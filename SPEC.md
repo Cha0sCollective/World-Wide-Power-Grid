@@ -4,7 +4,7 @@
 > **North-star specification:** CEE content, Power Grid electrical backend, direct interoperability, no player-visible translation layer.
 
 **Document status:** Normative target specification  
-**Specification version:** 1.0  
+**Specification version:** 1.1  
 **Project phase:** Pre-implementation / pursuing specification  
 **Initial compatibility target:** Minecraft 1.21.1-era releases of Create: Electro Energetics and Power Grid
 
@@ -535,6 +535,80 @@ The implementation SHALL retain enough per-substep electrical state to reproduce
 
 ---
 
+# 19A. Future asynchronous execution
+
+Compatibility-provided Power Grid electrical elements SHALL be designed so that their numerical solver callbacks do **not** require access to mutable Minecraft world state.
+
+Gameplay/world state required by an electrical calculation SHOULD be captured during a defined **prepare phase** before the numerical solve begins. The electrical solver SHALL then operate only on solver-owned state, immutable snapshots, captured scalar/model data, or other data that is safe to consume without reading mutable world objects.
+
+Gameplay effects produced by the solved electrical state SHALL be applied during a defined **commit phase** after the solve completes. Solver callbacks MUST NOT directly mutate blocks, block entities, entities, levels, inventories, CEE gameplay SavedData, or other mutable Minecraft world state merely because the initial implementation happens to run synchronously.
+
+The initial implementation MAY execute prepare, solve, and commit synchronously on the server thread. This does not relax the architectural separation.
+
+The required conceptual boundary is:
+
+```text
+MUTABLE WORLD / GAMEPLAY STATE
+            │
+            ▼
+         PREPARE
+ capture immutable electrical inputs
+            │
+            ▼
+          SOLVE
+ no mutable-world reads or writes
+            │
+            ▼
+          COMMIT
+ apply resulting gameplay effects
+            │
+            ▼
+MUTABLE WORLD / GAMEPLAY STATE
+```
+
+This requirement exists so that a future Power Grid implementation or World-Wide Power Grid execution path MAY move the numerical electrical solve off-thread without requiring a redesign of compatibility-provided electrical elements.
+
+Asynchronous solving itself is not required for the initial release, but **asynchronous-safe solver boundaries are part of the finished architecture**.
+
+---
+
+# 19B. Topology mutation ownership
+
+All compatibility-induced electrical topology mutations SHALL pass through a centralized **topology manager** or equivalent single ownership boundary.
+
+Compatibility code outside that owner MUST NOT directly add, remove, migrate, reconnect, split, merge, or otherwise structurally mutate compatibility-provided Power Grid nodes, wires, couplings, endpoint mappings, or related network topology.
+
+Topology mutations SHALL NOT occur while an electrical solve is in progress.
+
+World events, device changes, wire placement/removal, chunk lifecycle changes, and similar systems MAY request topology changes at any time permitted by Minecraft's lifecycle, but those requests SHALL be queued, coalesced, or otherwise deferred until a defined topology-mutation phase in which no authoritative electrical solve is executing.
+
+The target ownership model is:
+
+```text
+world/device/wire events
+          │
+          ▼
+ topology change requests
+          │
+          ▼
+ CENTRAL TOPOLOGY MANAGER
+          │
+   safe mutation phase
+   (solver not running)
+          │
+          ▼
+ persistent PG topology
+          │
+          ▼
+      electrical solve
+```
+
+The topology manager SHOULD also be the authority responsible for preserving stable identities, avoiding duplicate mutations, ordering dependent mutations, and invalidating only the affected structural regions where practical.
+
+This requirement is a correctness and concurrency invariant, not merely an organizational preference.
+
+---
+
 # 20. CEE result bridge
 
 After the authoritative PG solve, World-Wide Power Grid SHALL construct results consumable by normal CEE gameplay logic.
@@ -663,6 +737,8 @@ The final architecture MUST satisfy all of the following:
 8. Power Grid's sparse/native solver optimizations remain usable.
 9. The server does not wait on a disabled CEE electrical worker.
 10. Cross-mod interoperability does not require running two electrical solvers.
+11. Solver callbacks avoid mutable-world access so numerical solving can be moved off-thread later without redesigning compatibility elements.
+12. Compatibility-originated topology mutations are centralized and never race an in-progress electrical solve.
 
 ---
 
@@ -727,6 +803,8 @@ Required lifecycle cases include:
 - source/load state changes.
 
 A stale compatibility node or element MUST NOT remain permanently in the PG graph after its owning CEE object no longer exists.
+
+Lifecycle handlers that discover a required electrical topology change SHALL request that change through the centralized topology manager rather than mutating the PG graph directly.
 
 ---
 
@@ -793,12 +871,13 @@ Diagnostics SHOULD be capable of exposing:
 - number of compatibility nodes;
 - number of compatibility elements/wires;
 - compatibility topology additions/removals for the current tick;
+- queued topology mutations and the topology-manager phase in which they are applied;
 - parameter updates for the current tick;
 - unsupported CEE property classes;
 - PG network IDs containing compatibility content;
-- synchronization time;
-- result-bridge time;
-- PG solver time where accessible;
+- synchronization/prepare time;
+- numerical solve time where accessible;
+- result/commit time;
 - orphaned/stale mappings;
 - selected-machine mapping inspection.
 
@@ -820,6 +899,8 @@ Compatibility code SHOULD be organized around stable concepts such as:
 
 - endpoint mapping;
 - CEE graph synchronization;
+- centralized topology mutation ownership;
+- prepare/solve/commit phase separation;
 - property translation;
 - dynamic/nonlinear solver hooks;
 - result bridging;
@@ -1001,9 +1082,11 @@ In a world where electrical topology is unchanged for a sustained test period:
 - compatibility structural wire/coupling addition/removal count MUST remain zero except for upstream-required maintenance behavior;
 - dynamic numerical values MAY change every substep;
 - CEE's native independent solver MUST execute zero solves;
-- stateful CEE properties MUST advance exactly once per authoritative PG electrical substep.
+- stateful CEE properties MUST advance exactly once per authoritative PG electrical substep;
+- compatibility solver callbacks MUST NOT require mutable-world access;
+- no compatibility topology mutation may execute concurrently with the authoritative electrical solve.
 
-This test specifically protects the product against accidental regression to per-tick graph rebuilding.
+This test specifically protects the product against accidental regression to per-tick graph rebuilding or unsafe solver/world coupling.
 
 ---
 
@@ -1027,6 +1110,8 @@ The following actions MUST work without server restart or manual refresh:
 - merge previously separate grids.
 
 Only the affected topology SHOULD be invalidated where practical.
+
+All compatibility-induced structural changes in this suite MUST be routed through the centralized topology manager and applied only outside an active electrical solve.
 
 ---
 
@@ -1131,6 +1216,8 @@ For this project, **full interoperability** means all of the following are simul
 - Cross-mod networks survive save/reload and chunk lifecycle events.
 - Large server-wide connected networks are supported by the architecture.
 - Persistent PG topology is synchronized incrementally rather than rebuilt each tick.
+- Compatibility-provided solver elements maintain prepare/solve/commit separation and are not coupled to mutable world access during numerical callbacks.
+- Compatibility-induced topology changes have centralized ownership and never execute during an active solve.
 - Ordinary unsupported CEE content is treated as a defect, not an expected limitation.
 - The functional, fidelity, persistence, dynamic-topology, and performance acceptance tests in this specification pass.
 
@@ -1184,13 +1271,17 @@ A **1.0 / complete** release may be declared only when all sections below pass.
 - [ ] Network merge/split suite passes.
 - [ ] No stale or duplicated compatibility objects remain.
 
-## 46.7 Performance
+## 46.7 Performance and concurrency architecture
 
 - [ ] Persistent topology is used.
 - [ ] Stable networks cause no wholesale graph recreation.
 - [ ] Stable sparse structure is preserved where possible.
 - [ ] Defined 10k-node/15k-edge benchmark passes.
 - [ ] No CEE solver-thread synchronization barrier remains in the compatibility solve path.
+- [ ] Numerical solver callbacks do not depend on mutable Minecraft world state.
+- [ ] A clear prepare/solve/commit boundary exists even if execution is initially synchronous.
+- [ ] All compatibility-induced topology mutations pass through the centralized topology manager.
+- [ ] No compatibility-induced topology mutation occurs while an electrical solve is in progress.
 
 ## 46.8 User experience
 
@@ -1229,6 +1320,8 @@ Changes that materially alter any of the following require an explicit specifica
 - no-adapter requirement;
 - direct wire interoperability;
 - persistent topology requirement;
+- prepare/solve/commit separation;
+- centralized topology mutation ownership;
 - electrical fidelity goals;
 - scale expectations;
 - release completion criteria.
@@ -1253,32 +1346,42 @@ PGEndpointManager
 CEEGraphSynchronizer
     reads CEE desired-state graph
     diffs it against persistent compatibility state
-    applies incremental PG updates
+    emits parameter updates and topology-change requests
+
+CompatTopologyManager
+    sole owner of compatibility-induced PG topology mutation
+    queues/coalesces structural changes
+    applies them only while no electrical solve is active
 
 CEEPropertyAdapterRegistry
     maps CEE ElectricalProperties families to PG elements/hooks
 
 CEEDynamicElementAdapters
+    capture gameplay inputs during prepare
     preserve CEE capacitor/inductor/accumulator/AC state evolution
+    expose solver-only state during solve
+    defer gameplay effects to commit
 
 CEENonlinearSolverHooks
     integrate CEE nonlinear properties into PG Newton iterations
+    do not access mutable Minecraft world state during solver callbacks
 
 CEECouplingAdapters
     map transformer/coupled properties into PG constraints
 
 CEEWireSynchronizer
     mirrors CEE physical wire resistance/topology into PG
+    requests structural mutations through CompatTopologyManager
 
 MixedResultBridge
     captures PG solved node/substep state
-    constructs CEE-compatible SimulationResults
+    constructs CEE-compatible SimulationResults during commit
 
 CompatSavedData
     persists only mappings/state that cannot be safely reconstructed
 
 Diagnostics
-    mapping counts, topology churn, unsupported properties, timing
+    mapping counts, topology churn/queue state, unsupported properties, timing
 ```
 
 The expected simulation sequence is:
@@ -1286,40 +1389,53 @@ The expected simulation sequence is:
 ```text
 SERVER TICK
 
-CEE pre-simulation phase
+CEE / gameplay prepare phase
     │
+    ├─ read mutable world/gameplay state
     ├─ create desired electrical description
     ├─ device.preTick(...)
+    ├─ capture immutable solver inputs
     └─ publish graph event
     │
     ▼
-World-Wide Power Grid synchronization
+World-Wide Power Grid synchronization phase
     │
     ├─ compare desired CEE state with persistent PG state
-    ├─ update parameters
-    └─ apply actual topology changes only
+    ├─ update numerical parameters
+    └─ submit structural changes to CompatTopologyManager
     │
     ▼
-Power Grid electrical phase
+Topology mutation phase
     │
-    └─ ONE authoritative PG solve / PG substeps
+    ├─ solver is not running
+    ├─ coalesce/apply queued structural changes
+    └─ establish stable PG topology for this solve
     │
     ▼
-World-Wide Power Grid result phase
+Power Grid electrical solve phase
+    │
+    ├─ ONE authoritative PG solve / PG substeps
+    └─ compatibility solver callbacks use solver-owned/captured state only
+    │
+    ▼
+World-Wide Power Grid commit/result phase
     │
     ├─ gather mapped solved node values
-    └─ construct CEE-compatible results
+    ├─ construct CEE-compatible results
+    └─ translate solved outcomes into pending gameplay effects/state
     │
     ▼
-CEE post-simulation phase
+CEE / gameplay commit phase
     │
     ├─ device.postTick(...)
     ├─ CEE wire thermal/lifetime behavior
     ├─ CEE component damage/failure
-    └─ normal CEE synchronization/gameplay
+    └─ apply normal CEE synchronization/gameplay updates
 ```
 
-This methodology is preferred because it preserves CEE's content model while avoiding dual-solver synchronization and retaining PG's persistent sparse-network architecture.
+The initial implementation MAY run every phase synchronously. The phase boundaries SHALL nevertheless remain explicit so that the numerical solve can later move off-thread without changing the electrical adapter contract.
+
+This methodology is preferred because it preserves CEE's content model while avoiding dual-solver synchronization, retaining PG's persistent sparse-network architecture, and maintaining a concurrency-safe path toward future asynchronous execution.
 
 ---
 
@@ -1377,5 +1493,7 @@ CEE content should simply exist in the same electrical world as Power Grid conte
                       │
               one electrical truth
 ```
+
+The numerical solve should additionally be isolated from mutable world state, and all compatibility topology mutation should have one safe owner.
 
 **That is the product this repository is pursuing.**
