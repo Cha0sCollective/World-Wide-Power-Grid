@@ -36,6 +36,8 @@ The jar is written to `build/libs/wwpg-0.1.0-beta.1.jar`. GameTests run the actu
 
 `runPackagedGameTestServer` loads WWPG exclusively from the built jar and asserts that the mod file is a jar. Run `SETUP` and then `VERIFY` in separate processes using the same `run/world`; the second run checks both saved wire systems, persisted native settings, capacitor history and stable restored stamps. These fixtures reserve chunks (64,64) and (128,128) in the test world. Use the development test directory for them.
 
+Both GameTest tasks also require the current server process to report a completed passing suite. A zero process exit after a NeoForge mod-loading failure cannot pass this check. The current suite contains thirty fixtures; Windows native `SETUP` and Java `VERIFY` have passed, alongside the four electrical equation tests.
+
 Launch tasks install native binaries in `run/.pg-native`. The game directory and test logs are local and ignored by Git. CI runs packaged GameTests and restart verification on Windows and Linux with both backends. A checked-in CI workflow is not evidence that its remote jobs have already passed.
 
 ## PG native binary workaround
@@ -58,7 +60,9 @@ Use `/wwpg` for phase, topology changes, substep/backend counts and CEE solve at
 
 PG's portable battery retains its native behavior: its placed electrical input charges an energy item. It does not discharge as a voltage source into wires. WWPG feeds that input with solved CEE power and adds no FE bridge. The CEE accumulator provides reversible circuit storage.
 
-Two narrow lifecycle corrections are applied to the pinned APIs: CEE device removal immediately cuts attached PG wires, including remove/replacement within one tick; CEE 1.1.3's variac loss calculation resolves terminal IDs relative to its own position rather than as global graph indexes.
+Targeted corrections are applied to the pinned APIs: CEE device removal immediately cuts attached PG wires, including remove/replacement within one tick; CEE 1.1.3's variac loss calculation resolves terminal IDs relative to its own position rather than as global graph indexes; its three-pole panel meter reads the panel's assigned terminal IDs and uses the consumed-energy sign from the single-phase meter. Transformer winding currents include simultaneous leakage current before RMS aggregation, preserving their AC phase relationship.
+
+Panel fixtures exercise survival attachment insertion and item consumption, emergency-stop/reset and momentary player interactions, configured breaker insertion/trip/reset, ammeter readings and both panel energy-meter timesteps/disconnect. Alternator fixtures use actual rotor/stator/brush assemblies driven by a configured Create motor, including speed changes, stopping, balanced three-phase RMS and reversal of phase sequence. These checks do not certify every attachment, machine configuration or multiplayer workflow.
 
 ## Content inventory
 

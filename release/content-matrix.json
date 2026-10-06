@@ -158,7 +158,10 @@
       "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
       "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
       "status": "unverified",
-      "fixtures": [],
+      "fixtures": [
+        "assembledCeeAlternatorPowersPgLoad",
+        "assembledThreePhaseGenerationPreservesPhaseAndDirection"
+      ],
       "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
     },
     {
@@ -171,7 +174,9 @@
       "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
       "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
       "status": "unverified",
-      "fixtures": [],
+      "fixtures": [
+        "assembledCeeAlternatorPowersPgLoad"
+      ],
       "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
     },
     {
@@ -184,7 +189,9 @@
       "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
       "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
       "status": "unverified",
-      "fixtures": [],
+      "fixtures": [
+        "assembledThreePhaseGenerationPreservesPhaseAndDirection"
+      ],
       "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
     },
     {
@@ -197,7 +204,10 @@
       "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
       "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
       "status": "unverified",
-      "fixtures": [],
+      "fixtures": [
+        "assembledCeeAlternatorPowersPgLoad",
+        "assembledThreePhaseGenerationPreservesPhaseAndDirection"
+      ],
       "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
     },
     {
@@ -527,7 +537,8 @@
       "status": "unverified",
       "fixtures": [
         "capacitorChargesOnceAndDischarges",
-        "restartPreservesBothWireSystemsAndCapacitor"
+        "restartPreservesBothWireSystemsAndCapacitor",
+        "reactiveAcTransformerKeepsWindingCurrent"
       ],
       "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
     },
@@ -570,7 +581,8 @@
       "acceptance_circuit": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
       "status": "unverified",
       "fixtures": [
-        "transformerRatioChanges"
+        "transformerRatioChanges",
+        "reactiveAcTransformerKeepsWindingCurrent"
       ],
       "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
     },
@@ -717,7 +729,11 @@
       "acceptance_circuit": "Mixed source with panel/board controls and meters; nonlinear operation, edit, replacement and reload.",
       "status": "unverified",
       "fixtures": [
-        "panelControlsAndMonitorsPgFactory"
+        "panelControlsAndMonitorsPgFactory",
+        "panelPlayerStopAndMomentaryControl",
+        "panelBreakerTripsAndPlayerResets",
+        "panelEnergyMeterAndAmmeterReadMixedLoad",
+        "panelTriPolarMeterUsesAssignedTerminals"
       ],
       "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required.",
       "variants": [
@@ -1530,7 +1546,9 @@
       "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
       "status": "unverified",
       "release_scope": true,
-      "fixtures": []
+      "fixtures": [
+        "panelEnergyMeterAndAmmeterReadMixedLoad"
+      ]
     },
     {
       "id": "electroenergetics:voltmeter",
@@ -1562,7 +1580,9 @@
       "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
       "status": "unverified",
       "release_scope": true,
-      "fixtures": []
+      "fixtures": [
+        "panelPlayerStopAndMomentaryControl"
+      ]
     },
     {
       "id": "electroenergetics:cut_off_switch",
@@ -1641,7 +1661,9 @@
       "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
       "status": "unverified",
       "release_scope": true,
-      "fixtures": []
+      "fixtures": [
+        "panelPlayerStopAndMomentaryControl"
+      ]
     },
     {
       "id": "electroenergetics:energy_meter",
@@ -1656,7 +1678,9 @@
       "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
       "status": "unverified",
       "release_scope": true,
-      "fixtures": []
+      "fixtures": [
+        "panelEnergyMeterAndAmmeterReadMixedLoad"
+      ]
     },
     {
       "id": "electroenergetics:tri_polar_energy_meter",
@@ -1671,7 +1695,9 @@
       "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
       "status": "unverified",
       "release_scope": true,
-      "fixtures": []
+      "fixtures": [
+        "panelTriPolarMeterUsesAssignedTerminals"
+      ]
     },
     {
       "id": "electroenergetics:miniature_circuit_breaker",
@@ -1686,7 +1712,9 @@
       "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
       "status": "unverified",
       "release_scope": true,
-      "fixtures": []
+      "fixtures": [
+        "panelBreakerTripsAndPlayerResets"
+      ]
     },
     {
       "id": "electroenergetics:altitude_sensor",

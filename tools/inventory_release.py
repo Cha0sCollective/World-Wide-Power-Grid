@@ -64,7 +64,7 @@ models = {
 fixtures = {
     "electroenergetics:creative_battery": ["ceeSourceAndLoadUsePg", "acRmsIntoPgLoad", "ceePowersNonlinearBoardAndReconfiguration", "restartPreservesBothWireSystemsAndCapacitor", "mixedMotorsRespondToPowerAndPolarity", "ceeChargesPgPortableBattery"],
     "electroenergetics:creative_resistor": ["ceeSourceAndLoadUsePg", "pgToCeeWithPgWire", "pgToCeeWithCeeSpool"],
-    "electroenergetics:capacitor": ["capacitorChargesOnceAndDischarges", "restartPreservesBothWireSystemsAndCapacitor"],
+    "electroenergetics:capacitor": ["capacitorChargesOnceAndDischarges", "restartPreservesBothWireSystemsAndCapacitor", "reactiveAcTransformerKeepsWindingCurrent"],
     "electroenergetics:inductor": ["inductorAdvancesOnceIntoPgResistor"],
     "electroenergetics:accumulator": ["accumulatorChargesFromPgAndPowersPgLoad"],
     "electroenergetics:bulb": ["pgPowersCeeLightHeatAndPump"],
@@ -73,8 +73,12 @@ fixtures = {
     "electroenergetics:fuse": ["ceeFuseTripsAndRepairRestoresPgLoad"],
     "electroenergetics:broken_fuse": ["ceeFuseTripsAndRepairRestoresPgLoad"],
     "electroenergetics:variac": ["ceeVariacControlsPgLoad"],
-    "electroenergetics:transformer": ["transformerRatioChanges"],
-    "electroenergetics:electrical_panel": ["panelControlsAndMonitorsPgFactory"],
+    "electroenergetics:transformer": ["transformerRatioChanges", "reactiveAcTransformerKeepsWindingCurrent"],
+    "electroenergetics:alternator_rotor": ["assembledCeeAlternatorPowersPgLoad", "assembledThreePhaseGenerationPreservesPhaseAndDirection"],
+    "electroenergetics:alternator_brushes": ["assembledCeeAlternatorPowersPgLoad"],
+    "electroenergetics:three_phase_alternator_brushes": ["assembledThreePhaseGenerationPreservesPhaseAndDirection"],
+    "electroenergetics:stator": ["assembledCeeAlternatorPowersPgLoad", "assembledThreePhaseGenerationPreservesPhaseAndDirection"],
+    "electroenergetics:electrical_panel": ["panelControlsAndMonitorsPgFactory", "panelPlayerStopAndMomentaryControl", "panelBreakerTripsAndPlayerResets", "panelEnergyMeterAndAmmeterReadMixedLoad", "panelTriPolarMeterUsesAssignedTerminals"],
     "powergrid:creative_voltage_source": ["pgToCeeWithPgWire", "pgToCeeWithCeeSpool", "mixedBranchesLoopCutReconnectAndRemoval", "pgPowersCeeLightHeatAndPump"],
     "powergrid:creative_resistor": ["ceeToPgWithPgWire", "ceeToPgWithCeeSpool", "mixedBranchesLoopCutReconnectAndRemoval", "restartPreservesBothWireSystemsAndCapacitor", "chunkReloadRebindsMixedEndpoints"],
     "powergrid:electric_motor": ["mixedMotorsRespondToPowerAndPolarity"],
@@ -123,6 +127,17 @@ portable["gameplay"] = "Solved electrical input charges PG's portable energy ite
 portable["acceptance_circuit"] = "CEE source -> PG portable battery; verify charging, saturation, power removal, saved charge and native item use."
 
 panel_source = args.cee_source / "src/main/java/com/george_vi/electroenergetics/content/electrical_panel/attachments/CEEPanelAttachmentTypes.java"
+panel_fixtures = {
+    "cut_off_switch": ["panelControlsAndMonitorsPgFactory"],
+    "voltmeter": ["panelControlsAndMonitorsPgFactory"],
+    "indicator_bulb": ["panelControlsAndMonitorsPgFactory"],
+    "ammeter": ["panelEnergyMeterAndAmmeterReadMixedLoad"],
+    "energy_meter": ["panelEnergyMeterAndAmmeterReadMixedLoad"],
+    "tri_polar_energy_meter": ["panelTriPolarMeterUsesAssignedTerminals"],
+    "emergency_stop_button": ["panelPlayerStopAndMomentaryControl"],
+    "momentary_switch": ["panelPlayerStopAndMomentaryControl"],
+    "miniature_circuit_breaker": ["panelBreakerTripsAndPlayerResets"],
+}
 for ident, factory, mode in re.findall(r'\.register\("([^"]+)".*?PanelAttachmentType\(([^,]+),.*?PanelAttachmentMode\.(\w+)\)', panel_source.read_text(), re.S):
     optional = ident in {"altitude_sensor", "velocity_sensor"}
     count = 0 if mode.endswith("NONE") else 6 if mode == "FULL_TRIPLE" else 4 if mode == "FULL_DOUBLE" else 2
@@ -131,7 +146,7 @@ for ident, factory, mode in re.findall(r'\.register\("([^"]+)".*?PanelAttachment
                  "gameplay": "Native panel attachment interaction, sensing, indication or control.",
                  "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
                  "status": "unsupported" if optional else "unverified", "release_scope": not optional,
-                 "fixtures": ["panelControlsAndMonitorsPgFactory"] if ident in {"cut_off_switch", "voltmeter", "indicator_bulb"} else []})
+                 "fixtures": panel_fixtures.get(ident, [])})
 
 component_source = args.pg_source / "src/main/java/org/patryk3211/powergrid/circuits/components/Components.java"
 for segment in component_source.read_text().split("public static final RegistryEntry")[1:]:

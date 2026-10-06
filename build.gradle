@@ -152,3 +152,30 @@ tasks.register('runPackagedGameTestServer', JavaExec) {
         logger.lifecycle("Testing packaged WWPG artifact: ${packaged.name}")
     }
 }
+
+// NeoForge can return exit code zero after a mod-loading failure. Require the
+// current process to report a completed, passing suite as well as a good exit.
+tasks.matching { it.name in ['runGameTestServer', 'runPackagedGameTestServer'] }.configureEach {
+    doFirst {
+        def capture = new ByteArrayOutputStream()
+        extensions.extraProperties.set('wwpgTestOutput', capture)
+        def tee = { OutputStream console ->
+            new OutputStream() {
+                void write(int value) { console.write(value); capture.write(value) }
+                void write(byte[] bytes, int offset, int length) {
+                    console.write(bytes, offset, length)
+                    capture.write(bytes, offset, length)
+                }
+                void flush() { console.flush() }
+            }
+        }
+        standardOutput = tee(standardOutput ?: System.out)
+        errorOutput = tee(errorOutput ?: System.err)
+    }
+    doLast {
+        def output = extensions.extraProperties.get('wwpgTestOutput').toString('UTF-8')
+        def passed = output =~ /All (\d+) required tests passed/
+        if (!output.contains('GAME TESTS COMPLETE') || !passed.find() || passed.group(1).toInteger() == 0)
+            throw new GradleException('GameTest server did not report a completed passing suite; inspect the current run log')
+    }
+}

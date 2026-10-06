@@ -228,6 +228,8 @@ public final class WorldBridge {
                 transformers.put(key, winding); ++created;
             } else winding.element.update(p.ratio());
             winding.properties = p;
+            winding.primaryLeak = directedBranch(p.nodes());
+            winding.secondaryLeak = directedBranch(p.coupledNodes());
             winding.primarySum = winding.secondarySum = winding.primarySquares = winding.secondarySquares = 0;
         }
         // Physical grounds are applied here. Preferred references are chosen from the
@@ -380,7 +382,10 @@ public final class WorldBridge {
             branch.currentSum += i; branch.currentSquares += i * i;
         }
         for (var winding : resultWindings.getOrDefault(network, List.of())) {
-            double p = winding.element.primaryCurrent(), s = winding.element.secondaryCurrent();
+            // Combine simultaneous currents before squaring. Adding separate RMS
+            // readings loses their phase relationship in reactive AC circuits.
+            double p = winding.element.primaryCurrent() + winding.primaryLeak.current();
+            double s = winding.element.secondaryCurrent() + winding.secondaryLeak.current();
             if (!Double.isFinite(p) || !Double.isFinite(s)) {
                 diagnostic("Non-finite transformer current at " + winding.properties.nodes()); p = s = 0;
             }
@@ -407,7 +412,6 @@ public final class WorldBridge {
             currents.put(new DirectionalNodeConnection(branch.desired.first, branch.desired.second), current);
         }
         for (var winding : transformers.values()) {
-            // Include each winding's parallel leakage resistor in the directed current.
             putWindingCurrent(currents, winding.properties.nodes(), winding.primarySum, winding.primarySquares);
             putWindingCurrent(currents, winding.properties.coupledNodes(), winding.secondarySum, winding.secondarySquares);
         }
@@ -417,10 +421,14 @@ public final class WorldBridge {
 
     private void putWindingCurrent(Object2DoubleOpenHashMap<DirectionalNodeConnection> currents,
                                    DirectionalNodeConnection connection, double sum, double squares) {
-        double leak = currents.getDouble(connection);
-        if (!currents.containsKey(connection)) leak = -currents.getDouble(connection.invert());
         currents.removeDouble(connection.invert());
-        currents.put(connection, Math.copySign(Math.sqrt(squares / substeps), sum) + leak);
+        currents.put(connection, Math.copySign(Math.sqrt(squares / substeps), sum));
+    }
+
+    private DirectedBranch directedBranch(DirectionalNodeConnection connection) {
+        var first = EndpointKey.of(connection.node1());
+        var key = BranchKey.of(first, EndpointKey.of(connection.node2()));
+        return new DirectedBranch(branches.get(key), key.first().equals(first) ? 1 : -1);
     }
 
     public void commit(SimulationTicker ticker) {
@@ -489,8 +497,12 @@ public final class WorldBridge {
     private static final class Winding {
         final TransformerStamp element;
         TransformerElectricalProperties properties;
+        DirectedBranch primaryLeak, secondaryLeak;
         double primarySum, secondarySum, primarySquares, secondarySquares;
         Winding(TransformerStamp element) { this.element = element; }
+    }
+    private record DirectedBranch(Branch branch, int direction) {
+        double current() { return branch == null ? 0 : direction * branch.element.current(); }
     }
     private static final class Branch {
         final LinearBranch element;

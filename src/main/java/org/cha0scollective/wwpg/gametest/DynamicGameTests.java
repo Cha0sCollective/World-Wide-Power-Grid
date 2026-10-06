@@ -6,6 +6,7 @@ import com.george_vi.electroenergetics.content.electronic_components.capacitor.C
 import com.george_vi.electroenergetics.content.electronic_components.inductor.InductorDevice;
 import com.george_vi.electroenergetics.content.accumulator.AccumulatorDevice;
 import com.george_vi.electroenergetics.foundation.electrical_properties.AccumulatorProperties;
+import com.george_vi.electroenergetics.foundation.nodes.InWorldNode;
 import com.george_vi.electroenergetics.content.transmission_distribution.transformer.TransformerDevice;
 import com.george_vi.electroenergetics.devices.device.DevicesSavedData;
 import com.george_vi.electroenergetics.simulation.infrastructure.InfrastructureSavedData;
@@ -78,6 +79,43 @@ public final class DynamicGameTests {
         h.runAtTickTime(20, () -> {
             double rms = InfrastructureSavedData.load(level).ticker.lastResults.getVoltageAt(load, 0, 1);
             close(h, rms, 10 / Math.sqrt(2), 0.1, "AC RMS history");
+            audit(h); h.succeed();
+        });
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 100) public static void reactiveAcTransformerKeepsWindingCurrent(GameTestHelper h) {
+        var a = new BlockPos(1, 2, 1); var t = new BlockPos(3, 2, 1);
+        var b = new BlockPos(5, 2, 1); var c = new BlockPos(5, 2, 4);
+        for (var pos : new BlockPos[] {a, t, b, c}) h.setBlock(pos.below(), Blocks.STONE);
+        h.setBlock(a, CEEBlocks.CREATIVE_BATTERY.get()); h.setBlock(t, CEEBlocks.TRANSFORMER.get());
+        h.setBlock(b, ModdedBlocks.CREATIVE_RESISTOR.get()); h.setBlock(c, CEEBlocks.CAPACITOR.get());
+        var source = h.absolutePos(a); var transformer = h.absolutePos(t);
+        var load = h.absolutePos(b); var capacitor = h.absolutePos(c); var level = h.getLevel();
+        h.runAtTickTime(5, () -> {
+            var device = DevicesSavedData.load(level).getDevice(source, CreativeBatteryDevice.class);
+            device.voltage = 10; device.acFrequency = 50;
+            DevicesSavedData.load(level).getDevice(transformer, TransformerDevice.class).ratio = 2;
+            DevicesSavedData.load(level).getDevice(capacitor, CapacitorDevice.class).capacitance = 0.001;
+            ((ResistorBlockEntity) level.getBlockEntity(load)).setValue(10);
+            WiringGameTests.connect(h, source, 1, transformer, 0, false);
+            WiringGameTests.connect(h, source, 0, transformer, 1, false);
+            for (var pos : new BlockPos[] {load, capacitor}) {
+                WiringGameTests.connect(h, transformer, 2, pos, 0, true);
+                WiringGameTests.connect(h, transformer, 3, pos, 1, true);
+            }
+        });
+        h.runAtTickTime(40, () -> {
+            var results = InfrastructureSavedData.load(level).ticker.lastResults;
+            double output = results.getVoltageAt(transformer, 2, 3);
+            h.assertTrue(output > 3 && output < 3.55, "Reactive transformer AC output was " + output);
+            for (var pair : new int[][] {{0, 4, 4, 1}, {5, 3, 2, 5}}) {
+                var v1 = results.getVoltages(new InWorldNode(pair[0], transformer));
+                var v2 = results.getVoltages(new InWorldNode(pair[1], transformer));
+                double squares = 0;
+                for (int i = 0; i < v1.length; ++i) squares += Math.pow((v1[i] - v2[i]) / 0.1, 2);
+                double expected = Math.sqrt(squares / v1.length);
+                close(h, Math.abs(results.getCurrentThrough(transformer, pair[2], pair[3])), expected, 0.0001, "AC winding current / Kirchhoff balance");
+            }
             audit(h); h.succeed();
         });
     }
