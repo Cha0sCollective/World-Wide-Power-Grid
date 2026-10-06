@@ -1,0 +1,154 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.89'
+}
+
+group = 'org.cha0scollective.wwpg'
+version = mod_version
+base { archivesName = 'wwpg' }
+java { toolchain.languageVersion = JavaLanguageVersion.of(21) }
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://maven.createmod.net' }
+    maven { url = 'https://mvn.devos.one/snapshots' }
+    maven { url = 'https://maven.architectury.dev' }
+    exclusiveContent {
+        forRepository { maven { url = 'https://api.modrinth.com/maven' } }
+        filter { includeGroup 'maven.modrinth' }
+    }
+    exclusiveContent {
+        forRepository { maven { url = 'https://cursemaven.com' } }
+        filter { includeGroup 'curse.maven' }
+    }
+}
+
+def releaseArtifacts = new groovy.json.JsonSlurper().parse(file('release/artifacts.json'))
+configurations { pgNativeReference; upstreamArtifacts }
+
+neoForge {
+    version = neo_version
+    runs {
+        client { client() }
+        server { server(); programArgument '--nogui' }
+        gameTestServer {
+            type = 'gameTestServer'
+            systemProperty 'neoforge.enabledGameTestNamespaces', 'wwpg'
+            systemProperty 'wwpg.test.backend', providers.gradleProperty('testBackend').getOrElse('NATIVE')
+            systemProperty 'wwpg.test.restartPhase', providers.gradleProperty('restartPhase').getOrElse('SETUP')
+        }
+        configureEach { logLevel = org.slf4j.event.Level.INFO }
+    }
+    mods { wwpg { sourceSet sourceSets.main } }
+}
+
+dependencies {
+    releaseArtifacts.artifacts.findAll { it.role != 'pg_native_reference' }.each {
+        upstreamArtifacts(it.coordinate) { transitive = false }
+    }
+    implementation("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false }
+    implementation 'net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1'
+    implementation 'com.tterrag.registrate:Registrate:MC1.21-1.3.0+67'
+    compileOnly 'dev.engine-room.flywheel:flywheel-neoforge-api-1.21.1:1.0.6'
+    runtimeOnly 'dev.engine-room.flywheel:flywheel-neoforge-1.21.1:1.0.6'
+    implementation('maven.modrinth:qYJdIoAx:KWxEmmON') { transitive = false }
+    implementation('curse.maven:power-grid-1321420:8880715') { transitive = false }
+    // PG 0.6.2 omitted native v7. Its NativeMNA interface is byte-identical to 0.6.1.
+    pgNativeReference('curse.maven:power-grid-1321420:8738576') { transitive = false }
+    implementation 'dev.architectury:architectury-neoforge:13.0.8'
+    testImplementation platform('org.junit:junit-bom:5.11.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testRuntimeOnly 'it.unimi.dsi:fastutil:8.5.12'
+    testRuntimeOnly 'org.ejml:ejml-core:0.44.0'
+    testRuntimeOnly 'org.ejml:ejml-ddense:0.44.0'
+    testRuntimeOnly 'org.ejml:ejml-dsparse:0.44.0'
+}
+
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+tasks.named('test') { useJUnitPlatform() }
+tasks.named('processResources') {
+    inputs.property 'version', project.version
+    filesMatching('META-INF/neoforge.mods.toml') { expand version: project.version }
+    from('release') { include 'artifacts.json', 'content-matrix.json'; into 'data/wwpg/release' }
+}
+tasks.named('jar') { manifest.attributes 'MixinConfigs': 'wwpg.mixins.json' }
+tasks.named('wrapper') { distributionType = Wrapper.DistributionType.BIN }
+
+tasks.register('verifyUpstreamArtifacts') {
+    inputs.file 'release/artifacts.json'
+    inputs.files configurations.upstreamArtifacts, configurations.pgNativeReference
+    doLast {
+        def resolved = configurations.upstreamArtifacts.resolvedConfiguration.resolvedArtifacts +
+                configurations.pgNativeReference.resolvedConfiguration.resolvedArtifacts
+        releaseArtifacts.artifacts.each { locked ->
+            def artifact = resolved.find { it.moduleVersion.id.toString() == locked.coordinate }
+            if (artifact == null) throw new GradleException("Missing locked upstream artifact ${locked.coordinate}")
+            def hash = java.security.MessageDigest.getInstance('SHA-256').digest(artifact.file.bytes).encodeHex().toString()
+            if (hash != locked.sha256) throw new GradleException("Checksum mismatch for ${locked.coordinate}")
+        }
+        def pg = resolved.find { it.moduleVersion.id.toString() == releaseArtifacts.artifacts.find { it.role == 'pg' }.coordinate }.file
+        def donor = configurations.pgNativeReference.singleFile
+        def entry = 'org/patryk3211/powergrid/electricity/sim/solver/NativeMNA.class'
+        new java.util.zip.ZipFile(pg).withCloseable { pgZip ->
+            new java.util.zip.ZipFile(donor).withCloseable { donorZip ->
+                if (!Arrays.equals(pgZip.getInputStream(pgZip.getEntry(entry)).bytes,
+                                   donorZip.getInputStream(donorZip.getEntry(entry)).bytes))
+                    throw new GradleException('PG native donor JNI interface differs from the pinned PG artifact')
+                releaseArtifacts.native_binaries.each { binary ->
+                    def hash = java.security.MessageDigest.getInstance('SHA-256')
+                            .digest(donorZip.getInputStream(donorZip.getEntry(binary.entry)).bytes).encodeHex().toString()
+                    if (hash != binary.sha256) throw new GradleException("Native checksum mismatch: ${binary.entry}")
+                }
+            }
+        }
+    }
+}
+tasks.named('check') { dependsOn tasks.named('verifyUpstreamArtifacts') }
+
+tasks.register('preparePgNative', Sync) {
+    dependsOn tasks.named('verifyUpstreamArtifacts')
+    def reference = configurations.pgNativeReference
+    from({
+        def jar = reference.singleFile
+        def checksum = java.security.MessageDigest.getInstance('SHA-256').digest(jar.bytes).encodeHex().toString()
+        if (checksum != 'b2835c36af6794a963737c617b5f9dd6b41aba5078d418c88847193fbcf702e5')
+            throw new GradleException('PG native reference artifact checksum mismatch')
+        zipTree(jar)
+    }) {
+        include 'native/linux/libpowergridNative7.so', 'native/windows/libpowergridNative7.dll'
+    }
+    into layout.buildDirectory.dir('pg-native-resources')
+}
+tasks.register('installPgNative', Copy) {
+    dependsOn tasks.named('preparePgNative')
+    from(layout.buildDirectory.dir('pg-native-resources')) {
+        include 'native/linux/libpowergridNative7.so', 'native/windows/libpowergridNative7.dll'
+        eachFile { relativePath = new RelativePath(true, name) }
+        includeEmptyDirs = false
+    }
+    into layout.projectDirectory.dir('run/.pg-native')
+}
+tasks.matching { it.name.startsWith('run') || it.name.startsWith('prepare') && it.name.endsWith('Run') }.configureEach {
+    dependsOn tasks.named('installPgNative')
+}
+
+// Use the same NeoForge test harness with WWPG loaded exclusively from the built jar.
+tasks.register('runPackagedGameTestServer', JavaExec) {
+    def developmentRun = tasks.named('runGameTestServer')
+    dependsOn tasks.named('build'), tasks.named('prepareGameTestServerRun'), tasks.named('installPgNative')
+    javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(21) }
+    doFirst {
+        def run = developmentRun.get()
+        workingDir = run.gameDirectory.get().asFile
+        mainClass = run.mainClass
+        args = run.args
+        jvmArgs = run.jvmArgs + ['-Dwwpg.test.packaged=true']
+        def packaged = tasks.named('jar').get().archiveFile.get().asFile
+        classpath = run.classpathProvider.filter { !sourceSets.main.output.files.contains(it) } + files(packaged)
+        def env = new HashMap(run.environmentProperty.get())
+        env['MOD_CLASSES'] = "wwpg%%${packaged.absolutePath}"
+        environment env
+        logger.lifecycle("Testing packaged WWPG artifact: ${packaged.name}")
+    }
+}

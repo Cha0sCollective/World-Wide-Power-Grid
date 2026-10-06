@@ -1,0 +1,2250 @@
+{
+  "schema": 1,
+  "target": "0.1.0-beta.1",
+  "upstream_versions": {
+    "cee": "1.21.1-1.1.3",
+    "pg": "0.6.2"
+  },
+  "status_definition": {
+    "verified": "All declared electrical, gameplay and lifecycle acceptance checks passed on the packaged jar.",
+    "unverified": "In release scope; may have passing partial fixtures but is not yet certified for release.",
+    "unsupported": "Outside release scope; unknown electrical constructs are isolated with diagnostics."
+  },
+  "content": [
+    {
+      "id": "electroenergetics:connector",
+      "registry": "block",
+      "category": "wiring",
+      "model": "Native endpoint geometry, wire resistance, and physical grounding.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/connector/ConnectorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:insulator",
+      "registry": "block",
+      "category": "wiring",
+      "model": "Native endpoint geometry, wire resistance, and physical grounding.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/connector/InsulatorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:concrete_pole",
+      "registry": "block",
+      "category": "wiring",
+      "model": "Native endpoint geometry, wire resistance, and physical grounding.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/pole/ConcretePoleBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:pole_mount",
+      "registry": "block",
+      "category": "wiring",
+      "model": "Native endpoint geometry, wire resistance, and physical grounding.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/pole/PoleMountBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:double_connector",
+      "registry": "block",
+      "category": "wiring",
+      "model": "Native endpoint geometry, wire resistance, and physical grounding.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/connector/DoubleConnectorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:triple_connector",
+      "registry": "block",
+      "category": "wiring",
+      "model": "Native endpoint geometry, wire resistance, and physical grounding.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/connector/TripleConnectorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:quad_connector",
+      "registry": "block",
+      "category": "wiring",
+      "model": "Native endpoint geometry, wire resistance, and physical grounding.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/connector/QuadConnectorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:ground_rod",
+      "registry": "block",
+      "category": "wiring",
+      "model": "Native endpoint geometry, wire resistance, and physical grounding.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/ground_rod/GroundRodBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:duplex_wire_termination",
+      "registry": "block",
+      "category": "wiring",
+      "model": "Native endpoint geometry, wire resistance, and physical grounding.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/bundled_wire/BundledWireTerminationBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:creative_battery",
+      "registry": "block",
+      "category": "sources",
+      "model": "Upstream prepared source model and mechanical feedback; PG content keeps its native model.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/creative_battery/CreativeBatteryBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "status": "unverified",
+      "fixtures": [
+        "ceeSourceAndLoadUsePg",
+        "acRmsIntoPgLoad",
+        "ceePowersNonlinearBoardAndReconfiguration",
+        "restartPreservesBothWireSystemsAndCapacitor",
+        "mixedMotorsRespondToPowerAndPolarity",
+        "ceeChargesPgPortableBattery"
+      ],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:alternator_rotor",
+      "registry": "block",
+      "category": "sources",
+      "model": "Upstream prepared source model and mechanical feedback; PG content keeps its native model.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/rotor/AlternatorRotorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:alternator_brushes",
+      "registry": "block",
+      "category": "sources",
+      "model": "Upstream prepared source model and mechanical feedback; PG content keeps its native model.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/rotor/AlternatorBrushesBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:three_phase_alternator_brushes",
+      "registry": "block",
+      "category": "sources",
+      "model": "Upstream prepared source model and mechanical feedback; PG content keeps its native model.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/rotor/ThreePhaseAlternatorBrushesBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:stator",
+      "registry": "block",
+      "category": "sources",
+      "model": "Upstream prepared source model and mechanical feedback; PG content keeps its native model.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/rotor/StatorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:radiator_panel",
+      "registry": "block",
+      "category": "sources",
+      "model": "Upstream prepared source model and mechanical feedback; PG content keeps its native model.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/transmission_distribution/transformer/RadiatorPanelBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:voltage_regulator",
+      "registry": "block",
+      "category": "sources",
+      "model": "Upstream prepared source model and mechanical feedback; PG content keeps its native model.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/transmission_distribution/voltage_regulator/VoltageRegulatorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:bulb",
+      "registry": "block",
+      "category": "loads",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/bulb/BulbBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "status": "unverified",
+      "fixtures": [
+        "pgPowersCeeLightHeatAndPump"
+      ],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:broken_bulb",
+      "registry": "block",
+      "category": "loads",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/bulb/BulbBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:electric_pump",
+      "registry": "block",
+      "category": "loads",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/electric_pump/ElectricPumpBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "status": "unverified",
+      "fixtures": [
+        "pgPowersCeeLightHeatAndPump"
+      ],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:resistor",
+      "registry": "block",
+      "category": "loads",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/electronic_components/resistor/ResistorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:creative_resistor",
+      "registry": "block",
+      "category": "loads",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/electronic_components/resistor/ResistorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "status": "unverified",
+      "fixtures": [
+        "ceeSourceAndLoadUsePg",
+        "pgToCeeWithPgWire",
+        "pgToCeeWithCeeSpool"
+      ],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:indicator_bulb",
+      "registry": "block",
+      "category": "loads",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/indicator_bulb/IndicatorBulbBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:resistive_heater",
+      "registry": "block",
+      "category": "loads",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/resistive_heater/ResistiveHeaterBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "status": "unverified",
+      "fixtures": [
+        "pgPowersCeeLightHeatAndPump"
+      ],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:fuse",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/fuse/FuseBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [
+        "ceeFuseTripsAndRepairRestoresPgLoad"
+      ],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:broken_fuse",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/fuse/FuseBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [
+        "ceeFuseTripsAndRepairRestoresPgLoad"
+      ],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:fuse_holder",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/fuse/FuseHolderBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:cut_off_switch",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/cut_off_switch/CutOffSwitchBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:double_switch",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/cut_off_switch/CutOffSwitchBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:redstone_relay",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/redstone_relay/RedstoneRelayBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:high_voltage_switch",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/transmission_distribution/hv_switch/HVSwitchBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:sulfur_hexafluoride_breaker",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/transmission_distribution/sf6_breaker/SF6BreakerBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:relay",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/relay/RelayBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:momentary_switch",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/cut_off_switch/MomentarySwitchBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:emergency_stop_button",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/cut_off_switch/EmergencyStopBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:potentiometer",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/potentiometer/PotentiometerBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:redstone_potentiometer",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/potentiometer/RedstonePotentiometerBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:accumulator",
+      "registry": "block",
+      "category": "storage",
+      "model": "CEE backward-Euler history properties or PG native dynamic model, under the PG substep schedule.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/accumulator/AccumulatorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Charge and discharge into an opposite-mod load; compare substep evolution, then save/restart.",
+      "acceptance_circuit": "Charge and discharge into an opposite-mod load; compare substep evolution, then save/restart.",
+      "status": "unverified",
+      "fixtures": [
+        "accumulatorChargesFromPgAndPowersPgLoad"
+      ],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:capacitor",
+      "registry": "block",
+      "category": "storage",
+      "model": "CEE backward-Euler history properties or PG native dynamic model, under the PG substep schedule.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/electronic_components/capacitor/CapacitorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Charge and discharge into an opposite-mod load; compare substep evolution, then save/restart.",
+      "acceptance_circuit": "Charge and discharge into an opposite-mod load; compare substep evolution, then save/restart.",
+      "status": "unverified",
+      "fixtures": [
+        "capacitorChargesOnceAndDischarges",
+        "restartPreservesBothWireSystemsAndCapacitor"
+      ],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:high_voltage_capacitor",
+      "registry": "block",
+      "category": "storage",
+      "model": "CEE backward-Euler history properties or PG native dynamic model, under the PG substep schedule.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/transmission_distribution/hv_capacitor/HVCapacitorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Charge and discharge into an opposite-mod load; compare substep evolution, then save/restart.",
+      "acceptance_circuit": "Charge and discharge into an opposite-mod load; compare substep evolution, then save/restart.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:inductor",
+      "registry": "block",
+      "category": "storage",
+      "model": "CEE backward-Euler history properties or PG native dynamic model, under the PG substep schedule.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/electronic_components/inductor/InductorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Charge and discharge into an opposite-mod load; compare substep evolution, then save/restart.",
+      "acceptance_circuit": "Charge and discharge into an opposite-mod load; compare substep evolution, then save/restart.",
+      "status": "unverified",
+      "fixtures": [
+        "inductorAdvancesOnceIntoPgResistor"
+      ],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:transformer",
+      "registry": "block",
+      "category": "transformers",
+      "model": "Four-terminal coupling with winding resistance; CEE ratio is reciprocal to PG's ratio.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/transmission_distribution/transformer/TransformerBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+      "acceptance_circuit": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+      "status": "unverified",
+      "fixtures": [
+        "transformerRatioChanges"
+      ],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:transformer_core",
+      "registry": "block",
+      "category": "transformers",
+      "model": "Four-terminal coupling with winding resistance; CEE ratio is reciprocal to PG's ratio.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/transmission_distribution/transformer/TransformerCoreBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+      "acceptance_circuit": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:variac",
+      "registry": "block",
+      "category": "transformers",
+      "model": "Four-terminal coupling with winding resistance; CEE ratio is reciprocal to PG's ratio.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/variac/VariacBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+      "acceptance_circuit": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+      "status": "unverified",
+      "fixtures": [
+        "ceeVariacControlsPgLoad"
+      ],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:redstone_variac",
+      "registry": "block",
+      "category": "transformers",
+      "model": "Four-terminal coupling with winding resistance; CEE ratio is reciprocal to PG's ratio.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/variac/RedstoneVariacBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+      "acceptance_circuit": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:ammeter",
+      "registry": "block",
+      "category": "meters",
+      "model": "Native sensing impedance; DC/RMS voltage, signed current and energy from solved history.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/gauge/ElectricGaugeBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "acceptance_circuit": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:voltmeter",
+      "registry": "block",
+      "category": "meters",
+      "model": "Native sensing impedance; DC/RMS voltage, signed current and energy from solved history.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/gauge/ElectricGaugeBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "acceptance_circuit": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:energy_meter",
+      "registry": "block",
+      "category": "meters",
+      "model": "Native sensing impedance; DC/RMS voltage, signed current and energy from solved history.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/energy_meter/EnergyMeterBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "acceptance_circuit": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:tri_polar_energy_meter",
+      "registry": "block",
+      "category": "meters",
+      "model": "Native sensing impedance; DC/RMS voltage, signed current and energy from solved history.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/energy_meter/TriPolarEnergyMeterBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "acceptance_circuit": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:current_transformer",
+      "registry": "block",
+      "category": "meters",
+      "model": "Native sensing impedance; DC/RMS voltage, signed current and energy from solved history.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/transmission_distribution/current_transformer/CurrentTransformerBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "acceptance_circuit": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:frequency_meter",
+      "registry": "block",
+      "category": "meters",
+      "model": "Native sensing impedance; DC/RMS voltage, signed current and energy from solved history.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/frequency_meter/FrequencyMeterBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "acceptance_circuit": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:synchroscope",
+      "registry": "block",
+      "category": "meters",
+      "model": "Native sensing impedance; DC/RMS voltage, signed current and energy from solved history.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/synchroscope/SynchroscopeBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "acceptance_circuit": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:electrical_panel",
+      "registry": "block",
+      "category": "electronics",
+      "model": "Native component models; CEE panel attachments become stable terminal and internal-node mappings.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/electrical_panel/ElectricalPanelBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source with panel/board controls and meters; nonlinear operation, edit, replacement and reload.",
+      "acceptance_circuit": "Mixed source with panel/board controls and meters; nonlinear operation, edit, replacement and reload.",
+      "status": "unverified",
+      "fixtures": [
+        "panelControlsAndMonitorsPgFactory"
+      ],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required.",
+      "variants": [
+        "electroenergetics:black_electrical_panel",
+        "electroenergetics:blue_electrical_panel",
+        "electroenergetics:brown_electrical_panel",
+        "electroenergetics:cyan_electrical_panel",
+        "electroenergetics:electrical_panel",
+        "electroenergetics:gray_electrical_panel",
+        "electroenergetics:green_electrical_panel",
+        "electroenergetics:light_blue_electrical_panel",
+        "electroenergetics:light_gray_electrical_panel",
+        "electroenergetics:lime_electrical_panel",
+        "electroenergetics:magenta_electrical_panel",
+        "electroenergetics:orange_electrical_panel",
+        "electroenergetics:pink_electrical_panel",
+        "electroenergetics:purple_electrical_panel",
+        "electroenergetics:red_electrical_panel",
+        "electroenergetics:white_electrical_panel",
+        "electroenergetics:yellow_electrical_panel"
+      ]
+    },
+    {
+      "id": "electroenergetics:diode",
+      "registry": "block",
+      "category": "electronics",
+      "model": "Native component models; CEE panel attachments become stable terminal and internal-node mappings.",
+      "model_source": "src/main/java/com/george_vi/electroenergetics/content/electronic_components/diode/DiodeBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source with panel/board controls and meters; nonlinear operation, edit, replacement and reload.",
+      "acceptance_circuit": "Mixed source with panel/board controls and meters; nonlinear operation, edit, replacement and reload.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:white_electric_motor",
+      "variants": [
+        "electroenergetics:black_electric_motor",
+        "electroenergetics:blue_electric_motor",
+        "electroenergetics:brown_electric_motor",
+        "electroenergetics:cyan_electric_motor",
+        "electroenergetics:gray_electric_motor",
+        "electroenergetics:green_electric_motor",
+        "electroenergetics:light_blue_electric_motor",
+        "electroenergetics:light_gray_electric_motor",
+        "electroenergetics:lime_electric_motor",
+        "electroenergetics:magenta_electric_motor",
+        "electroenergetics:orange_electric_motor",
+        "electroenergetics:pink_electric_motor",
+        "electroenergetics:purple_electric_motor",
+        "electroenergetics:red_electric_motor",
+        "electroenergetics:white_electric_motor",
+        "electroenergetics:yellow_electric_motor"
+      ],
+      "registry": "block",
+      "category": "loads",
+      "behavior_group": "CEE motor",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "terminals": "CEE motor terminal configuration.",
+      "gameplay": "Motor shaft rotation and stress output.",
+      "acceptance_circuit": "PG source -> CEE motor, each native operating mode and casing behavior; stop and restart.",
+      "status": "unverified",
+      "fixtures": [
+        "mixedMotorsRespondToPowerAndPolarity"
+      ]
+    },
+    {
+      "id": "powergrid:wire_connector",
+      "registry": "block",
+      "category": "wiring",
+      "model": "Native endpoint geometry, wire resistance, and physical grounding.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/wireconnector/ConnectorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:heavy_wire_connector",
+      "registry": "block",
+      "category": "wiring",
+      "model": "Native endpoint geometry, wire resistance, and physical grounding.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/wireconnector/HeavyConnectorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:cord_junction",
+      "registry": "block",
+      "category": "wiring",
+      "model": "Native endpoint geometry, wire resistance, and physical grounding.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/wireconnector/CordJunctionBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:ceiling_tile_connector",
+      "registry": "block",
+      "category": "wiring",
+      "model": "Native endpoint geometry, wire resistance, and physical grounding.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/general/ceilingtile/wire/CeilingTileConnectorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:ceiling_tile_junction",
+      "registry": "block",
+      "category": "wiring",
+      "model": "Native endpoint geometry, wire resistance, and physical grounding.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/general/ceilingtile/junction/CeilingTileJunctionBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:device_connector",
+      "registry": "block",
+      "category": "wiring",
+      "model": "Native endpoint geometry, wire resistance, and physical grounding.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/deviceconnector/DeviceConnectorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:socket",
+      "registry": "block",
+      "category": "wiring",
+      "model": "Native endpoint geometry, wire resistance, and physical grounding.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/socket/SocketBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:grounding_rod",
+      "registry": "block",
+      "category": "wiring",
+      "model": "Native endpoint geometry, wire resistance, and physical grounding.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/grounding/GroundingRodBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:creative_voltage_source",
+      "registry": "block",
+      "category": "sources",
+      "model": "Upstream prepared source model and mechanical feedback; PG content keeps its native model.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/creative/CreativeSourceBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "status": "unverified",
+      "fixtures": [
+        "pgToCeeWithPgWire",
+        "pgToCeeWithCeeSpool",
+        "mixedBranchesLoopCutReconnectAndRemoval",
+        "pgPowersCeeLightHeatAndPump"
+      ],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:creative_current_source",
+      "registry": "block",
+      "category": "sources",
+      "model": "Upstream prepared source model and mechanical feedback; PG content keeps its native model.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/creative/CreativeSourceBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:generator_induction_rotor",
+      "registry": "block",
+      "category": "sources",
+      "model": "Upstream prepared source model and mechanical feedback; PG content keeps its native model.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/kinetics/generator/inductionrotor/InductionRotorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:generator_large_induction_rotor",
+      "registry": "block",
+      "category": "sources",
+      "model": "Upstream prepared source model and mechanical feedback; PG content keeps its native model.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/kinetics/generator/inductionrotor/LargeInductionRotorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:generator_commutator",
+      "registry": "block",
+      "category": "sources",
+      "model": "Upstream prepared source model and mechanical feedback; PG content keeps its native model.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/kinetics/generator/inductionrotor/CommutatorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:generator_vertical_commutator",
+      "registry": "block",
+      "category": "sources",
+      "model": "Upstream prepared source model and mechanical feedback; PG content keeps its native model.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/kinetics/generator/inductionrotor/VerticalCommutatorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:generator_clutch",
+      "registry": "block",
+      "category": "sources",
+      "model": "Upstream prepared source model and mechanical feedback; PG content keeps its native model.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/kinetics/generator/clutch/GeneratorClutchBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:generator_housing",
+      "registry": "block",
+      "category": "sources",
+      "model": "Upstream prepared source model and mechanical feedback; PG content keeps its native model.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/kinetics/generator/housing/GeneratorHousing.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:vertical_generator_housing",
+      "registry": "block",
+      "category": "sources",
+      "model": "Upstream prepared source model and mechanical feedback; PG content keeps its native model.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/kinetics/generator/housing/VerticalGeneratorHousing.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:solar_panel",
+      "registry": "block",
+      "category": "sources",
+      "model": "Upstream prepared source model and mechanical feedback; PG content keeps its native model.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/solarpanel/SolarPanelBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:ceiling_tile_solar",
+      "registry": "block",
+      "category": "sources",
+      "model": "Upstream prepared source model and mechanical feedback; PG content keeps its native model.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/general/ceilingtile/solar/CeilingTileSolarBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:winding",
+      "registry": "block",
+      "category": "sources",
+      "model": "Upstream prepared source model and mechanical feedback; PG content keeps its native model.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/kinetics/generator/winding/WindingBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:creative_resistor",
+      "registry": "block",
+      "category": "loads",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/creative/CreativeResistorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "status": "unverified",
+      "fixtures": [
+        "ceeToPgWithPgWire",
+        "ceeToPgWithCeeSpool",
+        "mixedBranchesLoopCutReconnectAndRemoval",
+        "restartPreservesBothWireSystemsAndCapacitor",
+        "chunkReloadRebindsMixedEndpoints"
+      ],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:power_resistor",
+      "registry": "block",
+      "category": "loads",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/resistor/ResistorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:heating_coil",
+      "registry": "block",
+      "category": "loads",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/heater/HeaterBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:basin_heater",
+      "registry": "block",
+      "category": "loads",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/basinheater/BasinHeaterBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:light_fixture",
+      "registry": "block",
+      "category": "loads",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/light/fixture/LightFixtureBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:factory_light",
+      "registry": "block",
+      "category": "loads",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/light/factorylight/FactoryLightBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:factory_light_light",
+      "registry": "block",
+      "category": "loads",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/light/factorylight/FactoryLightLightBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:ceiling_tile_lamp",
+      "registry": "block",
+      "category": "loads",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/general/ceilingtile/lamp/CeilingTileLampBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:electric_motor",
+      "registry": "block",
+      "category": "loads",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/kinetics/motor/ElectricMotorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "status": "unverified",
+      "fixtures": [
+        "mixedMotorsRespondToPowerAndPolarity"
+      ],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:constant_speed_motor",
+      "registry": "block",
+      "category": "loads",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/kinetics/motor/ConstantSpeedMotorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:servo",
+      "registry": "block",
+      "category": "loads",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/kinetics/servo/ServoBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:electric_pump",
+      "registry": "block",
+      "category": "loads",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/pump/ElectricPumpBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:string_light_block",
+      "registry": "block",
+      "category": "loads",
+      "model": "Upstream prepared resistive/source model; solved current and voltage drive native gameplay.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/light/string/StringLightBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:lv_switch",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/electricswitch/LvSwitchBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:lv_button",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/electricswitch/LvButtonBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:mv_switch",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/electricswitch/MvSwitchBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:hv_switch",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/electricswitch/HvSwitchBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:hv_breaker",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/electricswitch/HvBreakerBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:contactor",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/contactor/ContactorBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:fuse_holder",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/fuse/FuseHolderBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:rheostat",
+      "registry": "block",
+      "category": "controls",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/kinetics/rheostat/RheostatBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:portable_battery",
+      "registry": "block",
+      "category": "storage",
+      "model": "PG native switched charging resistor; native item charge advances once per gameplay tick.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/equipment/portablebattery/PortableBatteryBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Solved electrical input charges PG's portable energy item; its native placed block is not a circuit voltage source.",
+      "acceptance_circuit": "CEE source -> PG portable battery; verify charging, saturation, power removal, saved charge and native item use.",
+      "status": "unverified",
+      "fixtures": [
+        "ceeChargesPgPortableBattery"
+      ],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:transformer_core",
+      "registry": "block",
+      "category": "transformers",
+      "model": "Four-terminal coupling with winding resistance; CEE ratio is reciprocal to PG's ratio.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/transformer/TransformerCoreBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+      "acceptance_circuit": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:transformer_small",
+      "registry": "block",
+      "category": "transformers",
+      "model": "Four-terminal coupling with winding resistance; CEE ratio is reciprocal to PG's ratio.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/transformer/TransformerSmallBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+      "acceptance_circuit": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:transformer_medium",
+      "registry": "block",
+      "category": "transformers",
+      "model": "Four-terminal coupling with winding resistance; CEE ratio is reciprocal to PG's ratio.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/transformer/TransformerMediumBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+      "acceptance_circuit": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:nether_transformer",
+      "registry": "block",
+      "category": "transformers",
+      "model": "Four-terminal coupling with winding resistance; CEE ratio is reciprocal to PG's ratio.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/transformer/NetherTransformerBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+      "acceptance_circuit": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:variac",
+      "registry": "block",
+      "category": "transformers",
+      "model": "Four-terminal coupling with winding resistance; CEE ratio is reciprocal to PG's ratio.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/kinetics/variac/VariacBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+      "acceptance_circuit": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:voltage_gauge",
+      "registry": "block",
+      "category": "meters",
+      "model": "Native sensing impedance; DC/RMS voltage, signed current and energy from solved history.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/gauge/VoltageGaugeBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "acceptance_circuit": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:current_gauge",
+      "registry": "block",
+      "category": "meters",
+      "model": "Native sensing impedance; DC/RMS voltage, signed current and energy from solved history.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/gauge/CurrentGaugeBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "acceptance_circuit": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:power_gauge",
+      "registry": "block",
+      "category": "meters",
+      "model": "Native sensing impedance; DC/RMS voltage, signed current and energy from solved history.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/gauge/PowerGaugeBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "acceptance_circuit": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:energy_meter",
+      "registry": "block",
+      "category": "meters",
+      "model": "Native sensing impedance; DC/RMS voltage, signed current and energy from solved history.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/gauge/EnergyMeterBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "acceptance_circuit": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:plotter",
+      "registry": "block",
+      "category": "meters",
+      "model": "Native sensing impedance; DC/RMS voltage, signed current and energy from solved history.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/kinetics/plotter/PlotterBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "acceptance_circuit": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:circuit_board",
+      "registry": "block",
+      "category": "electronics",
+      "model": "Native component models; CEE panel attachments become stable terminal and internal-node mappings.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/circuits/circuitboard/CircuitBoardBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source with panel/board controls and meters; nonlinear operation, edit, replacement and reload.",
+      "acceptance_circuit": "Mixed source with panel/board controls and meters; nonlinear operation, edit, replacement and reload.",
+      "status": "unverified",
+      "fixtures": [
+        "ceePowersNonlinearBoardAndReconfiguration"
+      ],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:circuit_design_table",
+      "registry": "block",
+      "category": "electronics",
+      "model": "Native component models; CEE panel attachments become stable terminal and internal-node mappings.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/circuits/editor/CircuitDesignTableBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source with panel/board controls and meters; nonlinear operation, edit, replacement and reload.",
+      "acceptance_circuit": "Mixed source with panel/board controls and meters; nonlinear operation, edit, replacement and reload.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "powergrid:modular_display",
+      "registry": "block",
+      "category": "electronics",
+      "model": "Native component models; CEE panel attachments become stable terminal and internal-node mappings.",
+      "model_source": "src/main/java/org/patryk3211/powergrid/electricity/modulardisplay/ModularDisplayBlock.java",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source with panel/board controls and meters; nonlinear operation, edit, replacement and reload.",
+      "acceptance_circuit": "Mixed source with panel/board controls and meters; nonlinear operation, edit, replacement and reload.",
+      "status": "unverified",
+      "fixtures": [],
+      "note": "Fixtures cover the named behaviors; complete gameplay and lifecycle acceptance is still required."
+    },
+    {
+      "id": "electroenergetics:ammeter",
+      "registry": "panel_attachment",
+      "category": "electronics",
+      "model": "GaugePanelAttachment::ammeter",
+      "terminals": {
+        "count": 2,
+        "identity": "Panel position, slot, and upstream stable terminal ID"
+      },
+      "gameplay": "Native panel attachment interaction, sensing, indication or control.",
+      "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "electroenergetics:voltmeter",
+      "registry": "panel_attachment",
+      "category": "electronics",
+      "model": "GaugePanelAttachment::voltmeter",
+      "terminals": {
+        "count": 2,
+        "identity": "Panel position, slot, and upstream stable terminal ID"
+      },
+      "gameplay": "Native panel attachment interaction, sensing, indication or control.",
+      "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": [
+        "panelControlsAndMonitorsPgFactory"
+      ]
+    },
+    {
+      "id": "electroenergetics:emergency_stop_button",
+      "registry": "panel_attachment",
+      "category": "electronics",
+      "model": "EStopPanelAttachment::new",
+      "terminals": {
+        "count": 2,
+        "identity": "Panel position, slot, and upstream stable terminal ID"
+      },
+      "gameplay": "Native panel attachment interaction, sensing, indication or control.",
+      "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "electroenergetics:cut_off_switch",
+      "registry": "panel_attachment",
+      "category": "electronics",
+      "model": "CutOffSwitchPanelAttachment::new",
+      "terminals": {
+        "count": 2,
+        "identity": "Panel position, slot, and upstream stable terminal ID"
+      },
+      "gameplay": "Native panel attachment interaction, sensing, indication or control.",
+      "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": [
+        "panelControlsAndMonitorsPgFactory"
+      ]
+    },
+    {
+      "id": "electroenergetics:analog_lever",
+      "registry": "panel_attachment",
+      "category": "electronics",
+      "model": "AnalogLeverPanelAttachment::new",
+      "terminals": {
+        "count": 0,
+        "identity": "Panel position, slot, and upstream stable terminal ID"
+      },
+      "gameplay": "Native panel attachment interaction, sensing, indication or control.",
+      "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "electroenergetics:steering_wheel",
+      "registry": "panel_attachment",
+      "category": "electronics",
+      "model": "SteeringWheelPanelAttachment::new",
+      "terminals": {
+        "count": 0,
+        "identity": "Panel position, slot, and upstream stable terminal ID"
+      },
+      "gameplay": "Native panel attachment interaction, sensing, indication or control.",
+      "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "electroenergetics:indicator_bulb",
+      "registry": "panel_attachment",
+      "category": "electronics",
+      "model": "IndicatorBulbPanelAttachment::new",
+      "terminals": {
+        "count": 2,
+        "identity": "Panel position, slot, and upstream stable terminal ID"
+      },
+      "gameplay": "Native panel attachment interaction, sensing, indication or control.",
+      "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": [
+        "panelControlsAndMonitorsPgFactory"
+      ]
+    },
+    {
+      "id": "electroenergetics:momentary_switch",
+      "registry": "panel_attachment",
+      "category": "electronics",
+      "model": "MomentarySwitchPanelAttachment::new",
+      "terminals": {
+        "count": 2,
+        "identity": "Panel position, slot, and upstream stable terminal ID"
+      },
+      "gameplay": "Native panel attachment interaction, sensing, indication or control.",
+      "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "electroenergetics:energy_meter",
+      "registry": "panel_attachment",
+      "category": "electronics",
+      "model": "EnergyMeterAttachment::new",
+      "terminals": {
+        "count": 4,
+        "identity": "Panel position, slot, and upstream stable terminal ID"
+      },
+      "gameplay": "Native panel attachment interaction, sensing, indication or control.",
+      "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "electroenergetics:tri_polar_energy_meter",
+      "registry": "panel_attachment",
+      "category": "electronics",
+      "model": "TriPolarEnergyMeterAttachment::new",
+      "terminals": {
+        "count": 6,
+        "identity": "Panel position, slot, and upstream stable terminal ID"
+      },
+      "gameplay": "Native panel attachment interaction, sensing, indication or control.",
+      "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "electroenergetics:miniature_circuit_breaker",
+      "registry": "panel_attachment",
+      "category": "electronics",
+      "model": "MCBPanelAttachment::new",
+      "terminals": {
+        "count": 2,
+        "identity": "Panel position, slot, and upstream stable terminal ID"
+      },
+      "gameplay": "Native panel attachment interaction, sensing, indication or control.",
+      "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "electroenergetics:altitude_sensor",
+      "registry": "panel_attachment",
+      "category": "electronics",
+      "model": "AltitudeSensorPanelAttachment::new",
+      "terminals": {
+        "count": 0,
+        "identity": "Panel position, slot, and upstream stable terminal ID"
+      },
+      "gameplay": "Native panel attachment interaction, sensing, indication or control.",
+      "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+      "status": "unsupported",
+      "release_scope": false,
+      "fixtures": []
+    },
+    {
+      "id": "electroenergetics:velocity_sensor",
+      "registry": "panel_attachment",
+      "category": "electronics",
+      "model": "VelocitySensorPanelAttachment::new",
+      "terminals": {
+        "count": 0,
+        "identity": "Panel position, slot, and upstream stable terminal ID"
+      },
+      "gameplay": "Native panel attachment interaction, sensing, indication or control.",
+      "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+      "status": "unsupported",
+      "release_scope": false,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:via",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native ViaComponent",
+      "terminals": {
+        "pads": [
+          0
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:label",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native LabelComponent",
+      "terminals": {
+        "pads": [],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:triode",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native ElectronTubeComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:pentode",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native PentodeComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:thyratron",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native ThyratronComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:vfet",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native VFETComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1,
+          2
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:bjt_npn",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native NPNComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1,
+          2
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:bjt_pnp",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native PNPComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1,
+          2
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:regulator_tube",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native RegulatorTubeComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:barretter_tube",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native BarretterTubeComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:neon_bulb",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native NeonBulbComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:light_bulb",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native LightBulbComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:connector",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native ConnectorComponent",
+      "terminals": {
+        "pads": [
+          0
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": [
+        "ceePowersNonlinearBoardAndReconfiguration"
+      ]
+    },
+    {
+      "id": "powergrid:switch",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native SwitchComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:relay",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native RelayComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:relay_dpdt",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native DoubleRelayComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:resistor",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native ResistorComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": [
+        "ceePowersNonlinearBoardAndReconfiguration"
+      ]
+    },
+    {
+      "id": "powergrid:redstone_relay",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native RedstoneRelayComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:voltage_gauge",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native VoltageGaugeComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:current_gauge",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native CurrentGaugeComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:diode",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native DiodeComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": [
+        "ceePowersNonlinearBoardAndReconfiguration"
+      ]
+    },
+    {
+      "id": "powergrid:capacitor",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native CapacitorComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:inductor",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native InductorComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:button",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native ButtonComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:potentiometer",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native PotentiometerComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1,
+          2
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:varistor",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native VaristorComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:fuse_holder",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native FuseHolderComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    },
+    {
+      "id": "powergrid:display_module",
+      "registry": "board_component",
+      "category": "electronics",
+      "model": "PG native ModularDisplayComponent",
+      "terminals": {
+        "pads": [
+          0,
+          1,
+          2
+        ],
+        "identity": "Native placed component UUID and pad index"
+      },
+      "gameplay": "Native circuit board component behavior, configuration and failure.",
+      "acceptance_circuit": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+      "status": "unverified",
+      "release_scope": true,
+      "fixtures": []
+    }
+  ]
+}

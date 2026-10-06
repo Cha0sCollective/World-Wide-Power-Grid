@@ -17,9 +17,9 @@ PG wires ─────┘                                                     
 
 ## Project status
 
-**Specification / pre-implementation.**
+**Implementation in progress; no first release has been certified.**
 
-The repository is currently pursuing the complete product described in [`SPEC.md`](SPEC.md). That document defines the release target and completion criteria. It is intentionally **not** an MVP checklist.
+The long-term product is described in [`SPEC.md`](SPEC.md). The bounded first release uses [`docs/FIRST_RELEASE.md`](docs/FIRST_RELEASE.md), targeting **CEE 1.1.3 and PG 0.6.2 on Minecraft 1.21.1 / NeoForge**. Its priority is working stationary factory items across both mods.
 
 Implementation milestones may be narrower, but they must move toward the specification rather than redefine “complete” around what happens to be implemented first.
 
@@ -31,12 +31,14 @@ Implementation milestones may be narrower, but they must move toward the specifi
 - **No one-tick boundary model.** The project does not join the mods through delayed Thevenin/Norton bridge blocks.
 - **Persistent topology.** CEE electrical content is represented by persistent PG-side nodes/elements and synchronized incrementally.
 - **CEE stays CEE.** CEE keeps ownership of its gameplay, visuals, machine state, wire rendering, thermal behavior, failures, and other non-solver mechanics.
-- **Scale is a requirement.** A server-wide connected network containing both mods is considered a normal supported use case.
+- **Scale is a long-term requirement.** The first functional release checks ordinary stationary factories; server-wide scale acceptance follows later.
 
 ## Primary documents
 
 - [`SPEC.md`](SPEC.md) — normative product target, architecture, invariants, and release completion criteria.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — project workflow and how implementation work should relate to the specification.
+- [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md) — fixed dependencies, build/tests, native binary setup and simulation lifecycle.
+- [`release/content-matrix.json`](release/content-matrix.json) — release inventory, acceptance circuits and verification status.
 
 ## Upstream projects
 
