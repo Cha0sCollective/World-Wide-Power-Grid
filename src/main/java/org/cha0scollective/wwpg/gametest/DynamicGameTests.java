@@ -43,7 +43,7 @@ public final class DynamicGameTests {
         h.runAtTickTime(5, () -> {
             ((CreativeSourceBlockEntity) level.getBlockEntity(source)).setValue(10);
             ((ResistorBlockEntity) level.getBlockEntity(load)).setValue(10);
-            DevicesSavedData.load(level).getDevice(transformer, TransformerDevice.class).ratio = 2;
+            ((com.simibubi.create.foundation.blockEntity.SmartBlockEntity)level.getBlockEntity(transformer)).getBehaviour(com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour.TYPE).setValue(29);
             WiringGameTests.connect(h, source, 0, transformer, 0, true);
             WiringGameTests.connect(h, source, 1, transformer, 1, true);
             WiringGameTests.connect(h, transformer, 2, load, 0, true);
@@ -51,7 +51,7 @@ public final class DynamicGameTests {
         });
         h.runAtTickTime(15, () -> {
             close(h, pgVoltage(h, load), 5 / 1.0125, 0.05, "Transformer step-down");
-            DevicesSavedData.load(level).getDevice(transformer, TransformerDevice.class).ratio = 0.5;
+            ((com.simibubi.create.foundation.blockEntity.SmartBlockEntity)level.getBlockEntity(transformer)).getBehaviour(com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour.TYPE).setValue(55);
         });
         h.runAtTickTime(25, () -> {
             close(h, pgVoltage(h, load), 20 / 1.05, 0.05, "Transformer step-up");
@@ -121,34 +121,49 @@ public final class DynamicGameTests {
     }
 
     @GameTest(template = "empty", timeoutTicks = 80) public static void capacitorChargesOnceAndDischarges(GameTestHelper h) {
+        capacitor(h, false);
+    }
+    @GameTest(template = "empty", timeoutTicks = 80) public static void highVoltageCapacitorChargesOnceAndDischarges(GameTestHelper h) {
+        capacitor(h, true);
+    }
+    private static void capacitor(GameTestHelper h, boolean highVoltage) {
         var a = new BlockPos(1, 2, 1); var r = new BlockPos(3, 2, 1); var c = new BlockPos(5, 2, 1);
         for (var pos : new BlockPos[] {a, r, c}) h.setBlock(pos.below(), Blocks.STONE);
         h.setBlock(a, ModdedBlocks.CREATIVE_VOLTAGE_SOURCE.get());
-        h.setBlock(r, ModdedBlocks.CREATIVE_RESISTOR.get()); h.setBlock(c, CEEBlocks.CAPACITOR.get());
+        h.setBlock(r, ModdedBlocks.CREATIVE_RESISTOR.get()); h.setBlock(c, highVoltage ? CEEBlocks.HV_CAPACITOR.get() : CEEBlocks.CAPACITOR.get());
         var source = h.absolutePos(a); var resistor = h.absolutePos(r); var capacitor = h.absolutePos(c); var level = h.getLevel();
         double[] previous = new double[1];
         h.runAtTickTime(5, () -> {
             ((CreativeSourceBlockEntity) level.getBlockEntity(source)).setValue(10);
             ((ResistorBlockEntity) level.getBlockEntity(resistor)).setValue(10);
-            var device = DevicesSavedData.load(level).getDevice(capacitor, CapacitorDevice.class);
-            device.capacitance = 0.1; device.lastVoltage = 0;
+            if (highVoltage) {
+                var device=DevicesSavedData.load(level).getDevice(capacitor,com.george_vi.electroenergetics.content.transmission_distribution.hv_capacitor.HVCapacitorDevice.class);
+                device.capacitance=.1;device.lastVoltage=0;
+            } else {
+                var device=DevicesSavedData.load(level).getDevice(capacitor,CapacitorDevice.class);
+                device.capacitance=.1;device.lastVoltage=0;
+            }
             WiringGameTests.connect(h, source, 0, resistor, 0, true);
             WiringGameTests.connect(h, resistor, 1, capacitor, 0, true);
             WiringGameTests.connect(h, capacitor, 1, source, 1, true);
         });
-        h.runAtTickTime(10, () -> previous[0] = DevicesSavedData.load(level).getDevice(capacitor, CapacitorDevice.class).lastVoltage);
+        h.runAtTickTime(10, () -> previous[0] = capacitorVoltage(level,capacitor,highVoltage));
         h.runAtTickTime(20, () -> {
-            var device = DevicesSavedData.load(level).getDevice(capacitor, CapacitorDevice.class);
             double decay = Math.pow(1 / (1 + (0.05 / 16) / 1.01), 160);
-            close(h, device.lastVoltage, 10 + (previous[0] - 10) * decay, 0.1, "RC charging / exactly-once advancement");
-            previous[0] = device.lastVoltage;
+            close(h, capacitorVoltage(level,capacitor,highVoltage), 10 + (previous[0] - 10) * decay, 0.1, "RC charging / exactly-once advancement");
+            previous[0] = capacitorVoltage(level,capacitor,highVoltage);
             ((CreativeSourceBlockEntity) level.getBlockEntity(source)).setValue(0);
         });
         h.runAtTickTime(35, () -> {
-            double voltage = DevicesSavedData.load(level).getDevice(capacitor, CapacitorDevice.class).lastVoltage;
+            double voltage = capacitorVoltage(level,capacitor,highVoltage);
             h.assertTrue(voltage > 0 && voltage < previous[0] * 0.6, "Capacitor failed to discharge: " + voltage);
             audit(h); h.succeed();
         });
+    }
+
+    private static double capacitorVoltage(ServerLevel level,BlockPos pos,boolean highVoltage) {
+        return highVoltage ? DevicesSavedData.load(level).getDevice(pos,com.george_vi.electroenergetics.content.transmission_distribution.hv_capacitor.HVCapacitorDevice.class).lastVoltage
+                : DevicesSavedData.load(level).getDevice(pos,CapacitorDevice.class).lastVoltage;
     }
 
     private static double pgVoltage(GameTestHelper h, BlockPos pos) {

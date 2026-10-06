@@ -103,7 +103,7 @@ public final class GenerationGameTests {
         return cross;
     }
 
-    private static void assemble(GameTestHelper h, boolean threePhase) {
+    static void assemble(GameTestHelper h, boolean threePhase) {
         for (var pos : new BlockPos[] {BRUSH, ROTOR, DRIVE}) h.setBlock(pos.below(), Blocks.STONE);
         h.setBlock(BRUSH, (threePhase ? CEEBlocks.THREE_PHASE_ALTERNATOR_BRUSHES.getDefaultState() : CEEBlocks.ALTERNATOR_BRUSHES.getDefaultState())
                 .setValue(AlternatorBrushesBlock.FACING, Direction.WEST));
@@ -111,7 +111,7 @@ public final class GenerationGameTests {
         h.setBlock(ROTOR.above(), CEEBlocks.STATOR.getDefaultState().setValue(StatorBlock.FACING, Direction.DOWN).setValue(StatorBlock.ROLL, true));
         h.setBlock(DRIVE, AllBlocks.CREATIVE_MOTOR.getDefaultState().setValue(BlockStateProperties.FACING, Direction.WEST));
     }
-    private static void speed(GameTestHelper h, int rpm) {
+    static void speed(GameTestHelper h, int rpm) {
         var drive = (SmartBlockEntity) h.getBlockEntity(DRIVE);
         drive.getBehaviour(ScrollValueBehaviour.TYPE).setValue(rpm);
     }

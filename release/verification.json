@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "target": "0.1.0-beta.1",
+  "checked_at": "2026-10-06T23:18:18.973916+00:00",
+  "all_release_gates_passed": true,
+  "equation_tests": 4,
+  "packaged_electrical_gameplay_fixtures": 114,
+  "checks": [
+    {
+      "log": "build/final-native-setup.log",
+      "passed_fixtures": 114,
+      "sha256": "a238d29188e4f2bbea67af5a15c0e5127407779f7c3aba0fad811e0c0fff6550"
+    },
+    {
+      "log": "build/final-java-verify.log",
+      "passed_fixtures": 114,
+      "sha256": "22c1297f5fa1255c69718cec91b113347ea9e3d7e61d36d434054666b9d62aca"
+    },
+    {
+      "log": "build/final-linux-native-setup.log",
+      "passed_fixtures": 114,
+      "sha256": "02e9a16e78be38be65135a2cc34f7a0c01df5efe2b03201bb84a767f71577f1f"
+    },
+    {
+      "log": "build/final-linux-java-verify.log",
+      "passed_fixtures": 114,
+      "sha256": "101d181e3b73532d118386664a2188b5630059d7b90a2793d49088a1aaac2898"
+    },
+    {
+      "log": "build/published-reference-upstream.log",
+      "passed_fixtures": 2,
+      "sha256": "d81da1aa8fb83e35ac08c72d485e470324cbc26c79d4883575a37aad1e4f3b91"
+    },
+    {
+      "log": "build/published-reference-compatibility.log",
+      "passed_fixtures": 2,
+      "sha256": "e5205ea00e383ab7e74540ab00f0b29469c5541aa12aec00e04acb12ada8009d"
+    },
+    {
+      "log": "build/published-example-setup.log",
+      "passed_fixtures": 1,
+      "sha256": "87d5a638e57f29dcf98335ebcec1767d41c002ee89e7aa9f2ff31c43e49459e1"
+    },
+    {
+      "log": "build/published-example-verify.log",
+      "passed_fixtures": 1,
+      "sha256": "a540bb4307ed9ccee897a7d017e134bae85ea670a17adc4dde386fff4064b037"
+    },
+    {
+      "log": "build/final-multiplayer-server.log",
+      "passed_fixtures": 1,
+      "sha256": "3617a6f47c6e97a5c8233730562543bb6048b0a737adada9be2a401a377b3433"
+    },
+    {
+      "log": "build/final-multiplayer-client-a.log",
+      "real_client_passed": true,
+      "sha256": "63df9eafc773f27f1e05938965e57e3f21ba284554684ed7f70f3e84a43db287"
+    },
+    {
+      "log": "build/final-multiplayer-client-b.log",
+      "real_client_passed": true,
+      "sha256": "cc6fc909a8d9b1173388fcee862d6f5240e1fc54a34f17f3028e593748f957b8"
+    }
+  ],
+  "runtime": "Published Create 6.0.10-280, CEE 1.21.1-1.1.3 and PG 0.6.2; native v7 primary, Java regression.",
+  "platforms": [
+    "Windows 11 x86-64 / Java 21",
+    "Ubuntu 24.04 x86-64 / Java 21"
+  ],
+  "multiplayer": "Two real Minecraft clients over loopback TCP, native wiring/configuration packets and synchronized readings/wire rendering data.",
+  "scope": "134 declared content behaviors, including all 11 base CEE panel attachments and all 28 base PG board components. Additional inventoried content remains unclaimed.",
+  "remote_ci": "Workflow committed; remote jobs have not been executed in this local session.",
+  "reproducibility": "Checks use isolated worlds and packaged artifacts. Final distribution hashes are recorded separately in release/distribution.json."
+}

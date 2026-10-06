@@ -1,32 +1,32 @@
-# WWPG 0.1.0-beta.1 gates
+# WWPG 0.1.0-beta.1 acceptance
 
-Target: Minecraft 1.21.1, NeoForge 21.1.231, Java 21, Create 6.0.10-280, CEE 1.21.1-1.1.3 and PG 0.6.2. The user approved CEE 1.1.3 in place of the original 1.1.1 target. Dependency versions remain fixed.
+Target: Minecraft 1.21.1, NeoForge 21.1.231, Java 21, Create 6.0.10-280, CEE 1.21.1-1.1.3 and PG 0.6.2. CEE 1.1.3 replaces the originally proposed 1.1.1 with the user's approval. Published dependencies remain fixed; [artifacts.json](../release/artifacts.json) records their hashes and matching source references.
 
-The release covers stationary factory power, wiring/control, CEE base panels and PG base circuit-board components. Moving trains/contraptions, Sable sublevels, optional integrations, specialized equipment outside those categories and server-wide scale acceptance are deferred.
+This release covers stationary factory power, wiring and controls, all 11 built-in CEE panel attachments and all 28 built-in PG board components. [SUPPORT.md](SUPPORT.md) describes the 134 declared content behaviors. Cosmetic variants share their native behavior. Additional inventoried content stays explicitly unclaimed.
 
-Every gate needs a working demonstration and regression checks. Completion is driven by evidence, not dates or amount of code written.
-
-| Stage | Required exit gate | Current evidence / remaining work |
+| Stage | Accepted behavior | Evidence |
 | --- | --- | --- |
-| 0 — Baseline | Clean build, client and dedicated server with exact dependencies; committed registry matrix and upstream reference worlds. | Build, client startup, dedicated GameTests, wrapper, metadata, checksum/source lock, CI and a 150-entry registry matrix exist. Standalone upstream reference worlds and remote CI remain to verify. |
-| 1 — Lifecycle | CEE source/load solved by PG; voltage/load changes work; zero CEE solves; unchanged objects retained. | Passing real server source/load fixture, parameter-change identity check and solver audit. Native and Java runs have passed. |
-| 2 — Direct wiring | Each source/load direction and each wire system; same-mod cross-wires, branches/loops, removal without stale graph objects. | Six native wire interaction fixtures and branch/loop/cut/reconnect/removal pass. Immediate CEE removal handles replacement within one tick. Survival costs, client feedback/rendering and normal cutting tools still need acceptance. |
-| 3 — Factory/controls | Mixed switched factory, variable power, meters, protection trip and repair; actual gameplay outputs. | Panel switch/gauge/indicator, player emergency-stop/reset/momentary interactions, configured breaker trip/player reset, both panel energy meters, lighting, heater heat/cooling, pump drive and fuse trip/state repair pass. Fluid transport, fuse player repair, remaining standalone controls/meters and failure behavior still need checks. |
-| 4 — Dynamics | Mixed charging/discharging, reactive circuits, motor modes, AC/phase generation and transformer ratios; exactly-once state. | Capacitor RC and inductor RL recurrences, accumulator charge/discharge, PG item battery charging, AC RMS, transformer ratios/polarity/reactive winding currents, mixed motors and CEE variac pass. Actual CEE rotor/stator/brush assemblies respond to Create drive speed and stopping; balanced three-phase generation reverses phase sequence with the drive. PG generation assemblies and remaining native machine configurations still need checks. |
-| 5 — Electronics | All base CEE attachments and PG board components have passing mixed fixtures; panel/board edits preserve workflows. | Stable panel/internal node mappings and a CEE-powered native PG diode/resistor board are implemented; panel edit, board reconfiguration and nonlinear operation pass on both backends. Survival item insertion/consumption and electrical behavior fixtures cover nine base panel attachments; analog lever, steering wheel and full per-component board behavior/assembly/crafting coverage remain. |
-| 6 — Persistence/play | Restart/chunk reload, split/merge, source/wire failures and two-client dedicated-server synchronization; compact diagnostics. | Separate server processes restore both wire systems, capacitor history, native settings and stable stamps. Actual chunk unload/reload rebinds native endpoints. Source removal and split/merge fixtures pass; status/error/position diagnostics exist. Repeated lifecycle stress, dimension changes and two-client acceptance remain. |
-| 7 — Ship | Frozen verified matrix; packaged-jar acceptance, both backends, installation docs, example world, changelog and release tag. | Packaged-jar tests and restart checks exist; complete matrix, reference/example worlds, multiplayer, Linux native execution and release artifacts remain. No release tag; this jar is a development candidate. |
+| 0 — Baseline | Fixed NeoForge build, packaged client/server, registry inventory and native upstream reference circuits. | Gradle wrapper, metadata, checksum/JNI verification, full published Create runtime, client launches, dedicated GameTests and saved reference-world comparison. |
+| 1 — Lifecycle | CEE prepares devices, PG alone solves, CEE consumes results and commits gameplay. Unchanged graphs retain their objects. | Source/load changes, topology identity, zero CEE solves and exactly-once dynamic advancement assertions. |
+| 2 — Wiring | Both wire systems connect across mods and between same-mod machines, with native terminal selection, costs, rendering and cutting. | Six wiring directions, branches/loops, survival spool/wire costs, removal/reconnection, cord sockets, sparse duplex terminals and real-client interactions. |
+| 3 — Factory/controls | Actual lighting, heating, fluid pumping, switching, variable resistance, meaningful metering, protection trip and native repair. | Native block entities, real Create tanks/pipes, item interactions, redstone/mechanical controls, meter readings, fuses/breakers, wire burnout and repair. |
+| 4 — Dynamics | Storage, reactive circuits, motor modes, AC generation/phase and transformer/variac behavior across mods. | RC/RL recurrences, accumulator charge/discharge, native PG battery item charging, RMS/phase, driven alternators/generators, motors, winding polarity and native transformer construction/configuration. |
+| 5 — Electronics | All declared panel attachments and every built-in board component operate through PG, retaining assembly/edit/configuration workflows. | Per-behavior fixtures, nonlinear components and heaters, board design/assembly/native placement, panel item insertion, gauges/displays, edits and replacement. |
+| 6 — Normal gameplay | Saves, process restarts, repeated actual chunk unloads, dimension isolation, split/merge, failures and two real clients. | Restored wire UUIDs/panel IDs/capacitor history, unload events, Overworld/Nether circuits, simultaneous TCP wiring/settings and synchronized readings/rendered wire data. Operator diagnostics identify mappings and recent errors. |
+| 7 — Freeze/package | Declared support is tied to passing fixtures; packaged artifacts, both PG backends, install instructions, example world and release metadata are available. | Frozen matrix, [verification.json](../release/verification.json), [distribution.json](../release/distribution.json), reproducible jar/world, installation guide and changelog. |
 
-Current local evidence: thirty packaged fixtures pass with Windows native `SETUP` and Java `VERIFY` in separate processes, and four electrical equation tests pass. The GameTest Gradle tasks require an actual completed passing suite in addition to a successful process exit.
+## Verification
 
-## Acceptance rules
+The packaged suite contains **114 electrical/gameplay/lifecycle fixtures**, run with native and Java backends on Windows and Ubuntu 24.04. Windows and Linux each run SETUP then VERIFY in separate processes against the same saved test world. Four JUnit tests check electrical equations. Every electrical acceptance run asserts the requested PG backend and zero independent CEE solves.
 
-- Each claimed behavior needs a repeatable mixed-network fixture with measurable electrical and gameplay outputs.
-- Compare polarity, grounding, resistance, current direction, storage state, AC/RMS and transformer relationships with analytical expectations and the pinned upstream reference circuits.
-- Exercise placement, configuration, removal, reconnection, network split/merge, chunk reload and restart.
-- Preserve same-mod circuits, native nonlinear PG models and exactly-once dynamic state advancement.
-- Check the packaged jar, dedicated server with two clients, and PG's Java and native backends.
-- Fix material differences before promoting a matrix entry from `unverified` to `verified`.
-- No release with open crashes, persistence failures, duplicate simulation or broken claimed interoperability.
+Two saved reference fixtures first operate with upstream solvers, then reopen with WWPG enabled. The example-world fixture runs in separate creation and restart processes. Multiplayer uses two real Minecraft clients connected to a loopback TCP GameTest server: clients place different native wire types, concurrently change settings, and verify synchronized voltage, resistance and wire-rendering data.
 
-Large-network benchmarking, a 10,000-node gate, asynchronous solving, topology reduction and comprehensive performance tuning are beyond this release. Performance defects that prevent normal functional play still block release.
+The committed CI workflow reproduces build, backend, restart, reference and example checks on Windows/Linux. Remote CI has not been executed in this local session. The release evidence reports local completed checks and their log hashes; it does not infer success from a workflow file or a zero exit code.
+
+## Boundaries
+
+PG's native v7 solver is primary. WWPG restores the omitted PG 0.6.2 native resources from the official 0.6.1 artifact after checksum and byte-identical JNI verification; the donor mod is not installed at runtime. Java remains tested regression/fallback. Native platform requirements are in [INSTALL.md](INSTALL.md).
+
+The first release does not certify moving trains/contraptions, Sable sublevels, optional integrations, broad dependency ranges, every upstream item, or server-wide scale. Large-network benchmarks, asynchronous execution, topology reduction and comprehensive performance tuning remain future work. Unknown or invalid CEE electrical constructs receive diagnostics and zeroed isolated results.
+
+The beta release artifacts and tag are prepared locally. Publishing to a mod distribution site or GitHub release is a separate operation.

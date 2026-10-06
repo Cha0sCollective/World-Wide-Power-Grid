@@ -41,7 +41,12 @@ public final class FactoryGameTests {
         h.runAtTickTime(40, () -> charge[0] = ((PortableBatteryBlockEntity) level.getBlockEntity(battery)).getCharge());
         h.runAtTickTime(55, () -> {
             h.assertTrue(((PortableBatteryBlockEntity) level.getBlockEntity(battery)).getCharge() == charge[0], "PG battery gained charge without solved voltage");
-            DynamicGameTests.audit(h); h.succeed();
+            var be=(PortableBatteryBlockEntity)level.getBlockEntity(battery);
+            var tag=be.saveWithoutMetadata(level.registryAccess());be.setCharge(0);be.loadWithComponents(tag,level.registryAccess());
+            h.assertTrue(be.getCharge()==charge[0],"Portable battery lost saved charge");
+            int maximum=org.patryk3211.powergrid.equipment.portablebattery.BatteryUtils.getMaxCharge(0);
+            be.setCharge(maximum-1);DevicesSavedData.load(level).getDevice(source,CreativeBatteryDevice.class).voltage=24;
+            h.runAfterDelay(8,()->{h.assertTrue(be.getCharge()==maximum&&be.getComparatorOutput()==15,"Portable battery did not stop at native capacity");DynamicGameTests.audit(h);h.succeed();});
         });
     }
     @GameTest(template = "empty", timeoutTicks = 110) public static void pgPowersCeeLightHeatAndPump(GameTestHelper h) {
@@ -94,7 +99,13 @@ public final class FactoryGameTests {
             h.assertTrue(device.isBroken, "CEE fuse did not trip on solved PG current");
             h.assertTrue(Math.abs(voltage(h, load)) < 0.001, "Fuse trip left PG load energized");
             ((ResistorBlockEntity) level.getBlockEntity(load)).setValue(100);
-            device.isBroken = false; device.temp = 0; device.setAmperage = 10;
+            var player = h.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
+            var wire = com.george_vi.electroenergetics.CEEItems.COPPER_WIRE.asStack();
+            player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, wire);
+            var result = level.getBlockState(fuse).useItemOn(wire, level, player, net.minecraft.world.InteractionHand.MAIN_HAND,
+                    new net.minecraft.world.phys.BlockHitResult(fuse.getCenter(), net.minecraft.core.Direction.UP, fuse, false));
+            h.assertTrue(result.consumesAction() && wire.isEmpty(), "Native CEE fuse repair did not consume copper wire");
+            h.assertTrue(device.setAmperage == 1, "Repair changed the configured CEE fuse rating");
         });
         h.runAtTickTime(70, () -> {
             h.assertTrue(Math.abs(voltage(h, load) - 100) < 1, "Repair failed to restore PG power");

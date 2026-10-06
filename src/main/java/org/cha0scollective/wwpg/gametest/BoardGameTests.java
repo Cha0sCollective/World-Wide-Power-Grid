@@ -50,7 +50,7 @@ public final class BoardGameTests {
         });
     }
 
-    private static CircuitSchematic diodeBoard(float resistance) {
+    static CircuitSchematic diodeBoard(float resistance) {
         var schematic = new CircuitSchematic(); schematic.setName("WWPG diode acceptance");
         schematic.placeComponent(new PlacedComponent(Components.CONNECTOR.get(), 0, 5, null), 0, 5);
         schematic.placeComponent(new PlacedComponent(Components.CONNECTOR.get(), 13, 5, null), 13, 5);

@@ -56,9 +56,16 @@ public final class Terminals {
 
     public static Vec3 pgLocalPosition(Level level, BlockPos pos, int id) {
         var electric = nativePg(level, pos);
-        if (electric == null || id < 0 || id >= electric.terminalCount()) return null;
-        var placement = electric.terminal(loadedState(level, pos), id);
-        return placement == null ? null : placement.getOrigin();
+        if (electric == null || id < 0) return null;
+        var state = loadedState(level, pos);
+        // A multiblock can expose two terminals locally while its controller
+        // assigns IDs 2 and 3 to this part (PG's medium transformer).
+        for (int local = 0; local < electric.terminalCount(); ++local) {
+            var placement = electric.terminal(state, local);
+            if (placement != null && electric.terminalIndexAt(state, placement.getOrigin()) == id)
+                return placement.getOrigin();
+        }
+        return null;
     }
 
     public static InWorldNode closestPg(Level level, BlockPos pos, Vec3 clicked, double threshold) {
@@ -67,10 +74,13 @@ public final class Terminals {
         InWorldNode found = null;
         double distance = threshold * threshold;
         for (int i = 0; i < electric.terminalCount(); ++i) {
-            var local = pgLocalPosition(level, pos, i);
-            if (local == null) continue;
-            double d = local.add(pos.getX(), pos.getY(), pos.getZ()).distanceToSqr(clicked);
-            if (d <= distance) { distance = d; found = new InWorldNode(i, pos); }
+            var state = loadedState(level, pos);
+            var placement = electric.terminal(state, i);
+            if (placement == null) continue;
+            int id = electric.terminalIndexAt(state, placement.getOrigin());
+            if (id < 0) continue;
+            double d = placement.getOrigin().add(pos.getX(), pos.getY(), pos.getZ()).distanceToSqr(clicked);
+            if (d <= distance) { distance = d; found = new InWorldNode(id, pos); }
         }
         return found;
     }
@@ -93,8 +103,13 @@ public final class Terminals {
         var electric = nativePg(level, pos);
         if (electric == null) return;
         var ids = new ArrayList<Integer>();
-        for (int id = 0; id < electric.terminalCount(); ++id)
-            if (pgLocalPosition(level, pos, id) != null) ids.add(id);
+        var state = loadedState(level, pos);
+        for (int local = 0; local < electric.terminalCount(); ++local) {
+            var placement = electric.terminal(state, local);
+            if (placement == null) continue;
+            int id = electric.terminalIndexAt(state, placement.getOrigin());
+            if (id >= 0 && !ids.contains(id)) ids.add(id);
+        }
         infrastructure.registerOrUpdateNodes(pos, ids);
     }
 
@@ -103,6 +118,8 @@ public final class Terminals {
         if (map == null) return;
         map.entrySet().removeIf(e -> {
             if (!level.hasChunkAt(e.getKey())) return false;
+            if (level instanceof ServerLevel server && server.getChunkSource().getChunkNow(e.getKey().getX() >> 4, e.getKey().getZ() >> 4) == null)
+                return false;
             var adapter = e.getValue();
             if (loadedState(level, e.getKey()).getBlock() != adapter.block()) {
                 adapter.behaviour().breakConnections();

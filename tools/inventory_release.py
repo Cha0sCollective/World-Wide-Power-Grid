@@ -170,5 +170,7 @@ matrix = {"schema": 1, "target": lock["target"], "upstream_versions": {"cee": "1
                                 "unverified": "In release scope; may have passing partial fixtures but is not yet certified for release.",
                                 "unsupported": "Outside release scope; unknown electrical constructs are isolated with diagnostics."},
           "content": rows}
-(root / "release/content-matrix.json").write_text(json.dumps(matrix, indent=2) + "\n", encoding="utf-8")
+from release_acceptance import apply
+matrix = apply(matrix)
+(root / "release/content-matrix.json").write_text(json.dumps(matrix, indent=2) + "\n", encoding="utf-8", newline="\n")
 print(f"Inventoried {len(rows)} content entries. No partial fixture is promoted to verified release support.")

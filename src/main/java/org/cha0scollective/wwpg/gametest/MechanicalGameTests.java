@@ -22,6 +22,19 @@ import org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint;
 @GameTestHolder("wwpg")
 @PrefixGameTestTemplate(false)
 public final class MechanicalGameTests {
+    @GameTest(template="empty",timeoutTicks=120) public static void ceeMotorRmsHistoryUsesPgSubsteps(GameTestHelper h){
+        var a=new BlockPos(1,2,1);var b=new BlockPos(4,2,1);for(var p:new BlockPos[]{a,b})h.setBlock(p.below(),Blocks.STONE);
+        h.setBlock(a,ModdedBlocks.CREATIVE_VOLTAGE_SOURCE.get());h.setBlock(b,BuiltInRegistries.BLOCK.get(ResourceLocation.parse("electroenergetics:white_electric_motor")));
+        var source=h.absolutePos(a);var motor=h.absolutePos(b);
+        h.runAtTickTime(5,()->{((CreativeSourceBlockEntity)h.getLevel().getBlockEntity(source)).setValue(200,20,0);for(int port=0;port<2;port++)WiringGameTests.connect(h,source,port,motor,port,true);});
+        h.runAtTickTime(70,()->{var be=(ElectricMotorBlockEntity)h.getBlockEntity(b);var samples=be.saveWithoutMetadata(h.getLevel().registryAccess()).getLongArray("Voltage");
+            h.assertTrue(samples.length==48,"Motor retained CEE's independent sample count: "+samples.length);
+            double sum=0;for(long bits:samples)sum+=Math.pow(Double.longBitsToDouble(bits),2);double rms=Math.sqrt(sum/samples.length);
+            BoardComponentGameTests.near(h,rms,200/Math.sqrt(2),.1,"Motor AC RMS history");
+            BoardComponentGameTests.near(h,be.calculateAddedStressCapacity()*Math.abs(be.getGeneratedSpeed()),rms*rms/com.george_vi.electroenergetics.config.CEEConfigs.server().resistanceValues.motorResistance.get(),.1,"Motor mechanical capacity follows RMS voltage");
+            ((CreativeSourceBlockEntity)h.getLevel().getBlockEntity(source)).setValue(0);});
+        h.runAtTickTime(100,()->{h.assertTrue(((ElectricMotorBlockEntity)h.getBlockEntity(b)).getGeneratedSpeed()==0,"AC motor did not stop");DynamicGameTests.audit(h);h.succeed();});
+    }
     @GameTest(template = "empty", timeoutTicks = 150) public static void mixedMotorsRespondToPowerAndPolarity(GameTestHelper h) {
         var a = new BlockPos(1, 2, 1); var b = new BlockPos(4, 2, 1);
         var c = new BlockPos(1, 2, 4); var d = new BlockPos(4, 2, 4);

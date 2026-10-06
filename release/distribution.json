@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "version": "0.1.0-beta.1",
+  "local_tag": "0.1.0-beta.1",
+  "publication": "Prepared and tagged locally; no GitHub or mod-site publication in this session.",
+  "artifacts": [
+    {
+      "file": "wwpg-0.1.0-beta.1.jar",
+      "sha256": "44f96249a10559e765010befab617f2968dad0123db7f40558451070ac36bb98",
+      "bytes": 2618615
+    },
+    {
+      "file": "wwpg-0.1.0-beta.1-example.zip",
+      "sha256": "ab1bd6b914739579a9f73ebb39eeed795d938028f2aba5eba46cd0c608475dd6",
+      "bytes": 89625
+    },
+    {
+      "file": "wwpg-0.1.0-beta.1-verification.zip",
+      "sha256": "d67d61bab2f21fcabd3e80b021b9c75718ae361e12764c9a880e0787926d0b66",
+      "bytes": 70059
+    }
+  ],
+  "reproducible_jar": "Byte-identical Windows Java 21 and Ubuntu 24.04 Java 21 builds, with normalized text and ZIP permissions.",
+  "runtime": {
+    "minecraft": "1.21.1",
+    "neoforge": "21.1.231",
+    "java": 21,
+    "create": "6.0.10-280",
+    "cee": "1.21.1-1.1.3",
+    "powergrid": "0.6.2",
+    "architectury": "13.0.8"
+  },
+  "solver": {
+    "primary": "PG native v7",
+    "regression_fallback": "PG Java",
+    "substeps": 16
+  },
+  "scope": "134 declared stationary content behaviors; 11 CEE panel attachments and 28 PG board components included.",
+  "verification": "release/verification.json"
+}

@@ -86,7 +86,13 @@ public final class WorldBridge {
         substeps = ModdedConfigs.server().electricity.solver.multiTicks.get();
         ticker.microTicks = substeps;
         builder = infrastructure.wireSimulationState.createCircuitBuilder();
-        devices = List.copyOf(DevicesSavedData.load(level).getDevices(CEESimulatedDeviceFeatureTypes.TICKING_ELECTRICAL.get()));
+        // Native PG endpoints/wire entities do not exist until their chunk has
+        // loaded. Pause CEE state in that interval instead of discharging storage
+        // through a temporary, disconnected graph during startup or chunk unload.
+        devices = DevicesSavedData.load(level).getDevices(CEESimulatedDeviceFeatureTypes.TICKING_ELECTRICAL.get()).stream()
+                .filter(device -> level.getChunkSource().getChunkNow(device.pos.getX() >> 4, device.pos.getZ() >> 4) != null
+                        && level.areEntitiesLoaded(net.minecraft.world.level.ChunkPos.asLong(device.pos)))
+                .toList();
         var collector = new BridgeCollector(builder, infrastructure, substeps);
         for (var device : devices) ((TickingElectricalDevice) device).preTick(collector);
         NeoForge.EVENT_BUS.post(new AddToElectricGraphEvent(builder, level, infrastructure));
@@ -131,6 +137,10 @@ public final class WorldBridge {
             }
             catch (IllegalArgumentException e) { diagnostic(e.getMessage()); }
         }
+        ((RejectedConnections)builder).wwpg$rejectedConnections().forEach((node,error)->{
+            var key=nodeKeys.get(node);
+            if(key!=null){isolated.add(key);diagnostic(error+" at "+key);}
+        });
         for (var n : builder.allNodes()) {
             var first = nodeKeys.get(n.node);
             if (first == null) continue;

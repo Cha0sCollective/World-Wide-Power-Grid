@@ -28,6 +28,58 @@ import org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint;
 @GameTestHolder("wwpg")
 @PrefixGameTestTemplate(false)
 public final class PanelGameTests {
+    @GameTest(template = "empty", timeoutTicks = 80)
+    public static void analogPanelControlsRetainNativeInteractionAndLinkState(GameTestHelper h) {
+        var a = new BlockPos(1, 2, 1); var p = new BlockPos(3, 2, 1);
+        var q = new BlockPos(3, 2, 4); var b = new BlockPos(5, 2, 1);
+        for (var pos : new BlockPos[] {a, p, q, b}) h.setBlock(pos.below(), Blocks.STONE);
+        h.setBlock(a, ModdedBlocks.CREATIVE_VOLTAGE_SOURCE.get());
+        h.setBlock(b, CEEBlocks.BULB.get());
+        for (var pos : new BlockPos[] {p, q}) h.setBlock(pos, CEEBlocks.ELECTRICAL_PANEL.getDefaultState().setValue(ElectricalPanelBlock.FACING, Direction.NORTH));
+        var source = h.absolutePos(a); var load = h.absolutePos(b);
+        PanelAttachment[] controls = new PanelAttachment[2];
+        h.runAtTickTime(5, () -> {
+            ((CreativeSourceBlockEntity) h.getLevel().getBlockEntity(source)).setValue(10);
+            WiringGameTests.connect(h, source, 0, load, 0, true);
+            WiringGameTests.connect(h, source, 1, load, 1, false);
+            controls[0] = insertWithItem(h, h.absolutePos(p), CEEPanelAttachmentTypes.ANALOG_LEVER.get(), ElectricalPanelSlot.THIRD_LEFT, null);
+            controls[1] = insertWithItem(h, h.absolutePos(q), CEEPanelAttachmentTypes.STEERING_WHEEL.get(), ElectricalPanelSlot.QUARTER_CENTER, null);
+            for (var attachment : controls) {
+                var link = (com.george_vi.electroenergetics.content.electrical_panel.link.ElectricalPanelLink) attachment;
+                link.getLinkFrequencies()[0] = new ItemStack(net.minecraft.world.item.Items.REDSTONE);
+                link.getLinkFrequencies()[1] = new ItemStack(net.minecraft.world.item.Items.IRON_INGOT);
+                var player = new net.minecraft.server.level.ServerPlayer(h.getLevel().getServer(), h.getLevel(),
+                        new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(), "WWPG-panel-test"),
+                        net.minecraft.server.level.ClientInformation.createDefault());
+                player.setPos(attachment.pos.getX() + 0.5, attachment.pos.getY(), attachment.pos.getZ() + 0.5);
+                new com.george_vi.electroenergetics.content.electrical_panel.special_interaction.AnalogPanelAttachmentChangeStatePacket(
+                        attachment.pos, attachment.slot.ordinal(), (byte) 127).handle(player);
+                h.assertTrue(((com.george_vi.electroenergetics.content.electrical_panel.special_interaction.IAnalogPanelAttachment) attachment).getAnalogState() == 15,
+                        "Native analog packet did not clamp its signal");
+                var dye = new ItemStack(net.minecraft.world.item.Items.BLUE_DYE);
+                attachment.onInteract(dye, player, InteractionHand.MAIN_HAND,
+                        new BlockHitResult(attachment.pos.getCenter(), Direction.NORTH, attachment.pos, false));
+            }
+        });
+        h.runAtTickTime(30, () -> {
+            for (var attachment : controls) {
+                var link = (com.george_vi.electroenergetics.content.electrical_panel.link.ElectricalPanelLink) attachment;
+                h.assertTrue(link.getTransmittedStrength() == 15 && link.isAlive(), "Panel control did not prepare its native redstone link");
+                var saved = new CompoundTag(); attachment.write(saved, false, h.getLevel().registryAccess());
+                var restored = attachment.type.createNew(attachment.pos, attachment.nodes, h.getLevel(), attachment.slot, Direction.NORTH, h.getLevel().registryAccess());
+                restored.read(saved, false, h.getLevel().registryAccess());
+                h.assertTrue(((com.george_vi.electroenergetics.content.electrical_panel.link.ElectricalPanelLink) restored).getTransmittedStrength() == 15
+                                && saved.getString("Color").equals("blue"), "Analog panel state/dye/frequencies did not round-trip");
+                h.assertTrue(attachment.nodes.length == 0, "Native analog control gained unintended electrical terminals");
+                attachment.onRemoved(h.makeMockPlayer(GameType.SURVIVAL));
+                var be = (ElectricalPanelBlockEntity) h.getLevel().getBlockEntity(attachment.pos);
+                be.getAttachments()[attachment.slot.ordinal()] = null; be.attachmentUpdate();
+            }
+            h.assertTrue(Math.abs(new BlockWireEndpoint(load, 0).getNode(h.getLevel()).getVoltage()
+                    - new BlockWireEndpoint(load, 1).getNode(h.getLevel()).getVoltage()) > 9, "Analog panel edits interrupted the mixed factory");
+            DynamicGameTests.audit(h); h.succeed();
+        });
+    }
     @GameTest(template = "empty", timeoutTicks = 100) public static void panelControlsAndMonitorsPgFactory(GameTestHelper h) {
         var a = new BlockPos(1, 2, 1); var p = new BlockPos(3, 2, 1); var b = new BlockPos(5, 2, 1);
         for (var pos : new BlockPos[] {a, p, b}) h.setBlock(pos.below(), Blocks.STONE);

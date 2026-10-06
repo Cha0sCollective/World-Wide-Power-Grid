@@ -1,2 +1,15 @@
+* text=auto
+.gitattributes text eol=lf
+*.gradle text eol=lf
+*.properties text eol=lf
+*.java text eol=lf
+*.json text eol=lf
+*.toml text eol=lf
+*.txt text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.py text eol=lf
 gradlew text eol=lf
-gradlew.bat text eol=crlf
+*.bat text eol=crlf
+*.nbt binary
+*.jar binary

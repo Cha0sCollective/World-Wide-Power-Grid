@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "org.cha0scollective.wwpg.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": ["CircuitBuilderAccessor", "ElectricalNetworkAccessor", "CeeSolverAuditMixin", "SimulationTickerMixin", "WorldNetworksMixin", "PgElectricMixin", "PgBehaviourMixin", "CeeDeviceRemovalMixin", "PgWireRemovalMixin", "VariacResultsMixin", "PanelMeterAccessor", "TriPolarMeterResultsMixin", "InWorldNodeMixin", "WireSpoolMixin", "SyncPositionMixin"],
+  "mixins": ["NativeResourceMixin", "SolverConfigThreadMixin", "CircuitBuilderAccessor", "CircuitBuilderValidationMixin", "ElectricalNetworkAccessor", "CeeSolverAuditMixin", "SimulationTickerMixin", "WorldNetworksMixin", "PgElectricMixin", "PgBehaviourMixin", "CeeDeviceRemovalMixin", "PgWireRemovalMixin", "VariacResultsMixin", "PanelMeterAccessor", "TriPolarMeterResultsMixin", "FrequencyMeterTimingMixin", "MotorSamplingMixin", "InWorldNodeMixin", "WireSpoolMixin", "SyncPositionMixin"],
   "client": [],
   "injectors": { "defaultRequire": 1 }
 }

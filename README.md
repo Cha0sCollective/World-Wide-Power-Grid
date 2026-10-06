@@ -1,52 +1,36 @@
 # World-Wide Power Grid
 
-> **One electrical world. Two great content ecosystems. One authoritative solver.**
+WWPG makes **Create: Electro Energetics (CEE)** and **Power Grid (PG)** operate as one stationary electrical system. Both mods' wires connect directly to their native terminals. PG owns the electrical solve; CEE keeps its machines, controls, visuals, heat, damage and other gameplay.
 
-World-Wide Power Grid is a compatibility project for **Create: Electro Energetics (CEE)** and **Power Grid (PG)**.
+**0.1.0-beta.1** targets Minecraft **1.21.1**, NeoForge **21.1.231**, Java **21**, Create **6.0.10-280**, CEE **1.21.1-1.1.3**, PG **0.6.2** and Architectury **13.0.8**. Use the published upstream jars and the exact versions in [the installation guide](docs/INSTALL.md).
 
-The finished product is intended to make CEE electrical content participate directly in Power Grid's electrical simulation. When the compatibility layer is active, Power Grid is the authoritative electrical backend for supported CEE devices and wires, while CEE remains responsible for its blocks, machines, visuals, controls, thermal behavior, damage systems, wire gameplay, and other native mechanics.
+The declared stationary support set includes factory generation, motors, pumping, lighting, heating, storage, reactives, transformers, wiring, protection, controls and meters; **all 11 built-in CEE panel attachments and all 28 built-in PG board components** are included. [The support checklist](docs/SUPPORT.md) records the bounded behaviors and unclaimed content.
 
-The goal is not to bridge two independent simulators. The goal is to make them behave like one electrical ecosystem.
+PG's **native solver is primary**. WWPG includes the verified native v7 binaries missing from PG 0.6.2, taken from its official 0.6.1 artifact with the same JNI interface. The 0.6.1 mod is not a runtime dependency. Java remains a tested fallback/regression backend.
 
 ```text
-CEE machines ─┐
-CEE wires ────┼────► compatibility layer ────► persistent Power Grid graph ────► Power Grid solver
-PG machines ──┤                                                        │
-PG wires ─────┘                                                        └────► CEE-compatible results
+CEE preparation → topology/parameter updates → PG substeps
+                                              ↓
+                    CEE gameplay ← compatible electrical results
 ```
 
-## Project status
+The packaged jar passes 114 electrical/gameplay/lifecycle fixtures with both backends on Windows and Linux, plus equation checks, upstream saved-world comparisons, an example-world restart and a two-client TCP wiring/configuration check. [Verification evidence](release/verification.json) distinguishes local results from the committed CI workflow. [Release hashes](release/distribution.json) identify the local jar and example-world ZIP.
 
-**Implementation in progress; no first release has been certified.**
+```sh
+./gradlew build --no-daemon
+```
 
-The long-term product is described in [`SPEC.md`](SPEC.md). The bounded first release uses [`docs/FIRST_RELEASE.md`](docs/FIRST_RELEASE.md), targeting **CEE 1.1.3 and PG 0.6.2 on Minecraft 1.21.1 / NeoForge**. Its priority is working stationary factory items across both mods.
+Use a Java 21 JDK; Windows users can run `gradlew.bat`. The jar is `build/libs/wwpg-0.1.0-beta.1.jar`. Release delivery files are in `build/distributions`. Follow [INSTALL.md](docs/INSTALL.md) for solver configuration and importing the example world.
 
-Implementation milestones may be narrower, but they must move toward the specification rather than redefine “complete” around what happens to be implemented first.
+- [Installation](docs/INSTALL.md)
+- [Supported content and limitations](docs/SUPPORT.md)
+- [Release acceptance](docs/FIRST_RELEASE.md)
+- [Development and test commands](docs/DEVELOPMENT.md)
+- [Changelog](CHANGELOG.md)
+- [Long-term specification](SPEC.md) and [contribution workflow](CONTRIBUTING.md)
 
-## Product principles
+Moving systems, Sable sublevels, optional integrations and server-wide scale certification are deferred. This beta does not claim every upstream item or configuration. Unknown electrical constructs are diagnosed and isolated without a second solver or stale results.
 
-- **One electrical solver.** Power Grid is the sole authoritative electrical solver while compatibility mode is active.
-- **No adapter blocks.** PG wires connect directly to CEE terminals and CEE wires connect directly to PG terminals.
-- **No FE conversion.** Interoperability is circuit-level, using real electrical quantities and models.
-- **No one-tick boundary model.** The project does not join the mods through delayed Thevenin/Norton bridge blocks.
-- **Persistent topology.** CEE electrical content is represented by persistent PG-side nodes/elements and synchronized incrementally.
-- **CEE stays CEE.** CEE keeps ownership of its gameplay, visuals, machine state, wire rendering, thermal behavior, failures, and other non-solver mechanics.
-- **Scale is a long-term requirement.** The first functional release checks ordinary stationary factories; server-wide scale acceptance follows later.
+Upstream projects: [Create: Electro Energetics](https://github.com/george8188625/Create-Electro-Energetics) and [Power Grid](https://github.com/patryk3211/PowerGrid). WWPG is an interoperability mod, not a replacement distribution of either project.
 
-## Primary documents
-
-- [`SPEC.md`](SPEC.md) — normative product target, architecture, invariants, and release completion criteria.
-- [`CONTRIBUTING.md`](CONTRIBUTING.md) — project workflow and how implementation work should relate to the specification.
-- [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md) — fixed dependencies, build/tests, native binary setup and simulation lifecycle.
-- [`release/content-matrix.json`](release/content-matrix.json) — release inventory, acceptance circuits and verification status.
-
-## Upstream projects
-
-- Create: Electro Energetics: https://github.com/george8188625/Create-Electro-Energetics
-- Power Grid: https://github.com/patryk3211/PowerGrid
-
-World-Wide Power Grid is an interoperability project and is not a replacement distribution of either upstream mod.
-
-## License
-
-A project license has **not yet been selected**. Do not assume the license of either upstream project automatically applies to this repository.
+A project license has not yet been selected. Bundled PG native resources retain their Apache license and attribution. This local beta preparation does not publish a GitHub or mod-site release.

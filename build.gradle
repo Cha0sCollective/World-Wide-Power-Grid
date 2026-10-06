@@ -30,12 +30,27 @@ neoForge {
     version = neo_version
     runs {
         client { client() }
+        clientA {
+            client()
+            jvmArgument '-Xmx2G'
+            gameDirectory = layout.projectDirectory.dir('run/client-a')
+            systemProperty 'wwpg.test.multiplayer', 'true'
+            programArguments.addAll '--username', 'WWPG_A', '--quickPlayMultiplayer', '127.0.0.1:25575', '--width', '854', '--height', '480'
+        }
+        clientB {
+            client()
+            jvmArgument '-Xmx2G'
+            gameDirectory = layout.projectDirectory.dir('run/client-b')
+            systemProperty 'wwpg.test.multiplayer', 'true'
+            programArguments.addAll '--username', 'WWPG_B', '--quickPlayMultiplayer', '127.0.0.1:25575', '--width', '854', '--height', '480'
+        }
         server { server(); programArgument '--nogui' }
         gameTestServer {
             type = 'gameTestServer'
-            systemProperty 'neoforge.enabledGameTestNamespaces', 'wwpg'
+            systemProperty 'neoforge.enabledGameTestNamespaces', providers.gradleProperty('testNamespaces').getOrElse('wwpg')
             systemProperty 'wwpg.test.backend', providers.gradleProperty('testBackend').getOrElse('NATIVE')
             systemProperty 'wwpg.test.restartPhase', providers.gradleProperty('restartPhase').getOrElse('SETUP')
+            systemProperty 'wwpg.test.multiplayer', providers.gradleProperty('multiplayer').getOrElse('false')
         }
         configureEach { logLevel = org.slf4j.event.Level.INFO }
     }
@@ -46,7 +61,8 @@ dependencies {
     releaseArtifacts.artifacts.findAll { it.role != 'pg_native_reference' }.each {
         upstreamArtifacts(it.coordinate) { transitive = false }
     }
-    implementation("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false }
+    def createClassifier = providers.gradleProperty('publishedRuntime').getOrElse('true') == 'true' ? '' : ':slim'
+    implementation("com.simibubi.create:create-${minecraft_version}:${create_version}${createClassifier}") { transitive = false }
     implementation 'net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1'
     implementation 'com.tterrag.registrate:Registrate:MC1.21-1.3.0+67'
     compileOnly 'dev.engine-room.flywheel:flywheel-neoforge-api-1.21.1:1.0.6'
@@ -68,11 +84,19 @@ dependencies {
 tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
 tasks.named('test') { useJUnitPlatform() }
 tasks.named('processResources') {
+    dependsOn tasks.named('preparePgNative')
     inputs.property 'version', project.version
     filesMatching('META-INF/neoforge.mods.toml') { expand version: project.version }
     from('release') { include 'artifacts.json', 'content-matrix.json'; into 'data/wwpg/release' }
+    from(layout.buildDirectory.dir('pg-native-resources/native')) { into 'native/wwpg' }
 }
 tasks.named('jar') { manifest.attributes 'MixinConfigs': 'wwpg.mixins.json' }
+tasks.withType(Jar).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+    filePermissions { unix('0644') }
+    dirPermissions { unix('0755') }
+}
 tasks.named('wrapper') { distributionType = Wrapper.DistributionType.BIN }
 
 tasks.register('verifyUpstreamArtifacts') {
@@ -140,7 +164,8 @@ tasks.register('runPackagedGameTestServer', JavaExec) {
     javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(21) }
     doFirst {
         def run = developmentRun.get()
-        workingDir = run.gameDirectory.get().asFile
+        workingDir = file(providers.gradleProperty('testDirectory').getOrElse(run.gameDirectory.get().asFile.absolutePath))
+        workingDir.mkdirs()
         mainClass = run.mainClass
         args = run.args
         jvmArgs = run.jvmArgs + ['-Dwwpg.test.packaged=true']
@@ -153,9 +178,88 @@ tasks.register('runPackagedGameTestServer', JavaExec) {
     }
 }
 
+['A', 'B'].each { suffix ->
+    tasks.register("runPackagedClient${suffix}", JavaExec) {
+        def developmentRun = tasks.named("runClient${suffix}")
+        dependsOn tasks.named('build'), tasks.named("prepareClient${suffix}Run")
+        javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(21) }
+        doFirst {
+            def run = developmentRun.get()
+            workingDir = run.gameDirectory.get().asFile
+            mainClass = run.mainClass
+            args = run.args
+            jvmArgs = run.jvmArgs + ['-Dwwpg.test.packaged=true']
+            def packaged = tasks.named('jar').get().archiveFile.get().asFile
+            classpath = run.classpathProvider.filter { !sourceSets.main.output.files.contains(it) } + files(packaged)
+            def env = new HashMap(run.environmentProperty.get())
+            env['MOD_CLASSES'] = "wwpg%%${packaged.absolutePath}"
+            environment env
+        }
+    }
+}
+
+// A test-only jar keeps the native resource repair but removes the electrical
+// bridge hooks, allowing the pinned upstream solvers to capture reference worlds.
+tasks.register('prepareReferenceConfig') {
+    def output = layout.buildDirectory.file('reference-config/wwpg.mixins.json')
+    outputs.file output
+    doLast {
+        def target = output.get().asFile
+        target.parentFile.mkdirs()
+        target.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson([
+            required: true, minVersion: '0.8', package: 'org.cha0scollective.wwpg.mixin',
+            compatibilityLevel: 'JAVA_21', mixins: ['NativeResourceMixin'],
+            client: [], injectors: [defaultRequire: 1]
+        ])) + '\n'
+    }
+}
+tasks.register('referenceJar', Jar) {
+    dependsOn tasks.named('classes'), tasks.named('prepareReferenceConfig')
+    archiveClassifier = 'upstream-reference-tests'
+    from(sourceSets.main.output) { exclude 'wwpg.mixins.json' }
+    from(layout.buildDirectory.dir('reference-config'))
+    manifest.attributes 'MixinConfigs': 'wwpg.mixins.json'
+}
+['runUpstreamReferenceServer', 'runReferenceCompatibilityServer'].each { taskName ->
+    tasks.register(taskName, JavaExec) {
+        boolean upstream = taskName == 'runUpstreamReferenceServer'
+        def artifact = tasks.named(upstream ? 'referenceJar' : 'jar')
+        def developmentRun = tasks.named('runGameTestServer')
+        dependsOn artifact, tasks.named('prepareGameTestServerRun')
+        javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(21) }
+        doFirst {
+            def run = developmentRun.get()
+            def directory = layout.projectDirectory.dir('run/reference').asFile
+            directory.mkdirs()
+            workingDir = directory
+            mainClass = run.mainClass
+            args = run.args
+            // Gradle orders -D arguments before @response files. Override the
+            // generated properties inside their file so the default namespace
+            // cannot silently run the mixed suite with the bridge disabled.
+            jvmArgs = run.jvmArgs.collect { argument ->
+                if (!argument.startsWith('@')) return argument
+                def original = file(argument.substring(1))
+                if (!original.isFile()) return argument
+                def replacement = layout.buildDirectory.file("reference-config/${taskName}-${original.name}").get().asFile
+                replacement.parentFile.mkdirs()
+                replacement.text = original.getText('UTF-8')
+                    .replaceAll('(?m)^-Dneoforge.enabledGameTestNamespaces=.*$', '-Dneoforge.enabledGameTestNamespaces=wwpg_reference')
+                    .replaceAll('(?m)^-Dwwpg.test.restartPhase=.*$', "-Dwwpg.test.restartPhase=${upstream ? 'SETUP' : 'VERIFY'}")
+                return "@${replacement.absolutePath}"
+            } + ['-Dwwpg.test.packaged=true', "-Dwwpg.test.upstreamReference=${upstream}"]
+            def packaged = artifact.get().archiveFile.get().asFile
+            classpath = run.classpathProvider.filter { !sourceSets.main.output.files.contains(it) } + files(packaged)
+            def env = new HashMap(run.environmentProperty.get())
+            env['MOD_CLASSES'] = "wwpg%%${packaged.absolutePath}"
+            environment env
+        }
+    }
+}
+
 // NeoForge can return exit code zero after a mod-loading failure. Require the
 // current process to report a completed, passing suite as well as a good exit.
-tasks.matching { it.name in ['runGameTestServer', 'runPackagedGameTestServer'] }.configureEach {
+tasks.matching { it.name in ['runGameTestServer', 'runPackagedGameTestServer', 'runUpstreamReferenceServer', 'runReferenceCompatibilityServer'] }.configureEach {
     doFirst {
         def capture = new ByteArrayOutputStream()
         extensions.extraProperties.set('wwpgTestOutput', capture)

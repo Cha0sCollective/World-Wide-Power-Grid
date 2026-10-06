@@ -31,6 +31,14 @@
       "url": "https://mediafilez.forgecdn.net/files/8738/576/powergrid-mc1.21.1-0.6.1.jar",
       "sha256": "b2835c36af6794a963737c617b5f9dd6b41aba5078d418c88847193fbcf702e5",
       "source_note": "Native v7 binary donor only; this mod jar is never loaded. NativeMNA.class is byte-identical to the 0.6.2 interface."
+    },
+    {
+      "role": "create",
+      "version": "6.0.10-280",
+      "coordinate": "com.simibubi.create:create-1.21.1:6.0.10-280",
+      "url": "https://maven.createmod.net/com/simibubi/create/create-1.21.1/6.0.10-280/create-1.21.1-6.0.10-280.jar",
+      "sha256": "192c7b0be13f523dcec9a7a2393bbc2614c3c9bd3edb1f7720a97bcd4f0b87a7",
+      "source_note": "Published full Create release. All 2692 Create classes are byte-identical to the slim development artifact. Bundled Registrate, Ponder and Flywheel versions match the fixed development runtime."
     }
   ],
   "native_binaries": [

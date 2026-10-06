@@ -87,7 +87,12 @@ public final class CeeElectric implements IElectric {
         @Override public OwnedFloatingNode getTerminal(int index) {
             if (!hasTerminal(index)) return null;
             var endpoint = new BlockWireEndpoint(pos, index);
-            return GlobalElectricNetworks.getWorldNetworks(level).globalExternalNodes.computeIfAbsent(endpoint, OwnedFloatingNode::new);
+            // PG publishes the WorldNetworks object before reading saved line
+            // parts. Those parts resolve CEE endpoints here. Re-entering the
+            // Level overload would recursively completeLoad the same saved NBT.
+            var world=GlobalElectricNetworks.getWorldNetworks((net.minecraft.world.level.LevelAccessor)level);
+            if(world==null)world=GlobalElectricNetworks.getWorldNetworks(level);
+            return world.globalExternalNodes.computeIfAbsent(endpoint, OwnedFloatingNode::new);
         }
         @Override public boolean hasTerminal(int index) { return accessible().containsKey(index); }
         @Override public List<OwnedFloatingNode> getExternalNodes() {
