@@ -1,0 +1,13 @@
+WWPG includes Power Grid native solver v7 binaries recovered from the official
+Power Grid Minecraft 1.21.1 version 0.6.1 release. Copyright Patryk3211.
+Power Grid is licensed under the Apache License, Version 2.0. A copy is provided
+as META-INF/POWER-GRID-LICENSE.txt.
+
+These binaries are used with Power Grid 0.6.2. The two releases contain
+byte-identical NativeMNA.class JNI interfaces. Version 0.6.1's mod classes are
+not included or loaded. Artifact and binary SHA-256 checksums and source
+references are recorded in data/wwpg/release/artifacts.json.
+
+Source: https://github.com/patryk3211/PowerGrid
+Donor: https://mediafilez.forgecdn.net/files/8738/576/powergrid-mc1.21.1-0.6.1.jar
+Platforms: Windows x86-64 and Linux x86-64 (glibc 2.38 or newer).

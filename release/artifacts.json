@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "target": "0.1.0-beta.1",
+  "minecraft": "1.21.1",
+  "neoforge": "21.1.231",
+  "java": 21,
+  "create": "6.0.10-280",
+  "artifacts": [
+    {
+      "role": "cee",
+      "version": "1.21.1-1.1.3",
+      "coordinate": "maven.modrinth:qYJdIoAx:KWxEmmON",
+      "url": "https://cdn.modrinth.com/data/qYJdIoAx/versions/KWxEmmON/electroenergetics-1.21.1-1.1.3.jar",
+      "sha256": "ae7ea74b7b00f175daa5a60a953a6d57f7f775aed0b642a1e9f80c3865cf8be7",
+      "source": "https://github.com/george8188625/Create-Electro-Energetics/tree/cf855615a611acea5d43e62398087d68cb5ef840",
+      "source_note": "Stable 1.1.x source at the 1.1.3 publication; the development branch uses a different property API."
+    },
+    {
+      "role": "pg",
+      "version": "0.6.2",
+      "coordinate": "curse.maven:power-grid-1321420:8880715",
+      "url": "https://mediafilez.forgecdn.net/files/8880/715/powergrid-mc1.21.1-0.6.2.jar",
+      "sha256": "e40d67a874431925d502af88e85064883c67936cfd689033d7df560cffcf19e7",
+      "source": "https://github.com/patryk3211/PowerGrid/tree/0938be067fb71f311b3e5fd6c5f7cdaed722e241",
+      "source_note": "Minecraft 1.21.1 source at the published artifact. The generic v0.6.2 tag targets 1.20.1."
+    },
+    {
+      "role": "pg_native_reference",
+      "version": "0.6.1",
+      "coordinate": "curse.maven:power-grid-1321420:8738576",
+      "url": "https://mediafilez.forgecdn.net/files/8738/576/powergrid-mc1.21.1-0.6.1.jar",
+      "sha256": "b2835c36af6794a963737c617b5f9dd6b41aba5078d418c88847193fbcf702e5",
+      "source_note": "Native v7 binary donor only; this mod jar is never loaded. NativeMNA.class is byte-identical to the 0.6.2 interface."
+    },
+    {
+      "role": "create",
+      "version": "6.0.10-280",
+      "coordinate": "com.simibubi.create:create-1.21.1:6.0.10-280",
+      "url": "https://maven.createmod.net/com/simibubi/create/create-1.21.1/6.0.10-280/create-1.21.1-6.0.10-280.jar",
+      "sha256": "192c7b0be13f523dcec9a7a2393bbc2614c3c9bd3edb1f7720a97bcd4f0b87a7",
+      "source_note": "Published full Create release. All 2692 Create classes are byte-identical to the slim development artifact. Bundled Registrate, Ponder and Flywheel versions match the fixed development runtime."
+    }
+  ],
+  "native_binaries": [
+    {
+      "entry": "native/windows/libpowergridNative7.dll",
+      "sha256": "3150ba018b68ef173332a31b041b25cd8c6501394c4e9222aaa4c3ac9eeb16f4"
+    },
+    {
+      "entry": "native/linux/libpowergridNative7.so",
+      "sha256": "c90e98869ed32ed8bff68aa5a856f4507ca09025a6152d9df718115637c8e837"
+    }
+  ]
+}

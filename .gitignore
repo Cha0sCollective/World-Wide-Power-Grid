@@ -2,13 +2,13 @@
 .gradle/
 build/
 **/build/
-!gradle/wrapper/gradle-wrapper.jar
 
 # Java
 *.class
 *.jar
 *.war
 *.ear
+!gradle/wrapper/gradle-wrapper.jar
 hs_err_pid*
 replay_pid*
 

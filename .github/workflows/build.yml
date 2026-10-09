@@ -1,0 +1,41 @@
+name: Build
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-latest]
+        backend: [NATIVE, JAVA]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/wrapper-validation@v4
+      - uses: gradle/actions/setup-gradle@v4
+      - if: runner.os != 'Windows'
+        run: chmod +x gradlew
+      - run: ./gradlew build --no-daemon
+      - run: ./gradlew runPackagedGameTestServer -PtestBackend=${{ matrix.backend }} -PrestartPhase=SETUP --no-daemon
+      - run: ./gradlew runPackagedGameTestServer -PtestBackend=${{ matrix.backend }} -PrestartPhase=VERIFY --no-daemon
+      - run: ./gradlew runUpstreamReferenceServer -PtestBackend=${{ matrix.backend }} --no-daemon
+      - run: ./gradlew runReferenceCompatibilityServer -PtestBackend=${{ matrix.backend }} --no-daemon
+      - run: ./gradlew runPackagedGameTestServer -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_example -PtestDirectory=run/example --no-daemon
+      - run: ./gradlew runPackagedGameTestServer -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_example -PtestDirectory=run/example -PrestartPhase=VERIFY --no-daemon
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wwpg-${{ matrix.os }}-${{ matrix.backend }}
+          path: |
+            build/libs/*.jar
+            build/reports/tests/
+            run/logs/
+            run/crash-reports/
