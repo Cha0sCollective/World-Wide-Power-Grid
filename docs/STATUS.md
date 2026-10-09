@@ -29,7 +29,13 @@ The initial Linux/native run failed `chunkReloadRebindsMixedEndpoints`: the rest
 
 The test samples at a fixed tick after forcing the chunk to load, while entity loading is asynchronous. This is a plausible timing cause, not a confirmed diagnosis. It remains unclear whether the failure is limited to the test's deadline or exposes a compatibility lifecycle defect. A successful later run does not resolve that question.
 
-The next diagnostic step is to record chunk/entity readiness, restored wire connections, and simulation progress before the assertion. Any change must retain an actual unload/reload and check that power returns within a bounded interval. This documentation review does not fix the failure or change the released jar.
+The next diagnostic step is to record chunk/entity readiness, restored wire connections, and simulation progress before the assertion. Any change must retain an actual unload/reload and check that power returns within a bounded interval. Beta.2 does not claim to fix this earlier failure.
+
+## Startup failure under investigation
+
+Beta.2 publication is held while an intermittent mod-registration failure is investigated. NeoForge reports an “uncaught parallel processing error”; the earlier underlying error is Create's Registrate reporting unused registration callbacks. This happens before a world or electrical simulation starts and has occurred with both solver selections.
+
+The final local 117-test native/Java runs, example restart, and two real clients passed, but the [Linux/native PR job](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38005893894) and [Linux/Java push job](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38005891186) reproduced the startup failure on commit `cdb94cb`. Reusing CEE's existing meter handler did not fully resolve it. Failure-path diagnostics are being added; neither an upstream cause nor a WWPG cause has been established. Successful later starts alone will not be presented as a fix.
 
 ## Deferred work
 

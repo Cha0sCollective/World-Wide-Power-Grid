@@ -65,8 +65,11 @@ jobs = ci.get("jobs", [])
 if ci.get("conclusion") != "success" or len(jobs) != 4 or any(j.get("conclusion") != "success" for j in jobs):
     raise SystemExit("The four platform/backend CI jobs have not passed")
 
+jar = root / "build/libs" / f"wwpg-{version}.jar"
 report = {
     "schema": 1, "target": version, "equation_tests": equations,
+    "tested_artifact": {"file": jar.name, "sha256": sha(jar)},
+    "ci_source_commit": ci["headSha"],
     "packaged_electrical_gameplay_fixtures": 117,
     "checks": checks, "ci": ci["url"],
     "local_platform": "Windows x86-64, Java 21; native v7 and Java",
@@ -80,7 +83,6 @@ evidence[ci_path.relative_to(root).as_posix()] = ci_path
 verification = output / f"wwpg-{version}-verification.zip"
 archive(verification, evidence)
 
-jar = root / "build/libs" / f"wwpg-{version}.jar"
 with zipfile.ZipFile(jar) as built:
     metadata = built.read("META-INF/neoforge.mods.toml").decode()
     if f'version="{version}"' not in metadata or 'license="MIT"' not in metadata:
