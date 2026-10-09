@@ -4,6 +4,10 @@ WWPG is a compatibility project for CEE and Power Grid. The current beta's prior
 
 Before changing a feature, identify the relevant beta behavior in the [support matrix](release/content-matrix.json) and the design requirement it advances. Use [STATUS.md](docs/STATUS.md) for unresolved issues and [DEVELOPMENT.md](docs/DEVELOPMENT.md) for build/test commands. Changes to the beta's scope should update its documentation explicitly.
 
+## License
+
+WWPG's own code and documentation use the [MIT License](LICENSE). By submitting a contribution, you agree to license it under MIT. Preserve third-party licenses and attribution notices, including those for the bundled Power Grid native resources.
+
 ## Architectural rules
 
 - **One electrical solver:** PG owns the authoritative electrical solve while compatibility is active.

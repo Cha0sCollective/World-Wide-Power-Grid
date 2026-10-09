@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Make WWPG's own code and documentation open source under MIT, including the WWPG portions of the existing beta.
+- Declare MIT in mod metadata and include the license in newly built jars and release bundles.
+- Preserve the bundled Power Grid native resources' Apache 2.0 license and attribution. Original published beta artifacts and checksums are unchanged.
+
 ## Documentation review — 9 October 2026
 
 - Update publication and CI status after the beta release and merge into `main`.

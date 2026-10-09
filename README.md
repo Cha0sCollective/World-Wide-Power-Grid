@@ -62,4 +62,6 @@ PG's **native solver is primary**. WWPG includes the verified native v7 binaries
 
 WWPG builds on [Create: Electro Energetics](https://github.com/george8188625/Create-Electro-Energetics) and [Power Grid](https://github.com/patryk3211/PowerGrid). Each upstream mod retains ownership of its content and native gameplay.
 
-WWPG's project license has not yet been selected; the mod metadata currently says **All Rights Reserved**. Bundled PG native resources retain their [Apache 2.0 license](src/main/resources/META-INF/POWER-GRID-LICENSE.txt) and [attribution notice](src/main/resources/META-INF/WWPG-NATIVE-NOTICE.txt).
+**WWPG is open source under the [MIT License](LICENSE).** You can use, modify, fork, and redistribute WWPG, including in modpacks, while keeping its copyright and license notice. Contributions are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+The MIT license also applies to WWPG's own code and documentation in **0.1.0-beta.1**. The original published jar retains its older “All Rights Reserved” metadata label; current builds declare MIT and include the license. Bundled PG native resources retain their [Apache 2.0 license](src/main/resources/META-INF/POWER-GRID-LICENSE.txt) and [attribution notice](src/main/resources/META-INF/WWPG-NATIVE-NOTICE.txt). Other dependencies retain their own licenses.

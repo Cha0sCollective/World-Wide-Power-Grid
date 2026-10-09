@@ -31,4 +31,6 @@ The next diagnostic step is to record chunk/entity readiness, restored wire conn
 
 Moving trains/contraptions, Sable sublevels, optional integrations, broad version ranges, specialized unclaimed devices, large-network benchmarks, asynchronous execution, advanced topology reduction, and a public extension API are outside this beta's scope. The [long-term specification](../SPEC.md) retains the full product requirements.
 
-WWPG's project license has not yet been selected. Its current mod metadata declares All Rights Reserved; bundled PG native resources retain their Apache 2.0 license and attribution. This remains a project decision for later review.
+## Open-source license
+
+WWPG's own code and documentation are licensed under [MIT](../LICENSE), including the WWPG portions of the published beta. Current builds declare MIT and include the license. The original `0.1.0-beta.1` download still contains its older “All Rights Reserved” metadata label; its published files and checksums are preserved. Bundled PG native resources retain their Apache 2.0 license and attribution; other dependencies retain their own licenses.

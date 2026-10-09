@@ -87,6 +87,7 @@ tasks.named('processResources') {
     dependsOn tasks.named('preparePgNative')
     inputs.property 'version', project.version
     filesMatching('META-INF/neoforge.mods.toml') { expand version: project.version }
+    from('LICENSE') { into 'META-INF'; rename { 'WWPG-LICENSE.txt' } }
     from('release') { include 'artifacts.json', 'content-matrix.json'; into 'data/wwpg/release' }
     from(layout.buildDirectory.dir('pg-native-resources/native')) { into 'native/wwpg' }
 }

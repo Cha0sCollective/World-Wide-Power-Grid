@@ -76,7 +76,7 @@ distribution = {
 manifest = root / "release/distribution.json"
 manifest.write_text(json.dumps(distribution, indent=2) + "\n", newline="\n")
 entries = {path.name: path for path in [release_jar, world, evidence_zip]}
-for name in ["README.md", "CHANGELOG.md", "docs/INSTALL.md", "docs/SUPPORT.md",
+for name in ["LICENSE", "README.md", "CHANGELOG.md", "docs/INSTALL.md", "docs/SUPPORT.md",
              "docs/FIRST_RELEASE.md", "docs/DEVELOPMENT.md", "release/artifacts.json",
              "release/content-matrix.json", "release/verification.json", "release/distribution.json"]:
     entries[name] = root / name
