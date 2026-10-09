@@ -1,6 +1,6 @@
 # Supported content
 
-WWPG 0.1.0-beta.1 declares 134 checked behaviors: 95 block/assembly groups, all 11 built-in CEE panel attachments, and all 28 built-in PG board components. Colored panels and motors share native behavior groups. The counts describe inventory groups, not 134 separate automated tests; the packaged suite contains 114 tests, some covering multiple groups.
+WWPG 0.1.0-beta.2 retains the original 134 checked behaviors: 95 block/assembly groups, all 11 built-in CEE panel attachments, and all 28 built-in PG board components. It also adds explicit support for two handheld meters. Colored panels and motors share native behavior groups. The counts describe inventory groups, not separate automated tests; the packaged suite contains 117 tests, some covering multiple groups.
 
 The [machine-readable matrix](../release/content-matrix.json) links each declared behavior to electrical/gameplay tests and a shared lifecycle suite. Coverage includes placement, editing, removal, reconnection, network split/merge, chunk reload, restart, and multiplayer interactions. It does not establish every configuration of every device.
 
@@ -39,6 +39,15 @@ Names below are native registry IDs, useful when checking upstream code or the m
 | Category | Native registry names |
 | --- | --- |
 | electronics | `ammeter`, `voltmeter`, `emergency_stop_button`, `cut_off_switch`, `analog_lever`, `steering_wheel`, `indicator_bulb`, `momentary_switch`, `energy_meter`, `tri_polar_energy_meter`, `miniature_circuit_breaker` |
+
+## Handheld meters added in beta.2
+
+| Tool | Mixed-circuit behavior |
+| --- | --- |
+| PG `multimeter` | Voltage between two accessible terminals from either mod; current on PG or CEE wires. |
+| CEE `clamp_meter` | Hold to measure current on PG or CEE wires. |
+
+The [additional support record](../release/0.1.0-beta.2/content-additions.json) links these tools to server fixtures and the real-client test. The original beta.1 checks covered installed meters, not these handheld interactions. See [meter instructions](INSTALL.md#handheld-meters); optional lineman-stick extension interactions have no compatibility claim.
 
 ## PG circuit-board components
 

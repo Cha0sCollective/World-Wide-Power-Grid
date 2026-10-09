@@ -41,7 +41,7 @@ public final class MultiplayerClientDriver {
                     new net.minecraft.client.multiplayer.ServerData("WWPG acceptance","127.0.0.1:25575",net.minecraft.client.multiplayer.ServerData.Type.LAN),false,null);
         }
         if(phase.equals("failed")){if(++age>=60){mc.stop();phase="";}return;}
-        if(!phase.isEmpty()&&mc.level==null&&mc.screen instanceof net.minecraft.client.gui.screens.DisconnectedScreen){mc.stop();phase="";return;}
+        if(!phase.isEmpty()&&!phase.equals("done")&&mc.level==null&&mc.screen instanceof net.minecraft.client.gui.screens.DisconnectedScreen){mc.stop();phase="";return;}
         if(phase.equals("done")){if(++age==100){WorldWidePowerGrid.LOGGER.info("WWPG_REAL_CLIENT_PASSED");mc.stop();phase="";}return;}
         if(mc.player==null||mc.level==null||mc.gameMode==null||phase.isEmpty())return;
         ++age;boolean a=mc.player.getGameProfile().getName().endsWith("A");

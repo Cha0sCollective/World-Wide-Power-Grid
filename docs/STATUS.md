@@ -4,6 +4,10 @@ Status checked **9 October 2026**. These facts describe the implementation and p
 
 ## Published beta
 
+**0.1.0-beta.2** is the handheld-meter and example-world hotfix. Its release checks are in progress on this branch. It adds three packaged fixtures (117 total) and actual-client checks for CEE terminal voltage, both meters on PG wires, and both meters on CEE wires. The example heater now has a separate 600 V feed, a basin, and tools at spawn. The original 300 V feed only warmed the heater and did not reach working burner heat.
+
+The original acceptance covered installed meters; it did not validate the handheld interactions reported by a player. Beta.2 fixes wire targeting taking precedence over terminal probes and synchronizes solved server measurements instead of using a client estimate that cannot reconstruct the CEE source. [PR #2](https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/2) contains the change. The original beta.1 downloads and evidence remain unchanged.
+
 **0.1.0-beta.1** is [published as a GitHub prerelease](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.1). The downloads include the mod jar, example world, verification archive, complete documentation bundle, and checksums. [PR #1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/1) merged the implementation into `main` as `8e533df` on 9 October.
 
 The declared scope is stationary interoperability: 95 block/assembly behaviors, 11 built-in CEE panel attachments, and 28 built-in PG board components. See [SUPPORT.md](SUPPORT.md) for the inventory and exclusions, and [INSTALL.md](INSTALL.md) for the exact dependencies and solver settings.
