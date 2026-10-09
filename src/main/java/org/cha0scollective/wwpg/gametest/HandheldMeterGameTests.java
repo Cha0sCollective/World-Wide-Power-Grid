@@ -69,8 +69,8 @@ public final class HandheldMeterGameTests {
         player.setItemInHand(InteractionHand.MAIN_HAND,stack);
         var point=new NodeConnectionPoint(new InWorldNode(1,source),new InWorldNode(0,load),.5f);
         h.runAtTickTime(20,()->{
-            h.assertTrue(HandheldMeters.MULTIMETER.get().isActiveFor(stack,player),"PG meter cannot target CEE wires");
-            HandheldMeters.MULTIMETER.get().interactWire(point,h.getLevel(),player,stack);
+            h.assertTrue(com.george_vi.electroenergetics.CEEWireInteractionBehaviours.CLAMP_METER.get().isActiveFor(stack,player),"PG meter cannot target CEE wires");
+            com.george_vi.electroenergetics.CEEWireInteractionBehaviours.CLAMP_METER.get().interactWire(point,h.getLevel(),player,stack);
             meter.inventoryTick(stack,h.getLevel(),player,0,true);
             BoardComponentGameTests.near(h,meter.getMeasurement(h.getLevel(),stack),1,.03,"Handheld CEE wire current");
             DevicesSavedData.load(h.getLevel()).getDevice(source,CreativeBatteryDevice.class).voltage=20;

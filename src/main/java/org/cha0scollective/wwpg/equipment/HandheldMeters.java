@@ -2,14 +2,11 @@ package org.cha0scollective.wwpg.equipment;
 
 import com.george_vi.electroenergetics.CEEDataComponents;
 import com.george_vi.electroenergetics.content.clamp_meter.ClampMeterItem;
-import com.george_vi.electroenergetics.content.wire.interaction.WireInteractionBehaviour;
 import com.george_vi.electroenergetics.foundation.nodes.NodeConnectionPoint;
 import com.george_vi.electroenergetics.foundation.QuadraticWireHelper;
 import com.george_vi.electroenergetics.simulation.infrastructure.InfrastructureSavedData;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -17,8 +14,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
 import org.patryk3211.powergrid.collections.ModdedConfigs;
 import org.patryk3211.powergrid.electricity.wire.BaseWireEntity;
 import org.patryk3211.powergrid.electricity.wire.CircuitBoardEndpoint;
@@ -26,24 +21,15 @@ import org.patryk3211.powergrid.electricity.wire.IWireEndpoint;
 import org.patryk3211.powergrid.electricity.wire.WireEndpointType;
 import org.patryk3211.powergrid.equipment.multimeter.MultimeterItem;
 
-import java.util.function.Supplier;
 
 /** Item selections retain native identities; measurements come from the existing solve. */
 public final class HandheldMeters {
     public static final String CEE_WIRE = "WWPG_CeeWire";
     public static final String CURRENT = "WWPG_Current";
     public static final String PG_WIRE = "WWPG_PgWire";
-    // Refer to the registry by key so CEE/Create initialize in their own mod
-    // constructors rather than being initialized from WWPG's constructor.
-    private static final DeferredRegister<WireInteractionBehaviour> BEHAVIOURS =
-            DeferredRegister.create(ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(
-                    "electroenergetics", "wire_interaction_behaviour")), "wwpg");
-    public static final Supplier<WireInteractionBehaviour> MULTIMETER =
-            BEHAVIOURS.register("multimeter", MultimeterWireBehaviour::new);
 
     private HandheldMeters() {}
 
-    public static void register(IEventBus bus) { BEHAVIOURS.register(bus); }
 
     public static void clearCeeWire(ItemStack stack) {
         stack.remove(CEEDataComponents.NODE_CONNECTION);
@@ -157,19 +143,4 @@ public final class HandheldMeters {
         return Float.isFinite(current)?Math.abs(current):0;
     }
 
-    public static final class MultimeterWireBehaviour extends WireInteractionBehaviour {
-        @Override public boolean isActiveFor(ItemStack stack, Player player) { return stack.getItem() instanceof MultimeterItem; }
-        @Override public void interactWire(NodeConnectionPoint point, Level level, Player player, ItemStack stack) {
-            if (level instanceof ServerLevel server) attachMultimeter(point, server, player, stack);
-        }
-        @net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT)
-        @Override public boolean canInteractOn(net.minecraft.client.multiplayer.ClientLevel level, net.minecraft.world.level.block.state.BlockState state, net.minecraft.core.BlockPos pos) {
-            var electric=org.patryk3211.powergrid.electricity.base.IElectric.getAt(level,pos);
-            var hit=net.minecraft.client.Minecraft.getInstance().hitResult;
-            // A wire's targeting box overlaps its terminal. Voltage probes
-            // take priority when the crosshair is directly on that terminal.
-            return !(electric!=null&&hit instanceof net.minecraft.world.phys.BlockHitResult block
-                    &&electric.terminalIndexAt(state,block.getLocation().subtract(pos.getX(),pos.getY(),pos.getZ()))>=0);
-        }
-    }
 }
