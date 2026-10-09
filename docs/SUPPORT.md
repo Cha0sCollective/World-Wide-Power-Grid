@@ -1,10 +1,14 @@
-# Declared beta support
+# Supported content
 
-WWPG 0.1.0-beta.1 declares 134 content behaviors: 95 block/assembly groups, all 11 built-in CEE panel attachments, and all 28 built-in PG board components. Colored panels/motors share native behavior groups. Certification covers the documented behavior and common placement, editing, removal, reconnect, split/merge, chunk reload, restart and multiplayer paths; it does not certify every upstream configuration.
+WWPG 0.1.0-beta.1 declares 134 checked behaviors: 95 block/assembly groups, all 11 built-in CEE panel attachments, and all 28 built-in PG board components. Colored panels and motors share native behavior groups. The counts describe inventory groups, not 134 separate automated tests; the packaged suite contains 114 tests, some covering multiple groups.
 
-The [machine-readable matrix](../release/content-matrix.json) links each claim to electrical/gameplay fixtures and the shared lifecycle suite. The [verification record](../release/verification.json) records packaged native/Java runs on Windows and Linux, saved upstream reference circuits, a restarted example world, and two real TCP clients.
+The [machine-readable matrix](../release/content-matrix.json) links each declared behavior to electrical/gameplay tests and a shared lifecycle suite. Coverage includes placement, editing, removal, reconnection, network split/merge, chunk reload, restart, and multiplayer interactions. It does not establish every configuration of every device.
 
-## electroenergetics block
+The [local verification record](../release/verification.json) contains passing runs. An earlier GitHub run failed a chunk-reload assertion; later runs passed, and the cause remains unresolved. Read [current status](STATUS.md) alongside this support list.
+
+Names below are native registry IDs, useful when checking upstream code or the matrix. CEE IDs use the `electroenergetics:` namespace; PG IDs use `powergrid:`.
+
+## CEE blocks and assemblies
 
 | Category | Native registry names |
 | --- | --- |
@@ -17,7 +21,7 @@ The [machine-readable matrix](../release/content-matrix.json) links each claim t
 | transformers | `transformer`, `variac`, `redstone_variac` |
 | wiring | `connector`, `double_connector`, `triple_connector`, `quad_connector`, `ground_rod`, `duplex_wire_termination` |
 
-## powergrid block
+## PG blocks and assemblies
 
 | Category | Native registry names |
 | --- | --- |
@@ -30,21 +34,26 @@ The [machine-readable matrix](../release/content-matrix.json) links each claim t
 | transformers | `transformer_core`, `transformer_small`, `transformer_medium`, `variac` |
 | wiring | `wire_connector`, `heavy_wire_connector`, `cord_junction`, `ceiling_tile_connector`, `ceiling_tile_junction`, `device_connector`, `socket`, `grounding_rod` |
 
-## electroenergetics panel attachment
+## CEE panel attachments
 
 | Category | Native registry names |
 | --- | --- |
 | electronics | `ammeter`, `voltmeter`, `emergency_stop_button`, `cut_off_switch`, `analog_lever`, `steering_wheel`, `indicator_bulb`, `momentary_switch`, `energy_meter`, `tri_polar_energy_meter`, `miniature_circuit_breaker` |
 
-## powergrid board component
+## PG circuit-board components
 
-| Category | Native registry names |
+| Function | Native registry names |
 | --- | --- |
-| electronics | `via`, `label`, `triode`, `pentode`, `thyratron`, `vfet`, `bjt_npn`, `bjt_pnp`, `regulator_tube`, `barretter_tube`, `neon_bulb`, `light_bulb`, `connector`, `switch`, `relay`, `relay_dpdt`, `resistor`, `redstone_relay`, `voltage_gauge`, `current_gauge`, `diode`, `capacitor`, `inductor`, `button`, `potentiometer`, `varistor`, `fuse_holder`, `display_module` |
+| Routing and labels | `via`, `label`, `connector` |
+| Passive and protection | `resistor`, `capacitor`, `inductor`, `potentiometer`, `varistor`, `fuse_holder` |
+| Switching and control | `switch`, `button`, `relay`, `relay_dpdt`, `redstone_relay` |
+| Semiconductor devices | `diode`, `bjt_npn`, `bjt_pnp`, `vfet` |
+| Tubes and lamps | `triode`, `pentode`, `thyratron`, `regulator_tube`, `barretter_tube`, `neon_bulb`, `light_bulb` |
+| Readings and display | `voltage_gauge`, `current_gauge`, `display_module` |
 
-## Additional unclaimed content
+## Additional content outside the declared set
 
-These inventory rows retain explicit unverified/unsupported status. Native content may work, but this beta makes no compatibility claim for it. Structural blocks do not acquire new terminals. Optional attachments and moving systems are outside scope.
+`Unverified` means this beta has no completed compatibility claim for that group. `Unsupported` means it is outside the release scope. Structural blocks retain their native role and do not acquire new terminals. Optional attachments and moving systems are excluded.
 
 - `electroenergetics:insulator` (unverified)
 - `electroenergetics:concrete_pole` (unverified)
@@ -63,4 +72,4 @@ These inventory rows retain explicit unverified/unsupported status. Native conte
 - `electroenergetics:altitude_sensor` (unsupported)
 - `electroenergetics:velocity_sensor` (unsupported)
 
-See [INSTALL.md](INSTALL.md) for the pinned upstream AC-source behavior, portable-battery semantics and native platform requirements. Large-network benchmarks, asynchronous solving, trains, contraptions, Sable sublevels, optional integrations and a public extension API remain deferred.
+See [INSTALL.md](INSTALL.md#pinned-upstream-behavior) for the tested upstream AC-source and portable-battery behavior. Large-network benchmarks, asynchronous solving, trains, contraptions, Sable sublevels, optional integrations, and a public extension API remain deferred.

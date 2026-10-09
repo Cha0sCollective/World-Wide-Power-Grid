@@ -1,29 +1,56 @@
 # Developing WWPG
 
-The bounded stationary release is in [FIRST_RELEASE.md](FIRST_RELEASE.md); [SPEC.md](../SPEC.md) remains the long-term specification. Exact versions, published artifact checksums and source references are in [artifacts.json](../release/artifacts.json). Do not substitute upstream development HEAD or PG's generic Minecraft 1.20.1 `v0.6.2` tag.
+Start with [beta scope and acceptance](FIRST_RELEASE.md), [current status](STATUS.md), and the [contribution guide](../CONTRIBUTING.md). [SPEC.md](../SPEC.md) defines the long-term product; the beta supports the declared stationary content in the [matrix](../release/content-matrix.json).
 
-Use a Java 21 JDK. On Windows substitute `gradlew.bat` for `./gradlew`. The default build uses the full published Create 6.0.10-280 jar. `-PpublishedRuntime=false` selects its byte-identical slim artifact; fixed Ponder, Flywheel and Registrate match the full jar's bundled versions.
+## Build and launch
+
+Use a Java 21 JDK. On Windows, use `gradlew.bat` in place of `./gradlew`.
 
 ```sh
 ./gradlew build --no-daemon
 ./gradlew runClient
 ./gradlew runServer
+```
+
+The normal jar is `build/libs/wwpg-0.1.0-beta.1.jar`. The build runs four equation tests and verifies locked upstream artifacts, native binary hashes, and the JNI interface.
+
+The default runtime uses the full published Create 6.0.10-280 jar. `-PpublishedRuntime=false` selects the optional slim development artifact; its Create classes are byte-identical, with fixed Ponder, Flywheel, and Registrate versions matching the full jar's bundled libraries.
+
+Published checksums and matching source references are in [artifacts.json](../release/artifacts.json). CEE's development branch has different APIs, and PG's generic `v0.6.2` tag targets Minecraft 1.20.1. Use the pinned Minecraft 1.21.1 sources when reviewing this implementation.
+
+## Packaged regression suite
+
+The 114 GameTests use real upstream devices, item interactions, and server hooks. Electrical checks cover polarity, grounding, currents, transient state, RMS/phase, transformer relationships, and nonlinear electronics. Gameplay checks cover outputs, assembly, controls, protection, repair, and failures.
+
+Run SETUP and VERIFY in separate processes using the same isolated test directory:
+
+```sh
 ./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PrestartPhase=SETUP -PtestDirectory=run/release-validation --no-daemon
 ./gradlew runPackagedGameTestServer -PtestBackend=JAVA -PrestartPhase=VERIFY -PtestDirectory=run/release-validation --no-daemon
 ```
 
-The jar is `build/libs/wwpg-0.1.0-beta.1.jar`. Four JUnit tests check linear/transformer equations. The 114 GameTests use real upstream devices, item interactions and server hooks. Analytical checks cover polarity/current, grounds, charge history, RMS/phase, transformer relationships and nonlinear electronics; gameplay checks cover outputs, assembly, configuration and failure/repair. Tests use 16 PG substeps, assert the requested backend actually solved, and reject any independent CEE solve. A regression dispatches 100 configuration reload requests from a background thread.
+Use either `NATIVE` or `JAVA` for both phases to reproduce a CI backend job. The commands above also check reopening a native-created world with Java. Tests configure 16 PG substeps, assert the actual backend, and reject independent CEE solves.
 
-Packaged tasks load WWPG exclusively from its jar and require a completed, nonempty passing suite, even when NeoForge exits zero after a loading failure. Run SETUP then VERIFY in separate processes with the same test directory. Reserved chunks (64,64) and (96,96) check saved wires, settings, capacitor history, panel terminal IDs and board UUID/charge. Chunk (128,128) actually unloads/reloads twice, with unload events checked. A separate fixture checks identical coordinates in the Overworld and Nether. Use isolated test worlds.
+Packaged tasks load WWPG exclusively from its jar. A successful process exit is insufficient: each task requires a completed, nonempty passing suite. This catches NeoForge loading failures that can exit with code zero.
 
-Reference fixtures first use the upstream solvers with only the missing-native-resource repair, then reopen the saved circuits with full compatibility:
+Reserved chunks `(64,64)` and `(96,96)` check restart persistence for wires, settings, capacitor history, panel IDs, and board UUID/charge. Chunk `(128,128)` unloads and reloads twice, with unload events checked. Another test isolates matching coordinates in the Overworld and Nether. A configuration test queues 100 background-thread reload requests.
+
+**Known issue:** `chunkReloadRebindsMixedEndpoints` has failed once in Linux/native CI, reading 0 V instead of 10 V after reload. It uses fixed tick deadlines while entity loading is asynchronous. That makes timing a candidate cause; instrumentation is still needed to establish whether the issue is in the fixture or compatibility lifecycle. See [the failure record](STATUS.md#unresolved-chunk-reload-failure).
+
+## Upstream reference worlds
+
+Reference tests first use the upstream solvers with only the missing-native-resource repair, then reopen the saved circuits with full compatibility:
 
 ```sh
 ./gradlew runUpstreamReferenceServer -PtestBackend=NATIVE --no-daemon
 ./gradlew runReferenceCompatibilityServer -PtestBackend=NATIVE --no-daemon
 ```
 
-They use `run/reference`. The `*-upstream-reference-tests.jar` is test-only and must not be distributed as WWPG. Build/export the example separately:
+Both use `run/reference`. The `*-upstream-reference-tests.jar` is test-only; exclude it from installations and release downloads.
+
+## Example world
+
+Build, restart, and export the example separately from the regression world:
 
 ```sh
 ./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PtestNamespaces=wwpg_example -PtestDirectory=run/example --no-daemon
@@ -31,29 +58,41 @@ They use `run/reference`. The `*-upstream-reference-tests.jar` is test-only and 
 python tools/export_example.py
 ```
 
-For the opt-in multiplayer check, prepare once, then run the last three commands in separate terminals. Keep the jar immutable while the processes use it.
+The ZIP is written to `build/distributions`. It contains the small demonstration described in [INSTALL.md](INSTALL.md#example-world). The exporter creates a deterministic archive of the supplied saved world; generating a fresh Minecraft world can produce a different seed and artifact hash.
+
+## Two real clients
+
+Prepare once, then run the last three commands in separate terminals. Keep the jar unchanged while the processes use it.
 
 ```sh
 ./gradlew build prepareClientARun prepareClientBRun --no-daemon
-./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PtestNamespaces=wwpg_multiplayer -Pmultiplayer=true -x build -x compileJava -x processResources -x createMinecraftArtifacts --no-daemon
+./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PtestNamespaces=wwpg_multiplayer -Pmultiplayer=true -PtestDirectory=run/multiplayer -x build -x compileJava -x processResources -x createMinecraftArtifacts --no-daemon
 ./gradlew runPackagedClientA -x build -x compileJava -x processResources -x createMinecraftArtifacts --no-daemon
 ./gradlew runPackagedClientB -x build -x compileJava -x processResources -x createMinecraftArtifacts --no-daemon
 ```
 
-This test-only offline-auth TCP server binds to `127.0.0.1:25575`, permits two players and runs with wall-clock pacing. It changes no normal server authorization or EULA settings. Real Minecraft clients use native wire/configuration packets, verify synchronized readings/settings and rendered wire data, then close. Linux validation uses Ubuntu 24.04/WSLg with Mesa software rendering. Working graphics are required. Keep this test server on loopback.
+The opt-in GameTest server binds to `127.0.0.1:25575`, uses offline authentication for two test players, and runs with wall-clock pacing. These settings apply to that test instance. Keep it on loopback.
 
-## Native solver
+The real clients use native wire/settings packets, check synchronized readings and rendered wire data, then close. Graphics support is required. Local Linux validation used Ubuntu 24.04/WSLg with Mesa software rendering. This check is separate from CI's headless server tests.
 
-PG 0.6.2 omitted native v7 resources. WWPG bundles the checksum-locked DLL/SO from official PG 0.6.1; the JNI class is byte-identical. The donor mod never enters the runtime mod path. `verifyUpstreamArtifacts` checks published jars, the JNI interface and both binaries. `processResources` packages binaries and their Apache license/notice. WWPG installs a verified missing binary before PG's normal loader and preserves existing files. Native acceptance fails if the requested backend cannot load. See [INSTALL.md](INSTALL.md) for requirements.
+## Native resource handling
 
-## Lifecycle and persistence
+The pinned PG 0.6.2 artifact omitted native v7 resources. WWPG bundles checksum-locked binaries from official PG 0.6.1 after verifying byte-identical `NativeMNA.class` interfaces. The binary-source mod jar is excluded from the runtime.
 
-CEE preparation → topology/parameter updates → PG substeps → CEE-compatible results → native gameplay commit runs synchronously. Stable endpoint/branch identities retain PG objects on unchanged topology. CEE dynamic state advances once per PG substep, including three-phase windings across networks. Results preserve voltage history and directed currents; winding leakage is combined before RMS aggregation. Meter and motor history use PG's clock. Configuration watcher updates are queued onto the server thread.
+`verifyUpstreamArtifacts` checks jars, JNI compatibility, and both binaries. `processResources` packages the DLL/SO and their license/notice. WWPG installs a verified missing binary before PG's normal loader and preserves existing files. Native acceptance fails if native did not load. See [platform requirements](INSTALL.md#native-solver-requirements).
 
-Unknown/invalid CEE constructs are diagnosed and isolated with zero results; no second solver or stale history is used. Devices awaiting chunk entity load are paused to preserve stored energy. Native mods keep their own persistence; WWPG reconstructs stamps instead of saving graph ordinals. Versioned `wwpg_removed_wires` data remembers removed PG wire UUIDs so unloaded entities cannot resurrect cut connections.
+## Electrical lifecycle and persistence
 
-Use `/wwpg`, `/wwpg errors` and `/wwpg at x y z` for bounded diagnostics. The matrix distinguishes declared behavior from additional unclaimed content. [release_acceptance.py](../tools/release_acceptance.py) maps claims to behavior and shared lifecycle fixtures; [inventory_release.py](../tools/inventory_release.py) regenerates the pinned inventory without certifying it. Registry presence alone is not support evidence.
+CEE preparation → topology/parameter updates → PG substeps → CEE-compatible results → native gameplay commit runs synchronously. Stable endpoint and branch identities retain PG objects on unchanged topology. CEE dynamic state advances once per PG substep. The result bridge retains voltage history and directed currents; meter and motor sampling use PG's clock.
 
-CI checks Windows/Linux × native/Java, separate restart processes, reference worlds and the example. A workflow does not establish that its remote jobs passed. Local evidence is recorded in [verification.json](../release/verification.json). Ordinary stationary factories define this beta's scope; large-network and moving-system certification are deferred.
+Unknown or invalid CEE models are diagnosed and isolated with zero results. Devices awaiting chunk entity loading are paused to preserve stored energy. Native mods retain their persistence; WWPG reconstructs electrical elements instead of saving temporary graph ordinals. Versioned `wwpg_removed_wires` data records removed PG wire UUIDs so unloaded wire entities cannot restore cut connections. Configuration-watcher updates are queued onto the server thread.
 
-For release preparation, `tools/verify_release.py` requires the named completed acceptance logs and equation results before `tools/release_acceptance.py --freeze` certifies the matrix. Rebuild after freezing. `tools/package_release.py` checks current evidence hashes, the frozen claims and byte-identical Windows/Linux jars, then assembles the delivery bundle, verification archive and `SHA256SUMS.txt`. It excludes the test-only upstream reference jar. See [distribution.json](../release/distribution.json) for the prepared artifact hashes.
+Use `/wwpg`, `/wwpg errors`, and `/wwpg at x y z` for diagnostics. Upstream integration uses targeted Mixins and accessors; see [the one-page overview](UPSTREAM_OVERVIEW.md) for reviewer context and [SPEC.md](../SPEC.md) for the intended ownership boundaries.
+
+## Release records and packaging
+
+[release_acceptance.py](../tools/release_acceptance.py) maps declared behaviors to electrical and shared lifecycle tests. [inventory_release.py](../tools/inventory_release.py) regenerates the pinned inventory without marking it verified. Registry presence alone is insufficient evidence.
+
+[verify_release.py](../tools/verify_release.py) requires the named completed acceptance logs and equation results before `release_acceptance.py --freeze` marks the matrix verified. Rebuild after freezing. [package_release.py](../tools/package_release.py) checks evidence hashes, frozen claims, and byte-identical Windows/Linux jars, then assembles the delivery bundle, verification archive, and `SHA256SUMS.txt`. It excludes the test-only reference jar.
+
+These scripts encode the original beta-preparation workflow and local log paths. [release/README.md](../release/README.md) explains the historical records. Update the workflow deliberately for future releases; preserve published artifact hashes and evidence. Current publication and CI status belong in [STATUS.md](STATUS.md).

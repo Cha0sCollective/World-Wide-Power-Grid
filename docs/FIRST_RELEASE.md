@@ -1,32 +1,44 @@
-# WWPG 0.1.0-beta.1 acceptance
+# First beta: scope and acceptance
 
-Target: Minecraft 1.21.1, NeoForge 21.1.231, Java 21, Create 6.0.10-280, CEE 1.21.1-1.1.3 and PG 0.6.2. CEE 1.1.3 replaces the originally proposed 1.1.1 with the user's approval. Published dependencies remain fixed; [artifacts.json](../release/artifacts.json) records their hashes and matching source references.
+**WWPG 0.1.0-beta.1** delivers a declared set of stationary devices working across CEE and PG. The [support matrix](SUPPORT.md) describes 134 checked behaviors, including all 11 built-in CEE panel attachments and all 28 built-in PG board components.
 
-This release covers stationary factory power, wiring and controls, all 11 built-in CEE panel attachments and all 28 built-in PG board components. [SUPPORT.md](SUPPORT.md) describes the 134 declared content behaviors. Cosmetic variants share their native behavior. Additional inventoried content stays explicitly unclaimed.
+The beta is [published on GitHub](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.1), and its implementation was [merged into `main`](https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/1). See [STATUS.md](STATUS.md) for later CI results and the unresolved chunk-reload failure.
 
-| Stage | Accepted behavior | Evidence |
+## Fixed baseline
+
+Minecraft 1.21.1, NeoForge 21.1.231, Java 21, Create 6.0.10-280, CEE 1.21.1-1.1.3, PG 0.6.2, and Architectury 13.0.8. The dependency list is also in [INSTALL.md](INSTALL.md); published artifact hashes and source references are in [artifacts.json](../release/artifacts.json).
+
+CEE 1.1.3 is the implemented target. The original development proposal targeted 1.1.1; it is not an additional supported version.
+
+## Development stages and evidence
+
+The stages describe the work leading to the beta. Passing evidence establishes the recorded test outcomes, not a guarantee that every future run or upstream configuration will pass.
+
+| Stage | Delivered behavior | Evidence |
 | --- | --- | --- |
-| 0 — Baseline | Fixed NeoForge build, packaged client/server, registry inventory and native upstream reference circuits. | Gradle wrapper, metadata, checksum/JNI verification, full published Create runtime, client launches, dedicated GameTests and saved reference-world comparison. |
-| 1 — Lifecycle | CEE prepares devices, PG alone solves, CEE consumes results and commits gameplay. Unchanged graphs retain their objects. | Source/load changes, topology identity, zero CEE solves and exactly-once dynamic advancement assertions. |
-| 2 — Wiring | Both wire systems connect across mods and between same-mod machines, with native terminal selection, costs, rendering and cutting. | Six wiring directions, branches/loops, survival spool/wire costs, removal/reconnection, cord sockets, sparse duplex terminals and real-client interactions. |
-| 3 — Factory/controls | Actual lighting, heating, fluid pumping, switching, variable resistance, meaningful metering, protection trip and native repair. | Native block entities, real Create tanks/pipes, item interactions, redstone/mechanical controls, meter readings, fuses/breakers, wire burnout and repair. |
-| 4 — Dynamics | Storage, reactive circuits, motor modes, AC generation/phase and transformer/variac behavior across mods. | RC/RL recurrences, accumulator charge/discharge, native PG battery item charging, RMS/phase, driven alternators/generators, motors, winding polarity and native transformer construction/configuration. |
-| 5 — Electronics | All declared panel attachments and every built-in board component operate through PG, retaining assembly/edit/configuration workflows. | Per-behavior fixtures, nonlinear components and heaters, board design/assembly/native placement, panel item insertion, gauges/displays, edits and replacement. |
-| 6 — Normal gameplay | Saves, process restarts, repeated actual chunk unloads, dimension isolation, split/merge, failures and two real clients. | Restored wire UUIDs/panel IDs/capacitor history, unload events, Overworld/Nether circuits, simultaneous TCP wiring/settings and synchronized readings/rendered wire data. Operator diagnostics identify mappings and recent errors. |
-| 7 — Freeze/package | Declared support is tied to passing fixtures; packaged artifacts, both PG backends, install instructions, example world and release metadata are available. | Frozen matrix, [verification.json](../release/verification.json), [distribution.json](../release/distribution.json), reproducible jar/world, installation guide and changelog. |
+| 0 — Baseline | Fixed NeoForge build, packaged client/server, content inventory, and native upstream reference circuits. | Wrapper, metadata, artifact/JNI verification, client launches, server tests, and saved reference worlds. |
+| 1 — Electrical lifecycle | CEE prepares devices; PG solves; CEE receives results and applies gameplay. Unchanged topology retains its objects. | Source/load changes, object identity checks, zero independent CEE solves, and exactly-once state assertions. |
+| 2 — Direct wiring | Both wire systems connect across mods using native terminals and interactions. | Connection directions, branches/loops, survival costs, cutting, reconnection, cords, and real-client selection/rendering. |
+| 3 — Factory and controls | Lighting, heating, fluid transport, controls, meters, protection, and repair respond to solved power. | Native devices, Create tanks/pipes, mechanical/redstone controls, readings, fuse/breaker repair, and wire failure. |
+| 4 — Dynamic circuits | Storage, capacitors/inductors, motor modes, AC generation, transformers, and variacs work in mixed circuits. | Charge/discharge and transient equations, RMS/phase, driven generation, native assembly/configuration, and winding polarity. |
+| 5 — Electronics | All declared panel attachments and board components retain their electrical and native interaction workflows. | Component behavior, nonlinear circuits, board design/assembly, panel insertion/editing, gauges/displays, and replacement. |
+| 6 — Persistence and play | Mixed mappings and state survive the tested save/restart/reload paths; two real clients can wire and configure circuits. | Wire UUIDs, panel IDs, stored charge, actual unload events, dimension isolation, TCP clients, and diagnostics. An intermittent reload assertion remains unresolved. |
+| 7 — Packaging | The support matrix, jar, example world, documentation, and test evidence are published together. | Frozen records, artifact hashes, release downloads, changelog, and tag `0.1.0-beta.1`. |
 
-## Verification
+## Recorded checks
 
-The packaged suite contains **114 electrical/gameplay/lifecycle fixtures**, run with native and Java backends on Windows and Ubuntu 24.04. Windows and Linux each run SETUP then VERIFY in separate processes against the same saved test world. Four JUnit tests check electrical equations. Every electrical acceptance run asserts the requested PG backend and zero independent CEE solves.
+The packaged suite contains **114 electrical, gameplay, and lifecycle tests**. Local acceptance ran native and Java backends on Windows and Ubuntu 24.04, with SETUP and VERIFY in separate processes against the same saved worlds. Four JUnit tests check electrical equations. Electrical acceptance asserts the requested backend and zero independent CEE solves.
 
-Two saved reference fixtures first operate with upstream solvers, then reopen with WWPG enabled. The example-world fixture runs in separate creation and restart processes. Multiplayer uses two real Minecraft clients connected to a loopback TCP GameTest server: clients place different native wire types, concurrently change settings, and verify synchronized voltage, resistance and wire-rendering data.
+Two reference tests first run with the upstream solvers, then reopen saved circuits with WWPG enabled. The example world has separate creation and restart tests. Two real Minecraft clients connect over loopback TCP, place different native wire types, change settings, and check synchronized readings and rendered wire data.
 
-The committed CI workflow reproduces build, backend, restart, reference and example checks on Windows/Linux. Remote CI has not been executed in this local session. The release evidence reports local completed checks and their log hashes; it does not infer success from a workflow file or a zero exit code.
+GitHub CI reproduces build, backend, restart, reference, and example checks. The [implementation merge run passed](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/37990481752). Real-client multiplayer is a separate local check, not a headless CI job.
+
+The [release records](../release/README.md) distinguish original local evidence from later GitHub results. The original JSON records and published assets remain unchanged.
 
 ## Boundaries
 
-PG's native v7 solver is primary. WWPG restores the omitted PG 0.6.2 native resources from the official 0.6.1 artifact after checksum and byte-identical JNI verification; the donor mod is not installed at runtime. Java remains tested regression/fallback. Native platform requirements are in [INSTALL.md](INSTALL.md).
+PG native v7 is primary, with Java checked as a fallback. Native resource provenance and platform requirements are in [INSTALL.md](INSTALL.md#native-solver-requirements).
 
-The first release does not certify moving trains/contraptions, Sable sublevels, optional integrations, broad dependency ranges, every upstream item, or server-wide scale. Large-network benchmarks, asynchronous execution, topology reduction and comprehensive performance tuning remain future work. Unknown or invalid CEE electrical constructs receive diagnostics and zeroed isolated results.
+Moving trains/contraptions, Sable sublevels, optional integrations, broad version ranges, unclaimed specialized devices, and server-wide scale testing are deferred. Large-network benchmarks, asynchronous execution, topology reduction, and comprehensive performance tuning remain future work. Unknown or invalid CEE electrical models receive diagnostics and isolated zero results.
 
-The beta release artifacts and tag are prepared locally. Publishing to a mod distribution site or GitHub release is a separate operation.
+The [long-term specification](../SPEC.md) retains the full product and scale goals. This beta's acceptance scope does not replace those requirements.

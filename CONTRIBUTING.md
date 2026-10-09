@@ -1,172 +1,76 @@
-# Contributing to World-Wide Power Grid
+# Contributing to WWPG
 
-World-Wide Power Grid is a **specification-driven interoperability project**.
+WWPG is a compatibility project for CEE and Power Grid. The current beta's priority is reliable stationary interoperability; [SPEC.md](SPEC.md) retains the long-term product requirements.
 
-The project is pursuing the finished product defined in [`SPEC.md`](SPEC.md). Early milestones may implement only part of that target, but implementation progress must not silently redefine what “complete” means.
+Before changing a feature, identify the relevant beta behavior in the [support matrix](release/content-matrix.json) and the design requirement it advances. Use [STATUS.md](docs/STATUS.md) for unresolved issues and [DEVELOPMENT.md](docs/DEVELOPMENT.md) for build/test commands. Changes to the beta's scope should update its documentation explicitly.
 
-## The rule that matters most
+## Architectural rules
 
-Before implementing a feature, identify which requirement(s) in `SPEC.md` the work advances.
+- **One electrical solver:** PG owns the authoritative electrical solve while compatibility is active.
+- **Persistent topology:** represent CEE terminals and models in PG; retain existing objects on unchanged topology.
+- **Direct wiring:** preserve native tools and terminal interactions without requiring adapter blocks or FE conversion.
+- **Single state advancement:** advance each electrical state variable exactly once per authoritative substep.
+- **Native gameplay:** CEE owns its machine state, visuals, controls, heat, damage, and physical wires; PG retains its native content models.
+- **Explicit phases:** preparation, solving, and gameplay commit remain separate even while execution is synchronous.
+- **Single topology owner:** compatibility structural changes pass through the topology manager and execute outside an active solve.
 
-A pull request that intentionally changes the product target should update the specification explicitly and explain the architectural reason for doing so. A pull request that merely has not reached the target yet should document the remaining work instead of weakening the specification.
+The finished architecture must remain suitable for server-wide networks and future asynchronous solving. Large-network testing and asynchronous execution are deferred for this beta, as described in [FIRST_RELEASE.md](docs/FIRST_RELEASE.md).
 
-## Architectural invariants
+## Preparation, solving, and commit
 
-Changes should preserve these project-level invariants unless an explicit specification amendment is being proposed:
+**Prepare** may read mutable world and gameplay state. Capture the electrical inputs the solver needs as immutable or solver-owned values.
 
-- Power Grid is the sole authoritative electrical solver while compatibility mode is active.
-- CEE electrical content participates directly in persistent Power Grid topology.
-- CEE and PG wires can connect directly to compatible terminals without player-visible adapters.
-- Interoperability does not use FE conversion or a previous-tick equivalent-source bridge.
-- Stateful electrical properties are advanced exactly once.
-- Stable CEE topology is synchronized incrementally rather than destroyed/recreated every tick.
-- CEE retains ownership of its non-solver gameplay behavior.
-- Large, server-wide connected networks are a supported architectural target.
-- Compatibility-provided numerical solver callbacks do not depend on mutable Minecraft world state.
-- Electrical integration maintains an explicit **prepare → solve → commit** separation even while those phases execute synchronously.
-- All compatibility-induced electrical topology mutations pass through the centralized topology manager.
-- Compatibility-induced topology mutation never occurs while an authoritative electrical solve is in progress.
+**Solve** operates on captured values and electrical model state. Numerical callbacks must not read or mutate blocks, block entities, entities, levels, inventories, or gameplay SavedData. Synchronous execution does not remove this boundary.
 
-## Prepare, solve, and commit discipline
+**Commit** consumes solved values and applies resulting gameplay state and effects through the normal server lifecycle.
 
-Compatibility code should be written as though the numerical Power Grid solve may execute off-thread in the future.
+Configuration, wire failures, and other gameplay events can discover required structural changes. Route those requests to the topology owner; defer consequences discovered during commit until the next safe preparation phase.
 
-The **prepare phase** may read mutable Minecraft/CEE gameplay state and should capture the immutable or solver-owned inputs required by electrical elements.
+## Topology changes
 
-The **solve phase** must operate only on captured/solver-owned state. Solver callbacks, nonlinear hooks, dynamic element callbacks, and equivalent numerical paths must not directly read or mutate blocks, block entities, entities, levels, inventories, gameplay SavedData, or other mutable world state.
+The topology owner orders and applies structural requests, preserves stable identities, and avoids duplicate changes. Relevant events include wire or machine placement/removal, terminal edits, chunk lifecycle changes, network split/merge, and endpoint migration.
 
-The **commit phase** consumes solved electrical results and applies resulting gameplay state/effects through the normal server-safe lifecycle.
+Changing voltage, resistance, or another numerical parameter should update an existing element where its model permits. Treat a genuine change in circuit structure as a structural request. Neither path may race an active solve.
 
-Initial synchronous execution is acceptable. Collapsing these responsibilities together because they currently share a thread is not.
+Persistent identity must come from the owning device, terminal, attachment, or internal node. Temporary graph indices are unsuitable for saved identity.
 
-## Topology mutation discipline
+## Testing a change
 
-Compatibility code should have one structural authority: the centralized topology manager described by `SPEC.md`.
+Run the checks that establish the behavior changed:
 
-Code that discovers a structural change should submit a **topology change request** rather than directly modifying the compatibility-provided PG graph.
+| Change | Relevant checks |
+| --- | --- |
+| Property translation or result calculations | Equation tests and mixed circuits with analytical expectations |
+| Wire or terminal interaction | Both wire tools, native selection/cost/cutting, reconnect, and removal |
+| Storage, AC, or coupled elements | State evolution, RMS/phase, polarity, and exactly-once advancement |
+| Controls and gameplay outputs | Native interactions, readings, outputs, protection, and repair |
+| Topology or persistence | Actual unload/reload, separate-process restart, split/merge, and source removal |
+| Synchronization | Two real clients using native packets and checking displayed state |
+| Documentation | Links, formatting, version/scope claims, and consistency with recorded evidence |
 
-Examples include:
+Preserve same-mod circuits and exercise both PG backends where the change affects electrical solving. A test should measure behavior, not merely mirror the implementation. See [the current reload failure](docs/STATUS.md#unresolved-chunk-reload-failure) before interpreting a repeat run as proof of a fix.
 
-- CEE/PG wire placement or removal;
-- machine creation/destruction;
-- terminal creation/removal;
-- chunk/sublevel lifecycle changes;
-- circuit-structure changes;
-- compatibility endpoint migration;
-- network split/merge consequences.
+For solver or ownership changes, add assertions that detect structural mutation during a solve and double state advancement. For scale work, use the benchmark defined in [SPEC.md](SPEC.md#39-performance-acceptance-benchmark); passing that benchmark is a long-term completion requirement.
 
-The topology manager is responsible for ordering/coalescing requests, preserving stable identities, avoiding duplicate operations, and applying structural changes only during a phase in which no authoritative electrical solve is running.
+## Pull requests
 
-Numerical parameter updates that do not change graph structure may follow their appropriate PG update path, but they must not be disguised structural mutations performed from solver callbacks.
+Describe the problem and resulting behavior for a reviewer who has not seen the development conversation. Include the relevant scope, validation, and remaining limitations.
 
-## Recommended development sequence
+For electrical or lifecycle work, explain:
 
-Implementation work will likely be easier to reason about if it progresses roughly through these concerns:
+- which model, hook, or ownership boundary changes;
+- whether parameters or circuit structure change;
+- where required gameplay inputs are captured;
+- how topology changes stay outside the solve;
+- how state advancement and native gameplay remain correct;
+- which behavior tests establish the result.
 
-1. **Lifecycle interception** — retain CEE model generation and result consumption while bypassing the native CEE solve.
-2. **Prepare/solve/commit boundaries** — establish solver-safe captured state before writing property adapters.
-3. **Central topology manager** — establish the only compatibility-owned path for PG structural mutation.
-4. **Persistent endpoint mapping** — stable CEE terminal/internal-node representations in PG.
-5. **Basic property translation** — resistors and linear sources.
-6. **Persistent graph synchronization** — desired-state diffing that emits parameter updates and topology requests.
-7. **Result bridging** — construct valid CEE results from PG-solved values during commit.
-8. **Direct PG-wire → CEE-terminal placement.**
-9. **Direct CEE-wire → PG-terminal placement.**
-10. **Stateful element integration** — capacitor, inductor, accumulator, AC behavior.
-11. **Nonlinear solver-hook integration.**
-12. **Transformer/coupled-property integration.**
-13. **Chunk/restart/sublevel lifecycle hardening.**
-14. **Performance instrumentation, concurrency validation, and acceptance benchmarks.**
+Keep the contribution focused. Use the pinned versions and matching sources in [artifacts.json](release/artifacts.json); similarity to an upstream development API does not establish compatibility. Prefer existing extension points and narrow Mixins/accessors. Avoid unnecessary permanent forks.
 
-This sequence is guidance, not a replacement for the finished requirements in `SPEC.md`.
+## Specification and release records
 
-## Pull request expectations
+An implementation limitation belongs in known issues or milestone documentation. It does not silently redefine a requirement for full interoperability.
 
-A substantial pull request should explain:
+A change to the long-term product requirements must state the old requirement, the proposed replacement, the reason, and the effects on electrical fidelity, gameplay, concurrency, and scale. Preserve [the specification's change policy](SPEC.md#47-specification-change-policy).
 
-- which `SPEC.md` section(s) it advances;
-- what electrical ownership/lifecycle it changes;
-- whether PG topology is added/removed or only numerically updated;
-- which topology-manager request/path is used for any structural mutation;
-- how it guarantees that no structural mutation occurs during a solve;
-- what mutable gameplay/world state it reads during prepare;
-- what state is exposed to numerical solver callbacks and why it is safe for future off-thread execution;
-- what gameplay effects/state are deferred until commit;
-- how stateful components avoid double advancement;
-- what tests were added or performed;
-- known gaps that remain before the product specification is satisfied.
-
-Performance-sensitive work should include before/after measurements when practical.
-
-## Testing philosophy
-
-Electrical interoperability should be tested at several levels:
-
-### Unit/equation tests
-
-Use these for property adapters, current/voltage relationships, timestep behavior, nonlinear residuals, transformer equations, and verification that numerical callbacks depend only on captured/solver-owned state.
-
-### Integration circuits
-
-Build small deterministic circuits that mix native PG elements with CEE compatibility elements and verify solved voltages/currents.
-
-### Lifecycle tests
-
-Exercise placement, removal, chunk unload/reload, world restart, network merge/split, and failure-driven topology changes. Verify that all compatibility structural changes pass through the topology manager.
-
-### Concurrency-boundary tests
-
-Instrument or assert the topology manager so structural mutation attempted during an active solve fails loudly in development rather than racing silently. Exercise prepare/solve/commit boundaries with tests that make mutable-world access from solver callbacks detectable where practical.
-
-### Gameplay tests
-
-Verify that CEE post-solve behavior such as heating, damage, state updates, and wire failure still occurs correctly from PG-produced results during the commit phase.
-
-### Scale tests
-
-Verify that stable topology stays stable and that compatibility synchronization does not devolve into per-tick graph reconstruction. The release-scale benchmark is defined in `SPEC.md`.
-
-## Avoiding compatibility debt
-
-Do not introduce a temporary adapter architecture that is likely to become permanent if it violates core invariants.
-
-In particular, avoid normalizing around:
-
-- FE conversion;
-- adapter blocks;
-- last-tick equivalent sources;
-- running both solvers;
-- rebuilding the translated graph every tick;
-- direct PG topology mutation from arbitrary compatibility classes;
-- topology mutation from solver callbacks;
-- mutable-world access from numerical solver hooks simply because the initial solve is synchronous;
-- one-off machine adapters when a reusable property-family adapter is appropriate.
-
-A temporary development stub is acceptable when clearly isolated and tracked, but it must not be presented as completion of the corresponding specification requirement.
-
-## Upstream compatibility
-
-World-Wide Power Grid depends on implementation details in both upstream projects. Keep upstream assumptions narrow and documented.
-
-Prefer:
-
-- public APIs and normal extension points;
-- targeted Mixins/accessors when no suitable API exists;
-- stable model/property abstractions over machine-specific patches;
-- explicit supported version declarations.
-
-Avoid unnecessary permanent forks of either upstream mod.
-
-## Specification changes
-
-Changes to the north-star product definition deserve the same scrutiny as major code architecture changes.
-
-A specification-changing pull request should clearly state:
-
-- the existing requirement;
-- the proposed replacement;
-- why the old requirement is undesirable, impossible, or no longer appropriate;
-- what player-visible, electrical-fidelity, concurrency, or scalability consequences result;
-- how the revised requirement remains consistent with the project's purpose.
-
-The specification should describe the product we actually want to finish—not merely the easiest implementation available today.
+Published tags, assets, hashes, and original acceptance records identify the tested release. Preserve them when updating current documentation; [release/README.md](release/README.md) explains how the historical records relate to live status.

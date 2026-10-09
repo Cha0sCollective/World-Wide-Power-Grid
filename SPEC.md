@@ -1,18 +1,21 @@
 # World-Wide Power Grid
+
 ## Product Specification
 
-> **North-star specification:** CEE content, Power Grid electrical backend, direct interoperability, no player-visible translation layer.
+> **Long-term product specification:** CEE content, Power Grid electrical backend, direct interoperability, no player-visible translation layer.
 
-**Document status:** Normative target specification  
-**Specification version:** 1.1  
-**Project phase:** Pre-implementation / pursuing specification  
-**Initial compatibility target:** Minecraft 1.21.1-era releases of Create: Electro Energetics and Power Grid
+- **Document status:** Normative long-term specification
+- **Specification version:** 1.1
+- **Project phase:** Stationary beta released; full product requirements remain open
+- **Current beta baseline:** Minecraft 1.21.1, CEE 1.21.1-1.1.3, and PG 0.6.2; exact dependencies are in [INSTALL.md](docs/INSTALL.md)
+
+This document defines the destination for a complete **1.0** release. It is not a claim that the current beta satisfies every requirement below. For shipped behavior, test evidence, and known issues, read [beta acceptance](docs/FIRST_RELEASE.md), [supported content](docs/SUPPORT.md), and [current status](docs/STATUS.md).
 
 ---
 
 ## 0. How to read this document
 
-This document defines the **finished release product** that World-Wide Power Grid is pursuing. It is deliberately not an MVP definition and must not be weakened merely because an early implementation supports a smaller subset.
+This document defines the **finished release product** that World-Wide Power Grid is pursuing. The first beta has its own smaller acceptance scope; its limitations do not change the requirements for the finished product.
 
 Implementation milestones may deliver only portions of this specification. Such milestones are progress toward completion, not alternative definitions of completion.
 
@@ -20,9 +23,18 @@ The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **
 
 When implementation convenience conflicts with this specification, the implementation should change unless the specification is intentionally amended.
 
+### Reading guide
+
+- **Product and ownership:** [vision](#1-product-vision), [single solver](#4-single-authoritative-solver), [CEE lifecycle](#5-cee-solver-replacement-boundary).
+- **Connections and graph state:** [direct wires](#9-direct-wire-interoperability), [persistent topology](#11-persistent-electrical-topology), [incremental updates](#12-incremental-synchronization).
+- **Models and timing:** [electrical primitives](#14-electrical-primitive-translation), [dynamic state](#16-dynamic-property-ownership), [timestep](#19-authoritative-timestep-and-microticks), [result bridge](#20-cee-result-bridge).
+- **Safe execution:** [future asynchronous boundary](#19a-future-asynchronous-execution), [topology ownership](#19b-topology-mutation-ownership), [lifecycle](#28-lifecycle-correctness), [persistence](#30-persistence).
+- **Long-term acceptance:** [functional connections](#37-required-functional-connection-matrix), [electrical fidelity](#38-electrical-fidelity-acceptance-criteria), [scale benchmark](#39-performance-acceptance-benchmark), [1.0 checklist](#46-release-completion-criteria).
+- **Maintainer reference:** [change policy](#47-specification-change-policy), [architectural responsibilities](#48-expected-implementation-methodology), [upstream references](#49-upstream-technical-references).
+
 ---
 
-# 1. Product vision
+## 1. Product vision
 
 World-Wide Power Grid exists to make **Create: Electro Energetics (CEE)** and **Power Grid (PG)** behave as one electrical ecosystem.
 
@@ -54,7 +66,7 @@ No player-visible adapter block, FE bridge, one-tick equivalent-source interface
 
 ---
 
-# 2. Definition of the product
+## 2. Definition of the product
 
 World-Wide Power Grid is an **electrical backend compatibility layer**.
 
@@ -96,7 +108,7 @@ A network containing CEE and PG content SHALL NOT enter a special solver-to-solv
 
 ---
 
-# 3. Guiding principle
+## 3. Guiding principle
 
 All architecture and implementation decisions SHOULD follow this rule:
 
@@ -106,7 +118,7 @@ The compatibility layer translates between those responsibilities without exposi
 
 ---
 
-# 4. Single authoritative solver
+## 4. Single authoritative solver
 
 Power Grid MUST be the sole authoritative electrical solver while World-Wide Power Grid compatibility mode is active.
 
@@ -125,7 +137,7 @@ There SHALL be one authoritative solved electrical state per simulation step.
 
 ---
 
-# 5. CEE solver replacement boundary
+## 5. CEE solver replacement boundary
 
 World-Wide Power Grid SHOULD preserve the useful portions of CEE's electrical device lifecycle while replacing the actual CEE network solve.
 
@@ -185,7 +197,7 @@ CEE MAY continue creating a lightweight `CircuitBuilder` or equivalent electrica
 
 ---
 
-# 6. CEE remains the gameplay owner
+## 6. CEE remains the gameplay owner
 
 Replacing CEE's electrical solver MUST NOT unnecessarily replace CEE gameplay systems.
 
@@ -212,7 +224,7 @@ World-Wide Power Grid is an electrical interoperability project, not a redesign 
 
 ---
 
-# 7. Compatibility nodes are invisible software objects
+## 7. Compatibility nodes are invisible software objects
 
 A **CompatNode** is an internal software representation used to make a terminal or internal CEE electrical node participate in Power Grid.
 
@@ -246,7 +258,7 @@ The implementation SHOULD NOT introduce a new persistent PG endpoint serializati
 
 ---
 
-# 8. Sidecar device model
+## 8. Sidecar device model
 
 CEE machines do not need to literally become Power Grid block entities.
 
@@ -268,7 +280,7 @@ This design SHOULD avoid forcing CEE's object inheritance model into PG's block-
 
 ---
 
-# 9. Direct wire interoperability
+## 9. Direct wire interoperability
 
 Power Grid wires MUST be able to connect directly to compatible CEE terminals.
 
@@ -292,7 +304,7 @@ Cross-mod wiring MUST participate in the same authoritative PG electrical topolo
 
 ---
 
-# 10. Terminal interaction requirements
+## 10. Terminal interaction requirements
 
 Cross-mod terminal selection SHOULD feel native to the wire system the player is currently using.
 
@@ -314,7 +326,7 @@ Any invisible endpoint must correspond to the terminal the player actually selec
 
 ---
 
-# 11. Persistent electrical topology
+## 11. Persistent electrical topology
 
 CEE electrical content MUST be represented by persistent PG-side topology.
 
@@ -341,7 +353,7 @@ Stable CEE node identities SHALL map to stable PG-side identities wherever possi
 
 ---
 
-# 12. Incremental synchronization
+## 12. Incremental synchronization
 
 World-Wide Power Grid MUST synchronize CEE electrical changes incrementally.
 
@@ -373,7 +385,7 @@ An unchanged CEE network SHOULD cause zero compatibility-originated PG topology 
 
 ---
 
-# 13. Stable sparse structure is a product requirement
+## 13. Stable sparse structure is a product requirement
 
 World-Wide Power Grid MUST avoid unnecessary changes to Power Grid's matrix sparsity structure.
 
@@ -401,7 +413,7 @@ The project SHALL NOT intentionally throw away PG's persistent-network advantage
 
 ---
 
-# 14. Electrical primitive translation
+## 14. Electrical primitive translation
 
 The compatibility layer MUST support every electrical primitive required by the declared supported CEE version.
 
@@ -411,7 +423,7 @@ A CEE machine composed entirely from already-supported electrical primitives SHO
 
 The finished compatibility layer MUST support, where used by the supported CEE version:
 
-## 14.1 Linear elements
+### 14.1 Linear elements
 
 - resistors;
 - conductances;
@@ -423,7 +435,7 @@ The finished compatibility layer MUST support, where used by the supported CEE v
 - ground/reference behavior;
 - source/reference priority behavior where it affects results.
 
-## 14.2 Stateful/time-dependent elements
+### 14.2 Stateful/time-dependent elements
 
 - capacitors;
 - inductors;
@@ -432,13 +444,13 @@ The finished compatibility layer MUST support, where used by the supported CEE v
 - alternator phase windings;
 - other CEE `MicroTickingElectricalProperties`.
 
-## 14.3 Nonlinear elements
+### 14.3 Nonlinear elements
 
 - diodes;
 - other CEE Norton-linearized nonlinear properties;
 - components using solver-iteration callbacks.
 
-## 14.4 Coupled elements
+### 14.4 Coupled elements
 
 - ideal transformer relationships;
 - transformer-derived devices;
@@ -448,7 +460,7 @@ Unsupported normal built-in CEE electrical properties SHALL be considered compat
 
 ---
 
-# 15. Preserve CEE electrical equations where practical
+## 15. Preserve CEE electrical equations where practical
 
 Using Power Grid as the solver MUST NOT imply replacing CEE's intended electrical behavior with crude approximations when avoidable.
 
@@ -470,7 +482,7 @@ The project SHOULD prefer an exact or equation-equivalent PG integration over a 
 
 ---
 
-# 16. Dynamic property ownership
+## 16. Dynamic property ownership
 
 Every electrical state variable MUST have exactly one advancement path while compatibility mode is active.
 
@@ -482,7 +494,7 @@ If a CEE stateful property remains the authoritative holder of its own internal 
 
 ---
 
-# 17. Nonlinear component integration
+## 17. Nonlinear component integration
 
 CEE nonlinear elements SHALL participate directly in Power Grid's Newton iteration or an equivalent solver-hook mechanism.
 
@@ -494,7 +506,7 @@ Representative nonlinear tests MUST include forward bias, reverse bias, switchin
 
 ---
 
-# 18. Transformer and coupled-element integration
+## 18. Transformer and coupled-element integration
 
 CEE transformer/coupled properties SHALL be represented as direct PG coupling constraints or equation-equivalent PG constructs.
 
@@ -510,7 +522,7 @@ A transformer MUST NOT be approximated through an FE bridge or a one-tick two-po
 
 ---
 
-# 19. Authoritative timestep and microticks
+## 19. Authoritative timestep and microticks
 
 There MUST be one authoritative electrical timestep schedule.
 
@@ -535,7 +547,7 @@ The implementation SHALL retain enough per-substep electrical state to reproduce
 
 ---
 
-# 19A. Future asynchronous execution
+## 19A. Future asynchronous execution
 
 Compatibility-provided Power Grid electrical elements SHALL be designed so that their numerical solver callbacks do **not** require access to mutable Minecraft world state.
 
@@ -572,7 +584,7 @@ Asynchronous solving itself is not required for the initial release, but **async
 
 ---
 
-# 19B. Topology mutation ownership
+## 19B. Topology mutation ownership
 
 All compatibility-induced electrical topology mutations SHALL pass through a centralized **topology manager** or equivalent single ownership boundary.
 
@@ -609,7 +621,7 @@ This requirement is a correctness and concurrency invariant, not merely an organ
 
 ---
 
-# 20. CEE result bridge
+## 20. CEE result bridge
 
 After the authoritative PG solve, World-Wide Power Grid SHALL construct results consumable by normal CEE gameplay logic.
 
@@ -630,7 +642,7 @@ CEE `postTick` methods SHOULD receive ordinary CEE-compatible results without ne
 
 ---
 
-# 21. CEE physical wires
+## 21. CEE physical wires
 
 CEE wires SHALL remain CEE-owned physical/gameplay objects.
 
@@ -656,7 +668,7 @@ After PG solves, CEE SHALL receive sufficient solved node state for its normal t
 
 ---
 
-# 22. Power Grid physical wires
+## 22. Power Grid physical wires
 
 PG wires connected to CEE terminals SHALL remain normal PG wire entities.
 
@@ -675,7 +687,7 @@ Connecting a PG wire to a CEE terminal MUST NOT create a duplicate CEE physical 
 
 ---
 
-# 23. Physical topology vs. simulation topology
+## 23. Physical topology vs. simulation topology
 
 World-Wide Power Grid SHALL maintain a clear distinction between:
 
@@ -703,7 +715,7 @@ This separation is fundamental to the architecture.
 
 ---
 
-# 24. Scale is a normal use case
+## 24. Scale is a normal use case
 
 A server-wide connected electrical network SHALL be considered a normal supported scenario, not an edge case.
 
@@ -721,7 +733,7 @@ A world where most or all loaded CEE electrical devices participate in PG networ
 
 ---
 
-# 25. Performance design requirements
+## 25. Performance design requirements
 
 Performance is part of correctness for the finished product.
 
@@ -742,7 +754,7 @@ The final architecture MUST satisfy all of the following:
 
 ---
 
-# 26. Topology reduction
+## 26. Topology reduction
 
 World-Wide Power Grid MAY implement persistent electrical topology reduction to keep large CEE-heavy networks efficient.
 
@@ -762,7 +774,7 @@ Topology reduction MUST preserve the electrical quantities required to reconstru
 
 ---
 
-# 27. Network partitioning
+## 27. Network partitioning
 
 Power Grid's existing ability to split large networks through transmission-line/weak-coupling behavior MAY be used where it is already part of PG's normal configured behavior.
 
@@ -777,7 +789,7 @@ If future compatibility-specific partitioning changes transient behavior compare
 
 ---
 
-# 28. Lifecycle correctness
+## 28. Lifecycle correctness
 
 World-Wide Power Grid MUST correctly handle the complete lifecycle of electrical content.
 
@@ -808,7 +820,7 @@ Lifecycle handlers that discover a required electrical topology change SHALL req
 
 ---
 
-# 29. Moving structures, sublevels, and coordinate transforms
+## 29. Moving structures, sublevels, and coordinate transforms
 
 Where the supported upstream versions allow electrical content to exist in Create contraptions, trains, sublevels, Sable-projected spaces, or other transformed environments, World-Wide Power Grid SHOULD preserve correct endpoint identity and electrical mapping through those systems.
 
@@ -818,7 +830,7 @@ Cross-mod endpoint position, persistence, and migration logic MUST be validated 
 
 ---
 
-# 30. Persistence
+## 30. Persistence
 
 Compatibility mappings that cannot be safely and deterministically reconstructed from authoritative mod-owned world state MUST be persisted.
 
@@ -837,7 +849,7 @@ Where practical, the original CEE/PG machines and physical wires SHOULD remain t
 
 ---
 
-# 31. Failure policy
+## 31. Failure policy
 
 World-Wide Power Grid MUST fail predictably when it encounters an unsupported electrical construct.
 
@@ -860,7 +872,7 @@ For a production release claiming full compatibility with a declared CEE version
 
 ---
 
-# 32. Debugging and observability
+## 32. Debugging and observability
 
 The finished project SHOULD provide developer/administrator diagnostics for interoperability state.
 
@@ -885,7 +897,7 @@ These tools are for development and administration and SHOULD NOT be required fo
 
 ---
 
-# 33. Compatibility isolation and maintainability
+## 33. Compatibility isolation and maintainability
 
 World-Wide Power Grid SHOULD minimize invasive changes to both upstream mods.
 
@@ -909,7 +921,7 @@ Compatibility code SHOULD be organized around stable concepts such as:
 
 ---
 
-# 34. Version compatibility
+## 34. Version compatibility
 
 Every released version MUST declare which CEE and PG versions or version ranges are supported.
 
@@ -927,7 +939,7 @@ then full-support status MUST be revalidated before the compatibility release cl
 
 ---
 
-# 35. Behavior when compatibility is not active
+## 35. Behavior when compatibility is not active
 
 World-Wide Power Grid SHALL activate its backend replacement only when the required supported mods are present and compatibility mode is applicable.
 
@@ -939,7 +951,7 @@ PG-only electrical networks MUST NOT be materially altered simply because World-
 
 ---
 
-# 36. Explicit non-goals
+## 36. Explicit non-goals
 
 World-Wide Power Grid is not intended to:
 
@@ -957,7 +969,7 @@ World-Wide Power Grid is not intended to:
 
 ---
 
-# 37. Required functional connection matrix
+## 37. Required functional connection matrix
 
 A release claiming full interoperability MUST pass all of the following connection classes:
 
@@ -993,22 +1005,22 @@ A connection working visually while being electrically disconnected does not cou
 
 ---
 
-# 38. Electrical fidelity acceptance criteria
+## 38. Electrical fidelity acceptance criteria
 
 The compatibility implementation SHALL be validated against representative reference circuits.
 
-## 38.1 Static DC
+### 38.1 Static DC
 
 After convergence, representative node voltages and branch currents SHOULD agree with expected/reference behavior within:
 
 - **0.1% relative error**, or
 - the applicable solver tolerance where the true value is near zero.
 
-## 38.2 Stateful/transient circuits
+### 38.2 Stateful/transient circuits
 
 Capacitor, inductor, accumulator, and equivalent dynamic behavior SHOULD remain within **1% error** over defined transient test windows, unless a difference is intentionally caused by the documented canonical PG timestep policy.
 
-## 38.3 Nonlinear circuits
+### 38.3 Nonlinear circuits
 
 Diodes and other nonlinear CEE properties MUST converge correctly across representative:
 
@@ -1018,11 +1030,11 @@ Diodes and other nonlinear CEE properties MUST converge correctly across represe
 - interaction with reactive elements;
 - interaction with PG-native nonlinear elements where supported.
 
-## 38.4 Transformers/couplings
+### 38.4 Transformers/couplings
 
 Transformer ratios, current relationships, and reflected impedance behavior MUST match the CEE-defined model within solver tolerance.
 
-## 38.5 CEE gameplay consequences
+### 38.5 CEE gameplay consequences
 
 CEE overheating, damage, failure, charging state, and similar solved-electrical consequences SHOULD occur within **one game tick** of their expected reference behavior under equivalent conditions.
 
@@ -1030,7 +1042,7 @@ Material deviations MUST be fixed or explicitly accepted/documented before a rel
 
 ---
 
-# 39. Performance acceptance benchmark
+## 39. Performance acceptance benchmark
 
 The final release SHALL NOT be considered complete until it passes a documented multiplayer-scale benchmark.
 
@@ -1073,7 +1085,7 @@ Functional correctness MUST also be validated with the supported non-native PG s
 
 ---
 
-# 40. Stable-topology acceptance criteria
+## 40. Stable-topology acceptance criteria
 
 In a world where electrical topology is unchanged for a sustained test period:
 
@@ -1090,7 +1102,7 @@ This test specifically protects the product against accidental regression to per
 
 ---
 
-# 41. Dynamic topology acceptance criteria
+## 41. Dynamic topology acceptance criteria
 
 The following actions MUST work without server restart or manual refresh:
 
@@ -1115,7 +1127,7 @@ All compatibility-induced structural changes in this suite MUST be routed throug
 
 ---
 
-# 42. Restart and persistence acceptance criteria
+## 42. Restart and persistence acceptance criteria
 
 A test world containing all supported cross-mod connection directions MUST survive:
 
@@ -1138,7 +1150,7 @@ After reload:
 
 ---
 
-# 43. Player-experience acceptance criteria
+## 43. Player-experience acceptance criteria
 
 A normal player SHOULD NOT need to know World-Wide Power Grid's internal translation system exists.
 
@@ -1159,7 +1171,7 @@ Compatibility-specific diagnostics MAY exist for administrators and developers.
 
 ---
 
-# 44. No-adapter acceptance criterion
+## 44. No-adapter acceptance criterion
 
 The following does **not** satisfy this specification:
 
@@ -1197,7 +1209,7 @@ World-Wide Power Grid requires direct circuit-level participation in the authori
 
 ---
 
-# 45. Definition of full interoperability
+## 45. Definition of full interoperability
 
 For this project, **full interoperability** means all of the following are simultaneously true for the declared supported upstream versions:
 
@@ -1225,30 +1237,30 @@ Until these conditions are met, the project MAY describe itself as experimental,
 
 ---
 
-# 46. Release completion criteria
+## 46. Release completion criteria
 
 A **1.0 / complete** release may be declared only when all sections below pass.
 
-## 46.1 Electrical backend
+### 46.1 Electrical backend
 
 - [ ] CEE's independent electrical network solver executes zero solves in compatibility mode.
 - [ ] PG is the sole authoritative electrical backend.
 - [ ] No electrical state variable is double-advanced.
 
-## 46.2 Device/model coverage
+### 46.2 Device/model coverage
 
 - [ ] Every built-in CEE electrical primitive for the declared version is supported.
 - [ ] Every built-in CEE electrical device is representable through supported primitives or an intentional device-specific adapter.
 - [ ] No normal supported device emits an unsupported-property diagnostic.
 
-## 46.3 Wire interoperability
+### 46.3 Wire interoperability
 
 - [ ] PG wire → CEE terminal works directly.
 - [ ] CEE wire → PG terminal works directly.
 - [ ] Same-mod wire behavior remains intact.
 - [ ] No adapter block/item is required.
 
-## 46.4 Electrical correctness
+### 46.4 Electrical correctness
 
 - [ ] Static/DC acceptance suite passes.
 - [ ] Reactive/transient acceptance suite passes.
@@ -1256,7 +1268,7 @@ A **1.0 / complete** release may be declared only when all sections below pass.
 - [ ] Transformer/coupling acceptance suite passes.
 - [ ] Mixed PG-native + CEE-property circuits pass.
 
-## 46.5 Gameplay correctness
+### 46.5 Gameplay correctness
 
 - [ ] CEE `postTick` behavior receives valid results.
 - [ ] CEE thermal behavior works.
@@ -1264,14 +1276,14 @@ A **1.0 / complete** release may be declared only when all sections below pass.
 - [ ] CEE wire failure behavior works.
 - [ ] CEE user-facing controls remain functional.
 
-## 46.6 Persistence/lifecycle
+### 46.6 Persistence/lifecycle
 
 - [ ] Restart suite passes.
 - [ ] Chunk load/unload suite passes.
 - [ ] Network merge/split suite passes.
 - [ ] No stale or duplicated compatibility objects remain.
 
-## 46.7 Performance and concurrency architecture
+### 46.7 Performance and concurrency architecture
 
 - [ ] Persistent topology is used.
 - [ ] Stable networks cause no wholesale graph recreation.
@@ -1283,13 +1295,13 @@ A **1.0 / complete** release may be declared only when all sections below pass.
 - [ ] All compatibility-induced topology mutations pass through the centralized topology manager.
 - [ ] No compatibility-induced topology mutation occurs while an electrical solve is in progress.
 
-## 46.8 User experience
+### 46.8 User experience
 
 - [ ] Cross-mod terminals can be wired using normal upstream wire tools.
 - [ ] Compatibility internals are invisible in ordinary gameplay.
 - [ ] Debug/admin tooling exists for diagnosing mapping failures.
 
-## 46.9 Maintainability
+### 46.9 Maintainability
 
 - [ ] Supported upstream versions are explicitly declared.
 - [ ] Compatibility persistence data is versioned.
@@ -1308,7 +1320,7 @@ The release target is a **single, persistent, scalable Power Grid electrical bac
 
 ---
 
-# 47. Specification-change policy
+## 47. Specification-change policy
 
 This document represents the destination the project is pursuing.
 
@@ -1332,9 +1344,11 @@ Temporary implementation limitations belong in issues, milestones, or developmen
 
 ---
 
-# 48. Current expected implementation methodology
+## 48. Expected implementation methodology
 
 The following component model is the expected implementation direction. Exact class names may change, but architectural responsibility SHOULD remain recognizable.
+
+These are conceptual names, not an inventory of classes in the current beta. [DEVELOPMENT.md](docs/DEVELOPMENT.md#electrical-lifecycle-and-persistence) describes the implementation.
 
 ```text
 CEEEndpointManager
@@ -1439,12 +1453,14 @@ This methodology is preferred because it preserves CEE's content model while avo
 
 ---
 
-# 49. Upstream technical references
+## 49. Upstream technical references
 
 These links identify the upstream projects whose behavior this specification is designed around:
 
-- **Create: Electro Energetics** — https://github.com/george8188625/Create-Electro-Energetics
-- **Power Grid** — https://github.com/patryk3211/PowerGrid
+- [Create: Electro Energetics](https://github.com/george8188625/Create-Electro-Energetics)
+- [Power Grid](https://github.com/patryk3211/PowerGrid)
+
+Use [artifacts.json](release/artifacts.json) for the published beta artifacts and matching source references. The requirements describe the long-term integration; upstream class names and property APIs can differ between versions.
 
 Important upstream implementation areas for maintainers include:
 
@@ -1476,7 +1492,7 @@ These references are implementation context, not a substitute for the normative 
 
 ---
 
-# 50. Final statement
+## 50. Final statement
 
 World-Wide Power Grid is complete when the distinction between “CEE electricity” and “Power Grid electricity” no longer matters to the player or to the authoritative electrical solve.
 
