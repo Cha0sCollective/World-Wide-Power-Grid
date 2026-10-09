@@ -10,11 +10,28 @@ The first release, **0.1.0-beta.1**, focuses on stationary factories. It is [pub
 
 Use **Minecraft 1.21.1**, **NeoForge 21.1.231**, **Java 21**, **Create 6.0.10-280**, **CEE 1.21.1-1.1.3**, **PG 0.6.2**, and **Architectury 13.0.8**. Follow the [installation guide](docs/INSTALL.md), including PG's solver settings.
 
-## What the beta covers
+## What works in-game
 
-The declared support set covers factory generation, motors, pumping, lighting, heating, storage, capacitors and inductors, transformers, wiring, controls, protection, and meters. It includes **all 11 built-in CEE panel attachments** and **all 28 built-in PG board components**. Native placement, assembly, configuration, and interaction workflows remain in use.
+**You can build a stationary factory that uses CEE and Power Grid equipment together on the same electrical circuit.** With the [supported equipment](docs/SUPPORT.md), you can:
 
-The [support matrix](docs/SUPPORT.md) records the checked behaviors and additional unverified content. Moving systems, optional integrations, and large-network testing are deferred.
+- **Share power between the mods.** Run CEE equipment from a Power Grid source, or Power Grid equipment from a CEE source.
+- **Wire your factory with either mod's tools.** Connect supported terminals across both mods, add branches, and cut or reconnect wires using the usual interactions.
+- **Run useful machines.** Power motors to drive Create machinery, pumps to move water through pipes and tanks, lights to illuminate your factory, and heaters to produce heat.
+- **Store and change power.** Charge and discharge CEE accumulators and capacitors in mixed circuits, change voltage with transformers and variacs, and use AC generation and equipment.
+- **Control and protect circuits.** Turn loads on and off with switches and relays, adjust power with electrical controls, read meters, and use fuses and breakers that trip when overloaded.
+- **Build control panels and electronics.** Use all **11 built-in CEE panel attachments** and all **28 built-in Power Grid circuit-board components** in mixed circuits, including switches, indicators, gauges, and displays.
+
+You still place, assemble, configure, and repair equipment through each mod's normal gameplay. PG's portable battery keeps its normal item-charging role; use a CEE accumulator to store power and supply it back to a wired circuit.
+
+The [example world](docs/INSTALL.md#example-world) lets you try a PG-powered CEE pump, lights, and heater, plus a CEE-powered PG capacitor board controlled by a CEE panel.
+
+## Beta status
+
+The beta has passed **114 automated checks** on Windows and Linux. Further checks cover saving and reopening worlds and **two players wiring and configuring the same circuit**. The [detailed test results](docs/FIRST_RELEASE.md) and [passing main-branch build](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/37990481752) record the evidence.
+
+**One reload issue remains unexplained:** an earlier test found a circuit had no power after a section of the world was unloaded and loaded again. Later runs passed, but we have not confirmed whether this was a test-timing problem or a gameplay bug. See [current status and known issues](docs/STATUS.md).
+
+This release covers the stationary equipment listed above. Moving trains and contraptions, optional add-ons, and very large power grids are outside its tested scope. The [support list](docs/SUPPORT.md) identifies the exact equipment covered and items still unverified.
 
 ## How it works
 
@@ -29,12 +46,6 @@ WWPG returns electrical results to CEE's gameplay systems
 ```
 
 PG's **native solver is primary**. WWPG includes the verified native v7 binaries omitted from the pinned PG 0.6.2 jar, recovered from official PG 0.6.1 with a byte-identical JNI interface. PG 0.6.1 is used only as a binary source during the build. Java remains a tested fallback.
-
-## Current status
-
-The release has passing runs of **114 packaged electrical, gameplay, and lifecycle tests** on Windows and Linux with native and Java backends. Additional checks cover electrical equations, saved upstream reference circuits, example-world restart, and two real multiplayer clients. The implementation's [main-branch CI run passed](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/37990481752).
-
-An earlier Linux/native CI run failed a chunk-reload assertion. Later runs passed, but the cause remains unresolved. This is a beta with a declared stationary support set; see [current status and known issues](docs/STATUS.md) before evaluating it.
 
 ## Documentation
 
