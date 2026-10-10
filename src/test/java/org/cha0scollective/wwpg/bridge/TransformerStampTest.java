@@ -37,7 +37,30 @@ class TransformerStampTest {
     }
 
     @Test void invalidRatiosCannotReachPg() {
-        for (double ratio : new double[] {0, Double.NaN, Double.POSITIVE_INFINITY, Double.MIN_VALUE})
+        for (double ratio : new double[] {Double.NaN, Double.POSITIVE_INFINITY, Double.MIN_VALUE, Double.MAX_VALUE})
             assertThrows(IllegalArgumentException.class, () -> TransformerStamp.ratio(ratio));
+    }
+
+    @Test void neutralRegulatorAndSignedStepsKeepTheSameCoupling() {
+        var network = new ElectricalNetwork(false);
+        network.warmUp(-1);
+        var input = new FloatingNode(); var output = new FloatingNode(); var dividedInput = new FloatingNode();
+        var ground = new FloatingNode();
+        for (var node : new FloatingNode[]{input, output, dividedInput, ground}) network.addNode(node);
+        network.addWire(new ElectricWire(.001, ground, null));
+        var supply = new VoltageSourceCoupling(input, ground, 0);
+        supply.setVoltage(100);
+        network.addNode(supply);
+        network.addWire(new ElectricWire(.01, input, dividedInput));
+        network.addWire(new ElectricWire(1000, output, ground));
+        var transformer = new TransformerStamp(network, input, output, ground, dividedInput, 0);
+        for (double ratio : new double[]{0, .1, 0, -.1, 0}) {
+            transformer.update(ratio);
+            network.calculate(1);
+            assertSame(network, transformer.network());
+            assertEquals(100 * (1 + ratio), output.getVoltage(), .002);
+            assertEquals(output.getVoltage() / 1000, transformer.primaryCurrent(), 1e-6);
+            assertEquals(-ratio * transformer.primaryCurrent(), transformer.secondaryCurrent(), 1e-6);
+        }
     }
 }
