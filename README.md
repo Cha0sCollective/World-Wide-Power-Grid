@@ -26,6 +26,8 @@ You still place, assemble, configure, and repair equipment through each mod's no
 
 The [revised example world](docs/INSTALL.md#example-world) lets you try a PG-powered CEE pump, lights, and heater. Flip the CEE panel switch to operate a PG relay board: its green RUN lamp turns on, and switching off produces a short capacitor delay before the red OFF lamp lights.
 
+The [expanded test yard](docs/FIXTURE_WORLD.md) adds seven transformer/variac circuits, both mods' meter banks, every built-in board component and panel attachment, controls, motors, and storage. It uses the same beta.2 jar and includes signs, tools, a guidebook, and parts cabinets.
+
 ## Beta status
 
 The original beta passed **114 automated checks** on Windows and Linux. Beta.2 expands the suite to **118**, adding handheld-meter checks and a startup-registration regression. Further checks cover saving and reopening worlds and **two players wiring, configuring, and measuring the same circuit**. See [current test results](docs/STATUS.md) and the [original release acceptance](docs/FIRST_RELEASE.md).

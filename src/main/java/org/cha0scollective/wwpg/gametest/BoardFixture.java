@@ -29,15 +29,26 @@ final class BoardFixture {
     final GameTestHelper h;
     final CircuitBoardBlockEntity board;
     final PlacedComponent component;
+    final BlockPos boardPosition;
     private final Map<Integer, Integer> ports = new TreeMap<>();
     private final Map<Integer, BlockPos> supplies = new TreeMap<>();
     private final Map<Integer, BlockPos> ballasts = new TreeMap<>();
     private final Map<Integer, Double> ballastResistance = new TreeMap<>();
+    private int referenceTerminal;
+    private boolean absolutePlacement;
 
     BoardFixture(GameTestHelper h, Component type, Consumer<PlacedComponent> configure) {
+        this(h, type, configure, null, false);
+    }
+
+    /** An optional absolute placement origin avoids the test structure's rotation/position. */
+    BoardFixture(GameTestHelper h, Component type, Consumer<PlacedComponent> configure, BlockPos offset, boolean restore) {
         this.h = h;
-        h.setBlock(BOARD.below(), Blocks.STONE); h.setBlock(BOARD, ModdedBlocks.CIRCUIT_BOARD.get());
-        board = (CircuitBoardBlockEntity) h.getBlockEntity(BOARD);
+        absolutePlacement = offset != null;
+        var relativeBoard = offset == null ? BOARD : BOARD.offset(offset);
+        boardPosition = absolutePlacement ? relativeBoard : h.absolutePos(relativeBoard);
+        if (!restore) { place(relativeBoard.below(), Blocks.STONE); place(relativeBoard, ModdedBlocks.CIRCUIT_BOARD.get()); }
+        board = (CircuitBoardBlockEntity) h.getLevel().getBlockEntity(boardPosition);
         var desired = new PlacedComponent(type, 6, 6, null); configure.accept(desired);
         var schematic = new CircuitSchematic(); schematic.setName("WWPG " + type.getClass().getSimpleName());
         var pads = new TreeMap<Integer, Point>();
@@ -71,7 +82,7 @@ final class BoardFixture {
             }
         }
         h.assertTrue(routed, "Cannot route independent acceptance board pad nets");
-        board.setSchematic(schematic);
+        if (!restore) board.setSchematic(schematic);
         component = board.getComponentsStream().filter(p -> p.component == type).findFirst().orElseThrow();
         h.assertTrue(board.terminalCount() == ports.size(), "Board external terminal count differs from its fixture wiring");
         for (var bundle : board.getSchematic().findNodeBundles())
@@ -80,11 +91,20 @@ final class BoardFixture {
         int supplyIndex = 0;
         for (int pad : ports.keySet()) {
             var relative = SUPPLIES[supplyIndex++];
-            h.setBlock(relative.below(), Blocks.STONE);
-            h.setBlock(relative, CEEBlocks.CREATIVE_BATTERY.get());
-            h.setBlock(relative.above(), ModdedBlocks.CREATIVE_RESISTOR.get());
-            supplies.put(pad, h.absolutePos(relative)); ballasts.put(pad, h.absolutePos(relative.above()));
+            if (offset != null) relative = relative.offset(offset);
+            if (!restore) {
+                place(relative.below(), Blocks.STONE);
+                place(relative, CEEBlocks.CREATIVE_BATTERY.get());
+                place(relative.above(), ModdedBlocks.CREATIVE_RESISTOR.get());
+            }
+            var supply = absolutePlacement ? relative : h.absolutePos(relative);
+            supplies.put(pad, supply); ballasts.put(pad, supply.above());
+            if (restore) ballastResistance.put(pad, ((ResistorBlockEntity) h.getLevel().getBlockEntity(supply.above())).getValue());
         }
+    }
+
+    private void place(BlockPos at, net.minecraft.world.level.block.Block block) {
+        if (absolutePlacement) h.getLevel().setBlockAndUpdate(at, block.defaultBlockState()); else h.setBlock(at, block);
     }
 
     void connect() {
@@ -93,7 +113,7 @@ final class BoardFixture {
             var supply = supplies.get(pad); var ballast = ballasts.get(pad);
             voltage(pad, 0); resistance(pad, 0.1);
             WiringGameTests.connect(h, supply, 1, ballast, 0, true);
-            WiringGameTests.connect(h, ballast, 1, h.absolutePos(BOARD), ports.get(pad), true);
+            WiringGameTests.connect(h, ballast, 1, boardPosition, ports.get(pad), true);
             if (previous != null) WiringGameTests.connect(h, previous, 0, supply, 0, false);
             previous = supply;
         }
@@ -109,9 +129,14 @@ final class BoardFixture {
                 - new BlockWireEndpoint(pos, 1).getNode(h.getLevel()).getVoltage()) / ballastResistance.get(pad);
     }
     double padVoltage(int pad) {
-        var reference = new BlockWireEndpoint(supplies.values().iterator().next(), 0).getNode(h.getLevel());
-        return new BlockWireEndpoint(h.absolutePos(BOARD), ports.get(pad)).getNode(h.getLevel()).getVoltage() - reference.getVoltage();
+        var reference = new BlockWireEndpoint(supplies.values().iterator().next(), referenceTerminal).getNode(h.getLevel());
+        return new BlockWireEndpoint(boardPosition, ports.get(pad)).getNode(h.getLevel()).getVoltage() - reference.getVoltage();
     }
+    BlockPos supply(int pad) { return supplies.get(pad); }
+    BlockPos ballast(int pad) { return ballasts.get(pad); }
+    Set<Integer> pads() { return ports.keySet(); }
+    int port(int pad) { return ports.get(pad); }
+    void referenceTerminal(int terminal) { referenceTerminal = terminal; }
     double current() { return Math.abs(component.wires.getFirst().current()); }
     void finish() {
         h.assertTrue(!component.destroyed, "Fixture unexpectedly destroyed its component");

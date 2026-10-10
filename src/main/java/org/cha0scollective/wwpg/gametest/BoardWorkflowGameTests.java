@@ -111,7 +111,7 @@ public final class BoardWorkflowGameTests {
         });
     }
 
-    private static CircuitSchematic viaLabelBoard() {
+    static CircuitSchematic viaLabelBoard() {
         var s = new CircuitSchematic(); s.setName("WWPG via and label acceptance");
         s.placeComponent(new PlacedComponent(Components.CONNECTOR.get(), 0, 5, null), 0, 5);
         s.placeComponent(new PlacedComponent(Components.CONNECTOR.get(), 13, 5, null), 13, 5);

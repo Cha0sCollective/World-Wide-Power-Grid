@@ -68,6 +68,10 @@ These diagnostic commands require operator permission level 2:
 | `/wwpg errors` | Recent compatibility errors |
 | `/wwpg at x y z` | Mapped block terminals, voltage, backend, and isolation state |
 
+## Expanded test yard
+
+For a broader hands-on test, use the [expanded yard and station guide](FIXTURE_WORLD.md). It includes transformers, gauges, all built-in board components and panel attachments, and storage. Use the existing beta.2 jar. Extract its separate save folder into `saves`; keep a clean copy before destructive experiments. Loose wire items left during construction are removed before export.
+
 ## Example world
 
 Download [the revised example-world ZIP](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2-example-v2.zip) and extract `WWPG Example - Panel Demo/` into the client's `saves` directory. It appears as **WWPG - Panel Relay Demo** in the world list and uses the published **beta.2 mod jar**. For a dedicated server, use that directory as the server's level directory. Install the dependencies and solver settings above first. The earlier example remains available as a separate download; this revision has its own save folder.

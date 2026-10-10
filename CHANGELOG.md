@@ -1,5 +1,12 @@
 # Changelog
 
+## Expanded test yard revision 1 — 10 October 2026
+
+- Add a separate world with live exhibits for all 28 built-in PG board component types and 11 CEE panel attachment types, seven transformer/variac circuits, three meter banks, 22 device/storage stations, and the existing factory.
+- Include signs, a guidebook, goggles, handheld meters, and parts cabinets. Distinguish working exhibits from inventory-only equipment.
+- Remove loose collectable wire/spool items before export while checking that connected PG wire entities remain. Check native controls, readings, stored charge before recharging, and reopening with both solvers.
+- Exclude a placed circuit design table after discovering a PG 0.6.2 saved-design load error; record it in current status. Preserve the published beta.2 runtime and previous downloads.
+
 ## Example world revision 2 — 9 October 2026
 
 - Replace the quiet capacitor/resistor demonstration with a panel-controlled PG relay board that powers CEE RUN/OFF lamps from a PG supply. Its capacitor creates a visible delay after switch-off.

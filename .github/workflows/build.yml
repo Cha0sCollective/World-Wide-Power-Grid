@@ -30,6 +30,8 @@ jobs:
       - run: ./gradlew runReferenceCompatibilityServer -PtestBackend=${{ matrix.backend }} --no-daemon
       - run: ./gradlew runPackagedGameTestServer -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_example -PtestDirectory=run/example --no-daemon
       - run: ./gradlew runPackagedGameTestServer -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_example -PtestDirectory=run/example -PrestartPhase=VERIFY --no-daemon
+      - run: ./gradlew runPackagedGameTestServer -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_showroom -PtestDirectory=run/showroom --no-daemon
+      - run: ./gradlew runPackagedGameTestServer -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_showroom -PtestDirectory=run/showroom -PrestartPhase=VERIFY --no-daemon
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -39,3 +41,6 @@ jobs:
             build/reports/tests/
             run/logs/
             run/crash-reports/
+            run/showroom/logs/
+            run/showroom/crash-reports/
+            run/showroom/showroom-coverage.json
