@@ -12,7 +12,7 @@ Use a Java 21 JDK. On Windows, use `gradlew.bat` in place of `./gradlew`.
 ./gradlew runServer
 ```
 
-The normal jar is `build/libs/wwpg-0.1.0-beta.2.jar`. The build runs four equation tests and verifies locked upstream artifacts, native binary hashes, and the JNI interface.
+The normal jar is `build/libs/wwpg-0.1.0-beta.3.jar`. The build runs four equation tests and verifies locked upstream artifacts, native binary hashes, and the JNI interface.
 
 The default runtime uses the full published Create 6.0.10-280 jar. `-PpublishedRuntime=false` selects the optional slim development artifact; its Create classes are byte-identical, with fixed Ponder, Flywheel, and Registrate versions matching the full jar's bundled libraries.
 

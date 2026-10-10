@@ -1,5 +1,7 @@
 # Release records
 
+[0.1.0-beta.3/](0.1.0-beta.3/) records the grounding release, the final versioned jar, and its native/Java acceptance. It retains the dependency baseline and reuses the unchanged expanded yard and panel demo. Earlier release artifacts and evidence are preserved.
+
 [examples/expanded-yard-v1/](examples/expanded-yard-v1/) records the expanded test yard, its exact live/inventory coverage, and separate world/evidence downloads for the unchanged beta.2 runtime.
 
 [examples/panel-relay-v2/](examples/panel-relay-v2/) records the visibly testable panel/board example for the existing beta.2 runtime. Its world ZIP and verification archive are additional downloads; earlier artifacts, checksums, and records are preserved.

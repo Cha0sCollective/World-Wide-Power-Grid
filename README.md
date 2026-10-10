@@ -2,11 +2,11 @@
 
 **World-Wide Power Grid (WWPG)** lets **Create: Electro Energetics (CEE)** and **Power Grid (PG)** share electrical circuits. Use either mod's native wire tools to connect supported terminals across both mods. PG solves the circuit; CEE keeps its machines, controls, visuals, heat, damage, and other gameplay.
 
-The latest beta, **0.1.0-beta.2**, focuses on stationary factories. It fixes handheld measurements across the two mods, gives the example heater enough power to work as a burner, and addresses an intermittent error when starting Minecraft. See the [GitHub release](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.2).
+The latest beta, **0.1.0-beta.3**, fixes incorrect circuit voltages after ground connections change or a ground rod's chunk unloads. It retains beta.2's handheld-meter compatibility, working burner example, and startup-registration fix. See the [GitHub release](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.3).
 
 ## Try the beta
 
-[Download the mod jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2.jar) or [the complete bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2-release.zip), which includes the example world, documentation, and test evidence.
+[Download the mod jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.3/wwpg-0.1.0-beta.3.jar) or [the complete bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.3/wwpg-0.1.0-beta.3-release.zip), which includes both example worlds, documentation, and test evidence.
 
 Use **Minecraft 1.21.1**, **NeoForge 21.1.231**, **Java 21**, **Create 6.0.10-280**, **CEE 1.21.1-1.1.3**, **PG 0.6.2**, and **Architectury 13.0.8**. Follow the [installation guide](docs/INSTALL.md), including PG's solver settings.
 
@@ -26,11 +26,11 @@ You still place, assemble, configure, and repair equipment through each mod's no
 
 The [revised example world](docs/INSTALL.md#example-world) lets you try a PG-powered CEE pump, lights, and heater. Flip the CEE panel switch to operate a PG relay board: its green RUN lamp turns on, and switching off produces a short capacitor delay before the red OFF lamp lights.
 
-The [expanded test yard](docs/FIXTURE_WORLD.md) adds seven transformer/variac circuits, both mods' meter banks, every built-in board component and panel attachment, controls, motors, and storage. It uses the same beta.2 jar and includes signs, tools, a guidebook, and parts cabinets.
+The [expanded test yard](docs/FIXTURE_WORLD.md) adds seven transformer/variac circuits, both mods' meter banks, every built-in board component and panel attachment, controls, motors, and storage. The existing download works with beta.3 and includes signs, tools, a guidebook, and parts cabinets. You do not need to replace your world when updating the mod jar.
 
 ## Beta status
 
-The original beta passed **114 automated checks** on Windows and Linux. Beta.2 expands the suite to **118**, adding handheld-meter checks and a startup-registration regression. Further checks cover saving and reopening worlds and **two players wiring, configuring, and measuring the same circuit**. See [current test results](docs/STATUS.md) and the [original release acceptance](docs/FIRST_RELEASE.md).
+The packaged suite contains **121 automated checks**: the original electrical and gameplay coverage, beta.2's handheld-meter/startup checks, and three new grounding regressions. Native and Java backends are checked on Windows and Linux. Real Windows clients also check the downloaded expanded yard's displays and panel interactions. Earlier two-player tests cover wiring, configuration, and handheld measurements; their evidence is recorded separately. See [current test results](docs/STATUS.md) and [beta.3 release records](release/0.1.0-beta.3/).
 
 **Two reload/restart checks remain unexplained:** tests have occasionally read no power in a restored circuit or no charge in a restored circuit-board capacitor. Later runs passed, but we have not confirmed whether these were early readings or gameplay bugs. See [current status and known issues](docs/STATUS.md).
 

@@ -4,6 +4,8 @@ Status checked **10 October 2026**. These facts describe the implementation and 
 
 ## Published beta
 
+**[0.1.0-beta.3](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.3)** publishes the grounding correction from [PR #5](https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/5) under its own jar version. Circuits recalculate correctly when physical grounds or preferred references change, including unloading/reloading a ground rod's chunk. The support set and dependency versions are unchanged. Existing example worlds work with beta.3; replace the WWPG jar on the server and every client. [Release records](../release/0.1.0-beta.3/) identify the final artifact and its checks.
+
 **[0.1.0-beta.2](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.2)** is the handheld-meter, example-world, and startup-registration hotfix. Its final packaged checks passed with native and Java solvers. It adds three meter fixtures and one concurrent-registration regression (118 total), plus actual-client checks for CEE terminal voltage, both meters on PG wires, and both meters on CEE wires. The example heater now has a separate 600 V feed, a basin, and tools at spawn. The original 300 V feed only warmed the heater and did not reach working burner heat.
 
 The original acceptance covered installed meters; it did not validate the handheld interactions reported by a player. Beta.2 fixes wire targeting taking precedence over terminal probes and synchronizes solved server measurements instead of using a client estimate that cannot reconstruct the CEE source. [PR #2](https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/2) contains the change. The original beta.1 downloads and evidence remain unchanged.
@@ -16,7 +18,7 @@ The original acceptance covered installed meters; it did not validate the handhe
 
 The declared scope is stationary interoperability: 95 block/assembly behaviors, 11 built-in CEE panel attachments, and 28 built-in PG board components. See [SUPPORT.md](SUPPORT.md) for the inventory and exclusions, and [INSTALL.md](INSTALL.md) for the exact dependencies and solver settings.
 
-## Grounding correction in development
+## Grounding correction in beta.3
 
 The published beta.2 can retain incorrect voltages when a ground connection changes without replacing the circuit's nodes. This also affects moving the preferred voltage reference and unloading a chunk containing a ground rod. PG 0.6.2 skips its incremental equation update for ground connections, which have only one terminal.
 
@@ -24,7 +26,7 @@ The source correction rebuilds the affected equations when grounding changes, pr
 
 The same grounding-fix jar passed [real Windows client checks of the downloaded expanded yard](../release/fixes/grounding/client/) with native and Java backends, including a native save/restart. Each client visited 69 stations, checked 54 synchronized gauges, and switched the factory and P2 panel through actual client interactions. All 282 PG wires remained connected. These checks cover the yard's 85 live behavior groups; they do not resolve the intermittent failures below.
 
-This is an unreleased source fix; the published beta.2 downloads are unchanged. It does not establish the causes of the earlier intermittent chunk-reload or board-restart failures below.
+This correction is released in beta.3; published beta.2 downloads and earlier evidence remain unchanged. It does not establish the causes of the earlier intermittent chunk-reload or board-restart failures below.
 
 ## Test evidence
 
@@ -61,7 +63,7 @@ The failed run did not capture those diagnostics, so the rerun cannot establish 
 
 Building the expanded yard exposed `powergrid:circuit_design_table` throwing a `NullPointerException` when loading its saved schematic. PG 0.6.2's `CircuitDesignTableBlockEntity.read` accesses `level.registryAccess()` before the block entity has a level. The table could subsequently receive power, so a powered-block check alone missed the failed load. The diagnostic log is retained in the expanded-yard evidence archive.
 
-The downloadable yard excludes a placed design table. Its item remains in the parts cabinets, and the live routing board demonstrates pins, traces, a via, and a label. The existing design/copy workflow tests do not establish saved-table persistence. The published beta.2 jar is unchanged; this issue is open.
+The downloadable yard excludes a placed design table. Its item remains in the parts cabinets, and the live routing board demonstrates pins, traces, a via, and a label. The existing design/copy workflow tests do not establish saved-table persistence. This issue remains open in beta.3.
 
 ## Startup registration race
 
