@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "target": "0.1.0-beta.2",
+  "equation_tests": 4,
+  "tested_artifact": {
+    "file": "wwpg-0.1.0-beta.2.jar",
+    "sha256": "1c4963b5821e37221d5c3f7d37d6d0e2749252eb57c7ccf1e4b99009bee3db93"
+  },
+  "ci_source_commit": "cd41b24695c92e1fee82a1b1cc4c0adf68a3639e",
+  "packaged_electrical_gameplay_fixtures": 117,
+  "packaged_fixtures": 118,
+  "startup_concurrency_fixtures": 1,
+  "registration_regression": "Fails with a stranded callback when synchronization is disabled; passes with the fix enabled",
+  "startup_diagnostic_ci": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38006974291",
+  "checks": [
+    {
+      "log": "build/handheld-release-native-setup.log",
+      "passed_fixtures": 118,
+      "sha256": "981959c91942ee4f04be7c4a94c979b234ac9c2d6eb095076a09fa7eb685bd35"
+    },
+    {
+      "log": "build/handheld-release-native-verify.log",
+      "passed_fixtures": 118,
+      "sha256": "122e03f1502c38792225a4c6dcc189886dd4ec9eadc48f965556a609219b31df"
+    },
+    {
+      "log": "build/handheld-release-java-setup.log",
+      "passed_fixtures": 118,
+      "sha256": "0c32e64fd363d9605cb0587dd16f2737d56d62a503f39a175697efa15432d394"
+    },
+    {
+      "log": "build/handheld-release-java-verify.log",
+      "passed_fixtures": 118,
+      "sha256": "895c52963964aef2df8ca14d5990a997765db4b2abdc1d2bb2af2e278053abd0"
+    },
+    {
+      "log": "build/handheld-release-example-setup.log",
+      "passed_fixtures": 1,
+      "sha256": "87b439e11aa5de95130579c76b5ebf9e02d950ea78856bc0ad898c7bd5d349ed"
+    },
+    {
+      "log": "build/handheld-release-example-verify.log",
+      "passed_fixtures": 1,
+      "sha256": "0f3fc98e33281b6e51abf5feadc3f9f4fa0b3bd99d821514dd694871fdaf2f00"
+    },
+    {
+      "log": "build/handheld-release-multiplayer-server.log",
+      "passed_fixtures": 1,
+      "sha256": "8c2dd518b9cc9b07bc647e1fdd58fa44c1d9b42dba106dd0332db77b445006a2"
+    },
+    {
+      "log": "build/handheld-release-multiplayer-client-a.log",
+      "passed_fixtures": null,
+      "sha256": "6c365569385b66ea2e97b4adb856be31de7e6d28d2ce4e297691787362388e3b"
+    },
+    {
+      "log": "build/handheld-release-multiplayer-client-b.log",
+      "passed_fixtures": null,
+      "sha256": "f54303b50d4f1ab2e0b16986c58d63a7afa81b73d466f888396b925ef4ace11f"
+    }
+  ],
+  "ci": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38008086944",
+  "local_platform": "Windows x86-64, Java 21; native v7 and Java",
+  "real_clients": "Two packaged Windows clients; terminal voltage and both wire systems' handheld current readings",
+  "known_issues": [
+    "Earlier beta.1 Linux/native chunk-reload failure remains unexplained; no fix claimed.",
+    "A local Windows/native board-capacitor restart assertion read 0 V at tick 20. The diagnostic rerun retained charge; the original cause remains unresolved."
+  ],
+  "intermittent_board_restart": {
+    "failed_log": "build/handheld-board-restart-first-failure.log",
+    "failed_log_sha256": "47332dd613c3789865c1dd7f7ea095789e927c612d0556c5919289c64809ff34",
+    "diagnostic_log": "build/handheld-board-restart-diagnostic.log",
+    "diagnostic_log_sha256": "4acc8cf60bd65a470b7c1610ea930fe9bd11d3db9d5262c81333ed12c5608813",
+    "status": "Unresolved; passing retries do not distinguish lost charge from an early live reading."
+  }
+}

@@ -12,7 +12,7 @@ Use a Java 21 JDK. On Windows, use `gradlew.bat` in place of `./gradlew`.
 ./gradlew runServer
 ```
 
-The normal jar is `build/libs/wwpg-0.1.0-beta.1.jar`. The build runs four equation tests and verifies locked upstream artifacts, native binary hashes, and the JNI interface.
+The normal jar is `build/libs/wwpg-0.1.0-beta.2.jar`. The build runs four equation tests and verifies locked upstream artifacts, native binary hashes, and the JNI interface.
 
 The default runtime uses the full published Create 6.0.10-280 jar. `-PpublishedRuntime=false` selects the optional slim development artifact; its Create classes are byte-identical, with fixed Ponder, Flywheel, and Registrate versions matching the full jar's bundled libraries.
 
@@ -20,7 +20,7 @@ Published checksums and matching source references are in [artifacts.json](../re
 
 ## Packaged regression suite
 
-The 114 GameTests use real upstream devices, item interactions, and server hooks. Electrical checks cover polarity, grounding, currents, transient state, RMS/phase, transformer relationships, and nonlinear electronics. Gameplay checks cover outputs, assembly, controls, protection, repair, and failures.
+The 118 GameTests include 117 electrical/gameplay/lifecycle fixtures and one concurrent-registration regression. Electrical checks cover polarity, grounding, currents, transient state, RMS/phase, transformer relationships, and nonlinear electronics. Gameplay checks cover outputs, assembly, controls, protection, repair, and failures. Three handheld-meter fixtures were added after beta.1; the real-client fixture additionally checks targeting, item packets, and displayed readings. The startup regression uses an isolated Registrate instance to force a callback to arrive during entry publication and checks that the callback is retained.
 
 Run SETUP and VERIFY in separate processes using the same isolated test directory:
 
@@ -37,9 +37,11 @@ Reserved chunks `(64,64)` and `(96,96)` check restart persistence for wires, set
 
 **Known issue:** `chunkReloadRebindsMixedEndpoints` has failed once in Linux/native CI, reading 0 V instead of 10 V after reload. It uses fixed tick deadlines while entity loading is asynchronous. That makes timing a candidate cause; instrumentation is still needed to establish whether the issue is in the fixture or compatibility lifecycle. See [the failure record](STATUS.md#unresolved-chunk-reload-failure).
 
+`restartRetainsPanelTerminalsBoardIdentityAndCharge` also read 0 V once in a local Windows/native run at tick 20. A diagnostic rerun retained about 9.869 V in the saved property and internal history. The failed run lacked that instrumentation, so the cause remains open; see [the restart record](STATUS.md#unresolved-board-restart-reading). Keep the actual persistence assertions when investigating either failure.
+
 ## Upstream reference worlds
 
-Reference tests first use the upstream solvers with only the missing-native-resource repair, then reopen the saved circuits with full compatibility:
+Reference tests first use the upstream solvers with the missing-native-resource repair and atomic registration bookkeeping, then reopen the saved circuits with full electrical compatibility:
 
 ```sh
 ./gradlew runUpstreamReferenceServer -PtestBackend=NATIVE --no-daemon
@@ -55,7 +57,7 @@ Build, restart, and export the example separately from the regression world:
 ```sh
 ./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PtestNamespaces=wwpg_example -PtestDirectory=run/example --no-daemon
 ./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PtestNamespaces=wwpg_example -PtestDirectory=run/example -PrestartPhase=VERIFY --no-daemon
-python tools/export_example.py
+python tools/export_example.py --output build/distributions/wwpg-0.1.0-beta.2-example.zip
 ```
 
 The ZIP is written to `build/distributions`. It contains the small demonstration described in [INSTALL.md](INSTALL.md#example-world). The exporter creates a deterministic archive of the supplied saved world; generating a fresh Minecraft world can produce a different seed and artifact hash.

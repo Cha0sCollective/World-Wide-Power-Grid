@@ -4,6 +4,8 @@
 
 The beta is [published on GitHub](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.1), and its implementation was [merged into `main`](https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/1). See [STATUS.md](STATUS.md) for later CI results and the unresolved chunk-reload failure.
 
+This page records the original beta.1 acceptance. Beta.2 adds handheld-meter coverage and corrects the example heater's power supply; see [current support](SUPPORT.md) and [hotfix records](../release/0.1.0-beta.2/).
+
 ## Fixed baseline
 
 Minecraft 1.21.1, NeoForge 21.1.231, Java 21, Create 6.0.10-280, CEE 1.21.1-1.1.3, PG 0.6.2, and Architectury 13.0.8. The dependency list is also in [INSTALL.md](INSTALL.md); published artifact hashes and source references are in [artifacts.json](../release/artifacts.json).

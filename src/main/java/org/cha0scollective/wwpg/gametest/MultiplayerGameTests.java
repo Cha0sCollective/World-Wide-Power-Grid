@@ -79,7 +79,14 @@ public final class MultiplayerGameTests {
                 announce(players,"verify");phase[0]=3;phaseTick[0]=level.getGameTime();
             }else if(phase[0]==3&&acked("verified",players)){
                 h.assertTrue(!acked("failed",players),"A real client reported stale displays or missing wire rendering data");
-                DynamicGameTests.audit(h);announce(players,"done");phase[0]=4;
+                for(var p:players){p.setItemInHand(InteractionHand.MAIN_HAND,p.getGameProfile().getName().endsWith("A")?ModdedItems.MULTIMETER.asStack():CEEItems.CLAMP_METER.asStack());p.inventoryMenu.broadcastChanges();}
+                announce(players,"meter-voltage");phase[0]=4;phaseTick[0]=level.getGameTime();
+            }else if(phase[0]==4&&acked("meter-voltage",players)){
+                announce(players,"meter-pg-current");phase[0]=5;phaseTick[0]=level.getGameTime();
+            }else if(phase[0]==5&&acked("meter-pg-current",players)){
+                announce(players,"meter-current");phase[0]=6;phaseTick[0]=level.getGameTime();
+            }else if(phase[0]==6&&acked("meter-current",players)){
+                DynamicGameTests.audit(h);announce(players,"done");phase[0]=7;
                 h.runAfterDelay(50,h::succeed);
             }
             if(!acknowledgments.getOrDefault("failed",Set.of()).isEmpty())h.fail("Real client validation failed; inspect its client log");

@@ -1,6 +1,6 @@
 # Install and try WWPG
 
-**0.1.0-beta.1** is the first stationary compatibility beta. Read [current status](STATUS.md) for the unresolved chunk-reload test failure and [supported content](SUPPORT.md) for the release's coverage.
+**0.1.0-beta.2** fixes handheld meters across the two mods, improves the example world's heater, and addresses an intermittent startup error. Read [current status](STATUS.md) for unresolved reload/restart test failures and [supported content](SUPPORT.md) for the release's coverage.
 
 ## Required versions
 
@@ -14,13 +14,13 @@ Install this exact combination on the server and every client. Use Java 21.
 | Create: Electro Energetics | 1.21.1-1.1.3 |
 | Power Grid | Minecraft 1.21.1, 0.6.2 |
 | Architectury API | NeoForge 13.0.8 |
-| WWPG | 0.1.0-beta.1 |
+| WWPG | 0.1.0-beta.2 |
 
 Use Create's full published release jar. CEE, PG, and Create download references and checksums are recorded in [artifacts.json](../release/artifacts.json). The WWPG download contains the compatibility mod and native solver resources; install the required upstream mods separately.
 
 ## Installation
 
-1. [Download the WWPG jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.1/wwpg-0.1.0-beta.1.jar).
+1. [Download the WWPG jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2.jar).
 2. Put it and the required dependency jars in the instance's `mods` directory.
 3. Launch once to generate configuration, then stop the game or server.
 4. In `config/powergrid-server.toml`, edit the existing solver settings to the values below. Keep the other PG solver settings at their defaults.
@@ -50,6 +50,16 @@ PG retains its Java backend and fallback. The same electrical suite has passing 
 
 Use the upstream wire, spool, and cord tools on supported terminals. Wire lengths, types, costs, and cutting follow their native workflows. PG cords use sockets, junctions, and split ends; hidden cord terminals are not bare-wire attachment points. CEE insulators and structural poles retain their native role.
 
+## Handheld meters
+
+- **Power Grid multimeter, voltage:** right-click two accessible terminals to attach the probes. These can be CEE terminals, PG terminals, or one of each. Walk around a machine if its other terminal is on the back. Shift-right-click releases the probes.
+- **Power Grid multimeter, current:** right-click a wire from either mod. Selecting a wire switches to current mode; selecting a terminal switches back to voltage mode.
+- **CEE clamp meter, current:** hold right-click while aiming at a wire from either mod. Release right-click or look away to stop measuring. A clamp measures a wire's current, not a terminal's voltage.
+
+Replace the older WWPG jar on the server and every client when upgrading. Keep the same dependency versions and solver settings. The original beta.1 example remains underpowered at its heater; use the updated example below for the working burner demonstration.
+
+## Diagnostic commands
+
 These diagnostic commands require operator permission level 2:
 
 | Command | What it shows |
@@ -60,12 +70,13 @@ These diagnostic commands require operator permission level 2:
 
 ## Example world
 
-Download [the example-world ZIP](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.1/wwpg-0.1.0-beta.1-example.zip) and extract `WWPG Example/` into the client's `saves` directory. For a dedicated server, use that directory as the server's level directory. Install the dependencies and solver settings above first.
+Download [the example-world ZIP](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2-example.zip) and extract `WWPG Example/` into the client's `saves` directory. For a dedicated server, use that directory as the server's level directory. Install the dependencies and solver settings above first. Keep a copy of any example world you have edited before replacing it.
 
 Spawn is at `(8, 64, 16)`:
 
 - **Northern circuit:** a CEE source supplies a PG resistor and capacitor board through a CEE control/meter panel. The panel's **Factory enable** switch controls the storage circuit.
-- **Southern circuit:** a PG source powers CEE lighting, heating, and a water pump connected to Create tanks and pipes.
+- **Southern circuits:** a 300 V PG source powers CEE lighting and a water pump connected to Create tanks and pipes. A separate 600 V PG source powers the CEE heater beneath a Create basin; after warming up, it reaches usable burner heat.
+- **Tools at spawn:** the chest at `(6, 64, 16)` contains both meters and both wire tools.
 
 The world has passed creation and restart checks. It provides a repeatable small demonstration; it does not establish large-network performance. Maintainers can rebuild it with [the development commands](DEVELOPMENT.md#example-world).
 

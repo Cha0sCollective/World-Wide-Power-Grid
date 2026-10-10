@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "target": "0.1.0-beta.2",
+  "base_matrix": "release/content-matrix.json",
+  "content": [
+    {
+      "id": "powergrid:multimeter",
+      "status": "verified",
+      "behavior": "Voltage probes on CEE and mixed terminals; server-solved current on both wire systems",
+      "fixtures": ["multimeterReadsCeeAndMixedTerminals", "multimeterReadsCeeWireAndClearsCutConnection", "twoRealClients"]
+    },
+    {
+      "id": "electroenergetics:clamp_meter",
+      "status": "verified",
+      "behavior": "Hold to read server-solved current on PG wires; retain native CEE wire measurement",
+      "fixtures": ["clampAttachesToPgWireAndReleases", "twoRealClients"]
+    }
+  ],
+  "limits": "Main-hand native interactions; PG voltage probes require accessible terminals. Clamp meters measure wires, not terminal voltage. Optional lineman-stick extension interactions are outside these checks."
+}

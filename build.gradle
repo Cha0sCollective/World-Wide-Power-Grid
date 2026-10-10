@@ -209,7 +209,7 @@ tasks.register('prepareReferenceConfig') {
         target.parentFile.mkdirs()
         target.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson([
             required: true, minVersion: '0.8', package: 'org.cha0scollective.wwpg.mixin',
-            compatibilityLevel: 'JAVA_21', mixins: ['NativeResourceMixin'],
+            compatibilityLevel: 'JAVA_21', mixins: ['NativeResourceMixin', 'RegistrateCallbacksMixin'],
             client: [], injectors: [defaultRequire: 1]
         ])) + '\n'
     }
