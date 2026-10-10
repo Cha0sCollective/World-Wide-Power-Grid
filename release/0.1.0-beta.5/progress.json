@@ -8,36 +8,104 @@
     {
       "stage": 1,
       "status": "in_progress",
-      "implemented": ["Runtime inventory accounting", "Separate BASE and PINOUT profiles", "Optional artifact and checksum lock", "Eight CI platform/backend/profile combinations"],
-      "remaining": ["Complete behavior expectations, terminal models and station assignments", "Fresh graphical startup in both profiles"]
+      "implemented": [
+        "Runtime inventory accounting",
+        "Separate BASE and PINOUT profiles",
+        "Optional artifact and checksum lock",
+        "Eight CI platform/backend/profile combinations"
+      ],
+      "remaining": [
+        "Complete behavior expectations, terminal models and station assignments",
+        "Fresh graphical startup in both profiles"
+      ]
     },
     {
       "stage": 2,
       "status": "in_progress",
-      "implemented": ["Reproduced and fixed unassigned-world registry access", "Reproduced and fixed missing inventory serialization", "Reproduced and fixed inventory edits not scheduling a world save", "Native saved-design copying, assembly, placement and power fixture", "Five actual chunk cycles with delayed cord entity loading"],
-      "remaining": ["Graphical design editing, saving and reopening", "Remaining native tool, wire attachment, panel editing and replacement workflows", "Complete packaged restart matrix"]
+      "implemented": [
+        "Reproduced and fixed unassigned-world registry access",
+        "Reproduced and fixed missing inventory serialization",
+        "Reproduced and fixed inventory edits not scheduling a world save",
+        "Native saved-design copying, assembly, placement and power fixture",
+        "Five actual chunk cycles with delayed cord entity loading"
+      ],
+      "remaining": [
+        "Graphical design editing, saving and reopening",
+        "Remaining native tool, wire attachment, panel editing and replacement workflows",
+        "Complete packaged restart matrix"
+      ]
     },
     {
       "stage": 3,
       "status": "in_progress",
-      "implemented": ["Initial powered fixtures for stationary loads, batteries, carbon pile, native instruments and FE conversion"],
-      "remaining": ["CEE poles, mounts, insulators and catenary assemblies", "CEE transformer cores, radiators and voltage regulator", "Large and vertical PG generators", "Ceiling solar", "String and growth lights", "Broken-bulb replacement", "Magnetizing recipes and fan processing", "CRT variants and punch-card workflows", "External FE provider/receiver fixtures and complete converter direction/accounting coverage", "Linked Nether transformers and portal lifecycle"]
+      "implemented": [
+        "Initial powered fixtures for stationary loads, batteries, carbon pile, native instruments and FE conversion",
+        "Native CEE core placement, turn changes, radiator cooling and half removal",
+        "Neutral voltage regulator reproduced and corrected; step-up/down source-change fixture",
+        "Native broken-bulb repair and overload cycle retains both wire systems",
+        "Ceiling solar installation, shading and wrench removal",
+        "Growth-lamp native crop effects and power-off behavior",
+        "Native punch-card insertion, all sixteen rows and extraction drive eight mixed loads",
+        "All three CRT electrical models, heater/grid cutoff and saved color",
+        "Native FE source/sink provider/receiver, limits and exactly-once native accounting",
+        "Reproduced and corrected Nether-transformer saved-history indexing"
+      ],
+      "remaining": [
+        "CEE poles, mounts, insulators and catenary assemblies",
+        "Large and vertical PG generators and housing/winding workflows",
+        "String-light construction and repair",
+        "Magnetizing recipes and fan processing",
+        "CRT graphical beams/encasing and punch-card editing",
+        "Remaining native battery/solar assembly workflows",
+        "Linked Nether transformers and portal lifecycle",
+        "Content-specific restart/reload checks and playable demonstrations"
+      ]
     },
     {
       "stage": 4,
       "status": "pending",
-      "remaining": ["0.1% packaged DC references", "1% recorded storage windows", "Complete AC, phase, polarity, reflected impedance and current relationships", "Pinned upstream heating, charging, protection and failure timing within one tick", "Mixed nonlinear rectifier, switching and reactive correctness", "Expanded topology and exactly-once state acceptance"]
+      "remaining": [
+        "0.1% packaged DC references",
+        "1% recorded storage windows",
+        "Complete AC, phase, polarity, reflected impedance and current relationships",
+        "Pinned upstream heating, charging, protection and failure timing within one tick",
+        "Mixed nonlinear rectifier, switching and reactive correctness",
+        "Expanded topology and exactly-once state acceptance"
+      ]
     },
     {
       "stage": 5,
       "status": "in_progress",
-      "implemented": ["Actual native peripheral provider and Lua VM exercise all eight methods", "Mixed loads on all eight native pins", "Both wire systems", "Signed voltage checks against independent load measurements", "Invalid input checks", "Native saved pin state before first solve", "Computer reboot"],
-      "remaining": ["Meters, panel inputs and board-controlled equipment", "Peripheral detach/reattach and block replacement", "Actual chunk cycles and cold world restarts", "Playable start/stop demonstration"]
+      "implemented": [
+        "Actual native peripheral provider and Lua VM exercise all eight methods",
+        "Mixed loads on all eight native pins",
+        "Both wire systems",
+        "Signed voltage checks against independent load measurements",
+        "Invalid input checks",
+        "Native saved pin state before first solve",
+        "Computer reboot"
+      ],
+      "remaining": [
+        "Meters, panel inputs and board-controlled equipment",
+        "Peripheral detach/reattach and block replacement",
+        "Actual chunk cycles and cold world restarts",
+        "Playable start/stop demonstration"
+      ]
     },
     {
       "stage": 6,
       "status": "pending",
-      "remaining": ["Complete Stationary Test Yard", "Complete Stationary Test Yard - Pinout", "Every declared behavior has a live station and instructions", "Goggles and tools at spawn", "Visible or audible outputs and repair demonstrations", "Accessible Nether route", "Readable Lua programs", "Construction wire drop cleanup", "Extracted ZIP acceptance"]
+      "remaining": [
+        "Complete Stationary Test Yard",
+        "Complete Stationary Test Yard - Pinout",
+        "Every declared behavior has a live station and instructions",
+        "Goggles and tools at spawn",
+        "Visible or audible outputs and repair demonstrations",
+        "Accessible Nether route",
+        "Readable Lua programs",
+        "Construction wire drop cleanup",
+        "Extracted ZIP acceptance"
+      ]
     }
   ],
   "release_blockers": [
@@ -47,6 +115,7 @@
     "Partial unload, changed grounds, disconnected sources, failures, split/merge and independently loaded Nether ends",
     "Fresh graphical checks on both backends and two real dedicated-server clients",
     "Complete diagnostics for readiness, isolation, device and terminal identities",
-    "Final jar, both worlds, manifests, checksums, player instructions and release notes"
+    "Final jar, both worlds, manifests, checksums, player instructions and release notes",
+    "Investigate prolonged Linux/native/Pinout CI slowdown; cancelled duplicate run has incomplete proof"
   ]
 }

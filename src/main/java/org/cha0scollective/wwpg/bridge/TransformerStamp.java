@@ -12,7 +12,10 @@ public final class TransformerStamp {
     public TransformerStamp(ElectricalNetwork network, IElectricNode p1, IElectricNode p2,
                             IElectricNode s1, IElectricNode s2, double ceeRatio) {
         pgRatio = ratio(ceeRatio);
-        coupling = TransformerCoupling.create(pgRatio, p1, p2, s1, s2);
+        // CEE imposes Vprimary = ratio * Vsecondary. PG imposes
+        // ratio * Vprimary = Vsecondary, so exchange the winding roles.
+        // This also represents CEE's valid zero-ratio regulator position.
+        coupling = TransformerCoupling.create(pgRatio, s1, s2, p1, p2);
         network.addNode(coupling);
     }
     public void update(double ceeRatio) {
@@ -20,13 +23,13 @@ public final class TransformerStamp {
         coupling.setRatio(pgRatio);
     }
     public static float ratio(double ceeRatio) {
-        float converted = (float) (1 / ceeRatio);
-        if (!Double.isFinite(ceeRatio) || ceeRatio == 0 || !Float.isFinite(converted) || converted == 0)
+        float converted = (float) ceeRatio;
+        if (!Double.isFinite(ceeRatio) || !Float.isFinite(converted) || (ceeRatio != 0 && converted == 0))
             throw new IllegalArgumentException("Invalid transformer ratio " + ceeRatio);
         return converted;
     }
-    public double primaryCurrent() { return pgRatio * coupling.getStateValue(); }
-    public double secondaryCurrent() { return -coupling.getStateValue(); }
+    public double primaryCurrent() { return -coupling.getStateValue(); }
+    public double secondaryCurrent() { return pgRatio * coupling.getStateValue(); }
     public ElectricalNetwork network() { return coupling.getNetwork(); }
     public void remove() { coupling.remove(); }
 }

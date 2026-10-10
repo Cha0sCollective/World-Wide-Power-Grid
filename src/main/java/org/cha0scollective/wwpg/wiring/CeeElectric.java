@@ -34,7 +34,7 @@ public final class CeeElectric implements IElectric {
     public static void register(IEventBus bus) { TYPES.register(bus); }
     private final Level level;
     private final BlockPos pos;
-    private final ElectricalDeviceBlock<?> block;
+    private ElectricalDeviceBlock<?> block;
     private final EndpointBehaviour behaviour;
 
     CeeElectric(Level level, BlockPos pos, ElectricalDeviceBlock<?> block) {
@@ -44,6 +44,15 @@ public final class CeeElectric implements IElectric {
         behaviour = new EndpointBehaviour(holder);
     }
     ElectricalDeviceBlock<?> block() { return block; }
+    boolean updateBulbVariant(BlockState state) {
+        // Native bulb failure and repair retain the same device and terminals.
+        // Keep the sidecar, nodes and wire owners through that block transition.
+        if (!(block instanceof com.george_vi.electroenergetics.content.bulb.BulbBlock)
+                || !(state.getBlock() instanceof com.george_vi.electroenergetics.content.bulb.BulbBlock replacement)
+                || replacement.getDevice() != block.getDevice()) return false;
+        block = replacement;
+        return true;
+    }
     public ElectricBehaviour behaviour() { return behaviour; }
     private Map<Integer, Vec3> accessible() {
         var state = Terminals.loadedState(level, pos);

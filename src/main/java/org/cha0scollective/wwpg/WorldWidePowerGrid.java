@@ -20,6 +20,8 @@ public final class WorldWidePowerGrid {
 
     public WorldWidePowerGrid(net.neoforged.bus.api.IEventBus modBus) {
         org.cha0scollective.wwpg.wiring.CeeElectric.register(modBus);
+        if (Boolean.getBoolean("wwpg.test.energyFixtures"))
+            modBus.addListener(org.cha0scollective.wwpg.gametest.FixtureEnergyCapabilities::register);
         LOGGER.info("WWPG: CEE 1.1.3 / Power Grid 0.6.2 compatibility loaded");
         NeoForge.EVENT_BUS.addListener(this::commands);
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.gametest.MultiplayerGameTests::commands);
