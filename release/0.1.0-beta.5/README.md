@@ -198,3 +198,28 @@ Lua reports and artifact checksum are retained in `evidence/pinout-lifecycle`.
 Passing retries of the earlier harness are not counted as a resolution. Complete
 playable worlds, graphical/two-client checks and final release acceptance remain
 open.
+
+The reference-correctness batch compares seven additional circuits with the actual
+pinned upstream simulation: CEE bulb failure, heater transitions, fuse trip and
+survival repair, accumulator storage, PG acid and potato batteries, and reactive
+diode circuits from both mods. Events agree within one game tick and recorded
+storage changes agree within 1%. Independent accumulator equations also cover
+one, two and sixteen substeps without advancing state twice.
+
+A tighter diode comparison reproduced a compatibility defect: PG discarded
+conductance changes below `1e-9 S` while its wire still remembered the new value.
+Repeated small changes therefore left CEE diode properties and the matrix out of
+step. WWPG now applies every nonzero change for its CEE property wires, retaining
+PG's exact-zero fast path and the native thresholds for PG content. Two isolated
+control jars reproduce lost small changes and unnecessary unchanged updates on
+both solvers; the corrected jar passes both regressions.
+
+On Windows, that frozen jar passes all 36 focused accuracy checks on each solver,
+plus nine native upstream and nine compatibility reference checks on each solver
+at normal precision and a tighter `1e-10 A` current residual. Near-zero voltage
+comparisons explicitly account for PG's current tolerance and load resistance.
+Signed CEE source equation vectors seed its native saved field because its player
+UI clamps to nonnegative voltages; the native UI remains unchanged. Raw traces,
+artifact proofs, controls and fixture corrections are retained in
+[`evidence/native-reference-correctness`](evidence/native-reference-correctness).
+Stage CI and all final release gates remain required.

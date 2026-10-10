@@ -15,7 +15,7 @@ public final class LinearBranch {
     public LinearBranch(ElectricalNetwork network, IElectricNode first, IElectricNode second,
                         ElectricalProperties properties, boolean voltageSource) {
         validate(properties);
-        norton = new CurrentSourceWire(first, second, properties.conductance());
+        norton = new PropertyCurrentSourceWire(first, second, properties.conductance());
         network.addWire(norton);
         voltage = voltageSource ? new VoltageSourceCoupling(first, second, 0f) : null;
         if (voltage != null) network.addNode(voltage);

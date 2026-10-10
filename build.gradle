@@ -243,7 +243,7 @@ tasks.register('prepareReferenceConfig') {
         target.parentFile.mkdirs()
         target.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson([
             required: true, minVersion: '0.8', package: 'org.cha0scollective.wwpg.mixin',
-            compatibilityLevel: 'JAVA_21', mixins: ['NativeResourceMixin', 'RegistrateCallbacksMixin'],
+            compatibilityLevel: 'JAVA_21', mixins: ['NativeResourceMixin', 'RegistrateCallbacksMixin', 'ElectricalNetworkAccessor'],
             client: [], injectors: [defaultRequire: 1]
         ])) + '\n'
     }
@@ -264,7 +264,7 @@ tasks.register('referenceJar', Jar) {
         javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(21) }
         doFirst {
             def run = developmentRun.get()
-            def directory = layout.projectDirectory.dir('run/reference').asFile
+            def directory = file(providers.gradleProperty('referenceDirectory').getOrElse('run/reference'))
             directory.mkdirs()
             workingDir = directory
             mainClass = run.mainClass
@@ -282,12 +282,21 @@ tasks.register('referenceJar', Jar) {
                     .replaceAll('(?m)^-Dneoforge.enabledGameTestNamespaces=.*$', '-Dneoforge.enabledGameTestNamespaces=wwpg_reference')
                     .replaceAll('(?m)^-Dwwpg.test.restartPhase=.*$', "-Dwwpg.test.restartPhase=${upstream ? 'SETUP' : 'VERIFY'}")
                 return "@${replacement.absolutePath}"
-            } + ['-Dwwpg.test.packaged=true', "-Dwwpg.test.upstreamReference=${upstream}"]
+            } + ['-Dwwpg.test.packaged=true', "-Dwwpg.test.upstreamReference=${upstream}",
+                "-Dwwpg.test.tightReferencePrecision=${providers.gradleProperty('tightReferencePrecision').getOrElse('false')}"]
             def packaged = artifact.get().archiveFile.get().asFile
             classpath = run.classpathProvider.filter { !sourceSets.main.output.files.contains(it) } + files(packaged)
             def env = new HashMap(run.environmentProperty.get())
             env['MOD_CLASSES'] = "wwpg%%${packaged.absolutePath}"
             environment env
+            def stamp = java.time.Instant.now().toString().replace(':', '-')
+            def proof = [schema: 1, artifact: packaged.name,
+                sha256: java.security.MessageDigest.getInstance('SHA-256').digest(packaged.bytes).encodeHex().toString(),
+                profile: testProfile, backend: providers.gradleProperty('testBackend').getOrElse('NATIVE'),
+                upstream: upstream, started: stamp, namespaces: 'wwpg_reference']
+            def evidence = new File(directory, "reference-packaged-${stamp}.json")
+            evidence.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(proof)) + '\n'
+            extensions.extraProperties.set('wwpgPackagedEvidence', evidence)
         }
     }
 }

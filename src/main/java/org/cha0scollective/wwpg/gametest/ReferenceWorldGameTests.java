@@ -21,9 +21,19 @@ import org.patryk3211.powergrid.collections.ModdedBlocks;
 @GameTestHolder("wwpg_reference")
 @PrefixGameTestTemplate(false)
 public final class ReferenceWorldGameTests {
+    @net.minecraft.gametest.framework.BeforeBatch(batch="reference")
+    public static void configureNativeReferenceBackend(net.minecraft.server.level.ServerLevel level) {
+        DynamicGameTests.substeps(level);
+        com.george_vi.electroenergetics.config.CEEConfigs.server().simulationConfig.microTicks.set(16);
+        if (Boolean.getBoolean("wwpg.test.tightReferencePrecision")) {
+            var solver = org.patryk3211.powergrid.collections.ModdedConfigs.server().electricity.solver;
+            solver.solverAbsolutePrecision.set(1e-10); solver.solverAbsoluteMinimumPrecision.set(1e-10);
+            org.patryk3211.powergrid.electricity.GlobalElectricNetworks.configsReloaded();
+        }
+    }
     private static final BlockPos CEE_SOURCE=new BlockPos(8,64,8),CEE_LOAD=CEE_SOURCE.offset(3,0,0),CAP=CEE_SOURCE.offset(0,0,3);
     private static final BlockPos PG_SOURCE=new BlockPos(8,64,24),PG_BOARD=PG_SOURCE.offset(3,0,0),PG_LOAD=PG_SOURCE.offset(0,0,3);
-    @GameTest(template="empty",timeoutTicks=120) public static void nativeCeeStationaryWorldRemainsFunctional(GameTestHelper h){
+    @GameTest(template="empty",batch="reference",timeoutTicks=120) public static void nativeCeeStationaryWorldRemainsFunctional(GameTestHelper h){
         var level=h.getLevel();level.setChunkForced(0,0,true);level.getChunk(0,0);boolean upstream=Boolean.getBoolean("wwpg.test.upstreamReference");
         if(upstream){
             for(var p:new BlockPos[]{CEE_SOURCE,CEE_LOAD,CAP}){level.setBlockAndUpdate(p,Blocks.AIR.defaultBlockState());level.setBlockAndUpdate(p.below(),Blocks.STONE.defaultBlockState());}
@@ -37,7 +47,7 @@ public final class ReferenceWorldGameTests {
             h.assertTrue(results!=null,"Pinned native CEE circuit produced no result");near(h,results.getVoltageAt(CEE_LOAD,0,1),10,.1,"Saved CEE reference voltage");near(h,Math.abs(results.getCurrentThrough(CEE_LOAD,0,1)),.1,.001,"Saved CEE reference current");
             near(h,DevicesSavedData.load(level).getDevice(CAP,CapacitorDevice.class).lastVoltage,10,.1,"Saved CEE capacitor state");finish(h,upstream);});
     }
-    @GameTest(template="empty",timeoutTicks=120) public static void nativePgStationaryWorldRemainsFunctional(GameTestHelper h){
+    @GameTest(template="empty",batch="reference",timeoutTicks=120) public static void nativePgStationaryWorldRemainsFunctional(GameTestHelper h){
         var level=h.getLevel();level.setChunkForced(0,1,true);level.getChunk(0,1);boolean upstream=Boolean.getBoolean("wwpg.test.upstreamReference");
         if(upstream){
             for(var p:new BlockPos[]{PG_SOURCE,PG_LOAD,PG_BOARD}){level.setBlockAndUpdate(p,Blocks.AIR.defaultBlockState());level.setBlockAndUpdate(p.below(),Blocks.STONE.defaultBlockState());}
@@ -58,6 +68,11 @@ public final class ReferenceWorldGameTests {
             h.assertTrue(Math.abs(n0.getVoltage()-n1.getVoltage())/1000<.000001,"Reverse-biased native PG reference diode conducted");finish(h,upstream);});
     }
     private static void finish(GameTestHelper h,boolean upstream){
+        var expected=org.patryk3211.powergrid.config.CSolver.SolverBackend.valueOf(System.getProperty("wwpg.test.backend","NATIVE"));
+        var active=org.patryk3211.powergrid.electricity.GlobalElectricNetworks.getWorldNetworks(h.getLevel()).subnetworks.stream()
+                .filter(n->!n.isEmpty()).map(n->((org.cha0scollective.wwpg.mixin.ElectricalNetworkAccessor)n).wwpg$solver().type()).toList();
+        h.assertTrue(!active.isEmpty() && active.stream().allMatch(type->type==expected),"Native reference backend differs: "+active+" expected "+expected);
+        org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info("NATIVE_REFERENCE_BACKEND: requested={}, active={}, upstream={}",expected,active,upstream);
         if(upstream)h.assertTrue(org.cha0scollective.wwpg.bridge.Bridges.get(h.getLevel()).backendCounts().isEmpty(),"Reference jar unexpectedly activated the WWPG bridge");
         else DynamicGameTests.audit(h);
         h.getLevel().getDataStorage().save();h.getLevel().getChunkSource().save(true);h.succeed();

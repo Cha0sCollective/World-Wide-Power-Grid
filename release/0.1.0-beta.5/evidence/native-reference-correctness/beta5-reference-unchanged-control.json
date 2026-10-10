@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "change": "Only the property-conductance mixin class uses its earlier zero threshold instead of Double.MIN_VALUE.",
+  "artifacts": {
+    "wwpg-beta5-reference-complete.jar": "77a1444787dd1601ee0e0ccf9c678f81a292c62113fcc0c8839a2aef5349369b",
+    "wwpg-beta5-reference-stamp-fix.jar": "c40c521ea33056f1189fc021cd97c1ab5d929d8eb9e560a57c864b8f876bd534",
+    "wwpg-beta5-reference-unchanged-control.jar": "be40c166bb386e53a1ebea7ab3fa8395751ffface7c46432733eb5b2b19cca6a"
+  }
+}
