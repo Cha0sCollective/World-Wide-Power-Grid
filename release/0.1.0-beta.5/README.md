@@ -147,3 +147,10 @@ That yard regression does not replace the complete beta.5 demonstrations.
 Controls, fixture corrections, recorded samples and proofs are retained in
 [`evidence/accuracy`](evidence/accuracy). Native timing comparisons, accumulator
 and battery windows, nonlinear mixed circuits and final acceptance remain open.
+
+A fresh extracted legacy-yard client run also passes all 69 views with the Java
+backend and both optional mods installed, including synchronized gauges and
+actual panel interaction packets. Both client helpers shut down after completing
+the checks. This confirms optional-profile startup; playable computer-control
+stations and the new yard acceptance remain pending. Its log and exact jar/ZIP
+checksums are included in the accuracy evidence.
