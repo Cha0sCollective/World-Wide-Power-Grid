@@ -34,6 +34,8 @@ The source now protects PG wires while saved entities are still loading and pres
 
 The investigation separates three behaviors: an early zero-power reading while wires are pending; PG's cleanup timer treating a pending entity as missing; and a board's persistence callback copying a cold zero terminal reading over retained charge. The test suite delays real entity-load results, requires restored power shortly after readiness, and checks saved capacitor state before recharging can conceal a loss. It contains 123 packaged checks, including cold-save and missing-wire cleanup regressions. [Restoration verification](../release/fixes/restoration/) records reproduction and backend results.
 
+Windows native/Java SETUP and VERIFY runs each passed all 123 checks. Disabling the two production corrections makes exactly their two focused regressions fail while the other 121 pass. Both backends also passed the downloaded expanded yard's automated server checks from pristine copies and again after saving with the corrected jar: 85 live behavior groups, all board and panel types, 282 retained PG wires, and no loose wire items. Graphical-client checks from beta.3 are separate historical evidence.
+
 The historical failures below did not record entity readiness or capacitor history at the failing instant. The corrections address reproducible restoration paths, but cannot conclusively attribute every earlier zero reading to one of them. The PG design-table saved-design error remains a separate open issue.
 
 ## Test evidence

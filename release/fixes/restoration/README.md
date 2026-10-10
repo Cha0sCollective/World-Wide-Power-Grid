@@ -16,6 +16,8 @@ The GameTest IO gate delays consumption of real disk-load results, retains their
 
 [verification.json](verification.json) records source and candidate hashes, Windows native/Java SETUP and VERIFY checks, negative controls, and diagnostic logs. GitHub's existing four-job matrix also runs these fixtures, upstream references, and both example worlds' creation/restart on Windows and Linux with both solvers. CI outcomes are recorded separately when complete.
 
+The exact downloaded expanded-yard ZIP also passed its packaged server fixture on native and Java: first from pristine copies, then reopening each save made by the corrected candidate. All 28 board components, 11 panel types, seven transformer/variac circuits, and factory controls were exercised; 282 PG wires were retained and no loose wire items remained. These are automated server checks, separate from the earlier releases' graphical-client acceptance. Retained [checkpoints](checkpoints/) accompany the full local-log hashes.
+
 Reproduce with Java 21 and separate processes for creation and restart:
 
 ```powershell

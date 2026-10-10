@@ -1,0 +1,11 @@
+[09:05:46] [Server thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: RESTORE_BOARD entity-ready: entitiesReady=true, measured=5.20923022880536, history=5.2091781365030725, properties={Id:"powergrid:capacitor",Properties:{"powergrid:capacitor_value":0.1f,"powergrid:charge":5.2092304f,"powergrid:orientation":0},UUID:[I;-1080340481,1927037335,-2029767301,1726555581],X:6,Y:5}, connections={Block(pos=BlockPos{x=1542, y=64, z=1536}, n=0)=[HangingWireEntity['Hanging Wire'/265, l='ServerLevel[Test Level]', x=1541.42, y=64.25, z=1536.64], HangingWireEntity['Hanging Wire'/271, l='ServerLevel[Test Level]', x=1541.30, y=64.22, z=1536.64]], Block(pos=BlockPos{x=1542, y=64, z=1536}, n=1)=[HangingWireEntity['Hanging Wire'/269, l='ServerLevel[Test Level]', x=1542.52, y=64.22, z=1538.14]]}, phase=RESULTS, endpoints=219, branches=155, created=163, removed=7, prepared=60, committed=59, PG substeps=608, backends={JAVA=26240}, CEE solve attempts=0
+[09:05:47] [Server thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: RESTORE_CHUNK: entitiesReady=false, lines=6, voltage=0.0, phase=RESULTS, endpoints=209, branches=148, created=167, removed=18, prepared=442, committed=441, PG substeps=6720, backends={JAVA=338304}, CEE solve attempts=0
+[09:05:48] [Server thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: RESTORE_COLD_SAVE: measured=0.0, history=7.5, persisted=0.0
+[09:05:48] [Server thread/ERROR] [minecraft/LogTestReporter]: coldboardsavepreservesunsolvedcapacitorhistory failed at 4674312, -60, -10688814! Cold board tick overwrote stored charge with a zero terminal reading expected 7.5, got 0.0
+[09:05:51] [Server thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: RESTORE_WIRE_CHECK: entitiesReady=false, retained=false
+[09:05:51] [Server thread/ERROR] [minecraft/LogTestReporter]: missingwirewaitsforentitiesthenexpires failed at 4674299, -60, -10688744! PG expired a missing wire before the entity load completed
+[09:05:53] [Server thread/INFO] [minecraft/GameTestServer]: ========= 123 GAME TESTS COMPLETE IN 10.49 s ======================
+[09:05:53] [Server thread/INFO] [minecraft/GameTestServer]: 2 required tests failed :(
+[09:05:53] [Server thread/INFO] [minecraft/GameTestServer]:    - coldboardsavepreservesunsolvedcapacitorhistory
+[09:05:53] [Server thread/INFO] [minecraft/GameTestServer]:    - missingwirewaitsforentitiesthenexpires
+BUILD FAILED in 34s
