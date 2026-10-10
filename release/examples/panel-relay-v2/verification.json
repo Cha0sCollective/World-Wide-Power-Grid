@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "example_revision": 2,
+  "compatible_mod": "0.1.0-beta.2",
+  "world": {
+    "file": "wwpg-0.1.0-beta.2-example-v2.zip",
+    "sha256": "ef7547db80a9ce80246c2825008e24bca6712104f82e8e2f5701e9871947c413",
+    "bytes": 102117
+  },
+  "published_runtime": {
+    "file": "wwpg-0.1.0-beta.2.jar",
+    "sha256": "1c4963b5821e37221d5c3f7d37d6d0e2749252eb57c7ccf1e4b99009bee3db93"
+  },
+  "test_harness": {
+    "sha256": "36cdb3b37794f531571dd095c5aafe922ccd07084723b9c8999958cc4d53a90d",
+    "changed_entries": [
+      "org/cha0scollective/wwpg/gametest/BoardFixture$Router$Cell.class",
+      "org/cha0scollective/wwpg/gametest/BoardFixture$Router.class",
+      "org/cha0scollective/wwpg/gametest/ExampleControlBoard.class",
+      "org/cha0scollective/wwpg/gametest/ExampleWorldGameTests.class"
+    ],
+    "non_gametest_entries_identical": 67,
+    "note": "The harness contains revised fixtures; all other jar entries match the published runtime byte for byte."
+  },
+  "ci": {
+    "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38022856355",
+    "source_commit": "16656f16b91192ffb4cdaff293ad30ee7e604a98",
+    "platform_backend_jobs": 4,
+    "all_fixture_jars_byte_identical": true
+  },
+  "equation_checks": 4,
+  "checks": [
+    {
+      "log": "build/visible-example-native-setup.log",
+      "sha256": "f383afc13e8e6c6b97d5666b89b0064546f78e1c6279b730ce30a71e4f6838c6",
+      "passed_fixtures": 1
+    },
+    {
+      "log": "build/visible-example-native-verify.log",
+      "sha256": "e6bebf728535b554e2ba7e8d1e17d002cb445a45962365abb7c8140c2c8138f0",
+      "passed_fixtures": 1
+    },
+    {
+      "log": "build/visible-example-java-setup.log",
+      "sha256": "71b01b6fc882bfaff3c0dc3f6ca149f53e8712c12dec9402a40f50b926b2ab1e",
+      "passed_fixtures": 1
+    },
+    {
+      "log": "build/visible-example-java-verify.log",
+      "sha256": "2cf37afc11bde40055b82968b64b20560ee7cdc8eb6150a369b08494769c1378",
+      "passed_fixtures": 1
+    },
+    {
+      "log": "build/visible-example-export-native.log",
+      "sha256": "829161b0401f203612ced07f6417e54759198864f2eceaf9a30cfb23e3f083fb",
+      "passed_fixtures": 1
+    },
+    {
+      "log": "build/visible-example-export-java.log",
+      "sha256": "cf231c182652d50799b505e6705e3f3d1767f716b62c1f4bde397f0ba5d99367",
+      "passed_fixtures": 1
+    }
+  ],
+  "tested_behavior": [
+    "Native CEE panel interaction",
+    "PG relay contacts power both CEE lamp branches",
+    "RUN on / OFF dark while enabled",
+    "Capacitor holds RUN after opening the panel switch",
+    "Discharge transfers output to OFF",
+    "Re-enabling recharges and restores RUN",
+    "Panel voltage/current readings",
+    "Stored capacitor property before recharge on restart",
+    "Goggles, meters, signs, factory lamp, heater, and pumped water",
+    "Exported ZIP reopened with both backends"
+  ],
+  "known_issues": "Earlier intermittent chunk-reload and board-capacitor restart failures remain unresolved; see docs/STATUS.md."
+}

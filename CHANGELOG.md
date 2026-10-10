@@ -1,5 +1,11 @@
 # Changelog
 
+## Example world revision 2 — 9 October 2026
+
+- Replace the quiet capacitor/resistor demonstration with a panel-controlled PG relay board that powers CEE RUN/OFF lamps from a PG supply. Its capacitor creates a visible delay after switch-off.
+- Add an ammeter, instructions on signs, colored lamp bases, and goggles at spawn. Repeat native panel interactions in creation and restart checks, including saved capacitor state before recharging.
+- Publish the revised world and evidence as additional downloads for the existing beta.2 jar, preserving earlier release artifacts and records.
+
 ## 0.1.0-beta.2 — 9 October 2026
 
 - Let PG's multimeter read voltage at CEE terminals and mixed terminal pairs, with readings synchronized to the client.

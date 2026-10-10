@@ -57,10 +57,12 @@ Build, restart, and export the example separately from the regression world:
 ```sh
 ./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PtestNamespaces=wwpg_example -PtestDirectory=run/example --no-daemon
 ./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PtestNamespaces=wwpg_example -PtestDirectory=run/example -PrestartPhase=VERIFY --no-daemon
-python tools/export_example.py --output build/distributions/wwpg-0.1.0-beta.2-example.zip
+python tools/export_example.py --output build/distributions/wwpg-0.1.0-beta.2-example-v2.zip --name "WWPG Example - Panel Demo" --level-name "WWPG - Panel Relay Demo"
 ```
 
-The ZIP is written to `build/distributions`. It contains the small demonstration described in [INSTALL.md](INSTALL.md#example-world). The exporter creates a deterministic archive of the supplied saved world; generating a fresh Minecraft world can produce a different seed and artifact hash.
+The ZIP is written to `build/distributions`. It contains the small demonstration described in [INSTALL.md](INSTALL.md#example-world). The exporter creates a deterministic archive of the supplied saved world; generating a fresh Minecraft world can produce a different seed and artifact hash. Its optional folder/display-name arguments distinguish the revised save from the historical example without changing electrical state.
+
+Revision 2 runs a PG relay and capacitor from the CEE panel, with native contacts powering RUN/OFF CEE lamps. The fixture toggles the native panel interaction, verifies the brief off-delay and both outputs, then restores the on state before saving. VERIFY checks the saved capacitor property before charging can conceal a loss, and repeats the interaction sequence. `tools/package_example.py` retains the new world and evidence separately from the published beta.2 jar and original downloads, comparing every non-GameTest jar entry to the published runtime.
 
 ## Two real clients
 
