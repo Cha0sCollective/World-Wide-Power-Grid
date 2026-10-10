@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "published_support_claim": false,
+  "reproduced_instrument_defect": "CEE uses samples % 10 == 0 for frequency and synchroscope synchronization. An odd saved sample counter advanced by 16 never meets that condition; internal measurement continues but the display freezes.",
+  "fix": "Retain the native ten-sample throttle and change detection using elapsed samples, including saved clock reset. No saved format or native frequency equation changes.",
+  "controls": [
+    "instrument-control.log.gz",
+    "saved-yard-instrument-control.log.gz"
+  ],
+  "reference_fixture_corrections": [
+    "Use the actual pinned CEE float TWO_PI in its near-zero AC reference.",
+    "Use relative 0.1% power balance for transformer Watts; voltage zero tolerance has different units."
+  ],
+  "checks": [
+    "Physical mixed DC with both supplies and wire systems, positive/negative voltage, load changes and source disconnection: 0.1%.",
+    "Series/parallel Kirchhoff circuit and six signed transformer ratios, reflected impedance, winding currents and power: 0.1%.",
+    "Native CEE RC and RL windows at 1, 2 and 16 substeps, charging/discharging/reversal: 270 recorded points each per backend, 1%.",
+    "Native CEE AC samples/RMS/quadrature and reactive transformer voltage/current/phase/RMS reference: 0.1% voltage/current/RMS.",
+    "Exactly declared dynamic and solver advancement, stable compatibility execution, zero independent CEE solves in physical fixtures.",
+    "Odd/even saved frequency counter and synchroscope phase-change display regressions."
+  ],
+  "cold_pass_jar_sha256": "afd262f37e99adb33a90c9a5db354c717d936a37a5b97dd8ae23e27d78ad60d4",
+  "setup_jar_sha256": "13c9038245063e33333df95de54f745d6dee2731c612ac3ad57c08df21953f44",
+  "artifact_difference": "SETUP predates an additional unexecuted Pinout lifecycle Lua resource. The three complete cold runs per backend use one unchanged jar; the Java runner class for that lifecycle program is not in those jars.",
+  "graphical_native_jar_sha256": "375dfdbf46557f6521f27bfa6a003f7bb8a8ee6077f91cbb03928790ec3e0f32",
+  "graphical_limit": "Freshly extracted legacy expanded yard, 69 views and native interactions; predates the final reactive analytical fixture. This is a regression demonstration, not the complete beta.5 yard.",
+  "remaining": [
+    "Pinned upstream timing within one tick",
+    "Accumulator/battery recorded storage accuracy",
+    "Mixed nonlinear rectifier/reactive switching correctness",
+    "Final release platform/profile/backend acceptance and the complete playable yards"
+  ],
+  "graphical_java_jar_sha256": "afd262f37e99adb33a90c9a5db354c717d936a37a5b97dd8ae23e27d78ad60d4",
+  "graphical_java_profile": "PINOUT",
+  "graphical_java_limit": "Freshly extracted legacy expanded yard, 69 views, synchronized gauges and actual panel packets; optional profile startup is checked, not playable Pinout stations.",
+  "legacy_yard_zip_sha256": "7463af3876daa72064b0fa226f1cd88a633af6a1b2ab7471720d0fd6f3dd128f"
+}
