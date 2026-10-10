@@ -20,7 +20,7 @@ Published checksums and matching source references are in [artifacts.json](../re
 
 ## Packaged regression suite
 
-The 118 GameTests include 117 electrical/gameplay/lifecycle fixtures and one concurrent-registration regression. Electrical checks cover polarity, grounding, currents, transient state, RMS/phase, transformer relationships, and nonlinear electronics. Gameplay checks cover outputs, assembly, controls, protection, repair, and failures. Three handheld-meter fixtures were added after beta.1; the real-client fixture additionally checks targeting, item packets, and displayed readings. The startup regression uses an isolated Registrate instance to force a callback to arrive during entry publication and checks that the callback is retained.
+The current source suite contains 121 GameTests: 120 electrical/gameplay/lifecycle fixtures and one concurrent-registration regression. The published beta.2 acceptance remains 118 checks. Electrical checks cover polarity, grounding, currents, transient state, RMS/phase, transformer relationships, and nonlinear electronics. Gameplay checks cover outputs, assembly, controls, protection, repair, and failures. Three handheld-meter fixtures were added after beta.1; the real-client fixture additionally checks targeting, item packets, and displayed readings. The startup regression uses an isolated Registrate instance to force a callback to arrive during entry publication and checks that the callback is retained.
 
 Run SETUP and VERIFY in separate processes using the same isolated test directory:
 
@@ -34,6 +34,8 @@ Use either `NATIVE` or `JAVA` for both phases to reproduce a CI backend job. The
 Packaged tasks load WWPG exclusively from its jar. A successful process exit is insufficient: each task requires a completed, nonempty passing suite. This catches NeoForge loading failures that can exit with code zero.
 
 Reserved chunks `(64,64)` and `(96,96)` check restart persistence for wires, settings, capacitor history, panel IDs, and board UUID/charge. Chunk `(128,128)` unloads and reloads twice, with unload events checked. Another test isolates matching coordinates in the Overworld and Nether. A configuration test queues 100 background-thread reload requests.
+
+Three grounding regressions preserve source nodes, networks, and CEE branches while changing physical ground conductance, moving the preferred reference, and handing the reference to a physical ground. The chunk fixture keeps the source in `(160,160)` and unloads/reloads a CEE ground rod in `(174,160)` twice. A connector divides the long return into two ordinary CEE wires; analytical readings include their resistance. The rod lies beyond the source's generation halo. Checks require both an actual unload event and absence of the loaded chunk, then bound restoration after entity readiness. The existing Windows/Linux native/Java CI matrix runs these tests with the rest of the default suite.
 
 **Known issue:** `chunkReloadRebindsMixedEndpoints` has failed once in Linux/native CI, reading 0 V instead of 10 V after reload. It uses fixed tick deadlines while entity loading is asynchronous. That makes timing a candidate cause; instrumentation is still needed to establish whether the issue is in the fixture or compatibility lifecycle. See [the failure record](STATUS.md#unresolved-chunk-reload-failure).
 

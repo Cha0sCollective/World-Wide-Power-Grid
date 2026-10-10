@@ -1,0 +1,201 @@
+{
+  "schema": 1,
+  "date": "2026-10-10",
+  "kind": "Real graphical Minecraft client with integrated server; packaged WWPG jar and separate test helper",
+  "source_commit": "10be93a3a324d9dc1a0e6456d5643ebcaa949933",
+  "platform": "Windows 11 amd64",
+  "java": "Eclipse Adoptium 21.0.12+8",
+  "resolution": "1280x720",
+  "tested_jar": {
+    "path": "build/libs/wwpg-0.1.0-beta.2.jar",
+    "sha256": "ecd39ee6d5815a3ea08d3320444121735d417f3b7ae21c969421f725ddc8d4a7",
+    "bytes": 2730065
+  },
+  "downloaded_world": {
+    "file": "wwpg-0.1.0-beta.2-fixture-world-v1.zip",
+    "sha256": "7463af3876daa72064b0fa226f1cd88a633af6a1b2ab7471720d0fd6f3dd128f",
+    "bytes": 429696,
+    "save_folder": "WWPG Expanded Test Yard",
+    "unchanged_original_download": true
+  },
+  "dependency_record": "release/artifacts.json",
+  "solver_configuration_before_world_start": {
+    "multiTicks": 16,
+    "backends": [
+      "NATIVE",
+      "JAVA"
+    ]
+  },
+  "coverage": {
+    "live_behavior_groups": 85,
+    "declared_behavior_groups": 134,
+    "PG_board_components": 28,
+    "CEE_panel_attachment_types": 11,
+    "transformer_variac_stations": 7,
+    "meter_banks": 3,
+    "device_storage_stations": 22
+  },
+  "checks": [
+    {
+      "backend": "NATIVE",
+      "phase": "Reopen a save made by the new jar",
+      "result": "PASS",
+      "world_directory": "run/expanded-client-native-correct",
+      "saved_yard_acceptance": "PASS",
+      "client_station_views": 69,
+      "synchronized_gauges": 54,
+      "factory_client_packets_and_delayed_lamps": "PASS",
+      "P2_client_packets_and_lamp": "PASS",
+      "retained_PG_wire_entities": 282,
+      "baseline_loose_wire_items": 0,
+      "bridge_diagnostics_at_finish": [],
+      "CEE_solve_attempts": 0,
+      "normal_save_and_client_shutdown": true,
+      "full_local_log": {
+        "path": "build/expanded-client-native-restart.log",
+        "sha256": "578c1adaf9d22ea01631e6b68760dfe7e2039f7f13cdbdbff1289f6743d5bccd",
+        "bytes": 94960
+      },
+      "retained_checkpoints": {
+        "path": "release/fixes/grounding/client/native-client.log",
+        "sha256": "d1f314b7d67f7cfb32fe285938dbb43ae0649e589340afed8f58a201e5071a0b",
+        "bytes": 27863
+      },
+      "transformer_client_volts": {
+        "T1": 49.99238967895508,
+        "T2": 199.89112854003906,
+        "T3": 39.974124908447266,
+        "T4": 9.998810768127441,
+        "T5": 19.99485206604004,
+        "T6": 9.999557495117188,
+        "T7": 19.998502731323242
+      }
+    },
+    {
+      "backend": "JAVA",
+      "phase": "Open a pristine copy of the downloaded save",
+      "result": "PASS",
+      "world_directory": "run/expanded-client-java",
+      "saved_yard_acceptance": "PASS",
+      "client_station_views": 69,
+      "synchronized_gauges": 54,
+      "factory_client_packets_and_delayed_lamps": "PASS",
+      "P2_client_packets_and_lamp": "PASS",
+      "retained_PG_wire_entities": 282,
+      "baseline_loose_wire_items": 0,
+      "bridge_diagnostics_at_finish": [],
+      "CEE_solve_attempts": 0,
+      "normal_save_and_client_shutdown": true,
+      "full_local_log": {
+        "path": "build/expanded-client-java-correct.log",
+        "sha256": "7e6341a755ef6f67a9b5060f5310da899576df19a428cb2e080e2afa5f7ec600",
+        "bytes": 95037
+      },
+      "retained_checkpoints": {
+        "path": "release/fixes/grounding/client/java-client.log",
+        "sha256": "9a23a40a45d67f86d252ba0ecf17ef1637bb85e33e4c6ee1c466ddfdb982c79c",
+        "bytes": 27889
+      },
+      "transformer_client_volts": {
+        "T1": 49.99238967895508,
+        "T2": 199.89112854003906,
+        "T3": 39.974124908447266,
+        "T4": 9.998810768127441,
+        "T5": 19.99485206604004,
+        "T6": 9.999557495117188,
+        "T7": 19.998502731323242
+      }
+    }
+  ],
+  "earlier_attempts": [
+    {
+      "result": "NOT AN ACCEPTED RUN",
+      "cause": "First-launch accessibility onboarding was completed. The world then started with PG default multiTicks=1 before the helper changed it; the AC frequency-display assertion read 0 Hz. Invalid startup configuration for this acceptance.",
+      "assertions": [
+        "Saved-yard acceptance failed"
+      ],
+      "full_local_log": {
+        "path": "build/expanded-client-native-first.log",
+        "sha256": "f783c36d5f0e242ced2330acff2db0fc665fa1d0d56a668ebac7b6c95f6fc4d3",
+        "bytes": 36050
+      }
+    },
+    {
+      "result": "NOT AN ACCEPTED RUN",
+      "cause": "A diagnostic run reproduced the default-one-step startup error. Live AC sampling became correct after switching to 16, but the CEE frequency display remained stale. The final accepted runs use the documented 16 steps before opening the world.",
+      "assertions": [
+        "Saved-yard acceptance failed"
+      ],
+      "full_local_log": {
+        "path": "build/expanded-client-native-probe.log",
+        "sha256": "a6c6d09a93a2d818362b2fa2952cd5125449ba3ec1bc28a5347f00e047d25016",
+        "bytes": 37332
+      }
+    },
+    {
+      "result": "NOT AN ACCEPTED RUN",
+      "cause": "All saved-yard checks, 69 station views, and client panel interactions passed. The driver then incorrectly required all 282 wires to be visible to the client at once; Minecraft entity tracking legitimately showed 139 nearby wires. The corrected driver checks 282 on the server and positive local rendering on the client.",
+      "assertions": [
+        "Client did not retain all 282 PG wire entities: 139"
+      ],
+      "full_local_log": {
+        "path": "build/expanded-client-native-correct.log",
+        "sha256": "2040fed39f96ccedd309c78b35441b1ef5fb2c79378a6d04bf42645cb6ccbc10",
+        "bytes": 99962
+      }
+    }
+  ],
+  "helper_jar": {
+    "path": "build/expanded-client-harness/wwpg-client-acceptance.jar",
+    "sha256": "28992cddd0535fbe52ae65812884e95717dc1fd38b0dceb01d7ffee3374d8641",
+    "bytes": 14103
+  },
+  "retained_helper_sources": [
+    {
+      "path": "release/fixes/grounding/client/helper/client.init.gradle",
+      "sha256": "87a1233812b7792e8ef57f22e0582ea852ba5e046d0baa0c658e153e59b3a403",
+      "bytes": 4239
+    },
+    {
+      "path": "release/fixes/grounding/client/helper/resources/META-INF/neoforge.mods.toml",
+      "sha256": "b99a0f1b86579299d4c6bef2df38c0fd76941029465e8b6aeb2a49051838b9fe",
+      "bytes": 353
+    },
+    {
+      "path": "release/fixes/grounding/client/helper/src/org/cha0scollective/wwpg/acceptance/ExpandedClientAcceptance.java",
+      "sha256": "cb0be3e4aba8040cd3e2c2e254704cd54587df65422cd757a2c3713b89db9786",
+      "bytes": 15814
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "release/fixes/grounding/client/native-transformer.png",
+      "sha256": "01596cdb437fdfed2b7f05ea1321298d4bbf2f6f42ebf4fb15eaccf5d39e629f",
+      "bytes": 518195
+    },
+    {
+      "path": "release/fixes/grounding/client/native-factory.png",
+      "sha256": "e917b9f94d7f16159963010099a12260ad90dd7958f090ac3e8d65e6f3fd286b",
+      "bytes": 485032
+    },
+    {
+      "path": "release/fixes/grounding/client/java-breaker-panel.png",
+      "sha256": "76fd4017bc4e8b546e1c1be664226d5b9dea074b1ff588bce564b1368ba193ca",
+      "bytes": 572734
+    },
+    {
+      "path": "release/fixes/grounding/client/java-resistor-board.png",
+      "sha256": "1d8c933727384c626d82c661c9d23e3261f299579a6f57012db4a83f5af05e55",
+      "bytes": 460780
+    }
+  ],
+  "limitations": [
+    "This is a developer launch with the exact packaged WWPG jar; the separate helper is not bundled in that jar.",
+    "Graphical-client coverage is Windows only. Packaged CI separately covers Windows and Linux native/Java backends.",
+    "Checks cover the declared live yard fixtures, not every inventory item, arbitrary wiring arrangement, or moving systems.",
+    "The helper checks renderable wire data and synchronized block entities; selected screenshots were inspected visually, not every frame.",
+    "Handheld-meter client interactions and two-client multiplayer were not repeated in this run; prior evidence remains separate.",
+    "The earlier intermittent chunk-reload and board-capacitor restart failures and the PG design-table saved-design error remain unresolved.",
+    "This evidence commit does not change WWPG production code or published beta.2 downloads."
+  ]
+}

@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased — grounding correction
+
+- Refresh PG's electrical equations when physical grounds or preferred voltage references are added, removed, or change conductance. Retain existing nodes and branches, and avoid rebuilding for unchanged grounding.
+- Add regression circuits for ground changes, reference changes and physical-ground takeover, and two actual ground-rod chunk unload/reload cycles. Run them in the packaged suite on both solvers.
+- Keep the published beta.2 downloads and historical acceptance records unchanged. This correction does not establish the causes of the earlier intermittent reload/restart failures.
+
 ## Expanded test yard revision 1 — 10 October 2026
 
 - Add a separate world with live exhibits for all 28 built-in PG board component types and 11 CEE panel attachment types, seven transformer/variac circuits, three meter banks, 22 device/storage stations, and the existing factory.

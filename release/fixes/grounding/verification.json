@@ -1,0 +1,117 @@
+{
+  "schema": 1,
+  "date": "2026-10-10",
+  "correction": "grounding equation updates",
+  "base_commit": "cdf9cc2d17412c1a611119a62a914a09bb74fa9b",
+  "release_status": "Unreleased source correction; published beta.2 artifacts unchanged",
+  "dependencies": {
+    "minecraft": "1.21.1",
+    "neoforge": "21.1.231",
+    "create": "6.0.10-280",
+    "cee": "1.21.1-1.1.3",
+    "power_grid": "0.6.2",
+    "artifact_record": "release/artifacts.json"
+  },
+  "tested_jar": {
+    "path": "build/libs/wwpg-0.1.0-beta.2.jar",
+    "sha256": "ecd39ee6d5815a3ea08d3320444121735d417f3b7ae21c969421f725ddc8d4a7",
+    "bytes": 2730065,
+    "java": "Eclipse Adoptium 21.0.12+8"
+  },
+  "source_hashes": [
+    {
+      "path": "src/main/java/org/cha0scollective/wwpg/bridge/WorldBridge.java",
+      "sha256": "f21998483d1260437c6b8fa824597cd5a2ffb21d52d144f8b3a9ec45c3ea19c7"
+    },
+    {
+      "path": "src/main/java/org/cha0scollective/wwpg/gametest/GroundingChangeGameTests.java",
+      "sha256": "b90ebfcc03fd7879bbd7e1ef7e3fa7b9a87be12a22330a0032d7a076635a0092"
+    }
+  ],
+  "equation_checks": {
+    "passed": 4,
+    "failures": 0,
+    "note": "Gradle build/check includes LinearBranchTest and TransformerStampTest; results reused from the successful build cache."
+  },
+  "checks": [
+    {
+      "platform": "Windows 11 amd64",
+      "backend": "NATIVE",
+      "phase": "SETUP",
+      "passed_tests": 121,
+      "actual_ground_rod_unloads": 2,
+      "log": "build/grounding-native-setup.log",
+      "log_sha256": "559c3c7b74927b58583bc624bff8779bd1a97d1f8f92f2011025fa9a9acd8f5f"
+    },
+    {
+      "platform": "Windows 11 amd64",
+      "backend": "NATIVE",
+      "phase": "VERIFY",
+      "passed_tests": 121,
+      "actual_ground_rod_unloads": 2,
+      "log": "build/grounding-native-verify.log",
+      "log_sha256": "f8aee27b89f5270b2f321d2dbe2921944423df3cae3fbd3bcc8cd4e96c057e28"
+    },
+    {
+      "platform": "Windows 11 amd64",
+      "backend": "JAVA",
+      "phase": "SETUP",
+      "passed_tests": 121,
+      "actual_ground_rod_unloads": 2,
+      "log": "build/grounding-java-setup.log",
+      "log_sha256": "dc76bfe0552d521692b905ebf54c71b7863f0dd6fc7ffec7927982e2f0ac79b6"
+    },
+    {
+      "platform": "Windows 11 amd64",
+      "backend": "JAVA",
+      "phase": "VERIFY",
+      "passed_tests": 121,
+      "actual_ground_rod_unloads": 2,
+      "log": "build/grounding-java-verify.log",
+      "log_sha256": "3ec4569189ab0bd5fc367447aa0f64bf1cbaeef6df559f4b8bf2eb05a1dca645"
+    }
+  ],
+  "negative_control": {
+    "backend": "JAVA",
+    "platform": "Windows 11 amd64",
+    "phase": "SETUP",
+    "original_world_bridge_commit": "cdf9cc2d17412c1a611119a62a914a09bb74fa9b",
+    "fixtures": "Same final GroundingChangeGameTests.java used in passing runs",
+    "passed_tests": 118,
+    "failed_tests": 3,
+    "expected_failure": true,
+    "log": "build/grounding-java-negative-control.log",
+    "log_sha256": "5a19951f7b08e82c4e928db475c54b019626d970af692de4cc514d152b84c2f2",
+    "failures": [
+      {
+        "test": "physicalGroundChangesKeepExistingTopology",
+        "assertion": "Positive ground potential after removing the positive ground",
+        "expected_volts": 10,
+        "actual_volts": 4.999745013878384
+      },
+      {
+        "test": "preferredReferenceChangesAndPhysicalGroundTakeover",
+        "assertion": "Positive ground potential after moving the preferred reference",
+        "expected_volts": 0,
+        "actual_volts": 9.999990001745408
+      },
+      {
+        "test": "groundRodChunkUnloadReloadUpdatesExistingCircuit",
+        "assertion": "Source after actual ground chunk unload",
+        "expected_volts": 10,
+        "actual_volts": 6.749611307668659,
+        "actual_unload_event": true
+      }
+    ]
+  },
+  "invocation_error": {
+    "log": "build/grounding-java-verify-invocation-error.log",
+    "tests_run": 0,
+    "cause": "Command supplied lowercase java; PG requires uppercase JAVA. Corrected VERIFY command passed."
+  },
+  "limitations": [
+    "Local runs cover Windows; the existing CI matrix also covers Linux with native and Java backends.",
+    "The causes of the earlier intermittent chunk-reload and board restart failures remain unresolved.",
+    "Local log paths refer to ignored build output. GitHub Actions publishes its logs and jars as workflow artifacts."
+  ]
+}

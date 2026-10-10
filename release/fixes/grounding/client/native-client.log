@@ -1,0 +1,215 @@
+[05:43:18] [modloading-worker-0/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_HELPER: exact saved world; backend=NATIVE; views=69
+[05:43:27] [Server thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_BASELINE_STARTED: downloaded yard reopened in integrated server
+[05:43:48] [Server thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: WWPG_EXAMPLE_CLEANUP: removed 0 loose wire/spool items; 282 connected PG wires/cords retained
+[05:43:48] [Server thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: WWPG_SHOWROOM_COVERAGE: 85/134 declared behavior groups have live exhibits; 45 block types, 28 board components, 11 panel types
+[05:43:48] [Server thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: WWPG_SHOWROOM_PASSED: phase=VERIFY; 25 electrical boards, routing board, all 11 panel types, 7 transformer/variac circuits, 3 meter banks, 22 device/storage circuits, and original factory
+[05:43:48] [Server thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: WWPG_EXAMPLE_VISIBLE_PASSED: panel on -> RUN; off -> capacitor delay -> OFF; on -> RUN
+[05:43:48] [Server thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_BASELINE_PASSED: all live exhibits and native-handler interactions
+[05:43:50] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B01 client=0.010046401992440224 server=0.010046401992440224
+[05:43:50] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B01 rendered PG wires=178
+[05:43:50] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 01-B01.png
+[05:43:52] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B02 client=3.6853307392448187E-4 server=3.6853307392448187E-4
+[05:43:52] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B02 rendered PG wires=185
+[05:43:52] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 02-B02.png
+[05:43:54] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B03 client=0.9737411737442017 server=0.9737411737442017
+[05:43:54] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B03 rendered PG wires=185
+[05:43:54] [IO-Worker-3/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 03-B03.png
+[05:43:57] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B04 client=0.010033681057393551 server=0.010033681057393551
+[05:43:57] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B04 rendered PG wires=185
+[05:43:57] [IO-Worker-2/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 04-B04.png
+[05:43:59] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B05 client=0.007518606726080179 server=0.007518606726080179
+[05:43:59] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B05 rendered PG wires=167
+[05:43:59] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 05-B05.png
+[05:44:01] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B06 client=0.009702644310891628 server=0.009702644310891628
+[05:44:01] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B06 rendered PG wires=200
+[05:44:01] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 06-B06.png
+[05:44:03] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B07 client=0.009996436536312103 server=0.009996436536312103
+[05:44:03] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B07 rendered PG wires=201
+[05:44:03] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 07-B07.png
+[05:44:06] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B08 client=4.980067751603201E-5 server=4.980067751603201E-5
+[05:44:06] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B08 rendered PG wires=199
+[05:44:06] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 08-B08.png
+[05:44:08] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B09 client=0.10807710140943527 server=0.10807710140943527
+[05:44:08] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B09 rendered PG wires=194
+[05:44:08] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 09-B09.png
+[05:44:10] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B10 client=0.10807710140943527 server=0.10807710140943527
+[05:44:10] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B10 rendered PG wires=180
+[05:44:10] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 10-B10.png
+[05:44:12] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B11 client=0.009996436536312103 server=0.009996436536312103
+[05:44:12] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B11 rendered PG wires=209
+[05:44:12] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 11-B11.png
+[05:44:15] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B12 client=0.009339694865047932 server=0.009339694865047932
+[05:44:15] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B12 rendered PG wires=209
+[05:44:15] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 12-B12.png
+[05:44:17] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B13 client=9.593532886356115E-4 server=9.593532886356115E-4
+[05:44:17] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B13 rendered PG wires=206
+[05:44:17] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 13-B13.png
+[05:44:19] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B14 client=-9.593530558049679E-4 server=-9.593530558049679E-4
+[05:44:19] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B14 rendered PG wires=201
+[05:44:19] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 14-B14.png
+[05:44:21] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B15 client=0.013258932158350945 server=0.013258932158350945
+[05:44:21] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B15 rendered PG wires=185
+[05:44:21] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 15-B15.png
+[05:44:24] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B16 client=0.004862908273935318 server=0.004862908273935318
+[05:44:24] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B16 rendered PG wires=212
+[05:44:24] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 16-B16.png
+[05:44:26] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B17 client=0.008364428766071796 server=0.008364428766071796
+[05:44:26] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B17 rendered PG wires=219
+[05:44:26] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 17-B17.png
+[05:44:28] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B18 client=0.08797738701105118 server=0.08797738701105118
+[05:44:28] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B18 rendered PG wires=218
+[05:44:28] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 18-B18.png
+[05:44:30] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B19 client=0.007936343550682068 server=0.007936343550682068
+[05:44:30] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B19 rendered PG wires=206
+[05:44:30] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 19-B19.png
+[05:44:33] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B20 client=0.10004986822605133 server=0.10004986822605133
+[05:44:33] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B20 rendered PG wires=193
+[05:44:33] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 20-B20.png
+[05:44:35] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B21 client=0.006731328554451466 server=0.006731328554451466
+[05:44:35] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B21 rendered PG wires=199
+[05:44:35] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 21-B21.png
+[05:44:37] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B22 client=0.24981077015399933 server=0.24981077015399933
+[05:44:37] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B22 rendered PG wires=214
+[05:44:37] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 22-B22.png
+[05:44:39] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B23 client=1.499991922173649E-4 server=1.499991922173649E-4
+[05:44:39] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B23 rendered PG wires=217
+[05:44:39] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 23-B23.png
+[05:44:42] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B24 client=0.004999483935534954 server=0.004999483935534954
+[05:44:42] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B24 rendered PG wires=207
+[05:44:42] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 24-B24.png
+[05:44:44] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: B25 client=0.9427975416183472 server=0.9427975416183472
+[05:44:44] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B25 rendered PG wires=193
+[05:44:44] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 25-B25.png
+[05:44:46] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: P1 rendered PG wires=161
+[05:44:46] [IO-Worker-3/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 26-P1.png
+[05:44:48] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: P2 rendered PG wires=176
+[05:44:48] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 27-P2.png
+[05:44:51] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: P3 rendered PG wires=192
+[05:44:51] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 28-P3.png
+[05:44:53] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: P4 rendered PG wires=187
+[05:44:53] [IO-Worker-3/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 29-P4.png
+[05:44:55] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: P5 rendered PG wires=174
+[05:44:55] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 30-P5.png
+[05:44:57] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: P6 rendered PG wires=137
+[05:44:57] [IO-Worker-3/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 31-P6.png
+[05:45:00] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: P7 rendered PG wires=151
+[05:45:00] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 32-P7.png
+[05:45:02] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: P8 rendered PG wires=160
+[05:45:02] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 33-P8.png
+[05:45:04] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: P9 rendered PG wires=153
+[05:45:04] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 34-P9.png
+[05:45:06] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: T1 client=49.99238967895508 server=49.99238967895508
+[05:45:06] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: T1 rendered PG wires=119
+[05:45:06] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 35-T1.png
+[05:45:09] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: T2 client=199.89112854003906 server=199.89112854003906
+[05:45:09] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: T2 rendered PG wires=137
+[05:45:09] [IO-Worker-3/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 36-T2.png
+[05:45:11] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: T3 client=39.974124908447266 server=39.974124908447266
+[05:45:11] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: T3 rendered PG wires=143
+[05:45:11] [IO-Worker-3/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 37-T3.png
+[05:45:13] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: T4 client=9.998810768127441 server=9.998810768127441
+[05:45:13] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: T4 rendered PG wires=132
+[05:45:13] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 38-T4.png
+[05:45:15] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: T5 client=19.99485206604004 server=19.99485206604004
+[05:45:15] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: T5 rendered PG wires=109
+[05:45:15] [IO-Worker-3/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 39-T5.png
+[05:45:18] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: T6 client=9.999557495117188 server=9.999557495117188
+[05:45:18] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: T6 rendered PG wires=92
+[05:45:18] [IO-Worker-5/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 40-T6.png
+[05:45:20] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: T7 client=19.998502731323242 server=19.998502731323242
+[05:45:20] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: T7 rendered PG wires=104
+[05:45:20] [IO-Worker-3/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 41-T7.png
+[05:45:22] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: M1 rendered PG wires=88
+[05:45:22] [IO-Worker-6/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 42-M1.png
+[05:45:24] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: M2 rendered PG wires=96
+[05:45:24] [IO-Worker-6/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 43-M2.png
+[05:45:27] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: M3 rendered PG wires=82
+[05:45:27] [IO-Worker-6/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 44-M3.png
+[05:45:29] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: B26 rendered PG wires=107
+[05:45:29] [IO-Worker-3/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 45-B26.png
+[05:45:31] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D1 client=149.99183654785156 server=149.99183654785156
+[05:45:31] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D1 rendered PG wires=82
+[05:45:31] [IO-Worker-6/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 46-D1.png
+[05:45:33] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D2 client=149.99424743652344 server=149.99424743652344
+[05:45:33] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D2 rendered PG wires=84
+[05:45:33] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 47-D2.png
+[05:45:36] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D3 client=149.99197387695312 server=149.99197387695312
+[05:45:36] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D3 rendered PG wires=84
+[05:45:36] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 48-D3.png
+[05:45:38] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D4 client=0.0 server=0.0
+[05:45:38] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D4 rendered PG wires=82
+[05:45:38] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 49-D4.png
+[05:45:40] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D5 client=149.96966552734375 server=149.96966552734375
+[05:45:40] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D5 rendered PG wires=72
+[05:45:40] [IO-Worker-6/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 50-D5.png
+[05:45:42] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D6 client=149.9846649169922 server=149.9846649169922
+[05:45:42] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D6 rendered PG wires=75
+[05:45:42] [IO-Worker-3/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 51-D6.png
+[05:45:45] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D7 client=7.496214821003377E-4 server=7.496214821003377E-4
+[05:45:45] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D7 rendered PG wires=77
+[05:45:45] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 52-D7.png
+[05:45:47] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D8 client=9.999420166015625 server=9.999420166015625
+[05:45:47] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D8 rendered PG wires=79
+[05:45:47] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 53-D8.png
+[05:45:49] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D9 client=9.999420166015625 server=9.999420166015625
+[05:45:49] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D9 rendered PG wires=75
+[05:45:49] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 54-D9.png
+[05:45:51] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D10 client=9.999420166015625 server=9.999420166015625
+[05:45:51] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D10 rendered PG wires=69
+[05:45:51] [IO-Worker-3/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 55-D10.png
+[05:45:54] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D11 client=9.999420166015625 server=9.999420166015625
+[05:45:54] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D11 rendered PG wires=63
+[05:45:54] [IO-Worker-3/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 56-D11.png
+[05:45:56] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D12 client=9.999411582946777 server=9.999411582946777
+[05:45:56] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D12 rendered PG wires=65
+[05:45:56] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 57-D12.png
+[05:45:58] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D13 client=9.999403953552246 server=9.999403953552246
+[05:45:58] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D13 rendered PG wires=65
+[05:45:58] [IO-Worker-3/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 58-D13.png
+[05:46:00] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D14 client=9.99940299987793 server=9.99940299987793
+[05:46:00] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D14 rendered PG wires=64
+[05:46:00] [IO-Worker-3/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 59-D14.png
+[05:46:03] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D15 client=9.999403953552246 server=9.999403953552246
+[05:46:03] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D15 rendered PG wires=61
+[05:46:03] [IO-Worker-3/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 60-D15.png
+[05:46:05] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D16 client=99.98616027832031 server=99.98616027832031
+[05:46:05] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D16 rendered PG wires=59
+[05:46:05] [IO-Worker-3/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 61-D16.png
+[05:46:07] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D17 client=99.99417114257812 server=99.99417114257812
+[05:46:07] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D17 rendered PG wires=61
+[05:46:07] [IO-Worker-3/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 62-D17.png
+[05:46:09] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D18 client=9.994990348815918 server=9.994990348815918
+[05:46:09] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D18 rendered PG wires=60
+[05:46:09] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 63-D18.png
+[05:46:12] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D19 client=9.994989395141602 server=9.994989395141602
+[05:46:12] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D19 rendered PG wires=60
+[05:46:12] [IO-Worker-3/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 64-D19.png
+[05:46:14] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D20 client=0.09877438843250275 server=0.09877438843250275
+[05:46:14] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D20 rendered PG wires=57
+[05:46:14] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 65-D20.png
+[05:46:16] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D21 client=23.999555587768555 server=23.999555587768555
+[05:46:16] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D21 rendered PG wires=53
+[05:46:16] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 66-D21.png
+[05:46:18] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_READING: D22 client=25.181734085083008 server=25.181734085083008
+[05:46:18] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: D22 rendered PG wires=58
+[05:46:18] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 67-D22.png
+[05:46:21] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: factory rendered PG wires=145
+[05:46:21] [IO-Worker-6/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 68-factory.png
+[05:46:23] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_VIEW_PASSED: relay-panel rendered PG wires=129
+[05:46:23] [IO-Worker-6/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as 69-relay-panel.png
+[05:46:24] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_PANEL_CLICK: BlockPos{x=12, y=64, z=8} result=SUCCESS
+[05:46:25] [IO-Worker-6/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as factory-off-delay.png
+[05:46:30] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_PANEL_CLICK: BlockPos{x=12, y=64, z=8} result=SUCCESS
+[05:46:30] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as factory-off.png
+[05:46:34] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_PANEL_PACKETS_PASSED: OFF -> delayed lamp change -> ON
+[05:46:34] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as factory-on.png
+[05:46:35] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_PANEL_CLICK: BlockPos{x=51, y=64, z=94} result=SUCCESS
+[05:46:36] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_PANEL_CLICK: BlockPos{x=51, y=64, z=94} result=SUCCESS
+[05:46:36] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as panel-P2-off.png
+[05:46:38] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_P2_PACKETS_PASSED
+[05:46:43] [Render thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_REAL_CLIENT_PASSED: backend=NATIVE; views=69; synchronized gauges; panel interaction packets; server PG wires=282; locally rendered PG wires=139; loose wires=0
+[05:46:43] [Render thread/INFO] [minecraft/Minecraft]: Stopping!
+[05:46:43] [IO-Worker-4/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_CLIENT_SCREENSHOT: Saved screenshot as yard-overview.png
+[05:46:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+BUILD SUCCESSFUL in 3m 45s
+[05:46:43] [Server thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: EXPANDED_AC_DIAGNOSTIC: sourceNBT={DC:0.0f,Freq:50.0f,NodeValue:100.0f,ScrollValue:0}; time=197.06879; deltaV=97.86732266243767; meterTicks=139104; prevV=-98.17090932406057; period=6.404490044369595; cross=139100.01146479874; maxLast=97.78782221269074; status=phase=RESULTS, endpoints=561, branches=434, created=576, removed=138, prepared=3960, committed=3959, PG substeps=63360, backends={NATIVE=4534736}, CEE solve attempts=0
