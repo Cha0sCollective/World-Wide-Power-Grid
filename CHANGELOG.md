@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.0-beta.4 — 10 October 2026
 
 - Keep PG's missing-wire checks queued while a chunk's saved entities are still loading. Start the existing ten-tick cleanup grace period after entity readiness; genuinely missing wires still expire.
 - Save PG board capacitors from their committed voltage history, preventing an unsolved terminal reading from overwriting retained charge with zero.

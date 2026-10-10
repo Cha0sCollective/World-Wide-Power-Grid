@@ -1,8 +1,8 @@
 # Expanded test yard
 
-This is a hands-on world for **WWPG 0.1.0-beta.2 and beta.3**. It gives most supported equipment its own working mixed-mod circuit, with signs, testing tools, and a guidebook. Every built-in **Power Grid board component** and **CEE panel attachment** appears in a working example.
+This is a hands-on world for **WWPG 0.1.0-beta.2, beta.3, and beta.4**. It gives most supported equipment its own working mixed-mod circuit, with signs, testing tools, and a guidebook. Every built-in **Power Grid board component** and **CEE panel attachment** appears in a working example.
 
-Download [the expanded test-yard ZIP](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2-fixture-world-v1.zip). Extract **WWPG Expanded Test Yard/** into your Minecraft instance's `saves` folder. Open **WWPG - Expanded Test Yard** in the world list. Use the current beta.3 jar and [exact dependencies and solver settings](INSTALL.md#required-versions). The world download is unchanged; upgrading from beta.2 only requires replacing the mod jar.
+Download [the expanded test-yard ZIP](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2-fixture-world-v1.zip). Extract **WWPG Expanded Test Yard/** into your Minecraft instance's `saves` folder. Open **WWPG - Expanded Test Yard** in the world list. Use the current beta.4 jar and [exact dependencies and solver settings](INSTALL.md#required-versions). The world download is unchanged; upgrading from beta.2 or beta.3 only requires replacing the mod jar.
 
 You spawn at **(8, 64, 16)** in Creative mode. Take **Engineer's Goggles**, both handheld meters, the wrench, and the guidebook from the chest at **(6, 64, 16)**. Follow the white path or fly. Each station has its own supply, so changing one example generally does not shut down the others.
 
