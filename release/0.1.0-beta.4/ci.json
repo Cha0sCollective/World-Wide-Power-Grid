@@ -1,0 +1,713 @@
+{
+  "status": "completed",
+  "conclusion": "success",
+  "headSha": "5dd8674a25bf2ecd6a2d27e5c5dba427ff9bffb2",
+  "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38060676594",
+  "runId": 38060676594,
+  "runAttempt": 1,
+  "event": "pull_request",
+  "jobs": [
+    {
+      "databaseId": 114238125503,
+      "name": "build (ubuntu-24.04, JAVA)",
+      "conclusion": "success",
+      "status": "completed",
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38060676594/job/114238125503",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-10T14:42:27Z",
+          "completed_at": "2026-10-10T14:42:31Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-10T14:42:31Z",
+          "completed_at": "2026-10-10T14:42:32Z"
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-10T14:42:32Z",
+          "completed_at": "2026-10-10T14:42:32Z"
+        },
+        {
+          "name": "Run gradle/actions/wrapper-validation@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-10T14:42:32Z",
+          "completed_at": "2026-10-10T14:42:32Z"
+        },
+        {
+          "name": "Run gradle/actions/setup-gradle@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-10T14:42:32Z",
+          "completed_at": "2026-10-10T14:42:46Z"
+        },
+        {
+          "name": "Run chmod +x gradlew",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-10T14:42:46Z",
+          "completed_at": "2026-10-10T14:42:46Z"
+        },
+        {
+          "name": "Run ./gradlew build --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-10T14:42:46Z",
+          "completed_at": "2026-10-10T14:43:10Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=JAVA -PrestartPhase=SETUP --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-10-10T14:43:10Z",
+          "completed_at": "2026-10-10T14:43:59Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=JAVA -PrestartPhase=VERIFY --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-10T14:43:59Z",
+          "completed_at": "2026-10-10T14:44:44Z"
+        },
+        {
+          "name": "Run ./gradlew runUpstreamReferenceServer -PtestBackend=JAVA --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-10T14:44:44Z",
+          "completed_at": "2026-10-10T14:45:14Z"
+        },
+        {
+          "name": "Run ./gradlew runReferenceCompatibilityServer -PtestBackend=JAVA --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-10T14:45:14Z",
+          "completed_at": "2026-10-10T14:45:43Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=JAVA -PtestNamespaces=wwpg_example -PtestDirectory=run/example --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-10T14:45:43Z",
+          "completed_at": "2026-10-10T14:46:14Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=JAVA -PtestNamespaces=wwpg_example -PtestDirectory=run/example -PrestartPhase=VERIFY --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-10T14:46:14Z",
+          "completed_at": "2026-10-10T14:46:44Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=JAVA -PtestNamespaces=wwpg_showroom -PtestDirectory=run/showroom --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-10T14:46:44Z",
+          "completed_at": "2026-10-10T14:47:21Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=JAVA -PtestNamespaces=wwpg_showroom -PtestDirectory=run/showroom -PrestartPhase=VERIFY --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-10T14:47:21Z",
+          "completed_at": "2026-10-10T14:47:56Z"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16,
+          "started_at": "2026-10-10T14:47:56Z",
+          "completed_at": "2026-10-10T14:47:57Z"
+        },
+        {
+          "name": "Post Run gradle/actions/setup-gradle@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 30,
+          "started_at": "2026-10-10T14:47:57Z",
+          "completed_at": "2026-10-10T14:47:58Z"
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 31,
+          "started_at": "2026-10-10T14:47:58Z",
+          "completed_at": "2026-10-10T14:47:58Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 32,
+          "started_at": "2026-10-10T14:47:58Z",
+          "completed_at": "2026-10-10T14:47:58Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 33,
+          "started_at": "2026-10-10T14:47:58Z",
+          "completed_at": "2026-10-10T14:47:58Z"
+        }
+      ]
+    },
+    {
+      "databaseId": 114238125678,
+      "name": "build (ubuntu-24.04, NATIVE)",
+      "conclusion": "success",
+      "status": "completed",
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38060676594/job/114238125678",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-10T14:42:28Z",
+          "completed_at": "2026-10-10T14:42:30Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-10T14:42:30Z",
+          "completed_at": "2026-10-10T14:42:31Z"
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-10T14:42:31Z",
+          "completed_at": "2026-10-10T14:42:31Z"
+        },
+        {
+          "name": "Run gradle/actions/wrapper-validation@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-10T14:42:31Z",
+          "completed_at": "2026-10-10T14:42:31Z"
+        },
+        {
+          "name": "Run gradle/actions/setup-gradle@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-10T14:42:31Z",
+          "completed_at": "2026-10-10T14:42:48Z"
+        },
+        {
+          "name": "Run chmod +x gradlew",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-10T14:42:48Z",
+          "completed_at": "2026-10-10T14:42:48Z"
+        },
+        {
+          "name": "Run ./gradlew build --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-10T14:42:48Z",
+          "completed_at": "2026-10-10T14:43:09Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PrestartPhase=SETUP --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-10-10T14:43:09Z",
+          "completed_at": "2026-10-10T14:44:35Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PrestartPhase=VERIFY --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-10T14:44:35Z",
+          "completed_at": "2026-10-10T14:45:48Z"
+        },
+        {
+          "name": "Run ./gradlew runUpstreamReferenceServer -PtestBackend=NATIVE --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-10T14:45:48Z",
+          "completed_at": "2026-10-10T14:46:17Z"
+        },
+        {
+          "name": "Run ./gradlew runReferenceCompatibilityServer -PtestBackend=NATIVE --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-10T14:46:17Z",
+          "completed_at": "2026-10-10T14:46:46Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PtestNamespaces=wwpg_example -PtestDirectory=run/example --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-10T14:46:46Z",
+          "completed_at": "2026-10-10T14:47:17Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PtestNamespaces=wwpg_example -PtestDirectory=run/example -PrestartPhase=VERIFY --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-10T14:47:17Z",
+          "completed_at": "2026-10-10T14:47:48Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PtestNamespaces=wwpg_showroom -PtestDirectory=run/showroom --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-10T14:47:48Z",
+          "completed_at": "2026-10-10T14:48:24Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PtestNamespaces=wwpg_showroom -PtestDirectory=run/showroom -PrestartPhase=VERIFY --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-10T14:48:24Z",
+          "completed_at": "2026-10-10T14:48:58Z"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16,
+          "started_at": "2026-10-10T14:48:58Z",
+          "completed_at": "2026-10-10T14:49:00Z"
+        },
+        {
+          "name": "Post Run gradle/actions/setup-gradle@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 30,
+          "started_at": "2026-10-10T14:49:00Z",
+          "completed_at": "2026-10-10T14:49:00Z"
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 31,
+          "started_at": "2026-10-10T14:49:00Z",
+          "completed_at": "2026-10-10T14:49:00Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 32,
+          "started_at": "2026-10-10T14:49:00Z",
+          "completed_at": "2026-10-10T14:49:00Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 33,
+          "started_at": "2026-10-10T14:49:00Z",
+          "completed_at": "2026-10-10T14:49:00Z"
+        }
+      ]
+    },
+    {
+      "databaseId": 114238125691,
+      "name": "build (windows-latest, JAVA)",
+      "conclusion": "success",
+      "status": "completed",
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38060676594/job/114238125691",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-10T14:42:27Z",
+          "completed_at": "2026-10-10T14:42:29Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-10T14:42:29Z",
+          "completed_at": "2026-10-10T14:42:34Z"
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-10T14:42:34Z",
+          "completed_at": "2026-10-10T14:42:34Z"
+        },
+        {
+          "name": "Run gradle/actions/wrapper-validation@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-10T14:42:34Z",
+          "completed_at": "2026-10-10T14:42:35Z"
+        },
+        {
+          "name": "Run gradle/actions/setup-gradle@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-10T14:42:35Z",
+          "completed_at": "2026-10-10T14:42:52Z"
+        },
+        {
+          "name": "Run chmod +x gradlew",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6,
+          "started_at": "2026-10-10T14:42:52Z",
+          "completed_at": "2026-10-10T14:42:52Z"
+        },
+        {
+          "name": "Run ./gradlew build --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-10T14:42:52Z",
+          "completed_at": "2026-10-10T14:43:24Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=JAVA -PrestartPhase=SETUP --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-10-10T14:43:24Z",
+          "completed_at": "2026-10-10T14:44:22Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=JAVA -PrestartPhase=VERIFY --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-10T14:44:22Z",
+          "completed_at": "2026-10-10T14:45:17Z"
+        },
+        {
+          "name": "Run ./gradlew runUpstreamReferenceServer -PtestBackend=JAVA --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-10T14:45:17Z",
+          "completed_at": "2026-10-10T14:46:05Z"
+        },
+        {
+          "name": "Run ./gradlew runReferenceCompatibilityServer -PtestBackend=JAVA --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-10T14:46:05Z",
+          "completed_at": "2026-10-10T14:46:46Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=JAVA -PtestNamespaces=wwpg_example -PtestDirectory=run/example --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-10T14:46:46Z",
+          "completed_at": "2026-10-10T14:47:26Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=JAVA -PtestNamespaces=wwpg_example -PtestDirectory=run/example -PrestartPhase=VERIFY --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-10T14:47:26Z",
+          "completed_at": "2026-10-10T14:48:02Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=JAVA -PtestNamespaces=wwpg_showroom -PtestDirectory=run/showroom --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-10T14:48:02Z",
+          "completed_at": "2026-10-10T14:48:45Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=JAVA -PtestNamespaces=wwpg_showroom -PtestDirectory=run/showroom -PrestartPhase=VERIFY --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-10T14:48:45Z",
+          "completed_at": "2026-10-10T14:49:26Z"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16,
+          "started_at": "2026-10-10T14:49:26Z",
+          "completed_at": "2026-10-10T14:49:28Z"
+        },
+        {
+          "name": "Post Run gradle/actions/setup-gradle@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 30,
+          "started_at": "2026-10-10T14:49:28Z",
+          "completed_at": "2026-10-10T14:49:28Z"
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 31,
+          "started_at": "2026-10-10T14:49:28Z",
+          "completed_at": "2026-10-10T14:49:28Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 32,
+          "started_at": "2026-10-10T14:49:28Z",
+          "completed_at": "2026-10-10T14:49:30Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 33,
+          "started_at": "2026-10-10T14:49:30Z",
+          "completed_at": "2026-10-10T14:49:30Z"
+        }
+      ]
+    },
+    {
+      "databaseId": 114238125727,
+      "name": "build (windows-latest, NATIVE)",
+      "conclusion": "success",
+      "status": "completed",
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38060676594/job/114238125727",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-10T14:42:27Z",
+          "completed_at": "2026-10-10T14:42:29Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-10T14:42:29Z",
+          "completed_at": "2026-10-10T14:42:33Z"
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-10T14:42:33Z",
+          "completed_at": "2026-10-10T14:42:34Z"
+        },
+        {
+          "name": "Run gradle/actions/wrapper-validation@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-10T14:42:34Z",
+          "completed_at": "2026-10-10T14:42:34Z"
+        },
+        {
+          "name": "Run gradle/actions/setup-gradle@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-10T14:42:34Z",
+          "completed_at": "2026-10-10T14:42:51Z"
+        },
+        {
+          "name": "Run chmod +x gradlew",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6,
+          "started_at": "2026-10-10T14:42:51Z",
+          "completed_at": "2026-10-10T14:42:51Z"
+        },
+        {
+          "name": "Run ./gradlew build --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-10T14:42:51Z",
+          "completed_at": "2026-10-10T14:43:15Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PrestartPhase=SETUP --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-10-10T14:43:15Z",
+          "completed_at": "2026-10-10T14:44:19Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PrestartPhase=VERIFY --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-10T14:44:19Z",
+          "completed_at": "2026-10-10T14:45:22Z"
+        },
+        {
+          "name": "Run ./gradlew runUpstreamReferenceServer -PtestBackend=NATIVE --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-10T14:45:22Z",
+          "completed_at": "2026-10-10T14:45:49Z"
+        },
+        {
+          "name": "Run ./gradlew runReferenceCompatibilityServer -PtestBackend=NATIVE --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-10T14:45:49Z",
+          "completed_at": "2026-10-10T14:46:14Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PtestNamespaces=wwpg_example -PtestDirectory=run/example --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-10T14:46:14Z",
+          "completed_at": "2026-10-10T14:46:41Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PtestNamespaces=wwpg_example -PtestDirectory=run/example -PrestartPhase=VERIFY --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-10T14:46:41Z",
+          "completed_at": "2026-10-10T14:47:08Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PtestNamespaces=wwpg_showroom -PtestDirectory=run/showroom --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-10T14:47:08Z",
+          "completed_at": "2026-10-10T14:47:43Z"
+        },
+        {
+          "name": "Run ./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PtestNamespaces=wwpg_showroom -PtestDirectory=run/showroom -PrestartPhase=VERIFY --no-daemon",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-10T14:47:43Z",
+          "completed_at": "2026-10-10T14:48:12Z"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16,
+          "started_at": "2026-10-10T14:48:12Z",
+          "completed_at": "2026-10-10T14:48:14Z"
+        },
+        {
+          "name": "Post Run gradle/actions/setup-gradle@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 30,
+          "started_at": "2026-10-10T14:48:14Z",
+          "completed_at": "2026-10-10T14:48:14Z"
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 31,
+          "started_at": "2026-10-10T14:48:14Z",
+          "completed_at": "2026-10-10T14:48:14Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 32,
+          "started_at": "2026-10-10T14:48:14Z",
+          "completed_at": "2026-10-10T14:48:16Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 33,
+          "started_at": "2026-10-10T14:48:16Z",
+          "completed_at": "2026-10-10T14:48:16Z"
+        }
+      ]
+    }
+  ],
+  "packagedArtifactHashes": [
+    {
+      "job": "wwpg-ubuntu-24.04-JAVA",
+      "file": "wwpg-0.1.0-beta.4.jar",
+      "sha256": "a4de0887257ba3e32924ae3b7babf08f0bbb9fd1630ac5e56d6087598fda86e2",
+      "bytes": 2744699
+    },
+    {
+      "job": "wwpg-ubuntu-24.04-NATIVE",
+      "file": "wwpg-0.1.0-beta.4.jar",
+      "sha256": "a4de0887257ba3e32924ae3b7babf08f0bbb9fd1630ac5e56d6087598fda86e2",
+      "bytes": 2744699
+    },
+    {
+      "job": "wwpg-windows-latest-JAVA",
+      "file": "wwpg-0.1.0-beta.4.jar",
+      "sha256": "a4de0887257ba3e32924ae3b7babf08f0bbb9fd1630ac5e56d6087598fda86e2",
+      "bytes": 2744699
+    },
+    {
+      "job": "wwpg-windows-latest-NATIVE",
+      "file": "wwpg-0.1.0-beta.4.jar",
+      "sha256": "a4de0887257ba3e32924ae3b7babf08f0bbb9fd1630ac5e56d6087598fda86e2",
+      "bytes": 2744699
+    }
+  ]
+}

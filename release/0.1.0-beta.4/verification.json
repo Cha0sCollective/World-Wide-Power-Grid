@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "target": "0.1.0-beta.4",
+  "tested_artifact": {
+    "file": "wwpg-0.1.0-beta.4.jar",
+    "sha256": "a4de0887257ba3e32924ae3b7babf08f0bbb9fd1630ac5e56d6087598fda86e2",
+    "bytes": 2744699
+  },
+  "ci_source_commit": "5dd8674a25bf2ecd6a2d27e5c5dba427ff9bffb2",
+  "ci": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38060676594",
+  "packaged_checks": 123,
+  "electrical_gameplay_lifecycle_checks": 122,
+  "startup_registration_checks": 1,
+  "equation_tests": 4,
+  "comparison": {
+    "tested_PR7_candidate": {
+      "file": "wwpg-0.1.0-beta.3.jar",
+      "sha256": "c3bd8e9e7488b9486291b2b6c68994581289ccfc7d8954e60528c46eecfa6bf2",
+      "bytes": 2744698
+    },
+    "changed_entries": [
+      "META-INF/neoforge.mods.toml"
+    ],
+    "only_mod_version_metadata_changed": true,
+    "correction_source_hashes_unchanged": true
+  },
+  "downloaded_yard": {
+    "checks": [
+      {
+        "backend": "NATIVE",
+        "phase": "verify",
+        "result": "PASS",
+        "log": {
+          "path": "build/beta4-yard-native-verify.log",
+          "file": "beta4-yard-native-verify.log",
+          "sha256": "cf739c19241cdc458ce1654b1441e579910dcf044c711bc7fb54798ea7123f73",
+          "bytes": 15586
+        }
+      },
+      {
+        "backend": "NATIVE",
+        "phase": "restart",
+        "result": "PASS",
+        "log": {
+          "path": "build/beta4-yard-native-restart.log",
+          "file": "beta4-yard-native-restart.log",
+          "sha256": "affbaf6ff2f8a72b1381ff782d85e84b8d9bf33e1d32293ed7bace85885299ee",
+          "bytes": 15432
+        }
+      },
+      {
+        "backend": "JAVA",
+        "phase": "verify",
+        "result": "PASS",
+        "log": {
+          "path": "build/beta4-yard-java-verify.log",
+          "file": "beta4-yard-java-verify.log",
+          "sha256": "a9fe40a4096b95a5953ebf1ee160b712dbb2c1285bc13fc43e7f0ad5b8a22f41",
+          "bytes": 15738
+        }
+      },
+      {
+        "backend": "JAVA",
+        "phase": "restart",
+        "result": "PASS",
+        "log": {
+          "path": "build/beta4-yard-java-restart.log",
+          "file": "beta4-yard-java-restart.log",
+          "sha256": "c9bf9ad0c089037afacbaea271e5152f6f1d8219d2797cef82ff35c386f231e0",
+          "bytes": 15432
+        }
+      }
+    ],
+    "live_behavior_groups": "85/134",
+    "board_types": 28,
+    "panel_types": 11,
+    "transformer_variac_circuits": 7,
+    "retained_PG_wires": 282,
+    "loose_wire_items": 0,
+    "mode": "Automated packaged servers; no new graphical-client checks"
+  },
+  "worlds_reused_unchanged": [
+    {
+      "file": "wwpg-0.1.0-beta.2-fixture-world-v1.zip",
+      "sha256": "7463af3876daa72064b0fa226f1cd88a633af6a1b2ab7471720d0fd6f3dd128f",
+      "bytes": 429696
+    },
+    {
+      "file": "wwpg-0.1.0-beta.2-example-v2.zip",
+      "sha256": "ef7547db80a9ce80246c2825008e24bca6712104f82e8e2f5701e9871947c413",
+      "bytes": 102117
+    }
+  ],
+  "negative_control": "release/fixes/restoration/verification.json; two focused failures, other 121 pass",
+  "earlier_client_and_multiplayer_evidence": [
+    "release/0.1.0-beta.2/verification.json",
+    "release/0.1.0-beta.3/verification.json"
+  ],
+  "remaining_issues": [
+    "Exact causes of historical intermittent zero readings remain unproven.",
+    "PG 0.6.2 circuit design-table saved-design loading error remains open."
+  ],
+  "scope": "Unchanged stationary support set; no scale or moving-system certification"
+}
