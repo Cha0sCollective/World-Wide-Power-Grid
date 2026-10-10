@@ -210,7 +210,7 @@ public final class WorldBridge {
         });
         for (var map : List.of(grounds, references)) map.entrySet().removeIf(e -> {
             if (wantedNodes.containsKey(e.getKey()) && !changed.contains(e.getKey()) && !isolated.contains(e.getKey())) return false;
-            e.getValue().remove(); return true;
+            removeGround(e.getValue()); return true;
         });
         for (var node : retired) if (node.endpoint instanceof InternalEndpoint) node.remove();
         for (var entry : wanted.entrySet()) {
@@ -251,18 +251,20 @@ public final class WorldBridge {
         }
         grounds.entrySet().removeIf(e -> {
             if (desiredGrounds.containsKey(e.getKey())) return false;
-            world.scheduleIslandDiscovery(e.getValue().getNode1().getNetwork());
-            e.getValue().remove(); return true;
+            world.scheduleIslandDiscovery(e.getValue().getNetwork());
+            removeGround(e.getValue()); return true;
         });
         for (var entry : desiredGrounds.entrySet()) {
             var ground = grounds.get(entry.getKey());
             if (ground == null) {
                 var node = nodes.get(entry.getKey());
                 if (node.getNetwork() == null) node.endpoint.joinNetwork(level, world.newNetwork());
-                ground = new CurrentSourceWire(node, null, entry.getValue());
-                node.getNetwork().addWire(ground);
+                ground = addGround(node, entry.getValue());
                 grounds.put(entry.getKey(), ground);
-            } else ground.setConductance(entry.getValue());
+            } else if (Double.compare(ground.conductance(), entry.getValue()) != 0) {
+                ground.setConductance(entry.getValue());
+                ground.getNetwork().setDirty();
+            }
         }
         nodes.entrySet().removeIf(e -> {
             if (wantedNodes.containsKey(e.getKey())) return false;
@@ -353,14 +355,25 @@ public final class WorldBridge {
         var wanted = new HashSet<>(best.values());
         references.entrySet().removeIf(e -> {
             if (wanted.contains(e.getKey())) return false;
-            e.getValue().remove(); return true;
+            removeGround(e.getValue()); return true;
         });
-        for (var key : wanted) references.computeIfAbsent(key, k -> {
-            var node = nodes.get(k);
-            var wire = new CurrentSourceWire(node, null, 1000);
-            node.getNetwork().addWire(wire);
-            return wire;
-        });
+        for (var key : wanted) references.computeIfAbsent(key, k -> addGround(nodes.get(k), 1000));
+    }
+
+    // PG 0.6.2's incremental conductance update rejects null-ended wires.
+    // Rebuild only when grounding changes, retaining the existing nodes and stamps.
+    private static CurrentSourceWire addGround(OwnedFloatingNode node, double conductance) {
+        var network = node.getNetwork();
+        var ground = new CurrentSourceWire(node, null, conductance);
+        network.addWire(ground);
+        network.setDirty();
+        return ground;
+    }
+
+    private static void removeGround(CurrentSourceWire ground) {
+        var network = ground.getNetwork();
+        ground.remove();
+        if (network != null) network.setDirty();
     }
 
     public void beforeSolve(ElectricalNetwork network) {

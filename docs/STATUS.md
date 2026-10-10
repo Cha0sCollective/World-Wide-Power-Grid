@@ -16,6 +16,14 @@ The original acceptance covered installed meters; it did not validate the handhe
 
 The declared scope is stationary interoperability: 95 block/assembly behaviors, 11 built-in CEE panel attachments, and 28 built-in PG board components. See [SUPPORT.md](SUPPORT.md) for the inventory and exclusions, and [INSTALL.md](INSTALL.md) for the exact dependencies and solver settings.
 
+## Grounding correction in development
+
+The published beta.2 can retain incorrect voltages when a ground connection changes without replacing the circuit's nodes. This also affects moving the preferred voltage reference and unloading a chunk containing a ground rod. PG 0.6.2 skips its incremental equation update for ground connections, which have only one terminal.
+
+The source correction rebuilds the affected equations when grounding changes, preserving the circuit's existing nodes and branches. Three new regressions cover adding/removing/changing grounds, reference changes and physical-ground takeover, and two actual ground-rod chunk unload/reload cycles. The packaged suite now contains 121 checks. [Grounding verification](../release/fixes/grounding/) records the results and reproduction on the old code.
+
+This is an unreleased source fix; the published beta.2 downloads are unchanged. It does not establish the causes of the earlier intermittent chunk-reload or board-restart failures below.
+
 ## Test evidence
 
 | Record | Outcome |
