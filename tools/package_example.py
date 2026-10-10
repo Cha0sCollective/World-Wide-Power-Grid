@@ -57,6 +57,9 @@ ci_path = record / "ci.json"
 ci = json.loads(ci_path.read_text(encoding="utf-8"))
 if ci.get("conclusion") != "success" or len(ci.get("jobs", [])) != 4 or any(job.get("conclusion") != "success" for job in ci["jobs"]):
     raise SystemExit("The four platform/backend CI jobs have not passed")
+ci_hashes = ci.get("packagedArtifactHashes", [])
+if len(ci_hashes) != 4 or any(entry.get("sha256") != sha(harness) for entry in ci_hashes):
+    raise SystemExit("The four CI fixture jars must match the locally tested harness")
 evidence[ci_path.relative_to(root).as_posix()] = ci_path
 
 world = output / "wwpg-0.1.0-beta.2-example-v2.zip"
@@ -73,7 +76,8 @@ report = {
     "test_harness": {"sha256": sha(harness), "changed_entries": changed,
                      "non_gametest_entries_identical": len(original_entries),
                      "note": "The harness contains revised fixtures; all other jar entries match the published runtime byte for byte."},
-    "ci": {"url": ci["url"], "source_commit": ci["headSha"], "platform_backend_jobs": 4},
+    "ci": {"url": ci["url"], "source_commit": ci["headSha"], "platform_backend_jobs": 4,
+           "all_fixture_jars_byte_identical": True},
     "equation_checks": equations, "checks": checks,
     "tested_behavior": ["Native CEE panel interaction", "PG relay contacts power both CEE lamp branches",
                         "RUN on / OFF dark while enabled", "Capacitor holds RUN after opening the panel switch",
