@@ -1,5 +1,7 @@
 # Release records
 
+[Restoration verification](fixes/restoration/) records the source corrections after beta.3, their negative controls, delayed-loading regressions, and native/Java results. It is separate from published release acceptance.
+
 [0.1.0-beta.3/](0.1.0-beta.3/) records the grounding release, the final versioned jar, and its native/Java acceptance. It retains the dependency baseline and reuses the unchanged expanded yard and panel demo. Earlier release artifacts and evidence are preserved.
 
 [examples/expanded-yard-v1/](examples/expanded-yard-v1/) records the expanded test yard, its exact live/inventory coverage, and separate world/evidence downloads for the unchanged beta.2 runtime.

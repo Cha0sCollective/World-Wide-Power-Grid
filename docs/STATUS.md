@@ -28,6 +28,14 @@ The same grounding-fix jar passed [real Windows client checks of the downloaded 
 
 This correction is released in beta.3; published beta.2 downloads and earlier evidence remain unchanged. It does not establish the causes of the earlier intermittent chunk-reload or board-restart failures below.
 
+## Restoration corrections after beta.3
+
+The source now protects PG wires while saved entities are still loading and preserves PG board capacitors' committed charge when their newly restored circuit has not solved yet. These changes are **not included in the published beta.3 jar**. Dependencies, solver selection, and the stationary support set are unchanged.
+
+The investigation separates three behaviors: an early zero-power reading while wires are pending; PG's cleanup timer treating a pending entity as missing; and a board's persistence callback copying a cold zero terminal reading over retained charge. The test suite delays real entity-load results, requires restored power shortly after readiness, and checks saved capacitor state before recharging can conceal a loss. It contains 123 packaged checks, including cold-save and missing-wire cleanup regressions. [Restoration verification](../release/fixes/restoration/) records reproduction and backend results.
+
+The historical failures below did not record entity readiness or capacitor history at the failing instant. The corrections address reproducible restoration paths, but cannot conclusively attribute every earlier zero reading to one of them. The PG design-table saved-design error remains a separate open issue.
+
 ## Test evidence
 
 | Record | Outcome |
@@ -51,9 +59,9 @@ CI runs the packaged suite's SETUP and VERIFY phases, upstream reference compari
 
 The initial Linux/native run failed `chunkReloadRebindsMixedEndpoints`: the restored circuit read **0 V**, where the fixture expected **10 V**. Subsequent runs passed without implementation changes.
 
-The test samples at a fixed tick after forcing the chunk to load, while entity loading is asynchronous. This is a plausible timing cause, not a confirmed diagnosis. It remains unclear whether the failure is limited to the test's deadline or exposes a compatibility lifecycle defect. A successful later run does not resolve that question.
+The published test samples at a fixed tick after forcing the chunk to load, while entity loading is asynchronous. Delaying real entity-load results now reproduces **0 V with entities still pending** at that deadline. The updated fixture retains both actual unload/reload cycles and requires 10 V within five ticks of entity readiness, under the original total timeout. It also checks retained wire identities while loading is pending.
 
-The next diagnostic step is to record chunk/entity readiness, restored wire connections, and simulation progress before the assertion. Any change must retain an actual unload/reload and check that power returns within a bounded interval. Beta.3's grounding correction does not claim to fix this earlier failure.
+PG's separate missing-wire cleanup timer uses block-chunk availability and can expire a part while entities are still loading. The source pauses that timer until entity readiness, retaining its normal cleanup grace period afterward. A dedicated fixture exercises this reconciliation boundary; the ordinary whole-chunk fixture alone did not reproduce premature part deletion. These results establish concrete timing and lifecycle defects without proving which occurred in the old uninstrumented CI failure.
 
 ## Unresolved board restart reading
 
@@ -61,7 +69,9 @@ A local Windows/native VERIFY run on `cd41b24` failed `restartRetainsPanelTermin
 
 The failed run did not capture those diagnostics, so the rerun cannot establish whether the original failure lost stored charge or sampled a circuit before restoration completed. The failure and diagnostic logs are retained with the hotfix evidence. This is separate from the startup registration fix and remains open; later passing runs do not establish a cause.
 
-The same assertion failed again in [PR #5's Linux/native CI run, attempt 1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38046505940/attempts/1), on `dfbfa64`. A retry of the failed job passed without code or assertion changes; the [main merge CI](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38051470456) also passed. This confirms that the restart failure is still intermittent. Beta.3 retains it as an unresolved issue.
+The same assertion failed again in [PR #5's Linux/native CI run, attempt 1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38046505940/attempts/1), on `dfbfa64`. A retry of the failed job passed without code or assertion changes; the [main merge CI](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38051470456) also passed. Beta.3 retains the unresolved historical failure.
+
+The current investigation's delayed restart retained about 9.869 V; it did not reproduce saved charge loss in that circuit. A separate cold-save fixture conclusively reproduces a related defect: PG's native board capacitor tick writes **0 V** into its saved charge property although its solver history still holds **7.5 V**. Saving committed history corrects that overwrite. The revised restart fixture checks serialized charge and history before the first solve, then checks the restored live reading after entity readiness. Historical failures lacked those observations, so their exact cause remains unproven.
 
 ## PG circuit design table saved-design error
 
