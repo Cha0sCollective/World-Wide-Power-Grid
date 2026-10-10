@@ -184,3 +184,12 @@ The harness now sets and logs PG's actual requested backend before each batch.
 Three complete cold passes on the corrected artifact and full eight-combination
 CI are still required for this batch. Playable computer stations and fresh
 graphical/two-client acceptance remain release blockers.
+
+The backend-setting correction did not close the durable cold-boot failure.
+Retained native and Java failures show `PINOUT_BOOT` with `ticking=false`: the
+harness constructed and started a globally registered computer before its forced
+chunks became entity-ticking. The fixture now waits for actual ticking and entity
+inbox readiness across all four chunks before booting Lua, including reloads.
+It still reads saved pins/settings immediately before any solve, and keeps the
+same voltage/current expectations. Corrected complete cold passes are pending;
+passing retries of the earlier harness are not counted as a resolution.

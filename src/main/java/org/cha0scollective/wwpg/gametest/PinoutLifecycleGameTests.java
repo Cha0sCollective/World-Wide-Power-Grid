@@ -80,7 +80,7 @@ public final class PinoutLifecycleGameTests {
             var computer = new dan200.computercraft.shared.computer.core.ServerComputer[1];
             var mount = new dan200.computercraft.api.filesystem.WritableMount[1];
             var ids = new HashSet<WorldNetworks.PartId>();
-            var sequence = h.startSequence().thenIdle(10).thenExecute(() -> {
+            var sequence = h.startSequence().thenWaitUntil(() -> ready(h)).thenIdle(2).thenExecute(() -> {
                 if (!verify) {
                     ShowroomTools.scroll(h, SOURCE, 12_000);
                     ((CircuitBoardBlockEntity) level.getBlockEntity(load(3))).setSchematic(BoardWorkflowGameTests.viaLabelBoard());
@@ -140,7 +140,7 @@ public final class PinoutLifecycleGameTests {
                     h.assertTrue(!level.areEntitiesLoaded(new ChunkPos(PINS).toLong()), "Delayed Pinout wire entities were not exercised");
                     h.assertTrue(ids.stream().allMatch(id -> GlobalElectricNetworks.getWorldNetworks(level).getPart(id) != null),
                             "Native Pinout wire identity expired while entities were delayed");
-                }).thenWaitUntil(() -> h.assertTrue(level.areEntitiesLoaded(new ChunkPos(PINS).toLong()), "Waiting for Pinout wire readiness"))
+                }).thenWaitUntil(() -> ready(h)).thenIdle(2)
                         .thenExecute(() -> boot(h, computer, mount, false))
                         .thenWaitUntil(() -> complete(h, mount[0], "lifecycle.json"))
                         .thenExecute(() -> {
@@ -179,6 +179,7 @@ public final class PinoutLifecycleGameTests {
 
         private static void boot(GameTestHelper h, dan200.computercraft.shared.computer.core.ServerComputer[] computer,
                                  dan200.computercraft.api.filesystem.WritableMount[] mount, boolean install) {
+            ready(h);
             computer[0] = ((dan200.computercraft.shared.computer.blocks.AbstractComputerBlockEntity) h.getLevel().getBlockEntity(COMPUTER)).createServerComputer();
             mount[0] = computer[0].createRootMount();
             for (var path : new String[]{"lifecycle.json", "detached.json", "attached.json", "replacement.json", "lifecycle-error.json"}) delete(mount[0], path);
@@ -202,6 +203,18 @@ public final class PinoutLifecycleGameTests {
                 h.assertTrue(JsonParser.parseString(read(mount, path)).getAsJsonObject().get("ok").getAsBoolean(), "Native Lua report failed");
                 return true;
             } catch (IOException error) { throw new IllegalStateException(error); }
+        }
+        private static void ready(GameTestHelper h) {
+            var level = h.getLevel();
+            // getChunk() returns a full chunk before its ticking ticket and
+            // entity inbox are necessarily ready. A Lua computer can run from
+            // the global registry before the electrical block entities tick.
+            for (int x = SOURCE.getX() >> 4; x <= (SOURCE.getX() >> 4) + 1; x++)
+                for (int z = SOURCE.getZ() >> 4; z <= (SOURCE.getZ() >> 4) + 1; z++) {
+                    var chunk = new ChunkPos(x, z);
+                    h.assertTrue(level.areEntitiesLoaded(chunk.toLong()) && level.isPositionEntityTicking(chunk.getMiddleBlockPosition(64)),
+                            "Waiting for actual Pinout chunk/entity ticking readiness " + chunk);
+                }
         }
         private static void electrical(GameTestHelper h, dan200.computercraft.api.filesystem.WritableMount mount) {
             var level = h.getLevel();

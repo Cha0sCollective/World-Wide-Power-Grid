@@ -6,8 +6,8 @@ local function report(path, value)
   if fs.exists(path) then fs.delete(path) end
   fs.move(path .. ".tmp", path)
 end
-local function near(actual, expected)
-  assert(math.abs(actual - expected) < 0.03, tostring(actual) .. " != " .. tostring(expected))
+local function near(actual, expected, label)
+  assert(math.abs(actual - expected) < 0.03, label .. ": " .. tostring(actual) .. " != " .. tostring(expected))
 end
 local ok, err = pcall(function()
   local p = assert(peripheral.find("pinout"), "Pinout did not attach after loading")
@@ -24,10 +24,10 @@ local ok, err = pcall(function()
   assert(before == (boots == 0 and 0 or 85), "Saved pins changed before the first Lua write")
   p.setByte(0)
   sleep(0.2)
-  for pin = 1, 8 do near(p.comparePin(pin, 9), -12) end
+  for pin = 1, 8 do near(p.comparePin(pin, 9), -12, "open pin " .. pin .. " at boot " .. boots) end
   p.setByte(255)
   sleep(0.3)
-  for pin = 1, 8 do near(p.comparePin(pin, 9), 0) end
+  for pin = 1, 8 do near(p.comparePin(pin, 9), 0, "closed pin " .. pin .. " at boot " .. boots) end
   p.setByte(85)
   sleep(0.3)
   local voltages = p.pinsVoltage()
