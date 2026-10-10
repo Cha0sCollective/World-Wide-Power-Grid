@@ -1,0 +1,305 @@
+{
+  "schema": 1,
+  "date": "2026-10-10",
+  "correction": "pending wire reconciliation and cold board capacitor persistence",
+  "base_commit": "7fa7844ad0324f337f2d046f52dc2c3a73c8bec7",
+  "release_status": "Unreleased source correction; published beta.3 artifacts unchanged. Candidate retains beta.3 metadata and is identified by this hash.",
+  "dependencies": "release/artifacts.json",
+  "java": "Eclipse Adoptium 21.0.12+8",
+  "candidate": {
+    "path": "build/libs/wwpg-0.1.0-beta.3.jar",
+    "sha256": "c3bd8e9e7488b9486291b2b6c68994581289ccfc7d8954e60528c46eecfa6bf2",
+    "bytes": 2744698
+  },
+  "source_files": [
+    {
+      "path": "src/main/java/org/cha0scollective/wwpg/gametest/DelayedEntityLoads.java",
+      "sha256": "1dff6c942deb5403984730ac4454fc3e791ecb292c642bf16bec0d74a9cd5eca",
+      "bytes": 3557
+    },
+    {
+      "path": "src/main/java/org/cha0scollective/wwpg/gametest/RestorationGameTests.java",
+      "sha256": "796e69691943a9e3c037b9ef2ad92db718503cc7f9ccdf64cb05b2b34ce1a302",
+      "bytes": 6444
+    },
+    {
+      "path": "src/main/java/org/cha0scollective/wwpg/gametest/ElectronicsPersistenceGameTests.java",
+      "sha256": "fb9a600e8a0048acf3ccfbb71cf2e9b5550c6411ca4eee3d316b1398914b125a",
+      "bytes": 12021
+    },
+    {
+      "path": "src/main/java/org/cha0scollective/wwpg/gametest/PersistenceGameTests.java",
+      "sha256": "6284885744acabb61b4409e95e0f807a78c8382b4f95798497a5f4f2d08f3002",
+      "bytes": 14526
+    },
+    {
+      "path": "src/main/java/org/cha0scollective/wwpg/mixin/WorldNetworksMixin.java",
+      "sha256": "613d53800bf83afda1944f97cb193780fc28a9c233767716e5620156da700bb7",
+      "bytes": 2534
+    },
+    {
+      "path": "src/main/java/org/cha0scollective/wwpg/mixin/BoardCapacitorPersistenceMixin.java",
+      "sha256": "a1d08a68209fb717cf1c364a2b4580e88856e5096f800e3a2a0a54f792d1a8e8",
+      "bytes": 915
+    },
+    {
+      "path": "src/main/java/org/cha0scollective/wwpg/mixin/CapacitorHistoryAccessor.java",
+      "sha256": "36f9940ba0abb7dcabe20141dc0f321f19db1fefeb3e46f3fe12f569023ceb85",
+      "bytes": 428
+    },
+    {
+      "path": "src/main/resources/wwpg.mixins.json",
+      "sha256": "9cc174899491c4e693724c9f6fb97ccff2f7ce8f73b900a9e6b7a169da1c6af6",
+      "bytes": 896
+    }
+  ],
+  "equation_tests": {
+    "passed": 4,
+    "failures": 0
+  },
+  "checks": [
+    {
+      "platform": "Windows 11 amd64",
+      "backend": "NATIVE",
+      "phase": "SETUP",
+      "result": "PASS",
+      "packaged_checks": 123,
+      "cold_save_volts": 7.5,
+      "pending_wire_part_retained": true,
+      "restored_power_deadline_ticks_after_entity_readiness": 5,
+      "full_local_log": {
+        "path": "build/restoration-native-final-setup.log",
+        "sha256": "e1fca0133f3b6a8585f5aab28d38a475c47fcf1425cc70f9ee5dd614fbc21a59",
+        "bytes": 36582
+      },
+      "retained_checkpoints": {
+        "path": "release/fixes/restoration/checkpoints/native-setup.log",
+        "sha256": "04d24682bce55538ef704cf670b707c09d0a956c5acb45143c488e231306d32e",
+        "bytes": 1948
+      }
+    },
+    {
+      "platform": "Windows 11 amd64",
+      "backend": "NATIVE",
+      "phase": "VERIFY",
+      "result": "PASS",
+      "packaged_checks": 123,
+      "cold_save_volts": 7.5,
+      "pending_wire_part_retained": true,
+      "restored_power_deadline_ticks_after_entity_readiness": 5,
+      "full_local_log": {
+        "path": "build/restoration-native-final-verify.log",
+        "sha256": "e88a0e9e148488e1a19cce8ed7257e0161f8a963ba51d9184c51883c76f2458e",
+        "bytes": 33444
+      },
+      "retained_checkpoints": {
+        "path": "release/fixes/restoration/checkpoints/native-verify.log",
+        "sha256": "4b709674b280eb7d5cc1890c2146f03a074896437f8ab6db295f63d6fee6ec9e",
+        "bytes": 3041
+      }
+    },
+    {
+      "platform": "Windows 11 amd64",
+      "backend": "JAVA",
+      "phase": "SETUP",
+      "result": "PASS",
+      "packaged_checks": 123,
+      "cold_save_volts": 7.5,
+      "pending_wire_part_retained": true,
+      "restored_power_deadline_ticks_after_entity_readiness": 5,
+      "full_local_log": {
+        "path": "build/restoration-java-final-setup.log",
+        "sha256": "c60ef7502c74a4426bce54c9bbbe551deecc0a1ec2f92ed1cae9ba2dbbacd009",
+        "bytes": 32301
+      },
+      "retained_checkpoints": {
+        "path": "release/fixes/restoration/checkpoints/java-setup.log",
+        "sha256": "f81d5f9549a29f936a322e43fda68c4218491dc13aaa8653da8a18834f26b81e",
+        "bytes": 1945
+      }
+    },
+    {
+      "platform": "Windows 11 amd64",
+      "backend": "JAVA",
+      "phase": "VERIFY",
+      "result": "PASS",
+      "packaged_checks": 123,
+      "cold_save_volts": 7.5,
+      "pending_wire_part_retained": true,
+      "restored_power_deadline_ticks_after_entity_readiness": 5,
+      "full_local_log": {
+        "path": "build/restoration-java-final-verify.log",
+        "sha256": "addbe4ef480c2a0ee514f243d884e46682033721c7dd1fc8670b0b2f578c62f5",
+        "bytes": 34018
+      },
+      "retained_checkpoints": {
+        "path": "release/fixes/restoration/checkpoints/java-verify.log",
+        "sha256": "68597470df369884a4e3cfdcf62488fd53db729b35e190105b21bfc3a0a04034",
+        "bytes": 3428
+      }
+    }
+  ],
+  "negative_control": {
+    "backend": "JAVA",
+    "phase": "SETUP",
+    "result": "EXPECTED FAILURE: both targeted fixtures fail, other 121 pass",
+    "disabled_changes": [
+      "WorldNetworksMixin restored from base commit",
+      "BoardCapacitorPersistenceMixin removed from mixin configuration; accessor retained for unchanged test fixtures"
+    ],
+    "candidate": {
+      "path": "build/restoration-control/wwpg-controls.jar",
+      "sha256": "141856ab9b0cd5908a81ebd19425ecf32b6d4bc61a3cb68d07b03fde71bc2273",
+      "bytes": 2744356
+    },
+    "saved_capacitor_history_volts": 7.5,
+    "incorrectly_persisted_volts": 0.0,
+    "pending_wire_part_retained": false,
+    "failures": [
+      {
+        "fixture": "coldboardsavepreservesunsolvedcapacitorhistory",
+        "assertion": "Cold board tick overwrote stored charge with a zero terminal reading expected 7.5, got 0.0"
+      },
+      {
+        "fixture": "missingwirewaitsforentitiesthenexpires",
+        "assertion": "PG expired a missing wire before the entity load completed"
+      }
+    ],
+    "full_local_log": {
+      "path": "build/restoration-java-controls.log",
+      "sha256": "1cbe9e416337b0a1c09606b89186b5bc2f38eb873d0ea1ad69411d03affba121",
+      "bytes": 37715
+    },
+    "retained_checkpoints": {
+      "path": "release/fixes/restoration/checkpoints/java-negative-control.log",
+      "sha256": "2ef91f04f09008fa77933fb03bb83d90f75ebb77a250b5188ab684dc4e83a1da",
+      "bytes": 2344
+    }
+  },
+  "scope_and_limits": [
+    "Entity-load gates delay real results for 60 ticks, do not change data, and are installed only in GameTests.",
+    "Actual chunk absence and unload events remain mandatory; the original 900-tick chunk deadline is retained.",
+    "Stored board property and solver history are checked before the first solve and recharging.",
+    "Whole-chunk reload reproduced a premature 0 V reading but did not itself reproduce missing-part deletion; the dedicated reconciliation fixture does.",
+    "The controlled delayed restart retained charge. The cold-save fixture proves a related overwrite, without establishing the exact cause of historical uninstrumented restart failures.",
+    "PG circuit-design-table saved-design failure is separate and remains open."
+  ],
+  "github_validation": "The existing Windows/Linux x NATIVE/JAVA matrix runs the 123-check suite in SETUP and VERIFY, upstream references, and example/expanded-yard creation and restart; final outcomes are reported on the pull request.",
+  "expanded_yard": {
+    "source_archive": {
+      "name": "wwpg-0.1.0-beta.2-fixture-world-v1.zip",
+      "sha256": "7463af3876daa72064b0fa226f1cd88a633af6a1b2ab7471720d0fd6f3dd128f",
+      "bytes": 429696
+    },
+    "checks": [
+      {
+        "platform": "Windows 11 amd64",
+        "kind": "Packaged dedicated GameTest server; no graphical client in this check",
+        "backend": "NATIVE",
+        "backend_assertion": "ExampleWorldGameTests.demonstrate invokes DynamicGameTests.audit before success",
+        "phase": "Open pristine downloaded yard",
+        "result": "PASS",
+        "packaged_world_fixtures": 1,
+        "live_behavior_groups": 85,
+        "declared_behavior_groups": 134,
+        "builtin_board_components": 28,
+        "panel_attachment_types": 11,
+        "transformer_variac_circuits": 7,
+        "retained_PG_wire_entities": 282,
+        "loose_wire_items": 0,
+        "factory_panel_and_delayed_lamps": "PASS",
+        "full_local_log": {
+          "path": "build/restoration-yard-native-verify.log",
+          "sha256": "97b4bb0c7b310a78330d4c1371b327b21b2efdcf12441f74589345aecefc03d9",
+          "bytes": 19733
+        },
+        "retained_checkpoints": {
+          "path": "release/fixes/restoration/checkpoints/yard-native-verify.log",
+          "sha256": "235ed3f42a8ef2ba8e91f53feeb4a7460ed1ef1bcf9aadbe54cc614f1f5cf15b",
+          "bytes": 994
+        }
+      },
+      {
+        "platform": "Windows 11 amd64",
+        "kind": "Packaged dedicated GameTest server; no graphical client in this check",
+        "backend": "NATIVE",
+        "backend_assertion": "ExampleWorldGameTests.demonstrate invokes DynamicGameTests.audit before success",
+        "phase": "Reopen save made by corrected candidate",
+        "result": "PASS",
+        "packaged_world_fixtures": 1,
+        "live_behavior_groups": 85,
+        "declared_behavior_groups": 134,
+        "builtin_board_components": 28,
+        "panel_attachment_types": 11,
+        "transformer_variac_circuits": 7,
+        "retained_PG_wire_entities": 282,
+        "loose_wire_items": 0,
+        "factory_panel_and_delayed_lamps": "PASS",
+        "full_local_log": {
+          "path": "build/restoration-yard-native-restart.log",
+          "sha256": "000227eefe0bf0bbb2ff91ec7c07adde9a851e46de67c5b94510d9c516cd3a06",
+          "bytes": 15419
+        },
+        "retained_checkpoints": {
+          "path": "release/fixes/restoration/checkpoints/yard-native-restart.log",
+          "sha256": "1d991e8ea65d840b67d2b167f9cc0dbdcafcb2047111f085774ee3ef7514d3f1",
+          "bytes": 994
+        }
+      },
+      {
+        "platform": "Windows 11 amd64",
+        "kind": "Packaged dedicated GameTest server; no graphical client in this check",
+        "backend": "JAVA",
+        "backend_assertion": "ExampleWorldGameTests.demonstrate invokes DynamicGameTests.audit before success",
+        "phase": "Open pristine downloaded yard",
+        "result": "PASS",
+        "packaged_world_fixtures": 1,
+        "live_behavior_groups": 85,
+        "declared_behavior_groups": 134,
+        "builtin_board_components": 28,
+        "panel_attachment_types": 11,
+        "transformer_variac_circuits": 7,
+        "retained_PG_wire_entities": 282,
+        "loose_wire_items": 0,
+        "factory_panel_and_delayed_lamps": "PASS",
+        "full_local_log": {
+          "path": "build/restoration-yard-java-verify.log",
+          "sha256": "c19e1c458d728d9ea022dfeed0422072c3bc078b42b3fcec1b8ecc6cd6210f6b",
+          "bytes": 19881
+        },
+        "retained_checkpoints": {
+          "path": "release/fixes/restoration/checkpoints/yard-java-verify.log",
+          "sha256": "b34a4ad722259992c89fc8617a90c95a34f9ff1fa4ba06c1c717d94e36a4f39a",
+          "bytes": 994
+        }
+      },
+      {
+        "platform": "Windows 11 amd64",
+        "kind": "Packaged dedicated GameTest server; no graphical client in this check",
+        "backend": "JAVA",
+        "backend_assertion": "ExampleWorldGameTests.demonstrate invokes DynamicGameTests.audit before success",
+        "phase": "Reopen save made by corrected candidate",
+        "result": "PASS",
+        "packaged_world_fixtures": 1,
+        "live_behavior_groups": 85,
+        "declared_behavior_groups": 134,
+        "builtin_board_components": 28,
+        "panel_attachment_types": 11,
+        "transformer_variac_circuits": 7,
+        "retained_PG_wire_entities": 282,
+        "loose_wire_items": 0,
+        "factory_panel_and_delayed_lamps": "PASS",
+        "full_local_log": {
+          "path": "build/restoration-yard-java-restart.log",
+          "sha256": "40e695809375d24c8bd41c85412ebfe149eb702a21e49b65b3590f7249e1688c",
+          "bytes": 15419
+        },
+        "retained_checkpoints": {
+          "path": "release/fixes/restoration/checkpoints/yard-java-restart.log",
+          "sha256": "52e301f22d94d2d811c0bf7630b39455ad9c3d6adadac769609c09c04df6e3e0",
+          "bytes": 994
+        }
+      }
+    ]
+  }
+}

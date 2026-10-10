@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Keep PG's missing-wire checks queued while a chunk's saved entities are still loading. Start the existing ten-tick cleanup grace period after entity readiness; genuinely missing wires still expire.
+- Save PG board capacitors from their committed voltage history, preventing an unsolved terminal reading from overwriting retained charge with zero.
+- Check saved board charge before the first solve, delay real entity-load results during restart and two actual chunk reloads, and require restored power within five ticks of entity readiness. Add cold-save and missing-wire cleanup regressions (123 packaged checks total).
+- Preserve published beta.3 artifacts and historical failures. These changes address reproducible restoration defects; the old intermittent failures did not capture enough state to identify their exact cause retrospectively.
+
 ## 0.1.0-beta.3 — 10 October 2026
 
 - Refresh PG's electrical equations when physical grounds or preferred voltage references are added, removed, or change conductance. Retain existing nodes and branches, and avoid rebuilding for unchanged grounding.

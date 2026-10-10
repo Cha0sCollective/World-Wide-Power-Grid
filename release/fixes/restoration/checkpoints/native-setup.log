@@ -1,0 +1,9 @@
+[09:06:57] [Server thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: RESTORE_BOARD entity-ready: entitiesReady=true, measured=5.209230228800259, history=5.209178136497972, properties={Id:"powergrid:capacitor",Properties:{"powergrid:capacitor_value":0.1f,"powergrid:charge":5.209178f,"powergrid:orientation":0},UUID:[I;1527812535,1157578759,-1107218938,447954787],X:6,Y:5}, connections={Block(pos=BlockPos{x=1542, y=64, z=1536}, n=0)=[HangingWireEntity['Hanging Wire'/179, l='ServerLevel[Test Level]', x=1541.30, y=64.22, z=1536.64], HangingWireEntity['Hanging Wire'/173, l='ServerLevel[Test Level]', x=1541.42, y=64.25, z=1536.64]], Block(pos=BlockPos{x=1542, y=64, z=1536}, n=1)=[HangingWireEntity['Hanging Wire'/177, l='ServerLevel[Test Level]', x=1542.52, y=64.22, z=1538.14]]}, phase=RESULTS, endpoints=204, branches=136, created=139, removed=2, prepared=47, committed=46, PG substeps=400, backends={NATIVE=15440}, CEE solve attempts=0
+[09:07:06] [Server thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: RESTORE_CHUNK: entitiesReady=false, lines=6, voltage=0.0, phase=RESULTS, endpoints=209, branches=148, created=167, removed=18, prepared=442, committed=441, PG substeps=6720, backends={NATIVE=337968}, CEE solve attempts=0
+[09:07:15] [Server thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: RESTORE_COLD_SAVE: measured=0.0, history=7.5, persisted=7.5
+[09:07:28] [Server thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: Grounding regression: actual rod unload 1 after 1 ticks
+[09:07:28] [Server thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: RESTORE_WIRE_CHECK: entitiesReady=false, retained=true
+[09:07:28] [Server thread/INFO] [or.ch.ww.WorldWidePowerGrid/]: Grounding regression: actual rod unload 2 after 2 ticks
+[09:07:32] [Server thread/INFO] [minecraft/GameTestServer]: ========= 123 GAME TESTS COMPLETE IN 37.71 s ======================
+[09:07:32] [Server thread/INFO] [minecraft/GameTestServer]: All 123 required tests passed :)
+BUILD SUCCESSFUL in 59s

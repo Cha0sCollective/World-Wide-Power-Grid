@@ -53,7 +53,7 @@ public final class PersistenceGameTests {
             level.setBlockAndUpdate(source, CEEBlocks.CREATIVE_BATTERY.getDefaultState());
             level.setBlockAndUpdate(load, ModdedBlocks.CREATIVE_RESISTOR.getDefaultState());
         });
-        Object[] oldEndpoint = new Object[1];
+        var ids = new java.util.ArrayList<org.patryk3211.powergrid.electricity.WorldNetworks.PartId>();
         h.runAtTickTime(15, () -> {
             DevicesSavedData.load(level).getDevice(source, CreativeBatteryDevice.class).voltage = 10;
             ((ResistorBlockEntity) level.getBlockEntity(load)).getBehaviour(ScrollValueBehaviour.TYPE).setValue(35);
@@ -61,7 +61,9 @@ public final class PersistenceGameTests {
         });
         h.runAtTickTime(35, () -> {
             close(h, pgVoltage(h, load), 10, "Before chunk unload");
-            oldEndpoint[0] = new BlockWireEndpoint(load, 0).getNode(level);
+            var world=org.patryk3211.powergrid.electricity.GlobalElectricNetworks.getWorldNetworks(level);
+            for(int port=0;port<2;port++)for(var part:world.findConnectedWires(new BlockWireEndpoint(load,port)))ids.add(part.persistentOwnerId);
+            h.assertTrue(ids.size()==2,"Expected two saved PG wire identities");
             level.getDataStorage().save(); level.getChunkSource().save(true);
             level.setChunkForced(128, 128, false);
         });
@@ -73,10 +75,21 @@ public final class PersistenceGameTests {
             h.assertTrue(level.getChunkSource().getChunkNow(128, 128) == null, "The fixture chunk never actually unloaded: "
                     + level.getChunkSource().getChunkDebugData(new net.minecraft.world.level.ChunkPos(128, 128)));
             h.assertTrue(unloaded.get(), "Chunk changed status without completing its unload event");
+            DelayedEntityLoads.hold(level,new net.minecraft.world.level.ChunkPos(128,128),60);
             level.setChunkForced(128, 128, true); level.getChunk(128, 128);
         });
         h.runAtTickTime(420, () -> {
-            close(h, pgVoltage(h, load), 10, "After chunk reload");
+            org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info("RESTORE_CHUNK: entitiesReady={}, lines={}, voltage={}, {}",
+                    level.areEntitiesLoaded(net.minecraft.world.level.ChunkPos.asLong(source)),org.patryk3211.powergrid.electricity.GlobalElectricNetworks.getWorldNetworks(level).transmissionLines.size(),
+                    pgVoltage(h,load),Bridges.get(level).status());
+            h.assertTrue(!level.areEntitiesLoaded(net.minecraft.world.level.ChunkPos.asLong(source)),"Controlled first entity-load delay did not run");
+            h.assertTrue(ids.stream().allMatch(id->id.getEntity(level)==null),"Saved wire entities escaped the controlled delay");
+            var world=org.patryk3211.powergrid.electricity.GlobalElectricNetworks.getWorldNetworks(level);
+            h.assertTrue(ids.stream().allMatch(id->world.getPart(id)!=null),"PG expired saved wire parts before their entities loaded");
+        });
+        h.startSequence().thenIdle(420).thenWaitUntil(()->h.assertTrue(level.areEntitiesLoaded(net.minecraft.world.level.ChunkPos.asLong(source)),"Waiting for first chunk's wire entities"))
+        .thenIdle(5).thenExecute(()->{
+            close(h, pgVoltage(h, load), 10, "After entity-ready chunk reload");
             h.assertTrue(new BlockWireEndpoint(load, 0).getNode(level) != null, "Chunk reload did not restore the native PG endpoint");
             unloaded.set(false);
             level.setChunkForced(128, 128, false);
@@ -85,9 +98,16 @@ public final class PersistenceGameTests {
         h.runAtTickTime(775, () -> level.getChunkSource().tick(() -> true, true));
         h.runAtTickTime(780, () -> {
             h.assertTrue(unloaded.get() && level.getChunkSource().getChunkNow(128, 128) == null, "Second chunk unload did not complete");
+            DelayedEntityLoads.hold(level,new net.minecraft.world.level.ChunkPos(128,128),60);
             level.setChunkForced(128, 128, true); level.getChunk(128, 128);
         });
         h.runAtTickTime(820, () -> {
+            h.assertTrue(!level.areEntitiesLoaded(net.minecraft.world.level.ChunkPos.asLong(source)),"Controlled second entity-load delay did not run");
+            var world=org.patryk3211.powergrid.electricity.GlobalElectricNetworks.getWorldNetworks(level);
+            h.assertTrue(ids.stream().allMatch(id->world.getPart(id)!=null),"Repeated reload expired pending wire parts");
+        });
+        h.startSequence().thenIdle(820).thenWaitUntil(()->h.assertTrue(level.areEntitiesLoaded(net.minecraft.world.level.ChunkPos.asLong(source)),"Waiting for second chunk's wire entities"))
+        .thenIdle(5).thenExecute(()->{
             close(h, pgVoltage(h, load), 10, "After repeated chunk reload");
             net.neoforged.neoforge.common.NeoForge.EVENT_BUS.unregister(unloadListener);
             DynamicGameTests.audit(h);

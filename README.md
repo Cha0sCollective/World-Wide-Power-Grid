@@ -30,9 +30,9 @@ The [expanded test yard](docs/FIXTURE_WORLD.md) adds seven transformer/variac ci
 
 ## Beta status
 
-The packaged suite contains **121 automated checks**: the original electrical and gameplay coverage, beta.2's handheld-meter/startup checks, and three new grounding regressions. Native and Java backends are checked on Windows and Linux. Real Windows clients also check the downloaded expanded yard's displays and panel interactions. Earlier two-player tests cover wiring, configuration, and handheld measurements; their evidence is recorded separately. See [current test results](docs/STATUS.md) and [beta.3 release records](release/0.1.0-beta.3/).
+The published beta.3 packaged suite contains **121 automated checks**: the original electrical and gameplay coverage, beta.2's handheld-meter/startup checks, and three new grounding regressions. Native and Java backends are checked on Windows and Linux. Real Windows clients also check the downloaded expanded yard's displays and panel interactions. Earlier two-player tests cover wiring, configuration, and handheld measurements; their evidence is recorded separately. See [current test results](docs/STATUS.md) and [beta.3 release records](release/0.1.0-beta.3/).
 
-**Two reload/restart checks remain unexplained:** tests have occasionally read no power in a restored circuit or no charge in a restored circuit-board capacitor. Later runs passed, but we have not confirmed whether these were early readings or gameplay bugs. See [current status and known issues](docs/STATUS.md).
+**Source changes after beta.3 address restoration:** wires are protected while a chunk is still loading, and circuit-board capacitors keep their saved charge before their first electrical update. The source suite adds two regressions (123 checks total). These changes are not in the published beta.3 jar. The old intermittent failures lacked enough diagnostics to identify their exact cause; see [current status and known issues](docs/STATUS.md).
 
 This release covers the stationary equipment listed above. Moving trains and contraptions, optional add-ons, and very large power grids are outside its tested scope. The [support list](docs/SUPPORT.md) identifies the exact equipment covered and items still unverified.
 

@@ -10,6 +10,7 @@ LICENSE text eol=lf
 *.md text eol=lf
 *.yml text eol=lf
 *.py text eol=lf
+release/fixes/restoration/checkpoints/*.log text eol=lf
 gradlew text eol=lf
 *.bat text eol=crlf
 *.nbt binary
