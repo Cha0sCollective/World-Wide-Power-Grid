@@ -115,3 +115,14 @@ The foundation and equipment stage CI runs
 and [38083716279](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38083716279)
 pass all eight combinations. Those runs cover their respective stage commits,
 not this later batch or the completed beta.5 release.
+
+PR #11's first complete CI run failed the saved-board charge assertion in all
+eight combinations. A second fixture collision was reproduced locally: the
+destructive stationary portal used the exact position of the persistent
+electronics source. Full VERIFY runs replaced that source before checking the
+board, allowing it to discharge. The earlier distribution-only cold passes did
+not exercise this interaction. The portal fixtures now use a separate reserved
+area. The strict pre-solve charge assertion and saved electronics coordinates
+remain unchanged. Failed CI and local controls are retained in
+[`evidence/restart-fixture-isolation`](evidence/restart-fixture-isolation).
+Fresh full suites pass locally; complete cold and CI verification are pending.

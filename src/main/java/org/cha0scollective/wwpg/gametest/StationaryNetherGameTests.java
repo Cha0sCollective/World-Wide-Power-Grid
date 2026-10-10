@@ -42,8 +42,12 @@ public final class StationaryNetherGameTests {
     private static void portalCircuit(GameTestHelper h, boolean nativeOnly) {
         var overworld = h.getLevel();
         var nether = overworld.getServer().getLevel(Level.NETHER);
-        var portal = new BlockPos(nativeOnly ? 2560 : 1536, 64, 1536);
-        var otherPortal = new BlockPos(nativeOnly ? 320 : 192, 64, 192);
+        // Separate destructive portal fixtures from saved electronics at
+        // (1536,64,1536) and the durable Nether link at (32768,64,32768).
+        // VERIFY runs all fixtures again; a portal must not replace the saved
+        // source and discharge its capacitor before its restart check begins.
+        var portal = new BlockPos(nativeOnly ? 41024 : 40000, 64, 40000);
+        var otherPortal = new BlockPos(nativeOnly ? 5128 : 5000, 64, 5000);
         force(overworld, portal, true);
         force(nether, otherPortal, true);
         portal(h, overworld, portal);
