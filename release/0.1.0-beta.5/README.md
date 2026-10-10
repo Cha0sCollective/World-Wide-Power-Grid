@@ -39,3 +39,14 @@ the four design checks also passed three consecutive cold restarts of the same
 jar; each pass performed five actual chunk unload/reload cycles. This is partial
 local evidence, not completion of the eight-combination release matrix. Earlier
 failed runs are preserved with their explanations.
+
+Foundation CI run [38081560620](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38081560620)
+passed all eight platform/backend/profile combinations, including three cold
+restarts in each. A duplicate run of the same commit,
+[38081588970](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38081588970),
+passed seven combinations but its Linux/native/Pinout setup was cancelled after
+prolonged slowdown. Its server continued ticking and completed two actual designer
+chunk cycles; it never produced a complete passing proof. Slow startup preceded
+the electrical tests. The cause remains open. The retained logs and incomplete
+proof are in `evidence/ci-slowdown`; CI now has a process timeout and captures JVM
+thread dumps on expiration. A passing retry does not resolve this investigation.

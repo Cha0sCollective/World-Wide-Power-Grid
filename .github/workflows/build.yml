@@ -5,6 +5,7 @@ permissions:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
     defaults:
       run:
         shell: bash
@@ -22,22 +23,25 @@ jobs:
           java-version: '21'
       - uses: gradle/actions/wrapper-validation@v4
       - uses: gradle/actions/setup-gradle@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - if: runner.os != 'Windows'
         run: chmod +x gradlew
-      - run: ./gradlew build -PtestProfile=${{ matrix.profile }} --no-daemon
-      - run: ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PrestartPhase=SETUP --no-daemon
+      - run: python tools/run_checked.py --timeout 1200 -- ./gradlew build -PtestProfile=${{ matrix.profile }} --no-daemon
+      - run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PrestartPhase=SETUP --no-daemon
       - name: Three consecutive cold world restarts
         run: |
           for pass in 1 2 3; do
-            ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PrestartPhase=VERIFY --no-daemon
+            python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PrestartPhase=VERIFY --no-daemon
             cp run/logs/latest.log "run/restart-${pass}.log"
           done
-      - run: ./gradlew runUpstreamReferenceServer -PtestBackend=${{ matrix.backend }} --no-daemon
-      - run: ./gradlew runReferenceCompatibilityServer -PtestBackend=${{ matrix.backend }} --no-daemon
-      - run: ./gradlew runPackagedGameTestServer -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_example -PtestDirectory=run/example --no-daemon
-      - run: ./gradlew runPackagedGameTestServer -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_example -PtestDirectory=run/example -PrestartPhase=VERIFY --no-daemon
-      - run: ./gradlew runPackagedGameTestServer -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_showroom -PtestDirectory=run/showroom --no-daemon
-      - run: ./gradlew runPackagedGameTestServer -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_showroom -PtestDirectory=run/showroom -PrestartPhase=VERIFY --no-daemon
+      - run: python tools/run_checked.py -- ./gradlew runUpstreamReferenceServer -PtestBackend=${{ matrix.backend }} --no-daemon
+      - run: python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=${{ matrix.backend }} --no-daemon
+      - run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_example -PtestDirectory=run/example --no-daemon
+      - run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_example -PtestDirectory=run/example -PrestartPhase=VERIFY --no-daemon
+      - run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_showroom -PtestDirectory=run/showroom --no-daemon
+      - run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_showroom -PtestDirectory=run/showroom -PrestartPhase=VERIFY --no-daemon
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -45,6 +49,7 @@ jobs:
           path: |
             build/libs/*.jar
             build/reports/tests/
+            build/watchdog/
             run/logs/
             run/crash-reports/
             run/stationary-registry.json
