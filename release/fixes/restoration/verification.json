@@ -73,7 +73,7 @@
         "bytes": 36582
       },
       "retained_checkpoints": {
-        "path": "release/fixes/restoration/logs/native-setup.log",
+        "path": "release/fixes/restoration/checkpoints/native-setup.log",
         "sha256": "04d24682bce55538ef704cf670b707c09d0a956c5acb45143c488e231306d32e",
         "bytes": 1948
       }
@@ -93,7 +93,7 @@
         "bytes": 33444
       },
       "retained_checkpoints": {
-        "path": "release/fixes/restoration/logs/native-verify.log",
+        "path": "release/fixes/restoration/checkpoints/native-verify.log",
         "sha256": "4b709674b280eb7d5cc1890c2146f03a074896437f8ab6db295f63d6fee6ec9e",
         "bytes": 3041
       }
@@ -113,7 +113,7 @@
         "bytes": 32301
       },
       "retained_checkpoints": {
-        "path": "release/fixes/restoration/logs/java-setup.log",
+        "path": "release/fixes/restoration/checkpoints/java-setup.log",
         "sha256": "f81d5f9549a29f936a322e43fda68c4218491dc13aaa8653da8a18834f26b81e",
         "bytes": 1945
       }
@@ -133,7 +133,7 @@
         "bytes": 34018
       },
       "retained_checkpoints": {
-        "path": "release/fixes/restoration/logs/java-verify.log",
+        "path": "release/fixes/restoration/checkpoints/java-verify.log",
         "sha256": "68597470df369884a4e3cfdcf62488fd53db729b35e190105b21bfc3a0a04034",
         "bytes": 3428
       }
@@ -171,7 +171,7 @@
       "bytes": 37715
     },
     "retained_checkpoints": {
-      "path": "release/fixes/restoration/logs/java-negative-control.log",
+      "path": "release/fixes/restoration/checkpoints/java-negative-control.log",
       "sha256": "2ef91f04f09008fa77933fb03bb83d90f75ebb77a250b5188ab684dc4e83a1da",
       "bytes": 2344
     }
@@ -184,5 +184,122 @@
     "The controlled delayed restart retained charge. The cold-save fixture proves a related overwrite, without establishing the exact cause of historical uninstrumented restart failures.",
     "PG circuit-design-table saved-design failure is separate and remains open."
   ],
-  "github_validation": "The existing Windows/Linux x NATIVE/JAVA matrix runs the 123-check suite in SETUP and VERIFY, upstream references, and example/expanded-yard creation and restart; final outcomes are reported on the pull request."
+  "github_validation": "The existing Windows/Linux x NATIVE/JAVA matrix runs the 123-check suite in SETUP and VERIFY, upstream references, and example/expanded-yard creation and restart; final outcomes are reported on the pull request.",
+  "expanded_yard": {
+    "source_archive": {
+      "name": "wwpg-0.1.0-beta.2-fixture-world-v1.zip",
+      "sha256": "7463af3876daa72064b0fa226f1cd88a633af6a1b2ab7471720d0fd6f3dd128f",
+      "bytes": 429696
+    },
+    "checks": [
+      {
+        "platform": "Windows 11 amd64",
+        "kind": "Packaged dedicated GameTest server; no graphical client in this check",
+        "backend": "NATIVE",
+        "backend_assertion": "ExampleWorldGameTests.demonstrate invokes DynamicGameTests.audit before success",
+        "phase": "Open pristine downloaded yard",
+        "result": "PASS",
+        "packaged_world_fixtures": 1,
+        "live_behavior_groups": 85,
+        "declared_behavior_groups": 134,
+        "builtin_board_components": 28,
+        "panel_attachment_types": 11,
+        "transformer_variac_circuits": 7,
+        "retained_PG_wire_entities": 282,
+        "loose_wire_items": 0,
+        "factory_panel_and_delayed_lamps": "PASS",
+        "full_local_log": {
+          "path": "build/restoration-yard-native-verify.log",
+          "sha256": "97b4bb0c7b310a78330d4c1371b327b21b2efdcf12441f74589345aecefc03d9",
+          "bytes": 19733
+        },
+        "retained_checkpoints": {
+          "path": "release/fixes/restoration/checkpoints/yard-native-verify.log",
+          "sha256": "235ed3f42a8ef2ba8e91f53feeb4a7460ed1ef1bcf9aadbe54cc614f1f5cf15b",
+          "bytes": 994
+        }
+      },
+      {
+        "platform": "Windows 11 amd64",
+        "kind": "Packaged dedicated GameTest server; no graphical client in this check",
+        "backend": "NATIVE",
+        "backend_assertion": "ExampleWorldGameTests.demonstrate invokes DynamicGameTests.audit before success",
+        "phase": "Reopen save made by corrected candidate",
+        "result": "PASS",
+        "packaged_world_fixtures": 1,
+        "live_behavior_groups": 85,
+        "declared_behavior_groups": 134,
+        "builtin_board_components": 28,
+        "panel_attachment_types": 11,
+        "transformer_variac_circuits": 7,
+        "retained_PG_wire_entities": 282,
+        "loose_wire_items": 0,
+        "factory_panel_and_delayed_lamps": "PASS",
+        "full_local_log": {
+          "path": "build/restoration-yard-native-restart.log",
+          "sha256": "000227eefe0bf0bbb2ff91ec7c07adde9a851e46de67c5b94510d9c516cd3a06",
+          "bytes": 15419
+        },
+        "retained_checkpoints": {
+          "path": "release/fixes/restoration/checkpoints/yard-native-restart.log",
+          "sha256": "1d991e8ea65d840b67d2b167f9cc0dbdcafcb2047111f085774ee3ef7514d3f1",
+          "bytes": 994
+        }
+      },
+      {
+        "platform": "Windows 11 amd64",
+        "kind": "Packaged dedicated GameTest server; no graphical client in this check",
+        "backend": "JAVA",
+        "backend_assertion": "ExampleWorldGameTests.demonstrate invokes DynamicGameTests.audit before success",
+        "phase": "Open pristine downloaded yard",
+        "result": "PASS",
+        "packaged_world_fixtures": 1,
+        "live_behavior_groups": 85,
+        "declared_behavior_groups": 134,
+        "builtin_board_components": 28,
+        "panel_attachment_types": 11,
+        "transformer_variac_circuits": 7,
+        "retained_PG_wire_entities": 282,
+        "loose_wire_items": 0,
+        "factory_panel_and_delayed_lamps": "PASS",
+        "full_local_log": {
+          "path": "build/restoration-yard-java-verify.log",
+          "sha256": "c19e1c458d728d9ea022dfeed0422072c3bc078b42b3fcec1b8ecc6cd6210f6b",
+          "bytes": 19881
+        },
+        "retained_checkpoints": {
+          "path": "release/fixes/restoration/checkpoints/yard-java-verify.log",
+          "sha256": "b34a4ad722259992c89fc8617a90c95a34f9ff1fa4ba06c1c717d94e36a4f39a",
+          "bytes": 994
+        }
+      },
+      {
+        "platform": "Windows 11 amd64",
+        "kind": "Packaged dedicated GameTest server; no graphical client in this check",
+        "backend": "JAVA",
+        "backend_assertion": "ExampleWorldGameTests.demonstrate invokes DynamicGameTests.audit before success",
+        "phase": "Reopen save made by corrected candidate",
+        "result": "PASS",
+        "packaged_world_fixtures": 1,
+        "live_behavior_groups": 85,
+        "declared_behavior_groups": 134,
+        "builtin_board_components": 28,
+        "panel_attachment_types": 11,
+        "transformer_variac_circuits": 7,
+        "retained_PG_wire_entities": 282,
+        "loose_wire_items": 0,
+        "factory_panel_and_delayed_lamps": "PASS",
+        "full_local_log": {
+          "path": "build/restoration-yard-java-restart.log",
+          "sha256": "40e695809375d24c8bd41c85412ebfe149eb702a21e49b65b3590f7249e1688c",
+          "bytes": 15419
+        },
+        "retained_checkpoints": {
+          "path": "release/fixes/restoration/checkpoints/yard-java-restart.log",
+          "sha256": "52e301f22d94d2d811c0bf7630b39455ad9c3d6adadac769609c09c04df6e3e0",
+          "bytes": 994
+        }
+      }
+    ]
+  }
 }
