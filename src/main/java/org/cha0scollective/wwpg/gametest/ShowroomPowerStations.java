@@ -44,7 +44,7 @@ final class ShowroomPowerStations {
             if(i==4||i==5)h.getLevel().setBlockAndUpdate(s.device.above(),AllBlocks.HAND_CRANK.getDefaultState().setValue(BlockStateProperties.FACING,Direction.DOWN));
             if(i==6)h.getLevel().setBlockAndUpdate(s.device.north(),Blocks.LEVER.defaultBlockState().setValue(BlockStateProperties.ATTACH_FACE,net.minecraft.world.level.block.state.properties.AttachFace.FLOOR).setValue(BlockStateProperties.POWERED,true));
             sign(h,s.device.south(4),"T"+(i+1)+" "+s.name,"LIVE mixed circuit",s.input+" V input",i<4?"Read output gauge":"Crank/lever: vary V");
-            sign(h,s.meter.south(2),"OUTPUT VOLTAGE",i<4?"About "+s.expected+" V":"Starts about 20 V","Goggles / probes","PG has modeled loss");
+            sign(h,s.meter.south(2),"OUTPUT VOLTAGE",(i<4?"About ":"Starts ")+s.expected+" V","Goggles / probes","PG has modeled loss");
         }
         if(!restore){buildMeters(h);h.runAtTickTime(10,()->assemble(h));h.runAtTickTime(20,()->configure(h));}
     }

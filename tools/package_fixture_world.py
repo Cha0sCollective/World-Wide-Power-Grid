@@ -61,7 +61,7 @@ for path in (root / "build/test-results/test").glob("TEST-*.xml"):
 if equations != 4:
     raise SystemExit("Expected four passing equation checks")
 
-directories = ["showroom-native-final", "showroom-java-final", "showroom-export-native", "showroom-export-java"]
+directories = ["showroom-native-release", "showroom-java-release", "showroom-zip-native", "showroom-zip-java"]
 coverage = None
 for directory in directories:
     path = root / "run" / directory / "showroom-coverage.json"
