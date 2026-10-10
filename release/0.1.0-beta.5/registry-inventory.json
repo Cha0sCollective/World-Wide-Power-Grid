@@ -2323,8 +2323,8 @@
       "registry": "item",
       "id": "electroenergetics:wire_damper",
       "implementation": "net.minecraft.world.item.Item",
-      "disposition": "crafting_or_assembly_item",
-      "reason": "Native recipe/assembly item; no standalone electrical model"
+      "disposition": "native_workflow",
+      "fixture": "nativeWireAttachmentsInstallRemoveAndPersist"
     },
     {
       "registry": "item",
@@ -2484,7 +2484,7 @@
       "id": "powergrid:copper_coil",
       "implementation": "org.patryk3211.powergrid.kinetics.generator.winding.WindingItem",
       "disposition": "native_workflow",
-      "fixture": "largeVerticalPgGeneratorPowersCeeLoad"
+      "fixture": "nativeLargeGeneratorUsesInstalledCoilAndMixedExcitation"
     },
     {
       "registry": "item",
@@ -2754,7 +2754,7 @@
       "id": "powergrid:growth_lamp",
       "implementation": "org.patryk3211.powergrid.electricity.light.bulb.GrowthLamp",
       "disposition": "native_workflow",
-      "fixture": "ceePoweredGrowthLampProcessesNativeCrop"
+      "fixture": "ceePowerRunsNativeGrowthLampAndCropEffect"
     },
     {
       "registry": "item",
@@ -3034,7 +3034,7 @@
       "id": "powergrid:punch_card",
       "implementation": "org.patryk3211.powergrid.kinetics.punchcard.PunchCardItem",
       "disposition": "native_workflow",
-      "fixture": "nativePunchCardControlsMixedLoads"
+      "fixture": "nativePunchCardScansEveryRowAndControlsEightMixedLoads"
     },
     {
       "registry": "item",
@@ -3147,7 +3147,7 @@
       "id": "powergrid:string_light_cord",
       "implementation": "org.patryk3211.powergrid.electricity.light.string.StringLightCordItem",
       "disposition": "native_workflow",
-      "fixture": "nativeStringCordLightsFromCeePower"
+      "fixture": "nativeColoredStringCordLightsMixedCircuitAndReturnsCuttingCost"
     },
     {
       "registry": "item",
@@ -3255,399 +3255,7 @@
     },
     {
       "registry": "wire_type",
-      "id": "electroenergetics:white_heavily_insulated",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:light_gray_heavily_insulated",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:gray_heavily_insulated",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:magenta_heavily_insulated",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:orange_heavily_insulated",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:lime_hanging_insulator",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:colored_blue",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:colored_lime",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:light_blue_heavily_insulated",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:brown_heavily_insulated",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:magenta_hanging_insulator",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:iron_bus",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:yellow_hanging_insulator",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:gray_hanging_insulator",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:orange_hanging_insulator",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:red_heavily_insulated",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:blue_hanging_insulator",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:pink_heavily_insulated",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:colored_green",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:heavily_insulated",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:cyan_heavily_insulated",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:glass_insulator",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:colored_gray",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:white_hanging_insulator",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:colored_red",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:pink_hanging_insulator",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:black_heavily_insulated",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:iron_rail",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:blue_heavily_insulated",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:colored_yellow",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:colored_white",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:copper",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:red_hanging_insulator",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:colored_brown",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:purple_heavily_insulated",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:light_gray_hanging_insulator",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:yellow_heavily_insulated",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:duplex",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:colored_light_blue",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:colored_purple",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:colored_cyan",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:colored_light_gray",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:standard",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:iron",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:cyan_hanging_insulator",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:electrum",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:creative",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:bundle_conductor",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:light_blue_hanging_insulator",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:colored_black",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:green_hanging_insulator",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:colored_pink",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:lime_heavily_insulated",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:colored_orange",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
       "id": "electroenergetics:black_hanging_insulator",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:green_heavily_insulated",
-      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
-      "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
-    },
-    {
-      "registry": "wire_type",
-      "id": "electroenergetics:colored_magenta",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
       "fixture": "allStationaryWireFamiliesRetainNativeRules"
@@ -3661,31 +3269,402 @@
     },
     {
       "registry": "wire_type",
+      "id": "electroenergetics:duplex",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:magenta_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:standard",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_yellow",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:magenta_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:creative",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:light_blue_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:glass_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:yellow_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:black_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:light_gray_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_pink",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:red_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:copper",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:cyan_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:bundle_conductor",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:green_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:iron_rail",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_gray",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:purple_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:pink_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_blue",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:green_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_purple",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:iron_bus",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:red_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:pink_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:gray_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:orange_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:yellow_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:light_blue_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:light_gray_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:gray_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_magenta",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_black",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_light_gray",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:white_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
       "id": "electroenergetics:purple_hanging_insulator",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
       "fixture": "allStationaryWireFamiliesRetainNativeRules"
     },
     {
-      "registry": "wire_attachment",
-      "id": "electroenergetics:banner",
-      "implementation": "com.george_vi.electroenergetics.content.wire.attachments.BannerAttachmentType",
-      "disposition": "native_workflow",
-      "fixture": "nativeWireAttachmentsInstallRemoveAndPersist"
+      "registry": "wire_type",
+      "id": "electroenergetics:blue_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
     },
     {
-      "registry": "wire_attachment",
-      "id": "electroenergetics:empty",
-      "implementation": "com.george_vi.electroenergetics.content.wire.WireAttachmentType$Empty",
-      "disposition": "native_workflow",
-      "fixture": "nativeWireAttachmentsInstallRemoveAndPersist"
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_light_blue",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
     },
     {
-      "registry": "wire_attachment",
-      "id": "electroenergetics:bunting",
-      "implementation": "com.george_vi.electroenergetics.content.wire.attachments.BuntingAttachmentType",
-      "disposition": "native_workflow",
-      "fixture": "nativeWireAttachmentsInstallRemoveAndPersist"
+      "registry": "wire_type",
+      "id": "electroenergetics:white_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:lime_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_white",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:orange_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:iron",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:electrum",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_green",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:blue_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_brown",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:lime_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_lime",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_red",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:cyan_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:brown_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_cyan",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_orange",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
+      "disposition": "stationary_wiring",
+      "fixture": "allStationaryWireFamiliesRetainNativeRules"
     },
     {
       "registry": "wire_attachment",
@@ -3695,25 +3674,32 @@
       "fixture": "nativeWireAttachmentsInstallRemoveAndPersist"
     },
     {
-      "registry": "panel_attachment",
-      "id": "electroenergetics:momentary_switch",
-      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType",
-      "disposition": "functional_behavior",
-      "behavior": "electroenergetics:momentary_switch"
+      "registry": "wire_attachment",
+      "id": "electroenergetics:empty",
+      "implementation": "com.george_vi.electroenergetics.content.wire.WireAttachmentType$Empty",
+      "disposition": "empty_registry_sentinel",
+      "reason": "Empty wire attachment; no native installation item"
+    },
+    {
+      "registry": "wire_attachment",
+      "id": "electroenergetics:bunting",
+      "implementation": "com.george_vi.electroenergetics.content.wire.attachments.BuntingAttachmentType",
+      "disposition": "deferred",
+      "reason": "Optional Supplementaries wire decoration; outside BASE and PINOUT profiles"
+    },
+    {
+      "registry": "wire_attachment",
+      "id": "electroenergetics:banner",
+      "implementation": "com.george_vi.electroenergetics.content.wire.attachments.BannerAttachmentType",
+      "disposition": "native_workflow",
+      "fixture": "nativeWireAttachmentsInstallRemoveAndPersist"
     },
     {
       "registry": "panel_attachment",
-      "id": "electroenergetics:analog_lever",
+      "id": "electroenergetics:miniature_circuit_breaker",
       "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType",
       "disposition": "functional_behavior",
-      "behavior": "electroenergetics:analog_lever"
-    },
-    {
-      "registry": "panel_attachment",
-      "id": "electroenergetics:emergency_stop_button",
-      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType",
-      "disposition": "functional_behavior",
-      "behavior": "electroenergetics:emergency_stop_button"
+      "behavior": "electroenergetics:miniature_circuit_breaker"
     },
     {
       "registry": "panel_attachment",
@@ -3738,17 +3724,10 @@
     },
     {
       "registry": "panel_attachment",
-      "id": "electroenergetics:indicator_bulb",
+      "id": "electroenergetics:velocity_sensor",
       "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType",
-      "disposition": "functional_behavior",
-      "behavior": "electroenergetics:indicator_bulb"
-    },
-    {
-      "registry": "panel_attachment",
-      "id": "electroenergetics:steering_wheel",
-      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType",
-      "disposition": "functional_behavior",
-      "behavior": "electroenergetics:steering_wheel"
+      "disposition": "deferred",
+      "reason": "Optional moving-system panel attachment"
     },
     {
       "registry": "panel_attachment",
@@ -3759,24 +3738,10 @@
     },
     {
       "registry": "panel_attachment",
-      "id": "electroenergetics:cut_off_switch",
+      "id": "electroenergetics:emergency_stop_button",
       "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType",
       "disposition": "functional_behavior",
-      "behavior": "electroenergetics:cut_off_switch"
-    },
-    {
-      "registry": "panel_attachment",
-      "id": "electroenergetics:velocity_sensor",
-      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType",
-      "disposition": "deferred",
-      "reason": "Optional moving-system panel attachment"
-    },
-    {
-      "registry": "panel_attachment",
-      "id": "electroenergetics:miniature_circuit_breaker",
-      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType",
-      "disposition": "functional_behavior",
-      "behavior": "electroenergetics:miniature_circuit_breaker"
+      "behavior": "electroenergetics:emergency_stop_button"
     },
     {
       "registry": "panel_attachment",
@@ -3784,6 +3749,41 @@
       "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType",
       "disposition": "functional_behavior",
       "behavior": "electroenergetics:energy_meter"
+    },
+    {
+      "registry": "panel_attachment",
+      "id": "electroenergetics:steering_wheel",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType",
+      "disposition": "functional_behavior",
+      "behavior": "electroenergetics:steering_wheel"
+    },
+    {
+      "registry": "panel_attachment",
+      "id": "electroenergetics:momentary_switch",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType",
+      "disposition": "functional_behavior",
+      "behavior": "electroenergetics:momentary_switch"
+    },
+    {
+      "registry": "panel_attachment",
+      "id": "electroenergetics:cut_off_switch",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType",
+      "disposition": "functional_behavior",
+      "behavior": "electroenergetics:cut_off_switch"
+    },
+    {
+      "registry": "panel_attachment",
+      "id": "electroenergetics:indicator_bulb",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType",
+      "disposition": "functional_behavior",
+      "behavior": "electroenergetics:indicator_bulb"
+    },
+    {
+      "registry": "panel_attachment",
+      "id": "electroenergetics:analog_lever",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType",
+      "disposition": "functional_behavior",
+      "behavior": "electroenergetics:analog_lever"
     },
     {
       "registry": "board_component",

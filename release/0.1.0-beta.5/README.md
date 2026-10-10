@@ -66,6 +66,52 @@ electrical behavior, and external FE provider/receiver accounting. The initial C
 fixture assumed ideal source voltages and failed; the corrected expectation uses
 measured terminal voltage and PG's actual emission equation, including wire drops.
 Those failed and passing logs are retained under `evidence/distribution`.
-Rendered CRT beams, linked Nether operation, remaining assembly workflows,
+Rendered CRT beams, remaining assembly workflows,
 content-specific lifecycle checks and playable demonstrations still block completion.
 Test-only barrel FE capabilities are enabled only in the acceptance harness.
+
+The native-workflow batch adds real item interactions for horizontal/vertical
+large generators, installed coils and winding housings, two through five segment
+CEE poles, mounted insulator-controlled breakers, all four stationary catenary
+styles, string-light dyeing/placement/cutting, fan washing, electromagnet recipes,
+banner patterns and dampers, and native attachment/spool recovery. Supplementaries
+bunting requires another optional mod and is explicitly deferred; the empty wire
+attachment registry entry is a sentinel rather than a player item.
+
+Three more reproduced defects are corrected in this batch. Odd-height CEE poles
+checked one block beyond their top and failed to conduct. A PG-only native Nether
+transformer circuit amplified stale cross-dimension samples after shutdown:
+clustering substeps reached `2.581177438983389E11 V` in the isolated Java control,
+while interleaving the same native equations produced approximately zero volts.
+WWPG now prepares every dimension before advancing each PG substep across them.
+CEE gameplay still commits once, and no replacement transformer model is added.
+The deferral flag is local to the server thread so client Ponder scenes continue
+using their own native simulation.
+
+The second Nether defect left a link to an unloaded controller because Create
+skips `remove()` during chunk unload. WWPG detaches that endpoint through PG's
+existing link table, with a guard against detaching a replacement. Native saved
+identities, history format, wire drops and assembly requirements are preserved.
+The new durable mixed Nether fixture alternates actual end unloads, delays entity
+loading, checks unloaded and unready source isolation, and compares restored
+history with the actual serialized chunk data before its first solve. It keeps
+the circuit for separate-process cold restarts, including a saved banner and
+native wire identities. The final eight-combination and graphical release gates
+remain outstanding.
+
+This batch passes 169 packaged BASE/native checks and 170 PINOUT/Java checks on
+one frozen development jar (SHA-256
+`92ed114972153ccf25f46326ca31375786867bef6fa1e914acd027faad432c0a`).
+Each locally tested profile/backend also passes three consecutive separate-process
+cold restarts, with 21 distribution checks and five actual independent Nether-end
+unload/reload cycles in each pass. Logs, artifact proofs, reproduced controls and
+fixture corrections are retained in [`evidence/native-workflows`](evidence/native-workflows).
+The first full Java run exposed a fixture collision: the prepared Nether portal
+shared coordinates with the older dimension test's source block. Reserved fixture
+coordinates correct that collision; both failed runs remain in the evidence.
+
+The foundation and equipment stage CI runs
+[38083631940](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38083631940)
+and [38083716279](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38083716279)
+pass all eight combinations. Those runs cover their respective stage commits,
+not this later batch or the completed beta.5 release.

@@ -1,5 +1,8 @@
 name: Build
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
 permissions:
   contents: read
 jobs:
@@ -56,6 +59,7 @@ jobs:
             run/restart-*.log
             run/designer-before-restart.nbt
             run/designer-cycles-before-restart.nbt
+            run/nether-before-restart.nbt
             run/packaged-*.json
             run/showroom/logs/
             run/showroom/crash-reports/

@@ -49,5 +49,9 @@ public final class WorldWidePowerGrid {
         if (event.getLevel() instanceof ServerLevel level) Bridges.unload(level);
         if (event.getLevel() instanceof net.minecraft.world.level.Level level) org.cha0scollective.wwpg.wiring.Terminals.unload(level);
     }
-    private void stop(ServerStoppedEvent event) { Bridges.clear(); org.cha0scollective.wwpg.wiring.Terminals.clear(); }
+    private void stop(ServerStoppedEvent event) {
+        Bridges.clear();
+        org.cha0scollective.wwpg.bridge.ServerElectricalSchedule.clear();
+        org.cha0scollective.wwpg.wiring.Terminals.clear();
+    }
 }
