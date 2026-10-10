@@ -1,9 +1,11 @@
 # Changelog
 
-## Unreleased — grounding correction
+## 0.1.0-beta.3 — 10 October 2026
 
 - Refresh PG's electrical equations when physical grounds or preferred voltage references are added, removed, or change conductance. Retain existing nodes and branches, and avoid rebuilding for unchanged grounding.
 - Add regression circuits for ground changes, reference changes and physical-ground takeover, and two actual ground-rod chunk unload/reload cycles. Run them in the packaged suite on both solvers.
+- Publish the grounding correction under a distinct beta.3 jar version. Retain beta.2's handheld meters, startup fix, dependency versions, native solver resources, and stationary support set.
+- Verify the downloaded expanded yard in real native/Java clients, including synchronized gauges, factory switching, panel interactions, and retained wiring. Existing example worlds remain compatible; no new world revision is required.
 - Keep the published beta.2 downloads and historical acceptance records unchanged. This correction does not establish the causes of the earlier intermittent reload/restart failures.
 
 ## Expanded test yard revision 1 — 10 October 2026

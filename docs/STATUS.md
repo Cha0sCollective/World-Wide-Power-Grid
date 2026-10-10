@@ -4,6 +4,8 @@ Status checked **10 October 2026**. These facts describe the implementation and 
 
 ## Published beta
 
+**[0.1.0-beta.3](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.3)** publishes the grounding correction from [PR #5](https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/5) under its own jar version. Circuits recalculate correctly when physical grounds or preferred references change, including unloading/reloading a ground rod's chunk. The support set and dependency versions are unchanged. Existing example worlds work with beta.3; replace the WWPG jar on the server and every client. [Release records](../release/0.1.0-beta.3/) identify the final artifact and its checks.
+
 **[0.1.0-beta.2](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.2)** is the handheld-meter, example-world, and startup-registration hotfix. Its final packaged checks passed with native and Java solvers. It adds three meter fixtures and one concurrent-registration regression (118 total), plus actual-client checks for CEE terminal voltage, both meters on PG wires, and both meters on CEE wires. The example heater now has a separate 600 V feed, a basin, and tools at spawn. The original 300 V feed only warmed the heater and did not reach working burner heat.
 
 The original acceptance covered installed meters; it did not validate the handheld interactions reported by a player. Beta.2 fixes wire targeting taking precedence over terminal probes and synchronizes solved server measurements instead of using a client estimate that cannot reconstruct the CEE source. [PR #2](https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/2) contains the change. The original beta.1 downloads and evidence remain unchanged.
@@ -16,7 +18,7 @@ The original acceptance covered installed meters; it did not validate the handhe
 
 The declared scope is stationary interoperability: 95 block/assembly behaviors, 11 built-in CEE panel attachments, and 28 built-in PG board components. See [SUPPORT.md](SUPPORT.md) for the inventory and exclusions, and [INSTALL.md](INSTALL.md) for the exact dependencies and solver settings.
 
-## Grounding correction in development
+## Grounding correction in beta.3
 
 The published beta.2 can retain incorrect voltages when a ground connection changes without replacing the circuit's nodes. This also affects moving the preferred voltage reference and unloading a chunk containing a ground rod. PG 0.6.2 skips its incremental equation update for ground connections, which have only one terminal.
 
@@ -24,7 +26,7 @@ The source correction rebuilds the affected equations when grounding changes, pr
 
 The same grounding-fix jar passed [real Windows client checks of the downloaded expanded yard](../release/fixes/grounding/client/) with native and Java backends, including a native save/restart. Each client visited 69 stations, checked 54 synchronized gauges, and switched the factory and P2 panel through actual client interactions. All 282 PG wires remained connected. These checks cover the yard's 85 live behavior groups; they do not resolve the intermittent failures below.
 
-This is an unreleased source fix; the published beta.2 downloads are unchanged. It does not establish the causes of the earlier intermittent chunk-reload or board-restart failures below.
+This correction is released in beta.3; published beta.2 downloads and earlier evidence remain unchanged. It does not establish the causes of the earlier intermittent chunk-reload or board-restart failures below.
 
 ## Test evidence
 
@@ -40,8 +42,10 @@ This is an unreleased source fix; the published beta.2 downloads are unchanged. 
 | [Example revision 2 acceptance](../release/examples/panel-relay-v2/verification.json), 9 October | Native/Java creation, restart, and reopening the exported ZIP passed. Checks cover panel interaction, actual relay-powered lamps, capacitor off-delay, panel readings, and saved charge before recharging. All 67 non-GameTest jar entries match the published beta.2 runtime. |
 | [Expanded yard CI](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38028267367), commit `59373ab` | All four Windows/Linux native/Java jobs passed the 118-check suite, reference comparisons, and both example worlds' creation/restart. All four fixture jars match the local harness. |
 | [Expanded yard acceptance](../release/examples/expanded-yard-v1/verification.json), 10 October | Six native/Java creation, restart, and exact exported-ZIP checks passed, plus four equation checks. Coverage is 85/134 groups, all 28 board components and 11 panel attachments, 282 PG wire entities retained, and no loose wire items remaining. |
+| [Beta.3 versioned-jar CI](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38054448951), commit `08e1c49` | All four Windows/Linux native/Java jobs passed on their first attempt: 121 packaged checks in SETUP and VERIFY, upstream references, and both example worlds' creation/restart. No intermittent failure appeared in this run. |
+| [Beta.3 real-client acceptance](../release/0.1.0-beta.3/verification.json), 10 October | The final versioned jar passed in pristine copies of the downloaded expanded yard with native and Java Windows clients: 69 station views, 54 synchronized gauges, actual factory/P2 panel packets, 282 retained PG wires, and no loose wire items. Both clients saved and closed normally. Only mod-version metadata differs from the earlier tested grounding-fix jar. |
 
-CI runs the packaged suite's SETUP and VERIFY phases, upstream reference comparison, and example creation/restart on Windows and Ubuntu 24.04 with native and Java backends. Two-client multiplayer is a local check. Beta.2's jars downloaded from all four CI jobs are byte-identical to the final local release jar; hashes are recorded in [ci.json](../release/0.1.0-beta.2/ci.json).
+CI runs the packaged suite's SETUP and VERIFY phases, upstream reference comparison, and example creation/restart on Windows and Ubuntu 24.04 with native and Java backends. Two-client multiplayer is a local check. Beta.2 and beta.3 each have four downloaded CI jars matching their respective local release jar; hashes are recorded in [beta.2 CI](../release/0.1.0-beta.2/ci.json) and [beta.3 CI](../release/0.1.0-beta.3/ci.json).
 
 ## Unresolved chunk-reload failure
 
@@ -49,7 +53,7 @@ The initial Linux/native run failed `chunkReloadRebindsMixedEndpoints`: the rest
 
 The test samples at a fixed tick after forcing the chunk to load, while entity loading is asynchronous. This is a plausible timing cause, not a confirmed diagnosis. It remains unclear whether the failure is limited to the test's deadline or exposes a compatibility lifecycle defect. A successful later run does not resolve that question.
 
-The next diagnostic step is to record chunk/entity readiness, restored wire connections, and simulation progress before the assertion. Any change must retain an actual unload/reload and check that power returns within a bounded interval. Beta.2 does not claim to fix this earlier failure.
+The next diagnostic step is to record chunk/entity readiness, restored wire connections, and simulation progress before the assertion. Any change must retain an actual unload/reload and check that power returns within a bounded interval. Beta.3's grounding correction does not claim to fix this earlier failure.
 
 ## Unresolved board restart reading
 
@@ -57,11 +61,13 @@ A local Windows/native VERIFY run on `cd41b24` failed `restartRetainsPanelTermin
 
 The failed run did not capture those diagnostics, so the rerun cannot establish whether the original failure lost stored charge or sampled a circuit before restoration completed. The failure and diagnostic logs are retained with the hotfix evidence. This is separate from the startup registration fix and remains open; later passing runs do not establish a cause.
 
+The same assertion failed again in [PR #5's Linux/native CI run, attempt 1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38046505940/attempts/1), on `dfbfa64`. A retry of the failed job passed without code or assertion changes; the [main merge CI](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38051470456) also passed. This confirms that the restart failure is still intermittent. Beta.3 retains it as an unresolved issue.
+
 ## PG circuit design table saved-design error
 
 Building the expanded yard exposed `powergrid:circuit_design_table` throwing a `NullPointerException` when loading its saved schematic. PG 0.6.2's `CircuitDesignTableBlockEntity.read` accesses `level.registryAccess()` before the block entity has a level. The table could subsequently receive power, so a powered-block check alone missed the failed load. The diagnostic log is retained in the expanded-yard evidence archive.
 
-The downloadable yard excludes a placed design table. Its item remains in the parts cabinets, and the live routing board demonstrates pins, traces, a via, and a label. The existing design/copy workflow tests do not establish saved-table persistence. The published beta.2 jar is unchanged; this issue is open.
+The downloadable yard excludes a placed design table. Its item remains in the parts cabinets, and the live routing board demonstrates pins, traces, a via, and a label. The existing design/copy workflow tests do not establish saved-table persistence. This issue remains open in beta.3.
 
 ## Startup registration race
 

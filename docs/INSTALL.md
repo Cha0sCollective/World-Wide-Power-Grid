@@ -1,6 +1,6 @@
 # Install and try WWPG
 
-**0.1.0-beta.2** fixes handheld meters across the two mods, improves the example world's heater, and addresses an intermittent startup error. Read [current status](STATUS.md) for unresolved reload/restart test failures and [supported content](SUPPORT.md) for the release's coverage.
+**0.1.0-beta.3** fixes incorrect voltages after grounding changes. It includes beta.2's handheld-meter, example-heater, and startup-registration fixes. Read [current status](STATUS.md) for unresolved reload/restart test failures and [supported content](SUPPORT.md) for the release's coverage.
 
 ## Required versions
 
@@ -14,13 +14,13 @@ Install this exact combination on the server and every client. Use Java 21.
 | Create: Electro Energetics | 1.21.1-1.1.3 |
 | Power Grid | Minecraft 1.21.1, 0.6.2 |
 | Architectury API | NeoForge 13.0.8 |
-| WWPG | 0.1.0-beta.2 |
+| WWPG | 0.1.0-beta.3 |
 
 Use Create's full published release jar. CEE, PG, and Create download references and checksums are recorded in [artifacts.json](../release/artifacts.json). The WWPG download contains the compatibility mod and native solver resources; install the required upstream mods separately.
 
 ## Installation
 
-1. [Download the WWPG jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2.jar).
+1. [Download the WWPG jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.3/wwpg-0.1.0-beta.3.jar).
 2. Put it and the required dependency jars in the instance's `mods` directory.
 3. Launch once to generate configuration, then stop the game or server.
 4. In `config/powergrid-server.toml`, edit the existing solver settings to the values below. Keep the other PG solver settings at their defaults.
@@ -56,7 +56,7 @@ Use the upstream wire, spool, and cord tools on supported terminals. Wire length
 - **Power Grid multimeter, current:** right-click a wire from either mod. Selecting a wire switches to current mode; selecting a terminal switches back to voltage mode.
 - **CEE clamp meter, current:** hold right-click while aiming at a wire from either mod. Release right-click or look away to stop measuring. A clamp measures a wire's current, not a terminal's voltage.
 
-Replace the older WWPG jar on the server and every client when upgrading. Keep the same dependency versions and solver settings. The original beta.1 example remains underpowered at its heater; use the updated example below for the working burner demonstration.
+When upgrading, stop the game/server, back up your world, and replace the older WWPG jar on the server and every client. Keep only one WWPG jar in `mods`. Keep the same dependency versions and solver settings; existing beta.2 worlds work with beta.3 and do not need to be downloaded again. The original beta.1 example remains underpowered at its heater; use the updated example below for the working burner demonstration.
 
 ## Diagnostic commands
 
@@ -70,11 +70,11 @@ These diagnostic commands require operator permission level 2:
 
 ## Expanded test yard
 
-For a broader hands-on test, use the [expanded yard and station guide](FIXTURE_WORLD.md). It includes transformers, gauges, all built-in board components and panel attachments, and storage. Use the existing beta.2 jar. Extract its separate save folder into `saves`; keep a clean copy before destructive experiments. Loose wire items left during construction are removed before export.
+For a broader hands-on test, use the [expanded yard and station guide](FIXTURE_WORLD.md). It includes transformers, gauges, all built-in board components and panel attachments, and storage. The existing yard download works with beta.3. Extract its separate save folder into `saves`; keep a clean copy before destructive experiments. Loose wire items left during construction are removed before export.
 
 ## Example world
 
-Download [the revised example-world ZIP](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2-example-v2.zip) and extract `WWPG Example - Panel Demo/` into the client's `saves` directory. It appears as **WWPG - Panel Relay Demo** in the world list and uses the published **beta.2 mod jar**. For a dedicated server, use that directory as the server's level directory. Install the dependencies and solver settings above first. The earlier example remains available as a separate download; this revision has its own save folder.
+Download [the revised example-world ZIP](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2-example-v2.zip) and extract `WWPG Example - Panel Demo/` into the client's `saves` directory. It appears as **WWPG - Panel Relay Demo** in the world list and works with **beta.3**. Its original beta.2 filename is retained because the world is unchanged. For a dedicated server, use that directory as the server's level directory. Install the dependencies and solver settings above first. The earlier example remains available as a separate download; this revision has its own save folder.
 
 Spawn is at `(8, 64, 16)`:
 
