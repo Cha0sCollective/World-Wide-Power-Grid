@@ -17,6 +17,28 @@ import java.util.UUID;
 
 /** Exercises upstream item handlers, including their hidden socket terminals. */
 final class NativeInteractions {
+    static int connectSplitCord(GameTestHelper h, BlockPos source, int positive, int negative,
+                                BlockPos target, int targetPositive, int targetNegative,
+                                net.minecraft.world.item.ItemStack stack) {
+        var hit = new BlockHitResult[1];
+        var player = new Player(h.getLevel(), BlockPos.ZERO, 0, new GameProfile(UUID.randomUUID(), "WWPG-string-test")) {
+            @Override public boolean isSpectator() { return false; }
+            @Override public boolean isCreative() { return false; }
+            @Override public HitResult pick(double distance, float partialTick, boolean fluids) { return hit[0]; }
+        };
+        int before = stack.getCount();
+        player.setItemInHand(InteractionHand.MAIN_HAND, stack);
+        var positions = new BlockPos[] {source, source, target, target};
+        var terminals = new int[] {positive, negative, targetPositive, targetNegative};
+        for (int i = 0; i < positions.length; i++) {
+            hit[0] = new BlockHitResult(new BlockWireEndpoint(positions[i], terminals[i]).getExactPosition(h.getLevel()),
+                    Direction.UP, positions[i], false);
+            h.assertTrue(CordItem.useOn(player, InteractionHand.MAIN_HAND, positions[i], Direction.UP).isTrue(),
+                    "Native split cord rejected terminal " + positions[i] + ":" + terminals[i]);
+        }
+        return before - stack.getCount();
+    }
+
     static void connectCord(GameTestHelper h, BlockPos source, int positive, int negative, BlockPos target) {
         var hit = new BlockHitResult[1];
         var player = new Player(h.getLevel(), BlockPos.ZERO, 0, new GameProfile(UUID.randomUUID(), "WWPG-cord-test")) {

@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "ci_run": 38088289202,
+  "classification": "acceptance-fixture collision, reproduced locally",
+  "cause": "The destructive stationary Nether portal at Overworld (1536,64,1536) replaced ElectronicsPersistenceGameTests SOURCE at exactly that position. The full VERIFY suite runs the portal test before the saved-board test, allowing the disconnected board to discharge. Narrow distribution-only cold runs did not exercise that interaction.",
+  "correction": "Reserve destructive portal areas at Overworld (40000/41024,64,40000), Nether (5000/5128,64,5000); retain original saved-electronics coordinates and strict pre-solve charge assertion.",
+  "local_control": "local-control.log.gz",
+  "ci_control": "ci-failures.log.gz",
+  "product_persistence_fix_added": false,
+  "validation": "Fresh full BASE/native and PINOUT/Java SETUP suites pass (182/183 with the separately developed accuracy tests). Complete cold passes and eight-combination CI remain pending at this commit.",
+  "published_support_claim": false
+}

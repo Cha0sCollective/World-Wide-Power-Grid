@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "target": "0.1.0-beta.5",
+  "jar_sha256": "92ed114972153ccf25f46326ca31375786867bef6fa1e914acd027faad432c0a",
+  "published_support_claim": false,
+  "passing_runs": [
+    {
+      "log": "pinout-java-full.log.gz",
+      "required_tests_passed": 170
+    },
+    {
+      "log": "base-native-full.log.gz",
+      "required_tests_passed": 169
+    },
+    {
+      "log": "native-cold-1.log.gz",
+      "required_tests_passed": 21
+    },
+    {
+      "log": "native-cold-2.log.gz",
+      "required_tests_passed": 21
+    },
+    {
+      "log": "native-cold-3.log.gz",
+      "required_tests_passed": 21
+    },
+    {
+      "log": "java-cold-1.log.gz",
+      "required_tests_passed": 21
+    },
+    {
+      "log": "java-cold-2.log.gz",
+      "required_tests_passed": 21
+    },
+    {
+      "log": "java-cold-3.log.gz",
+      "required_tests_passed": 21
+    }
+  ],
+  "reproduced_defects": [
+    {
+      "control": "odd-pole-control.log.gz",
+      "cause": "CEE scans pole segments in pairs and checks one block beyond an odd-height pole.",
+      "fix": "Check the preceding segment at the overshoot; retain native assembly and terminals."
+    },
+    {
+      "control": "native-nether-shutdown-control.log.gz",
+      "cause": "PG-only linked controllers amplify stale samples when every substep in one dimension runs before the other dimension.",
+      "fix": "Prepare all server dimensions and interleave their native PG substeps. Thread-local deferral preserves client Ponder simulation."
+    },
+    {
+      "control": "nether-unload-control.log.gz",
+      "cause": "Create skips block entity remove() during actual chunk unload, leaving PG static controller links attached.",
+      "fix": "Detach the unloaded controller through the native link entry, guarded against replacement."
+    }
+  ],
+  "fixture_corrections": [
+    "Compare reloaded history against actual serialized chunk bytes after unloading; the live circuit can advance between a requested save and actual unload.",
+    "The original Nether destination at (512,64,512) collided with the parallel dimension regression source. Reserve a separate portal area at Nether (4096,64,4096) and Overworld (32768,64,32768). Both failed runs remain retained.",
+    "Scope topology identity checks to the actual decorated circuit, rather than counters modified by parallel fixtures.",
+    "Place the native recovery spool in inventory after selecting cutters; the original mock player overwrote the spool in its hand.",
+    "Retain PG native housing residual field of .001 and assert zero winding current when the housing is removed."
+  ],
+  "lifecycle": "Each local cold pass runs five actual independent Nether-end unload/reload cycles, delayed entities, pre-first-solve native saved history, persistent wire identities and a saved CEE banner.",
+  "remaining": [
+    "Full Windows/Linux x native/Java x BASE/PINOUT CI acceptance",
+    "Other stationary completion gates in progress.json, including electrical accuracy, Pinout lifecycle, graphical/two-client workflows and the two complete exported yards",
+    "Earlier Linux/native/Pinout CI slowdown remains unexplained; a passing run is not resolution"
+  ]
+}
