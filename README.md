@@ -28,7 +28,7 @@ The [example world](docs/INSTALL.md#example-world) lets you try a PG-powered CEE
 
 ## Beta status
 
-The original beta passed **114 automated checks** on Windows and Linux. Beta.2 expands the suite to **117**, adding handheld-meter checks and real-client measurement tests. Further checks cover saving and reopening worlds and **two players wiring, configuring, and measuring the same circuit**. See [current test results](docs/STATUS.md) and the [original release acceptance](docs/FIRST_RELEASE.md).
+The original beta passed **114 automated checks** on Windows and Linux. Beta.2 expands the suite to **118**, adding handheld-meter checks and a startup-registration regression. Further checks cover saving and reopening worlds and **two players wiring, configuring, and measuring the same circuit**. See [current test results](docs/STATUS.md) and the [original release acceptance](docs/FIRST_RELEASE.md).
 
 **One reload issue remains unexplained:** an earlier test found a circuit had no power after a section of the world was unloaded and loaded again. Later runs passed, but we have not confirmed whether this was a test-timing problem or a gameplay bug. See [current status and known issues](docs/STATUS.md).
 

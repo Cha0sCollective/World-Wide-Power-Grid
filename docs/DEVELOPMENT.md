@@ -20,7 +20,7 @@ Published checksums and matching source references are in [artifacts.json](../re
 
 ## Packaged regression suite
 
-The 117 GameTests use real upstream devices, item interactions, and server hooks. Electrical checks cover polarity, grounding, currents, transient state, RMS/phase, transformer relationships, and nonlinear electronics. Gameplay checks cover outputs, assembly, controls, protection, repair, and failures. Three handheld-meter fixtures were added after beta.1; the real-client fixture additionally checks targeting, item packets, and displayed readings.
+The 118 GameTests include 117 electrical/gameplay/lifecycle fixtures and one concurrent-registration regression. Electrical checks cover polarity, grounding, currents, transient state, RMS/phase, transformer relationships, and nonlinear electronics. Gameplay checks cover outputs, assembly, controls, protection, repair, and failures. Three handheld-meter fixtures were added after beta.1; the real-client fixture additionally checks targeting, item packets, and displayed readings. The startup regression uses an isolated Registrate instance to force a callback to arrive during entry publication and checks that the callback is retained.
 
 Run SETUP and VERIFY in separate processes using the same isolated test directory:
 
@@ -39,7 +39,7 @@ Reserved chunks `(64,64)` and `(96,96)` check restart persistence for wires, set
 
 ## Upstream reference worlds
 
-Reference tests first use the upstream solvers with only the missing-native-resource repair, then reopen the saved circuits with full compatibility:
+Reference tests first use the upstream solvers with the missing-native-resource repair and atomic registration bookkeeping, then reopen the saved circuits with full electrical compatibility:
 
 ```sh
 ./gradlew runUpstreamReferenceServer -PtestBackend=NATIVE --no-daemon

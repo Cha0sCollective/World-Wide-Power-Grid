@@ -1,6 +1,6 @@
 # Supported content
 
-WWPG 0.1.0-beta.2 retains the original 134 checked behaviors: 95 block/assembly groups, all 11 built-in CEE panel attachments, and all 28 built-in PG board components. It also adds explicit support for two handheld meters. Colored panels and motors share native behavior groups. The counts describe inventory groups, not separate automated tests; the packaged suite contains 117 tests, some covering multiple groups.
+WWPG 0.1.0-beta.2 retains the original 134 checked behaviors: 95 block/assembly groups, all 11 built-in CEE panel attachments, and all 28 built-in PG board components. It also adds explicit support for two handheld meters. Colored panels and motors share native behavior groups. The counts describe inventory groups, not separate automated tests; the packaged suite contains 117 electrical/gameplay/lifecycle fixtures and one startup-registration regression, some covering multiple groups.
 
 The [machine-readable matrix](../release/content-matrix.json) links each declared behavior to electrical/gameplay tests and a shared lifecycle suite. Coverage includes placement, editing, removal, reconnection, network split/merge, chunk reload, restart, and multiplayer interactions. It does not establish every configuration of every device.
 

@@ -30,8 +30,8 @@ def archive(path, entries):
 checks = []
 evidence = {}
 for name, expected in [
-    ("native-setup", 117), ("native-verify", 117),
-    ("java-setup", 117), ("java-verify", 117),
+    ("native-setup", 118), ("native-verify", 118),
+    ("java-setup", 118), ("java-verify", 118),
     ("example-setup", 1), ("example-verify", 1),
     ("multiplayer-server", 1),
     ("multiplayer-client-a", None), ("multiplayer-client-b", None),
@@ -59,6 +59,16 @@ for path in (root / "build/test-results/test").glob("TEST-*.xml"):
 if equations != 4:
     raise SystemExit(f"Expected four equation tests, got {equations}")
 
+regression = root / "build/handheld-startup-unpatched-fixture.log"
+regression_text = regression.read_text(encoding="utf-8", errors="replace")
+if "1 required tests failed" not in regression_text or "No stranded or negative callback count" not in regression_text:
+    raise SystemExit("The isolated registration regression must reproduce the callback loss with the fix disabled")
+evidence[regression.relative_to(root).as_posix()] = regression
+diagnostic = root / "build/handheld-ci-startup-diagnostic-failure.log"
+if "callback size=-1, keys=[], entries={}" not in diagnostic.read_text(encoding="utf-8", errors="replace"):
+    raise SystemExit("Missing captured startup-counter failure")
+evidence[diagnostic.relative_to(root).as_posix()] = diagnostic
+
 ci_path = record / "ci.json"
 ci = json.loads(ci_path.read_text(encoding="utf-8"))
 jobs = ci.get("jobs", [])
@@ -71,6 +81,9 @@ report = {
     "tested_artifact": {"file": jar.name, "sha256": sha(jar)},
     "ci_source_commit": ci["headSha"],
     "packaged_electrical_gameplay_fixtures": 117,
+    "packaged_fixtures": 118, "startup_concurrency_fixtures": 1,
+    "registration_regression": "Fails with a stranded callback when synchronization is disabled; passes with the fix enabled",
+    "startup_diagnostic_ci": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38006974291",
     "checks": checks, "ci": ci["url"],
     "local_platform": "Windows x86-64, Java 21; native v7 and Java",
     "real_clients": "Two packaged Windows clients; terminal voltage and both wire systems' handheld current readings",
