@@ -8,6 +8,8 @@ Status checked **9 October 2026**. These facts describe the implementation and p
 
 The original acceptance covered installed meters; it did not validate the handheld interactions reported by a player. Beta.2 fixes wire targeting taking precedence over terminal probes and synchronizes solved server measurements instead of using a client estimate that cannot reconstruct the CEE source. [PR #2](https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/2) contains the change. The original beta.1 downloads and evidence remain unchanged.
 
+**Example world revision 2** makes the panel/board circuit visibly testable with RUN/OFF lamps and a short capacitor off-delay. It uses the existing beta.2 runtime and is distributed separately from the original world and release bundle. [Instructions](INSTALL.md#example-world) explain the controls; [revision evidence](../release/examples/panel-relay-v2/) records its checks. The revision does not resolve the earlier reload/restart failures below.
+
 **0.1.0-beta.1** is [published as a GitHub prerelease](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.1). The downloads include the mod jar, example world, verification archive, complete documentation bundle, and checksums. [PR #1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/1) merged the implementation into `main` as `8e533df` on 9 October.
 
 The declared scope is stationary interoperability: 95 block/assembly behaviors, 11 built-in CEE panel attachments, and 28 built-in PG board components. See [SUPPORT.md](SUPPORT.md) for the inventory and exclusions, and [INSTALL.md](INSTALL.md) for the exact dependencies and solver settings.

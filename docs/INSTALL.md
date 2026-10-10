@@ -70,15 +70,23 @@ These diagnostic commands require operator permission level 2:
 
 ## Example world
 
-Download [the example-world ZIP](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2-example.zip) and extract `WWPG Example/` into the client's `saves` directory. For a dedicated server, use that directory as the server's level directory. Install the dependencies and solver settings above first. Keep a copy of any example world you have edited before replacing it.
+Download [the revised example-world ZIP](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2-example-v2.zip) and extract `WWPG Example - Panel Demo/` into the client's `saves` directory. It appears as **WWPG - Panel Relay Demo** in the world list and uses the published **beta.2 mod jar**. For a dedicated server, use that directory as the server's level directory. Install the dependencies and solver settings above first. The earlier example remains available as a separate download; this revision has its own save folder.
 
 Spawn is at `(8, 64, 16)`:
 
-- **Northern circuit:** a CEE source supplies a PG resistor and capacitor board through a CEE control/meter panel. The panel's **Factory enable** switch controls the storage circuit.
+- **Northern circuit:** the CEE panel controls a PG board containing a relay and capacitor. The relay routes a separate 300 V PG supply to two CEE lamps, mounted on green and red blocks and labeled **RUNNING** and **OFF**. The lamps' power passes through the board's contacts.
 - **Southern circuits:** a 300 V PG source powers CEE lighting and a water pump connected to Create tanks and pipes. A separate 600 V PG source powers the CEE heater beneath a Create basin; after warming up, it reaches usable burner heat.
-- **Tools at spawn:** the chest at `(6, 64, 16)` contains both meters and both wire tools.
+- **Tools at spawn:** the chest at `(6, 64, 16)` contains both meters, both wire tools, and Create's Engineer's Goggles.
 
-The world has passed creation and restart checks. It provides a repeatable small demonstration; it does not establish large-network performance. Maintainers can rebuild it with [the development commands](DEVELOPMENT.md#example-world).
+To test the panel and board, right-click **Factory enable** with an empty hand:
+
+1. **Switch on:** the green **RUNNING** lamp lights and the red **OFF** lamp goes out.
+2. **Switch off:** the capacitor keeps the green lamp on for roughly three seconds. Then green goes out and red lights.
+3. **Switch on again:** green returns after a short charging delay and red goes out. Repeat as often as you like.
+
+With goggles on, the panel shows about **18.4 V** at the board's relay coil and **0.15 A** through the panel while on. The active lamp branch draws about **0.30 A**. The panel's stock meter needles move very little at these readings; use the numeric tooltip or the obvious lamp changes. Signs identify the controls and outputs in the world.
+
+The example checks exercise the actual panel interaction, capacitor delay, relay state, both lamps, numeric meters, tools, and saved state. [Revision-2 evidence](../release/examples/panel-relay-v2/) records creation/restart and exported-world checks. It provides a repeatable small demonstration; it does not establish large-network performance. Maintainers can rebuild it with [the development commands](DEVELOPMENT.md#example-world).
 
 ## Pinned upstream behavior
 

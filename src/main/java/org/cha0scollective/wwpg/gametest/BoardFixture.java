@@ -151,7 +151,8 @@ final class BoardFixture {
                 for (var next : neighbors) {
                     if (next.x < 0 || next.x > 15 || next.y < 0 || next.y > 15 || previous.containsKey(next)) continue;
                     var p = new Point(next.x, next.y);
-                    if (occupied[next.layer][next.x][next.y] || pads.contains(p) && !p.equals(from) && !p.equals(to)) continue;
+                    if (occupied[next.layer][next.x][next.y] && !p.equals(to)
+                            || pads.contains(p) && !p.equals(from) && !p.equals(to)) continue;
                     previous.put(next, at); queue.addLast(next);
                 }
             }

@@ -24,7 +24,7 @@ Use **Minecraft 1.21.1**, **NeoForge 21.1.231**, **Java 21**, **Create 6.0.10-28
 
 You still place, assemble, configure, and repair equipment through each mod's normal gameplay. PG's portable battery keeps its normal item-charging role; use a CEE accumulator to store power and supply it back to a wired circuit.
 
-The [example world](docs/INSTALL.md#example-world) lets you try a PG-powered CEE pump, lights, and heater, plus a CEE-powered PG capacitor board controlled by a CEE panel.
+The [revised example world](docs/INSTALL.md#example-world) lets you try a PG-powered CEE pump, lights, and heater. Flip the CEE panel switch to operate a PG relay board: its green RUN lamp turns on, and switching off produces a short capacitor delay before the red OFF lamp lights.
 
 ## Beta status
 
