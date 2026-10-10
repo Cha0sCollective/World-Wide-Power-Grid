@@ -1,0 +1,64 @@
+gradle.projectsEvaluated {
+    def project = gradle.rootProject
+    def root = project.file('build/expanded-client-harness')
+    def compilation = project.tasks.register('compileExpandedClientHarness', JavaCompile) {
+        source project.fileTree(new File(root, 'src')) { include '**/*.java' }
+        classpath = project.sourceSets.main.compileClasspath + project.files('build/libs/wwpg-0.1.0-beta.2.jar')
+        destinationDirectory = new File(root, 'classes')
+        javaCompiler = project.javaToolchains.compilerFor { languageVersion = JavaLanguageVersion.of(21) }
+        options.encoding = 'UTF-8'
+    }
+    def harness = project.tasks.register('expandedClientHarnessJar', Jar) {
+        dependsOn compilation
+        from compilation.map { it.destinationDirectory }
+        from new File(root, 'resources')
+        destinationDirectory = root
+        archiveFileName = 'wwpg-client-acceptance.jar'
+    }
+    project.tasks.register('runExpandedWorldClient', JavaExec) {
+        dependsOn harness, project.tasks.named('prepareClientARun')
+        javaLauncher = project.javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(21) }
+        doFirst {
+            def run = project.tasks.named('runClientA').get()
+            workingDir = project.file(project.providers.gradleProperty('expandedDirectory').get())
+            mainClass = run.mainClass
+            args = run.args.collect { argument ->
+                if (!argument.startsWith('@')) return argument
+                def original = project.file(argument.substring(1))
+                def replacement = new File(root, 'client-program-args.txt')
+                replacement.text = original.getText('UTF-8').replace('--quickPlayMultiplayer\n127.0.0.1:25575', '--quickPlaySingleplayer\n"WWPG Expanded Test Yard"').replace('--width\n854', '--width\n1280').replace('--height\n480', '--height\n720')
+                return "@${replacement.absolutePath}"
+            }
+            jvmArgs = run.jvmArgs.collect { argument ->
+                if (!argument.startsWith('@')) return argument
+                def original = project.file(argument.substring(1))
+                def replacement = new File(root, 'client-vm-args.txt')
+                replacement.text = original.getText('UTF-8').replace('-Xmx2G', '-Xmx4G').replace('-Dwwpg.test.multiplayer=true', '-Dwwpg.test.multiplayer=false') + '\n-Dwwpg.test.backend=' + project.providers.gradleProperty('testBackend').get() + '\n-Dwwpg.test.restartPhase=VERIFY\n-Dneoforge.enabledGameTestNamespaces=wwpg_showroom\n'
+                return "@${replacement.absolutePath}"
+            }
+            def packaged = project.file('build/libs/wwpg-0.1.0-beta.2.jar')
+            def helper = harness.get().archiveFile.get().asFile
+            classpath = run.classpathProvider.filter { !project.sourceSets.main.output.files.contains(it) } + project.files(packaged, helper)
+            def env = new HashMap(run.environmentProperty.get())
+            env['MOD_CLASSES'] = "wwpg%%${packaged.absolutePath}" + File.pathSeparator + "wwpg_acceptance%%${helper.absolutePath}"
+            environment env
+            def capture = new ByteArrayOutputStream()
+            extensions.extraProperties.set('expandedClientOutput', capture)
+            def tee = { OutputStream console ->
+                new OutputStream() {
+                    void write(int value) { console.write(value); capture.write(value) }
+                    void write(byte[] bytes, int offset, int length) { console.write(bytes, offset, length); capture.write(bytes, offset, length) }
+                    void flush() { console.flush() }
+                }
+            }
+            standardOutput = tee(System.out)
+            errorOutput = tee(System.err)
+            logger.lifecycle('Opening downloaded yard in client with exact WWPG jar and separate acceptance helper')
+        }
+        doLast {
+            def output = extensions.extraProperties.get('expandedClientOutput').toString('UTF-8')
+            if (!output.contains('EXPANDED_REAL_CLIENT_PASSED') || output.contains('EXPANDED_REAL_CLIENT_FAILED'))
+                throw new GradleException('Downloaded-world client acceptance did not complete successfully; inspect its log')
+        }
+    }
+}

@@ -14,6 +14,8 @@ The tests assert retained source-node, network, and branch identities. They also
 
 [verification.json](verification.json) records the tested jar and source hashes, Windows native/Java SETUP and VERIFY results, and negative-control readings. The existing GitHub Actions matrix runs the full suite, upstream reference comparisons, and example-world creation/restart on Windows and Linux with both backends. Local log paths in the record refer to ignored build output; CI publishes its logs and jars as workflow artifacts.
 
+The exact downloaded expanded-yard ZIP was also opened in real Windows clients with this same packaged jar. Native and Java client acceptance passed all 69 station views and 54 synchronized gauge checks, plus actual client panel clicks controlling the factory delay and P2 lamp. The native run reopened a save made by the new jar. Both retained 282 PG wires, found no loose construction wires, and saved and closed normally. [Client verification](client-verification.json) and [reproduction, checkpoints, and screenshots](client/) preserve the results and earlier setup/test-driver failures. The live yard covers 85/134 behavior groups; inventory-only parts and prior handheld-meter/multiplayer checks are separate.
+
 Reproduce each backend with Java 21, using separate server processes and the same directory for SETUP and VERIFY:
 
 ```powershell

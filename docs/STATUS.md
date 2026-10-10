@@ -22,6 +22,8 @@ The published beta.2 can retain incorrect voltages when a ground connection chan
 
 The source correction rebuilds the affected equations when grounding changes, preserving the circuit's existing nodes and branches. Three new regressions cover adding/removing/changing grounds, reference changes and physical-ground takeover, and two actual ground-rod chunk unload/reload cycles. The packaged suite now contains 121 checks. [Grounding verification](../release/fixes/grounding/) records the results and reproduction on the old code.
 
+The same grounding-fix jar passed [real Windows client checks of the downloaded expanded yard](../release/fixes/grounding/client/) with native and Java backends, including a native save/restart. Each client visited 69 stations, checked 54 synchronized gauges, and switched the factory and P2 panel through actual client interactions. All 282 PG wires remained connected. These checks cover the yard's 85 live behavior groups; they do not resolve the intermittent failures below.
+
 This is an unreleased source fix; the published beta.2 downloads are unchanged. It does not establish the causes of the earlier intermittent chunk-reload or board-restart failures below.
 
 ## Test evidence
