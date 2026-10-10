@@ -98,12 +98,13 @@
         "PG supply runs native Lua API checks",
         "Both handheld instruments, panel gauge and traced/via/label board",
         "Five actual chunk cycles with delayed entities and pre-solve native pins/settings",
-        "Native peripheral detach/reattach and default-open block replacement"
+        "Native peripheral detach/reattach and default-open block replacement",
+        "185 complete optional checks in setup and three consecutive cold processes locally on both solvers, with actual ticking readiness before Lua boot"
       ],
       "remaining": [
-        "Complete corrected-artifact cold restart and CI matrix",
         "Playable start/stop demonstration",
-        "Fresh graphical/two-client optional acceptance"
+        "Fresh graphical and two-client optional acceptance",
+        "Final eight-combination release acceptance"
       ]
     },
     {

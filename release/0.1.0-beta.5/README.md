@@ -181,8 +181,7 @@ Complete Java runs also exposed the test harness selecting Java during solves
 while leaving PG's configuration on native. Deliberate config-reload tests could
 switch the backend between Lua calls and temporarily clear its solved values.
 The harness now sets and logs PG's actual requested backend before each batch.
-Three complete cold passes on the corrected artifact and full eight-combination
-CI are still required for this batch. Playable computer stations and fresh
+Full eight-combination CI is still required for this batch. Playable computer stations and fresh
 graphical/two-client acceptance remain release blockers.
 
 The backend-setting correction did not close the durable cold-boot failure.
@@ -191,5 +190,11 @@ harness constructed and started a globally registered computer before its forced
 chunks became entity-ticking. The fixture now waits for actual ticking and entity
 inbox readiness across all four chunks before booting Lua, including reloads.
 It still reads saved pins/settings immediately before any solve, and keeps the
-same voltage/current expectations. Corrected complete cold passes are pending;
-passing retries of the earlier harness are not counted as a resolution.
+same voltage/current expectations. The identical corrected packaged jar passes
+all 185 optional-profile checks in setup and three consecutive cold processes on
+both native and Java. Every computer boot reports actual ticking readiness, and
+each process verifies five actual unload/reloads. The logs, native identities,
+Lua reports and artifact checksum are retained in `evidence/pinout-lifecycle`.
+Passing retries of the earlier harness are not counted as a resolution. Complete
+playable worlds, graphical/two-client checks and final release acceptance remain
+open.
