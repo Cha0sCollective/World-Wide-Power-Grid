@@ -1,0 +1,837 @@
+{
+  "schema": 1,
+  "backend": "NATIVE",
+  "upstream": false,
+  "initial": 0.0,
+  "samples": [
+    {
+      "tick": 16,
+      "value": -9.341518020675277,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 17,
+      "value": -9.341523563806325,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 18,
+      "value": -9.341528203517589,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 19,
+      "value": -9.341532083365975,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 20,
+      "value": -9.34153532941959,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 21,
+      "value": -9.341538043213562,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 22,
+      "value": -9.341540315806096,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 23,
+      "value": -9.341542217221361,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 24,
+      "value": -9.34154380661258,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 25,
+      "value": -9.341545137306035,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 26,
+      "value": -9.341546250889818,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 27,
+      "value": -9.341547182381973,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 28,
+      "value": -9.341547959792535,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 29,
+      "value": -9.341548611134023,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 30,
+      "value": -9.341549157425105,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 31,
+      "value": -9.341549612661414,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 32,
+      "value": -9.341549994358612,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 33,
+      "value": -9.341550313033139,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 34,
+      "value": -9.341550579182204,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 35,
+      "value": -9.341550803293828,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 36,
+      "value": -9.341550988568192,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 37,
+      "value": -9.34155114619886,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 38,
+      "value": -9.341551275816055,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 39,
+      "value": -9.341551384406827,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 40,
+      "value": -9.341551475490784,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 41,
+      "value": -9.341551552551826,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 42,
+      "value": -9.341551615614387,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 43,
+      "value": -9.341551668157717,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 44,
+      "value": -9.34155171369422,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 45,
+      "value": -9.341551752229558,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 46,
+      "value": -9.341551783758092,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 47,
+      "value": -9.341551811407973,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 48,
+      "value": -9.34155183252247,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 49,
+      "value": -9.34155185007366,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 50,
+      "value": -9.34155186413748,
+      "source_setting": 10.0
+    },
+    {
+      "tick": 51,
+      "value": -5.7089915709992525,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 52,
+      "value": -3.4891410012111246,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 53,
+      "value": -2.1325946112745893,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 54,
+      "value": -1.3036117361456812,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 55,
+      "value": -0.7970219046618292,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 56,
+      "value": -0.4874458386591886,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 57,
+      "value": -0.2982645043321362,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 58,
+      "value": -0.1826561679522304,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 59,
+      "value": -0.11200819784544856,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 60,
+      "value": -0.06883561404167235,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 61,
+      "value": -0.042453397247843035,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 62,
+      "value": -0.026331594441117368,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 63,
+      "value": -0.0164797720556746,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 64,
+      "value": -0.010459435336661372,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 65,
+      "value": -0.006780465490097251,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 66,
+      "value": -0.0045322773069100385,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 67,
+      "value": -0.0031584524727894946,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 68,
+      "value": -0.002318910579270714,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 69,
+      "value": -0.0018058638949643927,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 70,
+      "value": -0.001492339310118339,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 71,
+      "value": -0.0013007433071647455,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 72,
+      "value": -0.0011836582785457789,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 73,
+      "value": -0.001112107174959513,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 74,
+      "value": -0.0010683820220945747,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 75,
+      "value": -0.0010416614129446365,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 76,
+      "value": -0.0010253323454660335,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 77,
+      "value": -0.0010153535890912522,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 78,
+      "value": -0.0010092555323671757,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 79,
+      "value": -0.0010055289862297928,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 80,
+      "value": -0.0010032516794105713,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 81,
+      "value": -0.001001860008365033,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 82,
+      "value": -0.001001009552780961,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 83,
+      "value": -0.0010004898360683949,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 84,
+      "value": -0.001000172235165584,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 85,
+      "value": -9.999781480196646E-4,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 86,
+      "value": -9.99859540610689E-4,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 87,
+      "value": -9.99787059162287E-4,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 88,
+      "value": -9.997708115568873E-4,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 89,
+      "value": -9.997708115568873E-4,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 90,
+      "value": -9.997708115568873E-4,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 91,
+      "value": -0.0012835795133280198,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 92,
+      "value": -0.001457022885162559,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 93,
+      "value": -0.0015630192055772717,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 94,
+      "value": -0.0016277966581547617,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 95,
+      "value": -0.0016673840544832214,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 96,
+      "value": -0.0016915770705051426,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 97,
+      "value": -0.0017063621303605718,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 98,
+      "value": -0.001715397712973779,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 99,
+      "value": -0.0017209196218438394,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 100,
+      "value": -0.0017242942218972635,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 101,
+      "value": -0.001726356538713524,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 102,
+      "value": -0.0017276168808528255,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 103,
+      "value": -0.0017283871128053454,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 104,
+      "value": -0.0017288578240845943,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 105,
+      "value": -0.0017291454895179573,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 106,
+      "value": -0.0017293212902799115,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 107,
+      "value": -0.001729428727268577,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 108,
+      "value": -0.0017294943851554091,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 109,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 110,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 111,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 112,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 113,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 114,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 115,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 116,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 117,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 118,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 119,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 120,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 121,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 122,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 123,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 124,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 125,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 126,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 127,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 128,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 129,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 130,
+      "value": -0.0017295005461996154,
+      "source_setting": -10.0
+    },
+    {
+      "tick": 131,
+      "value": -4.375614135503372,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 132,
+      "value": -4.375632837707875,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 133,
+      "value": -4.3756350858085735,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 134,
+      "value": -4.375636966914522,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 135,
+      "value": -4.375638540673006,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 136,
+      "value": -4.3756398552242715,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 137,
+      "value": -4.375640954291925,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 138,
+      "value": -4.375641876446202,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 139,
+      "value": -4.375642646761973,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 140,
+      "value": -4.375643291165865,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 141,
+      "value": -4.375643831865745,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 142,
+      "value": -4.375644283680943,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 143,
+      "value": -4.37564466143317,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 144,
+      "value": -4.3756449762193,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 145,
+      "value": -4.3756452384758235,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 146,
+      "value": -4.375645460784964,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 147,
+      "value": -4.375645646053093,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 148,
+      "value": -4.375645801684709,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 149,
+      "value": -4.375645931374117,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 150,
+      "value": -4.375646038832152,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 151,
+      "value": -4.375646131459397,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 152,
+      "value": -4.3756462055785486,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 153,
+      "value": -4.375646267891837,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 154,
+      "value": -4.37564631987658,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 155,
+      "value": -4.375646364414462,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 156,
+      "value": -4.375646401552851,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 157,
+      "value": -4.375646434931733,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 158,
+      "value": -4.375646460952598,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 159,
+      "value": -4.375646483226587,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 160,
+      "value": -4.375646501794194,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 161,
+      "value": -4.375646515991218,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 162,
+      "value": -4.3756465272742,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 163,
+      "value": -4.3756465383951895,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 164,
+      "value": -4.375646546019289,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 165,
+      "value": -4.375646553436986,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 166,
+      "value": -4.3756465608450865,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 167,
+      "value": -4.375646568248462,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 168,
+      "value": -4.375646572169382,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 169,
+      "value": -4.375646575160613,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 170,
+      "value": -4.375646579542963,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 171,
+      "value": -4.375646582559275,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 172,
+      "value": -4.375646586950631,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 173,
+      "value": -4.375646586950631,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 174,
+      "value": -4.375646586950631,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 175,
+      "value": -4.375646586950631,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 176,
+      "value": -4.375646586950631,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 177,
+      "value": -4.375646586950631,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 178,
+      "value": -4.375646586950631,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 179,
+      "value": -4.375646586950631,
+      "source_setting": 5.0
+    },
+    {
+      "tick": 180,
+      "value": -4.375646586950631,
+      "source_setting": 5.0
+    }
+  ],
+  "events": {},
+  "relative_tolerance": 0.01,
+  "near_zero_tolerance": 2.0000000233721948E-7,
+  "allowed_gameplay_tick_offset": 1
+}

@@ -70,10 +70,8 @@
       "stage": 4,
       "status": "in_progress",
       "remaining": [
-        "Pinned upstream heating, charging, protection and failure timing within one tick",
-        "Recorded accumulator and battery storage windows",
-        "Mixed nonlinear rectifier, switching and reactive correctness",
-        "Complete eight-combination packaged accuracy acceptance"
+        "Complete eight-combination packaged accuracy acceptance",
+        "Graphical workflows and complete playable demonstrations"
       ],
       "implemented": [
         "0.1% physical mixed DC reference fixtures with both wire systems and supplies",
@@ -81,7 +79,12 @@
         "Recorded native CEE RC/RL windows at 1, 2 and 16 substeps within 1%",
         "Native AC samples, RMS/quadrature, and reactive transformer phase/current/RMS checks",
         "Reproduced and corrected saved frequency/synchroscope counters starving display synchronization",
-        "182 BASE/native and 183 PINOUT/Java full checks plus three consecutive complete cold passes locally"
+        "182 BASE/native and 183 PINOUT/Java full checks plus three consecutive complete cold passes locally",
+        "Actual pinned upstream heating, bulb failure, fuse trip and survival repair timing within one tick",
+        "Recorded native accumulator and battery energy-change windows within 1%, including native potato no-charging behavior",
+        "CEE diode and PG nonlinear reactive board switching against native traces on both solvers, at normal and tighter precision",
+        "Reproduced small CEE conductance changes being lost from the PG matrix; corrected only property stamps and retained the exact-zero fast path",
+        "36 focused accuracy checks plus nine actual upstream and nine compatibility reference checks on each solver; causal failures and artifact proofs retained"
       ]
     },
     {
