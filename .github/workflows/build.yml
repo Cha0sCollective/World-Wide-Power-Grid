@@ -56,6 +56,7 @@ jobs:
             run/logs/
             run/crash-reports/
             run/stationary-registry.json
+            run/accuracy-*.json
             run/restart-*.log
             run/designer-before-restart.nbt
             run/designer-cycles-before-restart.nbt

@@ -126,3 +126,24 @@ area. The strict pre-solve charge assertion and saved electronics coordinates
 remain unchanged. Failed CI and local controls are retained in
 [`evidence/restart-fixture-isolation`](evidence/restart-fixture-isolation).
 Fresh full suites pass locally; complete cold and CI verification are pending.
+
+The electrical-accuracy batch passes 182 packaged BASE/native and 183 PINOUT/Java
+checks locally, including three consecutive complete cold runs per tested profile.
+The strict saved-board assertion now passes in those full restarts, after moving
+the destructive portal fixtures. DC and transformer references check 0.1% errors;
+270 recorded capacitor and 270 inductor points per backend check 1% windows at
+1, 2 and 16 substeps. Native AC, reactive transformer phase/RMS, winding current
+and reflected impedance are also checked. Evidence records each exact artifact,
+including the added, unexecuted Lua test resource between SETUP and cold runs.
+
+A graphical run of the extracted older yard exposed a separate real display bug:
+an odd saved native sample count, advanced by 16 each tick, never reached CEE's
+`count % 10 == 0` display update condition. Frequency and synchroscope measurements
+continued internally while their displayed values froze. An elapsed-sample check
+retains the native throttle and value-change rules. Both regressions pass on
+native and Java. The native client also passes all 69 legacy-yard views,
+synchronized readings, wire rendering, and real panel interaction packets.
+That yard regression does not replace the complete beta.5 demonstrations.
+Controls, fixture corrections, recorded samples and proofs are retained in
+[`evidence/accuracy`](evidence/accuracy). Native timing comparisons, accumulator
+and battery windows, nonlinear mixed circuits and final acceptance remain open.

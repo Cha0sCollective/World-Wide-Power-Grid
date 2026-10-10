@@ -68,14 +68,20 @@
     },
     {
       "stage": 4,
-      "status": "pending",
+      "status": "in_progress",
       "remaining": [
-        "0.1% packaged DC references",
-        "1% recorded storage windows",
-        "Complete AC, phase, polarity, reflected impedance and current relationships",
         "Pinned upstream heating, charging, protection and failure timing within one tick",
+        "Recorded accumulator and battery storage windows",
         "Mixed nonlinear rectifier, switching and reactive correctness",
-        "Expanded topology and exactly-once state acceptance"
+        "Complete eight-combination packaged accuracy acceptance"
+      ],
+      "implemented": [
+        "0.1% physical mixed DC reference fixtures with both wire systems and supplies",
+        "Signed transformer ratios, current relationships, reflected impedance, Kirchhoff and power checks",
+        "Recorded native CEE RC/RL windows at 1, 2 and 16 substeps within 1%",
+        "Native AC samples, RMS/quadrature, and reactive transformer phase/current/RMS checks",
+        "Reproduced and corrected saved frequency/synchroscope counters starving display synchronization",
+        "182 BASE/native and 183 PINOUT/Java full checks plus three consecutive complete cold passes locally"
       ]
     },
     {
