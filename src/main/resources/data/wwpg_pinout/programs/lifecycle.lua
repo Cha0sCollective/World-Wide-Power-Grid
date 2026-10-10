@@ -15,7 +15,12 @@ local ok, err = pcall(function()
   local before = 0
   for pin = 1, 8 do if state[pin] then before = before + 2^(pin - 1) end end
   -- First installation has no saved state; every later boot must retain 85.
-  local boots = tonumber(fs.exists("boots.txt") and fs.open("boots.txt", "r").readAll() or "0")
+  local boots = 0
+  if fs.exists("boots.txt") then
+    local previous = assert(fs.open("boots.txt", "r"))
+    boots = assert(tonumber(previous.readAll()))
+    previous.close()
+  end
   assert(before == (boots == 0 and 0 or 85), "Saved pins changed before the first Lua write")
   p.setByte(0)
   sleep(0.2)
