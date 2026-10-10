@@ -24,7 +24,10 @@ repositories {
 }
 
 def releaseArtifacts = new groovy.json.JsonSlurper().parse(file('release/artifacts.json'))
-configurations { pgNativeReference; upstreamArtifacts }
+def optionalArtifacts = new groovy.json.JsonSlurper().parse(file('release/optional-artifacts.json'))
+def testProfile = providers.gradleProperty('testProfile').getOrElse('BASE').toUpperCase()
+if (!(testProfile in ['BASE', 'PINOUT'])) throw new GradleException('testProfile must be BASE or PINOUT')
+configurations { pgNativeReference; upstreamArtifacts; optionalReference }
 
 neoForge {
     version = neo_version
@@ -47,7 +50,8 @@ neoForge {
         server { server(); programArgument '--nogui' }
         gameTestServer {
             type = 'gameTestServer'
-            systemProperty 'neoforge.enabledGameTestNamespaces', providers.gradleProperty('testNamespaces').getOrElse('wwpg')
+            systemProperty 'neoforge.enabledGameTestNamespaces', providers.gradleProperty('testNamespaces').getOrElse(testProfile == 'PINOUT' ? 'wwpg,wwpg_stationary,wwpg_design,wwpg_pinout' : 'wwpg,wwpg_stationary,wwpg_design')
+            systemProperty 'wwpg.test.profile', testProfile
             systemProperty 'wwpg.test.backend', providers.gradleProperty('testBackend').getOrElse('NATIVE')
             systemProperty 'wwpg.test.restartPhase', providers.gradleProperty('restartPhase').getOrElse('SETUP')
             systemProperty 'wwpg.test.multiplayer', providers.gradleProperty('multiplayer').getOrElse('false')
@@ -58,6 +62,11 @@ neoForge {
 }
 
 dependencies {
+    optionalArtifacts.artifacts.each {
+        optionalReference(it.coordinate) { transitive = false }
+        compileOnly(it.coordinate) { transitive = false }
+        if (testProfile == 'PINOUT') runtimeOnly(it.coordinate) { transitive = false }
+    }
     releaseArtifacts.artifacts.findAll { it.role != 'pg_native_reference' }.each {
         upstreamArtifacts(it.coordinate) { transitive = false }
     }
@@ -88,7 +97,7 @@ tasks.named('processResources') {
     inputs.property 'version', project.version
     filesMatching('META-INF/neoforge.mods.toml') { expand version: project.version }
     from('LICENSE') { into 'META-INF'; rename { 'WWPG-LICENSE.txt' } }
-    from('release') { include 'artifacts.json', 'content-matrix.json'; into 'data/wwpg/release' }
+    from('release') { include 'artifacts.json', 'optional-artifacts.json', 'content-matrix.json', '0.1.0-beta.5/content-matrix.json', '0.1.0-beta.5/registry-inventory.json'; into 'data/wwpg/release' }
     from(layout.buildDirectory.dir('pg-native-resources/native')) { into 'native/wwpg' }
 }
 tasks.named('jar') { manifest.attributes 'MixinConfigs': 'wwpg.mixins.json' }
@@ -130,6 +139,21 @@ tasks.register('verifyUpstreamArtifacts') {
     }
 }
 tasks.named('check') { dependsOn tasks.named('verifyUpstreamArtifacts') }
+
+tasks.register('verifyOptionalArtifacts') {
+    inputs.file 'release/optional-artifacts.json'
+    inputs.files configurations.optionalReference
+    doLast {
+        def resolved = configurations.optionalReference.resolvedConfiguration.resolvedArtifacts
+        optionalArtifacts.artifacts.each { locked ->
+            def artifact = resolved.find { it.moduleVersion.id.toString() == locked.coordinate }
+            if (artifact == null) throw new GradleException("Missing optional reference ${locked.coordinate}")
+            def hash = java.security.MessageDigest.getInstance('SHA-256').digest(artifact.file.bytes).encodeHex().toString()
+            if (hash != locked.sha256) throw new GradleException("Optional checksum mismatch: ${locked.coordinate}")
+        }
+    }
+}
+tasks.named('check') { dependsOn tasks.named('verifyOptionalArtifacts') }
 
 tasks.register('preparePgNative', Sync) {
     dependsOn tasks.named('verifyUpstreamArtifacts')
@@ -176,6 +200,15 @@ tasks.register('runPackagedGameTestServer', JavaExec) {
         env['MOD_CLASSES'] = "wwpg%%${packaged.absolutePath}"
         environment env
         logger.lifecycle("Testing packaged WWPG artifact: ${packaged.name}")
+        def stamp = java.time.Instant.now().toString().replace(':', '-')
+        def proof = [schema: 1, artifact: packaged.name,
+                sha256: java.security.MessageDigest.getInstance('SHA-256').digest(packaged.bytes).encodeHex().toString(),
+                profile: testProfile, backend: providers.gradleProperty('testBackend').getOrElse('NATIVE'),
+                phase: providers.gradleProperty('restartPhase').getOrElse('SETUP'), started: stamp,
+                namespaces: providers.gradleProperty('testNamespaces').getOrElse('default')]
+        def evidence = new File(workingDir, "packaged-${stamp}.json")
+        evidence.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(proof)) + '\n'
+        extensions.extraProperties.set('wwpgPackagedEvidence', evidence)
     }
 }
 
@@ -282,5 +315,12 @@ tasks.matching { it.name in ['runGameTestServer', 'runPackagedGameTestServer', '
         def passed = output =~ /All (\d+) required tests passed/
         if (!output.contains('GAME TESTS COMPLETE') || !passed.find() || passed.group(1).toInteger() == 0)
             throw new GradleException('GameTest server did not report a completed passing suite; inspect the current run log')
+        if (extensions.extraProperties.has('wwpgPackagedEvidence')) {
+            def evidence = extensions.extraProperties.get('wwpgPackagedEvidence')
+            def proof = new groovy.json.JsonSlurper().parse(evidence)
+            proof.required_tests_passed = passed.group(1).toInteger()
+            proof.completed = java.time.Instant.now().toString()
+            evidence.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(proof)) + '\n'
+        }
     }
 }

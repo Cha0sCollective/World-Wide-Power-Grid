@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "profile": "PINOUT",
+  "required_for_base_wwpg": false,
+  "artifacts": [
+    {
+      "role": "pinout",
+      "version": "0.2.1",
+      "coordinate": "maven.modrinth:sMa4MaGz:UJtJCpBi",
+      "sha256": "d31c19c3c8aefb512922bf8086146127cad7ef9100d929a8fddcc2ab133fdd4a",
+      "download": "https://cdn.modrinth.com/data/sMa4MaGz/versions/UJtJCpBi/pinout-0.2.1.jar",
+      "source": "https://github.com/INEEDCHATPROGRAAAAAMS/CC-cpg-pinout/tree/590e86b4bd437cff33246fda23b0c14fe6272d04",
+      "source_note": "Reference source; published jar metadata and bytecode are authoritative."
+    },
+    {
+      "role": "computercraft",
+      "version": "1.120.2",
+      "coordinate": "maven.modrinth:gu7yAYhd:1ewzHZYg",
+      "sha256": "e8651fe24b384e925e563c9ad077644744474e2e7c0adb8e6d5b4757598dce9f",
+      "download": "https://cdn.modrinth.com/data/gu7yAYhd/versions/1ewzHZYg/cc-tweaked-1.21.1-forge-1.120.2.jar",
+      "source": "https://github.com/cc-tweaked/CC-Tweaked/releases/tag/v1.120.2"
+    }
+  ]
+}
