@@ -69,6 +69,17 @@ if "callback size=-1, keys=[], entries={}" not in diagnostic.read_text(encoding=
     raise SystemExit("Missing captured startup-counter failure")
 evidence[diagnostic.relative_to(root).as_posix()] = diagnostic
 
+# Retain intermittent acceptance failures alongside the passing release runs.
+# A successful retry is evidence of intermittency, not a persistence diagnosis.
+board_failure = root / "build/handheld-board-restart-first-failure.log"
+if "Restart discarded PG board capacitor charge: 0.0" not in board_failure.read_text(encoding="utf-8", errors="replace"):
+    raise SystemExit("Missing the recorded intermittent board-restart failure")
+board_diagnostic = root / "build/handheld-board-restart-diagnostic.log"
+if "WWPG board restart diagnostic:" not in board_diagnostic.read_text(encoding="utf-8", errors="replace"):
+    raise SystemExit("Missing the board-restart diagnostic rerun")
+for path in [board_failure, board_diagnostic]:
+    evidence[path.relative_to(root).as_posix()] = path
+
 ci_path = record / "ci.json"
 ci = json.loads(ci_path.read_text(encoding="utf-8"))
 jobs = ci.get("jobs", [])
@@ -76,6 +87,9 @@ if ci.get("conclusion") != "success" or len(jobs) != 4 or any(j.get("conclusion"
     raise SystemExit("The four platform/backend CI jobs have not passed")
 
 jar = root / "build/libs" / f"wwpg-{version}.jar"
+ci_hashes = ci.get("packagedArtifactHashes", [])
+if len(ci_hashes) != 4 or any(p.get("sha256") != sha(jar) for p in ci_hashes):
+    raise SystemExit("The four passing CI jars must match the local tested artifact")
 report = {
     "schema": 1, "target": version, "equation_tests": equations,
     "tested_artifact": {"file": jar.name, "sha256": sha(jar)},
@@ -87,7 +101,15 @@ report = {
     "checks": checks, "ci": ci["url"],
     "local_platform": "Windows x86-64, Java 21; native v7 and Java",
     "real_clients": "Two packaged Windows clients; terminal voltage and both wire systems' handheld current readings",
-    "known_issue": "Earlier beta.1 Linux/native chunk-reload failure remains unexplained; no fix claimed.",
+    "known_issues": [
+        "Earlier beta.1 Linux/native chunk-reload failure remains unexplained; no fix claimed.",
+        "A local Windows/native board-capacitor restart assertion read 0 V at tick 20. The diagnostic rerun retained charge; the original cause remains unresolved.",
+    ],
+    "intermittent_board_restart": {
+        "failed_log": board_failure.relative_to(root).as_posix(), "failed_log_sha256": sha(board_failure),
+        "diagnostic_log": board_diagnostic.relative_to(root).as_posix(), "diagnostic_log_sha256": sha(board_diagnostic),
+        "status": "Unresolved; passing retries do not distinguish lost charge from an early live reading.",
+    },
 }
 report_path = record / "verification.json"
 report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8", newline="\n")

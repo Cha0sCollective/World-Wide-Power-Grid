@@ -2,7 +2,7 @@
 
 **World-Wide Power Grid (WWPG)** lets **Create: Electro Energetics (CEE)** and **Power Grid (PG)** share electrical circuits. Use either mod's native wire tools to connect supported terminals across both mods. PG solves the circuit; CEE keeps its machines, controls, visuals, heat, damage, and other gameplay.
 
-The latest beta, **0.1.0-beta.2**, focuses on stationary factories. It fixes handheld measurements across the two mods and gives the example heater enough power to work as a burner. See the [GitHub release](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.2).
+The latest beta, **0.1.0-beta.2**, focuses on stationary factories. It fixes handheld measurements across the two mods, gives the example heater enough power to work as a burner, and addresses an intermittent error when starting Minecraft. See the [GitHub release](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.2).
 
 ## Try the beta
 
@@ -30,7 +30,7 @@ The [example world](docs/INSTALL.md#example-world) lets you try a PG-powered CEE
 
 The original beta passed **114 automated checks** on Windows and Linux. Beta.2 expands the suite to **118**, adding handheld-meter checks and a startup-registration regression. Further checks cover saving and reopening worlds and **two players wiring, configuring, and measuring the same circuit**. See [current test results](docs/STATUS.md) and the [original release acceptance](docs/FIRST_RELEASE.md).
 
-**One reload issue remains unexplained:** an earlier test found a circuit had no power after a section of the world was unloaded and loaded again. Later runs passed, but we have not confirmed whether this was a test-timing problem or a gameplay bug. See [current status and known issues](docs/STATUS.md).
+**Two reload/restart checks remain unexplained:** tests have occasionally read no power in a restored circuit or no charge in a restored circuit-board capacitor. Later runs passed, but we have not confirmed whether these were early readings or gameplay bugs. See [current status and known issues](docs/STATUS.md).
 
 This release covers the stationary equipment listed above. Moving trains and contraptions, optional add-ons, and very large power grids are outside its tested scope. The [support list](docs/SUPPORT.md) identifies the exact equipment covered and items still unverified.
 

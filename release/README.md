@@ -1,6 +1,6 @@
 # Release records
 
-[0.1.0-beta.2/](0.1.0-beta.2/) records the handheld-meter and example-heater hotfix separately. It retains the same dependency baseline, adds explicit handheld support, and supplies new verification and distribution records. The original beta.1 records below are preserved.
+[0.1.0-beta.2/](0.1.0-beta.2/) records the handheld-meter, example-heater, and startup-registration hotfix separately. It retains the same dependency baseline, adds explicit handheld support, and supplies new verification and distribution records, including passing runs and unresolved intermittent failures. The original beta.1 records below are preserved.
 
 This directory records the fixed dependencies, supported behaviors, local acceptance, and hashes used to prepare **0.1.0-beta.1**. The beta is now [published on GitHub](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.1). See [current status](../docs/STATUS.md) for publication, later CI results, and known issues.
 

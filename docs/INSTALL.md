@@ -1,6 +1,6 @@
 # Install and try WWPG
 
-**0.1.0-beta.2** fixes handheld meters across the two mods and improves the example world's heater. Read [current status](STATUS.md) for the unresolved chunk-reload test failure and [supported content](SUPPORT.md) for the release's coverage.
+**0.1.0-beta.2** fixes handheld meters across the two mods, improves the example world's heater, and addresses an intermittent startup error. Read [current status](STATUS.md) for unresolved reload/restart test failures and [supported content](SUPPORT.md) for the release's coverage.
 
 ## Required versions
 

@@ -8,7 +8,7 @@
 - Add handheld-meter regression tests and extend the real-client multiplayer fixture to check the actual item interactions and displayed readings.
 - Give the example heater a separate 600 V supply so it reaches Create's working burner heat, without changing CEE's heater model. Add a basin and a chest of testing tools at spawn.
 - Make Registrate's pending-callback updates and entry publication atomic per instance, addressing an intermittent startup registration failure. Add a regression that forces a callback to arrive during publication and checks that it is retained.
-
+- Retain the unexplained chunk-reload and board-capacitor restart failure records alongside passing hotfix acceptance; neither is claimed fixed.
 - Make WWPG's own code and documentation open source under MIT, including the WWPG portions of the existing beta.
 - Declare MIT in mod metadata and include the license in newly built jars and release bundles.
 - Preserve the bundled Power Grid native resources' Apache 2.0 license and attribution. Original published beta artifacts and checksums are unchanged.

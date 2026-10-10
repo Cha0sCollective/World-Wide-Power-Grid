@@ -37,6 +37,8 @@ Reserved chunks `(64,64)` and `(96,96)` check restart persistence for wires, set
 
 **Known issue:** `chunkReloadRebindsMixedEndpoints` has failed once in Linux/native CI, reading 0 V instead of 10 V after reload. It uses fixed tick deadlines while entity loading is asynchronous. That makes timing a candidate cause; instrumentation is still needed to establish whether the issue is in the fixture or compatibility lifecycle. See [the failure record](STATUS.md#unresolved-chunk-reload-failure).
 
+`restartRetainsPanelTerminalsBoardIdentityAndCharge` also read 0 V once in a local Windows/native run at tick 20. A diagnostic rerun retained about 9.869 V in the saved property and internal history. The failed run lacked that instrumentation, so the cause remains open; see [the restart record](STATUS.md#unresolved-board-restart-reading). Keep the actual persistence assertions when investigating either failure.
+
 ## Upstream reference worlds
 
 Reference tests first use the upstream solvers with the missing-native-resource repair and atomic registration bookkeeping, then reopen the saved circuits with full electrical compatibility:

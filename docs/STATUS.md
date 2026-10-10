@@ -4,7 +4,7 @@ Status checked **9 October 2026**. These facts describe the implementation and p
 
 ## Published beta
 
-**0.1.0-beta.2** is the handheld-meter, example-world, and startup-registration hotfix. Its release checks are in progress on this branch. It adds three meter fixtures and one concurrent-registration regression (118 total), plus actual-client checks for CEE terminal voltage, both meters on PG wires, and both meters on CEE wires. The example heater now has a separate 600 V feed, a basin, and tools at spawn. The original 300 V feed only warmed the heater and did not reach working burner heat.
+**[0.1.0-beta.2](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.2)** is the handheld-meter, example-world, and startup-registration hotfix. Its final packaged checks passed with native and Java solvers. It adds three meter fixtures and one concurrent-registration regression (118 total), plus actual-client checks for CEE terminal voltage, both meters on PG wires, and both meters on CEE wires. The example heater now has a separate 600 V feed, a basin, and tools at spawn. The original 300 V feed only warmed the heater and did not reach working burner heat.
 
 The original acceptance covered installed meters; it did not validate the handheld interactions reported by a player. Beta.2 fixes wire targeting taking precedence over terminal probes and synchronizes solved server measurements instead of using a client estimate that cannot reconstruct the CEE source. [PR #2](https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/2) contains the change. The original beta.1 downloads and evidence remain unchanged.
 
@@ -20,8 +20,10 @@ The declared scope is stationary interoperability: 95 block/assembly behaviors, 
 | [Initial push CI](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/37547855327), commit `3cd55dc` | One Linux/native chunk-reload test failed; the other three backend/platform jobs passed. |
 | [PR CI](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/37547915948), same commit `3cd55dc` | All four backend/platform jobs passed. |
 | [Main merge CI](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/37990481752), commit `8e533df` | All four backend/platform jobs passed. |
+| [Beta.2 implementation CI](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38008086944), commit `cd41b24` | All four backend/platform jobs passed with the registration fix: 118 packaged checks, reference comparison, and example creation/restart. |
+| [Beta.2 packaged acceptance](../release/0.1.0-beta.2/verification.json), 9 October | Final Windows native/Java SETUP and VERIFY runs passed all 118 checks. The updated example passed creation/restart; two real clients measured about 20 V and 1 A using native item controls and closed cleanly. Earlier failures are retained in the verification archive. |
 
-CI runs the packaged suite's SETUP and VERIFY phases, upstream reference comparison, and example creation/restart on Windows and Ubuntu 24.04 with native and Java backends. Two-client multiplayer and cross-platform byte-identical jar comparison are recorded local checks, not CI jobs.
+CI runs the packaged suite's SETUP and VERIFY phases, upstream reference comparison, and example creation/restart on Windows and Ubuntu 24.04 with native and Java backends. Two-client multiplayer is a local check. Beta.2's jars downloaded from all four CI jobs are byte-identical to the final local release jar; hashes are recorded in [ci.json](../release/0.1.0-beta.2/ci.json).
 
 ## Unresolved chunk-reload failure
 
@@ -31,13 +33,19 @@ The test samples at a fixed tick after forcing the chunk to load, while entity l
 
 The next diagnostic step is to record chunk/entity readiness, restored wire connections, and simulation progress before the assertion. Any change must retain an actual unload/reload and check that power returns within a bounded interval. Beta.2 does not claim to fix this earlier failure.
 
+## Unresolved board restart reading
+
+A local Windows/native VERIFY run on `cd41b24` failed `restartRetainsPanelTerminalsBoardIdentityAndCharge`: the PG circuit-board capacitor read **0 V** at the tick-20 assertion. An instrumented rerun read about **9.869 V** in both the saved component property and the capacitor's internal voltage history, with the wire entities loaded. All four implementation CI jobs passed this check.
+
+The failed run did not capture those diagnostics, so the rerun cannot establish whether the original failure lost stored charge or sampled a circuit before restoration completed. The failure and diagnostic logs are retained with the hotfix evidence. This is separate from the startup registration fix and remains open; later passing runs do not establish a cause.
+
 ## Startup registration race
 
 NeoForge reported an “uncaught parallel processing error”; the underlying error was Create's Registrate reporting unused registration callbacks. This happened before a world or electrical simulation started and occurred with both solver selections, including on GitHub's independent test machines.
 
 Earlier local native/Java runs, example restart, and two real clients passed, but the [Linux/native PR job](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38005893894) and [Linux/Java push job](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38005891186) reproduced startup failures on `cdb94cb`. Reusing CEE's existing meter handler did not fully resolve them.
 
-A subsequent [instrumented Windows/Java failure](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38006974291), on `1f8b377`, recorded a callback count of **−1** with an empty callback map. Beta.2 now synchronizes pending-callback updates and entry publication per Registrate instance, preserving the existing error checks for actual unused callbacks. A forced interleaving regression reproduces a stranded callback with the fix disabled and retains it with the fix enabled. The initiating class-loading interleaving has not been attributed to an individual mod. Final packaged client and cross-platform checks of the fix are in progress.
+A subsequent [instrumented Windows/Java failure](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38006974291), on `1f8b377`, recorded a callback count of **−1** with an empty callback map. Beta.2 now synchronizes pending-callback updates and entry publication per Registrate instance, preserving the existing error checks for actual unused callbacks. A forced interleaving regression reproduces a stranded callback with the fix disabled and retains it with the fix enabled. All four implementation CI jobs and both final packaged clients passed with the fix. The initiating class-loading interleaving has not been attributed to an individual mod.
 
 ## Deferred work
 

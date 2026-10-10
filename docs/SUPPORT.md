@@ -4,7 +4,7 @@ WWPG 0.1.0-beta.2 retains the original 134 checked behaviors: 95 block/assembly 
 
 The [machine-readable matrix](../release/content-matrix.json) links each declared behavior to electrical/gameplay tests and a shared lifecycle suite. Coverage includes placement, editing, removal, reconnection, network split/merge, chunk reload, restart, and multiplayer interactions. It does not establish every configuration of every device.
 
-The [local verification record](../release/verification.json) contains passing runs. An earlier GitHub run failed a chunk-reload assertion; later runs passed, and the cause remains unresolved. Read [current status](STATUS.md) alongside this support list.
+The [original verification record](../release/verification.json) and [hotfix records](../release/0.1.0-beta.2/) contain the acceptance evidence. Intermittent chunk-reload and board-capacitor restart assertions remain unresolved despite later passing runs. Read [current status](STATUS.md) alongside this support list.
 
 Names below are native registry IDs, useful when checking upstream code or the matrix. CEE IDs use the `electroenergetics:` namespace; PG IDs use `powergrid:`.
 
