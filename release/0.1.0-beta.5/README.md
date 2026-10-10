@@ -154,3 +154,47 @@ actual panel interaction packets. Both client helpers shut down after completing
 the checks. This confirms optional-profile startup; playable computer-control
 stations and the new yard acceptance remain pending. Its log and exact jar/ZIP
 checksums are included in the accuracy evidence.
+
+The native-workflow CI run
+[38089985019](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38089985019)
+and electrical-accuracy CI run
+[38090541628](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38090541628)
+pass all eight platform/backend/profile combinations, including their complete
+cold-restart suites. These runs validate their stage commits; final stationary
+completion and the prolonged slowdown investigation remain open.
+
+The next optional-integration batch adds a second native Lua fixture using a PG
+supply, plus a durable computer/Pinout/panel/traced-board circuit. It checks both
+handheld instruments, five actual unload/reload cycles with delayed wire entities,
+native saved pins and settings before solving, retained computer/wire identities,
+peripheral detach/reattach, and default-open block replacement. It preserves all
+eight native Lua methods and introduces no Pinout runtime compatibility hook.
+
+Failed fixture controls are retained. Changing a PG resistor's live wire alone
+left its saved scroll setting at a low resistance; reload then overloaded the
+native Pinout and a thermal explosion destroyed the computer. The fixture now
+uses native persistent controls and checks them before solving. Another fixture
+clicked outside handheld reach; it now moves within the native limit and checks
+that current mode actually attached. Neither correction suppresses native damage.
+
+Complete Java runs also exposed the test harness selecting Java during solves
+while leaving PG's configuration on native. Deliberate config-reload tests could
+switch the backend between Lua calls and temporarily clear its solved values.
+The harness now sets and logs PG's actual requested backend before each batch.
+Full eight-combination CI is still required for this batch. Playable computer stations and fresh
+graphical/two-client acceptance remain release blockers.
+
+The backend-setting correction did not close the durable cold-boot failure.
+Retained native and Java failures show `PINOUT_BOOT` with `ticking=false`: the
+harness constructed and started a globally registered computer before its forced
+chunks became entity-ticking. The fixture now waits for actual ticking and entity
+inbox readiness across all four chunks before booting Lua, including reloads.
+It still reads saved pins/settings immediately before any solve, and keeps the
+same voltage/current expectations. The identical corrected packaged jar passes
+all 185 optional-profile checks in setup and three consecutive cold processes on
+both native and Java. Every computer boot reports actual ticking readiness, and
+each process verifies five actual unload/reloads. The logs, native identities,
+Lua reports and artifact checksum are retained in `evidence/pinout-lifecycle`.
+Passing retries of the earlier harness are not counted as a resolution. Complete
+playable worlds, graphical/two-client checks and final release acceptance remain
+open.

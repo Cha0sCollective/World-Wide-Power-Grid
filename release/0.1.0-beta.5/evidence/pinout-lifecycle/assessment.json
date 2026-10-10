@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "published_support_claim": false,
+  "checks": [
+    {
+      "run": "beta5-pinout-readiness-java",
+      "count": 185,
+      "sha256": "8511436187fbf3d1a0b9134b1daaf4612a01bf9059944ed34915dd37aadcd002",
+      "setup": true,
+      "consecutive_cold_passes": 3,
+      "actual_pinout_cycles_per_pass": 5
+    },
+    {
+      "run": "beta5-pinout-readiness-native",
+      "count": 185,
+      "sha256": "8511436187fbf3d1a0b9134b1daaf4612a01bf9059944ed34915dd37aadcd002",
+      "setup": true,
+      "consecutive_cold_passes": 3,
+      "actual_pinout_cycles_per_pass": 5
+    }
+  ],
+  "controls": [
+    "The first fixture incorrectly inspected a simple board resistor special-wire list; PG bakes it into shared wires. Read native baked nodes instead.",
+    "The mutation trace proves a native PG ThermalBehaviour explosion removed the computer after reload. Fixture resistor setValue changed the live wire only, leaving its saved native scroll resistance low. Use native persistent settings and assert them before the first solve. Temporary mutation tracing was removed.",
+    "The meter fixture clicked a distant wire midpoint outside native handheld reach, leaving voltage mode selected. Move the mock player within reach and assert actual current selection.",
+    "The harness selected Java solves while PG configuration remained native. Native config reloads could switch the solver and clear its state between Lua calls. The batch now configures and logs the requested backend. This alone did not close the cold-boot failure.",
+    "Failed native and Java cold runs booted the globally registered computer while ticking=false. The corrected fixture waits for actual ticking and entity readiness across all four chunks before initial/reload Lua boot. Saved state is still checked before the first solve. All eight complete corrected-artifact setup/cold processes pass with ticking=true at every boot. No Pinout runtime hook was added."
+  ],
+  "covered": [
+    "Actual native Lua VM/provider; all eight methods; both supply mods; all pins and byte patterns; signed comparisons and invalid inputs.",
+    "Native common Lua9/PG0 identity; both wire systems; independent CEE panel and native traced/via/label board outputs.",
+    "Native PG multimeter probes across Pinout/CEE terminals, PG current measurement on CEE spool, and CEE clamp on PG common cord.",
+    "Before-write Lua pin checks and before-solve serialized native pins/settings, retained native computer ID and five saved wire identities.",
+    "Five actual chunk cycles per run with delayed entity loading, live peripheral detach/reattach, block replacement, default-open isolation and restored mixed power."
+  ],
+  "artifact_note": "Both backends ran the identical frozen readiness jar, each with 185 complete checks in setup and three consecutive cold processes. This development artifact also contains five unexecuted reference-namespace timing fixtures from the following stage. CI must exercise the committed Pinout stage on all eight combinations.",
+  "remaining": [
+    "Complete playable Pinout yard and player start/stop programs",
+    "Fresh graphical/two-real-client optional acceptance",
+    "Final eight-combination beta.5 packaged acceptance"
+  ]
+}

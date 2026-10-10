@@ -94,13 +94,17 @@
         "Signed voltage checks against independent load measurements",
         "Invalid input checks",
         "Native saved pin state before first solve",
-        "Computer reboot"
+        "Computer reboot",
+        "PG supply runs native Lua API checks",
+        "Both handheld instruments, panel gauge and traced/via/label board",
+        "Five actual chunk cycles with delayed entities and pre-solve native pins/settings",
+        "Native peripheral detach/reattach and default-open block replacement",
+        "185 complete optional checks in setup and three consecutive cold processes locally on both solvers, with actual ticking readiness before Lua boot"
       ],
       "remaining": [
-        "Meters, panel inputs and board-controlled equipment",
-        "Peripheral detach/reattach and block replacement",
-        "Actual chunk cycles and cold world restarts",
-        "Playable start/stop demonstration"
+        "Playable start/stop demonstration",
+        "Fresh graphical and two-client optional acceptance",
+        "Final eight-combination release acceptance"
       ]
     },
     {

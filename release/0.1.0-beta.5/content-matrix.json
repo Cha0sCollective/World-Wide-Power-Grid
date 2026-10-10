@@ -5197,10 +5197,21 @@
       "status": "unverified",
       "release_scope": true,
       "fixtures": [
-        "actualLuaControlsAllEightMixedLoads"
+        "actualLuaControlsAllEightMixedLoads",
+        "actualLuaControlsAllEightMixedLoadsFromPowerGridSupply",
+        "nativePinsComputerPanelAndBoardSurviveColdRestartFiveChunkCyclesAndReplacement"
       ],
-      "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
-      "profile": "PINOUT"
+      "acceptance_circuit": "12 V supply from either mod; eight 1 k\u03a9 mixed loads, both wires, native Lua switching/signed measurements, a CEE panel and PG traced board; enabled legs about 12 V/12 mA, four enabled legs about 48 mA at common. Before-solve native state/settings and five real unload/reloads plus three cold process restarts.",
+      "profile": "PINOUT",
+      "lifecycle_fixtures": [
+        "nativePinsComputerPanelAndBoardSurviveColdRestartFiveChunkCyclesAndReplacement"
+      ],
+      "fixture_sources": {
+        "actualLuaControlsAllEightMixedLoads": "src/main/java/org/cha0scollective/wwpg/gametest/PinoutLuaGameTests.java",
+        "actualLuaControlsAllEightMixedLoadsFromPowerGridSupply": "src/main/java/org/cha0scollective/wwpg/gametest/PinoutLuaGameTests.java",
+        "nativePinsComputerPanelAndBoardSurviveColdRestartFiveChunkCyclesAndReplacement": "src/main/java/org/cha0scollective/wwpg/gametest/PinoutLifecycleGameTests.java"
+      },
+      "terminals": "Native PG common terminal 0 maps to Lua common pin 9; switchable terminals 1\u20138 retain their native pin identities."
     },
     {
       "registry": "block",
