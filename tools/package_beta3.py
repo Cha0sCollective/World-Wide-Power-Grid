@@ -85,6 +85,7 @@ def main():
         for marker in ("BUILD SUCCESSFUL", f"World-Wide Power Grid {VERSION} (wwpg)",
                        f"EXPANDED_REAL_CLIENT_PASSED: backend={backend}; views=69;",
                        "server PG wires=282;", "loose wires=0",
+                       "EXPANDED_CLIENT_BASELINE_PASSED", "CEE solve attempts=0",
                        "EXPANDED_CLIENT_PANEL_PACKETS_PASSED", "EXPANDED_CLIENT_P2_PACKETS_PASSED"):
             require(marker in log, f"Missing graphical-client checkpoint {marker}: {path}")
         require("EXPANDED_REAL_CLIENT_FAILED" not in log, f"Graphical client failed: {path}")
@@ -136,7 +137,8 @@ def main():
             if path.is_file():
                 evidence[path.relative_to(ROOT).as_posix()] = path
     for name, marker in (("grounding-java-negative-control.log", "3 required tests failed"),
-                         ("grounding-ci-linux-java-push.log", "Restart discarded PG board capacitor charge: 0.0")):
+                         ("grounding-ci-linux-java-push.log", "Restart discarded PG board capacitor charge: 0.0"),
+                         ("beta3-pr5-linux-native-first-failure.log", "Restart discarded PG board capacitor charge: 0.0")):
         path = ROOT / "build" / name
         require(marker in path.read_text(encoding="utf-8", errors="replace"), f"Missing historical failure evidence: {path}")
         evidence[path.relative_to(ROOT).as_posix()] = path

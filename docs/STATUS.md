@@ -42,8 +42,10 @@ This correction is released in beta.3; published beta.2 downloads and earlier ev
 | [Example revision 2 acceptance](../release/examples/panel-relay-v2/verification.json), 9 October | Native/Java creation, restart, and reopening the exported ZIP passed. Checks cover panel interaction, actual relay-powered lamps, capacitor off-delay, panel readings, and saved charge before recharging. All 67 non-GameTest jar entries match the published beta.2 runtime. |
 | [Expanded yard CI](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38028267367), commit `59373ab` | All four Windows/Linux native/Java jobs passed the 118-check suite, reference comparisons, and both example worlds' creation/restart. All four fixture jars match the local harness. |
 | [Expanded yard acceptance](../release/examples/expanded-yard-v1/verification.json), 10 October | Six native/Java creation, restart, and exact exported-ZIP checks passed, plus four equation checks. Coverage is 85/134 groups, all 28 board components and 11 panel attachments, 282 PG wire entities retained, and no loose wire items remaining. |
+| [Beta.3 versioned-jar CI](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38054448951), commit `08e1c49` | All four Windows/Linux native/Java jobs passed on their first attempt: 121 packaged checks in SETUP and VERIFY, upstream references, and both example worlds' creation/restart. No intermittent failure appeared in this run. |
+| [Beta.3 real-client acceptance](../release/0.1.0-beta.3/verification.json), 10 October | The final versioned jar passed in pristine copies of the downloaded expanded yard with native and Java Windows clients: 69 station views, 54 synchronized gauges, actual factory/P2 panel packets, 282 retained PG wires, and no loose wire items. Both clients saved and closed normally. Only mod-version metadata differs from the earlier tested grounding-fix jar. |
 
-CI runs the packaged suite's SETUP and VERIFY phases, upstream reference comparison, and example creation/restart on Windows and Ubuntu 24.04 with native and Java backends. Two-client multiplayer is a local check. Beta.2's jars downloaded from all four CI jobs are byte-identical to the final local release jar; hashes are recorded in [ci.json](../release/0.1.0-beta.2/ci.json).
+CI runs the packaged suite's SETUP and VERIFY phases, upstream reference comparison, and example creation/restart on Windows and Ubuntu 24.04 with native and Java backends. Two-client multiplayer is a local check. Beta.2 and beta.3 each have four downloaded CI jars matching their respective local release jar; hashes are recorded in [beta.2 CI](../release/0.1.0-beta.2/ci.json) and [beta.3 CI](../release/0.1.0-beta.3/ci.json).
 
 ## Unresolved chunk-reload failure
 
@@ -51,13 +53,15 @@ The initial Linux/native run failed `chunkReloadRebindsMixedEndpoints`: the rest
 
 The test samples at a fixed tick after forcing the chunk to load, while entity loading is asynchronous. This is a plausible timing cause, not a confirmed diagnosis. It remains unclear whether the failure is limited to the test's deadline or exposes a compatibility lifecycle defect. A successful later run does not resolve that question.
 
-The next diagnostic step is to record chunk/entity readiness, restored wire connections, and simulation progress before the assertion. Any change must retain an actual unload/reload and check that power returns within a bounded interval. Beta.2 does not claim to fix this earlier failure.
+The next diagnostic step is to record chunk/entity readiness, restored wire connections, and simulation progress before the assertion. Any change must retain an actual unload/reload and check that power returns within a bounded interval. Beta.3's grounding correction does not claim to fix this earlier failure.
 
 ## Unresolved board restart reading
 
 A local Windows/native VERIFY run on `cd41b24` failed `restartRetainsPanelTerminalsBoardIdentityAndCharge`: the PG circuit-board capacitor read **0 V** at the tick-20 assertion. An instrumented rerun read about **9.869 V** in both the saved component property and the capacitor's internal voltage history, with the wire entities loaded. All four implementation CI jobs passed this check.
 
 The failed run did not capture those diagnostics, so the rerun cannot establish whether the original failure lost stored charge or sampled a circuit before restoration completed. The failure and diagnostic logs are retained with the hotfix evidence. This is separate from the startup registration fix and remains open; later passing runs do not establish a cause.
+
+The same assertion failed again in [PR #5's Linux/native CI run, attempt 1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38046505940/attempts/1), on `dfbfa64`. A retry of the failed job passed without code or assertion changes; the [main merge CI](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38051470456) also passed. This confirms that the restart failure is still intermittent. Beta.3 retains it as an unresolved issue.
 
 ## PG circuit design table saved-design error
 

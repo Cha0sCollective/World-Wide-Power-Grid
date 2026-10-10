@@ -39,7 +39,7 @@ Three grounding regressions preserve source nodes, networks, and CEE branches wh
 
 **Known issue:** `chunkReloadRebindsMixedEndpoints` has failed once in Linux/native CI, reading 0 V instead of 10 V after reload. It uses fixed tick deadlines while entity loading is asynchronous. That makes timing a candidate cause; instrumentation is still needed to establish whether the issue is in the fixture or compatibility lifecycle. See [the failure record](STATUS.md#unresolved-chunk-reload-failure).
 
-`restartRetainsPanelTerminalsBoardIdentityAndCharge` also read 0 V once in a local Windows/native run at tick 20. A diagnostic rerun retained about 9.869 V in the saved property and internal history. The failed run lacked that instrumentation, so the cause remains open; see [the restart record](STATUS.md#unresolved-board-restart-reading). Keep the actual persistence assertions when investigating either failure.
+`restartRetainsPanelTerminalsBoardIdentityAndCharge` also read 0 V at tick 20 in a local Windows/native run and later Linux/Java and Linux/native CI runs. A local diagnostic rerun retained about 9.869 V in the saved property and internal history. The failing samples did not establish whether charge was lost or restoration was incomplete, so the cause remains open; see [the restart record](STATUS.md#unresolved-board-restart-reading). Keep the actual persistence assertions when investigating either failure.
 
 ## Upstream reference worlds
 
@@ -55,6 +55,8 @@ Both use `run/reference`. The `*-upstream-reference-tests.jar` is test-only; exc
 ## Example world
 
 Build, restart, and export the example separately from the regression world:
+
+The export names below reproduce the existing beta.2 world revisions, which beta.3 reuses unchanged. The revision-specific packaging scripts validate their historical runtime; use `tools/package_beta3.py` for the new mod release.
 
 ```sh
 ./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PtestNamespaces=wwpg_example -PtestDirectory=run/example --no-daemon

@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "target": "0.1.0-beta.3",
+  "tested_artifact": {
+    "file": "wwpg-0.1.0-beta.3.jar",
+    "sha256": "b139912c88d8fb1f20ae70bf03f601be3c5f62340922b464d9ebf5670b8ac73c",
+    "bytes": 2730064
+  },
+  "ci_source_commit": "08e1c496ff77656fdf5eedcfac3c85a1594c0094",
+  "ci": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38054448951",
+  "packaged_checks": 121,
+  "electrical_gameplay_lifecycle_checks": 120,
+  "startup_registration_checks": 1,
+  "new_grounding_checks": 3,
+  "equation_tests": 4,
+  "comparison": {
+    "previous_tested_grounding_jar": {
+      "file": "wwpg-0.1.0-beta.2.jar",
+      "sha256": "ecd39ee6d5815a3ea08d3320444121735d417f3b7ae21c969421f725ddc8d4a7",
+      "bytes": 2730065
+    },
+    "changed_entries": [
+      "META-INF/neoforge.mods.toml"
+    ],
+    "only_mod_version_metadata_changed": true
+  },
+  "real_clients": [
+    {
+      "backend": "NATIVE",
+      "result": "PASS",
+      "phase": "Fresh copy of the published downloaded yard",
+      "station_views": 69,
+      "synchronized_gauges": 54,
+      "retained_server_PG_wires": 282,
+      "loose_client_wires": 0,
+      "factory_and_P2_interaction_packets": "PASS",
+      "log": {
+        "path": "build/beta3-client-native.log",
+        "file": "beta3-client-native.log",
+        "sha256": "90cbe0d0d293df3e1740345ca6d4bed64762ff93f4729f5cbabae36f4e20f188",
+        "bytes": 95373
+      }
+    },
+    {
+      "backend": "JAVA",
+      "result": "PASS",
+      "phase": "Fresh copy of the published downloaded yard",
+      "station_views": 69,
+      "synchronized_gauges": 54,
+      "retained_server_PG_wires": 282,
+      "loose_client_wires": 0,
+      "factory_and_P2_interaction_packets": "PASS",
+      "log": {
+        "path": "build/beta3-client-java.log",
+        "file": "beta3-client-java.log",
+        "sha256": "84a650ed62ea1add4b51a134d413c337156651a8789d59ceba3bde3fa5c96a19",
+        "bytes": 95205
+      }
+    }
+  ],
+  "worlds_reused_unchanged": [
+    {
+      "file": "wwpg-0.1.0-beta.2-fixture-world-v1.zip",
+      "sha256": "7463af3876daa72064b0fa226f1cd88a633af6a1b2ab7471720d0fd6f3dd128f",
+      "bytes": 429696
+    },
+    {
+      "file": "wwpg-0.1.0-beta.2-example-v2.zip",
+      "sha256": "ef7547db80a9ce80246c2825008e24bca6712104f82e8e2f5701e9871947c413",
+      "bytes": 102117
+    }
+  ],
+  "earlier_multiplayer_and_handheld_evidence": "release/0.1.0-beta.2/verification.json",
+  "known_issues": [
+    "Intermittent zero reading after chunk reload remains unresolved.",
+    "Intermittent board-capacitor restart zero reading remains unresolved, including PR #5 Linux/native run 38046505940 attempt 1; retry passed.",
+    "PG 0.6.2 circuit design-table saved-design loading error remains open."
+  ],
+  "scope": "Same stationary content set as beta.2; no scale or moving-system certification"
+}
