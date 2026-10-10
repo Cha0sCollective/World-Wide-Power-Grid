@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "world_revision": "expanded-yard-v1",
+  "compatible_mod": "0.1.0-beta.2",
+  "world": {
+    "file": "wwpg-0.1.0-beta.2-fixture-world-v1.zip",
+    "sha256": "7463af3876daa72064b0fa226f1cd88a633af6a1b2ab7471720d0fd6f3dd128f",
+    "bytes": 429696
+  },
+  "published_runtime": {
+    "file": "wwpg-0.1.0-beta.2.jar",
+    "sha256": "1c4963b5821e37221d5c3f7d37d6d0e2749252eb57c7ccf1e4b99009bee3db93"
+  },
+  "test_harness": {
+    "sha256": "d7f7a8159045946d0090ca9c35b6ed96c8fa1423f460fe6e6293029862f0ab3a",
+    "changed_entries": [
+      "data/wwpg_showroom/structure/empty.nbt",
+      "org/cha0scollective/wwpg/gametest/BoardFixture$Router$Cell.class",
+      "org/cha0scollective/wwpg/gametest/BoardFixture$Router.class",
+      "org/cha0scollective/wwpg/gametest/BoardFixture.class",
+      "org/cha0scollective/wwpg/gametest/BoardWorkflowGameTests.class",
+      "org/cha0scollective/wwpg/gametest/ExampleControlBoard.class",
+      "org/cha0scollective/wwpg/gametest/ExampleWorldGameTests.class",
+      "org/cha0scollective/wwpg/gametest/ShowroomBoardStations$Spec.class",
+      "org/cha0scollective/wwpg/gametest/ShowroomBoardStations$Station.class",
+      "org/cha0scollective/wwpg/gametest/ShowroomBoardStations.class",
+      "org/cha0scollective/wwpg/gametest/ShowroomDeviceStations$Station.class",
+      "org/cha0scollective/wwpg/gametest/ShowroomDeviceStations.class",
+      "org/cha0scollective/wwpg/gametest/ShowroomPanelStations$Station.class",
+      "org/cha0scollective/wwpg/gametest/ShowroomPanelStations.class",
+      "org/cha0scollective/wwpg/gametest/ShowroomPowerStations$Transformer.class",
+      "org/cha0scollective/wwpg/gametest/ShowroomPowerStations.class",
+      "org/cha0scollective/wwpg/gametest/ShowroomTools.class",
+      "org/cha0scollective/wwpg/gametest/ShowroomWorldGameTests.class"
+    ],
+    "runtime_entries_identical": 67,
+    "additional_test_template": "data/wwpg_showroom/structure/empty.nbt",
+    "note": "GameTest changes and one byte-identical empty namespace template only; the published runtime is unchanged."
+  },
+  "ci": {
+    "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38028267367",
+    "source_commit": "59373ab913f7a9967dd960972046d2d6fbbc40bb",
+    "platform_backend_jobs": 4,
+    "all_fixture_jars_byte_identical": true
+  },
+  "coverage": {
+    "live_behavior_groups": 85,
+    "declared_behavior_groups": 134,
+    "live_board_components": 28,
+    "live_panel_attachments": 11,
+    "pg_connected_wire_entities": 282,
+    "loose_wire_items_remaining": 0
+  },
+  "equation_checks": 4,
+  "checks": [
+    {
+      "log": "build/expanded-yard-native-setup.log",
+      "sha256": "e653c93372c837d30f87b14352625baa760f125853da1fef72ae7489d74b25c8",
+      "passed_world_fixtures": 1
+    },
+    {
+      "log": "build/expanded-yard-native-verify.log",
+      "sha256": "af55bff82e466f6be0a6e2fd9c7b97c9afe47bbb3c194b5821c52d82ddd73fac",
+      "passed_world_fixtures": 1
+    },
+    {
+      "log": "build/expanded-yard-java-setup.log",
+      "sha256": "0414e93c0a0ec06f1e3bbcb896fefa39b96ad9a773a2fa0060a542b93554bc2f",
+      "passed_world_fixtures": 1
+    },
+    {
+      "log": "build/expanded-yard-java-verify.log",
+      "sha256": "4360fba6bfb84a41ce746d3489efeabf1b4f3c6eeb0fe240cc631f754b344353",
+      "passed_world_fixtures": 1
+    },
+    {
+      "log": "build/expanded-yard-export-native.log",
+      "sha256": "6710f894871d0c7ca631327a0102d9c5e4066b2ed9449230643817945a50beeb",
+      "passed_world_fixtures": 1
+    },
+    {
+      "log": "build/expanded-yard-export-java.log",
+      "sha256": "88bb7fb96b9d23b83e5dae4e9c37b2fa27dd5790386938bfbbc4d0f286f00260",
+      "passed_world_fixtures": 1
+    }
+  ],
+  "tested_behavior": [
+    "25 individual board circuits, routing board, all 28 built-in board types",
+    "Nine panels containing all 11 built-in attachment types",
+    "Seven transformers/variacs and three mixed-mod meter banks",
+    "22 standalone control, connector, motor, and storage circuits",
+    "Native button, switch, relay, analog-control, and breaker interactions",
+    "Voltage/current/power/energy/frequency readings and transformer ratio changes",
+    "Saved board and CEE capacitor voltage before recharging on restart",
+    "Original factory pump, heater, lamps, and capacitor-delayed relay",
+    "Representative collectable wire cleanup preserving all PG wire entities",
+    "Exported ZIP reopened with both backends"
+  ],
+  "limitations": [
+    "49 behavior groups are cabinet parts or assembly references rather than live exhibits",
+    "PG 0.6.2 circuit design table excluded after saved-design load error",
+    "Earlier intermittent chunk-reload and board-capacitor restart failures remain open",
+    "No new real-client visual, multiplayer, or large-network acceptance is claimed"
+  ]
+}

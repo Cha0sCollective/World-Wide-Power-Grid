@@ -1,0 +1,897 @@
+{
+  "schema": 1,
+  "compatible_mod": "0.1.0-beta.2",
+  "live_board_components": 28,
+  "live_panel_attachments": 11,
+  "live_block_ids": [
+    "electroenergetics:accumulator",
+    "electroenergetics:ammeter",
+    "electroenergetics:bulb",
+    "electroenergetics:capacitor",
+    "electroenergetics:connector",
+    "electroenergetics:creative_battery",
+    "electroenergetics:creative_resistor",
+    "electroenergetics:cut_off_switch",
+    "electroenergetics:double_connector",
+    "electroenergetics:double_switch",
+    "electroenergetics:duplex_wire_termination",
+    "electroenergetics:electric_pump",
+    "electroenergetics:electrical_panel",
+    "electroenergetics:emergency_stop_button",
+    "electroenergetics:energy_meter",
+    "electroenergetics:frequency_meter",
+    "electroenergetics:high_voltage_capacitor",
+    "electroenergetics:inductor",
+    "electroenergetics:momentary_switch",
+    "electroenergetics:quad_connector",
+    "electroenergetics:redstone_variac",
+    "electroenergetics:resistive_heater",
+    "electroenergetics:transformer",
+    "electroenergetics:triple_connector",
+    "electroenergetics:variac",
+    "electroenergetics:voltmeter",
+    "electroenergetics:white_electric_motor",
+    "powergrid:ceiling_tile_connector",
+    "powergrid:circuit_board",
+    "powergrid:creative_resistor",
+    "powergrid:creative_voltage_source",
+    "powergrid:current_gauge",
+    "powergrid:electric_motor",
+    "powergrid:energy_meter",
+    "powergrid:heavy_wire_connector",
+    "powergrid:lv_button",
+    "powergrid:lv_switch",
+    "powergrid:mv_switch",
+    "powergrid:portable_battery",
+    "powergrid:power_gauge",
+    "powergrid:transformer_medium",
+    "powergrid:transformer_small",
+    "powergrid:variac",
+    "powergrid:voltage_gauge",
+    "powergrid:wire_connector"
+  ],
+  "board_component_ids": [
+    "powergrid:barretter_tube",
+    "powergrid:bjt_npn",
+    "powergrid:bjt_pnp",
+    "powergrid:button",
+    "powergrid:capacitor",
+    "powergrid:connector",
+    "powergrid:current_gauge",
+    "powergrid:diode",
+    "powergrid:display_module",
+    "powergrid:fuse_holder",
+    "powergrid:inductor",
+    "powergrid:label",
+    "powergrid:light_bulb",
+    "powergrid:neon_bulb",
+    "powergrid:pentode",
+    "powergrid:potentiometer",
+    "powergrid:redstone_relay",
+    "powergrid:regulator_tube",
+    "powergrid:relay",
+    "powergrid:relay_dpdt",
+    "powergrid:resistor",
+    "powergrid:switch",
+    "powergrid:thyratron",
+    "powergrid:triode",
+    "powergrid:varistor",
+    "powergrid:vfet",
+    "powergrid:via",
+    "powergrid:voltage_gauge"
+  ],
+  "panel_attachment_ids": [
+    "electroenergetics:ammeter",
+    "electroenergetics:analog_lever",
+    "electroenergetics:cut_off_switch",
+    "electroenergetics:emergency_stop_button",
+    "electroenergetics:energy_meter",
+    "electroenergetics:indicator_bulb",
+    "electroenergetics:miniature_circuit_breaker",
+    "electroenergetics:momentary_switch",
+    "electroenergetics:steering_wheel",
+    "electroenergetics:tri_polar_energy_meter",
+    "electroenergetics:voltmeter"
+  ],
+  "cabinet_item_ids": [
+    "create:analog_lever",
+    "create:copper_nugget",
+    "create:goggles",
+    "create:turntable",
+    "create:wrench",
+    "electroenergetics:accumulator",
+    "electroenergetics:alternator_brushes",
+    "electroenergetics:alternator_rotor",
+    "electroenergetics:ammeter",
+    "electroenergetics:broken_fuse",
+    "electroenergetics:bulb",
+    "electroenergetics:capacitor",
+    "electroenergetics:clamp_meter",
+    "electroenergetics:connector",
+    "electroenergetics:creative_battery",
+    "electroenergetics:creative_resistor",
+    "electroenergetics:current_transformer",
+    "electroenergetics:cut_off_switch",
+    "electroenergetics:diode",
+    "electroenergetics:double_connector",
+    "electroenergetics:double_switch",
+    "electroenergetics:duplex_wire_termination",
+    "electroenergetics:electric_pump",
+    "electroenergetics:electrical_panel",
+    "electroenergetics:emergency_stop_button",
+    "electroenergetics:energy_meter",
+    "electroenergetics:frequency_meter",
+    "electroenergetics:fuse",
+    "electroenergetics:fuse_holder",
+    "electroenergetics:ground_rod",
+    "electroenergetics:high_voltage_capacitor",
+    "electroenergetics:high_voltage_switch",
+    "electroenergetics:indicator_bulb",
+    "electroenergetics:inductor",
+    "electroenergetics:miniature_circuit_breaker",
+    "electroenergetics:momentary_switch",
+    "electroenergetics:potentiometer",
+    "electroenergetics:quad_connector",
+    "electroenergetics:redstone_potentiometer",
+    "electroenergetics:redstone_relay",
+    "electroenergetics:redstone_variac",
+    "electroenergetics:relay",
+    "electroenergetics:resistive_heater",
+    "electroenergetics:resistor",
+    "electroenergetics:stator",
+    "electroenergetics:sulfur_hexafluoride_breaker",
+    "electroenergetics:synchroscope",
+    "electroenergetics:three_phase_alternator_brushes",
+    "electroenergetics:transformer",
+    "electroenergetics:tri_polar_energy_meter",
+    "electroenergetics:triple_connector",
+    "electroenergetics:variac",
+    "electroenergetics:voltmeter",
+    "electroenergetics:white_electric_motor",
+    "electroenergetics:wire_spool",
+    "minecraft:paper",
+    "minecraft:written_book",
+    "powergrid:barretter_tube",
+    "powergrid:basin_heater",
+    "powergrid:bjt_npn",
+    "powergrid:bjt_pnp",
+    "powergrid:capacitor",
+    "powergrid:circuit_board",
+    "powergrid:circuit_design_table",
+    "powergrid:constant_speed_motor",
+    "powergrid:contactor",
+    "powergrid:copper_coil",
+    "powergrid:copper_cord",
+    "powergrid:cord_junction",
+    "powergrid:creative_current_source",
+    "powergrid:creative_resistor",
+    "powergrid:creative_voltage_source",
+    "powergrid:current_gauge",
+    "powergrid:device_connector",
+    "powergrid:diode",
+    "powergrid:display_module",
+    "powergrid:electric_motor",
+    "powergrid:electric_pump",
+    "powergrid:energy_meter",
+    "powergrid:factory_light",
+    "powergrid:fuse_holder",
+    "powergrid:generator_clutch",
+    "powergrid:generator_commutator",
+    "powergrid:generator_housing",
+    "powergrid:generator_induction_rotor",
+    "powergrid:grounding_rod",
+    "powergrid:heating_coil",
+    "powergrid:heavy_wire_connector",
+    "powergrid:hv_breaker",
+    "powergrid:hv_switch",
+    "powergrid:iron_wire",
+    "powergrid:light_fixture",
+    "powergrid:lv_button",
+    "powergrid:lv_light_bulb",
+    "powergrid:lv_switch",
+    "powergrid:modular_display",
+    "powergrid:multimeter",
+    "powergrid:mv_switch",
+    "powergrid:neon_bulb",
+    "powergrid:pentode",
+    "powergrid:portable_battery_placeable",
+    "powergrid:potentiometer",
+    "powergrid:power_gauge",
+    "powergrid:power_resistor",
+    "powergrid:redstone_relay",
+    "powergrid:regulator_tube",
+    "powergrid:relay",
+    "powergrid:relay_dpdt",
+    "powergrid:resistor",
+    "powergrid:rheostat",
+    "powergrid:servo",
+    "powergrid:socket",
+    "powergrid:solar_panel",
+    "powergrid:thyratron",
+    "powergrid:transformer_core",
+    "powergrid:triode",
+    "powergrid:variac",
+    "powergrid:varistor",
+    "powergrid:vfet",
+    "powergrid:voltage_gauge",
+    "powergrid:wire",
+    "powergrid:wire_connector"
+  ],
+  "live_behavior_groups": 85,
+  "declared_behavior_groups": 134,
+  "coverage": [
+    {
+      "id": "electroenergetics:connector",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:double_connector",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:triple_connector",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:quad_connector",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:ground_rod",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:duplex_wire_termination",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:creative_battery",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:alternator_rotor",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:alternator_brushes",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:three_phase_alternator_brushes",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:stator",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:bulb",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:electric_pump",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:resistor",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:creative_resistor",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:indicator_bulb",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:resistive_heater",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:fuse",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:broken_fuse",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:fuse_holder",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:cut_off_switch",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:double_switch",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:redstone_relay",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:high_voltage_switch",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:sulfur_hexafluoride_breaker",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:relay",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:momentary_switch",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:emergency_stop_button",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:potentiometer",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:redstone_potentiometer",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:accumulator",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:capacitor",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:high_voltage_capacitor",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:inductor",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:transformer",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:variac",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:redstone_variac",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:ammeter",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:voltmeter",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:energy_meter",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:tri_polar_energy_meter",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:current_transformer",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:frequency_meter",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:synchroscope",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:electrical_panel",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:diode",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:white_electric_motor",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:wire_connector",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:heavy_wire_connector",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:cord_junction",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:ceiling_tile_connector",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:ceiling_tile_junction",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:device_connector",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:socket",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:grounding_rod",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:creative_voltage_source",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:creative_current_source",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:generator_induction_rotor",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:generator_commutator",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:generator_clutch",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:generator_housing",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:solar_panel",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:winding",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:creative_resistor",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:power_resistor",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:heating_coil",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:basin_heater",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:light_fixture",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:factory_light",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:factory_light_light",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:ceiling_tile_lamp",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:electric_motor",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:constant_speed_motor",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:servo",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:electric_pump",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:lv_switch",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:lv_button",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:mv_switch",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:hv_switch",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:hv_breaker",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:contactor",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:fuse_holder",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:rheostat",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:portable_battery",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:transformer_core",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:transformer_small",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:transformer_medium",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:variac",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:voltage_gauge",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:current_gauge",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:power_gauge",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:energy_meter",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:circuit_board",
+      "registry": "block",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:circuit_design_table",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "powergrid:modular_display",
+      "registry": "block",
+      "world_coverage": "parts_catalog_or_assembly_reference"
+    },
+    {
+      "id": "electroenergetics:ammeter",
+      "registry": "panel_attachment",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:voltmeter",
+      "registry": "panel_attachment",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:emergency_stop_button",
+      "registry": "panel_attachment",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:cut_off_switch",
+      "registry": "panel_attachment",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:analog_lever",
+      "registry": "panel_attachment",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:steering_wheel",
+      "registry": "panel_attachment",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:indicator_bulb",
+      "registry": "panel_attachment",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:momentary_switch",
+      "registry": "panel_attachment",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:energy_meter",
+      "registry": "panel_attachment",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:tri_polar_energy_meter",
+      "registry": "panel_attachment",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "electroenergetics:miniature_circuit_breaker",
+      "registry": "panel_attachment",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:via",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:label",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:triode",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:pentode",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:thyratron",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:vfet",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:bjt_npn",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:bjt_pnp",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:regulator_tube",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:barretter_tube",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:neon_bulb",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:light_bulb",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:connector",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:switch",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:relay",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:relay_dpdt",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:resistor",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:redstone_relay",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:voltage_gauge",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:current_gauge",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:diode",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:capacitor",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:inductor",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:button",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:potentiometer",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:varistor",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:fuse_holder",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    },
+    {
+      "id": "powergrid:display_module",
+      "registry": "board_component",
+      "world_coverage": "live_exhibit"
+    }
+  ],
+  "pg_connected_wire_entities": 282,
+  "loose_wire_items_remaining": 0,
+  "note": "Live exhibits were checked in this run. Parts cabinets do not certify an additional working circuit. Upstream assembly helper blocks may have no standalone item. Known intermittent reload/restart failures remain unresolved."
+}

@@ -1,5 +1,7 @@
 # Release records
 
+[examples/expanded-yard-v1/](examples/expanded-yard-v1/) records the expanded test yard, its exact live/inventory coverage, and separate world/evidence downloads for the unchanged beta.2 runtime.
+
 [examples/panel-relay-v2/](examples/panel-relay-v2/) records the visibly testable panel/board example for the existing beta.2 runtime. Its world ZIP and verification archive are additional downloads; earlier artifacts, checksums, and records are preserved.
 
 [0.1.0-beta.2/](0.1.0-beta.2/) records the handheld-meter, example-heater, and startup-registration hotfix separately. It retains the same dependency baseline, adds explicit handheld support, and supplies new verification and distribution records, including passing runs and unresolved intermittent failures. The original beta.1 records below are preserved.

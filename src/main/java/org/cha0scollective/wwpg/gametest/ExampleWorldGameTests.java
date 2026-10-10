@@ -41,6 +41,9 @@ public final class ExampleWorldGameTests {
     private static final BlockPos PANEL = new BlockPos(12,64,8), BOARD = PANEL.east(2);
     private static final BlockPos LAMP_SOURCE = new BlockPos(18,64,8), RUN_LAMP = LAMP_SOURCE.south(3), OFF_LAMP = LAMP_SOURCE.north(3);
     @GameTest(template="empty",timeoutTicks=650) public static void buildAndVerifyMixedExampleWorld(GameTestHelper h){
+        demonstrate(h, () -> {});
+    }
+    static void demonstrate(GameTestHelper h, Runnable additionalChecks){
         var level=h.getLevel();level.setChunkForced(0,0,true);level.setChunkForced(0,1,true);level.getChunk(0,0);level.getChunk(0,1);
         var s=new BlockPos(8,64,8);var r=s.east(2);var p=PANEL;var b=BOARD;
         var factory=new BlockPos(8,64,24);var lamp=factory.east(3);var heater=factory.east(6);var pump=factory.offset(3,0,4);var input=pump.west(4);var output=pump.east(4);
@@ -124,7 +127,29 @@ public final class ExampleWorldGameTests {
             BoardComponentGameTests.near(h,((GaugePanelAttachment)panel.getAttachments()[ElectricalPanelSlot.THIRD_RIGHT.ordinal()]).value,0,.001,"Panel input current after switch-off");
             togglePanel(h);
         }).thenIdle(40).thenWaitUntil(()->{assertLamps(h,true);h.assertTrue(capacitorVoltage(h)>18,"Example did not recharge after switching on");})
-          .thenExecute(()->{org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info("WWPG_EXAMPLE_VISIBLE_PASSED: panel on -> RUN; off -> capacitor delay -> OFF; on -> RUN");level.setDefaultSpawnPos(new BlockPos(8,64,16),180);level.getServer().getWorldData().setGameType(GameType.CREATIVE);DynamicGameTests.audit(h);level.getDataStorage().save();level.getChunkSource().save(true);}).thenSucceed();
+          .thenExecute(()->{cleanDroppedWireItems(h);additionalChecks.run();org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info("WWPG_EXAMPLE_VISIBLE_PASSED: panel on -> RUN; off -> capacitor delay -> OFF; on -> RUN");level.setDefaultSpawnPos(new BlockPos(8,64,16),180);level.getServer().getWorldData().setGameType(GameType.CREATIVE);DynamicGameTests.audit(h);level.getDataStorage().save();level.getChunkSource().save(true);}).thenSucceed();
+    }
+    private static boolean droppedWire(net.minecraft.world.entity.item.ItemEntity entity) {
+        var item=entity.getItem().getItem();
+        return item instanceof org.patryk3211.powergrid.electricity.wire.WireItem
+                || item instanceof com.george_vi.electroenergetics.content.wire_spool.WireSpoolItem
+                || item instanceof com.george_vi.electroenergetics.content.wire_spool.EmptySpoolItem
+                || item instanceof com.george_vi.electroenergetics.content.bundled_wire.BundledWireItem
+                || entity.getItem().is(com.george_vi.electroenergetics.CEEItems.INSULATED_WIRE.get())
+                || entity.getItem().is(com.george_vi.electroenergetics.CEEItems.HEAVILY_INSULATED_WIRE.get())
+                || entity.getItem().is(com.george_vi.electroenergetics.CEEItems.COPPER_WIRE.get())
+                || entity.getItem().is(com.george_vi.electroenergetics.CEEItems.ELECTRUM_WIRE.get())
+                || entity.getItem().is(com.george_vi.electroenergetics.CEEItems.IRON_WIRE.get());
+    }
+    static void cleanDroppedWireItems(GameTestHelper h) {
+        var bounds=new net.minecraft.world.phys.AABB(0,-64,0,130,320,242);
+        var level=h.getLevel();
+        var connections=level.getEntitiesOfClass(org.patryk3211.powergrid.electricity.wire.BaseWireEntity.class,bounds).size();
+        var loose=level.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,bounds,ExampleWorldGameTests::droppedWire);
+        loose.forEach(net.minecraft.world.entity.Entity::discard);
+        h.assertTrue(level.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,bounds,ExampleWorldGameTests::droppedWire).isEmpty(),"Example retained dropped wire items");
+        h.assertTrue(level.getEntitiesOfClass(org.patryk3211.powergrid.electricity.wire.BaseWireEntity.class,bounds).size()==connections,"Example cleanup removed a connected wire entity");
+        org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info("WWPG_EXAMPLE_CLEANUP: removed {} loose wire/spool items; {} connected PG wires/cords retained",loose.size(),connections);
     }
     private static void wire(GameTestHelper h,BlockPos a,int ta,BlockPos b,int tb,boolean pg){WiringGameTests.connect(h,a,ta,b,tb,pg);}
     private static void togglePanel(GameTestHelper h){

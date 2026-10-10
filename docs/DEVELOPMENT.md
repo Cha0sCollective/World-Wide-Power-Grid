@@ -64,6 +64,20 @@ The ZIP is written to `build/distributions`. It contains the small demonstration
 
 Revision 2 runs a PG relay and capacitor from the CEE panel, with native contacts powering RUN/OFF CEE lamps. The fixture toggles the native panel interaction, verifies the brief off-delay and both outputs, then restores the on state before saving. VERIFY checks the saved capacitor property before charging can conceal a loss, and repeats the interaction sequence. `tools/package_example.py` retains the new world and evidence separately from the published beta.2 jar and original downloads, comparing every non-GameTest jar entry to the published runtime.
 
+## Expanded test yard
+
+Use a separate directory; VERIFY reopens existing blocks, wires, schematics, and component state.
+
+```sh
+./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PtestNamespaces=wwpg_showroom -PtestDirectory=run/showroom --no-daemon
+./gradlew runPackagedGameTestServer -PtestBackend=NATIVE -PtestNamespaces=wwpg_showroom -PtestDirectory=run/showroom -PrestartPhase=VERIFY --no-daemon
+python tools/export_example.py --world run/showroom/world --output build/distributions/wwpg-0.1.0-beta.2-fixture-world-v1.zip --name "WWPG Expanded Test Yard" --level-name "WWPG - Expanded Test Yard"
+```
+
+Repeat creation/restart with JAVA in another directory. Reopen the exact exported ZIP with both backends before publication. `tools/package_fixture_world.py` checks the six canonical passing logs, four equation tests, coverage, CI artifact hashes, and equality with the published runtime, then creates separate evidence/checksum downloads. Its added empty GameTest template must match the original template. It does not republish the harness as a mod upgrade. Historical revision-2 packaging records are preserved.
+
+The final builder removes only dropped wire/spool item entities inside the yard; it checks that connected PG wire/cord entities survive. Representative dropped PG wire, CEE copper wire, and spool items exercise this cleanup. Players' ordinary drops are unaffected during play.
+
 ## Two real clients
 
 Prepare once, then run the last three commands in separate terminals. Keep the jar unchanged while the processes use it.

@@ -8,6 +8,8 @@ The [original verification record](../release/verification.json) and [hotfix rec
 
 Names below are native registry IDs, useful when checking upstream code or the matrix. CEE IDs use the `electroenergetics:` namespace; PG IDs use `powergrid:`.
 
+The [expanded test yard](FIXTURE_WORLD.md) provides live examples for 85 groups, including all board components and panel attachments. Cabinet items are listed separately in its coverage record. PG's circuit design table passes the design/copy workflow checks, but its [saved-design load error](STATUS.md#pg-circuit-design-table-saved-design-error) remains open; the yard excludes a placed table.
+
 ## CEE blocks and assemblies
 
 | Category | Native registry names |
