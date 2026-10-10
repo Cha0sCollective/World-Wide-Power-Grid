@@ -2,11 +2,11 @@
 
 **World-Wide Power Grid (WWPG)** lets **Create: Electro Energetics (CEE)** and **Power Grid (PG)** share electrical circuits. Use either mod's native wire tools to connect supported terminals across both mods. PG solves the circuit; CEE keeps its machines, controls, visuals, heat, damage, and other gameplay.
 
-The latest beta, **0.1.0-beta.3**, fixes incorrect circuit voltages after ground connections change or a ground rod's chunk unloads. It retains beta.2's handheld-meter compatibility, working burner example, and startup-registration fix. See the [GitHub release](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.3).
+The latest beta, **0.1.0-beta.4**, protects wires while saved chunks finish loading and prevents a restored circuit board from saving zero over its capacitor charge before its first electrical update. It includes the earlier grounding, handheld-meter, heater-example, and startup fixes. See the [GitHub release](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.4).
 
 ## Try the beta
 
-[Download the mod jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.3/wwpg-0.1.0-beta.3.jar) or [the complete bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.3/wwpg-0.1.0-beta.3-release.zip), which includes both example worlds, documentation, and test evidence.
+[Download the mod jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.4/wwpg-0.1.0-beta.4.jar) or [the complete bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.4/wwpg-0.1.0-beta.4-release.zip), which includes both example worlds, documentation, and test evidence.
 
 Use **Minecraft 1.21.1**, **NeoForge 21.1.231**, **Java 21**, **Create 6.0.10-280**, **CEE 1.21.1-1.1.3**, **PG 0.6.2**, and **Architectury 13.0.8**. Follow the [installation guide](docs/INSTALL.md), including PG's solver settings.
 
@@ -26,13 +26,13 @@ You still place, assemble, configure, and repair equipment through each mod's no
 
 The [revised example world](docs/INSTALL.md#example-world) lets you try a PG-powered CEE pump, lights, and heater. Flip the CEE panel switch to operate a PG relay board: its green RUN lamp turns on, and switching off produces a short capacitor delay before the red OFF lamp lights.
 
-The [expanded test yard](docs/FIXTURE_WORLD.md) adds seven transformer/variac circuits, both mods' meter banks, every built-in board component and panel attachment, controls, motors, and storage. The existing download works with beta.3 and includes signs, tools, a guidebook, and parts cabinets. You do not need to replace your world when updating the mod jar.
+The [expanded test yard](docs/FIXTURE_WORLD.md) adds seven transformer/variac circuits, both mods' meter banks, every built-in board component and panel attachment, controls, motors, and storage. The existing download works with beta.4 and includes signs, tools, a guidebook, and parts cabinets. You do not need to replace your world when updating the mod jar.
 
 ## Beta status
 
-The published beta.3 packaged suite contains **121 automated checks**: the original electrical and gameplay coverage, beta.2's handheld-meter/startup checks, and three new grounding regressions. Native and Java backends are checked on Windows and Linux. Real Windows clients also check the downloaded expanded yard's displays and panel interactions. Earlier two-player tests cover wiring, configuration, and handheld measurements; their evidence is recorded separately. See [current test results](docs/STATUS.md) and [beta.3 release records](release/0.1.0-beta.3/).
+Beta.4's packaged suite contains **123 automated checks**, including grounding, delayed chunk loading, saved capacitor charge, and missing-wire cleanup. Native and Java backends are checked on Windows and Linux. The downloaded expanded yard is checked on both backends by automated servers. Graphical-client and two-player checks come from earlier releases and are recorded separately. See [current test results](docs/STATUS.md) and [beta.4 release records](release/0.1.0-beta.4/).
 
-**Source changes after beta.3 address restoration:** wires are protected while a chunk is still loading, and circuit-board capacitors keep their saved charge before their first electrical update. The source suite adds two regressions (123 checks total). These changes are not in the published beta.3 jar. The old intermittent failures lacked enough diagnostics to identify their exact cause; see [current status and known issues](docs/STATUS.md).
+**Restart and chunk reload:** beta.4 addresses reproduced restoration bugs. The old intermittent zero readings lacked enough diagnostics to identify their exact cause. PG's circuit design-table saved-design error remains open; see [current status and known issues](docs/STATUS.md).
 
 This release covers the stationary equipment listed above. Moving trains and contraptions, optional add-ons, and very large power grids are outside its tested scope. The [support list](docs/SUPPORT.md) identifies the exact equipment covered and items still unverified.
 

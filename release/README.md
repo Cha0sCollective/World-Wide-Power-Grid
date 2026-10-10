@@ -1,6 +1,8 @@
 # Release records
 
-[Restoration verification](fixes/restoration/) records the source corrections after beta.3, their negative controls, delayed-loading regressions, and native/Java results. It is separate from published release acceptance.
+[0.1.0-beta.4/](0.1.0-beta.4/) records the restart and chunk-loading release, the final versioned jar, and its native/Java acceptance. It retains the dependency baseline and reuses both existing worlds unchanged.
+
+[Restoration verification](fixes/restoration/) records the corrections developed after beta.3 and published in beta.4, their negative controls, delayed-loading regressions, and native/Java results. The investigation snapshot is preserved separately from release acceptance.
 
 [0.1.0-beta.3/](0.1.0-beta.3/) records the grounding release, the final versioned jar, and its native/Java acceptance. It retains the dependency baseline and reuses the unchanged expanded yard and panel demo. Earlier release artifacts and evidence are preserved.
 

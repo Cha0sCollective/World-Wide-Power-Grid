@@ -1,10 +1,10 @@
 # Supported content
 
-WWPG 0.1.0-beta.3 retains the original 134 checked behaviors: 95 block/assembly groups, all 11 built-in CEE panel attachments, and all 28 built-in PG board components. It includes beta.2's explicit support for two handheld meters. Colored panels and motors share native behavior groups. The counts describe inventory groups, not separate automated tests; the packaged suite contains 120 electrical/gameplay/lifecycle fixtures and one startup-registration regression, some covering multiple groups. Beta.3 adds grounding regressions rather than expanding the content set.
+WWPG 0.1.0-beta.4 retains the original 134 checked behaviors: 95 block/assembly groups, all 11 built-in CEE panel attachments, and all 28 built-in PG board components. It includes beta.2's explicit support for two handheld meters. Colored panels and motors share native behavior groups. The counts describe inventory groups, not separate automated tests; the packaged suite contains 122 electrical/gameplay/lifecycle fixtures and one startup-registration regression, some covering multiple groups. Beta.3 added grounding regressions; beta.4 adds restoration regressions and fixes without expanding the content set.
 
 The [machine-readable matrix](../release/content-matrix.json) links each declared behavior to electrical/gameplay tests and a shared lifecycle suite. Coverage includes placement, editing, removal, reconnection, network split/merge, chunk reload, restart, and multiplayer interactions. It does not establish every configuration of every device.
 
-The [original verification record](../release/verification.json), [beta.2 hotfix records](../release/0.1.0-beta.2/), and [beta.3 release records](../release/0.1.0-beta.3/) contain the acceptance evidence. Intermittent chunk-reload and board-capacitor restart assertions remain unresolved despite later passing runs. Read [current status](STATUS.md) alongside this support list.
+The [original verification record](../release/verification.json), [beta.2 hotfix records](../release/0.1.0-beta.2/), [beta.3 release records](../release/0.1.0-beta.3/), and [beta.4 release records](../release/0.1.0-beta.4/) contain the acceptance evidence. Beta.4 corrects reproduced restoration bugs; the exact causes of the older intermittent zero readings remain unproven. Read [current status](STATUS.md) alongside this support list.
 
 Names below are native registry IDs, useful when checking upstream code or the matrix. CEE IDs use the `electroenergetics:` namespace; PG IDs use `powergrid:`.
 

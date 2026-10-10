@@ -4,7 +4,7 @@ Status checked **10 October 2026**. These facts describe the implementation and 
 
 ## Published beta
 
-**[0.1.0-beta.3](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.3)** publishes the grounding correction from [PR #5](https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/5) under its own jar version. Circuits recalculate correctly when physical grounds or preferred references change, including unloading/reloading a ground rod's chunk. The support set and dependency versions are unchanged. Existing example worlds work with beta.3; replace the WWPG jar on the server and every client. [Release records](../release/0.1.0-beta.3/) identify the final artifact and its checks.
+**[0.1.0-beta.4](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.4)** publishes the restart and chunk-loading corrections from [PR #7](https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/7). Saved wires are protected until chunk entities finish loading, and PG board capacitors save retained charge rather than an unsolved zero reading. It includes beta.3's grounding correction. The support set and dependencies are unchanged. Existing example worlds work with beta.4; replace the WWPG jar on the server and every client. [Release records](../release/0.1.0-beta.4/) identify the final artifact and its checks.
 
 **[0.1.0-beta.2](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.2)** is the handheld-meter, example-world, and startup-registration hotfix. Its final packaged checks passed with native and Java solvers. It adds three meter fixtures and one concurrent-registration regression (118 total), plus actual-client checks for CEE terminal voltage, both meters on PG wires, and both meters on CEE wires. The example heater now has a separate 600 V feed, a basin, and tools at spawn. The original 300 V feed only warmed the heater and did not reach working burner heat.
 
@@ -28,13 +28,13 @@ The same grounding-fix jar passed [real Windows client checks of the downloaded 
 
 This correction is released in beta.3; published beta.2 downloads and earlier evidence remain unchanged. It does not establish the causes of the earlier intermittent chunk-reload or board-restart failures below.
 
-## Restoration corrections after beta.3
+## Restoration corrections in beta.4
 
-The source now protects PG wires while saved entities are still loading and preserves PG board capacitors' committed charge when their newly restored circuit has not solved yet. These changes are **not included in the published beta.3 jar**. Dependencies, solver selection, and the stationary support set are unchanged.
+Beta.4 protects PG wires while saved entities are still loading and preserves PG board capacitors' committed charge when their newly restored circuit has not solved yet. The published beta.3 jar remains unchanged. Dependencies, solver selection, and the stationary support set are unchanged.
 
 The investigation separates three behaviors: an early zero-power reading while wires are pending; PG's cleanup timer treating a pending entity as missing; and a board's persistence callback copying a cold zero terminal reading over retained charge. The test suite delays real entity-load results, requires restored power shortly after readiness, and checks saved capacitor state before recharging can conceal a loss. It contains 123 packaged checks, including cold-save and missing-wire cleanup regressions. [Restoration verification](../release/fixes/restoration/) records reproduction and backend results.
 
-Windows native/Java SETUP and VERIFY runs each passed all 123 checks. Disabling the two production corrections makes exactly their two focused regressions fail while the other 121 pass. Both backends also passed the downloaded expanded yard's automated server checks from pristine copies and again after saving with the corrected jar: 85 live behavior groups, all board and panel types, 282 retained PG wires, and no loose wire items. Graphical-client checks from beta.3 are separate historical evidence.
+The PR #7 candidate passed all 123 checks in Windows native/Java SETUP and VERIFY runs and the complete Windows/Linux native/Java CI matrix. Disabling the two production corrections makes exactly their two focused regressions fail while the other 121 pass. Both backends also passed the downloaded expanded yard's automated server checks from pristine copies and again after saving with the corrected jar: 85 live behavior groups, all board and panel types, 282 retained PG wires, and no loose wire items. Beta.4's versioned-jar results are recorded separately in [release acceptance](../release/0.1.0-beta.4/). Graphical-client checks from beta.3 are historical evidence.
 
 The historical failures below did not record entity readiness or capacitor history at the failing instant. The corrections address reproducible restoration paths, but cannot conclusively attribute every earlier zero reading to one of them. The PG design-table saved-design error remains a separate open issue.
 
@@ -79,7 +79,7 @@ The current investigation's delayed restart retained about 9.869 V; it did not r
 
 Building the expanded yard exposed `powergrid:circuit_design_table` throwing a `NullPointerException` when loading its saved schematic. PG 0.6.2's `CircuitDesignTableBlockEntity.read` accesses `level.registryAccess()` before the block entity has a level. The table could subsequently receive power, so a powered-block check alone missed the failed load. The diagnostic log is retained in the expanded-yard evidence archive.
 
-The downloadable yard excludes a placed design table. Its item remains in the parts cabinets, and the live routing board demonstrates pins, traces, a via, and a label. The existing design/copy workflow tests do not establish saved-table persistence. This issue remains open in beta.3.
+The downloadable yard excludes a placed design table. Its item remains in the parts cabinets, and the live routing board demonstrates pins, traces, a via, and a label. The existing design/copy workflow tests do not establish saved-table persistence. This issue remains open in beta.4.
 
 ## Startup registration race
 
