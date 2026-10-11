@@ -60,6 +60,7 @@ jobs:
             run/restart-*.log
             run/designer-before-restart.nbt
             run/designer-cycles-before-restart.nbt
+            run/fuse-holders-before-restart.nbt
             run/nether-before-restart.nbt
             run/pinout-before-restart.nbt
             run/world/computercraft/computer/**/*.lua

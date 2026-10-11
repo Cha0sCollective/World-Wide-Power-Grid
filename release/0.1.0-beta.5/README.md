@@ -19,8 +19,8 @@ traces, vias, labels, copying, native component assembly, board placement, mixed
 power, and actual chunk cycling. Native schematic copies retain PG's intentional
 creation of new component UUIDs; world saves retain the original identities.
 
-The runtime audit accounts for 519 base registry entries and two optional Pinout
-entries. The new matrix contains 164 base behavior groups and one optional group.
+The runtime audit accounts for 523 base registry entries and two optional Pinout
+entries, including the four native fuse-holder insert types. The new matrix contains 164 base behavior groups and one optional group.
 Every new-release row remains unverified until final acceptance. Runtime checks
 compare the packaged inventory record against the complete pinned registries.
 
@@ -223,3 +223,28 @@ UI clamps to nonnegative voltages; the native UI remains unchanged. Raw traces,
 artifact proofs, controls and fixture corrections are retained in
 [`evidence/native-reference-correctness`](evidence/native-reference-correctness).
 Stage CI and all final release gates remain required.
+
+The playable-yard repair sequence exposed bare CEE fuses losing PG wires during
+the native healthy/broken block transition. The fix preserves the same device,
+terminals and wire identities through failure and repair; actual block removal
+still cuts connections. Changed native fuse-holder insert data also needs to
+schedule a chunk save. The save hook alone did not fix unloading: a trace showed
+CEE committing a zero-power result after PG stopped ticking, while entity IO
+still reported ready. CEE preparation now requires native block ticking readiness
+as well. Native formats remain unchanged.
+
+The four native holder inserts (rated fuse, cut-off switch, indicator and copper
+bypass) have explicit inventory and player-workflow checks. The copper bypass
+uses the pinned native copper-ingot tag. One frozen jar passes 41 focused checks
+on each solver, including three consecutive cold processes and five real chunk
+cycles per process. Full native insert data is checked before the first solve.
+Failed controls, immutable snapshot corrections, chunk dirty-state evidence,
+wire identities and artifact proofs are retained in `evidence/native-held-components`.
+Final release, playable worlds and client acceptance remain incomplete.
+
+A separate causal control disables only the holder save hook while retaining the
+ticking-readiness fix. On both solvers, changing the dye of an already-saved
+holder fails to schedule a chunk save. The corrected jar also passes setup plus
+three cold processes per solver with alternating saved dyes, exact native NBT
+checks, and five actual unloads per process. That final focused jar has SHA-256
+`bfc789c4d41052eba3078de6b9e86ff40b9c7553b02c996e332ee99e0dbc3736`; the earlier runtime/cold evidence remains preserved.

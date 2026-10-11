@@ -48,7 +48,7 @@ public final class Terminals {
         if (!(block instanceof ElectricalDeviceBlock<?>)) return null;
         var map = CEE.computeIfAbsent(level, l -> new HashMap<>());
         var current = map.get(pos);
-        if (current != null && (current.block() == block || current.updateBulbVariant(loadedState(level, pos)))) return current;
+        if (current != null && (current.block() == block || current.updateNativeVariant(loadedState(level, pos)))) return current;
         var adapter = new CeeElectric(level, pos.immutable(), (ElectricalDeviceBlock<?>) block);
         map.put(pos.immutable(), adapter);
         return adapter;
@@ -122,7 +122,7 @@ public final class Terminals {
                 return false;
             var adapter = e.getValue();
             var state = loadedState(level, e.getKey());
-            if (state.getBlock() != adapter.block() && !adapter.updateBulbVariant(state)) {
+            if (state.getBlock() != adapter.block() && !adapter.updateNativeVariant(state)) {
                 adapter.behaviour().breakConnections();
                 return true;
             }

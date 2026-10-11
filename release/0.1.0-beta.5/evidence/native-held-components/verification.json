@@ -1,0 +1,206 @@
+{
+  "schema": 1,
+  "target": "0.1.0-beta.5",
+  "complete_release_acceptance": false,
+  "jar": "wwpg-beta5-fuse-holders-player-save.jar",
+  "sha256": "bfc789c4d41052eba3078de6b9e86ff40b9c7553b02c996e332ee99e0dbc3736",
+  "checks": [
+    {
+      "backend": "NATIVE",
+      "phase": "SETUP",
+      "pass_index": 0,
+      "log": "beta5-fuse-holders-ticking-native-0.log.gz",
+      "sha256": "9e4ca4ece11818ae51a17ff1e328dd326a7424ed43f888f5610c8ada220352fc",
+      "checks": 41,
+      "actual_unloads": 5
+    },
+    {
+      "backend": "NATIVE",
+      "phase": "VERIFY",
+      "pass_index": 1,
+      "log": "beta5-fuse-holders-ticking-native-1.log.gz",
+      "sha256": "5d498dd0e90d4c0fca391ecf81c657198dba3ba3423b696e4c07101db0ec06e8",
+      "checks": 41,
+      "actual_unloads": 5
+    },
+    {
+      "backend": "NATIVE",
+      "phase": "VERIFY",
+      "pass_index": 2,
+      "log": "beta5-fuse-holders-ticking-native-2.log.gz",
+      "sha256": "e24e0d40a8cff90ff73c1374e2c06fdf50f0976b4c008c1e7fbf6c965f27bdd4",
+      "checks": 41,
+      "actual_unloads": 5
+    },
+    {
+      "backend": "NATIVE",
+      "phase": "VERIFY",
+      "pass_index": 3,
+      "log": "beta5-fuse-holders-ticking-native-3.log.gz",
+      "sha256": "1fdf151c5973c2ca8c5a507133f84c6c68bd152ee304c0fd4198ce358a708ac3",
+      "checks": 41,
+      "actual_unloads": 5
+    },
+    {
+      "backend": "JAVA",
+      "phase": "SETUP",
+      "pass_index": 0,
+      "log": "beta5-fuse-holders-ticking-java-0.log.gz",
+      "sha256": "e34974f849b1b64c489338a4cb6a318bdcf5ab885ce85cb23bea0941cf53e3a7",
+      "checks": 41,
+      "actual_unloads": 5
+    },
+    {
+      "backend": "JAVA",
+      "phase": "VERIFY",
+      "pass_index": 1,
+      "log": "beta5-fuse-holders-ticking-java-1.log.gz",
+      "sha256": "7f9002dab97242ac0b2be22ccc2ba4b1b510954a2792cc688226180e80b6c897",
+      "checks": 41,
+      "actual_unloads": 5
+    },
+    {
+      "backend": "JAVA",
+      "phase": "VERIFY",
+      "pass_index": 2,
+      "log": "beta5-fuse-holders-ticking-java-2.log.gz",
+      "sha256": "534bc380d6ef21a57c889b0f951bd2cfba5f44a09cba293f6ce15873ba8cff05",
+      "checks": 41,
+      "actual_unloads": 5
+    },
+    {
+      "backend": "JAVA",
+      "phase": "VERIFY",
+      "pass_index": 3,
+      "log": "beta5-fuse-holders-ticking-java-3.log.gz",
+      "sha256": "c2e42735f1d074d35ccdcf11cc55a46f11586356c36563644c198c497e4be720",
+      "checks": 41,
+      "actual_unloads": 5
+    },
+    {
+      "backend": "NATIVE",
+      "phase": "SETUP",
+      "pass_index": 0,
+      "log": "beta5-fuse-holders-player-save-native-0.log.gz",
+      "sha256": "5c35071fb3a3d7942db1eec12a76e0301a9f9ce65df2e99449b3ff9f77741689",
+      "checks": 41,
+      "actual_unloads": 5,
+      "edits_already_saved_holder": true
+    },
+    {
+      "backend": "NATIVE",
+      "phase": "VERIFY",
+      "pass_index": 1,
+      "log": "beta5-fuse-holders-player-save-native-1.log.gz",
+      "sha256": "27b532cfcc3e3dd66a155d0370a2cbb00ca13a10cbf6709fca6beb727d59fd73",
+      "checks": 41,
+      "actual_unloads": 5,
+      "edits_already_saved_holder": true
+    },
+    {
+      "backend": "NATIVE",
+      "phase": "VERIFY",
+      "pass_index": 2,
+      "log": "beta5-fuse-holders-player-save-native-2.log.gz",
+      "sha256": "8142177e5bfdf2cfcbf9cc548a5cb9a51d269f634729e1409d86fcdf7d10f988",
+      "checks": 41,
+      "actual_unloads": 5,
+      "edits_already_saved_holder": true
+    },
+    {
+      "backend": "NATIVE",
+      "phase": "VERIFY",
+      "pass_index": 3,
+      "log": "beta5-fuse-holders-player-save-native-3.log.gz",
+      "sha256": "374768fe7e3048d514e01ccad27c47b4f98e09509ab67375739877bc127e1e39",
+      "checks": 41,
+      "actual_unloads": 5,
+      "edits_already_saved_holder": true
+    },
+    {
+      "backend": "JAVA",
+      "phase": "SETUP",
+      "pass_index": 0,
+      "log": "beta5-fuse-holders-player-save-java-0.log.gz",
+      "sha256": "e8381496ff2326de216adb4cb1d062cd4a3435a1c3bf38ddda68d2471b005672",
+      "checks": 41,
+      "actual_unloads": 5,
+      "edits_already_saved_holder": true
+    },
+    {
+      "backend": "JAVA",
+      "phase": "VERIFY",
+      "pass_index": 1,
+      "log": "beta5-fuse-holders-player-save-java-1.log.gz",
+      "sha256": "4d10476b73eb1f3b6d332c5478c963a2a0e55ae82b086003baad9dbae3f63925",
+      "checks": 41,
+      "actual_unloads": 5,
+      "edits_already_saved_holder": true
+    },
+    {
+      "backend": "JAVA",
+      "phase": "VERIFY",
+      "pass_index": 2,
+      "log": "beta5-fuse-holders-player-save-java-2.log.gz",
+      "sha256": "29215096610cf3543648d367d3305b957c6c7fd39b62d0d4eb69723d8baa0d97",
+      "checks": 41,
+      "actual_unloads": 5,
+      "edits_already_saved_holder": true
+    },
+    {
+      "backend": "JAVA",
+      "phase": "VERIFY",
+      "pass_index": 3,
+      "log": "beta5-fuse-holders-player-save-java-3.log.gz",
+      "sha256": "bb58625b57b2b28cc83aae9672e168369f16d8a63bb94cc000e9bd4b07c3a5d1",
+      "checks": 41,
+      "actual_unloads": 5,
+      "edits_already_saved_holder": true
+    }
+  ],
+  "controls": [
+    {
+      "jar": "wwpg-beta5-fuse-nullsafe-control.jar",
+      "sha256": "ff657808f8480e19f8c5771d968e54be6372fd54b7e9dd26add85b60cde07bbc",
+      "failure": "Native fuse block-variant change removed PG wire identity on both solvers"
+    },
+    {
+      "jar": "wwpg-beta5-holder-dirty-control.jar",
+      "sha256": "912f40048f24e1b27441a6e1508aa202de0b677ce8dc3ce38c5a45bc7720a4a0",
+      "failure": "Native holder chunk was clean despite changed insert data; indicator brightness reverted before the next solve on both solvers"
+    },
+    {
+      "jar": "wwpg-beta5-holder-save-trace.jar",
+      "sha256": "0feebed73facea2198927ed8edff6b0bb2a41ffee76b3e27d557c7f813ac378e",
+      "failure": "Even with the save hook, CEE committed zero brightness after PG block ticking stopped while entity IO still reported loaded. Trace records ticking=false, entities=true at that unintended commit."
+    },
+    {
+      "jar": "wwpg-beta5-holder-player-save-control.jar",
+      "sha256": "edc88023ed2479fd19d0a7fea27e5d5a445c0461d419d2e9bd985ec59e7188f4",
+      "failure": "With ticking readiness retained, disabling only the save hook leaves an existing holder dye edit in a clean chunk on both solvers. All other 40 focused checks pass."
+    }
+  ],
+  "fixture_corrections": [
+    "First parallel launches collided in shared Gradle JUnit outputs before Minecraft. Those are harness failures, not electrical results; subsequent launches were serialized.",
+    "PG returns null for a disconnected endpoint wire collection; the control now treats that as an empty set and reports the actual identity loss.",
+    "CEE native copper bypass tag accepts copper ingots, not CEE copper-wire items. Fixture now selects the native tag item.",
+    "Native holder write attaches mutable insert NBT by reference. Expected snapshots are deep copies; whole native insert NBT is still compared before the first solve."
+  ],
+  "coverage": [
+    "Both native wire systems survive repeated bare-fuse overload/repair; actual block removal cuts both",
+    "Native copper bypass item consumption/removal/drop and switch replacement",
+    "Native held switch defaults, toggle, saved history, wrench removal and unchanged wire IDs",
+    "Two independently installed slots, native indicator dye, full/half/off brightness and wrench removal",
+    "Native held fuse rating, overload trip, returned broken item, healthy replacement and restored power",
+    "All four insert identities and full native data before first solve, five real delayed-entity chunk cycles per process, three consecutive cold restarts per backend",
+    "CEE device preparation follows native block ticking plus entity IO readiness, preventing transient commits after PG detaches during unloading",
+    "Edit the dye of an already-saved holder in every process; alternate red/lime across cold restarts and retain exact native data before the first solve"
+  ],
+  "limitations": [
+    "Local Windows evidence; eight-way CI and final playable-world/client release gates remain required"
+  ],
+  "earlier_artifact": {
+    "jar": "wwpg-beta5-fuse-holders-ticking.jar",
+    "sha256": "1ffef5defff63d22c5696ee39ec39e28b85f5c0c285737fa0ca9bfa8cdc62b63"
+  }
+}

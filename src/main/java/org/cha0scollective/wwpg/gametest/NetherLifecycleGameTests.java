@@ -155,8 +155,24 @@ public final class NetherLifecycleGameTests {
                 var survivingLevel = unloadPrimary ? nether : over;
                 var survivingPos = unloadPrimary ? secondary[0] : PRIMARY;
                 var controller = ((NetherTransformerAccessor) survivingLevel.getBlockEntity(survivingPos)).wwpg$controller();
+                WorldWidePowerGrid.LOGGER.info("NETHER_UNLOAD_BOUNDARY: cycle={} unloaded={} gameTime={} detached={} lastSolvedCurrent={}",
+                        index, unloadPrimary ? "primary" : "secondary", survivingLevel.getGameTime(),
+                        controller.secondary == null, controller.getCurrent());
+                h.assertTrue(controller.secondary == null,
+                        "Actual chunk unload retained the live Nether controller link: lastSolvedCurrent=" + controller.getCurrent());
+            }).thenIdle(1).thenExecute(() -> {
+                // Chunk IO may finish after this tick's electrical solve. PG
+                // clears the detached current source in preSolve(), so inspect
+                // its electrical output after the next scheduled solve, while
+                // requiring the native controller link to detach immediately.
+                var survivingLevel = unloadPrimary ? nether : over;
+                var survivingPos = unloadPrimary ? secondary[0] : PRIMARY;
+                var controller = ((NetherTransformerAccessor) survivingLevel.getBlockEntity(survivingPos)).wwpg$controller();
+                WorldWidePowerGrid.LOGGER.info("NETHER_UNLOAD_SOLVED: cycle={} gameTime={} detached={} sourceCurrent={}",
+                        index, survivingLevel.getGameTime(), controller.secondary == null, controller.getCurrent());
                 h.assertTrue(controller.secondary == null && controller.getCurrent() == 0,
-                        "Unloaded Nether end retained a live controller or source current");
+                        "Detached Nether end retained a link or source current after its next solve: linked="
+                                + (controller.secondary != null) + ", current=" + controller.getCurrent());
                 if (unloadPrimary) near(h, StationaryNetherGameTests.voltage(nether, secondary[0].north(3)), 0, .001,
                         "Unloaded source left Nether ghost power");
                 var persisted = disk(level, unloadPrimary ? PRIMARY : secondary[0]);

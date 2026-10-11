@@ -87,10 +87,12 @@ public final class WorldBridge {
         ticker.microTicks = substeps;
         builder = infrastructure.wireSimulationState.createCircuitBuilder();
         // Native PG endpoints/wire entities do not exist until their chunk has
-        // loaded. Pause CEE state in that interval instead of discharging storage
-        // through a temporary, disconnected graph during startup or chunk unload.
+        // loaded and its block entities are ticking. Entity IO can remain ready
+        // after a chunk loses its ticking ticket, while PG has already detached
+        // its electrical model. Do not commit that temporary disconnected graph.
         devices = DevicesSavedData.load(level).getDevices(CEESimulatedDeviceFeatureTypes.TICKING_ELECTRICAL.get()).stream()
                 .filter(device -> level.getChunkSource().getChunkNow(device.pos.getX() >> 4, device.pos.getZ() >> 4) != null
+                        && level.getChunkSource().isPositionTicking(net.minecraft.world.level.ChunkPos.asLong(device.pos))
                         && level.areEntitiesLoaded(net.minecraft.world.level.ChunkPos.asLong(device.pos)))
                 .toList();
         var collector = new BridgeCollector(builder, infrastructure, substeps);

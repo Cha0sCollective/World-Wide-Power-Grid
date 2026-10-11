@@ -1,6 +1,7 @@
 package org.cha0scollective.wwpg.gametest;
 
 import com.george_vi.electroenergetics.CEERegistries;
+import com.george_vi.electroenergetics.content.fuse.fuse_held.FuseHoldable;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -48,6 +49,8 @@ public final class StationaryInventoryGameTests {
         CEERegistries.WIRE_ATTACHMENT_TYPE.entrySet().forEach(e -> rows.add(row("wire_attachment", e.getKey().location().toString(), e.getValue())));
         CEERegistries.PANEL_ATTACHMENT_TYPE.entrySet().forEach(e -> rows.add(row("panel_attachment", e.getKey().location().toString(), e.getValue())));
         ComponentRegistry.entries().forEach(e -> rows.add(row("board_component", ComponentRegistry.getId(e).toString(), e)));
+        FuseHoldable.ALL.entrySet().stream().sorted(java.util.Map.Entry.comparingByKey())
+                .forEach(e -> rows.add(row("fuse_holdable", e.getKey().toString(), e.getValue())));
         report.add("entries", rows);
         Files.writeString(Path.of("stationary-registry.json"), new GsonBuilder().setPrettyPrinting().create().toJson(report) + "\n");
         try (var stream = StationaryInventoryGameTests.class.getResourceAsStream(
