@@ -1,0 +1,206 @@
+{
+  "schema": 1,
+  "wwpg_version": "0.2.1",
+  "api_version": "1.0.0",
+  "source_sha": "39df6fa087d0bbc4601d9aab40d76105895a1e7a",
+  "api_coordinate": "org.cha0scollective.wwpg:wwpg-api:1.0.0",
+  "cee_api_coordinate": "org.cha0scollective.wwpg:wwpg-cee-api:1.0.0",
+  "artifacts": {
+    "runtime": {
+      "path": "build/frozen-0.2.1/wwpg-0.2.1.jar",
+      "sha256": "7c852948a308f22946637df1dcecee7ade680ff7f4e0906d95a1425df14212dd",
+      "bytes": 3534944
+    },
+    "api": {
+      "path": "build/frozen-0.2.1/wwpg-api-1.0.0.jar",
+      "sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+      "bytes": 50130
+    },
+    "api_sources": {
+      "path": "build/frozen-0.2.1/wwpg-api-1.0.0-sources.jar",
+      "sha256": "a88fdf9c52fe7a671ca908d0ecae558b083e41608d733dea986aecdce71a91f2",
+      "bytes": 21834
+    },
+    "api_javadoc": {
+      "path": "build/frozen-0.2.1/wwpg-api-1.0.0-javadoc.jar",
+      "sha256": "468ff362c75ff12272bfe62255612b41f0add7f0aaf4cf1606407a5213a49c20",
+      "bytes": 225767
+    },
+    "cee_api": {
+      "path": "build/frozen-0.2.1/wwpg-cee-api-1.0.0.jar",
+      "sha256": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+      "bytes": 8788
+    },
+    "cee_api_sources": {
+      "path": "build/frozen-0.2.1/wwpg-cee-api-1.0.0-sources.jar",
+      "sha256": "5cf223b0232750623b0901458b35ac2875de62a45a202c0af1839208d30b840a",
+      "bytes": 6305
+    },
+    "cee_api_javadoc": {
+      "path": "build/frozen-0.2.1/wwpg-cee-api-1.0.0-javadoc.jar",
+      "sha256": "19906ec8f41b50531d1cca11d7330c3c8d0faed53e7e1a16b9f28e0ac1d16e89",
+      "bytes": 107292
+    },
+    "example": {
+      "path": "build/frozen-0.2.1/wwpg-api-example-1.0.0.jar",
+      "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+      "bytes": 52081
+    },
+    "upstream_example": {
+      "path": "build/frozen-0.2.1/wwpg-upstream-api-example-1.0.0.jar",
+      "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+      "bytes": 45633
+    },
+    "example_sources": {
+      "path": "build/frozen-0.2.1/wwpg-api-example-1.0.0-source.zip",
+      "sha256": "8a9acc0678297b13d2b8b0d6131c2b798277d102a02b1cb774e340b5f3850ad8",
+      "bytes": 79377
+    },
+    "upstream_example_sources": {
+      "path": "build/frozen-0.2.1/wwpg-upstream-api-example-1.0.0-source.zip",
+      "sha256": "a4077b2088f61d66978537eb9fe9b046f6722a9bf62b1d0b777230cf563ac2bb",
+      "bytes": 70196
+    },
+    "maven_repository": {
+      "path": "build/frozen-0.2.1/wwpg-api-1.0.0-maven.zip",
+      "sha256": "fa9d177c8d7968ef7e8b9d42e094719951db1c21cb530895df58deab48c7dc6a",
+      "bytes": 405177
+    }
+  },
+  "abi": {
+    "path": "release/0.2.1/api-contract.json",
+    "sha256": "634a0629543a816ee1f5112dc1c2c48d767c5bba4485a05963ec3568c7e4780e",
+    "bytes": 63513
+  },
+  "cee_abi": {
+    "path": "release/0.2.1/cee-api-contract.json",
+    "sha256": "45a023ef3b8c767921402bc8280d2dd56d6dfb26e439d8383d5cc1a150ee57b2",
+    "bytes": 11927
+  },
+  "previous_api": {
+    "path": "build/frozen-0.2.0-33/wwpg-api-1.0.0.jar",
+    "sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+    "bytes": 50130
+  },
+  "previous_cee_api": {
+    "path": "build/frozen-0.2.0-33/wwpg-cee-api-1.0.0.jar",
+    "sha256": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+    "bytes": 8788
+  },
+  "stages_complete": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "unresolved_failures": [],
+  "required_regression_checks": {
+    "BASE": 204,
+    "PINOUT": 208
+  },
+  "ci": {
+    "path": "release/0.2.1/evidence/ci-38171546014/ci.json",
+    "sha256": "1ab428d08670107ed64096278e23e5fa6489b687b0324b75da87e7e94cc86f7c",
+    "bytes": 5098
+  },
+  "independent_example_build": {
+    "path": "release/0.2.1/evidence/extracted-sdk/example-build-proof.json",
+    "sha256": "390469bcbed7eb2e75d6b813ed60650b6918d286f057425730137ed983cf01be",
+    "bytes": 2305
+  },
+  "independent_upstream_example_build": {
+    "path": "release/0.2.1/evidence/extracted-sdk/upstream_example-build-proof.json",
+    "sha256": "0a74403f6bb0496758839b0a5dc38dc39fdbd627f4385575c9f9474bfc8d8d65",
+    "bytes": 2446
+  },
+  "base_world": {
+    "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-NATIVE-BASE/build/distributions/wwpg-stationary-BASE.zip",
+    "sha256": "290dfb20419c6a1a0adfbec7ee96051c3b1ecbf0ef7e7eb54d054c1b558ef430",
+    "bytes": 1304867
+  },
+  "base_workshop_world": {
+    "path": "build/distributions/release021-api-workshop-BASE.zip",
+    "sha256": "1be77b894dc885b9c6d04f2bd8a6482bb4b62533b152b98384f8008ed00497a1",
+    "bytes": 319443
+  },
+  "pinout_world": {
+    "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-NATIVE-PINOUT/build/distributions/wwpg-stationary-PINOUT.zip",
+    "sha256": "76c7aa518d4b962aacfd0d1ff1d60121013139711c8b9c3a0550e8ffe4209f06",
+    "bytes": 1359198
+  },
+  "pinout_workshop_world": {
+    "path": "build/distributions/release021-api-workshop-PINOUT.zip",
+    "sha256": "d77176072213c0e3a1164d145347fd073a512f5ba63b088bb6dd3b7f7bc31060",
+    "bytes": 323239
+  },
+  "client_acceptance": [
+    {
+      "path": "release/0.2.1/evidence/release021-api-multiplayer-BASE-NATIVE/verification.json",
+      "sha256": "0e4188852e95d15e71899af8c64c435089d83cce84ed575e9aae896f0c85c3a6",
+      "bytes": 12559
+    },
+    {
+      "path": "release/0.2.1/evidence/release021-api-graphical-BASE-JAVA/verification.json",
+      "sha256": "19a3fd23837be36ff08224b5f3a4f857cd39b6c7dbf8b5d855a89a8d9e2ef8a7",
+      "bytes": 6773
+    },
+    {
+      "path": "release/0.2.1/evidence/release021-api-multiplayer-BASE-JAVA/verification.json",
+      "sha256": "a1c17e5b107d9f4d7165458cf8d483085f0475d54c6adf96aa43a6925b1c5b6c",
+      "bytes": 12545
+    },
+    {
+      "path": "release/0.2.1/evidence/release021-api-graphical-PINOUT-NATIVE/verification.json",
+      "sha256": "76db4a111a70e6ba9612dc3caa53b3c438dd821325d6fc3b0eda3e452e5d4bdd",
+      "bytes": 6801
+    },
+    {
+      "path": "release/0.2.1/evidence/release021-api-multiplayer-PINOUT-NATIVE/verification.json",
+      "sha256": "8084875ce22be20340601318983412f232f540bc1525687640aea03592a0d8b9",
+      "bytes": 12572
+    },
+    {
+      "path": "release/0.2.1/evidence/release021-api-graphical-PINOUT-JAVA/verification.json",
+      "sha256": "ef8f806b4c657136424d3f0bc015841c558d6ceef6f206b6d37d460b9c18a81b",
+      "bytes": 6787
+    },
+    {
+      "path": "release/0.2.1/evidence/release021-api-multiplayer-PINOUT-JAVA/verification.json",
+      "sha256": "e80a518d828d176c4700af5955b94ea3d303532d8a8295e4477515de6a0eecc7",
+      "bytes": 12560
+    },
+    {
+      "path": "release/0.2.1/evidence/release021retry-api-graphical-BASE-NATIVE/verification.json",
+      "sha256": "6ac0ad1873e228af6949c9021741483f742cabe364642a1ed9906a5cf437e52b",
+      "bytes": 6817
+    }
+  ],
+  "compiled_addon_regression": {
+    "path": "release/0.2.1/addon-binary-regression.json",
+    "sha256": "2b3af1b5f053c73de117f311c177215ea64def8ab1e31ec1a473ec6e9ca6942c",
+    "bytes": 380
+  },
+  "neoforge_248_acceptance": {
+    "path": "release/0.2.1/neoforge-248-verification.json",
+    "sha256": "7092519d0386679cd65e22a1d2d975425fe01381737532976eb559dd5698017a",
+    "bytes": 25997
+  },
+  "previous_release": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.0",
+  "progress": {
+    "path": "release/0.2.1/progress.json",
+    "sha256": "e98c65ca2c4a79d02120efd6725c8fe010fd3fd0527212d02c7ebe33cd1b0aea",
+    "bytes": 17919
+  },
+  "failure_review": {
+    "path": "release/0.2.1/failure-review.json",
+    "sha256": "c931574e94204dec49532852d0d3a8d484149c51cd177925744aa2527f77ee68",
+    "bytes": 2930
+  },
+  "dependencies": {
+    "path": "release/0.2.1/dependencies.json",
+    "sha256": "ec12485f9ad059e888c0e82a1a73b972116239865e421fdfdece2bd9b5e2fe4f",
+    "bytes": 10614
+  }
+}

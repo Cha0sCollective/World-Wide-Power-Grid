@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "completed": true,
+  "passed": true,
+  "unresolved_failures": [],
+  "source_sha": "39df6fa087d0bbc4601d9aab40d76105895a1e7a",
+  "artifact_hashes": {
+    "runtime": "7c852948a308f22946637df1dcecee7ade680ff7f4e0906d95a1425df14212dd",
+    "api": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+    "cee_api": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+    "example": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+    "upstream_example": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11"
+  },
+  "uses_published_api_only": true,
+  "uses_wwpg_project_classes": false,
+  "build_from_extracted_sdk": true,
+  "extracted_source_sha256": "8a9acc0678297b13d2b8b0d6131c2b798277d102a02b1cb774e340b5f3850ad8",
+  "maven_repository_sha256": "fa9d177c8d7968ef7e8b9d42e094719951db1c21cb530895df58deab48c7dc6a",
+  "compiled_against_api_sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+  "compiled_output": {
+    "path": "release/0.2.1/evidence/extracted-sdk/general-example/build/libs/wwpg-api-example-1.0.0.jar",
+    "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+    "bytes": 52081
+  },
+  "build_log": {
+    "path": "release/0.2.1/evidence/extracted-sdk/example-build.log",
+    "sha256": "36d597e7f4f1984713c36e90b5ba6db7c86b187736f25c28debfa6f3ccb8d10c",
+    "bytes": 2583
+  },
+  "dependency_proof": {
+    "path": "release/0.2.1/evidence/extracted-sdk/example-dependencies.json",
+    "sha256": "b9ad0fe6a80962c776f5b9760937b9f90ed69faddc1285295f5b1c20f3c61284",
+    "bytes": 25309
+  },
+  "functional_behaviors": [
+    "machine",
+    "storage",
+    "instrument"
+  ],
+  "evidence_files": [
+    {
+      "path": "build/frozen-0.2.1/wwpg-api-example-1.0.0-source.zip",
+      "sha256": "8a9acc0678297b13d2b8b0d6131c2b798277d102a02b1cb774e340b5f3850ad8",
+      "bytes": 79377
+    },
+    {
+      "path": "build/frozen-0.2.1/wwpg-api-1.0.0-maven.zip",
+      "sha256": "fa9d177c8d7968ef7e8b9d42e094719951db1c21cb530895df58deab48c7dc6a",
+      "bytes": 405177
+    },
+    {
+      "path": "release/0.2.1/evidence/extracted-sdk/compile-sdk-evidence.gradle",
+      "sha256": "459cbfb10fd1e48b8d951174580b60af32e617b87ed64921c483a5ee5a6a0693",
+      "bytes": 2002
+    }
+  ]
+}

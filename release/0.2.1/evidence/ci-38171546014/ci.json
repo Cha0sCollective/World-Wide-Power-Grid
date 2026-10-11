@@ -1,0 +1,141 @@
+{
+  "schema": 1,
+  "source_sha": "39df6fa087d0bbc4601d9aab40d76105895a1e7a",
+  "status": "completed",
+  "conclusion": "success",
+  "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38171546014",
+  "run_id": 38171546014,
+  "run_attempt": 1,
+  "jobs": [
+    {
+      "platform": "ubuntu-24.04",
+      "backend": "JAVA",
+      "profile": "BASE",
+      "status": "completed",
+      "conclusion": "success",
+      "id": 114565016027,
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38171546014/job/114565016027",
+      "proof": {
+        "path": "release/0.2.1/evidence/ci-38171546014/ubuntu-24.04-JAVA-BASE.json",
+        "sha256": "3b20000b4787fcde7a098fdc72922717f457344efb38d6534b745740283d8a6e",
+        "bytes": 26956
+      }
+    },
+    {
+      "platform": "ubuntu-24.04",
+      "backend": "JAVA",
+      "profile": "PINOUT",
+      "status": "completed",
+      "conclusion": "success",
+      "id": 114565016044,
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38171546014/job/114565016044",
+      "proof": {
+        "path": "release/0.2.1/evidence/ci-38171546014/ubuntu-24.04-JAVA-PINOUT.json",
+        "sha256": "cb567a645f8f2869c49b902825b7bf15c70b3b59c6dbccb81b7772df9c86bcf4",
+        "bytes": 27158
+      }
+    },
+    {
+      "platform": "ubuntu-24.04",
+      "backend": "NATIVE",
+      "profile": "BASE",
+      "status": "completed",
+      "conclusion": "success",
+      "id": 114565016023,
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38171546014/job/114565016023",
+      "proof": {
+        "path": "release/0.2.1/evidence/ci-38171546014/ubuntu-24.04-NATIVE-BASE.json",
+        "sha256": "49b92cddebf4e92200c3cd48cf1714ca4fbecc72735024cc048e40c80fed758d",
+        "bytes": 27154
+      }
+    },
+    {
+      "platform": "ubuntu-24.04",
+      "backend": "NATIVE",
+      "profile": "PINOUT",
+      "status": "completed",
+      "conclusion": "success",
+      "id": 114565015989,
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38171546014/job/114565015989",
+      "proof": {
+        "path": "release/0.2.1/evidence/ci-38171546014/ubuntu-24.04-NATIVE-PINOUT.json",
+        "sha256": "f9e445a5daf02455ad28bfd0ff5d61973e275e17b9d4febf0f1dc20367152b91",
+        "bytes": 27356
+      }
+    },
+    {
+      "platform": "windows-latest",
+      "backend": "JAVA",
+      "profile": "BASE",
+      "status": "completed",
+      "conclusion": "success",
+      "id": 114565016155,
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38171546014/job/114565016155",
+      "proof": {
+        "path": "release/0.2.1/evidence/ci-38171546014/windows-latest-JAVA-BASE.json",
+        "sha256": "45b0548bad21b9076b61844912731acc276285217f654749c9fcc1f87ee9bbda",
+        "bytes": 27139
+      }
+    },
+    {
+      "platform": "windows-latest",
+      "backend": "JAVA",
+      "profile": "PINOUT",
+      "status": "completed",
+      "conclusion": "success",
+      "id": 114565015797,
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38171546014/job/114565015797",
+      "proof": {
+        "path": "release/0.2.1/evidence/ci-38171546014/windows-latest-JAVA-PINOUT.json",
+        "sha256": "1ac01c16de9b412809bd63d01d6b286d76635781e105ddbd69a3a87a2905e2e5",
+        "bytes": 27356
+      }
+    },
+    {
+      "platform": "windows-latest",
+      "backend": "NATIVE",
+      "profile": "BASE",
+      "status": "completed",
+      "conclusion": "success",
+      "id": 114565016021,
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38171546014/job/114565016021",
+      "proof": {
+        "path": "release/0.2.1/evidence/ci-38171546014/windows-latest-NATIVE-BASE.json",
+        "sha256": "4f3ab0ca62f2df4c25325c4a61a1f1b213c8f822dac658f7ff507a154df01ea3",
+        "bytes": 27340
+      }
+    },
+    {
+      "platform": "windows-latest",
+      "backend": "NATIVE",
+      "profile": "PINOUT",
+      "status": "completed",
+      "conclusion": "success",
+      "id": 114565016067,
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38171546014/job/114565016067",
+      "proof": {
+        "path": "release/0.2.1/evidence/ci-38171546014/windows-latest-NATIVE-PINOUT.json",
+        "sha256": "57a7d9c73f321e78b9b05e5e38c93c585f4c5b73088f3e35f95b7cbc3b81ac1b",
+        "bytes": 27548
+      }
+    }
+  ],
+  "inputs": {
+    "run": {
+      "path": "build/ci-38171546014-inputs/run.json",
+      "sha256": "7b6593ff99a4665803f2e6f6a7282bae065e0db30bdf0e8a53eb25fb7784578e",
+      "bytes": 14687
+    },
+    "jobs": {
+      "path": "build/ci-38171546014-inputs/jobs.json",
+      "sha256": "0c3e83f3e78c9f4e00ced03ec67a585d8db3b86e681951068edf47893666e87b",
+      "bytes": 86706
+    },
+    "artifacts": {
+      "path": "build/ci-38171546014-inputs/artifacts.json",
+      "sha256": "b27e732d1afaf9f5fb36aa87ba80c900965b12063d018282fc58609bba34e1da",
+      "bytes": 6015
+    }
+  },
+  "source_tree": "a2e96e2a25da2d46b23392f182f2b3874597abfd"
+}

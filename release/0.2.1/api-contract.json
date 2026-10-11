@@ -1,0 +1,1860 @@
+{
+  "schema": 1,
+  "api_version": "1.0.0",
+  "mode": "comparison",
+  "compatible": true,
+  "previous": {
+    "file": "wwpg-api-1.0.0.jar",
+    "sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+    "bytes": 50130
+  },
+  "changes": [],
+  "current": {
+    "schema": 1,
+    "artifact": {
+      "file": "wwpg-api-1.0.0.jar",
+      "sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+      "bytes": 50130
+    },
+    "prefixes": [
+      "org/cha0scollective/wwpg/api/"
+    ],
+    "types": {
+      "org/cha0scollective/wwpg/api/CircuitDescription": {
+        "name": "org/cha0scollective/wwpg/api/CircuitDescription",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Record",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "<init>(Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/Set;)V": {
+            "name": "<init>",
+            "descriptor": "(Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/Set;)V",
+            "access": 1,
+            "flags": 0,
+            "signature": "(Ljava/util/List<Lorg/cha0scollective/wwpg/api/Terminal;>;Ljava/util/List<Lorg/cha0scollective/wwpg/api/InternalNode;>;Ljava/util/List<Lorg/cha0scollective/wwpg/api/Element;>;Ljava/util/Set<Ljava/lang/String;>;)V"
+          },
+          "empty()Lorg/cha0scollective/wwpg/api/CircuitDescription;": {
+            "name": "empty",
+            "descriptor": "()Lorg/cha0scollective/wwpg/api/CircuitDescription;",
+            "access": 1,
+            "flags": 8
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "terminals()Ljava/util/List;": {
+            "name": "terminals",
+            "descriptor": "()Ljava/util/List;",
+            "access": 1,
+            "flags": 0,
+            "signature": "()Ljava/util/List<Lorg/cha0scollective/wwpg/api/Terminal;>;"
+          },
+          "internalNodes()Ljava/util/List;": {
+            "name": "internalNodes",
+            "descriptor": "()Ljava/util/List;",
+            "access": 1,
+            "flags": 0,
+            "signature": "()Ljava/util/List<Lorg/cha0scollective/wwpg/api/InternalNode;>;"
+          },
+          "elements()Ljava/util/List;": {
+            "name": "elements",
+            "descriptor": "()Ljava/util/List;",
+            "access": 1,
+            "flags": 0,
+            "signature": "()Ljava/util/List<Lorg/cha0scollective/wwpg/api/Element;>;"
+          },
+          "grounds()Ljava/util/Set;": {
+            "name": "grounds",
+            "descriptor": "()Ljava/util/Set;",
+            "access": 1,
+            "flags": 0,
+            "signature": "()Ljava/util/Set<Ljava/lang/String;>;"
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/DeviceIdentity": {
+        "name": "org/cha0scollective/wwpg/api/DeviceIdentity",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Record",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "<init>(Ljava/lang/String;IIILjava/lang/String;Ljava/lang/String;)V": {
+            "name": "<init>",
+            "descriptor": "(Ljava/lang/String;IIILjava/lang/String;Ljava/lang/String;)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "dimensionId()Ljava/lang/String;": {
+            "name": "dimensionId",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 0
+          },
+          "x()I": {
+            "name": "x",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 0
+          },
+          "y()I": {
+            "name": "y",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 0
+          },
+          "z()I": {
+            "name": "z",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 0
+          },
+          "providerId()Ljava/lang/String;": {
+            "name": "providerId",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 0
+          },
+          "slotId()Ljava/lang/String;": {
+            "name": "slotId",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/DeviceResults": {
+        "name": "org/cha0scollective/wwpg/api/DeviceResults",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Record",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "<init>(Lorg/cha0scollective/wwpg/api/TickContext;Lorg/cha0scollective/wwpg/api/MeasurementStatus;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Ljava/lang/String;)V": {
+            "name": "<init>",
+            "descriptor": "(Lorg/cha0scollective/wwpg/api/TickContext;Lorg/cha0scollective/wwpg/api/MeasurementStatus;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Ljava/lang/String;)V",
+            "access": 1,
+            "flags": 0,
+            "signature": "(Lorg/cha0scollective/wwpg/api/TickContext;Lorg/cha0scollective/wwpg/api/MeasurementStatus;Ljava/util/Map<Ljava/lang/String;Lorg/cha0scollective/wwpg/api/NodeResult;>;Ljava/util/Map<Ljava/lang/String;Lorg/cha0scollective/wwpg/api/ElementResult;>;Ljava/util/Map<Ljava/lang/String;Lorg/cha0scollective/wwpg/api/ElementState;>;Ljava/lang/String;)V"
+          },
+          "node(Ljava/lang/String;)Ljava/util/Optional;": {
+            "name": "node",
+            "descriptor": "(Ljava/lang/String;)Ljava/util/Optional;",
+            "access": 1,
+            "flags": 0,
+            "signature": "(Ljava/lang/String;)Ljava/util/Optional<Lorg/cha0scollective/wwpg/api/NodeResult;>;"
+          },
+          "element(Ljava/lang/String;)Ljava/util/Optional;": {
+            "name": "element",
+            "descriptor": "(Ljava/lang/String;)Ljava/util/Optional;",
+            "access": 1,
+            "flags": 0,
+            "signature": "(Ljava/lang/String;)Ljava/util/Optional<Lorg/cha0scollective/wwpg/api/ElementResult;>;"
+          },
+          "state(Ljava/lang/String;)Ljava/util/Optional;": {
+            "name": "state",
+            "descriptor": "(Ljava/lang/String;)Ljava/util/Optional;",
+            "access": 1,
+            "flags": 0,
+            "signature": "(Ljava/lang/String;)Ljava/util/Optional<Lorg/cha0scollective/wwpg/api/ElementState;>;"
+          },
+          "unavailable(Lorg/cha0scollective/wwpg/api/TickContext;Lorg/cha0scollective/wwpg/api/MeasurementStatus;Ljava/lang/String;)Lorg/cha0scollective/wwpg/api/DeviceResults;": {
+            "name": "unavailable",
+            "descriptor": "(Lorg/cha0scollective/wwpg/api/TickContext;Lorg/cha0scollective/wwpg/api/MeasurementStatus;Ljava/lang/String;)Lorg/cha0scollective/wwpg/api/DeviceResults;",
+            "access": 1,
+            "flags": 8
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "context()Lorg/cha0scollective/wwpg/api/TickContext;": {
+            "name": "context",
+            "descriptor": "()Lorg/cha0scollective/wwpg/api/TickContext;",
+            "access": 1,
+            "flags": 0
+          },
+          "status()Lorg/cha0scollective/wwpg/api/MeasurementStatus;": {
+            "name": "status",
+            "descriptor": "()Lorg/cha0scollective/wwpg/api/MeasurementStatus;",
+            "access": 1,
+            "flags": 0
+          },
+          "nodes()Ljava/util/Map;": {
+            "name": "nodes",
+            "descriptor": "()Ljava/util/Map;",
+            "access": 1,
+            "flags": 0,
+            "signature": "()Ljava/util/Map<Ljava/lang/String;Lorg/cha0scollective/wwpg/api/NodeResult;>;"
+          },
+          "elements()Ljava/util/Map;": {
+            "name": "elements",
+            "descriptor": "()Ljava/util/Map;",
+            "access": 1,
+            "flags": 0,
+            "signature": "()Ljava/util/Map<Ljava/lang/String;Lorg/cha0scollective/wwpg/api/ElementResult;>;"
+          },
+          "electricalState()Ljava/util/Map;": {
+            "name": "electricalState",
+            "descriptor": "()Ljava/util/Map;",
+            "access": 1,
+            "flags": 0,
+            "signature": "()Ljava/util/Map<Ljava/lang/String;Lorg/cha0scollective/wwpg/api/ElementState;>;"
+          },
+          "detail()Ljava/lang/String;": {
+            "name": "detail",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/ElectricalDevice": {
+        "name": "org/cha0scollective/wwpg/api/ElectricalDevice",
+        "access": 1,
+        "flags": 1536,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "providerId()Ljava/lang/String;": {
+            "name": "providerId",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 1024
+          },
+          "slotId()Ljava/lang/String;": {
+            "name": "slotId",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 0
+          },
+          "terminals()Ljava/util/List;": {
+            "name": "terminals",
+            "descriptor": "()Ljava/util/List;",
+            "access": 1,
+            "flags": 1024,
+            "signature": "()Ljava/util/List<Lorg/cha0scollective/wwpg/api/Terminal;>;"
+          },
+          "prepare(Lorg/cha0scollective/wwpg/api/TickContext;)Lorg/cha0scollective/wwpg/api/CircuitDescription;": {
+            "name": "prepare",
+            "descriptor": "(Lorg/cha0scollective/wwpg/api/TickContext;)Lorg/cha0scollective/wwpg/api/CircuitDescription;",
+            "access": 1,
+            "flags": 1024
+          },
+          "commit(Lorg/cha0scollective/wwpg/api/DeviceResults;)V": {
+            "name": "commit",
+            "descriptor": "(Lorg/cha0scollective/wwpg/api/DeviceResults;)V",
+            "access": 1,
+            "flags": 1024
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/ElectricalModel": {
+        "name": "org/cha0scollective/wwpg/api/ElectricalModel",
+        "access": 1,
+        "flags": 1536,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": {},
+        "methods": {},
+        "major_version": 65,
+        "permitted_subclasses": [
+          "org/cha0scollective/wwpg/api/ElectricalModel$AcVoltageSource",
+          "org/cha0scollective/wwpg/api/ElectricalModel$Capacitor",
+          "org/cha0scollective/wwpg/api/ElectricalModel$ControlledCurrentSource",
+          "org/cha0scollective/wwpg/api/ElectricalModel$ControlledVoltageSource",
+          "org/cha0scollective/wwpg/api/ElectricalModel$CurrentSource",
+          "org/cha0scollective/wwpg/api/ElectricalModel$Diode",
+          "org/cha0scollective/wwpg/api/ElectricalModel$Inductor",
+          "org/cha0scollective/wwpg/api/ElectricalModel$Resistor",
+          "org/cha0scollective/wwpg/api/ElectricalModel$Switch",
+          "org/cha0scollective/wwpg/api/ElectricalModel$Transformer",
+          "org/cha0scollective/wwpg/api/ElectricalModel$VoltageSource"
+        ]
+      },
+      "org/cha0scollective/wwpg/api/ElectricalModel$AcVoltageSource": {
+        "name": "org/cha0scollective/wwpg/api/ElectricalModel$AcVoltageSource",
+        "access": 1,
+        "flags": 24,
+        "super": "java/lang/Record",
+        "interfaces": [
+          "org/cha0scollective/wwpg/api/ElectricalModel"
+        ],
+        "fields": {},
+        "methods": {
+          "<init>(DDDD)V": {
+            "name": "<init>",
+            "descriptor": "(DDDD)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "peakVoltageVolts()D": {
+            "name": "peakVoltageVolts",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "frequencyHertz()D": {
+            "name": "frequencyHertz",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "phaseRadians()D": {
+            "name": "phaseRadians",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "offsetVoltageVolts()D": {
+            "name": "offsetVoltageVolts",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65,
+        "enclosing": "org/cha0scollective/wwpg/api/ElectricalModel"
+      },
+      "org/cha0scollective/wwpg/api/ElectricalModel$Capacitor": {
+        "name": "org/cha0scollective/wwpg/api/ElectricalModel$Capacitor",
+        "access": 1,
+        "flags": 24,
+        "super": "java/lang/Record",
+        "interfaces": [
+          "org/cha0scollective/wwpg/api/ElectricalModel"
+        ],
+        "fields": {},
+        "methods": {
+          "<init>(DD)V": {
+            "name": "<init>",
+            "descriptor": "(DD)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "capacitanceFarads()D": {
+            "name": "capacitanceFarads",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "initialVoltageVolts()D": {
+            "name": "initialVoltageVolts",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65,
+        "enclosing": "org/cha0scollective/wwpg/api/ElectricalModel"
+      },
+      "org/cha0scollective/wwpg/api/ElectricalModel$ControlledCurrentSource": {
+        "name": "org/cha0scollective/wwpg/api/ElectricalModel$ControlledCurrentSource",
+        "access": 1,
+        "flags": 24,
+        "super": "java/lang/Record",
+        "interfaces": [
+          "org/cha0scollective/wwpg/api/ElectricalModel"
+        ],
+        "fields": {},
+        "methods": {
+          "<init>(Ljava/lang/String;Ljava/lang/String;D)V": {
+            "name": "<init>",
+            "descriptor": "(Ljava/lang/String;Ljava/lang/String;D)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "controlPositiveNode()Ljava/lang/String;": {
+            "name": "controlPositiveNode",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 0
+          },
+          "controlNegativeNode()Ljava/lang/String;": {
+            "name": "controlNegativeNode",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 0
+          },
+          "transconductanceSiemens()D": {
+            "name": "transconductanceSiemens",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65,
+        "enclosing": "org/cha0scollective/wwpg/api/ElectricalModel"
+      },
+      "org/cha0scollective/wwpg/api/ElectricalModel$ControlledVoltageSource": {
+        "name": "org/cha0scollective/wwpg/api/ElectricalModel$ControlledVoltageSource",
+        "access": 1,
+        "flags": 24,
+        "super": "java/lang/Record",
+        "interfaces": [
+          "org/cha0scollective/wwpg/api/ElectricalModel"
+        ],
+        "fields": {},
+        "methods": {
+          "<init>(Ljava/lang/String;Ljava/lang/String;D)V": {
+            "name": "<init>",
+            "descriptor": "(Ljava/lang/String;Ljava/lang/String;D)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "controlPositiveNode()Ljava/lang/String;": {
+            "name": "controlPositiveNode",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 0
+          },
+          "controlNegativeNode()Ljava/lang/String;": {
+            "name": "controlNegativeNode",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 0
+          },
+          "gain()D": {
+            "name": "gain",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65,
+        "enclosing": "org/cha0scollective/wwpg/api/ElectricalModel"
+      },
+      "org/cha0scollective/wwpg/api/ElectricalModel$CurrentSource": {
+        "name": "org/cha0scollective/wwpg/api/ElectricalModel$CurrentSource",
+        "access": 1,
+        "flags": 24,
+        "super": "java/lang/Record",
+        "interfaces": [
+          "org/cha0scollective/wwpg/api/ElectricalModel"
+        ],
+        "fields": {},
+        "methods": {
+          "<init>(D)V": {
+            "name": "<init>",
+            "descriptor": "(D)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "currentAmps()D": {
+            "name": "currentAmps",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65,
+        "enclosing": "org/cha0scollective/wwpg/api/ElectricalModel"
+      },
+      "org/cha0scollective/wwpg/api/ElectricalModel$Diode": {
+        "name": "org/cha0scollective/wwpg/api/ElectricalModel$Diode",
+        "access": 1,
+        "flags": 24,
+        "super": "java/lang/Record",
+        "interfaces": [
+          "org/cha0scollective/wwpg/api/ElectricalModel"
+        ],
+        "fields": {},
+        "methods": {
+          "<init>(DDDD)V": {
+            "name": "<init>",
+            "descriptor": "(DDDD)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "saturationCurrentAmps()D": {
+            "name": "saturationCurrentAmps",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "seriesResistanceOhms()D": {
+            "name": "seriesResistanceOhms",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "temperatureCelsius()D": {
+            "name": "temperatureCelsius",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "idealityFactor()D": {
+            "name": "idealityFactor",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65,
+        "enclosing": "org/cha0scollective/wwpg/api/ElectricalModel"
+      },
+      "org/cha0scollective/wwpg/api/ElectricalModel$Inductor": {
+        "name": "org/cha0scollective/wwpg/api/ElectricalModel$Inductor",
+        "access": 1,
+        "flags": 24,
+        "super": "java/lang/Record",
+        "interfaces": [
+          "org/cha0scollective/wwpg/api/ElectricalModel"
+        ],
+        "fields": {},
+        "methods": {
+          "<init>(DD)V": {
+            "name": "<init>",
+            "descriptor": "(DD)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "inductanceHenries()D": {
+            "name": "inductanceHenries",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "initialCurrentAmps()D": {
+            "name": "initialCurrentAmps",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65,
+        "enclosing": "org/cha0scollective/wwpg/api/ElectricalModel"
+      },
+      "org/cha0scollective/wwpg/api/ElectricalModel$Resistor": {
+        "name": "org/cha0scollective/wwpg/api/ElectricalModel$Resistor",
+        "access": 1,
+        "flags": 24,
+        "super": "java/lang/Record",
+        "interfaces": [
+          "org/cha0scollective/wwpg/api/ElectricalModel"
+        ],
+        "fields": {},
+        "methods": {
+          "<init>(D)V": {
+            "name": "<init>",
+            "descriptor": "(D)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "resistanceOhms()D": {
+            "name": "resistanceOhms",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65,
+        "enclosing": "org/cha0scollective/wwpg/api/ElectricalModel"
+      },
+      "org/cha0scollective/wwpg/api/ElectricalModel$Switch": {
+        "name": "org/cha0scollective/wwpg/api/ElectricalModel$Switch",
+        "access": 1,
+        "flags": 24,
+        "super": "java/lang/Record",
+        "interfaces": [
+          "org/cha0scollective/wwpg/api/ElectricalModel"
+        ],
+        "fields": {},
+        "methods": {
+          "<init>(ZD)V": {
+            "name": "<init>",
+            "descriptor": "(ZD)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "closed()Z": {
+            "name": "closed",
+            "descriptor": "()Z",
+            "access": 1,
+            "flags": 0
+          },
+          "onResistanceOhms()D": {
+            "name": "onResistanceOhms",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65,
+        "enclosing": "org/cha0scollective/wwpg/api/ElectricalModel"
+      },
+      "org/cha0scollective/wwpg/api/ElectricalModel$Transformer": {
+        "name": "org/cha0scollective/wwpg/api/ElectricalModel$Transformer",
+        "access": 1,
+        "flags": 24,
+        "super": "java/lang/Record",
+        "interfaces": [
+          "org/cha0scollective/wwpg/api/ElectricalModel"
+        ],
+        "fields": {},
+        "methods": {
+          "<init>(Ljava/lang/String;Ljava/lang/String;D)V": {
+            "name": "<init>",
+            "descriptor": "(Ljava/lang/String;Ljava/lang/String;D)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "secondaryPositiveNode()Ljava/lang/String;": {
+            "name": "secondaryPositiveNode",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 0
+          },
+          "secondaryNegativeNode()Ljava/lang/String;": {
+            "name": "secondaryNegativeNode",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 0
+          },
+          "ratio()D": {
+            "name": "ratio",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65,
+        "enclosing": "org/cha0scollective/wwpg/api/ElectricalModel"
+      },
+      "org/cha0scollective/wwpg/api/ElectricalModel$VoltageSource": {
+        "name": "org/cha0scollective/wwpg/api/ElectricalModel$VoltageSource",
+        "access": 1,
+        "flags": 24,
+        "super": "java/lang/Record",
+        "interfaces": [
+          "org/cha0scollective/wwpg/api/ElectricalModel"
+        ],
+        "fields": {},
+        "methods": {
+          "<init>(D)V": {
+            "name": "<init>",
+            "descriptor": "(D)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "voltageVolts()D": {
+            "name": "voltageVolts",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65,
+        "enclosing": "org/cha0scollective/wwpg/api/ElectricalModel"
+      },
+      "org/cha0scollective/wwpg/api/Element": {
+        "name": "org/cha0scollective/wwpg/api/Element",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Record",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "<init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/cha0scollective/wwpg/api/ElectricalModel;)V": {
+            "name": "<init>",
+            "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/cha0scollective/wwpg/api/ElectricalModel;)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "id()Ljava/lang/String;": {
+            "name": "id",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 0
+          },
+          "positiveNode()Ljava/lang/String;": {
+            "name": "positiveNode",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 0
+          },
+          "negativeNode()Ljava/lang/String;": {
+            "name": "negativeNode",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 0
+          },
+          "model()Lorg/cha0scollective/wwpg/api/ElectricalModel;": {
+            "name": "model",
+            "descriptor": "()Lorg/cha0scollective/wwpg/api/ElectricalModel;",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/ElementResult": {
+        "name": "org/cha0scollective/wwpg/api/ElementResult",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Record",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "<init>(DDDDDDDD)V": {
+            "name": "<init>",
+            "descriptor": "(DDDDDDDD)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "lastVoltageVolts()D": {
+            "name": "lastVoltageVolts",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "meanVoltageVolts()D": {
+            "name": "meanVoltageVolts",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "rmsVoltageVolts()D": {
+            "name": "rmsVoltageVolts",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "lastCurrentAmps()D": {
+            "name": "lastCurrentAmps",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "meanCurrentAmps()D": {
+            "name": "meanCurrentAmps",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "rmsCurrentAmps()D": {
+            "name": "rmsCurrentAmps",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "meanPowerWatts()D": {
+            "name": "meanPowerWatts",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "energyJoules()D": {
+            "name": "energyJoules",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/ElementState": {
+        "name": "org/cha0scollective/wwpg/api/ElementState",
+        "access": 1,
+        "flags": 1536,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": {},
+        "methods": {},
+        "major_version": 65,
+        "permitted_subclasses": [
+          "org/cha0scollective/wwpg/api/ElementState$Capacitor",
+          "org/cha0scollective/wwpg/api/ElementState$Inductor"
+        ]
+      },
+      "org/cha0scollective/wwpg/api/ElementState$Capacitor": {
+        "name": "org/cha0scollective/wwpg/api/ElementState$Capacitor",
+        "access": 1,
+        "flags": 24,
+        "super": "java/lang/Record",
+        "interfaces": [
+          "org/cha0scollective/wwpg/api/ElementState"
+        ],
+        "fields": {},
+        "methods": {
+          "<init>(D)V": {
+            "name": "<init>",
+            "descriptor": "(D)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "voltageVolts()D": {
+            "name": "voltageVolts",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65,
+        "enclosing": "org/cha0scollective/wwpg/api/ElementState"
+      },
+      "org/cha0scollective/wwpg/api/ElementState$Inductor": {
+        "name": "org/cha0scollective/wwpg/api/ElementState$Inductor",
+        "access": 1,
+        "flags": 24,
+        "super": "java/lang/Record",
+        "interfaces": [
+          "org/cha0scollective/wwpg/api/ElementState"
+        ],
+        "fields": {},
+        "methods": {
+          "<init>(D)V": {
+            "name": "<init>",
+            "descriptor": "(D)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "currentAmps()D": {
+            "name": "currentAmps",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65,
+        "enclosing": "org/cha0scollective/wwpg/api/ElementState"
+      },
+      "org/cha0scollective/wwpg/api/EndpointIdentity": {
+        "name": "org/cha0scollective/wwpg/api/EndpointIdentity",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Record",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "<init>(Lorg/cha0scollective/wwpg/api/DeviceIdentity;Ljava/lang/String;)V": {
+            "name": "<init>",
+            "descriptor": "(Lorg/cha0scollective/wwpg/api/DeviceIdentity;Ljava/lang/String;)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "device()Lorg/cha0scollective/wwpg/api/DeviceIdentity;": {
+            "name": "device",
+            "descriptor": "()Lorg/cha0scollective/wwpg/api/DeviceIdentity;",
+            "access": 1,
+            "flags": 0
+          },
+          "nodeKey()Ljava/lang/String;": {
+            "name": "nodeKey",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/InternalNode": {
+        "name": "org/cha0scollective/wwpg/api/InternalNode",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Record",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "<init>(Ljava/lang/String;)V": {
+            "name": "<init>",
+            "descriptor": "(Ljava/lang/String;)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "key()Ljava/lang/String;": {
+            "name": "key",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/LocalPoint": {
+        "name": "org/cha0scollective/wwpg/api/LocalPoint",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Record",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "<init>(DDD)V": {
+            "name": "<init>",
+            "descriptor": "(DDD)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "x()D": {
+            "name": "x",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "y()D": {
+            "name": "y",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "z()D": {
+            "name": "z",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/MeasurementStatus": {
+        "name": "org/cha0scollective/wwpg/api/MeasurementStatus",
+        "access": 1,
+        "flags": 16400,
+        "super": "java/lang/Enum",
+        "interfaces": [],
+        "fields": {
+          "VALIDLorg/cha0scollective/wwpg/api/MeasurementStatus;": {
+            "name": "VALID",
+            "descriptor": "Lorg/cha0scollective/wwpg/api/MeasurementStatus;",
+            "access": 1,
+            "flags": 24
+          },
+          "NOT_READYLorg/cha0scollective/wwpg/api/MeasurementStatus;": {
+            "name": "NOT_READY",
+            "descriptor": "Lorg/cha0scollective/wwpg/api/MeasurementStatus;",
+            "access": 1,
+            "flags": 24
+          },
+          "ISOLATEDLorg/cha0scollective/wwpg/api/MeasurementStatus;": {
+            "name": "ISOLATED",
+            "descriptor": "Lorg/cha0scollective/wwpg/api/MeasurementStatus;",
+            "access": 1,
+            "flags": 24
+          },
+          "SOLVE_FAILEDLorg/cha0scollective/wwpg/api/MeasurementStatus;": {
+            "name": "SOLVE_FAILED",
+            "descriptor": "Lorg/cha0scollective/wwpg/api/MeasurementStatus;",
+            "access": 1,
+            "flags": 24
+          }
+        },
+        "methods": {
+          "values()[Lorg/cha0scollective/wwpg/api/MeasurementStatus;": {
+            "name": "values",
+            "descriptor": "()[Lorg/cha0scollective/wwpg/api/MeasurementStatus;",
+            "access": 1,
+            "flags": 8
+          },
+          "valueOf(Ljava/lang/String;)Lorg/cha0scollective/wwpg/api/MeasurementStatus;": {
+            "name": "valueOf",
+            "descriptor": "(Ljava/lang/String;)Lorg/cha0scollective/wwpg/api/MeasurementStatus;",
+            "access": 1,
+            "flags": 8
+          }
+        },
+        "major_version": 65,
+        "signature": "Ljava/lang/Enum<Lorg/cha0scollective/wwpg/api/MeasurementStatus;>;"
+      },
+      "org/cha0scollective/wwpg/api/NodeResult": {
+        "name": "org/cha0scollective/wwpg/api/NodeResult",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Record",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "<init>(DDD)V": {
+            "name": "<init>",
+            "descriptor": "(DDD)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "lastVoltageVolts()D": {
+            "name": "lastVoltageVolts",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "meanVoltageVolts()D": {
+            "name": "meanVoltageVolts",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "rmsVoltageVolts()D": {
+            "name": "rmsVoltageVolts",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/Terminal": {
+        "name": "org/cha0scollective/wwpg/api/Terminal",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Record",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "<init>(Ljava/lang/String;ILorg/cha0scollective/wwpg/api/LocalPoint;D)V": {
+            "name": "<init>",
+            "descriptor": "(Ljava/lang/String;ILorg/cha0scollective/wwpg/api/LocalPoint;D)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "key()Ljava/lang/String;": {
+            "name": "key",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 0
+          },
+          "nativeId()I": {
+            "name": "nativeId",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 0
+          },
+          "position()Lorg/cha0scollective/wwpg/api/LocalPoint;": {
+            "name": "position",
+            "descriptor": "()Lorg/cha0scollective/wwpg/api/LocalPoint;",
+            "access": 1,
+            "flags": 0
+          },
+          "hitRadius()D": {
+            "name": "hitRadius",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/TerminalMeasurement": {
+        "name": "org/cha0scollective/wwpg/api/TerminalMeasurement",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Record",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "<init>(Lorg/cha0scollective/wwpg/api/MeasurementStatus;Ljava/util/OptionalDouble;Ljava/lang/String;)V": {
+            "name": "<init>",
+            "descriptor": "(Lorg/cha0scollective/wwpg/api/MeasurementStatus;Ljava/util/OptionalDouble;Ljava/lang/String;)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "status()Lorg/cha0scollective/wwpg/api/MeasurementStatus;": {
+            "name": "status",
+            "descriptor": "()Lorg/cha0scollective/wwpg/api/MeasurementStatus;",
+            "access": 1,
+            "flags": 0
+          },
+          "voltageVolts()Ljava/util/OptionalDouble;": {
+            "name": "voltageVolts",
+            "descriptor": "()Ljava/util/OptionalDouble;",
+            "access": 1,
+            "flags": 0
+          },
+          "detail()Ljava/lang/String;": {
+            "name": "detail",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/TickContext": {
+        "name": "org/cha0scollective/wwpg/api/TickContext",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Record",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "<init>(JDI)V": {
+            "name": "<init>",
+            "descriptor": "(JDI)V",
+            "access": 1,
+            "flags": 0
+          },
+          "substepSeconds()D": {
+            "name": "substepSeconds",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "startTimeSeconds()D": {
+            "name": "startTimeSeconds",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "gameTime()J": {
+            "name": "gameTime",
+            "descriptor": "()J",
+            "access": 1,
+            "flags": 0
+          },
+          "tickSeconds()D": {
+            "name": "tickSeconds",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "substeps()I": {
+            "name": "substeps",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/VoltageMeasurement": {
+        "name": "org/cha0scollective/wwpg/api/VoltageMeasurement",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Record",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "<init>(Lorg/cha0scollective/wwpg/api/TickContext;Lorg/cha0scollective/wwpg/api/MeasurementStatus;Ljava/util/Optional;Ljava/lang/String;)V": {
+            "name": "<init>",
+            "descriptor": "(Lorg/cha0scollective/wwpg/api/TickContext;Lorg/cha0scollective/wwpg/api/MeasurementStatus;Ljava/util/Optional;Ljava/lang/String;)V",
+            "access": 1,
+            "flags": 0,
+            "signature": "(Lorg/cha0scollective/wwpg/api/TickContext;Lorg/cha0scollective/wwpg/api/MeasurementStatus;Ljava/util/Optional<Lorg/cha0scollective/wwpg/api/NodeResult;>;Ljava/lang/String;)V"
+          },
+          "unavailable(Lorg/cha0scollective/wwpg/api/TickContext;Lorg/cha0scollective/wwpg/api/MeasurementStatus;Ljava/lang/String;)Lorg/cha0scollective/wwpg/api/VoltageMeasurement;": {
+            "name": "unavailable",
+            "descriptor": "(Lorg/cha0scollective/wwpg/api/TickContext;Lorg/cha0scollective/wwpg/api/MeasurementStatus;Ljava/lang/String;)Lorg/cha0scollective/wwpg/api/VoltageMeasurement;",
+            "access": 1,
+            "flags": 8
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "context()Lorg/cha0scollective/wwpg/api/TickContext;": {
+            "name": "context",
+            "descriptor": "()Lorg/cha0scollective/wwpg/api/TickContext;",
+            "access": 1,
+            "flags": 0
+          },
+          "status()Lorg/cha0scollective/wwpg/api/MeasurementStatus;": {
+            "name": "status",
+            "descriptor": "()Lorg/cha0scollective/wwpg/api/MeasurementStatus;",
+            "access": 1,
+            "flags": 0
+          },
+          "voltage()Ljava/util/Optional;": {
+            "name": "voltage",
+            "descriptor": "()Ljava/util/Optional;",
+            "access": 1,
+            "flags": 0,
+            "signature": "()Ljava/util/Optional<Lorg/cha0scollective/wwpg/api/NodeResult;>;"
+          },
+          "detail()Ljava/lang/String;": {
+            "name": "detail",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/WWPGApi": {
+        "name": "org/cha0scollective/wwpg/api/WWPGApi",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": {
+          "API_VERSIONLjava/lang/String;": {
+            "name": "API_VERSION",
+            "descriptor": "Ljava/lang/String;",
+            "access": 1,
+            "flags": 24
+          },
+          "MAX_TERMINAL_IDI": {
+            "name": "MAX_TERMINAL_ID",
+            "descriptor": "I",
+            "access": 1,
+            "flags": 24,
+            "constant": [
+              3,
+              "00000fff"
+            ]
+          },
+          "MAX_NODESI": {
+            "name": "MAX_NODES",
+            "descriptor": "I",
+            "access": 1,
+            "flags": 24,
+            "constant": [
+              3,
+              "00001000"
+            ]
+          },
+          "MAX_ELEMENTSI": {
+            "name": "MAX_ELEMENTS",
+            "descriptor": "I",
+            "access": 1,
+            "flags": 24,
+            "constant": [
+              3,
+              "00002000"
+            ]
+          }
+        },
+        "methods": {
+          "version()Ljava/lang/String;": {
+            "name": "version",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 8
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/neoforge/DeviceDiscoveryService": {
+        "name": "org/cha0scollective/wwpg/api/neoforge/DeviceDiscoveryService",
+        "access": 1,
+        "flags": 1536,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "changed(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;)Z": {
+            "name": "changed",
+            "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;)Z",
+            "access": 1,
+            "flags": 1024
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/neoforge/ElectricalCapabilities": {
+        "name": "org/cha0scollective/wwpg/api/neoforge/ElectricalCapabilities",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": {
+          "DEVICELnet/neoforged/neoforge/capabilities/BlockCapability;": {
+            "name": "DEVICE",
+            "descriptor": "Lnet/neoforged/neoforge/capabilities/BlockCapability;",
+            "access": 1,
+            "flags": 24,
+            "signature": "Lnet/neoforged/neoforge/capabilities/BlockCapability<Lorg/cha0scollective/wwpg/api/ElectricalDevice;Ljava/lang/Void;>;"
+          }
+        },
+        "methods": {},
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/neoforge/ElectricalDevices": {
+        "name": "org/cha0scollective/wwpg/api/neoforge/ElectricalDevices",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "changed(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;)Z": {
+            "name": "changed",
+            "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;)Z",
+            "access": 1,
+            "flags": 8
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/neoforge/ElectricalMeasurements": {
+        "name": "org/cha0scollective/wwpg/api/neoforge/ElectricalMeasurements",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "read(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;)Lorg/cha0scollective/wwpg/api/DeviceResults;": {
+            "name": "read",
+            "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;)Lorg/cha0scollective/wwpg/api/DeviceResults;",
+            "access": 1,
+            "flags": 8
+          },
+          "readTerminal(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;I)Lorg/cha0scollective/wwpg/api/VoltageMeasurement;": {
+            "name": "readTerminal",
+            "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;I)Lorg/cha0scollective/wwpg/api/VoltageMeasurement;",
+            "access": 1,
+            "flags": 8
+          },
+          "readVoltageBetween(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;ILnet/minecraft/core/BlockPos;I)Lorg/cha0scollective/wwpg/api/VoltageMeasurement;": {
+            "name": "readVoltageBetween",
+            "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;ILnet/minecraft/core/BlockPos;I)Lorg/cha0scollective/wwpg/api/VoltageMeasurement;",
+            "access": 1,
+            "flags": 8
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/neoforge/ElectricalProviders": {
+        "name": "org/cha0scollective/wwpg/api/neoforge/ElectricalProviders",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "registerBlock(Lnet/neoforged/neoforge/capabilities/RegisterCapabilitiesEvent;Ljava/lang/String;Lnet/neoforged/neoforge/capabilities/IBlockCapabilityProvider;[Lnet/minecraft/world/level/block/Block;)V": {
+            "name": "registerBlock",
+            "descriptor": "(Lnet/neoforged/neoforge/capabilities/RegisterCapabilitiesEvent;Ljava/lang/String;Lnet/neoforged/neoforge/capabilities/IBlockCapabilityProvider;[Lnet/minecraft/world/level/block/Block;)V",
+            "access": 1,
+            "flags": 8,
+            "signature": "(Lnet/neoforged/neoforge/capabilities/RegisterCapabilitiesEvent;Ljava/lang/String;Lnet/neoforged/neoforge/capabilities/IBlockCapabilityProvider<Lorg/cha0scollective/wwpg/api/ElectricalDevice;Ljava/lang/Void;>;[Lnet/minecraft/world/level/block/Block;)V"
+          },
+          "registerBlockEntity(Lnet/neoforged/neoforge/capabilities/RegisterCapabilitiesEvent;Ljava/lang/String;Lnet/minecraft/world/level/block/entity/BlockEntityType;Lnet/neoforged/neoforge/capabilities/ICapabilityProvider;)V": {
+            "name": "registerBlockEntity",
+            "descriptor": "(Lnet/neoforged/neoforge/capabilities/RegisterCapabilitiesEvent;Ljava/lang/String;Lnet/minecraft/world/level/block/entity/BlockEntityType;Lnet/neoforged/neoforge/capabilities/ICapabilityProvider;)V",
+            "access": 1,
+            "flags": 8,
+            "signature": "<BE:Lnet/minecraft/world/level/block/entity/BlockEntity;>(Lnet/neoforged/neoforge/capabilities/RegisterCapabilitiesEvent;Ljava/lang/String;Lnet/minecraft/world/level/block/entity/BlockEntityType<TBE;>;Lnet/neoforged/neoforge/capabilities/ICapabilityProvider<-TBE;Ljava/lang/Void;Lorg/cha0scollective/wwpg/api/ElectricalDevice;>;)V"
+          },
+          "owner(Lnet/minecraft/world/level/block/Block;)Ljava/util/Optional;": {
+            "name": "owner",
+            "descriptor": "(Lnet/minecraft/world/level/block/Block;)Ljava/util/Optional;",
+            "access": 1,
+            "flags": 8,
+            "signature": "(Lnet/minecraft/world/level/block/Block;)Ljava/util/Optional<Ljava/lang/String;>;"
+          },
+          "registeredBlocks()Ljava/util/Set;": {
+            "name": "registeredBlocks",
+            "descriptor": "()Ljava/util/Set;",
+            "access": 1,
+            "flags": 8,
+            "signature": "()Ljava/util/Set<Lnet/minecraft/world/level/block/Block;>;"
+          },
+          "validate(Lnet/minecraft/world/level/block/Block;Lorg/cha0scollective/wwpg/api/ElectricalDevice;)V": {
+            "name": "validate",
+            "descriptor": "(Lnet/minecraft/world/level/block/Block;Lorg/cha0scollective/wwpg/api/ElectricalDevice;)V",
+            "access": 1,
+            "flags": 8
+          },
+          "freeze()V": {
+            "name": "freeze",
+            "descriptor": "()V",
+            "access": 1,
+            "flags": 8
+          },
+          "isFrozen()Z": {
+            "name": "isFrozen",
+            "descriptor": "()Z",
+            "access": 1,
+            "flags": 8
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/neoforge/MeasurementService": {
+        "name": "org/cha0scollective/wwpg/api/neoforge/MeasurementService",
+        "access": 1,
+        "flags": 1536,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "read(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;)Lorg/cha0scollective/wwpg/api/DeviceResults;": {
+            "name": "read",
+            "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;)Lorg/cha0scollective/wwpg/api/DeviceResults;",
+            "access": 1,
+            "flags": 1024
+          },
+          "readTerminal(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;I)Lorg/cha0scollective/wwpg/api/VoltageMeasurement;": {
+            "name": "readTerminal",
+            "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;I)Lorg/cha0scollective/wwpg/api/VoltageMeasurement;",
+            "access": 1,
+            "flags": 0
+          },
+          "readVoltageBetween(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;ILnet/minecraft/core/BlockPos;I)Lorg/cha0scollective/wwpg/api/VoltageMeasurement;": {
+            "name": "readVoltageBetween",
+            "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;ILnet/minecraft/core/BlockPos;I)Lorg/cha0scollective/wwpg/api/VoltageMeasurement;",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65
+      }
+    }
+  },
+  "limits": "Classfile contracts only; does not certify electrical semantics, default-method conflicts, or gameplay compatibility."
+}

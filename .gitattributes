@@ -20,3 +20,5 @@ gradlew text eol=lf
 # Acceptance records and captured inputs are byte-addressed by SHA256.
 release/0.2.0/evidence/** -text
 release/0.2.0/*.json -text
+release/0.2.1/evidence/** -text
+release/0.2.1/*.json -text

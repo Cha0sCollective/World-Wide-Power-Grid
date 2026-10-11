@@ -1,0 +1,564 @@
+{
+  "schema": 1,
+  "completed": true,
+  "passed": true,
+  "unresolved_failures": [],
+  "artifact_hashes": {
+    "runtime": "7c852948a308f22946637df1dcecee7ade680ff7f4e0906d95a1425df14212dd",
+    "api": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+    "cee_api": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+    "example": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+    "upstream_example": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11"
+  },
+  "platform": "windows-latest",
+  "backend": "JAVA",
+  "profile": "PINOUT",
+  "regression_checks_passed": 208,
+  "extension_checks_passed": 34,
+  "api_namespaces_passed": [
+    "wwpg_api",
+    "wwpg_api_faults",
+    "wwpg_api_pause",
+    "wwpg_api_pending_restart",
+    "wwpg_api_restart",
+    "wwpg_api_upstream",
+    "wwpg_api_upstream_restart"
+  ],
+  "cold_restart_passes": 3,
+  "actual_chunk_reload_cycles": 5,
+  "independent_cee_solves": 0,
+  "exactly_once_history": true,
+  "cee_property_adapter_verified": true,
+  "global_pause_verified": true,
+  "api_fixture_behaviors": [
+    "board_component",
+    "instrument",
+    "machine",
+    "panel_attachment",
+    "storage"
+  ],
+  "nonconverging_backend_verified": true,
+  "paused_measurements_unavailable": true,
+  "cold_wire_systems_verified": [
+    "CEE",
+    "POWER_GRID"
+  ],
+  "cold_ownership_format_version": 2,
+  "source_sha": "39df6fa087d0bbc4601d9aab40d76105895a1e7a",
+  "source_tree": "a2e96e2a25da2d46b23392f182f2b3874597abfd",
+  "checked_out_source_verified": true,
+  "pending_wire_retirement_verified": true,
+  "pending_entity_restart_phases": [
+    "SETUP",
+    "ARM",
+    "VERIFY"
+  ],
+  "pending_entity_restart": {
+    "oracle": {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-pending-restart/extension-api-pending-before-restart.nbt",
+      "sha256": "b11ccb0c77ae11126ed33adce0de20f31dadc920ce4b3129243db385419d984d",
+      "bytes": 229
+    },
+    "phases": [
+      {
+        "phase": "SETUP",
+        "manifest": {
+          "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-pending-restart/packaged-2026-10-11T20-20-14.351792200Z.json",
+          "sha256": "5b8a841841fde8e69fb1bd7d7074de95a5921b636eed801b4cf0eb503e2520c8",
+          "bytes": 838
+        },
+        "log": {
+          "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-pending-restart/setup-phase.log",
+          "sha256": "13380155826f5d2f6545d3785399a2220e56b7c6671c51a6abd2ec0a4283a584",
+          "bytes": 19091
+        }
+      },
+      {
+        "phase": "ARM",
+        "manifest": {
+          "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-pending-restart/packaged-2026-10-11T20-21-03.137293500Z.json",
+          "sha256": "8b2f7f5057b928de870ba24df1edc932513ccf5940505da485a2f4e777880868",
+          "bytes": 836
+        },
+        "log": {
+          "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-pending-restart/arm-phase.log",
+          "sha256": "6f2a164f58c8e09d7dd9d5e711505f64f5a514e9cb9fab7aed388331b093a0b6",
+          "bytes": 14750
+        }
+      },
+      {
+        "phase": "VERIFY",
+        "manifest": {
+          "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-pending-restart/packaged-2026-10-11T20-21-46.106060200Z.json",
+          "sha256": "77eb2b9c4edd26c2d50eef91449a002c87c78af8ab61eff07cd7051dac860bdf",
+          "bytes": 839
+        },
+        "log": {
+          "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-pending-restart/verify-phase.log",
+          "sha256": "9209d213a1f4ad3dc8c5c69448db03d09b9ab0d6e2d2b0a5ab3190ea948620d3",
+          "bytes": 16069
+        }
+      }
+    ]
+  },
+  "junit_checks_passed": 62,
+  "evidence_files": [
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/ci-source.json",
+      "sha256": "7613398b9f33a3fc4709319110ca41c20a011980b62add582023687e3d018507",
+      "bytes": 211
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/distributions/wwpg-api-example-1.0.0-source.zip",
+      "sha256": "8a9acc0678297b13d2b8b0d6131c2b798277d102a02b1cb774e340b5f3850ad8",
+      "bytes": 79377
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/distributions/wwpg-api-workshop-PINOUT.zip",
+      "sha256": "f259433e8717239b47c4933af34920ba2ccaedf29d1fdf84d332220355c57ba3",
+      "bytes": 323219
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/distributions/wwpg-stationary-PINOUT.zip",
+      "sha256": "deb69b790888777df4c4465ca25c412f3ea324ab76733e4b90530910918c211f",
+      "bytes": 1335716
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/distributions/wwpg-upstream-api-example-1.0.0-source.zip",
+      "sha256": "a4077b2088f61d66978537eb9fe9b046f6722a9bf62b1d0b777230cf563ac2bb",
+      "bytes": 70196
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/libs/wwpg-0.2.1.jar",
+      "sha256": "7c852948a308f22946637df1dcecee7ade680ff7f4e0906d95a1425df14212dd",
+      "bytes": 3534944
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/libs/wwpg-api-1.0.0.jar",
+      "sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+      "bytes": 50130
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/libs/wwpg-cee-api-1.0.0.jar",
+      "sha256": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+      "bytes": 8788
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.api.ApiVersionTest.xml",
+      "sha256": "e5ba6af2f00fc49a1c851dcd8335af889388800df54c15aff3cc42866efc9a41",
+      "bytes": 473
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.api.cee.CeeAdapterRegistryTest.xml",
+      "sha256": "99d50a8c2240bd261c09920df8f20e31ce7f2d0e0d42d13191eadd7b4283caa0",
+      "bytes": 1701
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.api.CircuitDescriptionTest.xml",
+      "sha256": "e080233559414e8afe33f9a928a818f77e983c073eacc661bd202ea362cd1c48",
+      "bytes": 1286
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.api.DeviceResultsTest.xml",
+      "sha256": "579a56a9f97e103e357de8ab132c6c0572f8945d44dc4dd240fabedcb16e6dab",
+      "bytes": 1219
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.api.VoltageMeasurementTest.xml",
+      "sha256": "7603c9ebba543a063b443389721bf725fae7a6e3858fda0fc380ad2fb78bc22f",
+      "bytes": 495
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.BridgeSimulationResultsTest.xml",
+      "sha256": "211b3260623fa7929105d2fc834b63249df9351cdd043df46295e4da61c6a358",
+      "bytes": 717
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.LinearBranchTest.xml",
+      "sha256": "f0a4fe5a35080fe3ae52413e83deb20544929b5b60d82242e927bc5f8994359d",
+      "bytes": 779
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.NativeCeeCheckpointTest.xml",
+      "sha256": "bd79a9cb728dc96e409fd3291a41198ec27df9595b7b3451a7f26d75d40b9ab8",
+      "bytes": 949
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.TransformerStampTest.xml",
+      "sha256": "98ce38f81deb0962c14e485a5ec722f104a5154514d6f2dfb12ca2b5ff4d4a24",
+      "bytes": 997
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiCeeWireIdentitiesTest.xml",
+      "sha256": "26c15c95e326b9ff33dec031575e3e7c605eb98e153f87ec9597dfd06c15de9f",
+      "bytes": 1491
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiDiagnosticsTest.xml",
+      "sha256": "c7d36c3d2bcc76e6a4e07e08a2ba9252b023329828cc380f571fd65321f58680",
+      "bytes": 651
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiElectricalTest.xml",
+      "sha256": "13177955ec8dd17bae1f83f298abb22c41463e0540a5084bc5618364a435642b",
+      "bytes": 5482
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiGroundTest.xml",
+      "sha256": "d26d2083cb92f3e303ae477359e3ba4a8525105c53e3bc2576b43ed1f814d46b",
+      "bytes": 1349
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiTerminalIdentitiesTest.xml",
+      "sha256": "f82b39cd87e36253b4b60a6f513255eb30fd242ef7997b5d69b40e7501cdef6a",
+      "bytes": 1829
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.NativeApiReadingsTest.xml",
+      "sha256": "a8b1c9fea7cc4330c55dc3200bb6b48996d9d6a2b80e429b64cd62a723e197d0",
+      "bytes": 844
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar",
+      "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+      "bytes": 45633
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar",
+      "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+      "bytes": 52081
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api/extension-api-before-restart.nbt",
+      "sha256": "9e8ce6eeb9d11b4af50efe8028a9a5b64e5a42e44c6bfffa929515c7bb4ba255",
+      "bytes": 143
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api/extension-api-replacement-before-restart.nbt",
+      "sha256": "f4e22672d00b0edc104098b6a62b9346f6d5427de1619b0a034c5481859c092d",
+      "bytes": 232
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api/logs/latest.log",
+      "sha256": "44bc36f604da362eed68c501bf45d053070b9062842d8fcfee6170cfb218baec",
+      "bytes": 45381
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api/packaged-2026-10-11T20-22-33.564702600Z.json",
+      "sha256": "1eff1cf000f22e73bbb8551b7379558f751a3d76b259cf6599eb0a207951a87a",
+      "bytes": 900
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api/packaged-2026-10-11T20-23-43.568342200Z.json",
+      "sha256": "c1b51a896528180aaf42b52bce46571911ef94eb49a1d7e65d26acbd97861c02",
+      "bytes": 901
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api/packaged-2026-10-11T20-24-51.824926800Z.json",
+      "sha256": "f807a5309f667ccba0e4bf92b86e9a3203dff87a4722aee3efb42e90f8f83a7a",
+      "bytes": 901
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api/packaged-2026-10-11T20-26-17.611434400Z.json",
+      "sha256": "246367b7aee104c02d379b3232f7dc46fd312e8df694f720f3464a3392b0b333",
+      "bytes": 901
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api/restart-1.log",
+      "sha256": "fb43ced497425bcc8f643012f828693ec2937e1ff939a3680807222915c6d526",
+      "bytes": 45371
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api/restart-2.log",
+      "sha256": "12aaecb22cb8cbc309c5f3d15c5d7e4a394385ffee3e16b5c89aa796294f7bd3",
+      "bytes": 45321
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api/restart-3.log",
+      "sha256": "44bc36f604da362eed68c501bf45d053070b9062842d8fcfee6170cfb218baec",
+      "bytes": 45381
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api/upstream-api-before-restart.nbt",
+      "sha256": "8268090a870ec16ebb5e31273ac6ce10f7480bec3a3a68d26c9e554a64ed1481",
+      "bytes": 465
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-pause/logs/latest.log",
+      "sha256": "42c06694afaf4df468d9ef22abeee93bcabf5b87844eeea34a6b81b3b5ab7a12",
+      "bytes": 19410
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-pause/packaged-2026-10-11T20-19-29.566155400Z.json",
+      "sha256": "36f6a8387aa34e60b1fe5763bd5d159942a692457e7bdae37daa70f4330ea7e3",
+      "bytes": 828
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-pending-restart/arm-phase.log",
+      "sha256": "6f2a164f58c8e09d7dd9d5e711505f64f5a514e9cb9fab7aed388331b093a0b6",
+      "bytes": 14750
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-pending-restart/extension-api-pending-before-restart.nbt",
+      "sha256": "b11ccb0c77ae11126ed33adce0de20f31dadc920ce4b3129243db385419d984d",
+      "bytes": 229
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-pending-restart/packaged-2026-10-11T20-20-14.351792200Z.json",
+      "sha256": "5b8a841841fde8e69fb1bd7d7074de95a5921b636eed801b4cf0eb503e2520c8",
+      "bytes": 838
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-pending-restart/packaged-2026-10-11T20-21-03.137293500Z.json",
+      "sha256": "8b2f7f5057b928de870ba24df1edc932513ccf5940505da485a2f4e777880868",
+      "bytes": 836
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-pending-restart/packaged-2026-10-11T20-21-46.106060200Z.json",
+      "sha256": "77eb2b9c4edd26c2d50eef91449a002c87c78af8ab61eff07cd7051dac860bdf",
+      "bytes": 839
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-pending-restart/setup-phase.log",
+      "sha256": "13380155826f5d2f6545d3785399a2220e56b7c6671c51a6abd2ec0a4283a584",
+      "bytes": 19091
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-pending-restart/verify-phase.log",
+      "sha256": "9209d213a1f4ad3dc8c5c69448db03d09b9ab0d6e2d2b0a5ab3190ea948620d3",
+      "bytes": 16069
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-workshop/api-workshop-stations.json",
+      "sha256": "a79b693f7a14f38ea8b072e610e77e009920af136cf527bacad969b7546b759e",
+      "bytes": 19485
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-workshop/packaged-2026-10-11T20-58-33.409444200Z.json",
+      "sha256": "9083b334f9ad6584363176fabcc2ffab1dd0749490a2375c8273a643dd1a3c05",
+      "bytes": 828
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-workshop/packaged-2026-10-11T20-59-23.560011200Z.json",
+      "sha256": "04e7073013cfdb16d3dd8fbf1c435a25d4426b8697ad64439dbfc03cc673bada",
+      "bytes": 829
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-workshop/packaged-2026-10-11T21-00-11.177018100Z.json",
+      "sha256": "de2c1e65d5322cb5498e607c02c5b45e18f2c966a70c4e3ce14bb61dbb7be15b",
+      "bytes": 829
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-workshop/packaged-2026-10-11T21-01-00.239677700Z.json",
+      "sha256": "512c83a44226474b9a62bea3dfec1c604ae192d515e6c6e6f4ad90a8d55b1827",
+      "bytes": 829
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-workshop/restart-1.log",
+      "sha256": "481b015cc1ffea8638cec6a4df68c131236ea3033c4ff2c6205522e1ca50629d",
+      "bytes": 20920
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-workshop/restart-2.log",
+      "sha256": "55e664c21cfa9e98fb42e30998a742d17bc15c7d9b823a0823e09648396ec017",
+      "bytes": 21082
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/api-workshop/restart-3.log",
+      "sha256": "c0119c11961d1e26deb817a468b270cf1b3053409a6b7d79a52413aa4b53d453",
+      "bytes": 20816
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/example/logs/latest.log",
+      "sha256": "90ad078eb1e87cf7ffaa08f2eb0eccdb6e5817ce2c410c5063c2b52ed22b0945",
+      "bytes": 15908
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/example/packaged-2026-10-11T20-47-47.641243400Z.json",
+      "sha256": "c49d708eb7ca089dc1bebc7a0122eb94757b563036cbe358122e3ccb02e3f8cc",
+      "bytes": 425
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/example/packaged-2026-10-11T20-48-31.501151800Z.json",
+      "sha256": "f1c0ab30919a85a96d34fd33ffa2af913ee92cd80dab0f317d878af8ded9646f",
+      "bytes": 426
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/exported-api-workshop/api-workshop-stations.json",
+      "sha256": "bace87cc8a090bc1a8505735a4bd9784403acf5bdb56a70eb93bd9113d688582",
+      "bytes": 19487
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/exported-api-workshop/extracted-yard.json",
+      "sha256": "7c102f37ec7a4cca72e995b7a9f9d6645828bc16b503ef4b6fd9db7214fae255",
+      "bytes": 536
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/exported-api-workshop/packaged-2026-10-11T21-01-49.804184700Z.json",
+      "sha256": "ec1a4f53affba23c6fdfc9c268fafc7dc16725c03bf62a9faca3c554ccc129fb",
+      "bytes": 829
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/exported-api-workshop/packaged-2026-10-11T21-02-38.650012200Z.json",
+      "sha256": "6182770a758fa72628c491788b38b404cdc5c9b1fd9c8071a690532f2729a03f",
+      "bytes": 829
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/exported-api-workshop/packaged-2026-10-11T21-03-26.541592900Z.json",
+      "sha256": "a4f0c32be34174422ac392447a37bef7788b880daddad71af359531df0190a8b",
+      "bytes": 826
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/exported-api-workshop/restart-1.log",
+      "sha256": "ab1f3eb8d06a0d7fd4b7642c5522e50e89b45c80594f9398f37795890c4f1c00",
+      "bytes": 25088
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/exported-api-workshop/restart-2.log",
+      "sha256": "7127c61ec28229113c1d75611885e4a1a45b01e3fdd028e8d77dd2459efa66d3",
+      "bytes": 20919
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/exported-api-workshop/restart-3.log",
+      "sha256": "3393eb04b092f3f087aafe56c67370d003177ba0a67e210626d434d6894e0acd",
+      "bytes": 20918
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/exported-yard/extracted-yard.json",
+      "sha256": "5bb10d9c3789359dcaa5d082aef6c2853bdf8669348096dc243e462c99807e39",
+      "bytes": 510
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/exported-yard/packaged-2026-10-11T20-55-18.946703800Z.json",
+      "sha256": "6a25f0365c4270b8df6c7bede7abffc7ea486db9a349b9d008f28d739e695eb6",
+      "bytes": 425
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/exported-yard/packaged-2026-10-11T20-56-30.669706400Z.json",
+      "sha256": "4c2427b11dfd61017797360bbc58ca7ca4430243917718b885926632fd0ba1e1",
+      "bytes": 425
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/exported-yard/packaged-2026-10-11T20-57-30.751707100Z.json",
+      "sha256": "355de7217fcfcdd8ed22fdec4452eb47b367e42f26011be68038c0579aaed18e",
+      "bytes": 425
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/exported-yard/restart-1.log",
+      "sha256": "373f20721d46c77528d53f655dbea76a134bac7777acb15bd6e8c23cbc1547b4",
+      "bytes": 27444
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/exported-yard/restart-2.log",
+      "sha256": "c94beac129fdc77be07e61a84409214748721b18555b5a1ca2b3e6920203a1a2",
+      "bytes": 22962
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/exported-yard/restart-3.log",
+      "sha256": "b4ce1cdab36eff80d546540c37bd0cc115676d82ea592692acb1ef348e7e37a9",
+      "bytes": 23276
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/packaged-2026-10-11T20-27-34.467934800Z.json",
+      "sha256": "cd5035a4e98bab43fa253280a5fa1a2d8290eccd911df64015ef8ed3f8e76c3b",
+      "bytes": 424
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/packaged-2026-10-11T20-30-50.455338100Z.json",
+      "sha256": "e80f33085f7948f25365859450636b5382fe8db29bbb375d7c337a9bb345450e",
+      "bytes": 425
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/packaged-2026-10-11T20-34-35.732484100Z.json",
+      "sha256": "9e3d80a5d8bf8f5585c964f8f44f2e4b0620443545d233dec9a12efdfd4bae13",
+      "bytes": 425
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/packaged-2026-10-11T20-39-49.275998800Z.json",
+      "sha256": "8474405577e10316003861fc8e9d0cc5b72ed596ca9524be5cfc824897c53463",
+      "bytes": 425
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/reference/reference-packaged-2026-10-11T20-46-09.076947300Z.json",
+      "sha256": "ed695b59e4889a3d6b1b4b574722d1140dbe3bf53000b23e149712d838ce2339",
+      "bytes": 398
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/reference/reference-packaged-2026-10-11T20-47-00.436146200Z.json",
+      "sha256": "fa270d727da4ffde5fd4ef7fe89f28aea9e3f935b39aee457a2d988c015603f9",
+      "bytes": 374
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/restart-1.log",
+      "sha256": "15e1026f7b2c80cf24715e826ac87bc5020d12327650293a8fdf101bba3ed7e1",
+      "bytes": 220153
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/restart-2.log",
+      "sha256": "0c8b17af49eb003c05a1a381aebc1ae814f34037d1d366f910132084cb095fdb",
+      "bytes": 219545
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/restart-3.log",
+      "sha256": "f2888ca0e47147f933480ae0c32a54c506fd0612a55a13eaae8d30e12a52855b",
+      "bytes": 220191
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/showroom/logs/latest.log",
+      "sha256": "a665651a08af062c3b2767135a223d78c56267d7076b94aba8c66c53b386a8a6",
+      "bytes": 19871
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/showroom/packaged-2026-10-11T20-49-14.034049900Z.json",
+      "sha256": "b61ed3eafbae5724d1ea00ec68b72eb38649a2ca7cd26eab612ea496bf926ac7",
+      "bytes": 426
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/showroom/packaged-2026-10-11T20-50-07.262833600Z.json",
+      "sha256": "a28046af8bdc952292bd0f7895acbbd058f3091e1546565a98ea7f16ba3622d3",
+      "bytes": 427
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/yard/packaged-2026-10-11T20-50-56.568126600Z.json",
+      "sha256": "df88a2dbfc34405f110610ca326f20fbf5c28b3865e5b568001c5d56cfefbac5",
+      "bytes": 421
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/yard/packaged-2026-10-11T20-52-13.073542200Z.json",
+      "sha256": "06d0d382d7c6438321a61c00f8b19aadddd5ee6c1f2a616bb3605486e8c84fad",
+      "bytes": 425
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/yard/packaged-2026-10-11T20-53-14.878504500Z.json",
+      "sha256": "47f43369cad491115e40a9d7afc83e785822392e40a5fa6b3597697446737a93",
+      "bytes": 422
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/yard/packaged-2026-10-11T20-54-16.006909800Z.json",
+      "sha256": "9f60723ded2ad3f36a90ef98f8bc3a741b8862049f484606b369aa7d686cd2ac",
+      "bytes": 425
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/yard/restart-1.log",
+      "sha256": "19cc184e7587c9dbfae839336b4c988a0598e93772de03e4146ac779a7064b3a",
+      "bytes": 23098
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/yard/restart-2.log",
+      "sha256": "bf1cb2f6961dfe0671b094226a174d0b0cb6ddec6fd7e78b5dc381613878022b",
+      "bytes": 23274
+    },
+    {
+      "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/run/yard/restart-3.log",
+      "sha256": "f23fb95609ec918654e4077c12a66ca3ab6f1a5afb3be3786101d12670ee9b1a",
+      "bytes": 23277
+    }
+  ],
+  "checked_out_source": {
+    "path": "build/ci-38171546014-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/ci-source.json",
+    "sha256": "7613398b9f33a3fc4709319110ca41c20a011980b62add582023687e3d018507",
+    "bytes": 211
+  },
+  "github_job_id": 114565015797,
+  "github_artifact_id": 11715496780
+}

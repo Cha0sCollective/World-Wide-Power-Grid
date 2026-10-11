@@ -69,7 +69,7 @@ Use each mod's wire, spool and cord tools as usual. Both wire systems can connec
 
 ## Upgrading an existing world
 
-Stop the game or server, back up your world, and replace the older WWPG jar on the server and every client. Keep only one WWPG jar in `mods`. Keep the dependency versions and settings listed above. Existing beta.5 and 0.2.0 worlds work with 0.2.1; you do not need to download them again.
+Stop the game or server, back up your world, and replace the older WWPG jar on the server and every client. Keep only one WWPG jar in `mods`. Use the listed solver settings and matching dependency versions on the server and clients. Existing beta.5 and 0.2.0 worlds work with 0.2.1; you do not need to download them again.
 
 An update cannot restore wires or charge that an older version already lost and saved. The original beta.1 example also has an underpowered heater; use the current Stationary Yard or revised small example for a working burner demonstration.
 

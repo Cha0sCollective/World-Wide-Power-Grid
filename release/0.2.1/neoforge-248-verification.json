@@ -1,0 +1,812 @@
+{
+  "schema": 1,
+  "completed": true,
+  "passed": true,
+  "source_sha": "39df6fa087d0bbc4601d9aab40d76105895a1e7a",
+  "run_id": 38171545877,
+  "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38171545877",
+  "runtime_sha256": "7c852948a308f22946637df1dcecee7ade680ff7f4e0906d95a1425df14212dd",
+  "compile_neoforge": "21.1.231",
+  "runtime_neoforge": "21.1.248",
+  "unresolved_failures": [],
+  "matrix": [
+    {
+      "platform": "ubuntu-24.04",
+      "backend": "NATIVE",
+      "profile": "BASE",
+      "archive": {
+        "path": "build/release021-248-ci-38171545877/neoforge-248-ubuntu-24.04-NATIVE-BASE.zip",
+        "sha256": "8473c734eb08887a30b927840a1383efff22cddcb203111692fe77c06a256a65",
+        "bytes": 3812288
+      },
+      "artifact_id": 11715660005,
+      "launches": [
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-19-45.901020414Z.json",
+          "phase": "SETUP",
+          "tests": 205,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-26-32.958030449Z.json",
+          "phase": "VERIFY",
+          "tests": 205,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-31-57.889965790Z.json",
+          "phase": "VERIFY",
+          "tests": 205,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-39-58.191104614Z.json",
+          "phase": "VERIFY",
+          "tests": 205,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-49-09.487959290Z.json",
+          "phase": "SETUP",
+          "tests": 33,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-50-39.573384232Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-52-10.069052213Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-53-46.756364783Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-pause/packaged-2026-10-11T20-55-22.948097594Z.json",
+          "phase": "SETUP",
+          "tests": 1,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T20-55-51.050552476Z.json",
+          "phase": "SETUP",
+          "tests": 1,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T20-56-19.760525879Z.json",
+          "phase": "ARM",
+          "tests": 1,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T20-56-46.180799147Z.json",
+          "phase": "VERIFY",
+          "tests": 1,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        }
+      ]
+    },
+    {
+      "platform": "ubuntu-24.04",
+      "backend": "JAVA",
+      "profile": "PINOUT",
+      "archive": {
+        "path": "build/release021-248-ci-38171545877/neoforge-248-ubuntu-24.04-JAVA-PINOUT.zip",
+        "sha256": "ea60454ddd4ad4e589cf216176ff9a2f0770bd2493a9676438461f9cfc9986ef",
+        "bytes": 3824200
+      },
+      "artifact_id": 11715410034,
+      "launches": [
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-20-04.118019137Z.json",
+          "phase": "SETUP",
+          "tests": 209,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-22-20.540456775Z.json",
+          "phase": "VERIFY",
+          "tests": 209,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-25-13.345231666Z.json",
+          "phase": "VERIFY",
+          "tests": 209,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-29-00.616691998Z.json",
+          "phase": "VERIFY",
+          "tests": 209,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-33-47.413780389Z.json",
+          "phase": "SETUP",
+          "tests": 33,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-34-41.087780505Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-35-31.898174811Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-36-24.218688790Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-pause/packaged-2026-10-11T20-37-21.790262470Z.json",
+          "phase": "SETUP",
+          "tests": 1,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T20-37-52.516185223Z.json",
+          "phase": "SETUP",
+          "tests": 1,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T20-38-24.710056048Z.json",
+          "phase": "ARM",
+          "tests": 1,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T20-38-55.319979944Z.json",
+          "phase": "VERIFY",
+          "tests": 1,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        }
+      ]
+    },
+    {
+      "platform": "windows-latest",
+      "backend": "NATIVE",
+      "profile": "BASE",
+      "archive": {
+        "path": "build/release021-248-ci-38171545877/neoforge-248-windows-latest-NATIVE-BASE.zip",
+        "sha256": "27d0785348b3f71bb08e2c37d5189b3e89d23600e26e553070f1a3f4613b812f",
+        "bytes": 3815459
+      },
+      "artifact_id": 11715247645,
+      "launches": [
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-20-38.212266Z.json",
+          "phase": "SETUP",
+          "tests": 205,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-27-24.909953400Z.json",
+          "phase": "VERIFY",
+          "tests": 205,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-34-34.046352900Z.json",
+          "phase": "VERIFY",
+          "tests": 205,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-42-59.921997100Z.json",
+          "phase": "VERIFY",
+          "tests": 205,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-51-18.044121400Z.json",
+          "phase": "SETUP",
+          "tests": 33,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-53-44.105181800Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-56-11.989043800Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-58-43.696408800Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-pause/packaged-2026-10-11T21-01-17.530491200Z.json",
+          "phase": "SETUP",
+          "tests": 1,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T21-01-58.131719Z.json",
+          "phase": "SETUP",
+          "tests": 1,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T21-02-40.635601800Z.json",
+          "phase": "ARM",
+          "tests": 1,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T21-03-20.355546200Z.json",
+          "phase": "VERIFY",
+          "tests": 1,
+          "profile": "BASE",
+          "backend": "NATIVE"
+        }
+      ]
+    },
+    {
+      "platform": "windows-latest",
+      "backend": "NATIVE",
+      "profile": "PINOUT",
+      "archive": {
+        "path": "build/release021-248-ci-38171545877/neoforge-248-windows-latest-NATIVE-PINOUT.zip",
+        "sha256": "88ed807847c845414a63e8f2331fa5872a11e20b38544cef47a988ed6ebf40f2",
+        "bytes": 3833743
+      },
+      "artifact_id": 11715013456,
+      "launches": [
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-21-04.070531700Z.json",
+          "phase": "SETUP",
+          "tests": 209,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-27-28.003985300Z.json",
+          "phase": "VERIFY",
+          "tests": 209,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-36-15.118669600Z.json",
+          "phase": "VERIFY",
+          "tests": 209,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-45-30.564125700Z.json",
+          "phase": "VERIFY",
+          "tests": 209,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-55-09.834648600Z.json",
+          "phase": "SETUP",
+          "tests": 33,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-57-39.987750200Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T21-00-13.471033400Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T21-02-48.578993200Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-pause/packaged-2026-10-11T21-05-27.776729100Z.json",
+          "phase": "SETUP",
+          "tests": 1,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T21-06-10.356608700Z.json",
+          "phase": "SETUP",
+          "tests": 1,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T21-06-54.548040300Z.json",
+          "phase": "ARM",
+          "tests": 1,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T21-07-38.045649100Z.json",
+          "phase": "VERIFY",
+          "tests": 1,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        }
+      ]
+    },
+    {
+      "platform": "ubuntu-24.04",
+      "backend": "NATIVE",
+      "profile": "PINOUT",
+      "archive": {
+        "path": "build/release021-248-ci-38171545877/neoforge-248-ubuntu-24.04-NATIVE-PINOUT.zip",
+        "sha256": "95fd60040e79ad947449d161c1fc0d6d3691a5ea1199ea64158110d365485be3",
+        "bytes": 3823639
+      },
+      "artifact_id": 11714926003,
+      "launches": [
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-19-08.853465681Z.json",
+          "phase": "SETUP",
+          "tests": 209,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-22-15.422533701Z.json",
+          "phase": "VERIFY",
+          "tests": 209,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-25-58.547185428Z.json",
+          "phase": "VERIFY",
+          "tests": 209,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-30-08.065221149Z.json",
+          "phase": "VERIFY",
+          "tests": 209,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-34-34.090914849Z.json",
+          "phase": "SETUP",
+          "tests": 33,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-35-35.196985282Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-36-35.713494527Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-37-39.959632593Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-pause/packaged-2026-10-11T20-38-45.600355358Z.json",
+          "phase": "SETUP",
+          "tests": 1,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T20-39-07.242074035Z.json",
+          "phase": "SETUP",
+          "tests": 1,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T20-39-28.416478570Z.json",
+          "phase": "ARM",
+          "tests": 1,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T20-39-48.405346915Z.json",
+          "phase": "VERIFY",
+          "tests": 1,
+          "profile": "PINOUT",
+          "backend": "NATIVE"
+        }
+      ]
+    },
+    {
+      "platform": "windows-latest",
+      "backend": "JAVA",
+      "profile": "PINOUT",
+      "archive": {
+        "path": "build/release021-248-ci-38171545877/neoforge-248-windows-latest-JAVA-PINOUT.zip",
+        "sha256": "40aa26e8a38b9161e8c2dbbd64e895ff2e986f7de31553b059a961bd3a4b4162",
+        "bytes": 3826287
+      },
+      "artifact_id": 11714607219,
+      "launches": [
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-20-58.924998Z.json",
+          "phase": "SETUP",
+          "tests": 209,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-24-00.594055800Z.json",
+          "phase": "VERIFY",
+          "tests": 209,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-27-45.132805400Z.json",
+          "phase": "VERIFY",
+          "tests": 209,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-32-29.429470Z.json",
+          "phase": "VERIFY",
+          "tests": 209,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-38-46.162547800Z.json",
+          "phase": "SETUP",
+          "tests": 33,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-40-25.558622800Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-41-51.950911700Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-43-24.185578100Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-pause/packaged-2026-10-11T20-44-40.575124300Z.json",
+          "phase": "SETUP",
+          "tests": 1,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T20-45-23.438676900Z.json",
+          "phase": "SETUP",
+          "tests": 1,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T20-46-08.345422700Z.json",
+          "phase": "ARM",
+          "tests": 1,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T20-46-51.694857600Z.json",
+          "phase": "VERIFY",
+          "tests": 1,
+          "profile": "PINOUT",
+          "backend": "JAVA"
+        }
+      ]
+    },
+    {
+      "platform": "ubuntu-24.04",
+      "backend": "JAVA",
+      "profile": "BASE",
+      "archive": {
+        "path": "build/release021-248-ci-38171545877/neoforge-248-ubuntu-24.04-JAVA-BASE.zip",
+        "sha256": "4f7fbded022d514010ba8de5897520d1e0bf40172cce8c36b9220fe6e90dc3b1",
+        "bytes": 3807973
+      },
+      "artifact_id": 11714462691,
+      "launches": [
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-19-40.826170283Z.json",
+          "phase": "SETUP",
+          "tests": 205,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-21-53.657018599Z.json",
+          "phase": "VERIFY",
+          "tests": 205,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-24-50.934041033Z.json",
+          "phase": "VERIFY",
+          "tests": 205,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-28-45.635511789Z.json",
+          "phase": "VERIFY",
+          "tests": 205,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-33-47.942906256Z.json",
+          "phase": "SETUP",
+          "tests": 33,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-34-37.859923047Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-35-26.653894592Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-36-18.037567788Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-pause/packaged-2026-10-11T20-37-12.746647477Z.json",
+          "phase": "SETUP",
+          "tests": 1,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T20-37-42.883122526Z.json",
+          "phase": "SETUP",
+          "tests": 1,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T20-38-12.169128431Z.json",
+          "phase": "ARM",
+          "tests": 1,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T20-38-41.331318606Z.json",
+          "phase": "VERIFY",
+          "tests": 1,
+          "profile": "BASE",
+          "backend": "JAVA"
+        }
+      ]
+    },
+    {
+      "platform": "windows-latest",
+      "backend": "JAVA",
+      "profile": "BASE",
+      "archive": {
+        "path": "build/release021-248-ci-38171545877/neoforge-248-windows-latest-JAVA-BASE.zip",
+        "sha256": "94bee9955d9370bd2f985335c2eb8147b2c13f46fc5b96c731bc58740bec6f50",
+        "bytes": 3810256
+      },
+      "artifact_id": 11714428134,
+      "launches": [
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-20-39.760368600Z.json",
+          "phase": "SETUP",
+          "tests": 205,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-23-22.955436500Z.json",
+          "phase": "VERIFY",
+          "tests": 205,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-26-34.188551700Z.json",
+          "phase": "VERIFY",
+          "tests": 205,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-compat/packaged-2026-10-11T20-30-33.739275300Z.json",
+          "phase": "VERIFY",
+          "tests": 205,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-35-24.845382500Z.json",
+          "phase": "SETUP",
+          "tests": 33,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-36-29.927508700Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-37-33.443811100Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-api/packaged-2026-10-11T20-38-40.586626300Z.json",
+          "phase": "VERIFY",
+          "tests": 33,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-pause/packaged-2026-10-11T20-39-49.306825300Z.json",
+          "phase": "SETUP",
+          "tests": 1,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T20-40-29.862843300Z.json",
+          "phase": "SETUP",
+          "tests": 1,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T20-41-12.675081Z.json",
+          "phase": "ARM",
+          "tests": 1,
+          "profile": "BASE",
+          "backend": "JAVA"
+        },
+        {
+          "path": "run/neoforge-pending/packaged-2026-10-11T20-41-51.547197Z.json",
+          "phase": "VERIFY",
+          "tests": 1,
+          "profile": "BASE",
+          "backend": "JAVA"
+        }
+      ]
+    }
+  ],
+  "github_inputs": {
+    "run": {
+      "path": "build/release021-248-ci-38171545877/run.json",
+      "sha256": "f4b53c33cb532e4a99d3c95ed15309a8dcc2d66cb16fdfcf8bbf2d6ffb6e5097",
+      "bytes": 14719
+    },
+    "jobs": {
+      "path": "build/release021-248-ci-38171545877/jobs.json",
+      "sha256": "55dbaf7763f956a8894508088befe7910e0ac1862555adb1bb5a684b751776bc",
+      "bytes": 39042
+    },
+    "artifacts": {
+      "path": "build/release021-248-ci-38171545877/artifacts.json",
+      "sha256": "9e9770ed6edf352686cae8ff2b58b7e5e67052ba9f768e30b5953f9a20af9c9d",
+      "bytes": 6071
+    }
+  },
+  "neoforge_artifact": {
+    "path": "build/neoforge-compat/neoforge-artifact.json",
+    "sha256": "9cc48dafa490374a0e91cc499c44e0cf271952d5487be9570b78dd79737b4dd6",
+    "bytes": 263
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "target": "0.2.1",
+  "source_sha": "39df6fa087d0bbc4601d9aab40d76105895a1e7a",
+  "unresolved_failures": [],
+  "observations": [
+    {
+      "scope": "Local release tool tests",
+      "cause": "Workspace sandbox denied Windows directory rename; identical tests passed with normal Windows permissions. No Minecraft assertion failed."
+    },
+    {
+      "scope": "First base/native graphical check",
+      "cause": "User confirmed interrupting the test client, which caused the automated block click ray to miss. Runtime and helper code unchanged; fresh extraction uses the identical world ZIP.",
+      "failed_log": {
+        "path": "build/release021-api-graphical-BASE-NATIVE.log",
+        "sha256": "cd450fc3d419eb06fd4cd5b394a602d4852fbb5a4a01b34e145dc985e47d9c12",
+        "bytes": 36956
+      },
+      "status": "User-interrupted attempt retained; superseded only after full fresh graphical acceptance",
+      "followup": {
+        "path": "release/0.2.1/evidence/release021retry-api-graphical-BASE-NATIVE/verification.json",
+        "sha256": "6ac0ad1873e228af6949c9021741483f742cabe364642a1ed9906a5cf437e52b",
+        "bytes": 6817
+      }
+    },
+    {
+      "scope": "Pre-release 248 matrix, earlier source",
+      "run": "38163877827",
+      "cause": "Combined factory/API workload exceeded the native watchdog on two jobs. Splitting independent fixture worlds restored bounded passes without relaxing deadlines.",
+      "followup": "38164947443",
+      "status": "Resolved test workload; failed logs and local diagnostics retained.",
+      "evidence": [
+        {
+          "path": "build/neoforge-compat/failed-linux-diagnostics.zip",
+          "sha256": "fbdfacd6106c6d801e227f316a83c051a8eb7bf3a5ff19e88a04e2ac0ec312a7",
+          "bytes": 3567730
+        },
+        {
+          "path": "build/neoforge-compat/failed-windows-diagnostics.zip",
+          "sha256": "61cb183347f39f9821ead39f96fb8d8d17ae784a2d69e26a03a4bd2c08bd7b4f",
+          "bytes": 3555574
+        },
+        {
+          "path": "build/neoforge-compat/job-linux-native-pinout.log",
+          "sha256": "58cd7968faef171b2097bb0e336aede95a1fc32865f9c7829a8ff38e553dae89",
+          "bytes": 322849
+        },
+        {
+          "path": "build/neoforge-compat/job-windows-native-pinout.log",
+          "sha256": "cf3b4499996ad3a91b38df535e7bcbfd31e2aa7751cc9356ee568fe93c89db93",
+          "bytes": 277929
+        }
+      ]
+    }
+  ],
+  "current_ci": {
+    "path": "release/0.2.1/evidence/ci-38171546014/ci.json",
+    "sha256": "1ab428d08670107ed64096278e23e5fa6489b687b0324b75da87e7e94cc86f7c",
+    "bytes": 5098
+  },
+  "compatibility": {
+    "path": "release/0.2.1/neoforge-248-verification.json",
+    "sha256": "7092519d0386679cd65e22a1d2d975425fe01381737532976eb559dd5698017a",
+    "bytes": 25997
+  },
+  "historical_release": "release/0.2.0/verification.json"
+}

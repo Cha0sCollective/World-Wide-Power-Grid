@@ -1,6 +1,6 @@
 # Stationary wiring and native tools
 
-With **WWPG 0.2.0, CEE 1.1.3 and Power Grid 0.6.2**, both mods' tools work on
+With **WWPG 0.2.1, CEE 1.1.3 and Power Grid 0.6.2**, both mods' tools work on
 supported stationary circuits. You can wire equipment across mods, measure it,
 cut connections and repair broken parts. Follow the [installation guide](INSTALL.md)
 for the full version list and the [Stationary Test Yard](STATIONARY_YARD.md) for
@@ -72,6 +72,6 @@ voltage before powering it again.
 The wiring fixtures check native item costs, all ordinary CEE wire variants, PG iron on CEE terminals, native bulb installation and repair, duplex orientation, and five actual duplex-assembly unload/reload cycles with delayed entity loading. Cold checks inspect native cable and bulb state before the first solve, so restored power cannot hide state loss.
 
 The [beta.5 evidence](../release/0.1.0-beta.5/evidence/) retains the original
-fixtures, failed controls and corrected runs. The [0.2.0 verification record](../release/0.2.0/verification.json)
+fixtures, failed controls and corrected runs. The [0.2.1 verification record](../release/0.2.1/verification.json)
 checks the inherited workflows with the current jar and downloadable worlds.
 Earlier published artifacts and claims remain unchanged.

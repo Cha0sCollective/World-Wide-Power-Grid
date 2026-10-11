@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "completed": true,
+  "passed": true,
+  "source_sha": "39df6fa087d0bbc4601d9aab40d76105895a1e7a",
+  "artifact_hashes": {
+    "runtime": "7c852948a308f22946637df1dcecee7ade680ff7f4e0906d95a1425df14212dd",
+    "api": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+    "cee_api": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+    "example": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+    "upstream_example": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11"
+  },
+  "unresolved_failures": [],
+  "uses_published_api_only": true,
+  "uses_wwpg_project_classes": false,
+  "compiled_against_api_sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+  "functional_behaviors": [
+    "panel_attachment",
+    "board_component"
+  ],
+  "provenance": {
+    "path": "release/0.2.1/evidence/ci-38171546014/ci.json",
+    "sha256": "1ab428d08670107ed64096278e23e5fa6489b687b0324b75da87e7e94cc86f7c",
+    "bytes": 5098
+  },
+  "acceptance_scope": "independent CI source project build; extracted SDK/client gates remain separate",
+  "compiled_against_cee_api_sha256": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38"
+}

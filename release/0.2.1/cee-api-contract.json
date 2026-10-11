@@ -1,0 +1,330 @@
+{
+  "schema": 1,
+  "api_version": "1.0.0",
+  "mode": "comparison",
+  "compatible": true,
+  "previous": {
+    "file": "wwpg-cee-api-1.0.0.jar",
+    "sha256": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+    "bytes": 8788
+  },
+  "changes": [],
+  "current": {
+    "schema": 1,
+    "artifact": {
+      "file": "wwpg-cee-api-1.0.0.jar",
+      "sha256": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+      "bytes": 8788
+    },
+    "prefixes": [
+      "org/cha0scollective/wwpg/api/cee/"
+    ],
+    "types": {
+      "org/cha0scollective/wwpg/api/cee/CeeElectricalParameters": {
+        "name": "org/cha0scollective/wwpg/api/cee/CeeElectricalParameters",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Record",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "<init>(DDDZ)V": {
+            "name": "<init>",
+            "descriptor": "(DDDZ)V",
+            "access": 1,
+            "flags": 0
+          },
+          "inverted()Lorg/cha0scollective/wwpg/api/cee/CeeElectricalParameters;": {
+            "name": "inverted",
+            "descriptor": "()Lorg/cha0scollective/wwpg/api/cee/CeeElectricalParameters;",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "conductanceSiemens()D": {
+            "name": "conductanceSiemens",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "currentSourceAmps()D": {
+            "name": "currentSourceAmps",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "voltageSourceVolts()D": {
+            "name": "voltageSourceVolts",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "idealVoltageSource()Z": {
+            "name": "idealVoltageSource",
+            "descriptor": "()Z",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/cee/CeePropertyAdapter": {
+        "name": "org/cha0scollective/wwpg/api/cee/CeePropertyAdapter",
+        "access": 1,
+        "flags": 1536,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "prepare(Lcom/george_vi/electroenergetics/simulation/electrical_properties/ElectricalProperties;)Lorg/cha0scollective/wwpg/api/cee/CeeElectricalParameters;": {
+            "name": "prepare",
+            "descriptor": "(Lcom/george_vi/electroenergetics/simulation/electrical_properties/ElectricalProperties;)Lorg/cha0scollective/wwpg/api/cee/CeeElectricalParameters;",
+            "access": 1,
+            "flags": 1024,
+            "signature": "(TT;)Lorg/cha0scollective/wwpg/api/cee/CeeElectricalParameters;"
+          },
+          "dynamic()Z": {
+            "name": "dynamic",
+            "descriptor": "()Z",
+            "access": 1,
+            "flags": 0
+          },
+          "checkpoint(Lcom/george_vi/electroenergetics/simulation/electrical_properties/ElectricalProperties;)Lorg/cha0scollective/wwpg/api/cee/CeeStateCheckpoint;": {
+            "name": "checkpoint",
+            "descriptor": "(Lcom/george_vi/electroenergetics/simulation/electrical_properties/ElectricalProperties;)Lorg/cha0scollective/wwpg/api/cee/CeeStateCheckpoint;",
+            "access": 1,
+            "flags": 0,
+            "signature": "(TT;)Lorg/cha0scollective/wwpg/api/cee/CeeStateCheckpoint;"
+          },
+          "beforeSubstep(Lcom/george_vi/electroenergetics/simulation/electrical_properties/ElectricalProperties;Lorg/cha0scollective/wwpg/api/cee/CeeSubstepContext;)V": {
+            "name": "beforeSubstep",
+            "descriptor": "(Lcom/george_vi/electroenergetics/simulation/electrical_properties/ElectricalProperties;Lorg/cha0scollective/wwpg/api/cee/CeeSubstepContext;)V",
+            "access": 1,
+            "flags": 0,
+            "signature": "(TT;Lorg/cha0scollective/wwpg/api/cee/CeeSubstepContext;)V"
+          },
+          "afterSubstep(Lcom/george_vi/electroenergetics/simulation/electrical_properties/ElectricalProperties;Lorg/cha0scollective/wwpg/api/cee/CeeSubstepResult;)V": {
+            "name": "afterSubstep",
+            "descriptor": "(Lcom/george_vi/electroenergetics/simulation/electrical_properties/ElectricalProperties;Lorg/cha0scollective/wwpg/api/cee/CeeSubstepResult;)V",
+            "access": 1,
+            "flags": 0,
+            "signature": "(TT;Lorg/cha0scollective/wwpg/api/cee/CeeSubstepResult;)V"
+          }
+        },
+        "major_version": 65,
+        "signature": "<T:Lcom/george_vi/electroenergetics/simulation/electrical_properties/ElectricalProperties;>Ljava/lang/Object;"
+      },
+      "org/cha0scollective/wwpg/api/cee/CeeStateCheckpoint": {
+        "name": "org/cha0scollective/wwpg/api/cee/CeeStateCheckpoint",
+        "access": 1,
+        "flags": 1536,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": {
+          "NONELorg/cha0scollective/wwpg/api/cee/CeeStateCheckpoint;": {
+            "name": "NONE",
+            "descriptor": "Lorg/cha0scollective/wwpg/api/cee/CeeStateCheckpoint;",
+            "access": 1,
+            "flags": 24
+          }
+        },
+        "methods": {
+          "restore()V": {
+            "name": "restore",
+            "descriptor": "()V",
+            "access": 1,
+            "flags": 1024
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/cee/CeeSubstepContext": {
+        "name": "org/cha0scollective/wwpg/api/cee/CeeSubstepContext",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Record",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "<init>(DIID)V": {
+            "name": "<init>",
+            "descriptor": "(DIID)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "previousVoltageVolts()D": {
+            "name": "previousVoltageVolts",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "substep()I": {
+            "name": "substep",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 0
+          },
+          "totalSubsteps()I": {
+            "name": "totalSubsteps",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 0
+          },
+          "substepSeconds()D": {
+            "name": "substepSeconds",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/cee/CeeSubstepResult": {
+        "name": "org/cha0scollective/wwpg/api/cee/CeeSubstepResult",
+        "access": 1,
+        "flags": 16,
+        "super": "java/lang/Record",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "<init>(DDIID)V": {
+            "name": "<init>",
+            "descriptor": "(DDIID)V",
+            "access": 1,
+            "flags": 0
+          },
+          "toString()Ljava/lang/String;": {
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "access": 1,
+            "flags": 16
+          },
+          "hashCode()I": {
+            "name": "hashCode",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 16
+          },
+          "equals(Ljava/lang/Object;)Z": {
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 1,
+            "flags": 16
+          },
+          "voltageVolts()D": {
+            "name": "voltageVolts",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "currentAmps()D": {
+            "name": "currentAmps",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          },
+          "substep()I": {
+            "name": "substep",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 0
+          },
+          "totalSubsteps()I": {
+            "name": "totalSubsteps",
+            "descriptor": "()I",
+            "access": 1,
+            "flags": 0
+          },
+          "substepSeconds()D": {
+            "name": "substepSeconds",
+            "descriptor": "()D",
+            "access": 1,
+            "flags": 0
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/cee/RegisterCeePropertyAdaptersEvent": {
+        "name": "org/cha0scollective/wwpg/api/cee/RegisterCeePropertyAdaptersEvent",
+        "access": 1,
+        "flags": 16,
+        "super": "net/neoforged/bus/api/Event",
+        "interfaces": [
+          "net/neoforged/fml/event/IModBusEvent"
+        ],
+        "fields": {},
+        "methods": {
+          "<init>(Lorg/cha0scollective/wwpg/api/cee/RegisterCeePropertyAdaptersEvent$Registration;)V": {
+            "name": "<init>",
+            "descriptor": "(Lorg/cha0scollective/wwpg/api/cee/RegisterCeePropertyAdaptersEvent$Registration;)V",
+            "access": 1,
+            "flags": 0
+          },
+          "register(Ljava/lang/String;Ljava/lang/Class;Lorg/cha0scollective/wwpg/api/cee/CeePropertyAdapter;)V": {
+            "name": "register",
+            "descriptor": "(Ljava/lang/String;Ljava/lang/Class;Lorg/cha0scollective/wwpg/api/cee/CeePropertyAdapter;)V",
+            "access": 1,
+            "flags": 0,
+            "signature": "<T:Lcom/george_vi/electroenergetics/simulation/electrical_properties/ElectricalProperties;>(Ljava/lang/String;Ljava/lang/Class<TT;>;Lorg/cha0scollective/wwpg/api/cee/CeePropertyAdapter<TT;>;)V"
+          }
+        },
+        "major_version": 65
+      },
+      "org/cha0scollective/wwpg/api/cee/RegisterCeePropertyAdaptersEvent$Registration": {
+        "name": "org/cha0scollective/wwpg/api/cee/RegisterCeePropertyAdaptersEvent$Registration",
+        "access": 1,
+        "flags": 1544,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": {},
+        "methods": {
+          "register(Ljava/lang/String;Ljava/lang/Class;Lorg/cha0scollective/wwpg/api/cee/CeePropertyAdapter;)V": {
+            "name": "register",
+            "descriptor": "(Ljava/lang/String;Ljava/lang/Class;Lorg/cha0scollective/wwpg/api/cee/CeePropertyAdapter;)V",
+            "access": 1,
+            "flags": 1024,
+            "signature": "<T:Lcom/george_vi/electroenergetics/simulation/electrical_properties/ElectricalProperties;>(Ljava/lang/String;Ljava/lang/Class<TT;>;Lorg/cha0scollective/wwpg/api/cee/CeePropertyAdapter<TT;>;)V"
+          }
+        },
+        "major_version": 65,
+        "enclosing": "org/cha0scollective/wwpg/api/cee/RegisterCeePropertyAdaptersEvent"
+      }
+    }
+  },
+  "limits": "Classfile contracts only; does not certify electrical semantics, default-method conflicts, or gameplay compatibility."
+}

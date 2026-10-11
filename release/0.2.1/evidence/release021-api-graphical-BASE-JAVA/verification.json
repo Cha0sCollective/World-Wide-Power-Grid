@@ -1,0 +1,179 @@
+{
+  "schema": 1,
+  "completed": true,
+  "passed": true,
+  "unresolved_failures": [],
+  "source_sha": "39df6fa087d0bbc4601d9aab40d76105895a1e7a",
+  "artifact_hashes": {
+    "runtime": "7c852948a308f22946637df1dcecee7ade680ff7f4e0906d95a1425df14212dd",
+    "api": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+    "cee_api": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+    "example": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+    "upstream_example": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11"
+  },
+  "mode": "graphical",
+  "profile": "BASE",
+  "backend": "JAVA",
+  "world_sha256": "1be77b894dc885b9c6d04f2bd8a6482bb4b62533b152b98384f8008ed00497a1",
+  "api_fixture_behaviors": [
+    "machine",
+    "storage",
+    "instrument",
+    "panel_attachment",
+    "board_component"
+  ],
+  "real_graphical_client": true,
+  "checkpoints": {
+    "graphical": {
+      "views": [
+        "A01",
+        "A02",
+        "A03",
+        "A04",
+        "A05",
+        "A06",
+        "A07",
+        "A08",
+        "A09",
+        "A10",
+        "A11"
+      ],
+      "phases": [
+        "wire",
+        "configure",
+        "configure_on",
+        "meter",
+        "panel_edit",
+        "board_edit",
+        "repair",
+        "repair_wire"
+      ]
+    }
+  },
+  "logs": {
+    "graphical": {
+      "file": "graphical.log.gz",
+      "sha256": "3029acd861146b0e9add17318b4805a1452d8041449d7c76ac317a786ea4387a",
+      "bytes": 7401
+    }
+  },
+  "screenshots": {
+    "graphical-api-board-edit.png": {
+      "file": "graphical-api-board-edit.png",
+      "sha256": "9f565d613599c65c5fc85973e06c1b79b14f625c07f867a8ea3a797d9660a196",
+      "bytes": 127473
+    },
+    "graphical-api-A08.png": {
+      "file": "graphical-api-A08.png",
+      "sha256": "9f7e35d37c47605df8cb85de0f6b46bcf8293a44c2a2d9a6ce311683c75dd191",
+      "bytes": 202512
+    },
+    "graphical-api-A11.png": {
+      "file": "graphical-api-A11.png",
+      "sha256": "001794ba0306a566cd817d38937aeda9cf87c80093f85935b16344674b896d88",
+      "bytes": 144162
+    },
+    "graphical-api-A07.png": {
+      "file": "graphical-api-A07.png",
+      "sha256": "beabd62c4efc15e71632d9c392600d87b92e3a451b437dfef99d0793af485028",
+      "bytes": 198883
+    },
+    "graphical-api-control-off.png": {
+      "file": "graphical-api-control-off.png",
+      "sha256": "b120497f20008900cb8c3b0e806a48cd96b6f7cab936aa525dd0fe211bdf19da",
+      "bytes": 120835
+    },
+    "graphical-api-A05.png": {
+      "file": "graphical-api-A05.png",
+      "sha256": "c509cab01e84ae87db3645dbeaea67eaaa9c6fada9e99a00de4f105e7147684e",
+      "bytes": 219683
+    },
+    "graphical-api-panel-edit.png": {
+      "file": "graphical-api-panel-edit.png",
+      "sha256": "6596afc6ebe1addb4f778a464f058fd8923ab59072d00a4bd5ea5041c3320b08",
+      "bytes": 230128
+    },
+    "graphical-api-A01.png": {
+      "file": "graphical-api-A01.png",
+      "sha256": "c17ea90eb171cb6526970db1c9eeeaf0a618410737d747664b1e913f2b817d01",
+      "bytes": 238066
+    },
+    "graphical-api-control-on.png": {
+      "file": "graphical-api-control-on.png",
+      "sha256": "d89aaf8b94636efb8d5818339b709875299c8c21f1edf59c366ff5051066d423",
+      "bytes": 140341
+    },
+    "graphical-api-A10.png": {
+      "file": "graphical-api-A10.png",
+      "sha256": "61ba76bf4e48f72605f837f3165becd59acf98029e355b986e18ccd6f4758340",
+      "bytes": 139512
+    },
+    "graphical-api-A09.png": {
+      "file": "graphical-api-A09.png",
+      "sha256": "81eb0c2eebbedbac620fa3b7c5130f0bd6f7ad438148a1807abbb0db367a14ba",
+      "bytes": 198699
+    },
+    "graphical-api-A06.png": {
+      "file": "graphical-api-A06.png",
+      "sha256": "0e63f0e56df92c4c6a2c35ac3e4cf7e33a9f0f5204b542ef40f27a07b5fbeb59",
+      "bytes": 209196
+    },
+    "graphical-api-A03.png": {
+      "file": "graphical-api-A03.png",
+      "sha256": "ca94762c9e29d4de8d316f4eaf2444207d5023987eed4eb21cde8654eefba823",
+      "bytes": 228839
+    },
+    "graphical-api-A02.png": {
+      "file": "graphical-api-A02.png",
+      "sha256": "3c26be940d48efae574a63c1e6d77eb6c29c237a96bc807841babb86a420c2d7",
+      "bytes": 226840
+    },
+    "graphical-api-A04.png": {
+      "file": "graphical-api-A04.png",
+      "sha256": "bea9bcd61d8308f3729b6e58c6379abe93a4b1c3cf0b84d903681d9ab6df343d",
+      "bytes": 219467
+    }
+  },
+  "provenance": {
+    "acceptance_helper": {
+      "path": "release/0.2.1/evidence/release021-api-graphical-BASE-JAVA/helper-provenance/helper.jar",
+      "sha256": "2668b22b86e9326a0150b8c33577ea281fd0fddaed1064392503cd8ffb0a810e",
+      "bytes": 39050
+    },
+    "acceptance_helper_sources": [
+      {
+        "path": "release/0.2.1/evidence/release021-api-graphical-BASE-JAVA/helper-provenance/inputs/tools/client_acceptance/api_client.gradle",
+        "sha256": "cbd46810f81d84516daee3967003eda983f136661010b7f33a428465bc1aaa9f",
+        "bytes": 10561,
+        "source_path": "tools/client_acceptance/api_client.gradle",
+        "kind": "init"
+      },
+      {
+        "path": "release/0.2.1/evidence/release021-api-graphical-BASE-JAVA/helper-provenance/inputs/tools/client_acceptance/resources/META-INF/neoforge.mods.toml",
+        "sha256": "d493caee15dfd18d8242f2c03748fde524fd9f0774f12813c80e73f4eef25ad6",
+        "bytes": 354,
+        "source_path": "tools/client_acceptance/resources/META-INF/neoforge.mods.toml",
+        "kind": "resource"
+      },
+      {
+        "path": "release/0.2.1/evidence/release021-api-graphical-BASE-JAVA/helper-provenance/inputs/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ApiWorkshopClientAcceptance.java",
+        "sha256": "60cd7f55c989a1094cff4155c6f80de01b050d1853e1422ca4b72f8a28755abf",
+        "bytes": 29972,
+        "source_path": "tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ApiWorkshopClientAcceptance.java",
+        "kind": "java"
+      },
+      {
+        "path": "release/0.2.1/evidence/release021-api-graphical-BASE-JAVA/helper-provenance/inputs/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ExpandedClientAcceptance.java",
+        "sha256": "93598b6e21d46b850ef75336485e17e1e268c08e8a77347294d57141787e90b3",
+        "bytes": 34837,
+        "source_path": "tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ExpandedClientAcceptance.java",
+        "kind": "java"
+      }
+    ],
+    "launch_descriptor": {
+      "path": "release/0.2.1/evidence/release021-api-graphical-BASE-JAVA/helper-provenance/launch.json.gz",
+      "sha256": "c07a769244194bd5c14fdc8ad781ed54542c53c4e4b6d5c2b590511b67324678",
+      "bytes": 1125
+    }
+  }
+}

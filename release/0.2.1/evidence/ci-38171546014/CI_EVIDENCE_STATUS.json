@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "source_sha": "39df6fa087d0bbc4601d9aab40d76105895a1e7a",
+  "artifact_hashes": {
+    "runtime": "7c852948a308f22946637df1dcecee7ade680ff7f4e0906d95a1425df14212dd",
+    "api": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+    "cee_api": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+    "example": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+    "upstream_example": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11"
+  },
+  "matrix_evidence_complete": true,
+  "api_frozen": false,
+  "publishable": false,
+  "state": "packaged_matrix_candidate",
+  "remaining": [
+    "Exact downloadable SDK extraction/build",
+    "Graphical and two real TCP clients on both profiles/backends",
+    "Review unresolved historical failures and complete six release gates",
+    "Frozen release manifest/package validation"
+  ]
+}

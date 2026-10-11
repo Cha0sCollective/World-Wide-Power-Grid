@@ -1,0 +1,354 @@
+{
+  "schema": 1,
+  "completed": true,
+  "passed": true,
+  "unresolved_failures": [],
+  "source_sha": "39df6fa087d0bbc4601d9aab40d76105895a1e7a",
+  "artifact_hashes": {
+    "runtime": "7c852948a308f22946637df1dcecee7ade680ff7f4e0906d95a1425df14212dd",
+    "api": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+    "cee_api": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+    "example": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+    "upstream_example": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11"
+  },
+  "mode": "multiplayer",
+  "profile": "PINOUT",
+  "backend": "JAVA",
+  "world_sha256": "d77176072213c0e3a1164d145347fd073a512f5ba63b088bb6dd3b7f7bc31060",
+  "api_fixture_behaviors": [
+    "machine",
+    "storage",
+    "instrument",
+    "panel_attachment",
+    "board_component"
+  ],
+  "real_graphical_client": true,
+  "checkpoints": {
+    "client-a": {
+      "views": [
+        "A01",
+        "A02",
+        "A03",
+        "A04",
+        "A05",
+        "A06",
+        "A07",
+        "A08",
+        "A09",
+        "A10",
+        "A11"
+      ],
+      "phases": [
+        "wire",
+        "configure",
+        "configure_on",
+        "meter",
+        "panel_edit",
+        "board_edit",
+        "repair",
+        "repair_wire"
+      ]
+    },
+    "client-b": {
+      "views": [
+        "A01",
+        "A02",
+        "A03",
+        "A04",
+        "A05",
+        "A06",
+        "A07",
+        "A08",
+        "A09",
+        "A10",
+        "A11"
+      ],
+      "phases": [
+        "wire",
+        "configure",
+        "configure_on",
+        "meter",
+        "panel_edit",
+        "board_edit",
+        "repair",
+        "repair_wire"
+      ]
+    }
+  },
+  "logs": {
+    "server": {
+      "file": "server.log.gz",
+      "sha256": "e2d637cdaeb740f890e87f26c7ce417d2cc6a4fdf5444c3beaf304e1dd8e8fe8",
+      "bytes": 5639
+    },
+    "client-a": {
+      "file": "client-a.log.gz",
+      "sha256": "b9319f9f915b7261d58b1db95d673d225951a3b4a6a4af7ce8320af5acabad70",
+      "bytes": 5750
+    },
+    "client-b": {
+      "file": "client-b.log.gz",
+      "sha256": "76d45f5741c6da55905f6c1fc88678e71508894468f51df8a1ff62b02de679ef",
+      "bytes": 5537
+    }
+  },
+  "screenshots": {
+    "client-a-api-A10.png": {
+      "file": "client-a-api-A10.png",
+      "sha256": "2198b854b775f4091d485d7560a0099c49983f375336c8dd0becd9eaa6f6609f",
+      "bytes": 132710
+    },
+    "client-a-api-A11.png": {
+      "file": "client-a-api-A11.png",
+      "sha256": "95447699915980299c03ac69ba253235e613cea190d743a3d6e1d2468f23634c",
+      "bytes": 148144
+    },
+    "client-a-api-A01.png": {
+      "file": "client-a-api-A01.png",
+      "sha256": "dfb70849f35cc4b682af61b539ef47ca060d744ef22315041ceddcec6e4c3eb0",
+      "bytes": 184083
+    },
+    "client-a-api-A04.png": {
+      "file": "client-a-api-A04.png",
+      "sha256": "915b87b6a5e04438e5893be4ef2b09796dc253ee758ac1a4df8b3896c2becf8d",
+      "bytes": 221946
+    },
+    "client-a-api-repair-A.png": {
+      "file": "client-a-api-repair-A.png",
+      "sha256": "b6268d0ea83e5f549bfb5bc13b8290eca3b180ffd4cf47fc105dc8b649ec24f6",
+      "bytes": 137945
+    },
+    "client-a-api-repair_wire-A.png": {
+      "file": "client-a-api-repair_wire-A.png",
+      "sha256": "441f992934ae6b64cd763ef0e23fa5adde5bb1de11be116136105f9ae055eb99",
+      "bytes": 216760
+    },
+    "client-a-api-panel_edit-A.png": {
+      "file": "client-a-api-panel_edit-A.png",
+      "sha256": "0b496c348221d0fb42bf7b5360e911d311b9dd4da5471b5175f0e033f644297e",
+      "bytes": 59877
+    },
+    "client-a-api-A06.png": {
+      "file": "client-a-api-A06.png",
+      "sha256": "60a5748b3cc5ee8d9b382ce1a91ddd4174b540fc0e52afebe43a938977d56ee0",
+      "bytes": 207098
+    },
+    "client-a-api-A05.png": {
+      "file": "client-a-api-A05.png",
+      "sha256": "e1840cd89f78008566dd48da62ff188abf65ba085eb9ee606cc01959ce040f58",
+      "bytes": 226032
+    },
+    "client-a-api-meter-A.png": {
+      "file": "client-a-api-meter-A.png",
+      "sha256": "49ca08c9a839df762a1b1ec797b245eaf468b447633d226f030c1f45d43b86cc",
+      "bytes": 170063
+    },
+    "client-a-api-wire-A.png": {
+      "file": "client-a-api-wire-A.png",
+      "sha256": "698c2687642fc30425ab44fc618dfa3e3c73467aa447f1c65885c21ebbd51b7e",
+      "bytes": 191460
+    },
+    "client-a-api-configure_on-A.png": {
+      "file": "client-a-api-configure_on-A.png",
+      "sha256": "6850107f37ce3572cf68a208ca0423d733750cfe4ebb41a151230f73ccb28085",
+      "bytes": 120744
+    },
+    "client-a-api-A03.png": {
+      "file": "client-a-api-A03.png",
+      "sha256": "2a2944c792b67540439e80620bc979814cf4f703b2f58a4a4f586fc2cc27132b",
+      "bytes": 206981
+    },
+    "client-a-api-configure-A.png": {
+      "file": "client-a-api-configure-A.png",
+      "sha256": "a24fb9da931ec536cfe707f93d80b732c0ef683fbe12f48ab236051ef371bac0",
+      "bytes": 113361
+    },
+    "client-a-api-board-editor-visible-A.png": {
+      "file": "client-a-api-board-editor-visible-A.png",
+      "sha256": "434ab2082f3a9cf97a0d142704b9a340f0de575466f956093f9a7bce5719cde3",
+      "bytes": 120466
+    },
+    "client-a-api-board_edit-A.png": {
+      "file": "client-a-api-board_edit-A.png",
+      "sha256": "29524831ad7858df79f768ce0178551c3d1345b1205d4742a7f2f2df80b83740",
+      "bytes": 161111
+    },
+    "client-a-api-A09.png": {
+      "file": "client-a-api-A09.png",
+      "sha256": "903082e25c339a1a01ae9ec9d94383e0e6ea4d6c73e9a4b00af2f3ff115465c5",
+      "bytes": 207179
+    },
+    "client-a-api-A08.png": {
+      "file": "client-a-api-A08.png",
+      "sha256": "e4b1f8009bc5b88af8a10d25f80be9d0facedaa218730d3ac7bf7ad977ff84f1",
+      "bytes": 201576
+    },
+    "client-a-api-A02.png": {
+      "file": "client-a-api-A02.png",
+      "sha256": "550910875525dcf9d5c135a54c1324ec2c70274ad9e46dbf5ce64ce45825f583",
+      "bytes": 227974
+    },
+    "client-a-api-A07.png": {
+      "file": "client-a-api-A07.png",
+      "sha256": "3fb5b6e2ec602f5470d754511637494516cf221fbe27bb9404d57c8b82e6ba73",
+      "bytes": 204169
+    },
+    "client-b-api-A10.png": {
+      "file": "client-b-api-A10.png",
+      "sha256": "d18e1c119d8087b2455baa1a30d1f27939a23d42fe27fee04f0f2b32ead88bd0",
+      "bytes": 143388
+    },
+    "client-b-api-A11.png": {
+      "file": "client-b-api-A11.png",
+      "sha256": "e28ac725557916b0174a625e2daee2fb2478961ccae8c567cc3bf261c18fd389",
+      "bytes": 146576
+    },
+    "client-b-api-A01.png": {
+      "file": "client-b-api-A01.png",
+      "sha256": "5f41517b8d9e6ce67be3b269a7af5acb4222a57ade4db6556ca9af280588748a",
+      "bytes": 229181
+    },
+    "client-b-api-panel_edit-B.png": {
+      "file": "client-b-api-panel_edit-B.png",
+      "sha256": "885f48f76d261d23b1028d19a1904164ade26eae052889e56ec6335b469a04d0",
+      "bytes": 59529
+    },
+    "client-b-api-A04.png": {
+      "file": "client-b-api-A04.png",
+      "sha256": "1a4b833f7fe74643357c3a75ed9d1dee132499e99462298721b9cacaf6065f35",
+      "bytes": 201845
+    },
+    "client-b-api-meter-B.png": {
+      "file": "client-b-api-meter-B.png",
+      "sha256": "f919e7aa1fccfdf67866150f208b45b229451fa9ac8f1d7b94968677bf3ad89f",
+      "bytes": 127289
+    },
+    "client-b-api-A06.png": {
+      "file": "client-b-api-A06.png",
+      "sha256": "e051db9153a8c1224096d160082bebd7b3a4bd4ae79817ed7ff348737c692188",
+      "bytes": 218474
+    },
+    "client-b-api-A05.png": {
+      "file": "client-b-api-A05.png",
+      "sha256": "23f59bfc67ef5820dea4123e9f3c6fd1ab6fec39e9423cb20ddf2358ba699b8a",
+      "bytes": 220602
+    },
+    "client-b-api-board_edit-B.png": {
+      "file": "client-b-api-board_edit-B.png",
+      "sha256": "dd621d580bbfcde251042464d6c22995d8d6d5892dd0938b0ff1f66a600f94bb",
+      "bytes": 139423
+    },
+    "client-b-api-A03.png": {
+      "file": "client-b-api-A03.png",
+      "sha256": "2f75d9cd6758a408fb111557a63b1e289add2aa0f7ac97e1f17b6814c4dbf13f",
+      "bytes": 233008
+    },
+    "client-b-api-repair-B.png": {
+      "file": "client-b-api-repair-B.png",
+      "sha256": "3a350d46fb0d3aa387135db9287e5264b82aa206d8146dc789b39e35fb538a44",
+      "bytes": 164701
+    },
+    "client-b-api-repair_wire-B.png": {
+      "file": "client-b-api-repair_wire-B.png",
+      "sha256": "db2b63d31bbb434dafadaa13689c47da20556db12441fe03c0b9558f96dadfd4",
+      "bytes": 164056
+    },
+    "client-b-api-wire-B.png": {
+      "file": "client-b-api-wire-B.png",
+      "sha256": "f1d95bc652ac8bb99b57bd0e5aa8cb97b0114129f127c1d707cad85042b6aa31",
+      "bytes": 197755
+    },
+    "client-b-api-A09.png": {
+      "file": "client-b-api-A09.png",
+      "sha256": "a6991dc33321cb3ed83509af4a5d2a7801301ceb27c4d5495e7107121f32ecaa",
+      "bytes": 210196
+    },
+    "client-b-api-configure_on-B.png": {
+      "file": "client-b-api-configure_on-B.png",
+      "sha256": "094e1a4773b958e698938b00a4f3caad89060238dbd184b6f774ad492a33a5ad",
+      "bytes": 131093
+    },
+    "client-b-api-A08.png": {
+      "file": "client-b-api-A08.png",
+      "sha256": "a69c37f549b75556880cd28c334672030946f1fdaa078e49d3af2d2792103e38",
+      "bytes": 208512
+    },
+    "client-b-api-A02.png": {
+      "file": "client-b-api-A02.png",
+      "sha256": "f3affd58ddacc22c4540a01a4ef2bfd70e57876ebe5f444085aaa56168f491e5",
+      "bytes": 239724
+    },
+    "client-b-api-configure-B.png": {
+      "file": "client-b-api-configure-B.png",
+      "sha256": "78d5c3ed3978173ceee505afed186867ec851cf68a7a5800f2b073c7c7160ab0",
+      "bytes": 111593
+    },
+    "client-b-api-A07.png": {
+      "file": "client-b-api-A07.png",
+      "sha256": "a81e3b00e797cfe9682a4180452c51de5fdb03d28d65cc6911c1b27582f9e39a",
+      "bytes": 189975
+    }
+  },
+  "provenance": {
+    "acceptance_helper": {
+      "path": "release/0.2.1/evidence/release021-api-multiplayer-PINOUT-JAVA/helper-provenance/helper.jar",
+      "sha256": "2668b22b86e9326a0150b8c33577ea281fd0fddaed1064392503cd8ffb0a810e",
+      "bytes": 39050
+    },
+    "acceptance_helper_sources": [
+      {
+        "path": "release/0.2.1/evidence/release021-api-multiplayer-PINOUT-JAVA/helper-provenance/inputs/tools/client_acceptance/api_multiplayer.gradle",
+        "sha256": "6a22f6cc1cad99e654e90fab6d9ea9604cbdda218e9aef01aa5d12017fab089b",
+        "bytes": 10530,
+        "source_path": "tools/client_acceptance/api_multiplayer.gradle",
+        "kind": "init"
+      },
+      {
+        "path": "release/0.2.1/evidence/release021-api-multiplayer-PINOUT-JAVA/helper-provenance/inputs/tools/client_acceptance/resources/META-INF/neoforge.mods.toml",
+        "sha256": "d493caee15dfd18d8242f2c03748fde524fd9f0774f12813c80e73f4eef25ad6",
+        "bytes": 354,
+        "source_path": "tools/client_acceptance/resources/META-INF/neoforge.mods.toml",
+        "kind": "resource"
+      },
+      {
+        "path": "release/0.2.1/evidence/release021-api-multiplayer-PINOUT-JAVA/helper-provenance/inputs/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ApiWorkshopClientAcceptance.java",
+        "sha256": "60cd7f55c989a1094cff4155c6f80de01b050d1853e1422ca4b72f8a28755abf",
+        "bytes": 29972,
+        "source_path": "tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ApiWorkshopClientAcceptance.java",
+        "kind": "java"
+      },
+      {
+        "path": "release/0.2.1/evidence/release021-api-multiplayer-PINOUT-JAVA/helper-provenance/inputs/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ExpandedClientAcceptance.java",
+        "sha256": "93598b6e21d46b850ef75336485e17e1e268c08e8a77347294d57141787e90b3",
+        "bytes": 34837,
+        "source_path": "tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ExpandedClientAcceptance.java",
+        "kind": "java"
+      }
+    ],
+    "launch_descriptor": {
+      "path": "release/0.2.1/evidence/release021-api-multiplayer-PINOUT-JAVA/helper-provenance/launch.json.gz",
+      "sha256": "dc3676225557764bfc22fda0cc337be1890d6f9050b9a4646febb665371a5f93",
+      "bytes": 1347
+    }
+  },
+  "real_clients": [
+    "WWPG_A",
+    "WWPG_B"
+  ],
+  "real_tcp_clients": true,
+  "processes": {
+    "server": {
+      "pid": 15628,
+      "exit_code": 0
+    },
+    "client-a": {
+      "pid": 34368,
+      "exit_code": 0
+    },
+    "client-b": {
+      "pid": 58856,
+      "exit_code": 0
+    }
+  },
+  "elapsed_seconds": 214.81
+}

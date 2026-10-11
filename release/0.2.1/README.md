@@ -15,3 +15,6 @@ downloads group worlds, the developer SDK, verification records and checksums.
 [Dependencies](dependencies.json), [verification](verification.json),
 [download hashes and sizes](download-layout.json) and [release notes](RELEASE_NOTES.md)
 record the published files. Earlier releases and their evidence are unchanged.
+
+The [provenance guide](PROVENANCE.md) explains where to find the complete test
+inputs, logs and screenshots inside the verification archive.

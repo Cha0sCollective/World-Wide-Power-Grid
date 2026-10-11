@@ -1,0 +1,289 @@
+{
+  "schema": 1,
+  "target": "0.2.1",
+  "api_version": "1.0.0",
+  "publication_acceptance": true,
+  "implementation_source_sha": "39df6fa087d0bbc4601d9aab40d76105895a1e7a",
+  "runtime_artifact": {
+    "path": "build/frozen-0.2.1/wwpg-0.2.1.jar",
+    "sha256": "7c852948a308f22946637df1dcecee7ade680ff7f4e0906d95a1425df14212dd",
+    "bytes": 3534944
+  },
+  "frozen_artifact_lock": {
+    "path": "build/frozen-0.2.1/artifact-lock.json",
+    "sha256": "b08419d388f338720b48ed0c53a5183912e25fa86809e9d779f380720381ab27",
+    "bytes": 2549
+  },
+  "platform": {
+    "minecraft": "1.21.1",
+    "java": 21,
+    "compile_neoforge": "21.1.231",
+    "tested_neoforge": [
+      "21.1.231",
+      "21.1.248"
+    ],
+    "create": "6.0.10-280"
+  },
+  "required_mod_artifacts": [
+    {
+      "role": "cee",
+      "version": "1.21.1-1.1.3",
+      "coordinate": "maven.modrinth:qYJdIoAx:KWxEmmON",
+      "url": "https://cdn.modrinth.com/data/qYJdIoAx/versions/KWxEmmON/electroenergetics-1.21.1-1.1.3.jar",
+      "sha256": "ae7ea74b7b00f175daa5a60a953a6d57f7f775aed0b642a1e9f80c3865cf8be7",
+      "source": "https://github.com/george8188625/Create-Electro-Energetics/tree/cf855615a611acea5d43e62398087d68cb5ef840",
+      "source_note": "Stable 1.1.x source at the 1.1.3 publication; the development branch uses a different property API.",
+      "installation": "mods directory on client and server"
+    },
+    {
+      "role": "pg",
+      "version": "0.6.2",
+      "coordinate": "curse.maven:power-grid-1321420:8880715",
+      "url": "https://mediafilez.forgecdn.net/files/8880/715/powergrid-mc1.21.1-0.6.2.jar",
+      "sha256": "e40d67a874431925d502af88e85064883c67936cfd689033d7df560cffcf19e7",
+      "source": "https://github.com/patryk3211/PowerGrid/tree/0938be067fb71f311b3e5fd6c5f7cdaed722e241",
+      "source_note": "Minecraft 1.21.1 source at the published artifact. The generic v0.6.2 tag targets 1.20.1.",
+      "installation": "mods directory on client and server"
+    },
+    {
+      "role": "create",
+      "version": "6.0.10-280",
+      "coordinate": "com.simibubi.create:create-1.21.1:6.0.10-280",
+      "url": "https://maven.createmod.net/com/simibubi/create/create-1.21.1/6.0.10-280/create-1.21.1-6.0.10-280.jar",
+      "sha256": "192c7b0be13f523dcec9a7a2393bbc2614c3c9bd3edb1f7720a97bcd4f0b87a7",
+      "source_note": "Published full Create release. All 2692 Create classes are byte-identical to the slim development artifact. Bundled Registrate, Ponder and Flywheel versions match the fixed development runtime.",
+      "installation": "mods directory on client and server"
+    },
+    {
+      "role": "architectury",
+      "version": "13.0.8",
+      "coordinate": "dev.architectury:architectury-neoforge:13.0.8",
+      "url": "https://maven.architectury.dev/dev/architectury/architectury-neoforge/13.0.8/architectury-neoforge-13.0.8.jar",
+      "sha256": "2eb06668281be9c57ed6ba8b2ca39b155567063c3096aa94a1c2140694f787df",
+      "bytes": 591636,
+      "installation": "mods directory on client and server",
+      "provenance": "Resolved published NeoForge artifact from the Maven coordinate and repository configured in build.gradle; jar metadata identifies architectury 13.0.8."
+    }
+  ],
+  "optional_mod_artifacts": [
+    {
+      "role": "pinout",
+      "version": "0.2.1",
+      "coordinate": "maven.modrinth:sMa4MaGz:UJtJCpBi",
+      "sha256": "d31c19c3c8aefb512922bf8086146127cad7ef9100d929a8fddcc2ab133fdd4a",
+      "download": "https://cdn.modrinth.com/data/sMa4MaGz/versions/UJtJCpBi/pinout-0.2.1.jar",
+      "source": "https://github.com/INEEDCHATPROGRAAAAAMS/CC-cpg-pinout/tree/590e86b4bd437cff33246fda23b0c14fe6272d04",
+      "source_note": "Reference source; published jar metadata and bytecode are authoritative."
+    },
+    {
+      "role": "computercraft",
+      "version": "1.120.2",
+      "coordinate": "maven.modrinth:gu7yAYhd:1ewzHZYg",
+      "sha256": "e8651fe24b384e925e563c9ad077644744474e2e7c0adb8e6d5b4757598dce9f",
+      "download": "https://cdn.modrinth.com/data/gu7yAYhd/versions/1ewzHZYg/cc-tweaked-1.21.1-forge-1.120.2.jar",
+      "source": "https://github.com/cc-tweaked/CC-Tweaked/releases/tag/v1.120.2"
+    }
+  ],
+  "profiles": {
+    "BASE": {
+      "required_roles": [
+        "cee",
+        "pg",
+        "create",
+        "architectury"
+      ],
+      "optional_roles": [],
+      "requires_pinout_or_computercraft": false
+    },
+    "PINOUT": {
+      "required_roles": [
+        "cee",
+        "pg",
+        "create",
+        "architectury",
+        "pinout",
+        "computercraft"
+      ],
+      "optional_roles": [],
+      "requires_pinout_or_computercraft": true
+    }
+  },
+  "native_backend": {
+    "default": "NATIVE",
+    "alternative": "JAVA",
+    "binary_donor": {
+      "role": "pg_native_reference",
+      "version": "0.6.1",
+      "coordinate": "curse.maven:power-grid-1321420:8738576",
+      "url": "https://mediafilez.forgecdn.net/files/8738/576/powergrid-mc1.21.1-0.6.1.jar",
+      "sha256": "b2835c36af6794a963737c617b5f9dd6b41aba5078d418c88847193fbcf702e5",
+      "source_note": "Native v7 binary donor only; this mod jar is never loaded. NativeMNA.class is byte-identical to the 0.6.2 interface.",
+      "installation": "NEVER install this jar; build-time native-v7 binary donor only"
+    },
+    "binaries": [
+      {
+        "entry": "native/wwpg/windows/libpowergridNative7.dll",
+        "sha256": "3150ba018b68ef173332a31b041b25cd8c6501394c4e9222aaa4c3ac9eeb16f4"
+      },
+      {
+        "entry": "native/wwpg/linux/libpowergridNative7.so",
+        "sha256": "c90e98869ed32ed8bff68aa5a856f4507ca09025a6152d9df718115637c8e837"
+      }
+    ],
+    "distribution": "WWPG includes the donor's matching native-v7 binaries and license notice; Power Grid 0.6.2 remains the installed PG mod. Java is the fallback backend."
+  },
+  "upstream_pins": [
+    {
+      "path": "release/artifacts.json",
+      "sha256": "eed4abcd082ef9d02c7313c66ee6ff8fa5f890e62f4a5afe60404807e262075f",
+      "bytes": 2574
+    },
+    {
+      "path": "release/optional-artifacts.json",
+      "sha256": "e0ab7a8f8098c5bb11b3351816aabefe3e64b20625c0efbea824106372f6eb0c",
+      "bytes": 1018
+    }
+  ],
+  "compatibility_policy": "Minimum-only declarations permit newer NeoForge, Create, CEE and Power Grid releases for player testing. Minecraft remains 1.21.1. Only listed combinations are verified.",
+  "sdk": {
+    "coordinates": [
+      "org.cha0scollective.wwpg:wwpg-api:1.0.0",
+      "org.cha0scollective.wwpg:wwpg-cee-api:1.0.0"
+    ],
+    "installation": "Compile-only developer artifacts. Do not place API, sources, or Javadoc jars in the Minecraft mods directory; WWPG's runtime jar embeds the APIs.",
+    "release_repository_zip": "wwpg-api-1.0.0-maven.zip"
+  },
+  "redistribution": "This manifest links upstream releases and records checksums. Upstream mod jars are not WWPG release assets.",
+  "accepted_manifest": "release/0.2.1/verification.json",
+  "runtime_declarations": [
+    {
+      "modId": "neoforge",
+      "type": "required",
+      "versionRange": "[21.1.231,)",
+      "ordering": "NONE",
+      "side": "BOTH"
+    },
+    {
+      "modId": "minecraft",
+      "type": "required",
+      "versionRange": "[1.21.1]",
+      "ordering": "NONE",
+      "side": "BOTH"
+    },
+    {
+      "modId": "create",
+      "type": "required",
+      "versionRange": "[6.0.10,)",
+      "ordering": "AFTER",
+      "side": "BOTH"
+    },
+    {
+      "modId": "electroenergetics",
+      "type": "required",
+      "versionRange": "[1.21.1-1.1.3,)",
+      "ordering": "AFTER",
+      "side": "BOTH"
+    },
+    {
+      "modId": "powergrid",
+      "type": "required",
+      "versionRange": "[0.6.2,)",
+      "ordering": "AFTER",
+      "side": "BOTH"
+    }
+  ],
+  "workshop_example_mods": [
+    {
+      "role": "example",
+      "artifact": {
+        "path": "build/frozen-0.2.1/wwpg-api-example-1.0.0.jar",
+        "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+        "bytes": 52081
+      },
+      "mods": [
+        {
+          "modId": "wwpg_api_example",
+          "version": "1.0.0",
+          "displayName": "WWPG API Example",
+          "description": "Independent example of stationary electrical machines using WWPG API 1.0."
+        }
+      ],
+      "dependencies": {
+        "wwpg_api_example": [
+          {
+            "modId": "neoforge",
+            "type": "required",
+            "versionRange": "[21.1.231,)",
+            "side": "BOTH"
+          },
+          {
+            "modId": "minecraft",
+            "type": "required",
+            "versionRange": "[1.21.1]",
+            "side": "BOTH"
+          },
+          {
+            "modId": "wwpg",
+            "type": "required",
+            "versionRange": "[0.2.0,)",
+            "ordering": "AFTER",
+            "side": "BOTH"
+          }
+        ]
+      }
+    },
+    {
+      "role": "upstream_example",
+      "artifact": {
+        "path": "build/frozen-0.2.1/wwpg-upstream-api-example-1.0.0.jar",
+        "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+        "bytes": 45633
+      },
+      "mods": [
+        {
+          "modId": "wwpg_api_upstream",
+          "version": "1.0.0",
+          "displayName": "WWPG Upstream API Example",
+          "description": "Independent CEE panel attachment/property adapter and native Power Grid board component examples for WWPG API 1.0."
+        }
+      ],
+      "dependencies": {
+        "wwpg_api_upstream": [
+          {
+            "modId": "neoforge",
+            "type": "required",
+            "versionRange": "[21.1.231,)",
+            "side": "BOTH"
+          },
+          {
+            "modId": "minecraft",
+            "type": "required",
+            "versionRange": "[1.21.1]",
+            "side": "BOTH"
+          },
+          {
+            "modId": "wwpg",
+            "type": "required",
+            "versionRange": "[0.2.0,)",
+            "ordering": "AFTER",
+            "side": "BOTH"
+          },
+          {
+            "modId": "electroenergetics",
+            "type": "required",
+            "versionRange": "[1.21.1-1.1.3,)",
+            "ordering": "AFTER",
+            "side": "BOTH"
+          },
+          {
+            "modId": "powergrid",
+            "type": "required",
+            "versionRange": "[0.6.2,)",
+            "ordering": "AFTER",
+            "side": "BOTH"
+          }
+        ]
+      }
+    }
+  ]
+}

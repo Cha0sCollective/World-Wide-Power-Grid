@@ -53,7 +53,7 @@ Both example add-ons also built independently from their downloadable source
 and Maven archives. API 1.0.0 establishes the first published API contract.
 
 For maintainers, the detailed [verification record](../release/0.2.1/verification.json)
-retain exact versions, hashes and results. There are 204 base checks or 208 with
+retains exact versions, hashes and results. There are 204 base checks or 208 with
 Pinout, plus 34 extension/lifecycle checks and 62 Java unit checks per CI job.
 These are test counts, not counts of items in the game.
 
