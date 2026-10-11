@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "source": "wwpg-beta5-fuse-holders-player-save.jar",
+  "source_sha256": "bfc789c4d41052eba3078de6b9e86ff40b9c7553b02c996e332ee99e0dbc3736",
+  "control": "wwpg-beta5-holder-player-save-control.jar",
+  "control_sha256": "edc88023ed2479fd19d0a7fea27e5d5a445c0461d419d2e9bd985ec59e7188f4",
+  "only_changed_entry": "wwpg.mixins.json",
+  "removed_mixin": "CeeFuseHolderPersistenceMixin",
+  "preserved": "Native ticking readiness fix, fuse identity fix, all electrical models and exact player edit fixture"
+}

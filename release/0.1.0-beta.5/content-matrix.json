@@ -708,7 +708,8 @@
       "status": "unverified",
       "fixtures": [
         "ceeFuseTripsAndRepairRestoresPgLoad",
-        "fuseTripAndNativeRepairMatchPinnedUpstreamWithinOneTick"
+        "fuseTripAndNativeRepairMatchPinnedUpstreamWithinOneTick",
+        "nativeFuseFailureAndRepeatedRepairRetainBothWireSystems"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
@@ -728,7 +729,8 @@
         "restartRetainsPanelTerminalsBoardIdentityAndCharge": "src/main/java/org/cha0scollective/wwpg/gametest/ElectronicsPersistenceGameTests.java",
         "identicalCoordinatesKeepSeparateDimensionTopology": "src/main/java/org/cha0scollective/wwpg/gametest/DimensionGameTests.java",
         "ceeWireOverloadBreaksAndRepairRejoinsPgCircuit": "src/main/java/org/cha0scollective/wwpg/gametest/WireFailureGameTests.java",
-        "fuseTripAndNativeRepairMatchPinnedUpstreamWithinOneTick": "src/main/java/org/cha0scollective/wwpg/gametest/NativeReferenceTimingGameTests.java"
+        "fuseTripAndNativeRepairMatchPinnedUpstreamWithinOneTick": "src/main/java/org/cha0scollective/wwpg/gametest/NativeReferenceTimingGameTests.java",
+        "nativeFuseFailureAndRepeatedRepairRetainBothWireSystems": "src/main/java/org/cha0scollective/wwpg/gametest/FuseVariantGameTests.java"
       },
       "baseline_status": "verified"
     },
@@ -770,14 +772,17 @@
       "id": "electroenergetics:fuse_holder",
       "registry": "block",
       "category": "controls",
-      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
+      "model": "Native fuse (rating, thermal trip, switching history), cut-off switch (native arc/resistance history), indicator (configured resistance and abs(V)/70 brightness), or copper bypass (0.1 ohm).",
       "model_source": "src/main/java/com/george_vi/electroenergetics/content/fuse/FuseHolderBlock.java",
-      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
-      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
-      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "terminals": "First slot: native nodes 1 and 3. Second slot: native nodes 0 and 2. Independent inserts share the block but retain separate electrical properties.",
+      "gameplay": "Install and replace native items in either slot; toggle a held switch, dye the indicator, trip and replace a rated fuse, or conduct through the copper bypass. Native wrench removes the switch and indicator.",
+      "acceptance_circuit": "PG supply -> CEE held insert -> PG load using both wire systems; independent second slot, signed brightness/voltage, item costs/drops, unchanged wire identities, native serialization, three cold restarts and five actual delayed-entity chunk cycles.",
       "status": "unverified",
       "fixtures": [
-        "ceeHeldFuseNativeInsertionTripsMixedLoad"
+        "ceeHeldFuseNativeInsertionTripsMixedLoad",
+        "nativeCopperBypassReplacementAndHeldSwitchOperateMixedLoad",
+        "nativeHeldIndicatorColorBrightnessAndIndependentSlotsSurviveSerialization",
+        "nativeHeldFuseTripsReturnsBrokenItemAndReplacementReusesWires"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
@@ -787,7 +792,8 @@
         "restartPreservesBothWireSystemsAndCapacitor",
         "restartRetainsPanelTerminalsBoardIdentityAndCharge",
         "identicalCoordinatesKeepSeparateDimensionTopology",
-        "ceeWireOverloadBreaksAndRepairRejoinsPgCircuit"
+        "ceeWireOverloadBreaksAndRepairRejoinsPgCircuit",
+        "allNativeHeldComponentsSurviveColdRestartAndFiveActualChunkCycles"
       ],
       "fixture_sources": {
         "ceeHeldFuseNativeInsertionTripsMixedLoad": "src/main/java/org/cha0scollective/wwpg/gametest/CeeAuxiliaryGameTests.java",
@@ -796,9 +802,31 @@
         "restartPreservesBothWireSystemsAndCapacitor": "src/main/java/org/cha0scollective/wwpg/gametest/PersistenceGameTests.java",
         "restartRetainsPanelTerminalsBoardIdentityAndCharge": "src/main/java/org/cha0scollective/wwpg/gametest/ElectronicsPersistenceGameTests.java",
         "identicalCoordinatesKeepSeparateDimensionTopology": "src/main/java/org/cha0scollective/wwpg/gametest/DimensionGameTests.java",
-        "ceeWireOverloadBreaksAndRepairRejoinsPgCircuit": "src/main/java/org/cha0scollective/wwpg/gametest/WireFailureGameTests.java"
+        "ceeWireOverloadBreaksAndRepairRejoinsPgCircuit": "src/main/java/org/cha0scollective/wwpg/gametest/WireFailureGameTests.java",
+        "nativeCopperBypassReplacementAndHeldSwitchOperateMixedLoad": "src/main/java/org/cha0scollective/wwpg/gametest/FuseHolderWorkflowGameTests.java",
+        "nativeHeldIndicatorColorBrightnessAndIndependentSlotsSurviveSerialization": "src/main/java/org/cha0scollective/wwpg/gametest/FuseHolderWorkflowGameTests.java",
+        "nativeHeldFuseTripsReturnsBrokenItemAndReplacementReusesWires": "src/main/java/org/cha0scollective/wwpg/gametest/FuseHolderWorkflowGameTests.java",
+        "allNativeHeldComponentsSurviveColdRestartAndFiveActualChunkCycles": "src/main/java/org/cha0scollective/wwpg/gametest/FuseHolderWorkflowGameTests.java"
       },
-      "baseline_status": "verified"
+      "baseline_status": "verified",
+      "behaviors": [
+        {
+          "registry": "fuse_holdable",
+          "id": "electroenergetics:copper_conductor"
+        },
+        {
+          "registry": "fuse_holdable",
+          "id": "electroenergetics:fuse"
+        },
+        {
+          "registry": "fuse_holdable",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "fuse_holdable",
+          "id": "electroenergetics:indicator_bulb"
+        }
+      ]
     },
     {
       "id": "electroenergetics:cut_off_switch",

@@ -3980,6 +3980,38 @@
       "implementation": "org.patryk3211.powergrid.circuits.components.ModularDisplayComponent",
       "disposition": "functional_behavior",
       "behavior": "powergrid:display_module"
+    },
+    {
+      "registry": "fuse_holdable",
+      "id": "electroenergetics:copper_conductor",
+      "implementation": "com.george_vi.electroenergetics.content.fuse.fuse_held.FuseHoldable$CopperConductor",
+      "disposition": "functional_behavior",
+      "behavior": "electroenergetics:fuse_holder",
+      "reason": "Native installed fuse-holder insert with its own electrical behavior"
+    },
+    {
+      "registry": "fuse_holdable",
+      "id": "electroenergetics:fuse",
+      "implementation": "com.george_vi.electroenergetics.content.fuse.fuse_held.FuseHeldFuse",
+      "disposition": "functional_behavior",
+      "behavior": "electroenergetics:fuse_holder",
+      "reason": "Native installed fuse-holder insert with its own electrical behavior"
+    },
+    {
+      "registry": "fuse_holdable",
+      "id": "electroenergetics:cut_off_switch",
+      "implementation": "com.george_vi.electroenergetics.content.fuse.fuse_held.FuseHeldSwitch",
+      "disposition": "functional_behavior",
+      "behavior": "electroenergetics:fuse_holder",
+      "reason": "Native installed fuse-holder insert with its own electrical behavior"
+    },
+    {
+      "registry": "fuse_holdable",
+      "id": "electroenergetics:indicator_bulb",
+      "implementation": "com.george_vi.electroenergetics.content.fuse.fuse_held.FuseHeldIndicatorBulb",
+      "disposition": "functional_behavior",
+      "behavior": "electroenergetics:fuse_holder",
+      "reason": "Native installed fuse-holder insert with its own electrical behavior"
     }
   ],
   "note": "Accounting only. Registry presence does not establish functional acceptance."

@@ -13,7 +13,8 @@
         "Separate BASE and PINOUT profiles",
         "Optional artifact and checksum lock",
         "Eight CI platform/backend/profile combinations",
-        "Fresh graphical BASE/native and PINOUT/Java startup and 69-view legacy-yard regression"
+        "Fresh graphical BASE/native and PINOUT/Java startup and 69-view legacy-yard regression",
+        "All four native CEE FuseHoldable map entries included: 523 BASE and 525 PINOUT registry entries"
       ],
       "remaining": [
         "Complete behavior expectations, terminal models and station assignments"
@@ -29,7 +30,11 @@
         "Native saved-design copying, assembly, placement and power fixture",
         "Five actual chunk cycles with delayed cord entity loading",
         "Native banner/damper installation, patterns, overlap rejection, wrench removal and cutter/spool recovery",
-        "Native stationary catenary placement, four styles and spool recovery"
+        "Native stationary catenary placement, four styles and spool recovery",
+        "Reproduced bare-fuse block-variant wire loss on native and Java; preserve existing endpoints through native failure/repair, but cut wires on actual removal",
+        "Reproduced changed native held-insert NBT not scheduling a chunk save; save only changed data and native player edits",
+        "Native held bypass, switch, indicator and fuse installation/removal/replacement; both slots, dye, ratings and native drops",
+        "All four inserts pass five actual delayed-entity chunk cycles and three consecutive cold processes locally on both solvers, with complete pre-solve native NBT equality"
       ],
       "remaining": [
         "Graphical design editing, saving and reopening",
@@ -58,7 +63,8 @@
         "Actual linked Nether portal assembly, bidirectional mixed power, source removal and portal disruption",
         "Reproduced PG-only split-controller shutdown instability and corrected synchronous cross-dimension substep scheduling",
         "Reproduced stale native link after actual end unload and detached through the native link table",
-        "Five actual independent end unload/reload cycles and three cold restarts locally on native and Java, with delayed entities and pre-solve serialized native history"
+        "Five actual independent end unload/reload cycles and three cold restarts locally on native and Java, with delayed entities and pre-solve serialized native history",
+        "Traced an unintended CEE zero-power commit after native PG block ticking stopped but entity IO remained loaded; device preparation now requires native block ticking readiness"
       ],
       "remaining": [
         "CRT graphical beams/encasing and punch-card editing",
