@@ -1,6 +1,7 @@
 """Reconcile actual pinned registries; never certify content from registry presence."""
 import argparse
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -62,9 +63,9 @@ REMAINING = {
     "powergrid:plotter": "nativePlotterRecordsMixedWaveform",
 }
 TOOLS = {
-    "electroenergetics:clamp_meter": "handheldMetersReadBothWireSystems",
-    "powergrid:multimeter": "handheldMetersReadBothWireSystems",
-    "electroenergetics:linemans_stick": "nativeWireAttachmentsInstallRemoveAndPersist",
+    "electroenergetics:clamp_meter": ["clampAttachesToPgWireAndReleases"],
+    "powergrid:multimeter": ["multimeterReadsCeeAndMixedTerminals", "multimeterReadsCeeWireAndClearsCutConnection"],
+    "electroenergetics:linemans_stick": ["nativeLinemansStickInstallsAndReturnsOffhandAttachments", "nativeLinemansStickWithOffhandClampMeasuresPgWire"],
     "electroenergetics:wire_damper": "nativeWireAttachmentsInstallRemoveAndPersist",
     "powergrid:wire_cutter": "pgWireTypesRetainCostResistanceAndPlayerCut",
     "powergrid:circuit_schematic": "savedDesignerLoadsBeforeWorldAssignment",
@@ -97,6 +98,13 @@ for row in matrix["content"]:
             row["fixtures"].append("savedDesignerLoadsBeforeWorldAssignment")
             row["fixtures"].append("designerInventoryChangesScheduleAWorldSave")
             row["fixtures"].append("savedDesignReopensCopiesAssemblesAndPowersAfterRestart")
+        if row["id"] == "electroenergetics:duplex_wire_termination":
+            row["fixtures"] += ["nativeDuplexSpoolConnectsBothConductorsAndRecoversOnce", "nativeBundleNodeHelpersMatchEveryRegisteredOrientation", "duplexLimitsCancellationStaleSelectionAndBlockRemovalRetainNativeCosts"]
+            row["lifecycle_fixtures"] = ["duplexAndLvBulbRetainNativeStateAcrossFiveActualCyclesAndColdRestart"]
+            row["model"] = "One native saved/rendered duplex cable with two independently solved conductors using CEE's configured per-length resistance."
+            row["terminals"] = "Native root and two accessible conductor IDs retain facing, roll and flip identity."
+            row["gameplay"] = "A mixed supply and return light a native 12 V bulb through one cable; spool placement, recovery and cutting retain native costs."
+            row["acceptance_circuit"] = row["gameplay"]
 
 for entry in snapshot["entries"]:
     key = (entry["registry"], entry["id"])
@@ -131,9 +139,21 @@ for entry in snapshot["entries"]:
         elif entry["block"] in DECORATIVE: row.update(disposition="native_placement", reason="Native decorative block item")
         else: raise SystemExit(f"Unaccounted block item: {entry}")
     elif entry["registry"] == "item" and ident in TOOLS:
-        row.update(disposition="native_workflow", fixture=TOOLS[ident])
+        fixtures = TOOLS[ident] if isinstance(TOOLS[ident], list) else [TOOLS[ident]]
+        row.update(disposition="native_workflow", fixture=fixtures[0], fixtures=fixtures)
     elif entry["registry"] == "wire_type" or entry["implementation"].endswith(("WireItem", "CordItem", "WireSpoolItem", "BundledWireItem", "EmptySpoolItem")):
-        row.update(disposition="stationary_wiring", fixture="allStationaryWireFamiliesRetainNativeRules")
+        fixture = "allStationaryWireFamiliesRetainNativeRules"
+        if ident in {"electroenergetics:duplex", "electroenergetics:bundle_conductor", "electroenergetics:duplex_wire_spool"}:
+            fixture = "nativeDuplexSpoolConnectsBothConductorsAndRecoversOnce"
+        elif ident == "electroenergetics:hanging_glass_insulator":
+            fixture = "nativeHangingInsulatorSpoolRecognizesFreshPgTerminal"
+        elif ident == "powergrid:copper_cord":
+            fixture = "ceePowerCrossesPgCordJunction"
+        elif ident == "powergrid:iron_wire":
+            fixture = "pgIronWireUsesCeeTerminalsWithoutChangingNativePgRestrictions"
+        elif ident.startswith("powergrid:"):
+            fixture = "pgWireTypesRetainCostResistanceAndPlayerCut"
+        row.update(disposition="stationary_wiring", fixture=fixture)
     elif entry["registry"] == "wire_attachment" and ident.endswith(":empty"):
         row.update(disposition="empty_registry_sentinel", reason="Empty wire attachment; no native installation item")
     elif entry["registry"] == "wire_attachment":
@@ -153,6 +173,25 @@ for entry in snapshot["entries"]:
 
 destination = ROOT / "release/0.1.0-beta.5"
 destination.mkdir(parents=True, exist_ok=True)
+# Keep references aligned with the current fixtures, including optional-profile
+# tests. A matrix entry cannot quietly name a removed or nonexistent check.
+fixture_sources = {}
+for source in (ROOT / "src/main/java/org/cha0scollective/wwpg/gametest").glob("*.java"):
+    for name in re.findall(r"public\s+static\s+void\s+(\w+)\s*\(\s*GameTestHelper\b", source.read_text()):
+        fixture_sources[name] = source.relative_to(ROOT).as_posix()
+for row in matrix["content"]:
+    names = list(dict.fromkeys(row.get("fixtures", []) + row.get("lifecycle_fixtures", [])))
+    missing = [name for name in names if name not in fixture_sources]
+    if missing:
+        raise SystemExit(f"Missing fixture for {row['id']}: {missing}")
+    row["fixture_sources"] = {name: fixture_sources[name] for name in names}
+for row in audit:
+    names = row.get("fixtures", [row["fixture"]] if "fixture" in row else [])
+    missing = [name for name in names if name not in fixture_sources]
+    if missing:
+        raise SystemExit(f"Missing workflow fixture for {row['id']}: {missing}")
+    if names:
+        row["fixture_sources"] = {name: fixture_sources[name] for name in names}
 (destination / "registry-inventory.json").write_text(json.dumps(dict(schema=1, profile=snapshot["profile"],
     entries=audit, note="Accounting only. Registry presence does not establish functional acceptance."), indent=2) + "\n", newline="\n")
 (destination / "content-matrix.json").write_text(json.dumps(matrix, indent=2) + "\n", newline="\n")

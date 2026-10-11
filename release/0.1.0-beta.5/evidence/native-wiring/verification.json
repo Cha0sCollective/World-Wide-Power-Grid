@@ -1,0 +1,260 @@
+{
+  "schema": 1,
+  "target": "0.1.0-beta.5",
+  "platform": "Windows",
+  "complete_release_acceptance": false,
+  "artifact": {
+    "name": "wwpg-beta5-wiring-complete.jar",
+    "sha256": "08bb020e3e4d88825f912685145bf4875e69d60c643411e9107dc39686326d95"
+  },
+  "checks": [
+    {
+      "profile": "BASE",
+      "backend": "NATIVE",
+      "cold_pass": 0,
+      "phase": "SETUP",
+      "required_tests_passed": 11,
+      "actual_duplex_unloads": 5,
+      "file": "beta5-wiring-complete-BASE-NATIVE-0.log.gz",
+      "sha256": "a1ce9aac064e1e985556559710b81b801f440f2e9879c2b3ea4a370f5f3e38ec",
+      "raw_sha256": "c67040229001299ba9d42bc8ce9093a4d4311204283a2f4354045985cde5de30"
+    },
+    {
+      "profile": "BASE",
+      "backend": "JAVA",
+      "cold_pass": 0,
+      "phase": "SETUP",
+      "required_tests_passed": 11,
+      "actual_duplex_unloads": 5,
+      "file": "beta5-wiring-complete-BASE-JAVA-0.log.gz",
+      "sha256": "0314de5a78ad6070108576ee94476f30d46e217403b1fb4597d4590d37249c21",
+      "raw_sha256": "d5b722ba081b5be84422d67e0697171d8250fe95a9395e97d8748203b355ce69"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "NATIVE",
+      "cold_pass": 0,
+      "phase": "SETUP",
+      "required_tests_passed": 11,
+      "actual_duplex_unloads": 5,
+      "file": "beta5-wiring-complete-PINOUT-NATIVE-0.log.gz",
+      "sha256": "9d21e9a0d54b67ef8ff47e5f05b7b59d0ffdd8e617fc24190956d7c747236cfc",
+      "raw_sha256": "bb44615a1e3d4a67d75b5a5cde6b0b86b6999f251f335906f7dc3951db919f7e"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "NATIVE",
+      "cold_pass": 1,
+      "phase": "VERIFY",
+      "required_tests_passed": 11,
+      "actual_duplex_unloads": 5,
+      "file": "beta5-wiring-complete-PINOUT-NATIVE-1.log.gz",
+      "sha256": "f6a103331882228aa2b98dd0b198aac277a5c63bf016fbbda4087f5e7816c2c3",
+      "raw_sha256": "da97136868052eb43d853e6ac9442edf2893e68be08d5aa4a3ef57408f82399d"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "NATIVE",
+      "cold_pass": 2,
+      "phase": "VERIFY",
+      "required_tests_passed": 11,
+      "actual_duplex_unloads": 5,
+      "file": "beta5-wiring-complete-PINOUT-NATIVE-2.log.gz",
+      "sha256": "71386f7a6bd063677033bdbb49fdc2063bee76a7eb114f8590efc84f9e6bb47c",
+      "raw_sha256": "ea713fe8aeb81a9d16a49642b52eb4e1c2859b172ead5b7334379e7cb7b49ef7"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "NATIVE",
+      "cold_pass": 3,
+      "phase": "VERIFY",
+      "required_tests_passed": 11,
+      "actual_duplex_unloads": 5,
+      "file": "beta5-wiring-complete-PINOUT-NATIVE-3.log.gz",
+      "sha256": "bb232ba9026f1bd4906fabd970ede995d1b72ca52ebf60f5344a033d111d8505",
+      "raw_sha256": "f73c6e0e68b8e592a833adb49f2514e87eaae424ca330f30517d113b83103487"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "JAVA",
+      "cold_pass": 0,
+      "phase": "SETUP",
+      "required_tests_passed": 11,
+      "actual_duplex_unloads": 5,
+      "file": "beta5-wiring-complete-PINOUT-JAVA-0.log.gz",
+      "sha256": "0e1ef98434bcbc55db2e3aead13d670e68e934bdacd0ddd9eb56caf399c0a27a",
+      "raw_sha256": "7a8d3c7b6925789fcfe8ff1531a27d40e0742e3a039f7fa349ffff0a17ed5221"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "JAVA",
+      "cold_pass": 1,
+      "phase": "VERIFY",
+      "required_tests_passed": 11,
+      "actual_duplex_unloads": 5,
+      "file": "beta5-wiring-complete-PINOUT-JAVA-1.log.gz",
+      "sha256": "bba4d5f05ee3186ed3aaa64f63aacccab21ef3d07b80e2ad16678c9747eec1dc",
+      "raw_sha256": "5a345510b8b9d0337bd51ba1fa200231091129b2293df45b1526e846b2fdc199"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "JAVA",
+      "cold_pass": 2,
+      "phase": "VERIFY",
+      "required_tests_passed": 11,
+      "actual_duplex_unloads": 5,
+      "file": "beta5-wiring-complete-PINOUT-JAVA-2.log.gz",
+      "sha256": "399289092572135a15484ff9ca56136dc0acca9d5e562ecbb1a356839d2a2d5a",
+      "raw_sha256": "2d7e6286e4065cc6fe4f1c59a14b1e76dda5129a85354f11dad553964e989d51"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "JAVA",
+      "cold_pass": 3,
+      "phase": "VERIFY",
+      "required_tests_passed": 11,
+      "actual_duplex_unloads": 5,
+      "file": "beta5-wiring-complete-PINOUT-JAVA-3.log.gz",
+      "sha256": "ea4dd53a96842571f50566cff66e82313484a619f0f202c133dc61e46ec50677",
+      "raw_sha256": "d85ac4561a8d4b23e32471234cc8b2704369c2f98803d45d8c9691fe083db031"
+    }
+  ],
+  "controls": [
+    {
+      "backend": "NATIVE",
+      "expected_failure": true,
+      "cause": "Published native second click accepts both endpoints without creating a cable.",
+      "file": "beta5-bundle-before-NATIVE.log.gz",
+      "sha256": "86726486fa6e2cfff538f3c2d5c8ff06846f4b4ecbfeff8006d777c4f5659d1c",
+      "raw_sha256": "0a31e6f56df0adf91737cbdedb43ffafdc8756dd38ac98672d9942c4a1b5b2c8"
+    },
+    {
+      "backend": "JAVA",
+      "expected_failure": true,
+      "cause": "Published native second click accepts both endpoints without creating a cable.",
+      "file": "beta5-bundle-before-JAVA.log.gz",
+      "sha256": "1a23ae6d4b9043ac3483089b520973220d82dd8eee6ca2425f429f8dfa8e80f8",
+      "raw_sha256": "453d0003f32b55fce716b1721d6167c683c505774f02d4383f17890ac191c828"
+    },
+    {
+      "backend": "NATIVE",
+      "expected_failure": true,
+      "cause": "Native hanging insulator rejects a fresh PG terminal without its CEE endpoint registration.",
+      "file": "beta5-loose-wire-control-NATIVE.log.gz",
+      "sha256": "62fbc16da9348b0136a06120210ed254eeb29997d2befd013185ff278722e6cd",
+      "raw_sha256": "2fb1bb40d61f628b11a944fd4509ce4d700812d2d6ef4787c3f1c9c1b5bf016f"
+    },
+    {
+      "backend": "JAVA",
+      "expected_failure": true,
+      "cause": "Native hanging insulator rejects a fresh PG terminal without its CEE endpoint registration.",
+      "file": "beta5-loose-wire-control-JAVA.log.gz",
+      "sha256": "5f2c825b3a30aac55bc1f35640e2f10ee7c17f9b1e6b979b3b05a37c0ef5ec13",
+      "raw_sha256": "a8f3959637ce2c5e1373efedd2c5614d9eeb308bf8f0961138d509051a74f89e"
+    },
+    {
+      "backend": "NATIVE",
+      "expected_failure": true,
+      "cause": "Native lineman stick with offhand clamp cannot select a PG wire.",
+      "file": "beta5-stick-control-NATIVE.log.gz",
+      "sha256": "8ad3786f8e1bab05dd06b15c2232bc85a0d47a663264b2d5aec05ebd3d7856c5",
+      "raw_sha256": "a2e5abf790c59dcb59ad7cf6b6621b691c0d09b32c68b5bc697346fdfc2a2757"
+    },
+    {
+      "backend": "JAVA",
+      "expected_failure": true,
+      "cause": "Native lineman stick with offhand clamp cannot select a PG wire.",
+      "file": "beta5-stick-control-JAVA.log.gz",
+      "sha256": "6d4aacc132cbdcf0829afa867b3bbbaa6b758da516b736f0fc823067b07c95ad",
+      "raw_sha256": "312cf703fe476356846cfbba2ca8155dbadb13a7650f878728fc495c65682851"
+    }
+  ],
+  "startup_observations": [
+    {
+      "cold_pass": 1,
+      "outcome": "passed",
+      "file": "beta5-pinout-startup-observe-1.log.gz",
+      "sha256": "0103d640e1dd1cc713cbb192a868dbf35f9b3d75b705dd47be5be9d47fffdedc",
+      "raw_sha256": "8d8725c69ba663056e0cc6d0fc44743721d6c593fb5257fceced57e630183ec2",
+      "computers": [
+        {
+          "computer": 0,
+          "report": "pinout-startup-observe-1-0.json",
+          "sha256": "4072cbfe2fe99aa92995a2e0fe2b4e4f34fcff5ed0850bb7213a0cd62fe69a1e"
+        },
+        {
+          "computer": 1,
+          "report": "pinout-startup-observe-1-1.json",
+          "sha256": "0b934096f4da32462dc6a5f893c858967e451609ba2a2abf4d9c1b79811a73d0"
+        }
+      ]
+    },
+    {
+      "cold_pass": 2,
+      "outcome": "failed",
+      "file": "beta5-pinout-startup-observe-2.log.gz",
+      "sha256": "4dad8a491cafeddf41387e7103ed15c0822e83094c11f5c52a68156dd4f7dadf",
+      "raw_sha256": "b49631d0bcc8b68ae0b7c1984aadf17b28581444f4c3a0eac7721862ebed1c89",
+      "computers": [
+        {
+          "computer": 0,
+          "report": "pinout-startup-observe-2-0.json",
+          "sha256": "c93612ca4967a061c9d307808828c02610ac787d4fcef1ef12e53a547c0346c7"
+        },
+        {
+          "computer": 1,
+          "report": "pinout-startup-observe-2-1.json",
+          "sha256": "91ff93e7cb6ec2d297f35bd8f8d6ddd15d946a211eab1b28f40639a08aa70a89"
+        }
+      ]
+    },
+    {
+      "cold_pass": 3,
+      "outcome": "failed",
+      "file": "beta5-pinout-startup-observe-3.log.gz",
+      "sha256": "005329a13fc3304104fab7ae97be8cdfa935bf157c5226124a1228866a4c2ff6",
+      "raw_sha256": "5d71fa9258cd8230c5ff7a6d2ea87581d2fe09d6b8f1d9066a42fb29901e9cd0",
+      "computers": [
+        {
+          "computer": 0,
+          "report": "pinout-startup-observe-3-0.json",
+          "sha256": "8dd18f65d337f91dde5a57ef162c64aef8a610e743ee95e088f623270956e9d3"
+        },
+        {
+          "computer": 1,
+          "report": "pinout-startup-observe-3-1.json",
+          "sha256": "818cd5e982da37b576dc160afd08ffd9872863250864211c445d98f86e92bf28"
+        }
+      ]
+    },
+    {
+      "cold_pass": 4,
+      "outcome": "passed",
+      "file": "beta5-pinout-startup-observe-4.log.gz",
+      "sha256": "102091792dda8315fed2b3ceecb85d20f8087b12f7a7bcf1b22a6bdce1010cf8",
+      "raw_sha256": "c0d77eccbbe2361182fd5065b2ee7121d5ef72d5738558f13622c63ada804107",
+      "computers": [
+        {
+          "computer": 0,
+          "report": "pinout-startup-observe-4-0.json",
+          "sha256": "1ab60aea1b9cfcae6f2aecd4f223ebef5148fedc67e5195292066f986ce5b6a3"
+        },
+        {
+          "computer": 1,
+          "report": "pinout-startup-observe-4-1.json",
+          "sha256": "6842474633c12602176a058739c15ba552091fd946a05598eea92f7b6c3ed785"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Eleven focused checks include one playable yard, four duplex checks and six native wire/bulb/tool checks.",
+    "The single wire-family fixture exercises all 57 ordinary CEE variants, independently; cosmetic variants retain native behavior.",
+    "The published CEE node helper disagrees with its registered geometry. Independent orientation coverage checks 72 native node identities.",
+    "No native bulb or dye hook was added: corrected fixtures follow the actual two-click replacement and native colored-wire arrays.",
+    "Two instrumented cold boots reproduce bulk=0 followed by single=-0.069914047614574315 V; native Lua calls sample separate ticks.",
+    "The later native-wiring jar also runs wwpg volts on actual computer startup; its full-profile and yard checks are recorded separately when complete.",
+    "The historical Windows/native combined Nether-unload assertion failure remains unproven; this stage does not claim to close it.",
+    "Final eight-way packaged acceptance, exact ZIP reopening, graphical and two-real-client checks remain required."
+  ]
+}

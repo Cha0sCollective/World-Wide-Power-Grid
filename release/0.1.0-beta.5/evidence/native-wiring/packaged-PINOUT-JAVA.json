@@ -1,0 +1,50 @@
+[
+  {
+    "schema": 1,
+    "artifact": "wwpg-beta5-wiring-complete.jar",
+    "sha256": "08bb020e3e4d88825f912685145bf4875e69d60c643411e9107dc39686326d95",
+    "profile": "PINOUT",
+    "backend": "JAVA",
+    "phase": "SETUP",
+    "started": "2026-10-11T02-16-35.830512800Z",
+    "namespaces": "wwpg_yard,wwpg_bundle,wwpg_wires",
+    "required_tests_passed": 11,
+    "completed": "2026-10-11T02:17:23.486022200Z"
+  },
+  {
+    "schema": 1,
+    "artifact": "wwpg-beta5-wiring-complete.jar",
+    "sha256": "08bb020e3e4d88825f912685145bf4875e69d60c643411e9107dc39686326d95",
+    "profile": "PINOUT",
+    "backend": "JAVA",
+    "phase": "VERIFY",
+    "started": "2026-10-11T02-17-30.105677300Z",
+    "namespaces": "wwpg_yard,wwpg_bundle,wwpg_wires",
+    "required_tests_passed": 11,
+    "completed": "2026-10-11T02:18:13.949363500Z"
+  },
+  {
+    "schema": 1,
+    "artifact": "wwpg-beta5-wiring-complete.jar",
+    "sha256": "08bb020e3e4d88825f912685145bf4875e69d60c643411e9107dc39686326d95",
+    "profile": "PINOUT",
+    "backend": "JAVA",
+    "phase": "VERIFY",
+    "started": "2026-10-11T02-18-20.491017600Z",
+    "namespaces": "wwpg_yard,wwpg_bundle,wwpg_wires",
+    "required_tests_passed": 11,
+    "completed": "2026-10-11T02:19:03.737835300Z"
+  },
+  {
+    "schema": 1,
+    "artifact": "wwpg-beta5-wiring-complete.jar",
+    "sha256": "08bb020e3e4d88825f912685145bf4875e69d60c643411e9107dc39686326d95",
+    "profile": "PINOUT",
+    "backend": "JAVA",
+    "phase": "VERIFY",
+    "started": "2026-10-11T02-19-10.437195600Z",
+    "namespaces": "wwpg_yard,wwpg_bundle,wwpg_wires",
+    "required_tests_passed": 11,
+    "completed": "2026-10-11T02:19:52.931792500Z"
+  }
+]

@@ -60,7 +60,10 @@
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
-      "baseline_status": "unverified"
+      "baseline_status": "unverified",
+      "fixture_sources": {
+        "nativePoleMountAndInsulatorControlMountedMixedBreaker": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryPoleGameTests.java"
+      }
     },
     {
       "id": "electroenergetics:concrete_pole",
@@ -77,7 +80,10 @@
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
-      "baseline_status": "unverified"
+      "baseline_status": "unverified",
+      "fixture_sources": {
+        "nativeThreeSegmentPoleCarriesMixedPower": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryPoleGameTests.java"
+      }
     },
     {
       "id": "electroenergetics:pole_mount",
@@ -94,7 +100,10 @@
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
-      "baseline_status": "unverified"
+      "baseline_status": "unverified",
+      "fixture_sources": {
+        "nativePoleMountAndInsulatorControlMountedMixedBreaker": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryPoleGameTests.java"
+      }
     },
     {
       "id": "electroenergetics:double_connector",
@@ -236,33 +245,29 @@
       "id": "electroenergetics:duplex_wire_termination",
       "registry": "block",
       "category": "wiring",
-      "model": "Native endpoint geometry, wire resistance, and physical grounding.",
+      "model": "One native saved/rendered duplex cable with two independently solved conductors using CEE's configured per-length resistance.",
       "model_source": "src/main/java/com/george_vi/electroenergetics/content/bundled_wire/BundledWireTerminationBlock.java",
-      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
-      "gameplay": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
-      "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+      "terminals": "Native root and two accessible conductor IDs retain facing, roll and flip identity.",
+      "gameplay": "A mixed supply and return light a native 12 V bulb through one cable; spool placement, recovery and cutting retain native costs.",
+      "acceptance_circuit": "A mixed supply and return light a native 12 V bulb through one cable; spool placement, recovery and cutting retain native costs.",
       "status": "unverified",
       "fixtures": [
-        "stationaryConnectorFamiliesRetainMixedTerminalWiring"
+        "stationaryConnectorFamiliesRetainMixedTerminalWiring",
+        "nativeDuplexSpoolConnectsBothConductorsAndRecoversOnce",
+        "nativeBundleNodeHelpersMatchEveryRegisteredOrientation",
+        "duplexLimitsCancellationStaleSelectionAndBlockRemovalRetainNativeCosts"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
       "lifecycle_fixtures": [
-        "mixedBranchesLoopCutReconnectAndRemoval",
-        "chunkReloadRebindsMixedEndpoints",
-        "restartPreservesBothWireSystemsAndCapacitor",
-        "restartRetainsPanelTerminalsBoardIdentityAndCharge",
-        "identicalCoordinatesKeepSeparateDimensionTopology",
-        "ceeWireOverloadBreaksAndRepairRejoinsPgCircuit"
+        "duplexAndLvBulbRetainNativeStateAcrossFiveActualCyclesAndColdRestart"
       ],
       "fixture_sources": {
         "stationaryConnectorFamiliesRetainMixedTerminalWiring": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryEndpointGameTests.java",
-        "mixedBranchesLoopCutReconnectAndRemoval": "src/main/java/org/cha0scollective/wwpg/gametest/TopologyGameTests.java",
-        "chunkReloadRebindsMixedEndpoints": "src/main/java/org/cha0scollective/wwpg/gametest/PersistenceGameTests.java",
-        "restartPreservesBothWireSystemsAndCapacitor": "src/main/java/org/cha0scollective/wwpg/gametest/PersistenceGameTests.java",
-        "restartRetainsPanelTerminalsBoardIdentityAndCharge": "src/main/java/org/cha0scollective/wwpg/gametest/ElectronicsPersistenceGameTests.java",
-        "identicalCoordinatesKeepSeparateDimensionTopology": "src/main/java/org/cha0scollective/wwpg/gametest/DimensionGameTests.java",
-        "ceeWireOverloadBreaksAndRepairRejoinsPgCircuit": "src/main/java/org/cha0scollective/wwpg/gametest/WireFailureGameTests.java"
+        "nativeDuplexSpoolConnectsBothConductorsAndRecoversOnce": "src/main/java/org/cha0scollective/wwpg/gametest/BundledWireGameTests.java",
+        "nativeBundleNodeHelpersMatchEveryRegisteredOrientation": "src/main/java/org/cha0scollective/wwpg/gametest/BundledWireGameTests.java",
+        "duplexLimitsCancellationStaleSelectionAndBlockRemovalRetainNativeCosts": "src/main/java/org/cha0scollective/wwpg/gametest/BundledWireGameTests.java",
+        "duplexAndLvBulbRetainNativeStateAcrossFiveActualCyclesAndColdRestart": "src/main/java/org/cha0scollective/wwpg/gametest/BundledWireLifecycleGameTests.java"
       },
       "baseline_status": "verified"
     },
@@ -454,7 +459,10 @@
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
-      "baseline_status": "unverified"
+      "baseline_status": "unverified",
+      "fixture_sources": {
+        "nativeCeeCoreAssemblyTransformsMixedPowerAndUsesRadiators": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryDistributionGameTests.java"
+      }
     },
     {
       "id": "electroenergetics:voltage_regulator",
@@ -471,7 +479,10 @@
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
-      "baseline_status": "unverified"
+      "baseline_status": "unverified",
+      "fixture_sources": {
+        "nativeRegulatorStartsAtNeutralAndRegulatesMixedLoad": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryDistributionGameTests.java"
+      }
     },
     {
       "id": "electroenergetics:bulb",
@@ -522,7 +533,10 @@
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
-      "baseline_status": "unverified"
+      "baseline_status": "unverified",
+      "fixture_sources": {
+        "nativeBrokenBulbRepairRestoresMixedPowerWithoutRewiring": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryLightingGameTests.java"
+      }
     },
     {
       "id": "electroenergetics:electric_pump",
@@ -707,9 +721,7 @@
       "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
       "status": "unverified",
       "fixtures": [
-        "ceeFuseTripsAndRepairRestoresPgLoad",
-        "fuseTripAndNativeRepairMatchPinnedUpstreamWithinOneTick",
-        "nativeFuseFailureAndRepeatedRepairRetainBothWireSystems"
+        "ceeFuseTripsAndRepairRestoresPgLoad"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
@@ -728,9 +740,7 @@
         "restartPreservesBothWireSystemsAndCapacitor": "src/main/java/org/cha0scollective/wwpg/gametest/PersistenceGameTests.java",
         "restartRetainsPanelTerminalsBoardIdentityAndCharge": "src/main/java/org/cha0scollective/wwpg/gametest/ElectronicsPersistenceGameTests.java",
         "identicalCoordinatesKeepSeparateDimensionTopology": "src/main/java/org/cha0scollective/wwpg/gametest/DimensionGameTests.java",
-        "ceeWireOverloadBreaksAndRepairRejoinsPgCircuit": "src/main/java/org/cha0scollective/wwpg/gametest/WireFailureGameTests.java",
-        "fuseTripAndNativeRepairMatchPinnedUpstreamWithinOneTick": "src/main/java/org/cha0scollective/wwpg/gametest/NativeReferenceTimingGameTests.java",
-        "nativeFuseFailureAndRepeatedRepairRetainBothWireSystems": "src/main/java/org/cha0scollective/wwpg/gametest/FuseVariantGameTests.java"
+        "ceeWireOverloadBreaksAndRepairRejoinsPgCircuit": "src/main/java/org/cha0scollective/wwpg/gametest/WireFailureGameTests.java"
       },
       "baseline_status": "verified"
     },
@@ -772,17 +782,14 @@
       "id": "electroenergetics:fuse_holder",
       "registry": "block",
       "category": "controls",
-      "model": "Native fuse (rating, thermal trip, switching history), cut-off switch (native arc/resistance history), indicator (configured resistance and abs(V)/70 brightness), or copper bypass (0.1 ohm).",
+      "model": "Upstream resistance and switching state; protection failures commit after the solve.",
       "model_source": "src/main/java/com/george_vi/electroenergetics/content/fuse/FuseHolderBlock.java",
-      "terminals": "First slot: native nodes 1 and 3. Second slot: native nodes 0 and 2. Independent inserts share the block but retain separate electrical properties.",
-      "gameplay": "Install and replace native items in either slot; toggle a held switch, dye the indicator, trip and replace a rated fuse, or conduct through the copper bypass. Native wrench removes the switch and indicator.",
-      "acceptance_circuit": "PG supply -> CEE held insert -> PG load using both wire systems; independent second slot, signed brightness/voltage, item costs/drops, unchanged wire identities, native serialization, three cold restarts and five actual delayed-entity chunk cycles.",
+      "terminals": "Upstream named terminal IDs and geometry; assembly/configuration can change accessible terminals.",
+      "gameplay": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+      "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
       "status": "unverified",
       "fixtures": [
-        "ceeHeldFuseNativeInsertionTripsMixedLoad",
-        "nativeCopperBypassReplacementAndHeldSwitchOperateMixedLoad",
-        "nativeHeldIndicatorColorBrightnessAndIndependentSlotsSurviveSerialization",
-        "nativeHeldFuseTripsReturnsBrokenItemAndReplacementReusesWires"
+        "ceeHeldFuseNativeInsertionTripsMixedLoad"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
@@ -792,8 +799,7 @@
         "restartPreservesBothWireSystemsAndCapacitor",
         "restartRetainsPanelTerminalsBoardIdentityAndCharge",
         "identicalCoordinatesKeepSeparateDimensionTopology",
-        "ceeWireOverloadBreaksAndRepairRejoinsPgCircuit",
-        "allNativeHeldComponentsSurviveColdRestartAndFiveActualChunkCycles"
+        "ceeWireOverloadBreaksAndRepairRejoinsPgCircuit"
       ],
       "fixture_sources": {
         "ceeHeldFuseNativeInsertionTripsMixedLoad": "src/main/java/org/cha0scollective/wwpg/gametest/CeeAuxiliaryGameTests.java",
@@ -802,31 +808,9 @@
         "restartPreservesBothWireSystemsAndCapacitor": "src/main/java/org/cha0scollective/wwpg/gametest/PersistenceGameTests.java",
         "restartRetainsPanelTerminalsBoardIdentityAndCharge": "src/main/java/org/cha0scollective/wwpg/gametest/ElectronicsPersistenceGameTests.java",
         "identicalCoordinatesKeepSeparateDimensionTopology": "src/main/java/org/cha0scollective/wwpg/gametest/DimensionGameTests.java",
-        "ceeWireOverloadBreaksAndRepairRejoinsPgCircuit": "src/main/java/org/cha0scollective/wwpg/gametest/WireFailureGameTests.java",
-        "nativeCopperBypassReplacementAndHeldSwitchOperateMixedLoad": "src/main/java/org/cha0scollective/wwpg/gametest/FuseHolderWorkflowGameTests.java",
-        "nativeHeldIndicatorColorBrightnessAndIndependentSlotsSurviveSerialization": "src/main/java/org/cha0scollective/wwpg/gametest/FuseHolderWorkflowGameTests.java",
-        "nativeHeldFuseTripsReturnsBrokenItemAndReplacementReusesWires": "src/main/java/org/cha0scollective/wwpg/gametest/FuseHolderWorkflowGameTests.java",
-        "allNativeHeldComponentsSurviveColdRestartAndFiveActualChunkCycles": "src/main/java/org/cha0scollective/wwpg/gametest/FuseHolderWorkflowGameTests.java"
+        "ceeWireOverloadBreaksAndRepairRejoinsPgCircuit": "src/main/java/org/cha0scollective/wwpg/gametest/WireFailureGameTests.java"
       },
-      "baseline_status": "verified",
-      "behaviors": [
-        {
-          "registry": "fuse_holdable",
-          "id": "electroenergetics:copper_conductor"
-        },
-        {
-          "registry": "fuse_holdable",
-          "id": "electroenergetics:fuse"
-        },
-        {
-          "registry": "fuse_holdable",
-          "id": "electroenergetics:cut_off_switch"
-        },
-        {
-          "registry": "fuse_holdable",
-          "id": "electroenergetics:indicator_bulb"
-        }
-      ]
+      "baseline_status": "verified"
     },
     {
       "id": "electroenergetics:cut_off_switch",
@@ -1179,9 +1163,7 @@
       "acceptance_circuit": "Charge and discharge into an opposite-mod load; compare substep evolution, then save/restart.",
       "status": "unverified",
       "fixtures": [
-        "accumulatorChargesFromPgAndPowersPgLoad",
-        "accumulatorMixedChargeDischargeMatchesPinnedStorageWithinOnePercent",
-        "pinnedAccumulatorChargeDeltasMatchIndependentEquationWithinOnePercent"
+        "accumulatorChargesFromPgAndPowersPgLoad"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
@@ -1200,9 +1182,7 @@
         "restartPreservesBothWireSystemsAndCapacitor": "src/main/java/org/cha0scollective/wwpg/gametest/PersistenceGameTests.java",
         "restartRetainsPanelTerminalsBoardIdentityAndCharge": "src/main/java/org/cha0scollective/wwpg/gametest/ElectronicsPersistenceGameTests.java",
         "identicalCoordinatesKeepSeparateDimensionTopology": "src/main/java/org/cha0scollective/wwpg/gametest/DimensionGameTests.java",
-        "ceeWireOverloadBreaksAndRepairRejoinsPgCircuit": "src/main/java/org/cha0scollective/wwpg/gametest/WireFailureGameTests.java",
-        "accumulatorMixedChargeDischargeMatchesPinnedStorageWithinOnePercent": "src/main/java/org/cha0scollective/wwpg/gametest/NativeReferenceTimingGameTests.java",
-        "pinnedAccumulatorChargeDeltasMatchIndependentEquationWithinOnePercent": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryAccuracyGameTests.java"
+        "ceeWireOverloadBreaksAndRepairRejoinsPgCircuit": "src/main/java/org/cha0scollective/wwpg/gametest/WireFailureGameTests.java"
       },
       "baseline_status": "verified"
     },
@@ -1360,7 +1340,10 @@
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
-      "baseline_status": "unverified"
+      "baseline_status": "unverified",
+      "fixture_sources": {
+        "nativeCeeCoreAssemblyTransformsMixedPowerAndUsesRadiators": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryDistributionGameTests.java"
+      }
     },
     {
       "id": "electroenergetics:variac",
@@ -2203,7 +2186,10 @@
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
-      "baseline_status": "unverified"
+      "baseline_status": "unverified",
+      "fixture_sources": {
+        "nativeLargeGeneratorUsesInstalledCoilAndMixedExcitation": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryGeneratorWorkflowGameTests.java"
+      }
     },
     {
       "id": "powergrid:generator_commutator",
@@ -2254,7 +2240,10 @@
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
-      "baseline_status": "unverified"
+      "baseline_status": "unverified",
+      "fixture_sources": {
+        "nativeVerticalGeneratorUsesInstalledCoilAndMixedExcitation": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryGeneratorWorkflowGameTests.java"
+      }
     },
     {
       "id": "powergrid:generator_clutch",
@@ -2339,7 +2328,10 @@
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
-      "baseline_status": "unverified"
+      "baseline_status": "unverified",
+      "fixture_sources": {
+        "nativeVerticalHousingJoinsAndSeparatesExcitedWindings": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryGeneratorWorkflowGameTests.java"
+      }
     },
     {
       "id": "powergrid:solar_panel",
@@ -2390,7 +2382,10 @@
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
-      "baseline_status": "unverified"
+      "baseline_status": "unverified",
+      "fixture_sources": {
+        "nativeCeilingSolarAssemblyPowersCeeAndRespondsToShade": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryLightingGameTests.java"
+      }
     },
     {
       "id": "powergrid:winding",
@@ -2851,7 +2846,10 @@
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
-      "baseline_status": "unverified"
+      "baseline_status": "unverified",
+      "fixture_sources": {
+        "nativeColoredStringCordLightsMixedCircuitAndReturnsCuttingCost": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryStringLightGameTests.java"
+      }
     },
     {
       "id": "powergrid:lv_switch",
@@ -3282,7 +3280,10 @@
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
-      "baseline_status": "unverified"
+      "baseline_status": "unverified",
+      "fixture_sources": {
+        "linkedNetherEndsSurviveColdRestartAndFiveIndependentActualChunkCycles": "src/main/java/org/cha0scollective/wwpg/gametest/NetherLifecycleGameTests.java"
+      }
     },
     {
       "id": "powergrid:variac",
@@ -3469,7 +3470,10 @@
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
-      "baseline_status": "unverified"
+      "baseline_status": "unverified",
+      "fixture_sources": {
+        "nativePlotterRecordsMixedWaveform": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryInstrumentGameTests.java"
+      }
     },
     {
       "id": "powergrid:circuit_board",
@@ -3534,6 +3538,9 @@
       ],
       "fixture_sources": {
         "ceePoweredDesignerSavesAndPlacesViaLabelBoard": "src/main/java/org/cha0scollective/wwpg/gametest/BoardWorkflowGameTests.java",
+        "savedDesignerLoadsBeforeWorldAssignment": "src/main/java/org/cha0scollective/wwpg/gametest/DesignTablePersistenceGameTests.java",
+        "designerInventoryChangesScheduleAWorldSave": "src/main/java/org/cha0scollective/wwpg/gametest/DesignTablePersistenceGameTests.java",
+        "savedDesignReopensCopiesAssemblesAndPowersAfterRestart": "src/main/java/org/cha0scollective/wwpg/gametest/DesignerRestartGameTests.java",
         "mixedBranchesLoopCutReconnectAndRemoval": "src/main/java/org/cha0scollective/wwpg/gametest/TopologyGameTests.java",
         "chunkReloadRebindsMixedEndpoints": "src/main/java/org/cha0scollective/wwpg/gametest/PersistenceGameTests.java",
         "restartPreservesBothWireSystemsAndCapacitor": "src/main/java/org/cha0scollective/wwpg/gametest/PersistenceGameTests.java",
@@ -3997,7 +4004,8 @@
       "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
       "status": "unsupported",
       "release_scope": false,
-      "fixtures": []
+      "fixtures": [],
+      "fixture_sources": {}
     },
     {
       "id": "electroenergetics:velocity_sensor",
@@ -4012,7 +4020,8 @@
       "acceptance_circuit": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
       "status": "unsupported",
       "release_scope": false,
-      "fixtures": []
+      "fixtures": [],
+      "fixture_sources": {}
     },
     {
       "id": "powergrid:via",
@@ -5185,6 +5194,8 @@
       "id": "electroenergetics:buzzer",
       "implementation": "com.george_vi.electroenergetics.content.buzzer.BuzzerBlock",
       "has_item": true,
+      "disposition": "functional_behavior",
+      "behavior": "electroenergetics:buzzer",
       "category": "loads",
       "status": "unverified",
       "release_scope": true,
@@ -5192,13 +5203,18 @@
         "pgPowerSoundsCeeBuzzer"
       ],
       "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
-      "profile": "BASE"
+      "profile": "BASE",
+      "fixture_sources": {
+        "pgPowerSoundsCeeBuzzer": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryEquipmentGameTests.java"
+      }
     },
     {
       "registry": "block",
       "id": "electroenergetics:catenary_holder",
       "implementation": "com.george_vi.electroenergetics.content.railway_electrification.catenary.CatenaryHolderBlock",
       "has_item": true,
+      "disposition": "functional_behavior",
+      "behavior": "electroenergetics:catenary_holder",
       "category": "wiring",
       "status": "unverified",
       "release_scope": true,
@@ -5206,13 +5222,18 @@
         "nativeCatenarySpoolStylesAndRecoveryCarryMixedPower"
       ],
       "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
-      "profile": "BASE"
+      "profile": "BASE",
+      "fixture_sources": {
+        "nativeCatenarySpoolStylesAndRecoveryCarryMixedPower": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryPoleGameTests.java"
+      }
     },
     {
       "registry": "block",
       "id": "electroenergetics:converter",
       "implementation": "com.george_vi.electroenergetics.content.converter.ConverterBlock",
       "has_item": true,
+      "disposition": "functional_behavior",
+      "behavior": "electroenergetics:converter",
       "category": "conversion",
       "status": "unverified",
       "release_scope": true,
@@ -5220,38 +5241,37 @@
         "nativeFeConvertersExchangeMixedPower"
       ],
       "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
-      "profile": "BASE"
+      "profile": "BASE",
+      "fixture_sources": {
+        "nativeFeConvertersExchangeMixedPower": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryConversionGameTests.java"
+      }
     },
     {
       "registry": "block",
       "id": "pinout:pinout",
       "implementation": "com.breakdown.pinout.content.pinout.PinoutBlock",
       "has_item": true,
+      "disposition": "functional_behavior",
+      "behavior": "pinout:pinout",
       "category": "computer_control",
       "status": "unverified",
       "release_scope": true,
       "fixtures": [
-        "actualLuaControlsAllEightMixedLoads",
-        "actualLuaControlsAllEightMixedLoadsFromPowerGridSupply",
-        "nativePinsComputerPanelAndBoardSurviveColdRestartFiveChunkCyclesAndReplacement"
+        "actualLuaControlsAllEightMixedLoads"
       ],
-      "acceptance_circuit": "12 V supply from either mod; eight 1 k\u03a9 mixed loads, both wires, native Lua switching/signed measurements, a CEE panel and PG traced board; enabled legs about 12 V/12 mA, four enabled legs about 48 mA at common. Before-solve native state/settings and five real unload/reloads plus three cold process restarts.",
+      "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
       "profile": "PINOUT",
-      "lifecycle_fixtures": [
-        "nativePinsComputerPanelAndBoardSurviveColdRestartFiveChunkCyclesAndReplacement"
-      ],
       "fixture_sources": {
-        "actualLuaControlsAllEightMixedLoads": "src/main/java/org/cha0scollective/wwpg/gametest/PinoutLuaGameTests.java",
-        "actualLuaControlsAllEightMixedLoadsFromPowerGridSupply": "src/main/java/org/cha0scollective/wwpg/gametest/PinoutLuaGameTests.java",
-        "nativePinsComputerPanelAndBoardSurviveColdRestartFiveChunkCyclesAndReplacement": "src/main/java/org/cha0scollective/wwpg/gametest/PinoutLifecycleGameTests.java"
-      },
-      "terminals": "Native PG common terminal 0 maps to Lua common pin 9; switchable terminals 1\u20138 retain their native pin identities."
+        "actualLuaControlsAllEightMixedLoads": "src/main/java/org/cha0scollective/wwpg/gametest/PinoutLuaGameTests.java"
+      }
     },
     {
       "registry": "block",
       "id": "powergrid:alarm_bell",
       "implementation": "org.patryk3211.powergrid.electricity.bell.AlarmBellBlock",
       "has_item": true,
+      "disposition": "functional_behavior",
+      "behavior": "powergrid:alarm_bell",
       "category": "loads",
       "status": "unverified",
       "release_scope": true,
@@ -5259,13 +5279,18 @@
         "ceePowerRunsPgFanMagnetAndBell"
       ],
       "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
-      "profile": "BASE"
+      "profile": "BASE",
+      "fixture_sources": {
+        "ceePowerRunsPgFanMagnetAndBell": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryEquipmentGameTests.java"
+      }
     },
     {
       "registry": "block",
       "id": "powergrid:battery",
       "implementation": "org.patryk3211.powergrid.electricity.battery.BatteryBlock",
       "has_item": true,
+      "disposition": "functional_behavior",
+      "behavior": "powergrid:battery",
       "category": "storage",
       "status": "unverified",
       "release_scope": true,
@@ -5273,13 +5298,18 @@
         "stationaryBatteriesChargeAndDischargeWithCee"
       ],
       "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
-      "profile": "BASE"
+      "profile": "BASE",
+      "fixture_sources": {
+        "stationaryBatteriesChargeAndDischargeWithCee": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryEquipmentGameTests.java"
+      }
     },
     {
       "registry": "block",
       "id": "powergrid:carbon_pile",
       "implementation": "org.patryk3211.powergrid.electricity.carbonpile.CarbonPileBlock",
       "has_item": false,
+      "disposition": "functional_behavior",
+      "behavior": "powergrid:carbon_pile",
       "category": "controls",
       "status": "unverified",
       "release_scope": true,
@@ -5287,13 +5317,18 @@
         "ceeControlsNativeCarbonPileResistance"
       ],
       "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
-      "profile": "BASE"
+      "profile": "BASE",
+      "fixture_sources": {
+        "ceeControlsNativeCarbonPileResistance": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryInstrumentGameTests.java"
+      }
     },
     {
       "registry": "block",
       "id": "powergrid:carbon_pile_coil",
       "implementation": "org.patryk3211.powergrid.electricity.carbonpile.CarbonPileCoilBlock",
       "has_item": true,
+      "disposition": "functional_behavior",
+      "behavior": "powergrid:carbon_pile_coil",
       "category": "controls",
       "status": "unverified",
       "release_scope": true,
@@ -5301,13 +5336,18 @@
         "ceeControlsNativeCarbonPileResistance"
       ],
       "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
-      "profile": "BASE"
+      "profile": "BASE",
+      "fixture_sources": {
+        "ceeControlsNativeCarbonPileResistance": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryInstrumentGameTests.java"
+      }
     },
     {
       "registry": "block",
       "id": "powergrid:crt",
       "implementation": "org.patryk3211.powergrid.electricity.crt.CRTBlock",
       "has_item": true,
+      "disposition": "functional_behavior",
+      "behavior": "powergrid:crt",
       "category": "instruments",
       "status": "unverified",
       "release_scope": true,
@@ -5322,13 +5362,20 @@
         "powergrid:crt",
         "powergrid:andesite_encased_crt",
         "powergrid:brass_encased_crt"
-      ]
+      ],
+      "fixture_sources": {
+        "mixedPowerControlsNativeCrt": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryCrtGameTests.java",
+        "mixedPowerControlsAndesiteCrt": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryCrtGameTests.java",
+        "mixedPowerControlsBrassCrt": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryCrtGameTests.java"
+      }
     },
     {
       "registry": "block",
       "id": "powergrid:electric_fan",
       "implementation": "org.patryk3211.powergrid.electricity.fan.ElectricFanBlock",
       "has_item": true,
+      "disposition": "functional_behavior",
+      "behavior": "powergrid:electric_fan",
       "category": "loads",
       "status": "unverified",
       "release_scope": true,
@@ -5336,13 +5383,18 @@
         "ceePowerRunsPgFanMagnetAndBell"
       ],
       "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
-      "profile": "BASE"
+      "profile": "BASE",
+      "fixture_sources": {
+        "ceePowerRunsPgFanMagnetAndBell": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryEquipmentGameTests.java"
+      }
     },
     {
       "registry": "block",
       "id": "powergrid:electromagnet",
       "implementation": "org.patryk3211.powergrid.electricity.electromagnet.ElectromagnetBlock",
       "has_item": true,
+      "disposition": "functional_behavior",
+      "behavior": "powergrid:electromagnet",
       "category": "loads",
       "status": "unverified",
       "release_scope": true,
@@ -5350,13 +5402,18 @@
         "ceePowerRunsPgFanMagnetAndBell"
       ],
       "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
-      "profile": "BASE"
+      "profile": "BASE",
+      "fixture_sources": {
+        "ceePowerRunsPgFanMagnetAndBell": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryEquipmentGameTests.java"
+      }
     },
     {
       "registry": "block",
       "id": "powergrid:fe_inverter",
       "implementation": "org.patryk3211.powergrid.electricity.febridge.FEInverterBlock",
       "has_item": true,
+      "disposition": "functional_behavior",
+      "behavior": "powergrid:fe_inverter",
       "category": "conversion",
       "status": "unverified",
       "release_scope": true,
@@ -5364,24 +5421,28 @@
         "nativeFeConvertersExchangeMixedPower"
       ],
       "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
-      "profile": "BASE"
+      "profile": "BASE",
+      "fixture_sources": {
+        "nativeFeConvertersExchangeMixedPower": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryConversionGameTests.java"
+      }
     },
     {
       "registry": "block",
       "id": "powergrid:potato_battery",
       "implementation": "org.patryk3211.powergrid.electricity.battery.PotatoBatteryBlock",
       "has_item": true,
+      "disposition": "functional_behavior",
+      "behavior": "powergrid:potato_battery",
       "category": "storage",
       "status": "unverified",
       "release_scope": true,
       "fixtures": [
-        "potatoBatteryPreservesNativeNonRechargeableBehavior",
-        "mixedPotatoBatteryPreservesNativeNoChargingAndDischargeWindow"
+        "potatoBatteryPreservesNativeNonRechargeableBehavior"
       ],
       "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
       "profile": "BASE",
       "fixture_sources": {
-        "mixedPotatoBatteryPreservesNativeNoChargingAndDischargeWindow": "src/main/java/org/cha0scollective/wwpg/gametest/NativeReferenceTimingGameTests.java"
+        "potatoBatteryPreservesNativeNonRechargeableBehavior": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryEquipmentGameTests.java"
       }
     },
     {
@@ -5389,6 +5450,8 @@
       "id": "powergrid:punch_card_reader",
       "implementation": "org.patryk3211.powergrid.kinetics.punchcard.PunchCardReaderBlock",
       "has_item": true,
+      "disposition": "functional_behavior",
+      "behavior": "powergrid:punch_card_reader",
       "category": "controls",
       "status": "unverified",
       "release_scope": true,
@@ -5396,13 +5459,18 @@
         "nativePunchCardScansEveryRowAndControlsEightMixedLoads"
       ],
       "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
-      "profile": "BASE"
+      "profile": "BASE",
+      "fixture_sources": {
+        "nativePunchCardScansEveryRowAndControlsEightMixedLoads": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryReaderGameTests.java"
+      }
     },
     {
       "registry": "block",
       "id": "powergrid:redstone_converter",
       "implementation": "org.patryk3211.powergrid.electricity.redstoneconverter.RedstoneConverterBlock",
       "has_item": true,
+      "disposition": "functional_behavior",
+      "behavior": "powergrid:redstone_converter",
       "category": "controls",
       "status": "unverified",
       "release_scope": true,
@@ -5410,13 +5478,18 @@
         "nativeRedstoneConverterControlsCeeLoad"
       ],
       "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
-      "profile": "BASE"
+      "profile": "BASE",
+      "fixture_sources": {
+        "nativeRedstoneConverterControlsCeeLoad": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryEquipmentGameTests.java"
+      }
     },
     {
       "registry": "block",
       "id": "powergrid:spark_gap",
       "implementation": "org.patryk3211.powergrid.electricity.sparkgap.SparkGapBlock",
       "has_item": true,
+      "disposition": "functional_behavior",
+      "behavior": "powergrid:spark_gap",
       "category": "protection",
       "status": "unverified",
       "release_scope": true,
@@ -5424,13 +5497,18 @@
         "mixedVoltageTriggersAndExtinguishesNativeSparkGap"
       ],
       "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
-      "profile": "BASE"
+      "profile": "BASE",
+      "fixture_sources": {
+        "mixedVoltageTriggersAndExtinguishesNativeSparkGap": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryEquipmentGameTests.java"
+      }
     },
     {
       "registry": "block",
       "id": "powergrid:thermometer",
       "implementation": "org.patryk3211.powergrid.equipment.thermometer.ThermometerBlock",
       "has_item": true,
+      "disposition": "functional_behavior",
+      "behavior": "powergrid:thermometer",
       "category": "instruments",
       "status": "unverified",
       "release_scope": true,
@@ -5438,7 +5516,10 @@
         "pgThermometerReadsCeePoweredPgHeat"
       ],
       "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
-      "profile": "BASE"
+      "profile": "BASE",
+      "fixture_sources": {
+        "pgThermometerReadsCeePoweredPgHeat": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryInstrumentGameTests.java"
+      }
     }
   ],
   "lifecycle_policy": "Shared topology, persistence and synchronization fixtures cover mappings; behavior fixtures additionally check native edits/NBT/removal. No scale or moving-system certification.",

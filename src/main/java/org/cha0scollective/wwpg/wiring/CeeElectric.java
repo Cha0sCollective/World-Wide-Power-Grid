@@ -86,6 +86,11 @@ public final class CeeElectric implements IElectric {
         return id < 0 ? null : terminal(state, id);
     }
     @Override public ElectricBehaviour getBehaviour(Level world, BlockPos position, BlockState state) { return behaviour; }
+    @Override public boolean accepts(net.minecraft.world.item.ItemStack wireStack) {
+        // CEE has no native light-wire-only terminal restriction. Let PG's
+        // registry validate its items; any PG endpoint retains its own rules.
+        return org.patryk3211.powergrid.electricity.wire.registry.WireRegistry.forItem(level,wireStack.getItem())!=null;
+    }
 
     void removeInvalidConnections() {
         for (var e : List.copyOf(behaviour.getConnections().entrySet())) {

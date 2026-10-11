@@ -50,7 +50,7 @@ neoForge {
         server { server(); programArgument '--nogui' }
         gameTestServer {
             type = 'gameTestServer'
-            systemProperty 'neoforge.enabledGameTestNamespaces', providers.gradleProperty('testNamespaces').getOrElse(testProfile == 'PINOUT' ? 'wwpg,wwpg_stationary,wwpg_design,wwpg_distribution,wwpg_pinout' : 'wwpg,wwpg_stationary,wwpg_design,wwpg_distribution')
+            systemProperty 'neoforge.enabledGameTestNamespaces', providers.gradleProperty('testNamespaces').getOrElse(testProfile == 'PINOUT' ? 'wwpg,wwpg_stationary,wwpg_design,wwpg_distribution,wwpg_wires,wwpg_bundle,wwpg_pinout' : 'wwpg,wwpg_stationary,wwpg_design,wwpg_distribution,wwpg_wires,wwpg_bundle')
             systemProperty 'wwpg.test.profile', testProfile
             systemProperty 'wwpg.test.energyFixtures', 'true'
             systemProperty 'wwpg.test.backend', providers.gradleProperty('testBackend').getOrElse('NATIVE')

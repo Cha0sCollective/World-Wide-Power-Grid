@@ -2,6 +2,7 @@ package org.cha0scollective.wwpg.mixin;
 
 import com.george_vi.electroenergetics.client.ElectricPropertiesOverlay;
 import com.george_vi.electroenergetics.content.clamp_meter.ClampMeterItem;
+import com.george_vi.electroenergetics.content.linemans_stick.LinemansStickItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,13 +17,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = ClampMeterItem.class, remap = false)
+@Mixin(value = {ClampMeterItem.class, LinemansStickItem.class}, remap = false)
 public abstract class ClampMeterClientMixin {
     @Inject(method = "onUseTick", at = @At("HEAD"), cancellable = true)
     private void wwpg$pgReading(Level level, LivingEntity entity, ItemStack stack, int remaining, CallbackInfo ci) {
         if (!level.isClientSide) return;
         var data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
         if (!data.hasUUID(HandheldMeters.PG_WIRE)) return;
+        if(stack.getItem() instanceof LinemansStickItem && !(entity.getOffhandItem().getItem() instanceof ClampMeterItem)) {
+            entity.stopUsingItem();ci.cancel();return;
+        }
         var hit = Minecraft.getInstance().hitResult;
         if (hit instanceof EntityHitResult target && target.getEntity() instanceof BaseWireEntity wire
                 && wire.isAlive() && wire.getUUID().equals(data.getUUID(HandheldMeters.PG_WIRE))) {

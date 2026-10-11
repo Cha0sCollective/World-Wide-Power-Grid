@@ -37,9 +37,13 @@ elseif command == "volts" then
   print("Signed volts relative to common pin 9:")
   print("ON is about 0 V; OFF is about -70 V.")
   print("Load gauges read 70 V ON, 0 V OFF.")
+  print("Readings are taken one at a time.")
   for pin = 1, 8 do
-    print(string.format("%d %s %+.2f V", pin, states[pin] and "ON " or "OFF", volts[pin]))
-    assert(math.abs(p.comparePin(pin, 9) - volts[pin]) < 0.05, "Pin readings changed; try again")
+    local latest = p.comparePin(pin, 9)
+    print(string.format("%d %s %+.2f V", pin, states[pin] and "ON " or "OFF", latest))
+    if math.abs(latest - volts[pin]) >= 0.05 then
+      print(string.format("  Earlier reading: %+.2f V", volts[pin]))
+    end
   end
 elseif command == "layout" then
   print(textutils.serialize(p.pinLayout()))
