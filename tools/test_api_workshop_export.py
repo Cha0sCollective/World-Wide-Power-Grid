@@ -8,7 +8,7 @@ import tempfile
 import unittest
 import zipfile
 
-from export_api_workshop import STATION_IDS, TICKETS, export
+from export_api_workshop import VERSION, STATION_IDS, TICKETS, export
 from reopen_stationary_yard import extract
 
 
@@ -64,7 +64,7 @@ class WorkshopExportChecks(unittest.TestCase):
                     role: dict(artifact=self.jars[role].name, sha256=hashes[role])
                     for role in ("example", "upstream_example")}
             (self.run / f"packaged-{index}.json").write_text(json.dumps(proof), encoding="utf-8")
-        stations = dict(target="0.2.0", api_version="1.0.0", profile=profile, backend="NATIVE",
+        stations = dict(target=VERSION, api_version="1.0.0", profile=profile, backend="NATIVE",
                         phase="VERIFY", completed=True, runtime_station_checks=11,
                         native_item_workflows=True, loose_construction_wire_items=0,
                         native_forced_chunks=[list(pair) for pair in TICKETS],

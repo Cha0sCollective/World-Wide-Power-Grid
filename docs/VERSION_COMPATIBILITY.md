@@ -1,10 +1,10 @@
 # Version compatibility
 
-WWPG builds from this change allow newer NeoForge, Create, CEE and Power Grid
+WWPG **0.2.1** allows newer NeoForge, Create, CEE and Power Grid
 versions. The jar no longer requires an exact match to every tested dependency.
 Minecraft remains **1.21.1**.
 
-| Dependency | Minimum accepted by the new jar | Test targets |
+| Dependency | Minimum accepted by WWPG 0.2.1 | Test targets |
 | --- | --- | --- |
 | NeoForge | 21.1.231 | 21.1.231 and 21.1.248 |
 | Create | 6.0.10 | 6.0.10-280 |
@@ -18,8 +18,8 @@ before changing versions. Upstream mods also have their own requirements.
 Use the same mod versions on the server and every client.
 
 The already published **WWPG 0.2.0 jar still requires NeoForge 21.1.231**.
-Changing this repository does not alter that download. Using NeoForge 21.1.248
-requires a new WWPG build containing the wider declarations. The original
+That download is unchanged. For NeoForge 21.1.248, install
+[WWPG 0.2.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.1). The original
 release records continue to describe the original tested versions.
 
 ## Checking NeoForge 21.1.248

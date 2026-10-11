@@ -346,7 +346,7 @@ def validate_pending_restart(proof, root, hashes):
         record = read(locked_file(item.get('manifest', {}), root))
         require(record.get('completed') and record.get('required_tests_passed', 0) > 0
                 and record.get('phase') == item['phase'] and record.get('namespaces') == 'wwpg_api_pending_restart'
-                and record.get('artifact') == 'wwpg-0.2.0.jar' and record.get('sha256') == hashes['runtime']
+                and record.get('artifact') == f'wwpg-{VERSION}.jar' and record.get('sha256') == hashes['runtime']
                 and record.get('profile') == proof['profile'] and record.get('backend') == proof['backend']
                 and set(record.get('addon_artifacts', {})) == {'example', 'upstream_example'}
                 and all(record['addon_artifacts'][role].get('sha256') == hashes[role]

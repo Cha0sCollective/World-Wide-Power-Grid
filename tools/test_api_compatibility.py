@@ -7,6 +7,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from package_api_release import VERSION
 import zipfile
 
 from verify_api_compatibility import ContractError, compare, snapshot
@@ -242,7 +243,7 @@ class PublicationGateChecks(unittest.TestCase):
         phases = []
         for phase in ['SETUP', 'ARM', 'VERIFY']:
             record = dict(completed='TEST_ONLY', required_tests_passed=1, phase=phase,
-                namespaces='wwpg_api_pending_restart', artifact='wwpg-0.2.0.jar', sha256=self.hashes['runtime'],
+                namespaces='wwpg_api_pending_restart', artifact=f'wwpg-{VERSION}.jar', sha256=self.hashes['runtime'],
                 profile=profile, backend=backend,
                 addon_artifacts={role: dict(sha256=self.hashes[role]) for role in ['example', 'upstream_example']})
             log = folder / (phase.lower() + '.log')

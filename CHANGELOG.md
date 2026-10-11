@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1 — expanded dependency compatibility
+
+- Support NeoForge 21.1.248 alongside 21.1.231 with the same jar, built against the minimum supported loader.
+- Allow newer NeoForge, Create, CEE and Power Grid versions for player testing. Minecraft remains 1.21.1; allowed versions beyond the listed test targets are unverified.
+- Keep extension API 1.0.0, saved worlds and existing add-on identities compatible.
+- Publish five grouped downloads with short notes. Freeze new artifact hashes and repeat packaged, lifecycle, SDK and real-client acceptance for this release; preserve earlier artifacts and failed-run evidence.
+
 ## 0.2.0 — extension API 1.0.0
 
 - Publish the independently versioned general and CEE property APIs, with source/Javadoc jars, first-release classfile snapshots and a downloadable Maven repository.

@@ -2,7 +2,7 @@
 
 **WWPG lets Create: Electro Energetics (CEE) and Power Grid (PG) work together in the same stationary factory.** Either mod can power the other's supported equipment using their native wires, controls and tools.
 
-**[Download WWPG 0.2.0](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.0)** for Minecraft 1.21.1 and NeoForge. Follow [installation](docs/INSTALL.md) for the required mod versions and settings. Add-on developers can also use the separately versioned **extension API 1.0.0**.
+**[Download WWPG 0.2.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.1)** for Minecraft 1.21.1 and NeoForge. Follow [installation](docs/INSTALL.md) for the required mod versions and settings. Add-on developers can also use the separately versioned **extension API 1.0.0**.
 
 ## What you can do
 
@@ -17,9 +17,9 @@ The [support list](docs/SUPPORT.md) gives the equipment and workflows covered by
 
 ## Try the worlds
 
-Choose **Stationary Test Yard** or **Stationary Test Yard — Pinout** from the [release downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.0). Each supported native behavior has a checked exhibit or assembly/repair workflow. Signs and books explain controls, readings and resets. Goggles and tools are at spawn. The [yard guide](docs/STATIONARY_YARD.md) points to transformers, gauges, boards, panels, storage, processing and the playable Nether route.
+Choose **Stationary Test Yard** or **Stationary Test Yard — Pinout** from the [release downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.1). Each supported native behavior has a checked exhibit or assembly/repair workflow. Signs and books explain controls, readings and resets. Goggles and tools are at spawn. The [yard guide](docs/STATIONARY_YARD.md) points to transformers, gauges, boards, panels, storage, processing and the playable Nether route.
 
-All four saves and the optional Workshop mods are in **wwpg-0.2.0-example-worlds.zip**.
+All four saves and the optional Workshop mods are in **wwpg-0.2.1-example-worlds.zip**.
 Players can download the mod jar directly; the developer SDK and verification
 archive are separate optional downloads.
 
@@ -45,7 +45,7 @@ PG's native solver is the default on Windows and Linux. WWPG supplies its missin
 | Anyone checking coverage | [Supported content](docs/SUPPORT.md) and [current status](docs/STATUS.md) |
 | Maintainers | [Development and test commands](docs/DEVELOPMENT.md), [contributing](CONTRIBUTING.md) |
 | Add-on developers | [Extension API contract and SDK](docs/EXTENSION_API.md), [independent examples](examples/), [API Workshop](docs/EXTENSION_API_WORKSHOP.md) |
-| Reviewers checking release evidence | [Current acceptance](release/0.2.0/verification.json), [release records](release/README.md), [changelog](CHANGELOG.md) |
+| Reviewers checking release evidence | [Current acceptance](release/0.2.1/verification.json), [release records](release/README.md), [changelog](CHANGELOG.md) |
 | Readers evaluating the long-term design | [Product specification](SPEC.md) |
 
 The [documentation index](docs/README.md) separates current guides, developer references and archived release history.

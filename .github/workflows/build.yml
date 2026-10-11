@@ -124,7 +124,7 @@ jobs:
           done
       - name: Export and extract the exact stationary yard ZIP
         run: |
-          python tools/export_stationary_yard.py --run run/yard --jar build/libs/wwpg-0.2.0.jar --target 0.2.0 --profile ${{ matrix.profile }} --output build/distributions/wwpg-stationary-${{ matrix.profile }}.zip
+          python tools/export_stationary_yard.py --run run/yard --jar build/libs/wwpg-0.2.1.jar --target 0.2.1 --profile ${{ matrix.profile }} --output build/distributions/wwpg-stationary-${{ matrix.profile }}.zip
           python tools/reopen_stationary_yard.py build/distributions/wwpg-stationary-${{ matrix.profile }}.zip --run run/exported-yard
       - name: Three cold restarts of the extracted ZIP
         run: |
@@ -142,7 +142,7 @@ jobs:
           done
       - name: Export and extract the exact API Workshop ZIP with locked example jars
         run: |
-          python tools/export_api_workshop.py --run run/api-workshop --jar build/libs/wwpg-0.2.0.jar --example examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar --upstream-example examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar --profile ${{ matrix.profile }} --backend ${{ matrix.backend }} --output build/distributions/wwpg-api-workshop-${{ matrix.profile }}.zip
+          python tools/export_api_workshop.py --run run/api-workshop --jar build/libs/wwpg-0.2.1.jar --example examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar --upstream-example examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar --profile ${{ matrix.profile }} --backend ${{ matrix.backend }} --output build/distributions/wwpg-api-workshop-${{ matrix.profile }}.zip
           python tools/reopen_stationary_yard.py build/distributions/wwpg-api-workshop-${{ matrix.profile }}.zip --run run/exported-api-workshop
       - name: Three cold restarts of the extracted API Workshop ZIP
         run: |

@@ -5,8 +5,8 @@ developers should start with the [public API contract](EXTENSION_API.md) and the
 two [example projects](../examples/extension-addon/README.md) and
 [upstream example](../examples/cee-addon/README.md).
 
-WWPG 0.2.0 and extension API 1.0.0 are published. The
-[final verification record](../release/0.2.0/verification.json) identifies the
+WWPG 0.2.1 and extension API 1.0.0 are published. The
+[final verification record](../release/0.2.1/verification.json) identifies the
 accepted artifacts and evidence; the [original acceptance plan](EXTENSION_API_PLAN.md)
 preserves the release requirements. The commands below reproduce those checks.
 Use fresh output paths for a new attempt and keep earlier records unchanged.
@@ -86,7 +86,7 @@ The final SDK gate builds the exact downloadable source ZIPs after extraction,
 using the exact extracted Maven ZIP. Run it on the frozen artifacts:
 
 ```text
-python tools/verify_extracted_api_sdk.py --runtime build/libs/wwpg-0.2.0.jar --api build/libs/wwpg-api-1.0.0.jar --cee-api build/libs/wwpg-cee-api-1.0.0.jar --example examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar --upstream-example examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar --maven build/distributions/wwpg-api-1.0.0-maven.zip --example-source build/distributions/wwpg-api-example-1.0.0-source.zip --upstream-source build/distributions/wwpg-upstream-api-example-1.0.0-source.zip --source-sha FROZEN_COMMIT_SHA --output build/extracted-sdk-FROZEN_COMMIT_SHA
+python tools/verify_extracted_api_sdk.py --runtime build/libs/wwpg-0.2.1.jar --api build/libs/wwpg-api-1.0.0.jar --cee-api build/libs/wwpg-cee-api-1.0.0.jar --example examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar --upstream-example examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar --maven build/distributions/wwpg-api-1.0.0-maven.zip --example-source build/distributions/wwpg-api-example-1.0.0-source.zip --upstream-source build/distributions/wwpg-upstream-api-example-1.0.0-source.zip --source-sha FROZEN_COMMIT_SHA --output build/extracted-sdk-FROZEN_COMMIT_SHA
 ```
 
 This runs each extracted project's own wrapper, records its resolved compile-time
@@ -97,13 +97,13 @@ Each attempt uses a new output directory; a failed attempt remains inspectable.
 Pass `--release` only when the frozen manifest includes completed acceptance:
 
 ```text
-python tools/package_api_release.py --manifest release/0.2.0/verification.json --output build/distributions/wwpg-0.2.0-sdk-candidate.zip
-python tools/package_api_release.py --manifest release/0.2.0/verification.json --output build/distributions/wwpg-0.2.0-release.zip --release
+python tools/package_api_release.py --manifest release/0.2.1/verification.json --output build/distributions/wwpg-0.2.1-sdk-candidate.zip
+python tools/package_api_release.py --manifest release/0.2.1/verification.json --output build/distributions/wwpg-0.2.1-release.zip --release
 ```
 
 ### Manifest fields and artifact roles
 
-The input format has `schema: 1`, `wwpg_version: "0.2.0"`,
+The input format has `schema: 1`, `wwpg_version: "0.2.1"`,
 `api_version: "1.0.0"`, and
 `api_coordinate: "org.cha0scollective.wwpg:wwpg-api:1.0.0"`.
 It also supplies
@@ -204,7 +204,7 @@ Derive the packaged matrix records from actual GitHub metadata and uploaded
 artifacts with the evidence collector, rather than writing passing flags by hand:
 
 ```text
-python tools/collect_api_ci_evidence.py --collect-ci RUN_ID --download build/api-ci-RUN_ID --output release/0.2.0/evidence/ci-RUN_ID
+python tools/collect_api_ci_evidence.py --collect-ci RUN_ID --download build/api-ci-RUN_ID --output release/0.2.1/evidence/ci-RUN_ID
 ```
 
 This read-only GitHub collection uses `gh`; it does not build, freeze, publish, or

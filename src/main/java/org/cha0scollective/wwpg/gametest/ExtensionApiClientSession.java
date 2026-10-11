@@ -87,7 +87,7 @@ public final class ExtensionApiClientSession {
         ACKS.clear();
         try {
             var manifest = JsonParser.parseString(Files.readString(save.resolve("WWPG_MANIFEST.json"))).getAsJsonObject();
-            require(manifest.get("target").getAsString().equals("0.2.0") && manifest.get("api_version").getAsString().equals("1.0.0"), "Wrong exact exported Workshop");
+            require(manifest.get("target").getAsString().equals(net.neoforged.fml.ModList.get().getModContainerById("wwpg").orElseThrow().getModInfo().getVersion().toString()) && manifest.get("api_version").getAsString().equals("1.0.0"), "Wrong exact exported Workshop");
             require(manifest.get("profile").getAsString().equals(System.getProperty("wwpg.test.profile", "BASE")), "Workshop installation profile differs");
         } catch (Exception error) { throw new IllegalStateException("Cannot read exact Workshop export manifest", error); }
         for (var player : players) {

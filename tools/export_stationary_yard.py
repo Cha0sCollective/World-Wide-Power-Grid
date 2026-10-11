@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import tomllib
 import zipfile
+import re
 
 
 def sha(data):
@@ -49,11 +50,13 @@ def main():
     parser.add_argument("--run", type=Path, required=True, help="Dedicated wwpg_yard run directory")
     parser.add_argument("--jar", type=Path, required=True)
     parser.add_argument("--profile", choices=["BASE", "PINOUT"], required=True)
-    parser.add_argument("--target", choices=["0.1.0-beta.5", "0.2.0"], default="0.1.0-beta.5",
+    parser.add_argument("--target", default="0.1.0-beta.5",
                         help="Release being verified; must match the packaged WWPG mod version")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     args = parser.parse_args()
+    if not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?", args.target):
+        parser.error("Invalid release version")
     run, root = args.run.resolve(), args.root.resolve()
     world = run / "world"
     if args.output.resolve().is_relative_to(world):

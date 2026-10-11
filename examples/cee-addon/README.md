@@ -5,15 +5,15 @@ its separately registered electrical-property adapter, and a native **Power Grid
 circuit-board component**. It compiles against published API artifacts and the
 pinned upstream mods. It imports no WWPG implementation classes or Mixins.
 
-This example ships with WWPG 0.2.0 and requires extension API 1.0.0.
+This example ships with WWPG 0.2.1 and requires extension API 1.0.0.
 The [API Workshop](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/docs/EXTENSION_API_WORKSHOP.md) provides a playable panel
-and board demonstration. The [release verification](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/release/0.2.0/verification.json)
+and board demonstration. The [release verification](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/release/0.2.1/verification.json)
 identifies the tested artifacts and accepted checks.
 
 ## Build independently
 
 Use Java 21. Download, verify and extract the
-[developer SDK](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-developer-sdk.zip),
+[developer SDK](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.1/wwpg-0.2.1-developer-sdk.zip),
 then extract its `maven/wwpg-api-1.0.0-maven.zip`. The directory containing `org/cha0scollective/wwpg` is the Maven
 repository root. Supply that directory's absolute path and run this project's
 wrapper from the project directory:
@@ -31,7 +31,7 @@ include the WWPG source project and does not shade any API or upstream classes.
 
 The compile-only upstream coordinates are locked in `build.gradle`. Install the
 real upstream jars and WWPG at runtime using the main project's
-[dependency manifest](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/release/0.2.0/dependencies.json) and
+[dependency manifest](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/release/0.2.1/dependencies.json) and
 [installation instructions](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/docs/INSTALL.md). This add-on belongs on the
 server and every client. WWPG itself does not require it. Pinout and CC:Tweaked
 are optional.
@@ -126,5 +126,5 @@ unload fixture's chunk holder alive.
 
 These fixtures check electrical and saved-state behavior. Graphical editing and
 multiplayer have separate acceptance sessions, recorded alongside them in the
-[final verification](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/release/0.2.0/verification.json). The
+[final verification](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/release/0.2.1/verification.json). The
 [maintainer release guide](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/docs/API_RELEASE_CHECKS.md) describes the complete gates.
