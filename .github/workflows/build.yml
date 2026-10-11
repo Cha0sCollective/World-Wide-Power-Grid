@@ -54,6 +54,8 @@ jobs:
         run: python tools/test_beta5_package.py
       - name: Verify public API binary contracts and publication gates
         run: python tools/test_api_compatibility.py
+      - name: Verify five-download layout, short notes and safe release publication
+        run: python tools/test_release_process.py
       - name: Verify API Workshop export evidence and native save preservation
         run: python tools/test_api_workshop_export.py
       - name: Verify CI provenance, cold sequences and actual lifecycle evidence gates

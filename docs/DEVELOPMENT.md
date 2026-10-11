@@ -155,6 +155,11 @@ assembles the bundle. Its default candidate mode does not establish publication
 or API freeze. Keep earlier artifacts and failed attempts unchanged.
 [Final 0.2.0 verification](../release/0.2.0/verification.json) binds the accepted release.
 
+Follow [Publishing a release](RELEASING.md) to turn that accepted bundle into
+the five public downloads, generate short notes, and upload a verified GitHub draft.
+Use the release tools for future publications so SDK files and test records
+stay inside their bundles.
+
 ## Historical beta.5 tooling
 
 `tools/accept_stationary_clients.ps1` is the earlier stationary-client runner.
