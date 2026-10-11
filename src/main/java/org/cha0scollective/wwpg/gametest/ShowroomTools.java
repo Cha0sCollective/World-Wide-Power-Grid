@@ -43,7 +43,8 @@ final class ShowroomTools {
     static void resistance(GameTestHelper h, BlockPos at, double resistance) {
         int exponent = (int) Math.floor(Math.log10(resistance));
         int mantissa = (int) Math.round(resistance / Math.pow(10, exponent));
-        scroll(h, at, (exponent + 3) * 9 + mantissa - 1);
+        int offset=org.patryk3211.powergrid.collections.ModdedBlocks.RESISTOR.has(h.getLevel().getBlockState(at))?1:3;
+        scroll(h, at, (exponent + offset) * 9 + mantissa - 1);
         near(h, ((ResistorBlockEntity) h.getLevel().getBlockEntity(at)).getValue(), resistance, Math.max(.00001, resistance * .000001), "Saved ballast setting");
     }
     static void wire(GameTestHelper h, BlockPos a, int ta, BlockPos b, int tb, boolean pg) {

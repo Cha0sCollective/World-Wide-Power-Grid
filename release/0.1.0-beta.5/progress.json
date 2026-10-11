@@ -118,17 +118,21 @@
     },
     {
       "stage": 6,
-      "status": "pending",
+      "status": "in_progress",
       "remaining": [
-        "Complete Stationary Test Yard",
-        "Complete Stationary Test Yard - Pinout",
-        "Every declared behavior has a live station and instructions",
-        "Goggles and tools at spawn",
-        "Visible or audible outputs and repair demonstrations",
-        "Accessible Nether route",
-        "Readable Lua programs",
-        "Construction wire drop cleanup",
-        "Extracted ZIP acceptance"
+        "Complete inventory-to-live-station reconciliation, full wire families and LV bulbs",
+        "Complete Stationary Test Yard and Stationary Test Yard - Pinout exports",
+        "Exact ZIP extraction/reopen and graphical verification",
+        "Two-client dedicated-server acceptance"
+      ],
+      "implemented": [
+        "67 new BASE and 69 PINOUT live exhibits accompany the legacy boards, panels and factory yard",
+        "Native generator, distribution, storage, thermal, processing, instruments, held parts and protection demonstrations",
+        "Playable native portal route and independently linked mixed Nether load",
+        "Two real CC:Tweaked computers run readable start/stop/demo/pattern/pins/volts programs against native Pinout",
+        "Goggles, meters, wiring and repair supplies plus paginated native instruction books",
+        "Construction-only loose wire cleanup preserves connected wires and normal player-generated drops",
+        "Setup and three consecutive cold processes locally for each BASE/PINOUT and native/Java combination"
       ]
     }
   ],

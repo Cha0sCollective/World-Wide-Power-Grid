@@ -45,6 +45,14 @@ jobs:
       - run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_example -PtestDirectory=run/example -PrestartPhase=VERIFY --no-daemon
       - run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_showroom -PtestDirectory=run/showroom --no-daemon
       - run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_showroom -PtestDirectory=run/showroom -PrestartPhase=VERIFY --no-daemon
+      - name: Build stationary yard for the installation profile
+        run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_yard -PtestDirectory=run/yard --no-daemon
+      - name: Three cold stationary yard restarts
+        run: |
+          for pass in 1 2 3; do
+            python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_yard -PtestDirectory=run/yard -PrestartPhase=VERIFY --no-daemon
+            cp run/yard/logs/latest.log "run/yard/restart-${pass}.log"
+          done
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -75,3 +83,10 @@ jobs:
             run/showroom/logs/
             run/showroom/crash-reports/
             run/showroom/showroom-coverage.json
+            run/yard/logs/
+            run/yard/crash-reports/
+            run/yard/packaged-*.json
+            run/yard/restart-*.log
+            run/yard/stationary-yard-stations.json
+            run/yard/world/computercraft/computer/**/*.lua
+            run/yard/world/computercraft/computer/**/*.json

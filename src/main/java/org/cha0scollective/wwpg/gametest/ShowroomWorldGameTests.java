@@ -38,6 +38,9 @@ import static org.cha0scollective.wwpg.gametest.ShowroomTools.*;
 public final class ShowroomWorldGameTests {
     private static final BlockPos ROUTING_SOURCE=new BlockPos(80,64,140),ROUTING_BOARD=ROUTING_SOURCE.east(3);
     @GameTest(template="empty",timeoutTicks=1000) public static void buildAndVerifyExpandedFixtureWorld(GameTestHelper h) {
+        build(h, false);
+    }
+    static void build(GameTestHelper h, boolean completionYard) {
         var level=h.getLevel();boolean restore=System.getProperty("wwpg.test.restartPhase","SETUP").equals("VERIFY");
         ModdedConfigs.server().electricity.solver.multiTicks.set(16);
         for(int x=0;x<=8;x++)for(int z=0;z<=15;z++){level.setChunkForced(x,z,true);level.getChunk(x,z);}
@@ -66,6 +69,7 @@ public final class ShowroomWorldGameTests {
                 level.addFreshEntity(new net.minecraft.world.entity.item.ItemEntity(level,22.5,64.5,16.5,stack));
         }
         var boards=new ShowroomBoardStations(h,restore);var panels=new ShowroomPanelStations(h,restore);var power=new ShowroomPowerStations(h,restore);var devices=new ShowroomDeviceStations(h,restore);
+        var additional = completionYard ? new StationaryYardStations(h, restore) : null;
         boolean[] interactionsChecked={false};
         h.runAtTickTime(180,()->checked("initial readings",()->checkAll(h,()->boards.verify(h),()->panels.verify(h),()->power.verify(h),()->devices.verify(h))));
         // Schedule the complete sequence before ticking. Adding many tasks while Minecraft's
@@ -80,8 +84,10 @@ public final class ShowroomWorldGameTests {
             near(h,Math.abs(volts(h,ROUTING_BOARD,0,1))/1000,.01,.0001,"Routing exhibit current");
             var chest=(ChestBlockEntity)level.getBlockEntity(new BlockPos(6,64,16));
             if(!restore){chest.setItem(5,AllItems.WRENCH.asStack());chest.setItem(6,ModdedItems.IRON_WIRE.asStack(64));chest.setItem(7,ModdedItems.CORD.asStack(64));chest.setItem(8,guide());chest.setChanged();}
+            if(additional!=null&&!restore)StationaryYardGuide.install(h,additional);
             h.assertTrue(chest.getItem(8).is(Items.WRITTEN_BOOK),"Test-yard guide was not saved");
             coverage(h);
+            if (additional != null) additional.verifyAndRecord();
             WorldWidePowerGrid.LOGGER.info("WWPG_SHOWROOM_PASSED: phase={}; 25 electrical boards, routing board, all 11 panel types, 7 transformer/variac circuits, 3 meter banks, 22 device/storage circuits, and original factory",restore?"VERIFY":"SETUP");
         });
     }

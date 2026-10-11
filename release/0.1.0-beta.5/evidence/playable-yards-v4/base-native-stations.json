@@ -1,0 +1,1190 @@
+{
+  "schema": 1,
+  "target": "0.1.0-beta.5",
+  "stationary_completion": false,
+  "backend": "NATIVE",
+  "stations": [
+    {
+      "code": "S01",
+      "name": "Light Fixture",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 8,
+      "content": [
+        "powergrid:light_fixture"
+      ],
+      "instructions": [
+        "Click feed: light",
+        "120 V when ON",
+        "Replace native bulb"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S02",
+      "name": "Ceiling Tile Lamp",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 8,
+      "content": [
+        "powergrid:ceiling_tile_lamp"
+      ],
+      "instructions": [
+        "Click feed: light",
+        "120 V when ON",
+        "Replace native bulb"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S03",
+      "name": "Factory Light",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 8,
+      "content": [
+        "powergrid:factory_light",
+        "powergrid:factory_light_light"
+      ],
+      "instructions": [
+        "Click feed: light",
+        "120 V when ON",
+        "Replace native bulb"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S04",
+      "name": "Electric Fan",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 8,
+      "content": [
+        "powergrid:electric_fan"
+      ],
+      "instructions": [
+        "Feed controls output",
+        "Goggles: V/current",
+        "Switch OFF to stop"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S05",
+      "name": "Electromagnet",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 8,
+      "content": [
+        "powergrid:electromagnet"
+      ],
+      "instructions": [
+        "Feed controls output",
+        "Goggles: V/current",
+        "Switch OFF to stop"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S06",
+      "name": "Alarm Bell",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 26,
+      "content": [
+        "powergrid:alarm_bell"
+      ],
+      "instructions": [
+        "Feed controls output",
+        "Goggles: V/current",
+        "Switch OFF to stop"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S07",
+      "name": "Buzzer",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 26,
+      "content": [
+        "electroenergetics:buzzer"
+      ],
+      "instructions": [
+        "Feed controls output",
+        "Goggles: V/current",
+        "Switch OFF to stop"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S08",
+      "name": "Constant Speed Motor",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 26,
+      "content": [
+        "powergrid:constant_speed_motor"
+      ],
+      "instructions": [
+        "Feed controls output",
+        "Goggles: V/current",
+        "Switch OFF to stop"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S09",
+      "name": "Heating Coil",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 26,
+      "content": [
+        "powergrid:heating_coil",
+        "powergrid:thermometer"
+      ],
+      "instructions": [
+        "Feed heats the basin",
+        "Thermometer: Celsius",
+        "OFF cools; max stays"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S10",
+      "name": "Basin Heater",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 26,
+      "content": [
+        "powergrid:basin_heater",
+        "powergrid:thermometer"
+      ],
+      "instructions": [
+        "Feed heats the basin",
+        "Thermometer: Celsius",
+        "OFF cools; max stays"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S11",
+      "name": "Solar panel",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 44,
+      "content": [
+        "powergrid:solar_panel"
+      ],
+      "instructions": [
+        "Sun powers meter",
+        "Cover panel: OFF",
+        "Remove cover: ON"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S12",
+      "name": "Ceiling solar",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 44,
+      "content": [
+        "powergrid:ceiling_tile_solar"
+      ],
+      "instructions": [
+        "Sun powers meter",
+        "Cover panel: OFF",
+        "Remove cover: ON"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S13",
+      "name": "Stationary battery",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 44,
+      "content": [
+        "powergrid:battery"
+      ],
+      "instructions": [
+        "Charge switch: ON",
+        "OFF: stored power",
+        "About 12 V output"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S14",
+      "name": "Potato battery",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 44,
+      "content": [
+        "powergrid:potato_battery"
+      ],
+      "instructions": [
+        "Battery -\u003e meter",
+        "Cannot recharge",
+        "Replace to reset"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S15",
+      "name": "Plotter",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 44,
+      "content": [
+        "powergrid:plotter"
+      ],
+      "instructions": [
+        "Feed draws a graph",
+        "Open plotter: view",
+        "Source: 0 to 1 V"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S16",
+      "name": "Carbon pile",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 62,
+      "content": [
+        "powergrid:carbon_pile",
+        "powergrid:carbon_pile_coil"
+      ],
+      "instructions": [
+        "Feed varies pile R",
+        "Goggles: resistance",
+        "Remove coal: OFF"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S17",
+      "name": "Spark gap",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 62,
+      "content": [
+        "powergrid:spark_gap"
+      ],
+      "instructions": [
+        "Feed makes an arc",
+        "1500 V / ballast",
+        "OFF stops sparks"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S18",
+      "name": "FE conversion",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 62,
+      "content": [
+        "electroenergetics:converter",
+        "powergrid:fe_inverter"
+      ],
+      "instructions": [
+        "Electric -\u003e FE -\u003e V",
+        "Goggles: both stores",
+        "Control V cuts out"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S19",
+      "name": "Core + radiator",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 62,
+      "content": [
+        "electroenergetics:transformer_core",
+        "electroenergetics:radiator_panel"
+      ],
+      "instructions": [
+        "100 V -\u003e 50 V",
+        "Scroll winding turns",
+        "Radiator adds cooling"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S20",
+      "name": "Voltage regulator",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 62,
+      "content": [
+        "electroenergetics:voltage_regulator"
+      ],
+      "instructions": [
+        "100 V -\u003e 110 V",
+        "Scroll target voltage",
+        "Change supply: holds"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S21",
+      "name": "Current transformer",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 80,
+      "content": [
+        "electroenergetics:current_transformer"
+      ],
+      "instructions": [
+        "20 V -\u003e about 2 V",
+        "Scroll ratio: 10:1",
+        "1:1 \u003d about 20 V"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S22",
+      "name": "Concrete pole",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 80,
+      "content": [
+        "electroenergetics:concrete_pole"
+      ],
+      "instructions": [
+        "3-segment power pole",
+        "100 V at the load",
+        "Break middle: OFF"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S23",
+      "name": "Mounted breaker",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 80,
+      "content": [
+        "electroenergetics:pole_mount",
+        "electroenergetics:insulator",
+        "electroenergetics:sulfur_hexafluoride_breaker"
+      ],
+      "instructions": [
+        "100 V with feed ON",
+        "Lever opens breaker",
+        "OFF lever \u003d reset"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S24",
+      "name": "Cathode Ray Tube",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 80,
+      "content": [
+        "powergrid:crt"
+      ],
+      "instructions": [
+        "Heater feed: beam",
+        "Scroll X/Y: move dot",
+        "Grid: 0 V to reset"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S25",
+      "name": "Andesite Encased CRT",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 80,
+      "content": [
+        "powergrid:crt"
+      ],
+      "instructions": [
+        "Heater feed: beam",
+        "Scroll X/Y: move dot",
+        "Grid: 0 V to reset"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S26",
+      "name": "Brass Encased CRT",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 98,
+      "content": [
+        "powergrid:crt"
+      ],
+      "instructions": [
+        "Heater feed: beam",
+        "Scroll X/Y: move dot",
+        "Grid: 0 V to reset"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S27",
+      "name": "Punch-card reader",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 98,
+      "content": [
+        "powergrid:punch_card_reader",
+        "electroenergetics:indicator_bulb"
+      ],
+      "instructions": [
+        "Card runs 8 lamps",
+        "Reverse motor: reset",
+        "Remove / edit card"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S28",
+      "name": "CEE alternator",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 98,
+      "content": [
+        "electroenergetics:alternator_brushes",
+        "electroenergetics:alternator_rotor",
+        "electroenergetics:stator"
+      ],
+      "instructions": [
+        "Motor speed makes V",
+        "Stop drive: no power",
+        "32 RPM: about 48 V"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S29",
+      "name": "Three-phase alternator",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 98,
+      "content": [
+        "electroenergetics:three_phase_alternator_brushes",
+        "electroenergetics:synchroscope"
+      ],
+      "instructions": [
+        "Motor speed makes V",
+        "Stop drive: no power",
+        "Goggles: AC / phase"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S30",
+      "name": "PG generator",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 98,
+      "content": [
+        "powergrid:generator_induction_rotor",
+        "powergrid:generator_commutator",
+        "powergrid:generator_clutch",
+        "powergrid:winding",
+        "powergrid:device_connector"
+      ],
+      "instructions": [
+        "Feed \u003d excitation",
+        "Drive speed changes V",
+        "OFF removes power"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S31",
+      "name": "Large generator",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 116,
+      "content": [
+        "powergrid:generator_large_induction_rotor",
+        "powergrid:generator_commutator",
+        "powergrid:generator_clutch",
+        "powergrid:winding",
+        "powergrid:device_connector"
+      ],
+      "instructions": [
+        "Feed \u003d excitation",
+        "Drive speed changes V",
+        "OFF removes power"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S32",
+      "name": "Vertical generator",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 116,
+      "content": [
+        "powergrid:generator_large_induction_rotor",
+        "powergrid:generator_vertical_commutator",
+        "powergrid:generator_clutch",
+        "powergrid:winding",
+        "powergrid:device_connector"
+      ],
+      "instructions": [
+        "Feed \u003d excitation",
+        "Drive speed changes V",
+        "OFF removes power"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S33",
+      "name": "Generator housing",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 116,
+      "content": [
+        "powergrid:generator_housing"
+      ],
+      "instructions": [
+        "Feed excites 2 coils",
+        "Goggles: coil current",
+        "Remove housing: split"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S34",
+      "name": "Vertical housing",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 116,
+      "content": [
+        "powergrid:vertical_generator_housing"
+      ],
+      "instructions": [
+        "Feed excites 2 coils",
+        "Goggles: coil current",
+        "Remove housing: split"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S35",
+      "name": "CEE relay",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 116,
+      "content": [
+        "electroenergetics:relay"
+      ],
+      "instructions": [
+        "Feed runs relay coil",
+        "Relay switches lamp",
+        "6 V coil / 70 V lamp"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S36",
+      "name": "PG contactor",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 134,
+      "content": [
+        "powergrid:contactor"
+      ],
+      "instructions": [
+        "Feed runs relay coil",
+        "Relay switches lamp",
+        "30 V coil / 70 V lamp"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S37",
+      "name": "Redstone relay",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 134,
+      "content": [
+        "electroenergetics:redstone_relay"
+      ],
+      "instructions": [
+        "Lever switches lamp",
+        "Feed: 70 V supply",
+        "Lever OFF: dark"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S38",
+      "name": "Redstone converter",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 134,
+      "content": [
+        "powergrid:redstone_converter"
+      ],
+      "instructions": [
+        "Lever switches lamp",
+        "Feed: 70 V supply",
+        "Lever OFF: dark"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S39",
+      "name": "Shaft divider",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 134,
+      "content": [
+        "electroenergetics:potentiometer"
+      ],
+      "instructions": [
+        "10 V at initial arm",
+        "Crank lowers voltage",
+        "Return arm: reset"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S40",
+      "name": "Redstone divider",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 134,
+      "content": [
+        "electroenergetics:redstone_potentiometer"
+      ],
+      "instructions": [
+        "10 V at initial arm",
+        "Lever lowers voltage",
+        "Return arm: reset"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S41",
+      "name": "PG rheostat",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 152,
+      "content": [
+        "powergrid:rheostat"
+      ],
+      "instructions": [
+        "Crank changes voltage",
+        "20 V input supply",
+        "Goggles: divider arm"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S42",
+      "name": "Servo",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 152,
+      "content": [
+        "powergrid:servo"
+      ],
+      "instructions": [
+        "Control V moves arm",
+        "2.5 V -\u003e 180 degrees",
+        "0 V -\u003e center"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S43",
+      "name": "Modular display",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 152,
+      "content": [
+        "powergrid:modular_display"
+      ],
+      "instructions": [
+        "Feed OFF / ON: count",
+        "Right-click a module",
+        "Saved count persists"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S44",
+      "name": "Current source",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 152,
+      "content": [
+        "powergrid:creative_current_source",
+        "electroenergetics:resistor"
+      ],
+      "instructions": [
+        "0.1 A -\u003e 100 ohms",
+        "About 10 V output",
+        "Scroll current varies V"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S45",
+      "name": "Two-channel lamp",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 152,
+      "content": [
+        "electroenergetics:indicator_bulb"
+      ],
+      "instructions": [
+        "Both channels lit",
+        "70 V \u003d full / 35 \u003d half",
+        "Feed OFF: dark"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S46",
+      "name": "Bulb repair",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 170,
+      "content": [
+        "electroenergetics:broken_bulb"
+      ],
+      "instructions": [
+        "40 V lights the bulb",
+        "1000 V breaks it",
+        "40 V + copper: reset"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S47",
+      "name": "CEE fuse repair",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 170,
+      "content": [
+        "electroenergetics:fuse",
+        "electroenergetics:broken_fuse"
+      ],
+      "instructions": [
+        "1 A protection",
+        "Load 1 ohm: trips",
+        "1000 ohm + copper"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S48",
+      "name": "PG fuse repair",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 170,
+      "content": [
+        "powergrid:fuse_holder"
+      ],
+      "instructions": [
+        "1 A protection",
+        "Load 1 ohm: trips",
+        "1000 ohm + iron wire"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S49",
+      "name": "Held CEE fuse",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 170,
+      "content": [
+        "electroenergetics:fuse_holder"
+      ],
+      "instructions": [
+        "Native inserted fuse",
+        "1 A rating / 20 V",
+        "Swap fuse to repair"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S50",
+      "name": "CEE HV switch",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 170,
+      "content": [
+        "electroenergetics:high_voltage_switch"
+      ],
+      "instructions": [
+        "Click big switch",
+        "Watch moving contact",
+        "100 V when closed"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S51",
+      "name": "PG HV switch",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 188,
+      "content": [
+        "powergrid:hv_switch"
+      ],
+      "instructions": [
+        "Drive +64: close",
+        "Drive -64: open",
+        "Watch contact / gauge"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S52",
+      "name": "PG HV breaker",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 188,
+      "content": [
+        "powergrid:hv_breaker"
+      ],
+      "instructions": [
+        "Drive charges spring",
+        "Lever ON: close",
+        "Load 1 ohm: trips"
+      ],
+      "checked": true
+    },
+    {
+      "code": "S53",
+      "name": "Held switch + lamp",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 188,
+      "content": [
+        "electroenergetics:fuse_holder"
+      ],
+      "instructions": [
+        "Click left insert",
+        "Held lamp ON/OFF",
+        "70 V ON / 0 V OFF",
+        "Dye right insert; use a wrench to remove either part."
+      ],
+      "checked": true
+    },
+    {
+      "code": "S54",
+      "name": "Held copper bypass",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 188,
+      "content": [
+        "electroenergetics:fuse_holder"
+      ],
+      "instructions": [
+        "70 V / about 70 mA",
+        "Click copper: OFF",
+        "Copper ingot: repair",
+        "This bypass has no fuse protection; use only the supplied lamp load."
+      ],
+      "checked": true
+    },
+    {
+      "code": "S55",
+      "name": "Cord junction",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 188,
+      "content": [
+        "powergrid:cord_junction"
+      ],
+      "instructions": [
+        "Cord carries 70 V",
+        "Feed: lamp ON/OFF",
+        "Unplug / reconnect",
+        "Use the PG cord and socket, then select both exposed load terminals."
+      ],
+      "checked": true
+    },
+    {
+      "code": "S56",
+      "name": "Ceiling cord junction",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 206,
+      "content": [
+        "powergrid:ceiling_tile_junction"
+      ],
+      "instructions": [
+        "Cord carries 70 V",
+        "Feed: lamp ON/OFF",
+        "Unplug / reconnect",
+        "Use the PG cord and socket, then select both exposed load terminals."
+      ],
+      "checked": true
+    },
+    {
+      "code": "S57",
+      "name": "Socket and split cord",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 206,
+      "content": [
+        "powergrid:socket"
+      ],
+      "instructions": [
+        "70 V lights lamp",
+        "Empty hand: unplug",
+        "Cord: reconnect",
+        "The socket\u0027s two visible terminals keep their native polarity and hidden cord endpoints."
+      ],
+      "checked": true
+    },
+    {
+      "code": "S58",
+      "name": "Both physical grounds",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 206,
+      "content": [
+        "electroenergetics:ground_rod",
+        "powergrid:grounding_rod"
+      ],
+      "instructions": [
+        "Load: 10 V / 0.1 A",
+        "Rods set reference",
+        "Change soil / rewire",
+        "Removing one rod changes voltage relative to earth; the load keeps its 10 V supply."
+      ],
+      "checked": true
+    },
+    {
+      "code": "S59",
+      "name": "CEE diode polarity",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 206,
+      "content": [
+        "electroenergetics:diode"
+      ],
+      "instructions": [
+        "Forward: lamp ON",
+        "Load: about 68.86 V",
+        "Reverse wires: OFF",
+        "Reconnect the supply with its original polarity to reset. CEE 1.1.3 clamps its diode linearisation at 0.8 V; its loaded drop is about 1.14 V here."
+      ],
+      "checked": true
+    },
+    {
+      "code": "S60",
+      "name": "Dyed string lights",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 206,
+      "content": [
+        "powergrid:string_light_block"
+      ],
+      "instructions": [
+        "120 V: red / blue",
+        "Feed OFF: cools",
+        "Cutter returns cord",
+        "Native dye recipe, item cost, filament heat and light blocks are retained."
+      ],
+      "checked": true
+    },
+    {
+      "code": "S61",
+      "name": "Powered saved design",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 224,
+      "content": [
+        "powergrid:circuit_design_table"
+      ],
+      "instructions": [
+        "Open powered table",
+        "Saved via + label",
+        "Board: 10 V / 10 mA",
+        "Edit, save, copy and assemble with native PG items. The supplied board is made from this table\u0027s saved design."
+      ],
+      "checked": true
+    },
+    {
+      "code": "S62",
+      "name": "Native power resistor",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 224,
+      "content": [
+        "powergrid:power_resistor"
+      ],
+      "instructions": [
+        "70 V / 70 mA",
+        "Scroll: 1000 ohms",
+        "Feed OFF: zero amps",
+        "Change native resistance and compare V / R against your handheld readings."
+      ],
+      "checked": true
+    },
+    {
+      "code": "S63",
+      "name": "PG water transfer",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 224,
+      "content": [
+        "powergrid:electric_pump"
+      ],
+      "instructions": [
+        "Feed pumps water",
+        "North -\u003e south tank",
+        "Refill north to reset",
+        "Use buckets to empty the south tank and refill the north tank. No power means no pumping."
+      ],
+      "checked": true
+    },
+    {
+      "code": "S64",
+      "name": "Stationary catenary",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 224,
+      "content": [
+        "electroenergetics:catenary_holder"
+      ],
+      "instructions": [
+        "40 V: lamp lit",
+        "Wrench: four styles",
+        "Empty spool: recover",
+        "Copper spool reconnects the holders. Moving trains remain outside this release."
+      ],
+      "checked": true
+    },
+    {
+      "code": "S65",
+      "name": "Power through Nether",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 224,
+      "content": [
+        "powergrid:nether_transformer",
+        "powergrid:transformer_core"
+      ],
+      "instructions": [
+        "70 V at both ends",
+        "Enter this portal",
+        "Feed OFF: lamp OFF",
+        "Follow the white path at the Nether landing. Both native transformer ends are kept loaded in this demonstration."
+      ],
+      "checked": true
+    },
+    {
+      "code": "S66",
+      "name": "Fan flour washing",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 242,
+      "content": [
+        "powergrid:electric_fan"
+      ],
+      "instructions": [
+        "Throw flour in water",
+        "Flour -\u003e dough",
+        "Feed OFF stops work",
+        "The adjacent chest contains the product made during acceptance and spare input to repeat the native recipe."
+      ],
+      "checked": true
+    },
+    {
+      "code": "S67",
+      "name": "Magnet making",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 242,
+      "content": [
+        "powergrid:electromagnet"
+      ],
+      "instructions": [
+        "Throw alloy under",
+        "Alloy -\u003e magnet",
+        "Feed OFF stops work",
+        "The adjacent chest contains the product made during acceptance and spare input to repeat the native recipe."
+      ],
+      "checked": true
+    }
+  ]
+}
