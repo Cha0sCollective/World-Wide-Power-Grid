@@ -182,7 +182,7 @@ test('downloads and requirements match the configured release; Modrinth is optio
   const doc = new JSDOM(html('/downloads/')).window.document;
   assert.ok(doc.querySelector(`a[href="${downloadHref()}"]`));
   assert.equal(doc.querySelector('#download-url').value, assetHref('jar'));
-  for (const asset of ['yard', 'pinoutYard', 'checksums'])
+  for (const asset of ['worlds', 'checksums'])
     assert.ok(doc.querySelector(`a[href="${assetHref(asset)}"]`));
   for (const value of Object.values(currentRelease.requirements))
     assert.ok(doc.querySelector('.requirements').textContent.includes(value));
@@ -391,20 +391,18 @@ test('search sends the selected release filter and renders safe, version-labeled
 
 test('SDK and workshop downloads target the current public release and explain runtime requirements', () => {
   const doc = new JSDOM(html('/downloads/')).window.document;
-  for (const asset of [
-    'sdk',
-    'example',
-    'upstreamExample',
-    'exampleSource',
-    'upstreamSource',
-    'workshop',
-    'pinoutWorkshop',
-  ])
+  for (const asset of ['sdk', 'worlds'])
     assert.ok(doc.querySelector(`a[href="${assetHref(asset)}"]`), asset);
   assert.match(
     doc.querySelector('#worlds').textContent,
     /both example addon jars/,
   );
+  assert.match(doc.querySelector('#worlds').textContent, /workshop-mods/);
+  for (const filename of Object.keys(currentRelease.bundles.worlds.files))
+    assert.ok(
+      doc.querySelector('#worlds').textContent.includes(filename),
+      filename,
+    );
   const guide = new JSDOM(html(`/docs/${currentRelease.version}/developers/`))
     .window.document;
   assert.match(
@@ -419,6 +417,30 @@ test('SDK and workshop downloads target the current public release and explain r
     guide.querySelector('main').textContent,
     /do not shade API classes/i,
   );
+  assert.ok(guide.querySelector(`a[href="${assetHref('sdk')}"]`));
+  assert.match(
+    guide.querySelector('main').textContent,
+    /maven\/wwpg-api-1.0.0-maven.zip/,
+  );
+});
+
+test('current release pages link only to published top-level downloads, including projected snapshot guides', () => {
+  const prefix = `${project.repository}/releases/download/${currentRelease.tag}/`;
+  const filenames = new Set(Object.values(currentRelease.downloads));
+  for (const route of routes) {
+    const dom = new JSDOM(html(route), { url: project.origin + route });
+    for (const link of dom.window.document.querySelectorAll('a[href]'))
+      if (link.href.startsWith(prefix))
+        assert.ok(
+          filenames.has(link.href.slice(prefix.length)),
+          `${route}: removed download ${link.href}`,
+        );
+    assert.ok(
+      !html(route).includes('{{asset:'),
+      `${route}: unresolved download placeholder`,
+    );
+    dom.window.close();
+  }
 });
 
 test('generated references preserve released bytes, export only supported packages, and have working local destinations', () => {

@@ -41,8 +41,10 @@ const underRepo = (path) => {
 const sha = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const scratch = underRepo(`.website-api-checks/${Date.now()}`);
 mkdirSync(scratch, { recursive: true });
-const paths = {};
-for (const [role, artifact] of Object.entries(api.artifacts)) {
+const python =
+  process.env.WWPG_PYTHON ??
+  (process.platform === 'win32' ? 'python' : 'python3');
+const download = async (artifact) => {
   if (
     !/^[A-Za-z0-9._-]+$/.test(artifact.file) ||
     !/^[a-f0-9]{64}$/.test(artifact.sha256)
@@ -62,6 +64,38 @@ for (const [role, artifact] of Object.entries(api.artifacts)) {
       })();
   if (sha(bytes) !== artifact.sha256)
     throw new Error(`Released SDK checksum mismatch: ${artifact.file}`);
+  return bytes;
+};
+const bundledFiles = new Map();
+for (const [id, bundle] of Object.entries(release.bundles ?? {})) {
+  if (!/^[A-Za-z0-9_-]+$/.test(id)) throw new Error('Invalid bundle ID');
+  const archive = resolve(scratch, bundle.file);
+  writeFileSync(archive, await download(bundle));
+  const extracted = resolve(scratch, `bundle-${id}`);
+  execFileSync(
+    python,
+    [resolve(root, 'scripts/extract-reference.py'), archive, extracted],
+    { stdio: 'inherit' },
+  );
+  for (const [filename, relative] of Object.entries(bundle.files)) {
+    const path = resolve(extracted, relative);
+    if (!path.startsWith(extracted + sep) || bundledFiles.has(filename))
+      throw new Error('Invalid or duplicate bundled artifact path');
+    bundledFiles.set(filename, path);
+  }
+}
+const paths = {};
+for (const [role, artifact] of Object.entries(api.artifacts)) {
+  if (
+    !/^[A-Za-z0-9._-]+$/.test(artifact.file) ||
+    !/^[a-f0-9]{64}$/.test(artifact.sha256)
+  )
+    throw new Error('Invalid API artifact descriptor');
+  const bytes = bundledFiles.has(artifact.file)
+    ? readFileSync(bundledFiles.get(artifact.file))
+    : await download(artifact);
+  if (sha(bytes) !== artifact.sha256)
+    throw new Error(`Released SDK checksum mismatch: ${artifact.file}`);
   paths[role] = resolve(scratch, artifact.file);
   writeFileSync(paths[role], bytes);
 }
@@ -74,9 +108,6 @@ execFileSync(wrapper, [...tasks, '--no-daemon'], {
   stdio: 'inherit',
   shell: process.platform === 'win32',
 });
-const python =
-  process.env.WWPG_PYTHON ??
-  (process.platform === 'win32' ? 'python' : 'python3');
 const args = [underRepo(api.verifier)];
 for (const role of [
   'runtime',

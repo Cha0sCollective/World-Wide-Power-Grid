@@ -2,11 +2,11 @@
 
 ## Choose your integration
 
-| Route | Contract | Working example |
-| --- | --- | --- |
-| New stationary device or instrument | `org.cha0scollective.wwpg.api` and `.api.neoforge` | General machine addon: nine devices using immutable models and accepted results. |
-| Custom CEE property | Separate `org.cha0scollective.wwpg.api.cee` contract plus CEE 1.1.3 | Native addon: a storage-indicator panel attachment with checkpointed numerical state. |
-| Power Grid board component | Power Grid 0.6.2's own component registration and simulation | Native addon: a circuit shunt assembled through PG's designer. |
+| Route                               | Contract                                                            | Working example                                                                       |
+| ----------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| New stationary device or instrument | `org.cha0scollective.wwpg.api` and `.api.neoforge`                  | General machine addon: nine devices using immutable models and accepted results.      |
+| Custom CEE property                 | Separate `org.cha0scollective.wwpg.api.cee` contract plus CEE 1.1.3 | Native addon: a storage-indicator panel attachment with checkpointed numerical state. |
+| Power Grid board component          | Power Grid 0.6.2's own component registration and simulation        | Native addon: a circuit shunt assembled through PG's designer.                        |
 
 A PG-native component already has an electrical owner. **Do not register a second WWPG circuit for it.** The CEE adapter route and PG's component route are separate upstream integrations.
 
@@ -14,8 +14,8 @@ A PG-native component already has an electrical owner. **Do not register a secon
 
 Use Java 21 and the pinned Minecraft 1.21.1 / NeoForge 21.1.231 development environment. Check the [full runtime requirements]({{docs}}install/) before testing in game.
 
-1. Download the [API 1.0.0 Maven repository ZIP](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-api-1.0.0-maven.zip) and verify it against [the release checksums](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/SHA256SUMS.txt).
-2. Extract it into a directory such as `wwpg-api-maven`. The directory containing `org/cha0scollective/wwpg` is the repository root.
+1. Download and extract the [developer SDK bundle]({{asset:sdk}}), verifying it against [the release checksums]({{asset:checksums}}).
+2. Extract its `maven/wwpg-api-1.0.0-maven.zip` into a directory such as `wwpg-api-maven`. The directory containing `org/cha0scollective/wwpg` is the repository root.
 3. Point your build at its absolute path and declare the exact version:
 
 ```groovy title="build.gradle"
@@ -35,7 +35,7 @@ The WWPG runtime supplies both API contracts. Do not put SDK, sources, or Javado
 
 ## Build your first integration
 
-Download the [general example source ZIP](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-api-example-1.0.0-source.zip), verify its checksum, and extract it into its own directory. It includes its own Gradle wrapper and MIT license; no WWPG source checkout is needed.
+Inside the developer SDK bundle, extract `examples/wwpg-api-example-1.0.0-source.zip` into its own directory. The bundle's `SHA256SUMS.txt` also lists the enclosed files. The example includes its own Gradle wrapper and MIT license; no WWPG source checkout is needed.
 
 Run from that extracted project, using the absolute path of your extracted Maven repository:
 
@@ -81,7 +81,7 @@ An addon owns gameplay, rendering, networking, inventory, recipes, and persisten
 
 ## Extend a CEE property or PG board
 
-The [native example source ZIP](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-upstream-api-example-1.0.0-source.zip) includes a separate wrapped project. Build it with the same command and Maven repository. It produces `wwpg-upstream-api-example-1.0.0.jar` and pins CEE 1.1.3, PG 0.6.2, Create, and the other development dependencies.
+The SDK's `examples/wwpg-upstream-api-example-1.0.0-source.zip` includes a separate wrapped project. Build it with the same command and Maven repository. It produces `wwpg-upstream-api-example-1.0.0.jar` and pins CEE 1.1.3, PG 0.6.2, Create, and the other development dependencies.
 
 CEE adapters additionally declare:
 

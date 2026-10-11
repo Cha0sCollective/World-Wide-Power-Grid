@@ -22,7 +22,15 @@ export interface Release {
   date: string;
   requirements: Record<string, string>;
   optionalRequirements: Record<string, string>;
-  downloads: Record<string, string>;
+  downloads: {
+    jar: string;
+    checksums: string;
+    [asset: string]: string | undefined;
+  };
+  bundles?: Record<
+    string,
+    { file: string; sha256: string; files: Record<string, string> }
+  >;
   guides: {
     source: string;
     slug: string;
@@ -44,8 +52,12 @@ export const docsHref = (version = currentRelease.version) =>
   `/docs/${version}/`;
 export const releaseHref = (release = currentRelease) =>
   `${project.repository}/releases/tag/${release.tag}`;
-export const assetHref = (asset: string, release = currentRelease) =>
-  `${project.repository}/releases/download/${release.tag}/${release.downloads[asset]}`;
+export const assetHref = (asset: string, release = currentRelease) => {
+  const filename = release.downloads[asset];
+  if (!filename)
+    throw new Error(`Unknown download ${asset} for ${release.version}`);
+  return `${project.repository}/releases/download/${release.tag}/${filename}`;
+};
 export const downloadHref = () => project.modrinthUrl ?? assetHref('jar');
 export const sourceHref = (path: string, release = currentRelease) =>
   `${project.repository}/blob/${release.commit}/${path}`;

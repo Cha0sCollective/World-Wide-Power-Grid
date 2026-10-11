@@ -118,11 +118,17 @@ import {
         </h2>
       </div>
       <p>
-        Install the matching mod set first.
+        Install the matching mod set first, then extract the bundle.
         <br />
-        Extract the named save folder into <code>saves</code>.<br />
+        Choose a ZIP in <code>worlds</code> and extract its save folder into{' '}
+        <code>saves</code>.<br />
         Keep a clean copy for experiments.
       </p>
+    </div>
+    <div class="button-row">
+      <a class="button button-outline" href={assetHref('worlds')}>
+        Download the example worlds bundle ↓
+      </a>
     </div>
     <div class="world-grid">
       <article>
@@ -132,9 +138,9 @@ import {
           Transformers, boards, panels, meters, storage, processing, and a
           playable Nether route.
         </p>
-        <a class="text-link" href={assetHref('yard')}>
-          Download the world ↓
-        </a>
+        <p class="bundle-path">
+          <code>worlds/wwpg-0.2.0-stationary-yard.zip</code>
+        </p>
       </article>
       <article>
         <span class="mono violet">OPTIONAL PINOUT PROFILE</span>
@@ -143,9 +149,9 @@ import {
           The base exhibits plus computer-controlled circuits and the supplied{' '}
           <code>wwpg</code> Lua program.
         </p>
-        <a class="text-link" href={assetHref('pinoutYard')}>
-          Download the Pinout world ↓
-        </a>
+        <p class="bundle-path">
+          <code>worlds/wwpg-0.2.0-stationary-yard-pinout.zip</code>
+        </p>
       </article>
     </div>
     <p class="world-guide">
@@ -161,14 +167,15 @@ import {
         <h3>Extension API Workshop</h3>
         <p>
           Nine device models, a CEE storage indicator, and a PG shunt board.
-          Install both example addon jars below alongside the required mod set.
+          Install both example addon jars from <code>workshop-mods</code>{' '}
+          alongside the required mod set.
         </p>
-        <a class="text-link" href={assetHref('workshop')}>
-          Download the workshop ↓
-        </a>
-        <a class="text-link" href={assetHref('pinoutWorkshop')}>
-          Workshop with Pinout dependencies ↓
-        </a>
+        <p class="bundle-path">
+          <code>worlds/wwpg-0.2.0-api-workshop.zip</code>
+        </p>
+        <p class="bundle-path">
+          <code>worlds/wwpg-0.2.0-api-workshop-pinout.zip</code>
+        </p>
         <p class="small-text">
           Both editions contain the same stations. Computer exhibits are in the
           Pinout Stationary Yard.
@@ -178,15 +185,16 @@ import {
         <span class="mono violet">WORKSHOP RUNTIME ADDONS</span>
         <h3>The two example mods</h3>
         <p>
-          Install these jars on every client and the server for the workshop.
-          Ordinary WWPG factories do not require them.
+          Install both jars from the bundle's <code>workshop-mods</code> folder
+          on every client and the server for the workshop. Ordinary WWPG
+          factories do not require them.
         </p>
-        <a class="text-link" href={assetHref('example')}>
-          General machine example ↓
-        </a>
-        <a class="text-link" href={assetHref('upstreamExample')}>
-          Native CEE / PG example ↓
-        </a>
+        <p class="bundle-path">
+          <code>wwpg-api-example-1.0.0.jar</code>
+        </p>
+        <p class="bundle-path">
+          <code>wwpg-upstream-api-example-1.0.0.jar</code>
+        </p>
         <a class="text-link" href={`${docsHref()}workshop/`}>
           Workshop guide ↗
         </a>
@@ -197,10 +205,11 @@ import {
     <p class="eyebrow">FOR ADDON AUTHORS / API {release.api?.version}</p>
     <h2>Your next device starts here.</h2>
     <p>
-      The downloadable Maven repository includes both compile-time SDKs,
-      sources, POMs, and generated Javadoc. Use Java 21 and exact API versions.
-      These developer artifacts belong in your build environment; the WWPG
-      runtime supplies the APIs in game.
+      Extract the developer SDK bundle, then its Maven repository ZIP in{' '}
+      <code>maven</code>. Both compile-time SDKs, sources, POMs, and generated
+      Javadoc are included. Use Java 21 and exact API versions. These developer
+      artifacts belong in your build environment; the WWPG runtime supplies the
+      APIs in game.
     </p>
     <div class="button-row">
       <a class="button button-outline" href={assetHref('sdk')}>
@@ -214,12 +223,10 @@ import {
       </a>
     </div>
     <p class="world-guide">
-      <a class="text-link" href={assetHref('exampleSource')}>
-        General example source ↓
-      </a>
-      <a class="text-link" href={assetHref('upstreamSource')}>
-        Native example source ↓
-      </a>
+      The bundle's <code>examples</code> folder contains both standalone source
+      ZIPs; <code>api</code> contains the individual API, source, and Javadoc
+      jars. Each bundle includes checksums and a <code>START-HERE.md</code>{' '}
+      guide.
     </p>
   </section>
   <section class="container release-history">

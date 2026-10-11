@@ -22,19 +22,36 @@ rmSync(generated, { recursive: true, force: true });
 rmSync(apiOutput, { recursive: true, force: true });
 mkdirSync(generated, { recursive: true });
 
+function rewriteDownloads(markdown, release, repository) {
+  const prefix = `${repository}/releases/download/${release.tag}/`;
+  return markdown.replace(/\]\(([^\s)]+)\)/g, (whole, destination) => {
+    if (!destination.startsWith(prefix)) return whole;
+    const filename = destination.slice(prefix.length);
+    const bundle = Object.values(release.bundles ?? {}).find((item) =>
+      Object.hasOwn(item.files, filename),
+    );
+    if (bundle) return `](${prefix}${bundle.file})`;
+    if (filename === 'SHA256SUMS.txt' && release.bundles)
+      return `](${prefix}${release.downloads.checksums})`;
+    return whole;
+  });
+}
 export function rewriteLinks(markdown, source, release, repository) {
   const rendered = new Map(release.guides.map((g) => [g.source, g.slug]));
-  return markdown.replace(/\]\(([^\s)]+)\)/g, (whole, destination) => {
-    if (/^(https?:|mailto:|#)/.test(destination)) return whole;
-    const [path, fragment] = destination.split('#');
-    const absolute = posix.normalize(posix.join(posix.dirname(source), path));
-    const hash = fragment ? `#${fragment}` : '';
-    const slug = rendered.get(absolute);
-    if (slug) return `](/docs/${release.version}/${slug}/${hash})`;
-    const kind =
-      absolute.endsWith('/') || !posix.extname(absolute) ? 'tree' : 'blob';
-    return `](${repository}/${kind}/${release.commit}/${absolute}${hash})`;
-  });
+  return rewriteDownloads(markdown, release, repository).replace(
+    /\]\(([^\s)]+)\)/g,
+    (whole, destination) => {
+      if (/^(https?:|mailto:|#)/.test(destination)) return whole;
+      const [path, fragment] = destination.split('#');
+      const absolute = posix.normalize(posix.join(posix.dirname(source), path));
+      const hash = fragment ? `#${fragment}` : '';
+      const slug = rendered.get(absolute);
+      if (slug) return `](/docs/${release.version}/${slug}/${hash})`;
+      const kind =
+        absolute.endsWith('/') || !posix.extname(absolute) ? 'tree' : 'blob';
+      return `](${repository}/${kind}/${release.commit}/${absolute}${hash})`;
+    },
+  );
 }
 
 for (const release of project.releases) {
@@ -106,7 +123,28 @@ for (const release of project.releases) {
     mkdirSync(dirname(target), { recursive: true });
     const frontmatter = `---\ntitle: ${JSON.stringify(title)}\ndescription: ${JSON.stringify(description)}\neditUrl: false\n---\n\n`;
     const edition = `:::note[Release ${release.version}]\nThese instructions apply to **WWPG ${release.version}**${release.api ? ` / API ${release.api.version}` : ''} and its pinned dependencies. [Choose a release](/docs/).\n:::\n\n`;
-    writeFileSync(target, frontmatter + edition + body + '\n', 'utf8');
+    const downloads =
+      release.bundles &&
+      ['install', 'example-worlds', 'workshop'].includes(slug)
+        ? `:::note[World downloads]\nDownload and extract the [example-worlds bundle](${project.repository}/releases/download/${release.tag}/${release.downloads.worlds}). The four world ZIPs are in \`worlds/\`; both workshop addon jars are in \`workshop-mods/\`. World download links below open this shared bundle. Choose the named ZIP after extraction, then extract its save folder into \`saves/\`.\n:::\n\n`
+        : '';
+    const resolved = body.replace(
+      /\{\{asset:([A-Za-z0-9_]+)\}\}/g,
+      (_, asset) => {
+        if (!release.downloads[asset])
+          throw new Error(`Unknown download ${asset}`);
+        return `${project.repository}/releases/download/${release.tag}/${release.downloads[asset]}`;
+      },
+    );
+    writeFileSync(
+      target,
+      frontmatter +
+        edition +
+        downloads +
+        rewriteDownloads(resolved, release, project.repository) +
+        '\n',
+      'utf8',
+    );
   };
   for (const guide of release.guides) {
     const bytes = readFileSync(resolve(base, guide.source));
