@@ -19,7 +19,44 @@ sequential measurements; controlled accuracy fixtures keep their independent
 electrical expectations. Failed boots and their numerical readings are retained.
 Complete packaged acceptance, exported ZIP reopening, fresh graphical checks,
 and two real clients remain required before a stationary-completion claim.
-Work-in-progress jars use `0.1.0-beta.5-dev`; published beta.4 artifacts are unchanged.
+Earlier work-in-progress jars use `0.1.0-beta.5-dev`. The final-version candidate
+now uses `0.1.0-beta.5` for acceptance; it remains unpublished until every gate
+passes. Published beta.4 artifacts are unchanged.
+
+The client-workflow stage adds a separate graphical helper and an opt-in test
+with two real TCP clients. Both start from fresh extractions of an audited yard
+ZIP and require its recorded jar checksum. The graphical helper checks native
+plotter samples, CRT beams, design-table load/edit/save packets, optional computer
+keyboard input and actual portal travel. The dedicated session retains the
+existing simultaneous wiring, configuration, displays and handheld-meter checks,
+then checks both players' native design editing and optional Lua control.
+These checks remain release gates until their complete runs pass.
+
+Ordinary portal travel exposed a native pentode unload crash on Java: incremental
+conductance updates checked only two terminals while a transconductance stamp
+also addressed a reduced control terminal at index `-1`. An unfixed packaged
+Java control reproduces the same removal failure. The correction validates all
+coupled nodes, matching PG's full-rebuild handling of reduced terminals. Valid
+updates retain their existing equations and thresholds. Both solvers pass native
+tube removal/replacement and five actual saved mixed-board chunk cycles. Evidence
+is retained in `evidence/nonlinear-unload-controls`; final acceptance is still due.
+
+The yard's earlier dark Nether load had a different cause: native GameTest batch
+cleanup removed the Overworld source's forced chunks before saving. The dedicated
+yard harness now preserves its native source/load settings at shutdown, and the
+exporter rejects saves missing either set. Ordinary WWPG does not force player
+chunks. Actual ordinary-client portal checks use the saved vanilla settings,
+without a GameTest batch or helper chunk tickets. Their evidence is separate from
+the required complete graphical yard runs in `evidence/yard-native-tickets`.
+
+The first graphical run also reproduced a missing native CEE duplex model. The
+pinned jar requests `duplex_wire_segment` but only ships `bundled_wire_segment`.
+WWPG adds a parent-model alias to the existing upstream geometry. Acceptance
+requires the actual CEE partial model to bake visible quads in the client.
+Two partial graphical runs failed because the helper targeted the floor below
+raised catenary/fan exhibits; their evidence is retained separately and they are
+not counted as passing runs. The plotter instructions now describe its paper
+graph; the native format menu requires a name tag.
 
 The diagnostics/export stage adds a standalone three-pole meter exhibit, bringing
 the complete station records to 147 BASE or 149 PINOUT visits. Its typed registry

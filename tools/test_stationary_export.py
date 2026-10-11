@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+import struct
 import sys
 import tempfile
 import unittest
@@ -32,6 +33,11 @@ class ExportChecks(unittest.TestCase):
                       'DIM-1/region/r.0.0.mca': b'nether chunks', 'DIM-1/entities/r.0.0.mca': b'remote wires',
                       'DIM-1/data/electroenergetics.dat': b'remote CEE connections',
                       'serverconfig/powergrid-server.toml': b'native backend'}
+        for dimension, cx, cz in (('', 16, 14), ('DIM-1/', 2, 1)):
+            forced = [(z << 32) | x for x in range(cx - 1, cx + 2) for z in range(cz - 1, cz + 2)]
+            raw = b'\x0a\x00\x00\x0a\x00\x04data\x0c\x00\x06Forced' + struct.pack('>i', len(forced))
+            raw += b''.join(struct.pack('>q', entry) for entry in forced) + b'\x00\x00'
+            self.files[dimension + 'data/chunks.dat'] = gzip.compress(raw, mtime=0)
         for name, data in self.files.items():
             path = self.world / name
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -46,6 +52,12 @@ class ExportChecks(unittest.TestCase):
 
     def tearDown(self):
         self.scratch.cleanup()
+
+    def test_native_nether_tickets_cannot_be_lost_at_batch_completion(self):
+        result = self.export()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        (self.world / 'data/chunks.dat').write_bytes(gzip.compress(b'\x0a\x00\x00\x0a\x00\x04data\x0c\x00\x06Forced\x00\x00\x00\x00\x00\x00'))
+        self.assertNotEqual(self.export().returncode, 0, 'An unpowered Nether route was accepted')
 
     def configure(self, profile, completed=True, namespace='wwpg_yard'):
         self.profile = profile

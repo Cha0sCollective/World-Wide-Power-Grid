@@ -46,6 +46,10 @@ public final class MultiplayerClientDriver {
         if(mc.player==null||mc.level==null||mc.gameMode==null||phase.isEmpty())return;
         ++age;boolean a=mc.player.getGameProfile().getName().endsWith("A");
         try{
+            if(phase.startsWith("stationary-")) {
+                if(StationaryMultiplayerClientDriver.tick(mc,a,phase,age)){ack(mc,phase);phase="waiting";}
+                return;
+            }
             if(phase.equals("wire")&&(age==28||age==43))lookAt(mc,age==28?MultiplayerGameTests.SOURCE:MultiplayerGameTests.LOAD,age==28?(a?1:0):(a?0:1));
             if(phase.equals("wire")&&age>=30&&!first&&mc.level.getBlockEntity(MultiplayerGameTests.LOAD)!=null){click(mc,MultiplayerGameTests.SOURCE,a?1:0);first=true;age=30;}
             else if(phase.equals("wire")&&first&&age==45){click(mc,MultiplayerGameTests.LOAD,a?0:1);ack(mc,"wired");phase="waiting";}

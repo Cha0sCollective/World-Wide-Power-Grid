@@ -1,0 +1,57 @@
+// Prepare all three launches once; each receives private, frozen argument files.
+gradle.projectsEvaluated {
+    def project=gradle.rootProject
+    project.tasks.register('prepareStationaryMultiplayer') {
+        dependsOn project.tasks.named('prepareGameTestServerRun'), project.tasks.named('prepareClientARun'), project.tasks.named('prepareClientBRun'), project.tasks.named('installPgNative')
+        doLast {
+            def root=project.file(project.providers.gradleProperty('multiplayerDirectory').get())
+            def server=new File(root,'server')
+            def extraction=new groovy.json.JsonSlurper().parse(new File(server,'extracted-yard.json'))
+            def artifact=project.file(project.providers.gradleProperty('clientArtifact').get())
+            def hash=java.security.MessageDigest.getInstance('SHA-256').digest(artifact.bytes).encodeHex().toString()
+            if(hash!=extraction.jar.sha256)throw new GradleException('Multiplayer artifact does not match the exact exported ZIP')
+            def profile=project.providers.gradleProperty('testProfile').getOrElse('BASE')
+            def backend=project.providers.gradleProperty('testBackend').getOrElse('NATIVE')
+            if(profile!=extraction.profile)throw new GradleException('Multiplayer profile does not match the exact exported ZIP')
+            def snapshots=new File(root,'launch');snapshots.mkdirs()
+            def launches=[]
+            ['server':'runGameTestServer','client-a':'runClientA','client-b':'runClientB'].each { role,task ->
+                def run=project.tasks.named(task).get()
+                def directory=new File(root,role);directory.mkdirs()
+                def copyArguments={ arguments,kind ->
+                    arguments.collect { argument ->
+                        if(!argument.startsWith('@'))return argument
+                        def original=project.file(argument.substring(1))
+                        def target=new File(snapshots,"${role}-${kind}.txt")
+                        def text=original.getText('UTF-8')
+                        if(kind=='vm') {
+                            // Legacy classpaths must also survive later Gradle preparation.
+                            def legacy=project.file("build/moddev/${task.substring(3,4).toLowerCase()+task.substring(4)}LegacyClasspath.txt")
+                            if(legacy.isFile()) {
+                                def frozen=new File(snapshots,"${role}-legacy-classpath.txt")
+                                frozen.text=legacy.getText('UTF-8')
+                                text=text.replace(legacy.absolutePath.replace('\\','\\\\'),frozen.absolutePath.replace('\\','\\\\'))
+                            }
+                            text += '\n-Dwwpg.test.packaged=true\n-Dwwpg.test.backend='+backend+'\n-Dwwpg.test.profile='+profile+'\n'
+                            if(role=='server')text += '-Dwwpg.test.multiplayer=true\n-Dwwpg.test.stationaryMultiplayer=true\n-Dneoforge.enabledGameTestNamespaces=wwpg_multiplayer\n'
+                        }
+                        target.text=text
+                        return '@'+target.absolutePath
+                    }
+                }
+                def vm=copyArguments(run.jvmArgs,'vm')
+                def args=copyArguments(run.args,'program')
+                def classpath=run.classpathProvider.filter { !project.sourceSets.main.output.files.contains(it) }+project.files(artifact)
+                def quote={ value -> '"'+value.toString().replace('\\','/').replace('"','\\"')+'"' }
+                def command=new File(snapshots,"${role}-launch.txt")
+                // Java does not expand nested @files inside an @file.
+                def flatten={ values -> values.collect { it.startsWith('@') ? project.file(it.substring(1)).getText('UTF-8') : quote(it) }.join('\n') }
+                command.text=flatten(vm)+'\n'+['-cp',classpath.asPath,run.mainClass.get()].collect(quote).join('\n')+'\n'+flatten(args)+'\n'
+                def env=new HashMap(run.environmentProperty.get());env['MOD_CLASSES']='wwpg%%'+artifact.absolutePath
+                launches.add([role:role,directory:directory.absolutePath,command:[project.javaToolchains.launcherFor { languageVersion=JavaLanguageVersion.of(21) }.get().executablePath.asFile.absolutePath,'@'+command.absolutePath],environment:env])
+            }
+            new File(root,'launch.json').text=groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson([schema:1,jar:[path:artifact.absolutePath,sha256:hash],archive:extraction.archive,archive_sha256:extraction.sha256,profile:profile,backend:backend,launches:launches]))+'\n'
+            logger.lifecycle("Prepared exact-ZIP multiplayer launches: ${profile}/${backend}; WWPG ${hash}")
+        }
+    }
+}

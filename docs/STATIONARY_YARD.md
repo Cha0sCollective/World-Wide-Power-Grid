@@ -13,6 +13,8 @@ Useful starting points:
 | Factory panel | Toggle Factory enable | RUN/OFF lamps change after a short capacitor delay. |
 | Transformer rows | Compare input/output gauges; adjust native winding turns | Load voltage changes with the ratio and winding polarity. |
 | Core and radiator | Inspect the working assembly and cooling panel | The native core supplies the mixed load; the radiator contributes cooling. |
+| S15 plotter | Look at the paper graph; switch its signal feed | The trace responds to the electrical input. A name tag opens PG's native format menu. |
+| S24–S26 CRTs | Switch the heater feed; adjust the X/Y supplies or grid cutoff | A bright dot moves with the deflection inputs. Raising the cutoff voltage extinguishes it. |
 | S61 saved design | Open the powered table; move its saved output into the load slot | Load, edit, save, copy and assemble the supplied design using PG's menus and items. The nearby board runs at about 10 V / 10 mA. |
 | S65 Nether route | Enter the portal; inspect the remote lamp and gauge | About 70 V powers the mixed equipment at both ends. Both transformer ends are kept loaded in this demonstration. |
 | S68–S76 wire families | Switch the feed and measure the load | Conductive wires light the indicator. Glass insulation carries essentially no power in the pinned CEE release, so its lamp stays dark. |
@@ -23,6 +25,8 @@ Useful starting points:
 Small board currents are expected. A control circuit can operate a relay while drawing only milliamps; measure the separate factory-load feed to see its larger current. Wear goggles for precise gauge readings. Temperature-dependent lamps and storage circuits can change their readings while warming up or charging.
 
 In the Pinout edition, S80 and S81 let each upstream supply power eight computer-controlled lamps, a board relay and a panel gauge. Open a computer and type `wwpg start`, `wwpg stop`, `wwpg pattern 85`, `wwpg demo` or `wwpg volts`. `wwpg layout` explains the pins. Lua common pin 9 maps to PG terminal 0; pins 1–8 retain their native numbers. ON pins read slightly below zero relative to common because of contact resistance. OFF pins read about −70 V in these loaded examples.
+
+`wwpg stop` switches off all eight pin lamps. The separate board RUN lamp stays on briefly while its capacitor discharges, then the OFF lamp lights. Allow about three seconds for the relay to respond after starting or stopping. A native PG diode keeps that stored energy from feeding back into pin 3's indicator.
 
 Keep a clean save before destructive experiments. Export cleanup removes construction wire drops inside the yard; normal player drops remain during play. Connected wire entities, Nether saved data, native device identities and optional computer files are retained in the ZIP.
 

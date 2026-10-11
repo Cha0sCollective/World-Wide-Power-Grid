@@ -39,10 +39,12 @@ public final class MultiplayerGameTests {
                 .executes(c->{var player=c.getSource().getPlayerOrException();
                     acknowledgments.computeIfAbsent(com.mojang.brigadier.arguments.StringArgumentType.getString(c,"checkpoint"),k->new HashSet<>()).add(player.getUUID());return 1;})));
     }
-    @GameTest(template="empty",timeoutTicks=4000)
+    @GameTest(template="empty",timeoutTicks=8000)
     public static void twoRealClients(GameTestHelper h){
         h.assertTrue(Boolean.getBoolean("wwpg.test.multiplayer"),"Enable the opt-in multiplayer launch property");
         var level=h.getLevel();var server=level.getServer();acknowledgments.clear();
+        DynamicGameTests.substeps(level);
+        var stationary=new StationaryMultiplayerSession[1];
         try{
             // Vanilla's GameTest player list is capped at one. This changes only
             // the opt-in test instance, never a user's dedicated server settings.
@@ -86,14 +88,17 @@ public final class MultiplayerGameTests {
             }else if(phase[0]==5&&acked("meter-pg-current",players)){
                 announce(players,"meter-current");phase[0]=6;phaseTick[0]=level.getGameTime();
             }else if(phase[0]==6&&acked("meter-current",players)){
-                DynamicGameTests.audit(h);announce(players,"done");phase[0]=7;
-                h.runAfterDelay(50,h::succeed);
+                phase[0]=7;
+                if(Boolean.getBoolean("wwpg.test.stationaryMultiplayer"))stationary[0]=new StationaryMultiplayerSession(h,players);
+                else {DynamicGameTests.audit(h);announce(players,"done");h.runAfterDelay(50,h::succeed);}
+            }else if(phase[0]==7&&stationary[0]!=null){
+                if(stationary[0].tick()){DynamicGameTests.audit(h);announce(players,"done");phase[0]=8;h.runAfterDelay(50,h::succeed);}
             }
             if(!acknowledgments.getOrDefault("failed",Set.of()).isEmpty())h.fail("Real client validation failed; inspect its client log");
         });
     }
-    private static void announce(List<ServerPlayer> players,String phase){players.forEach(p->p.sendSystemMessage(Component.literal("WWPG_TEST "+phase)));}
-    private static boolean acked(String phase,List<ServerPlayer> players){return acknowledgments.getOrDefault(phase,Set.of()).containsAll(players.stream().map(ServerPlayer::getUUID).toList());}
+    static void announce(List<ServerPlayer> players,String phase){players.forEach(p->p.sendSystemMessage(Component.literal("WWPG_TEST "+phase)));}
+    static boolean acked(String phase,List<ServerPlayer> players){return acknowledgments.getOrDefault(phase,Set.of()).containsAll(players.stream().map(ServerPlayer::getUUID).toList());}
     private static double voltage(GameTestHelper h){return new BlockWireEndpoint(LOAD,0).getNode(h.getLevel()).getVoltage()-new BlockWireEndpoint(LOAD,1).getNode(h.getLevel()).getVoltage();}
     private static void near(GameTestHelper h,double value,double expected,String label){BoardComponentGameTests.near(h,value,expected,0.15,label);}
 }

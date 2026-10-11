@@ -14,10 +14,11 @@
         "Optional artifact and checksum lock",
         "Eight CI platform/backend/profile combinations",
         "Fresh graphical BASE/native and PINOUT/Java startup and 69-view legacy-yard regression",
-        "All four native CEE FuseHoldable map entries included: 523 BASE and 525 PINOUT registry entries"
+        "All four native CEE FuseHoldable map entries included: 523 BASE and 525 PINOUT registry entries",
+        "Complete stationary registry accounting and typed live-station reconciliation: 164 BASE / 165 PINOUT in-scope behaviors"
       ],
       "remaining": [
-        "Complete behavior expectations, terminal models and station assignments"
+        "Final versioned-jar installation/profile acceptance"
       ]
     },
     {
@@ -34,12 +35,14 @@
         "Reproduced bare-fuse block-variant wire loss on native and Java; preserve existing endpoints through native failure/repair, but cut wires on actual removal",
         "Reproduced changed native held-insert NBT not scheduling a chunk save; save only changed data and native player edits",
         "Native held bypass, switch, indicator and fuse installation/removal/replacement; both slots, dye, ratings and native drops",
-        "All four inserts pass five actual delayed-entity chunk cycles and three consecutive cold processes locally on both solvers, with complete pre-solve native NBT equality"
+        "All four inserts pass five actual delayed-entity chunk cycles and three consecutive cold processes locally on both solvers, with complete pre-solve native NBT equality",
+        "All 57 native ordinary CEE wire variants, duplex placement/restoration, native PG iron endpoints, hanging insulators, wire attachments and PG bulb replacement have dedicated fixtures",
+        "Reproduced native pentode incremental removal at reduced control index -1 on Java; validate all coupled terminals like the native full rebuild",
+        "Both solvers pass native conducting-tube removal/replacement and five actual delayed-wire mixed-board chunk cycles with unchanged schematic and twelve PG wire identities",
+        "Native schematic item copies correctly create fresh component UUIDs; GUI/TCP fixtures preserve live identities across editing rather than changing the native copy contract"
       ],
       "remaining": [
-        "Graphical design editing, saving and reopening",
-        "Remaining wire families, panel editing and component replacement workflows",
-        "Complete packaged restart matrix"
+        "Complete fresh graphical design load/edit/save and two-real-client acceptance"
       ]
     },
     {
@@ -64,20 +67,18 @@
         "Reproduced PG-only split-controller shutdown instability and corrected synchronous cross-dimension substep scheduling",
         "Reproduced stale native link after actual end unload and detached through the native link table",
         "Five actual independent end unload/reload cycles and three cold restarts locally on native and Java, with delayed entities and pre-solve serialized native history",
-        "Traced an unintended CEE zero-power commit after native PG block ticking stopped but entity IO remained loaded; device preparation now requires native block ticking readiness"
+        "Traced an unintended CEE zero-power commit after native PG block ticking stopped but entity IO remained loaded; device preparation now requires native block ticking readiness",
+        "Complete typed exhibits include native power conversion, independent Nether ends and the standalone CEE three-pole energy meter"
       ],
       "remaining": [
-        "CRT graphical beams/encasing and punch-card editing",
-        "Remaining native battery/solar assembly workflows",
-        "Content-specific restart/reload checks and playable demonstrations"
+        "Complete fresh graphical equipment, display and playable route checks"
       ]
     },
     {
       "stage": 4,
       "status": "in_progress",
       "remaining": [
-        "Complete eight-combination packaged accuracy acceptance",
-        "Graphical workflows and complete playable demonstrations"
+        "Final eight-combination versioned-jar accuracy acceptance"
       ],
       "implemented": [
         "0.1% physical mixed DC reference fixtures with both wire systems and supplies",
@@ -90,7 +91,8 @@
         "Recorded native accumulator and battery energy-change windows within 1%, including native potato no-charging behavior",
         "CEE diode and PG nonlinear reactive board switching against native traces on both solvers, at normal and tighter precision",
         "Reproduced small CEE conductance changes being lost from the PG matrix; corrected only property stamps and retained the exact-zero fast path",
-        "36 focused accuracy checks plus nine actual upstream and nine compatibility reference checks on each solver; causal failures and artifact proofs retained"
+        "36 focused accuracy checks plus nine actual upstream and nine compatibility reference checks on each solver; causal failures and artifact proofs retained",
+        "Defined DC, storage, AC/phase/transformer and native nonlinear/heating/failure reference fixtures pass both solvers in stage CI"
       ]
     },
     {
@@ -108,22 +110,19 @@
         "Both handheld instruments, panel gauge and traced/via/label board",
         "Five actual chunk cycles with delayed entities and pre-solve native pins/settings",
         "Native peripheral detach/reattach and default-open block replacement",
-        "185 complete optional checks in setup and three consecutive cold processes locally on both solvers, with actual ticking readiness before Lua boot"
+        "185 complete optional checks in setup and three consecutive cold processes locally on both solvers, with actual ticking readiness before Lua boot",
+        "Two playable computers independently control CEE-fed and PG-fed lamps, panel inputs and native relay boards; Lua programs and exact exported computer files are preserved",
+        "Real two-client checks reproduced capacitor backfeed and a premature relay assertion; isolated the computer-demo input with a native PG diode and used a shorter native capacitor delay. Actual loaded pin expectations include native contact resistance and charging current. Strict client lamps, board contacts and panel states have bounded settling deadlines."
       ],
       "remaining": [
-        "Playable start/stop demonstration",
-        "Fresh graphical and two-client optional acceptance",
-        "Final eight-combination release acceptance"
+        "Fresh graphical and two-real-client optional acceptance, then final versioned-jar matrix"
       ]
     },
     {
       "stage": 6,
       "status": "in_progress",
       "remaining": [
-        "Complete inventory-to-live-station reconciliation, full wire families and LV bulbs",
-        "Complete Stationary Test Yard and Stationary Test Yard - Pinout exports",
-        "Exact ZIP extraction/reopen and graphical verification",
-        "Two-client dedicated-server acceptance"
+        "Complete fresh graphical/two-real-client acceptance and publish final versioned artifacts"
       ],
       "implemented": [
         "67 new BASE and 69 PINOUT live exhibits accompany the legacy boards, panels and factory yard",
@@ -132,18 +131,24 @@
         "Two real CC:Tweaked computers run readable start/stop/demo/pattern/pins/volts programs against native Pinout",
         "Goggles, meters, wiring and repair supplies plus paginated native instruction books",
         "Construction-only loose wire cleanup preserves connected wires and normal player-generated drops",
-        "Setup and three consecutive cold processes locally for each BASE/PINOUT and native/Java combination"
+        "Setup and three consecutive cold processes locally for each BASE/PINOUT and native/Java combination",
+        "147 BASE / 149 PINOUT checked station records; all four exported profile/backend ZIPs pass three consecutive cold restarts after exact extraction",
+        "Reproduced native GameTest cleanup clearing the Overworld Nether source forceload set before yard export; preserve native settings at dedicated yard shutdown and reject incomplete native sets",
+        "Exact exported ordinary clients pass real portal travel and synchronized remote 69.932678 V and lit lamp on both solvers without GameTest or helper chunk tickets",
+        "Disposable full graphical and real TCP client drivers require the same immutable jar and exact ZIP hashes; old partial runs are preserved separately"
       ]
     }
   ],
   "release_blockers": [
-    "Every remaining in-scope behavior and workflow must pass",
-    "Windows and Linux, native and Java, BASE and PINOUT packaged matrix",
-    "Three consecutive cold restarts and five actual reloads for representative assemblies",
-    "Partial unload, changed grounds, disconnected sources, failures, split/merge and independently loaded Nether ends",
-    "Fresh graphical checks on both backends and two real dedicated-server clients",
-    "Complete diagnostics for readiness, isolation, device and terminal identities",
-    "Final jar, both worlds, manifests, checksums, player instructions and release notes",
-    "Investigate prolonged Linux/native/Pinout CI slowdown; cancelled duplicate run has incomplete proof"
-  ]
+    "Complete fresh graphical and two-real-client checks in BASE/PINOUT on native/Java",
+    "Complete final versioned-jar Windows/Linux x native/Java x BASE/PINOUT matrix, including three cold restarts and five actual assembly reloads",
+    "Final jar, both worlds, manifests, checksums, support matrix, player instructions and release notes",
+    "Retain failed-run evidence and require final acceptance to finish without a watchdog timeout; historical slowdown and original Nether-assertion attribution remain documented"
+  ],
+  "final_candidate": {
+    "artifact": "wwpg-0.1.0-beta.5.jar",
+    "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+    "published": false,
+    "acceptance": "All four earlier local combinations passed, but the strict byte-identity gate found Lua line endings and empty directories. Reproducible frozen artifact now matches all four earlier Linux CI jars; complete final Windows/Linux and local exact-world gates are rerunning."
+  }
 }

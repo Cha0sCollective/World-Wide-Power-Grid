@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "stationary_completion": false,
+  "logs": [
+    {
+      "source": "build\\beta5-client-v6-graphical-BASE-NATIVE.log",
+      "sha256": "768c9fcf4db5fc7c3f4215b41b7a6e0898bd1f4ed8c9979c207ce81d86c7fe4f",
+      "evidence": "beta5-client-v6-graphical-BASE-NATIVE.log.gz"
+    },
+    {
+      "source": "build\\beta5-native-ticket-yard-setup.log",
+      "sha256": "e59384d33e4fbc9e535b29e1d8a2b7ee722d19b32c2358168e5492f5fff66c0b",
+      "evidence": "beta5-native-ticket-yard-setup.log.gz"
+    },
+    {
+      "source": "build\\beta5-ordinary-portal-NATIVE.log",
+      "sha256": "0446cf0ccd2c9fe005096ac293fb12afd4aaee6d4ec3156bd22bba3b1971c057",
+      "evidence": "beta5-ordinary-portal-NATIVE.log.gz"
+    }
+  ],
+  "cause": "Native GameTestRunner.testCompleted clears every forced chunk in the test level. It removed the Overworld Nether-transformer source tickets both after the GUI baseline and before exported yard saving. The remote end remained loaded. Independent trace confirmed source/primary loaded and entity-ready but not block-ticking after portal travel; zero remote power was correct.",
+  "correction": "The dedicated packaged yard harness restores only its native source/load forceload sets on ServerStoppingEvent, before native saving. Export now rejects a ZIP source missing either native set. The graphical batch restores its own view tickets after its native baseline ends. Ordinary clients use the saved vanilla tickets; WWPG does not force ordinary player chunks.",
+  "ordinary_native_control": "Corrected exact saved world passed actual Native portal travel and remote 69.93 V/lit lamp without running a GameTest batch or adding helper chunk tickets.",
+  "ordinary_java_control": "Found and corrected a separate native pentode incremental stamp removal crash; both corrected ordinary clients now pass. See nonlinear-unload-controls.",
+  "export_tool_tests": 7,
+  "actual_full_graphical_acceptance": "Still required; portal-only focus controls are never counted as all-station acceptance.",
+  "corrected_ordinary_clients": [
+    {
+      "source": "build\\beta5-coupled-v11-ordinary-JAVA.log",
+      "sha256": "c297e29eb0315d76e18fd7afcf9d8681d600d2817484795bc37e5a1f38e9cc5d",
+      "evidence": "beta5-coupled-v11-ordinary-JAVA.log.gz",
+      "backend": "JAVA",
+      "extraction": {
+        "schema": 1,
+        "archive": "C:\\Users\\Parker\\Documents\\ChatGPT\\WWPG\\build\\distributions\\beta5-coupled-v11-yard.zip",
+        "sha256": "230088c55f0fa1a4d5aa4c86feee8e70cf24cf39cccdcadd641bbe86aba70b72",
+        "profile": "BASE",
+        "jar": {
+          "name": "wwpg-beta5-coupled-fixed-v11.jar",
+          "sha256": "8947ef8ed8312ae34f5083a6919c29deaf8fe112f6c1ef8fcf4d9fb69557a6a6"
+        },
+        "files": 23,
+        "extracted": true,
+        "reopened": false,
+        "source_save_name": "Stationary Test Yard",
+        "destination": "client"
+      },
+      "scope": "Actual ordinary portal travel and remote synchronized power; no all-station claim"
+    },
+    {
+      "source": "build\\beta5-coupled-v11-ordinary-NATIVE.log",
+      "sha256": "00b106962050623cfd77e24942764a9edcee9870a1bdd6cf9d35b2a427e89885",
+      "evidence": "beta5-coupled-v11-ordinary-NATIVE.log.gz",
+      "backend": "NATIVE",
+      "extraction": {
+        "schema": 1,
+        "archive": "C:\\Users\\Parker\\Documents\\ChatGPT\\WWPG\\build\\distributions\\beta5-coupled-v11-yard.zip",
+        "sha256": "230088c55f0fa1a4d5aa4c86feee8e70cf24cf39cccdcadd641bbe86aba70b72",
+        "profile": "BASE",
+        "jar": {
+          "name": "wwpg-beta5-coupled-fixed-v11.jar",
+          "sha256": "8947ef8ed8312ae34f5083a6919c29deaf8fe112f6c1ef8fcf4d9fb69557a6a6"
+        },
+        "files": 23,
+        "extracted": true,
+        "reopened": false,
+        "source_save_name": "Stationary Test Yard",
+        "destination": "client"
+      },
+      "scope": "Actual ordinary portal travel and remote synchronized power; no all-station claim"
+    }
+  ]
+}

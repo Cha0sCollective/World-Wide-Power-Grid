@@ -8,5 +8,10 @@
   "corrected_local_proof": "base-discovery-corrected-yard.log.gz",
   "local_base_yard_startup_and_acceptance_passed": true,
   "corrected_ci_pending": true,
-  "scope": "Test discovery only; no required optional dependency was added to WWPG."
+  "scope": "Test discovery only; no required optional dependency was added to WWPG.",
+  "failed_ci": {
+    "run": 38109984483,
+    "job": 114383363788,
+    "evidence": "base-discovery-ci.log.gz"
+  }
 }

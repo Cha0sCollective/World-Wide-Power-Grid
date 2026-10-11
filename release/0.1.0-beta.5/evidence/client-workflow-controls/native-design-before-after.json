@@ -1,0 +1,215 @@
+{
+  "before": {
+    "Temperature": 140.98226928710938,
+    "keepPacked": 0,
+    "x": 159,
+    "y": 64,
+    "z": 224,
+    "WWPGInventory": {
+      "Version": 1,
+      "Items": [
+        {
+          "count": 1,
+          "Slot": 2,
+          "components": {
+            "minecraft:custom_name": "\"WWPG via and label acceptance\"",
+            "minecraft:custom_data": {
+              "Schematic": {
+                "Components": [
+                  {
+                    "X": 0,
+                    "Y": 5,
+                    "Id": "powergrid:connector",
+                    "Properties": {
+                      "powergrid:label": ""
+                    }
+                  },
+                  {
+                    "X": 13,
+                    "Y": 5,
+                    "Id": "powergrid:connector",
+                    "Properties": {
+                      "powergrid:label": ""
+                    }
+                  },
+                  {
+                    "X": 6,
+                    "Y": 5,
+                    "Id": "powergrid:resistor",
+                    "Properties": {
+                      "powergrid:resistor_value": 1000.0,
+                      "powergrid:orientation": 0,
+                      "powergrid:vertical": 0
+                    }
+                  },
+                  {
+                    "X": 4,
+                    "Y": 6,
+                    "Id": "powergrid:via",
+                    "Properties": {
+                      "powergrid:vertical_passthrough": 0,
+                      "powergrid:edge_connections": 1
+                    }
+                  },
+                  {
+                    "X": 2,
+                    "Y": 2,
+                    "Id": "powergrid:label",
+                    "Properties": {
+                      "powergrid:label": "WWPG",
+                      "powergrid:size": 3,
+                      "powergrid:color": 14
+                    }
+                  }
+                ],
+                "Version": 2,
+                "Front": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  345871173726555264
+                ],
+                "FullPixelTraces": 0,
+                "Back": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  80216064
+                ],
+                "Name": "WWPG via and label acceptance"
+              }
+            }
+          },
+          "id": "powergrid:circuit_schematic"
+        }
+      ]
+    },
+    "id": "powergrid:circuit_design_table",
+    "Schematic": {
+      "Components": [],
+      "Version": 2,
+      "Front": [],
+      "FullPixelTraces": 0,
+      "Back": [],
+      "Name": "WWPG via and label acceptance"
+    }
+  },
+  "after": {
+    "Temperature": 140.98226928710938,
+    "keepPacked": 0,
+    "x": 159,
+    "y": 64,
+    "z": 224,
+    "WWPGInventory": {
+      "Version": 1,
+      "Items": []
+    },
+    "id": "powergrid:circuit_design_table",
+    "Schematic": {
+      "Components": [
+        {
+          "X": 0,
+          "Y": 5,
+          "Id": "powergrid:connector",
+          "UUID": [
+            590499465,
+            -651473353,
+            -1480459923,
+            1493618928
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 13,
+          "Y": 5,
+          "Id": "powergrid:connector",
+          "UUID": [
+            -386163075,
+            160908952,
+            -2067402557,
+            554185250
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 6,
+          "Y": 5,
+          "Id": "powergrid:resistor",
+          "UUID": [
+            -1834613087,
+            1571569875,
+            -2136218731,
+            -724127167
+          ],
+          "Properties": {
+            "powergrid:resistor_value": 1000.0,
+            "powergrid:orientation": 0,
+            "powergrid:vertical": 0
+          }
+        },
+        {
+          "X": 4,
+          "Y": 6,
+          "Id": "powergrid:via",
+          "UUID": [
+            -1891263411,
+            -794866568,
+            -2089094519,
+            -1031390186
+          ],
+          "Properties": {
+            "powergrid:vertical_passthrough": 0,
+            "powergrid:edge_connections": 1
+          }
+        },
+        {
+          "X": 2,
+          "Y": 2,
+          "Id": "powergrid:label",
+          "UUID": [
+            951670541,
+            1787970102,
+            -1471905589,
+            1245245625
+          ],
+          "Properties": {
+            "powergrid:label": "WWPG",
+            "powergrid:size": 3,
+            "powergrid:color": 14
+          }
+        }
+      ],
+      "Version": 2,
+      "Front": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        345871173726555264
+      ],
+      "FullPixelTraces": 0,
+      "Back": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        80216064
+      ],
+      "Name": "WWPG multiplayer A"
+    }
+  }
+}

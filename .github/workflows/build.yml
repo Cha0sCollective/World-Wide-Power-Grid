@@ -31,6 +31,8 @@ jobs:
           python-version: '3.12'
       - name: Verify stationary world export and preservation tools
         run: python tools/test_stationary_export.py
+      - name: Verify final packaging acceptance gates
+        run: python tools/test_beta5_package.py
       - if: runner.os != 'Windows'
         run: chmod +x gradlew
       - run: python tools/run_checked.py --timeout 1200 -- ./gradlew build -PtestProfile=${{ matrix.profile }} --no-daemon
@@ -57,7 +59,7 @@ jobs:
           done
       - name: Export and extract the exact stationary yard ZIP
         run: |
-          python tools/export_stationary_yard.py --run run/yard --jar build/libs/wwpg-0.1.0-beta.5-dev.jar --profile ${{ matrix.profile }} --output build/distributions/wwpg-stationary-${{ matrix.profile }}.zip
+          python tools/export_stationary_yard.py --run run/yard --jar build/libs/wwpg-0.1.0-beta.5.jar --profile ${{ matrix.profile }} --output build/distributions/wwpg-stationary-${{ matrix.profile }}.zip
           python tools/reopen_stationary_yard.py build/distributions/wwpg-stationary-${{ matrix.profile }}.zip --run run/exported-yard
       - name: Three cold restarts of the extracted ZIP
         run: |
@@ -83,6 +85,7 @@ jobs:
             run/designer-cycles-before-restart.nbt
             run/fuse-holders-before-restart.nbt
             run/duplex-before-restart.nbt
+            run/pentode-before-restart.nbt
             run/nether-before-restart.nbt
             run/pinout-before-restart.nbt
             run/world/computercraft/computer/**/*.lua
@@ -94,8 +97,12 @@ jobs:
             run/reference/reference-packaged-*.json
             run/reference/logs/
             run/reference/crash-reports/
+            run/example/logs/
+            run/example/crash-reports/
+            run/example/packaged-*.json
             run/showroom/logs/
             run/showroom/crash-reports/
+            run/showroom/packaged-*.json
             run/showroom/showroom-coverage.json
             run/yard/logs/
             run/yard/crash-reports/

@@ -50,12 +50,13 @@ neoForge {
         server { server(); programArgument '--nogui' }
         gameTestServer {
             type = 'gameTestServer'
-            systemProperty 'neoforge.enabledGameTestNamespaces', providers.gradleProperty('testNamespaces').getOrElse(testProfile == 'PINOUT' ? 'wwpg,wwpg_stationary,wwpg_design,wwpg_distribution,wwpg_wires,wwpg_bundle,wwpg_pinout' : 'wwpg,wwpg_stationary,wwpg_design,wwpg_distribution,wwpg_wires,wwpg_bundle')
+            systemProperty 'neoforge.enabledGameTestNamespaces', providers.gradleProperty('testNamespaces').getOrElse(testProfile == 'PINOUT' ? 'wwpg,wwpg_stationary,wwpg_design,wwpg_distribution,wwpg_wires,wwpg_bundle,wwpg_coupled,wwpg_pinout' : 'wwpg,wwpg_stationary,wwpg_design,wwpg_distribution,wwpg_wires,wwpg_bundle,wwpg_coupled')
             systemProperty 'wwpg.test.profile', testProfile
             systemProperty 'wwpg.test.energyFixtures', 'true'
             systemProperty 'wwpg.test.backend', providers.gradleProperty('testBackend').getOrElse('NATIVE')
             systemProperty 'wwpg.test.restartPhase', providers.gradleProperty('restartPhase').getOrElse('SETUP')
             systemProperty 'wwpg.test.multiplayer', providers.gradleProperty('multiplayer').getOrElse('false')
+            systemProperty 'wwpg.test.stationaryMultiplayer', providers.gradleProperty('stationaryMultiplayer').getOrElse('false')
         }
         configureEach { logLevel = org.slf4j.event.Level.INFO }
     }
@@ -105,6 +106,7 @@ tasks.named('jar') { manifest.attributes 'MixinConfigs': 'wwpg.mixins.json' }
 tasks.withType(Jar).configureEach {
     preserveFileTimestamps = false
     reproducibleFileOrder = true
+    includeEmptyDirs = false
     filePermissions { unix('0644') }
     dirPermissions { unix('0755') }
 }

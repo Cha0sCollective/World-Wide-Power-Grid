@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "stationary_completion": false,
+  "logs": [
+    {
+      "source": "build\\beta5-ordinary-portal-JAVA.log",
+      "sha256": "6e167f427f9b92668f94d53f0419998f7442196be4cf42aa852a23488d8e56e4",
+      "evidence": "beta5-ordinary-portal-JAVA.log.gz"
+    },
+    {
+      "source": "build\\beta5-coupled-negative-v8b-JAVA.log",
+      "sha256": "55f8efab5e3e38eddcbf2753fc1eec88c8ae4992eca53b66c2f4726b33b2d50e",
+      "evidence": "beta5-coupled-negative-v8b-JAVA.log.gz"
+    },
+    {
+      "source": "build\\beta5-coupled-fixed-v9-JAVA.log",
+      "sha256": "91b40f04b21df5308bcebfb137bb8d00a0353c663cb75e7e5306fdeb95c454cb",
+      "evidence": "beta5-coupled-fixed-v9-JAVA.log.gz"
+    },
+    {
+      "source": "build\\beta5-coupled-fixed-v10-JAVA.log",
+      "sha256": "0d773beeed845789ec90e1dc3fc0ffc83dfc0fd27371cfd8497c79ce16b25eb7",
+      "evidence": "beta5-coupled-fixed-v10-JAVA.log.gz"
+    },
+    {
+      "source": "build\\beta5-coupled-fixed-v11-build.log",
+      "sha256": "d800a26f047ba2a8844a2b788c0e8cd046a1592a865a7f1fa8da3ca7a2103b81",
+      "evidence": "beta5-coupled-fixed-v11-build.log.gz"
+    },
+    {
+      "source": "build\\beta5-coupled-fixed-v11-JAVA.log",
+      "sha256": "2af3d68dc136c31024bb4e5bf62e8f175884a180e44c87d875019a071d907856",
+      "evidence": "beta5-coupled-fixed-v11-JAVA.log.gz"
+    },
+    {
+      "source": "build\\beta5-coupled-fixed-v11-NATIVE.log",
+      "sha256": "c309afc3887ff3fd1c96347a8e66b0402f1f3da588ed473592a20ced906f5d2c",
+      "evidence": "beta5-coupled-fixed-v11-NATIVE.log.gz"
+    }
+  ],
+  "passing_controls": [
+    {
+      "backend": "JAVA",
+      "required_tests": 2,
+      "actual_unloads": 5,
+      "proof": "java-packaged.json"
+    },
+    {
+      "backend": "NATIVE",
+      "required_tests": 2,
+      "actual_unloads": 5,
+      "proof": "native-packaged.json"
+    }
+  ],
+  "original_failure": "Ordinary Java client portal departure caused a real chunk ticket update, native ElectricBehaviour.pause, CompoundWire removal and PentodeWire.GMStamp subtraction at control index -1.",
+  "negative_control": {
+    "jar": "wwpg-beta5-coupled-negative-v8b.jar",
+    "sha256": "0f81a1fea90c8886de230bb945ab6f14029442aaa9e9d926e800f865df40cfe3",
+    "backend": "JAVA",
+    "result": "A powered native pentode with reduced control grid, full plate endpoints and clean matrix fails native removal with Index -1 out of bounds. No guard is included.",
+    "native_not_run": "Avoid deliberately addressing a negative index through JNI."
+  },
+  "correction": "Validate every coupled node before incremental updates, matching native full-rebuild leaf handling. Leaf stamps were never populated and must not be subtracted. Departed or mismatched terminals request native full rebuild. Valid updates and native electrical equations remain unchanged.",
+  "harness_controls": {
+    "v9": "Tube removal and replacement conduct, but an immediate world-backend audit ran before a world tick and board-only enumeration counted six of twelve assembly wires. Both harness assertions corrected.",
+    "v10": "Adding a second BeforeBatch handler caused startup rejection. Removed it; existing shared handler already runs for the focused namespace."
+  },
+  "ordinary_exported_client": "Both corrected ordinary exact-world portal checks pass, with no GameTest batch or helper chunk tickets. Client/server remote light 0.9990383 and voltage 69.9326782 V on each backend. See yard-native-tickets.",
+  "remaining": [
+    "Final versioned-jar eight-way CI",
+    "Complete graphical and two-real-client acceptance on both profiles/backends"
+  ]
+}

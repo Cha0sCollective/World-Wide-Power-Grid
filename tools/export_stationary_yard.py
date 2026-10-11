@@ -11,6 +11,27 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
+def required_yard_tickets(world):
+    """Validate native forceload data after the GameTest runner has exited."""
+    tickets = {}
+    for dimension, cx, cz in (("", 16, 14), ("DIM-1", 2, 1)):
+        path = world / dimension / "data/chunks.dat"
+        raw = gzip.decompress(path.read_bytes())
+        marker = b"\x0c\x00\x06Forced"
+        if raw.count(marker) != 1:
+            raise ValueError("Missing unambiguous native Forced long array")
+        start = raw.index(marker) + len(marker)
+        count = int.from_bytes(raw[start:start + 4], "big", signed=True)
+        if count < 0 or start + 4 + count * 8 > len(raw):
+            raise ValueError("Invalid native forced chunk data")
+        actual = {int.from_bytes(raw[start + 4 + i * 8:start + 12 + i * 8], "big") for i in range(count)}
+        required = [(x, z) for x in range(cx - 1, cx + 2) for z in range(cz - 1, cz + 2)]
+        if any(((z & 0xffffffff) << 32 | (x & 0xffffffff)) not in actual for x, z in required):
+            raise ValueError("GameTest cleanup removed the yard's native Nether source/load tickets; do not export an unpowered route")
+        tickets[dimension or "overworld"] = required
+    return tickets
+
+
 def renamed_level(data, name):
     raw = gzip.decompress(data)
     marker = b"\x08\x00\x09LevelName"
@@ -66,6 +87,7 @@ def main():
                             electrical_expectation=behavior["acceptance_circuit"], fixtures=behavior["fixtures"]))
     if not (world / "level.dat").is_file():
         raise ValueError("Missing native saved level")
+    native_tickets = required_yard_tickets(world)
     # The complete base yard fits in the first 512 x 512 region. Keep all
     # native SavedData, including forced chunks, link identities and node data.
     selected = {world / "level.dat"}
@@ -94,8 +116,10 @@ def main():
     dependencies = json.loads((root / "release/artifacts.json").read_text())
     optional = json.loads((root / "release/optional-artifacts.json").read_text()) if args.profile == "PINOUT" else None
     manifest = dict(schema=1, target="0.1.0-beta.5", profile=args.profile, save_name=name,
-                    stationary_completion=False, release_claim="Candidate; final packaged and graphical acceptance required",
+                    acceptance_record="Published beta.5 verification record, matched by this exact ZIP's SHA-256",
+                    release_claim="This immutable manifest records export inputs; final release acceptance is recorded separately after testing this exact ZIP",
                     jar=dict(name=args.jar.name, sha256=artifact_hash), dependencies=dependencies,
+                    native_nether_forced_chunks=native_tickets,
                     stations=coverage, behavior_mapping=mapping, packaged_yard_proof=proofs[-1],
                     files={p: dict(bytes=len(data), sha256=sha(data)) for p, data in contents.items()})
     if optional is not None:

@@ -11,6 +11,7 @@
     "CircuitBuilderValidationMixin",
     "ElectricalNetworkAccessor",
     "PropertyConductanceMixin",
+    "CoupledNodeConductanceMixin",
     "CeeSolverAuditMixin",
     "SimulationTickerMixin",
     "WorldNetworksMixin",
