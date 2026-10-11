@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import VersionChoices from '../components/VersionChoices.astro';
 import Circuit from '../components/Circuit.astro';
 import {
   project,
@@ -52,7 +53,7 @@ import {
         Minecraft <strong>{release.requirements.Minecraft}</strong>
       </span>
       <span>
-        NeoForge <strong>{release.requirements.NeoForge}</strong>
+        NeoForge <VersionChoices version={release.requirements.NeoForge} />
       </span>
       <span>
         Java <strong>{release.requirements.Java}</strong>
