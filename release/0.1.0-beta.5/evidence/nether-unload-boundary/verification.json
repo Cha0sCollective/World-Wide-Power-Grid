@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "complete_release_acceptance": false,
+  "jar": "wwpg-beta5-nether-unload-boundary.jar",
+  "sha256": "bdd57d18761ec06bcec6265d5b66e6ff3f06ef504c1b5670a53cb043d33ee2c5",
+  "checks": [
+    {
+      "backend": "NATIVE",
+      "phase": "SETUP",
+      "cold_pass": 0,
+      "checks": 21,
+      "actual_unloads": 5,
+      "log": "beta5-nether-unload-boundary-NATIVE-0.log.gz",
+      "sha256": "021c36a9e75236ac267d62e2bcc403eef0a1979f684c1cd09bf56de1392d2ac4"
+    },
+    {
+      "backend": "NATIVE",
+      "phase": "VERIFY",
+      "cold_pass": 1,
+      "checks": 21,
+      "actual_unloads": 5,
+      "log": "beta5-nether-unload-boundary-NATIVE-1.log.gz",
+      "sha256": "25e367edc6cc3993990726aac641db094d64c3a80449cb92773bb717a62f8d90"
+    },
+    {
+      "backend": "NATIVE",
+      "phase": "VERIFY",
+      "cold_pass": 2,
+      "checks": 21,
+      "actual_unloads": 5,
+      "log": "beta5-nether-unload-boundary-NATIVE-2.log.gz",
+      "sha256": "defb4622e6210dcb4c6a03299e9a41c195911c0eab7652d689d692382cce5508"
+    },
+    {
+      "backend": "NATIVE",
+      "phase": "VERIFY",
+      "cold_pass": 3,
+      "checks": 21,
+      "actual_unloads": 5,
+      "log": "beta5-nether-unload-boundary-NATIVE-3.log.gz",
+      "sha256": "94fd29758b061265aa62d8c0742cbc324a2c732702b6127750b72d4d9dbd85ab"
+    },
+    {
+      "backend": "JAVA",
+      "phase": "SETUP",
+      "cold_pass": 0,
+      "checks": 21,
+      "actual_unloads": 5,
+      "log": "beta5-nether-unload-boundary-JAVA-0.log.gz",
+      "sha256": "a17c61c429e7188efc5afde9162d299a9ac2b93b3e7dcbee22fedf5a4cee45e7"
+    },
+    {
+      "backend": "JAVA",
+      "phase": "VERIFY",
+      "cold_pass": 1,
+      "checks": 21,
+      "actual_unloads": 5,
+      "log": "beta5-nether-unload-boundary-JAVA-1.log.gz",
+      "sha256": "247b6bf1bd6bdddc27ff0dfed7d322b2a3611a3fa1436a9c59426e97158e3b53"
+    },
+    {
+      "backend": "JAVA",
+      "phase": "VERIFY",
+      "cold_pass": 2,
+      "checks": 21,
+      "actual_unloads": 5,
+      "log": "beta5-nether-unload-boundary-JAVA-2.log.gz",
+      "sha256": "1e0766f0251b292ae3d4bc286586eef86300dde57282c8d9389448cf6976f885"
+    },
+    {
+      "backend": "JAVA",
+      "phase": "VERIFY",
+      "cold_pass": 3,
+      "checks": 21,
+      "actual_unloads": 5,
+      "log": "beta5-nether-unload-boundary-JAVA-3.log.gz",
+      "sha256": "57cbe69855d21025e1c3e5205a027f8246d11b972734f65bdeb5f648875d789c"
+    }
+  ],
+  "failed_ci": [
+    {
+      "run": 38099603398,
+      "platform": "Windows",
+      "backend": "NATIVE",
+      "profile": "BASE",
+      "log": "ci-38099603398-windows-native-base-failed.log.gz",
+      "result": "failed",
+      "assertion": "Combined immediate controller-link/current assertion after an actual independent chunk unload"
+    },
+    {
+      "run": 38099603398,
+      "platform": "Windows",
+      "backend": "NATIVE",
+      "profile": "PINOUT",
+      "log": "ci-38099603398-windows-native-pinout-failed.log.gz",
+      "result": "failed",
+      "assertion": "Combined immediate controller-link/current assertion after an actual independent chunk unload"
+    }
+  ],
+  "change": "Require link detachment immediately; require zero source current and ghost-power voltage after the next scheduled solve, one game tick later.",
+  "evidence": "PG 0.6.2 TransformerEntry detaches the peer immediately; SplitTransformerControllerWire.preSolve clears its current when detached. The original assertion could sample the previous solve after chunk IO.",
+  "limitation": "The failed CI assertion did not record which conjunct failed. The phase hypothesis needs observed boundary telemetry or a controlled reproduction before those failures are closed; passing retries alone do not establish their cause."
+}
