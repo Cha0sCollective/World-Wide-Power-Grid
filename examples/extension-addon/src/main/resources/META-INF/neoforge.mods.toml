@@ -9,7 +9,7 @@ description='''Independent example of stationary electrical machines using WWPG 
 [[dependencies.wwpg_api_example]]
 modId="neoforge"
 type="required"
-versionRange="[21.1.231]"
+versionRange="[21.1.231,)"
 side="BOTH"
 [[dependencies.wwpg_api_example]]
 modId="minecraft"
@@ -19,6 +19,6 @@ side="BOTH"
 [[dependencies.wwpg_api_example]]
 modId="wwpg"
 type="required"
-versionRange="[0.2.0,0.3.0)"
+versionRange="[0.2.0,)"
 ordering="AFTER"
 side="BOTH"

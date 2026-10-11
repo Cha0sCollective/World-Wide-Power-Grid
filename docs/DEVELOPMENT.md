@@ -15,6 +15,11 @@ artifacts. The optional `PINOUT` profile adds the
 [locked Pinout and CC:Tweaked versions](../release/optional-artifacts.json).
 The ordinary build produces `build/libs/wwpg-0.2.0.jar`.
 
+The compile baseline remains NeoForge 21.1.231. Use `-Pneo_version=21.1.248`
+to build or launch with that loader, including the independent examples.
+[Version compatibility](VERSION_COMPATIBILITY.md) describes the runtime
+declarations and the additional matrix checking a frozen jar on 21.1.248.
+
 ```sh
 ./gradlew build --no-daemon
 ./gradlew runClient

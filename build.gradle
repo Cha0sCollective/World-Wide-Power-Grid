@@ -78,6 +78,7 @@ neoForge {
             systemProperty 'wwpg.test.profile', testProfile
             systemProperty 'wwpg.test.energyFixtures', 'true'
             systemProperty 'wwpg.test.backend', providers.gradleProperty('testBackend').getOrElse('NATIVE')
+            systemProperty 'wwpg.test.expectedNeoForge', neo_version
             systemProperty 'wwpg.test.restartPhase', providers.gradleProperty('restartPhase').getOrElse('SETUP')
             systemProperty 'wwpg.test.multiplayer', providers.gradleProperty('multiplayer').getOrElse('false')
             systemProperty 'wwpg.test.stationaryMultiplayer', providers.gradleProperty('stationaryMultiplayer').getOrElse('false')
@@ -322,7 +323,7 @@ tasks.matching { it.name.startsWith('run') || it.name.startsWith('prepare') && i
 // Use the same NeoForge test harness with WWPG loaded exclusively from the built jar.
 tasks.register('runPackagedGameTestServer', JavaExec) {
     def developmentRun = tasks.named('runGameTestServer')
-    dependsOn tasks.named('build'), tasks.named('prepareGameTestServerRun'), tasks.named('installPgNative')
+    dependsOn tasks.named('build'), tasks.named('createMinecraftArtifacts'), tasks.named('prepareGameTestServerRun'), tasks.named('installPgNative')
     javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(21) }
     doFirst {
         def run = developmentRun.get()
@@ -331,14 +332,19 @@ tasks.register('runPackagedGameTestServer', JavaExec) {
         mainClass = run.mainClass
         args = run.args
         jvmArgs = run.jvmArgs + ['-Dwwpg.test.packaged=true']
-        def packaged = tasks.named('jar').get().archiveFile.get().asFile
+        // Test one frozen jar against another loader without silently substituting
+        // the jar rebuilt for that loader. The normal release CI keeps its default.
+        def packaged = providers.gradleProperty('testArtifact').isPresent()
+                ? file(providers.gradleProperty('testArtifact').get())
+                : tasks.named('jar').get().archiveFile.get().asFile
+        if (!packaged.isFile()) throw new GradleException("Missing packaged test artifact: ${packaged}")
         classpath = run.classpathProvider.filter { ![sourceSets.main,sourceSets.extensionApi,sourceSets.ceeApi].any { set -> set.output.files.contains(it) } } + files(packaged)
         def env = new HashMap(run.environmentProperty.get())
         env['MOD_CLASSES'] = "wwpg%%${packaged.absolutePath}"
         environment env
         logger.lifecycle("Testing packaged WWPG artifact: ${packaged.name}")
         def stamp = java.time.Instant.now().toString().replace(':', '-')
-        def proof = [schema: 1, artifact: packaged.name,
+        def proof = [schema: 1, artifact: packaged.name, neoforge: neo_version, minecraft: minecraft_version,
                 sha256: java.security.MessageDigest.getInstance('SHA-256').digest(packaged.bytes).encodeHex().toString(),
                 profile: testProfile, backend: providers.gradleProperty('testBackend').getOrElse('NATIVE'),
                 phase: providers.gradleProperty('restartPhase').getOrElse('SETUP'), started: stamp,
