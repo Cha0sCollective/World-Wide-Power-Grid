@@ -2,7 +2,7 @@
 
 WWPG is a compatibility project for CEE and Power Grid. The current beta's priority is reliable stationary interoperability; [SPEC.md](SPEC.md) retains the long-term product requirements.
 
-Before changing a feature, identify the relevant beta behavior in the [support matrix](release/content-matrix.json) and the design requirement it advances. Use [STATUS.md](docs/STATUS.md) for unresolved issues and [DEVELOPMENT.md](docs/DEVELOPMENT.md) for build/test commands. Changes to the beta's scope should update its documentation explicitly.
+Before changing a feature, identify the relevant beta behavior in the [support matrix](release/0.1.0-beta.5/supported-content.json) and the design requirement it advances. Use [STATUS.md](docs/STATUS.md) for unresolved issues and [DEVELOPMENT.md](docs/DEVELOPMENT.md) for build/test commands. Changes to the beta's scope should update its documentation explicitly.
 
 ## License
 
@@ -52,7 +52,7 @@ Run the checks that establish the behavior changed:
 | Synchronization | Two real clients using native packets and checking displayed state |
 | Documentation | Links, formatting, version/scope claims, and consistency with recorded evidence |
 
-Preserve same-mod circuits and exercise both PG backends where the change affects electrical solving. A test should measure behavior, not merely mirror the implementation. See [the current reload failure](docs/STATUS.md#unresolved-chunk-reload-failure) before interpreting a repeat run as proof of a fix.
+Preserve same-mod circuits and exercise both PG backends where the change affects electrical solving. A test should measure behavior, not merely mirror the implementation. See [the historical reload investigation](docs/STATUS.md#unresolved-chunk-reload-failure) before interpreting a repeat run as proof of a fix.
 
 For solver or ownership changes, add assertions that detect structural mutation during a solve and double state advancement. For scale work, use the benchmark defined in [SPEC.md](SPEC.md#39-performance-acceptance-benchmark); passing that benchmark is a long-term completion requirement.
 

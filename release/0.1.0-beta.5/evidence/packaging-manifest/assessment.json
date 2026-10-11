@@ -1,0 +1,13 @@
+{
+  "cause": "Verification archive included its previous distribution manifest; the verification hash necessarily describes the preceding archive.",
+  "embedded": {
+    "file": "wwpg-0.1.0-beta.5-verification.zip",
+    "sha256": "acd7de830c6b7fe63ff224508821f4d9e3477c053f1bf9679492ec4fb308b58d",
+    "bytes": 48033992
+  },
+  "current": {
+    "file": "wwpg-0.1.0-beta.5-verification.zip",
+    "sha256": "dc60f9e4a337b538a0c3741d8e953d03f40a1e030c5227b5d293ec543d368dcf",
+    "bytes": 48036570
+  }
+}

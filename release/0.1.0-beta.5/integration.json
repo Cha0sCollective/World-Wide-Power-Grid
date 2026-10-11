@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "source_acceptance": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38116785029",
+  "source_commit": "79837b3051f4a9384c166c71c1eef78daeb68d12",
+  "main_after_stages": "da25cf4cae94b8585732af218a2a12e16dd267fe",
+  "stage_merges": [
+    {
+      "number": 9,
+      "title": "Establish stationary completion profiles and repair saved circuit designs",
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/9",
+      "head": "04ebf40bc0ebd0d3e467a07267fc4632c5d16af4",
+      "merge_commit": "32ff52ddee3b88ac8d2faa216607efab34319264",
+      "merged_at": "2026-10-11T06:49:13Z"
+    },
+    {
+      "number": 10,
+      "title": "Repair stationary regulators, bulb wire retention and saved transformer history",
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/10",
+      "head": "0218fb02fe2a805dbdec820ea0393f074207f9a8",
+      "merge_commit": "b6ebf54d6f23f53ac1df8da34eb5b8ab34e4929d",
+      "merged_at": "2026-10-11T06:49:21Z"
+    },
+    {
+      "number": 11,
+      "title": "Fix stationary pole conduction and linked Nether power lifecycle",
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/11",
+      "head": "283a26211aee747258f4c0f47fe006fd8a8ebc83",
+      "merge_commit": "058dcac190bdffbc7f7da90707baf850bff8b8b5",
+      "merged_at": "2026-10-11T06:49:30Z"
+    },
+    {
+      "number": 12,
+      "title": "Verify electrical accuracy and fix saved instrument displays",
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/12",
+      "head": "2802229d5d195694a956ff6b0bfe73e2a4d91d28",
+      "merge_commit": "8d6f0346d9292b90e2835e515cc2e39bfa67901c",
+      "merged_at": "2026-10-11T06:49:40Z"
+    },
+    {
+      "number": 13,
+      "title": "Verify native Pinout meters, Lua persistence and real reloads",
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/13",
+      "head": "e34fac859c40e670ec6a1510f48170372afc8164",
+      "merge_commit": "b00d4ca890c08aa127b133e3bb32cb8215281b49",
+      "merged_at": "2026-10-11T06:49:50Z"
+    },
+    {
+      "number": 14,
+      "title": "Preserve CEE conductance changes and verify native reference transients",
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/14",
+      "head": "f5b84fa3c31e8bea96980e7f7aa4f0d73420dd5b",
+      "merge_commit": "6576a9068476e95a13b9fa29683fdfb8157e7d17",
+      "merged_at": "2026-10-11T06:50:00Z"
+    },
+    {
+      "number": 15,
+      "title": "Preserve fuse wires, holder saves and block ticking readiness",
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/15",
+      "head": "f326018078e8e685de9dd5245da37ed2973df668",
+      "merge_commit": "97f1a460cbf5ea5981297dc4da81d2e813997cb6",
+      "merged_at": "2026-10-11T06:50:09Z"
+    },
+    {
+      "number": 16,
+      "title": "Add playable stationary equipment and Pinout yards",
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/16",
+      "head": "e97e991ae268ef72632d49c3ce7660dc35499fe6",
+      "merge_commit": "0386dfc43f9be2c9d6a602d38a3d13aca25ef67c",
+      "merged_at": "2026-10-11T06:50:18Z"
+    },
+    {
+      "number": 17,
+      "title": "Complete stationary native wiring and tool workflows",
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/17",
+      "head": "e3f8f10349c91162b001543e6fa4eba5f02195f7",
+      "merge_commit": "93af071999edd233ed1dd2c74670c379491e0ea1",
+      "merged_at": "2026-10-11T06:50:28Z"
+    },
+    {
+      "number": 18,
+      "title": "Audit stationary yard exports and add useful electrical diagnostics",
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/18",
+      "head": "cbcb321e6c5d73af061a49038ae00a052452b8f2",
+      "merge_commit": "c818b88a279d383606ee1113bfd376582e91e9aa",
+      "merged_at": "2026-10-11T06:50:38Z"
+    },
+    {
+      "number": 19,
+      "title": "Finish stationary client workflows and fix nonlinear chunk unloading",
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/19",
+      "head": "79837b3051f4a9384c166c71c1eef78daeb68d12",
+      "merge_commit": "da25cf4cae94b8585732af218a2a12e16dd267fe",
+      "merged_at": "2026-10-11T06:50:48Z"
+    }
+  ]
+}

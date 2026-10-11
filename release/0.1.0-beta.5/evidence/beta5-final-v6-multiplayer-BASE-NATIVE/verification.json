@@ -1,0 +1,64 @@
+{
+  "schema": 1,
+  "passed": true,
+  "failure": null,
+  "elapsed_seconds": 96.25,
+  "jar": {
+    "path": "C:\\Users\\Parker\\Documents\\ChatGPT\\WWPG\\build\\libs\\wwpg-0.1.0-beta.5.jar",
+    "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1"
+  },
+  "archive_sha256": "2779c759087f2a95305be9a2dfce5fc95544d5fe1510c407fc08a647cb7b632b",
+  "profile": "BASE",
+  "backend": "NATIVE",
+  "real_clients": [
+    "WWPG_A",
+    "WWPG_B"
+  ],
+  "processes": {
+    "server": {
+      "pid": 56184,
+      "exit_code": 0
+    },
+    "client-a": {
+      "pid": 43564,
+      "exit_code": 0
+    },
+    "client-b": {
+      "pid": 52980,
+      "exit_code": 0
+    }
+  },
+  "logs": {
+    "server": {
+      "file": "server.log.gz",
+      "sha256": "e1f44db65003a30a5bb717566bca56ed22a2dca64d9d9b83ce6843f111608312"
+    },
+    "client-a": {
+      "file": "client-a.log.gz",
+      "sha256": "75b450ea5dd3c56d724e9da1fe4036b0cd4e91a07b8060c536a428ed5eccfa68"
+    },
+    "client-b": {
+      "file": "client-b.log.gz",
+      "sha256": "5203803b9f4d4212dff14a162ccf8e37ed6a53e63f7242c9362981ee02dff69e"
+    }
+  },
+  "screenshots": {
+    "client-a-design-editor-A.png": {
+      "sha256": "239401473accaf714b1002099ab36b47f85cde2579f082a0ff44b89527f62ac3",
+      "bytes": 27020
+    },
+    "client-a-design-saved-A.png": {
+      "sha256": "f8b38a55926bc0bcf1cf6c691f36d36b26561763d61086094a5c3411d7652c63",
+      "bytes": 31094
+    },
+    "client-b-design-editor-B.png": {
+      "sha256": "953958506811d81b78e6cdae9235cfcbe8b24126ed01192d9deb104dd0b172d6",
+      "bytes": 25278
+    },
+    "client-b-design-saved-B.png": {
+      "sha256": "7c2498a1d8ff54b94b12a8caad320c66b43f840efbc69d7fadc8704a6cc5da1e",
+      "bytes": 29384
+    }
+  },
+  "mode": "One dedicated server and two real TCP Minecraft clients; native menu and keyboard packets"
+}

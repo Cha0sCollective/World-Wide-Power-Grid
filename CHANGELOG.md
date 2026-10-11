@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased — 0.1.0-beta.5 candidate
+## 0.1.0-beta.5 — 11 October 2026 — stationary completion
 
 - Complete the stationary registry checklist, native player workflows, generation, storage, distribution, FE conversion, Nether links, instruments, loads and board/panel electronics.
 - Add optional CC;CPG: Pinout 0.2.1 with CC:Tweaked 1.120.2, preserving its native Lua API and pin numbering.
@@ -8,7 +8,8 @@
 - Preserve small CEE diode conductance changes and native block-ticking readiness. Validate every coupled terminal during PG nonlinear matrix updates to prevent reduced-control-node crashes during unloading.
 - Add readable diagnostics and separate base/Pinout playable yards with station instructions, tools, visible outputs and native computer programs. Preserve the Nether circuit's saved native chunk-loading settings during export.
 - Restore CEE's missing duplex partial-model reference using its existing native geometry.
-- Keep final publication gated by the packaged Windows/Linux, native/Java, base/Pinout matrix, three cold restarts, five actual chunk cycles, exact exported worlds, graphical clients and two real multiplayer clients.
+- Make the optional computer demo switch clearly: isolate stored relay energy with a native PG diode, shorten its delay and verify actual pin lamps, board contacts and synchronized panel readings.
+- Pass the packaged Windows/Linux, native/Java, base/Pinout matrix (204/208 checks), three cold restarts, five actual chunk cycles, exact exported worlds, full graphical clients and two real multiplayer clients per profile/backend. Publish the frozen jar, two playable yards, dependency manifests, verified support matrix, instructions, release evidence and checksums.
 
 ## 0.1.0-beta.4 — 10 October 2026
 

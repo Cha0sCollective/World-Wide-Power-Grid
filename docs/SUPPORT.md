@@ -1,86 +1,42 @@
-# Supported content
+# Supported stationary content
 
-WWPG 0.1.0-beta.4 retains the original 134 checked behaviors: 95 block/assembly groups, all 11 built-in CEE panel attachments, and all 28 built-in PG board components. It includes beta.2's explicit support for two handheld meters. Colored panels and motors share native behavior groups. The counts describe inventory groups, not separate automated tests; the packaged suite contains 122 electrical/gameplay/lifecycle fixtures and one startup-registration regression, some covering multiple groups. Beta.3 added grounding regressions; beta.4 adds restoration regressions and fixes without expanding the content set.
+WWPG 0.1.0-beta.5 covers **164 base behavior groups, or 165 with optional Pinout**. All 11 built-in CEE panel attachments and all 28 built-in PG board components are included. The base jar starts without either optional mod. Native cosmetic variants, ingredients, assembly parts and deferred moving content are accounted for in the [registry inventory](../release/0.1.0-beta.5/registry-inventory.json).
 
-The [machine-readable matrix](../release/content-matrix.json) links each declared behavior to electrical/gameplay tests and a shared lifecycle suite. Coverage includes placement, editing, removal, reconnection, network split/merge, chunk reload, restart, and multiplayer interactions. It does not establish every configuration of every device.
+The [verified support matrix](../release/0.1.0-beta.5/supported-content.json) links each in-scope behavior to its fixtures. The [final verification record](../release/0.1.0-beta.5/verification.json) certifies the exact jar and worlds. The earlier candidate checklist remains unchanged as an input record; beta.4's historical matrix is not expanded retroactively.
 
-The [original verification record](../release/verification.json), [beta.2 hotfix records](../release/0.1.0-beta.2/), [beta.3 release records](../release/0.1.0-beta.3/), and [beta.4 release records](../release/0.1.0-beta.4/) contain the acceptance evidence. Beta.4 corrects reproduced restoration bugs; the exact causes of the older intermittent zero readings remain unproven. Read [current status](STATUS.md) alongside this support list.
+Players can generate, store, transform, convert, measure and control mixed power; run native loads; edit and reuse board designs; assemble equipment; and repair bulbs, fuses and wiring. Structural parts keep their native assembly roles and do not gain invented terminals. Every claimed behavior maps to a working station or native assembly/repair workflow in the [stationary yard](STATIONARY_YARD.md); inventory cabinets do not establish coverage.
 
-Names below are native registry IDs, useful when checking upstream code or the matrix. CEE IDs use the `electroenergetics:` namespace; PG IDs use `powergrid:`.
+## Native items and workflows
 
-The [expanded test yard](FIXTURE_WORLD.md) provides live examples for 85 groups, including all board components and panel attachments. Cabinet items are listed separately in its coverage record. PG's circuit design table passes the design/copy workflow checks, but its [saved-design load error](STATUS.md#pg-circuit-design-table-saved-design-error) remains open; the yard excludes a placed table.
+PG wires, hanging wires and cords, all 57 ordinary CEE wire variants and native duplex cables keep their native lengths, costs, orientation, rendering and cutting. Native PG banners/dampers and lineman-stick interactions are covered. PG's multimeter reads voltage at either mod's accessible terminals and current on either wire system; CEE's clamp meter reads either wire system. [Tool instructions](STATIONARY_WIRING.md) explain the native limits, including glass insulation and creative-only duplex placement in the pinned CEE release.
 
-## CEE blocks and assemblies
+The saved design workflow includes editing, saving, cold restart, reopening, native copying, assembly, placing and powering a board. Native item copies create fresh component identities; installed designs retain their identities across edits and reloads.
 
-| Category | Native registry names |
+With **CC;CPG: Pinout 0.2.1 and CC:Tweaked 1.120.2**, computers switch all eight pins and read independently checked signed voltages. Lua common pin 9 maps to PG terminal 0; controlled pins 1–8 retain their numbering. Both wire systems, meters, supplies, panel inputs and board outputs are exercised, including computer restart and peripheral replacement. No replacement Lua API or required adapter block is introduced.
+
+## Behavior IDs
+
+These native registry IDs are useful to maintainers; the matrix distinguishes registry types and groups cosmetic variants. Structural parts appear with their checked assembly workflow.
+
+| Category | Native behavior IDs |
 | --- | --- |
-| controls | `fuse`, `broken_fuse`, `fuse_holder`, `cut_off_switch`, `double_switch`, `redstone_relay`, `high_voltage_switch`, `sulfur_hexafluoride_breaker`, `relay`, `momentary_switch`, `emergency_stop_button`, `potentiometer`, `redstone_potentiometer` |
-| electronics | `electrical_panel`, `diode` |
-| loads | `bulb`, `electric_pump`, `resistor`, `creative_resistor`, `indicator_bulb`, `resistive_heater`, `white_electric_motor` |
-| meters | `ammeter`, `voltmeter`, `energy_meter`, `tri_polar_energy_meter`, `current_transformer`, `frequency_meter`, `synchroscope` |
-| sources | `creative_battery`, `alternator_rotor`, `alternator_brushes`, `three_phase_alternator_brushes`, `stator` |
-| storage | `accumulator`, `capacitor`, `high_voltage_capacitor`, `inductor` |
-| transformers | `transformer`, `variac`, `redstone_variac` |
-| wiring | `connector`, `double_connector`, `triple_connector`, `quad_connector`, `ground_rod`, `duplex_wire_termination` |
+| computer_control | `pinout:pinout` |
+| controls | `electroenergetics:broken_fuse`, `electroenergetics:cut_off_switch`, `electroenergetics:double_switch`, `electroenergetics:emergency_stop_button`, `electroenergetics:fuse`, `electroenergetics:fuse_holder`, `electroenergetics:high_voltage_switch`, `electroenergetics:momentary_switch`, `electroenergetics:potentiometer`, `electroenergetics:redstone_potentiometer`, `electroenergetics:redstone_relay`, `electroenergetics:relay`, `electroenergetics:sulfur_hexafluoride_breaker`, `powergrid:carbon_pile`, `powergrid:carbon_pile_coil`, `powergrid:contactor`, `powergrid:fuse_holder`, `powergrid:hv_breaker`, `powergrid:hv_switch`, `powergrid:lv_button`, `powergrid:lv_switch`, `powergrid:mv_switch`, `powergrid:punch_card_reader`, `powergrid:redstone_converter`, `powergrid:rheostat` |
+| conversion | `electroenergetics:converter`, `powergrid:fe_inverter` |
+| electronics | `electroenergetics:ammeter`, `electroenergetics:analog_lever`, `electroenergetics:cut_off_switch`, `electroenergetics:diode`, `electroenergetics:electrical_panel`, `electroenergetics:emergency_stop_button`, `electroenergetics:energy_meter`, `electroenergetics:indicator_bulb`, `electroenergetics:miniature_circuit_breaker`, `electroenergetics:momentary_switch`, `electroenergetics:steering_wheel`, `electroenergetics:tri_polar_energy_meter`, `electroenergetics:voltmeter`, `powergrid:barretter_tube`, `powergrid:bjt_npn`, `powergrid:bjt_pnp`, `powergrid:button`, `powergrid:capacitor`, `powergrid:circuit_board`, `powergrid:circuit_design_table`, `powergrid:connector`, `powergrid:current_gauge`, `powergrid:diode`, `powergrid:display_module`, `powergrid:fuse_holder`, `powergrid:inductor`, `powergrid:label`, `powergrid:light_bulb`, `powergrid:modular_display`, `powergrid:neon_bulb`, `powergrid:pentode`, `powergrid:potentiometer`, `powergrid:redstone_relay`, `powergrid:regulator_tube`, `powergrid:relay`, `powergrid:relay_dpdt`, `powergrid:resistor`, `powergrid:switch`, `powergrid:thyratron`, `powergrid:triode`, `powergrid:varistor`, `powergrid:vfet`, `powergrid:via`, `powergrid:voltage_gauge` |
+| instruments | `powergrid:crt`, `powergrid:thermometer` |
+| loads | `electroenergetics:broken_bulb`, `electroenergetics:bulb`, `electroenergetics:buzzer`, `electroenergetics:creative_resistor`, `electroenergetics:electric_pump`, `electroenergetics:indicator_bulb`, `electroenergetics:resistive_heater`, `electroenergetics:resistor`, `electroenergetics:white_electric_motor`, `powergrid:alarm_bell`, `powergrid:basin_heater`, `powergrid:ceiling_tile_lamp`, `powergrid:constant_speed_motor`, `powergrid:creative_resistor`, `powergrid:electric_fan`, `powergrid:electric_motor`, `powergrid:electric_pump`, `powergrid:electromagnet`, `powergrid:factory_light`, `powergrid:factory_light_light`, `powergrid:heating_coil`, `powergrid:light_fixture`, `powergrid:power_resistor`, `powergrid:servo`, `powergrid:string_light_block` |
+| meters | `electroenergetics:ammeter`, `electroenergetics:current_transformer`, `electroenergetics:energy_meter`, `electroenergetics:frequency_meter`, `electroenergetics:synchroscope`, `electroenergetics:tri_polar_energy_meter`, `electroenergetics:voltmeter`, `powergrid:current_gauge`, `powergrid:energy_meter`, `powergrid:plotter`, `powergrid:power_gauge`, `powergrid:voltage_gauge` |
+| protection | `powergrid:spark_gap` |
+| sources | `electroenergetics:alternator_brushes`, `electroenergetics:alternator_rotor`, `electroenergetics:creative_battery`, `electroenergetics:radiator_panel`, `electroenergetics:stator`, `electroenergetics:three_phase_alternator_brushes`, `electroenergetics:voltage_regulator`, `powergrid:ceiling_tile_solar`, `powergrid:creative_current_source`, `powergrid:creative_voltage_source`, `powergrid:generator_clutch`, `powergrid:generator_commutator`, `powergrid:generator_housing`, `powergrid:generator_induction_rotor`, `powergrid:generator_large_induction_rotor`, `powergrid:generator_vertical_commutator`, `powergrid:solar_panel`, `powergrid:vertical_generator_housing`, `powergrid:winding` |
+| storage | `electroenergetics:accumulator`, `electroenergetics:capacitor`, `electroenergetics:high_voltage_capacitor`, `electroenergetics:inductor`, `powergrid:battery`, `powergrid:portable_battery`, `powergrid:potato_battery` |
+| transformers | `electroenergetics:redstone_variac`, `electroenergetics:transformer`, `electroenergetics:transformer_core`, `electroenergetics:variac`, `powergrid:nether_transformer`, `powergrid:transformer_core`, `powergrid:transformer_medium`, `powergrid:transformer_small`, `powergrid:variac` |
+| wiring | `electroenergetics:catenary_holder`, `electroenergetics:concrete_pole`, `electroenergetics:connector`, `electroenergetics:double_connector`, `electroenergetics:duplex_wire_termination`, `electroenergetics:ground_rod`, `electroenergetics:insulator`, `electroenergetics:pole_mount`, `electroenergetics:quad_connector`, `electroenergetics:triple_connector`, `powergrid:ceiling_tile_connector`, `powergrid:ceiling_tile_junction`, `powergrid:cord_junction`, `powergrid:device_connector`, `powergrid:grounding_rod`, `powergrid:heavy_wire_connector`, `powergrid:socket`, `powergrid:wire_connector` |
 
-## PG blocks and assemblies
+## Boundaries
 
-| Category | Native registry names |
-| --- | --- |
-| controls | `lv_switch`, `lv_button`, `mv_switch`, `hv_switch`, `hv_breaker`, `contactor`, `fuse_holder`, `rheostat` |
-| electronics | `circuit_board`, `circuit_design_table`, `modular_display` |
-| loads | `creative_resistor`, `power_resistor`, `heating_coil`, `basin_heater`, `light_fixture`, `factory_light`, `factory_light_light`, `ceiling_tile_lamp`, `electric_motor`, `constant_speed_motor`, `servo`, `electric_pump` |
-| meters | `voltage_gauge`, `current_gauge`, `power_gauge`, `energy_meter` |
-| sources | `creative_voltage_source`, `creative_current_source`, `generator_induction_rotor`, `generator_commutator`, `generator_clutch`, `generator_housing`, `solar_panel`, `winding` |
-| storage | `portable_battery` |
-| transformers | `transformer_core`, `transformer_small`, `transformer_medium`, `variac` |
-| wiring | `wire_connector`, `heavy_wire_connector`, `cord_junction`, `ceiling_tile_connector`, `ceiling_tile_junction`, `device_connector`, `socket`, `grounding_rod` |
+The release validates the declared pinned stationary workflows and reference conditions, rather than every possible device configuration. Native source quirks, portable-battery charging behavior and potato-battery depletion remain upstream behavior; see [installation notes](INSTALL.md#pinned-upstream-behavior).
 
-## CEE panel attachments
+Moving systems, altitude/velocity sensors, Sable sublevels, other optional integrations, broad version ranges, large-server benchmarks, asynchronous solving, advanced topology reduction and a public extension API remain later milestones. Unknown constructs are diagnosed and isolated. [The long-term specification](../SPEC.md) retains those future requirements.
 
-| Category | Native registry names |
-| --- | --- |
-| electronics | `ammeter`, `voltmeter`, `emergency_stop_button`, `cut_off_switch`, `analog_lever`, `steering_wheel`, `indicator_bulb`, `momentary_switch`, `energy_meter`, `tri_polar_energy_meter`, `miniature_circuit_breaker` |
-
-## Handheld meters added in beta.2
-
-| Tool | Mixed-circuit behavior |
-| --- | --- |
-| PG `multimeter` | Voltage between two accessible terminals from either mod; current on PG or CEE wires. |
-| CEE `clamp_meter` | Hold to measure current on PG or CEE wires. |
-
-The [additional support record](../release/0.1.0-beta.2/content-additions.json) links these tools to server fixtures and the real-client test. The original beta.1 checks covered installed meters, not these handheld interactions. See [meter instructions](INSTALL.md#handheld-meters); optional lineman-stick extension interactions have no compatibility claim.
-
-## PG circuit-board components
-
-| Function | Native registry names |
-| --- | --- |
-| Routing and labels | `via`, `label`, `connector` |
-| Passive and protection | `resistor`, `capacitor`, `inductor`, `potentiometer`, `varistor`, `fuse_holder` |
-| Switching and control | `switch`, `button`, `relay`, `relay_dpdt`, `redstone_relay` |
-| Semiconductor devices | `diode`, `bjt_npn`, `bjt_pnp`, `vfet` |
-| Tubes and lamps | `triode`, `pentode`, `thyratron`, `regulator_tube`, `barretter_tube`, `neon_bulb`, `light_bulb` |
-| Readings and display | `voltage_gauge`, `current_gauge`, `display_module` |
-
-## Additional content outside the declared set
-
-`Unverified` means this beta has no completed compatibility claim for that group. `Unsupported` means it is outside the release scope. Structural blocks retain their native role and do not acquire new terminals. Optional attachments and moving systems are excluded.
-
-- `electroenergetics:insulator` (unverified)
-- `electroenergetics:concrete_pole` (unverified)
-- `electroenergetics:pole_mount` (unverified)
-- `electroenergetics:radiator_panel` (unverified)
-- `electroenergetics:voltage_regulator` (unverified)
-- `electroenergetics:broken_bulb` (unverified)
-- `electroenergetics:transformer_core` (unverified)
-- `powergrid:generator_large_induction_rotor` (unverified)
-- `powergrid:generator_vertical_commutator` (unverified)
-- `powergrid:vertical_generator_housing` (unverified)
-- `powergrid:ceiling_tile_solar` (unverified)
-- `powergrid:string_light_block` (unverified)
-- `powergrid:nether_transformer` (unverified)
-- `powergrid:plotter` (unverified)
-- `electroenergetics:altitude_sensor` (unsupported)
-- `electroenergetics:velocity_sensor` (unsupported)
-
-See [INSTALL.md](INSTALL.md#pinned-upstream-behavior) for the tested upstream AC-source and portable-battery behavior. Large-network benchmarks, asynchronous solving, trains, contraptions, Sable sublevels, optional integrations, and a public extension API remain deferred.
+Published beta.1–beta.4 artifacts, support claims and evidence remain unchanged. [Current status](STATUS.md) preserves historical investigations without assigning causes that their logs cannot prove.

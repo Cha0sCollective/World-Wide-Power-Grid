@@ -1,6 +1,6 @@
 # Stationary wiring and native tools
 
-These changes are being verified for WWPG beta.5 with CEE 1.1.3 and Power Grid 0.6.2. They do not expand earlier releases' support claims.
+WWPG 0.1.0-beta.5 verifies these stationary wiring and repair workflows with CEE 1.1.3 and Power Grid 0.6.2. The [final verification record](../release/0.1.0-beta.5/verification.json) identifies the tested jar and exact worlds. Earlier published support claims remain unchanged.
 
 Both mods' ordinary wires connect compatible stationary terminals across mods. Keep the native wire's length, voltage and temperature limits in mind. PG endpoints retain their native wire restrictions; CEE terminals accept PG wire types, including iron wire. Wire costs, offhand dyes, cutting and spool recovery use the upstream workflows.
 
@@ -22,8 +22,8 @@ Holding the clamp meter in the offhand turns the lineman's stick into its native
 
 A burned PG bulb takes two clicks: first remove it, then install a healthy bulb. Use a 12 V bulb in the low-voltage exhibit and a 120 V bulb in the ordinary fixture exhibits. Turn the feed off before repairing or rewiring. CEE's broken bulb uses its separate native copper-wire repair workflow.
 
-## Evidence and remaining acceptance
+## Acceptance evidence
 
 The wiring fixtures check native item costs, all ordinary CEE wire variants, PG iron on CEE terminals, native bulb installation and repair, duplex orientation, and five actual duplex-assembly unload/reload cycles with delayed entity loading. Cold checks inspect native cable and bulb state before the first solve, so restored power cannot hide state loss.
 
-The current stage's evidence is recorded under `release/0.1.0-beta.5/evidence/`. Final stationary completion still requires the complete packaged platform/profile matrix, extracted-world checks, fresh graphical checks and two real multiplayer clients.
+The [release evidence](../release/0.1.0-beta.5/evidence/) retains the fixtures, failed controls and corrected runs. Final acceptance passes on Windows and Linux with both solvers and installation profiles. Both exact world ZIPs also pass cold restart, full Windows graphical checks and two real multiplayer clients for each profile/backend combination. Use the [stationary yard guide](STATIONARY_YARD.md) for hands-on controls and expected readings.

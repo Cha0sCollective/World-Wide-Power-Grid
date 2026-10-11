@@ -1,7 +1,9 @@
 # Stationary completion work
 
-This directory records implementation and acceptance for the planned 0.1.0-beta.5.
-**It is not a published release or a completed support claim.**
+This directory records implementation, historical investigations and final acceptance for 0.1.0-beta.5.
+
+The chronological notes below describe earlier work and its then-pending gates. Use final verification and the derived matrix for the completed release claim. Published earlier artifacts remain unchanged.
+**Final stationary acceptance passed.** The [verification record](verification.json) identifies the exact jar, eight CI jobs, exported worlds and real-client runs. The [supported matrix](supported-content.json) is derived only after those gates; the original candidate matrix remains an immutable input record.
 
 The native-wiring stage adds individual checks for all 57 ordinary CEE wire
 variants, PG iron wire on CEE terminals, hanging insulators, duplex cables,
