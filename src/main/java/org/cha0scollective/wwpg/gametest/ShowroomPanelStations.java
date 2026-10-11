@@ -112,7 +112,31 @@ final class ShowroomPanelStations {
         var player=h.makeMockPlayer(GameType.SURVIVAL);player.setShiftKeyDown(shift);
         h.assertTrue(a.onInteract(ItemStack.EMPTY,player,InteractionHand.MAIN_HAND,new BlockHitResult(a.pos.getCenter(),Direction.SOUTH,a.pos,false)).consumesAction(),"Exhibit panel control rejected use");
     }
-    private void light(GameTestHelper h,Station s,boolean on) {h.assertTrue(h.getLevel().getBlockState(s.lamp()).getValue(BulbBlock.LIGHT)==(on?15:0),s.name+" lamp disagrees with control state");}
+    private void light(GameTestHelper h,Station s,boolean on) {
+        int expected=on?15:0,actual=h.getLevel().getBlockState(s.lamp()).getValue(BulbBlock.LIGHT);
+        if(attachment(h,s) instanceof MomentarySwitchPanelAttachment momentary) {
+            var level=h.getLevel();
+            var first=new com.george_vi.electroenergetics.foundation.nodes.InWorldNode(0,s.lamp());
+            var second=new com.george_vi.electroenergetics.foundation.nodes.InWorldNode(1,s.lamp());
+            var results=com.george_vi.electroenergetics.simulation.infrastructure.InfrastructureSavedData.load(level).ticker.lastResults;
+            boolean present=results!=null&&results.getNodeID(first,-1)>=0&&results.getNodeID(second,-1)>=0;
+            boolean available=present&&(!(results instanceof org.cha0scollective.wwpg.bridge.BridgeSimulationResults bridged)||bridged.available(first,second));
+            double ceeVoltage=present?results.getVoltageAt(first,second):Double.NaN;
+            // Inspect existing native entries only: endpoint lookups must not create
+            // adapters, terminals or graph objects while observing the failed frame.
+            var world=org.patryk3211.powergrid.electricity.GlobalElectricNetworks.getWorldNetworks(level);
+            var pgFirst=world.globalExternalNodes.get(new org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint(s.lamp(),0));
+            var pgSecond=world.globalExternalNodes.get(new org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint(s.lamp(),1));
+            var network=pgFirst==null?null:pgFirst.getNetwork();
+            double pgVoltage=pgFirst!=null&&pgSecond!=null?pgFirst.getVoltage()-pgSecond.getVoltage():Double.NaN;
+            var bridge=org.cha0scollective.wwpg.bridge.Bridges.get(level);
+            org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info(
+                    "WWPG_SHOWROOM_MOMENTARY_OBSERVATION: fixtureTick={}; gameTime={}; expectedLight={}; actualLight={}; closedTicks={}; switchState={}; isClosed={}; ceeResultsPresent={}; ceeResultsAvailable={}; ceeVoltage={}; pgVoltage={}; pgConverged={}; recentErrors={}",
+                    h.getTick(),level.getGameTime(),expected,actual,momentary.closedTicks,momentary.behaviour.state,momentary.behaviour.isClosed,
+                    present,available,ceeVoltage,pgVoltage,network!=null&&network.isConverged(),bridge.diagnostics().stream().limit(2).toList());
+        }
+        h.assertTrue(actual==expected,s.name+" lamp disagrees with control state");
+    }
     void verify(GameTestHelper h) {
         for(int i=0;i<stations.size();i++) {
             var s=stations.get(i);var a=attachment(h,s);
@@ -134,7 +158,10 @@ final class ShowroomPanelStations {
             h.runAtTickTime(195,()->{light(h,s,false);var a=attachment(h,s);use(h,a,a instanceof EStopPanelAttachment);});
         }
         var momentary=stations.get(3);h.runAtTickTime(190,()->use(h,attachment(h,momentary),false));
-        h.runAtTickTime(192,()->light(h,momentary,true));h.runAtTickTime(205,()->light(h,momentary,false));
+        // Closing adds the native branch. PG quarantines its settling frame;
+        // observe the next accepted CEE gameplay frame, within one tick of the
+        // upstream observation. Keep the native four-commit pulse and OFF check.
+        h.runAtTickTime(193,()->light(h,momentary,true));h.runAtTickTime(205,()->light(h,momentary,false));
         var breaker=stations.get(4);h.runAtTickTime(190,()->resistance(h,breaker.lamp().north(3),50));
         h.runAtTickTime(205,()->{h.assertTrue(!((MCBPanelAttachment)attachment(h,breaker)).isClosed,"Exhibit breaker failed to trip");light(h,breaker,false);resistance(h,breaker.lamp().north(3),100000);use(h,attachment(h,breaker),false);});
         for(int i:new int[]{7,8}) {

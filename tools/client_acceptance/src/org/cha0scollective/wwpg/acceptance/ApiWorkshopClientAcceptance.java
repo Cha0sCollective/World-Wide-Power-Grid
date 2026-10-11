@@ -38,6 +38,9 @@ import java.util.ArrayDeque;
 
 /** Disposable graphical driver: native input APIs and network packets, never server handlers. */
 final class ApiWorkshopClientAcceptance {
+    private static final int RECONNECT_OBSERVER_DEADLINE_TICKS = 600;
+    private static final int REPAIR_OBSERVER_DEADLINE_TICKS = 600;
+    private static final int BOARD_OBSERVER_DEADLINE_TICKS = 800;
     private final boolean multiplayer = "multiplayer".equals(System.getProperty("wwpg.test.apiMode"));
     private final long started = System.currentTimeMillis();
     private volatile String failure;
@@ -237,9 +240,17 @@ final class ApiWorkshopClientAcceptance {
                 mc.player.closeContainer();
             }
         }
-        if (age == 310) {
+        if (a ? age == 310 : age >= 310) {
             var board = (CircuitBoardBlockEntity) mc.level.getBlockEntity(ExtensionApiClientSession.BOARD);
-            require(board != null && board.getSchematic().getName().equals("WWPG API client edited") && board.getComponentsStream().count() == 3, "Other client's native board edit did not synchronize");
+            boolean synchronizedDesign = board != null && "WWPG API client edited".equals(board.getSchematic().getName())
+                    && board.getComponentsStream().count() == 3;
+            if (!a && !synchronizedDesign) {
+                require(age < BOARD_OBSERVER_DEADLINE_TICKS, "Other client's native board edit did not synchronize within 800 observer ticks");
+                return;
+            }
+            require(synchronizedDesign, "Other client's native board edit did not synchronize");
+            WorldWidePowerGrid.LOGGER.info("API_WORKSHOP_BOARD_SYNC_OBSERVED: player={}; operator={}; actionAge={}; renamed=true; components=3; observerDeadlineTicks={}",
+                    mc.player.getGameProfile().getName(), a, age, BOARD_OBSERVER_DEADLINE_TICKS);
             finish(mc);
         }
     }
@@ -249,9 +260,16 @@ final class ApiWorkshopClientAcceptance {
             require(mc.hitResult instanceof EntityHitResult && ((EntityHitResult) mc.hitResult).getEntity() instanceof HangingWireEntity, "Native cutter ray missed API wire");
             require(mc.gameMode.interact(mc.player, ((EntityHitResult) mc.hitResult).getEntity(), InteractionHand.MAIN_HAND).consumesAction(), "Native cutter did not accept API wire");
         }
-        if (age == 100) {
+        if (a ? age == 100 : age >= 100) {
             var load = ExtensionApiClientSession.load(true);
-            require(!booleanState(mc, load, "lit"), "Client API load remained lit after cutting its wire");
+            boolean dark = !booleanState(mc, load, "lit");
+            if (!a && !dark) {
+                require(age < REPAIR_OBSERVER_DEADLINE_TICKS, "Client API load remained lit after cutting its wire for 600 observer ticks");
+                return;
+            }
+            require(dark, "Client API load remained lit after cutting its wire");
+            WorldWidePowerGrid.LOGGER.info("API_WORKSHOP_CUT_STATE_OBSERVED: player={}; operator={}; actionAge={}; lit=false; observerDeadlineTicks={}",
+                    mc.player.getGameProfile().getName(), a, age, REPAIR_OBSERVER_DEADLINE_TICKS);
             finish(mc);
         }
     }
@@ -259,9 +277,23 @@ final class ApiWorkshopClientAcceptance {
         if (a && age == 25) terminalLook(mc, ExtensionApiClientSession.source(true), 0);
         if (a && age == 35) terminalClick(mc, ExtensionApiClientSession.source(true));
         if (a && age == 50) terminalLook(mc, ExtensionApiClientSession.load(true), 0);
-        if (a && age == 60) terminalClick(mc, ExtensionApiClientSession.load(true));
-        if (age == 120) {
-            require(booleanState(mc, ExtensionApiClientSession.load(true), "lit"), "API load did not recover after native reconnection");
+        if (a && age == 60) {
+            terminalClick(mc, ExtensionApiClientSession.load(true));
+            WorldWidePowerGrid.LOGGER.info("API_WORKSHOP_NATIVE_RECONNECT_TARGET_CLICK_SENT: player={}; actionAge={}; terminal={}:0",
+                    mc.player.getGameProfile().getName(), age, ExtensionApiClientSession.load(true));
+        }
+        if (a ? age == 120 : age >= 120) {
+            boolean recovered = booleanState(mc, ExtensionApiClientSession.load(true), "lit");
+            // The operator pauses its action clock while moving. The observing client
+            // waits for the synchronized output, rather than racing that independent clock.
+            if (!a && !recovered) {
+                require(age < RECONNECT_OBSERVER_DEADLINE_TICKS,
+                        "API load did not synchronize native reconnection recovery within 600 observer ticks");
+                return;
+            }
+            require(recovered, "API load did not recover after native reconnection");
+            WorldWidePowerGrid.LOGGER.info("API_WORKSHOP_RECONNECT_RECOVERY_OBSERVED: player={}; operator={}; actionAge={}; lit=true; observerDeadlineTicks={}",
+                    mc.player.getGameProfile().getName(), a, age, RECONNECT_OBSERVER_DEADLINE_TICKS);
             finish(mc);
         }
     }

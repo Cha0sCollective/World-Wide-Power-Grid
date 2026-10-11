@@ -17,3 +17,6 @@ gradlew text eol=lf
 *.bat text eol=crlf
 *.nbt binary
 *.jar binary
+# Acceptance records and captured inputs are byte-addressed by SHA256.
+release/0.2.0/evidence/** -text
+release/0.2.0/*.json -text
