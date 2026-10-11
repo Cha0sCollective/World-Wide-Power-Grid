@@ -57,19 +57,29 @@ jobs:
               artifacts=[dict(path=p,sha256=hashlib.sha256((root/p).read_bytes()).hexdigest()) for p in files])
           (root/'build/neoforge-compat/inputs.json').write_text(json.dumps(proof,indent=2)+'\n',encoding='utf-8')
           PY
+      - name: Prepare NeoForge 21.1.248 before the bounded gameplay run
+        run: python tools/run_checked.py --timeout 1200 -- ./gradlew createMinecraftArtifacts -Pneo_version=21.1.248 --no-daemon
       - name: Factory, electronics, loader and profile checks on NeoForge 21.1.248
         run: |
-          namespaces=wwpg_platform,wwpg,wwpg_stationary,wwpg_design,wwpg_distribution,wwpg_wires,wwpg_bundle,wwpg_coupled,wwpg_api,wwpg_api_faults,wwpg_api_restart,wwpg_api_upstream,wwpg_api_upstream_restart
+          namespaces=wwpg_platform,wwpg,wwpg_stationary,wwpg_design,wwpg_distribution,wwpg_wires,wwpg_bundle,wwpg_coupled
           if [ '${{ matrix.profile }}' = PINOUT ]; then namespaces="$namespaces,wwpg_pinout"; fi
           python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.0.jar -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces="$namespaces" -PtestDirectory=run/neoforge-compat -x build -x jar --no-daemon
           cp run/neoforge-compat/logs/latest.log run/neoforge-compat/setup.log
       - name: Three cold restarts with the same jar, including actual assembly unload/reload cycles
         run: |
-          namespaces=wwpg_platform,wwpg,wwpg_stationary,wwpg_design,wwpg_distribution,wwpg_wires,wwpg_bundle,wwpg_coupled,wwpg_api,wwpg_api_faults,wwpg_api_restart,wwpg_api_upstream,wwpg_api_upstream_restart
+          namespaces=wwpg_platform,wwpg,wwpg_stationary,wwpg_design,wwpg_distribution,wwpg_wires,wwpg_bundle,wwpg_coupled
           if [ '${{ matrix.profile }}' = PINOUT ]; then namespaces="$namespaces,wwpg_pinout"; fi
           for pass in 1 2 3; do
             python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.0.jar -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces="$namespaces" -PtestDirectory=run/neoforge-compat -PrestartPhase=VERIFY -x build -x jar --no-daemon
             cp run/neoforge-compat/logs/latest.log "run/neoforge-compat/restart-$pass.log"
+          done
+      - name: Independent API examples, faults and lifecycle checks in their own world
+        run: |
+          python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.0.jar -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_platform,wwpg_api,wwpg_api_faults,wwpg_api_restart,wwpg_api_upstream,wwpg_api_upstream_restart -PtestDirectory=run/neoforge-api -x build -x jar --no-daemon
+          cp run/neoforge-api/logs/latest.log run/neoforge-api/setup.log
+          for pass in 1 2 3; do
+            python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.0.jar -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_platform,wwpg_api,wwpg_api_faults,wwpg_api_restart,wwpg_api_upstream,wwpg_api_upstream_restart -PtestDirectory=run/neoforge-api -PrestartPhase=VERIFY -x build -x jar --no-daemon
+            cp run/neoforge-api/logs/latest.log "run/neoforge-api/restart-$pass.log"
           done
       - name: Paused circuits and exactly-once stepping
         run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.0.jar -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api_pause -PtestDirectory=run/neoforge-pause -x build -x jar --no-daemon
@@ -87,7 +97,7 @@ jobs:
           for item in proof['artifacts']:
               assert hashlib.sha256(pathlib.Path(item['path']).read_bytes()).hexdigest()==item['sha256'], 'Frozen input changed'
           expected=proof['artifacts'][0]['sha256']
-          for name, count in [('neoforge-compat',4), ('neoforge-pause',1), ('neoforge-pending',3)]:
+          for name, count in [('neoforge-compat',4), ('neoforge-api',4), ('neoforge-pause',1), ('neoforge-pending',3)]:
               files=sorted(pathlib.Path('run',name).glob('packaged-*.json'))
               assert len(files)==count, 'Missing or additional launch attempt; retain failed evidence'
               for file in files:
@@ -107,6 +117,10 @@ jobs:
             run/neoforge-compat/*.log
             run/neoforge-compat/*.json
             run/neoforge-compat/*.nbt
+            run/neoforge-api/logs/
+            run/neoforge-api/*.log
+            run/neoforge-api/*.json
+            run/neoforge-api/*.nbt
             run/neoforge-pause/logs/
             run/neoforge-pause/*.json
             run/neoforge-pending/logs/
