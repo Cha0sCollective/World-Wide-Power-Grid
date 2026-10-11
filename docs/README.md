@@ -27,6 +27,7 @@ Each world has a base edition and an edition requiring Pinout and CC:Tweaked.
 | Build WWPG or run development checks | [Development](DEVELOPMENT.md) |
 | Submit a change | [Contributing](../CONTRIBUTING.md) |
 | Understand API release requirements | [API release checks](API_RELEASE_CHECKS.md) and [completed API plan](EXTENSION_API_PLAN.md) |
+| Package and publish the five downloads with short notes | [Release process](RELEASING.md) |
 | Inspect a published release's files and test records | [Release records](../release/README.md) |
 | Understand the eventual full product | [Product specification](../SPEC.md) |
 

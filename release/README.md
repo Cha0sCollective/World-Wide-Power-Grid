@@ -1,5 +1,9 @@
 # Release records
 
+Maintainers: follow [Publishing a release](../docs/RELEASING.md) for the standard
+five-download layout and short notes. Edit [presentation.json](presentation.json)
+for the next release; version-specific records below preserve published history.
+
 **[WWPG 0.2.0](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.0)**
 is the current release. To install it or choose a playable world, use the
 [installation guide](../docs/INSTALL.md). This directory is for reviewing what

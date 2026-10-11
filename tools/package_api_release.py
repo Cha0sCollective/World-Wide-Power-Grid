@@ -14,7 +14,14 @@ import zipfile
 
 from verify_api_compatibility import DEFAULT_PREFIX, PUBLIC, STATIC, compare, snapshot
 
-VERSION, API_VERSION = '0.2.0', '1.0.0'
+def declared_versions():
+    """Keep packaging aligned with the versions used to build this checkout."""
+    properties = (Path(__file__).resolve().parents[1] / 'gradle.properties').read_text(encoding='utf-8')
+    values = dict(re.findall(r'^([a-z_]+)\s*=\s*([^\r\n]+)', properties, re.MULTILINE))
+    return values['mod_version'].strip(), values['api_version'].strip()
+
+
+VERSION, API_VERSION = declared_versions()
 PLATFORMS = {'ubuntu-24.04', 'windows-latest'}
 BACKENDS, PROFILES = {'NATIVE', 'JAVA'}, {'BASE', 'PINOUT'}
 COMBINATIONS = {(p, b, r) for p in PLATFORMS for b in BACKENDS for r in PROFILES}
@@ -525,7 +532,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument('--manifest', type=Path)
-    mode.add_argument('--maven-source', type=Path, help='Archive both explicit 1.0.0 API publications without asserting release acceptance')
+    mode.add_argument('--maven-source', type=Path, help='Archive both declared API versions without asserting release acceptance')
     mode.add_argument('--example-source', type=Path, help='Export an independent wrapped example project without build outputs/caches')
     parser.add_argument('--root', type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument('--output', type=Path, required=True)

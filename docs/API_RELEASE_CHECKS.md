@@ -18,7 +18,9 @@ Use fresh output paths for a new attempt and keep earlier records unchanged.
 3. Freeze the source commit and artifact hashes. Build the exact SDK ZIPs after extraction.
 4. Verify the complete CI matrix, exported worlds, graphical clients, and real multiplayer sessions against those artifacts.
 5. Review failed attempts and lock the completed progress and verification records.
-6. Run the strict release packager. Publish only after every required gate passes.
+6. Run the strict release packager, then use the [release process](RELEASING.md)
+   to stage the five downloads, review the short notes and publish a verified draft.
+   Publish only after every required gate passes.
 
 The [development guide](DEVELOPMENT.md) describes local builds and test runs.
 This document keeps the detailed manifest requirements used by the release tools.
