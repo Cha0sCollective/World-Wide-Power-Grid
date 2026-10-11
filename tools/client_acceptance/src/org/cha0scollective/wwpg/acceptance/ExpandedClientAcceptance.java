@@ -69,7 +69,10 @@ public final class ExpandedClientAcceptance {
         // Read the exact archive's checked stations; no inventory cabinet counts
         // as a live view. Legacy views above also exercise individual gauges.
         try {
-            var save=java.nio.file.Path.of(System.getProperty("wwpg.test.savePath"));
+            // The Windows JVM launcher decodes -D values in its native code page,
+            // whereas the saved extraction record preserves the UTF-8 folder name.
+            var extraction=com.google.gson.JsonParser.parseString(java.nio.file.Files.readString(java.nio.file.Path.of("extracted-yard.json"))).getAsJsonObject();
+            var save=java.nio.file.Path.of("saves",extraction.get("source_save_name").getAsString());
             var manifest=com.google.gson.JsonParser.parseString(java.nio.file.Files.readString(save.resolve("WWPG_MANIFEST.json"))).getAsJsonObject();
             for(var entry:manifest.getAsJsonObject("stations").getAsJsonArray("stations")) {
                 var station=entry.getAsJsonObject();var code=station.get("code").getAsString();
@@ -291,19 +294,22 @@ public final class ExpandedClientAcceptance {
             } else if(phase==9) {
                 if(age==40)typeCommand(mc,"wwpg stop");
                 if(age==120){shot(mc,"pinout-stop-terminal.png");mc.player.closeContainer();mc.setScreen(null);phase=10;age=0;}
-            } else if(phase==10&&age==80) {
-                verifyPinLamps(mc,0);shot(mc,"pinout-all-off.png");openComputer(mc);phase=11;age=0;
+            } else if(phase==10&&age>=80) {
+                if(!verifyPinLamps(mc,0))return;
+                shot(mc,"pinout-all-off.png");openComputer(mc);phase=11;age=0;
             } else if(phase==11) {
                 if(age==40)typeCommand(mc,"wwpg pattern 85");
                 if(age==120){mc.player.closeContainer();mc.setScreen(null);phase=12;age=0;}
-            } else if(phase==12&&age==80) {
-                verifyPinLamps(mc,85);shot(mc,"pinout-odd-pins.png");openComputer(mc);phase=13;age=0;
+            } else if(phase==12&&age>=80) {
+                if(!verifyPinLamps(mc,85))return;
+                shot(mc,"pinout-odd-pins.png");openComputer(mc);phase=13;age=0;
             } else if(phase==13) {
                 if(age==40)typeCommand(mc,"wwpg volts");
                 if(age==200){shot(mc,"pinout-signed-voltage-terminal.png");typeCommand(mc,"wwpg start");}
                 if(age==300){mc.player.closeContainer();mc.setScreen(null);phase=14;age=0;}
-            } else if(phase==14&&age==80) {
-                verifyPinLamps(mc,255);shot(mc,"pinout-all-restored.png");
+            } else if(phase==14&&age>=80) {
+                if(!verifyPinLamps(mc,255))return;
+                shot(mc,"pinout-all-restored.png");
                 WorldWidePowerGrid.LOGGER.info("STATIONARY_CLIENT_PINOUT_KEYBOARD_PASSED: stop -> pattern 85 -> volts -> start");phase=15;age=0;
             } else if(phase==15) {
                 if(age==1)move(mc,new Vec3(267.5,64.05,224.5),new Vec3(268.5,64.5,224.5));
@@ -349,14 +355,29 @@ public final class ExpandedClientAcceptance {
         require(mc.screen.keyPressed(257,0,0),"Computer rejected Enter");
         WorldWidePowerGrid.LOGGER.info("STATIONARY_CLIENT_NATIVE_KEYBOARD: {}",command);
     }
-    private void verifyPinLamps(Minecraft mc,int pattern) {
+    private boolean verifyPinLamps(Minecraft mc,int pattern) {
+        String pending=null;
         for(int pin=1;pin<=8;pin++) {
             var pos=new BlockPos(263+5+(pin-1)%2*4,64,278+(pin-1)/2*2);
             var be=mc.level.getBlockEntity(pos);require(be!=null,"Pin lamp missing: "+pin);
             float light=be.saveWithoutMetadata(mc.level.registryAccess()).getFloat("FirstLight");
             boolean on=(pattern&(1<<(pin-1)))!=0;
-            require(on?light>.95:light<.01,"Client pin "+pin+" lamp disagrees with actual Lua pattern "+pattern+": "+light);
+            if(!(on?light>.95:light<.01))pending="pin "+pin+" light="+light;
         }
+        var pins=new BlockPos(263,64,278);boolean run=(pattern&4)!=0;
+        var running=(org.patryk3211.powergrid.electricity.light.fixture.AbstractLightFixtureBlockEntity)mc.level.getBlockEntity(pins.offset(15,0,10));
+        if(!(run?running.getPowerLevel()>0:running.getPowerLevel()==0))pending="RUN light="+running.getPowerLevel();
+        float stopped=mc.level.getBlockEntity(pins.offset(15,0,13)).saveWithoutMetadata(mc.level.registryAccess()).getFloat("FirstLight");
+        if(!(run?stopped<.01:stopped>.95))pending="OFF light="+stopped;
+        var panel=(com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlockEntity)mc.level.getBlockEntity(pins.south(10));
+        var gauge=(com.george_vi.electroenergetics.content.electrical_panel.attachments.GaugePanelAttachment)panel.getAttachments()[com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelSlot.THIRD_CENTERED.ordinal()];
+        if(Math.abs(gauge.value-((pattern&16)!=0?70:0))>=.2)pending="panel voltage="+gauge.value;
+        if(pending!=null) {
+            if(age%100==0)WorldWidePowerGrid.LOGGER.info("STATIONARY_CLIENT_SETTLING: pattern={}, age={}, pending={}",pattern,age,pending);
+            require(age<600,"Native computer outputs did not settle: pattern="+pattern+", "+pending);
+            return false;
+        }
+        return true;
     }
     private void move(Minecraft mc,Vec3 camera,Vec3 target){
         var delta=target.subtract(camera.add(0,mc.player.getEyeHeight(),0));

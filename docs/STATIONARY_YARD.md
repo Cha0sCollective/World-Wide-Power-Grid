@@ -26,6 +26,8 @@ Small board currents are expected. A control circuit can operate a relay while d
 
 In the Pinout edition, S80 and S81 let each upstream supply power eight computer-controlled lamps, a board relay and a panel gauge. Open a computer and type `wwpg start`, `wwpg stop`, `wwpg pattern 85`, `wwpg demo` or `wwpg volts`. `wwpg layout` explains the pins. Lua common pin 9 maps to PG terminal 0; pins 1–8 retain their native numbers. ON pins read slightly below zero relative to common because of contact resistance. OFF pins read about −70 V in these loaded examples.
 
+`wwpg stop` switches off all eight pin lamps. The separate board RUN lamp stays on briefly while its capacitor discharges, then the OFF lamp lights. Allow about three seconds for the relay to respond after starting or stopping. A native PG diode keeps that stored energy from feeding back into pin 3's indicator.
+
 Keep a clean save before destructive experiments. Export cleanup removes construction wire drops inside the yard; normal player drops remain during play. Connected wire entities, Nether saved data, native device identities and optional computer files are retained in the ZIP.
 
 For a report, include the exhibit code, what you operated, the reading you expected and what happened. An operator can run `/wwpg at x y z` to inspect device identities and loading readiness, `/wwpg topology` for recent structural changes, and `/wwpg errors` for recent simulation errors. Diagnostic queries do not load distant chunks or create electrical adapters.

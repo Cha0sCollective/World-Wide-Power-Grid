@@ -1,0 +1,552 @@
+[
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 159,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 278,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 0.0
+  },
+  {
+    "Temperature": 18.048498153686523,
+    "Pin6": 0,
+    "Pin5": 0,
+    "Pin8": 0,
+    "Pin7": 0,
+    "keepPacked": 0,
+    "Pin2": 0,
+    "x": 159,
+    "Pin1": 0,
+    "y": 64,
+    "Pin4": 0,
+    "z": 296,
+    "Pin3": 0,
+    "id": "pinout:pinout"
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 164,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 296,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 4.997476025891956e-06
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 164,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 298,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 0.024158429354429245
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 168,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 300,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 4.999974862585077e-06
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 168,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 302,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 4.999974862585077e-06
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 164,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 300,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 4.99497991768294e-06
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 168,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 296,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 4.999974862585077e-06
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 164,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 302,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 4.999974862585077e-06
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 168,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 298,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 4.999974862585077e-06
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 174,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 309,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 1.0
+  },
+  {
+    "keepPacked": 0,
+    "x": 171,
+    "y": 64,
+    "z": 306,
+    "id": "powergrid:circuit_board",
+    "Schematic": {
+      "Components": [
+        {
+          "X": 0,
+          "Y": 0,
+          "Id": "powergrid:connector",
+          "UUID": [
+            323201777,
+            -498774049,
+            -1931042038,
+            349718934
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 0,
+          "Y": 13,
+          "Id": "powergrid:connector",
+          "UUID": [
+            -1659548299,
+            1724862387,
+            -1884710570,
+            345104897
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 13,
+          "Y": 0,
+          "Id": "powergrid:connector",
+          "UUID": [
+            376889688,
+            -911323215,
+            -1210267728,
+            857521733
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 13,
+          "Y": 5,
+          "Id": "powergrid:connector",
+          "UUID": [
+            -127300864,
+            -904117731,
+            -1123922782,
+            -1190802856
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 13,
+          "Y": 13,
+          "Id": "powergrid:connector",
+          "UUID": [
+            1064116052,
+            -73777041,
+            -1131182245,
+            2015574682
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 6,
+          "Y": 5,
+          "Id": "powergrid:relay",
+          "UUID": [
+            -1881993100,
+            -986560551,
+            -1644493068,
+            -1394987728
+          ],
+          "Properties": {
+            "powergrid:relay_state": 0,
+            "powergrid:relay_threshold": 12.0,
+            "powergrid:orientation": 0,
+            "powergrid:mirrored": 0,
+            "powergrid:relay_polarized": 0
+          }
+        },
+        {
+          "X": 2,
+          "Y": 6,
+          "Id": "powergrid:capacitor",
+          "UUID": [
+            1574878436,
+            -979873930,
+            -1324437567,
+            1299936650
+          ],
+          "Properties": {
+            "powergrid:capacitor_value": 0.03999999910593033,
+            "powergrid:charge": 1.8758759498596191,
+            "powergrid:orientation": 0
+          }
+        }
+      ],
+      "Version": 2,
+      "Front": [
+        0,
+        144115188075855904,
+        216172782113783856,
+        216172782113783856,
+        216172782113783856,
+        417934024918224016,
+        345876121625862144,
+        489991618919684096,
+        216172782119865504,
+        216172782113783856,
+        216172782113783856,
+        216172782113783856,
+        216172782113783856,
+        216172782113783856,
+        72057594037927952
+      ],
+      "FullPixelTraces": 0,
+      "Back": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        80216064
+      ],
+      "Name": "WWPG lamp relay with capacitor off-delay"
+    },
+    "Thermal": {
+      "8fd31074-c532-47d9-9dfb-06f4acda2d30-1": 18.02145004272461,
+      "8fd31074-c532-47d9-9dfb-06f4acda2d30-0": 18.790664672851562
+    }
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 211,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 278,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 0.1428457498550415
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 268,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 280,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 0.024157697334885597
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 268,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 282,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 4.99497991768294e-06
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 268,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 278,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 4.997476025891956e-06
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 268,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 284,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 4.999974862585077e-06
+  },
+  {
+    "Temperature": 18.04849624633789,
+    "Pin6": 0,
+    "Pin5": 0,
+    "Pin8": 0,
+    "Pin7": 0,
+    "keepPacked": 0,
+    "Pin2": 0,
+    "x": 263,
+    "Pin1": 0,
+    "y": 64,
+    "Pin4": 0,
+    "z": 278,
+    "Pin3": 0,
+    "id": "pinout:pinout"
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 272,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 278,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 4.999974862585077e-06
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 272,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 284,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 4.999974862585077e-06
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 272,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 280,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 4.999974862585077e-06
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 272,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 282,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 4.999974862585077e-06
+  },
+  {
+    "keepPacked": 0,
+    "x": 275,
+    "y": 64,
+    "z": 288,
+    "id": "powergrid:circuit_board",
+    "Schematic": {
+      "Components": [
+        {
+          "X": 0,
+          "Y": 0,
+          "Id": "powergrid:connector",
+          "UUID": [
+            2037611121,
+            -1325645306,
+            -1979352215,
+            1023846562
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 0,
+          "Y": 13,
+          "Id": "powergrid:connector",
+          "UUID": [
+            1293345757,
+            1168853864,
+            -1224242876,
+            -826369656
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 13,
+          "Y": 0,
+          "Id": "powergrid:connector",
+          "UUID": [
+            -867487343,
+            1038566554,
+            -1286165957,
+            1163122975
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 13,
+          "Y": 5,
+          "Id": "powergrid:connector",
+          "UUID": [
+            187011253,
+            -1561113905,
+            -1336418307,
+            1995070628
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 13,
+          "Y": 13,
+          "Id": "powergrid:connector",
+          "UUID": [
+            -1405214122,
+            -1895477464,
+            -2101059777,
+            274255063
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 6,
+          "Y": 5,
+          "Id": "powergrid:relay",
+          "UUID": [
+            904572742,
+            -72988597,
+            -1609217408,
+            -1503716716
+          ],
+          "Properties": {
+            "powergrid:relay_state": 0,
+            "powergrid:relay_threshold": 12.0,
+            "powergrid:orientation": 0,
+            "powergrid:mirrored": 0,
+            "powergrid:relay_polarized": 0
+          }
+        },
+        {
+          "X": 2,
+          "Y": 6,
+          "Id": "powergrid:capacitor",
+          "UUID": [
+            497679923,
+            1898660752,
+            -1768119667,
+            -1896734846
+          ],
+          "Properties": {
+            "powergrid:capacitor_value": 0.03999999910593033,
+            "powergrid:charge": 1.8758190870285034,
+            "powergrid:orientation": 0
+          }
+        }
+      ],
+      "Version": 2,
+      "Front": [
+        0,
+        144115188075855904,
+        216172782113783856,
+        216172782113783856,
+        216172782113783856,
+        417934024918224016,
+        345876121625862144,
+        489991618919684096,
+        216172782119865504,
+        216172782113783856,
+        216172782113783856,
+        216172782113783856,
+        216172782113783856,
+        216172782113783856,
+        72057594037927952
+      ],
+      "FullPixelTraces": 0,
+      "Back": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        80216064
+      ],
+      "Name": "WWPG lamp relay with capacitor off-delay"
+    },
+    "Thermal": {
+      "35eaaf46-fba6-484b-a015-4a80a65f1a94-0": 18.790618896484375,
+      "35eaaf46-fba6-484b-a015-4a80a65f1a94-1": 18.02145004272461
+    }
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 278,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 291,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 1.0
+  }
+]

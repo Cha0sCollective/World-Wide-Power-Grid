@@ -105,13 +105,27 @@ final class StationaryMultiplayerSession {
         var level=h.getLevel();
         for(boolean cee:List.of(true,false)) {
             var pos=pins(cee);var tag=level.getBlockEntity(pos).saveWithoutMetadata(level.registryAccess());
+            double common=new org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint(pos,0).getNode(level).getVoltage()
+                    -new org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint(load(pos,1),1).getNode(level).getVoltage();
+            double contact=org.patryk3211.powergrid.config.ResistanceValues.get(org.patryk3211.powergrid.collections.ModdedBlocks.PUNCH_CARD_READER.get());
+            double coilFeed=ShowroomTools.volts(h,pos.offset(12,0,8),0,1)/500;
+            double indicatorResistance=com.george_vi.electroenergetics.config.CEEConfigs.server().resistanceValues.indicatorBulbResistance.get();
             for(int pin=1;pin<=8;pin++) {
                 boolean on=(pattern&(1<<(pin-1)))!=0;
                 h.assertTrue(tag.getBoolean("Pin"+pin)==on,"Native Lua pin state mismatch: "+cee+" pin "+pin);
                 var lamp=load(pos,pin);float light=level.getBlockEntity(lamp).saveWithoutMetadata(level.registryAccess()).getFloat("FirstLight");
                 h.assertTrue(on?light>.95:light<.01,"Native Lua lamp did not respond: "+cee+" pin "+pin);
-                BoardComponentGameTests.near(h,ShowroomTools.volts(h,lamp,0,1),on?70:0,.2,"Actual Lua controlled load");
+                double expected=on?(common-contact*(pin==3?coilFeed:0))/(1+contact/indicatorResistance):0;
+                double actual=ShowroomTools.volts(h,lamp,0,1);
+                BoardComponentGameTests.near(h,actual,expected,on?Math.abs(expected)*.001:.002,"Actual Lua controlled load with native contact drop");
+                org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info("STATIONARY_REAL_CLIENT_PIN_VOLTAGE: supply={}, pattern={}, pin={}, expected={}, actual={}, common={}, coilFeed={}",cee?"CEE":"PG",pattern,pin,expected,actual,common,coilFeed);
             }
+            boolean run=(pattern&4)!=0;
+            BoardComponentGameTests.near(h,ShowroomTools.volts(h,pos.offset(15,0,10),0,1),run?120:0,.2,"Native computer-controlled RUN contact");
+            BoardComponentGameTests.near(h,ShowroomTools.volts(h,pos.offset(15,0,13),0,1),run?0:120,.2,"Native computer-controlled OFF contact");
+            var panel=(com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlockEntity)level.getBlockEntity(pos.south(10));
+            var gauge=(com.george_vi.electroenergetics.content.electrical_panel.attachments.GaugePanelAttachment)panel.getAttachments()[com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelSlot.THIRD_CENTERED.ordinal()];
+            BoardComponentGameTests.near(h,gauge.value,(pattern&16)!=0?70:0,.2,"Native computer-controlled panel voltage");
         }
         org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info("STATIONARY_REAL_CLIENT_LUA_PATTERN: {} independently verified on both supplies",pattern);
     }

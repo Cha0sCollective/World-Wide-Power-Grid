@@ -44,8 +44,7 @@ gradle.projectsEvaluated {
                 def replacement = new File(output, 'client-vm-args.txt')
                 replacement.text = original.getText('UTF-8').replace('-Xmx2G','-Xmx4G').replace('-Dwwpg.test.multiplayer=true','-Dwwpg.test.multiplayer=false') +
                     '\n-Dwwpg.test.backend=' + project.providers.gradleProperty('testBackend').get() +
-                    '\n-Dwwpg.test.profile=' + extraction.profile + '\n"-Dwwpg.test.saveName=' + name + '"' +
-                    '\n"-Dwwpg.test.savePath=' + new File(workingDir,'saves/' + name).absolutePath.replace('\\','/') + '"' +
+                    '\n-Dwwpg.test.profile=' + extraction.profile +
                     '\n-Dwwpg.test.restartPhase=VERIFY\n-Dneoforge.enabledGameTestNamespaces=wwpg_yard\n' +
                     '\n-Dwwpg.test.netherFocus=' + project.providers.gradleProperty('netherFocus').getOrElse('false')+'\n'
                 return "@${replacement.absolutePath}"

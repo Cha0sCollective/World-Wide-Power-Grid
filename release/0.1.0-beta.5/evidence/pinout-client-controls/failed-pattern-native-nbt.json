@@ -1,0 +1,420 @@
+[
+  {
+    "Temperature": 18.620468139648438,
+    "Pin6": 0,
+    "Pin5": 1,
+    "Pin8": 0,
+    "Pin7": 1,
+    "keepPacked": 0,
+    "Pin2": 0,
+    "x": 159,
+    "Pin1": 1,
+    "y": 64,
+    "Pin4": 0,
+    "z": 296,
+    "Pin3": 1,
+    "id": "pinout:pinout"
+  },
+  {
+    "Temperature": 18.020004272460938,
+    "Bulb": "powergrid:light_bulb",
+    "keepPacked": 0,
+    "x": 174,
+    "y": 64,
+    "z": 306,
+    "id": "powergrid:ceiling_tile_lamp"
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 174,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 309,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 1.0
+  },
+  {
+    "keepPacked": 0,
+    "x": 171,
+    "y": 64,
+    "z": 306,
+    "id": "powergrid:circuit_board",
+    "Schematic": {
+      "Components": [
+        {
+          "X": 0,
+          "Y": 0,
+          "Id": "powergrid:connector",
+          "UUID": [
+            1549644019,
+            -1573108676,
+            -1797420776,
+            -943105248
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 0,
+          "Y": 13,
+          "Id": "powergrid:connector",
+          "UUID": [
+            -1618001992,
+            60182388,
+            -1799322744,
+            -934729425
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 13,
+          "Y": 0,
+          "Id": "powergrid:connector",
+          "UUID": [
+            484848244,
+            1850164352,
+            -1561801534,
+            695064763
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 13,
+          "Y": 5,
+          "Id": "powergrid:connector",
+          "UUID": [
+            -1402288707,
+            -1812181011,
+            -1856030130,
+            1905195542
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 13,
+          "Y": 13,
+          "Id": "powergrid:connector",
+          "UUID": [
+            -580208316,
+            -1030403689,
+            -1738219317,
+            -810926154
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 6,
+          "Y": 5,
+          "Id": "powergrid:relay",
+          "UUID": [
+            -649549850,
+            -206290715,
+            -2012571796,
+            516915155
+          ],
+          "Properties": {
+            "powergrid:relay_state": 0,
+            "powergrid:relay_threshold": 12.0,
+            "powergrid:orientation": 0,
+            "powergrid:mirrored": 0,
+            "powergrid:relay_polarized": 0
+          }
+        },
+        {
+          "X": 2,
+          "Y": 6,
+          "Id": "powergrid:capacitor",
+          "UUID": [
+            1773841230,
+            -407024187,
+            -1516784793,
+            964174290
+          ],
+          "Properties": {
+            "powergrid:capacitor_value": 0.03999999910593033,
+            "powergrid:charge": 11.857919692993164,
+            "powergrid:orientation": 0
+          }
+        },
+        {
+          "X": 6,
+          "Y": 1,
+          "Id": "powergrid:diode",
+          "UUID": [
+            -1437259853,
+            747785547,
+            -1108117981,
+            -1337367995
+          ],
+          "Properties": {
+            "powergrid:orientation": 0,
+            "powergrid:vertical": 0
+          }
+        }
+      ],
+      "Version": 2,
+      "Front": [
+        0,
+        144122664754924672,
+        216173881658966016,
+        216172782164115456,
+        216172782164115456,
+        417934024854470656,
+        345876121625862144,
+        489991618919684096,
+        216172782119865504,
+        216172782113783856,
+        216172782113783856,
+        216172782113783856,
+        216172782113783856,
+        216172782113783856,
+        72057594037927952
+      ],
+      "FullPixelTraces": 0,
+      "Back": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        80216064
+      ],
+      "Name": "WWPG lamp relay with capacitor off-delay"
+    },
+    "Thermal": {
+      "d948a7e6-f3b4-40e5-880a-976c1ecf7fd3-0": 42.507911682128906,
+      "aa5527b3-2c92-4d4b-bdf3-7623b0496245-0": 18.56517791748047,
+      "d948a7e6-f3b4-40e5-880a-976c1ecf7fd3-1": 18.02145004272461
+    }
+  },
+  {
+    "keepPacked": 0,
+    "x": 171,
+    "y": 64,
+    "ScrollValue": 49,
+    "z": 304,
+    "id": "powergrid:creative_resistor"
+  },
+  {
+    "Temperature": 18.6204776763916,
+    "Pin6": 0,
+    "Pin5": 1,
+    "Pin8": 0,
+    "Pin7": 1,
+    "keepPacked": 0,
+    "Pin2": 0,
+    "x": 263,
+    "Pin1": 1,
+    "y": 64,
+    "Pin4": 0,
+    "z": 278,
+    "Pin3": 1,
+    "id": "pinout:pinout"
+  },
+  {
+    "keepPacked": 0,
+    "x": 275,
+    "y": 64,
+    "ScrollValue": 49,
+    "z": 286,
+    "id": "powergrid:creative_resistor"
+  },
+  {
+    "Temperature": 18.020004272460938,
+    "Bulb": "powergrid:light_bulb",
+    "keepPacked": 0,
+    "x": 278,
+    "y": 64,
+    "z": 288,
+    "id": "powergrid:ceiling_tile_lamp"
+  },
+  {
+    "keepPacked": 0,
+    "x": 275,
+    "y": 64,
+    "z": 288,
+    "id": "powergrid:circuit_board",
+    "Schematic": {
+      "Components": [
+        {
+          "X": 0,
+          "Y": 0,
+          "Id": "powergrid:connector",
+          "UUID": [
+            1018981584,
+            -344636645,
+            -1169759733,
+            -1811276978
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 0,
+          "Y": 13,
+          "Id": "powergrid:connector",
+          "UUID": [
+            -825735100,
+            -1426570015,
+            -1732098991,
+            -467251
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 13,
+          "Y": 0,
+          "Id": "powergrid:connector",
+          "UUID": [
+            -1932944249,
+            360925627,
+            -1536946862,
+            644663709
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 13,
+          "Y": 5,
+          "Id": "powergrid:connector",
+          "UUID": [
+            -1163957296,
+            874792138,
+            -1276989951,
+            1131652403
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 13,
+          "Y": 13,
+          "Id": "powergrid:connector",
+          "UUID": [
+            2116511469,
+            62802588,
+            -2072213754,
+            2097259513
+          ],
+          "Properties": {
+            "powergrid:label": ""
+          }
+        },
+        {
+          "X": 6,
+          "Y": 5,
+          "Id": "powergrid:relay",
+          "UUID": [
+            759446465,
+            1748716453,
+            -2115829461,
+            122639634
+          ],
+          "Properties": {
+            "powergrid:relay_state": 0,
+            "powergrid:relay_threshold": 12.0,
+            "powergrid:orientation": 0,
+            "powergrid:mirrored": 0,
+            "powergrid:relay_polarized": 0
+          }
+        },
+        {
+          "X": 2,
+          "Y": 6,
+          "Id": "powergrid:capacitor",
+          "UUID": [
+            -386105117,
+            1134314715,
+            -1546441734,
+            -2136543771
+          ],
+          "Properties": {
+            "powergrid:capacitor_value": 0.03999999910593033,
+            "powergrid:charge": 11.85633659362793,
+            "powergrid:orientation": 0
+          }
+        },
+        {
+          "X": 6,
+          "Y": 1,
+          "Id": "powergrid:diode",
+          "UUID": [
+            17606195,
+            -786347936,
+            -1479562909,
+            1150055758
+          ],
+          "Properties": {
+            "powergrid:orientation": 0,
+            "powergrid:vertical": 0
+          }
+        }
+      ],
+      "Version": 2,
+      "Front": [
+        0,
+        144122664754924672,
+        216173881658966016,
+        216172782164115456,
+        216172782164115456,
+        417934024854470656,
+        345876121625862144,
+        489991618919684096,
+        216172782119865504,
+        216172782113783856,
+        216172782113783856,
+        216172782113783856,
+        216172782113783856,
+        216172782113783856,
+        72057594037927952
+      ],
+      "FullPixelTraces": 0,
+      "Back": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        80216064
+      ],
+      "Name": "WWPG lamp relay with capacitor off-delay"
+    },
+    "Thermal": {
+      "010ca633-d121-4860-a7cf-a963448c754e-0": 18.565185546875,
+      "2d443bc1-683b-4ba5-81e3-012b074f5512-1": 18.02145004272461,
+      "2d443bc1-683b-4ba5-81e3-012b074f5512-0": 42.500606536865234
+    }
+  },
+  {
+    "SecondColor": "white",
+    "keepPacked": 0,
+    "x": 278,
+    "SecondLight": 0.0,
+    "y": 64,
+    "z": 291,
+    "id": "electroenergetics:indicator_bulb",
+    "FirstColor": "white",
+    "FirstLight": 1.0
+  }
+]

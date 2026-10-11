@@ -66,7 +66,7 @@ final class StationaryYardPinout {
                     yard.source(s.source(),70);((SwitchBlockEntity)level.getBlockEntity(s.control())).setState(true);
                     wire(h,s.source(),pg?0:1,s.control(),0,true);wire(h,s.control(),1,pins,0,false);
                     for(int pin=1;pin<=8;pin++) { wire(h,pins,pin,load(pins,pin),0,pin%2==0);wire(h,s.source(),pg?1:0,load(pins,pin),1,pin%2!=0); }
-                    ((CircuitBoardBlockEntity)level.getBlockEntity(board)).setSchematic(ExampleControlBoard.schematic());resistance(h,ballast,500);
+                    ((CircuitBoardBlockEntity)level.getBlockEntity(board)).setSchematic(ExampleControlBoard.schematic(true));resistance(h,ballast,500);
                     wire(h,pins,3,ballast,0,true);wire(h,ballast,1,board,ExampleControlBoard.COIL_POSITIVE,false);wire(h,s.source(),pg?1:0,board,ExampleControlBoard.COIL_RETURN,true);
                     yard.source(lampSupply,120);wire(h,lampSupply,1,board,ExampleControlBoard.LAMP_FEED,true);wire(h,lampSupply,0,board,ExampleControlBoard.COIL_RETURN,false);
                     wire(h,board,ExampleControlBoard.RUN_LAMP,running,0,false);wire(h,board,ExampleControlBoard.OFF_LAMP,stopped,0,true);

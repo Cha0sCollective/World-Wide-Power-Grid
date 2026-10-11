@@ -1,0 +1,134 @@
+{
+  "schema": 1,
+  "stationary_completion": false,
+  "failed_real_client_runs": [
+    {
+      "batch": "beta5-final",
+      "result": {
+        "schema": 1,
+        "passed": false,
+        "failure": "RuntimeError: server exited with 1; retain its log",
+        "elapsed_seconds": 125.94,
+        "jar": {
+          "path": "C:\\Users\\Parker\\Documents\\ChatGPT\\WWPG\\build\\libs\\wwpg-0.1.0-beta.5.jar",
+          "sha256": "cb6a15daa4d38c5ede3271db5eec2e4f7645b0858a6fbf404cc7790e9d9a9aaa"
+        },
+        "archive_sha256": "973b0d32c98c498242fc4d37f6dac3c8137b830aac015d6176f55e2f390e5319",
+        "profile": "PINOUT",
+        "backend": "NATIVE",
+        "real_clients": [
+          "WWPG_A",
+          "WWPG_B"
+        ],
+        "processes": {
+          "server": {
+            "pid": 37276,
+            "exit_code": 1
+          },
+          "client-a": {
+            "pid": 41676,
+            "exit_code": 0
+          },
+          "client-b": {
+            "pid": 35948,
+            "exit_code": 0
+          }
+        }
+      },
+      "preserved_jar": "wwpg-beta5-candidate-cb6a15.jar",
+      "jar_sha256": "cb6a15daa4d38c5ede3271db5eec2e4f7645b0858a6fbf404cc7790e9d9a9aaa"
+    },
+    {
+      "batch": "beta5-pinout-isolation-v12",
+      "result": {
+        "schema": 1,
+        "passed": false,
+        "failure": "RuntimeError: server exited with 1; retain its log",
+        "elapsed_seconds": 120.42,
+        "jar": {
+          "path": "C:\\Users\\Parker\\Documents\\ChatGPT\\WWPG\\build\\libs\\wwpg-beta5-pinout-isolation-v12.jar",
+          "sha256": "e5ccb82a69d8175acda386c70151b14bec1448204a2fe72e64b262090b5dc3db"
+        },
+        "archive_sha256": "bf188e67a6f2d7d16969a6297af43f0e646174ca9f70d50d87aee199dd5d6451",
+        "profile": "PINOUT",
+        "backend": "NATIVE",
+        "real_clients": [
+          "WWPG_A",
+          "WWPG_B"
+        ],
+        "processes": {
+          "server": {
+            "pid": 6776,
+            "exit_code": 1
+          },
+          "client-a": {
+            "pid": 52204,
+            "exit_code": 1
+          },
+          "client-b": {
+            "pid": 54084,
+            "exit_code": 1
+          }
+        }
+      },
+      "preserved_jar": "wwpg-beta5-pinout-isolation-v12.jar",
+      "jar_sha256": "e5ccb82a69d8175acda386c70151b14bec1448204a2fe72e64b262090b5dc3db"
+    },
+    {
+      "batch": "beta5-final-v2",
+      "result": {
+        "schema": 1,
+        "passed": false,
+        "failure": "RuntimeError: server exited with 1; retain its log",
+        "elapsed_seconds": 141.7,
+        "jar": {
+          "path": "C:\\Users\\Parker\\Documents\\ChatGPT\\WWPG\\build\\libs\\wwpg-0.1.0-beta.5.jar",
+          "sha256": "f33547f91092a5472503c8bfb48fa59cec05bf0ad4305a3f8f3f64b36f77d325"
+        },
+        "archive_sha256": "262695c1f83d7817765515a744e670a251306971d27dfd811dd465eb4ce770b9",
+        "profile": "PINOUT",
+        "backend": "NATIVE",
+        "real_clients": [
+          "WWPG_A",
+          "WWPG_B"
+        ],
+        "processes": {
+          "server": {
+            "pid": 34236,
+            "exit_code": 1
+          },
+          "client-a": {
+            "pid": 9576,
+            "exit_code": 0
+          },
+          "client-b": {
+            "pid": 10492,
+            "exit_code": 0
+          }
+        }
+      },
+      "preserved_jar": "wwpg-beta5-candidate-f33547.jar",
+      "jar_sha256": "f33547f91092a5472503c8bfb48fa59cec05bf0ad4305a3f8f3f64b36f77d325"
+    }
+  ],
+  "first_failure": {
+    "native_api": "Both computers completed wwpg stop; saved native Pin1..Pin8 are all false on both stations.",
+    "observed": "Both pin-3 indicator FirstLight values remained about 0.02416. Both board capacitors retained about 1.8758 V; native relay state was false.",
+    "cause": "The real native board capacitor fed residual stored energy backwards through its input ballast into the pin-3 indicator. Native CEE indicator synchronization also uses a 2% deadband. This was a misleading demonstration/incorrect immediate-zero fixture assumption, not a failure to open the native pins.",
+    "correction": "Place a native PG diode between the input connector and the coil/capacitor net in just the two computer demonstration boards. Preserve native models and the capacitor off-delay. The original legacy relay example remains unchanged."
+  },
+  "second_failure": {
+    "passed": "Both real clients verify all eight indicators switched off after native Lua stop with the isolation diode; both verify pattern 85.",
+    "failed": "Server assumed loaded pin 3 must be 70 V within 0.2 V; observed 69.7841012 V while the board was charging.",
+    "cause": "The add-on uses native contact resistance; charging/coil current causes additional pin-3 drop. A nominal-voltage assertion omitted this native circuit term.",
+    "correction": "Use the measured common/reference voltage and independent ballast current with native contact/indicator resistances, as in the analytical yard acceptance. Require agreement to 0.1%; retain 0.002 V near-zero off checks. Add visible board RUN/OFF and synchronized panel checks."
+  },
+  "third_failure": {
+    "observed": "Both real clients switched all eight indicator lamps, but the board RUN lamp was still off at client age 280. Saved native relay state remained false and capacitor voltages were 11.8563 / 11.8579 V, below the native 12 V pull-in threshold.",
+    "cause": "A fixed client-age deadline assumed a charged relay despite its native RC rise time. Computer demo capacitance 0.04 F and 500 ohm ballast made response unnecessarily slow.",
+    "correction": "Use 0.01 F only on the isolated computer demonstration boards, preserving native equations and the legacy 0.04 F board. Client checks wait for the actual outputs within a bounded deadline; exact lamp and panel assertions remain unchanged."
+  },
+  "remaining": [
+    "Complete corrected final-jar real clients, exact worlds and eight-way packaged CI"
+  ]
+}

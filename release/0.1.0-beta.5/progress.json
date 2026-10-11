@@ -111,7 +111,8 @@
         "Five actual chunk cycles with delayed entities and pre-solve native pins/settings",
         "Native peripheral detach/reattach and default-open block replacement",
         "185 complete optional checks in setup and three consecutive cold processes locally on both solvers, with actual ticking readiness before Lua boot",
-        "Two playable computers independently control CEE-fed and PG-fed lamps, panel inputs and native relay boards; Lua programs and exact exported computer files are preserved"
+        "Two playable computers independently control CEE-fed and PG-fed lamps, panel inputs and native relay boards; Lua programs and exact exported computer files are preserved",
+        "Real two-client checks reproduced capacitor backfeed and a premature relay assertion; isolated the computer-demo input with a native PG diode and used a shorter native capacitor delay. Actual loaded pin expectations include native contact resistance and charging current. Strict client lamps, board contacts and panel states have bounded settling deadlines."
       ],
       "remaining": [
         "Fresh graphical and two-real-client optional acceptance, then final versioned-jar matrix"
@@ -146,8 +147,8 @@
   ],
   "final_candidate": {
     "artifact": "wwpg-0.1.0-beta.5.jar",
-    "sha256": "cb6a15daa4d38c5ede3271db5eec2e4f7645b0858a6fbf404cc7790e9d9a9aaa",
+    "sha256": "3bba6879b78cf0f2b411e639a6dd8a7d1c86850e6b8b9ef0e8448f117764b288",
     "published": false,
-    "acceptance": "Running; full release gates still required"
+    "acceptance": "Final frozen jar: exact Pinout ZIP has three native cold passes; final GUI, multiplayer and eight-way CI gates are running."
   }
 }

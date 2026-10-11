@@ -71,13 +71,27 @@ final class StationaryMultiplayerClientDriver {
                 if(phase.equals("stationary-pinout-volts"))verifyVoltageText(terminalText(mc),85);
                 shot(mc,phase+"-"+(a?"A":"B")+".png");mc.player.closeContainer();
             }
-            if(age==280) {
+            if(age>=280) {
                 int pattern=phase.endsWith("stop")?0:phase.endsWith("start")?255:85;
+                String pending=null;
                 for(int pin=1;pin<=8;pin++) {
                     var lamp=mc.level.getBlockEntity(StationaryMultiplayerSession.load(StationaryMultiplayerSession.pins(a),pin));
                     require(lamp!=null,"Native client pin lamp missing");
                     float light=lamp.saveWithoutMetadata(mc.level.registryAccess()).getFloat("FirstLight");
-                    require((pattern&(1<<(pin-1)))!=0?light>.95:light<.01,"Real-client lamp state disagrees with native keyboard program at pin "+pin);
+                    if(!((pattern&(1<<(pin-1)))!=0?light>.95:light<.01))pending="pin "+pin+" light="+light;
+                }
+                var pins=StationaryMultiplayerSession.pins(a);boolean run=(pattern&4)!=0;
+                var running=(org.patryk3211.powergrid.electricity.light.fixture.AbstractLightFixtureBlockEntity)mc.level.getBlockEntity(pins.offset(15,0,10));
+                if(!(run?running.getPowerLevel()>0:running.getPowerLevel()==0))pending="RUN light="+running.getPowerLevel();
+                float stopped=mc.level.getBlockEntity(pins.offset(15,0,13)).saveWithoutMetadata(mc.level.registryAccess()).getFloat("FirstLight");
+                if(!(run?stopped<.01:stopped>.95))pending="OFF light="+stopped;
+                var panel=(com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlockEntity)mc.level.getBlockEntity(pins.south(10));
+                var gauge=(com.george_vi.electroenergetics.content.electrical_panel.attachments.GaugePanelAttachment)panel.getAttachments()[com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelSlot.THIRD_CENTERED.ordinal()];
+                if(Math.abs(gauge.value-((pattern&16)!=0?70:0))>=.2)pending="panel voltage="+gauge.value;
+                if(pending!=null) {
+                    if(age%100==0)WorldWidePowerGrid.LOGGER.info("STATIONARY_REAL_CLIENT_SETTLING: pattern={}, age={}, pending={}",pattern,age,pending);
+                    require(age<700,"Native computer outputs did not settle: pattern="+pattern+", "+pending);
+                    return false;
                 }
                 WorldWidePowerGrid.LOGGER.info("STATIONARY_REAL_CLIENT_LUA: {} {} native keyboard and synchronized lamps passed",a?"A":"B",phase);
                 return true;
