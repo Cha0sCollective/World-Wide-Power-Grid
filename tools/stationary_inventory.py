@@ -138,6 +138,9 @@ for entry in snapshot["entries"]:
         row.update(disposition="empty_registry_sentinel", reason="Empty wire attachment; no native installation item")
     elif entry["registry"] == "wire_attachment":
         row.update(disposition="native_workflow", fixture="nativeWireAttachmentsInstallRemoveAndPersist")
+    elif entry["registry"] == "fuse_holdable":
+        row.update(disposition="functional_behavior", behavior="electroenergetics:fuse_holder",
+                   reason="Native installed fuse-holder insert with its own electrical behavior")
     elif entry["registry"] == "panel_attachment" and ident.endswith(":empty"):
         row.update(disposition="empty_registry_sentinel", reason="Empty panel slot")
     elif entry["registry"] == "item" and entry["implementation"] in ("net.minecraft.world.item.Item", "com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem"):

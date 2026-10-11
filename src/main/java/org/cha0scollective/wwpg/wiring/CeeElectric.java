@@ -1,6 +1,8 @@
 package org.cha0scollective.wwpg.wiring;
 
 import com.george_vi.electroenergetics.foundation.device.ElectricalDeviceBlock;
+import com.george_vi.electroenergetics.content.bulb.BulbBlock;
+import com.george_vi.electroenergetics.content.fuse.FuseBlock;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
@@ -44,12 +46,13 @@ public final class CeeElectric implements IElectric {
         behaviour = new EndpointBehaviour(holder);
     }
     ElectricalDeviceBlock<?> block() { return block; }
-    boolean updateBulbVariant(BlockState state) {
-        // Native bulb failure and repair retain the same device and terminals.
+    boolean updateNativeVariant(BlockState state) {
+        // Native bulb/fuse failure and repair retain the same device and terminals.
         // Keep the sidecar, nodes and wire owners through that block transition.
-        if (!(block instanceof com.george_vi.electroenergetics.content.bulb.BulbBlock)
-                || !(state.getBlock() instanceof com.george_vi.electroenergetics.content.bulb.BulbBlock replacement)
+        if (!(state.getBlock() instanceof ElectricalDeviceBlock<?> replacement)
                 || replacement.getDevice() != block.getDevice()) return false;
+        if (!(block instanceof BulbBlock && replacement instanceof BulbBlock)
+                && !(block instanceof FuseBlock && replacement instanceof FuseBlock)) return false;
         block = replacement;
         return true;
     }
