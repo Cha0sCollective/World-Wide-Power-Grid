@@ -1,0 +1,2931 @@
+{
+  "schema": 1,
+  "profile": "BASE",
+  "entries": [
+    {
+      "registry": "block",
+      "id": "electroenergetics:accumulator",
+      "implementation": "com.george_vi.electroenergetics.content.accumulator.AccumulatorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:alternator_brushes",
+      "implementation": "com.george_vi.electroenergetics.content.rotor.AlternatorBrushesBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:alternator_rotor",
+      "implementation": "com.george_vi.electroenergetics.content.rotor.AlternatorRotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:ammeter",
+      "implementation": "com.george_vi.electroenergetics.content.gauge.ElectricGaugeBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:black_electric_motor",
+      "implementation": "com.george_vi.electroenergetics.content.electric_motor.ElectricMotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:black_electrical_panel",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:blue_electric_motor",
+      "implementation": "com.george_vi.electroenergetics.content.electric_motor.ElectricMotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:blue_electrical_panel",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:broken_bulb",
+      "implementation": "com.george_vi.electroenergetics.content.bulb.BulbBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:broken_fuse",
+      "implementation": "com.george_vi.electroenergetics.content.fuse.FuseBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:brown_electric_motor",
+      "implementation": "com.george_vi.electroenergetics.content.electric_motor.ElectricMotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:brown_electrical_panel",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:bulb",
+      "implementation": "com.george_vi.electroenergetics.content.bulb.BulbBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:buzzer",
+      "implementation": "com.george_vi.electroenergetics.content.buzzer.BuzzerBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:capacitor",
+      "implementation": "com.george_vi.electroenergetics.content.electronic_components.capacitor.CapacitorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:catenary_holder",
+      "implementation": "com.george_vi.electroenergetics.content.railway_electrification.catenary.CatenaryHolderBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:concrete_pole",
+      "implementation": "com.george_vi.electroenergetics.content.pole.ConcretePoleBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:connector",
+      "implementation": "com.george_vi.electroenergetics.content.connector.ConnectorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:converter",
+      "implementation": "com.george_vi.electroenergetics.content.converter.ConverterBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:creative_battery",
+      "implementation": "com.george_vi.electroenergetics.content.creative_battery.CreativeBatteryBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:creative_resistor",
+      "implementation": "com.george_vi.electroenergetics.content.electronic_components.resistor.ResistorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:current_transformer",
+      "implementation": "com.george_vi.electroenergetics.content.transmission_distribution.current_transformer.CurrentTransformerBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:cut_off_switch",
+      "implementation": "com.george_vi.electroenergetics.content.cut_off_switch.CutOffSwitchBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:cyan_electric_motor",
+      "implementation": "com.george_vi.electroenergetics.content.electric_motor.ElectricMotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:cyan_electrical_panel",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:diode",
+      "implementation": "com.george_vi.electroenergetics.content.electronic_components.diode.DiodeBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:double_connector",
+      "implementation": "com.george_vi.electroenergetics.content.connector.DoubleConnectorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:double_switch",
+      "implementation": "com.george_vi.electroenergetics.content.cut_off_switch.CutOffSwitchBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:duplex_wire_termination",
+      "implementation": "com.george_vi.electroenergetics.content.bundled_wire.BundledWireTerminationBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:electric_pump",
+      "implementation": "com.george_vi.electroenergetics.content.electric_pump.ElectricPumpBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:electric_shock_sign",
+      "implementation": "com.george_vi.electroenergetics.content.sign.WarningSignBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:electrical_panel",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:emergency_stop_button",
+      "implementation": "com.george_vi.electroenergetics.content.cut_off_switch.EmergencyStopBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:energy_meter",
+      "implementation": "com.george_vi.electroenergetics.content.energy_meter.EnergyMeterBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:frequency_meter",
+      "implementation": "com.george_vi.electroenergetics.content.frequency_meter.FrequencyMeterBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:fuse",
+      "implementation": "com.george_vi.electroenergetics.content.fuse.FuseBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:fuse_holder",
+      "implementation": "com.george_vi.electroenergetics.content.fuse.FuseHolderBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:gray_electric_motor",
+      "implementation": "com.george_vi.electroenergetics.content.electric_motor.ElectricMotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:gray_electrical_panel",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:green_electric_motor",
+      "implementation": "com.george_vi.electroenergetics.content.electric_motor.ElectricMotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:green_electrical_panel",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:ground_rod",
+      "implementation": "com.george_vi.electroenergetics.content.ground_rod.GroundRodBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:grounding_sign",
+      "implementation": "com.george_vi.electroenergetics.content.sign.WarningSignBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:high_voltage_capacitor",
+      "implementation": "com.george_vi.electroenergetics.content.transmission_distribution.hv_capacitor.HVCapacitorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:high_voltage_sign",
+      "implementation": "com.george_vi.electroenergetics.content.sign.WarningSignBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:high_voltage_switch",
+      "implementation": "com.george_vi.electroenergetics.content.transmission_distribution.hv_switch.HVSwitchBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:indicator_bulb",
+      "implementation": "com.george_vi.electroenergetics.content.indicator_bulb.IndicatorBulbBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:inductor",
+      "implementation": "com.george_vi.electroenergetics.content.electronic_components.inductor.InductorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:insulator",
+      "implementation": "com.george_vi.electroenergetics.content.connector.InsulatorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:light_blue_electric_motor",
+      "implementation": "com.george_vi.electroenergetics.content.electric_motor.ElectricMotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:light_blue_electrical_panel",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:light_gray_electric_motor",
+      "implementation": "com.george_vi.electroenergetics.content.electric_motor.ElectricMotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:light_gray_electrical_panel",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:lime_electric_motor",
+      "implementation": "com.george_vi.electroenergetics.content.electric_motor.ElectricMotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:lime_electrical_panel",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:magenta_electric_motor",
+      "implementation": "com.george_vi.electroenergetics.content.electric_motor.ElectricMotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:magenta_electrical_panel",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:magnet",
+      "implementation": "net.minecraft.world.level.block.Block",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:momentary_switch",
+      "implementation": "com.george_vi.electroenergetics.content.cut_off_switch.MomentarySwitchBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:orange_electric_motor",
+      "implementation": "com.george_vi.electroenergetics.content.electric_motor.ElectricMotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:orange_electrical_panel",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:pantograph",
+      "implementation": "com.george_vi.electroenergetics.content.railway_electrification.pantograph.PantographBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:pink_electric_motor",
+      "implementation": "com.george_vi.electroenergetics.content.electric_motor.ElectricMotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:pink_electrical_panel",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:plant_oil",
+      "implementation": "net.minecraft.world.level.block.LiquidBlock",
+      "has_item": false
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:pole_mount",
+      "implementation": "com.george_vi.electroenergetics.content.pole.PoleMountBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:potentiometer",
+      "implementation": "com.george_vi.electroenergetics.content.potentiometer.PotentiometerBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:purple_electric_motor",
+      "implementation": "com.george_vi.electroenergetics.content.electric_motor.ElectricMotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:purple_electrical_panel",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:quad_connector",
+      "implementation": "com.george_vi.electroenergetics.content.connector.QuadConnectorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:radiator_panel",
+      "implementation": "com.george_vi.electroenergetics.content.transmission_distribution.transformer.RadiatorPanelBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:rail_contact_shoe",
+      "implementation": "com.george_vi.electroenergetics.content.railway_electrification.third_rail.RailContactShoeBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:red_electric_motor",
+      "implementation": "com.george_vi.electroenergetics.content.electric_motor.ElectricMotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:red_electrical_panel",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:redstone_potentiometer",
+      "implementation": "com.george_vi.electroenergetics.content.potentiometer.RedstonePotentiometerBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:redstone_relay",
+      "implementation": "com.george_vi.electroenergetics.content.redstone_relay.RedstoneRelayBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:redstone_variac",
+      "implementation": "com.george_vi.electroenergetics.content.variac.RedstoneVariacBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:relay",
+      "implementation": "com.george_vi.electroenergetics.content.relay.RelayBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:resistive_heater",
+      "implementation": "com.george_vi.electroenergetics.content.resistive_heater.ResistiveHeaterBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:resistor",
+      "implementation": "com.george_vi.electroenergetics.content.electronic_components.resistor.ResistorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:stator",
+      "implementation": "com.george_vi.electroenergetics.content.rotor.StatorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:sulfur_hexafluoride_breaker",
+      "implementation": "com.george_vi.electroenergetics.content.transmission_distribution.sf6_breaker.SF6BreakerBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:synchroscope",
+      "implementation": "com.george_vi.electroenergetics.content.synchroscope.SynchroscopeBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:three_phase_alternator_brushes",
+      "implementation": "com.george_vi.electroenergetics.content.rotor.ThreePhaseAlternatorBrushesBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:transformer",
+      "implementation": "com.george_vi.electroenergetics.content.transmission_distribution.transformer.TransformerBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:transformer_core",
+      "implementation": "com.george_vi.electroenergetics.content.transmission_distribution.transformer.TransformerCoreBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:transformer_oil",
+      "implementation": "net.minecraft.world.level.block.LiquidBlock",
+      "has_item": false
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:tri_polar_energy_meter",
+      "implementation": "com.george_vi.electroenergetics.content.energy_meter.TriPolarEnergyMeterBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:triple_connector",
+      "implementation": "com.george_vi.electroenergetics.content.connector.TripleConnectorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:variac",
+      "implementation": "com.george_vi.electroenergetics.content.variac.VariacBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:voltage_regulator",
+      "implementation": "com.george_vi.electroenergetics.content.transmission_distribution.voltage_regulator.VoltageRegulatorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:voltmeter",
+      "implementation": "com.george_vi.electroenergetics.content.gauge.ElectricGaugeBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:white_electric_motor",
+      "implementation": "com.george_vi.electroenergetics.content.electric_motor.ElectricMotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:white_electrical_panel",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:yellow_electric_motor",
+      "implementation": "com.george_vi.electroenergetics.content.electric_motor.ElectricMotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "electroenergetics:yellow_electrical_panel",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:acid",
+      "implementation": "net.minecraft.world.level.block.LiquidBlock",
+      "has_item": false
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:alarm_bell",
+      "implementation": "org.patryk3211.powergrid.electricity.bell.AlarmBellBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:andesite_encased_crt",
+      "implementation": "org.patryk3211.powergrid.electricity.crt.EncasedCRTBlock",
+      "has_item": false
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:basin_heater",
+      "implementation": "org.patryk3211.powergrid.electricity.basinheater.BasinHeaterBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:battery",
+      "implementation": "org.patryk3211.powergrid.electricity.battery.BatteryBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:brass_encased_crt",
+      "implementation": "org.patryk3211.powergrid.electricity.crt.EncasedCRTBlock",
+      "has_item": false
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:carbon_pile",
+      "implementation": "org.patryk3211.powergrid.electricity.carbonpile.CarbonPileBlock",
+      "has_item": false
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:carbon_pile_coil",
+      "implementation": "org.patryk3211.powergrid.electricity.carbonpile.CarbonPileCoilBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:ceiling_tile",
+      "implementation": "org.patryk3211.powergrid.general.ceilingtile.CeilingTileBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:ceiling_tile_connector",
+      "implementation": "org.patryk3211.powergrid.general.ceilingtile.wire.CeilingTileConnectorBlock",
+      "has_item": false
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:ceiling_tile_junction",
+      "implementation": "org.patryk3211.powergrid.general.ceilingtile.junction.CeilingTileJunctionBlock",
+      "has_item": false
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:ceiling_tile_lamp",
+      "implementation": "org.patryk3211.powergrid.general.ceilingtile.lamp.CeilingTileLampBlock",
+      "has_item": false
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:ceiling_tile_solar",
+      "implementation": "org.patryk3211.powergrid.general.ceilingtile.solar.CeilingTileSolarBlock",
+      "has_item": false
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:circuit_board",
+      "implementation": "org.patryk3211.powergrid.circuits.circuitboard.CircuitBoardBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:circuit_design_table",
+      "implementation": "org.patryk3211.powergrid.circuits.editor.CircuitDesignTableBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:conductive_casing",
+      "implementation": "com.simibubi.create.content.decoration.encasing.CasingBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:constant_speed_motor",
+      "implementation": "org.patryk3211.powergrid.kinetics.motor.ConstantSpeedMotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:contactor",
+      "implementation": "org.patryk3211.powergrid.electricity.contactor.ContactorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:copper_plating",
+      "implementation": "com.simibubi.create.content.decoration.encasing.CasingBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:copper_plating_slab",
+      "implementation": "net.minecraft.world.level.block.SlabBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:copper_plating_stairs",
+      "implementation": "net.minecraft.world.level.block.StairBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:cord_junction",
+      "implementation": "org.patryk3211.powergrid.electricity.wireconnector.CordJunctionBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:creative_current_source",
+      "implementation": "org.patryk3211.powergrid.electricity.creative.CreativeSourceBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:creative_resistor",
+      "implementation": "org.patryk3211.powergrid.electricity.creative.CreativeResistorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:creative_voltage_source",
+      "implementation": "org.patryk3211.powergrid.electricity.creative.CreativeSourceBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:crt",
+      "implementation": "org.patryk3211.powergrid.electricity.crt.CRTBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:current_gauge",
+      "implementation": "org.patryk3211.powergrid.electricity.gauge.CurrentGaugeBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:device_connector",
+      "implementation": "org.patryk3211.powergrid.electricity.deviceconnector.DeviceConnectorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:electric_fan",
+      "implementation": "org.patryk3211.powergrid.electricity.fan.ElectricFanBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:electric_motor",
+      "implementation": "org.patryk3211.powergrid.kinetics.motor.ElectricMotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:electric_pump",
+      "implementation": "org.patryk3211.powergrid.electricity.pump.ElectricPumpBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:electromagnet",
+      "implementation": "org.patryk3211.powergrid.electricity.electromagnet.ElectromagnetBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:energy_meter",
+      "implementation": "org.patryk3211.powergrid.electricity.gauge.EnergyMeterBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:factory_light",
+      "implementation": "org.patryk3211.powergrid.electricity.light.factorylight.FactoryLightBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:factory_light_light",
+      "implementation": "org.patryk3211.powergrid.electricity.light.factorylight.FactoryLightLightBlock",
+      "has_item": false
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:fe_inverter",
+      "implementation": "org.patryk3211.powergrid.electricity.febridge.FEInverterBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:fuse_holder",
+      "implementation": "org.patryk3211.powergrid.electricity.fuse.FuseHolderBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:generator_clutch",
+      "implementation": "org.patryk3211.powergrid.kinetics.generator.clutch.GeneratorClutchBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:generator_commutator",
+      "implementation": "org.patryk3211.powergrid.kinetics.generator.inductionrotor.CommutatorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:generator_housing",
+      "implementation": "org.patryk3211.powergrid.kinetics.generator.housing.GeneratorHousing",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:generator_induction_rotor",
+      "implementation": "org.patryk3211.powergrid.kinetics.generator.inductionrotor.InductionRotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:generator_large_induction_rotor",
+      "implementation": "org.patryk3211.powergrid.kinetics.generator.inductionrotor.LargeInductionRotorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:generator_vertical_commutator",
+      "implementation": "org.patryk3211.powergrid.kinetics.generator.inductionrotor.VerticalCommutatorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:grounding_rod",
+      "implementation": "org.patryk3211.powergrid.electricity.grounding.GroundingRodBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:heating_coil",
+      "implementation": "org.patryk3211.powergrid.electricity.heater.HeaterBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:heavy_wire_connector",
+      "implementation": "org.patryk3211.powergrid.electricity.wireconnector.HeavyConnectorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:hv_breaker",
+      "implementation": "org.patryk3211.powergrid.electricity.electricswitch.HvBreakerBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:hv_switch",
+      "implementation": "org.patryk3211.powergrid.electricity.electricswitch.HvSwitchBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:light_fixture",
+      "implementation": "org.patryk3211.powergrid.electricity.light.fixture.LightFixtureBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:lv_button",
+      "implementation": "org.patryk3211.powergrid.electricity.electricswitch.LvButtonBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:lv_switch",
+      "implementation": "org.patryk3211.powergrid.electricity.electricswitch.LvSwitchBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:modular_display",
+      "implementation": "org.patryk3211.powergrid.electricity.modulardisplay.ModularDisplayBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:mv_switch",
+      "implementation": "org.patryk3211.powergrid.electricity.electricswitch.MvSwitchBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:nether_transformer",
+      "implementation": "org.patryk3211.powergrid.electricity.transformer.NetherTransformerBlock",
+      "has_item": false
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:plotter",
+      "implementation": "org.patryk3211.powergrid.kinetics.plotter.PlotterBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:portable_battery",
+      "implementation": "org.patryk3211.powergrid.equipment.portablebattery.PortableBatteryBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:potato_battery",
+      "implementation": "org.patryk3211.powergrid.electricity.battery.PotatoBatteryBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:power_gauge",
+      "implementation": "org.patryk3211.powergrid.electricity.gauge.PowerGaugeBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:power_resistor",
+      "implementation": "org.patryk3211.powergrid.electricity.resistor.ResistorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:punch_card_reader",
+      "implementation": "org.patryk3211.powergrid.kinetics.punchcard.PunchCardReaderBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:redstone_converter",
+      "implementation": "org.patryk3211.powergrid.electricity.redstoneconverter.RedstoneConverterBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:rheostat",
+      "implementation": "org.patryk3211.powergrid.kinetics.rheostat.RheostatBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:servo",
+      "implementation": "org.patryk3211.powergrid.kinetics.servo.ServoBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:socket",
+      "implementation": "org.patryk3211.powergrid.electricity.socket.SocketBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:solar_panel",
+      "implementation": "org.patryk3211.powergrid.electricity.solarpanel.SolarPanelBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:solar_panel_bearing",
+      "implementation": "org.patryk3211.powergrid.electricity.solarpanel.SolarPanelBearingBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:spark_gap",
+      "implementation": "org.patryk3211.powergrid.electricity.sparkgap.SparkGapBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:string_light_block",
+      "implementation": "org.patryk3211.powergrid.electricity.light.string.StringLightBlock",
+      "has_item": false
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:thermometer",
+      "implementation": "org.patryk3211.powergrid.equipment.thermometer.ThermometerBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:transformer_core",
+      "implementation": "org.patryk3211.powergrid.electricity.transformer.TransformerCoreBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:transformer_medium",
+      "implementation": "org.patryk3211.powergrid.electricity.transformer.TransformerMediumBlock",
+      "has_item": false
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:transformer_small",
+      "implementation": "org.patryk3211.powergrid.electricity.transformer.TransformerSmallBlock",
+      "has_item": false
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:variac",
+      "implementation": "org.patryk3211.powergrid.kinetics.variac.VariacBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:vertical_generator_housing",
+      "implementation": "org.patryk3211.powergrid.kinetics.generator.housing.VerticalGeneratorHousing",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:voltage_gauge",
+      "implementation": "org.patryk3211.powergrid.electricity.gauge.VoltageGaugeBlock",
+      "has_item": true
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:winding",
+      "implementation": "org.patryk3211.powergrid.kinetics.generator.winding.WindingBlock",
+      "has_item": false
+    },
+    {
+      "registry": "block",
+      "id": "powergrid:wire_connector",
+      "implementation": "org.patryk3211.powergrid.electricity.wireconnector.ConnectorBlock",
+      "has_item": true
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:accumulator",
+      "implementation": "com.george_vi.electroenergetics.content.accumulator.AccumulatorBlockItem",
+      "block": "electroenergetics:accumulator"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:alternator_brushes",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:alternator_brushes"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:alternator_rotor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:alternator_rotor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:ammeter",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:ammeter"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:black_electric_motor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:black_electric_motor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:black_electrical_panel",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:black_electrical_panel"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:blue_electric_motor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:blue_electric_motor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:blue_electrical_panel",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:blue_electrical_panel"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:broken_bulb",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:broken_bulb"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:broken_fuse",
+      "implementation": "com.george_vi.electroenergetics.content.fuse.FuseBlockItem",
+      "block": "electroenergetics:broken_fuse"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:brown_electric_motor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:brown_electric_motor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:brown_electrical_panel",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:brown_electrical_panel"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:bulb",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:bulb"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:buzzer",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:buzzer"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:capacitor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:capacitor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:catenary_holder",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:catenary_holder"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:clamp_meter",
+      "implementation": "com.george_vi.electroenergetics.content.clamp_meter.ClampMeterItem"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:commutator",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:concrete_pole",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:concrete_pole"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:connector",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:connector"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:converter",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:converter"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:copper_wire",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:copper_wire_spool",
+      "implementation": "com.george_vi.electroenergetics.content.wire_spool.WireSpoolItem"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:creative_battery",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:creative_battery"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:creative_resistor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:creative_resistor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:creative_wire_spool",
+      "implementation": "com.george_vi.electroenergetics.content.wire_spool.WireSpoolItem"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:current_transformer",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:current_transformer"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:cut_off_switch",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:cut_off_switch"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:cyan_electric_motor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:cyan_electric_motor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:cyan_electrical_panel",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:cyan_electrical_panel"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:diode",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:diode"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:double_connector",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:double_connector"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:double_switch",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:double_switch"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:duplex_wire_spool",
+      "implementation": "com.george_vi.electroenergetics.content.bundled_wire.BundledWireItem"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:duplex_wire_termination",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:duplex_wire_termination"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:electric_pump",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:electric_pump"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:electric_shock_sign",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:electric_shock_sign"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:electrical_panel",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:electrical_panel"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:electrum_wire",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:electrum_wire_spool",
+      "implementation": "com.george_vi.electroenergetics.content.wire_spool.WireSpoolItem"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:emergency_stop_button",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:emergency_stop_button"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:empty_spool",
+      "implementation": "com.george_vi.electroenergetics.content.wire_spool.EmptySpoolItem"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:energy_meter",
+      "implementation": "com.george_vi.electroenergetics.content.energy_meter.EnergyMeterItem",
+      "block": "electroenergetics:energy_meter"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:frequency_meter",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:frequency_meter"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:fuse",
+      "implementation": "com.george_vi.electroenergetics.content.fuse.FuseBlockItem",
+      "block": "electroenergetics:fuse"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:fuse_holder",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:fuse_holder"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:glass_insulator_segment",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:glass_insulator_spool",
+      "implementation": "com.george_vi.electroenergetics.content.wire_spool.WireSpoolItem"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:gray_electric_motor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:gray_electric_motor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:gray_electrical_panel",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:gray_electrical_panel"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:green_electric_motor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:green_electric_motor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:green_electrical_panel",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:green_electrical_panel"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:ground_rod",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:ground_rod"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:grounding_sign",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:grounding_sign"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:hanging_glass_insulator",
+      "implementation": "com.george_vi.electroenergetics.content.wire_spool.HangingWireSpoolItem"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:heavily_insulated_wire",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:heavily_insulated_wire_spool",
+      "implementation": "com.george_vi.electroenergetics.content.wire_spool.WireSpoolItem"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:high_voltage_capacitor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:high_voltage_capacitor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:high_voltage_sign",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:high_voltage_sign"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:high_voltage_switch",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:high_voltage_switch"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:incomplete_miniature_circuit_breaker",
+      "implementation": "com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:incomplete_transformer_core",
+      "implementation": "com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:indicator_bulb",
+      "implementation": "com.george_vi.electroenergetics.content.indicator_bulb.IndicatorBulbBlockItem",
+      "block": "electroenergetics:indicator_bulb"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:inductor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:inductor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:insulated_wire",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:insulator",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:insulator"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:iron_bus_spool",
+      "implementation": "com.george_vi.electroenergetics.content.wire_spool.WireSpoolItem"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:iron_rail_spool",
+      "implementation": "com.george_vi.electroenergetics.content.wire_spool.WireSpoolItem"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:iron_wire",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:iron_wire_spool",
+      "implementation": "com.george_vi.electroenergetics.content.wire_spool.WireSpoolItem"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:iron_wire_strand",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:light_blue_electric_motor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:light_blue_electric_motor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:light_blue_electrical_panel",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:light_blue_electrical_panel"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:light_gray_electric_motor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:light_gray_electric_motor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:light_gray_electrical_panel",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:light_gray_electrical_panel"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:lime_electric_motor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:lime_electric_motor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:lime_electrical_panel",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:lime_electrical_panel"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:linemans_stick",
+      "implementation": "com.george_vi.electroenergetics.content.linemans_stick.LinemansStickItem"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:magenta_electric_motor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:magenta_electric_motor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:magenta_electrical_panel",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:magenta_electrical_panel"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:magnet",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:magnet"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:miniature_circuit_breaker",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.MCBItem"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:momentary_switch",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:momentary_switch"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:orange_electric_motor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:orange_electric_motor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:orange_electrical_panel",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:orange_electrical_panel"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:pantograph",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:pantograph"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:pink_electric_motor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:pink_electric_motor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:pink_electrical_panel",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:pink_electrical_panel"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:plant_oil_bucket",
+      "implementation": "net.minecraft.world.item.BucketItem"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:pole_mount",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:pole_mount"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:potentiometer",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:potentiometer"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:purple_electric_motor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:purple_electric_motor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:purple_electrical_panel",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:purple_electrical_panel"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:quad_connector",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:quad_connector"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:radiator_panel",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:radiator_panel"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:rail_contact_shoe",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:rail_contact_shoe"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:red_electric_motor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:red_electric_motor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:red_electrical_panel",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:red_electrical_panel"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:redstone_potentiometer",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:redstone_potentiometer"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:redstone_relay",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:redstone_relay"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:redstone_variac",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:redstone_variac"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:relay",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:relay"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:resistive_heater",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:resistive_heater"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:resistor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:resistor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:stator",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:stator"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:sulfur_hexafluoride_breaker",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:sulfur_hexafluoride_breaker"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:synchroscope",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:synchroscope"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:three_phase_alternator_brushes",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:three_phase_alternator_brushes"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:transformer",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:transformer"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:transformer_core",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:transformer_core"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:transformer_core_lamination",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:transformer_oil_bucket",
+      "implementation": "net.minecraft.world.item.BucketItem"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:tri_polar_energy_meter",
+      "implementation": "com.george_vi.electroenergetics.content.energy_meter.EnergyMeterItem",
+      "block": "electroenergetics:tri_polar_energy_meter"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:triple_connector",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:triple_connector"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:variac",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:variac"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:voltage_regulator",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:voltage_regulator"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:voltmeter",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:voltmeter"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:white_electric_motor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:white_electric_motor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:white_electrical_panel",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:white_electrical_panel"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:wire_damper",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:wire_spool",
+      "implementation": "com.george_vi.electroenergetics.content.wire_spool.WireSpoolItem"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:yellow_electric_motor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:yellow_electric_motor"
+    },
+    {
+      "registry": "item",
+      "id": "electroenergetics:yellow_electrical_panel",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "electroenergetics:yellow_electrical_panel"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:acid_bucket",
+      "implementation": "net.minecraft.world.item.BucketItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:alarm_bell",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:alarm_bell"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:barretter_tube",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:basin_heater",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:basin_heater"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:battery",
+      "implementation": "org.patryk3211.powergrid.electricity.battery.BatteryItem",
+      "block": "powergrid:battery"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:bjt_npn",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:bjt_pnp",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:capacitor",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:carbon_pile_coil",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:carbon_pile_coil"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:ceiling_tile",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:ceiling_tile"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:circuit_board",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:circuit_board"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:circuit_design_table",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:circuit_design_table"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:circuit_schematic",
+      "implementation": "org.patryk3211.powergrid.circuits.schematic.CircuitSchematicItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:conductive_casing",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:conductive_casing"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:constant_speed_motor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:constant_speed_motor"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:contactor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:contactor"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:copper_coil",
+      "implementation": "org.patryk3211.powergrid.kinetics.generator.winding.WindingItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:copper_cord",
+      "implementation": "org.patryk3211.powergrid.electricity.wire.powercord.CordItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:copper_plating",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:copper_plating"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:copper_plating_slab",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:copper_plating_slab"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:copper_plating_stairs",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:copper_plating_stairs"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:cord_junction",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:cord_junction"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:creative_current_source",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:creative_current_source"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:creative_resistor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:creative_resistor"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:creative_voltage_source",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:creative_voltage_source"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:crt",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:crt"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:current_gauge",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:current_gauge"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:debug",
+      "implementation": "org.patryk3211.powergrid.electricity.sim.DebugItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:device_connector",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:device_connector"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:diode",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:display_module",
+      "implementation": "org.patryk3211.powergrid.electricity.modulardisplay.DisplayModuleItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:electric_fan",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:electric_fan"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:electric_motor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:electric_motor"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:electric_pump",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:electric_pump"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:electrical_gizmo",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:electrobaton",
+      "implementation": "org.patryk3211.powergrid.equipment.baton.ElectroBatonItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:electromagnet",
+      "implementation": "com.simibubi.create.content.processing.AssemblyOperatorBlockItem",
+      "block": "powergrid:electromagnet"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:electrozapper",
+      "implementation": "org.patryk3211.powergrid.equipment.zapper.ElectroZapperItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:empty_circuit",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:energy_meter",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:energy_meter"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:factory_light",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:factory_light"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:fe_inverter",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:fe_inverter"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:fuse_holder",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:fuse_holder"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:generator_clutch",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:generator_clutch"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:generator_commutator",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:generator_commutator"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:generator_housing",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:generator_housing"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:generator_induction_rotor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:generator_induction_rotor"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:generator_large_induction_rotor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:generator_large_induction_rotor"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:generator_vertical_commutator",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:generator_vertical_commutator"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:golden_wire",
+      "implementation": "org.patryk3211.powergrid.electricity.wire.WireItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:grounding_rod",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:grounding_rod"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:growth_lamp",
+      "implementation": "org.patryk3211.powergrid.electricity.light.bulb.GrowthLamp"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:heating_coil",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:heating_coil"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:heavy_wire_connector",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:heavy_wire_connector"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:hv_breaker",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:hv_breaker"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:hv_switch",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:hv_switch"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:incomplete_battery",
+      "implementation": "com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:incomplete_bjt_npn",
+      "implementation": "com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:incomplete_bjt_pnp",
+      "implementation": "com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:incomplete_circuit",
+      "implementation": "org.patryk3211.powergrid.circuits.circuitboard.IncompleteCircuitItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:incomplete_electrical_gizmo",
+      "implementation": "com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:incomplete_punch_card",
+      "implementation": "com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:incomplete_solar_panel",
+      "implementation": "com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:incomplete_transformer_core",
+      "implementation": "com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:incomplete_unetched_circuit",
+      "implementation": "com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:insulated_copper_wire",
+      "implementation": "org.patryk3211.powergrid.electricity.wire.WireItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:integrated_circuit",
+      "implementation": "org.patryk3211.powergrid.equipment.BoostingChipItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:iron_wire",
+      "implementation": "org.patryk3211.powergrid.electricity.wire.WireItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:light_bulb",
+      "implementation": "org.patryk3211.powergrid.electricity.light.bulb.LightBulb"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:light_fixture",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:light_fixture"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:lv_button",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:lv_button"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:lv_light_bulb",
+      "implementation": "org.patryk3211.powergrid.electricity.light.bulb.LvLightBulb"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:lv_switch",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:lv_switch"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:magnet",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:modular_display",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:modular_display"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:multimeter",
+      "implementation": "org.patryk3211.powergrid.equipment.multimeter.MultimeterItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:mv_switch",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:mv_switch"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:neon_bulb",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:pentode",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:pins",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:plotter",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:plotter"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:portable_battery",
+      "implementation": "org.patryk3211.powergrid.equipment.portablebattery.forge.ForgePortableBatteryItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:portable_battery_placeable",
+      "implementation": "com.simibubi.create.content.equipment.armor.BacktankItem$BacktankBlockItem",
+      "block": "powergrid:portable_battery"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:portable_drill",
+      "implementation": "org.patryk3211.powergrid.equipment.drill.DrillItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:portable_saw",
+      "implementation": "org.patryk3211.powergrid.equipment.saw.SawItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:potato_battery",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:potato_battery"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:potentiometer",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:power_gauge",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:power_gauge"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:power_resistor",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:power_resistor"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:punch_card",
+      "implementation": "org.patryk3211.powergrid.kinetics.punchcard.PunchCardItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:punch_card_reader",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:punch_card_reader"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:redstone_converter",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:redstone_converter"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:redstone_relay",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:regulator_tube",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:relay",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:relay_dpdt",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:resistive_coil",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:resistor",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:rheostat",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:rheostat"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:servo",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:servo"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:socket",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:socket"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:solar_panel",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:solar_panel"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:solar_panel_bearing",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:solar_panel_bearing"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:spark_gap",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:spark_gap"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:string_light_cord",
+      "implementation": "org.patryk3211.powergrid.electricity.light.string.StringLightCordItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:thermometer",
+      "implementation": "org.patryk3211.powergrid.equipment.thermometer.ThermometerItem",
+      "block": "powergrid:thermometer"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:thyratron",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:transformer_core",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:transformer_core"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:triode",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:unetched_circuit",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:variac",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:variac"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:varistor",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:vertical_generator_housing",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:vertical_generator_housing"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:vfet",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:voltage_gauge",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:voltage_gauge"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:wire",
+      "implementation": "org.patryk3211.powergrid.electricity.wire.WireItem"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:wire_connector",
+      "implementation": "net.minecraft.world.item.BlockItem",
+      "block": "powergrid:wire_connector"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:wire_cutter",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "item",
+      "id": "powergrid:zinc_sheet",
+      "implementation": "net.minecraft.world.item.Item"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:iron_rail",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:pink_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:lime_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_cyan",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:light_gray_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_gray",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:orange_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:light_gray_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:cyan_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:bundle_conductor",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:electrum",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_green",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:lime_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:duplex",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_orange",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:black_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:pink_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:black_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:gray_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_red",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_yellow",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:light_blue_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:gray_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:brown_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:blue_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_blue",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:copper",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_pink",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:standard",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_brown",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:iron",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:iron_bus",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_light_blue",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:magenta_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:red_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:purple_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:creative",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_black",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:green_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:white_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_white",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:green_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:blue_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:glass_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:yellow_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:orange_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:purple_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:brown_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:red_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:magenta_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:white_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_light_gray",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_lime",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_purple",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:colored_magenta",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:light_blue_hanging_insulator",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:yellow_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_type",
+      "id": "electroenergetics:cyan_heavily_insulated",
+      "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable"
+    },
+    {
+      "registry": "wire_attachment",
+      "id": "electroenergetics:bunting",
+      "implementation": "com.george_vi.electroenergetics.content.wire.attachments.BuntingAttachmentType"
+    },
+    {
+      "registry": "wire_attachment",
+      "id": "electroenergetics:empty",
+      "implementation": "com.george_vi.electroenergetics.content.wire.WireAttachmentType$Empty"
+    },
+    {
+      "registry": "wire_attachment",
+      "id": "electroenergetics:damper",
+      "implementation": "com.george_vi.electroenergetics.content.wire.attachments.DamperAttachmentType"
+    },
+    {
+      "registry": "wire_attachment",
+      "id": "electroenergetics:banner",
+      "implementation": "com.george_vi.electroenergetics.content.wire.attachments.BannerAttachmentType"
+    },
+    {
+      "registry": "panel_attachment",
+      "id": "electroenergetics:altitude_sensor",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType"
+    },
+    {
+      "registry": "panel_attachment",
+      "id": "electroenergetics:energy_meter",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType"
+    },
+    {
+      "registry": "panel_attachment",
+      "id": "electroenergetics:ammeter",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType"
+    },
+    {
+      "registry": "panel_attachment",
+      "id": "electroenergetics:voltmeter",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType"
+    },
+    {
+      "registry": "panel_attachment",
+      "id": "electroenergetics:momentary_switch",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType"
+    },
+    {
+      "registry": "panel_attachment",
+      "id": "electroenergetics:indicator_bulb",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType"
+    },
+    {
+      "registry": "panel_attachment",
+      "id": "electroenergetics:velocity_sensor",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType"
+    },
+    {
+      "registry": "panel_attachment",
+      "id": "electroenergetics:tri_polar_energy_meter",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType"
+    },
+    {
+      "registry": "panel_attachment",
+      "id": "electroenergetics:analog_lever",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType"
+    },
+    {
+      "registry": "panel_attachment",
+      "id": "electroenergetics:steering_wheel",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType"
+    },
+    {
+      "registry": "panel_attachment",
+      "id": "electroenergetics:emergency_stop_button",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType"
+    },
+    {
+      "registry": "panel_attachment",
+      "id": "electroenergetics:miniature_circuit_breaker",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType"
+    },
+    {
+      "registry": "panel_attachment",
+      "id": "electroenergetics:cut_off_switch",
+      "implementation": "com.george_vi.electroenergetics.content.electrical_panel.attachments.PanelAttachmentType"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:via",
+      "implementation": "org.patryk3211.powergrid.circuits.components.ViaComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:label",
+      "implementation": "org.patryk3211.powergrid.circuits.components.LabelComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:triode",
+      "implementation": "org.patryk3211.powergrid.circuits.components.ElectronTubeComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:pentode",
+      "implementation": "org.patryk3211.powergrid.circuits.components.PentodeComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:thyratron",
+      "implementation": "org.patryk3211.powergrid.circuits.components.ThyratronComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:vfet",
+      "implementation": "org.patryk3211.powergrid.circuits.components.VFETComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:bjt_npn",
+      "implementation": "org.patryk3211.powergrid.circuits.components.NPNComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:bjt_pnp",
+      "implementation": "org.patryk3211.powergrid.circuits.components.PNPComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:regulator_tube",
+      "implementation": "org.patryk3211.powergrid.circuits.components.RegulatorTubeComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:barretter_tube",
+      "implementation": "org.patryk3211.powergrid.circuits.components.BarretterTubeComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:neon_bulb",
+      "implementation": "org.patryk3211.powergrid.circuits.components.NeonBulbComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:light_bulb",
+      "implementation": "org.patryk3211.powergrid.circuits.components.LightBulbComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:connector",
+      "implementation": "org.patryk3211.powergrid.circuits.components.ConnectorComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:switch",
+      "implementation": "org.patryk3211.powergrid.circuits.components.SwitchComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:relay",
+      "implementation": "org.patryk3211.powergrid.circuits.components.RelayComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:relay_dpdt",
+      "implementation": "org.patryk3211.powergrid.circuits.components.DoubleRelayComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:resistor",
+      "implementation": "org.patryk3211.powergrid.circuits.components.ResistorComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:redstone_relay",
+      "implementation": "org.patryk3211.powergrid.circuits.components.RedstoneRelayComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:voltage_gauge",
+      "implementation": "org.patryk3211.powergrid.circuits.components.VoltageGaugeComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:current_gauge",
+      "implementation": "org.patryk3211.powergrid.circuits.components.CurrentGaugeComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:diode",
+      "implementation": "org.patryk3211.powergrid.circuits.components.DiodeComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:capacitor",
+      "implementation": "org.patryk3211.powergrid.circuits.components.CapacitorComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:inductor",
+      "implementation": "org.patryk3211.powergrid.circuits.components.InductorComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:button",
+      "implementation": "org.patryk3211.powergrid.circuits.components.ButtonComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:potentiometer",
+      "implementation": "org.patryk3211.powergrid.circuits.components.PotentiometerComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:varistor",
+      "implementation": "org.patryk3211.powergrid.circuits.components.VaristorComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:fuse_holder",
+      "implementation": "org.patryk3211.powergrid.circuits.components.FuseHolderComponent"
+    },
+    {
+      "registry": "board_component",
+      "id": "powergrid:display_module",
+      "implementation": "org.patryk3211.powergrid.circuits.components.ModularDisplayComponent"
+    }
+  ]
+}

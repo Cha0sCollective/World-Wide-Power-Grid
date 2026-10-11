@@ -1,0 +1,1044 @@
+{
+  "schema": 1,
+  "backend": "NATIVE",
+  "upstream": true,
+  "initial": 0.0,
+  "samples": [
+    {
+      "tick": 11,
+      "value": 0.0,
+      "source_setting": 300.0
+    },
+    {
+      "tick": 12,
+      "value": 0.006092302966862917,
+      "source_setting": 300.0
+    },
+    {
+      "tick": 13,
+      "value": 0.012044482864439487,
+      "source_setting": 300.0
+    },
+    {
+      "tick": 14,
+      "value": 0.01785976253449917,
+      "source_setting": 300.0
+    },
+    {
+      "tick": 15,
+      "value": 0.023541290313005447,
+      "source_setting": 300.0
+    },
+    {
+      "tick": 16,
+      "value": 0.02909214235842228,
+      "source_setting": 300.0
+    },
+    {
+      "tick": 17,
+      "value": 0.03451532498002052,
+      "source_setting": 300.0
+    },
+    {
+      "tick": 18,
+      "value": 0.039813775569200516,
+      "source_setting": 300.0
+    },
+    {
+      "tick": 19,
+      "value": 0.04499036446213722,
+      "source_setting": 300.0
+    },
+    {
+      "tick": 20,
+      "value": 0.05004788935184479,
+      "source_setting": 300.0
+    },
+    {
+      "tick": 21,
+      "value": 0.05498909205198288,
+      "source_setting": 300.0
+    },
+    {
+      "tick": 22,
+      "value": 0.059816647320985794,
+      "source_setting": 300.0
+    },
+    {
+      "tick": 23,
+      "value": 0.06453316658735275,
+      "source_setting": 300.0
+    },
+    {
+      "tick": 24,
+      "value": 0.0691412091255188,
+      "source_setting": 300.0
+    },
+    {
+      "tick": 25,
+      "value": 0.0736432671546936,
+      "source_setting": 300.0
+    },
+    {
+      "tick": 26,
+      "value": 0.07804177701473236,
+      "source_setting": 300.0
+    },
+    {
+      "tick": 27,
+      "value": 0.08233912289142609,
+      "source_setting": 300.0
+    },
+    {
+      "tick": 28,
+      "value": 0.08653762936592102,
+      "source_setting": 300.0
+    },
+    {
+      "tick": 29,
+      "value": 0.09063956886529922,
+      "source_setting": 300.0
+    },
+    {
+      "tick": 30,
+      "value": 0.09464716166257858,
+      "source_setting": 300.0
+    },
+    {
+      "tick": 31,
+      "value": 0.0985625833272934,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 32,
+      "value": 0.14514563977718353,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 33,
+      "value": 0.19065728783607483,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 34,
+      "value": 0.2351221740245819,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 35,
+      "value": 0.27856436371803284,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 36,
+      "value": 0.3210074007511139,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 37,
+      "value": 0.3624742329120636,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 38,
+      "value": 0.4029873311519623,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 39,
+      "value": 0.4425686299800873,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 40,
+      "value": 0.48123955726623535,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 41,
+      "value": 0.5190210342407227,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 42,
+      "value": 0.5559335350990295,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 43,
+      "value": 0.5919970870018005,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 44,
+      "value": 0.6272311806678772,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 45,
+      "value": 0.6616548895835876,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 46,
+      "value": 0.6952868103981018,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 47,
+      "value": 0.7281452417373657,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 48,
+      "value": 0.7602478861808777,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 49,
+      "value": 0.7916122078895569,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 50,
+      "value": 0.8222551345825195,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 51,
+      "value": 0.852193295955658,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 52,
+      "value": 0.8814428448677063,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 53,
+      "value": 0.9100196957588196,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 54,
+      "value": 0.9379392266273499,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 55,
+      "value": 0.9652166366577148,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 56,
+      "value": 0.9918665885925293,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 57,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 58,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 59,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 60,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 61,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 62,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 63,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 64,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 65,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 66,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 67,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 68,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 69,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 70,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 71,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 72,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 73,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 74,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 75,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 76,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 77,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 78,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 79,
+      "value": 1.0,
+      "source_setting": 1000.0
+    },
+    {
+      "tick": 80,
+      "value": 1.0,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 81,
+      "value": 1.0,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 82,
+      "value": 0.9769999980926514,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 83,
+      "value": 0.9545289874076843,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 84,
+      "value": 0.9325748085975647,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 85,
+      "value": 0.9111256003379822,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 86,
+      "value": 0.8901696801185608,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 87,
+      "value": 0.869695782661438,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 88,
+      "value": 0.8496927618980408,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 89,
+      "value": 0.8301498293876648,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 90,
+      "value": 0.81105637550354,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 91,
+      "value": 0.7924020886421204,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 92,
+      "value": 0.774176836013794,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 93,
+      "value": 0.7563707828521729,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 94,
+      "value": 0.7389742732048035,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 95,
+      "value": 0.7219778895378113,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 96,
+      "value": 0.7053723931312561,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 97,
+      "value": 0.6891488432884216,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 98,
+      "value": 0.6732984185218811,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 99,
+      "value": 0.6578125357627869,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 100,
+      "value": 0.6426828503608704,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 101,
+      "value": 0.6279011368751526,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 102,
+      "value": 0.6134594082832336,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 103,
+      "value": 0.599349856376648,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 104,
+      "value": 0.5855647921562195,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 105,
+      "value": 0.5720968246459961,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 106,
+      "value": 0.5589386224746704,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 107,
+      "value": 0.5460830330848694,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 108,
+      "value": 0.5335231423377991,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 109,
+      "value": 0.5212520956993103,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 110,
+      "value": 0.509263277053833,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 111,
+      "value": 0.49755021929740906,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 112,
+      "value": 0.4861065745353699,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 113,
+      "value": 0.4749261140823364,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 114,
+      "value": 0.4640028178691864,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 115,
+      "value": 0.45333075523376465,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 116,
+      "value": 0.44290414452552795,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 117,
+      "value": 0.43271735310554504,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 118,
+      "value": 0.4227648675441742,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 119,
+      "value": 0.41304126381874084,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 120,
+      "value": 0.40354132652282715,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 121,
+      "value": 0.39425987005233765,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 122,
+      "value": 0.3851918876171112,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 123,
+      "value": 0.37633246183395386,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 124,
+      "value": 0.36767682433128357,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 125,
+      "value": 0.3592202663421631,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 126,
+      "value": 0.3509581983089447,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 127,
+      "value": 0.34288614988327026,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 128,
+      "value": 0.33499976992607117,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 129,
+      "value": 0.3272947669029236,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 130,
+      "value": 0.3197669982910156,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 131,
+      "value": 0.3124123513698578,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 132,
+      "value": 0.3052268624305725,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 133,
+      "value": 0.2982066571712494,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 134,
+      "value": 0.2913478910923004,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 135,
+      "value": 0.2846468985080719,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 136,
+      "value": 0.27810001373291016,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 137,
+      "value": 0.27170372009277344,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 138,
+      "value": 0.2654545307159424,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 139,
+      "value": 0.2593490779399872,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 140,
+      "value": 0.2533840537071228,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 141,
+      "value": 0.24755622446537018,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 142,
+      "value": 0.2418624311685562,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 143,
+      "value": 0.23629958927631378,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 144,
+      "value": 0.23086470365524292,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 145,
+      "value": 0.22555480897426605,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 146,
+      "value": 0.22036704421043396,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 147,
+      "value": 0.2152986079454422,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 148,
+      "value": 0.2103467434644699,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 149,
+      "value": 0.2055087685585022,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 150,
+      "value": 0.20078206062316895,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 151,
+      "value": 0.196164071559906,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 152,
+      "value": 0.1916522979736328,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 153,
+      "value": 0.18724429607391357,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 154,
+      "value": 0.18293768167495728,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 155,
+      "value": 0.17873011529445648,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 156,
+      "value": 0.17461931705474854,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 157,
+      "value": 0.17060306668281555,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 158,
+      "value": 0.16667918860912323,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 159,
+      "value": 0.16284556686878204,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 160,
+      "value": 0.15910011529922485,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 161,
+      "value": 0.1554408073425293,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 162,
+      "value": 0.1518656611442566,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 163,
+      "value": 0.14837275445461273,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 164,
+      "value": 0.1449601799249649,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 165,
+      "value": 0.14162608981132507,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 166,
+      "value": 0.13836869597434998,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 167,
+      "value": 0.13518621027469635,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 168,
+      "value": 0.1320769339799881,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 169,
+      "value": 0.12903916835784912,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 170,
+      "value": 0.1260712742805481,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 171,
+      "value": 0.12317163497209549,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 172,
+      "value": 0.12033868581056595,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 173,
+      "value": 0.1175708994269371,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 174,
+      "value": 0.11486677080392838,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 175,
+      "value": 0.11222483217716217,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 176,
+      "value": 0.10964366048574448,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 177,
+      "value": 0.10712185502052307,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 178,
+      "value": 0.10465805232524872,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 179,
+      "value": 0.10225091874599457,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 180,
+      "value": 0.09989915043115616,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 181,
+      "value": 0.09760147333145142,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 182,
+      "value": 0.09535663574934006,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 183,
+      "value": 0.09316343069076538,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 184,
+      "value": 0.09102067351341248,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 185,
+      "value": 0.08892719447612762,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 186,
+      "value": 0.08688186854124069,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 187,
+      "value": 0.08488358557224274,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 188,
+      "value": 0.0829312652349472,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 189,
+      "value": 0.08102384954690933,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 190,
+      "value": 0.07916030287742615,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 191,
+      "value": 0.07733961939811707,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 192,
+      "value": 0.0755608081817627,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 193,
+      "value": 0.07382290810346603,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 194,
+      "value": 0.07212498039007187,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 195,
+      "value": 0.07046610862016678,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 196,
+      "value": 0.06884539127349854,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 197,
+      "value": 0.0672619491815567,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 198,
+      "value": 0.06571492552757263,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 199,
+      "value": 0.06420347839593887,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 200,
+      "value": 0.06272679567337036,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 201,
+      "value": 0.061284080147743225,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 202,
+      "value": 0.05987454578280449,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 203,
+      "value": 0.05849743261933327,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 204,
+      "value": 0.05715199187397957,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 205,
+      "value": 0.05583749711513519,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 206,
+      "value": 0.054553233087062836,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 207,
+      "value": 0.05329850688576698,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 208,
+      "value": 0.052072640508413315,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 209,
+      "value": 0.050874970853328705,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 210,
+      "value": 0.04970484599471092,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 211,
+      "value": 0.04856163263320923,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 212,
+      "value": 0.04744471609592438,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 213,
+      "value": 0.04635348916053772,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 214,
+      "value": 0.0452873595058918,
+      "source_setting": 0.0
+    },
+    {
+      "tick": 215,
+      "value": 0.044245749711990356,
+      "source_setting": 0.0
+    }
+  ],
+  "events": {
+    "bulb-lit": 12,
+    "heater-smouldering": 32,
+    "bulb-destroyed": 37,
+    "broken-bulb-placed": 38,
+    "heater-kindled": 44,
+    "heater-cooled": 180
+  },
+  "relative_tolerance": 0.01,
+  "near_zero_tolerance": 1.0E-8,
+  "allowed_gameplay_tick_offset": 1
+}

@@ -330,11 +330,91 @@ public final class StationaryAccuracyGameTests {
         h.succeed();
     }
 
+    @GameTest(template = "empty", timeoutTicks = 20)
+    public static void pinnedAccumulatorChargeDeltasMatchIndependentEquationWithinOnePercent(GameTestHelper h) {
+        var samples = new JsonArray();
+        for (int steps : new int[]{1, 2, 16}) {
+            var n = network();
+            try {
+                var ground = node(n); var supply = node(n); var output = node(n);
+                n.addWire(new ElectricWire(.001, ground, null));
+                var source = new LinearBranch(n, ground, supply, ElectricalProperties.fromThevenin(1, 30), false);
+                n.addWire(new ElectricWire(10, supply, output));
+                var properties = new com.george_vi.electroenergetics.foundation.electrical_properties.AccumulatorProperties();
+                double nominal = com.george_vi.electroenergetics.foundation.electrical_properties.AccumulatorProperties.getNominalCharge();
+                double expectedCharge = nominal*.5;
+                properties.storedCharge = expectedCharge;
+                properties.tick(new double[2*steps], 0, steps, 0, 1);
+                var accumulator = new LinearBranch(n, output, ground, properties, false);
+                var values = new double[2*steps];
+                for (double voltage : new double[]{30, 0, -10}) {
+                    source.update(ElectricalProperties.fromThevenin(1, voltage));
+                    double start = expectedCharge;
+                    for (int tick = 1; tick <= 30; tick++) {
+                        n.prepare(steps); int stamp = n.getStamp();
+                        for (int step = 0; step < steps; step++) {
+                            // Independent explicit charge reference from the pinned
+                            // OCV law; do not call the property being tested.
+                            double soc = Math.clamp(expectedCharge/nominal, 0, 1);
+                            double openVoltage = soc < 1e-5 ? 0 : (Math.log10(1000*soc)/4+.25)*24;
+                            double current = (openVoltage-voltage)/11.1;
+                            expectedCharge = Math.clamp(expectedCharge-current*.05/steps, 0, nominal);
+                            properties.tick(values, step, steps, 0, 1); accumulator.update(properties);
+                            n.singleTick();
+                            values[step] = output.getVoltage(); values[steps+step] = ground.getVoltage();
+                            properties.afterTick(values, 0, 1, step, steps);
+                        }
+                        h.assertTrue(n.getStamp()-stamp == steps, "Accumulator advanced outside its declared substeps");
+                        sample(samples, steps, tick, voltage, expectedCharge-start, properties.storedCharge-start);
+                        relative(h, properties.storedCharge-start, expectedCharge-start, .01, "Accumulator charge delta at " + steps + " substeps, tick " + tick);
+                    }
+                }
+            } finally { n.cleanup(); }
+        }
+        var report = new JsonObject(); report.addProperty("schema", 1);
+        report.addProperty("backend", System.getProperty("wwpg.test.backend", "NATIVE"));
+        report.addProperty("model", "CEE 1.1.3 explicit charge update with logarithmic OCV");
+        report.addProperty("total_resistance_ohms", 11.1); report.addProperty("relative_tolerance", .01);
+        report.addProperty("near_zero_tolerance", ZERO); report.add("samples", samples);
+        try { Files.writeString(Path.of("accuracy-accumulator.json"), new GsonBuilder().setPrettyPrinting().create().toJson(report)+"\n"); }
+        catch (java.io.IOException error) { throw new IllegalStateException(error); }
+        h.succeed();
+    }
+
     private static ElectricalNetwork network() {
         var n = new ElectricalNetwork(false);
         n.switchBackend(CSolver.SolverBackend.valueOf(System.getProperty("wwpg.test.backend", "NATIVE")));
         n.warmUp(-1);
         return n;
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 20)
+    public static void repeatedSmallPropertyConductanceChangesKeepTheMatrixConsistent(GameTestHelper h) {
+        var n = network();
+        try {
+            var ground = node(n); var supply = node(n); var output = node(n);
+            n.addWire(new ElectricWire(.001, ground, null));
+            var source = new VoltageSourceCoupling(supply, ground, 0); source.setVoltage(-10); n.addNode(source);
+            n.addWire(new ElectricWire(1000, output, ground));
+            var branch = new LinearBranch(n, supply, output, ElectricalProperties.resistor(1/2.3e-8), false);
+            n.prepare(1);
+            ((org.cha0scollective.wwpg.mixin.ElectricalNetworkAccessor) n).wwpg$solver().setPrecision(1e-12, 1e-16, 1e-12, .99);
+            int nodes = n.size();
+            for (int step = 0; step <= 40; step++) {
+                double conductance = 2.3e-8-step*5e-10;
+                branch.update(ElectricalProperties.resistor(1/conductance));
+                n.singleTick();
+                double expected = -10*conductance/(.001+conductance);
+                near(h, output.getVoltage()-ground.getVoltage(), expected, 1e-8, "Repeated sub-threshold property update " + step);
+                h.assertTrue(n.size() == nodes, "Small parameter updates changed topology");
+            }
+            var accessor = (org.cha0scollective.wwpg.mixin.ElectricalNetworkAccessor) n;
+            int updates = accessor.wwpg$conductanceUpdates();
+            var unchanged = ElectricalProperties.resistor(1/(2.3e-8-40*5e-10));
+            for (int step = 0; step < 100; step++) { branch.update(unchanged); n.singleTick(); }
+            h.assertTrue(accessor.wwpg$conductanceUpdates() == updates, "Unchanged properties requested needless matrix updates");
+        } finally { n.cleanup(); }
+        h.succeed();
     }
     private static void sample(JsonArray samples, int steps, int tick, double supply, double expected, double actual) {
         var row = new JsonObject();

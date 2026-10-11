@@ -66,6 +66,11 @@ jobs:
             run/world/computercraft/computer/**/*.json
             run/world/computercraft/computer/**/boots.txt
             run/packaged-*.json
+            run/reference/native-reference-*.json
+            run/reference/compatibility-*.json
+            run/reference/reference-packaged-*.json
+            run/reference/logs/
+            run/reference/crash-reports/
             run/showroom/logs/
             run/showroom/crash-reports/
             run/showroom/showroom-coverage.json

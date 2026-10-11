@@ -9,4 +9,5 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 public interface ElectricalNetworkAccessor {
     @Accessor("mna") IMNA wwpg$solver();
     @Accessor("groundReferenceCount") int wwpg$groundCount();
+    @Accessor("conductanceUpdates") int wwpg$conductanceUpdates();
 }

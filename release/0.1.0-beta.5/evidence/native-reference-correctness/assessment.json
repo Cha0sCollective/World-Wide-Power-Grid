@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "published_support_claim": false,
+  "corrected_artifact_sha256": "77a1444787dd1601ee0e0ccf9c678f81a292c62113fcc0c8839a2aef5349369b",
+  "checks": [
+    {
+      "backend": "java",
+      "precision": "normal",
+      "upstream_required": 9,
+      "compatibility_required": 9
+    },
+    {
+      "backend": "java",
+      "precision": "tight",
+      "upstream_required": 9,
+      "compatibility_required": 9
+    },
+    {
+      "backend": "native",
+      "precision": "normal",
+      "upstream_required": 9,
+      "compatibility_required": 9
+    },
+    {
+      "backend": "native",
+      "precision": "tight",
+      "upstream_required": 9,
+      "compatibility_required": 9
+    }
+  ],
+  "accuracy_checks_per_backend": 36,
+  "defect": "PG drops conductance deltas below 1e-9 S while the wire stores the updated value. Repeated small CEE diode changes therefore diverge from the matrix. CEE property wires now retain every nonzero delta. Native PG wire thresholds and exactly unchanged fast paths remain intact.",
+  "controls": [
+    "Removing only the conductance hook reproduces the small-delta analytical failure on both solvers at update 1.",
+    "Replacing only the corrected class with a zero-threshold prototype reproduces unnecessary updates for unchanged parameters on both solvers. Double.MIN_VALUE preserves the exact-zero fast path.",
+    "Native battery fixtures require their real connector assembly; CEE accumulator test seeding must update already prepared native history. Those fixture corrections are retained.",
+    "CEE native UI clamps source voltage to nonnegative values. Signed equation vectors explicitly seed its existing saved voltage field and record actual source settings. Player UI behavior is unchanged.",
+    "PG uses a current residual tolerance. Near-zero diode voltage comparisons use twice the load resistance times that tolerance; both normal and 1e-10 A reference runs pass. Nonzero windows retain the 1% comparison."
+  ],
+  "covered": [
+    "Native upstream and compatibility traces for bulb failure, heater transitions and survival fuse repair agree within one gameplay tick.",
+    "Native CEE accumulator, PG acid battery and noncharging potato battery charge/energy changes agree within 1% across recorded charge/discharge windows, allowing one native gameplay tick.",
+    "CEE diode and native PG diode-board reactive switching preserve forward, off, reverse and restored windows.",
+    "Independent accumulator ODE and RC/RL checks record 1, 2 and 16 substep windows; repeated small and unchanged conductance updates retain PG object identities."
+  ],
+  "remaining": [
+    "Stage CI on all eight combinations",
+    "Complete playable yards",
+    "Graphical and two-real-client acceptance",
+    "Final exact beta.5 packaged acceptance"
+  ]
+}

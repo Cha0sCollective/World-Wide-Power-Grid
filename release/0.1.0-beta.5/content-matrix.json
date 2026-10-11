@@ -707,7 +707,8 @@
       "acceptance_circuit": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
       "status": "unverified",
       "fixtures": [
-        "ceeFuseTripsAndRepairRestoresPgLoad"
+        "ceeFuseTripsAndRepairRestoresPgLoad",
+        "fuseTripAndNativeRepairMatchPinnedUpstreamWithinOneTick"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
@@ -726,7 +727,8 @@
         "restartPreservesBothWireSystemsAndCapacitor": "src/main/java/org/cha0scollective/wwpg/gametest/PersistenceGameTests.java",
         "restartRetainsPanelTerminalsBoardIdentityAndCharge": "src/main/java/org/cha0scollective/wwpg/gametest/ElectronicsPersistenceGameTests.java",
         "identicalCoordinatesKeepSeparateDimensionTopology": "src/main/java/org/cha0scollective/wwpg/gametest/DimensionGameTests.java",
-        "ceeWireOverloadBreaksAndRepairRejoinsPgCircuit": "src/main/java/org/cha0scollective/wwpg/gametest/WireFailureGameTests.java"
+        "ceeWireOverloadBreaksAndRepairRejoinsPgCircuit": "src/main/java/org/cha0scollective/wwpg/gametest/WireFailureGameTests.java",
+        "fuseTripAndNativeRepairMatchPinnedUpstreamWithinOneTick": "src/main/java/org/cha0scollective/wwpg/gametest/NativeReferenceTimingGameTests.java"
       },
       "baseline_status": "verified"
     },
@@ -1149,7 +1151,9 @@
       "acceptance_circuit": "Charge and discharge into an opposite-mod load; compare substep evolution, then save/restart.",
       "status": "unverified",
       "fixtures": [
-        "accumulatorChargesFromPgAndPowersPgLoad"
+        "accumulatorChargesFromPgAndPowersPgLoad",
+        "accumulatorMixedChargeDischargeMatchesPinnedStorageWithinOnePercent",
+        "pinnedAccumulatorChargeDeltasMatchIndependentEquationWithinOnePercent"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
@@ -1168,7 +1172,9 @@
         "restartPreservesBothWireSystemsAndCapacitor": "src/main/java/org/cha0scollective/wwpg/gametest/PersistenceGameTests.java",
         "restartRetainsPanelTerminalsBoardIdentityAndCharge": "src/main/java/org/cha0scollective/wwpg/gametest/ElectronicsPersistenceGameTests.java",
         "identicalCoordinatesKeepSeparateDimensionTopology": "src/main/java/org/cha0scollective/wwpg/gametest/DimensionGameTests.java",
-        "ceeWireOverloadBreaksAndRepairRejoinsPgCircuit": "src/main/java/org/cha0scollective/wwpg/gametest/WireFailureGameTests.java"
+        "ceeWireOverloadBreaksAndRepairRejoinsPgCircuit": "src/main/java/org/cha0scollective/wwpg/gametest/WireFailureGameTests.java",
+        "accumulatorMixedChargeDischargeMatchesPinnedStorageWithinOnePercent": "src/main/java/org/cha0scollective/wwpg/gametest/NativeReferenceTimingGameTests.java",
+        "pinnedAccumulatorChargeDeltasMatchIndependentEquationWithinOnePercent": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryAccuracyGameTests.java"
       },
       "baseline_status": "verified"
     },
@@ -5341,10 +5347,14 @@
       "status": "unverified",
       "release_scope": true,
       "fixtures": [
-        "potatoBatteryPreservesNativeNonRechargeableBehavior"
+        "potatoBatteryPreservesNativeNonRechargeableBehavior",
+        "mixedPotatoBatteryPreservesNativeNoChargingAndDischargeWindow"
       ],
       "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
-      "profile": "BASE"
+      "profile": "BASE",
+      "fixture_sources": {
+        "mixedPotatoBatteryPreservesNativeNoChargingAndDischargeWindow": "src/main/java/org/cha0scollective/wwpg/gametest/NativeReferenceTimingGameTests.java"
+      }
     },
     {
       "registry": "block",

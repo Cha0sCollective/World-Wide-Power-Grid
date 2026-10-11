@@ -10,6 +10,7 @@
     "CircuitBuilderAccessor",
     "CircuitBuilderValidationMixin",
     "ElectricalNetworkAccessor",
+    "PropertyConductanceMixin",
     "CeeSolverAuditMixin",
     "SimulationTickerMixin",
     "WorldNetworksMixin",
