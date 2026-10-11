@@ -2,6 +2,7 @@ package org.cha0scollective.wwpg.mixin;
 
 import net.minecraft.server.level.ServerLevel;
 import org.cha0scollective.wwpg.bridge.Bridges;
+import org.cha0scollective.wwpg.bridge.ServerElectricalSchedule;
 import org.patryk3211.powergrid.electricity.WorldNetworks;
 import org.patryk3211.powergrid.electricity.sim.ElectricalNetwork;
 import org.spongepowered.asm.mixin.Mixin;
@@ -32,17 +33,20 @@ public abstract class WorldNetworksMixin {
     }
     @Redirect(method = "preTick", at = @At(value = "INVOKE", target = "Lorg/patryk3211/powergrid/electricity/sim/ElectricalNetwork;singleTick()V"))
     private void wwpg$substep(ElectricalNetwork network) {
+        if (ServerElectricalSchedule.preparing()) return;
         var world = (WorldNetworks) (Object) this;
         if (world.world instanceof ServerLevel level) {
-            var bridge = Bridges.get(level);
-            bridge.beforeSolve(network);
-            network.singleTick();
-            bridge.afterSolve(network);
+            ServerElectricalSchedule.solve(level, network);
         } else network.singleTick();
+    }
+    @Redirect(method = "preTick", at = @At(value = "INVOKE", target = "Lorg/patryk3211/powergrid/electricity/sim/PerformanceCounter;end()V"))
+    private void wwpg$finishPerformance(org.patryk3211.powergrid.electricity.sim.PerformanceCounter counter) {
+        if (!ServerElectricalSchedule.preparing()) counter.end();
     }
     @Inject(method = "preTick", at = @At("RETURN"))
     private void wwpg$results(CallbackInfo ci) {
         var world = (WorldNetworks) (Object) this;
-        if (world.world instanceof ServerLevel level) Bridges.get(level).finishSolving();
+        if (!ServerElectricalSchedule.preparing() && world.world instanceof ServerLevel level)
+            Bridges.get(level).finishSolving();
     }
 }

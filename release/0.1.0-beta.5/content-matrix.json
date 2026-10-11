@@ -56,7 +56,7 @@
       "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
       "status": "unverified",
       "fixtures": [
-        "stationaryPoleAndCatenaryAssemblyRetainsWires"
+        "nativePoleMountAndInsulatorControlMountedMixedBreaker"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
@@ -73,7 +73,7 @@
       "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
       "status": "unverified",
       "fixtures": [
-        "stationaryPoleAndCatenaryAssemblyRetainsWires"
+        "nativeThreeSegmentPoleCarriesMixedPower"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
@@ -90,7 +90,7 @@
       "acceptance_circuit": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
       "status": "unverified",
       "fixtures": [
-        "stationaryPoleAndCatenaryAssemblyRetainsWires"
+        "nativePoleMountAndInsulatorControlMountedMixedBreaker"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
@@ -450,7 +450,7 @@
       "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
       "status": "unverified",
       "fixtures": [
-        "assembledCeeCoreAndRadiatorsPowerPgLoad"
+        "nativeCeeCoreAssemblyTransformsMixedPowerAndUsesRadiators"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
@@ -467,7 +467,7 @@
       "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
       "status": "unverified",
       "fixtures": [
-        "ceeVoltageRegulatorCorrectsMixedLoad"
+        "nativeRegulatorStartsAtNeutralAndRegulatesMixedLoad"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
@@ -518,7 +518,7 @@
       "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
       "status": "unverified",
       "fixtures": [
-        "nativeCeeBulbFailureAndReplacement"
+        "nativeBrokenBulbRepairRestoresMixedPowerWithoutRewiring"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
@@ -1322,7 +1322,7 @@
       "acceptance_circuit": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
       "status": "unverified",
       "fixtures": [
-        "assembledCeeCoreAndRadiatorsPowerPgLoad"
+        "nativeCeeCoreAssemblyTransformsMixedPowerAndUsesRadiators"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
@@ -2165,7 +2165,7 @@
       "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
       "status": "unverified",
       "fixtures": [
-        "largeVerticalPgGeneratorPowersCeeLoad"
+        "nativeLargeGeneratorUsesInstalledCoilAndMixedExcitation"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
@@ -2216,7 +2216,7 @@
       "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
       "status": "unverified",
       "fixtures": [
-        "largeVerticalPgGeneratorPowersCeeLoad"
+        "nativeVerticalGeneratorUsesInstalledCoilAndMixedExcitation"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
@@ -2301,7 +2301,7 @@
       "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
       "status": "unverified",
       "fixtures": [
-        "largeVerticalPgGeneratorPowersCeeLoad"
+        "nativeVerticalHousingJoinsAndSeparatesExcitedWindings"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
@@ -2352,7 +2352,7 @@
       "acceptance_circuit": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
       "status": "unverified",
       "fixtures": [
-        "ceilingSolarPowersCeeAndRespondsToShade"
+        "nativeCeilingSolarAssemblyPowersCeeAndRespondsToShade"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
@@ -2813,7 +2813,7 @@
       "acceptance_circuit": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
       "status": "unverified",
       "fixtures": [
-        "nativeStringCordLightsFromCeePower"
+        "nativeColoredStringCordLightsMixedCircuitAndReturnsCuttingCost"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
@@ -3244,7 +3244,7 @@
       "acceptance_circuit": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
       "status": "unverified",
       "fixtures": [
-        "linkedNetherTransformerRestoresMixedPower"
+        "linkedNetherEndsSurviveColdRestartAndFiveIndependentActualChunkCycles"
       ],
       "note": "Awaiting stationary completion acceptance; prior-release evidence is retained separately.",
       "release_scope": true,
@@ -5169,7 +5169,7 @@
       "status": "unverified",
       "release_scope": true,
       "fixtures": [
-        "stationaryPoleAndCatenaryAssemblyRetainsWires"
+        "nativeCatenarySpoolStylesAndRecoveryCarryMixedPower"
       ],
       "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
       "profile": "BASE"
@@ -5267,7 +5267,9 @@
       "status": "unverified",
       "release_scope": true,
       "fixtures": [
-        "mixedCrtHeaterAnodeGridAndDeflection"
+        "mixedPowerControlsNativeCrt",
+        "mixedPowerControlsAndesiteCrt",
+        "mixedPowerControlsBrassCrt"
       ],
       "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
       "profile": "BASE",
@@ -5342,7 +5344,7 @@
       "status": "unverified",
       "release_scope": true,
       "fixtures": [
-        "nativePunchCardControlsMixedLoads"
+        "nativePunchCardScansEveryRowAndControlsEightMixedLoads"
       ],
       "acceptance_circuit": "Mixed native workflow, solved output, removal and restoration.",
       "profile": "BASE"

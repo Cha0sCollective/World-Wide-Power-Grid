@@ -16,6 +16,7 @@ DEFERRED = {
     "powergrid:solar_panel_bearing": "Moving solar contraption",
     "electroenergetics:altitude_sensor": "Optional moving-system panel attachment",
     "electroenergetics:velocity_sensor": "Optional moving-system panel attachment",
+    "electroenergetics:bunting": "Optional Supplementaries wire decoration; outside BASE and PINOUT profiles",
     "powergrid:electrozapper": "Specialized handheld equipment; native battery energy remains supported",
     "powergrid:electrobaton": "Specialized handheld equipment; native battery energy remains supported",
     "powergrid:portable_drill": "Specialized handheld equipment; native battery energy remains supported",
@@ -28,7 +29,7 @@ MATERIAL_BLOCKS = set("electroenergetics:plant_oil electroenergetics:transformer
 ADDITIONS = {
     "electroenergetics:buzzer": ("loads", "pgPowerSoundsCeeBuzzer"),
     "electroenergetics:converter": ("conversion", "nativeFeConvertersExchangeMixedPower"),
-    "electroenergetics:catenary_holder": ("wiring", "stationaryPoleAndCatenaryAssemblyRetainsWires"),
+    "electroenergetics:catenary_holder": ("wiring", "nativeCatenarySpoolStylesAndRecoveryCarryMixedPower"),
     "powergrid:battery": ("storage", "stationaryBatteriesChargeAndDischargeWithCee"),
     "powergrid:potato_battery": ("storage", "potatoBatteryPreservesNativeNonRechargeableBehavior"),
     "powergrid:alarm_bell": ("loads", "ceePowerRunsPgFanMagnetAndBell"),
@@ -36,8 +37,8 @@ ADDITIONS = {
     "powergrid:electromagnet": ("loads", "ceePowerRunsPgFanMagnetAndBell"),
     "powergrid:carbon_pile": ("controls", "ceeControlsNativeCarbonPileResistance"),
     "powergrid:carbon_pile_coil": ("controls", "ceeControlsNativeCarbonPileResistance"),
-    "powergrid:crt": ("instruments", "mixedCrtHeaterAnodeGridAndDeflection"),
-    "powergrid:punch_card_reader": ("controls", "nativePunchCardControlsMixedLoads"),
+    "powergrid:crt": ("instruments", "mixedPowerControlsNativeCrt"),
+    "powergrid:punch_card_reader": ("controls", "nativePunchCardScansEveryRowAndControlsEightMixedLoads"),
     "powergrid:redstone_converter": ("controls", "nativeRedstoneConverterControlsCeeLoad"),
     "powergrid:fe_inverter": ("conversion", "nativeFeConvertersExchangeMixedPower"),
     "powergrid:spark_gap": ("protection", "mixedVoltageTriggersAndExtinguishesNativeSparkGap"),
@@ -45,36 +46,37 @@ ADDITIONS = {
     "pinout:pinout": ("computer_control", "actualLuaControlsAllEightMixedLoads"),
 }
 REMAINING = {
-    "electroenergetics:insulator": "stationaryPoleAndCatenaryAssemblyRetainsWires",
-    "electroenergetics:concrete_pole": "stationaryPoleAndCatenaryAssemblyRetainsWires",
-    "electroenergetics:pole_mount": "stationaryPoleAndCatenaryAssemblyRetainsWires",
-    "electroenergetics:radiator_panel": "assembledCeeCoreAndRadiatorsPowerPgLoad",
-    "electroenergetics:transformer_core": "assembledCeeCoreAndRadiatorsPowerPgLoad",
-    "electroenergetics:voltage_regulator": "ceeVoltageRegulatorCorrectsMixedLoad",
-    "electroenergetics:broken_bulb": "nativeCeeBulbFailureAndReplacement",
-    "powergrid:generator_large_induction_rotor": "largeVerticalPgGeneratorPowersCeeLoad",
-    "powergrid:generator_vertical_commutator": "largeVerticalPgGeneratorPowersCeeLoad",
-    "powergrid:vertical_generator_housing": "largeVerticalPgGeneratorPowersCeeLoad",
-    "powergrid:ceiling_tile_solar": "ceilingSolarPowersCeeAndRespondsToShade",
-    "powergrid:string_light_block": "nativeStringCordLightsFromCeePower",
-    "powergrid:nether_transformer": "linkedNetherTransformerRestoresMixedPower",
+    "electroenergetics:insulator": "nativePoleMountAndInsulatorControlMountedMixedBreaker",
+    "electroenergetics:concrete_pole": "nativeThreeSegmentPoleCarriesMixedPower",
+    "electroenergetics:pole_mount": "nativePoleMountAndInsulatorControlMountedMixedBreaker",
+    "electroenergetics:radiator_panel": "nativeCeeCoreAssemblyTransformsMixedPowerAndUsesRadiators",
+    "electroenergetics:transformer_core": "nativeCeeCoreAssemblyTransformsMixedPowerAndUsesRadiators",
+    "electroenergetics:voltage_regulator": "nativeRegulatorStartsAtNeutralAndRegulatesMixedLoad",
+    "electroenergetics:broken_bulb": "nativeBrokenBulbRepairRestoresMixedPowerWithoutRewiring",
+    "powergrid:generator_large_induction_rotor": "nativeLargeGeneratorUsesInstalledCoilAndMixedExcitation",
+    "powergrid:generator_vertical_commutator": "nativeVerticalGeneratorUsesInstalledCoilAndMixedExcitation",
+    "powergrid:vertical_generator_housing": "nativeVerticalHousingJoinsAndSeparatesExcitedWindings",
+    "powergrid:ceiling_tile_solar": "nativeCeilingSolarAssemblyPowersCeeAndRespondsToShade",
+    "powergrid:string_light_block": "nativeColoredStringCordLightsMixedCircuitAndReturnsCuttingCost",
+    "powergrid:nether_transformer": "linkedNetherEndsSurviveColdRestartAndFiveIndependentActualChunkCycles",
     "powergrid:plotter": "nativePlotterRecordsMixedWaveform",
 }
 TOOLS = {
     "electroenergetics:clamp_meter": "handheldMetersReadBothWireSystems",
     "powergrid:multimeter": "handheldMetersReadBothWireSystems",
     "electroenergetics:linemans_stick": "nativeWireAttachmentsInstallRemoveAndPersist",
+    "electroenergetics:wire_damper": "nativeWireAttachmentsInstallRemoveAndPersist",
     "powergrid:wire_cutter": "pgWireTypesRetainCostResistanceAndPlayerCut",
     "powergrid:circuit_schematic": "savedDesignerLoadsBeforeWorldAssignment",
-    "powergrid:punch_card": "nativePunchCardControlsMixedLoads",
-    "powergrid:growth_lamp": "ceePoweredGrowthLampProcessesNativeCrop",
+    "powergrid:punch_card": "nativePunchCardScansEveryRowAndControlsEightMixedLoads",
+    "powergrid:growth_lamp": "ceePowerRunsNativeGrowthLampAndCropEffect",
     "powergrid:light_bulb": "nativePgBulbItemsRetainMixedLightAndReplacement",
     "powergrid:lv_light_bulb": "nativePgBulbItemsRetainMixedLightAndReplacement",
     "powergrid:portable_battery": "ceeChargesPgPortableBattery",
     "powergrid:display_module": "ceePulsesPgModularDisplayWithNativeModules",
-    "powergrid:copper_coil": "largeVerticalPgGeneratorPowersCeeLoad",
+    "powergrid:copper_coil": "nativeLargeGeneratorUsesInstalledCoilAndMixedExcitation",
     "powergrid:incomplete_circuit": "everyBuiltinBoardComponentAssemblesFromNativeItems",
-    "powergrid:string_light_cord": "nativeStringCordLightsFromCeePower",
+    "powergrid:string_light_cord": "nativeColoredStringCordLightsMixedCircuitAndReturnsCuttingCost",
 }
 
 matrix = json.loads(json.dumps(baseline))
@@ -106,6 +108,7 @@ for entry in snapshot["entries"]:
         if entry["id"] == "powergrid:crt":
             row["variants"] = ["powergrid:crt", "powergrid:andesite_encased_crt", "powergrid:brass_encased_crt"]
             for variant in row["variants"]: known[("block", variant)] = row
+            row["fixtures"] += ["mixedPowerControlsAndesiteCrt", "mixedPowerControlsBrassCrt"]
         matrix["content"].append(row); known[key] = row
 
 audit = []
@@ -131,6 +134,8 @@ for entry in snapshot["entries"]:
         row.update(disposition="native_workflow", fixture=TOOLS[ident])
     elif entry["registry"] == "wire_type" or entry["implementation"].endswith(("WireItem", "CordItem", "WireSpoolItem", "BundledWireItem", "EmptySpoolItem")):
         row.update(disposition="stationary_wiring", fixture="allStationaryWireFamiliesRetainNativeRules")
+    elif entry["registry"] == "wire_attachment" and ident.endswith(":empty"):
+        row.update(disposition="empty_registry_sentinel", reason="Empty wire attachment; no native installation item")
     elif entry["registry"] == "wire_attachment":
         row.update(disposition="native_workflow", fixture="nativeWireAttachmentsInstallRemoveAndPersist")
     elif entry["registry"] == "panel_attachment" and ident.endswith(":empty"):

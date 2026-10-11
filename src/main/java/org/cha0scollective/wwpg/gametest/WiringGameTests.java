@@ -59,14 +59,25 @@ public final class WiringGameTests {
     }
 
     public static void connect(GameTestHelper h, BlockPos a, int terminalA, BlockPos b, int terminalB, boolean pgWire) {
-        var player = h.makeMockPlayer(GameType.CREATIVE);
+        connect(h, h.getLevel(), a, terminalA, b, terminalB, pgWire);
+    }
+
+    public static void connect(GameTestHelper h, net.minecraft.server.level.ServerLevel level,
+                               BlockPos a, int terminalA, BlockPos b, int terminalB, boolean pgWire) {
+        var player = new net.minecraft.world.entity.player.Player(level, a, 0,
+                new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(), "WWPG-wire-test")) {
+            @Override public boolean isSpectator() { return false; }
+            @Override public boolean isCreative() { return true; }
+        };
         player.setItemInHand(InteractionHand.MAIN_HAND, pgWire ? ModdedItems.WIRE.asStack(64) : CEEItems.WIRE_SPOOL.asStack());
         for (var endpoint : new BlockWireEndpoint[] {new BlockWireEndpoint(a, terminalA), new BlockWireEndpoint(b, terminalB)}) {
             var pos = endpoint.getPos();
-            var click = pgWire ? endpoint.getExactPosition(h.getLevel()) : new InWorldNode(endpoint.getTerminal(), pos).getPosition(h.getLevel());
-            h.assertTrue(click != null, "Terminal has no position at " + pos);
+            var click = pgWire ? endpoint.getExactPosition(level) : new InWorldNode(endpoint.getTerminal(), pos).getPosition(level);
+            h.assertTrue(click != null, "Terminal " + endpoint.getTerminal() + " has no position in "
+                    + level.dimension().location() + " at " + pos + ": " + level.getBlockState(pos)
+                    + " using " + (pgWire ? "PG cord" : "CEE spool"));
             var context = new UseOnContext(player, InteractionHand.MAIN_HAND, new BlockHitResult(click, Direction.UP, pos, false));
-            var result = pgWire ? IElectric.getAt(h.getLevel(), pos).onWire(h.getLevel().getBlockState(pos), context)
+            var result = pgWire ? IElectric.getAt(level, pos).onWire(level.getBlockState(pos), context)
                     : player.getMainHandItem().getItem().useOn(context);
             h.assertTrue(result.consumesAction(), "Native wire placement failed at " + pos + " terminal " + endpoint.getTerminal());
         }

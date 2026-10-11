@@ -27,11 +27,13 @@
         "Reproduced and fixed missing inventory serialization",
         "Reproduced and fixed inventory edits not scheduling a world save",
         "Native saved-design copying, assembly, placement and power fixture",
-        "Five actual chunk cycles with delayed cord entity loading"
+        "Five actual chunk cycles with delayed cord entity loading",
+        "Native banner/damper installation, patterns, overlap rejection, wrench removal and cutter/spool recovery",
+        "Native stationary catenary placement, four styles and spool recovery"
       ],
       "remaining": [
         "Graphical design editing, saving and reopening",
-        "Remaining native tool, wire attachment, panel editing and replacement workflows",
+        "Remaining wire families, panel editing and component replacement workflows",
         "Complete packaged restart matrix"
       ]
     },
@@ -48,16 +50,19 @@
         "Native punch-card insertion, all sixteen rows and extraction drive eight mixed loads",
         "All three CRT electrical models, heater/grid cutoff and saved color",
         "Native FE source/sink provider/receiver, limits and exactly-once native accounting",
-        "Reproduced and corrected Nether-transformer saved-history indexing"
+        "Reproduced and corrected Nether-transformer saved-history indexing",
+        "Native two through five segment CEE poles, mounted insulator-controlled breaker and removal",
+        "Horizontal and vertical large PG generators, three-long native coil installation, winding housings, speed and excitation",
+        "Native string-light dye recipe, survival placement, heating, saved color/history, cutting and cost recovery",
+        "CEE-powered native electromagnet recipe and fan washing recipe",
+        "Actual linked Nether portal assembly, bidirectional mixed power, source removal and portal disruption",
+        "Reproduced PG-only split-controller shutdown instability and corrected synchronous cross-dimension substep scheduling",
+        "Reproduced stale native link after actual end unload and detached through the native link table",
+        "Five actual independent end unload/reload cycles and three cold restarts locally on native and Java, with delayed entities and pre-solve serialized native history"
       ],
       "remaining": [
-        "CEE poles, mounts, insulators and catenary assemblies",
-        "Large and vertical PG generators and housing/winding workflows",
-        "String-light construction and repair",
-        "Magnetizing recipes and fan processing",
         "CRT graphical beams/encasing and punch-card editing",
         "Remaining native battery/solar assembly workflows",
-        "Linked Nether transformers and portal lifecycle",
         "Content-specific restart/reload checks and playable demonstrations"
       ]
     },
