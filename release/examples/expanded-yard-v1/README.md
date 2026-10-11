@@ -1,5 +1,7 @@
 # Expanded test yard, revision 1
 
+> Historical world for the beta.2 runtime, later checked with beta.3 and beta.4. Use the [current Stationary Yard](../../../docs/STATIONARY_YARD.md) for WWPG 0.2.0.
+
 This additional world uses the published **WWPG 0.1.0-beta.2 jar** and its exact dependency versions. Download and player instructions are in [FIXTURE_WORLD.md](../../../docs/FIXTURE_WORLD.md).
 
 The yard contains 25 electrical board stations, a routing board, all 11 built-in CEE panel attachment types, seven transformer/variac circuits, three meter banks, 22 additional device/storage circuits, and the original pump/heater/relay factory. It includes a guidebook, signs, goggles, both handheld meters, and parts cabinets.

@@ -1,34 +1,73 @@
 # Release records
 
-[0.2.0](0.2.0/) records the public extension API 1.0.0 release: independently versioned general/CEE SDKs, classfile baselines, exact extracted-example builds, retained stationary regressions, four world ZIPs and graphical/two-client Workshop acceptance. [Final verification](0.2.0/verification.json) locks artifacts and executable evidence. Earlier release claims, tags and assets remain unchanged.
+**[WWPG 0.2.0](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.0)**
+is the current release. To install it or choose a playable world, use the
+[installation guide](../docs/INSTALL.md). This directory is for reviewing what
+was shipped and which checks passed.
 
-[0.1.0-beta.5](0.1.0-beta.5/) is the stationary completion release. Its derived verified matrix and final artifact/world/client records are separate from the original beta.1 matrix and the preserved beta.4 baseline.
+## Current release: 0.2.0
 
-[0.1.0-beta.4/](0.1.0-beta.4/) records the restart and chunk-loading release, the final versioned jar, and its native/Java acceptance. It retains the dependency baseline and reuses both existing worlds unchanged.
+The release retains stationary factory support and adds extension API 1.0.0,
+two independently buildable example add-ons and the API Workshop worlds.
 
-[Restoration verification](fixes/restoration/) records the corrections developed after beta.3 and published in beta.4, their negative controls, delayed-loading regressions, and native/Java results. The investigation snapshot is preserved separately from release acceptance.
+| Record | What it tells you |
+| --- | --- |
+| [Release summary](0.2.0/README.md) | Scope, API baseline and links to acceptance records. |
+| [Downloads](0.2.0/DOWNLOADS.md) | Current five-file layout, sizes/checksums manifest and archived original files. |
+| [Original distribution](0.2.0/distribution.json) | The original 29 accepted downloads, preserved inside the verification archive. |
+| [Dependencies](0.2.0/dependencies.json) | Exact required and optional dependency versions. |
+| [Verification](0.2.0/verification.json) | Accepted artifacts, test results and the evidence files supporting them. |
+| [Completed stages](0.2.0/progress.json) | Completion of the API development and acceptance stages. |
 
-[0.1.0-beta.3/](0.1.0-beta.3/) records the grounding release, the final versioned jar, and its native/Java acceptance. It retains the dependency baseline and reuses the unchanged expanded yard and panel demo. Earlier release artifacts and evidence are preserved.
+A checksum is a fingerprint of a file's exact contents. The verification record
+uses these fingerprints to identify the jars, worlds and logs that were checked.
+See [API release checks](../docs/API_RELEASE_CHECKS.md) for the maintainer rules
+and [current status](../docs/STATUS.md) for a readable account of what works and
+what remains outside the release.
 
-[examples/expanded-yard-v1/](examples/expanded-yard-v1/) records the expanded test yard, its exact live/inventory coverage, and separate world/evidence downloads for the unchanged beta.2 runtime.
+## Earlier releases and investigations
 
-[examples/panel-relay-v2/](examples/panel-relay-v2/) records the visibly testable panel/board example for the existing beta.2 runtime. Its world ZIP and verification archive are additional downloads; earlier artifacts, checksums, and records are preserved.
+These records describe the version named in the table. They preserve the original
+results, including failed attempts; they are not the current installation guide
+or list of open problems.
 
-[0.1.0-beta.2/](0.1.0-beta.2/) records the handheld-meter, example-heater, and startup-registration hotfix separately. It retains the same dependency baseline, adds explicit handheld support, and supplies new verification and distribution records, including passing runs and unresolved intermittent failures. The original beta.1 records below are preserved.
+| Record | What changed or was investigated |
+| --- | --- |
+| [0.1.0-beta.5](0.1.0-beta.5/README.md) | Stationary completion, optional Pinout, saved electronics, native player workflows and the complete Stationary Yard. |
+| [0.1.0-beta.4](0.1.0-beta.4/README.md) | Restart and chunk-loading fixes. |
+| [Restoration investigation](fixes/restoration/README.md) | Reproductions, fixes and checks leading to beta.4; investigation notes are separate from final acceptance. |
+| [0.1.0-beta.3](0.1.0-beta.3/README.md) | Grounding fixes and checks on both solvers. |
+| [Grounding investigation](fixes/grounding/README.md) | The defect and checks leading to beta.3. |
+| [0.1.0-beta.2](0.1.0-beta.2/verification.json) | Handheld-meter, example-heater and startup-registration fixes. |
+| [Expanded yard v1](examples/expanded-yard-v1/README.md) | The earlier beta.2 demonstration world and its recorded coverage. |
+| [Panel and relay example v2](examples/panel-relay-v2/README.md) | The earlier beta.2 panel and board demonstration. |
 
-This directory records the fixed dependencies, supported behaviors, local acceptance, and hashes used to prepare **0.1.0-beta.1**. The beta is now [published on GitHub](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.1). See [current status](../docs/STATUS.md) for publication, later CI results, and known issues.
+[Release history](../docs/RELEASE_HISTORY.md) explains older restart and reload
+reports, their later fixes and the limits of what the original logs established.
+
+## Original 0.1.0-beta.1 records
+
+The files at the root of this directory belong to the
+[first functional beta](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.1).
+Its narrower content matrix is preserved separately from later releases.
 
 | File | Purpose |
 | --- | --- |
-| [artifacts.json](artifacts.json) | Published dependency coordinates, checksums, matching source references, and native binary provenance. Used by the build. |
-| [content-matrix.json](content-matrix.json) | Inventory of 150 behavior groups: 134 declared/verified, 14 unverified, and two unsupported. Links declared behaviors to their tests. Bundled in the jar. |
+| [artifacts.json](artifacts.json) | Pinned dependency coordinates, checksums, source references and native binary provenance. The build still uses these dependency records. |
+| [content-matrix.json](content-matrix.json) | Original inventory of 150 behavior groups: 134 declared and verified, 14 unverified and two unsupported. |
 | [verification.json](verification.json) | Local acceptance snapshot from 6 October 2026, including log hashes and test counts. |
-| [distribution.json](distribution.json) | Original jar, example-world, and verification-archive hashes and runtime requirements. |
+| [distribution.json](distribution.json) | Original jar, example-world and verification-archive hashes and runtime requirements. |
 
-`verified` records passing acceptance for the documented behavior. It does not imply every upstream item/configuration has been checked or that later regressions are resolved. Shared lifecycle tests cover mapping behavior; the [known chunk-reload failure](../docs/STATUS.md#unresolved-chunk-reload-failure) remains relevant.
+Statements such as “prepared and tagged locally” describe the original preparation
+snapshot. A recorded pass establishes what that run checked; it does not erase
+the [intermittent failures recorded later](../docs/RELEASE_HISTORY.md#unresolved-chunk-reload-failure).
 
-The local evidence predates GitHub publication. Statements such as “remote jobs have not been executed in this local session” and “prepared and tagged locally” describe that preparation snapshot. They are preserved as evidence, not used as the current project status. The original JSON records, release tag, published assets, and hashes remain unchanged.
+Published tags, assets, checksums and captured evidence remain unchanged. Download
+bundles contain the documentation from their release; use the current repository
+guides for later updates.
 
-The GitHub release also provides `SHA256SUMS.txt` for all four downloadable artifacts. The complete bundle includes installation instructions, support documentation, the example world, and test logs. Its embedded documentation is the original release snapshot; use the repository's current docs for later status updates.
-
-WWPG's own code and documentation, including the WWPG portions of this beta, are now available under the [MIT License](../LICENSE), also supplied as a separate `LICENSE` download on the GitHub release. The original jar's “All Rights Reserved” metadata predates that decision. New builds include the MIT license and metadata; the original published artifacts and checksums are preserved. Bundled Power Grid native resources retain their Apache 2.0 license and attribution.
+WWPG's own code and documentation, including its portions of the first beta,
+are available under the [MIT License](../LICENSE). The original first beta jar's
+“All Rights Reserved” metadata predates that decision. Later builds include MIT
+metadata; bundled Power Grid native resources retain their Apache 2.0 license
+and attribution.

@@ -1,5 +1,7 @@
 # Beta.4 release record
 
+> Historical beta.4 release record. Current support and known limits are in [current status](../../docs/STATUS.md).
+
 **0.1.0-beta.4** publishes the pending-wire cleanup and board-capacitor persistence corrections from [PR #7](https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/7). Dependencies, native resources, solver scheduling, and the stationary support set are unchanged. The expanded yard and visible panel demo are reused unchanged; existing worlds do not need replacing.
 
 - [Release notes](RELEASE_NOTES.md) explain the player-visible changes and upgrade steps.

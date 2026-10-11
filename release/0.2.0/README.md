@@ -5,6 +5,10 @@ verification](verification.json) locks runtime, both APIs, sources,
 Javadoc, example jars and source ZIPs, Maven repository, four worlds and executable
 acceptance evidence by SHA256.
 
+The [current download guide](DOWNLOADS.md) describes the five grouped downloads
+and where the original individual files are preserved. The [short public notes](DOWNLOAD_NOTES.md)
+replace the longer release-page presentation; original captured notes remain archived.
+
 - [Developer contract](../../docs/EXTENSION_API.md)
 - [Stage plan and completion rule](../../docs/EXTENSION_API_PLAN.md)
 - [Completed progress](progress.json)

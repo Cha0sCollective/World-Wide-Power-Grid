@@ -1,5 +1,7 @@
 # Restart and chunk restoration verification
 
+> Historical restart/loading investigation. These fixes shipped in [beta.4](../../0.1.0-beta.4/); the separate saved-design issue was corrected in beta.5. Use [current status](../../../docs/STATUS.md) for today's release.
+
 This source correction is based on beta.3 (`7fa7844`). Published beta.3 jars, worlds, checksums, and acceptance records are preserved. The development jar still carries beta.3 metadata; its hash identifies this unreleased candidate.
 
 The investigation found three distinct restoration behaviors:

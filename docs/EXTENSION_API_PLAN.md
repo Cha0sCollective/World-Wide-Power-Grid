@@ -1,14 +1,17 @@
 # WWPG 0.2.0 / extension API 1.0 implementation and acceptance
 
-This is the retained implementation and acceptance plan for the published API.
-The [completed progress record](../release/0.2.0/progress.json) and [frozen final
-verification](../release/0.2.0/verification.json) record its actual gates. The requirements
-below are preserved rather than rewritten after implementation.
+WWPG **0.2.0** and extension API **1.0.0** are published. This document preserves
+the implementation stages and the requirements each stage had to pass.
+The [completed progress record](../release/0.2.0/progress.json) and
+[final verification](../release/0.2.0/verification.json) record the accepted results.
 
-The release delivers a documented stationary integration contract, an independent
-SDK, and a separately built example add-on. API version **1.0.0** is independent
-of WWPG version **0.2.0**. Completion is recorded in
-[release/0.2.0/progress.json](../release/0.2.0/progress.json).
+To build an add-on, use the [public API guide](EXTENSION_API.md). To reproduce
+release checks, use the [maintainer release guide](API_RELEASE_CHECKS.md).
+The plan below describes the original gates; it is not a list of unfinished work.
+
+The release delivers a stationary integration contract, an independent SDK, and
+separately built example add-ons. API version **1.0.0** is independent of WWPG
+version **0.2.0**.
 
 Keep the beta.5 upstream pins: Minecraft 1.21.1, NeoForge 21.1.231, Java 21, Create
 6.0.10-280, CEE 1.1.3, PG 0.6.2, and Architectury 13.0.8. Optional Pinout 0.2.1

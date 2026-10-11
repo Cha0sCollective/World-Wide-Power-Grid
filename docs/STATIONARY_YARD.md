@@ -1,10 +1,21 @@
 # Stationary Test Yard
 
-The 0.2.0 yards retain the native stationary demonstrations and pass acceptance against the exact downloadable ZIPs. See the [release downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.0) and [verification record](../release/0.2.0/verification.json). The beta.5 inventory remains the native content baseline; its historical ZIPs and evidence are unchanged. It has two editions: **Stationary Test Yard** for the base mods, and **Stationary Test Yard — Pinout** with CC:Tweaked and Pinout installed. Earlier downloadable worlds and their support claims remain unchanged.
+This world lets you try WWPG 0.2.0 without building a factory first. Switch lamps, pump water, run a heater, compare transformer voltages, charge storage, and operate circuit boards and electrical panels. The equipment mixes CEE and Power Grid in working circuits.
 
-Take goggles, both handheld meters and the guide books from the spawn chest at **8, 64, 16**. Follow the white paths. Each exhibit has instructions, expected readings and a reset action. Click its feed switch with an empty hand to stop or resume power. Turn power off before repairing a bulb, fuse or wire.
+Choose the edition that matches your installation:
 
-The earlier factory, boards, panels, transformers and meter banks remain on the west side. The east side adds 79 base exhibits; the Pinout edition adds two computer exhibits. The export manifest maps each claimed behavior to a checked exhibit or native assembly/repair workflow. Cabinets provide spares and do not count as working demonstrations.
+Download and extract the [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-example-worlds.zip). Choose a ZIP from its `worlds` folder:
+
+- **Stationary Test Yard** (`wwpg-0.2.0-stationary-yard.zip`): the required base mods.
+- **Stationary Test Yard — Pinout** (`wwpg-0.2.0-stationary-yard-pinout.zip`): the base mods plus CC:Tweaked 1.120.2 and Pinout 0.2.1.
+
+Follow the [installation guide](INSTALL.md), then extract the named save folder into your instance's `saves` directory. Keep a clean copy before cutting wires or deliberately breaking equipment.
+
+## Start here
+
+Take Engineer's Goggles, both handheld meters and the guide books from the spawn chest at **8, 64, 16**. Wear the goggles and look at gauges to see their numeric readings. Follow the white paths. Each exhibit has instructions, expected readings and a reset action. Right-click its feed switch with an empty hand to stop or resume power. Turn power off before repairing a bulb, fuse or wire.
+
+Start with the factory on the west side: toggle **Factory enable** and watch the RUN/OFF lamps change. That side also contains the board and panel galleries, transformers and meter banks. The east side adds 79 exhibits, including saved designs, new wiring examples and a Nether route. The Pinout edition adds two computer exhibits. Cabinets contain spares for repairs and your own builds.
 
 Useful starting points:
 
@@ -22,12 +33,31 @@ Useful starting points:
 | S78 wire attachments | Use the lineman's stick with a banner/damper in the offhand | Native attachments install and can be removed. An offhand clamp meter also measures PG wire current. |
 | S79 three-pole meter | Switch the feed; inspect both lamps and the energy meter | Both lamps light at about 120 V / 30 W each; the meter totals about 60 W. Red and blue lines have opposite signs relative to their common middle line. |
 
-Small board currents are expected. A control circuit can operate a relay while drawing only milliamps; measure the separate factory-load feed to see its larger current. Wear goggles for precise gauge readings. Temperature-dependent lamps and storage circuits can change their readings while warming up or charging.
+Small board currents are expected: **10 mA is 0.010 A**. A control circuit can operate a relay while drawing very little current; measure the separate feed to the factory load to see its larger current. A nearly motionless gauge needle can still have a valid numeric reading. Lamps and storage circuits can change their readings while warming up or charging.
 
-In the Pinout edition, S80 and S81 let each upstream supply power eight computer-controlled lamps, a board relay and a panel gauge. Open a computer and type `wwpg start`, `wwpg stop`, `wwpg pattern 85`, `wwpg demo` or `wwpg volts`. `wwpg layout` explains the pins. Lua common pin 9 maps to PG terminal 0; pins 1–8 retain their native numbers. ON pins read slightly below zero relative to common because of contact resistance. OFF pins read about −70 V in these loaded examples.
+## Computer controls in the Pinout edition
+
+At S80 and S81, each mod's supply powers eight computer-controlled lamps, a board relay and a panel gauge. Right-click a computer to open its screen, then type a command and press Enter:
+
+| Command | What happens |
+| --- | --- |
+| `wwpg start` | All eight pin lamps turn on. |
+| `wwpg stop` | All eight pin lamps turn off. |
+| `wwpg pattern 85` | Alternating pins turn on. |
+| `wwpg demo` | Runs the demonstration program. |
+| `wwpg volts` | Prints the pin voltages. |
+| `wwpg layout` | Explains which pin controls each output. |
+
+Voltages are measured relative to the common connection, so a negative number is expected here. ON pins read slightly below zero because of contact resistance; OFF pins read about **−70 V**. The computer calls common pin 9; PG labels that terminal 0. Pins 1–8 keep their usual numbers.
 
 `wwpg stop` switches off all eight pin lamps. The separate board RUN lamp stays on briefly while its capacitor discharges, then the OFF lamp lights. Allow about three seconds for the relay to respond after starting or stopping. A native PG diode keeps that stored energy from feeding back into pin 3's indicator.
 
-Keep a clean save before destructive experiments. Export cleanup removes construction wire drops inside the yard; normal player drops remain during play. Connected wire entities, Nether saved data, native device identities and optional computer files are retained in the ZIP.
+## Reset, repair and report a problem
 
-For a report, include the exhibit code, what you operated, the reading you expected and what happened. An operator can run `/wwpg at x y z` to inspect device identities and loading readiness, `/wwpg topology` for recent structural changes, and `/wwpg errors` for recent simulation errors. Diagnostic queries do not load distant chunks or create electrical adapters.
+Follow the station's reset sign to restore its original settings and turn its feed back on. Give charging circuits and relay delays a few seconds to settle. For bulbs, wire decorations and duplex cables, use the [wiring and repair guide](STATIONARY_WIRING.md). Re-extract your clean download if you want to undo extensive changes.
+
+The download has connected wires, saved Nether links and the Pinout computer programs intact. Loose construction wire drops are removed before export; wires you break during play still drop normally.
+
+For a report, include the exhibit code, what you operated, the reading you expected and what happened. [Current status](STATUS.md) lists release limitations. An operator can run `/wwpg at x y z` to inspect the affected block, `/wwpg topology` for recent connection changes, and `/wwpg errors` for recent errors. These commands do not load distant chunks.
+
+The [0.2.0 verification record](../release/0.2.0/verification.json) records checks on the exact downloadable worlds. The yard covers the [declared stationary content](SUPPORT.md); moving machinery and large-server performance remain outside this release's scope. Earlier downloads and their check records remain unchanged.
