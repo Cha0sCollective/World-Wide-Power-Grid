@@ -30,6 +30,8 @@ The current edition covers stable WWPG 0.2.0 and independently versioned API 1.0
 
 The `api` object pins the public package allowlist, the two release-owned API-only Javadoc tasks, the released SDK assets and their SHA-256 values, and the release's extracted-SDK verification tool. It includes `wwpg-api:1.0.0` and `wwpg-cee-api:1.0.0`; the downloadable Maven ZIP supplies both coordinates without GitHub credentials.
 
+The public release distributes a developer-SDK bundle and an example-worlds bundle. `bundles` pins each outer ZIP's checksum and the selected member paths. Preparation verifies the outer ZIPs before bounded extraction, then checks the original API and example hashes before compiling. The Maven and source ZIPs are in the SDK; the example runtime jars are in the worlds bundle. The individual artifact and frozen-reference bytes are unchanged. Rendered guides translate old individual download links to the current bundles, while preserving the immutable release snapshots.
+
 With Java 21 and Python 3 available, run:
 
 ```sh

@@ -782,6 +782,12 @@ hr {
   border: 1px solid var(--line);
   padding: 32px;
 }
+.bundle-path {
+  overflow-wrap: anywhere;
+}
+#worlds > .button-row {
+  margin-bottom: 25px;
+}
 .world-grid .mono {
   font-size: 0.56rem;
 }

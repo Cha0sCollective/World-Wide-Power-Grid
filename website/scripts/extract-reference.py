@@ -1,4 +1,4 @@
-"""Extract a checksum-verified public Javadoc archive into a fresh directory."""
+"""Extract a checksum-verified public release archive into a fresh directory."""
 from pathlib import Path
 import sys
 import zipfile

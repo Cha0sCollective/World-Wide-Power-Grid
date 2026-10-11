@@ -30,16 +30,36 @@
       },
       "downloads": {
         "jar": "wwpg-0.2.0.jar",
-        "yard": "wwpg-0.2.0-stationary-yard.zip",
-        "pinoutYard": "wwpg-0.2.0-stationary-yard-pinout.zip",
-        "checksums": "SHA256SUMS.txt",
-        "workshop": "wwpg-0.2.0-api-workshop.zip",
-        "pinoutWorkshop": "wwpg-0.2.0-api-workshop-pinout.zip",
-        "sdk": "wwpg-api-1.0.0-maven.zip",
-        "example": "wwpg-api-example-1.0.0.jar",
-        "upstreamExample": "wwpg-upstream-api-example-1.0.0.jar",
-        "exampleSource": "wwpg-api-example-1.0.0-source.zip",
-        "upstreamSource": "wwpg-upstream-api-example-1.0.0-source.zip"
+        "worlds": "wwpg-0.2.0-example-worlds.zip",
+        "checksums": "wwpg-0.2.0-checksums.txt",
+        "sdk": "wwpg-0.2.0-developer-sdk.zip"
+      },
+      "bundles": {
+        "sdk": {
+          "file": "wwpg-0.2.0-developer-sdk.zip",
+          "sha256": "7dc4731bf27506250ebd903757bcf09826a1321702cc49693b3d819beccbf8c1",
+          "files": {
+            "wwpg-api-1.0.0.jar": "api/wwpg-api-1.0.0.jar",
+            "wwpg-cee-api-1.0.0.jar": "api/wwpg-cee-api-1.0.0.jar",
+            "wwpg-api-1.0.0-javadoc.jar": "api/wwpg-api-1.0.0-javadoc.jar",
+            "wwpg-cee-api-1.0.0-javadoc.jar": "api/wwpg-cee-api-1.0.0-javadoc.jar",
+            "wwpg-api-1.0.0-maven.zip": "maven/wwpg-api-1.0.0-maven.zip",
+            "wwpg-api-example-1.0.0-source.zip": "examples/wwpg-api-example-1.0.0-source.zip",
+            "wwpg-upstream-api-example-1.0.0-source.zip": "examples/wwpg-upstream-api-example-1.0.0-source.zip"
+          }
+        },
+        "worlds": {
+          "file": "wwpg-0.2.0-example-worlds.zip",
+          "sha256": "192115876247df8de2ffbfcb8f7907688f4df2c167207c2b16db723246600307",
+          "files": {
+            "wwpg-api-example-1.0.0.jar": "workshop-mods/wwpg-api-example-1.0.0.jar",
+            "wwpg-upstream-api-example-1.0.0.jar": "workshop-mods/wwpg-upstream-api-example-1.0.0.jar",
+            "wwpg-0.2.0-stationary-yard.zip": "worlds/wwpg-0.2.0-stationary-yard.zip",
+            "wwpg-0.2.0-stationary-yard-pinout.zip": "worlds/wwpg-0.2.0-stationary-yard-pinout.zip",
+            "wwpg-0.2.0-api-workshop.zip": "worlds/wwpg-0.2.0-api-workshop.zip",
+            "wwpg-0.2.0-api-workshop-pinout.zip": "worlds/wwpg-0.2.0-api-workshop-pinout.zip"
+          }
+        }
       },
       "guides": [
         {
