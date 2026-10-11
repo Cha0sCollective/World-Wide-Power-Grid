@@ -94,7 +94,7 @@ public final class ShowroomWorldGameTests {
                 StationaryYardCoverage.write(h,visits,additional);
             }
             WorldWidePowerGrid.LOGGER.info("WWPG_SHOWROOM_PASSED: phase={}; 25 electrical boards, routing board, all 11 panel types, 7 transformer/variac circuits, 3 meter banks, 22 device/storage circuits, and original factory",restore?"VERIFY":"SETUP");
-        });
+        },additional==null?()->{}:additional::awaitReady);
     }
     private static ItemStack guide() {
         var sections=List.of(

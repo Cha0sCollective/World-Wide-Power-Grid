@@ -24,7 +24,9 @@ local ok, err = pcall(function()
   assert(shell.run("wwpg", "help"))
   assert(shell.run("wwpg", "volts"), "Could not display native voltage readings")
 end)
-local report = assert(fs.open("yard-ready.json", "w"))
+local report = assert(fs.open("yard-ready.pending.json", "w"))
 report.write(textutils.serializeJSON({ok=ok, error=err, readings=readings}))
 report.close()
+if fs.exists("yard-ready.json") then fs.delete("yard-ready.json") end
+fs.move("yard-ready.pending.json", "yard-ready.json")
 if not ok then printError(err) end

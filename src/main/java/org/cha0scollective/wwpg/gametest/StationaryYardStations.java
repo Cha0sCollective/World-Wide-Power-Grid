@@ -44,6 +44,7 @@ final class StationaryYardStations {
     final List<Station> stations = new ArrayList<>();
     final List<Runnable> checks = new ArrayList<>();
     final List<Runnable> configure = new ArrayList<>();
+    final List<Runnable> readinessChecks = new ArrayList<>();
 
     StationaryYardStations(GameTestHelper h, boolean restore) {
         this.h = h; this.restore = restore;
@@ -179,6 +180,8 @@ final class StationaryYardStations {
             });
         }
     }
+
+    void awaitReady() { readinessChecks.forEach(Runnable::run); }
 
     void verifyAndRecord() {
         checkAll(h,checks.toArray(Runnable[]::new));
