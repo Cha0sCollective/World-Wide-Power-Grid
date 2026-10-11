@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from package_api_release import VERSION
 
 from collect_api_ci_evidence import API_NAMESPACES, COMBINATIONS, EvidenceError, checked_source, cold_replacement, cycles, log, marker, metadata, nonconvergence, packaged, pending_retirement
 
@@ -35,7 +36,7 @@ class EvidenceChecks(unittest.TestCase):
         return run, dict(jobs=jobs), dict(artifacts=artifacts)
 
     def proof(self, number, phase='SETUP', completed=True, **changes):
-        value = dict(schema=1, artifact='wwpg-0.2.0.jar', sha256=self.hashes['runtime'], profile='BASE', backend='NATIVE', phase=phase,
+        value = dict(schema=1, artifact=f'wwpg-{VERSION}.jar', sha256=self.hashes['runtime'], profile='BASE', backend='NATIVE', phase=phase,
                      namespaces=','.join(sorted(API_NAMESPACES)), required_tests_passed=28,
                      addon_artifacts={role: dict(sha256=self.hashes[role]) for role in ['example', 'upstream_example']})
         if completed: value['completed'] = 'TEST_ONLY_COMPLETION'

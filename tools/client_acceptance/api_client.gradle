@@ -3,7 +3,7 @@ gradle.projectsEvaluated {
     def project = gradle.rootProject
     def output = project.file('build/api-client-helper')
     def properties = [runtime:'clientArtifact', api:'apiArtifact', cee_api:'ceeApiArtifact', example:'exampleArtifact', upstream_example:'upstreamExampleArtifact']
-    def defaults = [runtime:'build/libs/wwpg-0.2.0.jar',api:'build/libs/wwpg-api-1.0.0.jar',cee_api:'build/libs/wwpg-cee-api-1.0.0.jar',
+    def defaults = [runtime:"build/libs/wwpg-${project.mod_version}.jar",api:'build/libs/wwpg-api-1.0.0.jar',cee_api:'build/libs/wwpg-cee-api-1.0.0.jar',
                     example:'examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar',upstream_example:'examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar']
     def artifacts = properties.collectEntries { role, property -> [role, project.file(project.providers.gradleProperty(property).getOrElse(defaults[role]))] }
     def hash = { file -> java.security.MessageDigest.getInstance('SHA-256').digest(file.bytes).encodeHex().toString() }
@@ -87,7 +87,7 @@ gradle.projectsEvaluated {
             }
             def profile = project.providers.gradleProperty('testProfile').getOrElse('BASE')
             def backend = project.providers.gradleProperty('testBackend').getOrElse('NATIVE')
-            if (profile != extraction.profile || manifest.target != '0.2.0') throw new GradleException('Wrong Workshop profile/target')
+            if (profile != extraction.profile || manifest.target != project.mod_version) throw new GradleException('Wrong Workshop profile/target')
             def frozenHelper = freezeHelper(workingDir,helper.get().archiveFile.get().asFile)
             def proof = [schema:1,source_sha:sourceSha,jar:frozen.runtime,artifacts:frozen.findAll { role,value -> role != 'runtime' },
                          archive:extraction.archive,archive_sha256:extraction.sha256,profile:profile,backend:backend,

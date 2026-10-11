@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "repository": "Cha0sCollective/World-Wide-Power-Grid",
+  "summary": "WWPG lets stationary CEE and Power Grid machines share power through either mod's wires.",
+  "changes": [
+    "Adds tested support for NeoForge 21.1.248 alongside 21.1.231.",
+    "Allows newer NeoForge, Create, CEE and Power Grid versions for player testing; only the listed combinations are verified.",
+    "Keeps extension API 1.0.0 and existing worlds compatible."
+  ],
+  "installation": "Use Minecraft 1.21.1, NeoForge 21.1.231 or 21.1.248, Java 21, Create 6.0.10-280, CEE 1.1.3, Power Grid 0.6.2 and Architectury 13.0.8. Match server and client mod versions.",
+  "optional_installation": "Pinout editions also require CC:Tweaked 1.120.2 and CC;CPG: Pinout 0.2.1."
+}

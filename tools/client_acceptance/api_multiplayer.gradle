@@ -3,7 +3,7 @@ gradle.projectsEvaluated {
     def project = gradle.rootProject
     def output = project.file('build/api-multiplayer-helper')
     def properties = [runtime:'clientArtifact', api:'apiArtifact', cee_api:'ceeApiArtifact', example:'exampleArtifact', upstream_example:'upstreamExampleArtifact']
-    def defaults = [runtime:'build/libs/wwpg-0.2.0.jar',api:'build/libs/wwpg-api-1.0.0.jar',cee_api:'build/libs/wwpg-cee-api-1.0.0.jar',
+    def defaults = [runtime:"build/libs/wwpg-${project.mod_version}.jar",api:'build/libs/wwpg-api-1.0.0.jar',cee_api:'build/libs/wwpg-cee-api-1.0.0.jar',
                     example:'examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar',upstream_example:'examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar']
     def artifacts = properties.collectEntries { role, property -> [role,project.file(project.providers.gradleProperty(property).getOrElse(defaults[role]))] }
     def hash = { file -> java.security.MessageDigest.getInstance('SHA-256').digest(file.bytes).encodeHex().toString() }
@@ -79,7 +79,7 @@ gradle.projectsEvaluated {
             def profile = project.providers.gradleProperty('testProfile').getOrElse('BASE')
             def backend = project.providers.gradleProperty('testBackend').getOrElse('NATIVE')
             def source = project.providers.gradleProperty('sourceSha').get()
-            if (!(source ==~ /[0-9a-f]{40}/) || profile != extraction.profile || manifest.target != '0.2.0')
+            if (!(source ==~ /[0-9a-f]{40}/) || profile != extraction.profile || manifest.target != project.mod_version)
                 throw new GradleException('Wrong frozen source, Workshop profile or target')
             def spec = new File(root,'launch.json')
             if (spec.exists()) throw new GradleException('Retain previous launch evidence; use a fresh extraction')

@@ -1,10 +1,13 @@
 # Current status
 
-**[WWPG 0.2.0](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.0)**
+**[WWPG 0.2.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.1)**
 is the current release. It supports the declared stationary factories and
 optional Pinout computer control, and includes **extension API 1.0.0** for
 add-on developers. Existing beta.5 worlds remain compatible; update WWPG on
 the server and every client using the [installation guide](INSTALL.md).
+NeoForge **21.1.231 and 21.1.248** are tested. Newer NeoForge, Create, CEE and
+Power Grid versions are allowed to load for player testing; see
+[version compatibility](VERSION_COMPATIBILITY.md) for the tested combination.
 
 ## What works
 
@@ -33,7 +36,7 @@ paused or invalid. They do not keep showing its last successful measurement.
 If a wire tool says **Device is loading. Try again in a moment.**, wait for
 the area to finish loading and try again.
 
-WWPG 0.2.0 also isolates failing add-on callbacks, preserves accepted electrical
+WWPG also isolates failing add-on callbacks, preserves accepted electrical
 history after rejected calculations, and allows recovery when the add-on reports
 a repaired device. The [developer contract](EXTENSION_API.md) explains those rules.
 
@@ -49,8 +52,7 @@ and repairs. Linux coverage comes from server tests, rather than graphical clien
 Both example add-ons also built independently from their downloadable source
 and Maven archives. API 1.0.0 establishes the first published API contract.
 
-For maintainers, the detailed [verification record](../release/0.2.0/verification.json)
-and [frozen CI run](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38143489285)
+For maintainers, the detailed [verification record](../release/0.2.1/verification.json)
 retain exact versions, hashes and results. There are 204 base checks or 208 with
 Pinout, plus 34 extension/lifecycle checks and 62 Java unit checks per CI job.
 These are test counts, not counts of items in the game.
@@ -58,8 +60,9 @@ These are test counts, not counts of items in the game.
 ## Limits and older reports
 
 - Moving trains, contraptions and other moving electrical systems are future work.
-- Only the [pinned mod versions](INSTALL.md#required-versions) and declared optional
-  integration are supported. Large-server performance has not been certified.
+- The [listed versions](INSTALL.md#required-versions) and declared optional
+  integration are verified. Newer allowed dependencies need player testing.
+  Large-server performance has not been certified.
 - Example API components are creative demonstrations; they do not define survival
   recipes or balance for a finished add-on.
 - Add-ons own their gameplay and saving. WWPG can restore its electrical history

@@ -21,7 +21,7 @@ REPO = 'Cha0sCollective/World-Wide-Power-Grid'
 API_NAMESPACES = {'wwpg_api', 'wwpg_api_faults', 'wwpg_api_restart',
                   'wwpg_api_upstream', 'wwpg_api_upstream_restart'}
 HASH = re.compile(r'[0-9a-f]{64}')
-ARTIFACTS = {'runtime': 'build/libs/wwpg-0.2.0.jar', 'api': 'build/libs/wwpg-api-1.0.0.jar',
+ARTIFACTS = {'runtime': f'build/libs/wwpg-{VERSION}.jar', 'api': 'build/libs/wwpg-api-1.0.0.jar',
              'cee_api': 'build/libs/wwpg-cee-api-1.0.0.jar',
              'example': 'examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar',
              'upstream_example': 'examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar'}
@@ -93,7 +93,7 @@ def packaged(directory, namespaces, phases, hashes, profile, backend, evidence):
     for path, item in zip(paths, records):
         require(item.get('completed') and isinstance(item.get('required_tests_passed'), int)
                 and item['required_tests_passed'] > 0, f'Incomplete/failed packaged attempt remains unresolved: {path}')
-        require(item.get('artifact') == 'wwpg-0.2.0.jar' and item.get('sha256') == hashes['runtime']
+        require(item.get('artifact') == f'wwpg-{VERSION}.jar' and item.get('sha256') == hashes['runtime']
                 and item.get('profile') == profile and item.get('backend') == backend, f'Packaged artifact/profile/backend mismatch: {path}')
         actual = set(item.get('namespaces', '').split(','))
         require(actual == set(namespaces), f'Packaged namespace mismatch: {path}')

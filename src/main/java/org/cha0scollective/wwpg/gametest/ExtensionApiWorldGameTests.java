@@ -401,7 +401,7 @@ public final class ExtensionApiWorldGameTests {
     }
     private static void writeManifest(GameTestHelper h, boolean restore) {
         var report = new JsonObject();
-        report.addProperty("schema", 1); report.addProperty("target", "0.2.0"); report.addProperty("api_version", WWPGApi.API_VERSION);
+        report.addProperty("schema", 1); report.addProperty("target", net.neoforged.fml.ModList.get().getModContainerById("wwpg").orElseThrow().getModInfo().getVersion().toString()); report.addProperty("api_version", WWPGApi.API_VERSION);
         report.addProperty("profile", System.getProperty("wwpg.test.profile", "BASE"));
         report.addProperty("backend", System.getProperty("wwpg.test.backend", "NATIVE"));
         report.addProperty("phase", restore ? "VERIFY" : "SETUP"); report.addProperty("completed", true);

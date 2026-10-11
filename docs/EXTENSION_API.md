@@ -1,6 +1,6 @@
 # WWPG extension API
 
-Published with **WWPG 0.2.0**, independently versioned **API 1.0.0**, Java 21 and NeoForge for Minecraft 1.21.1.
+Published with **WWPG 0.2.1**, independently versioned **API 1.0.0**, Java 21 and NeoForge for Minecraft 1.21.1.
 
 Use this guide to add stationary electrical content to WWPG. It defines the
 public API contract: registration, electrical models, measurements, and saved
@@ -68,7 +68,7 @@ Maven repository supports public consumption without GitHub credentials. A hoste
 Maven service is not required.
 
 Download and extract the
-[developer SDK](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-developer-sdk.zip).
+[developer SDK](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.1/wwpg-0.2.1-developer-sdk.zip).
 Verify its published SHA256, then extract the included `maven/wwpg-api-1.0.0-maven.zip` into a directory such as
 `wwpg-api-maven`. That directory contains `org/cha0scollective/wwpg/...` and is
 the Maven repository root. Use its absolute path in `maven { url = uri(...) }`
@@ -450,7 +450,7 @@ CEE's solver or independently advance history during nonlinear trials.
 ## Versioning and compatibility checks
 
 `WWPGApi.version()` returns the installed API version, currently `1.0.0`; the
-mod version is `0.2.0`. Mod bug fixes do not automatically change the API version.
+mod version is `0.2.1`. Mod bug fixes do not automatically change the API version.
 The `API_VERSION` field also reads the version at runtime. It is deliberately
 not a Java compile-time constant, so an already compiled add-on observes a later
 compatible API version without recompilation.
@@ -469,7 +469,7 @@ semantics or gameplay behavior.
 
 ## Release verification
 
-WWPG 0.2.0's [verification record](../release/0.2.0/verification.json) binds the
+WWPG 0.2.1's [verification record](../release/0.2.1/verification.json) binds the
 runtime, SDK, independently built examples, and playable worlds to the accepted
 tests. The [maintainer release guide](API_RELEASE_CHECKS.md) documents classfile
 checks, SDK packaging, and the full evidence manifest. Those packaging steps are

@@ -1,6 +1,6 @@
 # Supported stationary content
 
-WWPG 0.2.0 lets **Create: Electro Energetics (CEE)** and **Power Grid (PG)** work
+WWPG 0.2.1 lets **Create: Electro Energetics (CEE)** and **Power Grid (PG)** work
 together in stationary factories: equipment built in the world that stays in
 place. Either mod can supply power to the other's supported equipment, and you
 can connect and measure circuits with either mod's tools.
@@ -43,7 +43,7 @@ remain later work. Unsupported electrical constructs are reported and isolated
 from the circuit. [Current status](STATUS.md) lists release limitations; [the
 long-term specification](../SPEC.md) describes the wider project goals.
 
-## Add-ons in 0.2.0
+## Add-ons in 0.2.1
 
 Extension API **1.0.0** lets developers add stationary electrical equipment to
 WWPG. The optional [API Workshop](EXTENSION_API_WORKSHOP.md) shows nine new machine
@@ -82,7 +82,7 @@ The release retains **164 base behavior groups, or 165 with optional Pinout**.
 The [beta.5 support matrix](../release/0.1.0-beta.5/supported-content.json) and
 [registry inventory](../release/0.1.0-beta.5/registry-inventory.json) provide the
 item-by-item baseline, including cosmetic variants, ingredients, assembly parts
-and deferred moving content. The [0.2.0 verification record](../release/0.2.0/verification.json)
+and deferred moving content. The [0.2.1 verification record](../release/0.2.1/verification.json)
 checks that baseline with the new jar and worlds, alongside the add-on examples.
 Older published artifacts, support claims and check records remain unchanged.
 

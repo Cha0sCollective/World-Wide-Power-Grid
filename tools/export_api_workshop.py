@@ -7,10 +7,9 @@ from pathlib import Path
 import zipfile
 
 from export_stationary_yard import renamed_level
+from package_api_release import VERSION, API_VERSION
 
 
-VERSION = "0.2.0"
-API_VERSION = "1.0.0"
 NAMESPACE = "wwpg_api_world"
 STATION_IDS = {
     **{f"A{i:02}": "wwpg_api_example:" + kind for i, kind in enumerate(
@@ -153,11 +152,11 @@ def export(run, jar, example, upstream_example, profile, backend, output, root):
 
 def instructions(profile):
     optional = "Also install CC:Tweaked 1.120.2 and CC;CPG: Pinout 0.2.1.\n" if profile == "PINOUT" else ""
-    return """WWPG Extension API Workshop
+    return f"""WWPG Extension API Workshop
 
 Extract this folder into your Minecraft instance's saves directory.
-Install Minecraft 1.21.1, NeoForge 21.1.231, Java 21, Create 6.0.10-280,
-CEE 1.1.3, Power Grid 0.6.2 and WWPG 0.2.0, plus BOTH example mod jars:
+Install Minecraft 1.21.1, NeoForge 21.1.231 or 21.1.248, Java 21, Create 6.0.10-280,
+CEE 1.1.3, Power Grid 0.6.2 and WWPG {VERSION}, plus BOTH example mod jars:
   wwpg-api-example-1.0.0.jar
   wwpg-upstream-api-example-1.0.0.jar
 The exact file hashes and dependency pins are in WWPG_MANIFEST.json.
