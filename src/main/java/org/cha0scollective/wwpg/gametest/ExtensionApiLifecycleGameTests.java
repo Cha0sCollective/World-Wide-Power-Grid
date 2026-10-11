@@ -61,7 +61,9 @@ public final class ExtensionApiLifecycleGameTests {
             checkHistory(h,stored.getCompound("Inductor"),saved(h,COIL),"Cold inductor before first solve");
             h.assertTrue(stored.getDouble("StoredVoltage")>1,"Cold restart reference must contain charged storage");
         }
-        h.startSequence().thenIdle(5).thenWaitUntil(()->h.assertTrue(level.areEntitiesLoaded(chunk.toLong()),"Waiting for saved API wire entities"))
+        h.startSequence().thenIdle(5).thenWaitUntil(()->h.assertTrue(org.cha0scollective.wwpg.extension.ApiTerminals.canWire(level,SOURCE)
+                &&org.cha0scollective.wwpg.extension.ApiTerminals.canWire(level,CAP)
+                &&org.cha0scollective.wwpg.extension.ApiTerminals.canWire(level,COIL),"Waiting for cold-state API endpoints to be ticking, with wire entities loaded and no pending retirement"))
                 .thenExecute(()-> {
                     if(verify)return;
                     WiringGameTests.connect(h,SOURCE,0,CAP,0,true);WiringGameTests.connect(h,SOURCE,1,CAP,1,true);
@@ -314,7 +316,9 @@ public final class ExtensionApiLifecycleGameTests {
         }
         example(h,source,"source");example(h,load,"capacitor");
         var oldIds=new java.util.HashSet<org.patryk3211.powergrid.electricity.WorldNetworks.PartId>();
-        h.startSequence().thenIdle(5).thenExecute(()-> {
+        h.startSequence().thenWaitUntil(()->h.assertTrue(org.cha0scollective.wwpg.extension.ApiTerminals.canWire(level,source)
+                &&org.cha0scollective.wwpg.extension.ApiTerminals.canWire(level,load),"Waiting for initial partial-replacement API endpoints at "+source+" and "+load+" to be ticking, with wire entities loaded and no pending retirement"))
+                .thenExecute(()-> {
             WiringGameTests.connect(h,source,0,load,0,true);WiringGameTests.connect(h,source,1,load,1,true);
         }).thenIdle(30).thenExecute(()-> {
             h.assertTrue(saved(h,load).getDouble("StoredVoltage")>1,"Partial replacement needs real charged saved storage");

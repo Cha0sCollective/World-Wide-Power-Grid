@@ -52,6 +52,7 @@ import org.patryk3211.powergrid.collections.ModdedBlocks;
 import org.patryk3211.powergrid.collections.ModdedConfigs;
 import org.patryk3211.powergrid.collections.ModdedItems;
 import org.patryk3211.powergrid.electricity.electricswitch.SwitchBlockEntity;
+import org.patryk3211.powergrid.electricity.electricswitch.SwitchBlock;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -110,13 +111,17 @@ public final class ExtensionApiWorldGameTests {
             buildGeneral(h);
             buildUpstream(h);
             tools(h);
-            h.runAtTickTime(20, () -> { configureGeneral(h); configureUpstream(h); });
         }
-        h.runAtTickTime(150, () -> verify(h, false));
-        h.runAtTickTime(160, () -> changeControls(h, true));
-        h.runAtTickTime(240, () -> verify(h, true));
-        h.runAtTickTime(250, () -> changeControls(h, false));
-        h.runAtTickTime(410, () -> {
+        // Forced block chunks do not imply that their native wire-entity inboxes
+        // have loaded. Start construction/operation after actual readiness in
+        // both new saves and cold verification; retain every settling window.
+        h.startSequence().thenWaitUntil(() -> requireWorkshopReady(h))
+                .thenExecute(() -> { if (!restore) { configureGeneral(h); configureUpstream(h); } })
+                .thenIdle(restore ? 150 : 130).thenExecute(() -> verify(h, false))
+                .thenIdle(10).thenExecute(() -> changeControls(h, true))
+                .thenIdle(80).thenExecute(() -> verify(h, true))
+                .thenIdle(10).thenExecute(() -> changeControls(h, false))
+                .thenIdle(160).thenExecute(() -> {
             verify(h, false);
             ExampleWorldGameTests.cleanDroppedWireItems(h.getLevel(), new AABB(8988, 62, 8988, 9076, 80, 9076));
             h.getLevel().setDefaultSpawnPos(SPAWN, 0);
@@ -126,8 +131,22 @@ public final class ExtensionApiWorldGameTests {
             h.getLevel().getDataStorage().save();
             h.getLevel().getChunkSource().save(true);
             WorldWidePowerGrid.LOGGER.info("WWPG_API_WORKSHOP_PASSED: phase={}; nine general devices, native panel storage indicator and assembled PG shunt; real wiring and ON/OFF/reset checks", restore ? "VERIFY" : "SETUP");
-            h.succeed();
-        });
+        }).thenSucceed();
+    }
+
+    private static void requireWorkshopReady(GameTestHelper h) {
+        var positions = new ArrayList<BlockPos>();
+        for (int i = 0; i < KINDS.length; i++) {
+            var s = station(i); positions.add(s.source); positions.add(s.device);
+            if (hasSeparateLoad(i)) positions.add(s.load);
+            if (i != 2) positions.add(s.gauge);
+        }
+        positions.addAll(List.of(panelOrigin(), panelOrigin().east(3), panelPosition(),
+                boardOrigin(), boardOrigin().east(3), boardPosition(), boardPosition().south(3)));
+        for (var pos : positions) h.assertTrue(org.cha0scollective.wwpg.extension.ApiTerminals.canWire(h.getLevel(), pos),
+                "Waiting for Workshop chunk/entity readiness and retired ownership at " + pos);
+        WorldWidePowerGrid.LOGGER.info("WWPG_API_WORKSHOP_READY: phase={}; all station endpoints ticking, entities loaded, no pending retirement",
+                System.getProperty("wwpg.test.restartPhase", "SETUP"));
     }
 
     private static void requireExamples(GameTestHelper h) {
@@ -188,6 +207,10 @@ public final class ExtensionApiWorldGameTests {
         wire(h, measured, second, s.gauge, 1, true);
     }
     private static void configureGeneral(GameTestHelper h) {
+        // Establish native ballast settings before connecting any live supply;
+        // parameter configuration is separate from the native wiring workflow.
+        resistance(h, station(1).device, 100);
+        for (int i = 5; i < KINDS.length; i++) resistance(h, station(i).load, 100);
         for (int i = 0; i < KINDS.length; i++) {
             var s = station(i);
             if (i == 0) {
@@ -195,16 +218,13 @@ public final class ExtensionApiWorldGameTests {
                 wire(h, s.source, 1, s.device, 0, true);
                 wire(h, s.source, 0, s.device, 1, false);
             } else if (i == 5) {
-                resistance(h, s.load, 100);
                 wire(h, s.source, 0, s.device, 0, false);
                 wire(h, s.device, 1, s.load, 0, true);
                 wire(h, s.source, 1, s.load, 1, false);
             } else {
                 wire(h, s.source, 0, s.device, 0, i % 2 == 0);
                 wire(h, s.source, 1, s.device, 1, i % 2 != 0);
-                if (i == 1) resistance(h, s.device, 100);
                 if (hasSeparateLoad(i)) {
-                    resistance(h, s.load, 100);
                     wire(h, s.device, 2, s.load, 0, true);
                     wire(h, s.device, 3, s.load, 1, false);
                 }
@@ -226,7 +246,7 @@ public final class ExtensionApiWorldGameTests {
     private static void configureUpstream(GameTestHelper h) {
         var level = h.getLevel();
         pgSource(h, panelOrigin(), 70);
-        ((SwitchBlockEntity) level.getBlockEntity(panelOrigin().east(3))).setState(true);
+        setFeed(h, panelOrigin().east(3), true);
         var slot = ElectricalPanelSlot.THIRD_LEFT;
         var player = h.makeMockPlayer(GameType.SURVIVAL);
         var stack = new ItemStack(BuiltInRegistries.ITEM.get(PANEL));
@@ -241,7 +261,7 @@ public final class ExtensionApiWorldGameTests {
         wire(h, panelOrigin(), 1, panelPosition(), attachment.nodes[1].id(), true);
 
         scroll(h, boardOrigin(), 20000);
-        ((SwitchBlockEntity) level.getBlockEntity(boardOrigin().east(3))).setState(true);
+        setFeed(h, boardOrigin().east(3), true);
         assembleBoard(h);
         wire(h, boardOrigin(), 1, boardOrigin().east(3), 0, false);
         wire(h, boardOrigin().east(3), 1, boardPosition(), 0, true);
@@ -323,7 +343,8 @@ public final class ExtensionApiWorldGameTests {
         var attachment = panelAttachment(h);
         var tag = new CompoundTag(); attachment.write(tag, true, h.getLevel().registryAccess());
         if (off) h.assertTrue(tag.getFloat("Light") < .05, "A10 stored indicator did not discharge after its feed opened");
-        else h.assertTrue(tag.getFloat("Light") > .95, "A10 native indicator is not visibly powered");
+        else h.assertTrue(tag.getFloat("Light") > .95, "A10 native indicator is not visibly powered: " + tag
+                + "; feed=" + h.getLevel().getBlockState(panelOrigin().east(3)));
         var board = (CircuitBoardBlockEntity) h.getLevel().getBlockEntity(boardPosition());
         var shunt = board.getComponentsStream().filter(p -> SHUNT.equals(ComponentRegistry.getId(p.component))).findFirst().orElseThrow();
         h.assertTrue(shunt.get(ResistorComponent.RESISTANCE) == 100f && !shunt.destroyed, "A11 lost native shunt configuration");
@@ -342,9 +363,16 @@ public final class ExtensionApiWorldGameTests {
             toggle(h, i == 1 || i == 2 || i == 4 || i == 5 ? s.source : s.device);
         }
         for (var position : List.of(panelOrigin().east(3), boardOrigin().east(3))) {
-            var control = (SwitchBlockEntity) h.getLevel().getBlockEntity(position);
-            control.setState(!off);
+            setFeed(h, position, !off);
         }
+    }
+    private static void setFeed(GameTestHelper h, BlockPos position, boolean enabled) {
+        // Native PG reconstructs a switch from its OPEN block state on reload.
+        // Keep the exhibit's saved/visible setting and live electrical state
+        // together, as its normal player interaction does.
+        h.getLevel().setBlockAndUpdate(position,
+                h.getLevel().getBlockState(position).setValue(SwitchBlock.OPEN, !enabled));
+        ((SwitchBlockEntity) h.getLevel().getBlockEntity(position)).setState(enabled);
     }
     private static ItemStack guide() {
         var pages = new ArrayList<Filterable<Component>>();
