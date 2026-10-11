@@ -21,6 +21,7 @@
     "PanelMeterAccessor",
     "TriPolarMeterResultsMixin",
     "FrequencyMeterTimingMixin",
+    "MeterDisplayTimingMixin",
     "MotorSamplingMixin",
     "InWorldNodeMixin",
     "WireSpoolMixin",

@@ -1,0 +1,2441 @@
+{
+  "schema": 1,
+  "backend": "NATIVE",
+  "model": "CEE 1.1.3 backward Euler RL",
+  "resistance_ohms": 10,
+  "inductance_henries": 1.0,
+  "relative_tolerance": 0.01,
+  "near_zero_tolerance": 1.0E-6,
+  "samples": [
+    {
+      "substeps": 1,
+      "tick": 1,
+      "seconds": 0.05,
+      "supply_voltage": 10.0,
+      "expected": 0.20000000000000007,
+      "actual": 0.1999999999999999,
+      "tolerance": 0.002000000000000001
+    },
+    {
+      "substeps": 1,
+      "tick": 2,
+      "seconds": 0.1,
+      "supply_voltage": 10.0,
+      "expected": 0.4666666666666667,
+      "actual": 0.46666666666666656,
+      "tolerance": 0.004666666666666667
+    },
+    {
+      "substeps": 1,
+      "tick": 3,
+      "seconds": 0.15000000000000002,
+      "supply_voltage": 10.0,
+      "expected": 0.6444444444444446,
+      "actual": 0.6444444444444444,
+      "tolerance": 0.006444444444444446
+    },
+    {
+      "substeps": 1,
+      "tick": 4,
+      "seconds": 0.2,
+      "supply_voltage": 10.0,
+      "expected": 0.7629629629629631,
+      "actual": 0.7629629629629628,
+      "tolerance": 0.007629629629629631
+    },
+    {
+      "substeps": 1,
+      "tick": 5,
+      "seconds": 0.25,
+      "supply_voltage": 10.0,
+      "expected": 0.8419753086419753,
+      "actual": 0.8419753086419751,
+      "tolerance": 0.008419753086419754
+    },
+    {
+      "substeps": 1,
+      "tick": 6,
+      "seconds": 0.30000000000000004,
+      "supply_voltage": 10.0,
+      "expected": 0.8946502057613169,
+      "actual": 0.8946502057613166,
+      "tolerance": 0.00894650205761317
+    },
+    {
+      "substeps": 1,
+      "tick": 7,
+      "seconds": 0.35000000000000003,
+      "supply_voltage": 10.0,
+      "expected": 0.929766803840878,
+      "actual": 0.9297668038408776,
+      "tolerance": 0.00929766803840878
+    },
+    {
+      "substeps": 1,
+      "tick": 8,
+      "seconds": 0.4,
+      "supply_voltage": 10.0,
+      "expected": 0.953177869227252,
+      "actual": 0.9531778692272517,
+      "tolerance": 0.00953177869227252
+    },
+    {
+      "substeps": 1,
+      "tick": 9,
+      "seconds": 0.45,
+      "supply_voltage": 10.0,
+      "expected": 0.9687852461515013,
+      "actual": 0.9687852461515011,
+      "tolerance": 0.009687852461515014
+    },
+    {
+      "substeps": 1,
+      "tick": 10,
+      "seconds": 0.5,
+      "supply_voltage": 10.0,
+      "expected": 0.9791901641010009,
+      "actual": 0.9791901641010006,
+      "tolerance": 0.00979190164101001
+    },
+    {
+      "substeps": 1,
+      "tick": 11,
+      "seconds": 0.55,
+      "supply_voltage": 10.0,
+      "expected": 0.9861267760673339,
+      "actual": 0.9861267760673337,
+      "tolerance": 0.009861267760673339
+    },
+    {
+      "substeps": 1,
+      "tick": 12,
+      "seconds": 0.6000000000000001,
+      "supply_voltage": 10.0,
+      "expected": 0.9907511840448893,
+      "actual": 0.990751184044889,
+      "tolerance": 0.009907511840448894
+    },
+    {
+      "substeps": 1,
+      "tick": 13,
+      "seconds": 0.65,
+      "supply_voltage": 10.0,
+      "expected": 0.9938341226965929,
+      "actual": 0.9938341226965925,
+      "tolerance": 0.009938341226965929
+    },
+    {
+      "substeps": 1,
+      "tick": 14,
+      "seconds": 0.7000000000000001,
+      "supply_voltage": 10.0,
+      "expected": 0.9958894151310619,
+      "actual": 0.9958894151310617,
+      "tolerance": 0.00995889415131062
+    },
+    {
+      "substeps": 1,
+      "tick": 15,
+      "seconds": 0.75,
+      "supply_voltage": 10.0,
+      "expected": 0.9972596100873746,
+      "actual": 0.9972596100873744,
+      "tolerance": 0.009972596100873747
+    },
+    {
+      "substeps": 1,
+      "tick": 16,
+      "seconds": 0.8,
+      "supply_voltage": 10.0,
+      "expected": 0.9981730733915831,
+      "actual": 0.9981730733915829,
+      "tolerance": 0.009981730733915832
+    },
+    {
+      "substeps": 1,
+      "tick": 17,
+      "seconds": 0.8500000000000001,
+      "supply_voltage": 10.0,
+      "expected": 0.998782048927722,
+      "actual": 0.9987820489277218,
+      "tolerance": 0.00998782048927722
+    },
+    {
+      "substeps": 1,
+      "tick": 18,
+      "seconds": 0.9,
+      "supply_voltage": 10.0,
+      "expected": 0.9991880326184813,
+      "actual": 0.9991880326184811,
+      "tolerance": 0.009991880326184813
+    },
+    {
+      "substeps": 1,
+      "tick": 19,
+      "seconds": 0.9500000000000001,
+      "supply_voltage": 10.0,
+      "expected": 0.9994586884123209,
+      "actual": 0.9994586884123207,
+      "tolerance": 0.009994586884123208
+    },
+    {
+      "substeps": 1,
+      "tick": 20,
+      "seconds": 1.0,
+      "supply_voltage": 10.0,
+      "expected": 0.9996391256082139,
+      "actual": 0.9996391256082137,
+      "tolerance": 0.009996391256082138
+    },
+    {
+      "substeps": 1,
+      "tick": 21,
+      "seconds": 1.05,
+      "supply_voltage": 10.0,
+      "expected": 0.9997594170721427,
+      "actual": 0.9997594170721423,
+      "tolerance": 0.009997594170721427
+    },
+    {
+      "substeps": 1,
+      "tick": 22,
+      "seconds": 1.1,
+      "supply_voltage": 10.0,
+      "expected": 0.9998396113814284,
+      "actual": 0.9998396113814282,
+      "tolerance": 0.009998396113814284
+    },
+    {
+      "substeps": 1,
+      "tick": 23,
+      "seconds": 1.1500000000000001,
+      "supply_voltage": 10.0,
+      "expected": 0.9998930742542856,
+      "actual": 0.9998930742542854,
+      "tolerance": 0.009998930742542857
+    },
+    {
+      "substeps": 1,
+      "tick": 24,
+      "seconds": 1.2000000000000002,
+      "supply_voltage": 10.0,
+      "expected": 0.9999287161695237,
+      "actual": 0.9999287161695235,
+      "tolerance": 0.009999287161695238
+    },
+    {
+      "substeps": 1,
+      "tick": 25,
+      "seconds": 1.25,
+      "supply_voltage": 10.0,
+      "expected": 0.9999524774463492,
+      "actual": 0.999952477446349,
+      "tolerance": 0.009999524774463493
+    },
+    {
+      "substeps": 1,
+      "tick": 26,
+      "seconds": 1.3,
+      "supply_voltage": 10.0,
+      "expected": 0.9999683182975662,
+      "actual": 0.9999683182975659,
+      "tolerance": 0.009999683182975661
+    },
+    {
+      "substeps": 1,
+      "tick": 27,
+      "seconds": 1.35,
+      "supply_voltage": 10.0,
+      "expected": 0.9999788788650441,
+      "actual": 0.9999788788650439,
+      "tolerance": 0.00999978878865044
+    },
+    {
+      "substeps": 1,
+      "tick": 28,
+      "seconds": 1.4000000000000001,
+      "supply_voltage": 10.0,
+      "expected": 0.9999859192433627,
+      "actual": 0.9999859192433626,
+      "tolerance": 0.009999859192433626
+    },
+    {
+      "substeps": 1,
+      "tick": 29,
+      "seconds": 1.4500000000000002,
+      "supply_voltage": 10.0,
+      "expected": 0.9999906128289084,
+      "actual": 0.9999906128289083,
+      "tolerance": 0.009999906128289085
+    },
+    {
+      "substeps": 1,
+      "tick": 30,
+      "seconds": 1.5,
+      "supply_voltage": 10.0,
+      "expected": 0.999993741885939,
+      "actual": 0.9999937418859388,
+      "tolerance": 0.00999993741885939
+    },
+    {
+      "substeps": 1,
+      "tick": 1,
+      "seconds": 0.05,
+      "supply_voltage": 0.0,
+      "expected": 0.6666624945906259,
+      "actual": 0.6666624945906259,
+      "tolerance": 0.006666624945906259
+    },
+    {
+      "substeps": 1,
+      "tick": 2,
+      "seconds": 0.1,
+      "supply_voltage": 0.0,
+      "expected": 0.4444416630604172,
+      "actual": 0.4444416630604172,
+      "tolerance": 0.004444416630604172
+    },
+    {
+      "substeps": 1,
+      "tick": 3,
+      "seconds": 0.15000000000000002,
+      "supply_voltage": 0.0,
+      "expected": 0.2962944420402781,
+      "actual": 0.2962944420402781,
+      "tolerance": 0.002962944420402781
+    },
+    {
+      "substeps": 1,
+      "tick": 4,
+      "seconds": 0.2,
+      "supply_voltage": 0.0,
+      "expected": 0.19752962802685206,
+      "actual": 0.19752962802685206,
+      "tolerance": 0.0019752962802685207
+    },
+    {
+      "substeps": 1,
+      "tick": 5,
+      "seconds": 0.25,
+      "supply_voltage": 0.0,
+      "expected": 0.13168641868456804,
+      "actual": 0.13168641868456804,
+      "tolerance": 0.0013168641868456805
+    },
+    {
+      "substeps": 1,
+      "tick": 6,
+      "seconds": 0.30000000000000004,
+      "supply_voltage": 0.0,
+      "expected": 0.08779094578971201,
+      "actual": 0.08779094578971203,
+      "tolerance": 8.779094578971201E-4
+    },
+    {
+      "substeps": 1,
+      "tick": 7,
+      "seconds": 0.35000000000000003,
+      "supply_voltage": 0.0,
+      "expected": 0.05852729719314134,
+      "actual": 0.05852729719314134,
+      "tolerance": 5.852729719314135E-4
+    },
+    {
+      "substeps": 1,
+      "tick": 8,
+      "seconds": 0.4,
+      "supply_voltage": 0.0,
+      "expected": 0.03901819812876089,
+      "actual": 0.039018198128760895,
+      "tolerance": 3.9018198128760887E-4
+    },
+    {
+      "substeps": 1,
+      "tick": 9,
+      "seconds": 0.45,
+      "supply_voltage": 0.0,
+      "expected": 0.026012132085840595,
+      "actual": 0.0260121320858406,
+      "tolerance": 2.6012132085840596E-4
+    },
+    {
+      "substeps": 1,
+      "tick": 10,
+      "seconds": 0.5,
+      "supply_voltage": 0.0,
+      "expected": 0.017341421390560396,
+      "actual": 0.0173414213905604,
+      "tolerance": 1.7341421390560397E-4
+    },
+    {
+      "substeps": 1,
+      "tick": 11,
+      "seconds": 0.55,
+      "supply_voltage": 0.0,
+      "expected": 0.01156094759370693,
+      "actual": 0.011560947593706933,
+      "tolerance": 1.156094759370693E-4
+    },
+    {
+      "substeps": 1,
+      "tick": 12,
+      "seconds": 0.6000000000000001,
+      "supply_voltage": 0.0,
+      "expected": 0.0077072983958046196,
+      "actual": 0.007707298395804621,
+      "tolerance": 7.70729839580462E-5
+    },
+    {
+      "substeps": 1,
+      "tick": 13,
+      "seconds": 0.65,
+      "supply_voltage": 0.0,
+      "expected": 0.005138198930536413,
+      "actual": 0.005138198930536414,
+      "tolerance": 5.1381989305364126E-5
+    },
+    {
+      "substeps": 1,
+      "tick": 14,
+      "seconds": 0.7000000000000001,
+      "supply_voltage": 0.0,
+      "expected": 0.0034254659536909417,
+      "actual": 0.003425465953690942,
+      "tolerance": 3.4254659536909415E-5
+    },
+    {
+      "substeps": 1,
+      "tick": 15,
+      "seconds": 0.75,
+      "supply_voltage": 0.0,
+      "expected": 0.002283643969127294,
+      "actual": 0.0022836439691272946,
+      "tolerance": 2.2836439691272943E-5
+    },
+    {
+      "substeps": 1,
+      "tick": 16,
+      "seconds": 0.8,
+      "supply_voltage": 0.0,
+      "expected": 0.0015224293127515294,
+      "actual": 0.0015224293127515296,
+      "tolerance": 1.5224293127515294E-5
+    },
+    {
+      "substeps": 1,
+      "tick": 17,
+      "seconds": 0.8500000000000001,
+      "supply_voltage": 0.0,
+      "expected": 0.0010149528751676863,
+      "actual": 0.0010149528751676863,
+      "tolerance": 1.0149528751676863E-5
+    },
+    {
+      "substeps": 1,
+      "tick": 18,
+      "seconds": 0.9,
+      "supply_voltage": 0.0,
+      "expected": 6.766352501117907E-4,
+      "actual": 6.766352501117907E-4,
+      "tolerance": 6.7663525011179075E-6
+    },
+    {
+      "substeps": 1,
+      "tick": 19,
+      "seconds": 0.9500000000000001,
+      "supply_voltage": 0.0,
+      "expected": 4.5109016674119384E-4,
+      "actual": 4.510901667411938E-4,
+      "tolerance": 4.510901667411939E-6
+    },
+    {
+      "substeps": 1,
+      "tick": 20,
+      "seconds": 1.0,
+      "supply_voltage": 0.0,
+      "expected": 3.0072677782746256E-4,
+      "actual": 3.007267778274625E-4,
+      "tolerance": 3.0072677782746257E-6
+    },
+    {
+      "substeps": 1,
+      "tick": 21,
+      "seconds": 1.05,
+      "supply_voltage": 0.0,
+      "expected": 2.0048451855164166E-4,
+      "actual": 2.0048451855164166E-4,
+      "tolerance": 2.0048451855164167E-6
+    },
+    {
+      "substeps": 1,
+      "tick": 22,
+      "seconds": 1.1,
+      "supply_voltage": 0.0,
+      "expected": 1.3365634570109444E-4,
+      "actual": 1.3365634570109444E-4,
+      "tolerance": 1.3365634570109445E-6
+    },
+    {
+      "substeps": 1,
+      "tick": 23,
+      "seconds": 1.1500000000000001,
+      "supply_voltage": 0.0,
+      "expected": 8.910423046739629E-5,
+      "actual": 8.910423046739629E-5,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 1,
+      "tick": 24,
+      "seconds": 1.2000000000000002,
+      "supply_voltage": 0.0,
+      "expected": 5.940282031159752E-5,
+      "actual": 5.940282031159752E-5,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 1,
+      "tick": 25,
+      "seconds": 1.25,
+      "supply_voltage": 0.0,
+      "expected": 3.960188020773168E-5,
+      "actual": 3.9601880207731676E-5,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 1,
+      "tick": 26,
+      "seconds": 1.3,
+      "supply_voltage": 0.0,
+      "expected": 2.6401253471821118E-5,
+      "actual": 2.6401253471821115E-5,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 1,
+      "tick": 27,
+      "seconds": 1.35,
+      "supply_voltage": 0.0,
+      "expected": 1.7600835647880744E-5,
+      "actual": 1.760083564788074E-5,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 1,
+      "tick": 28,
+      "seconds": 1.4000000000000001,
+      "supply_voltage": 0.0,
+      "expected": 1.1733890431920496E-5,
+      "actual": 1.1733890431920493E-5,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 1,
+      "tick": 29,
+      "seconds": 1.4500000000000002,
+      "supply_voltage": 0.0,
+      "expected": 7.822593621280331E-6,
+      "actual": 7.822593621280328E-6,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 1,
+      "tick": 30,
+      "seconds": 1.5,
+      "supply_voltage": 0.0,
+      "expected": 5.2150624141868865E-6,
+      "actual": 5.215062414186885E-6,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 1,
+      "tick": 1,
+      "seconds": 0.05,
+      "supply_voltage": -10.0,
+      "expected": -0.3333298566250573,
+      "actual": -0.33332985662505715,
+      "tolerance": 0.003333298566250573
+    },
+    {
+      "substeps": 1,
+      "tick": 2,
+      "seconds": 0.1,
+      "supply_voltage": -10.0,
+      "expected": -0.5555532377500382,
+      "actual": -0.5555532377500381,
+      "tolerance": 0.005555532377500382
+    },
+    {
+      "substeps": 1,
+      "tick": 3,
+      "seconds": 0.15000000000000002,
+      "supply_voltage": -10.0,
+      "expected": -0.7037021585000255,
+      "actual": -0.7037021585000254,
+      "tolerance": 0.007037021585000255
+    },
+    {
+      "substeps": 1,
+      "tick": 4,
+      "seconds": 0.2,
+      "supply_voltage": -10.0,
+      "expected": -0.8024681056666837,
+      "actual": -0.8024681056666836,
+      "tolerance": 0.008024681056666837
+    },
+    {
+      "substeps": 1,
+      "tick": 5,
+      "seconds": 0.25,
+      "supply_voltage": -10.0,
+      "expected": -0.8683120704444558,
+      "actual": -0.8683120704444556,
+      "tolerance": 0.008683120704444559
+    },
+    {
+      "substeps": 1,
+      "tick": 6,
+      "seconds": 0.30000000000000004,
+      "supply_voltage": -10.0,
+      "expected": -0.9122080469629705,
+      "actual": -0.9122080469629703,
+      "tolerance": 0.009122080469629706
+    },
+    {
+      "substeps": 1,
+      "tick": 7,
+      "seconds": 0.35000000000000003,
+      "supply_voltage": -10.0,
+      "expected": -0.941472031308647,
+      "actual": -0.9414720313086468,
+      "tolerance": 0.00941472031308647
+    },
+    {
+      "substeps": 1,
+      "tick": 8,
+      "seconds": 0.4,
+      "supply_voltage": -10.0,
+      "expected": -0.9609813542057647,
+      "actual": -0.9609813542057644,
+      "tolerance": 0.009609813542057647
+    },
+    {
+      "substeps": 1,
+      "tick": 9,
+      "seconds": 0.45,
+      "supply_voltage": -10.0,
+      "expected": -0.9739875694705098,
+      "actual": -0.9739875694705095,
+      "tolerance": 0.009739875694705098
+    },
+    {
+      "substeps": 1,
+      "tick": 10,
+      "seconds": 0.5,
+      "supply_voltage": -10.0,
+      "expected": -0.9826583796470065,
+      "actual": -0.9826583796470062,
+      "tolerance": 0.009826583796470065
+    },
+    {
+      "substeps": 1,
+      "tick": 11,
+      "seconds": 0.55,
+      "supply_voltage": -10.0,
+      "expected": -0.988438919764671,
+      "actual": -0.9884389197646707,
+      "tolerance": 0.00988438919764671
+    },
+    {
+      "substeps": 1,
+      "tick": 12,
+      "seconds": 0.6000000000000001,
+      "supply_voltage": -10.0,
+      "expected": -0.9922926131764473,
+      "actual": -0.992292613176447,
+      "tolerance": 0.009922926131764473
+    },
+    {
+      "substeps": 1,
+      "tick": 13,
+      "seconds": 0.65,
+      "supply_voltage": -10.0,
+      "expected": -0.9948617421176316,
+      "actual": -0.9948617421176312,
+      "tolerance": 0.009948617421176316
+    },
+    {
+      "substeps": 1,
+      "tick": 14,
+      "seconds": 0.7000000000000001,
+      "supply_voltage": -10.0,
+      "expected": -0.9965744947450877,
+      "actual": -0.9965744947450874,
+      "tolerance": 0.009965744947450879
+    },
+    {
+      "substeps": 1,
+      "tick": 15,
+      "seconds": 0.75,
+      "supply_voltage": -10.0,
+      "expected": -0.9977163298300584,
+      "actual": -0.9977163298300582,
+      "tolerance": 0.009977163298300585
+    },
+    {
+      "substeps": 1,
+      "tick": 16,
+      "seconds": 0.8,
+      "supply_voltage": -10.0,
+      "expected": -0.998477553220039,
+      "actual": -0.9984775532200387,
+      "tolerance": 0.00998477553220039
+    },
+    {
+      "substeps": 1,
+      "tick": 17,
+      "seconds": 0.8500000000000001,
+      "supply_voltage": -10.0,
+      "expected": -0.998985035480026,
+      "actual": -0.9989850354800257,
+      "tolerance": 0.00998985035480026
+    },
+    {
+      "substeps": 1,
+      "tick": 18,
+      "seconds": 0.9,
+      "supply_voltage": -10.0,
+      "expected": -0.999323356986684,
+      "actual": -0.9993233569866837,
+      "tolerance": 0.00999323356986684
+    },
+    {
+      "substeps": 1,
+      "tick": 19,
+      "seconds": 0.9500000000000001,
+      "supply_voltage": -10.0,
+      "expected": -0.9995489046577893,
+      "actual": -0.9995489046577891,
+      "tolerance": 0.009995489046577894
+    },
+    {
+      "substeps": 1,
+      "tick": 20,
+      "seconds": 1.0,
+      "supply_voltage": -10.0,
+      "expected": -0.9996992697718595,
+      "actual": -0.9996992697718593,
+      "tolerance": 0.009996992697718596
+    },
+    {
+      "substeps": 1,
+      "tick": 21,
+      "seconds": 1.05,
+      "supply_voltage": -10.0,
+      "expected": -0.9997995131812397,
+      "actual": -0.9997995131812395,
+      "tolerance": 0.009997995131812397
+    },
+    {
+      "substeps": 1,
+      "tick": 22,
+      "seconds": 1.1,
+      "supply_voltage": -10.0,
+      "expected": -0.9998663421208265,
+      "actual": -0.9998663421208263,
+      "tolerance": 0.009998663421208266
+    },
+    {
+      "substeps": 1,
+      "tick": 23,
+      "seconds": 1.1500000000000001,
+      "supply_voltage": -10.0,
+      "expected": -0.9999108947472176,
+      "actual": -0.9999108947472174,
+      "tolerance": 0.009999108947472177
+    },
+    {
+      "substeps": 1,
+      "tick": 24,
+      "seconds": 1.2000000000000002,
+      "supply_voltage": -10.0,
+      "expected": -0.9999405964981452,
+      "actual": -0.9999405964981448,
+      "tolerance": 0.009999405964981452
+    },
+    {
+      "substeps": 1,
+      "tick": 25,
+      "seconds": 1.25,
+      "supply_voltage": -10.0,
+      "expected": -0.9999603976654301,
+      "actual": -0.9999603976654298,
+      "tolerance": 0.009999603976654302
+    },
+    {
+      "substeps": 1,
+      "tick": 26,
+      "seconds": 1.3,
+      "supply_voltage": -10.0,
+      "expected": -0.99997359844362,
+      "actual": -0.9999735984436198,
+      "tolerance": 0.0099997359844362
+    },
+    {
+      "substeps": 1,
+      "tick": 27,
+      "seconds": 1.35,
+      "supply_voltage": -10.0,
+      "expected": -0.9999823989624134,
+      "actual": -0.9999823989624131,
+      "tolerance": 0.009999823989624134
+    },
+    {
+      "substeps": 1,
+      "tick": 28,
+      "seconds": 1.4000000000000001,
+      "supply_voltage": -10.0,
+      "expected": -0.9999882659749423,
+      "actual": -0.9999882659749421,
+      "tolerance": 0.009999882659749423
+    },
+    {
+      "substeps": 1,
+      "tick": 29,
+      "seconds": 1.4500000000000002,
+      "supply_voltage": -10.0,
+      "expected": -0.9999921773166282,
+      "actual": -0.9999921773166279,
+      "tolerance": 0.009999921773166281
+    },
+    {
+      "substeps": 1,
+      "tick": 30,
+      "seconds": 1.5,
+      "supply_voltage": -10.0,
+      "expected": -0.9999947848777521,
+      "actual": -0.9999947848777518,
+      "tolerance": 0.00999994784877752
+    },
+    {
+      "substeps": 2,
+      "tick": 1,
+      "seconds": 0.05,
+      "supply_voltage": 10.0,
+      "expected": 0.23199999999999987,
+      "actual": 0.23200000000000004,
+      "tolerance": 0.0023199999999999987
+    },
+    {
+      "substeps": 2,
+      "tick": 2,
+      "seconds": 0.1,
+      "supply_voltage": 10.0,
+      "expected": 0.5084799999999999,
+      "actual": 0.50848,
+      "tolerance": 0.0050847999999999996
+    },
+    {
+      "substeps": 2,
+      "tick": 3,
+      "seconds": 0.15000000000000002,
+      "supply_voltage": 10.0,
+      "expected": 0.6854271999999999,
+      "actual": 0.6854272,
+      "tolerance": 0.006854271999999999
+    },
+    {
+      "substeps": 2,
+      "tick": 4,
+      "seconds": 0.2,
+      "supply_voltage": 10.0,
+      "expected": 0.7986734079999999,
+      "actual": 0.798673408,
+      "tolerance": 0.007986734079999998
+    },
+    {
+      "substeps": 2,
+      "tick": 5,
+      "seconds": 0.25,
+      "supply_voltage": 10.0,
+      "expected": 0.87115098112,
+      "actual": 0.87115098112,
+      "tolerance": 0.0087115098112
+    },
+    {
+      "substeps": 2,
+      "tick": 6,
+      "seconds": 0.30000000000000004,
+      "supply_voltage": 10.0,
+      "expected": 0.9175366279167999,
+      "actual": 0.9175366279168,
+      "tolerance": 0.009175366279167999
+    },
+    {
+      "substeps": 2,
+      "tick": 7,
+      "seconds": 0.35000000000000003,
+      "supply_voltage": 10.0,
+      "expected": 0.947223441866752,
+      "actual": 0.947223441866752,
+      "tolerance": 0.00947223441866752
+    },
+    {
+      "substeps": 2,
+      "tick": 8,
+      "seconds": 0.4,
+      "supply_voltage": 10.0,
+      "expected": 0.9662230027947213,
+      "actual": 0.9662230027947213,
+      "tolerance": 0.009662230027947213
+    },
+    {
+      "substeps": 2,
+      "tick": 9,
+      "seconds": 0.45,
+      "supply_voltage": 10.0,
+      "expected": 0.9783827217886216,
+      "actual": 0.9783827217886216,
+      "tolerance": 0.009783827217886216
+    },
+    {
+      "substeps": 2,
+      "tick": 10,
+      "seconds": 0.5,
+      "supply_voltage": 10.0,
+      "expected": 0.9861649419447178,
+      "actual": 0.9861649419447178,
+      "tolerance": 0.009861649419447178
+    },
+    {
+      "substeps": 2,
+      "tick": 11,
+      "seconds": 0.55,
+      "supply_voltage": 10.0,
+      "expected": 0.9911455628446194,
+      "actual": 0.9911455628446194,
+      "tolerance": 0.009911455628446194
+    },
+    {
+      "substeps": 2,
+      "tick": 12,
+      "seconds": 0.6000000000000001,
+      "supply_voltage": 10.0,
+      "expected": 0.9943331602205564,
+      "actual": 0.9943331602205564,
+      "tolerance": 0.009943331602205565
+    },
+    {
+      "substeps": 2,
+      "tick": 13,
+      "seconds": 0.65,
+      "supply_voltage": 10.0,
+      "expected": 0.9963732225411561,
+      "actual": 0.9963732225411561,
+      "tolerance": 0.009963732225411562
+    },
+    {
+      "substeps": 2,
+      "tick": 14,
+      "seconds": 0.7000000000000001,
+      "supply_voltage": 10.0,
+      "expected": 0.99767886242634,
+      "actual": 0.99767886242634,
+      "tolerance": 0.0099767886242634
+    },
+    {
+      "substeps": 2,
+      "tick": 15,
+      "seconds": 0.75,
+      "supply_voltage": 10.0,
+      "expected": 0.9985144719528576,
+      "actual": 0.9985144719528575,
+      "tolerance": 0.009985144719528575
+    },
+    {
+      "substeps": 2,
+      "tick": 16,
+      "seconds": 0.8,
+      "supply_voltage": 10.0,
+      "expected": 0.9990492620498288,
+      "actual": 0.9990492620498288,
+      "tolerance": 0.009990492620498288
+    },
+    {
+      "substeps": 2,
+      "tick": 17,
+      "seconds": 0.8500000000000001,
+      "supply_voltage": 10.0,
+      "expected": 0.9993915277118904,
+      "actual": 0.9993915277118904,
+      "tolerance": 0.009993915277118905
+    },
+    {
+      "substeps": 2,
+      "tick": 18,
+      "seconds": 0.9,
+      "supply_voltage": 10.0,
+      "expected": 0.9996105777356099,
+      "actual": 0.9996105777356099,
+      "tolerance": 0.0099961057773561
+    },
+    {
+      "substeps": 2,
+      "tick": 19,
+      "seconds": 0.9500000000000001,
+      "supply_voltage": 10.0,
+      "expected": 0.9997507697507904,
+      "actual": 0.9997507697507904,
+      "tolerance": 0.009997507697507903
+    },
+    {
+      "substeps": 2,
+      "tick": 20,
+      "seconds": 1.0,
+      "supply_voltage": 10.0,
+      "expected": 0.9998404926405058,
+      "actual": 0.9998404926405058,
+      "tolerance": 0.009998404926405057
+    },
+    {
+      "substeps": 2,
+      "tick": 21,
+      "seconds": 1.05,
+      "supply_voltage": 10.0,
+      "expected": 0.9998979152899237,
+      "actual": 0.9998979152899237,
+      "tolerance": 0.009998979152899237
+    },
+    {
+      "substeps": 2,
+      "tick": 22,
+      "seconds": 1.1,
+      "supply_voltage": 10.0,
+      "expected": 0.9999346657855511,
+      "actual": 0.9999346657855511,
+      "tolerance": 0.00999934665785551
+    },
+    {
+      "substeps": 2,
+      "tick": 23,
+      "seconds": 1.1500000000000001,
+      "supply_voltage": 10.0,
+      "expected": 0.9999581861027528,
+      "actual": 0.9999581861027527,
+      "tolerance": 0.009999581861027527
+    },
+    {
+      "substeps": 2,
+      "tick": 24,
+      "seconds": 1.2000000000000002,
+      "supply_voltage": 10.0,
+      "expected": 0.9999732391057617,
+      "actual": 0.9999732391057617,
+      "tolerance": 0.009999732391057618
+    },
+    {
+      "substeps": 2,
+      "tick": 25,
+      "seconds": 1.25,
+      "supply_voltage": 10.0,
+      "expected": 0.9999828730276875,
+      "actual": 0.9999828730276875,
+      "tolerance": 0.009999828730276876
+    },
+    {
+      "substeps": 2,
+      "tick": 26,
+      "seconds": 1.3,
+      "supply_voltage": 10.0,
+      "expected": 0.99998903873772,
+      "actual": 0.99998903873772,
+      "tolerance": 0.0099998903873772
+    },
+    {
+      "substeps": 2,
+      "tick": 27,
+      "seconds": 1.35,
+      "supply_voltage": 10.0,
+      "expected": 0.9999929847921408,
+      "actual": 0.9999929847921408,
+      "tolerance": 0.009999929847921408
+    },
+    {
+      "substeps": 2,
+      "tick": 28,
+      "seconds": 1.4000000000000001,
+      "supply_voltage": 10.0,
+      "expected": 0.9999955102669701,
+      "actual": 0.9999955102669701,
+      "tolerance": 0.0099999551026697
+    },
+    {
+      "substeps": 2,
+      "tick": 29,
+      "seconds": 1.4500000000000002,
+      "supply_voltage": 10.0,
+      "expected": 0.9999971265708609,
+      "actual": 0.9999971265708608,
+      "tolerance": 0.00999997126570861
+    },
+    {
+      "substeps": 2,
+      "tick": 30,
+      "seconds": 1.5,
+      "supply_voltage": 10.0,
+      "expected": 0.999998161005351,
+      "actual": 0.9999981610053509,
+      "tolerance": 0.009999981610053511
+    },
+    {
+      "substeps": 2,
+      "tick": 1,
+      "seconds": 0.05,
+      "supply_voltage": 0.0,
+      "expected": 0.6399988230434247,
+      "actual": 0.6399988230434245,
+      "tolerance": 0.006399988230434247
+    },
+    {
+      "substeps": 2,
+      "tick": 2,
+      "seconds": 0.1,
+      "supply_voltage": 0.0,
+      "expected": 0.4095992467477918,
+      "actual": 0.4095992467477917,
+      "tolerance": 0.004095992467477918
+    },
+    {
+      "substeps": 2,
+      "tick": 3,
+      "seconds": 0.15000000000000002,
+      "supply_voltage": 0.0,
+      "expected": 0.2621435179185868,
+      "actual": 0.26214351791858664,
+      "tolerance": 0.002621435179185868
+    },
+    {
+      "substeps": 2,
+      "tick": 4,
+      "seconds": 0.2,
+      "supply_voltage": 0.0,
+      "expected": 0.16777185146789558,
+      "actual": 0.16777185146789542,
+      "tolerance": 0.0016777185146789558
+    },
+    {
+      "substeps": 2,
+      "tick": 5,
+      "seconds": 0.25,
+      "supply_voltage": 0.0,
+      "expected": 0.10737398493945317,
+      "actual": 0.10737398493945306,
+      "tolerance": 0.0010737398493945317
+    },
+    {
+      "substeps": 2,
+      "tick": 6,
+      "seconds": 0.30000000000000004,
+      "supply_voltage": 0.0,
+      "expected": 0.06871935036125003,
+      "actual": 0.06871935036124995,
+      "tolerance": 6.871935036125003E-4
+    },
+    {
+      "substeps": 2,
+      "tick": 7,
+      "seconds": 0.35000000000000003,
+      "supply_voltage": 0.0,
+      "expected": 0.04398038423120003,
+      "actual": 0.04398038423119996,
+      "tolerance": 4.398038423120003E-4
+    },
+    {
+      "substeps": 2,
+      "tick": 8,
+      "seconds": 0.4,
+      "supply_voltage": 0.0,
+      "expected": 0.02814744590796802,
+      "actual": 0.028147445907967972,
+      "tolerance": 2.8147445907968023E-4
+    },
+    {
+      "substeps": 2,
+      "tick": 9,
+      "seconds": 0.45,
+      "supply_voltage": 0.0,
+      "expected": 0.01801436538109954,
+      "actual": 0.0180143653810995,
+      "tolerance": 1.8014365381099537E-4
+    },
+    {
+      "substeps": 2,
+      "tick": 10,
+      "seconds": 0.5,
+      "supply_voltage": 0.0,
+      "expected": 0.011529193843903704,
+      "actual": 0.011529193843903678,
+      "tolerance": 1.1529193843903704E-4
+    },
+    {
+      "substeps": 2,
+      "tick": 11,
+      "seconds": 0.55,
+      "supply_voltage": 0.0,
+      "expected": 0.0073786840600983715,
+      "actual": 0.007378684060098353,
+      "tolerance": 7.378684060098372E-5
+    },
+    {
+      "substeps": 2,
+      "tick": 12,
+      "seconds": 0.6000000000000001,
+      "supply_voltage": 0.0,
+      "expected": 0.004722357798462959,
+      "actual": 0.004722357798462945,
+      "tolerance": 4.722357798462959E-5
+    },
+    {
+      "substeps": 2,
+      "tick": 13,
+      "seconds": 0.65,
+      "supply_voltage": 0.0,
+      "expected": 0.003022308991016294,
+      "actual": 0.0030223089910162843,
+      "tolerance": 3.0223089910162938E-5
+    },
+    {
+      "substeps": 2,
+      "tick": 14,
+      "seconds": 0.7000000000000001,
+      "supply_voltage": 0.0,
+      "expected": 0.001934277754250428,
+      "actual": 0.0019342777542504215,
+      "tolerance": 1.934277754250428E-5
+    },
+    {
+      "substeps": 2,
+      "tick": 15,
+      "seconds": 0.75,
+      "supply_voltage": 0.0,
+      "expected": 0.0012379377627202742,
+      "actual": 0.0012379377627202695,
+      "tolerance": 1.2379377627202743E-5
+    },
+    {
+      "substeps": 2,
+      "tick": 16,
+      "seconds": 0.8,
+      "supply_voltage": 0.0,
+      "expected": 7.922801681409756E-4,
+      "actual": 7.922801681409724E-4,
+      "tolerance": 7.922801681409755E-6
+    },
+    {
+      "substeps": 2,
+      "tick": 17,
+      "seconds": 0.8500000000000001,
+      "supply_voltage": 0.0,
+      "expected": 5.070593076102244E-4,
+      "actual": 5.070593076102223E-4,
+      "tolerance": 5.070593076102245E-6
+    },
+    {
+      "substeps": 2,
+      "tick": 18,
+      "seconds": 0.9,
+      "supply_voltage": 0.0,
+      "expected": 3.2451795687054365E-4,
+      "actual": 3.2451795687054224E-4,
+      "tolerance": 3.2451795687054364E-6
+    },
+    {
+      "substeps": 2,
+      "tick": 19,
+      "seconds": 0.9500000000000001,
+      "supply_voltage": 0.0,
+      "expected": 2.0769149239714796E-4,
+      "actual": 2.07691492397147E-4,
+      "tolerance": 2.0769149239714794E-6
+    },
+    {
+      "substeps": 2,
+      "tick": 20,
+      "seconds": 1.0,
+      "supply_voltage": 0.0,
+      "expected": 1.329225551341747E-4,
+      "actual": 1.3292255513417406E-4,
+      "tolerance": 1.329225551341747E-6
+    },
+    {
+      "substeps": 2,
+      "tick": 21,
+      "seconds": 1.05,
+      "supply_voltage": 0.0,
+      "expected": 8.507043528587182E-5,
+      "actual": 8.507043528587139E-5,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 2,
+      "tick": 22,
+      "seconds": 1.1,
+      "supply_voltage": 0.0,
+      "expected": 5.4445078582957976E-5,
+      "actual": 5.4445078582957685E-5,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 2,
+      "tick": 23,
+      "seconds": 1.1500000000000001,
+      "supply_voltage": 0.0,
+      "expected": 3.4844850293093104E-5,
+      "actual": 3.4844850293092914E-5,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 2,
+      "tick": 24,
+      "seconds": 1.2000000000000002,
+      "supply_voltage": 0.0,
+      "expected": 2.2300704187579592E-5,
+      "actual": 2.2300704187579464E-5,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 2,
+      "tick": 25,
+      "seconds": 1.25,
+      "supply_voltage": 0.0,
+      "expected": 1.427245068005094E-5,
+      "actual": 1.4272450680050857E-5,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 2,
+      "tick": 26,
+      "seconds": 1.3,
+      "supply_voltage": 0.0,
+      "expected": 9.134368435232604E-6,
+      "actual": 9.134368435232548E-6,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 2,
+      "tick": 27,
+      "seconds": 1.35,
+      "supply_voltage": 0.0,
+      "expected": 5.845995798548866E-6,
+      "actual": 5.84599579854883E-6,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 2,
+      "tick": 28,
+      "seconds": 1.4000000000000001,
+      "supply_voltage": 0.0,
+      "expected": 3.7414373110712747E-6,
+      "actual": 3.741437311071251E-6,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 2,
+      "tick": 29,
+      "seconds": 1.4500000000000002,
+      "supply_voltage": 0.0,
+      "expected": 2.3945198790856163E-6,
+      "actual": 2.3945198790856E-6,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 2,
+      "tick": 30,
+      "seconds": 1.5,
+      "supply_voltage": 0.0,
+      "expected": 1.5324927226147945E-6,
+      "actual": 1.532492722614784E-6,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 2,
+      "tick": 1,
+      "seconds": 0.05,
+      "supply_voltage": -10.0,
+      "expected": -0.3599990192046574,
+      "actual": -0.3599990192046576,
+      "tolerance": 0.003599990192046574
+    },
+    {
+      "substeps": 2,
+      "tick": 2,
+      "seconds": 0.1,
+      "supply_voltage": -10.0,
+      "expected": -0.5903993722909807,
+      "actual": -0.5903993722909809,
+      "tolerance": 0.005903993722909807
+    },
+    {
+      "substeps": 2,
+      "tick": 3,
+      "seconds": 0.15000000000000002,
+      "supply_voltage": -10.0,
+      "expected": -0.7378555982662276,
+      "actual": -0.7378555982662278,
+      "tolerance": 0.007378555982662276
+    },
+    {
+      "substeps": 2,
+      "tick": 4,
+      "seconds": 0.2,
+      "supply_voltage": -10.0,
+      "expected": -0.8322275828903857,
+      "actual": -0.8322275828903858,
+      "tolerance": 0.008322275828903858
+    },
+    {
+      "substeps": 2,
+      "tick": 5,
+      "seconds": 0.25,
+      "supply_voltage": -10.0,
+      "expected": -0.8926256530498468,
+      "actual": -0.8926256530498469,
+      "tolerance": 0.008926256530498469
+    },
+    {
+      "substeps": 2,
+      "tick": 6,
+      "seconds": 0.30000000000000004,
+      "supply_voltage": -10.0,
+      "expected": -0.931280417951902,
+      "actual": -0.931280417951902,
+      "tolerance": 0.00931280417951902
+    },
+    {
+      "substeps": 2,
+      "tick": 7,
+      "seconds": 0.35000000000000003,
+      "supply_voltage": -10.0,
+      "expected": -0.9560194674892173,
+      "actual": -0.9560194674892173,
+      "tolerance": 0.009560194674892173
+    },
+    {
+      "substeps": 2,
+      "tick": 8,
+      "seconds": 0.4,
+      "supply_voltage": -10.0,
+      "expected": -0.971852459193099,
+      "actual": -0.971852459193099,
+      "tolerance": 0.009718524591930991
+    },
+    {
+      "substeps": 2,
+      "tick": 9,
+      "seconds": 0.45,
+      "supply_voltage": -10.0,
+      "expected": -0.9819855738835834,
+      "actual": -0.9819855738835833,
+      "tolerance": 0.009819855738835835
+    },
+    {
+      "substeps": 2,
+      "tick": 10,
+      "seconds": 0.5,
+      "supply_voltage": -10.0,
+      "expected": -0.9884707672854933,
+      "actual": -0.9884707672854933,
+      "tolerance": 0.009884707672854933
+    },
+    {
+      "substeps": 2,
+      "tick": 11,
+      "seconds": 0.55,
+      "supply_voltage": -10.0,
+      "expected": -0.9926212910627158,
+      "actual": -0.9926212910627157,
+      "tolerance": 0.009926212910627159
+    },
+    {
+      "substeps": 2,
+      "tick": 12,
+      "seconds": 0.6000000000000001,
+      "supply_voltage": -10.0,
+      "expected": -0.995277626280138,
+      "actual": -0.995277626280138,
+      "tolerance": 0.009952776262801381
+    },
+    {
+      "substeps": 2,
+      "tick": 13,
+      "seconds": 0.65,
+      "supply_voltage": -10.0,
+      "expected": -0.9969776808192884,
+      "actual": -0.9969776808192884,
+      "tolerance": 0.009969776808192884
+    },
+    {
+      "substeps": 2,
+      "tick": 14,
+      "seconds": 0.7000000000000001,
+      "supply_voltage": -10.0,
+      "expected": -0.9980657157243445,
+      "actual": -0.9980657157243445,
+      "tolerance": 0.009980657157243446
+    },
+    {
+      "substeps": 2,
+      "tick": 15,
+      "seconds": 0.75,
+      "supply_voltage": -10.0,
+      "expected": -0.9987620580635805,
+      "actual": -0.9987620580635805,
+      "tolerance": 0.009987620580635806
+    },
+    {
+      "substeps": 2,
+      "tick": 16,
+      "seconds": 0.8,
+      "supply_voltage": -10.0,
+      "expected": -0.9992077171606916,
+      "actual": -0.9992077171606916,
+      "tolerance": 0.009992077171606916
+    },
+    {
+      "substeps": 2,
+      "tick": 17,
+      "seconds": 0.8500000000000001,
+      "supply_voltage": -10.0,
+      "expected": -0.9994929389828425,
+      "actual": -0.9994929389828426,
+      "tolerance": 0.009994929389828426
+    },
+    {
+      "substeps": 2,
+      "tick": 18,
+      "seconds": 0.9,
+      "supply_voltage": -10.0,
+      "expected": -0.9996754809490193,
+      "actual": -0.9996754809490193,
+      "tolerance": 0.009996754809490192
+    },
+    {
+      "substeps": 2,
+      "tick": 19,
+      "seconds": 0.9500000000000001,
+      "supply_voltage": -10.0,
+      "expected": -0.9997923078073723,
+      "actual": -0.9997923078073723,
+      "tolerance": 0.009997923078073723
+    },
+    {
+      "substeps": 2,
+      "tick": 20,
+      "seconds": 1.0,
+      "supply_voltage": -10.0,
+      "expected": -0.9998670769967183,
+      "actual": -0.9998670769967182,
+      "tolerance": 0.009998670769967183
+    },
+    {
+      "substeps": 2,
+      "tick": 21,
+      "seconds": 1.05,
+      "supply_voltage": -10.0,
+      "expected": -0.9999149292778997,
+      "actual": -0.9999149292778996,
+      "tolerance": 0.009999149292778998
+    },
+    {
+      "substeps": 2,
+      "tick": 22,
+      "seconds": 1.1,
+      "supply_voltage": -10.0,
+      "expected": -0.9999455547378558,
+      "actual": -0.9999455547378557,
+      "tolerance": 0.009999455547378558
+    },
+    {
+      "substeps": 2,
+      "tick": 23,
+      "seconds": 1.1500000000000001,
+      "supply_voltage": -10.0,
+      "expected": -0.9999651550322277,
+      "actual": -0.9999651550322276,
+      "tolerance": 0.009999651550322277
+    },
+    {
+      "substeps": 2,
+      "tick": 24,
+      "seconds": 1.2000000000000002,
+      "supply_voltage": -10.0,
+      "expected": -0.9999776992206257,
+      "actual": -0.9999776992206256,
+      "tolerance": 0.009999776992206258
+    },
+    {
+      "substeps": 2,
+      "tick": 25,
+      "seconds": 1.25,
+      "supply_voltage": -10.0,
+      "expected": -0.9999857275012005,
+      "actual": -0.9999857275012004,
+      "tolerance": 0.009999857275012005
+    },
+    {
+      "substeps": 2,
+      "tick": 26,
+      "seconds": 1.3,
+      "supply_voltage": -10.0,
+      "expected": -0.9999908656007683,
+      "actual": -0.9999908656007682,
+      "tolerance": 0.009999908656007684
+    },
+    {
+      "substeps": 2,
+      "tick": 27,
+      "seconds": 1.35,
+      "supply_voltage": -10.0,
+      "expected": -0.9999941539844918,
+      "actual": -0.9999941539844917,
+      "tolerance": 0.009999941539844917
+    },
+    {
+      "substeps": 2,
+      "tick": 28,
+      "seconds": 1.4000000000000001,
+      "supply_voltage": -10.0,
+      "expected": -0.9999962585500747,
+      "actual": -0.9999962585500747,
+      "tolerance": 0.009999962585500746
+    },
+    {
+      "substeps": 2,
+      "tick": 29,
+      "seconds": 1.4500000000000002,
+      "supply_voltage": -10.0,
+      "expected": -0.9999976054720479,
+      "actual": -0.9999976054720477,
+      "tolerance": 0.009999976054720479
+    },
+    {
+      "substeps": 2,
+      "tick": 30,
+      "seconds": 1.5,
+      "supply_voltage": -10.0,
+      "expected": -0.9999984675021106,
+      "actual": -0.9999984675021105,
+      "tolerance": 0.009999984675021107
+    },
+    {
+      "substeps": 16,
+      "tick": 1,
+      "seconds": 0.05,
+      "supply_voltage": 10.0,
+      "expected": 0.26657136642636503,
+      "actual": 0.26657136642636525,
+      "tolerance": 0.0026657136642636503
+    },
+    {
+      "substeps": 16,
+      "tick": 2,
+      "seconds": 0.1,
+      "supply_voltage": 10.0,
+      "expected": 0.5517353662119255,
+      "actual": 0.5517353662119259,
+      "tolerance": 0.005517353662119255
+    },
+    {
+      "substeps": 16,
+      "tick": 3,
+      "seconds": 0.15000000000000002,
+      "supply_voltage": 10.0,
+      "expected": 0.726024901801189,
+      "actual": 0.7260249018011891,
+      "tolerance": 0.00726024901801189
+    },
+    {
+      "substeps": 16,
+      "tick": 4,
+      "seconds": 0.2,
+      "supply_voltage": 10.0,
+      "expected": 0.8325490150790362,
+      "actual": 0.8325490150790364,
+      "tolerance": 0.008325490150790362
+    },
+    {
+      "substeps": 16,
+      "tick": 5,
+      "seconds": 0.25,
+      "supply_voltage": 10.0,
+      "expected": 0.8976555441157152,
+      "actual": 0.8976555441157152,
+      "tolerance": 0.008976555441157153
+    },
+    {
+      "substeps": 16,
+      "tick": 6,
+      "seconds": 0.30000000000000004,
+      "supply_voltage": 10.0,
+      "expected": 0.9374480379724599,
+      "actual": 0.9374480379724598,
+      "tolerance": 0.0093744803797246
+    },
+    {
+      "substeps": 16,
+      "tick": 7,
+      "seconds": 0.35000000000000003,
+      "supply_voltage": 10.0,
+      "expected": 0.9617688333023261,
+      "actual": 0.961768833302326,
+      "tolerance": 0.009617688333023261
+    },
+    {
+      "substeps": 16,
+      "tick": 8,
+      "seconds": 0.4,
+      "supply_voltage": 10.0,
+      "expected": 0.9766334730408327,
+      "actual": 0.9766334730408325,
+      "tolerance": 0.009766334730408327
+    },
+    {
+      "substeps": 16,
+      "tick": 9,
+      "seconds": 0.45,
+      "supply_voltage": 10.0,
+      "expected": 0.9857186000508137,
+      "actual": 0.9857186000508135,
+      "tolerance": 0.009857186000508137
+    },
+    {
+      "substeps": 16,
+      "tick": 10,
+      "seconds": 0.5,
+      "supply_voltage": 10.0,
+      "expected": 0.9912713436247914,
+      "actual": 0.9912713436247913,
+      "tolerance": 0.009912713436247915
+    },
+    {
+      "substeps": 16,
+      "tick": 11,
+      "seconds": 0.55,
+      "supply_voltage": 10.0,
+      "expected": 0.9946651279014974,
+      "actual": 0.9946651279014973,
+      "tolerance": 0.009946651279014975
+    },
+    {
+      "substeps": 16,
+      "tick": 12,
+      "seconds": 0.6000000000000001,
+      "supply_voltage": 10.0,
+      "expected": 0.996739376705421,
+      "actual": 0.9967393767054207,
+      "tolerance": 0.00996739376705421
+    },
+    {
+      "substeps": 16,
+      "tick": 13,
+      "seconds": 0.65,
+      "supply_voltage": 10.0,
+      "expected": 0.9980071379270488,
+      "actual": 0.9980071379270486,
+      "tolerance": 0.009980071379270488
+    },
+    {
+      "substeps": 16,
+      "tick": 14,
+      "seconds": 0.7000000000000001,
+      "supply_voltage": 10.0,
+      "expected": 0.9987819815774456,
+      "actual": 0.9987819815774451,
+      "tolerance": 0.009987819815774455
+    },
+    {
+      "substeps": 16,
+      "tick": 15,
+      "seconds": 0.75,
+      "supply_voltage": 10.0,
+      "expected": 0.999255558677232,
+      "actual": 0.9992555586772319,
+      "tolerance": 0.00999255558677232
+    },
+    {
+      "substeps": 16,
+      "tick": 16,
+      "seconds": 0.8,
+      "supply_voltage": 10.0,
+      "expected": 0.9995450045148887,
+      "actual": 0.9995450045148886,
+      "tolerance": 0.009995450045148888
+    },
+    {
+      "substeps": 16,
+      "tick": 17,
+      "seconds": 0.8500000000000001,
+      "supply_voltage": 10.0,
+      "expected": 0.9997219110692273,
+      "actual": 0.9997219110692269,
+      "tolerance": 0.009997219110692273
+    },
+    {
+      "substeps": 16,
+      "tick": 18,
+      "seconds": 0.9,
+      "supply_voltage": 10.0,
+      "expected": 0.9998300346795761,
+      "actual": 0.9998300346795759,
+      "tolerance": 0.00999830034679576
+    },
+    {
+      "substeps": 16,
+      "tick": 19,
+      "seconds": 0.9500000000000001,
+      "supply_voltage": 10.0,
+      "expected": 0.9998961188060722,
+      "actual": 0.999896118806072,
+      "tolerance": 0.009998961188060722
+    },
+    {
+      "substeps": 16,
+      "tick": 20,
+      "seconds": 1.0,
+      "supply_voltage": 10.0,
+      "expected": 0.9999365087982363,
+      "actual": 0.9999365087982361,
+      "tolerance": 0.009999365087982362
+    },
+    {
+      "substeps": 16,
+      "tick": 21,
+      "seconds": 1.05,
+      "supply_voltage": 10.0,
+      "expected": 0.999961194778872,
+      "actual": 0.9999611947788718,
+      "tolerance": 0.009999611947788721
+    },
+    {
+      "substeps": 16,
+      "tick": 22,
+      "seconds": 1.1,
+      "supply_voltage": 10.0,
+      "expected": 0.9999762826164105,
+      "actual": 0.9999762826164103,
+      "tolerance": 0.009999762826164105
+    },
+    {
+      "substeps": 16,
+      "tick": 23,
+      "seconds": 1.1500000000000001,
+      "supply_voltage": 10.0,
+      "expected": 0.9999855041598017,
+      "actual": 0.9999855041598013,
+      "tolerance": 0.009999855041598017
+    },
+    {
+      "substeps": 16,
+      "tick": 24,
+      "seconds": 1.2000000000000002,
+      "supply_voltage": 10.0,
+      "expected": 0.9999911402797758,
+      "actual": 0.9999911402797755,
+      "tolerance": 0.009999911402797757
+    },
+    {
+      "substeps": 16,
+      "tick": 25,
+      "seconds": 1.25,
+      "supply_voltage": 10.0,
+      "expected": 0.9999945850229184,
+      "actual": 0.9999945850229183,
+      "tolerance": 0.009999945850229184
+    },
+    {
+      "substeps": 16,
+      "tick": 26,
+      "seconds": 1.3,
+      "supply_voltage": 10.0,
+      "expected": 0.9999966904172984,
+      "actual": 0.9999966904172984,
+      "tolerance": 0.009999966904172984
+    },
+    {
+      "substeps": 16,
+      "tick": 27,
+      "seconds": 1.35,
+      "supply_voltage": 10.0,
+      "expected": 0.9999979772144013,
+      "actual": 0.9999979910015925,
+      "tolerance": 0.009999979772144013
+    },
+    {
+      "substeps": 16,
+      "tick": 28,
+      "seconds": 1.4000000000000001,
+      "supply_voltage": 10.0,
+      "expected": 0.9999987636926019,
+      "actual": 0.999998787849585,
+      "tolerance": 0.009999987636926019
+    },
+    {
+      "substeps": 16,
+      "tick": 29,
+      "seconds": 1.4500000000000002,
+      "supply_voltage": 10.0,
+      "expected": 0.9999992443806286,
+      "actual": 0.9999992732466969,
+      "tolerance": 0.009999992443806286
+    },
+    {
+      "substeps": 16,
+      "tick": 30,
+      "seconds": 1.5,
+      "supply_voltage": 10.0,
+      "expected": 0.9999995381725975,
+      "actual": 0.9999995768517156,
+      "tolerance": 0.009999995381725975
+    },
+    {
+      "substeps": 16,
+      "tick": 1,
+      "seconds": 0.05,
+      "supply_voltage": 0.0,
+      "expected": 0.6111902693538058,
+      "actual": 0.6111902693538055,
+      "tolerance": 0.006111902693538058
+    },
+    {
+      "substeps": 16,
+      "tick": 2,
+      "seconds": 0.1,
+      "supply_voltage": 0.0,
+      "expected": 0.3735537034213864,
+      "actual": 0.37355370342138605,
+      "tolerance": 0.003735537034213864
+    },
+    {
+      "substeps": 16,
+      "tick": 3,
+      "seconds": 0.15000000000000002,
+      "supply_voltage": 0.0,
+      "expected": 0.22831248522226527,
+      "actual": 0.2283124852222649,
+      "tolerance": 0.0022831248522226528
+    },
+    {
+      "substeps": 16,
+      "tick": 4,
+      "seconds": 0.2,
+      "supply_voltage": 0.0,
+      "expected": 0.13954242838697228,
+      "actual": 0.139542428386972,
+      "tolerance": 0.0013954242838697228
+    },
+    {
+      "substeps": 16,
+      "tick": 5,
+      "seconds": 0.25,
+      "supply_voltage": 0.0,
+      "expected": 0.0852870104811699,
+      "actual": 0.08528701048116968,
+      "tolerance": 8.528701048116991E-4
+    },
+    {
+      "substeps": 16,
+      "tick": 6,
+      "seconds": 0.30000000000000004,
+      "supply_voltage": 0.0,
+      "expected": 0.05212661296565394,
+      "actual": 0.052126612965653796,
+      "tolerance": 5.212661296565395E-4
+    },
+    {
+      "substeps": 16,
+      "tick": 7,
+      "seconds": 0.35000000000000003,
+      "supply_voltage": 0.0,
+      "expected": 0.031859292100184414,
+      "actual": 0.0318592921001843,
+      "tolerance": 3.1859292100184415E-4
+    },
+    {
+      "substeps": 16,
+      "tick": 8,
+      "seconds": 0.4,
+      "supply_voltage": 0.0,
+      "expected": 0.019472097559717964,
+      "actual": 0.01947209755971789,
+      "tolerance": 1.9472097559717965E-4
+    },
+    {
+      "substeps": 16,
+      "tick": 9,
+      "seconds": 0.45,
+      "supply_voltage": 0.0,
+      "expected": 0.011901161588363718,
+      "actual": 0.011901161588363665,
+      "tolerance": 1.1901161588363718E-4
+    },
+    {
+      "substeps": 16,
+      "tick": 10,
+      "seconds": 0.5,
+      "supply_voltage": 0.0,
+      "expected": 0.00727387723474386,
+      "actual": 0.007273877234743827,
+      "tolerance": 7.27387723474386E-5
+    },
+    {
+      "substeps": 16,
+      "tick": 11,
+      "seconds": 0.55,
+      "supply_voltage": 0.0,
+      "expected": 0.004445724867550466,
+      "actual": 0.004445724867550444,
+      "tolerance": 4.4457248675504665E-5
+    },
+    {
+      "substeps": 16,
+      "tick": 12,
+      "seconds": 0.6000000000000001,
+      "supply_voltage": 0.0,
+      "expected": 0.002717184929043223,
+      "actual": 0.0027171849290432088,
+      "tolerance": 2.7171849290432233E-5
+    },
+    {
+      "substeps": 16,
+      "tick": 13,
+      "seconds": 0.65,
+      "supply_voltage": 0.0,
+      "expected": 0.0016607176913958715,
+      "actual": 0.001660717691395862,
+      "tolerance": 1.6607176913958715E-5
+    },
+    {
+      "substeps": 16,
+      "tick": 14,
+      "seconds": 0.7000000000000001,
+      "supply_voltage": 0.0,
+      "expected": 0.0010150149226266962,
+      "actual": 0.00101501492262669,
+      "tolerance": 1.0150149226266963E-5
+    },
+    {
+      "substeps": 16,
+      "tick": 15,
+      "seconds": 0.75,
+      "supply_voltage": 0.0,
+      "expected": 6.203675064657888E-4,
+      "actual": 6.203675064657847E-4,
+      "tolerance": 6.2036750646578885E-6
+    },
+    {
+      "substeps": 16,
+      "tick": 16,
+      "seconds": 0.8,
+      "supply_voltage": 0.0,
+      "expected": 3.791627438172389E-4,
+      "actual": 3.7916274381723616E-4,
+      "tolerance": 3.7916274381723895E-6
+    },
+    {
+      "substeps": 16,
+      "tick": 17,
+      "seconds": 0.8500000000000001,
+      "supply_voltage": 0.0,
+      "expected": 2.3174067758325646E-4,
+      "actual": 2.3174067758325461E-4,
+      "tolerance": 2.3174067758325645E-6
+    },
+    {
+      "substeps": 16,
+      "tick": 18,
+      "seconds": 0.9,
+      "supply_voltage": 0.0,
+      "expected": 1.4163770708609675E-4,
+      "actual": 1.4163770708609555E-4,
+      "tolerance": 1.4163770708609674E-6
+    },
+    {
+      "substeps": 16,
+      "tick": 19,
+      "seconds": 0.9500000000000001,
+      "supply_voltage": 0.0,
+      "expected": 8.65676249755489E-5,
+      "actual": 8.656762497554812E-5,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 16,
+      "tick": 20,
+      "seconds": 1.0,
+      "supply_voltage": 0.0,
+      "expected": 5.290931241460976E-5,
+      "actual": 5.290931241460925E-5,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 16,
+      "tick": 21,
+      "seconds": 1.05,
+      "supply_voltage": 0.0,
+      "expected": 3.2337670589639826E-5,
+      "actual": 3.23376705896395E-5,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 16,
+      "tick": 22,
+      "seconds": 1.1,
+      "supply_voltage": 0.0,
+      "expected": 1.9764477961261555E-5,
+      "actual": 1.976447796126134E-5,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 16,
+      "tick": 23,
+      "seconds": 1.1500000000000001,
+      "supply_voltage": 0.0,
+      "expected": 1.207986172035357E-5,
+      "actual": 1.2079861720353438E-5,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 16,
+      "tick": 24,
+      "seconds": 1.2000000000000002,
+      "supply_voltage": 0.0,
+      "expected": 7.383097062764482E-6,
+      "actual": 7.383097062764399E-6,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 16,
+      "tick": 25,
+      "seconds": 1.25,
+      "supply_voltage": 0.0,
+      "expected": 4.5124789919040596E-6,
+      "actual": 4.512478991904009E-6,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 16,
+      "tick": 26,
+      "seconds": 1.3,
+      "supply_voltage": 0.0,
+      "expected": 2.757984417551607E-6,
+      "actual": 2.7526003594549484E-6,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 16,
+      "tick": 27,
+      "seconds": 1.35,
+      "supply_voltage": 0.0,
+      "expected": 1.685653952318544E-6,
+      "actual": 1.669264640295106E-6,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 16,
+      "tick": 28,
+      "seconds": 1.4000000000000001,
+      "supply_voltage": 0.0,
+      "expected": 1.0302557291058223E-6,
+      "actual": 1.0040919462070297E-6,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 16,
+      "tick": 29,
+      "seconds": 1.4500000000000002,
+      "supply_voltage": 0.0,
+      "expected": 6.29682543024577E-7,
+      "actual": 5.981264472747294E-7,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 16,
+      "tick": 30,
+      "seconds": 1.5,
+      "supply_voltage": 0.0,
+      "expected": 3.8485600592973924E-7,
+      "actual": 3.4701220329492547E-7,
+      "tolerance": 1.0E-6
+    },
+    {
+      "substeps": 16,
+      "tick": 1,
+      "seconds": 0.05,
+      "supply_voltage": -10.0,
+      "expected": -0.38880925993139914,
+      "actual": -0.38880925993139925,
+      "tolerance": 0.0038880925993139913
+    },
+    {
+      "substeps": 16,
+      "tick": 2,
+      "seconds": 0.1,
+      "supply_voltage": -10.0,
+      "expected": -0.6264460088821895,
+      "actual": -0.6264460088821897,
+      "tolerance": 0.006264460088821895
+    },
+    {
+      "substeps": 16,
+      "tick": 3,
+      "seconds": 0.15000000000000002,
+      "supply_voltage": -10.0,
+      "expected": -0.7716873389404054,
+      "actual": -0.7716873389404054,
+      "tolerance": 0.007716873389404054
+    },
+    {
+      "substeps": 16,
+      "tick": 4,
+      "seconds": 0.2,
+      "supply_voltage": -10.0,
+      "expected": -0.8604574641429176,
+      "actual": -0.8604574641429177,
+      "tolerance": 0.008604574641429176
+    },
+    {
+      "substeps": 16,
+      "tick": 5,
+      "seconds": 0.25,
+      "supply_voltage": -10.0,
+      "expected": -0.9147129238341167,
+      "actual": -0.9147129238341166,
+      "tolerance": 0.009147129238341168
+    },
+    {
+      "substeps": 16,
+      "tick": 6,
+      "seconds": 0.30000000000000004,
+      "supply_voltage": -10.0,
+      "expected": -0.9478733468884715,
+      "actual": -0.9478733468884715,
+      "tolerance": 0.009478733468884715
+    },
+    {
+      "substeps": 16,
+      "tick": 7,
+      "seconds": 0.35000000000000003,
+      "supply_voltage": -10.0,
+      "expected": -0.9681406833630373,
+      "actual": -0.9681406833630372,
+      "tolerance": 0.009681406833630373
+    },
+    {
+      "substeps": 16,
+      "tick": 8,
+      "seconds": 0.4,
+      "supply_voltage": -10.0,
+      "expected": -0.9805278874436355,
+      "actual": -0.9805278874436354,
+      "tolerance": 0.009805278874436356
+    },
+    {
+      "substeps": 16,
+      "tick": 9,
+      "seconds": 0.45,
+      "supply_voltage": -10.0,
+      "expected": -0.988098829245828,
+      "actual": -0.9880988292458279,
+      "tolerance": 0.00988098829245828
+    },
+    {
+      "substeps": 16,
+      "tick": 10,
+      "seconds": 0.5,
+      "supply_voltage": -10.0,
+      "expected": -0.9927261171632009,
+      "actual": -0.9927261171632008,
+      "tolerance": 0.009927261171632009
+    },
+    {
+      "substeps": 16,
+      "tick": 11,
+      "seconds": 0.55,
+      "supply_voltage": -10.0,
+      "expected": -0.9955542717085265,
+      "actual": -0.9955542717085263,
+      "tolerance": 0.009955542717085266
+    },
+    {
+      "substeps": 16,
+      "tick": 12,
+      "seconds": 0.6000000000000001,
+      "supply_voltage": -10.0,
+      "expected": -0.9972828129782875,
+      "actual": -0.9972828129782872,
+      "tolerance": 0.009972828129782875
+    },
+    {
+      "substeps": 16,
+      "tick": 13,
+      "seconds": 0.65,
+      "supply_voltage": -10.0,
+      "expected": -0.9983392810295845,
+      "actual": -0.9983392810295842,
+      "tolerance": 0.009983392810295845
+    },
+    {
+      "substeps": 16,
+      "tick": 14,
+      "seconds": 0.7000000000000001,
+      "supply_voltage": -10.0,
+      "expected": -0.9989849842956486,
+      "actual": -0.9989849842956484,
+      "tolerance": 0.009989849842956486
+    },
+    {
+      "substeps": 16,
+      "tick": 15,
+      "seconds": 0.75,
+      "supply_voltage": -10.0,
+      "expected": -0.9993796320157514,
+      "actual": -0.9993796320157511,
+      "tolerance": 0.009993796320157514
+    },
+    {
+      "substeps": 16,
+      "tick": 16,
+      "seconds": 0.8,
+      "supply_voltage": -10.0,
+      "expected": -0.9996208369641665,
+      "actual": -0.9996208369641664,
+      "tolerance": 0.009996208369641666
+    },
+    {
+      "substeps": 16,
+      "tick": 17,
+      "seconds": 0.8500000000000001,
+      "supply_voltage": -10.0,
+      "expected": -0.9997682591439392,
+      "actual": -0.9997682591439392,
+      "tolerance": 0.009997682591439391
+    },
+    {
+      "substeps": 16,
+      "tick": 18,
+      "seconds": 0.9,
+      "supply_voltage": -10.0,
+      "expected": -0.9998583621838301,
+      "actual": -0.9998583621838298,
+      "tolerance": 0.009998583621838301
+    },
+    {
+      "substeps": 16,
+      "tick": 19,
+      "seconds": 0.9500000000000001,
+      "supply_voltage": -10.0,
+      "expected": -0.9999134323083535,
+      "actual": -0.9999134323083534,
+      "tolerance": 0.009999134323083535
+    },
+    {
+      "substeps": 16,
+      "tick": 20,
+      "seconds": 1.0,
+      "supply_voltage": -10.0,
+      "expected": -0.9999470906468367,
+      "actual": -0.9999470906468366,
+      "tolerance": 0.009999470906468367
+    },
+    {
+      "substeps": 16,
+      "tick": 21,
+      "seconds": 1.05,
+      "supply_voltage": -10.0,
+      "expected": -0.9999676623045052,
+      "actual": -0.999967662304505,
+      "tolerance": 0.009999676623045052
+    },
+    {
+      "substeps": 16,
+      "tick": 22,
+      "seconds": 1.1,
+      "supply_voltage": -10.0,
+      "expected": -0.9999802355068169,
+      "actual": -0.9999802355068165,
+      "tolerance": 0.00999980235506817
+    },
+    {
+      "substeps": 16,
+      "tick": 23,
+      "seconds": 1.1500000000000001,
+      "supply_voltage": -10.0,
+      "expected": -0.9999879201289762,
+      "actual": -0.9999879201289759,
+      "tolerance": 0.009999879201289762
+    },
+    {
+      "substeps": 16,
+      "tick": 24,
+      "seconds": 1.2000000000000002,
+      "supply_voltage": -10.0,
+      "expected": -0.999992616897251,
+      "actual": -0.9999926168972508,
+      "tolerance": 0.00999992616897251
+    },
+    {
+      "substeps": 16,
+      "tick": 25,
+      "seconds": 1.25,
+      "supply_voltage": -10.0,
+      "expected": -0.9999954875175328,
+      "actual": -0.9999954875175324,
+      "tolerance": 0.009999954875175328
+    },
+    {
+      "substeps": 16,
+      "tick": 26,
+      "seconds": 1.3,
+      "supply_voltage": -10.0,
+      "expected": -0.9999972420134584,
+      "actual": -0.9999972473975203,
+      "tolerance": 0.009999972420134584
+    },
+    {
+      "substeps": 16,
+      "tick": 27,
+      "seconds": 1.35,
+      "supply_voltage": -10.0,
+      "expected": -0.9999983143447495,
+      "actual": -0.999998330734074,
+      "tolerance": 0.009999983143447496
+    },
+    {
+      "substeps": 16,
+      "tick": 28,
+      "seconds": 1.4000000000000001,
+      "supply_voltage": -10.0,
+      "expected": -0.9999989697434775,
+      "actual": -0.9999989959072804,
+      "tolerance": 0.009999989697434776
+    },
+    {
+      "substeps": 16,
+      "tick": 29,
+      "seconds": 1.4500000000000002,
+      "supply_voltage": -10.0,
+      "expected": -0.9999993703169721,
+      "actual": -0.999999401873092,
+      "tolerance": 0.00999999370316972
+    },
+    {
+      "substeps": 16,
+      "tick": 30,
+      "seconds": 1.5,
+      "supply_voltage": -10.0,
+      "expected": -0.9999996151436976,
+      "actual": -0.9999996529875292,
+      "tolerance": 0.009999996151436976
+    }
+  ]
+}
