@@ -27,7 +27,6 @@ import java.util.Map;
 public final class ApiTerminals {
     private static final Map<Level, Map<BlockPos, ApiElectric>> HOLDERS = new IdentityHashMap<>();
     private static final Map<Level, Map<BlockPos, String>> FAILURES = new IdentityHashMap<>();
-    private static final Map<Level, Map<ApiTerminalIdentities.Owner, PendingRemoval>> PENDING = new IdentityHashMap<>();
 
     private ApiTerminals() {}
 
@@ -65,6 +64,10 @@ public final class ApiTerminals {
 
     /** Native wire discovery; allocates geometry only, never advances electrical state. */
     public static ApiElectric get(Level level, BlockPos pos) {
+        // Native PG entity deserialization queries endpoint validity on its IO
+        // worker. Leave those endpoints unresolved until the native server tick:
+        // provider discovery, sidecars, and their SavedData belong to that thread.
+        if (level instanceof ServerLevel server && !server.getServer().isSameThread()) return null;
         var device = device(level, pos);
         if (device == null) return null;
         try {
@@ -99,6 +102,41 @@ public final class ApiTerminals {
                 && level.getChunkSource().isPositionTicking(chunk) && level.areEntitiesLoaded(chunk);
     }
 
+    /** Player wiring waits for physical readiness and safe retirement of any previous incarnation. */
+    public static boolean canWire(ServerLevel level,BlockPos pos) {
+        return ready(level,pos)&&!pendingRemoval(level,pos);
+    }
+
+    /** Test either end of a player connection without loading a selected endpoint's chunk. */
+    public static boolean blockedWireEndpoint(ServerLevel level,BlockPos pos) {
+        if(pos==null)return false;
+        if(level.getChunkSource().getChunkNow(pos.getX()>>4,pos.getZ()>>4)==null)
+            return existing(level,pos)!=null||!ApiTerminalIdentities.get(level).ownersAt(pos).isEmpty()
+                    ||pendingRemoval(level,pos);
+        var block=Terminals.loadedState(level,pos).getBlock();
+        // An upstream replacement owns its native readiness semantics. Saved
+        // API retirement does not acquire the new owner's wires.
+        if(Terminals.nativePg(level,pos)!=null||block instanceof ElectricalDeviceBlock<?>)return false;
+        return ElectricalProviders.registeredBlocks().contains(block)?!canWire(level,pos):pendingRemoval(level,pos);
+    }
+
+    /** Read-only lifecycle diagnostic; pending retirement survives world/chunk unload. */
+    public static boolean pendingRemoval(ServerLevel level,BlockPos pos) {
+        return ApiTerminalIdentities.get(level).pendingRemovals().keySet().stream().anyMatch(owner->owner.position().equals(pos));
+    }
+
+    public static java.util.Set<WorldNetworks.PartId> pendingPgWireIdentities(ServerLevel level,BlockPos pos) {
+        var ids=new java.util.HashSet<WorldNetworks.PartId>();
+        ApiTerminalIdentities.get(level).pendingRemovals().forEach((owner,scope)->{if(owner.position().equals(pos))ids.addAll(scope.pgWires());});
+        return java.util.Set.copyOf(ids);
+    }
+
+    public static java.util.Set<java.util.UUID> pendingCeeWireIdentities(ServerLevel level,BlockPos pos) {
+        var ids=new java.util.HashSet<java.util.UUID>();
+        ApiTerminalIdentities.get(level).pendingRemovals().forEach((owner,scope)->{if(owner.position().equals(pos))ids.addAll(scope.ceeWires());});
+        return java.util.Set.copyOf(ids);
+    }
+
     public static BlockEntity loadedBlockEntity(Level level, BlockPos pos) {
         if (level instanceof ServerLevel server) {
             var chunk = server.getChunkSource().getChunkNow(pos.getX() >> 4, pos.getZ() >> 4);
@@ -127,9 +165,42 @@ public final class ApiTerminals {
         return entries == null ? null : entries.get(pos);
     }
 
+    /** Persisted terminal identity lookup used before native CEE geometry can request an owner chunk. */
+    public static boolean knownSavedTerminal(ServerLevel level,BlockPos pos,int nativeId) {
+        var identities=ApiTerminalIdentities.get(level);
+        for(var owner:identities.ownersAt(pos))if(identities.history(owner).containsKey(nativeId))return true;
+        // A queued physical removal can outlive active terminal history.
+        return identities.pendingRemovals().keySet().stream().anyMatch(owner->owner.position().equals(pos));
+    }
+
     /** Internal acceptance diagnostic: reports the format actually read from disk. */
     public static java.util.OptionalInt savedOwnershipFormat(ServerLevel level) {
         return ApiTerminalIdentities.get(level).loadedFormat();
+    }
+
+    /** Read-only saved wire identity diagnostic; never resolves terminals or creates native graph nodes. */
+    public static java.util.Set<WorldNetworks.PartId> savedPgWireIdentities(ServerLevel level,BlockPos pos) {
+        var identities=ApiTerminalIdentities.get(level);var ids=new java.util.HashSet<WorldNetworks.PartId>();
+        for(var owner:identities.ownersAt(pos))ids.addAll(identities.pgWires(owner));
+        return java.util.Set.copyOf(ids);
+    }
+
+    /** Physical block removal only. Queue exact ownership while it is still distinguishable from a new incarnation. */
+    public static void ownerRemoved(ServerLevel level,BlockPos pos,net.minecraft.world.level.block.state.BlockState previous) {
+        String block=net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(previous.getBlock()).toString();
+        var identities=ApiTerminalIdentities.get(level);
+        var adapter=existing(level,pos);
+        if(adapter!=null&&adapter.persistentOwner().block().equals(block))adapter.captureReplacementParts();
+        var owners=new java.util.HashSet<>(identities.ownersAt(pos));
+        if(adapter!=null)owners.add(adapter.persistentOwner());
+        for(var owner:owners) {
+            if(!owner.block().equals(block))continue;
+            var pg=new java.util.HashSet<>(identities.pgWires(owner));var cee=new java.util.HashSet<>(identities.ceeWires(owner));
+            if(adapter!=null&&adapter.persistentOwner().equals(owner)) {
+                pg.addAll(adapter.observedParts().keySet());cee.addAll(adapter.observedCeeWires());
+            }
+            identities.queueRemoval(owner,pg,cee);
+        }
     }
 
     /** Read-only pre-migration snapshot; native replacement wires must not inherit saved API wires. */
@@ -146,8 +217,7 @@ public final class ApiTerminals {
         var identities = ApiTerminalIdentities.get(server);
         for (var owner : identities.ownersAt(pos)) {
             if (owner.block().equals(net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(Terminals.loadedState(level, pos).getBlock()).toString())) continue;
-            PENDING.computeIfAbsent(level, ignored -> new HashMap<>()).computeIfAbsent(owner,
-                    ignored -> new PendingRemoval(identities.pgWires(owner), identities.ceeWires(owner)));
+            identities.queueRemoval(owner,identities.pgWires(owner),identities.ceeWires(owner));
         }
     }
 
@@ -284,10 +354,6 @@ public final class ApiTerminals {
         if (failures != null) failures.remove(pos);
     }
 
-    private record PendingRemoval(java.util.Set<WorldNetworks.PartId> pgWires, java.util.Set<java.util.UUID> ceeWires) {
-        PendingRemoval { pgWires=java.util.Set.copyOf(pgWires); ceeWires=java.util.Set.copyOf(ceeWires); }
-    }
-
     /** Detect unloaded-history replacements even when no wire tool or native lookup was used. */
     private static void queueReplacedSavedOwners(ServerLevel level) {
         var identities=ApiTerminalIdentities.get(level);
@@ -295,18 +361,20 @@ public final class ApiTerminals {
             var pos=owner.position();
             if(level.getChunkSource().getChunkNow(pos.getX()>>4,pos.getZ()>>4)==null||existing(level,pos)!=null)continue;
             String block=net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(Terminals.loadedState(level,pos).getBlock()).toString();
-            if(!owner.block().equals(block))PENDING.computeIfAbsent(level,ignored->new HashMap<>()).computeIfAbsent(owner,
-                    ignored->new PendingRemoval(identities.pgWires(owner),identities.ceeWires(owner)));
+            if(!owner.block().equals(block))identities.queueRemoval(owner,identities.pgWires(owner),identities.ceeWires(owner));
         }
     }
 
     /** Structural cleanup is deferred until the owning chunk and entities are ready. */
     private static void retirePending(ServerLevel level) {
-        var pending=PENDING.get(level);
-        if(pending==null)return;
-        for(var entry:List.copyOf(pending.entrySet())) {
+        var identities=ApiTerminalIdentities.get(level);
+        for(var entry:identities.pendingRemovals().entrySet()) {
             var owner=entry.getKey();var pos=owner.position();
             if(!ready(level,pos))continue;
+            var adapter=existing(level,pos);
+            // A same-block replacement can retain its cache key. Retire its
+            // old node objects before resolving a fresh incarnation.
+            if(adapter!=null&&adapter.persistentOwner().equals(owner))remove(level,pos);
             ApiCircuits.retireOwner(level,pos,owner.provider(),owner.slot());
             // This is the safe topology phase. Complete saved PG parts here so
             // they cannot reappear after cleanup and before the first solve.
@@ -322,10 +390,9 @@ public final class ApiTerminals {
                 } else part.remove();
             }
             retireCeeWires(level,entry.getValue().ceeWires());
-            ApiTerminalIdentities.get(level).forget(owner);
-            pending.remove(owner);
+            identities.forget(owner);
+            identities.finishRemoval(owner);
         }
-        if(pending.isEmpty())PENDING.remove(level);
     }
 
     private static void rememberRemovedPart(ServerLevel level,WorldNetworks.PartId id) {
@@ -355,6 +422,6 @@ public final class ApiTerminals {
         @Override public OwnedFloatingNode getNode(Level level) { return node; }
     }
 
-    public static void unload(Level level) { HOLDERS.remove(level); FAILURES.remove(level); PENDING.remove(level); }
-    public static void clear() { HOLDERS.clear(); FAILURES.clear(); PENDING.clear(); }
+    public static void unload(Level level) { HOLDERS.remove(level); FAILURES.remove(level); }
+    public static void clear() { HOLDERS.clear(); FAILURES.clear(); }
 }

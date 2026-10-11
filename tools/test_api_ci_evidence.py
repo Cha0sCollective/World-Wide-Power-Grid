@@ -4,7 +4,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from collect_api_ci_evidence import API_NAMESPACES, COMBINATIONS, EvidenceError, cold_replacement, cycles, log, marker, metadata, nonconvergence, packaged
+from collect_api_ci_evidence import API_NAMESPACES, COMBINATIONS, EvidenceError, checked_source, cold_replacement, cycles, log, marker, metadata, nonconvergence, packaged, pending_retirement
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -20,10 +20,12 @@ class EvidenceChecks(unittest.TestCase):
     def metadata_fixture(self):
         run = dict(id=42, head_sha='a' * 40, run_attempt=2, path='.github/workflows/build.yml',
                    html_url='https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/42', status='completed', conclusion='success')
-        steps = ['Build runtime and publish both SDK APIs to an isolated local Maven repository',
+        steps = ['Record the exact checked-out source and CI attempt',
+                 'Build runtime and publish both SDK APIs to an isolated local Maven repository',
                  'Build the general example independently against published Maven API artifacts',
                  'Build the CEE panel and PG board example independently against published APIs',
-                 'Verify global freeze and one-tick stepping in an isolated API fixture']
+                 'Verify global freeze and one-tick stepping in an isolated API fixture',
+                 'Verify stopped-before-ready persisted wire retirement']
         jobs, artifacts = [], []
         for index, (platform, backend, profile) in enumerate(sorted(COMBINATIONS)):
             jobs.append(dict(id=index + 100, run_id=42, run_attempt=2, name=f'build ({platform}, {backend}, {profile})',
@@ -104,6 +106,39 @@ class EvidenceChecks(unittest.TestCase):
         expected = dict(frozenCallbacks='0', steppedCommits='1', resumed='true', pausedMeasurementsUnavailable='true')
         marker(pause, 'API_PAUSE_PASSED', expected)
         with self.assertRaises(EvidenceError): marker(pause.replace('; pausedMeasurementsUnavailable=true', ''), 'API_PAUSE_PASSED', expected)
+
+    def test_actual_saved_before_ready_markers_require_both_systems_and_zero_charge(self):
+        armed = 'API_PENDING_RESTART_ARMED: actualInboxHeld=true, savedBeforeReady=true, replacementZeroCharge=true, nativePG=true, nativeCEE=true'
+        verified = 'API_PENDING_RESTART_PASSED: actualInboxHeld=true, savedBeforeReady=true, diskTombstonesVerified=true, nativePG=true, nativeCEE=true, replacementIsolated=true, replacementZeroCharge=true, newWiresPowered=true, ownershipVersion=2'
+        pending_retirement(armed, verified)
+        for first, second in [(armed.replace('savedBeforeReady=true', 'savedBeforeReady=false'), verified),
+                              (armed, verified.replace('diskTombstonesVerified=true', 'diskTombstonesVerified=false')),
+                              (armed, verified.replace('replacementZeroCharge=true', 'replacementZeroCharge=false')),
+                              (armed, verified.replace(', nativeCEE=true', '')),
+                              (armed, verified.replace('ownershipVersion=2', 'ownershipVersion=1')),
+                              (armed, verified + '\n' + verified)]:
+            with self.subTest(first=first, second=second), self.assertRaises(EvidenceError): pending_retirement(first, second)
+
+    def test_saved_before_ready_requires_three_fresh_phase_manifests(self):
+        namespace = {'wwpg_api_pending_restart'}
+        for number, phase in enumerate(['SETUP', 'ARM', 'VERIFY']):
+            self.proof(number, phase, namespaces='wwpg_api_pending_restart', required_tests_passed=1)
+        self.assertEqual(len(packaged(self.root, namespace, ['SETUP', 'ARM', 'VERIFY'], self.hashes, 'BASE', 'NATIVE', [])), 3)
+        self.proof(1, 'VERIFY', namespaces='wwpg_api_pending_restart', required_tests_passed=1)
+        with self.assertRaises(EvidenceError): packaged(self.root, namespace, ['SETUP', 'ARM', 'VERIFY'], self.hashes, 'BASE', 'NATIVE', [])
+
+    def test_run_head_metadata_cannot_substitute_for_actual_checkout_source(self):
+        path = self.root / 'ci-source.json'
+        value = dict(schema=1, source_sha='a' * 40, source_tree='b' * 40, run_id=42, run_attempt=2, event='pull_request')
+        path.write_text(json.dumps(value), encoding='utf-8')
+        evidence = []
+        self.assertEqual(checked_source(path, 'a' * 40, 42, 2, evidence), value)
+        self.assertEqual(evidence, [path])
+        for changes in [dict(source_sha='c' * 40), dict(run_attempt=1), dict(run_id=43), dict(source_tree='branch'), dict(event='workflow_dispatch')]:
+            path.write_text(json.dumps(dict(value, **changes)), encoding='utf-8')
+            with self.subTest(changes=changes), self.assertRaises(EvidenceError): checked_source(path, 'a' * 40, 42, 2, [])
+        path.unlink()
+        with self.assertRaises(EvidenceError): checked_source(path, 'a' * 40, 42, 2, [])
 
 
 if __name__ == '__main__': unittest.main()

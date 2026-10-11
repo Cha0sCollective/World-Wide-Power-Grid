@@ -58,9 +58,16 @@ public final class ApiCircuits {
     }
     public static void clear() { WORLDS.clear(); }
     public static int step(ServerLevel level,ElectricalNetwork network) { return get(level).steps.getOrDefault(network,0); }
+    /** Read-only lifecycle instrumentation; never creates a world manager or simulation objects. */
+    public static int objectCount(ServerLevel level,BlockPos pos) {
+        var owner=WORLDS.get(level);
+        var device=owner==null?null:owner.devices.get(pos);
+        return device==null?0:device.nodes.size()+device.elements.size()+device.grounds.size();
+    }
     public static DeviceResults results(ServerLevel level, BlockPos pos) {
         var owner = WORLDS.get(level);
-        if (owner != null && owner.ready(pos) && owner.preparedServerTick==level.getServer().getTickCount()) {
+        if (owner != null && !ApiTerminals.pendingRemoval(level,pos)
+                && owner.ready(pos) && owner.preparedServerTick==level.getServer().getTickCount()) {
             var failure = owner.failures.get(pos);
             if(failure!=null&&failure.context().equals(owner.context))return failure;
             var device = owner.devices.get(pos);

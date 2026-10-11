@@ -13,8 +13,29 @@ public abstract class PgWireRemovalMixin {
     @Inject(method = "makeWire", at = @At("HEAD"), cancellable = true)
     private void wwpg$discardDeletedWire(CallbackInfo ci) {
         var wire = (WireEntity) (Object) this;
-        if (wire.level() instanceof ServerLevel level && RemovedWires.get(level).contains(wire.getUUID())) {
-            wire.kill(); ci.cancel();
+        if (wire.level() instanceof ServerLevel level) {
+            // Minecraft deserializes saved entities on its IO worker. Native PG
+            // calls makeWire there from setEndpoint; retain its exact endpoints
+            // and use its first server tick to bind them, before reading SavedData
+            // or changing the shared electrical graph.
+            if (!level.getServer().isSameThread()) {
+                wire.redeferEndpoints();
+                ci.cancel();
+                return;
+            }
+            if (RemovedWires.get(level).contains(wire.getUUID())) {
+                wire.kill(); ci.cancel();return;
+            }
+            // EntityStorage.flush can drain deserialization on the server
+            // thread. Read-only geometry can exist before that inbox is ready;
+            // native wire binding must still wait for either API owner.
+            if(wire.getEndpoint1() instanceof org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint first
+                    &&org.cha0scollective.wwpg.extension.ApiTerminals.blockedWireEndpoint(level,first.getPos())
+                    ||wire.getEndpoint2() instanceof org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint second
+                    &&org.cha0scollective.wwpg.extension.ApiTerminals.blockedWireEndpoint(level,second.getPos())) {
+                wire.redeferEndpoints();ci.cancel();
+            }
         }
     }
+
 }

@@ -10,7 +10,7 @@ import unittest
 import zipfile
 
 from verify_api_compatibility import ContractError, compare, snapshot
-from package_api_release import BEHAVIORS, COMBINATIONS, PublicationError, locked_file, package_example, package_maven, validate_release, validate_api_metadata, validate_version_accessor
+from package_api_release import BEHAVIORS, COMBINATIONS, PublicationError, collect_locked_evidence, locked_file, package_example, package_maven, validate_release, validate_api_metadata, validate_version_accessor
 
 PREFIX = 'example/api/'
 ROOT = Path(__file__).resolve().parents[1]
@@ -176,14 +176,20 @@ class PublicationGateChecks(unittest.TestCase):
                 regression_checks_passed=208 if profile == 'PINOUT' else 204, extension_checks_passed=10,
                 cold_restart_passes=3, actual_chunk_reload_cycles=5, api_fixture_behaviors=sorted(BEHAVIORS),
                 independent_cee_solves=0, exactly_once_history=True, cee_property_adapter_verified=True,
-                api_namespaces_passed=['wwpg_api', 'wwpg_api_faults', 'wwpg_api_restart', 'wwpg_api_upstream', 'wwpg_api_upstream_restart', 'wwpg_api_pause'],
+                api_namespaces_passed=['wwpg_api', 'wwpg_api_faults', 'wwpg_api_restart', 'wwpg_api_upstream', 'wwpg_api_upstream_restart', 'wwpg_api_pause', 'wwpg_api_pending_restart'],
                 global_pause_verified=True, nonconverging_backend_verified=True, paused_measurements_unavailable=True,
-                cold_wire_systems_verified=['CEE', 'POWER_GRID'], cold_ownership_format_version=2)
+                cold_wire_systems_verified=['CEE', 'POWER_GRID'], cold_ownership_format_version=2,
+                checked_out_source_verified=True, source_tree='c' * 40,
+                pending_wire_retirement_verified=True, pending_entity_restart_phases=['SETUP', 'ARM', 'VERIFY'],
+                pending_entity_restart=self.pending_restart(i, backend, profile),
+                checked_out_source=self.lock(f'checkout-{i}.json', dict(schema=1, source_sha=self.source, source_tree='c' * 40,
+                    run_id=123, run_attempt=1, event='pull_request')))
             self.records[f'job-{i}'] = record
             self.jobs.append(dict(platform=platform, backend=backend, profile=profile, status='completed',
                                   conclusion='success', proof=self.lock(f'job-{i}.json', record)))
         self.ci = dict(source_sha=self.source, status='completed', conclusion='success',
-                       url='https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/123', jobs=self.jobs)
+                       url='https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/123', jobs=self.jobs,
+                       run_id=123, run_attempt=1, source_tree='c' * 40)
         self.manifest['ci'] = self.lock('ci.json', self.ci)
         independent = self.proof(uses_published_api_only=True, uses_wwpg_project_classes=False,
             compiled_against_api_sha256=self.hashes['api'], functional_behaviors=sorted(BEHAVIORS),
@@ -230,6 +236,23 @@ class PublicationGateChecks(unittest.TestCase):
             dependency_proof=self.lock(role + '-dependencies.json', dict(api_dependencies=deps,
                 wwpg_project_dependencies=[], compiled_source_count=1)))
 
+    def pending_restart(self, index, backend, profile):
+        folder = self.root / ('pending-' + str(index)); folder.mkdir()
+        oracle = folder / 'extension-api-pending-before-restart.nbt'; oracle.write_bytes(b'TEST_ONLY_SAVED_ORACLE')
+        phases = []
+        for phase in ['SETUP', 'ARM', 'VERIFY']:
+            record = dict(completed='TEST_ONLY', required_tests_passed=1, phase=phase,
+                namespaces='wwpg_api_pending_restart', artifact='wwpg-0.2.0.jar', sha256=self.hashes['runtime'],
+                profile=profile, backend=backend,
+                addon_artifacts={role: dict(sha256=self.hashes[role]) for role in ['example', 'upstream_example']})
+            log = folder / (phase.lower() + '.log')
+            text = 'TEST ONLY\nGAME TESTS COMPLETE\nAll 1 required tests passed\n'
+            if phase == 'ARM': text += 'API_PENDING_RESTART_ARMED: actualInboxHeld=true, savedBeforeReady=true, replacementZeroCharge=true, nativePG=true, nativeCEE=true\n'
+            if phase == 'VERIFY': text += 'API_PENDING_RESTART_PASSED: actualInboxHeld=true, savedBeforeReady=true, diskTombstonesVerified=true, nativePG=true, nativeCEE=true, replacementIsolated=true, replacementZeroCharge=true, newWiresPowered=true, ownershipVersion=2\n'
+            log.write_text(text, encoding='utf-8')
+            phases.append(dict(phase=phase, manifest=self.lock(f'pending-{index}/{phase.lower()}.json', record), log=self.describe(log)))
+        return dict(oracle=self.describe(oracle), phases=phases)
+
     def describe(self, path):
         import hashlib
         return dict(path=path.relative_to(self.root).as_posix(), bytes=path.stat().st_size,
@@ -258,6 +281,9 @@ class PublicationGateChecks(unittest.TestCase):
                            ('exactly_once_history', False), ('global_pause_verified', False), ('nonconverging_backend_verified', False),
                            ('paused_measurements_unavailable', False), ('cold_wire_systems_verified', ['POWER_GRID']),
                            ('cold_ownership_format_version', 1), ('api_namespaces_passed', ['wwpg_api']), ('regression_checks_passed', 0),
+                           ('checked_out_source_verified', False), ('source_tree', 'd' * 40), ('checked_out_source', {}),
+                           ('pending_wire_retirement_verified', False), ('pending_entity_restart_phases', ['SETUP', 'VERIFY']),
+                           ('pending_entity_restart', {}),
                            ('unresolved_failures', ['unexplained failure']), ('api_fixture_behaviors', ['machine'])]:
             self.change_job(key, value)
             with self.subTest(key=key), self.assertRaises(PublicationError): validate_release(self.manifest, self.root)
@@ -290,6 +316,39 @@ class PublicationGateChecks(unittest.TestCase):
         (self.root / descriptor['path']).write_text('{}', encoding='utf-8')
         with self.assertRaises(PublicationError): validate_release(self.manifest, self.root)
         with self.assertRaises(PublicationError): locked_file(dict(path='../ci.json', sha256='1' * 64, bytes=0), self.root)
+
+    def test_checkout_record_of_another_attempt_cannot_certify_frozen_ci(self):
+        record = self.records['job-0']
+        path = record['checked_out_source']['path']
+        value = json.loads((self.root / path).read_text(encoding='utf-8'))
+        value['run_attempt'] = 2
+        self.change_job('checked_out_source', self.lock(path, value))
+        with self.assertRaises(PublicationError): validate_release(self.manifest, self.root)
+
+    def test_pending_restart_flags_cannot_replace_retained_shutdown_assertions(self):
+        retained = self.records['job-0']['pending_entity_restart']
+        item = retained['phases'][1]
+        path = self.root / item['log']['path']
+        text = path.read_text(encoding='utf-8')
+        path.write_text(text.replace('savedBeforeReady=true', 'savedBeforeReady=false'), encoding='utf-8')
+        item['log'] = self.describe(path)
+        self.change_job('pending_entity_restart', retained)
+        with self.assertRaises(PublicationError): validate_release(self.manifest, self.root)
+
+    def test_package_retains_transitive_sdk_logs_and_relative_client_media(self):
+        sdk_log = self.root / 'sdk.log'; sdk_log.write_bytes(b'TEST_ONLY_SDK_LOG')
+        dependency = self.lock('deps.json', dict(build_log=self.describe(sdk_log)))
+        child = self.lock('sdk-proof.json', dict(dependency_proof=dependency, repeated_dependency=dependency))
+        client_log = self.root / 'client.log.gz'; client_log.write_bytes(b'TEST_ONLY_CLIENT_LOG')
+        shot = self.root / 'shot.png'; shot.write_bytes(b'TEST_ONLY_SCREENSHOT')
+        media = lambda path: dict(file=path.name, sha256=self.describe(path)['sha256'], bytes=path.stat().st_size)
+        client = self.lock('client-proof.json', dict(logs=dict(graphical=media(client_log)), screenshots=dict(station=media(shot))))
+        result = collect_locked_evidence(dict(sdk=child, client=client), self.root)
+        self.assertEqual(set(result), {'evidence/sdk.log', 'evidence/deps.json', 'evidence/sdk-proof.json',
+            'evidence/client-proof.json', 'evidence/client.log.gz', 'evidence/shot.png'})
+        self.assertEqual(result['evidence/client.log.gz'], b'TEST_ONLY_CLIENT_LOG')
+        sdk_log.write_bytes(b'CHANGED_AFTER_PROOF')
+        with self.assertRaises(PublicationError): collect_locked_evidence(child, self.root)
 
     def test_incomplete_stages_and_unresolved_failures_block_freeze(self):
         self.manifest['stages_complete'] = [1, 2, 3]

@@ -211,7 +211,8 @@ public final class NativeApiReadings {
 
     private VoltageMeasurement check(Frame frame) {
         if (!finished || serverTick != level.getServer().getTickCount()) return unavailable(level, "No current completed electrical timestep");
-        if (frame == null || !ApiTerminals.ready(level, frame.key.pos())) return unavailable(level, "Terminal or chunk is not ready");
+        if (frame == null || !ApiTerminals.ready(level, frame.key.pos()) || ApiTerminals.pendingRemoval(level,frame.key.pos()))
+            return unavailable(level, "Terminal or chunk is not ready, or its previous owner is awaiting retirement");
         var state = Terminals.loadedState(level, frame.key.pos());
         var entity = ApiTerminals.loadedBlockEntity(level, frame.key.pos());
         Object anchor = entity == null ? state.getBlock() : entity;

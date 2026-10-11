@@ -116,6 +116,13 @@ also run there. Client displays consume the owning mod's synchronized state and
 never invoke these server callbacks themselves. Startup registration is not a
 place to access a running world or solve a circuit.
 
+Saved-wire discovery on a background thread is deferred to the server thread.
+Wire binding also waits for API endpoint readiness, including when Minecraft
+drains entity deserialization synchronously while saving. Read-only geometry may
+exist before that readiness; it cannot advance storage or expose accepted results.
+Native wire tools reject an unavailable replacement before changing selection,
+inventory, or connections.
+
 The examples declare WWPG as a required runtime mod. An integration that makes
 WWPG optional must isolate API-referencing classes and load/register them only
 after confirming WWPG is installed. A `compileOnly` dependency does not make the
@@ -125,13 +132,15 @@ in an always-loaded block, listener or method signature. The API source/Javadoc
 JARs and Maven ZIP are developer artifacts, not extra mods to install.
 
 Call `ElectricalDevices.changed(ServerLevel, BlockPos)` from server-side placement,
-removal, loading and configuration hooks when a device may have changed. This is
+loading and configuration hooks when a device may have changed. This is
 especially important for plain blocks without block entities. It invalidates the
 location's capability and queues loaded-device discovery without preparing a
 circuit, loading a chunk or changing topology during solving. Its return value
-is false when the runtime is absent or the location is unloaded. Chunk unload is
-temporary loading loss; handle permanent block removal through the native removal
-hook, retaining saved wires and history across unload.
+is false when the runtime is absent or the location is unloaded. WWPG observes
+physical block removal, including replacing a block with the same block type,
+and retires its previous wire identities automatically. An add-on's native removal
+hook still owns its item drops and gameplay cleanup. Chunk unload is temporary
+loading loss and preserves saved wires and history.
 
 The core interface is:
 
@@ -342,6 +351,12 @@ installed wire merely because the block position and terminal numbers match.
 These records are internal versioned save data, not identifiers an add-on should
 persist or manipulate.
 
+Pending retirement is saved even if the server stops before old wire entities are
+ready. Both native wire tools refuse new connections while the owner is loading
+or retiring old connections, displaying "Device is loading. Try again in a moment."
+This requires no new provider callback. Configuration and readiness changes still
+use `ElectricalDevices.changed`.
+
 Wire entities may load after a block. A partially loaded assembly must be marked
 not ready instead of publishing fabricated power or deleting its saved links.
 Do not use measurement queries as an excuse to request chunk tickets.
@@ -508,6 +523,9 @@ A release additionally supplies:
   previous release's 204 and 208 packaged requirements.
 - A locked `ci` JSON with the successful repository run URL, source SHA, and
   exactly eight platform/backend/profile jobs. Every job has a locked `proof`.
+  The run and job proofs share the actual `source_tree`. Each job locks its
+  `checked_out_source` record containing actual Git HEAD/tree, run ID, attempt,
+  and event; pull-request merge commits cannot stand in for the frozen source.
 - `independent_example_build`, a locked proof that the external Gradle project
   compiled against the API artifact without WWPG project implementation classes.
 - `independent_upstream_example_build`, the corresponding proof for the separate
@@ -526,7 +544,8 @@ regression/extension counts, at least three cold passes and five actual chunk
 cycles, zero independent CEE solves, exactly-once electrical history, and a
 passing runtime CEE-property fixture (`cee_property_adapter_verified: true`).
 They list all passing `api_namespaces_passed`: `wwpg_api`, `wwpg_api_faults`,
-`wwpg_api_restart`, `wwpg_api_upstream`, `wwpg_api_upstream_restart`, and `wwpg_api_pause`.
+`wwpg_api_restart`, `wwpg_api_upstream`, `wwpg_api_upstream_restart`,
+`wwpg_api_pause`, and `wwpg_api_pending_restart`.
 `global_pause_verified: true` binds the separate pause/step/resume fixture to
 each profile/backend/platform proof; a passing subset cannot replace that gate.
 `paused_measurements_unavailable: true` additionally confirms frozen meter behavior.
@@ -534,6 +553,13 @@ each profile/backend/platform proof; a passing subset cannot replace that gate.
 history rollback, a healthy unrelated circuit, and recovery. Cold restart proofs
 require `cold_wire_systems_verified: ["CEE", "POWER_GRID"]` and
 `cold_ownership_format_version: 2`; a legacy PG-only result is insufficient.
+`pending_wire_retirement_verified: true` covers a separate three-process
+`pending_entity_restart_phases: ["SETUP", "ARM", "VERIFY"]` sequence. Its locked
+`pending_entity_restart` retains the saved-state `oracle` and each ordered phase's
+`manifest` and `log` descriptors. Final packaging reparses the ARM shutdown and
+VERIFY markers for actual held entity loading, saving before readiness, disk
+tombstones, both wire systems, zero-charge replacement, and fresh functioning
+connections. A repeated ordinary VERIFY pass cannot substitute for this sequence.
 
 Required `api_fixture_behaviors` are `machine`, `storage`, `instrument`,
 `panel_attachment`, and `board_component`. Independent build proofs name their
@@ -557,6 +583,9 @@ not substitutes for executing tests. Packaging validates their immutability and
 declared gates; it does not establish trust in fabricated input. Preserve failed
 runs, investigate causes, and close defects with reproducible evidence. A retry
 alone does not establish API readiness.
+The package includes every transitively referenced locked proof and its logs,
+dependency records, saved-state oracles, and client screenshots; changed evidence
+blocks packaging.
 
 Derive the packaged matrix records from actual GitHub metadata and uploaded
 artifacts with the evidence collector, rather than writing passing flags by hand:

@@ -20,6 +20,23 @@ jobs:
         profile: [BASE, PINOUT]
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Record the exact checked-out source and CI attempt
+        env:
+          EXPECTED_SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          python - <<'PY'
+          import json, os, pathlib, subprocess
+          source = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+          assert source == os.environ['EXPECTED_SOURCE_SHA'], 'Checkout differs from requested frozen source'
+          evidence = dict(schema=1, source_sha=source,
+              source_tree=subprocess.check_output(['git', 'rev-parse', 'HEAD^{tree}'], text=True).strip(),
+              run_id=int(os.environ['GITHUB_RUN_ID']), run_attempt=int(os.environ['GITHUB_RUN_ATTEMPT']),
+              event=os.environ['GITHUB_EVENT_NAME'])
+          path = pathlib.Path('build/ci-source.json'); path.parent.mkdir(parents=True, exist_ok=True)
+          path.write_text(json.dumps(evidence, indent=2) + '\n', encoding='utf-8', newline='\n')
+          PY
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -41,6 +58,8 @@ jobs:
         run: python tools/test_api_ci_evidence.py
       - name: Verify exact SDK extraction and independent build gates
         run: python tools/test_extracted_api_sdk.py
+      - name: Verify bounded child launches and Windows batch quoting
+        run: python tools/test_checked_runner.py
       - if: runner.os != 'Windows'
         run: chmod +x gradlew
       - name: Build runtime and publish both SDK APIs to an isolated local Maven repository
@@ -60,6 +79,14 @@ jobs:
           python tools/package_api_release.py --example-source examples/cee-addon --output build/distributions/wwpg-upstream-api-example-1.0.0-source.zip
       - name: Verify global freeze and one-tick stepping in an isolated API fixture
         run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api_pause -PtestDirectory=run/api-pause --no-daemon
+      - name: Verify stopped-before-ready persisted wire retirement
+        run: |
+          python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api_pending_restart -PtestDirectory=run/api-pending-restart -PrestartPhase=SETUP --no-daemon
+          cp run/api-pending-restart/logs/latest.log run/api-pending-restart/setup-phase.log
+          python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api_pending_restart -PtestDirectory=run/api-pending-restart -PrestartPhase=ARM --no-daemon
+          cp run/api-pending-restart/logs/latest.log run/api-pending-restart/arm-phase.log
+          python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api_pending_restart -PtestDirectory=run/api-pending-restart -PrestartPhase=VERIFY --no-daemon
+          cp run/api-pending-restart/logs/latest.log run/api-pending-restart/verify-phase.log
       - name: Run both packaged public API example fixture suites
         run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api,wwpg_api_faults,wwpg_api_restart,wwpg_api_upstream,wwpg_api_upstream_restart -PtestDirectory=run/api --no-daemon
       - name: Three cold restarts of the packaged API example assemblies
@@ -91,7 +118,7 @@ jobs:
           done
       - name: Export and extract the exact stationary yard ZIP
         run: |
-          python tools/export_stationary_yard.py --run run/yard --jar build/libs/wwpg-0.2.0.jar --profile ${{ matrix.profile }} --output build/distributions/wwpg-stationary-${{ matrix.profile }}.zip
+          python tools/export_stationary_yard.py --run run/yard --jar build/libs/wwpg-0.2.0.jar --target 0.2.0 --profile ${{ matrix.profile }} --output build/distributions/wwpg-stationary-${{ matrix.profile }}.zip
           python tools/reopen_stationary_yard.py build/distributions/wwpg-stationary-${{ matrix.profile }}.zip --run run/exported-yard
       - name: Three cold restarts of the extracted ZIP
         run: |
@@ -122,6 +149,7 @@ jobs:
         with:
           name: wwpg-${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}
           path: |
+            build/ci-source.json
             build/libs/*.jar
             build/api-contract.json
             build/cee-api-contract.json
@@ -163,6 +191,11 @@ jobs:
             run/api-pause/logs/
             run/api-pause/crash-reports/
             run/api-pause/packaged-*.json
+            run/api-pending-restart/logs/
+            run/api-pending-restart/crash-reports/
+            run/api-pending-restart/packaged-*.json
+            run/api-pending-restart/*-phase.log
+            run/api-pending-restart/*.nbt
             run/api-workshop/logs/
             run/api-workshop/crash-reports/
             run/api-workshop/packaged-*.json

@@ -324,6 +324,49 @@ def validate_extracted_build(proof, role, manifest, root, hashes):
             'Extracted example compile classpath omitted the frozen SDK or included a WWPG source project')
 
 
+def validate_pending_restart(proof, root, hashes):
+    """Retain the real three-process evidence, including assertions during shutdown."""
+    retained = proof.get('pending_entity_restart', {})
+    require(isinstance(retained, dict), 'Pending restart proof is not an object')
+    oracle = locked_file(retained.get('oracle', {}), root)
+    require(oracle.name == 'extension-api-pending-before-restart.nbt' and oracle.stat().st_size > 0,
+            'Stopped-before-ready restart lacks the saved-state oracle')
+    phases = retained.get('phases', [])
+    require(isinstance(phases, list) and [item.get('phase') for item in phases] == ['SETUP', 'ARM', 'VERIFY'],
+            'Pending restart requires three retained ordered JVM phases')
+    logs = {}
+    for item in phases:
+        record = read(locked_file(item.get('manifest', {}), root))
+        require(record.get('completed') and record.get('required_tests_passed', 0) > 0
+                and record.get('phase') == item['phase'] and record.get('namespaces') == 'wwpg_api_pending_restart'
+                and record.get('artifact') == 'wwpg-0.2.0.jar' and record.get('sha256') == hashes['runtime']
+                and record.get('profile') == proof['profile'] and record.get('backend') == proof['backend']
+                and set(record.get('addon_artifacts', {})) == {'example', 'upstream_example'}
+                and all(record['addon_artifacts'][role].get('sha256') == hashes[role]
+                        for role in ('example', 'upstream_example')),
+                'Pending restart process differs from the accepted artifacts/profile/backend')
+        text = locked_file(item.get('log', {}), root).read_text(encoding='utf-8', errors='replace')
+        require('GAME TESTS COMPLETE' in text and re.search(r'All [1-9][0-9]* required tests passed', text)
+                and not re.search(r'[1-9][0-9]* required tests failed|Tests? .* failed at', text),
+                'Pending restart process log is incomplete or failed')
+        logs[item['phase']] = text
+    for phase, name, expected in [
+        ('ARM', 'API_PENDING_RESTART_ARMED', dict(actualInboxHeld='true', savedBeforeReady='true',
+            replacementZeroCharge='true', nativePG='true', nativeCEE='true')),
+        ('VERIFY', 'API_PENDING_RESTART_PASSED', dict(actualInboxHeld='true', savedBeforeReady='true',
+            diskTombstonesVerified='true', nativePG='true', nativeCEE='true', replacementIsolated='true',
+            replacementZeroCharge='true', newWiresPowered='true', ownershipVersion='2'))]:
+        matches = re.findall(r'\b' + re.escape(name) + r': ([^\r\n]+)', logs[phase])
+        require(len(matches) == 1, 'Missing/duplicate real pending-restart assertion: ' + name)
+        fields = {}
+        for entry in re.split(r'[,;]\s*', matches[0]):
+            key, separator, value = entry.partition('=')
+            require(separator and key not in fields, 'Malformed pending-restart assertion: ' + name)
+            fields[key] = value
+        require(all(fields.get(key) == value for key, value in expected.items()),
+                'Pending restart omitted a required actual assertion: ' + name)
+
+
 def validate_release(manifest, root):
     source = manifest.get('source_sha', '')
     require(re.fullmatch(r'[0-9a-f]{40}', source) is not None, 'Missing immutable source commit')
@@ -343,6 +386,12 @@ def validate_release(manifest, root):
         proof = accepted_record(job.get('proof', {}), root, hashes, source)
         require((proof.get('platform'), proof.get('backend'), proof.get('profile')) ==
                 (job['platform'], job['backend'], job['profile']), 'Proof profile/backend/platform mismatch')
+        checkout = read(locked_file(proof.get('checked_out_source', {}), root))
+        require(proof.get('checked_out_source_verified') is True and checkout.get('schema') == 1
+                and checkout.get('source_sha') == source and checkout.get('source_tree') == proof.get('source_tree') == ci.get('source_tree')
+                and re.fullmatch(r'[0-9a-f]{40}', checkout.get('source_tree', ''))
+                and checkout.get('run_id') == ci.get('run_id') and checkout.get('run_attempt') == ci.get('run_attempt')
+                and checkout.get('event') in {'pull_request', 'push'}, 'Actual checked-out CI source/attempt is not proven')
         required = manifest.get('required_regression_checks', {}).get(job['profile'])
         require(isinstance(required, int) and required >= (208 if job['profile'] == 'PINOUT' else 204),
                 'Release cannot lower existing beta.5 regression requirements')
@@ -354,7 +403,7 @@ def validate_release(manifest, root):
         require(proof.get('independent_cee_solves') == 0 and proof.get('exactly_once_history') is True,
                 'Solver ownership/state advancement check failed')
         require(proof.get('cee_property_adapter_verified') is True, 'Public CEE property adapter lacks a passing runtime fixture')
-        require({'wwpg_api', 'wwpg_api_faults', 'wwpg_api_restart', 'wwpg_api_upstream', 'wwpg_api_upstream_restart', 'wwpg_api_pause'}
+        require({'wwpg_api', 'wwpg_api_faults', 'wwpg_api_restart', 'wwpg_api_upstream', 'wwpg_api_upstream_restart', 'wwpg_api_pause', 'wwpg_api_pending_restart'}
                 <= set(proof.get('api_namespaces_passed', [])), 'A required packaged API fixture suite was omitted')
         require(proof.get('global_pause_verified') is True, 'Global pause and one-tick stepping lack passing acceptance')
         require(proof.get('nonconverging_backend_verified') is True and proof.get('paused_measurements_unavailable') is True,
@@ -362,6 +411,10 @@ def validate_release(manifest, root):
         require(set(proof.get('cold_wire_systems_verified', [])) == {'CEE', 'POWER_GRID'}
                 and proof.get('cold_ownership_format_version') == 2,
                 'Cold restart must verify both native wire systems and v2 persisted ownership')
+        require(proof.get('pending_wire_retirement_verified') is True
+                and proof.get('pending_entity_restart_phases') == ['SETUP', 'ARM', 'VERIFY'],
+                'Stopped-before-ready removal lacks the real isolated restart sequence')
+        validate_pending_restart(proof, root, hashes)
     independent = accepted_record(manifest.get('independent_example_build', {}), root, hashes, source)
     require(independent.get('uses_published_api_only') is True and independent.get('uses_wwpg_project_classes') is False,
             'Example was not built independently against the published SDK')
@@ -404,6 +457,38 @@ def validate_release(manifest, root):
         require(proof.get('world_sha256') == world_hashes[proof['profile']], 'A client used another exact world/profile archive')
 
 
+def collect_locked_evidence(value, root):
+    """Follow retained JSON proof descriptors once, including relative client media."""
+    entries, processed = {}, set()
+    pending = [(value, root, False)]
+    while pending:
+        item, relative_base, relative_media = pending.pop()
+        if isinstance(item, dict):
+            descriptor = None
+            if {'path', 'sha256', 'bytes'} <= item.keys():
+                descriptor = item
+            elif relative_media and {'file', 'sha256', 'bytes'} <= item.keys():
+                name = item['file']
+                require(isinstance(name, str) and PurePosixPath(name).name == name and '\\' not in name,
+                        'Client log/screenshot filename must be relative to its retained proof')
+                path = (relative_base / name).resolve()
+                require(path.is_relative_to(root), 'Client media escaped the evidence workspace')
+                descriptor = dict(path=path.relative_to(root).as_posix(), sha256=item['sha256'], bytes=item['bytes'])
+            if descriptor is not None:
+                path = locked_file(descriptor, root)
+                key = path.relative_to(root).as_posix()
+                entries['evidence/' + key] = path.read_bytes()
+                if path.suffix.lower() == '.json' and key not in processed:
+                    processed.add(key)  # Duplicate/cyclic proof references do not recurse.
+                    pending.append((read(path), path.parent, False))
+            else:
+                pending.extend((child, relative_base, relative_media or key in {'logs', 'screenshots'})
+                               for key, child in item.items())
+        elif isinstance(item, list):
+            pending.extend((child, relative_base, relative_media) for child in item)
+    return entries
+
+
 def package(manifest_path, root, output, release=False):
     root, output = Path(root).resolve(), Path(output).resolve()
     manifest_path = Path(manifest_path).resolve()
@@ -423,19 +508,7 @@ def package(manifest_path, root, output, release=False):
         require((root / name).is_file(), f'Missing SDK documentation/license: {name}')
         entries[name] = (root / name).read_bytes()
     # Evidence must remain inspectable inside the package, not just on the build host.
-    def collect_descriptors(value):
-        if isinstance(value, dict):
-            if {'path', 'sha256', 'bytes'} <= value.keys():
-                path = locked_file(value, root)
-                entries['evidence/' + str(PurePosixPath(value['path']))] = path.read_bytes()
-            else:
-                for item in value.values(): collect_descriptors(item)
-        elif isinstance(value, list):
-            for item in value: collect_descriptors(item)
-    collect_descriptors({k: v for k, v in manifest.items() if k != 'artifacts'})
-    if release:
-        ci = read(locked_file(manifest['ci'], root))
-        collect_descriptors(ci)
+    entries.update(collect_locked_evidence({k: v for k, v in manifest.items() if k != 'artifacts'}, root))
     sums = ''.join(hashlib.sha256(data).hexdigest() + '  ' + name + '\n' for name, data in sorted(entries.items()))
     entries['SHA256SUMS.txt'] = sums.encode('utf-8')
     output.parent.mkdir(parents=True, exist_ok=True)

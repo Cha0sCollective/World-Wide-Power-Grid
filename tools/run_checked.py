@@ -11,6 +11,30 @@ import subprocess
 import sys
 
 
+def launch_command(command, cwd=None):
+    """Keep Windows batch paths and arguments inside one correctly quoted /c command."""
+    command = list(command)
+    if os.name != 'nt':
+        return command
+    cwd = Path.cwd() if cwd is None else Path(cwd)
+    if Path(command[0]).name == 'gradlew':
+        command[0] = str((cwd / 'gradlew.bat').resolve())
+    if not command[0].lower().endswith('.bat'):
+        return command
+    path = Path(command[0])
+    if path.is_absolute() and path.parent.resolve() == cwd.resolve():
+        command[0] = path.name
+    # cmd expands percent references even inside quotes; embedded quotes can
+    # break an argument's quoting. Batch acceptance tasks need neither form.
+    if any(any(character in value for character in ('"', '%', '\r', '\n')) for value in command):
+        raise ValueError('Windows batch arguments cannot contain quotes, percent expansions or newlines')
+    invocation = ' '.join('"' + value + '"' for value in command)
+    prefix = subprocess.list2cmdline([os.environ.get('COMSPEC', 'cmd.exe'), '/d', '/v:off', '/s', '/c'])
+    # Pass the complete command line to CreateProcess. Re-quoting it as one
+    # list argument would turn the inner quotes into backslash-escaped quotes.
+    return prefix + ' "' + invocation + '"'
+
+
 def java_processes(jcmd):
     if not jcmd:
         return {}
@@ -30,17 +54,17 @@ def main():
     command = args.command[1:] if args.command[:1] == ["--"] else args.command
     if not command or args.timeout <= 0:
         parser.error("A command and a positive timeout are required")
-    if os.name == "nt" and Path(command[0]).name == "gradlew":
-        command[0] = str(Path("gradlew.bat").resolve())
-    if os.name == "nt" and command[0].lower().endswith(".bat"):
-        command = [os.environ.get("COMSPEC", "cmd.exe"), "/d", "/c", *command]
+    try:
+        executable_command = launch_command(command)
+    except ValueError as error:
+        parser.error(str(error))
     jcmd = shutil.which("jcmd")
     if not jcmd and os.environ.get("JAVA_HOME"):
         candidate = Path(os.environ["JAVA_HOME"]) / "bin" / ("jcmd.exe" if os.name == "nt" else "jcmd")
         if candidate.is_file():
             jcmd = str(candidate)
     previous = java_processes(jcmd)
-    process = subprocess.Popen(command, start_new_session=os.name != "nt")
+    process = subprocess.Popen(executable_command, start_new_session=os.name != "nt")
     try:
         return process.wait(timeout=args.timeout)
     except subprocess.TimeoutExpired:

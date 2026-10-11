@@ -56,6 +56,7 @@ public final class Terminals {
 
     /** Native PG and public extension terminals usable by CEE's wire tools. */
     public static IElectric pgCompatible(Level level, BlockPos pos) {
+        if (level instanceof ServerLevel server && !server.getServer().isSameThread()) return null;
         var electric = nativePg(level, pos);
         if (electric != null) org.cha0scollective.wwpg.extension.ApiTerminals.captureNativeReplacement(level, pos);
         return electric == null ? org.cha0scollective.wwpg.extension.ApiTerminals.get(level, pos) : electric;
@@ -63,6 +64,10 @@ public final class Terminals {
 
     /** Native models retain priority; extension discovery never prepares a circuit. */
     public static IElectric electric(Level level, BlockPos pos) {
+        // PG deserializes wire endpoints on an IO worker. A null discovery
+        // result preserves their native deferred-resolution flags; connection
+        // assignment, compatibility holders, and SavedData wait for its tick.
+        if (level instanceof ServerLevel server && !server.getServer().isSameThread()) return null;
         var electric = nativePg(level, pos);
         if (electric != null) {
             org.cha0scollective.wwpg.extension.ApiTerminals.captureNativeReplacement(level, pos);
@@ -99,6 +104,8 @@ public final class Terminals {
     public static InWorldNode closestPg(Level level, BlockPos pos, Vec3 clicked, double threshold) {
         var electric = pgCompatible(level, pos);
         if (electric == null) return null;
+        if (electric instanceof org.cha0scollective.wwpg.extension.ApiElectric && level instanceof ServerLevel server
+                && !org.cha0scollective.wwpg.extension.ApiTerminals.canWire(server,pos)) return null;
         InWorldNode found = null;
         double distance = threshold * threshold;
         for (int i = 0; i < electric.terminalCount(); ++i) {

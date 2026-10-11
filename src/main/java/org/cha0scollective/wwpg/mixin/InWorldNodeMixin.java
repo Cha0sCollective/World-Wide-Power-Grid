@@ -39,7 +39,8 @@ public abstract class InWorldNodeMixin {
     /** CEE's fallback calls getBlockState, which requests a chunk-load ticket. */
     private static boolean wwpg$unloadedApiNode(Level level, InWorldNode node) {
         return level instanceof ServerLevel server && !DetachedNodeHelper.isDetached(node)
-                && org.cha0scollective.wwpg.extension.ApiTerminals.existing(level, node.sourcePos()) != null
-                && server.getChunkSource().getChunkNow(node.sourcePos().getX() >> 4, node.sourcePos().getZ() >> 4) == null;
+                && server.getChunkSource().getChunkNow(node.sourcePos().getX() >> 4, node.sourcePos().getZ() >> 4) == null
+                && (org.cha0scollective.wwpg.extension.ApiTerminals.existing(level, node.sourcePos()) != null
+                || org.cha0scollective.wwpg.extension.ApiTerminals.knownSavedTerminal(server,node.sourcePos(),node.id()));
     }
 }

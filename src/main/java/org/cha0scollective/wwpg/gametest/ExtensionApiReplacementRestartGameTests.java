@@ -63,7 +63,8 @@ public final class ExtensionApiReplacementRestartGameTests {
                 level.setBlockAndUpdate(pos,Blocks.AIR.defaultBlockState());level.setBlockAndUpdate(pos.below(),Blocks.STONE.defaultBlockState());
             }
             example(h,SOURCE,"source");example(h,LOAD,"capacitor");example(h,CEE_LOAD,"capacitor");
-            h.startSequence().thenIdle(5).thenExecute(()-> {
+            h.startSequence().thenWaitUntil(()->h.assertTrue(ApiTerminals.canWire(level,SOURCE)&&ApiTerminals.canWire(level,LOAD)&&ApiTerminals.canWire(level,CEE_LOAD),"Waiting for cold SETUP chunk/entity readiness"))
+                    .thenExecute(()-> {
                 WiringGameTests.connect(h,SOURCE,0,LOAD,0,true);WiringGameTests.connect(h,SOURCE,1,LOAD,1,true);
                 WiringGameTests.connect(h,SOURCE,0,CEE_LOAD,0,false);WiringGameTests.connect(h,SOURCE,1,CEE_LOAD,1,false);
             }).thenIdle(30).thenExecute(()-> {
@@ -102,6 +103,7 @@ public final class ExtensionApiReplacementRestartGameTests {
 
         h.startSequence().thenIdle(5).thenExecute(()-> {
             h.assertTrue(!level.areEntitiesLoaded(chunk.toLong()),"Cold native replacement missed the partial-load window");
+            ExtensionApiLifecycleGameTests.assertLoadingWireRejection(h,SOURCE);
             var world=GlobalElectricNetworks.getWorldNetworks(level);
             world.addAndMigrateNode(new BlockWireEndpoint(LOAD,0));world.addAndMigrateNode(new BlockWireEndpoint(LOAD,1));
             world.addAndMigrateNode(new BlockWireEndpoint(CEE_LOAD,0));world.addAndMigrateNode(new BlockWireEndpoint(CEE_LOAD,1));
@@ -132,12 +134,14 @@ public final class ExtensionApiReplacementRestartGameTests {
             var newCeeIds=ApiCeeWireIdentities.get(level).idsAt(CEE_LOAD);
             h.assertTrue(newCeeIds.size()==2&&newCeeIds.stream().noneMatch(oldCeeIds::contains),"Cold cleanup removed new CEE wires or reused old identities");
             h.assertTrue(ElectricalMeasurements.read(level,CEE_LOAD).status()==MeasurementStatus.NOT_READY,"CEE-wired native replacement acquired API circuit ownership");
+            ExtensionApiLifecycleGameTests.assertSelectedApiReplacementRejectsSecondClick(h,SOURCE,LOAD);
             org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info("API_COLD_REPLACEMENT: diskStateVerified=true, delayedEntities=true, oldWiresRetired=true, newWiresPowered=true, oldCeeWiresRetired=true, newCeeWiresPowered=true, nativePG=true, nativeCEE=true, ownershipVersion={}",ownershipVersion);
             for(var pos:new BlockPos[]{SOURCE,LOAD,CEE_LOAD})level.setBlockAndUpdate(pos,Blocks.AIR.defaultBlockState());
             // Rearm a new saved API circuit for the next independent cold run.
             // The oracle is replaced only after this proof and rearming succeed.
             example(h,SOURCE,"source");example(h,LOAD,"capacitor");example(h,CEE_LOAD,"capacitor");
-        }).thenIdle(5).thenExecute(()-> {
+        }).thenWaitUntil(()->h.assertTrue(ApiTerminals.canWire(level,SOURCE)&&ApiTerminals.canWire(level,LOAD)&&ApiTerminals.canWire(level,CEE_LOAD),"Waiting for next-cold-run replacement retirement and native entity readiness"))
+                .thenExecute(()-> {
             WiringGameTests.connect(h,SOURCE,0,LOAD,0,true);WiringGameTests.connect(h,SOURCE,1,LOAD,1,true);
             WiringGameTests.connect(h,SOURCE,0,CEE_LOAD,0,false);WiringGameTests.connect(h,SOURCE,1,CEE_LOAD,1,false);
         }).thenIdle(30).thenExecute(()-> {

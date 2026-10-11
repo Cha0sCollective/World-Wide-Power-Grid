@@ -233,6 +233,13 @@ public final class ApiElectric implements IElectric {
 
     @Override public ElectricBehaviour getBehaviour(Level world, BlockPos position, BlockState state) { return behaviour; }
     @Override public boolean accepts(ItemStack wireStack) { return WireRegistry.forItem(level, wireStack.getItem()) != null; }
+    @Override public net.minecraft.world.InteractionResult onWire(BlockState state, net.minecraft.world.item.context.UseOnContext context) {
+        if (level instanceof ServerLevel server && !ApiTerminals.canWire(server,pos)) {
+            IElectric.sendMessage(context,net.minecraft.network.chat.Component.translatable("wwpg.device.loading"));
+            return net.minecraft.world.InteractionResult.FAIL;
+        }
+        return IElectric.super.onWire(state,context);
+    }
 
     /** Called only in the topology preparation phase, never from geometry lookup. */
     void removeInvalidConnections() {

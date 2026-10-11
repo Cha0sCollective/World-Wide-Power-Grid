@@ -23,6 +23,11 @@ final class ApiTerminalIdentities extends SavedData {
     private final Map<Owner, Map<Integer, String>> identities = new HashMap<>();
     private final Map<Owner, Set<WorldNetworks.PartId>> pgWires = new HashMap<>();
     private final Map<Owner, Set<UUID>> ceeWires = new HashMap<>();
+    private final Map<Owner, WireOwnership> pendingRemovals = new HashMap<>();
+
+    record WireOwnership(Set<WorldNetworks.PartId> pgWires, Set<UUID> ceeWires) {
+        WireOwnership { pgWires=Set.copyOf(pgWires); ceeWires=Set.copyOf(ceeWires); }
+    }
 
     record Owner(BlockPos position, String block, String provider, String slot) {
         Owner { position = position.immutable(); }
@@ -50,12 +55,32 @@ final class ApiTerminalIdentities extends SavedData {
     Set<WorldNetworks.PartId> pgWires(Owner owner) { return pgWires.getOrDefault(owner, Set.of()); }
     Set<UUID> ceeWires(Owner owner) { return ceeWires.getOrDefault(owner, Set.of()); }
 
+    Map<Owner, WireOwnership> pendingRemovals() { return Map.copyOf(pendingRemovals); }
+
+    /** A physical removal is durable even when native wire entities cannot yet be retired. */
+    void queueRemoval(Owner owner, Set<WorldNetworks.PartId> pg, Set<UUID> cee) {
+        var old=pendingRemovals.get(owner);
+        var joinedPg=new java.util.HashSet<>(pg);var joinedCee=new java.util.HashSet<>(cee);
+        if(old!=null) {joinedPg.addAll(old.pgWires());joinedCee.addAll(old.ceeWires());}
+        var next=new WireOwnership(joinedPg,joinedCee);
+        validatePgWires(next.pgWires());
+        if(!next.equals(old)) {pendingRemovals.put(owner,next);setDirty();}
+    }
+
+    void finishRemoval(Owner owner) {
+        if(pendingRemovals.remove(owner)!=null)setDirty();
+    }
+
+    private static void validatePgWires(Set<WorldNetworks.PartId> wires) {
+        for(var id:wires)
+            if(!(id instanceof WorldNetworks.SimpleId)&&!(id instanceof WorldNetworks.ComplexId complex&&complex.sub()>=0))
+                throw new IllegalArgumentException("Unsupported PG wire ownership identity");
+    }
+
     void rememberWires(Owner owner, Set<WorldNetworks.PartId> pg, Set<UUID> cee) {
         if (!identities.containsKey(owner)) throw new IllegalArgumentException("Wire ownership requires a validated API terminal owner");
         var nextPg = Set.copyOf(pg); var nextCee = Set.copyOf(cee);
-        for (var id : nextPg)
-            if (!(id instanceof WorldNetworks.SimpleId) && !(id instanceof WorldNetworks.ComplexId complex && complex.sub() >= 0))
-                throw new IllegalArgumentException("Unsupported PG wire ownership identity");
+        validatePgWires(nextPg);
         if (!nextPg.equals(pgWires.getOrDefault(owner, Set.of())) || !nextCee.equals(ceeWires.getOrDefault(owner, Set.of()))) {
             pgWires.put(owner, nextPg); ceeWires.put(owner, nextCee); setDirty();
         }
@@ -137,6 +162,23 @@ final class ApiTerminalIdentities extends SavedData {
                 if (!cee.add(net.minecraft.nbt.NbtUtils.loadUUID(genericWire))) throw new IllegalStateException("Duplicate saved CEE wire identity");
             result.ceeWires.put(owner, Set.copyOf(cee));
         }
+        if(version==FORMAT)for(var generic:tag.getList("PendingRemovals",Tag.TAG_COMPOUND)) {
+            var entry=(CompoundTag)generic;var position=entry.getIntArray("Position");
+            if(position.length!=3)throw new IllegalStateException("Invalid pending API removal position");
+            var owner=new Owner(new BlockPos(position[0],position[1],position[2]),entry.getString("Block"),entry.getString("Provider"),entry.getString("Slot"));
+            if(owner.block().isBlank()||owner.provider().isBlank()||owner.slot().isBlank())throw new IllegalStateException("Invalid pending API removal owner");
+            var pg=new java.util.HashSet<WorldNetworks.PartId>();
+            for(var genericWire:entry.getList("PgWires",Tag.TAG_COMPOUND)) {
+                var wire=(CompoundTag)genericWire;
+                if(!wire.hasUUID("UUID")||wire.getInt("Sub") < -1)throw new IllegalStateException("Invalid pending PG wire identity");
+                WorldNetworks.PartId id=wire.getInt("Sub")==-1?new WorldNetworks.SimpleId(wire.getUUID("UUID")):new WorldNetworks.ComplexId(wire.getUUID("UUID"),wire.getInt("Sub"));
+                if(!pg.add(id))throw new IllegalStateException("Duplicate pending PG wire identity");
+            }
+            var cee=new java.util.HashSet<UUID>();
+            for(var genericWire:entry.getList("CeeWires",Tag.TAG_INT_ARRAY))
+                if(!cee.add(net.minecraft.nbt.NbtUtils.loadUUID(genericWire)))throw new IllegalStateException("Duplicate pending CEE wire identity");
+            if(result.pendingRemovals.putIfAbsent(owner,new WireOwnership(pg,cee))!=null)throw new IllegalStateException("Duplicate pending API removal owner");
+        }
         return result;
     }
 
@@ -174,6 +216,25 @@ final class ApiTerminalIdentities extends SavedData {
             devices.add(entry);
         });
         tag.put("Devices", devices);
+        var pending=new ListTag();
+        pendingRemovals.entrySet().stream().sorted(java.util.Comparator.comparing(entry->entry.getKey().position().toShortString()
+                +"/"+entry.getKey().block()+"/"+entry.getKey().provider()+"/"+entry.getKey().slot())).forEach(saved->{
+            var owner=saved.getKey();var entry=new CompoundTag();
+            entry.putIntArray("Position",new int[]{owner.position().getX(),owner.position().getY(),owner.position().getZ()});
+            entry.putString("Block",owner.block());entry.putString("Provider",owner.provider());entry.putString("Slot",owner.slot());
+            var pg=new ListTag();
+            saved.getValue().pgWires().stream().sorted(java.util.Comparator.comparing(Object::toString)).forEach(id->{
+                var wire=new CompoundTag();
+                if(id instanceof WorldNetworks.SimpleId simple) {wire.putUUID("UUID",simple.id());wire.putInt("Sub",-1);}
+                else if(id instanceof WorldNetworks.ComplexId complex) {wire.putUUID("UUID",complex.id());wire.putInt("Sub",complex.sub());}
+                else throw new IllegalStateException("Unknown pending PG wire identity type");
+                pg.add(wire);
+            });
+            entry.put("PgWires",pg);
+            var cee=new ListTag();saved.getValue().ceeWires().stream().sorted().forEach(id->cee.add(net.minecraft.nbt.NbtUtils.createUUID(id)));
+            entry.put("CeeWires",cee);pending.add(entry);
+        });
+        tag.put("PendingRemovals",pending);
         return tag;
     }
 }

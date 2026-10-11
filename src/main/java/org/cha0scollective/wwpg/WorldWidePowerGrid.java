@@ -25,6 +25,9 @@ public final class WorldWidePowerGrid {
         modBus.addListener(org.cha0scollective.wwpg.extension.ApiDeviceDiscovery::freeze);
         if (Boolean.getBoolean("wwpg.test.energyFixtures"))
             modBus.addListener(org.cha0scollective.wwpg.gametest.FixtureEnergyCapabilities::register);
+        if (Boolean.getBoolean("wwpg.test.packaged") && java.util.Arrays.asList(
+                System.getProperty("neoforge.enabledGameTestNamespaces", "").split(",")).contains("wwpg_api"))
+            modBus.addListener(org.cha0scollective.wwpg.gametest.ExtensionApiDiodeParameterGameTests::register);
         LOGGER.info("WWPG: CEE 1.1.3 / Power Grid 0.6.2 compatibility loaded");
         NeoForge.EVENT_BUS.addListener(this::commands);
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.gametest.MultiplayerGameTests::commands);
@@ -33,6 +36,9 @@ public final class WorldWidePowerGrid {
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.extension.ApiCircuits::chunkLoaded);
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.extension.ApiCircuits::blockPlaced);
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.extension.ApiTerminals::chunkUnloaded);
+        if (Boolean.getBoolean("wwpg.test.packaged")
+                && "wwpg_api_pending_restart".equals(System.getProperty("neoforge.enabledGameTestNamespaces")))
+            NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.gametest.ExtensionApiPendingRestartGameTests::installBeforeStartup);
         if (Boolean.getBoolean("wwpg.test.packaged")
                 && "wwpg_yard".equals(System.getProperty("neoforge.enabledGameTestNamespaces")))
             NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.gametest.StationaryYardChunkTickets::preserveForExport);

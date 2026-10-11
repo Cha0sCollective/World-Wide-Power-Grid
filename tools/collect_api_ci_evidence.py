@@ -58,10 +58,12 @@ def metadata(run, jobs, index):
                 for platform, backend, profile in COMBINATIONS}
     values = jobs.get('jobs', [])
     require(len(values) == 8 and {job.get('name') for job in values} == set(expected), 'Missing/duplicate eight-way CI job')
-    required_steps = {'Build runtime and publish both SDK APIs to an isolated local Maven repository',
+    required_steps = {'Record the exact checked-out source and CI attempt',
+                      'Build runtime and publish both SDK APIs to an isolated local Maven repository',
                       'Build the general example independently against published Maven API artifacts',
                       'Build the CEE panel and PG board example independently against published APIs',
-                      'Verify global freeze and one-tick stepping in an isolated API fixture'}
+                      'Verify global freeze and one-tick stepping in an isolated API fixture',
+                      'Verify stopped-before-ready persisted wire retirement'}
     artifacts = {}
     for item in index.get('artifacts', []):
         if not item.get('name', '').startswith('wwpg-'): continue
@@ -141,6 +143,14 @@ def nonconvergence(text):
     marker(text, 'API_NONCONVERGENCE_PASSED', dict(rollback='true', healthyCircuit='true', recovered='true'))
 
 
+def pending_retirement(armed, verified):
+    marker(armed, 'API_PENDING_RESTART_ARMED', dict(actualInboxHeld='true', savedBeforeReady='true',
+        replacementZeroCharge='true', nativePG='true', nativeCEE='true'))
+    marker(verified, 'API_PENDING_RESTART_PASSED', dict(actualInboxHeld='true', savedBeforeReady='true',
+        diskTombstonesVerified='true', nativePG='true', nativeCEE='true', replacementIsolated='true',
+        replacementZeroCharge='true', newWiresPowered='true', ownershipVersion='2'))
+
+
 def world(archive, extraction, hashes, profile, api, evidence):
     require(extraction.get('sha256') == sha(archive) and extraction.get('profile') == profile
             and extraction.get('jar', {}).get('sha256') == hashes['runtime'], 'Extracted save does not bind the exact ZIP/jar/profile')
@@ -148,11 +158,14 @@ def world(archive, extraction, hashes, profile, api, evidence):
         candidates = [name for name in zipped.namelist() if name.endswith('/WWPG_MANIFEST.json')]
         require(len(candidates) == 1 and any(name.endswith('/level.dat') for name in zipped.namelist()), 'Playable ZIP manifest/save missing')
         manifest = json.loads(zipped.read(candidates[0]))
-        require(manifest.get('profile') == profile and manifest.get('jar', {}).get('sha256') == hashes['runtime'], 'World manifest runtime/profile differs')
+        require(manifest.get('target') == VERSION and manifest.get('profile') == profile
+                and manifest.get('jar', {}).get('sha256') == hashes['runtime'], 'World manifest target/runtime/profile differs')
         if api:
             require(manifest.get('target') == VERSION and manifest.get('api_version') == API_VERSION, 'Wrong API Workshop target/version')
             require(all(manifest.get('example_addons', {}).get(role, {}).get('sha256') == hashes[role]
                         for role in ('example', 'upstream_example')), 'Workshop contains another example add-on identity')
+        else:
+            require(manifest.get('support_baseline') == 'release/0.1.0-beta.5/content-matrix.json', 'Stationary yard lacks the declared inherited content baseline')
     evidence.append(archive)
 
 
@@ -185,9 +198,21 @@ def audit_sdk(directory, hashes, evidence):
         evidence.append(source)
 
 
-def matrix_job(directory, combination):
+def checked_source(path, source_sha, run_id, run_attempt, evidence):
+    require(path.is_file(), 'Actual checked-out source provenance is absent')
+    value = read(path)
+    require(value.get('schema') == 1 and value.get('source_sha') == source_sha
+            and re.fullmatch(r'[0-9a-f]{40}', value.get('source_tree', ''))
+            and value.get('run_id') == run_id and value.get('run_attempt') == run_attempt
+            and value.get('event') in {'pull_request', 'push'}, 'Actual checkout differs from frozen run source/attempt')
+    evidence.append(path)
+    return value
+
+
+def matrix_job(directory, combination, source_sha, run_id, run_attempt, root=ROOT):
     platform, backend, profile = combination
     evidence = []
+    source = checked_source(directory / 'build/ci-source.json', source_sha, run_id, run_attempt, evidence)
     paths = {role: directory / path for role, path in ARTIFACTS.items()}
     require(all(path.is_file() for path in paths.values()), 'Matrix upload omitted a frozen API/runtime/example artifact')
     hashes = {role: sha(path) for role, path in paths.items()}; evidence.extend(paths.values())
@@ -203,6 +228,20 @@ def matrix_job(directory, combination):
     require(count >= (208 if profile == 'PINOUT' else 204), 'Inherited regression coverage was reduced')
     api = packaged(run / 'api', API_NAMESPACES, ['SETUP', 'VERIFY', 'VERIFY', 'VERIFY'], hashes, profile, backend, evidence)
     pause = packaged(run / 'api-pause', {'wwpg_api_pause'}, ['SETUP'], hashes, profile, backend, evidence)
+    pending_restart = packaged(run / 'api-pending-restart', {'wwpg_api_pending_restart'},
+        ['SETUP', 'ARM', 'VERIFY'], hashes, profile, backend, evidence)
+    pending_logs = {phase: log(run / 'api-pending-restart' / (phase.lower() + '-phase.log'), evidence)
+                    for phase in ('SETUP', 'ARM', 'VERIFY')}
+    pending_retirement(pending_logs['ARM'], pending_logs['VERIFY'])
+    pending_oracle = run / 'api-pending-restart/extension-api-pending-before-restart.nbt'
+    require(pending_oracle.is_file() and pending_oracle.stat().st_size > 0,
+            'Stopped-before-ready restart lacks its actual saved-state oracle')
+    evidence.append(pending_oracle)
+    pending_files = sorted((run / 'api-pending-restart').glob('packaged-*.json'))
+    pending_proof = dict(oracle=descriptor(pending_oracle, root), phases=[
+        dict(phase=phase, manifest=descriptor(path, root),
+             log=descriptor(run / 'api-pending-restart' / (phase.lower() + '-phase.log'), root))
+        for phase, path in zip(('SETUP', 'ARM', 'VERIFY'), pending_files)])
     latest = log(run / 'api/logs/latest.log', evidence)
     nonconvergence(latest)
     require(cycles(latest, 'API_CHUNK_CYCLE') == cycles(latest, 'API_UPSTREAM_CHUNK_CYCLE') == 5, 'Actual unload coverage incomplete')
@@ -255,12 +294,15 @@ def matrix_job(directory, combination):
     require(tests > 0, 'No actual JUnit checks ran')
     return dict(schema=1, completed=True, passed=True, unresolved_failures=[], artifact_hashes=hashes,
                 platform=platform, backend=backend, profile=profile, regression_checks_passed=count,
-                extension_checks_passed=api[0]['required_tests_passed'] + pause[0]['required_tests_passed'],
-                api_namespaces_passed=sorted(API_NAMESPACES | {'wwpg_api_pause'}), cold_restart_passes=3,
+                extension_checks_passed=api[0]['required_tests_passed'] + pause[0]['required_tests_passed'] + pending_restart[0]['required_tests_passed'],
+                api_namespaces_passed=sorted(API_NAMESPACES | {'wwpg_api_pause', 'wwpg_api_pending_restart'}), cold_restart_passes=3,
                 actual_chunk_reload_cycles=5, independent_cee_solves=0, exactly_once_history=True,
                 cee_property_adapter_verified=True, global_pause_verified=True, api_fixture_behaviors=sorted(BEHAVIORS),
                 nonconverging_backend_verified=True, paused_measurements_unavailable=True,
                 cold_wire_systems_verified=['CEE', 'POWER_GRID'], cold_ownership_format_version=2,
+                source_sha=source['source_sha'], source_tree=source['source_tree'], checked_out_source_verified=True,
+                pending_wire_retirement_verified=True, pending_entity_restart_phases=['SETUP', 'ARM', 'VERIFY'],
+                pending_entity_restart=pending_proof,
                 junit_checks_passed=tests, evidence_files=evidence)
 
 
@@ -271,16 +313,19 @@ def aggregate(run_path, jobs_path, index_path, artifacts, output, root=ROOT):
     rows = metadata(run, jobs, index)
     proofs, hashes = [], None
     for job, artifact, combination in sorted(rows, key=lambda row: row[2]):
-        proof = matrix_job(artifacts / artifact['name'], combination)
+        proof = matrix_job(artifacts / artifact['name'], combination, run['head_sha'], run['id'], run['run_attempt'], root)
         require(hashes is None or proof['artifact_hashes'] == hashes, 'Platform jobs built different frozen API/runtime/example artifacts')
-        hashes = proof['artifact_hashes']; proof['source_sha'] = run['head_sha']
+        hashes = proof['artifact_hashes']
         proof['evidence_files'] = [descriptor(path, root) for path in sorted(set(proof['evidence_files']))]
+        proof['checked_out_source'] = descriptor(artifacts / artifact['name'] / 'build/ci-source.json', root)
         proof['github_job_id'] = job['id']; proof['github_artifact_id'] = artifact['id']
         proofs.append((job, combination, proof))
     output.mkdir(parents=True)
     ci = dict(schema=1, source_sha=run['head_sha'], status=run['status'], conclusion=run['conclusion'],
               url=run['html_url'], run_id=run['id'], run_attempt=run['run_attempt'], jobs=[],
               inputs={key: descriptor(path, root) for key, path in [('run', run_path), ('jobs', jobs_path), ('artifacts', index_path)]})
+    require(len({proof['source_tree'] for _, _, proof in proofs}) == 1, 'CI jobs checked out different source trees')
+    ci['source_tree'] = proofs[0][2]['source_tree']
     for job, (platform, backend, profile), proof in proofs:
         path = output / f'{platform}-{backend}-{profile}.json'; write(path, proof)
         ci['jobs'].append(dict(platform=platform, backend=backend, profile=profile, status=job['status'],

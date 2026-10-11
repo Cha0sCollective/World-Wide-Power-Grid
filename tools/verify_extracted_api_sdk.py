@@ -41,6 +41,12 @@ def write(path, value):
     path.write_text(json.dumps(value, indent=2) + '\n', encoding='utf-8', newline='\n')
 
 
+def wrapper_executable():
+    # cwd is the extracted project. A bare BAT name avoids cmd /c stripping
+    # quotes around an absolute Windows path when other arguments contain spaces.
+    return 'gradlew.bat' if os.name == 'nt' else './gradlew'
+
+
 def extract(archive, destination):
     """Extract only a fresh, bounded, regular-file archive; retain Unix modes."""
     require(not destination.exists(), 'Preserve previous SDK attempts: extraction destination exists')
@@ -138,9 +144,8 @@ def verify(inputs, source_sha, output, timeout=1200, root=ROOT):
         expected_path, dependencies = output / (role + '-expected.json'), output / (role + '-dependencies.json')
         write(expected_path, expected)
         log = output / (role + '-build.log')
-        wrapper = project / ('gradlew.bat' if os.name == 'nt' else 'gradlew')
-        command = [sys.executable, str(root / 'tools/run_checked.py'), '--timeout', str(timeout), '--', str(wrapper),
-                   'clean', 'build', '--no-daemon', '-I', str(init), '-PapiRepository=' + maven.as_uri(),
+        command = [sys.executable, str(root / 'tools/run_checked.py'), '--timeout', str(timeout), '--', wrapper_executable(),
+                   'clean', 'build', '--no-daemon', '--no-build-cache', '-I', str(init), '-PapiRepository=' + maven.as_uri(),
                    '-PsdkExpectedHashes=' + str(expected_path), '-PsdkDependencyProof=' + str(dependencies)]
         with log.open('w', encoding='utf-8') as stream:
             process = subprocess.run(command, cwd=project, stdout=stream, stderr=subprocess.STDOUT, check=False)

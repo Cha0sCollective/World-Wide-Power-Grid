@@ -32,6 +32,38 @@ final class DelayedEntityLoads {
         }
     }
 
+    /** Release a test-only gate during shutdown, after evidence is saved and before entity-manager close. */
+    static void release(ServerLevel level,ChunkPos chunk) {
+        try {
+            var managerField=ServerLevel.class.getDeclaredField("entityManager");managerField.setAccessible(true);
+            var manager=managerField.get(level);var inboxField=PersistentEntitySectionManager.class.getDeclaredField("loadingInbox");inboxField.setAccessible(true);
+            if(inboxField.get(manager) instanceof Gate gate) {
+                gate.until.remove(chunk.toLong());
+                for(var iterator=gate.held.iterator();iterator.hasNext();) {
+                    var result=iterator.next();
+                    if(result.getPos().equals(chunk)) {iterator.remove();gate.delegate.offer(result);}
+                }
+            }
+        }catch(ReflectiveOperationException error) {throw new IllegalStateException("Cannot release the pinned entity-load test gate",error);}
+    }
+
+    /** Actual deserialized entities awaiting consumption by the server, without releasing the gate. */
+    static List<net.minecraft.world.entity.Entity> heldEntities(ServerLevel level,ChunkPos chunk) {
+        if(!level.getServer().isSameThread())throw new IllegalStateException("Inspect the entity inbox on the server thread");
+        try {
+            var managerField=ServerLevel.class.getDeclaredField("entityManager");managerField.setAccessible(true);
+            var manager=managerField.get(level);var inboxField=PersistentEntitySectionManager.class.getDeclaredField("loadingInbox");inboxField.setAccessible(true);
+            if(!(inboxField.get(manager) instanceof Gate gate))return List.of();
+            var entities=new ArrayList<net.minecraft.world.entity.Entity>();
+            // The delegate is Minecraft's concurrent IO inbox; held entries are
+            // server-owned. Inspect both because IO may finish between ticks.
+            for(var result:gate)if(result.getPos().equals(chunk))result.getEntities().forEach(entity->{
+                if(entity instanceof net.minecraft.world.entity.Entity actual)entities.add(actual);
+            });
+            return List.copyOf(entities);
+        }catch(ReflectiveOperationException error) {throw new IllegalStateException("Cannot inspect the pinned entity-load test gate",error);}
+    }
+
     private static final class Gate extends AbstractQueue<ChunkEntities<?>> {
         final ServerLevel level;
         final Object manager;

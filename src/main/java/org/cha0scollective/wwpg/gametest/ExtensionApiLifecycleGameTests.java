@@ -103,13 +103,37 @@ public final class ExtensionApiLifecycleGameTests {
             }
         };
         NeoForge.EVENT_BUS.addListener(ChunkEvent.Unload.class,listener);
+        boolean coldVerify=System.getProperty("wwpg.test.restartPhase","SETUP").equals("VERIFY");
+        var oldIds=org.cha0scollective.wwpg.extension.ApiTerminals.savedPgWireIdentities(level,cap);
+        var oldCeeIds=org.cha0scollective.wwpg.extension.ApiCeeWireIdentities.get(level).idsAt(coil);
+        if(coldVerify) {
+            h.assertTrue(org.cha0scollective.wwpg.extension.ApiTerminals.existing(level,source)==null
+                    &&org.cha0scollective.wwpg.extension.ApiTerminals.existing(level,cap)==null
+                    &&org.cha0scollective.wwpg.extension.ApiTerminals.existing(level,coil)==null,"Same-owner replacement must precede terminal discovery");
+            h.assertTrue(oldIds.size()==2&&oldCeeIds.size()==2,"Cold same-owner replacement requires two saved wires from each system");
+            DelayedEntityLoads.hold(level,chunk,100);
+        }
         level.setChunkForced(chunk.x,chunk.z,true);level.getChunkAt(source);
         for(var pos:new BlockPos[]{source,cap,coil}) {
             level.setBlockAndUpdate(pos,Blocks.AIR.defaultBlockState());level.setBlockAndUpdate(pos.below(),Blocks.STONE.defaultBlockState());
         }
         example(h,source,"source");example(h,cap,"capacitor");example(h,coil,"inductor");
+        h.assertTrue(saved(h,cap).getDouble("StoredVoltage")==0,"New API capacitor inherited the removed incarnation's charge before preparation");
         var ids=new HashSet<String>();
-        var sequence=h.startSequence().thenIdle(5).thenExecute(()-> {
+        var sequence=h.startSequence().thenExecute(()-> {
+            if(!coldVerify)return;
+            h.assertTrue(!level.areEntitiesLoaded(chunk.toLong()),"Same-owner replacement must exercise delayed saved entities");
+            h.assertTrue(org.cha0scollective.wwpg.extension.ApiTerminals.pendingPgWireIdentities(level,cap).containsAll(oldIds),"Same-owner physical removal lost exact old PG ownership");
+            h.assertTrue(org.cha0scollective.wwpg.extension.ApiTerminals.pendingCeeWireIdentities(level,coil).containsAll(oldCeeIds),"Same-owner physical removal lost exact old CEE ownership");
+            assertLoadingWireRejection(h,source);
+        }).thenWaitUntil(()->h.assertTrue(org.cha0scollective.wwpg.extension.ApiTerminals.canWire(level,source)
+                &&org.cha0scollective.wwpg.extension.ApiTerminals.canWire(level,cap)
+                &&org.cha0scollective.wwpg.extension.ApiTerminals.canWire(level,coil),"Waiting for actual API chunk/entity readiness and old-owner retirement"))
+                .thenExecute(()-> {
+            var world=GlobalElectricNetworks.getWorldNetworks(level);
+            for(var id:oldIds)h.assertTrue(world.getPart(id)==null,"Same-API replacement retained an old PG wire: "+id);
+            h.assertTrue(org.cha0scollective.wwpg.extension.ApiCeeWireIdentities.get(level).idsAt(coil).stream().noneMatch(oldCeeIds::contains),"Same-API replacement retained an old CEE wire");
+            h.assertTrue(saved(h,cap).getDouble("StoredVoltage")==0,"New unwired API capacitor inherited retired history");
             WiringGameTests.connect(h,source,0,cap,0,true);WiringGameTests.connect(h,source,1,cap,1,true);
             WiringGameTests.connect(h,source,0,coil,0,false);WiringGameTests.connect(h,source,1,coil,1,false);
         }).thenIdle(30).thenExecute(()-> {
@@ -149,6 +173,128 @@ public final class ExtensionApiLifecycleGameTests {
             });
         }
         sequence.thenExecute(()-> {NeoForge.EVENT_BUS.unregister(listener);level.setChunkForced(chunk.x,chunk.z,false);DynamicGameTests.audit(h);}).thenSucceed();
+    }
+
+    /** Actual native items must refuse unready API owners without allocating connections or nodes. */
+    static void assertLoadingWireRejection(GameTestHelper h,BlockPos pos) {
+        var level=h.getLevel();h.assertTrue(!org.cha0scollective.wwpg.extension.ApiTerminals.canWire(level,pos),"Loading guard requires an unready API owner");
+        var electric=org.patryk3211.powergrid.electricity.base.IElectric.getAt(level,pos);
+        var provider=org.cha0scollective.wwpg.extension.ApiTerminals.device(level,pos);
+        h.assertTrue(provider!=null,"Loading guard requires a declared API device");
+        var terminal=provider.terminals().stream().filter(value->value.nativeId()==0).findFirst().orElseThrow();
+        var point=terminal.position();
+        var click=new net.minecraft.world.phys.Vec3(pos.getX()+point.x(),pos.getY()+point.y(),pos.getZ()+point.z());
+        if(electric!=null)h.assertTrue(new BlockWireEndpoint(pos,0).getExactPosition(level).equals(click),"Native geometry disagrees with the declared terminal position");
+        else h.assertTrue(org.cha0scollective.wwpg.extension.ApiTerminals.pendingRemoval(level,pos),"Only a pending incarnation may refuse loaded terminal discovery");
+        var player=new net.minecraft.world.entity.player.Player(level,pos,0,new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(),"WWPG-loading-wire-test")) {
+            @Override public boolean isSpectator(){return false;}@Override public boolean isCreative(){return true;}
+            @Override public net.minecraft.world.phys.HitResult pick(double distance,float partialTicks,boolean fluid) {
+                return new net.minecraft.world.phys.BlockHitResult(click,net.minecraft.core.Direction.UP,pos,false);
+            }
+        };
+        var world=GlobalElectricNetworks.getWorldNetworks((net.minecraft.world.level.LevelAccessor)level);
+        int nodes=world==null?0:world.globalExternalNodes.size();
+        var parts=world==null?new net.minecraft.nbt.ListTag():world.save(new CompoundTag(),level.registryAccess()).getList("Parts",net.minecraft.nbt.Tag.TAG_COMPOUND).copy();
+        var cee=org.cha0scollective.wwpg.extension.ApiCeeWireIdentities.get(level).idsAt(pos);
+        for(boolean pg:new boolean[]{true,false}) {
+            player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,pg?org.patryk3211.powergrid.collections.ModdedItems.WIRE.asStack(64)
+                    :com.george_vi.electroenergetics.CEEItems.WIRE_SPOOL.asStack());
+            var stack=player.getMainHandItem();var before=stack.copy();
+            var inventoryBefore=new java.util.ArrayList<net.minecraft.world.item.ItemStack>();
+            for(int slot=0;slot<player.getInventory().getContainerSize();slot++)inventoryBefore.add(player.getInventory().getItem(slot).copy());
+            var context=new net.minecraft.world.item.context.UseOnContext(player,net.minecraft.world.InteractionHand.MAIN_HAND,
+                    new net.minecraft.world.phys.BlockHitResult(click,net.minecraft.core.Direction.UP,pos,false));
+            if(pg) {
+                var result=org.patryk3211.powergrid.electricity.wire.WireItem.useOn(player,net.minecraft.world.InteractionHand.MAIN_HAND,pos,net.minecraft.core.Direction.UP);
+                h.assertTrue(result.interruptsFurtherEvaluation()&&result.isFalse(),"Unready API owner accepted the actual native PG wire interaction");
+            }else h.assertTrue(stack.getItem().useOn(context)==net.minecraft.world.InteractionResult.FAIL,"Unready API owner accepted native CEE spool");
+            h.assertTrue(net.minecraft.world.item.ItemStack.matches(before,stack),"Rejected wiring changed item or pending terminal selection");
+            for(int slot=0;slot<inventoryBefore.size();slot++)h.assertTrue(net.minecraft.world.item.ItemStack.matches(inventoryBefore.get(slot),player.getInventory().getItem(slot)),"Rejected wiring changed inventory slot "+slot);
+        }
+        var after=GlobalElectricNetworks.getWorldNetworks((net.minecraft.world.level.LevelAccessor)level);
+        h.assertTrue((after==null?0:after.globalExternalNodes.size())==nodes,"Rejected wiring allocated electrical nodes");
+        var afterParts=after==null?new net.minecraft.nbt.ListTag():after.save(new CompoundTag(),level.registryAccess()).getList("Parts",net.minecraft.nbt.Tag.TAG_COMPOUND);
+        h.assertTrue(parts.equals(afterParts),"Rejected wiring created or changed native PG wire parts");
+        h.assertTrue(cee.equals(org.cha0scollective.wwpg.extension.ApiCeeWireIdentities.get(level).idsAt(pos)),"Rejected wiring created CEE connections");
+    }
+
+    /** Select a ready API endpoint, then remove it before clicking a ready native target. */
+    static void assertSelectedApiReplacementRejectsSecondClick(GameTestHelper h,BlockPos source,BlockPos nativeTarget) {
+        var level=h.getLevel();h.assertTrue(org.cha0scollective.wwpg.extension.ApiTerminals.canWire(level,source),"Selected-endpoint test requires an initially ready API source");
+        var players=new java.util.ArrayList<net.minecraft.world.entity.player.Player>();
+        var hits=new java.util.ArrayList<java.util.concurrent.atomic.AtomicReference<net.minecraft.world.phys.BlockHitResult>>();
+        for(boolean pg:new boolean[]{true,false}) {
+            var click=new BlockWireEndpoint(source,0).getExactPosition(level);
+            var hit=new java.util.concurrent.atomic.AtomicReference<>(new net.minecraft.world.phys.BlockHitResult(click,net.minecraft.core.Direction.UP,source,false));
+            var player=new net.minecraft.world.entity.player.Player(level,source,0,new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(),"WWPG-selected-wire-test")) {
+                @Override public boolean isSpectator(){return false;}@Override public boolean isCreative(){return false;}
+                @Override public net.minecraft.world.phys.HitResult pick(double distance,float partialTicks,boolean fluid){return hit.get();}
+            };
+            player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,pg?org.patryk3211.powergrid.collections.ModdedItems.WIRE.asStack(64):com.george_vi.electroenergetics.CEEItems.WIRE_SPOOL.asStack());
+            var context=new net.minecraft.world.item.context.UseOnContext(player,net.minecraft.world.InteractionHand.MAIN_HAND,
+                    new net.minecraft.world.phys.BlockHitResult(click,net.minecraft.core.Direction.UP,source,false));
+            if(pg)h.assertTrue(org.patryk3211.powergrid.electricity.wire.WireItem.useOn(player,net.minecraft.world.InteractionHand.MAIN_HAND,source,net.minecraft.core.Direction.UP).isTrue(),"Actual first PG click did not select the ready API source");
+            else h.assertTrue(player.getMainHandItem().getItem().useOn(context).consumesAction(),"Actual first CEE click did not select the ready API source");
+            players.add(player);hits.add(hit);
+        }
+        // Native PG otherwise treats a pending target with getAt()==null as an
+        // imaginary free-standing wire endpoint. Exercise that real fallback
+        // with the source selected by an actual earlier player interaction.
+        var pendingTarget=source.east(9);
+        h.assertTrue(level.getBlockState(pendingTarget).isAir(),"Selected-endpoint fixture target must begin empty");
+        example(h,pendingTarget,"capacitor");
+        h.assertTrue(org.cha0scollective.wwpg.extension.ApiTerminals.get(level,pendingTarget)!=null,"New target needs only declared terminal geometry");
+        level.setBlockAndUpdate(pendingTarget,Blocks.AIR.defaultBlockState());example(h,pendingTarget,"capacitor");
+        h.assertTrue(org.cha0scollective.wwpg.extension.ApiTerminals.pendingRemoval(level,pendingTarget)
+                &&org.patryk3211.powergrid.electricity.base.IElectric.getAt(level,pendingTarget)==null,"Pending target must reproduce native PG's missing-holder fallback");
+        var targetTerminal=org.cha0scollective.wwpg.extension.ApiTerminals.device(level,pendingTarget).terminals().stream().filter(value->value.nativeId()==0).findFirst().orElseThrow();
+        var targetPoint=targetTerminal.position();var pendingClick=new net.minecraft.world.phys.Vec3(pendingTarget.getX()+targetPoint.x(),pendingTarget.getY()+targetPoint.y(),pendingTarget.getZ()+targetPoint.z());
+        var beforeWorld=GlobalElectricNetworks.getWorldNetworks(level);int beforeNodes=beforeWorld.globalExternalNodes.size();
+        var beforeParts=beforeWorld.save(new CompoundTag(),level.registryAccess()).getList("Parts",net.minecraft.nbt.Tag.TAG_COMPOUND).copy();
+        var beforeCee=org.cha0scollective.wwpg.extension.ApiCeeWireIdentities.get(level).idsAt(source);
+        for(int index=0;index<2;index++) {
+            boolean pg=index==0;var player=players.get(index);var stack=player.getMainHandItem();var before=stack.copy();
+            var inventoryBefore=new java.util.ArrayList<net.minecraft.world.item.ItemStack>();
+            for(int slot=0;slot<player.getInventory().getContainerSize();slot++)inventoryBefore.add(player.getInventory().getItem(slot).copy());
+            var hit=new net.minecraft.world.phys.BlockHitResult(pendingClick,net.minecraft.core.Direction.UP,pendingTarget,false);hits.get(index).set(hit);
+            if(pg) {
+                var result=org.patryk3211.powergrid.electricity.wire.WireItem.useOn(player,net.minecraft.world.InteractionHand.MAIN_HAND,pendingTarget,net.minecraft.core.Direction.UP);
+                h.assertTrue(result.interruptsFurtherEvaluation()&&result.isFalse(),"Preselected PG wire fell back to an imaginary endpoint on a pending target");
+            }else h.assertTrue(stack.getItem().useOn(new net.minecraft.world.item.context.UseOnContext(player,net.minecraft.world.InteractionHand.MAIN_HAND,hit))==net.minecraft.world.InteractionResult.FAIL,"Preselected CEE wire accepted a pending target");
+            h.assertTrue(net.minecraft.world.item.ItemStack.matches(before,stack),"Pending target consumed wire or changed the selected source");
+            for(int slot=0;slot<inventoryBefore.size();slot++)h.assertTrue(net.minecraft.world.item.ItemStack.matches(inventoryBefore.get(slot),player.getInventory().getItem(slot)),"Pending target changed inventory slot "+slot);
+        }
+        h.assertTrue(beforeNodes==beforeWorld.globalExternalNodes.size(),"Pending target fallback created native nodes");
+        h.assertTrue(beforeParts.equals(beforeWorld.save(new CompoundTag(),level.registryAccess()).getList("Parts",net.minecraft.nbt.Tag.TAG_COMPOUND)),"Pending target fallback created or changed native PG wires");
+        h.assertTrue(beforeCee.equals(org.cha0scollective.wwpg.extension.ApiCeeWireIdentities.get(level).idsAt(source)),"Pending target fallback created CEE connections");
+        level.setBlockAndUpdate(pendingTarget,Blocks.AIR.defaultBlockState());
+        var state=level.getBlockState(source);
+        level.setBlockAndUpdate(source,Blocks.AIR.defaultBlockState());level.setBlockAndUpdate(source,state);
+        h.assertTrue(org.cha0scollective.wwpg.extension.ApiTerminals.pendingRemoval(level,source),"Same-source replacement did not retain a pending incarnation break");
+        h.assertTrue(ElectricalMeasurements.read(level,source).status()==MeasurementStatus.NOT_READY,"Pending source replacement exposed old device results");
+        var terminal=ElectricalMeasurements.readTerminal(level,source,0);
+        h.assertTrue(terminal.status()==MeasurementStatus.NOT_READY&&terminal.voltage().isEmpty(),"Pending source replacement exposed an old terminal voltage");
+        var world=GlobalElectricNetworks.getWorldNetworks(level);int nodes=world.globalExternalNodes.size();
+        var parts=world.save(new CompoundTag(),level.registryAccess()).getList("Parts",net.minecraft.nbt.Tag.TAG_COMPOUND).copy();
+        var cee=org.cha0scollective.wwpg.extension.ApiCeeWireIdentities.get(level).idsAt(source);
+        for(int index=0;index<2;index++) {
+            boolean pg=index==0;var player=players.get(index);var stack=player.getMainHandItem();var before=stack.copy();
+            var inventoryBefore=new java.util.ArrayList<net.minecraft.world.item.ItemStack>();
+            for(int slot=0;slot<player.getInventory().getContainerSize();slot++)inventoryBefore.add(player.getInventory().getItem(slot).copy());
+            var click=new BlockWireEndpoint(nativeTarget,0).getExactPosition(level);
+            hits.get(index).set(new net.minecraft.world.phys.BlockHitResult(click,net.minecraft.core.Direction.UP,nativeTarget,false));
+            var context=new net.minecraft.world.item.context.UseOnContext(player,net.minecraft.world.InteractionHand.MAIN_HAND,
+                    new net.minecraft.world.phys.BlockHitResult(click,net.minecraft.core.Direction.UP,nativeTarget,false));
+            if(pg) {
+                var result=org.patryk3211.powergrid.electricity.wire.WireItem.useOn(player,net.minecraft.world.InteractionHand.MAIN_HAND,nativeTarget,net.minecraft.core.Direction.UP);
+                h.assertTrue(result.interruptsFurtherEvaluation()&&result.isFalse(),"Native target accepted a replaced selected API source");
+            }else h.assertTrue(stack.getItem().useOn(context)==net.minecraft.world.InteractionResult.FAIL,"Native target accepted a replaced selected API source");
+            h.assertTrue(net.minecraft.world.item.ItemStack.matches(before,stack),"Rejected second click consumed wire or cleared the selected source");
+            for(int slot=0;slot<inventoryBefore.size();slot++)h.assertTrue(net.minecraft.world.item.ItemStack.matches(inventoryBefore.get(slot),player.getInventory().getItem(slot)),"Rejected second click changed inventory slot "+slot);
+        }
+        h.assertTrue(nodes==world.globalExternalNodes.size(),"Rejected selected-source wiring created nodes");
+        h.assertTrue(parts.equals(world.save(new CompoundTag(),level.registryAccess()).getList("Parts",net.minecraft.nbt.Tag.TAG_COMPOUND)),"Rejected selected-source wiring created wire parts");
+        h.assertTrue(cee.equals(org.cha0scollective.wwpg.extension.ApiCeeWireIdentities.get(level).idsAt(source)),"Rejected selected-source wiring created CEE connections");
     }
     private static Set<String> wireIds(GameTestHelper h,BlockPos source) {
         var world=GlobalElectricNetworks.getWorldNetworks(h.getLevel());var ids=new HashSet<String>();

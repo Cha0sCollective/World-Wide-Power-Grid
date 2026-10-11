@@ -2,6 +2,7 @@ package org.cha0scollective.wwpg.extension;
 
 import org.cha0scollective.wwpg.api.*;
 import org.cha0scollective.wwpg.bridge.PropertyCurrentSourceWire;
+import org.cha0scollective.wwpg.mixin.PnJunctionParametersAccessor;
 import org.patryk3211.powergrid.electricity.sim.ElectricalNetwork;
 import org.patryk3211.powergrid.electricity.sim.node.*;
 import org.patryk3211.powergrid.electricity.sim.special.PNJunctionWire;
@@ -55,8 +56,6 @@ final class ApiElement {
                 || structure.model().getClass() != element.model().getClass()
                 || positive != nodes.get(element.positiveNode()) || negative != nodes.get(element.negativeNode())) return false;
         return switch (element.model()) {
-            case ElectricalModel.Diode d -> d.saturationCurrentAmps() == ((ElectricalModel.Diode)structure.model()).saturationCurrentAmps()
-                    && d.seriesResistanceOhms() == ((ElectricalModel.Diode)structure.model()).seriesResistanceOhms();
             case ElectricalModel.Transformer t -> t.secondaryPositiveNode().equals(((ElectricalModel.Transformer)structure.model()).secondaryPositiveNode())
                     && t.secondaryNegativeNode().equals(((ElectricalModel.Transformer)structure.model()).secondaryNegativeNode())
                     && transformer.coupledNodes().contains(nodes.get(t.secondaryPositiveNode()))
@@ -68,10 +67,24 @@ final class ApiElement {
     }
 
     void update(Element element) {
+        var previous = desired.model();
         desired = element;
         tickStorage=storage;
         if (element.model() instanceof ElectricalModel.Transformer t) transformer.setRatio((float)t.ratio());
-        if (element.model() instanceof ElectricalModel.Diode d) { diode.setTemperatureCelsius(d.temperatureCelsius()); diode.setIdealityFactor(d.idealityFactor()); }
+        if (element.model() instanceof ElectricalModel.Diode d) {
+            var old = (ElectricalModel.Diode) previous;
+            if (Double.compare(d.saturationCurrentAmps(), old.saturationCurrentAmps()) != 0
+                    || Double.compare(d.seriesResistanceOhms(), old.seriesResistanceOhms()) != 0) {
+                // PG's hook reads these parameters on every Newton iteration.
+                // Retain its G/Ieq/previous-voltage limiter and network ownership;
+                // replacing the wire would repeatedly warm up a changing device.
+                var parameters = (PnJunctionParametersAccessor) diode;
+                parameters.wwpg$setSaturationCurrent(d.saturationCurrentAmps());
+                parameters.wwpg$setSeriesResistance(d.seriesResistanceOhms());
+            }
+            diode.setTemperatureCelsius(d.temperatureCelsius());
+            diode.setIdealityFactor(d.idealityFactor());
+        }
         if (element.model() instanceof ElectricalModel.ControlledVoltageSource c) controlled.update(c.gain());
         if (element.model() instanceof ElectricalModel.ControlledCurrentSource c) controlled.update(c.transconductanceSiemens());
         sumV = squaresV = sumI = squaresI = sumP = lastV = lastI = 0;

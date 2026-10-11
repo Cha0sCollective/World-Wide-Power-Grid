@@ -20,16 +20,18 @@
   "development_verification": {
     "final_acceptance": false,
     "runtime_and_sdk_build": "passed",
-    "unit_tests": {"suites": 15, "passed": 59, "failed": 0},
+    "unit_tests": {"suites": 15, "passed": 62, "failed": 0},
     "independent_example_builds": ["extension-addon", "cee-addon"],
-    "windows_native_packaged_api": {"total": 31, "passed": 30, "failed": 1},
+    "windows_native_packaged_api": {"total": 32, "passed": 32, "failed": 0, "setup": "api16-full-NATIVE-SETUP", "cold_verification": ["api16-full-NATIVE-VERIFY1", "api16-full-NATIVE-VERIFY2", "api16-full-NATIVE-VERIFY3"], "frozen_acceptance": false},
+    "live_diode_parameters": {"backend": "NATIVE", "accepted_updates": 30, "stable_objects": true, "retained_storage_history": true},
+    "pending_retirement_restart": {"status": "passed", "run": "api21-pending", "backends": ["NATIVE", "JAVA"], "phases": ["SETUP", "ARM", "VERIFY"], "finding": "Native saved-entity deserialization can run synchronously on the server thread before entity readiness; the entity-deserializer thread name alone does not establish worker ownership", "correction": "Defer discovery on background threads and binding until API endpoints are ready; preserve exact old wire identities across a save made before readiness", "frozen_acceptance": false},
     "native_cold_replacement": {"consecutive_passes": 3, "wire_systems": ["CEE", "PG"], "serialized_state_before_first_solve": true},
     "pause_step_resume": {"backends": ["NATIVE", "JAVA"], "frozen_callbacks": 0, "stepped_commits": 1, "paused_meters_unavailable": true},
     "actual_native_unload_cycles": {"general_api": 5, "native_panel_and_board": 5},
     "failed_run_evidence": "evidence/development/index.json"
   },
   "remaining": [
-    "Confirm the stable-node cache correction closes the callback-fault CEE wire regression",
+    "Repeat the save-before-ready SETUP/ARM/VERIFY gate on the final eight-way frozen-artifact matrix",
     "Complete fresh Java verification and actual graphical/multiplayer workflows",
     "Run packaged acceptance against frozen runtime/API/example artifacts",
     "Retain actual build and gameplay evidence for every release gate",

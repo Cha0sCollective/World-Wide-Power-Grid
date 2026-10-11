@@ -1,11 +1,14 @@
 """Pure archive/classpath gate tests; they do not execute or simulate Gradle builds."""
 from pathlib import Path
+import os
+import subprocess
+import sys
 import tempfile
 import unittest
 import zipfile
 
 from package_api_release import PublicationError
-from verify_extracted_api_sdk import SdkBuildError, audit_project, extract
+from verify_extracted_api_sdk import SdkBuildError, audit_project, extract, wrapper_executable
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -57,6 +60,19 @@ class ExtractedSdkChecks(unittest.TestCase):
         java.write_text('package example;', encoding='utf-8')
         (output / 'build.gradle').write_text('dependencies { compileOnly project(":wwpg") }', encoding='utf-8')
         with self.assertRaises(SdkBuildError): audit_project(output)
+
+    @unittest.skipUnless(os.name == 'nt', 'Windows BAT quoting regression')
+    def test_inert_wrapper_runs_with_spaces_in_directory_and_arguments(self):
+        project = self.root / 'space directory'; project.mkdir()
+        self.assertTrue(project.resolve().is_relative_to(ROOT))
+        # This is an inert batch echo probe, not Gradle or a simulated build.
+        (project / 'gradlew.bat').write_text('@echo off\r\necho SDK_COMMAND_PROBE %~1\r\nexit /b 0\r\n', encoding='ascii')
+        self.assertEqual(wrapper_executable(), 'gradlew.bat')
+        result = subprocess.run([sys.executable, str(ROOT / 'tools/run_checked.py'), '--timeout', '10', '--',
+                                 wrapper_executable(), '-Pprobe=path with spaces'],
+                                cwd=project, capture_output=True, text=True, timeout=30)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('SDK_COMMAND_PROBE -Pprobe=path with spaces', result.stdout)
 
 
 if __name__ == '__main__': unittest.main()

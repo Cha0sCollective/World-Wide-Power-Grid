@@ -96,4 +96,34 @@ class ApiTerminalIdentitiesTest {
         assertEquals(2,reopened.save(new CompoundTag(),null).getInt("Version"));
         assertEquals(1,reopened.loadedFormat().orElseThrow(),"Writing the current format must not pretend it was loaded from disk");
     }
+
+    @Test void sameOwnerPendingRemovalSurvivesRestartAndKeepsNewWireIdentitiesSeparate() {
+        var data=new ApiTerminalIdentities();data.remember(OWNER,List.of(terminal("positive",0)));
+        var oldPg=new WorldNetworks.SimpleId(UUID.randomUUID());var oldCee=UUID.randomUUID();
+        var newPg=new WorldNetworks.SimpleId(UUID.randomUUID());var newCee=UUID.randomUUID();
+        data.rememberWires(OWNER,Set.of(oldPg),Set.of(oldCee));
+        data.queueRemoval(OWNER,Set.of(oldPg),Set.of(oldCee));
+        data.forget(OWNER); // a new incarnation may have the exact same stable declaration
+        data.remember(OWNER,List.of(terminal("positive",0)));
+        data.rememberWires(OWNER,Set.of(newPg),Set.of(newCee));
+        var reopened=ApiTerminalIdentities.load(data.save(new CompoundTag(),null));
+        assertEquals(Set.of(oldPg),reopened.pendingRemovals().get(OWNER).pgWires());
+        assertEquals(Set.of(oldCee),reopened.pendingRemovals().get(OWNER).ceeWires());
+        assertEquals(Set.of(newPg),reopened.pgWires(OWNER));assertEquals(Set.of(newCee),reopened.ceeWires(OWNER));
+        reopened.finishRemoval(OWNER);
+        assertTrue(reopened.pendingRemovals().isEmpty());
+        assertEquals(Set.of(newPg),reopened.pgWires(OWNER));assertEquals(Set.of(newCee),reopened.ceeWires(OWNER));
+    }
+
+    @Test void pendingRemovalMergeAndLegacyFormatTwoRemainDeterministic() {
+        var data=new ApiTerminalIdentities();
+        var first=new WorldNetworks.ComplexId(UUID.randomUUID(),0);var second=new WorldNetworks.ComplexId(first.id(),1);
+        var cee=UUID.randomUUID();
+        data.queueRemoval(OWNER,Set.of(first),Set.of());data.queueRemoval(OWNER,Set.of(second),Set.of(cee));
+        var reopened=ApiTerminalIdentities.load(data.save(new CompoundTag(),null));
+        assertEquals(Set.of(first,second),reopened.pendingRemovals().get(OWNER).pgWires());
+        assertEquals(Set.of(cee),reopened.pendingRemovals().get(OWNER).ceeWires());
+        var legacy=data.save(new CompoundTag(),null);legacy.remove("PendingRemovals");
+        assertTrue(ApiTerminalIdentities.load(legacy).pendingRemovals().isEmpty());
+    }
 }
