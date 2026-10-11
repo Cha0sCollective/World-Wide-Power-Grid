@@ -1,0 +1,24 @@
+---
+import DefaultTitle from '@astrojs/starlight/components/PageTitle.astro';
+import { project } from '../../data/project';
+const version = Astro.url.pathname.split('/')[2] ?? '';
+---
+
+<div class="release-tools" data-pagefind-ignore>
+  <span class="version-label">
+    WWPG / {version}
+    {version === project.currentRelease ? ' / CURRENT' : ' / ARCHIVED'}
+  </span>
+  <nav aria-label="Documentation editions">
+    {project.releases.map((release) => (
+      <a
+        href={`/docs/${release.version}/`}
+        aria-current={release.version === version ? 'true' : undefined}
+      >
+        {release.version}
+      </a>
+    ))}
+    <a href="/docs/">All editions ↗</a>
+  </nav>
+</div>
+<DefaultTitle />

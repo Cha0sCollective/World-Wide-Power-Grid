@@ -1,0 +1,50 @@
+---
+const version = Astro.url.pathname.split('/')[2] ?? '';
+---
+
+<a class="docs-search-fallback" href="/docs/">
+  Browse docs
+</a>
+<button class="docs-search-open" type="button" hidden>
+  <span>Search docs</span>
+  <kbd>Ctrl K</kbd>
+</button>
+<dialog
+  class="docs-search-dialog"
+  aria-labelledby="search-title"
+  data-version={version}
+>
+  <div class="docs-search-inner">
+    <div class="docs-search-header">
+      <div>
+        <h2 id="search-title">Search documentation</h2>
+        <p class="docs-search-status">Release {version}</p>
+      </div>
+      <button class="docs-search-close" type="button">
+        Close
+      </button>
+    </div>
+    <label class="docs-search-label" for="docs-search-input">
+      Find a topic in this release
+    </label>
+    <input
+      id="docs-search-input"
+      type="search"
+      autocomplete="off"
+      placeholder="Try transformers, pins, or installation"
+    />
+    <p
+      class="docs-search-status"
+      role="status"
+      aria-live="polite"
+      id="search-status"
+    >
+      Enter a topic to search.
+    </p>
+    <ul class="docs-search-results"></ul>
+  </div>
+</dialog>
+<script>
+  import { initializeSearch } from '../../scripts/search';
+  initializeSearch();
+</script>

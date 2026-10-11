@@ -1,0 +1,58 @@
+name: Publish WWPG website
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: wwpg-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: website
+    env:
+      ASTRO_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - run: npm ci
+      - name: Verify released Javadoc and compile both downloadable SDK examples
+        run: |
+          release_commit=$(node -p "require('./src/data/project.json').releases.find(r => r.version === require('./src/data/project.json').currentRelease).commit")
+          git worktree add --detach ../.website-api-source "$release_commit"
+          node scripts/prepare-api.mjs ../.website-api-source
+      - run: npm run check:launch
+      - run: npm run check
+      - run: npm run build
+      - run: npm test
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: website/dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v5
+        id: deployment

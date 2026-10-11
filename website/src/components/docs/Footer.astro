@@ -1,0 +1,12 @@
+---
+import DefaultFooter from '@astrojs/starlight/components/Footer.astro';
+import { project } from '../../data/project';
+---
+
+<DefaultFooter />
+<nav class="docs-footer-links" aria-label="WWPG links">
+  <a href="/">WWPG overview</a>
+  <a href="/downloads/">Downloads</a>
+  <a href="/docs/">All documentation editions</a>
+  <a href={project.community}>Ch4oS Collective ↗</a>
+</nav>
