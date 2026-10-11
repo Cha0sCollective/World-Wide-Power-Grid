@@ -18,6 +18,11 @@ Install this exact combination on the server and every client. Use Java 21.
 | Architectury API | NeoForge 13.0.8 |
 | WWPG | 0.2.0 |
 
+These are the versions for the published 0.2.0 jar. New builds allow newer
+dependency versions; see [Version compatibility](VERSION_COMPATIBILITY.md)
+for the NeoForge 21.1.248 test target and the difference between allowed and
+verified versions.
+
 Use the full Create release jar. [The 0.2.0 dependency list](../release/0.2.0/dependencies.json) records the exact downloads and checksums. WWPG does not include these other mods; download and install them separately.
 
 ## Optional computer-control profile

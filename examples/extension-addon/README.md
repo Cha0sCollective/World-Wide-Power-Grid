@@ -32,7 +32,7 @@ the example's build or shade API classes into the example jar.
 ## Install and operate
 
 Install the example jar together with the **WWPG 0.2.0 runtime** on the server
-and every client. Use the pinned Minecraft 1.21.1 / NeoForge 21.1.231 environment
+and every client. Use the tested Minecraft 1.21.1 / NeoForge 21.1.231 environment
 with Java 21, Create 6.0.10-280, CEE 1.1.3, PG 0.6.2, and Architectury 13.0.8.
 Follow [WWPG's installation instructions](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/docs/INSTALL.md) for the upstream
 dependencies and solver configuration. The example adds no FE or computer mod

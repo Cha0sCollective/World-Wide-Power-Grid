@@ -8,6 +8,7 @@ These guides describe **WWPG 0.2.0**, its supported stationary factories, and
 | I want to… | Read |
 | --- | --- |
 | Install or update the mod | [Installation](INSTALL.md) |
+| Check NeoForge versions or try newer upstream mods | [Version compatibility](VERSION_COMPATIBILITY.md) |
 | See which machines and tools work together | [Supported content](SUPPORT.md) |
 | Try working circuits with instructions | [Stationary Test Yard](STATIONARY_YARD.md) |
 | Learn the native wire and repair controls | [Wiring and repair](STATIONARY_WIRING.md) |
