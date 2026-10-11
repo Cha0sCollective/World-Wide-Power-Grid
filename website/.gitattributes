@@ -1,0 +1,2 @@
+# Frozen release snapshots must retain their exact bytes on every platform.
+content/releases/** -text

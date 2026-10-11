@@ -1,0 +1,11 @@
+---
+import DefaultHead from '@astrojs/starlight/components/Head.astro';
+const version = Astro.url.pathname.split('/')[2] ?? '';
+---
+
+<DefaultHead />
+<meta name="wwpg-doc-version" content={version} />
+<meta
+  property="og:image:alt"
+  content="World-Wide Power Grid — release documentation"
+/>

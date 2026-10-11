@@ -1,0 +1,114 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import {
+  project,
+  currentRelease,
+  docsHref,
+  sourceHref,
+} from '../../data/project';
+---
+
+<Layout
+  title="Documentation"
+  description="Find release-specific WWPG installation guides, compatibility details, Lua examples, and the released Java addon API."
+>
+  <section class="page-hero container">
+    <p class="eyebrow">WWPG / FIELD GUIDE</p>
+    <h1>
+      Know your
+      <br />
+      <span class="text-mint">connections.</span>
+    </h1>
+    <p class="page-lead">Choose your release. Find your next step.</p>
+  </section>
+  <section
+    class="container docs-release-selector"
+    aria-labelledby="release-title"
+  >
+    <div>
+      <p class="eyebrow">DOCUMENTATION EDITIONS</p>
+      <h2 id="release-title">Built for your version.</h2>
+      <p>
+        Every published edition is pinned to its mod release. The current
+        preview covers {currentRelease.version}.
+      </p>
+    </div>
+    <ul>
+      {project.releases.map((release) => (
+        <li>
+          <a href={docsHref(release.version)}>
+            <span>
+              <strong>{release.version}</strong>
+              <small>
+                {release.version === project.currentRelease
+                  ? 'Current documentation'
+                  : 'Archived documentation'}{' '}
+                · {release.channel}
+              </small>
+            </span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+  <section class="section container docs-start-grid">
+    <article>
+      <span class="eyebrow">01 / PLAYERS & SERVER OWNERS</span>
+      <h2>Get the circuit running.</h2>
+      <p>
+        Check dependencies, configure the solver, learn the native tools, and
+        investigate unexpected readings.
+      </p>
+      <a class="text-link" href={`${docsHref()}install/`}>
+        Installation guide ↗
+      </a>
+      <a class="text-link" href={`${docsHref()}troubleshooting/`}>
+        Diagnostics and troubleshooting ↗
+      </a>
+    </article>
+    <article>
+      <span class="eyebrow">02 / COMPUTER CONTROL</span>
+      <h2>Switch. Read. Automate.</h2>
+      <p>
+        Use Pinout's native Lua peripheral with the optional computer-control
+        profile and the supplied yard.
+      </p>
+      <a class="text-link" href={`${docsHref()}lua/`}>
+        Lua guide ↗
+      </a>
+      <a class="text-link" href={`${docsHref()}example-worlds/`}>
+        Example worlds ↗
+      </a>
+    </article>
+    <article>
+      <span class="eyebrow">03 / ADDON AUTHORS</span>
+      <h2>Extend the ecosystem.</h2>
+      <p>
+        API {currentRelease.api?.version} ships with WWPG{' '}
+        {currentRelease.version}. Start with the released SDK and two complete
+        example projects, then explore device lifecycle and CEE property
+        adapters.
+      </p>
+      <a class="text-link" href={`${docsHref()}developers/`}>
+        Developer documentation ↗
+      </a>
+      <a class="text-link" href={`/api/${currentRelease.version}/`}>
+        Java API reference ↗
+      </a>
+    </article>
+  </section>
+  <section class="container docs-edition-note">
+    <p class="eyebrow">A SEPARATE EDITION FOR THE COMMUNITY PACK</p>
+    <h3>Playing Create: Ch4oS?</h3>
+    <p>
+      The future player manual on <a href={project.community}>ch4os.live</a>{' '}
+      will teach the pack's gameplay systems. WWPG's requirements and release
+      history are separate. Check versions before sharing builds or
+      instructions.
+    </p>
+    <a class="text-link" href={sourceHref('docs/INSTALL.md')}>
+      Check this release's source guide ↗
+    </a>
+  </section>
+</Layout>

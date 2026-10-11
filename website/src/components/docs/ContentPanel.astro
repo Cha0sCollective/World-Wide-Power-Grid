@@ -1,0 +1,13 @@
+---
+import DefaultPanel from '@astrojs/starlight/components/ContentPanel.astro';
+const version = Astro.url.pathname.split('/')[2] ?? '';
+---
+
+<div
+  data-pagefind-filter={`version:${version}`}
+  data-pagefind-meta={`version:${version}`}
+>
+  <DefaultPanel>
+    <slot />
+  </DefaultPanel>
+</div>

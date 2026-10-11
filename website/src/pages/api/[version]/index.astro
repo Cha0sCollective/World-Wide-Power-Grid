@@ -1,0 +1,101 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { project, docsHref } from '../../../data/project';
+export function getStaticPaths() {
+  return project.releases.map((release) => ({
+    params: { version: release.version },
+    props: { release },
+  }));
+}
+const { release } = Astro.props;
+---
+
+<Layout
+  title={`Java API — ${release.version}`}
+  description={`Public Java addon API availability for WWPG ${release.version}. Internal bridge classes are not supported extension points.`}
+>
+  <section class="page-hero container">
+    <p class="eyebrow">JAVA REFERENCE / {release.version}</p>
+    <h1>
+      Room for
+      <br />
+      <span class="text-mint">more connections.</span>
+    </h1>
+    <p class="page-lead">
+      {release.api
+        ? `API ${release.api.version} · released with WWPG ${release.version}`
+        : 'No public addon API in this archived release.'}
+    </p>
+  </section>
+  <section class="container api-availability">
+    {release.api ? (
+      <>
+        <h2>Two contracts. Clear boundaries.</h2>
+        <p>
+          These references were generated from the supported public API packages
+          and shipped with WWPG {release.version}. The API version is
+          independently numbered {release.api.version}.
+        </p>
+        <div class="world-grid">
+          {release.api.references.map((reference) => (
+            <article>
+              <span class="mono text-mint">API {release.api!.version}</span>
+              <h3>{reference.title}</h3>
+              <p>
+                {reference.id === 'core'
+                  ? 'Immutable circuit models, identities, accepted measurements, and NeoForge device registration.'
+                  : 'Custom CEE property translation, numerical substep callbacks, and state checkpoints. Requires CEE 1.1.3.'}
+              </p>
+              <a
+                class="text-link"
+                href={`/api/${release.version}/${reference.id}/`}
+              >
+                Open generated Javadoc ↗
+              </a>
+            </article>
+          ))}
+        </div>
+        <p>
+          Power Grid board components retain PG's native API and electrical
+          ownership. WWPG's bridge, wiring, mixins, and solver internals are
+          implementation details.
+        </p>
+        <div class="button-row">
+          <a
+            class="button button-outline"
+            href={`${docsHref(release.version)}developers/`}
+          >
+            Build your first addon ↗
+          </a>
+          <a class="text-link" href="/downloads/#sdk">
+            Get the SDK ↓
+          </a>
+        </div>
+      </>
+    ) : (
+      <>
+        <h2>No public addon API in this release.</h2>
+        <p>
+          WWPG {release.version} does not expose supported Java extension
+          points. Its internal bridge classes and mixins are implementation
+          details.
+        </p>
+        <p>
+          WWPG {project.currentRelease} introduces the public API. Choose its
+          documentation and matching runtime to develop an addon.
+        </p>
+        <div class="button-row">
+          <a
+            class="button button-outline"
+            href={`${docsHref(release.version)}developers/`}
+          >
+            Developer documentation ↗
+          </a>
+          <a class="text-link" href={`${docsHref(release.version)}lua/`}>
+            Available Lua integration ↗
+          </a>
+        </div>
+      </>
+    )}
+  </section>
+</Layout>

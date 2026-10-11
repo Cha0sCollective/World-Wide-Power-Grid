@@ -1,0 +1,298 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Circuit from '../components/Circuit.astro';
+import {
+  project,
+  currentRelease as release,
+  docsHref,
+  downloadHref,
+  sourceHref,
+} from '../data/project';
+---
+
+<Layout title="Two systems. One circuit.">
+  <section class="hero container">
+    <div class="hero-copy">
+      <p class="eyebrow">
+        <span class="small-line"></span> CREATE COMPATIBILITY, CONNECTED.
+      </p>
+      <h1>
+        Two systems.
+        <br />
+        <span class="text-mint">One circuit.</span>
+      </h1>
+      <p class="hero-lead">
+        Your factory shouldn't stop
+        <br class="desktop-break" /> where one mod ends.
+      </p>
+      <p class="hero-detail">
+        World-Wide Power Grid connects{' '}
+        <strong>Create: Electro Energetics</strong> and{' '}
+        <strong>Power Grid</strong>. Build mixed stationary circuits with the
+        equipment, wires, and controls you already know.
+      </p>
+      <div class="button-row">
+        <a class="button button-mint" href={downloadHref()}>
+          Get WWPG <span aria-hidden="true">↓</span>
+        </a>
+        <a class="button button-outline" href={docsHref()}>
+          Read the docs <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <p class="hero-note mono">
+        {release.version} <span> / </span> API {release.api?.version} AVAILABLE
+      </p>
+    </div>
+    <Circuit />
+  </section>
+  <div class="spec-strip">
+    <div class="container spec-inner">
+      <span class="mono">THE FOUNDATION</span>
+      <span>
+        Minecraft <strong>{release.requirements.Minecraft}</strong>
+      </span>
+      <span>
+        NeoForge <strong>{release.requirements.NeoForge}</strong>
+      </span>
+      <span>
+        Java <strong>{release.requirements.Java}</strong>
+      </span>
+      <a href="/downloads/">
+        All dependencies <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+  <section class="section container" id="connection">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">01 / CONNECT THE POSSIBILITIES</p>
+        <h2>
+          Same tools.
+          <br />A bigger system.
+        </h2>
+      </div>
+      <p>
+        A CEE supply. A Power Grid board.
+        <br />A factory that works across both.
+        <br />
+        Keep the native workflow. Connect the circuit.
+      </p>
+    </div>
+    <div class="bridge-story">
+      <article>
+        <span class="mono brass">01.1 / ELECTRO ENERGETICS</span>
+        <h3>Prepare the models.</h3>
+        <p>
+          CEE keeps its equipment, controls, heat, protection, and gameplay.
+          WWPG brings its prepared electrical models into the shared circuit.
+        </p>
+      </article>
+      <div class="flow-arrow" aria-hidden="true">
+        →
+      </div>
+      <article class="bridge-core">
+        <span class="mono text-mint">01.2 / WORLD-WIDE POWER GRID</span>
+        <h3>Bridge the systems.</h3>
+        <p>
+          Persistent circuit elements connect the two mods under one synchronous
+          prepare → solve → commit schedule.
+        </p>
+      </article>
+      <div class="flow-arrow" aria-hidden="true">
+        →
+      </div>
+      <article>
+        <span class="mono violet">01.3 / POWER GRID</span>
+        <h3>Solve the circuit.</h3>
+        <p>
+          PG solves the electrical network. CEE consumes the results for its
+          machines and displays. Native and Java backends are supported.
+        </p>
+      </article>
+    </div>
+  </section>
+  <section class="capabilities-section section" id="capabilities">
+    <div class="container capabilities-layout">
+      <div class="capabilities-heading">
+        <p class="eyebrow">02 / BUILD ACROSS THE BOUNDARY</p>
+        <h2>
+          Power the whole
+          <br />
+          workshop.
+        </h2>
+        <p>
+          From a relay switching a lamp to storage, transformers, and processing
+          equipment.
+        </p>
+        <a class="text-link" href={`${docsHref()}compatibility/`}>
+          Explore supported content <span aria-hidden="true">↗</span>
+        </a>
+        <div class="terminal-note mono">
+          <span>SUPPORTED IN THIS RELEASE</span>
+          <strong>STATIONARY SYSTEMS</strong>
+          <span>PINNED VERSIONS / NATIVE WORKFLOWS</span>
+        </div>
+      </div>
+      <div class="capability-list">
+        <article>
+          <span class="capability-icon" aria-hidden="true">
+            ϟ
+          </span>
+          <div>
+            <span class="mono">GENERATION & STORAGE</span>
+            <h3>Make it. Store it. Use it.</h3>
+            <p>
+              Generate electricity, charge storage, and power supported motors,
+              pumps, lamps, and heaters across both mods.
+            </p>
+          </div>
+        </article>
+        <article>
+          <span class="capability-icon" aria-hidden="true">
+            ⌁
+          </span>
+          <div>
+            <span class="mono">TRANSFORMERS & CONVERSION</span>
+            <h3>Shape the supply.</h3>
+            <p>
+              Build transformer and variac circuits, regulate voltage, use FE
+              converters, and link stationary Nether transformers.
+            </p>
+          </div>
+        </article>
+        <article>
+          <span class="capability-icon" aria-hidden="true">
+            ⊞
+          </span>
+          <div>
+            <span class="mono">BOARDS & PANELS</span>
+            <h3>Give your factory a control room.</h3>
+            <p>
+              Use native circuit boards and CEE panels. Save, copy, and assemble
+              designs; switch, measure, and protect mixed circuits.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="section container yard-section">
+    <div>
+      <p class="eyebrow">03 / LEARN BY CONNECTING</p>
+      <h2>
+        Step into
+        <br />
+        the test yard.
+      </h2>
+      <p>
+        Download a stationary world with working exhibits, signs, tools,
+        expected readings, and reset instructions. Follow a circuit. Flip a
+        switch. See what changes.
+      </p>
+      <div class="button-row">
+        <a class="button button-outline" href={`${docsHref()}example-worlds/`}>
+          Explore the exhibits ↗
+        </a>
+        <a class="text-link" href="/downloads/#worlds">
+          Get the worlds ↓
+        </a>
+      </div>
+    </div>
+    <div class="yard-board">
+      <div class="mono board-heading">STATIONARY YARD / FIELD NOTES</div>
+      <ol>
+        <li>
+          <span class="mono">S61</span>
+          <div>
+            <strong>Save a board design.</strong>
+            <p>Edit, save, copy, assemble, and power a native circuit board.</p>
+          </div>
+        </li>
+        <li>
+          <span class="mono">S65</span>
+          <div>
+            <strong>Follow power through the Nether.</strong>
+            <p>
+              Visit a stationary link with both transformer ends kept loaded.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="mono">S80–81</span>
+          <div>
+            <strong>Let a computer take control.</strong>
+            <p>
+              The optional Pinout yard switches eight pins and reads signed
+              voltage.
+            </p>
+          </div>
+        </li>
+      </ol>
+      <a class="text-link" href={sourceHref('docs/STATIONARY_YARD.md')}>
+        Release-pinned yard guide ↗
+      </a>
+    </div>
+  </section>
+  <section class="ecosystem-section container">
+    <div class="ecosystem-label mono">04 / BUILD ON THE CONNECTION</div>
+    <div class="ecosystem-content">
+      <div>
+        <p class="eyebrow violet">FOR ADDON AUTHORS</p>
+        <h2>
+          More connections.
+          <br />
+          More possibilities.
+        </h2>
+      </div>
+      <div>
+        <p>
+          Build stationary machines and instruments with immutable electrical
+          models, extend custom CEE properties, or bring PG's native board
+          components into mixed circuits.
+        </p>
+        <p class="api-status">
+          <span class="status-outline"></span> API {release.api?.version} is
+          available with WWPG {release.version}: two SDK contracts, generated
+          reference, and independently buildable example addons.
+        </p>
+        <a class="text-link" href={`${docsHref()}developers/`}>
+          Build your first addon ↗
+        </a>
+        <a class="text-link" href={`/api/${release.version}/`}>
+          Java API reference ↗
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="section container final-invitation">
+    <div>
+      <p class="eyebrow">YOUR NEXT CIRCUIT STARTS HERE</p>
+      <h2>
+        Connect something
+        <br />
+        worth figuring out.
+      </h2>
+    </div>
+    <div>
+      <a class="button button-mint" href="/downloads/">
+        Get started with WWPG ↗
+      </a>
+      <p class="small-text">Check the pinned dependencies before installing.</p>
+    </div>
+  </section>
+  <section class="attribution container">
+    <p>
+      Built on{' '}
+      <a href="https://github.com/george8188625/Create-Electro-Energetics">
+        Create: Electro Energetics
+      </a>{' '}
+      and <a href="https://github.com/patryk3211/PowerGrid">Power Grid</a>. Each
+      project retains ownership of its native content. WWPG's own code and
+      documentation are{' '}
+      <a href={`${project.repository}/blob/${release.commit}/LICENSE`}>
+        MIT licensed
+      </a>
+      ; bundled PG native resources retain Apache 2.0 attribution.
+    </p>
+  </section>
+</Layout>

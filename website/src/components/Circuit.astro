@@ -1,0 +1,144 @@
+---
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+
+<figure class:list={['circuit', { compact }]} data-circuit data-paused="true">
+  <div class="circuit-top mono">
+    <span>
+      <i></i> COMPATIBILITY BRIDGE
+    </span>
+    <span>WWPG / 01</span>
+  </div>
+  <svg
+    viewBox="0 0 600 450"
+    role="img"
+    aria-label="Conceptual schematic: CEE and Power Grid connect through WWPG's shared electrical simulation"
+  >
+    <defs>
+      <pattern
+        id="circuit-grid"
+        width="25"
+        height="25"
+        patternUnits="userSpaceOnUse"
+      >
+        <path d="M25 0H0V25" fill="none" stroke="#263431" stroke-width=".7" />
+      </pattern>
+      <radialGradient id="core-glow">
+        <stop stop-color="#99d6bc" stop-opacity=".13" />
+        <stop offset="1" stop-color="#99d6bc" stop-opacity="0" />
+      </radialGradient>
+    </defs>
+    <rect width="600" height="450" fill="url(#circuit-grid)" />
+    <circle cx="300" cy="216" r="165" fill="url(#core-glow)" />
+    <g class="circuit-traces" fill="none" stroke-width="2">
+      <path d="M102 90V145H205L235 175" stroke="#c6a576" />
+      <path d="M498 90V145H395L365 175" stroke="#b49ad6" />
+      <path d="M235 257L201 291H92V349" stroke="#9bc9c2" />
+      <path d="M300 294V351" stroke="#9bc9c2" />
+      <path d="M365 257L399 291H508V349" stroke="#9bc9c2" />
+      <path d="M43 219H204M396 219H557" stroke="#334a42" />
+      <path
+        d="M102 90V145H205L235 175M498 90V145H395L365 175M235 257L201 291H92V349M300 294V351M365 257L399 291H508V349"
+        stroke="#d0f5dd"
+        class="energy-pulse"
+        stroke-dasharray="4 190"
+      />
+    </g>
+    <g stroke="#495f54" fill="#101a17">
+      <circle cx="102" cy="145" r="4" />
+      <circle cx="498" cy="145" r="4" />
+      <circle cx="201" cy="291" r="4" />
+      <circle cx="399" cy="291" r="4" />
+      <circle cx="300" cy="330" r="4" />
+    </g>
+    <g class="core-orbit" fill="none" stroke="#83baa0">
+      <circle cx="300" cy="216" r="91" stroke-opacity=".2" />
+      <circle
+        cx="300"
+        cy="216"
+        r="91"
+        stroke-dasharray="26 117"
+        stroke-width="2"
+      />
+    </g>
+    <circle cx="300" cy="216" r="74" fill="#11201a" stroke="#94c5a6" />
+    <circle cx="300" cy="216" r="64" fill="none" stroke="#3c5145" />
+    <path d="M303 181L284 220H306L297 246L319 207H297Z" fill="#c5ddbe" />
+    <g fill="#0e1413" stroke="#39473f">
+      <rect x="40" y="35" width="125" height="57" rx="3" />
+      <rect x="435" y="35" width="125" height="57" rx="3" />
+      <rect x="37" y="349" width="110" height="56" rx="3" />
+      <rect x="245" y="349" width="110" height="56" rx="3" />
+      <rect x="453" y="349" width="110" height="56" rx="3" />
+    </g>
+    <g font-family="'IBM Plex Mono',monospace" text-anchor="middle">
+      <text x="102" y="69" fill="#c6a576" font-size="16">
+        CEE
+      </text>
+      <text x="498" y="69" fill="#b49ad6" font-size="15">
+        POWER GRID
+      </text>
+      <text x="300" y="275" fill="#d4e5d6" font-size="12" letter-spacing="3">
+        WWPG
+      </text>
+      <text x="92" y="373" fill="#c9d6ce" font-size="11">
+        MACHINES
+      </text>
+      <text x="300" y="373" fill="#c9d6ce" font-size="11">
+        CONTROLS
+      </text>
+      <text x="508" y="373" fill="#c9d6ce" font-size="11">
+        CIRCUITS
+      </text>
+      <text x="92" y="391" fill="#8d9c93" font-size="8">
+        NATIVE EQUIPMENT
+      </text>
+      <text x="300" y="391" fill="#8d9c93" font-size="8">
+        NATIVE WORKFLOWS
+      </text>
+      <text x="508" y="391" fill="#8d9c93" font-size="8">
+        SHARED SOLVING
+      </text>
+      <text x="300" y="434" fill="#8d9c93" font-size="8" letter-spacing="2">
+        PREPARE → SOLVE → COMMIT
+      </text>
+    </g>
+    <g stroke="#607166" stroke-width="1">
+      <path d="M20 15V30M13 22H27M580 15V30M573 22H587M20 420V435M13 428H27M580 420V435M573 428H587" />
+    </g>
+  </svg>
+  <figcaption>
+    <span class="mono">CONCEPTUAL SIGNAL FLOW</span>
+    <button type="button" class="motion-toggle" aria-pressed="false" hidden>
+      Pause motion
+    </button>
+  </figcaption>
+</figure>
+<script>
+  for (const figure of document.querySelectorAll<HTMLElement>(
+    '[data-circuit]',
+  )) {
+    const button = figure.querySelector<HTMLButtonElement>('.motion-toggle');
+    if (!button) continue;
+    const preference = matchMedia('(prefers-reduced-motion: reduce)');
+    let paused = preference.matches;
+    const update = () => {
+      figure.dataset.paused = String(paused);
+      button.setAttribute('aria-pressed', String(paused));
+      button.textContent = paused ? 'Resume motion' : 'Pause motion';
+    };
+    button.hidden = false;
+    update();
+    button.addEventListener('click', () => {
+      paused = !paused;
+      update();
+    });
+    preference.addEventListener('change', () => {
+      paused = preference.matches;
+      update();
+    });
+  }
+</script>

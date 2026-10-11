@@ -1,0 +1,156 @@
+---
+import '@fontsource/space-grotesk/latin-400.css';
+import '@fontsource/space-grotesk/latin-500.css';
+import '@fontsource/space-grotesk/latin-600.css';
+import '@fontsource/ibm-plex-mono/latin-400.css';
+import '../styles/global.css';
+import { project } from '../data/project';
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = project.description } = Astro.props;
+const canonical = new URL(
+  Astro.url.pathname === '/404/' ? '/404.html' : Astro.url.pathname,
+  project.origin,
+).href;
+const links = [
+  { href: '/', label: 'Overview' },
+  { href: '/downloads/', label: 'Downloads' },
+  { href: '/docs/', label: 'Documentation' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — World-Wide Power Grid</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0b0f10" />
+    {!project.publicationReady && (
+      <meta name="robots" content="noindex, nofollow" />
+    )}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={project.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={`${project.origin}/images/social.png`} />
+    <meta
+      property="og:image:alt"
+      content="World-Wide Power Grid: two systems, one circuit"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/" aria-label="World-Wide Power Grid home">
+          <span class="brand-mark" aria-hidden="true">
+            ϟ
+          </span>
+          <span>
+            WWPG<small class="mono">BY CH4OS COLLECTIVE</small>
+          </span>
+        </a>
+        <button
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="main-navigation"
+          type="button"
+          hidden
+        >
+          Menu <span aria-hidden="true">+</span>
+        </button>
+        <nav id="main-navigation" aria-label="Main navigation">
+          {links.map((link) => (
+            <a
+              href={link.href}
+              aria-current={
+                Astro.url.pathname === link.href ? 'page' : undefined
+              }
+            >
+              {link.label}
+            </a>
+          ))}
+          <a class="nav-source" href={project.repository}>
+            Source code <span aria-hidden="true">↗</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <footer class="site-footer container">
+      <div class="footer-main">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true">
+            ϟ
+          </span>
+          <span>
+            World-Wide
+            <br />
+            Power Grid
+          </span>
+        </a>
+        <p>
+          Independent systems.
+          <br />
+          Shared possibilities.
+        </p>
+        <nav aria-label="Footer navigation">
+          <a href="/docs/">Documentation</a>
+          <a href={`${project.repository}/issues`}>Report an issue ↗</a>
+          <a href={project.community}>Ch4oS Collective ↗</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>© {new Date().getFullYear()} Ch4oS Collective</span>
+        <span>
+          WWPG is MIT licensed. Upstream projects retain their own licenses.
+        </span>
+        <span class="mono">BUILT TO CONNECT.</span>
+      </div>
+    </footer>
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+      const nav = document.querySelector<HTMLElement>('#main-navigation');
+      if (toggle && nav) {
+        toggle.hidden = false;
+        nav.dataset.enhanced = 'true';
+        const close = () => {
+          toggle.setAttribute('aria-expanded', 'false');
+          nav.dataset.open = 'false';
+        };
+        toggle.addEventListener('click', () => {
+          const open = toggle.getAttribute('aria-expanded') !== 'true';
+          toggle.setAttribute('aria-expanded', String(open));
+          nav.dataset.open = String(open);
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && nav.dataset.open === 'true') {
+            close();
+            toggle.focus();
+          }
+        });
+        document.addEventListener('click', (e) => {
+          if (
+            e.target instanceof Node &&
+            !nav.contains(e.target) &&
+            !toggle.contains(e.target)
+          )
+            close();
+        });
+        matchMedia('(min-width: 901px)').addEventListener('change', close);
+      }
+    </script>
+  </body>
+</html>

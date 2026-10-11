@@ -1,0 +1,8 @@
+node_modules/
+.astro/
+dist/
+src/content/docs/
+public/api/
+.api-proof.json
+.qa/
+*.log

@@ -1,0 +1,62 @@
+:root {
+  color-scheme: dark;
+  --body-font-family: system-ui, sans-serif;
+  --block-font-family: system-ui, sans-serif;
+  --code-font-family: ui-monospace, monospace;
+  --body-text-color: #e9ece5;
+  --block-text-color: #c1c9c1;
+  --body-background-color: #0b0f10;
+  --section-background-color: #151b1d;
+  --detail-background-color: #0f1517;
+  --navbar-background-color: #182223;
+  --navbar-text-color: #e9ece5;
+  --subnav-background-color: #202a2b;
+  --selected-background-color: #c5ddbe;
+  --selected-text-color: #102014;
+  --selected-link-color: #102014;
+  --even-row-color: #101718;
+  --odd-row-color: #192123;
+  --title-color: #c5ddbe;
+  --link-color: #a5d5d8;
+  --link-color-active: #e4c68d;
+  --snippet-background-color: #202a2b;
+  --snippet-text-color: #e9ece5;
+  --snippet-highlight-color: #59492e;
+  --border-color: #344244;
+  --table-border-color: #344244;
+  --search-input-background-color: #0f1517;
+  --search-input-text-color: #e9ece5;
+  --search-input-placeholder-color: #a2aca3;
+  --search-tag-highlight-color: #59492e;
+  --copy-icon-brightness: 180%;
+  --invalid-tag-background-color: #592b2b;
+  --invalid-tag-text-color: #ffffff;
+}
+:focus-visible {
+  outline: 2px solid #e4c68d;
+  outline-offset: 3px;
+}
+nav[aria-label='WWPG documentation'] {
+  line-height: 1.7;
+}
+.ui-widget-content {
+  background: #182223;
+  color: #e9ece5;
+  border-color: #344244;
+}
+.ui-state-active {
+  background: #c5ddbe;
+  color: #102014;
+}
+@media (max-width: 640px) {
+  h1 {
+    overflow-wrap: anywhere;
+  }
+  .member-signature {
+    overflow-x: auto;
+    max-width: 100%;
+  }
+  .summary-table {
+    overflow-x: auto;
+  }
+}
