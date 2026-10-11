@@ -1,8 +1,38 @@
-# Current status and known issues
+# Current status
+
+**[0.1.0-beta.5](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.5) is the stationary feature-complete beta.** It supports the [declared base content and optional Pinout profile](SUPPORT.md), including saved electronics workflows, native distribution, storage, FE conversion, Nether links, instruments and repair. Existing beta.4 worlds and identities remain compatible; replace WWPG on the server and every client.
+
+## Final acceptance
+
+The exact packaged jar passes **204 base checks and 208 Pinout checks** in all eight Windows/Linux × native/Java × base/Pinout combinations. Each includes three consecutive cold full-suite restarts and five actual chunk cycles of representative mixed assemblies, including delayed entities and serialized-state checks before solving. Pinned upstream references and electrical expectations cover 0.1% DC and 1% recorded storage windows, with native heating/protection timing within one tick.
+
+Both exact downloadable ZIPs pass three cold restarts on each solver locally. Fresh Windows graphical clients complete 148 base or 150 Pinout views, native design and panel interactions, visible plotter/CRT/duplex checks and actual portal travel. Two real TCP clients on Windows in each profile/backend combination check simultaneous wiring/configuration, both meters, native design editing and optional Lua, lamps, boards and panels. [Final verification](../release/0.1.0-beta.5/verification.json) and [CI](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38116785029) identify hashes, processes and retained evidence.
+
+## Reproduced corrections
+
+- Native PG design-table reading now uses its supplied registry lookup before a world is assigned. Native inventory edits and serialization survive save/restart; real clients reuse nonempty designs through the native menus.
+- Native CEE fuse-holder changes schedule saving. Bare-fuse healthy/broken transitions retain wires through failure and repair. Compatibility preparation waits for native block ticking and wire-entity readiness.
+- Small nonzero CEE property conductance changes reach PG's matrix; unchanged values and PG-native thresholds retain their normal paths.
+- Incremental PG nonlinear updates validate every coupled terminal, preventing a pentode control node reduced to index -1 from being addressed during removal. An unfixed Java control reproduces the crash; both corrected solvers pass actual saved-board cycles and ordinary client portal travel.
+- Exported yards retain native Nether source/load forceload settings after GameTest cleanup. Ordinary WWPG does not force player chunks. Native computer boot readiness and atomic reports replace assumptions about when an asynchronous startup finishes.
+- The Pinout demo isolates its board capacitor behind a native diode, so all eight pin indicators switch off clearly while the separate RUN lamp keeps its off-delay. Native models and the add-on API remain unchanged.
+- CEE's missing duplex partial-model reference uses an alias to its shipped geometry. Actual clients bake and display it.
+
+Failed runs, negative controls and harness corrections are retained in the [release evidence](../release/0.1.0-beta.5/evidence/). Passing retries alone are not used to close defects.
+
+## Limits and historical uncertainty
+
+No failing claimed stationary behavior remains in final acceptance. This does not establish the exact cause of every older intermittent zero reading, startup schedule or Nether assertion: some original logs lacked the required state. Those attribution limits remain below. The old saved-design error is corrected in beta.5; its beta.4 account is historical.
+
+Moving systems, other optional add-ons, broad version support, scale certification, asynchronous execution and a public API remain later work. See [SPEC.md](../SPEC.md) and the pinned upstream limitations in [installation notes](INSTALL.md#pinned-upstream-behavior).
+
+## Historical beta.1–beta.4 records
+
+The following records describe their named historical versions. They are retained to preserve evidence and attribution limits; their older support boundaries and open design-table status do not describe beta.5.
 
 Status checked **10 October 2026**. These facts describe the implementation and published beta at that date; linked GitHub runs retain their own commit and outcome.
 
-## Published beta
+### Published beta
 
 **[0.1.0-beta.4](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.4)** publishes the restart and chunk-loading corrections from [PR #7](https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/7). Saved wires are protected until chunk entities finish loading, and PG board capacitors save retained charge rather than an unsolved zero reading. It includes beta.3's grounding correction. The support set and dependencies are unchanged. Existing example worlds work with beta.4; replace the WWPG jar on the server and every client. [Release records](../release/0.1.0-beta.4/) identify the final artifact and its checks.
 
@@ -16,9 +46,9 @@ The original acceptance covered installed meters; it did not validate the handhe
 
 **0.1.0-beta.1** is [published as a GitHub prerelease](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.1). The downloads include the mod jar, example world, verification archive, complete documentation bundle, and checksums. [PR #1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/1) merged the implementation into `main` as `8e533df` on 9 October.
 
-The declared scope is stationary interoperability: 95 block/assembly behaviors, 11 built-in CEE panel attachments, and 28 built-in PG board components. See [SUPPORT.md](SUPPORT.md) for the inventory and exclusions, and [INSTALL.md](INSTALL.md) for the exact dependencies and solver settings.
+The declared scope is stationary interoperability: 95 block/assembly behaviors, 11 built-in CEE panel attachments, and 28 built-in PG board components. See the [historical support matrix](../release/content-matrix.json) for the inventory and exclusions, and [INSTALL.md](INSTALL.md) for the exact dependencies and solver settings.
 
-## Grounding correction in beta.3
+### Grounding correction in beta.3
 
 The published beta.2 can retain incorrect voltages when a ground connection changes without replacing the circuit's nodes. This also affects moving the preferred voltage reference and unloading a chunk containing a ground rod. PG 0.6.2 skips its incremental equation update for ground connections, which have only one terminal.
 
@@ -28,7 +58,7 @@ The same grounding-fix jar passed [real Windows client checks of the downloaded 
 
 This correction is released in beta.3; published beta.2 downloads and earlier evidence remain unchanged. It does not establish the causes of the earlier intermittent chunk-reload or board-restart failures below.
 
-## Restoration corrections in beta.4
+### Restoration corrections in beta.4
 
 Beta.4 protects PG wires while saved entities are still loading and preserves PG board capacitors' committed charge when their newly restored circuit has not solved yet. The published beta.3 jar remains unchanged. Dependencies, solver selection, and the stationary support set are unchanged.
 
@@ -38,7 +68,7 @@ The PR #7 candidate passed all 123 checks in Windows native/Java SETUP and VERIF
 
 The historical failures below did not record entity readiness or capacitor history at the failing instant. The corrections address reproducible restoration paths, but cannot conclusively attribute every earlier zero reading to one of them. The PG design-table saved-design error remains a separate open issue.
 
-## Test evidence
+### Test evidence
 
 | Record | Outcome |
 | --- | --- |
@@ -59,7 +89,7 @@ The historical failures below did not record entity readiness or capacitor histo
 
 CI runs the packaged suite's SETUP and VERIFY phases, upstream reference comparison, and example creation/restart on Windows and Ubuntu 24.04 with native and Java backends. Two-client multiplayer is a local check. Beta.2, beta.3, and beta.4 each have four downloaded CI jars matching their respective local release jar; hashes are recorded in [beta.2 CI](../release/0.1.0-beta.2/ci.json), [beta.3 CI](../release/0.1.0-beta.3/ci.json), and [beta.4 CI](../release/0.1.0-beta.4/ci.json).
 
-## Unresolved chunk-reload failure
+### Unresolved chunk-reload failure
 
 The initial Linux/native run failed `chunkReloadRebindsMixedEndpoints`: the restored circuit read **0 V**, where the fixture expected **10 V**. Subsequent runs passed without implementation changes.
 
@@ -67,7 +97,7 @@ The published test samples at a fixed tick after forcing the chunk to load, whil
 
 PG's separate missing-wire cleanup timer uses block-chunk availability and can expire a part while entities are still loading. The source pauses that timer until entity readiness, retaining its normal cleanup grace period afterward. A dedicated fixture exercises this reconciliation boundary; the ordinary whole-chunk fixture alone did not reproduce premature part deletion. These results establish concrete timing and lifecycle defects without proving which occurred in the old uninstrumented CI failure.
 
-## Unresolved board restart reading
+### Unresolved board restart reading
 
 A local Windows/native VERIFY run on `cd41b24` failed `restartRetainsPanelTerminalsBoardIdentityAndCharge`: the PG circuit-board capacitor read **0 V** at the tick-20 assertion. An instrumented rerun read about **9.869 V** in both the saved component property and the capacitor's internal voltage history, with the wire entities loaded. All four implementation CI jobs passed this check.
 
@@ -77,13 +107,13 @@ The same assertion failed again in [PR #5's Linux/native CI run, attempt 1](http
 
 The current investigation's delayed restart retained about 9.869 V; it did not reproduce saved charge loss in that circuit. A separate cold-save fixture conclusively reproduces a related defect: PG's native board capacitor tick writes **0 V** into its saved charge property although its solver history still holds **7.5 V**. Saving committed history corrects that overwrite. The revised restart fixture checks serialized charge and history before the first solve, then checks the restored live reading after entity readiness. Historical failures lacked those observations, so their exact cause remains unproven.
 
-## PG circuit design table saved-design error
+### Historical PG circuit design table saved-design error
 
 Building the expanded yard exposed `powergrid:circuit_design_table` throwing a `NullPointerException` when loading its saved schematic. PG 0.6.2's `CircuitDesignTableBlockEntity.read` accesses `level.registryAccess()` before the block entity has a level. The table could subsequently receive power, so a powered-block check alone missed the failed load. The diagnostic log is retained in the expanded-yard evidence archive.
 
 The downloadable yard excludes a placed design table. Its item remains in the parts cabinets, and the live routing board demonstrates pins, traces, a via, and a label. The existing design/copy workflow tests do not establish saved-table persistence. This issue remains open in beta.4.
 
-## Startup registration race
+### Startup registration race
 
 NeoForge reported an “uncaught parallel processing error”; the underlying error was Create's Registrate reporting unused registration callbacks. This happened before a world or electrical simulation started and occurred with both solver selections, including on GitHub's independent test machines.
 
@@ -91,10 +121,10 @@ Earlier local native/Java runs, example restart, and two real clients passed, bu
 
 A subsequent [instrumented Windows/Java failure](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38006974291), on `1f8b377`, recorded a callback count of **−1** with an empty callback map. Beta.2 now synchronizes pending-callback updates and entry publication per Registrate instance, preserving the existing error checks for actual unused callbacks. A forced interleaving regression reproduces a stranded callback with the fix disabled and retains it with the fix enabled. All four implementation CI jobs and both final packaged clients passed with the fix. The initiating class-loading interleaving has not been attributed to an individual mod.
 
-## Deferred work
+### Deferred work
 
 Moving trains/contraptions, Sable sublevels, optional integrations, broad version ranges, specialized unclaimed devices, large-network benchmarks, asynchronous execution, advanced topology reduction, and a public extension API are outside this beta's scope. The [long-term specification](../SPEC.md) retains the full product requirements.
 
-## Open-source license
+### Open-source license
 
 WWPG's own code and documentation are licensed under [MIT](../LICENSE), including the WWPG portions of the published beta. Current builds declare MIT and include the license. The original `0.1.0-beta.1` download still contains its older “All Rights Reserved” metadata label; its published files and checksums are preserved. Bundled PG native resources retain their Apache 2.0 license and attribution; other dependencies retain their own licenses.

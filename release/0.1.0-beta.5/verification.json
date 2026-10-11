@@ -1,0 +1,2834 @@
+{
+  "schema": 1,
+  "target": "0.1.0-beta.5",
+  "stationary_completion": true,
+  "tested_artifact": {
+    "file": "wwpg-0.1.0-beta.5.jar",
+    "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+    "bytes": 3219387
+  },
+  "ci": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38116785029",
+  "ci_source_commit": "79837b3051f4a9384c166c71c1eef78daeb68d12",
+  "equation_tests": 5,
+  "base_behaviors": 164,
+  "pinout_behaviors": 165,
+  "base_packaged_checks": 204,
+  "pinout_packaged_checks": 208,
+  "platform_backend_profile_matrix": [
+    {
+      "platform": "windows-latest",
+      "backend": "NATIVE",
+      "profile": "PINOUT",
+      "packaged_checks": 208,
+      "full_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "SETUP",
+          "started": "2026-10-11T06-04-47.806460Z",
+          "namespaces": "default",
+          "required_tests_passed": 208,
+          "completed": "2026-10-11T06:07:44.144077500Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-07-56.596673200Z",
+          "namespaces": "default",
+          "required_tests_passed": 208,
+          "completed": "2026-10-11T06:13:35.945972700Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-13-45.686203200Z",
+          "namespaces": "default",
+          "required_tests_passed": 208,
+          "completed": "2026-10-11T06:20:52.847663800Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-21-02.018874200Z",
+          "namespaces": "default",
+          "required_tests_passed": 208,
+          "completed": "2026-10-11T06:27:14.734060100Z"
+        }
+      ],
+      "source_yard_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "SETUP",
+          "started": "2026-10-11T06-30-38.368868900Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:31:21.337585100Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-31-30.005533900Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:32:04.660169300Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-32-13.137499900Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:32:48.837027400Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-32-57.354412300Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:33:31.830568400Z"
+        }
+      ],
+      "exact_zip_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-33-40.845484200Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:34:20.006093500Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-34-28.443061500Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:35:03.035077500Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-35-11.571818Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:35:45.954395800Z"
+        }
+      ],
+      "references": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5-upstream-reference-tests.jar",
+          "sha256": "bd784bbe433521b8a3d1c732df6dd38d11f82a77578cf8a704693d59d13b566c",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "upstream": true,
+          "started": "2026-10-11T06-27-23.705445100Z",
+          "namespaces": "wwpg_reference",
+          "required_tests_passed": 10,
+          "completed": "2026-10-11T06:27:45.931586200Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "upstream": false,
+          "started": "2026-10-11T06-27-54.163679900Z",
+          "namespaces": "wwpg_reference",
+          "required_tests_passed": 10,
+          "completed": "2026-10-11T06:28:17.155974400Z"
+        }
+      ]
+    },
+    {
+      "platform": "windows-latest",
+      "backend": "JAVA",
+      "profile": "BASE",
+      "packaged_checks": 204,
+      "full_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "SETUP",
+          "started": "2026-10-11T06-04-26.359827Z",
+          "namespaces": "default",
+          "required_tests_passed": 204,
+          "completed": "2026-10-11T06:06:13.852509Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-06-24.830952200Z",
+          "namespaces": "default",
+          "required_tests_passed": 204,
+          "completed": "2026-10-11T06:08:34.842351500Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-08-45.802389700Z",
+          "namespaces": "default",
+          "required_tests_passed": 204,
+          "completed": "2026-10-11T06:11:55.831863600Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-12-10.815601500Z",
+          "namespaces": "default",
+          "required_tests_passed": 204,
+          "completed": "2026-10-11T06:16:59.092073900Z"
+        }
+      ],
+      "source_yard_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "SETUP",
+          "started": "2026-10-11T06-21-34.822430200Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:22:33.534512200Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-22-44.270670200Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:23:23.491168Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-23-34.177154Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:24:21.339165100Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-24-32.158749800Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:25:11.186595500Z"
+        }
+      ],
+      "exact_zip_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-25-23.861404300Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:26:15.817327Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-26-26.543870Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:27:05.136472400Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-27-15.759818400Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:28:04.774266200Z"
+        }
+      ],
+      "references": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5-upstream-reference-tests.jar",
+          "sha256": "bd784bbe433521b8a3d1c732df6dd38d11f82a77578cf8a704693d59d13b566c",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "upstream": true,
+          "started": "2026-10-11T06-17-11.021038Z",
+          "namespaces": "wwpg_reference",
+          "required_tests_passed": 10,
+          "completed": "2026-10-11T06:17:43.399093600Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "upstream": false,
+          "started": "2026-10-11T06-17-54.540520600Z",
+          "namespaces": "wwpg_reference",
+          "required_tests_passed": 10,
+          "completed": "2026-10-11T06:18:27.091827500Z"
+        }
+      ]
+    },
+    {
+      "platform": "ubuntu-24.04",
+      "backend": "NATIVE",
+      "profile": "BASE",
+      "packaged_checks": 204,
+      "full_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "SETUP",
+          "started": "2026-10-11T06-03-59.147982489Z",
+          "namespaces": "default",
+          "required_tests_passed": 204,
+          "completed": "2026-10-11T06:08:04.860452508Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-08-13.068840331Z",
+          "namespaces": "default",
+          "required_tests_passed": 204,
+          "completed": "2026-10-11T06:14:11.090515184Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-14-18.969807334Z",
+          "namespaces": "default",
+          "required_tests_passed": 204,
+          "completed": "2026-10-11T06:19:53.451043232Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-20-01.023238761Z",
+          "namespaces": "default",
+          "required_tests_passed": 204,
+          "completed": "2026-10-11T06:26:13.384776018Z"
+        }
+      ],
+      "source_yard_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "SETUP",
+          "started": "2026-10-11T06-29-29.965822412Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:30:08.077554041Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-30-15.733757768Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:30:46.628159802Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-30-54.547058719Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:31:26.121990973Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-31-33.747552609Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:32:05.042251541Z"
+        }
+      ],
+      "exact_zip_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-32-13.197371764Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:32:47.383684622Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-32-55.357675180Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:33:27.114449731Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-33-34.948541140Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:34:06.564617424Z"
+        }
+      ],
+      "references": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5-upstream-reference-tests.jar",
+          "sha256": "bd784bbe433521b8a3d1c732df6dd38d11f82a77578cf8a704693d59d13b566c",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "upstream": true,
+          "started": "2026-10-11T06-26-21.682892112Z",
+          "namespaces": "wwpg_reference",
+          "required_tests_passed": 10,
+          "completed": "2026-10-11T06:26:42.756051932Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "upstream": false,
+          "started": "2026-10-11T06-26-50.459502770Z",
+          "namespaces": "wwpg_reference",
+          "required_tests_passed": 10,
+          "completed": "2026-10-11T06:27:13.067372103Z"
+        }
+      ]
+    },
+    {
+      "platform": "ubuntu-24.04",
+      "backend": "JAVA",
+      "profile": "BASE",
+      "packaged_checks": 204,
+      "full_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "SETUP",
+          "started": "2026-10-11T06-04-04.169055978Z",
+          "namespaces": "default",
+          "required_tests_passed": 204,
+          "completed": "2026-10-11T06:05:38.488976502Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-05-47.044676066Z",
+          "namespaces": "default",
+          "required_tests_passed": 204,
+          "completed": "2026-10-11T06:07:39.263605128Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-07-47.542838389Z",
+          "namespaces": "default",
+          "required_tests_passed": 204,
+          "completed": "2026-10-11T06:10:17.939734460Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-10-26.519771108Z",
+          "namespaces": "default",
+          "required_tests_passed": 204,
+          "completed": "2026-10-11T06:13:36.927329479Z"
+        }
+      ],
+      "source_yard_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "SETUP",
+          "started": "2026-10-11T06-17-08.655334198Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:17:47.732194912Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-17-55.850321124Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:18:28.518699311Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-18-36.772017495Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:19:08.855484213Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-19-16.863235811Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:19:50.147637710Z"
+        }
+      ],
+      "exact_zip_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-19-58.623058718Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:20:34.077377669Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-20-42.656276060Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:21:15.951596055Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-21-24.455234030Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:21:56.870234851Z"
+        }
+      ],
+      "references": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5-upstream-reference-tests.jar",
+          "sha256": "bd784bbe433521b8a3d1c732df6dd38d11f82a77578cf8a704693d59d13b566c",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "upstream": true,
+          "started": "2026-10-11T06-13-46.067187232Z",
+          "namespaces": "wwpg_reference",
+          "required_tests_passed": 10,
+          "completed": "2026-10-11T06:14:09.223492831Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "upstream": false,
+          "started": "2026-10-11T06-14-17.850773659Z",
+          "namespaces": "wwpg_reference",
+          "required_tests_passed": 10,
+          "completed": "2026-10-11T06:14:41.679533173Z"
+        }
+      ]
+    },
+    {
+      "platform": "ubuntu-24.04",
+      "backend": "NATIVE",
+      "profile": "PINOUT",
+      "packaged_checks": 208,
+      "full_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "SETUP",
+          "started": "2026-10-11T06-04-06.748298201Z",
+          "namespaces": "default",
+          "required_tests_passed": 208,
+          "completed": "2026-10-11T06:08:46.342885285Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-08-54.813437069Z",
+          "namespaces": "default",
+          "required_tests_passed": 208,
+          "completed": "2026-10-11T06:13:58.410778582Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-14-06.752748110Z",
+          "namespaces": "default",
+          "required_tests_passed": 208,
+          "completed": "2026-10-11T06:21:02.499330914Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-21-10.781436030Z",
+          "namespaces": "default",
+          "required_tests_passed": 208,
+          "completed": "2026-10-11T06:28:25.522080110Z"
+        }
+      ],
+      "source_yard_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "SETUP",
+          "started": "2026-10-11T06-31-55.135774316Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:32:37.380900171Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-32-45.826513858Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:33:21.965282367Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-33-30.241719080Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:34:06.051309237Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-34-14.544598334Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:34:51.537223708Z"
+        }
+      ],
+      "exact_zip_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-35-00.326592985Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:35:40.525512553Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-35-48.729216485Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:36:23.776139681Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-36-32.086959842Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:37:07.797223471Z"
+        }
+      ],
+      "references": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5-upstream-reference-tests.jar",
+          "sha256": "bd784bbe433521b8a3d1c732df6dd38d11f82a77578cf8a704693d59d13b566c",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "upstream": true,
+          "started": "2026-10-11T06-28-34.264026928Z",
+          "namespaces": "wwpg_reference",
+          "required_tests_passed": 10,
+          "completed": "2026-10-11T06:28:57.103541811Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "upstream": false,
+          "started": "2026-10-11T06-29-05.314341218Z",
+          "namespaces": "wwpg_reference",
+          "required_tests_passed": 10,
+          "completed": "2026-10-11T06:29:28.855751150Z"
+        }
+      ]
+    },
+    {
+      "platform": "ubuntu-24.04",
+      "backend": "JAVA",
+      "profile": "PINOUT",
+      "packaged_checks": 208,
+      "full_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "SETUP",
+          "started": "2026-10-11T06-04-00.076213651Z",
+          "namespaces": "default",
+          "required_tests_passed": 208,
+          "completed": "2026-10-11T06:05:51.230404651Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-05-59.821852006Z",
+          "namespaces": "default",
+          "required_tests_passed": 208,
+          "completed": "2026-10-11T06:08:21.827907959Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-08-30.359201779Z",
+          "namespaces": "default",
+          "required_tests_passed": 208,
+          "completed": "2026-10-11T06:11:41.530619059Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-11-50.243949960Z",
+          "namespaces": "default",
+          "required_tests_passed": 208,
+          "completed": "2026-10-11T06:16:08.350433716Z"
+        }
+      ],
+      "source_yard_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "SETUP",
+          "started": "2026-10-11T06-19-41.037185474Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:20:24.998800211Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-20-33.514356577Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:21:10.494571889Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-21-19.266096432Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:21:56.226224993Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-22-04.760885834Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:22:43.089380454Z"
+        }
+      ],
+      "exact_zip_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-22-52.497111687Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:23:32.747096039Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-23-41.393345719Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:24:19.951891678Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-24-28.991431833Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:25:05.874280776Z"
+        }
+      ],
+      "references": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5-upstream-reference-tests.jar",
+          "sha256": "bd784bbe433521b8a3d1c732df6dd38d11f82a77578cf8a704693d59d13b566c",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "upstream": true,
+          "started": "2026-10-11T06-16-17.314169235Z",
+          "namespaces": "wwpg_reference",
+          "required_tests_passed": 10,
+          "completed": "2026-10-11T06:16:40.456563326Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "upstream": false,
+          "started": "2026-10-11T06-16-48.766030421Z",
+          "namespaces": "wwpg_reference",
+          "required_tests_passed": 10,
+          "completed": "2026-10-11T06:17:12.113812562Z"
+        }
+      ]
+    },
+    {
+      "platform": "windows-latest",
+      "backend": "NATIVE",
+      "profile": "BASE",
+      "packaged_checks": 204,
+      "full_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "SETUP",
+          "started": "2026-10-11T06-04-23.314846500Z",
+          "namespaces": "default",
+          "required_tests_passed": 204,
+          "completed": "2026-10-11T06:08:40.151879700Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-08-49.276518200Z",
+          "namespaces": "default",
+          "required_tests_passed": 204,
+          "completed": "2026-10-11T06:12:46.224860600Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-12-58.479159900Z",
+          "namespaces": "default",
+          "required_tests_passed": 204,
+          "completed": "2026-10-11T06:17:22.496668700Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-17-33.765715900Z",
+          "namespaces": "default",
+          "required_tests_passed": 204,
+          "completed": "2026-10-11T06:23:40.217860600Z"
+        }
+      ],
+      "source_yard_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "SETUP",
+          "started": "2026-10-11T06-27-43.290692400Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:28:22.418829600Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-28-31.034359100Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:29:02.373487300Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-29-10.843531500Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:29:41.995440900Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-29-50.567915500Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:30:21.489722100Z"
+        }
+      ],
+      "exact_zip_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-30-30.337811600Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:31:06.296409400Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-31-14.831932800Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:31:45.831657600Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-31-54.183007200Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:32:25.224353300Z"
+        }
+      ],
+      "references": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5-upstream-reference-tests.jar",
+          "sha256": "bd784bbe433521b8a3d1c732df6dd38d11f82a77578cf8a704693d59d13b566c",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "upstream": true,
+          "started": "2026-10-11T06-23-51.370552900Z",
+          "namespaces": "wwpg_reference",
+          "required_tests_passed": 10,
+          "completed": "2026-10-11T06:24:20.009116800Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "upstream": false,
+          "started": "2026-10-11T06-24-30.342569400Z",
+          "namespaces": "wwpg_reference",
+          "required_tests_passed": 10,
+          "completed": "2026-10-11T06:24:59.337704300Z"
+        }
+      ]
+    },
+    {
+      "platform": "windows-latest",
+      "backend": "JAVA",
+      "profile": "PINOUT",
+      "packaged_checks": 208,
+      "full_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "SETUP",
+          "started": "2026-10-11T06-04-29.243514800Z",
+          "namespaces": "default",
+          "required_tests_passed": 208,
+          "completed": "2026-10-11T06:06:50.292934700Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-07-01.939956200Z",
+          "namespaces": "default",
+          "required_tests_passed": 208,
+          "completed": "2026-10-11T06:09:52.648789700Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-10-04.273612600Z",
+          "namespaces": "default",
+          "required_tests_passed": 208,
+          "completed": "2026-10-11T06:13:27.914916600Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-13-40.875836Z",
+          "namespaces": "default",
+          "required_tests_passed": 208,
+          "completed": "2026-10-11T06:18:14.405628600Z"
+        }
+      ],
+      "source_yard_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "SETUP",
+          "started": "2026-10-11T06-23-24.417798300Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:24:30.542390200Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-24-41.884150900Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:25:27.535089100Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-25-39.553858200Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:26:33.433177800Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-26-44.865798400Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:27:29.811691800Z"
+        }
+      ],
+      "exact_zip_processes": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-27-44.943696500Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:28:43.619870500Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-28-57.617434800Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:29:53.910574700Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T06-30-05.220199100Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T06:30:50.260907700Z"
+        }
+      ],
+      "references": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5-upstream-reference-tests.jar",
+          "sha256": "bd784bbe433521b8a3d1c732df6dd38d11f82a77578cf8a704693d59d13b566c",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "upstream": true,
+          "started": "2026-10-11T06-18-27.401823400Z",
+          "namespaces": "wwpg_reference",
+          "required_tests_passed": 10,
+          "completed": "2026-10-11T06:18:57.646552400Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "upstream": false,
+          "started": "2026-10-11T06-19-09.794272100Z",
+          "namespaces": "wwpg_reference",
+          "required_tests_passed": 10,
+          "completed": "2026-10-11T06:19:48.396589200Z"
+        }
+      ]
+    }
+  ],
+  "real_clients": [
+    {
+      "mode": "graphical",
+      "profile": "BASE",
+      "backend": "NATIVE",
+      "record": {
+        "schema": 1,
+        "passed": true,
+        "mode": "Real graphical Minecraft client with an integrated server, native GUI packets and optional CC keyboard input",
+        "profile": "BASE",
+        "backend": "NATIVE",
+        "jar": {
+          "file": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "bytes": 3219387
+        },
+        "exact_archive_sha256": "2779c759087f2a95305be9a2dfce5fc95544d5fe1510c407fc08a647cb7b632b",
+        "views": [
+          "B01",
+          "B02",
+          "B03",
+          "B04",
+          "B05",
+          "B06",
+          "B07",
+          "B08",
+          "B09",
+          "B10",
+          "B11",
+          "B12",
+          "B13",
+          "B14",
+          "B15",
+          "B16",
+          "B17",
+          "B18",
+          "B19",
+          "B20",
+          "B21",
+          "B22",
+          "B23",
+          "B24",
+          "B25",
+          "P1",
+          "P2",
+          "P3",
+          "P4",
+          "P5",
+          "P6",
+          "P7",
+          "P8",
+          "P9",
+          "T1",
+          "T2",
+          "T3",
+          "T4",
+          "T5",
+          "T6",
+          "T7",
+          "M1",
+          "M2",
+          "M3",
+          "B26",
+          "D1",
+          "D2",
+          "D3",
+          "D4",
+          "D5",
+          "D6",
+          "D7",
+          "D8",
+          "D9",
+          "D10",
+          "D11",
+          "D12",
+          "D13",
+          "D14",
+          "D15",
+          "D16",
+          "D17",
+          "D18",
+          "D19",
+          "D20",
+          "D21",
+          "D22",
+          "factory",
+          "relay-panel",
+          "S01",
+          "S02",
+          "S03",
+          "S04",
+          "S05",
+          "S06",
+          "S07",
+          "S08",
+          "S09",
+          "S10",
+          "S11",
+          "S12",
+          "S13",
+          "S14",
+          "S15",
+          "S16",
+          "S17",
+          "S18",
+          "S19",
+          "S20",
+          "S21",
+          "S22",
+          "S23",
+          "S24",
+          "S25",
+          "S26",
+          "S27",
+          "S28",
+          "S29",
+          "S30",
+          "S31",
+          "S32",
+          "S33",
+          "S34",
+          "S35",
+          "S36",
+          "S37",
+          "S38",
+          "S39",
+          "S40",
+          "S41",
+          "S42",
+          "S43",
+          "S44",
+          "S45",
+          "S46",
+          "S47",
+          "S48",
+          "S49",
+          "S50",
+          "S51",
+          "S52",
+          "S53",
+          "S54",
+          "S55",
+          "S56",
+          "S57",
+          "S58",
+          "S59",
+          "S60",
+          "S61",
+          "S62",
+          "S63",
+          "S64",
+          "S65",
+          "S66",
+          "S67",
+          "S68",
+          "S69",
+          "S70",
+          "S71",
+          "S72",
+          "S73",
+          "S74",
+          "S75",
+          "S76",
+          "S77",
+          "S78",
+          "S79"
+        ],
+        "view_count": 148,
+        "client_server_gauge_comparisons": 133,
+        "checkpoints": [
+          "EXPANDED_CLIENT_BASELINE_PASSED",
+          "EXPANDED_CLIENT_PANEL_PACKETS_PASSED",
+          "EXPANDED_CLIENT_P2_PACKETS_PASSED",
+          "STATIONARY_CLIENT_PLOTTER_GRAPH_PASSED",
+          "STATIONARY_CLIENT_DUPLEX_MODEL_PASSED",
+          "STATIONARY_CLIENT_DESIGN_SCREEN_PASSED",
+          "STATIONARY_CLIENT_NATIVE_PORTAL_PASSED",
+          "WWPG_TEST_BACKEND_CONFIG: requested=NATIVE, configured=NATIVE"
+        ],
+        "screenshots": {
+          "B08": {
+            "file": "08-B08.png",
+            "sha256": "75d74a0c87fcede1e6c59819b0f41ef009745cd369d1a0c134c92f520a422b31",
+            "bytes": 435151
+          },
+          "P2": {
+            "file": "27-P2.png",
+            "sha256": "804f0e57d5d3ed4b89186377c8301ae7a4cf9809d3b8c19b5635621d8c470861",
+            "bytes": 530016
+          },
+          "T2": {
+            "file": "36-T2.png",
+            "sha256": "bad2cd53db9d3a7565d1c291b76e26966d7c3fd426db70613accd75d58f723d4",
+            "bytes": 474415
+          },
+          "S15": {
+            "file": "84-S15.png",
+            "sha256": "5d239e31368686ecb257bea1cc7ab413a1d259098f667d993f4ae9462a1346c6",
+            "bytes": 128189
+          },
+          "S24": {
+            "file": "93-S24.png",
+            "sha256": "f764880dd8a00f830b984d9e49ee6f587f45cd78d569849db918321f7e234d8b",
+            "bytes": 129906
+          },
+          "S25": {
+            "file": "94-S25.png",
+            "sha256": "b9d476de67e62ee93e64a3a051563977a5b439b4a1dfaf733dee478573684e76",
+            "bytes": 112079
+          },
+          "S26": {
+            "file": "95-S26.png",
+            "sha256": "de95b61775c88ccae42e82d7576e6a14ab8d360176fd5eb0dc8294d68279c952",
+            "bytes": 112816
+          },
+          "S61": {
+            "file": "130-S61.png",
+            "sha256": "c28143089823b14462d5ffd0a0c0187dd1cfeaac9a50e0ddf64d0a06110d7226",
+            "bytes": 517044
+          },
+          "S77": {
+            "file": "146-S77.png",
+            "sha256": "97502076ccc0d5f175cd0e85c2841ecaafde5106d2ba61c565eea5c853ee04d1",
+            "bytes": 538391
+          },
+          "S79": {
+            "file": "148-S79.png",
+            "sha256": "74acbbc535c39dc6bf1bebd8c9083388ba8a271b6f558586e5a3e16bc532d8ef",
+            "bytes": 502982
+          },
+          "native-saved-design-editor.png": {
+            "file": "native-saved-design-editor.png",
+            "sha256": "7d15edf1481ba32b2dd9f688bf9934d4c1afbf39d22829f482a3228f595d4be3",
+            "bytes": 183018
+          },
+          "native-design-saved.png": {
+            "file": "native-design-saved.png",
+            "sha256": "6857b2313059c8ef15a052d83786a314ac3d2006f695e31a87fad9c2c9c76725",
+            "bytes": 191005
+          },
+          "native-nether-route.png": {
+            "file": "native-nether-route.png",
+            "sha256": "a1150147ce85cb180823cc44ab391c76230f825e5ce8a01750a9a09f4c2094c9",
+            "bytes": 565691
+          },
+          "factory-off.png": {
+            "file": "factory-off.png",
+            "sha256": "26c73a2600a33aca8b9f6d77d2ef820d55706e28aff61e74dac68296ebef81ea",
+            "bytes": 183820
+          },
+          "factory-on.png": {
+            "file": "factory-on.png",
+            "sha256": "fb7eedf1f1491444d2c4880310e725eb8a7cf637af2b36f8e796bf943762b096",
+            "bytes": 183161
+          }
+        },
+        "log": {
+          "file": "client.log.gz",
+          "sha256": "87e780afa48d0cec21fab23f29cd0e6cc0de981aafcf2e6621c628d9670cfd01",
+          "bytes": 13112
+        }
+      }
+    },
+    {
+      "mode": "multiplayer",
+      "profile": "BASE",
+      "backend": "NATIVE",
+      "record": {
+        "schema": 1,
+        "passed": true,
+        "failure": null,
+        "elapsed_seconds": 96.25,
+        "jar": {
+          "path": "C:\\Users\\Parker\\Documents\\ChatGPT\\WWPG\\build\\libs\\wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1"
+        },
+        "archive_sha256": "2779c759087f2a95305be9a2dfce5fc95544d5fe1510c407fc08a647cb7b632b",
+        "profile": "BASE",
+        "backend": "NATIVE",
+        "real_clients": [
+          "WWPG_A",
+          "WWPG_B"
+        ],
+        "processes": {
+          "server": {
+            "pid": 56184,
+            "exit_code": 0
+          },
+          "client-a": {
+            "pid": 43564,
+            "exit_code": 0
+          },
+          "client-b": {
+            "pid": 52980,
+            "exit_code": 0
+          }
+        },
+        "logs": {
+          "server": {
+            "file": "server.log.gz",
+            "sha256": "e1f44db65003a30a5bb717566bca56ed22a2dca64d9d9b83ce6843f111608312"
+          },
+          "client-a": {
+            "file": "client-a.log.gz",
+            "sha256": "75b450ea5dd3c56d724e9da1fe4036b0cd4e91a07b8060c536a428ed5eccfa68"
+          },
+          "client-b": {
+            "file": "client-b.log.gz",
+            "sha256": "5203803b9f4d4212dff14a162ccf8e37ed6a53e63f7242c9362981ee02dff69e"
+          }
+        },
+        "screenshots": {
+          "client-a-design-editor-A.png": {
+            "sha256": "239401473accaf714b1002099ab36b47f85cde2579f082a0ff44b89527f62ac3",
+            "bytes": 27020
+          },
+          "client-a-design-saved-A.png": {
+            "sha256": "f8b38a55926bc0bcf1cf6c691f36d36b26561763d61086094a5c3411d7652c63",
+            "bytes": 31094
+          },
+          "client-b-design-editor-B.png": {
+            "sha256": "953958506811d81b78e6cdae9235cfcbe8b24126ed01192d9deb104dd0b172d6",
+            "bytes": 25278
+          },
+          "client-b-design-saved-B.png": {
+            "sha256": "7c2498a1d8ff54b94b12a8caad320c66b43f840efbc69d7fadc8704a6cc5da1e",
+            "bytes": 29384
+          }
+        },
+        "mode": "One dedicated server and two real TCP Minecraft clients; native menu and keyboard packets"
+      }
+    },
+    {
+      "mode": "graphical",
+      "profile": "BASE",
+      "backend": "JAVA",
+      "record": {
+        "schema": 1,
+        "passed": true,
+        "mode": "Real graphical Minecraft client with an integrated server, native GUI packets and optional CC keyboard input",
+        "profile": "BASE",
+        "backend": "JAVA",
+        "jar": {
+          "file": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "bytes": 3219387
+        },
+        "exact_archive_sha256": "2779c759087f2a95305be9a2dfce5fc95544d5fe1510c407fc08a647cb7b632b",
+        "views": [
+          "B01",
+          "B02",
+          "B03",
+          "B04",
+          "B05",
+          "B06",
+          "B07",
+          "B08",
+          "B09",
+          "B10",
+          "B11",
+          "B12",
+          "B13",
+          "B14",
+          "B15",
+          "B16",
+          "B17",
+          "B18",
+          "B19",
+          "B20",
+          "B21",
+          "B22",
+          "B23",
+          "B24",
+          "B25",
+          "P1",
+          "P2",
+          "P3",
+          "P4",
+          "P5",
+          "P6",
+          "P7",
+          "P8",
+          "P9",
+          "T1",
+          "T2",
+          "T3",
+          "T4",
+          "T5",
+          "T6",
+          "T7",
+          "M1",
+          "M2",
+          "M3",
+          "B26",
+          "D1",
+          "D2",
+          "D3",
+          "D4",
+          "D5",
+          "D6",
+          "D7",
+          "D8",
+          "D9",
+          "D10",
+          "D11",
+          "D12",
+          "D13",
+          "D14",
+          "D15",
+          "D16",
+          "D17",
+          "D18",
+          "D19",
+          "D20",
+          "D21",
+          "D22",
+          "factory",
+          "relay-panel",
+          "S01",
+          "S02",
+          "S03",
+          "S04",
+          "S05",
+          "S06",
+          "S07",
+          "S08",
+          "S09",
+          "S10",
+          "S11",
+          "S12",
+          "S13",
+          "S14",
+          "S15",
+          "S16",
+          "S17",
+          "S18",
+          "S19",
+          "S20",
+          "S21",
+          "S22",
+          "S23",
+          "S24",
+          "S25",
+          "S26",
+          "S27",
+          "S28",
+          "S29",
+          "S30",
+          "S31",
+          "S32",
+          "S33",
+          "S34",
+          "S35",
+          "S36",
+          "S37",
+          "S38",
+          "S39",
+          "S40",
+          "S41",
+          "S42",
+          "S43",
+          "S44",
+          "S45",
+          "S46",
+          "S47",
+          "S48",
+          "S49",
+          "S50",
+          "S51",
+          "S52",
+          "S53",
+          "S54",
+          "S55",
+          "S56",
+          "S57",
+          "S58",
+          "S59",
+          "S60",
+          "S61",
+          "S62",
+          "S63",
+          "S64",
+          "S65",
+          "S66",
+          "S67",
+          "S68",
+          "S69",
+          "S70",
+          "S71",
+          "S72",
+          "S73",
+          "S74",
+          "S75",
+          "S76",
+          "S77",
+          "S78",
+          "S79"
+        ],
+        "view_count": 148,
+        "client_server_gauge_comparisons": 133,
+        "checkpoints": [
+          "EXPANDED_CLIENT_BASELINE_PASSED",
+          "EXPANDED_CLIENT_PANEL_PACKETS_PASSED",
+          "EXPANDED_CLIENT_P2_PACKETS_PASSED",
+          "STATIONARY_CLIENT_PLOTTER_GRAPH_PASSED",
+          "STATIONARY_CLIENT_DUPLEX_MODEL_PASSED",
+          "STATIONARY_CLIENT_DESIGN_SCREEN_PASSED",
+          "STATIONARY_CLIENT_NATIVE_PORTAL_PASSED",
+          "WWPG_TEST_BACKEND_CONFIG: requested=JAVA, configured=JAVA"
+        ],
+        "screenshots": {
+          "B08": {
+            "file": "08-B08.png",
+            "sha256": "e49e400cd29c2bfdbd8dc210ef0378310b0bef4050051b833256e46161d5e2a9",
+            "bytes": 434804
+          },
+          "P2": {
+            "file": "27-P2.png",
+            "sha256": "40627fd1afe1e462172ddc054e82cab58b8ec5b798d46c41622680018df807e7",
+            "bytes": 529463
+          },
+          "T2": {
+            "file": "36-T2.png",
+            "sha256": "50a00612d53a92e013e54198565c9fb7a098e8e9dce13218634fb8814f55aeda",
+            "bytes": 474989
+          },
+          "S15": {
+            "file": "84-S15.png",
+            "sha256": "efe79d5eb5b9e11adade2e572abd870edb22b3b2a8cdd2a74582fe1fa55c9279",
+            "bytes": 128478
+          },
+          "S24": {
+            "file": "93-S24.png",
+            "sha256": "467a1dbb65ec542521d5c313beb1387d021ec4d2be34804b507f448f48496b6d",
+            "bytes": 129599
+          },
+          "S25": {
+            "file": "94-S25.png",
+            "sha256": "31d216ccf85b6ec44b090da5febab24c195d7f6f6dc71389bba806203da7c149",
+            "bytes": 111825
+          },
+          "S26": {
+            "file": "95-S26.png",
+            "sha256": "12f5dd3fddc384ba60ed761d0f156ecc5b966b1318fab43dca52bceb987963f2",
+            "bytes": 113219
+          },
+          "S61": {
+            "file": "130-S61.png",
+            "sha256": "4ff04958ba2e1fb2dc09e49f31f9bb7eaa598486744bbfa68e6233823fa92482",
+            "bytes": 517502
+          },
+          "S77": {
+            "file": "146-S77.png",
+            "sha256": "f5f0b59e5189345550c7bb34c043675c20af0ea12da28dc1172ca0560dd6e25d",
+            "bytes": 536521
+          },
+          "S79": {
+            "file": "148-S79.png",
+            "sha256": "9f972a52c03c3ed03d5d9ab6714302c90ef3f5a797145102ad5fa6c278a3ac0b",
+            "bytes": 500967
+          },
+          "native-saved-design-editor.png": {
+            "file": "native-saved-design-editor.png",
+            "sha256": "ccaf9586d9590963163aeada7ef3b0b400601ca9a50a8309cc64713b22ae5b0b",
+            "bytes": 183204
+          },
+          "native-design-saved.png": {
+            "file": "native-design-saved.png",
+            "sha256": "2e21a5faa4b14f225e579e74274259e2585a24f0a18879b8d9c4e00e1a191d7f",
+            "bytes": 190518
+          },
+          "native-nether-route.png": {
+            "file": "native-nether-route.png",
+            "sha256": "545cb6ebaa8fd18dd9c4f164a3d1dd9068763c3ca605ca8f9340d54a8e92a7e3",
+            "bytes": 563847
+          },
+          "factory-off.png": {
+            "file": "factory-off.png",
+            "sha256": "46ca08e845f01abcfd692e955dcdce797e5f2bc88e2eb23da6601b73320a8bb1",
+            "bytes": 168861
+          },
+          "factory-on.png": {
+            "file": "factory-on.png",
+            "sha256": "dc272cbf9d7754c82df4c7a6c80132901da957fd66d4ce99083332ea80fb0f6b",
+            "bytes": 171409
+          }
+        },
+        "log": {
+          "file": "client.log.gz",
+          "sha256": "e132a5249f5e47dcc15464f8c121eb42c1b94ca806fb88da08cafb546d5dd1d2",
+          "bytes": 13117
+        }
+      }
+    },
+    {
+      "mode": "multiplayer",
+      "profile": "BASE",
+      "backend": "JAVA",
+      "record": {
+        "schema": 1,
+        "passed": true,
+        "failure": null,
+        "elapsed_seconds": 96.89,
+        "jar": {
+          "path": "C:\\Users\\Parker\\Documents\\ChatGPT\\WWPG\\build\\libs\\wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1"
+        },
+        "archive_sha256": "2779c759087f2a95305be9a2dfce5fc95544d5fe1510c407fc08a647cb7b632b",
+        "profile": "BASE",
+        "backend": "JAVA",
+        "real_clients": [
+          "WWPG_A",
+          "WWPG_B"
+        ],
+        "processes": {
+          "server": {
+            "pid": 9540,
+            "exit_code": 0
+          },
+          "client-a": {
+            "pid": 40368,
+            "exit_code": 0
+          },
+          "client-b": {
+            "pid": 44156,
+            "exit_code": 0
+          }
+        },
+        "logs": {
+          "server": {
+            "file": "server.log.gz",
+            "sha256": "010d862ce59dd8a244109536a0cdc1bf6fb1d03020f0b842be55c3adbb6994d6"
+          },
+          "client-a": {
+            "file": "client-a.log.gz",
+            "sha256": "7599a5b3d57e929bac42a35778a0917c1cdaffb0b66858ef582c07088556a2a9"
+          },
+          "client-b": {
+            "file": "client-b.log.gz",
+            "sha256": "03c2d9cc6b0e52e64f768fb1fba13a2706c096a4135a3a8690ecf96cfecd941a"
+          }
+        },
+        "screenshots": {
+          "client-a-design-editor-A.png": {
+            "sha256": "239401473accaf714b1002099ab36b47f85cde2579f082a0ff44b89527f62ac3",
+            "bytes": 27020
+          },
+          "client-a-design-saved-A.png": {
+            "sha256": "fff67327dedb1fb37835819c88ae5b67e288235a82a5d9ffcc772ec933395e4d",
+            "bytes": 31081
+          },
+          "client-b-design-editor-B.png": {
+            "sha256": "5a7dc765cfb1eb8bed1bbacb3ce55557ca306067cc98db29b4cc43729d0e32cb",
+            "bytes": 24860
+          },
+          "client-b-design-saved-B.png": {
+            "sha256": "6c2514d3a22390b895643de1333a7a15272b49cac532f1ed1ed5936b3b2134c5",
+            "bytes": 29002
+          }
+        },
+        "mode": "One dedicated server and two real TCP Minecraft clients; native menu and keyboard packets"
+      }
+    },
+    {
+      "mode": "graphical",
+      "profile": "PINOUT",
+      "backend": "NATIVE",
+      "record": {
+        "schema": 1,
+        "passed": true,
+        "mode": "Real graphical Minecraft client with an integrated server, native GUI packets and optional CC keyboard input",
+        "profile": "PINOUT",
+        "backend": "NATIVE",
+        "jar": {
+          "file": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "bytes": 3219387
+        },
+        "exact_archive_sha256": "d6ac6767436c8169b94711c21b09259d9b1481fbb5302d2301596ea3325eab48",
+        "views": [
+          "B01",
+          "B02",
+          "B03",
+          "B04",
+          "B05",
+          "B06",
+          "B07",
+          "B08",
+          "B09",
+          "B10",
+          "B11",
+          "B12",
+          "B13",
+          "B14",
+          "B15",
+          "B16",
+          "B17",
+          "B18",
+          "B19",
+          "B20",
+          "B21",
+          "B22",
+          "B23",
+          "B24",
+          "B25",
+          "P1",
+          "P2",
+          "P3",
+          "P4",
+          "P5",
+          "P6",
+          "P7",
+          "P8",
+          "P9",
+          "T1",
+          "T2",
+          "T3",
+          "T4",
+          "T5",
+          "T6",
+          "T7",
+          "M1",
+          "M2",
+          "M3",
+          "B26",
+          "D1",
+          "D2",
+          "D3",
+          "D4",
+          "D5",
+          "D6",
+          "D7",
+          "D8",
+          "D9",
+          "D10",
+          "D11",
+          "D12",
+          "D13",
+          "D14",
+          "D15",
+          "D16",
+          "D17",
+          "D18",
+          "D19",
+          "D20",
+          "D21",
+          "D22",
+          "factory",
+          "relay-panel",
+          "S01",
+          "S02",
+          "S03",
+          "S04",
+          "S05",
+          "S06",
+          "S07",
+          "S08",
+          "S09",
+          "S10",
+          "S11",
+          "S12",
+          "S13",
+          "S14",
+          "S15",
+          "S16",
+          "S17",
+          "S18",
+          "S19",
+          "S20",
+          "S21",
+          "S22",
+          "S23",
+          "S24",
+          "S25",
+          "S26",
+          "S27",
+          "S28",
+          "S29",
+          "S30",
+          "S31",
+          "S32",
+          "S33",
+          "S34",
+          "S35",
+          "S36",
+          "S37",
+          "S38",
+          "S39",
+          "S40",
+          "S41",
+          "S42",
+          "S43",
+          "S44",
+          "S45",
+          "S46",
+          "S47",
+          "S48",
+          "S49",
+          "S50",
+          "S51",
+          "S52",
+          "S53",
+          "S54",
+          "S55",
+          "S56",
+          "S57",
+          "S58",
+          "S59",
+          "S60",
+          "S61",
+          "S62",
+          "S63",
+          "S64",
+          "S65",
+          "S66",
+          "S67",
+          "S68",
+          "S69",
+          "S70",
+          "S71",
+          "S72",
+          "S73",
+          "S74",
+          "S75",
+          "S76",
+          "S77",
+          "S78",
+          "S79",
+          "S80",
+          "S81"
+        ],
+        "view_count": 150,
+        "client_server_gauge_comparisons": 135,
+        "checkpoints": [
+          "EXPANDED_CLIENT_BASELINE_PASSED",
+          "EXPANDED_CLIENT_PANEL_PACKETS_PASSED",
+          "EXPANDED_CLIENT_P2_PACKETS_PASSED",
+          "STATIONARY_CLIENT_PLOTTER_GRAPH_PASSED",
+          "STATIONARY_CLIENT_DUPLEX_MODEL_PASSED",
+          "STATIONARY_CLIENT_DESIGN_SCREEN_PASSED",
+          "STATIONARY_CLIENT_NATIVE_PORTAL_PASSED",
+          "WWPG_TEST_BACKEND_CONFIG: requested=NATIVE, configured=NATIVE",
+          "STATIONARY_CLIENT_PINOUT_KEYBOARD_PASSED"
+        ],
+        "screenshots": {
+          "B08": {
+            "file": "08-B08.png",
+            "sha256": "e205c2e6c91760823249fee4f5980480a4f13d1a2da94c4534a24a3548892a66",
+            "bytes": 434853
+          },
+          "P2": {
+            "file": "27-P2.png",
+            "sha256": "6c7fd232f876ad5302400cb1a8e18a4c609516a8c3acfa72348b00bf979e12ac",
+            "bytes": 529583
+          },
+          "T2": {
+            "file": "36-T2.png",
+            "sha256": "131fa548b2c5926ec8d554547696674cf73dfaad314d678d981f6010168c7868",
+            "bytes": 475183
+          },
+          "S15": {
+            "file": "84-S15.png",
+            "sha256": "416cca8287532dacef832fe38a274d77e92a399241703679ce491b389a90c936",
+            "bytes": 128016
+          },
+          "S24": {
+            "file": "93-S24.png",
+            "sha256": "3bfc2d8582cdb098586fb3113481632fe7b527e8950f13e893454c87885714ac",
+            "bytes": 129462
+          },
+          "S25": {
+            "file": "94-S25.png",
+            "sha256": "5e238c4fbb13cdf318bcbe9fbac3cd5518b6bc04dafff48da29e76ef32f4d06b",
+            "bytes": 111816
+          },
+          "S26": {
+            "file": "95-S26.png",
+            "sha256": "71225917b850befe00b2e5d8ffac803e3b7988b60cc3302181439423c8123162",
+            "bytes": 113458
+          },
+          "S61": {
+            "file": "130-S61.png",
+            "sha256": "4ac53f6caf498f3c44281cfa1dbd2a00c8463c36e3683159bf5f2643bee5e6a4",
+            "bytes": 519607
+          },
+          "S77": {
+            "file": "146-S77.png",
+            "sha256": "7aadca1c062529de6691218805bee8653950d14201198ec17995b368db7c030b",
+            "bytes": 536840
+          },
+          "S79": {
+            "file": "148-S79.png",
+            "sha256": "99e9c9f5c17f3bd8c91c7cdf81fbaaf6870dfa1393fb1d38dfe556d54b62cbde",
+            "bytes": 504597
+          },
+          "native-saved-design-editor.png": {
+            "file": "native-saved-design-editor.png",
+            "sha256": "b13da7086f9f08ba1edd23bb5b221401ab25b1b901f1f5546f29f18a3c6f37b0",
+            "bytes": 183185
+          },
+          "native-design-saved.png": {
+            "file": "native-design-saved.png",
+            "sha256": "891be18fdcb0b3f8174565389ec9d7d76f3b9064a1eecb85540cce06362cd8b0",
+            "bytes": 190445
+          },
+          "native-nether-route.png": {
+            "file": "native-nether-route.png",
+            "sha256": "3c33eaee91af75dd74126168b419e0a40a5a955ec89d342cbfa7c9cc34b22345",
+            "bytes": 569073
+          },
+          "factory-off.png": {
+            "file": "factory-off.png",
+            "sha256": "5e094fc3299273593a5ad6baf822cf2a64a96846552a56e65694166d400ff78a",
+            "bytes": 169150
+          },
+          "factory-on.png": {
+            "file": "factory-on.png",
+            "sha256": "37a63754b52fb865a2320314d5cb800d118de713261ca624d6abcb8c34e5ca4a",
+            "bytes": 169507
+          },
+          "pinout-all-off.png": {
+            "file": "pinout-all-off.png",
+            "sha256": "326c7ba9bba073f7914e4e1d97c02a1cbfa53e64cff56caf6b4c3e14f40db6b0",
+            "bytes": 215833
+          },
+          "pinout-odd-pins.png": {
+            "file": "pinout-odd-pins.png",
+            "sha256": "8c33e27155be12373525dbb4ab55bb9b591a9a256ae2b39ceec5f214ebe869b5",
+            "bytes": 215746
+          },
+          "pinout-signed-voltage-terminal.png": {
+            "file": "pinout-signed-voltage-terminal.png",
+            "sha256": "d876ba2bd1575053881a1418cfe357b121bad66203ca62414c6710abf6ef383d",
+            "bytes": 83753
+          },
+          "pinout-all-restored.png": {
+            "file": "pinout-all-restored.png",
+            "sha256": "05531af5dd8745efe51aeff8dc22c678658ada356e71aa3b7ebc8be98b9a198a",
+            "bytes": 215801
+          }
+        },
+        "log": {
+          "file": "client.log.gz",
+          "sha256": "816f7cd2045aaea955c32e2c90a1862cf7f5452bcd7576b80ebc69c7faef2fae",
+          "bytes": 13649
+        }
+      }
+    },
+    {
+      "mode": "multiplayer",
+      "profile": "PINOUT",
+      "backend": "NATIVE",
+      "record": {
+        "schema": 1,
+        "passed": true,
+        "failure": null,
+        "elapsed_seconds": 154.31,
+        "jar": {
+          "path": "C:\\Users\\Parker\\Documents\\ChatGPT\\WWPG\\build\\libs\\wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1"
+        },
+        "archive_sha256": "d6ac6767436c8169b94711c21b09259d9b1481fbb5302d2301596ea3325eab48",
+        "profile": "PINOUT",
+        "backend": "NATIVE",
+        "real_clients": [
+          "WWPG_A",
+          "WWPG_B"
+        ],
+        "processes": {
+          "server": {
+            "pid": 11252,
+            "exit_code": 0
+          },
+          "client-a": {
+            "pid": 53948,
+            "exit_code": 0
+          },
+          "client-b": {
+            "pid": 40400,
+            "exit_code": 0
+          }
+        },
+        "logs": {
+          "server": {
+            "file": "server.log.gz",
+            "sha256": "b2d00b033af6bce5927160e9d553a331ff6bc0251017e073526760dcb8e750dc"
+          },
+          "client-a": {
+            "file": "client-a.log.gz",
+            "sha256": "cda23da47c1ab5994b6705929c3637a308a6aecba69e39364b4327d9999f9ca1"
+          },
+          "client-b": {
+            "file": "client-b.log.gz",
+            "sha256": "b6f040abb2950d252f26c222eccc1673b73006564e61408605daa85672cf0979"
+          }
+        },
+        "screenshots": {
+          "client-a-design-editor-A.png": {
+            "sha256": "b25d224c7fad1567447411f231a4dfc57e48edfd5e10aa459a095c5dc31a989c",
+            "bytes": 27079
+          },
+          "client-a-design-saved-A.png": {
+            "sha256": "646fadf0cc6822481f8efa274a0334f198dd5ed1fe10838b343c01ecaaaf64a4",
+            "bytes": 31939
+          },
+          "client-a-stationary-pinout-stop-A.png": {
+            "sha256": "ba18a9a18c211f4f4903f62eb1526a618d305720af4eccdf3596ffb5c0500d2d",
+            "bytes": 45086
+          },
+          "client-a-stationary-pinout-pattern-A.png": {
+            "sha256": "0e9e580df7959eefa5167f14a340fd9ef75ea0aa81725d63e7045209a47fbc0a",
+            "bytes": 44486
+          },
+          "client-a-stationary-pinout-volts-A.png": {
+            "sha256": "3460b28f992b8dc9c51fd965f1d72ddcd006212f085b9ec89dfd89043f7de545",
+            "bytes": 44398
+          },
+          "client-a-stationary-pinout-start-A.png": {
+            "sha256": "5f35751485b6f7a366c4316836db6c7a16a8f21764975e10f407db8828c7c222",
+            "bytes": 44503
+          },
+          "client-b-design-editor-B.png": {
+            "sha256": "9969e77bee70d2b9adea6d4384d6a1b2aabdfa84016787c8077e8a735c5a84da",
+            "bytes": 25022
+          },
+          "client-b-design-saved-B.png": {
+            "sha256": "dac43d8387f8d4b18e9fab5a1a58d0699e66a2c86b9885ff44427e35ac8a0b1f",
+            "bytes": 29055
+          },
+          "client-b-stationary-pinout-stop-B.png": {
+            "sha256": "ac759942c749a82c1b1aabb0c694b4685d48c1753b56f6bc95f6291c976da25a",
+            "bytes": 51488
+          },
+          "client-b-stationary-pinout-pattern-B.png": {
+            "sha256": "b2de1af2cabcffc7daf8b3dc5263bf9f21e67f827c65dac060a0fa26b2e61bbe",
+            "bytes": 51230
+          },
+          "client-b-stationary-pinout-volts-B.png": {
+            "sha256": "041079d1b562287cf5250ebe80d95cd661d2c5c60b620571e552beaef97fa9c5",
+            "bytes": 51112
+          },
+          "client-b-stationary-pinout-start-B.png": {
+            "sha256": "5715c5167d2397f6c0e60fb77275b20b2760e67d75fa5dc2cc4b00dc9f15db88",
+            "bytes": 51247
+          }
+        },
+        "mode": "One dedicated server and two real TCP Minecraft clients; native menu and keyboard packets"
+      }
+    },
+    {
+      "mode": "graphical",
+      "profile": "PINOUT",
+      "backend": "JAVA",
+      "record": {
+        "schema": 1,
+        "passed": true,
+        "mode": "Real graphical Minecraft client with an integrated server, native GUI packets and optional CC keyboard input",
+        "profile": "PINOUT",
+        "backend": "JAVA",
+        "jar": {
+          "file": "wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+          "bytes": 3219387
+        },
+        "exact_archive_sha256": "d6ac6767436c8169b94711c21b09259d9b1481fbb5302d2301596ea3325eab48",
+        "views": [
+          "B01",
+          "B02",
+          "B03",
+          "B04",
+          "B05",
+          "B06",
+          "B07",
+          "B08",
+          "B09",
+          "B10",
+          "B11",
+          "B12",
+          "B13",
+          "B14",
+          "B15",
+          "B16",
+          "B17",
+          "B18",
+          "B19",
+          "B20",
+          "B21",
+          "B22",
+          "B23",
+          "B24",
+          "B25",
+          "P1",
+          "P2",
+          "P3",
+          "P4",
+          "P5",
+          "P6",
+          "P7",
+          "P8",
+          "P9",
+          "T1",
+          "T2",
+          "T3",
+          "T4",
+          "T5",
+          "T6",
+          "T7",
+          "M1",
+          "M2",
+          "M3",
+          "B26",
+          "D1",
+          "D2",
+          "D3",
+          "D4",
+          "D5",
+          "D6",
+          "D7",
+          "D8",
+          "D9",
+          "D10",
+          "D11",
+          "D12",
+          "D13",
+          "D14",
+          "D15",
+          "D16",
+          "D17",
+          "D18",
+          "D19",
+          "D20",
+          "D21",
+          "D22",
+          "factory",
+          "relay-panel",
+          "S01",
+          "S02",
+          "S03",
+          "S04",
+          "S05",
+          "S06",
+          "S07",
+          "S08",
+          "S09",
+          "S10",
+          "S11",
+          "S12",
+          "S13",
+          "S14",
+          "S15",
+          "S16",
+          "S17",
+          "S18",
+          "S19",
+          "S20",
+          "S21",
+          "S22",
+          "S23",
+          "S24",
+          "S25",
+          "S26",
+          "S27",
+          "S28",
+          "S29",
+          "S30",
+          "S31",
+          "S32",
+          "S33",
+          "S34",
+          "S35",
+          "S36",
+          "S37",
+          "S38",
+          "S39",
+          "S40",
+          "S41",
+          "S42",
+          "S43",
+          "S44",
+          "S45",
+          "S46",
+          "S47",
+          "S48",
+          "S49",
+          "S50",
+          "S51",
+          "S52",
+          "S53",
+          "S54",
+          "S55",
+          "S56",
+          "S57",
+          "S58",
+          "S59",
+          "S60",
+          "S61",
+          "S62",
+          "S63",
+          "S64",
+          "S65",
+          "S66",
+          "S67",
+          "S68",
+          "S69",
+          "S70",
+          "S71",
+          "S72",
+          "S73",
+          "S74",
+          "S75",
+          "S76",
+          "S77",
+          "S78",
+          "S79",
+          "S80",
+          "S81"
+        ],
+        "view_count": 150,
+        "client_server_gauge_comparisons": 135,
+        "checkpoints": [
+          "EXPANDED_CLIENT_BASELINE_PASSED",
+          "EXPANDED_CLIENT_PANEL_PACKETS_PASSED",
+          "EXPANDED_CLIENT_P2_PACKETS_PASSED",
+          "STATIONARY_CLIENT_PLOTTER_GRAPH_PASSED",
+          "STATIONARY_CLIENT_DUPLEX_MODEL_PASSED",
+          "STATIONARY_CLIENT_DESIGN_SCREEN_PASSED",
+          "STATIONARY_CLIENT_NATIVE_PORTAL_PASSED",
+          "WWPG_TEST_BACKEND_CONFIG: requested=JAVA, configured=JAVA",
+          "STATIONARY_CLIENT_PINOUT_KEYBOARD_PASSED"
+        ],
+        "screenshots": {
+          "B08": {
+            "file": "08-B08.png",
+            "sha256": "f7ee2fe32b8163ead9217ba5469137a69c720c7736bc667d0f851c6f9b3466a3",
+            "bytes": 434421
+          },
+          "P2": {
+            "file": "27-P2.png",
+            "sha256": "03fa327026252d546be028c5637f6097e6046b46d559fa029619f3ade4cedc34",
+            "bytes": 530453
+          },
+          "T2": {
+            "file": "36-T2.png",
+            "sha256": "381615200e2e09771fca2680486f70d867a8cb6a6747650c97f6bc75acd4103c",
+            "bytes": 473350
+          },
+          "S15": {
+            "file": "84-S15.png",
+            "sha256": "d3d20bfaa4b89b472e2412f2233f24a35412f807478017315c1570c2f0d59282",
+            "bytes": 128398
+          },
+          "S24": {
+            "file": "93-S24.png",
+            "sha256": "0dcd6b4c970b8775f5eb816545c070d713e38a95db062b537d435b21e4e5248c",
+            "bytes": 129852
+          },
+          "S25": {
+            "file": "94-S25.png",
+            "sha256": "d02a4d1193a24c0132b617181a321eccf3255f5c3b030a2534af967a7f2f619b",
+            "bytes": 112261
+          },
+          "S26": {
+            "file": "95-S26.png",
+            "sha256": "78309a9e73016d245968c63f3b9d1ec99939e0a3ffb08b6357fcda6c8d3ec8ae",
+            "bytes": 112858
+          },
+          "S61": {
+            "file": "130-S61.png",
+            "sha256": "07714cf471f27e1fce366d64aecca43dd54b103389fdcd1f1eff5026491d110d",
+            "bytes": 519112
+          },
+          "S77": {
+            "file": "146-S77.png",
+            "sha256": "e7bd4a31fc164b33aaea7acfcf6b24825f666db2422ac60cc89525557e3a37fd",
+            "bytes": 536439
+          },
+          "S79": {
+            "file": "148-S79.png",
+            "sha256": "03a0eaff71ae3f26d8607032bd7d101dd5c01340a6009dc56dcc24b2d7691d65",
+            "bytes": 502178
+          },
+          "native-saved-design-editor.png": {
+            "file": "native-saved-design-editor.png",
+            "sha256": "c868fefc3f05ac5c261ccfe494ad8cc34f0764f1fd491ebc218360cbd67d792e",
+            "bytes": 183115
+          },
+          "native-design-saved.png": {
+            "file": "native-design-saved.png",
+            "sha256": "7ee11e8be11872153821ad78e83bdb0445cb1e262c2dccdd6cf11412ef631543",
+            "bytes": 190344
+          },
+          "native-nether-route.png": {
+            "file": "native-nether-route.png",
+            "sha256": "b04547907f31c54f3fc9c27f7143cd95419aa81efa77c67d3c8f1ec2f9788edd",
+            "bytes": 567480
+          },
+          "factory-off.png": {
+            "file": "factory-off.png",
+            "sha256": "2e15fbe0ff995fe7e6cd0556a0db63abc9e86e5fa05ef2c4500011a3dc6872e9",
+            "bytes": 169239
+          },
+          "factory-on.png": {
+            "file": "factory-on.png",
+            "sha256": "d22842ff18366992c9cfbeb80762244223ab6805d1156602902637dae1a86b56",
+            "bytes": 168870
+          },
+          "pinout-all-off.png": {
+            "file": "pinout-all-off.png",
+            "sha256": "6e48f90ece11131657da3ba7d92b7da387851d6e2ba4dd4654c35e14ec2449fb",
+            "bytes": 216173
+          },
+          "pinout-odd-pins.png": {
+            "file": "pinout-odd-pins.png",
+            "sha256": "24a873d8cc7f52510770925c284af01646e2a3bee4c9ffb28326764a8c6c35b6",
+            "bytes": 216182
+          },
+          "pinout-signed-voltage-terminal.png": {
+            "file": "pinout-signed-voltage-terminal.png",
+            "sha256": "e386b1a1992cf2ee915f3e5c8b89cb088182924a33b6ae34da1891b31954df5f",
+            "bytes": 83780
+          },
+          "pinout-all-restored.png": {
+            "file": "pinout-all-restored.png",
+            "sha256": "abd300cd35e5bff36f1e0c3e882c6359cc932debb420c370d7db9ba7e9765b78",
+            "bytes": 216143
+          }
+        },
+        "log": {
+          "file": "client.log.gz",
+          "sha256": "fecd6639ee57dc72a9c18898dc36967990024aebaae4f8d32ad2d1d9991cc681",
+          "bytes": 13534
+        }
+      }
+    },
+    {
+      "mode": "multiplayer",
+      "profile": "PINOUT",
+      "backend": "JAVA",
+      "record": {
+        "schema": 1,
+        "passed": true,
+        "failure": null,
+        "elapsed_seconds": 155.67,
+        "jar": {
+          "path": "C:\\Users\\Parker\\Documents\\ChatGPT\\WWPG\\build\\libs\\wwpg-0.1.0-beta.5.jar",
+          "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1"
+        },
+        "archive_sha256": "d6ac6767436c8169b94711c21b09259d9b1481fbb5302d2301596ea3325eab48",
+        "profile": "PINOUT",
+        "backend": "JAVA",
+        "real_clients": [
+          "WWPG_A",
+          "WWPG_B"
+        ],
+        "processes": {
+          "server": {
+            "pid": 48920,
+            "exit_code": 0
+          },
+          "client-a": {
+            "pid": 56768,
+            "exit_code": 0
+          },
+          "client-b": {
+            "pid": 3496,
+            "exit_code": 0
+          }
+        },
+        "logs": {
+          "server": {
+            "file": "server.log.gz",
+            "sha256": "52c0f8f22790ff22901553a85b53fcb8af46e972b3a10d8a373f16cb0637fb49"
+          },
+          "client-a": {
+            "file": "client-a.log.gz",
+            "sha256": "182b53520caacb2837f05356cdc3df82102e5565309b8f401f76e7de6d0b7a08"
+          },
+          "client-b": {
+            "file": "client-b.log.gz",
+            "sha256": "29a06895ec51b1f90ac6a0f628fb7d1eb83a08c65f0ea8ca63de68adc16fb9b5"
+          }
+        },
+        "screenshots": {
+          "client-a-design-editor-A.png": {
+            "sha256": "239401473accaf714b1002099ab36b47f85cde2579f082a0ff44b89527f62ac3",
+            "bytes": 27020
+          },
+          "client-a-design-saved-A.png": {
+            "sha256": "db3e01798e442283fd7a76ad652a99a2ae8d40ace65472d187e25db2304b07be",
+            "bytes": 31081
+          },
+          "client-a-stationary-pinout-stop-A.png": {
+            "sha256": "352f74dc03ba646c1ff4a0ca20ab2bfd6d4022816b8c9b00118893c146e21cbd",
+            "bytes": 45063
+          },
+          "client-a-stationary-pinout-pattern-A.png": {
+            "sha256": "0e9e580df7959eefa5167f14a340fd9ef75ea0aa81725d63e7045209a47fbc0a",
+            "bytes": 44486
+          },
+          "client-a-stationary-pinout-volts-A.png": {
+            "sha256": "2de3a28864c328bb403f02f8e8666a991790df11ea3bb6c60fe4c8a33a6cb481",
+            "bytes": 44406
+          },
+          "client-a-stationary-pinout-start-A.png": {
+            "sha256": "0687d9f461fa02940c804a73ff18df95f100936c77aaf82820dec1d9bc4f04d9",
+            "bytes": 44511
+          },
+          "client-b-design-editor-B.png": {
+            "sha256": "9f3e5aee0680ddc2dddff4e4812a679e540d5c0c38eeb2a9dcbe196cb7efa4c2",
+            "bytes": 25271
+          },
+          "client-b-design-saved-B.png": {
+            "sha256": "6328142bd7f3d97d89e26bc401f1e98be5c232b2c3c6e05cf90078439fbb8c82",
+            "bytes": 29364
+          },
+          "client-b-stationary-pinout-stop-B.png": {
+            "sha256": "789468127e160e0a74c3b6a329d1d9ede70a1afdd44f74241039d051d340b264",
+            "bytes": 51330
+          },
+          "client-b-stationary-pinout-pattern-B.png": {
+            "sha256": "3a305a9aecbb37badb26912c8cfdc1764fed6124936c15f3a5f30451eb68dc1e",
+            "bytes": 51022
+          },
+          "client-b-stationary-pinout-volts-B.png": {
+            "sha256": "c155bb7fb0b8363d7f72596a593d6c5e1a9308a637730f3636cb758f7a374a46",
+            "bytes": 50962
+          },
+          "client-b-stationary-pinout-start-B.png": {
+            "sha256": "a777e569be3cd5b11b008754479fbd62fa7984ff2748276646597dfbd4f56ef6",
+            "bytes": 51076
+          }
+        },
+        "mode": "One dedicated server and two real TCP Minecraft clients; native menu and keyboard packets"
+      }
+    }
+  ],
+  "released_worlds": {
+    "BASE": {
+      "file": "beta5-final-v6-BASE.zip",
+      "sha256": "2779c759087f2a95305be9a2dfce5fc95544d5fe1510c407fc08a647cb7b632b",
+      "bytes": 1088584
+    },
+    "PINOUT": {
+      "file": "beta5-final-v6-PINOUT.zip",
+      "sha256": "d6ac6767436c8169b94711c21b09259d9b1481fbb5302d2301596ea3325eab48",
+      "bytes": 1119037
+    }
+  },
+  "compatibility": "Existing beta.4 stationary worlds and native identities remain compatible.",
+  "boundaries": [
+    "Stationary content only",
+    "Pinned upstream versions",
+    "No moving systems, scale certification or public API"
+  ],
+  "historical_investigations": "Preserved in evidence; passing acceptance does not retroactively identify every earlier intermittent failure."
+}

@@ -1,5 +1,7 @@
 # Release records
 
+[0.1.0-beta.5](0.1.0-beta.5/) is the stationary completion release. Its derived verified matrix and final artifact/world/client records are separate from the original beta.1 matrix and the preserved beta.4 baseline.
+
 [0.1.0-beta.4/](0.1.0-beta.4/) records the restart and chunk-loading release, the final versioned jar, and its native/Java acceptance. It retains the dependency baseline and reuses both existing worlds unchanged.
 
 [Restoration verification](fixes/restoration/) records the corrections developed after beta.3 and published in beta.4, their negative controls, delayed-loading regressions, and native/Java results. The investigation snapshot is preserved separately from release acceptance.

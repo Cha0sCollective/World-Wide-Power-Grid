@@ -197,7 +197,11 @@ def main():
         target = OUTPUT / f'wwpg-{VERSION}-stationary-yard{ "-pinout" if profile == "PINOUT" else ""}.zip'
         shutil.copyfile(world, target)
         downloads.append(target)
-    evidence = {p.relative_to(ROOT).as_posix(): p for p in RECORD.rglob('*') if p.is_file()}
+    # The distribution manifest contains this archive's hash. Including its
+    # previous value would make a rerun embed a stale, self-referential checksum.
+    # Ship the manifest in the outer release bundle instead.
+    evidence = {p.relative_to(ROOT).as_posix(): p for p in RECORD.rglob('*')
+                if p.is_file() and p != RECORD / 'distribution.json'}
     evidence['build/final-build.log'] = args.build_log
     for path in (ROOT / 'build/test-results/test').glob('TEST-*.xml'):
         evidence['equation-tests/' + path.name] = path

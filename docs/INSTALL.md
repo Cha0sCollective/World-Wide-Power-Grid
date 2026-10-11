@@ -1,6 +1,6 @@
 # Install and try WWPG
 
-**0.1.0-beta.4** protects wires during saved-chunk loading and prevents restored circuit boards from saving zero over their capacitor charge. It includes the earlier grounding, handheld-meter, example-heater, and startup fixes. Read [current status](STATUS.md) for validation and remaining issues, and [supported content](SUPPORT.md) for the release's coverage.
+**0.1.0-beta.5** completes the declared stationary workflows and optional Pinout profile. Read [current status](STATUS.md) for verification, [supported content](SUPPORT.md) for the exact claim, and the [stationary yard guide](STATIONARY_YARD.md) for hands-on tests.
 
 ## Required versions
 
@@ -14,13 +14,17 @@ Install this exact combination on the server and every client. Use Java 21.
 | Create: Electro Energetics | 1.21.1-1.1.3 |
 | Power Grid | Minecraft 1.21.1, 0.6.2 |
 | Architectury API | NeoForge 13.0.8 |
-| WWPG | 0.1.0-beta.4 |
+| WWPG | 0.1.0-beta.5 |
 
 Use Create's full published release jar. CEE, PG, and Create download references and checksums are recorded in [artifacts.json](../release/artifacts.json). The WWPG download contains the compatibility mod and native solver resources; install the required upstream mods separately.
 
+## Optional computer-control profile
+
+For Pinout support, additionally install **CC;CPG: Pinout 0.2.1** and **CC:Tweaked 1.120.2** on the server and clients. The base jar works without them. Use the separately named Pinout world; [locked artifacts and checksums](../release/optional-artifacts.json) identify the downloads.
+
 ## Installation
 
-1. [Download the WWPG jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.4/wwpg-0.1.0-beta.4.jar).
+1. [Download the WWPG jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.5/wwpg-0.1.0-beta.5.jar).
 2. Put it and the required dependency jars in the instance's `mods` directory.
 3. Launch once to generate configuration, then stop the game or server.
 4. In `config/powergrid-server.toml`, edit the existing solver settings to the values below. Keep the other PG solver settings at their defaults.
@@ -56,7 +60,7 @@ Use the upstream wire, spool, and cord tools on supported terminals. Wire length
 - **Power Grid multimeter, current:** right-click a wire from either mod. Selecting a wire switches to current mode; selecting a terminal switches back to voltage mode.
 - **CEE clamp meter, current:** hold right-click while aiming at a wire from either mod. Release right-click or look away to stop measuring. A clamp measures a wire's current, not a terminal's voltage.
 
-When upgrading, stop the game/server, back up your world, and replace the older WWPG jar on the server and every client. Keep only one WWPG jar in `mods`. Keep the same dependency versions and solver settings; existing beta.2/beta.3 worlds work with beta.4 and do not need to be downloaded again. The update cannot recover wires or charge already lost and saved by an older version. The original beta.1 example remains underpowered at its heater; use the updated example below for the working burner demonstration.
+When upgrading, stop the game/server, back up your world, and replace the older WWPG jar on the server and every client. Keep only one WWPG jar in `mods`. Keep the same dependency versions and solver settings; existing beta.2/beta.3/beta.4 worlds work with beta.5 and do not need to be downloaded again. The update cannot recover wires or charge already lost and saved by an older version. The original beta.1 example remains underpowered at its heater; use the updated example below for the working burner demonstration.
 
 ## Diagnostic commands
 
@@ -65,16 +69,17 @@ These diagnostic commands require operator permission level 2:
 | Command | What it shows |
 | --- | --- |
 | `/wwpg` | Mapping counts, simulation steps, backend counts, and CEE solve attempts |
-| `/wwpg errors` | Recent compatibility errors |
+| `/wwpg errors` | Recent timestamped compatibility errors |
+| `/wwpg topology` | Recent structural changes and device identities |
 | `/wwpg at x y z` | Mapped block terminals, voltage, backend, and isolation state |
 
 ## Expanded test yard
 
-For a broader hands-on test, use the [expanded yard and station guide](FIXTURE_WORLD.md). It includes transformers, gauges, all built-in board components and panel attachments, and storage. The existing yard download works with beta.4. Extract its separate save folder into `saves`; keep a clean copy before destructive experiments. Loose wire items left during construction are removed before export.
+Download [Stationary Test Yard](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.5/wwpg-0.1.0-beta.5-stationary-yard.zip) for the base installation, or [Stationary Test Yard — Pinout](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.5/wwpg-0.1.0-beta.5-stationary-yard-pinout.zip) with the optional mods. Extract the named save folder into `saves`. The [station guide](STATIONARY_YARD.md) explains controls, expected readings and resets. Goggles and tools are at spawn. Every claimed behavior maps to a checked exhibit or native assembly/repair workflow. The ZIP retains native Nether loading settings, connected wires and optional computer programs. Loose construction wire drops are removed before export.
 
 ## Example world
 
-Download [the revised example-world ZIP](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2-example-v2.zip) and extract `WWPG Example - Panel Demo/` into the client's `saves` directory. It appears as **WWPG - Panel Relay Demo** in the world list and works with **beta.4**. Its original beta.2 filename is retained because the world is unchanged. For a dedicated server, use that directory as the server's level directory. Install the dependencies and solver settings above first. The earlier example remains available as a separate download; this revision has its own save folder.
+Download [the revised example-world ZIP](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2-example-v2.zip) and extract `WWPG Example - Panel Demo/` into the client's `saves` directory. It appears as **WWPG - Panel Relay Demo** in the world list and works with **beta.5**. Its original beta.2 filename is retained because the world is unchanged. For a dedicated server, use that directory as the server's level directory. Install the dependencies and solver settings above first. The earlier example remains available as a separate download; this revision has its own save folder.
 
 Spawn is at `(8, 64, 16)`:
 
@@ -90,7 +95,7 @@ To test the panel and board, right-click **Factory enable** with an empty hand:
 
 With goggles on, the panel shows about **18.4 V** at the board's relay coil and **0.15 A** through the panel while on. The active lamp branch draws about **0.30 A**. The panel's stock meter needles move very little at these readings; use the numeric tooltip or the obvious lamp changes. Signs identify the controls and outputs in the world.
 
-The example checks exercise the actual panel interaction, capacitor delay, relay state, both lamps, numeric meters, tools, and saved state. [Revision-2 evidence](../release/examples/panel-relay-v2/) records creation/restart and exported-world checks. It provides a repeatable small demonstration; it does not establish large-network performance. Maintainers can rebuild it with [the development commands](DEVELOPMENT.md#example-world).
+The example checks exercise the actual panel interaction, capacitor delay, relay state, both lamps, numeric meters, tools, and saved state. [Revision-2 evidence](../release/examples/panel-relay-v2/) records creation/restart and exported-world checks. It provides a repeatable small demonstration; it does not establish large-network performance.
 
 ## Pinned upstream behavior
 

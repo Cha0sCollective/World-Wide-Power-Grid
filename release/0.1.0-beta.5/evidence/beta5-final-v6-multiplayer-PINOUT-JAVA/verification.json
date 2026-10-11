@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "passed": true,
+  "failure": null,
+  "elapsed_seconds": 155.67,
+  "jar": {
+    "path": "C:\\Users\\Parker\\Documents\\ChatGPT\\WWPG\\build\\libs\\wwpg-0.1.0-beta.5.jar",
+    "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1"
+  },
+  "archive_sha256": "d6ac6767436c8169b94711c21b09259d9b1481fbb5302d2301596ea3325eab48",
+  "profile": "PINOUT",
+  "backend": "JAVA",
+  "real_clients": [
+    "WWPG_A",
+    "WWPG_B"
+  ],
+  "processes": {
+    "server": {
+      "pid": 48920,
+      "exit_code": 0
+    },
+    "client-a": {
+      "pid": 56768,
+      "exit_code": 0
+    },
+    "client-b": {
+      "pid": 3496,
+      "exit_code": 0
+    }
+  },
+  "logs": {
+    "server": {
+      "file": "server.log.gz",
+      "sha256": "52c0f8f22790ff22901553a85b53fcb8af46e972b3a10d8a373f16cb0637fb49"
+    },
+    "client-a": {
+      "file": "client-a.log.gz",
+      "sha256": "182b53520caacb2837f05356cdc3df82102e5565309b8f401f76e7de6d0b7a08"
+    },
+    "client-b": {
+      "file": "client-b.log.gz",
+      "sha256": "29a06895ec51b1f90ac6a0f628fb7d1eb83a08c65f0ea8ca63de68adc16fb9b5"
+    }
+  },
+  "screenshots": {
+    "client-a-design-editor-A.png": {
+      "sha256": "239401473accaf714b1002099ab36b47f85cde2579f082a0ff44b89527f62ac3",
+      "bytes": 27020
+    },
+    "client-a-design-saved-A.png": {
+      "sha256": "db3e01798e442283fd7a76ad652a99a2ae8d40ace65472d187e25db2304b07be",
+      "bytes": 31081
+    },
+    "client-a-stationary-pinout-stop-A.png": {
+      "sha256": "352f74dc03ba646c1ff4a0ca20ab2bfd6d4022816b8c9b00118893c146e21cbd",
+      "bytes": 45063
+    },
+    "client-a-stationary-pinout-pattern-A.png": {
+      "sha256": "0e9e580df7959eefa5167f14a340fd9ef75ea0aa81725d63e7045209a47fbc0a",
+      "bytes": 44486
+    },
+    "client-a-stationary-pinout-volts-A.png": {
+      "sha256": "2de3a28864c328bb403f02f8e8666a991790df11ea3bb6c60fe4c8a33a6cb481",
+      "bytes": 44406
+    },
+    "client-a-stationary-pinout-start-A.png": {
+      "sha256": "0687d9f461fa02940c804a73ff18df95f100936c77aaf82820dec1d9bc4f04d9",
+      "bytes": 44511
+    },
+    "client-b-design-editor-B.png": {
+      "sha256": "9f3e5aee0680ddc2dddff4e4812a679e540d5c0c38eeb2a9dcbe196cb7efa4c2",
+      "bytes": 25271
+    },
+    "client-b-design-saved-B.png": {
+      "sha256": "6328142bd7f3d97d89e26bc401f1e98be5c232b2c3c6e05cf90078439fbb8c82",
+      "bytes": 29364
+    },
+    "client-b-stationary-pinout-stop-B.png": {
+      "sha256": "789468127e160e0a74c3b6a329d1d9ede70a1afdd44f74241039d051d340b264",
+      "bytes": 51330
+    },
+    "client-b-stationary-pinout-pattern-B.png": {
+      "sha256": "3a305a9aecbb37badb26912c8cfdc1764fed6124936c15f3a5f30451eb68dc1e",
+      "bytes": 51022
+    },
+    "client-b-stationary-pinout-volts-B.png": {
+      "sha256": "c155bb7fb0b8363d7f72596a593d6c5e1a9308a637730f3636cb758f7a374a46",
+      "bytes": 50962
+    },
+    "client-b-stationary-pinout-start-B.png": {
+      "sha256": "a777e569be3cd5b11b008754479fbd62fa7984ff2748276646597dfbd4f56ef6",
+      "bytes": 51076
+    }
+  },
+  "mode": "One dedicated server and two real TCP Minecraft clients; native menu and keyboard packets"
+}

@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "extraction": {
+    "schema": 1,
+    "archive": "C:\\Users\\Parker\\Documents\\ChatGPT\\WWPG\\build\\distributions\\beta5-final-v6-BASE.zip",
+    "sha256": "2779c759087f2a95305be9a2dfce5fc95544d5fe1510c407fc08a647cb7b632b",
+    "profile": "BASE",
+    "jar": {
+      "name": "wwpg-0.1.0-beta.5.jar",
+      "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1"
+    },
+    "files": 23,
+    "extracted": true,
+    "reopened": false,
+    "source_save_name": "Stationary Test Yard",
+    "destination": "server"
+  },
+  "processes": [
+    {
+      "schema": 1,
+      "artifact": "wwpg-0.1.0-beta.5.jar",
+      "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+      "profile": "BASE",
+      "backend": "JAVA",
+      "phase": "VERIFY",
+      "started": "2026-10-11T06-12-53.194488500Z",
+      "namespaces": "wwpg_yard",
+      "required_tests_passed": 1,
+      "completed": "2026-10-11T06:13:16.655995600Z"
+    },
+    {
+      "schema": 1,
+      "artifact": "wwpg-0.1.0-beta.5.jar",
+      "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+      "profile": "BASE",
+      "backend": "JAVA",
+      "phase": "VERIFY",
+      "started": "2026-10-11T06-13-22.799896Z",
+      "namespaces": "wwpg_yard",
+      "required_tests_passed": 1,
+      "completed": "2026-10-11T06:13:44.218838700Z"
+    },
+    {
+      "schema": 1,
+      "artifact": "wwpg-0.1.0-beta.5.jar",
+      "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
+      "profile": "BASE",
+      "backend": "JAVA",
+      "phase": "VERIFY",
+      "started": "2026-10-11T06-13-51.491533300Z",
+      "namespaces": "wwpg_yard",
+      "required_tests_passed": 1,
+      "completed": "2026-10-11T06:14:12.960369Z"
+    }
+  ]
+}

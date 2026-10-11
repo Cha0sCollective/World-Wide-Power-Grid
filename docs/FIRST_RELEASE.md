@@ -1,5 +1,7 @@
 # First beta: scope and acceptance
 
+This page preserves the first-release scope and acceptance history. Current stationary completion is defined by the [beta.5 supported matrix](../release/0.1.0-beta.5/supported-content.json), [final verification](../release/0.1.0-beta.5/verification.json) and [stationary yard guide](STATIONARY_YARD.md).
+
 **WWPG 0.1.0-beta.1** delivers a declared set of stationary devices working across CEE and PG. The [support matrix](SUPPORT.md) describes 134 checked behaviors, including all 11 built-in CEE panel attachments and all 28 built-in PG board components.
 
 The beta is [published on GitHub](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.1), and its implementation was [merged into `main`](https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/1). See [STATUS.md](STATUS.md) for later CI results and the unresolved chunk-reload failure.
