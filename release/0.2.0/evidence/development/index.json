@@ -4,7 +4,10 @@
   "api_target": "1.0.0",
   "evidence_class": "development_failures",
   "publication_acceptance": false,
-  "platform": "Windows",
+  "platforms": [
+    "Windows",
+    "Ubuntu 24.04"
+  ],
   "packaged_backends": [
     "JAVA",
     "NATIVE"
@@ -12,8 +15,8 @@
   "warning": "These are pre-freeze development failures and their investigations. Corrections and retries do not establish final acceptance; frozen artifacts must pass the independent release gates.",
   "archive": {
     "path": "failed-development-runs.zip",
-    "sha256": "8f7177838ea4ef030ae25dca13e2c2a5e047eac6ddd272d03de87aaae635d672",
-    "size": 179199
+    "sha256": "3c658513d5dc13a7ea5c2945445bc3eff4ad1f4fa2956f0dec80905e4e9c3de4",
+    "size": 5549981
   },
   "runs": [
     {
@@ -23,7 +26,8 @@
       "summary": "GameTest holder prefixed an already namespaced template, producing wwpg_api:wwpg:empty.",
       "correction": "Use template=empty and a separate structure in each holder namespace.",
       "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
-      "backend": "JAVA"
+      "backend": "JAVA",
+      "platform": "Windows"
     },
     {
       "log": "build/api-second-java.log",
@@ -32,7 +36,8 @@
       "summary": "10 tests ran; 3 failed: native panel item installation, committed API NBT lag, and PG board branch lookup.",
       "correction": "Add the native CEE attachment item tag; publish consumed committed API results; query the native baked PG board branch rather than an empty per-component branch list.",
       "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
-      "backend": "JAVA"
+      "backend": "JAVA",
+      "platform": "Windows"
     },
     {
       "log": "build/api-complete-java-3.log",
@@ -41,7 +46,8 @@
       "summary": "20 tests ran; 6 failed: 4 custom CEE model cases, the AC current oracle, and actual API chunk unloading.",
       "correction": "Dispatch CEE registrations on mod event buses before freeze; include actual native wire resistance in the AC equation; place concurrent forced/unload fixtures beyond each other's ticket radius.",
       "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
-      "backend": "JAVA"
+      "backend": "JAVA",
+      "platform": "Windows"
     },
     {
       "log": "build/api-registration-java.log",
@@ -50,7 +56,8 @@
       "summary": "8 tests ran; 2 failed. Custom CEE registration, callback rollback/recovery and native PG board assembly passed. Remaining failures concerned the removal-to-discharge time window and native replacement load voltage.",
       "correction": "Anchor the twenty-tick discharge window after the safe topology boundary and assert exact history increments; calculate replacement load voltage with its native resistance and both wires.",
       "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
-      "backend": "JAVA"
+      "backend": "JAVA",
+      "platform": "Windows"
     },
     {
       "log": "build/api-lifecycle-java-5.log",
@@ -59,7 +66,8 @@
       "summary": "The bounded actual-unload diagnostic aborted with chunk ticket level 39 after 420 server ticks.",
       "correction": "A concurrently forced cold-restart fixture eight chunks away retained the unload fixture through its propagated generation ticket. Move the two fixtures at least sixteen chunks apart.",
       "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
-      "backend": "JAVA"
+      "backend": "JAVA",
+      "platform": "Windows"
     },
     {
       "log": "build/api-lifecycle-java-4.log",
@@ -67,7 +75,8 @@
       "summary": "A terminal-removal source edit did not compile against the pinned PG endpoint API.",
       "correction": "Use the actual pinned native endpoint/removal signatures and rebuild.",
       "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
-      "backend": "not_applicable"
+      "backend": "not_applicable",
+      "platform": "Windows"
     },
     {
       "log": "build/api-electrical-tests.log",
@@ -75,7 +84,8 @@
       "summary": "CEE checkpoint contracts and their consumer were briefly out of sync during concurrent development.",
       "correction": "Complete the checkpoint contract and compile API/runtime sources together.",
       "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
-      "backend": "not_applicable"
+      "backend": "not_applicable",
+      "platform": "Windows"
     },
     {
       "log": "build/api-checkpoint-build.log",
@@ -83,7 +93,8 @@
       "summary": "Minecraft-backed terminal identity tests did not have the Minecraft/NeoForge compile classpath.",
       "correction": "Use the pinned development test classpath while retaining standalone electrical unit tests.",
       "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
-      "backend": "not_applicable"
+      "backend": "not_applicable",
+      "platform": "Windows"
     },
     {
       "log": "build/api-native-readings-build.log",
@@ -91,7 +102,8 @@
       "summary": "Initial native Workshop/reading fixture code used signatures from a different upstream source revision.",
       "correction": "Compile native workflow fixtures against the actual pinned release jars and registry APIs.",
       "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
-      "backend": "not_applicable"
+      "backend": "not_applicable",
+      "platform": "Windows"
     },
     {
       "log": "build/api-lifecycle-JAVA-6.log",
@@ -100,7 +112,8 @@
       "summary": "25 tests ran; 24 passed, including five actual API and five upstream chunk cycles. A healthy native PG board fixture failed because an unrelated CEE callback fault globally cleared native CEE results.",
       "correction": "Publish fresh results with scoped unavailable nodes and branch currents; preserve healthy CEE gameplay, meters and wire heating while isolating rejected circuits.",
       "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
-      "backend": "JAVA"
+      "backend": "JAVA",
+      "platform": "Windows"
     },
     {
       "log": "build/api-scoped-NATIVE-10.log",
@@ -109,7 +122,8 @@
       "summary": "27 tests ran; 24 passed. Failures identified a diagnostic identity-size expectation, a native capacitor baseline captured before the already accepted frame's gameplay commit, and an old saved wire entering a native replacement during delayed wire loading.",
       "correction": "Capture the accepted native property history before injecting next-frame failure; preserve strict exact checks on property and device history. Align bounded diagnostic identity reporting. Retire saved extension wire ownership before delayed entity attachment to a native replacement. Review also identified and corrected unavailable-result propagation into the native wire hazard cache.",
       "resolution_status": "corrections_in_progress; final_frozen_acceptance_required",
-      "backend": "NATIVE"
+      "backend": "NATIVE",
+      "platform": "Windows"
     },
     {
       "log": "build/api-complete-NATIVE-11.log",
@@ -118,7 +132,8 @@
       "summary": "29 tests ran; 28 passed. Exact native CEE capacitor rollback, externally driven capture isolation, healthy native/public measurements, diagnostic bounds and delayed replacement tests passed. The actual PG multimeter's CEE-wire path still read the previous native result during the same frame as a new callback rejection.",
       "correction": "Check current read-only terminal acceptance before using cached native CEE wire results. Native multimeter number, text and pointer queries also consult current acceptance so they cannot expose a cached powered value before the next inventory update.",
       "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
-      "backend": "NATIVE"
+      "backend": "NATIVE",
+      "platform": "Windows"
     },
     {
       "log": "build/api-no-geometry-cold-NATIVE-12.log",
@@ -128,7 +143,8 @@
       "summary": "A genuine fresh-JVM cold replacement failed before any API geometry holder existed: an old saved PG wire migrated to the native replacement during delayed entity loading. This run reused the preceding run's runtime directory; its current logs are archived separately to preserve both original failures.",
       "correction": "Persist exact PG PartId and compatibility CEE wire UUID ownership independently of geometry holders. Freeze old-owner IDs before replacement wiring, retire exact old IDs after delayed native loading, and give physically reconnected CEE wires fresh persisted identities. Verify both wire systems with separate-JVM setup and restart fixtures.",
       "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
-      "backend": "NATIVE"
+      "backend": "NATIVE",
+      "platform": "Windows"
     },
     {
       "log": "build/api-full-NATIVE-13.log",
@@ -137,9 +153,314 @@
       ],
       "kind": "packaged_wire_thermal_failure",
       "summary": "31 tests ran; 30 passed, including five actual API and five upstream chunk cycles and actual nonthrowing backend rejection. The custom CEE callback fault fixture passed exact history rollback, healthy scoped publication and same-frame meter rejection, then failed its combined selected-wire/finite-temperature assertion.",
-      "correction": "A source-level regression reproduces pinned CEE's cached ordinal lookup returning an unrelated rejected node after builder ordering changes, sending NaN into a healthy native wire's thermal input. Validate cached ordinal hints against stable node identity in compatibility results. The gameplay fixture now verifies its initial wire selection/temperature and reports selection, physical wire and temperature failures separately. A packaged rerun is required to establish whether this fixes the observed failure. This runtime directory was reused for cold verification; only the completed setup build log and its exact setup manifest are retained here, rather than later overwritten latest.log files.",
-      "resolution_status": "source_regression_reproduced; packaged_confirmation_pending; final_frozen_acceptance_required",
-      "backend": "NATIVE"
+      "correction": "A source-level regression reproduces pinned CEE's cached ordinal lookup returning an unrelated rejected node after builder ordering changes, sending NaN into a healthy native wire's thermal input. Validate cached ordinal hints against stable node identity in compatibility results. The gameplay fixture now verifies its initial wire selection/temperature and reports selection, physical wire and temperature failures separately. The next NATIVE14 SETUP passed all 31 checks, including this callback fault fixture. This runtime directory was reused for cold verification; only the completed setup build log and its exact setup manifest are retained here, rather than later overwritten latest.log files.",
+      "resolution_status": "source_regression_and_subsequent_packaged_setup_passed; final_frozen_acceptance_required",
+      "backend": "NATIVE",
+      "platform": "Windows"
+    },
+    {
+      "log": "build/api-full-NATIVE-14-VERIFY1.log",
+      "files": [
+        "build/api-full-NATIVE-14-SETUP.log",
+        "run/api-full-NATIVE-14/packaged-2026-10-11T10-17-05.297793Z.json",
+        "run/api-full-NATIVE-14/packaged-2026-10-11T10-18-13.112738700Z.json"
+      ],
+      "kind": "packaged_restart_native_wiring_failure",
+      "summary": "The NATIVE14 SETUP passed all 31 required checks, including callback-fault wire thermal state. In the first fresh-JVM VERIFY, 30 of 31 checks passed; the extension five-cycle fixture failed during initial native wire placement at BlockPos{x=10243,y=64,z=10240}, terminal 0. The actual upstream five-cycle fixture and saved exact PG/CEE wire replacement checks passed. The cold verification loop stopped after this failure.",
+      "correction": "Native extension terminal readiness and the repeated fixture's initial wiring are under investigation. Preserve the failed first cold verification together with its successful setup and both exact packaged manifests. Omit the overwritten setup latest.log; the two completed build logs retain each phase's original output. A retry cannot close this defect without identifying and correcting its cause.",
+      "resolution_status": "unresolved; investigation_in_progress; final_frozen_acceptance_required",
+      "backend": "NATIVE",
+      "platform": "Windows"
+    },
+    {
+      "log": "build/api15-pending-NATIVE-ARM.log",
+      "files": [
+        "build/api15-pending-NATIVE-SETUP.log",
+        "build/api-release-build-15.log",
+        "run/api15-pending-NATIVE/packaged-2026-10-11T10-46-30.800513900Z.json",
+        "run/api15-pending-NATIVE/packaged-2026-10-11T10-46-53.368770500Z.json"
+      ],
+      "kind": "packaged_pending_removal_fixture_precondition_failure",
+      "summary": "The isolated native pending-removal SETUP passed its one required fixture with runtime SHA256 f70b0b225556660f50952a70bd622b6b0d4d87a6fdc6c9e92ba5d84c7cd1e688. The separate-JVM ARM phase failed the fresh-terminal-cache precondition: Pending restart requires fresh terminal caches before loading. The intended pending-removal-before-readiness assertions were not reached.",
+      "correction": "The delayed-loading gate was installed after early startup restoration had already resolved and prepared API devices despite unforcing the chunks. Move the fixture's gate to the earliest loading boundary, then prove the intended uncached/pending state before arming the restart. The fixture must retain its strict fresh-cache precondition. The matching successful build and SETUP logs are contextual development evidence, not proof that the failed ARM condition or release acceptance passed.",
+      "resolution_status": "fixture_loading_gate_timing_identified; correction_in_progress; final_frozen_acceptance_required",
+      "backend": "NATIVE",
+      "platform": "Windows"
+    },
+    {
+      "log": "build/api15-full-NATIVE-SETUP.log",
+      "files": [
+        "run/api15-full-NATIVE/packaged-2026-10-11T10-48-30.705103900Z.json"
+      ],
+      "kind": "packaged_cold_replacement_initial_readiness_failure",
+      "summary": "The full native SETUP ran 32 required tests: 31 passed and coldOwnerReplacementDuringDelayedEntityLoadingRetiresOnlyOldWires failed its initial PG source wire placement at BlockPos{x=13312,y=64,z=13312}, terminal 0. Both five actual unload/reload cycle markers completed. The dynamic diode marker verified 30 accepted parameter updates, stable native objects, native PN parameters, preserved storage history and plain-block replacement. This run used runtime SHA256 f70b0b225556660f50952a70bd622b6b0d4d87a6fdc6c9e92ba5d84c7cd1e688.",
+      "correction": "The new loading guard may expose the fixture's fixed five-tick initial delay assuming native terminal readiness. Replace that timing assumption with an explicit canWire readiness predicate while retaining actual native placement assertions. This is a candidate explanation under investigation and remains unproven until the corrected fixture reruns. No passing cycle or diode marker closes the failed cold-replacement requirement.",
+      "resolution_status": "initial_loading_readiness_candidate; fixture_correction_in_progress; final_frozen_acceptance_required",
+      "backend": "NATIVE",
+      "platform": "Windows"
+    },
+    {
+      "log": "build/api16-pending-NATIVE-ARM.log",
+      "files": [
+        "build/api16-pending-NATIVE-SETUP.log",
+        "build/api-release-build-16.log",
+        "run/api16-pending-NATIVE/packaged-2026-10-11T10-52-21.727676300Z.json",
+        "run/api16-pending-NATIVE/packaged-2026-10-11T10-52-45.178818700Z.json"
+      ],
+      "kind": "packaged_pending_removal_early_gate_precondition_failure",
+      "summary": "The isolated native SETUP passed its one required test with runtime SHA256 cd68efcc431a4555bd6b4e86cc641ee2b47caf8831730bc72e09f45c338f3662. The separate ARM log records API_PENDING_STARTUP_GATE: phase=ARM, installedBeforeFirstTick=true, but still fails Pending restart requires fresh terminal caches before loading. Unlike the prior ARM log, no API device-position failure warnings appear before the fixture. The intended pending-removal persistence assertions were not reached.",
+      "correction": "Trace the first terminal cache creation call stack and distinguish read-only geometry discovery from accepted electrical objects or state advancement. The early gate marker proves installation timing only; it does not prove that caches remain empty or that pending retirement is correct. Keep the strict precondition and investigate the actual first-loading path before rerunning. No solved early-gate or accepted-state-advancement claim follows from this run.",
+      "resolution_status": "early_gate_installed_but_fresh_cache_precondition_unresolved; tracing_in_progress; final_frozen_acceptance_required",
+      "backend": "NATIVE",
+      "platform": "Windows"
+    },
+    {
+      "log": "build/api17-pending-NATIVE-ARM.log",
+      "files": [
+        "build/api17-pending-NATIVE-SETUP.log",
+        "build/api-release-build-17.log",
+        "run/api17-pending-NATIVE/packaged-2026-10-11T11-01-07.730948900Z.json",
+        "run/api17-pending-NATIVE/packaged-2026-10-11T11-01-30.551258400Z.json"
+      ],
+      "kind": "packaged_pending_removal_sidecar_discovery_trace_failure",
+      "summary": "The isolated native SETUP passed, but ARM again failed only the fresh terminal-cache precondition with runtime SHA256 823ab76d0bccd5062359bd496e7de38b6351500ca9113f2a385fda9c8c4d2ba5. The startup gate was installed before the first tick. Actual pre-fixture tracing records diskHistoryUnchanged=true, apiObjects=0, resultsUnavailable=true, and cached load/CEE geometry. Discovery traces return NOT_READY with zero API objects. The PG entity-deserializer worker called native endpoint validation into compatibility terminal sidecars; a separate server-thread CEE resolve path also queried geometry. Pending-removal persistence assertions were not reached.",
+      "correction": "The traces distinguish geometry sidecar discovery from accepted electrical objects or saved-history advancement. Add a server-thread capability guard and defer native wire creation/restoration to its safe server-thread phase, then prove the intended precondition and persisted pending removal on the packaged jar. These corrective changes still require packaged verification; the trace does not establish that pending retirement passed.",
+      "resolution_status": "worker_sidecar_discovery_traced_without_history_advancement; corrective_change_needs_packaged_proof; final_frozen_acceptance_required",
+      "backend": "NATIVE",
+      "platform": "Windows"
+    },
+    {
+      "log": "build/api18-pending-NATIVE-ARM.log",
+      "files": [
+        "build/api18-pending-NATIVE-SETUP.log",
+        "build/api-release-build-18.log",
+        "run/api18-pending-NATIVE/packaged-2026-10-11T11-08-12.272186100Z.json",
+        "run/api18-pending-NATIVE/packaged-2026-10-11T11-08-35.440056600Z.json"
+      ],
+      "kind": "packaged_pending_removal_post_replacement_geometry_failure",
+      "summary": "Candidate 18's isolated native SETUP passed. Its ARM phase passed the traced pre-fixture checks for unchanged disk history, zero API electrical objects and unavailable results, then failed Loading guard still requires queryable API terminal geometry. This run used runtime SHA256 28d6da2923e0ff565f4e697d8ff286431135cfa3153f0b2d73df12a1b42fbd4a. Accepted replacement wire and electrical advancement assertions were not reached.",
+      "correction": "After physical AIR-to-same-owner replacement, the cached holder's ownerChanged guard returns no holder. Review the native tool readiness path and the fixture's geometry expectation while keeping actual unchanged history, zero API objects and unavailable result checks. The earlier fresh-cache-only precondition has been replaced by these electrical invariants; read-only cached geometry alone is not an accepted solve. The additional geometry failure and proposed corrections remain under investigation and need packaged proof.",
+      "resolution_status": "post_replacement_geometry_readiness_under_review; accepted_wire_and_advancement_checks_not_reached; final_frozen_acceptance_required",
+      "backend": "NATIVE",
+      "platform": "Windows"
+    },
+    {
+      "log": "build/api20-pending-NATIVE-ARM.log",
+      "files": [
+        "build/api20-pending-NATIVE-SETUP.log",
+        "build/api-release-build-20.log",
+        "run/api20-pending-NATIVE/packaged-2026-10-11T11-15-30.974557400Z.json",
+        "run/api20-pending-NATIVE/packaged-2026-10-11T11-15-53.237878500Z.json"
+      ],
+      "kind": "packaged_pending_removal_premature_native_graph_binding",
+      "summary": "Candidate 20's isolated native SETUP passed with runtime SHA256 a2f8a43e685419a7fc7442f6e514df9eea593e11a032a5698b73468642448992. ARM passed unchanged disk history, zero API model objects, unavailable results, exact pending PG/CEE ownership, empty replacement history and actual native tool rejection checks. It then found the exact saved PG entities in the held native IO inbox but failed Entity deserialization bound a native PG graph before its server tick: a held entity's getWire() was already nonnull. The subsequent save-before-ready and cold pending-removal verification were not reached.",
+      "correction": "Source investigation found EntityStorage.flush can run deserialization on the server thread before the entity reaches the held inbox, so blocking worker-thread wire creation alone is insufficient. Add a narrow API-endpoint readiness guard to native makeWire and trace the binding path. This is an actual prematurely bound native graph observation; unchanged API history does not close it. The targeted correction still needs packaged proof with the held-entity assertion retained.",
+      "resolution_status": "premature_native_graph_binding_reproduced; endpoint_readiness_guard_and_trace_in_progress; final_frozen_acceptance_required",
+      "backend": "NATIVE",
+      "platform": "Windows"
+    }
+  ],
+  "ci_runs": [
+    {
+      "id": 38131357758,
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38131357758",
+      "head_sha": "41f40860118a3afe5e9acf62bb784f1f36ed46b9",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-10-11T10:16:24Z",
+      "updated_at": "2026-10-11T10:23:13Z",
+      "retrieved_at": "2026-10-11T10:44:21Z",
+      "metadata": [
+        "build/preliminary-ci-38131357758/run-completed.json",
+        "build/preliminary-ci-38131357758/jobs-completed.json"
+      ],
+      "kind": "preliminary_github_ci_cold_restart_failures",
+      "publication_acceptance": false,
+      "jobs": [
+        {
+          "id": 114446177047,
+          "name": "build (ubuntu-24.04, NATIVE, PINOUT)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38131357758/job/114446177047",
+          "runner": "ubuntu-24.04",
+          "backend": "NATIVE",
+          "profile": "PINOUT",
+          "conclusion": "failure",
+          "failed_step": "Three cold restarts of the packaged API example assemblies",
+          "failed_phase": "first_cold_VERIFY",
+          "setup_required_tests_passed": 31,
+          "failed_assertion_log_line": "2026-10-11T10:21:10.6903845Z [10:21:10] [Server thread/ERROR] [minecraft/LogTestReporter]: addonstateandsavedwiressurvivefiveactualdelayedchunkcycles failed at 11949896, -60, 1132053! Expected two PG wire identities before unload",
+          "log": "build/preliminary-ci-38131357758/ubuntu-NATIVE-PINOUT-job.log"
+        },
+        {
+          "id": 114446177115,
+          "name": "build (ubuntu-24.04, JAVA, BASE)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38131357758/job/114446177115",
+          "runner": "ubuntu-24.04",
+          "backend": "JAVA",
+          "profile": "BASE",
+          "conclusion": "failure",
+          "failed_step": "Three cold restarts of the packaged API example assemblies",
+          "failed_phase": "first_cold_VERIFY",
+          "setup_required_tests_passed": 31,
+          "failed_assertion_log_line": "2026-10-11T10:20:00.2341666Z [10:20:00] [Server thread/ERROR] [minecraft/LogTestReporter]: addonstateandsavedwiressurvivefiveactualdelayedchunkcycles failed at 13967601, -60, -11592376! Native wire placement failed at BlockPos{x=10243, y=64, z=10240} terminal 0",
+          "log": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-job.log"
+        },
+        {
+          "id": 114446177127,
+          "name": "build (ubuntu-24.04, JAVA, PINOUT)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38131357758/job/114446177127",
+          "runner": "ubuntu-24.04",
+          "backend": "JAVA",
+          "profile": "PINOUT",
+          "conclusion": "failure",
+          "failed_step": "Three cold restarts of the packaged API example assemblies",
+          "failed_phase": "first_cold_VERIFY",
+          "setup_required_tests_passed": 31,
+          "failed_assertion_log_line": "2026-10-11T10:19:17.4847217Z [10:19:17] [Server thread/ERROR] [minecraft/LogTestReporter]: addonstateandsavedwiressurvivefiveactualdelayedchunkcycles failed at 2941652, -60, -6316024! Expected two PG wire identities before unload",
+          "log": "build/preliminary-ci-38131357758/ubuntu-JAVA-PINOUT-job.log"
+        },
+        {
+          "id": 114446177132,
+          "name": "build (windows-latest, NATIVE, PINOUT)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38131357758/job/114446177132",
+          "runner": "windows-latest",
+          "backend": "NATIVE",
+          "profile": "PINOUT",
+          "conclusion": "failure",
+          "failed_step": "Three cold restarts of the packaged API example assemblies",
+          "failed_phase": "first_cold_VERIFY",
+          "setup_required_tests_passed": 31,
+          "failed_assertion_log_line": "2026-10-11T10:20:42.5716913Z [10:20:42] [Server thread/ERROR] [minecraft/LogTestReporter]: addonstateandsavedwiressurvivefiveactualdelayedchunkcycles failed at -6553708, -60, 6117678! Expected two PG wire identities before unload",
+          "log": "build/preliminary-ci-38131357758/windows-NATIVE-PINOUT-job.log"
+        },
+        {
+          "id": 114446177204,
+          "name": "build (windows-latest, NATIVE, BASE)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38131357758/job/114446177204",
+          "runner": "windows-latest",
+          "backend": "NATIVE",
+          "profile": "BASE",
+          "conclusion": "failure",
+          "failed_step": "Three cold restarts of the packaged API example assemblies",
+          "failed_phase": "first_cold_VERIFY",
+          "setup_required_tests_passed": 31,
+          "failed_assertion_log_line": "2026-10-11T10:21:57.5715896Z [10:21:57] [Server thread/ERROR] [minecraft/LogTestReporter]: addonstateandsavedwiressurvivefiveactualdelayedchunkcycles failed at 11239766, -60, 4396732! Expected two PG wire identities before unload",
+          "log": "build/preliminary-ci-38131357758/windows-NATIVE-BASE-job.log"
+        },
+        {
+          "id": 114446177234,
+          "name": "build (ubuntu-24.04, NATIVE, BASE)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38131357758/job/114446177234",
+          "runner": "ubuntu-24.04",
+          "backend": "NATIVE",
+          "profile": "BASE",
+          "conclusion": "failure",
+          "failed_step": "Three cold restarts of the packaged API example assemblies",
+          "failed_phase": "first_cold_VERIFY",
+          "setup_required_tests_passed": 31,
+          "failed_assertion_log_line": "2026-10-11T10:19:45.9893281Z [10:19:45] [Server thread/ERROR] [minecraft/LogTestReporter]: addonstateandsavedwiressurvivefiveactualdelayedchunkcycles failed at 12631480, -60, 9980447! Native wire placement failed at BlockPos{x=10243, y=64, z=10240} terminal 0",
+          "log": "build/preliminary-ci-38131357758/ubuntu-NATIVE-BASE-job.log"
+        },
+        {
+          "id": 114446177236,
+          "name": "build (windows-latest, JAVA, PINOUT)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38131357758/job/114446177236",
+          "runner": "windows-latest",
+          "backend": "JAVA",
+          "profile": "PINOUT",
+          "conclusion": "failure",
+          "failed_step": "Three cold restarts of the packaged API example assemblies",
+          "failed_phase": "first_cold_VERIFY",
+          "setup_required_tests_passed": 31,
+          "failed_assertion_log_line": "2026-10-11T10:21:01.1930084Z [10:21:01] [Server thread/ERROR] [minecraft/LogTestReporter]: addonstateandsavedwiressurvivefiveactualdelayedchunkcycles failed at -7604082, -60, -14910555! Expected two PG wire identities before unload",
+          "log": "build/preliminary-ci-38131357758/windows-JAVA-PINOUT-job.log"
+        },
+        {
+          "id": 114446177239,
+          "name": "build (windows-latest, JAVA, BASE)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38131357758/job/114446177239",
+          "runner": "windows-latest",
+          "backend": "JAVA",
+          "profile": "BASE",
+          "conclusion": "failure",
+          "failed_step": "Three cold restarts of the packaged API example assemblies",
+          "failed_phase": "first_cold_VERIFY",
+          "setup_required_tests_passed": 31,
+          "failed_assertion_log_line": "2026-10-11T10:20:32.0660322Z [10:20:32] [Server thread/ERROR] [minecraft/LogTestReporter]: addonstateandsavedwiressurvivefiveactualdelayedchunkcycles failed at 7812556, -60, -2588119! Native wire placement failed at BlockPos{x=10243, y=64, z=10240} terminal 0",
+          "log": "build/preliminary-ci-38131357758/windows-JAVA-BASE-job.log"
+        }
+      ],
+      "artifact_retention": {
+        "job_id": 114446177115,
+        "job_name": "build (ubuntu-24.04, JAVA, BASE)",
+        "source_directory": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact",
+        "scope": "Only this downloaded artifact subset is retained; all eight actual job logs and completed GitHub metadata are retained."
+      },
+      "summary": "All eight Windows/Linux, native/Java, base/Pinout jobs passed the 31-check setup and failed the first cold API VERIFY. The same five-cycle fixture reported rejected initial native wiring or an unexpected count of old PG wire identities. The restart loop stopped before its second and third VERIFY runs.",
+      "root_cause_analysis": "Source investigation identified physical removal to AIR followed by replacement with the same API block/provider/slot before the deferred scan. ApiTerminals.queueReplacedSavedOwners compared the final block to the saved owner, saw no replacement, and could retain or reattach old saved PG IDs. Old entities restored before new placement caused duplicate placement rejection; old entities restored afterward left four identities where the fixture expected two. This causal explanation comes from source/reproduction investigation; the retained CI logs establish the eight observed failures.",
+      "corrective_work": "Record physical removal durably before deferred scanning and retire the exact old wire identities; validate selected-source readiness. Corrective work is in progress and still requires a coherent packaged rebuild and all release gates.",
+      "resolution_status": "confirmed_causal_path; correction_in_progress; final_frozen_acceptance_required"
+    }
+  ],
+  "success_appendices": [
+    {
+      "kind": "candidate21_successful_pending_removal_diagnostic",
+      "publication_acceptance": false,
+      "platform": "Windows",
+      "build_log": "build/api-release-build-21.log",
+      "phases": [
+        {
+          "backend": "NATIVE",
+          "phase": "SETUP",
+          "required_tests_passed": 1,
+          "log": "build/api21-pending-NATIVE-SETUP.log",
+          "manifest": "run/api21-pending-NATIVE/packaged-2026-10-11T11-20-16.045758400Z.json",
+          "artifact_sha256": "49892f0d1fdb51448f451390374c37c79f7fd2b7e7b81665d2668372a173ec36"
+        },
+        {
+          "backend": "NATIVE",
+          "phase": "ARM",
+          "required_tests_passed": 1,
+          "log": "build/api21-pending-NATIVE-ARM.log",
+          "manifest": "run/api21-pending-NATIVE/packaged-2026-10-11T11-20-38.830547400Z.json",
+          "artifact_sha256": "49892f0d1fdb51448f451390374c37c79f7fd2b7e7b81665d2668372a173ec36"
+        },
+        {
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "required_tests_passed": 1,
+          "log": "build/api21-pending-NATIVE-VERIFY.log",
+          "manifest": "run/api21-pending-NATIVE/packaged-2026-10-11T11-21-00.554473500Z.json",
+          "artifact_sha256": "49892f0d1fdb51448f451390374c37c79f7fd2b7e7b81665d2668372a173ec36"
+        },
+        {
+          "backend": "JAVA",
+          "phase": "SETUP",
+          "required_tests_passed": 1,
+          "log": "build/api21-pending-JAVA-SETUP.log",
+          "manifest": "run/api21-pending-JAVA/packaged-2026-10-11T11-21-22.764624400Z.json",
+          "artifact_sha256": "49892f0d1fdb51448f451390374c37c79f7fd2b7e7b81665d2668372a173ec36"
+        },
+        {
+          "backend": "JAVA",
+          "phase": "ARM",
+          "required_tests_passed": 1,
+          "log": "build/api21-pending-JAVA-ARM.log",
+          "manifest": "run/api21-pending-JAVA/packaged-2026-10-11T11-21-45.745380700Z.json",
+          "artifact_sha256": "49892f0d1fdb51448f451390374c37c79f7fd2b7e7b81665d2668372a173ec36"
+        },
+        {
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "required_tests_passed": 1,
+          "log": "build/api21-pending-JAVA-VERIFY.log",
+          "manifest": "run/api21-pending-JAVA/packaged-2026-10-11T11-22-07.499412900Z.json",
+          "artifact_sha256": "49892f0d1fdb51448f451390374c37c79f7fd2b7e7b81665d2668372a173ec36"
+        }
+      ],
+      "observed_result": "Both native and Java separate-JVM SETUP, ARM and VERIFY passed. Actual held saved PG wire references remained unbound before readiness; exact old PG/CEE identities were retired, replacements stayed at zero charge while isolated, and fresh wires in both systems powered them after readiness.",
+      "threading_correction": "The trace explicitly reports serverThread=true and entityReady=false while the temporary thread name is entity-deserializer. Thread names alone do not prove worker-thread ownership, including in earlier candidate17 trace interpretation. The saved NBT readAdditionalSaveData -> setEndpoint2 -> makeWire call stack establishes binding before readiness; pinned EntityStorage.flush -> ProcessorMailbox.runAll explains synchronous server-thread deserialization. Readiness guarding is therefore needed in addition to actual server-thread ownership checks.",
+      "scope": "Bounded development diagnostic appendix for instrumented candidate21. All earlier evidence bytes and annotations remain preserved. These six passing singleton phases do not establish final frozen acceptance for the clean release artifact or other platform/profile requirements."
     }
   ],
   "members": [
@@ -180,6 +501,18 @@
       "sha256": "c73ccd863e4e77a6d87c4c9d0a70a69c67b212b2d6f70b9c229c055b0fe55d41"
     },
     {
+      "path": "build/api-full-NATIVE-14-SETUP.log",
+      "source_path": "build/api-full-NATIVE-14-SETUP.log",
+      "size": 40438,
+      "sha256": "0cfb5182a419779a7332aa825007e93ac51bb3cb30bbf2b4d8a940c4aa2d9866"
+    },
+    {
+      "path": "build/api-full-NATIVE-14-VERIFY1.log",
+      "source_path": "build/api-full-NATIVE-14-VERIFY1.log",
+      "size": 36055,
+      "sha256": "5ed39c08deb5bcea30917cc97a8f45bfb96fa5849c6acb07a33c7389d9e9110f"
+    },
+    {
       "path": "build/api-lifecycle-JAVA-6.log",
       "source_path": "build/api-lifecycle-JAVA-6.log",
       "size": 29791,
@@ -210,6 +543,42 @@
       "sha256": "d0fff9ec4a4e9ec3989bde97672ab24c09d4c2f544b8d8a92925149caf0542f1"
     },
     {
+      "path": "build/api-release-build-15.log",
+      "source_path": "build/api-release-build-15.log",
+      "size": 2214,
+      "sha256": "f3e57f3eb0f122b318c69ae8e848b5da72b207f78596b7c9716a4b5648768033"
+    },
+    {
+      "path": "build/api-release-build-16.log",
+      "source_path": "build/api-release-build-16.log",
+      "size": 1851,
+      "sha256": "4e14712bb70a57e6bc3d8352454101a50bf6873cbd612aa6b40cb727617c1942"
+    },
+    {
+      "path": "build/api-release-build-17.log",
+      "source_path": "build/api-release-build-17.log",
+      "size": 1851,
+      "sha256": "4e14712bb70a57e6bc3d8352454101a50bf6873cbd612aa6b40cb727617c1942"
+    },
+    {
+      "path": "build/api-release-build-18.log",
+      "source_path": "build/api-release-build-18.log",
+      "size": 1851,
+      "sha256": "4e14712bb70a57e6bc3d8352454101a50bf6873cbd612aa6b40cb727617c1942"
+    },
+    {
+      "path": "build/api-release-build-20.log",
+      "source_path": "build/api-release-build-20.log",
+      "size": 2236,
+      "sha256": "f2dc03f45314e892bd9cfa0993489b53cdebe282438f2984c37486d3daf489d6"
+    },
+    {
+      "path": "build/api-release-build-21.log",
+      "source_path": "build/api-release-build-21.log",
+      "size": 1595,
+      "sha256": "0660f15fa175e0819d7a85f1df122605a62cdbc90e0a637500c30b36a051d75c"
+    },
+    {
       "path": "build/api-scoped-NATIVE-10.log",
       "source_path": "build/api-scoped-NATIVE-10.log",
       "size": 30783,
@@ -220,6 +589,870 @@
       "source_path": "build/api-second-java.log",
       "size": 19379,
       "sha256": "48dca5085bee76094aa9a0c366045c53f78f23365f042971ba63a122d22bad07"
+    },
+    {
+      "path": "build/api15-full-NATIVE-SETUP.log",
+      "source_path": "build/api15-full-NATIVE-SETUP.log",
+      "size": 41850,
+      "sha256": "0a7c45662fa69abb50b04443902dbc047b02715f157fcb73c3b2f21ae8811975"
+    },
+    {
+      "path": "build/api15-pending-NATIVE-ARM.log",
+      "source_path": "build/api15-pending-NATIVE-ARM.log",
+      "size": 14149,
+      "sha256": "37256d7a06781c9a3ae9de3f1de48e185618eb34210b2630191cd68b145958ab"
+    },
+    {
+      "path": "build/api15-pending-NATIVE-SETUP.log",
+      "source_path": "build/api15-pending-NATIVE-SETUP.log",
+      "size": 17861,
+      "sha256": "967773cf235839cd53e31f504fb20bdcd862f0ae9dc17a48ce7fb41a83231bfa"
+    },
+    {
+      "path": "build/api16-pending-NATIVE-ARM.log",
+      "source_path": "build/api16-pending-NATIVE-ARM.log",
+      "size": 13708,
+      "sha256": "65943031058c2d83cd43af4c61b39d777c5df4fc64cc03bb2343b0c356f7f83e"
+    },
+    {
+      "path": "build/api16-pending-NATIVE-SETUP.log",
+      "source_path": "build/api16-pending-NATIVE-SETUP.log",
+      "size": 17926,
+      "sha256": "6b643ea42a21b324ed92eb01d452e45c44ee0c4222ee93d313438786aa4d7fd5"
+    },
+    {
+      "path": "build/api17-pending-NATIVE-ARM.log",
+      "source_path": "build/api17-pending-NATIVE-ARM.log",
+      "size": 22700,
+      "sha256": "98f51878685930547da59cd628731f6d9bb25ebe38ed378608c544054520fd86"
+    },
+    {
+      "path": "build/api17-pending-NATIVE-SETUP.log",
+      "source_path": "build/api17-pending-NATIVE-SETUP.log",
+      "size": 27826,
+      "sha256": "dbe76e761d332c85ebe4933444f64056e27a44fa0f1bb43e4148e6a0f2c84185"
+    },
+    {
+      "path": "build/api18-pending-NATIVE-ARM.log",
+      "source_path": "build/api18-pending-NATIVE-ARM.log",
+      "size": 13984,
+      "sha256": "1db2822ff2a40d434eebd35e86a5b61815636cb6668c5f3ec1eb55aa405ace04"
+    },
+    {
+      "path": "build/api18-pending-NATIVE-SETUP.log",
+      "source_path": "build/api18-pending-NATIVE-SETUP.log",
+      "size": 17926,
+      "sha256": "abe0b43429f253d16b63de86ac44ea994e5dc5546987a4b4ea354e515a906ea6"
+    },
+    {
+      "path": "build/api20-pending-NATIVE-ARM.log",
+      "source_path": "build/api20-pending-NATIVE-ARM.log",
+      "size": 14969,
+      "sha256": "d5872183817fe9b06cdd2c1d89e9dff07b06ac5dfc842b7bed0af171f5e8b7c2"
+    },
+    {
+      "path": "build/api20-pending-NATIVE-SETUP.log",
+      "source_path": "build/api20-pending-NATIVE-SETUP.log",
+      "size": 17862,
+      "sha256": "07e0feab4952cd913276838aff2a21292502f7bf9f617a42846e66eecda6af8f"
+    },
+    {
+      "path": "build/api21-pending-JAVA-ARM.log",
+      "source_path": "build/api21-pending-JAVA-ARM.log",
+      "size": 19767,
+      "sha256": "9b8a102659df0a31f63f850eb3ed3b3c691950dd2385d9cb84c12f9901ac4320"
+    },
+    {
+      "path": "build/api21-pending-JAVA-SETUP.log",
+      "source_path": "build/api21-pending-JAVA-SETUP.log",
+      "size": 32208,
+      "sha256": "8cc6a9758c2148a149cdba34ac1c29cda2ade6bdd472688b421637d76196696b"
+    },
+    {
+      "path": "build/api21-pending-JAVA-VERIFY.log",
+      "source_path": "build/api21-pending-JAVA-VERIFY.log",
+      "size": 35134,
+      "sha256": "2f81294f27e6bf6ca228341c446931b2e3acfa384782e7a23d7035f1014f0c6a"
+    },
+    {
+      "path": "build/api21-pending-NATIVE-ARM.log",
+      "source_path": "build/api21-pending-NATIVE-ARM.log",
+      "size": 19772,
+      "sha256": "4c75b5e54d10104699dd673c7aadfc28e140c26cc77dc89c337ba19aeda29fd9"
+    },
+    {
+      "path": "build/api21-pending-NATIVE-SETUP.log",
+      "source_path": "build/api21-pending-NATIVE-SETUP.log",
+      "size": 32151,
+      "sha256": "1e2e336f3fd4843b8fc11923b1e17cc4089dccbd2354428af89cebf3d54792fa"
+    },
+    {
+      "path": "build/api21-pending-NATIVE-VERIFY.log",
+      "source_path": "build/api21-pending-NATIVE-VERIFY.log",
+      "size": 35076,
+      "sha256": "0196c1ef5b434d20172f76cc95940e8c71609908b07655a8b4bae167d780fb30"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/jobs-completed.json",
+      "source_path": "build/preliminary-ci-38131357758/jobs-completed.json",
+      "size": 78660,
+      "sha256": "0a85d1c791a4ac47abc5266cfbd3154acd90e06b64231900d7c6d769d2cfb711"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/run-completed.json",
+      "source_path": "build/preliminary-ci-38131357758/run-completed.json",
+      "size": 14691,
+      "sha256": "1d490a29c580333845faf049656347f5c92311280c74ade395b0867a188e4732"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/api-contract.json",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/api-contract.json",
+      "size": 63389,
+      "sha256": "0e10291667726185f608f3b66790e210880ad07729e2437ede6acca7a2c70710"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/cee-api-contract.json",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/cee-api-contract.json",
+      "size": 11800,
+      "sha256": "2df8778c18472e93a7aa738587f4d22b8b15a606db8e878871c7200f92e80260"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/distributions/wwpg-api-1.0.0-maven.zip",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/distributions/wwpg-api-1.0.0-maven.zip",
+      "size": 422277,
+      "sha256": "6ef5640d2a65e0c3b390d0aeffc24a561707bfeb21a2ee444bd1df0f9b06b504"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/distributions/wwpg-api-example-1.0.0-source.zip",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/distributions/wwpg-api-example-1.0.0-source.zip",
+      "size": 78523,
+      "sha256": "af5a822214dda1b451e04fb6176b9a382b8c5ead592b7c0266c3971371a1f842"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/distributions/wwpg-upstream-api-example-1.0.0-source.zip",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/distributions/wwpg-upstream-api-example-1.0.0-source.zip",
+      "size": 69921,
+      "sha256": "0cf5b56fe374eb25c8c97640552f4a00e186a6a3f0ba15a2956410959b6681ae"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-0.2.0.jar",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-0.2.0.jar",
+      "size": 3481008,
+      "sha256": "37a7521b09b9fa6e2ace1547631cd3c1121113f3ef07ccab6ba03921e47b7b30"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-api-1.0.0-javadoc.jar",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-api-1.0.0-javadoc.jar",
+      "size": 233870,
+      "sha256": "42e1a71775d06d109c86d4f740c8364578e19756001ee75e1ec6e9d34a7c5c2a"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-api-1.0.0-sources.jar",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-api-1.0.0-sources.jar",
+      "size": 21834,
+      "sha256": "a88fdf9c52fe7a671ca908d0ecae558b083e41608d733dea986aecdce71a91f2"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-api-1.0.0.jar",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-api-1.0.0.jar",
+      "size": 50130,
+      "sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-cee-api-1.0.0-javadoc.jar",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-cee-api-1.0.0-javadoc.jar",
+      "size": 115745,
+      "sha256": "fa0c05d7c2d2f15d55945ac09ce386d0454e044d8ee6928d8efa2a099feacb62"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-cee-api-1.0.0-sources.jar",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-cee-api-1.0.0-sources.jar",
+      "size": 6305,
+      "sha256": "5cf223b0232750623b0901458b35ac2875de62a45a202c0af1839208d30b840a"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-cee-api-1.0.0.jar",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-cee-api-1.0.0.jar",
+      "size": 8788,
+      "sha256": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-javadoc.jar",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-javadoc.jar",
+      "size": 233870,
+      "sha256": "42e1a71775d06d109c86d4f740c8364578e19756001ee75e1ec6e9d34a7c5c2a"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-javadoc.jar.md5",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-javadoc.jar.md5",
+      "size": 32,
+      "sha256": "74093b8b4befcefcf0a9f1ae9ee23719f082d1791c063ad0457b641a04cb7146"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-javadoc.jar.sha1",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-javadoc.jar.sha1",
+      "size": 40,
+      "sha256": "8479d8df934c2758ac769fd9b63cbbac4451175a29b5556b92c359680447e4a0"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-javadoc.jar.sha256",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-javadoc.jar.sha256",
+      "size": 64,
+      "sha256": "de748741e5f6518b7e9f86e061ea6fb692decbcdf84fcac09dd42d6e066d6496"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-javadoc.jar.sha512",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-javadoc.jar.sha512",
+      "size": 128,
+      "sha256": "8a27c23b58d3265c647e96c6d050796aa9dbc76d253ef80bef112560c85ebcae"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-sources.jar",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-sources.jar",
+      "size": 21834,
+      "sha256": "a88fdf9c52fe7a671ca908d0ecae558b083e41608d733dea986aecdce71a91f2"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-sources.jar.md5",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-sources.jar.md5",
+      "size": 32,
+      "sha256": "4821eb21edd1ccf24456decabf80a9403bb5829eec7c170b8d17cb022c320e47"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-sources.jar.sha1",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-sources.jar.sha1",
+      "size": 40,
+      "sha256": "a5f39d6c40b6370e659d967feb8b029f8300a4c7085bc83b75e09113d3a43018"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-sources.jar.sha256",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-sources.jar.sha256",
+      "size": 64,
+      "sha256": "11a4e33641c71b1d09d941135a42825b5801bd4bec204ec6f4ca082f0f9470f3"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-sources.jar.sha512",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-sources.jar.sha512",
+      "size": 128,
+      "sha256": "c9fbda8e651e66c3f797390dbf5ca16247b0b6e61df48341224994bde2a71d02"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.jar",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.jar",
+      "size": 50130,
+      "sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.jar.md5",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.jar.md5",
+      "size": 32,
+      "sha256": "886dea54844ba816c6f55886db6d90c648306dbabbe3b76f122644ea073a4f15"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.jar.sha1",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.jar.sha1",
+      "size": 40,
+      "sha256": "24771ead117a7379f91bb67ff8177bfb012a383737070088296d40aa6430262e"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.jar.sha256",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.jar.sha256",
+      "size": 64,
+      "sha256": "535610720a2b14f75d0d9d1e43738c3b7f26aa6eb649542992f0aef8afafc85c"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.jar.sha512",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.jar.sha512",
+      "size": 128,
+      "sha256": "b7a907d9106a43168a4cffabc5c509329927f2b004cb44fd7b9b2c3f3ea50184"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.pom",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.pom",
+      "size": 883,
+      "sha256": "7c12a12d8b3a2725c4ea2d70f3b204fdffdc511c4e2149db877ea08490aa7868"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.pom.md5",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.pom.md5",
+      "size": 32,
+      "sha256": "9f45bb9afdb75647205cd0a3d33ce87c6f8191272f23370baf7f465700213db8"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.pom.sha1",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.pom.sha1",
+      "size": 40,
+      "sha256": "ff41dae61771afbc8bc1866b9f8ec5e4c13f776c2ba2b3f12f0bd137a382e58c"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.pom.sha256",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.pom.sha256",
+      "size": 64,
+      "sha256": "a9b4d3f7a5f4387d702f1d047cb77ced6fa48252795b46b42ddbe2bed71b2c69"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.pom.sha512",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.pom.sha512",
+      "size": 128,
+      "sha256": "d08179840b3891e98743ca5699e25cd4313a8d380cd7db6b485210f83695f987"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/maven-metadata.xml",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/maven-metadata.xml",
+      "size": 339,
+      "sha256": "d978caf7dfff7ad303413467c6dcf8cab56d66a20099b17758a7755be9f4fcc7"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/maven-metadata.xml.md5",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/maven-metadata.xml.md5",
+      "size": 32,
+      "sha256": "ac9f0e76349cd25b44e828faf0285d3f359eca0fc39688dc1fe40b524e3ae1c0"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/maven-metadata.xml.sha1",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/maven-metadata.xml.sha1",
+      "size": 40,
+      "sha256": "6e5985beb66f33bf01deda6c6cff37b7696a152a154087b502f0b1cac486d944"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/maven-metadata.xml.sha256",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/maven-metadata.xml.sha256",
+      "size": 64,
+      "sha256": "12597618d1121ad538fd94ab140c03cf8b30acccd396bd0820d00c615476d488"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/maven-metadata.xml.sha512",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/maven-metadata.xml.sha512",
+      "size": 128,
+      "sha256": "69230e816ceb2fae30726d3b95531ae09c1a0d3f44e9d5e3bea9dbec0ff0d306"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-javadoc.jar",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-javadoc.jar",
+      "size": 115745,
+      "sha256": "fa0c05d7c2d2f15d55945ac09ce386d0454e044d8ee6928d8efa2a099feacb62"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-javadoc.jar.md5",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-javadoc.jar.md5",
+      "size": 32,
+      "sha256": "5172ba317e635ab18c6d9fc78a5a29c95c832f308dcc51fc9919c52797c7d9c6"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-javadoc.jar.sha1",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-javadoc.jar.sha1",
+      "size": 40,
+      "sha256": "7c202824fa3ff9c3d9f33ed1b860d7febdf8879e2ccc077ef8ebf7ccc6376a9b"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-javadoc.jar.sha256",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-javadoc.jar.sha256",
+      "size": 64,
+      "sha256": "df579f05486174d63044e00160faa489064ad5428941251a2b57778252957576"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-javadoc.jar.sha512",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-javadoc.jar.sha512",
+      "size": 128,
+      "sha256": "274368ec95a505e123ee2efc5489a4392dae9171fe6ad1a9654bd394f5398a59"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-sources.jar",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-sources.jar",
+      "size": 6305,
+      "sha256": "5cf223b0232750623b0901458b35ac2875de62a45a202c0af1839208d30b840a"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-sources.jar.md5",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-sources.jar.md5",
+      "size": 32,
+      "sha256": "c9d40fc7487ac498570db9b84ed466830d8cfc6c9df410e57a0775ab12ab65a8"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-sources.jar.sha1",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-sources.jar.sha1",
+      "size": 40,
+      "sha256": "37f0d21799f5a6d9af9170658160dbaf559055995312c767bbd116b07f5498d0"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-sources.jar.sha256",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-sources.jar.sha256",
+      "size": 64,
+      "sha256": "9d934c46c021588784ced3b4fe796a776d376fdeb747962a510faddfcf8b90c8"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-sources.jar.sha512",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-sources.jar.sha512",
+      "size": 128,
+      "sha256": "45ce5e64efc3ac3fd4b5bb024c6c8325df682b0b230a37ccba512ef5543fff34"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.jar",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.jar",
+      "size": 8788,
+      "sha256": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.jar.md5",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.jar.md5",
+      "size": 32,
+      "sha256": "3843bee8cc0f464db650ed5c5a04ac04c80a234f9cb41d38f11a20b38240daa5"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.jar.sha1",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.jar.sha1",
+      "size": 40,
+      "sha256": "7155c842578df33fdb5b1e27691a82733001cff8e26834c5056fc6056a787699"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.jar.sha256",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.jar.sha256",
+      "size": 64,
+      "sha256": "7bc0c670d8c507d9f397b234ba09b93cf632e9a9ffc215e2db37633c8c4b78a5"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.jar.sha512",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.jar.sha512",
+      "size": 128,
+      "sha256": "d5bf222cc8cef41833d5010cb2c4dcd298d54b917ee36a76958c4f90e9e58415"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.pom",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.pom",
+      "size": 734,
+      "sha256": "459643274a97ce14fdcdfef90265394bfa7a5b04cb3496153c4faee20600169f"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.pom.md5",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.pom.md5",
+      "size": 32,
+      "sha256": "603f4a621b6b8a3e8b486a923471b9e17fe3cc05320fe44bf8356ca94e011971"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.pom.sha1",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.pom.sha1",
+      "size": 40,
+      "sha256": "f6a9ce9559fa557e146fedac9d8ff177e1fb5f6308501555e0360fc7708a9f11"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.pom.sha256",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.pom.sha256",
+      "size": 64,
+      "sha256": "efedcaab4d12c8eb3a3d7552de7a7ce0ef34e7fee62445b90b688db53bfc86a0"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.pom.sha512",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.pom.sha512",
+      "size": 128,
+      "sha256": "b20aa64bfc9aa229fba354419c5d6f10bd7445fa47d0e15c2654d7e8298296f3"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/maven-metadata.xml",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/maven-metadata.xml",
+      "size": 343,
+      "sha256": "e2c3e7870c4b2fbbf6710cb1c79920ddb81dcf72296b1ba9854902b1794bb655"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/maven-metadata.xml.md5",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/maven-metadata.xml.md5",
+      "size": 32,
+      "sha256": "a17a06e7557cb07b57baf8ecb096c0789a8fd8967bbebaab1f6da6e5b669ef7a"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/maven-metadata.xml.sha1",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/maven-metadata.xml.sha1",
+      "size": 40,
+      "sha256": "23793be83497268ba34324dedba744d065b959326f3230e96a7398cda259a6cc"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/maven-metadata.xml.sha256",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/maven-metadata.xml.sha256",
+      "size": 64,
+      "sha256": "6873fe1545b516714b28d1431ca19cd8a33ecd408adedce6c96d6855037e393c"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/maven-metadata.xml.sha512",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/maven-metadata.xml.sha512",
+      "size": 128,
+      "sha256": "db1247980f3533244b06f5424136c49eb2001d0b236364b4bdbe16eafaae5987"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.api.ApiVersionTest.html",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.api.ApiVersionTest.html",
+      "size": 1987,
+      "sha256": "38304c95768d49dbecfae1b035ebea83efb47d854165fcff3ce68e685ec50d03"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.api.CircuitDescriptionTest.html",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.api.CircuitDescriptionTest.html",
+      "size": 2812,
+      "sha256": "151429fa830e1f682c94bedb91c952ca36b5c97119f4baae96314fb4db96c840"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.api.DeviceResultsTest.html",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.api.DeviceResultsTest.html",
+      "size": 2764,
+      "sha256": "be54f3ba1c69d95f401a3852e731af630281decd157694d159f57d04763f7451"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.api.VoltageMeasurementTest.html",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.api.VoltageMeasurementTest.html",
+      "size": 2015,
+      "sha256": "e49e8a8b3c897c19d9190e8cbbc7d14b37c26febddf71e35136f2c6917cb223a"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.api.cee.CeeAdapterRegistryTest.html",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.api.cee.CeeAdapterRegistryTest.html",
+      "size": 3201,
+      "sha256": "0fcef22ea5f7719c881d97e40a1d606ab3e49024262772ebba26643fc67189b4"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.bridge.BridgeSimulationResultsTest.html",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.bridge.BridgeSimulationResultsTest.html",
+      "size": 2235,
+      "sha256": "00ec9b67276cd4ae905cf58ab713738d5e48138ff23625db8e8f087215abfea0"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.bridge.LinearBranchTest.html",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.bridge.LinearBranchTest.html",
+      "size": 2444,
+      "sha256": "02fc05fbd2f015cfb69a2480a1a633623e3445d2db00ee04a03e0d5e1bf32f7f"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.bridge.NativeCeeCheckpointTest.html",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.bridge.NativeCeeCheckpointTest.html",
+      "size": 2453,
+      "sha256": "d2a487a2b589c1fecd8b644fe77a7c562bf25ac2e2477b00209a0f3e3c91c982"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.bridge.TransformerStampTest.html",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.bridge.TransformerStampTest.html",
+      "size": 2662,
+      "sha256": "16e5ea997bb834a19d4a573248fb9e257b0f47bc77acd5837f8c5fa53423a25b"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.ApiCeeWireIdentitiesTest.html",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.ApiCeeWireIdentitiesTest.html",
+      "size": 3126,
+      "sha256": "fefd2fd3f9a141d0605941456f9c089506399bb939a2ef2f1076d671cbdeb059"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.ApiDiagnosticsTest.html",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.ApiDiagnosticsTest.html",
+      "size": 2166,
+      "sha256": "04652416e69d41f9847437d631c03542e9de5c0470658d2cefd558fa54208772"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.ApiElectricalTest.html",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.ApiElectricalTest.html",
+      "size": 7144,
+      "sha256": "c0c79d6b10f8f00c4bb3a838e92998ac54bb35f5dfba36a6815bbd333947697c"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.ApiGroundTest.html",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.ApiGroundTest.html",
+      "size": 3016,
+      "sha256": "f57fb47d0dd97dcf6d34985397a15093221031f097a1266d8bb975411467909c"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.ApiTerminalIdentitiesTest.html",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.ApiTerminalIdentitiesTest.html",
+      "size": 2947,
+      "sha256": "cb466cba1d93b6dab5d625398998ae294cc3d4433025606b1bc7d5a21b113bab"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.NativeApiReadingsTest.html",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.NativeApiReadingsTest.html",
+      "size": 2355,
+      "sha256": "51d5c9cff1a48d4f1a7597592570cf180cfe105aeb376a16eaec65bbb873c2bb"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/css/base-style.css",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/css/base-style.css",
+      "size": 2645,
+      "sha256": "a10a4ef75ca2601b44bfdaf3112a5854f6376f68d7cbaf6958286f04488d293b"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/css/style.css",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/css/style.css",
+      "size": 1135,
+      "sha256": "61866908fd7eb09c79e96239f69db2e8cc5c6526cdb308eba0535ed2a0f6a263"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/index.html",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/index.html",
+      "size": 6592,
+      "sha256": "caf22584ee9b17fc25c624111091bb17358a689fffa918a84081f94f28bc396d"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/js/report.js",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/js/report.js",
+      "size": 5252,
+      "sha256": "fc89c6d002d18f4662065c9887b2cda8f8486f2737d4ad0f2fdeac0ad58a44dc"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/packages/org.cha0scollective.wwpg.api.cee.html",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/packages/org.cha0scollective.wwpg.api.cee.html",
+      "size": 2098,
+      "sha256": "0560307baf71217f2444ee360b53a3f998b95170e16e172dd2253858b0d8a250"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/packages/org.cha0scollective.wwpg.api.html",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/packages/org.cha0scollective.wwpg.api.html",
+      "size": 2723,
+      "sha256": "25fa9cc07c6fde0a6795536c2aa2f6b70d2aa46410c61639c3bb93f19e16abdb"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/packages/org.cha0scollective.wwpg.bridge.html",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/packages/org.cha0scollective.wwpg.bridge.html",
+      "size": 2766,
+      "sha256": "6939e70165900aa6e91b0333d68d50e75e1f0429655c175c76d80e701fde9a50"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/packages/org.cha0scollective.wwpg.extension.html",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/packages/org.cha0scollective.wwpg.extension.html",
+      "size": 3219,
+      "sha256": "96ca3fc8b19fd060b77d9872267244a5f45a6b8a4960c27beb00887c1991e574"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.api.ApiVersionTest.xml",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.api.ApiVersionTest.xml",
+      "size": 468,
+      "sha256": "e9c2305fd6a199796e2e1028b38f612ad4f64da7249e2696c9deae889d1d6425"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.api.CircuitDescriptionTest.xml",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.api.CircuitDescriptionTest.xml",
+      "size": 1275,
+      "sha256": "6aa7d0e8b537599fbf501fdf2a5186382940ff9a21b87014fd1ccb386f86ca68"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.api.DeviceResultsTest.xml",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.api.DeviceResultsTest.xml",
+      "size": 1207,
+      "sha256": "80bdf5ed9f8f26324bbd25f74cd26e972f68247c7b9f5069fbcebe66973da314"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.api.VoltageMeasurementTest.xml",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.api.VoltageMeasurementTest.xml",
+      "size": 488,
+      "sha256": "b2a7054b50ac06a56e53201782343a40170649418191057592fa6be0c2014989"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.api.cee.CeeAdapterRegistryTest.xml",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.api.cee.CeeAdapterRegistryTest.xml",
+      "size": 1688,
+      "sha256": "528e26dde3bdcf2303dd4d6c352caf9545a0dfdbce9adc47bd9c33bac02e2a72"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.BridgeSimulationResultsTest.xml",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.BridgeSimulationResultsTest.xml",
+      "size": 709,
+      "sha256": "f2cfda2b0d4f4ad64c0499525de7fc4e927159793a19185d1bafed7909e895fd"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.LinearBranchTest.xml",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.LinearBranchTest.xml",
+      "size": 771,
+      "sha256": "2fa850c57c667e1142e86a188242b60223063e29e4f3ddf02859747f03573043"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.NativeCeeCheckpointTest.xml",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.NativeCeeCheckpointTest.xml",
+      "size": 935,
+      "sha256": "a7502c7568aecb484239bdc9d53ff25a57a95a94de1e26322af445c6c2be7b43"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.TransformerStampTest.xml",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.TransformerStampTest.xml",
+      "size": 988,
+      "sha256": "9a7e4903b5fa05eb33f3e0cea07a9b537bb540602dfe97b22fad398989cca19a"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiCeeWireIdentitiesTest.xml",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiCeeWireIdentitiesTest.xml",
+      "size": 1479,
+      "sha256": "e4119c6480110922d0aea078da54b5d4fbb09d44f8242b2e4614e028cff615b6"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiDiagnosticsTest.xml",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiDiagnosticsTest.xml",
+      "size": 643,
+      "sha256": "f8eb57caf897df235fbda35f03fe4de21dd8d37919438691b0dbb2b84079c6c6"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiElectricalTest.xml",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiElectricalTest.xml",
+      "size": 5468,
+      "sha256": "3ed09f481a5d77f3a4b761f2ed7d9002120fd3c2ba045f2964a96329273a4a8c"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiGroundTest.xml",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiGroundTest.xml",
+      "size": 1340,
+      "sha256": "47ec63b3d9a033ee974d12099bf4e84cdc409de9b21b63718c2a3ed87280c426"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiTerminalIdentitiesTest.xml",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiTerminalIdentitiesTest.xml",
+      "size": 1462,
+      "sha256": "7ef600b7608340f1d0eb0139f7dab19714a68215b0d879a4853e1ecf8142e8df"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.NativeApiReadingsTest.xml",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.NativeApiReadingsTest.xml",
+      "size": 835,
+      "sha256": "56a2bc5898c56a9447ba62087238b55bc8d1b4c24fa3b8281b8bdaff9b869a5e"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/binary/output.bin",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/binary/output.bin",
+      "size": 5904,
+      "sha256": "1e46e4fd6569aa23422c46ba097f2c9017ba63c3d1d24d443a7e950bb8c482c4"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/binary/output.bin.idx",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/binary/output.bin.idx",
+      "size": 473,
+      "sha256": "62529dafc3ffc41996892d0c6559bb44c94805e67c9cae362fa5048811aa6926"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/binary/results.bin",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/build/test-results/test/binary/results.bin",
+      "size": 9032,
+      "sha256": "d8a0384762632c191450e7115e23b3b109cdce0704f495b080ea663bba3d23d7"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar",
+      "size": 45638,
+      "sha256": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar",
+      "size": 50820,
+      "sha256": "09a0ce693fa01a83793ee601707b460826f2bdf7e6bf0979df2c83f41f8dfee1"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api-pause/logs/debug.log",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api-pause/logs/debug.log",
+      "size": 18900,
+      "sha256": "c2e4fab1326c4f12ad57a69ccde5c9fd2bb346f74e6ffde1507357e235f176ed"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api-pause/logs/latest.log",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api-pause/logs/latest.log",
+      "size": 18900,
+      "sha256": "c2e4fab1326c4f12ad57a69ccde5c9fd2bb346f74e6ffde1507357e235f176ed"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api-pause/packaged-2026-10-11T10-18-17.145856562Z.json",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api-pause/packaged-2026-10-11T10-18-17.145856562Z.json",
+      "size": 771,
+      "sha256": "6ee34dfcd885f9aa27ec10a467ec7abf7ffad2daca399c9d867402de6bb34746"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api/extension-api-before-restart.nbt",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api/extension-api-before-restart.nbt",
+      "size": 143,
+      "sha256": "642edd2097c8f31d6ed30e0ae650ddbbe5b10a5793f696ef5fa9b499e88a5c14"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api/extension-api-replacement-before-restart.nbt",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api/extension-api-replacement-before-restart.nbt",
+      "size": 233,
+      "sha256": "ec45281caf5bd780191b7654c54a6eb0f57d26e4df203f4a8d30d2a2cebff695"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api/logs/2026-10-11-1.log.gz",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api/logs/2026-10-11-1.log.gz",
+      "size": 6328,
+      "sha256": "5f7c2ddcb1a8af716c11520bc2be6ef516b6764b2b14694771d09f560b50b1d7"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api/logs/debug-1.log.gz",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api/logs/debug-1.log.gz",
+      "size": 6328,
+      "sha256": "5f7c2ddcb1a8af716c11520bc2be6ef516b6764b2b14694771d09f560b50b1d7"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api/logs/debug.log",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api/logs/debug.log",
+      "size": 41983,
+      "sha256": "40dbcd0b00087dea5ecfa1d7857de48ee9751f26b30fb52e33ba5cf4a3ab9a6d"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api/logs/latest.log",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api/logs/latest.log",
+      "size": 41983,
+      "sha256": "40dbcd0b00087dea5ecfa1d7857de48ee9751f26b30fb52e33ba5cf4a3ab9a6d"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api/packaged-2026-10-11T10-18-48.541933475Z.json",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api/packaged-2026-10-11T10-18-48.541933475Z.json",
+      "size": 843,
+      "sha256": "1bca8cf094e404c3f8f693c21593f2363f58483af84a6daadf6437ae91d2dcd5"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api/packaged-2026-10-11T10-19-38.772755489Z.json",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api/packaged-2026-10-11T10-19-38.772755489Z.json",
+      "size": 760,
+      "sha256": "18befee0381e8dc4a0b8db4046c3b1db1f466c7238923c84e585722cf83e28e9"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api/upstream-api-before-restart.nbt",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-artifact/run/api/upstream-api-before-restart.nbt",
+      "size": 467,
+      "sha256": "5f2bea4feb3abe9e24dc40b4efee1597dbe3aea74e4fdffdeffb4738557989ec"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-job.log",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-BASE-job.log",
+      "size": 201810,
+      "sha256": "472bcb7311a9c1358dc14dde4c634678bbf0b9bf91538a44a64bdb0a3e2c2722"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-JAVA-PINOUT-job.log",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-JAVA-PINOUT-job.log",
+      "size": 203582,
+      "sha256": "5f20d6ea1e829f75feac1c3f931f032febddd47eb0412a85cc170bc685af2240"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-NATIVE-BASE-job.log",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-NATIVE-BASE-job.log",
+      "size": 202204,
+      "sha256": "93fee5b67543a83a770c1244ee6f2d8b598fec10ef9427fcccc6b43b58c7172d"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/ubuntu-NATIVE-PINOUT-job.log",
+      "source_path": "build/preliminary-ci-38131357758/ubuntu-NATIVE-PINOUT-job.log",
+      "size": 204373,
+      "sha256": "e57f94fefc10c1c7d8b75ee053402b443d87a1d43d9bbcd9f7ed99964ffd4f7e"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/windows-JAVA-BASE-job.log",
+      "source_path": "build/preliminary-ci-38131357758/windows-JAVA-BASE-job.log",
+      "size": 200533,
+      "sha256": "708497987b83372148ed2d10d92dbd911fefdf97a11117d471e85e7795be1f28"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/windows-JAVA-PINOUT-job.log",
+      "source_path": "build/preliminary-ci-38131357758/windows-JAVA-PINOUT-job.log",
+      "size": 201438,
+      "sha256": "66035947be58e0816a64ab095048c92ec76d85be27f1e19fd200db0348034277"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/windows-NATIVE-BASE-job.log",
+      "source_path": "build/preliminary-ci-38131357758/windows-NATIVE-BASE-job.log",
+      "size": 199993,
+      "sha256": "c2d9d26bc7350e88c53e77bbd7ca328da211137b6e43bfa89a5d6f5bdea4e1bc"
+    },
+    {
+      "path": "build/preliminary-ci-38131357758/windows-NATIVE-PINOUT-job.log",
+      "source_path": "build/preliminary-ci-38131357758/windows-NATIVE-PINOUT-job.log",
+      "size": 201829,
+      "sha256": "f470965895236f13d057cb429dbe107bdcdf8e14624733c6e4bfe9676a51c0df"
     },
     {
       "path": "run/api-complete-NATIVE-11/logs/debug.log",
@@ -292,6 +1525,18 @@
       "source_path": "run/api-full-NATIVE-13/packaged-2026-10-11T10-05-07.960145Z.json",
       "size": 758,
       "sha256": "6cd88d34c1fe17d056a32adca91b740818947defa96df06d705cf5457a758c33"
+    },
+    {
+      "path": "run/api-full-NATIVE-14/packaged-2026-10-11T10-17-05.297793Z.json",
+      "source_path": "run/api-full-NATIVE-14/packaged-2026-10-11T10-17-05.297793Z.json",
+      "size": 842,
+      "sha256": "9f4c01a626e22ae03769efb2f470edfa6810d859a6d362c08ccba536adf2cdcf"
+    },
+    {
+      "path": "run/api-full-NATIVE-14/packaged-2026-10-11T10-18-13.112738700Z.json",
+      "source_path": "run/api-full-NATIVE-14/packaged-2026-10-11T10-18-13.112738700Z.json",
+      "size": 762,
+      "sha256": "206ff30871a0ebd21285a39d346fd58145cbcd97fb425dc3ed441c1446e3540a"
     },
     {
       "path": "run/api-lifecycle-JAVA-6/logs/debug.log",
@@ -388,6 +1633,108 @@
       "source_path": "run/api-second-java/packaged-2026-10-11T08-37-16.195029800Z.json",
       "size": 301,
       "sha256": "f045be23afd8935c1ed91b28d35c6c130de39d50213bd067474445118b63c181"
+    },
+    {
+      "path": "run/api15-full-NATIVE/packaged-2026-10-11T10-48-30.705103900Z.json",
+      "source_path": "run/api15-full-NATIVE/packaged-2026-10-11T10-48-30.705103900Z.json",
+      "size": 761,
+      "sha256": "2e2fe8b6c0feaa1406c2032ba1264eaa120661a11e73610f86a189a683780f6f"
+    },
+    {
+      "path": "run/api15-pending-NATIVE/packaged-2026-10-11T10-46-30.800513900Z.json",
+      "source_path": "run/api15-pending-NATIVE/packaged-2026-10-11T10-46-30.800513900Z.json",
+      "size": 783,
+      "sha256": "083b3d78f5456947fd27659acb8757caad924f7fc513558c1df3a1148732f028"
+    },
+    {
+      "path": "run/api15-pending-NATIVE/packaged-2026-10-11T10-46-53.368770500Z.json",
+      "source_path": "run/api15-pending-NATIVE/packaged-2026-10-11T10-46-53.368770500Z.json",
+      "size": 698,
+      "sha256": "3dee4ce1017c279448548a498feba888e79bc9a0336b71f84b15e570a87c43bc"
+    },
+    {
+      "path": "run/api16-pending-NATIVE/packaged-2026-10-11T10-52-21.727676300Z.json",
+      "source_path": "run/api16-pending-NATIVE/packaged-2026-10-11T10-52-21.727676300Z.json",
+      "size": 783,
+      "sha256": "10069adb5d20c9b5c06e098140e023617bf26cea06e3f64564d322f442f5b131"
+    },
+    {
+      "path": "run/api16-pending-NATIVE/packaged-2026-10-11T10-52-45.178818700Z.json",
+      "source_path": "run/api16-pending-NATIVE/packaged-2026-10-11T10-52-45.178818700Z.json",
+      "size": 698,
+      "sha256": "b8470052e852031b04654990a0df41bbc8b947c6699890b6e43547a6e7d57df5"
+    },
+    {
+      "path": "run/api17-pending-NATIVE/packaged-2026-10-11T11-01-07.730948900Z.json",
+      "source_path": "run/api17-pending-NATIVE/packaged-2026-10-11T11-01-07.730948900Z.json",
+      "size": 783,
+      "sha256": "95c760b6ba26d2a89a5ccd531e6f2b4e12810ca6522769879bebd6771aebf94e"
+    },
+    {
+      "path": "run/api17-pending-NATIVE/packaged-2026-10-11T11-01-30.551258400Z.json",
+      "source_path": "run/api17-pending-NATIVE/packaged-2026-10-11T11-01-30.551258400Z.json",
+      "size": 698,
+      "sha256": "86a4dd8afea385fcc9693da30dda2f43ce37fc3df4769634071fdc1727c2ecc4"
+    },
+    {
+      "path": "run/api18-pending-NATIVE/packaged-2026-10-11T11-08-12.272186100Z.json",
+      "source_path": "run/api18-pending-NATIVE/packaged-2026-10-11T11-08-12.272186100Z.json",
+      "size": 783,
+      "sha256": "746929782ea784d698e1df30fc90c0f2f8046557334b2e9ec46563c40ba8c7a3"
+    },
+    {
+      "path": "run/api18-pending-NATIVE/packaged-2026-10-11T11-08-35.440056600Z.json",
+      "source_path": "run/api18-pending-NATIVE/packaged-2026-10-11T11-08-35.440056600Z.json",
+      "size": 698,
+      "sha256": "15b9779e79f98c7f0d83450c6d3c0349c708e0e1d2f07a247b083ae72e2d8437"
+    },
+    {
+      "path": "run/api20-pending-NATIVE/packaged-2026-10-11T11-15-30.974557400Z.json",
+      "source_path": "run/api20-pending-NATIVE/packaged-2026-10-11T11-15-30.974557400Z.json",
+      "size": 780,
+      "sha256": "ae37bbc1f580abf51732fd65d73555a028510a59c90546d3225eaa415212a925"
+    },
+    {
+      "path": "run/api20-pending-NATIVE/packaged-2026-10-11T11-15-53.237878500Z.json",
+      "source_path": "run/api20-pending-NATIVE/packaged-2026-10-11T11-15-53.237878500Z.json",
+      "size": 698,
+      "sha256": "5939d68a019c8c9d55e674cb42baab7506c5cdb1aad1c71415a0963fff3d657e"
+    },
+    {
+      "path": "run/api21-pending-JAVA/packaged-2026-10-11T11-21-22.764624400Z.json",
+      "source_path": "run/api21-pending-JAVA/packaged-2026-10-11T11-21-22.764624400Z.json",
+      "size": 781,
+      "sha256": "04544f94d07ca4bbab392ccdc6735d09ba40ed22dd7e1209611f6880782b8bf0"
+    },
+    {
+      "path": "run/api21-pending-JAVA/packaged-2026-10-11T11-21-45.745380700Z.json",
+      "source_path": "run/api21-pending-JAVA/packaged-2026-10-11T11-21-45.745380700Z.json",
+      "size": 779,
+      "sha256": "436c5ca747b6ec90b59c3fdba5694cf1c5165b88c32b803570a2dd9704ebfe15"
+    },
+    {
+      "path": "run/api21-pending-JAVA/packaged-2026-10-11T11-22-07.499412900Z.json",
+      "source_path": "run/api21-pending-JAVA/packaged-2026-10-11T11-22-07.499412900Z.json",
+      "size": 782,
+      "sha256": "9b8d4753a9e11ace0ccab39e4ff51eb5e6fc6f2ce802151f972cdb06d1078956"
+    },
+    {
+      "path": "run/api21-pending-NATIVE/packaged-2026-10-11T11-20-16.045758400Z.json",
+      "source_path": "run/api21-pending-NATIVE/packaged-2026-10-11T11-20-16.045758400Z.json",
+      "size": 783,
+      "sha256": "22ea9a0dedbd954103121ea4532a2918e2ac07216675b6b4155a8261f0b89750"
+    },
+    {
+      "path": "run/api21-pending-NATIVE/packaged-2026-10-11T11-20-38.830547400Z.json",
+      "source_path": "run/api21-pending-NATIVE/packaged-2026-10-11T11-20-38.830547400Z.json",
+      "size": 781,
+      "sha256": "4cc4a06e4ffe7e2463bbc5b9e9c446cf6bf02c114a679fefd2f2446a94585589"
+    },
+    {
+      "path": "run/api21-pending-NATIVE/packaged-2026-10-11T11-21-00.554473500Z.json",
+      "source_path": "run/api21-pending-NATIVE/packaged-2026-10-11T11-21-00.554473500Z.json",
+      "size": 784,
+      "sha256": "ec4801b1a984c385ed1832326a7da55aca1fdc7d8e3e82d1c0a22a40c9be36de"
     },
     {
       "path": "runs/api-no-geometry-cold-NATIVE-12/build/api-no-geometry-cold-NATIVE-12.log",
