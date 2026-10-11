@@ -215,7 +215,10 @@ def main():
           runtime=dict(minecraft='1.21.1', neoforge='21.1.231', java=21, create='6.0.10-280', cee='1.21.1-1.1.3', powergrid='0.6.2', architectury='13.0.8'),
           optional=read(ROOT / 'release/optional-artifacts.json'), solver=dict(primary='PG native v7', fallback='PG Java', substeps=16)))
     bundle_entries = {p.name: p for p in downloads}
-    for path in [ROOT / 'LICENSE', ROOT / 'README.md', ROOT / 'CHANGELOG.md', *sorted((ROOT / 'docs').glob('*.md')),
+    for path in [ROOT / 'LICENSE', ROOT / 'README.md', ROOT / 'CHANGELOG.md', ROOT / 'SPEC.md', ROOT / 'CONTRIBUTING.md',
+                 ROOT / 'src/main/resources/META-INF/POWER-GRID-LICENSE.txt',
+                 ROOT / 'src/main/resources/META-INF/WWPG-NATIVE-NOTICE.txt',
+                 *sorted((ROOT / 'docs').glob('*.md')),
                  ROOT / 'release/artifacts.json', ROOT / 'release/optional-artifacts.json', *sorted(RECORD.glob('*'))]:
         if path.is_file():
             bundle_entries[path.relative_to(ROOT).as_posix()] = path
