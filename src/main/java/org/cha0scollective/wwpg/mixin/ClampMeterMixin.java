@@ -1,6 +1,7 @@
 package org.cha0scollective.wwpg.mixin;
 
 import com.george_vi.electroenergetics.content.clamp_meter.ClampMeterItem;
+import com.george_vi.electroenergetics.content.linemans_stick.LinemansStickItem;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.cha0scollective.wwpg.equipment.HandheldMeters;
@@ -9,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = ClampMeterItem.class, remap = false)
+@Mixin(value = {ClampMeterItem.class, LinemansStickItem.class}, remap = false)
 public abstract class ClampMeterMixin {
     @Inject(method = "onUseTick", at = @At("HEAD"))
     private void wwpg$syncCurrent(net.minecraft.world.level.Level level, LivingEntity entity, ItemStack stack, int remaining, CallbackInfo ci) {

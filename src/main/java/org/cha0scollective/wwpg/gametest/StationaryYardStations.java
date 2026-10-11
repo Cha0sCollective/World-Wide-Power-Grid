@@ -67,6 +67,7 @@ final class StationaryYardStations {
         new StationaryYardConnections(this).build();
         new StationaryYardNether(this).build();
         new StationaryYardProcessing(this).build();
+        new StationaryYardWiring(this).build();
         if (net.neoforged.fml.ModList.get().isLoaded("pinout") && net.neoforged.fml.ModList.get().isLoaded("computercraft"))
             StationaryYardPinout.build(this);
         if (!restore) h.runAtTickTime(20, () -> configure.forEach(Runnable::run));
@@ -185,6 +186,7 @@ final class StationaryYardStations {
         ExampleWorldGameTests.cleanDroppedWireItems(nether,new net.minecraft.world.phys.AABB(0,-64,0,64,320,64));
         var report=new JsonObject(); report.addProperty("schema",1); report.addProperty("target","0.1.0-beta.5");
         report.addProperty("stationary_completion",false); report.addProperty("backend",System.getProperty("wwpg.test.backend","NATIVE"));
+        report.addProperty("profile",System.getProperty("wwpg.test.profile","BASE"));
         var rows=new JsonArray();
         for (var s:stations) {
             var row=new JsonObject(); row.addProperty("code",s.code()); row.addProperty("name",s.name());

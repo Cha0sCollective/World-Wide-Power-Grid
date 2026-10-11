@@ -2,6 +2,23 @@
 
 This directory records implementation and acceptance for the planned 0.1.0-beta.5.
 **It is not a published release or a completed support claim.**
+
+The native-wiring stage adds individual checks for all 57 ordinary CEE wire
+variants, PG iron wire on CEE terminals, hanging insulators, duplex cables,
+lineman attachments and offhand-clamp measurement, and native PG bulb repair.
+The playable yard now has 78 additional base exhibits, or 80 with Pinout,
+alongside the earlier live board, panel, transformer and factory circuits.
+[Player workflows](../../docs/STATIONARY_WIRING.md) explain the upstream item
+behavior, including nearly nonconductive glass insulation and two-click PG bulb
+replacement. Registry accounting still does not certify content.
+
+Cold Pinout demo boots reproduced an invalid test assumption: native peripheral
+calls run on separate ticks, so a bulk voltage sampled before wire restoration
+can differ from a later individual reading. The player programs accept valid
+sequential measurements; controlled accuracy fixtures keep their independent
+electrical expectations. Failed boots and their numerical readings are retained.
+Complete packaged acceptance, exported ZIP reopening, fresh graphical checks,
+and two real clients remain required before a stationary-completion claim.
 Work-in-progress jars use `0.1.0-beta.5-dev`; published beta.4 artifacts are unchanged.
 
 Baseline: beta.4, commit `28da7ffca1f6972dc0db2378aa425c89753cab85`.

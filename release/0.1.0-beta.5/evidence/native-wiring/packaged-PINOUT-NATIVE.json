@@ -1,0 +1,50 @@
+[
+  {
+    "schema": 1,
+    "artifact": "wwpg-beta5-wiring-complete.jar",
+    "sha256": "08bb020e3e4d88825f912685145bf4875e69d60c643411e9107dc39686326d95",
+    "profile": "PINOUT",
+    "backend": "NATIVE",
+    "phase": "SETUP",
+    "started": "2026-10-11T02-13-01.439060400Z",
+    "namespaces": "wwpg_yard,wwpg_bundle,wwpg_wires",
+    "required_tests_passed": 11,
+    "completed": "2026-10-11T02:13:50.489179200Z"
+  },
+  {
+    "schema": 1,
+    "artifact": "wwpg-beta5-wiring-complete.jar",
+    "sha256": "08bb020e3e4d88825f912685145bf4875e69d60c643411e9107dc39686326d95",
+    "profile": "PINOUT",
+    "backend": "NATIVE",
+    "phase": "VERIFY",
+    "started": "2026-10-11T02-13-57.035480200Z",
+    "namespaces": "wwpg_yard,wwpg_bundle,wwpg_wires",
+    "required_tests_passed": 11,
+    "completed": "2026-10-11T02:14:42.497680500Z"
+  },
+  {
+    "schema": 1,
+    "artifact": "wwpg-beta5-wiring-complete.jar",
+    "sha256": "08bb020e3e4d88825f912685145bf4875e69d60c643411e9107dc39686326d95",
+    "profile": "PINOUT",
+    "backend": "NATIVE",
+    "phase": "VERIFY",
+    "started": "2026-10-11T02-14-48.936225900Z",
+    "namespaces": "wwpg_yard,wwpg_bundle,wwpg_wires",
+    "required_tests_passed": 11,
+    "completed": "2026-10-11T02:15:34.868420Z"
+  },
+  {
+    "schema": 1,
+    "artifact": "wwpg-beta5-wiring-complete.jar",
+    "sha256": "08bb020e3e4d88825f912685145bf4875e69d60c643411e9107dc39686326d95",
+    "profile": "PINOUT",
+    "backend": "NATIVE",
+    "phase": "VERIFY",
+    "started": "2026-10-11T02-15-41.893092400Z",
+    "namespaces": "wwpg_yard,wwpg_bundle,wwpg_wires",
+    "required_tests_passed": 11,
+    "completed": "2026-10-11T02:16:29.091231100Z"
+  }
+]

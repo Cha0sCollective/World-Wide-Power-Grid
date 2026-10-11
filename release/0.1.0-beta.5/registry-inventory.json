@@ -1527,7 +1527,13 @@
       "id": "electroenergetics:clamp_meter",
       "implementation": "com.george_vi.electroenergetics.content.clamp_meter.ClampMeterItem",
       "disposition": "native_workflow",
-      "fixture": "handheldMetersReadBothWireSystems"
+      "fixture": "clampAttachesToPgWireAndReleases",
+      "fixtures": [
+        "clampAttachesToPgWireAndReleases"
+      ],
+      "fixture_sources": {
+        "clampAttachesToPgWireAndReleases": "src/main/java/org/cha0scollective/wwpg/gametest/HandheldMeterGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -1572,7 +1578,10 @@
       "id": "electroenergetics:copper_wire_spool",
       "implementation": "com.george_vi.electroenergetics.content.wire_spool.WireSpoolItem",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -1595,7 +1604,10 @@
       "id": "electroenergetics:creative_wire_spool",
       "implementation": "com.george_vi.electroenergetics.content.wire_spool.WireSpoolItem",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -1658,7 +1670,10 @@
       "id": "electroenergetics:duplex_wire_spool",
       "implementation": "com.george_vi.electroenergetics.content.bundled_wire.BundledWireItem",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "nativeDuplexSpoolConnectsBothConductorsAndRecoversOnce",
+      "fixture_sources": {
+        "nativeDuplexSpoolConnectsBothConductorsAndRecoversOnce": "src/main/java/org/cha0scollective/wwpg/gametest/BundledWireGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -1704,7 +1719,10 @@
       "id": "electroenergetics:electrum_wire_spool",
       "implementation": "com.george_vi.electroenergetics.content.wire_spool.WireSpoolItem",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -1719,7 +1737,10 @@
       "id": "electroenergetics:empty_spool",
       "implementation": "com.george_vi.electroenergetics.content.wire_spool.EmptySpoolItem",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -1765,7 +1786,10 @@
       "id": "electroenergetics:glass_insulator_spool",
       "implementation": "com.george_vi.electroenergetics.content.wire_spool.WireSpoolItem",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -1820,7 +1844,10 @@
       "id": "electroenergetics:hanging_glass_insulator",
       "implementation": "com.george_vi.electroenergetics.content.wire_spool.HangingWireSpoolItem",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "nativeHangingInsulatorSpoolRecognizesFreshPgTerminal",
+      "fixture_sources": {
+        "nativeHangingInsulatorSpoolRecognizesFreshPgTerminal": "src/main/java/org/cha0scollective/wwpg/gametest/NativeWireToolsGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -1834,7 +1861,10 @@
       "id": "electroenergetics:heavily_insulated_wire_spool",
       "implementation": "com.george_vi.electroenergetics.content.wire_spool.WireSpoolItem",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -1910,14 +1940,20 @@
       "id": "electroenergetics:iron_bus_spool",
       "implementation": "com.george_vi.electroenergetics.content.wire_spool.WireSpoolItem",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "item",
       "id": "electroenergetics:iron_rail_spool",
       "implementation": "com.george_vi.electroenergetics.content.wire_spool.WireSpoolItem",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -1931,7 +1967,10 @@
       "id": "electroenergetics:iron_wire_spool",
       "implementation": "com.george_vi.electroenergetics.content.wire_spool.WireSpoolItem",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -1993,7 +2032,15 @@
       "id": "electroenergetics:linemans_stick",
       "implementation": "com.george_vi.electroenergetics.content.linemans_stick.LinemansStickItem",
       "disposition": "native_workflow",
-      "fixture": "nativeWireAttachmentsInstallRemoveAndPersist"
+      "fixture": "nativeLinemansStickInstallsAndReturnsOffhandAttachments",
+      "fixtures": [
+        "nativeLinemansStickInstallsAndReturnsOffhandAttachments",
+        "nativeLinemansStickWithOffhandClampMeasuresPgWire"
+      ],
+      "fixture_sources": {
+        "nativeLinemansStickInstallsAndReturnsOffhandAttachments": "src/main/java/org/cha0scollective/wwpg/gametest/NativeWireToolsGameTests.java",
+        "nativeLinemansStickWithOffhandClampMeasuresPgWire": "src/main/java/org/cha0scollective/wwpg/gametest/NativeWireToolsGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -2324,14 +2371,23 @@
       "id": "electroenergetics:wire_damper",
       "implementation": "net.minecraft.world.item.Item",
       "disposition": "native_workflow",
-      "fixture": "nativeWireAttachmentsInstallRemoveAndPersist"
+      "fixture": "nativeWireAttachmentsInstallRemoveAndPersist",
+      "fixtures": [
+        "nativeWireAttachmentsInstallRemoveAndPersist"
+      ],
+      "fixture_sources": {
+        "nativeWireAttachmentsInstallRemoveAndPersist": "src/main/java/org/cha0scollective/wwpg/gametest/WireAttachmentGameTests.java"
+      }
     },
     {
       "registry": "item",
       "id": "electroenergetics:wire_spool",
       "implementation": "com.george_vi.electroenergetics.content.wire_spool.WireSpoolItem",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -2453,7 +2509,13 @@
       "id": "powergrid:circuit_schematic",
       "implementation": "org.patryk3211.powergrid.circuits.schematic.CircuitSchematicItem",
       "disposition": "native_workflow",
-      "fixture": "savedDesignerLoadsBeforeWorldAssignment"
+      "fixture": "savedDesignerLoadsBeforeWorldAssignment",
+      "fixtures": [
+        "savedDesignerLoadsBeforeWorldAssignment"
+      ],
+      "fixture_sources": {
+        "savedDesignerLoadsBeforeWorldAssignment": "src/main/java/org/cha0scollective/wwpg/gametest/DesignTablePersistenceGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -2484,14 +2546,23 @@
       "id": "powergrid:copper_coil",
       "implementation": "org.patryk3211.powergrid.kinetics.generator.winding.WindingItem",
       "disposition": "native_workflow",
-      "fixture": "nativeLargeGeneratorUsesInstalledCoilAndMixedExcitation"
+      "fixture": "nativeLargeGeneratorUsesInstalledCoilAndMixedExcitation",
+      "fixtures": [
+        "nativeLargeGeneratorUsesInstalledCoilAndMixedExcitation"
+      ],
+      "fixture_sources": {
+        "nativeLargeGeneratorUsesInstalledCoilAndMixedExcitation": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryGeneratorWorkflowGameTests.java"
+      }
     },
     {
       "registry": "item",
       "id": "powergrid:copper_cord",
       "implementation": "org.patryk3211.powergrid.electricity.wire.powercord.CordItem",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "ceePowerCrossesPgCordJunction",
+      "fixture_sources": {
+        "ceePowerCrossesPgCordJunction": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryEndpointGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -2592,7 +2663,13 @@
       "id": "powergrid:display_module",
       "implementation": "org.patryk3211.powergrid.electricity.modulardisplay.DisplayModuleItem",
       "disposition": "native_workflow",
-      "fixture": "ceePulsesPgModularDisplayWithNativeModules"
+      "fixture": "ceePulsesPgModularDisplayWithNativeModules",
+      "fixtures": [
+        "ceePulsesPgModularDisplayWithNativeModules"
+      ],
+      "fixture_sources": {
+        "ceePulsesPgModularDisplayWithNativeModules": "src/main/java/org/cha0scollective/wwpg/gametest/DisplayGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -2739,7 +2816,10 @@
       "id": "powergrid:golden_wire",
       "implementation": "org.patryk3211.powergrid.electricity.wire.WireItem",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "pgWireTypesRetainCostResistanceAndPlayerCut",
+      "fixture_sources": {
+        "pgWireTypesRetainCostResistanceAndPlayerCut": "src/main/java/org/cha0scollective/wwpg/gametest/SurvivalWiringGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -2754,7 +2834,13 @@
       "id": "powergrid:growth_lamp",
       "implementation": "org.patryk3211.powergrid.electricity.light.bulb.GrowthLamp",
       "disposition": "native_workflow",
-      "fixture": "ceePowerRunsNativeGrowthLampAndCropEffect"
+      "fixture": "ceePowerRunsNativeGrowthLampAndCropEffect",
+      "fixtures": [
+        "ceePowerRunsNativeGrowthLampAndCropEffect"
+      ],
+      "fixture_sources": {
+        "ceePowerRunsNativeGrowthLampAndCropEffect": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryLightingGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -2814,7 +2900,13 @@
       "id": "powergrid:incomplete_circuit",
       "implementation": "org.patryk3211.powergrid.circuits.circuitboard.IncompleteCircuitItem",
       "disposition": "native_workflow",
-      "fixture": "everyBuiltinBoardComponentAssemblesFromNativeItems"
+      "fixture": "everyBuiltinBoardComponentAssemblesFromNativeItems",
+      "fixtures": [
+        "everyBuiltinBoardComponentAssemblesFromNativeItems"
+      ],
+      "fixture_sources": {
+        "everyBuiltinBoardComponentAssemblesFromNativeItems": "src/main/java/org/cha0scollective/wwpg/gametest/BoardWorkflowGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -2856,7 +2948,10 @@
       "id": "powergrid:insulated_copper_wire",
       "implementation": "org.patryk3211.powergrid.electricity.wire.WireItem",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "pgWireTypesRetainCostResistanceAndPlayerCut",
+      "fixture_sources": {
+        "pgWireTypesRetainCostResistanceAndPlayerCut": "src/main/java/org/cha0scollective/wwpg/gametest/SurvivalWiringGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -2870,14 +2965,23 @@
       "id": "powergrid:iron_wire",
       "implementation": "org.patryk3211.powergrid.electricity.wire.WireItem",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "pgIronWireUsesCeeTerminalsWithoutChangingNativePgRestrictions",
+      "fixture_sources": {
+        "pgIronWireUsesCeeTerminalsWithoutChangingNativePgRestrictions": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "item",
       "id": "powergrid:light_bulb",
       "implementation": "org.patryk3211.powergrid.electricity.light.bulb.LightBulb",
       "disposition": "native_workflow",
-      "fixture": "nativePgBulbItemsRetainMixedLightAndReplacement"
+      "fixture": "nativePgBulbItemsRetainMixedLightAndReplacement",
+      "fixtures": [
+        "nativePgBulbItemsRetainMixedLightAndReplacement"
+      ],
+      "fixture_sources": {
+        "nativePgBulbItemsRetainMixedLightAndReplacement": "src/main/java/org/cha0scollective/wwpg/gametest/NativeBulbItemsGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -2900,7 +3004,13 @@
       "id": "powergrid:lv_light_bulb",
       "implementation": "org.patryk3211.powergrid.electricity.light.bulb.LvLightBulb",
       "disposition": "native_workflow",
-      "fixture": "nativePgBulbItemsRetainMixedLightAndReplacement"
+      "fixture": "nativePgBulbItemsRetainMixedLightAndReplacement",
+      "fixtures": [
+        "nativePgBulbItemsRetainMixedLightAndReplacement"
+      ],
+      "fixture_sources": {
+        "nativePgBulbItemsRetainMixedLightAndReplacement": "src/main/java/org/cha0scollective/wwpg/gametest/NativeBulbItemsGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -2930,7 +3040,15 @@
       "id": "powergrid:multimeter",
       "implementation": "org.patryk3211.powergrid.equipment.multimeter.MultimeterItem",
       "disposition": "native_workflow",
-      "fixture": "handheldMetersReadBothWireSystems"
+      "fixture": "multimeterReadsCeeAndMixedTerminals",
+      "fixtures": [
+        "multimeterReadsCeeAndMixedTerminals",
+        "multimeterReadsCeeWireAndClearsCutConnection"
+      ],
+      "fixture_sources": {
+        "multimeterReadsCeeAndMixedTerminals": "src/main/java/org/cha0scollective/wwpg/gametest/HandheldMeterGameTests.java",
+        "multimeterReadsCeeWireAndClearsCutConnection": "src/main/java/org/cha0scollective/wwpg/gametest/HandheldMeterGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -2974,7 +3092,13 @@
       "id": "powergrid:portable_battery",
       "implementation": "org.patryk3211.powergrid.equipment.portablebattery.forge.ForgePortableBatteryItem",
       "disposition": "native_workflow",
-      "fixture": "ceeChargesPgPortableBattery"
+      "fixture": "ceeChargesPgPortableBattery",
+      "fixtures": [
+        "ceeChargesPgPortableBattery"
+      ],
+      "fixture_sources": {
+        "ceeChargesPgPortableBattery": "src/main/java/org/cha0scollective/wwpg/gametest/FactoryGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -3034,7 +3158,13 @@
       "id": "powergrid:punch_card",
       "implementation": "org.patryk3211.powergrid.kinetics.punchcard.PunchCardItem",
       "disposition": "native_workflow",
-      "fixture": "nativePunchCardScansEveryRowAndControlsEightMixedLoads"
+      "fixture": "nativePunchCardScansEveryRowAndControlsEightMixedLoads",
+      "fixtures": [
+        "nativePunchCardScansEveryRowAndControlsEightMixedLoads"
+      ],
+      "fixture_sources": {
+        "nativePunchCardScansEveryRowAndControlsEightMixedLoads": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryReaderGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -3147,7 +3277,13 @@
       "id": "powergrid:string_light_cord",
       "implementation": "org.patryk3211.powergrid.electricity.light.string.StringLightCordItem",
       "disposition": "native_workflow",
-      "fixture": "nativeColoredStringCordLightsMixedCircuitAndReturnsCuttingCost"
+      "fixture": "nativeColoredStringCordLightsMixedCircuitAndReturnsCuttingCost",
+      "fixtures": [
+        "nativeColoredStringCordLightsMixedCircuitAndReturnsCuttingCost"
+      ],
+      "fixture_sources": {
+        "nativeColoredStringCordLightsMixedCircuitAndReturnsCuttingCost": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryStringLightGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -3229,7 +3365,10 @@
       "id": "powergrid:wire",
       "implementation": "org.patryk3211.powergrid.electricity.wire.WireItem",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "pgWireTypesRetainCostResistanceAndPlayerCut",
+      "fixture_sources": {
+        "pgWireTypesRetainCostResistanceAndPlayerCut": "src/main/java/org/cha0scollective/wwpg/gametest/SurvivalWiringGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -3244,7 +3383,13 @@
       "id": "powergrid:wire_cutter",
       "implementation": "net.minecraft.world.item.Item",
       "disposition": "native_workflow",
-      "fixture": "pgWireTypesRetainCostResistanceAndPlayerCut"
+      "fixture": "pgWireTypesRetainCostResistanceAndPlayerCut",
+      "fixtures": [
+        "pgWireTypesRetainCostResistanceAndPlayerCut"
+      ],
+      "fixture_sources": {
+        "pgWireTypesRetainCostResistanceAndPlayerCut": "src/main/java/org/cha0scollective/wwpg/gametest/SurvivalWiringGameTests.java"
+      }
     },
     {
       "registry": "item",
@@ -3258,420 +3403,600 @@
       "id": "electroenergetics:black_hanging_insulator",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:brown_hanging_insulator",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:duplex",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "nativeDuplexSpoolConnectsBothConductorsAndRecoversOnce",
+      "fixture_sources": {
+        "nativeDuplexSpoolConnectsBothConductorsAndRecoversOnce": "src/main/java/org/cha0scollective/wwpg/gametest/BundledWireGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:magenta_hanging_insulator",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:standard",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:colored_yellow",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:magenta_heavily_insulated",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:creative",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:light_blue_hanging_insulator",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:glass_insulator",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:yellow_heavily_insulated",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:black_heavily_insulated",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:light_gray_hanging_insulator",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:colored_pink",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:red_hanging_insulator",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:copper",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:cyan_heavily_insulated",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:bundle_conductor",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "nativeDuplexSpoolConnectsBothConductorsAndRecoversOnce",
+      "fixture_sources": {
+        "nativeDuplexSpoolConnectsBothConductorsAndRecoversOnce": "src/main/java/org/cha0scollective/wwpg/gametest/BundledWireGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:green_hanging_insulator",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:iron_rail",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:colored_gray",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:purple_heavily_insulated",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:pink_hanging_insulator",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:colored_blue",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:green_heavily_insulated",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:colored_purple",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:iron_bus",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:red_heavily_insulated",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:pink_heavily_insulated",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:gray_heavily_insulated",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:orange_hanging_insulator",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:yellow_hanging_insulator",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:light_blue_heavily_insulated",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:light_gray_heavily_insulated",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:gray_hanging_insulator",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:colored_magenta",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:colored_black",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:colored_light_gray",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:white_hanging_insulator",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:purple_hanging_insulator",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:blue_hanging_insulator",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:colored_light_blue",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:white_heavily_insulated",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:lime_heavily_insulated",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:colored_white",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:orange_heavily_insulated",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:iron",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:electrum",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:colored_green",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:blue_heavily_insulated",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:colored_brown",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:lime_hanging_insulator",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:colored_lime",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:colored_red",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:cyan_hanging_insulator",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:brown_heavily_insulated",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:colored_cyan",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:colored_orange",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_type",
       "id": "electroenergetics:heavily_insulated",
       "implementation": "com.george_vi.electroenergetics.simulation.WireType$Dyeable",
       "disposition": "stationary_wiring",
-      "fixture": "allStationaryWireFamiliesRetainNativeRules"
+      "fixture": "allStationaryWireFamiliesRetainNativeRules",
+      "fixture_sources": {
+        "allStationaryWireFamiliesRetainNativeRules": "src/main/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java"
+      }
     },
     {
       "registry": "wire_attachment",
       "id": "electroenergetics:damper",
       "implementation": "com.george_vi.electroenergetics.content.wire.attachments.DamperAttachmentType",
       "disposition": "native_workflow",
-      "fixture": "nativeWireAttachmentsInstallRemoveAndPersist"
+      "fixture": "nativeWireAttachmentsInstallRemoveAndPersist",
+      "fixture_sources": {
+        "nativeWireAttachmentsInstallRemoveAndPersist": "src/main/java/org/cha0scollective/wwpg/gametest/WireAttachmentGameTests.java"
+      }
     },
     {
       "registry": "wire_attachment",
@@ -3692,7 +4017,10 @@
       "id": "electroenergetics:banner",
       "implementation": "com.george_vi.electroenergetics.content.wire.attachments.BannerAttachmentType",
       "disposition": "native_workflow",
-      "fixture": "nativeWireAttachmentsInstallRemoveAndPersist"
+      "fixture": "nativeWireAttachmentsInstallRemoveAndPersist",
+      "fixture_sources": {
+        "nativeWireAttachmentsInstallRemoveAndPersist": "src/main/java/org/cha0scollective/wwpg/gametest/WireAttachmentGameTests.java"
+      }
     },
     {
       "registry": "panel_attachment",

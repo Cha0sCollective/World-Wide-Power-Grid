@@ -111,7 +111,9 @@ public final class HandheldMeters {
     }
 
     public static InteractionResult attachClamp(BaseWireEntity wire, Player player, InteractionHand hand) {
-        if (hand != InteractionHand.MAIN_HAND || !(player.getMainHandItem().getItem() instanceof ClampMeterItem))
+        boolean nativeStick = com.george_vi.electroenergetics.CEEItems.LINEMANS_STICK.isIn(player.getMainHandItem())
+                && player.getOffhandItem().getItem() instanceof ClampMeterItem;
+        if (hand != InteractionHand.MAIN_HAND || !(player.getMainHandItem().getItem() instanceof ClampMeterItem) && !nativeStick)
             return InteractionResult.PASS;
         var stack = player.getMainHandItem();
         player.releaseUsingItem();

@@ -38,7 +38,7 @@ public final class SurvivalWiringGameTests {
                 player.setItemInHand(InteractionHand.MAIN_HAND, stack);
                 var a = new BlockWireEndpoint(source, 1); var b = new BlockWireEndpoint(load, 0);
                 if (!stack.is(org.patryk3211.powergrid.collections.ModdedTags.Item.LIGHT_WIRES.tag)) {
-                    h.assertTrue(!IElectric.getAt(h.getLevel(), source).onWire(h.getLevel().getBlockState(source), context(h, player, a, true)).consumesAction()
+                    h.assertTrue(!IElectric.getAt(h.getLevel(), load).onWire(h.getLevel().getBlockState(load), context(h, player, b, true)).consumesAction()
                             && stack.getCount() == 64, "Native incompatible wire rejection changed or consumed wire");
                     return;
                 }
