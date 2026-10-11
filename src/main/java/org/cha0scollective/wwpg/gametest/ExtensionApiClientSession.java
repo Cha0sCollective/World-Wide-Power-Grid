@@ -214,12 +214,20 @@ public final class ExtensionApiClientSession {
                 var table = (CircuitDesignTableBlockEntity) level.getBlockEntity(TABLE);
                 var copiedItems = new ArrayList<ItemStack>(); copiedItems.add(table.getInventory().getItem(0));
                 players.forEach(player -> copiedItems.addAll(player.getInventory().items));
-                require(copiedItems.stream().filter(stack -> stack.is(ModdedItems.CIRCUIT_SCHEMATIC.get()))
-                        .map(stack -> CircuitSchematic.fromStack(level.registryAccess(), stack))
-                        .anyMatch(copy -> copy.components().size() == 3 && copy.getName().equals("WWPG API client edited")),
+                var schematicItems = copiedItems.stream().filter(stack -> stack.is(ModdedItems.CIRCUIT_SCHEMATIC.get())).toList();
+                var copies = schematicItems.stream().map(stack -> CircuitSchematic.fromStack(level.registryAccess(), stack))
+                        .filter(Objects::nonNull).toList();
+                // Native item copies omit instance UUIDs; keep every serialized design field they do preserve.
+                var expectedCopy = table.getSchematic().serializeSafeNbt(level.registryAccess());
+                long matchingCopies = copies.stream().filter(copy -> copy.components().size() == 3
+                        && "WWPG API client edited".equals(copy.getName())
+                        && copy.serializeSafeNbt(level.registryAccess()).equals(expectedCopy)).count();
+                require(matchingCopies > 0,
                         "Native schematic item copy/load did not reach the server/player inventory");
                 require(table.getSchematic().components().size() == 3 && table.getSchematicName().equals("WWPG API client edited"), "Native copy lost the editable design");
                 near(voltage(BOARD), 20, .1, "Board stayed powered during editing");
+                WorldWidePowerGrid.LOGGER.info("API_WORKSHOP_NATIVE_COPY_PASSED: schematicItems={}; blankItems={}; parsedCopies={}; matchingCopies={}; fullNativeCopyNbt=true; boardComponentIdsPreserved=true",
+                        schematicItems.size(), schematicItems.size() - copies.size(), copies.size(), matchingCopies);
             }
             case "repair" -> near(voltage(load(true)), 0, .001, "Native cutter disconnected the API load");
             default -> { }
