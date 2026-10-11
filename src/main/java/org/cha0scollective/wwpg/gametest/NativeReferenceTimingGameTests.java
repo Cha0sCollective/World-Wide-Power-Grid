@@ -172,6 +172,30 @@ public final class NativeReferenceTimingGameTests {
         });
     }
 
+    @GameTest(template = "empty", batch = "reference", timeoutTicks = 80)
+    public static void ceeClampedDiodeHighBiasMatchesNativeEquationAndReference(GameTestHelper h) {
+        place(h,SOURCE,CEEBlocks.CREATIVE_BATTERY.get());place(h,DEVICE,CEEBlocks.DIODE.get());
+        place(h,LOAD,upstream()?CEEBlocks.CREATIVE_RESISTOR.get():ModdedBlocks.CREATIVE_RESISTOR.get());
+        var trace=new Trace("cee-diode-clamped-high-bias",h);
+        double conductance=(1e-9/.05)*Math.exp(.8/.05),clampedCurrent=1e-9*(Math.exp(.8/.05)-1);
+        double expected=1000*(70-.8+clampedCurrent/conductance)/(1000+1/conductance);
+        h.runAtTickTime(10,()->{
+            setSupply(h,true,70);
+            if(upstream())((com.george_vi.electroenergetics.content.electronic_components.resistor.ResistorBlockEntity)h.getBlockEntity(LOAD)).setResistance(1000);
+            else ShowroomTools.resistance(h,h.absolutePos(LOAD),1000);
+            WiringGameTests.connect(h,h.absolutePos(SOURCE),1,h.absolutePos(DEVICE),1,false);
+            WiringGameTests.connect(h,h.absolutePos(DEVICE),0,h.absolutePos(LOAD),0,false);
+            WiringGameTests.connect(h,h.absolutePos(SOURCE),0,h.absolutePos(LOAD),1,false);
+        });
+        for(int tick=20;tick<=60;tick++) {
+            final int at=tick;h.runAtTickTime(tick,()->{
+                double actual=com.george_vi.electroenergetics.simulation.infrastructure.InfrastructureSavedData.load(h.getLevel()).ticker.lastResults.getVoltageAt(h.absolutePos(LOAD),0,1);
+                BoardComponentGameTests.near(h,actual,expected,expected*.001,"CEE native clamped diode DC equation at tick "+at);trace.sample(at,actual);
+            });
+        }
+        h.runAtTickTime(61,()->{trace.finish(true);finish(h);});
+    }
+
     @GameTest(template = "empty", batch = "reference", timeoutTicks = 205)
     public static void pgNonlinearBoardReactiveSwitchingMatchesPinnedNativeWindow(GameTestHelper h) {
         boolean nativeRun = upstream();

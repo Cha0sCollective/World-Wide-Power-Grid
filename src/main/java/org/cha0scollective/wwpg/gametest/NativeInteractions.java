@@ -67,8 +67,12 @@ final class NativeInteractions {
             @Override public HitResult pick(double distance,float tick,boolean fluids){return hit[0];}
         };
         player.setItemInHand(InteractionHand.MAIN_HAND,ModdedItems.CORD.asStack(64));
-        hit[0]=new BlockHitResult(junction.getCenter(),Direction.SOUTH,junction,false);
-        h.assertTrue(CordItem.useOn(player,InteractionHand.MAIN_HAND,junction,Direction.SOUTH).isTrue(),"Native junction selection failed");
+        var state=h.getLevel().getBlockState(junction);
+        var origin=state.getBlock() instanceof ISocketElectric socket
+                ? socket.socket(state).getOrigin().add(junction.getX(),junction.getY(),junction.getZ())
+                : junction.getCenter();
+        hit[0]=new BlockHitResult(origin,Direction.SOUTH,junction,false);
+        h.assertTrue(CordItem.useOn(player,InteractionHand.MAIN_HAND,junction,Direction.SOUTH).isTrue(),"Native junction/socket selection failed at "+junction+": "+state);
         for(int port=0;port<2;port++){
             hit[0]=new BlockHitResult(new BlockWireEndpoint(target,port).getExactPosition(h.getLevel()),Direction.UP,target,false);
             h.assertTrue(CordItem.useOn(player,InteractionHand.MAIN_HAND,target,Direction.UP).isTrue(),"Native cord split connection failed");
