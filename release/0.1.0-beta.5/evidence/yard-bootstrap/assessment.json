@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "stationary_completion": false,
+  "ci": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38107590539",
+  "failed_job": "Windows/native/PINOUT",
+  "passed_jobs": 7,
+  "failed_step": "Third cold restart of the extracted exact yard ZIP",
+  "failure": "S81 PG computer control: Playable Lua startup has not finished",
+  "earlier_phases": "The full packaged SETUP plus three cold passes, upstream references, legacy examples, source yard plus three cold passes, and the first two extracted-ZIP cold passes succeeded.",
+  "causal_paths": [
+    "Native computer startup executes asynchronously; electrical-example completion was used as an unrelated fixed deadline for its report.",
+    "A restored computer may have completed startup before the fixture deletes its report. The pinned Computer.tick bytecode queues a start only when the executor is off; turnOn cannot rerun a completed, running shell.",
+    "Publishing a report by opening its final name before writing it permits a reader to observe an incomplete file."
+  ],
+  "corrections": [
+    "Await native report completion before one-time electrical/content acceptance; keep the overall test timeout.",
+    "Use native reboot when the test computer is already on; preserve its existing pin state.",
+    "The yard program writes, closes and renames a pending report before publishing the completion name."
+  ],
+  "causal_regression": "A new actual-Lua fixture proves delete+turnOn leaves boot count 1 and no fresh report, then uses the same corrected yard bootstrap and waits for a second boot with a deliberate 20-second native timer. All eight saved pin states must remain unchanged.",
+  "attribution_limit": "The original CI log records no executor state or Lua instruction at the failing instant. Preserve that limitation rather than attributing its exact timing solely to one path.",
+  "verification_pending": false,
+  "stage_ci_pending": true,
+  "local_controls": [
+    {
+      "backend": "NATIVE",
+      "passed": true,
+      "native_bootstrap_and_existing_Pinout_checks": 4,
+      "legacy_probe": "No second boot or fresh report after deleting the first report and using ordinary native turnOn",
+      "corrected_probe": "Native reboot completes a second boot after at least 400 ticks; all eight switch states remain unchanged"
+    },
+    {
+      "backend": "JAVA",
+      "passed": true,
+      "native_bootstrap_and_existing_Pinout_checks": 4,
+      "legacy_probe": "No second boot or fresh report after deleting the first report and using ordinary native turnOn",
+      "corrected_probe": "Native reboot completes a second boot after at least 400 ticks; all eight switch states remain unchanged"
+    }
+  ],
+  "tested_artifact": {
+    "file": "wwpg-beta5-client-workflows-v5.jar",
+    "sha256": "009f9ad92dad1e53e679195eec3a6c1be3aa2de5c32669bfbb7416a14881a8ef"
+  }
+}

@@ -29,6 +29,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Verify stationary world export and preservation tools
+        run: python tools/test_stationary_export.py
       - if: runner.os != 'Windows'
         run: chmod +x gradlew
       - run: python tools/run_checked.py --timeout 1200 -- ./gradlew build -PtestProfile=${{ matrix.profile }} --no-daemon
@@ -53,12 +55,23 @@ jobs:
             python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_yard -PtestDirectory=run/yard -PrestartPhase=VERIFY --no-daemon
             cp run/yard/logs/latest.log "run/yard/restart-${pass}.log"
           done
+      - name: Export and extract the exact stationary yard ZIP
+        run: |
+          python tools/export_stationary_yard.py --run run/yard --jar build/libs/wwpg-0.1.0-beta.5-dev.jar --profile ${{ matrix.profile }} --output build/distributions/wwpg-stationary-${{ matrix.profile }}.zip
+          python tools/reopen_stationary_yard.py build/distributions/wwpg-stationary-${{ matrix.profile }}.zip --run run/exported-yard
+      - name: Three cold restarts of the extracted ZIP
+        run: |
+          for pass in 1 2 3; do
+            python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_yard -PtestDirectory=run/exported-yard -PrestartPhase=VERIFY --no-daemon
+            cp run/exported-yard/logs/latest.log "run/exported-yard/restart-${pass}.log"
+          done
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: wwpg-${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}
           path: |
             build/libs/*.jar
+            build/distributions/wwpg-stationary-*.zip
             build/reports/tests/
             build/watchdog/
             run/logs/
@@ -89,5 +102,13 @@ jobs:
             run/yard/packaged-*.json
             run/yard/restart-*.log
             run/yard/stationary-yard-stations.json
+            run/yard/stationary-yard-coverage.json
             run/yard/world/computercraft/computer/**/*.lua
             run/yard/world/computercraft/computer/**/*.json
+            run/exported-yard/logs/
+            run/exported-yard/crash-reports/
+            run/exported-yard/extracted-yard.json
+            run/exported-yard/packaged-*.json
+            run/exported-yard/restart-*.log
+            run/exported-yard/stationary-yard-stations.json
+            run/exported-yard/stationary-yard-coverage.json

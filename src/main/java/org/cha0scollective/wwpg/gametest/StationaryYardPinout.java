@@ -55,6 +55,7 @@ final class StationaryYardPinout {
             }
             var mount=new dan200.computercraft.api.filesystem.WritableMount[1];
             var started=new boolean[]{false};
+            var bootTick=new long[1];var readinessReported=new boolean[1];
             h.startSequence().thenWaitUntil(()->{
                 for(int x=s.origin().getX()>>4;x<=running.getX()>>4;x++)for(int z=s.origin().getZ()>>4;z<=stopped.getZ()>>4;z++) {
                     var chunk=new net.minecraft.world.level.ChunkPos(x,z);
@@ -85,8 +86,17 @@ final class StationaryYardPinout {
                         }
                     }catch(java.io.IOException error){throw new IllegalStateException(error);}
                 }
-                try{if(mount[0].exists("yard-ready.json"))mount[0].delete("yard-ready.json");}catch(java.io.IOException error){throw new IllegalStateException(error);}
-                computer.turnOn();started[0]=true;
+                try{YardComputerBootstrap.start(computer,mount[0],s.code(),level.getGameTime());}catch(java.io.IOException error){throw new IllegalStateException(error);}
+                started[0]=true;bootTick[0]=level.getGameTime();
+            });
+            yard.readinessChecks.add(()->{
+                h.assertTrue(started[0],s.code()+" waiting for native computer start");
+                try { h.assertTrue(mount[0].exists("yard-ready.json"),s.code()+" waiting for native Lua completion"); }
+                catch(java.io.IOException error){throw new IllegalStateException(error);}
+                if(!readinessReported[0]) {
+                    readinessReported[0]=true;
+                    org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info("YARD_LUA_COMPLETION: station={}; bootTick={}; readyTick={}; elapsedTicks={}",s.code(),bootTick[0],level.getGameTime(),level.getGameTime()-bootTick[0]);
+                }
             });
             yard.check(s,()->{
                 h.assertTrue(started[0],"Playable Lua computer has not started");

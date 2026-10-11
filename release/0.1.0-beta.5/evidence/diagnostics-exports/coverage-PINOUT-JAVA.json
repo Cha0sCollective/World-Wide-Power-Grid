@@ -1,0 +1,6065 @@
+{
+  "schema": 1,
+  "target": "0.1.0-beta.5",
+  "profile": "PINOUT",
+  "backend": "JAVA",
+  "stationary_completion": false,
+  "stations": [
+    {
+      "code": "B01",
+      "name": "Resistor",
+      "dimension": "minecraft:overworld",
+      "x": 32,
+      "y": 64,
+      "z": 8,
+      "instructions": [
+        "10 V / 10 mA",
+        "Change source V",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:resistor"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B02",
+      "name": "Capacitor",
+      "dimension": "minecraft:overworld",
+      "x": 48,
+      "y": 64,
+      "z": 8,
+      "instructions": [
+        "Charges to 10 V",
+        "Off: watch voltage",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:capacitor"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B03",
+      "name": "Inductor",
+      "dimension": "minecraft:overworld",
+      "x": 64,
+      "y": 64,
+      "z": 8,
+      "instructions": [
+        "About 0.98 A on",
+        "Switch feed off/on",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:inductor"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B04",
+      "name": "Potentiometer",
+      "dimension": "minecraft:overworld",
+      "x": 80,
+      "y": 64,
+      "z": 8,
+      "instructions": [
+        "Middle pin: 5 V",
+        "Turn board knob",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:potentiometer"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B05",
+      "name": "Varistor",
+      "dimension": "minecraft:overworld",
+      "x": 96,
+      "y": 64,
+      "z": 8,
+      "instructions": [
+        "Clamps under 120 V",
+        "Try 50 V supply",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:varistor"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B06",
+      "name": "Fuse holder",
+      "dimension": "minecraft:overworld",
+      "x": 32,
+      "y": 64,
+      "z": 24,
+      "instructions": [
+        "10 mA / 1 A fuse",
+        "Raise V: fuse trips",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:fuse_holder"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B07",
+      "name": "Switch",
+      "dimension": "minecraft:overworld",
+      "x": 48,
+      "y": 64,
+      "z": 24,
+      "instructions": [
+        "ON: about 10 mA",
+        "Click the switch",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:switch"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B08",
+      "name": "Button",
+      "dimension": "minecraft:overworld",
+      "x": 64,
+      "y": 64,
+      "z": 24,
+      "instructions": [
+        "Brief 10 mA pulse",
+        "Press the button",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:button"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B09",
+      "name": "Relay",
+      "dimension": "minecraft:overworld",
+      "x": 80,
+      "y": 64,
+      "z": 24,
+      "instructions": [
+        "Coil: about 0.11 A",
+        "Off: contacts swap",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:relay"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B10",
+      "name": "DPDT relay",
+      "dimension": "minecraft:overworld",
+      "x": 96,
+      "y": 64,
+      "z": 24,
+      "instructions": [
+        "2 contacts transfer",
+        "Off: probe contacts",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:relay_dpdt"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:via"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B11",
+      "name": "Redstone relay",
+      "dimension": "minecraft:overworld",
+      "x": 32,
+      "y": 64,
+      "z": 40,
+      "instructions": [
+        "ON: about 10 mA",
+        "Flip nearby lever",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:redstone_relay"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B12",
+      "name": "Diode",
+      "dimension": "minecraft:overworld",
+      "x": 48,
+      "y": 64,
+      "z": 40,
+      "instructions": [
+        "Forward: about 9 mA",
+        "Reverse source wires",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:diode"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B13",
+      "name": "NPN transistor",
+      "dimension": "minecraft:overworld",
+      "x": 64,
+      "y": 64,
+      "z": 40,
+      "instructions": [
+        "Base controls current",
+        "PAD1 supply: try 0",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:bjt_npn"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B14",
+      "name": "PNP transistor",
+      "dimension": "minecraft:overworld",
+      "x": 80,
+      "y": 64,
+      "z": 40,
+      "instructions": [
+        "Reversed supplies",
+        "PAD1 supply: try 0",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:bjt_pnp"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:via"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B15",
+      "name": "VFET",
+      "dimension": "minecraft:overworld",
+      "x": 96,
+      "y": 64,
+      "z": 40,
+      "instructions": [
+        "Gate controls current",
+        "PAD2 supply: try 0",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:vfet"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B16",
+      "name": "Triode",
+      "dimension": "minecraft:overworld",
+      "x": 32,
+      "y": 64,
+      "z": 56,
+      "instructions": [
+        "6 V heater; plate I",
+        "PAD3 heater: try 0",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:triode"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B17",
+      "name": "Pentode",
+      "dimension": "minecraft:overworld",
+      "x": 48,
+      "y": 64,
+      "z": 56,
+      "instructions": [
+        "Heater / screen bias",
+        "PAD3 heater: try 0",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:pentode"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:via"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B18",
+      "name": "Thyratron",
+      "dimension": "minecraft:overworld",
+      "x": 64,
+      "y": 64,
+      "z": 56,
+      "instructions": [
+        "Heated tube strikes",
+        "Switch plate off",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:thyratron"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B19",
+      "name": "Regulator tube",
+      "dimension": "minecraft:overworld",
+      "x": 80,
+      "y": 64,
+      "z": 56,
+      "instructions": [
+        "Holds about 60 V",
+        "Switch feed off/on",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:regulator_tube"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B20",
+      "name": "Barretter tube",
+      "dimension": "minecraft:overworld",
+      "x": 96,
+      "y": 64,
+      "z": 56,
+      "instructions": [
+        "About 0.1 A",
+        "Try 10 V / 20 V",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:barretter_tube"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B21",
+      "name": "Neon bulb",
+      "dimension": "minecraft:overworld",
+      "x": 32,
+      "y": 64,
+      "z": 72,
+      "instructions": [
+        "Glows at about 45 V",
+        "Switch feed off/on",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:neon_bulb"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B22",
+      "name": "Light bulb",
+      "dimension": "minecraft:overworld",
+      "x": 48,
+      "y": 64,
+      "z": 72,
+      "instructions": [
+        "Board bulb glows",
+        "Off: bulb cools",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:light_bulb"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B23",
+      "name": "Voltage gauge",
+      "dimension": "minecraft:overworld",
+      "x": 64,
+      "y": 64,
+      "z": 72,
+      "instructions": [
+        "Board gauge: 10 V",
+        "Change source V",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B24",
+      "name": "Current gauge",
+      "dimension": "minecraft:overworld",
+      "x": 80,
+      "y": 64,
+      "z": 72,
+      "instructions": [
+        "Board gauge: 5 mA",
+        "Change source V",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:current_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B25",
+      "name": "Display module",
+      "dimension": "minecraft:overworld",
+      "x": 96,
+      "y": 64,
+      "z": 72,
+      "instructions": [
+        "Counts ON pulses",
+        "Switch feed off/on",
+        "Restore the labeled supply and feed switch"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:display_module"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "P1",
+      "name": "Gauges / light",
+      "dimension": "minecraft:overworld",
+      "x": 32,
+      "y": 64,
+      "z": 94,
+      "instructions": [
+        "Use the labeled panel control and watch its lamp or receiver",
+        "Wear goggles for voltage, current, energy and frequency readings",
+        "Restore the control; repair or reset protection at its labeled load"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:bulb"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:electrical_panel"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "panel_attachment",
+          "id": "electroenergetics:ammeter"
+        },
+        {
+          "registry": "panel_attachment",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "panel_attachment",
+          "id": "electroenergetics:voltmeter"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "P2",
+      "name": "Cut-off switch",
+      "dimension": "minecraft:overworld",
+      "x": 48,
+      "y": 64,
+      "z": 94,
+      "instructions": [
+        "Use the labeled panel control and watch its lamp or receiver",
+        "Wear goggles for voltage, current, energy and frequency readings",
+        "Restore the control; repair or reset protection at its labeled load"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:bulb"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:electrical_panel"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "panel_attachment",
+          "id": "electroenergetics:cut_off_switch"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "P3",
+      "name": "Emergency stop",
+      "dimension": "minecraft:overworld",
+      "x": 64,
+      "y": 64,
+      "z": 94,
+      "instructions": [
+        "Use the labeled panel control and watch its lamp or receiver",
+        "Wear goggles for voltage, current, energy and frequency readings",
+        "Restore the control; repair or reset protection at its labeled load"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:bulb"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:electrical_panel"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "panel_attachment",
+          "id": "electroenergetics:emergency_stop_button"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "P4",
+      "name": "Momentary switch",
+      "dimension": "minecraft:overworld",
+      "x": 80,
+      "y": 64,
+      "z": 94,
+      "instructions": [
+        "Use the labeled panel control and watch its lamp or receiver",
+        "Wear goggles for voltage, current, energy and frequency readings",
+        "Restore the control; repair or reset protection at its labeled load"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:bulb"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:electrical_panel"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "panel_attachment",
+          "id": "electroenergetics:momentary_switch"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "P5",
+      "name": "Circuit breaker",
+      "dimension": "minecraft:overworld",
+      "x": 96,
+      "y": 64,
+      "z": 94,
+      "instructions": [
+        "Use the labeled panel control and watch its lamp or receiver",
+        "Wear goggles for voltage, current, energy and frequency readings",
+        "Restore the control; repair or reset protection at its labeled load"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:bulb"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:electrical_panel"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "panel_attachment",
+          "id": "electroenergetics:miniature_circuit_breaker"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "P6",
+      "name": "Energy meter",
+      "dimension": "minecraft:overworld",
+      "x": 32,
+      "y": 64,
+      "z": 108,
+      "instructions": [
+        "Use the labeled panel control and watch its lamp or receiver",
+        "Wear goggles for voltage, current, energy and frequency readings",
+        "Restore the control; repair or reset protection at its labeled load"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:bulb"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:electrical_panel"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "panel_attachment",
+          "id": "electroenergetics:energy_meter"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "P7",
+      "name": "3-pole meter",
+      "dimension": "minecraft:overworld",
+      "x": 48,
+      "y": 64,
+      "z": 108,
+      "instructions": [
+        "Use the labeled panel control and watch its lamp or receiver",
+        "Wear goggles for voltage, current, energy and frequency readings",
+        "Restore the control; repair or reset protection at its labeled load"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:bulb"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:electrical_panel"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "panel_attachment",
+          "id": "electroenergetics:tri_polar_energy_meter"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "P8",
+      "name": "Analog lever",
+      "dimension": "minecraft:overworld",
+      "x": 64,
+      "y": 64,
+      "z": 108,
+      "instructions": [
+        "Use the labeled panel control and watch its lamp or receiver",
+        "Wear goggles for voltage, current, energy and frequency readings",
+        "Restore the control; repair or reset protection at its labeled load"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:electrical_panel"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "panel_attachment",
+          "id": "electroenergetics:analog_lever"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "P9",
+      "name": "Steering wheel",
+      "dimension": "minecraft:overworld",
+      "x": 80,
+      "y": 64,
+      "z": 108,
+      "instructions": [
+        "Use the labeled panel control and watch its lamp or receiver",
+        "Wear goggles for voltage, current, energy and frequency readings",
+        "Restore the control; repair or reset protection at its labeled load"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:electrical_panel"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "panel_attachment",
+          "id": "electroenergetics:steering_wheel"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "T1",
+      "name": "CEE step-down",
+      "dimension": "minecraft:overworld",
+      "x": 32,
+      "y": 64,
+      "z": 124,
+      "instructions": [
+        "100.0 V input; about 50.0 V output",
+        "Use goggles or probes; turn the variac crank or redstone lever where fitted",
+        "Restore the labeled source and winding settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:transformer"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "T2",
+      "name": "CEE step-up",
+      "dimension": "minecraft:overworld",
+      "x": 48,
+      "y": 64,
+      "z": 124,
+      "instructions": [
+        "100.0 V input; about 200.0 V output",
+        "Use goggles or probes; turn the variac crank or redstone lever where fitted",
+        "Restore the labeled source and winding settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:transformer"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "T3",
+      "name": "PG small step-up",
+      "dimension": "minecraft:overworld",
+      "x": 64,
+      "y": 64,
+      "z": 124,
+      "instructions": [
+        "20.0 V input; about 40.0 V output",
+        "Use goggles or probes; turn the variac crank or redstone lever where fitted",
+        "Restore the labeled source and winding settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:transformer_small"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "T4",
+      "name": "PG medium step-down",
+      "dimension": "minecraft:overworld",
+      "x": 80,
+      "y": 64,
+      "z": 124,
+      "instructions": [
+        "20.0 V input; about 10.0 V output",
+        "Use goggles or probes; turn the variac crank or redstone lever where fitted",
+        "Restore the labeled source and winding settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:transformer_medium"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "T5",
+      "name": "PG variac",
+      "dimension": "minecraft:overworld",
+      "x": 96,
+      "y": 64,
+      "z": 124,
+      "instructions": [
+        "20.0 V input; about 20.0 V output",
+        "Use goggles or probes; turn the variac crank or redstone lever where fitted",
+        "Restore the labeled source and winding settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:variac"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "T6",
+      "name": "CEE variac",
+      "dimension": "minecraft:overworld",
+      "x": 32,
+      "y": 64,
+      "z": 140,
+      "instructions": [
+        "20.0 V input; about 10.0 V output",
+        "Use goggles or probes; turn the variac crank or redstone lever where fitted",
+        "Restore the labeled source and winding settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:variac"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "T7",
+      "name": "CEE RS variac",
+      "dimension": "minecraft:overworld",
+      "x": 48,
+      "y": 64,
+      "z": 140,
+      "instructions": [
+        "20.0 V input; about 20.0 V output",
+        "Use goggles or probes; turn the variac crank or redstone lever where fitted",
+        "Restore the labeled source and winding settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:redstone_variac"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "M1",
+      "name": "PG meter bank",
+      "dimension": "minecraft:overworld",
+      "x": 32,
+      "y": 64,
+      "z": 156,
+      "instructions": [
+        "10 V, about 1 A and 10 W; energy rises",
+        "Use both handheld meters on terminals and wires",
+        "Restore the supply to 10 V"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:current_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:energy_meter"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:power_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "M2",
+      "name": "CEE meter bank",
+      "dimension": "minecraft:overworld",
+      "x": 64,
+      "y": 64,
+      "z": 156,
+      "instructions": [
+        "10 V, about 1 A and 10 W; energy rises",
+        "Use both handheld meters on terminals and wires",
+        "Restore the supply to 10 V"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:ammeter"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:energy_meter"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:voltmeter"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "M3",
+      "name": "AC frequency",
+      "dimension": "minecraft:overworld",
+      "x": 96,
+      "y": 64,
+      "z": 156,
+      "instructions": [
+        "50 Hz AC",
+        "Wear goggles and inspect the frequency reading",
+        "Restore the labeled AC source"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:frequency_meter"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D1",
+      "name": "CEE cut-off",
+      "dimension": "minecraft:overworld",
+      "x": 32,
+      "y": 64,
+      "z": 176,
+      "instructions": [
+        "150 V lamp feed; momentary controls light only while pressed",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:bulb"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D2",
+      "name": "CEE double",
+      "dimension": "minecraft:overworld",
+      "x": 48,
+      "y": 64,
+      "z": 176,
+      "instructions": [
+        "150 V lamp feed; momentary controls light only while pressed",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:bulb"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:double_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D3",
+      "name": "CEE e-stop",
+      "dimension": "minecraft:overworld",
+      "x": 64,
+      "y": 64,
+      "z": 176,
+      "instructions": [
+        "150 V lamp feed; momentary controls light only while pressed",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:bulb"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:emergency_stop_button"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D4",
+      "name": "CEE momentary",
+      "dimension": "minecraft:overworld",
+      "x": 80,
+      "y": 64,
+      "z": 176,
+      "instructions": [
+        "150 V lamp feed; momentary controls light only while pressed",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:bulb"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:momentary_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D5",
+      "name": "PG LV switch",
+      "dimension": "minecraft:overworld",
+      "x": 96,
+      "y": 64,
+      "z": 176,
+      "instructions": [
+        "150 V lamp feed; momentary controls light only while pressed",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:bulb"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:lv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D6",
+      "name": "PG MV switch",
+      "dimension": "minecraft:overworld",
+      "x": 32,
+      "y": 64,
+      "z": 190,
+      "instructions": [
+        "150 V lamp feed; momentary controls light only while pressed",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:bulb"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D7",
+      "name": "PG LV button",
+      "dimension": "minecraft:overworld",
+      "x": 48,
+      "y": 64,
+      "z": 190,
+      "instructions": [
+        "150 V lamp feed; momentary controls light only while pressed",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:bulb"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:lv_button"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D8",
+      "name": "CEE connector",
+      "dimension": "minecraft:overworld",
+      "x": 64,
+      "y": 64,
+      "z": 190,
+      "instructions": [
+        "10 V at the load",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D9",
+      "name": "CEE double",
+      "dimension": "minecraft:overworld",
+      "x": 80,
+      "y": 64,
+      "z": 190,
+      "instructions": [
+        "10 V at the load",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:double_connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D10",
+      "name": "CEE triple",
+      "dimension": "minecraft:overworld",
+      "x": 96,
+      "y": 64,
+      "z": 190,
+      "instructions": [
+        "10 V at the load",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:triple_connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D11",
+      "name": "CEE quad",
+      "dimension": "minecraft:overworld",
+      "x": 32,
+      "y": 64,
+      "z": 204,
+      "instructions": [
+        "10 V at the load",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:quad_connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D12",
+      "name": "CEE duplex",
+      "dimension": "minecraft:overworld",
+      "x": 48,
+      "y": 64,
+      "z": 204,
+      "instructions": [
+        "10 V at the load",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:duplex_wire_termination"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D13",
+      "name": "PG connector",
+      "dimension": "minecraft:overworld",
+      "x": 64,
+      "y": 64,
+      "z": 204,
+      "instructions": [
+        "10 V at the load",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:wire_connector"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D14",
+      "name": "PG heavy",
+      "dimension": "minecraft:overworld",
+      "x": 80,
+      "y": 64,
+      "z": 204,
+      "instructions": [
+        "10 V at the load",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:heavy_wire_connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D15",
+      "name": "PG ceiling",
+      "dimension": "minecraft:overworld",
+      "x": 96,
+      "y": 64,
+      "z": 204,
+      "instructions": [
+        "10 V at the load",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:ceiling_tile_connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D16",
+      "name": "CEE motor",
+      "dimension": "minecraft:overworld",
+      "x": 32,
+      "y": 64,
+      "z": 218,
+      "instructions": [
+        "Motor shaft output, charging or stored-energy output at the labeled settings",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:white_electric_motor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D17",
+      "name": "PG motor",
+      "dimension": "minecraft:overworld",
+      "x": 48,
+      "y": 64,
+      "z": 218,
+      "instructions": [
+        "Motor shaft output, charging or stored-energy output at the labeled settings",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:electric_motor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D18",
+      "name": "CEE capacitor",
+      "dimension": "minecraft:overworld",
+      "x": 64,
+      "y": 64,
+      "z": 218,
+      "instructions": [
+        "Motor shaft output, charging or stored-energy output at the labeled settings",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:capacitor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D19",
+      "name": "CEE HV cap",
+      "dimension": "minecraft:overworld",
+      "x": 80,
+      "y": 64,
+      "z": 218,
+      "instructions": [
+        "Motor shaft output, charging or stored-energy output at the labeled settings",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:high_voltage_capacitor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D20",
+      "name": "CEE inductor",
+      "dimension": "minecraft:overworld",
+      "x": 96,
+      "y": 64,
+      "z": 218,
+      "instructions": [
+        "Motor shaft output, charging or stored-energy output at the labeled settings",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:inductor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D21",
+      "name": "PG battery",
+      "dimension": "minecraft:overworld",
+      "x": 32,
+      "y": 64,
+      "z": 232,
+      "instructions": [
+        "Motor shaft output, charging or stored-energy output at the labeled settings",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:portable_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "D22",
+      "name": "CEE accumulator",
+      "dimension": "minecraft:overworld",
+      "x": 48,
+      "y": 64,
+      "z": 232,
+      "instructions": [
+        "Motor shaft output, charging or stored-energy output at the labeled settings",
+        "Use the labeled native control or feed switch; inspect the output gauge",
+        "Restore the feed and original settings"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:accumulator"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "B26",
+      "name": "Routing board: via, label and pins",
+      "dimension": "minecraft:overworld",
+      "x": 80,
+      "y": 64,
+      "z": 140,
+      "instructions": [
+        "10 V / 10 mA across front and back traces",
+        "Use the meters on the two external pins",
+        "Restore the supply to 10 V"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:label"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:resistor"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:via"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "F01",
+      "name": "Panel and board factory",
+      "dimension": "minecraft:overworld",
+      "x": 5,
+      "y": 64,
+      "z": 4,
+      "instructions": [
+        "Factory enable changes the RUN/OFF lamps after a short capacitor delay",
+        "Heater has a separate 600 V feed; pump moves water between tanks",
+        "Restore Factory enable and refill the input tank"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:bulb"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:electric_pump"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:electrical_panel"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:resistive_heater"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:capacitor"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:relay"
+        },
+        {
+          "registry": "panel_attachment",
+          "id": "electroenergetics:ammeter"
+        },
+        {
+          "registry": "panel_attachment",
+          "id": "electroenergetics:cut_off_switch"
+        },
+        {
+          "registry": "panel_attachment",
+          "id": "electroenergetics:voltmeter"
+        }
+      ],
+      "checked_workflow_content": []
+    },
+    {
+      "code": "S01",
+      "name": "Light Fixture",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 8,
+      "instructions": [
+        "Click feed: light",
+        "120 V when ON",
+        "Replace native bulb"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:light_fixture"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:light_fixture"
+      ]
+    },
+    {
+      "code": "S02",
+      "name": "Ceiling Tile Lamp",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 8,
+      "instructions": [
+        "Click feed: light",
+        "120 V when ON",
+        "Replace native bulb"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:ceiling_tile_lamp"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:ceiling_tile_lamp"
+      ]
+    },
+    {
+      "code": "S03",
+      "name": "Factory Light",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 8,
+      "instructions": [
+        "Click feed: light",
+        "120 V when ON",
+        "Replace native bulb"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:device_connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:factory_light"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:factory_light_light"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:factory_light",
+        "powergrid:factory_light_light"
+      ]
+    },
+    {
+      "code": "S04",
+      "name": "Electric Fan",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 8,
+      "instructions": [
+        "Feed controls output",
+        "Goggles: V/current",
+        "Switch OFF to stop"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:electric_fan"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:electric_fan"
+      ]
+    },
+    {
+      "code": "S05",
+      "name": "Electromagnet",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 8,
+      "instructions": [
+        "Feed controls output",
+        "Goggles: V/current",
+        "Switch OFF to stop"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:device_connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:electromagnet"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:electromagnet"
+      ]
+    },
+    {
+      "code": "S06",
+      "name": "Alarm Bell",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 26,
+      "instructions": [
+        "Feed controls output",
+        "Goggles: V/current",
+        "Switch OFF to stop"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:alarm_bell"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:alarm_bell"
+      ]
+    },
+    {
+      "code": "S07",
+      "name": "Buzzer",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 26,
+      "instructions": [
+        "Feed controls output",
+        "Goggles: V/current",
+        "Switch OFF to stop"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:buzzer"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:buzzer"
+      ]
+    },
+    {
+      "code": "S08",
+      "name": "Constant Speed Motor",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 26,
+      "instructions": [
+        "Feed controls output",
+        "Goggles: V/current",
+        "Switch OFF to stop"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:constant_speed_motor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:constant_speed_motor"
+      ]
+    },
+    {
+      "code": "S09",
+      "name": "Heating Coil",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 26,
+      "instructions": [
+        "Feed heats the basin",
+        "Thermometer: Celsius",
+        "OFF cools; max stays"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:device_connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:heating_coil"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:thermometer"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:heating_coil",
+        "powergrid:thermometer"
+      ]
+    },
+    {
+      "code": "S10",
+      "name": "Basin Heater",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 26,
+      "instructions": [
+        "Feed heats the basin",
+        "Thermometer: Celsius",
+        "OFF cools; max stays"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:basin_heater"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:device_connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:thermometer"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:basin_heater",
+        "powergrid:thermometer"
+      ]
+    },
+    {
+      "code": "S11",
+      "name": "Solar panel",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 44,
+      "instructions": [
+        "Sun powers meter",
+        "Cover panel: OFF",
+        "Remove cover: ON"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:device_connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:solar_panel"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:solar_panel"
+      ]
+    },
+    {
+      "code": "S12",
+      "name": "Ceiling solar",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 44,
+      "instructions": [
+        "Sun powers meter",
+        "Cover panel: OFF",
+        "Remove cover: ON"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:ceiling_tile_solar"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:device_connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:ceiling_tile_solar"
+      ]
+    },
+    {
+      "code": "S13",
+      "name": "Stationary battery",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 44,
+      "instructions": [
+        "Charge switch: ON",
+        "OFF: stored power",
+        "About 12 V output"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:device_connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:battery"
+      ]
+    },
+    {
+      "code": "S14",
+      "name": "Potato battery",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 44,
+      "instructions": [
+        "Battery -> meter",
+        "Cannot recharge",
+        "Replace to reset"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:potato_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:potato_battery"
+      ]
+    },
+    {
+      "code": "S15",
+      "name": "Plotter",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 44,
+      "instructions": [
+        "Feed draws a graph",
+        "Open plotter: view",
+        "Source: 0 to 1 V"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:plotter"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:plotter"
+      ]
+    },
+    {
+      "code": "S16",
+      "name": "Carbon pile",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 62,
+      "instructions": [
+        "Feed varies pile R",
+        "Goggles: resistance",
+        "Remove coal: OFF"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:carbon_pile"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:carbon_pile_coil"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:carbon_pile",
+        "powergrid:carbon_pile_coil"
+      ]
+    },
+    {
+      "code": "S17",
+      "name": "Spark gap",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 62,
+      "instructions": [
+        "Feed makes an arc",
+        "1500 V / ballast",
+        "OFF stops sparks"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:spark_gap"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:spark_gap"
+      ]
+    },
+    {
+      "code": "S18",
+      "name": "FE conversion",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 62,
+      "instructions": [
+        "Electric -> FE -> V",
+        "Goggles: both stores",
+        "Control V cuts out"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:converter"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:fe_inverter"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:converter",
+        "powergrid:fe_inverter"
+      ]
+    },
+    {
+      "code": "S19",
+      "name": "Core + radiator",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 62,
+      "instructions": [
+        "100 V -> 50 V",
+        "Scroll winding turns",
+        "Radiator adds cooling"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:radiator_panel"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:transformer_core"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:transformer_core",
+        "electroenergetics:radiator_panel"
+      ]
+    },
+    {
+      "code": "S20",
+      "name": "Voltage regulator",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 62,
+      "instructions": [
+        "100 V -> 110 V",
+        "Scroll target voltage",
+        "Change supply: holds"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:voltage_regulator"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:voltage_regulator"
+      ]
+    },
+    {
+      "code": "S21",
+      "name": "Current transformer",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 80,
+      "instructions": [
+        "20 V -> about 2 V",
+        "Scroll ratio: 10:1",
+        "1:1 = about 20 V"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:current_transformer"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:current_transformer"
+      ]
+    },
+    {
+      "code": "S22",
+      "name": "Concrete pole",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 80,
+      "instructions": [
+        "3-segment power pole",
+        "100 V at the load",
+        "Break middle: OFF"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:concrete_pole"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:concrete_pole"
+      ]
+    },
+    {
+      "code": "S23",
+      "name": "Mounted breaker",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 80,
+      "instructions": [
+        "100 V with feed ON",
+        "Lever opens breaker",
+        "OFF lever = reset"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:concrete_pole"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:insulator"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:pole_mount"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:sulfur_hexafluoride_breaker"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:pole_mount",
+        "electroenergetics:insulator",
+        "electroenergetics:sulfur_hexafluoride_breaker"
+      ]
+    },
+    {
+      "code": "S24",
+      "name": "Cathode Ray Tube",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 80,
+      "instructions": [
+        "Heater feed: beam",
+        "Scroll X/Y: move dot",
+        "Grid: 0 V to reset"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:crt"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:crt"
+      ]
+    },
+    {
+      "code": "S25",
+      "name": "Andesite Encased CRT",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 80,
+      "instructions": [
+        "Heater feed: beam",
+        "Scroll X/Y: move dot",
+        "Grid: 0 V to reset"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:andesite_encased_crt"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:crt"
+      ]
+    },
+    {
+      "code": "S26",
+      "name": "Brass Encased CRT",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 98,
+      "instructions": [
+        "Heater feed: beam",
+        "Scroll X/Y: move dot",
+        "Grid: 0 V to reset"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:brass_encased_crt"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:crt"
+      ]
+    },
+    {
+      "code": "S27",
+      "name": "Punch-card reader",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 98,
+      "instructions": [
+        "Card runs 8 lamps",
+        "Reverse motor: reset",
+        "Remove / edit card"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:punch_card_reader"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:punch_card_reader",
+        "electroenergetics:indicator_bulb"
+      ]
+    },
+    {
+      "code": "S28",
+      "name": "CEE alternator",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 98,
+      "instructions": [
+        "Motor speed makes V",
+        "Stop drive: no power",
+        "32 RPM: about 48 V"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:alternator_brushes"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:alternator_rotor"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:stator"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:alternator_brushes",
+        "electroenergetics:alternator_rotor",
+        "electroenergetics:stator"
+      ]
+    },
+    {
+      "code": "S29",
+      "name": "Three-phase alternator",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 98,
+      "instructions": [
+        "Motor speed makes V",
+        "Stop drive: no power",
+        "Goggles: AC / phase"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:alternator_rotor"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:stator"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:synchroscope"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:three_phase_alternator_brushes"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:three_phase_alternator_brushes",
+        "electroenergetics:synchroscope"
+      ]
+    },
+    {
+      "code": "S30",
+      "name": "PG generator",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 98,
+      "instructions": [
+        "Feed = excitation",
+        "Drive speed changes V",
+        "OFF removes power"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:device_connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:generator_clutch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:generator_commutator"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:generator_induction_rotor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:winding"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:generator_induction_rotor",
+        "powergrid:generator_commutator",
+        "powergrid:generator_clutch",
+        "powergrid:winding",
+        "powergrid:device_connector"
+      ]
+    },
+    {
+      "code": "S31",
+      "name": "Large generator",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 116,
+      "instructions": [
+        "Feed = excitation",
+        "Drive speed changes V",
+        "OFF removes power"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:device_connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:generator_clutch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:generator_commutator"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:generator_large_induction_rotor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:winding"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:generator_large_induction_rotor",
+        "powergrid:generator_commutator",
+        "powergrid:generator_clutch",
+        "powergrid:winding",
+        "powergrid:device_connector"
+      ]
+    },
+    {
+      "code": "S32",
+      "name": "Vertical generator",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 116,
+      "instructions": [
+        "Feed = excitation",
+        "Drive speed changes V",
+        "OFF removes power"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:device_connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:generator_clutch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:generator_large_induction_rotor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:generator_vertical_commutator"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:winding"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:generator_large_induction_rotor",
+        "powergrid:generator_vertical_commutator",
+        "powergrid:generator_clutch",
+        "powergrid:winding",
+        "powergrid:device_connector"
+      ]
+    },
+    {
+      "code": "S33",
+      "name": "Generator housing",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 116,
+      "instructions": [
+        "Feed excites 2 coils",
+        "Goggles: coil current",
+        "Remove housing: split"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:device_connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:generator_housing"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:winding"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:generator_housing"
+      ]
+    },
+    {
+      "code": "S34",
+      "name": "Vertical housing",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 116,
+      "instructions": [
+        "Feed excites 2 coils",
+        "Goggles: coil current",
+        "Remove housing: split"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:device_connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:winding"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:vertical_generator_housing"
+      ]
+    },
+    {
+      "code": "S35",
+      "name": "CEE relay",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 116,
+      "instructions": [
+        "Feed runs relay coil",
+        "Relay switches lamp",
+        "6 V coil / 70 V lamp"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:relay"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:relay"
+      ]
+    },
+    {
+      "code": "S36",
+      "name": "PG contactor",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 134,
+      "instructions": [
+        "Feed runs relay coil",
+        "Relay switches lamp",
+        "30 V coil / 70 V lamp"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:contactor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:device_connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:contactor"
+      ]
+    },
+    {
+      "code": "S37",
+      "name": "Redstone relay",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 134,
+      "instructions": [
+        "Lever switches lamp",
+        "Feed: 70 V supply",
+        "Lever OFF: dark"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:redstone_relay"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:redstone_relay"
+      ]
+    },
+    {
+      "code": "S38",
+      "name": "Redstone converter",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 134,
+      "instructions": [
+        "Lever switches lamp",
+        "Feed: 70 V supply",
+        "Lever OFF: dark"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:redstone_converter"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:redstone_converter"
+      ]
+    },
+    {
+      "code": "S39",
+      "name": "Shaft divider",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 134,
+      "instructions": [
+        "10 V at initial arm",
+        "Crank lowers voltage",
+        "Return arm: reset"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:potentiometer"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:potentiometer"
+      ]
+    },
+    {
+      "code": "S40",
+      "name": "Redstone divider",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 134,
+      "instructions": [
+        "10 V at initial arm",
+        "Lever lowers voltage",
+        "Return arm: reset"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:redstone_potentiometer"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:redstone_potentiometer"
+      ]
+    },
+    {
+      "code": "S41",
+      "name": "PG rheostat",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 152,
+      "instructions": [
+        "Crank changes voltage",
+        "20 V input supply",
+        "Goggles: divider arm"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:rheostat"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:rheostat"
+      ]
+    },
+    {
+      "code": "S42",
+      "name": "Servo",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 152,
+      "instructions": [
+        "Control V moves arm",
+        "2.5 V -> 180 degrees",
+        "0 V -> center"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:servo"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:servo"
+      ]
+    },
+    {
+      "code": "S43",
+      "name": "Modular display",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 152,
+      "instructions": [
+        "Feed OFF / ON: count",
+        "Right-click a module",
+        "Saved count persists"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:modular_display"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:modular_display"
+      ]
+    },
+    {
+      "code": "S44",
+      "name": "Current source",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 152,
+      "instructions": [
+        "0.1 A -> 100 ohms",
+        "About 10 V output",
+        "Scroll current varies V"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_current_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:creative_current_source",
+        "electroenergetics:resistor"
+      ]
+    },
+    {
+      "code": "S45",
+      "name": "Two-channel lamp",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 152,
+      "instructions": [
+        "Both channels lit",
+        "70 V = full / 35 = half",
+        "Feed OFF: dark"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:indicator_bulb"
+      ]
+    },
+    {
+      "code": "S46",
+      "name": "Bulb repair",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 170,
+      "instructions": [
+        "40 V lights the bulb",
+        "1000 V breaks it",
+        "40 V + copper: reset"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:broken_bulb"
+      ]
+    },
+    {
+      "code": "S47",
+      "name": "CEE fuse repair",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 170,
+      "instructions": [
+        "1 A protection",
+        "Load 1 ohm: trips",
+        "1000 ohm + copper"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:fuse"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:fuse",
+        "electroenergetics:broken_fuse"
+      ]
+    },
+    {
+      "code": "S48",
+      "name": "PG fuse repair",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 170,
+      "instructions": [
+        "1 A protection",
+        "Load 1 ohm: trips",
+        "1000 ohm + iron wire"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:fuse_holder"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:fuse_holder"
+      ]
+    },
+    {
+      "code": "S49",
+      "name": "Held CEE fuse",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 170,
+      "instructions": [
+        "Native inserted fuse",
+        "1 A rating / 20 V",
+        "Swap fuse to repair"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:fuse_holder"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:fuse_holder"
+      ]
+    },
+    {
+      "code": "S50",
+      "name": "CEE HV switch",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 170,
+      "instructions": [
+        "Click big switch",
+        "Watch moving contact",
+        "100 V when closed"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:connector"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:high_voltage_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:high_voltage_switch"
+      ]
+    },
+    {
+      "code": "S51",
+      "name": "PG HV switch",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 188,
+      "instructions": [
+        "Drive +64: close",
+        "Drive -64: open",
+        "Watch contact / gauge"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:hv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:hv_switch"
+      ]
+    },
+    {
+      "code": "S52",
+      "name": "PG HV breaker",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 188,
+      "instructions": [
+        "Drive charges spring",
+        "Lever ON: close",
+        "Load 1 ohm: trips"
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:hv_breaker"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:hv_breaker"
+      ]
+    },
+    {
+      "code": "S53",
+      "name": "Held switch + lamp",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 188,
+      "instructions": [
+        "Click left insert",
+        "Held lamp ON/OFF",
+        "70 V ON / 0 V OFF",
+        "Dye right insert; use a wrench to remove either part."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:connector"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:fuse_holder"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:ground_rod"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:fuse_holder"
+      ]
+    },
+    {
+      "code": "S54",
+      "name": "Held copper bypass",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 188,
+      "instructions": [
+        "70 V / about 70 mA",
+        "Click copper: OFF",
+        "Copper ingot: repair",
+        "This bypass has no fuse protection; use only the supplied lamp load."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:fuse_holder"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:fuse_holder"
+      ]
+    },
+    {
+      "code": "S55",
+      "name": "Cord junction",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 188,
+      "instructions": [
+        "Cord carries 70 V",
+        "Feed: lamp ON/OFF",
+        "Unplug / reconnect",
+        "Use the PG cord and socket, then select both exposed load terminals."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:cord_junction"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:socket"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:cord_junction"
+      ]
+    },
+    {
+      "code": "S56",
+      "name": "Ceiling cord junction",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 206,
+      "instructions": [
+        "Cord carries 70 V",
+        "Feed: lamp ON/OFF",
+        "Unplug / reconnect",
+        "Use the PG cord and socket, then select both exposed load terminals."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:ceiling_tile_junction"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:socket"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:ceiling_tile_junction"
+      ]
+    },
+    {
+      "code": "S57",
+      "name": "Socket and split cord",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 206,
+      "instructions": [
+        "70 V lights lamp",
+        "Empty hand: unplug",
+        "Cord: reconnect",
+        "The socket's two visible terminals keep their native polarity and hidden cord endpoints."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:socket"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:socket"
+      ]
+    },
+    {
+      "code": "S58",
+      "name": "Both physical grounds",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 206,
+      "instructions": [
+        "Load: 10 V / 0.1 A",
+        "Rods set reference",
+        "Change soil / rewire",
+        "Removing one rod changes voltage relative to earth; the load keeps its 10 V supply."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:grounding_rod"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:ground_rod",
+        "powergrid:grounding_rod"
+      ]
+    },
+    {
+      "code": "S59",
+      "name": "CEE diode polarity",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 206,
+      "instructions": [
+        "Forward: lamp ON",
+        "Load: about 68.86 V",
+        "Reverse wires: OFF",
+        "Reconnect the supply with its original polarity to reset. CEE 1.1.3 clamps its diode linearisation at 0.8 V; its loaded drop is about 1.14 V here."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:diode"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:diode"
+      ]
+    },
+    {
+      "code": "S60",
+      "name": "Dyed string lights",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 206,
+      "instructions": [
+        "120 V: red / blue",
+        "Feed OFF: cools",
+        "Cutter returns cord",
+        "Native dye recipe, item cost, filament heat and light blocks are retained."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:socket"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:string_light_block"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:string_light_block"
+      ]
+    },
+    {
+      "code": "S61",
+      "name": "Powered saved design",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 224,
+      "instructions": [
+        "Open powered table",
+        "Saved via + label",
+        "Board: 10 V / 10 mA",
+        "Edit, save, copy and assemble with native PG items. The supplied board is made from this table's saved design."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_design_table"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:socket"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:label"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:resistor"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:via"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:circuit_design_table"
+      ]
+    },
+    {
+      "code": "S62",
+      "name": "Native power resistor",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 224,
+      "instructions": [
+        "70 V / 70 mA",
+        "Scroll: 1000 ohms",
+        "Feed OFF: zero amps",
+        "Change native resistance and compare V / R against your handheld readings."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:power_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:power_resistor"
+      ]
+    },
+    {
+      "code": "S63",
+      "name": "PG water transfer",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 224,
+      "instructions": [
+        "Feed pumps water",
+        "North -> south tank",
+        "Refill north to reset",
+        "Use buckets to empty the south tank and refill the north tank. No power means no pumping."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:device_connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:electric_pump"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:electric_pump"
+      ]
+    },
+    {
+      "code": "S64",
+      "name": "Stationary catenary",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 224,
+      "instructions": [
+        "40 V: lamp lit",
+        "Wrench: four styles",
+        "Empty spool: recover",
+        "Copper spool reconnects the holders. Moving trains remain outside this release."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:catenary_holder"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:concrete_pole"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:catenary_holder"
+      ]
+    },
+    {
+      "code": "S65",
+      "name": "Power through Nether",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 224,
+      "instructions": [
+        "70 V at both ends",
+        "Enter this portal",
+        "Feed OFF: lamp OFF",
+        "Follow the white path at the Nether landing. Both native transformer ends are kept loaded in this demonstration."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:nether_transformer"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:nether_transformer",
+        "powergrid:transformer_core"
+      ]
+    },
+    {
+      "code": "S66",
+      "name": "Fan flour washing",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 242,
+      "instructions": [
+        "Throw flour in water",
+        "Flour -> dough",
+        "Feed OFF stops work",
+        "The adjacent chest contains the product made during acceptance and spare input to repeat the native recipe."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:electric_fan"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:electric_fan"
+      ]
+    },
+    {
+      "code": "S67",
+      "name": "Magnet making",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 242,
+      "instructions": [
+        "Throw alloy under",
+        "Alloy -> magnet",
+        "Feed OFF stops work",
+        "The adjacent chest contains the product made during acceptance and spare input to repeat the native recipe."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:device_connector"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:electromagnet"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "powergrid:electromagnet"
+      ]
+    },
+    {
+      "code": "S68",
+      "name": "copper wire",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 242,
+      "instructions": [
+        "10 V: lamp lights",
+        "Feed stops the lamp",
+        "Spool / cutter demo",
+        "The native wire carries power from a PG switch into a CEE lamp. Recover it using an empty spool or cutters, then reconnect with its matching CEE spool. Colored variants use dye in the offhand."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:copper"
+      ]
+    },
+    {
+      "code": "S69",
+      "name": "standard wire",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 242,
+      "instructions": [
+        "10 V: lamp lights",
+        "Feed stops the lamp",
+        "Spool / cutter demo",
+        "The native wire carries power from a PG switch into a CEE lamp. Recover it using an empty spool or cutters, then reconnect with its matching CEE spool. Colored variants use dye in the offhand."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:standard"
+      ]
+    },
+    {
+      "code": "S70",
+      "name": "heavily insulated wire",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 242,
+      "instructions": [
+        "10 V: lamp lights",
+        "Feed stops the lamp",
+        "Spool / cutter demo",
+        "The native wire carries power from a PG switch into a CEE lamp. Recover it using an empty spool or cutters, then reconnect with its matching CEE spool. Colored variants use dye in the offhand."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:heavily_insulated"
+      ]
+    },
+    {
+      "code": "S71",
+      "name": "creative wire",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 260,
+      "instructions": [
+        "10 V: lamp lights",
+        "Feed stops the lamp",
+        "Spool / cutter demo",
+        "The native wire carries power from a PG switch into a CEE lamp. Recover it using an empty spool or cutters, then reconnect with its matching CEE spool. Colored variants use dye in the offhand."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:creative"
+      ]
+    },
+    {
+      "code": "S72",
+      "name": "iron wire",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 260,
+      "instructions": [
+        "10 V: lamp lights",
+        "Feed stops the lamp",
+        "Spool / cutter demo",
+        "The native wire carries power from a PG switch into a CEE lamp. Recover it using an empty spool or cutters, then reconnect with its matching CEE spool. Colored variants use dye in the offhand."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:iron"
+      ]
+    },
+    {
+      "code": "S73",
+      "name": "iron bus wire",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 260,
+      "instructions": [
+        "10 V: lamp lights",
+        "Feed stops the lamp",
+        "Spool / cutter demo",
+        "The native wire carries power from a PG switch into a CEE lamp. Recover it using an empty spool or cutters, then reconnect with its matching CEE spool. Colored variants use dye in the offhand."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:iron_bus"
+      ]
+    },
+    {
+      "code": "S74",
+      "name": "iron rail wire",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 260,
+      "instructions": [
+        "10 V: lamp lights",
+        "Feed stops the lamp",
+        "Spool / cutter demo",
+        "The native wire carries power from a PG switch into a CEE lamp. Recover it using an empty spool or cutters, then reconnect with its matching CEE spool. Colored variants use dye in the offhand."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:iron_rail"
+      ]
+    },
+    {
+      "code": "S75",
+      "name": "electrum wire",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 260,
+      "instructions": [
+        "10 V: lamp lights",
+        "Feed stops the lamp",
+        "Spool / cutter demo",
+        "The native wire carries power from a PG switch into a CEE lamp. Recover it using an empty spool or cutters, then reconnect with its matching CEE spool. Colored variants use dye in the offhand."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:electrum"
+      ]
+    },
+    {
+      "code": "S76",
+      "name": "glass insulator wire",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 278,
+      "instructions": [
+        "Insulator: lamp OFF",
+        "Carries no power",
+        "Spool / cutter demo",
+        "Glass insulation passes essentially no power in CEE 1.1.3. Its dark lamp and near-zero meter reading are expected. The hanging-insulator item can also create a loose native endpoint on a PG terminal."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:glass_insulator"
+      ]
+    },
+    {
+      "code": "S77",
+      "name": "Duplex and 12 V bulb",
+      "dimension": "minecraft:overworld",
+      "x": 178,
+      "y": 64,
+      "z": 278,
+      "instructions": [
+        "About 12 V: lamp ON",
+        "One cable, two cores",
+        "Feed controls light",
+        "Use the duplex spool on the two terminations to reconnect the cable. Some voltage is lost in its wires. Measure current on a breakout wire; equal supply and return currents cancel around the whole cable. The spool retains CEE's native creative-only availability in 1.1.3.",
+        "To replace a burned PG bulb, click once to remove it and again with a healthy bulb to install it. Use a 12 V bulb here; ordinary bulbs are rated for 120 V. Switch the feed OFF before repairs."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:duplex_wire_termination"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:light_fixture"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:duplex_wire_termination",
+        "electroenergetics:duplex",
+        "electroenergetics:bundle_conductor",
+        "powergrid:lv_light_bulb"
+      ]
+    },
+    {
+      "code": "S78",
+      "name": "Lineman decorations",
+      "dimension": "minecraft:overworld",
+      "x": 204,
+      "y": 64,
+      "z": 278,
+      "instructions": [
+        "Banner and damper",
+        "10 V: lamp stays ON",
+        "Stick edits offhand",
+        "Hold the lineman's stick in your main hand and a banner or wire damper in your offhand, then click the wire. Shift-click with an empty offhand to remove the attachment. Decorations do not change electrical power."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:wire_damper",
+        "electroenergetics:linemans_stick",
+        "electroenergetics:banner",
+        "electroenergetics:damper"
+      ]
+    },
+    {
+      "code": "S79",
+      "name": "Three-pole energy",
+      "dimension": "minecraft:overworld",
+      "x": 230,
+      "y": 64,
+      "z": 278,
+      "instructions": [
+        "Feed: two lamps ON",
+        "About 120 V / 30 W",
+        "Meter: about 60 W",
+        "The 240 V supply feeds two equal 120 V lamps in series. Relative to their shared middle line, the red lamp is +120 V and the blue lamp is -120 V. Both consume power; the native three-pole meter sums about 60 W. Energy rises slowly in kWh. Turn the feed OFF to stop both lamps, then ON to resume. This is a split DC example; the alternator stations demonstrate AC phases."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:tri_polar_energy_meter"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:light_fixture"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        }
+      ],
+      "checked_workflow_content": [
+        "electroenergetics:tri_polar_energy_meter"
+      ]
+    },
+    {
+      "code": "S80",
+      "name": "CEE computer control",
+      "dimension": "minecraft:overworld",
+      "x": 256,
+      "y": 64,
+      "z": 278,
+      "instructions": [
+        "Computer: wwpg start",
+        "wwpg stop / demo",
+        "8 lamps + board",
+        "wwpg volts shows signed pin-to-common readings. Lua common 9 is PG terminal 0; pins 1-8 keep their numbers."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:electrical_panel"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "pinout:pinout"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:ceiling_tile_lamp"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:capacitor"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:relay"
+        },
+        {
+          "registry": "panel_attachment",
+          "id": "electroenergetics:voltmeter"
+        }
+      ],
+      "checked_workflow_content": [
+        "pinout:pinout"
+      ]
+    },
+    {
+      "code": "S81",
+      "name": "PG computer control",
+      "dimension": "minecraft:overworld",
+      "x": 152,
+      "y": 64,
+      "z": 296,
+      "instructions": [
+        "Computer: wwpg start",
+        "wwpg stop / demo",
+        "8 lamps + board",
+        "wwpg volts shows signed pin-to-common readings. Lua common 9 is PG terminal 0; pins 1-8 keep their numbers."
+      ],
+      "checked": true,
+      "observed_content": [
+        {
+          "registry": "block",
+          "id": "electroenergetics:creative_battery"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:electrical_panel"
+        },
+        {
+          "registry": "block",
+          "id": "electroenergetics:indicator_bulb"
+        },
+        {
+          "registry": "block",
+          "id": "pinout:pinout"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:ceiling_tile_lamp"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:circuit_board"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_resistor"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:creative_voltage_source"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:mv_switch"
+        },
+        {
+          "registry": "block",
+          "id": "powergrid:voltage_gauge"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:capacitor"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:connector"
+        },
+        {
+          "registry": "board_component",
+          "id": "powergrid:relay"
+        },
+        {
+          "registry": "panel_attachment",
+          "id": "electroenergetics:voltmeter"
+        }
+      ],
+      "checked_workflow_content": [
+        "pinout:pinout"
+      ]
+    }
+  ],
+  "note": "Records follow passing station checks. Observed blocks are distinguished from checked assembly and repair workflows; cabinet items are excluded. Release acceptance is recorded separately."
+}

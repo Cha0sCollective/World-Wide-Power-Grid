@@ -8,4 +8,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(value = NetherTransformerBlockEntity.class, remap = false)
 public interface NetherTransformerAccessor {
     @Accessor("wire") SplitTransformerControllerWire wwpg$controller();
+    @Accessor("id") java.util.UUID wwpg$linkId();
+    @Accessor("secondary") boolean wwpg$isSecondary();
+    @Accessor("TRANSFORMERS") static java.util.Map<java.util.UUID, ?> wwpg$links() { throw new AssertionError(); }
 }

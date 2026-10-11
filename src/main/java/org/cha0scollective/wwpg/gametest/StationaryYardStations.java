@@ -44,6 +44,7 @@ final class StationaryYardStations {
     final List<Station> stations = new ArrayList<>();
     final List<Runnable> checks = new ArrayList<>();
     final List<Runnable> configure = new ArrayList<>();
+    final List<Runnable> readinessChecks = new ArrayList<>();
 
     StationaryYardStations(GameTestHelper h, boolean restore) {
         this.h = h; this.restore = restore;
@@ -68,6 +69,7 @@ final class StationaryYardStations {
         new StationaryYardNether(this).build();
         new StationaryYardProcessing(this).build();
         new StationaryYardWiring(this).build();
+        StationaryYardThreePoleMeter.build(this);
         if (net.neoforged.fml.ModList.get().isLoaded("pinout") && net.neoforged.fml.ModList.get().isLoaded("computercraft"))
             StationaryYardPinout.build(this);
         if (!restore) h.runAtTickTime(20, () -> configure.forEach(Runnable::run));
@@ -178,6 +180,8 @@ final class StationaryYardStations {
             });
         }
     }
+
+    void awaitReady() { readinessChecks.forEach(Runnable::run); }
 
     void verifyAndRecord() {
         checkAll(h,checks.toArray(Runnable[]::new));

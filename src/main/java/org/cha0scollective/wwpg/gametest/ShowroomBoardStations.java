@@ -64,6 +64,12 @@ final class ShowroomBoardStations {
     );
     private record Station(Spec spec, BoardFixture fixture, BlockPos base, BlockPos current) {}
     private final List<Station> stations = new ArrayList<>();
+    List<StationaryYardCoverage.Visit> visits() {
+        var result=new ArrayList<StationaryYardCoverage.Visit>();int index=0;
+        for(var station:stations)result.add(new StationaryYardCoverage.Visit(String.format("B%02d",++index),station.spec.name,
+                station.base.above(2),List.of(station.spec.reading,station.spec.action,"Restore the labeled supply and feed switch")));
+        return result;
+    }
 
     ShowroomBoardStations(GameTestHelper h, boolean restore) {
         int i=0;

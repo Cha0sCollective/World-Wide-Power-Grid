@@ -44,6 +44,9 @@ public final class ExampleWorldGameTests {
         demonstrate(h, () -> {});
     }
     static void demonstrate(GameTestHelper h, Runnable additionalChecks){
+        demonstrate(h,additionalChecks,()->{});
+    }
+    static void demonstrate(GameTestHelper h, Runnable additionalChecks,Runnable readiness){
         var level=h.getLevel();level.setChunkForced(0,0,true);level.setChunkForced(0,1,true);level.getChunk(0,0);level.getChunk(0,1);
         var s=new BlockPos(8,64,8);var r=s.east(2);var p=PANEL;var b=BOARD;
         var factory=new BlockPos(8,64,24);var lamp=factory.east(3);var heater=factory.east(6);var pump=factory.offset(3,0,4);var input=pump.west(4);var output=pump.east(4);
@@ -126,7 +129,7 @@ public final class ExampleWorldGameTests {
             var panel=(ElectricalPanelBlockEntity)level.getBlockEntity(p);
             BoardComponentGameTests.near(h,((GaugePanelAttachment)panel.getAttachments()[ElectricalPanelSlot.THIRD_RIGHT.ordinal()]).value,0,.001,"Panel input current after switch-off");
             togglePanel(h);
-        }).thenIdle(40).thenWaitUntil(()->{assertLamps(h,true);h.assertTrue(capacitorVoltage(h)>18,"Example did not recharge after switching on");})
+        }).thenIdle(40).thenWaitUntil(()->{assertLamps(h,true);h.assertTrue(capacitorVoltage(h)>18,"Example did not recharge after switching on");readiness.run();})
           .thenExecute(()->{cleanDroppedWireItems(h);additionalChecks.run();org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info("WWPG_EXAMPLE_VISIBLE_PASSED: panel on -> RUN; off -> capacitor delay -> OFF; on -> RUN");level.setDefaultSpawnPos(new BlockPos(8,64,16),180);level.getServer().getWorldData().setGameType(GameType.CREATIVE);DynamicGameTests.audit(h);level.getDataStorage().save();level.getChunkSource().save(true);}).thenSucceed();
     }
     private static boolean droppedWire(net.minecraft.world.entity.item.ItemEntity entity) {
