@@ -1,0 +1,147 @@
+{
+  "schema": 1,
+  "target": "0.1.0-beta.5",
+  "complete_release_acceptance": false,
+  "jar": "wwpg-beta5-yard-pinout-v4.jar",
+  "sha256": "a2be568e5b465bfa63e97cc5a11e45cc3f2a56152f5c675ec21b894c21acd15d",
+  "platform": "Windows",
+  "checks": [
+    {
+      "profile": "BASE",
+      "backend": "NATIVE",
+      "phase": "SETUP",
+      "cold_pass": 0,
+      "log": "beta5-yard-v4-base-native-0.log.gz",
+      "sha256": "ffdb8962c6c487cda4665d52b98add4be171ed236aefc1f432a40cb8c079e302"
+    },
+    {
+      "profile": "BASE",
+      "backend": "NATIVE",
+      "phase": "VERIFY",
+      "cold_pass": 1,
+      "log": "beta5-yard-v4-base-native-1.log.gz",
+      "sha256": "e0cf0492d190dca64f675d84efd24d9924b604e2f6177cec4702956b238a5062"
+    },
+    {
+      "profile": "BASE",
+      "backend": "NATIVE",
+      "phase": "VERIFY",
+      "cold_pass": 2,
+      "log": "beta5-yard-v4-base-native-2.log.gz",
+      "sha256": "af64cb2043ae49924dcb045a511a6e7b2a7a355f8ac7da6f4ba672875eeb8785"
+    },
+    {
+      "profile": "BASE",
+      "backend": "NATIVE",
+      "phase": "VERIFY",
+      "cold_pass": 3,
+      "log": "beta5-yard-v4-base-native-3.log.gz",
+      "sha256": "da6f947f958803485a630dbcdbd4da22705df859b42c9ead1e87ddf5a6c8d1bc"
+    },
+    {
+      "profile": "BASE",
+      "backend": "JAVA",
+      "phase": "SETUP",
+      "cold_pass": 0,
+      "log": "beta5-yard-v4-base-java-0.log.gz",
+      "sha256": "e03afcea70c436e11bb74457f9a785eafec215623b2180aed5f902bf06e7baec"
+    },
+    {
+      "profile": "BASE",
+      "backend": "JAVA",
+      "phase": "VERIFY",
+      "cold_pass": 1,
+      "log": "beta5-yard-v4-base-java-1.log.gz",
+      "sha256": "d9c1243160094e99c33139534d2874844c1f78efca1b5328b34430c59c2e31b6"
+    },
+    {
+      "profile": "BASE",
+      "backend": "JAVA",
+      "phase": "VERIFY",
+      "cold_pass": 2,
+      "log": "beta5-yard-v4-base-java-2.log.gz",
+      "sha256": "20bf4273b997519aec2655536548a146515912d6a52072cdb44c6bd1c9486e63"
+    },
+    {
+      "profile": "BASE",
+      "backend": "JAVA",
+      "phase": "VERIFY",
+      "cold_pass": 3,
+      "log": "beta5-yard-v4-base-java-3.log.gz",
+      "sha256": "f813e3f77e5e9336c3aad9d00673d6cf18a6fcfa627d7aa5e354dba5d994bda3"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "NATIVE",
+      "phase": "SETUP",
+      "cold_pass": 0,
+      "log": "beta5-yard-pinout-v4-native.log.gz",
+      "sha256": "ef2bf0b0a7972e52c1f487fe77bbb3b58cb38af5fa534f8b781198707789555d"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "NATIVE",
+      "phase": "VERIFY",
+      "cold_pass": 1,
+      "log": "beta5-yard-v4-pinout-native-1.log.gz",
+      "sha256": "6c4a0ff07e8e4d5d1288aebf2344c9ad19df3b51f45d2277b806dfe5639b8be2"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "NATIVE",
+      "phase": "VERIFY",
+      "cold_pass": 2,
+      "log": "beta5-yard-v4-pinout-native-2.log.gz",
+      "sha256": "6c247cd2cd71138f0c980bf799ea66cd893d2eee774c8ff19fd50f00e5d58746"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "NATIVE",
+      "phase": "VERIFY",
+      "cold_pass": 3,
+      "log": "beta5-yard-v4-pinout-native-3.log.gz",
+      "sha256": "67802dc8eed8b94bba0c5f1edededc3a33a9d46b61ed3c88efaa22c967ef3d89"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "JAVA",
+      "phase": "SETUP",
+      "cold_pass": 0,
+      "log": "beta5-yard-v4-pinout-java-0.log.gz",
+      "sha256": "a09a5d024fc2e1bd35cb153f071468c1244fb1fc0ad1a298e168db99b264f7cc"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "JAVA",
+      "phase": "VERIFY",
+      "cold_pass": 1,
+      "log": "beta5-yard-v4-pinout-java-1.log.gz",
+      "sha256": "e7be8905146dc0f29f7b3a7baf316d57ece2fc75b4ebc1b29c30a81d9382728b"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "JAVA",
+      "phase": "VERIFY",
+      "cold_pass": 2,
+      "log": "beta5-yard-v4-pinout-java-2.log.gz",
+      "sha256": "71c339c3cb8460e236ad61f195a7d009263484490a5fa49d9f4d24ca24d41674"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "JAVA",
+      "phase": "VERIFY",
+      "cold_pass": 3,
+      "log": "beta5-yard-v4-pinout-java-3.log.gz",
+      "sha256": "bf7d0cbb8a4ba0262eecea38885bee30ea657fa42d291a050cf443bb9f55a8d5"
+    }
+  ],
+  "stations": {
+    "BASE": 67,
+    "PINOUT": 69
+  },
+  "reference_checks": "Ten actual upstream and ten compatibility checks on each backend; added high-bias CEE diode analytic check at 0.1%.",
+  "limitations": [
+    "These additions accompany the existing legacy yard, not a claim that every stationary workflow is complete.",
+    "Full wire families, duplex installation, low-voltage bulbs, precise inventory-to-station reconciliation, graphical checks and exact exported ZIP acceptance remain open."
+  ]
+}

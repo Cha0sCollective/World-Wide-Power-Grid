@@ -143,12 +143,14 @@ public final class ExampleWorldGameTests {
     }
     static void cleanDroppedWireItems(GameTestHelper h) {
         var bounds=new net.minecraft.world.phys.AABB(0,-64,0,130,320,242);
-        var level=h.getLevel();
+        cleanDroppedWireItems(h.getLevel(),bounds);
+    }
+    static void cleanDroppedWireItems(net.minecraft.server.level.ServerLevel level,net.minecraft.world.phys.AABB bounds) {
         var connections=level.getEntitiesOfClass(org.patryk3211.powergrid.electricity.wire.BaseWireEntity.class,bounds).size();
         var loose=level.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,bounds,ExampleWorldGameTests::droppedWire);
         loose.forEach(net.minecraft.world.entity.Entity::discard);
-        h.assertTrue(level.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,bounds,ExampleWorldGameTests::droppedWire).isEmpty(),"Example retained dropped wire items");
-        h.assertTrue(level.getEntitiesOfClass(org.patryk3211.powergrid.electricity.wire.BaseWireEntity.class,bounds).size()==connections,"Example cleanup removed a connected wire entity");
+        if(!level.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,bounds,ExampleWorldGameTests::droppedWire).isEmpty())throw new IllegalStateException("Example retained dropped wire items");
+        if(level.getEntitiesOfClass(org.patryk3211.powergrid.electricity.wire.BaseWireEntity.class,bounds).size()!=connections)throw new IllegalStateException("Example cleanup removed a connected wire entity");
         org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info("WWPG_EXAMPLE_CLEANUP: removed {} loose wire/spool items; {} connected PG wires/cords retained",loose.size(),connections);
     }
     private static void wire(GameTestHelper h,BlockPos a,int ta,BlockPos b,int tb,boolean pg){WiringGameTests.connect(h,a,ta,b,tb,pg);}
