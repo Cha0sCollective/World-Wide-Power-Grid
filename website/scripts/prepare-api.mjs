@@ -10,6 +10,7 @@ import { resolve, dirname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
+import { assertFrozenManifest } from './frozen-manifest.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const repo = resolve(root, process.argv[2] ?? '..');
@@ -194,8 +195,8 @@ const manifest =
     null,
     2,
   ) + '\n';
-if (existsSync(manifestFile) && readFileSync(manifestFile, 'utf8') !== manifest)
-  throw new Error('Refusing to change a frozen API manifest');
+if (existsSync(manifestFile))
+  assertFrozenManifest(readFileSync(manifestFile, 'utf8'), JSON.parse(manifest));
 const target = resolve(base, 'java-reference');
 for (const [relative, bytes] of contents) {
   const output = resolve(target, relative);
@@ -206,7 +207,9 @@ for (const [relative, bytes] of contents) {
   mkdirSync(dirname(output), { recursive: true });
   writeFileSync(output, bytes);
 }
-writeFileSync(manifestFile, manifest);
+// Filesystem enumeration order differs across operating systems. Keep the
+// original snapshot bytes when its complete JSON contents match.
+if (!existsSync(manifestFile)) writeFileSync(manifestFile, manifest);
 writeFileSync(
   proofFile,
   JSON.stringify(
