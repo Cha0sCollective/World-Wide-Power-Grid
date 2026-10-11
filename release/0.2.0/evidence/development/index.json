@@ -15,8 +15,8 @@
   "warning": "These are pre-freeze development failures and their investigations. Corrections and retries do not establish final acceptance; frozen artifacts must pass the independent release gates.",
   "archive": {
     "path": "failed-development-runs.zip",
-    "sha256": "3c658513d5dc13a7ea5c2945445bc3eff4ad1f4fa2956f0dec80905e4e9c3de4",
-    "size": 5549981
+    "sha256": "7c704154689d13b36878c140d844c2647eaa269d9e2ab470a8d942988f2567f3",
+    "size": 30258835
   },
   "runs": [
     {
@@ -258,6 +258,220 @@
       "resolution_status": "premature_native_graph_binding_reproduced; endpoint_readiness_guard_and_trace_in_progress; final_frozen_acceptance_required",
       "backend": "NATIVE",
       "platform": "Windows"
+    },
+    {
+      "log": "build/api22-workshop-BASE-setup.log",
+      "run": "run/api22-workshop-BASE",
+      "files": [
+        "build/api-release-build-22.log",
+        "build/frozen-0.2.0-22/wwpg-0.2.0.jar"
+      ],
+      "kind": "candidate22_workshop_builder_readiness_failure",
+      "source_reference": "189f39f",
+      "summary": "Candidate22's native base Workshop SETUP failed native wire placement at its API source BlockPos{x=9022,y=64,z=9000}, terminal0. Its runtime manifest records SHA256 be92893b73855c9884ac1c57f65a295936af02d73d8ab5b5a66b9598703511f9; that exact copied runtime jar is retained with the failed build output and actual runtime logs/manifest. The playable Workshop proof did not pass.",
+      "correction": "The builder's fixed twenty-tick wiring delay can still run before API source entity readiness and correctly hits the new native wiring guard. Replace the fixed delay with actual native wiring readiness without weakening real item interactions or station checks. Closure is pending a packaged Workshop rerun and complete clean-artifact release gates. Other passing development fixtures do not close this failure.",
+      "resolution_status": "workshop_fixed_delay_readiness_failure; builder_correction_in_progress; final_frozen_acceptance_required",
+      "backend": "JAVA",
+      "platform": "Windows"
+    },
+    {
+      "log": "build/api23-workshop-BASE-source-1.log",
+      "run": "run/api23-workshop-BASE",
+      "files": [
+        "build/api-release-build-23.log",
+        "build/api23-workshop-BASE-setup.log",
+        "build/frozen-0.2.0-23/wwpg-0.2.0.jar",
+        "run/api23-workshop-BASE/logs/2026-10-11-1.log.gz",
+        "run/api23-workshop-BASE/logs/debug-1.log.gz"
+      ],
+      "kind": "candidate23_workshop_switch_saved_state_failure",
+      "summary": "Candidate23's native base Workshop SETUP passed actual ON/OFF/reset station checks. The first cold VERIFY reported all endpoints ticking, entities loaded and no pending retirement, then failed A10 native indicator is not visibly powered. Both phase manifests record runtime SHA256 660614a10f8a4e52bc193b4e82ab6bb63185493deb7ad2a46c68613ee368844c; the exact runtime snapshot, successful setup/build and failed cold output are retained. Runtime latest/debug logs belong to failed VERIFY; earlier compressed setup logs and immutable phase build logs are retained separately.",
+      "correction": "Source investigation found the Workshop builder called native PG Switch.setState, changing the live wire without updating the OPEN block state used on reload. The saved OPEN value left the A10 panel unpowered after restart. Make the builder helper keep the saved OPEN block state and live switch state consistent, retaining real native wiring and station checks. This is a builder correction; no native runtime switch behavior change is claimed. A successful cold Workshop rerun and final release gates are still required.",
+      "resolution_status": "workshop_builder_live_and_saved_switch_state_mismatch_identified; correction_pending_packaged_restart_proof; final_frozen_acceptance_required",
+      "backend": "JAVA",
+      "platform": "Windows"
+    },
+    {
+      "log": "build/api24-regression-NATIVE.log",
+      "run": "run/api24-regression-NATIVE",
+      "files": [
+        "build/api-release-build-24.log",
+        "build/frozen-0.2.0-24/wwpg-0.2.0.jar"
+      ],
+      "kind": "candidate24_legacy_thermal_fixture_precondition_failure",
+      "source_reference": "80b8e492df20e8835a594dd5f9ab2a2a408ef7a6",
+      "summary": "Candidate24's inherited native regression suite ran204 checks, passing202 and failing the unknown/nonfinite property's new native resistor heating precondition. The exact jar SHA2569a8247571743444a373d911ddeece32fcf812223c7588c492cda083c960be778, failed build output, actual runtime logs and exact manifest are retained. The assertions stopped before their full isolation/healthy/repair checks.",
+      "correction": "Source investigation found the fixture's0.25W heating load was below CEE's3.3W cooling floor. Use the defined100V source and50V across100ohms(25W), plus the healthy120V source and60V across100ohms(36W), preserving every thermal/isolation/recovery assertion. The corrected fixtures and complete frozen release gates still require packaged proof.",
+      "resolution_status": "analytical_fixture_heat_input_below_native_cooling_floor; corrected_fixture_pending_packaged_proof; final_frozen_acceptance_required",
+      "backend": "NATIVE",
+      "platform": "Windows"
+    },
+    {
+      "log": "run/api25-api-multiplayer-BASE-NATIVE/server.log",
+      "run": "run/api25-api-multiplayer-BASE-NATIVE",
+      "files": [
+        "run/api25-api-multiplayer-BASE-NATIVE/api-multiplayer-result.json",
+        "run/api25-api-multiplayer-BASE-NATIVE/client-a-threads.txt",
+        "run/api25-api-multiplayer-BASE-NATIVE/client-a.log",
+        "run/api25-api-multiplayer-BASE-NATIVE/client-b-threads.txt",
+        "run/api25-api-multiplayer-BASE-NATIVE/client-b.log",
+        "run/api25-api-multiplayer-BASE-NATIVE/launch.json",
+        "run/api25-api-multiplayer-BASE-NATIVE/server.log",
+        "run/api25-api-multiplayer-BASE-NATIVE/client-a/options.txt",
+        "run/api25-api-multiplayer-BASE-NATIVE/client-b/options.txt",
+        "run/api25-api-multiplayer-BASE-NATIVE/launch/client-a-launch.txt",
+        "run/api25-api-multiplayer-BASE-NATIVE/launch/client-a-legacy.txt",
+        "run/api25-api-multiplayer-BASE-NATIVE/launch/client-a-program.txt",
+        "run/api25-api-multiplayer-BASE-NATIVE/launch/client-a-vm.txt",
+        "run/api25-api-multiplayer-BASE-NATIVE/launch/client-b-launch.txt",
+        "run/api25-api-multiplayer-BASE-NATIVE/launch/client-b-legacy.txt",
+        "run/api25-api-multiplayer-BASE-NATIVE/launch/client-b-program.txt",
+        "run/api25-api-multiplayer-BASE-NATIVE/launch/client-b-vm.txt",
+        "run/api25-api-multiplayer-BASE-NATIVE/launch/server-launch.txt",
+        "run/api25-api-multiplayer-BASE-NATIVE/launch/server-legacy.txt",
+        "run/api25-api-multiplayer-BASE-NATIVE/launch/server-program.txt",
+        "run/api25-api-multiplayer-BASE-NATIVE/launch/server-vm.txt",
+        "run/api25-api-multiplayer-BASE-NATIVE/server/extracted-yard.json",
+        "run/api25-api-multiplayer-BASE-NATIVE/server/usernamecache.json",
+        "run/api25-api-multiplayer-BASE-NATIVE/client-a/logs/debug.log",
+        "run/api25-api-multiplayer-BASE-NATIVE/client-a/logs/latest.log",
+        "run/api25-api-multiplayer-BASE-NATIVE/client-b/logs/debug.log",
+        "run/api25-api-multiplayer-BASE-NATIVE/client-b/logs/latest.log",
+        "run/api25-api-multiplayer-BASE-NATIVE/server/logs/debug.log",
+        "run/api25-api-multiplayer-BASE-NATIVE/server/logs/latest.log",
+        "build/api25-api-multiplayer-BASE-NATIVE-prepare.log",
+        "build/frozen-acceptance-helper-25/wwpg-api-client-acceptance.jar",
+        "build/frozen-0.2.0-25/wwpg-0.2.0.jar",
+        "build/frozen-acceptance-helper-25/source/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ApiWorkshopClientAcceptance.java",
+        "build/frozen-acceptance-helper-25/source/tools/client_acceptance/api_multiplayer.gradle",
+        "build/frozen-acceptance-helper-25/source/tools/client_acceptance/api_client.gradle"
+      ],
+      "kind": "candidate25_actual_client_helper_property_identity_failure",
+      "source_reference": "2b6974a0b1cc4edb3c22ba26536fd2d1a009c529",
+      "summary": "Both real TCP clients joined the exact exported BASE Workshop, then failed their first view because the acceptance helper created a new BooleanProperty instead of reading the existing declared property. The actual server observed their failed acknowledgements and stopped. Frozen implementation and example jars are retained; no public API defect is established by this helper failure.",
+      "correction": "Resolve the required BooleanProperty by name from the observed BlockState while retaining its expected value and rendering assertions. The same run also records a 67.5-block moved-too-quickly warning; travel must use bounded native movement before continuing actual interactions. Fresh actual-client sessions and final frozen release gates remain required.",
+      "resolution_status": "helper_identity_failure_identified; correction_in_progress; final_actual_client_acceptance_required",
+      "backend": "NATIVE",
+      "platform": "Windows"
+    },
+    {
+      "log": "run/api26-api-multiplayer-BASE-NATIVE/server.log",
+      "run": "run/api26-api-multiplayer-BASE-NATIVE",
+      "files": [
+        "build/api26-api-multiplayer-BASE-NATIVE-prepare.log",
+        "build/frozen-0.2.0-25/wwpg-0.2.0.jar",
+        "build/frozen-0.2.0-25/wwpg-api-example-1.0.0.jar",
+        "run/api26-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/api_multiplayer.gradle",
+        "run/api26-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/resources/META-INF/neoforge.mods.toml",
+        "run/api26-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ApiWorkshopClientAcceptance.java",
+        "run/api26-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ExpandedClientAcceptance.java",
+        "run/api26-api-multiplayer-BASE-NATIVE/acceptance-helper/wwpg-api-client-acceptance.jar",
+        "run/api26-api-multiplayer-BASE-NATIVE/api-multiplayer-result.json",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-a-threads.txt",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-a.log",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-a/logs/debug.log",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-a/logs/latest.log",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-a/options.txt",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A01.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A02.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A03.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A04.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A05.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A06.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A07.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A08.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A09.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A10.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A11.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-wire-A.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-b-threads.txt",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-b.log",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-b/logs/debug.log",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-b/logs/latest.log",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-b/options.txt",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A01.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A02.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A03.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A04.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A05.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A06.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A07.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A08.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A09.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A10.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A11.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-wire-B.png",
+        "run/api26-api-multiplayer-BASE-NATIVE/launch.json",
+        "run/api26-api-multiplayer-BASE-NATIVE/launch/client-a-launch.txt",
+        "run/api26-api-multiplayer-BASE-NATIVE/launch/client-a-legacy.txt",
+        "run/api26-api-multiplayer-BASE-NATIVE/launch/client-a-program.txt",
+        "run/api26-api-multiplayer-BASE-NATIVE/launch/client-a-vm.txt",
+        "run/api26-api-multiplayer-BASE-NATIVE/launch/client-b-launch.txt",
+        "run/api26-api-multiplayer-BASE-NATIVE/launch/client-b-legacy.txt",
+        "run/api26-api-multiplayer-BASE-NATIVE/launch/client-b-program.txt",
+        "run/api26-api-multiplayer-BASE-NATIVE/launch/client-b-vm.txt",
+        "run/api26-api-multiplayer-BASE-NATIVE/launch/server-launch.txt",
+        "run/api26-api-multiplayer-BASE-NATIVE/launch/server-legacy.txt",
+        "run/api26-api-multiplayer-BASE-NATIVE/launch/server-program.txt",
+        "run/api26-api-multiplayer-BASE-NATIVE/launch/server-vm.txt",
+        "run/api26-api-multiplayer-BASE-NATIVE/server.log",
+        "run/api26-api-multiplayer-BASE-NATIVE/server/extracted-yard.json",
+        "run/api26-api-multiplayer-BASE-NATIVE/server/logs/debug.log",
+        "run/api26-api-multiplayer-BASE-NATIVE/server/logs/latest.log",
+        "run/api26-api-multiplayer-BASE-NATIVE/server/usernamecache.json"
+      ],
+      "kind": "batch26_actual_client_native_item_dispatch_failure",
+      "source_reference": "2b6974a0b1cc4edb3c22ba26536fd2d1a009c529",
+      "artifact_hashes": {
+        "runtime": "9740d5754efa17e098c117fa09b54b58552ef34d3a38413a3fb1642c7e584ceb",
+        "api": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+        "cee_api": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+        "example": "09a0ce693fa01a83793ee601707b460826f2bdf7e6bf0979df2c83f41f8dfee1",
+        "upstream_example": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095"
+      },
+      "world_sha256": "d07145be64519256b8b4890a25bc1a61d765e7d7814fd3dd22b7edf69f1ba080",
+      "acceptance_helper": {
+        "archive_member": "run/api26-api-multiplayer-BASE-NATIVE/acceptance-helper/wwpg-api-client-acceptance.jar",
+        "sha256": "954cc94b0f8b5fa8702a8c3c1d28ea51baac2b29a32983747fb9c4a3216414dc",
+        "size": 36707
+      },
+      "acceptance_helper_sources": [
+        {
+          "archive_member": "run/api26-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/api_multiplayer.gradle",
+          "sha256": "86b75bfee4e3f29d71be70436d3cd58566b4b33020457461d9b0d149eb8f6bdd",
+          "size": 10501,
+          "kind": "init",
+          "source_path": "tools/client_acceptance/api_multiplayer.gradle"
+        },
+        {
+          "archive_member": "run/api26-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/resources/META-INF/neoforge.mods.toml",
+          "sha256": "d493caee15dfd18d8242f2c03748fde524fd9f0774f12813c80e73f4eef25ad6",
+          "size": 354,
+          "kind": "resource",
+          "source_path": "tools/client_acceptance/resources/META-INF/neoforge.mods.toml"
+        },
+        {
+          "archive_member": "run/api26-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ApiWorkshopClientAcceptance.java",
+          "sha256": "92cd3d9920ed6e56564a51aab1d85dd818ab4d28c778b5ee3d5be1ce6025df88",
+          "size": 23739,
+          "kind": "java",
+          "source_path": "tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ApiWorkshopClientAcceptance.java"
+        },
+        {
+          "archive_member": "run/api26-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ExpandedClientAcceptance.java",
+          "sha256": "93598b6e21d46b850ef75336485e17e1e268c08e8a77347294d57141787e90b3",
+          "size": 34837,
+          "kind": "java",
+          "source_path": "tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ExpandedClientAcceptance.java"
+        }
+      ],
+      "summary": "Two real TCP clients passed all eleven station views and the server accepted the view phase. Native PG item wiring reached the 20 V bench expectation; actual native CEE item wiring then produced 0 V rather than 20 V. The failed wire phase stopped acceptance. Exact launch inputs, immutable helper bytes, screenshots, process results, logs and thread dumps are retained.",
+      "correction": "Source investigation reproduced Minecraft block-first item dispatch: ExampleBlock.useWithoutItem returned SUCCESS for nonempty held items, consuming native CEE wire spool and PG multimeter useOn interactions. A narrow example useItemOn override will skip default block interaction for nonempty items and preserve empty-hand readouts/configuration. The runtime wiring hooks are unchanged. Corrected independent example artifacts, real native item interactions and complete frozen acceptance remain required.",
+      "resolution_status": "native_item_dispatch_cause_identified; example_correction_in_progress; final_actual_client_acceptance_required",
+      "backend": "NATIVE",
+      "profile": "BASE",
+      "platform": "Windows",
+      "publication_acceptance": false
     }
   ],
   "ci_runs": [
@@ -400,6 +614,325 @@
       "root_cause_analysis": "Source investigation identified physical removal to AIR followed by replacement with the same API block/provider/slot before the deferred scan. ApiTerminals.queueReplacedSavedOwners compared the final block to the saved owner, saw no replacement, and could retain or reattach old saved PG IDs. Old entities restored before new placement caused duplicate placement rejection; old entities restored afterward left four identities where the fixture expected two. This causal explanation comes from source/reproduction investigation; the retained CI logs establish the eight observed failures.",
       "corrective_work": "Record physical removal durably before deferred scanning and retire the exact old wire identities; validate selected-source readiness. Corrective work is in progress and still requires a coherent packaged rebuild and all release gates.",
       "resolution_status": "confirmed_causal_path; correction_in_progress; final_frozen_acceptance_required"
+    },
+    {
+      "id": 38135640810,
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38135640810",
+      "head_sha": "189f39fc410f78da1b45c1942c9b13641f786953",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-10-11T11:27:45Z",
+      "updated_at": "2026-10-11T11:52:40Z",
+      "retrieved_at": "2026-10-11T11:53:34Z",
+      "metadata": [
+        "build/preliminary-ci-38135640810/run-completed.json",
+        "build/preliminary-ci-38135640810/jobs-completed.json",
+        "build/preliminary-ci-38135640810/artifacts-completed.json",
+        "build/preliminary-ci-38135640810/retrieval.json"
+      ],
+      "kind": "second_preliminary_github_ci_regression_failures",
+      "publication_acceptance": false,
+      "jobs": [
+        {
+          "id": 114458819254,
+          "name": "build (ubuntu-24.04, JAVA, PINOUT)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38135640810/job/114458819254",
+          "runner": "ubuntu-24.04",
+          "backend": "JAVA",
+          "profile": "PINOUT",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=PINOUT -PtestBackend=JAVA -PrestartPhase=SETUP --no-daemon"
+          ],
+          "failed_phase": "legacy_packaged_SETUP",
+          "required_test_pass_counts_in_launch_order": [
+            1,
+            1,
+            1,
+            1,
+            32,
+            32,
+            32,
+            32
+          ],
+          "packaged_server_launches": 9,
+          "observed_failure_kinds": [
+            "legacy_unknown_property_zero_expectation_vs_unavailable_NaN",
+            "legacy_nonfinite_property_zero_expectation_vs_unavailable_NaN"
+          ],
+          "failed_assertion_log_lines": [
+            "2026-10-11T11:36:41.2419256Z [11:36:41] [Server thread/ERROR] [minecraft/LogTestReporter]: unknownpropertyisolatesandrecoverswithoutstalepower failed at 3808498, -60, -13239512! Isolated CEE device cannot reuse its previous result expected 0.0, got NaN",
+            "2026-10-11T11:36:41.2422677Z [11:36:41] [Server thread/ERROR] [minecraft/LogTestReporter]: nonfinitepropertyisolatesandrecoverswithoutstalepower failed at 3808420, -60, -13239480! Isolated CEE device cannot reuse its previous result expected 0.0, got NaN"
+          ],
+          "ci_error_lines": [
+            "2026-10-11T11:37:37.7153215Z ##[error]Process completed with exit code 1."
+          ],
+          "log": "build/preliminary-ci-38135640810/ubuntu-JAVA-PINOUT-job.log"
+        },
+        {
+          "id": 114458819260,
+          "name": "build (ubuntu-24.04, JAVA, BASE)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38135640810/job/114458819260",
+          "runner": "ubuntu-24.04",
+          "backend": "JAVA",
+          "profile": "BASE",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=BASE -PtestBackend=JAVA -PrestartPhase=SETUP --no-daemon"
+          ],
+          "failed_phase": "legacy_packaged_SETUP",
+          "required_test_pass_counts_in_launch_order": [
+            1,
+            1,
+            1,
+            1,
+            32,
+            32,
+            32,
+            32
+          ],
+          "packaged_server_launches": 9,
+          "observed_failure_kinds": [
+            "legacy_unknown_property_zero_expectation_vs_unavailable_NaN",
+            "legacy_nonfinite_property_zero_expectation_vs_unavailable_NaN"
+          ],
+          "failed_assertion_log_lines": [
+            "2026-10-11T11:34:08.2620850Z [11:34:08] [Server thread/ERROR] [minecraft/LogTestReporter]: unknownpropertyisolatesandrecoverswithoutstalepower failed at -5443348, -60, -8906645! Isolated CEE device cannot reuse its previous result expected 0.0, got NaN",
+            "2026-10-11T11:34:08.2624348Z [11:34:08] [Server thread/ERROR] [minecraft/LogTestReporter]: nonfinitepropertyisolatesandrecoverswithoutstalepower failed at -5443314, -60, -8906631! Isolated CEE device cannot reuse its previous result expected 0.0, got NaN"
+          ],
+          "ci_error_lines": [
+            "2026-10-11T11:34:50.5969399Z ##[error]Process completed with exit code 1."
+          ],
+          "log": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-job.log"
+        },
+        {
+          "id": 114458819262,
+          "name": "build (windows-latest, NATIVE, BASE)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38135640810/job/114458819262",
+          "runner": "windows-latest",
+          "backend": "NATIVE",
+          "profile": "BASE",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=BASE -PtestBackend=NATIVE -PrestartPhase=SETUP --no-daemon"
+          ],
+          "failed_phase": "legacy_packaged_SETUP",
+          "required_test_pass_counts_in_launch_order": [
+            1,
+            1,
+            1,
+            1,
+            32,
+            32,
+            32,
+            32
+          ],
+          "packaged_server_launches": 9,
+          "observed_failure_kinds": [
+            "legacy_unknown_property_zero_expectation_vs_unavailable_NaN",
+            "legacy_nonfinite_property_zero_expectation_vs_unavailable_NaN"
+          ],
+          "failed_assertion_log_lines": [
+            "2026-10-11T11:40:57.6631426Z [11:40:57] [Server thread/ERROR] [minecraft/LogTestReporter]: unknownpropertyisolatesandrecoverswithoutstalepower failed at 4583607, -60, -11213923! Isolated CEE device cannot reuse its previous result expected 0.0, got NaN",
+            "2026-10-11T11:40:59.1657992Z [11:40:59] [Server thread/ERROR] [minecraft/LogTestReporter]: nonfinitepropertyisolatesandrecoverswithoutstalepower failed at 4583641, -60, -11213909! Isolated CEE device cannot reuse its previous result expected 0.0, got NaN"
+          ],
+          "ci_error_lines": [
+            "2026-10-11T11:43:27.6170196Z ##[error]Process completed with exit code 1."
+          ],
+          "log": "build/preliminary-ci-38135640810/windows-NATIVE-BASE-job.log"
+        },
+        {
+          "id": 114458819284,
+          "name": "build (ubuntu-24.04, NATIVE, PINOUT)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38135640810/job/114458819284",
+          "runner": "ubuntu-24.04",
+          "backend": "NATIVE",
+          "profile": "PINOUT",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Three cold restarts of the packaged API example assemblies"
+          ],
+          "failed_phase": "API_VERIFY3",
+          "required_test_pass_counts_in_launch_order": [
+            1,
+            1,
+            1,
+            1,
+            32,
+            32,
+            32
+          ],
+          "packaged_server_launches": 8,
+          "observed_failure_kinds": [
+            "diagnostic_initial_native_wire_before_explicit_readiness"
+          ],
+          "failed_assertion_log_lines": [
+            "2026-10-11T11:38:03.1305771Z [11:38:03] [Server thread/ERROR] [minecraft/LogTestReporter]: diagnosticfreshsidecarreplacementduringdelayedwirereloadcutsonlysavedapiwires failed at -10572812, -60, -835506! Native wire placement failed at BlockPos{x=12000, y=64, z=12000} terminal 0"
+          ],
+          "ci_error_lines": [
+            "2026-10-11T11:39:37.4754194Z ##[error]Process completed with exit code 1."
+          ],
+          "log": "build/preliminary-ci-38135640810/ubuntu-NATIVE-PINOUT-job.log"
+        },
+        {
+          "id": 114458819294,
+          "name": "build (windows-latest, NATIVE, PINOUT)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38135640810/job/114458819294",
+          "runner": "windows-latest",
+          "backend": "NATIVE",
+          "profile": "PINOUT",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=PINOUT -PtestBackend=NATIVE -PrestartPhase=SETUP --no-daemon"
+          ],
+          "failed_phase": "legacy_packaged_SETUP",
+          "required_test_pass_counts_in_launch_order": [
+            1,
+            1,
+            1,
+            1,
+            32,
+            32,
+            32,
+            32
+          ],
+          "packaged_server_launches": 9,
+          "observed_failure_kinds": [
+            "legacy_unknown_property_zero_expectation_vs_unavailable_NaN",
+            "legacy_nonfinite_property_zero_expectation_vs_unavailable_NaN"
+          ],
+          "failed_assertion_log_lines": [
+            "2026-10-11T11:48:57.5402332Z [11:48:57] [Server thread/ERROR] [minecraft/LogTestReporter]: unknownpropertyisolatesandrecoverswithoutstalepower failed at -10123451, -60, -11993404! Isolated CEE device cannot reuse its previous result expected 0.0, got NaN",
+            "2026-10-11T11:48:57.5405535Z [11:48:57] [Server thread/ERROR] [minecraft/LogTestReporter]: nonfinitepropertyisolatesandrecoverswithoutstalepower failed at -10123529, -60, -11993372! Isolated CEE device cannot reuse its previous result expected 0.0, got NaN"
+          ],
+          "ci_error_lines": [
+            "2026-10-11T11:52:34.1916043Z ##[error]Process completed with exit code 1."
+          ],
+          "log": "build/preliminary-ci-38135640810/windows-NATIVE-PINOUT-job.log"
+        },
+        {
+          "id": 114458819326,
+          "name": "build (windows-latest, JAVA, BASE)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38135640810/job/114458819326",
+          "runner": "windows-latest",
+          "backend": "JAVA",
+          "profile": "BASE",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run both packaged public API example fixture suites"
+          ],
+          "failed_phase": "API_SETUP",
+          "required_test_pass_counts_in_launch_order": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "packaged_server_launches": 5,
+          "observed_failure_kinds": [
+            "diagnostic_initial_native_wire_before_explicit_readiness"
+          ],
+          "failed_assertion_log_lines": [
+            "2026-10-11T11:34:06.2148389Z [11:34:06] [Server thread/ERROR] [minecraft/LogTestReporter]: diagnosticfreshsidecarreplacementduringdelayedwirereloadcutsonlysavedapiwires failed at 14184321, -60, 5526428! Native wire placement failed at BlockPos{x=12000, y=64, z=12000} terminal 0"
+          ],
+          "ci_error_lines": [
+            "2026-10-11T11:34:33.6025521Z ##[error]Process completed with exit code 1."
+          ],
+          "log": "build/preliminary-ci-38135640810/windows-JAVA-BASE-job.log"
+        },
+        {
+          "id": 114458819328,
+          "name": "build (windows-latest, JAVA, PINOUT)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38135640810/job/114458819328",
+          "runner": "windows-latest",
+          "backend": "JAVA",
+          "profile": "PINOUT",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=PINOUT -PtestBackend=JAVA -PrestartPhase=SETUP --no-daemon"
+          ],
+          "failed_phase": "legacy_packaged_SETUP",
+          "required_test_pass_counts_in_launch_order": [
+            1,
+            1,
+            1,
+            1,
+            32,
+            32,
+            32,
+            32
+          ],
+          "packaged_server_launches": 9,
+          "observed_failure_kinds": [
+            "legacy_unknown_property_zero_expectation_vs_unavailable_NaN",
+            "legacy_nonfinite_property_zero_expectation_vs_unavailable_NaN"
+          ],
+          "failed_assertion_log_lines": [
+            "2026-10-11T11:39:55.8464487Z [11:39:55] [Server thread/ERROR] [minecraft/LogTestReporter]: unknownpropertyisolatesandrecoverswithoutstalepower failed at 8966707, -60, 7189906! Isolated CEE device cannot reuse its previous result expected 0.0, got NaN",
+            "2026-10-11T11:39:55.8467916Z [11:39:55] [Server thread/ERROR] [minecraft/LogTestReporter]: nonfinitepropertyisolatesandrecoverswithoutstalepower failed at 8966629, -60, 7189938! Isolated CEE device cannot reuse its previous result expected 0.0, got NaN"
+          ],
+          "ci_error_lines": [
+            "2026-10-11T11:41:02.2204059Z ##[error]Process completed with exit code 1."
+          ],
+          "log": "build/preliminary-ci-38135640810/windows-JAVA-PINOUT-job.log"
+        },
+        {
+          "id": 114458819359,
+          "name": "build (ubuntu-24.04, NATIVE, BASE)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38135640810/job/114458819359",
+          "runner": "ubuntu-24.04",
+          "backend": "NATIVE",
+          "profile": "BASE",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=BASE -PtestBackend=NATIVE -PrestartPhase=SETUP --no-daemon"
+          ],
+          "failed_phase": "legacy_packaged_SETUP",
+          "required_test_pass_counts_in_launch_order": [
+            1,
+            1,
+            1,
+            1,
+            32,
+            32,
+            32,
+            32
+          ],
+          "packaged_server_launches": 9,
+          "observed_failure_kinds": [
+            "legacy_unknown_property_zero_expectation_vs_unavailable_NaN",
+            "legacy_nonfinite_property_zero_expectation_vs_unavailable_NaN"
+          ],
+          "failed_assertion_log_lines": [
+            "2026-10-11T11:40:58.1857987Z [11:40:58] [Server thread/ERROR] [minecraft/LogTestReporter]: unknownpropertyisolatesandrecoverswithoutstalepower failed at 7661696, -60, -13382698! Isolated CEE device cannot reuse its previous result expected 0.0, got NaN",
+            "2026-10-11T11:40:58.1862127Z [11:40:58] [Server thread/ERROR] [minecraft/LogTestReporter]: nonfinitepropertyisolatesandrecoverswithoutstalepower failed at 7661730, -60, -13382684! Isolated CEE device cannot reuse its previous result expected 0.0, got NaN"
+          ],
+          "ci_error_lines": [
+            "2026-10-11T11:43:32.5467150Z ##[error]Process completed with exit code 1."
+          ],
+          "log": "build/preliminary-ci-38135640810/ubuntu-NATIVE-BASE-job.log"
+        }
+      ],
+      "artifact_retention": {
+        "job_id": 114458819260,
+        "artifact_id": 11700653976,
+        "artifact_name": "wwpg-ubuntu-24.04-JAVA-BASE",
+        "job_name": "build (ubuntu-24.04, JAVA, BASE)",
+        "source_provenance": {
+          "schema": 1,
+          "source_sha": "189f39fc410f78da1b45c1942c9b13641f786953",
+          "source_tree": "cc1af28d80c260c6245843e7174e5b788ee67c48",
+          "run_id": 38135640810,
+          "run_attempt": 1,
+          "event": "pull_request"
+        },
+        "source_directory": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact",
+        "scope": "Only this downloaded artifact subset is retained; all eight actual job logs and completed GitHub metadata are retained."
+      },
+      "summary": "Jobs reached different gates. The retained per-job records list every fixture failure, failed step, server launch count and successful check count in launch order. Legacy isolation fixtures still expected numeric zero although the compatibility layer deliberately reports unavailable native queries as NaN; diagnostic native wiring used a fixed initial delay instead of readiness. These observed failures precede later gates in their jobs.",
+      "root_cause_analysis": "The unavailable-result behavior requires meaningful legacy assertions of isolation, thermal safety, unaffected healthy circuits and recovery, rather than a zero reading. The separate diagnostic fixture needs an explicit native wiring readiness predicate before its first connection. These causal explanations come from source and local investigations; the archived CI job lines independently establish each actual failure. The independently observed candidate22/23 Workshop builder failures are retained as local failures and must not be attributed to this CI unless an actual job reached and failed that gate.",
+      "corrective_work": "Strengthen legacy isolation assertions and wait for actual diagnostic wiring readiness. Builder corrections and the complete frozen matrix remain subject to independent packaged proof. This archive was collected directly through GitHub; no strict acceptance collector was invoked for the failed run.",
+      "resolution_status": "corrective_changes_under_test; final_frozen_acceptance_required"
     }
   ],
   "success_appendices": [
@@ -461,6 +994,144 @@
       "observed_result": "Both native and Java separate-JVM SETUP, ARM and VERIFY passed. Actual held saved PG wire references remained unbound before readiness; exact old PG/CEE identities were retired, replacements stayed at zero charge while isolated, and fresh wires in both systems powered them after readiness.",
       "threading_correction": "The trace explicitly reports serverThread=true and entityReady=false while the temporary thread name is entity-deserializer. Thread names alone do not prove worker-thread ownership, including in earlier candidate17 trace interpretation. The saved NBT readAdditionalSaveData -> setEndpoint2 -> makeWire call stack establishes binding before readiness; pinned EntityStorage.flush -> ProcessorMailbox.runAll explains synchronous server-thread deserialization. Readiness guarding is therefore needed in addition to actual server-thread ownership checks.",
       "scope": "Bounded development diagnostic appendix for instrumented candidate21. All earlier evidence bytes and annotations remain preserved. These six passing singleton phases do not establish final frozen acceptance for the clean release artifact or other platform/profile requirements."
+    },
+    {
+      "kind": "candidate22_java_development_regression_passes",
+      "publication_acceptance": false,
+      "source_reference": "189f39f",
+      "platform": "Windows",
+      "profile": "BASE",
+      "runtime_snapshot": "build/frozen-0.2.0-22/wwpg-0.2.0.jar",
+      "artifact_sha256": "be92893b73855c9884ac1c57f65a295936af02d73d8ab5b5a66b9598703511f9",
+      "phases": [
+        {
+          "backend": "JAVA",
+          "profile": "BASE",
+          "phase": "SETUP",
+          "required_tests_passed": 32,
+          "log": "build/api22-full-JAVA-SETUP.log",
+          "manifest": "run/api22-full-JAVA/packaged-2026-10-11T11-29-31.605863200Z.json",
+          "artifact_sha256": "be92893b73855c9884ac1c57f65a295936af02d73d8ab5b5a66b9598703511f9"
+        },
+        {
+          "backend": "JAVA",
+          "profile": "BASE",
+          "phase": "VERIFY1",
+          "required_tests_passed": 32,
+          "log": "build/api22-full-JAVA-VERIFY1.log",
+          "manifest": "run/api22-full-JAVA/packaged-2026-10-11T11-30-06.410151100Z.json",
+          "artifact_sha256": "be92893b73855c9884ac1c57f65a295936af02d73d8ab5b5a66b9598703511f9"
+        },
+        {
+          "backend": "JAVA",
+          "profile": "BASE",
+          "phase": "VERIFY2",
+          "required_tests_passed": 32,
+          "log": "build/api22-full-JAVA-VERIFY2.log",
+          "manifest": "run/api22-full-JAVA/packaged-2026-10-11T11-30-40.775810400Z.json",
+          "artifact_sha256": "be92893b73855c9884ac1c57f65a295936af02d73d8ab5b5a66b9598703511f9"
+        },
+        {
+          "backend": "JAVA",
+          "profile": "BASE",
+          "phase": "VERIFY3",
+          "required_tests_passed": 32,
+          "log": "build/api22-full-JAVA-VERIFY3.log",
+          "manifest": "run/api22-full-JAVA/packaged-2026-10-11T11-31-16.293439500Z.json",
+          "artifact_sha256": "be92893b73855c9884ac1c57f65a295936af02d73d8ab5b5a66b9598703511f9"
+        },
+        {
+          "backend": "JAVA",
+          "profile": "BASE",
+          "phase": "PAUSE",
+          "required_tests_passed": 1,
+          "log": "build/api22-pause-JAVA.log",
+          "manifest": "run/api22-pause-JAVA/packaged-2026-10-11T11-31-54.505230200Z.json",
+          "artifact_sha256": "be92893b73855c9884ac1c57f65a295936af02d73d8ab5b5a66b9598703511f9"
+        }
+      ],
+      "scope": "The32-check Java SETUP and three separate cold VERIFY runs passed, and the standalone pause check passed. Actual full-run latest/debug logs belong to VERIFY3; compressed prior logs, immutable phase build logs and exact phase manifests are also retained. This historical development appendix does not close the same candidate's Workshop failure, the running CI matrix or final frozen clean-artifact acceptance."
+    },
+    {
+      "kind": "candidate24_native_base_workshop_development_passes",
+      "publication_acceptance": false,
+      "source_reference": "80b8e492df20e8835a594dd5f9ab2a2a408ef7a6",
+      "platform": "Windows",
+      "runtime_snapshot": "build/frozen-0.2.0-24/wwpg-0.2.0.jar",
+      "artifact_sha256": "9a8247571743444a373d911ddeece32fcf812223c7588c492cda083c960be778",
+      "phases": [
+        {
+          "backend": "NATIVE",
+          "profile": "BASE",
+          "phase": "SETUP",
+          "required_tests_passed": 1,
+          "log": "build/api24-workshop-BASE-SETUP.log",
+          "manifest": "run/api24-workshop-BASE/packaged-2026-10-11T11-43-39.367268600Z.json",
+          "artifact_sha256": "9a8247571743444a373d911ddeece32fcf812223c7588c492cda083c960be778"
+        },
+        {
+          "backend": "NATIVE",
+          "profile": "BASE",
+          "phase": "VERIFY1",
+          "required_tests_passed": 1,
+          "log": "build/api24-workshop-BASE-VERIFY1.log",
+          "manifest": "run/api24-workshop-BASE/packaged-2026-10-11T11-44-03.640649700Z.json",
+          "artifact_sha256": "9a8247571743444a373d911ddeece32fcf812223c7588c492cda083c960be778"
+        },
+        {
+          "backend": "NATIVE",
+          "profile": "BASE",
+          "phase": "VERIFY2",
+          "required_tests_passed": 1,
+          "log": "build/api24-workshop-BASE-VERIFY2.log",
+          "manifest": "run/api24-workshop-BASE/packaged-2026-10-11T11-44-28.339432300Z.json",
+          "artifact_sha256": "9a8247571743444a373d911ddeece32fcf812223c7588c492cda083c960be778"
+        },
+        {
+          "backend": "NATIVE",
+          "profile": "BASE",
+          "phase": "VERIFY3",
+          "required_tests_passed": 1,
+          "log": "build/api24-workshop-BASE-VERIFY3.log",
+          "manifest": "run/api24-workshop-BASE/packaged-2026-10-11T11-44-52.262356Z.json",
+          "artifact_sha256": "9a8247571743444a373d911ddeece32fcf812223c7588c492cda083c960be778"
+        }
+      ],
+      "scope": "The base native Workshop SETUP and three cold VERIFY runs passed the actual eleven station ON/OFF/reset checks through the single Workshop GameTest. This historical development proof does not close the candidate24 inherited regression failure or final frozen acceptance. The immutable phase build logs/manifests and actual compressed/latest runtime logs are retained."
+    },
+    {
+      "kind": "corrected_item_dispatch_two_backend_fixture_controls",
+      "platform": "Windows",
+      "publication_acceptance": false,
+      "build_log": "build/api-item-dispatch-example-build-26b.log",
+      "phases": [
+        {
+          "backend": "NATIVE",
+          "expected_pass": true,
+          "required_total": 7,
+          "passed": 7,
+          "failed": 0,
+          "log": "build/api26-item-dispatch-corrected.log",
+          "manifest": "run/api26-item-dispatch-corrected/packaged-2026-10-11T12-19-51.632670Z.json",
+          "example_sha256": "90a52b8ca6d65860043e816d4d101dc3e014dd7c947133e48a0dfe7a49490cd4",
+          "failed_assertion_log_lines": [],
+          "runtime_sha256": "9740d5754efa17e098c117fa09b54b58552ef34d3a38413a3fb1642c7e584ceb",
+          "publication_acceptance": false
+        },
+        {
+          "backend": "JAVA",
+          "expected_pass": true,
+          "required_total": 7,
+          "passed": 7,
+          "failed": 0,
+          "log": "build/api26-item-dispatch-corrected-JAVA.log",
+          "manifest": "run/api26-item-dispatch-corrected-JAVA/packaged-2026-10-11T12-20-52.993297500Z.json",
+          "example_sha256": "90a52b8ca6d65860043e816d4d101dc3e014dd7c947133e48a0dfe7a49490cd4",
+          "failed_assertion_log_lines": [],
+          "runtime_sha256": "9740d5754efa17e098c117fa09b54b58552ef34d3a38413a3fb1642c7e584ceb",
+          "publication_acceptance": false
+        }
+      ]
     }
   ],
   "members": [
@@ -511,6 +1182,18 @@
       "source_path": "build/api-full-NATIVE-14-VERIFY1.log",
       "size": 36055,
       "sha256": "5ed39c08deb5bcea30917cc97a8f45bfb96fa5849c6acb07a33c7389d9e9110f"
+    },
+    {
+      "path": "build/api-item-dispatch-example-build-26.log",
+      "source_path": "build/api-item-dispatch-example-build-26.log",
+      "size": 1120,
+      "sha256": "db4010f56ca792f8fc6782448774bff9e9ced91fac6929300b4a058be791da72"
+    },
+    {
+      "path": "build/api-item-dispatch-example-build-26b.log",
+      "source_path": "build/api-item-dispatch-example-build-26b.log",
+      "size": 703,
+      "sha256": "c30ce0edec38b16ca0e8055fa303a9c5efffcbf9f2792a9409e076aca464f2d9"
     },
     {
       "path": "build/api-lifecycle-JAVA-6.log",
@@ -577,6 +1260,24 @@
       "source_path": "build/api-release-build-21.log",
       "size": 1595,
       "sha256": "0660f15fa175e0819d7a85f1df122605a62cdbc90e0a637500c30b36a051d75c"
+    },
+    {
+      "path": "build/api-release-build-22.log",
+      "source_path": "build/api-release-build-22.log",
+      "size": 1609,
+      "sha256": "28532cdc035075bccc3aa98c0491784c54c09a51dfc04c764cb243416d9f1fc1"
+    },
+    {
+      "path": "build/api-release-build-23.log",
+      "source_path": "build/api-release-build-23.log",
+      "size": 1595,
+      "sha256": "0660f15fa175e0819d7a85f1df122605a62cdbc90e0a637500c30b36a051d75c"
+    },
+    {
+      "path": "build/api-release-build-24.log",
+      "source_path": "build/api-release-build-24.log",
+      "size": 1595,
+      "sha256": "c03e316ac90723356891d17fc8c42d8417969c47522d1d60997b537ddc177544"
     },
     {
       "path": "build/api-scoped-NATIVE-10.log",
@@ -691,6 +1392,180 @@
       "source_path": "build/api21-pending-NATIVE-VERIFY.log",
       "size": 35076,
       "sha256": "0196c1ef5b434d20172f76cc95940e8c71609908b07655a8b4bae167d780fb30"
+    },
+    {
+      "path": "build/api22-full-JAVA-SETUP.log",
+      "source_path": "build/api22-full-JAVA-SETUP.log",
+      "size": 41127,
+      "sha256": "bd1d9a86a61ddeb166c12bfc016372dcf027f1fe63138ab69c39b31e14404179"
+    },
+    {
+      "path": "build/api22-full-JAVA-VERIFY1.log",
+      "source_path": "build/api22-full-JAVA-VERIFY1.log",
+      "size": 37440,
+      "sha256": "5e521b4e8f4e804bfdfa1ed267285976a720680abacc462091d3f60a36778d40"
+    },
+    {
+      "path": "build/api22-full-JAVA-VERIFY2.log",
+      "source_path": "build/api22-full-JAVA-VERIFY2.log",
+      "size": 37573,
+      "sha256": "c12b3c58a253f241aae7393ca382c7f3940ec8733153c2eeb6fdc99f1ff7daa7"
+    },
+    {
+      "path": "build/api22-full-JAVA-VERIFY3.log",
+      "source_path": "build/api22-full-JAVA-VERIFY3.log",
+      "size": 37500,
+      "sha256": "5b6f9f9a53812f64b09e958a6a35b1ebeb4b24079851f6c204910be35b172b4a"
+    },
+    {
+      "path": "build/api22-pause-JAVA.log",
+      "source_path": "build/api22-pause-JAVA.log",
+      "size": 18130,
+      "sha256": "384786167138774fbda25d079f47f94d73f344f4d419716d6308daf1f3aab4b9"
+    },
+    {
+      "path": "build/api22-workshop-BASE-setup.log",
+      "source_path": "build/api22-workshop-BASE-setup.log",
+      "size": 24548,
+      "sha256": "f482a9be1ddf512dc9f154f29f06ddd78d6ad055ec838cdac3da4a3b1da539ed"
+    },
+    {
+      "path": "build/api23-workshop-BASE-setup.log",
+      "source_path": "build/api23-workshop-BASE-setup.log",
+      "size": 22534,
+      "sha256": "a1e093b61bb01c82c4da36ebe97251bea4cf92b48bb3495f34111f41092a6619"
+    },
+    {
+      "path": "build/api23-workshop-BASE-source-1.log",
+      "source_path": "build/api23-workshop-BASE-source-1.log",
+      "size": 17752,
+      "sha256": "7e3bb1cf89e842608c06a99d3b20328f6de13856c2dcb5d6ab87e8f33b8f0fb8"
+    },
+    {
+      "path": "build/api24-regression-NATIVE.log",
+      "source_path": "build/api24-regression-NATIVE.log",
+      "size": 159230,
+      "sha256": "285bb65012704e3c8436792795475ba87d4d920f0f8fbc663e423fbf9b23a0e7"
+    },
+    {
+      "path": "build/api24-workshop-BASE-SETUP.log",
+      "source_path": "build/api24-workshop-BASE-SETUP.log",
+      "size": 22522,
+      "sha256": "85fbdbce261d73ad9262556a88125e39537cf204b3cb184e33a09055931f0911"
+    },
+    {
+      "path": "build/api24-workshop-BASE-VERIFY1.log",
+      "source_path": "build/api24-workshop-BASE-VERIFY1.log",
+      "size": 18342,
+      "sha256": "e9da61fde99345bf89b23da459b4ef322c0161db73ceceda67750232b1829964"
+    },
+    {
+      "path": "build/api24-workshop-BASE-VERIFY2.log",
+      "source_path": "build/api24-workshop-BASE-VERIFY2.log",
+      "size": 18284,
+      "sha256": "76cd1900d8dfb7caa0d5402bcf5aa73c41b3fffe24d70e79e79852f2f662831a"
+    },
+    {
+      "path": "build/api24-workshop-BASE-VERIFY3.log",
+      "source_path": "build/api24-workshop-BASE-VERIFY3.log",
+      "size": 18288,
+      "sha256": "807bbd51e6579999d6355d9da81cfcf96043a53e3a226a42bf671531e9f671b0"
+    },
+    {
+      "path": "build/api25-api-multiplayer-BASE-NATIVE-prepare.log",
+      "source_path": "build/api25-api-multiplayer-BASE-NATIVE-prepare.log",
+      "size": 1665,
+      "sha256": "865f2a9f61419fd7003489878754797345323ae70d9cf3bed841a90ff567ea22"
+    },
+    {
+      "path": "build/api26-api-multiplayer-BASE-NATIVE-prepare.log",
+      "source_path": "build/api26-api-multiplayer-BASE-NATIVE-prepare.log",
+      "size": 1558,
+      "sha256": "8ba4de6230e933b50cc05eab23ade00aae26272203346f05220748c2e33b574b"
+    },
+    {
+      "path": "build/api26-item-dispatch-corrected-JAVA.log",
+      "source_path": "build/api26-item-dispatch-corrected-JAVA.log",
+      "size": 20185,
+      "sha256": "1f8a6e61acfe401907014c5c3d743e2521d88b50a5f09399449bff5eed759752"
+    },
+    {
+      "path": "build/api26-item-dispatch-corrected.log",
+      "source_path": "build/api26-item-dispatch-corrected.log",
+      "size": 20218,
+      "sha256": "3d3803b66fb1142fb096adb85495ff2dcc1ccd4299ed399a7718417b1839e86b"
+    },
+    {
+      "path": "build/api26-item-dispatch-negative.log",
+      "source_path": "build/api26-item-dispatch-negative.log",
+      "size": 21035,
+      "sha256": "8281498a67dbf9d3e013613172cabf2e1161980600a9542264924f08137abc85"
+    },
+    {
+      "path": "build/frozen-0.2.0-22/wwpg-0.2.0.jar",
+      "source_path": "build/frozen-0.2.0-22/wwpg-0.2.0.jar",
+      "size": 3521600,
+      "sha256": "be92893b73855c9884ac1c57f65a295936af02d73d8ab5b5a66b9598703511f9"
+    },
+    {
+      "path": "build/frozen-0.2.0-23/wwpg-0.2.0.jar",
+      "source_path": "build/frozen-0.2.0-23/wwpg-0.2.0.jar",
+      "size": 3522239,
+      "sha256": "660614a10f8a4e52bc193b4e82ab6bb63185493deb7ad2a46c68613ee368844c"
+    },
+    {
+      "path": "build/frozen-0.2.0-24/wwpg-0.2.0.jar",
+      "source_path": "build/frozen-0.2.0-24/wwpg-0.2.0.jar",
+      "size": 3525261,
+      "sha256": "9a8247571743444a373d911ddeece32fcf812223c7588c492cda083c960be778"
+    },
+    {
+      "path": "build/frozen-0.2.0-25/wwpg-0.2.0.jar",
+      "source_path": "build/frozen-0.2.0-25/wwpg-0.2.0.jar",
+      "size": 3525237,
+      "sha256": "9740d5754efa17e098c117fa09b54b58552ef34d3a38413a3fb1642c7e584ceb"
+    },
+    {
+      "path": "build/frozen-0.2.0-25/wwpg-api-example-1.0.0.jar",
+      "source_path": "build/frozen-0.2.0-25/wwpg-api-example-1.0.0.jar",
+      "size": 50820,
+      "sha256": "09a0ce693fa01a83793ee601707b460826f2bdf7e6bf0979df2c83f41f8dfee1"
+    },
+    {
+      "path": "build/frozen-acceptance-helper-25/source/tools/client_acceptance/api_client.gradle",
+      "source_path": "build/frozen-acceptance-helper-25/source/tools/client_acceptance/api_client.gradle",
+      "size": 7644,
+      "sha256": "d99d29a1ed2ffca46099805acce6cca6e91780bfefe60065599c76400378b60a"
+    },
+    {
+      "path": "build/frozen-acceptance-helper-25/source/tools/client_acceptance/api_multiplayer.gradle",
+      "source_path": "build/frozen-acceptance-helper-25/source/tools/client_acceptance/api_multiplayer.gradle",
+      "size": 7623,
+      "sha256": "8a5738a9fdc76b1878035606d1a11b915147dc7c36d65a95f0a2e046de9529ed"
+    },
+    {
+      "path": "build/frozen-acceptance-helper-25/source/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ApiWorkshopClientAcceptance.java",
+      "source_path": "build/frozen-acceptance-helper-25/source/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ApiWorkshopClientAcceptance.java",
+      "size": 21508,
+      "sha256": "ef41240af6f58353df01c7592a0910961372db0a5e9dcaac29ccf24d2df653aa"
+    },
+    {
+      "path": "build/frozen-acceptance-helper-25/wwpg-api-client-acceptance.jar",
+      "source_path": "build/frozen-acceptance-helper-25/wwpg-api-client-acceptance.jar",
+      "size": 35513,
+      "sha256": "1f2c0c649e62e21db3be64200f19af0631f695115f34e0f491de95c011781967"
+    },
+    {
+      "path": "build/item-dispatch-negative-26.json",
+      "source_path": "build/item-dispatch-negative-26.json",
+      "size": 847,
+      "sha256": "99b631998573a832a4fa9c94d73ae3407bac9438969cd0729f1a3056dc6d6f45"
+    },
+    {
+      "path": "build/make_item_dispatch_negative.py",
+      "source_path": "build/make_item_dispatch_negative.py",
+      "size": 1501,
+      "sha256": "8d51f1a478b7dbb2ead8fdeffc79e0b6ae795746c53fa036e1e9b0decde9a30e"
     },
     {
       "path": "build/preliminary-ci-38131357758/jobs-completed.json",
@@ -1455,6 +2330,1008 @@
       "sha256": "f470965895236f13d057cb429dbe107bdcdf8e14624733c6e4bfe9676a51c0df"
     },
     {
+      "path": "build/preliminary-ci-38135640810/artifacts-completed.json",
+      "source_path": "build/preliminary-ci-38135640810/artifacts-completed.json",
+      "size": 6025,
+      "sha256": "dc5a868484ba656db14a2c11f1133348de82452cf23b010f83b2e987940a9f6d"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/jobs-completed.json",
+      "source_path": "build/preliminary-ci-38135640810/jobs-completed.json",
+      "size": 83332,
+      "sha256": "4a545533119bd224786ab36767431cbb1b903e751e4edf1269b8b6fd311a62b5"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/retrieval.json",
+      "source_path": "build/preliminary-ci-38135640810/retrieval.json",
+      "size": 48,
+      "sha256": "39bf3e60cf99a5d1e73a115e352c7ba1cd545828ea4ed8a48c90f5446bbfa626"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/run-completed.json",
+      "source_path": "build/preliminary-ci-38135640810/run-completed.json",
+      "size": 14697,
+      "sha256": "35431defe42a0539cdfc0be0ec2f5371d0b619067c2d3c834088b2ea4254b891"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/api-contract.json",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/api-contract.json",
+      "size": 63389,
+      "sha256": "0e10291667726185f608f3b66790e210880ad07729e2437ede6acca7a2c70710"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/cee-api-contract.json",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/cee-api-contract.json",
+      "size": 11800,
+      "sha256": "2df8778c18472e93a7aa738587f4d22b8b15a606db8e878871c7200f92e80260"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/ci-source.json",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/ci-source.json",
+      "size": 211,
+      "sha256": "9817019a33db2427e5537ceb3ef25352a39f1df2aeb2f1a0f8a6d7332d4d6260"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/distributions/wwpg-api-1.0.0-maven.zip",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/distributions/wwpg-api-1.0.0-maven.zip",
+      "size": 422277,
+      "sha256": "6ef5640d2a65e0c3b390d0aeffc24a561707bfeb21a2ee444bd1df0f9b06b504"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/distributions/wwpg-api-example-1.0.0-source.zip",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/distributions/wwpg-api-example-1.0.0-source.zip",
+      "size": 78523,
+      "sha256": "af5a822214dda1b451e04fb6176b9a382b8c5ead592b7c0266c3971371a1f842"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/distributions/wwpg-upstream-api-example-1.0.0-source.zip",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/distributions/wwpg-upstream-api-example-1.0.0-source.zip",
+      "size": 69921,
+      "sha256": "0cf5b56fe374eb25c8c97640552f4a00e186a6a3f0ba15a2956410959b6681ae"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-0.2.0.jar",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-0.2.0.jar",
+      "size": 3521600,
+      "sha256": "be92893b73855c9884ac1c57f65a295936af02d73d8ab5b5a66b9598703511f9"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-api-1.0.0-javadoc.jar",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-api-1.0.0-javadoc.jar",
+      "size": 233870,
+      "sha256": "42e1a71775d06d109c86d4f740c8364578e19756001ee75e1ec6e9d34a7c5c2a"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-api-1.0.0-sources.jar",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-api-1.0.0-sources.jar",
+      "size": 21834,
+      "sha256": "a88fdf9c52fe7a671ca908d0ecae558b083e41608d733dea986aecdce71a91f2"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-api-1.0.0.jar",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-api-1.0.0.jar",
+      "size": 50130,
+      "sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-cee-api-1.0.0-javadoc.jar",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-cee-api-1.0.0-javadoc.jar",
+      "size": 115745,
+      "sha256": "fa0c05d7c2d2f15d55945ac09ce386d0454e044d8ee6928d8efa2a099feacb62"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-cee-api-1.0.0-sources.jar",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-cee-api-1.0.0-sources.jar",
+      "size": 6305,
+      "sha256": "5cf223b0232750623b0901458b35ac2875de62a45a202c0af1839208d30b840a"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-cee-api-1.0.0.jar",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/libs/wwpg-cee-api-1.0.0.jar",
+      "size": 8788,
+      "sha256": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-javadoc.jar",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-javadoc.jar",
+      "size": 233870,
+      "sha256": "42e1a71775d06d109c86d4f740c8364578e19756001ee75e1ec6e9d34a7c5c2a"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-javadoc.jar.md5",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-javadoc.jar.md5",
+      "size": 32,
+      "sha256": "74093b8b4befcefcf0a9f1ae9ee23719f082d1791c063ad0457b641a04cb7146"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-javadoc.jar.sha1",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-javadoc.jar.sha1",
+      "size": 40,
+      "sha256": "8479d8df934c2758ac769fd9b63cbbac4451175a29b5556b92c359680447e4a0"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-javadoc.jar.sha256",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-javadoc.jar.sha256",
+      "size": 64,
+      "sha256": "de748741e5f6518b7e9f86e061ea6fb692decbcdf84fcac09dd42d6e066d6496"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-javadoc.jar.sha512",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-javadoc.jar.sha512",
+      "size": 128,
+      "sha256": "8a27c23b58d3265c647e96c6d050796aa9dbc76d253ef80bef112560c85ebcae"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-sources.jar",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-sources.jar",
+      "size": 21834,
+      "sha256": "a88fdf9c52fe7a671ca908d0ecae558b083e41608d733dea986aecdce71a91f2"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-sources.jar.md5",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-sources.jar.md5",
+      "size": 32,
+      "sha256": "4821eb21edd1ccf24456decabf80a9403bb5829eec7c170b8d17cb022c320e47"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-sources.jar.sha1",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-sources.jar.sha1",
+      "size": 40,
+      "sha256": "a5f39d6c40b6370e659d967feb8b029f8300a4c7085bc83b75e09113d3a43018"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-sources.jar.sha256",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-sources.jar.sha256",
+      "size": 64,
+      "sha256": "11a4e33641c71b1d09d941135a42825b5801bd4bec204ec6f4ca082f0f9470f3"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-sources.jar.sha512",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0-sources.jar.sha512",
+      "size": 128,
+      "sha256": "c9fbda8e651e66c3f797390dbf5ca16247b0b6e61df48341224994bde2a71d02"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.jar",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.jar",
+      "size": 50130,
+      "sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.jar.md5",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.jar.md5",
+      "size": 32,
+      "sha256": "886dea54844ba816c6f55886db6d90c648306dbabbe3b76f122644ea073a4f15"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.jar.sha1",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.jar.sha1",
+      "size": 40,
+      "sha256": "24771ead117a7379f91bb67ff8177bfb012a383737070088296d40aa6430262e"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.jar.sha256",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.jar.sha256",
+      "size": 64,
+      "sha256": "535610720a2b14f75d0d9d1e43738c3b7f26aa6eb649542992f0aef8afafc85c"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.jar.sha512",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.jar.sha512",
+      "size": 128,
+      "sha256": "b7a907d9106a43168a4cffabc5c509329927f2b004cb44fd7b9b2c3f3ea50184"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.pom",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.pom",
+      "size": 883,
+      "sha256": "7c12a12d8b3a2725c4ea2d70f3b204fdffdc511c4e2149db877ea08490aa7868"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.pom.md5",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.pom.md5",
+      "size": 32,
+      "sha256": "9f45bb9afdb75647205cd0a3d33ce87c6f8191272f23370baf7f465700213db8"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.pom.sha1",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.pom.sha1",
+      "size": 40,
+      "sha256": "ff41dae61771afbc8bc1866b9f8ec5e4c13f776c2ba2b3f12f0bd137a382e58c"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.pom.sha256",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.pom.sha256",
+      "size": 64,
+      "sha256": "a9b4d3f7a5f4387d702f1d047cb77ced6fa48252795b46b42ddbe2bed71b2c69"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.pom.sha512",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/1.0.0/wwpg-api-1.0.0.pom.sha512",
+      "size": 128,
+      "sha256": "d08179840b3891e98743ca5699e25cd4313a8d380cd7db6b485210f83695f987"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/maven-metadata.xml",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/maven-metadata.xml",
+      "size": 339,
+      "sha256": "3e26b5d8d7564069eaec07632192e494dff4c5b253f441d82460b0f59488f557"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/maven-metadata.xml.md5",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/maven-metadata.xml.md5",
+      "size": 32,
+      "sha256": "8522ebff15b8158d6fcb1ea53e3a43277b9cb6789052af7e5801b52fe952c3c8"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/maven-metadata.xml.sha1",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/maven-metadata.xml.sha1",
+      "size": 40,
+      "sha256": "132329f6bd264589dfc7083072b3df7867a9119bc40a210b105361dbc3637df1"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/maven-metadata.xml.sha256",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/maven-metadata.xml.sha256",
+      "size": 64,
+      "sha256": "226b0fe2ad2f6fdbb8f3ae326d6caa033d92d43f51f3b96f1841bc28d2d9e714"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/maven-metadata.xml.sha512",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-api/maven-metadata.xml.sha512",
+      "size": 128,
+      "sha256": "f55cc470e04e96505beaf82a3cbf86f9b5bb9d48a08f432d17154ffcfa55ff76"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-javadoc.jar",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-javadoc.jar",
+      "size": 115745,
+      "sha256": "fa0c05d7c2d2f15d55945ac09ce386d0454e044d8ee6928d8efa2a099feacb62"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-javadoc.jar.md5",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-javadoc.jar.md5",
+      "size": 32,
+      "sha256": "5172ba317e635ab18c6d9fc78a5a29c95c832f308dcc51fc9919c52797c7d9c6"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-javadoc.jar.sha1",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-javadoc.jar.sha1",
+      "size": 40,
+      "sha256": "7c202824fa3ff9c3d9f33ed1b860d7febdf8879e2ccc077ef8ebf7ccc6376a9b"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-javadoc.jar.sha256",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-javadoc.jar.sha256",
+      "size": 64,
+      "sha256": "df579f05486174d63044e00160faa489064ad5428941251a2b57778252957576"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-javadoc.jar.sha512",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-javadoc.jar.sha512",
+      "size": 128,
+      "sha256": "274368ec95a505e123ee2efc5489a4392dae9171fe6ad1a9654bd394f5398a59"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-sources.jar",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-sources.jar",
+      "size": 6305,
+      "sha256": "5cf223b0232750623b0901458b35ac2875de62a45a202c0af1839208d30b840a"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-sources.jar.md5",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-sources.jar.md5",
+      "size": 32,
+      "sha256": "c9d40fc7487ac498570db9b84ed466830d8cfc6c9df410e57a0775ab12ab65a8"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-sources.jar.sha1",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-sources.jar.sha1",
+      "size": 40,
+      "sha256": "37f0d21799f5a6d9af9170658160dbaf559055995312c767bbd116b07f5498d0"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-sources.jar.sha256",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-sources.jar.sha256",
+      "size": 64,
+      "sha256": "9d934c46c021588784ced3b4fe796a776d376fdeb747962a510faddfcf8b90c8"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-sources.jar.sha512",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0-sources.jar.sha512",
+      "size": 128,
+      "sha256": "45ce5e64efc3ac3fd4b5bb024c6c8325df682b0b230a37ccba512ef5543fff34"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.jar",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.jar",
+      "size": 8788,
+      "sha256": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.jar.md5",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.jar.md5",
+      "size": 32,
+      "sha256": "3843bee8cc0f464db650ed5c5a04ac04c80a234f9cb41d38f11a20b38240daa5"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.jar.sha1",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.jar.sha1",
+      "size": 40,
+      "sha256": "7155c842578df33fdb5b1e27691a82733001cff8e26834c5056fc6056a787699"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.jar.sha256",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.jar.sha256",
+      "size": 64,
+      "sha256": "7bc0c670d8c507d9f397b234ba09b93cf632e9a9ffc215e2db37633c8c4b78a5"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.jar.sha512",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.jar.sha512",
+      "size": 128,
+      "sha256": "d5bf222cc8cef41833d5010cb2c4dcd298d54b917ee36a76958c4f90e9e58415"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.pom",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.pom",
+      "size": 734,
+      "sha256": "459643274a97ce14fdcdfef90265394bfa7a5b04cb3496153c4faee20600169f"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.pom.md5",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.pom.md5",
+      "size": 32,
+      "sha256": "603f4a621b6b8a3e8b486a923471b9e17fe3cc05320fe44bf8356ca94e011971"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.pom.sha1",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.pom.sha1",
+      "size": 40,
+      "sha256": "f6a9ce9559fa557e146fedac9d8ff177e1fb5f6308501555e0360fc7708a9f11"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.pom.sha256",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.pom.sha256",
+      "size": 64,
+      "sha256": "efedcaab4d12c8eb3a3d7552de7a7ce0ef34e7fee62445b90b688db53bfc86a0"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.pom.sha512",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/1.0.0/wwpg-cee-api-1.0.0.pom.sha512",
+      "size": 128,
+      "sha256": "b20aa64bfc9aa229fba354419c5d6f10bd7445fa47d0e15c2654d7e8298296f3"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/maven-metadata.xml",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/maven-metadata.xml",
+      "size": 343,
+      "sha256": "e5a649abdf29091c6c4a975b476589ac6a9e9619c1ed454b94bfc73f1989a444"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/maven-metadata.xml.md5",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/maven-metadata.xml.md5",
+      "size": 32,
+      "sha256": "c3d8ccc4de8237b169137160a7bcdda070d4a9280b0b6808370d0151a4b66467"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/maven-metadata.xml.sha1",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/maven-metadata.xml.sha1",
+      "size": 40,
+      "sha256": "126df197db6e14776efdf04a8bd8f3a3cadb6952746a2b292d46518106233f2f"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/maven-metadata.xml.sha256",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/maven-metadata.xml.sha256",
+      "size": 64,
+      "sha256": "bcad69efdf0e4c2308c8d326f6f61d8b56a85e44e245557bd755a7615ba4b17a"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/maven-metadata.xml.sha512",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/maven-repository/org/cha0scollective/wwpg/wwpg-cee-api/maven-metadata.xml.sha512",
+      "size": 128,
+      "sha256": "30d56c6df0aa766e145d59c0e2b4cdc481f14d4be3106488daad48f322e7ec99"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.api.ApiVersionTest.html",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.api.ApiVersionTest.html",
+      "size": 1987,
+      "sha256": "3f60364633211ccdc220cf229c4706a560ad1300afc8a206ef03699e96e6c553"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.api.CircuitDescriptionTest.html",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.api.CircuitDescriptionTest.html",
+      "size": 2812,
+      "sha256": "2c83405425dc0fca3791ba86b8f9a385b0d9193574bde59335df15bdff38708a"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.api.DeviceResultsTest.html",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.api.DeviceResultsTest.html",
+      "size": 2764,
+      "sha256": "790971e0ea4074de0cfe58997b0d651891c12b35008b1596f65c959f080b799f"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.api.VoltageMeasurementTest.html",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.api.VoltageMeasurementTest.html",
+      "size": 2015,
+      "sha256": "a72e846fb59c3b45e05cf45982492b15e643e44e23ecd32acee655abfc05d4a6"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.api.cee.CeeAdapterRegistryTest.html",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.api.cee.CeeAdapterRegistryTest.html",
+      "size": 3201,
+      "sha256": "c2551d11c4c9aebb0608b55bd5af1f0be01501f5d0f143acbb1b15200391ce0f"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.bridge.BridgeSimulationResultsTest.html",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.bridge.BridgeSimulationResultsTest.html",
+      "size": 2235,
+      "sha256": "3a1a3cddb718360ee5bd2f523aa7c7ce963e735a1a5e5714305cf5b447d9442a"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.bridge.LinearBranchTest.html",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.bridge.LinearBranchTest.html",
+      "size": 2444,
+      "sha256": "e560072044bdcce563c517d2aa8efb31446a224a9b9249a5bf7f0d56ab941248"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.bridge.NativeCeeCheckpointTest.html",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.bridge.NativeCeeCheckpointTest.html",
+      "size": 2457,
+      "sha256": "bb02b8e7375764de84567395902fade23daf7bf94488ac83a555730d6a40556d"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.bridge.TransformerStampTest.html",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.bridge.TransformerStampTest.html",
+      "size": 2662,
+      "sha256": "11aa221ddde551a4b8970ca1ec9bd1024f1d983e2bf8f1993f9f12fda9260f99"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.ApiCeeWireIdentitiesTest.html",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.ApiCeeWireIdentitiesTest.html",
+      "size": 3126,
+      "sha256": "32b55dde7b2c377b135b8cc578ad1eff50eaafde8c2c7c0ab143008114df5984"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.ApiDiagnosticsTest.html",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.ApiDiagnosticsTest.html",
+      "size": 2166,
+      "sha256": "de1ef0ba62dc4de93670453882bc54c68ff8ca2994ed48c792da78a74073f103"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.ApiElectricalTest.html",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.ApiElectricalTest.html",
+      "size": 7144,
+      "sha256": "90daaa422577b596a8c44a15208984103b94ce3376695c2fc35c0833ebc76eb2"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.ApiGroundTest.html",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.ApiGroundTest.html",
+      "size": 3016,
+      "sha256": "6b57aa933440bd9d8c2744b4741db59607160016e1e47ebe516d1b5625ba63fb"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.ApiTerminalIdentitiesTest.html",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.ApiTerminalIdentitiesTest.html",
+      "size": 3280,
+      "sha256": "a524a0ba21e641c3ca6369e1b353ef5397947dad18e27de618d9c3f3b36312fe"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.NativeApiReadingsTest.html",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/classes/org.cha0scollective.wwpg.extension.NativeApiReadingsTest.html",
+      "size": 2355,
+      "sha256": "b2e537b38afa41dade70240d85afbe810aae7ec8e62caec5d53da05da9c8595d"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/css/base-style.css",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/css/base-style.css",
+      "size": 2645,
+      "sha256": "a10a4ef75ca2601b44bfdaf3112a5854f6376f68d7cbaf6958286f04488d293b"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/css/style.css",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/css/style.css",
+      "size": 1135,
+      "sha256": "61866908fd7eb09c79e96239f69db2e8cc5c6526cdb308eba0535ed2a0f6a263"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/index.html",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/index.html",
+      "size": 6592,
+      "sha256": "1423e396304427780efd348020ff4512072cfd75502e831b3b40160862c4de5c"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/js/report.js",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/js/report.js",
+      "size": 5252,
+      "sha256": "fc89c6d002d18f4662065c9887b2cda8f8486f2737d4ad0f2fdeac0ad58a44dc"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/packages/org.cha0scollective.wwpg.api.cee.html",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/packages/org.cha0scollective.wwpg.api.cee.html",
+      "size": 2098,
+      "sha256": "83200c3bc0e3fa98d29c6cf274279d063fafce979e6c543b25133c994fc527c7"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/packages/org.cha0scollective.wwpg.api.html",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/packages/org.cha0scollective.wwpg.api.html",
+      "size": 2723,
+      "sha256": "94128ef60bb39e15b82f42341a7b86feb16f435ede0c4248bb0266d316d19e42"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/packages/org.cha0scollective.wwpg.bridge.html",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/packages/org.cha0scollective.wwpg.bridge.html",
+      "size": 2766,
+      "sha256": "55623b3b54e938abc6472ed7dfbc0dbf9bab91f227b8b299c2a8f21ef5a023c2"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/packages/org.cha0scollective.wwpg.extension.html",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/reports/tests/test/packages/org.cha0scollective.wwpg.extension.html",
+      "size": 3219,
+      "sha256": "8bb03d9390e1684eb2a241244ff2aca5b8d427c33e5d2cc5264f881e7040cb64"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.api.ApiVersionTest.xml",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.api.ApiVersionTest.xml",
+      "size": 466,
+      "sha256": "7c8fd76a72b8d0a88bb390964988fe947b98729c8c3258095dbc459fc2894a09"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.api.CircuitDescriptionTest.xml",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.api.CircuitDescriptionTest.xml",
+      "size": 1274,
+      "sha256": "939f6e3fba82423bbfc662c03ec3503a4ddda67b2a05f9b956533eb9d0dc7ef8"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.api.DeviceResultsTest.xml",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.api.DeviceResultsTest.xml",
+      "size": 1207,
+      "sha256": "98b1cfb9b990a991c2722203c93485bdc27e2fd6690598dfd199e832d2fbf8f7"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.api.VoltageMeasurementTest.xml",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.api.VoltageMeasurementTest.xml",
+      "size": 488,
+      "sha256": "4ee5680b75ea2a3db00c9a44299c9ce4a999fcd951d3f25f28cb777095092708"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.api.cee.CeeAdapterRegistryTest.xml",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.api.cee.CeeAdapterRegistryTest.xml",
+      "size": 1688,
+      "sha256": "cdddf1a788feb7d8836f474eea413e80b52356b23abf59cb5d88b15a397c75cb"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.BridgeSimulationResultsTest.xml",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.BridgeSimulationResultsTest.xml",
+      "size": 709,
+      "sha256": "e04520c676fa078a251a5df119a9256140ba5a8f9318ad89ec7326b307d9bdda"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.LinearBranchTest.xml",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.LinearBranchTest.xml",
+      "size": 771,
+      "sha256": "07ff858cfc05b99fead228df5065dee6eef471b4e261f00a9b2bba76795e28ec"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.NativeCeeCheckpointTest.xml",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.NativeCeeCheckpointTest.xml",
+      "size": 937,
+      "sha256": "75184f85b15a577e8002ef77ae75107fb8ab76f1973bf80af1b0296631de6ec0"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.TransformerStampTest.xml",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.TransformerStampTest.xml",
+      "size": 988,
+      "sha256": "6ef50c6311a7e0e566037d19904ac3d825f027c2a25bd6eb6037444f5dcc2fb2"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiCeeWireIdentitiesTest.xml",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiCeeWireIdentitiesTest.xml",
+      "size": 1480,
+      "sha256": "0866ba7a0a83d88f05e00568f6cb908c2002483c78e7762086584fa850b465a8"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiDiagnosticsTest.xml",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiDiagnosticsTest.xml",
+      "size": 643,
+      "sha256": "c2fe1fd5e7e22048dee24c41c0d405a84dc157ef43f76b32c4875ae310074c78"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiElectricalTest.xml",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiElectricalTest.xml",
+      "size": 5470,
+      "sha256": "f0fd6ab7b208036e52c79b88f0932a455af4ccf0e27890a021b97666356c1016"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiGroundTest.xml",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiGroundTest.xml",
+      "size": 1341,
+      "sha256": "08829fadf8311bab1e7bab86b28d5958b3fe1b5586db775f4b704bd8eb0cae12"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiTerminalIdentitiesTest.xml",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiTerminalIdentitiesTest.xml",
+      "size": 1810,
+      "sha256": "dd0b8162b9739084d6d474d4b49b10dff920a8482c61ea6e53681a6b99f75f36"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.NativeApiReadingsTest.xml",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.NativeApiReadingsTest.xml",
+      "size": 835,
+      "sha256": "4b25ec67671a6c20227ffff7e76ed18fe58ca0aa8cc7aa184fa87cf3026341aa"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/binary/output.bin",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/binary/output.bin",
+      "size": 5904,
+      "sha256": "1e46e4fd6569aa23422c46ba097f2c9017ba63c3d1d24d443a7e950bb8c482c4"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/binary/output.bin.idx",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/binary/output.bin.idx",
+      "size": 473,
+      "sha256": "62529dafc3ffc41996892d0c6559bb44c94805e67c9cae362fa5048811aa6926"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/binary/results.bin",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/build/test-results/test/binary/results.bin",
+      "size": 9324,
+      "sha256": "0a907cfb92957c6dcffbdca97a154210fb84aac44bf8b7aa4fd7079464ba2aa2"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar",
+      "size": 45638,
+      "sha256": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar",
+      "size": 50820,
+      "sha256": "09a0ce693fa01a83793ee601707b460826f2bdf7e6bf0979df2c83f41f8dfee1"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/accuracy-accumulator.json",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/accuracy-accumulator.json",
+      "size": 60943,
+      "sha256": "5d0b1334620814dc655457b48fd84320b0fb3da98b33339f75491fe47f51309f"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/accuracy-rc.json",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/accuracy-rc.json",
+      "size": 60349,
+      "sha256": "6bdfcee4e9e39db1d4beac856a19e76c99ec20917ca6c7c729fe503f5d435d0f"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/accuracy-rl.json",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/accuracy-rl.json",
+      "size": 60687,
+      "sha256": "814cce00e25139fe205a4424318e713df6486a10e08b13c990d09bd3f97ab674"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pause/logs/debug.log",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pause/logs/debug.log",
+      "size": 18904,
+      "sha256": "ecd22d3ec94ba38cd43e3c52f814860fdbc64686d57522239ce90dda82811664"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pause/logs/latest.log",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pause/logs/latest.log",
+      "size": 18904,
+      "sha256": "ecd22d3ec94ba38cd43e3c52f814860fdbc64686d57522239ce90dda82811664"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pause/packaged-2026-10-11T11-29-18.398076010Z.json",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pause/packaged-2026-10-11T11-29-18.398076010Z.json",
+      "size": 771,
+      "sha256": "800520b00937edbcd03d046f995c6fc5ea25420ba5e6bdfa35cd20ff26afe8ce"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/arm-phase.log",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/arm-phase.log",
+      "size": 14199,
+      "sha256": "bba0fa02de91129475ebca06686c23f00d5a68e2c5d5c6ca0f94706472053df4"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/extension-api-pending-before-restart.nbt",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/extension-api-pending-before-restart.nbt",
+      "size": 229,
+      "sha256": "c6c69f33b709b635b8c3aa180ee93de51814ea83e93e85e1477c199f8feb545f"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/logs/2026-10-11-1.log.gz",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/logs/2026-10-11-1.log.gz",
+      "size": 3826,
+      "sha256": "3294f2db30a9222113f240c5083a8b530c2864e5cfd26fd80839b477ffa891ed"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/logs/2026-10-11-2.log.gz",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/logs/2026-10-11-2.log.gz",
+      "size": 4417,
+      "sha256": "fe5e7627fa682a90c3ef1b73b27ea6088a96e1c1dbf7c68c26be0a3c7449b94f"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/logs/debug-1.log.gz",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/logs/debug-1.log.gz",
+      "size": 3826,
+      "sha256": "3294f2db30a9222113f240c5083a8b530c2864e5cfd26fd80839b477ffa891ed"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/logs/debug-2.log.gz",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/logs/debug-2.log.gz",
+      "size": 4417,
+      "sha256": "fe5e7627fa682a90c3ef1b73b27ea6088a96e1c1dbf7c68c26be0a3c7449b94f"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/logs/debug.log",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/logs/debug.log",
+      "size": 15613,
+      "sha256": "54f4c175b0a8d30ed77e04dc12ff55b101afacd800327215389110925d717f0d"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/logs/latest.log",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/logs/latest.log",
+      "size": 15613,
+      "sha256": "54f4c175b0a8d30ed77e04dc12ff55b101afacd800327215389110925d717f0d"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/packaged-2026-10-11T11-29-42.140204288Z.json",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/packaged-2026-10-11T11-29-42.140204288Z.json",
+      "size": 781,
+      "sha256": "0c6c599e4f8ef51663d95d86bb8ad8046c1e86b8f9f82653d903801a3627dadd"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/packaged-2026-10-11T11-30-05.850712232Z.json",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/packaged-2026-10-11T11-30-05.850712232Z.json",
+      "size": 779,
+      "sha256": "e5fadf3aa21ab3ad72fcd53c90fcc2babb8e6ab6e9d55b18e6f332f3dd74091c"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/packaged-2026-10-11T11-30-27.819595559Z.json",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/packaged-2026-10-11T11-30-27.819595559Z.json",
+      "size": 782,
+      "sha256": "66da1b08ff4312525de45b4bad4d4b0704da8c3005aefb7772e761b6c5a822b4"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/setup-phase.log",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/setup-phase.log",
+      "size": 18479,
+      "sha256": "d85547b9657032611c5b38f170cf1c534e306cdb9a571d7c7b799dbacf0436f5"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/verify-phase.log",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api-pending-restart/verify-phase.log",
+      "size": 15613,
+      "sha256": "54f4c175b0a8d30ed77e04dc12ff55b101afacd800327215389110925d717f0d"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/extension-api-before-restart.nbt",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/extension-api-before-restart.nbt",
+      "size": 143,
+      "sha256": "353cbd8f704b1742b9195ffc0bc6d055695ab02cf1c91e769cb0c47a0160fca7"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/extension-api-replacement-before-restart.nbt",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/extension-api-replacement-before-restart.nbt",
+      "size": 233,
+      "sha256": "87489cad4326fa3f08225cf89a72113f3819f59fcaa9a9f15f08d0607ae0465f"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/logs/2026-10-11-1.log.gz",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/logs/2026-10-11-1.log.gz",
+      "size": 5881,
+      "sha256": "ef147e3fb1822fff6b74193bca92cf5651d50400d7574e5124c9687d0e8b820f"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/logs/2026-10-11-2.log.gz",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/logs/2026-10-11-2.log.gz",
+      "size": 5852,
+      "sha256": "7c9cd3eea7d772bc8b216cc58521d52f717a1679d3bd049499f7519fba119bb7"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/logs/2026-10-11-3.log.gz",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/logs/2026-10-11-3.log.gz",
+      "size": 6430,
+      "sha256": "8df9b48ae245c242c8626fd741772417d2e7d45481204cc548762ef8cda560cb"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/logs/debug-1.log.gz",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/logs/debug-1.log.gz",
+      "size": 5881,
+      "sha256": "ef147e3fb1822fff6b74193bca92cf5651d50400d7574e5124c9687d0e8b820f"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/logs/debug-2.log.gz",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/logs/debug-2.log.gz",
+      "size": 5852,
+      "sha256": "7c9cd3eea7d772bc8b216cc58521d52f717a1679d3bd049499f7519fba119bb7"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/logs/debug-3.log.gz",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/logs/debug-3.log.gz",
+      "size": 6430,
+      "sha256": "8df9b48ae245c242c8626fd741772417d2e7d45481204cc548762ef8cda560cb"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/logs/debug.log",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/logs/debug.log",
+      "size": 44565,
+      "sha256": "0afecc5f4f8948e9570025f2965b508332b470f773e604e84c729ab42c50957f"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/logs/latest.log",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/logs/latest.log",
+      "size": 44565,
+      "sha256": "0afecc5f4f8948e9570025f2965b508332b470f773e604e84c729ab42c50957f"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/packaged-2026-10-11T11-30-50.341707407Z.json",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/packaged-2026-10-11T11-30-50.341707407Z.json",
+      "size": 843,
+      "sha256": "bad0815424b80638ec4735fe8ef28b40067c7e9fb3e281bbfb0d8c2978aba613"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/packaged-2026-10-11T11-31-28.764703959Z.json",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/packaged-2026-10-11T11-31-28.764703959Z.json",
+      "size": 844,
+      "sha256": "50e9f0fca9f1356a0c54d1160305dd1160b131f9b60a9ed1d28db6a2ffdc4115"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/packaged-2026-10-11T11-32-06.405857550Z.json",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/packaged-2026-10-11T11-32-06.405857550Z.json",
+      "size": 844,
+      "sha256": "0526dd92232d289d97a8b240020e2d042f8975cd8339db4843a66b4756258394"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/packaged-2026-10-11T11-32-46.249527212Z.json",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/packaged-2026-10-11T11-32-46.249527212Z.json",
+      "size": 844,
+      "sha256": "b9c0f84d5d9b3ac2da24134ec0d92f1cb90ab95690006cbe73f5ae4a17a35543"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/restart-1.log",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/restart-1.log",
+      "size": 44537,
+      "sha256": "303a5249cb7e4a986dbc5ac72a229349aa8a71d04270994b102d8829f36d3300"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/restart-2.log",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/restart-2.log",
+      "size": 44605,
+      "sha256": "ac8692282b538dbac23721f8f0d7d0e7e35eacdb457fb4f6489c42fe12702e9d"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/restart-3.log",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/restart-3.log",
+      "size": 44565,
+      "sha256": "0afecc5f4f8948e9570025f2965b508332b470f773e604e84c729ab42c50957f"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/upstream-api-before-restart.nbt",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/api/upstream-api-before-restart.nbt",
+      "size": 464,
+      "sha256": "0edf8eec5c6f855b7d9c9dac73b11cb713490b9d46ba56c03b15eda69b3dc3d7"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/designer-before-restart.nbt",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/designer-before-restart.nbt",
+      "size": 562,
+      "sha256": "6cd0d4ba23a94a271439a597be4bb543b962dd3a43451cdd7f4632c768a007d6"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/designer-cycles-before-restart.nbt",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/designer-cycles-before-restart.nbt",
+      "size": 536,
+      "sha256": "52244eec562719a1feb1423c600e012db82010cac2fb00670f04542d628f73a9"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/duplex-before-restart.nbt",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/duplex-before-restart.nbt",
+      "size": 182,
+      "sha256": "dfca1d05125a00d6f4b856bd33837b6dd8b382cfcfb1b194aa2a03f0d74ee34d"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/fuse-holders-before-restart.nbt",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/fuse-holders-before-restart.nbt",
+      "size": 383,
+      "sha256": "262bde333461c842d32134713c46bac2759718fdce40ae5072152a5041050d78"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/logs/debug.log",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/logs/debug.log",
+      "size": 181786,
+      "sha256": "cab73b5b8a5cf15f29a8dc0d35aa58f029cd3288cc899a186eaaf450c7c70fc8"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/logs/latest.log",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/logs/latest.log",
+      "size": 181786,
+      "sha256": "cab73b5b8a5cf15f29a8dc0d35aa58f029cd3288cc899a186eaaf450c7c70fc8"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/nether-before-restart.nbt",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/nether-before-restart.nbt",
+      "size": 346,
+      "sha256": "78413bde43a5f104ce640c77b9139d8b48f2341b779adddd223a710d505cb818"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/packaged-2026-10-11T11-33-26.358467804Z.json",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/packaged-2026-10-11T11-33-26.358467804Z.json",
+      "size": 282,
+      "sha256": "78a6a8d93afc8d6d21cf4ca28c38a17a993db834d6c453664a45de278082842b"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/pentode-before-restart.nbt",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/pentode-before-restart.nbt",
+      "size": 663,
+      "sha256": "6cf273aedf2681af1be64119ef2cc7380a848b57fa239d6367ee37d4a05ce4f9"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/stationary-registry.json",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-artifact/run/stationary-registry.json",
+      "size": 99970,
+      "sha256": "d50c15cfd8832662b2e773ee6e0a3288498d33119c71c16e601ee57db04ebf61"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-job.log",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-BASE-job.log",
+      "size": 556122,
+      "sha256": "54991e35dc1112dca986ed5ecb394cbae03541924818c6d8481681f7f81b0cf4"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-JAVA-PINOUT-job.log",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-JAVA-PINOUT-job.log",
+      "size": 601291,
+      "sha256": "a4a4246635d0fa209c3d97e2a68cc2ce196002192213dbde3b5598c44f4dbd42"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-NATIVE-BASE-job.log",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-NATIVE-BASE-job.log",
+      "size": 555675,
+      "sha256": "8f929cafa8a633b931f88d07fdcf93ab297d073cbdc94f1839149e4c716812a8"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/ubuntu-NATIVE-PINOUT-job.log",
+      "source_path": "build/preliminary-ci-38135640810/ubuntu-NATIVE-PINOUT-job.log",
+      "size": 375426,
+      "sha256": "3879e1126d52bada7753d255d2323f42a0e279f660a6ad6525818f08cd0af2fe"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/windows-JAVA-BASE-job.log",
+      "source_path": "build/preliminary-ci-38135640810/windows-JAVA-BASE-job.log",
+      "size": 222408,
+      "sha256": "4d32ac5da9bc83a5bdf461001ad0cb5e38288b477e08b8aa4d25a59769798295"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/windows-JAVA-PINOUT-job.log",
+      "source_path": "build/preliminary-ci-38135640810/windows-JAVA-PINOUT-job.log",
+      "size": 598795,
+      "sha256": "7c23007cabd81c239031de120d76f640160e89e42fcae698f7d48c88fc4ca597"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/windows-NATIVE-BASE-job.log",
+      "source_path": "build/preliminary-ci-38135640810/windows-NATIVE-BASE-job.log",
+      "size": 553707,
+      "sha256": "3dc584649359d351cc97ed7fb9c11630d44b88683df7281c03ec5fb9c9632e6d"
+    },
+    {
+      "path": "build/preliminary-ci-38135640810/windows-NATIVE-PINOUT-job.log",
+      "source_path": "build/preliminary-ci-38135640810/windows-NATIVE-PINOUT-job.log",
+      "size": 602117,
+      "sha256": "b66df1b5d54aec2cedac9862129ef13b9f63f80fe67aef00815f72f98ea40caa"
+    },
+    {
+      "path": "build/wwpg-api-example-item-dispatch-corrected-26.jar",
+      "source_path": "build/wwpg-api-example-item-dispatch-corrected-26.jar",
+      "size": 52085,
+      "sha256": "90a52b8ca6d65860043e816d4d101dc3e014dd7c947133e48a0dfe7a49490cd4"
+    },
+    {
+      "path": "build/wwpg-api-example-item-dispatch-negative-26.jar",
+      "source_path": "build/wwpg-api-example-item-dispatch-negative-26.jar",
+      "size": 51835,
+      "sha256": "eb2daaab8d020044ae833ad9f91583c6de1b0f8302194428b04aeb4c6e1adaf5"
+    },
+    {
       "path": "run/api-complete-NATIVE-11/logs/debug.log",
       "source_path": "run/api-complete-NATIVE-11/logs/debug.log",
       "size": 38509,
@@ -1737,6 +3614,816 @@
       "sha256": "ec4801b1a984c385ed1832326a7da55aca1fdc7d8e3e82d1c0a22a40c9be36de"
     },
     {
+      "path": "run/api22-full-JAVA/logs/2026-10-11-1.log.gz",
+      "source_path": "run/api22-full-JAVA/logs/2026-10-11-1.log.gz",
+      "size": 5859,
+      "sha256": "3758372ee270b74537bb62d7f7d69ac9e1f0a890310d49cfc41ece8b30a31e1c"
+    },
+    {
+      "path": "run/api22-full-JAVA/logs/2026-10-11-2.log.gz",
+      "source_path": "run/api22-full-JAVA/logs/2026-10-11-2.log.gz",
+      "size": 5844,
+      "sha256": "9b9724675e646d91b71930d9d75104d0c79e84a7d7befea1980e0947575d8fb4"
+    },
+    {
+      "path": "run/api22-full-JAVA/logs/2026-10-11-3.log.gz",
+      "source_path": "run/api22-full-JAVA/logs/2026-10-11-3.log.gz",
+      "size": 6391,
+      "sha256": "3388f5e66ad2b59beaa1f2eb95661b35daa006f01e77174049a4ccced7f5ae0e"
+    },
+    {
+      "path": "run/api22-full-JAVA/logs/debug-1.log.gz",
+      "source_path": "run/api22-full-JAVA/logs/debug-1.log.gz",
+      "size": 5859,
+      "sha256": "3758372ee270b74537bb62d7f7d69ac9e1f0a890310d49cfc41ece8b30a31e1c"
+    },
+    {
+      "path": "run/api22-full-JAVA/logs/debug-2.log.gz",
+      "source_path": "run/api22-full-JAVA/logs/debug-2.log.gz",
+      "size": 5844,
+      "sha256": "9b9724675e646d91b71930d9d75104d0c79e84a7d7befea1980e0947575d8fb4"
+    },
+    {
+      "path": "run/api22-full-JAVA/logs/debug-3.log.gz",
+      "source_path": "run/api22-full-JAVA/logs/debug-3.log.gz",
+      "size": 6391,
+      "sha256": "3388f5e66ad2b59beaa1f2eb95661b35daa006f01e77174049a4ccced7f5ae0e"
+    },
+    {
+      "path": "run/api22-full-JAVA/logs/debug.log",
+      "source_path": "run/api22-full-JAVA/logs/debug.log",
+      "size": 44751,
+      "sha256": "39f6647cef575851f692e9fe09933edca6bcbae9f43df3e3dd3f94280f42ddc0"
+    },
+    {
+      "path": "run/api22-full-JAVA/logs/latest.log",
+      "source_path": "run/api22-full-JAVA/logs/latest.log",
+      "size": 44751,
+      "sha256": "39f6647cef575851f692e9fe09933edca6bcbae9f43df3e3dd3f94280f42ddc0"
+    },
+    {
+      "path": "run/api22-full-JAVA/packaged-2026-10-11T11-29-31.605863200Z.json",
+      "source_path": "run/api22-full-JAVA/packaged-2026-10-11T11-29-31.605863200Z.json",
+      "size": 843,
+      "sha256": "57a4eb55abf5b4b4f990ec2cbf63a8f36063e6e08e2b36424c1e148706489427"
+    },
+    {
+      "path": "run/api22-full-JAVA/packaged-2026-10-11T11-30-06.410151100Z.json",
+      "source_path": "run/api22-full-JAVA/packaged-2026-10-11T11-30-06.410151100Z.json",
+      "size": 844,
+      "sha256": "3686e10b640619bd731e8825b220a4e5c3fa07ba548946bf4b8c47b46319c80e"
+    },
+    {
+      "path": "run/api22-full-JAVA/packaged-2026-10-11T11-30-40.775810400Z.json",
+      "source_path": "run/api22-full-JAVA/packaged-2026-10-11T11-30-40.775810400Z.json",
+      "size": 844,
+      "sha256": "a008d226fc2dd956bed845d5adbbf09b32d1d2922ac0fa913359e7247bdd3a8e"
+    },
+    {
+      "path": "run/api22-full-JAVA/packaged-2026-10-11T11-31-16.293439500Z.json",
+      "source_path": "run/api22-full-JAVA/packaged-2026-10-11T11-31-16.293439500Z.json",
+      "size": 844,
+      "sha256": "4bec547507d93aa366ad7835fc3b483299613196f988fbbd5d8a3838367a3dfd"
+    },
+    {
+      "path": "run/api22-pause-JAVA/logs/debug.log",
+      "source_path": "run/api22-pause-JAVA/logs/debug.log",
+      "size": 18996,
+      "sha256": "080086f1f1813393c31a3d2fca4b4da63f045c0ac62e90f22c6c984d5998d461"
+    },
+    {
+      "path": "run/api22-pause-JAVA/logs/latest.log",
+      "source_path": "run/api22-pause-JAVA/logs/latest.log",
+      "size": 18996,
+      "sha256": "080086f1f1813393c31a3d2fca4b4da63f045c0ac62e90f22c6c984d5998d461"
+    },
+    {
+      "path": "run/api22-pause-JAVA/packaged-2026-10-11T11-31-54.505230200Z.json",
+      "source_path": "run/api22-pause-JAVA/packaged-2026-10-11T11-31-54.505230200Z.json",
+      "size": 771,
+      "sha256": "3404e5997cc82479ae7e12336546a5384760073b96d67d9e2709603fc280b4b0"
+    },
+    {
+      "path": "run/api22-workshop-BASE/logs/debug.log",
+      "source_path": "run/api22-workshop-BASE/logs/debug.log",
+      "size": 23784,
+      "sha256": "8efc0442a48dfc2ea9338c298fda26398d6d824edfc298e62159df900a55b1a6"
+    },
+    {
+      "path": "run/api22-workshop-BASE/logs/latest.log",
+      "source_path": "run/api22-workshop-BASE/logs/latest.log",
+      "size": 23784,
+      "sha256": "8efc0442a48dfc2ea9338c298fda26398d6d824edfc298e62159df900a55b1a6"
+    },
+    {
+      "path": "run/api22-workshop-BASE/packaged-2026-10-11T11-32-59.916508500Z.json",
+      "source_path": "run/api22-workshop-BASE/packaged-2026-10-11T11-32-59.916508500Z.json",
+      "size": 690,
+      "sha256": "c84093aedf6b163b7228fae17ccf62c018ea147a1c8ec2119d6383a5d8197b7e"
+    },
+    {
+      "path": "run/api23-workshop-BASE/logs/2026-10-11-1.log.gz",
+      "source_path": "run/api23-workshop-BASE/logs/2026-10-11-1.log.gz",
+      "size": 5038,
+      "sha256": "e8f7159b04650bde2b890204416d8d974f4c12ccf8a59a1329d5b8c47216dbe2"
+    },
+    {
+      "path": "run/api23-workshop-BASE/logs/debug-1.log.gz",
+      "source_path": "run/api23-workshop-BASE/logs/debug-1.log.gz",
+      "size": 5038,
+      "sha256": "e8f7159b04650bde2b890204416d8d974f4c12ccf8a59a1329d5b8c47216dbe2"
+    },
+    {
+      "path": "run/api23-workshop-BASE/logs/debug.log",
+      "source_path": "run/api23-workshop-BASE/logs/debug.log",
+      "size": 19012,
+      "sha256": "da3bbd1013aa621ce5b798093575aaecca5af20f27d9f7c791e27b11dbcad64d"
+    },
+    {
+      "path": "run/api23-workshop-BASE/logs/latest.log",
+      "source_path": "run/api23-workshop-BASE/logs/latest.log",
+      "size": 19012,
+      "sha256": "da3bbd1013aa621ce5b798093575aaecca5af20f27d9f7c791e27b11dbcad64d"
+    },
+    {
+      "path": "run/api23-workshop-BASE/packaged-2026-10-11T11-37-19.247266300Z.json",
+      "source_path": "run/api23-workshop-BASE/packaged-2026-10-11T11-37-19.247266300Z.json",
+      "size": 773,
+      "sha256": "3382c2c024896df8a95aa6494dabc34790934e9e9868bc2e690b3be050f850ab"
+    },
+    {
+      "path": "run/api23-workshop-BASE/packaged-2026-10-11T11-38-52.801666100Z.json",
+      "source_path": "run/api23-workshop-BASE/packaged-2026-10-11T11-38-52.801666100Z.json",
+      "size": 691,
+      "sha256": "0f17ccd1ea0043c14f263c71c8b1ba026893a07a8279f702033cf155d93493a8"
+    },
+    {
+      "path": "run/api24-regression-NATIVE/logs/debug.log",
+      "source_path": "run/api24-regression-NATIVE/logs/debug.log",
+      "size": 181273,
+      "sha256": "992bd7f4cc89e9450c232717b671e8ca00c22e46f3510f5cf02674905150b0a6"
+    },
+    {
+      "path": "run/api24-regression-NATIVE/logs/latest.log",
+      "source_path": "run/api24-regression-NATIVE/logs/latest.log",
+      "size": 181273,
+      "sha256": "992bd7f4cc89e9450c232717b671e8ca00c22e46f3510f5cf02674905150b0a6"
+    },
+    {
+      "path": "run/api24-regression-NATIVE/packaged-2026-10-11T11-45-33.967018Z.json",
+      "source_path": "run/api24-regression-NATIVE/packaged-2026-10-11T11-45-33.967018Z.json",
+      "size": 281,
+      "sha256": "d52f6cc0f5a04a2b7c9d96b412b94e405243db95b143172e7a4f94e04dcfae63"
+    },
+    {
+      "path": "run/api24-workshop-BASE/logs/2026-10-11-1.log.gz",
+      "source_path": "run/api24-workshop-BASE/logs/2026-10-11-1.log.gz",
+      "size": 4285,
+      "sha256": "73d06a2cdfb003ebcc9deb2b9f026980c659d91d8e3d9f78d76bc78f72626b38"
+    },
+    {
+      "path": "run/api24-workshop-BASE/logs/2026-10-11-2.log.gz",
+      "source_path": "run/api24-workshop-BASE/logs/2026-10-11-2.log.gz",
+      "size": 4314,
+      "sha256": "a0a297f057396fbf66238fdf99e2330df5b1869e3e83e1c99ed4054f3614240d"
+    },
+    {
+      "path": "run/api24-workshop-BASE/logs/2026-10-11-3.log.gz",
+      "source_path": "run/api24-workshop-BASE/logs/2026-10-11-3.log.gz",
+      "size": 5026,
+      "sha256": "3d421fb7605d51a220f7ecda8b4a9a1df8fa92c59dbf3b378fcab4b823d150ba"
+    },
+    {
+      "path": "run/api24-workshop-BASE/logs/debug-1.log.gz",
+      "source_path": "run/api24-workshop-BASE/logs/debug-1.log.gz",
+      "size": 4285,
+      "sha256": "73d06a2cdfb003ebcc9deb2b9f026980c659d91d8e3d9f78d76bc78f72626b38"
+    },
+    {
+      "path": "run/api24-workshop-BASE/logs/debug-2.log.gz",
+      "source_path": "run/api24-workshop-BASE/logs/debug-2.log.gz",
+      "size": 4314,
+      "sha256": "a0a297f057396fbf66238fdf99e2330df5b1869e3e83e1c99ed4054f3614240d"
+    },
+    {
+      "path": "run/api24-workshop-BASE/logs/debug-3.log.gz",
+      "source_path": "run/api24-workshop-BASE/logs/debug-3.log.gz",
+      "size": 5026,
+      "sha256": "3d421fb7605d51a220f7ecda8b4a9a1df8fa92c59dbf3b378fcab4b823d150ba"
+    },
+    {
+      "path": "run/api24-workshop-BASE/logs/debug.log",
+      "source_path": "run/api24-workshop-BASE/logs/debug.log",
+      "size": 20511,
+      "sha256": "d10322105066204d3e699ae69c5202f8fb80d7826d26a9516b9b8dc2ef9f9d64"
+    },
+    {
+      "path": "run/api24-workshop-BASE/logs/latest.log",
+      "source_path": "run/api24-workshop-BASE/logs/latest.log",
+      "size": 20511,
+      "sha256": "d10322105066204d3e699ae69c5202f8fb80d7826d26a9516b9b8dc2ef9f9d64"
+    },
+    {
+      "path": "run/api24-workshop-BASE/packaged-2026-10-11T11-43-39.367268600Z.json",
+      "source_path": "run/api24-workshop-BASE/packaged-2026-10-11T11-43-39.367268600Z.json",
+      "size": 773,
+      "sha256": "ddf0f219d0c094a3ad78c2b769c02eb42d38535c5669ed6481f192d6e905374b"
+    },
+    {
+      "path": "run/api24-workshop-BASE/packaged-2026-10-11T11-44-03.640649700Z.json",
+      "source_path": "run/api24-workshop-BASE/packaged-2026-10-11T11-44-03.640649700Z.json",
+      "size": 774,
+      "sha256": "1e150a8cf57ec0dea3b976323cb9aaf2ea2eeee48687b332b545c658ed738879"
+    },
+    {
+      "path": "run/api24-workshop-BASE/packaged-2026-10-11T11-44-28.339432300Z.json",
+      "source_path": "run/api24-workshop-BASE/packaged-2026-10-11T11-44-28.339432300Z.json",
+      "size": 774,
+      "sha256": "ed433bec3c1fbeb6e4d2261e359283a28d7b14713270b356a26d092bc9ec3824"
+    },
+    {
+      "path": "run/api24-workshop-BASE/packaged-2026-10-11T11-44-52.262356Z.json",
+      "source_path": "run/api24-workshop-BASE/packaged-2026-10-11T11-44-52.262356Z.json",
+      "size": 771,
+      "sha256": "a8f2bd7e3295ce3b93f828bb9c16952a29afa936eb23e81097bdff3a937c75ed"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/api-multiplayer-result.json",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/api-multiplayer-result.json",
+      "size": 1096,
+      "sha256": "fff5dadadaba77c90a84476a6062a0a21da87e71efd5cfd89a3efd51fdaf42c2"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/client-a-threads.txt",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/client-a-threads.txt",
+      "size": 79762,
+      "sha256": "7407b708ac98417417668156e43f4760ebb0f447ce05cf6ced30fa7d6216c1f9"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/client-a.log",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/client-a.log",
+      "size": 19880,
+      "sha256": "7695fc527458a36eae29181b8f77a76e5393bb272e3a3a4a49f414a068062655"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/client-a/logs/debug.log",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/client-a/logs/debug.log",
+      "size": 21945,
+      "sha256": "d1b943eee6654a42767cf2e8b9121a065e51d3da6c3cd02958ad1e9033996b36"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/client-a/logs/latest.log",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/client-a/logs/latest.log",
+      "size": 21945,
+      "sha256": "d1b943eee6654a42767cf2e8b9121a065e51d3da6c3cd02958ad1e9033996b36"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/client-a/options.txt",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/client-a/options.txt",
+      "size": 4230,
+      "sha256": "ffef343513dc3be2feebed471681586dfaed848ffa50482022ee9230b439d156"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/client-b-threads.txt",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/client-b-threads.txt",
+      "size": 79766,
+      "sha256": "522d9b6cb23574b5a3d833dbd708539b47bea887ec308ad819b3f549632b03cd"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/client-b.log",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/client-b.log",
+      "size": 19981,
+      "sha256": "5b1d04e04f8295630eb87d0f04c713071ba4d927f2352bfc87f29e1e3a6e6f24"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/client-b/logs/debug.log",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/client-b/logs/debug.log",
+      "size": 22087,
+      "sha256": "c1c9772d4d8be4804104a23eedb357ef9146e11f6d381ec9ae898cfbb1e3bd26"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/client-b/logs/latest.log",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/client-b/logs/latest.log",
+      "size": 22087,
+      "sha256": "c1c9772d4d8be4804104a23eedb357ef9146e11f6d381ec9ae898cfbb1e3bd26"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/client-b/options.txt",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/client-b/options.txt",
+      "size": 4230,
+      "sha256": "ffef343513dc3be2feebed471681586dfaed848ffa50482022ee9230b439d156"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/launch.json",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/launch.json",
+      "size": 3572,
+      "sha256": "122039fd87effd850e7b61fed426fd119b302eec5be9d983a34e8a6513472bc9"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/launch/client-a-launch.txt",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/launch/client-a-launch.txt",
+      "size": 20778,
+      "sha256": "cfa64d0bb294d211395798d46dfad9a5a9c650b86fe00b018b45dd1eae3d149d"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/launch/client-a-legacy.txt",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/launch/client-a-legacy.txt",
+      "size": 16473,
+      "sha256": "bf0ee93fba83493d5de07658ba4b4e68921a1fa2ad77b9c14e31f6ea7915d563"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/launch/client-a-program.txt",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/launch/client-a-program.txt",
+      "size": 477,
+      "sha256": "2a1825aaaf1316512cf91b3c3ebd79f0fc7b956f7eaefd0e0e10275c5e087e03"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/launch/client-a-vm.txt",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/launch/client-a-vm.txt",
+      "size": 2114,
+      "sha256": "1c184aad28581d6732ee0b122c57c363e2a7e898668de413202afa2f3602da4b"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/launch/client-b-launch.txt",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/launch/client-b-launch.txt",
+      "size": 20778,
+      "sha256": "1117a2a46f9a4dcb970e442863bb18496b666dcf9f444a390875afc2d5f08f2b"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/launch/client-b-legacy.txt",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/launch/client-b-legacy.txt",
+      "size": 16473,
+      "sha256": "bf0ee93fba83493d5de07658ba4b4e68921a1fa2ad77b9c14e31f6ea7915d563"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/launch/client-b-program.txt",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/launch/client-b-program.txt",
+      "size": 477,
+      "sha256": "6d016c12370b9acc16d474ccb85aa52176c276d338dc1d8b05c61e289b973d35"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/launch/client-b-vm.txt",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/launch/client-b-vm.txt",
+      "size": 2114,
+      "sha256": "804375806f3ef56c82b3224634870852c157995e3623c893be9809a6eb7619e3"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/launch/server-launch.txt",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/launch/server-launch.txt",
+      "size": 20767,
+      "sha256": "79a1b157e9e8e4bc3a5187eb1fce237f95ec64c44079dc4ea42622437c2234e3"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/launch/server-legacy.txt",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/launch/server-legacy.txt",
+      "size": 10368,
+      "sha256": "f75f2e62061484defdbc60bcae925fa38477693813169d7f5a842c8d8cb09ffa"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/launch/server-program.txt",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/launch/server-program.txt",
+      "size": 288,
+      "sha256": "403d7609761c93800bb4d4017da11310885d9156710d30f784058868e9ddb191"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/launch/server-vm.txt",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/launch/server-vm.txt",
+      "size": 2391,
+      "sha256": "fe65d67162bb6ec2e1bf88216bc7111de1a958be81c0587848c316c598250826"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/server.log",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/server.log",
+      "size": 27087,
+      "sha256": "2e646a1643a9a3b12474e7a22b84a688246d85fb9df2fb8c88b632dbd54ac598"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/server/extracted-yard.json",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/server/extracted-yard.json",
+      "size": 511,
+      "sha256": "fecba18ef89d7b3e3f1a125ec870ba8f0cf01730914f037b6b78643f3cadf6f7"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/server/logs/debug.log",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/server/logs/debug.log",
+      "size": 30272,
+      "sha256": "3e6a40dce8f4b6a3b765b16b8bd4f84e8488c9c1a679c9db794782c0c50945e1"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/server/logs/latest.log",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/server/logs/latest.log",
+      "size": 30272,
+      "sha256": "3e6a40dce8f4b6a3b765b16b8bd4f84e8488c9c1a679c9db794782c0c50945e1"
+    },
+    {
+      "path": "run/api25-api-multiplayer-BASE-NATIVE/server/usernamecache.json",
+      "source_path": "run/api25-api-multiplayer-BASE-NATIVE/server/usernamecache.json",
+      "size": 106,
+      "sha256": "c9b74cf7672cf13c8689e7ee0375cc872836502371976850d7ecfe0d42accc81"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/api_multiplayer.gradle",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/api_multiplayer.gradle",
+      "size": 10501,
+      "sha256": "86b75bfee4e3f29d71be70436d3cd58566b4b33020457461d9b0d149eb8f6bdd"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/resources/META-INF/neoforge.mods.toml",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/resources/META-INF/neoforge.mods.toml",
+      "size": 354,
+      "sha256": "d493caee15dfd18d8242f2c03748fde524fd9f0774f12813c80e73f4eef25ad6"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ApiWorkshopClientAcceptance.java",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ApiWorkshopClientAcceptance.java",
+      "size": 23739,
+      "sha256": "92cd3d9920ed6e56564a51aab1d85dd818ab4d28c778b5ee3d5be1ce6025df88"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ExpandedClientAcceptance.java",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ExpandedClientAcceptance.java",
+      "size": 34837,
+      "sha256": "93598b6e21d46b850ef75336485e17e1e268c08e8a77347294d57141787e90b3"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/acceptance-helper/wwpg-api-client-acceptance.jar",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/acceptance-helper/wwpg-api-client-acceptance.jar",
+      "size": 36707,
+      "sha256": "954cc94b0f8b5fa8702a8c3c1d28ea51baac2b29a32983747fb9c4a3216414dc"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/api-multiplayer-result.json",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/api-multiplayer-result.json",
+      "size": 1096,
+      "sha256": "31856adc74206592d7713f5805f76fd03caf3145acfcc72081fea4efdced77f1"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-a-threads.txt",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-a-threads.txt",
+      "size": 74803,
+      "sha256": "5c1c8b123cd1299630be94ec5d97808e491ef1636fcde46c1526fb3ea660fa7d"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-a.log",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-a.log",
+      "size": 20668,
+      "sha256": "25e6bb62c93f24cb64b3ee4abed91041620eb87cdbb85e5193e645d4369d9917"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/logs/debug.log",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/logs/debug.log",
+      "size": 24508,
+      "sha256": "128015243c59de8ccaceb3ad86f74ab31087d188bad5e51a50ea539d3c8f8c8a"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/logs/latest.log",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/logs/latest.log",
+      "size": 24508,
+      "sha256": "128015243c59de8ccaceb3ad86f74ab31087d188bad5e51a50ea539d3c8f8c8a"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/options.txt",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/options.txt",
+      "size": 4230,
+      "sha256": "ffef343513dc3be2feebed471681586dfaed848ffa50482022ee9230b439d156"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A01.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A01.png",
+      "size": 172788,
+      "sha256": "d29d93981cf4bc5dd2a72ab8bdbc16a5e1474530e332b6105406bc796215ecfe"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A02.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A02.png",
+      "size": 219958,
+      "sha256": "f235e73728af67c4d5feb853b1c031521ac28c4eed42b5d5ebf922af4bae8f5d"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A03.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A03.png",
+      "size": 199367,
+      "sha256": "29606cfdef9031d9124b743007fe7c9526c54296c295b72942b97ad24d126e49"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A04.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A04.png",
+      "size": 214759,
+      "sha256": "a180e366cd2b1c2d04d154c371f5fa35576d12a1f0038d9148cf9744f3697802"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A05.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A05.png",
+      "size": 221493,
+      "sha256": "5cd885031c083566779ca2e1baa183e21e0709192c4b025a43d3f16b5f9ec121"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A06.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A06.png",
+      "size": 205109,
+      "sha256": "132fa69bbf58297a1d0fcb78d2cde599a70d6ccc7ef0cde6f8193a74b1d44056"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A07.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A07.png",
+      "size": 202770,
+      "sha256": "75c45d5f7cd84661c4355d39bf106f300c929896cc6be1ed612c7f1615ffb1d2"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A08.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A08.png",
+      "size": 194694,
+      "sha256": "812b6d90ae7072088762165621a7cf5e5f8d4b85813afc9bfe6f7e956c53b52f"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A09.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A09.png",
+      "size": 203103,
+      "sha256": "8514dfd17bac929dd4056cfaa079749fab53fa601b5d62932bbbef7d30d35516"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A10.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A10.png",
+      "size": 131998,
+      "sha256": "776868647cd9926b0db0f2f7562481bd2b0585e62c58f7b63a0af098720648c0"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A11.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A11.png",
+      "size": 153142,
+      "sha256": "e176f5623948cf3f02e5379c7a786a37f870ddc76132ed419fcbf49a528e7ba8"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-wire-A.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-wire-A.png",
+      "size": 180662,
+      "sha256": "86997656aa9f81bed901519c4ff7436a8aa2c7ffccadff886122566bed4cf749"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-b-threads.txt",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-b-threads.txt",
+      "size": 75899,
+      "sha256": "84871c69892efc88962e17ac50d0f9c0480fecacccda6db1617f7b780014ee64"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-b.log",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-b.log",
+      "size": 20972,
+      "sha256": "baff47173723a59a188179ad041e22b1598c7c5ad1dc0665e33860caee61ee52"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/logs/debug.log",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/logs/debug.log",
+      "size": 24935,
+      "sha256": "5f565471d58f9014808076ecd5ea5a3beeff9ed5a44f6fcb4699de95dee08c01"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/logs/latest.log",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/logs/latest.log",
+      "size": 24935,
+      "sha256": "5f565471d58f9014808076ecd5ea5a3beeff9ed5a44f6fcb4699de95dee08c01"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/options.txt",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/options.txt",
+      "size": 4230,
+      "sha256": "ffef343513dc3be2feebed471681586dfaed848ffa50482022ee9230b439d156"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A01.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A01.png",
+      "size": 224316,
+      "sha256": "9e4a2706e04a6675657490f4f65f197797de53fcc02f44bfc3a1a2897abbf21d"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A02.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A02.png",
+      "size": 231041,
+      "sha256": "9b3fb5aa3a7c9bd944fcb8347b23fb988a28a3c19cf385f089b6a83ad62930a7"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A03.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A03.png",
+      "size": 221542,
+      "sha256": "3298bb57d7f1d5465b0d8968d8c568cb2629f07d968cda08f318cc3044056f68"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A04.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A04.png",
+      "size": 198816,
+      "sha256": "99f3f3066cdafe8aadd1e73c44fa85fc275edf5f3bb6cea7e9ccb57511802c61"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A05.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A05.png",
+      "size": 223276,
+      "sha256": "bc792ebbd793e7fad944cf53e78e5efb82c426f868855c612553c5fa8251b7b4"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A06.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A06.png",
+      "size": 216730,
+      "sha256": "43c217998c670b60dd63ac69e84eb2bd5797d02f0eb0d9846ad39209793926d2"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A07.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A07.png",
+      "size": 187325,
+      "sha256": "9cd76012b83cef536e111217adbf200f1a3f8c3a00377d96215c2edee2fb8c40"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A08.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A08.png",
+      "size": 197540,
+      "sha256": "cf82469d4248dcdf448821b15ed78c052027e0c5da92c113e8940f4739814cc6"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A09.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A09.png",
+      "size": 198325,
+      "sha256": "8ff112c65d4c03ae897623a018e24bde04c48c47d5c003836a94e59a59721f57"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A10.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A10.png",
+      "size": 144713,
+      "sha256": "b165f6962e2f65e39a8ba90b330bbb48b765f3e2095c54270519d7f31b8b8239"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A11.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A11.png",
+      "size": 152249,
+      "sha256": "cd94e1c937c2bf0d20e5f9078464b482063d988166726c037dfa44ae001f4ecb"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-wire-B.png",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-wire-B.png",
+      "size": 221045,
+      "sha256": "9466577ab2543871823e520c568996739c3991aae5d3f4d543d6b52fe401c1e4"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/launch.json",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/launch.json",
+      "size": 5912,
+      "sha256": "2011e76bc939e94b5d2a397e1ce5d549537cc89cb24644b0fc03b131a2e8a551"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/launch/client-a-launch.txt",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/launch/client-a-launch.txt",
+      "size": 20805,
+      "sha256": "0503b8c9cfa44c50e544dd2f94e167fd46fd641c6e48d2debaf24cddc777b2d6"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/launch/client-a-legacy.txt",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/launch/client-a-legacy.txt",
+      "size": 16473,
+      "sha256": "bf0ee93fba83493d5de07658ba4b4e68921a1fa2ad77b9c14e31f6ea7915d563"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/launch/client-a-program.txt",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/launch/client-a-program.txt",
+      "size": 477,
+      "sha256": "2a1825aaaf1316512cf91b3c3ebd79f0fc7b956f7eaefd0e0e10275c5e087e03"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/launch/client-a-vm.txt",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/launch/client-a-vm.txt",
+      "size": 2114,
+      "sha256": "30ba2879363d18fc6e48c3ee79ca5d988443fcc7895681e50bcff36cde548cd0"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/launch/client-b-launch.txt",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/launch/client-b-launch.txt",
+      "size": 20805,
+      "sha256": "78f198e091ea66b136d97cbec0a9d085c8b13f8ed6c81fe27625a427e65e1250"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/launch/client-b-legacy.txt",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/launch/client-b-legacy.txt",
+      "size": 16473,
+      "sha256": "bf0ee93fba83493d5de07658ba4b4e68921a1fa2ad77b9c14e31f6ea7915d563"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/launch/client-b-program.txt",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/launch/client-b-program.txt",
+      "size": 477,
+      "sha256": "6d016c12370b9acc16d474ccb85aa52176c276d338dc1d8b05c61e289b973d35"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/launch/client-b-vm.txt",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/launch/client-b-vm.txt",
+      "size": 2114,
+      "sha256": "fc6e97e789d599c13808314df487231171898561b9b5c56325b6a3c919b7f16d"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/launch/server-launch.txt",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/launch/server-launch.txt",
+      "size": 20767,
+      "sha256": "142b9aea3ea59c301f8f9ca59cd67e2bd53dff5671830f368a5a2859570e008c"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/launch/server-legacy.txt",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/launch/server-legacy.txt",
+      "size": 10368,
+      "sha256": "f75f2e62061484defdbc60bcae925fa38477693813169d7f5a842c8d8cb09ffa"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/launch/server-program.txt",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/launch/server-program.txt",
+      "size": 288,
+      "sha256": "403d7609761c93800bb4d4017da11310885d9156710d30f784058868e9ddb191"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/launch/server-vm.txt",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/launch/server-vm.txt",
+      "size": 2391,
+      "sha256": "4ebae350f41c07360bc1e3ff84b2f0feea4208f76d5274fd9bbe11e510816600"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/server.log",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/server.log",
+      "size": 49135,
+      "sha256": "f2f2c5a643d4c0a9cfc24917e5c31990444f96d9317b8a67fb20d37647cd8cc6"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/server/extracted-yard.json",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/server/extracted-yard.json",
+      "size": 511,
+      "sha256": "9424b932c7da47deb9e67f7afa37b4cda931472e17efeb90a36fb222a5a6c8e6"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/server/logs/debug.log",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/server/logs/debug.log",
+      "size": 64976,
+      "sha256": "ad35c84b9a7f6af54f4c6259614421d0d70e7e2f9041ee9b601468b742b77683"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/server/logs/latest.log",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/server/logs/latest.log",
+      "size": 64976,
+      "sha256": "ad35c84b9a7f6af54f4c6259614421d0d70e7e2f9041ee9b601468b742b77683"
+    },
+    {
+      "path": "run/api26-api-multiplayer-BASE-NATIVE/server/usernamecache.json",
+      "source_path": "run/api26-api-multiplayer-BASE-NATIVE/server/usernamecache.json",
+      "size": 106,
+      "sha256": "c9b74cf7672cf13c8689e7ee0375cc872836502371976850d7ecfe0d42accc81"
+    },
+    {
+      "path": "run/api26-item-dispatch-corrected-JAVA/logs/debug.log",
+      "source_path": "run/api26-item-dispatch-corrected-JAVA/logs/debug.log",
+      "size": 21327,
+      "sha256": "247c184d81b3113bc28c02645cdc5b94872140e002e959e3def52013dad20255"
+    },
+    {
+      "path": "run/api26-item-dispatch-corrected-JAVA/logs/latest.log",
+      "source_path": "run/api26-item-dispatch-corrected-JAVA/logs/latest.log",
+      "size": 21327,
+      "sha256": "247c184d81b3113bc28c02645cdc5b94872140e002e959e3def52013dad20255"
+    },
+    {
+      "path": "run/api26-item-dispatch-corrected-JAVA/packaged-2026-10-11T12-20-52.993297500Z.json",
+      "source_path": "run/api26-item-dispatch-corrected-JAVA/packaged-2026-10-11T12-20-52.993297500Z.json",
+      "size": 772,
+      "sha256": "4d8cc202365bbad74c9a1e9ed6acc73664037b3f9c92a408fef3aea4af3e2220"
+    },
+    {
+      "path": "run/api26-item-dispatch-corrected/logs/debug.log",
+      "source_path": "run/api26-item-dispatch-corrected/logs/debug.log",
+      "size": 21349,
+      "sha256": "771ea6ceea8533eef51bd8bd156695c4d2f796136c7b1677c070ad251921aec2"
+    },
+    {
+      "path": "run/api26-item-dispatch-corrected/logs/latest.log",
+      "source_path": "run/api26-item-dispatch-corrected/logs/latest.log",
+      "size": 21349,
+      "sha256": "771ea6ceea8533eef51bd8bd156695c4d2f796136c7b1677c070ad251921aec2"
+    },
+    {
+      "path": "run/api26-item-dispatch-corrected/packaged-2026-10-11T12-19-51.632670Z.json",
+      "source_path": "run/api26-item-dispatch-corrected/packaged-2026-10-11T12-19-51.632670Z.json",
+      "size": 771,
+      "sha256": "6f4499dee5dd78791cbfb4d6e2bddfcfdec6fae16d653cbf2be80e09383b3f43"
+    },
+    {
+      "path": "run/api26-item-dispatch-negative/logs/debug.log",
+      "source_path": "run/api26-item-dispatch-negative/logs/debug.log",
+      "size": 21749,
+      "sha256": "64bff0fe5d32fdc18ebd20188d0f845a3f0c672eb43f05da05ae9dc37c358f45"
+    },
+    {
+      "path": "run/api26-item-dispatch-negative/logs/latest.log",
+      "source_path": "run/api26-item-dispatch-negative/logs/latest.log",
+      "size": 21749,
+      "sha256": "64bff0fe5d32fdc18ebd20188d0f845a3f0c672eb43f05da05ae9dc37c358f45"
+    },
+    {
+      "path": "run/api26-item-dispatch-negative/packaged-2026-10-11T12-19-05.627229300Z.json",
+      "source_path": "run/api26-item-dispatch-negative/packaged-2026-10-11T12-19-05.627229300Z.json",
+      "size": 691,
+      "sha256": "af8ec450c7e9aadbf5f2d88b675a9ec84ccce8ad74f170208163d4b3487a2262"
+    },
+    {
       "path": "runs/api-no-geometry-cold-NATIVE-12/build/api-no-geometry-cold-NATIVE-12.log",
       "source_path": "build/api-no-geometry-cold-NATIVE-12.log",
       "size": 14632,
@@ -1765,6 +4452,73 @@
       "source_path": "run/api-complete-NATIVE-11/packaged-2026-10-11T09-49-02.081601500Z.json",
       "size": 693,
       "sha256": "7d7c1d4a4bbc803431575b82267100ea073e627a69ed0665635d45e681519d3e"
+    }
+  ],
+  "negative_controls": [
+    {
+      "kind": "item_dispatch_old_block_class_only_control",
+      "publication_acceptance": false,
+      "platform": "Windows",
+      "replaced_class": "org/cha0scollective/wwpg/example/ExampleMod$ExampleBlock.class",
+      "differing_jar_members": [
+        "org/cha0scollective/wwpg/example/ExampleMod$ExampleBlock.class"
+      ],
+      "descriptor": "build/item-dispatch-negative-26.json",
+      "source_script": "build/make_item_dispatch_negative.py",
+      "phases": [
+        {
+          "backend": "NATIVE",
+          "expected_pass": false,
+          "required_total": 7,
+          "passed": 6,
+          "failed": 1,
+          "log": "build/api26-item-dispatch-negative.log",
+          "manifest": "run/api26-item-dispatch-negative/packaged-2026-10-11T12-19-05.627229300Z.json",
+          "example_sha256": "eb2daaab8d020044ae833ad9f91583c6de1b0f8302194428b04aeb4c6e1adaf5",
+          "failed_assertion_log_lines": [
+            "[07:19:20] [Server thread/ERROR] [minecraft/LogTestReporter]: loadedblockentityreplacementcutsoldwiresandnativepgreplacementcanberewired failed at -1474568, -60, 2624675! Independent example powered load: 0.0 expected 0.2"
+          ],
+          "runtime_sha256": "9740d5754efa17e098c117fa09b54b58552ef34d3a38413a3fb1642c7e584ceb",
+          "publication_acceptance": false
+        },
+        {
+          "backend": "NATIVE",
+          "expected_pass": true,
+          "required_total": 7,
+          "passed": 7,
+          "failed": 0,
+          "log": "build/api26-item-dispatch-corrected.log",
+          "manifest": "run/api26-item-dispatch-corrected/packaged-2026-10-11T12-19-51.632670Z.json",
+          "example_sha256": "90a52b8ca6d65860043e816d4d101dc3e014dd7c947133e48a0dfe7a49490cd4",
+          "failed_assertion_log_lines": [],
+          "runtime_sha256": "9740d5754efa17e098c117fa09b54b58552ef34d3a38413a3fb1642c7e584ceb",
+          "publication_acceptance": false
+        },
+        {
+          "backend": "JAVA",
+          "expected_pass": true,
+          "required_total": 7,
+          "passed": 7,
+          "failed": 0,
+          "log": "build/api26-item-dispatch-corrected-JAVA.log",
+          "manifest": "run/api26-item-dispatch-corrected-JAVA/packaged-2026-10-11T12-20-52.993297500Z.json",
+          "example_sha256": "90a52b8ca6d65860043e816d4d101dc3e014dd7c947133e48a0dfe7a49490cd4",
+          "failed_assertion_log_lines": [],
+          "runtime_sha256": "9740d5754efa17e098c117fa09b54b58552ef34d3a38413a3fb1642c7e584ceb",
+          "publication_acceptance": false
+        }
+      ],
+      "summary": "Only the ExampleBlock class differs between the corrected and negative jars; every corrected regression fixture is byte-identical. Restoring the old block makes exactly one native item-workflow fixture fail at zero current. The corrected artifact passes all seven checks on native and Java.",
+      "resolution_status": "class_only_negative_and_two_backend_positive_controls_recorded; final_frozen_sdk_and_actual_clients_still_required"
+    }
+  ],
+  "tool_configuration_appendices": [
+    {
+      "kind": "offline_example_maven_repository_path_correction",
+      "publication_acceptance": false,
+      "failed_log": "build/api-item-dispatch-example-build-26.log",
+      "corrected_log": "build/api-item-dispatch-example-build-26b.log",
+      "summary": "An initial offline example build pointed at the wrong local API repository and could not resolve API 1.0.0. Pointing -PapiRepository at build/maven-repository produced a successful build. This is build invocation evidence, not a public API defect."
     }
   ]
 }

@@ -7,14 +7,55 @@ gradle.projectsEvaluated {
                     example:'examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar',upstream_example:'examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar']
     def artifacts = properties.collectEntries { role, property -> [role,project.file(project.providers.gradleProperty(property).getOrElse(defaults[role]))] }
     def hash = { file -> java.security.MessageDigest.getInstance('SHA-256').digest(file.bytes).encodeHex().toString() }
+    def sourceFiles = project.fileTree(project.file('tools/client_acceptance/src')) { include '**/*.java' }
+    def initFile = project.file('tools/client_acceptance/api_multiplayer.gradle')
+    def inputFiles = { (sourceFiles.files + project.fileTree(project.file('tools/client_acceptance/resources')).files + [initFile]).sort { it.absolutePath } }
+    def inputLedger = new File(output,'acceptance-helper-inputs.json')
+    def verifyHelperInputs = {
+        if (!inputLedger.isFile()) throw new GradleException('Acceptance helper has no captured compilation inputs')
+        def ledger = new groovy.json.JsonSlurper().parse(inputLedger)
+        ledger.sources.each { item ->
+            def captured = project.file(item.path), current = project.file(item.source_path)
+            if (!captured.isFile() || captured.length() != item.bytes || hash(captured) != item.sha256 ||
+                    !current.isFile() || hash(current) != item.sha256)
+                throw new GradleException('Acceptance helper input changed after compilation: '+item.source_path)
+        }
+        return ledger.sources
+    }
+    def freezeHelper = { directory, jar ->
+        def sources = verifyHelperInputs()
+        def frozenDirectory = new File(directory,'acceptance-helper')
+        if (frozenDirectory.exists()) throw new GradleException('Retain previous helper inputs; use a fresh attempt')
+        frozenDirectory.mkdirs()
+        def frozenJar = new File(frozenDirectory,jar.name); frozenJar.bytes = jar.bytes
+        def capturedSources = sources.collect { item ->
+            def target = new File(frozenDirectory,'inputs/'+item.source_path)
+            target.parentFile.mkdirs(); target.bytes = project.file(item.path).bytes
+            [path:target.absolutePath,sha256:hash(target),bytes:target.length(),source_path:item.source_path,kind:item.kind]
+        }
+        return [file:frozenJar,record:[path:frozenJar.absolutePath,sha256:hash(frozenJar),bytes:frozenJar.length()],sources:capturedSources]
+    }
     def excluded = { file -> [project.sourceSets.main,project.sourceSets.extensionApi,project.sourceSets.ceeApi].any { it.output.files.contains(file) }
         || file.name in ['wwpg-api-example-1.0.0.jar','wwpg-upstream-api-example-1.0.0.jar'] }
     def compilation = project.tasks.register('compileApiMultiplayerHelper',JavaCompile) {
-        source project.fileTree(project.file('tools/client_acceptance/src')) { include '**/*.java' }
+        source sourceFiles
+        inputs.files(inputFiles())
         classpath = project.sourceSets.main.compileClasspath.filter { !excluded(it) }+project.files(artifacts.runtime)
         destinationDirectory = new File(output,'classes')
         javaCompiler = project.javaToolchains.compilerFor { languageVersion=JavaLanguageVersion.of(21) }
         options.encoding='UTF-8'
+        doFirst {
+            def sources = inputFiles().collect { file ->
+                def relative = project.relativePath(file).replace('\\','/')
+                def target = new File(output,'source-inputs/'+hash(file)+'/'+relative)
+                target.parentFile.mkdirs(); target.bytes = file.bytes
+                [path:target.absolutePath,sha256:hash(target),bytes:target.length(),source_path:relative,
+                 kind:file == initFile ? 'init' : (file.name.endsWith('.java') ? 'java' : 'resource')]
+            }
+            inputLedger.parentFile.mkdirs()
+            inputLedger.setText(groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson([schema:1,sources:sources]))+'\n','UTF-8')
+        }
+        doLast { verifyHelperInputs() }
     }
     def helper = project.tasks.register('apiMultiplayerHelperJar',Jar) {
         dependsOn compilation
@@ -42,6 +83,7 @@ gradle.projectsEvaluated {
                 throw new GradleException('Wrong frozen source, Workshop profile or target')
             def spec = new File(root,'launch.json')
             if (spec.exists()) throw new GradleException('Retain previous launch evidence; use a fresh extraction')
+            def frozenHelper = freezeHelper(root,helper.get().archiveFile.get().asFile)
             def snapshots = new File(root,'launch'); snapshots.mkdirs()
             def launches = []
             ['server':'runGameTestServer','client-a':'runClientA','client-b':'runClientB'].each { role,task ->
@@ -66,18 +108,19 @@ gradle.projectsEvaluated {
                 } }
                 def vm = copy(run.jvmArgs,'vm'), args = copy(run.args,'program')
                 def classpath = run.classpathProvider.filter { !excluded(it) }+project.files(artifacts.runtime,artifacts.example,artifacts.upstream_example)
-                if (role != 'server') classpath += project.files(helper.get().archiveFile.get().asFile)
+                if (role != 'server') classpath += project.files(frozenHelper.file)
                 def quote = { value -> '"'+value.toString().replace('\\','/').replace('"','\\"')+'"' }
                 def flatten = { values -> values.collect { it.startsWith('@') ? project.file(it.substring(1)).getText('UTF-8') : quote(it) }.join('\n') }
                 def command = new File(snapshots,role+'-launch.txt')
                 command.setText(flatten(vm)+'\n'+['-cp',classpath.asPath,run.mainClass.get()].collect(quote).join('\n')+'\n'+flatten(args)+'\n','UTF-8')
                 def env = new HashMap(run.environmentProperty.get());env['MOD_CLASSES']='wwpg%%'+artifacts.runtime.absolutePath
-                if (role != 'server') env['MOD_CLASSES'] += File.pathSeparator+'wwpg_acceptance%%'+helper.get().archiveFile.get().asFile.absolutePath
+                if (role != 'server') env['MOD_CLASSES'] += File.pathSeparator+'wwpg_acceptance%%'+frozenHelper.file.absolutePath
                 launches.add([role:role,directory:directory.absolutePath,command:[project.javaToolchains.launcherFor { languageVersion=JavaLanguageVersion.of(21) }.get().executablePath.asFile.absolutePath,'@'+command.absolutePath],environment:env])
             }
             spec.setText(groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson([schema:1,source_sha:source,jar:frozen.runtime,
                 artifacts:frozen.findAll { role,value -> role!='runtime' },archive:extraction.archive,archive_sha256:extraction.sha256,
-                profile:profile,backend:backend,launches:launches]))+'\n','UTF-8')
+                profile:profile,backend:backend,launches:launches,
+                acceptance_helper:frozenHelper.record,acceptance_helper_sources:frozenHelper.sources]))+'\n','UTF-8')
             logger.lifecycle('Prepared actual API Workshop TCP clients: '+profile+'/'+backend+'; exact ZIP '+extraction.sha256)
         }
     }

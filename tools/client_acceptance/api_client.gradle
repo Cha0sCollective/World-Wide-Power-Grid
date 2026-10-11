@@ -7,16 +7,57 @@ gradle.projectsEvaluated {
                     example:'examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar',upstream_example:'examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar']
     def artifacts = properties.collectEntries { role, property -> [role, project.file(project.providers.gradleProperty(property).getOrElse(defaults[role]))] }
     def hash = { file -> java.security.MessageDigest.getInstance('SHA-256').digest(file.bytes).encodeHex().toString() }
+    def sourceFiles = project.fileTree(project.file('tools/client_acceptance/src')) { include '**/*.java' }
+    def initFile = project.file('tools/client_acceptance/api_client.gradle')
+    def inputFiles = { (sourceFiles.files + project.fileTree(project.file('tools/client_acceptance/resources')).files + [initFile]).sort { it.absolutePath } }
+    def inputLedger = new File(output,'acceptance-helper-inputs.json')
+    def verifyHelperInputs = {
+        if (!inputLedger.isFile()) throw new GradleException('Acceptance helper has no captured compilation inputs')
+        def ledger = new groovy.json.JsonSlurper().parse(inputLedger)
+        ledger.sources.each { item ->
+            def captured = project.file(item.path), current = project.file(item.source_path)
+            if (!captured.isFile() || captured.length() != item.bytes || hash(captured) != item.sha256 ||
+                    !current.isFile() || hash(current) != item.sha256)
+                throw new GradleException('Acceptance helper input changed after compilation: '+item.source_path)
+        }
+        return ledger.sources
+    }
+    def freezeHelper = { directory, jar ->
+        def sources = verifyHelperInputs()
+        def frozenDirectory = new File(directory,'acceptance-helper')
+        if (frozenDirectory.exists()) throw new GradleException('Retain previous helper inputs; use a fresh attempt')
+        frozenDirectory.mkdirs()
+        def frozenJar = new File(frozenDirectory,jar.name); frozenJar.bytes = jar.bytes
+        def capturedSources = sources.collect { item ->
+            def target = new File(frozenDirectory,'inputs/'+item.source_path)
+            target.parentFile.mkdirs(); target.bytes = project.file(item.path).bytes
+            [path:target.absolutePath,sha256:hash(target),bytes:target.length(),source_path:item.source_path,kind:item.kind]
+        }
+        return [file:frozenJar,record:[path:frozenJar.absolutePath,sha256:hash(frozenJar),bytes:frozenJar.length()],sources:capturedSources]
+    }
     def snapshot = { artifacts.collectEntries { role, file -> [role,[path:file.absolutePath,sha256:hash(file)]] } }
     def sourceSha = project.providers.gradleProperty('sourceSha').getOrElse('')
     def excluded = { file -> [project.sourceSets.main,project.sourceSets.extensionApi,project.sourceSets.ceeApi].any { it.output.files.contains(file) }
         || file.name in ['wwpg-api-example-1.0.0.jar','wwpg-upstream-api-example-1.0.0.jar'] }
     def compilation = project.tasks.register('compileApiClientHelper', JavaCompile) {
-        source project.fileTree(project.file('tools/client_acceptance/src')) { include '**/*.java' }
+        source sourceFiles
+        inputs.files(inputFiles())
         classpath = project.sourceSets.main.compileClasspath.filter { !excluded(it) } + project.files(artifacts.runtime)
         destinationDirectory = new File(output,'classes')
         javaCompiler = project.javaToolchains.compilerFor { languageVersion = JavaLanguageVersion.of(21) }
         options.encoding = 'UTF-8'
+        doFirst {
+            def sources = inputFiles().collect { file ->
+                def relative = project.relativePath(file).replace('\\','/')
+                def target = new File(output,'source-inputs/'+hash(file)+'/'+relative)
+                target.parentFile.mkdirs(); target.bytes = file.bytes
+                [path:target.absolutePath,sha256:hash(target),bytes:target.length(),source_path:relative,
+                 kind:file == initFile ? 'init' : (file.name.endsWith('.java') ? 'java' : 'resource')]
+            }
+            inputLedger.parentFile.mkdirs()
+            inputLedger.setText(groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson([schema:1,sources:sources]))+'\n','UTF-8')
+        }
+        doLast { verifyHelperInputs() }
     }
     def helper = project.tasks.register('apiClientHelperJar', Jar) {
         dependsOn compilation
@@ -47,8 +88,10 @@ gradle.projectsEvaluated {
             def profile = project.providers.gradleProperty('testProfile').getOrElse('BASE')
             def backend = project.providers.gradleProperty('testBackend').getOrElse('NATIVE')
             if (profile != extraction.profile || manifest.target != '0.2.0') throw new GradleException('Wrong Workshop profile/target')
+            def frozenHelper = freezeHelper(workingDir,helper.get().archiveFile.get().asFile)
             def proof = [schema:1,source_sha:sourceSha,jar:frozen.runtime,artifacts:frozen.findAll { role,value -> role != 'runtime' },
-                         archive:extraction.archive,archive_sha256:extraction.sha256,profile:profile,backend:backend]
+                         archive:extraction.archive,archive_sha256:extraction.sha256,profile:profile,backend:backend,
+                         acceptance_helper:frozenHelper.record,acceptance_helper_sources:frozenHelper.sources]
             def record = new File(workingDir,'api-client-launch.json')
             if (record.exists()) throw new GradleException('Retain previous graphical evidence; use a fresh extraction')
             record.setText(groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(proof))+'\n','UTF-8')
@@ -71,9 +114,9 @@ gradle.projectsEvaluated {
                     '\n-Dwwpg.test.backend='+backend+'\n-Dwwpg.test.profile='+profile+'\n-Dwwpg.test.restartPhase=VERIFY\n','UTF-8')
                 return '@'+replacement.absolutePath
             }
-            classpath = run.classpathProvider.filter { !excluded(it) } + project.files(artifacts.runtime,artifacts.example,artifacts.upstream_example,helper.get().archiveFile.get().asFile)
+            classpath = run.classpathProvider.filter { !excluded(it) } + project.files(artifacts.runtime,artifacts.example,artifacts.upstream_example,frozenHelper.file)
             def env = new HashMap(run.environmentProperty.get())
-            env['MOD_CLASSES'] = 'wwpg%%'+artifacts.runtime.absolutePath+File.pathSeparator+'wwpg_acceptance%%'+helper.get().archiveFile.get().asFile.absolutePath
+            env['MOD_CLASSES'] = 'wwpg%%'+artifacts.runtime.absolutePath+File.pathSeparator+'wwpg_acceptance%%'+frozenHelper.file.absolutePath
             environment env
             def capture = new ByteArrayOutputStream()
             extensions.extraProperties.set('apiClientOutput',capture)

@@ -131,6 +131,115 @@ is necessary alongside actual thread-ownership checks. Earlier evidence remains
 byte-for-byte unchanged. These instrumented candidate 21 checks are development
 proof, separate from final frozen acceptance of the clean release artifact.
 
+Candidate 22, source reference `189f39f`, passed the 32-check Java setup and
+three cold verification runs, plus its standalone pause check. These completed
+development logs and exact manifests are retained in a separate success appendix.
+The native base Workshop setup nevertheless failed native wiring at an API
+source: its fixed twenty-tick builder delay preceded entity readiness. The failed
+Workshop build output, actual runtime logs/manifest and exact copied runtime jar
+are retained. The builder is being changed to wait for real wiring readiness;
+the Workshop proof and complete release acceptance remain pending. All earlier
+archive members remain unchanged.
+
+Candidate 23's Workshop setup passed its native wiring and visible station
+checks, but its first cold verification failed the A10 panel indicator even
+after endpoints were ready. Source investigation found that the builder changed
+the native switch's live wire without updating its saved `OPEN` block state.
+Reload restored the saved open switch and left the panel unpowered. The builder
+helper is being corrected to keep both states consistent; native switch runtime
+behavior is unchanged. The exact candidate 23 jar, passing setup, failed cold
+verification, build output and both phase manifests are retained. Runtime
+`latest.log` belongs to the failed verification; the original setup is retained
+in its completed build log and compressed logs. Packaged cold verification of
+the correction remains required.
+
+Candidate 24's native base Workshop setup and three cold verification runs
+passed all eleven station checks. Their exact phase manifests, completed build
+outputs and compressed/runtime logs are retained as a separate development
+success appendix. This confirms the local builder corrections against that jar;
+it does not establish the final cross-platform release gates.
+
+The same candidate's inherited native suite passed 202 of 204 checks. Both
+failures stopped at the new resistor heating precondition: the fixture supplied
+0.25 W, below CEE's native 3.3 W cooling floor. The corrected fixture supplies
+25 W to the tested resistor and 36 W to its independent healthy reference,
+keeping the isolation, temperature, healthy-circuit and repair assertions.
+The failed run's exact jar, manifest and actual logs remain retained; the
+corrected checks still require packaged proof.
+
+The second preliminary GitHub CI run,
+[38135640810](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38135640810),
+tested source `189f39fc410f78da1b45c1942c9b13641f786953` across all eight
+Windows/Linux, native/Java and base/Pinout combinations. Every job passed its
+standalone pause and three-phase pending-removal checks. Their later outcomes
+differed:
+
+- Six jobs passed the 32-check API setup and all three API cold verifications,
+  then failed both inherited unknown/nonfinite isolation fixtures. Those old
+  assertions expected zero where a deliberately unavailable native reading
+  returns `NaN`. The corrected assertions check unavailable measurements,
+  thermal safety, an unaffected healthy circuit and recovery after repair.
+- Windows Java/base failed diagnostic initial wiring during API setup.
+- Ubuntu native/Pinout passed API setup and two cold verifications, then failed
+  the same diagnostic's initial wiring during its third cold verification.
+
+The diagnostic used a fixed initial delay instead of waiting for native endpoint
+readiness. Its actual wiring expectation remains; the fixture now waits for
+readiness. All fourteen failed assertions, each job's failed step and reached
+phases, completed GitHub metadata and all eight actual job logs are retained.
+The downloaded Ubuntu Java/base artifact subset includes source provenance and
+exact phase manifests; other job artifacts were not downloaded. No job reached
+the Workshop gate, so the separately retained local Workshop failures are not
+attributed to this CI run. This failed CI was downloaded directly, without
+running the strict release acceptance collector. Corrective changes still
+require complete frozen acceptance, and all earlier archive bytes are preserved.
+
 The final release must use separately recorded frozen artifacts and passing
 acceptance runs. A later successful retry does not erase these failures or by itself
 close a release gate.
+
+Candidate 25 passed the base Workshop setup, three source cold restarts and
+three restarts after exact ZIP extraction. Its first actual TCP session joined
+two real clients, but both failed their first station view: the acceptance
+helper created a fresh `BooleanProperty` rather than using the property declared
+on the example block. The server correctly rejected their failed acknowledgements.
+The same session logged a moved-too-quickly warning during its long initial
+view jump. The helper is being corrected to resolve declared properties and
+travel through bounded native movement packets. The actual logs, process result,
+launch specifications, old helper jar/source and frozen runtime are retained.
+These failures do not establish a public API defect, and corrected actual-client
+acceptance remains required. Every previous archive member is unchanged.
+
+Batch26 used the same frozen candidate25 runtime and example jars with a corrected,
+independently hashed acceptance helper. Both real TCP clients passed all eleven
+station views and the server accepted that viewing phase. The actual native PG
+wire item powered its API bench at 20 V; the native CEE wire item then left its
+bench at zero instead of the required 20 V, failing the wiring phase. This attempt
+does not complete client acceptance.
+
+Source investigation reproduced block-first item dispatch: the general example
+block returned `SUCCESS` from its ordinary block interaction with a nonempty held
+item, consuming native CEE spool and PG multimeter item actions. A narrow example
+`useItemOn` override is being added to let nonempty native tools reach their item
+workflow while preserving empty-hand readings and configuration. The runtime
+wiring hooks are unchanged. Corrected artifacts still require independently built
+SDK examples and full real-client acceptance; no passing retry closes this gate
+by itself. The immutable launched helper jar, captured Java/init/resource inputs,
+all launch files, logs, screenshots, thread dumps, process result, preparation log,
+frozen runtime and old example jar are retained. All 475 earlier archive members
+remain byte-for-byte unchanged.
+
+The item-dispatch cause now has a class-only negative control. The controlled jar
+restores only the old `ExampleBlock` class into the corrected example; all seven
+new regression fixtures remain byte-identical. That negative native run passes
+six tests and fails exactly the powered native-item workflow at zero current
+instead of 0.2 A. The corrected jar passes all seven checks on both native and
+Java. The exact old/corrected/negative jars, construction script and hash record,
+three completed logs and matching packaged manifests are retained. These causal
+controls remain a development appendix, not final frozen SDK or real-client
+acceptance. Every previously archived member remains unchanged.
+
+An initial offline example build also used the wrong local Maven repository path
+and could not resolve API 1.0.0. Its failed log and the successful corrected build
+using `build/maven-repository` are kept as a separate tooling appendix. That
+invocation error is not attributed to the public API implementation.

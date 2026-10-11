@@ -9,6 +9,7 @@ import shutil
 
 from run_api_workshop_multiplayer import verify_inputs
 
+ROOT = Path(__file__).resolve().parents[1]
 PHASES = {'wire', 'configure', 'configure_on', 'meter', 'panel_edit',
           'board_edit', 'repair', 'repair_wire'}
 VIEWS = {f'A{index:02d}' for index in range(1, 12)}
@@ -20,9 +21,56 @@ def descriptor(path):
                 bytes=path.stat().st_size)
 
 
+def verify_helper_provenance(spec, run):
+    """Verify attempt-frozen bytes, never infer compilation inputs from current source."""
+    records = [spec.get('acceptance_helper'), *spec.get('acceptance_helper_sources', [])]
+    assert isinstance(records[0], dict), 'Launch did not freeze its acceptance helper'
+    sources = records[1:]
+    assert sources and {'java', 'init', 'resource'} <= {item.get('kind') for item in sources}, \
+        'Launch lacks actual Java/init/resource helper inputs'
+    assert len({item['source_path'] for item in sources}) == len(sources), 'Duplicate helper source identity'
+    frozen = (run / 'acceptance-helper').resolve()
+    for item in records:
+        assert isinstance(item, dict) and re.fullmatch(r'[0-9a-f]{64}', item.get('sha256', '')), \
+            'Invalid helper descriptor'
+        path = Path(item['path']).resolve()
+        assert path.is_file() and path.is_relative_to(frozen), 'Helper input escaped its frozen attempt'
+        assert path.stat().st_size == item.get('bytes'), 'Helper input size changed'
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == item['sha256'], 'Helper input hash changed'
+    for item in sources:
+        source = Path(item['source_path'])
+        assert not source.is_absolute() and '..' not in source.parts and ':' not in item['source_path'], \
+            'Invalid captured helper source identity'
+    return records
+
+
+def retain_helper_provenance(spec, spec_file, run, output, root=ROOT):
+    records = verify_helper_provenance(spec, run)
+    assert output.resolve().is_relative_to(root.resolve()), 'Retained helper provenance must remain in the workspace'
+    targets = []
+    for index, item in enumerate(records):
+        relative = 'helper.jar' if index == 0 else 'inputs/' + item['source_path']
+        target = output / 'helper-provenance' / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(item['path'], target)
+        saved = dict(path=target.resolve().relative_to(root.resolve()).as_posix(),
+                     sha256=item['sha256'], bytes=item['bytes'])
+        if index:
+            saved.update(source_path=item['source_path'], kind=item['kind'])
+        targets.append(saved)
+    # Keep the exact absolute-path launch record compressed. Its copied helper
+    # inputs below use root-relative descriptors for transitive release bundling.
+    launch = output / 'helper-provenance' / 'launch.json.gz'
+    launch.write_bytes(gzip.compress(spec_file.read_bytes(), mtime=0))
+    return dict(acceptance_helper=targets[0], acceptance_helper_sources=targets[1:],
+        launch_descriptor=dict(path=launch.resolve().relative_to(root.resolve()).as_posix(),
+            sha256=hashlib.sha256(launch.read_bytes()).hexdigest(), bytes=launch.stat().st_size))
+
+
 def collect(run, mode, output, log=None):
     spec_file = run / ('api-client-launch.json' if mode == 'graphical' else 'launch.json')
     spec = json.loads(spec_file.read_text(encoding='utf-8'))
+    verify_helper_provenance(spec, run)
     hashes = verify_inputs(spec)
     assert re.fullmatch(r'[0-9a-f]{40}', spec['source_sha']), 'Missing frozen source commit'
     assert spec['profile'] in {'BASE', 'PINOUT'} and spec['backend'] in {'NATIVE', 'JAVA'}
@@ -72,6 +120,7 @@ def collect(run, mode, output, log=None):
         profile=spec['profile'], backend=spec['backend'], world_sha256=spec['archive_sha256'],
         api_fixture_behaviors=BEHAVIORS, real_graphical_client=True,
         checkpoints=checkpoints, logs={}, screenshots={})
+    report['provenance'] = retain_helper_provenance(spec, spec_file, run, output)
     if mode == 'multiplayer':
         report.update(real_clients=['WWPG_A', 'WWPG_B'], real_tcp_clients=True,
                       processes=result['processes'], elapsed_seconds=result['elapsed_seconds'])

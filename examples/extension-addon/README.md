@@ -128,6 +128,13 @@ results do not overwrite that history. Block rendering, interaction, inventory
 items, and synchronization belong to the example mod; PG substeps and mixed
 electrical topology belong to WWPG.
 
+The example's `useItemOn` lets nonempty held stacks proceed to their native item
+handler by returning `SKIP_DEFAULT_BLOCK_INTERACTION`. Empty hands use
+`PASS_TO_DEFAULT_BLOCK_INTERACTION`, so the readout and sneak-click control still
+work. Preserve this ordering in an interactive add-on: consuming every click in
+`useWithoutItem` can swallow a CEE spool or multimeter before `Item.useOn` runs.
+Test real block/item dispatch as well as direct electrical fixtures.
+
 Breaking an example block returns its block item using the supplied loot table.
 The item does not carry its previous block entity's stored charge. This sample
 does not promise portable charged-device behavior.

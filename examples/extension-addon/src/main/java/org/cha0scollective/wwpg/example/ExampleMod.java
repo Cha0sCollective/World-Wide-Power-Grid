@@ -5,10 +5,13 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -76,6 +79,11 @@ public final class ExampleMod {
         }
         @Override protected void createBlockStateDefinition(StateDefinition.Builder<Block,BlockState> b) { b.add(LIT,ENABLED); }
         @Override public BlockEntity newBlockEntity(BlockPos pos,BlockState state) { return new Machine(pos,state); }
+        @Override protected ItemInteractionResult useItemOn(ItemStack stack,BlockState state,Level level,BlockPos pos,Player player,InteractionHand hand,BlockHitResult hit) {
+            // Let native wiring and instruments reach Item.useOn instead of
+            // being consumed by this block's empty-hand readout/configuration.
+            return stack.isEmpty()?ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION:ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+        }
         @Override protected InteractionResult useWithoutItem(BlockState state,Level level,BlockPos pos,Player player,BlockHitResult hit) {
             if(!level.isClientSide) {
                 if(player.isShiftKeyDown())level.setBlock(pos,state.cycle(ENABLED),3);

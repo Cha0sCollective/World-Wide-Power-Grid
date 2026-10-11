@@ -123,6 +123,16 @@ exist before that readiness; it cannot advance storage or expose accepted result
 Native wire tools reject an unavailable replacement before changing selection,
 inventory, or connections.
 
+An add-on also owns Minecraft's block/item interaction ordering. A block with an
+empty-hand readout or configuration handler must let held wiring tools and
+instruments reach their native `Item.useOn` method. In Minecraft 1.21.1, a
+consuming `useWithoutItem` handler can run before the item's method unless the
+block's `useItemOn` returns `ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION`.
+The example returns that result for nonempty stacks and
+`PASS_TO_DEFAULT_BLOCK_INTERACTION` for an empty hand, preserving its readout and
+sneak-click control. Add-ons with their own item interactions should apply the
+same ordering to tools they allow; WWPG does not replace their block handlers.
+
 The examples declare WWPG as a required runtime mod. An integration that makes
 WWPG optional must isolate API-referencing classes and load/register them only
 after confirming WWPG is installed. A `compileOnly` dependency does not make the

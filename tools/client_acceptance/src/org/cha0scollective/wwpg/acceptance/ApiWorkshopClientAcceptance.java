@@ -11,6 +11,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -33,6 +34,7 @@ import org.patryk3211.powergrid.network.packets.SaveSchematicC2SPacket;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.ArrayDeque;
 
 /** Disposable graphical driver: native input APIs and network packets, never server handlers. */
 final class ApiWorkshopClientAcceptance {
@@ -43,6 +45,9 @@ final class ApiWorkshopClientAcceptance {
     private String phase = "";
     private int age, stopping;
     private boolean completed;
+    private final ArrayDeque<Vec3> movement = new ArrayDeque<>();
+    private Vec3 movementTarget;
+    private int movementSettling;
 
     ApiWorkshopClientAcceptance() {
         NeoForge.EVENT_BUS.addListener(ClientChatReceivedEvent.System.class, this::chat);
@@ -54,6 +59,7 @@ final class ApiWorkshopClientAcceptance {
         var text = event.getMessage().getString();
         if (text.startsWith("API_WORKSHOP_TEST ")) {
             phase = text.substring("API_WORKSHOP_TEST ".length()); age = 0;
+            movement.clear(); movementTarget = null; movementSettling = 0;
             WorldWidePowerGrid.LOGGER.info("API_WORKSHOP_CLIENT_PHASE: {}", phase);
         }
     }
@@ -81,6 +87,7 @@ final class ApiWorkshopClientAcceptance {
                 WorldWidePowerGrid.LOGGER.info(multiplayer ? "API_WORKSHOP_CLIENT_PASSED" : "API_WORKSHOP_GRAPHICAL_PASSED"); completed = true; return;
             }
             if (!phase.equals("board_edit") && mc.screen != null) mc.setScreen(null);
+            if (advanceMovement(mc)) return;
             ++age;
             boolean a = !multiplayer || mc.player.getGameProfile().getName().endsWith("A");
             switch (phase) {
@@ -108,7 +115,7 @@ final class ApiWorkshopClientAcceptance {
         if (local != 30) return;
         require(!mc.level.getBlockState(pos).isAir(), "Client did not load A" + (index + 1));
         if (index < 9) {
-            require(mc.level.getBlockState(pos).getValue(net.minecraft.world.level.block.state.properties.BooleanProperty.create("lit")), "API client block does not show accepted power/storage");
+            require(booleanState(mc, pos, "lit"), "API client block does not show accepted power/storage");
             var model = mc.getBlockRenderer().getBlockModel(mc.level.getBlockState(pos));
             require(model != mc.getModelManager().getMissingModel(), "API block rendered a missing model");
         } else if (index == 9) {
@@ -138,11 +145,13 @@ final class ApiWorkshopClientAcceptance {
     }
     private void configure(Minecraft mc, boolean a) {
         var target = a ? ExtensionApiClientSession.source(true) : ExtensionApiClientSession.load(false);
-        if (age == 25) { face(mc, target, target.getCenter()); sneakClick(mc, target); }
-        if (!multiplayer && age == 60) { var second = ExtensionApiClientSession.load(false); face(mc, second, second.getCenter()); sneakClick(mc, second); }
+        if (age == 25) face(mc, target, target.getCenter());
+        if (age == 35) sneakClick(mc, target);
+        if (!multiplayer && age == 60) { var second = ExtensionApiClientSession.load(false); face(mc, second, second.getCenter()); }
+        if (!multiplayer && age == 70) sneakClick(mc, ExtensionApiClientSession.load(false));
         if (age == 110) {
             boolean enabled = phase.equals("configure_on");
-            require(mc.level.getBlockState(target).getValue(net.minecraft.world.level.block.state.properties.BooleanProperty.create("enabled")) == enabled, "Actual API enable click did not synchronize");
+            require(booleanState(mc, target, "enabled") == enabled, "Actual API enable click did not synchronize");
             if (!multiplayer) shot(mc, enabled ? "api-control-on.png" : "api-control-off.png");
             finish(mc);
         }
@@ -197,8 +206,8 @@ final class ApiWorkshopClientAcceptance {
             var table = (CircuitDesignTableBlockEntity) mc.level.getBlockEntity(ExtensionApiClientSession.TABLE);
             if (age == 25) {
                 face(mc, ExtensionApiClientSession.TABLE, ExtensionApiClientSession.TABLE.getCenter().add(0, .35, 0));
-                blockClick(mc, ExtensionApiClientSession.TABLE);
             }
+            if (age == 35) blockClick(mc, ExtensionApiClientSession.TABLE);
             if (age == 65) {
                 require(mc.screen instanceof CircuitDesignTableScreen && table.getSchematic().components().size() == 3, "Native custom-shunt design menu did not open");
                 ModdedPackets.sendToServer(new ChangeScreenC2SPacket(table, 1));
@@ -242,7 +251,7 @@ final class ApiWorkshopClientAcceptance {
         }
         if (age == 100) {
             var load = ExtensionApiClientSession.load(true);
-            require(!mc.level.getBlockState(load).getValue(net.minecraft.world.level.block.state.properties.BooleanProperty.create("lit")), "Client API load remained lit after cutting its wire");
+            require(!booleanState(mc, load, "lit"), "Client API load remained lit after cutting its wire");
             finish(mc);
         }
     }
@@ -252,7 +261,7 @@ final class ApiWorkshopClientAcceptance {
         if (a && age == 50) terminalLook(mc, ExtensionApiClientSession.load(true), 0);
         if (a && age == 60) terminalClick(mc, ExtensionApiClientSession.load(true));
         if (age == 120) {
-            require(mc.level.getBlockState(ExtensionApiClientSession.load(true)).getValue(net.minecraft.world.level.block.state.properties.BooleanProperty.create("lit")), "API load did not recover after native reconnection");
+            require(booleanState(mc, ExtensionApiClientSession.load(true), "lit"), "API load did not recover after native reconnection");
             finish(mc);
         }
     }
@@ -274,7 +283,7 @@ final class ApiWorkshopClientAcceptance {
         mc.player.connection.send(new net.minecraft.network.protocol.game.ServerboundPlayerCommandPacket(mc.player, net.minecraft.network.protocol.game.ServerboundPlayerCommandPacket.Action.RELEASE_SHIFT_KEY));
         mc.player.setShiftKeyDown(false);
     }
-    private static void terminalLook(Minecraft mc, BlockPos pos, int terminal) {
+    private void terminalLook(Minecraft mc, BlockPos pos, int terminal) {
         var point = new BlockWireEndpoint(pos, terminal).getExactPosition(mc.level);
         require(point != null, "API client terminal lacks native geometry: " + pos + ":" + terminal);
         var outward = point.subtract(Vec3.atCenterOf(pos)).multiply(1, 0, 1).normalize();
@@ -287,7 +296,7 @@ final class ApiWorkshopClientAcceptance {
         require(picked instanceof BlockHitResult && ((BlockHitResult) picked).getBlockPos().equals(expected), "Actual API block ray missed " + expected + ": " + picked);
         require(mc.gameMode.useItemOn(mc.player, InteractionHand.MAIN_HAND, (BlockHitResult) picked).consumesAction(), "Native API block interaction rejected " + expected);
     }
-    private static void wireLook(Minecraft mc) {
+    private void wireLook(Minecraft mc) {
         for (var entity : mc.level.entitiesForRendering()) if (entity instanceof HangingWireEntity wire
                 && wire.isConnectedTo(ExtensionApiClientSession.source(true), 0) && wire.curveParams != null) {
             var points = new ArrayList<Vec3>(); wire.curveParams.runForPoints(20, (x, y, z) -> points.add(new Vec3(x, y, z).add(wire.position())));
@@ -295,15 +304,53 @@ final class ApiWorkshopClientAcceptance {
         }
         throw new IllegalStateException("Client has no loaded PG wire curve at the API source");
     }
-    private static void face(Minecraft mc, BlockPos pos, Vec3 target) { move(mc, Vec3.atBottomCenterOf(pos).add(0, 0, -2.5), target); }
-    private static void move(Minecraft mc, Vec3 position, Vec3 target) {
-        mc.player.setPos(position);
-        mc.player.connection.send(new net.minecraft.network.protocol.game.ServerboundMovePlayerPacket.Pos(position.x, position.y, position.z, true));
+    private void face(Minecraft mc, BlockPos pos, Vec3 target) { move(mc, Vec3.atBottomCenterOf(pos).add(0, 0, -2.5), target); }
+    private void move(Minecraft mc, Vec3 position, Vec3 target) {
+        require(movement.isEmpty() && movementTarget == null, "Overlapping API client movement");
+        require(mc.player.getAbilities().mayfly, "API client movement requires the coordinator's native creative flight permission");
+        mc.player.getAbilities().flying = true;
+        mc.player.onUpdateAbilities();
+        var current = mc.player.position();
+        // Fly above the station hardware, travel with ordinary bounded packets,
+        // then descend into native interaction reach. Action ages pause in flight.
+        double altitude = Math.max(67, Math.max(current.y, position.y) + 3);
+        movement.add(new Vec3(current.x, altitude, current.z));
+        movement.add(new Vec3(position.x, altitude, position.z));
+        movement.add(position);
+        movementTarget = target;
+        movementSettling = 5;
+    }
+    private boolean advanceMovement(Minecraft mc) {
+        if (movementTarget == null) return false;
+        if (!movement.isEmpty()) {
+            var next = movement.peek();
+            var delta = next.subtract(mc.player.position());
+            double distance = delta.length();
+            var position = distance <= .35 ? movement.remove() : mc.player.position().add(delta.scale(.35 / distance));
+            mc.player.setPos(position);
+            mc.player.setDeltaMovement(Vec3.ZERO);
+            mc.player.connection.send(new net.minecraft.network.protocol.game.ServerboundMovePlayerPacket.Pos(position.x, position.y, position.z, false));
+            look(mc, movementTarget);
+            return true;
+        }
+        look(mc, movementTarget);
+        if (movementSettling-- > 0) return true;
+        WorldWidePowerGrid.LOGGER.info("API_WORKSHOP_MOVEMENT_SETTLED: position={}; target={}; maxStep=0.35", mc.player.position(), movementTarget);
+        movementTarget = null;
+        return false;
+    }
+    private static void look(Minecraft mc, Vec3 target) {
         var delta = target.subtract(mc.player.getEyePosition());
         float yaw = (float) Math.toDegrees(Math.atan2(-delta.x, delta.z));
         float pitch = (float) -Math.toDegrees(Math.atan2(delta.y, Math.sqrt(delta.x * delta.x + delta.z * delta.z)));
         mc.player.setYRot(yaw); mc.player.setXRot(pitch);
-        mc.player.connection.send(new net.minecraft.network.protocol.game.ServerboundMovePlayerPacket.Rot(yaw, pitch, true));
+        mc.player.connection.send(new net.minecraft.network.protocol.game.ServerboundMovePlayerPacket.Rot(yaw, pitch, false));
+    }
+    private static boolean booleanState(Minecraft mc, BlockPos position, String name) {
+        var state = mc.level.getBlockState(position);
+        var property = state.getBlock().getStateDefinition().getProperty(name);
+        require(property instanceof BooleanProperty, "Expected declared boolean property '" + name + "' at " + position + ", observed " + state);
+        return state.getValue((BooleanProperty) property);
     }
     private static void shot(Minecraft mc, String name) { Screenshot.grab(mc.gameDirectory, name, mc.getMainRenderTarget(), text -> WorldWidePowerGrid.LOGGER.info("API_WORKSHOP_SCREENSHOT: {}", text.getString())); }
     private static void near(double actual, double expected, double tolerance, String label) { require(Double.isFinite(actual) && Math.abs(actual - expected) <= tolerance, label + ": " + actual + " instead of " + expected); WorldWidePowerGrid.LOGGER.info("API_WORKSHOP_MEASUREMENT: {}={}", label, actual); }

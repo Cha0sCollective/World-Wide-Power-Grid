@@ -253,7 +253,7 @@ public final class FaultFixtures {
         h.getLevel().setBlockAndUpdate(load.below(), Blocks.STONE.defaultBlockState());
         h.getLevel().setBlockAndUpdate(load, block("wwpg_api_example", "load").defaultBlockState());
         h.runAtTickTime(5, () -> wireExample(h, source, load));
-        h.runAtTickTime(15, () -> { examplePowered(h, load); replaceEntity(h, load); });
+        h.runAtTickTime(15, () -> { examplePowered(h, load); emptyHandControls(h, load); replaceEntity(h, load); });
         h.runAtTickTime(21, () -> { unpowered(h, load); wireExample(h, source, load); });
         h.runAtTickTime(28, () -> { examplePowered(h, load); replaceEntity(h, load); });
         h.runAtTickTime(34, () -> { unpowered(h, load); wireExample(h, source, load); });
@@ -351,8 +351,23 @@ public final class FaultFixtures {
         return state;
     }
     private static void wireExample(GameTestHelper h, BlockPos source, BlockPos load) {
-        wire(h, source, new Vec3(.25, .5, 0), load, new Vec3(.25, .85, 0));
-        wire(h, source, new Vec3(.75, .5, 0), load, new Vec3(.75, .85, 0));
+        wire(h, source, new Vec3(.25, .5, 0), load, new Vec3(.25, .85, 0), true);
+        wire(h, source, new Vec3(.75, .5, 0), load, new Vec3(.75, .85, 0), true);
+    }
+    private static void emptyHandControls(GameTestHelper h, BlockPos target) {
+        var player = net.neoforged.neoforge.common.util.FakePlayerFactory.get(h.getLevel(),
+                new com.mojang.authlib.GameProfile(UUID.randomUUID(), "Public-api-block-use"));
+        player.setGameMode(net.minecraft.world.level.GameType.CREATIVE);
+        player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+        player.setShiftKeyDown(true);
+        var hit = new BlockHitResult(Vec3.atCenterOf(target), Direction.NORTH, target, false);
+        for (boolean expected : new boolean[]{false, true}) {
+            h.assertTrue(player.gameMode.useItemOn(player, h.getLevel(), player.getMainHandItem(), InteractionHand.MAIN_HAND, hit).consumesAction(),
+                    "Native empty-hand example configuration was rejected");
+            h.assertTrue(h.getLevel().getBlockState(target).getValue(ExampleMod.ExampleBlock.ENABLED) == expected,
+                    "Native empty-hand example configuration did not change its enabled state");
+        }
+        player.setShiftKeyDown(false);
     }
     private static void rejectedWireLookup(GameTestHelper h, BlockPos target) {
         var player = new Player(h.getLevel(), target, 0, new com.mojang.authlib.GameProfile(UUID.randomUUID(), "Unavailable-api-fixture")) {
@@ -366,17 +381,25 @@ public final class FaultFixtures {
         h.assertTrue(!item.useOn(context).consumesAction(), "Broken terminal declaration remained selectable by native wiring");
     }
     private static void wire(GameTestHelper h, BlockPos source, Vec3 sourcePoint, BlockPos target, Vec3 targetPoint) {
+        wire(h, source, sourcePoint, target, targetPoint, false);
+    }
+    private static void wire(GameTestHelper h, BlockPos source, Vec3 sourcePoint, BlockPos target, Vec3 targetPoint, boolean nativeBlockDispatch) {
         var id = ResourceLocation.fromNamespaceAndPath("electroenergetics", "creative_wire_spool");
         h.assertTrue(BuiltInRegistries.ITEM.containsKey(id), "Native CEE creative wire spool is missing");
-        var player = new Player(h.getLevel(), source, 0, new com.mojang.authlib.GameProfile(UUID.randomUUID(), "Public-api-fixture")) {
+        Player player = nativeBlockDispatch ? net.neoforged.neoforge.common.util.FakePlayerFactory.get(h.getLevel(),
+                new com.mojang.authlib.GameProfile(UUID.randomUUID(), "Public-api-item-use")) : new Player(h.getLevel(), source, 0, new com.mojang.authlib.GameProfile(UUID.randomUUID(), "Public-api-fixture")) {
             @Override public boolean isSpectator() { return false; }
             @Override public boolean isCreative() { return true; }
         };
+        if (player instanceof net.minecraft.server.level.ServerPlayer server) server.setGameMode(net.minecraft.world.level.GameType.CREATIVE);
         player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(BuiltInRegistries.ITEM.get(id)));
         for (var click : List.of(new BlockHitResult(sourcePoint.add(Vec3.atLowerCornerOf(source)), Direction.UP, source, false),
                 new BlockHitResult(targetPoint.add(Vec3.atLowerCornerOf(target)), Direction.UP, target, false))) {
             var context = new UseOnContext(player, InteractionHand.MAIN_HAND, click);
-            h.assertTrue(player.getMainHandItem().getItem().useOn(context).consumesAction(), "Native CEE spool rejected public API terminal");
+            var result = nativeBlockDispatch ? ((net.minecraft.server.level.ServerPlayer) player).gameMode.useItemOn(
+                    (net.minecraft.server.level.ServerPlayer) player, h.getLevel(), player.getMainHandItem(), InteractionHand.MAIN_HAND, click)
+                    : player.getMainHandItem().getItem().useOn(context);
+            h.assertTrue(result.consumesAction(), "Native CEE spool rejected public API terminal");
         }
     }
     private static void near(GameTestHelper h, double value, double expected, double tolerance, String detail) {
