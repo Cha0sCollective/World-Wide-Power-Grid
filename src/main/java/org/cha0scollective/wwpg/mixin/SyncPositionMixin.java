@@ -16,5 +16,9 @@ public abstract class SyncPositionMixin {
         if (cir.getReturnValue() != null) return;
         var adapter = Terminals.cee(level, ((StateS2CPacket.PosKey) (Object) this).pos());
         if (adapter != null) cir.setReturnValue(adapter.behaviour());
+        else {
+            var extension = org.cha0scollective.wwpg.extension.ApiTerminals.get(level, ((StateS2CPacket.PosKey) (Object) this).pos());
+            if (extension != null) cir.setReturnValue(extension.behaviour());
+        }
     }
 }

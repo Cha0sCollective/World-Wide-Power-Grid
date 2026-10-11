@@ -1,0 +1,564 @@
+{
+  "schema": 1,
+  "completed": true,
+  "passed": true,
+  "unresolved_failures": [],
+  "artifact_hashes": {
+    "runtime": "708d3bac7fee11f34a770f0a145ee4226a95566870db572767aafa97bae78f10",
+    "api": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+    "cee_api": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+    "example": "90a52b8ca6d65860043e816d4d101dc3e014dd7c947133e48a0dfe7a49490cd4",
+    "upstream_example": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095"
+  },
+  "platform": "ubuntu-24.04",
+  "backend": "JAVA",
+  "profile": "PINOUT",
+  "regression_checks_passed": 208,
+  "extension_checks_passed": 34,
+  "api_namespaces_passed": [
+    "wwpg_api",
+    "wwpg_api_faults",
+    "wwpg_api_pause",
+    "wwpg_api_pending_restart",
+    "wwpg_api_restart",
+    "wwpg_api_upstream",
+    "wwpg_api_upstream_restart"
+  ],
+  "cold_restart_passes": 3,
+  "actual_chunk_reload_cycles": 5,
+  "independent_cee_solves": 0,
+  "exactly_once_history": true,
+  "cee_property_adapter_verified": true,
+  "global_pause_verified": true,
+  "api_fixture_behaviors": [
+    "board_component",
+    "instrument",
+    "machine",
+    "panel_attachment",
+    "storage"
+  ],
+  "nonconverging_backend_verified": true,
+  "paused_measurements_unavailable": true,
+  "cold_wire_systems_verified": [
+    "CEE",
+    "POWER_GRID"
+  ],
+  "cold_ownership_format_version": 2,
+  "source_sha": "934fe30fd5a6dfe27f8ab13bee6edb40ca1078da",
+  "source_tree": "55d1b62cbb06f53be4759ba2d2303b3deb41d491",
+  "checked_out_source_verified": true,
+  "pending_wire_retirement_verified": true,
+  "pending_entity_restart_phases": [
+    "SETUP",
+    "ARM",
+    "VERIFY"
+  ],
+  "pending_entity_restart": {
+    "oracle": {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-pending-restart/extension-api-pending-before-restart.nbt",
+      "sha256": "da792fd4349d782c7b960fdeb7a245152b6e4a8561fe011a8336cafa579a2e3e",
+      "bytes": 229
+    },
+    "phases": [
+      {
+        "phase": "SETUP",
+        "manifest": {
+          "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-pending-restart/packaged-2026-10-11T13-33-22.311481952Z.json",
+          "sha256": "352a6b23ebb7e9db1c9093ce7a51ef0b1cc4253d262b2a673b95ab3fcf230e19",
+          "bytes": 783
+        },
+        "log": {
+          "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-pending-restart/setup-phase.log",
+          "sha256": "6e2eb3d87f26fda5e79e5e83522b2163f923f156735041d0dd49786a405c1c19",
+          "bytes": 19005
+        }
+      },
+      {
+        "phase": "ARM",
+        "manifest": {
+          "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-pending-restart/packaged-2026-10-11T13-33-55.517723989Z.json",
+          "sha256": "f43a73a7a3dec7d4fdd29de8213913a515e128c7fcbf7a7d18b62b2bc65aa94a",
+          "bytes": 781
+        },
+        "log": {
+          "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-pending-restart/arm-phase.log",
+          "sha256": "b90742d4cbc9090ac1ef684e07fb8f3a3dfb00c39a2edeba4d91099c87cec1c7",
+          "bytes": 14826
+        }
+      },
+      {
+        "phase": "VERIFY",
+        "manifest": {
+          "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-pending-restart/packaged-2026-10-11T13-34-27.874990836Z.json",
+          "sha256": "b2fcbb1e7a615a173121991bbb0a3bb5e47a208e73cd4e1431b1d01de51e01d9",
+          "bytes": 784
+        },
+        "log": {
+          "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-pending-restart/verify-phase.log",
+          "sha256": "3a898ad1b27491e2d66d934a0be7c5d523f65e2802f179f2a83833b42505674d",
+          "bytes": 16036
+        }
+      }
+    ]
+  },
+  "junit_checks_passed": 62,
+  "evidence_files": [
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/ci-source.json",
+      "sha256": "e43e7b31f3e5695c643b8d6aa41694bc99c07c08d04f6dbb300be58f739881b0",
+      "bytes": 211
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/distributions/wwpg-api-example-1.0.0-source.zip",
+      "sha256": "d98b1ee915486df8d2a159dd733e47c0d1773c9d7a9730a39dccb903faec7624",
+      "bytes": 79311
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/distributions/wwpg-api-workshop-PINOUT.zip",
+      "sha256": "2af745b63e4ef92e260b12382f9699986ea384c28633b0e240f9f9aaf03a94ef",
+      "bytes": 318167
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/distributions/wwpg-stationary-PINOUT.zip",
+      "sha256": "c171794fd0a505aa50dd1d0ce87502965b342139f20f916f48c594427dd8e0b8",
+      "bytes": 1354559
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/distributions/wwpg-upstream-api-example-1.0.0-source.zip",
+      "sha256": "0cf5b56fe374eb25c8c97640552f4a00e186a6a3f0ba15a2956410959b6681ae",
+      "bytes": 69921
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/libs/wwpg-0.2.0.jar",
+      "sha256": "708d3bac7fee11f34a770f0a145ee4226a95566870db572767aafa97bae78f10",
+      "bytes": 3532278
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/libs/wwpg-api-1.0.0.jar",
+      "sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+      "bytes": 50130
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/libs/wwpg-cee-api-1.0.0.jar",
+      "sha256": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+      "bytes": 8788
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.api.ApiVersionTest.xml",
+      "sha256": "d112efcba3ff85b93c8e1afcf97999437d3005d9c600b82f1baa5aa91f0314ae",
+      "bytes": 468
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.api.cee.CeeAdapterRegistryTest.xml",
+      "sha256": "d4b1d33b01c0f07326dc11c30274b0652851859cec098edb7afa3fc70818d228",
+      "bytes": 1688
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.api.CircuitDescriptionTest.xml",
+      "sha256": "a4f7f134749ea19c5e264232545331ca23feb7a2e2c3cbf360076af7f84b6521",
+      "bytes": 1275
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.api.DeviceResultsTest.xml",
+      "sha256": "12c6c73b0d90ba26199b41869b0f0842596bcceb9cfd368204b6fd746f571bae",
+      "bytes": 1207
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.api.VoltageMeasurementTest.xml",
+      "sha256": "8d7ea96124632fd0ad122efeb198a31e8f718982c74ad230d88e3e0933ff6abf",
+      "bytes": 488
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.BridgeSimulationResultsTest.xml",
+      "sha256": "efbe0b78f4924266c74e3894429e47f9133e0ab331e4b1a395035ccb4e72e1b9",
+      "bytes": 709
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.LinearBranchTest.xml",
+      "sha256": "36b9669f095d5a26ce8e97540d7a948ba52dfb8f193562e21dd44090037fdb21",
+      "bytes": 771
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.NativeCeeCheckpointTest.xml",
+      "sha256": "4d1870ce25450376cda9073094e3d824d4a7207c8b371b0780b35bceb71487b3",
+      "bytes": 939
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.TransformerStampTest.xml",
+      "sha256": "9da69d01efe814d13c5ab5d4c7de7473c0bf303602776a8ea8af19f94933a338",
+      "bytes": 987
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiCeeWireIdentitiesTest.xml",
+      "sha256": "91346012e677ee12aa4426a44b0770607a8ffa5cfb1af71d4efdd5daf2398700",
+      "bytes": 1476
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiDiagnosticsTest.xml",
+      "sha256": "2ffac73c1402de2d87bbe01d7f53759f2aa8be8f9918e3a1cb236f77edbb897e",
+      "bytes": 641
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiElectricalTest.xml",
+      "sha256": "7a8625974bcec9b100d1126952ef2cec1e3e7898bb1103649d9d2ac8e4084aeb",
+      "bytes": 5468
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiGroundTest.xml",
+      "sha256": "be958f3055e41eb65f937ec65871e11ac47ae04f144bb89fbbd540b1df258307",
+      "bytes": 1341
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiTerminalIdentitiesTest.xml",
+      "sha256": "802f8a1c35e57530fcd602a2b8a6854a7bec634944c59a918242847877ee3c07",
+      "bytes": 1814
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.NativeApiReadingsTest.xml",
+      "sha256": "4b7ff718cf5143fc60712ad6b5b987ff3ccad233713f07f8d6b1998c56b91cca",
+      "bytes": 831
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar",
+      "sha256": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095",
+      "bytes": 45638
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar",
+      "sha256": "90a52b8ca6d65860043e816d4d101dc3e014dd7c947133e48a0dfe7a49490cd4",
+      "bytes": 52085
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api/extension-api-before-restart.nbt",
+      "sha256": "e80108f5be3c16a859243683ff3a4e5bafa0844ef3bf20c1644283ddba99b911",
+      "bytes": 143
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api/extension-api-replacement-before-restart.nbt",
+      "sha256": "29702b1243d1bbdc29fbe4e79ce3a19205f42921c0f0e10ee7f0be312f5ee5ab",
+      "bytes": 234
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api/logs/latest.log",
+      "sha256": "012b537d44ee5790b4dad783ae50969077d19cc66602d74d91183ea53777b27d",
+      "bytes": 44996
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api/packaged-2026-10-11T13-35-00.161127803Z.json",
+      "sha256": "bbd0a9c4df1412f47759b96201337b825061cdac25fd348e791d507296fab77b",
+      "bytes": 845
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api/packaged-2026-10-11T13-35-55.645539868Z.json",
+      "sha256": "a9da92bb7fa02159e42ed2e4620674f4f24e791ad409bc8b524d98d7565e0dc9",
+      "bytes": 846
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api/packaged-2026-10-11T13-36-50.314274690Z.json",
+      "sha256": "bf28391ff2caef3c60b959352a0f863c4cf0202ef4bdaeed74871256a100b579",
+      "bytes": 846
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api/packaged-2026-10-11T13-37-48.117975873Z.json",
+      "sha256": "7cb4c78c884c5a565a34a2f5a3a36ecd2c776e0118488f9d6b0438869c23da7a",
+      "bytes": 846
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api/restart-1.log",
+      "sha256": "b790ffdf0c23ecfd2e4850c3f6639a2ee25e0250a3e32805af500bbc9c6756fe",
+      "bytes": 45028
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api/restart-2.log",
+      "sha256": "0ad163b112eb9be10d1efc3a2ab48554d43f8b644d7cd9cabd84e12f5ebb5f5e",
+      "bytes": 44909
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api/restart-3.log",
+      "sha256": "012b537d44ee5790b4dad783ae50969077d19cc66602d74d91183ea53777b27d",
+      "bytes": 44996
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api/upstream-api-before-restart.nbt",
+      "sha256": "5f8ac079479e05429bd0e76f5d9551d4e16acc11ef19d568ed3e1dbc154e3eca",
+      "bytes": 470
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-pause/logs/latest.log",
+      "sha256": "9149e9398c01dcdb1f626cd1b2ba0b13fa07a168453ef53aecb9fdfc4eb3d997",
+      "bytes": 19326
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-pause/packaged-2026-10-11T13-32-48.588507929Z.json",
+      "sha256": "c46aa5031b66646325aee66414bebc9e838a4110441798a41cc24276bd98ed84",
+      "bytes": 773
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-pending-restart/arm-phase.log",
+      "sha256": "b90742d4cbc9090ac1ef684e07fb8f3a3dfb00c39a2edeba4d91099c87cec1c7",
+      "bytes": 14826
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-pending-restart/extension-api-pending-before-restart.nbt",
+      "sha256": "da792fd4349d782c7b960fdeb7a245152b6e4a8561fe011a8336cafa579a2e3e",
+      "bytes": 229
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-pending-restart/packaged-2026-10-11T13-33-22.311481952Z.json",
+      "sha256": "352a6b23ebb7e9db1c9093ce7a51ef0b1cc4253d262b2a673b95ab3fcf230e19",
+      "bytes": 783
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-pending-restart/packaged-2026-10-11T13-33-55.517723989Z.json",
+      "sha256": "f43a73a7a3dec7d4fdd29de8213913a515e128c7fcbf7a7d18b62b2bc65aa94a",
+      "bytes": 781
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-pending-restart/packaged-2026-10-11T13-34-27.874990836Z.json",
+      "sha256": "b2fcbb1e7a615a173121991bbb0a3bb5e47a208e73cd4e1431b1d01de51e01d9",
+      "bytes": 784
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-pending-restart/setup-phase.log",
+      "sha256": "6e2eb3d87f26fda5e79e5e83522b2163f923f156735041d0dd49786a405c1c19",
+      "bytes": 19005
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-pending-restart/verify-phase.log",
+      "sha256": "3a898ad1b27491e2d66d934a0be7c5d523f65e2802f179f2a83833b42505674d",
+      "bytes": 16036
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-workshop/api-workshop-stations.json",
+      "sha256": "850ac9f45deca3526805b4428e3ec219e5d64004660c0b0b38c8449b064c5716",
+      "bytes": 19488
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-workshop/packaged-2026-10-11T14-03-06.699095378Z.json",
+      "sha256": "3499443f87dc02666ce825911a070bb545726170f7b957b559b15dd6ba856d69",
+      "bytes": 773
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-workshop/packaged-2026-10-11T14-03-45.036380559Z.json",
+      "sha256": "052428a2642774d53623de723828079816a1a1bfcddf8869ee488443aea6a07a",
+      "bytes": 774
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-workshop/packaged-2026-10-11T14-04-21.026974890Z.json",
+      "sha256": "64a8b6de798b0c03037b9a4bcf39724260deba479f50957e8eb00708fdeed02a",
+      "bytes": 774
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-workshop/packaged-2026-10-11T14-04-56.401693046Z.json",
+      "sha256": "43c96ae3e36fbcc55305e9f8b3852cbfb002d41c212dcea0f9195517596d5cf0",
+      "bytes": 774
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-workshop/restart-1.log",
+      "sha256": "ae208f2c8db263656272e9937dabe72789654b99f2848ea0446bb76222f4c50e",
+      "bytes": 20853
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-workshop/restart-2.log",
+      "sha256": "19cb0aeeae95defa718259cde3abf2e8860af2fe1f854f03b139c57254db0a03",
+      "bytes": 20751
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/api-workshop/restart-3.log",
+      "sha256": "072a4a5df4410faea3b0d6d725d36ad53537a84ae636abb2e9b954e3455dc0e8",
+      "bytes": 20852
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/example/logs/latest.log",
+      "sha256": "c68e80cdc8a612e18ef2ad9acf3b068c734eec5679f4443021d2b209e2fa4d0e",
+      "bytes": 15869
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/example/packaged-2026-10-11T13-54-57.654293133Z.json",
+      "sha256": "d07688b3d84963b022d191a469b8a0c5de2ec18b452ac6e3b7b70df02e155e51",
+      "bytes": 370
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/example/packaged-2026-10-11T13-55-30.018439275Z.json",
+      "sha256": "c66c4dbab9d18eecad9df5e4ce8f943b7ffe8f400c1117334abc28441fc2b71b",
+      "bytes": 371
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/exported-api-workshop/api-workshop-stations.json",
+      "sha256": "e03cc49892ccba4681cec9b3221f29971964d4788c762b5f3e0bf3bd5f22869a",
+      "bytes": 19487
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/exported-api-workshop/extracted-yard.json",
+      "sha256": "94d785e27f5bc89a832062d0f71283be0f4bf73316d590d07006bc8d30ee88ad",
+      "bytes": 543
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/exported-api-workshop/packaged-2026-10-11T14-05-32.230226366Z.json",
+      "sha256": "b9ec46bd74f1694ed19520d6b58ccea8e0ed6cc2bd72d08ad308dfc7d76f14e3",
+      "bytes": 774
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/exported-api-workshop/packaged-2026-10-11T14-06-09.505396889Z.json",
+      "sha256": "ec8011dc1919697325cb5c445ea4768324ea770d9f4dd8d089d029cf2e38a8b2",
+      "bytes": 774
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/exported-api-workshop/packaged-2026-10-11T14-06-44.972369210Z.json",
+      "sha256": "3014b2343f5a5497073ea9095e4d9fb58ca6cb594c1e4a22ea4f9d2499196f59",
+      "bytes": 774
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/exported-api-workshop/restart-1.log",
+      "sha256": "00237a5e24d88cf05497d8289a9d47d3707f87d3e9871ecb3848368de9571379",
+      "bytes": 24965
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/exported-api-workshop/restart-2.log",
+      "sha256": "06397acd0caefb61747f50fe89c39789e1aaabbd3a5223c71e8bf834664ec100",
+      "bytes": 20853
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/exported-api-workshop/restart-3.log",
+      "sha256": "4a52c913625f3e58ff2a27c0c153befa7f10937443d9837e0ac813e4b1f145bf",
+      "bytes": 20751
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/exported-yard/extracted-yard.json",
+      "sha256": "ad0ed7b51a4fd49f7b8fc38fa07f448a858d95059ce9d9ed6f073bdd97a4eca5",
+      "bytes": 517
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/exported-yard/packaged-2026-10-11T14-00-39.253832976Z.json",
+      "sha256": "66d08ffa67f3531e1033667de94f0a6baa9eac767973edee758416da3a55fd29",
+      "bytes": 370
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/exported-yard/packaged-2026-10-11T14-01-30.118467409Z.json",
+      "sha256": "f7970a479b3a42c11c0caadb3c9210a66665c9cf74bd938c6d1b6a9a05fb3c20",
+      "bytes": 370
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/exported-yard/packaged-2026-10-11T14-02-17.544203776Z.json",
+      "sha256": "3beb85590c8add1c985775370092ce2ea162319d675eb6191c3a3c85f1f3459e",
+      "bytes": 370
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/exported-yard/restart-1.log",
+      "sha256": "f4e426bda4a04a9e8eea39864f13326d885c57a3385542b4cbf8724de04f5978",
+      "bytes": 27010
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/exported-yard/restart-2.log",
+      "sha256": "b2b409651b62b00876882aed716ebe4d82c1e713aca3d69da3581704ccd78e93",
+      "bytes": 22889
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/exported-yard/restart-3.log",
+      "sha256": "b6b08eaeba4a0973033e3d38cdf85b044b5264eb339f439d67949ebade7de7a6",
+      "bytes": 22892
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/packaged-2026-10-11T13-38-46.106025148Z.json",
+      "sha256": "9bc101c4e783885d89cf57431054c5aeed2f37559bc18dda2b436a600f4c08da",
+      "bytes": 369
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/packaged-2026-10-11T13-41-13.150891286Z.json",
+      "sha256": "4939dd266e5118dc877c614005bcf21de636d94e45e04673ca11fa72ed8147fe",
+      "bytes": 370
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/packaged-2026-10-11T13-44-24.824813809Z.json",
+      "sha256": "b8764943e8ead3d166c35048203ee660c33228b7f4e1f280725b4cc164a1ae55",
+      "bytes": 370
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/packaged-2026-10-11T13-48-44.465334910Z.json",
+      "sha256": "5a97fe56266a79e26341f64102413a4ccbc1318bc80e2c2166994920f4be6061",
+      "bytes": 370
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/reference/reference-packaged-2026-10-11T13-53-51.531946792Z.json",
+      "sha256": "ea41030ad2783ba83cac69ee88c5c0fac051c06bef5a34c700f32c3f7e22d374",
+      "bytes": 398
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/reference/reference-packaged-2026-10-11T13-54-23.562827299Z.json",
+      "sha256": "eb8c038456d2842aedb943083b9e4fa35c758d5c20f11cb8d7cabfdc52174263",
+      "bytes": 374
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/restart-1.log",
+      "sha256": "51ef9ac5ee56348d9543e3e1b504cca1000d508be3b2b120692b8c12775c1ce8",
+      "bytes": 218722
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/restart-2.log",
+      "sha256": "d975df6b053ce280547bb85b781d6658402f79aaafd9909f8be8170f710e4348",
+      "bytes": 218738
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/restart-3.log",
+      "sha256": "f362db0d3b5f99f2aa9b735526f5a9b37c11b78969f61b8d1038ff347fcc89d9",
+      "bytes": 219434
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/showroom/logs/latest.log",
+      "sha256": "63fa4107b484a754756b5aa9ac33713a9331406ee2a340de7d05500319a71e49",
+      "bytes": 19817
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/showroom/packaged-2026-10-11T13-56-01.986787899Z.json",
+      "sha256": "8f41b2cff41bddfa966d10d0de7fedcf5f4d4ac9fb77afc17f01f67f7fdf6fb8",
+      "bytes": 371
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/showroom/packaged-2026-10-11T13-56-42.291599283Z.json",
+      "sha256": "f02fe095279fc8b3b1176e7f7f3475450beb0c71a52ce6ad89d71af41ca33cc2",
+      "bytes": 372
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/yard/packaged-2026-10-11T13-57-20.652250729Z.json",
+      "sha256": "1be6c983cc4a8f63c9bb1a0510e027dbbd9ce8449748eb2ecfbd7073b2013a46",
+      "bytes": 369
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/yard/packaged-2026-10-11T13-58-15.682297782Z.json",
+      "sha256": "d3fd37856cd1883e553b19f55597f243bcfa8b49ae2ca7afcaa1ad55cebf8175",
+      "bytes": 370
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/yard/packaged-2026-10-11T13-59-04.130846815Z.json",
+      "sha256": "eabab7dd2b91b03a9a1d61e3dd3a2240409aeb13deaefb2bfa88c602d62e35f6",
+      "bytes": 370
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/yard/packaged-2026-10-11T13-59-51.739420639Z.json",
+      "sha256": "dc389476b945709346076223c61656b74b116311bad7e664c89ff8eeb8eb470e",
+      "bytes": 370
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/yard/restart-1.log",
+      "sha256": "f53764ed5cebf27be4537367f9013ac2fd28c6e04ec35c64071cd4980ba8a01c",
+      "bytes": 22894
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/yard/restart-2.log",
+      "sha256": "8a80d202d5d30859d5427fdd5c05dcd25dc991fa8455ee80cf918b8116a3a0c9",
+      "bytes": 23204
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/run/yard/restart-3.log",
+      "sha256": "aaf7c85707ca801c5824eb6124a5fdf998def23566125a8678674ad5deeba873",
+      "bytes": 23205
+    }
+  ],
+  "checked_out_source": {
+    "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/ci-source.json",
+    "sha256": "e43e7b31f3e5695c643b8d6aa41694bc99c07c08d04f6dbb300be58f739881b0",
+    "bytes": 211
+  },
+  "github_job_id": 114481941016,
+  "github_artifact_id": 11705310489
+}

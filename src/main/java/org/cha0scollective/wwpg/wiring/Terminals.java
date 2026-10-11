@@ -54,8 +54,41 @@ public final class Terminals {
         return adapter;
     }
 
-    public static Vec3 pgLocalPosition(Level level, BlockPos pos, int id) {
+    /** Native PG and public extension terminals usable by CEE's wire tools. */
+    public static IElectric pgCompatible(Level level, BlockPos pos) {
+        if (level instanceof ServerLevel server && !server.getServer().isSameThread()) return null;
         var electric = nativePg(level, pos);
+        if (electric != null) org.cha0scollective.wwpg.extension.ApiTerminals.captureNativeReplacement(level, pos);
+        return electric == null ? org.cha0scollective.wwpg.extension.ApiTerminals.get(level, pos) : electric;
+    }
+
+    /** Native models retain priority; extension discovery never prepares a circuit. */
+    public static IElectric electric(Level level, BlockPos pos) {
+        // PG deserializes wire endpoints on an IO worker. A null discovery
+        // result preserves their native deferred-resolution flags; connection
+        // assignment, compatibility holders, and SavedData wait for its tick.
+        if (level instanceof ServerLevel server && !server.getServer().isSameThread()) return null;
+        var electric = nativePg(level, pos);
+        if (electric != null) {
+            org.cha0scollective.wwpg.extension.ApiTerminals.captureNativeReplacement(level, pos);
+            return electric;
+        }
+        var adapter = cee(level, pos);
+        return adapter == null ? org.cha0scollective.wwpg.extension.ApiTerminals.get(level, pos) : adapter;
+    }
+
+    public static Vec3 pgLocalPosition(Level level, BlockPos pos, int id) {
+        if (level instanceof ServerLevel server
+                && server.getChunkSource().getChunkNow(pos.getX() >> 4, pos.getZ() >> 4) == null) {
+            // Saved CEE wires can ask for geometry after the owner unloads.
+            // The sidecar retains stationary geometry without querying a capability.
+            var cached = org.cha0scollective.wwpg.extension.ApiTerminals.existing(level, pos);
+            var definition = cached == null ? null : cached.terminalDefinition(id);
+            if (definition == null) return null;
+            var point = definition.position();
+            return new Vec3(point.x(), point.y(), point.z());
+        }
+        var electric = pgCompatible(level, pos);
         if (electric == null || id < 0) return null;
         var state = loadedState(level, pos);
         // A multiblock can expose two terminals locally while its controller
@@ -69,8 +102,10 @@ public final class Terminals {
     }
 
     public static InWorldNode closestPg(Level level, BlockPos pos, Vec3 clicked, double threshold) {
-        var electric = nativePg(level, pos);
+        var electric = pgCompatible(level, pos);
         if (electric == null) return null;
+        if (electric instanceof org.cha0scollective.wwpg.extension.ApiElectric && level instanceof ServerLevel server
+                && !org.cha0scollective.wwpg.extension.ApiTerminals.canWire(server,pos)) return null;
         InWorldNode found = null;
         double distance = threshold * threshold;
         for (int i = 0; i < electric.terminalCount(); ++i) {
@@ -100,7 +135,7 @@ public final class Terminals {
         var infrastructure = InfrastructureSavedData.load(level);
         var registered = infrastructure.getNodesAt(pos);
         if (registered == null || registered.isEmpty()) return;
-        var electric = nativePg(level, pos);
+        var electric = pgCompatible(level, pos);
         if (electric == null) return;
         var ids = new ArrayList<Integer>();
         var state = loadedState(level, pos);
@@ -114,6 +149,7 @@ public final class Terminals {
     }
 
     public static void refresh(Level level) {
+        if (level instanceof ServerLevel server) org.cha0scollective.wwpg.extension.ApiTerminals.refresh(server);
         var map = CEE.get(level);
         if (map == null) return;
         map.entrySet().removeIf(e -> {
@@ -152,6 +188,6 @@ public final class Terminals {
         var adapter = map.remove(pos);
         if (adapter != null) adapter.behaviour().breakConnections();
     }
-    public static void unload(Level level) { CEE.remove(level); }
-    public static void clear() { CEE.clear(); }
+    public static void unload(Level level) { CEE.remove(level); org.cha0scollective.wwpg.extension.ApiTerminals.unload(level); }
+    public static void clear() { CEE.clear(); org.cha0scollective.wwpg.extension.ApiTerminals.clear(); }
 }

@@ -21,16 +21,32 @@ public abstract class WireSpoolMixin {
     @Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
     private void wwpg$pgSpool(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
         var level = context.getLevel(); var stack = context.getItemInHand();
+        // Native cancellation needs no endpoint lookup or graph mutation.
+        if(context.getPlayer()!=null&&context.getPlayer().isShiftKeyDown())return;
+        var selected=stack.get(CEEDataComponents.SELECTED_NODE);
+        if (level instanceof ServerLevel server
+                && (org.cha0scollective.wwpg.extension.ApiTerminals.blockedWireEndpoint(server,context.getClickedPos())
+                ||selected!=null&&org.cha0scollective.wwpg.extension.ApiTerminals.blockedWireEndpoint(server,selected.sourcePos()))) {
+            org.patryk3211.powergrid.electricity.base.IElectric.sendMessage(context,net.minecraft.network.chat.Component.translatable("wwpg.device.loading"));
+            cir.setReturnValue(InteractionResult.FAIL); return;
+        }
         if (level instanceof ServerLevel server) Terminals.ensurePgNode(server, stack.get(CEEDataComponents.SELECTED_NODE));
-        if (Terminals.nativePg(level, context.getClickedPos()) == null || context.getPlayer() == null) return;
+        if (Terminals.pgCompatible(level, context.getClickedPos()) == null || context.getPlayer() == null) return;
         var node = Terminals.closestPg(level, context.getClickedPos(), context.getClickLocation(), 1.5);
         if (node == null) { cir.setReturnValue(InteractionResult.PASS); return; }
         ((WireSpoolItem) (Object) this).interactDetachedNode(node, context.getPlayer(), level, stack);
         cir.setReturnValue(InteractionResult.SUCCESS);
     }
-    @Inject(method = "interactDetachedNode", at = @At("HEAD"))
+    @Inject(method = "interactDetachedNode", at = @At("HEAD"),cancellable=true)
     private void wwpg$ensurePgNodes(InWorldNode node, Player player, Level level, ItemStack stack, CallbackInfo ci) {
+        if(player.isShiftKeyDown())return;
         if (level instanceof ServerLevel server) {
+            var selected=stack.get(CEEDataComponents.SELECTED_NODE);
+            if(node!=null&&org.cha0scollective.wwpg.extension.ApiTerminals.blockedWireEndpoint(server,node.sourcePos())
+                    ||selected!=null&&org.cha0scollective.wwpg.extension.ApiTerminals.blockedWireEndpoint(server,selected.sourcePos())) {
+                player.displayClientMessage(net.minecraft.network.chat.Component.translatable("wwpg.device.loading"),true);
+                ci.cancel();return;
+            }
             Terminals.ensurePgNode(server, node);
             Terminals.ensurePgNode(server, stack.get(CEEDataComponents.SELECTED_NODE));
         }

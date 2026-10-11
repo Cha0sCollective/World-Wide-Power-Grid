@@ -49,6 +49,7 @@ public final class ExpandedClientAcceptance {
     private final Map<String,Double> serverReadings = new java.util.concurrent.ConcurrentHashMap<>();
 
     public ExpandedClientAcceptance() {
+        if (Boolean.getBoolean("wwpg.test.apiWorkshop")) { new ApiWorkshopClientAcceptance(); return; }
         for(int i=0;i<25;i++) {
             var base=new BlockPos(32+(i%5)*16,62,8+(i/5)*16);
             views.add(new View(String.format("B%02d",i+1),base.offset(3,2,3),base.offset(8,2,1),true));

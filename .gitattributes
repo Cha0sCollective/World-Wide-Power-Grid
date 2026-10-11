@@ -11,8 +11,12 @@ LICENSE text eol=lf
 *.yml text eol=lf
 *.py text eol=lf
 *.lua text eol=lf
+src/main/resources/META-INF/services/* text eol=lf
 release/fixes/restoration/checkpoints/*.log text eol=lf
 gradlew text eol=lf
 *.bat text eol=crlf
 *.nbt binary
 *.jar binary
+# Acceptance records and captured inputs are byte-addressed by SHA256.
+release/0.2.0/evidence/** -text
+release/0.2.0/*.json -text

@@ -1,0 +1,19 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.89'
+}
+group = 'org.cha0scollective.wwpg.examples'
+version = '1.0.0'
+base { archivesName = 'wwpg-api-example' }
+java { toolchain.languageVersion = JavaLanguageVersion.of(21) }
+repositories {
+    maven { url = providers.gradleProperty('apiRepository').getOrElse('../../build/maven-repository') }
+    mavenCentral()
+}
+neoForge { version = '21.1.231'; mods { wwpg_api_example { sourceSet sourceSets.main } } }
+dependencies { compileOnly 'org.cha0scollective.wwpg:wwpg-api:1.0.0' }
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+tasks.withType(Jar).configureEach { preserveFileTimestamps = false; reproducibleFileOrder = true; includeEmptyDirs = false }
+tasks.named('jar') {
+    from('LICENSE') { into 'META-INF'; rename { 'WWPG-EXAMPLE-LICENSE.txt' } }
+}

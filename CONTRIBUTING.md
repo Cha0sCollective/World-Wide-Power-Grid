@@ -1,8 +1,8 @@
 # Contributing to WWPG
 
-WWPG is a compatibility project for CEE and Power Grid. The current beta's priority is reliable stationary interoperability; [SPEC.md](SPEC.md) retains the long-term product requirements.
+WWPG is a compatibility project for CEE and Power Grid. The current priorities are reliable stationary interoperability and the stable extension API; [SPEC.md](SPEC.md) retains the long-term product requirements.
 
-Before changing a feature, identify the relevant beta behavior in the [support matrix](release/0.1.0-beta.5/supported-content.json) and the design requirement it advances. Use [STATUS.md](docs/STATUS.md) for unresolved issues and [DEVELOPMENT.md](docs/DEVELOPMENT.md) for build/test commands. Changes to the beta's scope should update its documentation explicitly.
+Before changing a feature, identify the relevant native behavior or public API contract in the [support matrix](release/0.1.0-beta.5/supported-content.json) and the design requirement it advances. Use [STATUS.md](docs/STATUS.md) for unresolved issues and [DEVELOPMENT.md](docs/DEVELOPMENT.md) for build/test commands. Changes to release scope should update its documentation explicitly. Public API changes follow the [versioning and binary-compatibility policy](docs/EXTENSION_API.md#versioning-and-compatibility-checks); compare published classfiles and run independently compiled add-ons before claiming compatibility.
 
 ## License
 
@@ -18,7 +18,7 @@ WWPG's own code and documentation use the [MIT License](LICENSE). By submitting 
 - **Explicit phases:** preparation, solving, and gameplay commit remain separate even while execution is synchronous.
 - **Single topology owner:** compatibility structural changes pass through the topology manager and execute outside an active solve.
 
-The finished architecture must remain suitable for server-wide networks and future asynchronous solving. Large-network testing and asynchronous execution are deferred for this beta, as described in [FIRST_RELEASE.md](docs/FIRST_RELEASE.md).
+The finished architecture must remain suitable for server-wide networks and future asynchronous solving. Large-network testing and asynchronous execution are deferred for the stationary release, as described in [FIRST_RELEASE.md](docs/FIRST_RELEASE.md).
 
 ## Preparation, solving, and commit
 

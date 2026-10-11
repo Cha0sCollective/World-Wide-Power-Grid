@@ -45,10 +45,16 @@ public final class StationaryInventoryGameTests {
                         row.addProperty("block", BuiltInRegistries.BLOCK.getKey(item.getBlock()).toString());
                     rows.add(row);
                 });
-        CEERegistries.WIRE_TYPE.entrySet().forEach(e -> rows.add(row("wire_type", e.getKey().location().toString(), e.getValue())));
-        CEERegistries.WIRE_ATTACHMENT_TYPE.entrySet().forEach(e -> rows.add(row("wire_attachment", e.getKey().location().toString(), e.getValue())));
-        CEERegistries.PANEL_ATTACHMENT_TYPE.entrySet().forEach(e -> rows.add(row("panel_attachment", e.getKey().location().toString(), e.getValue())));
-        ComponentRegistry.entries().forEach(e -> rows.add(row("board_component", ComponentRegistry.getId(e).toString(), e)));
+        CEERegistries.WIRE_TYPE.entrySet().stream().filter(e -> NAMESPACES.contains(e.getKey().location().getNamespace()))
+                .forEach(e -> rows.add(row("wire_type", e.getKey().location().toString(), e.getValue())));
+        CEERegistries.WIRE_ATTACHMENT_TYPE.entrySet().stream().filter(e -> NAMESPACES.contains(e.getKey().location().getNamespace()))
+                .forEach(e -> rows.add(row("wire_attachment", e.getKey().location().toString(), e.getValue())));
+        CEERegistries.PANEL_ATTACHMENT_TYPE.entrySet().stream().filter(e -> NAMESPACES.contains(e.getKey().location().getNamespace()))
+                .forEach(e -> rows.add(row("panel_attachment", e.getKey().location().toString(), e.getValue())));
+        ComponentRegistry.entries().forEach(e -> {
+            if (NAMESPACES.contains(ComponentRegistry.getId(e).getNamespace()))
+                rows.add(row("board_component", ComponentRegistry.getId(e).toString(), e));
+        });
         FuseHoldable.ALL.entrySet().stream().sorted(java.util.Map.Entry.comparingByKey())
                 .forEach(e -> rows.add(row("fuse_holdable", e.getKey().toString(), e.getValue())));
         report.add("entries", rows);

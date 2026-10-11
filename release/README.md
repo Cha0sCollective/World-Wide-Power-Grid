@@ -1,5 +1,7 @@
 # Release records
 
+[0.2.0](0.2.0/) records the public extension API 1.0.0 release: independently versioned general/CEE SDKs, classfile baselines, exact extracted-example builds, retained stationary regressions, four world ZIPs and graphical/two-client Workshop acceptance. [Final verification](0.2.0/verification.json) locks artifacts and executable evidence. Earlier release claims, tags and assets remain unchanged.
+
 [0.1.0-beta.5](0.1.0-beta.5/) is the stationary completion release. Its derived verified matrix and final artifact/world/client records are separate from the original beta.1 matrix and the preserved beta.4 baseline.
 
 [0.1.0-beta.4/](0.1.0-beta.4/) records the restart and chunk-loading release, the final versioned jar, and its native/Java acceptance. It retains the dependency baseline and reuses both existing worlds unchanged.

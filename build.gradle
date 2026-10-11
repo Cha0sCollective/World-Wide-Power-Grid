@@ -1,5 +1,6 @@
 plugins {
     id 'java-library'
+    id 'maven-publish'
     id 'net.neoforged.moddev' version '2.0.89'
 }
 
@@ -7,6 +8,29 @@ group = 'org.cha0scollective.wwpg'
 version = mod_version
 base { archivesName = 'wwpg' }
 java { toolchain.languageVersion = JavaLanguageVersion.of(21) }
+
+// The API is independently versioned and contains no PG/CEE implementation.
+sourceSets {
+    extensionApi {
+        java.srcDir 'src/api/java'
+        compileClasspath = configurations.compileClasspath
+    }
+    ceeApi {
+        java.setSrcDirs(['src/ceeApi/java'])
+        compileClasspath = configurations.compileClasspath + sourceSets.extensionApi.output
+    }
+}
+sourceSets.main.compileClasspath += sourceSets.extensionApi.output
+sourceSets.main.compileClasspath += sourceSets.ceeApi.output
+sourceSets.main.runtimeClasspath += sourceSets.extensionApi.output
+sourceSets.main.runtimeClasspath += sourceSets.ceeApi.output
+sourceSets.test.compileClasspath += sourceSets.extensionApi.output
+sourceSets.test.compileClasspath += sourceSets.ceeApi.output
+sourceSets.test.runtimeClasspath += sourceSets.extensionApi.output
+sourceSets.test.runtimeClasspath += sourceSets.ceeApi.output
+// Persisted identity tests use Minecraft's actual NBT format and BlockPos.
+sourceSets.test.compileClasspath += sourceSets.main.compileClasspath
+sourceSets.test.runtimeClasspath += sourceSets.main.runtimeClasspath
 
 repositories {
     mavenCentral()
@@ -60,7 +84,7 @@ neoForge {
         }
         configureEach { logLevel = org.slf4j.event.Level.INFO }
     }
-    mods { wwpg { sourceSet sourceSets.main } }
+    mods { wwpg { sourceSet sourceSets.main; sourceSet sourceSets.extensionApi; sourceSet sourceSets.ceeApi } }
 }
 
 dependencies {
@@ -85,15 +109,31 @@ dependencies {
     implementation 'dev.architectury:architectury-neoforge:13.0.8'
     testImplementation platform('org.junit:junit-bom:5.11.4')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    testCompileOnly 'dev.engine-room.flywheel:flywheel-neoforge-api-1.21.1:1.0.6'
+    testRuntimeOnly 'dev.engine-room.flywheel:flywheel-neoforge-api-1.21.1:1.0.6'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testRuntimeOnly 'it.unimi.dsi:fastutil:8.5.12'
     testRuntimeOnly 'org.ejml:ejml-core:0.44.0'
     testRuntimeOnly 'org.ejml:ejml-ddense:0.44.0'
     testRuntimeOnly 'org.ejml:ejml-dsparse:0.44.0'
+    testRuntimeOnly 'net.neoforged:bus:8.0.5'
+    if (providers.gradleProperty('testApiAddon').getOrElse('false') == 'true') {
+        runtimeOnly files('examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar')
+        runtimeOnly files('examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar')
+    }
 }
 
 tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
-tasks.named('test') { useJUnitPlatform() }
+tasks.named('test') {
+    useJUnitPlatform()
+    systemProperty 'wwpg.test.apiVersion', api_version
+}
+// NeoForge's mapped game classpath is a file collection, outside dependency
+// conflict resolution. Match its logging API/core when running NBT unit tests.
+configurations.testRuntimeClasspath.resolutionStrategy.force(
+        'org.apache.logging.log4j:log4j-api:2.22.1',
+        'org.apache.logging.log4j:log4j-core:2.22.1',
+        'org.apache.logging.log4j:log4j-slf4j2-impl:2.22.1')
 tasks.named('processResources') {
     dependsOn tasks.named('preparePgNative')
     inputs.property 'version', project.version
@@ -102,7 +142,101 @@ tasks.named('processResources') {
     from('release') { include 'artifacts.json', 'optional-artifacts.json', 'content-matrix.json', '0.1.0-beta.5/content-matrix.json', '0.1.0-beta.5/registry-inventory.json'; into 'data/wwpg/release' }
     from(layout.buildDirectory.dir('pg-native-resources/native')) { into 'native/wwpg' }
 }
-tasks.named('jar') { manifest.attributes 'MixinConfigs': 'wwpg.mixins.json' }
+tasks.named('jar') {
+    from sourceSets.extensionApi.output
+    from sourceSets.ceeApi.output
+    manifest.attributes 'MixinConfigs': 'wwpg.mixins.json', 'WWPG-API-Version': api_version
+}
+
+tasks.register('apiJar', Jar) {
+    archiveBaseName = 'wwpg-api'
+    archiveVersion = api_version
+    from sourceSets.extensionApi.output
+    from('LICENSE') { into 'META-INF'; rename { 'WWPG-LICENSE.txt' } }
+    manifest.attributes 'WWPG-API-Version': api_version
+}
+tasks.register('apiSourcesJar', Jar) {
+    archiveBaseName = 'wwpg-api'
+    archiveVersion = api_version
+    archiveClassifier = 'sources'
+    from sourceSets.extensionApi.allSource
+}
+tasks.register('ceeApiJar', Jar) {
+    archiveBaseName = 'wwpg-cee-api'
+    archiveVersion = api_version
+    from sourceSets.ceeApi.output
+    from('LICENSE') { into 'META-INF'; rename { 'WWPG-LICENSE.txt' } }
+    manifest.attributes 'WWPG-API-Version': api_version
+}
+tasks.register('ceeApiSourcesJar', Jar) {
+    archiveBaseName = 'wwpg-cee-api'
+    archiveVersion = api_version
+    archiveClassifier = 'sources'
+    from sourceSets.ceeApi.allSource
+}
+tasks.register('ceeApiJavadoc', Javadoc) {
+    source = sourceSets.ceeApi.allJava
+    classpath = sourceSets.ceeApi.compileClasspath
+    options.encoding = 'UTF-8'
+    options.addStringOption('Xdoclint:all,-missing', '-quiet')
+    destinationDir = layout.buildDirectory.dir('docs/cee-api').get().asFile
+}
+tasks.register('ceeApiJavadocJar', Jar) {
+    dependsOn tasks.named('ceeApiJavadoc')
+    archiveBaseName = 'wwpg-cee-api'
+    archiveVersion = api_version
+    archiveClassifier = 'javadoc'
+    from tasks.named('ceeApiJavadoc')
+}
+tasks.register('apiJavadoc', Javadoc) {
+    source = sourceSets.extensionApi.allJava
+    classpath = sourceSets.extensionApi.compileClasspath
+    options.encoding = 'UTF-8'
+    options.addStringOption('Xdoclint:all,-missing', '-quiet')
+    destinationDir = layout.buildDirectory.dir('docs/api').get().asFile
+}
+tasks.register('apiJavadocJar', Jar) {
+    dependsOn tasks.named('apiJavadoc')
+    archiveBaseName = 'wwpg-api'
+    archiveVersion = api_version
+    archiveClassifier = 'javadoc'
+    from tasks.named('apiJavadoc')
+}
+publishing {
+    publications {
+        ceeExtensionApi(MavenPublication) {
+            groupId = project.group
+            artifactId = 'wwpg-cee-api'
+            version = api_version
+            artifact tasks.named('ceeApiJar')
+            artifact tasks.named('ceeApiSourcesJar')
+            artifact tasks.named('ceeApiJavadocJar')
+            pom {
+                name = 'WWPG CEE Extension API'
+                description = 'CEE 1.1.3 property adapter contracts for WWPG API 1.0.'
+                url = 'https://github.com/Cha0sCollective/World-Wide-Power-Grid'
+                licenses { license { name = 'MIT'; url = 'https://opensource.org/licenses/MIT' } }
+            }
+        }
+        extensionApi(MavenPublication) {
+            groupId = project.group
+            artifactId = 'wwpg-api'
+            version = api_version
+            artifact tasks.named('apiJar')
+            artifact tasks.named('apiSourcesJar')
+            artifact tasks.named('apiJavadocJar')
+            pom {
+                name = 'World-Wide Power Grid Extension API'
+                description = 'Stationary electrical integration contracts for WWPG; requires a NeoForge 1.21.1 development environment.'
+                url = 'https://github.com/Cha0sCollective/World-Wide-Power-Grid'
+                licenses { license { name = 'MIT'; url = 'https://opensource.org/licenses/MIT' } }
+                scm { url = 'https://github.com/Cha0sCollective/World-Wide-Power-Grid' }
+            }
+        }
+    }
+    repositories { maven { name = 'Sdk'; url = layout.buildDirectory.dir('maven-repository') } }
+}
+tasks.named('assemble') { dependsOn tasks.named('apiJar'), tasks.named('apiSourcesJar'), tasks.named('ceeApiJar'), tasks.named('ceeApiSourcesJar') }
 tasks.withType(Jar).configureEach {
     preserveFileTimestamps = false
     reproducibleFileOrder = true
@@ -198,7 +332,7 @@ tasks.register('runPackagedGameTestServer', JavaExec) {
         args = run.args
         jvmArgs = run.jvmArgs + ['-Dwwpg.test.packaged=true']
         def packaged = tasks.named('jar').get().archiveFile.get().asFile
-        classpath = run.classpathProvider.filter { !sourceSets.main.output.files.contains(it) } + files(packaged)
+        classpath = run.classpathProvider.filter { ![sourceSets.main,sourceSets.extensionApi,sourceSets.ceeApi].any { set -> set.output.files.contains(it) } } + files(packaged)
         def env = new HashMap(run.environmentProperty.get())
         env['MOD_CLASSES'] = "wwpg%%${packaged.absolutePath}"
         environment env
@@ -209,6 +343,16 @@ tasks.register('runPackagedGameTestServer', JavaExec) {
                 profile: testProfile, backend: providers.gradleProperty('testBackend').getOrElse('NATIVE'),
                 phase: providers.gradleProperty('restartPhase').getOrElse('SETUP'), started: stamp,
                 namespaces: providers.gradleProperty('testNamespaces').getOrElse('default')]
+        if(providers.gradleProperty('testApiAddon').getOrElse('false')=='true') {
+            proof.addon_artifacts=[:]
+            [example:'examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar',
+             upstream_example:'examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar'].each { role,path ->
+                def addon=file(path)
+                if(!addon.isFile())throw new GradleException("Missing independent API example: ${path}")
+                proof.addon_artifacts[role]=[artifact:addon.name,
+                    sha256:java.security.MessageDigest.getInstance('SHA-256').digest(addon.bytes).encodeHex().toString()]
+            }
+        }
         def evidence = new File(workingDir, "packaged-${stamp}.json")
         evidence.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(proof)) + '\n'
         extensions.extraProperties.set('wwpgPackagedEvidence', evidence)
@@ -227,7 +371,7 @@ tasks.register('runPackagedGameTestServer', JavaExec) {
             args = run.args
             jvmArgs = run.jvmArgs + ['-Dwwpg.test.packaged=true']
             def packaged = tasks.named('jar').get().archiveFile.get().asFile
-            classpath = run.classpathProvider.filter { !sourceSets.main.output.files.contains(it) } + files(packaged)
+            classpath = run.classpathProvider.filter { ![sourceSets.main,sourceSets.extensionApi,sourceSets.ceeApi].any { set -> set.output.files.contains(it) } } + files(packaged)
             def env = new HashMap(run.environmentProperty.get())
             env['MOD_CLASSES'] = "wwpg%%${packaged.absolutePath}"
             environment env
@@ -254,6 +398,8 @@ tasks.register('referenceJar', Jar) {
     dependsOn tasks.named('classes'), tasks.named('prepareReferenceConfig')
     archiveClassifier = 'upstream-reference-tests'
     from(sourceSets.main.output) { exclude 'wwpg.mixins.json' }
+    from sourceSets.extensionApi.output
+    from sourceSets.ceeApi.output
     from(layout.buildDirectory.dir('reference-config'))
     manifest.attributes 'MixinConfigs': 'wwpg.mixins.json'
 }
@@ -287,7 +433,7 @@ tasks.register('referenceJar', Jar) {
             } + ['-Dwwpg.test.packaged=true', "-Dwwpg.test.upstreamReference=${upstream}",
                 "-Dwwpg.test.tightReferencePrecision=${providers.gradleProperty('tightReferencePrecision').getOrElse('false')}"]
             def packaged = artifact.get().archiveFile.get().asFile
-            classpath = run.classpathProvider.filter { !sourceSets.main.output.files.contains(it) } + files(packaged)
+            classpath = run.classpathProvider.filter { ![sourceSets.main,sourceSets.extensionApi,sourceSets.ceeApi].any { set -> set.output.files.contains(it) } } + files(packaged)
             def env = new HashMap(run.environmentProperty.get())
             env['MOD_CLASSES'] = "wwpg%%${packaged.absolutePath}"
             environment env

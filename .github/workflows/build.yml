@@ -8,7 +8,9 @@ permissions:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 45
+    # The complete functional matrix includes 18 additional JVM launches after
+    # the reference comparison. Preserve each launch's 600-second watchdog.
+    timeout-minutes: 120
     defaults:
       run:
         shell: bash
@@ -20,6 +22,23 @@ jobs:
         profile: [BASE, PINOUT]
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Record the exact checked-out source and CI attempt
+        env:
+          EXPECTED_SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          python - <<'PY'
+          import json, os, pathlib, subprocess
+          source = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+          assert source == os.environ['EXPECTED_SOURCE_SHA'], 'Checkout differs from requested frozen source'
+          evidence = dict(schema=1, source_sha=source,
+              source_tree=subprocess.check_output(['git', 'rev-parse', 'HEAD^{tree}'], text=True).strip(),
+              run_id=int(os.environ['GITHUB_RUN_ID']), run_attempt=int(os.environ['GITHUB_RUN_ATTEMPT']),
+              event=os.environ['GITHUB_EVENT_NAME'])
+          path = pathlib.Path('build/ci-source.json'); path.parent.mkdir(parents=True, exist_ok=True)
+          path.write_text(json.dumps(evidence, indent=2) + '\n', encoding='utf-8', newline='\n')
+          PY
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -33,9 +52,53 @@ jobs:
         run: python tools/test_stationary_export.py
       - name: Verify final packaging acceptance gates
         run: python tools/test_beta5_package.py
+      - name: Verify public API binary contracts and publication gates
+        run: python tools/test_api_compatibility.py
+      - name: Verify API Workshop export evidence and native save preservation
+        run: python tools/test_api_workshop_export.py
+      - name: Verify CI provenance, cold sequences and actual lifecycle evidence gates
+        run: python tools/test_api_ci_evidence.py
+      - name: Verify exact SDK extraction and independent build gates
+        run: python tools/test_extracted_api_sdk.py
+      - name: Verify bounded child launches and Windows batch quoting
+        run: python tools/test_checked_runner.py
+      - name: Verify immutable graphical and multiplayer acceptance helper provenance
+        run: python tools/test_api_client_provenance.py
       - if: runner.os != 'Windows'
         run: chmod +x gradlew
-      - run: python tools/run_checked.py --timeout 1200 -- ./gradlew build -PtestProfile=${{ matrix.profile }} --no-daemon
+      - name: Build runtime and publish both SDK APIs to an isolated local Maven repository
+        run: python tools/run_checked.py --timeout 1200 -- ./gradlew build publishAllPublicationsToSdkRepository -PtestProfile=${{ matrix.profile }} --no-daemon
+      - name: Snapshot the first published API contracts and archive the explicit Maven versions
+        run: |
+          python tools/verify_api_compatibility.py build/libs/wwpg-api-1.0.0.jar --api-version 1.0.0 --output build/api-contract.json
+          python tools/verify_api_compatibility.py build/libs/wwpg-cee-api-1.0.0.jar --prefix org.cha0scollective.wwpg.api.cee --api-version 1.0.0 --output build/cee-api-contract.json
+          python tools/package_api_release.py --maven-source build/maven-repository --output build/distributions/wwpg-api-1.0.0-maven.zip
+      - name: Build the general example independently against published Maven API artifacts
+        run: python tools/run_checked.py --timeout 1200 -- ./gradlew -p examples/extension-addon build --no-daemon
+      - name: Build the CEE panel and PG board example independently against published APIs
+        run: python tools/run_checked.py --timeout 1200 -- ./gradlew -p examples/cee-addon build --no-daemon
+      - name: Export independently buildable example projects with their own wrappers and licenses
+        run: |
+          python tools/package_api_release.py --example-source examples/extension-addon --output build/distributions/wwpg-api-example-1.0.0-source.zip
+          python tools/package_api_release.py --example-source examples/cee-addon --output build/distributions/wwpg-upstream-api-example-1.0.0-source.zip
+      - name: Verify global freeze and one-tick stepping in an isolated API fixture
+        run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api_pause -PtestDirectory=run/api-pause --no-daemon
+      - name: Verify stopped-before-ready persisted wire retirement
+        run: |
+          python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api_pending_restart -PtestDirectory=run/api-pending-restart -PrestartPhase=SETUP --no-daemon
+          cp run/api-pending-restart/logs/latest.log run/api-pending-restart/setup-phase.log
+          python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api_pending_restart -PtestDirectory=run/api-pending-restart -PrestartPhase=ARM --no-daemon
+          cp run/api-pending-restart/logs/latest.log run/api-pending-restart/arm-phase.log
+          python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api_pending_restart -PtestDirectory=run/api-pending-restart -PrestartPhase=VERIFY --no-daemon
+          cp run/api-pending-restart/logs/latest.log run/api-pending-restart/verify-phase.log
+      - name: Run both packaged public API example fixture suites
+        run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api,wwpg_api_faults,wwpg_api_restart,wwpg_api_upstream,wwpg_api_upstream_restart -PtestDirectory=run/api --no-daemon
+      - name: Three cold restarts of the packaged API example assemblies
+        run: |
+          for pass in 1 2 3; do
+            python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api,wwpg_api_faults,wwpg_api_restart,wwpg_api_upstream,wwpg_api_upstream_restart -PtestDirectory=run/api -PrestartPhase=VERIFY --no-daemon
+            cp run/api/logs/latest.log "run/api/restart-${pass}.log"
+          done
       - run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PrestartPhase=SETUP --no-daemon
       - name: Three consecutive cold world restarts
         run: |
@@ -59,7 +122,7 @@ jobs:
           done
       - name: Export and extract the exact stationary yard ZIP
         run: |
-          python tools/export_stationary_yard.py --run run/yard --jar build/libs/wwpg-0.1.0-beta.5.jar --profile ${{ matrix.profile }} --output build/distributions/wwpg-stationary-${{ matrix.profile }}.zip
+          python tools/export_stationary_yard.py --run run/yard --jar build/libs/wwpg-0.2.0.jar --target 0.2.0 --profile ${{ matrix.profile }} --output build/distributions/wwpg-stationary-${{ matrix.profile }}.zip
           python tools/reopen_stationary_yard.py build/distributions/wwpg-stationary-${{ matrix.profile }}.zip --run run/exported-yard
       - name: Three cold restarts of the extracted ZIP
         run: |
@@ -67,14 +130,45 @@ jobs:
             python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_yard -PtestDirectory=run/exported-yard -PrestartPhase=VERIFY --no-daemon
             cp run/exported-yard/logs/latest.log "run/exported-yard/restart-${pass}.log"
           done
+      - name: Build the playable public API Workshop with both independent add-ons
+        run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api_world -PtestDirectory=run/api-workshop --no-daemon
+      - name: Three cold API Workshop restarts
+        run: |
+          for pass in 1 2 3; do
+            python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api_world -PtestDirectory=run/api-workshop -PrestartPhase=VERIFY --no-daemon
+            cp run/api-workshop/logs/latest.log "run/api-workshop/restart-${pass}.log"
+          done
+      - name: Export and extract the exact API Workshop ZIP with locked example jars
+        run: |
+          python tools/export_api_workshop.py --run run/api-workshop --jar build/libs/wwpg-0.2.0.jar --example examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar --upstream-example examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar --profile ${{ matrix.profile }} --backend ${{ matrix.backend }} --output build/distributions/wwpg-api-workshop-${{ matrix.profile }}.zip
+          python tools/reopen_stationary_yard.py build/distributions/wwpg-api-workshop-${{ matrix.profile }}.zip --run run/exported-api-workshop
+      - name: Three cold restarts of the extracted API Workshop ZIP
+        run: |
+          for pass in 1 2 3; do
+            python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api_world -PtestDirectory=run/exported-api-workshop -PrestartPhase=VERIFY --no-daemon
+            cp run/exported-api-workshop/logs/latest.log "run/exported-api-workshop/restart-${pass}.log"
+          done
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: wwpg-${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}
           path: |
+            build/ci-source.json
             build/libs/*.jar
+            build/api-contract.json
+            build/cee-api-contract.json
+            build/maven-repository/
+            build/distributions/wwpg-api-1.0.0-maven.zip
+            build/distributions/wwpg-api-example-1.0.0-source.zip
+            build/distributions/wwpg-upstream-api-example-1.0.0-source.zip
+            examples/extension-addon/build/libs/*.jar
+            examples/extension-addon/build/reports/tests/
+            examples/cee-addon/build/libs/*.jar
+            examples/cee-addon/build/reports/tests/
             build/distributions/wwpg-stationary-*.zip
+            build/distributions/wwpg-api-workshop-*.zip
             build/reports/tests/
+            build/test-results/test/
             build/watchdog/
             run/logs/
             run/crash-reports/
@@ -92,6 +186,31 @@ jobs:
             run/world/computercraft/computer/**/*.json
             run/world/computercraft/computer/**/boots.txt
             run/packaged-*.json
+            run/api/logs/
+            run/api/crash-reports/
+            run/api/packaged-*.json
+            run/api/restart-*.log
+            run/api/api-*.json
+            run/api/*-before-restart.nbt
+            run/api-pause/logs/
+            run/api-pause/crash-reports/
+            run/api-pause/packaged-*.json
+            run/api-pending-restart/logs/
+            run/api-pending-restart/crash-reports/
+            run/api-pending-restart/packaged-*.json
+            run/api-pending-restart/*-phase.log
+            run/api-pending-restart/*.nbt
+            run/api-workshop/logs/
+            run/api-workshop/crash-reports/
+            run/api-workshop/packaged-*.json
+            run/api-workshop/restart-*.log
+            run/api-workshop/api-workshop-stations.json
+            run/exported-api-workshop/logs/
+            run/exported-api-workshop/crash-reports/
+            run/exported-api-workshop/extracted-yard.json
+            run/exported-api-workshop/packaged-*.json
+            run/exported-api-workshop/restart-*.log
+            run/exported-api-workshop/api-workshop-stations.json
             run/reference/native-reference-*.json
             run/reference/compatibility-*.json
             run/reference/reference-packaged-*.json

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "enabled=false,lit=false": {
+      "model": "wwpg_api_example:block/ac_source"
+    },
+    "enabled=false,lit=true": {
+      "model": "wwpg_api_example:block/ac_source_lit"
+    },
+    "enabled=true,lit=false": {
+      "model": "wwpg_api_example:block/ac_source"
+    },
+    "enabled=true,lit=true": {
+      "model": "wwpg_api_example:block/ac_source_lit"
+    }
+  }
+}

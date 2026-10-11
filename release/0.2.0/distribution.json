@@ -1,0 +1,160 @@
+{
+  "schema": 1,
+  "wwpg_version": "0.2.0",
+  "api_version": "1.0.0",
+  "state": "accepted_release_assets",
+  "implementation_source_sha": "934fe30fd5a6dfe27f8ab13bee6edb40ca1078da",
+  "verification": {
+    "path": "build/release-0.2.0-drafts/manifest-33.accepted.json",
+    "sha256": "6327c72f2119b8e41bd5e4031b971cc172582cbb6cb05c0a41d1275a5b45a02c",
+    "bytes": 6804
+  },
+  "assets": [
+    {
+      "filename": "POWER-GRID-LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
+    },
+    {
+      "filename": "SHA256SUMS.txt",
+      "sha256": "dcca9d2470a86bcab131585cd434b39c03cf70bbec0b971eba5b9861b768e4c7",
+      "bytes": 2623
+    },
+    {
+      "filename": "WWPG-LICENSE.txt",
+      "sha256": "9658df2969c0eb28532a681afccea2c3bceefbc8289a3274c1a1a63cb3a62bfd",
+      "bytes": 1089
+    },
+    {
+      "filename": "WWPG-NATIVE-NOTICE.txt",
+      "sha256": "419c7fdd49c7016b9b11e9f4e606a4d7690187d6aecc27a7e2097cb8f93e559c",
+      "bytes": 753
+    },
+    {
+      "filename": "wwpg-0.2.0-api-workshop-pinout.zip",
+      "sha256": "fcade8c1eb6bd39d485ccf995c52cd0fe548509cbd77cd21cdfbece1fc3d13b9",
+      "bytes": 322818
+    },
+    {
+      "filename": "wwpg-0.2.0-api-workshop.zip",
+      "sha256": "3fd07f6aad20e03a5fc5049cbbb2dcc4d1e5c0480feea74c68ef3dc8003b62d9",
+      "bytes": 320394
+    },
+    {
+      "filename": "wwpg-0.2.0-changelog.md",
+      "sha256": "6661547f3994e09340ca8a52b9e963d80f3624cbb24d9ee20de2e0e0f58a0cde",
+      "bytes": 2832
+    },
+    {
+      "filename": "wwpg-0.2.0-dependencies.json",
+      "sha256": "9859a5ba5602dd6e44519b9e94fc4e1c0882cf2f6a34960aede1472c26619854",
+      "bytes": 9780
+    },
+    {
+      "filename": "wwpg-0.2.0-install.md",
+      "sha256": "1717c071f186bd10799e9503a7729f9711528b45de91791f4a08309ffc177cd4",
+      "bytes": 4363
+    },
+    {
+      "filename": "wwpg-0.2.0-provenance.md",
+      "sha256": "2eb1e077f71e890efc57d7a4309a11afd8a1a1fc0821f3f68fcc80a00da2cbf5",
+      "bytes": 2996
+    },
+    {
+      "filename": "wwpg-0.2.0-release-notes.md",
+      "sha256": "272e06524516f1e43630f98ef8f982b209492827284345c65a253d0818549fcf",
+      "bytes": 3197
+    },
+    {
+      "filename": "wwpg-0.2.0-release.zip",
+      "sha256": "052dfdda02a6e524611623d3b48203632afe297d12c5a8598348dd9b42b62062",
+      "bytes": 197186660
+    },
+    {
+      "filename": "wwpg-0.2.0-stationary-yard-pinout.zip",
+      "sha256": "f736a1229658ae7d4defa238693f702c3fafbcb1d752a7ec6239a7e9c3372ca0",
+      "bytes": 1349284
+    },
+    {
+      "filename": "wwpg-0.2.0-stationary-yard.zip",
+      "sha256": "87c1e1ed4a3516327354c015b5fc808e4670fb083ebdae1fcb5ba85d9a9da12b",
+      "bytes": 1304446
+    },
+    {
+      "filename": "wwpg-0.2.0-verification.json",
+      "sha256": "6327c72f2119b8e41bd5e4031b971cc172582cbb6cb05c0a41d1275a5b45a02c",
+      "bytes": 6804
+    },
+    {
+      "filename": "wwpg-0.2.0.jar",
+      "sha256": "708d3bac7fee11f34a770f0a145ee4226a95566870db572767aafa97bae78f10",
+      "bytes": 3532278
+    },
+    {
+      "filename": "wwpg-api-1.0.0-contract.json",
+      "sha256": "0e10291667726185f608f3b66790e210880ad07729e2437ede6acca7a2c70710",
+      "bytes": 63389
+    },
+    {
+      "filename": "wwpg-api-1.0.0-javadoc.jar",
+      "sha256": "cd9ea6a40c8a97fb54e008ad8e052a012b6dff6b5cb5869a5a760ebfd1454c56",
+      "bytes": 225770
+    },
+    {
+      "filename": "wwpg-api-1.0.0-maven.zip",
+      "sha256": "0e55db86b2a8bed9079a22735ebaa2eed9942de2ce7672ba03672e5e49995569",
+      "bytes": 404908
+    },
+    {
+      "filename": "wwpg-api-1.0.0-sources.jar",
+      "sha256": "a88fdf9c52fe7a671ca908d0ecae558b083e41608d733dea986aecdce71a91f2",
+      "bytes": 21834
+    },
+    {
+      "filename": "wwpg-api-1.0.0.jar",
+      "sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+      "bytes": 50130
+    },
+    {
+      "filename": "wwpg-api-example-1.0.0-source.zip",
+      "sha256": "9078929fca1fd8aa8b2364bff1289e97e69dd7f5b3edb1eae237010ed5fcfcae",
+      "bytes": 79297
+    },
+    {
+      "filename": "wwpg-api-example-1.0.0.jar",
+      "sha256": "90a52b8ca6d65860043e816d4d101dc3e014dd7c947133e48a0dfe7a49490cd4",
+      "bytes": 52085
+    },
+    {
+      "filename": "wwpg-cee-api-1.0.0-contract.json",
+      "sha256": "2df8778c18472e93a7aa738587f4d22b8b15a606db8e878871c7200f92e80260",
+      "bytes": 11800
+    },
+    {
+      "filename": "wwpg-cee-api-1.0.0-javadoc.jar",
+      "sha256": "51fb877a34f2901e5dea15b0f400122a2e076e08abb34c88929f15ae7f5c8927",
+      "bytes": 107297
+    },
+    {
+      "filename": "wwpg-cee-api-1.0.0-sources.jar",
+      "sha256": "5cf223b0232750623b0901458b35ac2875de62a45a202c0af1839208d30b840a",
+      "bytes": 6305
+    },
+    {
+      "filename": "wwpg-cee-api-1.0.0.jar",
+      "sha256": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+      "bytes": 8788
+    },
+    {
+      "filename": "wwpg-upstream-api-example-1.0.0-source.zip",
+      "sha256": "3d9aabce079397b1d655d3ffb15745a9caea4185bde22a3024b841cac290653a",
+      "bytes": 69907
+    },
+    {
+      "filename": "wwpg-upstream-api-example-1.0.0.jar",
+      "sha256": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095",
+      "bytes": 45638
+    }
+  ],
+  "note": "Exact accepted download bytes. GitHub release metadata separately records publication and tag ownership."
+}

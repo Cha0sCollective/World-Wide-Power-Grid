@@ -20,25 +20,41 @@ public final class WorldWidePowerGrid {
 
     public WorldWidePowerGrid(net.neoforged.bus.api.IEventBus modBus) {
         org.cha0scollective.wwpg.wiring.CeeElectric.register(modBus);
+        org.cha0scollective.wwpg.extension.ApiElectric.register(modBus);
+        org.cha0scollective.wwpg.extension.CeeAdapters.initialize(modBus);
+        modBus.addListener(org.cha0scollective.wwpg.extension.ApiDeviceDiscovery::freeze);
         if (Boolean.getBoolean("wwpg.test.energyFixtures"))
             modBus.addListener(org.cha0scollective.wwpg.gametest.FixtureEnergyCapabilities::register);
+        if (Boolean.getBoolean("wwpg.test.packaged") && java.util.Arrays.asList(
+                System.getProperty("neoforge.enabledGameTestNamespaces", "").split(",")).contains("wwpg_api"))
+            modBus.addListener(org.cha0scollective.wwpg.gametest.ExtensionApiDiodeParameterGameTests::register);
         LOGGER.info("WWPG: CEE 1.1.3 / Power Grid 0.6.2 compatibility loaded");
         NeoForge.EVENT_BUS.addListener(this::commands);
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.gametest.MultiplayerGameTests::commands);
         NeoForge.EVENT_BUS.addListener(this::unload);
         NeoForge.EVENT_BUS.addListener(this::stop);
+        NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.extension.ApiCircuits::chunkLoaded);
+        NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.extension.ApiCircuits::blockPlaced);
+        NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.extension.ApiTerminals::chunkUnloaded);
+        if (Boolean.getBoolean("wwpg.test.packaged")
+                && "wwpg_api_pending_restart".equals(System.getProperty("neoforge.enabledGameTestNamespaces")))
+            NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.gametest.ExtensionApiPendingRestartGameTests::installBeforeStartup);
         if (Boolean.getBoolean("wwpg.test.packaged")
                 && "wwpg_yard".equals(System.getProperty("neoforge.enabledGameTestNamespaces")))
             NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.gametest.StationaryYardChunkTickets::preserveForExport);
+        if (Boolean.getBoolean("wwpg.test.packaged")
+                && "wwpg_api_world".equals(System.getProperty("neoforge.enabledGameTestNamespaces")))
+            NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.gametest.ExtensionApiWorldGameTests::preserveForExport);
     }
 
     private void commands(RegisterCommandsEvent event) {
         event.getDispatcher().register(Commands.literal("wwpg").requires(s -> s.hasPermission(2))
                 .executes(c -> {
-                    c.getSource().sendSuccess(() -> Component.literal(Bridges.get(c.getSource().getLevel()).status()), false);
+                    c.getSource().sendSuccess(() -> Component.literal(Bridges.get(c.getSource().getLevel()).status()+"; "+org.cha0scollective.wwpg.extension.ApiCircuits.get(c.getSource().getLevel()).status()), false);
                     return 1;
                 }).then(Commands.literal("errors").executes(c -> {
-                    var messages = Bridges.get(c.getSource().getLevel()).diagnostics();
+                    var messages = new java.util.ArrayList<>(Bridges.get(c.getSource().getLevel()).diagnostics());
+                    messages.addAll(org.cha0scollective.wwpg.extension.ApiCircuits.get(c.getSource().getLevel()).diagnostics());
                     c.getSource().sendSuccess(() -> Component.literal(messages.isEmpty() ? "WWPG: no recent errors" : String.join("\n", messages)), false);
                     return messages.size();
                 })).then(Commands.literal("at").then(Commands.argument("pos", BlockPosArgument.blockPos()).executes(c -> {
@@ -54,10 +70,16 @@ public final class WorldWidePowerGrid {
     }
     private void unload(LevelEvent.Unload event) {
         if (event.getLevel() instanceof ServerLevel level) Bridges.unload(level);
+        if (event.getLevel() instanceof ServerLevel level) org.cha0scollective.wwpg.extension.ApiCircuits.unload(level);
+        if (event.getLevel() instanceof ServerLevel level) org.cha0scollective.wwpg.extension.NativeApiReadings.unload(level);
         if (event.getLevel() instanceof net.minecraft.world.level.Level level) org.cha0scollective.wwpg.wiring.Terminals.unload(level);
+        if (event.getLevel() instanceof net.minecraft.world.level.Level level) org.cha0scollective.wwpg.extension.ApiTerminals.unload(level);
     }
     private void stop(ServerStoppedEvent event) {
         Bridges.clear();
+        org.cha0scollective.wwpg.extension.ApiCircuits.clear();
+        org.cha0scollective.wwpg.extension.NativeApiReadings.clear();
+        org.cha0scollective.wwpg.extension.ApiTerminals.clear();
         org.cha0scollective.wwpg.bridge.ServerElectricalSchedule.clear();
         org.cha0scollective.wwpg.wiring.Terminals.clear();
     }

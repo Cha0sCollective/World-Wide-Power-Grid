@@ -25,7 +25,7 @@ class ExportChecks(unittest.TestCase):
         self.run = self.root / 'run'
         self.world = self.run / 'world'
         self.jar = self.root / 'wwpg-candidate.jar'
-        self.jar.write_bytes(b'fixed artifact bytes')
+        self.jar_version('0.1.0-beta.5')
         self.archive = self.root / 'yard.zip'
         level = b'\x0a\x00\x00\x08\x00\x09LevelName\x00\x08Original\x08\x00\x0aRetainThis\x00\x0dnative-state!\x00'
         self.files = {'level.dat': gzip.compress(level), 'data/wwpg.dat': b'endpoint identities',
@@ -69,10 +69,30 @@ class ExportChecks(unittest.TestCase):
         for name in ('stationary-yard-stations.json', 'stationary-yard-coverage.json'):
             (self.run / name).write_text(json.dumps(record))
 
-    def export(self, output=None):
+    def jar_version(self, version):
+        with zipfile.ZipFile(self.jar, 'w') as jar:
+            jar.writestr('META-INF/neoforge.mods.toml', f'[[mods]]\nmodId="wwpg"\nversion="{version}"\n')
+
+    def export(self, output=None, target=None):
         return subprocess.run([sys.executable, str(EXPORT), '--run', str(self.run), '--jar', str(self.jar),
-                               '--profile', self.profile, '--output', str(output or self.archive), '--root', str(self.root)],
+                               '--profile', self.profile, '--output', str(output or self.archive), '--root', str(self.root)]
+                              + (['--target', target] if target else []),
                               capture_output=True, text=True)
+
+    def test_new_release_target_cannot_claim_historical_artifact_or_acceptance(self):
+        self.assertNotEqual(self.export(target='0.2.0').returncode, 0)
+        self.assertFalse(self.archive.exists())
+        self.jar_version('0.2.0')
+        self.configure('BASE')
+        self.assertNotEqual(self.export().returncode, 0)
+        result = self.export(target='0.2.0')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        with zipfile.ZipFile(self.archive) as archive:
+            manifest = json.loads(archive.read('Stationary Test Yard/WWPG_MANIFEST.json'))
+        self.assertEqual(manifest['target'], '0.2.0')
+        self.assertEqual(manifest['support_baseline'], 'release/0.1.0-beta.5/content-matrix.json')
+        self.assertIn('only when its exact ZIP SHA-256 is included', manifest['acceptance_record'])
+        self.assertNotIn('Published beta.5', manifest['acceptance_record'])
 
     def test_native_nether_connections_and_wire_entities_survive_actual_zip_and_extraction(self):
         result = self.export()

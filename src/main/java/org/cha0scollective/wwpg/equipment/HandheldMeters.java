@@ -16,6 +16,7 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import org.patryk3211.powergrid.collections.ModdedConfigs;
 import org.patryk3211.powergrid.electricity.wire.BaseWireEntity;
+import org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint;
 import org.patryk3211.powergrid.electricity.wire.CircuitBoardEndpoint;
 import org.patryk3211.powergrid.electricity.wire.IWireEndpoint;
 import org.patryk3211.powergrid.electricity.wire.WireEndpointType;
@@ -27,6 +28,7 @@ public final class HandheldMeters {
     public static final String CEE_WIRE = "WWPG_CeeWire";
     public static final String CURRENT = "WWPG_Current";
     public static final String PG_WIRE = "WWPG_PgWire";
+    public static final String UNAVAILABLE = "WWPG_ReadingUnavailable";
 
     private HandheldMeters() {}
 
@@ -64,6 +66,7 @@ public final class HandheldMeters {
     public static void tickMultimeter(ItemStack stack, ServerLevel level) {
         var meter = (MultimeterItem) stack.getItem();
         var data = MultimeterItem.getModeData(stack);
+        data.remove(UNAVAILABLE);
         if (meter.getMode(stack) == 0) {
             // CEE's adapter is not a placed PG block entity. Synchronize the
             // probe voltages in the native item's data, which PG already reads.
@@ -78,8 +81,12 @@ public final class HandheldMeters {
             // PG's client-side wire estimate cannot reconstruct a CEE source.
             // Use the native server wire's solved current for mixed networks.
             var wire = data.hasUUID("UUID") ? level.getEntity(data.getUUID("UUID")) : null;
-            if (wire instanceof BaseWireEntity pg) data.putFloat(CURRENT, finiteCurrent(pg));
-            else data.remove(CURRENT);
+            if (wire instanceof BaseWireEntity pg) {
+                float current = finiteCurrent(pg);
+                data.putFloat(CURRENT, current);
+                if (!Float.isFinite(current)) data.putBoolean(UNAVAILABLE, true);
+            }
+            else { data.remove(CURRENT); if (data.hasUUID("UUID")) data.putBoolean(UNAVAILABLE, true); }
             MultimeterItem.saveModeData(stack,data);
             return;
         }
@@ -95,8 +102,11 @@ public final class HandheldMeters {
             return;
         }
         var results = infrastructure.ticker.lastResults;
-        double current = results == null ? 0 : results.getCurrentThrough(connection.node1(), connection.node2());
-        data.putFloat(CURRENT, Double.isFinite(current) ? (float) Math.abs(current) : 0);
+        boolean rejected = rejectedTerminal(level, connection.node1().sourcePos(), connection.node1().id())
+                || rejectedTerminal(level, connection.node2().sourcePos(), connection.node2().id());
+        double current = rejected || results == null ? Double.NaN : results.getCurrentThrough(connection.node1(), connection.node2());
+        data.putFloat(CURRENT, Double.isFinite(current) ? (float) Math.abs(current) : Float.NaN);
+        if (!Double.isFinite(current)) data.putBoolean(UNAVAILABLE, true);
         MultimeterItem.saveModeData(stack, data);
     }
 
@@ -104,10 +114,12 @@ public final class HandheldMeters {
         data.remove(value);
         if (!data.contains(selection)) return;
         IWireEndpoint endpoint = WireEndpointType.deserialize(data.getCompound(selection));
-        if (endpoint == null || !endpoint.isValid(level)) return;
+        if (endpoint == null || !endpoint.isValid(level)) { data.putBoolean(UNAVAILABLE, true); return; }
+        if (rejectedEndpoint(level, endpoint)) { data.putBoolean(UNAVAILABLE, true); return; }
         var node = endpoint instanceof CircuitBoardEndpoint board ? board.getGenericNode(level) : endpoint.getNode(level);
-        double voltage = node == null ? 0 : node.getVoltage();
-        data.putFloat(value, Double.isFinite(voltage) ? (float) voltage : 0);
+        double voltage = node == null ? Double.NaN : node.getVoltage();
+        if (!Double.isFinite(voltage)) data.putBoolean(UNAVAILABLE, true);
+        else data.putFloat(value, (float) voltage);
     }
 
     public static InteractionResult attachClamp(BaseWireEntity wire, Player player, InteractionHand hand) {
@@ -127,7 +139,7 @@ public final class HandheldMeters {
     public static void clearPgWire(ItemStack stack) {
         var data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
         if (!data.contains(PG_WIRE)) return;
-        data.remove(PG_WIRE); data.remove(CURRENT);
+        data.remove(PG_WIRE); data.remove(CURRENT); data.remove(UNAVAILABLE);
         if (data.isEmpty()) stack.remove(DataComponents.CUSTOM_DATA);
         else stack.set(DataComponents.CUSTOM_DATA, CustomData.of(data));
     }
@@ -136,13 +148,50 @@ public final class HandheldMeters {
         var data=stack.getOrDefault(DataComponents.CUSTOM_DATA,CustomData.EMPTY).copyTag();
         if(!data.hasUUID(PG_WIRE))return;
         var entity=level.getEntity(data.getUUID(PG_WIRE));
-        data.putFloat(CURRENT,entity instanceof BaseWireEntity wire&&wire.isAlive()?finiteCurrent(wire):0);
+        float current=entity instanceof BaseWireEntity wire&&wire.isAlive()?finiteCurrent(wire):Float.NaN;
+        data.putFloat(CURRENT,current);
+        data.putBoolean(UNAVAILABLE,!Float.isFinite(current));
         stack.set(DataComponents.CUSTOM_DATA,CustomData.of(data));
     }
 
     private static float finiteCurrent(BaseWireEntity wire) {
+        if(rejectedEndpoint(wire.level(),wire.getEndpoint1())||rejectedEndpoint(wire.level(),wire.getEndpoint2()))return Float.NaN;
         float current=wire.measuredCurrent();
-        return Float.isFinite(current)?Math.abs(current):0;
+        return Float.isFinite(current)?Math.abs(current):Float.NaN;
+    }
+
+    private static boolean rejectedEndpoint(Level level, IWireEndpoint endpoint) {
+        if (!(level instanceof ServerLevel server) || !(endpoint instanceof BlockWireEndpoint block)) return false;
+        return rejectedTerminal(server, block.getPos(), block.getTerminal());
+    }
+
+    private static boolean rejectedTerminal(ServerLevel server, net.minecraft.core.BlockPos position, int nativeId) {
+        var status = org.cha0scollective.wwpg.api.neoforge.ElectricalMeasurements
+                .readTerminal(server, position, nativeId).status();
+        return status != org.cha0scollective.wwpg.api.MeasurementStatus.VALID;
+    }
+
+    /** Queries current acceptance without refreshing probes or creating graph objects. */
+    public static boolean selectionUnavailable(Level level, ItemStack stack) {
+        if (!(level instanceof ServerLevel server) || !(stack.getItem() instanceof MultimeterItem meter)) return false;
+        var data = MultimeterItem.getModeData(stack);
+        if (meter.getMode(stack) == 0) {
+            for (var key : new String[]{"Pos", "Neg"}) if (data.contains(key)) {
+                var endpoint = WireEndpointType.deserialize(data.getCompound(key));
+                if (endpoint == null || !endpoint.isValid(server) || rejectedEndpoint(server, endpoint)) return true;
+            }
+        } else if (meter.getMode(stack) == 1) {
+            var connection = stack.get(CEEDataComponents.NODE_CONNECTION);
+            if (connection != null && data.getBoolean(CEE_WIRE))
+                return InfrastructureSavedData.load(server).getConnectionData(connection) == null
+                        || rejectedTerminal(server, connection.node1().sourcePos(), connection.node1().id())
+                        || rejectedTerminal(server, connection.node2().sourcePos(), connection.node2().id());
+            var entity = data.hasUUID("UUID") ? server.getEntity(data.getUUID("UUID")) : null;
+            if (entity instanceof BaseWireEntity wire)
+                return rejectedEndpoint(server, wire.getEndpoint1()) || rejectedEndpoint(server, wire.getEndpoint2());
+            if (data.hasUUID("UUID")) return true;
+        }
+        return false;
     }
 
 }

@@ -257,5 +257,8 @@ public final class DynamicGameTests {
         var expected = CSolver.SolverBackend.valueOf(System.getProperty("wwpg.test.backend", "NATIVE"));
         h.assertTrue(Bridges.get(h.getLevel()).backendCounts().getOrDefault(expected, 0L) > 0,
                 "The requested PG backend never solved a network: " + expected);
+        org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info(
+                "WWPG_TEST_SOLVER_AUDIT: independentCeeSolves={}; backend={}; observedSubsteps={}",
+                SolverAudit.ceeAttempts(), expected, Bridges.get(h.getLevel()).backendCounts().getOrDefault(expected, 0L));
     }
 }

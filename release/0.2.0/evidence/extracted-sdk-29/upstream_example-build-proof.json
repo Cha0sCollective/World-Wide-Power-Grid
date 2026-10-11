@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "completed": true,
+  "passed": true,
+  "unresolved_failures": [],
+  "source_sha": "a0f2e63918e58bef9eef152d8808eb5ba51974ab",
+  "artifact_hashes": {
+    "runtime": "c7a366f0c9fd50740bfe43942738a490f3de6892241881e9a86837105a003107",
+    "api": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+    "cee_api": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+    "example": "90a52b8ca6d65860043e816d4d101dc3e014dd7c947133e48a0dfe7a49490cd4",
+    "upstream_example": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095"
+  },
+  "uses_published_api_only": true,
+  "uses_wwpg_project_classes": false,
+  "build_from_extracted_sdk": true,
+  "extracted_source_sha256": "3d9aabce079397b1d655d3ffb15745a9caea4185bde22a3024b841cac290653a",
+  "maven_repository_sha256": "0e55db86b2a8bed9079a22735ebaa2eed9942de2ce7672ba03672e5e49995569",
+  "compiled_against_api_sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+  "compiled_output": {
+    "path": "release/0.2.0/evidence/extracted-sdk-29/upstream-example/build/libs/wwpg-upstream-api-example-1.0.0.jar",
+    "sha256": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095",
+    "bytes": 45638
+  },
+  "build_log": {
+    "path": "release/0.2.0/evidence/extracted-sdk-29/upstream_example-build.log",
+    "sha256": "32696e23ac36773fd9f8a8afa2657d0a84d30ec8dd589d8b29025dc135f49970",
+    "bytes": 2586
+  },
+  "dependency_proof": {
+    "path": "release/0.2.0/evidence/extracted-sdk-29/upstream_example-dependencies.json",
+    "sha256": "e5d564c2138848f6e6dcee1a3135db0db452baf4a97a7a53bfb19ddcdf5c220a",
+    "bytes": 27914
+  },
+  "functional_behaviors": [
+    "panel_attachment",
+    "board_component"
+  ],
+  "evidence_files": [
+    {
+      "path": "build/frozen-0.2.0-29/wwpg-upstream-api-example-1.0.0-source.zip",
+      "sha256": "3d9aabce079397b1d655d3ffb15745a9caea4185bde22a3024b841cac290653a",
+      "bytes": 69907
+    },
+    {
+      "path": "build/frozen-0.2.0-29/wwpg-api-1.0.0-maven.zip",
+      "sha256": "0e55db86b2a8bed9079a22735ebaa2eed9942de2ce7672ba03672e5e49995569",
+      "bytes": 404908
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-29/compile-sdk-evidence.gradle",
+      "sha256": "459cbfb10fd1e48b8d951174580b60af32e617b87ed64921c483a5ee5a6a0693",
+      "bytes": 2002
+    }
+  ],
+  "compiled_against_cee_api_sha256": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38"
+}

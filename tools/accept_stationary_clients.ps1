@@ -1,6 +1,7 @@
 param(
     [Parameter(Mandatory=$true)][string]$Artifact,
     [Parameter(Mandatory=$true)][string]$Batch,
+    [ValidateSet('0.1.0-beta.5','0.2.0')][string]$Target='0.1.0-beta.5',
     [string[]]$Profiles=@('BASE','PINOUT'),
     [string[]]$Backends=@('NATIVE','JAVA'),
     [ValidateSet('Both','Graphical','Multiplayer')][string]$Mode='Both',
@@ -25,7 +26,7 @@ foreach($profile in $Profiles) {
         if(Test-Path -LiteralPath $source){throw 'Do not rebuild over a previous yard attempt'}
         & $Python tools/run_checked.py -- .\gradlew.bat runPackagedGameTestServer --offline --no-daemon -x build -x jar -x test -I build/pinout-native-controls.init.gradle "-PisolatedArtifactName=$Artifact" "-PtestProfile=$profile" '-PtestBackend=NATIVE' '-PtestNamespaces=wwpg_yard' "-PtestDirectory=$source" '-PrestartPhase=SETUP' *> "build/$Batch-yard-$profile-setup.log"
         Confirm-Run "$profile yard setup"
-        & $Python tools/export_stationary_yard.py --run $source --jar $artifactPath --profile $profile --output $archive
+        & $Python tools/export_stationary_yard.py --run $source --jar $artifactPath --profile $profile --target $Target --output $archive
         Confirm-Run "$profile exact world export"
     }
     foreach($backend in $Backends) {

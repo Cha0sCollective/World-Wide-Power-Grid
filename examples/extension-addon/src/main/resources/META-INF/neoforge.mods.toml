@@ -1,0 +1,24 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="MIT"
+[[mods]]
+modId="wwpg_api_example"
+version="1.0.0"
+displayName="WWPG API Example"
+description='''Independent example of stationary electrical machines using WWPG API 1.0.'''
+[[dependencies.wwpg_api_example]]
+modId="neoforge"
+type="required"
+versionRange="[21.1.231]"
+side="BOTH"
+[[dependencies.wwpg_api_example]]
+modId="minecraft"
+type="required"
+versionRange="[1.21.1]"
+side="BOTH"
+[[dependencies.wwpg_api_example]]
+modId="wwpg"
+type="required"
+versionRange="[0.2.0,0.3.0)"
+ordering="AFTER"
+side="BOTH"

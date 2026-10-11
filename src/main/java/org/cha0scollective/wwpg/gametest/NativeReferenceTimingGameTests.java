@@ -8,6 +8,9 @@ import com.george_vi.electroenergetics.content.fuse.FuseDevice;
 import com.george_vi.electroenergetics.content.resistive_heater.ResistiveHeaterBlockEntity;
 import com.george_vi.electroenergetics.devices.device.DevicesSavedData;
 import com.george_vi.electroenergetics.foundation.electrical_properties.AccumulatorProperties;
+import com.george_vi.electroenergetics.foundation.nodes.InWorldNode;
+import com.george_vi.electroenergetics.foundation.nodes.InWorldNodeConnection;
+import com.george_vi.electroenergetics.simulation.infrastructure.InfrastructureSavedData;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -21,9 +24,12 @@ import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import org.patryk3211.powergrid.collections.ModdedBlocks;
+import org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint;
+import org.patryk3211.powergrid.electricity.wire.WireEntity;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.concurrent.TimeUnit;
 
 /** Captures the actual pinned upstream gameplay, then compares compatibility.
  * The reference jar excludes all electrical compatibility hooks. */
@@ -98,39 +104,147 @@ public final class NativeReferenceTimingGameTests {
         h.runAtTickTime(101, () -> { data.requireEvents("fuse-trip", "repaired-power"); data.finish(false); finish(h); });
     }
 
-    @GameTest(template = "empty", batch = "reference", timeoutTicks = 135)
+    @GameTest(template = "empty", batch = "reference", timeoutTicks = 240)
     public static void accumulatorMixedChargeDischargeMatchesPinnedStorageWithinOnePercent(GameTestHelper h) {
         boolean nativeRun = upstream();
         place(h, SOURCE, nativeRun ? CEEBlocks.CREATIVE_BATTERY.get() : ModdedBlocks.CREATIVE_VOLTAGE_SOURCE.get());
         place(h, DEVICE, CEEBlocks.ACCUMULATOR.get()); place(h, LOAD, CEEBlocks.CREATIVE_RESISTOR.get());
         var data = new Trace("cee-accumulator", h);
-        h.runAtTickTime(10, () -> {
+        h.startSequence().thenIdle(10).thenExecute(() -> {
             var d = DevicesSavedData.load(h.getLevel()).getDevice(h.absolutePos(DEVICE), AccumulatorDevice.class);
-            d.cell1Charge = AccumulatorProperties.getNominalCharge() * .5;
-            // GameTest callbacks occur after native preparation. Seed the
-            // already-prepared history as well, before its solve can commit.
-            d.properties1.storedCharge = d.cell1Charge;
-            data.initial = d.cell1Charge;
+            d.cell1Charge = 0;
+            d.properties1.storedCharge = 0;
             ((com.george_vi.electroenergetics.content.electronic_components.resistor.ResistorBlockEntity) h.getBlockEntity(LOAD)).setResistance(10);
-            setSupply(h, nativeRun, 30);
+            setSupply(h, nativeRun, 0);
             WiringGameTests.connect(h, h.absolutePos(SOURCE), nativeRun ? 1 : 0, h.absolutePos(LOAD), 0, !nativeRun);
             WiringGameTests.connect(h, h.absolutePos(LOAD), 1, h.absolutePos(DEVICE), 0, false);
             WiringGameTests.connect(h, h.absolutePos(SOURCE), nativeRun ? 0 : 1, h.absolutePos(DEVICE), 1, !nativeRun);
-        });
-        h.runAtTickTime(60, () -> setSupply(h, nativeRun, 0));
-        for (int tick = 11; tick <= 120; tick++) {
-            final int at = tick;
-            h.runAtTickTime(tick, () -> {
-                var charge = DevicesSavedData.load(h.getLevel()).getDevice(h.absolutePos(DEVICE), AccumulatorDevice.class).cell1Charge;
-                data.sample(at, charge - data.initial);
+            data.preconditions.addProperty("wiring_fixture_tick", h.getTick());
+        }).thenWaitUntil(() -> requireAccumulatorReady(h, nativeRun)).thenExecute(() -> {
+            // Topology must settle at zero energy before the timed experiment.
+            // PG deliberately rejects its initial warm-up solve after addWire;
+            // starting the fixed window during that frame loses one charge tick.
+            // Native CEE's worker mutates properties directly: finish its already
+            // submitted zero-state calculation before writing the common seed.
+            if (nativeRun) settleNativeZeroSolve(h);
+            requireAccumulatorReady(h, nativeRun);
+            var d = DevicesSavedData.load(h.getLevel()).getDevice(h.absolutePos(DEVICE), AccumulatorDevice.class);
+            d.cell1Charge = AccumulatorProperties.getNominalCharge() * .5;
+            d.properties1.storedCharge = d.cell1Charge;
+            data.initial = d.cell1Charge;
+            long start = h.getTick();
+            data.preconditions.addProperty("all_endpoints_bound", true);
+            data.preconditions.addProperty("accepted_zero_state", true);
+            data.preconditions.addProperty("native_future_completed", nativeRun);
+            data.preconditions.addProperty("seed_fixture_tick", start);
+            data.preconditions.addProperty("seed_game_time", h.getLevel().getGameTime());
+            data.preconditions.addProperty("seed_charge", data.initial);
+            data.preconditions.addProperty("nominal_charge", AccumulatorProperties.getNominalCharge());
+            data.preconditions.addProperty("source_before_seed", 0);
+            data.preconditions.addProperty("charge_window_ticks", 50);
+            data.preconditions.addProperty("source_off_fixture_tick", start + 50);
+            data.preconditions.addProperty("first_sample_fixture_tick", start + 1);
+            data.preconditions.addProperty("last_sample_fixture_tick", start + 110);
+            setSupply(h, nativeRun, 30);
+            System.out.println("NATIVE_REFERENCE_ACCUMULATOR_START: upstream=" + nativeRun
+                    + "; backend=" + System.getProperty("wwpg.test.backend") + "; fixtureTick=" + start
+                    + "; allEndpointsBound=true; acceptedZeroState=true; seedCharge=" + data.initial);
+            h.runAtTickTime(start + 50, () -> setSupply(h, nativeRun, 0));
+            int[] acceptedFrames = new int[2];
+            for (int offset = 1; offset <= 110; offset++) {
+                final int relative = offset;
+                h.runAtTickTime(start + relative, () -> {
+                    var charge = DevicesSavedData.load(h.getLevel()).getDevice(h.absolutePos(DEVICE), AccumulatorDevice.class).cell1Charge;
+                    double value = charge - data.initial;
+                    data.sample(10 + relative, value);
+                    if (relative == 1) {
+                        if (Math.abs(value) > 1e-8) data.write();
+                        BoardComponentGameTests.near(h, value, 0, 1e-8, "Common pre-commit accumulator seed");
+                    }
+                    else {
+                        double previous = data.samples.get(relative - 2).getAsJsonObject().get("value").getAsDouble();
+                        boolean advanced = relative <= 51 ? value > previous : value < previous;
+                        if (!advanced) data.write();
+                        h.assertTrue(advanced,
+                                "Accumulator missed its " + (relative <= 51 ? "charging" : "discharging")
+                                        + " history frame at window tick " + relative + ": previous=" + previous + ", current=" + value);
+                        acceptedFrames[relative <= 51 ? 0 : 1]++;
+                    }
+                });
+            }
+            h.runAtTickTime(start + 111, () -> {
+                data.preconditions.addProperty("sample_count", data.samples.size());
+                data.preconditions.addProperty("accepted_charge_frames", acceptedFrames[0]);
+                data.preconditions.addProperty("accepted_discharge_frames", acceptedFrames[1]);
+                data.write();
+                h.assertTrue(data.samples.size() == 110, "Accumulator reference sample count changed");
+                h.assertTrue(acceptedFrames[0] == 50 && acceptedFrames[1] == 59, "Accumulator reference accepted history windows changed");
+                h.assertTrue(data.samples.get(35).getAsJsonObject().get("value").getAsDouble() > .1, "Accumulator did not charge: " + data.samples.get(35));
+                h.assertTrue(data.samples.get(109).getAsJsonObject().get("value").getAsDouble() < 0, "Accumulator did not discharge");
+                data.finish(true); finish(h);
             });
-        }
-        h.runAtTickTime(121, () -> {
-            data.write();
-            h.assertTrue(data.samples.get(35).getAsJsonObject().get("value").getAsDouble() > .1, "Accumulator did not charge: " + data.samples.get(35));
-            h.assertTrue(data.samples.get(109).getAsJsonObject().get("value").getAsDouble() < 0, "Accumulator did not discharge");
-            data.finish(true); finish(h);
         });
+    }
+
+    private static void requireAccumulatorReady(GameTestHelper h, boolean nativeRun) {
+        var level = h.getLevel();
+        var infrastructure = InfrastructureSavedData.load(level);
+        var results = infrastructure.ticker.lastResults;
+        h.assertTrue(results != null, "Waiting for an accepted zero-state electrical frame");
+        for (var position : new BlockPos[]{SOURCE, LOAD, DEVICE}) {
+            var absolute = h.absolutePos(position);
+            h.assertTrue(level.areEntitiesLoaded(new net.minecraft.world.level.ChunkPos(absolute).toLong()),
+                    "Waiting for native wire entities at " + absolute);
+            if (!nativeRun && position.equals(SOURCE)) continue;
+            for (int terminal = 0; terminal < 2; terminal++) h.assertTrue(
+                    results.circuitBuilder.getNode(new InWorldNode(terminal, absolute)) != null,
+                    "Waiting for accepted CEE node at " + absolute + " terminal " + terminal);
+            double voltage = results.getVoltageAt(absolute, 0, 1);
+            h.assertTrue(Double.isFinite(voltage) && Math.abs(voltage) < 1e-8,
+                    "Waiting for an accepted zero-voltage frame at " + absolute + ": " + voltage);
+        }
+        var middle = new InWorldNodeConnection(new InWorldNode(1, h.absolutePos(LOAD)), new InWorldNode(0, h.absolutePos(DEVICE)));
+        h.assertTrue(infrastructure.getConnectionData(middle) != null, "Waiting for the native CEE accumulator connection");
+        if (nativeRun) {
+            for (var connection : new InWorldNodeConnection[]{
+                    new InWorldNodeConnection(new InWorldNode(1, h.absolutePos(SOURCE)), new InWorldNode(0, h.absolutePos(LOAD))),
+                    new InWorldNodeConnection(new InWorldNode(0, h.absolutePos(SOURCE)), new InWorldNode(1, h.absolutePos(DEVICE)))})
+                h.assertTrue(infrastructure.getConnectionData(connection) != null, "Waiting for native CEE supply wiring");
+        } else {
+            var source = new BlockWireEndpoint(h.absolutePos(SOURCE), 0).getElectricBehaviour(level);
+            h.assertTrue(source != null, "Waiting for native PG source behavior");
+            var wires = source.getConnections().values().stream().flatMap(java.util.Collection::stream).distinct().toList();
+            h.assertTrue(wires.size() == 2 && wires.stream().allMatch(wire -> wire instanceof WireEntity actual
+                    && actual.getWire() != null && actual.getWire().isConverged()), "Waiting for both bound, converged native PG supply wires");
+            org.patryk3211.powergrid.electricity.sim.ElectricalNetwork network = null;
+            for (var position : new BlockPos[]{SOURCE, LOAD, DEVICE}) for (int terminal = 0; terminal < 2; terminal++) {
+                var node = new BlockWireEndpoint(h.absolutePos(position), terminal).getNode(level);
+                h.assertTrue(node != null && node.getNetwork() != null && node.getNetwork().isConverged(),
+                        "Waiting for converged PG node at " + h.absolutePos(position) + " terminal " + terminal);
+                if (network == null) network = node.getNetwork();
+                h.assertTrue(node.getNetwork() == network, "Accumulator endpoints have not joined one native PG network");
+            }
+        }
+        var device = DevicesSavedData.load(level).getDevice(h.absolutePos(DEVICE), AccumulatorDevice.class);
+        h.assertTrue(device != null && device.properties1 != null, "Waiting for prepared accumulator history");
+        BoardComponentGameTests.near(h, device.cell1Charge, 0, 1e-8, "Unpowered device charge before the common seed");
+        BoardComponentGameTests.near(h, device.properties1.storedCharge, 0, 1e-8, "Unpowered property history before the common seed");
+    }
+
+    private static void settleNativeZeroSolve(GameTestHelper h) {
+        var future = InfrastructureSavedData.load(h.getLevel()).ticker.future;
+        h.assertTrue(future != null, "Native CEE did not submit its zero-state calculation");
+        try {
+            // The pinned worker performs numerical work only; it does not wait
+            // for a server-thread callback. Never submit a second solve here.
+            if (future.isDone()) future.get();
+            else future.get(2, TimeUnit.SECONDS);
+        } catch (InterruptedException interrupted) {
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException("Interrupted while settling the native zero-state reference", interrupted);
+        } catch (java.util.concurrent.ExecutionException | java.util.concurrent.TimeoutException failure) {
+            throw new IllegalStateException("Native zero-state reference did not finish within two seconds", failure);
+        }
     }
 
     @GameTest(template = "empty", batch = "reference", timeoutTicks = 135)
@@ -290,12 +404,13 @@ public final class NativeReferenceTimingGameTests {
     private static void finish(GameTestHelper h) { if (!upstream()) DynamicGameTests.audit(h); h.succeed(); }
 
     private static final class Trace {
-        final String name; final GameTestHelper h; final JsonArray samples = new JsonArray(); final JsonObject events = new JsonObject(); final double nearZero; double initial;
+        final String name; final GameTestHelper h; final JsonArray samples = new JsonArray(); final JsonObject events = new JsonObject(); final JsonObject preconditions = new JsonObject(); final double nearZero; double initial;
         Trace(String name, GameTestHelper h) { this(name, h, 1e-8); }
         Trace(String name, GameTestHelper h, double nearZero) { this.name = name; this.h = h; this.nearZero = nearZero; }
         void sample(int tick, double value) {
             h.assertTrue(Double.isFinite(value), "Nonfinite native sample");
             var row = new JsonObject(); row.addProperty("tick", tick); row.addProperty("value", value);
+            row.addProperty("fixture_tick", h.getTick()); row.addProperty("game_time", h.getLevel().getGameTime());
             if (CEEBlocks.CREATIVE_BATTERY.has(h.getBlockState(SOURCE))) {
                 row.addProperty("source_setting", DevicesSavedData.load(h.getLevel()).getDevice(h.absolutePos(SOURCE),
                         com.george_vi.electroenergetics.content.creative_battery.CreativeBatteryDevice.class).voltage);
@@ -335,6 +450,7 @@ public final class NativeReferenceTimingGameTests {
         void write() {
             var data = new JsonObject(); data.addProperty("schema", 1); data.addProperty("backend", System.getProperty("wwpg.test.backend"));
             data.addProperty("upstream", upstream()); data.addProperty("initial", initial); data.add("samples", samples); data.add("events", events);
+            if (!preconditions.entrySet().isEmpty()) data.add("preconditions", preconditions);
             data.addProperty("relative_tolerance", .01); data.addProperty("near_zero_tolerance", nearZero);
             data.addProperty("allowed_gameplay_tick_offset", 1);
             try { Files.writeString(Path.of((upstream() ? "native-reference-" : "compatibility-")+name+".json"), new GsonBuilder().setPrettyPrinting().create().toJson(data)+"\n"); }

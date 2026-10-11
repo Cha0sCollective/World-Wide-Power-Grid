@@ -4,6 +4,7 @@ import gzip
 import hashlib
 import json
 from pathlib import Path
+import tomllib
 import zipfile
 
 
@@ -48,6 +49,8 @@ def main():
     parser.add_argument("--run", type=Path, required=True, help="Dedicated wwpg_yard run directory")
     parser.add_argument("--jar", type=Path, required=True)
     parser.add_argument("--profile", choices=["BASE", "PINOUT"], required=True)
+    parser.add_argument("--target", choices=["0.1.0-beta.5", "0.2.0"], default="0.1.0-beta.5",
+                        help="Release being verified; must match the packaged WWPG mod version")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     args = parser.parse_args()
@@ -61,6 +64,11 @@ def main():
     if not proofs or any(p["namespaces"] != "wwpg_yard" or p["profile"] != args.profile for p in proofs):
         raise ValueError("Export only a dedicated yard world, never a regression/combined test world")
     artifact_hash = sha(args.jar.read_bytes())
+    with zipfile.ZipFile(args.jar) as jar:
+        metadata = tomllib.loads(jar.read("META-INF/neoforge.mods.toml").decode("utf-8"))
+    versions = [mod.get("version") for mod in metadata.get("mods", []) if mod.get("modId") == "wwpg"]
+    if versions != [args.target]:
+        raise ValueError("Export target must match the exact packaged WWPG version")
     if proofs[-1]["sha256"] != artifact_hash:
         raise ValueError("Latest packaged yard proof does not match the supplied jar")
     if not proofs[-1].get("completed") or proofs[-1].get("required_tests_passed", 0) <= 0:
@@ -115,8 +123,9 @@ def main():
         contents[path.relative_to(world).as_posix()] = renamed_level(data, name) if path.name == "level.dat" else data
     dependencies = json.loads((root / "release/artifacts.json").read_text())
     optional = json.loads((root / "release/optional-artifacts.json").read_text()) if args.profile == "PINOUT" else None
-    manifest = dict(schema=1, target="0.1.0-beta.5", profile=args.profile, save_name=name,
-                    acceptance_record="Published beta.5 verification record, matched by this exact ZIP's SHA-256",
+    manifest = dict(schema=1, target=args.target, profile=args.profile, save_name=name,
+                    support_baseline="release/0.1.0-beta.5/content-matrix.json",
+                    acceptance_record=f"Final {args.target} acceptance record; this export is accepted only when its exact ZIP SHA-256 is included",
                     release_claim="This immutable manifest records export inputs; final release acceptance is recorded separately after testing this exact ZIP",
                     jar=dict(name=args.jar.name, sha256=artifact_hash), dependencies=dependencies,
                     native_nether_forced_chunks=native_tickets,
