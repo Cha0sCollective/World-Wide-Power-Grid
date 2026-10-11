@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "defect": "NeoForge inspects declared GameTest methods before filtering namespaces. Compiler-generated lambda signatures on the optional bootstrap test referenced absent CC:Tweaked classes in BASE.",
+  "reproduced_local_log": "base-discovery-failure.log.gz",
+  "failed_ci_run": 38109984483,
+  "failed_ci_job": 114383363788,
+  "correction": "Keep the discoverable test entry point free of optional types and put optional helpers and lambda bodies inside a lazily loaded inner Fixture class, following the existing optional test pattern.",
+  "corrected_local_proof": "base-discovery-corrected-yard.log.gz",
+  "local_base_yard_startup_and_acceptance_passed": true,
+  "corrected_ci_pending": true,
+  "scope": "Test discovery only; no required optional dependency was added to WWPG."
+}

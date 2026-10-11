@@ -22,6 +22,12 @@ import java.util.Set;
 public final class YardComputerBootstrapGameTests {
     @GameTest(template="empty",timeoutTicks=1800)
     public static void completedComputerNeedsRebootAndDelayedLuaCompletion(GameTestHelper h) {
+        Fixture.run(h);
+    }
+    // NeoForge inspects declared methods even for excluded namespaces. Keep
+    // optional types and compiler-generated lambda signatures in this class.
+    private static final class Fixture {
+    static void run(GameTestHelper h) {
         var local=new BlockPos(2,2,2);var pc=h.absolutePos(local);var pin=pc.east();
         h.setBlock(local.below(),Blocks.STONE);h.setBlock(local.east().below(),Blocks.STONE);
         h.setBlock(local,BuiltInRegistries.BLOCK.get(ResourceLocation.parse("computercraft:computer_normal")));
@@ -65,4 +71,5 @@ public final class YardComputerBootstrapGameTests {
     private static void io(Action action){try{action.run();}catch(java.io.IOException error){throw new IllegalStateException(error);}}
     private static boolean exists(WritableMount mount,String name){try{return mount.exists(name);}catch(java.io.IOException error){throw new IllegalStateException(error);}}
     private static String read(WritableMount mount,String name){try(var channel=mount.openForRead(name)){var data=ByteBuffer.allocate((int)mount.getSize(name));while(data.hasRemaining()&&channel.read(data)!=-1){}return new String(data.array(),StandardCharsets.UTF_8);}catch(java.io.IOException error){throw new IllegalStateException(error);}}
+    }
 }
