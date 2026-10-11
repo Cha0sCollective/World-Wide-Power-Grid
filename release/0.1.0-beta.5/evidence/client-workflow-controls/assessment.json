@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "stationary_completion": false,
+  "logs": [
+    {
+      "path": "build/beta5-stationary-graphical-BASE-NATIVE.log",
+      "sha256": "35f66c5be898e72f4f855c2480cd9bf576f41baa55820da5bba1980c90a62b8d",
+      "evidence": "beta5-stationary-graphical-BASE-NATIVE.log.gz"
+    },
+    {
+      "path": "build/beta5-graphical-v2-BASE-NATIVE.log",
+      "sha256": "a7826aee6accfb0b833750c988868ea034803c4d0eba364fdc120ef47ceb5d6f",
+      "evidence": "beta5-graphical-v2-BASE-NATIVE.log.gz"
+    },
+    {
+      "path": "build/beta5-client-workflows-v2-build-final.log",
+      "sha256": "60e486876177ac58685328ef68956b2210503a167b0102745cc9e77ab05b70c7",
+      "evidence": "beta5-client-workflows-v2-build-final.log.gz"
+    },
+    {
+      "path": "build/beta5-client-workflows-v3-build.log",
+      "sha256": "798b3a623dd0eed3427d132916ed1bab3078d90ee6a07c06f954074c6f6610b7",
+      "evidence": "beta5-client-workflows-v3-build.log.gz"
+    },
+    {
+      "path": "build\\beta5-client-v4-graphical-BASE-NATIVE.log",
+      "sha256": "4683a09521154a3fa4af770f03c936de5e9ebb8f48356b71dc5e57be616fd5de",
+      "evidence": "beta5-client-v4-graphical-BASE-NATIVE.log.gz"
+    }
+  ],
+  "graphical_failures": [
+    {
+      "log": "build/beta5-stationary-graphical-BASE-NATIVE.log",
+      "cause": "The helper selected the floor below the raised S64 catenary holder; 132 views and saved-yard baseline passed before the helper failed. This is not a completed graphical run."
+    },
+    {
+      "log": "build/beta5-graphical-v2-BASE-NATIVE.log",
+      "cause": "The helper selected the floor below the raised S66 processing fan; corrected S64 and S65 views passed. S66/S67 targets now include their native raised device positions. This is not a completed graphical run."
+    },
+    {
+      "log": "build\\beta5-client-v4-graphical-BASE-NATIVE.log",
+      "cause": "All 148 station views, native design load/editor/save, panel packets, CRT beams, plotter graph and actual duplex geometry passed. Actual portal travel succeeded; the old remote client scan then failed its combined lamp/gauge assertion. The corrected helper uses the native PortalTrackProvider endpoint mapping and logs independent client/server light and voltage; a complete passing run is still required."
+    }
+  ],
+  "duplex_rendering": {
+    "published_CEE_artifact": "1.21.1-1.1.3",
+    "referenced_model": "electroenergetics:block/duplex_wire_segment",
+    "published_existing_geometry": "electroenergetics:block/bundled_wire_segment",
+    "reproduction": "First client logs FileNotFoundException for the referenced JSON. Published jar inventory contains bundled_wire_segment.json and its native texture, but no duplex_wire_segment.json.",
+    "correction": "WWPG supplies only a parent alias to the shipped native geometry; no asset copy or renderer replacement.",
+    "acceptance": "A complete graphical run must resolve the actual CEE partial model, require nonempty baked quads and capture the powered S77 exhibit."
+  },
+  "frozen_gui_helper_v2": {
+    "sha256": "8731703dc2a19879107213b1169e7aee5380e22ac5434f5fb4a9fb70201065fa",
+    "path": "build/libs/wwpg-client-helper-v2.jar"
+  },
+  "remaining": [
+    "Complete fresh graphical acceptance on both profiles and both backends",
+    "Two real TCP clients on both profiles and both backends",
+    "Final versioned-jar eight-combination acceptance and release"
+  ],
+  "multiplayer_fixture_correction": {
+    "passed_before_failure": [
+      "Both real TCP clients joined",
+      "Simultaneous PG/CEE wire placement",
+      "Native settings packets and synchronized meters",
+      "Both handheld meters on both wire systems",
+      "Native saved-design item movement, load, editor opening and save synchronization for client A"
+    ],
+    "failed_assertion": "Server compared UUID-bearing descriptions independently reconstructed from a native schematic item.",
+    "native_contract": "CircuitSchematic.toItemStack uses serializeSafeNbt, which omits component UUIDs. Each fromStack load creates new IDs. The native schematic item also stacks to one, so the saved yard contains one design, not the assumed 64 items.",
+    "decoded_saved_data": "The original item and saved edited table retain identical safe native component types, positions, settings, traces, via and label after excluding the requested name change. The original inventory contains one saved design.",
+    "correction": "Compare native safe descriptions across the item-load boundary; snapshot loaded design and powered board UUIDs and retain them through editing; compare actual initial inventory counts. Invoke the native editor save action using its name widget.",
+    "runtime_changes": "None; do not change native copy identities or stack limits."
+  }
+}

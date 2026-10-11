@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "passed": false,
+  "failure": "RuntimeError: server exited with 1; retain its log",
+  "elapsed_seconds": 78.48,
+  "jar": {
+    "path": "C:\\Users\\Parker\\Documents\\ChatGPT\\WWPG\\build\\libs\\wwpg-beta5-client-workflows-v3.jar",
+    "sha256": "1ee6d040f09c420d447691547bd1b499fb353a0cfb445ad07a73f3874b1887ca"
+  },
+  "archive_sha256": "ea2869292bc86f4327e729e59566cffac889212a07c468797518e30059ea75ed",
+  "profile": "BASE",
+  "backend": "NATIVE",
+  "real_clients": [
+    "WWPG_A",
+    "WWPG_B"
+  ],
+  "processes": {
+    "server": {
+      "pid": 47540,
+      "exit_code": 1
+    },
+    "client-a": {
+      "pid": 34604,
+      "exit_code": 1
+    },
+    "client-b": {
+      "pid": 37716,
+      "exit_code": 1
+    }
+  }
+}

@@ -74,7 +74,7 @@ final class StationaryYardEquipment {
     }
 
     void plotter() {
-        var s=yard.station("Plotter",List.of("powergrid:plotter"),"Feed draws a graph","Open plotter: view","Source: 0 to 1 V");
+        var s=yard.station("Plotter",List.of("powergrid:plotter"),"Feed draws a graph","Look at paper graph","Source: 0 to 1 V");
         yard.feed(s,false); yard.state(s.device(),ModdedBlocks.PLOTTER.getDefaultState().setValue(PlotterBlock.HORIZONTAL_FACING,Direction.NORTH)); yard.prepareMeter(s);
         var motor=s.device().east(); yard.state(motor,AllBlocks.CREATIVE_MOTOR.getDefaultState().setValue(BlockStateProperties.FACING,Direction.WEST));
         yard.configure.add(()->{scroll(h,motor,128); yard.switchedPair(s,s.device(),1,false);});

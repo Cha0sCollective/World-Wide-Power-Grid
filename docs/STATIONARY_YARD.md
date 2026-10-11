@@ -13,6 +13,8 @@ Useful starting points:
 | Factory panel | Toggle Factory enable | RUN/OFF lamps change after a short capacitor delay. |
 | Transformer rows | Compare input/output gauges; adjust native winding turns | Load voltage changes with the ratio and winding polarity. |
 | Core and radiator | Inspect the working assembly and cooling panel | The native core supplies the mixed load; the radiator contributes cooling. |
+| S15 plotter | Look at the paper graph; switch its signal feed | The trace responds to the electrical input. A name tag opens PG's native format menu. |
+| S24–S26 CRTs | Switch the heater feed; adjust the X/Y supplies or grid cutoff | A bright dot moves with the deflection inputs. Raising the cutoff voltage extinguishes it. |
 | S61 saved design | Open the powered table; move its saved output into the load slot | Load, edit, save, copy and assemble the supplied design using PG's menus and items. The nearby board runs at about 10 V / 10 mA. |
 | S65 Nether route | Enter the portal; inspect the remote lamp and gauge | About 70 V powers the mixed equipment at both ends. Both transformer ends are kept loaded in this demonstration. |
 | S68–S76 wire families | Switch the feed and measure the load | Conductive wires light the indicator. Glass insulation carries essentially no power in the pinned CEE release, so its lamp stays dark. |

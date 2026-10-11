@@ -1,0 +1,76 @@
+// Test helper remains separate from the frozen WWPG artifact.
+gradle.projectsEvaluated {
+    def project = gradle.rootProject
+    def helperSources = project.file('tools/client_acceptance')
+    def output = project.file('build/stationary-client-helper')
+    def packaged = project.file(project.providers.gradleProperty('clientArtifact').get())
+    def compilation = project.tasks.register('compileStationaryClientHelper', JavaCompile) {
+        mustRunAfter project.tasks.named('jar')
+        source project.fileTree(new File(helperSources, 'src')) { include '**/*.java' }
+        classpath = project.sourceSets.main.compileClasspath + project.files(packaged)
+        destinationDirectory = new File(output, 'classes')
+        javaCompiler = project.javaToolchains.compilerFor { languageVersion = JavaLanguageVersion.of(21) }
+        options.encoding = 'UTF-8'
+    }
+    def helper = project.tasks.register('stationaryClientHelperJar', Jar) {
+        dependsOn compilation
+        from compilation.map { it.destinationDirectory }
+        from new File(helperSources, 'resources')
+        destinationDirectory = output
+        archiveFileName = 'wwpg-client-acceptance.jar'
+    }
+    project.tasks.register('runStationaryWorldClient', JavaExec) {
+        dependsOn helper, project.tasks.named('prepareClientARun')
+        javaLauncher = project.javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(21) }
+        doFirst {
+            def run = project.tasks.named('runClientA').get()
+            workingDir = project.file(project.providers.gradleProperty('clientDirectory').get())
+            def extraction = new groovy.json.JsonSlurper().parse(new File(workingDir,'extracted-yard.json'))
+            def name = extraction.source_save_name
+            def hash = java.security.MessageDigest.getInstance('SHA-256').digest(packaged.bytes).encodeHex().toString()
+            if (hash != extraction.jar.sha256) throw new GradleException('Client artifact does not match the exact exported ZIP')
+            if (extraction.profile != project.providers.gradleProperty('testProfile').getOrElse('BASE')) throw new GradleException('Client installation profile does not match the save')
+            mainClass = run.mainClass
+            args = run.args.collect { argument ->
+                if (!argument.startsWith('@')) return argument
+                def original = project.file(argument.substring(1))
+                def replacement = new File(output, 'client-program-args.txt')
+                replacement.text = original.getText('UTF-8').replace('--quickPlayMultiplayer\n127.0.0.1:25575', '--quickPlaySingleplayer\n"' + name + '"').replace('--width\n854', '--width\n1280').replace('--height\n480', '--height\n720')
+                return "@${replacement.absolutePath}"
+            }
+            jvmArgs = run.jvmArgs.collect { argument ->
+                if (!argument.startsWith('@')) return argument
+                def original = project.file(argument.substring(1))
+                def replacement = new File(output, 'client-vm-args.txt')
+                replacement.text = original.getText('UTF-8').replace('-Xmx2G','-Xmx4G').replace('-Dwwpg.test.multiplayer=true','-Dwwpg.test.multiplayer=false') +
+                    '\n-Dwwpg.test.backend=' + project.providers.gradleProperty('testBackend').get() +
+                    '\n-Dwwpg.test.profile=' + extraction.profile + '\n"-Dwwpg.test.saveName=' + name + '"' +
+                    '\n"-Dwwpg.test.savePath=' + new File(workingDir,'saves/' + name).absolutePath.replace('\\','/') + '"' +
+                    '\n-Dwwpg.test.restartPhase=VERIFY\n-Dneoforge.enabledGameTestNamespaces=wwpg_yard\n' +
+                    '\n-Dwwpg.test.netherFocus=' + project.providers.gradleProperty('netherFocus').getOrElse('false')+'\n'
+                return "@${replacement.absolutePath}"
+            }
+            classpath = run.classpathProvider.filter { !project.sourceSets.main.output.files.contains(it) } + project.files(packaged,helper.get().archiveFile.get().asFile)
+            def env = new HashMap(run.environmentProperty.get())
+            env['MOD_CLASSES'] = "wwpg%%${packaged.absolutePath}" + File.pathSeparator + "wwpg_acceptance%%${helper.get().archiveFile.get().asFile.absolutePath}"
+            environment env
+            def capture = new ByteArrayOutputStream()
+            extensions.extraProperties.set('stationaryClientOutput',capture)
+            def tee = { OutputStream console ->
+                new OutputStream() {
+                    void write(int value) { console.write(value); capture.write(value) }
+                    void write(byte[] bytes,int offset,int length) { console.write(bytes,offset,length);capture.write(bytes,offset,length) }
+                    void flush() { console.flush() }
+                }
+            }
+            standardOutput = tee(System.out); errorOutput = tee(System.err)
+            logger.lifecycle("Graphical acceptance of exact ZIP ${extraction.sha256} with WWPG ${hash}")
+        }
+        doLast {
+            def log = extensions.extraProperties.get('stationaryClientOutput').toString('UTF-8')
+            def marker=project.providers.gradleProperty('netherFocus').getOrElse('false')=='true' ? 'STATIONARY_FOCUSED_PORTAL_CLIENT_PASSED' : 'EXPANDED_REAL_CLIENT_PASSED'
+            if (!log.contains(marker) || log.contains('EXPANDED_REAL_CLIENT_FAILED'))
+                throw new GradleException('Stationary graphical acceptance did not complete; retain the client log')
+        }
+    }
+}

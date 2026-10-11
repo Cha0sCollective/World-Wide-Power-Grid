@@ -27,6 +27,9 @@ public final class WorldWidePowerGrid {
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.gametest.MultiplayerGameTests::commands);
         NeoForge.EVENT_BUS.addListener(this::unload);
         NeoForge.EVENT_BUS.addListener(this::stop);
+        if (Boolean.getBoolean("wwpg.test.packaged")
+                && "wwpg_yard".equals(System.getProperty("neoforge.enabledGameTestNamespaces")))
+            NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.gametest.StationaryYardChunkTickets::preserveForExport);
     }
 
     private void commands(RegisterCommandsEvent event) {
