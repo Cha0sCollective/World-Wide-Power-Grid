@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public interface PgElectricMixin {
     @Inject(method = "getAt", at = @At("HEAD"), cancellable = true)
     private static void wwpg$ceeTerminals(Level level, BlockPos pos, CallbackInfoReturnable<IElectric> cir) {
-        var electric = Terminals.nativePg(level, pos);
-        cir.setReturnValue(electric == null ? Terminals.cee(level, pos) : electric);
+        cir.setReturnValue(Terminals.electric(level, pos));
     }
 }

@@ -9,6 +9,7 @@ build/
 *.war
 *.ear
 !gradle/wrapper/gradle-wrapper.jar
+!examples/**/gradle/wrapper/gradle-wrapper.jar
 hs_err_pid*
 replay_pid*
 

@@ -10,10 +10,15 @@
     "CircuitBuilderAccessor",
     "CircuitBuilderValidationMixin",
     "ElectricalNetworkAccessor",
+    "CeePhaseHistoryAccessor",
+    "CeeRotorHistoryAccessor",
     "PropertyConductanceMixin",
     "CoupledNodeConductanceMixin",
     "CeeSolverAuditMixin",
     "SimulationTickerMixin",
+    "WireLifetimeAvailabilityMixin",
+    "WireElectrocutionAvailabilityMixin",
+    "CeeReadingAvailabilityMixin",
     "WorldNetworksMixin",
     "PgElectricMixin",
     "PgBehaviourMixin",
@@ -26,6 +31,7 @@
     "MeterDisplayTimingMixin",
     "MotorSamplingMixin",
     "InWorldNodeMixin",
+    "CeeWireIdentityMixin",
     "WireSpoolMixin",
     "HangingWireSpoolMixin",
     "BundledWireNodeMixin",
@@ -51,7 +57,8 @@
   ],
   "client": [
     "MultimeterWireClientMixin",
-    "ClampMeterClientMixin"
+    "ClampMeterClientMixin",
+    "NativeClampAvailabilityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,0 +1,423 @@
+{
+  "schema": 1,
+  "release_target": "0.2.0",
+  "api_target": "1.0.0",
+  "evidence_class": "development_failures",
+  "publication_acceptance": false,
+  "platform": "Windows",
+  "packaged_backends": [
+    "JAVA",
+    "NATIVE"
+  ],
+  "warning": "These are pre-freeze development failures and their investigations. Corrections and retries do not establish final acceptance; frozen artifacts must pass the independent release gates.",
+  "archive": {
+    "path": "failed-development-runs.zip",
+    "sha256": "8f7177838ea4ef030ae25dca13e2c2a5e047eac6ddd272d03de87aaae635d672",
+    "size": 179199
+  },
+  "runs": [
+    {
+      "log": "build/api-first-java.log",
+      "run": "run/api-first-java",
+      "kind": "packaged_startup_failure",
+      "summary": "GameTest holder prefixed an already namespaced template, producing wwpg_api:wwpg:empty.",
+      "correction": "Use template=empty and a separate structure in each holder namespace.",
+      "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
+      "backend": "JAVA"
+    },
+    {
+      "log": "build/api-second-java.log",
+      "run": "run/api-second-java",
+      "kind": "packaged_fixture_failures",
+      "summary": "10 tests ran; 3 failed: native panel item installation, committed API NBT lag, and PG board branch lookup.",
+      "correction": "Add the native CEE attachment item tag; publish consumed committed API results; query the native baked PG board branch rather than an empty per-component branch list.",
+      "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
+      "backend": "JAVA"
+    },
+    {
+      "log": "build/api-complete-java-3.log",
+      "run": "run/api-complete-java",
+      "kind": "packaged_fixture_failures",
+      "summary": "20 tests ran; 6 failed: 4 custom CEE model cases, the AC current oracle, and actual API chunk unloading.",
+      "correction": "Dispatch CEE registrations on mod event buses before freeze; include actual native wire resistance in the AC equation; place concurrent forced/unload fixtures beyond each other's ticket radius.",
+      "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
+      "backend": "JAVA"
+    },
+    {
+      "log": "build/api-registration-java.log",
+      "run": "run/api-registration-java",
+      "kind": "packaged_fixture_failures",
+      "summary": "8 tests ran; 2 failed. Custom CEE registration, callback rollback/recovery and native PG board assembly passed. Remaining failures concerned the removal-to-discharge time window and native replacement load voltage.",
+      "correction": "Anchor the twenty-tick discharge window after the safe topology boundary and assert exact history increments; calculate replacement load voltage with its native resistance and both wires.",
+      "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
+      "backend": "JAVA"
+    },
+    {
+      "log": "build/api-lifecycle-java-5.log",
+      "run": "run/api-lifecycle-java-5",
+      "kind": "packaged_diagnostic_failure",
+      "summary": "The bounded actual-unload diagnostic aborted with chunk ticket level 39 after 420 server ticks.",
+      "correction": "A concurrently forced cold-restart fixture eight chunks away retained the unload fixture through its propagated generation ticket. Move the two fixtures at least sixteen chunks apart.",
+      "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
+      "backend": "JAVA"
+    },
+    {
+      "log": "build/api-lifecycle-java-4.log",
+      "kind": "compile_failure",
+      "summary": "A terminal-removal source edit did not compile against the pinned PG endpoint API.",
+      "correction": "Use the actual pinned native endpoint/removal signatures and rebuild.",
+      "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
+      "backend": "not_applicable"
+    },
+    {
+      "log": "build/api-electrical-tests.log",
+      "kind": "compile_failure",
+      "summary": "CEE checkpoint contracts and their consumer were briefly out of sync during concurrent development.",
+      "correction": "Complete the checkpoint contract and compile API/runtime sources together.",
+      "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
+      "backend": "not_applicable"
+    },
+    {
+      "log": "build/api-checkpoint-build.log",
+      "kind": "compile_failure",
+      "summary": "Minecraft-backed terminal identity tests did not have the Minecraft/NeoForge compile classpath.",
+      "correction": "Use the pinned development test classpath while retaining standalone electrical unit tests.",
+      "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
+      "backend": "not_applicable"
+    },
+    {
+      "log": "build/api-native-readings-build.log",
+      "kind": "compile_failure",
+      "summary": "Initial native Workshop/reading fixture code used signatures from a different upstream source revision.",
+      "correction": "Compile native workflow fixtures against the actual pinned release jars and registry APIs.",
+      "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
+      "backend": "not_applicable"
+    },
+    {
+      "log": "build/api-lifecycle-JAVA-6.log",
+      "run": "run/api-lifecycle-JAVA-6",
+      "kind": "packaged_fixture_failure",
+      "summary": "25 tests ran; 24 passed, including five actual API and five upstream chunk cycles. A healthy native PG board fixture failed because an unrelated CEE callback fault globally cleared native CEE results.",
+      "correction": "Publish fresh results with scoped unavailable nodes and branch currents; preserve healthy CEE gameplay, meters and wire heating while isolating rejected circuits.",
+      "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
+      "backend": "JAVA"
+    },
+    {
+      "log": "build/api-scoped-NATIVE-10.log",
+      "run": "run/api-scoped-NATIVE-10",
+      "kind": "packaged_fixture_failures",
+      "summary": "27 tests ran; 24 passed. Failures identified a diagnostic identity-size expectation, a native capacitor baseline captured before the already accepted frame's gameplay commit, and an old saved wire entering a native replacement during delayed wire loading.",
+      "correction": "Capture the accepted native property history before injecting next-frame failure; preserve strict exact checks on property and device history. Align bounded diagnostic identity reporting. Retire saved extension wire ownership before delayed entity attachment to a native replacement. Review also identified and corrected unavailable-result propagation into the native wire hazard cache.",
+      "resolution_status": "corrections_in_progress; final_frozen_acceptance_required",
+      "backend": "NATIVE"
+    },
+    {
+      "log": "build/api-complete-NATIVE-11.log",
+      "run": "run/api-complete-NATIVE-11",
+      "kind": "packaged_fixture_failure",
+      "summary": "29 tests ran; 28 passed. Exact native CEE capacitor rollback, externally driven capture isolation, healthy native/public measurements, diagnostic bounds and delayed replacement tests passed. The actual PG multimeter's CEE-wire path still read the previous native result during the same frame as a new callback rejection.",
+      "correction": "Check current read-only terminal acceptance before using cached native CEE wire results. Native multimeter number, text and pointer queries also consult current acceptance so they cannot expose a cached powered value before the next inventory update.",
+      "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
+      "backend": "NATIVE"
+    },
+    {
+      "log": "build/api-no-geometry-cold-NATIVE-12.log",
+      "run": "run/api-complete-NATIVE-11",
+      "archive_prefix": "runs/api-no-geometry-cold-NATIVE-12/",
+      "kind": "packaged_cold_restart_failure",
+      "summary": "A genuine fresh-JVM cold replacement failed before any API geometry holder existed: an old saved PG wire migrated to the native replacement during delayed entity loading. This run reused the preceding run's runtime directory; its current logs are archived separately to preserve both original failures.",
+      "correction": "Persist exact PG PartId and compatibility CEE wire UUID ownership independently of geometry holders. Freeze old-owner IDs before replacement wiring, retire exact old IDs after delayed native loading, and give physically reconnected CEE wires fresh persisted identities. Verify both wire systems with separate-JVM setup and restart fixtures.",
+      "resolution_status": "corrective_change_implemented; final_frozen_acceptance_required",
+      "backend": "NATIVE"
+    },
+    {
+      "log": "build/api-full-NATIVE-13.log",
+      "files": [
+        "run/api-full-NATIVE-13/packaged-2026-10-11T10-05-07.960145Z.json"
+      ],
+      "kind": "packaged_wire_thermal_failure",
+      "summary": "31 tests ran; 30 passed, including five actual API and five upstream chunk cycles and actual nonthrowing backend rejection. The custom CEE callback fault fixture passed exact history rollback, healthy scoped publication and same-frame meter rejection, then failed its combined selected-wire/finite-temperature assertion.",
+      "correction": "A source-level regression reproduces pinned CEE's cached ordinal lookup returning an unrelated rejected node after builder ordering changes, sending NaN into a healthy native wire's thermal input. Validate cached ordinal hints against stable node identity in compatibility results. The gameplay fixture now verifies its initial wire selection/temperature and reports selection, physical wire and temperature failures separately. A packaged rerun is required to establish whether this fixes the observed failure. This runtime directory was reused for cold verification; only the completed setup build log and its exact setup manifest are retained here, rather than later overwritten latest.log files.",
+      "resolution_status": "source_regression_reproduced; packaged_confirmation_pending; final_frozen_acceptance_required",
+      "backend": "NATIVE"
+    }
+  ],
+  "members": [
+    {
+      "path": "build/api-checkpoint-build.log",
+      "source_path": "build/api-checkpoint-build.log",
+      "size": 9122,
+      "sha256": "1d3647679d364d821b8b71695a45e0bb202cbc7372f164a78ed35b107fb1508a"
+    },
+    {
+      "path": "build/api-complete-NATIVE-11.log",
+      "source_path": "build/api-complete-NATIVE-11.log",
+      "size": 34228,
+      "sha256": "3c7f64fb750dbec53620c4fb44b42562d89f41a728ad8021048d3db7cc3b653b"
+    },
+    {
+      "path": "build/api-complete-java-3.log",
+      "source_path": "build/api-complete-java-3.log",
+      "size": 34374,
+      "sha256": "4eef239d71ad6294d115a9d780cc39950ed46c733572c9406a5af352d7c40a49"
+    },
+    {
+      "path": "build/api-electrical-tests.log",
+      "source_path": "build/api-electrical-tests.log",
+      "size": 16536,
+      "sha256": "c13983b87b8f27c3c1a0abbc40cec4d8b168654f4d98f18e16d1ae2247091a38"
+    },
+    {
+      "path": "build/api-first-java.log",
+      "source_path": "build/api-first-java.log",
+      "size": 30875,
+      "sha256": "33cd98f69bef402962278415f33b0397b8434cc0690eeecf44c9e4fc10513729"
+    },
+    {
+      "path": "build/api-full-NATIVE-13.log",
+      "source_path": "build/api-full-NATIVE-13.log",
+      "size": 41293,
+      "sha256": "c73ccd863e4e77a6d87c4c9d0a70a69c67b212b2d6f70b9c229c055b0fe55d41"
+    },
+    {
+      "path": "build/api-lifecycle-JAVA-6.log",
+      "source_path": "build/api-lifecycle-JAVA-6.log",
+      "size": 29791,
+      "sha256": "5b68fbe5fb99fc93624ce0366aac248e914dad62494a0ab9c1628b54801d267f"
+    },
+    {
+      "path": "build/api-lifecycle-java-4.log",
+      "source_path": "build/api-lifecycle-java-4.log",
+      "size": 2998,
+      "sha256": "8643b1ae920b5487e45a302ccf1c0ffc32faed90ccb3c14bb69213801d9172ee"
+    },
+    {
+      "path": "build/api-lifecycle-java-5.log",
+      "source_path": "build/api-lifecycle-java-5.log",
+      "size": 34425,
+      "sha256": "53b531dabb89fea5213056156e940799ca5646d775afc3605efa87433c47ab17"
+    },
+    {
+      "path": "build/api-native-readings-build.log",
+      "source_path": "build/api-native-readings-build.log",
+      "size": 8450,
+      "sha256": "f45b6e6a4f8859d9d3d657d82cd82dc4498090a7211793328818fdb9c736f39f"
+    },
+    {
+      "path": "build/api-registration-java.log",
+      "source_path": "build/api-registration-java.log",
+      "size": 21106,
+      "sha256": "d0fff9ec4a4e9ec3989bde97672ab24c09d4c2f544b8d8a92925149caf0542f1"
+    },
+    {
+      "path": "build/api-scoped-NATIVE-10.log",
+      "source_path": "build/api-scoped-NATIVE-10.log",
+      "size": 30783,
+      "sha256": "e2983665807102a3c8f749e2e8618677d5c404c83ccd60905e74edb3c8f90202"
+    },
+    {
+      "path": "build/api-second-java.log",
+      "source_path": "build/api-second-java.log",
+      "size": 19379,
+      "sha256": "48dca5085bee76094aa9a0c366045c53f78f23365f042971ba63a122d22bad07"
+    },
+    {
+      "path": "run/api-complete-NATIVE-11/logs/debug.log",
+      "source_path": "run/api-complete-NATIVE-11/logs/debug.log",
+      "size": 38509,
+      "sha256": "0620f4b79295b595951c7fa9971469ad9dec9ee732ef1630ee2a28c1a119b035"
+    },
+    {
+      "path": "run/api-complete-NATIVE-11/logs/latest.log",
+      "source_path": "run/api-complete-NATIVE-11/logs/latest.log",
+      "size": 38509,
+      "sha256": "0620f4b79295b595951c7fa9971469ad9dec9ee732ef1630ee2a28c1a119b035"
+    },
+    {
+      "path": "run/api-complete-NATIVE-11/packaged-2026-10-11T09-44-40.220165Z.json",
+      "source_path": "run/api-complete-NATIVE-11/packaged-2026-10-11T09-44-40.220165Z.json",
+      "size": 758,
+      "sha256": "50586d97acc2c93425f36653642ac7f1ae910775d3c8cb620a761086f7af12db"
+    },
+    {
+      "path": "run/api-complete-NATIVE-11/packaged-2026-10-11T09-49-02.081601500Z.json",
+      "source_path": "run/api-complete-NATIVE-11/packaged-2026-10-11T09-49-02.081601500Z.json",
+      "size": 693,
+      "sha256": "7d7c1d4a4bbc803431575b82267100ea073e627a69ed0665635d45e681519d3e"
+    },
+    {
+      "path": "run/api-complete-java/logs/debug.log",
+      "source_path": "run/api-complete-java/logs/debug.log",
+      "size": 39986,
+      "sha256": "839d23f1c683195121457479830ee58315d356565202b787fd48c65bd164610b"
+    },
+    {
+      "path": "run/api-complete-java/logs/latest.log",
+      "source_path": "run/api-complete-java/logs/latest.log",
+      "size": 39986,
+      "sha256": "839d23f1c683195121457479830ee58315d356565202b787fd48c65bd164610b"
+    },
+    {
+      "path": "run/api-complete-java/packaged-2026-10-11T08-56-40.305808900Z.json",
+      "source_path": "run/api-complete-java/packaged-2026-10-11T08-56-40.305808900Z.json",
+      "size": 726,
+      "sha256": "17af1ca81691620d60f64e09da81f66ab8f1b25e01da8cef18506bedc291710d"
+    },
+    {
+      "path": "run/api-first-java/crash-reports/crash-2026-10-11_03.36.35-server.txt",
+      "source_path": "run/api-first-java/crash-reports/crash-2026-10-11_03.36.35-server.txt",
+      "size": 9965,
+      "sha256": "4c4d244ac8da87a25e82494009571281a9d56d8c1c5d2c1a0a1ebae176d80080"
+    },
+    {
+      "path": "run/api-first-java/logs/debug.log",
+      "source_path": "run/api-first-java/logs/debug.log",
+      "size": 28540,
+      "sha256": "fe1839934bf1e89bdc9b3ab26c553c5904d1b34571f53cb35c2eaf9e5f90c22c"
+    },
+    {
+      "path": "run/api-first-java/logs/latest.log",
+      "source_path": "run/api-first-java/logs/latest.log",
+      "size": 28540,
+      "sha256": "fe1839934bf1e89bdc9b3ab26c553c5904d1b34571f53cb35c2eaf9e5f90c22c"
+    },
+    {
+      "path": "run/api-first-java/packaged-2026-10-11T08-36-21.784107400Z.json",
+      "source_path": "run/api-first-java/packaged-2026-10-11T08-36-21.784107400Z.json",
+      "size": 301,
+      "sha256": "30e279de4b56b1d7f47b46dbd79f79ac96ddedc63f409d3c5bb63e5ac1ff1947"
+    },
+    {
+      "path": "run/api-full-NATIVE-13/packaged-2026-10-11T10-05-07.960145Z.json",
+      "source_path": "run/api-full-NATIVE-13/packaged-2026-10-11T10-05-07.960145Z.json",
+      "size": 758,
+      "sha256": "6cd88d34c1fe17d056a32adca91b740818947defa96df06d705cf5457a758c33"
+    },
+    {
+      "path": "run/api-lifecycle-JAVA-6/logs/debug.log",
+      "source_path": "run/api-lifecycle-JAVA-6/logs/debug.log",
+      "size": 33298,
+      "sha256": "bed164cc3410bee9a9d23bfb466971cbd29cd58843df9fd81014439a1763b6d2"
+    },
+    {
+      "path": "run/api-lifecycle-JAVA-6/logs/latest.log",
+      "source_path": "run/api-lifecycle-JAVA-6/logs/latest.log",
+      "size": 33298,
+      "sha256": "bed164cc3410bee9a9d23bfb466971cbd29cd58843df9fd81014439a1763b6d2"
+    },
+    {
+      "path": "run/api-lifecycle-JAVA-6/packaged-2026-10-11T09-19-13.074484300Z.json",
+      "source_path": "run/api-lifecycle-JAVA-6/packaged-2026-10-11T09-19-13.074484300Z.json",
+      "size": 742,
+      "sha256": "61c354750c3b2f8e889e61bbde0b625f97e3cd1f1e8846544db76d137b90f441"
+    },
+    {
+      "path": "run/api-lifecycle-java-5/crash-reports/crash-2026-10-11_04.14.52-server.txt",
+      "source_path": "run/api-lifecycle-java-5/crash-reports/crash-2026-10-11_04.14.52-server.txt",
+      "size": 9455,
+      "sha256": "658b23f2ed2a83567e230e56cb47f8230f88604e8c591d6f7fff8c8d73567350"
+    },
+    {
+      "path": "run/api-lifecycle-java-5/logs/debug.log",
+      "source_path": "run/api-lifecycle-java-5/logs/debug.log",
+      "size": 33031,
+      "sha256": "7036dd7f1c1e26253ec210ad9248326cae966b00fa7d0eb44ce87dcb3f92e75d"
+    },
+    {
+      "path": "run/api-lifecycle-java-5/logs/latest.log",
+      "source_path": "run/api-lifecycle-java-5/logs/latest.log",
+      "size": 33031,
+      "sha256": "7036dd7f1c1e26253ec210ad9248326cae966b00fa7d0eb44ce87dcb3f92e75d"
+    },
+    {
+      "path": "run/api-lifecycle-java-5/packaged-2026-10-11T09-14-32.008504400Z.json",
+      "source_path": "run/api-lifecycle-java-5/packaged-2026-10-11T09-14-32.008504400Z.json",
+      "size": 742,
+      "sha256": "b97f4c9f31ade9e96467c46e680d3e8ff1f9948baa45c6cc10153004160980b0"
+    },
+    {
+      "path": "run/api-registration-java/logs/debug.log",
+      "source_path": "run/api-registration-java/logs/debug.log",
+      "size": 21022,
+      "sha256": "bcbdb2dea67b5d02477b46afd63cb0929ef14b3e607f167ff4f5060558631efb"
+    },
+    {
+      "path": "run/api-registration-java/logs/latest.log",
+      "source_path": "run/api-registration-java/logs/latest.log",
+      "size": 21022,
+      "sha256": "bcbdb2dea67b5d02477b46afd63cb0929ef14b3e607f167ff4f5060558631efb"
+    },
+    {
+      "path": "run/api-registration-java/packaged-2026-10-11T09-06-18.535134200Z.json",
+      "source_path": "run/api-registration-java/packaged-2026-10-11T09-06-18.535134200Z.json",
+      "size": 707,
+      "sha256": "70b659935b3ed5af0391198e791dc5a822437cd81668f88b5b55ce6a8f16debd"
+    },
+    {
+      "path": "run/api-scoped-NATIVE-10/logs/debug.log",
+      "source_path": "run/api-scoped-NATIVE-10/logs/debug.log",
+      "size": 34436,
+      "sha256": "c49e95fca91806cd88600d4b3c376ddb5b315106ffb35f1fd15a1230ed69a5aa"
+    },
+    {
+      "path": "run/api-scoped-NATIVE-10/logs/latest.log",
+      "source_path": "run/api-scoped-NATIVE-10/logs/latest.log",
+      "size": 34436,
+      "sha256": "c49e95fca91806cd88600d4b3c376ddb5b315106ffb35f1fd15a1230ed69a5aa"
+    },
+    {
+      "path": "run/api-scoped-NATIVE-10/packaged-2026-10-11T09-36-54.999597700Z.json",
+      "source_path": "run/api-scoped-NATIVE-10/packaged-2026-10-11T09-36-54.999597700Z.json",
+      "size": 744,
+      "sha256": "0455595fd4c5b75c40e2811c52def9e8f36b24ed09b0f4605eb3aa526d3744bf"
+    },
+    {
+      "path": "run/api-second-java/logs/debug.log",
+      "source_path": "run/api-second-java/logs/debug.log",
+      "size": 19017,
+      "sha256": "faf567650de3bbe19b0fa3e6c109e7250ec2cc9b138cd1391a69a58ab6a01c4f"
+    },
+    {
+      "path": "run/api-second-java/logs/latest.log",
+      "source_path": "run/api-second-java/logs/latest.log",
+      "size": 19017,
+      "sha256": "faf567650de3bbe19b0fa3e6c109e7250ec2cc9b138cd1391a69a58ab6a01c4f"
+    },
+    {
+      "path": "run/api-second-java/packaged-2026-10-11T08-37-16.195029800Z.json",
+      "source_path": "run/api-second-java/packaged-2026-10-11T08-37-16.195029800Z.json",
+      "size": 301,
+      "sha256": "f045be23afd8935c1ed91b28d35c6c130de39d50213bd067474445118b63c181"
+    },
+    {
+      "path": "runs/api-no-geometry-cold-NATIVE-12/build/api-no-geometry-cold-NATIVE-12.log",
+      "source_path": "build/api-no-geometry-cold-NATIVE-12.log",
+      "size": 14632,
+      "sha256": "08022da7c8992a0f4522e20f1a133582e30c859bb5b4c1414ae7399be6c61361"
+    },
+    {
+      "path": "runs/api-no-geometry-cold-NATIVE-12/run/api-complete-NATIVE-11/logs/debug.log",
+      "source_path": "run/api-complete-NATIVE-11/logs/debug.log",
+      "size": 14274,
+      "sha256": "2821ce1f228361e40101230eb31f92218913ac784b39e805dcdd2a52edf421ba"
+    },
+    {
+      "path": "runs/api-no-geometry-cold-NATIVE-12/run/api-complete-NATIVE-11/logs/latest.log",
+      "source_path": "run/api-complete-NATIVE-11/logs/latest.log",
+      "size": 14274,
+      "sha256": "2821ce1f228361e40101230eb31f92218913ac784b39e805dcdd2a52edf421ba"
+    },
+    {
+      "path": "runs/api-no-geometry-cold-NATIVE-12/run/api-complete-NATIVE-11/packaged-2026-10-11T09-44-40.220165Z.json",
+      "source_path": "run/api-complete-NATIVE-11/packaged-2026-10-11T09-44-40.220165Z.json",
+      "size": 758,
+      "sha256": "50586d97acc2c93425f36653642ac7f1ae910775d3c8cb620a761086f7af12db"
+    },
+    {
+      "path": "runs/api-no-geometry-cold-NATIVE-12/run/api-complete-NATIVE-11/packaged-2026-10-11T09-49-02.081601500Z.json",
+      "source_path": "run/api-complete-NATIVE-11/packaged-2026-10-11T09-49-02.081601500Z.json",
+      "size": 693,
+      "sha256": "7d7c1d4a4bbc803431575b82267100ea073e627a69ed0665635d45e681519d3e"
+    }
+  ]
+}

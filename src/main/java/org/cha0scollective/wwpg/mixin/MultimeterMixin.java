@@ -29,8 +29,24 @@ public abstract class MultimeterMixin {
     private void wwpg$ceeCurrent(Level level, ItemStack stack, CallbackInfoReturnable<Float> cir) {
         var meter = (MultimeterItem) (Object) this;
         var data = MultimeterItem.getModeData(stack);
+        if (data.getBoolean(HandheldMeters.UNAVAILABLE) || HandheldMeters.selectionUnavailable(level, stack)) {
+            cir.setReturnValue(Float.NaN); return;
+        }
         if (meter.getMode(stack) == 1 && data.contains(HandheldMeters.CURRENT))
             cir.setReturnValue(data.getFloat(HandheldMeters.CURRENT));
+    }
+
+    @Inject(method = "getText", at = @At("HEAD"), cancellable = true)
+    private void wwpg$unavailableText(Level level, Player player, ItemStack stack,
+                                     CallbackInfoReturnable<net.minecraft.network.chat.Component> cir) {
+        if (MultimeterItem.getModeData(stack).getBoolean(HandheldMeters.UNAVAILABLE) || HandheldMeters.selectionUnavailable(level, stack))
+            cir.setReturnValue(net.minecraft.network.chat.Component.translatable("wwpg.reading.unavailable"));
+    }
+
+    @Inject(method = "getDial", at = @At("HEAD"), cancellable = true)
+    private void wwpg$safeUnavailableDial(Level level, ItemStack stack, CallbackInfoReturnable<Float> cir) {
+        if (MultimeterItem.getModeData(stack).getBoolean(HandheldMeters.UNAVAILABLE) || HandheldMeters.selectionUnavailable(level, stack))
+            cir.setReturnValue(0f);
     }
 
     @Inject(method = "onTerminal", at = @At("HEAD"))

@@ -1,0 +1,95 @@
+// Disposable graphical acceptance helper, compiled against the frozen runtime jar.
+gradle.projectsEvaluated {
+    def project = gradle.rootProject
+    def output = project.file('build/api-client-helper')
+    def properties = [runtime:'clientArtifact', api:'apiArtifact', cee_api:'ceeApiArtifact', example:'exampleArtifact', upstream_example:'upstreamExampleArtifact']
+    def defaults = [runtime:'build/libs/wwpg-0.2.0.jar',api:'build/libs/wwpg-api-1.0.0.jar',cee_api:'build/libs/wwpg-cee-api-1.0.0.jar',
+                    example:'examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar',upstream_example:'examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar']
+    def artifacts = properties.collectEntries { role, property -> [role, project.file(project.providers.gradleProperty(property).getOrElse(defaults[role]))] }
+    def hash = { file -> java.security.MessageDigest.getInstance('SHA-256').digest(file.bytes).encodeHex().toString() }
+    def snapshot = { artifacts.collectEntries { role, file -> [role,[path:file.absolutePath,sha256:hash(file)]] } }
+    def sourceSha = project.providers.gradleProperty('sourceSha').getOrElse('')
+    def excluded = { file -> [project.sourceSets.main,project.sourceSets.extensionApi,project.sourceSets.ceeApi].any { it.output.files.contains(file) }
+        || file.name in ['wwpg-api-example-1.0.0.jar','wwpg-upstream-api-example-1.0.0.jar'] }
+    def compilation = project.tasks.register('compileApiClientHelper', JavaCompile) {
+        source project.fileTree(project.file('tools/client_acceptance/src')) { include '**/*.java' }
+        classpath = project.sourceSets.main.compileClasspath.filter { !excluded(it) } + project.files(artifacts.runtime)
+        destinationDirectory = new File(output,'classes')
+        javaCompiler = project.javaToolchains.compilerFor { languageVersion = JavaLanguageVersion.of(21) }
+        options.encoding = 'UTF-8'
+    }
+    def helper = project.tasks.register('apiClientHelperJar', Jar) {
+        dependsOn compilation
+        from compilation.map { it.destinationDirectory }
+        from project.file('tools/client_acceptance/resources')
+        destinationDirectory = output
+        archiveFileName = 'wwpg-api-client-acceptance.jar'
+        preserveFileTimestamps = false
+        reproducibleFileOrder = true
+    }
+    project.tasks.register('runApiWorkshopClient', JavaExec) {
+        dependsOn helper, project.tasks.named('prepareClientARun'), project.tasks.named('installPgNative')
+        javaLauncher = project.javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(21) }
+        doFirst {
+            if (!(sourceSha ==~ /[0-9a-f]{40}/)) throw new GradleException('API client acceptance requires a frozen source commit')
+            def run = project.tasks.named('runClientA').get()
+            workingDir = project.file(project.providers.gradleProperty('clientDirectory').get())
+            def extraction = new groovy.json.JsonSlurper().parse(new File(workingDir,'extracted-yard.json'))
+            def name = extraction.source_save_name
+            def manifest = new groovy.json.JsonSlurper().parse(new File(workingDir,'saves/'+name+'/WWPG_MANIFEST.json'))
+            def frozen = snapshot()
+            if (frozen.runtime.sha256 != extraction.jar.sha256 || frozen.runtime.sha256 != manifest.jar.sha256)
+                throw new GradleException('Graphical runtime differs from the exact Workshop ZIP')
+            ['example','upstream_example'].each { role ->
+                if (frozen[role].sha256 != manifest.example_addons[role].sha256)
+                    throw new GradleException('Graphical '+role+' differs from the exact Workshop ZIP')
+            }
+            def profile = project.providers.gradleProperty('testProfile').getOrElse('BASE')
+            def backend = project.providers.gradleProperty('testBackend').getOrElse('NATIVE')
+            if (profile != extraction.profile || manifest.target != '0.2.0') throw new GradleException('Wrong Workshop profile/target')
+            def proof = [schema:1,source_sha:sourceSha,jar:frozen.runtime,artifacts:frozen.findAll { role,value -> role != 'runtime' },
+                         archive:extraction.archive,archive_sha256:extraction.sha256,profile:profile,backend:backend]
+            def record = new File(workingDir,'api-client-launch.json')
+            if (record.exists()) throw new GradleException('Retain previous graphical evidence; use a fresh extraction')
+            record.setText(groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(proof))+'\n','UTF-8')
+            extensions.extraProperties.set('apiClientFrozen',frozen)
+            mainClass = run.mainClass
+            args = run.args.collect { argument ->
+                if (!argument.startsWith('@')) return argument
+                def original = project.file(argument.substring(1))
+                def replacement = new File(output,'api-client-program.txt')
+                replacement.setText(original.getText('UTF-8').replace('--quickPlayMultiplayer\n127.0.0.1:25575','--quickPlaySingleplayer\n"'+name+'"')
+                    .replace('--width\n854','--width\n1280').replace('--height\n480','--height\n720'),'UTF-8')
+                return '@'+replacement.absolutePath
+            }
+            jvmArgs = run.jvmArgs.collect { argument ->
+                if (!argument.startsWith('@')) return argument
+                def original = project.file(argument.substring(1))
+                def replacement = new File(output,'api-client-vm.txt')
+                replacement.setText(original.getText('UTF-8').replace('-Xmx2G','-Xmx4G')+
+                    '\n-Dwwpg.test.packaged=true\n-Dwwpg.test.multiplayer=false\n-Dwwpg.test.apiWorkshop=true\n-Dwwpg.test.apiMode=graphical'+
+                    '\n-Dwwpg.test.backend='+backend+'\n-Dwwpg.test.profile='+profile+'\n-Dwwpg.test.restartPhase=VERIFY\n','UTF-8')
+                return '@'+replacement.absolutePath
+            }
+            classpath = run.classpathProvider.filter { !excluded(it) } + project.files(artifacts.runtime,artifacts.example,artifacts.upstream_example,helper.get().archiveFile.get().asFile)
+            def env = new HashMap(run.environmentProperty.get())
+            env['MOD_CLASSES'] = 'wwpg%%'+artifacts.runtime.absolutePath+File.pathSeparator+'wwpg_acceptance%%'+helper.get().archiveFile.get().asFile.absolutePath
+            environment env
+            def capture = new ByteArrayOutputStream()
+            extensions.extraProperties.set('apiClientOutput',capture)
+            def tee = { OutputStream console -> new OutputStream() {
+                void write(int value) { console.write(value); capture.write(value) }
+                void write(byte[] bytes,int offset,int length) { console.write(bytes,offset,length); capture.write(bytes,offset,length) }
+                void flush() { console.flush() }
+            } }
+            standardOutput = tee(System.out); errorOutput = tee(System.err)
+            logger.lifecycle('API Workshop graphical acceptance: '+backend+'/'+profile+'; exact ZIP '+extraction.sha256)
+        }
+        doLast {
+            def text = extensions.extraProperties.get('apiClientOutput').toString('UTF-8')
+            if (!text.contains('API_WORKSHOP_GRAPHICAL_PASSED') || text.contains('API_WORKSHOP_CLIENT_FAILED') || text.contains('API_WORKSHOP_SERVER_FAILED'))
+                throw new GradleException('API graphical acceptance did not complete; retain the actual log')
+            if (snapshot() != extensions.extraProperties.get('apiClientFrozen')) throw new GradleException('A frozen artifact changed during graphical acceptance')
+        }
+    }
+}

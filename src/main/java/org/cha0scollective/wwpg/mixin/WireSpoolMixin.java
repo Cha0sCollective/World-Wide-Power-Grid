@@ -22,7 +22,7 @@ public abstract class WireSpoolMixin {
     private void wwpg$pgSpool(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
         var level = context.getLevel(); var stack = context.getItemInHand();
         if (level instanceof ServerLevel server) Terminals.ensurePgNode(server, stack.get(CEEDataComponents.SELECTED_NODE));
-        if (Terminals.nativePg(level, context.getClickedPos()) == null || context.getPlayer() == null) return;
+        if (Terminals.pgCompatible(level, context.getClickedPos()) == null || context.getPlayer() == null) return;
         var node = Terminals.closestPg(level, context.getClickedPos(), context.getClickLocation(), 1.5);
         if (node == null) { cir.setReturnValue(InteractionResult.PASS); return; }
         ((WireSpoolItem) (Object) this).interactDetachedNode(node, context.getPlayer(), level, stack);

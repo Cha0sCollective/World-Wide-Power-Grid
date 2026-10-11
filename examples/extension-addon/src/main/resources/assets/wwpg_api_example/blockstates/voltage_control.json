@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "enabled=false,lit=false": {
+      "model": "wwpg_api_example:block/voltage_control"
+    },
+    "enabled=false,lit=true": {
+      "model": "wwpg_api_example:block/voltage_control_lit"
+    },
+    "enabled=true,lit=false": {
+      "model": "wwpg_api_example:block/voltage_control"
+    },
+    "enabled=true,lit=true": {
+      "model": "wwpg_api_example:block/voltage_control_lit"
+    }
+  }
+}

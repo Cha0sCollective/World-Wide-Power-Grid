@@ -24,7 +24,9 @@ The packaged release passes **204 checks in the base profile and 208 with Pinout
 
 Beta.5 repairs saved design-table loading, fuse saving and wiring through native repair, small CEE diode updates, and nonlinear component removal during chunk unloading. Older intermittent failures remain documented where their original logs did not establish a cause. Read [current status](docs/STATUS.md).
 
-Moving trains and contraptions, other optional integrations, broad version ranges, large-server certification, asynchronous solving and a public extension API remain later work. Existing beta.4 worlds and identities remain compatible.
+WWPG 0.2.0 and the independently versioned extension API 1.0 are in development. The [API contract](docs/EXTENSION_API.md), [implementation plan](docs/EXTENSION_API_PLAN.md) and [progress record](release/0.2.0/progress.json) describe the work and remaining acceptance gates. Beta.5 is the current published release.
+
+Moving trains and contraptions, other optional integrations, broad version ranges, large-server certification and asynchronous solving remain later work. Existing beta.4 worlds and identities remain compatible.
 
 ## How it works
 
@@ -40,6 +42,7 @@ PG's **native solver is primary**. WWPG includes verified native v7 binaries omi
 | Players and server owners | [Installation and example world](docs/INSTALL.md) |
 | Anyone checking coverage | [Supported content](docs/SUPPORT.md) and [current status](docs/STATUS.md) |
 | Maintainers | [Development and test commands](docs/DEVELOPMENT.md), [contributing](CONTRIBUTING.md) |
+| Add-on developers | [Extension API contract and SDK](docs/EXTENSION_API.md), [independent examples](examples/), [API Workshop](docs/EXTENSION_API_WORKSHOP.md) |
 | Reviewers checking release evidence | [Current acceptance](release/0.1.0-beta.5/verification.json) and [first-release history](docs/FIRST_RELEASE.md), [release records](release/README.md), [changelog](CHANGELOG.md) |
 | Readers evaluating the long-term design | [Product specification](SPEC.md) |
 

@@ -31,7 +31,7 @@ public abstract class ClampMeterClientMixin {
         if (hit instanceof EntityHitResult target && target.getEntity() instanceof BaseWireEntity wire
                 && wire.isAlive() && wire.getUUID().equals(data.getUUID(HandheldMeters.PG_WIRE))) {
             float current = data.getFloat(HandheldMeters.CURRENT);
-            ElectricPropertiesOverlay.INSTANCE.setAmmeter(Float.isFinite(current) ? Math.abs(current) : 0);
+            ElectricPropertiesOverlay.INSTANCE.setAmmeter(Float.isFinite(current) ? Math.abs(current) : Float.NaN);
         } else entity.stopUsingItem();
         ci.cancel();
     }

@@ -1,7 +1,9 @@
 package org.cha0scollective.wwpg.mixin;
 
 import com.george_vi.electroenergetics.foundation.nodes.InWorldNode;
+import com.george_vi.electroenergetics.simulation.infrastructure.detached_nodes.DetachedNodeHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -15,13 +17,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class InWorldNodeMixin {
     @Inject(method = "closestNode(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;FLnet/minecraft/world/phys/Vec3;)Lcom/george_vi/electroenergetics/foundation/nodes/InWorldNode;", at = @At("HEAD"), cancellable = true)
     private static void wwpg$pgSelection(Level level, BlockPos pos, BlockState state, float distance, Vec3 clicked, CallbackInfoReturnable<InWorldNode> cir) {
-        if (Terminals.nativePg(level, pos) != null) cir.setReturnValue(Terminals.closestPg(level, pos, clicked, distance));
+        if (Terminals.pgCompatible(level, pos) != null) cir.setReturnValue(Terminals.closestPg(level, pos, clicked, distance));
     }
     @Inject(method = "getPosition(Lnet/minecraft/world/level/Level;)Lnet/minecraft/world/phys/Vec3;", at = @At("HEAD"), cancellable = true)
     private void wwpg$pgPosition(Level level, CallbackInfoReturnable<Vec3> cir) {
         var node = (InWorldNode) (Object) this;
         var p = Terminals.pgLocalPosition(level, node.sourcePos(), node.id());
         if (p != null) cir.setReturnValue(p.add(node.sourcePos().getX(), node.sourcePos().getY(), node.sourcePos().getZ()));
+        else if (wwpg$unloadedApiNode(level, node)) cir.setReturnValue(null);
     }
     @Inject(method = "getPosition(Lnet/minecraft/world/level/Level;F)Lnet/minecraft/world/phys/Vec3;", at = @At("HEAD"), cancellable = true)
     private void wwpg$pgInterpolatedPosition(Level level, float partialTicks, CallbackInfoReturnable<Vec3> cir) { wwpg$pgPosition(level, cir); }
@@ -30,5 +33,13 @@ public abstract class InWorldNodeMixin {
         var node = (InWorldNode) (Object) this;
         var p = Terminals.pgLocalPosition(level, node.sourcePos(), node.id());
         if (p != null) cir.setReturnValue(p);
+        else if (wwpg$unloadedApiNode(level, node)) cir.setReturnValue(null);
+    }
+
+    /** CEE's fallback calls getBlockState, which requests a chunk-load ticket. */
+    private static boolean wwpg$unloadedApiNode(Level level, InWorldNode node) {
+        return level instanceof ServerLevel server && !DetachedNodeHelper.isDetached(node)
+                && org.cha0scollective.wwpg.extension.ApiTerminals.existing(level, node.sourcePos()) != null
+                && server.getChunkSource().getChunkNow(node.sourcePos().getX() >> 4, node.sourcePos().getZ() >> 4) == null;
     }
 }

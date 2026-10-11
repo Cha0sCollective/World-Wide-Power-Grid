@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "enabled=false,lit=false": {
+      "model": "wwpg_api_example:block/capacitor"
+    },
+    "enabled=false,lit=true": {
+      "model": "wwpg_api_example:block/capacitor_lit"
+    },
+    "enabled=true,lit=false": {
+      "model": "wwpg_api_example:block/capacitor"
+    },
+    "enabled=true,lit=true": {
+      "model": "wwpg_api_example:block/capacitor_lit"
+    }
+  }
+}

@@ -33,6 +33,7 @@ public final class BoardWorkflowGameTests {
     public static void everyBuiltinBoardComponentAssemblesFromNativeItems(GameTestHelper h) {
         int count = 0;
         for (var type : ComponentRegistry.entries()) {
+            if (!ComponentRegistry.getId(type).getNamespace().equals("powergrid")) continue;
             var schematic = new CircuitSchematic();
             schematic.placeComponent(new PlacedComponent(type, 6, 6, null), 6, 6);
             var tag = new CompoundTag(); tag.put("Schematic", schematic.serializeNbt(h.getLevel().registryAccess()));
