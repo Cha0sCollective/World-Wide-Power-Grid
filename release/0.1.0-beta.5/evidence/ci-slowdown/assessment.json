@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "commit": "49de7d1ae5ed425539c6296c9cb49d81644f03da",
+  "passing_run": 38081560620,
+  "cancelled_run": 38081588970,
+  "cancelled_job": 114299441450,
+  "profile": "PINOUT",
+  "backend": "NATIVE",
+  "platform": "Linux",
+  "observed": "Prolonged slow startup and ticking; two actual designer cycles completed. No completion proof or assertion failure.",
+  "cause": "Unresolved",
+  "next_step": "Bound commands and collect JVM thread dumps on timeout; investigate recurrence rather than counting retries as a fix."
+}
