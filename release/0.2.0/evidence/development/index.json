@@ -15,8 +15,8 @@
   "warning": "These are pre-freeze development failures and their investigations. Corrections and retries do not establish final acceptance; frozen artifacts must pass the independent release gates.",
   "archive": {
     "path": "failed-development-runs.zip",
-    "sha256": "7c704154689d13b36878c140d844c2647eaa269d9e2ab470a8d942988f2567f3",
-    "size": 30258835
+    "sha256": "78fff3417353f2e24ac0e71da75b376b3c6a752be01c2173ba3fcd49d18f06b1",
+    "size": 43365947
   },
   "runs": [
     {
@@ -468,6 +468,196 @@
       "summary": "Two real TCP clients passed all eleven station views and the server accepted the view phase. Native PG item wiring reached the 20 V bench expectation; actual native CEE item wiring then produced 0 V rather than 20 V. The failed wire phase stopped acceptance. Exact launch inputs, immutable helper bytes, screenshots, process results, logs and thread dumps are retained.",
       "correction": "Source investigation reproduced Minecraft block-first item dispatch: ExampleBlock.useWithoutItem returned SUCCESS for nonempty held items, consuming native CEE wire spool and PG multimeter useOn interactions. A narrow example useItemOn override will skip default block interaction for nonempty items and preserve empty-hand readouts/configuration. The runtime wiring hooks are unchanged. Corrected independent example artifacts, real native item interactions and complete frozen acceptance remain required.",
       "resolution_status": "native_item_dispatch_cause_identified; example_correction_in_progress; final_actual_client_acceptance_required",
+      "backend": "NATIVE",
+      "profile": "BASE",
+      "platform": "Windows",
+      "publication_acceptance": false
+    },
+    {
+      "log": "run/api27-api-multiplayer-BASE-NATIVE/server.log",
+      "run": "run/api27-api-multiplayer-BASE-NATIVE",
+      "files": [
+        "build/api-client-acceptance-27.log",
+        "build/api27-actual-schematic-inventories.json",
+        "build/api27-api-cold-BASE-NATIVE-1.log",
+        "build/api27-api-cold-BASE-NATIVE-2.log",
+        "build/api27-api-cold-BASE-NATIVE-3.log",
+        "build/api27-api-multiplayer-BASE-NATIVE-prepare.log",
+        "build/api27-workshop-BASE-setup.log",
+        "build/api27-workshop-BASE-source-1.log",
+        "build/api27-workshop-BASE-source-2.log",
+        "build/api27-workshop-BASE-source-3.log",
+        "build/distributions/api27-api-workshop-BASE.zip",
+        "build/frozen-0.2.0-27/api-contract.json",
+        "build/frozen-0.2.0-27/artifact-lock.json",
+        "build/frozen-0.2.0-27/cee-api-contract.json",
+        "build/frozen-0.2.0-27/wwpg-0.2.0.jar",
+        "build/frozen-0.2.0-27/wwpg-api-1.0.0-javadoc.jar",
+        "build/frozen-0.2.0-27/wwpg-api-1.0.0-maven.zip",
+        "build/frozen-0.2.0-27/wwpg-api-1.0.0-sources.jar",
+        "build/frozen-0.2.0-27/wwpg-api-1.0.0.jar",
+        "build/frozen-0.2.0-27/wwpg-api-example-1.0.0-source.zip",
+        "build/frozen-0.2.0-27/wwpg-api-example-1.0.0.jar",
+        "build/frozen-0.2.0-27/wwpg-cee-api-1.0.0-javadoc.jar",
+        "build/frozen-0.2.0-27/wwpg-cee-api-1.0.0-sources.jar",
+        "build/frozen-0.2.0-27/wwpg-cee-api-1.0.0.jar",
+        "build/frozen-0.2.0-27/wwpg-upstream-api-example-1.0.0-source.zip",
+        "build/frozen-0.2.0-27/wwpg-upstream-api-example-1.0.0.jar",
+        "build/inspect_api27_inventories.py",
+        "run/api27-api-cold-BASE-NATIVE/api-workshop-stations.json",
+        "run/api27-api-cold-BASE-NATIVE/extracted-yard.json",
+        "run/api27-api-cold-BASE-NATIVE/logs/2026-10-11-1.log.gz",
+        "run/api27-api-cold-BASE-NATIVE/logs/2026-10-11-2.log.gz",
+        "run/api27-api-cold-BASE-NATIVE/logs/debug-1.log.gz",
+        "run/api27-api-cold-BASE-NATIVE/logs/debug-2.log.gz",
+        "run/api27-api-cold-BASE-NATIVE/logs/debug.log",
+        "run/api27-api-cold-BASE-NATIVE/logs/latest.log",
+        "run/api27-api-cold-BASE-NATIVE/packaged-2026-10-11T12-33-36.097985300Z.json",
+        "run/api27-api-cold-BASE-NATIVE/packaged-2026-10-11T12-34-00.127731800Z.json",
+        "run/api27-api-cold-BASE-NATIVE/packaged-2026-10-11T12-34-25.166468900Z.json",
+        "run/api27-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/api_multiplayer.gradle",
+        "run/api27-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/resources/META-INF/neoforge.mods.toml",
+        "run/api27-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ApiWorkshopClientAcceptance.java",
+        "run/api27-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ExpandedClientAcceptance.java",
+        "run/api27-api-multiplayer-BASE-NATIVE/acceptance-helper/wwpg-api-client-acceptance.jar",
+        "run/api27-api-multiplayer-BASE-NATIVE/api-multiplayer-result.json",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a-threads.txt",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a.log",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a/logs/debug.log",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a/logs/latest.log",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a/options.txt",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A01.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A02.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A03.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A04.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A05.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A06.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A07.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A08.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A09.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A10.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A11.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-board_edit-A.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-configure-A.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-configure_on-A.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-meter-A.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-panel_edit-A.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-wire-A.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b-threads.txt",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b.log",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b/logs/debug.log",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b/logs/latest.log",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b/options.txt",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A01.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A02.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A03.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A04.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A05.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A06.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A07.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A08.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A09.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A10.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A11.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-board_edit-B.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-configure-B.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-configure_on-B.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-meter-B.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-panel_edit-B.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-wire-B.png",
+        "run/api27-api-multiplayer-BASE-NATIVE/launch.json",
+        "run/api27-api-multiplayer-BASE-NATIVE/launch/client-a-launch.txt",
+        "run/api27-api-multiplayer-BASE-NATIVE/launch/client-a-legacy.txt",
+        "run/api27-api-multiplayer-BASE-NATIVE/launch/client-a-program.txt",
+        "run/api27-api-multiplayer-BASE-NATIVE/launch/client-a-vm.txt",
+        "run/api27-api-multiplayer-BASE-NATIVE/launch/client-b-launch.txt",
+        "run/api27-api-multiplayer-BASE-NATIVE/launch/client-b-legacy.txt",
+        "run/api27-api-multiplayer-BASE-NATIVE/launch/client-b-program.txt",
+        "run/api27-api-multiplayer-BASE-NATIVE/launch/client-b-vm.txt",
+        "run/api27-api-multiplayer-BASE-NATIVE/launch/server-launch.txt",
+        "run/api27-api-multiplayer-BASE-NATIVE/launch/server-legacy.txt",
+        "run/api27-api-multiplayer-BASE-NATIVE/launch/server-program.txt",
+        "run/api27-api-multiplayer-BASE-NATIVE/launch/server-vm.txt",
+        "run/api27-api-multiplayer-BASE-NATIVE/server.log",
+        "run/api27-api-multiplayer-BASE-NATIVE/server/extracted-yard.json",
+        "run/api27-api-multiplayer-BASE-NATIVE/server/logs/debug.log",
+        "run/api27-api-multiplayer-BASE-NATIVE/server/logs/latest.log",
+        "run/api27-api-multiplayer-BASE-NATIVE/server/usernamecache.json",
+        "run/api27-api-multiplayer-BASE-NATIVE/server/world/playerdata/4bc04bfb-8e54-3770-99c5-191d6f24b100.dat",
+        "run/api27-api-multiplayer-BASE-NATIVE/server/world/playerdata/4bc04bfb-8e54-3770-99c5-191d6f24b100.dat_old",
+        "run/api27-api-multiplayer-BASE-NATIVE/server/world/playerdata/8814a350-c032-3444-8228-c8e066c7b3a6.dat",
+        "run/api27-api-multiplayer-BASE-NATIVE/server/world/playerdata/8814a350-c032-3444-8228-c8e066c7b3a6.dat_old",
+        "run/api27-workshop-BASE/api-workshop-stations.json",
+        "run/api27-workshop-BASE/logs/2026-10-11-1.log.gz",
+        "run/api27-workshop-BASE/logs/2026-10-11-2.log.gz",
+        "run/api27-workshop-BASE/logs/2026-10-11-3.log.gz",
+        "run/api27-workshop-BASE/logs/debug-1.log.gz",
+        "run/api27-workshop-BASE/logs/debug-2.log.gz",
+        "run/api27-workshop-BASE/logs/debug-3.log.gz",
+        "run/api27-workshop-BASE/logs/debug.log",
+        "run/api27-workshop-BASE/logs/latest.log",
+        "run/api27-workshop-BASE/packaged-2026-10-11T12-31-58.984084800Z.json",
+        "run/api27-workshop-BASE/packaged-2026-10-11T12-32-23.610481500Z.json",
+        "run/api27-workshop-BASE/packaged-2026-10-11T12-32-47.490610700Z.json",
+        "run/api27-workshop-BASE/packaged-2026-10-11T12-33-11.752802Z.json"
+      ],
+      "kind": "batch27_actual_clients_board_copy_oracle_failure",
+      "source_reference": "b8e6eaaf838a7d3ea676412ce9ed937df205557f",
+      "artifact_hashes": {
+        "runtime": "747c8173317a713721f676d824799e0cb254129f751c6bb939bd500ad1553712",
+        "api": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+        "cee_api": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+        "example": "90a52b8ca6d65860043e816d4d101dc3e014dd7c947133e48a0dfe7a49490cd4",
+        "upstream_example": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095"
+      },
+      "world_sha256": "0d805f690f9a2b02d968df918d1d277f1e0ba8d64b0d41a12a3d17b4ccf1ca1a",
+      "passed_server_phases": [
+        "view",
+        "wire",
+        "configure",
+        "configure_on",
+        "meter",
+        "panel_edit"
+      ],
+      "station_views_per_client": 11,
+      "acceptance_helper": {
+        "archive_member": "run/api27-api-multiplayer-BASE-NATIVE/acceptance-helper/wwpg-api-client-acceptance.jar",
+        "sha256": "954cc94b0f8b5fa8702a8c3c1d28ea51baac2b29a32983747fb9c4a3216414dc",
+        "size": 36707
+      },
+      "acceptance_helper_sources": [
+        {
+          "archive_member": "run/api27-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/api_multiplayer.gradle",
+          "sha256": "86b75bfee4e3f29d71be70436d3cd58566b4b33020457461d9b0d149eb8f6bdd",
+          "size": 10501,
+          "source_path": "tools/client_acceptance/api_multiplayer.gradle",
+          "kind": "init"
+        },
+        {
+          "archive_member": "run/api27-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/resources/META-INF/neoforge.mods.toml",
+          "sha256": "d493caee15dfd18d8242f2c03748fde524fd9f0774f12813c80e73f4eef25ad6",
+          "size": 354,
+          "source_path": "tools/client_acceptance/resources/META-INF/neoforge.mods.toml",
+          "kind": "resource"
+        },
+        {
+          "archive_member": "run/api27-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ApiWorkshopClientAcceptance.java",
+          "sha256": "92cd3d9920ed6e56564a51aab1d85dd818ab4d28c778b5ee3d5be1ce6025df88",
+          "size": 23739,
+          "source_path": "tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ApiWorkshopClientAcceptance.java",
+          "kind": "java"
+        },
+        {
+          "archive_member": "run/api27-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ExpandedClientAcceptance.java",
+          "sha256": "93598b6e21d46b850ef75336485e17e1e268c08e8a77347294d57141787e90b3",
+          "size": 34837,
+          "source_path": "tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ExpandedClientAcceptance.java",
+          "kind": "java"
+        }
+      ],
+      "summary": "Both real TCP clients passed eleven station views. The server accepted viewing, native item wiring, configuration off/on, metering and panel editing. Board editing then failed because its assertion called components() on a null schematic. Exact player NBT independently retains a blank schematic in slot 0 and the valid native table copy in slot 1, including the edited name, custom shunt settings and traces.",
+      "correction": "The acceptance oracle must ignore blank schematic items and compare the populated native copy by complete serializeSafeNbt data; native schematic copying intentionally regenerates identity UUIDs. Live placed-board UUID checks remain required. This is a native-copy assertion correction, with no PG adapter hook change. A fresh runtime source/artifact and complete actual-client acceptance are required.",
+      "resolution_status": "native_copy_oracle_cause_identified; correction_in_progress; fresh_frozen_actual_client_acceptance_required",
       "backend": "NATIVE",
       "profile": "BASE",
       "platform": "Windows",
@@ -933,6 +1123,333 @@
       "root_cause_analysis": "The unavailable-result behavior requires meaningful legacy assertions of isolation, thermal safety, unaffected healthy circuits and recovery, rather than a zero reading. The separate diagnostic fixture needs an explicit native wiring readiness predicate before its first connection. These causal explanations come from source and local investigations; the archived CI job lines independently establish each actual failure. The independently observed candidate22/23 Workshop builder failures are retained as local failures and must not be attributed to this CI unless an actual job reached and failed that gate.",
       "corrective_work": "Strengthen legacy isolation assertions and wait for actual diagnostic wiring readiness. Builder corrections and the complete frozen matrix remain subject to independent packaged proof. This archive was collected directly through GitHub; no strict acceptance collector was invoked for the failed run.",
       "resolution_status": "corrective_changes_under_test; final_frozen_acceptance_required"
+    },
+    {
+      "id": 38136995579,
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38136995579",
+      "head_sha": "2b6974a0b1cc4edb3c22ba26536fd2d1a009c529",
+      "source_tree": "e68c0dee9e480ea5261805c945f97820bb0ff1ef",
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-10-11T11:49:54Z",
+      "updated_at": "2026-10-11T12:37:51Z",
+      "kind": "superseded_candidate25_compatibility_reference_failures",
+      "publication_acceptance": false,
+      "metadata": [
+        "build/preliminary-ci-38136995579-stage/run-completed.json",
+        "build/preliminary-ci-38136995579-stage/jobs-completed.json"
+      ],
+      "downloaded_artifact_subset": "build/ci-38136995579-failed-windows-JAVA-BASE",
+      "retained_reference_subset": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset",
+      "jobs": [
+        {
+          "id": 114462801689,
+          "name": "build (ubuntu-24.04, JAVA, BASE)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38136995579/job/114462801689",
+          "runner": "ubuntu-24.04",
+          "backend": "JAVA",
+          "profile": "BASE",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=JAVA --no-daemon"
+          ],
+          "failed_assertion_log_lines": [
+            "build (ubuntu-24.04, JAVA, BASE)\tRun python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=JAVA --no-daemon\t2026-10-11T12:10:06.3555334Z [12:10:06] [Server thread/ERROR] [minecraft/LogTestReporter]: accumulatormixedchargedischargematchespinnedstoragewithinonepercent failed at -4244884, -60, 10806488! Native transient differs beyond 1% / recorded absolute tolerance even allowing one tick, point 51: 1.780608020897489, tolerance multiples=1.7602948721369536"
+          ],
+          "ci_error_lines": [
+            "build (ubuntu-24.04, JAVA, BASE)\tRun python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=JAVA --no-daemon\t2026-10-11T12:10:08.1144945Z ##[error]Process completed with exit code 1."
+          ],
+          "source_provenance_log_lines": [
+            "build (ubuntu-24.04, JAVA, BASE)\tRecord the exact checked-out source and CI attempt\t2026-10-11T11:50:02.3508244Z ^[[36;1mevidence = dict(schema=1, source_sha=source,^[[0m",
+            "build (ubuntu-24.04, JAVA, BASE)\tRecord the exact checked-out source and CI attempt\t2026-10-11T11:50:02.3508754Z ^[[36;1m    source_tree=subprocess.check_output(['git', 'rev-parse', 'HEAD^{tree}'], text=True).strip(),^[[0m"
+          ],
+          "required_test_pass_counts_in_launch_order": [
+            1,
+            1,
+            1,
+            1,
+            32,
+            32,
+            32,
+            32,
+            204,
+            204,
+            204,
+            204,
+            10
+          ],
+          "log": "build/preliminary-ci-38136995579-stage/ubuntu-JAVA-BASE-job.log"
+        },
+        {
+          "id": 114462801779,
+          "name": "build (windows-latest, JAVA, PINOUT)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38136995579/job/114462801779",
+          "runner": "windows-latest",
+          "backend": "JAVA",
+          "profile": "PINOUT",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=JAVA --no-daemon"
+          ],
+          "failed_assertion_log_lines": [
+            "build (windows-latest, JAVA, PINOUT)\tRun python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=JAVA --no-daemon\t2026-10-11T12:08:09.8522386Z [12:08:09] [Server thread/ERROR] [minecraft/LogTestReporter]: accumulatormixedchargedischargematchespinnedstoragewithinonepercent failed at -8493765, -60, 6924857! Native transient differs beyond 1% / recorded absolute tolerance even allowing one tick, point 51: 1.780608020897489, tolerance multiples=1.7602948721369536"
+          ],
+          "ci_error_lines": [
+            "build (windows-latest, JAVA, PINOUT)\tRun python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=JAVA --no-daemon\t2026-10-11T12:08:11.7673598Z ##[error]Process completed with exit code 1."
+          ],
+          "source_provenance_log_lines": [
+            "build (windows-latest, JAVA, PINOUT)\tRecord the exact checked-out source and CI attempt\t2026-10-11T11:50:06.1060941Z ^[[36;1mevidence = dict(schema=1, source_sha=source,^[[0m",
+            "build (windows-latest, JAVA, PINOUT)\tRecord the exact checked-out source and CI attempt\t2026-10-11T11:50:06.1061220Z ^[[36;1m    source_tree=subprocess.check_output(['git', 'rev-parse', 'HEAD^{tree}'], text=True).strip(),^[[0m"
+          ],
+          "required_test_pass_counts_in_launch_order": [
+            1,
+            1,
+            1,
+            1,
+            32,
+            32,
+            32,
+            32,
+            208,
+            208,
+            208,
+            208,
+            10
+          ],
+          "log": "build/preliminary-ci-38136995579-stage/windows-JAVA-PINOUT-job.log"
+        },
+        {
+          "id": 114462801785,
+          "name": "build (windows-latest, NATIVE, BASE)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38136995579/job/114462801785",
+          "runner": "windows-latest",
+          "backend": "NATIVE",
+          "profile": "BASE",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=NATIVE --no-daemon"
+          ],
+          "failed_assertion_log_lines": [
+            "build (windows-latest, NATIVE, BASE)\tRun python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=NATIVE --no-daemon\t2026-10-11T12:37:41.3206812Z [12:37:41] [Server thread/ERROR] [minecraft/LogTestReporter]: accumulatormixedchargedischargematchespinnedstoragewithinonepercent failed at -13434384, -60, -5449344! Native transient differs beyond 1% / recorded absolute tolerance even allowing one tick, point 51: 1.780608020897489, tolerance multiples=1.7602948721369536"
+          ],
+          "ci_error_lines": [
+            "build (windows-latest, NATIVE, BASE)\tRun python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=NATIVE --no-daemon\t2026-10-11T12:37:43.5294559Z ##[error]Process completed with exit code 1."
+          ],
+          "source_provenance_log_lines": [
+            "build (windows-latest, NATIVE, BASE)\tRecord the exact checked-out source and CI attempt\t2026-10-11T11:50:08.5302431Z ^[[36;1mevidence = dict(schema=1, source_sha=source,^[[0m",
+            "build (windows-latest, NATIVE, BASE)\tRecord the exact checked-out source and CI attempt\t2026-10-11T11:50:08.5302898Z ^[[36;1m    source_tree=subprocess.check_output(['git', 'rev-parse', 'HEAD^{tree}'], text=True).strip(),^[[0m"
+          ],
+          "required_test_pass_counts_in_launch_order": [
+            1,
+            1,
+            1,
+            1,
+            32,
+            32,
+            32,
+            32,
+            204,
+            204,
+            204,
+            204,
+            10
+          ],
+          "log": "build/preliminary-ci-38136995579-stage/windows-NATIVE-BASE-job.log"
+        },
+        {
+          "id": 114462801789,
+          "name": "build (ubuntu-24.04, NATIVE, BASE)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38136995579/job/114462801789",
+          "runner": "ubuntu-24.04",
+          "backend": "NATIVE",
+          "profile": "BASE",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=NATIVE --no-daemon"
+          ],
+          "failed_assertion_log_lines": [
+            "build (ubuntu-24.04, NATIVE, BASE)\tRun python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=NATIVE --no-daemon\t2026-10-11T12:23:42.1149423Z [12:23:42] [Server thread/ERROR] [minecraft/LogTestReporter]: accumulatormixedchargedischargematchespinnedstoragewithinonepercent failed at -11866410, -60, -5396115! Native transient differs beyond 1% / recorded absolute tolerance even allowing one tick, point 51: 1.780608020897489, tolerance multiples=1.7602948721369536"
+          ],
+          "ci_error_lines": [
+            "build (ubuntu-24.04, NATIVE, BASE)\tRun python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=NATIVE --no-daemon\t2026-10-11T12:23:43.7864161Z ##[error]Process completed with exit code 1."
+          ],
+          "source_provenance_log_lines": [
+            "build (ubuntu-24.04, NATIVE, BASE)\tRecord the exact checked-out source and CI attempt\t2026-10-11T11:50:01.3471110Z ^[[36;1mevidence = dict(schema=1, source_sha=source,^[[0m",
+            "build (ubuntu-24.04, NATIVE, BASE)\tRecord the exact checked-out source and CI attempt\t2026-10-11T11:50:01.3471660Z ^[[36;1m    source_tree=subprocess.check_output(['git', 'rev-parse', 'HEAD^{tree}'], text=True).strip(),^[[0m"
+          ],
+          "required_test_pass_counts_in_launch_order": [
+            1,
+            1,
+            1,
+            1,
+            32,
+            32,
+            32,
+            32,
+            204,
+            204,
+            204,
+            204,
+            10
+          ],
+          "log": "build/preliminary-ci-38136995579-stage/ubuntu-NATIVE-BASE-job.log"
+        },
+        {
+          "id": 114462801790,
+          "name": "build (ubuntu-24.04, JAVA, PINOUT)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38136995579/job/114462801790",
+          "runner": "ubuntu-24.04",
+          "backend": "JAVA",
+          "profile": "PINOUT",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=JAVA --no-daemon"
+          ],
+          "failed_assertion_log_lines": [
+            "build (ubuntu-24.04, JAVA, PINOUT)\tRun python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=JAVA --no-daemon\t2026-10-11T12:13:31.4510645Z [12:13:31] [Server thread/ERROR] [minecraft/LogTestReporter]: accumulatormixedchargedischargematchespinnedstoragewithinonepercent failed at -8356119, -60, 13832818! Native transient differs beyond 1% / recorded absolute tolerance even allowing one tick, point 51: 1.780608020897489, tolerance multiples=1.7602948721369536"
+          ],
+          "ci_error_lines": [
+            "build (ubuntu-24.04, JAVA, PINOUT)\tRun python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=JAVA --no-daemon\t2026-10-11T12:13:33.1030582Z ##[error]Process completed with exit code 1."
+          ],
+          "source_provenance_log_lines": [
+            "build (ubuntu-24.04, JAVA, PINOUT)\tRecord the exact checked-out source and CI attempt\t2026-10-11T11:50:01.9918872Z ^[[36;1mevidence = dict(schema=1, source_sha=source,^[[0m",
+            "build (ubuntu-24.04, JAVA, PINOUT)\tRecord the exact checked-out source and CI attempt\t2026-10-11T11:50:01.9919406Z ^[[36;1m    source_tree=subprocess.check_output(['git', 'rev-parse', 'HEAD^{tree}'], text=True).strip(),^[[0m"
+          ],
+          "required_test_pass_counts_in_launch_order": [
+            1,
+            1,
+            1,
+            1,
+            32,
+            32,
+            32,
+            32,
+            208,
+            208,
+            208,
+            208,
+            10
+          ],
+          "log": "build/preliminary-ci-38136995579-stage/ubuntu-JAVA-PINOUT-job.log"
+        },
+        {
+          "id": 114462801793,
+          "name": "build (windows-latest, NATIVE, PINOUT)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38136995579/job/114462801793",
+          "runner": "windows-latest",
+          "backend": "NATIVE",
+          "profile": "PINOUT",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=NATIVE --no-daemon"
+          ],
+          "failed_assertion_log_lines": [
+            "build (windows-latest, NATIVE, PINOUT)\tRun python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=NATIVE --no-daemon\t2026-10-11T12:14:54.0579775Z [12:14:53] [Server thread/ERROR] [minecraft/LogTestReporter]: accumulatormixedchargedischargematchespinnedstoragewithinonepercent failed at 3460680, -60, -4529902! Native transient differs beyond 1% / recorded absolute tolerance even allowing one tick, point 51: 1.780608020897489, tolerance multiples=1.7602948721369536"
+          ],
+          "ci_error_lines": [
+            "build (windows-latest, NATIVE, PINOUT)\tRun python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=NATIVE --no-daemon\t2026-10-11T12:14:55.3040579Z ##[error]Process completed with exit code 1."
+          ],
+          "source_provenance_log_lines": [
+            "build (windows-latest, NATIVE, PINOUT)\tRecord the exact checked-out source and CI attempt\t2026-10-11T11:50:04.8180595Z ^[[36;1mevidence = dict(schema=1, source_sha=source,^[[0m",
+            "build (windows-latest, NATIVE, PINOUT)\tRecord the exact checked-out source and CI attempt\t2026-10-11T11:50:04.8180857Z ^[[36;1m    source_tree=subprocess.check_output(['git', 'rev-parse', 'HEAD^{tree}'], text=True).strip(),^[[0m"
+          ],
+          "required_test_pass_counts_in_launch_order": [
+            1,
+            1,
+            1,
+            1,
+            32,
+            32,
+            32,
+            32,
+            208,
+            208,
+            208,
+            208,
+            10
+          ],
+          "log": "build/preliminary-ci-38136995579-stage/windows-NATIVE-PINOUT-job.log"
+        },
+        {
+          "id": 114462801802,
+          "name": "build (ubuntu-24.04, NATIVE, PINOUT)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38136995579/job/114462801802",
+          "runner": "ubuntu-24.04",
+          "backend": "NATIVE",
+          "profile": "PINOUT",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=NATIVE --no-daemon"
+          ],
+          "failed_assertion_log_lines": [
+            "build (ubuntu-24.04, NATIVE, PINOUT)\tRun python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=NATIVE --no-daemon\t2026-10-11T12:28:44.5329244Z [12:28:44] [Server thread/ERROR] [minecraft/LogTestReporter]: accumulatormixedchargedischargematchespinnedstoragewithinonepercent failed at -9264842, -60, 11333032! Native transient differs beyond 1% / recorded absolute tolerance even allowing one tick, point 51: 1.780608020897489, tolerance multiples=1.7602948721369536"
+          ],
+          "ci_error_lines": [
+            "build (ubuntu-24.04, NATIVE, PINOUT)\tRun python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=NATIVE --no-daemon\t2026-10-11T12:28:46.4676816Z ##[error]Process completed with exit code 1."
+          ],
+          "source_provenance_log_lines": [
+            "build (ubuntu-24.04, NATIVE, PINOUT)\tRecord the exact checked-out source and CI attempt\t2026-10-11T11:50:01.0943169Z ^[[36;1mevidence = dict(schema=1, source_sha=source,^[[0m",
+            "build (ubuntu-24.04, NATIVE, PINOUT)\tRecord the exact checked-out source and CI attempt\t2026-10-11T11:50:01.0943680Z ^[[36;1m    source_tree=subprocess.check_output(['git', 'rev-parse', 'HEAD^{tree}'], text=True).strip(),^[[0m"
+          ],
+          "required_test_pass_counts_in_launch_order": [
+            1,
+            1,
+            1,
+            1,
+            32,
+            32,
+            32,
+            32,
+            208,
+            208,
+            208,
+            208,
+            10
+          ],
+          "log": "build/preliminary-ci-38136995579-stage/ubuntu-NATIVE-PINOUT-job.log"
+        },
+        {
+          "id": 114462801861,
+          "name": "build (windows-latest, JAVA, BASE)",
+          "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38136995579/job/114462801861",
+          "runner": "windows-latest",
+          "backend": "JAVA",
+          "profile": "BASE",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=JAVA --no-daemon"
+          ],
+          "failed_assertion_log_lines": [
+            "build (windows-latest, JAVA, BASE)\tRun python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=JAVA --no-daemon\t2026-10-11T12:07:07.3108981Z [12:07:07] [Server thread/ERROR] [minecraft/LogTestReporter]: accumulatormixedchargedischargematchespinnedstoragewithinonepercent failed at 279565, -60, 6856866! Native transient differs beyond 1% / recorded absolute tolerance even allowing one tick, point 51: 1.780608020897489, tolerance multiples=1.7602948721369536"
+          ],
+          "ci_error_lines": [
+            "build (windows-latest, JAVA, BASE)\tRun python tools/run_checked.py -- ./gradlew runReferenceCompatibilityServer -PtestBackend=JAVA --no-daemon\t2026-10-11T12:07:08.6724528Z ##[error]Process completed with exit code 1."
+          ],
+          "source_provenance_log_lines": [
+            "build (windows-latest, JAVA, BASE)\tRecord the exact checked-out source and CI attempt\t2026-10-11T11:50:06.6480582Z ^[[36;1mevidence = dict(schema=1, source_sha=source,^[[0m",
+            "build (windows-latest, JAVA, BASE)\tRecord the exact checked-out source and CI attempt\t2026-10-11T11:50:06.6480852Z ^[[36;1m    source_tree=subprocess.check_output(['git', 'rev-parse', 'HEAD^{tree}'], text=True).strip(),^[[0m"
+          ],
+          "required_test_pass_counts_in_launch_order": [
+            1,
+            1,
+            1,
+            1,
+            32,
+            32,
+            32,
+            32,
+            204,
+            204,
+            204,
+            204,
+            10
+          ],
+          "log": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-job.log"
+        }
+      ],
+      "summary": "Actual completed candidate25 outcomes and all eight raw logs are retained. Compatibility-reference accumulator timing assertions failed in reached jobs; any other failed step is separately recorded from its actual metadata and logs. Windows Java/base native and compatibility traces retain the observed frame offset. The source fixture correction requires a new frozen run; this superseded CI is not final acceptance.",
+      "resolution_status": "reference_fixture_correction_requires_new_frozen_full_acceptance; original_failures_preserved"
     }
   ],
   "success_appendices": [
@@ -1132,6 +1649,96 @@
           "publication_acceptance": false
         }
       ]
+    },
+    {
+      "kind": "historical_exact_extracted_sdk_build",
+      "candidate": 22,
+      "source_reference": "189f39fc410f78da1b45c1942c9b13641f786953",
+      "publication_acceptance": false,
+      "attempt_archive_member": "release/0.2.0/evidence/extracted-sdk-22/attempt.json",
+      "artifact_hashes": {
+        "runtime": "be92893b73855c9884ac1c57f65a295936af02d73d8ab5b5a66b9598703511f9",
+        "api": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+        "cee_api": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+        "example": "09a0ce693fa01a83793ee601707b460826f2bdf7e6bf0979df2c83f41f8dfee1",
+        "upstream_example": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095"
+      },
+      "compiled_outputs": [
+        {
+          "role": "example",
+          "sha256": "09a0ce693fa01a83793ee601707b460826f2bdf7e6bf0979df2c83f41f8dfee1",
+          "archive_member": "release/0.2.0/evidence/extracted-sdk-22/general-example/build/libs/wwpg-api-example-1.0.0.jar"
+        },
+        {
+          "role": "upstream_example",
+          "sha256": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095",
+          "archive_member": "release/0.2.0/evidence/extracted-sdk-22/upstream-example/build/libs/wwpg-upstream-api-example-1.0.0.jar"
+        }
+      ],
+      "retained_files": [
+        "build/frozen-0.2.0-22/wwpg-0.2.0.jar",
+        "build/frozen-0.2.0-22/wwpg-api-1.0.0-maven.zip",
+        "build/frozen-0.2.0-22/wwpg-api-example-1.0.0-source.zip",
+        "build/frozen-0.2.0-22/wwpg-upstream-api-example-1.0.0-source.zip",
+        "release/0.2.0/evidence/extracted-sdk-22/attempt.json",
+        "release/0.2.0/evidence/extracted-sdk-22/compile-sdk-evidence.gradle",
+        "release/0.2.0/evidence/extracted-sdk-22/example-build-proof.json",
+        "release/0.2.0/evidence/extracted-sdk-22/example-build.log",
+        "release/0.2.0/evidence/extracted-sdk-22/example-dependencies.json",
+        "release/0.2.0/evidence/extracted-sdk-22/example-expected.json",
+        "release/0.2.0/evidence/extracted-sdk-22/general-example/build/libs/wwpg-api-example-1.0.0.jar",
+        "release/0.2.0/evidence/extracted-sdk-22/upstream-example/build/libs/wwpg-upstream-api-example-1.0.0.jar",
+        "release/0.2.0/evidence/extracted-sdk-22/upstream_example-build-proof.json",
+        "release/0.2.0/evidence/extracted-sdk-22/upstream_example-build.log",
+        "release/0.2.0/evidence/extracted-sdk-22/upstream_example-dependencies.json",
+        "release/0.2.0/evidence/extracted-sdk-22/upstream_example-expected.json"
+      ],
+      "summary": "Both exact downloadable example source ZIPs and the Maven ZIP were extracted and independently compiled; outputs match their historical frozen example artifacts. The source/API/example hashes and full original logs/dependency records are preserved. This candidate was superseded before full runtime/client acceptance, so these SDK successes do not certify the final release."
+    },
+    {
+      "kind": "historical_exact_extracted_sdk_build",
+      "candidate": 25,
+      "source_reference": "2b6974a0b1cc4edb3c22ba26536fd2d1a009c529",
+      "publication_acceptance": false,
+      "attempt_archive_member": "release/0.2.0/evidence/extracted-sdk-25/attempt.json",
+      "artifact_hashes": {
+        "runtime": "9740d5754efa17e098c117fa09b54b58552ef34d3a38413a3fb1642c7e584ceb",
+        "api": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+        "cee_api": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+        "example": "09a0ce693fa01a83793ee601707b460826f2bdf7e6bf0979df2c83f41f8dfee1",
+        "upstream_example": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095"
+      },
+      "compiled_outputs": [
+        {
+          "role": "example",
+          "sha256": "09a0ce693fa01a83793ee601707b460826f2bdf7e6bf0979df2c83f41f8dfee1",
+          "archive_member": "release/0.2.0/evidence/extracted-sdk-25/general-example/build/libs/wwpg-api-example-1.0.0.jar"
+        },
+        {
+          "role": "upstream_example",
+          "sha256": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095",
+          "archive_member": "release/0.2.0/evidence/extracted-sdk-25/upstream-example/build/libs/wwpg-upstream-api-example-1.0.0.jar"
+        }
+      ],
+      "retained_files": [
+        "build/frozen-0.2.0-25/wwpg-0.2.0.jar",
+        "build/frozen-0.2.0-25/wwpg-api-1.0.0-maven.zip",
+        "build/frozen-0.2.0-25/wwpg-api-example-1.0.0-source.zip",
+        "build/frozen-0.2.0-25/wwpg-upstream-api-example-1.0.0-source.zip",
+        "release/0.2.0/evidence/extracted-sdk-25/attempt.json",
+        "release/0.2.0/evidence/extracted-sdk-25/compile-sdk-evidence.gradle",
+        "release/0.2.0/evidence/extracted-sdk-25/example-build-proof.json",
+        "release/0.2.0/evidence/extracted-sdk-25/example-build.log",
+        "release/0.2.0/evidence/extracted-sdk-25/example-dependencies.json",
+        "release/0.2.0/evidence/extracted-sdk-25/example-expected.json",
+        "release/0.2.0/evidence/extracted-sdk-25/general-example/build/libs/wwpg-api-example-1.0.0.jar",
+        "release/0.2.0/evidence/extracted-sdk-25/upstream-example/build/libs/wwpg-upstream-api-example-1.0.0.jar",
+        "release/0.2.0/evidence/extracted-sdk-25/upstream_example-build-proof.json",
+        "release/0.2.0/evidence/extracted-sdk-25/upstream_example-build.log",
+        "release/0.2.0/evidence/extracted-sdk-25/upstream_example-dependencies.json",
+        "release/0.2.0/evidence/extracted-sdk-25/upstream_example-expected.json"
+      ],
+      "summary": "Both exact downloadable example source ZIPs and the Maven ZIP were extracted and independently compiled; outputs match their historical frozen example artifacts. The source/API/example hashes and full original logs/dependency records are preserved. This candidate was superseded before full runtime/client acceptance, so these SDK successes do not certify the final release."
     }
   ],
   "members": [
@@ -1140,6 +1747,12 @@
       "source_path": "build/api-checkpoint-build.log",
       "size": 9122,
       "sha256": "1d3647679d364d821b8b71695a45e0bb202cbc7372f164a78ed35b107fb1508a"
+    },
+    {
+      "path": "build/api-client-acceptance-27.log",
+      "source_path": "build/api-client-acceptance-27.log",
+      "size": 1432,
+      "sha256": "8ace17c79e8bbd80020ca76ebce93b909421819315358ca4c08db0c9e815b781"
     },
     {
       "path": "build/api-complete-NATIVE-11.log",
@@ -1502,10 +2115,88 @@
       "sha256": "8281498a67dbf9d3e013613172cabf2e1161980600a9542264924f08137abc85"
     },
     {
+      "path": "build/api27-actual-schematic-inventories.json",
+      "source_path": "build/api27-actual-schematic-inventories.json",
+      "size": 1956,
+      "sha256": "4f63cb9bc28d7fa3e3932ff5be9e65bb239801855df22e07a2c0dab92ca81cc5"
+    },
+    {
+      "path": "build/api27-api-cold-BASE-NATIVE-1.log",
+      "source_path": "build/api27-api-cold-BASE-NATIVE-1.log",
+      "size": 22557,
+      "sha256": "b10c5a91b4ab5bf16b08ee524fb3434f99c5a97a272f552434af1a3857054145"
+    },
+    {
+      "path": "build/api27-api-cold-BASE-NATIVE-2.log",
+      "source_path": "build/api27-api-cold-BASE-NATIVE-2.log",
+      "size": 18286,
+      "sha256": "2f9415bef8072bf317fca71b807a4de5e2c0d1ace467c44a45505a82c6e3a847"
+    },
+    {
+      "path": "build/api27-api-cold-BASE-NATIVE-3.log",
+      "source_path": "build/api27-api-cold-BASE-NATIVE-3.log",
+      "size": 18352,
+      "sha256": "7839327c2b75b5f8abbd7d9a3debc1db9ca7acad65dff8a512b884d0ee1b197b"
+    },
+    {
+      "path": "build/api27-api-multiplayer-BASE-NATIVE-prepare.log",
+      "source_path": "build/api27-api-multiplayer-BASE-NATIVE-prepare.log",
+      "size": 1301,
+      "sha256": "9e017094be001bd5034bbd5f970d17cf8c2d0feda697dae52f2a902588ec5daa"
+    },
+    {
+      "path": "build/api27-workshop-BASE-setup.log",
+      "source_path": "build/api27-workshop-BASE-setup.log",
+      "size": 22522,
+      "sha256": "2d3576dc947cdec90e12a4a32d3977bb2ddf2cd9de4c92ea8946398b048f750c"
+    },
+    {
+      "path": "build/api27-workshop-BASE-source-1.log",
+      "source_path": "build/api27-workshop-BASE-source-1.log",
+      "size": 18274,
+      "sha256": "a5400a11d0b3ff6b4b5bdacc3cbc9b429f0f46328bea616521e0a21ce9fcf766"
+    },
+    {
+      "path": "build/api27-workshop-BASE-source-2.log",
+      "source_path": "build/api27-workshop-BASE-source-2.log",
+      "size": 18284,
+      "sha256": "59039c6370844bc001ad6e5f0e4b846b344dcc7e4f301fdcda220c7cc9371a46"
+    },
+    {
+      "path": "build/api27-workshop-BASE-source-3.log",
+      "source_path": "build/api27-workshop-BASE-source-3.log",
+      "size": 18286,
+      "sha256": "df43ea201567128de52c6a713702c271924f15dba686f2115abf95e2e850bb5e"
+    },
+    {
+      "path": "build/distributions/api27-api-workshop-BASE.zip",
+      "source_path": "build/distributions/api27-api-workshop-BASE.zip",
+      "size": 322150,
+      "sha256": "0d805f690f9a2b02d968df918d1d277f1e0ba8d64b0d41a12a3d17b4ccf1ca1a"
+    },
+    {
       "path": "build/frozen-0.2.0-22/wwpg-0.2.0.jar",
       "source_path": "build/frozen-0.2.0-22/wwpg-0.2.0.jar",
       "size": 3521600,
       "sha256": "be92893b73855c9884ac1c57f65a295936af02d73d8ab5b5a66b9598703511f9"
+    },
+    {
+      "path": "build/frozen-0.2.0-22/wwpg-api-1.0.0-maven.zip",
+      "source_path": "build/frozen-0.2.0-22/wwpg-api-1.0.0-maven.zip",
+      "size": 404908,
+      "sha256": "0e55db86b2a8bed9079a22735ebaa2eed9942de2ce7672ba03672e5e49995569"
+    },
+    {
+      "path": "build/frozen-0.2.0-22/wwpg-api-example-1.0.0-source.zip",
+      "source_path": "build/frozen-0.2.0-22/wwpg-api-example-1.0.0-source.zip",
+      "size": 78509,
+      "sha256": "4ee312eddd2f443bc1e6fe84d3acc2e22759a0c4013b1efbdf1ea9a07495dc7e"
+    },
+    {
+      "path": "build/frozen-0.2.0-22/wwpg-upstream-api-example-1.0.0-source.zip",
+      "source_path": "build/frozen-0.2.0-22/wwpg-upstream-api-example-1.0.0-source.zip",
+      "size": 69907,
+      "sha256": "3d9aabce079397b1d655d3ffb15745a9caea4185bde22a3024b841cac290653a"
     },
     {
       "path": "build/frozen-0.2.0-23/wwpg-0.2.0.jar",
@@ -1526,10 +2217,118 @@
       "sha256": "9740d5754efa17e098c117fa09b54b58552ef34d3a38413a3fb1642c7e584ceb"
     },
     {
+      "path": "build/frozen-0.2.0-25/wwpg-api-1.0.0-maven.zip",
+      "source_path": "build/frozen-0.2.0-25/wwpg-api-1.0.0-maven.zip",
+      "size": 404908,
+      "sha256": "0e55db86b2a8bed9079a22735ebaa2eed9942de2ce7672ba03672e5e49995569"
+    },
+    {
+      "path": "build/frozen-0.2.0-25/wwpg-api-example-1.0.0-source.zip",
+      "source_path": "build/frozen-0.2.0-25/wwpg-api-example-1.0.0-source.zip",
+      "size": 78509,
+      "sha256": "4ee312eddd2f443bc1e6fe84d3acc2e22759a0c4013b1efbdf1ea9a07495dc7e"
+    },
+    {
       "path": "build/frozen-0.2.0-25/wwpg-api-example-1.0.0.jar",
       "source_path": "build/frozen-0.2.0-25/wwpg-api-example-1.0.0.jar",
       "size": 50820,
       "sha256": "09a0ce693fa01a83793ee601707b460826f2bdf7e6bf0979df2c83f41f8dfee1"
+    },
+    {
+      "path": "build/frozen-0.2.0-25/wwpg-upstream-api-example-1.0.0-source.zip",
+      "source_path": "build/frozen-0.2.0-25/wwpg-upstream-api-example-1.0.0-source.zip",
+      "size": 69907,
+      "sha256": "3d9aabce079397b1d655d3ffb15745a9caea4185bde22a3024b841cac290653a"
+    },
+    {
+      "path": "build/frozen-0.2.0-27/api-contract.json",
+      "source_path": "build/frozen-0.2.0-27/api-contract.json",
+      "size": 63389,
+      "sha256": "0e10291667726185f608f3b66790e210880ad07729e2437ede6acca7a2c70710"
+    },
+    {
+      "path": "build/frozen-0.2.0-27/artifact-lock.json",
+      "source_path": "build/frozen-0.2.0-27/artifact-lock.json",
+      "size": 1978,
+      "sha256": "e53174cf31735ffe5a1a4cd9158a858f731a24f028a918cdd880f58e009c9572"
+    },
+    {
+      "path": "build/frozen-0.2.0-27/cee-api-contract.json",
+      "source_path": "build/frozen-0.2.0-27/cee-api-contract.json",
+      "size": 11800,
+      "sha256": "2df8778c18472e93a7aa738587f4d22b8b15a606db8e878871c7200f92e80260"
+    },
+    {
+      "path": "build/frozen-0.2.0-27/wwpg-0.2.0.jar",
+      "source_path": "build/frozen-0.2.0-27/wwpg-0.2.0.jar",
+      "size": 3530089,
+      "sha256": "747c8173317a713721f676d824799e0cb254129f751c6bb939bd500ad1553712"
+    },
+    {
+      "path": "build/frozen-0.2.0-27/wwpg-api-1.0.0-javadoc.jar",
+      "source_path": "build/frozen-0.2.0-27/wwpg-api-1.0.0-javadoc.jar",
+      "size": 225770,
+      "sha256": "cd9ea6a40c8a97fb54e008ad8e052a012b6dff6b5cb5869a5a760ebfd1454c56"
+    },
+    {
+      "path": "build/frozen-0.2.0-27/wwpg-api-1.0.0-maven.zip",
+      "source_path": "build/frozen-0.2.0-27/wwpg-api-1.0.0-maven.zip",
+      "size": 404908,
+      "sha256": "0e55db86b2a8bed9079a22735ebaa2eed9942de2ce7672ba03672e5e49995569"
+    },
+    {
+      "path": "build/frozen-0.2.0-27/wwpg-api-1.0.0-sources.jar",
+      "source_path": "build/frozen-0.2.0-27/wwpg-api-1.0.0-sources.jar",
+      "size": 21834,
+      "sha256": "a88fdf9c52fe7a671ca908d0ecae558b083e41608d733dea986aecdce71a91f2"
+    },
+    {
+      "path": "build/frozen-0.2.0-27/wwpg-api-1.0.0.jar",
+      "source_path": "build/frozen-0.2.0-27/wwpg-api-1.0.0.jar",
+      "size": 50130,
+      "sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21"
+    },
+    {
+      "path": "build/frozen-0.2.0-27/wwpg-api-example-1.0.0-source.zip",
+      "source_path": "build/frozen-0.2.0-27/wwpg-api-example-1.0.0-source.zip",
+      "size": 79297,
+      "sha256": "9078929fca1fd8aa8b2364bff1289e97e69dd7f5b3edb1eae237010ed5fcfcae"
+    },
+    {
+      "path": "build/frozen-0.2.0-27/wwpg-api-example-1.0.0.jar",
+      "source_path": "build/frozen-0.2.0-27/wwpg-api-example-1.0.0.jar",
+      "size": 52085,
+      "sha256": "90a52b8ca6d65860043e816d4d101dc3e014dd7c947133e48a0dfe7a49490cd4"
+    },
+    {
+      "path": "build/frozen-0.2.0-27/wwpg-cee-api-1.0.0-javadoc.jar",
+      "source_path": "build/frozen-0.2.0-27/wwpg-cee-api-1.0.0-javadoc.jar",
+      "size": 107297,
+      "sha256": "51fb877a34f2901e5dea15b0f400122a2e076e08abb34c88929f15ae7f5c8927"
+    },
+    {
+      "path": "build/frozen-0.2.0-27/wwpg-cee-api-1.0.0-sources.jar",
+      "source_path": "build/frozen-0.2.0-27/wwpg-cee-api-1.0.0-sources.jar",
+      "size": 6305,
+      "sha256": "5cf223b0232750623b0901458b35ac2875de62a45a202c0af1839208d30b840a"
+    },
+    {
+      "path": "build/frozen-0.2.0-27/wwpg-cee-api-1.0.0.jar",
+      "source_path": "build/frozen-0.2.0-27/wwpg-cee-api-1.0.0.jar",
+      "size": 8788,
+      "sha256": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38"
+    },
+    {
+      "path": "build/frozen-0.2.0-27/wwpg-upstream-api-example-1.0.0-source.zip",
+      "source_path": "build/frozen-0.2.0-27/wwpg-upstream-api-example-1.0.0-source.zip",
+      "size": 69907,
+      "sha256": "3d9aabce079397b1d655d3ffb15745a9caea4185bde22a3024b841cac290653a"
+    },
+    {
+      "path": "build/frozen-0.2.0-27/wwpg-upstream-api-example-1.0.0.jar",
+      "source_path": "build/frozen-0.2.0-27/wwpg-upstream-api-example-1.0.0.jar",
+      "size": 45638,
+      "sha256": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095"
     },
     {
       "path": "build/frozen-acceptance-helper-25/source/tools/client_acceptance/api_client.gradle",
@@ -1554,6 +2353,12 @@
       "source_path": "build/frozen-acceptance-helper-25/wwpg-api-client-acceptance.jar",
       "size": 35513,
       "sha256": "1f2c0c649e62e21db3be64200f19af0631f695115f34e0f491de95c011781967"
+    },
+    {
+      "path": "build/inspect_api27_inventories.py",
+      "source_path": "build/inspect_api27_inventories.py",
+      "size": 1508,
+      "sha256": "3619f7093f48206fe357c78b1b9d5eda732272a473a4c4ba455466792dfe10d7"
     },
     {
       "path": "build/item-dispatch-negative-26.json",
@@ -3320,6 +4125,288 @@
       "sha256": "b66df1b5d54aec2cedac9862129ef13b9f63f80fe67aef00815f72f98ea40caa"
     },
     {
+      "path": "build/preliminary-ci-38136995579-stage/README.md",
+      "source_path": "build/preliminary-ci-38136995579-stage/README.md",
+      "size": 416,
+      "sha256": "22bf2b2dc26aca34571a576d6a06f342e03bf50dcfe037f8ceebc8f097c2f12d"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/jobs-completed.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/jobs-completed.json",
+      "size": 83330,
+      "sha256": "7a5cb2df5e4ed1fc2637275030170baf3dbcda50757c502e86ed3d15cb3d6869"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/jobs-snapshot-20261011T123008Z.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/jobs-snapshot-20261011T123008Z.json",
+      "size": 82317,
+      "sha256": "3cf171549aaf73ee6cea882b5085c39557e8d364d934519dd4b300d18adfbcd0"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/jobs-snapshot-20261011T123114Z.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/jobs-snapshot-20261011T123114Z.json",
+      "size": 82317,
+      "sha256": "3cf171549aaf73ee6cea882b5085c39557e8d364d934519dd4b300d18adfbcd0"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/jobs-snapshot-20261011T123306Z.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/jobs-snapshot-20261011T123306Z.json",
+      "size": 82317,
+      "sha256": "3cf171549aaf73ee6cea882b5085c39557e8d364d934519dd4b300d18adfbcd0"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/jobs-snapshot-20261011T123632Z.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/jobs-snapshot-20261011T123632Z.json",
+      "size": 82360,
+      "sha256": "c34e507ddf9e5f942a2e82057168657157411bb336b000a1fb97b89f2780d6b8"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/run-completed.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/run-completed.json",
+      "size": 14700,
+      "sha256": "b54a3cd9bc319557a858358032330addd4b2807bb5dd20c7963999c5810061ec"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/run-snapshot-1.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/run-snapshot-1.json",
+      "size": 76724,
+      "sha256": "2cf3eb7517461ca138881cadc49bf637e6eed37d3c70eeef0b9e893c17e20abc"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/run-snapshot-20261011T123008Z.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/run-snapshot-20261011T123008Z.json",
+      "size": 14697,
+      "sha256": "13337e77cc81c38e2eb725c976fc72e9c8702c1cda85b61265e00b9762e0b7ac"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/run-snapshot-20261011T123114Z.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/run-snapshot-20261011T123114Z.json",
+      "size": 14697,
+      "sha256": "13337e77cc81c38e2eb725c976fc72e9c8702c1cda85b61265e00b9762e0b7ac"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/run-snapshot-20261011T123306Z.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/run-snapshot-20261011T123306Z.json",
+      "size": 14697,
+      "sha256": "13337e77cc81c38e2eb725c976fc72e9c8702c1cda85b61265e00b9762e0b7ac"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/run-snapshot-20261011T123632Z.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/run-snapshot-20261011T123632Z.json",
+      "size": 14697,
+      "sha256": "13337e77cc81c38e2eb725c976fc72e9c8702c1cda85b61265e00b9762e0b7ac"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/stage-completed.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/stage-completed.json",
+      "size": 4041,
+      "sha256": "4b5dc6cd02f368b6a6a32e9994fb82bb1f034b7d8a98772a63f20e7ed43f6a34"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/stage-snapshot-20261011T123114Z.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/stage-snapshot-20261011T123114Z.json",
+      "size": 1592,
+      "sha256": "1a8ef0a967c15a0d612d3062860ffee669ccd1379be48307645270e83bd40df6"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/stage-snapshot-20261011T123306Z.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/stage-snapshot-20261011T123306Z.json",
+      "size": 1592,
+      "sha256": "51a4623bc63b1349f4462c6808a68b788806bc6946b279aad9ae712716fc2d28"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/stage-snapshot-20261011T123632Z.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/stage-snapshot-20261011T123632Z.json",
+      "size": 1592,
+      "sha256": "0f0b530b9cd847072e4a289b4d59c0b2b52cb5acf4a525698b5261687fb29f9a"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/ubuntu-JAVA-BASE-job.log",
+      "source_path": "build/preliminary-ci-38136995579-stage/ubuntu-JAVA-BASE-job.log",
+      "size": 1760914,
+      "sha256": "bfa64b2a72a131a3b4f45f3ebb6bfac259c2668f20cfccfce8ac18339229e78b"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/ubuntu-JAVA-PINOUT-job.log",
+      "source_path": "build/preliminary-ci-38136995579-stage/ubuntu-JAVA-PINOUT-job.log",
+      "size": 2006348,
+      "sha256": "53ad67820b2580cc433a068fdbccb29e23fdd5b89e74e024f3079d5d10cc8b3f"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/ubuntu-NATIVE-BASE-job.log",
+      "source_path": "build/preliminary-ci-38136995579-stage/ubuntu-NATIVE-BASE-job.log",
+      "size": 1782063,
+      "sha256": "c59499560a16af550550c8967467d5691fc3ea679fc82bb72f29836c3106fe5b"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/ubuntu-NATIVE-PINOUT-job.log",
+      "source_path": "build/preliminary-ci-38136995579-stage/ubuntu-NATIVE-PINOUT-job.log",
+      "size": 2029003,
+      "sha256": "45bd61a914f4d3529f3f2522b09b532f07c7d0298adcd5d222c5e9e3914d8ae9"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-job.log",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-job.log",
+      "size": 1769469,
+      "sha256": "baa13fac395521de902f2aa4c48509b42b9b39fe39139d5969fb07e623dea45d"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/build/ci-source.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/build/ci-source.json",
+      "size": 211,
+      "sha256": "76ec4e7915bd816c0f2100e690c96d0fd150194732796d5d3601de0c42513cf0"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/compatibility-cee-accumulator.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/compatibility-cee-accumulator.json",
+      "size": 10628,
+      "sha256": "4b41eee0965692eeb2ebd5b666ae86337478593155746f3838e9d3e94c4a4b4f"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/compatibility-cee-diode-clamped-high-bias.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/compatibility-cee-diode-clamped-high-bias.json",
+      "size": 4026,
+      "sha256": "db29f377b5e55619a1f8eb2a19716b9499b97f1ac18d19194bd68bd0bb4a5b38"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/compatibility-cee-diode-reactive.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/compatibility-cee-diode-reactive.json",
+      "size": 16047,
+      "sha256": "0b0ed509c2d6e2987df11921b22553378d002c661fa30c7f8f600144a46556aa"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/compatibility-cee-fuse.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/compatibility-cee-fuse.json",
+      "size": 7478,
+      "sha256": "4a59287aa560e20b548097985443412a8b405cc9ee25cee2a9f2c5ef725a03f7"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/compatibility-cee-heating.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/compatibility-cee-heating.json",
+      "size": 19652,
+      "sha256": "0ae5ed9b77e774d0b106bc3482fe1a90264c5daa3f2c32bd3611015cc80ee7af"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/compatibility-pg-acid-battery.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/compatibility-pg-acid-battery.json",
+      "size": 10559,
+      "sha256": "50799b6d7eeae9d96fcef3ac4254e46042f8a529e74a2836c6fc5178b5a41a4d"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/compatibility-pg-diode-reactive-board.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/compatibility-pg-diode-reactive-board.json",
+      "size": 16213,
+      "sha256": "15d71e8a2ec10da859b2751f1e1b8668005c9fbea383fae1bc5993b4ac0d927a"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/compatibility-pg-potato-battery.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/compatibility-pg-potato-battery.json",
+      "size": 10040,
+      "sha256": "766775740b53bef6c37f0ce68050bb724deacdb03ce4a2c60253c312218bea09"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/logs/2026-10-11-1.log.gz",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/logs/2026-10-11-1.log.gz",
+      "size": 4338,
+      "sha256": "521e110d36c29944f36797a4cb6e4ce3f2f0ab8812d57e7832fe60a72de03d96"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/logs/debug-1.log.gz",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/logs/debug-1.log.gz",
+      "size": 4338,
+      "sha256": "521e110d36c29944f36797a4cb6e4ce3f2f0ab8812d57e7832fe60a72de03d96"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/logs/debug.log",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/logs/debug.log",
+      "size": 17306,
+      "sha256": "0baa7e3c8c9653749d70e33bac31df74ef6927c20000d097510fbc54bdab4544"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/logs/latest.log",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/logs/latest.log",
+      "size": 17306,
+      "sha256": "0baa7e3c8c9653749d70e33bac31df74ef6927c20000d097510fbc54bdab4544"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/native-reference-cee-accumulator.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/native-reference-cee-accumulator.json",
+      "size": 10638,
+      "sha256": "69226493f6bf428e4db6f8b64da1412f210fa0eb7b92a19f465bd5f18741e005"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/native-reference-cee-diode-clamped-high-bias.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/native-reference-cee-diode-clamped-high-bias.json",
+      "size": 4066,
+      "sha256": "2f7f064319b8247a81a3b261be617aa93acd910eca15497d43582a8fbaa03505"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/native-reference-cee-diode-reactive.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/native-reference-cee-diode-reactive.json",
+      "size": 16016,
+      "sha256": "1529ad9472243eaf921f30622052623ec34287ac9e38400497560641a0646842"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/native-reference-cee-fuse.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/native-reference-cee-fuse.json",
+      "size": 7477,
+      "sha256": "d3a37e6901dabce9c2af9241aefac9cf680c9488c883f9eb19f77a043b10b5ca"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/native-reference-cee-heating.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/native-reference-cee-heating.json",
+      "size": 19654,
+      "sha256": "547f42ae335d2a9e1cc84a61548fc4ddb2ccf176e62c69f2689b1ed72ea59cba"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/native-reference-pg-acid-battery.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/native-reference-pg-acid-battery.json",
+      "size": 10556,
+      "sha256": "f9dc264327be69e2debe53fb1461dc436da587e8e00039621d58e77f71cc32b7"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/native-reference-pg-diode-reactive-board.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/native-reference-pg-diode-reactive-board.json",
+      "size": 16203,
+      "sha256": "d93dd5cec0de360a22935fd7091b0e5540e843d6605e4474b8e4913d4cb61809"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/native-reference-pg-potato-battery.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/native-reference-pg-potato-battery.json",
+      "size": 10038,
+      "sha256": "d4f56187e724b989582e8ae527d47fbed9f750fe903f5b558eb9fee5cc673867"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/reference-packaged-2026-10-11T12-06-21.995865100Z.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/reference-packaged-2026-10-11T12-06-21.995865100Z.json",
+      "size": 398,
+      "sha256": "75875603cd7ab7fc656ecf3a92921f6d0a95add113252a51975cc60c2d330ffc"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/reference-packaged-2026-10-11T12-06-49.991562800Z.json",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-BASE-reference-subset/run/reference/reference-packaged-2026-10-11T12-06-49.991562800Z.json",
+      "size": 290,
+      "sha256": "8d5676fdf739d8baa4e9df6a13f1917d27e3ee89838e2ade3b77c15a5020ee76"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-JAVA-PINOUT-job.log",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-JAVA-PINOUT-job.log",
+      "size": 2015079,
+      "sha256": "296249cf5050211eb2dd322d3c1bc82602a6654a0a0e50d371c9e88109db7056"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-NATIVE-BASE-job.log",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-NATIVE-BASE-job.log",
+      "size": 1797296,
+      "sha256": "ed8df2df73f2f628e5f2d55884e23bd71edf7c5b980b1b080f62e9d56aa59ac2"
+    },
+    {
+      "path": "build/preliminary-ci-38136995579-stage/windows-NATIVE-PINOUT-job.log",
+      "source_path": "build/preliminary-ci-38136995579-stage/windows-NATIVE-PINOUT-job.log",
+      "size": 2031614,
+      "sha256": "c261ffe06d666e3ef1c613705e5fd1336236c4a7a9bacfd0cc229f4de3e5796a"
+    },
+    {
       "path": "build/wwpg-api-example-item-dispatch-corrected-26.jar",
       "source_path": "build/wwpg-api-example-item-dispatch-corrected-26.jar",
       "size": 52085,
@@ -3330,6 +4417,150 @@
       "source_path": "build/wwpg-api-example-item-dispatch-negative-26.jar",
       "size": 51835,
       "sha256": "eb2daaab8d020044ae833ad9f91583c6de1b0f8302194428b04aeb4c6e1adaf5"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-22/attempt.json",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-22/attempt.json",
+      "size": 1150,
+      "sha256": "714374344f098f68c332d607c94fb631f3c3c268aef268859dcbc48c6c07c20a"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-22/compile-sdk-evidence.gradle",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-22/compile-sdk-evidence.gradle",
+      "size": 2002,
+      "sha256": "459cbfb10fd1e48b8d951174580b60af32e617b87ed64921c483a5ee5a6a0693"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-22/example-build-proof.json",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-22/example-build-proof.json",
+      "size": 2323,
+      "sha256": "7d02ca1f45b332858a39ac4872ecd266937987b3c90d75ffdb58cf5427b88ded"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-22/example-build.log",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-22/example-build.log",
+      "size": 2586,
+      "sha256": "b01b201ae02f3f5f387c887d40773483f57fcff6d4e64302d77eebfd834bbaee"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-22/example-dependencies.json",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-22/example-dependencies.json",
+      "size": 25315,
+      "sha256": "6e347cb33f93b2315fd42cae5c8b35eb183b505311ec342276e5bbf88e3d24b7"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-22/example-expected.json",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-22/example-expected.json",
+      "size": 80,
+      "sha256": "413ec9c6f93bbfa5b521c2e62a548febf8929957456bbd1cbe5bbd3d52f8a06d"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-22/general-example/build/libs/wwpg-api-example-1.0.0.jar",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-22/general-example/build/libs/wwpg-api-example-1.0.0.jar",
+      "size": 50820,
+      "sha256": "09a0ce693fa01a83793ee601707b460826f2bdf7e6bf0979df2c83f41f8dfee1"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-22/upstream-example/build/libs/wwpg-upstream-api-example-1.0.0.jar",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-22/upstream-example/build/libs/wwpg-upstream-api-example-1.0.0.jar",
+      "size": 45638,
+      "sha256": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-22/upstream_example-build-proof.json",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-22/upstream_example-build-proof.json",
+      "size": 2464,
+      "sha256": "0cea70e322025964e17e60e559c8d9f997270f681f89d35538f2b295d7543fe9"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-22/upstream_example-build.log",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-22/upstream_example-build.log",
+      "size": 2587,
+      "sha256": "0c9bc91c1381d0c8da2636b8e0fb6983e77398307b88fefc54ee473e728b323d"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-22/upstream_example-dependencies.json",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-22/upstream_example-dependencies.json",
+      "size": 27914,
+      "sha256": "7c621bd8402bda7388e38a83d1e9e93cdb25aadca94ace372c01de54164695e0"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-22/upstream_example-expected.json",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-22/upstream_example-expected.json",
+      "size": 161,
+      "sha256": "a19153672e4fb9e112493af6a22387e01b3b6e310a5654624c305ff7b439c7b5"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-25/attempt.json",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-25/attempt.json",
+      "size": 1150,
+      "sha256": "e2a985dc388eddd64cb66e449118cb695c21c7ba35c1332723440c24b34ed6c3"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-25/compile-sdk-evidence.gradle",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-25/compile-sdk-evidence.gradle",
+      "size": 2002,
+      "sha256": "459cbfb10fd1e48b8d951174580b60af32e617b87ed64921c483a5ee5a6a0693"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-25/example-build-proof.json",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-25/example-build-proof.json",
+      "size": 2323,
+      "sha256": "dab3eb91f16e87af5f705b82a9f732b00e31dc4122ab3c56c9116e88b43c2267"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-25/example-build.log",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-25/example-build.log",
+      "size": 2586,
+      "sha256": "50350ce66e958fc1577c82fac98aef5d026d6013146c3add2749accb06c48ecd"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-25/example-dependencies.json",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-25/example-dependencies.json",
+      "size": 25315,
+      "sha256": "e6e3f6d227d78e07e84c216a4a2d6530c2016abf2d316d2c24d90356394812b9"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-25/example-expected.json",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-25/example-expected.json",
+      "size": 80,
+      "sha256": "413ec9c6f93bbfa5b521c2e62a548febf8929957456bbd1cbe5bbd3d52f8a06d"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-25/general-example/build/libs/wwpg-api-example-1.0.0.jar",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-25/general-example/build/libs/wwpg-api-example-1.0.0.jar",
+      "size": 50820,
+      "sha256": "09a0ce693fa01a83793ee601707b460826f2bdf7e6bf0979df2c83f41f8dfee1"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-25/upstream-example/build/libs/wwpg-upstream-api-example-1.0.0.jar",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-25/upstream-example/build/libs/wwpg-upstream-api-example-1.0.0.jar",
+      "size": 45638,
+      "sha256": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-25/upstream_example-build-proof.json",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-25/upstream_example-build-proof.json",
+      "size": 2464,
+      "sha256": "640da7b079b4b18ea5ec0c7909bdd8dc8f920f1877dac1983cfe756625c6b096"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-25/upstream_example-build.log",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-25/upstream_example-build.log",
+      "size": 2587,
+      "sha256": "5a7326009cd7bbc4d2a466d55102774f6223094528dcfba6b2389cfc0fed91f1"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-25/upstream_example-dependencies.json",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-25/upstream_example-dependencies.json",
+      "size": 27914,
+      "sha256": "d4bdd05a6184cdadf49dbf074bbbd44c5d647e0f6ef4935bf9afbe205fbf4c76"
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-25/upstream_example-expected.json",
+      "source_path": "release/0.2.0/evidence/extracted-sdk-25/upstream_example-expected.json",
+      "size": 161,
+      "sha256": "a19153672e4fb9e112493af6a22387e01b3b6e310a5654624c305ff7b439c7b5"
     },
     {
       "path": "run/api-complete-NATIVE-11/logs/debug.log",
@@ -4422,6 +5653,582 @@
       "source_path": "run/api26-item-dispatch-negative/packaged-2026-10-11T12-19-05.627229300Z.json",
       "size": 691,
       "sha256": "af8ec450c7e9aadbf5f2d88b675a9ec84ccce8ad74f170208163d4b3487a2262"
+    },
+    {
+      "path": "run/api27-api-cold-BASE-NATIVE/api-workshop-stations.json",
+      "source_path": "run/api27-api-cold-BASE-NATIVE/api-workshop-stations.json",
+      "size": 19571,
+      "sha256": "5f9e564ffa8e6f6534d4bfad4dde72ef51efde75731137d505a64cdca2dcfb56"
+    },
+    {
+      "path": "run/api27-api-cold-BASE-NATIVE/extracted-yard.json",
+      "source_path": "run/api27-api-cold-BASE-NATIVE/extracted-yard.json",
+      "size": 511,
+      "sha256": "1027e635a811e5f47ccbb9a1cefee3b0db913563280f0bea40bd8ecc7b71a354"
+    },
+    {
+      "path": "run/api27-api-cold-BASE-NATIVE/logs/2026-10-11-1.log.gz",
+      "source_path": "run/api27-api-cold-BASE-NATIVE/logs/2026-10-11-1.log.gz",
+      "size": 4281,
+      "sha256": "2f965c424f5cf8ae4a7e648403f1f10c486bec28a0391b3be858dbef5f6386a8"
+    },
+    {
+      "path": "run/api27-api-cold-BASE-NATIVE/logs/2026-10-11-2.log.gz",
+      "source_path": "run/api27-api-cold-BASE-NATIVE/logs/2026-10-11-2.log.gz",
+      "size": 5001,
+      "sha256": "6d3b7ed694cd577060399502694f7eee2e74fb17795db3dbfc6f836f4c7d19dd"
+    },
+    {
+      "path": "run/api27-api-cold-BASE-NATIVE/logs/debug-1.log.gz",
+      "source_path": "run/api27-api-cold-BASE-NATIVE/logs/debug-1.log.gz",
+      "size": 4281,
+      "sha256": "2f965c424f5cf8ae4a7e648403f1f10c486bec28a0391b3be858dbef5f6386a8"
+    },
+    {
+      "path": "run/api27-api-cold-BASE-NATIVE/logs/debug-2.log.gz",
+      "source_path": "run/api27-api-cold-BASE-NATIVE/logs/debug-2.log.gz",
+      "size": 5001,
+      "sha256": "6d3b7ed694cd577060399502694f7eee2e74fb17795db3dbfc6f836f4c7d19dd"
+    },
+    {
+      "path": "run/api27-api-cold-BASE-NATIVE/logs/debug.log",
+      "source_path": "run/api27-api-cold-BASE-NATIVE/logs/debug.log",
+      "size": 20613,
+      "sha256": "71835c2fa9d8a702c384030a4a8bf964194e7366123fa96369700c10cf2b74a6"
+    },
+    {
+      "path": "run/api27-api-cold-BASE-NATIVE/logs/latest.log",
+      "source_path": "run/api27-api-cold-BASE-NATIVE/logs/latest.log",
+      "size": 20613,
+      "sha256": "71835c2fa9d8a702c384030a4a8bf964194e7366123fa96369700c10cf2b74a6"
+    },
+    {
+      "path": "run/api27-api-cold-BASE-NATIVE/packaged-2026-10-11T12-33-36.097985300Z.json",
+      "source_path": "run/api27-api-cold-BASE-NATIVE/packaged-2026-10-11T12-33-36.097985300Z.json",
+      "size": 774,
+      "sha256": "e7157d1aa291fbcf74ad05122eb04669c51c8b23538aa913cf602d66cc9a7cfa"
+    },
+    {
+      "path": "run/api27-api-cold-BASE-NATIVE/packaged-2026-10-11T12-34-00.127731800Z.json",
+      "source_path": "run/api27-api-cold-BASE-NATIVE/packaged-2026-10-11T12-34-00.127731800Z.json",
+      "size": 774,
+      "sha256": "979f913f4034b5829ba104ba98377bcec0fa7cd2e4fc24e4c0d6b4f60174c22e"
+    },
+    {
+      "path": "run/api27-api-cold-BASE-NATIVE/packaged-2026-10-11T12-34-25.166468900Z.json",
+      "source_path": "run/api27-api-cold-BASE-NATIVE/packaged-2026-10-11T12-34-25.166468900Z.json",
+      "size": 774,
+      "sha256": "3ad915d34b47589891dde79b3c9e63a4ac080b9fe0299ec69ac460654e28d27c"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/api_multiplayer.gradle",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/api_multiplayer.gradle",
+      "size": 10501,
+      "sha256": "86b75bfee4e3f29d71be70436d3cd58566b4b33020457461d9b0d149eb8f6bdd"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/resources/META-INF/neoforge.mods.toml",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/resources/META-INF/neoforge.mods.toml",
+      "size": 354,
+      "sha256": "d493caee15dfd18d8242f2c03748fde524fd9f0774f12813c80e73f4eef25ad6"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ApiWorkshopClientAcceptance.java",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ApiWorkshopClientAcceptance.java",
+      "size": 23739,
+      "sha256": "92cd3d9920ed6e56564a51aab1d85dd818ab4d28c778b5ee3d5be1ce6025df88"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ExpandedClientAcceptance.java",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/acceptance-helper/inputs/tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ExpandedClientAcceptance.java",
+      "size": 34837,
+      "sha256": "93598b6e21d46b850ef75336485e17e1e268c08e8a77347294d57141787e90b3"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/acceptance-helper/wwpg-api-client-acceptance.jar",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/acceptance-helper/wwpg-api-client-acceptance.jar",
+      "size": 36707,
+      "sha256": "954cc94b0f8b5fa8702a8c3c1d28ea51baac2b29a32983747fb9c4a3216414dc"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/api-multiplayer-result.json",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/api-multiplayer-result.json",
+      "size": 1097,
+      "sha256": "da163f5e3bfc450763bf93dfb8ebe64f927bad7a82812505da58d6bdbd63de45"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a-threads.txt",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a-threads.txt",
+      "size": 73715,
+      "sha256": "0ef26664457705ef1d16a8e92a70f5d5ee3d5888578f50be4fbbfef5c7be84b0"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a.log",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a.log",
+      "size": 24701,
+      "sha256": "055c53a3b1694f0f357d0c01f21aaa6643b5b594f4a967e439eb7004dde9c55c"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/logs/debug.log",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/logs/debug.log",
+      "size": 29602,
+      "sha256": "7b9e25441a7c727119bb9c0c2a0db7dea9c1fe7df0b8193c681365c2185b7347"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/logs/latest.log",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/logs/latest.log",
+      "size": 29602,
+      "sha256": "7b9e25441a7c727119bb9c0c2a0db7dea9c1fe7df0b8193c681365c2185b7347"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/options.txt",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/options.txt",
+      "size": 4230,
+      "sha256": "ffef343513dc3be2feebed471681586dfaed848ffa50482022ee9230b439d156"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A01.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A01.png",
+      "size": 169626,
+      "sha256": "170d63feaf3edfce1160d6a6b7ffbc20aa49761c99a443725095b02299c6a2b0"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A02.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A02.png",
+      "size": 222535,
+      "sha256": "67da53e5e5c331d897065c8386ff67162ff07ae3b27806b1591596d737f997ab"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A03.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A03.png",
+      "size": 202465,
+      "sha256": "43518cc8aa9ed043309f5d7aa519e7fa76e7b1eaed2d1cebc6361ac27f5e8944"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A04.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A04.png",
+      "size": 220677,
+      "sha256": "dfac9bae170e9c5ce32279877ba0fbfe90a484dc657c580c84e3f88ab83a51b4"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A05.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A05.png",
+      "size": 221578,
+      "sha256": "94f67e4c456c2231add5c4a28c2e71e1ac6c4018c536f1df91b074f54b017815"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A06.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A06.png",
+      "size": 209596,
+      "sha256": "2c979c3965788b38ed7acb8067c79a807c672db073a279dee872ab7d8643e3f9"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A07.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A07.png",
+      "size": 199766,
+      "sha256": "fa10bad4024f8df69d17fd264397bb04faadf278307aa2e8341c1d077c78cefd"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A08.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A08.png",
+      "size": 194156,
+      "sha256": "986e9a2986ea9ad38b5dff909a63cc0ebccbb9b71cdcdfe6b65204d5a015db04"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A09.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A09.png",
+      "size": 203151,
+      "sha256": "534e08d101cda87506f81c10e7d9cc988b077212dca3e60916464f00886a5c7d"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A10.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A10.png",
+      "size": 131889,
+      "sha256": "d0f9d5dec80fcdbc5a0d2c66038823154e15f6a3d1b77b75cdafcff04c3ae7ab"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A11.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-A11.png",
+      "size": 152990,
+      "sha256": "733fd98483172ee5cbcfd7676b45f2eb5f2561057f9189363ce219ae6463147d"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-board_edit-A.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-board_edit-A.png",
+      "size": 150019,
+      "sha256": "4446ecd3bea21b86b5c2d8e1bea860310ccd5d801662d3ac7268c97838c0660c"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-configure-A.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-configure-A.png",
+      "size": 110195,
+      "sha256": "dc6a7b77f272035971095c0fad7454d9b6d6d7274cda088e0614ec81ba2960ac"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-configure_on-A.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-configure_on-A.png",
+      "size": 115125,
+      "sha256": "5ca41a4fe440cbe9fc81095213adf152a09f4528dfe604fc0611180e110a865f"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-meter-A.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-meter-A.png",
+      "size": 162200,
+      "sha256": "03130d00199c8130b5350658f8b101e5aa7803749c39831d285830a7c3e00b55"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-panel_edit-A.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-panel_edit-A.png",
+      "size": 62059,
+      "sha256": "d19eedc6db99ab27703e9fc8789284f39350bbb769c5f0f67af46761efdbd666"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-wire-A.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-a/screenshots/api-wire-A.png",
+      "size": 182535,
+      "sha256": "37eabe4613166b626c5c1f7623c3594a07296763a03289ffc188f37427671598"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b-threads.txt",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b-threads.txt",
+      "size": 75105,
+      "sha256": "bd83136e0043780790fcc7bb7c5bd5ac4db6aedce5ad782498be7e9e003dc489"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b.log",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b.log",
+      "size": 24387,
+      "sha256": "cd6c3f4e5690f3d7bc8e365dcbd532b4d5209f3c284cf2aeeeb2de69eff9c662"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/logs/debug.log",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/logs/debug.log",
+      "size": 29260,
+      "sha256": "e6a60d4e17fd58635fe47d8a7a4b3a5379581790fc9d94ddcdb42ab1095b29c1"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/logs/latest.log",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/logs/latest.log",
+      "size": 29260,
+      "sha256": "e6a60d4e17fd58635fe47d8a7a4b3a5379581790fc9d94ddcdb42ab1095b29c1"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/options.txt",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/options.txt",
+      "size": 4230,
+      "sha256": "ffef343513dc3be2feebed471681586dfaed848ffa50482022ee9230b439d156"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A01.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A01.png",
+      "size": 224452,
+      "sha256": "d5c85d02def9d1cad3f39bd458f9b361ab2b9c076136ef1bfb3792fa9691d44d"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A02.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A02.png",
+      "size": 230183,
+      "sha256": "70405ed15bf4b47c5d72957d627fc856221552f99d0ed946f63ebb56d3be7d5c"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A03.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A03.png",
+      "size": 220152,
+      "sha256": "0dc19597dd7ce70a0fec51db9cd9bfde60a41bd86c41f40e8a9f2dc31d3299bd"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A04.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A04.png",
+      "size": 199396,
+      "sha256": "121f220567e02da012aa7575492f4d567c2bfbd3addef818d24ea33fa13f2b78"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A05.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A05.png",
+      "size": 218483,
+      "sha256": "75f1f65469678021a0c6ab97345299780e169a4d80f165e6c570aa2161a90b18"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A06.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A06.png",
+      "size": 217377,
+      "sha256": "49b2ae568e9161de4e6eaa6c6173df1214be8b87982abdcb7eb2cf6110ed9361"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A07.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A07.png",
+      "size": 186543,
+      "sha256": "ee54a94c5315b18f1dc38be1253653cd7ab89743a23e7d5dca173f2a92c32c68"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A08.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A08.png",
+      "size": 198814,
+      "sha256": "a8767156d00ab16c59226b0145ee37816d557aac22a7c810ef83162fd89597c6"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A09.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A09.png",
+      "size": 197254,
+      "sha256": "185fb67ca93ecd51321bb4a39926785095c2eb48c9a31e052b421ded5c830421"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A10.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A10.png",
+      "size": 147938,
+      "sha256": "b5ab990130b791e37a5ba155be5416f028605c95aec74b8d617e9bbe36ad9c13"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A11.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-A11.png",
+      "size": 148048,
+      "sha256": "fd6a1f346090b00630c7e414145a390d404242a5879d8a877aafc53cea31b9ac"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-board_edit-B.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-board_edit-B.png",
+      "size": 138641,
+      "sha256": "2e6125c0262e033a0983201348d9e5a617d8b6f08a8ae079516854d29387d4da"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-configure-B.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-configure-B.png",
+      "size": 108764,
+      "sha256": "6ea55c6c5328a0591a280008215b973aa45763697f59cb00e764878f4ac39d73"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-configure_on-B.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-configure_on-B.png",
+      "size": 122188,
+      "sha256": "4a245a153f2da7b0e71bab9aac06ba6534d2b067ce666b38bb7dd636902c11ec"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-meter-B.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-meter-B.png",
+      "size": 118977,
+      "sha256": "4c68dc8071962ce659f9fa1fe5465c7a23647579eac6c314d6aa8792efdc9a86"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-panel_edit-B.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-panel_edit-B.png",
+      "size": 55126,
+      "sha256": "c0ede351ac5d21e8f5e4caacd7bde365abba9bc05d4715a55fe9ec5ec1010af0"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-wire-B.png",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/client-b/screenshots/api-wire-B.png",
+      "size": 191428,
+      "sha256": "a6c01795da431806ccc918f5a1af133fd35f9711d73dce7d83361045e2d43fe1"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/launch.json",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/launch.json",
+      "size": 5912,
+      "sha256": "610b9262104b48f62c0fd740ed9a793063300297cda5f2d13da60056586c2ce9"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/launch/client-a-launch.txt",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/launch/client-a-launch.txt",
+      "size": 20805,
+      "sha256": "0c8cf17dd8263639b43e9f6f3ac79e9c2f82b357dc340eaa1173f943123f2e2c"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/launch/client-a-legacy.txt",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/launch/client-a-legacy.txt",
+      "size": 16473,
+      "sha256": "bf0ee93fba83493d5de07658ba4b4e68921a1fa2ad77b9c14e31f6ea7915d563"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/launch/client-a-program.txt",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/launch/client-a-program.txt",
+      "size": 477,
+      "sha256": "2a1825aaaf1316512cf91b3c3ebd79f0fc7b956f7eaefd0e0e10275c5e087e03"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/launch/client-a-vm.txt",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/launch/client-a-vm.txt",
+      "size": 2114,
+      "sha256": "6d5930b10ba5687a771acfae3964c5eebc817f7b7ae71758a29f1beb3d527589"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/launch/client-b-launch.txt",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/launch/client-b-launch.txt",
+      "size": 20805,
+      "sha256": "cc1e6d174f8f0e0c1db3015c76be1cfeaede0bb25fbcf5d4e952ef0bb2d7d0d0"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/launch/client-b-legacy.txt",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/launch/client-b-legacy.txt",
+      "size": 16473,
+      "sha256": "bf0ee93fba83493d5de07658ba4b4e68921a1fa2ad77b9c14e31f6ea7915d563"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/launch/client-b-program.txt",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/launch/client-b-program.txt",
+      "size": 477,
+      "sha256": "6d016c12370b9acc16d474ccb85aa52176c276d338dc1d8b05c61e289b973d35"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/launch/client-b-vm.txt",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/launch/client-b-vm.txt",
+      "size": 2114,
+      "sha256": "b17dc4d2c18f258fbd8e66c9a0c5555b4ccc7979b81da6aee6c08bb21d3f1c14"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/launch/server-launch.txt",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/launch/server-launch.txt",
+      "size": 20767,
+      "sha256": "790ee88ae1f3a585c4040a8bfa2c3c58dda6adb87d90e0441c7717e7ce3dc8ac"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/launch/server-legacy.txt",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/launch/server-legacy.txt",
+      "size": 10368,
+      "sha256": "f75f2e62061484defdbc60bcae925fa38477693813169d7f5a842c8d8cb09ffa"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/launch/server-program.txt",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/launch/server-program.txt",
+      "size": 288,
+      "sha256": "403d7609761c93800bb4d4017da11310885d9156710d30f784058868e9ddb191"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/launch/server-vm.txt",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/launch/server-vm.txt",
+      "size": 2391,
+      "sha256": "bb6e21b528cb1dc4e174dcd080403116010fba89b98d603d52ae3372063be050"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/server.log",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/server.log",
+      "size": 56111,
+      "sha256": "fabc61015025bfebc897061a7c7e84882fb0bf97e4ede714b90dbadb9601f232"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/server/extracted-yard.json",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/server/extracted-yard.json",
+      "size": 511,
+      "sha256": "1027e635a811e5f47ccbb9a1cefee3b0db913563280f0bea40bd8ecc7b71a354"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/server/logs/debug.log",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/server/logs/debug.log",
+      "size": 75020,
+      "sha256": "7fb2a8217eeffed36d7772448a1b1180498fc8b3a69f561e7c05e02ff6fd1b8f"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/server/logs/latest.log",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/server/logs/latest.log",
+      "size": 75020,
+      "sha256": "7fb2a8217eeffed36d7772448a1b1180498fc8b3a69f561e7c05e02ff6fd1b8f"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/server/usernamecache.json",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/server/usernamecache.json",
+      "size": 106,
+      "sha256": "c9b74cf7672cf13c8689e7ee0375cc872836502371976850d7ecfe0d42accc81"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/server/world/playerdata/4bc04bfb-8e54-3770-99c5-191d6f24b100.dat",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/server/world/playerdata/4bc04bfb-8e54-3770-99c5-191d6f24b100.dat",
+      "size": 1357,
+      "sha256": "2e7d6bc06b24b96e1aac8c49488f9cd0d29695ff44d1bb0da601dd925e3d55e9"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/server/world/playerdata/4bc04bfb-8e54-3770-99c5-191d6f24b100.dat_old",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/server/world/playerdata/4bc04bfb-8e54-3770-99c5-191d6f24b100.dat_old",
+      "size": 965,
+      "sha256": "7d9de476e168748e5d0a0f9b8f6679492ffb1185311b41bc3f66838c5ac4988a"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/server/world/playerdata/8814a350-c032-3444-8228-c8e066c7b3a6.dat",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/server/world/playerdata/8814a350-c032-3444-8228-c8e066c7b3a6.dat",
+      "size": 1186,
+      "sha256": "9b2a522e58dfa97bb3ea13debe6fa604686ca32733b4d17699dd4bd83627a0a7"
+    },
+    {
+      "path": "run/api27-api-multiplayer-BASE-NATIVE/server/world/playerdata/8814a350-c032-3444-8228-c8e066c7b3a6.dat_old",
+      "source_path": "run/api27-api-multiplayer-BASE-NATIVE/server/world/playerdata/8814a350-c032-3444-8228-c8e066c7b3a6.dat_old",
+      "size": 1186,
+      "sha256": "9b2a522e58dfa97bb3ea13debe6fa604686ca32733b4d17699dd4bd83627a0a7"
+    },
+    {
+      "path": "run/api27-workshop-BASE/api-workshop-stations.json",
+      "source_path": "run/api27-workshop-BASE/api-workshop-stations.json",
+      "size": 19608,
+      "sha256": "be3bd41c2cbc1331ddb79d7d50dfcb236f73e6e3dcfeb99412fba25f6cb98664"
+    },
+    {
+      "path": "run/api27-workshop-BASE/logs/2026-10-11-1.log.gz",
+      "source_path": "run/api27-workshop-BASE/logs/2026-10-11-1.log.gz",
+      "size": 4297,
+      "sha256": "e0cfa1b359a2efa4c116056693076f3fcd57c531f4bec6e6587935498b0132e9"
+    },
+    {
+      "path": "run/api27-workshop-BASE/logs/2026-10-11-2.log.gz",
+      "source_path": "run/api27-workshop-BASE/logs/2026-10-11-2.log.gz",
+      "size": 4279,
+      "sha256": "58fe122a0a130c3e6c0b0702826093f6ebac77b2af48984af4ee25ea20a96247"
+    },
+    {
+      "path": "run/api27-workshop-BASE/logs/2026-10-11-3.log.gz",
+      "source_path": "run/api27-workshop-BASE/logs/2026-10-11-3.log.gz",
+      "size": 5003,
+      "sha256": "3f09450d315f780ff8418d0203631ae3f2744d1bc44b3ee573b8e2b5d8a004bb"
+    },
+    {
+      "path": "run/api27-workshop-BASE/logs/debug-1.log.gz",
+      "source_path": "run/api27-workshop-BASE/logs/debug-1.log.gz",
+      "size": 4297,
+      "sha256": "e0cfa1b359a2efa4c116056693076f3fcd57c531f4bec6e6587935498b0132e9"
+    },
+    {
+      "path": "run/api27-workshop-BASE/logs/debug-2.log.gz",
+      "source_path": "run/api27-workshop-BASE/logs/debug-2.log.gz",
+      "size": 4279,
+      "sha256": "58fe122a0a130c3e6c0b0702826093f6ebac77b2af48984af4ee25ea20a96247"
+    },
+    {
+      "path": "run/api27-workshop-BASE/logs/debug-3.log.gz",
+      "source_path": "run/api27-workshop-BASE/logs/debug-3.log.gz",
+      "size": 5003,
+      "sha256": "3f09450d315f780ff8418d0203631ae3f2744d1bc44b3ee573b8e2b5d8a004bb"
+    },
+    {
+      "path": "run/api27-workshop-BASE/logs/debug.log",
+      "source_path": "run/api27-workshop-BASE/logs/debug.log",
+      "size": 20509,
+      "sha256": "1510f90347232d3cc7f5d1a23ee689d0917baf3e7817cb0f461418d17d07ffbe"
+    },
+    {
+      "path": "run/api27-workshop-BASE/logs/latest.log",
+      "source_path": "run/api27-workshop-BASE/logs/latest.log",
+      "size": 20509,
+      "sha256": "1510f90347232d3cc7f5d1a23ee689d0917baf3e7817cb0f461418d17d07ffbe"
+    },
+    {
+      "path": "run/api27-workshop-BASE/packaged-2026-10-11T12-31-58.984084800Z.json",
+      "source_path": "run/api27-workshop-BASE/packaged-2026-10-11T12-31-58.984084800Z.json",
+      "size": 773,
+      "sha256": "48b543f9731e4ceca82008445fa471d14783cbc51e7be5d40166e6081fbbb213"
+    },
+    {
+      "path": "run/api27-workshop-BASE/packaged-2026-10-11T12-32-23.610481500Z.json",
+      "source_path": "run/api27-workshop-BASE/packaged-2026-10-11T12-32-23.610481500Z.json",
+      "size": 774,
+      "sha256": "5e6af3831cdf924e6ea19f2a66656cece29120fe1075a29ff4cb20842c8385d0"
+    },
+    {
+      "path": "run/api27-workshop-BASE/packaged-2026-10-11T12-32-47.490610700Z.json",
+      "source_path": "run/api27-workshop-BASE/packaged-2026-10-11T12-32-47.490610700Z.json",
+      "size": 774,
+      "sha256": "8b973d1d857c62fc7e91c16b9776027dc432a2ef455f49ef61fcab7843517399"
+    },
+    {
+      "path": "run/api27-workshop-BASE/packaged-2026-10-11T12-33-11.752802Z.json",
+      "source_path": "run/api27-workshop-BASE/packaged-2026-10-11T12-33-11.752802Z.json",
+      "size": 771,
+      "sha256": "93bf236a8faedf6c53b1f0c782b699baa4fd0cb3f54c2015a3ffb5722abc6508"
     },
     {
       "path": "runs/api-no-geometry-cold-NATIVE-12/build/api-no-geometry-cold-NATIVE-12.log",

@@ -8,7 +8,9 @@ permissions:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 60
+    # The complete functional matrix includes 18 additional JVM launches after
+    # the reference comparison. Preserve each launch's 600-second watchdog.
+    timeout-minutes: 120
     defaults:
       run:
         shell: bash

@@ -243,3 +243,48 @@ An initial offline example build also used the wrong local Maven repository path
 and could not resolve API 1.0.0. Its failed log and the successful corrected build
 using `build/maven-repository` are kept as a separate tooling appendix. That
 invocation error is not attributed to the public API implementation.
+
+The two superseded extracted-SDK attempts, candidates 22 and 25, are now retained
+compactly in this archive. Each independently compiled both projects after
+extracting the exact downloadable example source ZIPs and Maven ZIP. Produced
+jars match their historical frozen examples. Original attempt/proof JSON, build
+logs, dependency records, compile-evidence scripts, output jars, input archives
+and runtime artifacts are preserved with their actual hashes. Expanded duplicate
+source trees and Gradle outputs are unnecessary to inspect these proofs because
+the exact source and Maven archives are included. Both attempts remained
+non-publishable and unfrozen; their successful SDK builds do not transfer to a
+corrected final release whose artifact set differs. Prior archive bytes remain
+unchanged.
+
+Batch27, source `b8e6eaaf838a7d3ea676412ce9ed937df205557f`, reached native
+board editing after both real TCP clients passed all eleven station views and
+the server accepted wiring, configuration, meters and panel editing. The board
+assertion dereferenced a null schematic. Original saved player NBT shows a blank
+schematic in slot 0 and the valid native design-table copy in slot 1, preserving
+the edited name, custom shunt settings and traces. The native copy workflow
+produced that saved item; the assertion must skip blank items and compare full
+`serializeSafeNbt` contents because native copying intentionally changes identity
+UUIDs. Placed-board identity assertions remain required. This failed attempt is
+not client acceptance, and the correction requires a fresh frozen runtime and
+complete real-client runs.
+
+The exact launched helper jar and captured inputs, both player `.dat` and
+`.dat_old` files, inventory inspection script/output, all launch files, logs,
+screenshots, thread dumps, process result, preparation/source/cold-run proofs,
+exported world ZIP and frozen candidate27 artifact/ABI files are retained. Earlier
+archive member bytes remain unchanged.
+
+The superseded candidate25 CI run [38136995579](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38136995579),
+source `2b6974a0b1cc4edb3c22ba26536fd2d1a009c529`, is now retained after its
+actual completion. All eight raw job logs and original run/attempt metadata
+are archived. The index records each reached phase, failed step, assertion
+and pass count rather than assigning a shared outcome to unfinished jobs.
+The completed metadata records 8 failed jobs; other outcomes are
+[]. A Windows Java/base downloaded artifact subset retains
+the actual checkout SHA/tree/attempt, native and compatibility accumulator
+traces, other reference tables, phase manifests and original reference logs.
+The observed accumulator frame offset led to a fixture timing/readiness
+correction. Its passing local reference checks are separate from the new
+frozen eight-way acceptance still required. The strict release collector was
+not used to relabel this failed run, and every earlier archive byte remains
+unchanged.
