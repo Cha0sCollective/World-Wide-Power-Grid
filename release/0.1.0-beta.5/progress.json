@@ -147,8 +147,8 @@
   ],
   "final_candidate": {
     "artifact": "wwpg-0.1.0-beta.5.jar",
-    "sha256": "3bba6879b78cf0f2b411e639a6dd8a7d1c86850e6b8b9ef0e8448f117764b288",
+    "sha256": "506a564b6998af205ae9e409e9db7f6c80fa8dd17b5667637e6db3f6858e16a1",
     "published": false,
-    "acceptance": "Final frozen jar: exact Pinout ZIP has three native cold passes; final GUI, multiplayer and eight-way CI gates are running."
+    "acceptance": "All four earlier local combinations passed, but the strict byte-identity gate found Lua line endings and empty directories. Reproducible frozen artifact now matches all four earlier Linux CI jars; complete final Windows/Linux and local exact-world gates are rerunning."
   }
 }

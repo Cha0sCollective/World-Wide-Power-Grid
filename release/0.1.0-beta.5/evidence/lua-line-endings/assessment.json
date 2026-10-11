@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "stationary_completion": false,
+  "release_gate": "Reject jars with different hashes despite passing functional runs.",
+  "differing_entries": [
+    {
+      "entry": "data/wwpg_pinout/programs/acceptance.lua",
+      "bytes": {
+        "local": 2620,
+        "linux": 2620,
+        "windows": 2690
+      },
+      "sha256": {
+        "local": "f110850ec75e6e623d879b7934c8437aee1854b6283902a8f647633b6ed7e82b",
+        "linux": "f110850ec75e6e623d879b7934c8437aee1854b6283902a8f647633b6ed7e82b",
+        "windows": "9f014b77a524f164f862f6b7058163c1e6619d54cb8c545826ae9e19a5974d6d"
+      },
+      "normalized_sha256": "f110850ec75e6e623d879b7934c8437aee1854b6283902a8f647633b6ed7e82b"
+    },
+    {
+      "entry": "data/wwpg_pinout/programs/lifecycle.lua",
+      "bytes": {
+        "local": 2407,
+        "linux": 2358,
+        "windows": 2407
+      },
+      "sha256": {
+        "local": "f78c87253b4be24c27dceb5285064ea5ce65b2b26f547f1ceedbf5425a932f1b",
+        "linux": "159e7074fa3c4929d745df383d2710e64a67d3a28bbb075b63cb815e0416fde1",
+        "windows": "f78c87253b4be24c27dceb5285064ea5ce65b2b26f547f1ceedbf5425a932f1b"
+      },
+      "normalized_sha256": "159e7074fa3c4929d745df383d2710e64a67d3a28bbb075b63cb815e0416fde1"
+    },
+    {
+      "entry": "data/wwpg_pinout/programs/yard/startup.lua",
+      "bytes": {
+        "local": 1766,
+        "linux": 1734,
+        "windows": 1766
+      },
+      "sha256": {
+        "local": "7634a2e79a13f9f9fa1bffff2be5caf79edcc2fe65e793bf80860e4d10100d52",
+        "linux": "020217ef2a81a0824b0dece6015f913f04161a1d847e1364537751ecec40534d",
+        "windows": "7634a2e79a13f9f9fa1bffff2be5caf79edcc2fe65e793bf80860e4d10100d52"
+      },
+      "normalized_sha256": "020217ef2a81a0824b0dece6015f913f04161a1d847e1364537751ecec40534d"
+    },
+    {
+      "entry": "data/wwpg_pinout/programs/yard/wwpg.lua",
+      "bytes": {
+        "local": 2199,
+        "linux": 2144,
+        "windows": 2199
+      },
+      "sha256": {
+        "local": "449159bf9104ed188c65ad800c16b0b328c6c652bee628114e45ba2bab394ed8",
+        "linux": "3a0206e10cc6ce5c2dec4d5815d0550ae42ba7787d8ec448af4903533d4e8d79",
+        "windows": "449159bf9104ed188c65ad800c16b0b328c6c652bee628114e45ba2bab394ed8"
+      },
+      "normalized_sha256": "3a0206e10cc6ce5c2dec4d5815d0550ae42ba7787d8ec448af4903533d4e8d79"
+    }
+  ],
+  "all_other_file_entries_identical": true,
+  "compiled_class_count": 213,
+  "extra_local_empty_directories": [
+    "data/wwpg_nether_debug/",
+    "data/wwpg_nether_debug/structure/"
+  ],
+  "correction": "Pin *.lua to LF and normalize the working resource files. Exclude empty directories from all Jar tasks, including stale empty development folders. Rebuild and rerun final exact-artifact acceptance; preserve the strict checksum gate.",
+  "prior_local_acceptance": "All four profile/backend combinations completed three cold exact-ZIP passes, full graphical and two-real-client acceptance on the preserved 3bba candidate.",
+  "aborted_v5": "A comparison incorrectly assumed identical directory entries and stopped normalization. The shell continued despite that Python error. Its old-jar private test tree was stopped; a fresh batch is used after correcting the comparison and checking every command exit."
+}

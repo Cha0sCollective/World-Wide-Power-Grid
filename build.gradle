@@ -106,6 +106,7 @@ tasks.named('jar') { manifest.attributes 'MixinConfigs': 'wwpg.mixins.json' }
 tasks.withType(Jar).configureEach {
     preserveFileTimestamps = false
     reproducibleFileOrder = true
+    includeEmptyDirs = false
     filePermissions { unix('0644') }
     dirPermissions { unix('0755') }
 }
