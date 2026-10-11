@@ -28,17 +28,22 @@ import java.util.Set;
 public final class PinoutLuaGameTests {
     @GameTest(template = "empty", timeoutTicks = 1200)
     public static void actualLuaControlsAllEightMixedLoads(GameTestHelper h) throws IOException {
-        LuaRunner.run(h);
+        LuaRunner.run(h, true);
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 1200)
+    public static void actualLuaControlsAllEightMixedLoadsFromPowerGridSupply(GameTestHelper h) throws IOException {
+        LuaRunner.run(h, false);
     }
 
     // NeoForge examines declared method signatures even for disabled namespaces.
     // Keep all CC API signatures in a class loaded only when this fixture runs.
     private static final class LuaRunner {
-        private static void run(GameTestHelper h) throws IOException {
+        private static void run(GameTestHelper h, boolean ceeSupply) throws IOException {
             var source = new BlockPos(1, 2, 1);
             var pins = new BlockPos(3, 2, 2);
             var computerPos = pins.west();
-            StationaryEquipmentGameTests.place(h, source, CEEBlocks.CREATIVE_BATTERY.get());
+            StationaryEquipmentGameTests.place(h, source, ceeSupply ? CEEBlocks.CREATIVE_BATTERY.get() : ModdedBlocks.CREATIVE_VOLTAGE_SOURCE.get());
             StationaryEquipmentGameTests.place(h, pins, BuiltInRegistries.BLOCK.get(ResourceLocation.parse("pinout:pinout")));
             StationaryEquipmentGameTests.place(h, computerPos, BuiltInRegistries.BLOCK.get(ResourceLocation.parse("computercraft:computer_normal")));
             for (int pin = 1; pin <= 8; pin++) StationaryEquipmentGameTests.place(h, load(pin),
@@ -51,15 +56,17 @@ public final class PinoutLuaGameTests {
                 write(mount, "startup.lua", script.readAllBytes());
             }
             h.runAtTickTime(5, () -> {
-                StationaryEquipmentGameTests.source(h, source, 12);
+                if (ceeSupply) ShowroomTools.scroll(h, h.absolutePos(source), 12_000);
+                else ShowroomTools.pgSource(h, h.absolutePos(source), 12);
                 // Native Lua common 9 is PG terminal 0. No replacement peripheral API.
-                StationaryEquipmentGameTests.wire(h, source, 1, pins, 0, true);
+                StationaryEquipmentGameTests.wire(h, source, ceeSupply ? 1 : 0, pins, 0, true);
                 for (int pin = 1; pin <= 8; pin++) {
                     var load = load(pin);
-                    if (pin % 2 == 0) ((ResistorBlockEntity) h.getBlockEntity(load)).setValue(1000);
-                    else StationaryEquipmentGameTests.resistor(h, load, 1000);
+                    if (pin % 2 == 0) ShowroomTools.resistance(h, h.absolutePos(load), 1000);
+                    else ((com.george_vi.electroenergetics.content.electronic_components.resistor.ResistorBlockEntity)
+                            h.getBlockEntity(load)).setResistance(1000);
                     StationaryEquipmentGameTests.wire(h, pins, pin, load, 0, pin % 2 == 0);
-                    StationaryEquipmentGameTests.wire(h, source, 0, load, 1, pin % 2 != 0);
+                    StationaryEquipmentGameTests.wire(h, source, ceeSupply ? 0 : 1, load, 1, pin % 2 != 0);
                 }
                 computer.turnOn();
             });
@@ -91,7 +98,9 @@ public final class PinoutLuaGameTests {
             }).thenExecute(() -> {
                 try {
                     var report = JsonParser.parseString(read(mount, "acceptance.json")).getAsJsonObject();
-                    h.assertTrue(report.get("ok").getAsBoolean(), "Lua failed after computer restart: " + report);
+                    h.assertTrue(report.get("ok").getAsBoolean(), "Lua failed after computer restart: " + report
+                            + "; source=" + h.getBlockEntity(source).saveWithoutMetadata(h.getLevel().registryAccess())
+                            + "; pinout=" + h.getBlockEntity(pins).saveWithoutMetadata(h.getLevel().registryAccess()));
                     DynamicGameTests.audit(h);
                 } catch (IOException error) { throw new IllegalStateException(error); }
             }).thenSucceed();

@@ -32,6 +32,15 @@ import org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint;
 public final class DynamicGameTests {
     @BeforeBatch(batch = "defaultBatch") public static void substeps(ServerLevel level) {
         ModdedConfigs.server().electricity.solver.multiTicks.set(16);
+        // The runtime assertion alone is insufficient: native config reloads
+        // must retain the backend being tested rather than switching its MNA
+        // underneath a Lua measurement and clearing the existing solution.
+        var backend = CSolver.SolverBackend.valueOf(System.getProperty("wwpg.test.backend", "NATIVE"));
+        if (!backend.isSupported()) throw new IllegalStateException("Requested test backend is unavailable: " + backend);
+        ModdedConfigs.server().electricity.solver.solverBackend.set(backend);
+        org.patryk3211.powergrid.electricity.GlobalElectricNetworks.configsReloaded();
+        org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info("WWPG_TEST_BACKEND_CONFIG: requested={}, configured={}",
+                backend, ModdedConfigs.server().electricity.solver.solverBackend.get());
     }
 
     @GameTest(template = "empty", timeoutTicks = 80) public static void transformerRatioChanges(GameTestHelper h) {
