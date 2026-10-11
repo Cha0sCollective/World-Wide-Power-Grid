@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "completed": true,
+  "passed": true,
+  "unresolved_failures": [],
+  "source_sha": "934fe30fd5a6dfe27f8ab13bee6edb40ca1078da",
+  "artifact_hashes": {
+    "runtime": "708d3bac7fee11f34a770f0a145ee4226a95566870db572767aafa97bae78f10",
+    "api": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+    "cee_api": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+    "example": "90a52b8ca6d65860043e816d4d101dc3e014dd7c947133e48a0dfe7a49490cd4",
+    "upstream_example": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095"
+  },
+  "uses_published_api_only": true,
+  "uses_wwpg_project_classes": false,
+  "build_from_extracted_sdk": true,
+  "extracted_source_sha256": "9078929fca1fd8aa8b2364bff1289e97e69dd7f5b3edb1eae237010ed5fcfcae",
+  "maven_repository_sha256": "0e55db86b2a8bed9079a22735ebaa2eed9942de2ce7672ba03672e5e49995569",
+  "compiled_against_api_sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+  "compiled_output": {
+    "path": "release/0.2.0/evidence/extracted-sdk-33/general-example/build/libs/wwpg-api-example-1.0.0.jar",
+    "sha256": "90a52b8ca6d65860043e816d4d101dc3e014dd7c947133e48a0dfe7a49490cd4",
+    "bytes": 52085
+  },
+  "build_log": {
+    "path": "release/0.2.0/evidence/extracted-sdk-33/example-build.log",
+    "sha256": "a5c9224a755c9772336c512a09ee24d80573715e3ad9fba602aeace8412391b4",
+    "bytes": 2924
+  },
+  "dependency_proof": {
+    "path": "release/0.2.0/evidence/extracted-sdk-33/example-dependencies.json",
+    "sha256": "c0a1567a4c9e321c612f88601b6a474952111f68a1a7bd2fa56a84ce118e4422",
+    "bytes": 25315
+  },
+  "functional_behaviors": [
+    "machine",
+    "storage",
+    "instrument"
+  ],
+  "evidence_files": [
+    {
+      "path": "build/frozen-0.2.0-33/wwpg-api-example-1.0.0-source.zip",
+      "sha256": "9078929fca1fd8aa8b2364bff1289e97e69dd7f5b3edb1eae237010ed5fcfcae",
+      "bytes": 79297
+    },
+    {
+      "path": "build/frozen-0.2.0-33/wwpg-api-1.0.0-maven.zip",
+      "sha256": "0e55db86b2a8bed9079a22735ebaa2eed9942de2ce7672ba03672e5e49995569",
+      "bytes": 404908
+    },
+    {
+      "path": "release/0.2.0/evidence/extracted-sdk-33/compile-sdk-evidence.gradle",
+      "sha256": "459cbfb10fd1e48b8d951174580b60af32e617b87ed64921c483a5ee5a6a0693",
+      "bytes": 2002
+    }
+  ]
+}

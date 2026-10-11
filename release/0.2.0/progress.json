@@ -3,39 +3,311 @@
   "target": "0.2.0",
   "api_version": "1.0.0",
   "baseline": "0188b2f13d141f9cb7178e523eb19e2833243dc5",
-  "state": "in_progress",
+  "state": "accepted_for_release",
   "published_support_claim": false,
-  "api_frozen": false,
+  "api_frozen": true,
   "stages": [
     {
       "stage": 1,
       "status": "complete",
-      "gate": "Independent examples built against documented API artifacts"
+      "gate": "Independent examples built against documented API artifacts",
+      "evidence": {
+        "sdk": [
+          {
+            "path": "release/0.2.0/evidence/extracted-sdk-33/example-build-proof.json",
+            "sha256": "49638f89d019d56af39562393dd15bacf1c7beb18624d8c68788bc0fb2861bf6",
+            "bytes": 2323
+          },
+          {
+            "path": "release/0.2.0/evidence/extracted-sdk-33/upstream_example-build-proof.json",
+            "sha256": "19b7634246c0a3874686a60dec7825cfbaf224c9fa173aeb47828dc0cde2256c",
+            "bytes": 2464
+          }
+        ],
+        "abi": [
+          {
+            "path": "build/frozen-0.2.0-33/api-contract.json",
+            "sha256": "0e10291667726185f608f3b66790e210880ad07729e2437ede6acca7a2c70710",
+            "bytes": 63389
+          },
+          {
+            "path": "build/frozen-0.2.0-33/cee-api-contract.json",
+            "sha256": "2df8778c18472e93a7aa738587f4d22b8b15a606db8e878871c7200f92e80260",
+            "bytes": 11800
+          }
+        ],
+        "scope": "Independent exact extracted SDKs and first-public ABI snapshots"
+      }
     },
     {
       "stage": 2,
-      "status": "in_progress",
-      "gate": "Stable identities, parallel elements, safe topology and native wire persistence"
+      "status": "complete",
+      "gate": "Stable identities, parallel elements, safe topology and native wire persistence",
+      "evidence": {
+        "ci": {
+          "path": "release/0.2.0/evidence/ci-38143489285/ci.json",
+          "sha256": "36d0bd0a70efeea6efe0a44128294baaa05c1c41e638d0c7e2615953822df6d0",
+          "bytes": 5098
+        },
+        "failure_review": {
+          "path": "build/api33-failure-review.final.json",
+          "sha256": "4924ca3b6bd970ab4379fcce9024cac315447bf6c6fc2bd879edcd3eb1fdbc25",
+          "bytes": 803702
+        },
+        "scope": "Required compiled identities/topology fixtures and specific identity/parallel JUnit methods passed in all8 jobs"
+      }
     },
     {
       "stage": 3,
-      "status": "in_progress",
-      "gate": "Electrical models, accuracy, exactly-once history and solver ownership on both backends"
+      "status": "complete",
+      "gate": "Electrical models, accuracy, exactly-once history and solver ownership on both backends",
+      "evidence": {
+        "ci": {
+          "path": "release/0.2.0/evidence/ci-38143489285/ci.json",
+          "sha256": "36d0bd0a70efeea6efe0a44128294baaa05c1c41e638d0c7e2615953822df6d0",
+          "bytes": 5098
+        },
+        "failure_review": {
+          "path": "build/api33-failure-review.final.json",
+          "sha256": "4924ca3b6bd970ab4379fcce9024cac315447bf6c6fc2bd879edcd3eb1fdbc25",
+          "bytes": 803702
+        },
+        "scope": "Accepted model/reference windows, nonlinear/storage/transformer orientation, pause/step, rejected-solve rollback and zero independent CEE solves on both backends"
+      }
     },
     {
       "stage": 4,
-      "status": "in_progress",
-      "gate": "Wiring, meters, panel and board workflows with actual players"
+      "status": "complete",
+      "gate": "Wiring, meters, panel and board workflows with actual players",
+      "evidence": {
+        "ci": {
+          "path": "release/0.2.0/evidence/ci-38143489285/ci.json",
+          "sha256": "36d0bd0a70efeea6efe0a44128294baaa05c1c41e638d0c7e2615953822df6d0",
+          "bytes": 5098
+        },
+        "failure_review": {
+          "path": "build/api33-failure-review.final.json",
+          "sha256": "4924ca3b6bd970ab4379fcce9024cac315447bf6c6fc2bd879edcd3eb1fdbc25",
+          "bytes": 803702
+        },
+        "clients": [
+          {
+            "path": "release/0.2.0/evidence/api35-api-graphical-BASE-NATIVE/verification.json",
+            "sha256": "8ad98a0b303b61d698fb9a8f0e34afbb1264c5b7425c8b68ab52b8c14c838956",
+            "bytes": 6757
+          },
+          {
+            "path": "release/0.2.0/evidence/api35-api-multiplayer-BASE-NATIVE/verification.json",
+            "sha256": "cddcdb2391cb110812b54387d64624f2eb946a560253b1a12ccb52371792273a",
+            "bytes": 12530
+          },
+          {
+            "path": "release/0.2.0/evidence/api35-api-graphical-BASE-JAVA/verification.json",
+            "sha256": "46f89926ded144b930678505464576ee5b1099b72ad302fb09d280ad635e26c1",
+            "bytes": 6743
+          },
+          {
+            "path": "release/0.2.0/evidence/api35-api-multiplayer-BASE-JAVA/verification.json",
+            "sha256": "e9393160141370e45ee2ed23da4ad26f020b3a5d9afae21ecc2a6faa61385de6",
+            "bytes": 12516
+          },
+          {
+            "path": "release/0.2.0/evidence/api33-api-graphical-PINOUT-NATIVE/verification.json",
+            "sha256": "58163dc3043b2670614d1ee0840708221209b0d77dc468a42d703c6691cabefb",
+            "bytes": 6771
+          },
+          {
+            "path": "release/0.2.0/evidence/api33-api-multiplayer-PINOUT-NATIVE/verification.json",
+            "sha256": "119522a9eee18e086de96412af853cd04b419fa635afd0fbc89c9eb09d4eabef",
+            "bytes": 12544
+          },
+          {
+            "path": "release/0.2.0/evidence/api33-api-graphical-PINOUT-JAVA/verification.json",
+            "sha256": "2e8f7666341b380770aa82cdec9beabe7d845e9957030eb3111e2ca000b940e5",
+            "bytes": 6757
+          },
+          {
+            "path": "release/0.2.0/evidence/api33-api-multiplayer-PINOUT-JAVA/verification.json",
+            "sha256": "4f39e4c8169bc294c0dae459e60aa57cea2ed502727a44a3441c230a911d50d2",
+            "bytes": 12530
+          }
+        ],
+        "scope": "All8 actual clients: native wires/meters/panel/board/copy/repair, visible GUI2 native input/rendered image/Save and bounded synchronization"
+      }
     },
     {
       "stage": 5,
-      "status": "in_progress",
-      "gate": "Cold restart, actual unload cycles and recoverable fault isolation"
+      "status": "complete",
+      "gate": "Cold restart, actual unload cycles and recoverable fault isolation",
+      "evidence": {
+        "ci": {
+          "path": "release/0.2.0/evidence/ci-38143489285/ci.json",
+          "sha256": "36d0bd0a70efeea6efe0a44128294baaa05c1c41e638d0c7e2615953822df6d0",
+          "bytes": 5098
+        },
+        "failure_review": {
+          "path": "build/api33-failure-review.final.json",
+          "sha256": "4924ca3b6bd970ab4379fcce9024cac315447bf6c6fc2bd879edcd3eb1fdbc25",
+          "bytes": 803702
+        },
+        "scope": "All8 jobs:3 cold verifies,5 actual general and upstream unload cycles, separate pending SETUP/ARM/VERIFY, pre-solve state, exact native wire ownership and scoped healthy/repaired fault checks"
+      }
     },
     {
       "stage": 6,
-      "status": "pending",
-      "gate": "Eight-way packaged acceptance, independent SDK, real clients and frozen publication artifacts"
+      "status": "complete",
+      "gate": "Eight-way packaged acceptance, independent SDK, real clients and frozen publication artifacts",
+      "evidence": {
+        "ci": {
+          "path": "release/0.2.0/evidence/ci-38143489285/ci.json",
+          "sha256": "36d0bd0a70efeea6efe0a44128294baaa05c1c41e638d0c7e2615953822df6d0",
+          "bytes": 5098
+        },
+        "failure_review": {
+          "path": "build/api33-failure-review.final.json",
+          "sha256": "4924ca3b6bd970ab4379fcce9024cac315447bf6c6fc2bd879edcd3eb1fdbc25",
+          "bytes": 803702
+        },
+        "sdk": [
+          {
+            "path": "release/0.2.0/evidence/extracted-sdk-33/example-build-proof.json",
+            "sha256": "49638f89d019d56af39562393dd15bacf1c7beb18624d8c68788bc0fb2861bf6",
+            "bytes": 2323
+          },
+          {
+            "path": "release/0.2.0/evidence/extracted-sdk-33/upstream_example-build-proof.json",
+            "sha256": "19b7634246c0a3874686a60dec7825cfbaf224c9fa173aeb47828dc0cde2256c",
+            "bytes": 2464
+          }
+        ],
+        "clients": [
+          {
+            "path": "release/0.2.0/evidence/api35-api-graphical-BASE-NATIVE/verification.json",
+            "sha256": "8ad98a0b303b61d698fb9a8f0e34afbb1264c5b7425c8b68ab52b8c14c838956",
+            "bytes": 6757
+          },
+          {
+            "path": "release/0.2.0/evidence/api35-api-multiplayer-BASE-NATIVE/verification.json",
+            "sha256": "cddcdb2391cb110812b54387d64624f2eb946a560253b1a12ccb52371792273a",
+            "bytes": 12530
+          },
+          {
+            "path": "release/0.2.0/evidence/api35-api-graphical-BASE-JAVA/verification.json",
+            "sha256": "46f89926ded144b930678505464576ee5b1099b72ad302fb09d280ad635e26c1",
+            "bytes": 6743
+          },
+          {
+            "path": "release/0.2.0/evidence/api35-api-multiplayer-BASE-JAVA/verification.json",
+            "sha256": "e9393160141370e45ee2ed23da4ad26f020b3a5d9afae21ecc2a6faa61385de6",
+            "bytes": 12516
+          },
+          {
+            "path": "release/0.2.0/evidence/api33-api-graphical-PINOUT-NATIVE/verification.json",
+            "sha256": "58163dc3043b2670614d1ee0840708221209b0d77dc468a42d703c6691cabefb",
+            "bytes": 6771
+          },
+          {
+            "path": "release/0.2.0/evidence/api33-api-multiplayer-PINOUT-NATIVE/verification.json",
+            "sha256": "119522a9eee18e086de96412af853cd04b419fa635afd0fbc89c9eb09d4eabef",
+            "bytes": 12544
+          },
+          {
+            "path": "release/0.2.0/evidence/api33-api-graphical-PINOUT-JAVA/verification.json",
+            "sha256": "2e8f7666341b380770aa82cdec9beabe7d845e9957030eb3111e2ca000b940e5",
+            "bytes": 6757
+          },
+          {
+            "path": "release/0.2.0/evidence/api33-api-multiplayer-PINOUT-JAVA/verification.json",
+            "sha256": "4f39e4c8169bc294c0dae459e60aa57cea2ed502727a44a3441c230a911d50d2",
+            "bytes": 12530
+          }
+        ],
+        "worlds": {
+          "base_world": {
+            "path": "build/ci-38143489285-inputs/artifacts/wwpg-windows-latest-NATIVE-BASE/build/distributions/wwpg-stationary-BASE.zip",
+            "sha256": "87c1e1ed4a3516327354c015b5fc808e4670fb083ebdae1fcb5ba85d9a9da12b",
+            "bytes": 1304446
+          },
+          "pinout_world": {
+            "path": "build/ci-38143489285-inputs/artifacts/wwpg-windows-latest-NATIVE-PINOUT/build/distributions/wwpg-stationary-PINOUT.zip",
+            "sha256": "f736a1229658ae7d4defa238693f702c3fafbcb1d752a7ec6239a7e9c3372ca0",
+            "bytes": 1349284
+          },
+          "base_workshop_world": {
+            "path": "build/distributions/api33-api-workshop-BASE.zip",
+            "sha256": "3fd07f6aad20e03a5fc5049cbbb2dcc4d1e5c0480feea74c68ef3dc8003b62d9",
+            "bytes": 320394
+          },
+          "pinout_workshop_world": {
+            "path": "build/distributions/api33-api-workshop-PINOUT.zip",
+            "sha256": "fcade8c1eb6bd39d485ccf995c52cd0fe548509cbd77cd21cdfbece1fc3d13b9",
+            "bytes": 322818
+          }
+        },
+        "artifacts": {
+          "runtime": {
+            "path": "build/frozen-0.2.0-33/wwpg-0.2.0.jar",
+            "sha256": "708d3bac7fee11f34a770f0a145ee4226a95566870db572767aafa97bae78f10",
+            "bytes": 3532278
+          },
+          "api": {
+            "path": "build/frozen-0.2.0-33/wwpg-api-1.0.0.jar",
+            "sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+            "bytes": 50130
+          },
+          "api_sources": {
+            "path": "build/frozen-0.2.0-33/wwpg-api-1.0.0-sources.jar",
+            "sha256": "a88fdf9c52fe7a671ca908d0ecae558b083e41608d733dea986aecdce71a91f2",
+            "bytes": 21834
+          },
+          "api_javadoc": {
+            "path": "build/frozen-0.2.0-33/wwpg-api-1.0.0-javadoc.jar",
+            "sha256": "cd9ea6a40c8a97fb54e008ad8e052a012b6dff6b5cb5869a5a760ebfd1454c56",
+            "bytes": 225770
+          },
+          "cee_api": {
+            "path": "build/frozen-0.2.0-33/wwpg-cee-api-1.0.0.jar",
+            "sha256": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+            "bytes": 8788
+          },
+          "cee_api_sources": {
+            "path": "build/frozen-0.2.0-33/wwpg-cee-api-1.0.0-sources.jar",
+            "sha256": "5cf223b0232750623b0901458b35ac2875de62a45a202c0af1839208d30b840a",
+            "bytes": 6305
+          },
+          "cee_api_javadoc": {
+            "path": "build/frozen-0.2.0-33/wwpg-cee-api-1.0.0-javadoc.jar",
+            "sha256": "51fb877a34f2901e5dea15b0f400122a2e076e08abb34c88929f15ae7f5c8927",
+            "bytes": 107297
+          },
+          "example": {
+            "path": "build/frozen-0.2.0-33/wwpg-api-example-1.0.0.jar",
+            "sha256": "90a52b8ca6d65860043e816d4d101dc3e014dd7c947133e48a0dfe7a49490cd4",
+            "bytes": 52085
+          },
+          "upstream_example": {
+            "path": "build/frozen-0.2.0-33/wwpg-upstream-api-example-1.0.0.jar",
+            "sha256": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095",
+            "bytes": 45638
+          },
+          "example_sources": {
+            "path": "build/frozen-0.2.0-33/wwpg-api-example-1.0.0-source.zip",
+            "sha256": "9078929fca1fd8aa8b2364bff1289e97e69dd7f5b3edb1eae237010ed5fcfcae",
+            "bytes": 79297
+          },
+          "upstream_example_sources": {
+            "path": "build/frozen-0.2.0-33/wwpg-upstream-api-example-1.0.0-source.zip",
+            "sha256": "3d9aabce079397b1d655d3ffb15745a9caea4185bde22a3024b841cac290653a",
+            "bytes": 69907
+          },
+          "maven_repository": {
+            "path": "build/frozen-0.2.0-33/wwpg-api-1.0.0-maven.zip",
+            "sha256": "0e55db86b2a8bed9079a22735ebaa2eed9942de2ce7672ba03672e5e49995569",
+            "bytes": 404908
+          }
+        },
+        "scope": "Exact complete matrix, all12 artifacts, independent SDKs,4 exported/reopened worlds,8 clients and causal failure closure; publication remains a separate operation"
+      }
     }
   ],
   "abi_baseline": "First public API release: establish snapshot; no previous public contract exists",
@@ -43,7 +315,103 @@
     "BASE": 204,
     "PINOUT": 208
   },
-  "acceptance": null,
+  "acceptance": {
+    "schema": 1,
+    "source_sha": "934fe30fd5a6dfe27f8ab13bee6edb40ca1078da",
+    "artifact_hashes": {
+      "runtime": "708d3bac7fee11f34a770f0a145ee4226a95566870db572767aafa97bae78f10",
+      "api": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+      "cee_api": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+      "example": "90a52b8ca6d65860043e816d4d101dc3e014dd7c947133e48a0dfe7a49490cd4",
+      "upstream_example": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095"
+    },
+    "failure_review": {
+      "path": "build/api33-failure-review.final.json",
+      "sha256": "4924ca3b6bd970ab4379fcce9024cac315447bf6c6fc2bd879edcd3eb1fdbc25",
+      "bytes": 803702
+    },
+    "ci": {
+      "path": "release/0.2.0/evidence/ci-38143489285/ci.json",
+      "sha256": "36d0bd0a70efeea6efe0a44128294baaa05c1c41e638d0c7e2615953822df6d0",
+      "bytes": 5098
+    },
+    "independent_example_build": {
+      "path": "release/0.2.0/evidence/extracted-sdk-33/example-build-proof.json",
+      "sha256": "49638f89d019d56af39562393dd15bacf1c7beb18624d8c68788bc0fb2861bf6",
+      "bytes": 2323
+    },
+    "independent_upstream_example_build": {
+      "path": "release/0.2.0/evidence/extracted-sdk-33/upstream_example-build-proof.json",
+      "sha256": "19b7634246c0a3874686a60dec7825cfbaf224c9fa173aeb47828dc0cde2256c",
+      "bytes": 2464
+    },
+    "worlds": {
+      "base_world": {
+        "path": "build/ci-38143489285-inputs/artifacts/wwpg-windows-latest-NATIVE-BASE/build/distributions/wwpg-stationary-BASE.zip",
+        "sha256": "87c1e1ed4a3516327354c015b5fc808e4670fb083ebdae1fcb5ba85d9a9da12b",
+        "bytes": 1304446
+      },
+      "pinout_world": {
+        "path": "build/ci-38143489285-inputs/artifacts/wwpg-windows-latest-NATIVE-PINOUT/build/distributions/wwpg-stationary-PINOUT.zip",
+        "sha256": "f736a1229658ae7d4defa238693f702c3fafbcb1d752a7ec6239a7e9c3372ca0",
+        "bytes": 1349284
+      },
+      "base_workshop_world": {
+        "path": "build/distributions/api33-api-workshop-BASE.zip",
+        "sha256": "3fd07f6aad20e03a5fc5049cbbb2dcc4d1e5c0480feea74c68ef3dc8003b62d9",
+        "bytes": 320394
+      },
+      "pinout_workshop_world": {
+        "path": "build/distributions/api33-api-workshop-PINOUT.zip",
+        "sha256": "fcade8c1eb6bd39d485ccf995c52cd0fe548509cbd77cd21cdfbece1fc3d13b9",
+        "bytes": 322818
+      }
+    },
+    "client_acceptance": [
+      {
+        "path": "release/0.2.0/evidence/api35-api-graphical-BASE-NATIVE/verification.json",
+        "sha256": "8ad98a0b303b61d698fb9a8f0e34afbb1264c5b7425c8b68ab52b8c14c838956",
+        "bytes": 6757
+      },
+      {
+        "path": "release/0.2.0/evidence/api35-api-multiplayer-BASE-NATIVE/verification.json",
+        "sha256": "cddcdb2391cb110812b54387d64624f2eb946a560253b1a12ccb52371792273a",
+        "bytes": 12530
+      },
+      {
+        "path": "release/0.2.0/evidence/api35-api-graphical-BASE-JAVA/verification.json",
+        "sha256": "46f89926ded144b930678505464576ee5b1099b72ad302fb09d280ad635e26c1",
+        "bytes": 6743
+      },
+      {
+        "path": "release/0.2.0/evidence/api35-api-multiplayer-BASE-JAVA/verification.json",
+        "sha256": "e9393160141370e45ee2ed23da4ad26f020b3a5d9afae21ecc2a6faa61385de6",
+        "bytes": 12516
+      },
+      {
+        "path": "release/0.2.0/evidence/api33-api-graphical-PINOUT-NATIVE/verification.json",
+        "sha256": "58163dc3043b2670614d1ee0840708221209b0d77dc468a42d703c6691cabefb",
+        "bytes": 6771
+      },
+      {
+        "path": "release/0.2.0/evidence/api33-api-multiplayer-PINOUT-NATIVE/verification.json",
+        "sha256": "119522a9eee18e086de96412af853cd04b419fa635afd0fbc89c9eb09d4eabef",
+        "bytes": 12544
+      },
+      {
+        "path": "release/0.2.0/evidence/api33-api-graphical-PINOUT-JAVA/verification.json",
+        "sha256": "2e8f7666341b380770aa82cdec9beabe7d845e9957030eb3111e2ca000b940e5",
+        "bytes": 6757
+      },
+      {
+        "path": "release/0.2.0/evidence/api33-api-multiplayer-PINOUT-JAVA/verification.json",
+        "sha256": "4f39e4c8169bc294c0dae459e60aa57cea2ed502727a44a3441c230a911d50d2",
+        "bytes": 12530
+      }
+    ],
+    "retained_transitive_paths": 1766,
+    "scope": "All six acceptance gates passed against actual source33 records. This build-only snapshot is not applied and the release is not yet published."
+  },
   "development_verification": {
     "final_acceptance": false,
     "runtime_and_sdk_build": "passed",
@@ -159,10 +527,19 @@
     }
   },
   "remaining": [
-    "Complete corrected eight-way frozen-artifact acceptance, including the save-before-ready SETUP/ARM/VERIFY gate",
-    "Complete actual graphical and multiplayer workflows on both profiles and backends",
-    "Build both independent examples from the final extracted SDK archives",
-    "Retain actual gameplay/build evidence and resolve every observed failure",
-    "Freeze API 1.0.0 and publish only after all six gates pass"
-  ]
+    "Apply the exact reviewed progress bytes, assemble/validate an immutable complete manifest, apply reviewed documentation, package and publish the accepted bytes."
+  ],
+  "implementation_source_sha": "934fe30fd5a6dfe27f8ab13bee6edb40ca1078da",
+  "artifact_hashes": {
+    "runtime": "708d3bac7fee11f34a770f0a145ee4226a95566870db572767aafa97bae78f10",
+    "api": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+    "cee_api": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+    "example": "90a52b8ca6d65860043e816d4d101dc3e014dd7c947133e48a0dfe7a49490cd4",
+    "upstream_example": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095"
+  },
+  "previous_progress_verbatim_snapshot": {
+    "path": "build/release-0.2.0-drafts/historical/progress-before-final-cutover.json.txt",
+    "sha256": "1c154ff3f2d4cd973e6f3d8c0df9d438643b8947498ec99fb1b314e48055849a",
+    "bytes": 5457
+  }
 }

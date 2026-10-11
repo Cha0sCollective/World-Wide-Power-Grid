@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "completed": true,
+  "passed": true,
+  "source_sha": "a0f2e63918e58bef9eef152d8808eb5ba51974ab",
+  "artifact_hashes": {
+    "runtime": "c7a366f0c9fd50740bfe43942738a490f3de6892241881e9a86837105a003107",
+    "api": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+    "cee_api": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+    "example": "90a52b8ca6d65860043e816d4d101dc3e014dd7c947133e48a0dfe7a49490cd4",
+    "upstream_example": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095"
+  },
+  "publishable": false,
+  "api_frozen": false,
+  "scope": "Exact downloadable SDK archives extracted and independently compiled",
+  "proofs": {
+    "example": {
+      "path": "release/0.2.0/evidence/extracted-sdk-29/example-build-proof.json",
+      "sha256": "d9aa5ae02a2cfa43117cad1ec06a6f38116c2d6c1da13bc1eba3e51306f64358",
+      "bytes": 2323
+    },
+    "upstream_example": {
+      "path": "release/0.2.0/evidence/extracted-sdk-29/upstream_example-build-proof.json",
+      "sha256": "57e89acb29341954fd05d3fac2ea0765145ea7526cba8712f87349b7153f1536",
+      "bytes": 2464
+    }
+  }
+}

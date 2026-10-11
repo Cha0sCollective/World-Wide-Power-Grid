@@ -1,14 +1,48 @@
 # Current status
 
+**[WWPG 0.2.0](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.0)** retains the [stationary base content and optional Pinout profile](SUPPORT.md) and publishes **extension API 1.0.0**. Existing beta.5 worlds and identities remain compatible. Upgrade WWPG on the server and every client; the pinned upstream versions are unchanged.
+
+## 0.2.0 acceptance
+
+The frozen release passes all eight Windows/Linux × native/Java × base/Pinout jobs. Its inherited stationary checks remain 204 BASE / 208 PINOUT; API fixture counts and individual process results are retained in [verification](../release/0.2.0/verification.json) rather than merged into an ambiguous single total. [CI](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38143489285) identifies the actual checked-out source and final artifact hashes.
+
+The API checks require three consecutive cold restarts and five actual unload/reload cycles, inspect serialized storage before the first solve, and exercise both native wire systems through block replacement. A separate SETUP → ARM → VERIFY sequence saves and stops while old wire entities are genuinely unready, then verifies disk-loaded retirement records and an uncharged replacement. Fault, backend-rejection and pause fixtures verify explicit unavailable readings and exactly-once accepted history.
+
+Both Stationary Yard editions and both API Workshop editions pass checks on their exact exported ZIPs. Windows graphical and real two-client API sessions run on both backends and profiles. Each includes eleven station views and nine phases: viewing, wiring, configuration, restored configuration, meters, panel editing, board editing, repair and reconnection. This is Windows client evidence; the eight-way dedicated-server suite supplies Windows and Linux coverage.
+
+The exact example source ZIPs and Maven repository ZIP are independently extracted and built without the WWPG runtime source tree. Their produced example jars match the frozen artifacts. API 1.0.0 establishes the first public classfile contract snapshot; there is no earlier public API against which to claim binary compatibility.
+
+## Reproduced 0.2.0 corrections
+
+- General extension endpoints retain stable owner, terminal and element identities. Replacing a machine retires its exact old PG and CEE wires, including a save made before entity readiness. Native tools display a loading message while binding is unsafe.
+- Rejected numerical steps restore WWPG-owned capacitor/inductor history and checkpointed CEE property state. An unavailable result clears electrical measurements instead of publishing stale readings.
+- Fault isolation identifies the affected owner while healthy devices retain their same-frame readings. Throwing gameplay commits are quarantined until the provider explicitly reports a repaired device change.
+- Live diode parameter changes update the existing electrical element without recreating unrelated topology or storage history.
+- Frozen server ticks do not prepare devices or advance electrical history. Meters become unavailable while paused; a single requested game tick advances one accepted gameplay frame.
+
+Failed runs and causal closure records remain part of the [release evidence](../release/0.2.0/verification.json). Later passes alone do not close a failure.
+
+## Current limits
+
+The public API supports stationary devices on the pinned dependency set. The add-on owns gameplay effects and persistence; WWPG cannot transactionally undo arbitrary world, inventory or NBT changes from a throwing callback. Numerical rollback is limited to owned/checkpointed electrical history. Native PG retains its own accepted-step behavior.
+
+Moving systems, other optional integrations, broad version support, scale certification, asynchronous execution and advanced solver extension points remain later work. The API examples use creative developer components and do not define survival balance. See [SPEC.md](../SPEC.md), [API boundaries](EXTENSION_API.md#deferred-extension-points), and [pinned upstream behavior](INSTALL.md#pinned-upstream-behavior).
+
+No remaining failure in a claimed public workflow is hidden by final acceptance. The historical records below retain attribution limits for older runs whose logs did not establish a cause; the 0.2.0 checks do not retroactively establish those causes.
+
+## Historical beta.5 record
+
+The following beta.5 acceptance and corrections describe that published version. Its references and totals are preserved separately from 0.2.0.
+
 **[0.1.0-beta.5](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.5) is the stationary feature-complete beta.** It supports the [declared base content and optional Pinout profile](SUPPORT.md), including saved electronics workflows, native distribution, storage, FE conversion, Nether links, instruments and repair. Existing beta.4 worlds and identities remain compatible; replace WWPG on the server and every client.
 
-## Final acceptance
+### Beta.5 final acceptance
 
 The exact packaged jar passes **204 base checks and 208 Pinout checks** in all eight Windows/Linux × native/Java × base/Pinout combinations. Each includes three consecutive cold full-suite restarts and five actual chunk cycles of representative mixed assemblies, including delayed entities and serialized-state checks before solving. Pinned upstream references and electrical expectations cover 0.1% DC and 1% recorded storage windows, with native heating/protection timing within one tick.
 
 Both exact downloadable ZIPs pass three cold restarts on each solver locally. Fresh Windows graphical clients complete 148 base or 150 Pinout views, native design and panel interactions, visible plotter/CRT/duplex checks and actual portal travel. Two real TCP clients on Windows in each profile/backend combination check simultaneous wiring/configuration, both meters, native design editing and optional Lua, lamps, boards and panels. [Final verification](../release/0.1.0-beta.5/verification.json) and [CI](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38116785029) identify hashes, processes and retained evidence.
 
-## Reproduced corrections
+### Beta.5 reproduced corrections
 
 - Native PG design-table reading now uses its supplied registry lookup before a world is assigned. Native inventory edits and serialization survive save/restart; real clients reuse nonempty designs through the native menus.
 - Native CEE fuse-holder changes schedule saving. Bare-fuse healthy/broken transitions retain wires through failure and repair. Compatibility preparation waits for native block ticking and wire-entity readiness.
@@ -20,7 +54,7 @@ Both exact downloadable ZIPs pass three cold restarts on each solver locally. Fr
 
 Failed runs, negative controls and harness corrections are retained in the [release evidence](../release/0.1.0-beta.5/evidence/). Passing retries alone are not used to close defects.
 
-## Limits and historical uncertainty
+### Beta.5 limits and historical uncertainty
 
 No failing claimed stationary behavior remains in final acceptance. This does not establish the exact cause of every older intermittent zero reading, startup schedule or Nether assertion: some original logs lacked the required state. Those attribution limits remain below. The old saved-design error is corrected in beta.5; its beta.4 account is historical.
 

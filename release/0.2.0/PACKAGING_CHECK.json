@@ -1,0 +1,472 @@
+{
+  "schema": 1,
+  "inspected_at_utc": "2026-10-11T14:52:25.086650+00:00",
+  "scope": "Independent read-only completed-bundle integrity, acceptance-manifest, original client evidence and cache-exclusion audit; does not rerun gameplay acceptance.",
+  "bundle": {
+    "path": "build/distributions/wwpg-0.2.0-release.zip",
+    "sha256": "052dfdda02a6e524611623d3b48203632afe297d12c5a8598348dd9b42b62062",
+    "bytes": 197186660
+  },
+  "checks": {
+    "zip_crc_test": {
+      "passed": true,
+      "bad_entry": null
+    },
+    "paths_and_cache_exclusion": {
+      "entries": 1789,
+      "unsafe_entries": [],
+      "cache_entries": []
+    },
+    "publication_status": {
+      "schema": 1,
+      "wwpg_version": "0.2.0",
+      "api_version": "1.0.0",
+      "publishable": true,
+      "state": "accepted_release",
+      "message": "All declared acceptance gates passed."
+    },
+    "manifest": {
+      "sha256": "6327c72f2119b8e41bd5e4031b971cc172582cbb6cb05c0a41d1275a5b45a02c",
+      "bytes": 6804,
+      "source_sha": "934fe30fd5a6dfe27f8ab13bee6edb40ca1078da",
+      "exact_original_bytes": true
+    },
+    "frozen_artifacts": [
+      {
+        "role": "runtime",
+        "path": "artifacts/wwpg-0.2.0.jar",
+        "sha256": "708d3bac7fee11f34a770f0a145ee4226a95566870db572767aafa97bae78f10",
+        "bytes": 3532278
+      },
+      {
+        "role": "api",
+        "path": "artifacts/wwpg-api-1.0.0.jar",
+        "sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+        "bytes": 50130
+      },
+      {
+        "role": "api_sources",
+        "path": "artifacts/wwpg-api-1.0.0-sources.jar",
+        "sha256": "a88fdf9c52fe7a671ca908d0ecae558b083e41608d733dea986aecdce71a91f2",
+        "bytes": 21834
+      },
+      {
+        "role": "api_javadoc",
+        "path": "artifacts/wwpg-api-1.0.0-javadoc.jar",
+        "sha256": "cd9ea6a40c8a97fb54e008ad8e052a012b6dff6b5cb5869a5a760ebfd1454c56",
+        "bytes": 225770
+      },
+      {
+        "role": "cee_api",
+        "path": "artifacts/wwpg-cee-api-1.0.0.jar",
+        "sha256": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+        "bytes": 8788
+      },
+      {
+        "role": "cee_api_sources",
+        "path": "artifacts/wwpg-cee-api-1.0.0-sources.jar",
+        "sha256": "5cf223b0232750623b0901458b35ac2875de62a45a202c0af1839208d30b840a",
+        "bytes": 6305
+      },
+      {
+        "role": "cee_api_javadoc",
+        "path": "artifacts/wwpg-cee-api-1.0.0-javadoc.jar",
+        "sha256": "51fb877a34f2901e5dea15b0f400122a2e076e08abb34c88929f15ae7f5c8927",
+        "bytes": 107297
+      },
+      {
+        "role": "example",
+        "path": "artifacts/wwpg-api-example-1.0.0.jar",
+        "sha256": "90a52b8ca6d65860043e816d4d101dc3e014dd7c947133e48a0dfe7a49490cd4",
+        "bytes": 52085
+      },
+      {
+        "role": "upstream_example",
+        "path": "artifacts/wwpg-upstream-api-example-1.0.0.jar",
+        "sha256": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095",
+        "bytes": 45638
+      },
+      {
+        "role": "example_sources",
+        "path": "artifacts/wwpg-api-example-1.0.0-source.zip",
+        "sha256": "9078929fca1fd8aa8b2364bff1289e97e69dd7f5b3edb1eae237010ed5fcfcae",
+        "bytes": 79297
+      },
+      {
+        "role": "upstream_example_sources",
+        "path": "artifacts/wwpg-upstream-api-example-1.0.0-source.zip",
+        "sha256": "3d9aabce079397b1d655d3ffb15745a9caea4185bde22a3024b841cac290653a",
+        "bytes": 69907
+      },
+      {
+        "role": "maven_repository",
+        "path": "artifacts/wwpg-api-1.0.0-maven.zip",
+        "sha256": "0e55db86b2a8bed9079a22735ebaa2eed9942de2ce7672ba03672e5e49995569",
+        "bytes": 404908
+      }
+    ],
+    "documentation_original_bytes": [
+      "docs/EXTENSION_API.md",
+      "docs/EXTENSION_API_PLAN.md",
+      "docs/EXTENSION_API_WORKSHOP.md",
+      "LICENSE"
+    ],
+    "transitive_locked_evidence": {
+      "files": 1770,
+      "original_bytes_verified": true
+    },
+    "original_client_png_identity": {
+      "files": 216,
+      "identical_to_executed_captures": true
+    },
+    "original_client_helper_identity": [
+      {
+        "session": "api35-api-graphical-BASE-NATIVE",
+        "mode": "graphical",
+        "profile": "BASE",
+        "backend": "NATIVE",
+        "helper_sha256": "2668b22b86e9326a0150b8c33577ea281fd0fddaed1064392503cd8ffb0a810e",
+        "helper_bytes": 39050,
+        "source_snapshots_checked": 4
+      },
+      {
+        "session": "api35-api-multiplayer-BASE-NATIVE",
+        "mode": "multiplayer",
+        "profile": "BASE",
+        "backend": "NATIVE",
+        "helper_sha256": "2668b22b86e9326a0150b8c33577ea281fd0fddaed1064392503cd8ffb0a810e",
+        "helper_bytes": 39050,
+        "source_snapshots_checked": 4
+      },
+      {
+        "session": "api35-api-graphical-BASE-JAVA",
+        "mode": "graphical",
+        "profile": "BASE",
+        "backend": "JAVA",
+        "helper_sha256": "2668b22b86e9326a0150b8c33577ea281fd0fddaed1064392503cd8ffb0a810e",
+        "helper_bytes": 39050,
+        "source_snapshots_checked": 4
+      },
+      {
+        "session": "api35-api-multiplayer-BASE-JAVA",
+        "mode": "multiplayer",
+        "profile": "BASE",
+        "backend": "JAVA",
+        "helper_sha256": "2668b22b86e9326a0150b8c33577ea281fd0fddaed1064392503cd8ffb0a810e",
+        "helper_bytes": 39050,
+        "source_snapshots_checked": 4
+      },
+      {
+        "session": "api33-api-graphical-PINOUT-NATIVE",
+        "mode": "graphical",
+        "profile": "PINOUT",
+        "backend": "NATIVE",
+        "helper_sha256": "5fdf564730be0d7cf93d545ef6303c38e4f0aa2f917aaa358e1b7329726f542a",
+        "helper_bytes": 38857,
+        "source_snapshots_checked": 4
+      },
+      {
+        "session": "api33-api-multiplayer-PINOUT-NATIVE",
+        "mode": "multiplayer",
+        "profile": "PINOUT",
+        "backend": "NATIVE",
+        "helper_sha256": "5fdf564730be0d7cf93d545ef6303c38e4f0aa2f917aaa358e1b7329726f542a",
+        "helper_bytes": 38857,
+        "source_snapshots_checked": 4
+      },
+      {
+        "session": "api33-api-graphical-PINOUT-JAVA",
+        "mode": "graphical",
+        "profile": "PINOUT",
+        "backend": "JAVA",
+        "helper_sha256": "5fdf564730be0d7cf93d545ef6303c38e4f0aa2f917aaa358e1b7329726f542a",
+        "helper_bytes": 38857,
+        "source_snapshots_checked": 4
+      },
+      {
+        "session": "api33-api-multiplayer-PINOUT-JAVA",
+        "mode": "multiplayer",
+        "profile": "PINOUT",
+        "backend": "JAVA",
+        "helper_sha256": "5fdf564730be0d7cf93d545ef6303c38e4f0aa2f917aaa358e1b7329726f542a",
+        "helper_bytes": 38857,
+        "source_snapshots_checked": 4
+      }
+    ],
+    "checksum_manifests": [
+      {
+        "archive": "release",
+        "path": "SHA256SUMS.txt",
+        "entries_checked": 1788
+      }
+    ],
+    "nested_zip_integrity_and_cache_exclusion": [
+      {
+        "path": "artifacts/wwpg-api-1.0.0-maven.zip",
+        "crc_passed": true,
+        "entries": 40,
+        "cache_entries": 0
+      },
+      {
+        "path": "artifacts/wwpg-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 59,
+        "cache_entries": 0
+      },
+      {
+        "path": "artifacts/wwpg-upstream-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 26,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-BASE/build/distributions/wwpg-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 59,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-BASE/build/distributions/wwpg-api-workshop-BASE.zip",
+        "crc_passed": true,
+        "entries": 15,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-BASE/build/distributions/wwpg-stationary-BASE.zip",
+        "crc_passed": true,
+        "entries": 23,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-BASE/build/distributions/wwpg-upstream-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 26,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/distributions/wwpg-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 59,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/distributions/wwpg-api-workshop-PINOUT.zip",
+        "crc_passed": true,
+        "entries": 15,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/distributions/wwpg-stationary-PINOUT.zip",
+        "crc_passed": true,
+        "entries": 32,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-JAVA-PINOUT/build/distributions/wwpg-upstream-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 26,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-BASE/build/distributions/wwpg-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 59,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-BASE/build/distributions/wwpg-api-workshop-BASE.zip",
+        "crc_passed": true,
+        "entries": 15,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-BASE/build/distributions/wwpg-stationary-BASE.zip",
+        "crc_passed": true,
+        "entries": 23,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-BASE/build/distributions/wwpg-upstream-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 26,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/distributions/wwpg-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 59,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/distributions/wwpg-api-workshop-PINOUT.zip",
+        "crc_passed": true,
+        "entries": 15,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/distributions/wwpg-stationary-PINOUT.zip",
+        "crc_passed": true,
+        "entries": 32,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/distributions/wwpg-upstream-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 26,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-windows-latest-JAVA-BASE/build/distributions/wwpg-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 59,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-windows-latest-JAVA-BASE/build/distributions/wwpg-api-workshop-BASE.zip",
+        "crc_passed": true,
+        "entries": 15,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-windows-latest-JAVA-BASE/build/distributions/wwpg-stationary-BASE.zip",
+        "crc_passed": true,
+        "entries": 23,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-windows-latest-JAVA-BASE/build/distributions/wwpg-upstream-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 26,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/distributions/wwpg-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 59,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/distributions/wwpg-api-workshop-PINOUT.zip",
+        "crc_passed": true,
+        "entries": 15,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/distributions/wwpg-stationary-PINOUT.zip",
+        "crc_passed": true,
+        "entries": 32,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-windows-latest-JAVA-PINOUT/build/distributions/wwpg-upstream-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 26,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-windows-latest-NATIVE-BASE/build/distributions/wwpg-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 59,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-windows-latest-NATIVE-BASE/build/distributions/wwpg-api-workshop-BASE.zip",
+        "crc_passed": true,
+        "entries": 15,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-windows-latest-NATIVE-BASE/build/distributions/wwpg-stationary-BASE.zip",
+        "crc_passed": true,
+        "entries": 23,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-windows-latest-NATIVE-BASE/build/distributions/wwpg-upstream-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 26,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-windows-latest-NATIVE-PINOUT/build/distributions/wwpg-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 59,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-windows-latest-NATIVE-PINOUT/build/distributions/wwpg-api-workshop-PINOUT.zip",
+        "crc_passed": true,
+        "entries": 15,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-windows-latest-NATIVE-PINOUT/build/distributions/wwpg-stationary-PINOUT.zip",
+        "crc_passed": true,
+        "entries": 32,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/ci-38143489285-inputs/artifacts/wwpg-windows-latest-NATIVE-PINOUT/build/distributions/wwpg-upstream-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 26,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/distributions/api33-api-workshop-BASE.zip",
+        "crc_passed": true,
+        "entries": 15,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/distributions/api33-api-workshop-PINOUT.zip",
+        "crc_passed": true,
+        "entries": 15,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/frozen-0.2.0-29/wwpg-api-1.0.0-maven.zip",
+        "crc_passed": true,
+        "entries": 40,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/frozen-0.2.0-29/wwpg-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 59,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/frozen-0.2.0-29/wwpg-upstream-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 26,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/frozen-0.2.0-33/wwpg-api-1.0.0-maven.zip",
+        "crc_passed": true,
+        "entries": 40,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/frozen-0.2.0-33/wwpg-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 59,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/build/frozen-0.2.0-33/wwpg-upstream-api-example-1.0.0-source.zip",
+        "crc_passed": true,
+        "entries": 26,
+        "cache_entries": 0
+      },
+      {
+        "path": "evidence/release/0.2.0/evidence/development/failed-development-runs.zip",
+        "crc_passed": true,
+        "entries": 1956,
+        "cache_entries": 0
+      }
+    ]
+  },
+  "failures": [],
+  "passed": true
+}

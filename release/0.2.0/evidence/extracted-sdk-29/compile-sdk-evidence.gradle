@@ -1,0 +1,28 @@
+import org.gradle.api.artifacts.component.ProjectComponentIdentifier
+import org.gradle.api.tasks.compile.JavaCompile
+gradle.projectsEvaluated {
+    def project = gradle.rootProject
+    def sha256 = { File file -> java.security.MessageDigest.getInstance('SHA-256').digest(file.bytes).encodeHex().toString() }
+    project.tasks.named('compileJava', JavaCompile).configure {
+        doFirst {
+            def artifacts = project.configurations.compileClasspath.resolvedConfiguration.resolvedArtifacts
+            def api = [:]
+            artifacts.each { artifact ->
+                if (artifact.moduleVersion.id.group == 'org.cha0scollective.wwpg') {
+                    def key = ['wwpg-api':'api', 'wwpg-cee-api':'cee_api'][artifact.name]
+                    if (key == null || artifact.moduleVersion.id.version != '1.0.0')
+                        throw new GradleException('Unexpected WWPG implementation/version dependency: ' + artifact)
+                    api[key] = sha256(artifact.file)
+                }
+            }
+            def expected = new groovy.json.JsonSlurper().parse(new File(project.findProperty('sdkExpectedHashes')))
+            if (api != expected) throw new GradleException('Compile dependencies differ from extracted frozen SDK: ' + api)
+            def projects = artifacts.findAll { it.id.componentIdentifier instanceof ProjectComponentIdentifier }.collect { it.id.componentIdentifier.toString() }
+            if (!projects.empty) throw new GradleException('Example compile classpath includes source projects: ' + projects)
+            def proof = [schema:1, api_dependencies:api, wwpg_project_dependencies:projects,
+                compiled_source_count:source.files.size(),
+                compile_classpath:classpath.files.collect { [path:it.absolutePath, sha256:it.isFile() ? sha256(it) : null] }]
+            new File(project.findProperty('sdkDependencyProof')).text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(proof)) + '\n'
+        }
+    }
+}

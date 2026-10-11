@@ -288,3 +288,63 @@ correction. Its passing local reference checks are separate from the new
 frozen eight-way acceptance still required. The strict release collector was
 not used to relabel this failed run, and every earlier archive byte remains
 unchanged.
+
+The superseded runs [38139459513](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38139459513)
+and [38140354792](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38140354792)
+were deliberately canceled by the lead developer after candidate29 was frozen,
+to free GitHub Actions workers. Original completed run/attempt metadata and all
+sixteen partial job logs are retained. Each job's actual conclusion, canceled
+step, reached assertion and partial pass count are recorded separately. These
+are cancellations, not compatibility-reference failures or accepted runs. No
+partial passing sequence completes a release gate. Candidate29 still requires
+its own full eight-job acceptance. Earlier archive members remain unchanged.
+
+The two superseded extracted-SDK attempts, candidates 27 and 28, are now retained
+compactly in this archive. Each independently compiled both projects after
+extracting the exact downloadable example source ZIPs and Maven ZIP. Produced
+jars match their historical frozen examples. Original attempt/proof JSON, build
+logs, dependency records, compile-evidence scripts, output jars, input archives
+and runtime artifacts are preserved with their actual hashes. Expanded duplicate
+source trees and Gradle outputs are unnecessary to inspect these proofs because
+the exact source and Maven archives are included. Both attempts remained
+non-publishable and unfrozen; their successful SDK builds do not transfer to a
+corrected final release whose artifact set differs. Prior archive bytes remain
+unchanged.
+
+Batch29 used frozen implementation `a0f2e63918e58bef9eef152d8808eb5ba51974ab`
+and runtime `c7a366f0c9fd50740bfe43942738a490f3de6892241881e9a86837105a003107`.
+Both real TCP clients passed all eleven views; native item wiring, controls,
+meters, panel editing, full native schematic copying and repair passed. The
+passive client's reconnection assertion then ran at its own age120 while the
+operator had only settled its second target position. Operator movement pauses
+its phase aging, so the observer's clock reached its check before the final
+native action. This attempt does not establish a native reconnection failure.
+
+A helper-only observer timing correction requires synchronized recovered state
+after a minimum wait with a hard deadline, preserving operator actions and the
+server's power/content assertions. The runtime, APIs, examples and successful
+SDK29 build remain frozen. Fresh complete real-client acceptance is required;
+this failed attempt remains failed. Exact helper/input bytes, original client/
+server logs, screenshots, launch files, thread dumps, process results, saved
+player data, world ZIP, frozen artifact lock/jars and source/cold proofs are
+retained. All 803 prior archive member bytes remain unchanged.
+
+CI run [38140559685](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38140559685)
+finished with seven actual Showroom failures and one deliberately cancelled
+remaining Windows/native/Pinout job. The cancellation happened only after
+diagnostic32 passed on both solvers; it freed workers for a new source-specific
+run. All eight raw logs and attempt/job/checkout records remain available.
+
+Diagnostic31 reproduces the strict tick192 lamp failure on both backends.
+Native PG is converged, but that callback observes the preceding rejected
+CEE frame before the next gameplay commit. Diagnostic32 observes ON at193
+and keeps OFF205, the native timer, strict15/0 brightness and electrical
+models unchanged. Both complete Showroom SETUP controls pass with zero
+independent CEE solves. Failed and successful original logs, sources, jars,
+phase records and saved worlds are preserved. These controls establish the
+cause and correction; they do not certify the final release.
+
+The content-address record maps every retained actual file to exact archived
+bytes, storing byte-identical jars/logs/NBT only once. Every prior919 member
+is unchanged. New implementation/source, SDK, complete CI, exported worlds
+and fresh real-client sessions must pass before publication.

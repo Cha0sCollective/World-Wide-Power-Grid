@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.0 — extension API 1.0.0
+
+- Publish the independently versioned general and CEE property APIs, with source/Javadoc jars, first-release classfile snapshots and a downloadable Maven repository.
+- Support stable extension terminals, parallel elements, resistors, switches, sources, AC, storage, diodes, transformers and controlled sources through the shared PG schedule. Native PG add-ons retain their existing simulation route.
+- Expose valid and unavailable measurements to add-ons and native handheld tools. Preserve accepted history through numerical rejection; isolate callback faults and clear paused readings.
+- Persist exact PG/CEE wire retirement through machine replacement and a save made before entity readiness. Wait for safe endpoint binding with clear tool feedback.
+- Ship two independently buildable examples and base/Pinout API Workshop saves with eleven playable stations. Retain the upstream Stationary Yard and its native content coverage.
+- Verify the frozen artifacts across the eight-way packaged matrix, exact extracted SDK builds, cold world reopens and Windows graphical/two-client Workshop sessions. [Final verification](release/0.2.0/verification.json) records exact counts, hashes and failure closures; [CI](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38143489285) identifies the checked-out source.
+
+The upstream versions and optional Pinout profile are unchanged. Earlier published artifacts and evidence remain intact. Moving systems, broad version support and large-server certification remain later work.
+
 ## 0.1.0-beta.5 — 11 October 2026 — stationary completion
 
 - Complete the stationary registry checklist, native player workflows, generation, storage, distribution, FE conversion, Nether links, instruments, loads and board/panel electronics.

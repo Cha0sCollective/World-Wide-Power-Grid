@@ -6,15 +6,12 @@ panel attachment through the CEE property API, and a new PG board component
 through PG's native system. The [Stationary Test Yard](STATIONARY_YARD.md) remains
 the demonstration of upstream stationary content.
 
-This is a development artifact until the exact exported ZIP passes acceptance.
-See the [0.2.0 progress record](../release/0.2.0/progress.json) for current evidence.
-The builder or a successful source compile alone does not establish a working
-download.
+Download [Extension API Workshop](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-api-workshop.zip) or its [Pinout installation edition](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-api-workshop-pinout.zip). The [final verification record](../release/0.2.0/verification.json) binds acceptance to these exact ZIPs and the example jars. The source builder and independently compiled SDK remain separate evidence from the playable checks.
 
 ## Install and enter
 
 Use the same fixed installation: Minecraft 1.21.1, NeoForge 21.1.231, Java 21,
-Create 6.0.10-280, CEE 1.1.3, Power Grid 0.6.2 and WWPG 0.2.0. Also install both
+Create 6.0.10-280, CEE 1.1.3, Power Grid 0.6.2, Architectury 13.0.8 and WWPG 0.2.0. Also install both
 example mod jars:
 
 - `wwpg-api-example-1.0.0.jar`, the general API machines.
@@ -33,6 +30,10 @@ Spawn is **9004, 64, 8995**. The chest at **9000, 64, 8997** holds goggles, both
 handheld meters, cutters, spools, native assembly parts and the workshop guide.
 Put on goggles, take both meters and walk south along the white paths. If an
 existing player position overrides spawn, teleport to those coordinates.
+
+If the PG design editor's name field or buttons are cut off, reduce **Options →
+Video Settings → GUI Scale**. GUI Scale 2 displays the complete editor in a
+1280 × 720 window.
 
 ## What to try
 
@@ -126,7 +127,8 @@ The opt-in client harness exercises actual PG/CEE wire items, source/load
 configuration, both handheld meters, native panel dyeing, design-table editing,
 schematic item copying/loading, board updates, wire cutting and reconnection.
 It runs once as a graphical single-player client and once as two real TCP
-clients for each profile and backend. On Windows, the frozen-artifact runner is:
+clients for each profile and backend. Each session has eleven station views and
+nine phases: one viewing phase and eight interaction phases. On Windows, the frozen-artifact runner is:
 
 ```powershell
 tools/accept_api_clients.ps1 -Batch api-acceptance -SourceSha <frozen-commit> -ColdRestarts

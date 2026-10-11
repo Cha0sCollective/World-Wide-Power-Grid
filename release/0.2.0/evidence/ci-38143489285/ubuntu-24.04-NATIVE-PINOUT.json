@@ -1,0 +1,564 @@
+{
+  "schema": 1,
+  "completed": true,
+  "passed": true,
+  "unresolved_failures": [],
+  "artifact_hashes": {
+    "runtime": "708d3bac7fee11f34a770f0a145ee4226a95566870db572767aafa97bae78f10",
+    "api": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+    "cee_api": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+    "example": "90a52b8ca6d65860043e816d4d101dc3e014dd7c947133e48a0dfe7a49490cd4",
+    "upstream_example": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095"
+  },
+  "platform": "ubuntu-24.04",
+  "backend": "NATIVE",
+  "profile": "PINOUT",
+  "regression_checks_passed": 208,
+  "extension_checks_passed": 34,
+  "api_namespaces_passed": [
+    "wwpg_api",
+    "wwpg_api_faults",
+    "wwpg_api_pause",
+    "wwpg_api_pending_restart",
+    "wwpg_api_restart",
+    "wwpg_api_upstream",
+    "wwpg_api_upstream_restart"
+  ],
+  "cold_restart_passes": 3,
+  "actual_chunk_reload_cycles": 5,
+  "independent_cee_solves": 0,
+  "exactly_once_history": true,
+  "cee_property_adapter_verified": true,
+  "global_pause_verified": true,
+  "api_fixture_behaviors": [
+    "board_component",
+    "instrument",
+    "machine",
+    "panel_attachment",
+    "storage"
+  ],
+  "nonconverging_backend_verified": true,
+  "paused_measurements_unavailable": true,
+  "cold_wire_systems_verified": [
+    "CEE",
+    "POWER_GRID"
+  ],
+  "cold_ownership_format_version": 2,
+  "source_sha": "934fe30fd5a6dfe27f8ab13bee6edb40ca1078da",
+  "source_tree": "55d1b62cbb06f53be4759ba2d2303b3deb41d491",
+  "checked_out_source_verified": true,
+  "pending_wire_retirement_verified": true,
+  "pending_entity_restart_phases": [
+    "SETUP",
+    "ARM",
+    "VERIFY"
+  ],
+  "pending_entity_restart": {
+    "oracle": {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-pending-restart/extension-api-pending-before-restart.nbt",
+      "sha256": "941564c7d002fa718a0e0ad661561f5af12bc32a908249f263336c0bd61c34fa",
+      "bytes": 229
+    },
+    "phases": [
+      {
+        "phase": "SETUP",
+        "manifest": {
+          "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-pending-restart/packaged-2026-10-11T13-33-08.663104487Z.json",
+          "sha256": "882c1db99ef92a92739959adc50b52210856ab161869bc12b33cabc9fa0df63c",
+          "bytes": 785
+        },
+        "log": {
+          "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-pending-restart/setup-phase.log",
+          "sha256": "4f3552eeef045c4ad7c5f9a6ae05b8901c703b1021c28c00bf44b88514234776",
+          "bytes": 19012
+        }
+      },
+      {
+        "phase": "ARM",
+        "manifest": {
+          "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-pending-restart/packaged-2026-10-11T13-33-34.552652911Z.json",
+          "sha256": "0bce5922b67c4299423644ef02fc412b9099c8d295d96b75d965de78e095704c",
+          "bytes": 783
+        },
+        "log": {
+          "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-pending-restart/arm-phase.log",
+          "sha256": "a4c13183c57f2390794c8e00fed189cbd4667deeee579ae213ffbcae6423f72c",
+          "bytes": 14733
+        }
+      },
+      {
+        "phase": "VERIFY",
+        "manifest": {
+          "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-pending-restart/packaged-2026-10-11T13-33-58.853621476Z.json",
+          "sha256": "1509b258858df22dcb17baee00c808a396df89a7b34d61ed052a56ce7013c30a",
+          "bytes": 786
+        },
+        "log": {
+          "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-pending-restart/verify-phase.log",
+          "sha256": "826f519e57fa28e41ee1f3bb9335804b30bbcb0a7ac999601d4283994fe6b382",
+          "bytes": 16040
+        }
+      }
+    ]
+  },
+  "junit_checks_passed": 62,
+  "evidence_files": [
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/ci-source.json",
+      "sha256": "e43e7b31f3e5695c643b8d6aa41694bc99c07c08d04f6dbb300be58f739881b0",
+      "bytes": 211
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/distributions/wwpg-api-example-1.0.0-source.zip",
+      "sha256": "d98b1ee915486df8d2a159dd733e47c0d1773c9d7a9730a39dccb903faec7624",
+      "bytes": 79311
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/distributions/wwpg-api-workshop-PINOUT.zip",
+      "sha256": "b7c3d885ee1bed24746b0decc57d3b511bea7254f42b5470649c6a033079f8d2",
+      "bytes": 322692
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/distributions/wwpg-stationary-PINOUT.zip",
+      "sha256": "345eccda67ce633a85ad00e686c0d8371a43879fcd9e58a841d8919851e0feb7",
+      "bytes": 1336677
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/distributions/wwpg-upstream-api-example-1.0.0-source.zip",
+      "sha256": "0cf5b56fe374eb25c8c97640552f4a00e186a6a3f0ba15a2956410959b6681ae",
+      "bytes": 69921
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/libs/wwpg-0.2.0.jar",
+      "sha256": "708d3bac7fee11f34a770f0a145ee4226a95566870db572767aafa97bae78f10",
+      "bytes": 3532278
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/libs/wwpg-api-1.0.0.jar",
+      "sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+      "bytes": 50130
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/libs/wwpg-cee-api-1.0.0.jar",
+      "sha256": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+      "bytes": 8788
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.api.ApiVersionTest.xml",
+      "sha256": "464a83945b7acb179bff1f22b56d81768e466cd8f335599673da26412704d732",
+      "bytes": 468
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.api.cee.CeeAdapterRegistryTest.xml",
+      "sha256": "e42c3553aa7957a01bf0ed9ecee8fa6e4685d5e73d8e082aad12cbdc760b21f6",
+      "bytes": 1686
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.api.CircuitDescriptionTest.xml",
+      "sha256": "2750f97b996f4cf4e06c633145804b0097a3b38831d8aa4868a71414afb88247",
+      "bytes": 1275
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.api.DeviceResultsTest.xml",
+      "sha256": "c87f2486af5bc84e89958819f690179d1b2b62f20e9debc33dab07593fc637a6",
+      "bytes": 1204
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.api.VoltageMeasurementTest.xml",
+      "sha256": "538d8e7519eaf4a88583101ce95d8ee19c04294b54b0de83ab57a0f968de83c5",
+      "bytes": 484
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.BridgeSimulationResultsTest.xml",
+      "sha256": "dc5ddd6a7919714760733cbed341b97775731e00dff3a6ad4a1afbc0864da3c2",
+      "bytes": 708
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.LinearBranchTest.xml",
+      "sha256": "e1146ad6085976aa4a3394f3bb604a9f9ece06a544ace18bfc3b2b316ab48638",
+      "bytes": 771
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.NativeCeeCheckpointTest.xml",
+      "sha256": "efc91edd21328ca8e9a0e5a7924e52b3f2a170c03968f6ef0dc3437ab5ad5ef5",
+      "bytes": 937
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.bridge.TransformerStampTest.xml",
+      "sha256": "c6ec5c4894ef9bcb1a374713b2374343cebbb17fad7dfdb6100fc0ee5d44fe3b",
+      "bytes": 988
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiCeeWireIdentitiesTest.xml",
+      "sha256": "e81a402a5862fd9fbf01b1ac7c79e3611ebfee0e35f3cf081a44e1e51efc9ec2",
+      "bytes": 1474
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiDiagnosticsTest.xml",
+      "sha256": "08ed53348ae96de0b73071b8773769c1a4ba09570edacae9d658bd22bad68b02",
+      "bytes": 641
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiElectricalTest.xml",
+      "sha256": "178441e95017b0c7294a012d3368d8ba21cfb698809c62fb695ab9b1b9f7ba90",
+      "bytes": 5470
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiGroundTest.xml",
+      "sha256": "5f543ccb8e8fd2a6280d8455153fab63e09f955d13d7c31dac47f3776018e6f9",
+      "bytes": 1341
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.ApiTerminalIdentitiesTest.xml",
+      "sha256": "50762774885200161a9dde4e98a260fc967ea71c758e8af3bffe4d2ed6e2ee8d",
+      "bytes": 1814
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/test-results/test/TEST-org.cha0scollective.wwpg.extension.NativeApiReadingsTest.xml",
+      "sha256": "ef28f3d9a2d7da1e7ee1e89a18efcdcccf45a964e06f9f89864760d16fdb644f",
+      "bytes": 833
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar",
+      "sha256": "c9e11914fa3048f778bd543dc32242c995fe43bdf37bb8f2bd675aef884b5095",
+      "bytes": 45638
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar",
+      "sha256": "90a52b8ca6d65860043e816d4d101dc3e014dd7c947133e48a0dfe7a49490cd4",
+      "bytes": 52085
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api/extension-api-before-restart.nbt",
+      "sha256": "afae203fc8460923c05a8a7a69923549cb2a63b121d67ae7b98c927979a5cbe7",
+      "bytes": 143
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api/extension-api-replacement-before-restart.nbt",
+      "sha256": "4d7a8ce21c9ed76a7aa137442079692a1a9e1251bca91907c6070ba309f5ed87",
+      "bytes": 233
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api/logs/latest.log",
+      "sha256": "4990b898da557b77db15463a5276d8a71bcd314d120fdcd35d91c6c316eadca0",
+      "bytes": 44959
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api/packaged-2026-10-11T13-34-24.443544959Z.json",
+      "sha256": "9104a78adc948b8ef7fa2014bc2b669eb8f15d2ee3b0518d05ae5ba5600f05f8",
+      "bytes": 847
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api/packaged-2026-10-11T13-35-48.311769595Z.json",
+      "sha256": "04abdbd636b17f166e9a8e3f4f2ba5699cdc8b29ab5edde0fdea11dc59d008a0",
+      "bytes": 848
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api/packaged-2026-10-11T13-37-10.104139774Z.json",
+      "sha256": "430b1198025da04aebaffaa5dbfd108cbd4310c0eb37b9c02d0fb2a99048e500",
+      "bytes": 848
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api/packaged-2026-10-11T13-38-38.585060754Z.json",
+      "sha256": "18a6b46a06dc7b7436f9a69532bc181b06edfc6e12991fbd0156ce9a3d7dc358",
+      "bytes": 848
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api/restart-1.log",
+      "sha256": "d29a93572c35ce5119100ae0420098041de05e4dc33e77180d907aea0e4dbb71",
+      "bytes": 45163
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api/restart-2.log",
+      "sha256": "62e13b98d9eec8a0e48d49598b548730e5f90fd434126d74e45a253e88463d1f",
+      "bytes": 45073
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api/restart-3.log",
+      "sha256": "4990b898da557b77db15463a5276d8a71bcd314d120fdcd35d91c6c316eadca0",
+      "bytes": 44959
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api/upstream-api-before-restart.nbt",
+      "sha256": "46921b7a12cbe189696857c6b2e77cc35326466b09aeccacc86f355a2dff770a",
+      "bytes": 466
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-pause/logs/latest.log",
+      "sha256": "aa1420c85cd6beb09210dd1c16400c3d22479bc5e4b4b91eed15301352298628",
+      "bytes": 20454
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-pause/packaged-2026-10-11T13-32-43.411769589Z.json",
+      "sha256": "2389ebb394c6addc6ee31c3e201cf8f9816fb439b1c8b9df8597d6c765a38d6d",
+      "bytes": 775
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-pending-restart/arm-phase.log",
+      "sha256": "a4c13183c57f2390794c8e00fed189cbd4667deeee579ae213ffbcae6423f72c",
+      "bytes": 14733
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-pending-restart/extension-api-pending-before-restart.nbt",
+      "sha256": "941564c7d002fa718a0e0ad661561f5af12bc32a908249f263336c0bd61c34fa",
+      "bytes": 229
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-pending-restart/packaged-2026-10-11T13-33-08.663104487Z.json",
+      "sha256": "882c1db99ef92a92739959adc50b52210856ab161869bc12b33cabc9fa0df63c",
+      "bytes": 785
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-pending-restart/packaged-2026-10-11T13-33-34.552652911Z.json",
+      "sha256": "0bce5922b67c4299423644ef02fc412b9099c8d295d96b75d965de78e095704c",
+      "bytes": 783
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-pending-restart/packaged-2026-10-11T13-33-58.853621476Z.json",
+      "sha256": "1509b258858df22dcb17baee00c808a396df89a7b34d61ed052a56ce7013c30a",
+      "bytes": 786
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-pending-restart/setup-phase.log",
+      "sha256": "4f3552eeef045c4ad7c5f9a6ae05b8901c703b1021c28c00bf44b88514234776",
+      "bytes": 19012
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-pending-restart/verify-phase.log",
+      "sha256": "826f519e57fa28e41ee1f3bb9335804b30bbcb0a7ac999601d4283994fe6b382",
+      "bytes": 16040
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-workshop/api-workshop-stations.json",
+      "sha256": "48cee2ebdd7aa4763cd5845a363424d6f1bb3cbe32914976fad10a58dffac141",
+      "bytes": 19571
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-workshop/packaged-2026-10-11T14-08-48.813886430Z.json",
+      "sha256": "50bb753ea7f362d83e06853e731ac134b48af859a431e669f2fa63071472ad40",
+      "bytes": 775
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-workshop/packaged-2026-10-11T14-09-18.343984730Z.json",
+      "sha256": "e4bc82fe14260c18d9e697ed07f445374a0424e80b4f8f0c38e950bca92d638e",
+      "bytes": 776
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-workshop/packaged-2026-10-11T14-09-46.431345972Z.json",
+      "sha256": "acc9084b47e550200edca145effc11fcfbb9302306e91ed3e59e90911e20f926",
+      "bytes": 776
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-workshop/packaged-2026-10-11T14-10-13.227536273Z.json",
+      "sha256": "cab9d3f72c9f7673b1a3b3d4bc2d8e5505d00765c9e55f72e9c92bfbae13fb0b",
+      "bytes": 776
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-workshop/restart-1.log",
+      "sha256": "fd326076ede08e6fadd2c2182ee53ad4dbed8b1daafde7086c365e692ff32055",
+      "bytes": 20755
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-workshop/restart-2.log",
+      "sha256": "ea2308aa0394089f68b3c596123cf213f4d6651f49906651b49cdd29b5c235bc",
+      "bytes": 20858
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/api-workshop/restart-3.log",
+      "sha256": "ed223ad6fe6ddc6fd925efa1ce5999b70323991f290145522d3e505e382c26dd",
+      "bytes": 20859
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/example/logs/latest.log",
+      "sha256": "b5afa9a1d679d69385e5c8f6d29900f661b9fdb122917289db0a738ad6f141a9",
+      "bytes": 15873
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/example/packaged-2026-10-11T14-02-16.391183129Z.json",
+      "sha256": "4a56b8255263b20c633c3aef37ce25364f42d31efca8d99f1f60b007f098a3d7",
+      "bytes": 372
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/example/packaged-2026-10-11T14-02-41.227293137Z.json",
+      "sha256": "dd5edae0246730d10b7482db0b3cf4d0cd6af9865262f6dada748693042ed292",
+      "bytes": 373
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/exported-api-workshop/api-workshop-stations.json",
+      "sha256": "d71f64376b1d550aa9c9ad40f2b1e23e80a1f1d5fa143017e5ba56a86abda5b4",
+      "bytes": 19605
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/exported-api-workshop/extracted-yard.json",
+      "sha256": "1081512aadf4c08083fb2b87cd1bc29f5fcd0999b30b64c86c70566e0c8adc37",
+      "bytes": 543
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/exported-api-workshop/packaged-2026-10-11T14-10-41.276778346Z.json",
+      "sha256": "ceb146e7f21cc7c67dbf9b99259b467b28b78a6a8570bf8cf7e7f60edfbb2ca8",
+      "bytes": 776
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/exported-api-workshop/packaged-2026-10-11T14-11-08.845759275Z.json",
+      "sha256": "52b432f0dbe98d4e82115216c6f722ada347903d8a6c41f667f0d1f993d9e664",
+      "bytes": 776
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/exported-api-workshop/packaged-2026-10-11T14-11-36.017710668Z.json",
+      "sha256": "5ca43cdec2ce88b76309cb6e25fb448b6d05b050b47b9e98fb400232e391ed05",
+      "bytes": 776
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/exported-api-workshop/restart-1.log",
+      "sha256": "1817aebda35fa40e9fa391fd2db00c36a2b31ea28ae69756a6f5a654750be0bb",
+      "bytes": 24972
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/exported-api-workshop/restart-2.log",
+      "sha256": "65ff8b2f2cd9f09cb7ff33ecf6611f7da9c0667252476cc1bc82557327cab2ac",
+      "bytes": 20757
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/exported-api-workshop/restart-3.log",
+      "sha256": "dd971bf9beade7f1d29f3bcbfc79f88d00b45a2e245b3b4693676d757dd5ff73",
+      "bytes": 20755
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/exported-yard/extracted-yard.json",
+      "sha256": "033f20f32aab0bb15860e209695e94e285c59c73145c729f008fd6288b3a899f",
+      "bytes": 517
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/exported-yard/packaged-2026-10-11T14-06-47.309428081Z.json",
+      "sha256": "6293668aac8d95f4d325613c58e7f0fe2b02fd60d7abe55a7345fb3073909996",
+      "bytes": 372
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/exported-yard/packaged-2026-10-11T14-07-30.892099720Z.json",
+      "sha256": "f85df9981e5714ecfd13bdf9d092e97d513ed3bae139f32bbbe53a50dfbfe76e",
+      "bytes": 372
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/exported-yard/packaged-2026-10-11T14-08-09.658959872Z.json",
+      "sha256": "a399a0b382a54809d8ebff15b92029febf2a6020679dccd4a7e5c750ff3ae557",
+      "bytes": 372
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/exported-yard/restart-1.log",
+      "sha256": "8a54c70fd77eeb885add519f43106c37eab886a2d2ba5515b7fcd14d5595e9d6",
+      "bytes": 27006
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/exported-yard/restart-2.log",
+      "sha256": "736d386b0a93a25ccaf3f6256c9e7d1b119a996abfae7d2c28a56725015fb96c",
+      "bytes": 23660
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/exported-yard/restart-3.log",
+      "sha256": "66e6c1faaa3ca9b7c601e75a1680c26e70a545f8cb1c3794f67b563fa9137098",
+      "bytes": 23350
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/packaged-2026-10-11T13-40-07.237673895Z.json",
+      "sha256": "17d85c5aff39d819766dfb2f62622dbc64a1e6266def4ebb429d30b4dea455f1",
+      "bytes": 371
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/packaged-2026-10-11T13-43-42.108504932Z.json",
+      "sha256": "21864658cfab26601159f652effe71a90b97fbe41745b7d5cda1729d5822a631",
+      "bytes": 372
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/packaged-2026-10-11T13-48-49.488235776Z.json",
+      "sha256": "12249b52741a3e6ef7b4aaaeb4767b5cfda2fef0db74db6f0c1578af9bcfea0c",
+      "bytes": 372
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/packaged-2026-10-11T13-54-35.881297755Z.json",
+      "sha256": "3ef2b4538d75c21caa2cad91772a7c221d8a4f13bfb221793aa6c0e078b79ecf",
+      "bytes": 372
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/reference/reference-packaged-2026-10-11T14-01-25.124116742Z.json",
+      "sha256": "570d77e39e3c4d0e2b8012bf734df61a1a28f40a89fbf9c1f6b88d22e36d2ac2",
+      "bytes": 400
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/reference/reference-packaged-2026-10-11T14-01-49.604176232Z.json",
+      "sha256": "81474b0fc34c62d6cd1f1384ae28ac8226ceeaa4a8a6da29c3fad8145af0f773",
+      "bytes": 376
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/restart-1.log",
+      "sha256": "455b78a0d6f6c6fff8ce37db8d5a4f493557307fe46f2c6e58f34cb0ae9c9ed2",
+      "bytes": 219444
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/restart-2.log",
+      "sha256": "e0878f7593f292e49f77c84607cdd1d83f8824a65a85eeb6a19610e96f416ece",
+      "bytes": 219154
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/restart-3.log",
+      "sha256": "07e40da382b52a301cb62b7e189fae0895685cf79a2db7701574b833eb75635b",
+      "bytes": 219843
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/showroom/logs/latest.log",
+      "sha256": "a76191b8559a102c711378453ae38b44866984cdb2ad0a8cf13b6439766fcb8c",
+      "bytes": 19824
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/showroom/packaged-2026-10-11T14-03-05.012293660Z.json",
+      "sha256": "b4082842cfb1abaf893e87d9279541ffb878f5ba0c407e8e6fe5267b1c5f226e",
+      "bytes": 373
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/showroom/packaged-2026-10-11T14-03-36.054374480Z.json",
+      "sha256": "2bc6993d0d9334204b8e3d6928019c9707f911cb015b14a2d62ea21c83c16f6c",
+      "bytes": 374
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/yard/packaged-2026-10-11T14-04-05.838429239Z.json",
+      "sha256": "cd4a6bad612f29ba01f66af08a0e6ded71d16d7a8a3f515a5ff57109ae6d2384",
+      "bytes": 371
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/yard/packaged-2026-10-11T14-04-49.217177261Z.json",
+      "sha256": "de89b8bebbac7883abe2e06e264b8345582405559dfde1da96ed21fbef114bbe",
+      "bytes": 372
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/yard/packaged-2026-10-11T14-05-29.526012699Z.json",
+      "sha256": "581091a67b19037d8c59555704d8104d98ecaeff9eb517a942784ad05886d52e",
+      "bytes": 372
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/yard/packaged-2026-10-11T14-06-08.152144970Z.json",
+      "sha256": "650617b51f58ed8052974bdbcc03a33cf0173541796651e8907919bbe1b1f943",
+      "bytes": 372
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/yard/restart-1.log",
+      "sha256": "f1b7fe300c227468ff359fc0ff7be83698fc2ed22a2f2a80d43b50fdaffdff38",
+      "bytes": 23351
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/yard/restart-2.log",
+      "sha256": "4c819250b7935e85ae344e05a6ed583ae1cf2a5b81015479b829082745331c16",
+      "bytes": 23659
+    },
+    {
+      "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/run/yard/restart-3.log",
+      "sha256": "e373d1a97be6a40ade48f8790e5570bd0b54824ba3bd40d3ec1d24018db5bb4a",
+      "bytes": 23351
+    }
+  ],
+  "checked_out_source": {
+    "path": "build/ci-38143489285-inputs/artifacts/wwpg-ubuntu-24.04-NATIVE-PINOUT/build/ci-source.json",
+    "sha256": "e43e7b31f3e5695c643b8d6aa41694bc99c07c08d04f6dbb300be58f739881b0",
+    "bytes": 211
+  },
+  "github_job_id": 114481941013,
+  "github_artifact_id": 11705395783
+}

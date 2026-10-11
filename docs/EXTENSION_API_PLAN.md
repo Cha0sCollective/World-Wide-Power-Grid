@@ -1,5 +1,10 @@
 # WWPG 0.2.0 / extension API 1.0 implementation and acceptance
 
+This is the retained implementation and acceptance plan for the published API.
+The [completed progress record](../release/0.2.0/progress.json) and [frozen final
+verification](../release/0.2.0/verification.json) record its actual gates. The requirements
+below are preserved rather than rewritten after implementation.
+
 The release delivers a documented stationary integration contract, an independent
 SDK, and a separately built example add-on. API version **1.0.0** is independent
 of WWPG version **0.2.0**. Completion is recorded in

@@ -1,11 +1,11 @@
 # WWPG extension API
 
-Target: **WWPG 0.2.0**, independently versioned **API 1.0.0**, Java 21 and NeoForge for Minecraft 1.21.1.
+Published with **WWPG 0.2.0**, independently versioned **API 1.0.0**, Java 21 and NeoForge for Minecraft 1.21.1.
 
-This document describes the contract being implemented. The implementation and
-acceptance state are recorded in [the 0.2.0 progress record](../release/0.2.0/progress.json).
-API freeze and release publication require all gates in
-[the implementation plan](EXTENSION_API_PLAN.md); source files alone do not establish a supported release.
+This document defines the supported stationary API contract. The [final
+verification record](../release/0.2.0/verification.json) locks the exact SDK, runtime,
+examples and accepted worlds. The [implementation plan](EXTENSION_API_PLAN.md)
+and [progress record](../release/0.2.0/progress.json) preserve its gates and evidence.
 
 ## What an add-on can provide
 
@@ -39,7 +39,7 @@ The intended compile-time coordinate is:
 
 ```groovy
 repositories {
-    // Use the provided local Maven repository for SDK candidates.
+    // Extract the release Maven ZIP and use its repository root.
     maven { url = uri('path/to/wwpg-api-maven') }
 }
 dependencies {
@@ -49,14 +49,13 @@ dependencies {
 
 Use the WWPG runtime mod to supply the API at runtime. Do not shade API classes
 into an add-on. The published source and Javadoc artifacts have the same
-coordinate with `sources` and `javadoc` classifiers. No public Maven hosting URL
-is promised until publication; the release's local Maven repository is sufficient
-to build the independent example.
+coordinate with `sources` and `javadoc` classifiers. The release's downloadable
+Maven repository supports public consumption without GitHub credentials. A hosted
+Maven service is not required.
 
-The public distribution target is the release asset
+Download the public release asset
 [wwpg-api-1.0.0-maven.zip](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-api-1.0.0-maven.zip).
-This URL becomes available when 0.2.0 is published. Download it from the release,
-verify its published SHA256, and extract it into a directory such as
+Verify its published SHA256, and extract it into a directory such as
 `wwpg-api-maven`. That directory contains `org/cha0scollective/wwpg/...` and is
 the Maven repository root. Use its absolute path in `maven { url = uri(...) }`
 or the examples' `-PapiRepository` option. Resolving these explicit versions
@@ -205,12 +204,12 @@ multiple capability owners. Native CEE panel attachments extend their native
 properties through the separate CEE route, and PG board components keep PG's
 native component registration and simulation.
 
-Panel attachments or board components use stable slots owned by their assembly.
-Do not derive slots from iteration order, visual position alone, list indices,
-matrix ordinals, or Java object identity. Copying an upstream assembly follows
-its native identity rules; preserve identities for an edit of an existing design,
-and assign new ones for an actual independent copy where native serialization
-requires it.
+For components described inside a general API assembly, the add-on owns the
+stable local node and element keys. Do not derive them from iteration order,
+visual position alone, list indices, matrix ordinals, or Java object identity.
+Native CEE attachments and PG board components keep their upstream identity and
+serialization rules; they do not acquire additional general-capability owners.
+Editing or copying an upstream assembly follows those native rules.
 
 Changing a parameter with the same element ID and model family retains the
 element's runtime history. Changing its endpoints or model family is structural.
@@ -442,7 +441,7 @@ The `API_VERSION` field also reads the version at runtime. It is deliberately
 not a Java compile-time constant, so an already compiled add-on observes a later
 compatible API version without recompilation.
 
-After API 1.0 is frozen, compatible additions use API minor versions. Breaking
+Compatible additions use API minor versions. Breaking
 descriptors, removed models, changed identity meaning, changed physical
 conventions, or new mandatory implementation methods require an API major version
 and migration documentation. Constants are part of the contract because Java
@@ -504,8 +503,8 @@ Each attempt uses a new output directory; a failed attempt remains inspectable.
 Pass `--release` only when the frozen manifest includes completed acceptance:
 
 ```text
-python tools/package_api_release.py --manifest release/0.2.0/manifest.json --output build/distributions/wwpg-0.2.0-sdk-candidate.zip
-python tools/package_api_release.py --manifest release/0.2.0/manifest.json --output build/distributions/wwpg-0.2.0-release.zip --release
+python tools/package_api_release.py --manifest release/0.2.0/verification.json --output build/distributions/wwpg-0.2.0-sdk-candidate.zip
+python tools/package_api_release.py --manifest release/0.2.0/verification.json --output build/distributions/wwpg-0.2.0-release.zip --release
 ```
 
 The input format has `schema: 1`, `wwpg_version: "0.2.0"`,

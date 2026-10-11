@@ -47,7 +47,7 @@ final class ApiWorkshopClientAcceptance {
     private ExtensionApiClientSession integrated;
     private String phase = "";
     private int age, stopping;
-    private boolean completed;
+    private boolean completed, displayConfigured;
     private final ArrayDeque<Vec3> movement = new ArrayDeque<>();
     private Vec3 movementTarget;
     private int movementSettling;
@@ -82,6 +82,18 @@ final class ApiWorkshopClientAcceptance {
         if (completed || failure != null) { if (++stopping >= 100) mc.stop(); return; }
         try {
             require(System.currentTimeMillis() - started < 900000, "API client exceeded fifteen minutes");
+            if (!displayConfigured) {
+                mc.options.getSoundSourceOptionInstance(net.minecraft.sounds.SoundSource.MUSIC).set(0.0);
+                mc.options.guiScale().set(2);
+                mc.resizeDisplay();
+                mc.options.save();
+                require(mc.options.getSoundSourceVolume(net.minecraft.sounds.SoundSource.MUSIC) == 0,
+                        "Test-client music must remain disabled");
+                require(mc.getWindow().getGuiScaledHeight() >= 272, "Native board editor requires at least 272 visible logical pixels");
+                displayConfigured = true;
+                WorldWidePowerGrid.LOGGER.info("API_WORKSHOP_DISPLAY_READY: requestedGuiScale=2; actualGuiScale={}; logicalWidth={}; logicalHeight={}",
+                        mc.getWindow().getGuiScale(), mc.getWindow().getGuiScaledWidth(), mc.getWindow().getGuiScaledHeight());
+            }
             if (mc.level == null && mc.screen instanceof net.minecraft.client.gui.screens.AccessibilityOnboardingScreen) {
                 for (var child : mc.screen.children()) if (child instanceof net.minecraft.client.gui.components.Button button && button.getMessage().getString().equals("Continue")) { button.onPress(); break; }
             }
@@ -218,9 +230,39 @@ final class ApiWorkshopClientAcceptance {
             if (age == 105) {
                 require(mc.screen instanceof CircuitDesignTableEditScreen, "Native board design editor did not open");
                 var field = CircuitDesignTableEditScreen.class.getDeclaredField("nameField"); field.setAccessible(true);
-                ((net.minecraft.client.gui.components.EditBox) field.get(mc.screen)).setValue("WWPG API client edited");
-                if (!multiplayer) shot(mc, "api-board-edit.png");
-                ((CircuitDesignTableEditScreen<?>) mc.screen).save();
+                var nameField = (net.minecraft.client.gui.components.EditBox) field.get(mc.screen);
+                require(nameField.getX() >= 0 && nameField.getY() >= 0
+                                && nameField.getRight() <= mc.screen.width && nameField.getBottom() <= mc.screen.height,
+                        "Native design name field is outside the visible viewport");
+                require(mc.screen.mouseClicked(nameField.getX() + 2, nameField.getY() + nameField.getHeight() / 2.0, 0)
+                                && nameField.isFocused(), "Native design name field did not accept a visible mouse click");
+                mc.screen.keyPressed(org.lwjgl.glfw.GLFW.GLFW_KEY_END, 0, 0);
+                int previousLength = nameField.getValue().length();
+                for (int i = 0; i < previousLength; i++) mc.screen.keyPressed(org.lwjgl.glfw.GLFW.GLFW_KEY_BACKSPACE, 0, 0);
+                require(nameField.getValue().isEmpty(), "Native name-field keyboard deletion failed");
+                for (char character : "WWPG API client edited".toCharArray())
+                    require(mc.screen.charTyped(character, 0), "Native name-field character input was rejected");
+                require(nameField.getValue().equals("WWPG API client edited"), "Native design name keyboard input differs");
+                WorldWidePowerGrid.LOGGER.info("API_WORKSHOP_VISIBLE_NAME_INPUT_PASSED: x={}; y={}; width={}; height={}; viewportWidth={}; viewportHeight={}; input=screenMouseAndKeyboard; name={}",
+                        nameField.getX(), nameField.getY(), nameField.getWidth(), nameField.getHeight(),
+                        mc.screen.width, mc.screen.height, nameField.getValue());
+            }
+            // Let the typed name render before capturing and pressing the visible
+            // native Save button. Later copy/synchronization assertions are unchanged.
+            if (age == 109) shot(mc, multiplayer ? "api-board-editor-visible-A.png" : "api-board-edit.png");
+            if (age == 110) {
+                require(mc.screen instanceof CircuitDesignTableEditScreen, "Native editor closed before visible Save");
+                var editor = mc.screen;
+                var field = CircuitDesignTableEditScreen.class.getDeclaredField("acceptBtn"); field.setAccessible(true);
+                var save = (net.minecraft.client.gui.components.AbstractWidget) field.get(editor);
+                require(save.active && save.visible && save.getX() >= 0 && save.getY() >= 0
+                                && save.getRight() <= editor.width && save.getBottom() <= editor.height,
+                        "Native Save button is disabled or outside the visible viewport");
+                double x = save.getX() + save.getWidth() / 2.0, y = save.getY() + save.getHeight() / 2.0;
+                require(editor.mouseClicked(x, y, 0), "Visible native Save button rejected its mouse click");
+                editor.mouseReleased(x, y, 0);
+                WorldWidePowerGrid.LOGGER.info("API_WORKSHOP_VISIBLE_SAVE_CLICK_PASSED: x={}; y={}; width={}; height={}; viewportWidth={}; viewportHeight={}; input=screenMouse",
+                        save.getX(), save.getY(), save.getWidth(), save.getHeight(), editor.width, editor.height);
             }
             if (age == 155) {
                 require(mc.screen instanceof CircuitDesignTableScreen && table.getSchematicName().equals("WWPG API client edited"), "Native editor save did not return the renamed design");

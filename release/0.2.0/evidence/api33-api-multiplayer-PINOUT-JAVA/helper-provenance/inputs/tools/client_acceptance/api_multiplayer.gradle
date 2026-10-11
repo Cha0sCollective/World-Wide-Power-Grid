@@ -1,0 +1,127 @@
+// Freeze one dedicated server and two graphical clients without rebuilding the runtime.
+gradle.projectsEvaluated {
+    def project = gradle.rootProject
+    def output = project.file('build/api-multiplayer-helper')
+    def properties = [runtime:'clientArtifact', api:'apiArtifact', cee_api:'ceeApiArtifact', example:'exampleArtifact', upstream_example:'upstreamExampleArtifact']
+    def defaults = [runtime:'build/libs/wwpg-0.2.0.jar',api:'build/libs/wwpg-api-1.0.0.jar',cee_api:'build/libs/wwpg-cee-api-1.0.0.jar',
+                    example:'examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar',upstream_example:'examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar']
+    def artifacts = properties.collectEntries { role, property -> [role,project.file(project.providers.gradleProperty(property).getOrElse(defaults[role]))] }
+    def hash = { file -> java.security.MessageDigest.getInstance('SHA-256').digest(file.bytes).encodeHex().toString() }
+    def sourceFiles = project.fileTree(project.file('tools/client_acceptance/src')) { include '**/*.java' }
+    def initFile = project.file('tools/client_acceptance/api_multiplayer.gradle')
+    def inputFiles = { (sourceFiles.files + project.fileTree(project.file('tools/client_acceptance/resources')).files + [initFile]).sort { it.absolutePath } }
+    def inputLedger = new File(output,'acceptance-helper-inputs.json')
+    def verifyHelperInputs = {
+        if (!inputLedger.isFile()) throw new GradleException('Acceptance helper has no captured compilation inputs')
+        def ledger = new groovy.json.JsonSlurper().parse(inputLedger)
+        ledger.sources.each { item ->
+            def captured = project.file(item.path), current = project.file(item.source_path)
+            if (!captured.isFile() || captured.length() != item.bytes || hash(captured) != item.sha256 ||
+                    !current.isFile() || hash(current) != item.sha256)
+                throw new GradleException('Acceptance helper input changed after compilation: '+item.source_path)
+        }
+        return ledger.sources
+    }
+    def freezeHelper = { directory, jar ->
+        def sources = verifyHelperInputs()
+        def frozenDirectory = new File(directory,'acceptance-helper')
+        if (frozenDirectory.exists()) throw new GradleException('Retain previous helper inputs; use a fresh attempt')
+        frozenDirectory.mkdirs()
+        def frozenJar = new File(frozenDirectory,jar.name); frozenJar.bytes = jar.bytes
+        def capturedSources = sources.collect { item ->
+            def target = new File(frozenDirectory,'inputs/'+item.source_path)
+            target.parentFile.mkdirs(); target.bytes = project.file(item.path).bytes
+            [path:target.absolutePath,sha256:hash(target),bytes:target.length(),source_path:item.source_path,kind:item.kind]
+        }
+        return [file:frozenJar,record:[path:frozenJar.absolutePath,sha256:hash(frozenJar),bytes:frozenJar.length()],sources:capturedSources]
+    }
+    def excluded = { file -> [project.sourceSets.main,project.sourceSets.extensionApi,project.sourceSets.ceeApi].any { it.output.files.contains(file) }
+        || file.name in ['wwpg-api-example-1.0.0.jar','wwpg-upstream-api-example-1.0.0.jar'] }
+    def compilation = project.tasks.register('compileApiMultiplayerHelper',JavaCompile) {
+        source sourceFiles
+        inputs.files(inputFiles())
+        classpath = project.sourceSets.main.compileClasspath.filter { !excluded(it) }+project.files(artifacts.runtime)
+        destinationDirectory = new File(output,'classes')
+        javaCompiler = project.javaToolchains.compilerFor { languageVersion=JavaLanguageVersion.of(21) }
+        options.encoding='UTF-8'
+        doFirst {
+            def sources = inputFiles().collect { file ->
+                def relative = project.relativePath(file).replace('\\','/')
+                def target = new File(output,'source-inputs/'+hash(file)+'/'+relative)
+                target.parentFile.mkdirs(); target.bytes = file.bytes
+                [path:target.absolutePath,sha256:hash(target),bytes:target.length(),source_path:relative,
+                 kind:file == initFile ? 'init' : (file.name.endsWith('.java') ? 'java' : 'resource')]
+            }
+            inputLedger.parentFile.mkdirs()
+            inputLedger.setText(groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson([schema:1,sources:sources]))+'\n','UTF-8')
+        }
+        doLast { verifyHelperInputs() }
+    }
+    def helper = project.tasks.register('apiMultiplayerHelperJar',Jar) {
+        dependsOn compilation
+        from compilation.map { it.destinationDirectory }
+        from project.file('tools/client_acceptance/resources')
+        destinationDirectory=output; archiveFileName='wwpg-api-client-acceptance.jar'
+        preserveFileTimestamps=false; reproducibleFileOrder=true
+    }
+    project.tasks.register('prepareApiWorkshopMultiplayer') {
+        dependsOn helper, project.tasks.named('prepareGameTestServerRun'),project.tasks.named('prepareClientARun'),project.tasks.named('prepareClientBRun'),project.tasks.named('installPgNative')
+        doLast {
+            def root = project.file(project.providers.gradleProperty('multiplayerDirectory').get())
+            def server = new File(root,'server')
+            def extraction = new groovy.json.JsonSlurper().parse(new File(server,'extracted-yard.json'))
+            def manifest = new groovy.json.JsonSlurper().parse(new File(server,'world/WWPG_MANIFEST.json'))
+            def frozen = artifacts.collectEntries { role,file -> [role,[path:file.absolutePath,sha256:hash(file)]] }
+            if (frozen.runtime.sha256 != extraction.jar.sha256 || frozen.runtime.sha256 != manifest.jar.sha256)
+                throw new GradleException('Dedicated runtime differs from the exact Workshop ZIP')
+            ['example','upstream_example'].each { role -> if (frozen[role].sha256 != manifest.example_addons[role].sha256)
+                throw new GradleException('Dedicated '+role+' differs from the exact Workshop ZIP') }
+            def profile = project.providers.gradleProperty('testProfile').getOrElse('BASE')
+            def backend = project.providers.gradleProperty('testBackend').getOrElse('NATIVE')
+            def source = project.providers.gradleProperty('sourceSha').get()
+            if (!(source ==~ /[0-9a-f]{40}/) || profile != extraction.profile || manifest.target != '0.2.0')
+                throw new GradleException('Wrong frozen source, Workshop profile or target')
+            def spec = new File(root,'launch.json')
+            if (spec.exists()) throw new GradleException('Retain previous launch evidence; use a fresh extraction')
+            def frozenHelper = freezeHelper(root,helper.get().archiveFile.get().asFile)
+            def snapshots = new File(root,'launch'); snapshots.mkdirs()
+            def launches = []
+            ['server':'runGameTestServer','client-a':'runClientA','client-b':'runClientB'].each { role,task ->
+                def run = project.tasks.named(task).get()
+                def directory = new File(root,role); directory.mkdirs()
+                def copy = { arguments,kind -> arguments.collect { argument ->
+                    if (!argument.startsWith('@')) return argument
+                    def original = project.file(argument.substring(1))
+                    def target = new File(snapshots,role+'-'+kind+'.txt')
+                    def text = original.getText('UTF-8')
+                    if (kind == 'vm') {
+                        def legacy = project.file('build/moddev/'+task.substring(3,4).toLowerCase()+task.substring(4)+'LegacyClasspath.txt')
+                        if (legacy.isFile()) {
+                            def locked = new File(snapshots,role+'-legacy.txt'); locked.setText(legacy.getText('UTF-8'),'UTF-8')
+                            text = text.replace(legacy.absolutePath.replace('\\','\\\\'),locked.absolutePath.replace('\\','\\\\'))
+                        }
+                        text += '\n-Dwwpg.test.packaged=true\n-Dwwpg.test.multiplayer=false\n-Dwwpg.test.apiWorkshop=true\n-Dwwpg.test.apiMode=multiplayer'+
+                                '\n-Dwwpg.test.backend='+backend+'\n-Dwwpg.test.profile='+profile+'\n'
+                        if (role == 'server') text += '-Dneoforge.enabledGameTestNamespaces=wwpg_api_multiplayer\n'
+                    } else if (role != 'server') text = text.replace('--width\n854','--width\n1280').replace('--height\n480','--height\n720')
+                    target.setText(text,'UTF-8'); return '@'+target.absolutePath
+                } }
+                def vm = copy(run.jvmArgs,'vm'), args = copy(run.args,'program')
+                def classpath = run.classpathProvider.filter { !excluded(it) }+project.files(artifacts.runtime,artifacts.example,artifacts.upstream_example)
+                if (role != 'server') classpath += project.files(frozenHelper.file)
+                def quote = { value -> '"'+value.toString().replace('\\','/').replace('"','\\"')+'"' }
+                def flatten = { values -> values.collect { it.startsWith('@') ? project.file(it.substring(1)).getText('UTF-8') : quote(it) }.join('\n') }
+                def command = new File(snapshots,role+'-launch.txt')
+                command.setText(flatten(vm)+'\n'+['-cp',classpath.asPath,run.mainClass.get()].collect(quote).join('\n')+'\n'+flatten(args)+'\n','UTF-8')
+                def env = new HashMap(run.environmentProperty.get());env['MOD_CLASSES']='wwpg%%'+artifacts.runtime.absolutePath
+                if (role != 'server') env['MOD_CLASSES'] += File.pathSeparator+'wwpg_acceptance%%'+frozenHelper.file.absolutePath
+                launches.add([role:role,directory:directory.absolutePath,command:[project.javaToolchains.launcherFor { languageVersion=JavaLanguageVersion.of(21) }.get().executablePath.asFile.absolutePath,'@'+command.absolutePath],environment:env])
+            }
+            spec.setText(groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson([schema:1,source_sha:source,jar:frozen.runtime,
+                artifacts:frozen.findAll { role,value -> role!='runtime' },archive:extraction.archive,archive_sha256:extraction.sha256,
+                profile:profile,backend:backend,launches:launches,
+                acceptance_helper:frozenHelper.record,acceptance_helper_sources:frozenHelper.sources]))+'\n','UTF-8')
+            logger.lifecycle('Prepared actual API Workshop TCP clients: '+profile+'/'+backend+'; exact ZIP '+extraction.sha256)
+        }
+    }
+}

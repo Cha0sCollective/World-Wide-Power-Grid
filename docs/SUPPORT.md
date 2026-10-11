@@ -1,10 +1,16 @@
 # Supported stationary content
 
-WWPG 0.1.0-beta.5 covers **164 base behavior groups, or 165 with optional Pinout**. All 11 built-in CEE panel attachments and all 28 built-in PG board components are included. The base jar starts without either optional mod. Native cosmetic variants, ingredients, assembly parts and deferred moving content are accounted for in the [registry inventory](../release/0.1.0-beta.5/registry-inventory.json).
+WWPG 0.2.0 retains **164 base behavior groups, or 165 with optional Pinout**. All 11 built-in CEE panel attachments and all 28 built-in PG board components are included. The base jar starts without either optional mod. Native cosmetic variants, ingredients, assembly parts and deferred moving content are accounted for in the [registry inventory](../release/0.1.0-beta.5/registry-inventory.json).
 
-The [verified support matrix](../release/0.1.0-beta.5/supported-content.json) links each in-scope behavior to its fixtures. The [final verification record](../release/0.1.0-beta.5/verification.json) certifies the exact jar and worlds. The earlier candidate checklist remains unchanged as an input record; beta.4's historical matrix is not expanded retroactively.
+The [beta.5 native support matrix](../release/0.1.0-beta.5/supported-content.json) and registry inventory remain the inherited content baseline. The [0.2.0 verification record](../release/0.2.0/verification.json) checks that baseline against the exact new runtime and worlds, alongside the extension fixtures. Historical support matrices and acceptance claims are not expanded retroactively.
 
 Players can generate, store, transform, convert, measure and control mixed power; run native loads; edit and reuse board designs; assemble equipment; and repair bulbs, fuses and wiring. Structural parts keep their native assembly roles and do not gain invented terminals. Every claimed behavior maps to a working station or native assembly/repair workflow in the [stationary yard](STATIONARY_YARD.md); inventory cabinets do not establish coverage.
+
+## Extension API 1.0.0
+
+The public API covers a stationary machine or assembly's stable terminals, internal nodes and distinct elements, including parallel branches. Supported models include loads, switches, DC and AC sources, capacitors, inductors, diodes, transformers and controlled sources. Add-ons receive explicit valid or unavailable readings and own their native gameplay, rendering, synchronization and saved state.
+
+Custom CEE properties use the separate CEE API; existing built-in properties are not replaced. PG add-ons use PG's native component and terminal integration, with no second WWPG electrical owner. The [contract](EXTENSION_API.md) defines the supported signatures and boundaries. The [API Workshop](EXTENSION_API_WORKSHOP.md) demonstrates nine general machine models, a custom CEE panel indicator and a native PG board component. These examples do not inflate the inherited native behavior count.
 
 ## Native items and workflows
 
@@ -37,6 +43,6 @@ These native registry IDs are useful to maintainers; the matrix distinguishes re
 
 The release validates the declared pinned stationary workflows and reference conditions, rather than every possible device configuration. Native source quirks, portable-battery charging behavior and potato-battery depletion remain upstream behavior; see [installation notes](INSTALL.md#pinned-upstream-behavior).
 
-Moving systems, altitude/velocity sensors, Sable sublevels, other optional integrations, broad version ranges, large-server benchmarks, asynchronous solving, advanced topology reduction and a public extension API remain later milestones. Unknown constructs are diagnosed and isolated. [The long-term specification](../SPEC.md) retains those future requirements.
+Moving systems, altitude/velocity sensors, Sable sublevels, other optional integrations, broad version ranges, large-server benchmarks, asynchronous solving, advanced topology reduction and broader numerical extension points remain later milestones. Unknown constructs are diagnosed and isolated. [The long-term specification](../SPEC.md) retains those future requirements.
 
-Published beta.1–beta.4 artifacts, support claims and evidence remain unchanged. [Current status](STATUS.md) preserves historical investigations without assigning causes that their logs cannot prove.
+Published beta.1–beta.5 artifacts, support claims and evidence remain unchanged. [Current status](STATUS.md) preserves historical investigations without assigning causes that their logs cannot prove.

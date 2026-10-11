@@ -1,6 +1,6 @@
 # Stationary Test Yard
 
-The beta.5 yards passed final stationary acceptance against the exact downloadable ZIPs. See the [release downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.5) and [verification record](../release/0.1.0-beta.5/verification.json). It has two editions: **Stationary Test Yard** for the base mods, and **Stationary Test Yard — Pinout** with CC:Tweaked and Pinout installed. Earlier downloadable worlds and their support claims remain unchanged.
+The 0.2.0 yards retain the native stationary demonstrations and pass acceptance against the exact downloadable ZIPs. See the [release downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.0) and [verification record](../release/0.2.0/verification.json). The beta.5 inventory remains the native content baseline; its historical ZIPs and evidence are unchanged. It has two editions: **Stationary Test Yard** for the base mods, and **Stationary Test Yard — Pinout** with CC:Tweaked and Pinout installed. Earlier downloadable worlds and their support claims remain unchanged.
 
 Take goggles, both handheld meters and the guide books from the spawn chest at **8, 64, 16**. Follow the white paths. Each exhibit has instructions, expected readings and a reset action. Click its feed switch with an empty hand to stop or resume power. Turn power off before repairing a bulb, fuse or wire.
 

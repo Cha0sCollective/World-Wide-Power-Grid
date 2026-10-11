@@ -109,6 +109,8 @@ def collect(run, mode, output, log=None):
         else:
             player = 'A' if role == 'client-a' else 'B'
             names |= {f'api-{phase}-{player}.png' for phase in PHASES}
+            if role == 'client-a' and 'API_WORKSHOP_VISIBLE_NAME_INPUT_PASSED:' in text:
+                names.add('api-board-editor-visible-A.png')
         for name in names:
             shot = directory / name
             assert shot.is_file(), f'Actual screenshot missing: {role}/{name}'
