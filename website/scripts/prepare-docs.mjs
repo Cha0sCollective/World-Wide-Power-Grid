@@ -8,6 +8,7 @@ import {
 import { createHash } from 'node:crypto';
 import { resolve, dirname, posix, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { renderReferenceScript } from './reference-script.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const project = JSON.parse(
@@ -117,7 +118,7 @@ for (const release of project.releases) {
               '<body$1 data-pagefind-ignore>' + navigation,
             ),
         );
-      } else writeFileSync(output, bytes);
+      } else writeFileSync(output, renderReferenceScript(file, bytes));
     }
   }
   const writePage = (slug, title, description, body) => {
