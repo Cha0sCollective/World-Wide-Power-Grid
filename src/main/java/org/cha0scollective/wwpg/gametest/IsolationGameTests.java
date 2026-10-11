@@ -38,21 +38,23 @@ public final class IsolationGameTests {
         var s=h.absolutePos(a);var control=h.absolutePos(b);var load=h.absolutePos(c);var level=h.getLevel();
         var healthySource=h.absolutePos(healthyA);var healthyControl=h.absolutePos(healthyB);var healthyLoad=h.absolutePos(healthyC);
         var isolatedWire=new InWorldNodeConnection(new InWorldNode(1,control),new InWorldNode(0,load));
-        h.runAtTickTime(5,()->{((CreativeSourceBlockEntity)level.getBlockEntity(s)).setValue(10);((ResistorBlockEntity)level.getBlockEntity(load)).setValue(100);
+        // Native CEE cooling floors low-power temperature at zero. Use 25 W
+        // per resistor so real heating/history assertions have a nonzero baseline.
+        h.runAtTickTime(5,()->{((CreativeSourceBlockEntity)level.getBlockEntity(s)).setValue(100);((ResistorBlockEntity)level.getBlockEntity(load)).setValue(100);
             DevicesSavedData.load(level).getDevice(control,ResistorDevice.class).properties=ElectricalProperties.resistor(100);
             WiringGameTests.connect(h,s,0,control,0,true);WiringGameTests.connect(h,control,1,load,0,false);WiringGameTests.connect(h,s,1,load,1,true);
-            ((CreativeSourceBlockEntity)level.getBlockEntity(healthySource)).setValue(10);((ResistorBlockEntity)level.getBlockEntity(healthyLoad)).setValue(100);
+            ((CreativeSourceBlockEntity)level.getBlockEntity(healthySource)).setValue(100);((ResistorBlockEntity)level.getBlockEntity(healthyLoad)).setValue(100);
             DevicesSavedData.load(level).getDevice(healthyControl,ResistorDevice.class).properties=ElectricalProperties.resistor(100);
             WiringGameTests.connect(h,healthySource,0,healthyControl,0,true);WiringGameTests.connect(h,healthyControl,1,healthyLoad,0,false);WiringGameTests.connect(h,healthySource,1,healthyLoad,1,true);});
         Object[] stamps={null,null};float[] temperatures=new float[3];
-        h.runAtTickTime(20,()->{near(h,voltage(h,load),5,.05,"Initial known circuit");
-            near(h,loadPower(h,load),.25,.005,"Initial PG gameplay power");
+        h.runAtTickTime(20,()->{near(h,voltage(h,load),50,.05,"Initial known circuit");
+            near(h,loadPower(h,load),25,.05,"Initial PG gameplay power");
             h.assertTrue(Float.isFinite(DevicesSavedData.load(level).getDevice(control,ResistorDevice.class).temp)
                     &&DevicesSavedData.load(level).getDevice(control,ResistorDevice.class).temp>0,"Native CEE resistor did not heat before isolation");
             stamps[0]=branch(h,control);stamps[1]=branch(h,healthyControl);
-            near(h,voltage(h,healthyLoad),5,.05,"Independent healthy circuit before isolation");
+            near(h,voltage(h,healthyLoad),50,.05,"Independent healthy circuit before isolation");
             DevicesSavedData.load(level).getDevice(control,ResistorDevice.class).properties=unknown?new UnknownProperties():ElectricalProperties.resistor(Double.NaN);
-            ((CreativeSourceBlockEntity)level.getBlockEntity(healthySource)).setValue(12);});
+            ((CreativeSourceBlockEntity)level.getBlockEntity(healthySource)).setValue(120);});
         h.runAtTickTime(30,()->{unavailable(h,control);
             temperatures[0]=DevicesSavedData.load(level).getDevice(control,ResistorDevice.class).temp;
             var connection=InfrastructureSavedData.load(level).getConnectionData(isolatedWire);
@@ -74,11 +76,11 @@ public final class IsolationGameTests {
             h.assertTrue(description.contains("isolated=true")&&description.contains("isolationReason=")&&description.contains(unknown?"UnknownProperties":"Invalid electrical parameters"),"Isolated terminal did not identify its cause: "+description);
             h.assertTrue(Bridges.get(level).branchIdentity(new com.george_vi.electroenergetics.foundation.nodes.InWorldNode(0,control),new com.george_vi.electroenergetics.foundation.nodes.InWorldNode(1,control))==null,"Unsupported device retained its old stamp");
             DevicesSavedData.load(level).getDevice(control,ResistorDevice.class).properties=ElectricalProperties.resistor(100);});
-        h.runAtTickTime(60,()->{near(h,voltage(h,load),5,.05,"Known configuration restores circuit");
-            near(h,loadPower(h,load),.25,.005,"Recovered PG gameplay power");
+        h.runAtTickTime(60,()->{near(h,voltage(h,load),50,.05,"Known configuration restores circuit");
+            near(h,loadPower(h,load),25,.05,"Recovered PG gameplay power");
             var reading=ElectricalMeasurements.readVoltageBetween(level,control,0,control,1);
             h.assertTrue(reading.status()==MeasurementStatus.VALID&&reading.voltage().isPresent(),"Repaired CEE terminals retained unavailable readings");
-            near(h,InfrastructureSavedData.load(level).ticker.lastResults.getVoltageAt(control,0,1),5,.05,"Recovered native CEE voltage");
+            near(h,InfrastructureSavedData.load(level).ticker.lastResults.getVoltageAt(control,0,1),50,.05,"Recovered native CEE voltage");
             h.assertTrue(DevicesSavedData.load(level).getDevice(control,ResistorDevice.class).temp>temperatures[0],"Native CEE heating did not resume after repair");
             h.assertTrue(branch(h,control)!=null&&branch(h,control)!=stamps[0],"Repair did not create a fresh supported electrical stamp");
             healthy(h,healthyControl,healthyLoad,stamps[1]);
@@ -101,9 +103,9 @@ public final class IsolationGameTests {
         h.assertTrue(reading.status()==MeasurementStatus.ISOLATED&&reading.voltage().isEmpty(),"Isolated public voltage exposed a numeric result: "+reading.status());
     }
     private static void healthy(GameTestHelper h,BlockPos control,BlockPos load,Object stamp){
-        near(h,voltage(h,load),6,.05,"Independent healthy circuit keeps solving");
-        near(h,loadPower(h,load),.36,.005,"Independent healthy PG gameplay power");
-        near(h,InfrastructureSavedData.load(h.getLevel()).ticker.lastResults.getVoltageAt(control,0,1),6,.05,"Independent healthy CEE results keep publishing");
+        near(h,voltage(h,load),60,.05,"Independent healthy circuit keeps solving");
+        near(h,loadPower(h,load),36,.05,"Independent healthy PG gameplay power");
+        near(h,InfrastructureSavedData.load(h.getLevel()).ticker.lastResults.getVoltageAt(control,0,1),60,.05,"Independent healthy CEE results keep publishing");
         h.assertTrue(branch(h,control)==stamp,"Isolation replaced an unrelated healthy electrical stamp");
     }
     private static double voltage(GameTestHelper h,BlockPos pos){return new BlockWireEndpoint(pos,0).getNode(h.getLevel()).getVoltage()-new BlockWireEndpoint(pos,1).getNode(h.getLevel()).getVoltage();}
