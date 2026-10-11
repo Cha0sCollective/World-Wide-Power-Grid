@@ -68,6 +68,7 @@ final class StationaryYardStations {
         new StationaryYardNether(this).build();
         new StationaryYardProcessing(this).build();
         new StationaryYardWiring(this).build();
+        StationaryYardThreePoleMeter.build(this);
         if (net.neoforged.fml.ModList.get().isLoaded("pinout") && net.neoforged.fml.ModList.get().isLoaded("computercraft"))
             StationaryYardPinout.build(this);
         if (!restore) h.runAtTickTime(20, () -> configure.forEach(Runnable::run));

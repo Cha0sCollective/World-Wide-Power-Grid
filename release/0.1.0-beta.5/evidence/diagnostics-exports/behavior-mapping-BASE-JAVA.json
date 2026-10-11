@@ -1,0 +1,2671 @@
+[
+  {
+    "id": "electroenergetics:connector",
+    "registry": "block",
+    "observed_stations": [
+      "D8",
+      "S50",
+      "S53"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+    "fixtures": [
+      "stationaryConnectorFamiliesRetainMixedTerminalWiring"
+    ]
+  },
+  {
+    "id": "electroenergetics:insulator",
+    "registry": "block",
+    "observed_stations": [
+      "S23"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+    "fixtures": [
+      "nativePoleMountAndInsulatorControlMountedMixedBreaker"
+    ]
+  },
+  {
+    "id": "electroenergetics:concrete_pole",
+    "registry": "block",
+    "observed_stations": [
+      "S22",
+      "S23",
+      "S64"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+    "fixtures": [
+      "nativeThreeSegmentPoleCarriesMixedPower"
+    ]
+  },
+  {
+    "id": "electroenergetics:pole_mount",
+    "registry": "block",
+    "observed_stations": [
+      "S23"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+    "fixtures": [
+      "nativePoleMountAndInsulatorControlMountedMixedBreaker"
+    ]
+  },
+  {
+    "id": "electroenergetics:double_connector",
+    "registry": "block",
+    "observed_stations": [
+      "D9"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+    "fixtures": [
+      "stationaryConnectorFamiliesRetainMixedTerminalWiring"
+    ]
+  },
+  {
+    "id": "electroenergetics:triple_connector",
+    "registry": "block",
+    "observed_stations": [
+      "D10"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+    "fixtures": [
+      "stationaryConnectorFamiliesRetainMixedTerminalWiring"
+    ]
+  },
+  {
+    "id": "electroenergetics:quad_connector",
+    "registry": "block",
+    "observed_stations": [
+      "D11"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+    "fixtures": [
+      "stationaryConnectorFamiliesRetainMixedTerminalWiring"
+    ]
+  },
+  {
+    "id": "electroenergetics:ground_rod",
+    "registry": "block",
+    "observed_stations": [
+      "S53"
+    ],
+    "checked_workflow_stations": [
+      "S58"
+    ],
+    "electrical_expectation": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+    "fixtures": [
+      "bothNativeGroundingSystemsSharePhysicalReference"
+    ]
+  },
+  {
+    "id": "electroenergetics:duplex_wire_termination",
+    "registry": "block",
+    "observed_stations": [
+      "D12",
+      "S77"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "A mixed supply and return light a native 12 V bulb through one cable; spool placement, recovery and cutting retain native costs.",
+    "fixtures": [
+      "stationaryConnectorFamiliesRetainMixedTerminalWiring",
+      "nativeDuplexSpoolConnectsBothConductorsAndRecoversOnce",
+      "nativeBundleNodeHelpersMatchEveryRegisteredOrientation",
+      "duplexLimitsCancellationStaleSelectionAndBlockRemovalRetainNativeCosts"
+    ]
+  },
+  {
+    "id": "electroenergetics:creative_battery",
+    "registry": "block",
+    "observed_stations": [
+      "B01",
+      "B02",
+      "B03",
+      "B04",
+      "B05",
+      "B06",
+      "B07",
+      "B08",
+      "B09",
+      "B10",
+      "B11",
+      "B12",
+      "B13",
+      "B14",
+      "B15",
+      "B16",
+      "B17",
+      "B18",
+      "B19",
+      "B20",
+      "B21",
+      "B22",
+      "B23",
+      "B24",
+      "B25",
+      "T3",
+      "T4",
+      "T5",
+      "T6",
+      "T7",
+      "M1",
+      "D5",
+      "D6",
+      "D7",
+      "D13",
+      "D14",
+      "D15",
+      "D17",
+      "D21",
+      "B26",
+      "F01",
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S08",
+      "S09",
+      "S10",
+      "S13",
+      "S14",
+      "S15",
+      "S16",
+      "S17",
+      "S18",
+      "S24",
+      "S25",
+      "S26",
+      "S27",
+      "S30",
+      "S31",
+      "S32",
+      "S33",
+      "S34",
+      "S36",
+      "S38",
+      "S41",
+      "S42",
+      "S43",
+      "S48",
+      "S51",
+      "S52",
+      "S55",
+      "S56",
+      "S57",
+      "S60",
+      "S61",
+      "S62",
+      "S63",
+      "S65",
+      "S66",
+      "S67",
+      "S77"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+    "fixtures": [
+      "ceeSourceAndLoadUsePg",
+      "acRmsIntoPgLoad",
+      "restartPreservesBothWireSystemsAndCapacitor"
+    ]
+  },
+  {
+    "id": "electroenergetics:alternator_rotor",
+    "registry": "block",
+    "observed_stations": [
+      "S28",
+      "S29"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+    "fixtures": [
+      "assembledCeeAlternatorPowersPgLoad"
+    ]
+  },
+  {
+    "id": "electroenergetics:alternator_brushes",
+    "registry": "block",
+    "observed_stations": [
+      "S28"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+    "fixtures": [
+      "assembledCeeAlternatorPowersPgLoad"
+    ]
+  },
+  {
+    "id": "electroenergetics:three_phase_alternator_brushes",
+    "registry": "block",
+    "observed_stations": [
+      "S29"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+    "fixtures": [
+      "assembledThreePhaseGenerationPreservesPhaseAndDirection"
+    ]
+  },
+  {
+    "id": "electroenergetics:stator",
+    "registry": "block",
+    "observed_stations": [
+      "S28",
+      "S29"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+    "fixtures": [
+      "assembledCeeAlternatorPowersPgLoad"
+    ]
+  },
+  {
+    "id": "electroenergetics:radiator_panel",
+    "registry": "block",
+    "observed_stations": [
+      "S19"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+    "fixtures": [
+      "nativeCeeCoreAssemblyTransformsMixedPowerAndUsesRadiators"
+    ]
+  },
+  {
+    "id": "electroenergetics:voltage_regulator",
+    "registry": "block",
+    "observed_stations": [
+      "S20"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+    "fixtures": [
+      "nativeRegulatorStartsAtNeutralAndRegulatesMixedLoad"
+    ]
+  },
+  {
+    "id": "electroenergetics:bulb",
+    "registry": "block",
+    "observed_stations": [
+      "P1",
+      "P2",
+      "P3",
+      "P4",
+      "P5",
+      "P6",
+      "P7",
+      "D1",
+      "D2",
+      "D3",
+      "D4",
+      "D5",
+      "D6",
+      "D7",
+      "F01",
+      "S46"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+    "fixtures": [
+      "pgPowersCeeLightHeatAndPump"
+    ]
+  },
+  {
+    "id": "electroenergetics:broken_bulb",
+    "registry": "block",
+    "observed_stations": [],
+    "checked_workflow_stations": [
+      "S46"
+    ],
+    "electrical_expectation": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+    "fixtures": [
+      "nativeBrokenBulbRepairRestoresMixedPowerWithoutRewiring"
+    ]
+  },
+  {
+    "id": "electroenergetics:electric_pump",
+    "registry": "block",
+    "observed_stations": [
+      "F01"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+    "fixtures": [
+      "pgPowerPumpsWaterThroughCee"
+    ]
+  },
+  {
+    "id": "electroenergetics:resistor",
+    "registry": "block",
+    "observed_stations": [
+      "S44"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+    "fixtures": [
+      "pgCurrentSourceDrivesAndReversesCeeResistor"
+    ]
+  },
+  {
+    "id": "electroenergetics:creative_resistor",
+    "registry": "block",
+    "observed_stations": [
+      "M3",
+      "S11",
+      "S12",
+      "S13",
+      "S14",
+      "S18",
+      "S30",
+      "S31",
+      "S32",
+      "S41",
+      "S48",
+      "S51",
+      "S52",
+      "S58"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+    "fixtures": [
+      "pgToCeeWithPgWire",
+      "pgToCeeWithCeeSpool"
+    ]
+  },
+  {
+    "id": "electroenergetics:indicator_bulb",
+    "registry": "block",
+    "observed_stations": [
+      "S27",
+      "S35",
+      "S36",
+      "S37",
+      "S38",
+      "S45",
+      "S54",
+      "S55",
+      "S56",
+      "S57",
+      "S59",
+      "S64",
+      "S68",
+      "S69",
+      "S70",
+      "S71",
+      "S72",
+      "S73",
+      "S74",
+      "S75",
+      "S76",
+      "S78"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+    "fixtures": [
+      "pgPowersBothCeeIndicatorChannels"
+    ]
+  },
+  {
+    "id": "electroenergetics:resistive_heater",
+    "registry": "block",
+    "observed_stations": [
+      "F01"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+    "fixtures": [
+      "pgPowersCeeLightHeatAndPump"
+    ]
+  },
+  {
+    "id": "electroenergetics:fuse",
+    "registry": "block",
+    "observed_stations": [
+      "S47"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "ceeFuseTripsAndRepairRestoresPgLoad"
+    ]
+  },
+  {
+    "id": "electroenergetics:broken_fuse",
+    "registry": "block",
+    "observed_stations": [],
+    "checked_workflow_stations": [
+      "S47"
+    ],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "ceeFuseTripsAndRepairRestoresPgLoad"
+    ]
+  },
+  {
+    "id": "electroenergetics:fuse_holder",
+    "registry": "block",
+    "observed_stations": [
+      "S49",
+      "S53",
+      "S54"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "ceeHeldFuseNativeInsertionTripsMixedLoad"
+    ]
+  },
+  {
+    "id": "electroenergetics:cut_off_switch",
+    "registry": "block",
+    "observed_stations": [
+      "B01",
+      "B02",
+      "B03",
+      "B04",
+      "B05",
+      "B06",
+      "B07",
+      "B08",
+      "B09",
+      "B10",
+      "B11",
+      "B12",
+      "B13",
+      "B14",
+      "B15",
+      "B16",
+      "B17",
+      "B18",
+      "B19",
+      "B20",
+      "B21",
+      "B22",
+      "B23",
+      "B24",
+      "B25",
+      "D1",
+      "D17"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "ceeCutoffSwitchControlsPgLoad"
+    ]
+  },
+  {
+    "id": "electroenergetics:double_switch",
+    "registry": "block",
+    "observed_stations": [
+      "D2"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "ceeDoubleSwitchControlsBothPgLines"
+    ]
+  },
+  {
+    "id": "electroenergetics:redstone_relay",
+    "registry": "block",
+    "observed_stations": [
+      "S37"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "ceeRedstoneRelayUsesRealWorldInput"
+    ]
+  },
+  {
+    "id": "electroenergetics:high_voltage_switch",
+    "registry": "block",
+    "observed_stations": [
+      "S50"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "ceeHvSwitchConnectorAndPlayerControl"
+    ]
+  },
+  {
+    "id": "electroenergetics:sulfur_hexafluoride_breaker",
+    "registry": "block",
+    "observed_stations": [
+      "S23"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "ceeSf6BreakerUsesBothBlocksAndRedstone"
+    ]
+  },
+  {
+    "id": "electroenergetics:relay",
+    "registry": "block",
+    "observed_stations": [
+      "S35"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "ceeRelayCoilControlsPgFactoryLoad"
+    ]
+  },
+  {
+    "id": "electroenergetics:momentary_switch",
+    "registry": "block",
+    "observed_stations": [
+      "D4"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "ceeStandaloneMomentaryPulsesPgLoad"
+    ]
+  },
+  {
+    "id": "electroenergetics:emergency_stop_button",
+    "registry": "block",
+    "observed_stations": [
+      "D3"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "ceeEmergencyStopAndPlayerReset"
+    ]
+  },
+  {
+    "id": "electroenergetics:potentiometer",
+    "registry": "block",
+    "observed_stations": [
+      "S39"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "ceePotentiometerShaftAdjustsPgLoad"
+    ]
+  },
+  {
+    "id": "electroenergetics:redstone_potentiometer",
+    "registry": "block",
+    "observed_stations": [
+      "S40"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "ceeRedstonePotentiometerAdjustsPgLoad"
+    ]
+  },
+  {
+    "id": "electroenergetics:accumulator",
+    "registry": "block",
+    "observed_stations": [
+      "D22"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Charge and discharge into an opposite-mod load; compare substep evolution, then save/restart.",
+    "fixtures": [
+      "accumulatorChargesFromPgAndPowersPgLoad"
+    ]
+  },
+  {
+    "id": "electroenergetics:capacitor",
+    "registry": "block",
+    "observed_stations": [
+      "D18"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Charge and discharge into an opposite-mod load; compare substep evolution, then save/restart.",
+    "fixtures": [
+      "capacitorChargesOnceAndDischarges",
+      "restartPreservesBothWireSystemsAndCapacitor"
+    ]
+  },
+  {
+    "id": "electroenergetics:high_voltage_capacitor",
+    "registry": "block",
+    "observed_stations": [
+      "D19"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Charge and discharge into an opposite-mod load; compare substep evolution, then save/restart.",
+    "fixtures": [
+      "highVoltageCapacitorChargesOnceAndDischarges"
+    ]
+  },
+  {
+    "id": "electroenergetics:inductor",
+    "registry": "block",
+    "observed_stations": [
+      "D20"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Charge and discharge into an opposite-mod load; compare substep evolution, then save/restart.",
+    "fixtures": [
+      "inductorAdvancesOnceIntoPgResistor"
+    ]
+  },
+  {
+    "id": "electroenergetics:transformer",
+    "registry": "block",
+    "observed_stations": [
+      "T1",
+      "T2"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+    "fixtures": [
+      "transformerRatioChanges",
+      "reactiveAcTransformerKeepsWindingCurrent"
+    ]
+  },
+  {
+    "id": "electroenergetics:transformer_core",
+    "registry": "block",
+    "observed_stations": [
+      "S19"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+    "fixtures": [
+      "nativeCeeCoreAssemblyTransformsMixedPowerAndUsesRadiators"
+    ]
+  },
+  {
+    "id": "electroenergetics:variac",
+    "registry": "block",
+    "observed_stations": [
+      "T6"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+    "fixtures": [
+      "ceeVariacControlsPgLoad"
+    ]
+  },
+  {
+    "id": "electroenergetics:redstone_variac",
+    "registry": "block",
+    "observed_stations": [
+      "T7"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+    "fixtures": [
+      "ceeRedstoneVariacControlsMixedFactory"
+    ]
+  },
+  {
+    "id": "electroenergetics:ammeter",
+    "registry": "block",
+    "observed_stations": [
+      "M2"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+    "fixtures": [
+      "standaloneCeeMetersReadPgLoadAndDisconnect"
+    ]
+  },
+  {
+    "id": "electroenergetics:voltmeter",
+    "registry": "block",
+    "observed_stations": [
+      "M2"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+    "fixtures": [
+      "standaloneCeeMetersReadPgLoadAndDisconnect"
+    ]
+  },
+  {
+    "id": "electroenergetics:energy_meter",
+    "registry": "block",
+    "observed_stations": [
+      "M2"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+    "fixtures": [
+      "standaloneCeeMetersReadPgLoadAndDisconnect"
+    ]
+  },
+  {
+    "id": "electroenergetics:tri_polar_energy_meter",
+    "registry": "block",
+    "observed_stations": [
+      "S79"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+    "fixtures": [
+      "ceeStandaloneThreePoleMeterReadsPgLoads"
+    ]
+  },
+  {
+    "id": "electroenergetics:current_transformer",
+    "registry": "block",
+    "observed_stations": [
+      "S21"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+    "fixtures": [
+      "ceeCurrentTransformerMapsInternalWindingNodes"
+    ]
+  },
+  {
+    "id": "electroenergetics:frequency_meter",
+    "registry": "block",
+    "observed_stations": [
+      "M3"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+    "fixtures": [
+      "frequencyMeterUsesPgSubstepClock"
+    ]
+  },
+  {
+    "id": "electroenergetics:synchroscope",
+    "registry": "block",
+    "observed_stations": [
+      "S29"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+    "fixtures": [
+      "ceeSynchroscopeReceivesMixedThreePhaseHistory"
+    ]
+  },
+  {
+    "id": "electroenergetics:electrical_panel",
+    "registry": "block",
+    "observed_stations": [
+      "P1",
+      "P2",
+      "P3",
+      "P4",
+      "P5",
+      "P6",
+      "P7",
+      "P8",
+      "P9",
+      "F01"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source with panel/board controls and meters; nonlinear operation, edit, replacement and reload.",
+    "fixtures": [
+      "panelControlsAndMonitorsPgFactory",
+      "restartRetainsPanelTerminalsBoardIdentityAndCharge"
+    ]
+  },
+  {
+    "id": "electroenergetics:diode",
+    "registry": "block",
+    "observed_stations": [
+      "S59"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source with panel/board controls and meters; nonlinear operation, edit, replacement and reload.",
+    "fixtures": [
+      "cee113DiodeRectifiesNativePgPower"
+    ]
+  },
+  {
+    "id": "electroenergetics:white_electric_motor",
+    "registry": "block",
+    "observed_stations": [
+      "D16"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "PG source -> CEE motor, each native operating mode and casing behavior; stop and restart.",
+    "fixtures": [
+      "mixedMotorsRespondToPowerAndPolarity",
+      "ceeMotorRmsHistoryUsesPgSubsteps"
+    ]
+  },
+  {
+    "id": "powergrid:wire_connector",
+    "registry": "block",
+    "observed_stations": [
+      "D13"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+    "fixtures": [
+      "stationaryConnectorFamiliesRetainMixedTerminalWiring"
+    ]
+  },
+  {
+    "id": "powergrid:heavy_wire_connector",
+    "registry": "block",
+    "observed_stations": [
+      "D14"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+    "fixtures": [
+      "stationaryConnectorFamiliesRetainMixedTerminalWiring"
+    ]
+  },
+  {
+    "id": "powergrid:cord_junction",
+    "registry": "block",
+    "observed_stations": [
+      "S55"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+    "fixtures": [
+      "ceePowerCrossesPgCordJunction"
+    ]
+  },
+  {
+    "id": "powergrid:ceiling_tile_connector",
+    "registry": "block",
+    "observed_stations": [
+      "D15"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+    "fixtures": [
+      "stationaryConnectorFamiliesRetainMixedTerminalWiring"
+    ]
+  },
+  {
+    "id": "powergrid:ceiling_tile_junction",
+    "registry": "block",
+    "observed_stations": [
+      "S56"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+    "fixtures": [
+      "ceePowerCrossesPgCeilingCordJunction"
+    ]
+  },
+  {
+    "id": "powergrid:device_connector",
+    "registry": "block",
+    "observed_stations": [
+      "S03",
+      "S05",
+      "S09",
+      "S10",
+      "S11",
+      "S12",
+      "S13",
+      "S30",
+      "S31",
+      "S32",
+      "S33",
+      "S34",
+      "S36",
+      "S63",
+      "S67"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+    "fixtures": [
+      "ceeExcitesPgWindingAndGeneratorPowersCeeLoad",
+      "pgContactorUsesCeeCoilPowerAndBothContacts"
+    ]
+  },
+  {
+    "id": "powergrid:socket",
+    "registry": "block",
+    "observed_stations": [
+      "S55",
+      "S56",
+      "S57",
+      "S60",
+      "S61"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+    "fixtures": [
+      "ceePoweredDesignerSavesAndPlacesViaLabelBoard"
+    ]
+  },
+  {
+    "id": "powergrid:grounding_rod",
+    "registry": "block",
+    "observed_stations": [
+      "S58"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load, branch and loop, ground reference, cut and reconnect, both wire tools.",
+    "fixtures": [
+      "bothNativeGroundingSystemsSharePhysicalReference"
+    ]
+  },
+  {
+    "id": "powergrid:creative_voltage_source",
+    "registry": "block",
+    "observed_stations": [
+      "P1",
+      "P2",
+      "P3",
+      "P4",
+      "P5",
+      "P6",
+      "P7",
+      "P8",
+      "P9",
+      "T1",
+      "T2",
+      "M2",
+      "M3",
+      "D1",
+      "D2",
+      "D3",
+      "D4",
+      "D8",
+      "D9",
+      "D10",
+      "D11",
+      "D12",
+      "D16",
+      "D18",
+      "D19",
+      "D20",
+      "D22",
+      "F01",
+      "S07",
+      "S19",
+      "S20",
+      "S21",
+      "S22",
+      "S23",
+      "S24",
+      "S25",
+      "S26",
+      "S35",
+      "S37",
+      "S39",
+      "S40",
+      "S45",
+      "S46",
+      "S47",
+      "S49",
+      "S50",
+      "S53",
+      "S54",
+      "S58",
+      "S59",
+      "S64",
+      "S68",
+      "S69",
+      "S70",
+      "S71",
+      "S72",
+      "S73",
+      "S74",
+      "S75",
+      "S76",
+      "S78",
+      "S79"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+    "fixtures": [
+      "pgToCeeWithPgWire",
+      "pgToCeeWithCeeSpool"
+    ]
+  },
+  {
+    "id": "powergrid:creative_current_source",
+    "registry": "block",
+    "observed_stations": [
+      "S44"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+    "fixtures": [
+      "pgCurrentSourceDrivesAndReversesCeeResistor"
+    ]
+  },
+  {
+    "id": "powergrid:generator_induction_rotor",
+    "registry": "block",
+    "observed_stations": [
+      "S30"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+    "fixtures": [
+      "ceeExcitesPgWindingAndGeneratorPowersCeeLoad"
+    ]
+  },
+  {
+    "id": "powergrid:generator_large_induction_rotor",
+    "registry": "block",
+    "observed_stations": [
+      "S31",
+      "S32"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+    "fixtures": [
+      "nativeLargeGeneratorUsesInstalledCoilAndMixedExcitation"
+    ]
+  },
+  {
+    "id": "powergrid:generator_commutator",
+    "registry": "block",
+    "observed_stations": [
+      "S30",
+      "S31"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+    "fixtures": [
+      "ceeExcitesPgWindingAndGeneratorPowersCeeLoad"
+    ]
+  },
+  {
+    "id": "powergrid:generator_vertical_commutator",
+    "registry": "block",
+    "observed_stations": [
+      "S32"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+    "fixtures": [
+      "nativeVerticalGeneratorUsesInstalledCoilAndMixedExcitation"
+    ]
+  },
+  {
+    "id": "powergrid:generator_clutch",
+    "registry": "block",
+    "observed_stations": [
+      "S30",
+      "S31",
+      "S32"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+    "fixtures": [
+      "ceeExcitesPgWindingAndGeneratorPowersCeeLoad"
+    ]
+  },
+  {
+    "id": "powergrid:generator_housing",
+    "registry": "block",
+    "observed_stations": [
+      "S33"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+    "fixtures": [
+      "ceeExcitesPgWindingAndGeneratorPowersCeeLoad"
+    ]
+  },
+  {
+    "id": "powergrid:vertical_generator_housing",
+    "registry": "block",
+    "observed_stations": [],
+    "checked_workflow_stations": [
+      "S34"
+    ],
+    "electrical_expectation": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+    "fixtures": [
+      "nativeVerticalHousingJoinsAndSeparatesExcitedWindings"
+    ]
+  },
+  {
+    "id": "powergrid:solar_panel",
+    "registry": "block",
+    "observed_stations": [
+      "S11"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+    "fixtures": [
+      "nativePgSolarPowersCeeAndRespondsToShade"
+    ]
+  },
+  {
+    "id": "powergrid:ceiling_tile_solar",
+    "registry": "block",
+    "observed_stations": [
+      "S12"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+    "fixtures": [
+      "nativeCeilingSolarAssemblyPowersCeeAndRespondsToShade"
+    ]
+  },
+  {
+    "id": "powergrid:winding",
+    "registry": "block",
+    "observed_stations": [
+      "S30",
+      "S31",
+      "S32",
+      "S33",
+      "S34"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Drive an opposite-mod resistive load; vary rotation or voltage; check current and gameplay feedback.",
+    "fixtures": [
+      "ceeExcitesPgWindingAndGeneratorPowersCeeLoad"
+    ]
+  },
+  {
+    "id": "powergrid:creative_resistor",
+    "registry": "block",
+    "observed_stations": [
+      "B01",
+      "B02",
+      "B03",
+      "B04",
+      "B05",
+      "B06",
+      "B07",
+      "B08",
+      "B09",
+      "B10",
+      "B11",
+      "B12",
+      "B13",
+      "B14",
+      "B15",
+      "B16",
+      "B17",
+      "B18",
+      "B19",
+      "B20",
+      "B21",
+      "B22",
+      "B23",
+      "B24",
+      "B25",
+      "T1",
+      "T2",
+      "T3",
+      "T4",
+      "T5",
+      "T6",
+      "T7",
+      "M1",
+      "M2",
+      "D8",
+      "D9",
+      "D10",
+      "D11",
+      "D12",
+      "D13",
+      "D14",
+      "D15",
+      "D16",
+      "D17",
+      "D18",
+      "D19",
+      "D20",
+      "D21",
+      "D22",
+      "F01",
+      "S13",
+      "S14",
+      "S16",
+      "S17",
+      "S19",
+      "S20",
+      "S21",
+      "S22",
+      "S23",
+      "S28",
+      "S29",
+      "S39",
+      "S40",
+      "S47",
+      "S49",
+      "S50",
+      "S60",
+      "S65"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+    "fixtures": [
+      "ceeToPgWithPgWire",
+      "ceeToPgWithCeeSpool"
+    ]
+  },
+  {
+    "id": "powergrid:power_resistor",
+    "registry": "block",
+    "observed_stations": [
+      "S62"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+    "fixtures": [
+      "ceeDrivesConfiguredPgPowerResistor"
+    ]
+  },
+  {
+    "id": "powergrid:heating_coil",
+    "registry": "block",
+    "observed_stations": [
+      "S09"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+    "fixtures": [
+      "ceePowersPgNativeHeatingAndBasinState"
+    ]
+  },
+  {
+    "id": "powergrid:basin_heater",
+    "registry": "block",
+    "observed_stations": [
+      "S10"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+    "fixtures": [
+      "ceePowersPgNativeHeatingAndBasinState"
+    ]
+  },
+  {
+    "id": "powergrid:light_fixture",
+    "registry": "block",
+    "observed_stations": [
+      "S01",
+      "S77",
+      "S79"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+    "fixtures": [
+      "ceePowersPgNativeLightFixtures"
+    ]
+  },
+  {
+    "id": "powergrid:factory_light",
+    "registry": "block",
+    "observed_stations": [
+      "S03"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+    "fixtures": [
+      "ceePowersPgNativeLightFixtures"
+    ]
+  },
+  {
+    "id": "powergrid:factory_light_light",
+    "registry": "block",
+    "observed_stations": [
+      "S03"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+    "fixtures": [
+      "ceePowersPgNativeLightFixtures"
+    ]
+  },
+  {
+    "id": "powergrid:ceiling_tile_lamp",
+    "registry": "block",
+    "observed_stations": [
+      "S02"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+    "fixtures": [
+      "ceePowersPgNativeLightFixtures"
+    ]
+  },
+  {
+    "id": "powergrid:electric_motor",
+    "registry": "block",
+    "observed_stations": [
+      "D17"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+    "fixtures": [
+      "mixedMotorsRespondToPowerAndPolarity"
+    ]
+  },
+  {
+    "id": "powergrid:constant_speed_motor",
+    "registry": "block",
+    "observed_stations": [
+      "S08"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+    "fixtures": [
+      "ceePowersPgConstantSpeedMotorConfiguration"
+    ]
+  },
+  {
+    "id": "powergrid:servo",
+    "registry": "block",
+    "observed_stations": [
+      "S42"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+    "fixtures": [
+      "ceeControlsPgServoAngleAndSavedState"
+    ]
+  },
+  {
+    "id": "powergrid:electric_pump",
+    "registry": "block",
+    "observed_stations": [
+      "S63"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+    "fixtures": [
+      "ceePowerPumpsWaterThroughPg"
+    ]
+  },
+  {
+    "id": "powergrid:string_light_block",
+    "registry": "block",
+    "observed_stations": [
+      "S60"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Opposite-mod source, control in series; verify real light, heat, pumping or mechanical output and loss of power.",
+    "fixtures": [
+      "nativeColoredStringCordLightsMixedCircuitAndReturnsCuttingCost"
+    ]
+  },
+  {
+    "id": "powergrid:lv_switch",
+    "registry": "block",
+    "observed_stations": [
+      "D5"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "pgLvSwitchControlsCeeLoad"
+    ]
+  },
+  {
+    "id": "powergrid:lv_button",
+    "registry": "block",
+    "observed_stations": [
+      "D7"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "pgButtonReleasesCeeLoad"
+    ]
+  },
+  {
+    "id": "powergrid:mv_switch",
+    "registry": "block",
+    "observed_stations": [
+      "D6",
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S07",
+      "S08",
+      "S09",
+      "S10",
+      "S13",
+      "S14",
+      "S15",
+      "S16",
+      "S17",
+      "S18",
+      "S19",
+      "S20",
+      "S21",
+      "S22",
+      "S23",
+      "S24",
+      "S25",
+      "S26",
+      "S27",
+      "S30",
+      "S31",
+      "S32",
+      "S33",
+      "S34",
+      "S35",
+      "S36",
+      "S37",
+      "S38",
+      "S39",
+      "S40",
+      "S41",
+      "S42",
+      "S43",
+      "S44",
+      "S45",
+      "S46",
+      "S47",
+      "S48",
+      "S49",
+      "S50",
+      "S51",
+      "S52",
+      "S53",
+      "S54",
+      "S55",
+      "S56",
+      "S57",
+      "S58",
+      "S59",
+      "S60",
+      "S61",
+      "S62",
+      "S63",
+      "S64",
+      "S65",
+      "S66",
+      "S67",
+      "S68",
+      "S69",
+      "S70",
+      "S71",
+      "S72",
+      "S73",
+      "S74",
+      "S75",
+      "S76",
+      "S77",
+      "S78",
+      "S79"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "pgMvSwitchControlsCeeLoad"
+    ]
+  },
+  {
+    "id": "powergrid:hv_switch",
+    "registry": "block",
+    "observed_stations": [
+      "S51"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "pgHvSwitchMechanicalAssemblyControlsCeeLoad"
+    ]
+  },
+  {
+    "id": "powergrid:hv_breaker",
+    "registry": "block",
+    "observed_stations": [
+      "S52"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "pgHvBreakerChargesClosesTripsAndRecovers"
+    ]
+  },
+  {
+    "id": "powergrid:contactor",
+    "registry": "block",
+    "observed_stations": [
+      "S36"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "pgContactorUsesCeeCoilPowerAndBothContacts"
+    ]
+  },
+  {
+    "id": "powergrid:fuse_holder",
+    "registry": "block",
+    "observed_stations": [
+      "S48"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "pgFuseTripsAndAcceptsSurvivalRepair"
+    ]
+  },
+  {
+    "id": "powergrid:rheostat",
+    "registry": "block",
+    "observed_stations": [
+      "S41"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load; operate control, vary resistance, or trip protection; repair and reconnect.",
+    "fixtures": [
+      "pgRheostatShaftDividesCeePower"
+    ]
+  },
+  {
+    "id": "powergrid:portable_battery",
+    "registry": "block",
+    "observed_stations": [
+      "D21"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> PG portable battery; verify charging, saturation, power removal, saved charge and native item use.",
+    "fixtures": [
+      "ceeChargesPgPortableBattery"
+    ]
+  },
+  {
+    "id": "powergrid:transformer_core",
+    "registry": "block",
+    "observed_stations": [],
+    "checked_workflow_stations": [
+      "S65"
+    ],
+    "electrical_expectation": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+    "fixtures": [
+      "assembledSmallTransformerStepUp",
+      "assembledSmallTransformerStepDown"
+    ]
+  },
+  {
+    "id": "powergrid:transformer_small",
+    "registry": "block",
+    "observed_stations": [
+      "T3"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+    "fixtures": [
+      "assembledSmallTransformerStepUp",
+      "assembledSmallTransformerStepDown"
+    ]
+  },
+  {
+    "id": "powergrid:transformer_medium",
+    "registry": "block",
+    "observed_stations": [
+      "T4"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+    "fixtures": [
+      "assembledMediumTransformerStepUp",
+      "assembledMediumTransformerStepDown"
+    ]
+  },
+  {
+    "id": "powergrid:nether_transformer",
+    "registry": "block",
+    "observed_stations": [
+      "S65"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+    "fixtures": [
+      "linkedNetherEndsSurviveColdRestartAndFiveIndependentActualChunkCycles"
+    ]
+  },
+  {
+    "id": "powergrid:variac",
+    "registry": "block",
+    "observed_stations": [
+      "T5"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load on both windings; step-up/down, reverse polarity, edit ratio under load.",
+    "fixtures": [
+      "pgVariacMechanicallyAdjustsCeeLoad"
+    ]
+  },
+  {
+    "id": "powergrid:voltage_gauge",
+    "registry": "block",
+    "observed_stations": [
+      "B01",
+      "B02",
+      "B03",
+      "B04",
+      "B05",
+      "B06",
+      "B07",
+      "B08",
+      "B09",
+      "B10",
+      "B11",
+      "B12",
+      "B13",
+      "B14",
+      "B15",
+      "B16",
+      "B17",
+      "B18",
+      "B19",
+      "B20",
+      "B21",
+      "B22",
+      "B23",
+      "B24",
+      "B25",
+      "T1",
+      "T2",
+      "T3",
+      "T4",
+      "T5",
+      "T6",
+      "T7",
+      "M1",
+      "D1",
+      "D2",
+      "D3",
+      "D4",
+      "D5",
+      "D6",
+      "D7",
+      "D8",
+      "D9",
+      "D10",
+      "D11",
+      "D12",
+      "D13",
+      "D14",
+      "D15",
+      "D16",
+      "D17",
+      "D18",
+      "D19",
+      "D20",
+      "D21",
+      "D22",
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S07",
+      "S08",
+      "S09",
+      "S10",
+      "S11",
+      "S12",
+      "S13",
+      "S14",
+      "S15",
+      "S16",
+      "S17",
+      "S18",
+      "S19",
+      "S20",
+      "S21",
+      "S22",
+      "S23",
+      "S24",
+      "S25",
+      "S26",
+      "S27",
+      "S28",
+      "S29",
+      "S30",
+      "S31",
+      "S32",
+      "S33",
+      "S34",
+      "S35",
+      "S36",
+      "S37",
+      "S38",
+      "S39",
+      "S40",
+      "S41",
+      "S42",
+      "S43",
+      "S44",
+      "S45",
+      "S46",
+      "S47",
+      "S48",
+      "S49",
+      "S50",
+      "S51",
+      "S52",
+      "S53",
+      "S54",
+      "S55",
+      "S56",
+      "S57",
+      "S58",
+      "S59",
+      "S60",
+      "S61",
+      "S62",
+      "S63",
+      "S64",
+      "S65",
+      "S66",
+      "S67",
+      "S68",
+      "S69",
+      "S70",
+      "S71",
+      "S72",
+      "S73",
+      "S74",
+      "S75",
+      "S76",
+      "S77",
+      "S78",
+      "S79"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+    "fixtures": [
+      "pgGaugesAndEnergyMeterReadCeeSupply"
+    ]
+  },
+  {
+    "id": "powergrid:current_gauge",
+    "registry": "block",
+    "observed_stations": [
+      "B01",
+      "B02",
+      "B03",
+      "B04",
+      "B05",
+      "B06",
+      "B07",
+      "B08",
+      "B09",
+      "B10",
+      "B11",
+      "B12",
+      "B13",
+      "B14",
+      "B15",
+      "B16",
+      "B17",
+      "B18",
+      "B19",
+      "B20",
+      "B21",
+      "B22",
+      "B23",
+      "B24",
+      "B25",
+      "M1"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+    "fixtures": [
+      "pgGaugesAndEnergyMeterReadCeeSupply"
+    ]
+  },
+  {
+    "id": "powergrid:power_gauge",
+    "registry": "block",
+    "observed_stations": [
+      "M1"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+    "fixtures": [
+      "pgGaugesAndEnergyMeterReadCeeSupply"
+    ]
+  },
+  {
+    "id": "powergrid:energy_meter",
+    "registry": "block",
+    "observed_stations": [
+      "M1"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+    "fixtures": [
+      "pgGaugesAndEnergyMeterReadCeeSupply"
+    ]
+  },
+  {
+    "id": "powergrid:plotter",
+    "registry": "block",
+    "observed_stations": [
+      "S15"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed circuit with known DC and AC conditions; compare display and energy accumulation with solved values.",
+    "fixtures": [
+      "nativePlotterRecordsMixedWaveform"
+    ]
+  },
+  {
+    "id": "powergrid:circuit_board",
+    "registry": "block",
+    "observed_stations": [
+      "B01",
+      "B02",
+      "B03",
+      "B04",
+      "B05",
+      "B06",
+      "B07",
+      "B08",
+      "B09",
+      "B10",
+      "B11",
+      "B12",
+      "B13",
+      "B14",
+      "B15",
+      "B16",
+      "B17",
+      "B18",
+      "B19",
+      "B20",
+      "B21",
+      "B22",
+      "B23",
+      "B24",
+      "B25",
+      "B26",
+      "F01",
+      "S61"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source with panel/board controls and meters; nonlinear operation, edit, replacement and reload.",
+    "fixtures": [
+      "ceePowersNonlinearBoardAndReconfiguration",
+      "restartRetainsPanelTerminalsBoardIdentityAndCharge"
+    ]
+  },
+  {
+    "id": "powergrid:circuit_design_table",
+    "registry": "block",
+    "observed_stations": [
+      "S61"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source with panel/board controls and meters; nonlinear operation, edit, replacement and reload.",
+    "fixtures": [
+      "ceePoweredDesignerSavesAndPlacesViaLabelBoard",
+      "savedDesignerLoadsBeforeWorldAssignment",
+      "designerInventoryChangesScheduleAWorldSave",
+      "savedDesignReopensCopiesAssemblesAndPowersAfterRestart"
+    ]
+  },
+  {
+    "id": "powergrid:modular_display",
+    "registry": "block",
+    "observed_stations": [
+      "S43"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source with panel/board controls and meters; nonlinear operation, edit, replacement and reload.",
+    "fixtures": [
+      "ceePulsesPgModularDisplayWithNativeModules"
+    ]
+  },
+  {
+    "id": "electroenergetics:ammeter",
+    "registry": "panel_attachment",
+    "observed_stations": [
+      "P1",
+      "F01"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+    "fixtures": [
+      "panelEnergyMeterAndAmmeterReadMixedLoad",
+      "restartRetainsPanelTerminalsBoardIdentityAndCharge"
+    ]
+  },
+  {
+    "id": "electroenergetics:voltmeter",
+    "registry": "panel_attachment",
+    "observed_stations": [
+      "P1",
+      "F01"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+    "fixtures": [
+      "panelControlsAndMonitorsPgFactory",
+      "restartRetainsPanelTerminalsBoardIdentityAndCharge"
+    ]
+  },
+  {
+    "id": "electroenergetics:emergency_stop_button",
+    "registry": "panel_attachment",
+    "observed_stations": [
+      "P3"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+    "fixtures": [
+      "panelPlayerStopAndMomentaryControl",
+      "restartRetainsPanelTerminalsBoardIdentityAndCharge"
+    ]
+  },
+  {
+    "id": "electroenergetics:cut_off_switch",
+    "registry": "panel_attachment",
+    "observed_stations": [
+      "P2",
+      "F01"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+    "fixtures": [
+      "panelControlsAndMonitorsPgFactory",
+      "restartRetainsPanelTerminalsBoardIdentityAndCharge"
+    ]
+  },
+  {
+    "id": "electroenergetics:analog_lever",
+    "registry": "panel_attachment",
+    "observed_stations": [
+      "P8"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+    "fixtures": [
+      "analogPanelControlsRetainNativeInteractionAndLinkState",
+      "restartRetainsPanelTerminalsBoardIdentityAndCharge"
+    ]
+  },
+  {
+    "id": "electroenergetics:steering_wheel",
+    "registry": "panel_attachment",
+    "observed_stations": [
+      "P9"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+    "fixtures": [
+      "analogPanelControlsRetainNativeInteractionAndLinkState",
+      "restartRetainsPanelTerminalsBoardIdentityAndCharge"
+    ]
+  },
+  {
+    "id": "electroenergetics:indicator_bulb",
+    "registry": "panel_attachment",
+    "observed_stations": [
+      "P1"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+    "fixtures": [
+      "panelControlsAndMonitorsPgFactory",
+      "restartRetainsPanelTerminalsBoardIdentityAndCharge"
+    ]
+  },
+  {
+    "id": "electroenergetics:momentary_switch",
+    "registry": "panel_attachment",
+    "observed_stations": [
+      "P4"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+    "fixtures": [
+      "panelPlayerStopAndMomentaryControl",
+      "restartRetainsPanelTerminalsBoardIdentityAndCharge"
+    ]
+  },
+  {
+    "id": "electroenergetics:energy_meter",
+    "registry": "panel_attachment",
+    "observed_stations": [
+      "P6"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+    "fixtures": [
+      "panelEnergyMeterAndAmmeterReadMixedLoad",
+      "restartRetainsPanelTerminalsBoardIdentityAndCharge"
+    ]
+  },
+  {
+    "id": "electroenergetics:tri_polar_energy_meter",
+    "registry": "panel_attachment",
+    "observed_stations": [
+      "P7"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+    "fixtures": [
+      "panelTriPolarMeterUsesAssignedTerminals",
+      "restartRetainsPanelTerminalsBoardIdentityAndCharge"
+    ]
+  },
+  {
+    "id": "electroenergetics:miniature_circuit_breaker",
+    "registry": "panel_attachment",
+    "observed_stations": [
+      "P5"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed source/load with attachment; operate, configure, remove, replace and reload alongside another attachment.",
+    "fixtures": [
+      "panelBreakerTripsAndPlayerResets",
+      "restartRetainsPanelTerminalsBoardIdentityAndCharge"
+    ]
+  },
+  {
+    "id": "powergrid:via",
+    "registry": "board_component",
+    "observed_stations": [
+      "B10",
+      "B14",
+      "B17",
+      "B26",
+      "S61"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "ceePoweredDesignerSavesAndPlacesViaLabelBoard",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:label",
+    "registry": "board_component",
+    "observed_stations": [
+      "B26",
+      "S61"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "ceePoweredDesignerSavesAndPlacesViaLabelBoard",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:triode",
+    "registry": "board_component",
+    "observed_stations": [
+      "B16"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardTriodeHeaterAndGridUseCeePower",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:pentode",
+    "registry": "board_component",
+    "observed_stations": [
+      "B17"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardPentodeHeaterAndGridUseCeePower",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:thyratron",
+    "registry": "board_component",
+    "observed_stations": [
+      "B18"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardThyratronHeaterTriggerAndExtinctionUseCee",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:vfet",
+    "registry": "board_component",
+    "observed_stations": [
+      "B15"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardVfetRespondsToCeeGateBias",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:bjt_npn",
+    "registry": "board_component",
+    "observed_stations": [
+      "B13"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardNpnAmplifiesCeeBaseCurrent",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:bjt_pnp",
+    "registry": "board_component",
+    "observed_stations": [
+      "B14"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardPnpAmplifiesCeeBaseCurrent",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:regulator_tube",
+    "registry": "board_component",
+    "observed_stations": [
+      "B19"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardRegulatorTubeStrikesAndExtinguishesFromCee",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:barretter_tube",
+    "registry": "board_component",
+    "observed_stations": [
+      "B20"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardBarretterRegulatesCeeCurrent",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:neon_bulb",
+    "registry": "board_component",
+    "observed_stations": [
+      "B21"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardNeonStrikesAndExtinguishesFromCee",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:light_bulb",
+    "registry": "board_component",
+    "observed_stations": [
+      "B22"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardLightBulbHeatsAndCoolsFromCee",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:connector",
+    "registry": "board_component",
+    "observed_stations": [
+      "B01",
+      "B02",
+      "B03",
+      "B04",
+      "B05",
+      "B06",
+      "B07",
+      "B08",
+      "B09",
+      "B10",
+      "B11",
+      "B12",
+      "B13",
+      "B14",
+      "B15",
+      "B16",
+      "B17",
+      "B18",
+      "B19",
+      "B20",
+      "B21",
+      "B22",
+      "B23",
+      "B24",
+      "B25",
+      "B26",
+      "F01",
+      "S61"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "ceePowersNonlinearBoardAndReconfiguration",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:switch",
+    "registry": "board_component",
+    "observed_stations": [
+      "B07"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardSwitchControlsCeePower",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:relay",
+    "registry": "board_component",
+    "observed_stations": [
+      "B09",
+      "F01"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardRelayTransfersMixedLoad",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:relay_dpdt",
+    "registry": "board_component",
+    "observed_stations": [
+      "B10"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardDoubleRelayTransfersMixedLoads",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:resistor",
+    "registry": "board_component",
+    "observed_stations": [
+      "B01",
+      "B26",
+      "S61"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "ceePowersNonlinearBoardAndReconfiguration",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:redstone_relay",
+    "registry": "board_component",
+    "observed_stations": [
+      "B11"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardRedstoneRelaySwitchesCeePower",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:voltage_gauge",
+    "registry": "board_component",
+    "observed_stations": [
+      "B23"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardVoltageGaugeReadsCeePower",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:current_gauge",
+    "registry": "board_component",
+    "observed_stations": [
+      "B24"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardCurrentGaugeReadsCeePower",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:diode",
+    "registry": "board_component",
+    "observed_stations": [
+      "B12"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "ceePowersNonlinearBoardAndReconfiguration",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:capacitor",
+    "registry": "board_component",
+    "observed_stations": [
+      "B02",
+      "F01"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardCapacitorChargesAndDischargesFromCee",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:inductor",
+    "registry": "board_component",
+    "observed_stations": [
+      "B03"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardInductorBuildsAndReleasesCeeCurrent",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:button",
+    "registry": "board_component",
+    "observed_stations": [
+      "B08"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardButtonReleasesCeePower",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:potentiometer",
+    "registry": "board_component",
+    "observed_stations": [
+      "B04"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardPotentiometerDividesCeePower",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:varistor",
+    "registry": "board_component",
+    "observed_stations": [
+      "B05"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardVaristorClampsCeeSupply",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:fuse_holder",
+    "registry": "board_component",
+    "observed_stations": [
+      "B06"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardFuseTripsAndPlayerRepairsCeePower",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "powergrid:display_module",
+    "registry": "board_component",
+    "observed_stations": [
+      "B25"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "CEE source -> assembled PG board; verify component response and mixed factory control, then edit and reload.",
+    "fixtures": [
+      "boardDisplayCountsCeePulses",
+      "everyBuiltinBoardComponentAssemblesFromNativeItems"
+    ]
+  },
+  {
+    "id": "electroenergetics:buzzer",
+    "registry": "block",
+    "observed_stations": [
+      "S07"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed native workflow, solved output, removal and restoration.",
+    "fixtures": [
+      "pgPowerSoundsCeeBuzzer"
+    ]
+  },
+  {
+    "id": "electroenergetics:catenary_holder",
+    "registry": "block",
+    "observed_stations": [
+      "S64"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed native workflow, solved output, removal and restoration.",
+    "fixtures": [
+      "nativeCatenarySpoolStylesAndRecoveryCarryMixedPower"
+    ]
+  },
+  {
+    "id": "electroenergetics:converter",
+    "registry": "block",
+    "observed_stations": [
+      "S18"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed native workflow, solved output, removal and restoration.",
+    "fixtures": [
+      "nativeFeConvertersExchangeMixedPower"
+    ]
+  },
+  {
+    "id": "powergrid:alarm_bell",
+    "registry": "block",
+    "observed_stations": [
+      "S06"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed native workflow, solved output, removal and restoration.",
+    "fixtures": [
+      "ceePowerRunsPgFanMagnetAndBell"
+    ]
+  },
+  {
+    "id": "powergrid:battery",
+    "registry": "block",
+    "observed_stations": [
+      "S13"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed native workflow, solved output, removal and restoration.",
+    "fixtures": [
+      "stationaryBatteriesChargeAndDischargeWithCee"
+    ]
+  },
+  {
+    "id": "powergrid:carbon_pile",
+    "registry": "block",
+    "observed_stations": [
+      "S16"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed native workflow, solved output, removal and restoration.",
+    "fixtures": [
+      "ceeControlsNativeCarbonPileResistance"
+    ]
+  },
+  {
+    "id": "powergrid:carbon_pile_coil",
+    "registry": "block",
+    "observed_stations": [
+      "S16"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed native workflow, solved output, removal and restoration.",
+    "fixtures": [
+      "ceeControlsNativeCarbonPileResistance"
+    ]
+  },
+  {
+    "id": "powergrid:crt",
+    "registry": "block",
+    "observed_stations": [
+      "S24"
+    ],
+    "checked_workflow_stations": [
+      "S25",
+      "S26"
+    ],
+    "electrical_expectation": "Mixed native workflow, solved output, removal and restoration.",
+    "fixtures": [
+      "mixedPowerControlsNativeCrt",
+      "mixedPowerControlsAndesiteCrt",
+      "mixedPowerControlsBrassCrt"
+    ]
+  },
+  {
+    "id": "powergrid:electric_fan",
+    "registry": "block",
+    "observed_stations": [
+      "S04",
+      "S66"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed native workflow, solved output, removal and restoration.",
+    "fixtures": [
+      "ceePowerRunsPgFanMagnetAndBell"
+    ]
+  },
+  {
+    "id": "powergrid:electromagnet",
+    "registry": "block",
+    "observed_stations": [
+      "S05",
+      "S67"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed native workflow, solved output, removal and restoration.",
+    "fixtures": [
+      "ceePowerRunsPgFanMagnetAndBell"
+    ]
+  },
+  {
+    "id": "powergrid:fe_inverter",
+    "registry": "block",
+    "observed_stations": [
+      "S18"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed native workflow, solved output, removal and restoration.",
+    "fixtures": [
+      "nativeFeConvertersExchangeMixedPower"
+    ]
+  },
+  {
+    "id": "powergrid:potato_battery",
+    "registry": "block",
+    "observed_stations": [
+      "S14"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed native workflow, solved output, removal and restoration.",
+    "fixtures": [
+      "potatoBatteryPreservesNativeNonRechargeableBehavior"
+    ]
+  },
+  {
+    "id": "powergrid:punch_card_reader",
+    "registry": "block",
+    "observed_stations": [
+      "S27"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed native workflow, solved output, removal and restoration.",
+    "fixtures": [
+      "nativePunchCardScansEveryRowAndControlsEightMixedLoads"
+    ]
+  },
+  {
+    "id": "powergrid:redstone_converter",
+    "registry": "block",
+    "observed_stations": [
+      "S38"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed native workflow, solved output, removal and restoration.",
+    "fixtures": [
+      "nativeRedstoneConverterControlsCeeLoad"
+    ]
+  },
+  {
+    "id": "powergrid:spark_gap",
+    "registry": "block",
+    "observed_stations": [
+      "S17"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed native workflow, solved output, removal and restoration.",
+    "fixtures": [
+      "mixedVoltageTriggersAndExtinguishesNativeSparkGap"
+    ]
+  },
+  {
+    "id": "powergrid:thermometer",
+    "registry": "block",
+    "observed_stations": [
+      "S09",
+      "S10"
+    ],
+    "checked_workflow_stations": [],
+    "electrical_expectation": "Mixed native workflow, solved output, removal and restoration.",
+    "fixtures": [
+      "pgThermometerReadsCeePoweredPgHeat"
+    ]
+  }
+]

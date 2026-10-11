@@ -53,3 +53,6 @@ Desktop.ini
 *.swp
 *.swo
 *~
+
+# Python tooling caches
+__pycache__/

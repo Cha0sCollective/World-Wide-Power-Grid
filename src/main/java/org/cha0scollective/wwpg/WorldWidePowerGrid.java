@@ -43,7 +43,11 @@ public final class WorldWidePowerGrid {
                     var mappings = Bridges.get(c.getSource().getLevel()).describe(pos);
                     c.getSource().sendSuccess(() -> Component.literal(mappings.isEmpty() ? "WWPG: no mapped terminals at " + pos.toShortString() : String.join("\n", mappings)), false);
                     return mappings.size();
-                }))));
+                }))).then(Commands.literal("topology").executes(c -> {
+                    var changes = Bridges.get(c.getSource().getLevel()).topologyHistory();
+                    c.getSource().sendSuccess(() -> Component.literal(changes.isEmpty() ? "WWPG: no compatibility topology changes yet" : String.join("\n", changes)), false);
+                    return changes.size();
+                })));
     }
     private void unload(LevelEvent.Unload event) {
         if (event.getLevel() instanceof ServerLevel level) Bridges.unload(level);

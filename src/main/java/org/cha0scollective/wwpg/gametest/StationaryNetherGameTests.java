@@ -59,6 +59,7 @@ public final class StationaryNetherGameTests {
         var remote = new BlockPos[1];
         var remoteSource = new BlockPos[1];
         var remoteLoad = new BlockPos[1];
+        var unlinked = new org.patryk3211.powergrid.electricity.sim.special.SplitTransformerControllerWire[1];
         h.startSequence().thenWaitUntil(() -> h.assertTrue(overworld.isPositionEntityTicking(base)
                 && nether.isPositionEntityTicking(otherPortal), "Waiting for both portal chunks to become ticking"))
         .thenExecute(() -> {
@@ -115,6 +116,30 @@ public final class StationaryNetherGameTests {
             ((CreativeSourceBlockEntity) nether.getBlockEntity(remoteSource[0])).setValue(40);
         }).thenIdle(70).thenExecute(() -> {
             near(h, voltage(overworld, localLoad), 40, .2, "Restored reverse supply failed to transfer power");
+            // Reproduce native unlinking between two solves without relying on
+            // the asynchronous chunk-IO callback landing at a particular tick.
+            // Actual chunk unloading is covered separately by the five cycles.
+            var endpoint=(org.cha0scollective.wwpg.mixin.NetherTransformerAccessor)overworld.getBlockEntity(primary);
+            var controller=endpoint.wwpg$controller();unlinked[0]=controller;
+            double lastCurrent=controller.secondary.getCurrent();
+            h.assertTrue(Math.abs(lastCurrent)>1e-6,"Phase control requires a live, solved remote current source");
+            var entry=(org.cha0scollective.wwpg.mixin.NetherTransformerEntryAccessor)org.cha0scollective.wwpg.mixin.NetherTransformerAccessor.wwpg$links().get(endpoint.wwpg$linkId());
+            var surviving=controller.secondary;
+            entry.wwpg$setWire(endpoint.wwpg$isSecondary(),null);
+            h.assertTrue(controller.secondary==null&&surviving.secondary==null,"Native unlink did not immediately detach both references");
+            h.assertTrue(surviving.getCurrent()==lastCurrent,"Unexpected native cached-current change during unlink");
+            org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info("NETHER_UNLINK_PHASE: backend={} gameTime={} nativeOnly={} detached=true before={} after={} oldImmediateZeroAssertionWouldFail={}",
+                    System.getProperty("wwpg.test.backend","NATIVE"),overworld.getGameTime(),nativeOnly,lastCurrent,surviving.getCurrent(),surviving.getCurrent()!=0);
+        }).thenIdle(1).thenExecute(() -> {
+            var endpoint=(org.cha0scollective.wwpg.mixin.NetherTransformerAccessor)overworld.getBlockEntity(primary);
+            var surviving=((org.cha0scollective.wwpg.mixin.NetherTransformerAccessor)nether.getBlockEntity(remote[0])).wwpg$controller();
+            h.assertTrue(surviving.secondary==null&&surviving.getCurrent()==0&&unlinked[0].getCurrent()==0,
+                    "Detached native current was not cleared by the next solve");
+            near(h,voltage(overworld,localLoad),0,.001,"Native unlink left ghost power after its next solve");
+            var entry=(org.cha0scollective.wwpg.mixin.NetherTransformerEntryAccessor)org.cha0scollective.wwpg.mixin.NetherTransformerAccessor.wwpg$links().get(endpoint.wwpg$linkId());
+            entry.wwpg$setWire(endpoint.wwpg$isSecondary(),unlinked[0]);
+        }).thenIdle(70).thenExecute(() -> {
+            near(h,voltage(overworld,localLoad),40,.2,"Native relink did not restore mixed power");
             overworld.setBlockAndUpdate(portal, Blocks.AIR.defaultBlockState());
         }).thenIdle(25).thenExecute(() -> {
             h.assertTrue(!ModdedBlocks.NETHER_TRANSFORMER.has(overworld.getBlockState(primary)),

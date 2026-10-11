@@ -6,7 +6,7 @@ This directory records implementation and acceptance for the planned 0.1.0-beta.
 The native-wiring stage adds individual checks for all 57 ordinary CEE wire
 variants, PG iron wire on CEE terminals, hanging insulators, duplex cables,
 lineman attachments and offhand-clamp measurement, and native PG bulb repair.
-The playable yard now has 78 additional base exhibits, or 80 with Pinout,
+The playable yard now has 79 additional base exhibits, or 81 with Pinout,
 alongside the earlier live board, panel, transformer and factory circuits.
 [Player workflows](../../docs/STATIONARY_WIRING.md) explain the upstream item
 behavior, including nearly nonconductive glass insulation and two-click PG bulb
@@ -20,6 +20,35 @@ electrical expectations. Failed boots and their numerical readings are retained.
 Complete packaged acceptance, exported ZIP reopening, fresh graphical checks,
 and two real clients remain required before a stationary-completion claim.
 Work-in-progress jars use `0.1.0-beta.5-dev`; published beta.4 artifacts are unchanged.
+
+The diagnostics/export stage adds a standalone three-pole meter exhibit, bringing
+the complete station records to 147 BASE or 149 PINOUT visits. Its typed registry
+audit distinguishes the standalone meter from the panel attachment; it rejected
+the earlier omission. The lamps consume about 60 W together, and their native
+temperature-dependent resistance is included in the 0.1% load-consumption check.
+The [yard guide](../../docs/STATIONARY_YARD.md) explains the player actions.
+
+Exact ZIP checks retain native Overworld/Nether saved data, connected wire entities
+and optional computer files. The exporter requires a passing dedicated-yard proof
+from the supplied jar and a checked exhibit or assembly/repair workflow for every
+in-scope behavior. CI additionally extracts its ZIP and runs three cold restarts.
+The implementation records each validation batch separately; graphical checks,
+two real clients and final versioned-jar acceptance still gate publication.
+
+Read-only diagnostics now report device/terminal and board-component identities,
+panel slots, block/entity loading readiness, isolation reasons, the actual backend,
+recent topology changes and timestamped errors. Queries do not force chunk loads
+or create adapters. Three new regressions cover these requirements.
+
+The native Nether unlink control deliberately removes a loaded peer between
+solves. Both backends reproduce immediate detachment with the previous nonzero
+cached current, followed by exactly zero current and load voltage on the next
+solve. This establishes that the old immediate-zero assertion required behavior
+the native model does not promise. The original CI log does not identify its
+failing conjunct; that attribution remains unknown and its evidence is retained.
+The corrected phase checks and actual chunk-unload tests require both immediate
+detachment and absence of ghost power at the next scheduled solve. A retry alone
+is not the basis for the correction.
 
 Baseline: beta.4, commit `28da7ffca1f6972dc0db2378aa425c89753cab85`.
 The dependency baseline remains fixed. The optional PINOUT profile is locked in

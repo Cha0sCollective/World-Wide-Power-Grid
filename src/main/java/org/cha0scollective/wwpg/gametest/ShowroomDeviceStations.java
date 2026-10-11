@@ -32,6 +32,15 @@ final class ShowroomDeviceStations {
     private static final String[] LABELS={"CEE cut-off","CEE double","CEE e-stop","CEE momentary","PG LV switch","PG MV switch","PG LV button","CEE connector","CEE double","CEE triple","CEE quad","CEE duplex","PG connector","PG heavy","PG ceiling","CEE motor","PG motor","CEE capacitor","CEE HV cap","CEE inductor","PG battery","CEE accumulator"};
     private record Station(BlockPos base,String id,int kind) {BlockPos device(){return base.east(3);}BlockPos load(){return base.east(7);}BlockPos gauge(){return load().south(3);}boolean pg(){return id.startsWith("powergrid:");} }
     private final List<Station> stations=new ArrayList<>();
+    List<StationaryYardCoverage.Visit> visits() {
+        var result=new ArrayList<StationaryYardCoverage.Visit>();int index=0;
+        for(var station:stations) {
+            String expected=station.kind==0?"150 V lamp feed; momentary controls light only while pressed":station.kind==1?"10 V at the load":"Motor shaft output, charging or stored-energy output at the labeled settings";
+            result.add(new StationaryYardCoverage.Visit("D"+(index+1),LABELS[index],station.base,
+                    List.of(expected,"Use the labeled native control or feed switch; inspect the output gauge","Restore the feed and original settings")));index++;
+        }
+        return result;
+    }
     ShowroomDeviceStations(GameTestHelper h,boolean restore) {
         int index=0;
         for(int kind=0;kind<3;kind++)for(var id:kind==0?CONTROLS:kind==1?CONNECTORS:OTHER) {

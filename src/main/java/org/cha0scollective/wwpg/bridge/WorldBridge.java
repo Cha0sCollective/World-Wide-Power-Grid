@@ -49,8 +49,12 @@ public final class WorldBridge {
     private final Map<EndpointKey, CurrentSourceWire> references = new HashMap<>();
     private final Map<WindingKey, Winding> transformers = new HashMap<>();
     private Set<EndpointKey> isolated = Set.of();
+    private final Map<EndpointKey, String> isolationReasons = new HashMap<>();
+    private final Map<EndpointKey, BlockPos> deviceOwners = new HashMap<>();
     private final Map<CSolver.SolverBackend, Long> backendSubsteps = new EnumMap<>(CSolver.SolverBackend.class);
-    private final LinkedHashSet<String> diagnostics = new LinkedHashSet<>();
+    private final LinkedHashMap<String, Diagnostic> diagnostics = new LinkedHashMap<>();
+    private final Deque<String> topologyHistory = new ArrayDeque<>();
+    private long topologyChanges, lastTopologyTick = -1;
     private final Map<ElectricalNetwork, Integer> steps = new IdentityHashMap<>();
     private final Map<ElectricalNetwork, List<ResultNode>> resultNodes = new IdentityHashMap<>();
     private final Map<ElectricalNetwork, List<Branch>> resultBranches = new IdentityHashMap<>();
@@ -96,7 +100,18 @@ public final class WorldBridge {
                         && level.areEntitiesLoaded(net.minecraft.world.level.ChunkPos.asLong(device.pos)))
                 .toList();
         var collector = new BridgeCollector(builder, infrastructure, substeps);
-        for (var device : devices) ((TickingElectricalDevice) device).preTick(collector);
+        deviceOwners.clear();
+        for (var device : devices) {
+            int firstNewNode = builder.allNodes().size();
+            ((TickingElectricalDevice) device).preTick(collector);
+            // Diagnostic ownership is reconstructed during preparation. These
+            // positions never replace the endpoint's native persistent identity.
+            for (int index = firstNewNode; index < builder.allNodes().size(); ++index) {
+                var node = builder.getNode(index).node;
+                if (node.getClass() == com.george_vi.electroenergetics.foundation.nodes.AttachedNode.class)
+                    deviceOwners.put(EndpointKey.of(node), device.pos.immutable());
+            }
+        }
         NeoForge.EVENT_BUS.post(new AddToElectricGraphEvent(builder, level, infrastructure));
         builder.connectAll(new ArrayList<>(infrastructure.wireSimulationState.getLazyConnections()));
         voltages = new double[builder.allNodes().size() * substeps];
@@ -127,10 +142,12 @@ public final class WorldBridge {
     }
 
     private void synchronize(WorldNetworks world) {
+        var previousTopology = topologyState();
         var wantedNodes = new HashMap<EndpointKey, Node>();
         var wanted = new HashMap<BranchKey, Desired>();
         var wantedTransformers = new HashMap<WindingKey, TransformerElectricalProperties>();
         isolated = new HashSet<>();
+        isolationReasons.clear();
         var nodeKeys = new HashMap<Node, EndpointKey>();
         for (var n : builder.allNodes()) {
             try {
@@ -141,7 +158,7 @@ public final class WorldBridge {
         }
         ((RejectedConnections)builder).wwpg$rejectedConnections().forEach((node,error)->{
             var key=nodeKeys.get(node);
-            if(key!=null){isolated.add(key);diagnostic(error+" at "+key);}
+            if(key!=null){isolate(key,error);diagnostic(error+" at "+key);}
         });
         for (var n : builder.allNodes()) {
             var first = nodeKeys.get(n.node);
@@ -153,8 +170,9 @@ public final class WorldBridge {
                 if (first.compareTo(second) >= 0) continue;
                 var p = entry.getValue();
                 if (!supported(p)) {
-                    isolated.add(first); isolated.add(second);
-                    diagnostic("Unsupported property " + p.getClass().getName() + " at " + first + " -> " + second);
+                    String reason = "Unsupported property " + p.getClass().getName();
+                    isolate(first, reason); isolate(second, reason);
+                    diagnostic(reason + " at " + first + " -> " + second);
                     continue;
                 }
                 try {
@@ -169,7 +187,7 @@ public final class WorldBridge {
                              dynamics.stream().anyMatch(d -> d.properties.invert() == p && d.properties.getClass().getName().endsWith("$ACSource"))));
                     wanted.put(new BranchKey(first, second), new Desired(p, voltageSource, n.node, other));
                 } catch (IllegalArgumentException e) {
-                    isolated.add(first); isolated.add(second); diagnostic(e.getMessage() + " at " + first);
+                    isolate(first,e.getMessage()); isolate(second,e.getMessage()); diagnostic(e.getMessage() + " at " + first);
                 }
             }
         }
@@ -280,6 +298,7 @@ public final class WorldBridge {
             }
             return true;
         });
+        recordTopology(previousTopology, !changed.isEmpty(), "prepare");
     }
 
     private OwnedFloatingNode resolve(WorldNetworks world, EndpointKey key, Node node) {
@@ -335,6 +354,7 @@ public final class WorldBridge {
     }
 
     private void selectReferences() {
+        var previousTopology = topologyState();
         var ownCounts = new IdentityHashMap<ElectricalNetwork, Integer>();
         references.values().forEach(g -> ownCounts.merge(g.getNode1().getNetwork(), 1, Integer::sum));
         var priorities = ((CircuitBuilderAccessor) builder).wwpg$groundPriorities();
@@ -360,6 +380,7 @@ public final class WorldBridge {
             removeGround(e.getValue()); return true;
         });
         for (var key : wanted) references.computeIfAbsent(key, k -> addGround(nodes.get(k), 1000));
+        recordTopology(previousTopology, false, "references");
     }
 
     // PG 0.6.2's incremental conductance update rejects null-ended wires.
@@ -481,21 +502,107 @@ public final class WorldBridge {
         if (!condition) throw new IllegalStateException("WWPG: " + error);
     }
     private void diagnostic(String error) {
-        if (diagnostics.add(error)) WorldWidePowerGrid.LOGGER.warn("WWPG {}: {}", level.dimension().location(), error);
-        if (diagnostics.size() > 128) diagnostics.remove(diagnostics.iterator().next());
+        var entry = diagnostics.get(error);
+        if (entry == null) {
+            entry = new Diagnostic(error, level.getGameTime());
+            diagnostics.put(error, entry);
+            WorldWidePowerGrid.LOGGER.warn("WWPG {}: {}", level.dimension().location(), error);
+        }
+        entry.lastTick = level.getGameTime();
+        ++entry.count;
+        if (diagnostics.size() > 128) diagnostics.remove(diagnostics.keySet().iterator().next());
     }
-    public List<String> diagnostics() { return List.copyOf(diagnostics); }
+    private void isolate(EndpointKey key, String reason) { isolated.add(key); isolationReasons.put(key, reason); }
+    public List<String> diagnostics() {
+        return diagnostics.values().stream().sorted(Comparator.comparingLong((Diagnostic d) -> d.lastTick).reversed())
+                .map(d -> "firstTick=" + d.firstTick + ", lastTick=" + d.lastTick + ", count=" + d.count + ": " + d.message).toList();
+    }
+    public List<String> topologyHistory() { return List.copyOf(topologyHistory); }
     public List<String> describe(BlockPos pos) {
         String owner = "block:" + pos.getX() + "," + pos.getY() + "," + pos.getZ();
-        return nodes.entrySet().stream().filter(e -> e.getKey().owner().equals(owner))
-                .sorted(Map.Entry.comparingByKey()).map(e -> {
+        var chunk = level.getChunkSource().getChunkNow(pos.getX() >> 4, pos.getZ() >> 4);
+        boolean loaded = chunk != null;
+        boolean ticking = level.getChunkSource().isPositionTicking(net.minecraft.world.level.ChunkPos.asLong(pos));
+        boolean entities = level.areEntitiesLoaded(net.minecraft.world.level.ChunkPos.asLong(pos));
+        boolean ready = loaded && ticking && entities;
+        String readiness = !loaded ? "waiting-for-block-chunk" : !ticking ? "waiting-for-block-ticking" : !entities ? "waiting-for-wire-entities" : "ready";
+        var lines = new ArrayList<String>();
+        lines.add("dimension=" + level.dimension().location() + ", device=" + owner
+                + ", block=" + (loaded ? net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(chunk.getBlockState(pos).getBlock()) : "unloaded")
+                + ", chunk=" + loaded + ", ticking=" + ticking + ", entities=" + entities
+                + ", readiness=" + readiness + ", phase=" + phase + ", gameTick=" + level.getGameTime());
+        var mapped = new HashSet<Integer>();
+        nodes.entrySet().stream().filter(e -> e.getKey().owner().equals(owner) || pos.equals(deviceOwners.get(e.getKey())))
+                .sorted(Map.Entry.comparingByKey()).forEach(e -> {
                     var key = e.getKey(); var node = e.getValue(); var network = node.getNetwork();
-                    var solver = network == null ? null : ((ElectricalNetworkAccessor) network).wwpg$solver();
-                    String backend = network == null ? "disconnected" : solver == null ? "uninitialized" : solver.type().name();
-                    return "terminal=" + key.terminal() + ", voltage=" + node.getVoltage()
-                            + ", backend=" + backend + ", isolated=" + isolated.contains(key)
-                            + ", internal=" + (node.endpoint instanceof InternalEndpoint);
-                }).toList();
+                    if (key.owner().equals(owner)) mapped.add(key.terminal());
+                    lines.add("identity=" + key.owner() + "/terminal:" + key.terminal() + ", voltage=" + (ready ? node.getVoltage() : "unavailable")
+                            + ", backend=" + backend(network) + ", isolated=" + isolated.contains(key)
+                            + ", isolationReason=" + isolationReasons.getOrDefault(key,"none")
+                            + ", internal=" + (node.endpoint instanceof InternalEndpoint));
+                });
+        // Read native models only after checking the loaded chunk. Do not call
+        // CeeElectric/IElectric.getAt: diagnostics must not create an adapter.
+        if (loaded) {
+            var electric = org.cha0scollective.wwpg.wiring.Terminals.nativePg(level,pos);
+            if (electric != null) {
+                var state = chunk.getBlockState(pos);
+                var behaviour = electric.getBehaviour(level,pos,state);
+                for (int local=0; local<electric.terminalCount(); ++local) {
+                    var placement = electric.terminal(state,local);
+                    if (placement == null) continue;
+                    int terminal = electric.terminalIndexAt(state,placement.getOrigin());
+                    if (terminal < 0 || !mapped.add(terminal)) continue;
+                    var node = behaviour == null ? null : behaviour.getTerminal(terminal);
+                    lines.add("identity=" + owner + "/terminal:" + terminal + ", nativePG=true, voltage="
+                            + (ready && node != null ? node.getVoltage() : "unavailable")
+                            + ", backend=" + backend(node == null ? null : node.getNetwork()));
+                }
+            }
+            var entity = chunk.getBlockEntity(pos,net.minecraft.world.level.chunk.LevelChunk.EntityCreationType.CHECK);
+            if (entity instanceof org.patryk3211.powergrid.electricity.transformer.NetherTransformerBlockEntity transformer) {
+                var link = (org.cha0scollective.wwpg.mixin.NetherTransformerAccessor) transformer;
+                var controller = link.wwpg$controller();
+                lines.add("Nether link=" + link.wwpg$linkId() + ", secondary=" + link.wwpg$isSecondary()
+                        + ", peerAttached=" + (controller != null && controller.secondary != null)
+                        + ", cachedCurrent=" + (controller == null ? "unavailable" : controller.getCurrent()));
+            }
+            if (entity instanceof com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlockEntity panel)
+                for (var attachment : panel.getAttachments()) if (attachment != null)
+                    lines.add("panel slot=" + attachment.slot + ", type=" + com.george_vi.electroenergetics.CEERegistries.PANEL_ATTACHMENT_TYPE.getKey(attachment.type)
+                            + ", terminals=" + Arrays.toString(attachment.nodes) + ", label=" + attachment.label);
+            if (entity instanceof org.patryk3211.powergrid.circuits.circuitboard.CircuitBoardBlockEntity board) {
+                var baked = board.getBaked();
+                board.getComponentsStream().forEach(component -> {
+                    String identity = "board component=" + org.patryk3211.powergrid.circuits.components.ComponentRegistry.getId(component.component)
+                            + ", uuid=" + component.uuid + ", x=" + component.x + ", y=" + component.y;
+                    lines.add(identity + ", damaged=" + component.destroyed);
+                    if (baked == null) return;
+                    component.footprint().getPads().values().stream().mapToInt(pad -> pad.nodeIndex()).filter(pad -> pad >= 0).distinct().sorted().forEach(pad -> {
+                        var node = baked.getNode(new org.patryk3211.powergrid.circuits.schematic.CircuitSchematic.Node(component,pad));
+                        lines.add(identity + "/pad:" + pad + ", voltage=" + (ready && node != null ? node.getVoltage() : "unavailable")
+                                + ", backend=" + backend(node == null ? null : node.getNetwork()));
+                    });
+                });
+            }
+        }
+        if (lines.size() == 1) lines.add("No currently mapped electrical terminals; " + readiness);
+        return List.copyOf(lines);
+    }
+    private static String backend(ElectricalNetwork network) {
+        var solver = network == null ? null : ((ElectricalNetworkAccessor) network).wwpg$solver();
+        return network == null ? "disconnected" : solver == null ? "uninitialized" : solver.type().name();
+    }
+    private TopologyState topologyState() {
+        return new TopologyState(Set.copyOf(nodes.keySet()),Set.copyOf(grounds.keySet()),Set.copyOf(references.keySet()),created,removed);
+    }
+    private void recordTopology(TopologyState previous, boolean rebound, String reason) {
+        if (!rebound && previous.equals(topologyState())) return;
+        ++topologyChanges; lastTopologyTick = level.getGameTime();
+        topologyHistory.addLast("tick=" + lastTopologyTick + ", phase=" + reason + ", endpoints=" + nodes.size()
+                + ", branches=" + branches.size() + ", grounds=" + grounds.size() + ", references=" + references.size()
+                + ", created=" + created + ", removed=" + removed + ", rebound=" + rebound);
+        if (topologyHistory.size() > 32) topologyHistory.removeFirst();
     }
     public long createdCount() { return created; }
     public Map<CSolver.SolverBackend, Long> backendCounts() { return Map.copyOf(backendSubsteps); }
@@ -507,7 +614,16 @@ public final class WorldBridge {
         return "phase=" + phase + ", endpoints=" + nodes.size() + ", branches=" + branches.size()
                 + ", created=" + created + ", removed=" + removed + ", prepared=" + preparedTicks
                 + ", committed=" + committedTicks + ", PG substeps=" + solvedSubsteps
-                + ", backends=" + backendSubsteps + ", CEE solve attempts=" + SolverAudit.ceeAttempts();
+                + ", backends=" + backendSubsteps + ", CEE solve attempts=" + SolverAudit.ceeAttempts()
+                + ", topologyChanges=" + topologyChanges + ", lastTopologyTick=" + lastTopologyTick;
+    }
+
+    private record TopologyState(Set<EndpointKey> nodes, Set<EndpointKey> grounds, Set<EndpointKey> references, long created, long removed) {}
+    private static final class Diagnostic {
+        final String message;
+        final long firstTick;
+        long lastTick, count;
+        Diagnostic(String message,long tick) { this.message=message; firstTick=lastTick=tick; }
     }
 
     private record Desired(ElectricalProperties properties, boolean voltageSource, Node first, Node second) {}

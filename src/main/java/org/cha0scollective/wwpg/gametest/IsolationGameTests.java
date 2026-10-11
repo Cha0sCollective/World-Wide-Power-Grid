@@ -38,10 +38,12 @@ public final class IsolationGameTests {
             DevicesSavedData.load(level).getDevice(control,ResistorDevice.class).properties=unknown?new UnknownProperties():ElectricalProperties.resistor(Double.NaN);});
         h.runAtTickTime(40,()->{near(h,voltage(h,load),0,.001,"Unsupported circuit is electrically isolated");
             near(h,InfrastructureSavedData.load(level).ticker.lastResults.getVoltageAt(control,0,1),0,.001,"Isolated CEE device cannot reuse its previous result");
-            h.assertTrue(Bridges.get(level).diagnostics().stream().anyMatch(s1->s1.contains(unknown?"UnknownProperties":"Invalid electrical parameters")),"Device diagnostic is missing");
+            h.assertTrue(Bridges.get(level).diagnostics().stream().anyMatch(s1->s1.contains(unknown?"UnknownProperties":"Invalid electrical parameters")&&s1.contains("firstTick=")&&s1.contains("lastTick=")&&s1.contains("count=")),"Device diagnostic is missing its error history");
+            var description=String.join("\n",Bridges.get(level).describe(control));
+            h.assertTrue(description.contains("isolated=true")&&description.contains("isolationReason=")&&description.contains(unknown?"UnknownProperties":"Invalid electrical parameters"),"Isolated terminal did not identify its cause: "+description);
             h.assertTrue(Bridges.get(level).branchIdentity(new com.george_vi.electroenergetics.foundation.nodes.InWorldNode(0,control),new com.george_vi.electroenergetics.foundation.nodes.InWorldNode(1,control))==null,"Unsupported device retained its old stamp");
             DevicesSavedData.load(level).getDevice(control,ResistorDevice.class).properties=ElectricalProperties.resistor(100);});
-        h.runAtTickTime(60,()->{near(h,voltage(h,load),5,.05,"Known configuration restores circuit");DynamicGameTests.audit(h);h.succeed();});
+        h.runAtTickTime(60,()->{near(h,voltage(h,load),5,.05,"Known configuration restores circuit");h.assertTrue(!String.join("\n",Bridges.get(level).describe(control)).contains("isolated=true"),"Recovered device retained a stale isolation reason");DynamicGameTests.audit(h);h.succeed();});
     }
     private static double voltage(GameTestHelper h,BlockPos pos){return new BlockWireEndpoint(pos,0).getNode(h.getLevel()).getVoltage()-new BlockWireEndpoint(pos,1).getNode(h.getLevel()).getVoltage();}
     private static void near(GameTestHelper h,double value,double expected,double tolerance,String label){BoardComponentGameTests.near(h,value,expected,tolerance,label);}

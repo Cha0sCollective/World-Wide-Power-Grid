@@ -123,7 +123,7 @@ public final class PanelGameTests {
         });
     }
 
-    private static PanelAttachment insert(GameTestHelper h, BlockPos pos, PanelAttachmentType type, ElectricalPanelSlot slot) {
+    static PanelAttachment insert(GameTestHelper h, BlockPos pos, PanelAttachmentType type, ElectricalPanelSlot slot) {
         var be = (ElectricalPanelBlockEntity) h.getLevel().getBlockEntity(pos);
         var attachment = type.createNew(pos, type.mode.getNodesFor(pos, slot), h.getLevel(), slot, Direction.NORTH, h.getLevel().registryAccess());
         be.getAttachments()[slot.ordinal()] = attachment;

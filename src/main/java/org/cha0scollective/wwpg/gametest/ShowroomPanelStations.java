@@ -30,6 +30,12 @@ import static org.cha0scollective.wwpg.gametest.ShowroomTools.*;
 final class ShowroomPanelStations {
     private record Station(BlockPos base, String name) {BlockPos source(){return base;} BlockPos panel(){return base.east(3);} BlockPos lamp(){return base.east(6);} }
     private final List<Station> stations=new ArrayList<>();
+    List<StationaryYardCoverage.Visit> visits() {
+        var result=new ArrayList<StationaryYardCoverage.Visit>();int index=0;
+        for(var station:stations)result.add(new StationaryYardCoverage.Visit("P"+(++index),station.name,station.base,
+                List.of("Use the labeled panel control and watch its lamp or receiver","Wear goggles for voltage, current, energy and frequency readings","Restore the control; repair or reset protection at its labeled load")));
+        return result;
+    }
     ShowroomPanelStations(GameTestHelper h,boolean restore) {
         String[] names={"Gauges / light","Cut-off switch","Emergency stop","Momentary switch","Circuit breaker","Energy meter","3-pole meter","Analog lever","Steering wheel"};
         for(int i=0;i<names.length;i++) {

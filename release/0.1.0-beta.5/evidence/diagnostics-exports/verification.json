@@ -1,0 +1,826 @@
+{
+  "schema": 1,
+  "target": "0.1.0-beta.5",
+  "platform": "Windows",
+  "complete_release_acceptance": false,
+  "artifact": {
+    "name": "wwpg-beta5-yard-export-v3.jar",
+    "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73"
+  },
+  "diagnostic_artifact": {
+    "name": "wwpg-beta5-diagnostics.jar",
+    "sha256": "34246ccc431ac22ec38cab86419079563859970749c6e53b9070b972b0da5893"
+  },
+  "wire_command_artifact": {
+    "name": "wwpg-beta5-native-wiring.jar",
+    "sha256": "d03c9451f217d4fc4319bd5948d8959045c981f73501e5fa6ee3f5a455c713f4"
+  },
+  "yards": [
+    {
+      "profile": "BASE",
+      "backend": "NATIVE",
+      "archive": "wwpg-beta5-candidate-v3-BASE-NATIVE.zip",
+      "archive_sha256": "f49ccba67017da2975bbefde1319a799f6859a3814241f096975bc3b1fe5b873",
+      "native_files": 20,
+      "mapped_behaviors": 164,
+      "stations": 147,
+      "source_runs": [
+        {
+          "cold_pass": 0,
+          "file": "beta5-yard-export-v3-BASE-NATIVE-0.log.gz",
+          "sha256": "1ba5d4ebbb7986100993efe3f93342673c122332ad8cf787cd3511410acee12c",
+          "raw_sha256": "f0986a613bab1102379e4cb16c5dad3f8ba83141da0368a3252bc77a2db814d6"
+        },
+        {
+          "cold_pass": 1,
+          "file": "beta5-yard-export-v3-BASE-NATIVE-1.log.gz",
+          "sha256": "99e9da89ab177919c302027d92e2d91177048b5e23c05af6ea78856093d7744f",
+          "raw_sha256": "de942b885ffb9760b3b4f78930589775c83ac6010bebd7761f5b7f7885dc6690"
+        },
+        {
+          "cold_pass": 2,
+          "file": "beta5-yard-export-v3-BASE-NATIVE-2.log.gz",
+          "sha256": "46687e448e52d06b9c3eca7e4fc94cecb07a1da95857c5461a4fdb1c3908a405",
+          "raw_sha256": "c8d6d34df282f824651f796ef96c0c0ff9b9d503ccf6a71fe82dcbfeca652618"
+        },
+        {
+          "cold_pass": 3,
+          "file": "beta5-yard-export-v3-BASE-NATIVE-3.log.gz",
+          "sha256": "e97e7d8748190c9461056609bdc44bd616a7e116cacf635b8779f8c809c90e3f",
+          "raw_sha256": "c4977e2d4b95a352c280b656e67768ff69b4931cd39631067bdff24a398ec2a5"
+        }
+      ],
+      "source_proofs": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "SETUP",
+          "started": "2026-10-11T02-53-43.883157300Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T02:54:11.213990800Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T02-54-17.699335100Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T02:54:42.113587700Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T02-54-48.995166200Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T02:55:13.670934500Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T02-55-20.221526100Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T02:55:44.430726100Z"
+        }
+      ],
+      "extracted_runs": [
+        {
+          "cold_pass": 1,
+          "file": "beta5-extracted-yard-v3-BASE-NATIVE-1.log.gz",
+          "sha256": "c3a9413655583f0f8a6bac35bac305e7a183126e9e30114e251f53d4ff9d8cb8",
+          "raw_sha256": "7c83445df7ae4fc7c6bce781955282d7d1ddd17d57469f2cf481cc4a3ea759ee"
+        },
+        {
+          "cold_pass": 2,
+          "file": "beta5-extracted-yard-v3-BASE-NATIVE-2.log.gz",
+          "sha256": "5deb226bede73c2ea1c923a3442f2d62e51ea29672862ef4df21e107e4fbf9a8",
+          "raw_sha256": "9c35d048cbb385db0b93862a048aa1e2164ff0d1cfce866e711be21ccf4c79d2"
+        },
+        {
+          "cold_pass": 3,
+          "file": "beta5-extracted-yard-v3-BASE-NATIVE-3.log.gz",
+          "sha256": "7c1d44b367841538bb75bb714049c29f6cddc4c6d376be5608a45e9a8ecd7704",
+          "raw_sha256": "e743d9fadee237b172846b3e5234d58040a819dd53455997d222951010b3d2d9"
+        }
+      ],
+      "extracted_proofs": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T02-55-51.585127700Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T02:56:18.049802200Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T02-56-24.786155600Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T02:56:49.065996800Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T02-56-56.110036700Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T02:57:20.142517200Z"
+        }
+      ],
+      "extraction": {
+        "schema": 1,
+        "archive": "C:\\Users\\Parker\\Documents\\ChatGPT\\WWPG\\build\\distributions\\wwpg-beta5-candidate-v3-BASE-NATIVE.zip",
+        "sha256": "f49ccba67017da2975bbefde1319a799f6859a3814241f096975bc3b1fe5b873",
+        "profile": "BASE",
+        "jar": {
+          "name": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73"
+        },
+        "files": 22,
+        "extracted": true,
+        "reopened": false,
+        "source_save_name": "Stationary Test Yard"
+      }
+    },
+    {
+      "profile": "BASE",
+      "backend": "JAVA",
+      "archive": "wwpg-beta5-candidate-v3-BASE-JAVA.zip",
+      "archive_sha256": "382a28a6f5357e25ba3d8246d67afa7398af18bde9f0d5e91be451a3daae10e6",
+      "native_files": 20,
+      "mapped_behaviors": 164,
+      "stations": 147,
+      "source_runs": [
+        {
+          "cold_pass": 0,
+          "file": "beta5-yard-export-v3-BASE-JAVA-0.log.gz",
+          "sha256": "dc9fa90f65548c246281d1d2d4064d6c45adc79fd3d61cdebe5fb257d65fdd51",
+          "raw_sha256": "05bf5c30361fc2d7ac2b02c6bb3aa7213bc7a0317fededb13ce86d800854b466"
+        },
+        {
+          "cold_pass": 1,
+          "file": "beta5-yard-export-v3-BASE-JAVA-1.log.gz",
+          "sha256": "6fc5ce3575d02efe1516e6afdae20c74c0a5d97173063fe8ec0b945e859b9b93",
+          "raw_sha256": "f34cc3f494d38e51d39a4201286a6954987eff90f562dfab7f845d839a0246e5"
+        },
+        {
+          "cold_pass": 2,
+          "file": "beta5-yard-export-v3-BASE-JAVA-2.log.gz",
+          "sha256": "7fe5d47d3410594f4d95054d51d9ead5a5114bd958cbf5f85ed39dba4602be1f",
+          "raw_sha256": "fa02fa7080f7901d2edfa6f2a4e112802a63d538db4d68f464fca1ee61d4c12c"
+        },
+        {
+          "cold_pass": 3,
+          "file": "beta5-yard-export-v3-BASE-JAVA-3.log.gz",
+          "sha256": "23fef98b09fb1357dc0420c63e48329b65bb27c617a8ca2d4f44030f02af3f89",
+          "raw_sha256": "3879d5d34fb4617964c089e2a01691aa6f4d0127a1e20e7d634731a1f45839a3"
+        }
+      ],
+      "source_proofs": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "SETUP",
+          "started": "2026-10-11T02-57-26.904078800Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T02:57:53.606314400Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T02-58-00.411350700Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T02:58:24.182528300Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T02-58-30.874708300Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T02:58:54.733444600Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T02-59-01.279564800Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T02:59:24.982487100Z"
+        }
+      ],
+      "extracted_runs": [
+        {
+          "cold_pass": 1,
+          "file": "beta5-extracted-yard-v3-BASE-JAVA-1.log.gz",
+          "sha256": "590e76a2538c154a6c0eb57da5ebb8497291d9b5f9c875eba4f6794fe782be67",
+          "raw_sha256": "a58a4292bfbf457769c92027292c9d221bbdcfd02a501fd08ccba71e2ae0f112"
+        },
+        {
+          "cold_pass": 2,
+          "file": "beta5-extracted-yard-v3-BASE-JAVA-2.log.gz",
+          "sha256": "bd00ffc03691b9b4d1c164f3f5a19f0e466d7b7e71adc1783bdda485fe986dae",
+          "raw_sha256": "1ffd22b878c8f3650e3da4c3ce95f92f69d41edba82a3da41e3775afe73f39bb"
+        },
+        {
+          "cold_pass": 3,
+          "file": "beta5-extracted-yard-v3-BASE-JAVA-3.log.gz",
+          "sha256": "e9f5ce076fd4b3fbfba523413fd088f3ae197c5ef2c0c3c2c54be32ce827409a",
+          "raw_sha256": "ffcc915fb14a78d07fb79aafd413142a727a1b31d6a7ca3676b02d7852c50868"
+        }
+      ],
+      "extracted_proofs": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T02-59-32.060921900Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T02:59:57.710367100Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T03-00-04.284353400Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T03:00:29.233728400Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T03-00-35.893996700Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T03:00:59.070388200Z"
+        }
+      ],
+      "extraction": {
+        "schema": 1,
+        "archive": "C:\\Users\\Parker\\Documents\\ChatGPT\\WWPG\\build\\distributions\\wwpg-beta5-candidate-v3-BASE-JAVA.zip",
+        "sha256": "382a28a6f5357e25ba3d8246d67afa7398af18bde9f0d5e91be451a3daae10e6",
+        "profile": "BASE",
+        "jar": {
+          "name": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73"
+        },
+        "files": 22,
+        "extracted": true,
+        "reopened": false,
+        "source_save_name": "Stationary Test Yard"
+      }
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "NATIVE",
+      "archive": "wwpg-beta5-candidate-v3-PINOUT-NATIVE.zip",
+      "archive_sha256": "51bf82dc4a4dba6045c693b844aa56d7935c3c15ba0c9b536d19284c79b21202",
+      "native_files": 29,
+      "mapped_behaviors": 165,
+      "stations": 149,
+      "source_runs": [
+        {
+          "cold_pass": 0,
+          "file": "beta5-yard-export-v3-PINOUT-NATIVE-0.log.gz",
+          "sha256": "db8def33e3986790eab27372f7134134d7839e7b368e2830cc330918d7e33db2",
+          "raw_sha256": "5d93e01a2f77a78e6441c8b658ac0287bf3c175672d9b4cec0dff174349d45f8"
+        },
+        {
+          "cold_pass": 1,
+          "file": "beta5-yard-export-v3-PINOUT-NATIVE-1.log.gz",
+          "sha256": "a42f817fc49fddb3211fb547ce3af814634bd5f66267f6e83debd4f7e88784ef",
+          "raw_sha256": "13168675a5cdddba8d10d651cc3a2419e79a07df2be56fc9acd2df1a6f07fc35"
+        },
+        {
+          "cold_pass": 2,
+          "file": "beta5-yard-export-v3-PINOUT-NATIVE-2.log.gz",
+          "sha256": "bd209d7ac23972a4fa097f4020615881c0f6e810e8d27f868a425a7c2483a064",
+          "raw_sha256": "350c51698c75421e4c7dc164f9d6f524001b4afe727eef1aa8dc5e11d07c0dbe"
+        },
+        {
+          "cold_pass": 3,
+          "file": "beta5-yard-export-v3-PINOUT-NATIVE-3.log.gz",
+          "sha256": "e0f7f535daba14f95209397f4844dc0444ea3bec29dce198bf127c2ee5ee9caa",
+          "raw_sha256": "415f6054afd560ed3fef7c7fd25b43857019ac3ff41d78650ca4e3f27eb302c8"
+        }
+      ],
+      "source_proofs": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "SETUP",
+          "started": "2026-10-11T03-01-05.619761900Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T03:01:35.131004900Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T03-01-42.012040300Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T03:02:08.182790100Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T03-02-14.990653200Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T03:02:41.774197100Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T03-02-48.391541700Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T03:03:14.770064700Z"
+        }
+      ],
+      "extracted_runs": [
+        {
+          "cold_pass": 1,
+          "file": "beta5-extracted-yard-v3-PINOUT-NATIVE-1.log.gz",
+          "sha256": "e32321306fa13d251ccfde06f82b7e447024334f78894f53a42c01b84ff4938b",
+          "raw_sha256": "bb469a91420ebdc731883f44a8e90d9fcb9b7ad8bd928ea8c69d69e31b4cc244"
+        },
+        {
+          "cold_pass": 2,
+          "file": "beta5-extracted-yard-v3-PINOUT-NATIVE-2.log.gz",
+          "sha256": "e7236187b44a15bc8c25104a8095079fa74ea30edfbddf1b0be61a543b686ed0",
+          "raw_sha256": "06dd780babac03f5d1b74d29e4562c5ff4686f6299fbd3c733c885d32918f87b"
+        },
+        {
+          "cold_pass": 3,
+          "file": "beta5-extracted-yard-v3-PINOUT-NATIVE-3.log.gz",
+          "sha256": "ab1b1fcc76b542d173ce617901a46c7a8fe4f35e51e5e92bf065108b108ffab2",
+          "raw_sha256": "7de5301c338174eb8752a3413f3c00208e6e9ba807b411d06a50b5f93b3ad02b"
+        }
+      ],
+      "extracted_proofs": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T03-03-22.124170500Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T03:03:50.970517800Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T03-03-57.776105100Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T03:04:24.647229400Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "PINOUT",
+          "backend": "NATIVE",
+          "phase": "VERIFY",
+          "started": "2026-10-11T03-04-31.398671300Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T03:04:57.116725900Z"
+        }
+      ],
+      "extraction": {
+        "schema": 1,
+        "archive": "C:\\Users\\Parker\\Documents\\ChatGPT\\WWPG\\build\\distributions\\wwpg-beta5-candidate-v3-PINOUT-NATIVE.zip",
+        "sha256": "51bf82dc4a4dba6045c693b844aa56d7935c3c15ba0c9b536d19284c79b21202",
+        "profile": "PINOUT",
+        "jar": {
+          "name": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73"
+        },
+        "files": 31,
+        "extracted": true,
+        "reopened": false,
+        "source_save_name": "Stationary Test Yard \u2014 Pinout",
+        "destination": "server"
+      }
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "JAVA",
+      "archive": "wwpg-beta5-candidate-v3-PINOUT-JAVA.zip",
+      "archive_sha256": "043a9dd701dfb8bf9f4cd704bdda0006d293bcc71f143eb3ca677b2dd75d0623",
+      "native_files": 29,
+      "mapped_behaviors": 165,
+      "stations": 149,
+      "source_runs": [
+        {
+          "cold_pass": 0,
+          "file": "beta5-yard-export-v3-PINOUT-JAVA-0.log.gz",
+          "sha256": "ba4c7d19f5a9bcf35bd3df7e9c7cdd68bdd99fe78e27836b7cc1777b56c9c33c",
+          "raw_sha256": "57e0ae4ec592216ce5dff738996221fedd663405c10eefef365fcac718e7e57c"
+        },
+        {
+          "cold_pass": 1,
+          "file": "beta5-yard-export-v3-PINOUT-JAVA-1.log.gz",
+          "sha256": "288c6bf187f0fca2c0928fc06dd962fb267f8da003a01128353b61edfc7066b1",
+          "raw_sha256": "402eb1495b5677a862218be436561c3b26b54e2ec8a1756e9d430ff172c250e2"
+        },
+        {
+          "cold_pass": 2,
+          "file": "beta5-yard-export-v3-PINOUT-JAVA-2.log.gz",
+          "sha256": "b1a3eb20aea50a14b99b06a7929a81a74b1109796c1e39db359935e0391d7503",
+          "raw_sha256": "be922ef974fb5f5e17dd1c9844348cf50f3f9348d65227e78cf18038b4fe325e"
+        },
+        {
+          "cold_pass": 3,
+          "file": "beta5-yard-export-v3-PINOUT-JAVA-3.log.gz",
+          "sha256": "caa89399d6715d270dba5a21931b70d80f7cec2e14ebd900927a722e42babe3f",
+          "raw_sha256": "fd74fda4bdeca586d3b4b33406da11014f2a6d453277367161fe0c027432498d"
+        }
+      ],
+      "source_proofs": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "SETUP",
+          "started": "2026-10-11T03-05-03.869743500Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T03:05:33.189352600Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T03-05-39.775836900Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T03:06:06.224207200Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T03-06-12.926019700Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T03:06:39.670868100Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T03-06-46.223332Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T03:07:12.647958300Z"
+        }
+      ],
+      "extracted_runs": [
+        {
+          "cold_pass": 1,
+          "file": "beta5-extracted-yard-v3-PINOUT-JAVA-1.log.gz",
+          "sha256": "002c6e5b510041db7a5a1301fbf7caa2019a0f6d1a763bc8da3b55981934fa11",
+          "raw_sha256": "44ac578b814f974590a24c3eb665d9ddc55b9f003bf781a4eba67206b367c9c7"
+        },
+        {
+          "cold_pass": 2,
+          "file": "beta5-extracted-yard-v3-PINOUT-JAVA-2.log.gz",
+          "sha256": "cdb1a403fba2eed5c191c245db37ad1bbec4784a26f02a9777062df395f11d11",
+          "raw_sha256": "c1994fb8bb3b6f4a475fd98d03edd6e7b95d22a5f03442c6189db52999f196ed"
+        },
+        {
+          "cold_pass": 3,
+          "file": "beta5-extracted-yard-v3-PINOUT-JAVA-3.log.gz",
+          "sha256": "67258b11c7ea4eda5d99042ecdec79221e63a99cb3922df6db94c1bedbf561c7",
+          "raw_sha256": "7c9e9612102a3ba097945fe67e7c419ba12bf90333e068d9a5341a103e9479e2"
+        }
+      ],
+      "extracted_proofs": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T03-07-19.760554900Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T03:07:48.727042800Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T03-07-55.304292500Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T03:08:21.800695900Z"
+        },
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73",
+          "profile": "PINOUT",
+          "backend": "JAVA",
+          "phase": "VERIFY",
+          "started": "2026-10-11T03-08-28.197562Z",
+          "namespaces": "wwpg_yard",
+          "required_tests_passed": 1,
+          "completed": "2026-10-11T03:08:54.166952500Z"
+        }
+      ],
+      "extraction": {
+        "schema": 1,
+        "archive": "C:\\Users\\Parker\\Documents\\ChatGPT\\WWPG\\build\\distributions\\wwpg-beta5-candidate-v3-PINOUT-JAVA.zip",
+        "sha256": "043a9dd701dfb8bf9f4cd704bdda0006d293bcc71f143eb3ca677b2dd75d0623",
+        "profile": "PINOUT",
+        "jar": {
+          "name": "wwpg-beta5-yard-export-v3.jar",
+          "sha256": "70db9a1501212065a98b04d137ef0cff00bf83535477135d7a05966aee723b73"
+        },
+        "files": 31,
+        "extracted": true,
+        "reopened": false,
+        "source_save_name": "Stationary Test Yard \u2014 Pinout",
+        "destination": "server"
+      }
+    }
+  ],
+  "diagnostic_and_native_phase_checks": [
+    {
+      "backend": "NATIVE",
+      "required_tests_passed": 188,
+      "native_unlink_phase_controls": [
+        "NETHER_UNLINK_PHASE: backend=NATIVE gameTime=421 nativeOnly=false detached=true before=-0.039989081813018856 after=-0.039989081813018856 oldImmediateZeroAssertionWouldFail=true",
+        "NETHER_UNLINK_PHASE: backend=NATIVE gameTime=2395 nativeOnly=true detached=true before=-0.03998978961226385 after=-0.03998978961226385 oldImmediateZeroAssertionWouldFail=true"
+      ],
+      "proofs": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-diagnostics.jar",
+          "sha256": "34246ccc431ac22ec38cab86419079563859970749c6e53b9070b972b0da5893",
+          "profile": "BASE",
+          "backend": "NATIVE",
+          "phase": "SETUP",
+          "started": "2026-10-11T02-39-36.475146400Z",
+          "namespaces": "wwpg,wwpg_stationary,wwpg_distribution",
+          "required_tests_passed": 188,
+          "completed": "2026-10-11T02:41:17.166532Z"
+        }
+      ],
+      "file": "beta5-diagnostics-focus-NATIVE.log.gz",
+      "sha256": "051bf2f4482fa3652184a0ef914757b744b812cd00218a6778de023dceed5af0",
+      "raw_sha256": "238d3a763a09a8ba25858a86e851acd5eb88e5a20f3537d501536ba1af5c5c85"
+    },
+    {
+      "backend": "JAVA",
+      "required_tests_passed": 188,
+      "native_unlink_phase_controls": [
+        "NETHER_UNLINK_PHASE: backend=JAVA gameTime=422 nativeOnly=false detached=true before=-0.039989081813473604 after=-0.039989081813473604 oldImmediateZeroAssertionWouldFail=true",
+        "NETHER_UNLINK_PHASE: backend=JAVA gameTime=2403 nativeOnly=true detached=true before=-0.039989789611354354 after=-0.039989789611354354 oldImmediateZeroAssertionWouldFail=true"
+      ],
+      "proofs": [
+        {
+          "schema": 1,
+          "artifact": "wwpg-beta5-diagnostics.jar",
+          "sha256": "34246ccc431ac22ec38cab86419079563859970749c6e53b9070b972b0da5893",
+          "profile": "BASE",
+          "backend": "JAVA",
+          "phase": "SETUP",
+          "started": "2026-10-11T02-41-23.881530400Z",
+          "namespaces": "wwpg,wwpg_stationary,wwpg_distribution",
+          "required_tests_passed": 188,
+          "completed": "2026-10-11T02:42:09.769831500Z"
+        }
+      ],
+      "file": "beta5-diagnostics-focus-JAVA.log.gz",
+      "sha256": "2da438ff1c03cb556d26d09e71fad1ac9f9cb2de6e92116f3528ed9a743ccf01",
+      "raw_sha256": "183b224804bce016d8111f6fc71615ee40bd772d48115ed4b4f9e559f8eb0da7"
+    }
+  ],
+  "additional_final_wire_command_runs": [
+    {
+      "profile": "BASE",
+      "backend": "NATIVE",
+      "required_tests_passed": 199,
+      "file": "beta5-native-wiring-regression-BASE-NATIVE.log.gz",
+      "sha256": "80d9b3f23e426df2dd1f3d0b2ab1ab33ddf6218fe02e2235d918cf0d4ea3793d",
+      "raw_sha256": "23e6b7aa3aee49392fa9115a06ab537fa69bc05a998dbaea0be4578f7ee3e27b"
+    },
+    {
+      "profile": "BASE",
+      "backend": "JAVA",
+      "required_tests_passed": 199,
+      "file": "beta5-native-wiring-regression-BASE-JAVA.log.gz",
+      "sha256": "21d77f72090068c6b7b36768a8ca44ecda9a4afbb97ddf7eb19eff496aae77e5",
+      "raw_sha256": "7401d5d8c653ee44fcdcfd737a17ce0497ad5338c7be5e7ae9a4d11f332a7eb7"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "NATIVE",
+      "required_tests_passed": 202,
+      "file": "beta5-native-wiring-regression-PINOUT-NATIVE.log.gz",
+      "sha256": "f6b753f85ee0e4d073ce5d1a3a3158421acdec455334bd086f78328931cd49fe",
+      "raw_sha256": "e8b4221faa91906b456ba7ca1e06bf7abfacefa2958ed9c51e665617b1859ba6"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "NATIVE",
+      "yard_cold_pass": 0,
+      "file": "beta5-native-wiring-yard-PINOUT-NATIVE-0.log.gz",
+      "sha256": "2c1a8d6ab32b26a47905d9065bec501a57df4e03e0bb9983895d446da1561c0c",
+      "raw_sha256": "f929b4b782ba801ddd37a0527389287a90e3dd2db9d36d6faca67ae0af093de3"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "NATIVE",
+      "yard_cold_pass": 1,
+      "file": "beta5-native-wiring-yard-PINOUT-NATIVE-1.log.gz",
+      "sha256": "d0a2e6839dfd991f50f2dc6b99f68b7f7072656011dffdaaa282154d1fd96012",
+      "raw_sha256": "7613639275860437976651bbe1ef3cb82cb42f3b7964e0ee36715dc0518ee08d"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "NATIVE",
+      "yard_cold_pass": 2,
+      "file": "beta5-native-wiring-yard-PINOUT-NATIVE-2.log.gz",
+      "sha256": "41de885d42440bdc853b8a68d72d0b13cd2e432ad197f2b433a98ab08836b10d",
+      "raw_sha256": "66d06740d7e7d49aec1d9c76bf9a3e0033bae6f455756c2dea4e548d1f377185"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "NATIVE",
+      "yard_cold_pass": 3,
+      "file": "beta5-native-wiring-yard-PINOUT-NATIVE-3.log.gz",
+      "sha256": "ea5f245c88217247085b3bc0f4a1fb7295da73bc9fd62433c71986c8c386aff2",
+      "raw_sha256": "4eca80151010359f07c4942f74e65b3ee637d48aa9aef9b82c3bf79276c03d58"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "JAVA",
+      "required_tests_passed": 202,
+      "file": "beta5-native-wiring-regression-PINOUT-JAVA.log.gz",
+      "sha256": "a085f02f5d3711739082ca2cb48ba51181ca6d77fd6a953cf42fba167fc03eeb",
+      "raw_sha256": "6ec2409e370e01d4150e41f62cd49fa9c7d7a514bcbe9679d8aef63cb37b4c48"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "JAVA",
+      "yard_cold_pass": 0,
+      "file": "beta5-native-wiring-yard-PINOUT-JAVA-0.log.gz",
+      "sha256": "2d0656079a8ae6c038a2731a98ec11afcad829d103c169153b56d92154b1706a",
+      "raw_sha256": "7c371bc21cc95a808f3a00169c09ff0175974750b031338ea9eae5f18d9165ef"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "JAVA",
+      "yard_cold_pass": 1,
+      "file": "beta5-native-wiring-yard-PINOUT-JAVA-1.log.gz",
+      "sha256": "bbec0877ad5400e07764fc57f89b0cb7470b7a6e4022b1a0dc6800d6597c0d84",
+      "raw_sha256": "1bcab2b6f3793b4e7a4d41b822a0b5f19358a322d5c1847e26103386dcf0f8a3"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "JAVA",
+      "yard_cold_pass": 2,
+      "file": "beta5-native-wiring-yard-PINOUT-JAVA-2.log.gz",
+      "sha256": "45d1fa17e73e47abc934f98f38567d7c222c7d86aae51004cf7825d82f9e7a90",
+      "raw_sha256": "4ccc4f7394a5773a98237c001648b90b05da7441a6590543ebf3e5ec2b810c10"
+    },
+    {
+      "profile": "PINOUT",
+      "backend": "JAVA",
+      "yard_cold_pass": 3,
+      "file": "beta5-native-wiring-yard-PINOUT-JAVA-3.log.gz",
+      "sha256": "5833c943daa7c202348b36a022237e0111cec56675c4a33cd362b5a52719807e",
+      "raw_sha256": "ac200bfe7a8b818bf44583f3077c2b7a01340886aff8463c225dc363818905ab"
+    }
+  ],
+  "retained_fixture_failures": [
+    {
+      "cause": "Lamp overlapped the gauge block.",
+      "artifact": "wwpg-beta5-yard-export.jar",
+      "artifact_sha256": "d36d84f47d892fc5b16bbc48713413371847ca7aa50516f28469a9e8d45bb808",
+      "file": "beta5-yard-export-BASE-NATIVE-0.log.gz",
+      "sha256": "f06b764d43c98cd54b89294a88bedf2c4346dfb259d783fc8c4bdd4f6529a128",
+      "raw_sha256": "951a387f1e14df4d47d51575b560fdf904c1e51ff9649fd7960520d9d12a9b66"
+    },
+    {
+      "cause": "Nominal wattage ignored native temperature-dependent filament resistance; actual meter differed by 0.12%.",
+      "artifact": "wwpg-beta5-yard-export-v2.jar",
+      "artifact_sha256": "4c8672f85878cc4606cf171281b00e5c2da08011a25d0be5dad4fe1c2c94b0da",
+      "file": "beta5-yard-export-v2-BASE-NATIVE-0.log.gz",
+      "sha256": "b7bf332f58357086f653769a0eaa97d6a86f271614289423cdc78506daa3bc75",
+      "raw_sha256": "e1e42fa2cf0879823fc6b55a97c2be9e67eeac2b96276a39756f697bbed2399f"
+    }
+  ],
+  "notes": [
+    "The first typed registry audit rejected the yard because the standalone three-pole meter had no exhibit. Panel coverage did not substitute for the block.",
+    "The corrected exhibit checks signed lamp voltages and metered consumption against actual native filament resistance at 0.1%.",
+    "Both profiles/backends pass setup, three cold source-save restarts and three cold restarts after exact ZIP extraction.",
+    "Native unlink clears peer references immediately and retains cached current until its next solve; both solvers reproduce the old immediate-zero requirement failing at that valid native boundary.",
+    "The original Windows/native CI log did not identify the failing conjunct. This phase control establishes the invalid assertion contract, without claiming to identify that historical sample.",
+    "Graphical acceptance, two real clients and final versioned-jar eight-way CI remain required."
+  ]
+}

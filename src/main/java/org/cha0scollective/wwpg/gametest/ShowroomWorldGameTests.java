@@ -87,7 +87,12 @@ public final class ShowroomWorldGameTests {
             if(additional!=null&&!restore)StationaryYardGuide.install(h,additional);
             h.assertTrue(chest.getItem(8).is(Items.WRITTEN_BOOK),"Test-yard guide was not saved");
             coverage(h);
-            if (additional != null) additional.verifyAndRecord();
+            if (additional != null) {
+                additional.verifyAndRecord();
+                var visits=new java.util.ArrayList<StationaryYardCoverage.Visit>();
+                visits.addAll(boards.visits());visits.addAll(panels.visits());visits.addAll(power.visits());visits.addAll(devices.visits());
+                StationaryYardCoverage.write(h,visits,additional);
+            }
             WorldWidePowerGrid.LOGGER.info("WWPG_SHOWROOM_PASSED: phase={}; 25 electrical boards, routing board, all 11 panel types, 7 transformer/variac circuits, 3 meter banks, 22 device/storage circuits, and original factory",restore?"VERIFY":"SETUP");
         });
     }

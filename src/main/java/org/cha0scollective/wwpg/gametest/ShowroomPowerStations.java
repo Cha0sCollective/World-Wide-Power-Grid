@@ -28,6 +28,15 @@ final class ShowroomPowerStations {
     private record Transformer(BlockPos source,BlockPos device,BlockPos load,BlockPos meter,String name,double input,double expected,boolean medium) {}
     private final List<Transformer> transformers=new ArrayList<>();
     private final List<BlockPos> meterBases=List.of(new BlockPos(32,64,156),new BlockPos(64,64,156));
+    List<StationaryYardCoverage.Visit> visits() {
+        var result=new ArrayList<StationaryYardCoverage.Visit>();int index=0;
+        for(var station:transformers)result.add(new StationaryYardCoverage.Visit("T"+(++index),station.name,station.source,
+                List.of(station.input+" V input; about "+station.expected+" V output","Use goggles or probes; turn the variac crank or redstone lever where fitted","Restore the labeled source and winding settings")));
+        for(int i=0;i<meterBases.size();i++)result.add(new StationaryYardCoverage.Visit("M"+(i+1),i==0?"PG meter bank":"CEE meter bank",meterBases.get(i),
+                List.of("10 V, about 1 A and 10 W; energy rises","Use both handheld meters on terminals and wires","Restore the supply to 10 V")));
+        result.add(new StationaryYardCoverage.Visit("M3","AC frequency",new BlockPos(96,64,156),List.of("50 Hz AC","Wear goggles and inspect the frequency reading","Restore the labeled AC source")));
+        return result;
+    }
     ShowroomPowerStations(GameTestHelper h,boolean restore) {
         String[] names={"CEE step-down","CEE step-up","PG small step-up","PG medium step-down","PG variac","CEE variac","CEE RS variac"};
         for(int i=0;i<names.length;i++) {
