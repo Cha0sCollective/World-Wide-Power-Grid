@@ -19,6 +19,10 @@ The [support list](docs/SUPPORT.md) gives the equipment and workflows covered by
 
 Choose **Stationary Test Yard** or **Stationary Test Yard — Pinout** from the [release downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.0). Each supported native behavior has a checked exhibit or assembly/repair workflow. Signs and books explain controls, readings and resets. Goggles and tools are at spawn. The [yard guide](docs/STATIONARY_YARD.md) points to transformers, gauges, boards, panels, storage, processing and the playable Nether route.
 
+All four saves and the optional Workshop mods are in **wwpg-0.2.0-example-worlds.zip**.
+Players can download the mod jar directly; the developer SDK and verification
+archive are separate optional downloads.
+
 The separate **Extension API Workshop** has eleven stations demonstrating nine new machine models, a CEE storage indicator and a PG shunt board. Install both supplied example add-ons for this world. Its [guide](docs/EXTENSION_API_WORKSHOP.md) explains how to switch loads, change voltage, discharge storage and check readings. Ordinary factories need only WWPG and its upstream dependencies.
 
 ## Release status

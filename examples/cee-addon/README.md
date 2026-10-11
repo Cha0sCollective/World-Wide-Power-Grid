@@ -12,9 +12,9 @@ identifies the tested artifacts and accepted checks.
 
 ## Build independently
 
-Use Java 21. Download and verify
-[wwpg-api-1.0.0-maven.zip](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-api-1.0.0-maven.zip),
-then extract it. The directory containing `org/cha0scollective/wwpg` is the Maven
+Use Java 21. Download, verify and extract the
+[developer SDK](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-developer-sdk.zip),
+then extract its `maven/wwpg-api-1.0.0-maven.zip`. The directory containing `org/cha0scollective/wwpg` is the Maven
 repository root. Supply that directory's absolute path and run this project's
 wrapper from the project directory:
 

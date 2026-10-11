@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "version": "0.2.0",
+  "api_version": "1.0.0",
+  "date": "2026-10-11",
+  "reason": "Group player, developer and review downloads; preserve original accepted bytes.",
+  "original_distribution": "release/0.2.0/distribution.json",
+  "original_assets_preserved": 29,
+  "assets": [
+    {
+      "filename": "wwpg-0.2.0.jar",
+      "sha256": "708d3bac7fee11f34a770f0a145ee4226a95566870db572767aafa97bae78f10",
+      "bytes": 3532278
+    },
+    {
+      "filename": "wwpg-0.2.0-example-worlds.zip",
+      "sha256": "192115876247df8de2ffbfcb8f7907688f4df2c167207c2b16db723246600307",
+      "bytes": 3315162
+    },
+    {
+      "filename": "wwpg-0.2.0-developer-sdk.zip",
+      "sha256": "7dc4731bf27506250ebd903757bcf09826a1321702cc49693b3d819beccbf8c1",
+      "bytes": 934789
+    },
+    {
+      "filename": "wwpg-0.2.0-verification.zip",
+      "sha256": "9a5c2cc2b600cd0d948caeca3fbace2a67e165f90b1d8012e0d70d28ba7f8ea6",
+      "bytes": 202725012
+    },
+    {
+      "filename": "wwpg-0.2.0-checksums.txt",
+      "sha256": "709e77f24405173d4f2795cbe946cb7097e19d1dcb07c523e16198bb3ad57da1",
+      "bytes": 366
+    }
+  ]
+}

@@ -13,7 +13,8 @@ two independently buildable example add-ons and the API Workshop worlds.
 | Record | What it tells you |
 | --- | --- |
 | [Release summary](0.2.0/README.md) | Scope, API baseline and links to acceptance records. |
-| [Distribution](0.2.0/distribution.json) | Published downloads, file sizes and SHA256 checksums. |
+| [Downloads](0.2.0/DOWNLOADS.md) | Current five-file layout, sizes/checksums manifest and archived original files. |
+| [Original distribution](0.2.0/distribution.json) | The original 29 accepted downloads, preserved inside the verification archive. |
 | [Dependencies](0.2.0/dependencies.json) | Exact required and optional dependency versions. |
 | [Verification](0.2.0/verification.json) | Accepted artifacts, test results and the evidence files supporting them. |
 | [Completed stages](0.2.0/progress.json) | Completion of the API development and acceptance stages. |

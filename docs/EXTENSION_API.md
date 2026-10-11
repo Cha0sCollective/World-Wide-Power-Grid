@@ -67,9 +67,9 @@ coordinate with `sources` and `javadoc` classifiers. The release's downloadable
 Maven repository supports public consumption without GitHub credentials. A hosted
 Maven service is not required.
 
-Download the public release asset
-[wwpg-api-1.0.0-maven.zip](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-api-1.0.0-maven.zip).
-Verify its published SHA256, and extract it into a directory such as
+Download and extract the
+[developer SDK](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-developer-sdk.zip).
+Verify its published SHA256, then extract the included `maven/wwpg-api-1.0.0-maven.zip` into a directory such as
 `wwpg-api-maven`. That directory contains `org/cha0scollective/wwpg/...` and is
 the Maven repository root. Use its absolute path in `maven { url = uri(...) }`
 or the examples' `-PapiRepository` option. Resolving these explicit versions
@@ -82,7 +82,7 @@ explicit version `1.0.0`; ranges and automatic latest-version resolution are not
 part of this initial distribution. A hosted Maven repository can be added later
 without changing the coordinates or published JARs.
 
-The two example projects also have independent source ZIPs with their own
+The SDK's `examples` folder also has independent source ZIPs with their own
 Gradle wrappers and MIT license. You can build them after extraction using the
 public Maven ZIP; no checkout of the WWPG runtime source is required.
 

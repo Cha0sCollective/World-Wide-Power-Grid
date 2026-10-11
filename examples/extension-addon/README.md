@@ -14,9 +14,9 @@ records the tested artifacts and completed checks.
 
 Use Java 21 and the example project's Gradle wrapper.
 
-Download the public release asset
-[wwpg-api-1.0.0-maven.zip](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-api-1.0.0-maven.zip).
-Verify its release checksum and extract it; the directory containing
+Download and extract the
+[developer SDK](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-developer-sdk.zip).
+Verify its release checksum, then extract its `maven/wwpg-api-1.0.0-maven.zip`; the directory containing
 `org/cha0scollective/wwpg` is the Maven repository root. Run the wrapper from
 this project's directory, supplying that root's absolute path:
 

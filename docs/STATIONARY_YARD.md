@@ -4,8 +4,10 @@ This world lets you try WWPG 0.2.0 without building a factory first. Switch lamp
 
 Choose the edition that matches your installation:
 
-- [Stationary Test Yard](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-stationary-yard.zip): the required base mods.
-- [Stationary Test Yard — Pinout](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-stationary-yard-pinout.zip): the base mods plus CC:Tweaked 1.120.2 and Pinout 0.2.1.
+Download and extract the [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-example-worlds.zip). Choose a ZIP from its `worlds` folder:
+
+- **Stationary Test Yard** (`wwpg-0.2.0-stationary-yard.zip`): the required base mods.
+- **Stationary Test Yard — Pinout** (`wwpg-0.2.0-stationary-yard-pinout.zip`): the base mods plus CC:Tweaked 1.120.2 and Pinout 0.2.1.
 
 Follow the [installation guide](INSTALL.md), then extract the named save folder into your instance's `saves` directory. Keep a clean copy before cutting wires or deliberately breaking equipment.
 

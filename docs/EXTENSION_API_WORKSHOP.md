@@ -8,17 +8,17 @@ need programming knowledge to operate the examples.
 The extension API is the interface developers use to add these devices. For the
 ordinary CEE and Power Grid equipment, use the [Stationary Test Yard](STATIONARY_YARD.md).
 
-Download [Extension API Workshop](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-api-workshop.zip) or its [Pinout installation edition](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-api-workshop-pinout.zip).
+Download and extract the [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-example-worlds.zip). Its `worlds` folder contains `wwpg-0.2.0-api-workshop.zip` and the Pinout installation edition.
 
 ## Install and enter
 
 Follow the [installation guide](INSTALL.md) for Minecraft 1.21.1, NeoForge
 21.1.231, Java 21, Create 6.0.10-280, CEE 1.1.3, Power Grid 0.6.2,
 Architectury 13.0.8 and WWPG 0.2.0. Also put both example mod jars in `mods`
-on the server and every client:
+from the bundle's `workshop-mods` folder on the server and every client:
 
-- [wwpg-api-example-1.0.0.jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-api-example-1.0.0.jar), the new machines.
-- [wwpg-upstream-api-example-1.0.0.jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-upstream-api-example-1.0.0.jar), the panel and board extensions.
+- `wwpg-api-example-1.0.0.jar`, the new machines.
+- `wwpg-upstream-api-example-1.0.0.jar`, the panel and board extensions.
 
 These two add-ons are required for this save. Ordinary WWPG factories do not
 require them. The Pinout installation edition additionally requires CC:Tweaked

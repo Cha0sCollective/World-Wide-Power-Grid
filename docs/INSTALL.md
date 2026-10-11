@@ -81,7 +81,7 @@ These diagnostic commands require operator permission level 2:
 
 ## Download a world to try
 
-Download [Stationary Test Yard](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-stationary-yard.zip) for the base installation, or [Stationary Test Yard — Pinout](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-stationary-yard-pinout.zip) with the optional mods.
+Download the [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-example-worlds.zip) and extract it. In its `worlds` folder, choose `wwpg-0.2.0-stationary-yard.zip` for the base installation, or `wwpg-0.2.0-stationary-yard-pinout.zip` with the optional mods.
 
 Extract the named save folder into your instance's `saves` directory. Goggles and tools are at spawn. Try switching the factory lamps, watching the pump and heater, changing transformer voltages, or operating panels and boards. The [station guide](STATIONARY_YARD.md) explains what to do, what you should see and how to reset each example.
 
@@ -89,10 +89,10 @@ The download keeps connected wires, Nether links and the Pinout edition's comput
 
 ## Extension API Workshop
 
-Download [Extension API Workshop](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-api-workshop.zip), or its [Pinout installation edition](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-api-workshop-pinout.zip). This separate world requires both example add-ons on the server and every client:
+The [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-example-worlds.zip) also contains `wwpg-0.2.0-api-workshop.zip` and its Pinout edition in `worlds`. This separate world requires both example add-ons from the bundle's `workshop-mods` folder on the server and every client:
 
-- [General API machines](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-api-example-1.0.0.jar)
-- [Native panel and board extensions](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-upstream-api-example-1.0.0.jar)
+- `wwpg-api-example-1.0.0.jar` — general API machines
+- `wwpg-upstream-api-example-1.0.0.jar` — native panel and board extensions
 
 The Pinout edition also requires the two optional mods above. Its eleven Workshop stations are the same; computer demonstrations live in the Pinout Stationary Yard. Ordinary factories do not require either example add-on.
 
