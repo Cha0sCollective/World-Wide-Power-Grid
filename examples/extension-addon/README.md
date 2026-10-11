@@ -4,21 +4,21 @@ This separate NeoForge project demonstrates stationary devices built with
 **WWPG extension API 1.0.0**. It compiles against the SDK artifact and NeoForge;
 its Java source imports no PG, CEE, or WWPG implementation classes.
 
-The project is an implementation example under development. Its source and models
-do not establish passed gameplay, persistence, panel, or board acceptance. The
-[0.2.0 release record](../../release/0.2.0/progress.json) records the completed gates.
+This example ships with WWPG 0.2.0. Its nine blocks demonstrate the general API;
+the [upstream example](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/examples/cee-addon/README.md) demonstrates native CEE panels and
+PG circuit boards. The [API Workshop](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/docs/EXTENSION_API_WORKSHOP.md) is a
+playable save using both add-ons. The [release verification](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/release/0.2.0/verification.json)
+records the tested artifacts and completed checks.
 
 ## Build independently
 
-Use Java 21 and the example project's Gradle wrapper. Extract the SDK's local
-Maven repository, then point this project at its absolute directory:
+Use Java 21 and the example project's Gradle wrapper.
 
-The public 0.2.0 distribution will provide
+Download the public release asset
 [wwpg-api-1.0.0-maven.zip](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-api-1.0.0-maven.zip).
 Verify its release checksum and extract it; the directory containing
-`org/cha0scollective/wwpg` is the repository root. This release asset route lets
-developers obtain the SDK without building WWPG or authenticating to GitHub
-Packages.
+`org/cha0scollective/wwpg` is the Maven repository root. Run the wrapper from
+this project's directory, supplying that root's absolute path:
 
 ```text
 ./gradlew build -PapiRepository=/absolute/path/to/wwpg-api-maven --no-daemon
@@ -34,7 +34,7 @@ the example's build or shade API classes into the example jar.
 Install the example jar together with the **WWPG 0.2.0 runtime** on the server
 and every client. Use the pinned Minecraft 1.21.1 / NeoForge 21.1.231 environment
 with Java 21, Create 6.0.10-280, CEE 1.1.3, PG 0.6.2, and Architectury 13.0.8.
-Follow [WWPG's installation instructions](../../docs/INSTALL.md) for the upstream
+Follow [WWPG's installation instructions](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/docs/INSTALL.md) for the upstream
 dependencies and solver configuration. The example adds no FE or computer mod
 requirement. Pinout and CC:Tweaked remain optional.
 
@@ -139,10 +139,10 @@ Breaking an example block returns its block item using the supplied loot table.
 The item does not carry its previous block entity's stored charge. This sample
 does not promise portable charged-device behavior.
 
-Panel attachments and native circuit-board components have additional upstream
-assembly workflows. Their completion is tracked separately; these nine ordinary
-blocks alone do not certify those extension categories.
+Panel attachments and circuit-board components use upstream assembly workflows.
+The [upstream example](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/examples/cee-addon/README.md) documents those routes; the nine
+blocks in this project demonstrate the general device API.
 
-See [the developer contract](../../docs/EXTENSION_API.md) for electrical units,
-identity rules, lifecycle boundaries, measurements, compatibility policy, and
-release acceptance.
+See [the public API contract](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/docs/EXTENSION_API.md) for electrical units,
+identity rules, lifecycle boundaries, measurements, and compatibility policy.
+Maintainer packaging checks live in the [release guide](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/docs/API_RELEASE_CHECKS.md).

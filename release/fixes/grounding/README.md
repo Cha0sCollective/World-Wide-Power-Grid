@@ -1,5 +1,7 @@
 # Grounding correction verification
 
+> Historical grounding investigation. The fix shipped in [beta.3](../../0.1.0-beta.3/). Use [current status](../../../docs/STATUS.md) for today's release.
+
 This record covers an unreleased fix based on `cdf9cc2`. The published beta.2 jar, worlds, and historical acceptance records remain unchanged.
 
 Adding, removing, or changing a ground connection could leave PG's equations using its previous conductance. Changing a preferred voltage reference had the same problem. PG 0.6.2 rejects incremental conductance updates when a wire's second terminal is null. WWPG now marks the owning network for equation rebuilding when these connections change, retaining existing nodes and branches.

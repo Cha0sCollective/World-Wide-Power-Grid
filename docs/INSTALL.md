@@ -1,6 +1,8 @@
 # Install and try WWPG
 
-**0.2.0** retains the declared stationary workflows and optional Pinout profile, and adds extension API 1.0.0 for add-ons. Read [current status](STATUS.md) for verification, [supported content](SUPPORT.md) for the exact claim, and the [stationary yard guide](STATIONARY_YARD.md) for hands-on tests.
+WWPG lets stationary equipment from **Create: Electro Energetics (CEE)** and **Power Grid (PG)** share power and wires. You can run mixed factories, use either mod's handheld meters, and control equipment with panels and circuit boards.
+
+This guide installs **WWPG 0.2.0**. Start with the [Stationary Test Yard](STATIONARY_YARD.md) if you want ready-built circuits to try. See [supported content](SUPPORT.md) for what works and [current status](STATUS.md) for limitations.
 
 ## Required versions
 
@@ -16,11 +18,11 @@ Install this exact combination on the server and every client. Use Java 21.
 | Architectury API | NeoForge 13.0.8 |
 | WWPG | 0.2.0 |
 
-Use Create's full published release jar. CEE, PG, and Create download references and checksums are recorded in [artifacts.json](../release/artifacts.json). The WWPG download contains the compatibility mod and native solver resources; install the required upstream mods separately.
+Use the full Create release jar. [The 0.2.0 dependency list](../release/0.2.0/dependencies.json) records the exact downloads and checksums. WWPG does not include these other mods; download and install them separately.
 
 ## Optional computer-control profile
 
-For Pinout support, additionally install **CC;CPG: Pinout 0.2.1** and **CC:Tweaked 1.120.2** on the server and clients. The base jar works without them. Use the separately named Pinout world; [locked artifacts and checksums](../release/optional-artifacts.json) identify the downloads.
+To control circuits with computers, also install **CC;CPG: Pinout 0.2.1** and **CC:Tweaked 1.120.2** on the server and every client. Use the **Stationary Test Yard — Pinout** world for its ready-made programs. These two mods are optional for ordinary WWPG factories; [their download records](../release/optional-artifacts.json) identify the exact files.
 
 ## Installation
 
@@ -28,31 +30,31 @@ For Pinout support, additionally install **CC;CPG: Pinout 0.2.1** and **CC:Tweak
 2. Put it and the required dependency jars in the instance's `mods` directory.
 3. Launch once to generate configuration, then stop the game or server.
 4. In `config/powergrid-server.toml`, edit the existing solver settings to the values below. Keep the other PG solver settings at their defaults.
-5. Restart, build or load a small supported circuit, and run `/wwpg` to check which backend has performed simulation steps.
+5. Restart and load a supported circuit or one of the downloadable worlds below. If you have operator permission, `/wwpg` shows which power-calculation engine is running.
 
 ```toml
 solverBackend = "NATIVE"
 multiTicks = 16
 ```
 
-The release's AC, motor, storage, and electronics tests use 16 PG electrical substeps. CEE's `microTicks` setting does not set the simulation schedule with WWPG installed. Stop and restart after changing the solver configuration.
+These settings use PG's native power-calculation engine and 16 electrical steps per game tick, matching the release's tests. CEE's `microTicks` setting does not control this timing when WWPG is installed. Stop and restart after changing these settings.
 
 ## Native solver requirements
 
-WWPG includes the verified native v7 DLL/SO from official PG 0.6.1 because the pinned PG 0.6.2 jar omitted those files. Their `NativeMNA.class` JNI interfaces are byte-identical. **PG 0.6.2 is the runtime dependency**; keep the 0.6.1 binary-source jar out of `mods`.
+WWPG supplies the native engine files missing from PG 0.6.2. They come from the official PG 0.6.1 release and match PG 0.6.2's interface. **Install PG 0.6.2 only**; the 0.6.1 mod jar is not needed.
 
-Before PG loads its backend, WWPG installs a missing binary into `.pg-native` in the game's working directory. It preserves an existing administrator-installed binary. Native resources retain PG's license and attribution.
+WWPG installs missing engine files in `.pg-native` inside the game's working directory. Existing administrator-installed files are preserved. PG's license and attribution remain included.
 
 | Tested native platform | Requirement |
 | --- | --- |
 | Windows | x86-64 |
 | Linux | x86-64; glibc 2.38 or newer. Release testing used Ubuntu 24.04. |
 
-PG retains its Java backend and fallback. The same electrical suite has passing Java runs on both operating systems. Check `/wwpg` for the backend actually used; selecting native in the configuration is not proof that it loaded.
+PG can also calculate power with its Java engine, and both engines passed the release's electrical tests on Windows and Linux. An operator can use `/wwpg` to check which one actually loaded. Selecting `NATIVE` in the file does not guarantee that your system can run it.
 
-## Wiring and diagnostics
+## Wires and tools
 
-Use the upstream wire, spool, and cord tools on supported terminals. Wire lengths, types, costs, and cutting follow their native workflows. PG cords use sockets, junctions, and split ends; hidden cord terminals are not bare-wire attachment points. CEE insulators and structural poles retain their native role.
+Use each mod's wire, spool and cord tools as usual. Both wire systems can connect supported terminals from either mod. Length limits, material costs and cutting still follow the mod that supplied the wire. PG cords use sockets, junctions and split ends; a hidden cord connection is not an attachment point for bare wire. [The wiring guide](STATIONARY_WIRING.md) covers duplex cables, decorations and bulb repairs.
 
 ## Handheld meters
 
@@ -60,7 +62,11 @@ Use the upstream wire, spool, and cord tools on supported terminals. Wire length
 - **Power Grid multimeter, current:** right-click a wire from either mod. Selecting a wire switches to current mode; selecting a terminal switches back to voltage mode.
 - **CEE clamp meter, current:** hold right-click while aiming at a wire from either mod. Release right-click or look away to stop measuring. A clamp measures a wire's current, not a terminal's voltage.
 
-When upgrading, stop the game/server, back up your world, and replace the older WWPG jar on the server and every client. Keep only one WWPG jar in `mods`. Keep the same dependency versions and solver settings; existing beta.5 worlds and saved identities remain compatible with 0.2.0 and do not need to be downloaded again. The update cannot recover wires or charge already lost and saved by an older version. The original beta.1 example remains underpowered at its heater; use the updated example below for the working burner demonstration.
+## Upgrading an existing world
+
+Stop the game or server, back up your world, and replace the older WWPG jar on the server and every client. Keep only one WWPG jar in `mods`. Keep the dependency versions and settings listed above. Existing beta.5 worlds work with 0.2.0; you do not need to download them again.
+
+An update cannot restore wires or charge that an older version already lost and saved. The original beta.1 example also has an underpowered heater; use the current Stationary Yard or revised small example for a working burner demonstration.
 
 ## Diagnostic commands
 
@@ -68,14 +74,18 @@ These diagnostic commands require operator permission level 2:
 
 | Command | What it shows |
 | --- | --- |
-| `/wwpg` | Mapping counts, simulation steps, backend counts, and CEE solve attempts |
-| `/wwpg errors` | Recent timestamped compatibility errors |
-| `/wwpg topology` | Recent structural changes and device identities |
-| `/wwpg at x y z` | Mapped block terminals, voltage, backend, and isolation state |
+| `/wwpg` | Which power engine is running and whether circuits are being calculated |
+| `/wwpg errors` | Recent compatibility errors, with timestamps |
+| `/wwpg topology` | Recent connection changes and the devices involved |
+| `/wwpg at x y z` | A block's terminals, voltages, loading state and any reason it cannot participate |
 
-## Expanded test yard
+## Download a world to try
 
-Download [Stationary Test Yard](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-stationary-yard.zip) for the base installation, or [Stationary Test Yard — Pinout](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-stationary-yard-pinout.zip) with the optional mods. Extract the named save folder into `saves`. The [station guide](STATIONARY_YARD.md) explains controls, expected readings and resets. Goggles and tools are at spawn. Every claimed behavior maps to a checked exhibit or native assembly/repair workflow. The ZIP retains native Nether loading settings, connected wires and optional computer programs. Loose construction wire drops are removed before export.
+Download [Stationary Test Yard](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-stationary-yard.zip) for the base installation, or [Stationary Test Yard — Pinout](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-stationary-yard-pinout.zip) with the optional mods.
+
+Extract the named save folder into your instance's `saves` directory. Goggles and tools are at spawn. Try switching the factory lamps, watching the pump and heater, changing transformer voltages, or operating panels and boards. The [station guide](STATIONARY_YARD.md) explains what to do, what you should see and how to reset each example.
+
+The download keeps connected wires, Nether links and the Pinout edition's computer programs. Loose construction wire drops are cleaned up before export; wires you break during play still drop normally.
 
 ## Extension API Workshop
 
@@ -92,11 +102,11 @@ If the PG design editor's name field or buttons are cut off, open **Options → 
 
 If a terminal is still loading or its old wires await retirement, the wire tool displays **Device is loading. Try again in a moment.** Wait for the area to finish loading, then retry.
 
-For development, follow the [API SDK guide](EXTENSION_API.md). The runtime WWPG jar supplies both APIs. Compile-time API jars belong in the build's dependencies; keep them out of `mods` and do not shade their classes into an add-on.
+To write your own add-on, follow the [developer API guide](EXTENSION_API.md). Players need the ordinary WWPG jar and the two example mod jars for this world. Keep API, source and Javadoc jars out of `mods`.
 
 ## Historical small example
 
-Download [the revised example-world ZIP](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2-example-v2.zip) and extract `WWPG Example - Panel Demo/` into the client's `saves` directory. It appears as **WWPG - Panel Relay Demo** in the world list and was verified with **beta.5**. Its historical verification remains available; use the current Stationary Yard for the 0.2.0 acceptance world. Its original beta.2 filename is retained because the world is unchanged. For a dedicated server, use that directory as the server's level directory. Install the dependencies and solver settings above first. The earlier example remains available as a separate download; this revision has its own save folder.
+The older [panel-relay example](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2-example-v2.zip) is a smaller demonstration. Extract `WWPG Example - Panel Demo/` into `saves`; it appears as **WWPG - Panel Relay Demo**. The unchanged download keeps its beta.2 filename and was last verified with beta.5. Use the current Stationary Yard for the 0.2.0 demonstration.
 
 Spawn is at `(8, 64, 16)`:
 
@@ -112,7 +122,7 @@ To test the panel and board, right-click **Factory enable** with an empty hand:
 
 With goggles on, the panel shows about **18.4 V** at the board's relay coil and **0.15 A** through the panel while on. The active lamp branch draws about **0.30 A**. The panel's stock meter needles move very little at these readings; use the numeric tooltip or the obvious lamp changes. Signs identify the controls and outputs in the world.
 
-The example checks exercise the actual panel interaction, capacitor delay, relay state, both lamps, numeric meters, tools, and saved state. [Revision-2 evidence](../release/examples/panel-relay-v2/) records creation/restart and exported-world checks. It provides a repeatable small demonstration; it does not establish large-network performance.
+[The historical check record](../release/examples/panel-relay-v2/) documents this revision. Its small circuits do not establish large-server performance.
 
 ## Pinned upstream behavior
 

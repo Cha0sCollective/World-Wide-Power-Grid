@@ -1,33 +1,36 @@
 # Extension API Workshop
 
-The workshop is a separate playable save for WWPG 0.2.0's two independently built
-example add-ons. It demonstrates new machines through the general API, a new CEE
-panel attachment through the CEE property API, and a new PG board component
-through PG's native system. The [Stationary Test Yard](STATIONARY_YARD.md) remains
-the demonstration of upstream stationary content.
+This world demonstrates machines that add-on developers can connect to WWPG
+0.2.0. You can switch new sources and loads, charge storage, change transformer
+voltages, and try a new CEE panel indicator and PG board component. You do not
+need programming knowledge to operate the examples.
 
-Download [Extension API Workshop](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-api-workshop.zip) or its [Pinout installation edition](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-api-workshop-pinout.zip). The [final verification record](../release/0.2.0/verification.json) binds acceptance to these exact ZIPs and the example jars. The source builder and independently compiled SDK remain separate evidence from the playable checks.
+The extension API is the interface developers use to add these devices. For the
+ordinary CEE and Power Grid equipment, use the [Stationary Test Yard](STATIONARY_YARD.md).
+
+Download [Extension API Workshop](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-api-workshop.zip) or its [Pinout installation edition](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-0.2.0-api-workshop-pinout.zip).
 
 ## Install and enter
 
-Use the same fixed installation: Minecraft 1.21.1, NeoForge 21.1.231, Java 21,
-Create 6.0.10-280, CEE 1.1.3, Power Grid 0.6.2, Architectury 13.0.8 and WWPG 0.2.0. Also install both
-example mod jars:
+Follow the [installation guide](INSTALL.md) for Minecraft 1.21.1, NeoForge
+21.1.231, Java 21, Create 6.0.10-280, CEE 1.1.3, Power Grid 0.6.2,
+Architectury 13.0.8 and WWPG 0.2.0. Also put both example mod jars in `mods`
+on the server and every client:
 
-- `wwpg-api-example-1.0.0.jar`, the general API machines.
-- `wwpg-upstream-api-example-1.0.0.jar`, the native panel and board extensions.
+- [wwpg-api-example-1.0.0.jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-api-example-1.0.0.jar), the new machines.
+- [wwpg-upstream-api-example-1.0.0.jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-upstream-api-example-1.0.0.jar), the panel and board extensions.
 
 These two add-ons are required for this save. Ordinary WWPG factories do not
 require them. The Pinout installation edition additionally requires CC:Tweaked
 1.120.2 and CC;CPG: Pinout 0.2.1. Its workshop stations are the same; the computer
 demonstrations live in the Pinout Stationary Yard.
 
-Extract the save folder into your instance's `saves` directory. The included
-`WWPG_MANIFEST.json` lists exact dependency and example-jar hashes. Keep a clean
-copy before destructive experiments.
+Extract the save folder into your instance's `saves` directory. Keep a clean
+copy before cutting wires or rebuilding designs. API, source and Javadoc jars
+are developer files; keep them out of `mods`.
 
 Spawn is **9004, 64, 8995**. The chest at **9000, 64, 8997** holds goggles, both
-handheld meters, cutters, spools, native assembly parts and the workshop guide.
+handheld meters, cutters, spools, assembly parts and the workshop guide.
 Put on goggles, take both meters and walk south along the white paths. If an
 existing player position overrides spawn, teleport to those coordinates.
 
@@ -42,10 +45,11 @@ Red identifies the positive terminal; blue identifies the negative terminal.
 The upper pair is its input or primary winding. Blocks with a lower pair expose
 their output or secondary winding there.
 
-With an empty hand, click an API block for server readings in chat. Sneak-click
-changes its setting. Bright block faces indicate accepted power or retained
-charge. Sources and loads use both native wire systems; the native gauges and
-handheld meters provide additional readings.
+With an empty hand, right-click an example block to print its readings in chat.
+Hold Shift while right-clicking to change its setting. Bright block faces show
+that it is receiving power or holding charge. You can also read the surrounding
+gauges or use either handheld meter. Both mods' wire systems connect to these
+devices.
 
 | Station | Device position | Action and expected result |
 | --- | --- | --- |
@@ -61,16 +65,17 @@ handheld meters provide additional readings.
 | A10 CEE storage indicator | 9007,64,9060 | Open its adjacent native feed switch: the panel light fades over a few seconds. Close it: the 70 V feed restores its light. |
 | A11 PG shunt board | 9029,64,9060 | Open/close its adjacent native feed switch: the assembled 100 Ω board and gauge change between 20 V/about 0.2 A and zero. |
 
-AC voltage crosses zero repeatedly. An instantaneous zero at A03 can coexist
-with a lit load and nonzero RMS voltage and power. The A09 negative voltage is
-the expected orientation of that current-source circuit; it still delivers power
-to its resistor. At A04, the gauge measures external terminal voltage; the chat
-reading labels the different **internal stored voltage**.
+AC voltage repeatedly changes direction and passes through zero. At A03, a
+momentary zero does not mean the power has stopped: the load can remain lit and
+the RMS reading shows its effective voltage. At A09, the negative voltage comes
+from the connection direction; the resistor still receives power. At A04, the
+gauge reads the external terminals while chat separately labels the capacitor's
+**internal stored voltage**.
 
-A07 demonstrates the general API's ideal transformer model. It deliberately uses
-a DC developer source to make ratios easy to read. Substitute the AC example
-source to explore AC operation. Native transformers retain their own assembly
-requirements and electrical models in the Stationary Yard.
+A07 is an ideal transformer example. It uses a DC demonstration source to make
+the voltage ratios easy to read; you can substitute the AC example source to try
+AC operation. CEE and PG transformers keep their own electrical behavior and
+assembly requirements; try those in the Stationary Yard.
 
 ## Reset and repair
 
@@ -79,21 +84,25 @@ capacitor, enabled ON means its discharge resistor is disconnected. Close the
 native feed switches beside A10 and A11. Give the capacitor and panel indicator
 a few seconds to settle.
 
-Native cutters and spools operate on the example terminals. Reconnect matching
+Both mods' cutters and spools operate on the example terminals. Reconnect matching
 red/blue pairs; leave lower output pairs separate from upper input pairs at A07–A09.
 The tool chest provides extra native panel and board components for assembly
-experiments. Consult the independent projects' instructions before rebuilding
-their native designs:
+experiments. Consult the add-ons' instructions before rebuilding their designs:
 
 - [General machine example](../examples/extension-addon/README.md)
 - [Native CEE/PG example](../examples/cee-addon/README.md)
 
-Ideal sources and creative resistors are developer demonstrations. The sample
-machines do not define balanced survival progression. Player-created wire drops
-remain collectible. Construction debris cleanup runs only while preparing the
-acceptance save; it does not run during normal play.
+These ideal sources and creative resistors demonstrate add-on behavior; they
+are not a balanced survival progression. Wires you break still drop normally.
+Construction debris was removed before export.
 
-## Build and verify the downloadable save
+## For maintainers: build and verify the save
+
+Players can stop here. The following commands reproduce the downloadable world
+and its checks. Start with the [development guide](DEVELOPMENT.md) for the overall
+test process and the [API guide](EXTENSION_API.md) to build the examples. The
+[0.2.0 verification record](../release/0.2.0/verification.json) records checks on
+the exact world ZIPs and example jars.
 
 The packaged `wwpg_api_world` fixture uses registry IDs and public contracts,
 without importing either example's implementation classes. It installs the panel

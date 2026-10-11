@@ -1,5 +1,7 @@
 # Beta.3 release record
 
+> Historical beta.3 release record. Current support and known limits are in [current status](../../docs/STATUS.md).
+
 **0.1.0-beta.3** publishes the grounding correction from [PR #5](https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/5). It retains beta.2's dependency versions, native resources, handheld meters, startup fix, and stationary content set. The expanded yard and visible panel demo are reused unchanged; existing worlds do not need replacing.
 
 - [Release notes](RELEASE_NOTES.md) explain the change and upgrade steps.

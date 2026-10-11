@@ -1,9 +1,13 @@
-# Stationary completion work
+# Beta.5 release record
 
 This directory records implementation, historical investigations and final acceptance for 0.1.0-beta.5.
 
 The chronological notes below describe earlier work and its then-pending gates. Use final verification and the derived matrix for the completed release claim. Published earlier artifacts remain unchanged.
 **Final stationary acceptance passed.** The [verification record](verification.json) identifies the exact jar, eight CI jobs, exported worlds and real-client runs. The [supported matrix](supported-content.json) is derived only after those gates; the original candidate matrix remains an immutable input record.
+
+## Historical development notes — recorded before acceptance
+
+The stage notes below retain what was pending at that point in development. The final verification above records the completed release; [current status](../../docs/STATUS.md) describes WWPG 0.2.0.
 
 The native-wiring stage adds individual checks for all 57 ordinary CEE wire
 variants, PG iron wire on CEE terminals, hanging insulators, duplex cables,

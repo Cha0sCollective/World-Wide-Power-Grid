@@ -1,8 +1,25 @@
 # Contributing to WWPG
 
-WWPG is a compatibility project for CEE and Power Grid. The current priorities are reliable stationary interoperability and the stable extension API; [SPEC.md](SPEC.md) retains the long-term product requirements.
+WWPG connects CEE and Power Grid in stationary factories and provides an extension API for add-ons. [SPEC.md](SPEC.md) retains the long-term product requirements.
 
-Before changing a feature, identify the relevant native behavior or public API contract in the [support matrix](release/0.1.0-beta.5/supported-content.json) and the design requirement it advances. Use [STATUS.md](docs/STATUS.md) for unresolved issues and [DEVELOPMENT.md](docs/DEVELOPMENT.md) for build/test commands. Changes to release scope should update its documentation explicitly. Public API changes follow the [versioning and binary-compatibility policy](docs/EXTENSION_API.md#versioning-and-compatibility-checks); compare published classfiles and run independently compiled add-ons before claiming compatibility.
+Before changing a feature, identify its native behavior or public API contract.
+Use the [support guide](docs/SUPPORT.md), [current status](docs/STATUS.md), and
+[development commands](docs/DEVELOPMENT.md) to establish the scope and relevant checks.
+Document any release-scope change explicitly.
+
+Public API changes follow the [versioning and binary-compatibility policy](docs/EXTENSION_API.md#versioning-and-compatibility-checks).
+Compare published classfiles and run independently compiled add-ons before claiming
+compatibility.
+
+## Branches and scope
+
+Use `dev/` for development branch names, for example `dev/fix-transformer-reading`.
+Keep `main` as the shared integration branch and submit focused pull requests.
+Published tags and release evidence keep their original identities.
+
+For a documentation change, keep player instructions, the public API contract,
+and maintainer test procedures in their respective guides. Put private outreach
+drafts outside the repository. Update links when moving or removing a guide.
 
 ## License
 
@@ -18,7 +35,7 @@ WWPG's own code and documentation use the [MIT License](LICENSE). By submitting 
 - **Explicit phases:** preparation, solving, and gameplay commit remain separate even while execution is synchronous.
 - **Single topology owner:** compatibility structural changes pass through the topology manager and execute outside an active solve.
 
-The finished architecture must remain suitable for server-wide networks and future asynchronous solving. Large-network testing and asynchronous execution are deferred for the stationary release, as described in [FIRST_RELEASE.md](docs/FIRST_RELEASE.md).
+The architecture must remain suitable for server-wide networks and future asynchronous solving. Large-network testing and asynchronous execution remain deferred; see the [current support boundaries](docs/SUPPORT.md).
 
 ## Preparation, solving, and commit
 
@@ -52,7 +69,7 @@ Run the checks that establish the behavior changed:
 | Synchronization | Two real clients using native packets and checking displayed state |
 | Documentation | Links, formatting, version/scope claims, and consistency with recorded evidence |
 
-Preserve same-mod circuits and exercise both PG backends where the change affects electrical solving. A test should measure behavior, not merely mirror the implementation. See [the historical reload investigation](docs/STATUS.md#unresolved-chunk-reload-failure) before interpreting a repeat run as proof of a fix.
+Preserve same-mod circuits and exercise both PG backends where the change affects electrical solving. A test should measure behavior, not merely mirror the implementation. See [the historical reload investigation](docs/RELEASE_HISTORY.md#unresolved-chunk-reload-failure) before interpreting a repeat run as proof of a fix.
 
 For solver or ownership changes, add assertions that detect structural mutation during a solve and double state advancement. For scale work, use the benchmark defined in [SPEC.md](SPEC.md#39-performance-acceptance-benchmark); passing that benchmark is a long-term completion requirement.
 

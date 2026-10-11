@@ -1,12 +1,12 @@
 # First beta: scope and acceptance
 
-This page preserves the first-release scope and acceptance history. Current stationary completion is defined by the [beta.5 supported matrix](../release/0.1.0-beta.5/supported-content.json), [final verification](../release/0.1.0-beta.5/verification.json) and [stationary yard guide](STATIONARY_YARD.md).
+This page preserves the first-release scope and acceptance history. For the current release, use [supported content](SUPPORT.md), [current status](STATUS.md) and the [stationary yard guide](STATIONARY_YARD.md).
 
-**WWPG 0.1.0-beta.1** delivers a declared set of stationary devices working across CEE and PG. The [support matrix](SUPPORT.md) describes 134 checked behaviors, including all 11 built-in CEE panel attachments and all 28 built-in PG board components.
+**WWPG 0.1.0-beta.1** delivers a declared set of stationary devices working across CEE and PG. The [original beta.1 support matrix](../release/content-matrix.json) describes 134 checked behavior groups, including all 11 built-in CEE panel attachments and all 28 built-in PG board components.
 
-The beta is [published on GitHub](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.1), and its implementation was [merged into `main`](https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/1). See [STATUS.md](STATUS.md) for later CI results and the unresolved chunk-reload failure.
+The beta is [published on GitHub](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.1.0-beta.1), and its implementation was [merged into `main`](https://github.com/Cha0sCollective/World-Wide-Power-Grid/pull/1). See [archived release history](RELEASE_HISTORY.md#unresolved-chunk-reload-failure) for its later CI results and the original unresolved chunk-reload report.
 
-This page records the original beta.1 acceptance. Beta.2 adds handheld-meter coverage and corrects the example heater's power supply; see [current support](SUPPORT.md) and [hotfix records](../release/0.1.0-beta.2/).
+This page records the original beta.1 acceptance. Beta.2 adds handheld-meter coverage and corrects the example heater's power supply; see its [hotfix records](../release/0.1.0-beta.2/). The current support list describes a later, larger release.
 
 ## Fixed baseline
 

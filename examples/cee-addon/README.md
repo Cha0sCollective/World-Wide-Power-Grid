@@ -5,13 +5,18 @@ its separately registered electrical-property adapter, and a native **Power Grid
 circuit-board component**. It compiles against published API artifacts and the
 pinned upstream mods. It imports no WWPG implementation classes or Mixins.
 
-The example requires WWPG 0.2.0 and API 1.0.0. Its existence does not establish a
-passed release gate; the WWPG release record lists the accepted packaged checks.
+This example ships with WWPG 0.2.0 and requires extension API 1.0.0.
+The [API Workshop](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/docs/EXTENSION_API_WORKSHOP.md) provides a playable panel
+and board demonstration. The [release verification](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/release/0.2.0/verification.json)
+identifies the tested artifacts and accepted checks.
 
 ## Build independently
 
-Use Java 21. Extract the SDK's local Maven repository and supply its absolute
-path. Run this project's wrapper from the project directory:
+Use Java 21. Download and verify
+[wwpg-api-1.0.0-maven.zip](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.0/wwpg-api-1.0.0-maven.zip),
+then extract it. The directory containing `org/cha0scollective/wwpg` is the Maven
+repository root. Supply that directory's absolute path and run this project's
+wrapper from the project directory:
 
 ```text
 ./gradlew build -PapiRepository=/absolute/path/to/wwpg-api-maven --no-daemon
@@ -25,9 +30,11 @@ NeoForge 21.1.231, Create 6.0.10-280, CEE 1.1.3 and PG 0.6.2. The build does not
 include the WWPG source project and does not shade any API or upstream classes.
 
 The compile-only upstream coordinates are locked in `build.gradle`. Install the
-real upstream jars and WWPG at runtime using the main project's dependency
-manifest and installation instructions. This add-on belongs on the server and
-every client. WWPG itself does not require it. Pinout and CC:Tweaked are optional.
+real upstream jars and WWPG at runtime using the main project's
+[dependency manifest](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/release/0.2.0/dependencies.json) and
+[installation instructions](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/docs/INSTALL.md). This add-on belongs on the
+server and every client. WWPG itself does not require it. Pinout and CC:Tweaked
+are optional.
 
 ## CEE panel example
 
@@ -117,6 +124,7 @@ state loss. Another fixture completes five actual unload/reload cycles at
 far enough apart that the cold fixture's forced-chunk ticket cannot keep the
 unload fixture's chunk holder alive.
 
-These fixtures complement the existing upstream workflow regressions. They do
-not substitute for graphical editing or multiplayer acceptance. Only the release
-record establishes which backend, platform and restart runs have passed.
+These fixtures check electrical and saved-state behavior. Graphical editing and
+multiplayer have separate acceptance sessions, recorded alongside them in the
+[final verification](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/release/0.2.0/verification.json). The
+[maintainer release guide](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/docs/API_RELEASE_CHECKS.md) describes the complete gates.

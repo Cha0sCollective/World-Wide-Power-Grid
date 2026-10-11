@@ -1,29 +1,77 @@
 # Stationary wiring and native tools
 
-WWPG 0.1.0-beta.5 verifies these stationary wiring and repair workflows with CEE 1.1.3 and Power Grid 0.6.2. The [final verification record](../release/0.1.0-beta.5/verification.json) identifies the tested jar and exact worlds. Earlier published support claims remain unchanged.
+With **WWPG 0.2.0, CEE 1.1.3 and Power Grid 0.6.2**, both mods' tools work on
+supported stationary circuits. You can wire equipment across mods, measure it,
+cut connections and repair broken parts. Follow the [installation guide](INSTALL.md)
+for the full version list and the [Stationary Test Yard](STATIONARY_YARD.md) for
+ready-made examples.
 
-Both mods' ordinary wires connect compatible stationary terminals across mods. Keep the native wire's length, voltage and temperature limits in mind. PG endpoints retain their native wire restrictions; CEE terminals accept PG wire types, including iron wire. Wire costs, offhand dyes, cutting and spool recovery use the upstream workflows.
+## Ordinary wires and cords
 
-CEE's 57 ordinary wire variants are checked individually. Colored variants share their family's electrical model. Glass insulation carries essentially no power in the published CEE 1.1.3 artifact: a dark lamp at that exhibit is expected. Its hanging-insulator item creates a native loose endpoint and also works on a fresh PG terminal.
+Use the wire or spool on two compatible terminals as you normally would. A
+terminal is the connection point on a machine or connector. You can connect a
+CEE machine to a PG machine, or use either wire system between supported
+machines from the same mod.
+
+The wire still has its original length, voltage and temperature limits. PG
+terminals retain their normal restrictions on wire types; CEE terminals accept
+PG wire types, including iron wire. Material costs, offhand dyes, cutting and
+spool recovery follow the supplying mod's normal workflow. PG cords use sockets,
+junctions and split ends; hidden cord connections do not accept bare wire.
+
+All 57 ordinary CEE wire variants are covered. Colored wires behave like the
+other wires in their family. **Glass insulation carries essentially no power**
+in CEE 1.1.3, so its yard lamp is expected to stay dark. The hanging-insulator
+item creates its usual loose connection point and also works on a fresh PG
+terminal.
+
+If a tool says **Device is loading. Try again in a moment.**, wait for the area
+to finish loading, then try again. For readings, see [handheld meter instructions](INSTALL.md#handheld-meters).
 
 ## Duplex cable
 
-The published CEE duplex spool accepts clicks but does not complete a connection. WWPG completes that existing item workflow and corrects the native conductor-node helper. One native cable is saved and rendered; its two conductors are derived for the electrical simulation. Each conductor uses CEE's configured resistance multiplied by the native cable length. Unchanged cables retain their PG electrical objects.
+CEE duplex cable carries two separate conductors in one visible cable. WWPG
+completes the duplex spool's connection workflow, which is incomplete in the
+published CEE release.
 
-Click the two duplex terminations with the duplex spool. Connect supply and return to the separate terminals at each end. Use an empty spool or cutters to recover the cable. Removing the parent cable removes both electrical conductors. Facing, roll and flip retain CEE's terminal identities.
+1. Click the two duplex terminations with the duplex spool.
+2. Connect supply and return to the separate terminals at each end.
+3. Use an empty spool or cutters to recover the cable when you want to remove it.
 
-The 12 V yard exhibit lights a red PG low-voltage bulb through this cable. Measure current on a breakout wire. Equal supply and return currents cancel when measuring the whole duplex cable. CEE 1.1.3 supplies no survival recipe for the duplex spool; WWPG preserves that native availability and provides spares in the test yard.
+Removing the cable removes both conductors. Rotating or flipping the termination
+keeps the conductors' terminal identities.
+
+At yard station S77, the cable powers a red **12 V PG bulb**. Measure current on
+one of the separate wires entering or leaving the termination. Measuring the
+whole cable cancels equal supply and return currents, so zero there is expected.
+CEE 1.1.3 has no survival recipe for the duplex spool; the yard supplies spares
+for Creative-mode testing.
 
 ## Decorations and repair
 
-To install a banner or wire damper, hold the lineman's stick in the main hand and the attachment in the offhand. Click the wire. Shift-click with an empty offhand to remove the attachment. Native attachment edits preserve wire type, length and electrical topology. A wrench can also remove attachments.
+To install a banner or wire damper, hold the lineman's stick in your main hand
+and the attachment in your offhand, then click the wire. Hold Shift and click
+with an empty offhand to remove it. A wrench can also remove attachments.
+Installing or removing a decoration keeps the wire connected.
 
-Holding the clamp meter in the offhand turns the lineman's stick into its native extended-reach meter. This workflow also selects PG wires, reads their solved current and clears the selection when released or when the offhand clamp is removed.
+For an extended-reach current reading, hold the clamp meter in your offhand and
+the lineman's stick in your main hand. This also measures PG wires. Release the
+tool or remove the offhand clamp to stop measuring.
 
-A burned PG bulb takes two clicks: first remove it, then install a healthy bulb. Use a 12 V bulb in the low-voltage exhibit and a 120 V bulb in the ordinary fixture exhibits. Turn the feed off before repairing or rewiring. CEE's broken bulb uses its separate native copper-wire repair workflow.
+Turn the feed off before repairing or rewiring, and restore the station's normal
+voltage before powering it again.
 
-## Acceptance evidence
+- **PG bulb:** remove the burned bulb with one click, then install a healthy one
+  with a second click. Use a 12 V bulb in the low-voltage exhibit and a 120 V bulb
+  in ordinary fixture exhibits.
+- **CEE broken bulb or bare fuse:** repair it with copper wire.
+- **PG fuse:** remove the blown wire, then install iron wire.
+
+## Check records for maintainers
 
 The wiring fixtures check native item costs, all ordinary CEE wire variants, PG iron on CEE terminals, native bulb installation and repair, duplex orientation, and five actual duplex-assembly unload/reload cycles with delayed entity loading. Cold checks inspect native cable and bulb state before the first solve, so restored power cannot hide state loss.
 
-The [release evidence](../release/0.1.0-beta.5/evidence/) retains the fixtures, failed controls and corrected runs. Final acceptance passes on Windows and Linux with both solvers and installation profiles. Both exact world ZIPs also pass cold restart, full Windows graphical checks and two real multiplayer clients for each profile/backend combination. Use the [stationary yard guide](STATIONARY_YARD.md) for hands-on controls and expected readings.
+The [beta.5 evidence](../release/0.1.0-beta.5/evidence/) retains the original
+fixtures, failed controls and corrected runs. The [0.2.0 verification record](../release/0.2.0/verification.json)
+checks the inherited workflows with the current jar and downloadable worlds.
+Earlier published artifacts and claims remain unchanged.

@@ -2,7 +2,7 @@
 
 This does not upload files, manufacture test results, or mark progress complete.
 The manifest describes immutable inputs and points to SHA256-locked evidence.
-See docs/EXTENSION_API.md for the manifest contract.
+See docs/API_RELEASE_CHECKS.md for the manifest contract.
 """
 import argparse
 import hashlib
@@ -504,7 +504,8 @@ def package(manifest_path, root, output, release=False):
         publishable=release, state='accepted_release' if release else 'sdk_candidate',
         message='All declared acceptance gates passed.' if release else 'Candidate only. API freeze and release acceptance have not been certified.'),
         indent=2).encode('utf-8') + b'\n'
-    for name in ('docs/EXTENSION_API.md', 'docs/EXTENSION_API_PLAN.md', 'docs/EXTENSION_API_WORKSHOP.md', 'LICENSE'):
+    for name in ('docs/EXTENSION_API.md', 'docs/EXTENSION_API_PLAN.md', 'docs/EXTENSION_API_WORKSHOP.md',
+                 'docs/API_RELEASE_CHECKS.md', 'LICENSE'):
         require((root / name).is_file(), f'Missing SDK documentation/license: {name}')
         entries[name] = (root / name).read_bytes()
     # Evidence must remain inspectable inside the package, not just on the build host.

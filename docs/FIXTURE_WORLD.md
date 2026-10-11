@@ -1,14 +1,21 @@
 # Expanded test yard revision 1 — historical
 
-For current beta.5 stationary completion, use the separately named [Stationary Test Yard and Pinout edition](STATIONARY_YARD.md). This page retains the older expanded-yard revision and its original evidence; its excluded design table is now corrected and demonstrated in beta.5.
+For **WWPG 0.2.0**, use the [Stationary Test Yard or Pinout edition](STATIONARY_YARD.md).
+This page documents the older expanded yard. Its instructions and check records
+describe beta.2–beta.4; they do not define the current release's coverage. The
+design-table problem that caused this older world to exclude a placed table was
+fixed in beta.5, and the current yard includes a working saved-design station.
 
 This is a hands-on world for **WWPG 0.1.0-beta.2, beta.3, and beta.4**. It gives most supported equipment its own working mixed-mod circuit, with signs, testing tools, and a guidebook. Every built-in **Power Grid board component** and **CEE panel attachment** appears in a working example.
 
-Download [the expanded test-yard ZIP](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2-fixture-world-v1.zip). Extract **WWPG Expanded Test Yard/** into your Minecraft instance's `saves` folder. Open **WWPG - Expanded Test Yard** in the world list. This historical revision was verified with the beta.4 jar and [exact dependencies and solver settings](INSTALL.md#required-versions). The world download is unchanged; upgrading from beta.2 or beta.3 only requires replacing the mod jar.
+Download [the older expanded test-yard ZIP](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2-fixture-world-v1.zip). Extract **WWPG Expanded Test Yard/** into your Minecraft instance's `saves` folder. Open **WWPG - Expanded Test Yard** in the world list. This revision was verified with beta.4 and [the versions and settings in its release notes](../release/0.1.0-beta.4/RELEASE_NOTES.md#update-your-installation). Its published download is unchanged.
 
 You spawn at **(8, 64, 16)** in Creative mode. Take **Engineer's Goggles**, both handheld meters, the wrench, and the guidebook from the chest at **(6, 64, 16)**. Follow the white path or fly. Each station has its own supply, so changing one example generally does not shut down the others.
 
-The yard demonstrates **85 of the 134 declared behavior groups** in live exhibits; the remaining equipment is supplied as parts or assembly references. A placed PG design table is excluded because of its [saved-design load error](STATUS.md#historical-pg-circuit-design-table-saved-design-error).
+This older yard demonstrates **85 of the 134 behavior groups declared at that
+time** in live exhibits; the remaining equipment is supplied as parts or assembly
+references. A placed PG design table is excluded because of the [historical
+saved-design load error](RELEASE_HISTORY.md#historical-pg-circuit-design-table-saved-design-error).
 
 ## Where to go
 
@@ -70,4 +77,9 @@ The PG portable battery example **charges an energy item**; its placed block doe
 
 Keep a clean copy of the downloaded world before cutting wires, replacing parts, or deliberately overloading components. Signs marked **LIVE** identify connected examples. The parts cabinets contain remaining supported equipment, including assemblies that need building; placing an item in a chest does not demonstrate that equipment operating.
 
-The world checks cover circuit readings, native controls, and reopening the exported save with native and Java backends. They do not replace the beta's full support matrix, establish large-network performance, or resolve the intermittent reload/restart failures in [current status](STATUS.md). The [world's evidence record](../release/examples/expanded-yard-v1/) lists its exact coverage and checks.
+The [historical world check record](../release/examples/expanded-yard-v1/) covers
+circuit readings, native controls and reopening this exported save with both
+power engines. It does not establish large-server performance or conclusively
+explain every intermittent reading reported in earlier releases. See [release
+history](RELEASE_HISTORY.md) for those investigations and [current status](STATUS.md)
+for the current release.

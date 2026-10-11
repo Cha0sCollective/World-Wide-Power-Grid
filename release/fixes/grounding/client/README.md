@@ -1,5 +1,7 @@
 # Downloaded-world client acceptance
 
+> Historical beta.3 client checks of the older expanded yard. Use the [current Stationary Yard](../../../../docs/STATIONARY_YARD.md) for today's demonstrations.
+
 This check opens a copy of the published **expanded test yard revision 1** in a real Minecraft client with the unreleased grounding-fix jar. The original ZIP and published beta.2 downloads are preserved. [The record](../client-verification.json) identifies the exact inputs, successful runs, and earlier setup or test-driver failures.
 
 The separate helper mod runs the yard's saved-world acceptance checks in the integrated server, then visits 69 stations. It compares 54 client gauge readings with server readings, checks client board and panel contents, captures screenshots, and checks that both wire systems have client rendering data. Actual client interaction packets switch the factory off and on through its capacitor delay and operate the P2 panel lamp. The server must retain all 282 PG wire entities without bridge diagnostics. Minecraft saves and closes normally when the check finishes.

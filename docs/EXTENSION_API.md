@@ -2,10 +2,24 @@
 
 Published with **WWPG 0.2.0**, independently versioned **API 1.0.0**, Java 21 and NeoForge for Minecraft 1.21.1.
 
-This document defines the supported stationary API contract. The [final
-verification record](../release/0.2.0/verification.json) locks the exact SDK, runtime,
-examples and accepted worlds. The [implementation plan](EXTENSION_API_PLAN.md)
-and [progress record](../release/0.2.0/progress.json) preserve its gates and evidence.
+Use this guide to add stationary electrical content to WWPG. It defines the
+public API contract: registration, electrical models, measurements, and saved
+state. The [installation guide](INSTALL.md) covers the runtime dependencies.
+
+## Choose an integration route
+
+| Your content | Integration route | Start here |
+| --- | --- | --- |
+| A new stationary machine or instrument | General API: declare terminals and a circuit, then consume results | [General example](../examples/extension-addon/README.md) |
+| A custom CEE panel attachment/property | CEE's native attachment plus the separately published CEE property API | [CEE property contract](#adapting-a-cee-electrical-property) and [upstream example](../examples/cee-addon/README.md#cee-panel-example) |
+| A native PG circuit-board component | PG's existing registration and electrical model | [Board example](../examples/cee-addon/README.md#power-grid-board-example) |
+
+For a first add-on, download the Maven ZIP below, build the general example,
+and try its [20 V source and load](../examples/extension-addon/README.md#devices-and-expected-behavior).
+Then read [device registration](#exposing-a-device), [identity rules](#terminals-nodes-and-identity),
+[models](#electrical-models-and-conventions), and [saved-state ownership](#simulation-and-state-ownership)
+before adding your own behavior. The [API Workshop](EXTENSION_API_WORKSHOP.md)
+provides a playable demonstration of all three routes.
 
 ## What an add-on can provide
 
@@ -28,14 +42,14 @@ translation and PG terminal integration are separate upstream-specific routes.
 The CEE property contract below is a separate published API; other runtime
 implementation classes are not public contracts.
 
-The two independent [example projects](../examples/) show both routes. Their
+The two independent [example projects](../examples/) show these routes. Their
 [Extension API Workshop](EXTENSION_API_WORKSHOP.md) provides visible machine,
 storage, native panel and native board demonstrations with player instructions.
 Its acceptance state is recorded separately from the developer contract.
 
 ## Dependency and package boundaries
 
-The intended compile-time coordinate is:
+Use this compile-time coordinate:
 
 ```groovy
 repositories {
@@ -68,17 +82,9 @@ explicit version `1.0.0`; ranges and automatic latest-version resolution are not
 part of this initial distribution. A hosted Maven repository can be added later
 without changing the coordinates or published JARs.
 
-The two independent example projects are also distributed as source ZIPs with
-their own wrappers and MIT license. They exclude Gradle caches and build outputs.
-The Unix wrapper retains its executable permission. Generate these archives with:
-
-```text
-python tools/package_api_release.py --example-source examples/extension-addon --output build/distributions/wwpg-api-example-1.0.0-source.zip
-python tools/package_api_release.py --example-source examples/cee-addon --output build/distributions/wwpg-upstream-api-example-1.0.0-source.zip
-```
-
-Building an example after extracting its source ZIP and the public Maven ZIP
-requires no checkout of the WWPG runtime source.
+The two example projects also have independent source ZIPs with their own
+Gradle wrappers and MIT license. You can build them after extraction using the
+public Maven ZIP; no checkout of the WWPG runtime source is required.
 
 `org.cha0scollective.wwpg.api` contains the platform-independent descriptions,
 identities, units, models, and results. These signatures do not import Minecraft,
@@ -107,50 +113,6 @@ Duplicate ownership fails with both provider IDs; a direct capability registrati
 that bypasses the declaration is not a supported API provider. Registration freezes
 before worlds begin ticking.
 
-Capability factories and `terminals()` can be queried on either logical side for
-wire selection and rendering. Keep their code free of client-only classes and
-return geometry from native state already available there. `prepare()` and
-`commit()` run on the authoritative server game thread; CEE numerical callbacks
-also run there. Client displays consume the owning mod's synchronized state and
-never invoke these server callbacks themselves. Startup registration is not a
-place to access a running world or solve a circuit.
-
-Saved-wire discovery on a background thread is deferred to the server thread.
-Wire binding also waits for API endpoint readiness, including when Minecraft
-drains entity deserialization synchronously while saving. Read-only geometry may
-exist before that readiness; it cannot advance storage or expose accepted results.
-Native wire tools reject an unavailable replacement before changing selection,
-inventory, or connections.
-
-An add-on also owns Minecraft's block/item interaction ordering. A block with an
-empty-hand readout or configuration handler must let held wiring tools and
-instruments reach their native `Item.useOn` method. In Minecraft 1.21.1, a
-consuming `useWithoutItem` handler can run before the item's method unless the
-block's `useItemOn` returns `ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION`.
-The example returns that result for nonempty stacks and
-`PASS_TO_DEFAULT_BLOCK_INTERACTION` for an empty hand, preserving its readout and
-sneak-click control. Add-ons with their own item interactions should apply the
-same ordering to tools they allow; WWPG does not replace their block handlers.
-
-The examples declare WWPG as a required runtime mod. An integration that makes
-WWPG optional must isolate API-referencing classes and load/register them only
-after confirming WWPG is installed. A `compileOnly` dependency does not make the
-API classes available when the runtime is absent. Apply the same class-loading
-guards to optional upstream-specific integrations; do not put optional mod types
-in an always-loaded block, listener or method signature. The API source/Javadoc
-JARs and Maven ZIP are developer artifacts, not extra mods to install.
-
-Call `ElectricalDevices.changed(ServerLevel, BlockPos)` from server-side placement,
-loading and configuration hooks when a device may have changed. This is
-especially important for plain blocks without block entities. It invalidates the
-location's capability and queues loaded-device discovery without preparing a
-circuit, loading a chunk or changing topology during solving. Its return value
-is false when the runtime is absent or the location is unloaded. WWPG observes
-physical block removal, including replacing a block with the same block type,
-and retires its previous wire identities automatically. An add-on's native removal
-hook still owns its item drops and gameplay cleanup. Chunk unload is temporary
-loading loss and preserves saved wires and history.
-
 The core interface is:
 
 ```java
@@ -167,6 +129,23 @@ public interface ElectricalDevice {
 identifies the device within its block. Both remain stable across restart. The
 world dimension and block position complete `DeviceIdentity`.
 
+### Callbacks, sides, and readiness
+
+Capability factories and `terminals()` can be queried on either logical side for
+wire selection and rendering. Keep their code free of client-only classes and
+return geometry from native state already available there. `prepare()` and
+`commit()` run on the authoritative server game thread; CEE numerical callbacks
+also run there. Client displays consume the owning mod's synchronized state and
+never invoke these server callbacks themselves. Startup registration is not a
+place to access a running world or solve a circuit.
+
+Saved-wire discovery on a background thread is deferred to the server thread.
+Wire binding also waits for API endpoint readiness, including when Minecraft
+drains entity deserialization synchronously while saving. Read-only geometry may
+exist before that readiness; it cannot advance storage or expose accepted results.
+Native wire tools reject an unavailable replacement before changing selection,
+inventory, or connections.
+
 `terminals()` is a geometry query, available without preparing or solving a
 circuit. Return an immutable snapshot. Looking at a terminal with a wiring tool
 or meter must not advance electrical history, place a wire, or mutate the world.
@@ -181,6 +160,41 @@ Apply electrical gameplay only when `status()` is `VALID`. Save accepted dynamic
 state through the owning mod's normal block serialization. Handle an invalid
 result as unavailable power and explain the reason to the player where useful;
 do not treat its absence as a newly measured zero.
+
+### Let native tools reach their item handlers
+
+An add-on also owns Minecraft's block/item interaction ordering. A block with an
+empty-hand readout or configuration handler must let held wiring tools and
+instruments reach their native `Item.useOn` method. In Minecraft 1.21.1, a
+consuming `useWithoutItem` handler can run before the item's method unless the
+block's `useItemOn` returns `ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION`.
+The example returns that result for nonempty stacks and
+`PASS_TO_DEFAULT_BLOCK_INTERACTION` for an empty hand, preserving its readout and
+sneak-click control. Add-ons with their own item interactions should apply the
+same ordering to tools they allow; WWPG does not replace their block handlers.
+
+### Optional runtime dependencies
+
+The examples declare WWPG as a required runtime mod. An integration that makes
+WWPG optional must isolate API-referencing classes and load/register them only
+after confirming WWPG is installed. A `compileOnly` dependency does not make the
+API classes available when the runtime is absent. Apply the same class-loading
+guards to optional upstream-specific integrations; do not put optional mod types
+in an always-loaded block, listener or method signature. The API source/Javadoc
+JARs and Maven ZIP are developer artifacts, not extra mods to install.
+
+### Notify WWPG when a device changes
+
+Call `ElectricalDevices.changed(ServerLevel, BlockPos)` from server-side placement,
+loading and configuration hooks when a device may have changed. This is
+especially important for plain blocks without block entities. It invalidates the
+location's capability and queues loaded-device discovery without preparing a
+circuit, loading a chunk or changing topology during solving. Its return value
+is false when the runtime is absent or the location is unloaded. WWPG observes
+physical block removal, including replacing a block with the same block type,
+and retires its previous wire identities automatically. An add-on's native removal
+hook still owns its item drops and gameplay cleanup. Chunk unload is temporary
+loading loss and preserves saved wires and history.
 
 ## Terminals, nodes, and identity
 
@@ -447,171 +461,19 @@ conventions, or new mandatory implementation methods require an API major versio
 and migration documentation. Constants are part of the contract because Java
 may inline them into already compiled clients.
 
-The first API release has no previous public API artifact. Establish an honest
-contract snapshot:
+For later compatible releases, compare against the actual earlier published
+API JAR and run a previously compiled add-on. The
+[maintainer release guide](API_RELEASE_CHECKS.md#snapshot-and-compare-api-contracts)
+documents these checks. Classfile compatibility alone does not prove electrical
+semantics or gameplay behavior.
 
-```text
-python tools/verify_api_compatibility.py build/libs/wwpg-api-1.0.0.jar --api-version 1.0.0 --output build/api-contract.json
-python tools/verify_api_compatibility.py build/libs/wwpg-cee-api-1.0.0.jar --prefix org.cha0scollective.wwpg.api.cee --api-version 1.0.0 --output build/cee-api-contract.json
-```
+## Release verification
 
-For a later compatible release, compare with the actual earlier published JAR:
-
-```text
-python tools/verify_api_compatibility.py CURRENT.jar --previous PREVIOUS-PUBLISHED.jar --api-version NEXT_VERSION --output build/api-compatibility.json
-```
-
-The tool checks exported type/member descriptors, visibility, static dispatch,
-final/abstract constraints, generic signatures, declared exceptions, inheritance,
-sealed type contracts, Java target, and constants. Private/package-private
-implementation changes are ignored. This conservative classfile check does not
-prove electrical semantics, interface default-method conflict resolution, or
-gameplay behavior. Run the previous independently compiled add-on as well.
-
-## SDK packaging and release evidence
-
-`tools/package_api_release.py` assembles an SDK candidate from immutable artifact
-descriptors. It checks the runtime's API bytes against the compile-time artifact,
-source/Javadoc completeness, a packaged independent example, and exact Maven
-repository contents. Its default output explicitly says `sdk_candidate` and
-`publishable: false`.
-
-To prepare the separately downloadable Maven asset from the Gradle publication,
-without asserting release readiness:
-
-```text
-./gradlew publishAllPublicationsToSdkRepository --no-daemon
-python tools/package_api_release.py --maven-source build/maven-repository --output build/distributions/wwpg-api-1.0.0-maven.zip
-```
-
-CI builds both standalone example projects against that local publication before
-running their packaged fixtures. The archive command alone does not freeze the
-API or permit a public release.
-
-The final SDK gate builds the exact downloadable source ZIPs after extraction,
-using the exact extracted Maven ZIP. Run it on the frozen artifacts:
-
-```text
-python tools/verify_extracted_api_sdk.py --runtime build/libs/wwpg-0.2.0.jar --api build/libs/wwpg-api-1.0.0.jar --cee-api build/libs/wwpg-cee-api-1.0.0.jar --example examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar --upstream-example examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar --maven build/distributions/wwpg-api-1.0.0-maven.zip --example-source build/distributions/wwpg-api-example-1.0.0-source.zip --upstream-source build/distributions/wwpg-upstream-api-example-1.0.0-source.zip --source-sha FROZEN_COMMIT_SHA --output build/extracted-sdk-FROZEN_COMMIT_SHA
-```
-
-This runs each extracted project's own wrapper, records its resolved compile-time
-API hashes and build log, and requires byte-for-byte agreement with the frozen
-example jars. The isolated projects do not use the main WWPG source tree.
-Each attempt uses a new output directory; a failed attempt remains inspectable.
-
-Pass `--release` only when the frozen manifest includes completed acceptance:
-
-```text
-python tools/package_api_release.py --manifest release/0.2.0/verification.json --output build/distributions/wwpg-0.2.0-sdk-candidate.zip
-python tools/package_api_release.py --manifest release/0.2.0/verification.json --output build/distributions/wwpg-0.2.0-release.zip --release
-```
-
-The input format has `schema: 1`, `wwpg_version: "0.2.0"`,
-`api_version: "1.0.0"`, and
-`api_coordinate: "org.cha0scollective.wwpg:wwpg-api:1.0.0"`.
-It also supplies
-`cee_api_coordinate: "org.cha0scollective.wwpg:wwpg-cee-api:1.0.0"`.
-Each file descriptor is `{ "path": "workspace/relative/file", "sha256": "...", "bytes": 123 }`.
-Paths must remain within the selected workspace root. Existing output ZIPs are
-never overwritten.
-
-Required `artifacts` roles are `runtime`, `api`, `api_sources`, `api_javadoc`,
-`cee_api`, `cee_api_sources`, `cee_api_javadoc`, `example`, `example_sources`,
-`upstream_example`, `upstream_example_sources`, and `maven_repository`.
-The upstream example supplies the panel/board integration in a separate
-standalone project. `abi` and `cee_abi` point to the separate classfile
-snapshot/comparison JSONs. A comparison also requires `previous_api` or
-`previous_cee_api`, respectively, pointing to the genuine previous artifact.
-
-A release additionally supplies:
-
-- `source_sha`, the frozen 40-character Git commit; `stages_complete: [1,2,3,4,5,6]`;
-  `unresolved_failures: []`.
-- `required_regression_checks` for `BASE` and `PINOUT`, preserving at least the
-  previous release's 204 and 208 packaged requirements.
-- A locked `ci` JSON with the successful repository run URL, source SHA, and
-  exactly eight platform/backend/profile jobs. Every job has a locked `proof`.
-  The run and job proofs share the actual `source_tree`. Each job locks its
-  `checked_out_source` record containing actual Git HEAD/tree, run ID, attempt,
-  and event; pull-request merge commits cannot stand in for the frozen source.
-- `independent_example_build`, a locked proof that the external Gradle project
-  compiled against the API artifact without WWPG project implementation classes.
-- `independent_upstream_example_build`, the corresponding proof for the separate
-  CEE property/panel and native PG board example.
-- Eight locked `client_acceptance` proofs: both profiles and backends, graphical
-  and actual two-client multiplayer.
-- Locked `base_world` and `pinout_world` descriptors for the exact accepted ZIPs.
-- Locked `base_workshop_world` and `pinout_workshop_world` descriptors for the
-  separate accepted API Workshop ZIPs. API client proofs bind to these archives.
-
-Every acceptance proof must declare `completed: true`, `passed: true`, the frozen
-`source_sha`, `artifact_hashes` for `runtime`, `api`, `cee_api`, `example`, and
-`upstream_example`, and no
-`unresolved_failures`. Matrix proofs identify platform/backend/profile, passing
-regression/extension counts, at least three cold passes and five actual chunk
-cycles, zero independent CEE solves, exactly-once electrical history, and a
-passing runtime CEE-property fixture (`cee_property_adapter_verified: true`).
-They list all passing `api_namespaces_passed`: `wwpg_api`, `wwpg_api_faults`,
-`wwpg_api_restart`, `wwpg_api_upstream`, `wwpg_api_upstream_restart`,
-`wwpg_api_pause`, and `wwpg_api_pending_restart`.
-`global_pause_verified: true` binds the separate pause/step/resume fixture to
-each profile/backend/platform proof; a passing subset cannot replace that gate.
-`paused_measurements_unavailable: true` additionally confirms frozen meter behavior.
-`nonconverging_backend_verified: true` requires actual backend rejection, scoped
-history rollback, a healthy unrelated circuit, and recovery. Cold restart proofs
-require `cold_wire_systems_verified: ["CEE", "POWER_GRID"]` and
-`cold_ownership_format_version: 2`; a legacy PG-only result is insufficient.
-`pending_wire_retirement_verified: true` covers a separate three-process
-`pending_entity_restart_phases: ["SETUP", "ARM", "VERIFY"]` sequence. Its locked
-`pending_entity_restart` retains the saved-state `oracle` and each ordered phase's
-`manifest` and `log` descriptors. Final packaging reparses the ARM shutdown and
-VERIFY markers for actual held entity loading, saving before readiness, disk
-tombstones, both wire systems, zero-charge replacement, and fresh functioning
-connections. A repeated ordinary VERIFY pass cannot substitute for this sequence.
-
-Required `api_fixture_behaviors` are `machine`, `storage`, `instrument`,
-`panel_attachment`, and `board_component`. Independent build proofs name their
-categories as `functional_behaviors`: the general example covers machine,
-storage, and instrument; the upstream example covers panel and board.
-Both set `uses_published_api_only: true`, `uses_wwpg_project_classes: false`,
-and lock `compiled_against_api_sha256`. The upstream example additionally locks
-`compiled_against_cee_api_sha256`.
-Both require `build_from_extracted_sdk: true`, `extracted_source_sha256` matching
-their source ZIP artifact, and `maven_repository_sha256` matching the Maven ZIP.
-Locked `compiled_output`, `build_log`, and `dependency_proof` descriptors preserve
-the independently built jar, successful build log, and actual resolved API hashes,
-source count, and empty `wwpg_project_dependencies`. A CI build from the checkout
-is preliminary evidence and cannot substitute for this exact archive gate.
-Client proofs identify backend/profile/mode, the exact `world_sha256`, and a real
-graphical client. Multiplayer additionally records at least two unique
-`real_clients` and `real_tcp_clients: true`.
-
-These JSON files are summaries of retained actual logs and artifact evidence,
-not substitutes for executing tests. Packaging validates their immutability and
-declared gates; it does not establish trust in fabricated input. Preserve failed
-runs, investigate causes, and close defects with reproducible evidence. A retry
-alone does not establish API readiness.
-The package includes every transitively referenced locked proof and its logs,
-dependency records, saved-state oracles, and client screenshots; changed evidence
-blocks packaging.
-
-Derive the packaged matrix records from actual GitHub metadata and uploaded
-artifacts with the evidence collector, rather than writing passing flags by hand:
-
-```text
-python tools/collect_api_ci_evidence.py --collect-ci RUN_ID --download build/api-ci-RUN_ID --output release/0.2.0/evidence/ci-RUN_ID
-```
-
-This read-only GitHub collection uses `gh`; it does not build, freeze, publish, or
-change the progress record. It requires all eight jobs, independent example build
-steps, matching uploaded jars, complete packaged attempts, actual unload counters,
-pause/step counters, solver audits, JUnit XML, and both source/extracted world
-restart chains. An incomplete earlier attempt in a final job blocks collection.
-The output remains a matrix candidate: independent builds from the extracted SDK,
-real-client acceptance, failed-run review, and final package approval remain
-separate. For an already downloaded run, use `--run-json`, `--jobs-json`,
-`--artifact-index`, and `--artifacts` instead of `--collect-ci`.
+WWPG 0.2.0's [verification record](../release/0.2.0/verification.json) binds the
+runtime, SDK, independently built examples, and playable worlds to the accepted
+tests. The [maintainer release guide](API_RELEASE_CHECKS.md) documents classfile
+checks, SDK packaging, and the full evidence manifest. Those packaging steps are
+not required to build an add-on against the published API.
 
 ## Deferred extension points
 

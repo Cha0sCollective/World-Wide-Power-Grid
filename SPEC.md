@@ -6,22 +6,41 @@
 
 - **Document status:** Normative long-term specification
 - **Specification version:** 1.1
-- **Project phase:** Stationary beta released; full product requirements remain open
-- **Current beta baseline:** Minecraft 1.21.1, CEE 1.21.1-1.1.3, and PG 0.6.2; exact dependencies are in [INSTALL.md](docs/INSTALL.md)
+- **Project phase:** WWPG 0.2.0 and extension API 1.0.0 released; full product requirements remain open
+- **Current release baseline:** Minecraft 1.21.1, CEE 1.21.1-1.1.3, and PG 0.6.2; exact dependencies are in [INSTALL.md](docs/INSTALL.md)
 
-This document defines the destination for a complete **1.0** release. It is not a claim that the current beta satisfies every requirement below. For shipped behavior, test evidence, and known issues, read [beta acceptance](docs/FIRST_RELEASE.md), [supported content](docs/SUPPORT.md), and [current status](docs/STATUS.md).
+This document defines the destination for a complete **WWPG product 1.0** release. **Extension API 1.0.0** is a separate, already released developer contract. WWPG 0.2.0 delivers the declared stationary support; the requirements below also include future moving systems and scale goals. For shipped behavior and known issues, read [supported content](docs/SUPPORT.md), [current status](docs/STATUS.md), and the [API guide](docs/EXTENSION_API.md).
+
+In this specification, prohibiting an FE bridge means CEE and PG electrical
+circuits must connect directly rather than exchanging power through a substitute
+Forge Energy bridge. The supported upstream converter and inverter items retain
+their own FE conversion behavior.
 
 ---
 
 ## 0. How to read this document
 
-This document defines the **finished release product** that World-Wide Power Grid is pursuing. The first beta has its own smaller acceptance scope; its limitations do not change the requirements for the finished product.
+This document defines the **finished release product** that World-Wide Power Grid is pursuing. Each published release has its own acceptance scope; those limits do not change the requirements for the finished product.
 
 Implementation milestones may deliver only portions of this specification. Such milestones are progress toward completion, not alternative definitions of completion.
 
 The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **MAY**, and **OPTIONAL** are normative.
 
 When implementation convenience conflicts with this specification, the implementation should change unless the specification is intentionally amended.
+
+### Terms used here
+
+| Term | Meaning |
+| --- | --- |
+| Terminal | The point on a device where a wire attaches. |
+| Node | An electrical connection point, including points inside a device. |
+| Topology | Which electrical elements and connection points are connected. |
+| Solver | The calculation that finds the circuit's voltages and currents. |
+| Substep | One electrical update within a Minecraft game tick. |
+| Stateful element | A component that retains charge, current or other electrical history. |
+| Prepare → solve → commit | Capture device inputs, calculate the circuit, then apply accepted results to gameplay. |
+| Native / Java backend | PG's compiled solver and its Java alternative. |
+| FE | Forge Energy; native conversion items are distinct from WWPG's direct electrical connections. |
 
 ### Reading guide
 
