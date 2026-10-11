@@ -50,3 +50,22 @@ chunk cycles; it never produced a complete passing proof. Slow startup preceded
 the electrical tests. The cause remains open. The retained logs and incomplete
 proof are in `evidence/ci-slowdown`; CI now has a process timeout and captures JVM
 thread dumps on expiration. A passing retry does not resolve this investigation.
+
+The next equipment batch passes 151 packaged BASE/native checks and 152
+PINOUT/Java checks on the same development jar (SHA-256
+`15a067f4003fe410254869d91e86e1c4ad4b8bbd17d17fb1f5a4bf16d155ed78`).
+It corrects three reproduced defects: a neutral CEE voltage regulator was rejected
+as an invalid transformer ratio; PG Nether-transformer cold loading read the wrong
+history index; and repairing or breaking a CEE bulb disconnected PG wires when its
+block variant changed. Saved formats and endpoint identities are preserved.
+
+New powered checks cover native core/radiator assemblies, regulation, bulb repair
+and overload, ceiling solar installation/shading/removal, native growth-lamp crop
+effects, all punch-card rows driving eight mixed loads, CRT heater/grid/deflection
+electrical behavior, and external FE provider/receiver accounting. The initial CRT
+fixture assumed ideal source voltages and failed; the corrected expectation uses
+measured terminal voltage and PG's actual emission equation, including wire drops.
+Those failed and passing logs are retained under `evidence/distribution`.
+Rendered CRT beams, linked Nether operation, remaining assembly workflows,
+content-specific lifecycle checks and playable demonstrations still block completion.
+Test-only barrel FE capabilities are enabled only in the acceptance harness.
