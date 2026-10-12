@@ -24,7 +24,14 @@ import org.patryk3211.powergrid.electricity.creative.CreativeSourceBlockEntity;
 @GameTestHolder("wwpg_loading")
 @PrefixGameTestTemplate(false)
 public final class LoadingBatchGameTests {
-    @BeforeBatch(batch="wwpg_loading_batch") public static void configure(ServerLevel level) { DynamicGameTests.substeps(level); }
+    // Restoration belongs to chunks, so concurrent fixtures in neighboring
+    // structures can pause one another. Each scenario owns its batch.
+    @BeforeBatch(batch="wwpg_loading_graph") public static void configureGraph(ServerLevel level) { DynamicGameTests.substeps(level); }
+    @BeforeBatch(batch="wwpg_loading_charge") public static void configureCharge(ServerLevel level) { DynamicGameTests.substeps(level); }
+    @BeforeBatch(batch="wwpg_loading_outputs") public static void configureOutputs(ServerLevel level) { DynamicGameTests.substeps(level); }
+    @BeforeBatch(batch="wwpg_loading_converter") public static void configureConverter(ServerLevel level) { DynamicGameTests.substeps(level); }
+    @BeforeBatch(batch="wwpg_loading_orphan") public static void configureOrphan(ServerLevel level) { DynamicGameTests.substeps(level); }
+    @BeforeBatch(batch="wwpg_loading_native_storage") public static void configureNativeStorage(ServerLevel level) { DynamicGameTests.substeps(level); }
     private static void place(GameTestHelper h, BlockPos relative, net.minecraft.world.level.block.Block block) {
         h.setBlock(relative.below(), Blocks.STONE); h.setBlock(relative, block);
     }
@@ -33,7 +40,7 @@ public final class LoadingBatchGameTests {
         WiringGameTests.connect(h, source, 1, load, 1, false);
     }
     private static void request(GameTestHelper h, BlockPos position) { RestorationCoordinator.restoring(h.getLevel(), new ChunkPos(position)); }
-    @GameTest(template="empty", batch="wwpg_loading_batch", timeoutTicks=20)
+    @GameTest(template="empty", batch="wwpg_loading_graph", timeoutTicks=20)
     public static void indexedDiscoveryPreservesWeakLinesGroundsAndPorts(GameTestHelper h) {
         // A local graph exercises partitioning without introducing blocks into the playable yard.
         var graph=new org.patryk3211.powergrid.electricity.sim.NetworkGraph();
@@ -57,7 +64,7 @@ public final class LoadingBatchGameTests {
         h.assertTrue(merged.size()==1&&weak.isEmpty()&&merged.getFirst().contains(line),"A strong loop failed to absorb its weak line");
         network.cleanup();h.succeed();
     }
-    @GameTest(template="empty", batch="wwpg_loading_batch", timeoutTicks=1200)
+    @GameTest(template="empty", batch="wwpg_loading_charge", timeoutTicks=1200)
     public static void restoringCircuitPreservesChargeAndLeavesOtherFactoryRunning(GameTestHelper h) {
         var source = new BlockPos(1,2,1); var capacitor = new BlockPos(4,2,1);
         place(h,source,ModdedBlocks.CREATIVE_VOLTAGE_SOURCE.get()); place(h,capacitor,CEEBlocks.CAPACITOR.get());
@@ -97,7 +104,7 @@ public final class LoadingBatchGameTests {
             level.setChunkForced(otherChunk.x,otherChunk.z,false);level.setChunkForced(loadChunk.x,loadChunk.z,false);h.succeed();
         });
     }
-    @GameTest(template="empty", batch="wwpg_loading_batch", timeoutTicks=100)
+    @GameTest(template="empty", batch="wwpg_loading_outputs", timeoutTicks=100)
     public static void restoringCircuitCannotKeepLightHeatOrPumpPowered(GameTestHelper h) {
         var source=new BlockPos(1,2,1);var bulb=new BlockPos(3,2,1);var heater=new BlockPos(5,2,1);var pump=new BlockPos(3,2,4);
         place(h,source,ModdedBlocks.CREATIVE_VOLTAGE_SOURCE.get());place(h,bulb,CEEBlocks.BULB.get());place(h,heater,CEEBlocks.RESISTIVE_HEATER.get());place(h,pump,CEEBlocks.ELECTRIC_PUMP.get());
@@ -113,7 +120,7 @@ public final class LoadingBatchGameTests {
         });
         h.runAtTickTime(75,()->{h.assertTrue(level.getBlockState(h.absolutePos(bulb)).getValue(BulbBlock.LIGHT)>0,"Lamp failed to resume after restoration");h.succeed();});
     }
-    @GameTest(template="empty", batch="wwpg_loading_batch", timeoutTicks=100)
+    @GameTest(template="empty", batch="wwpg_loading_converter", timeoutTicks=100)
     public static void restorationDoesNotRepeatConverterFeTransfers(GameTestHelper h) {
         var source=new BlockPos(1,2,1);var converter=new BlockPos(4,2,1);var port=converter.below();
         place(h,source,ModdedBlocks.CREATIVE_VOLTAGE_SOURCE.get());h.setBlock(port,Blocks.BARREL);
@@ -130,7 +137,7 @@ public final class LoadingBatchGameTests {
         h.runAtTickTime(75,()->{h.assertTrue(receiver[0].received>transfers[0],"Converter did not resume after restoration");h.succeed();});
     }
 
-    @GameTest(template="empty", batch="wwpg_loading_batch", timeoutTicks=60)
+    @GameTest(template="empty", batch="wwpg_loading_orphan", timeoutTicks=60)
     public static void unownedUnscheduledChunkCannotKeepRestorationActive(GameTestHelper h) {
         var missing = new ChunkPos(8192, 8192);
         h.runAtTickTime(5,()->RestorationCoordinator.restoring(h.getLevel(),missing));
@@ -141,7 +148,7 @@ public final class LoadingBatchGameTests {
         });
     }
 
-    @GameTest(template="empty", batch="wwpg_loading_batch", timeoutTicks=100)
+    @GameTest(template="empty", batch="wwpg_loading_native_storage", timeoutTicks=100)
     public static void restorationPreservesNativeBatteryAndInverterHistory(GameTestHelper h) {
         var battery=new BlockPos(5,2,1);var terminal=battery.above();var batteryLoad=new BlockPos(7,2,1);
         var inverter=new BlockPos(4,2,4);var control=new BlockPos(1,2,4);var inverterLoad=new BlockPos(7,2,4);
