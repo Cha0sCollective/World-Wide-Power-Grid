@@ -119,7 +119,7 @@ public final class LoadingBatchGameTests {
         level.setChunkForced(loadChunk.x,loadChunk.z,true);
         level.setBlockAndUpdate(other.below(),Blocks.STONE.defaultBlockState());level.setBlockAndUpdate(load.below(),Blocks.STONE.defaultBlockState());
         level.setBlockAndUpdate(other,ModdedBlocks.CREATIVE_VOLTAGE_SOURCE.getDefaultState());level.setBlockAndUpdate(load,ModdedBlocks.CREATIVE_RESISTOR.getDefaultState());
-        double[] saved={0};int[] held={0},flushed={0},elapsed={-1};boolean[] wired={false};
+        double[] saved={0};int[] held={0},flushed={0},elapsed={-1},healthyFrames={0};boolean[] wired={false};
         h.runAtTickTime(5,()->{
             ((CreativeSourceBlockEntity)level.getBlockEntity(a)).setValue(10);
             ((CreativeSourceBlockEntity)level.getBlockEntity(other)).setValue(10);
@@ -130,7 +130,18 @@ public final class LoadingBatchGameTests {
         });
         h.onEachTick(()->{
             if(!wired[0])return;
-            if(elapsed[0]<0){var before=ElectricalMeasurements.readVoltageBetween(level,load,0,load,1);var charged=DevicesSavedData.load(level).getDevice(cap,CapacitorDevice.class);if(before.status()!=MeasurementStatus.VALID||Math.abs(before.voltage().orElseThrow().meanVoltageVolts())<=9||charged.lastVoltage<=9)return;saved[0]=charged.lastVoltage;elapsed[0]=0;}
+            if(elapsed[0]<0){
+                var before=ElectricalMeasurements.readVoltageBetween(level,load,0,load,1);
+                var charged=DevicesSavedData.load(level).getDevice(cap,CapacitorDevice.class);
+                // One accepted frame can precede the remote chunk's final
+                // endpoint/line reconstruction. Establish a settled factory
+                // before testing that unrelated restoration leaves it running.
+                boolean ready=level.getChunkSource().isPositionTicking(otherChunk.toLong()) && level.areEntitiesLoaded(otherChunk.toLong())
+                        && level.getChunkSource().isPositionTicking(loadChunk.toLong()) && level.areEntitiesLoaded(loadChunk.toLong());
+                if(!ready || before.status()!=MeasurementStatus.VALID || Math.abs(before.voltage().orElseThrow().meanVoltageVolts())<=9 || charged.lastVoltage<=9){healthyFrames[0]=0;return;}
+                if(++healthyFrames[0]<10)return;
+                saved[0]=charged.lastVoltage;elapsed[0]=0;
+            }
             int sample=++elapsed[0];
             if(sample>=2&&sample<=24){
                 boolean paused=RestorationCoordinator.pausedAt(level,cap);
