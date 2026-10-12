@@ -33,6 +33,9 @@ public final class WorldWidePowerGrid {
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.gametest.MultiplayerGameTests::commands);
         NeoForge.EVENT_BUS.addListener(this::unload);
         NeoForge.EVENT_BUS.addListener(this::stop);
+        NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.bridge.RestorationCoordinator::loaded);
+        NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.bridge.RestorationCoordinator::entityLoaded);
+        NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.bridge.RestorationCoordinator::unloaded);
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.extension.ApiCircuits::chunkLoaded);
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.extension.ApiCircuits::blockPlaced);
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.extension.ApiTerminals::chunkUnloaded);
@@ -70,6 +73,7 @@ public final class WorldWidePowerGrid {
     }
     private void unload(LevelEvent.Unload event) {
         if (event.getLevel() instanceof ServerLevel level) Bridges.unload(level);
+        if (event.getLevel() instanceof ServerLevel level) org.cha0scollective.wwpg.bridge.RestorationCoordinator.unload(level);
         if (event.getLevel() instanceof ServerLevel level) org.cha0scollective.wwpg.extension.ApiCircuits.unload(level);
         if (event.getLevel() instanceof ServerLevel level) org.cha0scollective.wwpg.extension.NativeApiReadings.unload(level);
         if (event.getLevel() instanceof net.minecraft.world.level.Level level) org.cha0scollective.wwpg.wiring.Terminals.unload(level);
@@ -77,6 +81,7 @@ public final class WorldWidePowerGrid {
     }
     private void stop(ServerStoppedEvent event) {
         Bridges.clear();
+        org.cha0scollective.wwpg.bridge.RestorationCoordinator.clear();
         org.cha0scollective.wwpg.extension.ApiCircuits.clear();
         org.cha0scollective.wwpg.extension.NativeApiReadings.clear();
         org.cha0scollective.wwpg.extension.ApiTerminals.clear();

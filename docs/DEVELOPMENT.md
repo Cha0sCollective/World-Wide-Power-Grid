@@ -59,6 +59,21 @@ The [CI workflow](../.github/workflows/build.yml) runs all eight combinations of
 Windows/Linux, native/Java, and base/Pinout. It also runs the reference circuits,
 legacy example worlds, dedicated yards, API fixtures, and extracted-world restarts.
 
+## Loading-change regression checks
+
+The isolated `wwpg_loading` fixtures check affected-circuit pauses, retained
+storage and control history, unavailable measurements, and unrelated factories
+continuing to operate during restoration. They also check bounded loading
+windows and weak-line, ground and transformer-port connectivity.
+
+```sh
+python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestNamespaces=wwpg_loading -PtestBackend=NATIVE -PtestDirectory=run/loading-native --no-daemon
+python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestNamespaces=wwpg_loading -PtestBackend=JAVA -PtestDirectory=run/loading-java --no-daemon
+```
+
+Use fresh directories and retain failed evidence. These fixtures check ordinary
+gameplay correctness; they do not certify large-network loading or performance.
+
 ## Compare with upstream reference circuits
 
 ```sh

@@ -96,6 +96,8 @@ public final class CeeAdapters {
 
         private Session(Map<Class<? extends ElectricalProperties>, Entry<?>> entries) { this.entries = entries; }
 
+        public boolean hasAdapters() { return !entries.isEmpty(); }
+
         public Optional<Captured> capture(ElectricalProperties source) {
             Objects.requireNonNull(source, "CEE property");
             var previous = captured.get(source);

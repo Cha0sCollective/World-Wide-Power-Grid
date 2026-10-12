@@ -226,6 +226,10 @@ public final class ApiCircuits {
         solving=false;
         for(var device:devices.values()) {
             try {
+            if (device.elements.values().stream().anyMatch(element -> org.cha0scollective.wwpg.bridge.RestorationCoordinator.paused(element.network()))) {
+                device.elements.values().forEach(ApiElement::rejectTick);
+                device.results=DeviceResults.unavailable(context,MeasurementStatus.NOT_READY,"Circuit is restoring its chunks and wires"); continue;
+            }
             boolean valid=device.elements.values().stream().allMatch(e->e.valid(context) && !invalidNetworks.contains(e.network()))
                     && device.samples.values().stream().allMatch(n->n.valid(context) && !invalidNetworks.contains(n.node.getNetwork()));
             if(!valid) { device.elements.values().forEach(ApiElement::rejectTick);device.results=DeviceResults.unavailable(context,MeasurementStatus.SOLVE_FAILED,"Incomplete or nonconverged electrical substeps"); continue; }

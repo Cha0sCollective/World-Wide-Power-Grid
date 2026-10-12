@@ -17,6 +17,18 @@ import org.objectweb.asm.Opcodes;
 
 @Mixin(value = WorldNetworks.class, remap = false)
 public abstract class WorldNetworksMixin {
+    @Inject(method = "runIslandDiscoveryFor", at = @At("HEAD"), cancellable = true)
+    private void wwpg$indexedIslands(ElectricalNetwork network, CallbackInfo ci) {
+        var world = (WorldNetworks) (Object) this;
+        if (org.cha0scollective.wwpg.bridge.RestorationCoordinator.defer(world, network))
+            org.cha0scollective.wwpg.bridge.RestorationCoordinator.holdDiscovery(world, network);
+        else org.cha0scollective.wwpg.bridge.IndexedIslandDiscovery.run(world, network);
+        ci.cancel();
+    }
+    @Redirect(method = "preTick", at = @At(value = "INVOKE", target = "Lorg/patryk3211/powergrid/electricity/sim/ElectricalNetwork;prepare(I)V"))
+    private void wwpg$batchPreparation(ElectricalNetwork network, int steps) {
+        if (!org.cha0scollective.wwpg.bridge.RestorationCoordinator.defer((WorldNetworks) (Object) this, network)) network.prepare(steps);
+    }
     @ModifyExpressionValue(method = "postTick", at = @At(value = "FIELD",
             target = "Lorg/patryk3211/powergrid/electricity/WorldNetworks$CheckChunk;ticks:I",
             opcode = Opcodes.GETFIELD))
@@ -46,6 +58,7 @@ public abstract class WorldNetworksMixin {
     @Inject(method = "preTick", at = @At("RETURN"))
     private void wwpg$results(CallbackInfo ci) {
         var world = (WorldNetworks) (Object) this;
+        org.cha0scollective.wwpg.bridge.RestorationCoordinator.retainDiscovery(world);
         if (!ServerElectricalSchedule.preparing() && world.world instanceof ServerLevel level)
             Bridges.get(level).finishSolving();
     }

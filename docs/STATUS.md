@@ -57,6 +57,17 @@ retains exact versions, hashes and results. There are 204 base checks or 208 wit
 Pinout, plus 34 extension/lifecycle checks and 62 Java unit checks per CI job.
 These are test counts, not counts of items in the game.
 
+## Unreleased loading improvements
+
+Development changes group loading updates for affected circuits, preserve stored
+energy while those circuits wait, and reduce repeated graph and matrix work.
+Meters report unavailable readings during the pause, and devices resume without
+simulating the time spent waiting. Unrelated ready factories continue operating.
+
+These changes have not been released. Large-network speed remains uncertified,
+and an intermittent Java solver stall during large-world reconstruction remains
+under investigation. Ordinary gameplay passes do not close that separate issue.
+
 ## Limits and older reports
 
 - Moving trains, contraptions and other moving electrical systems are future work.

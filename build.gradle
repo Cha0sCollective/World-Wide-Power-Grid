@@ -78,6 +78,7 @@ neoForge {
             systemProperty 'wwpg.test.profile', testProfile
             systemProperty 'wwpg.test.energyFixtures', 'true'
             systemProperty 'wwpg.test.backend', providers.gradleProperty('testBackend').getOrElse('NATIVE')
+            systemProperty 'wwpg.restorationBatch', providers.gradleProperty('testRestorationBatch').getOrElse('true')
             systemProperty 'wwpg.test.expectedNeoForge', neo_version
             systemProperty 'wwpg.test.restartPhase', providers.gradleProperty('restartPhase').getOrElse('SETUP')
             systemProperty 'wwpg.test.multiplayer', providers.gradleProperty('multiplayer').getOrElse('false')
@@ -108,6 +109,8 @@ dependencies {
     // PG 0.6.2 omitted native v7. Its NativeMNA interface is byte-identical to 0.6.1.
     pgNativeReference('curse.maven:power-grid-1321420:8738576') { transitive = false }
     implementation 'dev.architectury:architectury-neoforge:13.0.8'
+    // PG supplies EJML at runtime. Compatibility hooks use its existing matrix types.
+    compileOnly 'org.ejml:ejml-core:0.44.0'
     testImplementation platform('org.junit:junit-bom:5.11.4')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testCompileOnly 'dev.engine-room.flywheel:flywheel-neoforge-api-1.21.1:1.0.6'
@@ -142,6 +145,7 @@ tasks.named('processResources') {
     from('LICENSE') { into 'META-INF'; rename { 'WWPG-LICENSE.txt' } }
     from('release') { include 'artifacts.json', 'optional-artifacts.json', 'content-matrix.json', '0.1.0-beta.5/content-matrix.json', '0.1.0-beta.5/registry-inventory.json'; into 'data/wwpg/release' }
     from(layout.buildDirectory.dir('pg-native-resources/native')) { into 'native/wwpg' }
+    from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_loading/structure' }
 }
 tasks.named('jar') {
     from sourceSets.extensionApi.output

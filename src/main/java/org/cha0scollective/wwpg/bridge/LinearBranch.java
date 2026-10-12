@@ -25,7 +25,8 @@ public final class LinearBranch {
     public void update(ElectricalProperties properties) {
         validate(properties);
         this.properties = properties;
-        norton.setConductance(properties.conductance());
+        double conductance = properties.conductance();
+        if (Double.compare(norton.conductance(), conductance) != 0) norton.setConductance(conductance);
         // CEE injects into the second node; PG injects into the first.
         norton.setCurrent(-properties.currentSource());
         if (voltage != null) voltage.setVoltage(-properties.voltageSource());
@@ -33,12 +34,27 @@ public final class LinearBranch {
 
     public boolean hasVoltageSource() { return voltage != null; }
     public ElectricalNetwork network() { return norton.getNode1().getNetwork(); }
+    public boolean attached() { var network = network(); return network != null && norton.getNetwork() == network && (voltage == null || voltage.getNetwork() == network); }
     public double current() {
         return norton.current() + properties.currentSource() + (voltage == null ? 0 : voltage.getCurrent());
+    }
+    public double current(double firstVoltage, double secondVoltage) {
+        return (firstVoltage - secondVoltage) * norton.conductance() + properties.currentSource()
+                + (voltage == null ? 0 : voltage.getCurrent());
     }
     public void remove() {
         norton.remove();
         if (voltage != null) voltage.remove();
+    }
+    public void remove(org.patryk3211.powergrid.electricity.sim.NetworkGraph graph) {
+        OwnedWireRemoval.remove(norton,graph);
+        if (voltage != null) {
+            var recorded=voltage.getNetwork();
+            var owner=norton.getNode1().getNetwork();
+            if(recorded!=null){recorded.setDirty();recorded.removeNode(voltage);}
+            if(owner!=null&&owner!=recorded){owner.setDirty();owner.removeNode(voltage);}
+            graph.decouple(voltage);
+        }
     }
 
     public static void validate(ElectricalProperties properties) {

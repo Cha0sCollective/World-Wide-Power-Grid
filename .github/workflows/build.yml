@@ -102,6 +102,8 @@ jobs:
             cp run/api/logs/latest.log "run/api/restart-${pass}.log"
           done
       - run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PrestartPhase=SETUP --no-daemon
+      - name: Verify restoration pauses, storage, independent factories and graph couplings
+        run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_loading -PtestDirectory=run/loading --no-daemon
       - name: Three consecutive cold world restarts
         run: |
           for pass in 1 2 3; do

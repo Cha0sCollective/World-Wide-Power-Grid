@@ -32,20 +32,22 @@ public final class ServerElectricalSchedule {
         LAST_TICK.put(server, tick);
         var worlds = new ArrayList<WorldNetworks>();
         for (var level : server.getAllLevels()) org.cha0scollective.wwpg.extension.ApiCircuits.get(level).prepare();
+        for (var level : server.getAllLevels()) worlds.add(GlobalElectricNetworks.getWorldNetworks(level));
+        RestorationCoordinator.joinCoupledWindows(worlds);
         // CEE prepares every dimension at tickServer HEAD, before PG's first
         // level pre-tick. Retain PG's native topology and matrix preparation,
         // but wait until every dimension is ready before advancing any of them.
         PREPARING.set(true);
         try {
-            for (var level : server.getAllLevels()) {
-                var world = GlobalElectricNetworks.getWorldNetworks(level);
-                worlds.add(world);
-                world.preTick();
-            }
+            for (var world : worlds) world.preTick();
         } finally {
             PREPARING.remove();
         }
-        var networks = worlds.stream().map(world -> List.copyOf(world.subnetworks)).toList();
+        RestorationCoordinator.coupledClosure(worlds);
+        RestorationCoordinator.finishPreparation(worlds);
+        var networks = worlds.stream().map(world -> world.subnetworks.stream().filter(network -> !RestorationCoordinator.paused(network)).toList()).toList();
+        for (var world : worlds) Bridges.get((ServerLevel) world.world).scheduledNetworks(
+                (int) world.subnetworks.stream().filter(network -> !network.isEmpty() && !RestorationCoordinator.paused(network)).count());
         int steps = ModdedConfigs.server().electricity.solver.multiTicks.get();
         for(var world:worlds) {
             var level=(ServerLevel)world.world;
