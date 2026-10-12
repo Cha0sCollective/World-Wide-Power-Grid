@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import VersionChoices from '../components/VersionChoices.astro';
 import {
   project,
   currentRelease as release,
@@ -87,7 +88,13 @@ import {
         {Object.entries(release.requirements).map(([name, version]) => (
           <div>
             <dt>{name}</dt>
-            <dd>{version}</dd>
+            <dd>
+              {name === 'NeoForge' ? (
+                <VersionChoices version={version} />
+              ) : (
+                version
+              )}
+            </dd>
           </div>
         ))}
       </dl>
@@ -139,7 +146,7 @@ import {
           playable Nether route.
         </p>
         <p class="bundle-path">
-          <code>worlds/wwpg-0.2.0-stationary-yard.zip</code>
+          <code>{`worlds/wwpg-${release.version}-stationary-yard.zip`}</code>
         </p>
       </article>
       <article>
@@ -150,7 +157,7 @@ import {
           <code>wwpg</code> Lua program.
         </p>
         <p class="bundle-path">
-          <code>worlds/wwpg-0.2.0-stationary-yard-pinout.zip</code>
+          <code>{`worlds/wwpg-${release.version}-stationary-yard-pinout.zip`}</code>
         </p>
       </article>
     </div>
@@ -171,10 +178,10 @@ import {
           alongside the required mod set.
         </p>
         <p class="bundle-path">
-          <code>worlds/wwpg-0.2.0-api-workshop.zip</code>
+          <code>{`worlds/wwpg-${release.version}-api-workshop.zip`}</code>
         </p>
         <p class="bundle-path">
-          <code>worlds/wwpg-0.2.0-api-workshop-pinout.zip</code>
+          <code>{`worlds/wwpg-${release.version}-api-workshop-pinout.zip`}</code>
         </p>
         <p class="small-text">
           Both editions contain the same stations. Computer exhibits are in the

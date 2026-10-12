@@ -1,0 +1,10 @@
+---
+interface Props {
+  version: string;
+}
+const { version } = Astro.props;
+const [primary, ...alternatives] = version.split(' / ');
+---
+
+<strong>{primary}</strong>
+{alternatives.map((alternative) => <Fragment> / {alternative}</Fragment>)}

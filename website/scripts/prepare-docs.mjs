@@ -8,6 +8,7 @@ import {
 import { createHash } from 'node:crypto';
 import { resolve, dirname, posix, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { renderReferenceScript } from './reference-script.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const project = JSON.parse(
@@ -21,6 +22,13 @@ if (!generated.startsWith(root + '/') && !generated.startsWith(root + '\\'))
 rmSync(generated, { recursive: true, force: true });
 rmSync(apiOutput, { recursive: true, force: true });
 mkdirSync(generated, { recursive: true });
+
+function formatNeoForge(version) {
+  const [primary, ...alternatives] = version.split(' / ');
+  return alternatives.length
+    ? `**${primary}** / ${alternatives.join(' / ')}`
+    : version;
+}
 
 function rewriteDownloads(markdown, release, repository) {
   const prefix = `${repository}/releases/download/${release.tag}/`;
@@ -110,7 +118,7 @@ for (const release of project.releases) {
               '<body$1 data-pagefind-ignore>' + navigation,
             ),
         );
-      } else writeFileSync(output, bytes);
+      } else writeFileSync(output, renderReferenceScript(file, bytes));
     }
   }
   const writePage = (slug, title, description, body) => {
@@ -128,7 +136,8 @@ for (const release of project.releases) {
       ['install', 'example-worlds', 'workshop'].includes(slug)
         ? `:::note[World downloads]\nDownload and extract the [example-worlds bundle](${project.repository}/releases/download/${release.tag}/${release.downloads.worlds}). The four world ZIPs are in \`worlds/\`; both workshop addon jars are in \`workshop-mods/\`. World download links below open this shared bundle. Choose the named ZIP after extraction, then extract its save folder into \`saves/\`.\n:::\n\n`
         : '';
-    const resolved = body.replace(
+    const neoforge = formatNeoForge(release.requirements.NeoForge);
+    let resolved = body.replaceAll('{{neoforge}}', neoforge).replace(
       /\{\{asset:([A-Za-z0-9_]+)\}\}/g,
       (_, asset) => {
         if (!release.downloads[asset])
@@ -136,6 +145,10 @@ for (const release of project.releases) {
         return `${project.repository}/releases/download/${release.tag}/${release.downloads[asset]}`;
       },
     );
+    const versions = release.requirements.NeoForge.split(' / ');
+    if (versions.length > 1)
+      for (const separator of [' or ', ' and ', ' / '])
+        resolved = resolved.replaceAll(versions.join(separator), neoforge);
     writeFileSync(
       target,
       frontmatter +
@@ -175,7 +188,7 @@ for (const release of project.releases) {
   }
   const prefix = `/docs/${release.version}/`;
   const requirements = Object.entries(release.requirements)
-    .map(([name, version]) => `| ${name} | ${version} |`)
+    .map(([name, version]) => `| ${name} | ${name === 'NeoForge' ? formatNeoForge(version) : version} |`)
     .join('\n');
   const overview = `Connect Create: Electro Energetics and Power Grid in the same stationary factory, using their native equipment, wires, and controls.\n\n## Choose a starting point\n\n- [Install WWPG](${prefix}install/) — client and server setup, with the exact required versions.\n- [Configuration](${prefix}configuration/) — solver settings and platform requirements.\n- [Supported content](${prefix}compatibility/) — equipment and release boundaries.\n- [Wiring and native tools](${prefix}wiring/) — connect, measure, and repair.\n- [Explore the test yards](${prefix}example-worlds/) — hands-on examples with instructions and reset actions.\n- [Lua computer control](${prefix}lua/) — the optional Pinout integration.\n- [Addon development](${prefix}developers/) — ${release.api ? `API ${release.api.version} setup, lifecycle, and working examples` : 'public API availability'}.\n- [Diagnostics and troubleshooting](${prefix}troubleshooting/) — investigate an unexpected result.\n\n${release.api ? `- [Extension API Workshop](${prefix}workshop/) — the two addon examples in a playable save.\n\n` : ''}## Pinned dependencies\n\n| Dependency | Version |\n| --- | --- |\n${requirements}\n\nThe community modpack and WWPG are separately versioned. Follow the requirements for the release you install. The future Ch4oS player manual will cover the pack's own gameplay edition.\n\n[Back to WWPG](/)`;
   writePage(
