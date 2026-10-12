@@ -258,5 +258,33 @@
   "documentation-native-4/saved-settings-VERIFY.json": {
     "sha256": "9138f2cf6541c391c06e1349e22419223c14801ab3de44dbf358a28215de90b6",
     "bytes": 145
+  },
+  "ci-build-native-pinout-600s.log": {
+    "sha256": "f9bf9442fd39b2572e4c9fed7929261d2e088ad1ebd8a5dfb6bbb599e6d59add",
+    "bytes": 1253152
+  },
+  "ci-build-native-pinout-restart-1.log": {
+    "sha256": "da92ca6f751d86f3b465f6a694d2063b39a041d88088428e701172f1288eed2a",
+    "bytes": 221986
+  },
+  "ci-build-native-pinout-restart-2.log": {
+    "sha256": "e102c5f6cab71bb3f60719d4dd8a8f0eb5d2a316a7012cdca2c5447ceeda979b",
+    "bytes": 222536
+  },
+  "ci-build-native-pinout-600s-watchdog/jvm-2644-threads.txt": {
+    "sha256": "35e3a5a0146f21c41e53886933eaccea3862b693090d7eff3e0e449d4f2b93b6",
+    "bytes": 158796
+  },
+  "ci-build-native-pinout-600s-watchdog/jvm-4352-threads.txt": {
+    "sha256": "935ffae459b8e6d1259b2e2f6196ad8e8d16a06390754cee75ebda481ad485fb",
+    "bytes": 34522
+  },
+  "ci-build-native-pinout-600s-watchdog/jvm-7456-threads.txt": {
+    "sha256": "e893ac4b91b43d59ca6f30fc07ac49a5f735179cb97db2d0a62d27cdad776dec",
+    "bytes": 12162
+  },
+  "ci-build-native-pinout-600s-watchdog/timeout.json": {
+    "sha256": "41fcd23f732c70584545df1e3c8b43fd5012f03c705beb39f34b4de2d08ec520",
+    "bytes": 765
   }
 }

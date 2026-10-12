@@ -9,7 +9,8 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
     # The complete functional matrix includes 18 additional JVM launches after
-    # the reference comparison. Preserve each launch's 600-second watchdog.
+    # the reference comparison. Populated cold restarts use a 1200-second
+    # watchdog; other gameplay launches retain their 600-second bound.
     timeout-minutes: 120
     defaults:
       run:
@@ -105,7 +106,7 @@ jobs:
       - name: Three consecutive cold world restarts
         run: |
           for pass in 1 2 3; do
-            python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PrestartPhase=VERIFY --no-daemon
+            python tools/run_checked.py --timeout 1200 -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PrestartPhase=VERIFY --no-daemon
             cp run/logs/latest.log "run/restart-${pass}.log"
           done
       - run: python tools/run_checked.py -- ./gradlew runUpstreamReferenceServer -PtestBackend=${{ matrix.backend }} --no-daemon
