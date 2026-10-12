@@ -70,9 +70,13 @@ final class DocClientAcceptance {
             mc.setScreen(null);age++;
             switch(age){
                 case 30 -> hand(mc,ModdedItems.WIRE.asStack(64));
+                case 35 -> look(mc,new BlockWireEndpoint(SOURCE,0).getExactPosition(mc.level));
                 case 50 -> terminal(mc,SOURCE,0);
+                case 60 -> look(mc,new BlockWireEndpoint(LOAD,0).getExactPosition(mc.level));
                 case 75 -> terminal(mc,LOAD,0);
+                case 85 -> look(mc,new BlockWireEndpoint(SOURCE,1).getExactPosition(mc.level));
                 case 100 -> terminal(mc,SOURCE,1);
+                case 110 -> look(mc,new BlockWireEndpoint(LOAD,1).getExactPosition(mc.level));
                 case 125 -> terminal(mc,LOAD,1);
                 case 155 -> mc.getSingleplayerServer().execute(()-> {
                     var level=mc.getSingleplayerServer().overworld();
@@ -87,7 +91,9 @@ final class DocClientAcceptance {
                 case 280 -> {require(!lit(mc),"Top-face OFF did not synchronize");click(mc,Direction.NORTH,false);}
                 case 300 -> {message("OFF / 400 ohms","0.000 A");shot(mc,"load-400-off.png");click(mc,Direction.UP,false);}
                 case 320 -> hand(mc,ModdedItems.MULTIMETER.asStack());
+                case 330 -> look(mc,new BlockWireEndpoint(LOAD,0).getExactPosition(mc.level));
                 case 340 -> terminal(mc,LOAD,0);
+                case 350 -> look(mc,new BlockWireEndpoint(LOAD,1).getExactPosition(mc.level));
                 case 360 -> terminal(mc,LOAD,1);
                 case 400 -> {
                     var meter=(org.patryk3211.powergrid.equipment.multimeter.MultimeterItem)mc.player.getMainHandItem().getItem();

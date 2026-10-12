@@ -65,12 +65,14 @@ jobs:
           if [ '${{ matrix.profile }}' = PINOUT ]; then namespaces="$namespaces,wwpg_pinout"; fi
           python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.1.jar -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces="$namespaces" -PtestDirectory=run/neoforge-compat -x build -x jar --no-daemon
           cp run/neoforge-compat/logs/latest.log run/neoforge-compat/setup.log
+      # A populated Windows native cold world kept making unload progress at 600s.
+      # Retain every assertion and five cycles with a bounded 1200s watchdog.
       - name: Three cold restarts with the same jar, including actual assembly unload/reload cycles
         run: |
           namespaces=wwpg_platform,wwpg,wwpg_stationary,wwpg_design,wwpg_distribution,wwpg_wires,wwpg_bundle,wwpg_coupled
           if [ '${{ matrix.profile }}' = PINOUT ]; then namespaces="$namespaces,wwpg_pinout"; fi
           for pass in 1 2 3; do
-            python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.1.jar -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces="$namespaces" -PtestDirectory=run/neoforge-compat -PrestartPhase=VERIFY -x build -x jar --no-daemon
+            python tools/run_checked.py --timeout 1200 -- ./gradlew runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.1.jar -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces="$namespaces" -PtestDirectory=run/neoforge-compat -PrestartPhase=VERIFY -x build -x jar --no-daemon
             cp run/neoforge-compat/logs/latest.log "run/neoforge-compat/restart-$pass.log"
           done
       - name: Independent API examples, faults and lifecycle checks in their own world

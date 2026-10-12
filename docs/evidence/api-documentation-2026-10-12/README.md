@@ -19,3 +19,11 @@ A fresh-context reviewer used only public APIs, guides and the starter, without 
 ## Reproduce
 
 From the repository root with Java 21 and Python, run `python tools/documentation_acceptance/check.py prepare`, then `python tools/documentation_acceptance/check.py server --backend NATIVE` and repeat with `JAVA`. Use a clean workspace: the preparation preserves existing extraction directories. The workflow does not add game-run tasks to the starter. Detailed runs use the test-only `tools/documentation_acceptance/init.gradle` against the released runtime; its server task requires all four cases to pass.
+
+## Dev Suite follow-up
+
+After the user authorized the separate Dev Suite host, Linux software-rendered Xvfb client checks passed on **both actual backends**, using the published 0.2.1 runtime and an independently built starter. They verify native PG wire placement, 100/200/400 Ω controls and readouts, read-only observation, OFF indication, resource/model availability and a native client multimeter near 20 V. The server fixtures separately cover the CEE clamp meter and both wire systems. Small result reports and exact helper hashes are retained here; full logs, failed attempts, helper captures and screenshots remain at `/workspace/artifacts/wwpg-api-docs-gui`. This is not a Steam Deck hardware/GPU certification or next-release acceptance.
+
+The first container cold build timed out during unbuffered archive writes on the Windows-mounted v9fs workspace. A derived build copy in the ext4 Linux cache completed the SDK builds and 40 constructor checks. The first container client attempt failed to place wires: PG recasts the player's view on the server, while the driver rotated and clicked in the same tick. Waiting for the view to settle corrected placement on both backends. Clients closed automatically and music remained disabled.
+
+The broader NeoForge compatibility run `38300946248` retained a failed Windows/NATIVE/BASE cold process at the 600-second watchdog. Its server thread was actively building CEE connections, and actual duplex unload counters advanced to three before termination. The affected cold-restarter command now has a bounded 1200-second limit, retaining the same test set, three cold processes and five unload cycles. Only a completed passing run closes that timing gate.

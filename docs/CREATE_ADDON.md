@@ -20,6 +20,7 @@ Set-Location "C:/Dev/Tutorial Load"
 ```
 
 ```sh
+mkdir -p "$HOME/Dev"
 unzip "$HOME/Downloads/wwpg-0.2.1-developer-sdk.zip" -d "$HOME/Dev/WWPG SDK"
 unzip "$HOME/Dev/WWPG SDK/maven/wwpg-api-1.0.0-maven.zip" -d "$HOME/Dev/WWPG API Maven"
 unzip "$HOME/Downloads/tutorial-load-0.1.0-source.zip" -d "$HOME/Dev/Tutorial Load"

@@ -19,6 +19,7 @@ Set-Location "C:/Dev/Tutorial Load"
 ```
 
 ```sh
+mkdir -p "$HOME/Dev"
 unzip "$HOME/Downloads/wwpg-0.2.1-developer-sdk.zip" -d "$HOME/Dev/WWPG SDK"
 unzip "$HOME/Dev/WWPG SDK/maven/wwpg-api-1.0.0-maven.zip" -d "$HOME/Dev/WWPG API Maven"
 unzip "$HOME/Downloads/tutorial-load-0.1.0-source.zip" -d "$HOME/Dev/Tutorial Load"
@@ -101,7 +102,7 @@ Set the load to **OFF / 400 Ω**, save and stop the world, then reopen it. Check
 
 An unavailable readout can mean loading, isolation or failed solving; it is not a measured zero. Inspect the [author troubleshooting guide]({{docs}}addon-testing/) and the [constructor limits]({{docs}}api-limits/). The complete [general example]({{docs}}general-example/) demonstrates storage and other models after this first device works. CEE properties and PG boards have different registration prerequisites; use the [native example]({{docs}}native-example/) for those routes.
 
-Dedicated-server checks pass on native and Java backends. Graphical testing of this new starter is deferred while benchmarks run; it remains a gate before inclusion in the next accepted SDK. The original 0.2.1 API Workshop and its verification are separate.
+Dedicated-server checks pass on Windows/Linux and both backends. Separate Linux software-rendered client checks pass on native and Java backends in Dev Suite, including controls, visible power and the multimeter. This does not certify Steam Deck hardware. The next SDK still requires acceptance against its own frozen release artifacts. The original 0.2.1 API Workshop and its verification are separate.
 
 ## Complete project files
 

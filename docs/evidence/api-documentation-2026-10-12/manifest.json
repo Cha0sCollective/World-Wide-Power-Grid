@@ -1,4 +1,12 @@
 {
+  "dev-suite-java-graphical.json": {
+    "sha256": "d5dd97ed82bae3d9cf347bfc08f15250013c9c925def53e6ed1589ea3b33c765",
+    "bytes": 1437
+  },
+  "dev-suite-native-graphical.json": {
+    "sha256": "e05908c32750498cfabece753805f5fcb9cd6d06a8011631d17cecd2810fc90e",
+    "bytes": 1439
+  },
   "documentation-api-abi.json": {
     "sha256": "4c523bcd33960b9a93da5f012a4d8f088919b0544ff08b6f3c236f31239fd1b7",
     "bytes": 63513
@@ -52,8 +60,8 @@
     "bytes": 2391
   },
   "README.md": {
-    "sha256": "47595592f82668c7dcf03650ac340f55c0417044b03a61cb182c33ee10600ded",
-    "bytes": 3530
+    "sha256": "a371c8765025b252695def905be36c8286a26d931abf602975127927f9c90379",
+    "bytes": 5238
   },
   "source-invariants.json": {
     "sha256": "d6e1a28cc7d9cba2818bc2aa0c9dbc6a7bf9c85baaaf7ee46b3287e63f45658a",
@@ -66,6 +74,26 @@
   "starter-provenance.json": {
     "sha256": "c33af8920133e92b50522299f4d3788f8cc2434e20b4c912c0edf084fd0a475d",
     "bytes": 287
+  },
+  "ci-38300946248-failed/failed-job.log": {
+    "sha256": "24f7de8fcd05fdbe7d2510b049a1e18b6bcff41b4066e800720d9d1be74dc23a",
+    "bytes": 901583
+  },
+  "ci-38300946248-failed/jvm-6484-threads.txt": {
+    "sha256": "b9d9428de923db32c4618debbf920059c524070ab14b85bd9fd74ab8f0634b8e",
+    "bytes": 152464
+  },
+  "ci-38300946248-failed/jvm-8272-threads.txt": {
+    "sha256": "2a65d98f49e1448ec110c93c832379776a78e7456a69ef332f5abce416cd4aa7",
+    "bytes": 12171
+  },
+  "ci-38300946248-failed/jvm-9120-threads.txt": {
+    "sha256": "88ef050771c842202f1d82d6f7c00cb53744355a58d9fbd92b4595ce7c655d4a",
+    "bytes": 24149
+  },
+  "ci-38300946248-failed/timeout.json": {
+    "sha256": "dbea474b05f672f5c32a8a88066681a5c27def1dbeaa79f318aadfe7c991764f",
+    "bytes": 1363
   },
   "documentation-java/chunk-reload-VERIFY-1791833961111.json": {
     "sha256": "dddb4b72bb04c6adf51c7746a081c7b6f7d8fc938c5edf993923136ce1968215",
