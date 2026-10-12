@@ -145,6 +145,16 @@ for (const release of project.releases) {
         );
       } else writeFileSync(output, renderReferenceScript(file, bytes));
     }
+    // Published Javadoc omits its optional web fonts. Keep the frozen stylesheet
+    // untouched and provide the imported file using the existing fallback fonts.
+    for (const reference of release.api.references) {
+      const stylesheet = resolve(editionOutput, reference.id, 'stylesheet.css');
+      const fontCss = resolve(editionOutput, reference.id, 'resources/fonts/dejavu.css');
+      if (readFileSync(stylesheet, 'utf8').includes("resources/fonts/dejavu.css") && !existsSync(fontCss)) {
+        mkdirSync(dirname(fontCss), { recursive: true });
+        writeFileSync(fontCss, '/* Optional DejaVu web fonts were omitted from the released Javadoc.\n * Use the fallback fonts declared in its unchanged stylesheet. */\n');
+      }
+    }
   }
   const writePage = (slug, title, description, body) => {
     const target = resolve(
