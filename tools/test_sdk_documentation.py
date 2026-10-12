@@ -24,6 +24,7 @@ class Navigation(unittest.TestCase):
         with self.assertRaises(ValueError):bundle_markdown('[x](../../private.md)','README.md',set(),'0.2.2',self.SHA)
     def test_real_source_archive_preserves_unix_wrapper_mode(self):
         root=Path(__file__).resolve().parents[1]
+        (root/'build').mkdir(exist_ok=True)
         with tempfile.TemporaryDirectory(dir=root/'build') as directory:
             out=Path(directory)/'starter.zip';package_example(root/'examples/adjustable-load',root,out)
             with zipfile.ZipFile(out) as z:

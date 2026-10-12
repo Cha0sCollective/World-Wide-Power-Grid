@@ -6,6 +6,8 @@ The standalone starter resolved the actual API jar `c68a9f5824ebc80810ad697f1132
 
 Dedicated-server checks on Windows / NeoForge 21.1.248 pass with both actual NATIVE and JAVA backends: 100/200/400 Ω, open state, unavailable indication/configuration, native wires, meters, replacement, diagnostics and recovery, actual chunk unload/restored power, and OFF/400 Ω inspected before solving after a separate process restart. Reports bind loaded runtime and starter jar hashes. The new CI workflow adds Linux extraction through ordinary `unzip`, builds both original SDK examples after the documented permission step, builds the future ZIP without a permission repair, and repeats the server checks on both platforms/backends. CI results belong to the documentation PR, not the earlier release.
 
+The first documentation CI attempt failed before any build because the archive test assumed `build/` already existed on a clean checkout. The test now creates its own scratch parent; the failed CI log is retained.
+
 ## Graphical testing deferred
 
 The user deferred graphical testing while benchmarks were running. Three preliminary native-client logs are retained. The first driver failed terminal targeting; the next two produced no placed wires and failed the powered indication assertion. Those are failed checks, not passing product demonstrations. The driver now uses a full native wire stack, but that change has **not** been graphically rerun. Real-client controls, meters and screenshots on both backends remain required before including the starter in a future accepted SDK. The released API Workshop evidence remains separate.

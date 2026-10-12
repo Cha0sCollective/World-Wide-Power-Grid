@@ -101,6 +101,8 @@ Set the load to **OFF / 400 Ω**, save and stop the world, then reopen it. Check
 
 An unavailable readout can mean loading, isolation or failed solving; it is not a measured zero. Inspect the [author troubleshooting guide]({{docs}}addon-testing/) and the [constructor limits]({{docs}}api-limits/). The complete [general example]({{docs}}general-example/) demonstrates storage and other models after this first device works. CEE properties and PG boards have different registration prerequisites; use the [native example]({{docs}}native-example/) for those routes.
 
+Dedicated-server checks pass on native and Java backends. Graphical testing of this new starter is deferred while benchmarks run; it remains a gate before inclusion in the next accepted SDK. The original 0.2.1 API Workshop and its verification are separate.
+
 ## Complete project files
 
 Each file below is complete, not pseudocode. Create the shown path under your project root. The source ZIP also contains the wrapper and MIT license.

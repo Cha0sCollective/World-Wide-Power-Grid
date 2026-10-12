@@ -1,0 +1,158 @@
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	﻿2026-10-12T19:54:09.4630968Z ##[group]Run python tools/test_sdk_documentation.py
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.4631434Z ^[[36;1mpython tools/test_sdk_documentation.py^[[0m
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.4690947Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.4691347Z env:
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.4691699Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.4692246Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.4692749Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.4693515Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.4694008Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.4694442Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.4694865Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.4695297Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.4695734Z   GRADLE_ACTION_ID: gradle/actions/setup-gradle
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.4696087Z   GRADLE_USER_HOME: /home/runner/.gradle
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.4696416Z   GRADLE_BUILD_ACTION_SETUP_COMPLETED: true
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.4696750Z   GRADLE_BUILD_ACTION_CACHE_RESTORED: true
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.4697213Z   DEVELOCITY_INJECTION_INIT_SCRIPT_NAME: gradle-actions.inject-develocity.init.gradle
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.4697730Z   DEVELOCITY_INJECTION_CUSTOM_VALUE: gradle-actions
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.4698084Z   GITHUB_DEPENDENCY_GRAPH_ENABLED: false
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.4698392Z ##[endgroup]
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.6925787Z ...E.
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.6926358Z ======================================================================
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.6927549Z ERROR: test_real_source_archive_preserves_unix_wrapper_mode (__main__.Navigation.test_real_source_archive_preserves_unix_wrapper_mode)
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.6928403Z ----------------------------------------------------------------------
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.6928901Z Traceback (most recent call last):
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.6935025Z   File "/home/runner/work/World-Wide-Power-Grid/World-Wide-Power-Grid/tools/test_sdk_documentation.py", line 27, in test_real_source_archive_preserves_unix_wrapper_mode
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.6935966Z     with tempfile.TemporaryDirectory(dir=root/'build') as directory:
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.6936480Z          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.6937472Z   File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/tempfile.py", line 886, in __init__
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.6938725Z     self.name = mkdtemp(suffix, prefix, dir)
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.6939311Z                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.6940225Z   File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/tempfile.py", line 384, in mkdtemp
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.6941088Z     _os.mkdir(file, 0o700)
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.6942138Z FileNotFoundError: [Errno 2] No such file or directory: '/home/runner/work/World-Wide-Power-Grid/World-Wide-Power-Grid/build/tmppr00xoxm'
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.6942776Z 
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.6943230Z ----------------------------------------------------------------------
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.6943624Z Ran 5 tests in 0.003s
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.6943784Z 
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.6943886Z FAILED (errors=1)
+authoring (ubuntu-24.04, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:09.7009069Z ##[error]Process completed with exit code 1.
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	﻿2026-10-12T19:54:23.0161296Z ##[group]Run python tools/test_sdk_documentation.py
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:23.0161896Z ^[[36;1mpython tools/test_sdk_documentation.py^[[0m
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:23.0201283Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:23.0201834Z env:
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:23.0202295Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:23.0202964Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:23.0203583Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:23.0204164Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:23.0204723Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:23.0205269Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:23.0205811Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:23.0206359Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:23.0206998Z   GRADLE_ACTION_ID: gradle/actions/setup-gradle
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:23.0207632Z   GRADLE_USER_HOME: /home/runner/.gradle
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:23.0208093Z   GRADLE_BUILD_ACTION_SETUP_COMPLETED: true
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:23.0208556Z   GRADLE_BUILD_ACTION_CACHE_RESTORED: true
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:23.0209136Z   DEVELOCITY_INJECTION_INIT_SCRIPT_NAME: gradle-actions.inject-develocity.init.gradle
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:23.0209787Z   DEVELOCITY_INJECTION_CUSTOM_VALUE: gradle-actions
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:23.0210248Z   GITHUB_DEPENDENCY_GRAPH_ENABLED: false
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:23.0210681Z ##[endgroup]
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:24.8098861Z ...E.
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:24.8099652Z ======================================================================
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:24.8100738Z ERROR: test_real_source_archive_preserves_unix_wrapper_mode (__main__.Navigation.test_real_source_archive_preserves_unix_wrapper_mode)
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:24.8101831Z ----------------------------------------------------------------------
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:24.8102405Z Traceback (most recent call last):
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:24.8109408Z   File "/home/runner/work/World-Wide-Power-Grid/World-Wide-Power-Grid/tools/test_sdk_documentation.py", line 27, in test_real_source_archive_preserves_unix_wrapper_mode
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:24.8110437Z     with tempfile.TemporaryDirectory(dir=root/'build') as directory:
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:24.8111012Z          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:24.8111703Z   File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/tempfile.py", line 886, in __init__
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:24.8112320Z     self.name = mkdtemp(suffix, prefix, dir)
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:24.8112774Z                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:24.8113399Z   File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/tempfile.py", line 384, in mkdtemp
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:24.8114003Z     _os.mkdir(file, 0o700)
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:24.8114702Z FileNotFoundError: [Errno 2] No such file or directory: '/home/runner/work/World-Wide-Power-Grid/World-Wide-Power-Grid/build/tmp3qoc7kdr'
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:24.8115276Z 
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:24.8115528Z ----------------------------------------------------------------------
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:24.8116033Z Ran 5 tests in 0.016s
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:24.8116266Z 
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:24.8116448Z FAILED (errors=1)
+authoring (ubuntu-24.04, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:24.8212143Z ##[error]Process completed with exit code 1.
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	﻿2026-10-12T19:54:25.6626784Z ##[group]Run python tools/test_sdk_documentation.py
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:25.6627533Z ^[[36;1mpython tools/test_sdk_documentation.py^[[0m
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:25.6651609Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:25.6652217Z env:
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:25.6652674Z   JAVA_HOME: C:\hostedtoolcache\windows\Java_Temurin-Hotspot_jdk\21.0.12-101.0\x64
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:25.6653367Z   JAVA_HOME_21_X64: C:\hostedtoolcache\windows\Java_Temurin-Hotspot_jdk\21.0.12-101.0\x64
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:25.6653980Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:25.6655013Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:25.6655847Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:25.6656435Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:25.6656961Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:25.6657604Z   GRADLE_ACTION_ID: gradle/actions/setup-gradle
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:25.6658053Z   GRADLE_USER_HOME: D:\a\.gradle
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:25.6658565Z   GRADLE_BUILD_ACTION_SETUP_COMPLETED: true
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:25.6659009Z   GRADLE_BUILD_ACTION_CACHE_RESTORED: true
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:25.6659573Z   DEVELOCITY_INJECTION_INIT_SCRIPT_NAME: gradle-actions.inject-develocity.init.gradle
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:25.6660194Z   DEVELOCITY_INJECTION_CUSTOM_VALUE: gradle-actions
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:25.6660609Z   GITHUB_DEPENDENCY_GRAPH_ENABLED: false
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:25.6661000Z ##[endgroup]
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:27.5201904Z ...E.
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:27.5202656Z ======================================================================
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:27.5203501Z ERROR: test_real_source_archive_preserves_unix_wrapper_mode (__main__.Navigation.test_real_source_archive_preserves_unix_wrapper_mode)
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:27.5204243Z ----------------------------------------------------------------------
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:27.5204767Z Traceback (most recent call last):
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:27.5210649Z   File "D:\a\World-Wide-Power-Grid\World-Wide-Power-Grid\tools\test_sdk_documentation.py", line 27, in test_real_source_archive_preserves_unix_wrapper_mode
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:27.5211548Z     with tempfile.TemporaryDirectory(dir=root/'build') as directory:
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:27.5212146Z          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:27.5212760Z   File "C:\hostedtoolcache\windows\Python\3.12.10\x64\Lib\tempfile.py", line 886, in __init__
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:27.5213337Z     self.name = mkdtemp(suffix, prefix, dir)
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:27.5213767Z                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:27.5214317Z   File "C:\hostedtoolcache\windows\Python\3.12.10\x64\Lib\tempfile.py", line 384, in mkdtemp
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:27.5214870Z     _os.mkdir(file, 0o700)
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:27.5216059Z FileNotFoundError: [WinError 3] The system cannot find the path specified: 'D:\\a\\World-Wide-Power-Grid\\World-Wide-Power-Grid\\build\\tmpxbw_tmg8'
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:27.5216629Z 
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:27.5216884Z ----------------------------------------------------------------------
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:27.5217346Z Ran 5 tests in 0.023s
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:27.5217545Z 
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:27.5217719Z FAILED (errors=1)
+authoring (windows-latest, NATIVE)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:27.5476818Z ##[error]Process completed with exit code 1.
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	﻿2026-10-12T19:54:28.6964911Z ##[group]Run python tools/test_sdk_documentation.py
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:28.6965364Z ^[[36;1mpython tools/test_sdk_documentation.py^[[0m
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:28.6983320Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:28.6983679Z env:
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:28.6983965Z   JAVA_HOME: C:\hostedtoolcache\windows\Java_Temurin-Hotspot_jdk\21.0.12-101.0\x64
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:28.6984416Z   JAVA_HOME_21_X64: C:\hostedtoolcache\windows\Java_Temurin-Hotspot_jdk\21.0.12-101.0\x64
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:28.6984850Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:28.6985238Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:28.6985623Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:28.6985969Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:28.6986304Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:28.6986646Z   GRADLE_ACTION_ID: gradle/actions/setup-gradle
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:28.6986909Z   GRADLE_USER_HOME: D:\a\.gradle
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:28.6987141Z   GRADLE_BUILD_ACTION_SETUP_COMPLETED: true
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:28.6987396Z   GRADLE_BUILD_ACTION_CACHE_RESTORED: true
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:28.6987762Z   DEVELOCITY_INJECTION_INIT_SCRIPT_NAME: gradle-actions.inject-develocity.init.gradle
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:28.6988148Z   DEVELOCITY_INJECTION_CUSTOM_VALUE: gradle-actions
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:28.6988622Z   GITHUB_DEPENDENCY_GRAPH_ENABLED: false
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:28.6988861Z ##[endgroup]
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:31.2396719Z ...E.
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:31.2397207Z ======================================================================
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:31.2398313Z ERROR: test_real_source_archive_preserves_unix_wrapper_mode (__main__.Navigation.test_real_source_archive_preserves_unix_wrapper_mode)
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:31.2399142Z ----------------------------------------------------------------------
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:31.2399661Z Traceback (most recent call last):
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:31.2405899Z   File "D:\a\World-Wide-Power-Grid\World-Wide-Power-Grid\tools\test_sdk_documentation.py", line 27, in test_real_source_archive_preserves_unix_wrapper_mode
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:31.2406615Z     with tempfile.TemporaryDirectory(dir=root/'build') as directory:
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:31.2406952Z          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:31.2407394Z   File "C:\hostedtoolcache\windows\Python\3.12.10\x64\Lib\tempfile.py", line 886, in __init__
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:31.2407822Z     self.name = mkdtemp(suffix, prefix, dir)
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:31.2408073Z                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:31.2408452Z   File "C:\hostedtoolcache\windows\Python\3.12.10\x64\Lib\tempfile.py", line 384, in mkdtemp
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:31.2408816Z     _os.mkdir(file, 0o700)
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:31.2409319Z FileNotFoundError: [WinError 3] The system cannot find the path specified: 'D:\\a\\World-Wide-Power-Grid\\World-Wide-Power-Grid\\build\\tmp5b_00f6u'
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:31.2409758Z 
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:31.2409900Z ----------------------------------------------------------------------
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:31.2410196Z Ran 5 tests in 0.027s
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:31.2410318Z 
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:31.2410400Z FAILED (errors=1)
+authoring (windows-latest, JAVA)	Run python tools/test_sdk_documentation.py	2026-10-12T19:54:31.2663198Z ##[error]Process completed with exit code 1.
