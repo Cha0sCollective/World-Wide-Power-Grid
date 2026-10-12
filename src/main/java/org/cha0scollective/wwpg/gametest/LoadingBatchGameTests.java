@@ -32,6 +32,44 @@ public final class LoadingBatchGameTests {
     @BeforeBatch(batch="wwpg_loading_converter") public static void configureConverter(ServerLevel level) { DynamicGameTests.substeps(level); }
     @BeforeBatch(batch="wwpg_loading_orphan") public static void configureOrphan(ServerLevel level) { DynamicGameTests.substeps(level); }
     @BeforeBatch(batch="wwpg_loading_native_storage") public static void configureNativeStorage(ServerLevel level) { DynamicGameTests.substeps(level); }
+    @BeforeBatch(batch="wwpg_loading_warmup") public static void configureWarmup(ServerLevel level) { DynamicGameTests.substeps(level); }
+    @GameTest(template="empty", batch="wwpg_loading_warmup", timeoutTicks=20)
+    public static void convergedWarmupHoldsStorageWithoutConcealingSolverFailure(GameTestHelper h) {
+        var network = new org.patryk3211.powergrid.electricity.sim.ElectricalNetwork(false);
+        network.switchBackend(org.patryk3211.powergrid.config.CSolver.SolverBackend.valueOf(System.getProperty("wwpg.test.backend", "NATIVE")));
+        try {
+            var a = new org.patryk3211.powergrid.electricity.sim.node.FloatingNode();
+            var b = new org.patryk3211.powergrid.electricity.sim.node.FloatingNode();
+            network.addNodes(a,b);
+            network.addWire(new org.patryk3211.powergrid.electricity.sim.ElectricWire(.005,b,null));
+            var source = new org.patryk3211.powergrid.electricity.sim.node.CurrentSourceWire(a,b,1000);
+            source.setCurrent(20000); network.addWire(source);
+            var capacitor = new org.patryk3211.powergrid.electricity.sim.special.CRSeriesWire(.01,1,a,b);
+            capacitor.setVoltage(5); network.addWire(capacitor);
+            network.prepare(16); network.warmUp(1);
+            var history = (org.cha0scollective.wwpg.mixin.CapacitorHistoryAccessor) capacitor;
+            var solver = (org.cha0scollective.wwpg.mixin.PgSolverWarmupAccessor) ((org.cha0scollective.wwpg.mixin.ElectricalNetworkAccessor) network).wwpg$solver();
+            var bridge = org.cha0scollective.wwpg.bridge.Bridges.get(h.getLevel());
+            var diagnostics = bridge.diagnostics();
+            double saved = history.wwpg$storedVoltage();
+            org.cha0scollective.wwpg.bridge.ServerElectricalSchedule.solve(h.getLevel(),network);
+            h.assertTrue(!network.isConverged() && solver.wwpg$warmUpTicks()==0,"Backend did not retain its converged warm-up hold");
+            h.assertTrue(history.wwpg$storedVoltage()==saved,"Warm-up advanced native capacitor history");
+            h.assertTrue(bridge.diagnostics().equals(diagnostics),"Normal converged warm-up was reported as a solver failure");
+            org.cha0scollective.wwpg.bridge.ServerElectricalSchedule.solve(h.getLevel(),network);
+            h.assertTrue(network.isConverged() && history.wwpg$storedVoltage()!=saved,"Storage failed to resume after warm-up");
+            saved=history.wwpg$storedVoltage();
+            var iterations=network.maxIterations;
+            network.maxIterations=hooks->1; source.setCurrent(60000);
+            org.cha0scollective.wwpg.bridge.ServerElectricalSchedule.solve(h.getLevel(),network);
+            h.assertTrue(!network.isConverged() && history.wwpg$storedVoltage()==saved,"Rejected trial advanced native storage");
+            h.assertTrue(!bridge.diagnostics().equals(diagnostics) && bridge.diagnostics().stream().anyMatch(message->message.contains("PG electrical substep did not converge")),"True nonconvergence was concealed as warm-up");
+            network.maxIterations=iterations;
+            org.cha0scollective.wwpg.bridge.ServerElectricalSchedule.solve(h.getLevel(),network);
+            h.assertTrue(network.isConverged(),"Circuit did not recover after the iteration budget was restored");
+            h.succeed();
+        } finally { network.cleanup(); }
+    }
     private static void place(GameTestHelper h, BlockPos relative, net.minecraft.world.level.block.Block block) {
         h.setBlock(relative.below(), Blocks.STONE); h.setBlock(relative, block);
     }

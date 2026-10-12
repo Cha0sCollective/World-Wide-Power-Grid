@@ -3,6 +3,8 @@ package org.cha0scollective.wwpg.bridge;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import org.cha0scollective.wwpg.mixin.WorldNetworksAccessor;
+import org.cha0scollective.wwpg.mixin.ElectricalNetworkAccessor;
+import org.cha0scollective.wwpg.mixin.PgSolverWarmupAccessor;
 import org.patryk3211.powergrid.collections.ModdedConfigs;
 import org.patryk3211.powergrid.electricity.GlobalElectricNetworks;
 import org.patryk3211.powergrid.electricity.WorldNetworks;
@@ -74,14 +76,22 @@ public final class ServerElectricalSchedule {
         var api = org.cha0scollective.wwpg.extension.ApiCircuits.get(level);
         api.before(network, org.cha0scollective.wwpg.extension.ApiCircuits.step(level,network));
         try {
+            var solver = ((ElectricalNetworkAccessor) network).wwpg$solver();
+            int warmBefore = solver instanceof PgSolverWarmupAccessor warm ? warm.wwpg$warmUpTicks() : 0;
             network.singleTick();
             // A backend can return a finite trial state without accepting it.
             // CEE history/gameplay must observe the same acceptance boundary as
             // general API models, including ordinary native warm-up substeps.
             if (!network.isConverged()) {
-                var error = new IllegalStateException("PG electrical substep did not converge");
-                api.solveFailure(network, error);
-                bridge.reject(network, error);
+                int warmAfter = solver instanceof PgSolverWarmupAccessor warm ? warm.wwpg$warmUpTicks() : 0;
+                if (SubstepAcceptance.settling(warmBefore, warmAfter, false)) {
+                    api.invalidate(network);
+                    bridge.unavailable(network);
+                } else {
+                    var error = new IllegalStateException("PG electrical substep did not converge (warm-up " + warmBefore + " -> " + warmAfter + ")");
+                    api.solveFailure(network, error);
+                    bridge.reject(network, error);
+                }
             }
         }
         catch(RuntimeException | LinkageError error) { api.solveFailure(network,error);bridge.reject(network,error); }

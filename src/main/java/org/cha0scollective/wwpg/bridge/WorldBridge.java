@@ -737,6 +737,10 @@ public final class WorldBridge {
     /** Keep a rejected shared frame out of CEE gameplay and extension measurements. */
     public void reject(ElectricalNetwork network,Throwable error) {
         diagnostic("Shared electrical solve failed: "+error.getClass().getSimpleName()+": "+error.getMessage());
+        unavailable(network);
+    }
+    /** Keep normal upstream settling out of history/gameplay without recording a false solver error. */
+    public void unavailable(ElectricalNetwork network) {
         failedAdapterNetworks.add(network);
         for(var affected:resultNodes.getOrDefault(network,List.of())) {
             var owner=ownerOf(affected.key);if(owner!=null)failedAdapterDevices.add(owner);
