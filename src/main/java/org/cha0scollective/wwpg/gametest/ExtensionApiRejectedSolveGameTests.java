@@ -105,6 +105,9 @@ public final class ExtensionApiRejectedSolveGameTests {
         });
         helper.runAtTickTime(22, () -> {
             assertRejected(helper, apiCapacitor, ceeCapacitor);
+            helper.assertTrue(org.cha0scollective.wwpg.bridge.Bridges.get(level).diagnostics().stream()
+                            .anyMatch(message -> message.contains("PG electrical substep did not converge")),
+                    "True backend nonconvergence was concealed as ordinary warm-up");
             var capacitor = DevicesSavedData.load(level).getDevice(ceeCapacitor, CapacitorDevice.class);
             helper.assertTrue(capacitor.lastVoltage == nativeSaved[0] && capacitor.temp == nativeSaved[1]
                             && capacitor.properties.lastVoltage == nativeSaved[0],

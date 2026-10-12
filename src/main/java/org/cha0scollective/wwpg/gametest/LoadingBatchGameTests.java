@@ -33,42 +33,49 @@ public final class LoadingBatchGameTests {
     @BeforeBatch(batch="wwpg_loading_orphan") public static void configureOrphan(ServerLevel level) { DynamicGameTests.substeps(level); }
     @BeforeBatch(batch="wwpg_loading_native_storage") public static void configureNativeStorage(ServerLevel level) { DynamicGameTests.substeps(level); }
     @BeforeBatch(batch="wwpg_loading_warmup") public static void configureWarmup(ServerLevel level) { DynamicGameTests.substeps(level); }
-    @GameTest(template="empty", batch="wwpg_loading_warmup", timeoutTicks=20)
-    public static void convergedWarmupHoldsStorageWithoutConcealingSolverFailure(GameTestHelper h) {
-        var network = new org.patryk3211.powergrid.electricity.sim.ElectricalNetwork(false);
-        network.switchBackend(org.patryk3211.powergrid.config.CSolver.SolverBackend.valueOf(System.getProperty("wwpg.test.backend", "NATIVE")));
-        try {
-            var a = new org.patryk3211.powergrid.electricity.sim.node.FloatingNode();
-            var b = new org.patryk3211.powergrid.electricity.sim.node.FloatingNode();
-            network.addNodes(a,b);
-            network.addWire(new org.patryk3211.powergrid.electricity.sim.ElectricWire(.005,b,null));
-            var source = new org.patryk3211.powergrid.electricity.sim.node.CurrentSourceWire(a,b,1000);
-            source.setCurrent(20000); network.addWire(source);
-            var capacitor = new org.patryk3211.powergrid.electricity.sim.special.CRSeriesWire(.01,1,a,b);
-            capacitor.setVoltage(5); network.addWire(capacitor);
-            network.prepare(16); network.warmUp(1);
-            var history = (org.cha0scollective.wwpg.mixin.CapacitorHistoryAccessor) capacitor;
-            var solver = (org.cha0scollective.wwpg.mixin.PgSolverWarmupAccessor) ((org.cha0scollective.wwpg.mixin.ElectricalNetworkAccessor) network).wwpg$solver();
-            var bridge = org.cha0scollective.wwpg.bridge.Bridges.get(h.getLevel());
-            var diagnostics = bridge.diagnostics();
-            double saved = history.wwpg$storedVoltage();
-            org.cha0scollective.wwpg.bridge.ServerElectricalSchedule.solve(h.getLevel(),network);
-            h.assertTrue(!network.isConverged() && solver.wwpg$warmUpTicks()==0,"Backend did not retain its converged warm-up hold");
-            h.assertTrue(history.wwpg$storedVoltage()==saved,"Warm-up advanced native capacitor history");
-            h.assertTrue(bridge.diagnostics().equals(diagnostics),"Normal converged warm-up was reported as a solver failure");
-            org.cha0scollective.wwpg.bridge.ServerElectricalSchedule.solve(h.getLevel(),network);
-            h.assertTrue(network.isConverged() && history.wwpg$storedVoltage()!=saved,"Storage failed to resume after warm-up");
-            saved=history.wwpg$storedVoltage();
-            var iterations=network.maxIterations;
-            network.maxIterations=hooks->1; source.setCurrent(60000);
-            org.cha0scollective.wwpg.bridge.ServerElectricalSchedule.solve(h.getLevel(),network);
-            h.assertTrue(!network.isConverged() && history.wwpg$storedVoltage()==saved,"Rejected trial advanced native storage");
-            h.assertTrue(!bridge.diagnostics().equals(diagnostics) && bridge.diagnostics().stream().anyMatch(message->message.contains("PG electrical substep did not converge")),"True nonconvergence was concealed as warm-up");
-            network.maxIterations=iterations;
-            org.cha0scollective.wwpg.bridge.ServerElectricalSchedule.solve(h.getLevel(),network);
-            h.assertTrue(network.isConverged(),"Circuit did not recover after the iteration budget was restored");
-            h.succeed();
-        } finally { network.cleanup(); }
+    @GameTest(template="empty", batch="wwpg_loading_warmup", timeoutTicks=80)
+    public static void convergedWarmupHoldsCeeStorageWithoutFalseSolverErrors(GameTestHelper h) {
+        var source=new BlockPos(1,2,1); var capacitor=new BlockPos(4,2,1);
+        place(h,source,ModdedBlocks.CREATIVE_VOLTAGE_SOURCE.get()); place(h,capacitor,CEEBlocks.CAPACITOR.get());
+        var level=h.getLevel(); var s=h.absolutePos(source); var c=h.absolutePos(capacitor);
+        double[] saved={0}; float[] temperature={0};
+        var diagnostics=new java.util.ArrayList<String>();
+        h.runAtTickTime(5,()->{
+            ((CreativeSourceBlockEntity)level.getBlockEntity(s)).setValue(10);
+            DevicesSavedData.load(level).getDevice(c,CapacitorDevice.class).capacitance=.01;
+            wire(h,s,c);
+        });
+        h.runAtTickTime(20,()->{
+            h.assertTrue(ElectricalMeasurements.readVoltageBetween(level,c,0,c,1).status()==MeasurementStatus.VALID,"Storage was not ready before warm-up");
+            var device=DevicesSavedData.load(level).getDevice(c,CapacitorDevice.class);
+            saved[0]=device.lastVoltage; temperature[0]=device.temp;
+            diagnostics.addAll(org.cha0scollective.wwpg.bridge.Bridges.get(level).diagnostics());
+            var network=new org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint(c,0).getNode(level).getNetwork();
+            ((CreativeSourceBlockEntity)level.getBlockEntity(s)).setValue(30);
+            network.warmUp(1);
+        });
+        h.runAtTickTime(21,()->{
+            var device=DevicesSavedData.load(level).getDevice(c,CapacitorDevice.class);
+            // GameTest actions run before CEE's end-of-tick commit. Tick 20
+            // still commits its already solved frame after the source edit.
+            // Capture here, then hold the next complete frame as well.
+            h.assertTrue(device.properties.lastVoltage==device.lastVoltage,"Warm-up retained uncommitted CEE numerical history");
+            saved[0]=device.lastVoltage; temperature[0]=device.temp;
+            h.assertTrue(ElectricalMeasurements.readVoltageBetween(level,c,0,c,1).status()!=MeasurementStatus.VALID,"Warm-up frame exposed accepted gameplay measurements");
+            h.assertTrue(org.cha0scollective.wwpg.bridge.Bridges.get(level).diagnostics().equals(diagnostics),"Converged warm-up was reported as a solver failure");
+            new org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint(c,0).getNode(level).getNetwork().warmUp(1);
+        });
+        h.runAtTickTime(22,()->{
+            var device=DevicesSavedData.load(level).getDevice(c,CapacitorDevice.class);
+            h.assertTrue(device.lastVoltage==saved[0] && device.properties.lastVoltage==saved[0] && device.temp==temperature[0],"Warm-up committed CEE charge or heating history");
+            h.assertTrue(ElectricalMeasurements.readVoltageBetween(level,c,0,c,1).status()!=MeasurementStatus.VALID,"Second warm-up frame exposed accepted gameplay measurements");
+            h.assertTrue(org.cha0scollective.wwpg.bridge.Bridges.get(level).diagnostics().equals(diagnostics),"Second converged warm-up was reported as a solver failure");
+        });
+        h.runAtTickTime(35,()->{
+            h.assertTrue(ElectricalMeasurements.readVoltageBetween(level,c,0,c,1).status()==MeasurementStatus.VALID,"Storage failed to resume after warm-up");
+            h.assertTrue(DevicesSavedData.load(level).getDevice(c,CapacitorDevice.class).lastVoltage>saved[0],"Storage did not respond to the changed source after warm-up");
+            h.assertTrue(org.cha0scollective.wwpg.bridge.Bridges.get(level).diagnostics().equals(diagnostics),"Recovery introduced a solver error"); h.succeed();
+        });
     }
     private static void place(GameTestHelper h, BlockPos relative, net.minecraft.world.level.block.Block block) {
         h.setBlock(relative.below(), Blocks.STONE); h.setBlock(relative, block);
