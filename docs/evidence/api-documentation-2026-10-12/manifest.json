@@ -286,5 +286,9 @@
   "ci-build-native-pinout-600s-watchdog/timeout.json": {
     "sha256": "41fcd23f732c70584545df1e3c8b43fd5012f03c705beb39f34b4de2d08ec520",
     "bytes": 765
+  },
+  "ci-linux-java-startup-audit-failure.log": {
+    "sha256": "44705ed0ccdc80f1d9743e5ea0a05b0b052beded591d875641fea52489fd42e1",
+    "bytes": 264844
   }
 }

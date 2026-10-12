@@ -5,8 +5,8 @@ gradle.projectsEvaluated {
     def frozen = p.file(p.providers.gradleProperty('docRuntimeJar').get())
     if (!starter.isFile() || !frozen.isFile()) throw new GradleException('Supply the independently built starter and frozen released runtime')
     def source = p.sourceSets.create('docAcceptance') {
-        java.srcDir p.file('tools/documentation_acceptance/src')
-        resources.srcDir p.file('tools/documentation_acceptance/resources')
+        java.srcDir p.file(p.providers.gradleProperty('docHelperSources').getOrElse('tools/documentation_acceptance/src'))
+        resources.srcDir p.file(p.providers.gradleProperty('docHelperResources').getOrElse('tools/documentation_acceptance/resources'))
         compileClasspath = p.sourceSets.main.compileClasspath + p.files(starter, frozen)
     }
     def helper = p.tasks.register('docAcceptanceJar', Jar) {
@@ -39,8 +39,9 @@ gradle.projectsEvaluated {
         }
         doLast {
             def text = extensions.extraProperties.get('documentationOutput').toString('UTF-8')
-            if (!text.contains('All 4 required tests passed') || text.contains('required tests failed'))
-                throw new GradleException('Documentation acceptance did not complete all four tests')
+            def required = p.providers.gradleProperty('docExpectedTests').getOrElse('4').toInteger()
+            if (required < 1 || !text.contains("All ${required} required tests passed") || text.contains('required tests failed'))
+                throw new GradleException("Documentation acceptance did not complete all ${required} required tests")
         }
     }
     p.tasks.register('runDocumentationClient', JavaExec) {

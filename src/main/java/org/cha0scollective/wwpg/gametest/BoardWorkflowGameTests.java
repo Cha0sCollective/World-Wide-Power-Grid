@@ -25,6 +25,8 @@ import org.patryk3211.powergrid.circuits.editor.CircuitDesignTableBlockEntity;
 import org.patryk3211.powergrid.circuits.schematic.*;
 import org.patryk3211.powergrid.collections.ModdedBlocks;
 import org.patryk3211.powergrid.collections.ModdedItems;
+import org.patryk3211.powergrid.electricity.resistor.ResistorBlockEntity;
+import org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint;
 
 @GameTestHolder("wwpg")
 @PrefixGameTestTemplate(false)
@@ -50,7 +52,25 @@ public final class BoardWorkflowGameTests {
             ++count;
         }
         h.assertTrue(count == 28, "Pinned board component inventory changed: " + count);
-        DynamicGameTests.audit(h); h.succeed();
+        // Assembly is synchronous and may be the first test in a fresh world.
+        // Establish our own mixed circuit before requiring an observed backend.
+        var a = new BlockPos(1, 2, 1); var r = new BlockPos(4, 2, 1);
+        for (var pos : new BlockPos[] {a, r}) h.setBlock(pos.below(), Blocks.STONE);
+        h.setBlock(a, CEEBlocks.CREATIVE_BATTERY.get());
+        h.setBlock(r, ModdedBlocks.CREATIVE_RESISTOR.get());
+        var source = h.absolutePos(a); var resistor = h.absolutePos(r);
+        h.runAtTickTime(5, () -> {
+            DevicesSavedData.load(h.getLevel()).getDevice(source, CreativeBatteryDevice.class).voltage = 10;
+            ((ResistorBlockEntity) h.getLevel().getBlockEntity(resistor)).setValue(1000);
+            WiringGameTests.connect(h, source, 1, resistor, 0, false);
+            WiringGameTests.connect(h, source, 0, resistor, 1, false);
+        });
+        h.runAtTickTime(20, () -> {
+            double voltage = new BlockWireEndpoint(resistor, 0).getNode(h.getLevel()).getVoltage()
+                    - new BlockWireEndpoint(resistor, 1).getNode(h.getLevel()).getVoltage();
+            BoardComponentGameTests.near(h, voltage, 10, 0.02, "Assembly audit mixed load voltage");
+            DynamicGameTests.audit(h); h.succeed();
+        });
     }
 
     @GameTest(template = "empty", timeoutTicks = 90)
