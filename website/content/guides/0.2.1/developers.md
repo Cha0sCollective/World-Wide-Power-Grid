@@ -1,5 +1,9 @@
 **API 1.0.0 is available in WWPG 0.2.1.** Build stationary machines and instruments, add custom CEE panel properties, or connect Power Grid's native board components to mixed circuits. The mod version and API version are independent.
 
+This guide assumes you know Java, but does not assume you have written a NeoForge mod. Start with the [single-device tutorial]({{docs}}create-addon/). The nine-device example and lifecycle contract remain useful references once your first block works.
+
+**Documentation update: October 12, 2026.** Corrections describe existing API 1.0.0 behavior. Released binaries, source ZIPs and original Javadoc snapshots are unchanged.
+
 ## Choose your integration
 
 | Route                               | Contract                                                            | Working example                                                                       |
@@ -40,12 +44,15 @@ Inside the developer SDK bundle, extract `examples/wwpg-api-example-1.0.0-source
 Run from that extracted project, using the absolute path of your extracted Maven repository:
 
 ```sh title="Linux / macOS shell"
-./gradlew build -PapiRepository=/absolute/path/to/wwpg-api-maven --no-daemon
+chmod +x gradlew
+./gradlew build "-PapiRepository=/absolute/path/to/wwpg-api-maven" --no-daemon
 ```
 
 ```powershell title="Windows PowerShell"
-.\gradlew.bat build -PapiRepository=C:/dev/wwpg-api-maven --no-daemon
+.\gradlew.bat build "-PapiRepository=C:/dev/wwpg-api-maven" --no-daemon
 ```
+
+The released ZIPs can lose the wrapper's executable permission on Unix; the `chmod` step repairs it. Run these commands from the project containing `settings.gradle`, not from the outer SDK or Maven directory. A repository path containing spaces still works when the entire `-PapiRepository=...` argument is quoted.
 
 The output is `build/libs/wwpg-api-example-1.0.0.jar`. Install it alongside WWPG 0.2.1 and every required mod on the server and each client. SDK jars stay in your development environment.
 
@@ -71,6 +78,8 @@ Register during NeoForge's `RegisterCapabilitiesEvent` using `ElectricalProvider
 
 `terminals()` is a read-only immutable geometry query that can run on either logical side. It must not mutate the world or advance electrical history. Keep factories and geometry queries free of client-only classes.
 
+`prepare()` must retain exactly the same terminal records returned by `terminals()`, compared as a set. Keys, native numbers, positions and hit radii all matter; ordering does not. A disabled device with wiring points keeps those terminals and opens a switch. `CircuitDescription.empty()` requires an empty geometry query too. See [constructor limits]({{docs}}api-limits/) before accepting configuration values.
+
 `prepare()` captures immutable topology and parameters on the authoritative server thread. `commit()` receives one snapshot per participating server tick after PG's substeps. Apply gameplay only when the status is `VALID`. `NOT_READY`, `ISOLATED`, and `SOLVE_FAILED` mean unavailable readings, including empty result/history maps; they are not measured zeroes or permission to reuse stale readings.
 
 Use stable namespaced provider IDs, device slots, terminal keys and native numbers, node keys, and independent element IDs. Parallel elements need separate IDs even when their endpoints match. Preserve accepted capacitor voltage and inductor current in versioned native saved data; restore initial values only when reconstructing elements. Invalid results must not overwrite that history.
@@ -95,6 +104,12 @@ Static adapters capture `CeeElectricalParameters`. Dynamic adapters use accepted
 
 The PG shunt keeps PG's native component registration, model, damage, schematic identity, and assembly-item workflow. It does not gain a duplicate WWPG device model. Consult the [native example implementation]({{source}}/examples/cee-addon/src/main/java/org/cha0scollective/wwpg/examples/upstream/UpstreamExample.java) and [CEE reference](/api/0.2.1/cee/) for the separate adapter contract.
 
+## Develop your own content
+
+[Create an adjustable load]({{docs}}create-addon/) provides a complete small project and explains its naming, registration, models and saved settings. [Build, install and debug]({{docs}}addon-workflow/) explains the edit loop and debugger attachment. [Test and troubleshoot]({{docs}}addon-testing/) gives symptoms, diagnostics and an author checklist.
+
+The existing examples do not define project-managed game runs. Build their jars and install them into a separate client/server instance; the workflow guide makes that route explicit.
+
 ## Test in the workshop
 
 The [Extension API Workshop]({{docs}}workshop/) demonstrates nine general devices, a CEE storage indicator, and a PG shunt board. Install **both example addon jars** for this save. Ordinary WWPG factories do not require either example. [Downloads and worlds](/downloads/#worlds) include the base and optional Pinout editions.
@@ -107,4 +122,4 @@ Use the supported API artifacts and pinned upstream contracts. WWPG's bridge, wi
 
 The optional [Lua integration]({{docs}}lua/) belongs to Pinout's upstream API and is separate from this Java SDK. The future Ch4oS player manual will teach the installed pack's gameplay edition.
 
-[Complete release-pinned developer contract]({{source}}/docs/EXTENSION_API.md) · [Java reference](/api/0.2.1/) · [General example guide]({{source}}/examples/extension-addon/README.md) · [Native example guide]({{source}}/examples/cee-addon/README.md)
+[Complete release-pinned developer contract]({{source}}/docs/EXTENSION_API.md) · [Java reference](/api/0.2.1/) · [General example guide]({{docs}}general-example/) · [Native example guide]({{docs}}native-example/)

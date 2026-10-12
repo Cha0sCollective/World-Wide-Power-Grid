@@ -4,11 +4,14 @@ import {
   mkdirSync,
   rmSync,
   existsSync,
+  readdirSync,
 } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { resolve, dirname, posix, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { renderReferenceScript } from './reference-script.mjs';
+import { loadCorrections, annotateReference } from './reference-corrections.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const project = JSON.parse(
@@ -22,6 +25,24 @@ if (!generated.startsWith(root + '/') && !generated.startsWith(root + '\\'))
 rmSync(generated, { recursive: true, force: true });
 rmSync(apiOutput, { recursive: true, force: true });
 mkdirSync(generated, { recursive: true });
+const python = process.env.WWPG_PYTHON ?? (process.platform === 'win32' ? 'python' : 'python3');
+execFileSync(python, [resolve(root, 'scripts/prepare-starter.py')], { stdio: 'inherit' });
+const starter = resolve(root, '../examples/adjustable-load');
+const starterPaths = ['settings.gradle', 'build.gradle', 'gradle.properties', 'LICENSE'];
+const collectStarter = (directory, prefix) => {
+  for (const item of readdirSync(directory, { withFileTypes: true })) {
+    if (item.isSymbolicLink()) throw new Error('Starter source must not contain symlinks');
+    const relative = prefix + item.name;
+    if (item.isDirectory()) collectStarter(resolve(directory, item.name), relative + '/');
+    else if (/\.(java|json|toml)$/.test(relative)) starterPaths.push(relative);
+  }
+};
+collectStarter(resolve(starter, 'src'), 'src/');
+const starterFiles = starterPaths.sort().map(file => {
+  const language = file.endsWith('.java') ? 'java' : file.endsWith('.json') ? 'json' : file.endsWith('.toml') ? 'toml' : file.endsWith('.gradle') ? 'groovy' : 'properties';
+  return '<details><summary><code>' + file + '</code></summary>\n\n```' + language + '\n' + readFileSync(resolve(starter, file), 'utf8') + '\n```\n\n</details>\n';
+}).join('\n');
+
 
 function formatNeoForge(version) {
   const [primary, ...alternatives] = version.split(' / ');
@@ -86,6 +107,7 @@ for (const release of project.releases) {
         JSON.stringify(release.api.packages)
     )
       throw new Error('API snapshot release or exported packages mismatch');
+    const corrections = loadCorrections(root, release, apiManifest);
     const archive = resolve(base, 'java-reference');
     const editionOutput = resolve(apiOutput, release.version);
     for (const [file, expected] of Object.entries(apiManifest.files)) {
@@ -106,8 +128,7 @@ for (const release of project.releases) {
         const navigation = `<nav aria-label="WWPG documentation" style="padding:14px 20px;background:#0b0f10;color:#e9ece5;font:14px Arial,sans-serif"><a style="color:#c5ddbe" href="/api/${release.version}/">WWPG ${release.version} / API ${release.api.version}</a> / <a style="color:#c5ddbe" href="/docs/${release.version}/developers/">Addon guide</a> / <a style="color:#c5ddbe" href="/docs/">Documentation editions</a></nav>`;
         writeFileSync(
           output,
-          bytes
-            .toString('utf8')
+          annotateReference(bytes.toString('utf8'), file, corrections, project.repository)
             .replace(
               /<title>(.*?)<\/title>/s,
               `<title>WWPG ${release.version} / API ${release.api.version} — $1</title>`,
@@ -141,7 +162,7 @@ for (const release of project.releases) {
         ? `:::note[World downloads]\nDownload and extract the [example-worlds bundle](${project.repository}/releases/download/${release.tag}/${release.downloads.worlds}). The four world ZIPs are in \`worlds/\`; both workshop addon jars are in \`workshop-mods/\`. World download links below open this shared bundle. Choose the named ZIP after extraction, then extract its save folder into \`saves/\`.\n:::\n\n`
         : '';
     const neoforge = formatNeoForge(release.requirements.NeoForge);
-    let resolved = body.replaceAll('{{neoforge}}', neoforge).replace(
+    let resolved = body.replaceAll('{{starterFiles}}', starterFiles).replaceAll('{{neoforge}}', neoforge).replace(
       /\{\{asset:([A-Za-z0-9_]+)\}\}/g,
       (_, asset) => {
         if (!release.downloads[asset])
@@ -201,7 +222,16 @@ for (const release of project.releases) {
     'Release-specific installation, compatibility, scripting, and addon development for WWPG.',
     overview,
   );
+  const authorPages = release.version === '0.2.1' ? [
+    ['api-limits','API validation and limits','Existing numeric, identity and constructor rules for API 1.0.0.'],
+    ['create-addon','Create your own add-on','Build one adjustable electrical load with a separate mod identity.'],
+    ['addon-workflow','Build, install and debug','An external-instance development loop for client and dedicated server.'],
+    ['addon-testing','Test and troubleshoot your add-on','Diagnose discovery, isolation, unavailable readings and saved state.'],
+    ['general-example','General example instructions','Release-pinned instructions with corrected setup and navigation.'],
+    ['native-example','CEE and PG example instructions','Release-pinned upstream integration prerequisites and instructions.'],
+  ] : [];
   for (const [slug, title, description] of [
+    ...authorPages,
     [
       'configuration',
       'Configuration',
@@ -228,7 +258,8 @@ for (const release of project.releases) {
     const body = readFileSync(file, 'utf8')
       .replaceAll('{{docs}}', prefix)
       .replaceAll('{{source}}', `${project.repository}/blob/${release.commit}`)
-      .replaceAll('{{version}}', release.version);
+      .replaceAll('{{version}}', release.version)
+      .replaceAll('{{documentationSource}}', `${project.repository}/blob/${project.documentationRevision ?? release.commit}`);
     writePage(slug, title, description, body);
   }
 }

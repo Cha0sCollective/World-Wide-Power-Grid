@@ -9,6 +9,18 @@ package org.cha0scollective.wwpg.api;
 public record ElementResult(double lastVoltageVolts, double meanVoltageVolts, double rmsVoltageVolts,
                             double lastCurrentAmps, double meanCurrentAmps, double rmsCurrentAmps,
                             double meanPowerWatts, double energyJoules) {
+    /**
+     * Constructs ElementResult with validated captured values.
+     * @param lastVoltageVolts signed last voltage in volts; finite, with magnitude at most 1e15 (inclusive)
+     * @param meanVoltageVolts signed mean voltage in volts; finite, with magnitude at most 1e15 (inclusive)
+     * @param rmsVoltageVolts RMS voltage in volts in [0, 1e15] inclusive
+     * @param lastCurrentAmps signed last current in amperes; finite, with magnitude at most 1e15 (inclusive)
+     * @param meanCurrentAmps signed mean current in amperes; finite, with magnitude at most 1e15 (inclusive)
+     * @param rmsCurrentAmps RMS current in amperes in [0, 1e15] inclusive
+     * @param meanPowerWatts mean signed V*I in watts; finite, with magnitude at most 1e15 (inclusive)
+     * @param energyJoules signed absorbed energy in joules; finite, with magnitude at most 1e15 (inclusive)
+     * @throws IllegalArgumentException if a numeric, key, count or structural constraint is violated
+     */
     public ElementResult {
         ApiValidation.finite(lastVoltageVolts, "lastVoltageVolts");
         ApiValidation.finite(meanVoltageVolts, "meanVoltageVolts");

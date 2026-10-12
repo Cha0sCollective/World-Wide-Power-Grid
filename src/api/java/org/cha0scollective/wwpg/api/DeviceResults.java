@@ -12,6 +12,18 @@ import java.util.Optional;
 public record DeviceResults(TickContext context, MeasurementStatus status,
                             Map<String, NodeResult> nodes, Map<String, ElementResult> elements,
                             Map<String, ElementState> electricalState, String detail) {
+    /**
+     * Constructs DeviceResults with validated captured values.
+     * Non-VALID snapshots require all three maps to be empty. Every history ID must have an element reading. Collections reject null entries and are defensively copied.
+     * @param context non-null authoritative timestep
+     * @param status non-null availability status
+     * @param nodes non-null map of valid local keys to non-null node readings; at most 4096 entries
+     * @param elements non-null map of valid local IDs to non-null element readings; at most 8192 entries
+     * @param electricalState non-null history map; at most 8192 entries, with IDs present in elements
+     * @param detail non-null explanation of at most 1024 characters
+     * @throws IllegalArgumentException if a numeric, key, count or structural constraint is violated
+     * @throws NullPointerException if a required reference or collection entry is null
+     */
     public DeviceResults {
         Objects.requireNonNull(context, "context");
         Objects.requireNonNull(status, "status");

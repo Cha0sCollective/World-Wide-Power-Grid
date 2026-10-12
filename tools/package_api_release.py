@@ -11,6 +11,8 @@ from pathlib import Path, PurePosixPath
 import re
 import xml.etree.ElementTree as ET
 import zipfile
+import subprocess
+from sdk_documentation import bundle_markdown
 
 from verify_api_compatibility import DEFAULT_PREFIX, PUBLIC, STATIC, compare, snapshot
 
@@ -162,6 +164,9 @@ def package_example(source, root, output):
             continue
         require(path.resolve().is_relative_to(source), 'Example project contains an external symlink')
         data = path.read_bytes()
+        if relative == 'README.md' and '](' in data.decode('utf-8'):
+            source_sha = subprocess.check_output(['git','-C',str(root),'rev-parse','HEAD'],text=True).strip()
+            data = bundle_markdown(data.decode('utf-8'),path.relative_to(root).as_posix(),set(),VERSION,source_sha).encode('utf-8')
         if relative.endswith('.java'):
             imports = re.findall(r'^\s*import\s+(?:static\s+)?(org\.cha0scollective\.wwpg\.[\w.*]+)', data.decode('utf-8'), re.MULTILINE)
             require(all(name.startswith(('org.cha0scollective.wwpg.api.', 'org.cha0scollective.wwpg.example.',
@@ -176,6 +181,7 @@ def package_example(source, root, output):
         for name, data in sorted(entries.items()):
             info = zipfile.ZipInfo(name, (2026, 10, 11, 0, 0, 0))
             info.compress_type = zipfile.ZIP_DEFLATED
+            info.create_system = 3  # Standard Unix extractors must honor the mode bits.
             info.external_attr = (0o100755 if name == 'gradlew' else 0o100644) << 16
             archive.writestr(info, data)
     return dict(file=output.name, sha256=sha(output), bytes=output.stat().st_size,
@@ -437,6 +443,56 @@ def validate_release(manifest, root):
     validate_extracted_build(upstream, 'upstream_example', manifest, root, hashes)
     require({'panel_attachment', 'board_component'} <= set(upstream.get('functional_behaviors', [])),
             'Independent upstream example lacks panel/board demonstrations')
+    starter = manifest.get('authoring_starter')
+    if starter is not None:
+        archive = locked_file(starter.get('source', {}), root)
+        built = read(locked_file(starter.get('proof', {}), root))
+        require(built.get('passed') is True and built.get('source_sha') == source
+                and built.get('source_archive_sha256') == sha(archive)
+                and built.get('compiled_against_api_sha256') == hashes['api']
+                and built.get('uses_wwpg_project_classes') is False,
+                'Tutorial starter requires an exact independent build')
+        output = locked_file(built.get('compiled_output', {}), root)
+        provenance = read(locked_file(built.get('dependency_proof', {}), root))
+        require(provenance.get('coordinate') == 'org.cha0scollective.wwpg:wwpg-api:' + API_VERSION
+                and provenance.get('api_sha256') == hashes['api']
+                and provenance.get('jar_sha256') == sha(output)
+                and provenance.get('wwpg_project_dependencies') == [], 'Starter dependency provenance differs')
+        build_log = locked_file(built.get('build_log', {}), root).read_text(encoding='utf-8', errors='replace')
+        require('BUILD SUCCESSFUL' in build_log and 'BUILD FAILED' not in build_log,
+                'Starter extracted-source build did not pass')
+        covered = set()
+        for item in built.get('gameplay', []):
+            report = read(locked_file(item, root))
+            key = (report.get('platform'), report.get('backend'))
+            require(key in {(p, b) for p in PLATFORMS for b in BACKENDS} and key not in covered,
+                    'Starter must have unique Windows/Linux reports on both backends')
+            require(report.get('passed') is True and report.get('runtime_sha256') == hashes['runtime']
+                    and report.get('starter_sha256') == sha(output), 'Starter gameplay used different jars')
+            require({'controls', 'native_tools', 'unavailable', 'cold_restart_before_solve',
+                     'actual_chunk_reload', 'replacement', 'dedicated_server'} <= set(report.get('checks', [])),
+                    'Starter gameplay omits a required workflow')
+            for descriptor in report.get('evidence', []): locked_file(descriptor, root)
+            require(bool(report.get('evidence')), 'Starter gameplay lacks captured evidence')
+            covered.add(key)
+        require(covered == {(p, b) for p in PLATFORMS for b in BACKENDS}, 'Incomplete starter gameplay matrix')
+        graphical = set()
+        for descriptor in built.get('graphical', []):
+            report = read(locked_file(descriptor, root))
+            backend = report.get('backend')
+            require(backend in BACKENDS and backend not in graphical and report.get('passed') is True
+                    and report.get('runtime_sha256') == hashes['runtime']
+                    and report.get('starter_sha256') == sha(output)
+                    and report.get('controls') is True and report.get('native_tools') is True,
+                    'Starter needs real graphical controls and native tools on both backends')
+            require(bool(report.get('evidence')), 'Starter graphical proof lacks logs/screenshots')
+            for item in report['evidence']: locked_file(item, root)
+            graphical.add(backend)
+        require(graphical == BACKENDS, 'Starter graphical acceptance is incomplete')
+        with checked_zip(archive) as project:
+            wrapper = project.getinfo('gradlew')
+            require(wrapper.create_system == 3 and (wrapper.external_attr >> 16) & 0o111,
+                    'Tutorial starter wrapper must survive ordinary Unix extraction')
     clients = manifest.get('client_acceptance', [])
     expected = {(backend, profile, mode) for backend in BACKENDS for profile in PROFILES for mode in ('graphical', 'multiplayer')}
     found = set()
@@ -511,10 +567,16 @@ def package(manifest_path, root, output, release=False):
         publishable=release, state='accepted_release' if release else 'sdk_candidate',
         message='All declared acceptance gates passed.' if release else 'Candidate only. API freeze and release acceptance have not been certified.'),
         indent=2).encode('utf-8') + b'\n'
-    for name in ('docs/EXTENSION_API.md', 'docs/EXTENSION_API_PLAN.md', 'docs/EXTENSION_API_WORKSHOP.md',
-                 'docs/API_RELEASE_CHECKS.md', 'LICENSE'):
+    documents = {'docs/EXTENSION_API.md', 'docs/EXTENSION_API_PLAN.md', 'docs/EXTENSION_API_WORKSHOP.md',
+                 'docs/API_RELEASE_CHECKS.md', 'docs/INSTALL.md', 'docs/STATIONARY_YARD.md',
+                 'docs/API_LIMITS.md', 'docs/CREATE_ADDON.md', 'docs/ADDON_WORKFLOW.md', 'docs/ADDON_TESTING.md', 'LICENSE'}
+    for name in sorted(documents):
         require((root / name).is_file(), f'Missing SDK documentation/license: {name}')
-        entries[name] = (root / name).read_bytes()
+        text = (root / name).read_text(encoding='utf-8')
+        entries[name] = bundle_markdown(text,name,documents,VERSION,manifest['source_sha']).encode('utf-8')
+    starter = manifest.get('authoring_starter')
+    if starter is not None:
+        entries['documentation-starter/'+Path(starter['source']['path']).name] = locked_file(starter['source'],root).read_bytes()
     # Evidence must remain inspectable inside the package, not just on the build host.
     entries.update(collect_locked_evidence({k: v for k, v in manifest.items() if k != 'artifacts'}, root))
     sums = ''.join(hashlib.sha256(data).hexdigest() + '  ' + name + '\n' for name, data in sorted(entries.items()))

@@ -216,3 +216,11 @@ The output remains a matrix candidate: independent builds from the extracted SDK
 real-client acceptance, failed-run review, and final package approval remain
 separate. For an already downloaded run, use `--run-json`, `--jobs-json`,
 `--artifact-index`, and `--artifacts` instead of `--collect-ci`.
+
+### Adjustable-load starter in the next SDK
+
+Do not rebuild existing SDK assets. A future release includes `authoring_starter` with locked `source` ZIP and `proof` descriptors in the accepted manifest. The proof names the frozen `source_sha`, `source_archive_sha256`, `compiled_against_api_sha256`, `uses_wwpg_project_classes: false`, and locked `compiled_output`, `build_log` and `dependency_proof`. The latter is the actual `sdkProvenance` output (`coordinate`, `api_sha256`, `jar_sha256`, empty `wwpg_project_dependencies`).
+
+`gameplay` contains four locked reports: Windows/Linux × NATIVE/JAVA, each binding the exact runtime and starter jar hashes. Required `checks` are `controls`, `native_tools`, `unavailable`, `cold_restart_before_solve`, `actual_chunk_reload`, `replacement`, and `dedicated_server`; `evidence` holds actual locked logs and observations. `graphical` holds separate real-client reports for each backend, binding both jar hashes, `controls: true`, `native_tools: true`, and locked logs/screenshots. Summary booleans cannot replace the actual observations. The ZIP must retain Unix origin with executable `gradlew` and ordinary files non-executable.
+
+Documentation publication can proceed before those future release gates. The October 12 starter's graphical testing was deferred while benchmarks were running; this does not certify the starter for the next SDK release. Finish the remaining client checks against the next release's frozen artifacts.

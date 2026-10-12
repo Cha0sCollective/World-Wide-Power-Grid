@@ -32,6 +32,7 @@ const routes = [
       'developers/',
     ].map((p) => `/docs/${r.version}/${p}`),
     ...(r.api ? [`/docs/${r.version}/workshop/`] : []),
+    ...(r.version === project.currentRelease ? ['api-limits','create-addon','addon-workflow','addon-testing','general-example','native-example'].map(p => `/docs/${r.version}/${p}/`) : []),
   ]),
 ];
 const builtPath = (route) =>
