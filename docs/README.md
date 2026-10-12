@@ -48,3 +48,5 @@ include work beyond the current stationary release.
 Old test results and development notes belong to the version named on the page.
 Use the current installation, support and status guides when deciding what to
 install or test today.
+
+For add-on authors: [create an adjustable load](CREATE_ADDON.md), [build/install/debug](ADDON_WORKFLOW.md), [validation limits](API_LIMITS.md), and [testing and repair](ADDON_TESTING.md). These maintained guides clarify the published API 1.0.0 contract without changing the release snapshots.

@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "command": [
+    "./gradlew",
+    "runPackagedGameTestServer",
+    "-Pneo_version=21.1.248",
+    "-PtestArtifact=build/neoforge-compat/wwpg-0.2.1.jar",
+    "-PtestProfile=BASE",
+    "-PtestBackend=NATIVE",
+    "-PtestApiAddon=true",
+    "-PtestNamespaces=wwpg_platform,wwpg,wwpg_stationary,wwpg_design,wwpg_distribution,wwpg_wires,wwpg_bundle,wwpg_coupled",
+    "-PtestDirectory=run/neoforge-compat",
+    "-PrestartPhase=VERIFY",
+    "-x",
+    "build",
+    "-x",
+    "jar",
+    "--no-daemon"
+  ],
+  "timeout_seconds": 600,
+  "process_pid": 5240,
+  "new_java_processes": {
+    "8272": "8272 org.gradle.wrapper.GradleWrapperMain runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.1.jar -PtestProfile=BASE -PtestBackend=NATIVE -PtestApiAddon=true -PtestNamespaces=wwpg_platform,wwpg,wwpg_stationary,wwpg_design,wwpg_distribution,wwpg_wires,wwpg_bundle,wwpg_coupled -PtestDirectory=run/neoforge-compat -PrestartPhase=VERIFY -x build -x jar --no-daemon",
+    "9120": "9120 net.neoforged.devlaunch.Main @D:\\\\a\\\\World-Wide-Power-Grid\\\\World-Wide-Power-Grid\\\\build\\\\moddev\\\\gameTestServerRunProgramArgs.txt",
+    "6484": "6484 org.gradle.launcher.daemon.bootstrap.GradleDaemon 8.12"
+  },
+  "meaning": "Timed out; this run is failed evidence, never a passing retry."
+}

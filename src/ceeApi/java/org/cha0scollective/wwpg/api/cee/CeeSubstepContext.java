@@ -9,6 +9,14 @@ package org.cha0scollective.wwpg.api.cee;
  */
 public record CeeSubstepContext(double previousVoltageVolts, int substep, int totalSubsteps,
                                double substepSeconds) {
+    /**
+     * Constructs CeeSubstepContext with validated captured values.
+     * @param previousVoltageVolts first-node minus second-node voltage in volts; finite, with magnitude at most 1e15 (inclusive)
+     * @param substep zero-based index in [0, totalSubsteps-1]
+     * @param totalSubsteps step count in [1, 4096] inclusive
+     * @param substepSeconds finite simulated seconds in (0, 1]
+     * @throws IllegalArgumentException if a numeric, key, count or structural constraint is violated
+     */
     public CeeSubstepContext {
         CeeElectricalParameters.requireFinite(previousVoltageVolts, "previousVoltageVolts");
         validateSchedule(substep, totalSubsteps, substepSeconds);

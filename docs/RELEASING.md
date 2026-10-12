@@ -108,3 +108,20 @@ python tools/test_api_compatibility.py
 These checks run on Windows and Linux in the existing CI matrix. They cover
 grouping, byte preservation, note limits, rejected candidates, corrupted inputs,
 draft recovery and publication safeguards. They do not replace gameplay acceptance.
+
+## Include the authoring starter in the next SDK
+
+The existing 0.2.1 downloads remain unchanged. Future SDKs include the validation,
+tutorial, workflow and troubleshooting guides with bundle-valid navigation.
+Export `examples/adjustable-load` with `package_api_release.py --example-source`;
+standard Unix extraction must preserve its executable wrapper.
+
+Add an `authoring_starter` object to the new release manifest, containing locked
+`source` and `proof` file descriptors (`path`, `sha256`, `bytes`). Its proof must
+identify the frozen release source, `source_archive_sha256`, the actually resolved
+`compiled_against_api_sha256`, `uses_wwpg_project_classes: false`, `passed: true`,
+and the locked independent build, dependency and gameplay/client records described
+in [API release checks](API_RELEASE_CHECKS.md#adjustable-load-starter-in-the-next-sdk).
+The graphical checks deferred during documentation work remain a release gate. The accepted archive carries
+this source ZIP into the existing SDK's `examples/` folder; no sixth download or
+new mandatory runtime mod is introduced. All normal release gates still apply.

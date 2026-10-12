@@ -9,6 +9,14 @@ package org.cha0scollective.wwpg.api.cee;
  */
 public record CeeElectricalParameters(double conductanceSiemens, double currentSourceAmps,
                                      double voltageSourceVolts, boolean idealVoltageSource) {
+    /**
+     * Constructs CeeElectricalParameters with validated captured values.
+     * @param conductanceSiemens conductance in siemens, finite in [0, 1e15] inclusive
+     * @param currentSourceAmps CEE-native signed source current in amperes; finite, with magnitude at most 1e15 (inclusive)
+     * @param voltageSourceVolts CEE-native signed source voltage in volts; finite, with magnitude at most 1e15 (inclusive)
+     * @param idealVoltageSource must be true for nonzero voltageSourceVolts; retain true for ideal-source zero crossings
+     * @throws IllegalArgumentException if a numeric, key, count or structural constraint is violated
+     */
     public CeeElectricalParameters {
         requireFinite(conductanceSiemens, "conductanceSiemens");
         requireFinite(currentSourceAmps, "currentSourceAmps");

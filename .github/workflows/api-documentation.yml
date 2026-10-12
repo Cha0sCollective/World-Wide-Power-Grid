@@ -1,0 +1,46 @@
+name: API documentation acceptance
+on:
+  pull_request:
+    paths: ['docs/**', 'website/**', 'src/api/**', 'src/ceeApi/**', 'examples/**', 'tools/**', '.github/workflows/api-documentation.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  authoring:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-latest]
+        backend: [NATIVE, JAVA]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: gradle/actions/setup-gradle@v4
+      - if: runner.os != 'Windows'
+        run: chmod +x gradlew
+      - run: python tools/test_sdk_documentation.py
+      - name: Published SDK examples and future Unix source ZIP
+        run: python tools/documentation_acceptance/check.py prepare
+      - name: Released runtime, controls, meters, cold restart and actual chunk reload
+        run: python tools/documentation_acceptance/check.py server --backend ${{ matrix.backend }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: documentation-${{ matrix.os }}-${{ matrix.backend }}
+          path: |
+            build/documentation-checks/
+            run/documentation-*/doc-evidence/
+            run/documentation-*/logs/

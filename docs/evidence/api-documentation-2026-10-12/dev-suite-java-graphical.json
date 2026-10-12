@@ -1,0 +1,26 @@
+{
+  "model": true,
+  "client_meter_volts": 19.999698638916016,
+  "controls": true,
+  "passed": true,
+  "readout": "20.000 V / 0.050 A / 1.000 W",
+  "read_only_click": true,
+  "music_volume": 0,
+  "backend": "JAVA",
+  "published_source": true,
+  "runtime_sha256": "7c852948a308f22946637df1dcecee7ade680ff7f4e0906d95a1425df14212dd",
+  "starter_sha256": "692dc8fd8245664e925d158a046e6bbb3902ca72be921bfce7d915afe73934bc",
+  "example_sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+  "platform": "Linux software-rendered Xvfb",
+  "neoforge": "21.1.231",
+  "acceptance_helper_hashes": {
+    "tools/documentation_acceptance/init.gradle": "ea7c17af4876637265a9a3ca6f7bd80f34930ab86e92663454cca3727132bb05",
+    "tools/documentation_acceptance/src/org/cha0scollective/wwpg/docs/DocClientAcceptance.java": "c1df63b2735c80070faf4a2a9fb4f18550159b63c41ec60c5f5b215346edb42a",
+    "tools/documentation_acceptance/src/org/cha0scollective/wwpg/docs/DocAcceptance.java": "c78dd88311daf24cbe43c377c2ebb16cf55bdb3981e8fe24801c288217b2c47f",
+    "build/doc-acceptance/wwpg-documentation-acceptance.jar": "a7e4ac62d1f1d5830e704662d9045736a604c56b1953707c87f4ae8aa9d06d69"
+  },
+  "base_source_sha": "7987ed0abf0068695278e29ba2c0211f319da4be",
+  "helper_has_view_settling_fix": true,
+  "captures_retained_at": "/workspace/artifacts/wwpg-api-docs-gui",
+  "status": "documentation validation, not next-release SDK certification"
+}

@@ -1,0 +1,43 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.89'
+}
+group = 'org.example.tutorialload'
+version = '0.1.0'
+base { archivesName = 'tutorial-load' }
+java { toolchain.languageVersion = JavaLanguageVersion.of(21) }
+repositories {
+    maven { url = uri(providers.gradleProperty('apiRepository').get()) }
+    mavenCentral()
+}
+neoForge {
+    version = providers.gradleProperty('neo_version').getOrElse('21.1.231')
+    mods { tutorial_load { sourceSet sourceSets.main } }
+}
+dependencies { compileOnly 'org.cha0scollective.wwpg:wwpg-api:1.0.0' }
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+tasks.withType(Jar).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+    includeEmptyDirs = false
+}
+tasks.named('jar') {
+    from('LICENSE') { into 'META-INF'; rename { 'TUTORIAL-LOAD-LICENSE.txt' } }
+}
+// Read the actual resolved artifact, so a successful compile cannot hide a wrong SDK.
+tasks.register('sdkProvenance') {
+    dependsOn 'jar'
+    doLast {
+        def artifacts = configurations.compileClasspath.resolvedConfiguration.resolvedArtifacts
+        def api = artifacts.findAll { it.moduleVersion.id.group == 'org.cha0scollective.wwpg' }
+        if (api.size() != 1 || api[0].moduleVersion.id.name != 'wwpg-api' || api[0].moduleVersion.id.version != '1.0.0')
+            throw new GradleException('Starter must compile against only the published general API 1.0.0')
+        def digest = { file -> java.security.MessageDigest.getInstance('SHA-256').digest(file.bytes).encodeHex().toString() }
+        def out = layout.buildDirectory.file('sdk-provenance.json').get().asFile
+        out.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson([
+            coordinate:api[0].moduleVersion.id.toString(), api_sha256:digest(api[0].file),
+            jar_sha256:digest(tasks.jar.archiveFile.get().asFile),
+            wwpg_project_dependencies:configurations.compileClasspath.allDependencies.withType(org.gradle.api.artifacts.ProjectDependency).collect { it.name }
+        ]))+'\n'
+    }
+}

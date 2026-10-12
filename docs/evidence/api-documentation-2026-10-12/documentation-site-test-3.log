@@ -1,0 +1,34 @@
+
+> wwpg-website@0.1.0 test
+> node --test tests/*.test.mjs
+
+✔ the released reference accepts different filesystem enumeration order (2.2639ms)
+✔ frozen reference protection rejects changed hashes, files, packages, and release identity (1.3228ms)
+✔ every correction targets a real frozen member without changing input bytes (41.9915ms)
+✔ a missing target cannot silently drop a correction (0.467ms)
+✔ incorrect release identity cannot apply another contract (0.8879ms)
+✔ duplicate anchors cannot ambiguously place a correction (0.1445ms)
+✔ published Javadoc URL templates display and copy literal text, including character references and raw test markup (548.2712ms)
+✔ all routes have useful metadata, one primary heading, and valid local links and assets (13948.1731ms)
+✔ release snapshots retain their exact selected source bytes and immutable revision (16.8904ms)
+✔ 0.2.1 documentation links to final acceptance records without changing source or historical pins (68.4389ms)
+✔ downloads and requirements match the configured release; Modrinth is optional (30.7027ms)
+✔ released API and archived availability are distinct; launch still requires matching proof and acceptance (9.3082ms)
+✔ without JavaScript, core links, native chapter navigation, and the download URL are usable (28.6201ms)
+✔ the built download control copies the exact URL and announces success (19.4765ms)
+✔ clipboard failure selects the complete download URL and explains manual copy (16.9646ms)
+✔ schematic motion follows reduced-motion changes and the pause control (15.8867ms)
+✔ docs are indexed with exact release filters and Lua methods match frozen tested programs (19.3158ms)
+✔ search sends the selected release filter and renders safe, version-labeled results (269.2674ms)
+✔ SDK and workshop downloads target the current public release and explain runtime requirements (23.107ms)
+✔ current release pages link only to published top-level downloads, including projected snapshot guides (608.5102ms)
+✔ generated references preserve released bytes, export only supported packages, and have working local destinations (2522.1177ms)
+✔ search failure preserves chapter navigation and announces a useful fallback (271.9263ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 27990.9063

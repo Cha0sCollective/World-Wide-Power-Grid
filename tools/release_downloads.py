@@ -228,6 +228,8 @@ No upstream dependency jars are included.
             for name in accepted.namelist():
                 if name.startswith('docs/'):
                     sdk_files[name] = accepted.read(name)
+                elif name.startswith('documentation-starter/'):
+                    sdk_files['examples/'+PurePosixPath(name).name] = accepted.read(name)
             sdk_files['START-HERE.md'] = f'''# Extension API {manifest['api_version']} for WWPG {version}
 
 Players install {runtime}. Do not put API, source or Javadoc jars in mods/.
@@ -237,7 +239,8 @@ Players install {runtime}. Do not put API, source or Javadoc jars in mods/.
 3. Use Java 21 and that project's wrapper to build against the extracted repository:
 
 ```text
-./gradlew build -PapiRepository=/absolute/path/to/maven-repository --no-daemon
+chmod +x gradlew
+./gradlew build "-PapiRepository=/absolute/path/to/maven-repository" --no-daemon
 ```
 
 Windows: use gradlew.bat with the same option and an absolute Windows path.
@@ -296,6 +299,7 @@ def check(staged):
                              ('upstream_example_sources', 'examples')):
             sdk_files[folder + '/' + paths[role].name] = paths[role].read_bytes()
         sdk_files.update({name: accepted.read(name) for name in accepted.namelist() if name.startswith('docs/')})
+        sdk_files.update({'examples/'+PurePosixPath(name).name: accepted.read(name) for name in accepted.namelist() if name.startswith('documentation-starter/')})
         verify_group(staged / 'downloads' / expected[2], sdk_files)
     return layout
 

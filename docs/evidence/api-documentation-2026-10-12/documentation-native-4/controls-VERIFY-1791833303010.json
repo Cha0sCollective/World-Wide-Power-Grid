@@ -1,0 +1,16 @@
+{
+  "replacement": true,
+  "resistances": [
+    100,
+    200,
+    400
+  ],
+  "cee_wires": true,
+  "pg_wires": true,
+  "unavailable_cleared": true,
+  "backend": "NATIVE",
+  "phase": "VERIFY",
+  "passed": true,
+  "runtime_sha256": "7c852948a308f22946637df1dcecee7ade680ff7f4e0906d95a1425df14212dd",
+  "starter_sha256": "252d61cb83374d0fc36c00e0f650173ec39a55f22bd64992830ad9b8344a96e1"
+}

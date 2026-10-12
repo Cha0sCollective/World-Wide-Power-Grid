@@ -50,6 +50,14 @@ export default defineConfig({
           collapsed: release.version !== project.currentRelease,
           items: [
             ...pages,
+            ...(release.version === '0.2.1' ? [
+              ['Create your own add-on','create-addon/'],
+              ['API validation and limits','api-limits/'],
+              ['Build, install and debug','addon-workflow/'],
+              ['Test your add-on','addon-testing/'],
+              ['General example instructions','general-example/'],
+              ['CEE and PG example instructions','native-example/'],
+            ] : []),
             ...(release.api ? [['API Workshop', 'workshop/']] : []),
           ].map(([label, slug]) => ({
             label,

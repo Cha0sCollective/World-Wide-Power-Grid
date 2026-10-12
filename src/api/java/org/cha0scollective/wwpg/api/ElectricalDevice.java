@@ -30,7 +30,15 @@ public interface ElectricalDevice {
     default String slotId() { return "main"; }
     /** Immutable external terminal geometry snapshot; no electrical advancement. */
     List<Terminal> terminals();
-    /** Capture circuit topology and parameters for the supplied authoritative tick. */
+    /**
+     * Capture circuit topology and parameters for the authoritative tick.
+     * The returned terminal set must equal {@link #terminals()}, including each
+     * key, native ID, position and hit radius; list ordering may differ.
+     * Keep terminals when disabled and open a switch instead. A fully empty
+     * description is permitted only when the geometry query is also empty.
+     * @param context authoritative server timestep; preparation must not advance history
+     * @return non-null immutable description with the same external terminal set
+     */
     CircuitDescription prepare(TickContext context);
     /** Consume accepted results once; save committed history and update native gameplay. */
     void commit(DeviceResults results);

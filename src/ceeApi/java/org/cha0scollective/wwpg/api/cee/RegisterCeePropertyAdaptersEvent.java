@@ -24,7 +24,11 @@ public final class RegisterCeePropertyAdaptersEvent extends Event implements IMo
 
     private final Registration registration;
 
-    /** Constructed by WWPG for its startup registration phase. */
+    /**
+     * Constructed by WWPG for its startup registration phase.
+     * @param registration non-null runtime registration sink
+     * @throws NullPointerException if registration is null
+     */
     public RegisterCeePropertyAdaptersEvent(Registration registration) {
         this.registration = Objects.requireNonNull(registration, "registration");
     }

@@ -6,6 +6,8 @@ Use this guide to add stationary electrical content to WWPG. It defines the
 public API contract: registration, electrical models, measurements, and saved
 state. The [installation guide](INSTALL.md) covers the runtime dependencies.
 
+Start with [Create your own adjustable load](CREATE_ADDON.md) if you know Java but are new to NeoForge. [Build, install and debug](ADDON_WORKFLOW.md) explains the supported development loop. [Validation and limits](API_LIMITS.md) lists the existing constructor rules.
+
 ## Choose an integration route
 
 | Your content | Integration route | Start here |
@@ -482,3 +484,11 @@ contraptions, alternate solvers, raw numerical matrix access, custom wire
 renderers, remote APIs, replacement Lua APIs, broad Minecraft/version ranges,
 and arbitrary numerical callbacks require separate designs. Full product
 specification 1.0 certification remains independent from API 1.0 compatibility.
+
+## Terminal geometry and the off state
+
+The complete terminal records in `prepare(context).terminals()` must equal `terminals()` as a set. Key, native ID, block-local position and hit radius all participate; list ordering may differ. A mismatch isolates the device with `Prepared terminals differ from read-only terminal geometry`.
+
+Keep those terminals when disabled. The [adjustable-load starter](../examples/adjustable-load/README.md) keeps a switch and resistor with stable IDs and changes `ElectricalModel.Switch.closed`. `CircuitDescription.empty()` is appropriate only when the geometry query also returns an empty list.
+
+See [constructor validation](API_LIMITS.md), [author troubleshooting](ADDON_TESTING.md) and the [author acceptance checklist](ADDON_TESTING.md#acceptance-checklist).

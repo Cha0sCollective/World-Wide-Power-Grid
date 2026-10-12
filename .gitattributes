@@ -22,3 +22,6 @@ release/0.2.0/evidence/** -text
 release/0.2.0/*.json -text
 release/0.2.1/evidence/** -text
 release/0.2.1/*.json -text
+
+# Documentation test captures are also byte-addressed, including failed runs.
+docs/evidence/api-documentation-2026-10-12/** -text

@@ -5,9 +5,9 @@ This separate NeoForge project demonstrates stationary devices built with
 its Java source imports no PG, CEE, or WWPG implementation classes.
 
 This example ships with WWPG 0.2.1. Its nine blocks demonstrate the general API;
-the [upstream example](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/examples/cee-addon/README.md) demonstrates native CEE panels and
-PG circuit boards. The [API Workshop](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/docs/EXTENSION_API_WORKSHOP.md) is a
-playable save using both add-ons. The [release verification](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/release/0.2.1/verification.json)
+the [upstream example](../cee-addon/README.md) demonstrates native CEE panels and
+PG circuit boards. The [API Workshop](../../docs/EXTENSION_API_WORKSHOP.md) is a
+playable save using both add-ons. The [release verification](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.1/wwpg-0.2.1-verification.zip)
 records the tested artifacts and completed checks.
 
 ## Build independently
@@ -21,6 +21,7 @@ Verify its release checksum, then extract its `maven/wwpg-api-1.0.0-maven.zip`; 
 this project's directory, supplying that root's absolute path:
 
 ```text
+chmod +x gradlew
 ./gradlew build -PapiRepository=/absolute/path/to/wwpg-api-maven --no-daemon
 ```
 
@@ -34,7 +35,7 @@ the example's build or shade API classes into the example jar.
 Install the example jar together with the **WWPG 0.2.1 runtime** on the server
 and every client. Use the tested Minecraft 1.21.1 / NeoForge 21.1.231 environment
 with Java 21, Create 6.0.10-280, CEE 1.1.3, PG 0.6.2, and Architectury 13.0.8.
-Follow [WWPG's installation instructions](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/docs/INSTALL.md) for the upstream
+Follow [WWPG's installation instructions](../../docs/INSTALL.md) for the upstream
 dependencies and solver configuration. The example adds no FE or computer mod
 requirement. Pinout and CC:Tweaked remain optional.
 
@@ -140,9 +141,11 @@ The item does not carry its previous block entity's stored charge. This sample
 does not promise portable charged-device behavior.
 
 Panel attachments and circuit-board components use upstream assembly workflows.
-The [upstream example](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/examples/cee-addon/README.md) documents those routes; the nine
+The [upstream example](../cee-addon/README.md) documents those routes; the nine
 blocks in this project demonstrate the general device API.
 
-See [the public API contract](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/docs/EXTENSION_API.md) for electrical units,
+See [the public API contract](../../docs/EXTENSION_API.md) for electrical units,
 identity rules, lifecycle boundaries, measurements, and compatibility policy.
-Maintainer packaging checks live in the [release guide](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/main/docs/API_RELEASE_CHECKS.md).
+Maintainer packaging checks live in the [release guide](../../docs/API_RELEASE_CHECKS.md).
+
+Unix: the current released source ZIP may require the `chmod` step above. Run from the extracted project root and quote the entire `-PapiRepository=...` argument when the path contains spaces.
