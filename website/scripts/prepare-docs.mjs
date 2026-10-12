@@ -57,7 +57,11 @@ export function rewriteLinks(markdown, source, release, repository) {
       if (slug) return `](/docs/${release.version}/${slug}/${hash})`;
       const kind =
         absolute.endsWith('/') || !posix.extname(absolute) ? 'tree' : 'blob';
-      return `](${repository}/${kind}/${release.commit}/${absolute}${hash})`;
+      // Final acceptance records can be committed after the tagged source.
+      const revision = absolute.startsWith(`release/${release.version}/`)
+        ? (release.recordsCommit ?? release.commit)
+        : release.commit;
+      return `](${repository}/${kind}/${revision}/${absolute}${hash})`;
     },
   );
 }
