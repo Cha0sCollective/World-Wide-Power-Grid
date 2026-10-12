@@ -178,6 +178,28 @@ test('release snapshots retain their exact selected source bytes and immutable r
   }
 });
 
+test('0.2.1 documentation links to final acceptance records without changing source or historical pins', () => {
+  const release = project.releases.find((r) => r.version === '0.2.1');
+  assert.match(release.recordsCommit, /^[a-f0-9]{40}$/);
+  assert.notEqual(release.recordsCommit, release.commit);
+  for (const [slug, record] of [
+    ['compatibility', 'verification.json'],
+    ['example-worlds', 'verification.json'],
+    ['install', 'dependencies.json'],
+  ]) {
+    const doc = new JSDOM(html(`/docs/0.2.1/${slug}/`)).window.document;
+    const path = `release/0.2.1/${record}`;
+    assert.ok(doc.querySelector(`a[href="${project.repository}/blob/${release.recordsCommit}/${path}"]`));
+    assert.equal(doc.querySelector(`a[href="${project.repository}/blob/${release.commit}/${path}"]`), null);
+    assert.ok(doc.querySelector(`a[href^="${project.repository}/blob/${release.commit}/docs/"]`));
+  }
+  const support = new JSDOM(html('/docs/0.2.1/compatibility/')).window.document;
+  for (const file of ['supported-content.json', 'registry-inventory.json'])
+    assert.ok(support.querySelector(`a[href="${project.repository}/blob/${release.commit}/release/0.1.0-beta.5/${file}"]`));
+  const archived = project.releases.find((r) => r.version === '0.2.0');
+  assert.ok(html('/docs/0.2.0/compatibility/').includes(`${project.repository}/blob/${archived.commit}/release/0.2.0/verification.json`));
+});
+
 test('downloads and requirements match the configured release; Modrinth is optional', () => {
   const doc = new JSDOM(html('/downloads/')).window.document;
   assert.ok(doc.querySelector(`a[href="${downloadHref()}"]`));
