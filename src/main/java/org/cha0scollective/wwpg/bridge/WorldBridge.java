@@ -736,8 +736,22 @@ public final class WorldBridge {
     }
     /** Keep a rejected shared frame out of CEE gameplay and extension measurements. */
     public void reject(ElectricalNetwork network,Throwable error) {
-        diagnostic("Shared electrical solve failed: "+error.getClass().getSimpleName()+": "+error.getMessage());
+        diagnostic("Shared electrical solve failed: "+error.getClass().getSimpleName()+": "+error.getMessage()+"; "+failureContext(network));
         unavailable(network);
+    }
+    private String failureContext(ElectricalNetwork network) {
+        var access=(ElectricalNetworkAccessor)network;
+        var owners=new TreeSet<String>();
+        for(var node:network.getNodes())if(node instanceof OwnedFloatingNode owned && owned.endpoint instanceof BlockWireEndpoint endpoint) {
+            var pos=endpoint.getPos(); long chunk=net.minecraft.world.level.ChunkPos.asLong(pos);
+            boolean loaded=level.getChunkSource().getChunkNow(pos.getX()>>4,pos.getZ()>>4)!=null;
+            owners.add(pos.getX()+","+pos.getY()+","+pos.getZ()+"/"+endpoint.getTerminal()+":"
+                    +(loaded?net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(level.getBlockState(pos).getBlock()).toString():"unloaded")
+                    +":ticking="+level.getChunkSource().isPositionTicking(chunk)+":entities="+level.areEntitiesLoaded(chunk));
+        }
+        for(var entry:resultNodes.getOrDefault(network,List.of()))owners.add(entry.key.toString());
+        return "backend="+access.wwpg$solver().type()+", substep="+activeStep+", sources="+access.wwpg$sourceCount()
+                +", nodes="+network.size()+", wires="+access.wwpg$wires().size()+", terminals="+owners.stream().limit(16).toList();
     }
     /** Keep normal upstream settling out of history/gameplay without recording a false solver error. */
     public void unavailable(ElectricalNetwork network) {

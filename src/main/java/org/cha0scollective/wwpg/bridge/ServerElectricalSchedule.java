@@ -85,6 +85,14 @@ public final class ServerElectricalSchedule {
             if (!network.isConverged()) {
                 int warmAfter = solver instanceof PgSolverWarmupAccessor warm ? warm.wwpg$warmUpTicks() : 0;
                 if (SubstepAcceptance.settling(warmBefore, warmAfter, false)) {
+                    PentodeInitialization.converged(network);
+                    api.invalidate(network);
+                    bridge.unavailable(network);
+                } else if(PentodeInitialization.hold(network,warmBefore)) {
+                    // PG limits a fresh pentode's bias to 0.25 V/iteration at
+                    // default settings. A 100 V screen can exceed its first
+                    // 200-iteration solve. Keep that trial unavailable without
+                    // changing equations, iteration limits, or physical state.
                     api.invalidate(network);
                     bridge.unavailable(network);
                 } else {
@@ -92,12 +100,12 @@ public final class ServerElectricalSchedule {
                     api.solveFailure(network, error);
                     bridge.reject(network, error);
                 }
-            }
+            } else PentodeInitialization.converged(network);
         }
         catch(RuntimeException | LinkageError error) { api.solveFailure(network,error);bridge.reject(network,error); }
         api.after(network);
         bridge.afterSolve(network);
         org.cha0scollective.wwpg.extension.NativeApiReadings.after(level,network);
     }
-    public static void clear() { LAST_TICK.clear(); PREPARING.remove(); }
+    public static void clear() { LAST_TICK.clear(); PREPARING.remove(); PentodeInitialization.clear(); }
 }

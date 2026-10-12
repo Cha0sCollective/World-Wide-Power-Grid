@@ -50,7 +50,23 @@ public final class BoardWorkflowGameTests {
             ++count;
         }
         h.assertTrue(count == 28, "Pinned board component inventory changed: " + count);
-        DynamicGameTests.audit(h); h.succeed();
+        // Assembly can be the first fixture in a fresh world. Its backend
+        // audit must be supported by its own accepted electrical results.
+        var a=new BlockPos(1,2,1); var r=new BlockPos(4,2,1);
+        for(var pos:new BlockPos[]{a,r})h.setBlock(pos.below(),Blocks.STONE);
+        h.setBlock(a,CEEBlocks.CREATIVE_BATTERY.get());h.setBlock(r,ModdedBlocks.CREATIVE_RESISTOR.get());
+        var source=h.absolutePos(a);var resistor=h.absolutePos(r);
+        h.runAtTickTime(5,()->{
+            DevicesSavedData.load(h.getLevel()).getDevice(source,CreativeBatteryDevice.class).voltage=10;
+            ((org.patryk3211.powergrid.electricity.resistor.ResistorBlockEntity)h.getLevel().getBlockEntity(resistor)).setValue(1000);
+            WiringGameTests.connect(h,source,1,resistor,0,false);WiringGameTests.connect(h,source,0,resistor,1,false);
+        });
+        h.runAtTickTime(20,()->{
+            var measurement=org.cha0scollective.wwpg.api.neoforge.ElectricalMeasurements.readVoltageBetween(h.getLevel(),resistor,0,resistor,1);
+            h.assertTrue(measurement.status()==org.cha0scollective.wwpg.api.MeasurementStatus.VALID,"Assembly audit circuit did not produce accepted results: "+measurement);
+            BoardComponentGameTests.near(h,measurement.voltage().orElseThrow().meanVoltageVolts(),10,.02,"Assembly audit mixed load voltage");
+            DynamicGameTests.audit(h);h.succeed();
+        });
     }
 
     @GameTest(template = "empty", timeoutTicks = 90)

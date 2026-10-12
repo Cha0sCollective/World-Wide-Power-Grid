@@ -64,7 +64,9 @@ legacy example worlds, dedicated yards, API fixtures, and extracted-world restar
 The isolated `wwpg_loading` fixtures check affected-circuit pauses, retained
 storage and control history, unavailable measurements, and unrelated factories
 continuing to operate during restoration. They also check bounded loading
-windows and weak-line, ground and transformer-port connectivity.
+windows and weak-line, ground and transformer-port connectivity. Native pentode
+reference fixtures distinguish its first operating-voltage initialization from
+persistent or later solver failures, and check that rejected trials retain storage.
 
 ```sh
 python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestNamespaces=wwpg_loading -PtestBackend=NATIVE -PtestDirectory=run/loading-native --no-daemon
@@ -73,6 +75,15 @@ python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestNamespa
 
 Use fresh directories and retain failed evidence. These fixtures check ordinary
 gameplay correctness; they do not certify large-network loading or performance.
+
+Run the board assembly audit separately so an earlier fixture cannot supply its
+solver evidence. It retains all 28 native component assembly checks and builds
+its own mixed supply/load circuit with accepted measurements:
+
+```sh
+python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestNamespaces=wwpg_board_startup -PtestBackend=NATIVE -PtestDirectory=run/board-startup-native --no-daemon
+python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestNamespaces=wwpg_board_startup -PtestBackend=JAVA -PtestDirectory=run/board-startup-java --no-daemon
+```
 
 ## Compare with upstream reference circuits
 

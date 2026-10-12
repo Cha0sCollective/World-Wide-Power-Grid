@@ -104,6 +104,8 @@ jobs:
       - run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PrestartPhase=SETUP --no-daemon
       - name: Verify restoration pauses, storage, independent factories and graph couplings
         run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_loading -PtestDirectory=run/loading --no-daemon
+      - name: Verify native board assembly has its own powered backend audit
+        run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_board_startup -PtestDirectory=run/board-startup --no-daemon
       - name: Three consecutive cold world restarts
         run: |
           for pass in 1 2 3; do
@@ -227,6 +229,9 @@ jobs:
             run/showroom/crash-reports/
             run/showroom/packaged-*.json
             run/showroom/showroom-coverage.json
+            run/board-startup/logs/
+            run/board-startup/crash-reports/
+            run/board-startup/packaged-*.json
             run/yard/logs/
             run/yard/crash-reports/
             run/yard/packaged-*.json

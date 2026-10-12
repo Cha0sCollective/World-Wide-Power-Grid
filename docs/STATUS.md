@@ -64,6 +64,11 @@ energy while those circuits wait, and reduce repeated graph and matrix work.
 Meters report unavailable readings during the pause, and devices resume without
 simulating the time spent waiting. Unrelated ready factories continue operating.
 
+Fresh PG pentodes can also need a few startup calculations before measurements
+become available. Development checks hold their unaccepted results and stored
+history, with a fixed initialization limit; persistent and later failures remain
+visible. Failed calculations now identify the affected circuit and terminals.
+
 These changes have not been released. Large-network speed remains uncertified,
 and an intermittent Java solver stall during large-world reconstruction remains
 under investigation. Ordinary gameplay passes do not close that separate issue.

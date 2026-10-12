@@ -146,6 +146,7 @@ tasks.named('processResources') {
     from('release') { include 'artifacts.json', 'optional-artifacts.json', 'content-matrix.json', '0.1.0-beta.5/content-matrix.json', '0.1.0-beta.5/registry-inventory.json'; into 'data/wwpg/release' }
     from(layout.buildDirectory.dir('pg-native-resources/native')) { into 'native/wwpg' }
     from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_loading/structure' }
+    from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_board_startup/structure' }
 }
 tasks.named('jar') {
     from sourceSets.extensionApi.output

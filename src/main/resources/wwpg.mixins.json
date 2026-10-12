@@ -11,6 +11,8 @@
     "CircuitBuilderValidationMixin",
     "ElectricalNetworkAccessor",
     "PgSolverWarmupAccessor",
+    "PgPentodeBiasAccessor",
+    "PgPentodeInitializationMixin",
     "CeePhaseHistoryAccessor",
     "CeeRotorHistoryAccessor",
     "PropertyConductanceMixin",
