@@ -1,0 +1,239 @@
+{
+  "release": "0.2.1",
+  "apiVersion": "1.0.0",
+  "date": "2026-10-12",
+  "sourceCommit": "39df6fa087d0bbc4601d9aab40d76105895a1e7a",
+  "annotations": [
+    {
+      "page": "core/org/cha0scollective/wwpg/api/CircuitDescription.html",
+      "anchor": "constructor-detail",
+      "member": "CircuitDescription constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/CircuitDescription.java",
+      "body": "<p>There may be at most 4096 terminals plus internal nodes and 8192 elements. All endpoint, control, winding and ground keys must be declared. Collections reject null entries and are defensively copied.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>terminals</code></td><td>non-null immutable-copy input; unique local keys and native IDs; must match the provider geometry</td></tr><tr><td><code>internalNodes</code></td><td>non-null nodes with keys unique across terminals and internal nodes</td></tr><tr><td><code>elements</code></td><td>non-null elements with unique IDs and declared endpoint/control/winding nodes</td></tr><tr><td><code>grounds</code></td><td>non-null set of declared local node keys</td></tr></tbody></table><p>The complete terminal records must match ElectricalDevice.terminals() as a set. Retain terminals in an off state.</p>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/DeviceIdentity.html",
+      "anchor": "constructor-detail",
+      "member": "DeviceIdentity constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/DeviceIdentity.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>dimensionId</code></td><td>namespaced lowercase ID, at most 256 characters, matching [a-z0-9_.-]+:[a-z0-9_./-]+</td></tr><tr><td><code>x</code></td><td>block X coordinate; any int</td></tr><tr><td><code>y</code></td><td>block Y coordinate; any int</td></tr><tr><td><code>z</code></td><td>block Z coordinate; any int</td></tr><tr><td><code>providerId</code></td><td>namespaced lowercase ID with the same grammar and limit as dimensionId</td></tr><tr><td><code>slotId</code></td><td>stable local key, 1..128 characters matching [a-z0-9_.:/-]+</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/EndpointIdentity.html",
+      "anchor": "constructor-detail",
+      "member": "EndpointIdentity constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/EndpointIdentity.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>device</code></td><td>non-null complete stable device address</td></tr><tr><td><code>nodeKey</code></td><td>stable local key, 1..128 characters matching [a-z0-9_.:/-]+</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/InternalNode.html",
+      "anchor": "constructor-detail",
+      "member": "InternalNode constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/InternalNode.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>key</code></td><td>stable local key, 1..128 characters matching [a-z0-9_.:/-]+</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/Terminal.html",
+      "anchor": "constructor-detail",
+      "member": "Terminal constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/Terminal.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>key</code></td><td>stable local key, 1..128 characters matching [a-z0-9_.:/-]+</td></tr><tr><td><code>nativeId</code></td><td>stable upstream terminal number in [0, 4095] inclusive; unique within a description</td></tr><tr><td><code>position</code></td><td>non-null block-local position, already transformed for orientation</td></tr><tr><td><code>hitRadius</code></td><td>selection radius in blocks, finite in [1e-12, 2] inclusive</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/LocalPoint.html",
+      "anchor": "constructor-detail",
+      "member": "LocalPoint constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/LocalPoint.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>x</code></td><td>block-local X coordinate, finite in [-64, 64] inclusive</td></tr><tr><td><code>y</code></td><td>block-local Y coordinate, finite in [-64, 64] inclusive</td></tr><tr><td><code>z</code></td><td>block-local Z coordinate, finite in [-64, 64] inclusive</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/Element.html",
+      "anchor": "constructor-detail",
+      "member": "Element constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/Element.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>id</code></td><td>stable local key, 1..128 characters matching [a-z0-9_.:/-]+</td></tr><tr><td><code>positiveNode</code></td><td>declared local key; different from negativeNode</td></tr><tr><td><code>negativeNode</code></td><td>declared local key; different from positiveNode</td></tr><tr><td><code>model</code></td><td>non-null captured electrical model</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/TickContext.html",
+      "anchor": "constructor-detail",
+      "member": "TickContext constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/TickContext.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>gameTime</code></td><td>nonnegative dimension game tick</td></tr><tr><td><code>tickSeconds</code></td><td>simulated seconds in [1e-12, 1] inclusive</td></tr><tr><td><code>substeps</code></td><td>electrical steps per tick in [1, 4096] inclusive</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/NodeResult.html",
+      "anchor": "constructor-detail",
+      "member": "NodeResult constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/NodeResult.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>lastVoltageVolts</code></td><td>signed last voltage in volts; finite, with magnitude at most 1e15 (inclusive)</td></tr><tr><td><code>meanVoltageVolts</code></td><td>signed arithmetic mean voltage in volts; finite, with magnitude at most 1e15 (inclusive)</td></tr><tr><td><code>rmsVoltageVolts</code></td><td>RMS voltage in volts, finite in [0, 1e15] inclusive</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/ElementResult.html",
+      "anchor": "constructor-detail",
+      "member": "ElementResult constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/ElementResult.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>lastVoltageVolts</code></td><td>signed last voltage in volts; finite, with magnitude at most 1e15 (inclusive)</td></tr><tr><td><code>meanVoltageVolts</code></td><td>signed mean voltage in volts; finite, with magnitude at most 1e15 (inclusive)</td></tr><tr><td><code>rmsVoltageVolts</code></td><td>RMS voltage in volts in [0, 1e15] inclusive</td></tr><tr><td><code>lastCurrentAmps</code></td><td>signed last current in amperes; finite, with magnitude at most 1e15 (inclusive)</td></tr><tr><td><code>meanCurrentAmps</code></td><td>signed mean current in amperes; finite, with magnitude at most 1e15 (inclusive)</td></tr><tr><td><code>rmsCurrentAmps</code></td><td>RMS current in amperes in [0, 1e15] inclusive</td></tr><tr><td><code>meanPowerWatts</code></td><td>mean signed V*I in watts; finite, with magnitude at most 1e15 (inclusive)</td></tr><tr><td><code>energyJoules</code></td><td>signed absorbed energy in joules; finite, with magnitude at most 1e15 (inclusive)</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/DeviceResults.html",
+      "anchor": "constructor-detail",
+      "member": "DeviceResults constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/DeviceResults.java",
+      "body": "<p>Non-VALID snapshots require all three maps to be empty. Every history ID must have an element reading. Collections reject null entries and are defensively copied.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>context</code></td><td>non-null authoritative timestep</td></tr><tr><td><code>status</code></td><td>non-null availability status</td></tr><tr><td><code>nodes</code></td><td>non-null map of valid local keys to non-null node readings; at most 4096 entries</td></tr><tr><td><code>elements</code></td><td>non-null map of valid local IDs to non-null element readings; at most 8192 entries</td></tr><tr><td><code>electricalState</code></td><td>non-null history map; at most 8192 entries, with IDs present in elements</td></tr><tr><td><code>detail</code></td><td>non-null explanation of at most 1024 characters</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/TerminalMeasurement.html",
+      "anchor": "constructor-detail",
+      "member": "TerminalMeasurement constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/TerminalMeasurement.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>status</code></td><td>non-null status; VALID exactly when voltageVolts is present</td></tr><tr><td><code>voltageVolts</code></td><td>non-null optional signed volts; present value must be finite, with magnitude at most 1e15 (inclusive)</td></tr><tr><td><code>detail</code></td><td>non-null explanation of at most 1024 characters</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/VoltageMeasurement.html",
+      "anchor": "constructor-detail",
+      "member": "VoltageMeasurement constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/VoltageMeasurement.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>context</code></td><td>non-null authoritative timestep</td></tr><tr><td><code>status</code></td><td>non-null status; VALID exactly when voltage is present</td></tr><tr><td><code>voltage</code></td><td>non-null optional accepted voltage summary</td></tr><tr><td><code>detail</code></td><td>non-null explanation of at most 1024 characters</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/ElectricalModel.Resistor.html",
+      "anchor": "constructor-detail",
+      "member": "ElectricalModel.Resistor constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/ElectricalModel.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>resistanceOhms</code></td><td>resistance in ohms; finite, in [1e-12, 1e15] (inclusive)</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/ElectricalModel.Switch.html",
+      "anchor": "constructor-detail",
+      "member": "ElectricalModel.Switch constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/ElectricalModel.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>closed</code></td><td>true for the conducting state; false for an open circuit</td></tr><tr><td><code>onResistanceOhms</code></td><td>closed-state resistance in ohms; finite, in [1e-12, 1e15] (inclusive)</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/ElectricalModel.VoltageSource.html",
+      "anchor": "constructor-detail",
+      "member": "ElectricalModel.VoltageSource constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/ElectricalModel.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>voltageVolts</code></td><td>Vpositive minus Vnegative, in volts; finite, with magnitude at most 1e15 (inclusive)</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/ElectricalModel.CurrentSource.html",
+      "anchor": "constructor-detail",
+      "member": "ElectricalModel.CurrentSource constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/ElectricalModel.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>currentAmps</code></td><td>current from positive to negative node, in amperes; finite, with magnitude at most 1e15 (inclusive)</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/ElectricalModel.AcVoltageSource.html",
+      "anchor": "constructor-detail",
+      "member": "ElectricalModel.AcVoltageSource constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/ElectricalModel.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>peakVoltageVolts</code></td><td>peak amplitude in volts, finite in [0, 1e15] inclusive</td></tr><tr><td><code>frequencyHertz</code></td><td>frequency in hertz, finite in [0, 1e15] inclusive</td></tr><tr><td><code>phaseRadians</code></td><td>phase in radians; finite, with magnitude at most 1e15 (inclusive)</td></tr><tr><td><code>offsetVoltageVolts</code></td><td>DC offset in volts; finite, with magnitude at most 1e15 (inclusive)</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/ElectricalModel.Capacitor.html",
+      "anchor": "constructor-detail",
+      "member": "ElectricalModel.Capacitor constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/ElectricalModel.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>capacitanceFarads</code></td><td>capacitance in farads; finite, in [1e-12, 1e15] (inclusive)</td></tr><tr><td><code>initialVoltageVolts</code></td><td>restored/initial oriented voltage in volts; finite, with magnitude at most 1e15 (inclusive)</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/ElectricalModel.Inductor.html",
+      "anchor": "constructor-detail",
+      "member": "ElectricalModel.Inductor constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/ElectricalModel.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>inductanceHenries</code></td><td>inductance in henries; finite, in [1e-12, 1e15] (inclusive)</td></tr><tr><td><code>initialCurrentAmps</code></td><td>restored/initial oriented current in amperes; finite, with magnitude at most 1e15 (inclusive)</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/ElectricalModel.Diode.html",
+      "anchor": "constructor-detail",
+      "member": "ElectricalModel.Diode constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/ElectricalModel.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>saturationCurrentAmps</code></td><td>saturation current in amperes, finite in [1e-30, 1e15] inclusive</td></tr><tr><td><code>seriesResistanceOhms</code></td><td>series resistance in ohms; finite, in [1e-12, 1e15] (inclusive)</td></tr><tr><td><code>temperatureCelsius</code></td><td>temperature in Celsius, finite in (-273.15, 1e15]</td></tr><tr><td><code>idealityFactor</code></td><td>dimensionless ideality factor; finite, in [1e-12, 1e15] (inclusive)</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/ElectricalModel.Transformer.html",
+      "anchor": "constructor-detail",
+      "member": "ElectricalModel.Transformer constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/ElectricalModel.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>secondaryPositiveNode</code></td><td>declared local key different from secondaryNegativeNode</td></tr><tr><td><code>secondaryNegativeNode</code></td><td>declared local key different from secondaryPositiveNode</td></tr><tr><td><code>ratio</code></td><td>signed Vsecondary/Vprimary, with finite magnitude in [1e-12, 1e12] inclusive; negative reverses polarity</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/ElectricalModel.ControlledVoltageSource.html",
+      "anchor": "constructor-detail",
+      "member": "ElectricalModel.ControlledVoltageSource constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/ElectricalModel.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>controlPositiveNode</code></td><td>declared local control-node key</td></tr><tr><td><code>controlNegativeNode</code></td><td>declared local control-node key; may equal controlPositiveNode</td></tr><tr><td><code>gain</code></td><td>dimensionless voltage gain; finite, with magnitude at most 1e15 (inclusive)</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/ElectricalModel.ControlledCurrentSource.html",
+      "anchor": "constructor-detail",
+      "member": "ElectricalModel.ControlledCurrentSource constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/ElectricalModel.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>controlPositiveNode</code></td><td>declared local control-node key</td></tr><tr><td><code>controlNegativeNode</code></td><td>declared local control-node key; may equal controlPositiveNode</td></tr><tr><td><code>transconductanceSiemens</code></td><td>current/voltage gain in siemens; finite, with magnitude at most 1e15 (inclusive)</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/ElementState.Capacitor.html",
+      "anchor": "constructor-detail",
+      "member": "ElementState.Capacitor constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/ElementState.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>voltageVolts</code></td><td>accepted oriented capacitor voltage in volts; finite, with magnitude at most 1e15 (inclusive)</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/ElementState.Inductor.html",
+      "anchor": "constructor-detail",
+      "member": "ElementState.Inductor constructor",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/ElementState.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>currentAmps</code></td><td>accepted oriented inductor current in amperes; finite, with magnitude at most 1e15 (inclusive)</td></tr></tbody></table>"
+    },
+    {
+      "page": "cee/org/cha0scollective/wwpg/api/cee/CeeElectricalParameters.html",
+      "anchor": "constructor-detail",
+      "member": "CeeElectricalParameters constructor",
+      "source": "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeeElectricalParameters.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>conductanceSiemens</code></td><td>conductance in siemens, finite in [0, 1e15] inclusive</td></tr><tr><td><code>currentSourceAmps</code></td><td>CEE-native signed source current in amperes; finite, with magnitude at most 1e15 (inclusive)</td></tr><tr><td><code>voltageSourceVolts</code></td><td>CEE-native signed source voltage in volts; finite, with magnitude at most 1e15 (inclusive)</td></tr><tr><td><code>idealVoltageSource</code></td><td>must be true for nonzero voltageSourceVolts; retain true for ideal-source zero crossings</td></tr></tbody></table>"
+    },
+    {
+      "page": "cee/org/cha0scollective/wwpg/api/cee/CeeSubstepContext.html",
+      "anchor": "constructor-detail",
+      "member": "CeeSubstepContext constructor",
+      "source": "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeeSubstepContext.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>previousVoltageVolts</code></td><td>first-node minus second-node voltage in volts; finite, with magnitude at most 1e15 (inclusive)</td></tr><tr><td><code>substep</code></td><td>zero-based index in [0, totalSubsteps-1]</td></tr><tr><td><code>totalSubsteps</code></td><td>step count in [1, 4096] inclusive</td></tr><tr><td><code>substepSeconds</code></td><td>finite simulated seconds in (0, 1]</td></tr></tbody></table>"
+    },
+    {
+      "page": "cee/org/cha0scollective/wwpg/api/cee/CeeSubstepResult.html",
+      "anchor": "constructor-detail",
+      "member": "CeeSubstepResult constructor",
+      "source": "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeeSubstepResult.java",
+      "body": "<p>Arguments violating these constraints throw IllegalArgumentException; required null references throw NullPointerException.</p><table><caption>Constructor arguments</caption><thead><tr><th>Argument</th><th>Units and accepted values</th></tr></thead><tbody><tr><td><code>voltageVolts</code></td><td>first-node minus second-node voltage in volts; finite, with magnitude at most 1e15 (inclusive)</td></tr><tr><td><code>currentAmps</code></td><td>first-node to second-node current in amperes; finite, with magnitude at most 1e15 (inclusive)</td></tr><tr><td><code>substep</code></td><td>zero-based index in [0, totalSubsteps-1]</td></tr><tr><td><code>totalSubsteps</code></td><td>step count in [1, 4096] inclusive</td></tr><tr><td><code>substepSeconds</code></td><td>finite simulated seconds in (0, 1]</td></tr></tbody></table>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/ElectricalDevice.html",
+      "anchor": "prepare(org.cha0scollective.wwpg.api.TickContext)",
+      "member": "ElectricalDevice.prepare(TickContext)",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/ElectricalDevice.java",
+      "body": "<p>The prepared terminal collection must equal terminals() as a set: key, native ID, position and hit radius all participate. Ordering may differ. Return captured immutable inputs; do not advance history.</p>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/CircuitDescription.html",
+      "anchor": "empty()",
+      "member": "CircuitDescription.empty()",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/CircuitDescription.java",
+      "body": "<p>An empty description requires an empty geometry query. For a disabled device with wiring points, keep its terminal records and use an open ElectricalModel.Switch. A mismatch isolates the device.</p>"
+    },
+    {
+      "page": "cee/org/cha0scollective/wwpg/api/cee/RegisterCeePropertyAdaptersEvent.html",
+      "anchor": "constructor-detail",
+      "member": "RegisterCeePropertyAdaptersEvent constructor",
+      "source": "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/RegisterCeePropertyAdaptersEvent.java",
+      "body": "<p>WWPG constructs this event during startup. The registration sink must be non-null; null throws NullPointerException. Add-ons subscribe on their mod event bus and use register(), rather than posting their own registration event.</p>"
+    },
+    {
+      "page": "core/org/cha0scollective/wwpg/api/CircuitDescription.html",
+      "anchor": "class-description",
+      "member": "CircuitDescription overview",
+      "source": "src/api/java/org/cha0scollective/wwpg/api/CircuitDescription.java",
+      "body": "<p>The original overview\u2019s phrase \u201celectrically inactive\u201d is incomplete: empty() exposes no terminals, so it is valid only if ElectricalDevice.terminals() is also empty. Keep terminal records and open a switch for an ordinary disabled, wired machine.</p>"
+    }
+  ]
+}

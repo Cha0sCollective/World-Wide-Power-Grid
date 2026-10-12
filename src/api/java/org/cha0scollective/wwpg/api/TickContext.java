@@ -6,6 +6,13 @@ package org.cha0scollective.wwpg.api;
  * substeps is the PG schedule for this tick. Substep duration is tickSeconds/substeps.
  */
 public record TickContext(long gameTime, double tickSeconds, int substeps) {
+    /**
+     * Constructs TickContext with validated captured values.
+     * @param gameTime nonnegative dimension game tick
+     * @param tickSeconds simulated seconds in [1e-12, 1] inclusive
+     * @param substeps electrical steps per tick in [1, 4096] inclusive
+     * @throws IllegalArgumentException if a numeric, key, count or structural constraint is violated
+     */
     public TickContext {
         if (gameTime < 0) throw new IllegalArgumentException("gameTime must be nonnegative");
         ApiValidation.positive(tickSeconds, "tickSeconds");

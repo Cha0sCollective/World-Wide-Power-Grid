@@ -9,10 +9,23 @@ import java.util.Set;
  * Immutable desired device circuit. All element and ground references use local
  * terminal/internal-node keys. WWPG compares identities and structural connections
  * with the previous description; parameter-only changes retain solver objects.
- * An empty description is valid for an electrically inactive device.
+ * Its terminal set must equal the exposing {@link ElectricalDevice#terminals()}
+ * snapshot, including key, native ID, position and hit radius. Ordering may differ.
+ * An empty description is valid only when that geometry snapshot is also empty.
+ * A disabled device that keeps its wiring points must keep its terminals.
  */
 public record CircuitDescription(List<Terminal> terminals, List<InternalNode> internalNodes,
                                  List<Element> elements, Set<String> grounds) {
+    /**
+     * Constructs CircuitDescription with validated captured values.
+     * There may be at most 4096 terminals plus internal nodes and 8192 elements. All endpoint, control, winding and ground keys must be declared. Collections reject null entries and are defensively copied.
+     * @param terminals non-null immutable-copy input; unique local keys and native IDs; must match the provider geometry
+     * @param internalNodes non-null nodes with keys unique across terminals and internal nodes
+     * @param elements non-null elements with unique IDs and declared endpoint/control/winding nodes
+     * @param grounds non-null set of declared local node keys
+     * @throws IllegalArgumentException if a numeric, key, count or structural constraint is violated
+     * @throws NullPointerException if a required reference or collection entry is null
+     */
     public CircuitDescription {
         Objects.requireNonNull(terminals, "terminals");
         Objects.requireNonNull(internalNodes, "internalNodes");
@@ -62,7 +75,12 @@ public record CircuitDescription(List<Terminal> terminals, List<InternalNode> in
         }
     }
 
-    /** Description with no nodes or elements. */
+    /**
+     * Description with no terminals, internal nodes, elements or grounds.
+     * Use only when {@link ElectricalDevice#terminals()} also returns an empty list.
+     * For a wired off state retain terminals and use an open {@link ElectricalModel.Switch}.
+     * @return immutable description of a device exposing no electrical nodes
+     */
     public static CircuitDescription empty() { return new CircuitDescription(List.of(), List.of(), List.of(), Set.of()); }
 
     private static void requireNode(Set<String> nodes, String key, String owner) {

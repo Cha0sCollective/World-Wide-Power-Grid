@@ -8,6 +8,15 @@ import java.util.Objects;
  * Changing endpoint orientation is a structural change, not an ID migration.
  */
 public record Element(String id, String positiveNode, String negativeNode, ElectricalModel model) {
+    /**
+     * Constructs Element with validated captured values.
+     * @param id stable local key, 1..128 characters matching [a-z0-9_.:/-]+
+     * @param positiveNode declared local key; different from negativeNode
+     * @param negativeNode declared local key; different from positiveNode
+     * @param model non-null captured electrical model
+     * @throws IllegalArgumentException if a numeric, key, count or structural constraint is violated
+     * @throws NullPointerException if a required reference or collection entry is null
+     */
     public Element {
         ApiValidation.key(id, "element id");
         ApiValidation.key(positiveNode, "element " + id + " positiveNode");

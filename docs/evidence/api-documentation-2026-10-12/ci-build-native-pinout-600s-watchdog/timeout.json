@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "command": [
+    "./gradlew",
+    "runPackagedGameTestServer",
+    "-PtestProfile=PINOUT",
+    "-PtestBackend=NATIVE",
+    "-PrestartPhase=VERIFY",
+    "--no-daemon"
+  ],
+  "timeout_seconds": 600,
+  "process_pid": 7760,
+  "new_java_processes": {
+    "4352": "4352 net.neoforged.devlaunch.Main @D:\\\\a\\\\World-Wide-Power-Grid\\\\World-Wide-Power-Grid\\\\build\\\\moddev\\\\gameTestServerRunProgramArgs.txt",
+    "7456": "7456 org.gradle.wrapper.GradleWrapperMain runPackagedGameTestServer -PtestProfile=PINOUT -PtestBackend=NATIVE -PrestartPhase=VERIFY --no-daemon",
+    "2644": "2644 org.gradle.launcher.daemon.bootstrap.GradleDaemon 8.12"
+  },
+  "meaning": "Timed out; this run is failed evidence, never a passing retry."
+}

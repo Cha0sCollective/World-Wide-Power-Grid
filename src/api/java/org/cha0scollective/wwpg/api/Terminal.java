@@ -8,6 +8,15 @@ import java.util.Objects;
  * Position and hitRadius use blocks, not pixels. Structural parts expose no terminals.
  */
 public record Terminal(String key, int nativeId, LocalPoint position, double hitRadius) {
+    /**
+     * Constructs Terminal with validated captured values.
+     * @param key stable local key, 1..128 characters matching [a-z0-9_.:/-]+
+     * @param nativeId stable upstream terminal number in [0, 4095] inclusive; unique within a description
+     * @param position non-null block-local position, already transformed for orientation
+     * @param hitRadius selection radius in blocks, finite in [1e-12, 2] inclusive
+     * @throws IllegalArgumentException if a numeric, key, count or structural constraint is violated
+     * @throws NullPointerException if a required reference or collection entry is null
+     */
     public Terminal {
         ApiValidation.key(key, "terminal key");
         Objects.requireNonNull(position, "terminal position");

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "tutorial_load:block/load"
+    },
+    "lit=true": {
+      "model": "tutorial_load:block/load_lit"
+    }
+  }
+}

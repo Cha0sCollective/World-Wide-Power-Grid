@@ -1,0 +1,10 @@
+{
+  "status": "ISOLATED",
+  "snapshot_detail": "Invalid extension description: IllegalArgumentException",
+  "actual_diagnostic": "API minecraft:overworld 8995311, -58, -14041050: IllegalArgumentException: Prepared terminals differ from read-only terminal geometry",
+  "backend": "NATIVE",
+  "phase": "VERIFY",
+  "passed": true,
+  "runtime_sha256": "7c852948a308f22946637df1dcecee7ade680ff7f4e0906d95a1425df14212dd",
+  "starter_sha256": "252d61cb83374d0fc36c00e0f650173ec39a55f22bd64992830ad9b8344a96e1"
+}

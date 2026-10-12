@@ -60,3 +60,7 @@ nav[aria-label='WWPG documentation'] {
     overflow-x: auto;
   }
 }
+
+/* Reviewed documentation annotations; frozen reference inputs are untouched. */
+.reference-correction{border:1px solid #87ad7e;border-left:4px solid #87ad7e;background:#18221b;padding:1rem;margin:1rem 0;color:#e9ece5;overflow:auto}
+.reference-correction strong{color:#c5ddbe}.reference-correction table{width:100%;border-collapse:collapse}.reference-correction td,.reference-correction th{border:1px solid #52634d;padding:.5rem;vertical-align:top;text-align:left}.reference-correction caption{text-align:left;font-weight:bold;margin:.5rem 0}

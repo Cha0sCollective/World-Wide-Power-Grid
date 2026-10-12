@@ -1,0 +1,19 @@
+
+> wwpg-website@0.1.0 check
+> npm run prepare:docs && astro check
+
+
+> wwpg-website@0.1.0 prepare:docs
+> node scripts/prepare-docs.mjs
+
+{"file": "tutorial-load-0.1.0-source.zip", "sha256": "fff870ed5fa9ca3a6b706f6bc685ef0dcff30a6d0df67f54c57d7baf75618f74", "bytes": 53988, "mode": "independent_example_source", "publishable": false, "note": "Source project archive only; independent build and release acceptance remain separate.", "api_version": "1.0.0", "wwpg_version": "0.2.1", "purpose": "documentation companion; not part of the original released SDK"}
+Prepared 3 release documentation set(s)
+14:49:09 [content] Syncing content
+14:49:10 [content] Synced content
+14:49:10 [types] Generated 780ms
+14:49:10 [check] Getting diagnostics for Astro files in C:\Users\Parker\.codex\worktrees\api-documentation\WWPG\website...
+Result (32 files): 
+- 0 errors
+- 0 warnings
+- 0 hints
+

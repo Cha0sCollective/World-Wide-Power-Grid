@@ -32,6 +32,7 @@ const routes = [
       'developers/',
     ].map((p) => `/docs/${r.version}/${p}`),
     ...(r.api ? [`/docs/${r.version}/workshop/`] : []),
+    ...(r.version === project.currentRelease ? ['api-limits','create-addon','addon-workflow','addon-testing','general-example','native-example'].map(p => `/docs/${r.version}/${p}/`) : []),
   ]),
 ];
 const builtPath = (route) =>
@@ -80,6 +81,9 @@ function browserEnvironment(
 }
 
 test('all routes have useful metadata, one primary heading, and valid local links and assets', () => {
+  // Many chapter links share the same large source appendix. Cache its IDs,
+  // rather than repeatedly constructing a complete DOM for each anchor.
+  const anchorIds = new Map();
   for (const route of routes) {
     const dom = new JSDOM(html(route), { url: project.origin + route });
     const doc = dom.window.document;
@@ -132,14 +136,15 @@ test('all routes have useful metadata, one primary heading, and valid local link
           `${route}: unresolved external preload token`,
         );
       if (url.hash && target.endsWith('.html')) {
-        const targetDom = new JSDOM(readFileSync(target, 'utf8'));
+        if (!anchorIds.has(target)) {
+          const targetDom = new JSDOM(readFileSync(target, 'utf8'));
+          anchorIds.set(target, new Set([...targetDom.window.document.querySelectorAll('[id]')].map(node => node.id)));
+          targetDom.window.close();
+        }
         assert.ok(
-          targetDom.window.document.getElementById(
-            decodeURIComponent(url.hash.slice(1)),
-          ),
+          anchorIds.get(target).has(decodeURIComponent(url.hash.slice(1))),
           `${route}: missing anchor ${value}`,
         );
-        targetDom.window.close();
       }
     }
     dom.window.close();
@@ -499,8 +504,16 @@ test('generated references preserve released bytes, export only supported packag
         expected,
         file,
       );
-      if (!file.endsWith('.html')) continue;
       const route = `/api/${release.version}/${file}`;
+      if (file.endsWith('.css')) {
+        const css = readFileSync(builtPath(route), 'utf8');
+        for (const match of css.matchAll(/url\(\s*["']?([^"')]+)["']?\s*\)/g)) {
+          const url = new URL(match[1].trim(), project.origin + route);
+          if (url.origin === project.origin)
+            assert.ok(existsSync(builtPath(url.pathname)), `${route}: missing CSS resource ${match[1]}`);
+        }
+      }
+      if (!file.endsWith('.html')) continue;
       const doc = documentFor(builtPath(route));
       assert.ok(doc.title.includes(`API ${release.api.version}`));
       assert.equal(

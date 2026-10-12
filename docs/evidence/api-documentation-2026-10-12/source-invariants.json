@@ -1,0 +1,26 @@
+{
+  "api_files_comment_only": [
+    "src/api/java/org/cha0scollective/wwpg/api/CircuitDescription.java",
+    "src/api/java/org/cha0scollective/wwpg/api/DeviceIdentity.java",
+    "src/api/java/org/cha0scollective/wwpg/api/DeviceResults.java",
+    "src/api/java/org/cha0scollective/wwpg/api/ElectricalDevice.java",
+    "src/api/java/org/cha0scollective/wwpg/api/ElectricalModel.java",
+    "src/api/java/org/cha0scollective/wwpg/api/Element.java",
+    "src/api/java/org/cha0scollective/wwpg/api/ElementResult.java",
+    "src/api/java/org/cha0scollective/wwpg/api/ElementState.java",
+    "src/api/java/org/cha0scollective/wwpg/api/EndpointIdentity.java",
+    "src/api/java/org/cha0scollective/wwpg/api/InternalNode.java",
+    "src/api/java/org/cha0scollective/wwpg/api/LocalPoint.java",
+    "src/api/java/org/cha0scollective/wwpg/api/NodeResult.java",
+    "src/api/java/org/cha0scollective/wwpg/api/Terminal.java",
+    "src/api/java/org/cha0scollective/wwpg/api/TerminalMeasurement.java",
+    "src/api/java/org/cha0scollective/wwpg/api/TickContext.java",
+    "src/api/java/org/cha0scollective/wwpg/api/VoltageMeasurement.java",
+    "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeeElectricalParameters.java",
+    "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeeSubstepContext.java",
+    "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeeSubstepResult.java",
+    "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/RegisterCeePropertyAdaptersEvent.java"
+  ],
+  "frozen_release_changes": [],
+  "baseline_source": "15a18d8b1808ddac9de6031ae95ecc9df5bba066"
+}

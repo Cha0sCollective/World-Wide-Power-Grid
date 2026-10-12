@@ -57,3 +57,7 @@ Desktop.ini
 
 # Python tooling caches
 __pycache__/
+
+# Derived documentation companion; wrapper remains source-controlled.
+website/public/tutorial/
+!examples/adjustable-load/gradle/wrapper/gradle-wrapper.jar

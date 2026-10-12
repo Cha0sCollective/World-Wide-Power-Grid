@@ -2,6 +2,13 @@ package org.cha0scollective.wwpg.api;
 
 /** Terminal position in block-local coordinates, already transformed for block orientation. */
 public record LocalPoint(double x, double y, double z) {
+    /**
+     * Constructs LocalPoint with validated captured values.
+     * @param x block-local X coordinate, finite in [-64, 64] inclusive
+     * @param y block-local Y coordinate, finite in [-64, 64] inclusive
+     * @param z block-local Z coordinate, finite in [-64, 64] inclusive
+     * @throws IllegalArgumentException if a numeric, key, count or structural constraint is violated
+     */
     public LocalPoint {
         ApiValidation.finite(x, "terminal x");
         ApiValidation.finite(y, "terminal y");
