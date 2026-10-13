@@ -1,0 +1,442 @@
+{
+  "schema": 1,
+  "wwpg_version": "0.2.2-alpha.1",
+  "api_version": "1.0.0",
+  "source_sha": "3dbea810bbef75029045d95a851d50680d70aa9a",
+  "api_coordinate": "org.cha0scollective.wwpg:wwpg-api:1.0.0",
+  "cee_api_coordinate": "org.cha0scollective.wwpg:wwpg-cee-api:1.0.0",
+  "artifacts": {
+    "runtime": {
+      "path": "build/frozen-0.2.2-alpha.1-final/wwpg-0.2.2-alpha.1.jar",
+      "sha256": "76c9004f0ce8a87c0c318c93e1844f6657d2e8a687826cd74f9acd18f36f7b0c",
+      "bytes": 3623199
+    },
+    "api": {
+      "path": "build/frozen-0.2.2-alpha.1-final/wwpg-api-1.0.0.jar",
+      "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+      "bytes": 50143
+    },
+    "cee_api": {
+      "path": "build/frozen-0.2.2-alpha.1-final/wwpg-cee-api-1.0.0.jar",
+      "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+      "bytes": 8793
+    },
+    "api_sources": {
+      "path": "build/frozen-0.2.2-alpha.1-final/wwpg-api-1.0.0-sources.jar",
+      "sha256": "1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b",
+      "bytes": 25943
+    },
+    "api_javadoc": {
+      "path": "build/frozen-0.2.2-alpha.1-final/wwpg-api-1.0.0-javadoc.jar",
+      "sha256": "07b438c587ea6f4fdfd61da12c22ccfe15c778afd7f0d6e8ff40109bd53f0560",
+      "bytes": 230994
+    },
+    "cee_api_sources": {
+      "path": "build/frozen-0.2.2-alpha.1-final/wwpg-cee-api-1.0.0-sources.jar",
+      "sha256": "00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34",
+      "bytes": 6947
+    },
+    "cee_api_javadoc": {
+      "path": "build/frozen-0.2.2-alpha.1-final/wwpg-cee-api-1.0.0-javadoc.jar",
+      "sha256": "88ad49e4d840b326cc5bfbe805473c05362da22f792402a49933ac96ac1878f8",
+      "bytes": 107953
+    },
+    "example": {
+      "path": "build/frozen-0.2.2-alpha.1-final/wwpg-api-example-1.0.0.jar",
+      "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+      "bytes": 52081
+    },
+    "upstream_example": {
+      "path": "build/frozen-0.2.2-alpha.1-final/wwpg-upstream-api-example-1.0.0.jar",
+      "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+      "bytes": 45633
+    },
+    "example_sources": {
+      "path": "build/frozen-0.2.2-alpha.1-final/wwpg-api-example-1.0.0-source.zip",
+      "sha256": "2d1f2e62e1f3ba123c6b0241558e084505eb514d86b3ad48cbf457fa60437bce",
+      "bytes": 79524
+    },
+    "upstream_example_sources": {
+      "path": "build/frozen-0.2.2-alpha.1-final/wwpg-upstream-api-example-1.0.0-source.zip",
+      "sha256": "fb4fba98d3d6b23f2735ac4d8247a0996ba34b9fe9a6dc3ea6571bca10f5ba73",
+      "bytes": 70380
+    },
+    "maven_repository": {
+      "path": "build/frozen-0.2.2-alpha.1-final/wwpg-api-1.0.0-maven.zip",
+      "sha256": "8aa02c77d9cfc48eccd84a3405f305341aff4c2e2ad0ba9fe023c2087bb0496d",
+      "bytes": 416134
+    }
+  },
+  "abi": {
+    "path": "local/release022-alpha-acceptance/wwpg-api-contract.json",
+    "sha256": "4c523bcd33960b9a93da5f012a4d8f088919b0544ff08b6f3c236f31239fd1b7",
+    "bytes": 63513
+  },
+  "cee_abi": {
+    "path": "local/release022-alpha-acceptance/wwpg-cee-api-contract.json",
+    "sha256": "c2cad834ecf207714de2e59e3024920d491724a33605456a85627c8887a4becd",
+    "bytes": 11927
+  },
+  "previous_api": {
+    "path": "build/frozen-0.2.1/wwpg-api-1.0.0.jar",
+    "sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+    "bytes": 50130
+  },
+  "previous_cee_api": {
+    "path": "build/frozen-0.2.1/wwpg-cee-api-1.0.0.jar",
+    "sha256": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+    "bytes": 8788
+  },
+  "stages_complete": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "unresolved_failures": [],
+  "required_regression_checks": {
+    "BASE": 204,
+    "PINOUT": 208
+  },
+  "ci": {
+    "path": "release/0.2.2-alpha.1/evidence/prior-ci-38337621475/ci.json",
+    "sha256": "3881bd111b72656fcad8377650af76609590c89161813c1676041c77f272ed31",
+    "bytes": 5210
+  },
+  "acceptance_reuse": {
+    "schema": 1,
+    "scope": "runtime_version_only",
+    "source_sha": "ba1f568273011aff7ca2a529a50530a77f2f7570",
+    "runtime_version": "0.2.2-dev.31",
+    "ci_runtime_version": "0.2.1",
+    "runtime": {
+      "path": "build/libs/wwpg-0.2.2-dev.31.jar",
+      "sha256": "55322b05bb1fbafdf827d4607dbe4dbbb6db293b2863649d8dfe533bdd14109f",
+      "bytes": 3623199
+    },
+    "ci_runtime": {
+      "path": "build/reused-ci-38337621475/artifacts/wwpg-windows-latest-NATIVE-BASE/build/libs/wwpg-0.2.1.jar",
+      "sha256": "5ce8b79db2621f60d191caa39fd9c2c3069dce4a75b36824325910fff1b40e5d",
+      "bytes": 3623194
+    },
+    "api": {
+      "path": "build/frozen-0.2.1/wwpg-api-1.0.0.jar",
+      "sha256": "c68a9f5824ebc80810ad697f1132170b2cf070ba5f2b8a892a1695ededf91d21",
+      "bytes": 50130
+    },
+    "cee_api": {
+      "path": "build/frozen-0.2.1/wwpg-cee-api-1.0.0.jar",
+      "sha256": "f77e98e7a0946b0d9929dad53a3f60f7e38122777f71df4792fc7dd7e349fc38",
+      "bytes": 8788
+    },
+    "example": {
+      "path": "build/frozen-0.2.2-alpha.1-final/wwpg-api-example-1.0.0.jar",
+      "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+      "bytes": 52081
+    },
+    "upstream_example": {
+      "path": "build/frozen-0.2.2-alpha.1-final/wwpg-upstream-api-example-1.0.0.jar",
+      "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+      "bytes": 45633
+    },
+    "clients": [
+      {
+        "proof": {
+          "path": "local/gameplay-acceptance-20261012-v9/evidence-api-gui-BASE-NATIVE/verification.json",
+          "sha256": "2692a40127673d8abb14a7fd856e3d70cb1841f3c7f4e93267578d22afea1a52",
+          "bytes": 6829
+        },
+        "world": {
+          "path": "local/gameplay-acceptance-20261012-v9/api-BASE-NATIVE.zip",
+          "sha256": "a591a22066433552c6894b74fa2f665a829a2f3fd6bebca5d4f162c5fb195bc8",
+          "bytes": 322076
+        }
+      },
+      {
+        "proof": {
+          "path": "local/gameplay-acceptance-20261012-v9/evidence-api-tcp-BASE-NATIVE/verification.json",
+          "sha256": "52b0e9e4e059ef3a32ec19eaad43de0a10da5ecfdca0e689af02baf0ba41fd36",
+          "bytes": 12590
+        },
+        "world": {
+          "path": "local/gameplay-acceptance-20261012-v9/api-BASE-NATIVE.zip",
+          "sha256": "a591a22066433552c6894b74fa2f665a829a2f3fd6bebca5d4f162c5fb195bc8",
+          "bytes": 322076
+        }
+      },
+      {
+        "proof": {
+          "path": "local/gameplay-acceptance-20261012-v9/evidence-api-gui-BASE-JAVA/verification.json",
+          "sha256": "4e1c594e34c72238f3ecd5e47c52cc3836b90f7c91cb66668b2128b5b39fccfc",
+          "bytes": 6815
+        },
+        "world": {
+          "path": "local/gameplay-acceptance-20261012-v9/api-BASE-JAVA.zip",
+          "sha256": "a81c1cf27df1752f8e0d0d0a44e91dad50b06877c3886de39f9e04a9a09ca143",
+          "bytes": 323278
+        }
+      },
+      {
+        "proof": {
+          "path": "local/gameplay-acceptance-20261012-v9/evidence-api-tcp-BASE-JAVA/verification.json",
+          "sha256": "6f107bae2a6dd642851629e987d0abcc3a42078db8b3221dfd1a9d89ee196391",
+          "bytes": 12576
+        },
+        "world": {
+          "path": "local/gameplay-acceptance-20261012-v9/api-BASE-JAVA.zip",
+          "sha256": "a81c1cf27df1752f8e0d0d0a44e91dad50b06877c3886de39f9e04a9a09ca143",
+          "bytes": 323278
+        }
+      },
+      {
+        "proof": {
+          "path": "local/gameplay-acceptance-20261012-v9/evidence-api-gui-PINOUT-NATIVE/verification.json",
+          "sha256": "ca2263e9277370c4ca490274a7a1f86efb7aa8d6683d8e63364b5f1cb858a800",
+          "bytes": 6843
+        },
+        "world": {
+          "path": "local/gameplay-acceptance-20261012-v9/api-PINOUT-NATIVE.zip",
+          "sha256": "799eadbd18bdb370b421407a4a478994e78e90b6bd6946809a57bb3a5d44da47",
+          "bytes": 322498
+        }
+      },
+      {
+        "proof": {
+          "path": "local/gameplay-acceptance-20261012-v9/evidence-api-tcp-PINOUT-NATIVE/verification.json",
+          "sha256": "367b0cbba49efef5ffbce635a4fd27d27b1c59afa8da466ac551dbe5fe003a54",
+          "bytes": 12604
+        },
+        "world": {
+          "path": "local/gameplay-acceptance-20261012-v9/api-PINOUT-NATIVE.zip",
+          "sha256": "799eadbd18bdb370b421407a4a478994e78e90b6bd6946809a57bb3a5d44da47",
+          "bytes": 322498
+        }
+      },
+      {
+        "proof": {
+          "path": "local/gameplay-acceptance-20261012-v9/evidence-api-gui-PINOUT-JAVA/verification.json",
+          "sha256": "c4028ee958b85994772ecd46d51062e5bf0cc860a60ed06f5caf6ba7dcd15aa8",
+          "bytes": 6829
+        },
+        "world": {
+          "path": "local/gameplay-acceptance-20261012-v9/api-PINOUT-JAVA.zip",
+          "sha256": "5c8c78d1f7dd6d24ec4fcc29b45fcfb87eab2e55deaa345e47628277024f46a7",
+          "bytes": 319538
+        }
+      },
+      {
+        "proof": {
+          "path": "local/gameplay-acceptance-20261012-v9/evidence-api-tcp-PINOUT-JAVA/verification.json",
+          "sha256": "55bf4c60bf616c56fa872042b702ceee0939cc4a0eab6bafa0efb38a6ad725f4",
+          "bytes": 12590
+        },
+        "world": {
+          "path": "local/gameplay-acceptance-20261012-v9/api-PINOUT-JAVA.zip",
+          "sha256": "5c8c78d1f7dd6d24ec4fcc29b45fcfb87eab2e55deaa345e47628277024f46a7",
+          "bytes": 319538
+        }
+      }
+    ],
+    "stationary_clients": [
+      {
+        "profile": "BASE",
+        "backend": "NATIVE",
+        "mode": "graphical",
+        "proof": {
+          "path": "local/gameplay-acceptance-20261012-v9/evidence-yard-gui-BASE-NATIVE/verification.json",
+          "sha256": "3e28e67eb15ef4d05cddb60cbd09a9a55532094cf2e5bbf01681a267109adc1c",
+          "bytes": 5469
+        },
+        "world": {
+          "path": "local/gameplay-acceptance-20261012-v9/yard-BASE-NATIVE.zip",
+          "sha256": "7abedd9041fd5dd9dff8bbf68b3a9ff0efdfc4ad9223d9e358c51cf9c408ea18",
+          "bytes": 1478199
+        }
+      },
+      {
+        "profile": "BASE",
+        "backend": "NATIVE",
+        "mode": "multiplayer",
+        "proof": {
+          "path": "local/gameplay-acceptance-20261012-v9/evidence-yard-tcp-BASE-NATIVE/verification.json",
+          "sha256": "27c70c1cacbfc71207bd53574ff646ad0127d2e49e8e0b3e2a3edf5ad2617d40",
+          "bytes": 1898
+        },
+        "world": {
+          "path": "local/gameplay-acceptance-20261012-v9/yard-BASE-NATIVE.zip",
+          "sha256": "7abedd9041fd5dd9dff8bbf68b3a9ff0efdfc4ad9223d9e358c51cf9c408ea18",
+          "bytes": 1478199
+        }
+      },
+      {
+        "profile": "BASE",
+        "backend": "JAVA",
+        "mode": "graphical",
+        "proof": {
+          "path": "local/gameplay-acceptance-20261012-v9/evidence-yard-gui-BASE-JAVA/verification.json",
+          "sha256": "a0de04517266a97416fd9faffcf8eeefa93a3ca4799466f24c7357ffb16c9dc8",
+          "bytes": 5463
+        },
+        "world": {
+          "path": "local/gameplay-acceptance-20261012-v9/yard-BASE-JAVA.zip",
+          "sha256": "bc7e4341bd59d1660000e91473356f4cfa19c6eb6d3bf054ab21b87ef2229734",
+          "bytes": 1485595
+        }
+      },
+      {
+        "profile": "BASE",
+        "backend": "JAVA",
+        "mode": "multiplayer",
+        "proof": {
+          "path": "local/gameplay-acceptance-20261012-v9/evidence-yard-tcp-BASE-JAVA/verification.json",
+          "sha256": "63d1f32c3b7ddffca395baa74116cb055f629e11d284a26423376ca13cb298f7",
+          "bytes": 1896
+        },
+        "world": {
+          "path": "local/gameplay-acceptance-20261012-v9/yard-BASE-JAVA.zip",
+          "sha256": "bc7e4341bd59d1660000e91473356f4cfa19c6eb6d3bf054ab21b87ef2229734",
+          "bytes": 1485595
+        }
+      },
+      {
+        "profile": "PINOUT",
+        "backend": "NATIVE",
+        "mode": "graphical",
+        "proof": {
+          "path": "local/gameplay-acceptance-20261012-v9/evidence-yard-gui-PINOUT-NATIVE/verification.json",
+          "sha256": "38438b1578cbcc98d4bb245d874f79d6509dc9b8c1b80d75d4fe928ade0e7a50",
+          "bytes": 6315
+        },
+        "world": {
+          "path": "local/gameplay-acceptance-20261012-v9/yard-PINOUT-NATIVE.zip",
+          "sha256": "6bcb1df556857a2719f69eacf56014da12170719c3b5cd55600791e117bcb329",
+          "bytes": 1551924
+        }
+      },
+      {
+        "profile": "PINOUT",
+        "backend": "NATIVE",
+        "mode": "multiplayer",
+        "proof": {
+          "path": "local/gameplay-acceptance-20261012-v9/evidence-yard-tcp-PINOUT-NATIVE/verification.json",
+          "sha256": "f72199b27e42c01bf89e076b165a1c91728a26dd8ded74d2fba6de55b8c7c383",
+          "bytes": 3215
+        },
+        "world": {
+          "path": "local/gameplay-acceptance-20261012-v9/yard-PINOUT-NATIVE.zip",
+          "sha256": "6bcb1df556857a2719f69eacf56014da12170719c3b5cd55600791e117bcb329",
+          "bytes": 1551924
+        }
+      },
+      {
+        "profile": "PINOUT",
+        "backend": "JAVA",
+        "mode": "graphical",
+        "proof": {
+          "path": "local/gameplay-acceptance-20261012-v9/evidence-yard-gui-PINOUT-JAVA/verification.json",
+          "sha256": "979ed0ce656e70c30c905f3a9687379b53e8bd1767455a9f78ee40a18393dfc7",
+          "bytes": 6309
+        },
+        "world": {
+          "path": "local/gameplay-acceptance-20261012-v9/yard-PINOUT-JAVA.zip",
+          "sha256": "5d71c02a227a351cc12ba793c6dc8c62a657944de18e8b68483b293a30d22389",
+          "bytes": 1537932
+        }
+      },
+      {
+        "profile": "PINOUT",
+        "backend": "JAVA",
+        "mode": "multiplayer",
+        "proof": {
+          "path": "local/gameplay-acceptance-20261012-v9/evidence-yard-tcp-PINOUT-JAVA/verification.json",
+          "sha256": "431736a681fa9e093c00ae0beb32837bb79e1d22c5bf4750e4e24164eb3ae693",
+          "bytes": 3214
+        },
+        "world": {
+          "path": "local/gameplay-acceptance-20261012-v9/yard-PINOUT-JAVA.zip",
+          "sha256": "5d71c02a227a351cc12ba793c6dc8c62a657944de18e8b68483b293a30d22389",
+          "bytes": 1537932
+        }
+      }
+    ],
+    "worlds": {
+      "base_world": {
+        "path": "local/gameplay-acceptance-20261012-v9/yard-BASE-NATIVE.zip",
+        "sha256": "7abedd9041fd5dd9dff8bbf68b3a9ff0efdfc4ad9223d9e358c51cf9c408ea18",
+        "bytes": 1478199
+      },
+      "base_workshop_world": {
+        "path": "local/gameplay-acceptance-20261012-v9/api-BASE-NATIVE.zip",
+        "sha256": "a591a22066433552c6894b74fa2f665a829a2f3fd6bebca5d4f162c5fb195bc8",
+        "bytes": 322076
+      },
+      "pinout_world": {
+        "path": "local/gameplay-acceptance-20261012-v9/yard-PINOUT-NATIVE.zip",
+        "sha256": "6bcb1df556857a2719f69eacf56014da12170719c3b5cd55600791e117bcb329",
+        "bytes": 1551924
+      },
+      "pinout_workshop_world": {
+        "path": "local/gameplay-acceptance-20261012-v9/api-PINOUT-NATIVE.zip",
+        "sha256": "799eadbd18bdb370b421407a4a478994e78e90b6bd6946809a57bb3a5d44da47",
+        "bytes": 322498
+      }
+    },
+    "explanation": "Full candidate acceptance is reused at the user's explicit direction. Runtime payload changes only its mod version. No interrupted campaign is represented as passing."
+  },
+  "independent_example_build": {
+    "path": "build/frozen-0.2.2-alpha.1-final/extracted-sdk/example-build-proof.json",
+    "sha256": "e800bf8f3286699afb2b160bfee6c7cb4090a81b5ba28ee9ad5c9310cfde6bc8",
+    "bytes": 2373
+  },
+  "independent_upstream_example_build": {
+    "path": "build/frozen-0.2.2-alpha.1-final/extracted-sdk/upstream_example-build-proof.json",
+    "sha256": "5afc52d0d425e524fccf63bdf9af237431d4633dd38bc0e6a90f69b9f47de7ca",
+    "bytes": 2514
+  },
+  "authoring_starter": {
+    "source": {
+      "path": "build/frozen-0.2.2-alpha.1-final/starter/tutorial-load-0.1.0-source.zip",
+      "sha256": "2ad6ba59ab18e62878948693588700cdc9e2137b6418f383c3cf68fbc4fddda5",
+      "bytes": 54115
+    },
+    "proof": {
+      "path": "release/0.2.2-alpha.1/authoring-starter-final.json",
+      "sha256": "a81d655c6c84361e8fac1f997c0a5edbc014758e94190744f3f700b8b91518ff",
+      "bytes": 2531
+    }
+  },
+  "client_acceptance": [],
+  "failure_review": {
+    "path": "release/0.2.2-alpha.1/failure-review-final.json",
+    "sha256": "4e3318666cab5a79208e84107780ad5fa67511f6a419290703321b67c2bd58a2",
+    "bytes": 1117
+  },
+  "dependencies": {
+    "path": "release/0.2.2-alpha.1/dependencies.json",
+    "sha256": "2eebe1202fd4e10f25b2727443af98ea5411542abbee720854c165d0f57fb3d8",
+    "bytes": 6168
+  },
+  "previous_release": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.1",
+  "base_world": {
+    "path": "build/reused-alpha-worlds/wwpg-0.2.2-alpha.1-stationary-yard.zip",
+    "sha256": "e05e5fb88e7721d9fbe5c9edefe3b8b4f4845420b15e4982c6f8000c86cc0f4f",
+    "bytes": 1478330
+  },
+  "base_workshop_world": {
+    "path": "build/reused-alpha-worlds/wwpg-0.2.2-alpha.1-api-workshop.zip",
+    "sha256": "496db78ff2fa315565f9153a7f4bf2d06e54f3b3e7113d7463409e3f4caff19e",
+    "bytes": 322242
+  },
+  "pinout_world": {
+    "path": "build/reused-alpha-worlds/wwpg-0.2.2-alpha.1-stationary-yard-pinout.zip",
+    "sha256": "4cdd76bb17524e00b6210172e6addb0a2ae3b7f33b20994102a5476759dfef11",
+    "bytes": 1552056
+  },
+  "pinout_workshop_world": {
+    "path": "build/reused-alpha-worlds/wwpg-0.2.2-alpha.1-api-workshop-pinout.zip",
+    "sha256": "67cf6363bba20870c58e2755f8711a39480d2099fff985bac8ca9c08f07fc402",
+    "bytes": 322658
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "source_sha": "3dbea810bbef75029045d95a851d50680d70aa9a",
+  "source_archive_sha256": "2ad6ba59ab18e62878948693588700cdc9e2137b6418f383c3cf68fbc4fddda5",
+  "compiled_against_api_sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+  "uses_wwpg_project_classes": false,
+  "source": {
+    "path": "build/frozen-0.2.2-alpha.1-final/starter/tutorial-load-0.1.0-source.zip",
+    "sha256": "2ad6ba59ab18e62878948693588700cdc9e2137b6418f383c3cf68fbc4fddda5",
+    "bytes": 54115
+  },
+  "compiled_output": {
+    "path": "build/frozen-0.2.2-alpha.1-final/starter/starter project/build/libs/tutorial-load-0.1.0.jar",
+    "sha256": "692dc8fd8245664e925d158a046e6bbb3902ca72be921bfce7d915afe73934bc",
+    "bytes": 12449
+  },
+  "build_log": {
+    "path": "build/frozen-0.2.2-alpha.1-final/starter/independent-build.log",
+    "sha256": "238fff7c27976387322df16103ed5aae8b13ce719ee3f2a2abe3e8146ac977dc",
+    "bytes": 2569
+  },
+  "dependency_proof": {
+    "path": "build/frozen-0.2.2-alpha.1-final/starter/starter project/build/sdk-provenance.json",
+    "sha256": "1d3143e62f5dd26cf9f6e7b810dc067fd3eb683e51d8f912ea9f0f2e870b2931",
+    "bytes": 287
+  },
+  "runtime_sha256": "76c9004f0ce8a87c0c318c93e1844f6657d2e8a687826cd74f9acd18f36f7b0c",
+  "gameplay": [
+    {
+      "path": "release/0.2.2-alpha.1/evidence/focused-starter/ubuntu-24.04-NATIVE.json",
+      "sha256": "2b4c5aa4f85b7fc5d62e28f4dc66ea468e40c8ae3dcd24d6902ad991dc8a9ff0",
+      "bytes": 4138
+    },
+    {
+      "path": "release/0.2.2-alpha.1/evidence/focused-starter/ubuntu-24.04-JAVA.json",
+      "sha256": "508a339e3855c24facbe9b89f34c967bcc7db2425c5c34177339b2dad32b97ce",
+      "bytes": 4086
+    },
+    {
+      "path": "release/0.2.2-alpha.1/evidence/focused-starter/windows-latest-NATIVE.json",
+      "sha256": "72a62ccd41db57d8b297676ab586f9e31674e96d820f8ce22b58b4bd57225132",
+      "bytes": 4166
+    },
+    {
+      "path": "release/0.2.2-alpha.1/evidence/focused-starter/windows-latest-JAVA.json",
+      "sha256": "3cba86aa4ab244d7cd088cac5dcb568b8e1462435687567c44681496d652ebf4",
+      "bytes": 4114
+    }
+  ],
+  "graphical": [
+    {
+      "path": "local/release022-alpha-acceptance/starter/NATIVE-graphical.json",
+      "sha256": "7183d767779f5ef92ae70458ded1e6e43dbd84d2c4b9c4d2ee910d2931131a21",
+      "bytes": 1856
+    },
+    {
+      "path": "local/release022-alpha-acceptance/starter/JAVA-graphical.json",
+      "sha256": "e79c65a97b7076fecc069199e01ec9973a7a9f812c7a3c93eb88ff8b921b2296",
+      "bytes": 1844
+    }
+  ]
+}
