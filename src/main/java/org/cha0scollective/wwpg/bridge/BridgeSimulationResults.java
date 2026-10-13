@@ -25,13 +25,32 @@ public final class BridgeSimulationResults extends SimulationResults {
                                    Object2DoubleMap<DirectionalNodeConnection> currents,
                                    CircuitBuilder builder, InfrastructureSavedData infrastructure,
                                    Set<Node> unavailableNodes) {
-        super(maskSamples(samples, substeps, builder, unavailableNodes), substeps,
-                maskCurrents(currents, unavailableNodes), builder, infrastructure);
-        this.unavailableNodes = Set.copyOf(unavailableNodes);
-        unavailableOrdinals = new boolean[builder.allNodes().size()];
-        for (var node : builder.allNodes()) unavailableOrdinals[node.ordinal] = unavailableNodes.contains(node.node);
+        this(samples, substeps, currents, builder, infrastructure, unavailableNodes, false);
     }
 
+    /**
+     * Publishes a fresh current map after all solve validation. The caller transfers
+     * ownership and must never mutate or reuse the map; voltage samples are copied.
+     */
+    static BridgeSimulationResults takeOwnershipOfCurrents(double[] samples, int substeps,
+            Object2DoubleOpenHashMap<DirectionalNodeConnection> currents,
+            CircuitBuilder builder, InfrastructureSavedData infrastructure, Set<Node> unavailableNodes) {
+        return new BridgeSimulationResults(samples, substeps, currents, builder, infrastructure, unavailableNodes, true);
+    }
+
+    private BridgeSimulationResults(double[] samples, int substeps,
+                                    Object2DoubleMap<DirectionalNodeConnection> currents,
+                                    CircuitBuilder builder, InfrastructureSavedData infrastructure,
+                                    Set<Node> unavailableNodes, boolean ownsCurrents) {
+        super(maskSamples(samples, substeps, builder, unavailableNodes), substeps,
+                maskCurrents(currents, unavailableNodes, ownsCurrents), builder, infrastructure);
+        this.unavailableNodes = Set.copyOf(unavailableNodes);
+        unavailableOrdinals = new boolean[builder.allNodes().size()];
+        if (!unavailableNodes.isEmpty())
+            for (var node : builder.allNodes()) unavailableOrdinals[node.ordinal] = unavailableNodes.contains(node.node);
+    }
+
+    public boolean allAvailable() { return unavailableNodes.isEmpty(); }
     public boolean available(Node node) { return !unavailableNodes.contains(node); }
     public boolean available(Node first, Node second) { return available(first) && available(second); }
 
@@ -73,16 +92,20 @@ public final class BridgeSimulationResults extends SimulationResults {
 
     private static double[] maskSamples(double[] samples, int substeps, CircuitBuilder builder, Set<Node> unavailable) {
         var copy = samples.clone();
-        for (var node : builder.allNodes()) if (unavailable.contains(node.node))
-            Arrays.fill(copy, node.ordinal * substeps, (node.ordinal + 1) * substeps, Double.NaN);
+        if (!unavailable.isEmpty())
+            for (var node : builder.allNodes()) if (unavailable.contains(node.node))
+                Arrays.fill(copy, node.ordinal * substeps, (node.ordinal + 1) * substeps, Double.NaN);
         return copy;
     }
     private static Object2DoubleMap<DirectionalNodeConnection> maskCurrents(
-            Object2DoubleMap<DirectionalNodeConnection> currents, Set<Node> unavailable) {
-        var copy = new Object2DoubleOpenHashMap<>(currents);
-        for (var entry : copy.object2DoubleEntrySet())
-            if (unavailable.contains(entry.getKey().node1()) || unavailable.contains(entry.getKey().node2()))
-                entry.setValue(Double.NaN);
-        return copy;
+            Object2DoubleMap<DirectionalNodeConnection> currents, Set<Node> unavailable, boolean ownsCurrents) {
+        Object2DoubleMap<DirectionalNodeConnection> result = ownsCurrents
+                ? currents : new Object2DoubleOpenHashMap<>(currents);
+        if (!unavailable.isEmpty()) {
+            for (var entry : result.object2DoubleEntrySet())
+                if (unavailable.contains(entry.getKey().node1()) || unavailable.contains(entry.getKey().node2()))
+                    entry.setValue(Double.NaN);
+        }
+        return result;
     }
 }

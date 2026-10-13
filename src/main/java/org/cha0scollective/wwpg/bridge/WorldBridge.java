@@ -633,7 +633,7 @@ public final class WorldBridge {
                 unavailable.add(indexed.node);
             }
         }
-        results = new BridgeSimulationResults(voltages, substeps, currents, builder, infrastructure, unavailable);
+        results = BridgeSimulationResults.takeOwnershipOfCurrents(voltages, substeps, currents, builder, infrastructure, unavailable);
         phase = Phase.RESULTS;
     }
 

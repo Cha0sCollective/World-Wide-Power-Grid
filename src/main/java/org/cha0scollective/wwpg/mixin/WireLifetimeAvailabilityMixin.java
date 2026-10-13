@@ -22,7 +22,7 @@ public abstract class WireLifetimeAvailabilityMixin {
     private Set<Map.Entry<InWorldNodeConnection, ConnectionEntry>> wwpg$availableWires(
             WireSimulationState state, SimulationResults results) {
         var connections = state.getAllConnections();
-        if (!(results instanceof BridgeSimulationResults bridge)) return connections;
+        if (!(results instanceof BridgeSimulationResults bridge) || bridge.allAvailable()) return connections;
         return connections.stream().filter(entry -> bridge.available(entry.getKey().node1(), entry.getKey().node2())
                         && (entry.getValue().cuts == null || entry.getValue().cuts.stream().allMatch(cut -> bridge.available(cut.node()))))
                 .collect(Collectors.toSet());

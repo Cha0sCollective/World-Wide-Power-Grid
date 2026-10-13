@@ -17,6 +17,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -59,14 +61,17 @@ class BridgeSimulationResultsTest {
     }
 
     private static BridgeSimulationResults results(Node[] order, double[] samples, Set<Node> unavailable) {
+        return new BridgeSimulationResults(samples, 2, new Object2DoubleOpenHashMap<>(), builder(order), null, unavailable);
+    }
+
+    private static CircuitBuilder builder(Node[] order) {
         var nodes = new ArrayList<WrappedIndexedNode>();
         var indexes = new Object2IntOpenHashMap<Node>();
         indexes.defaultReturnValue(-1);
         for (var node : order) {
             indexes.put(node, nodes.size()); nodes.add(new WrappedIndexedNode(node, nodes.size()));
         }
-        return new BridgeSimulationResults(samples, 2, new Object2DoubleOpenHashMap<>(),
-                new CircuitBuilder(order.length, nodes, indexes), null, unavailable);
+        return new CircuitBuilder(order.length, nodes, indexes);
     }
 
     @Test void rejectedCircuitHasNoNativeNumbersWhileUnrelatedCircuitKeepsFreshResults() {
@@ -103,5 +108,91 @@ class BridgeSimulationResultsTest {
         assertArrayEquals(new double[]{20, 20}, results.getVoltages(healthyPositive));
         assertEquals(70, original[0], "Masking must not rewrite the accepted samples used by callback rollback");
         assertEquals(.7, currents.getDouble(new DirectionalNodeConnection(rejectedPositive, rejectedNegative)));
+    }
+
+    @Test void publicPublicationRetainsItsOwnCurrentsAndAvailabilityAfterCallerMutation() {
+        Node first = new AttachedNode(0, "healthy"), second = new AttachedNode(1, "healthy");
+        var connection = new DirectionalNodeConnection(first, second);
+        var currents = new Object2DoubleOpenHashMap<DirectionalNodeConnection>();
+        currents.put(connection, -.25);
+        double[] samples = {10, -10, 0, 0};
+        var unavailable = new HashSet<Node>();
+        var retained = new BridgeSimulationResults(samples, 2, currents,
+                builder(new Node[]{first, second}), null, unavailable);
+
+        currents.put(connection, 100);
+        currents.put(connection.invert(), 200);
+        unavailable.add(first);
+        Arrays.fill(samples, 99);
+        assertTrue(retained.allAvailable());
+        assertTrue(retained.available(first, second));
+        assertEquals(10, retained.getVoltageAt(first, second));
+        assertArrayEquals(new double[]{10, -10}, retained.getVoltages(first));
+        assertEquals(-.25, retained.getCurrentThrough(first, second));
+        assertEquals(.25, retained.getCurrentThrough(second, first));
+        assertEquals(100, currents.getDouble(connection), "Public publication must not rewrite its caller's map");
+    }
+
+    @Test void ownedPublicationMasksLateRejectedAndCrossCircuitCurrentsWithoutRewritingSamples() {
+        Node rejectedFirst = new AttachedNode(0, "rejected"), rejectedSecond = new AttachedNode(1, "rejected");
+        Node healthyFirst = new AttachedNode(0, "healthy"), healthySecond = new AttachedNode(1, "healthy");
+        var rejected = new DirectionalNodeConnection(rejectedFirst, rejectedSecond);
+        var healthy = new DirectionalNodeConnection(healthyFirst, healthySecond);
+        var crossCircuit = new DirectionalNodeConnection(healthyFirst, rejectedFirst);
+        var currents = new Object2DoubleOpenHashMap<DirectionalNodeConnection>();
+        currents.put(rejected, .7); currents.put(healthy, -.2); currents.put(crossCircuit, .1);
+        double[] samples = {70, 70, 0, 0, 20, 20, 0, 0};
+        // Availability is established only after the complete current map exists,
+        // matching adapter finish/late validation before WorldBridge publishes.
+        var unavailable = new HashSet<Node>();
+        unavailable.add(rejectedFirst);
+        var results = BridgeSimulationResults.takeOwnershipOfCurrents(samples, 2, currents,
+                builder(new Node[]{rejectedFirst, rejectedSecond, healthyFirst, healthySecond}), null, unavailable);
+
+        assertFalse(results.allAvailable());
+        assertTrue(Double.isNaN(currents.getDouble(rejected)), "The transferred map is masked in place");
+        assertTrue(Double.isNaN(currents.getDouble(crossCircuit)), "Either unavailable endpoint rejects a current");
+        assertEquals(-.2, currents.getDouble(healthy));
+        assertTrue(Double.isNaN(results.getCurrentThrough(rejectedFirst, rejectedSecond)));
+        assertTrue(Double.isNaN(results.getCurrentThrough(healthyFirst, rejectedFirst)));
+        assertTrue(Double.isNaN(results.getVoltageAt(rejectedFirst)));
+        assertTrue(Double.isNaN(results.getVoltages(rejectedFirst)[0]));
+        assertEquals(20, results.getVoltageAt(healthyFirst, healthySecond));
+        assertEquals(-.2, results.getCurrentThrough(healthyFirst, healthySecond));
+        assertEquals(.2, results.getCurrentThrough(healthySecond, healthyFirst));
+        assertEquals(70, samples[0], "Masking must not mutate the callback/next-tick sample buffer");
+        unavailable.clear();
+        assertFalse(results.allAvailable(), "Publication owns its final availability snapshot");
+        assertFalse(results.available(rejectedFirst));
+    }
+
+    @Test void retainedOwnedResultsSurviveTheNextPublicationWithAReusedSixteenStepBuffer() {
+        Node first = new AttachedNode(0, "healthy"), second = new AttachedNode(1, "healthy");
+        var connection = new DirectionalNodeConnection(first, second);
+        double[] samples = new double[32];
+        for (int step = 0; step < 16; step++) samples[step] = step % 2 == 0 ? 8 : -8;
+        var firstCurrents = new Object2DoubleOpenHashMap<DirectionalNodeConnection>();
+        firstCurrents.put(connection, -.2);
+        var retained = BridgeSimulationResults.takeOwnershipOfCurrents(samples, 16, firstCurrents,
+                builder(new Node[]{first, second}), null, Set.of());
+        double[] firstWaveform = Arrays.copyOf(samples, 16);
+
+        Arrays.fill(samples, 0, 16, 30);
+        var secondCurrents = new Object2DoubleOpenHashMap<DirectionalNodeConnection>();
+        secondCurrents.put(connection, .3);
+        var next = BridgeSimulationResults.takeOwnershipOfCurrents(samples, 16, secondCurrents,
+                builder(new Node[]{first, second}), null, Set.of());
+        assertTrue(retained.allAvailable());
+        assertTrue(next.allAvailable());
+        assertArrayEquals(firstWaveform, retained.getVoltages(first));
+        assertEquals(8, retained.getVoltageAt(first, second));
+        assertEquals(64, retained.getVoltageAtSqr(first, second));
+        assertEquals(-.2, retained.getCurrentThrough(first, second));
+        assertEquals(.2, retained.getCurrentThrough(second, first));
+        assertEquals(30, next.getVoltageAt(first, second));
+        assertEquals(.3, next.getCurrentThrough(first, second));
+        var returned = retained.getVoltages(first);
+        Arrays.fill(returned, 1000);
+        assertArrayEquals(firstWaveform, retained.getVoltages(first), "Published voltage arrays remain defensive copies");
     }
 }
