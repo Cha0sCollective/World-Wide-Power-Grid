@@ -39,6 +39,7 @@
     "PgWireItemReadinessMixin",
     "PgBehaviourMixin",
     "CeeDeviceRemovalMixin",
+    "CeeBuzzerAudioMixin",
     "ApiDeviceRemovalMixin",
     "PgWireRemovalMixin",
     "VariacResultsMixin",

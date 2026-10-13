@@ -218,6 +218,14 @@ public final class ExpandedClientAcceptance {
                         WorldWidePowerGrid.LOGGER.info("STATIONARY_CLIENT_DUPLEX_MODEL_PASSED: native bundled geometry resolves under the published duplex name");
                     }
                     var block=mc.level.getBlockEntity(view.target);
+                    if(block instanceof com.george_vi.electroenergetics.content.buzzer.BuzzerBlockEntity buzzer) {
+                        var field=buzzer.getClass().getDeclaredField("soundInstance");field.setAccessible(true);
+                        var sound=(net.minecraft.client.resources.sounds.SoundInstance)field.get(buzzer);
+                        require(sound!=null&&mc.getSoundManager().isActive(sound),"Powered client buzzer has no active native sound");
+                        var serverBuzzer=mc.getSingleplayerServer().overworld().getBlockEntity(view.target);
+                        require(serverBuzzer!=null&&field.get(serverBuzzer)==null,"Integrated-server buzzer created a client sound");
+                        WorldWidePowerGrid.LOGGER.info("STATIONARY_CLIENT_BUZZER_AUDIO_PASSED: client sound active; server sound absent");
+                    }
                     if(block instanceof org.patryk3211.powergrid.electricity.crt.CRTBlockEntity crt) {
                         require(crt.getColor()==net.minecraft.world.item.DyeColor.LIME,"CRT client lost native color");
                         var brightness=org.patryk3211.powergrid.electricity.crt.CRTBlockEntity.class.getDeclaredField("brightness");brightness.setAccessible(true);

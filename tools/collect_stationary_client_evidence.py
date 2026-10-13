@@ -27,6 +27,7 @@ def main():
     assert 'BUILD SUCCESSFUL' in text and 'EXPANDED_REAL_CLIENT_PASSED' in text,'Graphical run did not complete'
     markers=['EXPANDED_CLIENT_BASELINE_PASSED','EXPANDED_CLIENT_PANEL_PACKETS_PASSED','EXPANDED_CLIENT_P2_PACKETS_PASSED','STATIONARY_CLIENT_PLOTTER_GRAPH_PASSED','STATIONARY_CLIENT_DUPLEX_MODEL_PASSED','STATIONARY_CLIENT_DESIGN_SCREEN_PASSED','STATIONARY_CLIENT_NATIVE_PORTAL_PASSED',f'WWPG_TEST_BACKEND_CONFIG: requested={args.backend}, configured={args.backend}']
     if extraction['profile']=='PINOUT':markers.append('STATIONARY_CLIENT_PINOUT_KEYBOARD_PASSED')
+    markers.append('STATIONARY_CLIENT_BUZZER_AUDIO_PASSED')
     for marker in markers:assert marker in text,f'Missing actual graphical checkpoint: {marker}'
     views=re.findall(r'EXPANDED_CLIENT_VIEW_PASSED: (\S+)',text)
     expected=150 if extraction['profile']=='PINOUT' else 148

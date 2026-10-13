@@ -68,6 +68,11 @@ windows and weak-line, ground and transformer-port connectivity. Native pentode
 reference fixtures distinguish its first operating-voltage initialization from
 persistent or later solver failures, and check that rejected trials retain storage.
 
+The stationary buzzer fixture invokes CEE's audio entry point on the server and
+requires no client sound to be created. Graphical yard checks separately require
+an active native buzzer sound on the client. This covers CEE's physical-client
+helper also running during integrated-server block ticks.
+
 ```sh
 python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestNamespaces=wwpg_loading -PtestBackend=NATIVE -PtestDirectory=run/loading-native --no-daemon
 python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestNamespaces=wwpg_loading -PtestBackend=JAVA -PtestDirectory=run/loading-java --no-daemon
