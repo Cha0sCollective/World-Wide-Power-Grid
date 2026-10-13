@@ -1,10 +1,10 @@
 # Version compatibility
 
-WWPG **0.2.1** allows newer NeoForge, Create, CEE and Power Grid
+WWPG **0.2.1** and **0.2.2-alpha.1** allow newer NeoForge, Create, CEE and Power Grid
 versions. The jar no longer requires an exact match to every tested dependency.
 Minecraft remains **1.21.1**.
 
-| Dependency | Minimum accepted by WWPG 0.2.1 | Test targets |
+| Dependency | Minimum accepted by WWPG | Test targets |
 | --- | --- | --- |
 | NeoForge | 21.1.231 | 21.1.231 and 21.1.248 |
 | Create | 6.0.10 | 6.0.10-280 |

@@ -83,6 +83,12 @@ jobs:
         run: |
           python tools/package_api_release.py --example-source examples/extension-addon --output build/distributions/wwpg-api-example-1.0.0-source.zip
           python tools/package_api_release.py --example-source examples/cee-addon --output build/distributions/wwpg-upstream-api-example-1.0.0-source.zip
+      - name: Build the downloadable adjustable-load starter from extracted SDK artifacts
+        if: matrix.profile == 'BASE'
+        run: python tools/authoring_starter_acceptance.py prepare --output build/authoring-starter --runtime build/libs/wwpg-0.2.2-alpha.1.jar
+      - name: Verify starter controls, native tools, cold persistence and real chunk reload
+        if: matrix.profile == 'BASE'
+        run: python tools/authoring_starter_acceptance.py server --output build/authoring-starter --runtime build/libs/wwpg-0.2.2-alpha.1.jar --backend ${{ matrix.backend }}
       - name: Verify global freeze and one-tick stepping in an isolated API fixture
         run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api_pause -PtestDirectory=run/api-pause --no-daemon
       - name: Verify stopped-before-ready persisted wire retirement
@@ -128,7 +134,7 @@ jobs:
           done
       - name: Export and extract the exact stationary yard ZIP
         run: |
-          python tools/export_stationary_yard.py --run run/yard --jar build/libs/wwpg-0.2.1.jar --target 0.2.1 --profile ${{ matrix.profile }} --output build/distributions/wwpg-stationary-${{ matrix.profile }}.zip
+          python tools/export_stationary_yard.py --run run/yard --jar build/libs/wwpg-0.2.2-alpha.1.jar --target 0.2.2-alpha.1 --profile ${{ matrix.profile }} --output build/distributions/wwpg-stationary-${{ matrix.profile }}.zip
           python tools/reopen_stationary_yard.py build/distributions/wwpg-stationary-${{ matrix.profile }}.zip --run run/exported-yard
       - name: Three cold restarts of the extracted ZIP
         run: |
@@ -146,7 +152,7 @@ jobs:
           done
       - name: Export and extract the exact API Workshop ZIP with locked example jars
         run: |
-          python tools/export_api_workshop.py --run run/api-workshop --jar build/libs/wwpg-0.2.1.jar --example examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar --upstream-example examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar --profile ${{ matrix.profile }} --backend ${{ matrix.backend }} --output build/distributions/wwpg-api-workshop-${{ matrix.profile }}.zip
+          python tools/export_api_workshop.py --run run/api-workshop --jar build/libs/wwpg-0.2.2-alpha.1.jar --example examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar --upstream-example examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar --profile ${{ matrix.profile }} --backend ${{ matrix.backend }} --output build/distributions/wwpg-api-workshop-${{ matrix.profile }}.zip
           python tools/reopen_stationary_yard.py build/distributions/wwpg-api-workshop-${{ matrix.profile }}.zip --run run/exported-api-workshop
       - name: Three cold restarts of the extracted API Workshop ZIP
         run: |
@@ -232,6 +238,7 @@ jobs:
             run/board-startup/logs/
             run/board-startup/crash-reports/
             run/board-startup/packaged-*.json
+            build/authoring-starter/
             run/yard/logs/
             run/yard/crash-reports/
             run/yard/packaged-*.json

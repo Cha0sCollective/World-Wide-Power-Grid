@@ -90,7 +90,7 @@ public final class DocAcceptance {
             Files.writeString(Path.of("doc-evidence",name+"-"+System.getProperty("wwpg.doc.phase","SETUP")+"-"+System.currentTimeMillis()+".json"),new GsonBuilder().setPrettyPrinting().create().toJson(data));
         } catch(Exception e) { throw new IllegalStateException("Could not retain documentation evidence",e); }
     }
-    private static String artifactHash(String modId) throws Exception {
+    static String artifactHash(String modId) throws Exception {
         var path=net.neoforged.fml.ModList.get().getModFileById(modId).getFile().getFilePath();
         return java.util.HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(path)));
     }

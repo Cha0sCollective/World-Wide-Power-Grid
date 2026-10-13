@@ -5,15 +5,15 @@ its separately registered electrical-property adapter, and a native **Power Grid
 circuit-board component**. It compiles against published API artifacts and the
 pinned upstream mods. It imports no WWPG implementation classes or Mixins.
 
-This example ships with WWPG 0.2.1 and requires extension API 1.0.0.
+This example ships with WWPG 0.2.2-alpha.1 and requires extension API 1.0.0.
 The [API Workshop](../../docs/EXTENSION_API_WORKSHOP.md) provides a playable panel
-and board demonstration. The [release verification](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.1/wwpg-0.2.1-verification.zip)
+and board demonstration. The [release verification](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.2-alpha.1/wwpg-0.2.2-alpha.1-verification.zip)
 identifies the tested artifacts and accepted checks.
 
 ## Build independently
 
 Use Java 21. Download, verify and extract the
-[developer SDK](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.1/wwpg-0.2.1-developer-sdk.zip),
+[developer SDK](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.2-alpha.1/wwpg-0.2.2-alpha.1-developer-sdk.zip),
 then extract its `maven/wwpg-api-1.0.0-maven.zip`. The directory containing `org/cha0scollective/wwpg` is the Maven
 repository root. Supply that directory's absolute path and run this project's
 wrapper from the project directory:
@@ -127,7 +127,7 @@ unload fixture's chunk holder alive.
 
 These fixtures check electrical and saved-state behavior. Graphical editing and
 multiplayer have separate acceptance sessions, recorded alongside them in the
-[final verification](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.1/wwpg-0.2.1-verification.zip). The
+[final verification](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.2-alpha.1/wwpg-0.2.2-alpha.1-verification.zip). The
 [maintainer release guide](../../docs/API_RELEASE_CHECKS.md) describes the complete gates.
 
 Unix: the current released source ZIP may require the `chmod` step above. Run from the extracted project root and quote the entire `-PapiRepository=...` argument when the path contains spaces.

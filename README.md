@@ -4,6 +4,8 @@
 
 **[Download WWPG 0.2.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.1)** for Minecraft 1.21.1 and NeoForge. Follow [installation](docs/INSTALL.md) for the required mod versions and settings. Add-on developers can also use the separately versioned **extension API 1.0.0**.
 
+The [0.2.2-alpha.1 prerelease](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-alpha.1) adds circuit-loading improvements and an expanded add-on SDK. Large-network performance remains under investigation.
+
 ## What you can do
 
 - Generate electricity, charge storage, run motors and pumps, light a factory and heat processing equipment across both mods.
