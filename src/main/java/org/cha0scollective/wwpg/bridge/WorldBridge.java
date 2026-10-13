@@ -504,6 +504,7 @@ public final class WorldBridge {
 
     /** Read preparation-time isolation by stable native identity without touching the world. */
     public Optional<String> isolatedTerminalReason(BlockPos position, int nativeId) {
+        if (isolated.isEmpty()) return Optional.empty();
         var key = EndpointKey.of(new InWorldNode(nativeId, position));
         if (!isolated.contains(key)) return Optional.empty();
         var reason = isolationReasons.getOrDefault(key, "Electrical terminal is isolated");
@@ -611,26 +612,34 @@ public final class WorldBridge {
         }
         var unavailable = new HashSet<Node>();
         pausedDevices.clear(); statefulDevices.clear();
-        for (var device : devices) if (device instanceof com.george_vi.electroenergetics.content.converter.ConverterDevice) statefulDevices.add(device.pos);
-        for (var dynamic : dynamics) for (int ordinal : new int[]{dynamic.first, dynamic.second}) {
-            var owner = ownerOf(preparedKeys.get(builder.getNode(ordinal).node)); if (owner != null) statefulDevices.add(owner);
+        boolean paused = RestorationCoordinator.anyPaused();
+        if (paused) {
+            for (var device : devices) if (device instanceof com.george_vi.electroenergetics.content.converter.ConverterDevice) statefulDevices.add(device.pos);
+            for (var dynamic : dynamics) for (int ordinal : new int[]{dynamic.first, dynamic.second}) {
+                var owner = ownerOf(preparedKeys.get(builder.getNode(ordinal).node)); if (owner != null) statefulDevices.add(owner);
+            }
         }
-        for (var indexed : builder.allNodes()) {
-            try {
-                var key = preparedKey(indexed.node);
-                var node = nodes.get(key);
-                if (node != null && RestorationCoordinator.paused(node.getNetwork())) {
+        // Healthy, fully mapped circuits have no availability work to perform.
+        // An unmapped descriptor must still take the checked path and be masked.
+        if (paused || !isolated.isEmpty() || !adapterPreparationFailures.isEmpty()
+                || !failedAdapterNetworks.isEmpty() || preparedKeys.size() != builder.allNodes().size()) {
+            for (var indexed : builder.allNodes()) {
+                try {
+                    var key = preparedKey(indexed.node);
+                    var node = nodes.get(key);
+                    if (node != null && RestorationCoordinator.paused(node.getNetwork())) {
+                        unavailable.add(indexed.node);
+                        var owner = ownerOf(key); if (owner != null) { pausedDevices.add(owner); RestorationCoordinator.markOwner(level, owner); }
+                    }
+                    if (isolated.contains(key) || adapterPreparationFailures.containsKey(indexed.node)
+                            || node != null && failedAdapterNetworks.contains(node.getNetwork())) {
+                        unavailable.add(indexed.node);
+                        var owner = ownerOf(key);
+                        if (owner != null) failedAdapterDevices.add(owner);
+                    }
+                } catch (IllegalArgumentException unsupported) {
                     unavailable.add(indexed.node);
-                    var owner = ownerOf(key); if (owner != null) { pausedDevices.add(owner); RestorationCoordinator.markOwner(level, owner); }
                 }
-                if (isolated.contains(key) || adapterPreparationFailures.containsKey(indexed.node)
-                        || node != null && failedAdapterNetworks.contains(node.getNetwork())) {
-                    unavailable.add(indexed.node);
-                    var owner = ownerOf(key);
-                    if (owner != null) failedAdapterDevices.add(owner);
-                }
-            } catch (IllegalArgumentException unsupported) {
-                unavailable.add(indexed.node);
             }
         }
         results = BridgeSimulationResults.takeOwnershipOfCurrents(voltages, substeps, currents, builder, infrastructure, unavailable);
