@@ -83,18 +83,37 @@ def validate(manifest, root, gate):
     for role in ('example','upstream_example'):
         gate.require(gate.sha(gate.locked_file(reuse[role],root)) == manifest['artifacts'][role]['sha256'], 'Example changed')
     expected = {(b,p,m) for b in gate.BACKENDS for p in gate.PROFILES for m in ('graphical','multiplayer')}
-    seen = set()
+    seen = set(); accepted_worlds = {}
     for item in reuse['clients']:
         proof = gate.accepted_record(item['proof'],root,hashes,source)
         key = (proof['backend'],proof['profile'],proof['mode'])
         gate.require(key in expected and key not in seen and proof.get('real_graphical_client') is True, 'Invalid original client coverage')
         gate.require(proof['world_sha256'] == item['world']['sha256'], 'Original client world differs')
         gate.locked_file(item['world'],root)
+        accepted_worlds[('api',proof['profile'],proof['backend'])] = item['world']['sha256']
         if proof['mode'] == 'multiplayer':
             gate.require(proof.get('real_tcp_clients') is True and len(set(proof.get('real_clients',[])))>=2, 'Original TCP coverage missing')
         seen.add(key)
     gate.require(seen == expected, 'Original client matrix incomplete')
+    stationary = set()
+    for item in reuse['stationary_clients']:
+        proof = gate.read(gate.locked_file(item['proof'],root))
+        key = (item['backend'],item['profile'],item['mode'])
+        gate.require(key in expected and key not in stationary and proof.get('passed') is True
+                     and proof['backend']==item['backend'] and proof['profile']==item['profile']
+                     and proof['jar']['sha256']==hashes['runtime'], 'Original stationary client differs')
+        old_world = proof.get('exact_archive_sha256',proof.get('archive_sha256'))
+        gate.require(old_world==item['world']['sha256'], 'Original stationary world differs')
+        gate.locked_file(item['world'],root)
+        if item['mode']=='multiplayer':
+            gate.require(len(set(proof.get('real_clients',[])))>=2 and
+                         all(p['exit_code']==0 for p in proof['processes'].values()), 'Original stationary TCP coverage missing')
+        stationary.add(key);accepted_worlds[('yard',item['profile'],item['backend'])] = old_world
+    gate.require(stationary==expected, 'Original stationary client matrix incomplete')
     for key in ('base_world','pinout_world','base_workshop_world','pinout_workshop_world'):
+        profile = 'BASE' if key.startswith('base_') else 'PINOUT'
+        kind = 'api' if 'workshop' in key else 'yard'
+        gate.require(reuse['worlds'][key]['sha256']==accepted_worlds[(kind,profile,'NATIVE')], 'Derived world was not the accepted snapshot')
         previous = gate.locked_file(reuse['worlds'][key],root); current_world = gate.locked_file(manifest[key],root)
         with zipfile.ZipFile(previous) as old, zipfile.ZipFile(current_world) as new:
             old_files = {n.split('/',1)[1]:old.read(n) for n in old.namelist() if not n.endswith('/')}

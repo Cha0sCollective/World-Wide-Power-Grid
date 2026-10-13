@@ -5,11 +5,19 @@ five-download layout and short notes. Edit [presentation.json](presentation.json
 for the next release; version-specific records below preserve published history.
 
 **[WWPG 0.2.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.1)**
-is the current release. To install it or choose a playable world, use the
+is the current stable release. To install it or choose a playable world, use the
 [installation guide](../docs/INSTALL.md). This directory is for reviewing what
 was shipped and which checks passed.
 
-## Current release: 0.2.1
+## Current alpha: 0.2.2-alpha.1
+
+[WWPG 0.2.2-alpha.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-alpha.1)
+adds safer loading, less repeated electrical work and the expanded add-on SDK.
+API 1.0.0 stays compatible. [Release record](0.2.2-alpha.1/README.md) explains
+the carried-forward gameplay acceptance, focused SDK checks and remaining limits.
+[Downloads and checksums](0.2.2-alpha.1/download-layout.json) identify the five files.
+
+## Current stable release: 0.2.1
 
 Adds tested NeoForge 21.1.248 support alongside 21.1.231. Newer NeoForge, Create,
 CEE and Power Grid versions are permitted for player testing. Extension API
