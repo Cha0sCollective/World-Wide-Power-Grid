@@ -22,7 +22,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public final class RestorationCoordinator {
     public static final boolean ENABLED = Boolean.parseBoolean(System.getProperty("wwpg.restorationBatch", "true"));
     private static final Map<ServerLevel, State> WORLDS = new ConcurrentHashMap<>();
-    private static final Set<ElectricalNetwork> PAUSED = Collections.newSetFromMap(new IdentityHashMap<>());
+    // Networks own their ephemeral mark. Advancing the epoch expires all marks
+    // without a retained identity set or touching discarded native networks.
+    private static long pauseEpoch = 1;
     private static boolean anyPaused;
     private static int serverTick = Integer.MIN_VALUE;
     private RestorationCoordinator() { }
@@ -45,7 +47,7 @@ public final class RestorationCoordinator {
     public static void begin(ServerLevel level) {
         if (!ENABLED) return;
         int tick = level.getServer().getTickCount();
-        if (serverTick != tick) { PAUSED.clear(); anyPaused = false; serverTick = tick; }
+        if (serverTick != tick) { nextPauseEpoch(); serverTick = tick; }
         var state = state(level); state.decisions.clear(); state.pausedPositions.clear(); state.heldDiscovery.clear();
         state.owners.clear(); state.claimed.clear(); state.dependencies.clear(); state.networkDependencies.clear();
         state.chunks.values().removeIf(record -> !record.window.active() && record.window.activated());
@@ -153,7 +155,7 @@ public final class RestorationCoordinator {
             hold = batch.hold(level.getServer().getTickCount(), ready);
         }
         state.decisions.put(network, hold);
-        if (hold) { PAUSED.add(network); anyPaused = true; state.pausedPositions.addAll(positions); }
+        if (hold) { markPaused(network); state.pausedPositions.addAll(positions); }
         return hold;
     }
     public static void holdDiscovery(WorldNetworks world, ElectricalNetwork network) {
@@ -165,7 +167,22 @@ public final class RestorationCoordinator {
             ((WorldNetworksAccessor) world).wwpg$islandQueue().addAll(state.heldDiscovery);
         }
     }
-    public static boolean paused(ElectricalNetwork network) { return anyPaused && network != null && PAUSED.contains(network); }
+    public static boolean paused(ElectricalNetwork network) {
+        return anyPaused && network != null && ((PauseMarker) network).wwpg$pauseEpoch() == pauseEpoch;
+    }
+    private static void markPaused(ElectricalNetwork network) {
+        ((PauseMarker) network).wwpg$pauseEpoch(pauseEpoch);
+        anyPaused = true;
+    }
+    private static void nextPauseEpoch() {
+        if (++pauseEpoch == 0) ++pauseEpoch; // Zero belongs to an unmarked new network.
+        anyPaused = false;
+    }
+    /** Internal, unsaved native-network state; the coordinator is its only writer. */
+    public interface PauseMarker {
+        long wwpg$pauseEpoch();
+        void wwpg$pauseEpoch(long epoch);
+    }
     public static boolean anyPaused() { return anyPaused; }
     /** Internal fixture entry point uses the same queued identity as the native loading events. */
     public static void restoring(ServerLevel level, ChunkPos chunk) {
@@ -197,7 +214,7 @@ public final class RestorationCoordinator {
     }
     private static boolean couple(ElectricalNetwork first, ElectricalNetwork second) {
         if (first == null || second == null || paused(first) == paused(second)) return false;
-        PAUSED.add(first); PAUSED.add(second); return true;
+        markPaused(first); markPaused(second); return true;
     }
     public static String status(ServerLevel level) {
         var state = WORLDS.get(level);
@@ -205,7 +222,7 @@ public final class RestorationCoordinator {
                 + ", pausedCircuits=" + (state == null ? 0 : state.decisions.values().stream().filter(Boolean::booleanValue).count());
     }
     public static void unload(ServerLevel level) { WORLDS.remove(level); }
-    public static void clear() { WORLDS.clear(); PAUSED.clear(); anyPaused = false; serverTick = Integer.MIN_VALUE; }
+    public static void clear() { WORLDS.clear(); nextPauseEpoch(); serverTick = Integer.MIN_VALUE; }
     private record Dependency(long chunk, BlockWireEndpoint endpoint) { }
     private static final class Chunk { RestorationWindow window = new RestorationWindow(); boolean ready; final Set<BlockWireEndpoint> endpoints = new HashSet<>(); }
     private static final class State {

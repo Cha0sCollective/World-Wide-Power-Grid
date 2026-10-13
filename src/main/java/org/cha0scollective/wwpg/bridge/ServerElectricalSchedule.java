@@ -47,6 +47,9 @@ public final class ServerElectricalSchedule {
         }
         RestorationCoordinator.coupledClosure(worlds);
         RestorationCoordinator.finishPreparation(worlds);
+        // Native preparation can merge/split circuits. Bind extension work to
+        // the final owners for this tick, before any electrical advancement.
+        for (var world : worlds) org.cha0scollective.wwpg.extension.ApiCircuits.get((ServerLevel) world.world).beginSolving();
         var networks = worlds.stream().map(world -> world.subnetworks.stream().filter(network -> !RestorationCoordinator.paused(network)).toList()).toList();
         for (var world : worlds) Bridges.get((ServerLevel) world.world).scheduledNetworks(
                 (int) world.subnetworks.stream().filter(network -> !network.isEmpty() && !RestorationCoordinator.paused(network)).count());

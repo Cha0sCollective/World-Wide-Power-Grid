@@ -89,6 +89,11 @@ public final class ApiElectric implements IElectric {
     public ElectricalDevice device() { return device; }
     public ElectricBehaviour behaviour() { return behaviour; }
 
+    /** Safe circuit preparation already persisted this holder's terminal and wire identities. */
+    public OwnedFloatingNode preparedTerminal(int nativeId) {
+        return behaviour.hasTerminal(nativeId)?behaviour.resolveTerminal(nativeId):null;
+    }
+
     boolean sameIdentity(ElectricalDevice replacement) {
         return providerId.equals(replacement.providerId()) && slotId.equals(replacement.slotId());
     }
@@ -199,6 +204,10 @@ public final class ApiElectric implements IElectric {
     public Terminal terminalDefinition(int nativeId) { return terminals.get(nativeId); }
     public List<Terminal> terminalDefinitions() { return List.copyOf(terminals.values()); }
 
+    /** Geometry reads can update native position caches before the safe topology phase. */
+    public boolean geometryChanged() { return geometryChanged; }
+    void geometryRefreshed() { geometryChanged = false; }
+
     @Override public int terminalCount() {
         return terminals.keySet().stream().mapToInt(id -> id + 1).max().orElse(0);
     }
@@ -249,7 +258,6 @@ public final class ApiElectric implements IElectric {
         }
         if (geometryChanged) {
             behaviour.refreshConnectionEntities();
-            geometryChanged = false;
         }
     }
 
@@ -259,6 +267,10 @@ public final class ApiElectric implements IElectric {
         @Override public OwnedFloatingNode getTerminal(int nativeId) {
             if (!hasTerminal(nativeId)) return null;
             rememberIdentities();
+            return resolveTerminal(nativeId);
+        }
+
+        private OwnedFloatingNode resolveTerminal(int nativeId) {
             var endpoint = new BlockWireEndpoint(pos, nativeId);
             // PG publishes its WorldNetworks before resolving saved endpoints.
             // Avoid recursively completing the same saved network during load.

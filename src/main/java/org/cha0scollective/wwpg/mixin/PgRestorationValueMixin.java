@@ -7,11 +7,15 @@ import org.patryk3211.powergrid.electricity.sim.node.INode;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Unique;
 import org.patryk3211.powergrid.electricity.sim.solver.IMNA;
 import java.util.List;
 
 @Mixin(value = ElectricalNetwork.class, remap = false)
-public abstract class PgRestorationValueMixin {
+public abstract class PgRestorationValueMixin implements RestorationCoordinator.PauseMarker {
+    @Unique private long wwpg$pauseEpoch;
+    @Override public long wwpg$pauseEpoch() { return wwpg$pauseEpoch; }
+    @Override public void wwpg$pauseEpoch(long epoch) { wwpg$pauseEpoch = epoch; }
     @Shadow private IMNA mna;
     @Shadow protected List<INode> nodes;
     @Shadow protected abstract Double tryGetValue(INode node);

@@ -504,6 +504,7 @@ public final class WorldBridge {
 
     /** Read preparation-time isolation by stable native identity without touching the world. */
     public Optional<String> isolatedTerminalReason(BlockPos position, int nativeId) {
+        if (isolated.isEmpty()) return Optional.empty();
         var key = EndpointKey.of(new InWorldNode(nativeId, position));
         if (!isolated.contains(key)) return Optional.empty();
         var reason = isolationReasons.getOrDefault(key, "Electrical terminal is isolated");
@@ -611,29 +612,37 @@ public final class WorldBridge {
         }
         var unavailable = new HashSet<Node>();
         pausedDevices.clear(); statefulDevices.clear();
-        for (var device : devices) if (device instanceof com.george_vi.electroenergetics.content.converter.ConverterDevice) statefulDevices.add(device.pos);
-        for (var dynamic : dynamics) for (int ordinal : new int[]{dynamic.first, dynamic.second}) {
-            var owner = ownerOf(preparedKeys.get(builder.getNode(ordinal).node)); if (owner != null) statefulDevices.add(owner);
-        }
-        for (var indexed : builder.allNodes()) {
-            try {
-                var key = preparedKey(indexed.node);
-                var node = nodes.get(key);
-                if (node != null && RestorationCoordinator.paused(node.getNetwork())) {
-                    unavailable.add(indexed.node);
-                    var owner = ownerOf(key); if (owner != null) { pausedDevices.add(owner); RestorationCoordinator.markOwner(level, owner); }
-                }
-                if (isolated.contains(key) || adapterPreparationFailures.containsKey(indexed.node)
-                        || node != null && failedAdapterNetworks.contains(node.getNetwork())) {
-                    unavailable.add(indexed.node);
-                    var owner = ownerOf(key);
-                    if (owner != null) failedAdapterDevices.add(owner);
-                }
-            } catch (IllegalArgumentException unsupported) {
-                unavailable.add(indexed.node);
+        boolean paused = RestorationCoordinator.anyPaused();
+        if (paused) {
+            for (var device : devices) if (device instanceof com.george_vi.electroenergetics.content.converter.ConverterDevice) statefulDevices.add(device.pos);
+            for (var dynamic : dynamics) for (int ordinal : new int[]{dynamic.first, dynamic.second}) {
+                var owner = ownerOf(preparedKeys.get(builder.getNode(ordinal).node)); if (owner != null) statefulDevices.add(owner);
             }
         }
-        results = new BridgeSimulationResults(voltages, substeps, currents, builder, infrastructure, unavailable);
+        // Healthy, fully mapped circuits have no availability work to perform.
+        // An unmapped descriptor must still take the checked path and be masked.
+        if (paused || !isolated.isEmpty() || !adapterPreparationFailures.isEmpty()
+                || !failedAdapterNetworks.isEmpty() || preparedKeys.size() != builder.allNodes().size()) {
+            for (var indexed : builder.allNodes()) {
+                try {
+                    var key = preparedKey(indexed.node);
+                    var node = nodes.get(key);
+                    if (node != null && RestorationCoordinator.paused(node.getNetwork())) {
+                        unavailable.add(indexed.node);
+                        var owner = ownerOf(key); if (owner != null) { pausedDevices.add(owner); RestorationCoordinator.markOwner(level, owner); }
+                    }
+                    if (isolated.contains(key) || adapterPreparationFailures.containsKey(indexed.node)
+                            || node != null && failedAdapterNetworks.contains(node.getNetwork())) {
+                        unavailable.add(indexed.node);
+                        var owner = ownerOf(key);
+                        if (owner != null) failedAdapterDevices.add(owner);
+                    }
+                } catch (IllegalArgumentException unsupported) {
+                    unavailable.add(indexed.node);
+                }
+            }
+        }
+        results = BridgeSimulationResults.takeOwnershipOfCurrents(voltages, substeps, currents, builder, infrastructure, unavailable);
         phase = Phase.RESULTS;
     }
 
@@ -874,7 +883,12 @@ public final class WorldBridge {
         Diagnostic(String message,long tick) { this.message=message; firstTick=lastTick=tick; }
     }
 
-    private record Desired(ElectricalProperties properties, boolean voltageSource, Node first, Node second, int firstOrdinal, int secondOrdinal) {}
+    private record Desired(ElectricalProperties properties, boolean voltageSource, Node first, Node second, int firstOrdinal, int secondOrdinal) {
+        Desired refresh(ElectricalProperties properties, Node first, Node second) {
+            if (this.properties == properties && this.first == first && this.second == second) return this;
+            return new Desired(properties, voltageSource, first, second, firstOrdinal, secondOrdinal);
+        }
+    }
     /** Validate structure and ownership, then update parameters without rebuilding desired-key maps. */
     private final class StableDescription {
         final Node[] descriptions = builder.allNodes().stream().map(indexed -> indexed.node).toArray(Node[]::new);
@@ -884,13 +898,13 @@ public final class WorldBridge {
         final double[] grounding = builder.allNodes().stream().mapToDouble(indexed -> indexed.groundConductance).toArray();
         final it.unimi.dsi.fastutil.ints.Int2IntMap priorities = new it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap(((CircuitBuilderAccessor)builder).wwpg$groundPriorities());
         final List<Branch> bindings = List.copyOf(branches.values());
-        final Map<Branch, Class<?>> families = new IdentityHashMap<>();
         final Map<Branch, Boolean> primaryWindings = new IdentityHashMap<>();
         final Map<BlockPos, Object> anchors = new HashMap<>();
         final Map<BlockPos, net.minecraft.world.level.block.Block> blocks = new HashMap<>();
         final Map<WindingKey, Winding> windings = Map.copyOf(transformers);
         StableDescription() {
-            for (var branch : bindings) { families.put(branch, branch.desired.properties.getClass()); if (branch.desired.properties instanceof TransformerElectricalProperties transformer) primaryWindings.put(branch, transformer.isPrimary()); }
+            for (var branch : bindings) if (branch.desired.properties instanceof TransformerElectricalProperties transformer)
+                primaryWindings.put(branch, transformer.isPrimary());
             for (var description : descriptions) if (description instanceof InWorldNode inWorld) {
                 var pos = inWorld.sourcePos();
                 var block = org.cha0scollective.wwpg.wiring.Terminals.loadedState(level, pos).getBlock();
@@ -918,7 +932,7 @@ public final class WorldBridge {
             }
             for (var branch : bindings) {
                 var old = branch.desired; var properties = builder.getNode(old.firstOrdinal).adjacency.get(old.secondOrdinal);
-                if (properties == null || properties.getClass() != families.get(branch) || !supported(properties) || !branch.element.attached()) return false;
+                if (properties == null || properties.getClass() != old.properties.getClass() || !supported(properties) || !branch.element.attached()) return false;
                 boolean voltage = properties.isVoltageSource() || properties.conductance() == 0 &&
                         (properties.getClass().getName().endsWith("$ACSource") || acSourceInversions.contains(properties));
                 if (voltage != branch.element.hasVoltageSource()) return false;
@@ -935,8 +949,8 @@ public final class WorldBridge {
             for (var branch : bindings) {
                 var old = branch.desired; var properties = builder.getNode(old.firstOrdinal).adjacency.get(old.secondOrdinal);
                 branch.element.update(properties); branch.currentSum = branch.currentSquares = branch.currentThisStep = 0;
-                branch.desired = new Desired(properties, old.voltageSource, builder.getNode(old.firstOrdinal).node,
-                        builder.getNode(old.secondOrdinal).node, old.firstOrdinal, old.secondOrdinal);
+                branch.desired = old.refresh(properties, builder.getNode(old.firstOrdinal).node,
+                        builder.getNode(old.secondOrdinal).node);
                 if (properties instanceof TransformerElectricalProperties transformer && transformer.isPrimary()) {
                     var winding = windings.get(WindingKey.of(transformer));
                     winding.element.update(transformer.ratio()); winding.properties = transformer;
