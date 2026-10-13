@@ -47,6 +47,7 @@ public final class ExpandedClientAcceptance {
     private int serverAge, age, index, phase;
     private boolean begun, finishing;
     private final Map<String,Double> serverReadings = new java.util.concurrent.ConcurrentHashMap<>();
+    private final Map<String,Boolean> serverBuzzerSilent = new java.util.concurrent.ConcurrentHashMap<>();
 
     public ExpandedClientAcceptance() {
         if (Boolean.getBoolean("wwpg.test.apiWorkshop")) { new ApiWorkshopClientAcceptance(); return; }
@@ -87,6 +88,8 @@ public final class ExpandedClientAcceptance {
                 views.add(new View(code,target,base.offset(11,0,4),false));
             }
         } catch(Exception error) { throw new IllegalStateException("Cannot read exact exported yard coverage",error); }
+        // Check the newly covered audio workflow before the long view tour.
+        views.sort(java.util.Comparator.comparingInt(view -> view.name.equals("S07") ? 0 : 1));
         NeoForge.EVENT_BUS.addListener(ServerTickEvent.Post.class,this::serverTick);
         NeoForge.EVENT_BUS.addListener(ClientTickEvent.Post.class,this::clientTick);
         WorldWidePowerGrid.LOGGER.info("EXPANDED_CLIENT_HELPER: exact saved world; backend={}; views={}",System.getProperty("wwpg.test.backend"),views.size());
@@ -146,6 +149,15 @@ public final class ExpandedClientAcceptance {
                     var be=level.getBlockEntity(view.gauge);
                     if(be instanceof CurrentGaugeBlockEntity current)serverReadings.put(view.name,(double)current.getValue());
                     else if(be instanceof VoltageGaugeBlockEntity voltage)serverReadings.put(view.name,(double)voltage.getValue());
+                    if(level.getBlockEntity(view.target) instanceof com.george_vi.electroenergetics.content.buzzer.BuzzerBlockEntity buzzer){
+                        // ServerLevel deliberately returns null for block lookups
+                        // from the render thread. Inspect here and publish only
+                        // the immutable observation to the client-side check.
+                        var field=buzzer.getClass().getDeclaredField("soundInstance");field.setAccessible(true);
+                        boolean silent=field.get(buzzer)==null;
+                        require(silent,"Integrated-server buzzer created a client sound at "+view.name);
+                        serverBuzzerSilent.put(view.name,silent);
+                    }
                 }
                 if(serverPassed&&event.getServer().getTickCount()%20==0){
                     serverWires=level.getEntitiesOfClass(BaseWireEntity.class,new net.minecraft.world.phys.AABB(0,-64,0,284,320,314)).size();
@@ -218,6 +230,13 @@ public final class ExpandedClientAcceptance {
                         WorldWidePowerGrid.LOGGER.info("STATIONARY_CLIENT_DUPLEX_MODEL_PASSED: native bundled geometry resolves under the published duplex name");
                     }
                     var block=mc.level.getBlockEntity(view.target);
+                    if(block instanceof com.george_vi.electroenergetics.content.buzzer.BuzzerBlockEntity buzzer) {
+                        var field=buzzer.getClass().getDeclaredField("soundInstance");field.setAccessible(true);
+                        var sound=(net.minecraft.client.resources.sounds.SoundInstance)field.get(buzzer);
+                        require(sound!=null&&mc.getSoundManager().isActive(sound),"Powered client buzzer has no active native sound");
+                        require(Boolean.TRUE.equals(serverBuzzerSilent.get(view.name)),"Server-thread buzzer observation unavailable at "+view.name);
+                        WorldWidePowerGrid.LOGGER.info("STATIONARY_CLIENT_BUZZER_AUDIO_PASSED: client sound active; server sound absent");
+                    }
                     if(block instanceof org.patryk3211.powergrid.electricity.crt.CRTBlockEntity crt) {
                         require(crt.getColor()==net.minecraft.world.item.DyeColor.LIME,"CRT client lost native color");
                         var brightness=org.patryk3211.powergrid.electricity.crt.CRTBlockEntity.class.getDeclaredField("brightness");brightness.setAccessible(true);

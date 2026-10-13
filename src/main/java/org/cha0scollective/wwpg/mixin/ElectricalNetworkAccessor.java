@@ -10,4 +10,6 @@ public interface ElectricalNetworkAccessor {
     @Accessor("mna") IMNA wwpg$solver();
     @Accessor("groundReferenceCount") int wwpg$groundCount();
     @Accessor("conductanceUpdates") int wwpg$conductanceUpdates();
+    @Accessor("sourceCount") int wwpg$sourceCount();
+    @Accessor("wires") java.util.Set<org.patryk3211.powergrid.electricity.sim.AbstractElectricWire> wwpg$wires();
 }

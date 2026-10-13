@@ -3,6 +3,8 @@ package org.cha0scollective.wwpg.bridge;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import org.cha0scollective.wwpg.mixin.WorldNetworksAccessor;
+import org.cha0scollective.wwpg.mixin.ElectricalNetworkAccessor;
+import org.cha0scollective.wwpg.mixin.PgSolverWarmupAccessor;
 import org.patryk3211.powergrid.collections.ModdedConfigs;
 import org.patryk3211.powergrid.electricity.GlobalElectricNetworks;
 import org.patryk3211.powergrid.electricity.WorldNetworks;
@@ -32,20 +34,22 @@ public final class ServerElectricalSchedule {
         LAST_TICK.put(server, tick);
         var worlds = new ArrayList<WorldNetworks>();
         for (var level : server.getAllLevels()) org.cha0scollective.wwpg.extension.ApiCircuits.get(level).prepare();
+        for (var level : server.getAllLevels()) worlds.add(GlobalElectricNetworks.getWorldNetworks(level));
+        RestorationCoordinator.joinCoupledWindows(worlds);
         // CEE prepares every dimension at tickServer HEAD, before PG's first
         // level pre-tick. Retain PG's native topology and matrix preparation,
         // but wait until every dimension is ready before advancing any of them.
         PREPARING.set(true);
         try {
-            for (var level : server.getAllLevels()) {
-                var world = GlobalElectricNetworks.getWorldNetworks(level);
-                worlds.add(world);
-                world.preTick();
-            }
+            for (var world : worlds) world.preTick();
         } finally {
             PREPARING.remove();
         }
-        var networks = worlds.stream().map(world -> List.copyOf(world.subnetworks)).toList();
+        RestorationCoordinator.coupledClosure(worlds);
+        RestorationCoordinator.finishPreparation(worlds);
+        var networks = worlds.stream().map(world -> world.subnetworks.stream().filter(network -> !RestorationCoordinator.paused(network)).toList()).toList();
+        for (var world : worlds) Bridges.get((ServerLevel) world.world).scheduledNetworks(
+                (int) world.subnetworks.stream().filter(network -> !network.isEmpty() && !RestorationCoordinator.paused(network)).count());
         int steps = ModdedConfigs.server().electricity.solver.multiTicks.get();
         for(var world:worlds) {
             var level=(ServerLevel)world.world;
@@ -72,20 +76,36 @@ public final class ServerElectricalSchedule {
         var api = org.cha0scollective.wwpg.extension.ApiCircuits.get(level);
         api.before(network, org.cha0scollective.wwpg.extension.ApiCircuits.step(level,network));
         try {
+            var solver = ((ElectricalNetworkAccessor) network).wwpg$solver();
+            int warmBefore = solver instanceof PgSolverWarmupAccessor warm ? warm.wwpg$warmUpTicks() : 0;
             network.singleTick();
             // A backend can return a finite trial state without accepting it.
             // CEE history/gameplay must observe the same acceptance boundary as
             // general API models, including ordinary native warm-up substeps.
             if (!network.isConverged()) {
-                var error = new IllegalStateException("PG electrical substep did not converge");
-                api.solveFailure(network, error);
-                bridge.reject(network, error);
-            }
+                int warmAfter = solver instanceof PgSolverWarmupAccessor warm ? warm.wwpg$warmUpTicks() : 0;
+                if (SubstepAcceptance.settling(warmBefore, warmAfter, false)) {
+                    PentodeInitialization.converged(network);
+                    api.invalidate(network);
+                    bridge.unavailable(network);
+                } else if(PentodeInitialization.hold(network,warmBefore)) {
+                    // PG limits a fresh pentode's bias to 0.25 V/iteration at
+                    // default settings. A 100 V screen can exceed its first
+                    // 200-iteration solve. Keep that trial unavailable without
+                    // changing equations, iteration limits, or physical state.
+                    api.invalidate(network);
+                    bridge.unavailable(network);
+                } else {
+                    var error = new IllegalStateException("PG electrical substep did not converge (warm-up " + warmBefore + " -> " + warmAfter + ")");
+                    api.solveFailure(network, error);
+                    bridge.reject(network, error);
+                }
+            } else PentodeInitialization.converged(network);
         }
         catch(RuntimeException | LinkageError error) { api.solveFailure(network,error);bridge.reject(network,error); }
         api.after(network);
         bridge.afterSolve(network);
         org.cha0scollective.wwpg.extension.NativeApiReadings.after(level,network);
     }
-    public static void clear() { LAST_TICK.clear(); PREPARING.remove(); }
+    public static void clear() { LAST_TICK.clear(); PREPARING.remove(); PentodeInitialization.clear(); }
 }

@@ -43,6 +43,9 @@ public final class StationaryEquipmentGameTests {
         h.runAtTickTime(25, () -> {
             near(h, h.getBlockEntity(LOAD).saveWithoutMetadata(h.getLevel().registryAccess())
                     .getDouble("Voltage"), 100, .1, "Buzzer's native audio voltage");
+            // Use the public upstream entry point. NeoForge removes tickAudio
+            // itself on dedicated servers because its body uses client classes.
+            ((com.george_vi.electroenergetics.content.buzzer.BuzzerBlockEntity) h.getBlockEntity(LOAD)).tick();
             ((CreativeSourceBlockEntity) h.getBlockEntity(SOURCE)).setValue(0);
         });
         h.runAtTickTime(45, () -> {
