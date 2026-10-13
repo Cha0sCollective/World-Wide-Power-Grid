@@ -69,6 +69,11 @@ public final class ApiTerminals {
         // provider discovery, sidecars, and their SavedData belong to that thread.
         if (level instanceof ServerLevel server && !server.getServer().isSameThread()) return null;
         var device = device(level, pos);
+        return updateHolder(level,pos,device);
+    }
+
+    /** The safe refresh already resolved this provider; do not query its capability twice. */
+    private static ApiElectric updateHolder(Level level,BlockPos pos,ElectricalDevice device) {
         if (device == null) return null;
         try {
             var entries = HOLDERS.computeIfAbsent(level, ignored -> new HashMap<>());
@@ -255,7 +260,7 @@ public final class ApiTerminals {
             current = null;
         }
         if (provider == null) return null;
-        var refreshed = get(level, pos);
+        var refreshed = updateHolder(level,pos,provider);
         if (refreshed != null) {
             refreshed.resumed();
             refreshed.rememberIdentities();

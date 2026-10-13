@@ -41,7 +41,13 @@ public abstract class WorldNetworksMixin {
     @Inject(method = "preTick", at = @At(value = "INVOKE", target = "Lorg/patryk3211/powergrid/electricity/sim/PerformanceCounter;start()V"))
     private void wwpg$begin(CallbackInfo ci) {
         var world = (WorldNetworks) (Object) this;
-        if (world.world instanceof ServerLevel level) Bridges.get(level).beginSolving(world);
+        if (world.world instanceof ServerLevel level) {
+            Bridges.get(level).beginSolving(world);
+            // Direct native preTick calls retain the same final-owner binding.
+            // The central schedule binds after all dimensions finish preparing.
+            if (!ServerElectricalSchedule.preparing())
+                org.cha0scollective.wwpg.extension.ApiCircuits.get(level).beginSolving();
+        }
     }
     @Redirect(method = "preTick", at = @At(value = "INVOKE", target = "Lorg/patryk3211/powergrid/electricity/sim/ElectricalNetwork;singleTick()V"))
     private void wwpg$substep(ElectricalNetwork network) {

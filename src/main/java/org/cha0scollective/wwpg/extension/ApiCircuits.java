@@ -29,8 +29,7 @@ public final class ApiCircuits {
     private long preparedTick = Long.MIN_VALUE, commits, created, removed;
     private int preparedServerTick = Integer.MIN_VALUE;
     private boolean solving;
-    private final Map<ElectricalNetwork,Integer> steps = new IdentityHashMap<>();
-    private final Set<ElectricalNetwork> invalidNetworks = Collections.newSetFromMap(new IdentityHashMap<>());
+    private final Map<ElectricalNetwork,NetworkWork> networkWork = new IdentityHashMap<>();
 
     private ApiCircuits(ServerLevel level) { this.level = level; }
     public static ApiCircuits get(ServerLevel level) { return WORLDS.computeIfAbsent(level, ApiCircuits::new); }
@@ -57,7 +56,10 @@ public final class ApiCircuits {
         }
     }
     public static void clear() { WORLDS.clear(); }
-    public static int step(ServerLevel level,ElectricalNetwork network) { return get(level).steps.getOrDefault(network,0); }
+    public static int step(ServerLevel level,ElectricalNetwork network) {
+        var work=get(level).networkWork.get(network);
+        return work==null?0:work.steps;
+    }
     /** Read-only lifecycle instrumentation; never creates a world manager or simulation objects. */
     public static int objectCount(ServerLevel level,BlockPos pos) {
         var owner=WORLDS.get(level);
@@ -92,8 +94,7 @@ public final class ApiCircuits {
         preparedTick = level.getGameTime();
         preparedServerTick = level.getServer().getTickCount();
         context = new TickContext(level.getGameTime(), .05, ModdedConfigs.server().electricity.solver.multiTicks.get());
-        steps.clear();
-        invalidNetworks.clear();
+        networkWork.clear();
         failures.clear();
         failedProviders.clear();
         failedAnchors.clear();
@@ -132,7 +133,7 @@ public final class ApiCircuits {
                 devices.put(pos,device);
                 var wantedNodes = new LinkedHashMap<String,OwnedFloatingNode>();
                 for (var terminal : description.terminals()) {
-                    var node = adapter.behaviour().getTerminal(terminal.nativeId());
+                    var node = adapter.preparedTerminal(terminal.nativeId());
                     if (node == null) throw new IllegalArgumentException("Unresolved terminal " + terminal.key() + " id=" + terminal.nativeId());
                     wantedNodes.put(terminal.key(),node);
                 }
@@ -210,17 +211,39 @@ public final class ApiCircuits {
         }
         return keys.stream().distinct().map(nodes::get).toList();
     }
+    /** Build this tick's work after PG has completed island discovery and merging. */
+    public void beginSolving() {
+        if (solving) throw new IllegalStateException("API ownership rebuild during solve");
+        for (var work : networkWork.values()) {
+            work.elements.clear();
+            work.samples.clear();
+        }
+        for (var device : devices.values()) {
+            for (var element : device.elements.values()) {
+                var network = element.network();
+                if (network != null) networkWork.computeIfAbsent(network, ignored -> new NetworkWork()).elements.add(element);
+            }
+            for (var sample : device.samples.values()) {
+                var network = sample.node.getNetwork();
+                if (network != null) networkWork.computeIfAbsent(network, ignored -> new NetworkWork()).samples.add(sample);
+            }
+        }
+        networkWork.values().removeIf(work -> work.elements.isEmpty() && work.samples.isEmpty());
+    }
     public void before(ElectricalNetwork network,int step) {
         solving=true;
-        for(var device:devices.values()) for(var element:device.elements.values()) if(element.network()==network) element.before(context,step);
+        var work = networkWork.get(network);
+        if (work != null) for (var element : work.elements) element.before(context,step);
     }
     public void after(ElectricalNetwork network) {
-        for(var device:devices.values()) {
-            for(var element:device.elements.values()) if(element.network()==network) element.after();
-            for(var sample:device.samples.values()) if(sample.node.getNetwork()==network) sample.add(network.isConverged());
+        var work = networkWork.get(network);
+        if (work != null) {
+            for (var element : work.elements) element.after();
+            boolean converged = network.isConverged();
+            for (var sample : work.samples) sample.add(converged);
+            ++work.steps;
         }
         solving=false;
-        steps.merge(network,1,Integer::sum);
     }
     public void finish() {
         solving=false;
@@ -230,8 +253,8 @@ public final class ApiCircuits {
                 device.elements.values().forEach(ApiElement::rejectTick);
                 device.results=DeviceResults.unavailable(context,MeasurementStatus.NOT_READY,"Circuit is restoring its chunks and wires"); continue;
             }
-            boolean valid=device.elements.values().stream().allMatch(e->e.valid(context) && !invalidNetworks.contains(e.network()))
-                    && device.samples.values().stream().allMatch(n->n.valid(context) && !invalidNetworks.contains(n.node.getNetwork()));
+            boolean valid=device.elements.values().stream().allMatch(e->e.valid(context) && !invalid(e.network()))
+                    && device.samples.values().stream().allMatch(n->n.valid(context) && !invalid(n.node.getNetwork()));
             if(!valid) { device.elements.values().forEach(ApiElement::rejectTick);device.results=DeviceResults.unavailable(context,MeasurementStatus.SOLVE_FAILED,"Incomplete or nonconverged electrical substeps"); continue; }
             var nodes=new HashMap<String,NodeResult>(); device.samples.forEach((key,s)->nodes.put(key,s.result()));
             var elements=new HashMap<String,ElementResult>(); var states=new HashMap<String,ElementState>();
@@ -246,8 +269,13 @@ public final class ApiCircuits {
     }
     /** Faulting upstream adapters invalidate the same shared network's extension results. */
     public void invalidate(ElectricalNetwork network) {
-        if(network!=null)invalidNetworks.add(network);
+        var work=networkWork.get(network);
+        if(work!=null)work.invalid=true;
         NativeApiReadings.invalidate(level,network);
+    }
+    private boolean invalid(ElectricalNetwork network) {
+        var work=networkWork.get(network);
+        return work!=null&&work.invalid;
     }
     public void solveFailure(ElectricalNetwork network,Throwable error) {
         invalidate(network);
@@ -312,6 +340,13 @@ public final class ApiCircuits {
         CircuitDescription description; DeviceResults results,committedResults; long committed=Long.MIN_VALUE;
         int committedServerTick=Integer.MIN_VALUE;
         Device(DeviceIdentity identity,ElectricalDevice provider,Object anchor) { this.identity=identity; this.provider=provider;this.anchor=anchor; }
+    }
+    /** Ephemeral ownership for one prepared tick; no cross-tick invalidation state. */
+    private static final class NetworkWork {
+        final List<ApiElement> elements = new ArrayList<>();
+        final List<NodeSamples> samples = new ArrayList<>();
+        int steps;
+        boolean invalid;
     }
     private static final class NodeSamples {
         final OwnedFloatingNode node; double last,sum,squares; int count; boolean failed;

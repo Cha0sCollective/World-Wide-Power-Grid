@@ -874,7 +874,12 @@ public final class WorldBridge {
         Diagnostic(String message,long tick) { this.message=message; firstTick=lastTick=tick; }
     }
 
-    private record Desired(ElectricalProperties properties, boolean voltageSource, Node first, Node second, int firstOrdinal, int secondOrdinal) {}
+    private record Desired(ElectricalProperties properties, boolean voltageSource, Node first, Node second, int firstOrdinal, int secondOrdinal) {
+        Desired refresh(ElectricalProperties properties, Node first, Node second) {
+            if (this.properties == properties && this.first == first && this.second == second) return this;
+            return new Desired(properties, voltageSource, first, second, firstOrdinal, secondOrdinal);
+        }
+    }
     /** Validate structure and ownership, then update parameters without rebuilding desired-key maps. */
     private final class StableDescription {
         final Node[] descriptions = builder.allNodes().stream().map(indexed -> indexed.node).toArray(Node[]::new);
@@ -884,13 +889,13 @@ public final class WorldBridge {
         final double[] grounding = builder.allNodes().stream().mapToDouble(indexed -> indexed.groundConductance).toArray();
         final it.unimi.dsi.fastutil.ints.Int2IntMap priorities = new it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap(((CircuitBuilderAccessor)builder).wwpg$groundPriorities());
         final List<Branch> bindings = List.copyOf(branches.values());
-        final Map<Branch, Class<?>> families = new IdentityHashMap<>();
         final Map<Branch, Boolean> primaryWindings = new IdentityHashMap<>();
         final Map<BlockPos, Object> anchors = new HashMap<>();
         final Map<BlockPos, net.minecraft.world.level.block.Block> blocks = new HashMap<>();
         final Map<WindingKey, Winding> windings = Map.copyOf(transformers);
         StableDescription() {
-            for (var branch : bindings) { families.put(branch, branch.desired.properties.getClass()); if (branch.desired.properties instanceof TransformerElectricalProperties transformer) primaryWindings.put(branch, transformer.isPrimary()); }
+            for (var branch : bindings) if (branch.desired.properties instanceof TransformerElectricalProperties transformer)
+                primaryWindings.put(branch, transformer.isPrimary());
             for (var description : descriptions) if (description instanceof InWorldNode inWorld) {
                 var pos = inWorld.sourcePos();
                 var block = org.cha0scollective.wwpg.wiring.Terminals.loadedState(level, pos).getBlock();
@@ -918,7 +923,7 @@ public final class WorldBridge {
             }
             for (var branch : bindings) {
                 var old = branch.desired; var properties = builder.getNode(old.firstOrdinal).adjacency.get(old.secondOrdinal);
-                if (properties == null || properties.getClass() != families.get(branch) || !supported(properties) || !branch.element.attached()) return false;
+                if (properties == null || properties.getClass() != old.properties.getClass() || !supported(properties) || !branch.element.attached()) return false;
                 boolean voltage = properties.isVoltageSource() || properties.conductance() == 0 &&
                         (properties.getClass().getName().endsWith("$ACSource") || acSourceInversions.contains(properties));
                 if (voltage != branch.element.hasVoltageSource()) return false;
@@ -935,8 +940,8 @@ public final class WorldBridge {
             for (var branch : bindings) {
                 var old = branch.desired; var properties = builder.getNode(old.firstOrdinal).adjacency.get(old.secondOrdinal);
                 branch.element.update(properties); branch.currentSum = branch.currentSquares = branch.currentThisStep = 0;
-                branch.desired = new Desired(properties, old.voltageSource, builder.getNode(old.firstOrdinal).node,
-                        builder.getNode(old.secondOrdinal).node, old.firstOrdinal, old.secondOrdinal);
+                branch.desired = old.refresh(properties, builder.getNode(old.firstOrdinal).node,
+                        builder.getNode(old.secondOrdinal).node);
                 if (properties instanceof TransformerElectricalProperties transformer && transformer.isPrimary()) {
                     var winding = windings.get(WindingKey.of(transformer));
                     winding.element.update(transformer.ratio()); winding.properties = transformer;
