@@ -1,7 +1,10 @@
 package org.cha0scollective.wwpg.extension;
 
 import com.george_vi.electroenergetics.foundation.device.ElectricalDeviceBlock;
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import it.unimi.dsi.fastutil.ints.IntSet;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -11,7 +14,6 @@ import org.cha0scollective.wwpg.api.MeasurementStatus;
 import org.cha0scollective.wwpg.api.NodeResult;
 import org.cha0scollective.wwpg.api.TickContext;
 import org.cha0scollective.wwpg.api.VoltageMeasurement;
-import org.cha0scollective.wwpg.mixin.ElectricalNetworkAccessor;
 import org.cha0scollective.wwpg.wiring.Terminals;
 import org.cha0scollective.wwpg.wiring.LineVoltages;
 import org.patryk3211.powergrid.collections.ModdedConfigs;
@@ -35,13 +37,9 @@ public final class NativeApiReadings {
     private int serverTick;
     private Map<Key, Frame> frames = new HashMap<>(), previousFrames = new HashMap<>();
     private final Map<BlockPos, Owner> owners = new HashMap<>();
-    private final Map<ElectricalNetwork, List<Frame>> direct = new IdentityHashMap<>();
-    private final Map<ElectricalNetwork, List<LineFrame>> interpolated = new IdentityHashMap<>();
-    private final Map<ElectricalNetwork, Integer> steps = new IdentityHashMap<>();
+    private final Map<ElectricalNetwork, NetworkSamples> networks = new IdentityHashMap<>();
     private final Map<ElectricalNetwork, Object> references = new IdentityHashMap<>();
     private ReferenceGroups referenceGroups = new ReferenceGroups();
-    private final Set<ElectricalNetwork> rejected = Collections.newSetFromMap(new IdentityHashMap<>());
-    private final Map<TransmissionLine, Map<OwnedFloatingNode, Double>> lineFractions = new IdentityHashMap<>();
     private final Map<TransmissionLine, LineFrame> lines = new IdentityHashMap<>();
     private boolean finished;
 
@@ -68,8 +66,8 @@ public final class NativeApiReadings {
             var scratch = recorder.previousFrames;
             recorder.previousFrames = recorder.frames;
             recorder.frames = scratch;
-            recorder.frames.clear(); recorder.owners.clear(); recorder.direct.clear(); recorder.interpolated.clear();
-            recorder.steps.clear(); recorder.references.clear(); recorder.rejected.clear(); recorder.lineFractions.clear(); recorder.lines.clear();
+            recorder.frames.clear(); recorder.owners.clear(); recorder.networks.clear();
+            recorder.references.clear(); recorder.lines.clear();
             recorder.referenceGroups = new ReferenceGroups(); recorder.finished = false;
         }
         if (recorder.world != null) recorder.snapshot(recorder.previousFrames);
@@ -78,7 +76,8 @@ public final class NativeApiReadings {
     private void snapshot(Map<Key, Frame> previous) {
         // A native explicit ground gives a shared reference. Otherwise unrelated
         // floating circuits retain distinct solver references.
-        var grounded = org.cha0scollective.wwpg.bridge.Bridges.get(level).physicalReferenceNetworks(world.subnetworks);
+        var bridge = org.cha0scollective.wwpg.bridge.Bridges.get(level);
+        var grounded = bridge.physicalReferenceNetworks(world.subnetworks);
         for (var network : world.subnetworks) references.put(network, grounded.contains(network) ? EARTH_REFERENCE : network);
         for (var line : world.transmissionLines.values()) {
             var first = line.getNode1().getNetwork();
@@ -113,8 +112,7 @@ public final class NativeApiReadings {
                     if (!owner.ceeIds.contains(endpoint.getTerminal())) {
                         frame.unavailable(MeasurementStatus.NOT_READY, "CEE terminal is unavailable"); continue;
                     }
-                    var isolation = org.cha0scollective.wwpg.bridge.Bridges.get(level)
-                            .isolatedTerminalReason(endpoint.getPos(), endpoint.getTerminal());
+                    var isolation = bridge.isolatedTerminalReason(endpoint.getPos(), endpoint.getTerminal());
                     if (isolation.isPresent()) {
                         frame.unavailable(MeasurementStatus.ISOLATED, isolation.get()); continue;
                     }
@@ -130,32 +128,28 @@ public final class NativeApiReadings {
                     frame.unavailable(MeasurementStatus.NOT_READY, "Circuit is restoring its chunks and wires"); continue;
                 }
                 if (network != null) {
-                    frame.required = List.of(network);
                     frame.reference = reference(network);
-                    direct.computeIfAbsent(network, ignored -> new ArrayList<>()).add(frame);
+                    samples(network).direct.add(frame);
                 } else {
                     var line = world.findLineMiddle(frame.node);
                     if (line == null || line.getNode1().getNetwork() == null || line.getNode2().getNetwork() == null) {
                         frame.unavailable(MeasurementStatus.NOT_READY, "Terminal is not in a prepared circuit"); continue;
                     }
-                    frame.line = line;
-                    var fractions = lineFractions.computeIfAbsent(line, ignored -> LineVoltages.sample(
-                            line.segments.stream().map(segment -> new LineVoltages.Segment<>(segment.getNode2(), segment.getResistance())).toList(),
-                            line.getNode1(), line.getNode2(), 0, 1, line.getResistance()));
-                    frame.fraction = fractions.getOrDefault(frame.node, 1d);
                     var first = line.getNode1().getNetwork();
                     var second = line.getNode2().getNetwork();
+                    var lineFrame = lines.get(line);
+                    if (lineFrame == null) {
+                        lineFrame = new LineFrame(line, samples(first), samples(second));
+                        lines.put(line, lineFrame);
+                    }
+                    frame.fraction = lineFrame.fractions.getOrDefault(frame.node, 1d);
                     if (org.cha0scollective.wwpg.bridge.RestorationCoordinator.paused(first) || org.cha0scollective.wwpg.bridge.RestorationCoordinator.paused(second)) {
                         frame.unavailable(MeasurementStatus.NOT_READY, "Circuit is restoring its chunks and wires"); continue;
                     }
-                    frame.required = first == second ? List.of(first) : List.of(first, second);
                     frame.reference = reference(first);
-                    var lineFrame = lines.get(line);
-                    if (lineFrame == null) {
-                        lineFrame = new LineFrame(line, frame.required);
-                        lines.put(line, lineFrame);
-                        for (var required : frame.required)
-                            interpolated.computeIfAbsent(required, ignored -> new ArrayList<>()).add(lineFrame);
+                    if (lineFrame.frames.isEmpty()) {
+                        lineFrame.first.lines.add(lineFrame);
+                        if (lineFrame.second != lineFrame.first) lineFrame.second.lines.add(lineFrame);
                     }
                     lineFrame.frames.add(frame);
                 }
@@ -164,26 +158,30 @@ public final class NativeApiReadings {
             }
         }
     }
-    private record Owner(BlockState state, BlockEntity entity, Set<Integer> nativeIds, Set<Integer> ceeIds, ApiElectric api) { }
+    private NetworkSamples samples(ElectricalNetwork network) {
+        return networks.computeIfAbsent(network, NetworkSamples::new);
+    }
+
+    private record Owner(BlockState state, BlockEntity entity, IntSet nativeIds, IntSet ceeIds, ApiElectric api) { }
     private Owner owner(BlockPos pos) {
-        if (!ApiTerminals.ready(level, pos)) return null;
         var chunk = level.getChunkSource().getChunkNow(pos.getX() >> 4, pos.getZ() >> 4);
-        if (chunk == null) return null;
+        long chunkPos = ChunkPos.asLong(pos);
+        if (chunk == null || !level.getChunkSource().isPositionTicking(chunkPos) || !level.areEntitiesLoaded(chunkPos)) return null;
         var state = chunk.getBlockState(pos);
         var entity = chunk.getBlockEntity(pos, net.minecraft.world.level.chunk.LevelChunk.EntityCreationType.CHECK);
         if (state.hasBlockEntity() && entity == null) return null;
         var nativePg = entity instanceof IElectric electricEntity ? electricEntity
                 : state.getBlock() instanceof IElectric electricBlock ? electricBlock : null;
-        Set<Integer> nativeIds = null, ceeIds = null;
+        IntSet nativeIds = null, ceeIds = null;
         if (nativePg != null) {
-            nativeIds = new HashSet<>();
             int terminalCount = nativePg.terminalCount();
+            nativeIds = new IntOpenHashSet(Math.max(0, terminalCount));
             for (int local = 0; local < terminalCount; local++) {
                 var placement = nativePg.terminal(state, local);
                 if (placement != null) nativeIds.add(nativePg.terminalIndexAt(state, placement.getOrigin()));
             }
         } else if (state.getBlock() instanceof ElectricalDeviceBlock<?> cee) {
-            ceeIds = new HashSet<>();
+            ceeIds = new IntOpenHashSet();
             for (int id : cee.getNodePositions(level, pos, state).keySet())
                 if (cee.isNodeAccessible(level, pos, state, id)) ceeIds.add(id);
         }
@@ -199,23 +197,21 @@ public final class NativeApiReadings {
     public static void after(ServerLevel level, ElectricalNetwork network) {
         var recorder = WORLDS.get(level);
         if (recorder == null || recorder.finished) return;
-        int step = recorder.steps.getOrDefault(network, 0);
-        recorder.steps.put(network, step + 1);
-        boolean accepted = network.isConverged() && !recorder.rejected.contains(network);
-        for (var frame : recorder.direct.getOrDefault(network, List.of())) {
+        var samples = recorder.samples(network);
+        int step = samples.steps++;
+        boolean accepted = network.isConverged() && !samples.rejected;
+        for (var frame : samples.direct) {
             if (frame.node.getNetwork() != network) frame.unavailable(MeasurementStatus.NOT_READY, "Terminal network changed during solve");
             else frame.sample(step, frame.node.getVoltage(), accepted);
         }
         // Mid-line voltages depend on both ends. Wait until both containing
         // networks have accepted the same substep before interpolating.
-        for (var line : recorder.interpolated.getOrDefault(network, List.of())) {
+        for (var line : samples.lines) {
             int next = line.count;
-            boolean ready = true, valid = true;
-            for (var required : line.required) {
-                ready &= recorder.steps.getOrDefault(required, 0) == next + 1;
-                valid &= required.isConverged() && !recorder.rejected.contains(required);
-            }
+            boolean ready = line.first.steps == next + 1 && line.second.steps == next + 1;
             if (ready) {
+                boolean valid = line.first.network.isConverged() && !line.first.rejected
+                        && (line.second == line.first || line.second.network.isConverged() && !line.second.rejected);
                 double first = line.line.getNode1().getVoltage();
                 double second = line.line.getNode2().getVoltage();
                 for (var frame : line.frames)
@@ -229,10 +225,11 @@ public final class NativeApiReadings {
     public static void invalidate(ServerLevel level, ElectricalNetwork network) {
         var recorder = WORLDS.get(level);
         if (recorder == null || network == null) return;
-        recorder.rejected.add(network);
-        for (var frame : recorder.direct.getOrDefault(network, List.of()))
+        var samples = recorder.samples(network);
+        samples.rejected = true;
+        for (var frame : samples.direct)
             frame.unavailable(MeasurementStatus.SOLVE_FAILED, "Containing circuit did not produce an accepted solution");
-        for (var line : recorder.interpolated.getOrDefault(network, List.of()))
+        for (var line : samples.lines)
             for (var frame : line.frames)
                 frame.unavailable(MeasurementStatus.SOLVE_FAILED, "Containing circuit did not produce an accepted solution");
     }
@@ -331,12 +328,28 @@ public final class NativeApiReadings {
     public static void unload(ServerLevel level) { WORLDS.remove(level); }
     public static void clear() { WORLDS.clear(); }
 
+    /** One tick's sample ownership and progress, rebuilt after native topology preparation. */
+    private static final class NetworkSamples {
+        final ElectricalNetwork network;
+        final List<Frame> direct = new ArrayList<>();
+        final List<LineFrame> lines = new ArrayList<>();
+        int steps;
+        boolean rejected;
+        NetworkSamples(ElectricalNetwork network) { this.network = network; }
+    }
+
     private static final class LineFrame {
         final TransmissionLine line;
-        final List<ElectricalNetwork> required;
+        final NetworkSamples first, second;
+        final Map<OwnedFloatingNode, Double> fractions;
         final List<Frame> frames = new ArrayList<>();
         int count;
-        LineFrame(TransmissionLine line, List<ElectricalNetwork> required) { this.line = line; this.required = required; }
+        LineFrame(TransmissionLine line, NetworkSamples first, NetworkSamples second) {
+            this.line = line; this.first = first; this.second = second;
+            fractions = LineVoltages.sample(
+                    line.segments.stream().map(segment -> new LineVoltages.Segment<>(segment.getNode2(), segment.getResistance())).toList(),
+                    line.getNode1(), line.getNode2(), 0, 1, line.getResistance());
+        }
     }
 
     private static final class Frame {
@@ -345,8 +358,6 @@ public final class NativeApiReadings {
         final Block block;
         final Object anchor;
         final double[] values;
-        List<ElectricalNetwork> required = List.of();
-        TransmissionLine line;
         double fraction;
         Object reference;
         boolean extension;
@@ -358,7 +369,7 @@ public final class NativeApiReadings {
         Frame(Key key, OwnedFloatingNode node, Block block, Object anchor, int substeps) {
             this.key = key; this.node = node; this.block = block; this.anchor = anchor; values = new double[substeps];
         }
-        void reset() { required = List.of(); line = null; reference = null; extension = false; count = 0; status = null; detail = ""; result = null; }
+        void reset() { reference = null; extension = false; count = 0; status = null; detail = ""; result = null; }
         void unavailable(MeasurementStatus status, String detail) { this.status = status; this.detail = ApiDiagnostics.detail(detail); result = null; }
         void sample(int step, double value, boolean accepted) {
             if (status != null) return;
