@@ -69,21 +69,35 @@ public final class CeeElectric implements IElectric {
     @Override public ITerminalPlacement terminal(BlockState state, int index) {
         var location = accessible().get(index);
         if (location == null) return null;
-        double radius = block.getNodeSize(level, pos, state, index) / 2.0;
-        return new ITerminalPlacement() {
-            @Override public boolean check(Vec3 p) {
-                return Math.abs(p.x - location.x) <= radius && Math.abs(p.y - location.y) <= radius && Math.abs(p.z - location.z) <= radius;
-            }
-            @Override public Vec3 getOrigin() { return location; }
-        };
+        return placement(state, index, location);
     }
     @Override public int terminalIndexAt(BlockState state, Vec3 point) {
-        for (int id : accessible().keySet()) if (terminal(state, id).check(point)) return id;
-        return -1;
+        var selected = findTerminal(state, point);
+        return selected == null ? -1 : selected.nativeId();
     }
     @Override public ITerminalPlacement terminalAt(BlockState state, Vec3 point) {
-        int id = terminalIndexAt(state, point);
-        return id < 0 ? null : terminal(state, id);
+        return findTerminal(state, point);
+    }
+
+    private Placement findTerminal(BlockState state, Vec3 point) {
+        // One native geometry snapshot belongs to this selection operation.
+        // TreeMap iteration retains the first native ID when bounds overlap.
+        for (var entry : accessible().entrySet()) {
+            var placement = placement(state, entry.getKey(), entry.getValue());
+            if (placement.check(point)) return placement;
+        }
+        return null;
+    }
+
+    private Placement placement(BlockState state, int nativeId, Vec3 origin) {
+        return new Placement(nativeId, origin, block.getNodeSize(level, pos, state, nativeId) / 2.0);
+    }
+
+    private record Placement(int nativeId, Vec3 origin, double radius) implements ITerminalPlacement {
+        @Override public boolean check(Vec3 point) {
+            return Math.abs(point.x - origin.x) <= radius && Math.abs(point.y - origin.y) <= radius && Math.abs(point.z - origin.z) <= radius;
+        }
+        @Override public Vec3 getOrigin() { return origin; }
     }
     @Override public ElectricBehaviour getBehaviour(Level world, BlockPos position, BlockState state) { return behaviour; }
     @Override public boolean accepts(net.minecraft.world.item.ItemStack wireStack) {
@@ -93,16 +107,25 @@ public final class CeeElectric implements IElectric {
     }
 
     void removeInvalidConnections() {
-        for (var e : List.copyOf(behaviour.getConnections().entrySet())) {
-            if (behaviour.hasTerminal(e.getKey().getTerminal())) continue;
+        var connections = List.copyOf(behaviour.getConnections().entrySet());
+        if (connections.isEmpty()) return;
+        Map<Integer, Vec3> terminals = null;
+        for (var e : connections) {
+            if (terminals == null) terminals = accessible();
+            if (terminals.containsKey(e.getKey().getTerminal())) continue;
             for (var wire : List.copyOf(e.getValue())) wire.endpointRemoved(e.getKey());
+            // Removal invokes native/mod callbacks. Revalidate before the next endpoint.
+            terminals = null;
         }
     }
 
     private final class EndpointBehaviour extends ElectricBehaviour {
         EndpointBehaviour(Holder holder) { super(holder, false); }
         @Override public OwnedFloatingNode getTerminal(int index) {
-            if (!hasTerminal(index)) return null;
+            return hasTerminal(index) ? resolveTerminal(index) : null;
+        }
+        /** Resolve an ID already checked against this operation's native geometry. */
+        private OwnedFloatingNode resolveTerminal(int index) {
             var endpoint = new BlockWireEndpoint(pos, index);
             // PG publishes the WorldNetworks object before reading saved line
             // parts. Those parts resolve CEE endpoints here. Re-entering the
@@ -113,7 +136,7 @@ public final class CeeElectric implements IElectric {
         }
         @Override public boolean hasTerminal(int index) { return accessible().containsKey(index); }
         @Override public List<OwnedFloatingNode> getExternalNodes() {
-            return accessible().keySet().stream().map(this::getTerminal).toList();
+            return accessible().keySet().stream().map(this::resolveTerminal).toList();
         }
         @Override public void joinNetwork(ElectricalNetwork network, int index) {
             var node = getTerminal(index);
@@ -125,14 +148,15 @@ public final class CeeElectric implements IElectric {
         @Override public void writeToSync(FriendlyByteBuf buffer, boolean doubles, Function<OwnedFloatingNode, TransmissionLine> getter) {
             var ids = accessible().keySet();
             buffer.writeVarInt(ids.size());
-            for (int id : ids) { buffer.writeVarInt(id); writeToBuffer(buffer, getTerminal(id).getVoltage(), doubles); }
+            for (int id : ids) { buffer.writeVarInt(id); writeToBuffer(buffer, resolveTerminal(id).getVoltage(), doubles); }
         }
         @Override public void readFromSync(FriendlyByteBuf buffer, boolean doubles) {
             int count = buffer.readVarInt();
+            if (count <= 0) return;
+            var terminals = accessible();
             for (int i = 0; i < count; ++i) {
                 int id = buffer.readVarInt(); double v = readFromBuffer(buffer, doubles);
-                var node = getTerminal(id);
-                if (node != null) node.setStateValue(v);
+                if (terminals.containsKey(id)) resolveTerminal(id).setStateValue(v);
             }
         }
     }
