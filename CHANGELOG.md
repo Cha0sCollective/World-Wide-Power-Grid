@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.2.2-alpha.1
+
+- Trace wires iteratively to prevent stack overflows.
+- Discover strong circuits once; resolve weak couplings.
+- Build sparse matrices directly in Java and order native writes.
+- Batch loading changes while unrelated factories keep running.
+- Hold storage/history and unavailable readings until circuits are ready.
+- Retire detached wires/grounds to prevent stale solver objects.
+- Skip unchanged conductance writes; cache terminals, static parameters and shared line readings.
+- Distinguish warm-up from failures; bound fresh pentode initialization and report circuit/terminal errors.
+- Keep CEE buzzer audio on the client to prevent single-player crashes.
+- Isolate powered board tests; make full suites manual and development checks focused.
+- Integrate the adjustable-load starter, tutorial, workflow, validation and troubleshooting guides, sources and Javadoc. API 1.0.0 and saves stay compatible.
+
+Large-network speed and the large Java loading stall remain open.
+
+
 ## 0.2.1 — expanded dependency compatibility
 
 - Support NeoForge 21.1.248 alongside 21.1.231 with the same jar, built against the minimum supported loader.

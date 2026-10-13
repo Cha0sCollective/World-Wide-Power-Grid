@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "source_sha": "3dbea810bbef75029045d95a851d50680d70aa9a",
+  "full_acceptance": "reused from candidate31 and successful PR32 CI; not rerun for this alpha",
+  "user_policy": "Full suites only when explicitly requested, including when the user says development is done for the day. No schedule or automatic push/PR/release full suite.",
+  "interrupted_runs": [
+    {
+      "run": 38405475947,
+      "status": "cancelled at user request"
+    },
+    {
+      "run": 38405475935,
+      "status": "cancelled at user request"
+    },
+    {
+      "local": "release022-alpha-acceptance-v2",
+      "status": "stopped at a safe invocation boundary at user request"
+    }
+  ],
+  "corrections": [
+    "First local runner stopped before a path-expression defect; completed checks retained",
+    "Build-only PowerShell loader argument was corrected; no gameplay test was run"
+  ],
+  "preserved_failures": "All earlier candidate and v2-v8 failure evidence remains intact.",
+  "remaining_outside_scope": [
+    "Native large-network speed target",
+    "Intermittent large Java reconstruction/factorization stall"
+  ]
+}

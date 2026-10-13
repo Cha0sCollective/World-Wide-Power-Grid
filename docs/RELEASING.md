@@ -22,6 +22,13 @@ in the verification archive.
 
 ## Prepare the accepted inputs
 
+Full-suite runs require an explicit user request, including the end-of-day
+run. During development, check the changed area. A release that changes only
+the runtime's version metadata may reuse preserved passing full acceptance:
+record its original source/artifact identities and verify every other runtime
+entry is unchanged. SDK or packaging changes still need focused checks.
+Never describe carried-forward acceptance or an interrupted run as a fresh pass.
+
 1. Update `mod_version` and, when appropriate, `api_version` in `gradle.properties`.
    Keep the CI commands, independent example dependencies and API comparisons
    aligned with those versions. A mod release does not automatically change the API version.

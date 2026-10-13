@@ -1,7 +1,5 @@
 name: API documentation acceptance
 on:
-  pull_request:
-    paths: ['docs/**', 'website/**', 'src/api/**', 'src/ceeApi/**', 'examples/**', 'tools/**', '.github/workflows/api-documentation.yml']
   workflow_dispatch:
 permissions:
   contents: read

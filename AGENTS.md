@@ -2,6 +2,14 @@
 
 Use `dev/` for working branches, for example `dev/documentation-cleanup`.
 
+Run focused checks for the code, documentation or packaging being changed.
+Run the full testing suite only when the user explicitly requests it. The
+end-of-day run is also manual: wait for the user to say they are done and to
+run the tests. Do not schedule it or automatically run full suites on pushes,
+pull requests, version bumps or releases. Reuse preserved passing acceptance
+when the tested runtime is unchanged, with explicit artifact comparisons;
+never relabel old evidence or interrupted runs as fresh passes.
+
 Current user and developer guides start at [docs/README.md](docs/README.md).
 Write player instructions in plain language: what to operate, what should
 happen, how to reset it, and which mods are required. Keep internal test and

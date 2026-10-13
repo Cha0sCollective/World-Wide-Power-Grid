@@ -230,12 +230,22 @@ No upstream dependency jars are included.
                     sdk_files[name] = accepted.read(name)
                 elif name.startswith('documentation-starter/'):
                     sdk_files['examples/'+PurePosixPath(name).name] = accepted.read(name)
+            starter_instructions = (
+                '2. Start with docs/CREATE_ADDON.md and extract examples/tutorial-load-0.1.0-source.zip.\n'
+                '   The other example ZIPs demonstrate the larger general and CEE/PG integrations.'
+                if manifest.get('authoring_starter') else
+                '2. Extract either ZIP in examples/ into its own project directory.')
+            authoring_links = (
+                'Build your first add-on: docs/CREATE_ADDON.md\n'
+                'Build and debug: docs/ADDON_WORKFLOW.md\n'
+                'Validation and repair: docs/API_LIMITS.md and docs/ADDON_TESTING.md\n'
+                if manifest.get('authoring_starter') else '')
             sdk_files['START-HERE.md'] = f'''# Extension API {manifest['api_version']} for WWPG {version}
 
 Players install {runtime}. Do not put API, source or Javadoc jars in mods/.
 
 1. Extract the ZIP in maven/ into a directory containing org/cha0scollective/wwpg/.
-2. Extract either ZIP in examples/ into its own project directory.
+{starter_instructions}
 3. Use Java 21 and that project's wrapper to build against the extracted repository:
 
 ```text
@@ -248,6 +258,7 @@ api/ contains both APIs, sources and Javadoc. docs/ contains the accepted guides
 The Maven and source ZIPs are unchanged independently tested files.
 
 Developer guide: {base}EXTENSION_API.md
+{authoring_links}
 '''.encode('utf-8')
             bundle(downloads / sdk, sdk_files)
             shutil.copyfile(source, downloads / verification)

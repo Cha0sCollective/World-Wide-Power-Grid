@@ -1,7 +1,7 @@
 # Current status
 
-**[WWPG 0.2.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.1)**
-is the current release. It supports the declared stationary factories and
+**[WWPG 0.2.2-alpha.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-alpha.1)**
+is the latest prerelease. [0.2.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.1) remains the stable release. It supports the declared stationary factories and
 optional Pinout computer control, and includes **extension API 1.0.0** for
 add-on developers. Existing beta.5 worlds remain compatible; update WWPG on
 the server and every client using the [installation guide](INSTALL.md).
@@ -42,36 +42,43 @@ a repaired device. The [developer contract](EXTENSION_API.md) explains those rul
 
 ## What was checked
 
-The frozen release passed the full Windows/Linux × native/Java × base/Pinout
-server matrix. Each combination includes three cold restarts and five actual
-assembly unload/reload cycles. The exact four downloadable world ZIPs passed
-reopening checks. Windows graphical and two-client server sessions exercised
+The runtime's existing acceptance passed the full Windows/Linux × native/Java ×
+base/Pinout server matrix. Each combination includes three cold restarts and five
+actual assembly unload/reload cycles. Windows graphical and two-client sessions exercised
 the API Workshop's wiring, settings, meters, panel and board editing, cutting
 and repairs. Linux coverage comes from server tests, rather than graphical clients.
 
-Both example add-ons also built independently from their downloadable source
-and Maven archives. API 1.0.0 establishes the first published API contract.
+This alpha carries those results forward: its runtime differs only in the mod
+version declaration. Its worlds use accepted candidate exports with unchanged
+native save files and updated export metadata. The full suite was not repeated.
+The expanded SDK and starter received fresh focused build, server and graphical
+checks. Both example add-ons built independently from the downloadable source
+and Maven archives. API 1.0.0 remains compatible with the published contract.
 
-For maintainers, the detailed [verification record](../release/0.2.1/verification.json)
+For maintainers, the detailed [verification record](../release/0.2.2-alpha.1/verification.json)
 retains exact versions, hashes and results. There are 204 base checks or 208 with
-Pinout, plus 34 extension/lifecycle checks and 62 Java unit checks per CI job.
+Pinout, plus 34 extension/lifecycle checks and 81 Java unit checks per CI job.
 These are test counts, not counts of items in the game.
 
-## Unreleased loading improvements
+## Loading changes in this alpha
 
-Development changes group loading updates for affected circuits, preserve stored
-energy while those circuits wait, and reduce repeated graph and matrix work.
+This alpha groups loading updates for affected circuits, preserves stored
+energy while those circuits wait, and reduces repeated graph and matrix work.
 Meters report unavailable readings during the pause, and devices resume without
 simulating the time spent waiting. Unrelated ready factories continue operating.
 
 Fresh PG pentodes can also need a few startup calculations before measurements
-become available. Development checks hold their unaccepted results and stored
+become available. The checks hold their unaccepted results and stored
 history, with a fixed initialization limit; persistent and later failures remain
 visible. Failed calculations now identify the affected circuit and terminals.
 
-These changes have not been released. Large-network speed remains uncertified,
+Large-network speed remains uncertified,
 and an intermittent Java solver stall during large-world reconstruction remains
 under investigation. Ordinary gameplay passes do not close that separate issue.
+
+CEE buzzer audio runs only in the client world, avoiding concurrent sound access
+from single-player server ticks. The SDK includes an independently buildable
+adjustable-load starter and step-by-step authoring, testing and repair guides.
 
 ## Limits and older reports
 

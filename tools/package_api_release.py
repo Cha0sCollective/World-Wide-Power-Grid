@@ -337,7 +337,8 @@ def validate_extracted_build(proof, role, manifest, root, hashes):
             'Extracted example compile classpath omitted the frozen SDK or included a WWPG source project')
 
 
-def validate_pending_restart(proof, root, hashes):
+def validate_pending_restart(proof, root, hashes, version=None):
+    version = version or VERSION
     """Retain the real three-process evidence, including assertions during shutdown."""
     retained = proof.get('pending_entity_restart', {})
     require(isinstance(retained, dict), 'Pending restart proof is not an object')
@@ -352,7 +353,7 @@ def validate_pending_restart(proof, root, hashes):
         record = read(locked_file(item.get('manifest', {}), root))
         require(record.get('completed') and record.get('required_tests_passed', 0) > 0
                 and record.get('phase') == item['phase'] and record.get('namespaces') == 'wwpg_api_pending_restart'
-                and record.get('artifact') == f'wwpg-{VERSION}.jar' and record.get('sha256') == hashes['runtime']
+                and record.get('artifact') == f'wwpg-{version}.jar' and record.get('sha256') == hashes['runtime']
                 and record.get('profile') == proof['profile'] and record.get('backend') == proof['backend']
                 and set(record.get('addon_artifacts', {})) == {'example', 'upstream_example'}
                 and all(record['addon_artifacts'][role].get('sha256') == hashes[role]
@@ -380,13 +381,7 @@ def validate_pending_restart(proof, root, hashes):
                 'Pending restart omitted a required actual assertion: ' + name)
 
 
-def validate_release(manifest, root):
-    source = manifest.get('source_sha', '')
-    require(re.fullmatch(r'[0-9a-f]{40}', source) is not None, 'Missing immutable source commit')
-    require(manifest.get('unresolved_failures') == [], 'Unresolved failures block API freeze/release')
-    require(manifest.get('stages_complete') == list(range(1, 7)), 'All six extension API stages must pass')
-    hashes = {key: manifest['artifacts'][key]['sha256'] for key in ('runtime', 'api', 'cee_api', 'example', 'upstream_example')}
-    ci = read(locked_file(manifest.get('ci', {}), root))
+def validate_ci_acceptance(manifest, root, ci, source, hashes, version=None):
     require(ci.get('source_sha') == source and ci.get('status') == 'completed' and ci.get('conclusion') == 'success',
             'Fresh full CI has not passed on frozen source')
     require(re.fullmatch(r'https://github\.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/[0-9]+', ci.get('url', '')),
@@ -404,7 +399,7 @@ def validate_release(manifest, root):
                 and checkout.get('source_sha') == source and checkout.get('source_tree') == proof.get('source_tree') == ci.get('source_tree')
                 and re.fullmatch(r'[0-9a-f]{40}', checkout.get('source_tree', ''))
                 and checkout.get('run_id') == ci.get('run_id') and checkout.get('run_attempt') == ci.get('run_attempt')
-                and checkout.get('event') in {'pull_request', 'push'}, 'Actual checked-out CI source/attempt is not proven')
+                and checkout.get('event') in {'pull_request', 'push', 'workflow_dispatch'}, 'Actual checked-out CI source/attempt is not proven')
         required = manifest.get('required_regression_checks', {}).get(job['profile'])
         require(isinstance(required, int) and required >= (208 if job['profile'] == 'PINOUT' else 204),
                 'Release cannot lower existing beta.5 regression requirements')
@@ -427,7 +422,23 @@ def validate_release(manifest, root):
         require(proof.get('pending_wire_retirement_verified') is True
                 and proof.get('pending_entity_restart_phases') == ['SETUP', 'ARM', 'VERIFY'],
                 'Stopped-before-ready removal lacks the real isolated restart sequence')
-        validate_pending_restart(proof, root, hashes)
+        validate_pending_restart(proof, root, hashes, version)
+
+
+def validate_release(manifest, root):
+    source = manifest.get('source_sha', '')
+    require(re.fullmatch(r'[0-9a-f]{40}', source) is not None, 'Missing immutable source commit')
+    require(manifest.get('unresolved_failures') == [], 'Unresolved failures block API freeze/release')
+    require(manifest.get('stages_complete') == list(range(1, 7)), 'All six extension API stages must pass')
+    hashes = {key: manifest['artifacts'][key]['sha256'] for key in ('runtime', 'api', 'cee_api', 'example', 'upstream_example')}
+    ci = read(locked_file(manifest.get('ci', {}), root))
+    if manifest.get('acceptance_reuse'):
+        import release_acceptance_reuse
+        import sys
+        old_source, old_hashes, old_version = release_acceptance_reuse.validate(manifest, root, sys.modules[__name__])
+        validate_ci_acceptance(manifest, root, ci, old_source, old_hashes, old_version)
+    else:
+        validate_ci_acceptance(manifest, root, ci, source, hashes)
     independent = accepted_record(manifest.get('independent_example_build', {}), root, hashes, source)
     require(independent.get('uses_published_api_only') is True and independent.get('uses_wwpg_project_classes') is False,
             'Example was not built independently against the published SDK')
@@ -493,7 +504,7 @@ def validate_release(manifest, root):
             wrapper = project.getinfo('gradlew')
             require(wrapper.create_system == 3 and (wrapper.external_attr >> 16) & 0o111,
                     'Tutorial starter wrapper must survive ordinary Unix extraction')
-    clients = manifest.get('client_acceptance', [])
+    clients = [] if manifest.get('acceptance_reuse') else manifest.get('client_acceptance', [])
     expected = {(backend, profile, mode) for backend in BACKENDS for profile in PROFILES for mode in ('graphical', 'multiplayer')}
     found = set()
     for descriptor in clients:
@@ -506,7 +517,7 @@ def validate_release(manifest, root):
         if combination[2] == 'multiplayer':
             require(len(set(proof.get('real_clients', []))) >= 2 and proof.get('real_tcp_clients') is True,
                     'Missing two actual multiplayer clients')
-    require(found == expected, 'Both backends/profiles need graphical and real two-client checks')
+    require(manifest.get('acceptance_reuse') or found == expected, 'Both backends/profiles need graphical and real two-client checks')
     world_hashes = {}
     for key, profile in (('base_world', 'BASE'), ('pinout_world', 'PINOUT'),
                          ('base_workshop_world', 'BASE'), ('pinout_workshop_world', 'PINOUT')):

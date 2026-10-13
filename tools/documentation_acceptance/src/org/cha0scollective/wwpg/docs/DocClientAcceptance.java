@@ -107,7 +107,14 @@ final class DocClientAcceptance {
                             var expected=CSolver.SolverBackend.valueOf(System.getProperty("wwpg.test.backend"));
                             var actual=GlobalElectricNetworks.getWorldNetworks(level).subnetworks.stream().filter(n->!n.isEmpty()).map(n->((ElectricalNetworkAccessor)n).wwpg$solver().type()).toList();
                             require(!actual.isEmpty()&&actual.stream().allMatch(t->t==expected),"Unexpected actual backend "+actual);
-                            Files.writeString(Path.of("doc-client-result.json"),new com.google.gson.GsonBuilder().setPrettyPrinting().create().toJson(Map.of("passed",true,"backend",expected,"readout",load.reading(),"client_meter_volts",volts,"controls",true,"read_only_click",true,"model",true,"published_source",true,"music_volume",0)));
+                            var result=new LinkedHashMap<String,Object>();
+                            result.put("passed",true);result.put("backend",expected);result.put("readout",load.reading());
+                            result.put("client_meter_volts",volts);result.put("controls",true);result.put("native_tools",true);
+                            result.put("read_only_click",true);result.put("model",true);result.put("published_source",true);result.put("music_volume",0);
+                            result.put("runtime_sha256",DocAcceptance.artifactHash("wwpg"));
+                            result.put("starter_sha256",DocAcceptance.artifactHash("tutorial_load"));
+                            result.put("helper_sha256",DocAcceptance.artifactHash("wwpg_doc_acceptance"));
+                            Files.writeString(Path.of("doc-client-result.json"),new com.google.gson.GsonBuilder().setPrettyPrinting().create().toJson(result));
                             LOG.info("DOC_CLIENT_PASSED: backend={}, voltage={}, readout={}",expected,volts,load.reading());complete=true;
                         }catch(Throwable error){failure=error.toString();LOG.error("DOC_CLIENT_FAILED",error);}
                     });
