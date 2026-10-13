@@ -11,6 +11,16 @@ accepted artifacts and evidence; the [original acceptance plan](EXTENSION_API_PL
 preserves the release requirements. The commands below reproduce those checks.
 Use fresh output paths for a new attempt and keep earlier records unchanged.
 
+Full-suite runs now require an explicit user request. A version-only runtime
+release may carry forward prior passing acceptance with an `acceptance_reuse`
+record: retain the original CI/client sources, hashes and worlds, compare every
+runtime entry except the single mod-version declaration, and preserve every
+native save byte. API documentation may change source line numbers, but its
+executable bytes must remain equivalent. Run focused checks for new SDK content
+and packaging. The release record must distinguish reuse from fresh passes;
+interrupted campaigns remain interrupted. Changed runtime code needs new full
+acceptance when the user requests the end-of-day suite.
+
 ## Release sequence
 
 1. Build the runtime, both API artifacts, and both independent examples.

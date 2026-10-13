@@ -2,8 +2,8 @@
 
 ## 0.2.2-alpha.1
 
-- Replace recursive wire tracing to prevent stack overflows.
-- Discover strong circuits once, then resolve weak couplings.
+- Trace wires iteratively to prevent stack overflows.
+- Discover strong circuits once; resolve weak couplings.
 - Build sparse matrices directly in Java and order native writes.
 - Batch loading changes while unrelated factories keep running.
 - Hold storage/history and unavailable readings until circuits are ready.
@@ -11,7 +11,7 @@
 - Skip unchanged conductance writes; cache terminals, static parameters and shared line readings.
 - Distinguish warm-up from failures; bound fresh pentode initialization and report circuit/terminal errors.
 - Keep CEE buzzer audio on the client to prevent single-player crashes.
-- Give board assembly tests their own powered circuit; keep existing deadlines.
+- Isolate powered board tests; make full suites manual and development checks focused.
 - Integrate the adjustable-load starter, tutorial, workflow, validation and troubleshooting guides, sources and Javadoc. API 1.0.0 and saves stay compatible.
 
 Large-network speed and the large Java loading stall remain open.

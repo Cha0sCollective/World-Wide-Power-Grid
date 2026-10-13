@@ -42,14 +42,17 @@ a repaired device. The [developer contract](EXTENSION_API.md) explains those rul
 
 ## What was checked
 
-The frozen release passed the full Windows/Linux × native/Java × base/Pinout
-server matrix. Each combination includes three cold restarts and five actual
-assembly unload/reload cycles. The exact four downloadable world ZIPs passed
-reopening checks. Windows graphical and two-client server sessions exercised
+The runtime's existing acceptance passed the full Windows/Linux × native/Java ×
+base/Pinout server matrix. Each combination includes three cold restarts and five
+actual assembly unload/reload cycles. Windows graphical and two-client sessions exercised
 the API Workshop's wiring, settings, meters, panel and board editing, cutting
 and repairs. Linux coverage comes from server tests, rather than graphical clients.
 
-Both example add-ons also built independently from their downloadable source
+This alpha carries those results forward: its runtime differs only in the mod
+version declaration. Its worlds use accepted candidate exports with unchanged
+native save files and updated export metadata. The full suite was not repeated.
+The expanded SDK and starter received fresh focused build, server and graphical
+checks. Both example add-ons built independently from the downloadable source
 and Maven archives. API 1.0.0 remains compatible with the published contract.
 
 For maintainers, the detailed [verification record](../release/0.2.2-alpha.1/verification.json)

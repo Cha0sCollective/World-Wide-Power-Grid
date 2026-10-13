@@ -1,5 +1,12 @@
 # Development and testing
 
+Run focused checks for the area being changed during development. Full-suite
+runs are manual, including the end-of-day run: wait for the user to say they
+are done and ask for the tests. Version bumps, releases, pushes and pull
+requests do not authorize another full run. Keep previous passing evidence
+and verify artifact equivalence when reusing it; interrupted runs remain
+recorded as interrupted.
+
 Use this guide to build WWPG and choose checks for a change. To write an add-on,
 start with the [public API guide](EXTENSION_API.md). The detailed SDK manifest and
 publication requirements are in [API release checks](API_RELEASE_CHECKS.md).
