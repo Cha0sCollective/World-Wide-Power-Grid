@@ -137,15 +137,38 @@ public final class Terminals {
         if (registered == null || registered.isEmpty()) return;
         var electric = pgCompatible(level, pos);
         if (electric == null) return;
+        boolean changed = !(electric instanceof org.cha0scollective.wwpg.extension.ApiElectric api) || api.geometryChanged();
+        refreshPgNodes(level, pos, electric, registered, changed);
+    }
+
+    /** Safe API refresh already resolved its provider and captured pending geometry changes. */
+    public static void refreshPgNodes(ServerLevel level, BlockPos pos,
+            org.cha0scollective.wwpg.extension.ApiElectric electric, boolean geometryChanged) {
+        var registered = InfrastructureSavedData.load(level).getNodesAt(pos);
+        if (registered == null || registered.isEmpty()) return;
+        refreshPgNodes(level, pos, electric, registered, geometryChanged);
+    }
+
+    private static void refreshPgNodes(ServerLevel level, BlockPos pos, IElectric electric,
+            List<com.george_vi.electroenergetics.simulation.infrastructure.InWorldNodeData> registered, boolean changed) {
+        var infrastructure = InfrastructureSavedData.load(level);
         var ids = new ArrayList<Integer>();
         var state = loadedState(level, pos);
         for (int local = 0; local < electric.terminalCount(); ++local) {
             var placement = electric.terminal(state, local);
             if (placement == null) continue;
             int id = electric.terminalIndexAt(state, placement.getOrigin());
-            if (id >= 0 && !ids.contains(id)) ids.add(id);
+            if (id < 0 || ids.contains(id)) continue;
+            ids.add(id);
+            var data = infrastructure.getNodeData(new InWorldNode(id, pos));
+            changed |= data == null || !data.isValid() || !registered.contains(data)
+                    || !data.node.toGlobalPos(placement.getOrigin(), level).equals(data.getGlobalPos());
         }
-        infrastructure.registerOrUpdateNodes(pos, ids);
+        // Native registration rebuilds the lazy facade for every CEE node,
+        // even for unchanged IDs and geometry. It stores the current global
+        // position, while a PG-only terminal's local cache may remain CENTER.
+        // Compare that native authority without another terminal/topology cache.
+        if (changed || registered.size() != ids.size()) infrastructure.registerOrUpdateNodes(pos, ids);
     }
 
     public static void refresh(Level level) {

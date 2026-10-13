@@ -264,8 +264,10 @@ public final class ApiTerminals {
         if (refreshed != null) {
             refreshed.resumed();
             refreshed.rememberIdentities();
+            boolean geometryChanged = refreshed.geometryChanged();
             refreshed.removeInvalidConnections();
-            Terminals.refreshPgNodes(level, pos);
+            Terminals.refreshPgNodes(level, pos, refreshed, geometryChanged);
+            refreshed.geometryRefreshed();
         }
         return refreshed;
     }

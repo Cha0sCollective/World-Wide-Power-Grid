@@ -28,6 +28,9 @@ public final class WorldWidePowerGrid {
         if (Boolean.getBoolean("wwpg.test.packaged") && java.util.Arrays.asList(
                 System.getProperty("neoforge.enabledGameTestNamespaces", "").split(",")).contains("wwpg_api"))
             modBus.addListener(org.cha0scollective.wwpg.gametest.ExtensionApiDiodeParameterGameTests::register);
+        if (Boolean.getBoolean("wwpg.test.packaged") && java.util.Arrays.asList(
+                System.getProperty("neoforge.enabledGameTestNamespaces", "").split(",")).contains("wwpg_api_ownership"))
+            modBus.addListener(org.cha0scollective.wwpg.gametest.ExtensionApiTerminalRefreshGameTests::register);
         LOGGER.info("WWPG: CEE 1.1.3 / Power Grid 0.6.2 compatibility loaded");
         NeoForge.EVENT_BUS.addListener(this::commands);
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.gametest.MultiplayerGameTests::commands);

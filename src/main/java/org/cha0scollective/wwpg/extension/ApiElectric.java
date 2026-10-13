@@ -204,6 +204,10 @@ public final class ApiElectric implements IElectric {
     public Terminal terminalDefinition(int nativeId) { return terminals.get(nativeId); }
     public List<Terminal> terminalDefinitions() { return List.copyOf(terminals.values()); }
 
+    /** Geometry reads can update native position caches before the safe topology phase. */
+    public boolean geometryChanged() { return geometryChanged; }
+    void geometryRefreshed() { geometryChanged = false; }
+
     @Override public int terminalCount() {
         return terminals.keySet().stream().mapToInt(id -> id + 1).max().orElse(0);
     }
@@ -254,7 +258,6 @@ public final class ApiElectric implements IElectric {
         }
         if (geometryChanged) {
             behaviour.refreshConnectionEntities();
-            geometryChanged = false;
         }
     }
 
