@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.2-beta.2 — prepared, not published
+
+- Faster addon preparation: group devices and samples by their final network each tick; avoid repeated provider, terminal registration and geometry work; reuse stable branch descriptions.
+- Leaner native and CEE processing: reuse voltage differences for wire power, consolidate terminal and transmission-line sampling, remove duplicate current-map copies and healthy-circuit filtering, and simplify restoration pause bookkeeping.
+- Cheaper substep inputs: skip endpoint and leaf-map searches when no leaves exist, preserving contribution order and changing source/storage values. Focused power, lifecycle, Yard and API Workshop checks passed. API 1.0, saves, electrical equations and all 16 substeps remain unchanged. The 14,650-node yard has not reached 20 TPS.
+
 ## 0.2.2-alpha.1
 
 - Trace wires iteratively to prevent stack overflows.
