@@ -20,6 +20,7 @@ import org.patryk3211.powergrid.collections.ModdedConfigs;
 import org.patryk3211.powergrid.electricity.GlobalElectricNetworks;
 import org.patryk3211.powergrid.electricity.WorldNetworks;
 import org.patryk3211.powergrid.electricity.base.IElectric;
+import org.patryk3211.powergrid.electricity.base.ElectricBlock;
 import org.patryk3211.powergrid.electricity.sim.ElectricalNetwork;
 import org.patryk3211.powergrid.electricity.sim.node.OwnedFloatingNode;
 import org.patryk3211.powergrid.electricity.sim.special.TransmissionLine;
@@ -31,6 +32,19 @@ import java.util.*;
 public final class NativeApiReadings {
     private static final Map<ServerLevel, NativeApiReadings> WORLDS = new IdentityHashMap<>();
     private static final Object EARTH_REFERENCE = new Object();
+    // Only PG's inherited, state-only geometry can be shared between owners.
+    // Custom blocks/entities and native multiblock ID overrides keep their callbacks.
+    private static final ClassValue<Boolean> STATE_ONLY_TERMINALS = new ClassValue<>() {
+        @Override protected Boolean computeValue(Class<?> type) {
+            if (!type.getName().startsWith("org.patryk3211.powergrid.")) return false;
+            try {
+                return type.getMethod("terminalCount").getDeclaringClass() == ElectricBlock.class
+                        && type.getMethod("terminal", BlockState.class, int.class).getDeclaringClass() == ElectricBlock.class
+                        && type.getMethod("terminalIndexAt", BlockState.class, net.minecraft.world.phys.Vec3.class)
+                                .getDeclaringClass() == IElectric.class;
+            } catch (ReflectiveOperationException | SecurityException error) { return false; }
+        }
+    };
     private final ServerLevel level;
     private final WorldNetworks world;
     private TickContext context;
@@ -74,6 +88,8 @@ public final class NativeApiReadings {
     }
 
     private void snapshot(Map<Key, Frame> previous) {
+        // One preparation pass only: no topology, owner or geometry invalidation state.
+        var nativeTerminals = new IdentityHashMap<BlockState, IntSet>();
         // A native explicit ground gives a shared reference. Otherwise unrelated
         // floating circuits retain distinct solver references.
         var bridge = org.cha0scollective.wwpg.bridge.Bridges.get(level);
@@ -87,7 +103,7 @@ public final class NativeApiReadings {
         for (var entry : List.copyOf(world.globalExternalNodes.entrySet())) {
             if (!(entry.getKey() instanceof BlockWireEndpoint endpoint)) continue;
             Owner owner;
-            try { owner = owners.computeIfAbsent(endpoint.getPos(), this::owner); }
+            try { owner = owners.computeIfAbsent(endpoint.getPos(), pos -> owner(pos, nativeTerminals)); }
             catch (RuntimeException | LinkageError error) {
                 var state = Terminals.loadedState(level, endpoint.getPos());
                 var entity = ApiTerminals.loadedBlockEntity(level, endpoint.getPos());
@@ -163,7 +179,7 @@ public final class NativeApiReadings {
     }
 
     private record Owner(BlockState state, BlockEntity entity, IntSet nativeIds, IntSet ceeIds, ApiElectric api) { }
-    private Owner owner(BlockPos pos) {
+    private Owner owner(BlockPos pos, Map<BlockState, IntSet> nativeTerminals) {
         var chunk = level.getChunkSource().getChunkNow(pos.getX() >> 4, pos.getZ() >> 4);
         long chunkPos = ChunkPos.asLong(pos);
         if (chunk == null || !level.getChunkSource().isPositionTicking(chunkPos) || !level.areEntitiesLoaded(chunkPos)) return null;
@@ -174,18 +190,29 @@ public final class NativeApiReadings {
                 : state.getBlock() instanceof IElectric electricBlock ? electricBlock : null;
         IntSet nativeIds = null, ceeIds = null;
         if (nativePg != null) {
-            int terminalCount = nativePg.terminalCount();
-            nativeIds = new IntOpenHashSet(Math.max(0, terminalCount));
-            for (int local = 0; local < terminalCount; local++) {
-                var placement = nativePg.terminal(state, local);
-                if (placement != null) nativeIds.add(nativePg.terminalIndexAt(state, placement.getOrigin()));
-            }
+            nativeIds = nativeTerminalIds(nativePg, state, nativeTerminals);
         } else if (state.getBlock() instanceof ElectricalDeviceBlock<?> cee) {
             ceeIds = new IntOpenHashSet();
             for (int id : cee.getNodePositions(level, pos, state).keySet())
                 if (cee.isNodeAccessible(level, pos, state, id)) ceeIds.add(id);
         }
         return new Owner(state, entity, nativeIds, ceeIds, ApiTerminals.existing(level, pos));
+    }
+
+    private static IntSet nativeTerminalIds(IElectric electric, BlockState state, Map<BlockState, IntSet> prepared) {
+        if (electric == state.getBlock() && STATE_ONLY_TERMINALS.get(electric.getClass()))
+            return prepared.computeIfAbsent(state, key -> readNativeTerminalIds(electric, key));
+        return readNativeTerminalIds(electric, state);
+    }
+
+    private static IntSet readNativeTerminalIds(IElectric electric, BlockState state) {
+        int count = electric.terminalCount();
+        var ids = new IntOpenHashSet(Math.max(0, count));
+        for (int local = 0; local < count; local++) {
+            var placement = electric.terminal(state, local);
+            if (placement != null) ids.add(electric.terminalIndexAt(state, placement.getOrigin()));
+        }
+        return ids;
     }
 
     private Object reference(ElectricalNetwork network) { return referenceGroups.root(references.getOrDefault(network, network)); }
