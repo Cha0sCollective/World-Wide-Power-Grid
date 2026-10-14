@@ -118,7 +118,9 @@ final class DisplayPulseCheck {
     }
 
     private record Observation(boolean available, int index, boolean halfClick, double voltage, double current) {
-        boolean powered() { return Math.abs(voltage - 24) < .03 && current >= .5; }
+        // Native copper and the feed switch have real losses. The 25-ohm
+        // coil needs at least .5 A; an ideal 24 V at its terminals is not required.
+        boolean powered() { return voltage >= 12.5 && voltage <= 24.03 && current >= .5; }
         boolean off() { return Math.abs(voltage) < .001 && current < .001; }
     }
 }

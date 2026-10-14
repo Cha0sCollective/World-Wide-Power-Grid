@@ -63,7 +63,8 @@ public final class DisplayPulseGameTests {
                     var high=ElectricalMeasurements.readVoltageBetween(h.getLevel(),stuck.display,0,stuck.display,8);
                     var low=ElectricalMeasurements.readVoltageBetween(h.getLevel(),missing.display,0,missing.display,8);
                     h.assertTrue(high.status()==MeasurementStatus.VALID&&low.status()==MeasurementStatus.VALID,"Negative pulse fixtures need accepted electrical results");
-                    ShowroomTools.near(h,high.voltage().orElseThrow().meanVoltageVolts(),24,.03,"Stuck-ON control");
+                    double poweredVoltage=high.voltage().orElseThrow().meanVoltageVolts();
+                    h.assertTrue(poweredVoltage>=12.5&&poweredVoltage<=24.03,"Stuck-ON control must retain real coil-activation voltage despite wire losses");
                     ShowroomTools.near(h,low.voltage().orElseThrow().meanVoltageVolts(),0,.001,"Missing rising pulse");
                     DynamicGameTests.audit(h);
                 }).thenSucceed();
