@@ -147,6 +147,7 @@ tasks.named('processResources') {
     from(layout.buildDirectory.dir('pg-native-resources/native')) { into 'native/wwpg' }
     from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_loading/structure' }
     from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_board_startup/structure' }
+    from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_cee_preparation/structure' }
 }
 tasks.named('jar') {
     from sourceSets.extensionApi.output

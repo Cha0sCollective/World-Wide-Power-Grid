@@ -38,6 +38,8 @@ public final class StableBranchGameTests {
         double[][] cases = {{10, 1000}, {10, 1000}, {20, 1000}, {-20, 1000},
                 {-20, 2000}, {0, 2000}, {10, 2000}, {10, 1000}};
         Object[] branch = {null}; ElectricalNetwork[] owner = {null};
+        com.george_vi.electroenergetics.simulation.SimulationResults[] published = {null};
+        double[] publishedValues = new double[2];
         boolean[] wired = {false}; int[] healthy = {0}, elapsed = {-1}, currentCase = {-1};
         h.runAtTickTime(5, () -> {
             set(h, sourcePos, loadPos, 10, 1000);
@@ -54,6 +56,9 @@ public final class StableBranchGameTests {
                 if (++healthy[0] < 10) return;
                 branch[0] = Bridges.get(level).branchIdentity(first, second);
                 owner[0] = new BlockWireEndpoint(loadPos, 0).getNode(level).getNetwork();
+                published[0] = InfrastructureSavedData.load(level).ticker.lastResults;
+                publishedValues[0] = published[0].getVoltageAt(first, second);
+                publishedValues[1] = published[0].getCurrentThrough(first, second);
                 h.assertTrue(branch[0] != null && owner[0] != null, "Mixed resistor had no prepared compatibility ownership");
                 elapsed[0] = 0;
             }
@@ -70,6 +75,9 @@ public final class StableBranchGameTests {
                 h.assertTrue(Bridges.get(level).branchIdentity(first, second) == branch[0]
                                 && new BlockWireEndpoint(loadPos, 0).getNode(level).getNetwork() == owner[0],
                         "A parameter-only change replaced compatibility topology or its solver owner");
+                h.assertTrue(Double.doubleToLongBits(published[0].getVoltageAt(first, second)) == Double.doubleToLongBits(publishedValues[0])
+                                && Double.doubleToLongBits(published[0].getCurrentThrough(first, second)) == Double.doubleToLongBits(publishedValues[1]),
+                        "Refreshing branch descriptions changed previously published CEE results");
             }
             if (++currentCase[0] == cases.length) { DynamicGameTests.audit(h); h.succeed(); return; }
             var next = cases[currentCase[0]];
