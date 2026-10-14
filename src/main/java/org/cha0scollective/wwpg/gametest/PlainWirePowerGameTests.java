@@ -16,6 +16,7 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import org.cha0scollective.wwpg.api.MeasurementStatus;
 import org.cha0scollective.wwpg.api.neoforge.ElectricalMeasurements;
 import org.cha0scollective.wwpg.bridge.RestorationCoordinator;
+import org.cha0scollective.wwpg.bridge.PropertyCurrentSourceWire;
 import org.cha0scollective.wwpg.mixin.ElectricalNetworkAccessor;
 import org.patryk3211.powergrid.collections.ModdedBlocks;
 import org.patryk3211.powergrid.collections.ModdedConfigs;
@@ -98,6 +99,50 @@ public final class PlainWirePowerGameTests {
     }
 
     @GameTest(template = "empty", batch = "wwpg_wire_power_core", timeoutTicks = 40)
+    public static void appliedPropertyPowerPreservesValuesReadsAndAccumulation(GameTestHelper h) {
+        var network = new ElectricalNetwork(false);
+        try {
+            for (boolean attached : new boolean[]{false, true}) {
+                for (double voltage : new double[]{10, -10, 0.0, -0.0, Double.MIN_VALUE, 1e-308,
+                        1e150, Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY}) {
+                    for (double conductance : new double[]{.25, 0.0, -0.0, Double.MIN_VALUE,
+                            1e150, Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY}) {
+                        var first = new CountingNode(voltage); var expectedFirst = new CountingNode(voltage);
+                        var actual = new PropertyCurrentSourceWire(first, null, conductance);
+                        var reference = new CurrentSourceWire(expectedFirst, null, conductance);
+                        if (attached) { actual.setNetwork(network); reference.setNetwork(network); }
+                        for (double sourceCurrent : new double[]{100, 0, -100}) {
+                            actual.setCurrent(sourceCurrent); reference.setCurrent(sourceCurrent);
+                            first.reads = expectedFirst.reads = 0;
+                            sameBits(h, reference.internalPower(), actual.internalPower(), "Applied property power");
+                            int expectedReads = !attached ? 1 : Double.isFinite(conductance) && conductance > 0 ? 1 : 2;
+                            h.assertTrue(first.reads == expectedReads, "Property fast path or exceptional fallback changed");
+                            h.assertTrue(expectedFirst.reads == (attached ? 2 : 1), "Property reference callbacks changed");
+                        }
+                    }
+                }
+            }
+            var first = new CountingNode(0); var second = new CountingNode(0);
+            var actual = new PropertyCurrentSourceWire(first, second, .25);
+            var reference = new CurrentSourceWire(first, second, .25);
+            actual.setNetwork(network); reference.setNetwork(network);
+            for (int count : new int[]{1, 3, 16, 32}) {
+                actual.prepare(count); reference.prepare(count);
+                for (int step = 0; step < count; step++) {
+                    first.value = step % 2 == 0 ? step : -step;
+                    second.value = step % 3;
+                    actual.setConductance(step % 4 == 0 ? .5 : .25);
+                    reference.setConductance(actual.conductance());
+                    actual.setCurrent(step - 8); reference.setCurrent(step - 8);
+                    actual.postMicroTick(); reference.postMicroTick();
+                    sameBits(h, reference.power(), actual.power(), "Property accumulation order or changing source");
+                }
+            }
+            h.succeed();
+        } finally { network.cleanup(); }
+    }
+
+    @GameTest(template = "empty", batch = "wwpg_wire_power_core", timeoutTicks = 40)
     public static void poweredPlainAndLinePowerKeepSixteenSubstepsAndEdits(GameTestHelper h) {
         var network = new ElectricalNetwork(false);
         network.switchBackend(ModdedConfigs.server().electricity.solver.solverBackend.get());
@@ -108,7 +153,8 @@ public final class PlainWirePowerGameTests {
             network.addNode(first); network.addNode(second);
             var plain = new ElectricWire(8, first, second);
             var line = new TransmissionLine(12, new TestEndpoint(first), new TestEndpoint(second), world);
-            network.addWire(plain); network.addWire(line);
+            var property = new PropertyCurrentSourceWire(first, second, .25);
+            network.addWire(plain); network.addWire(line); network.addWire(property);
             network.addWire(new CurrentSourceWire(second, null, 1000));
             var source = new VoltageSourceCoupling(first, second, 0); network.addNode(source);
             int acceptedFrames = 0;
@@ -118,10 +164,12 @@ public final class PlainWirePowerGameTests {
                 plain.setResistance(resistance); source.setVoltage((float) voltage);
                 network.prepare(16);
                 boolean accepted = true;
-                double plainPower = 0, linePower = 0;
+                double plainPower = 0, linePower = 0, propertyPower = 0;
                 for (int step = 0; step < 16; step++) {
+                    property.setCurrent(step - 8);
                     network.singleTick(); accepted &= network.isConverged();
                     plainPower += nativePower(plain) / 16; linePower += nativePower(line) / 16;
+                    propertyPower += nativePower(property) / 16;
                 }
                 if (!accepted) continue;
                 acceptedFrames++;
@@ -132,6 +180,7 @@ public final class PlainWirePowerGameTests {
                 BoardComponentGameTests.near(h, line.power(), voltage * voltage / 12, 1e-6, "Line sixteen-step power");
                 sameBits(h, plainPower, plain.power(), "Plain native aggregation order");
                 sameBits(h, linePower, line.power(), "Line native aggregation order");
+                sameBits(h, propertyPower, property.power(), "Powered property aggregation order");
             }
             h.assertTrue(acceptedFrames >= 12, "Powered fixture did not obtain enough accepted frames");
             h.assertTrue(((ElectricalNetworkAccessor) network).wwpg$solver().type()
@@ -234,7 +283,7 @@ public final class PlainWirePowerGameTests {
     }
 
     private static final class CountingNode extends OwnedFloatingNode {
-        final double value;
+        double value;
         int reads;
         CountingNode(double value) { super(new BlockWireEndpoint(BlockPos.ZERO, 0)); this.value = value; }
         @Override public double getVoltage() { reads++; return value; }
