@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "repository": "Cha0sCollective/World-Wide-Power-Grid",
+  "summary": "Beta.2 combines native and add-on bookkeeping improvements. API 1.0.0 and saved worlds stay compatible; the large-network 20 TPS goal remains open.",
+  "changes": [
+    "Groups add-on work by circuit and avoids repeated provider, terminal geometry, registration and stable branch work.",
+    "Reuses wire voltage differences and terminal samples, removes duplicate result copies and healthy-circuit filtering, and simplifies loading-pause bookkeeping.",
+    "Skips unnecessary input-assembly searches while preserving changing sources, stored energy, electrical accuracy and all 16 substeps."
+  ],
+  "installation": "Use Minecraft 1.21.1, NeoForge 21.1.231 or 21.1.248, Java 21, Create 6.0.10-280, CEE 1.1.3, Power Grid 0.6.2 and Architectury 13.0.8. Match server and client mod versions.",
+  "optional_installation": "Pinout editions also require CC:Tweaked 1.120.2 and CC;CPG: Pinout 0.2.1."
+}
