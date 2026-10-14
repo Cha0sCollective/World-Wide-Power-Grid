@@ -32,7 +32,7 @@
     "PgResidualAssemblyMixin",
     "PgRestorationValueMixin",
     "PgRestorationWireMixin",
-    "PgWirePowerMixin",
+    "PgPlainWirePowerMixin",
     "PgRestorationDerivedCurrentMixin",
     "RestorationMotorMixin",
     "RestorationConstantMotorMixin",

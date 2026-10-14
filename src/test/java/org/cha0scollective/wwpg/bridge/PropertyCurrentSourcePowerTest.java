@@ -15,9 +15,7 @@ class PropertyCurrentSourcePowerTest {
         @Override public double getVoltage() { reads++; return value; }
     }
 
-    // Unit JVMs do not apply mixins. The applied fast path is covered by
-    // PlainWirePowerGameTests on each backend; these retain the stamp's numeric oracle.
-    @Test void untransformedPropertyStampRetainsNativePower() {
+    @Test void finiteAttachedPowerMatchesNativeWithOneDifferentialRead() {
         var network = new ElectricalNetwork(false);
         try {
             for (double voltage : new double[]{10, -10, 0.0, -0.0, Double.MIN_VALUE, 1e-308, 1e150}) {
@@ -32,7 +30,8 @@ class PropertyCurrentSourcePowerTest {
                         referenceNode.reads = actualNode.reads = 0;
                         assertSameBits(reference.internalPower(), actual.internalPower());
                         assertEquals(2, referenceNode.reads, "Native reference should repeat its differential read");
-                        assertEquals(2, actualNode.reads, "Untransformed marker should retain inherited callbacks");
+                        assertEquals(conductance > 0 ? 1 : 2, actualNode.reads,
+                                "Positive property power should read once, while zero conductance retains native fallback");
                     }
                 }
             }
@@ -63,7 +62,7 @@ class PropertyCurrentSourcePowerTest {
             }
             assertSameBits(expected, actual.power());
             assertEquals(32, referenceFirst.reads); assertEquals(32, referenceSecond.reads);
-            assertEquals(32, actualFirst.reads); assertEquals(32, actualSecond.reads);
+            assertEquals(16, actualFirst.reads); assertEquals(16, actualSecond.reads);
             reference.prepare(16); actual.prepare(16);
             assertSameBits(0.0, actual.power());
             assertSameBits(reference.power(), actual.power());
