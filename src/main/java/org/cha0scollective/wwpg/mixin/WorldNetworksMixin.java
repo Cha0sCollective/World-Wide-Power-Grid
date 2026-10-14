@@ -17,6 +17,16 @@ import org.objectweb.asm.Opcodes;
 
 @Mixin(value = WorldNetworks.class, remap = false)
 public abstract class WorldNetworksMixin {
+    @Inject(method = "lineDisconnected", at = @At("HEAD"))
+    private void wwpg$rediscoverDetachedLine(org.patryk3211.powergrid.electricity.sim.special.TransmissionLine line, CallbackInfo ci) {
+        // GraphedElectricalNetwork.removeWire clears the line's solver owner
+        // before disconnecting its graph edge. PG's callback then queues null.
+        // The endpoint owners still identify the circuits that must split.
+        var world = (WorldNetworks) (Object) this;
+        if (line.getNode1() != null) world.scheduleIslandDiscovery(line.getNode1().getNetwork());
+        if (line.getNode2() != null) world.scheduleIslandDiscovery(line.getNode2().getNetwork());
+    }
+
     @Inject(method = "runIslandDiscoveryFor", at = @At("HEAD"), cancellable = true)
     private void wwpg$indexedIslands(ElectricalNetwork network, CallbackInfo ci) {
         var world = (WorldNetworks) (Object) this;

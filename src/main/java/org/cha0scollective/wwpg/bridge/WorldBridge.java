@@ -52,7 +52,7 @@ public final class WorldBridge {
     private final Map<EndpointKey, String> isolationReasons = new HashMap<>();
     private final Map<EndpointKey, BlockPos> deviceOwners = new HashMap<>();
     private final Map<CSolver.SolverBackend, Long> backendSubsteps = new EnumMap<>(CSolver.SolverBackend.class);
-    private final LinkedHashMap<String, Diagnostic> diagnostics = new LinkedHashMap<>();
+    private final DiagnosticHistory<Object> diagnostics;
     private final Deque<String> topologyHistory = new ArrayDeque<>();
     private long topologyChanges, lastTopologyTick = -1;
     private long topologyIdentityRevision;
@@ -90,9 +90,15 @@ public final class WorldBridge {
             "com.george_vi.electroenergetics.content.creative_battery.CreativeBatteryDevice$ACSource",
             "com.george_vi.electroenergetics.content.rotor.ThreePhaseAlternatorBrushesDevice$PhaseWindingProperties");
 
-    public WorldBridge(ServerLevel level) { this.level = level; }
+    public WorldBridge(ServerLevel level) {
+        this.level = level;
+        diagnostics = new DiagnosticHistory<>((key, step) -> key instanceof SolveFailure failure
+                ? failure.reason + "; " + failureContext(failure.network, step) : (String) key,
+                message -> WorldWidePowerGrid.LOGGER.warn("WWPG {}: {}", level.dimension().location(), message));
+    }
 
     public void prepare(SimulationTicker ticker) {
+        diagnostics.advance(level.getGameTime());
         results = null;
         ticker.future = null;
         // CEE's server-head hook runs before Minecraft refreshes runsNormally()
@@ -696,15 +702,7 @@ public final class WorldBridge {
     }
     private void diagnostic(String error) {
         if(error.length()>2048)error=error.substring(0,2048);
-        var entry = diagnostics.get(error);
-        if (entry == null) {
-            entry = new Diagnostic(error, level.getGameTime());
-            diagnostics.put(error, entry);
-            WorldWidePowerGrid.LOGGER.warn("WWPG {}: {}", level.dimension().location(), error);
-        }
-        entry.lastTick = level.getGameTime();
-        ++entry.count;
-        if (diagnostics.size() > 128) diagnostics.remove(diagnostics.keySet().iterator().next());
+        diagnostics.record(error, level.getGameTime(), -1, -1);
     }
     private void isolate(EndpointKey key, String reason) { isolated.add(key); isolationReasons.put(key, reason); }
     private BlockPos ownerOf(EndpointKey key) {
@@ -745,10 +743,12 @@ public final class WorldBridge {
     }
     /** Keep a rejected shared frame out of CEE gameplay and extension measurements. */
     public void reject(ElectricalNetwork network,Throwable error) {
-        diagnostic("Shared electrical solve failed: "+error.getClass().getSimpleName()+": "+error.getMessage()+"; "+failureContext(network));
         unavailable(network);
+        String reason = "Shared electrical solve failed: " + error.getClass().getSimpleName() + ": " + error.getMessage();
+        if (reason.length() > 1024) reason = reason.substring(0,1024);
+        diagnostics.record(new SolveFailure(network, error.getClass(), reason), level.getGameTime(), network.getStamp(), activeStep);
     }
-    private String failureContext(ElectricalNetwork network) {
+    private String failureContext(ElectricalNetwork network, int step) {
         var access=(ElectricalNetworkAccessor)network;
         var owners=new TreeSet<String>();
         for(var node:network.getNodes())if(node instanceof OwnedFloatingNode owned && owned.endpoint instanceof BlockWireEndpoint endpoint) {
@@ -759,7 +759,8 @@ public final class WorldBridge {
                     +":ticking="+level.getChunkSource().isPositionTicking(chunk)+":entities="+level.areEntitiesLoaded(chunk));
         }
         for(var entry:resultNodes.getOrDefault(network,List.of()))owners.add(entry.key.toString());
-        return "backend="+access.wwpg$solver().type()+", substep="+activeStep+", sources="+access.wwpg$sourceCount()
+        var solver = access.wwpg$solver();
+        return "backend="+(solver == null ? "retired" : solver.type())+", substep="+step+", sources="+access.wwpg$sourceCount()
                 +", nodes="+network.size()+", wires="+access.wwpg$wires().size()+", terminals="+owners.stream().limit(16).toList();
     }
     /** Keep normal upstream settling out of history/gameplay without recording a false solver error. */
@@ -770,9 +771,9 @@ public final class WorldBridge {
         }
     }
     public List<String> diagnostics() {
-        return diagnostics.values().stream().sorted(Comparator.comparingLong((Diagnostic d) -> d.lastTick).reversed())
-                .map(d -> "firstTick=" + d.firstTick + ", lastTick=" + d.lastTick + ", count=" + d.count + ": " + d.message).toList();
+        return diagnostics.snapshot();
     }
+    void closeDiagnostics() { diagnostics.flush(); }
     public List<String> topologyHistory() { return List.copyOf(topologyHistory); }
     public List<String> describe(BlockPos pos) {
         String owner = "block:" + pos.getX() + "," + pos.getY() + "," + pos.getZ();
@@ -876,12 +877,7 @@ public final class WorldBridge {
     }
 
     private record TopologyState(long identities, long created, long removed) {}
-    private static final class Diagnostic {
-        final String message;
-        final long firstTick;
-        long lastTick, count;
-        Diagnostic(String message,long tick) { this.message=message; firstTick=lastTick=tick; }
-    }
+    private record SolveFailure(ElectricalNetwork network, Class<?> kind, String reason) { }
 
     private record Desired(ElectricalProperties properties, boolean voltageSource, Node first, Node second, int firstOrdinal, int secondOrdinal) {
         Desired refresh(ElectricalProperties properties, Node first, Node second) {
