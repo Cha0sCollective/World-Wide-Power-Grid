@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "repository": "Cha0sCollective/World-Wide-Power-Grid",
-  "summary": "Beta preparation combines today's native and add-on bookkeeping improvements. API 1.0.0 and saved worlds stay compatible; the large-network 20 TPS goal remains open.",
+  "summary": "Beta.2 combines native and add-on bookkeeping improvements. API 1.0.0 and saved worlds stay compatible; the large-network 20 TPS goal remains open.",
   "changes": [
     "Groups add-on work by circuit and avoids repeated provider, terminal geometry, registration and stable branch work.",
     "Reuses wire voltage differences and terminal samples, removes duplicate result copies and healthy-circuit filtering, and simplifies loading-pause bookkeeping.",

@@ -1,6 +1,6 @@
 # Current status
 
-**[WWPG 0.2.2-alpha.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-alpha.1)**
+**[WWPG 0.2.2-beta.2](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-beta.2)**
 is the latest prerelease. [0.2.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.1) remains the stable release. It supports the declared stationary factories and
 optional Pinout computer control, and includes **extension API 1.0.0** for
 add-on developers. Existing beta.5 worlds remain compatible; update WWPG on
@@ -42,30 +42,34 @@ a repaired device. The [developer contract](EXTENSION_API.md) explains those rul
 
 ## What was checked
 
-The runtime's existing acceptance passed the full Windows/Linux × native/Java ×
-base/Pinout server matrix. Each combination includes three cold restarts and five
-actual assembly unload/reload cycles. Windows graphical and two-client sessions exercised
-the API Workshop's wiring, settings, meters, panel and board editing, cutting
-and repairs. Linux coverage comes from server tests, rather than graphical clients.
+Beta.2 received fresh full acceptance on Windows/Linux × native/Java ×
+base/Pinout, including cold restarts, actual assembly unload/reload cycles,
+storage and ownership checks. Windows focused checks also cover the new
+substep-input and display-pulse fixtures.
+Windows graphical and two-client sessions exercised the exact downloadable
+Stationary Yard and API Workshop archives on both solvers and profiles. Linux
+coverage comes from server tests, rather than graphical clients.
 
-This alpha carries those results forward: its runtime differs only in the mod
-version declaration. Its worlds use accepted candidate exports with unchanged
-native save files and updated export metadata. The full suite was not repeated.
-The expanded SDK and starter received fresh focused build, server and graphical
-checks. Both example add-ons built independently from the downloadable source
-and Maven archives. API 1.0.0 remains compatible with the published contract.
+Both example add-ons built independently from the downloadable source and Maven
+archives. The adjustable-load starter also received independent build, server and
+graphical checks. API 1.0.0 remains compatible with its published contract.
 
-For maintainers, the detailed [verification record](../release/0.2.2-alpha.1/verification.json)
-retains exact versions, hashes and results. There are 204 base checks or 208 with
-Pinout, plus 34 extension/lifecycle checks and 81 Java unit checks per CI job.
-These are test counts, not counts of items in the game.
+For maintainers, the detailed [verification record](../release/0.2.2-beta.2/verification.json)
+retains exact versions, hashes, test counts and failed-attempt assessments. The
+[previous alpha record](../release/0.2.2-alpha.1/verification.json) continues to
+identify its carried-forward acceptance; it has not been relabeled as a fresh run.
 
-## Loading changes in this alpha
+## Loading and ticking
 
-This alpha groups loading updates for affected circuits, preserves stored
-energy while those circuits wait, and reduces repeated graph and matrix work.
+The loading fixes group updates for affected circuits, preserve stored
+energy while those circuits wait, and reduce repeated graph and matrix work.
 Meters report unavailable readings during the pause, and devices resume without
 simulating the time spent waiting. Unrelated ready factories continue operating.
+
+Beta.2 groups add-on work by circuit, reuses accepted terminal and wire readings,
+and skips empty input-assembly searches. These changes retain electrical
+accuracy, stored energy and all 16 substeps. The original 14,650-node benchmark
+has not reached 20 TPS; playable-world acceptance does not establish that target.
 
 Fresh PG pentodes can also need a few startup calculations before measurements
 become available. The checks hold their unaccepted results and stored

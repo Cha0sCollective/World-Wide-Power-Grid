@@ -20,7 +20,7 @@ Windows wrapper. Use a Python interpreter for the `python` commands.
 The [dependency lock](../release/artifacts.json) records the pinned upstream
 artifacts. The optional `PINOUT` profile adds the
 [locked Pinout and CC:Tweaked versions](../release/optional-artifacts.json).
-The ordinary build produces `build/libs/wwpg-0.2.2-alpha.1.jar`.
+The ordinary build produces `build/libs/wwpg-0.2.2-beta.2.jar`.
 
 The compile baseline remains NeoForge 21.1.231. Use `-Pneo_version=21.1.248`
 to build or launch with that loader, including the independent examples.
@@ -113,7 +113,7 @@ Use a dedicated `wwpg_yard` directory, separate from the regression worlds:
 
 ```sh
 ./gradlew runPackagedGameTestServer -PtestNamespaces=wwpg_yard -PtestProfile=BASE -PtestDirectory=run/yard-base --no-daemon
-python tools/export_stationary_yard.py --target 0.2.1 --run run/yard-base --jar build/libs/wwpg-0.2.2-alpha.1.jar --profile BASE --output build/distributions/yard-base.zip
+python tools/export_stationary_yard.py --target 0.2.2-beta.2 --run run/yard-base --jar build/libs/wwpg-0.2.2-beta.2.jar --profile BASE --output build/distributions/yard-base.zip
 python tools/reopen_stationary_yard.py build/distributions/yard-base.zip --run run/exact-yard-base
 ```
 

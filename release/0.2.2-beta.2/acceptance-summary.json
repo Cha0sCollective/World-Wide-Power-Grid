@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "version": "0.2.2-beta.2",
+  "status": "accepted_for_publication",
+  "recorded_utc": "2026-10-14T06:51:23.766853+00:00",
+  "runtime_source_sha": "c870c1438676371749fe6e4648232c9a7aac8f58",
+  "documentation_source_sha": "88a79b221c63caaaa631e62531a55af6f29d5449",
+  "starter_launcher_source_sha": "064a93c50085a1dd45c0a6303fc92c25e3b51895",
+  "runtime_sha256": "c06d067bfe97350aff15ad2240fff8f8bd2dcbb172df060cbde8a7a6cdee2c4d",
+  "local_acceptance": {
+    "passed": true,
+    "profiles": [
+      "BASE",
+      "PINOUT"
+    ],
+    "backends": [
+      "NATIVE",
+      "JAVA"
+    ],
+    "bounded_commands": 86,
+    "server_starts": 44,
+    "graphical_sessions": 8,
+    "two_client_dedicated_sessions": 8,
+    "independently_rehashed_records": 1103
+  },
+  "ci": {
+    "build": {
+      "run_id": 38512230142,
+      "jobs_passed": 8,
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38512230142"
+    },
+    "neoforge_compatibility": {
+      "run_id": 38512232460,
+      "jobs_passed": 8,
+      "bounded_launches": 96,
+      "compile_version": "21.1.231",
+      "runtime_version": "21.1.248",
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/38512232460"
+    }
+  },
+  "sdk": {
+    "readme_only_source_changes": true,
+    "independent_builds_passed": true,
+    "compiled_outputs_unchanged": true,
+    "starter_fresh_graphical_backends": [
+      "NATIVE",
+      "JAVA"
+    ],
+    "starter_client_voltage": 19.999698638916016,
+    "starter_screenshots_independently_reviewed": 4
+  },
+  "packaging": {
+    "public_acceptance_gates": "passed",
+    "staging": "passed",
+    "download_count": 5,
+    "mod_jar_first": true,
+    "lossless_log_compression": true,
+    "portable_evidence_paths": true,
+    "originals_and_failed_attempts_preserved": true
+  },
+  "limits": [
+    "The 14,650-node yard has not achieved the 20 TPS target. This release acceptance did not repeat the capacity benchmark campaign.",
+    "The intermittent large Java factorization stall remains a separate unresolved limit."
+  ],
+  "future_full_suites": "Only when the user explicitly requests them; focused development checks remain the default."
+}

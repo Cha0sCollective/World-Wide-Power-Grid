@@ -204,7 +204,7 @@ def checked_source(path, source_sha, run_id, run_attempt, evidence):
     require(value.get('schema') == 1 and value.get('source_sha') == source_sha
             and re.fullmatch(r'[0-9a-f]{40}', value.get('source_tree', ''))
             and value.get('run_id') == run_id and value.get('run_attempt') == run_attempt
-            and value.get('event') in {'pull_request', 'push'}, 'Actual checkout differs from frozen run source/attempt')
+            and value.get('event') in {'pull_request', 'push', 'workflow_dispatch'}, 'Actual checkout differs from frozen run source/attempt')
     evidence.append(path)
     return value
 

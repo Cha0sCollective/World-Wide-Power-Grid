@@ -1,6 +1,6 @@
 # Documentation
 
-These guides describe **WWPG 0.2.2-alpha.1**, its supported stationary factories, and
+These guides describe **WWPG 0.2.2-beta.2**, its supported stationary factories, and
 **extension API 1.0.0**. Start with the page that matches what you want to do.
 
 ## Play and run a server
