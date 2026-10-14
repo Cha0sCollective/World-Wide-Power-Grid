@@ -51,13 +51,26 @@ gradle.projectsEvaluated {
             workingDir = p.file(p.providers.gradleProperty('docDirectory').get()); workingDir.mkdirs()
             new File(workingDir,'options.txt').text='soundCategory_music:0.0\npauseOnLostFocus:false\n'
             def example=p.file(p.providers.gradleProperty('docExampleJar').get())
-            if(!new File(workingDir,'saves/Documentation Test/level.dat').isFile() || !example.isFile())
+            def worldName=p.providers.gradleProperty('docWorldName').getOrElse('')
+            def saves=new File(workingDir,'saves')
+            def worlds=saves.isDirectory() ? saves.listFiles() : null
+            if(!worldName || (worldName in ['.','..']) || worldName.contains('/') || worldName.contains('\\')
+                    || worldName.chars().anyMatch({ character -> character < 32 || character == 127 }))
+                throw new GradleException('Supply a safe existing save folder basename')
+            if(worlds == null || worlds.length != 1 || !worlds[0].isDirectory() || worlds[0].name != worldName
+                    || worlds[0].canonicalFile.parentFile != saves.canonicalFile
+                    || !new File(worlds[0],'level.dat').isFile() || !example.isFile())
                 throw new GradleException('Extract an existing disposable test save and supply the released source example jar')
+            // Java argument files require quotes around spaces and escapes inside quotes.
+            def worldArgument='"'+worldName.replace('\\','\\\\').replace('"','\\"')+'"'
             mainClass = run.mainClass
             args = run.args.collect { argument ->
                 if(!argument.startsWith('@')) return argument
-                def original=p.file(argument.substring(1)), replacement=p.file('build/doc-acceptance/client-program.txt')
-                replacement.text=original.getText('UTF-8').replace('--quickPlayMultiplayer\n127.0.0.1:25575','--quickPlaySingleplayer\n"Documentation Test"').replace('--width\n854','--width\n1280').replace('--height\n480','--height\n720')
+                def original=p.file(argument.substring(1)), replacement=new File(workingDir,'documentation-client-program.txt')
+                def program=original.getText('UTF-8')
+                def quickPlay='--quickPlayMultiplayer\n127.0.0.1:25575'
+                if(!program.contains(quickPlay)) throw new GradleException('Missing expected multiplayer argument pair')
+                replacement.setText(program.replace(quickPlay,'--quickPlaySingleplayer\n'+worldArgument).replace('--width\n854','--width\n1280').replace('--height\n480','--height\n720'),'UTF-8')
                 return '@'+replacement.absolutePath
             }
             jvmArgs = run.jvmArgs + ['-Dwwpg.test.packaged=false','-Dwwpg.doc.client=true','-Dwwpg.test.backend='+p.providers.gradleProperty('testBackend').getOrElse('NATIVE')]

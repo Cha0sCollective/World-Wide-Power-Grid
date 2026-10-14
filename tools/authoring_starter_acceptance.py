@@ -134,6 +134,22 @@ def server(output, runtime, backend):
     print(json.dumps(dict(passed=True, backend=backend, observations=len(reports))))
 
 
+def client_world_name(directory):
+    """Select the single extracted save without moving its native files."""
+    saves = directory / 'saves'
+    if not saves.is_dir():
+        raise ValueError('Supply one playable world')
+    entries = list(saves.iterdir())
+    if len(entries) != 1 or not entries[0].is_dir() or entries[0].is_symlink() \
+            or not (entries[0] / 'level.dat').is_file():
+        raise ValueError('Supply one playable world')
+    name = entries[0].name
+    if name in ('', '.', '..') or '/' in name or '\\' in name \
+            or any(ord(character) < 32 or ord(character) == 127 for character in name):
+        raise ValueError('Use a safe save folder basename')
+    return name
+
+
 def client(output, runtime, backend, world, example):
     proof = json.loads((output / 'build-proof.json').read_text(encoding='utf-8'))
     starter = ROOT / proof['compiled_output']['path']
@@ -143,17 +159,31 @@ def client(output, runtime, backend, world, example):
     if directory.exists():
         raise ValueError('Preserve earlier graphical attempt')
     extract_world(world, directory, client=True)
-    saves = list((directory / 'saves').iterdir())
-    if len(saves) != 1 or not (saves[0] / 'level.dat').is_file():
-        raise ValueError('Supply one playable world')
-    saves[0].rename(directory / 'saves/Documentation Test')
+    save_name = client_world_name(directory)
+    launcher_source = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+    if re.fullmatch(r'[0-9a-f]{40}', launcher_source) is None:
+        raise ValueError('Capture the immutable launcher source commit')
+    launcher_inputs = [Path(__file__).resolve(), ROOT / 'tools/documentation_acceptance/init.gradle']
+    launcher_hashes = [sha(path) for path in launcher_inputs]
+    launcher_directory = directory / 'launcher-inputs'
+    launcher_directory.mkdir()
+    launcher_tools = []
+    for path in launcher_inputs:
+        retained = launcher_directory / path.name
+        shutil.copyfile(path, retained)
+        launcher_tools.append(descriptor(retained))
+    if launcher_hashes != [item['sha256'] for item in launcher_tools]:
+        raise ValueError('Launcher snapshots differ from their captured inputs')
     wrapper = ROOT / ('gradlew.bat' if os.name == 'nt' else 'gradlew')
     log = output / (backend + '-client.log')
     run([sys.executable, ROOT / 'tools/run_checked.py', '--timeout', '600', '--',
          wrapper, 'runDocumentationClient', '-I', 'tools/documentation_acceptance/init.gradle',
          '-PdocStarterJar=' + str(starter), '-PdocRuntimeJar=' + str(runtime),
          '-PdocExampleJar=' + str(example), '-PdocDirectory=' + str(directory),
+         '-PdocWorldName=' + save_name,
          '-PtestBackend=' + backend, '-Pneo_version=21.1.248', '--no-daemon'], log)
+    if launcher_hashes != [sha(path) for path in launcher_inputs]:
+        raise ValueError('Launcher tools changed during the graphical check')
     text = log.read_text(encoding='utf-8', errors='replace')
     observation = directory / 'doc-client-result.json'
     result = json.loads(observation.read_text(encoding='utf-8'))
@@ -167,7 +197,10 @@ def client(output, runtime, backend, world, example):
         raise ValueError('Graphical result differs from actual frozen inputs or required interactions')
     saved_helper = directory / 'acceptance-helper.jar'
     shutil.copyfile(helper, saved_helper)
-    retained = [log, observation, saved_helper]
+    program = directory / 'documentation-client-program.txt'
+    if not program.is_file():
+        raise ValueError('Retain the actual single-player launcher argument file')
+    retained = [log, observation, saved_helper, program]
     for name in ('load-100-on.png', 'load-400-off.png'):
         screenshot = directory / 'screenshots' / name
         if not screenshot.is_file() or screenshot.stat().st_size < 1000:
@@ -176,6 +209,8 @@ def client(output, runtime, backend, world, example):
     report = dict(passed=True, backend=backend, runtime_sha256=sha(runtime),
         starter_sha256=sha(starter), controls=True, native_tools=True,
         source_sha=proof['source_sha'], evidence=[descriptor(p) for p in retained],
+        input_save_name=save_name, launcher_program=descriptor(program),
+        launcher_source_sha=launcher_source, launcher_tools=launcher_tools,
         input_world=descriptor(world), source_example=descriptor(example))
     write(output / (backend + '-graphical.json'), report)
     print(json.dumps(dict(passed=True, backend=backend, meter_volts=result['client_meter_volts'])))
