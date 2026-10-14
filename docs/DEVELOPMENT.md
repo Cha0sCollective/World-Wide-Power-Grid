@@ -39,6 +39,30 @@ the donor JNI interface. Use the published Minecraft 1.21.1 sources linked in th
 lock record. PG's generic `v0.6.2` tag and newer CEE development APIs are different
 baselines.
 
+## Focused wire removal and failure diagnostics
+
+The `wwpg_wire_recovery` namespace checks real PG wire removal, graph splits,
+reconnection, completed GameTest assemblies, and solver configuration reloads.
+It also exercises genuine rejected solves with native and addon storage held,
+and ordinary warm-up without false errors. It requires both independent example
+addon jars (`-PtestApiAddon=true`). Run it on `JAVA` and `NATIVE` in separate fresh
+directories, against the same frozen candidate:
+
+```sh
+python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestArtifact=path/to/candidate.jar -PtestNamespaces=wwpg_wire_recovery -PtestApiAddon=true -PtestBackend=JAVA -PtestDirectory=run/wire-recovery-java --offline --no-daemon -x build -x jar -x test
+```
+
+Vanilla GameTest success discards non-player entities, including wires, while
+leaving the source blocks. The completed-assembly observer deliberately keeps
+those blocks ticking; a success marker alone cannot establish their later health.
+
+Repeated runtime diagnostics keep occurrence counts and first reported details
+in a bounded history. Each world emits at most eight detailed warnings per 200
+game ticks, with additional occurrences summarized periodically and at unload.
+History eviction cannot reset that output budget. `/wwpg errors` exposes the
+retained details and reports history overflow. Logging never accepts a rejected
+solve or changes its measurement, storage or gameplay handling.
+
 ## Electrical lifecycle and persistence
 
 `BASE` has 204 inherited packaged checks. `PINOUT` has 208, including the optional
