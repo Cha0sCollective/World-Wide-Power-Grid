@@ -604,7 +604,7 @@ public final class WorldBridge {
             adapter.binding.failureReason().ifPresent(reason->adapterFault(adapter,reason));
         }
         for (var dynamic : dynamics) if (failedDynamic(dynamic)) dynamic.checkpoint.run();
-        var currents = new Object2DoubleOpenHashMap<DirectionalNodeConnection>();
+        var currents = new Object2DoubleOpenHashMap<DirectionalNodeConnection>(branches.size() + 2 * transformers.size());
         for (var branch : branches.values()) {
             var p = branch.desired.properties;
             double current = branch.currentSum / substeps;
