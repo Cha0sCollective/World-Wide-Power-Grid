@@ -99,7 +99,10 @@ final class StationaryYardControls {
             var be=(ModularDisplayBlockEntity)h.getLevel().getBlockEntity(s.device());var player=h.makeMockPlayer(GameType.SURVIVAL);var item=ModdedItems.DISPLAY_MODULE.asStack();player.setItemInHand(InteractionHand.MAIN_HAND,item);be.interact(0,player);h.assertTrue(item.isEmpty(),"Yard display module cost failed");
             close(s,24,false);wire(h,s.control(),1,s.device(),0,true);wire(h,s.source(),0,s.device(),8,false);wire(h,s.source(),0,s.device(),1,true);yard.blockMeter(s,s.device(),0,8,24);
         });
-        yard.check(s,()->h.assertTrue(((ModularDisplayBlockEntity)h.getLevel().getBlockEntity(s.device())).modules[0].getIndex()>0,"Display did not count a real pulse"));
+        var pulse = new DisplayPulseCheck(h,s.device(),s.control(),
+                closed->((org.patryk3211.powergrid.electricity.electricswitch.SwitchBlockEntity)h.getLevel().getBlockEntity(s.control())).setState(closed),yard.restore);
+        yard.readinessChecks.add(pulse::await);
+        yard.check(s,pulse::verify);
     }
     void currentSource() {
         var s=yard.station("Current source",List.of("powergrid:creative_current_source","electroenergetics:resistor"),"0.1 A -> 100 ohms","About 10 V output","Scroll current varies V");
