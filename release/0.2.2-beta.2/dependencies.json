@@ -1,0 +1,337 @@
+{
+  "schema": 1,
+  "api_version": "1.0.0",
+  "platform": {
+    "minecraft": "1.21.1",
+    "java": 21,
+    "compile_neoforge": "21.1.231",
+    "create": "6.0.10-280",
+    "historical_tested_neoforge": [
+      "21.1.231",
+      "21.1.248"
+    ],
+    "beta_acceptance_target_neoforge": [
+      "21.1.231",
+      "21.1.248"
+    ],
+    "acceptance_scope": "Historical tested loader versions are preserved from the alpha record; completion of the fresh beta matrix belongs to the separate verification record."
+  },
+  "required_mod_artifacts": [
+    {
+      "role": "cee",
+      "version": "1.21.1-1.1.3",
+      "coordinate": "maven.modrinth:qYJdIoAx:KWxEmmON",
+      "url": "https://cdn.modrinth.com/data/qYJdIoAx/versions/KWxEmmON/electroenergetics-1.21.1-1.1.3.jar",
+      "sha256": "ae7ea74b7b00f175daa5a60a953a6d57f7f775aed0b642a1e9f80c3865cf8be7",
+      "source": "https://github.com/george8188625/Create-Electro-Energetics/tree/cf855615a611acea5d43e62398087d68cb5ef840",
+      "source_note": "Stable 1.1.x source at the 1.1.3 publication; the development branch uses a different property API.",
+      "installation": "mods directory on client and server"
+    },
+    {
+      "role": "pg",
+      "version": "0.6.2",
+      "coordinate": "curse.maven:power-grid-1321420:8880715",
+      "url": "https://mediafilez.forgecdn.net/files/8880/715/powergrid-mc1.21.1-0.6.2.jar",
+      "sha256": "e40d67a874431925d502af88e85064883c67936cfd689033d7df560cffcf19e7",
+      "source": "https://github.com/patryk3211/PowerGrid/tree/0938be067fb71f311b3e5fd6c5f7cdaed722e241",
+      "source_note": "Minecraft 1.21.1 source at the published artifact. The generic v0.6.2 tag targets 1.20.1.",
+      "installation": "mods directory on client and server"
+    },
+    {
+      "role": "create",
+      "version": "6.0.10-280",
+      "coordinate": "com.simibubi.create:create-1.21.1:6.0.10-280",
+      "url": "https://maven.createmod.net/com/simibubi/create/create-1.21.1/6.0.10-280/create-1.21.1-6.0.10-280.jar",
+      "sha256": "192c7b0be13f523dcec9a7a2393bbc2614c3c9bd3edb1f7720a97bcd4f0b87a7",
+      "source_note": "Published full Create release. All 2692 Create classes are byte-identical to the slim development artifact. Bundled Registrate, Ponder and Flywheel versions match the fixed development runtime.",
+      "installation": "mods directory on client and server"
+    },
+    {
+      "role": "architectury",
+      "version": "13.0.8",
+      "coordinate": "dev.architectury:architectury-neoforge:13.0.8",
+      "url": "https://maven.architectury.dev/dev/architectury/architectury-neoforge/13.0.8/architectury-neoforge-13.0.8.jar",
+      "sha256": "2eb06668281be9c57ed6ba8b2ca39b155567063c3096aa94a1c2140694f787df",
+      "bytes": 591636,
+      "installation": "mods directory on client and server",
+      "provenance": "Resolved published NeoForge artifact from the Maven coordinate and repository configured in build.gradle; jar metadata identifies architectury 13.0.8."
+    }
+  ],
+  "optional_mod_artifacts": [
+    {
+      "role": "pinout",
+      "version": "0.2.1",
+      "coordinate": "maven.modrinth:sMa4MaGz:UJtJCpBi",
+      "sha256": "d31c19c3c8aefb512922bf8086146127cad7ef9100d929a8fddcc2ab133fdd4a",
+      "download": "https://cdn.modrinth.com/data/sMa4MaGz/versions/UJtJCpBi/pinout-0.2.1.jar",
+      "source": "https://github.com/INEEDCHATPROGRAAAAAMS/CC-cpg-pinout/tree/590e86b4bd437cff33246fda23b0c14fe6272d04",
+      "source_note": "Reference source; published jar metadata and bytecode are authoritative."
+    },
+    {
+      "role": "computercraft",
+      "version": "1.120.2",
+      "coordinate": "maven.modrinth:gu7yAYhd:1ewzHZYg",
+      "sha256": "e8651fe24b384e925e563c9ad077644744474e2e7c0adb8e6d5b4757598dce9f",
+      "download": "https://cdn.modrinth.com/data/gu7yAYhd/versions/1ewzHZYg/cc-tweaked-1.21.1-forge-1.120.2.jar",
+      "source": "https://github.com/cc-tweaked/CC-Tweaked/releases/tag/v1.120.2"
+    }
+  ],
+  "profiles": {
+    "BASE": {
+      "required_roles": [
+        "cee",
+        "pg",
+        "create",
+        "architectury"
+      ],
+      "optional_roles": [],
+      "requires_pinout_or_computercraft": false
+    },
+    "PINOUT": {
+      "required_roles": [
+        "cee",
+        "pg",
+        "create",
+        "architectury",
+        "pinout",
+        "computercraft"
+      ],
+      "optional_roles": [],
+      "requires_pinout_or_computercraft": true
+    }
+  },
+  "native_backend": {
+    "default": "NATIVE",
+    "alternative": "JAVA",
+    "binary_donor": {
+      "role": "pg_native_reference",
+      "version": "0.6.1",
+      "coordinate": "curse.maven:power-grid-1321420:8738576",
+      "url": "https://mediafilez.forgecdn.net/files/8738/576/powergrid-mc1.21.1-0.6.1.jar",
+      "sha256": "b2835c36af6794a963737c617b5f9dd6b41aba5078d418c88847193fbcf702e5",
+      "source_note": "Native v7 binary donor only; this mod jar is never loaded. NativeMNA.class is byte-identical to the 0.6.2 interface.",
+      "installation": "NEVER install this jar; build-time native-v7 binary donor only"
+    },
+    "binaries": [
+      {
+        "entry": "native/wwpg/windows/libpowergridNative7.dll",
+        "sha256": "3150ba018b68ef173332a31b041b25cd8c6501394c4e9222aaa4c3ac9eeb16f4"
+      },
+      {
+        "entry": "native/wwpg/linux/libpowergridNative7.so",
+        "sha256": "c90e98869ed32ed8bff68aa5a856f4507ca09025a6152d9df718115637c8e837"
+      }
+    ],
+    "distribution": "WWPG includes the donor's matching native-v7 binaries and license notice; Power Grid 0.6.2 remains the installed PG mod. Java is the fallback backend."
+  },
+  "upstream_pins": [
+    {
+      "path": "release/artifacts.json",
+      "sha256": "eed4abcd082ef9d02c7313c66ee6ff8fa5f890e62f4a5afe60404807e262075f",
+      "bytes": 2574
+    },
+    {
+      "path": "release/optional-artifacts.json",
+      "sha256": "e0ab7a8f8098c5bb11b3351816aabefe3e64b20625c0efbea824106372f6eb0c",
+      "bytes": 1018
+    }
+  ],
+  "compatibility_policy": "Minimum-only declarations permit newer NeoForge, Create, CEE and Power Grid releases for player testing. Minecraft remains 1.21.1. Only listed combinations are verified.",
+  "redistribution": "This manifest links upstream releases and records checksums. Upstream mod jars are not WWPG release assets.",
+  "target": "0.2.2-beta.2",
+  "acceptance_record": "verification.json",
+  "note": "The pinned upstream coordinates, versions, download/source links and hashes are carried forward unchanged from the published alpha dependency metadata. Current beta-specific work here is configuration inspection and local jar/native-resource byte verification only. Fresh beta runtime, client and CI acceptance is recorded separately; no historical alpha acceptance is relabeled as a fresh beta pass.",
+  "source_sha": "c870c1438676371749fe6e4648232c9a7aac8f58",
+  "dependency_metadata_provenance": {
+    "kind": "Unchanged published dependency metadata with fresh local byte/configuration observations",
+    "historical_dependency_record": {
+      "path": "release/0.2.2-alpha.1/dependencies.json",
+      "sha256": "2eebe1202fd4e10f25b2727443af98ea5411542abbee720854c165d0f57fb3d8",
+      "bytes": 6168
+    },
+    "observed_at_utc": "2026-10-14T04:54:17.455113+00:00",
+    "observed_source_sha": "c870c1438676371749fe6e4648232c9a7aac8f58",
+    "configuration_files": [
+      {
+        "path": "gradle.properties",
+        "sha256": "20341c4402c6f24f3020dd69afefa6dab42c1321c15abcea56a6dc646847615f",
+        "bytes": 232
+      },
+      {
+        "path": "build.gradle",
+        "sha256": "3834141519f9ae8d4edc875e2469db9c098f9eb9b9eb37952371cf93665d58f6",
+        "bytes": 27125
+      }
+    ],
+    "configured_versions": {
+      "mod_version": "0.2.2-beta.2",
+      "api_version": "1.0.0",
+      "minecraft_version": "1.21.1",
+      "neo_version": "21.1.231",
+      "create_version": "6.0.10-280",
+      "cee_version": "1.21.1-1.1.3",
+      "pg_version": "0.6.2"
+    },
+    "create_runtime_classifier": "full published runtime by default; slim is an explicit development override",
+    "optional_profile_rule": "Both optional coordinates are read from release/optional-artifacts.json and added to runtime only for PINOUT.",
+    "historical_notes": "Upstream source links, URLs and the prior full/slim Create comparison remain historical annotations; no new internet/source audit or full/slim class comparison was performed.",
+    "current_local_dependency_jars": [
+      {
+        "role": "cee",
+        "coordinate": "maven.modrinth:qYJdIoAx:KWxEmmON",
+        "version": "1.21.1-1.1.3",
+        "observed_location": "C:\\Users\\Parker\\.gradle\\caches\\modules-2\\files-2.1\\maven.modrinth\\qYJdIoAx\\KWxEmmON\\b8225d9ec60b5afaba8809e0bd96f224a0560e10\\qYJdIoAx-KWxEmmON.jar",
+        "sha256": "ae7ea74b7b00f175daa5a60a953a6d57f7f775aed0b642a1e9f80c3865cf8be7",
+        "bytes": 4774544,
+        "matches_preserved_pin": true,
+        "seen_in_current_generated_classpaths": [],
+        "distribution": "Local byte observation only; this upstream jar is not included in the WWPG release bundles.",
+        "seen_in_retained_base_native_launches": [
+          "server-launch.txt",
+          "client-a-launch.txt",
+          "client-b-launch.txt"
+        ]
+      },
+      {
+        "role": "pg",
+        "coordinate": "curse.maven:power-grid-1321420:8880715",
+        "version": "0.6.2",
+        "observed_location": "C:\\Users\\Parker\\.gradle\\caches\\modules-2\\files-2.1\\curse.maven\\power-grid-1321420\\8880715\\e09452dac8202e31f282149d45c49dcdb218bd54\\power-grid-1321420-8880715.jar",
+        "sha256": "e40d67a874431925d502af88e85064883c67936cfd689033d7df560cffcf19e7",
+        "bytes": 5738480,
+        "matches_preserved_pin": true,
+        "seen_in_current_generated_classpaths": [],
+        "distribution": "Local byte observation only; this upstream jar is not included in the WWPG release bundles.",
+        "seen_in_retained_base_native_launches": [
+          "server-launch.txt",
+          "client-a-launch.txt",
+          "client-b-launch.txt"
+        ]
+      },
+      {
+        "role": "create",
+        "coordinate": "com.simibubi.create:create-1.21.1:6.0.10-280",
+        "version": "6.0.10-280",
+        "observed_location": "C:\\Users\\Parker\\.gradle\\caches\\modules-2\\files-2.1\\com.simibubi.create\\create-1.21.1\\6.0.10-280\\62c085fd48fc84b62f88d7bc98b7c4206492c080\\create-1.21.1-6.0.10-280.jar",
+        "sha256": "192c7b0be13f523dcec9a7a2393bbc2614c3c9bd3edb1f7720a97bcd4f0b87a7",
+        "bytes": 19123766,
+        "matches_preserved_pin": true,
+        "seen_in_current_generated_classpaths": [],
+        "distribution": "Local byte observation only; this upstream jar is not included in the WWPG release bundles.",
+        "seen_in_retained_base_native_launches": [
+          "server-launch.txt",
+          "client-a-launch.txt",
+          "client-b-launch.txt"
+        ]
+      },
+      {
+        "role": "architectury",
+        "coordinate": "dev.architectury:architectury-neoforge:13.0.8",
+        "version": "13.0.8",
+        "observed_location": "C:\\Users\\Parker\\.gradle\\caches\\modules-2\\files-2.1\\dev.architectury\\architectury-neoforge\\13.0.8\\6544bdc09e6d291e1307230fc0b7289601e164fa\\architectury-neoforge-13.0.8.jar",
+        "sha256": "2eb06668281be9c57ed6ba8b2ca39b155567063c3096aa94a1c2140694f787df",
+        "bytes": 591636,
+        "matches_preserved_pin": true,
+        "seen_in_current_generated_classpaths": [],
+        "distribution": "Local byte observation only; this upstream jar is not included in the WWPG release bundles.",
+        "seen_in_retained_base_native_launches": [
+          "server-launch.txt",
+          "client-a-launch.txt",
+          "client-b-launch.txt"
+        ]
+      },
+      {
+        "role": "pinout",
+        "coordinate": "maven.modrinth:sMa4MaGz:UJtJCpBi",
+        "version": "0.2.1",
+        "observed_location": "C:\\Users\\Parker\\.gradle\\caches\\modules-2\\files-2.1\\maven.modrinth\\sMa4MaGz\\UJtJCpBi\\784e88295a1360147ef1cbbe177a3ee3ad999e49\\sMa4MaGz-UJtJCpBi.jar",
+        "sha256": "d31c19c3c8aefb512922bf8086146127cad7ef9100d929a8fddcc2ab133fdd4a",
+        "bytes": 29769,
+        "matches_preserved_pin": true,
+        "seen_in_current_generated_classpaths": [],
+        "distribution": "Local byte observation only; this upstream jar is not included in the WWPG release bundles.",
+        "seen_in_retained_base_native_launches": []
+      },
+      {
+        "role": "computercraft",
+        "coordinate": "maven.modrinth:gu7yAYhd:1ewzHZYg",
+        "version": "1.120.2",
+        "observed_location": "C:\\Users\\Parker\\.gradle\\caches\\modules-2\\files-2.1\\maven.modrinth\\gu7yAYhd\\1ewzHZYg\\f35d4f636c2eb1b30c5d3f5c08e110c6acb8e02f\\gu7yAYhd-1ewzHZYg.jar",
+        "sha256": "e8651fe24b384e925e563c9ad077644744474e2e7c0adb8e6d5b4757598dce9f",
+        "bytes": 3126327,
+        "matches_preserved_pin": true,
+        "seen_in_current_generated_classpaths": [],
+        "distribution": "Local byte observation only; this upstream jar is not included in the WWPG release bundles.",
+        "seen_in_retained_base_native_launches": []
+      },
+      {
+        "role": "pg_native_reference",
+        "coordinate": "curse.maven:power-grid-1321420:8738576",
+        "version": "0.6.1",
+        "observed_location": "C:\\Users\\Parker\\.gradle\\caches\\modules-2\\files-2.1\\curse.maven\\power-grid-1321420\\8738576\\bb0139368f141b0d3a60707ef81c8e010cc72df9\\power-grid-1321420-8738576.jar",
+        "sha256": "b2835c36af6794a963737c617b5f9dd6b41aba5078d418c88847193fbcf702e5",
+        "bytes": 7965088,
+        "matches_preserved_pin": true,
+        "seen_in_current_generated_classpaths": [],
+        "distribution": "Local byte observation only; this upstream jar is not included in the WWPG release bundles.",
+        "seen_in_retained_base_native_launches": []
+      }
+    ],
+    "classpath_observation_scope": "The generated LegacyClasspath files listed below are bootstrap-layer observations, not the complete mod selection. The immutable BASE/NATIVE server and two-client launch response files explicitly select the four required jars whose bytes were freshly checked. Optional PINOUT jars and the never-loaded PG native donor are not on those BASE launch classpaths. A launch-file observation is not a claim that a pending session or the complete beta matrix has passed; independent CI/client acceptance remains separate.",
+    "classpath_observations": [
+      {
+        "observed_location": "C:\\Users\\Parker\\Documents\\ChatGPT\\WWPG\\build\\moddev\\clientALegacyClasspath.txt",
+        "sha256": "16534e1b1c06f4688a92ec0e7b9ceab3c50936275f30192f66971539e331e53c",
+        "bytes": 16504
+      },
+      {
+        "observed_location": "C:\\Users\\Parker\\Documents\\ChatGPT\\WWPG\\build\\moddev\\gameTestServerLegacyClasspath.txt",
+        "sha256": "88be37c4f2f97b56e5ee4c0a54da3e2ea15a33e0f7ad04fe8748974e3932ecdd",
+        "bytes": 10399
+      }
+    ],
+    "native_resource_verification": {
+      "runtime": {
+        "path": "build/frozen-0.2.2-beta.2-v3/wwpg-0.2.2-beta.2.jar",
+        "sha256": "c06d067bfe97350aff15ad2240fff8f8bd2dcbb172df060cbde8a7a6cdee2c4d",
+        "bytes": 3733103
+      },
+      "interface_class": "org/patryk3211/powergrid/electricity/sim/solver/NativeMNA.class",
+      "native_interface_bytes_identical": true,
+      "interface_sha256": "29725904ce75b0354346e3e81b6b62ace145db0a6422a5628f47f3549dc2ef3a",
+      "current_packaged_binary_checks": [
+        {
+          "entry": "native/wwpg/windows/libpowergridNative7.dll",
+          "sha256": "3150ba018b68ef173332a31b041b25cd8c6501394c4e9222aaa4c3ac9eeb16f4",
+          "bytes": 3727562,
+          "matches_pinned_donor": true
+        },
+        {
+          "entry": "native/wwpg/linux/libpowergridNative7.so",
+          "sha256": "c90e98869ed32ed8bff68aa5a856f4507ca09025a6152d9df718115637c8e837",
+          "bytes": 3119496,
+          "matches_pinned_donor": true
+        }
+      ]
+    },
+    "no_jvm_or_network_used": true,
+    "full_acceptance_claimed_by_this_record": false,
+    "retained_base_native_launch_files": [
+      {
+        "path": "local/release022-beta2-acceptance-v2/yard-tcp-BASE-NATIVE/launch/server-launch.txt",
+        "sha256": "211115f643e73b94f2918a9a8048e667f5b3e83a8351adcb8dbcd3195fa45405",
+        "bytes": 20979
+      },
+      {
+        "path": "local/release022-beta2-acceptance-v2/yard-tcp-BASE-NATIVE/launch/client-a-launch.txt",
+        "sha256": "2e2e4ce6f162f7fcf7062820d462375ac81e8e6e26d800e7f45c40b2afba5ef4",
+        "bytes": 20764
+      },
+      {
+        "path": "local/release022-beta2-acceptance-v2/yard-tcp-BASE-NATIVE/launch/client-b-launch.txt",
+        "sha256": "2ce5607528129adafef9d9799875697dee3e13f58cedf7edd493088b6469faeb",
+        "bytes": 20764
+      }
+    ]
+  }
+}

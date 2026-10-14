@@ -1,6 +1,6 @@
 # WWPG extension API
 
-Published with **WWPG 0.2.2-alpha.1**, independently versioned **API 1.0.0**, Java 21 and NeoForge for Minecraft 1.21.1.
+Published with **WWPG 0.2.2-beta.2**, independently versioned **API 1.0.0**, Java 21 and NeoForge for Minecraft 1.21.1.
 
 Use this guide to add stationary electrical content to WWPG. It defines the
 public API contract: registration, electrical models, measurements, and saved
@@ -70,7 +70,7 @@ Maven repository supports public consumption without GitHub credentials. A hoste
 Maven service is not required.
 
 Download and extract the
-[developer SDK](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.2-alpha.1/wwpg-0.2.2-alpha.1-developer-sdk.zip).
+[developer SDK](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.2-beta.2/wwpg-0.2.2-beta.2-developer-sdk.zip).
 Verify its published SHA256, then extract the included `maven/wwpg-api-1.0.0-maven.zip` into a directory such as
 `wwpg-api-maven`. That directory contains `org/cha0scollective/wwpg/...` and is
 the Maven repository root. Use its absolute path in `maven { url = uri(...) }`
@@ -471,7 +471,7 @@ semantics or gameplay behavior.
 
 ## Release verification
 
-WWPG 0.2.2-alpha.1's [verification record](../release/0.2.2-alpha.1/verification.json) binds the
+WWPG 0.2.2-beta.2's [verification record](../release/0.2.2-beta.2/verification.json) binds the
 runtime, SDK, independently built examples, and playable worlds to the accepted
 tests. The [maintainer release guide](API_RELEASE_CHECKS.md) documents classfile
 checks, SDK packaging, and the full evidence manifest. Those packaging steps are

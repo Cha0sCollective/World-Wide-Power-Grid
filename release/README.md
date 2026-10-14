@@ -9,7 +9,17 @@ is the current stable release. To install it or choose a playable world, use the
 [installation guide](../docs/INSTALL.md). This directory is for reviewing what
 was shipped and which checks passed.
 
-## Current alpha: 0.2.2-alpha.1
+## Current prerelease: 0.2.2-beta.2
+
+[WWPG 0.2.2-beta.2](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-beta.2)
+combines the loading fixes, less repeated native and add-on bookkeeping, and the
+expanded SDK. API 1.0.0 and saved-world formats stay compatible. Fresh release
+acceptance covers both solvers and profiles; the 14,650-node 20 TPS target remains
+open. [Verification](0.2.2-beta.2/verification.json) and
+[downloads and checksums](0.2.2-beta.2/download-layout.json) identify the accepted
+files and retained evidence.
+
+## Previous alpha: 0.2.2-alpha.1
 
 [WWPG 0.2.2-alpha.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-alpha.1)
 adds safer loading, less repeated electrical work and the expanded add-on SDK.

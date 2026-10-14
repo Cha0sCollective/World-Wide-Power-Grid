@@ -29,6 +29,17 @@ record its original source/artifact identities and verify every other runtime
 entry is unchanged. SDK or packaging changes still need focused checks.
 Never describe carried-forward acceptance or an interrupted run as a fresh pass.
 
+If installation instructions change after runtime acceptance, freeze their own
+documentation commit. An optional `documentation_snapshot` file descriptor in
+the manifest locks a JSON record with `schema: 1`, that commit's `source_sha`,
+the accepted `runtime_source_sha`, and a `files` map for every `SDK_DOCUMENTS`
+input in `package_api_release.py`. Capture raw files from the named Git commit;
+the packager checks their hashes and retains them with the evidence. Runtime
+source, artifact hashes, CI records and the release tag keep their tested
+identities. README-only example archives need fresh independent builds with
+identical compiled outputs. Starter preparation accepts `--runtime-source-sha`
+for this case and records its actual project checkout separately.
+
 1. Update `mod_version` and, when appropriate, `api_version` in `gradle.properties`.
    Keep the CI commands, independent example dependencies and API comparisons
    aligned with those versions. A mod release does not automatically change the API version.

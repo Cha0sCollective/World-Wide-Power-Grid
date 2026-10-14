@@ -135,11 +135,35 @@ class EvidenceChecks(unittest.TestCase):
         evidence = []
         self.assertEqual(checked_source(path, 'a' * 40, 42, 2, evidence), value)
         self.assertEqual(evidence, [path])
-        for changes in [dict(source_sha='c' * 40), dict(run_attempt=1), dict(run_id=43), dict(source_tree='branch'), dict(event='workflow_dispatch')]:
+        for changes in [dict(source_sha='c' * 40), dict(run_attempt=1), dict(run_id=43), dict(source_tree='branch'), dict(event='workflow_run')]:
             path.write_text(json.dumps(dict(value, **changes)), encoding='utf-8')
             with self.subTest(changes=changes), self.assertRaises(EvidenceError): checked_source(path, 'a' * 40, 42, 2, [])
         path.unlink()
         with self.assertRaises(EvidenceError): checked_source(path, 'a' * 40, 42, 2, [])
+
+    def test_supported_events_keep_the_original_checkout_record(self):
+        path = self.root / 'ci-source.json'
+        for event in ('pull_request', 'push', 'workflow_dispatch'):
+            value = dict(schema=1, source_sha='a' * 40, source_tree='b' * 40,
+                         run_id=42, run_attempt=2, event=event)
+            path.write_text(json.dumps(value), encoding='utf-8')
+            evidence = []
+            with self.subTest(event=event):
+                self.assertEqual(checked_source(path, 'a' * 40, 42, 2, evidence), value)
+                self.assertEqual(evidence, [path])
+
+    def test_manual_dispatch_still_rejects_wrong_checkout_identity(self):
+        path = self.root / 'ci-source.json'
+        value = dict(schema=1, source_sha='a' * 40, source_tree='b' * 40,
+                     run_id=42, run_attempt=2, event='workflow_dispatch')
+        variants = [dict(schema=2), dict(source_sha='c' * 40), dict(run_id=43),
+                    dict(run_attempt=1), dict(source_tree='branch'), dict(event='schedule')]
+        for changes in variants:
+            path.write_text(json.dumps(dict(value, **changes)), encoding='utf-8')
+            evidence = []
+            with self.subTest(changes=changes), self.assertRaises(EvidenceError):
+                checked_source(path, 'a' * 40, 42, 2, evidence)
+            self.assertEqual(evidence, [])
 
 
 if __name__ == '__main__': unittest.main()

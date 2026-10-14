@@ -6,6 +6,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -52,7 +53,11 @@ def run(command, log, cwd=ROOT):
                        stderr=subprocess.STDOUT, check=True)
 
 
-def prepare(output, runtime, repository_zip):
+def prepare(output, runtime, repository_zip, runtime_source_sha=None):
+    if runtime_source_sha is not None and (not isinstance(runtime_source_sha, str)
+            or re.fullmatch(r'[0-9a-f]{40}', runtime_source_sha) is None
+            or runtime_source_sha == '0' * 40):
+        raise ValueError('Supply an immutable forty-character runtime source SHA')
     if output.exists() or not runtime.is_file():
         raise ValueError('Supply a frozen runtime and fresh output directory')
     output.mkdir(parents=True)
@@ -76,8 +81,9 @@ def prepare(output, runtime, repository_zip):
     if provenance['api_sha256'] != sha(api) or provenance['jar_sha256'] != sha(compiled) \
             or provenance['wwpg_project_dependencies']:
         raise ValueError('Starter resolved another API or project dependency')
-    proof = dict(passed=True, source_sha=subprocess.check_output(
-        ['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
+    project_source = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+    proof = dict(passed=True, source_sha=runtime_source_sha if runtime_source_sha is not None else project_source,
+        project_source_sha=project_source, documentation_source_sha=project_source,
         source_archive_sha256=sha(source), compiled_against_api_sha256=sha(api),
         uses_wwpg_project_classes=False, source=descriptor(source),
         compiled_output=descriptor(compiled), build_log=descriptor(log),
@@ -182,6 +188,8 @@ if __name__ == '__main__':
     parser.add_argument('--runtime', type=Path, required=True)
     parser.add_argument('--maven', type=Path,
                         default=ROOT / 'build/distributions/wwpg-api-1.0.0-maven.zip')
+    parser.add_argument('--runtime-source-sha',
+                        help='Prepare only: bind unchanged compiled artifacts to their accepted runtime source; record this checkout separately')
     parser.add_argument('--backend', choices=['NATIVE', 'JAVA'])
     parser.add_argument('--world', type=Path)
     parser.add_argument('--example', type=Path)
@@ -189,8 +197,10 @@ if __name__ == '__main__':
     output, runtime = args.output.resolve(), args.runtime.resolve()
     if not output.is_relative_to(ROOT) or not runtime.is_relative_to(ROOT):
         parser.error('Inputs and evidence must be inside the workspace')
+    if args.runtime_source_sha is not None and args.mode != 'prepare':
+        parser.error('--runtime-source-sha applies only when preparing a new independent build')
     if args.mode == 'prepare':
-        prepare(output, runtime, args.maven.resolve())
+        prepare(output, runtime, args.maven.resolve(), args.runtime_source_sha)
     elif args.mode == 'server':
         if not args.backend:
             parser.error('server needs --backend')

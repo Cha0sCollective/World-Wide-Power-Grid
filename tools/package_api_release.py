@@ -32,6 +32,9 @@ ROLES = {'runtime', 'api', 'api_sources', 'api_javadoc', 'cee_api', 'cee_api_sou
          'upstream_example_sources', 'maven_repository'}
 BEHAVIORS = {'machine', 'storage', 'instrument', 'panel_attachment', 'board_component'}
 HASH = re.compile(r'^[0-9a-f]{64}$')
+SDK_DOCUMENTS = frozenset({'docs/EXTENSION_API.md', 'docs/EXTENSION_API_PLAN.md', 'docs/EXTENSION_API_WORKSHOP.md',
+    'docs/API_RELEASE_CHECKS.md', 'docs/INSTALL.md', 'docs/STATIONARY_YARD.md',
+    'docs/API_LIMITS.md', 'docs/CREATE_ADDON.md', 'docs/ADDON_WORKFLOW.md', 'docs/ADDON_TESTING.md', 'LICENSE'})
 
 
 class PublicationError(ValueError): pass
@@ -58,6 +61,25 @@ def locked_file(record, root):
     require(sha(path) == record['sha256'], f'Input changed after evidence capture: {relative}')
     require(path.stat().st_size == record.get('bytes'), f'Input size mismatch: {relative}')
     return path
+
+
+def documentation_inputs(manifest, root):
+    """Bind separately frozen guides without changing the runtime acceptance source."""
+    if 'documentation_snapshot' not in manifest:
+        return manifest['source_sha'], {name: root / name for name in SDK_DOCUMENTS}
+    record = read(locked_file(manifest['documentation_snapshot'], root))
+    require(isinstance(record, dict) and record.get('schema') == 1,
+            'Unknown documentation snapshot schema')
+    source = record.get('source_sha')
+    require(isinstance(source, str) and re.fullmatch(r'[0-9a-f]{40}', source) is not None
+            and source != '0' * 40,
+            'Documentation snapshot requires an immutable source commit')
+    require(record.get('runtime_source_sha') == manifest['source_sha'],
+            'Documentation snapshot belongs to a different runtime acceptance source')
+    files = record.get('files')
+    require(isinstance(files, dict) and set(files) == SDK_DOCUMENTS,
+            'Documentation snapshot must lock the exact required SDK document set')
+    return source, {name: locked_file(files[name], root) for name in sorted(SDK_DOCUMENTS)}
 
 
 def checked_zip(path):
@@ -428,6 +450,7 @@ def validate_ci_acceptance(manifest, root, ci, source, hashes, version=None):
 def validate_release(manifest, root):
     source = manifest.get('source_sha', '')
     require(re.fullmatch(r'[0-9a-f]{40}', source) is not None, 'Missing immutable source commit')
+    if 'documentation_snapshot' in manifest: documentation_inputs(manifest, root)
     require(manifest.get('unresolved_failures') == [], 'Unresolved failures block API freeze/release')
     require(manifest.get('stages_complete') == list(range(1, 7)), 'All six extension API stages must pass')
     hashes = {key: manifest['artifacts'][key]['sha256'] for key in ('runtime', 'api', 'cee_api', 'example', 'upstream_example')}
@@ -578,13 +601,11 @@ def package(manifest_path, root, output, release=False):
         publishable=release, state='accepted_release' if release else 'sdk_candidate',
         message='All declared acceptance gates passed.' if release else 'Candidate only. API freeze and release acceptance have not been certified.'),
         indent=2).encode('utf-8') + b'\n'
-    documents = {'docs/EXTENSION_API.md', 'docs/EXTENSION_API_PLAN.md', 'docs/EXTENSION_API_WORKSHOP.md',
-                 'docs/API_RELEASE_CHECKS.md', 'docs/INSTALL.md', 'docs/STATIONARY_YARD.md',
-                 'docs/API_LIMITS.md', 'docs/CREATE_ADDON.md', 'docs/ADDON_WORKFLOW.md', 'docs/ADDON_TESTING.md', 'LICENSE'}
-    for name in sorted(documents):
-        require((root / name).is_file(), f'Missing SDK documentation/license: {name}')
-        text = (root / name).read_text(encoding='utf-8')
-        entries[name] = bundle_markdown(text,name,documents,VERSION,manifest['source_sha']).encode('utf-8')
+    documentation_source, documents = documentation_inputs(manifest, root)
+    for name, path in sorted(documents.items()):
+        require(path.is_file(), f'Missing SDK documentation/license: {name}')
+        text = path.read_text(encoding='utf-8')
+        entries[name] = bundle_markdown(text,name,set(documents),VERSION,documentation_source).encode('utf-8')
     starter = manifest.get('authoring_starter')
     if starter is not None:
         entries['documentation-starter/'+Path(starter['source']['path']).name] = locked_file(starter['source'],root).read_bytes()
