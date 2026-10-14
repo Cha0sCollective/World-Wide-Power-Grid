@@ -73,7 +73,11 @@ gradle.projectsEvaluated {
                 replacement.setText(program.replace(quickPlay,'--quickPlaySingleplayer\n'+worldArgument).replace('--width\n854','--width\n1280').replace('--height\n480','--height\n720'),'UTF-8')
                 return '@'+replacement.absolutePath
             }
-            jvmArgs = run.jvmArgs + ['-Dwwpg.test.packaged=false','-Dwwpg.doc.client=true','-Dwwpg.test.backend='+p.providers.gradleProperty('testBackend').getOrElse('NATIVE')]
+            jvmArgs = run.jvmArgs + ['-Dwwpg.test.packaged=false','-Dwwpg.doc.client=true','-Dwwpg.test.backend='+p.providers.gradleProperty('testBackend').getOrElse('NATIVE'),'-Dwwpg.test.multiplayer=false']
+            def expandedVm=jvmArgs.collect { argument ->
+                argument.startsWith('@') ? p.file(argument.substring(1)).getText('UTF-8') : argument
+            }.join('\n')+'\n'
+            new File(workingDir,'documentation-client-vm-args.txt').setText(expandedVm,'UTF-8')
             classpath = run.classpathProvider.filter { ![p.sourceSets.main,p.sourceSets.extensionApi,p.sourceSets.ceeApi].any { set -> set.output.files.contains(it) } } + p.files(frozen,starter,example,helper.get().archiveFile.get().asFile)
             def env = new HashMap(run.environmentProperty.get())
             env['MOD_CLASSES']='wwpg%%'+frozen.absolutePath+File.pathSeparator+'tutorial_load%%'+starter.absolutePath+File.pathSeparator+'wwpg_doc_acceptance%%'+helper.get().archiveFile.get().asFile.absolutePath

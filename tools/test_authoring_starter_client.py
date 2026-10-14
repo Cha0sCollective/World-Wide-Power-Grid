@@ -161,6 +161,8 @@ class StarterClientChecks(unittest.TestCase):
             starter_sha256=launcher.sha(self.starter), helper_sha256=launcher.sha(helper),
             controls=True, native_tools=True, client_meter_volts=20.0)), encoding='utf-8')
         (directory / 'documentation-client-program.txt').write_text('--quickPlaySingleplayer\n"Stationary Yard"\n', encoding='utf-8')
+        (directory / 'documentation-client-vm-args.txt').write_text(
+            '-Dwwpg.test.multiplayer=true\n-Dwwpg.doc.client=true\n-Dwwpg.test.multiplayer=false\n', encoding='utf-8')
         screens = directory / 'screenshots'
         screens.mkdir()
         for name in ('load-100-on.png', 'load-400-off.png'):
@@ -178,6 +180,8 @@ class StarterClientChecks(unittest.TestCase):
         program = self.root / result['launcher_program']['path']
         self.assertEqual(launcher.sha(program), result['launcher_program']['sha256'])
         self.assertIn(result['launcher_program'], result['evidence'])
+        self.assertIn(result['launcher_vm_arguments'], result['evidence'])
+        self.assertEqual(launcher.sha(self.root / result['launcher_vm_arguments']['path']), result['launcher_vm_arguments']['sha256'])
         self.assertEqual({Path(item['path']).name for item in result['launcher_tools']},
                          {'authoring_starter_acceptance.py', 'init.gradle'})
         for item in result['launcher_tools']:
@@ -202,6 +206,27 @@ class StarterClientChecks(unittest.TestCase):
             (self.output / 'client-JAVA/documentation-client-program.txt').unlink()
         with patch.object(launcher, 'run', side_effect=missing_program):
             with self.assertRaisesRegex(ValueError, 'launcher argument file'):
+                self.call(world)
+        self.assertFalse((self.output / 'JAVA-graphical.json').exists())
+
+    def test_missing_vm_argument_record_cannot_be_reported_as_passed(self):
+        world = self.archive('Stationary Yard')
+        def missing_vm_arguments(command, log):
+            self.passing_run(command, log)
+            (self.output / 'client-JAVA/documentation-client-vm-args.txt').unlink()
+        with patch.object(launcher, 'run', side_effect=missing_vm_arguments):
+            with self.assertRaisesRegex(ValueError, 'launcher VM arguments'):
+                self.call(world)
+        self.assertFalse((self.output / 'JAVA-graphical.json').exists())
+
+    def test_effective_multiplayer_true_cannot_be_reported_as_passed(self):
+        world = self.archive('Stationary Yard')
+        def multiplayer_enabled(command, log):
+            self.passing_run(command, log)
+            (self.output / 'client-JAVA/documentation-client-vm-args.txt').write_text(
+                '-Dwwpg.test.multiplayer=false\n-Dwwpg.test.multiplayer=true\n', encoding='utf-8')
+        with patch.object(launcher, 'run', side_effect=multiplayer_enabled):
+            with self.assertRaisesRegex(ValueError, 'disable multiplayer automation'):
                 self.call(world)
         self.assertFalse((self.output / 'JAVA-graphical.json').exists())
 

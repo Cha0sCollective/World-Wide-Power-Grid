@@ -200,7 +200,14 @@ def client(output, runtime, backend, world, example):
     program = directory / 'documentation-client-program.txt'
     if not program.is_file():
         raise ValueError('Retain the actual single-player launcher argument file')
-    retained = [log, observation, saved_helper, program]
+    vm_arguments = directory / 'documentation-client-vm-args.txt'
+    if not vm_arguments.is_file():
+        raise ValueError('Retain the expanded single-player launcher VM arguments')
+    multiplayer = [line.strip() for line in vm_arguments.read_text(encoding='utf-8').splitlines()
+                   if line.strip().startswith('-Dwwpg.test.multiplayer=')]
+    if not multiplayer or multiplayer[-1] != '-Dwwpg.test.multiplayer=false':
+        raise ValueError('The documentation client must disable multiplayer automation')
+    retained = [log, observation, saved_helper, program, vm_arguments]
     for name in ('load-100-on.png', 'load-400-off.png'):
         screenshot = directory / 'screenshots' / name
         if not screenshot.is_file() or screenshot.stat().st_size < 1000:
@@ -210,6 +217,7 @@ def client(output, runtime, backend, world, example):
         starter_sha256=sha(starter), controls=True, native_tools=True,
         source_sha=proof['source_sha'], evidence=[descriptor(p) for p in retained],
         input_save_name=save_name, launcher_program=descriptor(program),
+        launcher_vm_arguments=descriptor(vm_arguments),
         launcher_source_sha=launcher_source, launcher_tools=launcher_tools,
         input_world=descriptor(world), source_example=descriptor(example))
     write(output / (backend + '-graphical.json'), report)
