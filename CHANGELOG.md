@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.2-beta.3 — 15 October 2026
+
+- Resolve built-in Power Grid terminal identities once per block state during each preparation pass; preserve custom and multiblock callbacks.
+- Reuse validated CEE branch descriptions and private endpoint maps, with one anchor record per position instead of duplicate ownership maps.
+- Pre-size collected current maps and share an empty availability mask for healthy results. Electrical settings, stored state, API 1.0.0 and all 16 substeps are unchanged.
+- Include the original mixed benchmark world, accurately labeled 14,650 electrical nodes, 20,637 connections and 1,050 stateful devices. The 20 TPS target remains open; benchmark tools and detailed measurements remain local.
+- Reuse candidate 72's passing full Windows acceptance after comparing runtime entries. Run the missing Linux acceptance separately; keep their original source identities and dates in the release record.
+
 ## [0.2.2-beta.2](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-beta.2)
 
 - Faster addon preparation: group devices and samples by their final network each tick; avoid repeated provider, terminal registration and geometry work; reuse stable branch descriptions.

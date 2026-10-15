@@ -37,11 +37,11 @@ jobs:
           python tools/run_checked.py --timeout 1200 -- ./gradlew -p examples/extension-addon build --no-daemon
           python tools/run_checked.py --timeout 1200 -- ./gradlew -p examples/cee-addon build --no-daemon
           mkdir -p build/neoforge-compat
-          cp build/libs/wwpg-0.2.2-beta.2.jar build/neoforge-compat/wwpg-0.2.2-beta.2.jar
+          cp build/libs/wwpg-0.2.2-beta.3.jar build/neoforge-compat/wwpg-0.2.2-beta.3.jar
           python - <<'PY'
           import hashlib, json, pathlib, subprocess
           root = pathlib.Path('.')
-          files = ['build/neoforge-compat/wwpg-0.2.2-beta.2.jar',
+          files = ['build/neoforge-compat/wwpg-0.2.2-beta.3.jar',
               'examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar',
               'examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar']
           proof = dict(schema=1, source_sha=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
@@ -55,30 +55,30 @@ jobs:
         run: |
           namespaces=wwpg_platform,wwpg,wwpg_stationary,wwpg_design,wwpg_distribution,wwpg_wires,wwpg_bundle,wwpg_coupled
           if [ '${{ matrix.profile }}' = PINOUT ]; then namespaces="$namespaces,wwpg_pinout"; fi
-          python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.2-beta.2.jar -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces="$namespaces" -PtestDirectory=run/neoforge-compat -x build -x jar --no-daemon
+          python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.2-beta.3.jar -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces="$namespaces" -PtestDirectory=run/neoforge-compat -x build -x jar --no-daemon
           cp run/neoforge-compat/logs/latest.log run/neoforge-compat/setup.log
       - name: Three cold restarts with the same jar, including actual assembly unload/reload cycles
         run: |
           namespaces=wwpg_platform,wwpg,wwpg_stationary,wwpg_design,wwpg_distribution,wwpg_wires,wwpg_bundle,wwpg_coupled
           if [ '${{ matrix.profile }}' = PINOUT ]; then namespaces="$namespaces,wwpg_pinout"; fi
           for pass in 1 2 3; do
-            python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.2-beta.2.jar -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces="$namespaces" -PtestDirectory=run/neoforge-compat -PrestartPhase=VERIFY -x build -x jar --no-daemon
+            python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.2-beta.3.jar -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces="$namespaces" -PtestDirectory=run/neoforge-compat -PrestartPhase=VERIFY -x build -x jar --no-daemon
             cp run/neoforge-compat/logs/latest.log "run/neoforge-compat/restart-$pass.log"
           done
       - name: Independent API examples, faults and lifecycle checks in their own world
         run: |
-          python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.2-beta.2.jar -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_platform,wwpg_api,wwpg_api_faults,wwpg_api_restart,wwpg_api_upstream,wwpg_api_upstream_restart -PtestDirectory=run/neoforge-api -x build -x jar --no-daemon
+          python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.2-beta.3.jar -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_platform,wwpg_api,wwpg_api_faults,wwpg_api_restart,wwpg_api_upstream,wwpg_api_upstream_restart -PtestDirectory=run/neoforge-api -x build -x jar --no-daemon
           cp run/neoforge-api/logs/latest.log run/neoforge-api/setup.log
           for pass in 1 2 3; do
-            python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.2-beta.2.jar -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_platform,wwpg_api,wwpg_api_faults,wwpg_api_restart,wwpg_api_upstream,wwpg_api_upstream_restart -PtestDirectory=run/neoforge-api -PrestartPhase=VERIFY -x build -x jar --no-daemon
+            python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.2-beta.3.jar -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_platform,wwpg_api,wwpg_api_faults,wwpg_api_restart,wwpg_api_upstream,wwpg_api_upstream_restart -PtestDirectory=run/neoforge-api -PrestartPhase=VERIFY -x build -x jar --no-daemon
             cp run/neoforge-api/logs/latest.log "run/neoforge-api/restart-$pass.log"
           done
       - name: Paused circuits and exactly-once stepping
-        run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.2-beta.2.jar -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api_pause -PtestDirectory=run/neoforge-pause -x build -x jar --no-daemon
+        run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.2-beta.3.jar -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api_pause -PtestDirectory=run/neoforge-pause -x build -x jar --no-daemon
       - name: Save before wire entities are ready, then retire old connections after restart
         run: |
           for phase in SETUP ARM VERIFY; do
-            python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.2-beta.2.jar -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api_pending_restart -PtestDirectory=run/neoforge-pending -PrestartPhase=$phase -x build -x jar --no-daemon
+            python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -Pneo_version=21.1.248 -PtestArtifact=build/neoforge-compat/wwpg-0.2.2-beta.3.jar -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api_pending_restart -PtestDirectory=run/neoforge-pending -PrestartPhase=$phase -x build -x jar --no-daemon
             cp run/neoforge-pending/logs/latest.log "run/neoforge-pending/$phase.log"
           done
       - name: Confirm retained evidence belongs to the frozen jar and actual loader
