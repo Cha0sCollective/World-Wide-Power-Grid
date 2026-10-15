@@ -48,6 +48,22 @@ public final class PlainWirePowerGameTests {
     public static void configureWorld(ServerLevel level) { DynamicGameTests.substeps(level); }
 
     @GameTest(template = "empty", batch = "wwpg_wire_power_core", timeoutTicks = 40)
+    public static void customIndexCallbackMayReleaseBackend(GameTestHelper h) {
+        var network = new ElectricalNetwork(false);
+        network.switchBackend(ModdedConfigs.server().electricity.solver.solverBackend.get());
+        try {
+            var observedNetwork = network;
+            int[] calls = {0};
+            var custom = new org.patryk3211.powergrid.electricity.sim.node.FloatingNode() {
+                @Override public int getIndex() { calls[0]++; observedNetwork.cleanup(); return 0; }
+            };
+            sameBits(h, 0, network.getValue(custom), "Solver released by an index callback stays unavailable");
+            h.assertTrue(calls[0] == 1, "The fixture did not exercise its index callback exactly once");
+        } finally { network.cleanup(); }
+        h.succeed();
+    }
+
+    @GameTest(template = "empty", batch = "wwpg_wire_power_core", timeoutTicks = 40)
     public static void appliedMixinUsesOneDifferentialAndPreservesFallbacks(GameTestHelper h) {
         var network = new ElectricalNetwork(false);
         network.switchBackend(ModdedConfigs.server().electricity.solver.solverBackend.get());
