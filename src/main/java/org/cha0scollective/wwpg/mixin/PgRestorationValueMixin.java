@@ -2,6 +2,7 @@ package org.cha0scollective.wwpg.mixin;
 
 import org.cha0scollective.wwpg.bridge.RestorationCoordinator;
 import org.cha0scollective.wwpg.bridge.ServerElectricalSchedule;
+import org.cha0scollective.wwpg.bridge.NativeStateRead;
 import org.patryk3211.powergrid.electricity.sim.ElectricalNetwork;
 import org.patryk3211.powergrid.electricity.sim.node.INode;
 import org.spongepowered.asm.mixin.Mixin;
@@ -9,6 +10,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Unique;
 import org.patryk3211.powergrid.electricity.sim.solver.IMNA;
+import org.patryk3211.powergrid.electricity.sim.solver.NativeMNA;
 import java.util.List;
 
 @Mixin(value = ElectricalNetwork.class, remap = false)
@@ -31,7 +33,11 @@ public abstract class PgRestorationValueMixin implements RestorationCoordinator.
         // Assigned rows can avoid its leaf-map probe and boxed temporary Double.
         int index = node.getIndex();
         if (mna != null && index >= 0 && index < nodes.size() && nodes.get(index) == node) {
-            double value = mna.stateVector().safe_get(index, 0);
+            // Stock native assigned rows need only column zero. Custom backends
+            // and NativeMNA subclasses retain their virtual matrix accessor.
+            double value = mna.getClass() == NativeMNA.class
+                    ? NativeStateRead.assignedRow((PgNativeStateAccessor) mna, index)
+                    : mna.stateVector().safe_get(index, 0);
             return Double.isFinite(value) ? value : 0;
         }
         var value = tryGetValue(node);
