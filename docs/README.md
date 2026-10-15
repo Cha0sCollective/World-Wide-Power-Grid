@@ -1,6 +1,6 @@
 # Documentation
 
-These guides describe **WWPG 0.2.2-beta.2**, its supported stationary factories, and
+These guides describe **WWPG 0.2.2-beta.3**, its supported stationary factories, and
 **extension API 1.0.0**. Start with the page that matches what you want to do.
 
 ## Play and run a server
@@ -11,6 +11,7 @@ These guides describe **WWPG 0.2.2-beta.2**, its supported stationary factories,
 | Check NeoForge versions or try newer upstream mods | [Version compatibility](VERSION_COMPATIBILITY.md) |
 | See which machines and tools work together | [Supported content](SUPPORT.md) |
 | Try working circuits with instructions | [Stationary Test Yard](STATIONARY_YARD.md) |
+| Explore the 14,650-node capacity workload | [Benchmark yard](BENCHMARK_YARD.md) |
 | Learn the native wire and repair controls | [Wiring and repair](STATIONARY_WIRING.md) |
 | Try the example add-on machines, panel and board | [Extension API Workshop](EXTENSION_API_WORKSHOP.md) |
 | Check current limitations and reported problems | [Current status](STATUS.md) |

@@ -1,6 +1,6 @@
 # Build, install and debug an add-on
 
-This is the supported **external-instance workflow** for the examples and adjustable-load starter. It uses Java 21, Minecraft 1.21.1, WWPG 0.2.2-beta.2 and the [tested dependency set](INSTALL.md). The source projects compile/package jars; they do not define game-run tasks.
+This is the supported **external-instance workflow** for the examples and adjustable-load starter. It uses Java 21, Minecraft 1.21.1, WWPG 0.2.2-beta.3 and the [tested dependency set](INSTALL.md). The source projects compile/package jars; they do not define game-run tasks.
 
 ## Prepare once
 
