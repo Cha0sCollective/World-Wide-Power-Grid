@@ -49,15 +49,16 @@ def write(path, value):
     path.write_text(json.dumps(value, indent=2) + '\n', encoding='utf-8', newline='\n')
 
 
-def metadata(run, jobs, index):
+def metadata(run, jobs, index, linux_only=False):
     require(run.get('status') == 'completed' and run.get('conclusion') == 'success', 'Full CI run is not passing/complete')
     require(run.get('path') == '.github/workflows/build.yml', 'Wrong CI workflow')
     require(re.fullmatch(r'[0-9a-f]{40}', run.get('head_sha', '')), 'CI lacks its actual immutable source SHA')
     require(run.get('html_url') == f'https://github.com/{REPO}/actions/runs/{run.get("id")}', 'Wrong repository/run provenance')
+    combinations = {c for c in COMBINATIONS if c[0] == 'ubuntu-24.04'} if linux_only else COMBINATIONS
     expected = {f'build ({platform}, {backend}, {profile})': (platform, backend, profile)
-                for platform, backend, profile in COMBINATIONS}
+                for platform, backend, profile in combinations}
     values = jobs.get('jobs', [])
-    require(len(values) == 8 and {job.get('name') for job in values} == set(expected), 'Missing/duplicate eight-way CI job')
+    require(len(values) == len(expected) and {job.get('name') for job in values} == set(expected), 'Missing/duplicate requested CI job')
     required_steps = {'Record the exact checked-out source and CI attempt',
                       'Build runtime and publish both SDK APIs to an isolated local Maven repository',
                       'Build the general example independently against published Maven API artifacts',
@@ -306,11 +307,11 @@ def matrix_job(directory, combination, source_sha, run_id, run_attempt, root=ROO
                 junit_checks_passed=tests, evidence_files=evidence)
 
 
-def aggregate(run_path, jobs_path, index_path, artifacts, output, root=ROOT):
+def aggregate(run_path, jobs_path, index_path, artifacts, output, root=ROOT, linux_only=False):
     root, artifacts, output = Path(root).resolve(), Path(artifacts).resolve(), Path(output).resolve()
     require(artifacts.is_relative_to(root) and output.is_relative_to(root) and not output.exists(), 'Use a fresh workspace evidence directory')
     run, jobs, index = read(run_path), read(jobs_path), read(index_path)
-    rows = metadata(run, jobs, index)
+    rows = metadata(run, jobs, index, linux_only)
     proofs, hashes = [], None
     for job, artifact, combination in sorted(rows, key=lambda row: row[2]):
         proof = matrix_job(artifacts / artifact['name'], combination, run['head_sha'], run['id'], run['run_attempt'], root)
@@ -339,7 +340,8 @@ def aggregate(run_path, jobs_path, index_path, artifacts, output, root=ROOT):
                      provenance=descriptor(output / 'ci.json', root), acceptance_scope='independent CI source project build; extracted SDK/client gates remain separate')
         if role == 'upstream_example': value['compiled_against_cee_api_sha256'] = hashes['cee_api']
         write(output / (key + '.json'), value)
-    summary = dict(schema=1, source_sha=run['head_sha'], artifact_hashes=hashes, matrix_evidence_complete=True,
+    summary = dict(schema=1, source_sha=run['head_sha'], artifact_hashes=hashes, matrix_evidence_complete=not linux_only,
+                   requested_platforms_complete=True, platforms=['ubuntu-24.04'] if linux_only else sorted({c[0] for c in COMBINATIONS}),
                    api_frozen=False, publishable=False, state='packaged_matrix_candidate',
                    remaining=['Exact downloadable SDK extraction/build', 'Graphical and two real TCP clients on both profiles/backends',
                               'Review unresolved historical failures and complete six release gates', 'Frozen release manifest/package validation'])
@@ -347,14 +349,14 @@ def aggregate(run_path, jobs_path, index_path, artifacts, output, root=ROOT):
     return summary
 
 
-def download(run_id, destination):
+def download(run_id, destination, linux_only=False):
     require(not destination.exists() and destination.resolve().is_relative_to(ROOT), 'Use a fresh workspace CI download')
     destination.mkdir(parents=True)
     for name, endpoint in [('run', ''), ('jobs', '/jobs'), ('artifacts', '/artifacts')]:
         args = ['gh', 'api', f'repos/{REPO}/actions/runs/{run_id}{endpoint}']
         result = subprocess.run(args, check=True, capture_output=True, text=True, encoding='utf-8')
         (destination / (name + '.json')).write_text(result.stdout, encoding='utf-8')
-    metadata(read(destination / 'run.json'), read(destination / 'jobs.json'), read(destination / 'artifacts.json'))
+    metadata(read(destination / 'run.json'), read(destination / 'jobs.json'), read(destination / 'artifacts.json'), linux_only)
     subprocess.run(['gh', 'run', 'download', str(run_id), '--repo', REPO, '--dir', str(destination / 'artifacts')], check=True)
     return destination / 'run.json', destination / 'jobs.json', destination / 'artifacts.json', destination / 'artifacts'
 
@@ -366,15 +368,16 @@ def main():
     parser.add_argument('--run-json', type=Path); parser.add_argument('--jobs-json', type=Path)
     parser.add_argument('--artifact-index', type=Path); parser.add_argument('--artifacts', type=Path)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--linux-only', action='store_true', help='Collect exactly four Linux combinations; does not certify Windows')
     args = parser.parse_args()
     try:
         if args.collect_ci:
             require(args.download is not None, '--collect-ci needs a fresh --download directory')
-            inputs = download(args.collect_ci, args.download)
+            inputs = download(args.collect_ci, args.download, args.linux_only)
         else:
             require(all([args.run_json, args.jobs_json, args.artifact_index, args.artifacts]), 'Supply actual run/jobs/artifact-index JSON and downloaded artifact tree')
             inputs = args.run_json, args.jobs_json, args.artifact_index, args.artifacts
-        result = aggregate(*inputs, args.output)
+        result = aggregate(*inputs, args.output, linux_only=args.linux_only)
         print(json.dumps(result))
     except (EvidenceError, OSError, ValueError, KeyError, ET.ParseError, zipfile.BadZipFile, subprocess.CalledProcessError) as error:
         parser.exit(2, f'API CI evidence blocked: {error}\n')

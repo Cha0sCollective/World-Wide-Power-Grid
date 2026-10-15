@@ -179,6 +179,34 @@ def verify_group(path, expected):
         require(archive.read('SHA256SUMS.txt') == sums.encode('utf-8'), 'Grouped checksum list changed')
 
 
+def world_payload(manifest, root, version):
+    files = {f'worlds/wwpg-{version}-{label}.zip': acceptance.locked_file(manifest[key], root).read_bytes()
+             for key, label in WORLD_KEYS.items()}
+    if 'benchmark_world' in manifest:
+        path = acceptance.locked_file(manifest['benchmark_world'], root)
+        with acceptance.checked_zip(path) as archive:
+            records = [n for n in archive.namelist() if n.endswith('/WWPG_MANIFEST.json')]
+            require(len(records) == 1, 'Benchmark world needs one inventory')
+            prefix = records[0].removesuffix('WWPG_MANIFEST.json')
+            record = json.loads(archive.read(records[0]))
+            require(record.get('kind') == 'mixed_capacity_benchmark' and record.get('target') == version
+                    and record.get('electrical_nodes') == 14650 and record.get('connections') == 20637
+                    and record.get('stateful_devices') == 1050 and record.get('chunks') == 953
+                    and record.get('certified_20_tps') is False and '14650' in prefix,
+                    'Benchmark identity/count/limitation differs')
+            require(record.get('jar', {}).get('sha256') == manifest['artifacts']['runtime']['sha256'], 'Benchmark runtime differs')
+            inventory = record.get('files', [])
+            names = {prefix + item['path'] for item in inventory}
+            require(names == set(archive.namelist()) - {records[0]}, 'Benchmark inventory is incomplete')
+            require(prefix + 'level.dat' in names and prefix + 'WWPG_README.txt' in names, 'Benchmark save/instructions absent')
+            for item in inventory:
+                safe_path(item['path'])
+                data = archive.read(prefix + item['path'])
+                require(len(data) == item['bytes'] and hashlib.sha256(data).hexdigest() == item['sha256'], 'Benchmark entry changed')
+        files[f'worlds/wwpg-{version}-benchmark-14650-nodes.zip'] = path.read_bytes()
+    return files
+
+
 def stage(source, expected_sha, config_path, output):
     source, output = Path(source).resolve(), Path(output).resolve()
     require(output.is_relative_to(ROOT) and not output.exists(), 'Use a fresh output directory inside the workspace')
@@ -196,10 +224,13 @@ def stage(source, expected_sha, config_path, output):
             licenses = licenses_from(accepted, paths['runtime'])
             base = 'https://github.com/' + config['repository'] + '/blob/main/docs/'
             world_files = dict(licenses)
-            for key, label in WORLD_KEYS.items():
-                world_files[f'worlds/wwpg-{version}-{label}.zip'] = acceptance.locked_file(manifest[key], root).read_bytes()
+            world_files.update(world_payload(manifest, root, version))
             for role in ('example', 'upstream_example'):
                 world_files['workshop-mods/' + paths[role].name] = paths[role].read_bytes()
+            benchmark_note = ('The benchmark-14650-nodes world is a heavy capacity workload, separate\n'
+                              'from the playable Stationary Yard. Read its WWPG_README.txt before opening it.\n'
+                              'It has 14,650 electrical nodes; it is not certified to run at 20 TPS.\n\n'
+                              if 'benchmark_world' in manifest else '')
             world_files['START-HERE.md'] = f'''# Example worlds for WWPG {version}
 
 Install WWPG and the required mods first: {base}INSTALL.md
@@ -215,7 +246,7 @@ workshop-mods/ on the server and every client. Those add-ons are optional for or
 Station instructions: {base}STATIONARY_YARD.md
 Workshop instructions: {base}EXTENSION_API_WORKSHOP.md
 
-The inner world ZIPs and example jars are unchanged accepted files.
+{benchmark_note}The inner world ZIPs and example jars retain their recorded hashes.
 No upstream dependency jars are included.
 '''.encode('utf-8')
             bundle(downloads / worlds, world_files)
@@ -298,8 +329,7 @@ def check(staged):
                 layout['version'] == manifest['wwpg_version'], 'Staged identity differs from acceptance')
         require(layout['assets'][0]['sha256'] == sha(paths['runtime']), 'Staged runtime differs from acceptance')
         world_files = licenses_from(accepted, paths['runtime'])
-        for key, label in WORLD_KEYS.items():
-            world_files[f'worlds/wwpg-{layout["version"]}-{label}.zip'] = acceptance.locked_file(manifest[key], root).read_bytes()
+        world_files.update(world_payload(manifest, root, layout['version']))
         for role in ('example', 'upstream_example'):
             world_files['workshop-mods/' + paths[role].name] = paths[role].read_bytes()
         verify_group(staged / 'downloads' / expected[1], world_files)

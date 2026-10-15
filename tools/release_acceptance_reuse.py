@@ -76,6 +76,7 @@ def validate(manifest, root, gate):
     current = gate.locked_file(manifest['artifacts']['runtime'],root)
     runtime_equivalent(runtime,current,reuse['runtime_version'],manifest['wwpg_version'])
     ci_runtime = gate.locked_file(reuse['ci_runtime'],root)
+    gate.require(re.fullmatch(r'[0-9a-f]{40}', reuse.get('ci_source_sha', source)), 'Missing CI accepted source')
     runtime_equivalent(ci_runtime,current,reuse['ci_runtime_version'],manifest['wwpg_version'])
     hashes = {role: reuse[role]['sha256'] for role in ('runtime','api','cee_api','example','upstream_example')}
     for role in ('api','cee_api'):

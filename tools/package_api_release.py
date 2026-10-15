@@ -12,6 +12,7 @@ import re
 import xml.etree.ElementTree as ET
 import zipfile
 import subprocess
+import sys
 from sdk_documentation import bundle_markdown
 
 from verify_api_compatibility import DEFAULT_PREFIX, PUBLIC, STATIC, compare, snapshot
@@ -410,7 +411,13 @@ def validate_ci_acceptance(manifest, root, ci, source, hashes, version=None):
             'Missing repository CI provenance')
     jobs = ci.get('jobs', [])
     combinations = {(j.get('platform'), j.get('backend'), j.get('profile')) for j in jobs}
-    require(len(jobs) == 8 and combinations == COMBINATIONS, 'Missing/duplicate eight-way CI combination')
+    local = manifest.get('retained_windows_acceptance')
+    expected = {c for c in COMBINATIONS if c[0] == 'ubuntu-24.04'} if local else COMBINATIONS
+    require(len(jobs) == len(expected) and combinations == expected, 'Missing/duplicate required CI combination')
+    if local:
+        require(isinstance(manifest.get('acceptance_reuse'), dict), 'Local Windows acceptance requires version-only runtime reuse')
+        import release_local_acceptance
+        release_local_acceptance.validate(local, root, sys.modules[__name__], manifest['acceptance_reuse'])
     for job in jobs:
         require(job.get('status') == 'completed' and job.get('conclusion') == 'success', 'A required CI job did not pass')
         proof = accepted_record(job.get('proof', {}), root, hashes, source)
@@ -459,7 +466,7 @@ def validate_release(manifest, root):
         import release_acceptance_reuse
         import sys
         old_source, old_hashes, old_version = release_acceptance_reuse.validate(manifest, root, sys.modules[__name__])
-        validate_ci_acceptance(manifest, root, ci, old_source, old_hashes, old_version)
+        validate_ci_acceptance(manifest, root, ci, manifest['acceptance_reuse'].get('ci_source_sha', old_source), old_hashes, old_version)
     else:
         validate_ci_acceptance(manifest, root, ci, source, hashes)
     independent = accepted_record(manifest.get('independent_example_build', {}), root, hashes, source)
@@ -481,7 +488,9 @@ def validate_release(manifest, root):
     if starter is not None:
         archive = locked_file(starter.get('source', {}), root)
         built = read(locked_file(starter.get('proof', {}), root))
-        require(built.get('passed') is True and built.get('source_sha') == source
+        starter_source = manifest['acceptance_reuse']['source_sha'] if manifest.get('acceptance_reuse') else source
+        starter_runtime = manifest['acceptance_reuse']['runtime']['sha256'] if manifest.get('acceptance_reuse') else hashes['runtime']
+        require(built.get('passed') is True and built.get('source_sha') == starter_source
                 and built.get('source_archive_sha256') == sha(archive)
                 and built.get('compiled_against_api_sha256') == hashes['api']
                 and built.get('uses_wwpg_project_classes') is False,
@@ -501,7 +510,7 @@ def validate_release(manifest, root):
             key = (report.get('platform'), report.get('backend'))
             require(key in {(p, b) for p in PLATFORMS for b in BACKENDS} and key not in covered,
                     'Starter must have unique Windows/Linux reports on both backends')
-            require(report.get('passed') is True and report.get('runtime_sha256') == hashes['runtime']
+            require(report.get('passed') is True and report.get('runtime_sha256') == starter_runtime
                     and report.get('starter_sha256') == sha(output), 'Starter gameplay used different jars')
             require({'controls', 'native_tools', 'unavailable', 'cold_restart_before_solve',
                      'actual_chunk_reload', 'replacement', 'dedicated_server'} <= set(report.get('checks', [])),
@@ -515,7 +524,7 @@ def validate_release(manifest, root):
             report = read(locked_file(descriptor, root))
             backend = report.get('backend')
             require(backend in BACKENDS and backend not in graphical and report.get('passed') is True
-                    and report.get('runtime_sha256') == hashes['runtime']
+                    and report.get('runtime_sha256') == starter_runtime
                     and report.get('starter_sha256') == sha(output)
                     and report.get('controls') is True and report.get('native_tools') is True,
                     'Starter needs real graphical controls and native tools on both backends')
