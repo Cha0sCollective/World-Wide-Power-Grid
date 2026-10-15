@@ -9,7 +9,18 @@ is the current stable release. To install it or choose a playable world, use the
 [installation guide](../docs/INSTALL.md). This directory is for reviewing what
 was shipped and which checks passed.
 
-## Current prerelease: 0.2.2-beta.2
+## Current prerelease: 0.2.2-beta.3 — preparation and result allocations
+
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-beta.3)
+· [Verification](0.2.2-beta.3/verification.json)
+· [Five-download layout](0.2.2-beta.3/download-layout.json).
+
+Reuses the passing candidate72 Windows suite with an exact version-only runtime
+comparison, plus fresh Linux server acceptance. The worlds bundle adds the
+original mixed 14,650-node benchmark, accurately labeled and explicitly not
+certified for 20 TPS. Private benchmark tools and detailed timings remain local.
+
+## Historical prerelease: 0.2.2-beta.2
 
 [WWPG 0.2.2-beta.2](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-beta.2)
 combines the loading fixes, less repeated native and add-on bookkeeping, and the

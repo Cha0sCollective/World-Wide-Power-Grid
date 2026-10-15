@@ -1,0 +1,494 @@
+{
+  "schema": 1,
+  "wwpg_version": "0.2.2-beta.3",
+  "api_version": "1.0.0",
+  "api_coordinate": "org.cha0scollective.wwpg:wwpg-api:1.0.0",
+  "cee_api_coordinate": "org.cha0scollective.wwpg:wwpg-cee-api:1.0.0",
+  "source_sha": "8198cb8d0884ec023d7e864a117b895737348f65",
+  "artifacts": {
+    "runtime": {
+      "path": "build/frozen-0.2.2-beta.3/wwpg-0.2.2-beta.3.jar",
+      "sha256": "aa95d88856f817b1a40d532a0be7f7c3963688cb3d0100a7bd6d4b5958ff6ebf",
+      "bytes": 3757080
+    },
+    "api": {
+      "path": "build/frozen-0.2.2-beta.3/wwpg-api-1.0.0.jar",
+      "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+      "bytes": 50143
+    },
+    "cee_api": {
+      "path": "build/frozen-0.2.2-beta.3/wwpg-cee-api-1.0.0.jar",
+      "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+      "bytes": 8793
+    },
+    "api_sources": {
+      "path": "build/frozen-0.2.2-beta.3/wwpg-api-1.0.0-sources.jar",
+      "sha256": "1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b",
+      "bytes": 25943
+    },
+    "api_javadoc": {
+      "path": "build/frozen-0.2.2-beta.3/wwpg-api-1.0.0-javadoc.jar",
+      "sha256": "07b438c587ea6f4fdfd61da12c22ccfe15c778afd7f0d6e8ff40109bd53f0560",
+      "bytes": 230994
+    },
+    "cee_api_sources": {
+      "path": "build/frozen-0.2.2-beta.3/wwpg-cee-api-1.0.0-sources.jar",
+      "sha256": "00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34",
+      "bytes": 6947
+    },
+    "cee_api_javadoc": {
+      "path": "build/frozen-0.2.2-beta.3/wwpg-cee-api-1.0.0-javadoc.jar",
+      "sha256": "88ad49e4d840b326cc5bfbe805473c05362da22f792402a49933ac96ac1878f8",
+      "bytes": 107953
+    },
+    "example": {
+      "path": "build/frozen-0.2.2-beta.3/wwpg-api-example-1.0.0.jar",
+      "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+      "bytes": 52081
+    },
+    "upstream_example": {
+      "path": "build/frozen-0.2.2-beta.3/wwpg-upstream-api-example-1.0.0.jar",
+      "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+      "bytes": 45633
+    },
+    "maven_repository": {
+      "path": "build/frozen-0.2.2-beta.3/wwpg-api-1.0.0-maven.zip",
+      "sha256": "8aa02c77d9cfc48eccd84a3405f305341aff4c2e2ad0ba9fe023c2087bb0496d",
+      "bytes": 416134
+    },
+    "example_sources": {
+      "path": "build/frozen-0.2.2-beta.3/sdk-source-v2/wwpg-api-example-1.0.0-source.zip",
+      "sha256": "b1b2a3ef151a348cadd762b86fc6d07cc2f3c058f5e4bb0ffa81a9613674cb2e",
+      "bytes": 79526
+    },
+    "upstream_example_sources": {
+      "path": "build/frozen-0.2.2-beta.3/sdk-source-v2/wwpg-upstream-api-example-1.0.0-source.zip",
+      "sha256": "441cac85060939a59a4e38dc58a42d9a4483958696283436c54baf82ae3fe1c6",
+      "bytes": 70380
+    }
+  },
+  "acceptance_reuse": {
+    "schema": 1,
+    "scope": "runtime_version_only",
+    "source_sha": "601705724febfa466bae44ee29f583f73723b0cb",
+    "runtime_version": "0.2.2-dev.72",
+    "ci_source_sha": "41ded651055a02f48fa2a05e2eee0da0d1e1b14b",
+    "ci_runtime_version": "0.2.2-beta.3",
+    "ci_runtime": {
+      "path": "build/frozen-0.2.2-beta.3/wwpg-0.2.2-beta.3.jar",
+      "sha256": "aa95d88856f817b1a40d532a0be7f7c3963688cb3d0100a7bd6d4b5958ff6ebf",
+      "bytes": 3757080
+    },
+    "clients": [
+      {
+        "backend": "NATIVE",
+        "profile": "BASE",
+        "mode": "graphical",
+        "proof": {
+          "path": "build/b3ev/j/7d638c35b3f7.json",
+          "sha256": "4cc977f0818874a7980c0ed7ef680ccd788a9dfe9f8ada8dc7285d222e88b81f",
+          "bytes": 7934
+        },
+        "world": {
+          "path": "build/b3ev/f/f4f523e6292b/api-BASE-NATIVE.zip",
+          "sha256": "735710ecc4c4d017af6c6f58600fe04e29a0ed3fdb5db2aea8348ad0b71db1b9",
+          "bytes": 318460
+        }
+      },
+      {
+        "backend": "JAVA",
+        "profile": "BASE",
+        "mode": "graphical",
+        "proof": {
+          "path": "build/b3ev/j/92512da5b380.json",
+          "sha256": "c8634a47b1c860ae77d21454ad3722d3c05079f0d45113b24e50d97fdd8833d7",
+          "bytes": 7930
+        },
+        "world": {
+          "path": "build/b3ev/f/f4f523e6292b/api-BASE-NATIVE.zip",
+          "sha256": "735710ecc4c4d017af6c6f58600fe04e29a0ed3fdb5db2aea8348ad0b71db1b9",
+          "bytes": 318460
+        }
+      },
+      {
+        "backend": "NATIVE",
+        "profile": "PINOUT",
+        "mode": "graphical",
+        "proof": {
+          "path": "build/b3ev/j/a07a77c03b5a.json",
+          "sha256": "b71e6b0324f82d49d86b1413087cae0141b7fef99bc30beaa58272a02cf1a853",
+          "bytes": 7938
+        },
+        "world": {
+          "path": "build/b3ev/f/139cf3264693/api-PINOUT-NATIVE.zip",
+          "sha256": "10f30e09b144e00e1ecd6305a06c20ff95471a36d9c44f919a1d694525f7bd0c",
+          "bytes": 320691
+        }
+      },
+      {
+        "backend": "JAVA",
+        "profile": "PINOUT",
+        "mode": "graphical",
+        "proof": {
+          "path": "build/b3ev/j/bcb9bd8cd061.json",
+          "sha256": "288ff162177a5bd136de7ffd789108f2975c47cdb6d0236d08a8aed451ba662e",
+          "bytes": 7934
+        },
+        "world": {
+          "path": "build/b3ev/f/139cf3264693/api-PINOUT-NATIVE.zip",
+          "sha256": "10f30e09b144e00e1ecd6305a06c20ff95471a36d9c44f919a1d694525f7bd0c",
+          "bytes": 320691
+        }
+      },
+      {
+        "backend": "NATIVE",
+        "profile": "BASE",
+        "mode": "multiplayer",
+        "proof": {
+          "path": "build/b3ev/j/19e85d3666a5.json",
+          "sha256": "1b25f250cc29fdd065671b2000563281e53c1810dcc5a65df04a3089a08bd4cd",
+          "bytes": 15265
+        },
+        "world": {
+          "path": "build/b3ev/f/f4f523e6292b/api-BASE-NATIVE.zip",
+          "sha256": "735710ecc4c4d017af6c6f58600fe04e29a0ed3fdb5db2aea8348ad0b71db1b9",
+          "bytes": 318460
+        }
+      },
+      {
+        "backend": "JAVA",
+        "profile": "BASE",
+        "mode": "multiplayer",
+        "proof": {
+          "path": "build/b3ev/j/bfdbbcd425e3.json",
+          "sha256": "29818a9c601f026a33d063a826a1968277356fa5f6e656a8c3303fe291fe0cd0",
+          "bytes": 15260
+        },
+        "world": {
+          "path": "build/b3ev/f/f4f523e6292b/api-BASE-NATIVE.zip",
+          "sha256": "735710ecc4c4d017af6c6f58600fe04e29a0ed3fdb5db2aea8348ad0b71db1b9",
+          "bytes": 318460
+        }
+      },
+      {
+        "backend": "NATIVE",
+        "profile": "PINOUT",
+        "mode": "multiplayer",
+        "proof": {
+          "path": "build/b3ev/j/d431ab421aa8.json",
+          "sha256": "5d0da1e6deaf366b8cacce72f26b016a5834368e01b5c3e125e3f37cf1fe70de",
+          "bytes": 15267
+        },
+        "world": {
+          "path": "build/b3ev/f/139cf3264693/api-PINOUT-NATIVE.zip",
+          "sha256": "10f30e09b144e00e1ecd6305a06c20ff95471a36d9c44f919a1d694525f7bd0c",
+          "bytes": 320691
+        }
+      },
+      {
+        "backend": "JAVA",
+        "profile": "PINOUT",
+        "mode": "multiplayer",
+        "proof": {
+          "path": "build/b3ev/j/d01e49485e38.json",
+          "sha256": "2dabf4c8e7bf6047a309b34059902be8c310b96a4d01921dac5b8cadb54d9dc3",
+          "bytes": 15262
+        },
+        "world": {
+          "path": "build/b3ev/f/139cf3264693/api-PINOUT-NATIVE.zip",
+          "sha256": "10f30e09b144e00e1ecd6305a06c20ff95471a36d9c44f919a1d694525f7bd0c",
+          "bytes": 320691
+        }
+      }
+    ],
+    "stationary_clients": [
+      {
+        "backend": "NATIVE",
+        "profile": "BASE",
+        "mode": "graphical",
+        "proof": {
+          "path": "build/b3ev/j/1267cca0b061.json",
+          "sha256": "084bba70eb0b657d6d13113e33e4a01dcb5ec75107baf9c78c2dd66b365293ff",
+          "bytes": 6875
+        },
+        "world": {
+          "path": "build/b3ev/f/53cfccb42191/yard-BASE-NATIVE.zip",
+          "sha256": "7a725554c48732a7cfd956bdbe4cf9bf9f951517146aa66c239a6655ac1144c8",
+          "bytes": 1321196
+        }
+      },
+      {
+        "backend": "JAVA",
+        "profile": "BASE",
+        "mode": "graphical",
+        "proof": {
+          "path": "build/b3ev/j/e641216bc62a.json",
+          "sha256": "26fb8f732704461cc666e7c78a3da92b0db1f98753c439dc8165ea6ed8b04be1",
+          "bytes": 6867
+        },
+        "world": {
+          "path": "build/b3ev/f/53cfccb42191/yard-BASE-NATIVE.zip",
+          "sha256": "7a725554c48732a7cfd956bdbe4cf9bf9f951517146aa66c239a6655ac1144c8",
+          "bytes": 1321196
+        }
+      },
+      {
+        "backend": "NATIVE",
+        "profile": "PINOUT",
+        "mode": "graphical",
+        "proof": {
+          "path": "build/b3ev/j/42aa7799b8ba.json",
+          "sha256": "1cbf39a5279f5494c40137a5dca7b607291388bdb8f0295897f5c91a90a168be",
+          "bytes": 7970
+        },
+        "world": {
+          "path": "build/b3ev/f/c63f6e2a36e0/yard-PINOUT-NATIVE.zip",
+          "sha256": "309cd8196a9215b871b7fad8839237da1178a8f1811b5869a6e08f54256d9bcc",
+          "bytes": 1346198
+        }
+      },
+      {
+        "backend": "JAVA",
+        "profile": "PINOUT",
+        "mode": "graphical",
+        "proof": {
+          "path": "build/b3ev/j/c694a35b1eeb.json",
+          "sha256": "3c19670e21c89b04068a09599581d30b4d941e8ed1b2a6de866d3701f8e9ea69",
+          "bytes": 7962
+        },
+        "world": {
+          "path": "build/b3ev/f/c63f6e2a36e0/yard-PINOUT-NATIVE.zip",
+          "sha256": "309cd8196a9215b871b7fad8839237da1178a8f1811b5869a6e08f54256d9bcc",
+          "bytes": 1346198
+        }
+      },
+      {
+        "backend": "NATIVE",
+        "profile": "BASE",
+        "mode": "multiplayer",
+        "proof": {
+          "path": "build/b3ev/j/4fac88293e3f.json",
+          "sha256": "8a6682695d4a03339af83863c4df952095c9d5cca4967f8351334fc6392b8bf5",
+          "bytes": 2632
+        },
+        "world": {
+          "path": "build/b3ev/f/53cfccb42191/yard-BASE-NATIVE.zip",
+          "sha256": "7a725554c48732a7cfd956bdbe4cf9bf9f951517146aa66c239a6655ac1144c8",
+          "bytes": 1321196
+        }
+      },
+      {
+        "backend": "JAVA",
+        "profile": "BASE",
+        "mode": "multiplayer",
+        "proof": {
+          "path": "build/b3ev/j/5053ceca6ff1.json",
+          "sha256": "056d498f7d604accde6cbab0bb92e22b7bc26f16b63f8d97404f3cf74b784f71",
+          "bytes": 2628
+        },
+        "world": {
+          "path": "build/b3ev/f/53cfccb42191/yard-BASE-NATIVE.zip",
+          "sha256": "7a725554c48732a7cfd956bdbe4cf9bf9f951517146aa66c239a6655ac1144c8",
+          "bytes": 1321196
+        }
+      },
+      {
+        "backend": "NATIVE",
+        "profile": "PINOUT",
+        "mode": "multiplayer",
+        "proof": {
+          "path": "build/b3ev/j/66c3bec71a33.json",
+          "sha256": "42937f923faf1b249d58f6bb9ad8d3e0d5d4d32e6e20f144226f5f0636327ace",
+          "bytes": 3918
+        },
+        "world": {
+          "path": "build/b3ev/f/c63f6e2a36e0/yard-PINOUT-NATIVE.zip",
+          "sha256": "309cd8196a9215b871b7fad8839237da1178a8f1811b5869a6e08f54256d9bcc",
+          "bytes": 1346198
+        }
+      },
+      {
+        "backend": "JAVA",
+        "profile": "PINOUT",
+        "mode": "multiplayer",
+        "proof": {
+          "path": "build/b3ev/j/a2660b1d0ba5.json",
+          "sha256": "ff6e8c47215689b92866f3ad596a867e4d1b7a69f31055373bd7b4dc08677345",
+          "bytes": 3915
+        },
+        "world": {
+          "path": "build/b3ev/f/c63f6e2a36e0/yard-PINOUT-NATIVE.zip",
+          "sha256": "309cd8196a9215b871b7fad8839237da1178a8f1811b5869a6e08f54256d9bcc",
+          "bytes": 1346198
+        }
+      }
+    ],
+    "worlds": {
+      "base_world": {
+        "path": "build/b3ev/f/53cfccb42191/yard-BASE-NATIVE.zip",
+        "sha256": "7a725554c48732a7cfd956bdbe4cf9bf9f951517146aa66c239a6655ac1144c8",
+        "bytes": 1321196
+      },
+      "pinout_world": {
+        "path": "build/b3ev/f/c63f6e2a36e0/yard-PINOUT-NATIVE.zip",
+        "sha256": "309cd8196a9215b871b7fad8839237da1178a8f1811b5869a6e08f54256d9bcc",
+        "bytes": 1346198
+      },
+      "base_workshop_world": {
+        "path": "build/b3ev/f/f4f523e6292b/api-BASE-NATIVE.zip",
+        "sha256": "735710ecc4c4d017af6c6f58600fe04e29a0ed3fdb5db2aea8348ad0b71db1b9",
+        "bytes": 318460
+      },
+      "pinout_workshop_world": {
+        "path": "build/b3ev/f/139cf3264693/api-PINOUT-NATIVE.zip",
+        "sha256": "10f30e09b144e00e1ecd6305a06c20ff95471a36d9c44f919a1d694525f7bd0c",
+        "bytes": 320691
+      }
+    },
+    "runtime": {
+      "path": "build/b3ev/f/5150f93d3437/wwpg-0.2.2-dev.72.jar",
+      "sha256": "da3a395b620424825f53b1506c7729dd38a9f721b4e6b75063d87d419864e648",
+      "bytes": 3757081
+    },
+    "api": {
+      "path": "build/b3ev/f/7c65c27f5607/wwpg-api-1.0.0.jar",
+      "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+      "bytes": 50143
+    },
+    "cee_api": {
+      "path": "build/b3ev/f/3f5931c7455c/wwpg-cee-api-1.0.0.jar",
+      "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+      "bytes": 8793
+    },
+    "example": {
+      "path": "build/b3ev/f/9ccbb0230364/wwpg-api-example-1.0.0.jar",
+      "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+      "bytes": 52081
+    },
+    "upstream_example": {
+      "path": "build/b3ev/f/01c011edd0f6/wwpg-upstream-api-example-1.0.0.jar",
+      "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+      "bytes": 45633
+    }
+  },
+  "retained_windows_acceptance": {
+    "path": "build/b3ev/j/ce1c309aa492.json",
+    "sha256": "160eb837866c285ab32b3165503100cffab3d54cb0b35badc22d563b36d607b0",
+    "bytes": 149000
+  },
+  "required_regression_checks": {
+    "BASE": 206,
+    "PINOUT": 210
+  },
+  "benchmark_world": {
+    "path": "build/b3ev/f/555fcf1a72f6/wwpg-0.2.2-beta.3-benchmark-14650-nodes.zip",
+    "sha256": "2fd696147b89503bfb98df9ed9a0dd18a1431d2f353c51546ff81d3e070eba06",
+    "bytes": 3408342
+  },
+  "base_world": {
+    "path": "build/b3ev/f/4ccc1fcd38b6/yard-BASE.zip",
+    "sha256": "b2c320d05c32a8be3636923204771c0e34419f86908a6328f890499b90d5dfd3",
+    "bytes": 1319158
+  },
+  "pinout_world": {
+    "path": "build/b3ev/f/4016c7c94a83/yard-PINOUT.zip",
+    "sha256": "90d9bf900b03cbe670ef4670dfd518edaf229a01a3232c1d476c32ce262aaa63",
+    "bytes": 1344134
+  },
+  "base_workshop_world": {
+    "path": "build/b3ev/f/d090b8172c0f/api-BASE.zip",
+    "sha256": "c30059b7f3dce84f810dd3980d62edbe948977e118ece3f419f8a5aa552743d9",
+    "bytes": 317854
+  },
+  "pinout_workshop_world": {
+    "path": "build/b3ev/f/056b509db853/api-PINOUT.zip",
+    "sha256": "fb812baac270a516a8e181dcc52c0b6ffe43d012e027d3c6e51ed04206bc9447",
+    "bytes": 320054
+  },
+  "independent_example_build": {
+    "path": "build/b3ev/j/77dfb9756e98.json",
+    "sha256": "e1484f43f3e1176fd3e5c7cfaafc8cb5dfb9583ce6b3b91de2376cbd2d5ca163",
+    "bytes": 3020
+  },
+  "independent_upstream_example_build": {
+    "path": "build/b3ev/j/1991beb65f88.json",
+    "sha256": "69e22db11597497be6c5054614453b1f8de08345c798be0e81aa98a6d83f8c83",
+    "bytes": 3169
+  },
+  "abi": {
+    "path": "build/b3ev/j/dca0d66a803d.json",
+    "sha256": "c0f9561972d1c34e6569f239060c3947f678575035fb27c4eab23522c348b5dc",
+    "bytes": 64277
+  },
+  "cee_abi": {
+    "path": "build/b3ev/j/3c14149426b1.json",
+    "sha256": "3aba574f8163ee8c3c4717a5d5095e680da7d8f573137ffa3c1aa7cfc972a6f1",
+    "bytes": 12699
+  },
+  "previous_api": {
+    "path": "build/b3ev/f/d8c138782c10/wwpg-api-1.0.0.jar",
+    "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+    "bytes": 50143
+  },
+  "previous_cee_api": {
+    "path": "build/b3ev/f/b5220c7cc207/wwpg-cee-api-1.0.0.jar",
+    "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+    "bytes": 8793
+  },
+  "documentation_snapshot": {
+    "path": "build/b3ev/j/57e4ffad74dd.json",
+    "sha256": "1ab80693ef228e53c5b29f317d8b7648cd21f7e5a6d9d6b88121271fca3c2297",
+    "bytes": 3185
+  },
+  "ci": {
+    "path": "build/b3ev/j/7386d3096ede.json",
+    "sha256": "e80366940fbbdeda20c1d26f34f853bf2e7d3cc4a43bb376495fe67371fea2f2",
+    "bytes": 3592
+  },
+  "authoring_starter": {
+    "source": {
+      "path": "build/b3ev/f/a8cc837e55f9/tutorial-load-0.1.0-source.zip",
+      "sha256": "3666a3aaffa0c3735d9a886b96e3a8ba18c5655c21b6aa5ad28cdaa2adad9f47",
+      "bytes": 54217
+    },
+    "proof": {
+      "path": "build/b3ev/j/852bb63bf40d.json",
+      "sha256": "c1c90c389bf125cec9f0805376878deddea7cd2cef5c94e9a05c0b1c953aed1c",
+      "bytes": 3273
+    }
+  },
+  "stages_complete": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "unresolved_failures": [],
+  "local_validation": {
+    "path": "build/b3ev/j/6f8e1e903e20.json",
+    "sha256": "a357b175132e3205a6d170daf9385212f3feb1cc4e5472e4f3a88fb7c62abd21",
+    "bytes": 9038
+  },
+  "runtime_comparison": {
+    "path": "build/b3ev/j/61a36e42b66b.json",
+    "sha256": "75cb8b85adad7e11e102c579c96ef330e4e9feaeed7c3e30c1507523ee008fe9",
+    "bytes": 1316
+  },
+  "representative_visual_review": {
+    "path": "build/b3ev/j/816d23f5d05e.json",
+    "sha256": "2741320a523c08cd870879acc6cdbb0113eba6882e7c57f74234c9768c7b72d0",
+    "bytes": 1617
+  },
+  "failure_review": {
+    "path": "build/b3ev/j/e43d2c1a7dd2.json",
+    "sha256": "f0a4fc847e71937a26c757a7ab59a3149a646b4bf819e8748e904daec75e9dca",
+    "bytes": 2554
+  },
+  "portable_evidence_map": {
+    "path": "build/b3ev/mapping.json",
+    "sha256": "f4dc58cac6907fedf7eeac4ee1c0ff2611a4cc4363baf436c0bc36c7d7ba2f82",
+    "bytes": 727426
+  }
+}

@@ -4,7 +4,7 @@
 
 **[Try WWPG 0.2.2-beta.3](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-beta.3) (prerelease)** for Minecraft 1.21.1 and NeoForge. Follow [installation](docs/INSTALL.md) for the required mod versions and settings. Add-on developers can also use the separately versioned **extension API 1.0.0**.
 
-Beta.2 combines circuit-loading fixes, less repeated native and add-on work, and the expanded SDK. [0.2.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.1) remains the stable release. The 14,650-node benchmark has not reached 20 TPS.
+Beta.3 reduces repeated terminal and CEE preparation work and result allocations, and includes the wire-removal and diagnostic corrections since beta.2. [0.2.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.1) remains the stable release. The 14,650-node benchmark has not reached 20 TPS.
 
 ## What you can do
 
@@ -21,7 +21,7 @@ The [support list](docs/SUPPORT.md) gives the equipment and workflows covered by
 
 Choose **Stationary Test Yard** or **Stationary Test Yard — Pinout** from the [release downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-beta.3). Each supported native behavior has a checked exhibit or assembly/repair workflow. Signs and books explain controls, readings and resets. Goggles and tools are at spawn. The [yard guide](docs/STATIONARY_YARD.md) points to transformers, gauges, boards, panels, storage, processing and the playable Nether route.
 
-All four saves and the optional Workshop mods are in **wwpg-0.2.2-beta.3-example-worlds.zip**.
+The four demonstration saves, the original [14,650-node benchmark](docs/BENCHMARK_YARD.md) and the optional Workshop mods are in **wwpg-0.2.2-beta.3-example-worlds.zip**.
 Players can download the mod jar directly; the developer SDK and verification
 archive are separate optional downloads.
 

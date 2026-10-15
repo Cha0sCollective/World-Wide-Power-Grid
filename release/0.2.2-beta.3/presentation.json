@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "repository": "Cha0sCollective/World-Wide-Power-Grid",
+  "summary": "Beta.3 reduces repeated electrical preparation and result allocations while preserving API 1.0.0, saved worlds and all 16 substeps. The large-yard 20 TPS goal remains open.",
+  "changes": [
+    "Reuses built-in terminal identities and validated CEE descriptions, and reduces result-map and availability-mask allocations.",
+    "Includes the disconnected-wire and repeated-diagnostics corrections since beta.2.",
+    "Adds the original mixed benchmark save, correctly labeled 14,650 electrical nodes, 20,637 connections and 1,050 stateful devices."
+  ],
+  "installation": "Use Minecraft 1.21.1, NeoForge 21.1.231 or 21.1.248, Java 21, Create 6.0.10-280, CEE 1.1.3, Power Grid 0.6.2 and Architectury 13.0.8. Match server and client mod versions.",
+  "optional_installation": "Pinout editions also require CC:Tweaked 1.120.2 and CC;CPG: Pinout 0.2.1."
+}
