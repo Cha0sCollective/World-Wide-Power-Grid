@@ -17,6 +17,33 @@ from package_api_release import PublicationError, locked_file, sha
 
 
 class ReleaseChecks(unittest.TestCase):
+    def test_optional_benchmark_inventory_and_actual_label(self):
+        prefix = 'WWPG Benchmark - MIXED - 14650 electrical nodes/'
+        files = {'level.dat': b'TEST_ONLY level', 'WWPG_README.txt': b'TEST_ONLY instructions'}
+        record = dict(kind='mixed_capacity_benchmark', target=self.version, electrical_nodes=14650,
+                      connections=20637, stateful_devices=1050, chunks=953, certified_20_tps=False,
+                      jar=dict(sha256=self.manifest['artifacts']['runtime']['sha256']),
+                      files=[self.descriptor(n, d) for n, d in files.items()])
+        path = self.root / 'benchmark.zip'
+        with zipfile.ZipFile(path, 'w') as archive:
+            for name, data in files.items(): archive.writestr(prefix + name, data)
+            archive.writestr(prefix + 'WWPG_MANIFEST.json', json.dumps(record))
+        self.manifest['benchmark_world'] = self.descriptor('benchmark.zip', path.read_bytes())
+        for key in release.WORLD_KEYS:
+            target = self.root / self.manifest[key]['path']
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(self.entries['evidence/' + self.manifest[key]['path']])
+        values = release.world_payload(self.manifest, self.root, self.version)
+        self.assertEqual(values[f'worlds/wwpg-{self.version}-benchmark-14650-nodes.zip'], path.read_bytes())
+        for field, value in [('electrical_nodes', 10000), ('certified_20_tps', True), ('files', [])]:
+            changed = dict(record, **{field: value})
+            with zipfile.ZipFile(path, 'w') as archive:
+                for name, data in files.items(): archive.writestr(prefix + name, data)
+                archive.writestr(prefix + 'WWPG_MANIFEST.json', json.dumps(changed))
+            self.manifest['benchmark_world'] = self.descriptor('benchmark.zip', path.read_bytes())
+            with self.subTest(field=field), self.assertRaises(PublicationError):
+                release.world_payload(self.manifest, self.root, self.version)
+
     def setUp(self):
         (release.ROOT / 'build').mkdir(exist_ok=True)
         self.temporary = tempfile.TemporaryDirectory(prefix='TEST_ONLY-release-', dir=release.ROOT / 'build')

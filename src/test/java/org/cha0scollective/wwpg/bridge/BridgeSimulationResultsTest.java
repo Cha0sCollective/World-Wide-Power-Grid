@@ -25,6 +25,28 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BridgeSimulationResultsTest {
+    @Test void healthyRejectedAndRecoveredPublicationsKeepIndependentOrdinalAvailability() {
+        Node first = new AttachedNode(0, "changing"), second = new AttachedNode(1, "changing");
+        Node[] order = {first, second};
+        var unavailable = new HashSet<Node>();
+        var healthy = results(order, new double[]{10, 10, 0, 0}, unavailable);
+        unavailable.add(first);
+        var rejected = results(order, new double[]{10, 10, 0, 0}, unavailable);
+        unavailable.clear();
+        var recovered = results(order, new double[]{20, 20, 0, 0}, unavailable);
+
+        assertTrue(healthy.allAvailable());
+        assertFalse(rejected.allAvailable());
+        assertTrue(recovered.allAvailable());
+        assertEquals(10, healthy.getVoltageAt(0));
+        assertEquals(10, healthy.getVoltageAt(first));
+        assertTrue(Double.isNaN(rejected.getVoltageAt(0)));
+        assertTrue(Double.isNaN(rejected.getVoltageAt(first)));
+        assertEquals(20, recovered.getVoltageAt(0));
+        assertEquals(20, recovered.getVoltageAt(first));
+        assertEquals(0, rejected.getVoltageAt(1), "The unrelated available ordinal remains readable");
+    }
+
     @Test void aReorderedBuilderCannotReadRejectedNodesThroughAnUnrelatedWiresCachedOrdinals() {
         Node first = new AttachedNode(0, "healthy"), second = new AttachedNode(1, "healthy");
         Node rejectedFirst = new AttachedNode(0, "rejected"), rejectedSecond = new AttachedNode(1, "rejected");

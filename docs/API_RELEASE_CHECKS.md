@@ -21,6 +21,14 @@ and packaging. The release record must distinguish reuse from fresh passes;
 interrupted campaigns remain interrupted. Changed runtime code needs new full
 acceptance when the user requests the end-of-day suite.
 
+For preserved full local Windows acceptance, `retained_windows_acceptance`
+binds its original campaign, hash ledger, 140 process outcomes, 95 unit checks,
+logs and pre-solve oracles. The gate reparses all four profile/backend
+combinations, including rejection, pause, real unload cycles, cold restarts and
+exact exported-save reopens. This can accompany a complete Linux-only CI record;
+it does not relabel local executions as GitHub jobs. Client and SDK acceptance
+remain separate gates. The original eight-way CI route is unchanged.
+
 ## Release sequence
 
 1. Build the runtime, both API artifacts, and both independent examples.

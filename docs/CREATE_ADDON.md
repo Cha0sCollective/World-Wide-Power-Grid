@@ -1,10 +1,10 @@
 # Create your own adjustable load
 
-Build a separate add-on with one controllable electrical load. You need basic Java, Java 21 and the released WWPG **0.2.2-beta.2** developer SDK. You do not need WWPG's implementation source or previous NeoForge experience. This project is a creative teaching example, not a survival-balanced machine.
+Build a separate add-on with one controllable electrical load. You need basic Java, Java 21 and the released WWPG **0.2.2-beta.3** developer SDK. You do not need WWPG's implementation source or previous NeoForge experience. This project is a creative teaching example, not a survival-balanced machine.
 
 ## 1. Prepare the project and SDK
 
-Download the [developer SDK](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.2-beta.2/wwpg-0.2.2-beta.2-developer-sdk.zip), and check the [published checksums](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.2-beta.2/wwpg-0.2.2-beta.2-checksums.txt). Extract the outer ZIP. Extract `maven/wwpg-api-1.0.0-maven.zip` into `wwpg-api-maven`; its root contains `org/cha0scollective/wwpg`.
+Download the [developer SDK](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.2-beta.3/wwpg-0.2.2-beta.3-developer-sdk.zip), and check the [published checksums](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.2-beta.3/wwpg-0.2.2-beta.3-checksums.txt). Extract the outer ZIP. Extract `maven/wwpg-api-1.0.0-maven.zip` into `wwpg-api-maven`; its root contains `org/cha0scollective/wwpg`.
 
 The SDK includes `examples/tutorial-load-0.1.0-source.zip`, the [complete starter project](../examples/adjustable-load/README.md) with only one load. Its addon ID is `tutorial_load`; the supplied examples use different IDs, so they can run together. The starter's own version is **0.1.0**, while its compile-time API is **1.0.0**.
 
@@ -13,7 +13,7 @@ For a fresh project built by copying files: create an empty `tutorial-load` dire
 For the ZIP route, download the SDK before these commands. Its examples folder contains the starter ZIP. Use new destination directories; do not extract over another project.
 
 ```powershell
-Expand-Archive -LiteralPath "$env:USERPROFILE/Downloads/wwpg-0.2.2-beta.2-developer-sdk.zip" -DestinationPath "C:/Dev/WWPG SDK"
+Expand-Archive -LiteralPath "$env:USERPROFILE/Downloads/wwpg-0.2.2-beta.3-developer-sdk.zip" -DestinationPath "C:/Dev/WWPG SDK"
 Expand-Archive -LiteralPath "C:/Dev/WWPG SDK/maven/wwpg-api-1.0.0-maven.zip" -DestinationPath "C:/Dev/WWPG API Maven"
 Expand-Archive -LiteralPath "C:/Dev/WWPG SDK/examples/tutorial-load-0.1.0-source.zip" -DestinationPath "C:/Dev/Tutorial Load"
 Set-Location "C:/Dev/Tutorial Load"
@@ -21,7 +21,7 @@ Set-Location "C:/Dev/Tutorial Load"
 
 ```sh
 mkdir -p "$HOME/Dev"
-unzip "$HOME/Downloads/wwpg-0.2.2-beta.2-developer-sdk.zip" -d "$HOME/Dev/WWPG SDK"
+unzip "$HOME/Downloads/wwpg-0.2.2-beta.3-developer-sdk.zip" -d "$HOME/Dev/WWPG SDK"
 unzip "$HOME/Dev/WWPG SDK/maven/wwpg-api-1.0.0-maven.zip" -d "$HOME/Dev/WWPG API Maven"
 unzip "$HOME/Dev/WWPG SDK/examples/tutorial-load-0.1.0-source.zip" -d "$HOME/Dev/Tutorial Load"
 cd "$HOME/Dev/Tutorial Load"
@@ -75,7 +75,7 @@ Both commands use an absolute repository path; quote the complete property argum
 
 If you do not yet have a NeoForge instance, follow the official [client setup](https://docs.neoforged.net/user/docs/client/) or [dedicated-server setup](https://docs.neoforged.net/user/docs/server/), selecting Minecraft **1.21.1** and NeoForge **21.1.248** (or the original tested 21.1.231). Start it once, stop it, and locate its game directory containing `mods` and `logs`.
 
-Stop that separate Minecraft instance, then install **the starter jar**, **WWPG 0.2.2-beta.2**, and the required mods from [Installation](INSTALL.md). Add the supplied `wwpg-api-example-1.0.0.jar` from the example-worlds bundle's `workshop-mods` directory for its 20 V source. Install matching jars on the dedicated server and every client. Keep SDK API/source/Javadoc jars out of `mods`. Remove older copies of your starter jar before restarting.
+Stop that separate Minecraft instance, then install **the starter jar**, **WWPG 0.2.2-beta.3**, and the required mods from [Installation](INSTALL.md). Add the supplied `wwpg-api-example-1.0.0.jar` from the example-worlds bundle's `workshop-mods` directory for its 20 V source. Install matching jars on the dedicated server and every client. Keep SDK API/source/Javadoc jars out of `mods`. Remove older copies of your starter jar before restarting.
 
 There is deliberately no `runClient` or `runServer` task in this project. Use the [build-and-install loop](ADDON_WORKFLOW.md), including debugger attachment, rather than trying commands the project does not provide.
 

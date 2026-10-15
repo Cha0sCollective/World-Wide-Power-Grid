@@ -604,7 +604,7 @@ public final class WorldBridge {
             adapter.binding.failureReason().ifPresent(reason->adapterFault(adapter,reason));
         }
         for (var dynamic : dynamics) if (failedDynamic(dynamic)) dynamic.checkpoint.run();
-        var currents = new Object2DoubleOpenHashMap<DirectionalNodeConnection>();
+        var currents = new Object2DoubleOpenHashMap<DirectionalNodeConnection>(branches.size() + 2 * transformers.size());
         for (var branch : branches.values()) {
             var p = branch.desired.properties;
             double current = branch.currentSum / substeps;
@@ -879,12 +879,21 @@ public final class WorldBridge {
     private record TopologyState(long identities, long created, long removed) {}
     private record SolveFailure(ElectricalNetwork network, Class<?> kind, String reason) { }
 
-    private record Desired(ElectricalProperties properties, boolean voltageSource, Node first, Node second, int firstOrdinal, int secondOrdinal) {
-        Desired refresh(ElectricalProperties properties, Node first, Node second) {
-            if (this.properties == properties && this.first == first && this.second == second) return this;
-            return new Desired(properties, voltageSource, first, second, firstOrdinal, secondOrdinal);
+    /** Current description owned by a branch; its ordinals/type stay fixed until topology changes. */
+    private static final class Desired {
+        ElectricalProperties properties;
+        Node first, second;
+        final boolean voltageSource;
+        final int firstOrdinal, secondOrdinal;
+        Desired(ElectricalProperties properties, boolean voltageSource, Node first, Node second, int firstOrdinal, int secondOrdinal) {
+            this.voltageSource = voltageSource; this.firstOrdinal = firstOrdinal; this.secondOrdinal = secondOrdinal;
+            refresh(properties, first, second);
+        }
+        void refresh(ElectricalProperties properties, Node first, Node second) {
+            this.properties = properties; this.first = first; this.second = second;
         }
     }
+    private record Anchor(net.minecraft.world.level.block.Block block, Object owner) { }
     /** Validate structure and ownership, then update parameters without rebuilding desired-key maps. */
     private final class StableDescription {
         final Node[] descriptions = builder.allNodes().stream().map(indexed -> indexed.node).toArray(Node[]::new);
@@ -895,17 +904,17 @@ public final class WorldBridge {
         final it.unimi.dsi.fastutil.ints.Int2IntMap priorities = new it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap(((CircuitBuilderAccessor)builder).wwpg$groundPriorities());
         final List<Branch> bindings = List.copyOf(branches.values());
         final Map<Branch, Boolean> primaryWindings = new IdentityHashMap<>();
-        final Map<BlockPos, Object> anchors = new HashMap<>();
-        final Map<BlockPos, net.minecraft.world.level.block.Block> blocks = new HashMap<>();
+        final Map<BlockPos, Anchor> anchors = new HashMap<>();
         final Map<WindingKey, Winding> windings = Map.copyOf(transformers);
         StableDescription() {
             for (var branch : bindings) if (branch.desired.properties instanceof TransformerElectricalProperties transformer)
                 primaryWindings.put(branch, transformer.isPrimary());
             for (var description : descriptions) if (description instanceof InWorldNode inWorld) {
-                var pos = inWorld.sourcePos();
-                var block = org.cha0scollective.wwpg.wiring.Terminals.loadedState(level, pos).getBlock();
-                var entity = org.cha0scollective.wwpg.extension.ApiTerminals.loadedBlockEntity(level, pos);
-                blocks.put(pos, block); anchors.put(pos, entity == null ? block : entity);
+                anchors.computeIfAbsent(inWorld.sourcePos(), pos -> {
+                    var block = org.cha0scollective.wwpg.wiring.Terminals.loadedState(level, pos).getBlock();
+                    var entity = org.cha0scollective.wwpg.extension.ApiTerminals.loadedBlockEntity(level, pos);
+                    return new Anchor(block, entity == null ? block : entity);
+                });
             }
         }
         boolean update(WorldNetworks world) {
@@ -917,7 +926,8 @@ public final class WorldBridge {
             for (var entry : anchors.entrySet()) {
                 var pos = entry.getKey(); var state = org.cha0scollective.wwpg.wiring.Terminals.loadedState(level, pos);
                 var entity = org.cha0scollective.wwpg.extension.ApiTerminals.loadedBlockEntity(level, pos);
-                if (state.getBlock() != blocks.get(pos) || (entity == null ? state.getBlock() : entity) != entry.getValue()) return false;
+                var anchor = entry.getValue();
+                if (state.getBlock() != anchor.block || (entity == null ? state.getBlock() : entity) != anchor.owner) return false;
             }
             for (int ordinal = 0; ordinal < descriptions.length; ordinal++) {
                 var current = builder.getNode(ordinal);
@@ -939,14 +949,14 @@ public final class WorldBridge {
                     try { TransformerStamp.ratio(transformer.ratio()); } catch (IllegalArgumentException invalid) { return false; }
                 }
             }
-            var freshKeys = new IdentityHashMap<Node, EndpointKey>();
-            for (int ordinal = 0; ordinal < keys.length; ordinal++) freshKeys.put(builder.getNode(ordinal).node, keys[ordinal]);
-            preparedKeys = freshKeys;
+            // Validation is complete. Rebind fresh descriptors in the privately owned map.
+            // The structural-rebuild path still keeps its old map while resolving new keys.
+            preparedKeys.clear();
+            for (int ordinal = 0; ordinal < keys.length; ordinal++) preparedKeys.put(builder.getNode(ordinal).node, keys[ordinal]);
             for (var branch : bindings) {
                 var old = branch.desired; var properties = builder.getNode(old.firstOrdinal).adjacency.get(old.secondOrdinal);
                 branch.element.update(properties); branch.currentSum = branch.currentSquares = branch.currentThisStep = 0;
-                branch.desired = old.refresh(properties, builder.getNode(old.firstOrdinal).node,
-                        builder.getNode(old.secondOrdinal).node);
+                old.refresh(properties, builder.getNode(old.firstOrdinal).node, builder.getNode(old.secondOrdinal).node);
                 if (properties instanceof TransformerElectricalProperties transformer && transformer.isPrimary()) {
                     var winding = windings.get(WindingKey.of(transformer));
                     winding.element.update(transformer.ratio()); winding.properties = transformer;

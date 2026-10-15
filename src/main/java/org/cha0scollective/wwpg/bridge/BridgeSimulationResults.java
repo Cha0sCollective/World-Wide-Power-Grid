@@ -18,6 +18,8 @@ import java.util.Set;
  * never reach CEE gameplay or wire heating; healthy circuits keep their results.
  */
 public final class BridgeSimulationResults extends SimulationResults {
+    // An empty mask makes every ordinal available without allocating a zero-filled array.
+    private static final boolean[] ALL_AVAILABLE = new boolean[0];
     private final Set<Node> unavailableNodes;
     private final boolean[] unavailableOrdinals;
 
@@ -45,7 +47,7 @@ public final class BridgeSimulationResults extends SimulationResults {
         super(maskSamples(samples, substeps, builder, unavailableNodes), substeps,
                 maskCurrents(currents, unavailableNodes, ownsCurrents), builder, infrastructure);
         this.unavailableNodes = Set.copyOf(unavailableNodes);
-        unavailableOrdinals = new boolean[builder.allNodes().size()];
+        unavailableOrdinals = unavailableNodes.isEmpty() ? ALL_AVAILABLE : new boolean[builder.allNodes().size()];
         if (!unavailableNodes.isEmpty())
             for (var node : builder.allNodes()) unavailableOrdinals[node.ordinal] = unavailableNodes.contains(node.node);
     }

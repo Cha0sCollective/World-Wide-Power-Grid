@@ -152,6 +152,22 @@ class JavaContractChecks(unittest.TestCase):
 
 
 class PublicationGateChecks(unittest.TestCase):
+    def test_linux_only_requires_separate_verified_windows_reuse(self):
+        from unittest.mock import patch
+        from package_api_release import validate_ci_acceptance
+        ci = dict(self.ci, jobs=[j for j in self.jobs if j['platform'] == 'ubuntu-24.04'])
+        with self.assertRaises(PublicationError):
+            validate_ci_acceptance(self.manifest, self.root, ci, self.source, self.hashes)
+        manifest = dict(self.manifest, retained_windows_acceptance={'TEST_ONLY': True})
+        with self.assertRaises(PublicationError):
+            validate_ci_acceptance(manifest, self.root, ci, self.source, self.hashes)
+        manifest['acceptance_reuse'] = {'TEST_ONLY': True}
+        with patch('release_local_acceptance.validate') as retained:
+            validate_ci_acceptance(manifest, self.root, ci, self.source, self.hashes)
+            retained.assert_called_once()
+        with self.assertRaises(PublicationError):
+            validate_ci_acceptance(manifest, self.root, ci, self.source, self.hashes)
+
     """Controlled summaries live only in temporary test directories, never release evidence."""
     def setUp(self):
         scratch = ROOT / 'build/api-tool-tests'

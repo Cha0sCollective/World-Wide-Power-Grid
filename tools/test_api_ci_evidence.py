@@ -11,6 +11,14 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class EvidenceChecks(unittest.TestCase):
+    def test_linux_subset_is_explicit_and_complete(self):
+        run, jobs, index = self.metadata_fixture()
+        jobs['jobs'] = [j for j in jobs['jobs'] if 'ubuntu-24.04' in j['name']]
+        self.assertEqual(len(metadata(run, jobs, index, linux_only=True)), 4)
+        with self.assertRaises(EvidenceError): metadata(run, jobs, index)
+        jobs['jobs'].pop()
+        with self.assertRaises(EvidenceError): metadata(run, jobs, index, linux_only=True)
+
     def setUp(self):
         scratch = ROOT / 'build/api-ci-tool-tests'; scratch.mkdir(parents=True, exist_ok=True)
         self.temp = tempfile.TemporaryDirectory(dir=scratch); self.root = Path(self.temp.name)
