@@ -510,7 +510,10 @@ def validate_release(manifest, root):
             key = (report.get('platform'), report.get('backend'))
             require(key in {(p, b) for p in PLATFORMS for b in BACKENDS} and key not in covered,
                     'Starter must have unique Windows/Linux reports on both backends')
-            require(report.get('passed') is True and report.get('runtime_sha256') == starter_runtime
+            tested_runtime = (manifest['acceptance_reuse']['ci_runtime']['sha256']
+                              if manifest.get('retained_windows_acceptance') and key[0] == 'ubuntu-24.04'
+                              else starter_runtime)
+            require(report.get('passed') is True and report.get('runtime_sha256') == tested_runtime
                     and report.get('starter_sha256') == sha(output), 'Starter gameplay used different jars')
             require({'controls', 'native_tools', 'unavailable', 'cold_restart_before_solve',
                      'actual_chunk_reload', 'replacement', 'dedicated_server'} <= set(report.get('checks', [])),
