@@ -1,7 +1,7 @@
 # Guarded native solver development
 
-This describes the **unreleased unload/native safety change**, not the binaries
-in published 0.2.2-beta.3. Public API 1.0.0, save formats, electrical equations,
+This describes the **beta.4 preparation's unload/native safety change**, not the
+binaries in published 0.2.2-beta.3. Public API 1.0.0, save formats, electrical equations,
 precision settings and the sixteen-substep schedule are unchanged.
 
 When a PG device pauses or unloads, WWPG captures the owners of its internal

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.2-beta.4 — prepared 16 October 2026
+
+- Bind matrix batching to its owning solver and preserve nested builds.
+- Rediscover disconnected circuits after unload and rebuild; clear retired network membership and stale source/ground bookkeeping.
+- Reject failed native factorizations, invalid permutations and nonfinite results before unsafe reuse; restore rejected state and retain diagnostics.
+- Hold battery/inverter energy and filter history after rejected solves; clear stale acceptance and restore callback bookkeeping on both solvers.
+- Keep handheld readings on compressed wires and battery/generator device connectors consistent with accepted terminal samples, including refreshed multiblock proxies.
+- Preserve API 1.0.0, saves, equations and all 16 substeps. Reuse dev.94's passing focused and Pinout yard checks on both solvers through an exact version-only comparison; this is not full release acceptance. Public release remains pending its acceptance gates.
+
 ## 0.2.2-beta.3 — 15 October 2026
 
 - Resolve built-in PG terminal identities once per block state per preparation pass; preserve custom and multiblock callbacks.
