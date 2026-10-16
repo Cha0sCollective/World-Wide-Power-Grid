@@ -5,20 +5,30 @@ import org.ejml.data.DMatrixSparseCSC;
 import org.patryk3211.powergrid.electricity.sim.solver.DynamicallyTypedMatrix;
 import org.patryk3211.powergrid.electricity.sim.solver.IMNA;
 import java.util.IdentityHashMap;
+import java.util.Objects;
 
 /** Server-thread-local full assembly only; incremental/nonlinear writes remain native. */
-public final class MatrixBuildScope {
+public final class MatrixBuildScope implements AutoCloseable {
     private static final ThreadLocal<MatrixBuildScope> ACTIVE = new ThreadLocal<>();
+    private final IMNA owner;
+    private final MatrixBuildScope parent;
     private final IdentityHashMap<DynamicallyTypedMatrix, SparseAssembly> javaMatrices = new IdentityHashMap<>();
     private final SparseAssembly nativeMatrix = new SparseAssembly();
     private boolean nativeUsed;
-    public static void begin() {
-        if (ACTIVE.get() != null) throw new IllegalStateException("Nested matrix assembly");
-        ACTIVE.set(new MatrixBuildScope());
+    private MatrixBuildScope(IMNA owner, MatrixBuildScope parent) {
+        this.owner = Objects.requireNonNull(owner, "solver"); this.parent = parent;
     }
-    public static void abort() { ACTIVE.remove(); }
-    public static boolean add(DynamicallyTypedMatrix target, int row, int column, double value) {
-        var scope = ACTIVE.get(); if (scope == null) return false;
+    public static MatrixBuildScope begin(IMNA owner) {
+        for (var active = ACTIVE.get(); active != null; active = active.parent)
+            if (active.owner == owner) throw new IllegalStateException("Recursive matrix assembly for the same solver");
+        var scope = new MatrixBuildScope(owner, ACTIVE.get());
+        ACTIVE.set(scope); return scope;
+    }
+    @Override public void close() {
+        if (parent == null) ACTIVE.remove(); else ACTIVE.set(parent);
+    }
+    public static boolean add(IMNA owner, DynamicallyTypedMatrix target, int row, int column, double value) {
+        var scope = ACTIVE.get(); if (scope == null || scope.owner != owner) return false;
         var storage = ((PgMatrixAccessor) (Object) target).wwpg$matrix();
         if (!(storage instanceof DMatrixSparseCSC matrix)) return false;
         if (row < 0 || column < 0 || row >= matrix.numRows || column >= matrix.numCols)
@@ -28,13 +38,16 @@ public final class MatrixBuildScope {
         }).add(row, column, value);
         return true;
     }
-    public static boolean nativeAdd(int row, int column, double value) {
-        var scope = ACTIVE.get(); if (scope == null) return false;
+    public static boolean nativeAdd(IMNA owner, int row, int column, double value) {
+        var scope = ACTIVE.get(); if (scope == null || scope.owner != owner) return false;
         if (value != 0) { scope.nativeUsed = true; scope.nativeMatrix.add(row, column, value); }
         return true;
     }
     public static void flush(IMNA solver) {
-        var scope = ACTIVE.get(); ACTIVE.remove(); if (scope == null) return;
+        var scope = ACTIVE.get(); if (scope == null || scope.owner != solver) return;
+        // Flush through the ordinary write path. A nested build restores its
+        // parent only when its enclosing try-with-resources exits.
+        ACTIVE.remove();
         scope.javaMatrices.forEach((target, assembly) -> {
             var access = (PgMatrixAccessor) (Object) target;
             var previous = access.wwpg$matrix();

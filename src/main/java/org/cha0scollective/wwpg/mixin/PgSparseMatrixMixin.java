@@ -18,12 +18,6 @@ public abstract class PgSparseMatrixMixin {
     @Shadow private LinearSolver<? extends DMatrix, DMatrixRMaj> solver;
     @Shadow private boolean refactorize;
 
-    @Inject(method = "add", at = @At("HEAD"), cancellable = true)
-    private void wwpg$collectBuild(int row, int column, double value, CallbackInfo ci) {
-        if (org.cha0scollective.wwpg.bridge.MatrixBuildScope.add(
-                (DynamicallyTypedMatrix) (Object) this, row, column, value)) ci.cancel();
-    }
-
     @Inject(method = "denseZero", at = @At("HEAD"), cancellable = true)
     private void wwpg$clearSparseWithoutDenseAllocation(CallbackInfo ci) {
         if (!sparse) return;
