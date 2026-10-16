@@ -1,6 +1,6 @@
 # Current status
 
-**[WWPG 0.2.2-beta.3](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-beta.3)**
+**[WWPG 0.2.2-beta.4](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-beta.4)**
 is the latest prerelease. [0.2.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.1) remains the stable release. It supports the declared stationary factories and
 optional Pinout computer control, and includes **extension API 1.0.0** for
 add-on developers. Existing beta.5 worlds remain compatible; update WWPG on
@@ -22,7 +22,8 @@ each mod's built-in limits.
 The [Stationary Test Yard](STATIONARY_YARD.md) demonstrates those behaviors.
 The separate [API Workshop](EXTENSION_API_WORKSHOP.md) demonstrates add-on
 machines, a panel attachment and a board component; it requires both example
-add-ons. Both worlds have an optional Pinout installation edition.
+add-ons. The combined Stationary Yard requires CC:Tweaked and Pinout. The API
+Workshop has BASE and Pinout editions.
 
 ## Saving, loading and tools
 
@@ -42,26 +43,23 @@ a repaired device. The [developer contract](EXTENSION_API.md) explains those rul
 
 ## What was checked
 
-Beta.3 reuses candidate72's passing full Windows acceptance on both solvers
-and profiles: 95 unit checks, 140 bounded server invocations and 16 graphical
-or real two-client proofs, plus starter controls and persistence. The release
-jar differs only in its version declaration. The demonstration saves retain
-all native save bytes; their release metadata changed.
+Beta.4 retains dev.94's completed Windows Pinout Stationary Yard checks on both
+solvers after comparing every jar entry except the version declaration. The
+combined yard includes the ordinary exhibits; there is no separate BASE yard
+run. The original cold restart, exact archive reopen, graphical and two-client
+results retain their actual source, dates and hashes.
 
-The missing Linux server matrix ran separately on Native/Java and BASE/Pinout.
-It checked the same version-equivalent runtime, saving, restoration, actual
-unload cycles, API ownership and exact exported-world reopens. Main server
-checks use NeoForge 21.1.231; the starter helpers use 21.1.248. Windows sessions
-provide graphical coverage; Linux coverage is server-side.
+The remaining Windows/Linux runtime and API matrix, exact API Workshop upgrade
+reopens, graphical/two-client Workshop checks and SDK builds are recorded
+separately for beta.4. The [verification record](../release/0.2.2-beta.4/verification.json)
+identifies their actual frozen artifacts and completed outcomes. Windows provides
+graphical coverage; Linux coverage is server-side. Main matrix checks use
+NeoForge 21.1.231; local world/client and starter checks use 21.1.248.
 
-Both example projects compiled from the exact beta.3 SDK source and Maven
-archives and matched their accepted jars. The public API remains 1.0.0.
-The independently buildable adjustable-load starter and its original Windows
-controls/persistence evidence are retained, with fresh Linux server checks.
-
-The [verification record](../release/0.2.2-beta.3/verification.json) preserves
-original source commits, hashes, dates and failed-attempt assessments. Retained
-Windows runs are not described as fresh beta.3 executions.
+API 1.0.0 and the compiled example add-ons remain unchanged. SDK checks retain
+their original source when the exact inputs match; build-only commits do not
+turn older executions into fresh passes. Prior beta.3 acceptance and failed
+attempts remain historical records, not evidence for changed beta.4 runtime code.
 
 ## Loading and ticking
 
@@ -74,6 +72,9 @@ Earlier improvements group add-on work by circuit, reuse accepted terminal and
 wire readings, and skip empty input-assembly searches. These changes retain
 electrical accuracy, stored energy and all 16 substeps. Beta.3 further reduces
 terminal preparation, CEE description rebuilding and result allocations.
+Beta.4 also corrects matrix ownership, unload/rebuild regrouping and handheld
+connector samples. Failed native factors, invalid permutations and nonfinite
+results are rejected before unsafe reuse; rejected circuits hold stored energy.
 The original [14,650-node benchmark](BENCHMARK_YARD.md) is included
 as a separate capacity save. It has not reached 20 TPS; ordinary gameplay
 acceptance does not establish that target.

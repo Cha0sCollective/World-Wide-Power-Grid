@@ -15,6 +15,15 @@ GitHub adds its source ZIP and tar archive automatically. Do not upload separate
 API jars, world saves, logs, screenshots or licenses as additional release assets.
 They belong inside the appropriate ZIP. Include licenses in the grouped downloads.
 
+From beta.4, publish one combined **Pinout Stationary Yard**. It includes the
+ordinary yard; do not build or test a separate BASE yard. Record actual PINOUT
+executions with `stationary_yard_policy: combined-pinout-v1`, a single
+`stationary_yard` descriptor and locked `stationary_yard_acceptance`. The gate
+checks both backends on Windows/Linux, three cold restarts, exact archive
+reopens and the retained real Windows clients. This changes yard coverage only;
+BASE/PINOUT runtime/API installation checks remain separate. The combined yard
+requires CC:Tweaked and Pinout. Previous releases keep their original editions.
+
 Release notes explain the change in plain language, provide the download table,
 and link installation and support guides. They allow at most **three highlights
 and 250 words total**. Keep detailed changes in the changelog and test records
@@ -73,6 +82,29 @@ python tools/package_api_release.py --manifest release/VERSION/verification.json
 Use the SHA256 printed by this command in the next step. A candidate package
 does not qualify, even if its files can be grouped successfully.
 
+If packaging-only commits follow runtime checks, `ci_acceptance_reuse` retains
+the actual CI source and its five runtime/API/example artifact descriptors.
+The gate compares every runtime entry, including native libraries, and permits
+only a version declaration change; the other four jars must retain their hashes.
+`sdk_acceptance_reuse` applies the same rule to all twelve SDK artifact roles.
+Original proof sources stay unchanged. Neither record accepts changed runtime
+code, replaced native binaries or new example sources without fresh checks.
+
+`client_acceptance_reuse` requires `runtime_identical_tooling_only`, the same
+version and five byte-identical jars to retain actual client proof sources when
+only release tooling changed afterward. The release tag can
+then include the final working publisher and reference fixture, while the client
+records continue to name the source they actually exercised.
+
+A `retained_ci_cohort` can combine completed Java jobs with a Native reference
+continuation. It retains each run's actual source, job outcomes and uploaded
+artifacts. The narrow `resume_native_from_run` workflow input accepts only a
+completed failure at the isolated upstream-reference step, with every preceding
+process passing and all five runtime/API/example jars byte-identical. It keeps
+the original failed artifact and reruns the corrected reference and its unexecuted
+successors. This records assembled coverage; it does not call the failed workflow
+a passing run. Both platforms and both installation profiles remain required.
+
 ## Stage and inspect the five downloads
 
 ```text
@@ -85,8 +117,9 @@ output directory for each attempt. Staging reruns the artifact and acceptance
 validators against the bundle's retained inputs; it does not launch Minecraft
 or create passing evidence.
 
-Inspect `release-notes.md` and the three ZIPs. The worlds bundle includes all four
-world editions, the two optional Workshop jars, instructions and licenses. The
+Inspect `release-notes.md` and the three ZIPs. The worlds bundle includes the
+combined yard, both API Workshop editions, the two optional Workshop jars,
+instructions and licenses. The
 SDK contains both APIs, sources, Javadoc, Maven repository, example projects,
 guides and licenses. Inner world and SDK files retain their accepted bytes.
 The verification ZIP is an unchanged copy of the complete accepted bundle.

@@ -110,8 +110,10 @@ def validate(manifest, root, gate):
             gate.require(len(set(proof.get('real_clients',[])))>=2 and
                          all(p['exit_code']==0 for p in proof['processes'].values()), 'Original stationary TCP coverage missing')
         stationary.add(key);accepted_worlds[('yard',item['profile'],item['backend'])] = old_world
-    gate.require(stationary==expected, 'Original stationary client matrix incomplete')
-    for key in ('base_world','pinout_world','base_workshop_world','pinout_workshop_world'):
+    stationary_expected = {(b, 'PINOUT', m) for b in gate.BACKENDS for m in ('graphical', 'multiplayer')} if manifest.get('stationary_yard_policy') == 'combined-pinout-v1' else expected
+    gate.require(stationary==stationary_expected, 'Original stationary client matrix incomplete')
+    world_keys = ('stationary_yard', 'base_workshop_world', 'pinout_workshop_world') if manifest.get('stationary_yard_policy') == 'combined-pinout-v1' else ('base_world','pinout_world','base_workshop_world','pinout_workshop_world')
+    for key in world_keys:
         profile = 'BASE' if key.startswith('base_') else 'PINOUT'
         kind = 'api' if 'workshop' in key else 'yard'
         gate.require(reuse['worlds'][key]['sha256']==accepted_worlds[(kind,profile,'NATIVE')], 'Derived world was not the accepted snapshot')

@@ -1,6 +1,6 @@
 # Documentation
 
-These guides describe **WWPG 0.2.2-beta.3**, its supported stationary factories, and
+These guides describe **WWPG 0.2.2-beta.4**, its supported stationary factories, and
 **extension API 1.0.0**. Start with the page that matches what you want to do.
 
 ## Play and run a server
@@ -18,7 +18,7 @@ These guides describe **WWPG 0.2.2-beta.3**, its supported stationary factories,
 
 The Stationary Yard demonstrates the upstream mods' supported equipment. The
 API Workshop is a separate world and requires the two supplied example add-ons.
-Each world has a base edition and an edition requiring Pinout and CC:Tweaked.
+The combined Stationary Yard requires Pinout and CC:Tweaked and includes the ordinary yard. The API Workshop retains separate installation editions.
 
 ## Develop and maintain WWPG
 

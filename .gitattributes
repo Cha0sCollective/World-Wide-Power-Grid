@@ -25,3 +25,8 @@ release/0.2.1/*.json -text
 
 # Documentation test captures are also byte-addressed, including failed runs.
 docs/evidence/api-documentation-2026-10-12/** -text
+
+# Native source inputs, manifests, licenses and libraries are byte-addressed.
+# Do not normalize the accepted source-lock CRLF or expand headers on Windows.
+tools/native/** -text
+tools/build_native_solver.py -text

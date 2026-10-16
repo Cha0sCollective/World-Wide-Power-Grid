@@ -29,6 +29,24 @@ exact exported-save reopens. This can accompany a complete Linux-only CI record;
 it does not relabel local executions as GitHub jobs. Client and SDK acceptance
 remain separate gates. The original eight-way CI route is unchanged.
 
+For beta.4 onward, the Stationary Yard has one combined PINOUT edition. It
+includes ordinary BASE exhibits, so do not repeat a BASE yard run or publish a
+second yard ZIP. This does not combine the runtime or API Workshop installation
+profiles. `stationary_yard_policy: combined-pinout-v1` uses a single
+`stationary_yard` download and a locked `stationary_yard_acceptance` record.
+That record retains the actual PINOUT executions on both Windows/Linux
+backends: setup, three cold restarts, three exact-ZIP reopens, and the two
+Windows graphical/two-client pairs. Windows may reuse version-equivalent
+completed local outcomes. The gate checks original exit codes, saves, logs,
+manifests and media; Linux runs bind to accepted CI jobs. CI jobs that defer yard
+coverage cannot pass release packaging without this separate complete record.
+
+SDK checks may retain their original source through `sdk_acceptance_reuse` when
+all twelve artifact roles remain identical, allowing only the runtime's version
+declaration to differ. Keep the original build/client proof sources and hashes.
+Documentation changes use the separately frozen documentation snapshot below;
+changed example sources or binaries need fresh focused SDK checks.
+
 ## Release sequence
 
 1. Build the runtime, both API artifacts, and both independent examples.
@@ -155,7 +173,8 @@ A release additionally supplies:
   CEE property/panel and native PG board example.
 - Eight locked `client_acceptance` proofs: both profiles and backends, graphical
   and actual two-client multiplayer.
-- Locked `base_world` and `pinout_world` descriptors for the exact accepted ZIPs.
+- Legacy releases lock `base_world` and `pinout_world` descriptors. New combined
+  releases lock `stationary_yard` and `stationary_yard_acceptance` instead.
 - Locked `base_workshop_world` and `pinout_workshop_world` descriptors for the
   separate accepted API Workshop ZIPs. API client proofs bind to these archives.
 
