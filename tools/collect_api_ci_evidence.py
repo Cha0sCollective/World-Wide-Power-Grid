@@ -259,7 +259,20 @@ def matrix_job(directory, combination, source_sha, run_id, run_attempt, root=ROO
         oracle = run / 'api' / name
         require(oracle.is_file() and oracle.stat().st_size > 0, f'Pre-solve saved-state oracle missing: {name}')
         evidence.append(oracle)
-    for namespace, folder in [('wwpg_yard', 'yard'), ('wwpg_api_world', 'api-workshop')]:
+    combined_yard = source.get('stationary_yard_policy') == 'combined-pinout-v1'
+    if combined_yard:
+        safety_namespaces = {'wwpg_unload', 'wwpg_solver_safety', 'wwpg_matrix_ownership', 'wwpg_meter_sampling'}
+        if backend == 'NATIVE':
+            safety_namespaces.add('wwpg_native_guard')
+        packaged(run / 'safety', safety_namespaces, ['SETUP'], hashes, profile, backend, evidence)
+        log(run / 'safety/logs/latest.log', evidence)
+    world_checks = [('wwpg_api_world', 'api-workshop')]
+    if not combined_yard or (run / 'yard').is_dir():
+        require(not combined_yard or profile == 'PINOUT', 'Combined stationary yard must execute the PINOUT profile')
+        world_checks.insert(0, ('wwpg_yard', 'yard'))
+    if combined_yard and platform == 'ubuntu-24.04' and profile == 'PINOUT':
+        require((run / 'yard').is_dir(), 'Linux combined stationary yard is missing')
+    for namespace, folder in world_checks:
         packaged(run / folder, {namespace}, ['SETUP', 'VERIFY', 'VERIFY', 'VERIFY'], hashes, profile, backend, evidence)
         packaged(run / ('exported-' + folder), {namespace}, ['VERIFY'] * 3, hashes, profile, backend, evidence)
         for origin in [folder, 'exported-' + folder]:

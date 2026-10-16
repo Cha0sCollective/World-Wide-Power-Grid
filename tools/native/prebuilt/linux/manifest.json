@@ -1,0 +1,29 @@
+{
+  "platform": "linux",
+  "sha256": "5c9698801a63452c839963ac9473559b6ce2dd8dac21eea610b43cf3741f6f8b",
+  "inputs": {
+    "tools/build_native_solver.py": "0d541e6d0898e3023ae39e5e13905b6581abfec27266ee6fab847640287cc77d",
+    "tools/native/CMakeLists.txt": "fa748181d2b787400e2e1f03bb93445ee630f1fcc8b0b7a5e6bf59c2fcdb62af",
+    "tools/native/jni-linux/jni_md.h": "a27e4594713e0a0c961a7228ffb87d45446b02231bbf5c831210bdeef5800bf0",
+    "tools/native/pg-safety.patch": "c1afd6488c3d23976054f6bd0cfda87f3ebceadab5fd62c9f48a4d5029ab8530",
+    "tools/native/sources.lock.json": "b1eb66114de651215076bbd8ad2b7b65d0af0ae724cb983ccbd081e5ed466c5d",
+    "tools/native/superlu-safety.patch": "86b00296b8e32812760cc9785705e1ace503c346f5761ce9110b3102d79c9dbc"
+  },
+  "source_lock": {
+    "PowerGrid": {
+      "repository": "patryk3211/PowerGrid",
+      "commit": "0938be067fb71f311b3e5fd6c5f7cdaed722e241",
+      "archive_sha256": "6ff5b70541259ad961cf4fb46c5b79b3fd303c90ff729f02ee1fae9e387be70c"
+    },
+    "superlu": {
+      "repository": "xiaoyeli/superlu",
+      "commit": "a390700c6a5fc8f2450417b3103710e1d90b5163",
+      "archive_sha256": "7db831f4ceed94d35e682e9e8f1b1b301aad1bba31e5e04ba8c172410ae37567"
+    },
+    "OpenBLAS": {
+      "repository": "OpenMathLib/OpenBLAS",
+      "commit": "cd02751b12a909f13ad51163dfe8a54f69af5c94",
+      "archive_sha256": "e243a8c6ebdf26a63d30866d3970339c7dd59eac9e32a2dfea88466ed82a30ac"
+    }
+  }
+}

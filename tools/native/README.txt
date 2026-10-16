@@ -21,6 +21,14 @@ Windows cross-builds also require a MinGW toolchain. Native resources are copied
 to build/guarded-pg-native with a checksummed manifest. Gradle verifies the
 manifest before packaging. Never reuse native output after changing a patch.
 
+prebuilt/ contains the exact guarded libraries accepted with dev.94, their
+input manifests and upstream licenses. Clean checkouts use these frozen inputs;
+an existing build/guarded-pg-native directory takes precedence and is still
+validated. Select an explicit workspace directory with
+-PguardedNativeDirectory=tools/native/prebuilt (or build/guarded-pg-native).
+Patch/source changes invalidate the pinned input hashes and require an explicit
+native rebuild. Packaging never silently falls back after a validation failure.
+
 NativeBootstrap selects only the verified guarded resource, in a directory
 named for its checksum. Existing administrator-installed v7 files are retained
 but cannot silently bypass these checks. A guarded load failure disables the

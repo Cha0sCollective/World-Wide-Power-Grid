@@ -322,7 +322,12 @@ tasks.register('preparePgNative', Sync) {
 }
 // Native compilation is explicit; normal Java checks never start a compiler or full suite.
 tasks.register('prepareGuardedPgNative') {
-    def source = layout.buildDirectory.dir('guarded-pg-native')
+    def source = providers.provider {
+        if (project.hasProperty('guardedNativeDirectory'))
+            return layout.projectDirectory.dir(project.property('guardedNativeDirectory').toString())
+        def localBuild = layout.buildDirectory.dir('guarded-pg-native').get()
+        localBuild.asFile.exists() ? localBuild : layout.projectDirectory.dir('tools/native/prebuilt')
+    }
     def destination = layout.buildDirectory.dir('guarded-native-resources/native/safe')
     inputs.files(fileTree('tools/native'), file('tools/build_native_solver.py'))
     inputs.dir(source)
