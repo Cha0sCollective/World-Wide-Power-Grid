@@ -90,6 +90,15 @@ only a version declaration change; the other four jars must retain their hashes.
 Original proof sources stay unchanged. Neither record accepts changed runtime
 code, replaced native binaries or new example sources without fresh checks.
 
+A `retained_ci_cohort` can combine completed Java jobs with a Native reference
+continuation. It retains each run's actual source, job outcomes and uploaded
+artifacts. The narrow `resume_native_from_run` workflow input accepts only a
+completed failure at the isolated upstream-reference step, with every preceding
+process passing and all five runtime/API/example jars byte-identical. It keeps
+the original failed artifact and reruns the corrected reference and its unexecuted
+successors. This records assembled coverage; it does not call the failed workflow
+a passing run. Both platforms and both installation profiles remain required.
+
 ## Stage and inspect the five downloads
 
 ```text

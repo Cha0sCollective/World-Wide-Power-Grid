@@ -433,6 +433,12 @@ tasks.register('runPackagedGameTestServer', JavaExec) {
 
 // A test-only jar keeps the native resource repair but removes the electrical
 // bridge hooks, allowing the pinned upstream solvers to capture reference worlds.
+sourceSets {
+    referenceControl {
+        java.srcDir 'tools/reference_control'
+        compileClasspath = sourceSets.main.compileClasspath + sourceSets.main.output + sourceSets.extensionApi.output + sourceSets.ceeApi.output
+    }
+}
 tasks.register('prepareReferenceConfig') {
     def output = layout.buildDirectory.file('reference-config/wwpg.mixins.json')
     outputs.file output
@@ -441,17 +447,18 @@ tasks.register('prepareReferenceConfig') {
         target.parentFile.mkdirs()
         target.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson([
             required: true, minVersion: '0.8', package: 'org.cha0scollective.wwpg.mixin',
-            compatibilityLevel: 'JAVA_21', mixins: ['NativeResourceMixin', 'PgNativeFailureMixin', 'PgSolverFailureMixin', 'RegistrateCallbacksMixin', 'ElectricalNetworkAccessor'],
+            compatibilityLevel: 'JAVA_21', mixins: ['NativeResourceMixin', 'PgNativeFailureMixin', 'PgSolverFailureMixin', 'RegistrateCallbacksMixin', 'ElectricalNetworkAccessor', 'ReferenceTeardownMixin'],
             client: [], injectors: [defaultRequire: 1]
         ])) + '\n'
     }
 }
 tasks.register('referenceJar', Jar) {
-    dependsOn tasks.named('classes'), tasks.named('prepareReferenceConfig')
+    dependsOn tasks.named('classes'), tasks.named('referenceControlClasses'), tasks.named('prepareReferenceConfig')
     archiveClassifier = 'upstream-reference-tests'
     from(sourceSets.main.output) { exclude 'wwpg.mixins.json' }
     from sourceSets.extensionApi.output
     from sourceSets.ceeApi.output
+    from sourceSets.referenceControl.output
     from(layout.buildDirectory.dir('reference-config'))
     manifest.attributes 'MixinConfigs': 'wwpg.mixins.json'
 }

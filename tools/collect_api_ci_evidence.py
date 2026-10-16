@@ -49,16 +49,21 @@ def write(path, value):
     path.write_text(json.dumps(value, indent=2) + '\n', encoding='utf-8', newline='\n')
 
 
-def metadata(run, jobs, index, linux_only=False):
-    require(run.get('status') == 'completed' and run.get('conclusion') == 'success', 'Full CI run is not passing/complete')
+def metadata(run, jobs, index, linux_only=False, backend=None):
+    require(backend in {None, 'NATIVE', 'JAVA'}, 'Unknown CI backend selection')
+    require(run.get('status') == 'completed' and (run.get('conclusion') == 'success'
+            or backend == 'JAVA' and run.get('conclusion') == 'failure'), 'Requested CI run is not complete/passing')
     require(run.get('path') == '.github/workflows/build.yml', 'Wrong CI workflow')
     require(re.fullmatch(r'[0-9a-f]{40}', run.get('head_sha', '')), 'CI lacks its actual immutable source SHA')
     require(run.get('html_url') == f'https://github.com/{REPO}/actions/runs/{run.get("id")}', 'Wrong repository/run provenance')
     combinations = {c for c in COMBINATIONS if c[0] == 'ubuntu-24.04'} if linux_only else COMBINATIONS
-    expected = {f'build ({platform}, {backend}, {profile})': (platform, backend, profile)
-                for platform, backend, profile in combinations}
+    all_names = {f'build ({p}, {b}, {f})' for p,b,f in combinations}
+    expected = {f'build ({p}, {b}, {f})': (p,b,f) for p,b,f in combinations if backend is None or b == backend}
     values = jobs.get('jobs', [])
-    require(len(values) == len(expected) and {job.get('name') for job in values} == set(expected), 'Missing/duplicate requested CI job')
+    names = [job.get('name') for job in values]
+    require(len(names) == len(set(names)) and set(names) in (all_names, set(expected)), 'Missing/duplicate requested CI job')
+    values = [job for job in values if job.get('name') in expected]
+    require(len(values) == len(expected), 'Selected backend coverage is incomplete')
     required_steps = {'Record the exact checked-out source and CI attempt',
                       'Build runtime and publish both SDK APIs to an isolated local Maven repository',
                       'Build the general example independently against published Maven API artifacts',
@@ -77,7 +82,11 @@ def metadata(run, jobs, index, linux_only=False):
         require(job.get('status') == 'completed' and job.get('conclusion') == 'success', 'A required matrix job failed')
         require(job.get('run_id') == run['id'] and job.get('run_attempt') == run.get('run_attempt'), 'Job belongs to a different run/attempt')
         steps = {step.get('name'): step for step in job.get('steps', [])}
-        require(required_steps <= steps.keys() and all(steps[name].get('conclusion') == 'success' for name in required_steps),
+        checked_steps = required_steps
+        if steps.get('Restore passing prefix before the isolated reference failure', {}).get('conclusion') == 'success':
+            checked_steps = required_steps - {'Verify global freeze and one-tick stepping in an isolated API fixture',
+                                               'Verify stopped-before-ready persisted wire retirement'}
+        require(checked_steps <= steps.keys() and all(steps[name].get('conclusion') == 'success' for name in checked_steps),
                 'Actual runtime/independent SDK/pause job steps did not pass')
         platform, backend, profile = expected[job['name']]
         name = f'wwpg-{platform}-{backend}-{profile}'
@@ -306,7 +315,35 @@ def matrix_job(directory, combination, source_sha, run_id, run_attempt, root=ROO
         require(int(suite.attrib.get('failures', 0)) == int(suite.attrib.get('errors', 0)) == 0, 'JUnit equation/contract/state check failed')
         tests += int(suite.attrib.get('tests', 0)); evidence.append(path)
     require(tests > 0, 'No actual JUnit checks ran')
-    return dict(schema=1, completed=True, passed=True, unresolved_failures=[], artifact_hashes=hashes,
+    continuation = {}
+    receipt_path = directory / 'build/retained-ci/receipt.json'
+    if receipt_path.is_file():
+        import ci_reference_continuation
+        receipt = read(receipt_path)
+        ci_reference_continuation.validate(receipt, directory)
+        reference = next(value for value in values if value['upstream'])
+        control_jar = directory / 'build/libs' / reference['artifact']
+        require(control_jar.is_file() and sha(control_jar) == reference['sha256'], 'Corrected reference jar identity is missing')
+        with checked_zip(control_jar) as control, checked_zip(paths['runtime']) as runtime:
+            mixins = json.loads(control.read('wwpg.mixins.json'))['mixins']
+            require(set(mixins) == {'NativeResourceMixin', 'PgNativeFailureMixin', 'PgSolverFailureMixin',
+                    'RegistrateCallbacksMixin', 'ElectricalNetworkAccessor', 'ReferenceTeardownMixin'},
+                    'Control changed electrical hooks instead of only its teardown')
+            require(all(control.read(n) == runtime.read(n) for n in runtime.namelist()
+                        if n.endswith(('.class', '.dll', '.so'))), 'Control changed measured runtime classes or native guards')
+            require('org/cha0scollective/wwpg/mixin/ReferenceTeardownMixin.class' not in runtime.namelist(),
+                    'Test-only teardown leaked into the player jar')
+        evidence.append(control_jar)
+        def rebase(value):
+            if isinstance(value, dict):
+                result = {k: rebase(v) for k,v in value.items()}
+                if {'path','sha256','bytes'} <= value.keys():
+                    result['path'] = (directory / value['path']).resolve().relative_to(root).as_posix()
+                return result
+            if isinstance(value, list): return [rebase(v) for v in value]
+            return value
+        continuation = dict(retained_prefix=rebase(receipt), retained_prefix_provenance=descriptor(receipt_path, root))
+    return dict(schema=1, completed=True, passed=True, unresolved_failures=[], artifact_hashes=hashes, **continuation,
                 platform=platform, backend=backend, profile=profile, regression_checks_passed=count,
                 extension_checks_passed=api[0]['required_tests_passed'] + pause[0]['required_tests_passed'] + pending_restart[0]['required_tests_passed'],
                 api_namespaces_passed=sorted(API_NAMESPACES | {'wwpg_api_pause', 'wwpg_api_pending_restart'}), cold_restart_passes=3,
@@ -320,11 +357,11 @@ def matrix_job(directory, combination, source_sha, run_id, run_attempt, root=ROO
                 junit_checks_passed=tests, evidence_files=evidence)
 
 
-def aggregate(run_path, jobs_path, index_path, artifacts, output, root=ROOT, linux_only=False):
+def aggregate(run_path, jobs_path, index_path, artifacts, output, root=ROOT, linux_only=False, backend=None):
     root, artifacts, output = Path(root).resolve(), Path(artifacts).resolve(), Path(output).resolve()
     require(artifacts.is_relative_to(root) and output.is_relative_to(root) and not output.exists(), 'Use a fresh workspace evidence directory')
     run, jobs, index = read(run_path), read(jobs_path), read(index_path)
-    rows = metadata(run, jobs, index, linux_only)
+    rows = metadata(run, jobs, index, linux_only, backend)
     proofs, hashes = [], None
     for job, artifact, combination in sorted(rows, key=lambda row: row[2]):
         proof = matrix_job(artifacts / artifact['name'], combination, run['head_sha'], run['id'], run['run_attempt'], root)
@@ -338,6 +375,7 @@ def aggregate(run_path, jobs_path, index_path, artifacts, output, root=ROOT, lin
     ci = dict(schema=1, source_sha=run['head_sha'], status=run['status'], conclusion=run['conclusion'],
               url=run['html_url'], run_id=run['id'], run_attempt=run['run_attempt'], jobs=[],
               inputs={key: descriptor(path, root) for key, path in [('run', run_path), ('jobs', jobs_path), ('artifacts', index_path)]})
+    if backend: ci['selection_backend'] = backend
     require(len({proof['source_tree'] for _, _, proof in proofs}) == 1, 'CI jobs checked out different source trees')
     ci['source_tree'] = proofs[0][2]['source_tree']
     for job, (platform, backend, profile), proof in proofs:
@@ -353,7 +391,7 @@ def aggregate(run_path, jobs_path, index_path, artifacts, output, root=ROOT, lin
                      provenance=descriptor(output / 'ci.json', root), acceptance_scope='independent CI source project build; extracted SDK/client gates remain separate')
         if role == 'upstream_example': value['compiled_against_cee_api_sha256'] = hashes['cee_api']
         write(output / (key + '.json'), value)
-    summary = dict(schema=1, source_sha=run['head_sha'], artifact_hashes=hashes, matrix_evidence_complete=not linux_only,
+    summary = dict(schema=1, source_sha=run['head_sha'], artifact_hashes=hashes, matrix_evidence_complete=not linux_only and backend is None,
                    requested_platforms_complete=True, platforms=['ubuntu-24.04'] if linux_only else sorted({c[0] for c in COMBINATIONS}),
                    api_frozen=False, publishable=False, state='packaged_matrix_candidate',
                    remaining=['Exact downloadable SDK extraction/build', 'Graphical and two real TCP clients on both profiles/backends',
@@ -362,14 +400,14 @@ def aggregate(run_path, jobs_path, index_path, artifacts, output, root=ROOT, lin
     return summary
 
 
-def download(run_id, destination, linux_only=False):
+def download(run_id, destination, linux_only=False, backend=None):
     require(not destination.exists() and destination.resolve().is_relative_to(ROOT), 'Use a fresh workspace CI download')
     destination.mkdir(parents=True)
     for name, endpoint in [('run', ''), ('jobs', '/jobs'), ('artifacts', '/artifacts')]:
         args = ['gh', 'api', f'repos/{REPO}/actions/runs/{run_id}{endpoint}']
         result = subprocess.run(args, check=True, capture_output=True, text=True, encoding='utf-8')
         (destination / (name + '.json')).write_text(result.stdout, encoding='utf-8')
-    metadata(read(destination / 'run.json'), read(destination / 'jobs.json'), read(destination / 'artifacts.json'), linux_only)
+    metadata(read(destination / 'run.json'), read(destination / 'jobs.json'), read(destination / 'artifacts.json'), linux_only, backend)
     subprocess.run(['gh', 'run', 'download', str(run_id), '--repo', REPO, '--dir', str(destination / 'artifacts')], check=True)
     return destination / 'run.json', destination / 'jobs.json', destination / 'artifacts.json', destination / 'artifacts'
 
@@ -382,15 +420,16 @@ def main():
     parser.add_argument('--artifact-index', type=Path); parser.add_argument('--artifacts', type=Path)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--linux-only', action='store_true', help='Collect exactly four Linux combinations; does not certify Windows')
+    parser.add_argument('--backend', choices=['NATIVE', 'JAVA'], help='Explicit four-job cohort component; cannot certify the other backend')
     args = parser.parse_args()
     try:
         if args.collect_ci:
             require(args.download is not None, '--collect-ci needs a fresh --download directory')
-            inputs = download(args.collect_ci, args.download, args.linux_only)
+            inputs = download(args.collect_ci, args.download, args.linux_only, args.backend)
         else:
             require(all([args.run_json, args.jobs_json, args.artifact_index, args.artifacts]), 'Supply actual run/jobs/artifact-index JSON and downloaded artifact tree')
             inputs = args.run_json, args.jobs_json, args.artifact_index, args.artifacts
-        result = aggregate(*inputs, args.output, linux_only=args.linux_only)
+        result = aggregate(*inputs, args.output, linux_only=args.linux_only, backend=args.backend)
         print(json.dumps(result))
     except (EvidenceError, OSError, ValueError, KeyError, ET.ParseError, zipfile.BadZipFile, subprocess.CalledProcessError) as error:
         parser.exit(2, f'API CI evidence blocked: {error}\n')

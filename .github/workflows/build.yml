@@ -11,8 +11,13 @@ on:
         description: 'Retain separately verified Windows Pinout yard evidence; run only the Linux combined yard here'
         type: boolean
         default: false
+      resume_native_from_run:
+        description: 'Continue Native after an investigated reference teardown failure; retain its passing prefix and Java jobs'
+        type: string
+        default: ''
 permissions:
   contents: read
+  actions: read
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -26,7 +31,7 @@ jobs:
       fail-fast: false
       matrix:
         os: ${{ fromJSON(inputs.platforms == 'linux' && '["ubuntu-24.04"]' || '["ubuntu-24.04", "windows-latest"]') }}
-        backend: [NATIVE, JAVA]
+        backend: ${{ fromJSON(inputs.resume_native_from_run != '' && '["NATIVE"]' || '["NATIVE", "JAVA"]') }}
         profile: [BASE, PINOUT]
     steps:
       - uses: actions/checkout@v4
@@ -92,15 +97,22 @@ jobs:
         run: |
           python tools/package_api_release.py --example-source examples/extension-addon --output build/distributions/wwpg-api-example-1.0.0-source.zip
           python tools/package_api_release.py --example-source examples/cee-addon --output build/distributions/wwpg-upstream-api-example-1.0.0-source.zip
+      - name: Restore passing prefix before the isolated reference failure
+        if: inputs.resume_native_from_run != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/ci_reference_continuation.py --run '${{ inputs.resume_native_from_run }}' --platform '${{ matrix.os }}' --profile '${{ matrix.profile }}'
       - name: Build the downloadable adjustable-load starter from extracted SDK artifacts
-        if: matrix.profile == 'BASE'
+        if: matrix.profile == 'BASE' && inputs.resume_native_from_run == ''
         run: python tools/authoring_starter_acceptance.py prepare --output build/authoring-starter --runtime build/libs/wwpg-0.2.2-beta.4.jar
       - name: Verify starter controls, native tools, cold persistence and real chunk reload
-        if: matrix.profile == 'BASE'
+        if: matrix.profile == 'BASE' && inputs.resume_native_from_run == ''
         run: python tools/authoring_starter_acceptance.py server --output build/authoring-starter --runtime build/libs/wwpg-0.2.2-beta.4.jar --backend ${{ matrix.backend }}
       - name: Verify global freeze and one-tick stepping in an isolated API fixture
+        if: inputs.resume_native_from_run == ''
         run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api_pause -PtestDirectory=run/api-pause --no-daemon
       - name: Verify stopped-before-ready persisted wire retirement
+        if: inputs.resume_native_from_run == ''
         run: |
           python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api_pending_restart -PtestDirectory=run/api-pending-restart -PrestartPhase=SETUP --no-daemon
           cp run/api-pending-restart/logs/latest.log run/api-pending-restart/setup-phase.log
@@ -109,24 +121,31 @@ jobs:
           python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api_pending_restart -PtestDirectory=run/api-pending-restart -PrestartPhase=VERIFY --no-daemon
           cp run/api-pending-restart/logs/latest.log run/api-pending-restart/verify-phase.log
       - name: Run both packaged public API example fixture suites
+        if: inputs.resume_native_from_run == ''
         run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api,wwpg_api_faults,wwpg_api_restart,wwpg_api_upstream,wwpg_api_upstream_restart -PtestDirectory=run/api --no-daemon
       - name: Three cold restarts of the packaged API example assemblies
+        if: inputs.resume_native_from_run == ''
         run: |
           for pass in 1 2 3; do
             python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces=wwpg_api,wwpg_api_faults,wwpg_api_restart,wwpg_api_upstream,wwpg_api_upstream_restart -PtestDirectory=run/api -PrestartPhase=VERIFY --no-daemon
             cp run/api/logs/latest.log "run/api/restart-${pass}.log"
           done
       - run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PrestartPhase=SETUP --no-daemon
+        if: inputs.resume_native_from_run == ''
       - name: Verify restoration pauses, storage, independent factories and graph couplings
+        if: inputs.resume_native_from_run == ''
         run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_loading -PtestDirectory=run/loading --no-daemon
       - name: Verify native board assembly has its own powered backend audit
+        if: inputs.resume_native_from_run == ''
         run: python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestNamespaces=wwpg_board_startup -PtestDirectory=run/board-startup --no-daemon
       - name: Verify matrix ownership, unload regrouping, guarded rejection and handheld connectors
+        if: inputs.resume_native_from_run == ''
         run: |
           namespaces=wwpg_unload,wwpg_solver_safety,wwpg_matrix_ownership,wwpg_meter_sampling
           if [ '${{ matrix.backend }}' = NATIVE ]; then namespaces="$namespaces,wwpg_native_guard"; fi
           python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PtestApiAddon=true -PtestNamespaces="$namespaces" -PtestDirectory=run/safety --no-daemon
       - name: Three consecutive cold world restarts
+        if: inputs.resume_native_from_run == ''
         run: |
           for pass in 1 2 3; do
             python tools/run_checked.py -- ./gradlew runPackagedGameTestServer -PtestProfile=${{ matrix.profile }} -PtestBackend=${{ matrix.backend }} -PrestartPhase=VERIFY --no-daemon
@@ -184,6 +203,11 @@ jobs:
           name: wwpg-${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}
           path: |
             build/ci-source.json
+            build/retained-ci/receipt.json
+            build/retained-ci/run.json
+            build/retained-ci/job.json
+            build/retained-ci/artifact.json
+            build/retained-ci/original-failed-artifact.zip
             build/libs/*.jar
             build/api-contract.json
             build/cee-api-contract.json

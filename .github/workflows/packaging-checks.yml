@@ -30,3 +30,4 @@ jobs:
       - run: python tools/test_extracted_api_sdk.py
       - run: python tools/test_release_acceptance_reuse.py
       - run: python tools/test_combined_stationary_release.py
+      - run: python tools/test_ci_reference_continuation.py

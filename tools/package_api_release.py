@@ -404,8 +404,14 @@ def validate_pending_restart(proof, root, hashes, version=None):
                 'Pending restart omitted a required actual assertion: ' + name)
 
 
-def validate_ci_acceptance(manifest, root, ci, source, hashes, version=None):
-    require(ci.get('source_sha') == source and ci.get('status') == 'completed' and ci.get('conclusion') == 'success',
+def validate_ci_acceptance(manifest, root, ci, source, hashes, version=None, selection=None):
+    if ci.get('kind') == 'retained_ci_cohort':
+        require(selection is None, 'Nested CI cohorts are not supported')
+        import release_ci_cohort
+        return release_ci_cohort.validate(ci, manifest, root, source, hashes, sys.modules[__name__], version)
+    require(selection in {None, 'NATIVE', 'JAVA'}, 'Invalid CI selection')
+    require(ci.get('source_sha') == source and ci.get('status') == 'completed' and (ci.get('conclusion') == 'success'
+            or selection == 'JAVA' and ci.get('conclusion') == 'failure'),
             'Fresh full CI has not passed on frozen source')
     require(re.fullmatch(r'https://github\.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/[0-9]+', ci.get('url', '')),
             'Missing repository CI provenance')
@@ -413,6 +419,9 @@ def validate_ci_acceptance(manifest, root, ci, source, hashes, version=None):
     combinations = {(j.get('platform'), j.get('backend'), j.get('profile')) for j in jobs}
     local = manifest.get('retained_windows_acceptance')
     expected = {c for c in COMBINATIONS if c[0] == 'ubuntu-24.04'} if local else COMBINATIONS
+    if selection is not None:
+        require(not local and ci.get('selection_backend') == selection, 'Partial CI requires an explicit complete cohort')
+        expected = {c for c in expected if c[1] == selection}
     require(len(jobs) == len(expected) and combinations == expected, 'Missing/duplicate required CI combination')
     if local:
         require(isinstance(manifest.get('acceptance_reuse'), dict), 'Local Windows acceptance requires version-only runtime reuse')
@@ -421,6 +430,9 @@ def validate_ci_acceptance(manifest, root, ci, source, hashes, version=None):
     for job in jobs:
         require(job.get('status') == 'completed' and job.get('conclusion') == 'success', 'A required CI job did not pass')
         proof = accepted_record(job.get('proof', {}), root, hashes, source)
+        if proof.get('retained_prefix'):
+            import ci_reference_continuation
+            ci_reference_continuation.validate(proof['retained_prefix'], root)
         require((proof.get('platform'), proof.get('backend'), proof.get('profile')) ==
                 (job['platform'], job['backend'], job['profile']), 'Proof profile/backend/platform mismatch')
         checkout = read(locked_file(proof.get('checked_out_source', {}), root))
