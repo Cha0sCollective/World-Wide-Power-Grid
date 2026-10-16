@@ -6,6 +6,8 @@
   "mixins": [
     "RegistrateCallbacksMixin",
     "NativeResourceMixin",
+    "PgNativeFailureMixin",
+    "PgSolverFailureMixin",
     "SolverConfigThreadMixin",
     "CircuitBuilderAccessor",
     "CircuitBuilderValidationMixin",

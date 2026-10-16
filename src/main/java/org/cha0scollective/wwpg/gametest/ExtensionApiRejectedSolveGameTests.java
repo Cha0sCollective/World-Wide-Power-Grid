@@ -32,6 +32,10 @@ import java.util.function.Function;
 public final class ExtensionApiRejectedSolveGameTests {
     @GameTest(template = "empty", timeoutTicks = 100)
     public static void nonthrowingRejectedSolveRollsBackCeeAndApiButKeepsHealthyCircuit(GameTestHelper helper) {
+        rejectedSolve(helper, false);
+    }
+
+    static void rejectedSolve(GameTestHelper helper, boolean nativeFactorFailure) {
         var supplyRelative = new BlockPos(1, 2, 1);
         var ballastRelative = new BlockPos(3, 2, 1);
         var ceeCapacitorRelative = new BlockPos(5, 2, 1);
@@ -87,7 +91,14 @@ public final class ExtensionApiRejectedSolveGameTests {
             // Limit the actual native/Java Newton loop, rather than spoofing its
             // convergence flag or throwing from an extension callback. Changing
             // the supply leaves a nonzero pre-update residual after one iteration.
-            network[0].maxIterations = hooks -> 1;
+            if (nativeFactorFailure) {
+                var solver = ((org.cha0scollective.wwpg.mixin.ElectricalNetworkAccessor)network[0]).wwpg$solver();
+                helper.assertTrue(solver.type() == org.patryk3211.powergrid.config.CSolver.SolverBackend.NATIVE,
+                        "Native factorization fixture ran another backend");
+                // Omit the matrix stamps deliberately; the real native factorizer
+                // must reject this circuit before publishing another frame.
+                solver.jacobianPrepareForWrite(); solver.finishJacobianWrite();
+            } else network[0].maxIterations = hooks -> 1;
             ((CreativeSourceBlockEntity) level.getBlockEntity(supply)).setValue(40);
             ((CreativeSourceBlockEntity) level.getBlockEntity(healthySupply)).setValue(15);
         });
@@ -106,7 +117,8 @@ public final class ExtensionApiRejectedSolveGameTests {
         helper.runAtTickTime(22, () -> {
             assertRejected(helper, apiCapacitor, ceeCapacitor);
             helper.assertTrue(org.cha0scollective.wwpg.bridge.Bridges.get(level).diagnostics().stream()
-                            .anyMatch(message -> message.contains("PG electrical substep did not converge")),
+                            .anyMatch(message -> message.contains(nativeFactorFailure
+                                    ? "PG native solve rejected:" : "PG electrical substep did not converge")),
                     "True backend nonconvergence was concealed as ordinary warm-up");
             var capacitor = DevicesSavedData.load(level).getDevice(ceeCapacitor, CapacitorDevice.class);
             helper.assertTrue(capacitor.lastVoltage == nativeSaved[0] && capacitor.temp == nativeSaved[1]
@@ -125,6 +137,7 @@ public final class ExtensionApiRejectedSolveGameTests {
                     "Unrelated healthy extension was isolated");
             meters[0].assertUnavailable("Second rejected electrical frame");
             network[0].maxIterations = limits[0];
+            if (nativeFactorFailure) network[0].setDirty();
         });
         helper.runAtTickTime(35, () -> {
             helper.assertTrue(ElectricalMeasurements.read(level, apiCapacitor).status() == MeasurementStatus.VALID,
@@ -133,7 +146,8 @@ public final class ExtensionApiRejectedSolveGameTests {
             helper.assertTrue(capacitor.lastVoltage > nativeSaved[0], "CEE storage did not resume after a valid solve");
             meters[0].assertAvailable("Recovered electrical frame");
             DynamicGameTests.audit(helper);
-            com.mojang.logging.LogUtils.getLogger().info("API_NONCONVERGENCE_PASSED: rollback=true; healthyCircuit=true; recovered=true");
+            com.mojang.logging.LogUtils.getLogger().info("{}: rollback=true; healthyCircuit=true; recovered=true",
+                    nativeFactorFailure ? "API_NATIVE_FACTORIZATION_REJECTION_PASSED" : "API_NONCONVERGENCE_PASSED");
             helper.succeed();
         });
     }

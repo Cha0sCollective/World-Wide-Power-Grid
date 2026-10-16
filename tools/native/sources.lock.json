@@ -1,0 +1,17 @@
+{
+  "PowerGrid": {
+    "repository": "patryk3211/PowerGrid",
+    "commit": "0938be067fb71f311b3e5fd6c5f7cdaed722e241",
+    "archive_sha256": "6ff5b70541259ad961cf4fb46c5b79b3fd303c90ff729f02ee1fae9e387be70c"
+  },
+  "superlu": {
+    "repository": "xiaoyeli/superlu",
+    "commit": "a390700c6a5fc8f2450417b3103710e1d90b5163",
+    "archive_sha256": "7db831f4ceed94d35e682e9e8f1b1b301aad1bba31e5e04ba8c172410ae37567"
+  },
+  "OpenBLAS": {
+    "repository": "OpenMathLib/OpenBLAS",
+    "commit": "cd02751b12a909f13ad51163dfe8a54f69af5c94",
+    "archive_sha256": "e243a8c6ebdf26a63d30866d3970339c7dd59eac9e32a2dfea88466ed82a30ac"
+  }
+}

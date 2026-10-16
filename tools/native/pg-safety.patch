@@ -1,0 +1,345 @@
+--- a/native/src/powergridNative/c/solver.c
++++ b/native/src/powergridNative/c/solver.c
+@@ -44,11 +44,13 @@
+     free(solver->m_state);
+     free(solver->m_residual);
+     free(solver->m_stateDelta);
++    free(solver->m_checkpoint);
+     solver->m_b = 0;
+     solver->m_rhs = 0;
+     solver->m_state = 0;
+     solver->m_residual = 0;
+     solver->m_stateDelta = 0;
++    solver->m_checkpoint = 0;
+ 
+     PG_TRACE("[Solver::free_bufs] Deleting old jBuffers");
+     if(solver->m_stateBuffer != 0) {
+@@ -83,6 +85,16 @@
+     solver->m_state = ALLOC(double, size);
+     solver->m_residual = ALLOC(double, size);
+     solver->m_stateDelta = ALLOC(double, size);
++    solver->m_checkpoint = ALLOC(double, size);
++    if(!solver->m_b || !solver->m_rhs || !solver->m_state || !solver->m_residual || !solver->m_stateDelta || !solver->m_checkpoint) {
++        solver_free_bufs(solver);
++        solver->m_size = 0;
++        solver->m_converged = FALSE;
++        solver->m_aux->status = 0;
++        jclass type = (*solver->m_env)->FindClass(solver->m_env, "java/lang/OutOfMemoryError");
++        if(type) (*solver->m_env)->ThrowNew(solver->m_env, type, "Cannot allocate PG native state/checkpoint buffers");
++        return;
++    }
+     memset(solver->m_rhs, 0, sizeof(double) * size);
+     memset(solver->m_state, 0, sizeof(double) * size);
+ 
+@@ -165,12 +177,48 @@
+     (*solver->m_env)->CallVoidMethod(solver->m_env, mnaObj, solver->m_reportProblemsMethod, norm, i, buf);
+ }
+ 
++// Inspect every row: BLAS idamax can select a finite row while other rows are NaN.
++static int solver_finite(const double *values, int size) {
++    for(int row = 0; row < size; ++row) if(!isfinite(values[row])) return FALSE;
++    return TRUE;
++}
++
++static double solver_residual_norm(solver_t *solver) {
++    double norm = 0;
++    for(int row = 0; row < solver->m_size; ++row) {
++        double value = fabs(solver->m_residual[row]);
++        if(!isfinite(value)) return NAN;
++        if(value > norm) norm = value;
++    }
++    return norm;
++}
++
++static jobject solver_failed(solver_t *solver, int info) {
++    solver->m_converged = FALSE;
++    solver->m_aux->status = 0;
++    // A Java hook can already hold either direct buffer. Restore both on failure.
++    memcpy(solver->m_state, solver->m_checkpoint, solver->m_size * sizeof(double));
++    memcpy(solver->m_b, solver->m_checkpoint, solver->m_size * sizeof(double));
++    if(!(*solver->m_env)->ExceptionCheck(solver->m_env)) {
++        char message[256];
++        snprintf(message, sizeof(message),
++            "PG native solve rejected: info=%d, rows=%d, nnz=%d (row permutation=-1001, column permutation=-1002, missing LU=-1003, nonfinite state/residual=-1004, callback=-1005)",
++            info, solver->m_size, solver->m_A.m_elementCount);
++        jclass type = (*solver->m_env)->FindClass(solver->m_env, "java/lang/IllegalStateException");
++        if(type) (*solver->m_env)->ThrowNew(solver->m_env, type, message);
++    }
++    return NULL;
++}
++
+ jobject solver_single_tick(solver_t *solver, int maxIters, jobject mnaObj, int cmdCount) {
+     if(solver->m_size == 0)
+         return 0;
+     PG_TRACE("[Solver::singleTick] entering");
++    memcpy(solver->m_checkpoint, solver->m_state, solver->m_size * sizeof(double));
++    solver->m_aux->status = 0;
+     solver_process_jacobian_buffer(solver, cmdCount);
+     solver_process_rhs_buffer(solver);
++    if(!solver_finite(solver->m_state, solver->m_size) || !solver_finite(solver->m_rhs, solver->m_size)) return solver_failed(solver, -1004);
+     PG_TRACE("[Solver::singleTick] RHS buffer processed");
+ 
+     int i;
+@@ -180,14 +228,19 @@
+             // Run inner hooks
+             PG_ASSERT_(solver->m_stateBuffer, "jBuffer 'state' not initialized!");
+             int cmdCount = (*solver->m_env)->CallIntMethod(solver->m_env, mnaObj, solver->m_iterHookMethod, i, solver->m_stateBuffer);
++            if((*solver->m_env)->ExceptionCheck(solver->m_env)) return solver_failed(solver, -1005);
+             if(cmdCount != 0)
+                 solver_process_jacobian_buffer(solver, cmdCount);
+         }
++
++        // A zero residual must not turn a latched factorization failure into acceptance.
++        if(solver->m_A.m_factorInfo) return solver_failed(solver, solver->m_A.m_factorInfo);
+ 
+         // Compute residual vector
+         memcpy(solver->m_b, solver->m_rhs, solver->m_size * sizeof(double));
+         PG_ASSERT_(solver->m_bBuffer, "jBuffer 'b' not initialized!");
+         (*solver->m_env)->CallVoidMethod(solver->m_env, mnaObj, solver->m_residualAddMethod, solver->m_bBuffer);
++        if((*solver->m_env)->ExceptionCheck(solver->m_env)) return solver_failed(solver, -1005);
+         memcpy(solver->m_residual, solver->m_b, solver->m_size * sizeof(double));
+         int inc = 1;
+ 
+@@ -195,15 +248,17 @@
+         // R = A * x - R
+         SuperMatrix* A = sparsematrix_supermatrix(&solver->m_A);
+         sp_dgemv(&trans, 1.0, A, solver->m_state, 1, -1.0, solver->m_residual, 1);
+-        int idxMax = idamax_(&solver->m_size, solver->m_residual, &inc);
+-        double nextNorm = fabs(solver->m_residual[idxMax - 1]);
++        double nextNorm = solver_residual_norm(solver);
++        if(!isfinite(nextNorm)) return solver_failed(solver, -1004);
+         double dNorm = fabs(nextNorm - norm);
+         norm = nextNorm;
+         if(norm < solver->m_absoluteStoppingCriterion || dNorm < solver->m_relativeStoppingCriterion)
+             break;
+ 
+         // Solve A * x = b
+-        sparsematrix_solve(&solver->m_A, &solver->m_B);
++        int info = sparsematrix_solve(&solver->m_A, &solver->m_B);
++        if(info) return solver_failed(solver, info);
++        if(!solver_finite(solver->m_b, solver->m_size)) return solver_failed(solver, -1004);
+         // B is now the state vector
+         solver_swap_buffers(solver);
+         // x = new state, b = old state
+@@ -217,17 +272,19 @@
+                 // Run inner hooks
+                 PG_ASSERT_(solver->m_stateBuffer, "jBuffer 'state' not initialized!");
+                 int cmdCount = (*solver->m_env)->CallIntMethod(solver->m_env, mnaObj, solver->m_iterHookMethod, i, solver->m_stateBuffer);
++                if((*solver->m_env)->ExceptionCheck(solver->m_env)) return solver_failed(solver, -1005);
+                 if(cmdCount != 0)
+                     solver_process_jacobian_buffer(solver, cmdCount);
+                 // Compute residual vector
+                 memcpy(solver->m_b, solver->m_rhs, solver->m_size * sizeof(double));
+                 PG_ASSERT_(solver->m_bBuffer, "jBuffer 'b' not initialized!");
+                 (*solver->m_env)->CallVoidMethod(solver->m_env, mnaObj, solver->m_residualAddMethod, solver->m_bBuffer);
++                if((*solver->m_env)->ExceptionCheck(solver->m_env)) return solver_failed(solver, -1005);
+                 memcpy(solver->m_residual, solver->m_b, solver->m_size * sizeof(double));
+                 // R = A * x - R
+                 sp_dgemv(&trans, 1.0, A, solver->m_state, 1, -1.0, solver->m_residual, 1);
+-                idxMax = idamax_(&solver->m_size, solver->m_residual, &inc);
+-                double testNorm = fabs(solver->m_residual[idxMax - 1]);
++                double testNorm = solver_residual_norm(solver);
++                if(!isfinite(testNorm)) return solver_failed(solver, -1004);
+                 if(testNorm < norm)
+                     break;
+                 double deltaAlpha = -(1 - alpha) * 0.5;
+@@ -240,9 +297,11 @@
+     }
+     PG_TRACE("[Solver::singleTick] post loop");
+ 
++    if(!solver_finite(solver->m_state, solver->m_size)) return solver_failed(solver, -1004);
+     if(norm > solver->m_minimumAllowedPrecision) {
+         if(solver->m_converged)
+             solver_convergence_problems(solver, mnaObj, norm, i);
++        if((*solver->m_env)->ExceptionCheck(solver->m_env)) return solver_failed(solver, -1005);
+         solver->m_converged = FALSE;
+     } else {
+         solver->m_converged = TRUE;
+--- a/native/src/powergridNative/c/sparse.c
++++ b/native/src/powergridNative/c/sparse.c
+@@ -27,12 +27,14 @@
+     free(matrix->m_permC);
+     free(matrix->m_permR);
+     free(matrix->m_etree);
++    free(matrix->m_permutationSeen);
+     matrix->m_columns = 0;
+     matrix->m_rowIndices = 0;
+     matrix->m_elements = 0;
+     matrix->m_permC = 0;
+     matrix->m_permR = 0;
+     matrix->m_etree = 0;
++    matrix->m_permutationSeen = 0;
+ }
+ 
+ void sparsematrix_destroy(sparsematrix_t *matrix) {
+@@ -48,14 +50,17 @@
+         Destroy_CompCol_Permuted(&matrix->m_AC);
+         matrix->m_AC.Store = 0;
+     }
+-    if(matrix->m_L.Store != 0) {
+-        Destroy_SuperNode_Matrix(&matrix->m_L);
+-        matrix->m_L.Store = 0;
+-    }
+-    if(matrix->m_U.Store != 0) {
+-        Destroy_CompCol_Matrix(&matrix->m_U);
+-        matrix->m_U.Store = 0;
+-    }
++    // GlobalLU owns the buffers, including partial factors on an error exit.
++    // L/U are views and may still point at buffers replaced during refactorization.
++    if(matrix->m_L.Store) Destroy_SuperMatrix_Store(&matrix->m_L);
++    if(matrix->m_U.Store) Destroy_SuperMatrix_Store(&matrix->m_U);
++    matrix->m_L.Store = matrix->m_U.Store = NULL;
++    free(matrix->m_GLU.xsup); free(matrix->m_GLU.supno);
++    free(matrix->m_GLU.lsub); free(matrix->m_GLU.xlsub);
++    free(matrix->m_GLU.lusup); free(matrix->m_GLU.xlusup);
++    free(matrix->m_GLU.ucol); free(matrix->m_GLU.usub);
++    free(matrix->m_GLU.xusub); free(matrix->m_GLU.expanders);
++    memset(&matrix->m_GLU, 0, sizeof(matrix->m_GLU));
+     PG_TRACE("[SparseMatrix::freeMatrices] returning");
+ }
+ 
+@@ -69,6 +74,7 @@
+     matrix->m_flags |= SPARSE_MATRIX_STRUCTURE_MODIFIED;
+     if(size == 0)
+         return;
++    matrix->m_permutationSeen = ALLOC(unsigned char, size);
+     matrix->m_permC = ALLOC(int, size);
+     matrix->m_permR = ALLOC(int, size);
+     matrix->m_etree = ALLOC(int, size);
+@@ -83,6 +89,7 @@
+ }
+ 
+ void sparsematrix_zero(sparsematrix_t *matrix) {
++    matrix->m_factorInfo = 0;
+     PG_TRACE("[SparseMatrix::zero] Zeroing sparse matrix of size %d", matrix->m_size);
+     matrix->m_opts.Fact = DOFACT;
+     matrix->m_flags |= SPARSE_MATRIX_REFACTORIZE | SPARSE_MATRIX_STRUCTURE_MODIFIED;
+@@ -172,11 +179,13 @@
+ 
+ void sparsematrix_set(sparsematrix_t *matrix, int row, int column, double value) {
+     *sparsematrix_ptr(matrix, row, column) = value;
++    matrix->m_factorInfo = 0;
+     matrix->m_flags |= SPARSE_MATRIX_REFACTORIZE;
+ }
+ 
+ void sparsematrix_add(sparsematrix_t *matrix, int row, int column, double value) {
+     *sparsematrix_ptr(matrix, row, column) += value;
++    matrix->m_factorInfo = 0;
+     matrix->m_flags |= SPARSE_MATRIX_REFACTORIZE;
+ }
+ 
+@@ -202,12 +211,38 @@
+     matrix->m_opts.Fact = value ? SamePattern_SameRowPerm : DOFACT;
+ }
+ 
+-void sparsematrix_factorize(sparsematrix_t *matrix) {
++// Negative values distinguish guard failures from SuperLU's positive INFO.
++static int permutation_valid(sparsematrix_t *matrix, const int *permutation) {
++    if(!permutation || !matrix->m_permutationSeen) return 0;
++    memset(matrix->m_permutationSeen, 0, matrix->m_size);
++    for(int i = 0; i < matrix->m_size; ++i) {
++        int value = permutation[i];
++        if(value < 0 || value >= matrix->m_size || matrix->m_permutationSeen[value]) return 0;
++        matrix->m_permutationSeen[value] = 1;
++    }
++    return 1;
++}
++
++static int factor_failed(sparsematrix_t *matrix, int info) {
++    matrix->m_factorInfo = info;
++    matrix->m_flags |= SPARSE_MATRIX_REFACTORIZE;
++    sparsematrix_free_logical(matrix);
++    return info;
++}
++
++int sparsematrix_factorize(sparsematrix_t *matrix) {
++    if(matrix->m_factorInfo) return matrix->m_factorInfo;
+     PG_TRACE("[SparseMatrix::factorize] entering");
+     if(matrix->m_flags & SPARSE_MATRIX_STRUCTURE_MODIFIED)
+         sparsematrix_form_logical_a(matrix);
+-    if(matrix->m_opts.Fact != SamePattern_SameRowPerm)
++    if(matrix->m_opts.Fact != SamePattern_SameRowPerm) {
+         sparsematrix_free_logical(matrix);
++    } else {
++        if(!matrix->m_L.Store || !matrix->m_U.Store) return factor_failed(matrix, -1003);
++        // dgstrf also indexes the old permutations to build their inverses.
++        if(!permutation_valid(matrix, matrix->m_permR)) return factor_failed(matrix, -1001);
++        if(!permutation_valid(matrix, matrix->m_permC)) return factor_failed(matrix, -1002);
++    }
+ 
+     /*
+      * Get column permutation vector perm_c[], according to permc_spec:
+@@ -221,6 +256,7 @@
+     if(matrix->m_opts.Fact == DOFACT) {
+         // When SamePattern_SameRowPerm is used we can reuse the already permuted AC matrix
+         get_perm_c(permc_spec, &matrix->m_A, matrix->m_permC);
++        if(!permutation_valid(matrix, matrix->m_permC)) return factor_failed(matrix, -1002);
+         sp_preorder(&matrix->m_opts, &matrix->m_A, matrix->m_permC, matrix->m_etree, &matrix->m_AC);
+         PG_TRACE("[SparseMatrix::factorize] preordered");
+     }
+@@ -231,17 +267,28 @@
+     /* Compute the LU factorization of A. */
+     int info;
+     dgstrf(&matrix->m_opts, &matrix->m_AC, relax, panel_size, matrix->m_etree, NULL, 0, matrix->m_permC, matrix->m_permR, &matrix->m_L, &matrix->m_U, &matrix->m_GLU, &matrix->m_stats, &info);
++    if(info) return factor_failed(matrix, info);
++    if(!permutation_valid(matrix, matrix->m_permR)) return factor_failed(matrix, -1001);
++    if(!permutation_valid(matrix, matrix->m_permC)) return factor_failed(matrix, -1002);
+     matrix->m_flags &= ~SPARSE_MATRIX_REFACTORIZE;
+     PG_TRACE("[SparseMatrix::factorize] returning");
+-}
+-
+-void sparsematrix_solve(sparsematrix_t *matrix, SuperMatrix *B) {
++    return 0;
++}
++
++int sparsematrix_solve(sparsematrix_t *matrix, SuperMatrix *B) {
++    if(matrix->m_factorInfo) return matrix->m_factorInfo;
+     PG_TRACE("[SparseMatrix::solve] entering");
+-    if(matrix->m_flags & SPARSE_MATRIX_REFACTORIZE)
+-        sparsematrix_factorize(matrix);
++    if(matrix->m_flags & SPARSE_MATRIX_REFACTORIZE) {
++        int info = sparsematrix_factorize(matrix);
++        if(info) return info;
++    }
++    if(!permutation_valid(matrix, matrix->m_permR)) return factor_failed(matrix, -1001);
++    if(!permutation_valid(matrix, matrix->m_permC)) return factor_failed(matrix, -1002);
++    if(!matrix->m_L.Store || !matrix->m_U.Store) return factor_failed(matrix, -1003);
+     int info;
+     dgstrs(NOTRANS, &matrix->m_L, &matrix->m_U, matrix->m_permC, matrix->m_permR, B, &matrix->m_stats, &info);
+     PG_TRACE("[SparseMatrix::solve] returning");
++    return info ? factor_failed(matrix, info) : 0;
+ }
+ 
+ /*
+--- a/native/src/powergridNative/include/solver.h
++++ b/native/src/powergridNative/include/solver.h
+@@ -35,6 +35,7 @@
+     double *m_rhs;
+     double *m_residual;
+     double *m_stateDelta;
++    double *m_checkpoint;
+ 
+     jobject m_stateBuffer;
+     jobject m_bBuffer;
+--- a/native/src/powergridNative/include/sparse.h
++++ b/native/src/powergridNative/include/sparse.h
+@@ -24,6 +24,8 @@
+     int m_elementsSize;
+     
+     char m_flags;
++    int m_factorInfo;
++    unsigned char *m_permutationSeen;
+     
+     SuperMatrix m_A;
+     NCformat m_Astore;
+@@ -55,8 +57,8 @@
+ 
+ void sparsematrix_same_pattern(sparsematrix_t *matrix, int value);
+ 
+-void sparsematrix_factorize(sparsematrix_t *matrix);
+-void sparsematrix_solve(sparsematrix_t *matrix, SuperMatrix *B);
++int sparsematrix_factorize(sparsematrix_t *matrix);
++int sparsematrix_solve(sparsematrix_t *matrix, SuperMatrix *B);
+ 
+ #if defined(__cplusplus)
+ }
