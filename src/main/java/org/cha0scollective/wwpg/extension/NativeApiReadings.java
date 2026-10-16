@@ -21,6 +21,10 @@ import org.patryk3211.powergrid.electricity.GlobalElectricNetworks;
 import org.patryk3211.powergrid.electricity.WorldNetworks;
 import org.patryk3211.powergrid.electricity.base.IElectric;
 import org.patryk3211.powergrid.electricity.base.ElectricBlock;
+import org.patryk3211.powergrid.electricity.base.ElectricBlockEntity;
+import org.patryk3211.powergrid.electricity.base.ElectricBehaviour;
+import org.patryk3211.powergrid.electricity.deviceconnector.BridgeElectricBehaviour;
+import org.patryk3211.powergrid.electricity.deviceconnector.DeviceConnectorBlock;
 import org.patryk3211.powergrid.electricity.sim.ElectricalNetwork;
 import org.patryk3211.powergrid.electricity.sim.node.OwnedFloatingNode;
 import org.patryk3211.powergrid.electricity.sim.special.TransmissionLine;
@@ -123,7 +127,9 @@ public final class NativeApiReadings {
             frames.put(frame.key, frame);
             try {
                 if (owner.nativeIds != null) {
-                    if (!owner.nativeIds.contains(endpoint.getTerminal())) { frame.unavailable(MeasurementStatus.NOT_READY, "Native terminal is unavailable"); continue; }
+                    if (!owner.nativeIds.contains(endpoint.getTerminal()) && !ownsNativeTerminal(owner, endpoint, frame.node)) {
+                        frame.unavailable(MeasurementStatus.NOT_READY, "Native terminal is unavailable"); continue;
+                    }
                 } else if (owner.ceeIds != null) {
                     if (!owner.ceeIds.contains(endpoint.getTerminal())) {
                         frame.unavailable(MeasurementStatus.NOT_READY, "CEE terminal is unavailable"); continue;
@@ -132,7 +138,7 @@ public final class NativeApiReadings {
                     if (isolation.isPresent()) {
                         frame.unavailable(MeasurementStatus.ISOLATED, isolation.get()); continue;
                     }
-                } else {
+                } else if (!ownsNativeTerminal(owner, endpoint, frame.node)) {
                     var api = owner.api;
                     if (api == null || api.ownerChanged() || api.terminalDefinition(endpoint.getTerminal()) == null) {
                         frame.unavailable(MeasurementStatus.NOT_READY, "Extension terminal is unavailable"); continue;
@@ -179,6 +185,16 @@ public final class NativeApiReadings {
     }
 
     private record Owner(BlockState state, BlockEntity entity, IntSet nativeIds, IntSet ceeIds, ApiElectric api) { }
+
+    /** Battery/generator controllers own nodes exposed physically by a proxy elsewhere. */
+    private static boolean ownsNativeTerminal(Owner owner, BlockWireEndpoint endpoint, OwnedFloatingNode node) {
+        if (!(owner.entity instanceof ElectricBlockEntity entity)) return false;
+        var behaviour = entity.getElectricBehaviour();
+        // Only the actual native owner qualifies; never traverse a proxy or
+        // initialize a connector merely to collect a controller's samples.
+        return behaviour != null && behaviour.getClass() == ElectricBehaviour.class
+                && behaviour.hasTerminal(endpoint.getTerminal()) && behaviour.getTerminal(endpoint.getTerminal()) == node;
+    }
     private Owner owner(BlockPos pos, Map<BlockState, IntSet> nativeTerminals) {
         var chunk = level.getChunkSource().getChunkNow(pos.getX() >> 4, pos.getZ() >> 4);
         long chunkPos = ChunkPos.asLong(pos);
@@ -277,7 +293,7 @@ public final class NativeApiReadings {
         if (nativeId < 0) throw new IllegalArgumentException("Native terminal ID must be nonnegative");
         var recorder = WORLDS.get(level);
         if (recorder == null) return unavailable(level, "No current terminal snapshot");
-        var frame = recorder.frames.get(new Key(pos, nativeId));
+        var frame = recorder.frameAt(pos, nativeId);
         var invalid = recorder.check(frame);
         return invalid == null ? new VoltageMeasurement(recorder.context, MeasurementStatus.VALID, Optional.of(frame.result), "") : invalid;
     }
@@ -287,8 +303,8 @@ public final class NativeApiReadings {
         if (idA < 0 || idB < 0) throw new IllegalArgumentException("Native terminal IDs must be nonnegative");
         var recorder = WORLDS.get(level);
         if (recorder == null) return unavailable(level, "No current terminal snapshot");
-        var first = recorder.frames.get(new Key(posA, idA));
-        var second = recorder.frames.get(new Key(posB, idB));
+        var first = recorder.frameAt(posA, idA);
+        var second = recorder.frameAt(posB, idB);
         var invalid = recorder.check(first); if (invalid != null) return invalid;
         invalid = recorder.check(second); if (invalid != null) return invalid;
         if (first.reference != second.reference)
@@ -299,6 +315,39 @@ public final class NativeApiReadings {
         } catch (RuntimeException error) {
             return VoltageMeasurement.unavailable(recorder.context, MeasurementStatus.SOLVE_FAILED, "Invalid differential voltage samples");
         }
+    }
+
+    /** Resolve a physical native proxy to an already captured canonical node. No alias cache or graph changes. */
+    private Frame frameAt(BlockPos pos, int nativeId) {
+        var direct = frames.get(new Key(pos, nativeId));
+        if (direct != null && (!(direct.node.endpoint instanceof BlockWireEndpoint endpoint)
+                || endpoint.getPos().equals(pos) && endpoint.getTerminal() == nativeId)) return direct;
+        try { return proxyFrame(pos, nativeId); }
+        catch (RuntimeException | LinkageError error) { return null; }
+    }
+
+    private Frame proxyFrame(BlockPos pos, int nativeId) {
+        if (!ApiTerminals.ready(level, pos) || ApiTerminals.pendingRemoval(level, pos)) return null;
+        var state = Terminals.loadedState(level, pos);
+        var nativePg = Terminals.nativePg(level, pos);
+        if (nativePg == null || !readNativeTerminalIds(nativePg, state).contains(nativeId)) return null;
+        if (!(ApiTerminals.loadedBlockEntity(level, pos) instanceof ElectricBlockEntity entity)) return null;
+        var behaviour = entity.getElectricBehaviour();
+        if (behaviour instanceof BridgeElectricBehaviour) {
+            // Bridge.getTerminal lazily constructs FE handlers and can destroy
+            // an uninitialized connector. Read its existing native target only.
+            if (!(state.getBlock() instanceof DeviceConnectorBlock)) return null;
+            var target = pos.relative(state.getValue(DeviceConnectorBlock.FACING));
+            if (!ApiTerminals.ready(level, target) || ApiTerminals.pendingRemoval(level, target)
+                    || !(ApiTerminals.loadedBlockEntity(level, target) instanceof ElectricBlockEntity main)) return null;
+            behaviour = main.getElectricBehaviour();
+            if (behaviour instanceof BridgeElectricBehaviour) return null;
+        }
+        if (behaviour == null || !behaviour.hasTerminal(nativeId)) return null;
+        var node = behaviour.getTerminal(nativeId);
+        if (node == null || !(node.endpoint instanceof BlockWireEndpoint canonical)) return null;
+        var frame = frames.get(new Key(canonical.getPos(), canonical.getTerminal()));
+        return frame != null && frame.node == node ? frame : null;
     }
 
     private VoltageMeasurement check(Frame frame) {

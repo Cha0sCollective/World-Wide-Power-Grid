@@ -154,6 +154,7 @@ tasks.named('processResources') {
     from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_solver_safety/structure' }
     from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_native_guard/structure' }
     from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_unload/structure' }
+    from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_meter_sampling/structure' }
 }
 tasks.named('jar') {
     from sourceSets.extensionApi.output
