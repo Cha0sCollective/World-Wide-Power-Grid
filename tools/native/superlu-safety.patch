@@ -1,0 +1,97 @@
+--- a/SRC/dgstrf.c
++++ b/SRC/dgstrf.c
+@@ -208,15 +208,15 @@
+     NCPformat *Astore;
+     int       *iperm_r = NULL; /* inverse of perm_r; used when 
+                                   options->Fact == SamePattern_SameRowPerm */
+-    int       *iperm_c; /* inverse of perm_c */
+-    int       *iwork;
+-    double    *dwork;
++    int       *iperm_c = NULL; /* inverse of perm_c */
++    int       *iwork = NULL;
++    double    *dwork = NULL;
+     int	      *segrep, *repfnz, *parent;
+     int	      *panel_lsub; /* dense[]/panel_lsub[] pair forms a w-wide SPA */
+-    int_t     *xprune, *xplore;
++    int_t     *xprune = NULL, *xplore = NULL;
+     int	      *marker;
+     double    *dense, *tempv;
+-    int       *relax_end;
++    int       *relax_end = NULL;
+     double    *a;
+     int_t     *asub, *xa_begin, *xa_end;
+     int_t     *xlsub, *xlusup, *xusub;
+@@ -254,7 +254,7 @@
+     /* Allocate storage common to the factor routines */
+     *info = dLUMemInit(fact, work, lwork, m, n, Astore->nnz,
+                        panel_size, fill_ratio, L, U, Glu, &iwork, &dwork);
+-    if ( *info ) return;
++    if ( *info ) goto allocation_failed;
+     
+     xsup    = Glu->xsup;
+     supno   = Glu->supno;
+@@ -307,7 +307,7 @@
+ 	    /* Determine the union of the row structure of the snode */
+ 	    if ( (*info = dsnode_dfs(jcol, kcol, asub, xa_begin, xa_end,
+ 				    xprune, marker, Glu)) != 0 )
+-		return;
++		goto allocation_failed;
+ 
+             nextu    = xusub[jcol];
+ 	    nextlu   = xlusup[jcol];
+@@ -317,7 +317,7 @@
+ 	    nzlumax = Glu->nzlumax;
+ 	    while ( new_next > nzlumax ) {
+ 		if ( (*info = dLUMemXpand(jcol, nextlu, LUSUP, &nzlumax, Glu)) )
+-		    return;
++		    goto allocation_failed;
+ 	    }
+     
+ 	    for (icol = jcol; icol<= kcol; icol++) {
+@@ -373,17 +373,17 @@
+ 
+ 	    	if ((*info = dcolumn_dfs(m, jj, perm_r, &nseg, &panel_lsub[k],
+ 					segrep, &repfnz[k], xprune, marker,
+-					parent, xplore, Glu)) != 0) return;
++					parent, xplore, Glu)) != 0) goto allocation_failed;
+ 
+ 	      	/* Numeric updates */
+ 	    	if ((*info = dcolumn_bmod(jj, (nseg - nseg1), &dense[k],
+ 					 tempv, &segrep[nseg1], &repfnz[k],
+-					 jcol, Glu, stat)) != 0) return;
++					 jcol, Glu, stat)) != 0) goto allocation_failed;
+ 		
+ 	        /* Copy the U-segments to ucol[*] */
+ 		if ((*info = dcopy_to_ucol(jj, nseg, segrep, &repfnz[k],
+ 					  perm_r, &dense[k], Glu)) != 0)
+-		    return;
++		    goto allocation_failed;
+ 
+ 	    	if ( (*info = dpivotL(jj, diag_pivot_thresh, &usepr, perm_r,
+ 				      iperm_r, iperm_c, &pivrow, Glu, stat)) )
+@@ -466,4 +466,13 @@
+     SUPERLU_FREE (iperm_c);
+     SUPERLU_FREE (relax_end);
+ 
++    return;
++
++allocation_failed:
++    /* WWPG: the caller discards partial factors; release local work here. */
++    dLUWorkFree(iwork, dwork, Glu);
++    SUPERLU_FREE(xplore); SUPERLU_FREE(xprune);
++    if(iperm_r_allocated) SUPERLU_FREE(iperm_r);
++    SUPERLU_FREE(iperm_c); SUPERLU_FREE(relax_end);
++
+ }
+--- a/SRC/dmemory.c
++++ b/SRC/dmemory.c
+@@ -244,6 +244,9 @@
+ 	    xusub  = duser_malloc((n+1) * iword, HEAD, Glu);
+ 	}
+ 
++        /* WWPG: publish ownership before any allocation-error return. */
++        Glu->xsup = xsup; Glu->supno = supno; Glu->xlsub = xlsub;
++        Glu->xlusup = xlusup; Glu->xusub = xusub;
+ 	lusup = (double *) dexpand( &nzlumax, LUSUP, 0, 0, Glu );
+ 	ucol  = (double *) dexpand( &nzumax, UCOL, 0, 0, Glu );
+ 	lsub  = (int_t *) dexpand( &nzlmax, LSUB, 0, 0, Glu );

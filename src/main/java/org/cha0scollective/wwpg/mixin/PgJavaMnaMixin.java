@@ -1,6 +1,7 @@
 package org.cha0scollective.wwpg.mixin;
 
 import org.cha0scollective.wwpg.bridge.SparseMatrixSupport;
+import org.cha0scollective.wwpg.bridge.MatrixBuildScope;
 import org.ejml.data.DMatrixSparseCSC;
 import org.patryk3211.powergrid.electricity.sim.ElectricalNetwork;
 import org.patryk3211.powergrid.electricity.sim.node.ICouplingNode;
@@ -20,6 +21,13 @@ public abstract class PgJavaMnaMixin {
     @Shadow private double[] columnScales;
     @Shadow private double[] rowScales;
     @Shadow private int scalesAge;
+
+    @Redirect(method = "jacobianAdd", at = @At(value = "INVOKE",
+            target = "Lorg/patryk3211/powergrid/electricity/sim/solver/DynamicallyTypedMatrix;add(IID)V"))
+    private void wwpg$collectOwnedBuild(DynamicallyTypedMatrix matrix, int row, int column, double value) {
+        if (!MatrixBuildScope.add((JavaMNA) (Object) this, matrix, row, column, value))
+            matrix.add(row, column, value);
+    }
 
     @Redirect(method = "allocate", at = @At(value = "NEW",
             target = "org/patryk3211/powergrid/electricity/sim/solver/DynamicallyTypedMatrix"))

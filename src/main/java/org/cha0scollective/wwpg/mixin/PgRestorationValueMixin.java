@@ -27,8 +27,8 @@ public abstract class PgRestorationValueMixin implements RestorationCoordinator.
     public double getValue(INode node) {
         if (RestorationCoordinator.paused((ElectricalNetwork) (Object) this) && !ServerElectricalSchedule.preparing()) return 0;
         if (mna == null) return 0;
-        // PG assigns -1 to eliminated nodes; their tracked-node path remains upstream.
-        // Assigned rows can avoid its leaf-map probe and boxed temporary Double.
+        // Assigned rows avoid PG's leaf-map probe/boxed Double; -1 retains its fallback.
+        // Recheck mna after getIndex: a custom node callback can release the backend.
         int index = node.getIndex();
         if (mna != null && index >= 0 && index < nodes.size() && nodes.get(index) == node) {
             double value = mna.stateVector().safe_get(index, 0);

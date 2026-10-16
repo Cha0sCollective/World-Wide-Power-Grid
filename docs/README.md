@@ -27,6 +27,7 @@ Each world has a base edition and an edition requiring Pinout and CC:Tweaked.
 | Make an add-on | [Extension API and SDK](EXTENSION_API.md) |
 | Build the independent examples | [General example](../examples/extension-addon/README.md) and [CEE/PG example](../examples/cee-addon/README.md) |
 | Build WWPG or run development checks | [Development](DEVELOPMENT.md) |
+| Work on the unreleased guarded native solver | [Native safety development](NATIVE_SAFETY_DEVELOPMENT.md) |
 | Submit a change | [Contributing](../CONTRIBUTING.md) |
 | Understand API release requirements | [API release checks](API_RELEASE_CHECKS.md) and [completed API plan](EXTENSION_API_PLAN.md) |
 | Package and publish the five downloads with short notes | [Release process](RELEASING.md) |

@@ -6,6 +6,8 @@
 
 Beta.3 reduces repeated terminal and CEE preparation work and result allocations, and includes the wire-removal and diagnostic corrections since beta.2. [0.2.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.1) remains the stable release. The 14,650-node benchmark has not reached 20 TPS.
 
+The current source also contains the unload safety, circuit regrouping and handheld connector fixes prepared for [beta.4](release/0.2.2-beta.4/PREPARATION.md). Beta.3 remains the latest published download until beta.4 completes the release gates.
+
 ## What you can do
 
 - Generate electricity, charge storage, run motors and pumps, light a factory and heat processing equipment across both mods.

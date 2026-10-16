@@ -6,10 +6,13 @@
   "mixins": [
     "RegistrateCallbacksMixin",
     "NativeResourceMixin",
+    "PgNativeFailureMixin",
+    "PgSolverFailureMixin",
     "SolverConfigThreadMixin",
     "CircuitBuilderAccessor",
     "CircuitBuilderValidationMixin",
     "ElectricalNetworkAccessor",
+    "PgNetworkMembershipMixin",
     "PgSolverWarmupAccessor",
     "PgPentodeBiasAccessor",
     "PgPentodeInitializationMixin",

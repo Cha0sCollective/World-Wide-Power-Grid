@@ -110,14 +110,22 @@ public final class HandheldMeters {
         MultimeterItem.saveModeData(stack, data);
     }
 
-    private static void cacheVoltage(Level level, CompoundTag data, String selection, String value) {
+    private static void cacheVoltage(ServerLevel level, CompoundTag data, String selection, String value) {
         data.remove(value);
         if (!data.contains(selection)) return;
         IWireEndpoint endpoint = WireEndpointType.deserialize(data.getCompound(selection));
         if (endpoint == null || !endpoint.isValid(level)) { data.putBoolean(UNAVAILABLE, true); return; }
-        if (rejectedEndpoint(level, endpoint)) { data.putBoolean(UNAVAILABLE, true); return; }
-        var node = endpoint instanceof CircuitBoardEndpoint board ? board.getGenericNode(level) : endpoint.getNode(level);
-        double voltage = node == null ? Double.NaN : node.getVoltage();
+        double voltage;
+        if (endpoint instanceof BlockWireEndpoint block) {
+            // Use the accepted sample itself. A compressed transmission-line
+            // middle has no assigned solver row, so its raw node voltage is zero.
+            var reading = org.cha0scollective.wwpg.api.neoforge.ElectricalMeasurements
+                    .readTerminal(level, block.getPos(), block.getTerminal());
+            voltage = reading.voltage().map(org.cha0scollective.wwpg.api.NodeResult::lastVoltageVolts).orElse(Double.NaN);
+        } else {
+            var node = endpoint instanceof CircuitBoardEndpoint board ? board.getGenericNode(level) : endpoint.getNode(level);
+            voltage = node == null ? Double.NaN : node.getVoltage();
+        }
         if (!Double.isFinite(voltage)) data.putBoolean(UNAVAILABLE, true);
         else data.putFloat(value, (float) voltage);
     }

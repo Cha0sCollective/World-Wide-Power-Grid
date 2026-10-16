@@ -11,6 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class PgNativeAssemblyMixin {
     @Inject(method = "jacobianAdd", at = @At("HEAD"), cancellable = true)
     private void wwpg$collect(int row, int column, double value, CallbackInfo ci) {
-        if (MatrixBuildScope.nativeAdd(row, column, value)) ci.cancel();
+        if (MatrixBuildScope.nativeAdd((NativeMNA) (Object) this, row, column, value)) ci.cancel();
     }
 }

@@ -140,14 +140,21 @@ configurations.testRuntimeClasspath.resolutionStrategy.force(
         'org.apache.logging.log4j:log4j-slf4j2-impl:2.22.1')
 tasks.named('processResources') {
     dependsOn tasks.named('preparePgNative')
+    dependsOn tasks.named('prepareGuardedPgNative')
     inputs.property 'version', project.version
     filesMatching('META-INF/neoforge.mods.toml') { expand version: project.version }
     from('LICENSE') { into 'META-INF'; rename { 'WWPG-LICENSE.txt' } }
     from('release') { include 'artifacts.json', 'optional-artifacts.json', 'content-matrix.json', '0.1.0-beta.5/content-matrix.json', '0.1.0-beta.5/registry-inventory.json'; into 'data/wwpg/release' }
     from(layout.buildDirectory.dir('pg-native-resources/native')) { into 'native/wwpg' }
+    from(layout.buildDirectory.dir('guarded-native-resources/native')) { into 'native/wwpg' }
     from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_loading/structure' }
+    from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_matrix_ownership/structure' }
     from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_board_startup/structure' }
     from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_cee_preparation/structure' }
+    from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_solver_safety/structure' }
+    from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_native_guard/structure' }
+    from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_unload/structure' }
+    from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_meter_sampling/structure' }
 }
 tasks.named('jar') {
     from sourceSets.extensionApi.output
@@ -313,6 +320,34 @@ tasks.register('preparePgNative', Sync) {
     }
     into layout.buildDirectory.dir('pg-native-resources')
 }
+// Native compilation is explicit; normal Java checks never start a compiler or full suite.
+tasks.register('prepareGuardedPgNative') {
+    def source = layout.buildDirectory.dir('guarded-pg-native')
+    def destination = layout.buildDirectory.dir('guarded-native-resources/native/safe')
+    inputs.files(fileTree('tools/native'), file('tools/build_native_solver.py'))
+    inputs.dir(source)
+    outputs.dir(destination)
+    doLast {
+        def digest = { File path -> java.security.MessageDigest.getInstance('SHA-256').digest(path.bytes).encodeHex().toString() }
+        def hashes = [:]
+        ['windows', 'linux'].each { platform ->
+            def name = "libpowergridNative7.${platform == 'windows' ? 'dll' : 'so'}"
+            def binary = source.get().file("${platform}/${name}").asFile
+            def record = source.get().file("${platform}/manifest.json").asFile
+            if (!binary.isFile() || !record.isFile()) throw new GradleException("Build guarded ${platform} native resources first: tools/build_native_solver.py")
+            def manifest = new groovy.json.JsonSlurper().parse(record)
+            if (digest(binary) != manifest.sha256) throw new GradleException("Guarded ${platform} binary checksum mismatch")
+            manifest.inputs.each { path, expected ->
+                if (!file(path).isFile() || digest(file(path)) != expected)
+                    throw new GradleException("Guarded ${platform} native input changed; rebuild: ${path}")
+            }
+            copy { from binary; into destination.get().dir(platform) }
+            hashes[platform] = manifest.sha256
+        }
+        destination.get().file('guarded.properties').asFile.text = hashes.collect { platform, hash -> "${platform}.sha256=${hash}" }.join('\n') + '\n'
+        copy { from source.get().dir('licenses'); into destination.get().dir('licenses') }
+    }
+}
 tasks.register('installPgNative', Copy) {
     dependsOn tasks.named('preparePgNative')
     from(layout.buildDirectory.dir('pg-native-resources')) {
@@ -401,7 +436,7 @@ tasks.register('prepareReferenceConfig') {
         target.parentFile.mkdirs()
         target.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson([
             required: true, minVersion: '0.8', package: 'org.cha0scollective.wwpg.mixin',
-            compatibilityLevel: 'JAVA_21', mixins: ['NativeResourceMixin', 'RegistrateCallbacksMixin', 'ElectricalNetworkAccessor'],
+            compatibilityLevel: 'JAVA_21', mixins: ['NativeResourceMixin', 'PgNativeFailureMixin', 'PgSolverFailureMixin', 'RegistrateCallbacksMixin', 'ElectricalNetworkAccessor'],
             client: [], injectors: [defaultRequire: 1]
         ])) + '\n'
     }
