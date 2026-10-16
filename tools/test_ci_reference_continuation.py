@@ -1,5 +1,6 @@
 """Synthetic publication-gate tests. These are never gameplay evidence."""
 import copy
+import gzip
 import json
 from pathlib import Path
 import tempfile
@@ -7,7 +8,8 @@ import unittest
 import zipfile
 
 import ci_reference_continuation as continuation
-from collect_api_ci_evidence import EvidenceError, metadata
+from collect_api_ci_evidence import EvidenceError, metadata, opaque_original_json
+import package_api_release as gate
 import test_api_ci_evidence
 
 
@@ -84,6 +86,16 @@ class ContinuationChecks(unittest.TestCase):
         p=self.root/'original.zip'; p.write_bytes(p.read_bytes()+b'CHANGED')
         r=copy.deepcopy(self.receipt); r['original_archive']=continuation.desc(p,self.root)
         with self.assertRaises(ValueError): continuation.validate(r,self.root)
+
+    def test_original_checkout_relative_receipt_is_lossless_opaque_provenance(self):
+        p=self.root/'checkout-relative-receipt.json'
+        p.write_text(json.dumps(dict(TEST_ONLY=True,original_file=dict(
+            path='run/only-in-the-original-ci-checkout.json',sha256='a'*64,bytes=10))),encoding='utf-8')
+        with self.assertRaises(gate.PublicationError):
+            gate.collect_locked_evidence(continuation.desc(p,self.root),self.root)
+        record=opaque_original_json(p,self.root)
+        self.assertEqual(gzip.decompress((self.root/record['path']).read_bytes()),p.read_bytes())
+        self.assertEqual(len(gate.collect_locked_evidence(record,self.root)),1)
 
 
 if __name__=='__main__': unittest.main()

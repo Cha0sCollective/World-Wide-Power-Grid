@@ -5,6 +5,7 @@ final-job packaged attempt must be complete; a later retry cannot erase a failur
 Client and independently extracted SDK acceptance remain separate release gates.
 """
 import argparse
+import gzip
 import hashlib
 import json
 from pathlib import Path
@@ -47,6 +48,17 @@ def descriptor(path, root):
 def write(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value, indent=2) + '\n', encoding='utf-8', newline='\n')
+
+
+def opaque_original_json(path, root):
+    """Keep checkout-relative descriptors inspectable without following them."""
+    original = root / 'build/ci-derived-originals' / (sha(path) + '.json.gz')
+    original.parent.mkdir(parents=True, exist_ok=True)
+    if original.exists():
+        require(gzip.decompress(original.read_bytes()) == path.read_bytes(), 'Changed original continuation receipt')
+    else:
+        original.write_bytes(gzip.compress(path.read_bytes(), mtime=0))
+    return descriptor(original, root)
 
 
 def metadata(run, jobs, index, linux_only=False, backend=None):
@@ -342,7 +354,10 @@ def matrix_job(directory, combination, source_sha, run_id, run_attempt, root=ROO
                 return result
             if isinstance(value, list): return [rebase(v) for v in value]
             return value
-        continuation = dict(retained_prefix=rebase(receipt), retained_prefix_provenance=descriptor(receipt_path, root))
+        # The raw receipt uses paths relative to its original CI checkout.
+        # Preserve it losslessly as opaque provenance; only the derived receipt
+        # above has workspace-relative descriptors that a release can follow.
+        continuation = dict(retained_prefix=rebase(receipt), retained_prefix_provenance=opaque_original_json(receipt_path, root))
     return dict(schema=1, completed=True, passed=True, unresolved_failures=[], artifact_hashes=hashes, **continuation,
                 platform=platform, backend=backend, profile=profile, regression_checks_passed=count,
                 extension_checks_passed=api[0]['required_tests_passed'] + pause[0]['required_tests_passed'] + pending_restart[0]['required_tests_passed'],
