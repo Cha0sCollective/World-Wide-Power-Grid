@@ -11,13 +11,15 @@ regressions and the complete Pinout Stationary Yard on Windows NeoForge
 two real multiplayer clients and saving/exit. Earlier safety and oil-rig
 checks retain their actual candidate identities; they are not fresh dev.94 runs.
 
-This is **release preparation, not a published or fully accepted release**.
-The retained yard run does not supply the full project/platform, API Workshop
-and SDK runtime coverage required by [the release rules](../../docs/RELEASING.md).
-No full suite is started automatically. Detailed evidence, worlds and
-diagnostic tooling remain local, as requested. Public verification-bundle
-contents also require agreement before publication under that restriction.
+The user approved the remaining release checks and the required verification
+bundle. One combined Pinout yard now covers the ordinary yard too; separate
+BASE yard runs and downloads are retired. BASE/PINOUT runtime and API Workshop
+installation checks remain distinct. The release gates validate the actual
+executed profiles and preserved process outcomes without relabeling them.
 
-The latest published prerelease remains
-[0.2.2-beta.3](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-beta.3).
-Published assets, tags, checksums and earlier evidence are preserved.
+The retained yard run is separate from the remaining project/platform, API
+Workshop and SDK checks in [the release rules](../../docs/RELEASING.md).
+No suite starts automatically. The version's final verification record and
+download layout identify completed acceptance and publication. Private oil-rig
+saves and unrelated diagnostics remain local. Published assets, tags, checksums
+and earlier evidence are preserved.

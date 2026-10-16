@@ -180,8 +180,12 @@ def verify_group(path, expected):
 
 
 def world_payload(manifest, root, version):
+    keys = WORLD_KEYS
+    if manifest.get('stationary_yard_policy') == 'combined-pinout-v1':
+        keys = {'stationary_yard': 'stationary-yard',
+                'base_workshop_world': 'api-workshop', 'pinout_workshop_world': 'api-workshop-pinout'}
     files = {f'worlds/wwpg-{version}-{label}.zip': acceptance.locked_file(manifest[key], root).read_bytes()
-             for key, label in WORLD_KEYS.items()}
+             for key, label in keys.items()}
     if 'benchmark_world' in manifest:
         path = acceptance.locked_file(manifest['benchmark_world'], root)
         with acceptance.checked_zip(path) as archive:
@@ -231,6 +235,9 @@ def stage(source, expected_sha, config_path, output):
                               'from the playable Stationary Yard. Read its WWPG_README.txt before opening it.\n'
                               'It has 14,650 electrical nodes; it is not certified to run at 20 TPS.\n\n'
                               if 'benchmark_world' in manifest else '')
+            yard_note = ('The combined stationary-yard includes all ordinary exhibits and the Pinout station.\n'
+                         'It requires CC:Tweaked and CC;CPG: Pinout on the server and every client.\n'
+                         if manifest.get('stationary_yard_policy') == 'combined-pinout-v1' else '')
             world_files['START-HERE.md'] = f'''# Example worlds for WWPG {version}
 
 Install WWPG and the required mods first: {base}INSTALL.md
@@ -241,6 +248,7 @@ Install WWPG and the required mods first: {base}INSTALL.md
 
 Start with stationary-yard. The api-workshop worlds also require both jars in
 workshop-mods/ on the server and every client. Those add-ons are optional for ordinary play.
+{yard_note}
 {config['optional_installation']}
 
 Station instructions: {base}STATIONARY_YARD.md

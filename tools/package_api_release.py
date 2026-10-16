@@ -424,6 +424,9 @@ def validate_ci_acceptance(manifest, root, ci, source, hashes, version=None):
         require((proof.get('platform'), proof.get('backend'), proof.get('profile')) ==
                 (job['platform'], job['backend'], job['profile']), 'Proof profile/backend/platform mismatch')
         checkout = read(locked_file(proof.get('checked_out_source', {}), root))
+        if checkout.get('stationary_yard_policy') == 'combined-pinout-v1':
+            require(manifest.get('stationary_yard_policy') == 'combined-pinout-v1',
+                    'CI deferred yard coverage requires the separately validated combined yard')
         require(proof.get('checked_out_source_verified') is True and checkout.get('schema') == 1
                 and checkout.get('source_sha') == source and checkout.get('source_tree') == proof.get('source_tree') == ci.get('source_tree')
                 and re.fullmatch(r'[0-9a-f]{40}', checkout.get('source_tree', ''))
@@ -454,6 +457,33 @@ def validate_ci_acceptance(manifest, root, ci, source, hashes, version=None):
         validate_pending_restart(proof, root, hashes, version)
 
 
+def artifact_acceptance_source(manifest, root, field, roles):
+    """Bind retained evidence to its actual source after exact artifact checks."""
+    reuse = manifest.get(field)
+    if reuse is None:
+        return manifest['source_sha'], {role: manifest['artifacts'][role]['sha256'] for role in roles}
+    label = 'SDK' if field == 'sdk_acceptance_reuse' else 'CI'
+    require(reuse.get('schema') == 1 and reuse.get('scope') == 'runtime_version_only'
+            and re.fullmatch(r'[0-9a-f]{40}', reuse.get('source_sha', '')),
+            label + ' reuse needs its original immutable source and explicit scope')
+    require(set(reuse.get('artifacts', {})) == set(roles), label + ' reuse must bind every original artifact')
+    from release_acceptance_reuse import runtime_equivalent
+    for role in sorted(roles):
+        old = locked_file(reuse['artifacts'][role], root)
+        current = locked_file(manifest['artifacts'][role], root)
+        if role == 'runtime':
+            runtime_equivalent(old, current, reuse['runtime_version'], manifest['wwpg_version'])
+        else:
+            require(sha(old) == sha(current), label + ' reuse changed input: ' + role)
+    return reuse['source_sha'], {role: reuse['artifacts'][role]['sha256'] for role in roles}
+
+
+def sdk_acceptance_source(manifest, root):
+    if manifest.get('sdk_acceptance_reuse') is None:
+        return manifest['source_sha']
+    return artifact_acceptance_source(manifest, root, 'sdk_acceptance_reuse', ROLES)[0]
+
+
 def validate_release(manifest, root):
     source = manifest.get('source_sha', '')
     require(re.fullmatch(r'[0-9a-f]{40}', source) is not None, 'Missing immutable source commit')
@@ -464,19 +494,23 @@ def validate_release(manifest, root):
     ci = read(locked_file(manifest.get('ci', {}), root))
     if manifest.get('acceptance_reuse'):
         import release_acceptance_reuse
-        import sys
         old_source, old_hashes, old_version = release_acceptance_reuse.validate(manifest, root, sys.modules[__name__])
         validate_ci_acceptance(manifest, root, ci, manifest['acceptance_reuse'].get('ci_source_sha', old_source), old_hashes, old_version)
     else:
-        validate_ci_acceptance(manifest, root, ci, source, hashes)
-    independent = accepted_record(manifest.get('independent_example_build', {}), root, hashes, source)
+        ci_source, ci_hashes = artifact_acceptance_source(manifest, root, 'ci_acceptance_reuse', hashes)
+        validate_ci_acceptance(manifest, root, ci, ci_source, ci_hashes)
+    sdk_source, sdk_hashes = source, hashes
+    if manifest.get('sdk_acceptance_reuse'):
+        sdk_source, original_sdk_hashes = artifact_acceptance_source(manifest, root, 'sdk_acceptance_reuse', ROLES)
+        sdk_hashes = {key: original_sdk_hashes[key] for key in hashes}
+    independent = accepted_record(manifest.get('independent_example_build', {}), root, sdk_hashes, sdk_source)
     require(independent.get('uses_published_api_only') is True and independent.get('uses_wwpg_project_classes') is False,
             'Example was not built independently against the published SDK')
     require(independent.get('compiled_against_api_sha256') == hashes['api'], 'Example used another API artifact')
     validate_extracted_build(independent, 'example', manifest, root, hashes)
     require(set(independent.get('functional_behaviors', [])) >= {'machine', 'storage', 'instrument'},
             'Independent general example lacks required extension demonstrations')
-    upstream = accepted_record(manifest.get('independent_upstream_example_build', {}), root, hashes, source)
+    upstream = accepted_record(manifest.get('independent_upstream_example_build', {}), root, sdk_hashes, sdk_source)
     require(upstream.get('uses_published_api_only') is True and upstream.get('uses_wwpg_project_classes') is False,
             'Upstream example was not built independently against published APIs')
     require(upstream.get('compiled_against_api_sha256') == hashes['api'] and
@@ -488,8 +522,8 @@ def validate_release(manifest, root):
     if starter is not None:
         archive = locked_file(starter.get('source', {}), root)
         built = read(locked_file(starter.get('proof', {}), root))
-        starter_source = manifest['acceptance_reuse']['source_sha'] if manifest.get('acceptance_reuse') else source
-        starter_runtime = manifest['acceptance_reuse']['runtime']['sha256'] if manifest.get('acceptance_reuse') else hashes['runtime']
+        starter_source = manifest['acceptance_reuse']['source_sha'] if manifest.get('acceptance_reuse') else sdk_source
+        starter_runtime = manifest['acceptance_reuse']['runtime']['sha256'] if manifest.get('acceptance_reuse') else sdk_hashes['runtime']
         require(built.get('passed') is True and built.get('source_sha') == starter_source
                 and built.get('source_archive_sha256') == sha(archive)
                 and built.get('compiled_against_api_sha256') == hashes['api']
@@ -554,8 +588,14 @@ def validate_release(manifest, root):
                     'Missing two actual multiplayer clients')
     require(manifest.get('acceptance_reuse') or found == expected, 'Both backends/profiles need graphical and real two-client checks')
     world_hashes = {}
-    for key, profile in (('base_world', 'BASE'), ('pinout_world', 'PINOUT'),
-                         ('base_workshop_world', 'BASE'), ('pinout_workshop_world', 'PINOUT')):
+    combined_yard = manifest.get('stationary_yard_policy') is not None
+    if combined_yard:
+        import release_stationary_acceptance
+        release_stationary_acceptance.validate(manifest, root, sys.modules[__name__])
+    worlds = [('base_workshop_world', 'BASE'), ('pinout_workshop_world', 'PINOUT')]
+    if not combined_yard:
+        worlds = [('base_world', 'BASE'), ('pinout_world', 'PINOUT')] + worlds
+    for key, profile in worlds:
         descriptor = manifest.get(key, {})
         archive = locked_file(descriptor, root)
         with checked_zip(archive) as world: require(any(n.endswith('/level.dat') for n in world.namelist()), 'Playable example archive lacks level.dat')

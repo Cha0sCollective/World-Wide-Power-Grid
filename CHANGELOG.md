@@ -1,13 +1,13 @@
 # Changelog
 
-## 0.2.2-beta.4 — prepared 16 October 2026
+## 0.2.2-beta.4 — 16 October 2026
 
 - Bind matrix batching to its owning solver and preserve nested builds.
 - Rediscover disconnected circuits after unload and rebuild; clear retired network membership and stale source/ground bookkeeping.
 - Reject failed native factorizations, invalid permutations and nonfinite results before unsafe reuse; restore rejected state and retain diagnostics.
 - Hold battery/inverter energy and filter history after rejected solves; clear stale acceptance and restore callback bookkeeping on both solvers.
 - Keep handheld readings on compressed wires and battery/generator device connectors consistent with accepted terminal samples, including refreshed multiblock proxies.
-- Preserve API 1.0.0, saves, equations and all 16 substeps. Reuse dev.94's passing focused and Pinout yard checks on both solvers through an exact version-only comparison; this is not full release acceptance. Public release remains pending its acceptance gates.
+- Preserve API 1.0.0, saves, equations and all 16 substeps. Retain dev.94's focused and combined Pinout yard checks through a version-only comparison; record the remaining release checks separately. The combined yard includes the ordinary exhibits.
 
 ## 0.2.2-beta.3 — 15 October 2026
 

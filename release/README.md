@@ -9,7 +9,16 @@ is the current stable release. To install it or choose a playable world, use the
 [installation guide](../docs/INSTALL.md). This directory is for reviewing what
 was shipped and which checks passed.
 
-## Current prerelease: 0.2.2-beta.3 — preparation and result allocations
+## Current prerelease: 0.2.2-beta.4 — unload safety, regrouping and meters
+
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-beta.4)
+· [Verification](0.2.2-beta.4/verification.json).
+
+Retains dev.94's version-equivalent Windows combined-yard checks and identifies
+the remaining release acceptance separately. One Pinout yard now covers the
+ordinary yard too. Private oil-rig saves and unrelated diagnostics remain local.
+
+## Historical prerelease: 0.2.2-beta.3 — preparation and result allocations
 
 [Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-beta.3)
 · [Verification](0.2.2-beta.3/verification.json)
