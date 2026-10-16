@@ -1,0 +1,342 @@
+{
+  "schema": 1,
+  "wwpg_version": "0.2.2-beta.4",
+  "api_version": "1.0.0",
+  "source_sha": "a0f2a0fb3f20190978721aa9f0a9eafc97e778dc",
+  "api_coordinate": "org.cha0scollective.wwpg:wwpg-api:1.0.0",
+  "cee_api_coordinate": "org.cha0scollective.wwpg:wwpg-cee-api:1.0.0",
+  "artifacts": {
+    "runtime": {
+      "path": "build/frozen-0.2.2-beta.4/wwpg-0.2.2-beta.4.jar",
+      "sha256": "63c81cd2a0f253df9d36a854459412eac1c7a10313508c8fc299b5e872a27bc1",
+      "bytes": 6171926
+    },
+    "api": {
+      "path": "build/frozen-0.2.2-beta.4/wwpg-api-1.0.0.jar",
+      "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+      "bytes": 50143
+    },
+    "cee_api": {
+      "path": "build/frozen-0.2.2-beta.4/wwpg-cee-api-1.0.0.jar",
+      "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+      "bytes": 8793
+    },
+    "api_sources": {
+      "path": "build/frozen-0.2.2-beta.4/wwpg-api-1.0.0-sources.jar",
+      "sha256": "1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b",
+      "bytes": 25943
+    },
+    "api_javadoc": {
+      "path": "build/frozen-0.2.2-beta.4/wwpg-api-1.0.0-javadoc.jar",
+      "sha256": "07b438c587ea6f4fdfd61da12c22ccfe15c778afd7f0d6e8ff40109bd53f0560",
+      "bytes": 230994
+    },
+    "cee_api_sources": {
+      "path": "build/frozen-0.2.2-beta.4/wwpg-cee-api-1.0.0-sources.jar",
+      "sha256": "00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34",
+      "bytes": 6947
+    },
+    "cee_api_javadoc": {
+      "path": "build/frozen-0.2.2-beta.4/wwpg-cee-api-1.0.0-javadoc.jar",
+      "sha256": "88ad49e4d840b326cc5bfbe805473c05362da22f792402a49933ac96ac1878f8",
+      "bytes": 107953
+    },
+    "example": {
+      "path": "build/frozen-0.2.2-beta.4/wwpg-api-example-1.0.0.jar",
+      "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+      "bytes": 52081
+    },
+    "upstream_example": {
+      "path": "build/frozen-0.2.2-beta.4/wwpg-upstream-api-example-1.0.0.jar",
+      "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+      "bytes": 45633
+    },
+    "maven_repository": {
+      "path": "build/frozen-0.2.2-beta.4/wwpg-api-1.0.0-maven.zip",
+      "sha256": "8aa02c77d9cfc48eccd84a3405f305341aff4c2e2ad0ba9fe023c2087bb0496d",
+      "bytes": 416134
+    },
+    "example_sources": {
+      "path": "build/frozen-0.2.2-beta.4/wwpg-api-example-1.0.0-source.zip",
+      "sha256": "b1b2a3ef151a348cadd762b86fc6d07cc2f3c058f5e4bb0ffa81a9613674cb2e",
+      "bytes": 79526
+    },
+    "upstream_example_sources": {
+      "path": "build/frozen-0.2.2-beta.4/wwpg-upstream-api-example-1.0.0-source.zip",
+      "sha256": "441cac85060939a59a4e38dc58a42d9a4483958696283436c54baf82ae3fe1c6",
+      "bytes": 70380
+    }
+  },
+  "status": "accepted_release",
+  "unresolved_failures": [],
+  "stages_complete": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "abi": {
+    "path": "build/b3ev/j/dca0d66a803d.json",
+    "sha256": "c0f9561972d1c34e6569f239060c3947f678575035fb27c4eab23522c348b5dc",
+    "bytes": 64277
+  },
+  "cee_abi": {
+    "path": "build/b3ev/j/3c14149426b1.json",
+    "sha256": "3aba574f8163ee8c3c4717a5d5095e680da7d8f573137ffa3c1aa7cfc972a6f1",
+    "bytes": 12699
+  },
+  "previous_api": {
+    "path": "build/b3ev/f/d8c138782c10/wwpg-api-1.0.0.jar",
+    "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+    "bytes": 50143
+  },
+  "previous_cee_api": {
+    "path": "build/b3ev/f/b5220c7cc207/wwpg-cee-api-1.0.0.jar",
+    "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+    "bytes": 8793
+  },
+  "required_regression_checks": {
+    "BASE": 206,
+    "PINOUT": 210
+  },
+  "stationary_yard_policy": "combined-pinout-v1",
+  "sdk_acceptance_reuse": {
+    "schema": 1,
+    "scope": "runtime_version_only",
+    "source_sha": "fda338d3a5b5d1614f15e63d684748d3c51d3fa3",
+    "runtime_version": "0.2.2-beta.4",
+    "artifacts": {
+      "runtime": {
+        "path": "build/frozen-0.2.2-beta.4/wwpg-0.2.2-beta.4.jar",
+        "sha256": "63c81cd2a0f253df9d36a854459412eac1c7a10313508c8fc299b5e872a27bc1",
+        "bytes": 6171926
+      },
+      "api": {
+        "path": "build/frozen-0.2.2-beta.4/wwpg-api-1.0.0.jar",
+        "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+        "bytes": 50143
+      },
+      "cee_api": {
+        "path": "build/frozen-0.2.2-beta.4/wwpg-cee-api-1.0.0.jar",
+        "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+        "bytes": 8793
+      },
+      "api_sources": {
+        "path": "build/frozen-0.2.2-beta.4/wwpg-api-1.0.0-sources.jar",
+        "sha256": "1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b",
+        "bytes": 25943
+      },
+      "api_javadoc": {
+        "path": "build/frozen-0.2.2-beta.4/wwpg-api-1.0.0-javadoc.jar",
+        "sha256": "07b438c587ea6f4fdfd61da12c22ccfe15c778afd7f0d6e8ff40109bd53f0560",
+        "bytes": 230994
+      },
+      "cee_api_sources": {
+        "path": "build/frozen-0.2.2-beta.4/wwpg-cee-api-1.0.0-sources.jar",
+        "sha256": "00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34",
+        "bytes": 6947
+      },
+      "cee_api_javadoc": {
+        "path": "build/frozen-0.2.2-beta.4/wwpg-cee-api-1.0.0-javadoc.jar",
+        "sha256": "88ad49e4d840b326cc5bfbe805473c05362da22f792402a49933ac96ac1878f8",
+        "bytes": 107953
+      },
+      "example": {
+        "path": "build/frozen-0.2.2-beta.4/wwpg-api-example-1.0.0.jar",
+        "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+        "bytes": 52081
+      },
+      "upstream_example": {
+        "path": "build/frozen-0.2.2-beta.4/wwpg-upstream-api-example-1.0.0.jar",
+        "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+        "bytes": 45633
+      },
+      "maven_repository": {
+        "path": "build/frozen-0.2.2-beta.4/wwpg-api-1.0.0-maven.zip",
+        "sha256": "8aa02c77d9cfc48eccd84a3405f305341aff4c2e2ad0ba9fe023c2087bb0496d",
+        "bytes": 416134
+      },
+      "example_sources": {
+        "path": "build/frozen-0.2.2-beta.4/wwpg-api-example-1.0.0-source.zip",
+        "sha256": "b1b2a3ef151a348cadd762b86fc6d07cc2f3c058f5e4bb0ffa81a9613674cb2e",
+        "bytes": 79526
+      },
+      "upstream_example_sources": {
+        "path": "build/frozen-0.2.2-beta.4/wwpg-upstream-api-example-1.0.0-source.zip",
+        "sha256": "441cac85060939a59a4e38dc58a42d9a4483958696283436c54baf82ae3fe1c6",
+        "bytes": 70380
+      }
+    },
+    "explanation": "All twelve SDK inputs are unchanged; these original independent builds and clients keep their actual source."
+  },
+  "independent_example_build": {
+    "path": "build/b4ev2/j/99fceeea8133.json",
+    "sha256": "1ee837da431efbd8ed17b50b6b9a8b5811146825904be8f1285f2987819c2833",
+    "bytes": 3027
+  },
+  "independent_upstream_example_build": {
+    "path": "build/b4ev2/j/0af7e53def7a.json",
+    "sha256": "1e666334fd955aba562dc524db0e0b47e5164835d00ce16f4bbd60212e49704d",
+    "bytes": 3177
+  },
+  "authoring_starter": {
+    "source": {
+      "path": "build/b4ev2/f/60aa432e28ca/tutorial-load-0.1.0-source.zip",
+      "sha256": "729d99a6e70912f81f40b159c7ddeaf0674ac413ea8452667cf2aa902c06190b",
+      "bytes": 54213
+    },
+    "proof": {
+      "path": "build/b4ev2/j/2fad41f54186.json",
+      "sha256": "d7eac0311a0ed56598e2a3794700898ad31d8f486f7ede73fe6d8cd15094894c",
+      "bytes": 3321
+    }
+  },
+  "client_acceptance": [
+    {
+      "path": "build/b4ev2/j/3fc0ab37bb37.json",
+      "sha256": "b73512f2ef356ac1fc109443968924cb08aac7faf820dad391cf8ad4aaa79e27",
+      "bytes": 7959
+    },
+    {
+      "path": "build/b4ev2/j/f52409b95cdd.json",
+      "sha256": "254f3a1aff71826fa2935efb2879fd754074f218dd3767ab3ae6c3fcb7d29965",
+      "bytes": 7955
+    },
+    {
+      "path": "build/b4ev2/j/35b96a20c5f2.json",
+      "sha256": "9786e544389c69bd3eaed18bea58adb2852e9d7706a56f2dfb104d7fe02c38ef",
+      "bytes": 7963
+    },
+    {
+      "path": "build/b4ev2/j/85cca02b578d.json",
+      "sha256": "b0f79d02b8ee1b63567dbf1ffa59fa22dfe91f5f08abe6382925ffdc7a9e9a20",
+      "bytes": 7959
+    },
+    {
+      "path": "build/b4ev2/j/136a6d2da2c5.json",
+      "sha256": "f0e32552543ea54cc5113083d6d65081e659f2297576ea28cd2557bf2fadb997",
+      "bytes": 15316
+    },
+    {
+      "path": "build/b4ev2/j/917c28d27455.json",
+      "sha256": "36a6e0728d3c78815a89b8c4206abe6a582e1e8e350631a839a25e35f9b44337",
+      "bytes": 15311
+    },
+    {
+      "path": "build/b4ev2/j/235201641223.json",
+      "sha256": "25561320720b52ad7e081af4dd552c2e1965bf86623b0837c666cbca79b8d395",
+      "bytes": 15320
+    },
+    {
+      "path": "build/b4ev2/j/a8c67acb863a.json",
+      "sha256": "dee4733a3b47c48827183410d5894a6dd06287ec0da26f7f300c32bc6bd63064",
+      "bytes": 15316
+    }
+  ],
+  "client_acceptance_reuse": {
+    "schema": 1,
+    "scope": "runtime_identical_tooling_only",
+    "source_sha": "f37bd1737bf48542e09ca96d49cbf0cc4d421b71",
+    "runtime_version": "0.2.2-beta.4",
+    "artifacts": {
+      "runtime": {
+        "path": "build/frozen-0.2.2-beta.4/wwpg-0.2.2-beta.4.jar",
+        "sha256": "63c81cd2a0f253df9d36a854459412eac1c7a10313508c8fc299b5e872a27bc1",
+        "bytes": 6171926
+      },
+      "api": {
+        "path": "build/frozen-0.2.2-beta.4/wwpg-api-1.0.0.jar",
+        "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+        "bytes": 50143
+      },
+      "cee_api": {
+        "path": "build/frozen-0.2.2-beta.4/wwpg-cee-api-1.0.0.jar",
+        "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+        "bytes": 8793
+      },
+      "example": {
+        "path": "build/frozen-0.2.2-beta.4/wwpg-api-example-1.0.0.jar",
+        "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+        "bytes": 52081
+      },
+      "upstream_example": {
+        "path": "build/frozen-0.2.2-beta.4/wwpg-upstream-api-example-1.0.0.jar",
+        "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+        "bytes": 45633
+      }
+    },
+    "explanation": "The final tag includes the corrected reference helper and publisher. Actual eight-client proof sources stay unchanged; all five tested jars are byte-identical and have the same version."
+  },
+  "base_workshop_world": {
+    "path": "build/b4ev2/f/c5cdd87bd449/wwpg-0.2.2-beta.4-api-workshop-BASE.zip",
+    "sha256": "b7036e4eca911963fa1defcfa993ce580f946188beaf9e63ca0c9749a2133164",
+    "bytes": 318760
+  },
+  "pinout_workshop_world": {
+    "path": "build/b4ev2/f/e8f6d25f2ca8/wwpg-0.2.2-beta.4-api-workshop-PINOUT.zip",
+    "sha256": "6310b067ecbce425294dc80fc30e98f8539e2c8fa60bf45a9003bb5a44c0089f",
+    "bytes": 320977
+  },
+  "api_exact_archive_cold_acceptance": {
+    "path": "build/b4ev2/j/b3f040366fca.json",
+    "sha256": "81c09189eb13bb6fb2f51cd5c15283f425caa91ef5e736b1c398c452dc5ea372",
+    "bytes": 3525
+  },
+  "representative_visual_review": {
+    "path": "build/b4ev2/j/a1410d7999c0.json",
+    "sha256": "deb5b8e890081d4778ffd86375c251b827fa85a56e14b978909c906144fa487a",
+    "bytes": 3261
+  },
+  "runtime_comparison": {
+    "path": "build/b4ev2/j/3224eb7c077d.json",
+    "sha256": "725cdd6eb0b93b8c4272d80e467a0dacc09aa09132e509bbcf58d7c06dace845",
+    "bytes": 2004
+  },
+  "final_runtime_comparison": {
+    "path": "build/b4ev2/j/b3f13220fde0.json",
+    "sha256": "31638405543bccaff74ed0e79a3f955ded12e9741ab5a34e5cfe076e52d6ce3e",
+    "bytes": 1084
+  },
+  "benchmark_world": {
+    "path": "build/b4ev2/f/2bfd6582980f/wwpg-0.2.2-beta.4-benchmark-14650-nodes.zip",
+    "sha256": "5830f1e97c20fa65da9bce0e48ea4904dfa08097f6512c2a276647b4eac8e0bc",
+    "bytes": 3408437
+  },
+  "benchmark_asset_comparison": {
+    "path": "build/b4ev2/j/34f14a4e8f73.json",
+    "sha256": "d022b2221ddf87741fb27b3a894d49c6c136050c9d3c9d4a28f8995eb8777789",
+    "bytes": 1466
+  },
+  "ci": {
+    "path": "build/b4ev2/j/45688973034e.json",
+    "sha256": "80461717b916ea4f35b778b4af5e80456147aa0446319366b6ee714ef17b688e",
+    "bytes": 5376
+  },
+  "stationary_yard": {
+    "path": "build/b4ev2/f/cfe80edc7eeb/wwpg-0.2.2-beta.4-stationary-yard.zip",
+    "sha256": "31ab32af7bbdb620b53df2f025bf0d288ae1f853ff95ae3a8edc32c6240a0927",
+    "bytes": 1352930
+  },
+  "stationary_yard_acceptance": {
+    "path": "build/b4ev2/j/92a1f1317d05.json",
+    "sha256": "124d701e7f527fe8ace44953203112cfec26d7fc2d670d9e7e8502f8f9b42ebf",
+    "bytes": 41292
+  },
+  "failure_review": {
+    "path": "build/b4ev2/j/c345c1e97d7b.json",
+    "sha256": "5927ed7539c7d7a6b4822de0c43e5fdb6b10eb9443008d603c8095de308626d6",
+    "bytes": 2880
+  },
+  "reference_failure_assessment": {
+    "path": "build/b4ev2/j/cb32055e0a74.json",
+    "sha256": "960a08b19d4ce28d37922671b0fae1c171b01960b26a3e3005115c1cd7597850",
+    "bytes": 2903
+  },
+  "portable_evidence_map": {
+    "path": "build/b4ev2/mapping.json",
+    "sha256": "bfb30a3e5473edf7daed894729e2418d0462875d4fd83594bb63c9af3496638b",
+    "bytes": 761513
+  }
+}
