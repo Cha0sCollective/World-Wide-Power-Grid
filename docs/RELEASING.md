@@ -90,8 +90,9 @@ only a version declaration change; the other four jars must retain their hashes.
 Original proof sources stay unchanged. Neither record accepts changed runtime
 code, replaced native binaries or new example sources without fresh checks.
 
-`client_acceptance_reuse` uses that five-jar comparison to retain actual client
-proof sources when only release tooling changed afterward. The release tag can
+`client_acceptance_reuse` requires `runtime_identical_tooling_only`, the same
+version and five byte-identical jars to retain actual client proof sources when
+only release tooling changed afterward. The release tag can
 then include the final working publisher and reference fixture, while the client
 records continue to name the source they actually exercised.
 

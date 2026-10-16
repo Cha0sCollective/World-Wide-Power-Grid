@@ -164,12 +164,16 @@ class CombinedYardGate(unittest.TestCase):
         artifacts = {k: self.file(k + '.bin', ('TEST_ONLY ' + k).encode()) for k in roles if k != 'runtime'}
         artifacts['runtime'] = self.current
         manifest = dict(source_sha='b'*40, wwpg_version=self.version, artifacts=artifacts,
-            client_acceptance_reuse=dict(schema=1, scope='runtime_version_only', source_sha='a'*40,
-                runtime_version=self.old_version, artifacts=dict(artifacts, runtime=self.old)))
+            client_acceptance_reuse=dict(schema=1, scope='runtime_identical_tooling_only', source_sha='a'*40,
+                runtime_version=self.version, artifacts=dict(artifacts)))
         source, hashes = gate.artifact_acceptance_source(manifest, self.root, 'client_acceptance_reuse', roles)
         self.assertEqual(source, 'a'*40)
         self.assertEqual(manifest['source_sha'], 'b'*40)
-        self.assertEqual(hashes['runtime'], self.old['sha256'])
+        self.assertEqual(hashes['runtime'], self.current['sha256'])
+        manifest['client_acceptance_reuse']['runtime_version'] = self.old_version
+        with self.assertRaisesRegex(gate.PublicationError, 'cannot change runtime version'):
+            gate.artifact_acceptance_source(manifest, self.root, 'client_acceptance_reuse', roles)
+        manifest['client_acceptance_reuse']['runtime_version'] = self.version
         manifest['artifacts']['example'] = self.file('changed-example.bin', b'TEST_ONLY changed addon')
         with self.assertRaisesRegex(gate.PublicationError, 'Client reuse changed input: example'):
             gate.artifact_acceptance_source(manifest, self.root, 'client_acceptance_reuse', roles)

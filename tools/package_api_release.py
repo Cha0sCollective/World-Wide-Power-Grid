@@ -475,15 +475,19 @@ def artifact_acceptance_source(manifest, root, field, roles):
     if reuse is None:
         return manifest['source_sha'], {role: manifest['artifacts'][role]['sha256'] for role in roles}
     label = {'sdk_acceptance_reuse': 'SDK', 'client_acceptance_reuse': 'Client'}.get(field, 'CI')
-    require(reuse.get('schema') == 1 and reuse.get('scope') == 'runtime_version_only'
+    client_reuse = field == 'client_acceptance_reuse'
+    scope = 'runtime_identical_tooling_only' if client_reuse else 'runtime_version_only'
+    require(reuse.get('schema') == 1 and reuse.get('scope') == scope
             and re.fullmatch(r'[0-9a-f]{40}', reuse.get('source_sha', '')),
             label + ' reuse needs its original immutable source and explicit scope')
     require(set(reuse.get('artifacts', {})) == set(roles), label + ' reuse must bind every original artifact')
+    if client_reuse:
+        require(reuse.get('runtime_version') == manifest['wwpg_version'], 'Client tooling reuse cannot change runtime version')
     from release_acceptance_reuse import runtime_equivalent
     for role in sorted(roles):
         old = locked_file(reuse['artifacts'][role], root)
         current = locked_file(manifest['artifacts'][role], root)
-        if role == 'runtime':
+        if role == 'runtime' and not client_reuse:
             runtime_equivalent(old, current, reuse['runtime_version'], manifest['wwpg_version'])
         else:
             require(sha(old) == sha(current), label + ' reuse changed input: ' + role)
