@@ -474,7 +474,7 @@ def artifact_acceptance_source(manifest, root, field, roles):
     reuse = manifest.get(field)
     if reuse is None:
         return manifest['source_sha'], {role: manifest['artifacts'][role]['sha256'] for role in roles}
-    label = 'SDK' if field == 'sdk_acceptance_reuse' else 'CI'
+    label = {'sdk_acceptance_reuse': 'SDK', 'client_acceptance_reuse': 'Client'}.get(field, 'CI')
     require(reuse.get('schema') == 1 and reuse.get('scope') == 'runtime_version_only'
             and re.fullmatch(r'[0-9a-f]{40}', reuse.get('source_sha', '')),
             label + ' reuse needs its original immutable source and explicit scope')
@@ -586,10 +586,11 @@ def validate_release(manifest, root):
             require(wrapper.create_system == 3 and (wrapper.external_attr >> 16) & 0o111,
                     'Tutorial starter wrapper must survive ordinary Unix extraction')
     clients = [] if manifest.get('acceptance_reuse') else manifest.get('client_acceptance', [])
+    client_source, client_hashes = artifact_acceptance_source(manifest, root, 'client_acceptance_reuse', hashes)
     expected = {(backend, profile, mode) for backend in BACKENDS for profile in PROFILES for mode in ('graphical', 'multiplayer')}
     found = set()
     for descriptor in clients:
-        proof = accepted_record(descriptor, root, hashes, source)
+        proof = accepted_record(descriptor, root, client_hashes, client_source)
         combination = (proof.get('backend'), proof.get('profile'), proof.get('mode'))
         require(combination in expected and combination not in found, 'Unexpected/duplicate real-client proof')
         found.add(combination)

@@ -90,6 +90,11 @@ only a version declaration change; the other four jars must retain their hashes.
 Original proof sources stay unchanged. Neither record accepts changed runtime
 code, replaced native binaries or new example sources without fresh checks.
 
+`client_acceptance_reuse` uses that five-jar comparison to retain actual client
+proof sources when only release tooling changed afterward. The release tag can
+then include the final working publisher and reference fixture, while the client
+records continue to name the source they actually exercised.
+
 A `retained_ci_cohort` can combine completed Java jobs with a Native reference
 continuation. It retains each run's actual source, job outcomes and uploaded
 artifacts. The narrow `resume_native_from_run` workflow input accepts only a

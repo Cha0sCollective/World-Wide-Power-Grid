@@ -159,6 +159,21 @@ class CombinedYardGate(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'changed beyond its version'):
             gate.artifact_acceptance_source(manifest, self.root, 'ci_acceptance_reuse', roles)
 
+    def test_client_reuse_preserves_actual_source_and_rejects_changed_addon(self):
+        roles = {'runtime', 'api', 'cee_api', 'example', 'upstream_example'}
+        artifacts = {k: self.file(k + '.bin', ('TEST_ONLY ' + k).encode()) for k in roles if k != 'runtime'}
+        artifacts['runtime'] = self.current
+        manifest = dict(source_sha='b'*40, wwpg_version=self.version, artifacts=artifacts,
+            client_acceptance_reuse=dict(schema=1, scope='runtime_version_only', source_sha='a'*40,
+                runtime_version=self.old_version, artifacts=dict(artifacts, runtime=self.old)))
+        source, hashes = gate.artifact_acceptance_source(manifest, self.root, 'client_acceptance_reuse', roles)
+        self.assertEqual(source, 'a'*40)
+        self.assertEqual(manifest['source_sha'], 'b'*40)
+        self.assertEqual(hashes['runtime'], self.old['sha256'])
+        manifest['artifacts']['example'] = self.file('changed-example.bin', b'TEST_ONLY changed addon')
+        with self.assertRaisesRegex(gate.PublicationError, 'Client reuse changed input: example'):
+            gate.artifact_acceptance_source(manifest, self.root, 'client_acceptance_reuse', roles)
+
 
 if __name__ == '__main__':
     unittest.main()
