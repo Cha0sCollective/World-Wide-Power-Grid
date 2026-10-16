@@ -23,13 +23,20 @@ import org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint;
 public final class UnloadPartitionGameTests {
     @BeforeBatch(batch="unload_powered") public static void powered(ServerLevel level){DynamicGameTests.substeps(level);}
     @BeforeBatch(batch="unload_passive") public static void passive(ServerLevel level){DynamicGameTests.substeps(level);}
+    @BeforeBatch(batch="unload_rebuild") public static void rebuild(ServerLevel level){DynamicGameTests.substeps(level);}
 
     @GameTest(template="empty",batch="unload_powered",timeoutTicks=110)
     public static void unloadRepartitionsTwoPoweredCircuitsAndReloadMergesThem(GameTestHelper h){scenario(h,true);}
     @GameTest(template="empty",batch="unload_passive",timeoutTicks=110)
     public static void unloadRepartitionsPoweredAndPassiveCircuitsWithoutFalseFailures(GameTestHelper h){scenario(h,false);}
 
+    @GameTest(template="empty",batch="unload_rebuild",timeoutTicks=110)
+    public static void rebuildingPausedDeviceRetainsExternalOwnersUntilReload(GameTestHelper h){scenario(h,true,true);}
+
     private static void scenario(GameTestHelper h,boolean poweredSecond){
+        scenario(h,poweredSecond,false);
+    }
+    private static void scenario(GameTestHelper h,boolean poweredSecond,boolean rebuildPaused){
         BlockPos a=new BlockPos(1,2,1),loadA=new BlockPos(4,2,1),bridge=new BlockPos(4,2,4),b=new BlockPos(1,2,7),loadB=new BlockPos(4,2,7);
         for(var p:List.of(a,loadA,bridge,b,loadB)){h.setBlock(p.below(),Blocks.STONE);h.setBlock(p,ModdedBlocks.CREATIVE_RESISTOR.get());}
         h.setBlock(a,ModdedBlocks.CREATIVE_VOLTAGE_SOURCE.get());
@@ -74,6 +81,11 @@ public final class UnloadPartitionGameTests {
             voltage(h,pla,10);voltage(h,plb,poweredSecond?20:0);
             verifyOwner(h,owner(level,pa));verifyOwner(h,owner(level,pb));
             var behaviour=((ElectricBlockEntity)level.getBlockEntity(pbridge)).getElectricBehaviour();
+            if(rebuildPaused){
+                behaviour.rebuildCircuit(false);
+                h.assertTrue(behaviour.isPaused(),"Internal rebuild woke an unloaded device");
+                h.assertTrue(owner(level,pa)!=owner(level,pb),"Paused rebuild prematurely merged detached circuits");
+            }
             behaviour.unpause();behaviour.setLazyTickRate(10);
         });
         h.runAtTickTime(70,()->{
@@ -82,16 +94,16 @@ public final class UnloadPartitionGameTests {
             DynamicGameTests.audit(h);h.succeed();
         });
     }
-    private static ElectricalNetwork owner(ServerLevel level,BlockPos p){return new BlockWireEndpoint(p,0).getNode(level).getNetwork();}
-    private static void verifyOwner(GameTestHelper h,ElectricalNetwork n){
+    static ElectricalNetwork owner(ServerLevel level,BlockPos p){return new BlockWireEndpoint(p,0).getNode(level).getNetwork();}
+    static void verifyOwner(GameTestHelper h,ElectricalNetwork n){
         var a=(ElectricalNetworkAccessor)n;
         long actual=n.getNodes().stream().filter(node->node.isSource()).count()+a.wwpg$wires().stream().filter(wire->wire.isSource()).count();
-        h.assertTrue(a.wwpg$sourceCount()==actual,"Repartitioned source bookkeeping differs from its participating elements");
+        h.assertTrue(a.wwpg$sourceCount()==actual,"Source membership reported="+a.wwpg$sourceCount()+", actual="+actual+", tick="+h.getTick());
         var solver=a.wwpg$solver();
         for(int row=0;row<n.size();row++)h.assertTrue(Double.isFinite(solver.stateVector().safe_get(row,0)),"Unloaded circuit retained nonfinite native/Java state");
         h.assertTrue(n.isConverged(),"Repartitioned circuit was not healthy");
     }
-    private static void voltage(GameTestHelper h,BlockPos p,double expected){
+    static void voltage(GameTestHelper h,BlockPos p,double expected){
         var value=ElectricalMeasurements.readVoltageBetween(h.getLevel(),p,0,p,1);
         h.assertTrue(value.status()==MeasurementStatus.VALID,"Expected valid native measurement: "+value.status());
         BoardComponentGameTests.near(h,value.voltage().orElseThrow().meanVoltageVolts(),expected,.02,"Powered/passive load voltage");

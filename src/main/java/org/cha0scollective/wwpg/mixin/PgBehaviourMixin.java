@@ -6,6 +6,7 @@ import org.patryk3211.powergrid.electricity.base.ElectricBehaviour;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Unique;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import org.patryk3211.powergrid.electricity.GlobalElectricNetworks;
@@ -28,11 +29,27 @@ public abstract class PgBehaviourMixin {
     @WrapMethod(method = "pause")
     private void wwpg$rediscoverDetachedInternals(Operation<Void> original) {
         var behaviour = (ElectricBehaviour) (Object) this;
-        if (paused || !behaviour.hasInternals() || !(behaviour.getWorld() instanceof ServerLevel level)) {
+        if (paused || !behaviour.hasInternals()) {
             original.call(); return;
         }
-        // Unload retains external wire junctions, but removes the connections
-        // inside the device. Capture owners before removal clears them.
+        wwpg$rediscoverAfterDetach(() -> original.call());
+    }
+
+    @WrapMethod(method = "rebuildCircuit")
+    private void wwpg$rediscoverRebuiltInternals(boolean external, Operation<Void> original) {
+        // A contactor can remove its open contacts without unloading the block.
+        // Remember the old owners even when the external terminals are retained.
+        wwpg$rediscoverAfterDetach(() -> original.call(external));
+    }
+
+    @Unique
+    private void wwpg$rediscoverAfterDetach(Runnable mutation) {
+        var behaviour = (ElectricBehaviour) (Object) this;
+        if (!(behaviour.getWorld() instanceof ServerLevel level)) {
+            mutation.run(); return;
+        }
+        // Both unload and rebuild remove graph edges. Capture every owner
+        // before removal clears membership; the existing queue coalesces them.
         Set<ElectricalNetwork> owners = Collections.newSetFromMap(new IdentityHashMap<>());
         for (var node : externalNodes) if (node.getNetwork() != null) owners.add(node.getNetwork());
         for (var node : internalNodes) if (node.getNetwork() != null) owners.add(node.getNetwork());
@@ -40,7 +57,7 @@ public abstract class PgBehaviourMixin {
         // Shutdown can retire all owners before the behaviours unload. Never
         // recreate SavedData/world networks merely to queue an obsolete owner.
         var world = owners.isEmpty() ? null : GlobalElectricNetworks.getWorldNetworks((net.minecraft.world.level.LevelAccessor) level);
-        try { original.call(); }
+        try { mutation.run(); }
         finally { if (world != null) owners.forEach(world::scheduleIslandDiscovery); }
     }
     @Inject(method = "remove", at = @At("HEAD"))

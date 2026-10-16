@@ -12,6 +12,7 @@
     "CircuitBuilderAccessor",
     "CircuitBuilderValidationMixin",
     "ElectricalNetworkAccessor",
+    "PgNetworkMembershipMixin",
     "PgSolverWarmupAccessor",
     "PgPentodeBiasAccessor",
     "PgPentodeInitializationMixin",
