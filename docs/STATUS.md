@@ -22,7 +22,8 @@ each mod's built-in limits.
 The [Stationary Test Yard](STATIONARY_YARD.md) demonstrates those behaviors.
 The separate [API Workshop](EXTENSION_API_WORKSHOP.md) demonstrates add-on
 machines, a panel attachment and a board component; it requires both example
-add-ons. Both worlds have an optional Pinout installation edition.
+add-ons. The combined Stationary Yard requires CC:Tweaked and Pinout. The API
+Workshop has BASE and Pinout editions.
 
 ## Saving, loading and tools
 

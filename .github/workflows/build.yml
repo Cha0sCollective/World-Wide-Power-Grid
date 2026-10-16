@@ -101,7 +101,8 @@ jobs:
         if: inputs.resume_native_from_run != ''
         env:
           GH_TOKEN: ${{ github.token }}
-        run: python tools/ci_reference_continuation.py --run '${{ inputs.resume_native_from_run }}' --platform '${{ matrix.os }}' --profile '${{ matrix.profile }}'
+          RETAINED_CI_RUN: ${{ inputs.resume_native_from_run }}
+        run: python tools/ci_reference_continuation.py --run "$RETAINED_CI_RUN" --platform '${{ matrix.os }}' --profile '${{ matrix.profile }}'
       - name: Build the downloadable adjustable-load starter from extracted SDK artifacts
         if: matrix.profile == 'BASE' && inputs.resume_native_from_run == ''
         run: python tools/authoring_starter_acceptance.py prepare --output build/authoring-starter --runtime build/libs/wwpg-0.2.2-beta.4.jar
