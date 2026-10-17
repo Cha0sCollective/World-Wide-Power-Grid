@@ -105,6 +105,11 @@ the original failed artifact and reruns the corrected reference and its unexecut
 successors. This records assembled coverage; it does not call the failed workflow
 a passing run. Both platforms and both installation profiles remain required.
 
+Future `separated-v2` manifests consume independently validated headless and
+graphical cohorts as described in [the testing process](TESTING.md). Publishing
+does not launch either suite. Missing applicable client evidence blocks
+publication without changing a completed headless result.
+
 ## Stage and inspect the five downloads
 
 ```text

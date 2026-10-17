@@ -3,6 +3,9 @@
 Use `dev/` for working branches, for example `dev/documentation-cleanup`.
 
 Run focused checks for the code, documentation or packaging being changed.
+The full suite means full headless acceptance. Graphical client acceptance is
+a separate manually requested lane; see docs/TESTING.md. Publishing validates
+applicable headless and graphical evidence without launching either suite.
 Run the full testing suite only when the user explicitly requests it. The
 end-of-day run is also manual: wait for the user to say they are done and to
 run the tests. Do not schedule it or automatically run full suites on pushes,

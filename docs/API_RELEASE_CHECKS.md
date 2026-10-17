@@ -1,5 +1,10 @@
 # Extension API release checks
 
+Future `separated-v2` records use the [testing process](TESTING.md): full
+headless and graphical acceptance are independent gates with named coverage.
+The legacy matrices and screenshot counts below describe their original
+acceptance policy and remain required when validating those historical records.
+
 This guide is for maintainers building and verifying a WWPG release. Add-on
 developers should start with the [public API contract](EXTENSION_API.md) and the
 two [example projects](../examples/extension-addon/README.md) and
