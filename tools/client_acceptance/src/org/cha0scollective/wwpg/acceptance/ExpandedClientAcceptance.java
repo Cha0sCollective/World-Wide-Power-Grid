@@ -31,7 +31,7 @@ import org.patryk3211.powergrid.electricity.wire.BaseWireEntity;
 import java.util.*;
 
 /** Separate, disposable helper mod. The WWPG jar under test is never modified. */
-@Mod("wwpg_acceptance")
+@Mod(value="wwpg_acceptance",dist=net.neoforged.api.distmarker.Dist.CLIENT)
 public final class ExpandedClientAcceptance {
     private record View(String name, BlockPos target, BlockPos gauge, boolean current) {}
     private final List<View> views = new ArrayList<>();
@@ -50,6 +50,16 @@ public final class ExpandedClientAcceptance {
     private final Map<String,Boolean> serverBuzzerSilent = new java.util.concurrent.ConcurrentHashMap<>();
 
     public ExpandedClientAcceptance() {
+        if(Boolean.getBoolean("wwpg.ci.v2")) {
+            RuntimeIdentity.record();
+            ClientShutdown.install();
+            if(Boolean.getBoolean("wwpg.ci.smoke")){new SmokeClient();return;}
+            if(Boolean.getBoolean("wwpg.ci.tcp")){
+                if(Boolean.getBoolean("wwpg.test.apiWorkshop"))new ApiWorkshopClientAcceptance();
+                else new YardTcpClient();
+                return;
+            }
+        }
         if (Boolean.getBoolean("wwpg.test.apiWorkshop")) { new ApiWorkshopClientAcceptance(); return; }
         for(int i=0;i<25;i++) {
             var base=new BlockPos(32+(i%5)*16,62,8+(i/5)*16);
@@ -90,6 +100,11 @@ public final class ExpandedClientAcceptance {
         } catch(Exception error) { throw new IllegalStateException("Cannot read exact exported yard coverage",error); }
         // Check the newly covered audio workflow before the long view tour.
         views.sort(java.util.Comparator.comparingInt(view -> view.name.equals("S07") ? 0 : 1));
+        if(Boolean.getBoolean("wwpg.ci.v2") && !Boolean.getBoolean("wwpg.ci.gallery")) {
+            var selected=Set.of(System.getProperty("wwpg.ci.views").split(","));
+            views.removeIf(view->!selected.contains(view.name));
+            if(views.size()!=selected.size())throw new IllegalStateException("Unknown selected yard view");
+        }
         NeoForge.EVENT_BUS.addListener(ServerTickEvent.Post.class,this::serverTick);
         NeoForge.EVENT_BUS.addListener(ClientTickEvent.Post.class,this::clientTick);
         WorldWidePowerGrid.LOGGER.info("EXPANDED_CLIENT_HELPER: exact saved world; backend={}; views={}",System.getProperty("wwpg.test.backend"),views.size());
@@ -99,6 +114,29 @@ public final class ExpandedClientAcceptance {
         if(failure!=null||finishing||event.getServer().getPlayerList().getPlayers().isEmpty())return;
         var level=event.getServer().overworld();
         try {
+            if(Boolean.getBoolean("wwpg.ci.v2")) {
+                if(++serverAge==1) {
+                    org.cha0scollective.wwpg.gametest.DynamicGameTests.substeps(level);
+                    for(int x=0;x<=17;x++)for(int z=0;z<=20;z++)level.setChunkForced(x,z,true);
+                    for(var player:event.getServer().getPlayerList().getPlayers()) {
+                        player.setGameMode(net.minecraft.world.level.GameType.CREATIVE);
+                        player.setItemSlot(EquipmentSlot.HEAD,AllItems.GOGGLES.asStack());
+                    }
+                }
+                if(!serverPassed) {
+                    require(serverAge<600,"Selected yard stations never became ready");
+                    if(serverAge<60)return;
+                    for(var view:views)if(!level.isPositionEntityTicking(view.target)||level.getBlockState(view.target).isAir())return;
+                    var linked=com.simibubi.create.api.contraption.train.PortalTrackProvider.getOtherSide(level,new net.createmod.catnip.math.BlockFace(new BlockPos(266,64,224),Direction.EAST));
+                    if(linked==null)return;
+                    remoteLamp=linked.face().getPos().south(3);remoteGauge=remoteLamp.west(2);
+                    initialServerWires=level.getEntitiesOfClass(BaseWireEntity.class,new net.minecraft.world.phys.AABB(0,-64,0,284,320,314)).size();
+                    require(initialServerWires>500,"Exported wire entities missing");serverPassed=true;
+                    WorldWidePowerGrid.LOGGER.info("CI_YARD_READY: selected exhibits; no saved-yard GameTest rerun");
+                }
+                // Reuse the observation block below without running the world
+                // construction/regression fixture a second time.
+            }
             if(Boolean.getBoolean("wwpg.test.netherFocus")) {
                 // Ordinary saved-world smoke check: no GameTestRunner and no
                 // helper chunk tickets may conceal missing exported forceloads.
@@ -118,7 +156,7 @@ public final class ExpandedClientAcceptance {
                 if(serverAge%20==0)WorldWidePowerGrid.LOGGER.info("STATIONARY_ORDINARY_PORTAL_TICKING: playerLevels={}; sourceTicking={}; remoteTicking={}",event.getServer().getPlayerList().getPlayers().stream().map(p->p.level().dimension().location()).toList(),level.getChunkSource().isPositionTicking(net.minecraft.world.level.ChunkPos.asLong(16,14)),nether.getChunkSource().isPositionTicking(net.minecraft.world.level.ChunkPos.asLong(2,1)));
                 return;
             }
-            if(test==null) {
+            if(test==null && !Boolean.getBoolean("wwpg.ci.v2")) {
                 if(++serverAge==1)for(int x=0;x<=17;x++)for(int z=0;z<=20;z++){level.setChunkForced(x,z,true);level.getChunk(x,z);}
                 if(serverAge<20)return;
                 for(int x=0;x<=17;x++)for(int z=0;z<=20;z++)if(!level.areEntitiesLoaded(net.minecraft.world.level.ChunkPos.asLong(x,z))){require(serverAge<300,"Yard chunks never became entity-ready");return;}
@@ -129,8 +167,8 @@ public final class ExpandedClientAcceptance {
                 GameTestRunner.Builder.fromInfo(List.of(test),level).newStructureSpawner(grid).existingStructureSpawner(grid).haltOnError(true).build().start();
                 WorldWidePowerGrid.LOGGER.info("EXPANDED_CLIENT_BASELINE_STARTED: downloaded yard reopened in integrated server");
             } else {
-                if(test.hasFailed())throw new IllegalStateException("Saved-yard acceptance failed",test.getError());
-                if(test.hasSucceeded()&&!serverPassed){
+                if(test!=null&&test.hasFailed())throw new IllegalStateException("Saved-yard acceptance failed",test.getError());
+                if(test!=null&&test.hasSucceeded()&&!serverPassed){
                     // Native GameTestRunner removes all forced chunks at batch
                     // completion. Restore this helper's display-view tickets;
                     // the exported save also retains its native Nether tickets.
@@ -179,6 +217,7 @@ public final class ExpandedClientAcceptance {
 
     private void clientTick(ClientTickEvent.Post event) {
         var mc=Minecraft.getInstance();
+        if(ClientShutdown.active())return;
         mc.options.pauseOnLostFocus=false;
         try {
             if(System.currentTimeMillis()-started>900_000)throw new IllegalStateException("Client acceptance exceeded fifteen minutes");
@@ -360,7 +399,9 @@ public final class ExpandedClientAcceptance {
                 require(serverErrors.isEmpty(),"Simulation diagnostics present: "+serverErrors);
                 shot(mc,"yard-overview.png");
                 WorldWidePowerGrid.LOGGER.info("EXPANDED_REAL_CLIENT_PASSED: backend={}; views={}; synchronized gauges; panel interaction packets; server PG wires={}; locally rendered PG wires={}; loose wires={}",System.getProperty("wwpg.test.backend"),views.size(),serverWires,wires,items);
-                finishing=true;mc.stop();
+                finishing=true;
+                if(Boolean.getBoolean("wwpg.ci.v2"))new TerminalHighlights(ClientShutdown::request);
+                else mc.stop();
             }
         }catch(Throwable problem){fail(problem);age=0;}
     }

@@ -9,6 +9,10 @@ gradle.projectsEvaluated {
         resources.srcDir p.file('tools/documentation_acceptance/resources')
         compileClasspath = p.sourceSets.main.compileClasspath + p.files(starter, frozen)
     }
+    p.tasks.named('compileDocAcceptanceJava',JavaCompile) { task ->
+        task.source(p.file('tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ClientShutdown.java'))
+        task.source(p.file('tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/RuntimeIdentity.java'))
+    }
     def helper = p.tasks.register('docAcceptanceJar', Jar) {
         dependsOn p.tasks.named('docAcceptanceClasses')
         from source.output
@@ -73,7 +77,8 @@ gradle.projectsEvaluated {
                 replacement.setText(program.replace(quickPlay,'--quickPlaySingleplayer\n'+worldArgument).replace('--width\n854','--width\n1280').replace('--height\n480','--height\n720'),'UTF-8')
                 return '@'+replacement.absolutePath
             }
-            jvmArgs = run.jvmArgs + ['-Dwwpg.test.packaged=false','-Dwwpg.doc.client=true','-Dwwpg.test.backend='+p.providers.gradleProperty('testBackend').getOrElse('NATIVE'),'-Dwwpg.test.multiplayer=false']
+            jvmArgs = run.jvmArgs + ['-Dwwpg.test.packaged=false','-Dwwpg.doc.client=true','-Dwwpg.test.backend='+p.providers.gradleProperty('testBackend').getOrElse('NATIVE'),'-Dwwpg.test.multiplayer=false',
+                '-Dwwpg.ci.v2='+p.providers.gradleProperty('ciV2').getOrElse('false')]
             def expandedVm=jvmArgs.collect { argument ->
                 argument.startsWith('@') ? p.file(argument.substring(1)).getText('UTF-8') : argument
             }.join('\n')+'\n'
