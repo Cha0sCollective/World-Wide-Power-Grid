@@ -50,7 +50,7 @@ class StarterSourceChecks(unittest.TestCase):
                 for item in zipped.infolist():
                     (target / item.filename).chmod(item.external_attr >> 16 & 0o777)
 
-    def prepare(self, output, runtime_source=None, changed_dependency=None):
+    def prepare(self, output, runtime_source=None, changed_dependency=None, api_artifact=None):
         def fake_run(command, log, project):
             compiled = project / 'build/libs/tutorial-load-0.1.0.jar'
             compiled.parent.mkdir(parents=True)
@@ -67,7 +67,7 @@ class StarterSourceChecks(unittest.TestCase):
                 patch.object(starter, 'run', side_effect=fake_run), \
                 patch.object(starter.subprocess, 'check_output', return_value=self.DOCUMENTATION_SOURCE + '\n'), \
                 contextlib.redirect_stdout(io.StringIO()):
-            starter.prepare(output, self.runtime, self.repository, runtime_source)
+            starter.prepare(output, self.runtime, self.repository, runtime_source, api_artifact=api_artifact)
         return json.loads((output / 'build-proof.json').read_text(encoding='utf-8'))
 
     def test_default_keeps_checkout_source_as_acceptance_source(self):
@@ -75,6 +75,11 @@ class StarterSourceChecks(unittest.TestCase):
         self.assertEqual(proof['source_sha'], self.DOCUMENTATION_SOURCE)
         self.assertEqual(proof['project_source_sha'], self.DOCUMENTATION_SOURCE)
         self.assertEqual(proof['documentation_source_sha'], self.DOCUMENTATION_SOURCE)
+
+    def test_frozen_api_works_on_a_fresh_platform_without_build_libs(self):
+        frozen=self.root/'downloaded-api.jar';frozen.write_bytes(self.api.read_bytes());self.api.unlink();self.api=frozen
+        proof=self.prepare(self.root/'fresh-platform',self.RUNTIME_SOURCE,api_artifact=frozen)
+        self.assertEqual(proof['compiled_against_api_sha256'],starter.sha(frozen))
 
     def test_explicit_runtime_source_preserves_separate_project_and_jar_identities(self):
         proof = self.prepare(self.root / 'explicit', self.RUNTIME_SOURCE)

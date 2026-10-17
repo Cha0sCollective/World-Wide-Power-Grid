@@ -122,8 +122,8 @@ dependencies {
     testRuntimeOnly 'org.ejml:ejml-dsparse:0.44.0'
     testRuntimeOnly 'net.neoforged:bus:8.0.5'
     if (providers.gradleProperty('testApiAddon').getOrElse('false') == 'true') {
-        runtimeOnly files('examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar')
-        runtimeOnly files('examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar')
+        runtimeOnly files(providers.gradleProperty('testExampleArtifact').getOrElse('examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar'))
+        runtimeOnly files(providers.gradleProperty('testUpstreamExampleArtifact').getOrElse('examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar'))
     }
 }
 
@@ -398,8 +398,8 @@ tasks.register('runPackagedGameTestServer', JavaExec) {
                 namespaces: providers.gradleProperty('testNamespaces').getOrElse('default')]
         if(providers.gradleProperty('testApiAddon').getOrElse('false')=='true') {
             proof.addon_artifacts=[:]
-            [example:'examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar',
-             upstream_example:'examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar'].each { role,path ->
+            [example:providers.gradleProperty('testExampleArtifact').getOrElse('examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar'),
+             upstream_example:providers.gradleProperty('testUpstreamExampleArtifact').getOrElse('examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar')].each { role,path ->
                 def addon=file(path)
                 if(!addon.isFile())throw new GradleException("Missing independent API example: ${path}")
                 proof.addon_artifacts[role]=[artifact:addon.name,
@@ -468,7 +468,8 @@ tasks.register('referenceJar', Jar) {
         boolean upstream = taskName == 'runUpstreamReferenceServer'
         def artifact = tasks.named(upstream ? 'referenceJar' : 'jar')
         def developmentRun = tasks.named('runGameTestServer')
-        dependsOn artifact, tasks.named('prepareGameTestServerRun')
+        dependsOn tasks.named('prepareGameTestServerRun')
+        if (!providers.gradleProperty('referenceArtifact').isPresent()) dependsOn artifact
         javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(21) }
         doFirst {
             def run = developmentRun.get()
@@ -492,7 +493,8 @@ tasks.register('referenceJar', Jar) {
                 return "@${replacement.absolutePath}"
             } + ['-Dwwpg.test.packaged=true', "-Dwwpg.test.upstreamReference=${upstream}",
                 "-Dwwpg.test.tightReferencePrecision=${providers.gradleProperty('tightReferencePrecision').getOrElse('false')}"]
-            def packaged = artifact.get().archiveFile.get().asFile
+            def packaged = providers.gradleProperty('referenceArtifact').isPresent()
+                ? file(providers.gradleProperty('referenceArtifact').get()) : artifact.get().archiveFile.get().asFile
             classpath = run.classpathProvider.filter { ![sourceSets.main,sourceSets.extensionApi,sourceSets.ceeApi].any { set -> set.output.files.contains(it) } } + files(packaged)
             def env = new HashMap(run.environmentProperty.get())
             env['MOD_CLASSES'] = "wwpg%%${packaged.absolutePath}"
@@ -501,7 +503,8 @@ tasks.register('referenceJar', Jar) {
             def proof = [schema: 1, artifact: packaged.name,
                 sha256: java.security.MessageDigest.getInstance('SHA-256').digest(packaged.bytes).encodeHex().toString(),
                 profile: testProfile, backend: providers.gradleProperty('testBackend').getOrElse('NATIVE'),
-                upstream: upstream, started: stamp, namespaces: 'wwpg_reference']
+                upstream: upstream, started: stamp, namespaces: 'wwpg_reference',
+                neoforge: providers.gradleProperty('neo_version').getOrElse('21.1.231')]
             def evidence = new File(directory, "reference-packaged-${stamp}.json")
             evidence.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(proof)) + '\n'
             extensions.extraProperties.set('wwpgPackagedEvidence', evidence)

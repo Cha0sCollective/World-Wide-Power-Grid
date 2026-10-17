@@ -1,0 +1,42 @@
+{
+  "schema": 2,
+  "policy": "separated-v2",
+  "platforms": ["ubuntu-24.04", "windows-latest"],
+  "backends": ["NATIVE", "JAVA"],
+  "profiles": ["BASE", "PINOUT"],
+  "loaders": ["21.1.231", "21.1.248"],
+  "groups": {
+    "regression": {"namespaces": ["wwpg", "wwpg_stationary", "wwpg_design", "wwpg_distribution", "wwpg_wires", "wwpg_bundle", "wwpg_coupled"], "phases": ["SETUP", "VERIFY", "VERIFY", "VERIFY"]},
+    "pinout": {"namespaces": ["wwpg_pinout"], "profiles": ["PINOUT"], "merge_into": "regression", "phases": ["SETUP", "VERIFY", "VERIFY", "VERIFY"]},
+    "loading": {"namespaces": ["wwpg_loading", "wwpg_cee_preparation", "wwpg_pause_epoch"], "phases": ["SETUP"]},
+    "board-startup": {"namespaces": ["wwpg_board_startup"], "phases": ["SETUP"]},
+    "safety": {"namespaces": ["wwpg_unload", "wwpg_solver_safety", "wwpg_matrix_ownership", "wwpg_meter_sampling", "wwpg_contactors", "wwpg_rhs", "wwpg_wire_power", "wwpg_wire_recovery", "wwpg_display_pulse"], "phases": ["SETUP"]},
+    "native-guard": {"namespaces": ["wwpg_native_guard"], "backends": ["NATIVE"], "merge_into": "safety", "phases": ["SETUP"]},
+    "api": {"namespaces": ["wwpg_api", "wwpg_api_faults", "wwpg_api_restart", "wwpg_api_upstream", "wwpg_api_upstream_restart", "wwpg_api_ownership"], "addon": true, "phases": ["SETUP", "VERIFY", "VERIFY", "VERIFY"]},
+    "pause": {"namespaces": ["wwpg_api_pause"], "addon": true, "phases": ["SETUP"]},
+    "pending": {"namespaces": ["wwpg_api_pending_restart"], "addon": true, "phases": ["SETUP", "ARM", "VERIFY"]},
+    "yard": {"namespaces": ["wwpg_yard"], "profiles": ["PINOUT"], "phases": ["SETUP", "VERIFY", "VERIFY", "VERIFY"], "export": "yard", "reopens": 3},
+    "workshop": {"namespaces": ["wwpg_api_world"], "addon": true, "phases": ["SETUP", "VERIFY", "VERIFY", "VERIFY"], "export": "workshop", "reopens": 3},
+    "example": {"namespaces": ["wwpg_example"], "profiles": ["BASE"], "phases": ["SETUP", "VERIFY"]},
+    "showroom": {"namespaces": ["wwpg_showroom"], "profiles": ["BASE"], "phases": ["SETUP", "VERIFY"]},
+    "platform": {"namespaces": ["wwpg_platform"], "merge_into": "regression", "phases": ["SETUP"]}
+  },
+  "special_namespaces": {
+    "wwpg_doc": "independently extracted SDK starter server and client helpers",
+    "wwpg_ci_client": "separate short two-client acceptance helper",
+    "wwpg_reference": "upstream and guarded compatibility reference processes",
+    "wwpg_multiplayer": "legacy real TCP yard client runner",
+    "wwpg_api_multiplayer": "legacy real TCP Workshop client runner"
+  },
+  "graphical": {
+    "yard-integrated": {"world": "yard", "profiles": ["PINOUT"], "checks": ["powered-readings", "control", "agreement", "buzzer-side"], "java_checks": ["unavailable-recovery"], "native_checks": ["representative-visuals", "terminal-highlights", "design", "pinout-keyboard", "portal"]},
+    "workshop-integrated": {"world": "workshop", "profiles": ["PINOUT"], "checks": ["powered-readings", "control", "agreement", "unavailable-recovery"], "native_checks": ["addon-visuals", "integrated-tools"]},
+    "yard-tcp": {"world": "yard", "profiles": ["PINOUT"], "tcp": true, "checks": ["powered-readings", "control", "agreement"], "native_checks": ["design-sync", "pinout-keyboard"]},
+    "workshop-tcp": {"world": "workshop", "profiles": ["PINOUT"], "tcp": true, "checks": ["powered-readings", "control", "agreement"], "native_checks": ["wire", "configure", "meter", "panel-edit", "board-edit", "repair"]},
+    "base-workshop": {"world": "workshop", "profiles": ["BASE"], "checks": ["powered-readings", "control", "agreement"]},
+    "starter": {"world": "workshop", "profiles": ["BASE"], "checks": ["powered-readings", "control", "agreement"], "native_checks": ["starter-controls", "native-tools"]}
+  },
+  "yard_views": ["B08", "P2", "T2", "S07", "S15", "S24", "S25", "S26", "S61", "S77", "S79"],
+  "workshop_views": ["A01", "A04", "A08", "A10", "A11"],
+  "known_limitations": ["Tiny capacitor-pin targeting is unresolved; highlight acceptance does not certify it."]
+}
