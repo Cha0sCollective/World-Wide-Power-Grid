@@ -194,8 +194,12 @@ def main():
     args = parser.parse_args()
     first = read(args.report[0])
     validate_reports(args.report, args.lane, first['source_sha'], first['artifact_hashes'])
-    write(args.output, dict(schema=2, policy='separated-v2', suite=args.lane, status='passed',
-        reports=[descriptor(p) for p in args.report]))
+    reports=[]
+    for path in args.report:
+        item=descriptor(path)
+        item['path']=Path(path).resolve().relative_to(ROOT).as_posix()
+        reports.append(item)
+    write(args.output, dict(schema=2, policy='separated-v2', suite=args.lane, status='passed',reports=reports))
 
 
 if __name__ == '__main__': main()
