@@ -430,6 +430,9 @@ test('SDK and workshop downloads target the current public release and explain r
       doc.querySelector('#worlds').textContent.includes(filename),
       filename,
     );
+  assert.ok(!doc.querySelector('#worlds').textContent.includes(`wwpg-${currentRelease.version}-stationary-yard-pinout.zip`));
+  assert.match(doc.querySelector('#worlds').textContent, /14,650-node benchmark/);
+  assert.match(doc.querySelector('#worlds').textContent, /not certified to run at 20 TPS/);
   const guide = new JSDOM(html(`/docs/${currentRelease.version}/developers/`))
     .window.document;
   assert.match(
