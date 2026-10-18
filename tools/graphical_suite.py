@@ -36,7 +36,8 @@ def observed(job, texts):
             if f'CI_SMOKE_SERVER_PASSED: {phase}' in joined and all(f'CI_SMOKE_CLIENT_PASSED: {phase}' in text for role,text in texts.items() if role!='server'): checks.add(name)
         if 'CI_SMOKE_UNAVAILABLE_PASSED' in joined and 'CI_SMOKE_SERVER_PASSED: recovered' in joined: checks.add('unavailable-recovery')
         if 'CI_SMOKE_BUZZER_SIDE_PASSED' in joined and 'CI_SMOKE_CLIENT_PASSED: audio' in joined: checks.add('buzzer-side')
-        if 'CI_ADDON_VISUALS_PASSED' in joined: checks.add('addon-visuals')
+        if all(marker in joined for marker in ('CI_ADDON_VISUALS_PASSED','CI_ADDON_PANEL_FRONT_PASSED','CI_ADDON_BOARD_TOP_PASSED')):
+            checks.add('addon-visuals')
         if 'CI_INTEGRATED_TOOLS_PASSED' in joined: checks.add('integrated-tools')
     if 'EXPANDED_REAL_CLIENT_PASSED' in joined:
         for name, marker in {'powered-readings':'EXPANDED_CLIENT_READING:', 'agreement':'EXPANDED_CLIENT_READING:',

@@ -213,6 +213,13 @@ class EvidenceChecks(unittest.TestCase):
         job=suites.plan('graphical',backends=['JAVA'],profiles=['BASE'])[0]
         self.assertEqual(observed(job,{'client':'passed=true\nCI_SMOKE_CLIENT_COMPLETE'}),set())
 
+    def test_workshop_visuals_require_panel_front_and_board_top_observations(self):
+        job=next(j for j in suites.plan('graphical') if j['id']=='workshop-integrated/NATIVE/PINOUT')
+        text='CI_SMOKE_SERVER_COMPLETE\nCI_SMOKE_CLIENT_COMPLETE\nCI_ADDON_VISUALS_PASSED\n'
+        self.assertNotIn('addon-visuals',observed(job,{'client':text}))
+        text+='CI_ADDON_PANEL_FRONT_PASSED\nCI_ADDON_BOARD_TOP_PASSED\n'
+        self.assertIn('addon-visuals',observed(job,{'client':text}))
+
     def test_shutdown_requires_click_title_and_saved_server(self):
         job=suites.plan('graphical',backends=['JAVA'],profiles=['BASE'])[0]
         hashes={r:r for r in suites.ROLES}
