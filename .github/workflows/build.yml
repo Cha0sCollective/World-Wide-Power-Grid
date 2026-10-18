@@ -91,6 +91,25 @@ jobs:
           path: build/ci-v2/windows
           run-id: ${{ inputs.frozen_run || github.run_id }}
           github-token: ${{ github.token }}
+      - name: Wait for the original environment's retained upload
+        if: inputs.frozen_run != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ORIGINAL_RUN: ${{ inputs.frozen_run }}
+          EXPECTED_ARTIFACT: ci-v2-evidence-${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}-${{ matrix.loader }}
+        run: |
+          python - <<'PY'
+          import json, os, subprocess, time
+          run=str(int(os.environ['ORIGINAL_RUN']))
+          repo=os.environ['GITHUB_REPOSITORY']
+          for _ in range(60):
+              data=json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/actions/runs/{run}/artifacts'],text=True))
+              if any(a['name']==os.environ['EXPECTED_ARTIFACT'] for a in data['artifacts']): break
+              status=json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/actions/runs/{run}'],text=True))
+              if status['status']=='completed': raise SystemExit('Original run finished without the required upload; no coverage inferred')
+              time.sleep(15)
+          else: raise SystemExit('Original environment has not uploaded its evidence yet')
+          PY
       - uses: actions/download-artifact@v4
         if: inputs.frozen_run != ''
         with:
