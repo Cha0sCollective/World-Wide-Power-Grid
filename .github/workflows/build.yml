@@ -1,4 +1,5 @@
 name: Full headless acceptance
+run-name: ${{ inputs.workshop_spawn_run != '' && 'Focused Workshop export reopens' || 'Full headless acceptance' }}
 on:
   workflow_dispatch:
     inputs:
@@ -6,12 +7,22 @@ on:
         description: 'Continue investigated missing coverage using an unchanged runtime and preserved passing lifecycle groups from this run; leave empty for a fresh full campaign'
         type: string
         default: ''
+      workshop_spawn_run:
+        description: 'Explicit focused Workshop spawn/export reopens using this preserved world run; skips all full-suite jobs'
+        type: string
+        default: ''
 permissions:
   contents: read
   actions: read
 jobs:
+  workshop-spawn:
+    if: inputs.workshop_spawn_run != ''
+    uses: ./.github/workflows/workshop-spawn.yml
+    with:
+      runtime_run: ${{ inputs.frozen_run }}
+      world_run: ${{ inputs.workshop_spawn_run }}
   prepare:
-    if: inputs.frozen_run == ''
+    if: inputs.frozen_run == '' && inputs.workshop_spawn_run == ''
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
@@ -34,7 +45,7 @@ jobs:
             build/ci-v2/canonical/
             !build/ci-v2/canonical/**/.gradle/**
   windows-preparation:
-    if: inputs.frozen_run == ''
+    if: inputs.frozen_run == '' && inputs.workshop_spawn_run == ''
     needs: prepare
     runs-on: windows-latest
     timeout-minutes: 45
@@ -58,7 +69,7 @@ jobs:
             !build/ci-v2/windows/**/.gradle/**
   gameplay:
     needs: [prepare, windows-preparation]
-    if: ${{ !cancelled() && (inputs.frozen_run != '' || (needs.prepare.result == 'success' && needs.windows-preparation.result == 'success')) }}
+    if: ${{ !cancelled() && inputs.workshop_spawn_run == '' && (inputs.frozen_run != '' || (needs.prepare.result == 'success' && needs.windows-preparation.result == 'success')) }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 120
     defaults:

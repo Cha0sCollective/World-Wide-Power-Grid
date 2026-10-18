@@ -1,5 +1,9 @@
 name: Focused Workshop export reopens
 on:
+  workflow_call:
+    inputs:
+      runtime_run: {type: string, required: true}
+      world_run: {type: string, required: true}
   workflow_dispatch:
     inputs:
       runtime_run:
