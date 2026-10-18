@@ -111,6 +111,15 @@ graphical cohorts as described in [the testing process](TESTING.md). Publishing
 does not launch either suite. Missing applicable client evidence blocks
 publication without changing a completed headless result.
 
+A version-only promotion may add `world_metadata_reuse` with schema 1,
+`scope: runtime_version_only`, the original runtime/source/version and all three
+original world descriptors in `worlds`. Both reused acceptance cohorts must name
+that same original runtime. The gate compares every native save byte and permits
+only the top-level target/jar labels and literal version text in `WWPG_README.txt`
+to change. Original inventories, saved settings, spawn metadata and captured
+proofs stay unchanged. Derived archives are labelled packaging reuse, never new
+world or client executions. Without this record, exact archive hashes must match.
+
 ## Stage and inspect the five downloads
 
 ```text

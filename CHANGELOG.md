@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.2 — 18 October 2026
+
+- Prevent recursive wire-tracing crashes; batch loading and matrix updates without pausing unrelated circuits.
+- Reduce network discovery, terminal/CEE preparation, wire-power, result and substep-input overhead; group addon work by network.
+- Preserve storage/history and unavailable readings during restoration and rejected solves; fix stale wires, circuit regrouping and batching ownership.
+- Reject unsafe factorizations, permutations and nonfinite results; keep genuine diagnostics visible.
+- Restore handheld connector readings, stabilize contactors and keep buzzer audio client-side.
+- Add CEE terminal highlights, fixed Workshop spawn, combined Pinout yard and the 14,650-node benchmark.
+- Integrate the addon starter/SDK guides and separate manual headless/graphical acceptance.
+- Promote beta.5 unchanged except version metadata. API 1.0, saves, native binary, equations and 16 substeps remain compatible. The 20 TPS goal and tiny-pin targeting remain open.
+
 ## 0.2.2-beta.5 — 17 October 2026
 
 - Keep contactors stable while their coil readings are unavailable during circuit restoration; normal power loss still releases them after accepted solving.
