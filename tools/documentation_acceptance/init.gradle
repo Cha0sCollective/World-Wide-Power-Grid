@@ -67,6 +67,7 @@ gradle.projectsEvaluated {
                 throw new GradleException('Extract an existing disposable test save and supply the released source example jar')
             // Java argument files require quotes around spaces and escapes inside quotes.
             def worldArgument='"'+worldName.replace('\\','\\\\').replace('"','\\"')+'"'
+            def separated=p.providers.gradleProperty('ciV2').getOrElse('false')=='true'
             mainClass = run.mainClass
             args = run.args.collect { argument ->
                 if(!argument.startsWith('@')) return argument
@@ -74,9 +75,12 @@ gradle.projectsEvaluated {
                 def program=original.getText('UTF-8')
                 def quickPlay='--quickPlayMultiplayer\n127.0.0.1:25575'
                 if(!program.contains(quickPlay)) throw new GradleException('Missing expected multiplayer argument pair')
-                replacement.setText(program.replace(quickPlay,'--quickPlaySingleplayer\n'+worldArgument).replace('--width\n854','--width\n1280').replace('--height\n480','--height\n720'),'UTF-8')
+                replacement.setText(program.replace(quickPlay,separated?'':'--quickPlaySingleplayer\n'+worldArgument).replace('--width\n854','--width\n1280').replace('--height\n480','--height\n720'),'UTF-8')
                 return '@'+replacement.absolutePath
             }
+            // Match the v2 yard launcher: Java's Windows response-file parser
+            // uses the native code page, so pass the Unicode save name directly.
+            if(separated)args=args+['--quickPlaySingleplayer',worldName]
             jvmArgs = run.jvmArgs + ['-Dwwpg.test.packaged=false','-Dwwpg.doc.client=true','-Dwwpg.test.backend='+p.providers.gradleProperty('testBackend').getOrElse('NATIVE'),'-Dwwpg.test.multiplayer=false',
                 '-Dwwpg.ci.v2='+p.providers.gradleProperty('ciV2').getOrElse('false')]
             def expandedVm=jvmArgs.collect { argument ->
