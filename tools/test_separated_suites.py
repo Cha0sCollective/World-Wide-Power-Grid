@@ -102,6 +102,16 @@ class EvidenceChecks(unittest.TestCase):
     def file(self,name,text):
         path=self.base/name;path.write_text(text,encoding='utf-8');return suites.descriptor(path)
 
+    def test_bound_world_is_resolved_from_its_frozen_manifest_and_cannot_change(self):
+        artifacts={r:self.file(r+'.jar','TEST_ONLY '+r) for r in suites.ROLES}
+        for item in artifacts.values():item['path']=Path(item['path']).name
+        world=self.file('world.zip','TEST_ONLY exact world');world['path']='world.zip'
+        path=self.base/'bound.json'
+        suites.write(path,dict(schema=2,policy='separated-v2',source_sha='a'*40,artifacts=artifacts,worlds={'workshop/BASE':world}))
+        self.assertEqual(Path(suites.frozen_inputs(path)['worlds']['workshop/BASE']['path']),self.base/'world.zip')
+        (self.base/'world.zip').write_text('changed')
+        with self.assertRaisesRegex(ValueError,'Frozen world changed'):suites.frozen_inputs(path)
+
     def test_missing_or_failed_headless_reports_do_not_pass(self):
         with self.assertRaisesRegex(ValueError,'Missing'):evidence.validate_reports([], 'full-headless','a'*40,{})
         report=dict(schema=2,policy='separated-v2',suite='full-headless',status='failed')
@@ -239,6 +249,10 @@ class EvidenceChecks(unittest.TestCase):
         for role in ('runtime','example','upstream_example'):text+='CI_LOADED_ARTIFACT: '+role+' '+hashes[role]+'\n'
         text+=f'WWPG_TEST_BACKEND_CONFIG: requested={job["backend"]}, configured={job["backend"]}\nCEE_TERMINAL_HIGHLIGHT_CLIENT_FAILED\n'
         proof['logs']['client']=self.file('failed-highlight.log',text)
+        with self.assertRaisesRegex(ValueError,'platform spawn'):
+            validate_observation(proof,job,dict(source_sha='a'*40,artifact_hashes=hashes),self.base)
+        text+='CI_WORKSHOP_INITIAL_SPAWN_PASSED\n'
+        proof['logs']['client']=self.file('observed-spawn-failed-highlight.log',text)
         with self.assertRaisesRegex(ValueError,'Client failure remains'):
             validate_observation(proof,job,dict(source_sha='a'*40,artifact_hashes=hashes),self.base)
 

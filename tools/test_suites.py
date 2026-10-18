@@ -259,7 +259,10 @@ def execute(jobs, inputs_path, output, lane, reason=None, preparation=None):
                 args, directory = command(job, inputs, folder)
                 if job.get('operation') == 'reference': directory.mkdir(parents=True, exist_ok=True)
                 if job.get('group', '').endswith('-extracted') and not directory.exists():
-                    archive = folder / f'{job["backend"]}-{job["profile"]}-{job["group"].removesuffix("-extracted")}.zip'
+                    bound=inputs.get('worlds',{}).get(job['world']+'/'+job['profile'])
+                    archive=Path(bound['path']) if bound else folder / f'{job["backend"]}-{job["profile"]}-{job["group"].removesuffix("-extracted")}.zip'
+                    if bound and (sha(archive)!=bound['sha256'] or archive.stat().st_size!=bound['bytes']):
+                        raise ValueError('Changed bound world archive')
                     from reopen_stationary_yard import extract
                     extract(archive, directory, False)
                 log = output / (job['id'].replace('/', '__')+'.log')

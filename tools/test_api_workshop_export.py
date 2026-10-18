@@ -8,8 +8,9 @@ import tempfile
 import unittest
 import zipfile
 
-from export_api_workshop import VERSION, STATION_IDS, TICKETS, export
+from export_api_workshop import VERSION, STATION_IDS, TICKETS, export, fixed_spawn_level
 from reopen_stationary_yard import extract
+from recheck_workshop_spawn import correct, validate_correction
 
 
 class WorkshopExportChecks(unittest.TestCase):
@@ -28,7 +29,7 @@ class WorkshopExportChecks(unittest.TestCase):
                 archive.writestr("META-INF/neoforge.mods.toml", "test-only metadata")
                 archive.writestr("test-only.txt", role)
             self.jars[role] = path
-        level = b"\x0a\x00\x00\x08\x00\x09LevelName\x00\x08Original\x00"
+        level = b"\x0a\x00\x00\x08\x00\x09LevelName\x00\x08Original\x0a\x00\x09GameRules\x08\x00\x0bspawnRadius\x00\x0210\x00\x00"
         tickets = b"\x0a\x00\x00\x0a\x00\x04data\x0c\x00\x06Forced" + struct.pack(">i", len(TICKETS))
         tickets += b"".join(struct.pack(">q", (z << 32) | x) for x, z in TICKETS) + b"\x00\x00"
         self.native = {
@@ -86,10 +87,32 @@ class WorkshopExportChecks(unittest.TestCase):
                 self.assertEqual((self.root / "reopened/world" / relative).read_bytes(), data)
         raw = gzip.decompress((self.root / "reopened/world/level.dat").read_bytes())
         self.assertIn(b"Extension API Workshop", raw)
+        self.assertIn(b"spawnRadius\x00\x010", raw)
         manifest = json.loads((self.root / "reopened/world/WWPG_MANIFEST.json").read_text(encoding="utf-8"))
         self.assertEqual(set(manifest["example_addons"]), {"example", "upstream_example"})
         self.assertEqual(len(manifest["cold_restart_proofs"]), 3)
         self.assertEqual(len(manifest["stations"]["stations"]), 11)
+        self.assertEqual(manifest['spawn_policy'],'fixed-platform-v1')
+
+    def test_fixed_spawn_changes_only_the_radius_string(self):
+        before=gzip.decompress(self.native['level.dat'])
+        after=gzip.decompress(fixed_spawn_level(self.native['level.dat']))
+        self.assertEqual(after,before.replace(b'spawnRadius\x00\x0210',b'spawnRadius\x00\x010'))
+        self.assertEqual(fixed_spawn_level(gzip.compress(after)),fixed_spawn_level(self.native['level.dat']))
+        for raw in (b'missing',before+before,before.replace(b'\x00\x0210',b'\x00\x02xx')):
+            with self.assertRaises(ValueError):fixed_spawn_level(gzip.compress(raw))
+
+    def test_preserved_archive_correction_rejects_other_native_changes(self):
+        source=self.root/'old.zip';header='Workshop/WWPG_MANIFEST.json'
+        manifest=dict(profile='BASE',backend='NATIVE',files={name:dict(bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest()) for name,raw in self.native.items()})
+        with zipfile.ZipFile(source,'x') as zipped:
+            for name,raw in self.native.items():zipped.writestr('Workshop/'+name,raw)
+            zipped.writestr(header,json.dumps(manifest))
+        corrected=self.root/'corrected.zip';correct(source,corrected);validate_correction(source,corrected)
+        corrupt=self.root/'bad.zip'
+        with zipfile.ZipFile(corrected) as before,zipfile.ZipFile(corrupt,'x') as after:
+            for name in before.namelist():after.writestr(name,b'changed wire' if name.endswith('/entities/r.17.17.mca') else before.read(name))
+        with self.assertRaisesRegex(ValueError,'native payload'):validate_correction(source,corrupt)
 
     def test_missing_runtime_addon_or_cold_restart_evidence_prevents_any_export(self):
         for values in (dict(jar_hash="0" * 64), dict(addons=False), dict(phase="SETUP")):

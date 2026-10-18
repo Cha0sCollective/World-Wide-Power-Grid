@@ -34,7 +34,10 @@ final class SmokeClient {
         });
         if(!Boolean.getBoolean("wwpg.ci.tcp"))NeoForge.EVENT_BUS.addListener(ServerTickEvent.Post.class,event->{
             if(event.getServer().getPlayerList().getPlayers().isEmpty())return;
-            if(session==null)session=new SmokeSession(event.getServer().overworld(),event.getServer().getPlayerList().getPlayers());
+            if(session==null) {
+                if(!yard)RuntimeIdentity.verifyWorkshopSpawn(event.getServer().getPlayerList().getPlayers().getFirst());
+                session=new SmokeSession(event.getServer().overworld(),event.getServer().getPlayerList().getPlayers());
+            }
             session.tick();
         });
         NeoForge.EVENT_BUS.addListener(ClientTickEvent.Post.class,this::tick);

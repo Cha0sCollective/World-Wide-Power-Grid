@@ -48,6 +48,7 @@ final class DocClientAcceptance {
     private void server(ServerTickEvent.Post event) {
         if(ready||failure!=null||event.getServer().getPlayerList().getPlayers().isEmpty())return;
         try {
+            if(Boolean.getBoolean("wwpg.ci.v2"))org.cha0scollective.wwpg.acceptance.RuntimeIdentity.verifyWorkshopSpawn(event.getServer().getPlayerList().getPlayers().getFirst());
             var backend=CSolver.SolverBackend.valueOf(System.getProperty("wwpg.test.backend","NATIVE"));
             require(backend.isSupported(),"Backend unavailable");
             ModdedConfigs.server().electricity.solver.solverBackend.set(backend);

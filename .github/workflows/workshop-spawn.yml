@@ -1,0 +1,90 @@
+name: Focused Workshop export reopens
+on:
+  workflow_dispatch:
+    inputs:
+      runtime_run:
+        description: 'Preserved run containing the frozen canonical runtime'
+        type: string
+        required: true
+      world_run:
+        description: 'Passing continued run containing Native Workshop exports'
+        type: string
+        required: true
+permissions:
+  contents: read
+  actions: read
+jobs:
+  worlds:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - uses: actions/download-artifact@v4
+        with:
+          name: ci-v2-canonical
+          path: build/ci-v2/canonical
+          run-id: ${{ inputs.runtime_run }}
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: ci-v2-continued-ubuntu-24.04-NATIVE-BASE-21.1.231
+          path: build/ci-v2/portable-continued/ubuntu-24.04-NATIVE-BASE-21.1.231
+          run-id: ${{ inputs.world_run }}
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: ci-v2-continued-ubuntu-24.04-NATIVE-PINOUT-21.1.231
+          path: build/ci-v2/portable-continued/ubuntu-24.04-NATIVE-PINOUT-21.1.231
+          run-id: ${{ inputs.world_run }}
+          github-token: ${{ github.token }}
+      - name: Freeze metadata-only Workshop corrections once
+        run: >-
+          python tools/recheck_workshop_spawn.py prepare
+          --inputs build/ci-v2/canonical/frozen/inputs.json
+          --base-report build/ci-v2/portable-continued/ubuntu-24.04-NATIVE-BASE-21.1.231/result.json
+          --pinout-report build/ci-v2/portable-continued/ubuntu-24.04-NATIVE-PINOUT-21.1.231/result.json
+          --output build/ci-v2/spawn
+      - uses: actions/upload-artifact@v4
+        with: {name: workshop-spawn-inputs, path: build/ci-v2/spawn/}
+  reopens:
+    needs: worlds
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-latest]
+        backend: [NATIVE, JAVA]
+        profile: [BASE, PINOUT]
+    defaults:
+      run: {shell: bash}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: {distribution: temurin, java-version: '21'}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - uses: gradle/actions/setup-gradle@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: ci-v2-canonical
+          path: build/ci-v2/canonical
+          run-id: ${{ inputs.runtime_run }}
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with: {name: workshop-spawn-inputs, path: build/ci-v2/spawn}
+      - if: runner.os != 'Windows'
+        run: chmod +x gradlew
+      - name: Verify unchanged native payloads and run three exact archive reopens
+        run: >-
+          python tools/recheck_workshop_spawn.py run
+          --inputs build/ci-v2/spawn/inputs.json
+          --corrections build/ci-v2/spawn/spawn-corrections.json
+          --backend ${{ matrix.backend }} --profile ${{ matrix.profile }}
+          --output build/ci-v2/spawn-check-${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: workshop-spawn-${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}
+          path: build/ci-v2/spawn-check-${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}/portable/

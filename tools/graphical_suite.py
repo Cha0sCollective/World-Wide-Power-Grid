@@ -80,6 +80,8 @@ def validate_observation(proof, job, inputs, base):
         require('All dimensions are saved' in texts['server'], 'Server did not save')
         require('GAME TESTS COMPLETE' in texts['server'] and re.search(r'All [1-9][0-9]* required tests passed',texts['server']), 'Dedicated scenario did not finish its assertions')
     else:require('All dimensions are saved' in texts['client'], 'Integrated server did not save')
+    if job['world']=='workshop' and not job['tcp']:
+        require('CI_WORKSHOP_INITIAL_SPAWN_PASSED' in texts['client'],'Fresh Workshop platform spawn was not observed before helper teleport')
     for text in texts.values():
         require('CI_LOADED_ARTIFACT: runtime '+inputs['artifact_hashes']['runtime'] in text,'Actual loaded runtime differs')
         require('NeoForge mod loading, version '+job['loader'] in text,'Actual loader differs')
