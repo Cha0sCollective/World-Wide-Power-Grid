@@ -85,6 +85,16 @@ installation checks remain separate. Source-world cold restarts and exact ZIP
 reopens remain distinct checks. References, example and showroom checks execute
 once per operating-system/backend combination.
 
+For an investigated Workshop spawn-metadata correction, the manual workflow's
+`workshop_spawn_run` input selects only the focused export/reopen continuation.
+Supply the preserved canonical runtime run as `frozen_run` and the passing world
+run as `workshop_spawn_run`. This mode skips preparation and every full-suite
+job. It freezes the corrected archives once and runs their three exact reopens
+on Windows/Linux and both solvers/profiles. Original source-world cold checks
+remain separate. Compare every native payload and all uncompressed `level.dat`
+NBT outside `spawnRadius`; a changed electrical save requires broader testing.
+The equivalent focused tools are `recheck_workshop_spawn.py prepare` and `run`.
+
 ## Separate local graphical acceptance
 
 Graphical sessions run serially on the local Windows desktop. Performance

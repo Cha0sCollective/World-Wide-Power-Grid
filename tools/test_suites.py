@@ -218,6 +218,16 @@ def command(job, inputs, output):
     return args, directory
 
 
+def archive_for_reopen(job, inputs, folder):
+    world=job['group'].removesuffix('-extracted')
+    bound=inputs.get('worlds',{}).get(world+'/'+job['profile'])
+    if not bound:return folder/f'{job["backend"]}-{job["profile"]}-{world}.zip'
+    archive=Path(bound['path'])
+    if sha(archive)!=bound['sha256'] or archive.stat().st_size!=bound['bytes']:
+        raise ValueError('Changed bound world archive')
+    return archive
+
+
 def execute(jobs, inputs_path, output, lane, reason=None, preparation=None):
     inputs = frozen_inputs(inputs_path)
     if any(j['platform'] != host_platform() for j in jobs): raise ValueError('Select this machine platform')
@@ -259,10 +269,7 @@ def execute(jobs, inputs_path, output, lane, reason=None, preparation=None):
                 args, directory = command(job, inputs, folder)
                 if job.get('operation') == 'reference': directory.mkdir(parents=True, exist_ok=True)
                 if job.get('group', '').endswith('-extracted') and not directory.exists():
-                    bound=inputs.get('worlds',{}).get(job['world']+'/'+job['profile'])
-                    archive=Path(bound['path']) if bound else folder / f'{job["backend"]}-{job["profile"]}-{job["group"].removesuffix("-extracted")}.zip'
-                    if bound and (sha(archive)!=bound['sha256'] or archive.stat().st_size!=bound['bytes']):
-                        raise ValueError('Changed bound world archive')
+                    archive=archive_for_reopen(job,inputs,folder)
                     from reopen_stationary_yard import extract
                     extract(archive, directory, False)
                 log = output / (job['id'].replace('/', '__')+'.log')

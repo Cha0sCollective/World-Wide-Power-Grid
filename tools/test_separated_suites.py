@@ -112,6 +112,17 @@ class EvidenceChecks(unittest.TestCase):
         (self.base/'world.zip').write_text('changed')
         with self.assertRaisesRegex(ValueError,'Frozen world changed'):suites.frozen_inputs(path)
 
+    def test_actual_reopen_selection_uses_group_with_bound_and_unbound_inputs(self):
+        job=next(j for j in suites.plan('full-headless') if j.get('group')=='workshop-extracted')
+        self.assertNotIn('world',job)
+        expected=self.base/f'{job["backend"]}-{job["profile"]}-workshop.zip'
+        self.assertEqual(suites.archive_for_reopen(job,{},self.base),expected)
+        item=self.file('fixed-world.zip','TEST_ONLY fixed metadata')
+        inputs={'worlds':{'workshop/'+job['profile']:item}}
+        self.assertEqual(suites.archive_for_reopen(job,inputs,self.base),Path(item['path']))
+        Path(item['path']).write_text('changed')
+        with self.assertRaisesRegex(ValueError,'Changed bound'):suites.archive_for_reopen(job,inputs,self.base)
+
     def test_missing_or_failed_headless_reports_do_not_pass(self):
         with self.assertRaisesRegex(ValueError,'Missing'):evidence.validate_reports([], 'full-headless','a'*40,{})
         report=dict(schema=2,policy='separated-v2',suite='full-headless',status='failed')

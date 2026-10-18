@@ -241,6 +241,17 @@ def validate_release(manifest, root, gate):
     worlds = {'yard/PINOUT': manifest['stationary_yard']['sha256'],
               'workshop/BASE': manifest['base_workshop_world']['sha256'],
               'workshop/PINOUT': manifest['pinout_workshop_world']['sha256']}
+    import gzip
+    import zipfile
+    from export_api_workshop import fixed_spawn_level
+    for key in ('base_workshop_world','pinout_workshop_world'):
+        with zipfile.ZipFile(gate.locked_file(manifest[key],root)) as archive:
+            headers=[n for n in archive.namelist() if n.endswith('/WWPG_MANIFEST.json')]
+            require(len(headers)==1,'Workshop inventory is ambiguous')
+            header=json.loads(archive.read(headers[0]))
+            require(header.get('spawn_policy')=='fixed-platform-v1','Workshop lacks fixed platform spawn policy')
+            raw=archive.read(headers[0].removesuffix('WWPG_MANIFEST.json')+'level.dat')
+            require(gzip.decompress(raw)==gzip.decompress(fixed_spawn_level(raw)),'Workshop still randomizes spawn beyond its platform')
     clients = read(gate.locked_file(manifest['graphical_acceptance'], root))
     headless=read(gate.locked_file(manifest['headless_acceptance'],root))
     exports={job['archive']['sha256'] for entry in headless['reports'] for job in read(gate.locked_file(entry,root))['jobs'] if job.get('operation')=='export'}
