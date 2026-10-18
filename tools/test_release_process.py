@@ -17,6 +17,26 @@ from package_api_release import PublicationError, locked_file, sha
 
 
 class ReleaseChecks(unittest.TestCase):
+    def test_transient_windows_lock_preserves_atomic_staging(self):
+        ready=self.root/'ready';ready.mkdir()
+        error=PermissionError('TEST_ONLY sharing lock');error.winerror=32
+        original=Path.rename
+        attempts=[]
+        def rename(path,target):
+            attempts.append(path)
+            if len(attempts)==1:raise error
+            return original(path,target)
+        with patch.object(Path,'rename',rename),patch.object(release.time,'sleep'):
+            release.finish_staging(ready,self.output)
+        self.assertTrue(self.output.is_dir());self.assertFalse(ready.exists())
+
+    def test_persistent_windows_lock_cannot_publish_partial_staging(self):
+        ready=self.root/'ready';ready.mkdir()
+        error=PermissionError('TEST_ONLY persistent lock');error.winerror=5
+        with patch.object(Path,'rename',side_effect=error),patch.object(release.time,'sleep'):
+            with self.assertRaises(PermissionError):release.finish_staging(ready,self.output)
+        self.assertTrue(ready.is_dir());self.assertFalse(self.output.exists())
+
     def test_optional_benchmark_inventory_and_actual_label(self):
         prefix = 'WWPG Benchmark - MIXED - 14650 electrical nodes/'
         files = {'level.dat': b'TEST_ONLY level', 'WWPG_README.txt': b'TEST_ONLY instructions'}

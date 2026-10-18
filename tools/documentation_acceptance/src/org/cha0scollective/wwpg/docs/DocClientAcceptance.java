@@ -37,6 +37,12 @@ final class DocClientAcceptance {
     private boolean complete,configured;
     private final List<String> messages=new ArrayList<>();
     DocClientAcceptance() {
+        if(Boolean.getBoolean("wwpg.ci.v2")){
+            require(!Boolean.getBoolean("wwpg.test.multiplayer"),"SDK integrated client must disable the legacy TCP driver");
+            LOG.info("DOC_CLIENT_MODE_PASSED: multiplayer=false");
+            org.cha0scollective.wwpg.acceptance.RuntimeIdentity.record();
+            org.cha0scollective.wwpg.acceptance.ClientShutdown.install();
+        }
         NeoForge.EVENT_BUS.addListener(ClientTickEvent.Post.class,this::tick);
         NeoForge.EVENT_BUS.addListener(ServerTickEvent.Post.class,this::server);
         NeoForge.EVENT_BUS.addListener(ClientChatReceivedEvent.System.class,event->messages.add(event.getMessage().getString()));
@@ -44,6 +50,7 @@ final class DocClientAcceptance {
     private void server(ServerTickEvent.Post event) {
         if(ready||failure!=null||event.getServer().getPlayerList().getPlayers().isEmpty())return;
         try {
+            if(Boolean.getBoolean("wwpg.ci.v2"))org.cha0scollective.wwpg.acceptance.RuntimeIdentity.verifyWorkshopSpawn(event.getServer().getPlayerList().getPlayers().getFirst());
             var backend=CSolver.SolverBackend.valueOf(System.getProperty("wwpg.test.backend","NATIVE"));
             require(backend.isSupported(),"Backend unavailable");
             ModdedConfigs.server().electricity.solver.solverBackend.set(backend);
@@ -59,6 +66,7 @@ final class DocClientAcceptance {
         } catch(Throwable error) {failure=error.toString();LOG.error("DOC_CLIENT_FAILED",error);}
     }
     private void tick(ClientTickEvent.Post event) {
+        if(org.cha0scollective.wwpg.acceptance.ClientShutdown.active())return;
         var mc=Minecraft.getInstance();mc.options.pauseOnLostFocus=false;
         if(complete||failure!=null){if(++stopAge>20)mc.stop();return;}
         try {
@@ -116,6 +124,7 @@ final class DocClientAcceptance {
                             result.put("helper_sha256",DocAcceptance.artifactHash("wwpg_doc_acceptance"));
                             Files.writeString(Path.of("doc-client-result.json"),new com.google.gson.GsonBuilder().setPrettyPrinting().create().toJson(result));
                             LOG.info("DOC_CLIENT_PASSED: backend={}, voltage={}, readout={}",expected,volts,load.reading());complete=true;
+                            if(Boolean.getBoolean("wwpg.ci.v2"))org.cha0scollective.wwpg.acceptance.ClientShutdown.request();
                         }catch(Throwable error){failure=error.toString();LOG.error("DOC_CLIENT_FAILED",error);}
                     });
                 }

@@ -9,6 +9,10 @@ gradle.projectsEvaluated {
         resources.srcDir p.file('tools/documentation_acceptance/resources')
         compileClasspath = p.sourceSets.main.compileClasspath + p.files(starter, frozen)
     }
+    p.tasks.named('compileDocAcceptanceJava',JavaCompile) { task ->
+        task.source(p.file('tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ClientShutdown.java'))
+        task.source(p.file('tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/RuntimeIdentity.java'))
+    }
     def helper = p.tasks.register('docAcceptanceJar', Jar) {
         dependsOn p.tasks.named('docAcceptanceClasses')
         from source.output
@@ -63,6 +67,7 @@ gradle.projectsEvaluated {
                 throw new GradleException('Extract an existing disposable test save and supply the released source example jar')
             // Java argument files require quotes around spaces and escapes inside quotes.
             def worldArgument='"'+worldName.replace('\\','\\\\').replace('"','\\"')+'"'
+            def separated=p.providers.gradleProperty('ciV2').getOrElse('false')=='true'
             mainClass = run.mainClass
             args = run.args.collect { argument ->
                 if(!argument.startsWith('@')) return argument
@@ -70,14 +75,23 @@ gradle.projectsEvaluated {
                 def program=original.getText('UTF-8')
                 def quickPlay='--quickPlayMultiplayer\n127.0.0.1:25575'
                 if(!program.contains(quickPlay)) throw new GradleException('Missing expected multiplayer argument pair')
-                replacement.setText(program.replace(quickPlay,'--quickPlaySingleplayer\n'+worldArgument).replace('--width\n854','--width\n1280').replace('--height\n480','--height\n720'),'UTF-8')
+                replacement.setText(program.replace(quickPlay,separated?'':'--quickPlaySingleplayer\n'+worldArgument).replace('--width\n854','--width\n1280').replace('--height\n480','--height\n720'),'UTF-8')
                 return '@'+replacement.absolutePath
             }
-            jvmArgs = run.jvmArgs + ['-Dwwpg.test.packaged=false','-Dwwpg.doc.client=true','-Dwwpg.test.backend='+p.providers.gradleProperty('testBackend').getOrElse('NATIVE'),'-Dwwpg.test.multiplayer=false']
+            // Match the v2 yard launcher: Java's Windows response-file parser
+            // uses the native code page, so pass the Unicode save name directly.
+            if(separated)args=args+['--quickPlaySingleplayer',worldName]
+            jvmArgs = run.jvmArgs + ['-Dwwpg.test.packaged=false','-Dwwpg.doc.client=true','-Dwwpg.test.backend='+p.providers.gradleProperty('testBackend').getOrElse('NATIVE'),'-Dwwpg.test.multiplayer=false',
+                '-Dwwpg.ci.v2='+p.providers.gradleProperty('ciV2').getOrElse('false')]
             def expandedVm=jvmArgs.collect { argument ->
                 argument.startsWith('@') ? p.file(argument.substring(1)).getText('UTF-8') : argument
             }.join('\n')+'\n'
-            new File(workingDir,'documentation-client-vm-args.txt').setText(expandedVm,'UTF-8')
+            def vmFile=new File(workingDir,'documentation-client-vm-args.txt')
+            vmFile.setText(expandedVm,'UTF-8')
+            // JavaExec extracts inline -D arguments ahead of @files. Keeping
+            // the ordered options in one file makes the final false override
+            // effective, so the legacy TCP driver cannot steal the title screen.
+            jvmArgs=['@'+vmFile.absolutePath]
             classpath = run.classpathProvider.filter { ![p.sourceSets.main,p.sourceSets.extensionApi,p.sourceSets.ceeApi].any { set -> set.output.files.contains(it) } } + p.files(frozen,starter,example,helper.get().archiveFile.get().asFile)
             def env = new HashMap(run.environmentProperty.get())
             env['MOD_CLASSES']='wwpg%%'+frozen.absolutePath+File.pathSeparator+'tutorial_load%%'+starter.absolutePath+File.pathSeparator+'wwpg_doc_acceptance%%'+helper.get().archiveFile.get().asFile.absolutePath

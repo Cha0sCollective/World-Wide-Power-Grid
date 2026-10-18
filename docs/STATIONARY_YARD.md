@@ -1,10 +1,10 @@
 # Stationary Test Yard
 
-This world lets you try WWPG 0.2.2-beta.4 without building a factory first. Switch lamps, pump water, run a heater, compare transformer voltages, charge storage, and operate circuit boards and electrical panels. The equipment mixes CEE and Power Grid in working circuits.
+This world lets you try WWPG 0.2.2-beta.5 without building a factory first. Switch lamps, pump water, run a heater, compare transformer voltages, charge storage, and operate circuit boards and electrical panels. The equipment mixes CEE and Power Grid in working circuits.
 
 The combined yard includes all ordinary exhibits and the Pinout computer stations.
 
-Download and extract the [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.2-beta.4/wwpg-0.2.2-beta.4-example-worlds.zip), then extract `wwpg-0.2.2-beta.4-stationary-yard.zip` into your instance's `saves` directory.
+Download and extract the [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.2-beta.5/wwpg-0.2.2-beta.5-example-worlds.zip), then extract `wwpg-0.2.2-beta.5-stationary-yard.zip` into your instance's `saves` directory.
 
 Install the [required mods](INSTALL.md#required-versions), **CC:Tweaked 1.120.2** and **Pinout 0.2.1** on the server and every client. There is one combined yard download. The optional computer mods are not required for ordinary factories.
 
@@ -49,6 +49,10 @@ Voltages are measured relative to the common connection, so a negative number is
 
 `wwpg stop` switches off all eight pin lamps. The separate board RUN lamp stays on briefly while its capacitor discharges, then the OFF lamp lights. Allow about three seconds for the relay to respond after starting or stopping. A native PG diode keeps that stored energy from feeding back into pin 3's indicator.
 
+## Selecting CEE terminals
+
+Hold a Power Grid wire tool in either hand, or wear Engineer's Goggles, and aim at a CEE terminal. A box and its native label show which terminal you are selecting. Empty hands without goggles hide that highlight. Tiny capacitor pins still have a separate targeting limitation; their selection is not certified by this change.
+
 ## Reset, repair and report a problem
 
 Follow the station's reset sign to restore its original settings and turn its feed back on. Give charging circuits and relay delays a few seconds to settle. For bulbs, wire decorations and duplex cables, use the [wiring and repair guide](STATIONARY_WIRING.md). Re-extract your clean download if you want to undo extensive changes.
@@ -57,4 +61,4 @@ The download has connected wires, saved Nether links and the Pinout computer pro
 
 For a report, include the exhibit code, what you operated, the reading you expected and what happened. [Current status](STATUS.md) lists release limitations. An operator can run `/wwpg at x y z` to inspect the affected block, `/wwpg topology` for recent connection changes, and `/wwpg errors` for recent errors. These commands do not load distant chunks.
 
-The [0.2.2-beta.4 verification record](../release/0.2.2-beta.4/verification.json) records checks on the exact downloadable worlds. The yard covers the [declared stationary content](SUPPORT.md); moving machinery and large-server performance remain outside this release's scope. Earlier downloads and their check records remain unchanged.
+The [0.2.2-beta.5 verification record](../release/0.2.2-beta.5/verification.json) records checks on the exact downloadable worlds. The yard covers the [declared stationary content](SUPPORT.md); moving machinery and large-server performance remain outside this release's scope. Earlier downloads and their check records remain unchanged.

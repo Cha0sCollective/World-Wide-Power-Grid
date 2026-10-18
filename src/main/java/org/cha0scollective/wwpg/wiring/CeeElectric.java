@@ -8,16 +8,19 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.AABB;
 import org.patryk3211.powergrid.electricity.GlobalElectricNetworks;
 import org.patryk3211.powergrid.electricity.base.ElectricBehaviour;
 import org.patryk3211.powergrid.electricity.base.IElectric;
 import org.patryk3211.powergrid.electricity.base.IElectricEntity;
 import org.patryk3211.powergrid.electricity.base.ITerminalPlacement;
+import org.patryk3211.powergrid.electricity.base.IDecoratedTerminal;
 import org.patryk3211.powergrid.electricity.sim.ElectricalNetwork;
 import org.patryk3211.powergrid.electricity.sim.node.OwnedFloatingNode;
 import org.patryk3211.powergrid.electricity.sim.special.TransmissionLine;
@@ -90,14 +93,23 @@ public final class CeeElectric implements IElectric {
     }
 
     private Placement placement(BlockState state, int nativeId, Vec3 origin) {
-        return new Placement(nativeId, origin, block.getNodeSize(level, pos, state, nativeId) / 2.0);
+        return new Placement(nativeId, origin, block.getNodeSize(level, pos, state, nativeId) / 2.0,
+                block.getNodeLabel(level, pos, state, nativeId));
     }
 
-    private record Placement(int nativeId, Vec3 origin, double radius) implements ITerminalPlacement {
+    private record Placement(int nativeId, Vec3 origin, double radius, Component name)
+            implements ITerminalPlacement, IDecoratedTerminal {
         @Override public boolean check(Vec3 point) {
             return Math.abs(point.x - origin.x) <= radius && Math.abs(point.y - origin.y) <= radius && Math.abs(point.z - origin.z) <= radius;
         }
         @Override public Vec3 getOrigin() { return origin; }
+        @Override public Component getName() { return name; }
+        // PG's existing highlighter consumes this same placement. Keep its box
+        // identical to the selectable CEE bounds rather than a second hitbox.
+        @Override public AABB getOutline() {
+            return new AABB(origin.x-radius, origin.y-radius, origin.z-radius,
+                    origin.x+radius, origin.y+radius, origin.z+radius);
+        }
     }
     @Override public ElectricBehaviour getBehaviour(Level world, BlockPos position, BlockState state) { return behaviour; }
     @Override public boolean accepts(net.minecraft.world.item.ItemStack wireStack) {

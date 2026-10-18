@@ -50,6 +50,11 @@ def validate(manifest, root, gate):
         'Unknown combined-yard policy')
     gate.require('base_world' not in manifest and 'pinout_world' not in manifest,
         'Combined yard cannot also claim separate yard editions')
+    if manifest.get('acceptance_policy') == 'separated-v2':
+        # The caller has already validated named headless and client coverage.
+        # The old combined record's screenshot-count contract remains unchanged.
+        world_files(manifest['stationary_yard'], root, gate, manifest['wwpg_version'], manifest['artifacts']['runtime']['sha256'])
+        return
     record = raw_json(manifest.get('stationary_yard_acceptance', {}), root, gate)
     gate.require(record.get('schema') == 1 and record.get('policy') == POLICY,
         'Missing combined-yard acceptance')

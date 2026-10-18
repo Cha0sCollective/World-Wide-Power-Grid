@@ -1,0 +1,102 @@
+// All v2 client launches consume one frozen input set and one helper build.
+// This script never depends on the WWPG build/jar/test tasks.
+gradle.projectsEvaluated {
+    def p=gradle.rootProject
+    def inputs=new groovy.json.JsonSlurper().parse(p.file(p.property('ciInputs')))
+    def selected=new groovy.json.JsonSlurper().parse(p.file(p.property('ciCase')))
+    def root=p.file(p.property('ciDirectory'))
+    def artifact={role->p.file(inputs.artifacts[role].path)}
+    def digest={file->java.security.MessageDigest.getInstance('SHA-256').digest(file.bytes).encodeHex().toString()}
+    def sources=p.fileTree('tools/client_acceptance/src'){include '**/*.java'}
+    def out=p.file('build/ci-client-helper')
+    def compilationInputs=new File(out,'compiled-inputs.json')
+    def inputsToCapture={sources.files+p.fileTree('tools/client_acceptance/resources').files+[p.file('tools/client_acceptance/suite.gradle'),p.file('tools/test-suites.json')]}
+    def compile=p.tasks.register('compileSuiteClientHelper',JavaCompile) {
+        source sources
+        classpath=p.sourceSets.main.compileClasspath+p.files(artifact('runtime'))
+        destinationDirectory=new File(out,'classes')
+        javaCompiler=p.javaToolchains.compilerFor{languageVersion=JavaLanguageVersion.of(21)}
+        options.encoding='UTF-8'
+        getInputs().files(inputsToCapture())
+        outputs.file(compilationInputs)
+        outputs.cacheIf{false}
+        doFirst {
+            def ledger=inputsToCapture().collect{file->
+                def relative=p.relativePath(file), saved=new File(out,'compiled-sources/'+digest(file)+'/'+relative)
+                saved.parentFile.mkdirs();saved.bytes=file.bytes
+                [source_path:relative,path:saved.absolutePath,sha256:digest(file)]
+            }
+            compilationInputs.parentFile.mkdirs()
+            compilationInputs.setText(groovy.json.JsonOutput.toJson(ledger),'UTF-8')
+        }
+        doLast {
+            new groovy.json.JsonSlurper().parse(compilationInputs).each{item->
+                if(digest(p.file(item.source_path))!=item.sha256)throw new GradleException('Helper source changed during compilation')
+            }
+        }
+    }
+    def helper=p.tasks.register('suiteClientHelperJar',Jar) {
+        dependsOn compile;from compile.map{it.destinationDirectory};from p.file('tools/client_acceptance/resources')
+        destinationDirectory=out;archiveFileName='wwpg-suite-client-helper.jar'
+        preserveFileTimestamps=false;reproducibleFileOrder=true
+    }
+    p.tasks.register('prepareSuiteClients') {
+        dependsOn helper,p.tasks.named('prepareClientARun'),p.tasks.named('installPgNative')
+        if(selected.tcp)dependsOn p.tasks.named('prepareClientBRun'),p.tasks.named('prepareGameTestServerRun')
+        doLast {
+            def launches=[], files=[]
+            def snapshot={file-> [path:file.absolutePath,sha256:digest(file),bytes:file.length()]}
+            def frozen=new File(root,'helper');if(frozen.exists())throw new GradleException('Preserve earlier helper snapshot')
+            frozen.mkdirs();def jar=new File(frozen,'helper.jar');jar.bytes=helper.get().archiveFile.get().asFile.bytes
+            new groovy.json.JsonSlurper().parse(compilationInputs).each { item->
+                def saved=p.file(item.path)
+                if(digest(saved)!=item.sha256||digest(p.file(item.source_path))!=item.sha256)throw new GradleException('Helper inputs differ from compiled sources')
+                // Keep snapshots below Windows MAX_PATH; source_path retains the
+                // full logical identity independently of this storage name.
+                def target=new File(frozen,'inputs/'+files.size()+'-'+saved.name);target.parentFile.mkdirs();target.bytes=saved.bytes
+                files.add(snapshot(target)+[source_path:item.source_path])
+            }
+            def smoke=selected.backend=='JAVA'||selected.scenario in ['workshop-integrated','base-workshop']
+            def tasks=selected.tcp?['server':'runGameTestServer','client-a':'runClientA','client-b':'runClientB']:['client':'runClientA']
+            tasks.each {role,name->
+                def run=p.tasks.named(name).get(), directory=selected.tcp?new File(root,role):root
+                directory.mkdirs()
+                def save=selected.tcp?new File(root,'server/world'):new File(root,'saves/'+selected.save_name)
+                def apiFull=selected.scenario=='workshop-tcp'&&!smoke
+                def namespace=smoke?'wwpg_ci_client':apiFull?'wwpg_api_multiplayer':'wwpg_multiplayer'
+                def vm=run.jvmArgs.collect {arg-> arg.startsWith('@')?p.file(arg.substring(1)).getText('UTF-8'):arg}.join('\n')+
+                    '\n-Dwwpg.test.multiplayer=false\n-Dwwpg.ci.v2=true\n-Dwwpg.ci.smoke='+smoke+'\n-Dwwpg.ci.tcp='+selected.tcp+
+                    '\n-Dwwpg.ci.scenario='+selected.scenario+
+                    '\n-Dwwpg.ci.views='+selected.views.join(',')+'\n-Dwwpg.ci.workshopViews='+selected.workshop_views.join(',')+'\n-Dwwpg.ci.gallery='+selected.gallery+
+                    '\n-Dwwpg.test.apiWorkshop='+apiFull+'\n-Dwwpg.test.apiMode=multiplayer'+
+                    '\n-Dwwpg.test.backend='+selected.backend+'\n-Dwwpg.test.profile='+selected.profile+'\n-Dwwpg.test.restartPhase=VERIFY\n'
+                if(role=='server') {
+                    vm+='-Dneoforge.enabledGameTestNamespaces='+namespace+'\n'
+                    if(!smoke&&!apiFull)vm+='-Dwwpg.test.multiplayer=true\n-Dwwpg.test.stationaryMultiplayer=true\n'
+                }
+                def program=run.args.collect {arg->arg.startsWith('@')?p.file(arg.substring(1)).getText('UTF-8'):arg}.join('\n')
+                if(!selected.tcp)program=program.replace('--quickPlayMultiplayer\n127.0.0.1:25575','')
+                program=program.replace('--width\n854','--width\n1280').replace('--height\n480','--height\n720')
+                def cp=run.classpathProvider.filter {file->![p.sourceSets.main,p.sourceSets.extensionApi,p.sourceSets.ceeApi].any{it.output.files.contains(file)}
+                    && !file.name.startsWith('wwpg-api-example-')&&!file.name.startsWith('wwpg-upstream-api-example-')}
+                cp+=p.files(artifact('runtime'),jar)
+                if(selected.world=='workshop')cp+=p.files(artifact('example'),artifact('upstream_example'))
+                def quote={value->'"'+value.toString().replace('\\','/').replace('"','\\"')+'"'}
+                def launch=new File(root,role+'-arguments.txt')
+                launch.setText(vm+'\n'+['-cp',cp.asPath,run.mainClass.get()].collect(quote).join('\n')+'\n'+program+'\n','UTF-8')
+                def env=new HashMap(run.environmentProperty.get())
+                env['MOD_CLASSES']='wwpg%%'+artifact('runtime').absolutePath+File.pathSeparator+'wwpg_acceptance%%'+jar.absolutePath
+                // Windows Java response files use the native code page. Keep
+                // Unicode save names on the process's wide-character command line.
+                def command=[p.javaToolchains.launcherFor{languageVersion=JavaLanguageVersion.of(21)}.get().executablePath.asFile.absolutePath,
+                    '-Dwwpg.ci.save='+save.absolutePath,'@'+launch.absolutePath]
+                if(!selected.tcp)command+=['--quickPlaySingleplayer',selected.save_name]
+                launches.add([role:role,directory:directory.absolutePath,command:command,
+                    environment:env,arguments:snapshot(launch)])
+            }
+            def record=[schema:2,helper:snapshot(jar),helper_sources:files,launches:launches]
+            def file=new File(root,'launch.json');if(file.exists())throw new GradleException('Retain prior launch')
+            file.setText(groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(record))+'\n','UTF-8')
+        }
+    }
+}

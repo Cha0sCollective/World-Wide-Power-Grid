@@ -79,6 +79,7 @@ final class ApiWorkshopClientAcceptance {
     }
     private void tick(ClientTickEvent.Post event) {
         var mc = Minecraft.getInstance(); mc.options.pauseOnLostFocus = false;
+        if(ClientShutdown.active())return;
         if (completed || failure != null) { if (++stopping >= 100) mc.stop(); return; }
         try {
             require(System.currentTimeMillis() - started < 900000, "API client exceeded fifteen minutes");
@@ -99,7 +100,8 @@ final class ApiWorkshopClientAcceptance {
             }
             if (mc.level == null || mc.player == null || mc.gameMode == null || phase.isEmpty() || phase.equals("waiting")) return;
             if (phase.equals("done")) {
-                WorldWidePowerGrid.LOGGER.info(multiplayer ? "API_WORKSHOP_CLIENT_PASSED" : "API_WORKSHOP_GRAPHICAL_PASSED"); completed = true; return;
+                WorldWidePowerGrid.LOGGER.info(multiplayer ? "API_WORKSHOP_CLIENT_PASSED" : "API_WORKSHOP_GRAPHICAL_PASSED"); completed = true;
+                if(Boolean.getBoolean("wwpg.ci.v2"))ClientShutdown.request();return;
             }
             if (!phase.equals("board_edit") && mc.screen != null) mc.setScreen(null);
             if (advanceMovement(mc)) return;
@@ -123,6 +125,7 @@ final class ApiWorkshopClientAcceptance {
         }
     }
     private void views(Minecraft mc) {
+        if(Boolean.getBoolean("wwpg.ci.v2") && multiplayer){finish(mc);return;}
         int index = (age - 1) / 35, local = (age - 1) % 35;
         if (index >= 11) { finish(mc); return; }
         var pos = ExtensionApiClientSession.view(index);
@@ -164,9 +167,13 @@ final class ApiWorkshopClientAcceptance {
         if (age == 35) sneakClick(mc, target);
         if (!multiplayer && age == 60) { var second = ExtensionApiClientSession.load(false); face(mc, second, second.getCenter()); }
         if (!multiplayer && age == 70) sneakClick(mc, ExtensionApiClientSession.load(false));
-        if (age == 110) {
+        if (age >= 110) {
             boolean enabled = phase.equals("configure_on");
             require(booleanState(mc, target, "enabled") == enabled, "Actual API enable click did not synchronize");
+            if(Boolean.getBoolean("wwpg.ci.v2")&&multiplayer&&
+                    booleanState(mc,a?ExtensionApiClientSession.load(false):ExtensionApiClientSession.source(true),"enabled")!=enabled) {
+                require(age<REPAIR_OBSERVER_DEADLINE_TICKS,"Other player's independent control did not synchronize");return;
+            }
             if (!multiplayer) shot(mc, enabled ? "api-control-on.png" : "api-control-off.png");
             finish(mc);
         }
@@ -203,15 +210,17 @@ final class ApiWorkshopClientAcceptance {
     }
     private void panel(Minecraft mc) {
         var pos = ExtensionApiClientSession.PANEL;
+        boolean operator=!multiplayer||!Boolean.getBoolean("wwpg.ci.v2")||mc.player.getGameProfile().getName().endsWith("A");
         if (age == 25) {
             var panel = (ElectricalPanelBlockEntity) mc.level.getBlockEntity(pos);
             var attachment = panel.getAttachments()[ElectricalPanelSlot.THIRD_LEFT.ordinal()];
             face(mc, pos, attachment.getCenter());
         }
-        if (age == 35) blockClick(mc, pos);
-        if (age == 100) {
+        if (age == 35&&operator) blockClick(mc, pos);
+        if (age >= 100) {
             var panel = (ElectricalPanelBlockEntity) mc.level.getBlockEntity(pos);
             var tag = new CompoundTag(); panel.getAttachments()[ElectricalPanelSlot.THIRD_LEFT.ordinal()].write(tag, true, mc.level.registryAccess());
+            if(!operator&&!tag.getString("Color").equals("blue")){require(age<REPAIR_OBSERVER_DEADLINE_TICKS,"Other player's panel edit did not synchronize");return;}
             require(tag.getString("Color").equals("blue") && tag.getFloat("Light") > .95, "Native panel dye edit did not synchronize or lost its light");
             if (!multiplayer) shot(mc, "api-panel-edit.png"); finish(mc);
         }

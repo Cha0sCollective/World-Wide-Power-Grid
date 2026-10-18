@@ -1,14 +1,50 @@
 name: Focused packaging and SDK checks
 on:
   pull_request:
-    paths: ['docs/**', 'release/**', 'examples/**', 'tools/**', 'gradle.properties', '.github/workflows/**', 'AGENTS.md']
+    paths: ['src/**', 'build.gradle', 'settings.gradle', 'docs/**', 'release/**', 'examples/**', 'tools/**', 'gradle.properties', '.github/workflows/**', 'AGENTS.md']
   push:
     branches: [main]
-    paths: ['docs/**', 'release/**', 'examples/**', 'tools/**', 'gradle.properties', '.github/workflows/**', 'AGENTS.md']
+    paths: ['src/**', 'build.gradle', 'settings.gradle', 'docs/**', 'release/**', 'examples/**', 'tools/**', 'gradle.properties', '.github/workflows/**', 'AGENTS.md']
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
+  changed:
+    runs-on: ubuntu-24.04
+    outputs:
+      java: ${{ steps.scope.outputs.java }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - id: scope
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          python - <<'PY'
+          import os, subprocess
+          base=os.environ.get('BASE_SHA','')
+          files=subprocess.check_output(['git','diff','--name-only',base,'HEAD'],text=True).splitlines() if base and set(base)!={'0'} else ['src/']
+          changed=any(p.startswith('src/') or p in {'build.gradle','gradle.properties','settings.gradle'} for p in files)
+          with open(os.environ['GITHUB_OUTPUT'],'a') as out: out.write('java='+str(changed).lower()+'\n')
+          PY
+  units:
+    needs: changed
+    if: needs.changed.outputs.java == 'true'
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      matrix:
+        os: [ubuntu-24.04, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: {distribution: temurin, java-version: '21'}
+      - uses: gradle/actions/setup-gradle@v4
+      - if: runner.os != 'Windows'
+        run: chmod +x gradlew
+      - name: Compile, check artifacts and run unit checks only
+        shell: bash
+        run: ./gradlew check --no-daemon
   packaging:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
@@ -31,3 +67,5 @@ jobs:
       - run: python tools/test_release_acceptance_reuse.py
       - run: python tools/test_combined_stationary_release.py
       - run: python tools/test_ci_reference_continuation.py
+      - run: python tools/test_suites.py audit
+      - run: python tools/test_separated_suites.py

@@ -144,6 +144,16 @@ public final class CeeTerminalGeometryGameTests {
         for (var entry : geometry.entrySet()) {
             var terminal = adapter.terminal(state, entry.getKey());
             h.assertTrue(terminal != null && terminal.getOrigin().equals(entry.getValue()), "Native placement did not observe current geometry");
+            h.assertTrue(terminal instanceof org.patryk3211.powergrid.electricity.base.IDecoratedTerminal,
+                    "CEE terminal cannot use PG's native highlighter");
+            var decorated = (org.patryk3211.powergrid.electricity.base.IDecoratedTerminal)terminal;
+            double radius=block.getNodeSize(level,panel,state,entry.getKey())/2.0;
+            var origin=entry.getValue();
+            h.assertTrue(decorated.getOutline().equals(new net.minecraft.world.phys.AABB(
+                    origin.x-radius,origin.y-radius,origin.z-radius,origin.x+radius,origin.y+radius,origin.z+radius)),
+                    "Highlight box differs from CEE's selectable bounds");
+            h.assertTrue(decorated.getName().equals(block.getNodeLabel(level,panel,state,entry.getKey())),
+                    "Highlight label differs from CEE's native terminal label");
             int selected = adapter.terminalIndexAt(state, entry.getValue());
             h.assertTrue(selected == entry.getKey(), "Native selection returned a compacted or stale terminal ID");
             var selection = adapter.terminalAt(state, entry.getValue());

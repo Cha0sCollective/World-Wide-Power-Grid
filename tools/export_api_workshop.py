@@ -26,6 +26,20 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
+def fixed_spawn_level(data):
+    """Keep the player on the documented platform, preserving every other NBT byte."""
+    raw = gzip.decompress(data)
+    marker = b"\x08\x00\x0bspawnRadius"
+    if raw.count(marker) != 1:
+        raise ValueError("Expected one native spawnRadius game rule")
+    start = raw.index(marker) + len(marker)
+    length = int.from_bytes(raw[start:start + 2], "big")
+    previous = raw[start + 2:start + 2 + length]
+    if not previous or not previous.isdigit():
+        raise ValueError("Invalid native spawnRadius game rule")
+    return gzip.compress(raw[:start] + b"\x00\x010" + raw[start + 2 + length:], mtime=0)
+
+
 def read_json(path):
     return json.loads(path.read_text(encoding="utf-8-sig"))
 
@@ -119,8 +133,8 @@ def export(run, jar, example, upstream_example, profile, backend, output, root):
         if not path.is_file() or path.is_symlink() or not path.resolve().is_relative_to(world):
             raise ValueError(f"Unsafe or missing native source file: {path}")
         data = path.read_bytes()
-        contents[path.relative_to(world).as_posix()] = renamed_level(data, name) if path.name == "level.dat" else data
-    manifest = dict(schema=1, target=VERSION, api_version=API_VERSION, profile=profile,
+        contents[path.relative_to(world).as_posix()] = fixed_spawn_level(renamed_level(data, name)) if path.name == "level.dat" else data
+    manifest = dict(schema=1, target=VERSION, api_version=API_VERSION, profile=profile, spawn_policy="fixed-platform-v1",
                     backend=backend, save_name=name, jar=artifacts["runtime"],
                     example_addons={role: artifacts[role] for role in ("example", "upstream_example")},
                     dependencies=read_json(root / "release/artifacts.json"),

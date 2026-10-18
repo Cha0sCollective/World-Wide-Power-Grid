@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.2-beta.5 — 17 October 2026
+
+- Keep contactors stable while their coil readings are unavailable during circuit restoration; normal power loss still releases them after accepted solving.
+- Highlight selectable CEE terminals through Power Grid's existing wire-tool and goggles behavior, using native terminal bounds and labels. Tiny capacitor-pin targeting remains a separate unresolved case.
+- Separate full headless acceptance from manually requested graphical checks. Freeze campaign artifacts, share preparation, remove repeated client tours and retain distinct restart/save checks.
+- Keep new Workshop players on the documented platform instead of randomizing spawn beyond its edge.
+- Preserve API 1.0.0, existing saves, the native binary, equations and all 16 substeps. Independent headless and graphical acceptance passed; original failures and reused execution identities remain inspectable.
+
 ## 0.2.2-beta.4 — 16 October 2026
 
 - Bind matrix batching to its owning solver and preserve nested builds.

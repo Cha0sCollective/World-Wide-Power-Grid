@@ -9,7 +9,17 @@ is the current stable release. To install it or choose a playable world, use the
 [installation guide](../docs/INSTALL.md). This directory is for reviewing what
 was shipped and which checks passed.
 
-## Current prerelease: 0.2.2-beta.4 — unload safety, regrouping and meters
+## Current prerelease: 0.2.2-beta.5 — contactors, terminal highlights and testing lanes
+
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-beta.5)
+· [Verification](0.2.2-beta.5/verification.json).
+
+Adds the dev.97 contactor restoration and dev.98 CEE terminal highlights, while
+retaining beta.4's fixes. Independent headless and graphical records validate the
+frozen beta.5 jar; original failures and reused process identities are preserved.
+The benchmark save is unchanged and remains uncertified for 20 TPS.
+
+## Historical prerelease: 0.2.2-beta.4 — unload safety, regrouping and meters
 
 [Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-beta.4)
 · [Verification](0.2.2-beta.4/verification.json).

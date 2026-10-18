@@ -53,7 +53,7 @@ def run(command, log, cwd=ROOT):
                        stderr=subprocess.STDOUT, check=True)
 
 
-def prepare(output, runtime, repository_zip, runtime_source_sha=None):
+def prepare(output, runtime, repository_zip, runtime_source_sha=None, api_artifact=None):
     if runtime_source_sha is not None and (not isinstance(runtime_source_sha, str)
             or re.fullmatch(r'[0-9a-f]{40}', runtime_source_sha) is None
             or runtime_source_sha == '0' * 40):
@@ -77,7 +77,7 @@ def prepare(output, runtime, repository_zip, runtime_source_sha=None):
     provenance_path = project / 'build/sdk-provenance.json'
     provenance = json.loads(provenance_path.read_text(encoding='utf-8'))
     compiled = project / 'build/libs/tutorial-load-0.1.0.jar'
-    api = ROOT / 'build/libs/wwpg-api-1.0.0.jar'
+    api = Path(api_artifact) if api_artifact is not None else ROOT / 'build/libs/wwpg-api-1.0.0.jar'
     if provenance['api_sha256'] != sha(api) or provenance['jar_sha256'] != sha(compiled) \
             or provenance['wwpg_project_dependencies']:
         raise ValueError('Starter resolved another API or project dependency')

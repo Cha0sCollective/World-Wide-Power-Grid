@@ -1,5 +1,9 @@
 # Development and testing
 
+For current suite selection, frozen inputs and separate client acceptance, use
+[Choosing and recording tests](TESTING.md). The individual fixture commands
+below remain useful for focused development and reproducing historical runs.
+
 Run focused checks for the area being changed during development. Full-suite
 runs are manual, including the end-of-day run: wait for the user to say they
 are done and ask for the tests. Version bumps, releases, pushes and pull

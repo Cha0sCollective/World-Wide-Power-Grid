@@ -507,8 +507,13 @@ def validate_release(manifest, root):
     require(manifest.get('unresolved_failures') == [], 'Unresolved failures block API freeze/release')
     require(manifest.get('stages_complete') == list(range(1, 7)), 'All six extension API stages must pass')
     hashes = {key: manifest['artifacts'][key]['sha256'] for key in ('runtime', 'api', 'cee_api', 'example', 'upstream_example')}
-    ci = read(locked_file(manifest.get('ci', {}), root))
-    if manifest.get('acceptance_reuse'):
+    separated = manifest.get('acceptance_policy') == 'separated-v2'
+    require(manifest.get('acceptance_policy') in {None, 'separated-v2'}, 'Unknown acceptance policy')
+    ci = None if separated else read(locked_file(manifest.get('ci', {}), root))
+    if separated:
+        import suite_evidence
+        suite_evidence.validate_release(manifest, root, sys.modules[__name__])
+    elif manifest.get('acceptance_reuse'):
         import release_acceptance_reuse
         old_source, old_hashes, old_version = release_acceptance_reuse.validate(manifest, root, sys.modules[__name__])
         validate_ci_acceptance(manifest, root, ci, manifest['acceptance_reuse'].get('ci_source_sha', old_source), old_hashes, old_version)
@@ -584,12 +589,12 @@ def validate_release(manifest, root):
             require(bool(report.get('evidence')), 'Starter graphical proof lacks logs/screenshots')
             for item in report['evidence']: locked_file(item, root)
             graphical.add(backend)
-        require(graphical == BACKENDS, 'Starter graphical acceptance is incomplete')
+        require(separated or graphical == BACKENDS, 'Starter graphical acceptance is incomplete')
         with checked_zip(archive) as project:
             wrapper = project.getinfo('gradlew')
             require(wrapper.create_system == 3 and (wrapper.external_attr >> 16) & 0o111,
                     'Tutorial starter wrapper must survive ordinary Unix extraction')
-    clients = [] if manifest.get('acceptance_reuse') else manifest.get('client_acceptance', [])
+    clients = [] if separated or manifest.get('acceptance_reuse') else manifest.get('client_acceptance', [])
     client_source, client_hashes = artifact_acceptance_source(manifest, root, 'client_acceptance_reuse', hashes)
     expected = {(backend, profile, mode) for backend in BACKENDS for profile in PROFILES for mode in ('graphical', 'multiplayer')}
     found = set()
@@ -603,7 +608,7 @@ def validate_release(manifest, root):
         if combination[2] == 'multiplayer':
             require(len(set(proof.get('real_clients', []))) >= 2 and proof.get('real_tcp_clients') is True,
                     'Missing two actual multiplayer clients')
-    require(manifest.get('acceptance_reuse') or found == expected, 'Both backends/profiles need graphical and real two-client checks')
+    require(separated or manifest.get('acceptance_reuse') or found == expected, 'Both backends/profiles need graphical and real two-client checks')
     world_hashes = {}
     combined_yard = manifest.get('stationary_yard_policy') is not None
     if combined_yard:

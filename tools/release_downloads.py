@@ -13,6 +13,7 @@ import shutil
 import stat
 import subprocess
 import tempfile
+import time
 import zipfile
 
 import package_api_release as acceptance
@@ -158,6 +159,19 @@ def bundle(path, files):
             info = zipfile.ZipInfo(name, (1980, 1, 1, 0, 0, 0))
             info.compress_type, info.external_attr = zipfile.ZIP_DEFLATED, 0o100644 << 16
             archive.writestr(info, data)
+
+
+def finish_staging(staged, output):
+    """Keep the atomic handoff when Windows briefly holds newly written files."""
+    for attempt in range(6):
+        require(not output.exists(), 'Output appeared during staging; refusing overwrite')
+        try:
+            staged.rename(output)
+            return
+        except PermissionError as error:
+            if getattr(error, 'winerror', None) not in (5, 32) or attempt == 5:
+                raise
+            time.sleep(.05 * 2**attempt)
 
 
 def licenses_from(accepted, runtime):
@@ -312,8 +326,7 @@ Developer guide: {base}EXTENSION_API.md
                           repository=config['repository'], source_sha=manifest['source_sha'],
                           accepted_bundle_sha256=expected_sha, notes_sha256=sha(staged / 'release-notes.md'), assets=assets)
             write_json(staged / 'download-layout.json', layout)
-            require(not output.exists(), 'Output appeared during staging; refusing overwrite')
-            staged.rename(output)
+            finish_staging(staged, output)
     return layout
 
 
