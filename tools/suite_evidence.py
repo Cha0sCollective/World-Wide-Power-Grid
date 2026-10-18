@@ -153,7 +153,7 @@ def validate_reports(paths, lane, source_sha, hashes, complete=True):
     return seen
 
 
-def continue_headless(previous, inputs_path, output, reason, preparation, environment=None, fresh_if_unavailable=False):
+def continue_headless(previous, inputs_path, output, reason, preparation, environment=None, fresh_if_unavailable=False, plan_only=False):
     """Reuse complete passing lifecycle groups; run incomplete groups afresh.
 
     Failed attempts stay failed. A retained view points to their immutable
@@ -192,6 +192,8 @@ def continue_headless(previous, inputs_path, output, reason, preparation, enviro
                 validate_job(actual[selected['id']],selected,old,base)
         except (ValueError,KeyError,TypeError):remaining.extend(members)
         else:retained.extend(actual[j['id']] for j in members)
+    selected_ids={j['id'] for j in remaining};selected=[j for j in expected if j['id'] in selected_ids]
+    if plan_only:return dict(retained_jobs=[j['id'] for j in retained],jobs=selected,original_report_available=available)
     output=Path(output).resolve();output.mkdir(parents=True,exist_ok=False)
     def relative(path):
         item=descriptor(path);item['path']=Path(path).relative_to(ROOT).as_posix();return item
@@ -201,7 +203,6 @@ def continue_headless(previous, inputs_path, output, reason, preparation, enviro
                   reuse_reason=reason,jobs=retained,not_run=[],complete_suite=False)
         write(output/'retained.json',view);reports.append(relative(output/'retained.json'))
     # Keep the catalog's original ordering and lifecycle dependencies.
-    selected_ids={j['id'] for j in remaining};selected=[j for j in expected if j['id'] in selected_ids]
     status='failed'
     try:
         if selected:execute(selected,inputs_path,output/'execution','full-headless',reason,preparation)

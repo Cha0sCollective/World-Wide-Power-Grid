@@ -144,6 +144,9 @@ class EvidenceChecks(unittest.TestCase):
         safety={k:v for k,v in first.items() if k not in ('status','exit_code','proof','log')}
         output=self.base/'continued'
         with patch.object(evidence,'plan',return_value=[safety,api0,api1]),patch.object(suites,'execute') as execute,patch('subprocess.check_output',return_value=''):
+            planned=evidence.continue_headless(path,self.base/'inputs.json',output,'TEST_ONLY plan',None,plan_only=True)
+            execute.assert_not_called();self.assertFalse(output.exists())
+            self.assertEqual(planned['retained_jobs'],[first['id']])
             evidence.continue_headless(path,self.base/'inputs.json',output,'TEST_ONLY investigated fixture repair',None)
             self.assertEqual([j['id'] for j in execute.call_args.args[0]],[api0['id'],api1['id']])
             self.assertEqual(suites.read(path)['status'],'failed')

@@ -298,6 +298,7 @@ def main():
     continuation.add_argument('--rerun-reason',required=True)
     continuation.add_argument('--environment')
     continuation.add_argument('--fresh-if-unavailable',action='store_true')
+    continuation.add_argument('--plan',action='store_true')
     frozen = sub.add_parser('freeze'); frozen.add_argument('--output', type=Path, required=True); frozen.add_argument('--source-sha')
     binding=sub.add_parser('bind');binding.add_argument('--inputs',type=Path,required=True);binding.add_argument('--output',type=Path,required=True)
     binding.add_argument('--world',action='append',default=[]);binding.add_argument('--starter',type=Path)
@@ -314,7 +315,9 @@ def main():
     if args.action == 'audit': print(json.dumps(audit(), indent=2)); return
     if args.action == 'continue-headless':
         from suite_evidence import continue_headless
-        continue_headless(args.report,args.inputs,args.output,args.rerun_reason,args.preparation,args.environment,args.fresh_if_unavailable);return
+        result=continue_headless(args.report,args.inputs,args.output,args.rerun_reason,args.preparation,args.environment,args.fresh_if_unavailable,args.plan)
+        if args.plan:print(json.dumps(result,indent=2))
+        return
     if args.action == 'freeze': print(freeze(args.output, args.source_sha)); return
     if args.action == 'collect-client':
         from graphical_suite import collect_case
