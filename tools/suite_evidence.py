@@ -72,6 +72,12 @@ def validate_job(actual, expected, inputs, base):
         return
     if expected.get('operation') == 'export':
         archive = locked(actual['archive'], base)
+        if actual.get('producer'):
+            producer=read(locked(actual['producer'],base))
+            require(producer.get('policy')=='fixed-platform-v1' and producer['archive']['sha256']==actual['archive']['sha256'],
+                    'Corrected export producer identity differs')
+            from recheck_workshop_spawn import validate_correction
+            validate_correction(locked(producer['source'],base),archive)
         from zipfile import ZipFile
         with ZipFile(archive) as zipped:
             headers = [n for n in zipped.namelist() if n.endswith('/WWPG_MANIFEST.json')]
