@@ -38,14 +38,15 @@ record its original source/artifact identities and verify every other runtime
 entry is unchanged. SDK or packaging changes still need focused checks.
 Never describe carried-forward acceptance or an interrupted run as a fresh pass.
 
-Windows acceptance may also come from a preserved full local run, combined with
+Under the historical acceptance policy, Windows evidence may come from a preserved full local run, combined with
 the complete four-way Linux CI matrix. Use `retained_windows_acceptance` only
 with version-equivalent `acceptance_reuse`. Its validator reparses the original
 locked process outcomes, logs, unit XML, cold-state oracles and lifecycle markers;
 four unverified summaries cannot replace CI. Preserve the original ledger and
 source. Set `ci_source_sha` when the independently checked CI commit differs.
-The manual Build workflow's `platforms=linux` option runs only the missing
-platform. This does not authorize running it automatically.
+The historical Build workflow's `platforms=linux` option ran only the missing
+platform. Its definition is retained under `tools/legacy/`; current selections
+and independent lane collectors are described in [TESTING.md](TESTING.md).
 
 An optional `benchmark_world` descriptor adds the original mixed capacity save
 inside the example-worlds ZIP. Its inventory must bind every entry, label the
