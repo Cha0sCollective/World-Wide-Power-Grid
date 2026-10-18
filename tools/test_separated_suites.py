@@ -267,6 +267,17 @@ class EvidenceChecks(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'Client failure remains'):
             validate_observation(proof,job,dict(source_sha='a'*40,artifact_hashes=hashes),self.base)
 
+    def test_starter_requires_observed_integrated_mode_even_after_clean_shutdown(self):
+        job=next(j for j in suites.plan('graphical') if j['id']=='starter/JAVA/BASE')
+        hashes={r:r for r in suites.ROLES}
+        launch=self.file('sdk-launch.json',json.dumps(dict(helper=self.file('sdk-helper.jar','binary'),helper_sources=[self.file('sdk-source.java','source')])))
+        text='CI_SAVE_QUIT_CLICK: Save and Quit\nCI_SAVE_QUIT_TITLE_PASSED\nAll dimensions are saved\nCI_WORKSHOP_INITIAL_SPAWN_PASSED\n'
+        proof=dict(schema=2,scenario_id=job['id'],backend=job['backend'],profile=job['profile'],loader=job['loader'],
+            source_sha='a'*40,artifact_hashes=hashes,passed=True,world=self.file('sdk-world.zip','world'),launch=launch,
+            processes={'client':{'exit_code':0}},logs={'client':self.file('sdk-mode-missing.log',text)},screenshots=[])
+        with self.assertRaisesRegex(ValueError,'execution mode'):
+            validate_observation(proof,job,dict(source_sha='a'*40,artifact_hashes=hashes),self.base)
+
     def test_portable_copy_retains_original_json_and_hashes(self):
         from bundle_suite_evidence import bundle
         raw=self.base/'nested.json';raw.write_text(json.dumps({'source_sha':'a'*40,'log':self.file('raw.log','actual log')}))

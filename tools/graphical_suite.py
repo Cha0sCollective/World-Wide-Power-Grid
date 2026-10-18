@@ -82,6 +82,7 @@ def validate_observation(proof, job, inputs, base):
     else:require('All dimensions are saved' in texts['client'], 'Integrated server did not save')
     if job['world']=='workshop' and not job['tcp']:
         require('CI_WORKSHOP_INITIAL_SPAWN_PASSED' in texts['client'],'Fresh Workshop platform spawn was not observed before helper teleport')
+    if job['scenario']=='starter':require('DOC_CLIENT_MODE_PASSED: multiplayer=false' in texts['client'],'SDK integrated/TCP execution mode was not verified')
     for text in texts.values():
         require('CI_LOADED_ARTIFACT: runtime '+inputs['artifact_hashes']['runtime'] in text,'Actual loaded runtime differs')
         require('NeoForge mod loading, version '+job['loader'] in text,'Actual loader differs')

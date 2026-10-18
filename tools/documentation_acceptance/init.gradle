@@ -86,7 +86,12 @@ gradle.projectsEvaluated {
             def expandedVm=jvmArgs.collect { argument ->
                 argument.startsWith('@') ? p.file(argument.substring(1)).getText('UTF-8') : argument
             }.join('\n')+'\n'
-            new File(workingDir,'documentation-client-vm-args.txt').setText(expandedVm,'UTF-8')
+            def vmFile=new File(workingDir,'documentation-client-vm-args.txt')
+            vmFile.setText(expandedVm,'UTF-8')
+            // JavaExec extracts inline -D arguments ahead of @files. Keeping
+            // the ordered options in one file makes the final false override
+            // effective, so the legacy TCP driver cannot steal the title screen.
+            jvmArgs=['@'+vmFile.absolutePath]
             classpath = run.classpathProvider.filter { ![p.sourceSets.main,p.sourceSets.extensionApi,p.sourceSets.ceeApi].any { set -> set.output.files.contains(it) } } + p.files(frozen,starter,example,helper.get().archiveFile.get().asFile)
             def env = new HashMap(run.environmentProperty.get())
             env['MOD_CLASSES']='wwpg%%'+frozen.absolutePath+File.pathSeparator+'tutorial_load%%'+starter.absolutePath+File.pathSeparator+'wwpg_doc_acceptance%%'+helper.get().archiveFile.get().asFile.absolutePath

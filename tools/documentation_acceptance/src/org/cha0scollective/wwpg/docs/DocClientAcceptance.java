@@ -38,6 +38,8 @@ final class DocClientAcceptance {
     private final List<String> messages=new ArrayList<>();
     DocClientAcceptance() {
         if(Boolean.getBoolean("wwpg.ci.v2")){
+            require(!Boolean.getBoolean("wwpg.test.multiplayer"),"SDK integrated client must disable the legacy TCP driver");
+            LOG.info("DOC_CLIENT_MODE_PASSED: multiplayer=false");
             org.cha0scollective.wwpg.acceptance.RuntimeIdentity.record();
             org.cha0scollective.wwpg.acceptance.ClientShutdown.install();
         }
