@@ -9,7 +9,17 @@ is the current stable release. To install it or choose a playable world, use the
 [installation guide](../docs/INSTALL.md). This directory is for reviewing what
 was shipped and which checks passed.
 
-## Current prerelease: 0.2.2-beta.5 — contactors, terminal highlights and testing lanes
+## Current stable: 0.2.2
+
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2)
+· [Verification](0.2.2/verification.json).
+
+Promotes beta.5 after a version-only jar comparison. Release notes cover the
+alpha/beta sequence; original acceptance identities and native world bytes are
+preserved. API 1.0.0 and existing saves remain compatible. The 14,650-node
+benchmark is included without a 20 TPS certification.
+
+## Historical prerelease: 0.2.2-beta.5 — contactors, terminal highlights and testing lanes
 
 [Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-beta.5)
 · [Verification](0.2.2-beta.5/verification.json).

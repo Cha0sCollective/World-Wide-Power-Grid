@@ -1,0 +1,266 @@
+{
+  "schema": 1,
+  "api_version": "1.0.0",
+  "api_coordinate": "org.cha0scollective.wwpg:wwpg-api:1.0.0",
+  "cee_api_coordinate": "org.cha0scollective.wwpg:wwpg-cee-api:1.0.0",
+  "abi": {
+    "path": "build/b3ev/j/dca0d66a803d.json",
+    "sha256": "c0f9561972d1c34e6569f239060c3947f678575035fb27c4eab23522c348b5dc",
+    "bytes": 64277
+  },
+  "cee_abi": {
+    "path": "build/b3ev/j/3c14149426b1.json",
+    "sha256": "3aba574f8163ee8c3c4717a5d5095e680da7d8f573137ffa3c1aa7cfc972a6f1",
+    "bytes": 12699
+  },
+  "previous_api": {
+    "path": "build/b3ev/f/d8c138782c10/wwpg-api-1.0.0.jar",
+    "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+    "bytes": 50143
+  },
+  "previous_cee_api": {
+    "path": "build/b3ev/f/b5220c7cc207/wwpg-cee-api-1.0.0.jar",
+    "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+    "bytes": 8793
+  },
+  "wwpg_version": "0.2.2",
+  "source_sha": "e90ee091b2662d2454fd22f72a7c7d61952d331c",
+  "artifacts": {
+    "runtime": {
+      "path": "build/frozen-0.2.2/wwpg-0.2.2.jar",
+      "sha256": "3090d604c96db299f42af1dff7206fc7e278ae43743c61af005969d317412bc9",
+      "bytes": 6180653
+    },
+    "api": {
+      "path": "build/frozen-0.2.2/wwpg-api-1.0.0.jar",
+      "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+      "bytes": 50143
+    },
+    "cee_api": {
+      "path": "build/frozen-0.2.2/wwpg-cee-api-1.0.0.jar",
+      "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+      "bytes": 8793
+    },
+    "example": {
+      "path": "build/frozen-0.2.2/wwpg-api-example-1.0.0.jar",
+      "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+      "bytes": 52081
+    },
+    "upstream_example": {
+      "path": "build/frozen-0.2.2/wwpg-upstream-api-example-1.0.0.jar",
+      "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+      "bytes": 45633
+    },
+    "maven_repository": {
+      "path": "build/frozen-0.2.2/wwpg-api-1.0.0-maven.zip",
+      "sha256": "92e65045c771bc4a50c7641397721f6d86f75596e0fdef68bf1b0ce742a2978d",
+      "bytes": 432827
+    },
+    "example_sources": {
+      "path": "build/frozen-0.2.2/wwpg-api-example-1.0.0-source.zip",
+      "sha256": "af86013c5c515ecd5bbff9723bfb7e171e295c000d0a74aa2117b94edc766d24",
+      "bytes": 79522
+    },
+    "upstream_example_sources": {
+      "path": "build/frozen-0.2.2/wwpg-upstream-api-example-1.0.0-source.zip",
+      "sha256": "cb77e9c5c84a5d55fe6078be81356c8a061630c0438084cf499df17622b21c51",
+      "bytes": 70378
+    },
+    "api_sources": {
+      "path": "build/frozen-0.2.2/wwpg-api-1.0.0-sources.jar",
+      "sha256": "1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b",
+      "bytes": 25943
+    },
+    "api_javadoc": {
+      "path": "build/frozen-0.2.2/wwpg-api-1.0.0-javadoc.jar",
+      "sha256": "7f53e453ba7790756f39b46aa062b63bf2a30f5c907fb6020ed2e8b6e17063ce",
+      "bytes": 239024
+    },
+    "cee_api_sources": {
+      "path": "build/frozen-0.2.2/wwpg-cee-api-1.0.0-sources.jar",
+      "sha256": "00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34",
+      "bytes": 6947
+    },
+    "cee_api_javadoc": {
+      "path": "build/frozen-0.2.2/wwpg-cee-api-1.0.0-javadoc.jar",
+      "sha256": "89a7c73eed5c0d394ec4768d014a65d2874f145f13c08faa30d247ce168d907d",
+      "bytes": 116395
+    }
+  },
+  "status": "accepted_release",
+  "unresolved_failures": [],
+  "acceptance_policy": "separated-v2",
+  "stages_complete": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "stationary_yard_policy": "combined-pinout-v1",
+  "headless_acceptance": {
+    "path": "local/stable-022-release-20261018/assembly-01/headless_acceptance.json",
+    "sha256": "d4bd3afe833c8f5d523aae209395e22b1035dc9c81606aedb8892f25ddd22361",
+    "bytes": 11041
+  },
+  "graphical_acceptance": {
+    "path": "local/stable-022-release-20261018/assembly-01/graphical_acceptance.json",
+    "sha256": "d61981a4490965e96a7ed99faca6e91de64fa5de08856ba9ed804f44bc6f8966",
+    "bytes": 3877
+  },
+  "independent_example_build": {
+    "path": "build/ci-v2/canonical/preparation-evidence/objects/9861c6f6eabc0e343b69cc11277aafeb03cd1a93222fb3872d22f415aa07881a.json",
+    "sha256": "c798d1c5c1e66e6218f9d09172be0ed2467819a5e00477e36058caa7fd930119",
+    "bytes": 2931
+  },
+  "independent_upstream_example_build": {
+    "path": "build/ci-v2/canonical/preparation-evidence/objects/04201a01bbac5ab32e99daf888f9c6a9e817be907afc3bdcb519f69f3477c6aa.json",
+    "sha256": "2eef2c5ec08f42cbb6547b09f1ac397181f0738b8ee37a842964ccc624d873ce",
+    "bytes": 3035
+  },
+  "sdk_acceptance_reuse": {
+    "schema": 1,
+    "scope": "runtime_version_only",
+    "source_sha": "9ac18f4c249deb934090b992d9d8f746cbe4a177",
+    "runtime_version": "0.2.2-beta.5",
+    "artifacts": {
+      "runtime": {
+        "path": "build/frozen-0.2.2-beta.5/wwpg-0.2.2-beta.5.jar",
+        "sha256": "ab572c47eb966468101cadb24ce924f1d258565e863e5010989c1ac4f3fe84cb",
+        "bytes": 6180657
+      },
+      "api": {
+        "path": "build/frozen-0.2.2-beta.5/wwpg-api-1.0.0.jar",
+        "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+        "bytes": 50143
+      },
+      "cee_api": {
+        "path": "build/frozen-0.2.2-beta.5/wwpg-cee-api-1.0.0.jar",
+        "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+        "bytes": 8793
+      },
+      "example": {
+        "path": "build/frozen-0.2.2-beta.5/wwpg-api-example-1.0.0.jar",
+        "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+        "bytes": 52081
+      },
+      "upstream_example": {
+        "path": "build/frozen-0.2.2-beta.5/wwpg-upstream-api-example-1.0.0.jar",
+        "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+        "bytes": 45633
+      },
+      "maven_repository": {
+        "path": "build/frozen-0.2.2-beta.5/wwpg-api-1.0.0-maven.zip",
+        "sha256": "92e65045c771bc4a50c7641397721f6d86f75596e0fdef68bf1b0ce742a2978d",
+        "bytes": 432827
+      },
+      "example_sources": {
+        "path": "build/frozen-0.2.2-beta.5/wwpg-api-example-1.0.0-source.zip",
+        "sha256": "af86013c5c515ecd5bbff9723bfb7e171e295c000d0a74aa2117b94edc766d24",
+        "bytes": 79522
+      },
+      "upstream_example_sources": {
+        "path": "build/frozen-0.2.2-beta.5/wwpg-upstream-api-example-1.0.0-source.zip",
+        "sha256": "cb77e9c5c84a5d55fe6078be81356c8a061630c0438084cf499df17622b21c51",
+        "bytes": 70378
+      },
+      "api_sources": {
+        "path": "build/frozen-0.2.2-beta.5/wwpg-api-1.0.0-sources.jar",
+        "sha256": "1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b",
+        "bytes": 25943
+      },
+      "api_javadoc": {
+        "path": "build/frozen-0.2.2-beta.5/wwpg-api-1.0.0-javadoc.jar",
+        "sha256": "7f53e453ba7790756f39b46aa062b63bf2a30f5c907fb6020ed2e8b6e17063ce",
+        "bytes": 239024
+      },
+      "cee_api_sources": {
+        "path": "build/frozen-0.2.2-beta.5/wwpg-cee-api-1.0.0-sources.jar",
+        "sha256": "00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34",
+        "bytes": 6947
+      },
+      "cee_api_javadoc": {
+        "path": "build/frozen-0.2.2-beta.5/wwpg-cee-api-1.0.0-javadoc.jar",
+        "sha256": "89a7c73eed5c0d394ec4768d014a65d2874f145f13c08faa30d247ce168d907d",
+        "bytes": 116395
+      }
+    },
+    "explanation": "All twelve SDK input artifacts are identical to the independently built frozen preparation; actual execution source is retained."
+  },
+  "authoring_starter": {
+    "source": {
+      "path": "build/ci-v2/canonical/starter/tutorial-load-0.1.0-source.zip",
+      "sha256": "b26eb5f879b4954632e297925d47ba1e5c6eb172295fd452b636dbbeb2db51c1",
+      "bytes": 54215
+    },
+    "proof": {
+      "path": "local/beta5-release-20261017/release-assembly-01/starter-accepted.json",
+      "sha256": "7315504d65f5732324ce5172d15e18a28760d5faaa67c40ff58997ed17d5fc95",
+      "bytes": 2716
+    }
+  },
+  "stationary_yard": {
+    "path": "build/frozen-0.2.2/wwpg-0.2.2-stationary-yard.zip",
+    "sha256": "abf1607093f8620a51353a47d3b695d6973baf81e89e0f4c5fe559405f32cace",
+    "bytes": 1351807
+  },
+  "base_workshop_world": {
+    "path": "build/frozen-0.2.2/wwpg-0.2.2-api-workshop.zip",
+    "sha256": "c82f03fc2b28e0af6235244b06ffa9cbe5fff5563c2f289f2d21c20ef8cdc628",
+    "bytes": 317431
+  },
+  "pinout_workshop_world": {
+    "path": "build/frozen-0.2.2/wwpg-0.2.2-api-workshop-pinout.zip",
+    "sha256": "3d7701e399eaa6c090d3a3a58ee247358872111fec50dd2aade43bf704ba0bc4",
+    "bytes": 320389
+  },
+  "benchmark_world": {
+    "path": "build/frozen-0.2.2/wwpg-0.2.2-benchmark-14650-nodes.zip",
+    "sha256": "dda69db804ef9445a21ed51785bdf69a130cf871db1fe58d7cf41a0a90bd4139",
+    "bytes": 3413540
+  },
+  "documentation_snapshot": {
+    "path": "local/stable-022-release-20261018/assembly-01/documentation-snapshot.json",
+    "sha256": "be17bbabcb11c5a8754fa093a79c15b7f672760066d7e2bff544fe31693b84fe",
+    "bytes": 2877
+  },
+  "acceptance_notes": [
+    "Original headless run 39082520711 failed and remains failed. Continuation 39084316464 retains only completed passing groups and runs incomplete lifecycle groups fresh.",
+    "First graphical yard attempt failed in the external helper handoff and was preserved. A fresh extraction with corrected helper must pass all scenario assertions and native Save and Quit.",
+    "The Java SDK graphical attempt passed electrical controls and saved, but failed return-to-title because JavaExec reordered legacy multiplayer JVM properties. The failed attempt is preserved. Both SDK cases ran fresh after ordering the actual JVM argument file and asserting integrated mode at startup.",
+    "Runtime is version-equivalent to dev.98; no production changes were needed during this campaign.",
+    "Workshop spawnRadius metadata was corrected without changing any native electrical payload. Exact corrected archives have focused Windows/Linux reopens on both backends/profiles and fresh applicable client scenarios, including pre-teleport player-position assertions.",
+    "Tiny capacitor-pin targeting and the 14,650-node 20 TPS target remain unresolved. No performance benchmark was run for beta.5.",
+    "Stable 0.2.2 promotes beta.5 with only its mod version changed. Full headless/graphical acceptance is reused, not rerun or relabelled. All native world bytes and original observations are identical; only release labels/readme version text are derived.",
+    "Cumulative release notes cover alpha.1 and the published beta.2 through beta.5 sequence. Original releases and failed attempts remain preserved."
+  ],
+  "world_metadata_reuse": {
+    "schema": 1,
+    "scope": "runtime_version_only",
+    "source_sha": "9ac18f4c249deb934090b992d9d8f746cbe4a177",
+    "runtime": {
+      "path": "build/frozen-0.2.2-beta.5/wwpg-0.2.2-beta.5.jar",
+      "sha256": "ab572c47eb966468101cadb24ce924f1d258565e863e5010989c1ac4f3fe84cb",
+      "bytes": 6180657
+    },
+    "version": "0.2.2-beta.5",
+    "worlds": {
+      "stationary_yard": {
+        "path": "local/beta5-release-20261017/clients-completion/06-yard-tcp-JAVA-PINOUT/portable/objects/6b89496e27d072d0083b14e16525907df83b0fa4242140e88cd75daa38e8556d.zip",
+        "sha256": "6b89496e27d072d0083b14e16525907df83b0fa4242140e88cd75daa38e8556d",
+        "bytes": 1351801
+      },
+      "base_workshop_world": {
+        "path": "local/beta5-release-20261017/spawn-clients/06-base-workshop-JAVA-BASE/portable/objects/4da9f5132cb57bbaf63e45e9646d94255c92c6d43ab461dfefca4b83531aebdc.zip",
+        "sha256": "4da9f5132cb57bbaf63e45e9646d94255c92c6d43ab461dfefca4b83531aebdc",
+        "bytes": 317395
+      },
+      "pinout_workshop_world": {
+        "path": "local/beta5-release-20261017/spawn-clients/04-workshop-tcp-JAVA-PINOUT/portable/objects/b5b8c0ebc87a462cc43485a1a76ac8d645a580a21c3bfd5c2eca320b5952e79d.zip",
+        "sha256": "b5b8c0ebc87a462cc43485a1a76ac8d645a580a21c3bfd5c2eca320b5952e79d",
+        "bytes": 320351
+      }
+    }
+  }
+}

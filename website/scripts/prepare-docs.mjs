@@ -232,7 +232,7 @@ for (const release of project.releases) {
     'Release-specific installation, compatibility, scripting, and addon development for WWPG.',
     overview,
   );
-  const authorPages = release.version === '0.2.1' ? [
+  const authorPages = existsSync(resolve(root, 'content/guides', release.version, 'create-addon.md')) ? [
     ['api-limits','API validation and limits','Existing numeric, identity and constructor rules for API 1.0.0.'],
     ['create-addon','Create your own add-on','Build one adjustable electrical load with a separate mod identity.'],
     ['addon-workflow','Build, install and debug','An external-instance development loop for client and dedicated server.'],

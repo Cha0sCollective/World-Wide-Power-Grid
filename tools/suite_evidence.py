@@ -220,14 +220,38 @@ def continue_headless(previous, inputs_path, output, reason, preparation, enviro
             original_report_available=available))
 
 
+WORLD_KEYS={'yard/PINOUT':'stationary_yard','workshop/BASE':'base_workshop_world','workshop/PINOUT':'pinout_workshop_world'}
+
+
+def accepted_world_hashes(manifest, root, gate, cohorts):
+    """Version promotions retain observed archives; only their labels may differ."""
+    reuse=manifest.get('world_metadata_reuse')
+    if reuse is None:return {key:manifest[field]['sha256'] for key,field in WORLD_KEYS.items()}
+    require(reuse.get('schema')==1 and reuse.get('scope')=='runtime_version_only'
+            and set(reuse.get('worlds',{}))==set(WORLD_KEYS.values()),'World promotion needs all original archives and explicit scope')
+    for cohort in cohorts:
+        accepted=cohort.get('reuse',{})
+        require(accepted.get('version')==reuse.get('version') and accepted.get('source_sha')==reuse.get('source_sha')
+                and accepted.get('runtime',{}).get('sha256')==reuse.get('runtime',{}).get('sha256'),
+                'World promotion differs from original runtime acceptance')
+    from release_acceptance_reuse import world_version_equivalent
+    old_runtime=reuse['runtime'];gate.locked_file(old_runtime,root)
+    for field in WORLD_KEYS.values():
+        world_version_equivalent(gate.locked_file(reuse['worlds'][field],root),gate.locked_file(manifest[field],root),
+            reuse['version'],manifest['wwpg_version'],old_runtime,manifest['artifacts']['runtime'])
+    return {key:reuse['worlds'][field]['sha256'] for key,field in WORLD_KEYS.items()}
+
+
 def validate_release(manifest, root, gate):
     """New release contract: headless completion cannot imply client completion."""
     require(manifest.get('acceptance_policy') == 'separated-v2', 'Unknown new acceptance policy')
     hashes = {r: manifest['artifacts'][r]['sha256'] for r in ROLES}
     require(all(isinstance(manifest.get(key),dict) for key in ('headless_acceptance','graphical_acceptance')),
             'Independent headless and graphical acceptance records are required')
+    cohorts=[]
     for lane, key in [('full-headless', 'headless_acceptance'), ('graphical', 'graphical_acceptance')]:
         cohort = read(gate.locked_file(manifest[key], root))
+        cohorts.append(cohort)
         require(cohort.get('schema') == 2 and cohort.get('policy') == 'separated-v2' and cohort.get('suite') == lane,
                 'Wrong independent release gate')
         paths = [gate.locked_file(d, root) for d in cohort['reports']]
@@ -242,11 +266,9 @@ def validate_release(manifest, root, gate):
             require(cohort.get('status') == 'reused', 'Reuse must be labelled separately')
         else: require(cohort.get('status') == 'passed', 'Incomplete release gate')
         validate_reports(paths, lane, accepted_source, accepted_hashes)
-    # Bind the media to the archives that will actually ship, not merely another
-    # accepted world with the same profile.
-    worlds = {'yard/PINOUT': manifest['stationary_yard']['sha256'],
-              'workshop/BASE': manifest['base_workshop_world']['sha256'],
-              'workshop/PINOUT': manifest['pinout_workshop_world']['sha256']}
+    # Bind media to exact archives or proven label-only derivatives, never an
+    # unrelated accepted world with the same profile.
+    worlds = accepted_world_hashes(manifest, root, gate, cohorts)
     import gzip
     import zipfile
     from export_api_workshop import fixed_spawn_level

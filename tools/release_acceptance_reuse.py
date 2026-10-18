@@ -1,5 +1,6 @@
 """Validate carried-forward acceptance without rewriting its source or hashes."""
 import json
+from pathlib import PurePosixPath
 import re
 import struct
 import zipfile
@@ -20,6 +21,32 @@ def runtime_equivalent(previous, current, old_version, new_version):
                 expected = expected.replace(before, after, 1)
             if expected != new.read(name):
                 raise ValueError('Runtime changed beyond its version: ' + name)
+
+
+def world_version_equivalent(previous, current, old_version, new_version, old_runtime, new_runtime):
+    """Permit release labels only; preserve every native save and original proof."""
+    with zipfile.ZipFile(previous) as old, zipfile.ZipFile(current) as new:
+        names=old.namelist()
+        if len(names)!=len(set(names)) or len(new.namelist())!=len(set(new.namelist())) or set(names)!=set(new.namelist()):
+            raise ValueError('Promoted world entries differ')
+        headers=[name for name in names if name.endswith('/WWPG_MANIFEST.json')]
+        if len(headers)!=1:raise ValueError('Promoted world inventory is ambiguous')
+        header=headers[0];readme=header.removesuffix('WWPG_MANIFEST.json')+'WWPG_README.txt'
+        metadata=json.loads(old.read(header));jar=metadata.get('jar',{})
+        if metadata.get('target')!=old_version or set(jar) not in ({'name','sha256'},{'name','sha256','bytes'}):
+            raise ValueError('Original world release identity differs')
+        expected_jar=dict(name=PurePosixPath(old_runtime['path']).name,sha256=old_runtime['sha256'])
+        if 'bytes' in jar:expected_jar['bytes']=old_runtime['bytes']
+        if jar!=expected_jar:raise ValueError('Original world runtime differs')
+        updated=dict(name=PurePosixPath(new_runtime['path']).name,sha256=new_runtime['sha256'])
+        if 'bytes' in jar:updated['bytes']=new_runtime['bytes']
+        if json.loads(new.read(header))!=dict(metadata,target=new_version,jar=updated):
+            raise ValueError('World metadata changed beyond its release labels')
+        for name in names:
+            if name==header:continue
+            expected=old.read(name)
+            if name==readme:expected=expected.replace(old_version.encode(),new_version.encode())
+            if new.read(name)!=expected:raise ValueError('Promoted native save/instructions changed: '+name)
 
 
 def without_line_numbers(data):

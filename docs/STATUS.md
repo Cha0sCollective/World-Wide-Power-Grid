@@ -1,7 +1,7 @@
 # Current status
 
-**[WWPG 0.2.2-beta.5](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-beta.5)**
-is the latest prerelease. [0.2.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.1) remains the stable release. It supports the declared stationary factories and
+**[WWPG 0.2.2](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2)**
+is the stable release. It supports the declared stationary factories and
 optional Pinout computer control, and includes **extension API 1.0.0** for
 add-on developers. Existing 0.1.0-beta.5 and beta.4 worlds remain compatible; update WWPG on
 the server and every client using the [installation guide](INSTALL.md).
@@ -43,6 +43,12 @@ a repaired device. The [developer contract](EXTENSION_API.md) explains those rul
 
 ## What was checked
 
+Stable 0.2.2 promotes accepted beta.5 with only the runtime's declared version
+changed. Every other jar entry is identical, including native libraries. The
+preserved headless and graphical evidence keeps its original beta.5 identities;
+no full acceptance campaign was rerun for this promotion. Published world labels
+were updated after checking every native save byte remained unchanged.
+
 Beta.5 uses independent full headless and graphical acceptance records. The
 headless catalog covers Windows/Linux, Native/Java, BASE/PINOUT and NeoForge
 21.1.231/21.1.248. The Stationary Yard is the combined PINOUT edition; runtime
@@ -55,7 +61,7 @@ SDK starter. Java uses short integration and synchronization checks. Integrated
 sessions must Save and Quit to Title; dedicated sessions must disconnect both
 clients and save/stop normally. The exhaustive gallery remains optional.
 
-The [verification record](../release/0.2.2-beta.5/verification.json) identifies
+The [verification record](../release/0.2.2/verification.json) identifies
 the actual runtime, helper sources, archives and outcomes. The failed initial
 headless run and graphical helper attempt remain failed records. Completed
 passing groups and collector-only reuse keep their original execution identity.
