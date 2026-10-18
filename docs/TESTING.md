@@ -60,6 +60,11 @@ retain the 600-second deadline and ordinary Minecraft watchdog. Client runs
 retain the existing 900-second TCP / 1200-second GUI launcher bounds; their
 scenario assertions remain independently bounded.
 
+Fresh-only fixtures use the catalog's `setup_namespaces`. API ownership's
+fixed-coordinate unload fixture runs during setup; dedicated API restart
+fixtures still run through all three cold verifications. Recreating that fresh
+fixture in a saved world would attempt to add wires that already exist.
+
 ## Full headless acceptance
 
 The manual **Full headless acceptance** GitHub workflow prepares artifacts once,
@@ -162,3 +167,17 @@ hashes. Keep the original reports; their source and status do not change.
 Historical policies, counts and continuation records remain readable through
 their original validators. The old workflow definitions are retained under
 `tools/legacy/` for reference, not active execution.
+
+An investigated runner or catalog repair may continue a frozen campaign through
+the manual workflow's `frozen_run` input. It reuses the original canonical jars
+and per-OS preparation, requires unchanged runtime/build inputs, and retains
+complete passing lifecycle groups as `reused` views of the original report.
+Failed attempts remain failed. Incomplete groups start again in fresh
+directories, including their setup and required cold phases; a successful
+prefix cannot stand in for an unfinished lifecycle. The continuation index
+identifies both retained and newly executed reports for the ordinary coverage
+validator. It never launches automatically.
+If a failed bundler left no usable execution report, continuation cannot reuse
+that environment's claimed prefix. Its explicit `--fresh-if-unavailable` option
+reruns the named environment and records that absence; other environments still
+retain verified passing groups. Original partial uploads remain preserved.

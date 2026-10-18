@@ -13,6 +13,8 @@ def bundle(source, output):
     source, output = Path(source).resolve(), Path(output).resolve()
     output.mkdir(parents=True, exist_ok=False)
     objects=output/'objects';objects.mkdir()
+    # Preserve the execution record even if a nested dependency is missing.
+    original=objects/'result.original.bin';original.write_bytes(source.read_bytes())
     cached={}
     def copy(item, base):
         original=(base/item['path']).resolve()
@@ -21,7 +23,7 @@ def bundle(source, output):
         if descriptor(original)['sha256']!=item['sha256']:raise ValueError('Changed retained input: '+str(original))
         if original in cached:return dict(item,**cached[original])
         raw=original.read_bytes(); target=objects/(item['sha256']+original.suffix)
-        try:value=json.loads(raw)
+        try:value=json.loads(raw) if original.suffix.lower()=='.json' else None
         except (ValueError,UnicodeError):value=None
         if value is not None:
             portable=walk(value,original.parent)
@@ -43,7 +45,6 @@ def bundle(source, output):
         if isinstance(value,list):return [walk(v,base) for v in value]
         return value
     result=walk(read(source),source.parent)
-    original=objects/'result.original.bin';original.write_bytes(source.read_bytes())
     result['_original_record']=relative(original)
     write(output/'result.json',result)
     return output/'result.json'

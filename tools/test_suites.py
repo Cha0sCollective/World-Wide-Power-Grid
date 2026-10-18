@@ -56,7 +56,7 @@ def audit(root=ROOT):
     spec = catalog()
     membership = {}
     for group, value in spec['groups'].items():
-        for name in value['namespaces']:
+        for name in value['namespaces']+value.get('setup_namespaces',[]):
             if name in membership: raise ValueError('Duplicate namespace: ' + name)
             membership[name] = group
     if set(membership)&spec['special_namespaces'].keys():raise ValueError('Namespace classified as both ordinary and special')
@@ -125,7 +125,7 @@ def plan(lane, groups=None, backends=None, profiles=None, loaders=None, platform
                         for number, phase in enumerate(phases):
                             jobs.append(dict(id=f'{target}/{loader}/{backend}/{profile}/{group}/{number}-{phase}',
                                 lane='headless', platform=target, loader=loader, backend=backend, profile=profile,
-                                group=group, phase=phase, namespaces=names, addon=cfg.get('addon', False)
+                                group=group, phase=phase, namespaces=names+cfg.get('setup_namespaces',[]) if phase=='SETUP' else names, addon=cfg.get('addon', False)
                                     or group in ('safety', 'native-guard')))
                         if lane == 'full-headless' and cfg.get('export'):
                             jobs.append(dict(id=f'{target}/{loader}/{backend}/{profile}/{group}/export',
@@ -293,6 +293,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest='action', required=True)
     sub.add_parser('audit')
+    continuation=sub.add_parser('continue-headless')
+    for name in ('report','inputs','output','preparation'):continuation.add_argument('--'+name,type=Path,required=True)
+    continuation.add_argument('--rerun-reason',required=True)
+    continuation.add_argument('--environment')
+    continuation.add_argument('--fresh-if-unavailable',action='store_true')
     frozen = sub.add_parser('freeze'); frozen.add_argument('--output', type=Path, required=True); frozen.add_argument('--source-sha')
     binding=sub.add_parser('bind');binding.add_argument('--inputs',type=Path,required=True);binding.add_argument('--output',type=Path,required=True)
     binding.add_argument('--world',action='append',default=[]);binding.add_argument('--starter',type=Path)
@@ -307,6 +312,9 @@ def main():
             child.add_argument('--preparation', type=Path)
     args = parser.parse_args()
     if args.action == 'audit': print(json.dumps(audit(), indent=2)); return
+    if args.action == 'continue-headless':
+        from suite_evidence import continue_headless
+        continue_headless(args.report,args.inputs,args.output,args.rerun_reason,args.preparation,args.environment,args.fresh_if_unavailable);return
     if args.action == 'freeze': print(freeze(args.output, args.source_sha)); return
     if args.action == 'collect-client':
         from graphical_suite import collect_case

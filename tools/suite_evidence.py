@@ -106,7 +106,15 @@ def validate_reports(paths, lane, source_sha, hashes, complete=True):
         allowed={lane}|({'graphical-gallery'} if lane=='graphical' else set())
         require(report.get('schema') == 2 and report.get('policy') == 'separated-v2'
                 and report.get('suite') in allowed, 'Acceptance policy/lane differs')
-        require(report.get('status') == 'passed' and not report.get('not_run'), 'Incomplete acceptance attempt')
+        require(report.get('status') in ('passed','reused') and not report.get('not_run'), 'Incomplete acceptance attempt')
+        if report['status']=='reused':
+            original=read(locked(report['execution_report'],base))
+            require(report.get('reuse_reason') and report.get('original_status')==original.get('status'), 'Missing retained execution identity')
+            for key in ('schema','policy','suite','source_sha','artifact_hashes','catalog','inputs'):
+                require(report.get(key)==original.get(key),'Retained execution changed: '+key)
+            require(bool(report['jobs']),'Empty retained coverage')
+            for job in report['jobs']:
+                require(job.get('status')=='passed' and job in original['jobs'],'Retained job did not actually pass')
         require(report.get('source_sha') == source_sha, 'Acceptance source differs')
         require(all(report.get('artifact_hashes', {}).get(r) == hashes[r] for r in ROLES), 'Acceptance artifacts differ')
         previous_catalog=read(locked(report['catalog'],base))
@@ -143,6 +151,66 @@ def validate_reports(paths, lane, source_sha, hashes, complete=True):
     for prefix,archive in reopens:require(exports.get(prefix)==archive,'Exact archive reopen lacks its matching export')
     if complete: require(seen == expected.keys(), 'Missing '+lane+' coverage: '+', '.join(sorted(expected.keys()-seen)))
     return seen
+
+
+def continue_headless(previous, inputs_path, output, reason, preparation, environment=None, fresh_if_unavailable=False):
+    """Reuse complete passing lifecycle groups; run incomplete groups afresh.
+
+    Failed attempts stay failed. A retained view points to their immutable
+    observations and cannot manufacture a passing process or split a cold
+    sequence across incompatible world directories.
+    """
+    from test_suites import execute, frozen_inputs
+    frozen=frozen_inputs(inputs_path)
+    previous=Path(previous).resolve();base=previous.parent
+    available=previous.is_file()
+    if available:old=read(previous)
+    else:
+        require(fresh_if_unavailable and environment,'Original report unavailable; explicit selected-environment rerun required')
+        old=dict(suite='full-headless',policy='separated-v2',source_sha=frozen['source_sha'],
+                 artifact_hashes={r:d['sha256'] for r,d in frozen['artifacts'].items()},jobs=[])
+    require(old.get('suite')=='full-headless' and old.get('policy')=='separated-v2','Not a versioned headless execution')
+    require(old['source_sha']==frozen['source_sha'] and all(old['artifact_hashes'][r]==frozen['artifacts'][r]['sha256'] for r in ROLES),'Continuation changed tested artifacts/source')
+    import subprocess
+    protected=['src','gradle.properties','build.gradle','tools/native','release/artifacts.json','release/optional-artifacts.json']
+    changed=subprocess.check_output(['git','diff','--name-only',frozen['source_sha'],'HEAD','--',*protected],cwd=ROOT,text=True)
+    dirty=subprocess.check_output(['git','diff','--name-only','--',*protected],cwd=ROOT,text=True)
+    require(not changed.strip() and not dirty.strip(),'Frozen continuation requires unchanged runtime/build inputs')
+    environments={(j['platform'],j['loader'],j['backend'],j['profile']) for j in old['jobs'] if 'backend' in j}
+    if not available:environments={tuple(environment.split('/'))}
+    require(len(environments)==1,'Continue one isolated environment at a time')
+    platform,loader,backend,profile=next(iter(environments))
+    if environment:require(tuple(environment.split('/'))==(platform,loader,backend,profile),'Continuation environment differs')
+    expected=plan('full-headless',backends=[backend],profiles=[profile],loaders=[loader],platforms=[platform])
+    groups={}
+    for job in expected:groups.setdefault(job.get('group',job.get('operation')),[]).append(job)
+    actual={j['id']:j for j in old['jobs']};retained=[];remaining=[]
+    for members in groups.values():
+        try:
+            for selected in members:
+                require(selected['id'] in actual,'Unexecuted lifecycle')
+                validate_job(actual[selected['id']],selected,old,base)
+        except (ValueError,KeyError,TypeError):remaining.extend(members)
+        else:retained.extend(actual[j['id']] for j in members)
+    output=Path(output).resolve();output.mkdir(parents=True,exist_ok=False)
+    def relative(path):
+        item=descriptor(path);item['path']=Path(path).relative_to(ROOT).as_posix();return item
+    reports=[]
+    if retained:
+        view=dict(old,status='reused',original_status=old['status'],execution_report=relative(previous),
+                  reuse_reason=reason,jobs=retained,not_run=[],complete_suite=False)
+        write(output/'retained.json',view);reports.append(relative(output/'retained.json'))
+    # Keep the catalog's original ordering and lifecycle dependencies.
+    selected_ids={j['id'] for j in remaining};selected=[j for j in expected if j['id'] in selected_ids]
+    status='failed'
+    try:
+        if selected:execute(selected,inputs_path,output/'execution','full-headless',reason,preparation)
+        status='passed'
+    finally:
+        if (output/'execution/result.json').is_file():reports.append(relative(output/'execution/result.json'))
+        write(output/'index.json',dict(schema=2,policy='separated-v2',kind='headless-continuation',status=status,
+            reports=reports,retained_jobs=len(retained),executed_jobs=len(selected),reason=reason,
+            original_report_available=available))
 
 
 def validate_release(manifest, root, gate):

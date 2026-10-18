@@ -50,6 +50,13 @@ class SelectionChecks(unittest.TestCase):
             self.assertEqual(len([j for j in jobs if j.get('group')==group+'-extracted']),3)
         self.assertEqual([j['phase'] for j in jobs if j.get('group')=='pending'],['SETUP','ARM','VERIFY'])
 
+    def test_fresh_ownership_fixture_does_not_rewire_saved_chunks_on_restart(self):
+        jobs=[j for j in suites.plan('full-headless',backends=['JAVA'],profiles=['BASE'],platforms=['windows-latest'],loaders=['21.1.231']) if j.get('group')=='api']
+        self.assertEqual([j['phase'] for j in jobs],['SETUP','VERIFY','VERIFY','VERIFY'])
+        self.assertIn('wwpg_api_ownership',jobs[0]['namespaces'])
+        self.assertTrue(all('wwpg_api_ownership' not in j['namespaces'] for j in jobs[1:]))
+        self.assertTrue(all({'wwpg_api_restart','wwpg_api_upstream_restart'}<=set(j['namespaces']) for j in jobs))
+
     def test_no_base_yard_and_no_repeated_reference_per_profile(self):
         jobs=suites.plan('full-headless')
         self.assertTrue(all(j['profile']=='PINOUT' for j in jobs if j.get('group','').startswith('yard')))
@@ -126,6 +133,42 @@ class EvidenceChecks(unittest.TestCase):
         self.assertEqual(evidence.validate_reports([path],'full-headless','a'*40,report['artifact_hashes'],complete=False),{report['jobs'][0]['id']})
         with self.assertRaisesRegex(ValueError,'Missing full-headless'):evidence.validate_reports([path],'full-headless','a'*40,report['artifact_hashes'])
 
+    def test_continuation_retains_passing_group_without_relabelling_failed_attempt(self):
+        path,report,_=self.passing_headless_fragment()
+        report.update(status='failed',failure='TEST_ONLY later lifecycle failure')
+        path.write_text(json.dumps(report))
+        first=report['jobs'][0]
+        api0={k:v for k,v in first.items() if k not in ('status','exit_code','proof','log')}
+        api0.update(id='TEST_ONLY/api/0-SETUP',group='api',phase='SETUP')
+        api1=dict(api0,id='TEST_ONLY/api/1-VERIFY',phase='VERIFY')
+        safety={k:v for k,v in first.items() if k not in ('status','exit_code','proof','log')}
+        output=self.base/'continued'
+        with patch.object(evidence,'plan',return_value=[safety,api0,api1]),patch.object(suites,'execute') as execute,patch('subprocess.check_output',return_value=''):
+            evidence.continue_headless(path,self.base/'inputs.json',output,'TEST_ONLY investigated fixture repair',None)
+            self.assertEqual([j['id'] for j in execute.call_args.args[0]],[api0['id'],api1['id']])
+            self.assertEqual(suites.read(path)['status'],'failed')
+            view=suites.read(output/'retained.json')
+            self.assertEqual(view['status'],'reused');self.assertEqual(view['original_status'],'failed')
+            self.assertEqual(evidence.validate_reports([output/'retained.json'],'full-headless','a'*40,report['artifact_hashes'],complete=False),{first['id']})
+            view['jobs'][0]['exit_code']=1
+            (output/'retained.json').write_text(json.dumps(view))
+            with self.assertRaisesRegex(ValueError,'did not actually pass'):
+                evidence.validate_reports([output/'retained.json'],'full-headless','a'*40,report['artifact_hashes'],complete=False)
+
+    def test_missing_execution_report_requires_explicit_selected_environment_rerun(self):
+        _,report,_=self.passing_headless_fragment()
+        missing=self.base/'unavailable.json'
+        with self.assertRaisesRegex(ValueError,'explicit selected-environment'):
+            evidence.continue_headless(missing,self.base/'inputs.json',self.base/'blocked','TEST_ONLY',None)
+        job={k:v for k,v in report['jobs'][0].items() if k not in ('status','exit_code','proof','log')}
+        with patch.object(evidence,'plan',return_value=[job]),patch.object(suites,'execute') as execute,patch('subprocess.check_output',return_value=''):
+            output=self.base/'fresh'
+            evidence.continue_headless(missing,self.base/'inputs.json',output,'TEST_ONLY missing evidence',None,
+                'windows-latest/21.1.231/JAVA/BASE',True)
+            self.assertEqual(execute.call_args.args[0],[job])
+            self.assertFalse((output/'retained.json').exists())
+            self.assertFalse(suites.read(output/'index.json')['original_report_available'])
+
     def test_actual_restart_phase_and_artifacts_are_checked(self):
         path,report,proof=self.passing_headless_fragment();proof['phase']='VERIFY'
         report['jobs'][0]['proof']=self.file('wrong-phase.json',json.dumps(proof));path.write_text(json.dumps(report))
@@ -173,6 +216,19 @@ class EvidenceChecks(unittest.TestCase):
         original=suites.ROOT/view['_original_record']['path']
         self.assertEqual(original.read_bytes(),before);self.assertEqual(raw.read_bytes(),before)
         self.assertEqual(view['source_sha'],'a'*40)
+
+    def test_portable_evidence_can_be_bundled_again_with_opaque_original_records(self):
+        from bundle_suite_evidence import bundle
+        directory=self.base/'raw';directory.mkdir()
+        artifact=directory/'candidate.jar';artifact.write_bytes(b'TEST_ONLY')
+        item=suites.descriptor(artifact);item['path']=artifact.name
+        source=directory/'inputs.json';source.write_text(json.dumps({'artifact':item}))
+        report=self.base/'report.json';report.write_text(json.dumps({'inputs':suites.descriptor(source)}))
+        first=bundle(report,self.base/'portable-1')
+        artifact.unlink();source.unlink()
+        second=bundle(first,self.base/'portable-2')
+        view=suites.read(evidence.locked(suites.read(second)['inputs'],second.parent))
+        self.assertEqual(evidence.locked(view['artifact'],second.parent).read_bytes(),b'TEST_ONLY')
 
     def test_preparation_snapshots_external_junit_before_worker_download(self):
         from ci_prepare import retain_preparation

@@ -1,10 +1,17 @@
 name: Full headless acceptance
 on:
   workflow_dispatch:
+    inputs:
+      frozen_run:
+        description: 'Continue investigated missing coverage using an unchanged runtime and preserved passing lifecycle groups from this run; leave empty for a fresh full campaign'
+        type: string
+        default: ''
 permissions:
   contents: read
+  actions: read
 jobs:
   prepare:
+    if: inputs.frozen_run == ''
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
@@ -27,6 +34,7 @@ jobs:
             build/ci-v2/canonical/
             !build/ci-v2/canonical/**/.gradle/**
   windows-preparation:
+    if: inputs.frozen_run == ''
     needs: prepare
     runs-on: windows-latest
     timeout-minutes: 45
@@ -50,6 +58,7 @@ jobs:
             !build/ci-v2/windows/**/.gradle/**
   gameplay:
     needs: [prepare, windows-preparation]
+    if: ${{ !cancelled() && (inputs.frozen_run != '' || (needs.prepare.result == 'success' && needs.windows-preparation.result == 'success')) }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 120
     defaults:
@@ -63,19 +72,36 @@ jobs:
         loader: ['21.1.231', '21.1.248']
     steps:
       - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
       - uses: actions/setup-java@v4
         with: {distribution: temurin, java-version: '21'}
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
       - uses: gradle/actions/setup-gradle@v4
       - uses: actions/download-artifact@v4
-        with: {name: ci-v2-canonical, path: build/ci-v2/canonical}
+        with:
+          name: ci-v2-canonical
+          path: build/ci-v2/canonical
+          run-id: ${{ inputs.frozen_run || github.run_id }}
+          github-token: ${{ github.token }}
       - uses: actions/download-artifact@v4
         if: runner.os == 'Windows'
-        with: {name: ci-v2-windows-preparation, path: build/ci-v2/windows}
+        with:
+          name: ci-v2-windows-preparation
+          path: build/ci-v2/windows
+          run-id: ${{ inputs.frozen_run || github.run_id }}
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        if: inputs.frozen_run != ''
+        with:
+          name: ci-v2-evidence-${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}-${{ matrix.loader }}
+          path: build/ci-v2/portable/${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}-${{ matrix.loader }}
+          run-id: ${{ inputs.frozen_run }}
+          github-token: ${{ github.token }}
       - if: runner.os != 'Windows'
         run: chmod +x gradlew
       - name: Execute the catalog selection against the frozen jar
+        if: inputs.frozen_run == ''
         env:
           PREPARATION: ${{ runner.os == 'Windows' && 'build/ci-v2/windows/preparation.json' || 'build/ci-v2/canonical/preparation.json' }}
         run: >-
@@ -84,14 +110,38 @@ jobs:
           --output build/ci-v2/run-${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}-${{ matrix.loader }}
           --platform ${{ matrix.os }} --backend ${{ matrix.backend }} --profile ${{ matrix.profile }}
           --loader ${{ matrix.loader }} --preparation "$PREPARATION"
+      - name: Retain complete passing groups and run incomplete lifecycle groups afresh
+        if: inputs.frozen_run != ''
+        env:
+          PREPARATION: ${{ runner.os == 'Windows' && 'build/ci-v2/windows/preparation.json' || 'build/ci-v2/canonical/preparation.json' }}
+        run: >-
+          python tools/test_suites.py continue-headless
+          --report build/ci-v2/portable/${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}-${{ matrix.loader }}/result.json
+          --inputs build/ci-v2/canonical/frozen/inputs.json
+          --output build/ci-v2/continuation-${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}-${{ matrix.loader }}
+          --preparation "$PREPARATION"
+          --environment "${{ matrix.os }}/${{ matrix.loader }}/${{ matrix.backend }}/${{ matrix.profile }}"
+          --fresh-if-unavailable
+          --rerun-reason "Investigated catalog lifecycle repair; retain original failed attempt and complete passing groups"
       - name: Retain portable observations and unchanged originals
-        if: always()
+        if: always() && inputs.frozen_run == ''
         run: >-
           python tools/bundle_suite_evidence.py
           build/ci-v2/run-${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}-${{ matrix.loader }}/result.json
           --output build/ci-v2/portable/${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}-${{ matrix.loader }}
+      - name: Retain portable continuation and original execution identities
+        if: always() && inputs.frozen_run != ''
+        run: >-
+          python tools/bundle_suite_evidence.py
+          build/ci-v2/continuation-${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}-${{ matrix.loader }}/index.json
+          --output build/ci-v2/portable-continued/${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}-${{ matrix.loader }}
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: always() && inputs.frozen_run == ''
         with:
           name: ci-v2-evidence-${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}-${{ matrix.loader }}
           path: build/ci-v2/portable/${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}-${{ matrix.loader }}/
+      - uses: actions/upload-artifact@v4
+        if: always() && inputs.frozen_run != ''
+        with:
+          name: ci-v2-continued-${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}-${{ matrix.loader }}
+          path: build/ci-v2/portable-continued/${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}-${{ matrix.loader }}/
