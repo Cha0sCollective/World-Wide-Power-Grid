@@ -217,7 +217,7 @@ public final class ExpandedClientAcceptance {
 
     private void clientTick(ClientTickEvent.Post event) {
         var mc=Minecraft.getInstance();
-        if(ClientShutdown.active())return;
+        if(ClientShutdown.active() || finishing)return;
         mc.options.pauseOnLostFocus=false;
         try {
             if(System.currentTimeMillis()-started>900_000)throw new IllegalStateException("Client acceptance exceeded fifteen minutes");

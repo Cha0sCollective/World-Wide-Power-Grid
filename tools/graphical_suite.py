@@ -86,7 +86,7 @@ def validate_observation(proof, job, inputs, base):
     server_text=texts['server' if job['tcp'] else 'client']
     if job['scenario']!='starter':
         require(f'WWPG_TEST_BACKEND_CONFIG: requested={job["backend"]}, configured={job["backend"]}' in server_text,'Actual configured solver differs')
-    require(not any(marker in text for text in texts.values() for marker in ('EXPANDED_REAL_CLIENT_FAILED','API_WORKSHOP_CLIENT_FAILED','CI_SCENARIO_FAILED','Exception in thread')), 'Client failure remains in log')
+    require(not any(marker in text for text in texts.values() for marker in ('EXPANDED_REAL_CLIENT_FAILED','CEE_TERMINAL_HIGHLIGHT_CLIENT_FAILED','API_WORKSHOP_CLIENT_FAILED','CI_SCENARIO_FAILED','Exception in thread')), 'Client failure remains in log')
     require(proof.get('electrical_diagnostics',{})==electrical_diagnostics(texts),'Electrical warnings were omitted from the result summary')
     require(set(job['checks'])<=observed(job,texts), 'Missing actual client assertions: '+str(set(job['checks'])-observed(job,texts)))
     for item in proof['screenshots']:verify_file(item,base)

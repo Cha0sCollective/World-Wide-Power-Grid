@@ -210,6 +210,15 @@ class EvidenceChecks(unittest.TestCase):
         wrong=copy.deepcopy(proof);wrong['backend']='NATIVE'
         with self.assertRaisesRegex(ValueError,'environment'):validate_observation(wrong,job,dict(source_sha='a'*40,artifact_hashes=hashes),self.base)
 
+        # A normal shutdown does not turn a failed highlight probe into a pass.
+        text='CI_SAVE_QUIT_CLICK: Save and Quit\nCI_SAVE_QUIT_TITLE_PASSED\nAll dimensions are saved\n'
+        text+='NeoForge mod loading, version '+job['loader']+'\n'
+        for role in ('runtime','example','upstream_example'):text+='CI_LOADED_ARTIFACT: '+role+' '+hashes[role]+'\n'
+        text+=f'WWPG_TEST_BACKEND_CONFIG: requested={job["backend"]}, configured={job["backend"]}\nCEE_TERMINAL_HIGHLIGHT_CLIENT_FAILED\n'
+        proof['logs']['client']=self.file('failed-highlight.log',text)
+        with self.assertRaisesRegex(ValueError,'Client failure remains'):
+            validate_observation(proof,job,dict(source_sha='a'*40,artifact_hashes=hashes),self.base)
+
     def test_portable_copy_retains_original_json_and_hashes(self):
         from bundle_suite_evidence import bundle
         raw=self.base/'nested.json';raw.write_text(json.dumps({'source_sha':'a'*40,'log':self.file('raw.log','actual log')}))

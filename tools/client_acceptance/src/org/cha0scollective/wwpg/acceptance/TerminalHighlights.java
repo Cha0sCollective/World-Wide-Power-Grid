@@ -59,18 +59,19 @@ final class TerminalHighlights {
         level.setBlockAndUpdate(BATTERY,CEEBlocks.CREATIVE_BATTERY.getDefaultState());
         for(var player:event.getServer().getPlayerList().getPlayers()) {
             player.setGameMode(GameType.CREATIVE);player.getAbilities().flying=true;player.onUpdateAbilities();
-            player.teleportTo(-28,68,-29);
+            player.teleportTo(level,-28,68,-29,player.getYRot(),player.getXRot());
         }
         ready=true;
     }
     private void client(ClientTickEvent.Post event) {
         var mc=Minecraft.getInstance();
-        if(ClientShutdown.active())return;
+        if(ClientShutdown.active() || finishing)return;
         if(System.currentTimeMillis()-started>240_000){fail(mc,new IllegalStateException("Client check did not finish"));return;}
         if(!ready || mc.level==null || mc.player==null || mc.getSingleplayerServer()==null)return;
+        if(!mc.level.dimension().equals(net.minecraft.world.level.Level.OVERWORLD)
+                || IElectric.getAt(mc.level,PG)==null || IElectric.getAt(mc.level,BATTERY)==null)return;
         try {
             mc.options.pauseOnLostFocus=false;mc.options.hideGui=false;mc.setScreen(null);
-            if(finishing)return;
             if(++age<35)return;
             var view=views.get(index);
             var electric=IElectric.getAt(mc.level,view.pos());
@@ -142,5 +143,6 @@ final class TerminalHighlights {
         if(finishing)return;finishing=true;age=0;
         WorldWidePowerGrid.LOGGER.error("CEE_TERMINAL_HIGHLIGHT_CLIENT_FAILED",error);
         try{Files.writeString(mc.gameDirectory.toPath().resolve("FAILED.txt"),error.toString());}catch(Exception ignored){}
+        ClientShutdown.request();
     }
 }
