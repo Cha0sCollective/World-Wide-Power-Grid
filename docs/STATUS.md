@@ -1,9 +1,9 @@
 # Current status
 
-**[WWPG 0.2.2-beta.4](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-beta.4)**
+**[WWPG 0.2.2-beta.5](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2-beta.5)**
 is the latest prerelease. [0.2.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.1) remains the stable release. It supports the declared stationary factories and
 optional Pinout computer control, and includes **extension API 1.0.0** for
-add-on developers. Existing beta.5 worlds remain compatible; update WWPG on
+add-on developers. Existing 0.1.0-beta.5 and beta.4 worlds remain compatible; update WWPG on
 the server and every client using the [installation guide](INSTALL.md).
 NeoForge **21.1.231 and 21.1.248** are tested. Newer NeoForge, Create, CEE and
 Power Grid versions are allowed to load for player testing; see
@@ -43,23 +43,33 @@ a repaired device. The [developer contract](EXTENSION_API.md) explains those rul
 
 ## What was checked
 
-Beta.4 retains dev.94's completed Windows Pinout Stationary Yard checks on both
-solvers after comparing every jar entry except the version declaration. The
-combined yard includes the ordinary exhibits; there is no separate BASE yard
-run. The original cold restart, exact archive reopen, graphical and two-client
-results retain their actual source, dates and hashes.
+Beta.5 uses independent full headless and graphical acceptance records. The
+headless catalog covers Windows/Linux, Native/Java, BASE/PINOUT and NeoForge
+21.1.231/21.1.248. The Stationary Yard is the combined PINOUT edition; runtime
+and API installation checks still cover both profiles. Cold restarts and exact
+archive reopens retain their separate process outcomes.
 
-The remaining Windows/Linux runtime and API matrix, exact API Workshop upgrade
-reopens, graphical/two-client Workshop checks and SDK builds are recorded
-separately for beta.4. The [verification record](../release/0.2.2-beta.4/verification.json)
-identifies their actual frozen artifacts and completed outcomes. Windows provides
-graphical coverage; Linux coverage is server-side. Main matrix checks use
-NeoForge 21.1.231; local world/client and starter checks use 21.1.248.
+Windows graphical checks cover the selected yard and Workshop visuals, native
+controls, terminal highlights, two real TCP clients and the independently built
+SDK starter. Java uses short integration and synchronization checks. Integrated
+sessions must Save and Quit to Title; dedicated sessions must disconnect both
+clients and save/stop normally. The exhaustive gallery remains optional.
 
-API 1.0.0 and the compiled example add-ons remain unchanged. SDK checks retain
-their original source when the exact inputs match; build-only commits do not
-turn older executions into fresh passes. Prior beta.3 acceptance and failed
-attempts remain historical records, not evidence for changed beta.4 runtime code.
+The [verification record](../release/0.2.2-beta.5/verification.json) identifies
+the actual runtime, helper sources, archives and outcomes. The failed initial
+headless run and graphical helper attempt remain failed records. Completed
+passing groups and collector-only reuse keep their original execution identity.
+No runtime changes were made to repair the test harness. Workshop startup
+panel-storage rejection diagnostics remain visible alongside the subsequent
+accepted powered-state checks; this is not a warning-free certification.
+
+Workshop spawn metadata now keeps new players on the platform. The corrected
+archives passed focused reopen checks on both platforms and solvers; applicable
+client checks observed the initial position before any test-driver teleport.
+
+API 1.0.0 and compiled example add-ons remain compatible. The beta.5 runtime
+differs from dev.98 only in its declared version. Tiny capacitor-pin targeting
+remains unresolved, separately from the passing terminal-highlight checks.
 
 ## Loading and ticking
 
