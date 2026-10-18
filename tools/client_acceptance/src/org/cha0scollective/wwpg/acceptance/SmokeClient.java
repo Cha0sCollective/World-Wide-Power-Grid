@@ -57,7 +57,14 @@ final class SmokeClient {
                 if(index>=codes.length){WorldWidePowerGrid.LOGGER.info("CI_ADDON_VISUALS_PASSED");ack(mc);return;}
                 int code=Integer.parseInt(codes[index].substring(1))-1;
                 var pos=org.cha0scollective.wwpg.gametest.ExtensionApiClientSession.view(code);
-                if(age%45==1)aim(mc,pos.getCenter(),pos.getCenter().add(2,1,3));
+                if(age%45==1) {
+                    // The panel faces north; photographing its back hides the
+                    // custom attachment. The assembled board lies flat.
+                    var target=code==10?pos.getCenter().add(0,-.45,0):pos.getCenter();
+                    var feet=code==9?pos.getCenter().add(0,-.6,-2.5):
+                            code==10?pos.getCenter().add(0,1,-1.5):pos.getCenter().add(2,1,3);
+                    aim(mc,target,feet);
+                }
                 if(age%45!=35)return;
                 var entity=mc.level.getBlockEntity(pos);if(entity==null)throw new IllegalStateException("Missing addon view "+codes[index]);
                 if(code<9) {
@@ -67,7 +74,15 @@ final class SmokeClient {
                     var panel=(com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlockEntity)entity;
                     var data=new net.minecraft.nbt.CompoundTag();panel.getAttachments()[com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelSlot.THIRD_LEFT.ordinal()].write(data,true,mc.level.registryAccess());
                     if(data.getFloat("Light")<.95)throw new IllegalStateException("Panel storage indicator dark");
-                }else if(((org.patryk3211.powergrid.circuits.circuitboard.CircuitBoardBlockEntity)entity).getComponentsStream().count()!=3)throw new IllegalStateException("Board components missing");
+                    var ray=mc.player.pick(6,1,false);
+                    if(!(ray instanceof BlockHitResult hit)||!hit.getBlockPos().equals(pos)||hit.getDirection()!=Direction.NORTH)
+                        throw new IllegalStateException("Panel attachment view did not face its actual front");
+                    WorldWidePowerGrid.LOGGER.info("CI_ADDON_PANEL_FRONT_PASSED: lit native attachment; real north-face ray");
+                }else {
+                    if(((org.patryk3211.powergrid.circuits.circuitboard.CircuitBoardBlockEntity)entity).getComponentsStream().count()!=3)throw new IllegalStateException("Board components missing");
+                    if(mc.player.getEyeY()<pos.getY()+1.5)throw new IllegalStateException("Board view did not expose its top");
+                    WorldWidePowerGrid.LOGGER.info("CI_ADDON_BOARD_TOP_PASSED: three synchronized assembled components");
+                }
                 Screenshot.grab(mc.gameDirectory,codes[index]+".png",mc.getMainRenderTarget(),message->{});return;
             }
             if(phase.equals("tools")) {
