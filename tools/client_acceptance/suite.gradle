@@ -51,7 +51,9 @@ gradle.projectsEvaluated {
             new groovy.json.JsonSlurper().parse(compilationInputs).each { item->
                 def saved=p.file(item.path)
                 if(digest(saved)!=item.sha256||digest(p.file(item.source_path))!=item.sha256)throw new GradleException('Helper inputs differ from compiled sources')
-                def target=new File(frozen,'inputs/'+item.source_path);target.parentFile.mkdirs();target.bytes=saved.bytes
+                // Keep snapshots below Windows MAX_PATH; source_path retains the
+                // full logical identity independently of this storage name.
+                def target=new File(frozen,'inputs/'+files.size()+'-'+saved.name);target.parentFile.mkdirs();target.bytes=saved.bytes
                 files.add(snapshot(target)+[source_path:item.source_path])
             }
             def smoke=selected.backend=='JAVA'||selected.scenario in ['workshop-integrated','base-workshop']

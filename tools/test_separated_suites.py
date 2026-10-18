@@ -1,6 +1,7 @@
 """Focused selection/evidence controls. Never starts Gradle or Minecraft."""
 import copy
 import json
+import os
 from pathlib import Path
 import tempfile
 import unittest
@@ -188,6 +189,21 @@ class EvidenceChecks(unittest.TestCase):
         # Portable descriptors use workspace-relative object paths even when
         # their containing JSON lives deeper in the object directory.
         self.assertTrue(evidence.validate_reports([portable],'full-headless','a'*40,report['artifact_hashes'],complete=False))
+
+    @unittest.skipUnless(os.name=='nt','Windows extended paths')
+    def test_long_retained_helper_path_is_verified_and_portable_without_relaunch(self):
+        from bundle_suite_evidence import bundle
+        from graphical_suite import verify_file
+        path=self.base/('a'*90)/('b'*90)/('c'*40+'.java')
+        extended=Path('\\\\?\\'+str(path));extended.parent.mkdir(parents=True)
+        extended.write_bytes(b'TEST_ONLY retained helper source')
+        self.addCleanup(extended.unlink)
+        item=suites.descriptor(extended);item['path']=str(path)
+        self.assertEqual(verify_file(item,self.base).read_bytes(),extended.read_bytes())
+        source=self.base/'long.json';source.write_text(json.dumps(dict(helper=item)))
+        portable=bundle(source,self.base/'short-portable')
+        copied=suites.read(portable)['helper']
+        self.assertEqual(evidence.locked(copied,self.base).read_bytes(),extended.read_bytes())
 
     def test_release_cannot_substitute_headless_for_graphical(self):
         manifest=dict(acceptance_policy='separated-v2',artifacts={r:{'sha256':'a'*64} for r in suites.ROLES},headless_acceptance={})

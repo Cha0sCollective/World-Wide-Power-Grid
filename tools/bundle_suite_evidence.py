@@ -5,6 +5,7 @@ artifact hashes, logs and observations keep their original values.
 """
 import argparse
 import json
+import os
 from pathlib import Path
 from test_suites import ROOT, descriptor, read, write
 
@@ -18,6 +19,8 @@ def bundle(source, output):
     cached={}
     def copy(item, base):
         original=(base/item['path']).resolve()
+        if os.name=='nt' and len(str(original))>=260 and not str(original).startswith('\\\\?\\'):
+            original=Path('\\\\?\\'+str(original))
         if not original.is_file():original=(ROOT/item['path']).resolve()
         if not original.is_file():raise ValueError('Missing retained input: '+str(original))
         if descriptor(original)['sha256']!=item['sha256']:raise ValueError('Changed retained input: '+str(original))

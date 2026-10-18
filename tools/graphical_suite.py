@@ -14,6 +14,8 @@ def require(condition, message):
 
 def verify_file(item, base):
     path=(Path(base)/item['path']).resolve()
+    if os.name=='nt' and len(str(path))>=260 and not str(path).startswith('\\\\?\\'):
+        path=Path('\\\\?\\'+str(path))
     if not path.is_file() and not Path(item['path']).is_absolute():path=(ROOT/item['path']).resolve()
     require(path.is_file() and sha(path)==item['sha256'] and path.stat().st_size==item['bytes'], 'Changed client input/evidence: '+str(path))
     return path
