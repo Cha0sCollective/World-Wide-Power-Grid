@@ -42,7 +42,7 @@ import java.nio.file.Path;
 import java.util.*;
 
 /** Opt-in real-player coordinator shared by dedicated and integrated acceptance. */
-@EventBusSubscriber(modid = "wwpg")
+@EventBusSubscriber(modid = "wwpg_tests")
 public final class ExtensionApiClientSession {
     public static final BlockPos PANEL = ExtensionApiWorldGameTests.ORIGIN.offset(7, 0, 60);
     public static final BlockPos BOARD = ExtensionApiWorldGameTests.ORIGIN.offset(29, 0, 60);

@@ -28,6 +28,7 @@ The combined Stationary Yard requires Pinout and CC:Tweaked and includes the ord
 | Build the independent examples | [General example](../examples/extension-addon/README.md) and [CEE/PG example](../examples/cee-addon/README.md) |
 | Build WWPG or run development checks | [Development](DEVELOPMENT.md) |
 | Choose focused, full headless or graphical checks | [Testing process](TESTING.md) |
+| See what each current GameTest actually checks | [GameTest coverage reference](GAMETEST_REFERENCE.md) |
 | Work on the unreleased guarded native solver | [Native safety development](NATIVE_SAFETY_DEVELOPMENT.md) |
 | Submit a change | [Contributing](../CONTRIBUTING.md) |
 | Understand API release requirements | [API release checks](API_RELEASE_CHECKS.md) and [completed API plan](EXTENSION_API_PLAN.md) |

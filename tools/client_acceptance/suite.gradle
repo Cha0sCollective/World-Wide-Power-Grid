@@ -13,7 +13,7 @@ gradle.projectsEvaluated {
     def inputsToCapture={sources.files+p.fileTree('tools/client_acceptance/resources').files+[p.file('tools/client_acceptance/suite.gradle'),p.file('tools/test-suites.json')]}
     def compile=p.tasks.register('compileSuiteClientHelper',JavaCompile) {
         source sources
-        classpath=p.sourceSets.main.compileClasspath+p.files(artifact('runtime'))
+        classpath=p.sourceSets.main.compileClasspath+p.files(artifact('runtime')) + (inputs.artifacts.gametest ? p.files(artifact('gametest')) : p.files())
         destinationDirectory=new File(out,'classes')
         javaCompiler=p.javaToolchains.compilerFor{languageVersion=JavaLanguageVersion.of(21)}
         options.encoding='UTF-8'
@@ -77,15 +77,17 @@ gradle.projectsEvaluated {
                 def program=run.args.collect {arg->arg.startsWith('@')?p.file(arg.substring(1)).getText('UTF-8'):arg}.join('\n')
                 if(!selected.tcp)program=program.replace('--quickPlayMultiplayer\n127.0.0.1:25575','')
                 program=program.replace('--width\n854','--width\n1280').replace('--height\n480','--height\n720')
-                def cp=run.classpathProvider.filter {file->![p.sourceSets.main,p.sourceSets.extensionApi,p.sourceSets.ceeApi].any{it.output.files.contains(file)}
+                def cp=run.classpathProvider.filter {file->![p.sourceSets.main,p.sourceSets.extensionApi,p.sourceSets.ceeApi,p.sourceSets.gameTest].any{it.output.files.contains(file)}
                     && !file.name.startsWith('wwpg-api-example-')&&!file.name.startsWith('wwpg-upstream-api-example-')}
                 cp+=p.files(artifact('runtime'),jar)
+                if(inputs.artifacts.gametest) cp+=p.files(artifact('gametest'))
                 if(selected.world=='workshop')cp+=p.files(artifact('example'),artifact('upstream_example'))
                 def quote={value->'"'+value.toString().replace('\\','/').replace('"','\\"')+'"'}
                 def launch=new File(root,role+'-arguments.txt')
                 launch.setText(vm+'\n'+['-cp',cp.asPath,run.mainClass.get()].collect(quote).join('\n')+'\n'+program+'\n','UTF-8')
                 def env=new HashMap(run.environmentProperty.get())
                 env['MOD_CLASSES']='wwpg%%'+artifact('runtime').absolutePath+File.pathSeparator+'wwpg_acceptance%%'+jar.absolutePath
+                if(inputs.artifacts.gametest) env['MOD_CLASSES']+=File.pathSeparator+'wwpg_tests%%'+artifact('gametest').absolutePath
                 // Windows Java response files use the native code page. Keep
                 // Unicode save names on the process's wide-character command line.
                 def command=[p.javaToolchains.launcherFor{languageVersion=JavaLanguageVersion.of(21)}.get().executablePath.asFile.absolutePath,

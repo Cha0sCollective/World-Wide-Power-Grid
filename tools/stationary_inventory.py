@@ -176,7 +176,7 @@ destination.mkdir(parents=True, exist_ok=True)
 # Keep references aligned with the current fixtures, including optional-profile
 # tests. A matrix entry cannot quietly name a removed or nonexistent check.
 fixture_sources = {}
-for source in (ROOT / "src/main/java/org/cha0scollective/wwpg/gametest").glob("*.java"):
+for source in (ROOT / "src/gameTest/java/org/cha0scollective/wwpg/gametest").glob("*.java"):
     for name in re.findall(r"public\s+static\s+void\s+(\w+)\s*\(\s*GameTestHelper\b", source.read_text()):
         fixture_sources[name] = source.relative_to(ROOT).as_posix()
 for row in matrix["content"]:

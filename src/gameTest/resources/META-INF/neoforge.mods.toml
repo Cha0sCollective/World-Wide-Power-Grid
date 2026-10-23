@@ -1,0 +1,17 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="MIT"
+
+[[mods]]
+modId="wwpg_tests"
+version="${version}"
+displayName="WWPG GameTests and Fixtures"
+authors="Cha0sCollective"
+description='''Development-only companion tests for the unchanged WWPG gameplay jar.'''
+
+[[dependencies.wwpg_tests]]
+modId="wwpg"
+type="required"
+versionRange="[${version}]"
+ordering="AFTER"
+side="BOTH"

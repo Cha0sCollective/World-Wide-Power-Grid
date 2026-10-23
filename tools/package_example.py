@@ -90,9 +90,9 @@ report_path = record / "verification.json"
 report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8", newline="\n")
 evidence[report_path.relative_to(root).as_posix()] = report_path
 for path in [record / "README.md", root / "docs/INSTALL.md", root / "docs/STATUS.md",
-             root / "src/main/java/org/cha0scollective/wwpg/gametest/ExampleWorldGameTests.java",
-             root / "src/main/java/org/cha0scollective/wwpg/gametest/ExampleControlBoard.java",
-             root / "src/main/java/org/cha0scollective/wwpg/gametest/BoardFixture.java"]:
+             root / "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExampleWorldGameTests.java",
+             root / "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExampleControlBoard.java",
+             root / "src/gameTest/java/org/cha0scollective/wwpg/gametest/BoardFixture.java"]:
     evidence[path.relative_to(root).as_posix()] = path
 verification = output / "wwpg-0.1.0-beta.2-example-v2-verification.zip"
 with zipfile.ZipFile(verification, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as archive:

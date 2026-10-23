@@ -113,7 +113,7 @@ LIFECYCLE = ["mixedBranchesLoopCutReconnectAndRemoval", "chunkReloadRebindsMixed
 
 def apply(matrix, verified=False):
     methods = {}
-    for file in (ROOT / "src/main/java/org/cha0scollective/wwpg/gametest").glob("*.java"):
+    for file in (ROOT / "src/gameTest/java/org/cha0scollective/wwpg/gametest").glob("*.java"):
         for method in re.findall(r'public static void (\w+)\(GameTestHelper', file.read_text()):
             methods[method] = file.relative_to(ROOT).as_posix()
     for row in matrix["content"]:

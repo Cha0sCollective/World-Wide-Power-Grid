@@ -23,7 +23,7 @@ import org.patryk3211.powergrid.electricity.resistor.ResistorBlockEntity;
 import org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint;
 import org.patryk3211.powergrid.electricity.wire.WireEntity;
 
-@EventBusSubscriber(modid="wwpg",value=Dist.CLIENT)
+@EventBusSubscriber(modid="wwpg_tests",value=Dist.CLIENT)
 public final class MultiplayerClientDriver {
     private static String phase="";private static int age,bootAge;private static boolean first,connecting;
     @SubscribeEvent public static void chat(ClientChatReceivedEvent.System event){

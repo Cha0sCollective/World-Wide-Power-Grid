@@ -3,6 +3,10 @@
 This is the `separated-v2` testing policy for future development and releases.
 Published release records retain their original policy and evidence.
 
+For the actions, assertions and limitations of each current fixture, see the
+[GameTest coverage reference](GAMETEST_REFERENCE.md). Its source inventory is
+separate from the passing execution records for any release.
+
 | Lane | What it proves | Authorization |
 | --- | --- | --- |
 | Focused | The affected code, tooling or selected electrical regressions work | Normal development checks |
@@ -191,3 +195,20 @@ If a failed bundler left no usable execution report, continuation cannot reuse
 that environment's claimed prefix. Its explicit `--fresh-if-unavailable` option
 reruns the named environment and records that absence; other environments still
 retain verified passing groups. Original partial uploads remain preserved.
+
+## Separate gameplay and test jars (development candidate dev.99)
+
+`assemble` builds the player mod `wwpg-<version>.jar` and the separate
+`wwpg-<version>-gametests.jar`. Install only the player mod for normal play.
+The companion contains GameTests, test commands, world-building fixtures and
+empty test structures; it requires the matching gameplay version. Gameplay Lua
+programs, native libraries, APIs and production mixins stay in the player mod.
+
+The catalog runner freezes both jars once. Each packaged headless launch loads
+the exact gameplay jar plus its companion, with both hashes in its process proof.
+Direct launches can supply `-PtestArtifact=<gameplay.jar>` and
+`-PtestFixtureArtifact=<gametests.jar>` to `runPackagedGameTestServer`.
+Normal development client/server runs exclude the companion; `runGameTestServer`
+includes it. SDK/client acceptance helpers also consume the frozen companion.
+Historical records without a companion retain their original validation rules.
+No test namespace or lifecycle phase was removed by this separation.

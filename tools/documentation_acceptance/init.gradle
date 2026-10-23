@@ -3,11 +3,13 @@ gradle.projectsEvaluated {
     def p = gradle.rootProject
     def starter = p.file(p.providers.gradleProperty('docStarterJar').get())
     def frozen = p.file(p.providers.gradleProperty('docRuntimeJar').get())
+    def fixtures = p.providers.gradleProperty('testFixtureArtifact').isPresent() ? p.file(p.providers.gradleProperty('testFixtureArtifact').get()) : null
+    if (fixtures != null && !fixtures.isFile()) throw new GradleException('Missing frozen GameTest companion')
     if (!starter.isFile() || !frozen.isFile()) throw new GradleException('Supply the independently built starter and frozen released runtime')
     def source = p.sourceSets.create('docAcceptance') {
         java.srcDir p.file('tools/documentation_acceptance/src')
         resources.srcDir p.file('tools/documentation_acceptance/resources')
-        compileClasspath = p.sourceSets.main.compileClasspath + p.files(starter, frozen)
+        compileClasspath = p.sourceSets.main.compileClasspath + p.files(starter, frozen, fixtures == null ? [] : [fixtures])
     }
     p.tasks.named('compileDocAcceptanceJava',JavaCompile) { task ->
         task.source(p.file('tools/client_acceptance/src/org/cha0scollective/wwpg/acceptance/ClientShutdown.java'))
@@ -29,9 +31,10 @@ gradle.projectsEvaluated {
             mainClass = run.mainClass
             args = run.args
             jvmArgs = run.jvmArgs + ['-Dwwpg.test.packaged=false', '-Dwwpg.doc.phase='+p.providers.gradleProperty('docPhase').getOrElse('SETUP')]
-            classpath = run.classpathProvider.filter { ![p.sourceSets.main,p.sourceSets.extensionApi,p.sourceSets.ceeApi].any { set -> set.output.files.contains(it) } } + p.files(frozen,starter,helper.get().archiveFile.get().asFile)
+            classpath = run.classpathProvider.filter { ![p.sourceSets.main,p.sourceSets.extensionApi,p.sourceSets.ceeApi,p.sourceSets.gameTest].any { set -> set.output.files.contains(it) } } + p.files(frozen,starter,helper.get().archiveFile.get().asFile,fixtures == null ? [] : [fixtures])
             def env = new HashMap(run.environmentProperty.get())
             env['MOD_CLASSES'] = 'wwpg%%'+frozen.absolutePath+File.pathSeparator+'tutorial_load%%'+starter.absolutePath+File.pathSeparator+'wwpg_doc_acceptance%%'+helper.get().archiveFile.get().asFile.absolutePath
+            if (fixtures != null) env['MOD_CLASSES'] += File.pathSeparator+'wwpg_tests%%'+fixtures.absolutePath
             environment env
             def capture = new ByteArrayOutputStream()
             extensions.extraProperties.set('documentationOutput', capture)
@@ -92,9 +95,10 @@ gradle.projectsEvaluated {
             // the ordered options in one file makes the final false override
             // effective, so the legacy TCP driver cannot steal the title screen.
             jvmArgs=['@'+vmFile.absolutePath]
-            classpath = run.classpathProvider.filter { ![p.sourceSets.main,p.sourceSets.extensionApi,p.sourceSets.ceeApi].any { set -> set.output.files.contains(it) } } + p.files(frozen,starter,example,helper.get().archiveFile.get().asFile)
+            classpath = run.classpathProvider.filter { ![p.sourceSets.main,p.sourceSets.extensionApi,p.sourceSets.ceeApi,p.sourceSets.gameTest].any { set -> set.output.files.contains(it) } } + p.files(frozen,starter,example,helper.get().archiveFile.get().asFile,fixtures == null ? [] : [fixtures])
             def env = new HashMap(run.environmentProperty.get())
             env['MOD_CLASSES']='wwpg%%'+frozen.absolutePath+File.pathSeparator+'tutorial_load%%'+starter.absolutePath+File.pathSeparator+'wwpg_doc_acceptance%%'+helper.get().archiveFile.get().asFile.absolutePath
+            if (fixtures != null) env['MOD_CLASSES'] += File.pathSeparator+'wwpg_tests%%'+fixtures.absolutePath
             environment env
             def capture = new ByteArrayOutputStream();extensions.extraProperties.set('documentationClientOutput',capture)
             def tee = { OutputStream console -> new OutputStream() {

@@ -92,7 +92,7 @@ def prepare(output, runtime, repository_zip, runtime_source_sha=None, api_artifa
     print(json.dumps(dict(passed=True, source=sha(source), starter=sha(compiled))))
 
 
-def server(output, runtime, backend):
+def server(output, runtime, backend, test_fixtures=None):
     proof = json.loads((output / 'build-proof.json').read_text(encoding='utf-8'))
     starter = ROOT / proof['compiled_output']['path']
     if sha(runtime) != proof['runtime_sha256'] or sha(starter) != proof['compiled_output']['sha256']:
@@ -107,7 +107,7 @@ def server(output, runtime, backend):
              '-PdocStarterJar=' + str(starter), '-PdocRuntimeJar=' + str(runtime),
              '-PdocDirectory=' + str(directory), '-PtestNamespaces=wwpg_doc',
              '-PtestBackend=' + backend, '-PdocPhase=' + phase,
-             '-Pneo_version=21.1.248', '--no-daemon'], log)
+             '-Pneo_version=21.1.248', '--no-daemon'] + (['-PtestFixtureArtifact='+str(test_fixtures)] if test_fixtures else []), log)
         text = log.read_text(encoding='utf-8', errors='replace')
         if 'All 4 required tests passed' not in text or 'BUILD FAILED' in text:
             raise ValueError('Starter gameplay did not pass all four fixtures')
@@ -130,6 +130,7 @@ def server(output, runtime, backend):
         checks=['controls', 'native_tools', 'unavailable', 'cold_restart_before_solve',
                 'actual_chunk_reload', 'replacement', 'dedicated_server'],
         evidence=[descriptor(p) for p in logs + observations])
+    if test_fixtures: report['test_fixture_artifact'] = descriptor(test_fixtures)
     write(output / (backend + '-gameplay.json'), report)
     print(json.dumps(dict(passed=True, backend=backend, observations=len(reports))))
 
@@ -150,7 +151,7 @@ def client_world_name(directory):
     return name
 
 
-def client(output, runtime, backend, world, example):
+def client(output, runtime, backend, world, example, test_fixtures=None):
     proof = json.loads((output / 'build-proof.json').read_text(encoding='utf-8'))
     starter = ROOT / proof['compiled_output']['path']
     if sha(runtime) != proof['runtime_sha256'] or sha(starter) != proof['compiled_output']['sha256']:
@@ -181,7 +182,7 @@ def client(output, runtime, backend, world, example):
          '-PdocStarterJar=' + str(starter), '-PdocRuntimeJar=' + str(runtime),
          '-PdocExampleJar=' + str(example), '-PdocDirectory=' + str(directory),
          '-PdocWorldName=' + save_name,
-         '-PtestBackend=' + backend, '-Pneo_version=21.1.248', '--no-daemon'], log)
+         '-PtestBackend=' + backend, '-Pneo_version=21.1.248', '--no-daemon'] + (['-PtestFixtureArtifact='+str(test_fixtures)] if test_fixtures else []), log)
     if launcher_hashes != [sha(path) for path in launcher_inputs]:
         raise ValueError('Launcher tools changed during the graphical check')
     text = log.read_text(encoding='utf-8', errors='replace')
@@ -220,6 +221,7 @@ def client(output, runtime, backend, world, example):
         launcher_vm_arguments=descriptor(vm_arguments),
         launcher_source_sha=launcher_source, launcher_tools=launcher_tools,
         input_world=descriptor(world), source_example=descriptor(example))
+    if test_fixtures: report['test_fixture_artifact'] = descriptor(test_fixtures)
     write(output / (backend + '-graphical.json'), report)
     print(json.dumps(dict(passed=True, backend=backend, meter_volts=result['client_meter_volts'])))
 
@@ -236,6 +238,7 @@ if __name__ == '__main__':
     parser.add_argument('--backend', choices=['NATIVE', 'JAVA'])
     parser.add_argument('--world', type=Path)
     parser.add_argument('--example', type=Path)
+    parser.add_argument('--test-fixtures', type=Path)
     args = parser.parse_args()
     output, runtime = args.output.resolve(), args.runtime.resolve()
     if not output.is_relative_to(ROOT) or not runtime.is_relative_to(ROOT):
@@ -247,8 +250,8 @@ if __name__ == '__main__':
     elif args.mode == 'server':
         if not args.backend:
             parser.error('server needs --backend')
-        server(output, runtime, args.backend)
+        server(output, runtime, args.backend, args.test_fixtures)
     else:
         if not args.backend or not args.world or not args.example:
             parser.error('client needs --backend, --world and --example')
-        client(output, runtime, args.backend, args.world.resolve(), args.example.resolve())
+        client(output, runtime, args.backend, args.world.resolve(), args.example.resolve(), args.test_fixtures)
