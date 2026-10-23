@@ -31,6 +31,12 @@ COMBINATIONS = {(p, b, r) for p in PLATFORMS for b in BACKENDS for r in PROFILES
 ROLES = {'runtime', 'api', 'api_sources', 'api_javadoc', 'cee_api', 'cee_api_sources',
          'cee_api_javadoc', 'example', 'example_sources', 'upstream_example',
          'upstream_example_sources', 'maven_repository'}
+
+
+def artifact_roles(manifest):
+    """Historical releases embedded tests; separated releases retain the companion."""
+    return ROLES | ({'gametest'} if 'gametest' in manifest.get('artifacts', {}) else set())
+
 BEHAVIORS = {'machine', 'storage', 'instrument', 'panel_attachment', 'board_component'}
 HASH = re.compile(r'^[0-9a-f]{64}$')
 SDK_DOCUMENTS = frozenset({'docs/EXTENSION_API.md', 'docs/EXTENSION_API_PLAN.md', 'docs/EXTENSION_API_WORKSHOP.md',
@@ -222,6 +228,15 @@ def validate_artifacts(manifest, root):
     records = manifest.get('artifacts', {})
     require(ROLES <= records.keys(), 'Missing SDK/runtime/example/Maven artifact')
     paths = {role: locked_file(record, root) for role, record in records.items()}
+    if 'gametest' in paths:
+        require(manifest.get('acceptance_policy') == 'separated-v2', 'Companion requires separated acceptance')
+        with checked_zip(paths['gametest']) as fixtures, checked_zip(paths['runtime']) as runtime:
+            require('org/cha0scollective/wwpg/gametest/WwpgGameTests.class' in fixtures.namelist(),
+                    'GameTest companion bootstrap missing')
+            require(not any('/gametest/' in name for name in runtime.namelist()), 'Player jar still contains GameTests')
+            metadata=fixtures.read('META-INF/neoforge.mods.toml').decode('utf-8')
+            require('modId="wwpg_tests"' in metadata and f'version="{VERSION}"' in metadata,
+                    'Wrong GameTest companion metadata/version')
     api_snapshot = snapshot(paths['api'])
     require(all(t['major_version'] <= 65 for t in api_snapshot['types'].values()), 'API requires newer than Java21')
     validate_version_accessor(api_snapshot)
@@ -236,6 +251,8 @@ def validate_artifacts(manifest, root):
         metadata = runtime.read('META-INF/neoforge.mods.toml').decode('utf-8')
         require(re.search(r'\bversion\s*=\s*"' + re.escape(VERSION) + r'"', metadata), 'Wrong runtime mod version')
         require(not any('/acceptance/' in name for name in runtime.namelist()), 'Private acceptance helper in runtime')
+        if manifest.get('acceptance_policy') == 'separated-v2' and 'org/cha0scollective/wwpg/gametest/WiringGameTests.class' not in runtime.namelist():
+            require('gametest' in paths, 'Separated player artifact requires the accepted GameTest companion')
     with checked_zip(paths['api_sources']) as sources:
         required = {name.split('$', 1)[0] + '.java' for name in api_snapshot['types']}
         require(required <= set(sources.namelist()), 'Published source JAR omits an exported API type')

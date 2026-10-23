@@ -64,7 +64,7 @@ def observed(job, texts):
 def validate_observation(proof, job, inputs, base):
     require(proof.get('schema')==2 and proof.get('scenario_id')==job['id'], 'Wrong client scenario')
     require(proof.get('backend')==job['backend'] and proof.get('profile')==job['profile'] and proof.get('loader')==job['loader'], 'Wrong client environment')
-    require(proof.get('source_sha')==inputs['source_sha'] and all(proof['artifact_hashes'].get(r)==inputs['artifact_hashes'][r] for r in ('runtime','api','cee_api','example','upstream_example')), 'Client input identity differs')
+    require(proof.get('source_sha')==inputs['source_sha'] and all(proof['artifact_hashes'].get(r)==inputs['artifact_hashes'][r] for r in ('runtime','api','cee_api','example','upstream_example')+(('gametest',) if 'gametest' in inputs['artifact_hashes'] else ())), 'Client input identity differs')
     require(proof.get('passed') is True, 'Failed client attempt')
     require(proof['world']['sha256']==sha(verify_file(proof['world'],base)), 'World hash differs')
     launch=read(verify_file(proof['launch'],base))
@@ -85,6 +85,8 @@ def validate_observation(proof, job, inputs, base):
     if job['scenario']=='starter':require('DOC_CLIENT_MODE_PASSED: multiplayer=false' in texts['client'],'SDK integrated/TCP execution mode was not verified')
     for text in texts.values():
         require('CI_LOADED_ARTIFACT: runtime '+inputs['artifact_hashes']['runtime'] in text,'Actual loaded runtime differs')
+        if 'gametest' in inputs['artifact_hashes']:
+            require('CI_LOADED_ARTIFACT: gametest '+inputs['artifact_hashes']['gametest'] in text,'Actual loaded GameTest companion differs')
         require('NeoForge mod loading, version '+job['loader'] in text,'Actual loader differs')
         if job['world']=='workshop':
             for role in ('example','upstream_example'):

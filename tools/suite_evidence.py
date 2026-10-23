@@ -126,6 +126,8 @@ def validate_reports(paths, lane, source_sha, hashes, complete=True):
             for job in report['jobs']:
                 require(job.get('status')=='passed' and job in original['jobs'],'Retained job did not actually pass')
         require(report.get('source_sha') == source_sha, 'Acceptance source differs')
+        require('gametest' not in report.get('artifact_hashes', {}) or 'gametest' in hashes,
+                'Acceptance requires the original GameTest companion identity')
         require(all(report.get('artifact_hashes', {}).get(r) == hashes[r] for r in tuple(ROLES)+(('gametest',) if 'gametest' in hashes else ())), 'Acceptance artifacts differ')
         previous_catalog=read(locked(report['catalog'],base))
         require(previous_catalog.get('schema')==2 and previous_catalog.get('policy')=='separated-v2','Coverage policy differs')
@@ -135,6 +137,13 @@ def validate_reports(paths, lane, source_sha, hashes, complete=True):
         input_path=locked(report['inputs'],base);frozen=read(input_path)
         require(frozen.get('schema')==2 and frozen.get('policy')=='separated-v2' and frozen.get('source_sha')==source_sha,
                 'Frozen campaign identity differs')
+        require('gametest' not in frozen.get('artifacts', {}) or 'gametest' in hashes,
+                'Frozen campaign requires its GameTest companion identity')
+        if 'gametest' not in frozen.get('artifacts', {}):
+            from zipfile import ZipFile
+            with ZipFile(locked(frozen['artifacts']['runtime'],input_path.parent)) as runtime:
+                require('org/cha0scollective/wwpg/gametest/WiringGameTests.class' in runtime.namelist(),
+                        'Separated runtime requires the frozen GameTest companion')
         for role in tuple(ROLES)+(('gametest',) if 'gametest' in hashes else ()):
             require(frozen['artifacts'][role]['sha256']==hashes[role],'Frozen campaign artifact differs')
             locked(frozen['artifacts'][role],input_path.parent)

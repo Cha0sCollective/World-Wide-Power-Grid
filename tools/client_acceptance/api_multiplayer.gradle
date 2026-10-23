@@ -6,6 +6,17 @@ gradle.projectsEvaluated {
     def defaults = [runtime:"build/libs/wwpg-${project.mod_version}.jar",api:'build/libs/wwpg-api-1.0.0.jar',cee_api:'build/libs/wwpg-cee-api-1.0.0.jar',
                     example:'examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar',upstream_example:'examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar']
     def artifacts = properties.collectEntries { role, property -> [role,project.file(project.providers.gradleProperty(property).getOrElse(defaults[role]))] }
+    def fixtures = project.providers.gradleProperty('testFixtureArtifact').isPresent()
+        ? project.file(project.providers.gradleProperty('testFixtureArtifact').get()) : null
+    if (fixtures != null && !fixtures.isFile()) throw new GradleException('Missing frozen GameTest companion')
+    if (fixtures == null && artifacts.runtime.isFile()) {
+        def legacy = new java.util.zip.ZipFile(artifacts.runtime)
+        try {
+            if (legacy.getEntry('org/cha0scollective/wwpg/gametest/WiringGameTests.class') == null)
+                throw new GradleException('Separated gameplay jar requires -PtestFixtureArtifact=<frozen companion jar>')
+        } finally { legacy.close() }
+    }
+    if (fixtures != null) artifacts.gametest = fixtures
     def hash = { file -> java.security.MessageDigest.getInstance('SHA-256').digest(file.bytes).encodeHex().toString() }
     def sourceFiles = project.fileTree(project.file('tools/client_acceptance/src')) { include '**/*.java' }
     def initFile = project.file('tools/client_acceptance/api_multiplayer.gradle')
@@ -35,12 +46,12 @@ gradle.projectsEvaluated {
         }
         return [file:frozenJar,record:[path:frozenJar.absolutePath,sha256:hash(frozenJar),bytes:frozenJar.length()],sources:capturedSources]
     }
-    def excluded = { file -> [project.sourceSets.main,project.sourceSets.extensionApi,project.sourceSets.ceeApi].any { it.output.files.contains(file) }
+    def excluded = { file -> [project.sourceSets.main,project.sourceSets.extensionApi,project.sourceSets.ceeApi,project.sourceSets.gameTest].any { it.output.files.contains(file) }
         || file.name in ['wwpg-api-example-1.0.0.jar','wwpg-upstream-api-example-1.0.0.jar'] }
     def compilation = project.tasks.register('compileApiMultiplayerHelper',JavaCompile) {
         source sourceFiles
         inputs.files(inputFiles())
-        classpath = project.sourceSets.main.compileClasspath.filter { !excluded(it) }+project.files(artifacts.runtime)
+        classpath = project.sourceSets.main.compileClasspath.filter { !excluded(it) }+project.files(artifacts.runtime,fixtures == null ? [] : [fixtures])
         destinationDirectory = new File(output,'classes')
         javaCompiler = project.javaToolchains.compilerFor { languageVersion=JavaLanguageVersion.of(21) }
         options.encoding='UTF-8'
@@ -107,13 +118,14 @@ gradle.projectsEvaluated {
                     target.setText(text,'UTF-8'); return '@'+target.absolutePath
                 } }
                 def vm = copy(run.jvmArgs,'vm'), args = copy(run.args,'program')
-                def classpath = run.classpathProvider.filter { !excluded(it) }+project.files(artifacts.runtime,artifacts.example,artifacts.upstream_example)
+                def classpath = run.classpathProvider.filter { !excluded(it) }+project.files(artifacts.runtime,artifacts.example,artifacts.upstream_example,fixtures == null ? [] : [fixtures])
                 if (role != 'server') classpath += project.files(frozenHelper.file)
                 def quote = { value -> '"'+value.toString().replace('\\','/').replace('"','\\"')+'"' }
                 def flatten = { values -> values.collect { it.startsWith('@') ? project.file(it.substring(1)).getText('UTF-8') : quote(it) }.join('\n') }
                 def command = new File(snapshots,role+'-launch.txt')
                 command.setText(flatten(vm)+'\n'+['-cp',classpath.asPath,run.mainClass.get()].collect(quote).join('\n')+'\n'+flatten(args)+'\n','UTF-8')
                 def env = new HashMap(run.environmentProperty.get());env['MOD_CLASSES']='wwpg%%'+artifacts.runtime.absolutePath
+                if (fixtures != null) env['MOD_CLASSES'] += File.pathSeparator+'wwpg_tests%%'+fixtures.absolutePath
                 if (role != 'server') env['MOD_CLASSES'] += File.pathSeparator+'wwpg_acceptance%%'+frozenHelper.file.absolutePath
                 launches.add([role:role,directory:directory.absolutePath,command:[project.javaToolchains.launcherFor { languageVersion=JavaLanguageVersion.of(21) }.get().executablePath.asFile.absolutePath,'@'+command.absolutePath],environment:env])
             }

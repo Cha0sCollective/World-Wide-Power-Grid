@@ -18,7 +18,7 @@ public final class RuntimeIdentity {
     }
     public static void record() {
         try {
-            for(var entry:java.util.Map.of("wwpg","runtime","wwpg_api_example","example","wwpg_api_upstream","upstream_example").entrySet()) {
+            for(var entry:java.util.Map.of("wwpg","runtime","wwpg_tests","gametest","wwpg_api_example","example","wwpg_api_upstream","upstream_example").entrySet()) {
                 var file=ModList.get().getModFileById(entry.getKey());if(file==null)continue;
                 var hash=HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(file.getFile().getFilePath())));
                 WorldWidePowerGrid.LOGGER.info("CI_LOADED_ARTIFACT: {} {}",entry.getValue(),hash);

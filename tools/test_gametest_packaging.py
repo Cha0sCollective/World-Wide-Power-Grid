@@ -2,7 +2,6 @@
 from pathlib import Path
 import re
 import unittest
-import json
 import tempfile
 from zipfile import ZipFile
 import test_suites as suites

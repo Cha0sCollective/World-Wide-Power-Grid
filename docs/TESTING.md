@@ -196,7 +196,7 @@ that environment's claimed prefix. Its explicit `--fresh-if-unavailable` option
 reruns the named environment and records that absence; other environments still
 retain verified passing groups. Original partial uploads remain preserved.
 
-## Separate gameplay and test jars (development candidate dev.99)
+## Separate gameplay and test jars (development candidates dev.99 onward)
 
 `assemble` builds the player mod `wwpg-<version>.jar` and the separate
 `wwpg-<version>-gametests.jar`. Install only the player mod for normal play.
@@ -212,3 +212,9 @@ Normal development client/server runs exclude the companion; `runGameTestServer`
 includes it. SDK/client acceptance helpers also consume the frozen companion.
 Historical records without a companion retain their original validation rules.
 No test namespace or lifecycle phase was removed by this separation.
+
+For a future separated release, the accepted manifest also includes the frozen
+`gametest` artifact. Its jar stays inside the verification bundle; it is not a
+sixth download or a player dependency. The headless/client reports must bind the
+same companion, and publication still requires their applicable complete coverage.
+Native provenance manifests remain in the player jar as referenced by its notice.

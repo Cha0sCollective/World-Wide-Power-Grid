@@ -11,13 +11,13 @@ gradle.projectsEvaluated {
     def out=p.file('build/ci-client-helper')
     def compilationInputs=new File(out,'compiled-inputs.json')
     def inputsToCapture={sources.files+p.fileTree('tools/client_acceptance/resources').files+[p.file('tools/client_acceptance/suite.gradle'),p.file('tools/test-suites.json')]}
-    def compile=p.tasks.register('compileSuiteClientHelper',JavaCompile) {
+    def compile=p.tasks.register('compileSuiteClientHelper',JavaCompile) { task ->
         source sources
         classpath=p.sourceSets.main.compileClasspath+p.files(artifact('runtime')) + (inputs.artifacts.gametest ? p.files(artifact('gametest')) : p.files())
         destinationDirectory=new File(out,'classes')
         javaCompiler=p.javaToolchains.compilerFor{languageVersion=JavaLanguageVersion.of(21)}
         options.encoding='UTF-8'
-        getInputs().files(inputsToCapture())
+        task.inputs.files(inputsToCapture())
         outputs.file(compilationInputs)
         outputs.cacheIf{false}
         doFirst {
