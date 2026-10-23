@@ -160,6 +160,11 @@ def frozen_inputs(path):
         item['path'] = str((path.parent / item['path']).resolve())
         if sha(item['path']) != item['sha256'] or Path(item['path']).stat().st_size != item['bytes']:
             raise ValueError('Frozen artifact changed: ' + item['path'])
+    if 'gametest' not in record['artifacts']:
+        from zipfile import ZipFile
+        with ZipFile(record['artifacts']['runtime']['path']) as runtime:
+            if 'org/cha0scollective/wwpg/gametest/WiringGameTests.class' not in runtime.namelist():
+                raise ValueError('Separated gameplay artifact requires a frozen GameTest companion')
     for item in record.get('worlds', {}).values():
         item['path'] = str((path.parent/item['path']).resolve())
         if sha(item['path']) != item['sha256']:raise ValueError('Frozen world changed')

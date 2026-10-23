@@ -157,7 +157,6 @@ tasks.named('processResources') {
     inputs.property 'version', project.version
     filesMatching('META-INF/neoforge.mods.toml') { expand version: project.version }
     from('LICENSE') { into 'META-INF'; rename { 'WWPG-LICENSE.txt' } }
-    from('release') { include 'artifacts.json', 'optional-artifacts.json', 'content-matrix.json', '0.1.0-beta.5/content-matrix.json', '0.1.0-beta.5/registry-inventory.json'; into 'data/wwpg/release' }
     from(layout.buildDirectory.dir('pg-native-resources/native')) { into 'native/wwpg' }
     from(layout.buildDirectory.dir('guarded-native-resources/native')) { into 'native/wwpg' }
 }
@@ -165,6 +164,7 @@ tasks.named('processResources') {
 tasks.named('processGameTestResources') {
     inputs.property 'version', project.version
     filesMatching('META-INF/neoforge.mods.toml') { expand version: project.version }
+    from('release') { include 'artifacts.json', 'optional-artifacts.json', 'content-matrix.json', '0.1.0-beta.5/content-matrix.json', '0.1.0-beta.5/registry-inventory.json'; into 'data/wwpg/release' }
     ['wwpg_loading', 'wwpg_matrix_ownership', 'wwpg_board_startup', 'wwpg_cee_preparation',
      'wwpg_solver_safety', 'wwpg_native_guard', 'wwpg_unload', 'wwpg_contactors', 'wwpg_meter_sampling'].each { namespace ->
         from('src/gameTest/resources/data/wwpg/structure/empty.nbt') { into "data/${namespace}/structure" }
@@ -387,7 +387,13 @@ tasks.matching { it.name.startsWith('run') || it.name.startsWith('prepare') && i
 }
 
 // Frozen fixture bytes are loaded as a distinct mod alongside the gameplay artifact.
-def packagedFixtures = {
+def packagedFixtures = { File gameplay ->
+    if (!providers.gradleProperty('testFixtureArtifact').isPresent()) {
+        def legacy = new java.util.zip.ZipFile(gameplay)
+        try {
+            if (legacy.getEntry('org/cha0scollective/wwpg/gametest/WiringGameTests.class') != null) return null
+        } finally { legacy.close() }
+    }
     def fixture = providers.gradleProperty('testFixtureArtifact').isPresent()
         ? file(providers.gradleProperty('testFixtureArtifact').get())
         : tasks.named('gameTestJar').get().archiveFile.get().asFile
@@ -395,12 +401,13 @@ def packagedFixtures = {
     fixture
 }
 def configurePackagedClasspath = { task, run, File gameplay ->
-    def fixture = packagedFixtures()
-    task.classpath = run.classpathProvider.filter { ![sourceSets.main,sourceSets.extensionApi,sourceSets.ceeApi,sourceSets.gameTest].any { set -> set.output.files.contains(it) } } + files(gameplay, fixture)
+    def fixture = packagedFixtures(gameplay)
+    task.classpath = run.classpathProvider.filter { ![sourceSets.main,sourceSets.extensionApi,sourceSets.ceeApi,sourceSets.gameTest].any { set -> set.output.files.contains(it) } } + files(gameplay, fixture == null ? [] : [fixture])
     def env = new HashMap(run.environmentProperty.get())
-    env['MOD_CLASSES'] = "wwpg%%${gameplay.absolutePath}" + File.pathSeparator + "wwpg_tests%%${fixture.absolutePath}"
+    env['MOD_CLASSES'] = "wwpg%%${gameplay.absolutePath}"
+    if (fixture != null) env['MOD_CLASSES'] += File.pathSeparator + "wwpg_tests%%${fixture.absolutePath}"
     task.environment env
-    [artifact:fixture.name, sha256:java.security.MessageDigest.getInstance('SHA-256').digest(fixture.bytes).encodeHex().toString()]
+    fixture == null ? null : [artifact:fixture.name, sha256:java.security.MessageDigest.getInstance('SHA-256').digest(fixture.bytes).encodeHex().toString()]
 }
 
 // Use the same NeoForge test harness with WWPG loaded exclusively from the built jar.

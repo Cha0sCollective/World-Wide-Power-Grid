@@ -193,6 +193,7 @@ def execute_starter(job,inputs,output):
         '-PdocWorldName='+name,'-PtestBackend='+job['backend'],'-Pneo_version='+job['loader'],'-PciV2=true',
         '-PtestApiAddon=true','-PtestExampleArtifact='+inputs['artifacts']['example']['path'],
         '-PtestUpstreamExampleArtifact='+inputs['artifacts']['upstream_example']['path'],'--offline','--no-daemon']
+    if 'gametest' in inputs['artifacts']: command += ['-PtestFixtureArtifact='+inputs['artifacts']['gametest']['path']]
     with log.open('xb') as stream:result=subprocess.run(command,cwd=ROOT,stdout=stream,stderr=subprocess.STDOUT)
     require(result.returncode==0,'SDK client failed; preserve '+str(log))
     native=read(directory/'doc-client-result.json')

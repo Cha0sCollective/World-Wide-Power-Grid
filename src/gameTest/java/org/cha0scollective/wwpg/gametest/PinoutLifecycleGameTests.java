@@ -184,7 +184,7 @@ public final class PinoutLifecycleGameTests {
             mount[0] = computer[0].createRootMount();
             for (var path : new String[]{"lifecycle.json", "detached.json", "attached.json", "replacement.json", "lifecycle-error.json"}) delete(mount[0], path);
             if (install) {
-                try (var source = PinoutLifecycleGameTests.class.getResourceAsStream("/data/wwpg_pinout/programs/lifecycle.lua")) {
+                try (var source = org.cha0scollective.wwpg.WorldWidePowerGrid.class.getResourceAsStream("/data/wwpg_pinout/programs/lifecycle.lua")) {
                     if (source == null) throw new IOException("Missing native lifecycle Lua");
                     try (var channel = mount[0].openFile("startup.lua", Set.of(StandardOpenOption.WRITE, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING))) {
                         var bytes = ByteBuffer.wrap(source.readAllBytes()); while (bytes.hasRemaining()) channel.write(bytes);
