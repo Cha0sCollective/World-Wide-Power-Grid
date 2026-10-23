@@ -61,6 +61,11 @@ class GameTestPackaging(unittest.TestCase):
             self.assertIn('org/cha0scollective/wwpg/gametest/WwpgGameTests.class',companion.namelist())
             self.assertIn('META-INF/neoforge.mods.toml',companion.namelist())
             self.assertTrue(any(n.endswith('/structure/empty.nbt') for n in companion.namelist()))
+            sources=suites.ROOT/'src/gameTest/java'
+            expected={path.relative_to(sources).with_suffix('.class').as_posix()
+                      for path in sources.rglob('*.java')}
+            self.assertTrue(expected <= set(companion.namelist()),
+                            'Companion omitted compiled fixture classes: '+str(expected-set(companion.namelist())))
 
 
 if __name__=='__main__':unittest.main()
