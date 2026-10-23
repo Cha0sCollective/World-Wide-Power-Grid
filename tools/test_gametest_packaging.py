@@ -2,6 +2,8 @@
 from pathlib import Path
 import re
 import unittest
+import json
+import tempfile
 from zipfile import ZipFile
 import test_suites as suites
 
@@ -19,6 +21,27 @@ class GameTestPackaging(unittest.TestCase):
     def test_player_sources_do_not_link_test_helpers(self):
         for file in (suites.ROOT/'src/main/java').rglob('*.java'):
             self.assertNotIn('org.cha0scollective.wwpg.gametest',file.read_text(encoding='utf-8'),str(file))
+
+    def test_separated_runtime_cannot_omit_the_frozen_companion(self):
+        with tempfile.TemporaryDirectory(dir=suites.ROOT/'build') as folder:
+            root=Path(folder)
+            runtime=root/'player.jar'
+            with ZipFile(runtime,'w') as jar:jar.writestr('META-INF/neoforge.mods.toml','test-only')
+            artifacts={role:suites.descriptor(runtime) for role in suites.ROLES}
+            manifest=root/'inputs.json'
+            suites.write(manifest,dict(schema=2,policy='separated-v2',source_sha='a'*40,artifacts=artifacts))
+            with self.assertRaisesRegex(ValueError,'requires a frozen GameTest companion'):
+                suites.frozen_inputs(manifest)
+
+    def test_legacy_runtime_keeps_its_original_embedded_fixtures(self):
+        with tempfile.TemporaryDirectory(dir=suites.ROOT/'build') as folder:
+            root=Path(folder);runtime=root/'legacy.jar'
+            with ZipFile(runtime,'w') as jar:
+                jar.writestr('org/cha0scollective/wwpg/gametest/WiringGameTests.class',b'test-only')
+            manifest=root/'inputs.json'
+            suites.write(manifest,dict(schema=2,policy='separated-v2',source_sha='a'*40,
+                artifacts={role:suites.descriptor(runtime) for role in suites.ROLES}))
+            self.assertNotIn('gametest',suites.frozen_inputs(manifest)['artifacts'])
 
     def test_packaged_launch_explicitly_selects_frozen_companion(self):
         inputs={'artifacts':{r:{'path':r+'.jar'} for r in (*suites.ROLES,'gametest')}}
