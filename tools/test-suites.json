@@ -38,5 +38,5 @@
   },
   "yard_views": ["B08", "P2", "T2", "S07", "S15", "S24", "S25", "S26", "S61", "S77", "S79"],
   "workshop_views": ["A01", "A04", "A08", "A10", "A11"],
-  "known_limitations": ["Tiny capacitor-pin targeting is unresolved; highlight acceptance does not certify it."]
+  "known_limitations": ["The dev.102 exposed-pin targeting fix has focused headless player-ray coverage while holding PG wires; prior highlight evidence does not certify its real-client rendering or input."]
 }

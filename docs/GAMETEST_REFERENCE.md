@@ -3,6 +3,7 @@
 Source audit: **23 October 2026**, checkout
 `9e7083d0c02c2bd45dd2f9e2f23027cbc9b02eac` (WWPG 0.2.2).
 The declarations were relocated without removing tests in local candidate 0.2.2-dev.99.
+Inventory updated **26 October 2026** for the five dev.102 terminal-targeting regressions.
 Source links below follow that new location. This is a reference to the assertions in the current source, **not a new test
 run or a claim that every entry has passed in every environment**. See
 [Testing process](TESTING.md) for execution and [published release records](../release/README.md)
@@ -12,14 +13,14 @@ for historical passing evidence.
 
 | Where the declarations live | Test methods | Source files |
 | --- | ---: | ---: |
-| Companion test jar: `src/gameTest/java/.../gametest` | 339 | 111 |
+| Companion test jar: `src/gameTest/java/.../gametest` | 344 | 112 |
 | Independently built general and CEE/PG example addons | 13 | 3 |
 | Extracted SDK acceptance helper | 4 | 1 |
 | Separate short TCP graphical helper | 1 | 1 |
-| **Total** | **357** | **116** |
+| **Total** | **362** | **117** |
 
-There are **40 namespaces**. These are annotated entry points, not 357 unique
-device models, 357 simultaneous tests or the number of invocations in a complete
+There are **40 namespaces**. These are annotated entry points, not 362 unique
+device models, 362 simultaneous tests or the number of invocations in a complete
 campaign. A method can operate many devices and check many assertions. Several
 focused namespaces intentionally delegate to an existing fixture. Compilation,
 JUnit, Python tooling, SDK build checks and native C fault-injection tests are
@@ -75,7 +76,7 @@ means a measurement explicitly cannot be used; it is different from a valid zero
 - Reference and legacy real-client namespaces are special selections, not an
   implicit part of every electrical group. `wwpg_doc` and `wwpg_ci_client` live
   in separate helpers; the latter and the legacy multiplayer entries need real
-  clients. The 339 runtime entries include the two legacy client entry points.
+  clients. The 344 companion entries include the two legacy client entry points.
 - Registry/inventory checks prove existence/accounting. Server-side control
   handlers and mock-player operations do not prove real mouse/keyboard input,
   rendered geometry, sound playback or multiplayer synchronization.
@@ -83,8 +84,9 @@ means a measurement explicitly cannot be used; it is different from a valid zero
   highlights, native controls, two-client agreement and clean Save and Quit/
   disconnect/server stop. Its exhaustive gallery is optional. None of those
   client sessions were run to write this reference.
-- **Tiny capacitor-pin targeting remains unresolved.** Passing geometry or
-  highlight checks must not be described as proof that every tiny pin can be hit.
+- Exposed regulator and capacitor pins have focused player-ray checks while
+  holding a PG wire from dev.102 onward. Earlier geometry/highlight evidence
+  does not certify this path; headless rays do not prove client rendering.
 - These fixtures do not certify 20 TPS on the 14,650-node yard, every possible
   oil-rig/night layout, arbitrary addons or all unsupported dependency versions.
   Numerical tolerances apply to the named fixtures, not every possible circuit.
@@ -868,6 +870,27 @@ Uses a powered sparse-ID CEE panel; rotates it, edits/removes attachments and qu
 Entry points:
 
 - [`poweredSparsePanelOperationsObserveLiveGeometry`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeTerminalGeometryGameTests.java#L46)
+
+#### CeeTerminalPickingGameTests
+
+Namespace: `wwpg_wires`. [Source](../src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeTerminalPickingGameTests.java).
+
+Uses Minecraft player aiming rays and PG's native wire handler to select exposed
+CEE pins. Checks copper, iron, golden and insulated copper wire on regulator
+upper pins in all horizontal rotations, native stacked assembly changes,
+capacitor pins in all six facings and both roll states, obstruction/reach limits,
+offhand wire selection, removal, and unchanged targeting for ordinary tools and
+CEE spools. A circuit finished through aimed golden-wire connections must deliver
+an accepted 100 V load reading. These are headless targeting checks, not client
+highlight screenshots or full graphical acceptance.
+
+Entry points:
+
+- `allPgWiresSelectUpperRegulatorPinsAcrossRotations`
+- `pickingRespectsOcclusionReachAndOtherTools`
+- `capacitorPinsRemainSelectableAcrossNativeOrientations`
+- `stackedRegulatorPickingObservesLiveAssemblyEnds`
+- `realAimGoldenWireConnectionsCarryRegulatedPower`
 
 #### NativeBulbItemsGameTests
 

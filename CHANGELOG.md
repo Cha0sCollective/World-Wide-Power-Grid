@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.3 — release preparation
+
+- Fix PG copper, iron, golden and insulated copper wire targeting on exposed CEE terminals, including regulator upper posts, stacked regulators and tiny capacitor pins. Use native terminal bounds for aiming, highlighting and wire selection while retaining reach and obstruction limits.
+- Move GameTests, fixtures and test-only resources into a separate companion jar. Keep gameplay code, native provenance and Lua programs in the player jar; retain all previous coverage and add five targeting regressions.
+- Keep API 1.0.0, saves, native solver binaries, equations and all 16 electrical substeps unchanged. Full headless and graphical release acceptance are pending; focused checks passed on both solvers. The 14,650-node 20 TPS goal remains open.
+
 ## 0.2.2 — 18 October 2026
 
 - Prevent recursive wire-tracing crashes; batch loading and matrix updates without pausing unrelated circuits.

@@ -139,8 +139,10 @@ Electrical warnings are retained in `electrical_diagnostics` as well as in the
 original logs. Passing named client assertions does not certify a warning-free
 runtime. Investigate those diagnostics before making that claim.
 
-Tiny capacitor-pin targeting remains unresolved. Passing CEE highlight checks
-does not certify those pins are selectable.
+The dev.102 targeting change has focused headless player-ray coverage for
+exposed regulator and capacitor pins while holding a PG wire. Highlight-only
+evidence from earlier builds does not certify this path. Real-client rendering
+and input acceptance must still be requested separately.
 
 ## Results and release gates
 
