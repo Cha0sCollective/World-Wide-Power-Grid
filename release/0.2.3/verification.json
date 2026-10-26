@@ -1,0 +1,246 @@
+{
+  "schema": 1,
+  "wwpg_version": "0.2.3",
+  "api_version": "1.0.0",
+  "api_coordinate": "org.cha0scollective.wwpg:wwpg-api:1.0.0",
+  "cee_api_coordinate": "org.cha0scollective.wwpg:wwpg-cee-api:1.0.0",
+  "source_sha": "dc5f898f382676b2790991c6524ec3b0492051f1",
+  "artifacts": {
+    "runtime": {
+      "path": "build/frozen-0.2.3/wwpg-0.2.3.jar",
+      "sha256": "60348700d85f9a9226eb0c92e53569ac88f876a5080f48b3fc8dc330b4eea142",
+      "bytes": 5060850
+    },
+    "api": {
+      "path": "build/frozen-0.2.3/wwpg-api-1.0.0.jar",
+      "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+      "bytes": 50143
+    },
+    "cee_api": {
+      "path": "build/frozen-0.2.3/wwpg-cee-api-1.0.0.jar",
+      "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+      "bytes": 8793
+    },
+    "example": {
+      "path": "build/frozen-0.2.3/wwpg-api-example-1.0.0.jar",
+      "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+      "bytes": 52081
+    },
+    "upstream_example": {
+      "path": "build/frozen-0.2.3/wwpg-upstream-api-example-1.0.0.jar",
+      "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+      "bytes": 45633
+    },
+    "gametest": {
+      "path": "build/frozen-0.2.3/wwpg-0.2.3-gametests.jar",
+      "sha256": "44f227db2a530ff303bfc19e19dde0229267a93fd131cdb5e1a4df2177f86fce",
+      "bytes": 1137377
+    },
+    "maven_repository": {
+      "path": "build/frozen-0.2.3/wwpg-api-1.0.0-maven.zip",
+      "sha256": "a29cd3647105f6635e503318c22c6323edf508cc3490b2e88ad5180ce5a44a1b",
+      "bytes": 432231
+    },
+    "example_sources": {
+      "path": "build/frozen-0.2.3/wwpg-api-example-1.0.0-source.zip",
+      "sha256": "c8acb460a7e027fe0d2d4eac57a703b2d62d1c92059fcd020a438e62f7775048",
+      "bytes": 79523
+    },
+    "upstream_example_sources": {
+      "path": "build/frozen-0.2.3/wwpg-upstream-api-example-1.0.0-source.zip",
+      "sha256": "2cf4306b0d102ab4f9a2dea5059e2ed72ddc9754c75c009da2b60e44a36316f7",
+      "bytes": 70377
+    },
+    "api_sources": {
+      "path": "build/frozen-0.2.3/wwpg-api-1.0.0-sources.jar",
+      "sha256": "1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b",
+      "bytes": 25943
+    },
+    "api_javadoc": {
+      "path": "build/frozen-0.2.3/wwpg-api-1.0.0-javadoc.jar",
+      "sha256": "292dda8786770c3c0d644304984c92e8e15baebeba18a8d1d99044e15f16b0c0",
+      "bytes": 238758
+    },
+    "cee_api_sources": {
+      "path": "build/frozen-0.2.3/wwpg-cee-api-1.0.0-sources.jar",
+      "sha256": "00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34",
+      "bytes": 6947
+    },
+    "cee_api_javadoc": {
+      "path": "build/frozen-0.2.3/wwpg-cee-api-1.0.0-javadoc.jar",
+      "sha256": "50ec0a529d1a3981a5fc3072c8272a56200da5d330de8776c00fe9ab07578884",
+      "bytes": 116310
+    }
+  },
+  "acceptance_policy": "separated-v2",
+  "status": "accepted_release",
+  "abi": {
+    "path": "local/api-abi.json",
+    "sha256": "d906e597d5ce75ef15506cad046bfad4bde6dd2035f82028b692296ea4158497",
+    "bytes": 63521
+  },
+  "previous_api": {
+    "path": "build/frozen-0.2.3/previous-published-api.jar",
+    "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+    "bytes": 50143
+  },
+  "cee_abi": {
+    "path": "local/cee-api-abi.json",
+    "sha256": "960e24bad6d437338a07c964204be4c99088f1d13e4cc9f73084521a637f92d5",
+    "bytes": 11935
+  },
+  "previous_cee_api": {
+    "path": "build/frozen-0.2.3/previous-published-cee_api.jar",
+    "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+    "bytes": 8793
+  },
+  "unresolved_failures": [],
+  "stages_complete": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "stationary_yard_policy": "combined-pinout-v1",
+  "headless_acceptance": {
+    "path": "local/release-assembly-02/headless_acceptance.json",
+    "sha256": "c6fc99c83798bc1a0365ff8ab59cd8fc04c048d6e10e856a7e9c0d5513ecac3e",
+    "bytes": 4020
+  },
+  "graphical_acceptance": {
+    "path": "local/release-assembly-02/graphical_acceptance.json",
+    "sha256": "f53be5f8ab712b291dcdca623123067b52ccb92f335716c848159864c1e74f6f",
+    "bytes": 2749
+  },
+  "independent_example_build": {
+    "path": "build/ci-v2/canonical/preparation-evidence/objects/fdd7867df94698a65102284ca9a09150c627ef7da7b7024cf87cbf7651648ee4.json",
+    "sha256": "d1559d8e4c317e4ba163292de87d7e367b63c3ac484c3a69ba98e136201a1fdf",
+    "bytes": 2931
+  },
+  "independent_upstream_example_build": {
+    "path": "build/ci-v2/canonical/preparation-evidence/objects/73166f65436aed0cd00300aa28df30d95f196207f7d94a0b996a4e9827ac2b1b.json",
+    "sha256": "c4387bfeac3c112033da7aaf23ef401bec425d116e48db9a6467c8d55c30faba",
+    "bytes": 3035
+  },
+  "sdk_acceptance_reuse": {
+    "schema": 1,
+    "scope": "runtime_version_only",
+    "source_sha": "1692d35b40841a5195a6ba5c4402c6ab6de72c0e",
+    "runtime_version": "0.2.3",
+    "artifacts": {
+      "cee_api_sources": {
+        "path": "build/frozen-0.2.3/wwpg-cee-api-1.0.0-sources.jar",
+        "sha256": "00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34",
+        "bytes": 6947
+      },
+      "api_javadoc": {
+        "path": "build/frozen-0.2.3/wwpg-api-1.0.0-javadoc.jar",
+        "sha256": "292dda8786770c3c0d644304984c92e8e15baebeba18a8d1d99044e15f16b0c0",
+        "bytes": 238758
+      },
+      "api_sources": {
+        "path": "build/frozen-0.2.3/wwpg-api-1.0.0-sources.jar",
+        "sha256": "1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b",
+        "bytes": 25943
+      },
+      "cee_api": {
+        "path": "build/frozen-0.2.3/wwpg-cee-api-1.0.0.jar",
+        "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+        "bytes": 8793
+      },
+      "api": {
+        "path": "build/frozen-0.2.3/wwpg-api-1.0.0.jar",
+        "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+        "bytes": 50143
+      },
+      "example": {
+        "path": "build/frozen-0.2.3/wwpg-api-example-1.0.0.jar",
+        "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+        "bytes": 52081
+      },
+      "runtime": {
+        "path": "build/frozen-0.2.3/wwpg-0.2.3.jar",
+        "sha256": "60348700d85f9a9226eb0c92e53569ac88f876a5080f48b3fc8dc330b4eea142",
+        "bytes": 5060850
+      },
+      "example_sources": {
+        "path": "build/frozen-0.2.3/wwpg-api-example-1.0.0-source.zip",
+        "sha256": "c8acb460a7e027fe0d2d4eac57a703b2d62d1c92059fcd020a438e62f7775048",
+        "bytes": 79523
+      },
+      "upstream_example": {
+        "path": "build/frozen-0.2.3/wwpg-upstream-api-example-1.0.0.jar",
+        "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+        "bytes": 45633
+      },
+      "upstream_example_sources": {
+        "path": "build/frozen-0.2.3/wwpg-upstream-api-example-1.0.0-source.zip",
+        "sha256": "2cf4306b0d102ab4f9a2dea5059e2ed72ddc9754c75c009da2b60e44a36316f7",
+        "bytes": 70377
+      },
+      "cee_api_javadoc": {
+        "path": "build/frozen-0.2.3/wwpg-cee-api-1.0.0-javadoc.jar",
+        "sha256": "50ec0a529d1a3981a5fc3072c8272a56200da5d330de8776c00fe9ab07578884",
+        "bytes": 116310
+      },
+      "maven_repository": {
+        "path": "build/frozen-0.2.3/wwpg-api-1.0.0-maven.zip",
+        "sha256": "a29cd3647105f6635e503318c22c6323edf508cc3490b2e88ad5180ce5a44a1b",
+        "bytes": 432231
+      }
+    },
+    "explanation": "The twelve SDK artifact roles retain their accepted bytes. The separately bound test companion is also unchanged. Documentation has a separate frozen snapshot."
+  },
+  "authoring_starter": {
+    "source": {
+      "path": "build/ci-v2/canonical/starter/tutorial-load-0.1.0-source.zip",
+      "sha256": "c17f26426b226e3890b909efa17f652825715ecf71ad35ba3b171b9da8612285",
+      "bytes": 54213
+    },
+    "proof": {
+      "path": "local/release-assembly-02/starter-accepted.json",
+      "sha256": "b59efca2ae21250da524c2304ce049ade4851c2d6bbdf06db1a150b7af298bfc",
+      "bytes": 2676
+    }
+  },
+  "stationary_yard": {
+    "path": "local/g06/portable/objects/ddea8ad3d09ddd38645837bf35a20ed7b4a7323c13ff5b7773767573560185a4.zip",
+    "sha256": "ddea8ad3d09ddd38645837bf35a20ed7b4a7323c13ff5b7773767573560185a4",
+    "bytes": 1357997
+  },
+  "base_workshop_world": {
+    "path": "local/g10/portable/objects/13ceae11786fc30137ce9abb90ca6ecfe8dfe22a0a63bb51489760a4ac7fd0e6.zip",
+    "sha256": "13ceae11786fc30137ce9abb90ca6ecfe8dfe22a0a63bb51489760a4ac7fd0e6",
+    "bytes": 320837
+  },
+  "pinout_workshop_world": {
+    "path": "local/g08/portable/objects/da95ac47c2ffaad2844589f08585a1b0a14363f496a6df380a8bfee9ef2603eb.zip",
+    "sha256": "da95ac47c2ffaad2844589f08585a1b0a14363f496a6df380a8bfee9ef2603eb",
+    "bytes": 323469
+  },
+  "benchmark_world": {
+    "path": "build/frozen-0.2.3/wwpg-0.2.3-benchmark-14650-nodes.zip",
+    "sha256": "8d4085f8ccb6ec101cbdd68df0d0a12fe3984194546f3c801bf879df2268bff0",
+    "bytes": 3413542
+  },
+  "targeted_pin_graphical": {
+    "path": "local/release-assembly-02/pin-targeting/result.json",
+    "sha256": "6359eaa5fdbb5d073b4f0654523a7b6ae66932705aadc3b6bc98b18fdcb36685",
+    "bytes": 5382
+  },
+  "documentation_snapshot": {
+    "path": "local/release-assembly-02/documentation-snapshot.json",
+    "sha256": "732b2dbce8bbdb145bcb2793903c653f73572ddf4791600c77dd07634c332f38",
+    "bytes": 2682
+  },
+  "acceptance_notes": [
+    "Fresh full headless run 40333259525 retains actual Windows/Linux, Native/Java, BASE/PINOUT and loader identities; no prior runtime acceptance is relabeled as new.",
+    "The separate graphical cohort retains twelve real client scenarios, exact tested world hashes, helper sources, native Save and Quit and dedicated save/stop outcomes.",
+    "Supplemental pin observations retain actual player rays, PG labels, native wire input and server-selected endpoints on regulator upper posts, stacked ends and capacitor pins.",
+    "The mod jar excludes GameTests and fixtures. All earlier core coverage remains in the separate companion with five added targeting regressions.",
+    "The 14,650-node benchmark native save bytes are preserved from 0.2.2; only release/jar metadata changed. No performance benchmark was run, and 20 TPS remains uncertified.",
+    "Goggles alone keep their existing targeting. The targeted checks do not certify every CEE item or arbitrary addon geometry. Electrical warnings remain retained in their original logs and observation summaries."
+  ]
+}
