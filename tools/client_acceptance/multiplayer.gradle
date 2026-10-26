@@ -8,6 +8,16 @@ gradle.projectsEvaluated {
             def server=new File(root,'server')
             def extraction=new groovy.json.JsonSlurper().parse(new File(server,'extracted-yard.json'))
             def artifact=project.file(project.providers.gradleProperty('clientArtifact').get())
+            def fixtures = project.providers.gradleProperty('testFixtureArtifact').isPresent()
+                ? project.file(project.providers.gradleProperty('testFixtureArtifact').get()) : null
+            if (fixtures != null && !fixtures.isFile()) throw new GradleException('Missing frozen GameTest companion')
+            if (fixtures == null && artifact.isFile()) {
+                def legacy = new java.util.zip.ZipFile(artifact)
+                try {
+                    if (legacy.getEntry('org/cha0scollective/wwpg/gametest/WiringGameTests.class') == null)
+                        throw new GradleException('Separated gameplay jar requires -PtestFixtureArtifact=<frozen companion jar>')
+                } finally { legacy.close() }
+            }
             def hash=java.security.MessageDigest.getInstance('SHA-256').digest(artifact.bytes).encodeHex().toString()
             if(hash!=extraction.jar.sha256)throw new GradleException('Multiplayer artifact does not match the exact exported ZIP')
             def profile=project.providers.gradleProperty('testProfile').getOrElse('BASE')
@@ -41,16 +51,18 @@ gradle.projectsEvaluated {
                 }
                 def vm=copyArguments(run.jvmArgs,'vm')
                 def args=copyArguments(run.args,'program')
-                def classpath=run.classpathProvider.filter { !project.sourceSets.main.output.files.contains(it) }+project.files(artifact)
+                def classpath=run.classpathProvider.filter { ![project.sourceSets.main,project.sourceSets.extensionApi,project.sourceSets.ceeApi,project.sourceSets.gameTest].any { set -> set.output.files.contains(it) } }+project.files(artifact,fixtures == null ? [] : [fixtures])
                 def quote={ value -> '"'+value.toString().replace('\\','/').replace('"','\\"')+'"' }
                 def command=new File(snapshots,"${role}-launch.txt")
                 // Java does not expand nested @files inside an @file.
                 def flatten={ values -> values.collect { it.startsWith('@') ? project.file(it.substring(1)).getText('UTF-8') : quote(it) }.join('\n') }
                 command.text=flatten(vm)+'\n'+['-cp',classpath.asPath,run.mainClass.get()].collect(quote).join('\n')+'\n'+flatten(args)+'\n'
                 def env=new HashMap(run.environmentProperty.get());env['MOD_CLASSES']='wwpg%%'+artifact.absolutePath
+                if (fixtures != null) env['MOD_CLASSES'] += File.pathSeparator+'wwpg_tests%%'+fixtures.absolutePath
                 launches.add([role:role,directory:directory.absolutePath,command:[project.javaToolchains.launcherFor { languageVersion=JavaLanguageVersion.of(21) }.get().executablePath.asFile.absolutePath,'@'+command.absolutePath],environment:env])
             }
-            new File(root,'launch.json').text=groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson([schema:1,jar:[path:artifact.absolutePath,sha256:hash],archive:extraction.archive,archive_sha256:extraction.sha256,profile:profile,backend:backend,launches:launches]))+'\n'
+            def fixtureProof = fixtures == null ? null : [path:fixtures.absolutePath,sha256:java.security.MessageDigest.getInstance('SHA-256').digest(fixtures.bytes).encodeHex().toString()]
+            new File(root,'launch.json').text=groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson([schema:1,jar:[path:artifact.absolutePath,sha256:hash],test_fixture_artifact:fixtureProof,archive:extraction.archive,archive_sha256:extraction.sha256,profile:profile,backend:backend,launches:launches]))+'\n'
             logger.lifecycle("Prepared exact-ZIP multiplayer launches: ${profile}/${backend}; WWPG ${hash}")
         }
     }

@@ -61,7 +61,7 @@ def audit(root=ROOT):
             membership[name] = group
     if set(membership)&spec['special_namespaces'].keys():raise ValueError('Namespace classified as both ordinary and special')
     membership.update(spec['special_namespaces'])
-    roots=['src/main/java','examples/extension-addon/src','examples/cee-addon/src',
+    roots=['src/main/java','src/gameTest/java','examples/extension-addon/src','examples/cee-addon/src',
            'tools/client_acceptance/src','tools/documentation_acceptance/src']
     discovered=set()
     for directory in roots:
@@ -160,6 +160,11 @@ def frozen_inputs(path):
         item['path'] = str((path.parent / item['path']).resolve())
         if sha(item['path']) != item['sha256'] or Path(item['path']).stat().st_size != item['bytes']:
             raise ValueError('Frozen artifact changed: ' + item['path'])
+    if 'gametest' not in record['artifacts']:
+        from zipfile import ZipFile
+        with ZipFile(record['artifacts']['runtime']['path']) as runtime:
+            if 'org/cha0scollective/wwpg/gametest/WiringGameTests.class' not in runtime.namelist():
+                raise ValueError('Separated gameplay artifact requires a frozen GameTest companion')
     for item in record.get('worlds', {}).values():
         item['path'] = str((path.parent/item['path']).resolve())
         if sha(item['path']) != item['sha256']:raise ValueError('Frozen world changed')
@@ -176,7 +181,8 @@ def freeze(output, source=None):
         cee_api=f'build/libs/wwpg-cee-api-{api}.jar',
         example=f'examples/extension-addon/build/libs/wwpg-api-example-{api}.jar',
         upstream_example=f'examples/cee-addon/build/libs/wwpg-upstream-api-example-{api}.jar',
-        reference=f'build/libs/wwpg-{version}-upstream-reference-tests.jar')
+        reference=f'build/libs/wwpg-{version}-upstream-reference-tests.jar',
+        gametest=f'build/libs/wwpg-{version}-gametests.jar')
     artifacts = {}
     for role, name in paths.items():
         source_path = ROOT / name
@@ -207,6 +213,8 @@ def command(job, inputs, output):
         '-PtestArtifact='+inputs['artifacts']['runtime']['path'], '-PtestBackend='+job['backend'],
         '-PtestProfile='+job['profile'], '-Pneo_version='+job['loader'],
         '-PtestDirectory='+str(directory), '-x', 'build', '-x', 'jar', '-x', 'test', '--no-daemon']
+    if 'gametest' in inputs['artifacts']:
+        args += ['-PtestFixtureArtifact='+inputs['artifacts']['gametest']['path']]
     if job.get('operation') == 'reference':
         args += ['-PreferenceArtifact='+inputs['artifacts']['reference' if job['reference'] == 'upstream' else 'runtime']['path'],
                  '-PreferenceDirectory='+str(directory)]
@@ -257,6 +265,7 @@ def execute(jobs, inputs_path, output, lane, reason=None, preparation=None):
                 log = output/(job['id'].replace('/', '__')+'.log')
                 args = [sys.executable, str(ROOT/'tools/authoring_starter_acceptance.py'), 'server',
                     '--output', str(parent/'starter'), '--runtime', inputs['artifacts']['runtime']['path'], '--backend', job['backend']]
+                if 'gametest' in inputs['artifacts']: args += ['--test-fixtures', inputs['artifacts']['gametest']['path']]
                 with log.open('xb') as stream:
                     result = subprocess.run(args, cwd=ROOT, stdout=stream, stderr=subprocess.STDOUT)
                 record.update(status='passed' if result.returncode == 0 else 'failed', exit_code=result.returncode,

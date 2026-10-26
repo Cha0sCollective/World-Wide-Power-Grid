@@ -32,6 +32,14 @@ sourceSets.test.runtimeClasspath += sourceSets.ceeApi.output
 sourceSets.test.compileClasspath += sourceSets.main.compileClasspath
 sourceSets.test.runtimeClasspath += sourceSets.main.runtimeClasspath
 
+// Test fixtures are a companion mod, never part of the player artifact.
+sourceSets {
+    gameTest {
+        compileClasspath = sourceSets.main.compileClasspath + sourceSets.main.output + sourceSets.extensionApi.output + sourceSets.ceeApi.output
+        runtimeClasspath += sourceSets.main.runtimeClasspath
+    }
+}
+
 repositories {
     mavenCentral()
     maven { url = 'https://maven.createmod.net' }
@@ -86,8 +94,13 @@ neoForge {
         }
         configureEach { logLevel = org.slf4j.event.Level.INFO }
     }
-    mods { wwpg { sourceSet sourceSets.main; sourceSet sourceSets.extensionApi; sourceSet sourceSets.ceeApi } }
+    mods {
+        wwpg { sourceSet sourceSets.main; sourceSet sourceSets.extensionApi; sourceSet sourceSets.ceeApi }
+        wwpg_tests { sourceSet sourceSets.gameTest }
+    }
 }
+neoForge.runs.configureEach { loadedMods = [neoForge.mods.wwpg] }
+neoForge.runs.named('gameTestServer') { loadedMods = [neoForge.mods.wwpg, neoForge.mods.wwpg_tests] }
 
 dependencies {
     optionalArtifacts.artifacts.each {
@@ -144,19 +157,27 @@ tasks.named('processResources') {
     inputs.property 'version', project.version
     filesMatching('META-INF/neoforge.mods.toml') { expand version: project.version }
     from('LICENSE') { into 'META-INF'; rename { 'WWPG-LICENSE.txt' } }
-    from('release') { include 'artifacts.json', 'optional-artifacts.json', 'content-matrix.json', '0.1.0-beta.5/content-matrix.json', '0.1.0-beta.5/registry-inventory.json'; into 'data/wwpg/release' }
+    // Native provenance is part of the player distribution, not a test fixture.
+    from('release') { include 'artifacts.json', 'optional-artifacts.json'; into 'data/wwpg/release' }
     from(layout.buildDirectory.dir('pg-native-resources/native')) { into 'native/wwpg' }
     from(layout.buildDirectory.dir('guarded-native-resources/native')) { into 'native/wwpg' }
-    from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_loading/structure' }
-    from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_matrix_ownership/structure' }
-    from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_board_startup/structure' }
-    from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_cee_preparation/structure' }
-    from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_solver_safety/structure' }
-    from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_native_guard/structure' }
-    from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_unload/structure' }
-    from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_contactors/structure' }
-    from('src/main/resources/data/wwpg/structure/empty.nbt') { into 'data/wwpg_meter_sampling/structure' }
 }
+
+tasks.named('processGameTestResources') {
+    inputs.property 'version', project.version
+    filesMatching('META-INF/neoforge.mods.toml') { expand version: project.version }
+    from('release') { include 'artifacts.json', 'optional-artifacts.json', 'content-matrix.json', '0.1.0-beta.5/content-matrix.json', '0.1.0-beta.5/registry-inventory.json'; into 'data/wwpg/release' }
+    ['wwpg_loading', 'wwpg_matrix_ownership', 'wwpg_board_startup', 'wwpg_cee_preparation',
+     'wwpg_solver_safety', 'wwpg_native_guard', 'wwpg_unload', 'wwpg_contactors', 'wwpg_meter_sampling'].each { namespace ->
+        from('src/gameTest/resources/data/wwpg/structure/empty.nbt') { into "data/${namespace}/structure" }
+    }
+}
+
+tasks.register('gameTestJar', Jar) {
+    archiveClassifier = 'gametests'
+    from sourceSets.gameTest.output
+}
+tasks.named('assemble') { dependsOn tasks.named('gameTestJar') }
 tasks.named('jar') {
     from sourceSets.extensionApi.output
     from sourceSets.ceeApi.output
@@ -367,8 +388,33 @@ tasks.matching { it.name.startsWith('run') || it.name.startsWith('prepare') && i
     dependsOn tasks.named('installPgNative')
 }
 
+// Frozen fixture bytes are loaded as a distinct mod alongside the gameplay artifact.
+def packagedFixtures = { File gameplay ->
+    if (!providers.gradleProperty('testFixtureArtifact').isPresent()) {
+        def legacy = new java.util.zip.ZipFile(gameplay)
+        try {
+            if (legacy.getEntry('org/cha0scollective/wwpg/gametest/WiringGameTests.class') != null) return null
+        } finally { legacy.close() }
+    }
+    def fixture = providers.gradleProperty('testFixtureArtifact').isPresent()
+        ? file(providers.gradleProperty('testFixtureArtifact').get())
+        : tasks.named('gameTestJar').get().archiveFile.get().asFile
+    if (!fixture.isFile()) throw new GradleException("Missing packaged GameTest companion: ${fixture}")
+    fixture
+}
+def configurePackagedClasspath = { task, run, File gameplay ->
+    def fixture = packagedFixtures(gameplay)
+    task.classpath = run.classpathProvider.filter { ![sourceSets.main,sourceSets.extensionApi,sourceSets.ceeApi,sourceSets.gameTest].any { set -> set.output.files.contains(it) } } + files(gameplay, fixture == null ? [] : [fixture])
+    def env = new HashMap(run.environmentProperty.get())
+    env['MOD_CLASSES'] = "wwpg%%${gameplay.absolutePath}"
+    if (fixture != null) env['MOD_CLASSES'] += File.pathSeparator + "wwpg_tests%%${fixture.absolutePath}"
+    task.environment env
+    fixture == null ? null : [artifact:fixture.name, sha256:java.security.MessageDigest.getInstance('SHA-256').digest(fixture.bytes).encodeHex().toString()]
+}
+
 // Use the same NeoForge test harness with WWPG loaded exclusively from the built jar.
 tasks.register('runPackagedGameTestServer', JavaExec) {
+    if (!providers.gradleProperty('testFixtureArtifact').isPresent()) dependsOn tasks.named('gameTestJar')
     def developmentRun = tasks.named('runGameTestServer')
     dependsOn tasks.named('build'), tasks.named('createMinecraftArtifacts'), tasks.named('prepareGameTestServerRun'), tasks.named('installPgNative')
     javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(21) }
@@ -385,13 +431,10 @@ tasks.register('runPackagedGameTestServer', JavaExec) {
                 ? file(providers.gradleProperty('testArtifact').get())
                 : tasks.named('jar').get().archiveFile.get().asFile
         if (!packaged.isFile()) throw new GradleException("Missing packaged test artifact: ${packaged}")
-        classpath = run.classpathProvider.filter { ![sourceSets.main,sourceSets.extensionApi,sourceSets.ceeApi].any { set -> set.output.files.contains(it) } } + files(packaged)
-        def env = new HashMap(run.environmentProperty.get())
-        env['MOD_CLASSES'] = "wwpg%%${packaged.absolutePath}"
-        environment env
+        def fixtureProof = configurePackagedClasspath(delegate, run, packaged)
         logger.lifecycle("Testing packaged WWPG artifact: ${packaged.name}")
         def stamp = java.time.Instant.now().toString().replace(':', '-')
-        def proof = [schema: 1, artifact: packaged.name, neoforge: neo_version, minecraft: minecraft_version,
+        def proof = [schema: 1, artifact: packaged.name, test_fixture_artifact: fixtureProof, neoforge: neo_version, minecraft: minecraft_version,
                 sha256: java.security.MessageDigest.getInstance('SHA-256').digest(packaged.bytes).encodeHex().toString(),
                 profile: testProfile, backend: providers.gradleProperty('testBackend').getOrElse('NATIVE'),
                 phase: providers.gradleProperty('restartPhase').getOrElse('SETUP'), started: stamp,
@@ -414,6 +457,7 @@ tasks.register('runPackagedGameTestServer', JavaExec) {
 
 ['A', 'B'].each { suffix ->
     tasks.register("runPackagedClient${suffix}", JavaExec) {
+        if (!providers.gradleProperty('testFixtureArtifact').isPresent()) dependsOn tasks.named('gameTestJar')
         def developmentRun = tasks.named("runClient${suffix}")
         dependsOn tasks.named('build'), tasks.named("prepareClient${suffix}Run")
         javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(21) }
@@ -424,10 +468,7 @@ tasks.register('runPackagedGameTestServer', JavaExec) {
             args = run.args
             jvmArgs = run.jvmArgs + ['-Dwwpg.test.packaged=true']
             def packaged = tasks.named('jar').get().archiveFile.get().asFile
-            classpath = run.classpathProvider.filter { ![sourceSets.main,sourceSets.extensionApi,sourceSets.ceeApi].any { set -> set.output.files.contains(it) } } + files(packaged)
-            def env = new HashMap(run.environmentProperty.get())
-            env['MOD_CLASSES'] = "wwpg%%${packaged.absolutePath}"
-            environment env
+            def fixtureProof = configurePackagedClasspath(delegate, run, packaged)
         }
     }
 }
@@ -437,7 +478,7 @@ tasks.register('runPackagedGameTestServer', JavaExec) {
 sourceSets {
     referenceControl {
         java.srcDir 'tools/reference_control'
-        compileClasspath = sourceSets.main.compileClasspath + sourceSets.main.output + sourceSets.extensionApi.output + sourceSets.ceeApi.output
+        compileClasspath = sourceSets.main.compileClasspath + sourceSets.main.output + sourceSets.extensionApi.output + sourceSets.ceeApi.output + sourceSets.gameTest.output
     }
 }
 tasks.register('prepareReferenceConfig') {
@@ -465,6 +506,7 @@ tasks.register('referenceJar', Jar) {
 }
 ['runUpstreamReferenceServer', 'runReferenceCompatibilityServer'].each { taskName ->
     tasks.register(taskName, JavaExec) {
+        if (!providers.gradleProperty('testFixtureArtifact').isPresent()) dependsOn tasks.named('gameTestJar')
         boolean upstream = taskName == 'runUpstreamReferenceServer'
         def artifact = tasks.named(upstream ? 'referenceJar' : 'jar')
         def developmentRun = tasks.named('runGameTestServer')
@@ -495,12 +537,9 @@ tasks.register('referenceJar', Jar) {
                 "-Dwwpg.test.tightReferencePrecision=${providers.gradleProperty('tightReferencePrecision').getOrElse('false')}"]
             def packaged = providers.gradleProperty('referenceArtifact').isPresent()
                 ? file(providers.gradleProperty('referenceArtifact').get()) : artifact.get().archiveFile.get().asFile
-            classpath = run.classpathProvider.filter { ![sourceSets.main,sourceSets.extensionApi,sourceSets.ceeApi].any { set -> set.output.files.contains(it) } } + files(packaged)
-            def env = new HashMap(run.environmentProperty.get())
-            env['MOD_CLASSES'] = "wwpg%%${packaged.absolutePath}"
-            environment env
+            def fixtureProof = configurePackagedClasspath(delegate, run, packaged)
             def stamp = java.time.Instant.now().toString().replace(':', '-')
-            def proof = [schema: 1, artifact: packaged.name,
+            def proof = [schema: 1, artifact: packaged.name, test_fixture_artifact: fixtureProof,
                 sha256: java.security.MessageDigest.getInstance('SHA-256').digest(packaged.bytes).encodeHex().toString(),
                 profile: testProfile, backend: providers.gradleProperty('testBackend').getOrElse('NATIVE'),
                 upstream: upstream, started: stamp, namespaces: 'wwpg_reference',

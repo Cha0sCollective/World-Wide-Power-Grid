@@ -79,7 +79,7 @@ final class StationaryYardPinout {
                 }
                 var computer=((dan200.computercraft.shared.computer.blocks.AbstractComputerBlockEntity)level.getBlockEntity(pc)).createServerComputer();mount[0]=computer.createRootMount();
                 if(!yard.restore)for(var program:List.of("wwpg.lua","startup.lua")) {
-                    try(var source=StationaryYardPinout.class.getResourceAsStream("/data/wwpg_pinout/programs/yard/"+program)) {
+                    try(var source=org.cha0scollective.wwpg.WorldWidePowerGrid.class.getResourceAsStream("/data/wwpg_pinout/programs/yard/"+program)) {
                         if(source==null)throw new java.io.IOException("Missing playable Lua "+program);
                         try(var channel=mount[0].openFile(program,Set.of(StandardOpenOption.WRITE,StandardOpenOption.CREATE,StandardOpenOption.TRUNCATE_EXISTING))) {
                             var bytes=ByteBuffer.wrap(source.readAllBytes());while(bytes.hasRemaining())channel.write(bytes);

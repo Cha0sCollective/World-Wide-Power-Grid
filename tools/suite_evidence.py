@@ -56,6 +56,8 @@ def validate_job(actual, expected, inputs, base):
         proof = read(locked(actual['proof'], base))
         require(proof.get('passed') and proof['runtime_sha256'] == inputs['artifact_hashes']['runtime']
                 and proof['backend'] == expected['backend'] and proof['platform'] == expected['platform'], 'Starter used another configuration')
+        if 'gametest' in inputs['artifact_hashes']:
+            require(proof.get('test_fixture_artifact', {}).get('sha256') == inputs['artifact_hashes']['gametest'], 'Starter test companion differs')
         require({'controls','native_tools','unavailable','cold_restart_before_solve','actual_chunk_reload','replacement','dedicated_server'} <= set(proof['checks']), 'Missing starter lifecycle')
         build = read(locked(actual['build'], base))
         require(build.get('passed') is True and build.get('source_sha')==inputs['source_sha']
@@ -93,6 +95,8 @@ def validate_job(actual, expected, inputs, base):
     require(proof.get('profile') == expected['profile'] and proof.get('backend') == expected['backend'], 'Actual solver/profile differs')
     role = 'reference' if expected.get('reference') == 'upstream' else 'runtime'
     require(proof.get('sha256') == inputs['artifact_hashes'][role], 'Actual loaded artifact differs')
+    if 'gametest' in inputs['artifact_hashes']:
+        require(proof.get('test_fixture_artifact', {}).get('sha256') == inputs['artifact_hashes']['gametest'], 'Loaded GameTest companion differs')
     if expected.get('operation') != 'reference':
         require(proof.get('phase') == expected['phase'] and proof.get('neoforge') == expected['loader']
                 and set(proof.get('namespaces', '').split(',')) == set(expected['namespaces']), 'Lifecycle/loader/namespace differs')
@@ -122,7 +126,9 @@ def validate_reports(paths, lane, source_sha, hashes, complete=True):
             for job in report['jobs']:
                 require(job.get('status')=='passed' and job in original['jobs'],'Retained job did not actually pass')
         require(report.get('source_sha') == source_sha, 'Acceptance source differs')
-        require(all(report.get('artifact_hashes', {}).get(r) == hashes[r] for r in ROLES), 'Acceptance artifacts differ')
+        require('gametest' not in report.get('artifact_hashes', {}) or 'gametest' in hashes,
+                'Acceptance requires the original GameTest companion identity')
+        require(all(report.get('artifact_hashes', {}).get(r) == hashes[r] for r in tuple(ROLES)+(('gametest',) if 'gametest' in hashes else ())), 'Acceptance artifacts differ')
         previous_catalog=read(locked(report['catalog'],base))
         require(previous_catalog.get('schema')==2 and previous_catalog.get('policy')=='separated-v2','Coverage policy differs')
         # Headless jobs below must exactly satisfy the current namespace,
@@ -131,7 +137,14 @@ def validate_reports(paths, lane, source_sha, hashes, complete=True):
         input_path=locked(report['inputs'],base);frozen=read(input_path)
         require(frozen.get('schema')==2 and frozen.get('policy')=='separated-v2' and frozen.get('source_sha')==source_sha,
                 'Frozen campaign identity differs')
-        for role in ROLES:
+        require('gametest' not in frozen.get('artifacts', {}) or 'gametest' in hashes,
+                'Frozen campaign requires its GameTest companion identity')
+        if 'gametest' not in frozen.get('artifacts', {}):
+            from zipfile import ZipFile
+            with ZipFile(locked(frozen['artifacts']['runtime'],input_path.parent)) as runtime:
+                require('org/cha0scollective/wwpg/gametest/WiringGameTests.class' in runtime.namelist(),
+                        'Separated runtime requires the frozen GameTest companion')
+        for role in tuple(ROLES)+(('gametest',) if 'gametest' in hashes else ()):
             require(frozen['artifacts'][role]['sha256']==hashes[role],'Frozen campaign artifact differs')
             locked(frozen['artifacts'][role],input_path.parent)
         if any(j.get('reference')=='upstream' for j in report['jobs']):
@@ -176,7 +189,7 @@ def continue_headless(previous, inputs_path, output, reason, preparation, enviro
         old=dict(suite='full-headless',policy='separated-v2',source_sha=frozen['source_sha'],
                  artifact_hashes={r:d['sha256'] for r,d in frozen['artifacts'].items()},jobs=[])
     require(old.get('suite')=='full-headless' and old.get('policy')=='separated-v2','Not a versioned headless execution')
-    require(old['source_sha']==frozen['source_sha'] and all(old['artifact_hashes'][r]==frozen['artifacts'][r]['sha256'] for r in ROLES),'Continuation changed tested artifacts/source')
+    require(old['source_sha']==frozen['source_sha'] and all(old['artifact_hashes'].get(r)==frozen['artifacts'][r]['sha256'] for r in tuple(ROLES)+(('gametest',) if 'gametest' in frozen['artifacts'] else ())),'Continuation changed tested artifacts/source')
     import subprocess
     protected=['src','gradle.properties','build.gradle','tools/native','release/artifacts.json','release/optional-artifacts.json']
     changed=subprocess.check_output(['git','diff','--name-only',frozen['source_sha'],'HEAD','--',*protected],cwd=ROOT,text=True)
@@ -245,7 +258,7 @@ def accepted_world_hashes(manifest, root, gate, cohorts):
 def validate_release(manifest, root, gate):
     """New release contract: headless completion cannot imply client completion."""
     require(manifest.get('acceptance_policy') == 'separated-v2', 'Unknown new acceptance policy')
-    hashes = {r: manifest['artifacts'][r]['sha256'] for r in ROLES}
+    hashes = {r: manifest['artifacts'][r]['sha256'] for r in tuple(ROLES)+(('gametest',) if 'gametest' in manifest['artifacts'] else ())}
     require(all(isinstance(manifest.get(key),dict) for key in ('headless_acceptance','graphical_acceptance')),
             'Independent headless and graphical acceptance records are required')
     cohorts=[]

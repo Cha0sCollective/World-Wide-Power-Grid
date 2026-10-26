@@ -51,7 +51,7 @@ public final class PinoutLuaGameTests {
             var computer = ((AbstractComputerBlockEntity) h.getBlockEntity(computerPos)).createServerComputer();
             var mount = computer.createRootMount();
             if (mount.exists("acceptance.json")) mount.delete("acceptance.json");
-            try (var script = PinoutLuaGameTests.class.getResourceAsStream("/data/wwpg_pinout/programs/acceptance.lua")) {
+            try (var script = org.cha0scollective.wwpg.WorldWidePowerGrid.class.getResourceAsStream("/data/wwpg_pinout/programs/acceptance.lua")) {
                 if (script == null) throw new IOException("Missing packaged Lua acceptance program");
                 write(mount, "startup.lua", script.readAllBytes());
             }

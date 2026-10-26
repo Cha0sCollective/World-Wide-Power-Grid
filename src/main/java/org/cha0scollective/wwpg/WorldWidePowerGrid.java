@@ -23,17 +23,8 @@ public final class WorldWidePowerGrid {
         org.cha0scollective.wwpg.extension.ApiElectric.register(modBus);
         org.cha0scollective.wwpg.extension.CeeAdapters.initialize(modBus);
         modBus.addListener(org.cha0scollective.wwpg.extension.ApiDeviceDiscovery::freeze);
-        if (Boolean.getBoolean("wwpg.test.energyFixtures"))
-            modBus.addListener(org.cha0scollective.wwpg.gametest.FixtureEnergyCapabilities::register);
-        if (Boolean.getBoolean("wwpg.test.packaged") && java.util.Arrays.asList(
-                System.getProperty("neoforge.enabledGameTestNamespaces", "").split(",")).contains("wwpg_api"))
-            modBus.addListener(org.cha0scollective.wwpg.gametest.ExtensionApiDiodeParameterGameTests::register);
-        if (Boolean.getBoolean("wwpg.test.packaged") && java.util.Arrays.asList(
-                System.getProperty("neoforge.enabledGameTestNamespaces", "").split(",")).contains("wwpg_api_ownership"))
-            modBus.addListener(org.cha0scollective.wwpg.gametest.ExtensionApiTerminalRefreshGameTests::register);
         LOGGER.info("WWPG: CEE 1.1.3 / Power Grid 0.6.2 compatibility loaded");
         NeoForge.EVENT_BUS.addListener(this::commands);
-        NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.gametest.MultiplayerGameTests::commands);
         NeoForge.EVENT_BUS.addListener(this::unload);
         NeoForge.EVENT_BUS.addListener(this::stop);
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.bridge.RestorationCoordinator::loaded);
@@ -42,15 +33,6 @@ public final class WorldWidePowerGrid {
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.extension.ApiCircuits::chunkLoaded);
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.extension.ApiCircuits::blockPlaced);
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.extension.ApiTerminals::chunkUnloaded);
-        if (Boolean.getBoolean("wwpg.test.packaged")
-                && "wwpg_api_pending_restart".equals(System.getProperty("neoforge.enabledGameTestNamespaces")))
-            NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.gametest.ExtensionApiPendingRestartGameTests::installBeforeStartup);
-        if (Boolean.getBoolean("wwpg.test.packaged")
-                && "wwpg_yard".equals(System.getProperty("neoforge.enabledGameTestNamespaces")))
-            NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.gametest.StationaryYardChunkTickets::preserveForExport);
-        if (Boolean.getBoolean("wwpg.test.packaged")
-                && "wwpg_api_world".equals(System.getProperty("neoforge.enabledGameTestNamespaces")))
-            NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.gametest.ExtensionApiWorldGameTests::preserveForExport);
     }
 
     private void commands(RegisterCommandsEvent event) {

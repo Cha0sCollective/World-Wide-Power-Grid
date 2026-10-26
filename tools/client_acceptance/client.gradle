@@ -4,10 +4,20 @@ gradle.projectsEvaluated {
     def helperSources = project.file('tools/client_acceptance')
     def output = project.file('build/stationary-client-helper')
     def packaged = project.file(project.providers.gradleProperty('clientArtifact').get())
+    def fixtures = project.providers.gradleProperty('testFixtureArtifact').isPresent()
+        ? project.file(project.providers.gradleProperty('testFixtureArtifact').get()) : null
+    if (fixtures != null && !fixtures.isFile()) throw new GradleException('Missing frozen GameTest companion')
+    if (fixtures == null && packaged.isFile()) {
+        def legacy = new java.util.zip.ZipFile(packaged)
+        try {
+            if (legacy.getEntry('org/cha0scollective/wwpg/gametest/WiringGameTests.class') == null)
+                throw new GradleException('Separated gameplay jar requires -PtestFixtureArtifact=<frozen companion jar>')
+        } finally { legacy.close() }
+    }
     def compilation = project.tasks.register('compileStationaryClientHelper', JavaCompile) {
         mustRunAfter project.tasks.named('jar')
         source project.fileTree(new File(helperSources, 'src')) { include '**/*.java' }
-        classpath = project.sourceSets.main.compileClasspath + project.files(packaged)
+        classpath = project.sourceSets.main.compileClasspath + project.files(packaged,fixtures == null ? [] : [fixtures])
         destinationDirectory = new File(output, 'classes')
         javaCompiler = project.javaToolchains.compilerFor { languageVersion = JavaLanguageVersion.of(21) }
         options.encoding = 'UTF-8'
@@ -25,6 +35,10 @@ gradle.projectsEvaluated {
         doFirst {
             def run = project.tasks.named('runClientA').get()
             workingDir = project.file(project.providers.gradleProperty('clientDirectory').get())
+            if (fixtures != null) {
+                def fixtureProof = [path:fixtures.absolutePath,sha256:java.security.MessageDigest.getInstance('SHA-256').digest(fixtures.bytes).encodeHex().toString()]
+                new File(workingDir,'test-fixture-artifact.json').setText(groovy.json.JsonOutput.toJson(fixtureProof)+'\n','UTF-8')
+            }
             def extraction = new groovy.json.JsonSlurper().parse(new File(workingDir,'extracted-yard.json'))
             def name = extraction.source_save_name
             def hash = java.security.MessageDigest.getInstance('SHA-256').digest(packaged.bytes).encodeHex().toString()
@@ -49,9 +63,10 @@ gradle.projectsEvaluated {
                     '\n-Dwwpg.test.netherFocus=' + project.providers.gradleProperty('netherFocus').getOrElse('false')+'\n'
                 return "@${replacement.absolutePath}"
             }
-            classpath = run.classpathProvider.filter { !project.sourceSets.main.output.files.contains(it) } + project.files(packaged,helper.get().archiveFile.get().asFile)
+            classpath = run.classpathProvider.filter { ![project.sourceSets.main,project.sourceSets.extensionApi,project.sourceSets.ceeApi,project.sourceSets.gameTest].any { set -> set.output.files.contains(it) } } + project.files(packaged,helper.get().archiveFile.get().asFile,fixtures == null ? [] : [fixtures])
             def env = new HashMap(run.environmentProperty.get())
             env['MOD_CLASSES'] = "wwpg%%${packaged.absolutePath}" + File.pathSeparator + "wwpg_acceptance%%${helper.get().archiveFile.get().asFile.absolutePath}"
+            if (fixtures != null) env['MOD_CLASSES'] += File.pathSeparator+'wwpg_tests%%'+fixtures.absolutePath
             environment env
             def capture = new ByteArrayOutputStream()
             extensions.extraProperties.set('stationaryClientOutput',capture)

@@ -4,12 +4,21 @@ Maintainers: follow [Publishing a release](../docs/RELEASING.md) for the standar
 five-download layout and short notes. Edit [presentation.json](presentation.json)
 for the next release; version-specific records below preserve published history.
 
-**[WWPG 0.2.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.1)**
+**[WWPG 0.2.3](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.3)**
 is the current stable release. To install it or choose a playable world, use the
 [installation guide](../docs/INSTALL.md). This directory is for reviewing what
 was shipped and which checks passed.
 
-## Current stable: 0.2.2
+## Current stable: 0.2.3
+
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.3)
+· [Verification](0.2.3/verification.json).
+
+Fixes exposed CEE regulator/capacitor targeting for PG wires and separates
+GameTests/fixtures from the gameplay jar. Fresh headless and graphical acceptance
+retain exact artifact and execution identities; API 1.0.0 and saves stay compatible.
+
+## Historical stable: 0.2.2
 
 [Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2)
 · [Verification](0.2.2/verification.json).

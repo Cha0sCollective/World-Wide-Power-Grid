@@ -132,7 +132,7 @@ if "Failed to load data for block entity powergrid:circuit_design_table" not in 
 evidence["diagnostics/design-table-reload.log"] = diagnostic
 for path in [record / "README.md", root / "docs/FIXTURE_WORLD.md", root / "docs/INSTALL.md", root / "docs/STATUS.md", Path(__file__).resolve()]:
     evidence[path.relative_to(root).as_posix()] = path
-for path in (root / "src/main/java/org/cha0scollective/wwpg/gametest").glob("*.java"):
+for path in (root / "src/gameTest/java/org/cha0scollective/wwpg/gametest").glob("*.java"):
     evidence[path.relative_to(root).as_posix()] = path
 verification = output / "wwpg-0.1.0-beta.2-fixture-world-v1-verification.zip"
 with zipfile.ZipFile(verification, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as archive:

@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
 import org.patryk3211.powergrid.electricity.GlobalElectricNetworks;
 import org.patryk3211.powergrid.electricity.base.ElectricBehaviour;
 import org.patryk3211.powergrid.electricity.base.IElectric;
@@ -90,6 +91,26 @@ public final class CeeElectric implements IElectric {
             if (placement.check(point)) return placement;
         }
         return null;
+    }
+
+    /** Pick the same live bounds used by PG's selection and outline, including overhanging pins. */
+    public BlockHitResult clip(Vec3 from, Vec3 to) {
+        var state = Terminals.loadedState(level, pos);
+        BlockHitResult nearest = null;
+        double distance = from.distanceToSqr(to);
+        for (var entry : accessible().entrySet()) {
+            var terminal = placement(state, entry.getKey(), entry.getValue());
+            var box = terminal.getOutline();
+            var hit = AABB.clip(List.of(box), from, to, pos);
+            if (hit == null || from.distanceToSqr(hit.getLocation()) >= distance) continue;
+            // Ray/box rounding can put a face a few ulps outside Placement.check.
+            // Nudge toward this terminal's center without moving the aim to a different pin.
+            var point = hit.getLocation().lerp(terminal.getOrigin().add(pos.getX(), pos.getY(), pos.getZ()), 1e-7);
+            if (from.distanceToSqr(point) > from.distanceToSqr(to)) continue;
+            nearest = new BlockHitResult(point, hit.getDirection(), pos, false);
+            distance = from.distanceToSqr(hit.getLocation());
+        }
+        return nearest;
     }
 
     private Placement placement(BlockState state, int nativeId, Vec3 origin) {

@@ -103,7 +103,7 @@ class EvidenceChecks(unittest.TestCase):
         path=self.base/name;path.write_text(text,encoding='utf-8');return suites.descriptor(path)
 
     def test_bound_world_is_resolved_from_its_frozen_manifest_and_cannot_change(self):
-        artifacts={r:self.file(r+'.jar','TEST_ONLY '+r) for r in suites.ROLES}
+        artifacts={r:self.file(r+'.jar','TEST_ONLY '+r) for r in (*suites.ROLES,'gametest')}
         for item in artifacts.values():item['path']=Path(item['path']).name
         world=self.file('world.zip','TEST_ONLY exact world');world['path']='world.zip'
         path=self.base/'bound.json'
@@ -138,6 +138,11 @@ class EvidenceChecks(unittest.TestCase):
     def passing_headless_fragment(self):
         job=suites.plan('focused',['safety'],['JAVA'],['BASE'],['21.1.231'],['windows-latest'])[0]
         artifacts={role:self.file(role+'.jar','TEST_ONLY '+role) for role in suites.ROLES}
+        from zipfile import ZipFile
+        runtime=self.base/'runtime.jar'
+        with ZipFile(runtime,'w') as jar:
+            jar.writestr('org/cha0scollective/wwpg/gametest/WiringGameTests.class',b'TEST_ONLY legacy fixture')
+        artifacts['runtime']=suites.descriptor(runtime)
         hashes={role:item['sha256'] for role,item in artifacts.items()}
         proof=dict(completed='actual completion',required_tests_passed=50,profile='BASE',backend='JAVA',
             sha256=hashes['runtime'],phase='SETUP',neoforge='21.1.231',namespaces=','.join(job['namespaces']),
@@ -154,6 +159,21 @@ class EvidenceChecks(unittest.TestCase):
         path,report,_=self.passing_headless_fragment()
         self.assertEqual(evidence.validate_reports([path],'full-headless','a'*40,report['artifact_hashes'],complete=False),{report['jobs'][0]['id']})
         with self.assertRaisesRegex(ValueError,'Missing full-headless'):evidence.validate_reports([path],'full-headless','a'*40,report['artifact_hashes'])
+
+    def test_separated_process_proof_must_match_the_companion(self):
+        _,report,proof=self.passing_headless_fragment()
+        expected=suites.plan('focused',['safety'],['JAVA'],['BASE'],['21.1.231'],['windows-latest'])[0]
+        report['artifact_hashes']['gametest']='b'*64
+        actual=report['jobs'][0]
+        with self.assertRaisesRegex(ValueError,'companion differs'):
+            evidence.validate_job(actual,expected,report,self.base)
+        proof['test_fixture_artifact']={'sha256':'b'*64}
+        actual['proof']=self.file('paired-proof.json',json.dumps(proof))
+        evidence.validate_job(actual,expected,report,self.base)
+        proof['test_fixture_artifact']['sha256']='c'*64
+        actual['proof']=self.file('wrong-companion.json',json.dumps(proof))
+        with self.assertRaisesRegex(ValueError,'companion differs'):
+            evidence.validate_job(actual,expected,report,self.base)
 
     def test_continuation_retains_passing_group_without_relabelling_failed_attempt(self):
         path,report,_=self.passing_headless_fragment()

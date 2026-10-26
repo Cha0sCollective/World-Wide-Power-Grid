@@ -42,6 +42,7 @@
     "RestorationStorageMixin",
     "PgElectricMixin",
     "PgWireItemReadinessMixin",
+    "CeeWirePickingMixin",
     "PgBehaviourMixin",
     "CeeDeviceRemovalMixin",
     "CeeBuzzerAudioMixin",

@@ -119,7 +119,7 @@ def accepted_bundle(path, expected_sha, temp_parent):
             require(all(status.get(key) == manifest.get(key) for key in ('wwpg_version', 'api_version')),
                     'Acceptance status version mismatch')
             names(manifest['wwpg_version'])
-            require(set(manifest['artifacts']) == acceptance.ROLES, 'Unexpected accepted artifact roles')
+            require(set(manifest['artifacts']) == acceptance.artifact_roles(manifest), 'Unexpected accepted artifact roles')
             destinations = {}
             for record in manifest['artifacts'].values():
                 target = str(safe_path(record['path']))

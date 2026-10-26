@@ -1,7 +1,7 @@
 # Mixed benchmark yard: 14,650 electrical nodes
 
-The 0.2.2 example-worlds bundle includes `wwpg-0.2.2-benchmark-14650-nodes.zip`.
-This retains the original save; 0.2.2 release checks do not include a fresh
+The 0.2.3 example-worlds bundle includes `wwpg-0.2.3-benchmark-14650-nodes.zip`.
+This retains the original save; 0.2.3 release checks do not include a fresh
 capacity timing run. It is separate from the guided
 [Stationary Test Yard](STATIONARY_YARD.md) and [API Workshop](EXTENSION_API_WORKSHOP.md).
 
@@ -11,7 +11,7 @@ Its former “10000 nodes” name referred to the requested construction tier;
 it understated the completed workload. The export preserves that workload.
 
 Install the base [required mods](INSTALL.md#required-versions), Java 21 and
-WWPG 0.2.2. Pinout, the SDK example add-ons and a benchmark helper are not
+WWPG 0.2.3. Pinout, the SDK example add-ons and a benchmark helper are not
 required. Reference measurements used an 8 GiB game heap. Use PG's
 `solverBackend = "NATIVE"` and `multiTicks = 16` in
 `config/powergrid-common.toml`, then restart the game.
