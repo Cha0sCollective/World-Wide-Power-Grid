@@ -1,11 +1,11 @@
 {
   "schema": 1,
   "repository": "Cha0sCollective/World-Wide-Power-Grid",
-  "summary": "0.2.2 brings together alpha.1 and beta.2–beta.5. API 1.0.0 and saves stay compatible. The 14,650-node 20 TPS goal and tiny capacitor-pin targeting remain open.",
+  "summary": "0.2.3 improves PG wire targeting on CEE equipment and keeps test fixtures out of the gameplay jar. API 1.0.0 and existing saves stay compatible.",
   "changes": [
-    "Faster loading and electrical bookkeeping: iterative wire tracing, batched network/matrix updates, grouped addon preparation and leaner terminal, wire-power and result processing.",
-    "Safer restoration: repair unload/regrouping and batching ownership; reject invalid solver results, retain stored energy/history, stabilize contactors, fix handheld readings and keep buzzer audio client-side.",
-    "Better tools and materials: CEE terminal highlights, fixed Workshop spawn, combined Pinout yard, addon starter/SDK guides and separately requested headless/graphical checks."
+    "Connect PG wires to exposed voltage-regulator posts, stacked regulator terminals and tiny capacitor pins using their native selection bounds.",
+    "Keep all GameTests and fixtures in a separate test companion, with gameplay code and native solver provenance retained in the mod jar.",
+    "Preserve wire reach and obstruction rules, electrical settings, native solver binaries and all 16 substeps."
   ],
   "installation": "Use Minecraft 1.21.1, NeoForge 21.1.231 or 21.1.248, Java 21, Create 6.0.10-280, CEE 1.1.3, Power Grid 0.6.2 and Architectury 13.0.8. Match server and client mod versions.",
   "optional_installation": "Pinout editions also require CC:Tweaked 1.120.2 and CC;CPG: Pinout 0.2.1."

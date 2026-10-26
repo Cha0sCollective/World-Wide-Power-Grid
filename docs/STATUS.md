@@ -1,6 +1,6 @@
 # Current status
 
-**[WWPG 0.2.2](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.2)**
+**[WWPG 0.2.3](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.3)**
 is the stable release. It supports the declared stationary factories and
 optional Pinout computer control, and includes **extension API 1.0.0** for
 add-on developers. Existing 0.1.0-beta.5 and beta.4 worlds remain compatible; update WWPG on
@@ -43,39 +43,32 @@ a repaired device. The [developer contract](EXTENSION_API.md) explains those rul
 
 ## What was checked
 
-Stable 0.2.2 promotes accepted beta.5 with only the runtime's declared version
-changed. Every other jar entry is identical, including native libraries. The
-preserved headless and graphical evidence keeps its original beta.5 identities;
-no full acceptance campaign was rerun for this promotion. Published world labels
-were updated after checking every native save byte remained unchanged.
+0.2.3 passed a fresh full headless campaign covering Windows/Linux, Native/Java,
+BASE/PINOUT and NeoForge 21.1.231/21.1.248: 342 catalog jobs. The Stationary Yard
+is the combined PINOUT edition; runtime and API installation retain both profiles.
+Cold restarts, actual unload/reload cycles, rejection checks, saved-state checks
+and exact exported-archive reopens keep their separate process outcomes.
 
-Beta.5 uses independent full headless and graphical acceptance records. The
-headless catalog covers Windows/Linux, Native/Java, BASE/PINOUT and NeoForge
-21.1.231/21.1.248. The Stationary Yard is the combined PINOUT edition; runtime
-and API installation checks still cover both profiles. Cold restarts and exact
-archive reopens retain their separate process outcomes.
+All 12 separately requested Windows graphical scenarios passed, including yard
+and Workshop interactions, Native/Java integration, two real TCP clients,
+the independently built SDK starter and clean Save and Quit or disconnect/stop.
+A supplemental real-client check verified the changed regulator/capacitor pins:
+actual aiming, PG highlights, native wire input and server acknowledgment.
 
-Windows graphical checks cover the selected yard and Workshop visuals, native
-controls, terminal highlights, two real TCP clients and the independently built
-SDK starter. Java uses short integration and synchronization checks. Integrated
-sessions must Save and Quit to Title; dedicated sessions must disconnect both
-clients and save/stop normally. The exhaustive gallery remains optional.
+The gameplay jar excludes GameTests and fixtures. The separate test companion
+retains the earlier tests and adds five exposed-pin regressions. Ordinary play
+uses the gameplay jar alone. API 1.0.0, saves, native solver binaries and all
+sixteen electrical substeps remain compatible.
 
-The [verification record](../release/0.2.2/verification.json) identifies
-the actual runtime, helper sources, archives and outcomes. The failed initial
-headless run and graphical helper attempt remain failed records. Completed
-passing groups and collector-only reuse keep their original execution identity.
-No runtime changes were made to repair the test harness. Workshop startup
-panel-storage rejection diagnostics remain visible alongside the subsequent
-accepted powered-state checks; this is not a warning-free certification.
+The [verification record](../release/0.2.3/verification.json) retains actual
+source, runtime, companion, helper, world and process identities. Earlier failed
+attempts remain failed. Electrical diagnostics are retained alongside passing
+observations; a passing suite does not certify warning-free operation.
 
-Workshop spawn metadata now keeps new players on the platform. The corrected
-archives passed focused reopen checks on both platforms and solvers; applicable
-client checks observed the initial position before any test-driver teleport.
-
-API 1.0.0 and compiled example add-ons remain compatible. The beta.5 runtime
-differs from dev.98 only in its declared version. Tiny capacitor-pin targeting
-remains unresolved, separately from the passing terminal-highlight checks.
+While holding PG wire, exposed regulator and capacitor pins can be selected
+outside the ordinary block body. Goggles alone retain their existing picking.
+The targeted checks do not certify every terminal on every CEE item or arbitrary
+third-party terminal geometry. Workshop spawn remains fixed to the platform.
 
 ## Loading and ticking
 

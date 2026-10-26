@@ -1,32 +1,30 @@
-# WWPG 0.2.3 preparation
+# WWPG 0.2.3
 
-This patch prepares exposed CEE terminal targeting for PG wires and the separate
-GameTest companion. PG copper, iron, golden and insulated copper selection uses
-the accessible native CEE boxes, including regulator upper posts and capacitor
-pins outside the ordinary block outline. Client crosshair picking and server
-wire selection share the same path while holding a PG wire. Native reach,
-obstructions, terminal IDs, wire costs and electrical behavior are retained.
+[Stable downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.3)
+· [Verification](verification.json) · [Download hashes](download-layout.json).
 
-The player jar keeps gameplay code, public APIs, Lua programs, native binaries
-and their provenance. Tests and fixtures are installed separately for acceptance
-and retained in the verification bundle. Ordinary players install only the mod
-jar. All earlier tests remain, with five targeting regressions added.
+PG copper, iron, golden and insulated copper wires can select exposed CEE
+regulator upper posts and capacitor pins using the native terminal boxes. Client
+crosshairs and server wire selection share the corrected aiming path while
+holding PG wire; reach, obstructions and native PG ownership remain enforced.
 
-Focused dev.102 checks passed 34 selected wire/distribution GameTests on each
-solver, six companion-packaging checks and 33 suite-tooling checks. They include
-regulator rotations/stacking, both capacitor roll states in all six facings,
-reach, obstruction, removal and a powered circuit completed through actual
-player rays and PG's wire handler. These records are focused headless checks;
-they do not certify real-client visuals or complete release acceptance.
+GameTests, fixtures and test-only resources are in the separate test companion.
+The gameplay jar retains gameplay, APIs, Lua programs and native provenance.
+The earlier 339 tests remain and five targeting regressions are added. Players
+install the gameplay jar; the companion is retained in the verification archive.
 
-**Publication is pending full headless and graphical release acceptance.**
-The user must explicitly request those lanes before they run. Earlier dev.101
-full headless acceptance and 0.2.2 graphical records keep their actual identities;
-they cannot certify the changed targeting runtime. API 1.0.0, native solver
-binaries, saves and all sixteen substeps are unchanged. The 14,650-node speed
-target remains uncertified. Published 0.2.2 assets and records are preserved.
+Fresh full headless acceptance passed all 342 catalog jobs across Windows/Linux,
+Native/Java, BASE/PINOUT and both tested loaders. All 12 Windows graphical
+scenarios passed, including real TCP clients, SDK controls and clean Save and
+Quit/disconnect/server stop. Supplemental real-client pin checks verified rays,
+PG labels, wire input and the server's selected endpoints. Earlier failed
+attempts and original execution identities remain inspectable.
 
-Use [the release process](../../docs/RELEASING.md) and
-`tools/release_downloads.py` to stage exactly five downloads after acceptance:
-the mod jar, example-worlds ZIP, developer-SDK ZIP, verification ZIP and checksums.
-No release has been published by this preparation record.
+API 1.0.0, saves, native binaries, equations and all 16 substeps stay compatible.
+The benchmark archive retains the original 14,650-node native save bytes; only
+release/jar labels change. No performance benchmark ran for this release, and
+20 TPS remains uncertified. Goggles alone keep their existing targeting. The
+targeted checks do not certify every CEE item or arbitrary addon geometry.
+
+The five downloads follow the existing release policy. Published 0.2.2 assets,
+private worlds and detailed performance evidence are unchanged.

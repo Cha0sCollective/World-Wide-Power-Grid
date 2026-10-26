@@ -1,10 +1,10 @@
 # Stationary Test Yard
 
-This world lets you try WWPG 0.2.2 without building a factory first. Switch lamps, pump water, run a heater, compare transformer voltages, charge storage, and operate circuit boards and electrical panels. The equipment mixes CEE and Power Grid in working circuits.
+This world lets you try WWPG 0.2.3 without building a factory first. Switch lamps, pump water, run a heater, compare transformer voltages, charge storage, and operate circuit boards and electrical panels. The equipment mixes CEE and Power Grid in working circuits.
 
 The combined yard includes all ordinary exhibits and the Pinout computer stations.
 
-Download and extract the [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.2/wwpg-0.2.2-example-worlds.zip), then extract `wwpg-0.2.2-stationary-yard.zip` into your instance's `saves` directory.
+Download and extract the [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.3/wwpg-0.2.3-example-worlds.zip), then extract `wwpg-0.2.3-stationary-yard.zip` into your instance's `saves` directory.
 
 Install the [required mods](INSTALL.md#required-versions), **CC:Tweaked 1.120.2** and **Pinout 0.2.1** on the server and every client. There is one combined yard download. The optional computer mods are not required for ordinary factories.
 
@@ -51,7 +51,7 @@ Voltages are measured relative to the common connection, so a negative number is
 
 ## Selecting CEE terminals
 
-Hold a Power Grid wire tool in either hand, or wear Engineer's Goggles, and aim at a CEE terminal. A box and its native label show which terminal you are selecting. Empty hands without goggles hide that highlight. Tiny capacitor pins still have a separate targeting limitation; their selection is not certified by this change.
+Hold a Power Grid wire tool in either hand, or wear Engineer's Goggles, and aim at a CEE terminal. A box and its native label show which terminal you are selecting. Empty hands without goggles hide that highlight. For exposed capacitor pins or upper regulator posts, hold a PG wire and aim directly at the pin. The highlight follows the native terminal bounds even when they extend beyond the block body. Goggles alone retain their existing targeting behavior.
 
 ## Reset, repair and report a problem
 
@@ -61,4 +61,4 @@ The download has connected wires, saved Nether links and the Pinout computer pro
 
 For a report, include the exhibit code, what you operated, the reading you expected and what happened. [Current status](STATUS.md) lists release limitations. An operator can run `/wwpg at x y z` to inspect the affected block, `/wwpg topology` for recent connection changes, and `/wwpg errors` for recent errors. These commands do not load distant chunks.
 
-The [0.2.2 verification record](../release/0.2.2/verification.json) records checks on the exact downloadable worlds. The yard covers the [declared stationary content](SUPPORT.md); moving machinery and large-server performance remain outside this release's scope. Earlier downloads and their check records remain unchanged.
+The [0.2.3 verification record](../release/0.2.3/verification.json) records checks on the exact downloadable worlds. The yard covers the [declared stationary content](SUPPORT.md); moving machinery and large-server performance remain outside this release's scope. Earlier downloads and their check records remain unchanged.
