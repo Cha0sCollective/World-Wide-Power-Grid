@@ -263,7 +263,7 @@ public final class ApiTerminals {
         var refreshed = updateHolder(level,pos,provider);
         if (refreshed != null) {
             refreshed.resumed();
-            refreshed.rememberIdentities();
+            refreshed.rememberPreparedConnections();
             boolean geometryChanged = refreshed.geometryChanged();
             refreshed.removeInvalidConnections();
             Terminals.refreshPgNodes(level, pos, refreshed, geometryChanged);

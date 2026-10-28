@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.4 — 28 October 2026
+
+- Keep CEE trains connected across continuous overhead-wire joints and adjacent contacts, avoiding false power drops.
+- Keep train voltage, current, stored energy and traction updates in the train's dimension. Unavailable voltage cannot poison the next load calculation; genuine failed or disconnected readings remain unavailable.
+- Prevent recursive CEE infrastructure loading while PG restores API terminals. Preserve terminal identity during binding and collect physical wire ownership during safe preparation.
+- Add a startup regression and stabilize the ground-reload fixture's native disk-readiness boundary. Fresh Windows/Linux headless and separate Windows graphical acceptance passed; earlier failed attempts remain preserved.
+- Preserve API 1.0.0, saves, native binaries, equations and all 16 substeps. The 14,650-node 20 TPS goal remains open.
+
 ## 0.2.3 — 26 October 2026
 
 - Fix PG copper, iron, golden and insulated copper wire targeting on exposed CEE terminals, including regulator upper posts, stacked regulators and tiny capacitor pins. Use native terminal bounds for aiming, highlighting and wire selection while retaining reach and obstruction limits.
