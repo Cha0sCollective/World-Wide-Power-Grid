@@ -1,6 +1,6 @@
 # Supported stationary content
 
-WWPG 0.2.3 lets **Create: Electro Energetics (CEE)** and **Power Grid (PG)** work
+WWPG 0.2.4 lets **Create: Electro Energetics (CEE)** and **Power Grid (PG)** work
 together in stationary factories: equipment built in the world that stays in
 place. Either mod can supply power to the other's supported equipment, and you
 can connect and measure circuits with either mod's tools.
@@ -37,7 +37,9 @@ Glass-insulated CEE wire carries essentially no power in the pinned release.
 These existing behaviors are preserved; see the [wiring guide](STATIONARY_WIRING.md)
 and [installation notes](INSTALL.md#pinned-upstream-behavior).
 
-Moving trains and contraptions, altitude/velocity sensors, Sable sublevels, other
+CEE train checks cover PG-fed movement across continuous overhead contacts,
+PG meter recovery and dimension-owned state. Train dimension travel, client audio,
+other moving contraptions, altitude/velocity sensors, Sable sublevels, other
 optional integrations, broad version support and large-server performance testing
 remain later work. Unsupported electrical constructs are reported and isolated
 from the circuit. [Current status](STATUS.md) lists release limitations; [the
@@ -82,7 +84,7 @@ The release retains **164 base behavior groups, or 165 with optional Pinout**.
 The [beta.5 support matrix](../release/0.1.0-beta.5/supported-content.json) and
 [registry inventory](../release/0.1.0-beta.5/registry-inventory.json) provide the
 item-by-item baseline, including cosmetic variants, ingredients, assembly parts
-and deferred moving content. The [0.2.3 verification record](../release/0.2.3/verification.json)
+and deferred moving content. The [0.2.4 verification record](../release/0.2.4/verification.json)
 checks that baseline with the new jar and worlds, alongside the add-on examples.
 Older published artifacts, support claims and check records remain unchanged.
 

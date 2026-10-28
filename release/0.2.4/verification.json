@@ -1,0 +1,175 @@
+{
+  "schema": 1,
+  "wwpg_version": "0.2.4",
+  "api_version": "1.0.0",
+  "api_coordinate": "org.cha0scollective.wwpg:wwpg-api:1.0.0",
+  "cee_api_coordinate": "org.cha0scollective.wwpg:wwpg-cee-api:1.0.0",
+  "source_sha": "de1491e480337e2cfd3e0b6382f59ee2150906f7",
+  "artifacts": {
+    "runtime": {
+      "path": "build/frozen-0.2.4/wwpg-0.2.4.jar",
+      "sha256": "e3b8a62c3a899947e6fba293571b00690a5b809af6d1ea1379d51e8ef42dbf24",
+      "bytes": 5072550
+    },
+    "api": {
+      "path": "build/frozen-0.2.4/wwpg-api-1.0.0.jar",
+      "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+      "bytes": 50143
+    },
+    "cee_api": {
+      "path": "build/frozen-0.2.4/wwpg-cee-api-1.0.0.jar",
+      "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+      "bytes": 8793
+    },
+    "example": {
+      "path": "build/frozen-0.2.4/wwpg-api-example-1.0.0.jar",
+      "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+      "bytes": 52081
+    },
+    "upstream_example": {
+      "path": "build/frozen-0.2.4/wwpg-upstream-api-example-1.0.0.jar",
+      "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+      "bytes": 45633
+    },
+    "gametest": {
+      "path": "build/frozen-0.2.4/wwpg-0.2.4-gametests.jar",
+      "sha256": "1495be4b8661f7e83d96ecda0672cfd7dbec84563bfa9901d69020f1b3799803",
+      "bytes": 1156836
+    },
+    "api_javadoc": {
+      "path": "build/frozen-0.2.4/wwpg-api-1.0.0-javadoc.jar",
+      "sha256": "8a1e880c846e70bf2dfcb8535e34001ee5f2c2e8bfc0ab7d28a8554fcbc521b5",
+      "bytes": 238764
+    },
+    "api_sources": {
+      "path": "build/frozen-0.2.4/wwpg-api-1.0.0-sources.jar",
+      "sha256": "1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b",
+      "bytes": 25943
+    },
+    "cee_api_javadoc": {
+      "path": "build/frozen-0.2.4/wwpg-cee-api-1.0.0-javadoc.jar",
+      "sha256": "06d3df3b99cf0bb1e468536653f4ecebd74467b45cd4d07f3255c8404f6cb557",
+      "bytes": 116316
+    },
+    "cee_api_sources": {
+      "path": "build/frozen-0.2.4/wwpg-cee-api-1.0.0-sources.jar",
+      "sha256": "00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34",
+      "bytes": 6947
+    },
+    "maven_repository": {
+      "path": "build/frozen-0.2.4/maven.zip",
+      "sha256": "e339fb82c79f3bc93bd56e1f70285ead2963d6c06410296559a2e66519bd20b5",
+      "bytes": 432239
+    },
+    "example_sources": {
+      "path": "build/frozen-0.2.4/wwpg-api-example-1.0.0-source.zip",
+      "sha256": "95328eaf5f50889180a8d5d3a152223ef7e3639df7e0216daf94841c0b917159",
+      "bytes": 79525
+    },
+    "upstream_example_sources": {
+      "path": "build/frozen-0.2.4/wwpg-upstream-api-example-1.0.0-source.zip",
+      "sha256": "c44190df750619ccb93a6b72c1b0dd54911094cd7bf4818e86c8c70bc9d0017b",
+      "bytes": 70379
+    }
+  },
+  "acceptance_policy": "separated-v2",
+  "status": "accepted_release",
+  "abi": {
+    "path": "build/frozen-0.2.4/api-abi.json",
+    "sha256": "d906e597d5ce75ef15506cad046bfad4bde6dd2035f82028b692296ea4158497",
+    "bytes": 63521
+  },
+  "cee_abi": {
+    "path": "build/frozen-0.2.4/cee-api-abi.json",
+    "sha256": "960e24bad6d437338a07c964204be4c99088f1d13e4cc9f73084521a637f92d5",
+    "bytes": 11935
+  },
+  "previous_api": {
+    "path": "build/frozen-0.2.4/previous-published-api.jar",
+    "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+    "bytes": 50143
+  },
+  "previous_cee_api": {
+    "path": "build/frozen-0.2.4/previous-published-cee_api.jar",
+    "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+    "bytes": 8793
+  },
+  "benchmark_world": {
+    "path": "build/frozen-0.2.4/wwpg-0.2.4-benchmark-14650-nodes.zip",
+    "sha256": "08ec2e6de70f183af988653dadba8886a001006606e341ce8b425ec76cf9728e",
+    "bytes": 3413540
+  },
+  "unresolved_failures": [],
+  "stages_complete": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "stationary_yard_policy": "combined-pinout-v1",
+  "headless_acceptance": {
+    "path": "local/release-assembly-01/full-headless.json",
+    "sha256": "7cadaaa09891c794c9a220783be369949fc6a7632849d67902a48dc250fb3b68",
+    "bytes": 3363
+  },
+  "graphical_acceptance": {
+    "path": "local/release-assembly-01/graphical.json",
+    "sha256": "032ffebfd7b204ebcb2c1d922ee9ea4d4fd5cd6f85e45676641e65915312536a",
+    "bytes": 476
+  },
+  "independent_example_build": {
+    "path": "build/ci-v2/canonical/preparation-evidence/objects/f236b3c30aac9d0563b8c08d0096fae53afb6f209119e3b0a04575600acb003d.json",
+    "sha256": "1504ebf480e5c94d6a17dcf4c44658c5d2ce25069c41543d92d8dfafff94c5e3",
+    "bytes": 2931
+  },
+  "independent_upstream_example_build": {
+    "path": "build/ci-v2/canonical/preparation-evidence/objects/3bd55bd999aeec87ce4cfc5ff2e0c85fdfae43416226be10d9676189666d1f97.json",
+    "sha256": "9b72e34efdfbe4ac7f049bf15f6f271adb8b2041f34598fd77506594d1af96f8",
+    "bytes": 3035
+  },
+  "authoring_starter": {
+    "source": {
+      "path": "build/ci-v2/canonical/preparation-evidence/objects/92b1a0d580255cb8230bda247e658665d41a90c14f4475657c26e5c68f20e736.zip",
+      "sha256": "92b1a0d580255cb8230bda247e658665d41a90c14f4475657c26e5c68f20e736",
+      "bytes": 54217
+    },
+    "proof": {
+      "path": "local/release-assembly-01/starter-accepted.json",
+      "sha256": "4afd1b5f287666b9774d27bed37dd3fe0cb5852de3d8214c13f0aacd1b7a89db",
+      "bytes": 3238
+    }
+  },
+  "stationary_yard": {
+    "path": "build/ci-v2/portable/ubuntu-24.04-NATIVE-PINOUT-21.1.231/objects/45befa4bc88a283f2471e594a5440b05cc95d6a459267852435a5d6b18443dc7.zip",
+    "sha256": "45befa4bc88a283f2471e594a5440b05cc95d6a459267852435a5d6b18443dc7",
+    "bytes": 1341958
+  },
+  "base_workshop_world": {
+    "path": "build/ci-v2/portable/ubuntu-24.04-NATIVE-BASE-21.1.231/objects/9c79e0efe5ae6e4e58f686b98e2ed6cb6f57d917102d1417017dc804402495b0.zip",
+    "sha256": "9c79e0efe5ae6e4e58f686b98e2ed6cb6f57d917102d1417017dc804402495b0",
+    "bytes": 320025
+  },
+  "pinout_workshop_world": {
+    "path": "build/ci-v2/portable/ubuntu-24.04-NATIVE-PINOUT-21.1.231/objects/9e5b6a76592a09cde227e79f848d2c7ecadbd913f2d3bb72e09f0fe3d53cfa0f.zip",
+    "sha256": "9e5b6a76592a09cde227e79f848d2c7ecadbd913f2d3bb72e09f0fe3d53cfa0f",
+    "bytes": 320787
+  },
+  "acceptance_notes": [
+    "Fresh full headless run40779930742 checks Windows/Linux, Native/Java, BASE/PINOUT and both loaders on the corrected runtime. No failed or interrupted attempt is relabeled.",
+    "The separate graphical cohort retains twelve real client scenarios, exact newly exported archives, helper sources, accepted powered readings, Save and Quit and dedicated save/stop outcomes.",
+    "A local starter proof locator stopped the first client campaign before either SDK starter launched. Its original failed report and ten complete cases remain retained; only the two missing starter cases were executed in a fresh attempt after verifying the exact CI proof bytes.",
+    "The original candidate exposed a recursive API terminal/CEE infrastructure startup load. Its failed evidence is preserved. Corrected terminal binding and a new pre-tick regression passed before these fresh lanes.",
+    "Workshop startup storage-adapter rejection warnings are retained in the client reports. The same warnings and occurrence counts exist in the accepted0.2.3 clients; the corrected startup replay does not introduce or suppress them.",
+    "Ground reload checks use native blocking disk work before entity readiness assertions under uncapped GameTest ticks. Electrical assertions, actual unload proof, tick bounds, launcher deadlines and watchdog stay unchanged.",
+    "The gameplay jar excludes GameTests and fixtures. All coverage remains in the separate companion. Public API1.0.0 and all native libraries are unchanged.",
+    "The14650-node benchmark native save bytes are preserved; only release/jar labels changed. No performance benchmark was run, and20TPS remains uncertified.",
+    "Headless train fixtures cover actual movement across overhead contacts, native PG meter availability and dimension-owned state. The general client scenarios do not certify all train audio or dimension travel."
+  ],
+  "ci_run_record": {
+    "path": "local/release-assembly-01/ci-run.json",
+    "sha256": "9b61a77b8296ceb1e3682ede2d5dfacd7867b8ac735a1909129ded3b3b90b2b6",
+    "bytes": 103715
+  }
+}

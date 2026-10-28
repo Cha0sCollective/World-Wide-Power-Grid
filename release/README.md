@@ -4,12 +4,21 @@ Maintainers: follow [Publishing a release](../docs/RELEASING.md) for the standar
 five-download layout and short notes. Edit [presentation.json](presentation.json)
 for the next release; version-specific records below preserve published history.
 
-**[WWPG 0.2.3](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.3)**
+**[WWPG 0.2.4](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.4)**
 is the current stable release. To install it or choose a playable world, use the
 [installation guide](../docs/INSTALL.md). This directory is for reviewing what
 was shipped and which checks passed.
 
-## Current stable: 0.2.3
+## Current stable: 0.2.4
+
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.4)
+· [Verification](0.2.4/verification.json).
+
+Fixes CEE overhead train contact continuity, dimension-owned train readings and
+state, and recursive API circuit loading during startup. Fresh headless and
+separate graphical acceptance retain their actual execution identities.
+
+## Historical stable: 0.2.3
 
 [Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.3)
 · [Verification](0.2.3/verification.json).

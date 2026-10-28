@@ -2,9 +2,9 @@
 
 **WWPG lets Create: Electro Energetics (CEE) and Power Grid (PG) work together in the same stationary factory.** Either mod can power the other's supported equipment using their native wires, controls and tools.
 
-**[WWPG 0.2.3](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.3) (stable)** for Minecraft 1.21.1 and NeoForge. Follow [installation](docs/INSTALL.md) for the required mod versions and settings. Add-on developers can also use the separately versioned **extension API 1.0.0**.
+**[WWPG 0.2.4](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.4) (stable)** for Minecraft 1.21.1 and NeoForge. Follow [installation](docs/INSTALL.md) for the required mod versions and settings. Add-on developers can also use the separately versioned **extension API 1.0.0**.
 
-0.2.3 fixes PG wire targeting on exposed CEE regulator and capacitor terminals. Tests and fixtures are kept in a separate companion jar; ordinary players install the gameplay jar alone. The 14,650-node benchmark has not reached 20 TPS.
+0.2.4 fixes CEE train power across continuous overhead-wire joints, keeps train readings and stored state in the correct dimension, and avoids recursive API circuit loading during startup. Tests and fixtures are kept in a separate companion jar; ordinary players install the gameplay jar alone. The 14,650-node benchmark has not reached 20 TPS.
 
 ## What you can do
 
@@ -19,9 +19,9 @@ The [support list](docs/SUPPORT.md) gives the equipment and workflows covered by
 
 ## Try the worlds
 
-Open the combined **Stationary Test Yard — Pinout** from the [release downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.3). It includes the ordinary yard and the computer stations, and requires CC:Tweaked and Pinout. Each supported native behavior has a checked exhibit or assembly/repair workflow. Signs and books explain controls, readings and resets. Goggles and tools are at spawn. The [yard guide](docs/STATIONARY_YARD.md) points to transformers, gauges, boards, panels, storage, processing and the playable Nether route.
+Open the combined **Stationary Test Yard — Pinout** from the [release downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.4). It includes the ordinary yard and the computer stations, and requires CC:Tweaked and Pinout. Each supported native behavior has a checked exhibit or assembly/repair workflow. Signs and books explain controls, readings and resets. Goggles and tools are at spawn. The [yard guide](docs/STATIONARY_YARD.md) points to transformers, gauges, boards, panels, storage, processing and the playable Nether route.
 
-The three demonstration saves, the original [14,650-node benchmark](docs/BENCHMARK_YARD.md) and the optional Workshop mods are in **wwpg-0.2.3-example-worlds.zip**.
+The three demonstration saves, the original [14,650-node benchmark](docs/BENCHMARK_YARD.md) and the optional Workshop mods are in **wwpg-0.2.4-example-worlds.zip**.
 Players can download the mod jar directly; the developer SDK and verification
 archive are separate optional downloads.
 
@@ -31,7 +31,7 @@ The separate **Extension API Workshop** has eleven stations demonstrating nine n
 
 The release has passed checks for mixed factories, saving and reopening worlds, chunk loading, and native player tools. The downloadable worlds were tested after extraction, and the API Workshop was checked with two game clients connected to a server. [Current status](docs/STATUS.md) explains what was tested and the remaining limits; [release records](release/README.md) contain the detailed evidence.
 
-Existing 0.1.0-beta.5 and 0.2.2 prerelease worlds remain compatible. Moving trains and contraptions, other optional add-ons, broader mod-version support and large-server testing remain future work.
+Existing 0.1.0-beta.5 and 0.2.2 prerelease worlds remain compatible. Focused CEE train checks cover actual movement across overhead contacts, meter recovery and dimension-owned state. Other moving contraptions, train dimension travel, train audio, broader mod-version support and large-server testing remain outside that coverage.
 
 ## How it works
 
