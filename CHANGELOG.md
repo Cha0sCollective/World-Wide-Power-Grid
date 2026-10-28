@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.4 — prepared for release approval
+
+- Keep CEE train contacts and PG branches connected across continuous overhead-wire joints and adjacent contact crossings, avoiding an artificial one-tick power interruption.
+- Apply train voltage, current, stored energy and traction updates only in the train's owning dimension; unrelated worlds can no longer overwrite them.
+- Prevent an unavailable voltage from poisoning the next train-load calculation. Genuine rejected or disconnected readings remain unavailable, and normal power loss still stops electrical traction.
+- Preserve API 1.0.0, saves, native solver binaries, equations and all 16 substeps. Carry forward the exact dev.106 focused Native/Java checks through verified version-only packaging; full release acceptance remains pending.
+
 ## 0.2.3 — 26 October 2026
 
 - Fix PG copper, iron, golden and insulated copper wire targeting on exposed CEE terminals, including regulator upper posts, stacked regulators and tiny capacitor pins. Use native terminal bounds for aiming, highlighting and wire selection while retaining reach and obstruction limits.
