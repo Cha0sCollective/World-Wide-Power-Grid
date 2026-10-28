@@ -164,6 +164,10 @@ public final class GroundingChangeGameTests {
                         near(h, endpoint(level, source, 1).getVoltage(), 0, "Earth return after ground chunk unload");
                         unchanged(h, level, source, load, connector, remoteRod, endpoints, stamps, network[0]);
                         level.setChunkForced(remoteChunk.x, remoteChunk.z, true); level.getChunk(remoteChunk.x, remoteChunk.z);
+                        // GameTest ticks are uncapped: drain Minecraft's real
+                        // chunk/entity IO before checking its restored state.
+                        // Keep the same readiness and electrical assertions.
+                        level.save(null, true, false);
                         stage[0] = 5; since[0] = tick;
                     }
                     case 5 -> {

@@ -14,6 +14,8 @@ public final class WwpgGameTests {
         var namespaces = Arrays.asList(System.getProperty("neoforge.enabledGameTestNamespaces", "").split(","));
         if (Boolean.getBoolean("wwpg.test.packaged") && namespaces.contains("wwpg_api"))
             modBus.addListener(ExtensionApiDiodeParameterGameTests::register);
+        if (namespaces.contains("wwpg_api"))
+            NeoForge.EVENT_BUS.addListener(ExtensionApiStartupGameTests::beforeStartup);
         if (Boolean.getBoolean("wwpg.test.packaged") && namespaces.contains("wwpg_api_ownership"))
             modBus.addListener(ExtensionApiTerminalRefreshGameTests::register);
         NeoForge.EVENT_BUS.addListener(MultiplayerGameTests::commands);

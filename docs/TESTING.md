@@ -76,6 +76,16 @@ foreign-dimension result/storage ownership. Client sound playback, multiplayer
 and train dimension travel require separate coverage; the headless fixture does
 not certify them.
 
+The `wwpg_api` startup binding regression observes native terminal resolution
+before the first electrical tick. It requires terminal identity to persist
+without initializing CEE infrastructure or preparing models, then verifies the
+same bound node supplies an accepted 20 V after normal preparation. It guards
+against recursive CEE/chunk loading while PG restores a saved network.
+The ground-rod reload fixture uses Minecraft's blocking chunk/entity save
+boundary after requesting the reload, so uncapped GameTest ticks do not race
+unfinished disk work. Its actual unload/reload, identity and voltage assertions,
+80-tick readiness bound, process deadline and watchdog remain unchanged.
+
 ## Full headless acceptance
 
 The manual **Full headless acceptance** GitHub workflow prepares artifacts once,

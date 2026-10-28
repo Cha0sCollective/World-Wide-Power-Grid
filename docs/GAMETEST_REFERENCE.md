@@ -5,6 +5,7 @@ Source audit: **23 October 2026**, checkout
 The declarations were relocated without removing tests in local candidate 0.2.2-dev.99.
 Inventory updated **26 October 2026** for the five dev.102 terminal-targeting regressions.
 Inventory updated **28 October 2026** for the local dev.106 train-circuit regression.
+Inventory updated **28 October 2026** for the API startup-binding regression in the 0.2.4 candidate.
 Source links below follow that new location. This is a reference to the assertions in the current source, **not a new test
 run or a claim that every entry has passed in every environment**. See
 [Testing process](TESTING.md) for execution and [published release records](../release/README.md)
@@ -14,14 +15,14 @@ for historical passing evidence.
 
 | Where the declarations live | Test methods | Source files |
 | --- | ---: | ---: |
-| Companion test jar: `src/gameTest/java/.../gametest` | 345 | 113 |
+| Companion test jar: `src/gameTest/java/.../gametest` | 346 | 114 |
 | Independently built general and CEE/PG example addons | 13 | 3 |
 | Extracted SDK acceptance helper | 4 | 1 |
 | Separate short TCP graphical helper | 1 | 1 |
-| **Total** | **363** | **118** |
+| **Total** | **364** | **119** |
 
-There are **41 namespaces**. These are annotated entry points, not 363 unique
-device models, 363 simultaneous tests or the number of invocations in a complete
+There are **41 namespaces**. These are annotated entry points, not 364 unique
+device models, 364 simultaneous tests or the number of invocations in a complete
 campaign. A method can operate many devices and check many assertions. Several
 focused namespaces intentionally delegate to an existing fixture. Compilation,
 JUnit, Python tooling, SDK build checks and native C fault-injection tests are
@@ -1284,7 +1285,17 @@ It does not certify client audio playback, multiplayer or travel between dimensi
 
 ### General addon API and ownership
 
-32 annotated entry points.
+33 annotated entry points.
+
+#### ExtensionApiStartupGameTests
+
+Namespace: `wwpg_api`. [Source](../src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiStartupGameTests.java).
+
+Resolves native PG terminals before the first electrical tick and requires saved terminal identities without initializing CEE infrastructure or preparing addon models. After normal preparation, requires the same native node and an accepted 20 V reading. This guards against recursive chunk loading during saved-network restoration.
+
+Entry point:
+
+- [`terminalBindingDoesNotInitializeCeeDuringStartup`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiStartupGameTests.java#L55)
 
 #### ExtensionApiDiodeParameterGameTests
 

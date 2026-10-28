@@ -5,6 +5,7 @@
 - Keep CEE train contacts and PG branches connected across continuous overhead-wire joints and adjacent contact crossings, avoiding an artificial one-tick power interruption.
 - Apply train voltage, current, stored energy and traction updates only in the train's owning dimension; unrelated worlds can no longer overwrite them.
 - Prevent an unavailable voltage from poisoning the next train-load calculation. Genuine rejected or disconnected readings remain unavailable, and normal power loss still stops electrical traction.
+- Keep API terminal binding from recursively loading CEE infrastructure while PG restores saved networks; collect wire ownership during safe preparation instead. Add a startup regression that fails on the prior candidate.
 - Preserve API 1.0.0, saves, native solver binaries, equations and all 16 substeps. Carry forward the exact dev.106 focused Native/Java checks through verified version-only packaging; full release acceptance remains pending.
 
 ## 0.2.3 — 26 October 2026

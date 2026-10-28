@@ -8,6 +8,12 @@ adjacent contact crossings, confines shared train results and storage updates
 to the train's dimension, and prevents unavailable voltage from becoming an
 invalid load coefficient. Genuine unavailable measurements remain visible.
 
+Release acceptance also exposed recursive CEE loading from API terminal
+binding during Workshop startup. The corrected candidate persists terminal
+identities during binding and collects physical wire ownership during normal
+preparation. The original failed campaign remains preserved; fresh acceptance
+is required for this runtime correction.
+
 Preserve the dev.106 passing focused Native/Java checks and their original
 source/artifact identities. Version-only equivalence must be verified before
 carrying them forward. Older 0.2.3 full acceptance describes a different runtime

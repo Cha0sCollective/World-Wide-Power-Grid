@@ -2,7 +2,7 @@
 
 - Preserve continuous train connections when crossing overhead-wire joints or adjacent contacts, avoiding false power drops.
 - Keep train readings, stored energy and traction updates in their owning dimension instead of letting another world overwrite them.
-- Recover from unavailable voltage without hiding genuine failed readings or changing power demand, native binaries or the 16 electrical substeps.
+- Avoid recursive API circuit loading during startup, and recover from unavailable train voltage while keeping genuine failed readings visible.
 
 ## Download
 

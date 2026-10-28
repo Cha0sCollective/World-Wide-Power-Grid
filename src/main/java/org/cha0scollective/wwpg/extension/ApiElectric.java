@@ -119,10 +119,16 @@ public final class ApiElectric implements IElectric {
     Map<WorldNetworks.PartId, TransmissionLinePart> observedParts() { return Map.copyOf(observedParts); }
     java.util.Set<java.util.UUID> observedCeeWires() { return java.util.Set.copyOf(observedCeeWires); }
 
-    /** Invoked by safe preparation or actual wire binding, never by terminal geometry discovery. */
-    void rememberIdentities() {
-        if (level instanceof ServerLevel server) {
+    /** Binding may run inside PG's saved-network load; persist declarations only. */
+    private void rememberTerminalIdentities() {
+        if (level instanceof ServerLevel server)
             ApiTerminalIdentities.get(server).remember(persistentOwner, terminalDefinitions());
+    }
+
+    /** Collect physical wire ownership only from the safe topology preparation phase. */
+    void rememberPreparedConnections() {
+        if (level instanceof ServerLevel server) {
+            rememberTerminalIdentities();
             captureExistingParts();
             var infrastructure = com.george_vi.electroenergetics.simulation.infrastructure.InfrastructureSavedData.load(server);
             var ceeIdentities = ApiCeeWireIdentities.get(server);
@@ -266,7 +272,7 @@ public final class ApiElectric implements IElectric {
 
         @Override public OwnedFloatingNode getTerminal(int nativeId) {
             if (!hasTerminal(nativeId)) return null;
-            rememberIdentities();
+            rememberTerminalIdentities();
             return resolveTerminal(nativeId);
         }
 
