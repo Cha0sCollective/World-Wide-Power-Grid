@@ -1,5 +1,6 @@
 """Packaging boundaries for the separately installed GameTest companion."""
 from pathlib import Path
+import os
 import re
 import unittest
 import tempfile
@@ -14,8 +15,8 @@ class GameTestPackaging(unittest.TestCase):
         methods=0
         for file in (root/'src/gameTest/java').rglob('*.java'):
             methods+=len(re.findall(r'@GameTest\s*(?:\(|\n)',file.read_text(encoding='utf-8')))
-        self.assertEqual(methods,344)
-        self.assertEqual(suites.audit()['namespaces'],40)
+        self.assertEqual(methods,345)
+        self.assertEqual(suites.audit()['namespaces'],41)
 
     def test_player_sources_do_not_link_test_helpers(self):
         for file in (suites.ROOT/'src/main/java').rglob('*.java'):
@@ -52,7 +53,10 @@ class GameTestPackaging(unittest.TestCase):
 
     def test_built_player_jar_excludes_tests_and_keeps_native_and_lua(self):
         props=dict(line.split('=',1) for line in (suites.ROOT/'gradle.properties').read_text().splitlines() if '=' in line)
-        base=suites.ROOT/'build/libs'/('wwpg-'+props['mod_version'])
+        # Explicit local candidates built with -Pmod_version need not replace
+        # the preserved release named by gradle.properties.
+        version=os.environ.get('WWPG_PACKAGING_VERSION',props['mod_version'])
+        base=suites.ROOT/'build/libs'/('wwpg-'+version)
         with ZipFile(str(base)+'.jar') as player,ZipFile(str(base)+'-gametests.jar') as companion:
             self.assertFalse(any('/gametest/' in name for name in player.namelist()))
             self.assertFalse(any('/structure/empty.nbt' in name for name in player.namelist()))

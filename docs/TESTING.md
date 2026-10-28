@@ -69,6 +69,13 @@ fixed-coordinate unload fixture runs during setup; dedicated API restart
 fixtures still run through all three cold verifications. Recreating that fresh
 fixture in a saved world would attempt to add wires that already exist.
 
+The `wwpg_trains` focused safety fixture assembles and moves a native CEE train
+fed through a PG source and CEE transformer. It checks overhead joints,
+neighboring contacts, actual PG multimeter readings, power loss/recovery and
+foreign-dimension result/storage ownership. Client sound playback, multiplayer
+and train dimension travel require separate coverage; the headless fixture does
+not certify them.
+
 ## Full headless acceptance
 
 The manual **Full headless acceptance** GitHub workflow prepares artifacts once,
