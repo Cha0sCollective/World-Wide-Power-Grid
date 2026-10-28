@@ -2,13 +2,12 @@ package org.cha0scollective.wwpg.bridge;
 
 import com.george_vi.electroenergetics.simulation.electrical_properties.ElectricalProperties;
 import org.patryk3211.powergrid.electricity.sim.ElectricalNetwork;
-import org.patryk3211.powergrid.electricity.sim.node.CurrentSourceWire;
 import org.patryk3211.powergrid.electricity.sim.node.IElectricNode;
 import org.patryk3211.powergrid.electricity.sim.node.VoltageSourceCoupling;
 
 /** A persistent PG stamp. Parameter changes do not replace its nodes or wires. */
 public final class LinearBranch {
-    private final CurrentSourceWire norton;
+    private final PropertyCurrentSourceWire norton;
     private final VoltageSourceCoupling voltage;
     private ElectricalProperties properties;
 
@@ -33,6 +32,10 @@ public final class LinearBranch {
     }
 
     public boolean hasVoltageSource() { return voltage != null; }
+    void reconnect(org.patryk3211.powergrid.electricity.sim.NetworkGraph graph, IElectricNode first, IElectricNode second) {
+        if (voltage != null) throw new IllegalStateException("Cannot move an ideal source");
+        norton.reconnect(graph, first, second);
+    }
     public ElectricalNetwork network() { return norton.getNode1().getNetwork(); }
     public boolean attached() { var network = network(); return network != null && norton.getNetwork() == network && (voltage == null || voltage.getNetwork() == network); }
     public double current() {

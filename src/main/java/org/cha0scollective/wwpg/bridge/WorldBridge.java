@@ -57,6 +57,7 @@ public final class WorldBridge {
     private long topologyChanges, lastTopologyTick = -1;
     private long topologyIdentityRevision;
     private StableDescription stableDescription;
+    private final List<CatenaryHandover> catenaryHandovers = new ArrayList<>();
     private final Map<ElectricalNetwork, Integer> steps = new IdentityHashMap<>();
     private final Map<ElectricalNetwork, List<ResultNode>> resultNodes = new IdentityHashMap<>();
     private final Map<ElectricalNetwork, List<Branch>> resultBranches = new IdentityHashMap<>();
@@ -108,6 +109,7 @@ public final class WorldBridge {
         }
         require(phase != Phase.SOLVE, "Topology cannot change during a solve");
         phase = Phase.PREPARE;
+        catenaryHandovers.clear();
         RestorationCoordinator.begin(level);
         org.cha0scollective.wwpg.wiring.Terminals.refresh(level);
         infrastructure = ticker.sd;
@@ -214,7 +216,7 @@ public final class WorldBridge {
     }
 
     private void synchronize(WorldNetworks world) {
-        if (stableDescription != null && stableDescription.update(world)) return;
+        if (catenaryHandovers.isEmpty() && stableDescription != null && stableDescription.update(world)) return;
         var previousTopology = topologyState();
         var wantedNodes = new HashMap<EndpointKey, Node>();
         var wanted = new HashMap<BranchKey, Desired>();
@@ -298,6 +300,7 @@ public final class WorldBridge {
             if (old != resolved) ++topologyIdentityRevision;
             if (old != null && old != resolved) { changed.add(entry.getKey()); retired.add(old); }
         }
+        for (var handover : catenaryHandovers) reuseCatenaryBranches(world, handover, wanted, changed);
         var stale = branches.entrySet().iterator();
         while (stale.hasNext()) {
             var entry = stale.next();
@@ -405,6 +408,100 @@ public final class WorldBridge {
         blockOwners.keySet().retainAll(nodes.keySet());
         stableDescription = isolated.isEmpty() && adapters.isEmpty() && adapterPreparationFailures.isEmpty()
                 && nodeKeys.size() == builder.allNodes().size() ? new StableDescription() : null;
+    }
+
+    /** Native CEE still owns the contact and its wire-cut tables. */
+    public com.george_vi.electroenergetics.foundation.nodes.AttachedNode moveCatenaryCut(
+            com.george_vi.electroenergetics.simulation.infrastructure.WireSimulationState state,
+            com.george_vi.electroenergetics.simulation.infrastructure.WireSimulationState.WireCutHandle handle,
+            com.george_vi.electroenergetics.foundation.nodes.AttachedNode cut,
+            com.george_vi.electroenergetics.simulation.infrastructure.ConnectionEntry from,
+            com.george_vi.electroenergetics.simulation.infrastructure.ConnectionEntry to, float point) {
+        if (phase != Phase.PREPARE || from == null || from == to || cut == null
+                || !(from.wireData instanceof com.george_vi.electroenergetics.simulation.infrastructure.CatenaryConnectionData)
+                || !(to.wireData instanceof com.george_vi.electroenergetics.simulation.infrastructure.CatenaryConnectionData)) return null;
+        net.minecraft.world.phys.Vec3 shared = null;
+        for (var a : List.of(from.pos1, from.pos2)) for (var b : List.of(to.pos1, to.pos2)) if (a.equals(b)) shared = a;
+        if (shared == null) return null;
+        var oldEnd = shared.equals(from.pos1) ? from.pos2 : from.pos1;
+        var newEnd = shared.equals(to.pos1) ? to.pos2 : to.pos1;
+        if (oldEnd.equals(newEnd)) return null;
+        var oldCuts = from.cuts.stream().sorted(Comparator.comparingDouble(com.george_vi.electroenergetics.simulation.infrastructure.WireSimulationState.CutWireEntry::point)).toList();
+        var newCuts = to.cuts.stream().sorted(Comparator.comparingDouble(com.george_vi.electroenergetics.simulation.infrastructure.WireSimulationState.CutWireEntry::point)).toList();
+        int index = -1;
+        for (int i = 0; i < oldCuts.size(); ++i) if (oldCuts.get(i).node().equals(cut)) index = i;
+        boolean oldForward = shared.equals(from.pos2), newForward = shared.equals(to.pos1);
+        boolean adjacent = index >= 0 && (oldForward ? index == oldCuts.size() - 1 : index == 0);
+        var oldNeighbor = oldCuts.size() == 1 ? catenaryKey(oldEnd)
+                : adjacent ? EndpointKey.of(oldCuts.get(oldForward ? index - 1 : index + 1).node()) : null;
+        var newNeighbor = newCuts.isEmpty() ? catenaryKey(newEnd)
+                : EndpointKey.of(newCuts.get(newForward ? 0 : newCuts.size() - 1).node());
+        if (!((MovingWireCuts)state).wwpg$transferCut(handle, cut, from, to, point)) return null;
+        // A discontinuous jump over another contact uses normal reconciliation.
+        if (adjacent) catenaryHandovers.add(new CatenaryHandover(EndpointKey.of(cut), catenaryKey(shared), oldNeighbor, newNeighbor));
+        return cut;
+    }
+
+    private static EndpointKey catenaryKey(net.minecraft.world.phys.Vec3 point) {
+        return EndpointKey.of(new com.george_vi.electroenergetics.foundation.nodes.InWorldNode(0, BlockPos.containing(point)));
+    }
+    /** Passing a second contact on the same wire is the same retained path swap. */
+    public void noteCatenaryRelocation(com.george_vi.electroenergetics.simulation.infrastructure.ConnectionEntry wire,
+            com.george_vi.electroenergetics.foundation.nodes.AttachedNode cut, float point) {
+        if (phase != Phase.PREPARE || wire == null || !Float.isFinite(point)
+                || !(wire.wireData instanceof com.george_vi.electroenergetics.simulation.infrastructure.CatenaryConnectionData)) return;
+        var cuts = wire.cuts.stream().sorted(Comparator.comparingDouble(com.george_vi.electroenergetics.simulation.infrastructure.WireSimulationState.CutWireEntry::point)).toList();
+        int old = -1, next = 0;
+        for (int i = 0; i < cuts.size(); ++i) if (cuts.get(i).node().equals(cut)) old = i;
+        if (old < 0) return;
+        for (int i = 0; i < cuts.size(); ++i) if (i != old && (cuts.get(i).point() < point || cuts.get(i).point() == point && i < old)) ++next;
+        int direction = Integer.compare(next, old);
+        if (Math.abs(next - old) != 1) return;
+        var junction = EndpointKey.of(cuts.get(old + direction).node());
+        var from = cutNeighbor(wire, cuts, old - direction);
+        var to = cutNeighbor(wire, cuts, old + 2 * direction);
+        catenaryHandovers.add(new CatenaryHandover(EndpointKey.of(cut), junction, from, to));
+    }
+    private static EndpointKey cutNeighbor(com.george_vi.electroenergetics.simulation.infrastructure.ConnectionEntry wire,
+            List<com.george_vi.electroenergetics.simulation.infrastructure.WireSimulationState.CutWireEntry> cuts, int index) {
+        return index < 0 ? catenaryKey(wire.pos1) : index >= cuts.size() ? catenaryKey(wire.pos2) : EndpointKey.of(cuts.get(index).node());
+    }
+    private record CatenaryHandover(EndpointKey cut, EndpointKey junction, EndpointKey from, EndpointKey to) { }
+
+    private void reuseCatenaryBranches(WorldNetworks world, CatenaryHandover handover,
+            Map<BranchKey, Desired> wanted, Set<EndpointKey> changed) {
+        var keys = List.of(handover.cut, handover.junction, handover.from, handover.to);
+        if (keys.stream().distinct().count() != 4 || keys.stream().anyMatch(changed::contains)) return;
+        var owner = nodes.get(handover.cut);
+        var network = owner == null ? null : owner.getNetwork();
+        if (network == null || keys.stream().map(nodes::get).anyMatch(node -> !PropertyCurrentSourceWire.assigned(network, node))) return;
+        var oldFirst = BranchKey.of(handover.from, handover.cut);
+        var oldSecond = BranchKey.of(handover.junction, handover.to);
+        var newFirst = BranchKey.of(handover.from, handover.junction);
+        var newSecond = BranchKey.of(handover.cut, handover.to);
+        var middle = BranchKey.of(handover.cut, handover.junction);
+        if (wanted.containsKey(oldFirst) || wanted.containsKey(oldSecond)
+                || branches.containsKey(newFirst) || branches.containsKey(newSecond)) return;
+        for (var key : List.of(oldFirst, oldSecond, middle)) {
+            var branch = branches.get(key);
+            if (branch == null || !branch.element.attached() || branch.element.hasVoltageSource()
+                    || !passiveCatenary(branch.desired)) return;
+        }
+        for (var key : List.of(newFirst, newSecond, middle)) if (!passiveCatenary(wanted.get(key))) return;
+        // A--cut--junction--B becomes A--junction--cut--B. The same
+        // four nodes remain connected, including every side branch. Keep the
+        // stamps and hooks; only their endpoints and matrix coefficients change.
+        for (var pair : List.of(Map.entry(oldFirst, newFirst), Map.entry(oldSecond, newSecond))) {
+            var branch = branches.remove(pair.getKey());
+            var next = pair.getValue();
+            branch.element.reconnect(world.globalGraph, nodes.get(next.first()), nodes.get(next.second()));
+            branches.put(next, branch);
+            ++topologyIdentityRevision;
+        }
+    }
+    private static boolean passiveCatenary(Desired desired) {
+        return desired != null && !desired.voltageSource && desired.properties.getClass() == ElectricalProperties.class
+                && desired.properties.conductance() > 0 && desired.properties.currentSource() == 0 && desired.properties.voltageSource() == 0;
     }
 
     private OwnedFloatingNode resolve(WorldNetworks world, EndpointKey key, Node node) {

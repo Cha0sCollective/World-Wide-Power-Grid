@@ -4,6 +4,7 @@ Source audit: **23 October 2026**, checkout
 `9e7083d0c02c2bd45dd2f9e2f23027cbc9b02eac` (WWPG 0.2.2).
 The declarations were relocated without removing tests in local candidate 0.2.2-dev.99.
 Inventory updated **26 October 2026** for the five dev.102 terminal-targeting regressions.
+Inventory updated **28 October 2026** for the local dev.106 train-circuit regression.
 Source links below follow that new location. This is a reference to the assertions in the current source, **not a new test
 run or a claim that every entry has passed in every environment**. See
 [Testing process](TESTING.md) for execution and [published release records](../release/README.md)
@@ -13,14 +14,14 @@ for historical passing evidence.
 
 | Where the declarations live | Test methods | Source files |
 | --- | ---: | ---: |
-| Companion test jar: `src/gameTest/java/.../gametest` | 344 | 112 |
+| Companion test jar: `src/gameTest/java/.../gametest` | 345 | 113 |
 | Independently built general and CEE/PG example addons | 13 | 3 |
 | Extracted SDK acceptance helper | 4 | 1 |
 | Separate short TCP graphical helper | 1 | 1 |
-| **Total** | **362** | **117** |
+| **Total** | **363** | **118** |
 
-There are **40 namespaces**. These are annotated entry points, not 362 unique
-device models, 362 simultaneous tests or the number of invocations in a complete
+There are **41 namespaces**. These are annotated entry points, not 363 unique
+device models, 363 simultaneous tests or the number of invocations in a complete
 campaign. A method can operate many devices and check many assertions. Several
 focused namespaces intentionally delegate to an existing fixture. Compilation,
 JUnit, Python tooling, SDK build checks and native C fault-injection tests are
@@ -1264,6 +1265,22 @@ Entry points:
 - [`removingRealWireEntitiesSplitsAndReconnectsPoweredBlocks`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/WireRemovalRecoveryGameTests.java#L62)
 - [`genuineRejectedSolveStillReportsAndHoldsStorage`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/WireRemovalRecoveryGameTests.java#L96)
 - [`ordinaryWarmupStillHoldsStorageWithoutErrors`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/WireRemovalRecoveryGameTests.java#L112)
+
+### Moving train circuits (`wwpg_trains`)
+
+`TrainCircuitGameTests.transformerFedMovingTrainKeepsContactAndRecoversWithoutForeignCommits`
+assembles a real Create carriage with a CEE motor and pantograph. A PG source
+feeds it through a native CEE transformer and two overhead spans. The test adds
+neighboring wire contacts, moves the carriage through the joint and contact
+ordering change, and checks continuous accepted power, retained contact identity
+and actual PG multimeter readings. It removes and restores the supply, verifies
+loss and recovery of native electrical traction, and applies populated Nether/End
+result sets with matching node IDs to ensure another dimension cannot modify the
+train's readings, accumulator charge, traction or gauge bookkeeping.
+
+The fixture lives only in the companion test jar:
+[TrainCircuitGameTests.java](../src/gameTest/java/org/cha0scollective/wwpg/gametest/TrainCircuitGameTests.java).
+It does not certify client audio playback, multiplayer or travel between dimensions.
 
 ### General addon API and ownership
 

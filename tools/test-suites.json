@@ -10,7 +10,7 @@
     "pinout": {"namespaces": ["wwpg_pinout"], "profiles": ["PINOUT"], "merge_into": "regression", "phases": ["SETUP", "VERIFY", "VERIFY", "VERIFY"]},
     "loading": {"namespaces": ["wwpg_loading", "wwpg_cee_preparation", "wwpg_pause_epoch"], "phases": ["SETUP"]},
     "board-startup": {"namespaces": ["wwpg_board_startup"], "phases": ["SETUP"]},
-    "safety": {"namespaces": ["wwpg_unload", "wwpg_solver_safety", "wwpg_matrix_ownership", "wwpg_meter_sampling", "wwpg_contactors", "wwpg_rhs", "wwpg_wire_power", "wwpg_wire_recovery", "wwpg_display_pulse"], "phases": ["SETUP"]},
+    "safety": {"namespaces": ["wwpg_unload", "wwpg_solver_safety", "wwpg_matrix_ownership", "wwpg_meter_sampling", "wwpg_contactors", "wwpg_rhs", "wwpg_wire_power", "wwpg_wire_recovery", "wwpg_display_pulse", "wwpg_trains"], "phases": ["SETUP"]},
     "native-guard": {"namespaces": ["wwpg_native_guard"], "backends": ["NATIVE"], "merge_into": "safety", "phases": ["SETUP"]},
     "api": {"namespaces": ["wwpg_api", "wwpg_api_faults", "wwpg_api_restart", "wwpg_api_upstream", "wwpg_api_upstream_restart"], "setup_namespaces": ["wwpg_api_ownership"], "addon": true, "phases": ["SETUP", "VERIFY", "VERIFY", "VERIFY"]},
     "pause": {"namespaces": ["wwpg_api_pause"], "addon": true, "phases": ["SETUP"]},
