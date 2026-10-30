@@ -236,7 +236,7 @@ def archive_for_reopen(job, inputs, folder):
     return archive
 
 
-def execute(jobs, inputs_path, output, lane, reason=None, preparation=None):
+def execute(jobs, inputs_path, output, lane, reason=None, preparation=None, command_factory=None):
     inputs = frozen_inputs(inputs_path)
     if any(j['platform'] != host_platform() for j in jobs): raise ValueError('Select this machine platform')
     output = Path(output).resolve(); output.mkdir(parents=True, exist_ok=False)
@@ -275,7 +275,7 @@ def execute(jobs, inputs_path, output, lane, reason=None, preparation=None):
                 from graphical_suite import execute_case
                 record.update(execute_case(job, inputs, output))
             else:
-                args, directory = command(job, inputs, folder)
+                args, directory = (command_factory or command)(job, inputs, folder)
                 if job.get('operation') == 'reference': directory.mkdir(parents=True, exist_ok=True)
                 if job.get('group', '').endswith('-extracted') and not directory.exists():
                     archive=archive_for_reopen(job,inputs,folder)

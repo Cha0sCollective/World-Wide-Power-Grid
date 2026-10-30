@@ -1,0 +1,23 @@
+// Only the manually requested loader probe uses this initializer. Production
+// dependencies and the full acceptance installation profiles are unchanged.
+gradle.projectsEvaluated {
+    def p = gradle.rootProject
+    def manifest = p.file(p.property('loaderInputs'))
+    def inputs = new groovy.json.JsonSlurper().parse(manifest)
+    def addons = p.property('loaderInstallation') == 'ADDONS'
+    def integrations = inputs.loader_compatibility.artifacts
+    def digest = { f -> java.security.MessageDigest.getInstance('SHA-256').digest(f.bytes).encodeHex().toString() }
+    // Replace optional Maven dependencies with the producer's exact frozen jars.
+    p.configurations.runtimeOnly.dependencies.removeAll { dep ->
+        dep.group == 'maven.modrinth' && dep.name in ['sMa4MaGz', 'gu7yAYhd']
+    }
+    if (addons) integrations.each { role ->
+        def item = inputs.artifacts[role], file = new File(manifest.parentFile, item.path)
+        if (!file.isFile() || digest(file) != item.sha256) throw new GradleException('Changed optional input: '+role)
+        p.dependencies.add('runtimeOnly', p.files(file))
+    }
+    p.tasks.named('runPackagedGameTestServer') {
+        systemProperty 'wwpg.loader.installation', addons ? 'ADDONS' : 'BASE'
+        systemProperty 'wwpg.loader.inputs', manifest.absolutePath
+    }
+}
