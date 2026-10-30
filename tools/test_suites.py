@@ -69,6 +69,7 @@ def audit(root=ROOT):
             text=path.read_text(encoding='utf-8')
             names=re.findall(r'@GameTestHolder\s*\(\s*(?:value\s*=\s*)?"([^"]+)"\s*\)',text)
             if '@GameTestHolder' in text and not names:raise ValueError('Use a literal cataloged GameTest namespace: '+str(path))
+            names+=re.findall(r'templateNamespace\s*=\s*"([^"]+)"',text)
             discovered.update(names)
     missing = discovered - membership.keys()
     if missing: raise ValueError('Unclassified GameTest namespaces: ' + ', '.join(sorted(missing)))
