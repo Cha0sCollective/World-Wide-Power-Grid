@@ -116,6 +116,42 @@ remain separate. Compare every native payload and all uncompressed `level.dat`
 NBT outside `spawnRadius`; a changed electrical save requires broader testing.
 The equivalent focused tools are `recheck_workshop_spawn.py prepare` and `run`.
 
+## Manual parallel loader compatibility
+
+The **Loader compatibility checks** GitHub Action accepts one to four newer
+NeoForge 21.1 versions, separated by commas. Start it manually and choose the
+branch containing the code to test. It builds and freezes one gameplay jar,
+matching test companion, APIs and SDK examples at the normal minimum loader.
+Every worker uses those same bytes against its selected loader.
+
+Each loader has eight independent jobs: Windows/Linux, Native/Java, and
+**BASE/ADDONS**. Up to eight jobs run concurrently, subject to GitHub runner
+availability. A failure does not cancel other environments. Each job retains
+its own directories, logs and proof; cold restart phases run in order.
+
+BASE excludes optional integrations and SDK example mods. ADDONS loads pinned
+CC:Tweaked, Pinout, Gauged Wires and Power Components, plus both SDK examples.
+The report records the actual existing `PINOUT` installation profile for ADDONS;
+this does not rename historical profiles or mean Pinout is the only addon.
+The loaded jars are checked against the frozen hashes. Small powered probes
+exercise an actual Gauged wire feeding a CEE resistor and a Power Components
+fuse on a PG circuit board. Existing Pinout/CC and API tests retain their own
+checks and cold sequences. This is targeted integration coverage, not exhaustive
+coverage of every optional mod feature.
+
+```text
+python tools/loader_compatibility.py plan --loader 21.1.262 --backend NATIVE --installation ADDONS
+```
+
+The plan launches nothing. The workflow runs regression, loading, isolated board
+startup and safety groups; ADDONS adds Pinout and API lifecycle checks. It does
+not run world export campaigns, SDK acceptance, graphical clients or performance
+benchmarks. New loader inputs do not enter the verified release catalog merely
+because they were requested. A separate collector requires every planned
+environment, exact loaded artifacts, completed tests and clean saves before
+reporting a passing compatibility campaign. Missing reports remain failures.
+Full release acceptance still requires its independent existing evidence.
+
 ## Separate local graphical acceptance
 
 Graphical sessions run serially on the local Windows desktop. Performance

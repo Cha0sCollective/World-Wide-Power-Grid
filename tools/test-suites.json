@@ -5,6 +5,20 @@
   "backends": ["NATIVE", "JAVA"],
   "profiles": ["BASE", "PINOUT"],
   "loaders": ["21.1.231", "21.1.248"],
+  "loader_compatibility": {
+    "policy": "loader-compatibility-v1",
+    "groups": ["regression", "platform", "loading", "board-startup", "safety", "native-guard"],
+    "addon_groups": ["pinout", "api", "pause", "pending"],
+    "installation_namespace": "wwpg_loader_installation",
+    "addon_namespace": "wwpg_loader_addons",
+    "installations": {"BASE": "BASE", "ADDONS": "PINOUT"},
+    "artifacts": [
+      {"role": "computercraft", "mod_id": "computercraft", "version": "1.120.2", "filename": "cc-tweaked-1.21.1-forge-1.120.2.jar", "url": "https://cdn.modrinth.com/data/gu7yAYhd/versions/1ewzHZYg/cc-tweaked-1.21.1-forge-1.120.2.jar", "sha256": "e8651fe24b384e925e563c9ad077644744474e2e7c0adb8e6d5b4757598dce9f"},
+      {"role": "pinout", "mod_id": "pinout", "version": "0.2.1", "filename": "pinout-0.2.1.jar", "url": "https://cdn.modrinth.com/data/sMa4MaGz/versions/UJtJCpBi/pinout-0.2.1.jar", "sha256": "d31c19c3c8aefb512922bf8086146127cad7ef9100d929a8fddcc2ab133fdd4a"},
+      {"role": "gauged", "mod_id": "gauged_wires", "version": "1.0.6a", "filename": "gauged_wires-1.0.6a.jar", "url": "https://cdn.modrinth.com/data/LemfA2Y5/versions/f1ywSCNc/gauged_wires-1.0.6a.jar", "sha256": "3798534240dc72cc34df5783c03b3a0178c6a7361a4bd198af014982606839e3"},
+      {"role": "power_components", "mod_id": "moregrid", "version": "1.3.0", "filename": "power-components-1.3.0.jar", "url": "https://cursemaven.com/curse/maven/create-power-components-1659527/9031604/create-power-components-1659527-9031604.jar", "sha256": "73a130d1144f52fb94e6d7ed70c89692a2f7b7ad0476a4cfb81cde47a40261fd"}
+    ]
+  },
   "groups": {
     "regression": {"namespaces": ["wwpg", "wwpg_stationary", "wwpg_design", "wwpg_distribution", "wwpg_wires", "wwpg_bundle", "wwpg_coupled"], "phases": ["SETUP", "VERIFY", "VERIFY", "VERIFY"]},
     "pinout": {"namespaces": ["wwpg_pinout"], "profiles": ["PINOUT"], "merge_into": "regression", "phases": ["SETUP", "VERIFY", "VERIFY", "VERIFY"]},
@@ -22,6 +36,8 @@
     "platform": {"namespaces": ["wwpg_platform"], "merge_into": "regression", "phases": ["SETUP"]}
   },
   "special_namespaces": {
+    "wwpg_loader_installation": "explicit loader compatibility installation inventory and powered optional integration checks",
+    "wwpg_loader_addons": "opt-in loader compatibility powered Gauged Wires and Power Components fixtures",
     "wwpg_doc": "independently extracted SDK starter server and client helpers",
     "wwpg_ci_client": "separate short two-client acceptance helper",
     "wwpg_reference": "upstream and guarded compatibility reference processes",
