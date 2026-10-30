@@ -128,6 +128,11 @@ Each loader has eight independent jobs: Windows/Linux, Native/Java, and
 **BASE/ADDONS**. Up to eight jobs run concurrently, subject to GitHub runner
 availability. A failure does not cancel other environments. Each job retains
 its own directories, logs and proof; cold restart phases run in order.
+The installation selector defaults to BOTH. Choose BASE or ADDONS for a targeted
+retry; its summary explicitly covers only that selected installation. Reuse
+passing evidence separately with its original source, artifacts and execution
+identity, after checking artifact equivalence. A partial retry is not a fresh
+pass of both installations.
 
 BASE excludes optional integrations and SDK example mods. ADDONS loads pinned
 CC:Tweaked, Pinout, Gauged Wires and Power Components, plus both SDK examples.
@@ -138,6 +143,9 @@ exercise an actual Gauged wire feeding a CEE resistor and a Power Components
 fuse on a PG circuit board. Existing Pinout/CC and API tests retain their own
 checks and cold sequences. This is targeted integration coverage, not exhaustive
 coverage of every optional mod feature.
+The three safety tests that need SDK storage devices have explicit addon-only
+namespaces. BASE retains the remaining solver, wire recovery and native guard
+tests; ADDONS and ordinary safety acceptance retain all three storage tests.
 
 ```text
 python tools/loader_compatibility.py plan --loader 21.1.262 --backend NATIVE --installation ADDONS

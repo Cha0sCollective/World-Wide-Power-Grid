@@ -22,6 +22,13 @@ class PlanningChecks(unittest.TestCase):
         self.assertEqual(len({tuple(j.values()) for j in jobs}),16)
         self.assertEqual({j['installation'] for j in jobs},{'BASE','ADDONS'})
 
+    def test_base_retry_cannot_expand_to_addons(self):
+        jobs=loader.matrix(['21.1.252','21.1.262'],['BASE'])
+        self.assertEqual(len(jobs),8)
+        self.assertEqual({j['installation'] for j in jobs},{'BASE'})
+        for invalid in ([],['BOTH'],['BASE','BASE']):
+            with self.assertRaises(ValueError):loader.matrix(['21.1.262'],invalid)
+
     def test_base_never_loads_optional_or_example_mods(self):
         for backend in ('NATIVE','JAVA'):
             jobs=loader.plan('21.1.262',backend,'BASE','windows-latest')
@@ -29,12 +36,19 @@ class PlanningChecks(unittest.TestCase):
             names={n for j in jobs for n in j['namespaces']}
             self.assertFalse({'wwpg_api','wwpg_pinout','wwpg_loader_addons'} & names)
             self.assertIn('wwpg_trains',names)
+            self.assertTrue({'wwpg_solver_safety','wwpg_wire_recovery'}<=names)
+            self.assertEqual('wwpg_native_guard' in names,backend=='NATIVE')
+            self.assertFalse(set(suites.catalog()['loader_compatibility']['addon_only_namespaces']) & names)
 
     def test_addons_have_real_optional_fixtures_and_ordered_restarts(self):
         jobs=loader.plan('21.1.262','NATIVE','ADDONS','windows-latest')
         self.assertTrue(all(j['profile']=='PINOUT' and j['addon'] for j in jobs))
         names={n for j in jobs for n in j['namespaces']}
-        self.assertTrue({'wwpg_loader_addons','wwpg_pinout','wwpg_api','wwpg_native_guard'} <= names)
+        self.assertTrue({'wwpg_loader_addons','wwpg_pinout','wwpg_api','wwpg_native_guard',
+                         'wwpg_addon_safety','wwpg_addon_native_guard'} <= names)
+        java={n for j in loader.plan('21.1.262','JAVA','ADDONS','windows-latest') for n in j['namespaces']}
+        self.assertIn('wwpg_addon_safety',java)
+        self.assertNotIn('wwpg_addon_native_guard',java)
         for group,phases in [('regression',['SETUP','VERIFY','VERIFY','VERIFY']),
                              ('api',['SETUP','VERIFY','VERIFY','VERIFY']),('pending',['SETUP','ARM','VERIFY'])]:
             selected=[j for j in jobs if j['group']==group]
@@ -143,6 +157,21 @@ class EvidenceChecks(unittest.TestCase):
         (duplicate/'result.json').write_bytes(source.read_bytes())
         with self.assertRaisesRegex(ValueError,'duplicate'):
             loader.collect(campaign,self.inputs,self.root/'reports',self.root/'duplicate-summary.json')
+
+    def test_selected_base_matrix_is_explicit_and_requires_every_environment(self):
+        environments=loader.matrix(['21.1.262'],['BASE']);campaign=self.root/'plan.json'
+        suites.write(campaign,dict(policy=loader.POLICY,installations=['BASE'],matrix={'include':environments}))
+        for e in environments:self.fragment(e)
+        result=loader.collect(campaign,self.inputs,self.root/'reports',self.root/'base-only.json')
+        self.assertEqual(result['status'],'passed')
+        self.assertEqual(result['installations'],['BASE'])
+        self.assertFalse(result['complete_matrix'])
+        self.assertFalse(result['full_acceptance'])
+        # Dropping an environment cannot narrow the campaign's declared scope.
+        broken=suites.read(campaign);broken['matrix']['include'].pop()
+        campaign.write_text(json.dumps(broken))
+        with self.assertRaisesRegex(ValueError,'Incomplete campaign matrix'):
+            loader.collect(campaign,self.inputs,self.root/'reports',self.root/'incomplete.json')
 
 
 if __name__=='__main__':unittest.main()

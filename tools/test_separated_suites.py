@@ -21,6 +21,12 @@ class SelectionChecks(unittest.TestCase):
             source.write_text('@GameTestHolder("wwpg_new_regression")')
             with self.assertRaisesRegex(ValueError,'Unclassified'):suites.audit(root)
 
+    def test_method_level_namespace_is_audited(self):
+        with tempfile.TemporaryDirectory(dir=suites.ROOT/'build') as d:
+            root=Path(d);source=root/'src/gameTest/java/Unknown.java';source.parent.mkdir(parents=True)
+            source.write_text('@GameTestHolder("wwpg_solver_safety") @GameTest(templateNamespace="wwpg_new_regression")')
+            with self.assertRaisesRegex(ValueError,'Unclassified'):suites.audit(root)
+
     def test_full_headless_has_no_client_launches(self):
         jobs=suites.plan('full-headless')
         self.assertTrue(jobs);self.assertEqual({j['lane'] for j in jobs},{'headless'})

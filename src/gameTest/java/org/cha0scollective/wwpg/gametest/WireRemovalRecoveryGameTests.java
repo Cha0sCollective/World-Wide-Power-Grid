@@ -93,7 +93,7 @@ public final class WireRemovalRecoveryGameTests {
         });
     }
 
-    @GameTest(template="empty",batch="rejected_wire_assemblies",timeoutTicks=100)
+    @GameTest(template="empty",templateNamespace="wwpg_addon_safety",batch="rejected_wire_assemblies",timeoutTicks=100)
     public static void genuineRejectedSolveStillReportsAndHoldsStorage(GameTestHelper h) {
         ExtensionApiRejectedSolveGameTests.nonthrowingRejectedSolveRollsBackCeeAndApiButKeepsHealthyCircuit(h);
         h.runAtTickTime(23,()->{
