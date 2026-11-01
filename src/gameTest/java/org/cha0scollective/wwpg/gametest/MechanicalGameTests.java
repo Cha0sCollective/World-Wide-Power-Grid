@@ -100,13 +100,48 @@ public final class MechanicalGameTests {
         });
         h.runAtTickTime(25, () -> {
             voltage(h, load, 10);
-            DevicesSavedData.load(level).getDevice(variac, VariacDevice.class).progress = 0.25f;
+            var device = DevicesSavedData.load(level).getDevice(variac, VariacDevice.class);
+            localVariacHeating(h, device);
+            device.progress = 0.25f;
         });
         h.runAtTickTime(40, () -> {
             voltage(h, load, 5);
             DevicesSavedData.load(level).getDevice(variac, VariacDevice.class).progress = 0;
         });
         h.runAtTickTime(55, () -> { voltage(h, load, 0); DynamicGameTests.audit(h); h.succeed(); });
+    }
+
+    /** Exercise the transformed native calculation, including its voltage overload. */
+    private static void localVariacHeating(GameTestHelper h, VariacDevice device) {
+        int[] reads = {0};
+        var readings = new com.george_vi.electroenergetics.simulation.SimulationResults(
+                new double[0], 1, new it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap<>(),
+                new com.george_vi.electroenergetics.simulation.CircuitBuilder(java.util.Set.of()), null) {
+            @Override public double getCurrentThrough(BlockPos pos, int first, int second) {
+                h.assertTrue(pos.equals(device.pos) && first == 0 && second == 1, "Variac current used another terminal pair");
+                return -2;
+            }
+            @Override public double getVoltageAt(int first, int second) {
+                throw new AssertionError("Variac treated local terminals as global voltage indices");
+            }
+            @Override public double getVoltageAt(BlockPos pos, int first, int second) {
+                h.assertTrue(pos.equals(device.pos) && first == 0 && second == 1, "Variac voltage used another device or terminal pair");
+                reads[0]++;
+                return 12.5;
+            }
+        };
+        float previous = device.temp;
+        try {
+            device.temp = 20;
+            float rating = com.george_vi.electroenergetics.config.CEEConfigs.server().powerValues.variacMaxPower.getF();
+            float expected = com.george_vi.electroenergetics.foundation.device.ElectricalDevice.updateTemp(
+                    20, Math.min(25 / (rating / 1300), 10000));
+            device.postTick(readings);
+            h.assertTrue(reads[0] == 1, "Variac did not read exactly one device-local voltage");
+            BoardComponentGameTests.near(h, device.temp, expected, 1e-5, "Variac heating from signed current and local voltage");
+        } finally {
+            device.temp = previous;
+        }
     }
     private static void voltage(GameTestHelper h, BlockPos pos, double expected) {
         double v = new BlockWireEndpoint(pos, 0).getNode(h.getLevel()).getVoltage() - new BlockWireEndpoint(pos, 1).getNode(h.getLevel()).getVoltage();

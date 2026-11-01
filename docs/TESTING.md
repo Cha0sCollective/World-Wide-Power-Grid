@@ -76,6 +76,12 @@ foreign-dimension result/storage ownership. Client sound playback, multiplayer
 and train dimension travel require separate coverage; the headless fixture does
 not certify them.
 
+The `wwpg` variac fixture checks powered PG load control and calls CEE's native
+heating calculation with distinct local voltage readings and signed current.
+It rejects global-index voltage reads and verifies the resulting temperature.
+Run it against both CEE 1.1.3 and 1.1.4 when changing the compatibility redirect;
+the grouped redirects require exactly one recognized upstream voltage call.
+
 The `wwpg_api` startup binding regression observes native terminal resolution
 before the first electrical tick. It requires terminal identity to persist
 without initializing CEE infrastructure or preparing models, then verifies the
