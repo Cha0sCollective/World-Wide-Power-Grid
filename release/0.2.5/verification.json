@@ -1,0 +1,269 @@
+{
+  "schema": 1,
+  "wwpg_version": "0.2.5",
+  "api_version": "1.0.0",
+  "api_coordinate": "org.cha0scollective.wwpg:wwpg-api:1.0.0",
+  "cee_api_coordinate": "org.cha0scollective.wwpg:wwpg-cee-api:1.0.0",
+  "source_sha": "a96bd53ad153b724644939e87f65e6b0b4de8a59",
+  "artifacts": {
+    "runtime": {
+      "path": "build/frozen-0.2.5-attempt2/wwpg-0.2.5.jar",
+      "sha256": "8e9afede1f4194d7e080596ea9a2bddd9c5ff85f5eec8125643be7029aab867e",
+      "bytes": 5079710
+    },
+    "api": {
+      "path": "build/frozen-0.2.5-attempt2/wwpg-api-1.0.0.jar",
+      "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+      "bytes": 50143
+    },
+    "cee_api": {
+      "path": "build/frozen-0.2.5-attempt2/wwpg-cee-api-1.0.0.jar",
+      "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+      "bytes": 8793
+    },
+    "example": {
+      "path": "build/frozen-0.2.5-attempt2/wwpg-api-example-1.0.0.jar",
+      "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+      "bytes": 52081
+    },
+    "upstream_example": {
+      "path": "build/frozen-0.2.5-attempt2/wwpg-upstream-api-example-1.0.0.jar",
+      "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+      "bytes": 45633
+    },
+    "gametest": {
+      "path": "build/frozen-0.2.5-attempt2/wwpg-0.2.5-gametests.jar",
+      "sha256": "6b4d152cff4ab9bafae9c36f3af6cc0d007a11f195355302fb9624c04675e00f",
+      "bytes": 1181745
+    },
+    "maven_repository": {
+      "path": "build/frozen-0.2.5-attempt2/wwpg-api-1.0.0-maven.zip",
+      "sha256": "7f8b7b4641ff64d24564663067ae2f07f47178535b9f9ab9a17528654af34465",
+      "bytes": 432199
+    },
+    "example_sources": {
+      "path": "build/frozen-0.2.5-attempt2/wwpg-api-example-1.0.0-source.zip",
+      "sha256": "82af82e1dc1fc9095f0889564286ede8c2b7c5b29b2ef563ad3f44ff1a057897",
+      "bytes": 79524
+    },
+    "upstream_example_sources": {
+      "path": "build/frozen-0.2.5-attempt2/wwpg-upstream-api-example-1.0.0-source.zip",
+      "sha256": "f7e24576d913a3d5857466077f679040c014127936b97c65c832ed5a3a1cba09",
+      "bytes": 70377
+    },
+    "api_sources": {
+      "path": "build/frozen-0.2.5-attempt2/wwpg-api-1.0.0-sources.jar",
+      "sha256": "1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b",
+      "bytes": 25943
+    },
+    "api_javadoc": {
+      "path": "build/frozen-0.2.5-attempt2/wwpg-api-1.0.0-javadoc.jar",
+      "sha256": "81efd3bf3f2c7220ad4d024318583c3f96e8b5cbe1818f739124bf4c532c4691",
+      "bytes": 238775
+    },
+    "cee_api_sources": {
+      "path": "build/frozen-0.2.5-attempt2/wwpg-cee-api-1.0.0-sources.jar",
+      "sha256": "00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34",
+      "bytes": 6947
+    },
+    "cee_api_javadoc": {
+      "path": "build/frozen-0.2.5-attempt2/wwpg-cee-api-1.0.0-javadoc.jar",
+      "sha256": "8a28cb95de9814318427331ed82faee1b8f4b4349f6bf09e20a976397abba471",
+      "bytes": 116318
+    }
+  },
+  "acceptance_policy": "separated-v2",
+  "status": "accepted_release",
+  "abi": {
+    "path": "local/api-abi.json",
+    "sha256": "d906e597d5ce75ef15506cad046bfad4bde6dd2035f82028b692296ea4158497",
+    "bytes": 63521
+  },
+  "previous_api": {
+    "path": "build/frozen-0.2.5-attempt2/previous-published-api.jar",
+    "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+    "bytes": 50143
+  },
+  "cee_abi": {
+    "path": "local/cee-api-abi.json",
+    "sha256": "960e24bad6d437338a07c964204be4c99088f1d13e4cc9f73084521a637f92d5",
+    "bytes": 11935
+  },
+  "previous_cee_api": {
+    "path": "build/frozen-0.2.5-attempt2/previous-published-cee_api.jar",
+    "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+    "bytes": 8793
+  },
+  "unresolved_failures": [],
+  "stages_complete": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "stationary_yard_policy": "combined-pinout-v1",
+  "headless_acceptance": {
+    "path": "local/release-assembly-01/headless_acceptance.json",
+    "sha256": "c6da7243787dc03429309f51df93bee3e1c4e5b54bc30aebbb4e6050c99485ce",
+    "bytes": 6158
+  },
+  "graphical_acceptance": {
+    "path": "local/release-assembly-01/graphical_acceptance.json",
+    "sha256": "fb9b273752238c2beb490ddfc3cb5ae11a82a927d592a1cf422f6851eb1a30f2",
+    "bytes": 2994
+  },
+  "independent_example_build": {
+    "path": "build/ci-v2/canonical/preparation-evidence/objects/38c262c3038db5bc3082449d5389634a636da74ed298f29a4d1ace73b6381043.json",
+    "sha256": "e232a66684f93e0278ce3c67bcdd88245a003a875e74795e8e0c7adf67112541",
+    "bytes": 2931
+  },
+  "independent_upstream_example_build": {
+    "path": "build/ci-v2/canonical/preparation-evidence/objects/791b49de3e256e00fa3df048c5c522d32e0e97b59b002391517f4219d46e2d44.json",
+    "sha256": "378889be7e033e0a1fb742deeb454ef61c2a60214bb0111e91792fd736acc10a",
+    "bytes": 3035
+  },
+  "sdk_acceptance_reuse": {
+    "schema": 1,
+    "scope": "runtime_version_only",
+    "source_sha": "8bc4815cff05e0640905405dda7b001c1f71906f",
+    "runtime_version": "0.2.5",
+    "artifacts": {
+      "upstream_example_sources": {
+        "path": "build/frozen-0.2.5-attempt2/wwpg-upstream-api-example-1.0.0-source.zip",
+        "sha256": "f7e24576d913a3d5857466077f679040c014127936b97c65c832ed5a3a1cba09",
+        "bytes": 70377
+      },
+      "api": {
+        "path": "build/frozen-0.2.5-attempt2/wwpg-api-1.0.0.jar",
+        "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+        "bytes": 50143
+      },
+      "upstream_example": {
+        "path": "build/frozen-0.2.5-attempt2/wwpg-upstream-api-example-1.0.0.jar",
+        "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+        "bytes": 45633
+      },
+      "cee_api": {
+        "path": "build/frozen-0.2.5-attempt2/wwpg-cee-api-1.0.0.jar",
+        "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+        "bytes": 8793
+      },
+      "cee_api_sources": {
+        "path": "build/frozen-0.2.5-attempt2/wwpg-cee-api-1.0.0-sources.jar",
+        "sha256": "00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34",
+        "bytes": 6947
+      },
+      "example": {
+        "path": "build/frozen-0.2.5-attempt2/wwpg-api-example-1.0.0.jar",
+        "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+        "bytes": 52081
+      },
+      "maven_repository": {
+        "path": "build/frozen-0.2.5-attempt2/wwpg-api-1.0.0-maven.zip",
+        "sha256": "7f8b7b4641ff64d24564663067ae2f07f47178535b9f9ab9a17528654af34465",
+        "bytes": 432199
+      },
+      "cee_api_javadoc": {
+        "path": "build/frozen-0.2.5-attempt2/wwpg-cee-api-1.0.0-javadoc.jar",
+        "sha256": "8a28cb95de9814318427331ed82faee1b8f4b4349f6bf09e20a976397abba471",
+        "bytes": 116318
+      },
+      "api_javadoc": {
+        "path": "build/frozen-0.2.5-attempt2/wwpg-api-1.0.0-javadoc.jar",
+        "sha256": "81efd3bf3f2c7220ad4d024318583c3f96e8b5cbe1818f739124bf4c532c4691",
+        "bytes": 238775
+      },
+      "example_sources": {
+        "path": "build/frozen-0.2.5-attempt2/wwpg-api-example-1.0.0-source.zip",
+        "sha256": "82af82e1dc1fc9095f0889564286ede8c2b7c5b29b2ef563ad3f44ff1a057897",
+        "bytes": 79524
+      },
+      "runtime": {
+        "path": "build/frozen-0.2.5-attempt2/wwpg-0.2.5.jar",
+        "sha256": "8e9afede1f4194d7e080596ea9a2bddd9c5ff85f5eec8125643be7029aab867e",
+        "bytes": 5079710
+      },
+      "api_sources": {
+        "path": "build/frozen-0.2.5-attempt2/wwpg-api-1.0.0-sources.jar",
+        "sha256": "1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b",
+        "bytes": 25943
+      }
+    },
+    "explanation": "The twelve SDK artifact roles retain their accepted bytes. The separately bound test companion is also unchanged. Documentation has a separate frozen snapshot."
+  },
+  "authoring_starter": {
+    "source": {
+      "path": "build/ci-v2/canonical/starter/tutorial-load-0.1.0-source.zip",
+      "sha256": "d5b4ae7658a150797f378c9df6de0932945350faaa584af4b3001d9fa3ab6680",
+      "bytes": 54213
+    },
+    "proof": {
+      "path": "local/release-assembly-01/starter-accepted.json",
+      "sha256": "3c0a2cfeba6513f0cdd13dc6ef8f06676bb4b02ef70efa3402ffbc762e31dce6",
+      "bytes": 2716
+    }
+  },
+  "stationary_yard": {
+    "path": "local/client-evidence/g06/objects/7085d37b51cbebb92b0799ca0506dd6cc0aaa17b98d934c0030b3e0a4712db09.zip",
+    "sha256": "7085d37b51cbebb92b0799ca0506dd6cc0aaa17b98d934c0030b3e0a4712db09",
+    "bytes": 1350850
+  },
+  "base_workshop_world": {
+    "path": "local/client-evidence/g10/objects/eefdb50dbdebe81d9dbbbeb5ba4c002d0496a2239eaaa439a0c85f2ed8aaf880.zip",
+    "sha256": "eefdb50dbdebe81d9dbbbeb5ba4c002d0496a2239eaaa439a0c85f2ed8aaf880",
+    "bytes": 321894
+  },
+  "pinout_workshop_world": {
+    "path": "local/client-evidence/g08/objects/5b0b61a42bb920b7427fdac784effbb2d48b0dfd875c8a43a75cf8c2c5a48477.zip",
+    "sha256": "5b0b61a42bb920b7427fdac784effbb2d48b0dfd875c8a43a75cf8c2c5a48477",
+    "bytes": 322846
+  },
+  "benchmark_world": {
+    "path": "build/benchmark-metadata-2/wwpg-0.2.5-benchmark-14650-nodes.zip",
+    "sha256": "cec7e096e62af08cdfbc8f208a43b865f07cb1123cae61e7eef2dd1a649af76b",
+    "bytes": 3413539
+  },
+  "supplemental_focused_acceptance": {
+    "path": "local/release-assembly-01/dev112-focused/result.json",
+    "sha256": "450d735517d167b0d8ea98443312c368c016c45973719e64e011fc58b6b58bb7",
+    "bytes": 12319
+  },
+  "ci_run_record": {
+    "path": "local/release-assembly-01/ci-run.json",
+    "sha256": "aec21b2b5b4de7e303746873931cc87ffca0c8c75953109e93c1c4011018ceaa",
+    "bytes": 99259
+  },
+  "publication_source_scope": {
+    "path": "local/release-assembly-01/source-scope.json",
+    "sha256": "7b831034956ad8d9de1e2301c8d0be1ca0e861063e0cd34ab3b15c4ffd4aa311",
+    "bytes": 1075
+  },
+  "graphical_prestart_failure_assessment": {
+    "path": "local/release-assembly-01/desktop-launch-assessment/result.json",
+    "sha256": "10e951e5c01d5a3be81f30578d4ff97860bd8bcf95ca59f0e8488e2e0bcc96c9",
+    "bytes": 3852
+  },
+  "representative_visual_review": {
+    "path": "local/release-assembly-01/visual-review/result.json",
+    "sha256": "0abf05c8cbf6002eab0b287626eea60dba315c568186d9d5ce80272e62fe639c",
+    "bytes": 3403
+  },
+  "documentation_snapshot": {
+    "path": "local/release-assembly-01/documentation-snapshot.json",
+    "sha256": "9a2cf70666fd0ceea398501e7fe121172489277d601e85380b2c616146b83ae9",
+    "bytes": 2682
+  },
+  "acceptance_notes": [
+    "Full headless coverage combines unchanged passing groups from run41494720277 with the targeted missing checks in run41503048967. The original failed run remains failed; this is assembled coverage, not a new342-job campaign. Actual launcher sources and immutable artifacts are retained.",
+    "All twelve separate Windows client scenarios retain exact world hashes, native inputs, helper sources, real two-client TCP, and clean Save and Quit or disconnect/server stop outcomes.",
+    "Two client launches stopped before Minecraft loaded when GLFW had no primary monitor. After each desktop restoration, only unfinished scenarios resumed. Eight passing cases were retained before the final four ran; both pre-start failures remain preserved.",
+    "Initial Linux SDK failures retained only launcher tracebacks, so their exact causes cannot be recovered. Enhanced failure capture and a diagnostic continuation exposed reference launches without Minecraft server classes; explicit loader preparation corrected that observed defect. The six final targeted checks passed without changing runtime bytes or timeout bounds.",
+    "Supplemental dev.112 focused coverage retains 158 Native/Java test executions across CEE 1.1.3/1.1.4 and optional Gauged, plus an eight-view Native probe-highlight/panel-cover client check. It is not relabelled as full acceptance.",
+    "Full release lanes use CEE 1.1.3; the separately retained compatibility and interaction checks cover CEE 1.1.4. API 1.0.0, native binaries and all sixteen substeps are unchanged.",
+    "GameTests and fixtures remain separate from gameplay. The companion contains 356 GameTest methods across the classified namespaces. All failed attempts and original execution identities remain preserved.",
+    "The public 0.2.4 14,650-node benchmark native save bytes are preserved; only release/jar metadata changed. No performance benchmark ran, and 20 TPS remains uncertified.",
+    "Workshop clients retain the known startup panel_storage rejected-tick/substep messages described in the accepted0.2.4 record; no WWPG ERROR lines occurred in the twelve passing client sessions. Electrical diagnostics remain in the original logs and client summaries. Passing acceptance does not certify warning-free operation, every third-party terminal geometry, train audio or train dimension travel."
+  ]
+}

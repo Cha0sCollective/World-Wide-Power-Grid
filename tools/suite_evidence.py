@@ -195,12 +195,17 @@ def continue_headless(previous, inputs_path, output, reason, preparation, enviro
     changed=subprocess.check_output(['git','diff','--name-only',frozen['source_sha'],'HEAD','--',*protected],cwd=ROOT,text=True)
     dirty=subprocess.check_output(['git','diff','--name-only','--',*protected],cwd=ROOT,text=True)
     require(not changed.strip() and not dirty.strip(),'Frozen continuation requires unchanged runtime/build inputs')
-    environments={(j['platform'],j['loader'],j['backend'],j['profile']) for j in old['jobs'] if 'backend' in j}
+    # The once-per-OS/backend starter deliberately uses the client loader,
+    # even in the minimum-loader worker. It is not a second worker selection.
+    environments={(j['platform'],j['loader'],j['backend'],j['profile']) for j in old['jobs']
+                  if 'backend' in j and j.get('operation') != 'starter'}
     if not available:environments={tuple(environment.split('/'))}
     require(len(environments)==1,'Continue one isolated environment at a time')
     platform,loader,backend,profile=next(iter(environments))
     if environment:require(tuple(environment.split('/'))==(platform,loader,backend,profile),'Continuation environment differs')
     expected=plan('full-headless',backends=[backend],profiles=[profile],loaders=[loader],platforms=[platform])
+    require({j['id'] for j in old['jobs']} <= {j['id'] for j in expected},
+            'Original report contains jobs outside the selected environment')
     groups={}
     for job in expected:groups.setdefault(job.get('group',job.get('operation')),[]).append(job)
     actual={j['id']:j for j in old['jobs']};retained=[];remaining=[]

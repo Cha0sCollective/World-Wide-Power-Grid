@@ -76,6 +76,32 @@ foreign-dimension result/storage ownership. Client sound playback, multiplayer
 and train dimension travel require separate coverage; the headless fixture does
 not certify them.
 
+The `wwpg` variac fixture checks powered PG load control and calls CEE's native
+heating calculation with distinct local voltage readings and signed current.
+It rejects global-index voltage reads and verifies the resulting temperature.
+Run it against both CEE 1.1.3 and 1.1.4 when changing the compatibility redirect;
+the grouped redirects require exactly one recognized upstream voltage call.
+
+The `wwpg_wires` panel-tool regression checks the shared cover predicate for all
+four PG wire materials, preserves native CEE tools, and excludes unrelated items.
+Actual player rays and PG wire dispatch must select both sparse panel terminals
+without consuming wire, across all horizontal panel orientations. The front-only
+cover exception must preserve wall occlusion, reach, back/side blocking, closed
+offhand-only covers, native CEE tool behavior and live attachment removal.
+With Gauged installed, the same checks exercise all its
+registered wire materials, including sizes outside PG's light-wire tag. These headless checks do
+not certify the client's fade animation.
+
+The `wwpg_wires` terminal-tool regressions also use actual PG multimeter rays
+on exposed regulator pins and powered, recessed panel terminals. They require
+native probe selection and accepted voltage without classifying the meter as
+a wire. CEE switch and panel controls must ignore wiring/probe clicks, including
+Shift and offhand attempts, while ordinary control clicks remain effective.
+The guards target native control handlers, including installed fuse-holder
+switches; bulb, fuse and fuse-holder material
+repair workflows retain their native handling. PG's client highlighter shares
+the main-hand probe selection, with the existing outline geometry and colors.
+
 The `wwpg_api` startup binding regression observes native terminal resolution
 before the first electrical tick. It requires terminal identity to persist
 without initializing CEE infrastructure or preparing models, then verifies the
@@ -116,6 +142,14 @@ remain separate. Compare every native payload and all uncompressed `level.dat`
 NBT outside `spawnRadius`; a changed electrical save requires broader testing.
 The equivalent focused tools are `recheck_workshop_spawn.py prepare` and `run`.
 
+A headless continuation retains complete passing lifecycle groups and runs the
+failed or unexecuted groups in fresh directories. Its minimum-loader worker also
+owns the SDK starter check on the client loader; both remain bound to the same
+platform/backend/profile and exact catalog job IDs. Custom reference and SDK
+launchers prepare the selected loader's Minecraft artifacts before their launch
+preparation. The gameplay jar stays frozen. Failed SDK commands include their
+underlying output in the retained launcher log even when no passing proof exists.
+
 ## Manual parallel loader compatibility
 
 The **Loader compatibility checks** GitHub Action accepts one to four newer
@@ -128,6 +162,11 @@ Each loader has eight independent jobs: Windows/Linux, Native/Java, and
 **BASE/ADDONS**. Up to eight jobs run concurrently, subject to GitHub runner
 availability. A failure does not cancel other environments. Each job retains
 its own directories, logs and proof; cold restart phases run in order.
+The installation selector defaults to BOTH. Choose BASE or ADDONS for a targeted
+retry; its summary explicitly covers only that selected installation. Reuse
+passing evidence separately with its original source, artifacts and execution
+identity, after checking artifact equivalence. A partial retry is not a fresh
+pass of both installations.
 
 BASE excludes optional integrations and SDK example mods. ADDONS loads pinned
 CC:Tweaked, Pinout, Gauged Wires and Power Components, plus both SDK examples.
@@ -138,6 +177,9 @@ exercise an actual Gauged wire feeding a CEE resistor and a Power Components
 fuse on a PG circuit board. Existing Pinout/CC and API tests retain their own
 checks and cold sequences. This is targeted integration coverage, not exhaustive
 coverage of every optional mod feature.
+The three safety tests that need SDK storage devices have explicit addon-only
+namespaces. BASE retains the remaining solver, wire recovery and native guard
+tests; ADDONS and ordinary safety acceptance retain all three storage tests.
 
 ```text
 python tools/loader_compatibility.py plan --loader 21.1.262 --backend NATIVE --installation ADDONS

@@ -169,7 +169,7 @@ tasks.named('processGameTestResources') {
     from('release') { include 'artifacts.json', 'optional-artifacts.json', 'content-matrix.json', '0.1.0-beta.5/content-matrix.json', '0.1.0-beta.5/registry-inventory.json'; into 'data/wwpg/release' }
     ['wwpg_loading', 'wwpg_matrix_ownership', 'wwpg_board_startup', 'wwpg_cee_preparation',
      'wwpg_solver_safety', 'wwpg_native_guard', 'wwpg_unload', 'wwpg_contactors', 'wwpg_meter_sampling',
-     'wwpg_loader_installation', 'wwpg_loader_addons'].each { namespace ->
+     'wwpg_loader_installation', 'wwpg_loader_addons', 'wwpg_addon_safety', 'wwpg_addon_native_guard'].each { namespace ->
         from('src/gameTest/resources/data/wwpg/structure/empty.nbt') { into "data/${namespace}/structure" }
     }
 }

@@ -4,12 +4,21 @@ Maintainers: follow [Publishing a release](../docs/RELEASING.md) for the standar
 five-download layout and short notes. Edit [presentation.json](presentation.json)
 for the next release; version-specific records below preserve published history.
 
-**[WWPG 0.2.4](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.4)**
+**[WWPG 0.2.5](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.5)**
 is the current stable release. To install it or choose a playable world, use the
 [installation guide](../docs/INSTALL.md). This directory is for reviewing what
 was shipped and which checks passed.
 
-## Current stable: 0.2.4
+## Current stable: 0.2.5
+
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.5)
+· [Verification](0.2.5/verification.json).
+
+Supports CEE 1.1.4 while retaining 1.1.3, reveals panels with PG/Gauged tools,
+highlights PG multimeter targets, and protects native controls during wiring and
+probing. Independent headless and graphical records retain exact identities.
+
+## Historical stable: 0.2.4
 
 [Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.4)
 · [Verification](0.2.4/verification.json).
@@ -85,7 +94,7 @@ API 1.0.0 stays compatible. [Release record](0.2.2-alpha.1/README.md) explains
 the carried-forward gameplay acceptance, focused SDK checks and remaining limits.
 [Downloads and checksums](0.2.2-alpha.1/download-layout.json) identify the five files.
 
-## Current stable release: 0.2.1
+## Historical stable release: 0.2.1
 
 Adds tested NeoForge 21.1.248 support alongside 21.1.231. Newer NeoForge, Create,
 CEE and Power Grid versions are permitted for player testing. Extension API

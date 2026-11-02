@@ -43,6 +43,9 @@
     "PgElectricMixin",
     "PgWireItemReadinessMixin",
     "CeeWirePickingMixin",
+    "CeeBlockControlToolMixin",
+    "CeePanelControlToolMixin",
+    "CeeFuseSwitchToolMixin",
     "PgBehaviourMixin",
     "CeeDeviceRemovalMixin",
     "CeeBuzzerAudioMixin",
@@ -84,6 +87,8 @@
     "NetherTransformerUnloadMixin"
   ],
   "client": [
+    "PgProbeHighlightMixin",
+    "CeePanelCoverMixin",
     "MultimeterWireClientMixin",
     "ClampMeterClientMixin",
     "NativeClampAvailabilityMixin"

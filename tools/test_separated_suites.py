@@ -21,6 +21,12 @@ class SelectionChecks(unittest.TestCase):
             source.write_text('@GameTestHolder("wwpg_new_regression")')
             with self.assertRaisesRegex(ValueError,'Unclassified'):suites.audit(root)
 
+    def test_method_level_namespace_is_audited(self):
+        with tempfile.TemporaryDirectory(dir=suites.ROOT/'build') as d:
+            root=Path(d);source=root/'src/gameTest/java/Unknown.java';source.parent.mkdir(parents=True)
+            source.write_text('@GameTestHolder("wwpg_solver_safety") @GameTest(templateNamespace="wwpg_new_regression")')
+            with self.assertRaisesRegex(ValueError,'Unclassified'):suites.audit(root)
+
     def test_full_headless_has_no_client_launches(self):
         jobs=suites.plan('full-headless')
         self.assertTrue(jobs);self.assertEqual({j['lane'] for j in jobs},{'headless'})
@@ -92,6 +98,16 @@ class SelectionChecks(unittest.TestCase):
         self.assertIn('-PtestArtifact=frozen/runtime.jar',args)
         self.assertEqual(args[args.index('--timeout')+1],'600')
         self.assertIn('-PtestExampleArtifact=frozen/example.jar',args)
+
+    def test_references_prepare_their_loader_before_custom_java_exec(self):
+        inputs={'version':'TEST_ONLY','artifacts':{r:{'path':'frozen/'+r+'.jar'} for r in suites.ROLES+('reference',)}}
+        jobs=[j for j in suites.plan('full-headless') if j.get('operation')=='reference']
+        for job in jobs:
+            args,_=suites.command(job,inputs,Path('scratch'))
+            task='runUpstreamReferenceServer' if job['reference']=='upstream' else 'runReferenceCompatibilityServer'
+            self.assertEqual(args[args.index('createMinecraftArtifacts')+1],task)
+            self.assertIn('-Pneo_version='+job['loader'],args)
+            self.assertEqual(args[args.index('--timeout')+1],'600')
 
 
 class EvidenceChecks(unittest.TestCase):
@@ -199,6 +215,34 @@ class EvidenceChecks(unittest.TestCase):
             (output/'retained.json').write_text(json.dumps(view))
             with self.assertRaisesRegex(ValueError,'did not actually pass'):
                 evidence.validate_reports([output/'retained.json'],'full-headless','a'*40,report['artifact_hashes'],complete=False)
+
+    def test_continuation_keeps_starter_on_its_distinct_catalog_loader(self):
+        path,report,_=self.passing_headless_fragment()
+        first=report['jobs'][0]
+        safety={k:v for k,v in first.items() if k not in ('status','exit_code','proof','log')}
+        starter=dict(id='windows-latest/JAVA/starter',lane='headless',operation='starter',
+            platform='windows-latest',loader='21.1.248',backend='JAVA',profile='BASE')
+        report['jobs'].append(dict(starter,status='failed',exit_code=1))
+        report['status']='failed';path.write_text(json.dumps(report))
+        with patch.object(evidence,'plan',return_value=[safety,starter]),patch('subprocess.check_output',return_value=''):
+            result=evidence.continue_headless(path,self.base/'inputs.json',self.base/'planned',
+                'TEST_ONLY starter failure',None,'windows-latest/21.1.231/JAVA/BASE',plan_only=True)
+        self.assertEqual(result['retained_jobs'],[first['id']])
+        self.assertEqual(result['jobs'],[starter])
+        self.assertEqual(result['jobs'][0]['loader'],'21.1.248')
+
+    def test_auxiliary_starter_cannot_smuggle_another_worker_into_continuation(self):
+        path,report,_=self.passing_headless_fragment()
+        first=report['jobs'][0]
+        safety={k:v for k,v in first.items() if k not in ('status','exit_code','proof','log')}
+        starter=dict(id='windows-latest/JAVA/starter',lane='headless',operation='starter',
+            platform='windows-latest',loader='21.1.248',backend='JAVA',profile='BASE')
+        report['jobs'].append(dict(starter,id='windows-latest/NATIVE/starter',backend='NATIVE',status='failed'))
+        path.write_text(json.dumps(report))
+        with patch.object(evidence,'plan',return_value=[safety,starter]),patch('subprocess.check_output',return_value=''):
+            with self.assertRaisesRegex(ValueError,'outside the selected environment'):
+                evidence.continue_headless(path,self.base/'inputs.json',self.base/'blocked',
+                    'TEST_ONLY mixed worker',None,plan_only=True)
 
     def test_missing_execution_report_requires_explicit_selected_environment_rerun(self):
         _,report,_=self.passing_headless_fragment()

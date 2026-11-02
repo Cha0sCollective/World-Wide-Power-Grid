@@ -8,6 +8,12 @@ on:
         type: string
         default: '21.1.262'
         required: true
+      installations:
+        description: 'Run both installations, or retry only BASE/ADDONS; prior results remain separate'
+        type: choice
+        options: [BOTH, BASE, ADDONS]
+        default: BOTH
+        required: true
 permissions:
   contents: read
 jobs:
@@ -28,13 +34,16 @@ jobs:
         name: Validate version selection and plan independent environments
         env:
           NEO_VERSIONS: ${{ inputs.neo_versions }}
+          INSTALLATIONS: ${{ inputs.installations }}
         run: |
           python - <<'PY'
           import json, os, sys
           from pathlib import Path
           sys.path.insert(0, 'tools')
           import loader_compatibility as check
-          campaign = dict(policy=check.POLICY, matrix={'include':check.matrix(check.versions(os.environ['NEO_VERSIONS']))})
+          installations = ['BASE', 'ADDONS'] if os.environ['INSTALLATIONS'] == 'BOTH' else [os.environ['INSTALLATIONS']]
+          campaign = dict(policy=check.POLICY, installations=installations,
+                          matrix={'include':check.matrix(check.versions(os.environ['NEO_VERSIONS']), installations)})
           Path('build/loader-compatibility').mkdir(parents=True)
           check.suites.write('build/loader-compatibility/plan.json', campaign)
           with open(os.environ['GITHUB_OUTPUT'], 'a') as f:

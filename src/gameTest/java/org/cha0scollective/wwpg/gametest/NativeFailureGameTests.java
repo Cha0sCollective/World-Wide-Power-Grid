@@ -20,7 +20,7 @@ public final class NativeFailureGameTests {
     @BeforeBatch(batch="wwpg_native_guard_storage")
     public static void configureStorage(ServerLevel level) { DynamicGameTests.substeps(level); }
 
-    @GameTest(template="empty",batch="wwpg_native_guard_storage",timeoutTicks=100)
+    @GameTest(template="empty",templateNamespace="wwpg_addon_native_guard",batch="wwpg_native_guard_storage",timeoutTicks=100)
     public static void failedNativeFactorizationHoldsCeeAndAddonStorageAndRecovers(GameTestHelper h) {
         ExtensionApiRejectedSolveGameTests.rejectedSolve(h,true);
     }

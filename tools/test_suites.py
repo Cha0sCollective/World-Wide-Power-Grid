@@ -69,6 +69,7 @@ def audit(root=ROOT):
             text=path.read_text(encoding='utf-8')
             names=re.findall(r'@GameTestHolder\s*\(\s*(?:value\s*=\s*)?"([^"]+)"\s*\)',text)
             if '@GameTestHolder' in text and not names:raise ValueError('Use a literal cataloged GameTest namespace: '+str(path))
+            names+=re.findall(r'templateNamespace\s*=\s*"([^"]+)"',text)
             discovered.update(names)
     missing = discovered - membership.keys()
     if missing: raise ValueError('Unclassified GameTest namespaces: ' + ', '.join(sorted(missing)))
@@ -209,7 +210,11 @@ def command(job, inputs, output):
         return args, directory
     task = ('runUpstreamReferenceServer' if job['reference'] == 'upstream' else 'runReferenceCompatibilityServer') \
         if job.get('operation') == 'reference' else 'runPackagedGameTestServer'
-    args = [sys.executable, str(ROOT/'tools/run_checked.py'), '--timeout', '600', '--', wrapper, task,
+    # These custom reference JavaExec tasks bind their classpath in doFirst.
+    # Generate this loader's Minecraft artifacts before its launch preparation,
+    # including when the preceding SDK check used the other loader.
+    tasks = ['createMinecraftArtifacts', task] if job.get('operation') == 'reference' else [task]
+    args = [sys.executable, str(ROOT/'tools/run_checked.py'), '--timeout', '600', '--', wrapper, *tasks,
         '-PtestArtifact='+inputs['artifacts']['runtime']['path'], '-PtestBackend='+job['backend'],
         '-PtestProfile='+job['profile'], '-Pneo_version='+job['loader'],
         '-PtestDirectory='+str(directory), '-x', 'build', '-x', 'jar', '-x', 'test', '--no-daemon']

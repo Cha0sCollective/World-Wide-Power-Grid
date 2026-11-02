@@ -1,4 +1,6 @@
 """Focused launcher controls only: no Minecraft, Java, Gradle, Git or network."""
+import contextlib
+import io
 import json
 from pathlib import Path
 import shutil
@@ -19,6 +21,34 @@ TOOL_SOURCE = 'e' * 40
 
 class BeforeJvm(Exception):
     pass
+
+
+class StarterCommandChecks(unittest.TestCase):
+    def test_failed_command_retains_its_actual_output_and_failure(self):
+        with tempfile.TemporaryDirectory(dir=LAUNCHER.parents[1]/'build') as folder:
+            log = Path(folder)/'failed.log'
+            failure = subprocess.CalledProcessError(9, ['TEST_ONLY'])
+            def fail(*args, **kwargs):
+                kwargs['stdout'].write('Actual failed electrical assertion\n')
+                raise failure
+            captured = io.StringIO()
+            with patch.object(launcher.subprocess, 'run', side_effect=fail), contextlib.redirect_stderr(captured):
+                with self.assertRaises(subprocess.CalledProcessError) as raised:
+                    launcher.run(['TEST_ONLY'], log)
+            self.assertIs(raised.exception, failure)
+            self.assertEqual(log.read_text(encoding='utf-8'), 'Actual failed electrical assertion\n')
+            self.assertIn(log.read_text(encoding='utf-8'), captured.getvalue())
+
+    def test_successful_command_does_not_duplicate_its_log(self):
+        with tempfile.TemporaryDirectory(dir=LAUNCHER.parents[1]/'build') as folder:
+            log = Path(folder)/'passed.log'
+            def succeed(*args, **kwargs):
+                kwargs['stdout'].write('Actual passed output\n')
+            captured = io.StringIO()
+            with patch.object(launcher.subprocess, 'run', side_effect=succeed), contextlib.redirect_stderr(captured):
+                launcher.run(['TEST_ONLY'], log)
+            self.assertEqual(captured.getvalue(), '')
+            self.assertEqual(log.read_text(encoding='utf-8'), 'Actual passed output\n')
 
 
 class StarterClientChecks(unittest.TestCase):
@@ -85,6 +115,15 @@ class StarterClientChecks(unittest.TestCase):
 
     def test_actual_extracted_basename_is_passed_without_rename(self):
         self.assert_selected_name('StationaryYard')
+
+    def test_server_prepares_its_loader_before_custom_java_exec(self):
+        with patch.object(launcher,'run',side_effect=BeforeJvm) as run:
+            with self.assertRaises(BeforeJvm):
+                launcher.server(self.output,self.runtime,'JAVA')
+        command=[str(value) for value in run.call_args.args[0]]
+        self.assertEqual(command[command.index('createMinecraftArtifacts')+1],'runDocumentationServer')
+        self.assertIn('-Pneo_version=21.1.248',command)
+        self.assertEqual(command[command.index('--timeout')+1],'600')
 
     def test_spaces_and_unicode_are_one_gradle_property_argument(self):
         self.assert_selected_name('Stationary Yard BASE beta.2 Ω')

@@ -26,11 +26,13 @@ def versions(text):
     return values
 
 
-def matrix(loaders):
+def matrix(loaders, installations=('BASE', 'ADDONS')):
     spec = suites.catalog()
+    require(bool(installations) and len(set(installations)) == len(installations)
+            and set(installations) <= {'BASE', 'ADDONS'}, 'Select BASE, ADDONS or both')
     return [dict(os=os_name, loader=loader, backend=backend, installation=installation)
             for loader in loaders for os_name in spec['platforms']
-            for backend in spec['backends'] for installation in ('BASE', 'ADDONS')]
+            for backend in spec['backends'] for installation in installations]
 
 
 def plan(loader, backend, installation, platform):
@@ -57,6 +59,8 @@ def plan(loader, backend, installation, platform):
             if phase != 'SETUP':
                 setup = spec['groups'][group].get('setup_namespaces', [])
                 item['namespaces'] = [n for n in item['namespaces'] if n not in setup]
+            if installation == 'BASE':
+                item['namespaces'] = [n for n in item['namespaces'] if n not in cfg['addon_only_namespaces']]
             jobs.append(item)
     return jobs
 
@@ -136,7 +140,8 @@ def collect(plan_path, inputs_path, reports, output):
     expected = {(r['os'], r['loader'], r['backend'], r['installation']) for r in campaign['matrix']['include']}
     require(len(expected) == len(campaign['matrix']['include']) and expected, 'Invalid campaign matrix')
     loaders=list(dict.fromkeys(r['loader'] for r in campaign['matrix']['include']))
-    require(campaign['matrix']['include']==matrix(versions(','.join(loaders))), 'Incomplete campaign matrix')
+    installations=campaign.get('installations', ['BASE', 'ADDONS'])
+    require(campaign['matrix']['include']==matrix(versions(','.join(loaders)), installations), 'Incomplete campaign matrix')
     seen = set(); entries = []; errors=[]
     for path in sorted(Path(reports).glob('*/result.json')):
         label=path.parent.name
@@ -151,6 +156,7 @@ def collect(plan_path, inputs_path, reports, output):
         except (ValueError,KeyError,OSError) as error:
             errors.append(label+': '+str(error));entries.append(dict(environment=label,status='failed',reason=str(error)))
     result=dict(policy=POLICY, source_sha=inputs['source_sha'], full_acceptance=False,
+                installations=installations, complete_matrix=set(installations)=={'BASE','ADDONS'},
                 status='passed' if seen==expected and not errors else 'failed', environments=entries, errors=errors,
                 missing=['/'.join(i) for i in sorted(expected-seen)])
     suites.write(output,result)
@@ -167,6 +173,7 @@ def collect(plan_path, inputs_path, reports, output):
 def main():
     parser=argparse.ArgumentParser(description=__doc__);sub=parser.add_subparsers(dest='action',required=True)
     p=sub.add_parser('matrix');p.add_argument('--versions',required=True);p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--installations',nargs='+',choices=['BASE','ADDONS'],default=['BASE','ADDONS'])
     p=sub.add_parser('prepare');p.add_argument('--output',type=Path,required=True)
     for action in ('plan','run'):
         p=sub.add_parser(action);p.add_argument('--loader',required=True);p.add_argument('--backend',choices=['NATIVE','JAVA'],required=True)
@@ -176,7 +183,7 @@ def main():
     p.add_argument('--reports',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
     a=parser.parse_args()
     if a.action=='matrix':
-        campaign=dict(policy=POLICY,matrix={'include':matrix(versions(a.versions))})
+        campaign=dict(policy=POLICY,installations=a.installations,matrix={'include':matrix(versions(a.versions),a.installations)})
         a.output.parent.mkdir(parents=True,exist_ok=True);suites.write(a.output,campaign)
         print(json.dumps(campaign['matrix'],separators=(',',':')))
     elif a.action=='prepare':print(prepare(a.output))

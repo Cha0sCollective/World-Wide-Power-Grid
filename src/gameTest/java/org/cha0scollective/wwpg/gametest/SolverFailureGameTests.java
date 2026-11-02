@@ -17,7 +17,7 @@ public final class SolverFailureGameTests {
     @BeforeBatch(batch="wwpg_solver_safety")
     public static void configure(ServerLevel level) { DynamicGameTests.substeps(level); }
 
-    @GameTest(template="empty",batch="wwpg_solver_safety_storage",timeoutTicks=100)
+    @GameTest(template="empty",templateNamespace="wwpg_addon_safety",batch="wwpg_solver_safety_storage",timeoutTicks=100)
     public static void rejectedSubstepsHoldCeeAndAddonStorageAndAvailability(GameTestHelper h) {
         ExtensionApiRejectedSolveGameTests.rejectedSolve(h,false);
     }

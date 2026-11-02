@@ -1,6 +1,6 @@
 # Current status
 
-**[WWPG 0.2.4](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.4)**
+**[WWPG 0.2.5](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.5)**
 is the stable release. It supports the declared stationary factories and
 optional Pinout computer control, and includes **extension API 1.0.0** for
 add-on developers. Existing 0.1.0-beta.5 and beta.4 worlds remain compatible; update WWPG on
@@ -43,26 +43,31 @@ a repaired device. The [developer contract](EXTENSION_API.md) explains those rul
 
 ## What was checked
 
-0.2.4 passed a fresh full headless campaign covering Windows/Linux, Native/Java,
+0.2.5 completed full headless coverage across Windows/Linux, Native/Java,
 BASE/PINOUT and NeoForge 21.1.231/21.1.248: 342 catalog jobs. The Stationary Yard
 is the combined PINOUT edition; runtime and API installation retain both profiles.
-Cold restarts, actual unload/reload cycles, rejection checks, saved-state checks
+The record combines 336 retained passes with six targeted SDK/reference
+completions after test-launch preparation repairs; the original failed attempt
+remains failed. Cold restarts, actual unload/reload cycles, rejection checks, saved-state checks
 and exact exported-archive reopens keep their separate process outcomes.
 
 All 12 separately requested Windows graphical scenarios passed, including yard
 and Workshop interactions, Native/Java integration, two real TCP clients,
 the independently built SDK starter and clean Save and Quit or disconnect/stop.
-The retained 0.2.3 supplemental pin check covers actual aiming, PG highlights,
-native wire input and server acknowledgment; those targeting classes are unchanged.
-The new train regression checks actual overhead movement, meter recovery and
-dimension-owned readings/storage, without certifying train audio or dimension travel.
+Supplemental dev.112 checks retain their original execution identities: 158
+focused Native/Java test executions covering CEE 1.1.3/1.1.4, optional Gauged
+wires, signed panel measurements and native control/repair behavior. An eight-view
+Native client check verifies PG multimeter highlights, revealed panel covers and
+normal Save and Quit. These focused records supplement the full release coverage.
 
 The gameplay jar excludes GameTests and fixtures. The separate test companion
-retains the earlier tests and adds the train and API startup-binding regressions.
+retains 356 GameTest methods, including the variac, panel, probe and control
+regressions. The train checks still cover overhead movement, meter recovery and
+dimension-owned state without certifying train audio or dimension travel.
 Ordinary play uses the gameplay jar alone. API 1.0.0, saves, native solver binaries and all
 sixteen electrical substeps remain compatible.
 
-The [verification record](../release/0.2.4/verification.json) retains actual
+The [verification record](../release/0.2.5/verification.json) retains actual
 source, runtime, companion, helper, world and process identities. Earlier failed
 attempts remain failed. Electrical diagnostics are retained alongside passing
 observations; a passing suite does not certify warning-free operation.
