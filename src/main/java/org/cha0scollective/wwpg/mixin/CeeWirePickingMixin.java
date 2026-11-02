@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class CeeWirePickingMixin {
     @Inject(method = "pick", at = @At("RETURN"), cancellable = true)
     private void wwpg$exposedCeePins(double reach, float partialTick, boolean fluids, CallbackInfoReturnable<HitResult> cir) {
-        if (fluids || !((Object) this instanceof Player player) || !CeeTerminalPicking.holdsPgWire(player)) return;
+        if (fluids || !((Object) this instanceof Player player) || !CeeTerminalPicking.holdsTerminalTool(player)) return;
         var from = player.getEyePosition(partialTick);
         var to = from.add(player.getViewVector(partialTick).scale(reach));
         cir.setReturnValue(CeeTerminalPicking.pick(player, from, to, cir.getReturnValue()));

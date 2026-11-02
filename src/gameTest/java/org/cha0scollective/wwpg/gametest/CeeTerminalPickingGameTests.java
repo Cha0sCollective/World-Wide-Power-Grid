@@ -38,6 +38,64 @@ import org.patryk3211.powergrid.electricity.wire.WireItem;
 public final class CeeTerminalPickingGameTests {
     private static final BlockPos REGULATOR = new BlockPos(5, 2, 5);
 
+    @GameTest(template="empty",timeoutTicks=80)
+    public static void multimeterTargetsExposedPinsWithoutBecomingAWire(GameTestHelper h) {
+        regulator(h);
+        h.runAtTickTime(5,()->{
+            var pos=h.absolutePos(REGULATOR);var player=h.makeMockPlayer(GameType.SURVIVAL);
+            var meter=ModdedItems.MULTIMETER.asStack();player.setItemInHand(InteractionHand.MAIN_HAND,meter);
+            h.assertTrue(!org.patryk3211.powergrid.electricity.wire.IWire.isWire(h.getLevel(),meter.getItem()),"Probe was reclassified as a native wire");
+            for(var facing:Direction.Plane.HORIZONTAL) {
+                h.getLevel().setBlockAndUpdate(pos,h.getBlockState(REGULATOR).setValue(VoltageRegulatorBlock.FACING,facing));
+                for(int id=0;id<2;id++) {
+                    var point=new BlockWireEndpoint(pos,id).getExactPosition(h.getLevel());aim(player,point.add(0,2,0),point);
+                    var hit=player.pick(4,1,false);
+                    h.assertTrue(selected(h,hit,pos)==id,"Probe missed exposed CEE pin "+facing+"/"+id);
+                    h.assertTrue(meter.getItem().useOn(new UseOnContext(player,InteractionHand.MAIN_HAND,(BlockHitResult)hit)).consumesAction(),"Native probe rejected aimed terminal");
+                    h.assertTrue(!meter.has(ModdedDataComponents.CONNECTION_DATA.get()),"Probe created wire connection data");
+                }
+            }
+            var point=new BlockWireEndpoint(pos,0).getExactPosition(h.getLevel());aim(player,point.add(0,3,0),point);
+            h.assertTrue(player.pick(1,1,false).getType()==HitResult.Type.MISS,"Probe exceeded reach");
+            var wall=BlockPos.containing(point.add(0,1.5,0));h.getLevel().setBlockAndUpdate(wall,Blocks.STONE.defaultBlockState());
+            h.assertTrue(player.pick(4,1,false) instanceof BlockHitResult b&&b.getBlockPos().equals(wall),"Probe selected through a wall");
+            h.getLevel().removeBlock(wall,false);player.setItemInHand(InteractionHand.MAIN_HAND,new ItemStack(Items.STICK));
+            player.setItemInHand(InteractionHand.OFF_HAND,meter);
+            h.assertTrue(selected(h,player.pick(4,1,false),pos)==-1,"Offhand-only probe changed native main-hand operation");
+            h.succeed();
+        });
+    }
+
+    @GameTest(template="empty",timeoutTicks=80)
+    public static void multimeterReadsPoweredPanelThroughActualPlayerAim(GameTestHelper h) {
+        var relative=new BlockPos(5,2,5);var sourceRelative=new BlockPos(1,2,5);
+        for(var p:new BlockPos[]{relative,sourceRelative})h.setBlock(p.below(),Blocks.STONE);
+        h.setBlock(relative,CEEBlocks.ELECTRICAL_PANEL.getDefaultState().setValue(ElectricalPanelBlock.FACING,Direction.NORTH));
+        h.setBlock(sourceRelative,ModdedBlocks.CREATIVE_VOLTAGE_SOURCE.get());
+        var panel=h.absolutePos(relative);var source=h.absolutePos(sourceRelative);
+        h.runAtTickTime(5,()->{
+            ((CreativeSourceBlockEntity)h.getBlockEntity(sourceRelative)).setValue(20);
+            var gauge=PanelGameTests.insert(h,panel,
+                    com.george_vi.electroenergetics.content.electrical_panel.attachments.CEEPanelAttachmentTypes.VOLTMETER.get(),
+                    com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelSlot.THIRD_CENTERED);
+            WiringGameTests.connect(h,source,0,panel,gauge.nodes[0].id(),false);
+            WiringGameTests.connect(h,source,1,panel,gauge.nodes[1].id(),false);
+        });
+        h.runAtTickTime(25,()->{
+            var player=h.makeMockPlayer(GameType.SURVIVAL);var stack=ModdedItems.MULTIMETER.asStack();
+            var meter=(org.patryk3211.powergrid.equipment.multimeter.MultimeterItem)stack.getItem();player.setItemInHand(InteractionHand.MAIN_HAND,stack);
+            h.assertTrue(org.cha0scollective.wwpg.wiring.CeeTerminalPicking.revealsPanel(h.getLevel(),stack),"Probe did not reveal the panel it must read");
+            for(int id:new int[]{11,8}) {
+                var point=new BlockWireEndpoint(panel,id).getExactPosition(h.getLevel());aim(player,point.add(0,0,-2),point);
+                var hit=player.pick(4,1,false);h.assertTrue(selected(h,hit,panel)==id,"Probe missed recessed panel terminal "+id);
+                h.assertTrue(meter.useOn(new UseOnContext(player,InteractionHand.MAIN_HAND,(BlockHitResult)hit)).consumesAction(),"Native probe rejected panel terminal");
+            }
+            meter.inventoryTick(stack,h.getLevel(),player,0,true);
+            BoardComponentGameTests.near(h,meter.getMeasurement(h.getLevel(),stack),20,.05,"Actual-aim panel voltage");
+            DynamicGameTests.audit(h);h.succeed();
+        });
+    }
+
     @GameTest(template = "empty", timeoutTicks = 80)
     public static void pgWireMaterialsRevealAndSelectPanelTerminals(GameTestHelper h) {
         var relative = new BlockPos(4, 2, 4);

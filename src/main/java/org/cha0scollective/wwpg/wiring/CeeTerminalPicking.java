@@ -12,6 +12,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.patryk3211.powergrid.electricity.wire.IWire;
+import org.patryk3211.powergrid.equipment.multimeter.MultimeterItem;
 
 /** Shared client crosshair and server wire-tool picking; never changes block/collision shapes. */
 public final class CeeTerminalPicking {
@@ -22,10 +23,25 @@ public final class CeeTerminalPicking {
                 || IWire.isWire(player.level(), player.getOffhandItem().getItem());
     }
 
-    /** CEE's native tools plus every wire accepted by PG's registry, including addons. */
+    public static boolean isPgProbe(ItemStack stack) {
+        return stack.getItem() instanceof MultimeterItem;
+    }
+
+    /** Tool intent only; never changes native wire identity or connection dispatch. */
+    public static boolean isPgTerminalTool(Level level, ItemStack stack) {
+        return isPgProbe(stack) || level != null && IWire.isWire(level, stack.getItem());
+    }
+
+    public static boolean holdsTerminalTool(Player player) {
+        // PG probes operate in the main hand; retain native offhand wire highlighting.
+        return isPgTerminalTool(player.level(), player.getMainHandItem())
+                || IWire.isWire(player.level(), player.getOffhandItem().getItem());
+    }
+
+    /** Keep the visible cover and recessed-terminal picking on the same tool predicate. */
     public static boolean revealsPanel(Level level, ItemStack stack) {
         return stack.is(CEETags.ELECTRICAL_PANEL_SEE_THROUGH)
-                || level != null && IWire.isWire(level, stack.getItem());
+                || isPgTerminalTool(level, stack);
     }
 
     public static HitResult pick(Player player, Vec3 from, Vec3 to, HitResult original) {

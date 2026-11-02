@@ -92,6 +92,15 @@ With Gauged installed, the same checks exercise all its
 registered wire materials, including sizes outside PG's light-wire tag. These headless checks do
 not certify the client's fade animation.
 
+The `wwpg_wires` terminal-tool regressions also use actual PG multimeter rays
+on exposed regulator pins and powered, recessed panel terminals. They require
+native probe selection and accepted voltage without classifying the meter as
+a wire. CEE switch and panel controls must ignore wiring/probe clicks, including
+Shift and offhand attempts, while ordinary control clicks remain effective.
+The guards target native control handlers; bulb, fuse and fuse-holder material
+repair workflows retain their native handling. PG's client highlighter shares
+the main-hand probe selection, with the existing outline geometry and colors.
+
 The `wwpg_api` startup binding regression observes native terminal resolution
 before the first electrical tick. It requires terminal identity to persist
 without initializing CEE infrastructure or preparing models, then verifies the
