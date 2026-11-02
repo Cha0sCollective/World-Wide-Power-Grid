@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.5-rc.1 — local candidate, 1 November 2026
+
+- Support CEE 1.1.4 while preserving 1.1.3, including position-aware variac voltage and heating calculations.
+- Reveal CEE panel terminals when holding PG or Gauged wire tools and allow front-facing selection of recessed terminals. Preserve native CEE tools, wall obstruction, reach limits and live attachment changes.
+- Preserve API 1.0.0, saves, native solver binaries and all 16 electrical substeps. Reuse the passing focused Native/Java checks with explicit artifact comparisons. Full headless and live graphical acceptance remain outstanding for this candidate.
+
 ## 0.2.4 — 28 October 2026
 
 - Keep CEE trains connected across continuous overhead-wire joints and adjacent contacts, avoiding false power drops.
