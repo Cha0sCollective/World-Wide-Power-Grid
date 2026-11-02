@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.5 — release preparation, 2 November 2026
+
+- Support CEE 1.1.4 while retaining 1.1.3, including correct variac voltage and heating readings.
+- Reveal CEE panels for PG/Gauged wires and PG multimeters. Highlight and select CEE terminals, including recessed panel pins, while preserving obstruction and reach limits.
+- Prevent wiring and probe clicks from operating CEE switches, breakers and menu controls, including switches inside fuse holders. Keep normal controls, copper insertion and fuse repairs intact. API 1.0.0, saves, native solver binaries and all 16 substeps remain unchanged.
+
 ## 0.2.5-rc.1 — local candidate, 1 November 2026
 
 - Support CEE 1.1.4 while preserving 1.1.3, including position-aware variac voltage and heating calculations.
