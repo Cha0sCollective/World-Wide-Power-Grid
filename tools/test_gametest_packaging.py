@@ -15,7 +15,7 @@ class GameTestPackaging(unittest.TestCase):
         methods=0
         for file in (root/'src/gameTest/java').rglob('*.java'):
             methods+=len(re.findall(r'@GameTest\s*(?:\(|\n)',file.read_text(encoding='utf-8')))
-        self.assertEqual(methods,355)
+        self.assertEqual(methods,356)
         self.assertEqual(suites.audit()['namespaces'],45)
 
     def test_player_sources_do_not_link_test_helpers(self):

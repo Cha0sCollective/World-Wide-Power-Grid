@@ -97,7 +97,8 @@ on exposed regulator pins and powered, recessed panel terminals. They require
 native probe selection and accepted voltage without classifying the meter as
 a wire. CEE switch and panel controls must ignore wiring/probe clicks, including
 Shift and offhand attempts, while ordinary control clicks remain effective.
-The guards target native control handlers; bulb, fuse and fuse-holder material
+The guards target native control handlers, including installed fuse-holder
+switches; bulb, fuse and fuse-holder material
 repair workflows retain their native handling. PG's client highlighter shares
 the main-hand probe selection, with the existing outline geometry and colors.
 

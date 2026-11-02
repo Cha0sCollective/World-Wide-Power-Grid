@@ -85,6 +85,29 @@ public final class TerminalToolControlGameTests {
         return items;
     }
 
+    @GameTest(template="empty",timeoutTicks=100)
+    public static void terminalToolsDoNotOperateFuseHeldSwitch(GameTestHelper h) {
+        var relative=new BlockPos(4,2,4);h.setBlock(relative.below(),Blocks.STONE);
+        h.setBlock(relative,CEEBlocks.FUSE_HOLDER.getDefaultState().setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING,Direction.UP));
+        h.runAtTickTime(5,()->{
+            var pos=h.absolutePos(relative);var player=h.makeMockPlayer(GameType.SURVIVAL);
+            var point=pos.getCenter().add(.25,.5,0);
+            var hit=new BlockHitResult(point,Direction.UP,pos,false);
+            var item=CEEBlocks.CUT_OFF_SWITCH.asStack();player.setItemInHand(InteractionHand.MAIN_HAND,item);
+            h.assertTrue(h.getLevel().getBlockState(pos).useItemOn(item,h.getLevel(),player,InteractionHand.MAIN_HAND,hit).consumesAction()&&item.isEmpty(),"Native held switch insertion failed");
+            var before=snapshot(h,pos);
+            for(var tool:tools(h)) {
+                player.setItemInHand(InteractionHand.MAIN_HAND,tool.copy());
+                var result=h.getLevel().getBlockState(pos).useItemOn(player.getMainHandItem(),h.getLevel(),player,InteractionHand.MAIN_HAND,hit);
+                h.assertTrue(!result.consumesAction()&&before.equals(snapshot(h,pos)),"Terminal tool operated or replaced held switch: "+tool);
+            }
+            player.setItemInHand(InteractionHand.MAIN_HAND,ItemStack.EMPTY);
+            h.assertTrue(h.getLevel().getBlockState(pos).useItemOn(ItemStack.EMPTY,h.getLevel(),player,InteractionHand.MAIN_HAND,hit).consumesAction()
+                    &&!before.equals(snapshot(h,pos)),"Normal held-switch operation was blocked");
+            h.succeed();
+        });
+    }
+
     private static void protectedClick(GameTestHelper h,Player player,BlockPos pos,Vec3 point,ItemStack tool) {
         protectedClick(h,player,pos,point,tool,InteractionHand.MAIN_HAND,false);
     }
