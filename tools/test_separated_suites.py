@@ -99,6 +99,16 @@ class SelectionChecks(unittest.TestCase):
         self.assertEqual(args[args.index('--timeout')+1],'600')
         self.assertIn('-PtestExampleArtifact=frozen/example.jar',args)
 
+    def test_references_prepare_their_loader_before_custom_java_exec(self):
+        inputs={'version':'TEST_ONLY','artifacts':{r:{'path':'frozen/'+r+'.jar'} for r in suites.ROLES+('reference',)}}
+        jobs=[j for j in suites.plan('full-headless') if j.get('operation')=='reference']
+        for job in jobs:
+            args,_=suites.command(job,inputs,Path('scratch'))
+            task='runUpstreamReferenceServer' if job['reference']=='upstream' else 'runReferenceCompatibilityServer'
+            self.assertEqual(args[args.index('createMinecraftArtifacts')+1],task)
+            self.assertIn('-Pneo_version='+job['loader'],args)
+            self.assertEqual(args[args.index('--timeout')+1],'600')
+
 
 class EvidenceChecks(unittest.TestCase):
     def setUp(self):

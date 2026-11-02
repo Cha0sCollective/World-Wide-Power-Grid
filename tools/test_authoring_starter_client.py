@@ -116,6 +116,15 @@ class StarterClientChecks(unittest.TestCase):
     def test_actual_extracted_basename_is_passed_without_rename(self):
         self.assert_selected_name('StationaryYard')
 
+    def test_server_prepares_its_loader_before_custom_java_exec(self):
+        with patch.object(launcher,'run',side_effect=BeforeJvm) as run:
+            with self.assertRaises(BeforeJvm):
+                launcher.server(self.output,self.runtime,'JAVA')
+        command=[str(value) for value in run.call_args.args[0]]
+        self.assertEqual(command[command.index('createMinecraftArtifacts')+1],'runDocumentationServer')
+        self.assertIn('-Pneo_version=21.1.248',command)
+        self.assertEqual(command[command.index('--timeout')+1],'600')
+
     def test_spaces_and_unicode_are_one_gradle_property_argument(self):
         self.assert_selected_name('Stationary Yard BASE beta.2 Ω')
 

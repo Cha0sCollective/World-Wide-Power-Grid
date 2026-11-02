@@ -210,7 +210,11 @@ def command(job, inputs, output):
         return args, directory
     task = ('runUpstreamReferenceServer' if job['reference'] == 'upstream' else 'runReferenceCompatibilityServer') \
         if job.get('operation') == 'reference' else 'runPackagedGameTestServer'
-    args = [sys.executable, str(ROOT/'tools/run_checked.py'), '--timeout', '600', '--', wrapper, task,
+    # These custom reference JavaExec tasks bind their classpath in doFirst.
+    # Generate this loader's Minecraft artifacts before its launch preparation,
+    # including when the preceding SDK check used the other loader.
+    tasks = ['createMinecraftArtifacts', task] if job.get('operation') == 'reference' else [task]
+    args = [sys.executable, str(ROOT/'tools/run_checked.py'), '--timeout', '600', '--', wrapper, *tasks,
         '-PtestArtifact='+inputs['artifacts']['runtime']['path'], '-PtestBackend='+job['backend'],
         '-PtestProfile='+job['profile'], '-Pneo_version='+job['loader'],
         '-PtestDirectory='+str(directory), '-x', 'build', '-x', 'jar', '-x', 'test', '--no-daemon']

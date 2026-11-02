@@ -110,7 +110,7 @@ def server(output, runtime, backend, test_fixtures=None):
     for phase in ('SETUP', 'VERIFY'):
         log = output / (backend + '-' + phase + '.log')
         run([sys.executable, ROOT / 'tools/run_checked.py', '--timeout', '600', '--',
-             wrapper, 'runDocumentationServer', '-I', 'tools/documentation_acceptance/init.gradle',
+             wrapper, 'createMinecraftArtifacts', 'runDocumentationServer', '-I', 'tools/documentation_acceptance/init.gradle',
              '-PdocStarterJar=' + str(starter), '-PdocRuntimeJar=' + str(runtime),
              '-PdocDirectory=' + str(directory), '-PtestNamespaces=wwpg_doc',
              '-PtestBackend=' + backend, '-PdocPhase=' + phase,
