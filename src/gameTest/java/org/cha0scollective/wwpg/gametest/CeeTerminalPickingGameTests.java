@@ -2,6 +2,7 @@ package org.cha0scollective.wwpg.gametest;
 
 import com.george_vi.electroenergetics.CEEBlocks;
 import com.george_vi.electroenergetics.CEEItems;
+import com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock;
 import com.george_vi.electroenergetics.content.transmission_distribution.voltage_regulator.VoltageRegulatorBlock;
 import com.george_vi.electroenergetics.foundation.base.DirectionalRolledDeviceBlock;
 import net.minecraft.core.BlockPos;
@@ -42,7 +43,7 @@ public final class CeeTerminalPickingGameTests {
         var relative = new BlockPos(4, 2, 4);
         h.setBlock(relative.below(), Blocks.STONE);
         h.setBlock(relative, CEEBlocks.ELECTRICAL_PANEL.getDefaultState().setValue(
-                com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock.FACING, Direction.NORTH));
+                ElectricalPanelBlock.FACING, Direction.NORTH));
         h.runAtTickTime(5, () -> {
             var tag = com.george_vi.electroenergetics.CEETags.ELECTRICAL_PANEL_SEE_THROUGH;
             h.assertTrue(CEEItems.WIRE_SPOOL.asStack().is(tag) && CEEItems.EMPTY_SPOOL.asStack().is(tag),
@@ -63,23 +64,73 @@ public final class CeeTerminalPickingGameTests {
                     com.george_vi.electroenergetics.content.electrical_panel.attachments.CEEPanelAttachmentTypes.VOLTMETER.get(),
                     com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelSlot.THIRD_CENTERED);
             var player = h.makeMockPlayer(GameType.SURVIVAL);
-            for (var wire : wires) {
-                h.assertTrue(wire.is(tag), "PG wire does not reveal panel terminals: " + wire);
-                for (var node : gauge.nodes) {
-                    player.setItemInHand(InteractionHand.MAIN_HAND, wire.copy());
-                    var point = new BlockWireEndpoint(panel, node.id()).getExactPosition(h.getLevel());
-                    aim(player, point.add(0, 0, -2), point);
-                    var hit = player.pick(4, 1, false);
-                    h.assertTrue(selected(h, hit, panel) == node.id(), "PG wire cannot aim at the exposed panel terminal: " + wire);
-                    click(player, (BlockHitResult) hit);
-                    var connection = player.getMainHandItem().get(ModdedDataComponents.CONNECTION_DATA.get());
-                    h.assertTrue(connection != null && new BlockWireEndpoint(panel, node.id()).equals(connection.endpoint()),
-                            "PG wire handler did not select the panel terminal: " + wire);
-                    h.assertTrue(player.getMainHandItem().getCount() == 64, "Selecting a panel terminal consumed wire");
+            for (var facing : Direction.Plane.HORIZONTAL) {
+                h.getLevel().setBlockAndUpdate(panel, h.getBlockState(relative).setValue(ElectricalPanelBlock.FACING, facing));
+                for (var wire : wires) {
+                    h.assertTrue(wire.is(tag), "PG wire does not reveal panel terminals: " + wire);
+                    for (var node : gauge.nodes) {
+                        player.setItemInHand(InteractionHand.MAIN_HAND, wire.copy());
+                        var point = new BlockWireEndpoint(panel, node.id()).getExactPosition(h.getLevel());
+                        aim(player, point.add(Vec3.atLowerCornerOf(facing.getNormal()).scale(2)), point);
+                        var hit = player.pick(4, 1, false);
+                        h.assertTrue(selected(h, hit, panel) == node.id(), "PG wire cannot aim at the exposed panel terminal: " + wire + "/" + facing);
+                        click(player, (BlockHitResult) hit);
+                        var connection = player.getMainHandItem().get(ModdedDataComponents.CONNECTION_DATA.get());
+                        h.assertTrue(connection != null && new BlockWireEndpoint(panel, node.id()).equals(connection.endpoint()),
+                                "PG wire handler did not select the panel terminal: " + wire);
+                        h.assertTrue(player.getMainHandItem().getCount() == 64, "Selecting a panel terminal consumed wire");
+                    }
                 }
             }
             org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info(
                     "PANEL_PG_WIRING_PASSED: baseMaterials=4, gaugedMaterials={}, nativeToolsRetained=true", gauged);
+            h.succeed();
+        });
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 80)
+    public static void panelPickingRespectsCoverSidesOcclusionAndReach(GameTestHelper h) {
+        var relative = new BlockPos(4, 2, 4);
+        h.setBlock(relative.below(), Blocks.STONE);
+        h.setBlock(relative, CEEBlocks.ELECTRICAL_PANEL.getDefaultState().setValue(ElectricalPanelBlock.FACING, Direction.NORTH));
+        h.runAtTickTime(5, () -> {
+            var panel = h.absolutePos(relative);
+            var gauge = PanelGameTests.insert(h, panel,
+                    com.george_vi.electroenergetics.content.electrical_panel.attachments.CEEPanelAttachmentTypes.VOLTMETER.get(),
+                    com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelSlot.THIRD_CENTERED);
+            var player = h.makeMockPlayer(GameType.SURVIVAL);
+            player.setItemInHand(InteractionHand.MAIN_HAND, ModdedItems.GOLDEN_WIRE.asStack(64));
+            var point = new BlockWireEndpoint(panel, gauge.nodes[0].id()).getExactPosition(h.getLevel());
+            aim(player, point.add(0, 0, -2), point);
+            h.assertTrue(selected(h, player.pick(4, 1, false), panel) == gauge.nodes[0].id(), "Open panel control pin was not selectable");
+            h.assertTrue(selected(h, player.pick(1.9, 1, false), panel) == -1, "Panel picking exceeded reach inside its cover");
+            var obstruction = panel.north();
+            h.getLevel().setBlockAndUpdate(obstruction, Blocks.STONE.defaultBlockState());
+            var blocked = player.pick(4, 1, false);
+            h.assertTrue(blocked instanceof BlockHitResult hit && hit.getBlockPos().equals(obstruction), "Panel picking passed through a wall");
+            h.getLevel().removeBlock(obstruction, false);
+            for (var side : Direction.values()) {
+                if (side == Direction.NORTH) continue;
+                aim(player, point.add(Vec3.atLowerCornerOf(side.getNormal()).scale(2)), point);
+                h.assertTrue(selected(h, player.pick(4, 1, false), panel) == -1, "Panel picked through its back or side: " + side);
+            }
+            aim(player, point.add(0, 0, -2), point);
+            for (var stack : new ItemStack[]{ItemStack.EMPTY, new ItemStack(Items.STICK), CEEItems.WIRE_SPOOL.asStack()}) {
+                player.setItemInHand(InteractionHand.MAIN_HAND, stack);
+                var vanilla = outline(h, player, 4);
+                var actual = player.pick(4, 1, false);
+                h.assertTrue(actual.getType() == vanilla.getType() && actual.getLocation().equals(vanilla.getLocation()),
+                        "Panel picking changed CEE or ordinary tool targeting");
+            }
+            player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.STICK));
+            player.setItemInHand(InteractionHand.OFF_HAND, ModdedItems.GOLDEN_WIRE.asStack());
+            h.assertTrue(selected(h, player.pick(4, 1, false), panel) == -1, "Offhand wire picked through a closed cover");
+            player.setItemInHand(InteractionHand.MAIN_HAND, ModdedItems.GOLDEN_WIRE.asStack());
+            var be = (com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlockEntity) h.getBlockEntity(relative);
+            gauge.onRemoved(player);
+            be.getAttachments()[com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelSlot.THIRD_CENTERED.ordinal()] = null;
+            be.attachmentUpdate();
+            h.assertTrue(selected(h, player.pick(4, 1, false), panel) == -1, "Removed attachment retained a panel target");
             h.succeed();
         });
     }

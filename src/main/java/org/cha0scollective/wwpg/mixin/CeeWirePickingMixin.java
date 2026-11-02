@@ -17,6 +17,6 @@ public abstract class CeeWirePickingMixin {
         if (fluids || !((Object) this instanceof Player player) || !CeeTerminalPicking.holdsPgWire(player)) return;
         var from = player.getEyePosition(partialTick);
         var to = from.add(player.getViewVector(partialTick).scale(reach));
-        cir.setReturnValue(CeeTerminalPicking.pick(player.level(), from, to, cir.getReturnValue()));
+        cir.setReturnValue(CeeTerminalPicking.pick(player, from, to, cir.getReturnValue()));
     }
 }

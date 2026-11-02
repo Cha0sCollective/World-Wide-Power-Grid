@@ -85,7 +85,10 @@ the grouped redirects require exactly one recognized upstream voltage call.
 The `wwpg_wires` panel-tool regression checks CEE's panel-cover item tag for all
 four PG wire materials, preserves native CEE tools, and excludes unrelated items.
 Actual player rays and PG wire dispatch must select both sparse panel terminals
-without consuming wire. With Gauged installed, the same checks exercise its
+without consuming wire, across all horizontal panel orientations. The front-only
+cover exception must preserve wall occlusion, reach, back/side blocking, closed
+offhand-only covers, native CEE tool behavior and live attachment removal.
+With Gauged installed, the same checks exercise its
 registered wire materials through PG's light-wire tag. These headless checks do
 not certify the client's fade animation.
 
