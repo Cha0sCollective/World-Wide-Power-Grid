@@ -76,7 +76,11 @@ public final class CeeTerminalPickingGameTests {
                         h.assertTrue(selected(h, hit, panel) == node.id(), "PG wire cannot aim at the exposed panel terminal: " + wire + "/" + facing);
                         click(player, (BlockHitResult) hit);
                         var connection = player.getMainHandItem().get(ModdedDataComponents.CONNECTION_DATA.get());
-                        h.assertTrue(connection != null && new BlockWireEndpoint(panel, node.id()).equals(connection.endpoint()),
+                        // PG cords assemble terminal pairs before selecting a cable endpoint.
+                        var selectedEndpoint = connection == null ? null
+                                : org.patryk3211.powergrid.electricity.wire.IWire.isCord(h.getLevel(), wire.getItem())
+                                ? connection.half() : connection.endpoint();
+                        h.assertTrue(new BlockWireEndpoint(panel, node.id()).equals(selectedEndpoint),
                                 "PG wire handler did not select the panel terminal: " + wire);
                         h.assertTrue(player.getMainHandItem().getCount() == 64, "Selecting a panel terminal consumed wire");
                     }
