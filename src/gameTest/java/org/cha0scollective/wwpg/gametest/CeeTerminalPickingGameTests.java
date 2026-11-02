@@ -82,16 +82,19 @@ public final class CeeTerminalPickingGameTests {
             WiringGameTests.connect(h,source,1,panel,gauge.nodes[1].id(),false);
         });
         h.runAtTickTime(25,()->{
-            var player=h.makeMockPlayer(GameType.SURVIVAL);var stack=ModdedItems.MULTIMETER.asStack();
-            var meter=(org.patryk3211.powergrid.equipment.multimeter.MultimeterItem)stack.getItem();player.setItemInHand(InteractionHand.MAIN_HAND,stack);
-            h.assertTrue(org.cha0scollective.wwpg.wiring.CeeTerminalPicking.revealsPanel(h.getLevel(),stack),"Probe did not reveal the panel it must read");
-            for(int id:new int[]{11,8}) {
-                var point=new BlockWireEndpoint(panel,id).getExactPosition(h.getLevel());aim(player,point.add(0,0,-2),point);
-                var hit=player.pick(4,1,false);h.assertTrue(selected(h,hit,panel)==id,"Probe missed recessed panel terminal "+id);
-                h.assertTrue(meter.useOn(new UseOnContext(player,InteractionHand.MAIN_HAND,(BlockHitResult)hit)).consumesAction(),"Native probe rejected panel terminal");
+            var player=h.makeMockPlayer(GameType.SURVIVAL);
+            for(boolean reverse:new boolean[]{false,true}) {
+                var stack=ModdedItems.MULTIMETER.asStack();
+                var meter=(org.patryk3211.powergrid.equipment.multimeter.MultimeterItem)stack.getItem();player.setItemInHand(InteractionHand.MAIN_HAND,stack);
+                h.assertTrue(org.cha0scollective.wwpg.wiring.CeeTerminalPicking.revealsPanel(h.getLevel(),stack),"Probe did not reveal the panel it must read");
+                for(int id:reverse?new int[]{11,8}:new int[]{8,11}) {
+                    var point=new BlockWireEndpoint(panel,id).getExactPosition(h.getLevel());aim(player,point.add(0,0,-2),point);
+                    var hit=player.pick(4,1,false);h.assertTrue(selected(h,hit,panel)==id,"Probe missed recessed panel terminal "+id);
+                    h.assertTrue(meter.useOn(new UseOnContext(player,InteractionHand.MAIN_HAND,(BlockHitResult)hit)).consumesAction(),"Native probe rejected panel terminal");
+                }
+                meter.inventoryTick(stack,h.getLevel(),player,0,true);
+                BoardComponentGameTests.near(h,meter.getMeasurement(h.getLevel(),stack),reverse?-20:20,.05,"Actual-aim signed panel voltage");
             }
-            meter.inventoryTick(stack,h.getLevel(),player,0,true);
-            BoardComponentGameTests.near(h,meter.getMeasurement(h.getLevel(),stack),20,.05,"Actual-aim panel voltage");
             DynamicGameTests.audit(h);h.succeed();
         });
     }
