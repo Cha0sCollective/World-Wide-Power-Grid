@@ -45,10 +45,10 @@ public final class CeeTerminalPickingGameTests {
         h.setBlock(relative, CEEBlocks.ELECTRICAL_PANEL.getDefaultState().setValue(
                 ElectricalPanelBlock.FACING, Direction.NORTH));
         h.runAtTickTime(5, () -> {
-            var tag = com.george_vi.electroenergetics.CEETags.ELECTRICAL_PANEL_SEE_THROUGH;
-            h.assertTrue(CEEItems.WIRE_SPOOL.asStack().is(tag) && CEEItems.EMPTY_SPOOL.asStack().is(tag),
+            h.assertTrue(org.cha0scollective.wwpg.wiring.CeeTerminalPicking.revealsPanel(h.getLevel(), CEEItems.WIRE_SPOOL.asStack())
+                    && org.cha0scollective.wwpg.wiring.CeeTerminalPicking.revealsPanel(h.getLevel(), CEEItems.EMPTY_SPOOL.asStack()),
                     "PG compatibility replaced CEE's native panel tools");
-            h.assertTrue(!new ItemStack(Items.STICK).is(tag), "An unrelated item reveals panel terminals");
+            h.assertTrue(!org.cha0scollective.wwpg.wiring.CeeTerminalPicking.revealsPanel(h.getLevel(), new ItemStack(Items.STICK)), "An unrelated item reveals panel terminals");
             var wires = new java.util.ArrayList<ItemStack>(java.util.List.of(ModdedItems.WIRE.asStack(64),
                     ModdedItems.IRON_WIRE.asStack(64), ModdedItems.GOLDEN_WIRE.asStack(64), ModdedItems.INSULATED_COPPER_WIRE.asStack(64)));
             for (var entry : net.minecraft.core.registries.BuiltInRegistries.ITEM.entrySet()) {
@@ -67,7 +67,7 @@ public final class CeeTerminalPickingGameTests {
             for (var facing : Direction.Plane.HORIZONTAL) {
                 h.getLevel().setBlockAndUpdate(panel, h.getBlockState(relative).setValue(ElectricalPanelBlock.FACING, facing));
                 for (var wire : wires) {
-                    h.assertTrue(wire.is(tag), "PG wire does not reveal panel terminals: " + wire);
+                    h.assertTrue(org.cha0scollective.wwpg.wiring.CeeTerminalPicking.revealsPanel(h.getLevel(), wire), "PG wire does not reveal panel terminals: " + wire);
                     for (var node : gauge.nodes) {
                         player.setItemInHand(InteractionHand.MAIN_HAND, wire.copy());
                         var point = new BlockWireEndpoint(panel, node.id()).getExactPosition(h.getLevel());

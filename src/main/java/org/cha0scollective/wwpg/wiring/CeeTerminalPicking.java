@@ -5,6 +5,8 @@ import com.george_vi.electroenergetics.CEETags;
 import com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.AABB;
@@ -18,6 +20,12 @@ public final class CeeTerminalPicking {
     public static boolean holdsPgWire(Player player) {
         return IWire.isWire(player.level(), player.getMainHandItem().getItem())
                 || IWire.isWire(player.level(), player.getOffhandItem().getItem());
+    }
+
+    /** CEE's native tools plus every wire accepted by PG's registry, including addons. */
+    public static boolean revealsPanel(Level level, ItemStack stack) {
+        return stack.is(CEETags.ELECTRICAL_PANEL_SEE_THROUGH)
+                || level != null && IWire.isWire(level, stack.getItem());
     }
 
     public static HitResult pick(Player player, Vec3 from, Vec3 to, HitResult original) {
@@ -50,7 +58,7 @@ public final class CeeTerminalPicking {
     private static BlockHitResult panelTerminal(Player player, Vec3 from, Vec3 to, HitResult original) {
         // Match CEE's main-hand cover visibility; an offhand wire must not pick
         // through a cover that CEE is still displaying as closed.
-        if (!player.getMainHandItem().is(CEETags.ELECTRICAL_PANEL_SEE_THROUGH)
+        if (!revealsPanel(player.level(), player.getMainHandItem())
                 || !(original instanceof BlockHitResult hit) || original.getType() != HitResult.Type.BLOCK) return null;
         var level = player.level();
         var pos = hit.getBlockPos();

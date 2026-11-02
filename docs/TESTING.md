@@ -82,14 +82,14 @@ It rejects global-index voltage reads and verifies the resulting temperature.
 Run it against both CEE 1.1.3 and 1.1.4 when changing the compatibility redirect;
 the grouped redirects require exactly one recognized upstream voltage call.
 
-The `wwpg_wires` panel-tool regression checks CEE's panel-cover item tag for all
+The `wwpg_wires` panel-tool regression checks the shared cover predicate for all
 four PG wire materials, preserves native CEE tools, and excludes unrelated items.
 Actual player rays and PG wire dispatch must select both sparse panel terminals
 without consuming wire, across all horizontal panel orientations. The front-only
 cover exception must preserve wall occlusion, reach, back/side blocking, closed
 offhand-only covers, native CEE tool behavior and live attachment removal.
-With Gauged installed, the same checks exercise its
-registered wire materials through PG's light-wire tag. These headless checks do
+With Gauged installed, the same checks exercise all its
+registered wire materials, including sizes outside PG's light-wire tag. These headless checks do
 not certify the client's fade animation.
 
 The `wwpg_api` startup binding regression observes native terminal resolution
