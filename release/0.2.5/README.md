@@ -1,30 +1,35 @@
-# 0.2.5 release preparation
+# WWPG 0.2.5 release record
 
-This version packages dev.112's panel and multimeter interactions, CEE control
-protection and compatibility with CEE 1.1.3 and 1.1.4. It retains 0.2.4's earlier
-fixes, API 1.0.0, saves, native binaries and all 16 electrical substeps.
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.5)
+· [Verification](verification.json) · [Download hashes](download-layout.json).
 
-The build is prepared locally; it is not an accepted or published release.
-The current stable release remains
-[0.2.4](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.4).
+This release packages dev.112's CEE compatibility and terminal-tool interactions.
+CEE 1.1.4 and 1.1.3 use their correct native variac voltage calls. PG/Gauged wires
+and the PG multimeter reveal CEE panel terminals; the multimeter also shows native
+terminal highlights. Wiring and probing clicks leave native controls alone,
+including installed fuse-holder switches, without blocking normal controls,
+copper insertion or fuse repairs.
 
-Packaging preserves the original dev.112 focused Native/Java and short client
-execution identities. The comparison must establish that only version metadata
-changes in the gameplay and fixture jars. Those records are not complete
-headless or graphical release acceptance.
+Full headless acceptance covers all 342 catalog jobs across Windows/Linux,
+Native/Java, BASE/PINOUT and NeoForge 21.1.231/21.1.248. All twelve separately
+requested Windows client scenarios cover exact exported saves, native inputs,
+two real TCP clients, the independent SDK starter and clean Save and Quit or
+disconnect/server stop. These full lanes use CEE 1.1.3.
 
-Build the gameplay jar and separate test companion with Java 21:
+The version-only comparison preserves dev.112's actual focused execution source:
+158 Native/Java tests covering CEE 1.1.3/1.1.4 and optional Gauged, plus an
+eight-view Native client check of meter highlights and panel covers. They
+supplement the full lanes rather than being relabelled as full acceptance.
+The full headless record retains 336 passing jobs from the original attempt and
+six targeted SDK/reference completions after launcher preparation repairs. The
+original failed attempt remains failed. All original evidence is retained.
 
-```text
-gradlew.bat jar gameTestJar apiJar ceeApiJar --no-daemon
-```
+API 1.0.0, saves, native solver binaries, equations and all sixteen electrical
+substeps are unchanged. Ordinary players install only the gameplay jar; tests
+and fixtures remain in the separate companion inside the verification bundle.
 
-Install only `wwpg-0.2.5.jar` for ordinary play. The matching
-`wwpg-0.2.5-gametests.jar` is test-only and belongs inside the verification
-bundle when published.
-
-Before public release, complete the independently requested
-[acceptance lanes](../../docs/TESTING.md), then follow the
-[five-download release procedure](../../docs/RELEASING.md). A packaging request
-does not launch either full suite. Prior releases, RC.1, dev.112 and their
-evidence remain unchanged.
+The benchmark archive preserves the published 14,650-node native save bytes;
+only release/jar labels change. No performance benchmark ran for this release,
+and 20 TPS remains uncertified. Electrical warnings remain inspectable alongside
+passing observations. Train audio, train dimension travel and arbitrary
+third-party terminal geometry are not certified by these checks.

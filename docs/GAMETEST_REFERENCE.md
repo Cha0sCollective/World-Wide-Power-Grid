@@ -6,6 +6,7 @@ The declarations were relocated without removing tests in local candidate 0.2.2-
 Inventory updated **26 October 2026** for the five dev.102 terminal-targeting regressions.
 Inventory updated **28 October 2026** for the local dev.106 train-circuit regression.
 Inventory updated **28 October 2026** for the API startup-binding regression in the 0.2.4 candidate.
+Inventory updated **2 November 2026** for dev.112 panel/probe/control regressions and the classified addon-only safety namespaces.
 Source links below follow that new location. This is a reference to the assertions in the current source, **not a new test
 run or a claim that every entry has passed in every environment**. See
 [Testing process](TESTING.md) for execution and [published release records](../release/README.md)
@@ -15,14 +16,14 @@ for historical passing evidence.
 
 | Where the declarations live | Test methods | Source files |
 | --- | ---: | ---: |
-| Companion test jar: `src/gameTest/java/.../gametest` | 346 | 114 |
+| Companion test jar: `src/gameTest/java/.../gametest` | 356 | 117 |
 | Independently built general and CEE/PG example addons | 13 | 3 |
 | Extracted SDK acceptance helper | 4 | 1 |
 | Separate short TCP graphical helper | 1 | 1 |
-| **Total** | **364** | **119** |
+| **Total** | **374** | **122** |
 
-There are **41 namespaces**. These are annotated entry points, not 364 unique
-device models, 364 simultaneous tests or the number of invocations in a complete
+There are **45 namespaces**. These are annotated entry points, not 374 unique
+device models, 374 simultaneous tests or the number of invocations in a complete
 campaign. A method can operate many devices and check many assertions. Several
 focused namespaces intentionally delegate to an existing fixture. Compilation,
 JUnit, Python tooling, SDK build checks and native C fault-injection tests are
@@ -33,7 +34,7 @@ method back to its source. Counts include nested fixture behavior and delegated
 checks in the description, but each annotated entry point is counted once.
 Method names are source identifiers, not copy-and-paste `/test` command IDs.
 
-**PG** means Power Grid; **CEE** means Create: Electrical Engineering. A
+**PG** means Power Grid; **CEE** means Create: Electro Energetics. A
 **mixed** circuit connects their native devices/wires through WWPG. **Unavailable**
 means a measurement explicitly cannot be used; it is different from a valid zero.
 
@@ -78,7 +79,7 @@ means a measurement explicitly cannot be used; it is different from a valid zero
 - Reference and legacy real-client namespaces are special selections, not an
   implicit part of every electrical group. `wwpg_doc` and `wwpg_ci_client` live
   in separate helpers; the latter and the legacy multiplayer entries need real
-  clients. The 344 companion entries include the two legacy client entry points.
+  clients. The 356 companion entries include the two legacy client entry points.
 - Registry/inventory checks prove existence/accounting. Server-side control
   handlers and mock-player operations do not prove real mouse/keyboard input,
   rendered geometry, sound playback or multiplayer synchronization.
@@ -351,7 +352,7 @@ Entry points:
 
 Namespace: `wwpg`. [Source](../src/gameTest/java/org/cha0scollective/wwpg/gametest/MechanicalGameTests.java).
 
-Checks CEE motor RMS sampling uses PG's electrical schedule, mechanical capacity and direction follow mixed supply, and motor output stops without power. Also changes a variac and checks the PG load voltage.
+Checks CEE motor RMS sampling uses PG's electrical schedule, mechanical capacity and direction follow mixed supply, and motor output stops without power. Also changes a variac and checks the PG load voltage. Its native heating assertion requires position-aware winding voltage and signed current on both recognized CEE 1.1.3/1.1.4 call layouts.
 
 Entry points:
 
@@ -888,11 +889,37 @@ highlight screenshots or full graphical acceptance.
 
 Entry points:
 
+The newer entries also exercise actual PG multimeter selection without wire
+classification, accepted signed panel readings, shared panel reveal predicates,
+all registered Gauged materials, front-cover bounds, back/side occlusion and
+live attachment removal. These remain headless checks; the retained short client
+proof separately observes panel fade, PG labels and native outlines.
+
+- `multimeterTargetsExposedPinsWithoutBecomingAWire`
+- `multimeterReadsPoweredPanelThroughActualPlayerAim`
+- `pgWireMaterialsRevealAndSelectPanelTerminals`
+- `panelPickingRespectsCoverSidesOcclusionAndReach`
 - `allPgWiresSelectUpperRegulatorPinsAcrossRotations`
 - `pickingRespectsOcclusionReachAndOtherTools`
 - `capacitorPinsRemainSelectableAcrossNativeOrientations`
 - `stackedRegulatorPickingObservesLiveAssemblyEnds`
 - `realAimGoldenWireConnectionsCarryRegulatedPower`
+
+#### TerminalToolControlGameTests
+
+Namespace: `wwpg_wires`. [Source](../src/gameTest/java/org/cha0scollective/wwpg/gametest/TerminalToolControlGameTests.java).
+
+Exercises native standalone controls, all eleven stationary panel attachments
+and an installed fuse-holder switch. PG wires/probes, optional Gauged materials,
+Shift clicks and relevant offhand cases must not operate controls; ordinary
+empty-hand operations must still work. Existing bulb/fuse/material fixtures
+separately retain their native repair assertions.
+
+Entry points:
+
+- `terminalToolsDoNotOperateStandaloneCeeControls`
+- `terminalToolsDoNotOperateCeePanelControls`
+- `terminalToolsDoNotOperateFuseHeldSwitch`
 
 #### NativeBulbItemsGameTests
 

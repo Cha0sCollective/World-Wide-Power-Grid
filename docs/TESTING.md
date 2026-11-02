@@ -142,6 +142,14 @@ remain separate. Compare every native payload and all uncompressed `level.dat`
 NBT outside `spawnRadius`; a changed electrical save requires broader testing.
 The equivalent focused tools are `recheck_workshop_spawn.py prepare` and `run`.
 
+A headless continuation retains complete passing lifecycle groups and runs the
+failed or unexecuted groups in fresh directories. Its minimum-loader worker also
+owns the SDK starter check on the client loader; both remain bound to the same
+platform/backend/profile and exact catalog job IDs. Custom reference and SDK
+launchers prepare the selected loader's Minecraft artifacts before their launch
+preparation. The gameplay jar stays frozen. Failed SDK commands include their
+underlying output in the retained launcher log even when no passing proof exists.
+
 ## Manual parallel loader compatibility
 
 The **Loader compatibility checks** GitHub Action accepts one to four newer
