@@ -38,6 +38,53 @@ public final class CeeTerminalPickingGameTests {
     private static final BlockPos REGULATOR = new BlockPos(5, 2, 5);
 
     @GameTest(template = "empty", timeoutTicks = 80)
+    public static void pgWireMaterialsRevealAndSelectPanelTerminals(GameTestHelper h) {
+        var relative = new BlockPos(4, 2, 4);
+        h.setBlock(relative.below(), Blocks.STONE);
+        h.setBlock(relative, CEEBlocks.ELECTRICAL_PANEL.getDefaultState().setValue(
+                com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlock.FACING, Direction.NORTH));
+        h.runAtTickTime(5, () -> {
+            var tag = com.george_vi.electroenergetics.CEETags.ELECTRICAL_PANEL_SEE_THROUGH;
+            h.assertTrue(CEEItems.WIRE_SPOOL.asStack().is(tag) && CEEItems.EMPTY_SPOOL.asStack().is(tag),
+                    "PG compatibility replaced CEE's native panel tools");
+            h.assertTrue(!new ItemStack(Items.STICK).is(tag), "An unrelated item reveals panel terminals");
+            var wires = new java.util.ArrayList<ItemStack>(java.util.List.of(ModdedItems.WIRE.asStack(64),
+                    ModdedItems.IRON_WIRE.asStack(64), ModdedItems.GOLDEN_WIRE.asStack(64), ModdedItems.INSULATED_COPPER_WIRE.asStack(64)));
+            for (var entry : net.minecraft.core.registries.BuiltInRegistries.ITEM.entrySet()) {
+                if (entry.getKey().location().getNamespace().equals("gauged_wires")
+                        && org.patryk3211.powergrid.electricity.wire.IWire.isWire(h.getLevel(), entry.getValue()))
+                    wires.add(new ItemStack(entry.getValue(), 64));
+            }
+            int gauged = wires.size() - 4;
+            if (net.neoforged.fml.ModList.get().isLoaded("gauged_wires"))
+                h.assertTrue(gauged > 0, "Gauged was loaded but no registered wire materials were exercised");
+            var panel = h.absolutePos(relative);
+            var gauge = PanelGameTests.insert(h, panel,
+                    com.george_vi.electroenergetics.content.electrical_panel.attachments.CEEPanelAttachmentTypes.VOLTMETER.get(),
+                    com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelSlot.THIRD_CENTERED);
+            var player = h.makeMockPlayer(GameType.SURVIVAL);
+            for (var wire : wires) {
+                h.assertTrue(wire.is(tag), "PG wire does not reveal panel terminals: " + wire);
+                for (var node : gauge.nodes) {
+                    player.setItemInHand(InteractionHand.MAIN_HAND, wire.copy());
+                    var point = new BlockWireEndpoint(panel, node.id()).getExactPosition(h.getLevel());
+                    aim(player, point.add(0, 0, -2), point);
+                    var hit = player.pick(4, 1, false);
+                    h.assertTrue(selected(h, hit, panel) == node.id(), "PG wire cannot aim at the exposed panel terminal: " + wire);
+                    click(player, (BlockHitResult) hit);
+                    var connection = player.getMainHandItem().get(ModdedDataComponents.CONNECTION_DATA.get());
+                    h.assertTrue(connection != null && new BlockWireEndpoint(panel, node.id()).equals(connection.endpoint()),
+                            "PG wire handler did not select the panel terminal: " + wire);
+                    h.assertTrue(player.getMainHandItem().getCount() == 64, "Selecting a panel terminal consumed wire");
+                }
+            }
+            org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info(
+                    "PANEL_PG_WIRING_PASSED: baseMaterials=4, gaugedMaterials={}, nativeToolsRetained=true", gauged);
+            h.succeed();
+        });
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 80)
     public static void allPgWiresSelectUpperRegulatorPinsAcrossRotations(GameTestHelper h) {
         regulator(h);
         h.runAtTickTime(5, () -> {
