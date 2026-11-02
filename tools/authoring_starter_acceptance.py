@@ -48,9 +48,16 @@ def extract(archive, target):
 def run(command, log, cwd=ROOT):
     if log.exists():
         raise ValueError('Preserve earlier log: ' + str(log))
-    with log.open('w', encoding='utf-8') as stream:
-        subprocess.run([str(v) for v in command], cwd=cwd, stdout=stream,
-                       stderr=subprocess.STDOUT, check=True)
+    try:
+        with log.open('w', encoding='utf-8') as stream:
+            subprocess.run([str(v) for v in command], cwd=cwd, stdout=stream,
+                           stderr=subprocess.STDOUT, check=True)
+    except subprocess.CalledProcessError:
+        # The suite retains this launcher's output even when no passing
+        # gameplay proof exists. Keep the actual failing assertion there too.
+        print('Failed command output retained in ' + str(log), file=sys.stderr)
+        print(log.read_text(encoding='utf-8', errors='replace'), file=sys.stderr, end='')
+        raise
 
 
 def prepare(output, runtime, repository_zip, runtime_source_sha=None, api_artifact=None):
