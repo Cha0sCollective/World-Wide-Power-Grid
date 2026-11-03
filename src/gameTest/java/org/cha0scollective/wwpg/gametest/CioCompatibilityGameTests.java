@@ -88,6 +88,25 @@ public final class CioCompatibilityGameTests {
         sameHistory(h,source(0,1,20,16),source);h.succeed();
     }
 
+    @GameTest(template="empty", timeoutTicks=40)
+    public static void deferredSubstepsHoldNativeHistoryWithoutInventingFaults(GameTestHelper h) {
+        for(int held:new int[]{0,8,15}) {
+            var source=source(23,56.25,170,16);
+            var original=source(23,56.25,170,16);
+            var registry=new CeeAdapters.Registry();register(registry,source);registry.freeze();
+            var binding=registry.newSession().capture(source).orElseThrow().binding();
+            for(int step=0;step<16;step++) {
+                binding.before(0,step,16,.05/16);
+                if(step==held) binding.defer();
+                binding.after(-40+step,2,step,16,.05/16,true);
+            }
+            binding.finish(false);
+            h.assertTrue(!binding.failed(),"Initialization was classified as an adapter failure");
+            sameHistory(h,original,source);
+        }
+        h.succeed();
+    }
+
     @GameTest(template="empty", timeoutTicks=160)
     public static void inverterPowersThreePhasesWithNativeMeasurements(GameTestHelper h) { inverter(h,false); }
 
@@ -95,18 +114,7 @@ public final class CioCompatibilityGameTests {
     public static void inverterControlsRecoverWithoutLosingPhaseHistory(GameTestHelper h) { inverter(h,true); }
 
     private static void inverter(GameTestHelper h,boolean controls) {
-        var level=h.getLevel();var a=new BlockPos(1,2,1);var b=new BlockPos(4,2,1);
-        h.setBlock(a.below(),Blocks.STONE);h.setBlock(b.below(),Blocks.STONE);
-        h.setBlock(a,ModdedBlocks.CREATIVE_VOLTAGE_SOURCE.get());h.setBlock(b,block("ElectroEnergeticsModule","CEE_INVERTER"));
-        var source=h.absolutePos(a);var inverter=h.absolutePos(b);
-        for(int p=0;p<3;p++){var l=new BlockPos(7,2,1+2*p);h.setBlock(l.below(),Blocks.STONE);h.setBlock(l,ModdedBlocks.CREATIVE_RESISTOR.get());}
-        h.runAtTickTime(8,()->{
-            ((CreativeSourceBlockEntity)level.getBlockEntity(source)).setValue(300);
-            var be=level.getBlockEntity(inverter);call(be,"setFrequency",double.class,50d);call(be,"setSetpoint",int.class,120);call(be,"setEnabled",boolean.class,true);
-            wire(h,source,0,inverter,0,true);wire(h,source,1,inverter,1,true);
-            for(int p=0;p<3;p++){var load=h.absolutePos(new BlockPos(7,2,1+2*p));((ResistorBlockEntity)level.getBlockEntity(load)).setValue(100);
-                wire(h,inverter,3+p,load,0,true);wire(h,inverter,6,load,1,true);}
-        });
+        var inverter=poweredInverter(h); var level=h.getLevel();
         h.runAtTickTime(85,()->verifyAfterCommit(h,inverter,50,()->{
             if(!controls){h.succeed();return;}
             call(level.getBlockEntity(inverter),"setEnabled",boolean.class,false);
@@ -120,7 +128,23 @@ public final class CioCompatibilityGameTests {
         h.runAtTickTime(190,()->verifyAfterCommit(h,inverter,25,h::succeed));
     }
 
-    private static void verifyAfterCommit(GameTestHelper h,BlockPos pos,double frequency,Runnable next) {
+    static BlockPos poweredInverter(GameTestHelper h) {
+        var level=h.getLevel();var a=new BlockPos(1,2,1);var b=new BlockPos(4,2,1);
+        h.setBlock(a.below(),Blocks.STONE);h.setBlock(b.below(),Blocks.STONE);
+        h.setBlock(a,ModdedBlocks.CREATIVE_VOLTAGE_SOURCE.get());h.setBlock(b,block("ElectroEnergeticsModule","CEE_INVERTER"));
+        var source=h.absolutePos(a);var inverter=h.absolutePos(b);
+        for(int p=0;p<3;p++){var l=new BlockPos(7,2,1+2*p);h.setBlock(l.below(),Blocks.STONE);h.setBlock(l,ModdedBlocks.CREATIVE_RESISTOR.get());}
+        h.runAtTickTime(8,()->{
+            ((CreativeSourceBlockEntity)level.getBlockEntity(source)).setValue(300);
+            var be=level.getBlockEntity(inverter);call(be,"setFrequency",double.class,50d);call(be,"setSetpoint",int.class,120);call(be,"setEnabled",boolean.class,true);
+            wire(h,source,0,inverter,0,true);wire(h,source,1,inverter,1,true);
+            for(int p=0;p<3;p++){var load=h.absolutePos(new BlockPos(7,2,1+2*p));((ResistorBlockEntity)level.getBlockEntity(load)).setValue(100);
+                wire(h,inverter,3+p,load,0,true);wire(h,inverter,6,load,1,true);}
+        });
+        return inverter;
+    }
+
+    static void verifyAfterCommit(GameTestHelper h,BlockPos pos,double frequency,Runnable next) {
         // CIO's per-phase accumulators can be newer than its device readouts during
         // the tick. Compare a single committed result, then report through GameTest.
         var failure=new java.util.concurrent.atomic.AtomicReference<Throwable>();
@@ -170,6 +194,8 @@ public final class CioCompatibilityGameTests {
         h.assertTrue(Bridges.get(h.getLevel()).backendCounts().getOrDefault(backend,0L)>0,"Requested backend was not exercised");
         System.out.println("CIO_ACCEPT inverter backend="+backend+" hz="+frequency+" acWatts="+totalPower+" dcWatts="+(dcAmps*300));
         System.out.println("CIO_ACCEPT diagnostic history at tick="+h.getLevel().getGameTime()+": "+Bridges.get(h.getLevel()).diagnostics());
+        h.assertTrue(Bridges.get(h.getLevel()).diagnostics().stream().noneMatch(line->line.contains("CEE adapter wwpg:cio_inverter")),
+                "Healthy CIO startup/control transition recorded an adapter fault");
     }
 
     @GameTest(template="empty", timeoutTicks=160)
@@ -248,9 +274,9 @@ public final class CioCompatibilityGameTests {
         near(h,x.resistance,y.resistance,0,"Resistance history");near(h,x.currentSource,y.currentSource,0,"Current history");
         near(h,x.voltageSource,y.voltageSource,0,"Voltage history");h.assertTrue(x.isForcedVoltageSource==y.isForcedVoltageSource,"Source family history");
     }
-    private static Class<?> type(String name){try{return Class.forName(name);}catch(ClassNotFoundException e){throw new IllegalStateException("Install the verified CIO fixture",e);}}
+    static Class<?> type(String name){try{return Class.forName(name);}catch(ClassNotFoundException e){throw new IllegalStateException("Install the verified CIO fixture",e);}}
     private static Block block(String module,String field){try{return (Block)((Supplier<?>)type(ROOT+"modules."+module).getField(field).get(null)).get();}catch(ReflectiveOperationException e){throw new IllegalStateException(e);}}
-    private static Object get(Object owner,String name){try{var f=field(owner,name);return f.get(owner);}catch(ReflectiveOperationException e){throw new IllegalStateException(e);}}
+    static Object get(Object owner,String name){try{var f=field(owner,name);return f.get(owner);}catch(ReflectiveOperationException e){throw new IllegalStateException(e);}}
     private static void set(Object owner,String name,Object value){try{field(owner,name).set(owner,value);}catch(ReflectiveOperationException e){throw new IllegalStateException(e);}}
     private static Field field(Object owner,String name)throws NoSuchFieldException{for(Class<?> c=owner.getClass();c!=null;c=c.getSuperclass())try{var f=c.getDeclaredField(name);f.setAccessible(true);return f;}catch(NoSuchFieldException ignored){}throw new NoSuchFieldException(name);}
     private static Object call(Object owner,String name){try{return owner.getClass().getMethod(name).invoke(owner);}catch(ReflectiveOperationException e){throw new IllegalStateException(e);}}

@@ -236,4 +236,89 @@ class CeeAdapterRegistryTest {
         assertThrows(IllegalArgumentException.class, () -> new CeeSubstepResult(Double.NaN, 0, 0, 16, .003125));
         assertEquals(1, new CeeSubstepResult(1, 2, 0, 16, .003125).voltageVolts());
     }
+
+    @Test void initializationHoldPreservesStampStopsCallbacksAndRestoresWholeTick() {
+        var source = new StoredProperty();
+        var binding = storedBinding(source, false);
+        binding.before(10, 0, 16, .003125);
+        binding.after(7, 1, 0, 16, .003125, true);
+        binding.before(7, 1, 16, .003125);
+        double stamp = binding.properties().currentSource();
+        binding.defer(); binding.defer();
+        assertEquals(7, source.savedVoltage);
+        assertEquals(1, source.commits);
+        assertEquals(stamp, binding.properties().currentSource());
+        assertEquals(1, binding.properties().conductance());
+        for (int step = 1; step < 16; step++) {
+            binding.before(999, step, 16, .003125);
+            binding.after(999, 999, step, 16, .003125, true);
+        }
+        assertEquals(1, source.commits);
+        binding.finish(false);
+        assertFalse(binding.failed());
+        assertEquals(10, source.savedVoltage);
+        assertEquals(0, source.commits);
+        assertEquals(0, source.currentSource);
+        assertThrows(IllegalStateException.class, binding::defer);
+    }
+
+    @Test void heldTickCannotBePublishedAsAccepted() {
+        var source = new StoredProperty();
+        var binding = storedBinding(source, false);
+        binding.before(10, 0, 16, .003125);
+        binding.defer(); binding.finish(true);
+        assertTrue(binding.failureReason().orElseThrow().contains("held electrical tick"));
+        assertEquals(10, source.savedVoltage);
+        assertEquals(0, source.currentSource);
+    }
+
+    @Test void realRejectionCannotBeDowngradedToInitialization() {
+        var source = new StoredProperty();
+        var binding = storedBinding(source, false);
+        binding.before(10, 0, 16, .003125);
+        binding.after(999, 999, 0, 16, .003125, false);
+        String fault = binding.failureReason().orElseThrow();
+        binding.defer(); binding.finish(false);
+        assertEquals(fault, binding.failureReason().orElseThrow());
+        assertTrue(fault.contains("substep 0 was rejected"));
+        assertEquals(0, binding.properties().conductance());
+        assertEquals(10, source.savedVoltage);
+    }
+
+    @Test void failedHoldRollbackStillReportsTheCause() {
+        var binding = storedBinding(new StoredProperty(), true);
+        binding.before(10, 0, 16, .003125);
+        binding.defer(); binding.finish(false);
+        assertTrue(binding.failed());
+        assertTrue(binding.failureReason().orElseThrow().contains("checkpoint restore failed"));
+        assertTrue(binding.failureReason().orElseThrow().contains("broken storage"));
+    }
+
+    private static CeeAdapters.Binding storedBinding(StoredProperty source, boolean brokenRollback) {
+        var registry = new CeeAdapters.Registry();
+        registry.register("example:held_storage", StoredProperty.class, new CeePropertyAdapter<>() {
+            int checkpoints;
+            @Override public boolean dynamic() { return true; }
+            @Override public CeeStateCheckpoint checkpoint(StoredProperty property) {
+                double voltage = property.savedVoltage, current = property.currentSource;
+                int commits = property.commits;
+                boolean broken = brokenRollback && ++checkpoints > 1;
+                return () -> {
+                    if (broken) throw new IllegalStateException("broken storage");
+                    property.savedVoltage = voltage; property.currentSource = current; property.commits = commits;
+                };
+            }
+            @Override public CeeElectricalParameters prepare(StoredProperty property) {
+                return new CeeElectricalParameters(1, property.currentSource, 0, false);
+            }
+            @Override public void beforeSubstep(StoredProperty property, CeeSubstepContext context) {
+                property.currentSource = -property.savedVoltage;
+            }
+            @Override public void afterSubstep(StoredProperty property, CeeSubstepResult result) {
+                property.savedVoltage = result.voltageVolts(); ++property.commits;
+            }
+        });
+        registry.freeze();
+        return registry.newSession().capture(source).orElseThrow().binding();
+    }
 }

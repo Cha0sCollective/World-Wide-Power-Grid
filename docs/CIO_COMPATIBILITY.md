@@ -1,6 +1,6 @@
 # CIO integration — unreleased development
 
-This describes the local 0.2.6-dev.114 integration. Published WWPG 0.2.5 does not
+This describes the local 0.2.6-dev.115 integration. Published WWPG 0.2.5 does not
 support CIO's inverter or safely separate its redundant coupler ports.
 
 ## Inverter
@@ -36,12 +36,13 @@ known legacy grid-coupler implementations are disabled while WWPG is installed.
 
 ## Developer checks and boundaries
 
-The companion provides three explicitly selected namespaces. These are not added
+The companion provides four explicitly selected namespaces. These are not added
 to the ordinary BASE/PINOUT acceptance matrix and never install CIO implicitly.
 
 | Namespace | Required fixture | Checks |
 | --- | --- | --- |
-| `wwpg_cio` | Verified CIO jar | Original callbacks versus adapter at 16/32 substeps, early/late rejection rollback, loaded three-phase waveforms, phase/line RMS, real power and DC draw, enable/frequency/reversal, both Power Kit families, blocked placement and saved coupler restart/rebuild |
+| `wwpg_cio` | Verified CIO jar | Original callbacks versus adapter at 16/32 substeps, early/late rejection and initialization rollback, loaded three-phase waveforms, phase/line RMS, real power and DC draw, enable/frequency/reversal without false fault history, both Power Kit families, blocked placement and saved coupler restart/rebuild |
+| `wwpg_cio_transitions` | Verified CIO jar, separate invocation | Real powered initialization holds and forced backend rejection, unavailable API/CEE readings, phase/gameplay history held, genuine retained diagnostics and recovery |
 | `wwpg_cio_upgrade` | Disposable original 0.2.5 coupler reproduction save | The old unintended CEE output stops, the PG supply stays powered, PG/CEE wires remain saved and a disabled explanation is available |
 | `wwpg_cio_guard` | Deliberately changed private-model identity | The mod loads, but the unverified class receives no private-history hook or adapter |
 
@@ -51,10 +52,15 @@ and select Native or Java with `testBackend`. An upgrade check needs a fresh cop
 of its original save; preserve every attempt. The normal 600-second server
 launcher bound and Minecraft watchdog still apply.
 
-Transient rejected adapter ticks observed during initial/enable transitions are
-retained in the diagnostic history. Steady powered checks and recovery checks
-must pass; do not clear those diagnostics to turn an interrupted or rejected
-attempt into a pass.
+In dev.114, normal PG warm-up during initial/enable transitions was incorrectly
+reported as an adapter rejection. Dev.115 carries the schedule's initialization
+state through the adapter lifecycle. It keeps the captured circuit stamp, stops
+history callbacks, rolls back the unaccepted tick and keeps measurements
+unavailable until a complete tick is accepted. It does not accept warm-up values
+or change electrical settings. Actual solver, callback and rollback failures
+still produce retained diagnostics. Never clear that history to turn a failed
+attempt into a pass. The deliberately failing transition fixture runs separately
+from healthy startup/control checks so its expected errors cannot mask regressions.
 
 This integration does not certify CIO's optional furniture, phone, voice,
 ComputerCraft, climate or transport integrations. Graphical input/rendering,
