@@ -22,6 +22,7 @@ public final class WorldWidePowerGrid {
         org.cha0scollective.wwpg.wiring.CeeElectric.register(modBus);
         org.cha0scollective.wwpg.extension.ApiElectric.register(modBus);
         org.cha0scollective.wwpg.extension.CeeAdapters.initialize(modBus);
+        modBus.addListener(org.cha0scollective.wwpg.compat.cio.CioCompatibility::registerAdapters);
         modBus.addListener(org.cha0scollective.wwpg.extension.ApiDeviceDiscovery::freeze);
         LOGGER.info("WWPG: CEE 1.1.3 / Power Grid 0.6.2 compatibility loaded");
         NeoForge.EVENT_BUS.addListener(this::commands);
@@ -33,6 +34,8 @@ public final class WorldWidePowerGrid {
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.extension.ApiCircuits::chunkLoaded);
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.extension.ApiCircuits::blockPlaced);
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.extension.ApiTerminals::chunkUnloaded);
+        NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.compat.cio.CioCompatibility::placed);
+        NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.compat.cio.CioCompatibility::tooltip);
     }
 
     private void commands(RegisterCommandsEvent event) {

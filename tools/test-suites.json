@@ -37,6 +37,9 @@
     "platform": {"namespaces": ["wwpg_platform"], "merge_into": "regression", "phases": ["SETUP"]}
   },
   "special_namespaces": {
+    "wwpg_cio": "opt-in CIO artifact: inverter waveform, rollback, controls and disabled saved couplers; requires the verified optional CIO jar",
+    "wwpg_cio_upgrade": "opt-in CIO upgrade against a disposable original 0.2.5 coupler reproduction world; retains native PG/CEE wires",
+    "wwpg_cio_guard": "opt-in negative CIO private-model identity fixture; an unverified model must load without receiving an unsafe adapter",
     "wwpg_loader_installation": "explicit loader compatibility installation inventory and powered optional integration checks",
     "wwpg_loader_addons": "opt-in loader compatibility powered Gauged Wires and Power Components fixtures",
     "wwpg_doc": "independently extracted SDK starter server and client helpers",

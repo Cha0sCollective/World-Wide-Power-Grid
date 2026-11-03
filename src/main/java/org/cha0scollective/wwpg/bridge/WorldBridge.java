@@ -63,6 +63,8 @@ public final class WorldBridge {
     private final Map<ElectricalNetwork, List<Branch>> resultBranches = new IdentityHashMap<>();
     private final Map<ElectricalNetwork, List<Winding>> resultWindings = new IdentityHashMap<>();
     private List<SimulatedDevice> devices = List.of();
+    private final Set<net.minecraft.core.BlockPos> disabledCouplers = new HashSet<>();
+    private Set<Node> disabledCouplerNodes = Set.of();
     private List<Dynamic> dynamics = List.of();
     private List<Adapted> adapters = List.of();
     private List<Branch> substepBranches = List.of();
@@ -120,7 +122,13 @@ public final class WorldBridge {
         // loaded and its block entities are ticking. Entity IO can remain ready
         // after a chunk loses its ticking ticket, while PG has already detached
         // its electrical model. Do not commit that temporary disconnected graph.
+        disabledCouplers.clear();
         devices = DevicesSavedData.load(level).getDevices(CEESimulatedDeviceFeatureTypes.TICKING_ELECTRICAL.get()).stream()
+                .filter(device -> {
+                    if (!org.cha0scollective.wwpg.compat.cio.CioCompatibility.gridCoupler(device)) return true;
+                    disabledCouplers.add(device.pos.immutable());
+                    return false;
+                })
                 .filter(device -> level.getChunkSource().getChunkNow(device.pos.getX() >> 4, device.pos.getZ() >> 4) != null
                         && level.getChunkSource().isPositionTicking(net.minecraft.world.level.ChunkPos.asLong(device.pos))
                         && level.areEntitiesLoaded(net.minecraft.world.level.ChunkPos.asLong(device.pos)))
@@ -140,6 +148,9 @@ public final class WorldBridge {
         }
         NeoForge.EVENT_BUS.post(new AddToElectricGraphEvent(builder, level, infrastructure));
         builder.connectAll(new ArrayList<>(infrastructure.wireSimulationState.getLazyConnections()));
+        disabledCouplerNodes = disabledCouplers.isEmpty() ? Set.of() : builder.allNodes().stream()
+                .map(indexed -> indexed.node).filter(node -> node instanceof InWorldNode inWorld
+                        && disabledCouplers.contains(inWorld.sourcePos())).collect(java.util.stream.Collectors.toUnmodifiableSet());
         int sampleCount = builder.allNodes().size() * substeps;
         if (voltages.length != sampleCount) voltages = new double[sampleCount];
         else Arrays.fill(voltages, 0);
@@ -506,6 +517,9 @@ public final class WorldBridge {
 
     private OwnedFloatingNode resolve(WorldNetworks world, EndpointKey key, Node node) {
         if (node instanceof InWorldNode inWorld) {
+            // A CIO coupler's PG and CEE terminals reuse IDs. Disabled CEE ports
+            // must remain distinct from the retained passive native PG terminals.
+            if (disabledCouplers.contains(inWorld.sourcePos())) return internal(key);
             var endpoint = new BlockWireEndpoint(inWorld.sourcePos(), inWorld.id());
             // PG's getAt reads the block state and can load the chunk. Unloaded CEE
             // descriptions must use the existing placeholder instead of keeping chunks alive.
@@ -713,7 +727,7 @@ public final class WorldBridge {
             putWindingCurrent(currents, winding.properties.nodes(), winding.primarySum, winding.primarySquares);
             putWindingCurrent(currents, winding.properties.coupledNodes(), winding.secondarySum, winding.secondarySquares);
         }
-        var unavailable = new HashSet<Node>();
+        var unavailable = new HashSet<Node>(disabledCouplerNodes);
         pausedDevices.clear(); statefulDevices.clear();
         boolean paused = RestorationCoordinator.anyPaused();
         if (paused) {
