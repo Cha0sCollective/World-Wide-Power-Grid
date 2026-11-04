@@ -1,6 +1,6 @@
 # Current status
 
-**[WWPG 0.2.5](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.5)**
+**[WWPG 0.2.6](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.6)**
 is the stable release. It supports the declared stationary factories and
 optional Pinout computer control, and includes **extension API 1.0.0** for
 add-on developers. Existing 0.1.0-beta.5 and beta.4 worlds remain compatible; update WWPG on
@@ -43,39 +43,42 @@ a repaired device. The [developer contract](EXTENSION_API.md) explains those rul
 
 ## What was checked
 
-0.2.5 completed full headless coverage across Windows/Linux, Native/Java,
-BASE/PINOUT and NeoForge 21.1.231/21.1.248: 342 catalog jobs. The Stationary Yard
-is the combined PINOUT edition; runtime and API installation retain both profiles.
-The record combines 336 retained passes with six targeted SDK/reference
-completions after test-launch preparation repairs; the original failed attempt
-remains failed. Cold restarts, actual unload/reload cycles, rejection checks, saved-state checks
-and exact exported-archive reopens keep their separate process outcomes.
+0.2.6 passed a fresh 342-job headless campaign across Windows and Ubuntu 24.04,
+Native/Java, BASE/PINOUT and NeoForge 21.1.231/21.1.248. The Stationary Yard is
+the combined PINOUT edition. Cold restarts, actual unload/reload, rejection,
+stored-state and exact exported-archive reopens retain distinct process proofs.
 
-All 12 separately requested Windows graphical scenarios passed, including yard
-and Workshop interactions, Native/Java integration, two real TCP clients,
-the independently built SDK starter and clean Save and Quit or disconnect/stop.
-Supplemental dev.112 checks retain their original execution identities: 158
-focused Native/Java test executions covering CEE 1.1.3/1.1.4, optional Gauged
-wires, signed panel measurements and native control/repair behavior. An eight-view
-Native client check verifies PG multimeter highlights, revealed panel covers and
-normal Save and Quit. These focused records supplement the full release coverage.
+All 12 separate Windows graphical scenarios passed: integrated yard and Workshop
+workflows, two real TCP clients, BASE Workshop and the independent SDK starter,
+including clean Save and Quit or disconnect/server save/stop. These client logs
+contain zero WWPG warnings or errors. Seven representative screenshots were
+reviewed; screenshot totals do not establish coverage.
 
-The gameplay jar excludes GameTests and fixtures. The separate test companion
-retains 356 GameTest methods, including the variac, panel, probe and control
-regressions. The train checks still cover overhead movement, meter recovery and
-dimension-owned state without certifying train audio or dimension travel.
-Ordinary play uses the gameplay jar alone. API 1.0.0, saves, native solver binaries and all
-sixteen electrical substeps remain compatible.
+Preparation passed 116 unit tests per OS and independently compiled the extracted
+SDK projects. The 43 release-tool checks passed. One supplemental tool attempt
+used Java 11 for Java 21 fixtures; its original failure and corrected Java 21 run
+remain preserved. The acceptance workers used Java 21 throughout.
 
-The [verification record](../release/0.2.5/verification.json) retains actual
-source, runtime, companion, helper, world and process identities. Earlier failed
-attempts remain failed. Electrical diagnostics are retained alongside passing
-observations; a passing suite does not certify warning-free operation.
+The separate companion contains 370 GameTest methods. Full release lanes use
+CEE 1.1.3. Focused CEE 1.1.4, Gauged, CIO and Sable results retain their actual
+source/artifact identities; they are not relabelled as new full runs. The Sable
+checks include public coordinate fixtures and real server assemblies, not an
+exhaustive moving-assembly client tour. Train audio and dimension travel remain
+outside the asserted train coverage.
 
-While holding PG wire, exposed regulator and capacitor pins can be selected
-outside the ordinary block body. Goggles alone retain their existing picking.
-The targeted checks do not certify every terminal on every CEE item or arbitrary
-third-party terminal geometry. Workshop spawn remains fixed to the platform.
+The [verification record](../release/0.2.6/verification.json) preserves the exact
+tested runtime and original evidence. Publication documentation follows with
+identical runtime/API/example/test jars. GameTests remain outside the gameplay
+jar. API 1.0.0, saves, native binaries and all 16 substeps are unchanged.
+
+## New compatibility and recovery behavior
+
+The verified CIO inverter retains native controls, waveforms, input limits and
+losses. Redundant CIO couplers remain saved but inert; see
+[CIO integration](CIO_COMPATIBILITY.md). Normal initialization holds readings and
+history unavailable until an accepted tick, without inventing a fault or hiding
+real failures. PG/Gauged picking on Sable assemblies uses the correct coordinate
+frame and normal reach/obstruction limits.
 
 ## Loading and ticking
 

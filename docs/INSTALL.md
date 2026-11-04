@@ -2,7 +2,7 @@
 
 WWPG lets stationary equipment from **Create: Electro Energetics (CEE)** and **Power Grid (PG)** share power and wires. You can run mixed factories, use either mod's handheld meters, and control equipment with panels and circuit boards.
 
-This guide installs **WWPG 0.2.5**. Start with the [Stationary Test Yard](STATIONARY_YARD.md) if you want ready-built circuits to try. See [supported content](SUPPORT.md) for what works and [current status](STATUS.md) for limitations.
+This guide installs **WWPG 0.2.6**. Start with the [Stationary Test Yard](STATIONARY_YARD.md) if you want ready-built circuits to try. See [supported content](SUPPORT.md) for what works and [current status](STATUS.md) for limitations.
 
 ## Required versions
 
@@ -16,9 +16,9 @@ Use this tested combination, with the same mod versions on the server and every 
 | Create: Electro Energetics | 1.21.1-1.1.3 or 1.21.1-1.1.4 |
 | Power Grid | Minecraft 1.21.1, 0.6.2 |
 | Architectury API | NeoForge 13.0.8 |
-| WWPG | 0.2.5 |
+| WWPG | 0.2.6 |
 
-WWPG 0.2.5 supports NeoForge 21.1.231 and 21.1.248. Its declarations also
+WWPG 0.2.6 supports NeoForge 21.1.231 and 21.1.248. Its declarations also
 allow newer NeoForge, Create, CEE and Power Grid versions so players can try
 them; the listed CEE versions have focused compatibility checks, while other additional versions have not been verified. See
 [Version compatibility](VERSION_COMPATIBILITY.md).
@@ -31,7 +31,7 @@ To control circuits with computers, also install **CC;CPG: Pinout 0.2.1** and **
 
 ## Installation
 
-1. [Download the WWPG jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.5/wwpg-0.2.5.jar).
+1. [Download the WWPG jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.6/wwpg-0.2.6.jar).
 2. Put it and the required dependency jars in the instance's `mods` directory.
 3. Launch once to generate configuration, then stop the game or server.
 4. In `config/powergrid-server.toml`, edit the existing solver settings to the values below. Keep the other PG solver settings at their defaults.
@@ -75,7 +75,7 @@ and other CEE controls alone. Put the tool away to operate those controls normal
 
 ## Upgrading an existing world
 
-Stop the game or server, back up your world, and replace the older WWPG jar on the server and every client. Keep only one WWPG gameplay jar in `mods`. Ordinary play does not need the separate `-gametests.jar` companion from the verification bundle. Use the listed solver settings and matching dependency versions on the server and clients. Existing 0.2.4, 0.2.3, 0.1.0-beta.5, 0.2.2-beta.4, 0.2.2, 0.2.0, 0.2.1 and 0.2.2-alpha.1 worlds work with 0.2.5; you do not need to download them again.
+Stop the game or server, back up your world, and replace the older WWPG jar on the server and every client. Keep only one WWPG gameplay jar in `mods`. Ordinary play does not need the separate `-gametests.jar` companion from the verification bundle. Use the listed solver settings and matching dependency versions on the server and clients. Existing 0.2.5, 0.2.4, 0.2.3, 0.1.0-beta.5, 0.2.2-beta.4, 0.2.2, 0.2.0, 0.2.1 and 0.2.2-alpha.1 worlds work with 0.2.6; you do not need to download them again.
 
 An update cannot restore wires or charge that an older version already lost and saved. The original beta.1 example also has an underpowered heater; use the current Stationary Yard or revised small example for a working burner demonstration.
 
@@ -92,7 +92,7 @@ These diagnostic commands require operator permission level 2:
 
 ## Download a world to try
 
-Download the [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.5/wwpg-0.2.5-example-worlds.zip) and extract it. Its `worlds` folder has one combined `wwpg-0.2.5-stationary-yard.zip`. It includes the ordinary yard and the computer stations. Install CC:Tweaked and Pinout on the server and every client before opening it; ordinary factories still do not require those optional mods.
+Download the [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.6/wwpg-0.2.6-example-worlds.zip) and extract it. Its `worlds` folder has one combined `wwpg-0.2.6-stationary-yard.zip`. It includes the ordinary yard and the computer stations. Install CC:Tweaked and Pinout on the server and every client before opening it; ordinary factories still do not require those optional mods.
 
 Extract the named save folder into your instance's `saves` directory. Goggles and tools are at spawn. Try switching the factory lamps, watching the pump and heater, changing transformer voltages, or operating panels and boards. The [station guide](STATIONARY_YARD.md) explains what to do, what you should see and how to reset each example.
 
@@ -100,14 +100,14 @@ The download keeps connected wires, Nether links and the Pinout edition's comput
 
 ## Large benchmark yard
 
-The same bundle also contains `wwpg-0.2.5-benchmark-14650-nodes.zip`.
+The same bundle also contains `wwpg-0.2.6-benchmark-14650-nodes.zip`.
 This is the original heavy mixed workload, separate from the playable Stationary Yard.
 Read the [benchmark guide](BENCHMARK_YARD.md) before opening it. Its actual size is
 14,650 electrical nodes; it is not certified to run at 20 TPS.
 
 ## Extension API Workshop
 
-The [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.5/wwpg-0.2.5-example-worlds.zip) also contains `wwpg-0.2.5-api-workshop.zip` and its Pinout edition in `worlds`. This separate world requires both example add-ons from the bundle's `workshop-mods` folder on the server and every client:
+The [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.6/wwpg-0.2.6-example-worlds.zip) also contains `wwpg-0.2.6-api-workshop.zip` and its Pinout edition in `worlds`. This separate world requires both example add-ons from the bundle's `workshop-mods` folder on the server and every client:
 
 - `wwpg-api-example-1.0.0.jar` — general API machines
 - `wwpg-upstream-api-example-1.0.0.jar` — native panel and board extensions
@@ -124,7 +124,7 @@ To write your own add-on, follow the [developer API guide](EXTENSION_API.md). Pl
 
 ## Historical small example
 
-The older [panel-relay example](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2-example-v2.zip) is a smaller demonstration. Extract `WWPG Example - Panel Demo/` into `saves`; it appears as **WWPG - Panel Relay Demo**. The unchanged download keeps its beta.2 filename and was last verified with 0.1.0-beta.5. Use the current Stationary Yard for the 0.2.5 demonstration.
+The older [panel-relay example](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2-example-v2.zip) is a smaller demonstration. Extract `WWPG Example - Panel Demo/` into `saves`; it appears as **WWPG - Panel Relay Demo**. The unchanged download keeps its beta.2 filename and was last verified with 0.1.0-beta.5. Use the current Stationary Yard for the 0.2.6 demonstration.
 
 Spawn is at `(8, 64, 16)`:
 
@@ -147,3 +147,15 @@ With goggles on, the panel shows about **18.4 V** at the board's relay coil and 
 PG's portable battery charges a native energy item. Its placed block does not discharge into a wired circuit as a voltage source; use CEE's accumulator for reversible circuit storage.
 
 In the pinned CEE 1.1.3 tests, the creative battery's AC mode produces a 20 Hz waveform despite its frequency selector. WWPG preserves that behavior. A PG AC source or driven CEE alternator provides other frequencies.
+
+## Optional CIO and Sable compatibility
+
+WWPG 0.2.6 supports the verified CIO 0.1.240-experimental inverter. Connect its
+labelled DC input and AC outputs with the usual tools; its native controls still
+apply. Redundant CIO grid couplers stay physically saved but do not transfer
+power. Replace them with direct wiring when updating a build; see
+[CIO integration](CIO_COMPATIBILITY.md).
+
+Sable terminal targeting was checked with Sable 2.0.5 and Companion API 1.6.0.
+Aim and connect with the normal PG/Gauged tools. This corrects coordinate picking;
+it does not establish general support for every moving electrical assembly.

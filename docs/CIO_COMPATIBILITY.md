@@ -1,8 +1,7 @@
-# CIO integration — unreleased development
+# CIO integration — WWPG 0.2.6
 
-This describes the local 0.2.6 candidate, including the dev.115 transition fix.
-Published WWPG 0.2.5 does not
-support CIO's inverter or safely separate its redundant coupler ports.
+WWPG 0.2.6 includes verified inverter support and safe disabling of redundant
+grid couplers. Earlier published WWPG 0.2.5 does not provide this integration.
 
 ## Inverter
 
@@ -64,7 +63,7 @@ attempt into a pass. The deliberately failing transition fixture runs separately
 from healthy startup/control checks so its expected errors cannot mask regressions.
 
 This integration does not certify CIO's optional furniture, phone, voice,
-ComputerCraft, climate or transport integrations. Graphical input/rendering,
-performance and full release acceptance require their own applicable evidence.
-Focused local results and artifact identities are recorded separately from
-published release records.
+ComputerCraft, climate or transport integrations. Graphical input/rendering
+and performance remain limited to the cases actually checked. The [0.2.6
+verification record](../release/0.2.6/verification.json) separates the ordinary
+full release lanes from the original focused CIO execution identities.

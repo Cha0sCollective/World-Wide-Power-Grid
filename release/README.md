@@ -4,12 +4,21 @@ Maintainers: follow [Publishing a release](../docs/RELEASING.md) for the standar
 five-download layout and short notes. Edit [presentation.json](presentation.json)
 for the next release; version-specific records below preserve published history.
 
-**[WWPG 0.2.5](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.5)**
+**[WWPG 0.2.6](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.6)**
 is the current stable release. To install it or choose a playable world, use the
 [installation guide](../docs/INSTALL.md). This directory is for reviewing what
 was shipped and which checks passed.
 
-## Current stable: 0.2.5
+## Current stable: 0.2.6
+
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.6)
+· [Verification](0.2.6/verification.json).
+
+Adds verified CIO inverter support, disables redundant couplers safely, fixes
+initialization fault classification and Sable terminal targeting. The qualified
+runtime passed 342 headless jobs and 12 separate client scenarios.
+
+## Historical stable: 0.2.5
 
 [Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.5)
 · [Verification](0.2.5/verification.json).

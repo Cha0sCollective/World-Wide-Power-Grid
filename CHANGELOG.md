@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.2.6 — release qualification
+## 0.2.6 — 4 November 2026
 
 - Support CIO 0.1.240-experimental's inverter through its original waveform and measurement callbacks. Disable redundant CIO grid couplers safely while keeping saved blocks and wires intact.
 - Preserve normal initialization as an unavailable frame instead of reporting a false adapter failure. Hold device history until a complete tick is accepted; retain genuine solver, callback and rollback warnings.

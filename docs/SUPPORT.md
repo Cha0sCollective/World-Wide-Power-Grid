@@ -1,6 +1,6 @@
 # Supported stationary content
 
-WWPG 0.2.5 lets **Create: Electro Energetics (CEE)** and **Power Grid (PG)** work
+WWPG 0.2.6 lets **Create: Electro Energetics (CEE)** and **Power Grid (PG)** work
 together in stationary factories: equipment built in the world that stays in
 place. Either mod can supply power to the other's supported equipment, and you
 can connect and measure circuits with either mod's tools.
@@ -39,8 +39,9 @@ and [installation notes](INSTALL.md#pinned-upstream-behavior).
 
 CEE train checks cover PG-fed movement across continuous overhead contacts,
 PG meter recovery and dimension-owned state. Train dimension travel, client audio,
-other moving contraptions, altitude/velocity sensors, Sable sublevels, other
-optional integrations, broad version support and large-server performance testing
+general moving electrical contraptions, altitude/velocity sensors, arbitrary
+Sable electrical content, other optional integrations, broad version support and
+large-server performance testing
 remain later work. Unsupported electrical constructs are reported and isolated
 from the circuit. [Current status](STATUS.md) lists release limitations; [the
 long-term specification](../SPEC.md) describes the wider project goals.
@@ -78,13 +79,25 @@ maps to PG terminal 0; pins 1–8 retain their numbering. Use either wire system
 control supported mixed equipment. The [Pinout yard instructions](STATIONARY_YARD.md#computer-controls-in-the-pinout-edition)
 explain the included programs.
 
+## Optional CIO and Sable interactions
+
+With verified CIO 0.1.240-experimental, its inverter keeps native DC limits,
+conversion losses, three-phase waveforms, controls and saved state. Redundant
+grid couplers are disabled without deleting their blocks or wires; use direct
+connections instead. See [CIO integration](CIO_COMPATIBILITY.md).
+
+PG/Gauged terminal picking uses Sable's translated, rotated and interpolated
+coordinates and retains normal reach and obstruction checks. Focused checks use
+Sable 2.0.5 and Companion 1.6.0. This targeting fix does not certify arbitrary
+moving electrical constructs or every Sable client rendering case.
+
 ## Detailed coverage records
 
 The release retains **164 base behavior groups, or 165 with optional Pinout**.
 The [beta.5 support matrix](../release/0.1.0-beta.5/supported-content.json) and
 [registry inventory](../release/0.1.0-beta.5/registry-inventory.json) provide the
 item-by-item baseline, including cosmetic variants, ingredients, assembly parts
-and deferred moving content. The [0.2.5 verification record](../release/0.2.5/verification.json)
+and deferred moving content. The [0.2.6 verification record](../release/0.2.6/verification.json)
 checks that baseline with the new jar and worlds, alongside the add-on examples.
 Older published artifacts, support claims and check records remain unchanged.
 
