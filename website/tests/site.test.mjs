@@ -229,6 +229,17 @@ test('the current SDK guides use current downloads, API references, and complete
   starter.window.close(); docs.window.close(); downloads.window.close();
 });
 
+test('current native configuration identifies the shipped guarded engine and verified platforms', () => {
+  const dom = new JSDOM(html(`/docs/${currentRelease.version}/configuration/`));
+  const text = dom.window.document.querySelector('main').textContent;
+  assert.match(text, /guarded build of PG/);
+  assert.match(text, /x86-64 with AVX2/);
+  assert.match(text, /Ubuntu 24.04/);
+  assert.match(text, /other distributions remain unverified/);
+  assert.doesNotMatch(text, /official PG 0.6.1|glibc 2.38/);
+  dom.window.close();
+});
+
 test('downloads and requirements match the configured release; Modrinth is optional', () => {
   const doc = new JSDOM(html('/downloads/')).window.document;
   assert.ok(doc.querySelector(`a[href="${downloadHref()}"]`));
