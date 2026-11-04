@@ -1,0 +1,291 @@
+{
+  "schema": 1,
+  "wwpg_version": "0.2.6",
+  "api_version": "1.0.0",
+  "api_coordinate": "org.cha0scollective.wwpg:wwpg-api:1.0.0",
+  "cee_api_coordinate": "org.cha0scollective.wwpg:wwpg-cee-api:1.0.0",
+  "source_sha": "6af67af67ef3830301c694162ef1f20c2b352124",
+  "acceptance_policy": "separated-v2",
+  "status": "accepted_release",
+  "abi": {
+    "path": "build/publication-02/retained-evidence/objects/d906e597d5ce75ef15506cad046bfad4bde6dd2035f82028b692296ea4158497.json",
+    "sha256": "d906e597d5ce75ef15506cad046bfad4bde6dd2035f82028b692296ea4158497",
+    "bytes": 63521
+  },
+  "previous_api": {
+    "path": "build/publication-02/retained-evidence/objects/a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892.jar",
+    "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+    "bytes": 50143
+  },
+  "cee_abi": {
+    "path": "build/publication-02/retained-evidence/objects/960e24bad6d437338a07c964204be4c99088f1d13e4cc9f73084521a637f92d5.json",
+    "sha256": "960e24bad6d437338a07c964204be4c99088f1d13e4cc9f73084521a637f92d5",
+    "bytes": 11935
+  },
+  "previous_cee_api": {
+    "path": "build/publication-02/retained-evidence/objects/d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a.jar",
+    "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+    "bytes": 8793
+  },
+  "headless_acceptance": {
+    "path": "build/publication-02/retained-evidence/objects/12d0cde47678eace6b716e84e0f47a58593089d5b8997562c1b6abd0ad1d510e.json",
+    "sha256": "fa0b91269baa23132c95ed65f8c61b812869619fe943a3e6e1844049d04054e8",
+    "bytes": 2242
+  },
+  "graphical_acceptance": {
+    "path": "build/publication-02/retained-evidence/objects/f53af8da91aec0a7b2a70ed89246c230b2fdfac4b97ce26bfbf062b8a2d72c68.json",
+    "sha256": "a29b8132a62096efd776ce98d9af1093fb3d0e457b4259cd52434b8c223cd4bd",
+    "bytes": 4238
+  },
+  "stationary_yard_policy": "combined-pinout-v1",
+  "unresolved_failures": [],
+  "stages_complete": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "independent_example_build": {
+    "path": "build/publication-02/retained-evidence/objects/f8db3fd402de91d475fd1ac55323436063755234b4ad5f5228f577f1485dd251.json",
+    "sha256": "13867178ce00c18636beac5d8b15c37de5b0c65a2647e1e8527134e3f1709674",
+    "bytes": 2903
+  },
+  "independent_upstream_example_build": {
+    "path": "build/publication-02/retained-evidence/objects/a5a6b432e1918ca56de432f7217e41eef97cd53253ff6eed8741e885ad1aa671.json",
+    "sha256": "53e73a75f43e716df05a509271025ca87787a37e10760e4e21d03d44428b4d8f",
+    "bytes": 3007
+  },
+  "authoring_starter": {
+    "source": {
+      "path": "build/p/starter/tutorial-load-0.1.0-source.zip",
+      "sha256": "8f8155c67248d57526dec7096b4abbdd33f75dd1613b9a10a58abc7607a889e0",
+      "bytes": 54213
+    },
+    "proof": {
+      "path": "build/publication-02/retained-evidence/objects/a07720d069cfdf618e34365934f29918bd8144a101bb2d170dcb21b01b3b26b0.json",
+      "sha256": "4c8fde24710e099798c9ab6304fb3df726cb63bb69c9baa475be910ea1a03a63",
+      "bytes": 2862
+    }
+  },
+  "stationary_yard": {
+    "path": "build/hN/21.1.231/NATIVE-PINOUT-yard.zip",
+    "sha256": "b2a961b42b10cebbb2ece4045c5f869d81c516c08a8528ecb9c6f49cfde4146b",
+    "bytes": 1351075
+  },
+  "base_workshop_world": {
+    "path": "build/hN/21.1.231/NATIVE-BASE-workshop.zip",
+    "sha256": "bd82149ec8cf8c262e955ab97cfb0715c709eb9b3f0148e5875032e0613bd834",
+    "bytes": 322198
+  },
+  "pinout_workshop_world": {
+    "path": "build/hN/21.1.231/NATIVE-PINOUT-workshop.zip",
+    "sha256": "af033c0d1ca835c5a5e380f6530807031faebd9d2af7a6cc40d1e44098640375",
+    "bytes": 324193
+  },
+  "representative_visual_review": {
+    "path": "build/publication-02/retained-evidence/objects/ec06342d5f07082e69c15024dcf8b07485f703e81012adfa8859ae01aa7afd58.json",
+    "sha256": "dec361dc9a551c621faaab3e9dcf5c0a884dff34fb11cce7462d2b0ffad78c0e",
+    "bytes": 3273
+  },
+  "client_diagnostics_review": {
+    "path": "build/publication-02/retained-evidence/objects/fa00f084a51740a31c33ed61a276f33431ad2d3eb677c7f3a1847d3adb6f5962.json",
+    "sha256": "aaa5e60c849d3de4c199c6a775fbe6864d4cc5b37c621b1ff4ccfc93e31e5e4f",
+    "bytes": 6537
+  },
+  "packaging_audit": {
+    "path": "build/publication-02/retained-evidence/objects/4a420f7a71869c90edc485004dde3692630cd7f1b68f7bc84d86db0e29a0d675.json",
+    "sha256": "4a420f7a71869c90edc485004dde3692630cd7f1b68f7bc84d86db0e29a0d675",
+    "bytes": 813
+  },
+  "resolved_tool_environment_failure": {
+    "path": "build/publication-02/retained-evidence/objects/4c2ddba67cb6e635c5bb2be112374488c28416fc7bf5144cb2196f4e12a42814.json",
+    "sha256": "4c2ddba67cb6e635c5bb2be112374488c28416fc7bf5144cb2196f4e12a42814",
+    "bytes": 688
+  },
+  "acceptance_notes": [
+    "Fresh local full headless acceptance on Windows and Ubuntu 24.04, both solvers, BASE/PINOUT, NeoForge 21.1.231 and 21.1.248; 342 catalog jobs.",
+    "Twelve fresh serial Windows graphical scenarios include actual inputs, two real TCP clients, and successful Save and Quit or disconnect/save/stop.",
+    "The gameplay jar contains no GameTests or acceptance helpers. All executions load the separately frozen matching companion.",
+    "Dev.116 focused targeting results retain their original identity; entry-level equivalence allows only the 0.2.6 version metadata to differ.",
+    "Full release lanes use CEE 1.1.3. Existing focused CEE 1.1.4, Gauged, CIO and Sable evidence remains separately identified; this does not certify arbitrary third-party builds or all Sable client rendering.",
+    "No performance campaign, full graphical gallery, GitHub merge, tag or publication was performed for this qualification.",
+    "Publication reuses the completed 342-job and 12-scenario qualification with every tested jar byte-identical. Protected runtime, tests, helper, tool and example source trees are unchanged; documentation and website updates have their own commit.",
+    "The original published 0.2.5 benchmark save is included with only 0.2.6 labels and jar metadata changed. Native save bytes are unchanged, no new benchmark ran, and 20 TPS remains uncertified.",
+    "Supplemental focused records retain their original dev.116 and dev.115 source identities and logs. Optional third-party jars and private test worlds are not distributed in this verification bundle."
+  ],
+  "sdk_acceptance_reuse": {
+    "schema": 1,
+    "scope": "runtime_version_only",
+    "source_sha": "2194e8ad99c94c9cc3968e411efe6766dcb93bec",
+    "runtime_version": "0.2.6",
+    "artifacts": {
+      "api_sources": {
+        "path": "build/publication-02/retained-evidence/objects/1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b.jar",
+        "sha256": "1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b",
+        "bytes": 25943
+      },
+      "maven_repository": {
+        "path": "build/publication-02/retained-evidence/objects/4754e5e04ac71bc60164843f5ed6554c200a515d7045feb970c90660264d4720.zip",
+        "sha256": "4754e5e04ac71bc60164843f5ed6554c200a515d7045feb970c90660264d4720",
+        "bytes": 415499
+      },
+      "upstream_example": {
+        "path": "build/publication-02/retained-evidence/objects/5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11.jar",
+        "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+        "bytes": 45633
+      },
+      "api": {
+        "path": "build/publication-02/retained-evidence/objects/a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892.jar",
+        "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+        "bytes": 50143
+      },
+      "cee_api_sources": {
+        "path": "build/publication-02/retained-evidence/objects/00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34.jar",
+        "sha256": "00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34",
+        "bytes": 6947
+      },
+      "runtime": {
+        "path": "build/publication-02/retained-evidence/objects/aa3402a9599281fb580372175413ac876823fe0ca6e927f28953a93ef8589efa.jar",
+        "sha256": "aa3402a9599281fb580372175413ac876823fe0ca6e927f28953a93ef8589efa",
+        "bytes": 5097860
+      },
+      "cee_api_javadoc": {
+        "path": "build/publication-02/retained-evidence/objects/37d3650a1658716ed22058b35bff9a88d968e95b20f4164d3fa8c6cd68f2d158.jar",
+        "sha256": "37d3650a1658716ed22058b35bff9a88d968e95b20f4164d3fa8c6cd68f2d158",
+        "bytes": 107864
+      },
+      "api_javadoc": {
+        "path": "build/publication-02/retained-evidence/objects/6f7d9d32dc2ea0b40c0f10488b24615e68c2965b548a4c11c462d79a9ba1371b.jar",
+        "sha256": "6f7d9d32dc2ea0b40c0f10488b24615e68c2965b548a4c11c462d79a9ba1371b",
+        "bytes": 230697
+      },
+      "example": {
+        "path": "build/publication-02/retained-evidence/objects/17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef.jar",
+        "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+        "bytes": 52081
+      },
+      "upstream_example_sources": {
+        "path": "build/publication-02/retained-evidence/objects/50587eb8cb6730aa62a3084d7146a4087bc8068dd9fc99f5a195dd6d959b4b4a.zip",
+        "sha256": "50587eb8cb6730aa62a3084d7146a4087bc8068dd9fc99f5a195dd6d959b4b4a",
+        "bytes": 70377
+      },
+      "example_sources": {
+        "path": "build/publication-02/retained-evidence/objects/4cf52bf1829dd3a71f2bc1b54a642ba2e52df9d225a9f779884fa115825d4db9.zip",
+        "sha256": "4cf52bf1829dd3a71f2bc1b54a642ba2e52df9d225a9f779884fa115825d4db9",
+        "bytes": 79521
+      },
+      "cee_api": {
+        "path": "build/publication-02/retained-evidence/objects/d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a.jar",
+        "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+        "bytes": 8793
+      }
+    },
+    "explanation": "All twelve SDK artifacts and the separate test companion retain accepted bytes; current guides are separately frozen."
+  },
+  "documentation_snapshot": {
+    "path": "build/publication-02/retained-evidence/objects/135dfb617c26063d03ce318c064afe65de79058edb4187d761d73cd26336a856.json",
+    "sha256": "2d045dc313c557f65c191dad62087c481c83814f34723ebf535c8b56482c992f",
+    "bytes": 3533
+  },
+  "publication_source_scope": {
+    "path": "build/publication-02/retained-evidence/objects/92c689c4039d44c98892ce3e7887bf18690a24b17543e536651e9eaa08517654.json",
+    "sha256": "a86fd19cc6798afaba803d62612fba136d2323c4a919f756dbcf7540b2a8417e",
+    "bytes": 21071
+  },
+  "benchmark_world": {
+    "path": "build/publication-02/wwpg-0.2.6-benchmark-14650-nodes.zip",
+    "sha256": "100b22fd1ea2e78c1506576ab92cc00fb248ffe53a8f753fbaa76d945853509c",
+    "bytes": 3413539
+  },
+  "benchmark_metadata_comparison": {
+    "path": "build/publication-02/retained-evidence/objects/eea233c4f72925b86c996d29e2fbdd797cf41c616de38ea771a1893ab67c4f1d.json",
+    "sha256": "f39c0e20489df74ed58e39f313768c6669c600ef56f577bdf631d030e0915b5a",
+    "bytes": 980
+  },
+  "supplemental_focused_records": [
+    {
+      "path": "build/publication-02/retained-evidence/objects/1cf9c68c24ab043479bb285d98b1b956250eba4572e5ad09f8c5abc06e7f80e9.json",
+      "sha256": "afb8922ba15070585b96a1d2a9edf05557d0aace323e39466907a975a32e5ee6",
+      "bytes": 11474
+    },
+    {
+      "path": "build/publication-02/retained-evidence/objects/a0c1270395b338bbfc9bfa56995ffdabcfd4d2acde2beea3e876d7bf7c68b7ad.json",
+      "sha256": "fd0077980de2ed4956b2c6d6928758fcbd17d5a098142ea9cd80418a5bf0f2ad",
+      "bytes": 17802
+    }
+  ],
+  "_original_record": {
+    "path": "build/publication-02/retained-evidence/objects/result.original.bin",
+    "sha256": "ba21ee25e6c713c9f21a4745c1381008b57a00c4cb5e6c79485e6e19edbd2512",
+    "bytes": 9390
+  },
+  "artifacts": {
+    "runtime": {
+      "path": "build/q/wwpg-0.2.6.jar",
+      "sha256": "aa3402a9599281fb580372175413ac876823fe0ca6e927f28953a93ef8589efa",
+      "bytes": 5097860
+    },
+    "api": {
+      "path": "build/q/wwpg-api-1.0.0.jar",
+      "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+      "bytes": 50143
+    },
+    "cee_api": {
+      "path": "build/q/wwpg-cee-api-1.0.0.jar",
+      "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+      "bytes": 8793
+    },
+    "example": {
+      "path": "build/q/wwpg-api-example-1.0.0.jar",
+      "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+      "bytes": 52081
+    },
+    "upstream_example": {
+      "path": "build/q/wwpg-upstream-api-example-1.0.0.jar",
+      "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+      "bytes": 45633
+    },
+    "gametest": {
+      "path": "build/q/wwpg-0.2.6-gametests.jar",
+      "sha256": "1b3f7547b1826749e24a7c5aab56fdbfd7a44cdb63cf49e385d599707113d0bf",
+      "bytes": 1227026
+    },
+    "maven_repository": {
+      "path": "build/q/wwpg-api-1.0.0-maven.zip",
+      "sha256": "4754e5e04ac71bc60164843f5ed6554c200a515d7045feb970c90660264d4720",
+      "bytes": 415499
+    },
+    "example_sources": {
+      "path": "build/q/wwpg-api-example-1.0.0-source.zip",
+      "sha256": "4cf52bf1829dd3a71f2bc1b54a642ba2e52df9d225a9f779884fa115825d4db9",
+      "bytes": 79521
+    },
+    "upstream_example_sources": {
+      "path": "build/q/wwpg-upstream-api-example-1.0.0-source.zip",
+      "sha256": "50587eb8cb6730aa62a3084d7146a4087bc8068dd9fc99f5a195dd6d959b4b4a",
+      "bytes": 70377
+    },
+    "api_sources": {
+      "path": "build/q/wwpg-api-1.0.0-sources.jar",
+      "sha256": "1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b",
+      "bytes": 25943
+    },
+    "api_javadoc": {
+      "path": "build/q/wwpg-api-1.0.0-javadoc.jar",
+      "sha256": "6f7d9d32dc2ea0b40c0f10488b24615e68c2965b548a4c11c462d79a9ba1371b",
+      "bytes": 230697
+    },
+    "cee_api_sources": {
+      "path": "build/q/wwpg-cee-api-1.0.0-sources.jar",
+      "sha256": "00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34",
+      "bytes": 6947
+    },
+    "cee_api_javadoc": {
+      "path": "build/q/wwpg-cee-api-1.0.0-javadoc.jar",
+      "sha256": "37d3650a1658716ed22058b35bff9a88d968e95b20f4164d3fa8c6cd68f2d158",
+      "bytes": 107864
+    }
+  }
+}
