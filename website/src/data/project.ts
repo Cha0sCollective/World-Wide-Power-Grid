@@ -19,6 +19,7 @@ export interface Release {
   tag: string;
   commit: string;
   recordsCommit?: string;
+  compatibilityNote?: string;
   channel: string;
   date: string;
   requirements: Record<string, string>;
