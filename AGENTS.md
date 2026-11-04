@@ -13,6 +13,13 @@ pull requests, version bumps or releases. Reuse preserved passing acceptance
 when the tested runtime is unchanged, with explicit artifact comparisons;
 never relabel old evidence or interrupted runs as fresh passes.
 
+For future release campaigns, select the newest currently supported runtime
+dependency jars before freezing inputs. Run complete requested acceptance on
+that set, and record the actual loaded versions and hashes. A full run on older
+jars plus focused checks on newer jars does not establish full acceptance of
+the newer set. Retain older-version compatibility checks and minimum SDK
+compile dependencies separately. This policy does not authorize a rerun.
+
 Current user and developer guides start at [docs/README.md](docs/README.md).
 Write player instructions in plain language: what to operate, what should
 happen, how to reset it, and which mods are required. Keep internal test and

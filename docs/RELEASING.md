@@ -38,6 +38,16 @@ record its original source/artifact identities and verify every other runtime
 entry is unchanged. SDK or packaging changes still need focused checks.
 Never describe carried-forward acceptance or an interrupted run as a fresh pass.
 
+For future release campaigns, follow the [runtime dependency selection
+policy](TESTING.md#select-release-runtime-dependencies): freeze the newest
+currently supported dependency jars and use them for the complete requested
+acceptance, including the applicable graphical lane. Older-version focused or
+compatibility checks remain additional coverage; they cannot replace the full
+run on the current supported set. Verify actual loaded versions and hashes,
+including when launcher or build defaults still select older jars. Preserve
+historical release evidence and the existing requirement for explicit suite
+authorization.
+
 Under the historical acceptance policy, Windows evidence may come from a preserved full local run, combined with
 the complete four-way Linux CI matrix. Use `retained_windows_acceptance` only
 with version-equivalent `acceptance_reuse`. Its validator reparses the original
