@@ -37,6 +37,14 @@ real-player and reference fixtures are explicitly classified outside ordinary
 electrical regression execution. External example namespaces are listed with
 their API groups.
 
+`wwpg_sable_targeting` is an opt-in coordinate fixture namespace. Install the
+Sable Companion 1.6.0 API explicitly for that invocation; the normal BASE and
+PINOUT launches do not require it. These fixtures use real CEE geometry and PG
+wire dispatch with controlled public-API poses, covering translation, rotation,
+scale, render interpolation, panel covers, occlusion and live owner replacement.
+They do not establish client frame rate or full moving-factory electrical
+compatibility. Retain separate evidence for checks using the actual Sable mod.
+
 ## Freeze once and run focused checks
 
 `tools/ci_prepare.py` builds one canonical runtime/API set, independently builds

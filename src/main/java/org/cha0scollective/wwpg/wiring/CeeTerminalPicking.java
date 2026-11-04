@@ -16,6 +16,19 @@ import org.patryk3211.powergrid.equipment.multimeter.MultimeterItem;
 
 /** Shared client crosshair and server wire-tool picking; never changes block/collision shapes. */
 public final class CeeTerminalPicking {
+    private static final class OptionalSable {
+        static final boolean LOADED = available();
+        private static boolean available() {
+            var mods=net.neoforged.fml.ModList.get();
+            if (!mods.isLoaded("sable")) return false;
+            var version=mods.getModContainerById("sablecompanion").map(mod->mod.getModInfo().getVersion());
+            if (version.isPresent() && version.get().getMajorVersion()==1 && version.get().getMinorVersion()>=5) return true;
+            org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.warn(
+                    "WWPG: Sable terminal projection requires Companion 1.5+ within API 1.x; found {}. Unrecognized hits retain native picking safely.",
+                    version.map(Object::toString).orElse("missing"));
+            return false;
+        }
+    }
     private CeeTerminalPicking() {}
 
     public static boolean holdsPgWire(Player player) {
@@ -44,8 +57,19 @@ public final class CeeTerminalPicking {
                 || isPgTerminalTool(level, stack);
     }
 
+    public static HitResult pick(Player player, double reach, float partialTick, HitResult original) {
+        if (OptionalSable.LOADED) return org.cha0scollective.wwpg.compat.sable.SableTerminalPicking.pick(player,reach,partialTick,original);
+        var from=player.getEyePosition(partialTick);
+        return pick(player,from,from.add(player.getViewVector(partialTick).scale(reach)),original);
+    }
+
+    /** Both the ray and the native hit must belong to this same coordinate frame. */
     public static HitResult pick(Player player, Vec3 from, Vec3 to, HitResult original) {
         if (original.getType() == HitResult.Type.ENTITY || from.equals(to)) return original;
+        // Never let a projected, stale or malformed hit expand the physical ray.
+        // Unknown moving-world integrations retain their native hit safely.
+        if (!Double.isFinite(from.distanceToSqr(to))
+                || original.getType()==HitResult.Type.BLOCK && !withinRay(from,to,original.getLocation())) return original;
         var level = player.level();
         var panel = panelTerminal(player, from, to, original);
         // An opened panel exposes its own recessed terminals. All other devices
@@ -69,6 +93,15 @@ public final class CeeTerminalPicking {
             }
         }
         return nearest;
+    }
+
+    /** Rigid transforms can introduce small rounding errors at distant storage coordinates. */
+    public static boolean withinRay(Vec3 from,Vec3 to,Vec3 point) {
+        var direction=to.subtract(from);double length=direction.lengthSqr();
+        if (!(length>0) || !Double.isFinite(length)) return false;
+        double along=point.subtract(from).dot(direction)/length;
+        if (!(along>=-1e-7 && along<=1+1e-7)) return false;
+        return from.add(direction.scale(Math.max(0,Math.min(1,along)))).distanceToSqr(point)<=1e-10;
     }
 
     private static BlockHitResult panelTerminal(Player player, Vec3 from, Vec3 to, HitResult original) {
