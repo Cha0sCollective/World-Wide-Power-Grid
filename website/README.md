@@ -24,7 +24,7 @@ Edit `src/data/project.json` for the origin, current release, requirements, down
 
 Reviewed website guides live in `content/guides/<version>/`. Add a complete set for a new release, then snapshot its selected sources, update the current-release field, and build. Preserve earlier editions. Each guide carries a release notice; search filters to the active edition and labels each result. No visitor requests to GitHub or Modrinth APIs are required.
 
-The current edition covers stable WWPG 0.2.5, supporting NeoForge 21.1.231 / 21.1.248 and CEE 1.1.3 / 1.1.4, with independently versioned API 1.0.0. Full acceptance uses CEE 1.1.3; focused Windows checks on NeoForge 21.1.248 cover both CEE versions. The 0.2.2 and 0.2.1 editions remain archived. The 0.2.0 edition retains its original requirements and released assets. The beta.5 edition remains available with its original source bytes and explicit lack of a public Java API. Lua calls are checked against each release's actual acceptance program; website validation does not claim new Minecraft gameplay execution.
+The current edition covers stable WWPG 0.2.6, supporting NeoForge 21.1.231 / 21.1.248 and CEE 1.1.3 / 1.1.4, with independently versioned API 1.0.0. Full acceptance uses CEE 1.1.3; focused Windows checks on NeoForge 21.1.248 cover both CEE versions. The 0.2.5, 0.2.2 and 0.2.1 editions remain archived. The 0.2.0 edition retains its original requirements and released assets. The beta.5 edition remains available with its original source bytes and explicit lack of a public Java API. Lua calls are checked against each release's actual acceptance program; website validation does not claim new Minecraft gameplay execution.
 
 ## Released addon API and launch validation
 
