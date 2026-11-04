@@ -46,6 +46,10 @@ repositories {
     maven { url = 'https://mvn.devos.one/snapshots' }
     maven { url = 'https://maven.architectury.dev' }
     exclusiveContent {
+        forRepository { maven { url = 'https://maven.ryanhcode.dev/releases' } }
+        filter { includeGroup 'dev.ryanhcode.sable-companion' }
+    }
+    exclusiveContent {
         forRepository { maven { url = 'https://api.modrinth.com/maven' } }
         filter { includeGroup 'maven.modrinth' }
     }
@@ -124,6 +128,9 @@ dependencies {
     implementation 'dev.architectury:architectury-neoforge:13.0.8'
     // PG supplies EJML at runtime. Compatibility hooks use its existing matrix types.
     compileOnly 'org.ejml:ejml-core:0.44.0'
+    // Optional Sable integration uses its read-only API; Sable supplies it at runtime.
+    compileOnly('dev.ryanhcode.sable-companion:sable-companion-common-1.21.1:1.6.0') { transitive = false }
+    testRuntimeOnly('dev.ryanhcode.sable-companion:sable-companion-common-1.21.1:1.6.0') { transitive = false }
     testImplementation platform('org.junit:junit-bom:5.11.4')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testCompileOnly 'dev.engine-room.flywheel:flywheel-neoforge-api-1.21.1:1.0.6'
@@ -169,7 +176,8 @@ tasks.named('processGameTestResources') {
     from('release') { include 'artifacts.json', 'optional-artifacts.json', 'content-matrix.json', '0.1.0-beta.5/content-matrix.json', '0.1.0-beta.5/registry-inventory.json'; into 'data/wwpg/release' }
     ['wwpg_loading', 'wwpg_matrix_ownership', 'wwpg_board_startup', 'wwpg_cee_preparation',
      'wwpg_solver_safety', 'wwpg_native_guard', 'wwpg_unload', 'wwpg_contactors', 'wwpg_meter_sampling',
-     'wwpg_loader_installation', 'wwpg_loader_addons', 'wwpg_addon_safety', 'wwpg_addon_native_guard'].each { namespace ->
+     'wwpg_loader_installation', 'wwpg_loader_addons', 'wwpg_addon_safety', 'wwpg_addon_native_guard',
+     'wwpg_cio', 'wwpg_cio_upgrade', 'wwpg_cio_guard', 'wwpg_cio_transitions', 'wwpg_sable_targeting'].each { namespace ->
         from('src/gameTest/resources/data/wwpg/structure/empty.nbt') { into "data/${namespace}/structure" }
     }
 }

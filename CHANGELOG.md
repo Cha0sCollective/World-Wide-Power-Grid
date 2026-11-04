@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.6 — 4 November 2026
+
+- Support CIO 0.1.240-experimental's inverter through its original waveform and measurement callbacks. Disable redundant CIO grid couplers safely while keeping saved blocks and wires intact.
+- Preserve normal initialization as an unavailable frame instead of reporting a false adapter failure. Hold device history until a complete tick is accepted; retain genuine solver, callback and rollback warnings.
+- Fix runaway PG-tool targeting scans on Sable sublevels. Use the correct translated, rotated and interpolated coordinates while preserving exposed CEE pins, panel covers, reach limits and native wire IDs. API 1.0.0, saves, native binaries and all 16 electrical substeps remain unchanged.
+
 ## 0.2.5 — 2 November 2026
 
 - Support CEE 1.1.4 while retaining 1.1.3, including correct variac voltage and heating readings.

@@ -13,6 +13,9 @@ description='''Direct electrical interoperability between Create: Electro Energe
 [[mixins]]
 config="wwpg.mixins.json"
 
+[[mixins]]
+config="wwpg.cio.mixins.json"
+
 [[dependencies.wwpg]]
 modId="neoforge"
 type="required"

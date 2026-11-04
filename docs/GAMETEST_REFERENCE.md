@@ -6,24 +6,35 @@ The declarations were relocated without removing tests in local candidate 0.2.2-
 Inventory updated **26 October 2026** for the five dev.102 terminal-targeting regressions.
 Inventory updated **28 October 2026** for the local dev.106 train-circuit regression.
 Inventory updated **28 October 2026** for the API startup-binding regression in the 0.2.4 candidate.
+Inventory updated **4 November 2026** for CIO integration/transition/upgrade/model guards and Sable coordinate fixtures.
 Inventory updated **2 November 2026** for dev.112 panel/probe/control regressions and the classified addon-only safety namespaces.
 Source links below follow that new location. This is a reference to the assertions in the current source, **not a new test
 run or a claim that every entry has passed in every environment**. See
 [Testing process](TESTING.md) for execution and [published release records](../release/README.md)
 for historical passing evidence.
 
+## 0.2.6 additions
+
+The four optional CIO namespaces cover loaded inverter waveforms and controls,
+initialization holds versus genuine rejection, saved-coupler upgrade and private
+model guards; see [CIO checks](CIO_COMPATIBILITY.md#developer-checks-and-boundaries).
+The optional [Sable coordinate fixtures](../src/gameTest/java/org/cha0scollective/wwpg/gametest/SableTerminalPickingGameTests.java)
+cover translated/rotated/scaled/interpolated poses, exposed pins, panel covers,
+reach, obstruction and live sublevel membership. These opt-in namespaces are
+classified separately from ordinary BASE/PINOUT full acceptance.
+
 ## Inventory and how to read it
 
 | Where the declarations live | Test methods | Source files |
 | --- | ---: | ---: |
-| Companion test jar: `src/gameTest/java/.../gametest` | 356 | 117 |
+| Companion test jar: `src/gameTest/java/.../gametest` | 370 | 122 |
 | Independently built general and CEE/PG example addons | 13 | 3 |
 | Extracted SDK acceptance helper | 4 | 1 |
 | Separate short TCP graphical helper | 1 | 1 |
-| **Total** | **374** | **122** |
+| **Total** | **388** | **127** |
 
-There are **45 namespaces**. These are annotated entry points, not 374 unique
-device models, 374 simultaneous tests or the number of invocations in a complete
+There are **50 namespaces**. These are annotated entry points, not 388 unique
+device models, 388 simultaneous tests or the number of invocations in a complete
 campaign. A method can operate many devices and check many assertions. Several
 focused namespaces intentionally delegate to an existing fixture. Compilation,
 JUnit, Python tooling, SDK build checks and native C fault-injection tests are
@@ -79,7 +90,7 @@ means a measurement explicitly cannot be used; it is different from a valid zero
 - Reference and legacy real-client namespaces are special selections, not an
   implicit part of every electrical group. `wwpg_doc` and `wwpg_ci_client` live
   in separate helpers; the latter and the legacy multiplayer entries need real
-  clients. The 356 companion entries include the two legacy client entry points.
+  clients. The 370 companion entries include the two legacy client entry points.
 - Registry/inventory checks prove existence/accounting. Server-side control
   handlers and mock-player operations do not prove real mouse/keyboard input,
   rendered geometry, sound playback or multiplayer synchronization.

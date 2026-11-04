@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "org.cha0scollective.wwpg.mixin",
+  "plugin": "org.cha0scollective.wwpg.compat.cio.CioMixinPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": ["CioPhaseSourceMixin", "CioCouplerMixin"],
+  "injectors": {"defaultRequire": 1}
+}

@@ -63,6 +63,8 @@ public final class WorldBridge {
     private final Map<ElectricalNetwork, List<Branch>> resultBranches = new IdentityHashMap<>();
     private final Map<ElectricalNetwork, List<Winding>> resultWindings = new IdentityHashMap<>();
     private List<SimulatedDevice> devices = List.of();
+    private final Set<net.minecraft.core.BlockPos> disabledCouplers = new HashSet<>();
+    private Set<Node> disabledCouplerNodes = Set.of();
     private List<Dynamic> dynamics = List.of();
     private List<Adapted> adapters = List.of();
     private List<Branch> substepBranches = List.of();
@@ -71,7 +73,8 @@ public final class WorldBridge {
     private final Set<ElectricalProperties> supportedInversions = Collections.newSetFromMap(new IdentityHashMap<>());
     private final Set<ElectricalProperties> acSourceInversions = Collections.newSetFromMap(new IdentityHashMap<>());
     private final Map<Node,String> adapterPreparationFailures = new IdentityHashMap<>();
-    private final Set<ElectricalNetwork> failedAdapterNetworks = Collections.newSetFromMap(new IdentityHashMap<>());
+    private enum Unavailability { INITIALIZING, FAILED }
+    private final Map<ElectricalNetwork, Unavailability> unavailableNetworks = new IdentityHashMap<>();
     private final Set<BlockPos> failedAdapterDevices = new HashSet<>();
     private CircuitBuilder builder;
     private InfrastructureSavedData infrastructure;
@@ -120,7 +123,13 @@ public final class WorldBridge {
         // loaded and its block entities are ticking. Entity IO can remain ready
         // after a chunk loses its ticking ticket, while PG has already detached
         // its electrical model. Do not commit that temporary disconnected graph.
+        disabledCouplers.clear();
         devices = DevicesSavedData.load(level).getDevices(CEESimulatedDeviceFeatureTypes.TICKING_ELECTRICAL.get()).stream()
+                .filter(device -> {
+                    if (!org.cha0scollective.wwpg.compat.cio.CioCompatibility.gridCoupler(device)) return true;
+                    disabledCouplers.add(device.pos.immutable());
+                    return false;
+                })
                 .filter(device -> level.getChunkSource().getChunkNow(device.pos.getX() >> 4, device.pos.getZ() >> 4) != null
                         && level.getChunkSource().isPositionTicking(net.minecraft.world.level.ChunkPos.asLong(device.pos))
                         && level.areEntitiesLoaded(net.minecraft.world.level.ChunkPos.asLong(device.pos)))
@@ -140,10 +149,13 @@ public final class WorldBridge {
         }
         NeoForge.EVENT_BUS.post(new AddToElectricGraphEvent(builder, level, infrastructure));
         builder.connectAll(new ArrayList<>(infrastructure.wireSimulationState.getLazyConnections()));
+        disabledCouplerNodes = disabledCouplers.isEmpty() ? Set.of() : builder.allNodes().stream()
+                .map(indexed -> indexed.node).filter(node -> node instanceof InWorldNode inWorld
+                        && disabledCouplers.contains(inWorld.sourcePos())).collect(java.util.stream.Collectors.toUnmodifiableSet());
         int sampleCount = builder.allNodes().size() * substeps;
         if (voltages.length != sampleCount) voltages = new double[sampleCount];
         else Arrays.fill(voltages, 0);
-        adapterPreparationFailures.clear();failedAdapterNetworks.clear();failedAdapterDevices.clear();
+        adapterPreparationFailures.clear();unavailableNetworks.clear();failedAdapterDevices.clear();
         var session = org.cha0scollective.wwpg.extension.CeeAdapters.newSession();
         adapters = new ArrayList<>();
         var bound = Collections.newSetFromMap(new IdentityHashMap<org.cha0scollective.wwpg.extension.CeeAdapters.Binding,Boolean>());
@@ -506,6 +518,9 @@ public final class WorldBridge {
 
     private OwnedFloatingNode resolve(WorldNetworks world, EndpointKey key, Node node) {
         if (node instanceof InWorldNode inWorld) {
+            // A CIO coupler's PG and CEE terminals reuse IDs. Disabled CEE ports
+            // must remain distinct from the retained passive native PG terminals.
+            if (disabledCouplers.contains(inWorld.sourcePos())) return internal(key);
             var endpoint = new BlockWireEndpoint(inWorld.sourcePos(), inWorld.id());
             // PG's getAt reads the block state and can load the chunk. Unloaded CEE
             // descriptions must use the existing placeholder instead of keeping chunks alive.
@@ -696,7 +711,10 @@ public final class WorldBridge {
                 "PG did not complete the declared substeps");
         for(var adapter:adapters) {
             var branch=directedBranch(new DirectionalNodeConnection(builder.getNode(adapter.first).node,builder.getNode(adapter.second).node)).branch;
-            adapter.binding.finish(branch!=null&&!failedAdapterNetworks.contains(branch.element.network())&&!RestorationCoordinator.paused(branch.element.network())
+            var network=branch==null?null:branch.element.network();
+            if (network!=null && (unavailableNetworks.get(network)==Unavailability.INITIALIZING
+                    || RestorationCoordinator.paused(network))) adapter.binding.defer();
+            adapter.binding.finish(branch!=null&&!unavailableNetworks.containsKey(network)&&!RestorationCoordinator.paused(network)
                     && steps.getOrDefault(branch.element.network(),0)==substeps);
             adapter.binding.failureReason().ifPresent(reason->adapterFault(adapter,reason));
         }
@@ -713,7 +731,7 @@ public final class WorldBridge {
             putWindingCurrent(currents, winding.properties.nodes(), winding.primarySum, winding.primarySquares);
             putWindingCurrent(currents, winding.properties.coupledNodes(), winding.secondarySum, winding.secondarySquares);
         }
-        var unavailable = new HashSet<Node>();
+        var unavailable = new HashSet<Node>(disabledCouplerNodes);
         pausedDevices.clear(); statefulDevices.clear();
         boolean paused = RestorationCoordinator.anyPaused();
         if (paused) {
@@ -725,7 +743,7 @@ public final class WorldBridge {
         // Healthy, fully mapped circuits have no availability work to perform.
         // An unmapped descriptor must still take the checked path and be masked.
         if (paused || !isolated.isEmpty() || !adapterPreparationFailures.isEmpty()
-                || !failedAdapterNetworks.isEmpty() || preparedKeys.size() != builder.allNodes().size()) {
+                || !unavailableNetworks.isEmpty() || preparedKeys.size() != builder.allNodes().size()) {
             for (var indexed : builder.allNodes()) {
                 try {
                     var key = preparedKey(indexed.node);
@@ -735,7 +753,7 @@ public final class WorldBridge {
                         var owner = ownerOf(key); if (owner != null) { pausedDevices.add(owner); RestorationCoordinator.markOwner(level, owner); }
                     }
                     if (isolated.contains(key) || adapterPreparationFailures.containsKey(indexed.node)
-                            || node != null && failedAdapterNetworks.contains(node.getNetwork())) {
+                            || node != null && unavailableNetworks.containsKey(node.getNetwork())) {
                         unavailable.add(indexed.node);
                         var owner = ownerOf(key);
                         if (owner != null) failedAdapterDevices.add(owner);
@@ -820,7 +838,7 @@ public final class WorldBridge {
         return failedDynamicNode(dynamic.firstNode) || failedDynamicNode(dynamic.secondNode);
     }
     private boolean failedDynamicNode(OwnedFloatingNode node) {
-        return node != null && (failedAdapterNetworks.contains(node.getNetwork()) || RestorationCoordinator.paused(node.getNetwork()));
+        return node != null && (unavailableNetworks.containsKey(node.getNetwork()) || RestorationCoordinator.paused(node.getNetwork()));
     }
     private void adapterFault(Adapted adapter,String reason) {
         diagnostic("CEE adapter "+adapter.binding.providerId()+": "+reason);
@@ -831,16 +849,13 @@ public final class WorldBridge {
             if(owner!=null)failedAdapterDevices.add(owner);
             var node=nodes.get(key);
             if(node==null||node.getNetwork()==null)continue;
-            var network=node.getNetwork();failedAdapterNetworks.add(network);
+            var network=node.getNetwork();markUnavailable(network,Unavailability.FAILED);
             org.cha0scollective.wwpg.extension.ApiCircuits.get(level).invalidate(network);
-            for(var affected:resultNodes.getOrDefault(network,List.of())) {
-                var affectedOwner=ownerOf(affected.key);if(affectedOwner!=null)failedAdapterDevices.add(affectedOwner);
-            }
         }
     }
     /** Keep a rejected shared frame out of CEE gameplay and extension measurements. */
     public void reject(ElectricalNetwork network,Throwable error) {
-        unavailable(network);
+        markUnavailable(network,Unavailability.FAILED);
         String reason = "Shared electrical solve failed: " + error.getClass().getSimpleName() + ": " + error.getMessage();
         if (reason.length() > 1024) reason = reason.substring(0,1024);
         diagnostics.record(new SolveFailure(network, error.getClass(), reason), level.getGameTime(), network.getStamp(), activeStep);
@@ -862,7 +877,11 @@ public final class WorldBridge {
     }
     /** Keep normal upstream settling out of history/gameplay without recording a false solver error. */
     public void unavailable(ElectricalNetwork network) {
-        failedAdapterNetworks.add(network);
+        markUnavailable(network,Unavailability.INITIALIZING);
+    }
+    private void markUnavailable(ElectricalNetwork network,Unavailability reason) {
+        // A later initialization hold must never downgrade a real fault.
+        if (reason==Unavailability.FAILED || !unavailableNetworks.containsKey(network)) unavailableNetworks.put(network,reason);
         for(var affected:resultNodes.getOrDefault(network,List.of())) {
             var owner=ownerOf(affected.key);if(owner!=null)failedAdapterDevices.add(owner);
         }
@@ -1117,8 +1136,10 @@ public final class WorldBridge {
             var current=branch;
             double v=voltages[first*substeps+step]-voltages[second*substeps+step];
             var branch=current.branch;
-            boolean accepted=branch!=null&&branch.element.network()!=null&&branch.element.network().isConverged();
-            binding.after(v,current.current(),step,substeps,.05/substeps,accepted);
+            var network=branch==null?null:branch.element.network();
+            if (network!=null && unavailableNetworks.get(network)==Unavailability.INITIALIZING) binding.defer();
+            else binding.after(v,current.current(),step,substeps,.05/substeps,
+                    network!=null&&network.isConverged()&&!unavailableNetworks.containsKey(network));
             binding.failureReason().ifPresent(reason->adapterFault(this,reason));
         }
     }

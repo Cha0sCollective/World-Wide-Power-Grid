@@ -135,7 +135,7 @@ public final class CeeAdapters {
         private CeeElectricalParameters parameters;
         private CeeStateCheckpoint tickCheckpoint, substepCheckpoint;
         private String failureReason;
-        private boolean finished;
+        private boolean finished, held;
         private int declaredSubsteps = -1;
         private int lastBefore = -1, lastAfter = -1;
 
@@ -158,6 +158,7 @@ public final class CeeAdapters {
         public final void before(double previousVoltage, int step, int total, double seconds) {
             if (failed()) return;
             if (finished) throw new IllegalStateException("CEE adapter " + providerId + " tick is already finished");
+            if (held) return;
             if (step != lastBefore + 1 || step > 0 && lastAfter != step - 1)
                 throw new IllegalStateException("CEE adapter " + providerId + " beforeSubstep out of order: " + step);
             var context = new CeeSubstepContext(previousVoltage, step, total, seconds);
@@ -180,6 +181,7 @@ public final class CeeAdapters {
         public final void after(double voltage, double current, int step, int total, double seconds, boolean accepted) {
             if (failed()) return;
             if (finished) throw new IllegalStateException("CEE adapter " + providerId + " tick is already finished");
+            if (held) return;
             if (step != lastBefore || step != lastAfter + 1)
                 throw new IllegalStateException("CEE adapter " + providerId + " afterSubstep out of order: " + step);
             if (!accepted) {
@@ -195,12 +197,24 @@ public final class CeeAdapters {
             }
         }
 
+        /** The schedule identified initialization/restoration, not a failed solve.
+         * Keep the captured stamp, stop callbacks and roll history back at tick end. */
+        public final void defer() {
+            if (finished) throw new IllegalStateException("CEE adapter " + providerId + " tick is already finished");
+            if (failed() || held) return;
+            held = true;
+            restore(substepCheckpoint);
+            substepCheckpoint = null;
+        }
+
         public final void finish(boolean acceptedTick) {
             if (finished) throw new IllegalStateException("CEE adapter " + providerId + " tick was finished twice");
+            if (acceptedTick && held && !failed())
+                latchFailure(new IllegalStateException("held electrical tick cannot be accepted"));
             if (acceptedTick && !failed() && dynamic && (declaredSubsteps < 1 || lastAfter != declaredSubsteps - 1))
                 latchFailure(new IllegalStateException("electrical tick did not complete its declared substeps"));
-            if (!acceptedTick && !failed()) latchFailure(new IllegalStateException("electrical tick was rejected"));
-            if (failed()) restore(tickCheckpoint);
+            if (!acceptedTick && !failed() && !held) latchFailure(new IllegalStateException("electrical tick was rejected"));
+            if (failed() || held) restore(tickCheckpoint);
             substepCheckpoint = null;
             tickCheckpoint = null;
             finished = true;

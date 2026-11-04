@@ -1,6 +1,6 @@
 # Version compatibility
 
-WWPG **0.2.5** targets Minecraft **1.21.1**. Use matching mod versions on the
+WWPG **0.2.6** targets Minecraft **1.21.1**. Use matching mod versions on the
 server and every client, and follow the [installation guide](INSTALL.md).
 
 | Dependency | Minimum accepted by WWPG | Checked versions |
