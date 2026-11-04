@@ -1,6 +1,7 @@
 # CIO integration — unreleased development
 
-This describes the local 0.2.6-dev.115 integration. Published WWPG 0.2.5 does not
+This describes the local 0.2.6 candidate, including the dev.115 transition fix.
+Published WWPG 0.2.5 does not
 support CIO's inverter or safely separate its redundant coupler ports.
 
 ## Inverter

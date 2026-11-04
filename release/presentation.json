@@ -1,11 +1,11 @@
 {
   "schema": 1,
   "repository": "Cha0sCollective/World-Wide-Power-Grid",
-  "summary": "0.2.5 improves CEE compatibility and mixed-mod wiring and measurement tools. API 1.0.0 and existing saves stay compatible.",
+  "summary": "0.2.6 adds CIO inverter support and improves transition reliability and targeting on Sable assemblies. API 1.0.0 and existing saves stay compatible.",
   "changes": [
-    "Support CEE 1.1.4 while retaining 1.1.3, including correct variac voltage and heating readings.",
-    "Reveal CEE panels for PG/Gauged wires and PG multimeters, and highlight and select CEE terminals without bypassing walls or reach limits.",
-    "Prevent wiring and measurement clicks from operating CEE controls, including fuse-holder switches, while keeping normal controls, copper insertion and fuse repairs."
+    "Power CIO's inverter through WWPG and safely disable redundant CIO grid couplers without deleting saved blocks or wires.",
+    "Keep normal initialization from becoming a false adapter error while preserving unavailable readings, stored history and genuine fault warnings.",
+    "Prevent runaway terminal-targeting scans on Sable assemblies while retaining exposed CEE pins, panel covers, reach limits and PG/Gauged wiring."
   ],
   "installation": "Use Minecraft 1.21.1, NeoForge 21.1.231 or 21.1.248, Java 21, Create 6.0.10-280, CEE 1.1.3 or 1.1.4, Power Grid 0.6.2 and Architectury 13.0.8. Full acceptance uses CEE 1.1.3; focused Windows checks cover both CEE versions on NeoForge 21.1.248. Match server and client mod versions.",
   "optional_installation": "Pinout editions also require CC:Tweaked 1.120.2 and CC;CPG: Pinout 0.2.1."
