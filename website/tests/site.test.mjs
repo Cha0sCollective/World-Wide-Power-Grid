@@ -205,6 +205,41 @@ test('0.2.1 documentation links to final acceptance records without changing sou
   assert.ok(html('/docs/0.2.0/compatibility/').includes(`${project.repository}/blob/${archived.commit}/release/0.2.0/verification.json`));
 });
 
+test('the current SDK guides use current downloads, API references, and complete starter extraction paths', () => {
+  const version = currentRelease.version;
+  for (const slug of ['developers', 'create-addon', 'general-example', 'native-example']) {
+    const dom = new JSDOM(html(`/docs/${version}/${slug}/`), { url: project.origin });
+    const doc = dom.window.document;
+    for (const link of doc.querySelectorAll('main a[href]')) {
+      if (link.href.startsWith(`${project.repository}/releases/download/`))
+        assert.ok(link.href.startsWith(`${project.repository}/releases/download/${version}/`), `${slug}: stale download ${link.href}`);
+      if (link.pathname.startsWith('/api/'))
+        assert.ok(link.pathname.startsWith(`/api/${version}/`), `${slug}: stale Java reference`);
+    }
+    dom.window.close();
+  }
+  const starter = new JSDOM(html(`/docs/${version}/create-addon/`));
+  assert.ok(starter.window.document.querySelector('main').textContent.includes('WWPG SDK/examples/tutorial-load-0.1.0-source.zip'));
+  assert.ok(starter.window.document.querySelector('main').textContent.includes(`wwpg-${version}-developer-sdk.zip`));
+  const docs = new JSDOM(html(`/docs/${version}/`));
+  for (const slug of ['create-addon', 'api-limits', 'addon-workflow', 'addon-testing', 'general-example', 'native-example'])
+    assert.ok(docs.window.document.querySelector(`nav[aria-label="Main"] a[href="/docs/${version}/${slug}/"]`), `missing current chapter ${slug}`);
+  const downloads = new JSDOM(html('/downloads/'));
+  assert.ok(downloads.window.document.querySelector('.requirements').textContent.includes(currentRelease.compatibilityNote));
+  starter.window.close(); docs.window.close(); downloads.window.close();
+});
+
+test('current native configuration identifies the shipped guarded engine and verified platforms', () => {
+  const dom = new JSDOM(html(`/docs/${currentRelease.version}/configuration/`));
+  const text = dom.window.document.querySelector('main').textContent;
+  assert.match(text, /guarded build of PG/);
+  assert.match(text, /x86-64 with AVX2/);
+  assert.match(text, /Ubuntu 24.04/);
+  assert.match(text, /other distributions remain unverified/);
+  assert.doesNotMatch(text, /official PG 0.6.1|glibc 2.38/);
+  dom.window.close();
+});
+
 test('downloads and requirements match the configured release; Modrinth is optional', () => {
   const doc = new JSDOM(html('/downloads/')).window.document;
   assert.ok(doc.querySelector(`a[href="${downloadHref()}"]`));
