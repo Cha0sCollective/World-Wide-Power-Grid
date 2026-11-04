@@ -4,6 +4,16 @@ import { readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
 import { JSDOM } from 'jsdom';
 import { project } from '../src/data/project.ts';
+import { renderReferenceScript } from '../scripts/reference-script.mjs';
+
+test('reference hardening preserves already-safe release scripts and rejects unexpected or ambiguous writers', () => {
+  const path = 'core/search-page.js';
+  const safe = Buffer.from('searchLink.text(href);');
+  assert.equal(renderReferenceScript(path, safe), safe);
+  assert.equal(renderReferenceScript(path, Buffer.from('searchLink.html(href);')).toString(), safe.toString());
+  for (const source of ['', 'searchLink.html(other);', 'searchLink.html(href);searchLink.text(href);', 'searchLink.text(href);searchLink.text(href);'])
+    assert.throws(() => renderReferenceScript(path, Buffer.from(source)), /Unexpected released Javadoc URL writer/);
+});
 
 test('published Javadoc URL templates display and copy literal text, including character references and raw test markup', () => {
   for (const release of project.releases.filter((item) => item.api))
