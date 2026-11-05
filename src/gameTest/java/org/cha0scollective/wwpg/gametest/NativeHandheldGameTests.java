@@ -214,9 +214,23 @@ public final class NativeHandheldGameTests {
 
     @GameTest(template = "empty", batch = "wwpg_handheld_sampling", timeoutTicks = 110)
     public static void meterReadsMediumTransformerOwnTerminals(GameTestHelper h) {
-        PgTransformerGameTests.assembledMediumTransformerStepUp(h);
-        var primary = h.absolutePos(new BlockPos(3, 3, 3));
-        var secondary = primary.south();
+        transformerProbes(h, true, Direction.Axis.Z);
+    }
+
+    @GameTest(template = "empty", batch = "wwpg_handheld_sampling", timeoutTicks = 110)
+    public static void meterReadsMediumTransformerOnOtherAxis(GameTestHelper h) {
+        transformerProbes(h, true, Direction.Axis.X);
+    }
+
+    @GameTest(template = "empty", batch = "wwpg_handheld_sampling", timeoutTicks = 110)
+    public static void meterKeepsSmallTransformerReadings(GameTestHelper h) {
+        transformerProbes(h, false, Direction.Axis.Z);
+    }
+
+    private static void transformerProbes(GameTestHelper h, boolean medium, Direction.Axis axis) {
+        PgTransformerGameTests.transformer(h, medium, 20, 40, axis);
+        var primary = h.absolutePos(new BlockPos(3, medium ? 3 : 2, 3));
+        var secondary = medium ? primary.relative(axis, 1) : primary;
         var load = h.absolutePos(new BlockPos(6, 2, 3));
         var loadProbe = new Probe(h, load);
         var primaryProbe = new Probe(h, primary);
@@ -224,16 +238,28 @@ public final class NativeHandheldGameTests {
         h.runAtTickTime(35, () -> {
             loadProbe.click(load, 0); loadProbe.click(load, 1);
             loadProbe.matches(load, 0, load, 1, 5);
+            var canonical = (BlockWireEndpoint) new BlockWireEndpoint(primary, 0).getNode(h.getLevel()).endpoint;
+            h.assertTrue(ElectricalMeasurements.readTerminal(h.getLevel(), canonical.getPos(), canonical.getTerminal()).status() == MeasurementStatus.VALID,
+                    "Transformer controller's canonical reading is unavailable");
+            var world = GlobalElectricNetworks.getWorldNetworks(h.getLevel());
+            int nodes = world.globalExternalNodes.size(), circuits = world.subnetworks.size();
             primaryProbe.click(primary, 0); primaryProbe.click(primary, 1);
             primaryProbe.matches(primary, 0, primary, 1, 5);
             secondaryProbe.click(secondary, 2); secondaryProbe.click(secondary, 3);
             secondaryProbe.matches(secondary, 2, secondary, 3, 5);
+            h.assertTrue(nodes == world.globalExternalNodes.size() && circuits == world.subnetworks.size(),
+                    "Transformer measurement changed the electrical graph");
         });
-        h.runAtTickTime(60, () -> {
+        h.runAtTickTime(45, () -> {
+            NativeApiReadings.invalidate(h.getLevel(), new BlockWireEndpoint(primary, 0).getNode(h.getLevel()).getNetwork());
+            NativeApiReadings.invalidate(h.getLevel(), new BlockWireEndpoint(secondary, 2).getNode(h.getLevel()).getNetwork());
+            primaryProbe.unavailable(); secondaryProbe.unavailable();
+        });
+        h.runAtTickTime(50, () -> {
             primaryProbe.matches(primary, 0, primary, 1, 5);
             secondaryProbe.matches(secondary, 2, secondary, 3, 5);
         });
-        h.runAtTickTime(71, () -> { primaryProbe.removed(); secondaryProbe.removed(); });
+        h.runAtTickTime(60, () -> { primaryProbe.removed(); secondaryProbe.removed(); });
     }
 
     @GameTest(template = "empty", batch = "wwpg_handheld_sampling", timeoutTicks = 100)
@@ -262,7 +288,7 @@ public final class NativeHandheldGameTests {
         }
         void matches(BlockPos a, int ia, BlockPos b, int ib, double minimum) {
             var result = ElectricalMeasurements.readVoltageBetween(h.getLevel(), a, ia, b, ib);
-            h.assertTrue(result.status() == MeasurementStatus.VALID, "Probe snapshot unavailable: " + result.status() + " " + result.detail());
+            h.assertTrue(result.status() == MeasurementStatus.VALID, "Probe snapshot unavailable at " + a + ":" + ia + " / " + b + ":" + ib + ": " + result.status() + " " + result.detail());
             double expected = result.voltage().orElseThrow().lastVoltageVolts();
             h.assertTrue(Math.abs(expected) > minimum, "Fixture is not powered: " + expected);
             meter.inventoryTick(stack, h.getLevel(), player, 0, true);

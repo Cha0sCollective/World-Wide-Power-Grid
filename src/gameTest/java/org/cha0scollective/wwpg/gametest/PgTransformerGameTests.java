@@ -42,13 +42,17 @@ public final class PgTransformerGameTests {
     @GameTest(template="empty",timeoutTicks=100) public static void assembledMediumTransformerStepDown(GameTestHelper h){transformer(h,true,40,20);}
 
     private static void transformer(GameTestHelper h,boolean medium,int primary,int secondary){
+        transformer(h,medium,primary,secondary,Direction.Axis.Z);
+    }
+
+    static void transformer(GameTestHelper h,boolean medium,int primary,int secondary,Direction.Axis axis){
         var core=new BlockPos(3,2,3);var source=new BlockPos(1,2,1);var load=new BlockPos(6,2,3);
-        for(var p:new BlockPos[]{core,core.south(),source,load})h.setBlock(p.below(),Blocks.STONE);
+        for(var p:new BlockPos[]{core,core.relative(axis,1),source,load})h.setBlock(p.below(),Blocks.STONE);
         h.setBlock(core,ModdedBlocks.TRANSFORMER_CORE.get());
-        if(medium)for(var p:new BlockPos[]{core.south(),core.above(),core.south().above()})h.setBlock(p,ModdedBlocks.TRANSFORMER_CORE.get());
+        if(medium)for(var p:new BlockPos[]{core.relative(axis,1),core.above(),core.relative(axis,1).above()})h.setBlock(p,ModdedBlocks.TRANSFORMER_CORE.get());
         h.setBlock(source,CEEBlocks.CREATIVE_BATTERY.get());h.setBlock(load,CEEBlocks.CREATIVE_RESISTOR.get());
         var base=h.absolutePos(core);var s=h.absolutePos(source);var l=h.absolutePos(load);var level=h.getLevel();
-        var top=medium?base.above():base;var other=medium?base.south().above():base;
+        var top=medium?base.above():base;var other=medium?base.relative(axis,1).above():base;
         h.runAtTickTime(5,()->{
             var player=h.makeMockPlayer(GameType.SURVIVAL);
             var context=new UseOnContext(player,InteractionHand.MAIN_HAND,new BlockHitResult(base.getCenter(),Direction.NORTH,base,false));

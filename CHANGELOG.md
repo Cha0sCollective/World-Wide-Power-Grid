@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Fix PG multimeter voltage readings on assembled medium-transformer terminals by resolving their loaded controller's accepted samples. Preserve unavailable readings during invalidation, removal and recovery; add direct-probe checks for both transformer orientations and small transformers.
+
 ## 0.2.6 — 4 November 2026
 
 - Support CIO 0.1.240-experimental's inverter through its original waveform and measurement callbacks. Disable redundant CIO grid couplers safely while keeping saved blocks and wires intact.
