@@ -211,6 +211,31 @@ public final class NativeHandheldGameTests {
 
     @GameTest(template = "empty", batch = "wwpg_handheld_sampling", timeoutTicks = 100)
     public static void existingMixedTerminalMeter(GameTestHelper h) { HandheldMeterGameTests.multimeterReadsCeeAndMixedTerminals(h); }
+
+    @GameTest(template = "empty", batch = "wwpg_handheld_sampling", timeoutTicks = 110)
+    public static void meterReadsMediumTransformerOwnTerminals(GameTestHelper h) {
+        PgTransformerGameTests.assembledMediumTransformerStepUp(h);
+        var primary = h.absolutePos(new BlockPos(3, 3, 3));
+        var secondary = primary.south();
+        var load = h.absolutePos(new BlockPos(6, 2, 3));
+        var loadProbe = new Probe(h, load);
+        var primaryProbe = new Probe(h, primary);
+        var secondaryProbe = new Probe(h, secondary);
+        h.runAtTickTime(35, () -> {
+            loadProbe.click(load, 0); loadProbe.click(load, 1);
+            loadProbe.matches(load, 0, load, 1, 5);
+            primaryProbe.click(primary, 0); primaryProbe.click(primary, 1);
+            primaryProbe.matches(primary, 0, primary, 1, 5);
+            secondaryProbe.click(secondary, 2); secondaryProbe.click(secondary, 3);
+            secondaryProbe.matches(secondary, 2, secondary, 3, 5);
+        });
+        h.runAtTickTime(60, () -> {
+            primaryProbe.matches(primary, 0, primary, 1, 5);
+            secondaryProbe.matches(secondary, 2, secondary, 3, 5);
+        });
+        h.runAtTickTime(71, () -> { primaryProbe.removed(); secondaryProbe.removed(); });
+    }
+
     @GameTest(template = "empty", batch = "wwpg_handheld_sampling", timeoutTicks = 100)
     public static void existingCeeWireMeter(GameTestHelper h) { HandheldMeterGameTests.multimeterReadsCeeWireAndClearsCutConnection(h); }
     @GameTest(template = "empty", batch = "wwpg_handheld_sampling", timeoutTicks = 100)
