@@ -1,0 +1,1068 @@
+{
+  "source_sha": "f100a1ff013b4fdb77a4640d50ba676c29ca06a6",
+  "status": "passed",
+  "checked_utc": "2026-11-07T05:15:44.788550+00:00",
+  "scope": "GitHub focused packaging/unit checks and CodeQL; full acceptance reused locally",
+  "runs": [
+    {
+      "run": {
+        "conclusion": "success",
+        "databaseId": 42340851377,
+        "status": "completed",
+        "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/42340851377",
+        "workflowName": "Focused packaging and SDK checks"
+      },
+      "jobs": [
+        {
+          "id": 128307988161,
+          "name": "packaging (ubuntu-24.04)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/42340851377/job/128307988161",
+          "started_at": "2026-11-07T05:00:32Z",
+          "completed_at": "2026-11-07T05:01:01Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-11-07T05:00:33Z",
+              "completed_at": "2026-11-07T05:00:34Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-11-07T05:00:34Z",
+              "completed_at": "2026-11-07T05:00:40Z"
+            },
+            {
+              "name": "Run actions/setup-java@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-11-07T05:00:40Z",
+              "completed_at": "2026-11-07T05:00:41Z"
+            },
+            {
+              "name": "Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-11-07T05:00:41Z",
+              "completed_at": "2026-11-07T05:00:41Z"
+            },
+            {
+              "name": "Run python tools/test_release_process.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-11-07T05:00:41Z",
+              "completed_at": "2026-11-07T05:00:42Z"
+            },
+            {
+              "name": "Run python tools/test_api_compatibility.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-11-07T05:00:42Z",
+              "completed_at": "2026-11-07T05:00:53Z"
+            },
+            {
+              "name": "Run python tools/test_sdk_documentation.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-11-07T05:00:53Z",
+              "completed_at": "2026-11-07T05:00:53Z"
+            },
+            {
+              "name": "Run python tools/test_extracted_api_sdk.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8,
+              "started_at": "2026-11-07T05:00:53Z",
+              "completed_at": "2026-11-07T05:00:53Z"
+            },
+            {
+              "name": "Run python tools/test_release_acceptance_reuse.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-11-07T05:00:53Z",
+              "completed_at": "2026-11-07T05:00:56Z"
+            },
+            {
+              "name": "Run python tools/test_combined_stationary_release.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-11-07T05:00:56Z",
+              "completed_at": "2026-11-07T05:00:56Z"
+            },
+            {
+              "name": "Run python tools/test_ci_reference_continuation.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-11-07T05:00:56Z",
+              "completed_at": "2026-11-07T05:00:56Z"
+            },
+            {
+              "name": "Run python tools/test_suites.py audit",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12,
+              "started_at": "2026-11-07T05:00:56Z",
+              "completed_at": "2026-11-07T05:00:56Z"
+            },
+            {
+              "name": "Run python tools/test_separated_suites.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13,
+              "started_at": "2026-11-07T05:00:56Z",
+              "completed_at": "2026-11-07T05:00:56Z"
+            },
+            {
+              "name": "Run python tools/test_loader_compatibility.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14,
+              "started_at": "2026-11-07T05:00:56Z",
+              "completed_at": "2026-11-07T05:00:57Z"
+            },
+            {
+              "name": "Post Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 26,
+              "started_at": "2026-11-07T05:00:57Z",
+              "completed_at": "2026-11-07T05:00:57Z"
+            },
+            {
+              "name": "Post Run actions/setup-java@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 27,
+              "started_at": "2026-11-07T05:00:57Z",
+              "completed_at": "2026-11-07T05:00:57Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 28,
+              "started_at": "2026-11-07T05:00:57Z",
+              "completed_at": "2026-11-07T05:00:57Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 29,
+              "started_at": "2026-11-07T05:00:57Z",
+              "completed_at": "2026-11-07T05:00:57Z"
+            }
+          ]
+        },
+        {
+          "id": 128307988432,
+          "name": "packaging (windows-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/42340851377/job/128307988432",
+          "started_at": "2026-11-07T05:00:31Z",
+          "completed_at": "2026-11-07T05:01:07Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-11-07T05:00:32Z",
+              "completed_at": "2026-11-07T05:00:33Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-11-07T05:00:33Z",
+              "completed_at": "2026-11-07T05:00:43Z"
+            },
+            {
+              "name": "Run actions/setup-java@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-11-07T05:00:43Z",
+              "completed_at": "2026-11-07T05:00:43Z"
+            },
+            {
+              "name": "Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-11-07T05:00:43Z",
+              "completed_at": "2026-11-07T05:00:43Z"
+            },
+            {
+              "name": "Run python tools/test_release_process.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-11-07T05:00:43Z",
+              "completed_at": "2026-11-07T05:00:46Z"
+            },
+            {
+              "name": "Run python tools/test_api_compatibility.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-11-07T05:00:46Z",
+              "completed_at": "2026-11-07T05:00:58Z"
+            },
+            {
+              "name": "Run python tools/test_sdk_documentation.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-11-07T05:00:58Z",
+              "completed_at": "2026-11-07T05:00:58Z"
+            },
+            {
+              "name": "Run python tools/test_extracted_api_sdk.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8,
+              "started_at": "2026-11-07T05:00:58Z",
+              "completed_at": "2026-11-07T05:00:59Z"
+            },
+            {
+              "name": "Run python tools/test_release_acceptance_reuse.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-11-07T05:00:59Z",
+              "completed_at": "2026-11-07T05:01:01Z"
+            },
+            {
+              "name": "Run python tools/test_combined_stationary_release.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-11-07T05:01:01Z",
+              "completed_at": "2026-11-07T05:01:01Z"
+            },
+            {
+              "name": "Run python tools/test_ci_reference_continuation.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-11-07T05:01:01Z",
+              "completed_at": "2026-11-07T05:01:02Z"
+            },
+            {
+              "name": "Run python tools/test_suites.py audit",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12,
+              "started_at": "2026-11-07T05:01:02Z",
+              "completed_at": "2026-11-07T05:01:02Z"
+            },
+            {
+              "name": "Run python tools/test_separated_suites.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13,
+              "started_at": "2026-11-07T05:01:02Z",
+              "completed_at": "2026-11-07T05:01:03Z"
+            },
+            {
+              "name": "Run python tools/test_loader_compatibility.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14,
+              "started_at": "2026-11-07T05:01:03Z",
+              "completed_at": "2026-11-07T05:01:03Z"
+            },
+            {
+              "name": "Post Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 26,
+              "started_at": "2026-11-07T05:01:03Z",
+              "completed_at": "2026-11-07T05:01:03Z"
+            },
+            {
+              "name": "Post Run actions/setup-java@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 27,
+              "started_at": "2026-11-07T05:01:03Z",
+              "completed_at": "2026-11-07T05:01:04Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 28,
+              "started_at": "2026-11-07T05:01:04Z",
+              "completed_at": "2026-11-07T05:01:05Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 29,
+              "started_at": "2026-11-07T05:01:05Z",
+              "completed_at": "2026-11-07T05:01:05Z"
+            }
+          ]
+        },
+        {
+          "id": 128307988574,
+          "name": "changed",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/42340851377/job/128307988574",
+          "started_at": "2026-11-07T05:00:32Z",
+          "completed_at": "2026-11-07T05:00:41Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-11-07T05:00:32Z",
+              "completed_at": "2026-11-07T05:00:33Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-11-07T05:00:33Z",
+              "completed_at": "2026-11-07T05:00:39Z"
+            },
+            {
+              "name": "Run python - <<'PY'",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-11-07T05:00:39Z",
+              "completed_at": "2026-11-07T05:00:39Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-11-07T05:00:39Z",
+              "completed_at": "2026-11-07T05:00:40Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-11-07T05:00:40Z",
+              "completed_at": "2026-11-07T05:00:40Z"
+            }
+          ]
+        },
+        {
+          "id": 128308034529,
+          "name": "units (windows-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/42340851377/job/128308034529",
+          "started_at": "2026-11-07T05:00:44Z",
+          "completed_at": "2026-11-07T05:02:25Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-11-07T05:00:44Z",
+              "completed_at": "2026-11-07T05:00:47Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-11-07T05:00:47Z",
+              "completed_at": "2026-11-07T05:00:58Z"
+            },
+            {
+              "name": "Run actions/setup-java@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-11-07T05:00:58Z",
+              "completed_at": "2026-11-07T05:00:58Z"
+            },
+            {
+              "name": "Run gradle/actions/setup-gradle@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-11-07T05:00:58Z",
+              "completed_at": "2026-11-07T05:01:20Z"
+            },
+            {
+              "name": "Run chmod +x gradlew",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 5,
+              "started_at": "2026-11-07T05:01:20Z",
+              "completed_at": "2026-11-07T05:01:20Z"
+            },
+            {
+              "name": "Compile, check artifacts and run unit checks only",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-11-07T05:01:20Z",
+              "completed_at": "2026-11-07T05:01:56Z"
+            },
+            {
+              "name": "Post Run gradle/actions/setup-gradle@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-11-07T05:01:56Z",
+              "completed_at": "2026-11-07T05:02:22Z"
+            },
+            {
+              "name": "Post Run actions/setup-java@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-11-07T05:02:22Z",
+              "completed_at": "2026-11-07T05:02:22Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12,
+              "started_at": "2026-11-07T05:02:22Z",
+              "completed_at": "2026-11-07T05:02:24Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13,
+              "started_at": "2026-11-07T05:02:24Z",
+              "completed_at": "2026-11-07T05:02:24Z"
+            }
+          ]
+        },
+        {
+          "id": 128308034572,
+          "name": "units (ubuntu-24.04)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/42340851377/job/128308034572",
+          "started_at": "2026-11-07T05:00:44Z",
+          "completed_at": "2026-11-07T05:02:09Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-11-07T05:00:44Z",
+              "completed_at": "2026-11-07T05:00:47Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-11-07T05:00:47Z",
+              "completed_at": "2026-11-07T05:00:52Z"
+            },
+            {
+              "name": "Run actions/setup-java@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-11-07T05:00:52Z",
+              "completed_at": "2026-11-07T05:00:52Z"
+            },
+            {
+              "name": "Run gradle/actions/setup-gradle@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-11-07T05:00:52Z",
+              "completed_at": "2026-11-07T05:01:07Z"
+            },
+            {
+              "name": "Run chmod +x gradlew",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-11-07T05:01:07Z",
+              "completed_at": "2026-11-07T05:01:07Z"
+            },
+            {
+              "name": "Compile, check artifacts and run unit checks only",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-11-07T05:01:07Z",
+              "completed_at": "2026-11-07T05:01:36Z"
+            },
+            {
+              "name": "Post Run gradle/actions/setup-gradle@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-11-07T05:01:36Z",
+              "completed_at": "2026-11-07T05:02:06Z"
+            },
+            {
+              "name": "Post Run actions/setup-java@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-11-07T05:02:06Z",
+              "completed_at": "2026-11-07T05:02:07Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12,
+              "started_at": "2026-11-07T05:02:07Z",
+              "completed_at": "2026-11-07T05:02:07Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13,
+              "started_at": "2026-11-07T05:02:07Z",
+              "completed_at": "2026-11-07T05:02:07Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run": {
+        "conclusion": "success",
+        "databaseId": 42340851445,
+        "status": "completed",
+        "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/42340851445",
+        "workflowName": "CodeQL"
+      },
+      "jobs": [
+        {
+          "id": 128307991884,
+          "name": "Analyze (javascript-typescript)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/42340851445/job/128307991884",
+          "started_at": "2026-11-07T05:00:33Z",
+          "completed_at": "2026-11-07T05:02:08Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-11-07T05:00:34Z",
+              "completed_at": "2026-11-07T05:00:35Z"
+            },
+            {
+              "name": "Checkout repository",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-11-07T05:00:35Z",
+              "completed_at": "2026-11-07T05:00:41Z"
+            },
+            {
+              "name": "Setup proxy for registries",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-11-07T05:00:41Z",
+              "completed_at": "2026-11-07T05:00:41Z"
+            },
+            {
+              "name": "Initialize CodeQL",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-11-07T05:00:41Z",
+              "completed_at": "2026-11-07T05:00:52Z"
+            },
+            {
+              "name": "Autobuild",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-11-07T05:00:52Z",
+              "completed_at": "2026-11-07T05:00:54Z"
+            },
+            {
+              "name": "Perform CodeQL Analysis",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-11-07T05:00:54Z",
+              "completed_at": "2026-11-07T05:02:03Z"
+            },
+            {
+              "name": "Post Perform CodeQL Analysis",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-11-07T05:02:03Z",
+              "completed_at": "2026-11-07T05:02:04Z"
+            },
+            {
+              "name": "Post Initialize CodeQL",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-11-07T05:02:04Z",
+              "completed_at": "2026-11-07T05:02:05Z"
+            },
+            {
+              "name": "Post Setup proxy for registries",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-11-07T05:02:05Z",
+              "completed_at": "2026-11-07T05:02:05Z"
+            },
+            {
+              "name": "Post Checkout repository",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12,
+              "started_at": "2026-11-07T05:02:05Z",
+              "completed_at": "2026-11-07T05:02:05Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13,
+              "started_at": "2026-11-07T05:02:05Z",
+              "completed_at": "2026-11-07T05:02:05Z"
+            }
+          ]
+        },
+        {
+          "id": 128307991965,
+          "name": "Analyze (actions)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/42340851445/job/128307991965",
+          "started_at": "2026-11-07T05:00:32Z",
+          "completed_at": "2026-11-07T05:01:11Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-11-07T05:00:33Z",
+              "completed_at": "2026-11-07T05:00:34Z"
+            },
+            {
+              "name": "Checkout repository",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-11-07T05:00:34Z",
+              "completed_at": "2026-11-07T05:00:40Z"
+            },
+            {
+              "name": "Setup proxy for registries",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-11-07T05:00:40Z",
+              "completed_at": "2026-11-07T05:00:40Z"
+            },
+            {
+              "name": "Initialize CodeQL",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-11-07T05:00:40Z",
+              "completed_at": "2026-11-07T05:00:49Z"
+            },
+            {
+              "name": "Autobuild",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-11-07T05:00:49Z",
+              "completed_at": "2026-11-07T05:00:50Z"
+            },
+            {
+              "name": "Perform CodeQL Analysis",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-11-07T05:00:50Z",
+              "completed_at": "2026-11-07T05:01:08Z"
+            },
+            {
+              "name": "Post Perform CodeQL Analysis",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-11-07T05:01:08Z",
+              "completed_at": "2026-11-07T05:01:08Z"
+            },
+            {
+              "name": "Post Initialize CodeQL",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-11-07T05:01:08Z",
+              "completed_at": "2026-11-07T05:01:09Z"
+            },
+            {
+              "name": "Post Setup proxy for registries",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-11-07T05:01:09Z",
+              "completed_at": "2026-11-07T05:01:09Z"
+            },
+            {
+              "name": "Post Checkout repository",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12,
+              "started_at": "2026-11-07T05:01:09Z",
+              "completed_at": "2026-11-07T05:01:09Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13,
+              "started_at": "2026-11-07T05:01:09Z",
+              "completed_at": "2026-11-07T05:01:09Z"
+            }
+          ]
+        },
+        {
+          "id": 128307992008,
+          "name": "Analyze (c-cpp)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/42340851445/job/128307992008",
+          "started_at": "2026-11-07T05:00:33Z",
+          "completed_at": "2026-11-07T05:01:34Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-11-07T05:00:33Z",
+              "completed_at": "2026-11-07T05:00:34Z"
+            },
+            {
+              "name": "Checkout repository",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-11-07T05:00:34Z",
+              "completed_at": "2026-11-07T05:00:41Z"
+            },
+            {
+              "name": "Setup proxy for registries",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-11-07T05:00:41Z",
+              "completed_at": "2026-11-07T05:00:41Z"
+            },
+            {
+              "name": "Initialize CodeQL",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-11-07T05:00:41Z",
+              "completed_at": "2026-11-07T05:00:52Z"
+            },
+            {
+              "name": "Autobuild",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-11-07T05:00:52Z",
+              "completed_at": "2026-11-07T05:00:53Z"
+            },
+            {
+              "name": "Perform CodeQL Analysis",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-11-07T05:00:53Z",
+              "completed_at": "2026-11-07T05:01:30Z"
+            },
+            {
+              "name": "Post Perform CodeQL Analysis",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-11-07T05:01:30Z",
+              "completed_at": "2026-11-07T05:01:30Z"
+            },
+            {
+              "name": "Post Initialize CodeQL",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-11-07T05:01:30Z",
+              "completed_at": "2026-11-07T05:01:31Z"
+            },
+            {
+              "name": "Post Setup proxy for registries",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-11-07T05:01:31Z",
+              "completed_at": "2026-11-07T05:01:31Z"
+            },
+            {
+              "name": "Post Checkout repository",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12,
+              "started_at": "2026-11-07T05:01:31Z",
+              "completed_at": "2026-11-07T05:01:32Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13,
+              "started_at": "2026-11-07T05:01:32Z",
+              "completed_at": "2026-11-07T05:01:32Z"
+            }
+          ]
+        },
+        {
+          "id": 128307992056,
+          "name": "Analyze (java-kotlin)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/42340851445/job/128307992056",
+          "started_at": "2026-11-07T05:00:33Z",
+          "completed_at": "2026-11-07T05:03:07Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-11-07T05:00:33Z",
+              "completed_at": "2026-11-07T05:00:34Z"
+            },
+            {
+              "name": "Checkout repository",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-11-07T05:00:34Z",
+              "completed_at": "2026-11-07T05:00:41Z"
+            },
+            {
+              "name": "Setup proxy for registries",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-11-07T05:00:41Z",
+              "completed_at": "2026-11-07T05:00:41Z"
+            },
+            {
+              "name": "Initialize CodeQL",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-11-07T05:00:41Z",
+              "completed_at": "2026-11-07T05:00:56Z"
+            },
+            {
+              "name": "Autobuild",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-11-07T05:00:56Z",
+              "completed_at": "2026-11-07T05:00:57Z"
+            },
+            {
+              "name": "Perform CodeQL Analysis",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-11-07T05:00:57Z",
+              "completed_at": "2026-11-07T05:03:03Z"
+            },
+            {
+              "name": "Post Perform CodeQL Analysis",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-11-07T05:03:03Z",
+              "completed_at": "2026-11-07T05:03:03Z"
+            },
+            {
+              "name": "Post Initialize CodeQL",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-11-07T05:03:03Z",
+              "completed_at": "2026-11-07T05:03:04Z"
+            },
+            {
+              "name": "Post Setup proxy for registries",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-11-07T05:03:04Z",
+              "completed_at": "2026-11-07T05:03:05Z"
+            },
+            {
+              "name": "Post Checkout repository",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12,
+              "started_at": "2026-11-07T05:03:05Z",
+              "completed_at": "2026-11-07T05:03:05Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13,
+              "started_at": "2026-11-07T05:03:05Z",
+              "completed_at": "2026-11-07T05:03:05Z"
+            }
+          ]
+        },
+        {
+          "id": 128307992095,
+          "name": "Analyze (python)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/42340851445/job/128307992095",
+          "started_at": "2026-11-07T05:00:33Z",
+          "completed_at": "2026-11-07T05:01:35Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-11-07T05:00:34Z",
+              "completed_at": "2026-11-07T05:00:35Z"
+            },
+            {
+              "name": "Checkout repository",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-11-07T05:00:35Z",
+              "completed_at": "2026-11-07T05:00:42Z"
+            },
+            {
+              "name": "Setup proxy for registries",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-11-07T05:00:42Z",
+              "completed_at": "2026-11-07T05:00:42Z"
+            },
+            {
+              "name": "Initialize CodeQL",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-11-07T05:00:42Z",
+              "completed_at": "2026-11-07T05:00:51Z"
+            },
+            {
+              "name": "Autobuild",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-11-07T05:00:51Z",
+              "completed_at": "2026-11-07T05:00:52Z"
+            },
+            {
+              "name": "Perform CodeQL Analysis",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-11-07T05:00:52Z",
+              "completed_at": "2026-11-07T05:01:30Z"
+            },
+            {
+              "name": "Post Perform CodeQL Analysis",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-11-07T05:01:30Z",
+              "completed_at": "2026-11-07T05:01:31Z"
+            },
+            {
+              "name": "Post Initialize CodeQL",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-11-07T05:01:31Z",
+              "completed_at": "2026-11-07T05:01:31Z"
+            },
+            {
+              "name": "Post Setup proxy for registries",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-11-07T05:01:31Z",
+              "completed_at": "2026-11-07T05:01:32Z"
+            },
+            {
+              "name": "Post Checkout repository",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12,
+              "started_at": "2026-11-07T05:01:32Z",
+              "completed_at": "2026-11-07T05:01:32Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13,
+              "started_at": "2026-11-07T05:01:32Z",
+              "completed_at": "2026-11-07T05:01:32Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
