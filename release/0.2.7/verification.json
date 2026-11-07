@@ -1,0 +1,332 @@
+{
+  "schema": 1,
+  "wwpg_version": "0.2.7",
+  "api_version": "1.0.0",
+  "api_coordinate": "org.cha0scollective.wwpg:wwpg-api:1.0.0",
+  "cee_api_coordinate": "org.cha0scollective.wwpg:wwpg-cee-api:1.0.0",
+  "source_sha": "f100a1ff013b4fdb77a4640d50ba676c29ca06a6",
+  "artifacts": {
+    "runtime": {
+      "path": "build/publication-01/wwpg-0.2.7.jar",
+      "sha256": "6c1060b17f14df765188a60da154b723705947503a813508a53f62013e625053",
+      "bytes": 5131245
+    },
+    "gametest": {
+      "path": "build/publication-01/wwpg-0.2.7-gametests.jar",
+      "sha256": "023b9dff0dc84c245c683ac51f4adbfec168b522b07576200a54eb6e65b06a30",
+      "bytes": 1244619
+    },
+    "api": {
+      "path": "build/publication-01/wwpg-api-1.0.0.jar",
+      "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+      "bytes": 50143
+    },
+    "cee_api": {
+      "path": "build/publication-01/wwpg-cee-api-1.0.0.jar",
+      "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+      "bytes": 8793
+    },
+    "example": {
+      "path": "build/publication-01/wwpg-api-example-1.0.0.jar",
+      "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+      "bytes": 52081
+    },
+    "upstream_example": {
+      "path": "build/publication-01/wwpg-upstream-api-example-1.0.0.jar",
+      "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+      "bytes": 45633
+    },
+    "maven_repository": {
+      "path": "build/publication-01/wwpg-api-1.0.0-maven.zip",
+      "sha256": "cf4f5653d4f1fa10e9df27af08eb046135783a525d6a9f9c7f7814d2be21bc06",
+      "bytes": 416016
+    },
+    "api_sources": {
+      "path": "build/publication-01/wwpg-api-1.0.0-sources.jar",
+      "sha256": "1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b",
+      "bytes": 25943
+    },
+    "api_javadoc": {
+      "path": "build/publication-01/wwpg-api-1.0.0-javadoc.jar",
+      "sha256": "52df8e9a8badf7a3440f819179c482bfdde2e45a62813f9ca9ded7ca1fc63f25",
+      "bytes": 231021
+    },
+    "cee_api_sources": {
+      "path": "build/publication-01/wwpg-cee-api-1.0.0-sources.jar",
+      "sha256": "00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34",
+      "bytes": 6947
+    },
+    "cee_api_javadoc": {
+      "path": "build/publication-01/wwpg-cee-api-1.0.0-javadoc.jar",
+      "sha256": "45c6cc3ed728ca83107c2e8eb5b5d14c4e27e64bbd800777c898bf47155d5ba5",
+      "bytes": 107962
+    },
+    "example_sources": {
+      "path": "build/publication-01/wwpg-api-example-1.0.0-source.zip",
+      "sha256": "1bc539e8ce905cb7c486842e65dd5dde2803c4598f800e057ea76922d1b2e663",
+      "bytes": 79513
+    },
+    "upstream_example_sources": {
+      "path": "build/publication-01/wwpg-upstream-api-example-1.0.0-source.zip",
+      "sha256": "f45cc1bec382fbe500e276d2cee90ee8b3bf9a57d8f590e9a1cf1ac1399153bd",
+      "bytes": 70369
+    }
+  },
+  "acceptance_policy": "separated-v2",
+  "stationary_yard_policy": "combined-pinout-v1",
+  "unresolved_failures": [],
+  "stages_complete": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "headless_acceptance": {
+    "path": "build/publication-01/retained-evidence/objects/6a5e8a0bdcd2cf90f51ee6f46ea585b3282ada84c6def6086fb024e3fcb74586.json",
+    "sha256": "62bed307c620578af89e76b8af0aa53e5881beea00e7d6f13a15e5b71a80d4c8",
+    "bytes": 31090
+  },
+  "graphical_acceptance": {
+    "path": "build/publication-01/retained-evidence/objects/46b1c46b6b65d304464a8a564f4f680493ae12988666f09e31c24b44646a1fce.json",
+    "sha256": "7ab81d84852ef416ee1c69a580d3eeacc187a71d091021ebf7e0c3dad2157963",
+    "bytes": 4433
+  },
+  "stationary_yard": {
+    "path": "build/publication-01/wwpg-0.2.7-stationary-yard.zip",
+    "sha256": "3c0614b6a1efed0b40ea8c64f49472b815eb32d214e5a587240478054b06496d",
+    "bytes": 1339538
+  },
+  "base_workshop_world": {
+    "path": "build/publication-01/wwpg-0.2.7-base-workshop-world.zip",
+    "sha256": "7c3725c0cccbb1fad26d9fa9a0fa3e6849b0112fbd4ff260bd2d7e37b4aaa9f9",
+    "bytes": 320688
+  },
+  "pinout_workshop_world": {
+    "path": "build/publication-01/wwpg-0.2.7-pinout-workshop-world.zip",
+    "sha256": "85ef2de4d0ad8251d5f206df4ad76a8b83724695702810fe20fc2d7f5f5292fa",
+    "bytes": 321818
+  },
+  "world_metadata_reuse": {
+    "schema": 1,
+    "scope": "runtime_version_only",
+    "version": "0.2.7-dev.128",
+    "source_sha": "a9da6c4304ccf215228f18f8f5d489ae2b32471a",
+    "runtime": {
+      "path": "build/publication-01/accepted-dev128/wwpg-0.2.7-dev.128.jar",
+      "sha256": "b2be5acd436bfede095fc9db659ecb239bf03b22b126492f05b2def685d48b22",
+      "bytes": 5131252
+    },
+    "worlds": {
+      "stationary_yard": {
+        "path": "build/publication-01/retained-evidence/objects/fff9600d576c06dab1f8f5c7668bae7a03f948d950d8d487ff14f777ba3ca7ce.zip",
+        "sha256": "fff9600d576c06dab1f8f5c7668bae7a03f948d950d8d487ff14f777ba3ca7ce",
+        "bytes": 1339541
+      },
+      "base_workshop_world": {
+        "path": "build/publication-01/retained-evidence/objects/192089b95383b5a3b846ada47190cfb71a0d044cd559bc3370240c5f1fc58cb5.zip",
+        "sha256": "192089b95383b5a3b846ada47190cfb71a0d044cd559bc3370240c5f1fc58cb5",
+        "bytes": 320651
+      },
+      "pinout_workshop_world": {
+        "path": "build/publication-01/retained-evidence/objects/deb4144b0e239ceff50f000cec2ef068c8dc694f43f4c01245bdc1ad24f319c0.zip",
+        "sha256": "deb4144b0e239ceff50f000cec2ef068c8dc694f43f4c01245bdc1ad24f319c0",
+        "bytes": 321785
+      }
+    }
+  },
+  "abi": {
+    "path": "build/publication-01/retained-evidence/objects/9fe84468d89d0a5b5424a003ac2092bf355651b2f258fb36b22ffa3483998b5b.json",
+    "sha256": "9fe84468d89d0a5b5424a003ac2092bf355651b2f258fb36b22ffa3483998b5b",
+    "bytes": 63517
+  },
+  "previous_api": {
+    "path": "build/publication-01/retained-evidence/objects/a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892.jar",
+    "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+    "bytes": 50143
+  },
+  "cee_abi": {
+    "path": "build/publication-01/retained-evidence/objects/73c614580250817a577ebce23e1458d629aa89c54e93f7c1d3d04b5d3ec3c93a.json",
+    "sha256": "73c614580250817a577ebce23e1458d629aa89c54e93f7c1d3d04b5d3ec3c93a",
+    "bytes": 11931
+  },
+  "previous_cee_api": {
+    "path": "build/publication-01/retained-evidence/objects/d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a.jar",
+    "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+    "bytes": 8793
+  },
+  "benchmark_world": {
+    "path": "build/publication-01/wwpg-0.2.7-benchmark-14650-nodes.zip",
+    "sha256": "6a2648e0e36260e7e9b0a2355dccb1400c2bad9b0b65efee99dfbed071bf8604",
+    "bytes": 3413537
+  },
+  "benchmark_metadata_comparison": {
+    "path": "build/publication-01/retained-evidence/objects/4493aae9ae671f1ae2589b684546cf72b0a4a6cd282067ca6b7b59c9e2863cd4.json",
+    "sha256": "e7aadaf71b9be2e935e0083c0762dc5f4fb76d25a52dfd56642d5bee787e88f8",
+    "bytes": 955
+  },
+  "original_qualification_records": [
+    {
+      "path": "build/publication-01/retained-evidence/objects/bda910d8528062b865e7e957067e081ed9522f6d98b52e16e446f263727749af.bin",
+      "sha256": "bda910d8528062b865e7e957067e081ed9522f6d98b52e16e446f263727749af",
+      "bytes": 1993
+    },
+    {
+      "path": "build/publication-01/retained-evidence/objects/ceedc3e4b0e87485e20b84567d36190f27043db81c81527063d93ff349fa5693.bin",
+      "sha256": "ceedc3e4b0e87485e20b84567d36190f27043db81c81527063d93ff349fa5693",
+      "bytes": 2136
+    },
+    {
+      "path": "build/publication-01/retained-evidence/objects/c05faaf3ad896229bcd5f70c2352ca8c5864733d7cdbbbc1ec43fd663df5afda.bin",
+      "sha256": "c05faaf3ad896229bcd5f70c2352ca8c5864733d7cdbbbc1ec43fd663df5afda",
+      "bytes": 13593
+    }
+  ],
+  "publication_source_scope": {
+    "path": "build/publication-01/retained-evidence/objects/a36e0874ecfa4dfe469038d611bab7ec277119cd889d5d85b0b871de09720c71.json",
+    "sha256": "a24772076b65a6c6f6548a7e848e96688be94e017f9e39dd26bb3985d40fb832",
+    "bytes": 34344
+  },
+  "acceptance_notes": [
+    "Reuses dev.128:350 headless jobs and12 graphical scenarios, CEE1.1.4; original execution identities and failures preserved.",
+    "Runtime and test companion differ only in declared release-version metadata and the companion exact WWPG dependency.",
+    "SDK README-only source updates receive fresh independent compilation with unchanged compiled outputs; native worlds change release labels only.",
+    "No performance campaign or exhaustive graphical gallery ran. The14,650-node benchmark is not certified at20TPS. Private reproduction worlds and detailed benchmark tools/results remain local."
+  ],
+  "independent_example_build": {
+    "path": "build/publication-01/retained-evidence/objects/d270b4d068b7b51f6908704c692124ef8ff7b269be615af81312a79fdcb074df.json",
+    "sha256": "9fb2118e2f6543b737a9fd240b8c2c8d20836d094ba87955afbfb4f2fc293ee0",
+    "bytes": 3197
+  },
+  "independent_upstream_example_build": {
+    "path": "build/publication-01/retained-evidence/objects/21461b820d806540e18ae85157632910056f42152a3e2d2e494fb8ccef9fb63b.json",
+    "sha256": "ce35dfba94efff70ef9b2abcb26d8f9da8e4d41c90773e3974edc0ea384265a3",
+    "bytes": 3301
+  },
+  "additional_focused_sdk_builds": [],
+  "focused_sdk_compilation": [
+    {
+      "path": "build/publication-01/retained-evidence/objects/9d84c7b01e1250fba77b986bea0ff093447de47da3bbd511edb640d7c7f96924.json",
+      "sha256": "0bdcdbfa8211e06a82e44cd7a12df85187a74f4a1f53e7981baac5c6814a30bc",
+      "bytes": 1884
+    },
+    {
+      "path": "build/publication-01/retained-evidence/objects/c88d5b44384ce93329bd72187b42eff277a6518457ee5a1633887baac6b8fd2a.json",
+      "sha256": "4de6391ff9a85c767d189e4010e67a805d9bd9c76ee5991a259b7e66ed7cc9d6",
+      "bytes": 1882
+    }
+  ],
+  "starter_source_comparison": {
+    "path": "build/publication-01/retained-evidence/objects/88a40f0d91ad3ec5d738bca35d1267b44fbbdfb5f8ec1f2f5953d4b260dff578.json",
+    "sha256": "88a40f0d91ad3ec5d738bca35d1267b44fbbdfb5f8ec1f2f5953d4b260dff578",
+    "bytes": 176
+  },
+  "authoring_starter": {
+    "source": {
+      "path": "build/focused-starter-windows/tutorial-load-0.1.0-source.zip",
+      "sha256": "418fb1eb90d97d8be19cb00662ba2e29a967c9bcb86c2774ee2cef306bce29f8",
+      "bytes": 54214
+    },
+    "proof": {
+      "path": "build/publication-01/retained-evidence/objects/f0d4060618aa7a82d03326696db628675753bf6b3cf04957e590fe8d3764c280.json",
+      "sha256": "c55e61a5503d658ff5ad13fb5b5560dcc0f3096eb55901c8f6687df3d2bfc8cd",
+      "bytes": 2862
+    }
+  },
+  "sdk_acceptance_reuse": {
+    "schema": 1,
+    "scope": "runtime_version_only",
+    "source_sha": "a9da6c4304ccf215228f18f8f5d489ae2b32471a",
+    "runtime_version": "0.2.7-dev.128",
+    "artifacts": {
+      "cee_api": {
+        "path": "build/publication-01/retained-evidence/objects/d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a.jar",
+        "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+        "bytes": 8793
+      },
+      "maven_repository": {
+        "path": "build/publication-01/retained-evidence/objects/cf4f5653d4f1fa10e9df27af08eb046135783a525d6a9f9c7f7814d2be21bc06.zip",
+        "sha256": "cf4f5653d4f1fa10e9df27af08eb046135783a525d6a9f9c7f7814d2be21bc06",
+        "bytes": 416016
+      },
+      "upstream_example": {
+        "path": "build/publication-01/retained-evidence/objects/5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11.jar",
+        "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+        "bytes": 45633
+      },
+      "example_sources": {
+        "path": "build/publication-01/retained-evidence/objects/1bc539e8ce905cb7c486842e65dd5dde2803c4598f800e057ea76922d1b2e663.zip",
+        "sha256": "1bc539e8ce905cb7c486842e65dd5dde2803c4598f800e057ea76922d1b2e663",
+        "bytes": 79513
+      },
+      "cee_api_sources": {
+        "path": "build/publication-01/retained-evidence/objects/00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34.jar",
+        "sha256": "00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34",
+        "bytes": 6947
+      },
+      "runtime": {
+        "path": "build/publication-01/retained-evidence/objects/b2be5acd436bfede095fc9db659ecb239bf03b22b126492f05b2def685d48b22.jar",
+        "sha256": "b2be5acd436bfede095fc9db659ecb239bf03b22b126492f05b2def685d48b22",
+        "bytes": 5131252
+      },
+      "api_javadoc": {
+        "path": "build/publication-01/retained-evidence/objects/52df8e9a8badf7a3440f819179c482bfdde2e45a62813f9ca9ded7ca1fc63f25.jar",
+        "sha256": "52df8e9a8badf7a3440f819179c482bfdde2e45a62813f9ca9ded7ca1fc63f25",
+        "bytes": 231021
+      },
+      "upstream_example_sources": {
+        "path": "build/publication-01/retained-evidence/objects/f45cc1bec382fbe500e276d2cee90ee8b3bf9a57d8f590e9a1cf1ac1399153bd.zip",
+        "sha256": "f45cc1bec382fbe500e276d2cee90ee8b3bf9a57d8f590e9a1cf1ac1399153bd",
+        "bytes": 70369
+      },
+      "example": {
+        "path": "build/publication-01/retained-evidence/objects/17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef.jar",
+        "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+        "bytes": 52081
+      },
+      "cee_api_javadoc": {
+        "path": "build/publication-01/retained-evidence/objects/45c6cc3ed728ca83107c2e8eb5b5d14c4e27e64bbd800777c898bf47155d5ba5.jar",
+        "sha256": "45c6cc3ed728ca83107c2e8eb5b5d14c4e27e64bbd800777c898bf47155d5ba5",
+        "bytes": 107962
+      },
+      "api_sources": {
+        "path": "build/publication-01/retained-evidence/objects/1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b.jar",
+        "sha256": "1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b",
+        "bytes": 25943
+      },
+      "api": {
+        "path": "build/publication-01/retained-evidence/objects/a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892.jar",
+        "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+        "bytes": 50143
+      }
+    },
+    "explanation": "Runtime source retains dev.128 identity. API/example/Maven binaries remain identical. README-only source archives have fresh independent builds on both OSs, with actual documentation/project commits recorded and byte-identical compiled outputs. No gameplay lane reran."
+  },
+  "status": "accepted_release",
+  "_original_record": {
+    "path": "build/publication-01/retained-evidence/objects/result.original.bin",
+    "sha256": "c809f77125796ebc1159a281d1726809d26b46b4536a91dadd8c90a80d6079a8",
+    "bytes": 12288
+  },
+  "tested_source_snapshot": {
+    "path": "build/publication-01/wwpg-dev128-tested-source.zip",
+    "sha256": "5379bb1538a2ede34a09a7b7f6c1bdb47a8a3f098eb5994c8597b450fe9646e4",
+    "bytes": 759390
+  },
+  "tested_source_comparison": {
+    "path": "build/publication-01/tested-source-comparison.json",
+    "sha256": "ad6edd954cec2dfaf8db93941a82eb095db5225e50aa8339f6b964ea3ac7719e",
+    "bytes": 138365
+  },
+  "resolved_sdk_environment_failure": {
+    "path": "build/publication-01/sdk-linux-permissions-assessment.json",
+    "sha256": "49e46e513067d591868c10ebf8b08523211449fdc9f58e94839778968e343916",
+    "bytes": 526
+  },
+  "publication_ci": {
+    "path": "build/publication-01/publication-ci.json",
+    "sha256": "917da81a15c18c9ca130c0f716c3b491097304110d79526ad30d98cb71646674",
+    "bytes": 39620
+  }
+}
