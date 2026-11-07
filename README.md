@@ -2,9 +2,9 @@
 
 **WWPG lets Create: Electro Energetics (CEE) and Power Grid (PG) work together in the same stationary factory.** Either mod can power the other's supported equipment using their native wires, controls and tools.
 
-**[WWPG 0.2.6](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.6) (stable)** for Minecraft 1.21.1 and NeoForge. Follow [installation](docs/INSTALL.md) for the required mod versions and settings. Add-on developers can also use the separately versioned **extension API 1.0.0**.
+**[WWPG 0.2.7](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.7) (stable)** for Minecraft 1.21.1 and NeoForge. Follow [installation](docs/INSTALL.md) for the required mod versions and settings. Add-on developers can also use the separately versioned **extension API 1.0.0**.
 
-0.2.6 supports CIO's verified inverter, safely disables its redundant grid couplers, preserves normal initialization without false adapter faults, and fixes PG-tool targeting on Sable assemblies. CEE 1.1.3/1.1.4 support and existing panel, wire and meter interactions remain available. Tests and fixtures are kept in a separate companion jar; ordinary players install the gameplay jar alone. The 14,650-node benchmark has not reached 20 TPS.
+0.2.7 stabilizes supported self-excited PG generators while retaining their original clutch response, and fixes PG multimeter readings on assembled transformer terminals. Existing CEE 1.1.3/1.1.4, CIO, panel, wire and meter support remains available. Tests and fixtures stay in a separate companion jar; players install the gameplay jar alone. The 14,650-node benchmark has not reached 20 TPS.
 
 ## What you can do
 
@@ -19,9 +19,9 @@ The [support list](docs/SUPPORT.md) gives the equipment and workflows covered by
 
 ## Try the worlds
 
-Open the combined **Stationary Test Yard — Pinout** from the [release downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.6). It includes the ordinary yard and the computer stations, and requires CC:Tweaked and Pinout. Each supported native behavior has a checked exhibit or assembly/repair workflow. Signs and books explain controls, readings and resets. Goggles and tools are at spawn. The [yard guide](docs/STATIONARY_YARD.md) points to transformers, gauges, boards, panels, storage, processing and the playable Nether route.
+Open the combined **Stationary Test Yard — Pinout** from the [release downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.7). It includes the ordinary yard and the computer stations, and requires CC:Tweaked and Pinout. Each supported native behavior has a checked exhibit or assembly/repair workflow. Signs and books explain controls, readings and resets. Goggles and tools are at spawn. The [yard guide](docs/STATIONARY_YARD.md) points to transformers, gauges, boards, panels, storage, processing and the playable Nether route.
 
-The three demonstration saves, the original [14,650-node benchmark](docs/BENCHMARK_YARD.md) and the optional Workshop mods are in **wwpg-0.2.6-example-worlds.zip**.
+The three demonstration saves, the original [14,650-node benchmark](docs/BENCHMARK_YARD.md) and the optional Workshop mods are in **wwpg-0.2.7-example-worlds.zip**.
 Players can download the mod jar directly; the developer SDK and verification
 archive are separate optional downloads.
 
@@ -47,7 +47,7 @@ PG's native solver is the default on Windows and Linux. WWPG supplies its missin
 | Anyone checking coverage | [Supported content](docs/SUPPORT.md) and [current status](docs/STATUS.md) |
 | Maintainers | [Development and test commands](docs/DEVELOPMENT.md), [contributing](CONTRIBUTING.md) |
 | Add-on developers | [Extension API contract and SDK](docs/EXTENSION_API.md), [independent examples](examples/), [API Workshop](docs/EXTENSION_API_WORKSHOP.md) |
-| Reviewers checking release evidence | [Current acceptance](release/0.2.6/verification.json), [release records](release/README.md), [changelog](CHANGELOG.md) |
+| Reviewers checking release evidence | [Current acceptance](release/0.2.7/verification.json), [release records](release/README.md), [changelog](CHANGELOG.md) |
 | Readers evaluating the long-term design | [Product specification](SPEC.md) |
 
 The [documentation index](docs/README.md) separates current guides, developer references and archived release history.

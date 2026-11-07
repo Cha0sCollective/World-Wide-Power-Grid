@@ -121,6 +121,12 @@ graphical cohorts as described in [the testing process](TESTING.md). Publishing
 does not launch either suite. Missing applicable client evidence blocks
 publication without changing a completed headless result.
 
+When promoting a tested development build, a reused cohort may also bind its
+original `gametest` descriptor beside the original `runtime`. The gate permits
+only the companion's declared mod version and exact WWPG dependency range to
+change. Every test class and fixture resource must remain identical, and the
+retained process proofs still name the companion they actually executed.
+
 A version-only promotion may add `world_metadata_reuse` with schema 1,
 `scope: runtime_version_only`, the original runtime/source/version and all three
 original world descriptors in `worlds`. Both reused acceptance cohorts must name

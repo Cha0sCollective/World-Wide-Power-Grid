@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+## 0.2.7 — 6 November 2026
+
+- Stabilize self-excited PG generators by solving rotor response and field excitation together during electrical substeps. Preserve PG's original clutch timing, including carbon-pile operating points, and verify transformer, variac and other excitation controls on both solvers.
 - Fix PG multimeter voltage readings on assembled medium-transformer terminals by resolving their loaded controller's accepted samples. Preserve unavailable readings during invalidation, removal and recovery; add direct-probe checks for both transformer orientations and small transformers.
 
 ## 0.2.6 — 4 November 2026

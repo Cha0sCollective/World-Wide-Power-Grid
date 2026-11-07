@@ -1,6 +1,6 @@
 # Current status
 
-**[WWPG 0.2.6](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.6)**
+**[WWPG 0.2.7](https://github.com/Cha 0sCollective/World-Wide-Power-Grid/releases/tag/0.2.7)**
 is the stable release. It supports the declared stationary factories and
 optional Pinout computer control, and includes **extension API 1.0.0** for
 add-on developers. Existing 0.1.0-beta.5 and beta.4 worlds remain compatible; update WWPG on
@@ -43,42 +43,38 @@ a repaired device. The [developer contract](EXTENSION_API.md) explains those rul
 
 ## What was checked
 
-0.2.6 passed a fresh 342-job headless campaign across Windows and Ubuntu 24.04,
-Native/Java, BASE/PINOUT and NeoForge 21.1.231/21.1.248. The Stationary Yard is
-the combined PINOUT edition. Cold restarts, actual unload/reload, rejection,
-stored-state and exact exported-archive reopens retain distinct process proofs.
+0.2.7 reuses the qualified dev.128 runtime after entry-by-entry comparisons.
+Only release-version metadata changes in the gameplay jar and matching test
+companion. The preserved campaign passed 350 full headless jobs on Windows and
+Ubuntu 24.04, Native/Java, BASE/PINOUT and NeoForge 21.1.231/21.1.248, plus all 12
+separate Windows graphical scenarios. Full acceptance used CEE 1.1.4.
 
-All 12 separate Windows graphical scenarios passed: integrated yard and Workshop
-workflows, two real TCP clients, BASE Workshop and the independent SDK starter,
-including clean Save and Quit or disconnect/server save/stop. These client logs
-contain zero WWPG warnings or errors. Seven representative screenshots were
-reviewed; screenshot totals do not establish coverage.
+Preparation passed 130 unit tests per OS and independently compiled the extracted
+SDK examples and starter. Distinct cold restarts, unload/recovery, rejection,
+stored-state and exact exported-world reopens remain covered. Client scenarios
+include real input, two TCP clients and successful Save and Quit or clean server
+shutdown. Their WWPG electrical diagnostic lists are empty.
 
-Preparation passed 116 unit tests per OS and independently compiled the extracted
-SDK projects. The 43 release-tool checks passed. One supplemental tool attempt
-used Java 11 for Java 21 fixtures; its original failure and corrected Java 21 run
-remain preserved. The acceptance workers used Java 21 throughout.
+The companion contains 378 GameTest methods. The [verification record](../release/0.2.7/verification.json)
+retains original execution sources, artifact hashes, failed attempts and the
+validated continuations; reuse does not describe a fresh suite run on release
+metadata. SDK documentation and packaging have their own focused checks.
+CEE 1.1.3 and optional integration records retain their actual earlier identities.
+No new performance campaign or exhaustive graphical gallery was run.
 
-The separate companion contains 370 GameTest methods. Full release lanes use
-CEE 1.1.3. Focused CEE 1.1.4, Gauged, CIO and Sable results retain their actual
-source/artifact identities; they are not relabelled as new full runs. The Sable
-checks include public coordinate fixtures and real server assemblies, not an
-exhaustive moving-assembly client tour. Train audio and dimension travel remain
-outside the asserted train coverage.
+## Generator and transformer fixes
 
-The [verification record](../release/0.2.6/verification.json) preserves the exact
-tested runtime and original evidence. Publication documentation follows with
-identical runtime/API/example/test jars. GameTests remain outside the gameplay
-jar. API 1.0.0, saves, native binaries and all 16 substeps are unchanged.
+Recognized native PG generator assemblies advance field excitation and rotor
+response together during electrical solving. Clutches retain PG's original
+once-per-tick speed sample and 50 ms force prediction while physical motion uses
+all 16 electrical substeps. Focused checks cover transformer, variac, carbon-pile
+and other excitation controls on both solvers. Unsupported/custom arrangements
+retain PG's native path; this is not a promise that every unregulated circuit is
+stable. Native clutch limits and generator damage behavior still apply.
 
-## New compatibility and recovery behavior
-
-The verified CIO inverter retains native controls, waveforms, input limits and
-losses. Redundant CIO couplers remain saved but inert; see
-[CIO integration](CIO_COMPATIBILITY.md). Normal initialization holds readings and
-history unavailable until an accepted tick, without inventing a fault or hiding
-real failures. PG/Gauged picking on Sable assemblies uses the correct coordinate
-frame and normal reach/obstruction limits.
+The PG multimeter can read assembled medium-transformer terminals through their
+loaded controller. Invalidated or unavailable samples remain unavailable until
+the circuit recovers. API 1.0.0, saves and native solver binaries are unchanged.
 
 ## Loading and ticking
 

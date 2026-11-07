@@ -1,12 +1,11 @@
 {
   "schema": 1,
   "repository": "Cha0sCollective/World-Wide-Power-Grid",
-  "summary": "0.2.6 adds CIO inverter support and improves transition reliability and targeting on Sable assemblies. API 1.0.0 and existing saves stay compatible.",
+  "summary": "0.2.7 improves self-excited PG generator stability and transformer multimeter readings. API 1.0.0 and existing saves stay compatible.",
   "changes": [
-    "Power CIO's inverter through WWPG and safely disable redundant CIO grid couplers without deleting saved blocks or wires.",
-    "Keep normal initialization from becoming a false adapter error while preserving unavailable readings, stored history and genuine fault warnings.",
-    "Prevent runaway terminal-targeting scans on Sable assemblies while retaining exposed CEE pins, panel covers, reach limits and PG/Gauged wiring."
+    "Coordinate supported PG generators' field and rotor calculations while preserving the original clutch response, including transformer, variac and carbon-pile excitation controls.",
+    "Read assembled medium-transformer terminals with the PG multimeter while retaining unavailable readings during genuine loading or invalidation."
   ],
-  "installation": "Use Minecraft 1.21.1, NeoForge 21.1.231 or 21.1.248, Java 21, Create 6.0.10-280, CEE 1.1.3 or 1.1.4, Power Grid 0.6.2 and Architectury 13.0.8. Full acceptance uses CEE 1.1.3; focused Windows checks cover both CEE versions on NeoForge 21.1.248. Match server and client mod versions.",
-  "optional_installation": "Pinout editions also require CC:Tweaked 1.120.2 and CC;CPG: Pinout 0.2.1."
+  "installation": "Use Minecraft 1.21.1, NeoForge 21.1.231 or 21.1.248, Java 21, Create 6.0.10-280, CEE 1.1.4, Power Grid 0.6.2 and Architectury 13.0.8. CEE 1.1.3 retains compatibility support. Match server and client mod versions.",
+  "optional_installation": "The combined Pinout Stationary Yard also requires CC:Tweaked 1.120.2 and CC;CPG: Pinout 0.2.1."
 }

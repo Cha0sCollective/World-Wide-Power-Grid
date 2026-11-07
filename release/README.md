@@ -4,12 +4,21 @@ Maintainers: follow [Publishing a release](../docs/RELEASING.md) for the standar
 five-download layout and short notes. Edit [presentation.json](presentation.json)
 for the next release; version-specific records below preserve published history.
 
-**[WWPG 0.2.6](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.6)**
+**[WWPG 0.2.7](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.7)**
 is the current stable release. To install it or choose a playable world, use the
 [installation guide](../docs/INSTALL.md). This directory is for reviewing what
 was shipped and which checks passed.
 
-## Current stable: 0.2.6
+## Current stable: 0.2.7
+
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.7)
+· [Verification](0.2.7/verification.json).
+
+Stabilizes supported self-excited PG generators with the original clutch response
+and repairs transformer-terminal multimeter readings. Reuses dev.128's passing
+350-job headless and 12-scenario graphical acceptance with explicit comparisons.
+
+## Historical stable: 0.2.6
 
 [Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.6)
 · [Verification](0.2.6/verification.json).

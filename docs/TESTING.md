@@ -108,6 +108,19 @@ foreign-dimension result/storage ownership. Client sound playback, multiplayer
 and train dimension travel require separate coverage; the headless fixture does
 not certify them.
 
+The `wwpg_generator_timing` fixtures run in the separate `generator-timing`
+group. They require a healthy world's diagnostic history, so they must not share
+a process with safety fixtures that deliberately reject electrical solves.
+They cover transformer-fed native
+self-excitation, settled output, load changes and drive stop/restart recovery,
+plus a fully connected 72-coil carbon-pile fixture that checks original powered
+operating points and both saturated and unsaturated clutch loads,
+plus unchanged direct/custom-rotor execution in both directions at one and sixteen
+substeps. A separate one-step batch requires shaft-driven and redstone variac re-excitation to
+recover while the rotor remains at full speed. Run the namespace on both solvers. The separate mechanics units include
+weak drives and the once-per-tick low-speed cutoff. See
+[generator timing](developer/GENERATOR_TIMING.md) for recognition and fallback limits.
+
 The `wwpg` variac fixture checks powered PG load control and calls CEE's native
 heating calculation with distinct local voltage readings and signed current.
 It rejects global-index voltage reads and verifies the resulting temperature.

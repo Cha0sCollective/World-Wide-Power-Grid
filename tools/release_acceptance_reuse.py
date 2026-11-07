@@ -23,6 +23,24 @@ def runtime_equivalent(previous, current, old_version, new_version):
                 raise ValueError('Runtime changed beyond its version: ' + name)
 
 
+def companion_equivalent(previous, current, old_version, new_version):
+    """Promote only the test mod version and its exact gameplay dependency."""
+    with zipfile.ZipFile(previous) as old, zipfile.ZipFile(current) as new:
+        names=old.namelist()
+        if len(names)!=len(set(names)) or len(new.namelist())!=len(set(new.namelist())) or set(names)!=set(new.namelist()):
+            raise ValueError('Companion entries differ')
+        for name in names:
+            expected=old.read(name)
+            if name=='META-INF/neoforge.mods.toml':
+                if expected.count(b'modId="wwpg_tests"')!=1 or expected.count(b'modId="wwpg"')!=1:
+                    raise ValueError('Companion mod/dependency identity differs')
+                for pattern in ('version="{}"','versionRange="[{}]"'):
+                    before=pattern.format(old_version).encode()
+                    if expected.count(before)!=1:raise ValueError('Ambiguous companion version/dependency')
+                    expected=expected.replace(before,pattern.format(new_version).encode(),1)
+            if expected!=new.read(name):raise ValueError('Companion changed beyond version metadata: '+name)
+
+
 def world_version_equivalent(previous, current, old_version, new_version, old_runtime, new_runtime):
     """Permit release labels only; preserve every native save and original proof."""
     with zipfile.ZipFile(previous) as old, zipfile.ZipFile(current) as new:
