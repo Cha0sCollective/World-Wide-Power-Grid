@@ -38,6 +38,16 @@ record its original source/artifact identities and verify every other runtime
 entry is unchanged. SDK or packaging changes still need focused checks.
 Never describe carried-forward acceptance or an interrupted run as a fresh pass.
 
+For future release campaigns, follow the [runtime dependency selection
+policy](TESTING.md#select-release-runtime-dependencies): freeze the newest
+currently supported dependency jars and use them for the complete requested
+acceptance, including the applicable graphical lane. Older-version focused or
+compatibility checks remain additional coverage; they cannot replace the full
+run on the current supported set. Verify actual loaded versions and hashes,
+including when launcher or build defaults still select older jars. Preserve
+historical release evidence and the existing requirement for explicit suite
+authorization.
+
 Under the historical acceptance policy, Windows evidence may come from a preserved full local run, combined with
 the complete four-way Linux CI matrix. Use `retained_windows_acceptance` only
 with version-equivalent `acceptance_reuse`. Its validator reparses the original
@@ -110,6 +120,12 @@ Future `separated-v2` manifests consume independently validated headless and
 graphical cohorts as described in [the testing process](TESTING.md). Publishing
 does not launch either suite. Missing applicable client evidence blocks
 publication without changing a completed headless result.
+
+When promoting a tested development build, a reused cohort may also bind its
+original `gametest` descriptor beside the original `runtime`. The gate permits
+only the companion's declared mod version and exact WWPG dependency range to
+change. Every test class and fixture resource must remain identical, and the
+retained process proofs still name the companion they actually executed.
 
 A version-only promotion may add `world_metadata_reuse` with schema 1,
 `scope: runtime_version_only`, the original runtime/source/version and all three

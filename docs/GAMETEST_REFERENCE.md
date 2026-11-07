@@ -8,6 +8,8 @@ Inventory updated **28 October 2026** for the local dev.106 train-circuit regres
 Inventory updated **28 October 2026** for the API startup-binding regression in the 0.2.4 candidate.
 Inventory updated **4 November 2026** for CIO integration/transition/upgrade/model guards and Sable coordinate fixtures.
 Inventory updated **2 November 2026** for dev.112 panel/probe/control regressions and the classified addon-only safety namespaces.
+Inventory updated **5 November 2026** for the local dev.117 transformer-probe regressions.
+Inventory updated **6 November 2026** for the local self-excitation and direct-rotor timing regressions.
 Source links below follow that new location. This is a reference to the assertions in the current source, **not a new test
 run or a claim that every entry has passed in every environment**. See
 [Testing process](TESTING.md) for execution and [published release records](../release/README.md)
@@ -27,14 +29,14 @@ classified separately from ordinary BASE/PINOUT full acceptance.
 
 | Where the declarations live | Test methods | Source files |
 | --- | ---: | ---: |
-| Companion test jar: `src/gameTest/java/.../gametest` | 370 | 122 |
+| Companion test jar: `src/gameTest/java/.../gametest` | 378 | 123 |
 | Independently built general and CEE/PG example addons | 13 | 3 |
 | Extracted SDK acceptance helper | 4 | 1 |
 | Separate short TCP graphical helper | 1 | 1 |
-| **Total** | **388** | **127** |
+| **Total** | **396** | **128** |
 
-There are **50 namespaces**. These are annotated entry points, not 388 unique
-device models, 388 simultaneous tests or the number of invocations in a complete
+There are **50 namespaces**. These are annotated entry points, not 391 unique
+device models, 391 simultaneous tests or the number of invocations in a complete
 campaign. A method can operate many devices and check many assertions. Several
 focused namespaces intentionally delegate to an existing fixture. Compilation,
 JUnit, Python tooling, SDK build checks and native C fault-injection tests are
@@ -90,7 +92,7 @@ means a measurement explicitly cannot be used; it is different from a valid zero
 - Reference and legacy real-client namespaces are special selections, not an
   implicit part of every electrical group. `wwpg_doc` and `wwpg_ci_client` live
   in separate helpers; the latter and the legacy multiplayer entries need real
-  clients. The 370 companion entries include the two legacy client entry points.
+  clients. The 373 companion entries include the two legacy client entry points.
 - Registry/inventory checks prove existence/accounting. Server-side control
   handlers and mock-player operations do not prove real mouse/keyboard input,
   rendered geometry, sound playback or multiplayer synchronization.
@@ -115,7 +117,7 @@ means a measurement explicitly cannot be used; it is different from a valid zero
 | --- | ---: |
 | [Mixed circuits, boards, controls and factories](GAMETEST_REFERENCE.md#mixed-circuits-boards-controls-and-factories) | 123 |
 | [Stationary accuracy, equipment and instruments](GAMETEST_REFERENCE.md#stationary-accuracy-equipment-and-instruments) | 44 |
-| [Distribution, generation and cross-dimension links](GAMETEST_REFERENCE.md#distribution-generation-and-cross-dimension-links) | 21 |
+| [Distribution, generation and cross-dimension links](GAMETEST_REFERENCE.md#distribution-generation-and-cross-dimension-links) | 24 |
 | [Native wires, tools and duplex cables](GAMETEST_REFERENCE.md#native-wires-tools-and-duplex-cables) | 12 |
 | [Saved designers and nonlinear lifecycle](GAMETEST_REFERENCE.md#saved-designers-and-nonlinear-lifecycle) | 6 |
 | [Loading, preparation and restored measurements](GAMETEST_REFERENCE.md#loading-preparation-and-restored-measurements) | 31 |
@@ -466,7 +468,7 @@ Entry points:
 - [`assembledSmallTransformerStepDown`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/PgTransformerGameTests.java#L40)
 - [`assembledMediumTransformerStepUp`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/PgTransformerGameTests.java#L41)
 - [`assembledMediumTransformerStepDown`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/PgTransformerGameTests.java#L42)
-- [`pgVariacMechanicallyAdjustsCeeLoad`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/PgTransformerGameTests.java#L91)
+- [`pgVariacMechanicallyAdjustsCeeLoad`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/PgTransformerGameTests.java#L95)
 
 #### ProtectionGameTests
 
@@ -745,7 +747,27 @@ Entry points:
 
 ### Distribution, generation and cross-dimension links
 
-21 annotated entry points.
+26 annotated entry points.
+
+#### GeneratorTimingGameTests
+
+Namespace: `wwpg_generator_timing` (focused safety). [Source](../src/gameTest/java/org/cha0scollective/wwpg/gametest/GeneratorTimingGameTests.java).
+
+Builds a real six-rotor self-excited PG generator with a 50:10 field transformer.
+Checks accepted powered output, bounded settled voltage and speed, load response
+and drive stop/restart recovery. A separate direct-network check preserves native
+custom-rotor torque counting, inertia compensation and output in both directions
+at one and sixteen substeps. These checks do not certify whole-world cold restart,
+moving assemblies or every possible excitation circuit. See the
+[development timing note](developer/GENERATOR_TIMING.md).
+
+Entry points:
+
+- `transformerFedSelfExcitationSettlesAndRecovers`
+- `carbonPilePreservesNativeClutchOperatingPoints` (connected 72-coil field, native saturated/unsaturated clutch response, load changes and drive recovery)
+- `redstoneVariacRestoresExcitationAtFullRotorSpeed`
+- `directAndCustomRotorsKeepNativeIntegration`
+- `shaftVariacRestoresExcitationAtFullRotorSpeed` (one substep; real mechanical arm, accepted recovery and empty diagnostics)
 
 #### ElectricalScheduleGameTests
 
@@ -1223,6 +1245,11 @@ Namespace: `wwpg_meter_sampling`. [Source](../src/gameTest/java/org/cha0scollect
 
 Checks persistent interpolated connector voltage, PG battery connectors, a remote terminal on a real 3x3x3 battery bank and powered commutator/gauge agreement. Fresh probing must not initialize/destroy a connector; unavailable readings must clear. Three entries deliberately reuse the earlier terminal/wire/clamp fixtures.
 
+The dev.117 additions probe both windings of assembled small transformers and
+both horizontal orientations of medium transformers. They compare the handheld
+meter with accepted terminal snapshots and the powered load, verify read-only
+graph ownership, then check invalidation, recovery and native disassembly.
+
 Entry points:
 
 - [`meterKeepsInterpolatedConnectorVoltage`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeHandheldGameTests.java#L38)
@@ -1230,9 +1257,12 @@ Entry points:
 - [`meterReadsRemoteMultiblockBatteryTerminal`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeHandheldGameTests.java#L99)
 - [`readingFreshConnectorDoesNotInitializeOrDestroyIt`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeHandheldGameTests.java#L138)
 - [`generatorConnectorProbesFollowPoweredCommutator`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeHandheldGameTests.java#L155)
-- [`existingMixedTerminalMeter`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeHandheldGameTests.java#L212)
-- [`existingCeeWireMeter`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeHandheldGameTests.java#L214)
-- [`existingPgWireClamp`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeHandheldGameTests.java#L216)
+- [`existingMixedTerminalMeter`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeHandheldGameTests.java#L213)
+- [`meterReadsMediumTransformerOwnTerminals`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeHandheldGameTests.java#L216)
+- [`meterReadsMediumTransformerOnOtherAxis`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeHandheldGameTests.java#L221)
+- [`meterKeepsSmallTransformerReadings`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeHandheldGameTests.java#L226)
+- [`existingCeeWireMeter`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeHandheldGameTests.java#L266)
+- [`existingPgWireClamp`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeHandheldGameTests.java#L268)
 
 #### PlainWirePowerGameTests
 

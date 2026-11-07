@@ -28,6 +28,8 @@ import org.patryk3211.powergrid.electricity.deviceconnector.DeviceConnectorBlock
 import org.patryk3211.powergrid.electricity.sim.ElectricalNetwork;
 import org.patryk3211.powergrid.electricity.sim.node.OwnedFloatingNode;
 import org.patryk3211.powergrid.electricity.sim.special.TransmissionLine;
+import org.patryk3211.powergrid.electricity.transformer.TransformerMediumBlock;
+import org.patryk3211.powergrid.electricity.transformer.TransformerMediumBlockEntity;
 import org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint;
 
 import java.util.*;
@@ -333,6 +335,23 @@ public final class NativeApiReadings {
         if (nativePg == null || !readNativeTerminalIds(nativePg, state).contains(nativeId)) return null;
         if (!(ApiTerminals.loadedBlockEntity(level, pos) instanceof ElectricBlockEntity entity)) return null;
         var behaviour = entity.getElectricBehaviour();
+        if (behaviour == null && state.getBlock().getClass() == TransformerMediumBlock.class
+                && entity instanceof TransformerMediumBlockEntity) {
+            // PG exposes terminals on upper parts 2/3, but their already-built
+            // electrical behaviour belongs to lower part 0. Do not call PG's
+            // world lookup here: its controller may be in an unloaded chunk.
+            int part = state.getValue(TransformerMediumBlock.PART);
+            if (part != 2 && part != 3) return null;
+            var axis = state.getValue(TransformerMediumBlock.HORIZONTAL_AXIS);
+            var controllerPos = pos.below().relative(axis, part == 3 ? -1 : 0);
+            if (!ApiTerminals.ready(level, controllerPos) || ApiTerminals.pendingRemoval(level, controllerPos)
+                    || !(ApiTerminals.loadedBlockEntity(level, controllerPos) instanceof TransformerMediumBlockEntity controller))
+                return null;
+            var controllerState = controller.getBlockState();
+            if (controllerState.getBlock() != state.getBlock() || !controller.isMain()
+                    || controllerState.getValue(TransformerMediumBlock.HORIZONTAL_AXIS) != axis) return null;
+            behaviour = controller.getElectricBehaviour();
+        }
         if (behaviour instanceof BridgeElectricBehaviour) {
             // Bridge.getTerminal lazily constructs FE handlers and can destroy
             // an uninitialized connector. Read its existing native target only.

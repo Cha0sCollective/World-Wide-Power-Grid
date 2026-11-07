@@ -4,10 +4,10 @@ This separate NeoForge project demonstrates stationary devices built with
 **WWPG extension API 1.0.0**. It compiles against the SDK artifact and NeoForge;
 its Java source imports no PG, CEE, or WWPG implementation classes.
 
-This example ships with WWPG 0.2.2-beta.3. Its nine blocks demonstrate the general API;
+This example ships with WWPG 0.2.7. Its nine blocks demonstrate the general API;
 the [upstream example](../cee-addon/README.md) demonstrates native CEE panels and
 PG circuit boards. The [API Workshop](../../docs/EXTENSION_API_WORKSHOP.md) is a
-playable save using both add-ons. The [release verification](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.2-beta.3/wwpg-0.2.2-beta.3-verification.zip)
+playable save using both add-ons. The [release verification](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.7/wwpg-0.2.7-verification.zip)
 records the tested artifacts and completed checks.
 
 ## Build independently
@@ -15,7 +15,7 @@ records the tested artifacts and completed checks.
 Use Java 21 and the example project's Gradle wrapper.
 
 Download and extract the
-[developer SDK](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.2-beta.3/wwpg-0.2.2-beta.3-developer-sdk.zip).
+[developer SDK](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.7/wwpg-0.2.7-developer-sdk.zip).
 Verify its release checksum, then extract its `maven/wwpg-api-1.0.0-maven.zip`; the directory containing
 `org/cha0scollective/wwpg` is the Maven repository root. Run the wrapper from
 this project's directory, supplying that root's absolute path:
@@ -32,9 +32,9 @@ the example's build or shade API classes into the example jar.
 
 ## Install and operate
 
-Install the example jar together with the **WWPG 0.2.2-beta.3 runtime** on the server
+Install the example jar together with the **WWPG 0.2.7 runtime** on the server
 and every client. Use the tested Minecraft 1.21.1 / NeoForge 21.1.231 environment
-with Java 21, Create 6.0.10-280, CEE 1.1.3, PG 0.6.2, and Architectury 13.0.8.
+with Java 21, Create 6.0.10-280, CEE 1.1.4, PG 0.6.2, and Architectury 13.0.8.
 Follow [WWPG's installation instructions](../../docs/INSTALL.md) for the upstream
 dependencies and solver configuration. The example adds no FE or computer mod
 requirement. Pinout and CC:Tweaked remain optional.

@@ -281,6 +281,12 @@ def validate_release(manifest, root, gate):
             runtime_equivalent(gate.locked_file(reuse['runtime'], root), gate.locked_file(manifest['artifacts']['runtime'], root),
                               reuse['version'], manifest['wwpg_version'])
             accepted_source = reuse['source_sha']; accepted_hashes = dict(hashes, runtime=reuse['runtime']['sha256'])
+            if 'gametest' in reuse:
+                require('gametest' in manifest['artifacts'], 'Companion reuse lacks the published companion')
+                from release_acceptance_reuse import companion_equivalent
+                companion_equivalent(gate.locked_file(reuse['gametest'], root),
+                    gate.locked_file(manifest['artifacts']['gametest'], root), reuse['version'], manifest['wwpg_version'])
+                accepted_hashes['gametest']=reuse['gametest']['sha256']
             require(cohort.get('status') == 'reused', 'Reuse must be labelled separately')
         else: require(cohort.get('status') == 'passed', 'Incomplete release gate')
         validate_reports(paths, lane, accepted_source, accepted_hashes)

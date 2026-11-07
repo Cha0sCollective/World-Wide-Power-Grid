@@ -18,6 +18,30 @@ no scheduled end-of-day run. A push, PR, version bump or release never authorize
 a full run. Publishing requires applicable passing evidence from both acceptance
 lanes, and the publisher validates it without launching tests.
 
+## Select release runtime dependencies
+
+Before freezing a future release campaign, review the current supported versions
+and select the newest supported runtime jars for the required mods and applicable
+optional integrations. Use the newest supported loader as the primary release
+environment, while preserving required minimum-loader compatibility coverage.
+Check the selected campaign inputs rather than assuming build defaults are current.
+
+The complete requested headless and graphical acceptance must exercise that
+frozen dependency set across their required environments. A full run on an older
+dependency plus focused checks on its newer version is not a full pass of the
+newer set. For example, when both CEE 1.1.3 and 1.1.4 are supported, the primary
+full release campaign must use CEE 1.1.4.
+
+Record actual loaded versions and jar hashes in the evidence. Keep intentionally
+pinned minimum SDK compile dependencies and explicitly selected older-version
+compatibility checks separate from the primary runtime selection. A newer jar
+outside WWPG's supported versions needs compatibility investigation before it
+can become a release input.
+
+This policy applies to future campaigns. Preserve published records with their
+actual dependency versions; do not relabel or rerun them automatically. Full
+headless and graphical runs still require their existing explicit authorization.
+
 ## Inspect a selection first
 
 Use Java 21 and Python from the repository root. All `plan` commands are read-only:
@@ -83,6 +107,19 @@ neighboring contacts, actual PG multimeter readings, power loss/recovery and
 foreign-dimension result/storage ownership. Client sound playback, multiplayer
 and train dimension travel require separate coverage; the headless fixture does
 not certify them.
+
+The `wwpg_generator_timing` fixtures run in the separate `generator-timing`
+group. They require a healthy world's diagnostic history, so they must not share
+a process with safety fixtures that deliberately reject electrical solves.
+They cover transformer-fed native
+self-excitation, settled output, load changes and drive stop/restart recovery,
+plus a fully connected 72-coil carbon-pile fixture that checks original powered
+operating points and both saturated and unsaturated clutch loads,
+plus unchanged direct/custom-rotor execution in both directions at one and sixteen
+substeps. A separate one-step batch requires shaft-driven and redstone variac re-excitation to
+recover while the rotor remains at full speed. Run the namespace on both solvers. The separate mechanics units include
+weak drives and the once-per-tick low-speed cutoff. See
+[generator timing](developer/GENERATOR_TIMING.md) for recognition and fallback limits.
 
 The `wwpg` variac fixture checks powered PG load control and calls CEE's native
 heating calculation with distinct local voltage readings and signed current.

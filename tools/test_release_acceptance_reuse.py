@@ -5,7 +5,7 @@ import subprocess
 import tempfile
 import unittest
 import zipfile
-from release_acceptance_reuse import runtime_equivalent, api_equivalent, world_version_equivalent
+from release_acceptance_reuse import runtime_equivalent, api_equivalent, world_version_equivalent, companion_equivalent
 
 class ReuseChecks(unittest.TestCase):
     def setUp(self):
@@ -29,6 +29,25 @@ class ReuseChecks(unittest.TestCase):
             with self.subTest(i=i),self.assertRaises(ValueError):runtime_equivalent(old,self.runtime(str(i)+'.jar','2',change),'1','2')
     def test_added_runtime_entry_is_rejected(self):
         with self.assertRaises(ValueError):runtime_equivalent(self.runtime('old.jar','1'),self.runtime('new.jar','2',{'extra.class':b'code'}),'1','2')
+    def companion(self,name,version,extra=None):
+        files={'META-INF/neoforge.mods.toml':f'modId="wwpg_tests"\nversion="{version}"\nmodId="wwpg"\nversionRange="[{version}]"',
+            'Tests.class':b'actual tests','fixture.nbt':b'actual saved fixture'}
+        files.update(extra or {});return self.jar(name,files)
+    def test_companion_promotion_retains_tests_and_fixtures(self):
+        companion_equivalent(self.companion('old-tests.jar','dev'),self.companion('new-tests.jar','stable'),'dev','stable')
+    def test_changed_test_fixture_or_dependency_is_rejected(self):
+        old=self.companion('old-tests.jar','dev')
+        for i,change in enumerate([{'Tests.class':b'changed tests'},{'fixture.nbt':b'changed fixture'},
+                {'META-INF/neoforge.mods.toml':'modId="wwpg_tests"\nversion="stable"\nmodId="wwpg"\nversionRange="[dev]"'},
+                {'new.class':b'added test'}]):
+            with self.subTest(i=i),self.assertRaises(ValueError):
+                companion_equivalent(old,self.companion(str(i)+'-tests.jar','stable',change),'dev','stable')
+    def test_companion_requires_exact_original_dependency_and_identity(self):
+        for i,metadata in enumerate(['modId="other"\nversion="dev"\nmodId="wwpg"\nversionRange="[dev]"',
+                'modId="wwpg_tests"\nversion="dev"\nmodId="wwpg"\nversionRange="[0,)"']):
+            with self.subTest(i=i),self.assertRaises(ValueError):
+                companion_equivalent(self.companion(str(i)+'-bad.jar','dev',{'META-INF/neoforge.mods.toml':metadata}),
+                    self.companion(str(i)+'-good.jar','stable'),'dev','stable')
     def compile(self,name,source):
         directory=self.root/name;directory.mkdir();p=directory/'Api.java';p.write_text(source,encoding='utf-8')
         home=os.environ.get('JAVA_HOME');javac=str(Path(home)/'bin/javac') if home else 'javac'
