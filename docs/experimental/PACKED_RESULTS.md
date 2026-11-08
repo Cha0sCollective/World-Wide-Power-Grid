@@ -1,5 +1,10 @@
 # Packed result-processing experiment
 
+The packed implementation and its active tooling have been reverted. The current
+experimental runtime is the earlier plain/property-wire batching version. This
+report and all captured evidence remain historical; reproduce the packed code
+from commit `b6e5876`. See the [rollback record](PACKED_ROLLBACK.md).
+
 Historical initial-prototype measurements. The subsequent
 [quiet-host rerun](PACKED_RESULTS_QUIET.md) resolves the clean worker comparison.
 

@@ -12,9 +12,5 @@ gradle.projectsEvaluated {
         systemProperty 'wwpg.experimental.plainWireBatch', 'true'
         systemProperty 'wwpg.experimental.plainWireBatch.verify', 'true'
         systemProperty 'wwpg.experimental.plainWireBatch.properties', p.providers.gradleProperty('testPropertyWireBatch').getOrElse('false')
-        systemProperty 'wwpg.experimental.packedResults', p.providers.gradleProperty('testPackedResults').getOrElse('false')
-        systemProperty 'wwpg.experimental.packedResults.verify', p.providers.gradleProperty('testPackedResults').getOrElse('false')
-        systemProperty 'wwpg.experimental.packedResults.workers', p.providers.gradleProperty('testPackedWorkers').getOrElse('0')
-        systemProperty 'wwpg.experimental.packedResults.minimum', '1'
     }
 }

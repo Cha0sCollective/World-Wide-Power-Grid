@@ -1,7 +1,8 @@
 # Batching-enabled profiling and worker-thread plan
 
 Historical profiling snapshot. The subsequent implementation and measurements
-are in [Packed result processing](PACKED_RESULTS.md).
+are in [Packed result processing](PACKED_RESULTS.md). That prototype was slower
+and has been [reverted](PACKED_ROLLBACK.md); the earlier batching runtime remains.
 
 This investigation continues `dev/experimental-plain-wire-batching` at
 `011fd2d`. It profiles the unchanged `0.2.7-experimental.plainwire.2` runtime,

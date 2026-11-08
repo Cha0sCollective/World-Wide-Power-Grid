@@ -45,13 +45,6 @@ public final class LinearBranch {
         return (firstVoltage - secondVoltage) * norton.conductance() + properties.currentSource()
                 + (voltage == null ? 0 : voltage.getCurrent());
     }
-    /** Capture on the server at the original result boundary. No property or JNI
-     * accessor is retained by the primitive worker buffer. */
-    void captureCurrent(org.cha0scollective.wwpg.experimental.PackedResults.Buffer buffer, int index) {
-        buffer.c[index] = norton.conductance();
-        buffer.d[index] = properties.currentSource();
-        buffer.e[index] = voltage == null ? 0 : voltage.getCurrent();
-    }
     public void remove() {
         norton.remove();
         if (voltage != null) voltage.remove();

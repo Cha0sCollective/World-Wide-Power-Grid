@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-11-08T19:02:25.029095+00:00",
+  "restored_from": "89e1b8a0570affc73c9367ba964af302d75f977d",
+  "rejected_prototype_preserved_at": "b6e5876d31f3516ae99a39e53f10e5f514ac9450",
+  "source_inventory": {
+    "path": "local/frozen/prototype-02c/inputs.json",
+    "sha256": "a77bb304af92bfdf87544535a3620c189c19f331c9a3e0e5360596af7bafe447",
+    "matched_entries": 361
+  },
+  "artifacts": {
+    "runtime": {
+      "rebuilt_path": "build/libs/wwpg-0.2.7-experimental.plainwire.2.jar",
+      "frozen_path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2.jar",
+      "sha256": "8f59be1043aaaf47c33561f3327ef5f52b5ca01eac8aef7039bd1066cb849aa2",
+      "byte_identical": true
+    },
+    "fixtures": {
+      "rebuilt_path": "build/libs/wwpg-0.2.7-experimental.plainwire.2-gametests.jar",
+      "frozen_path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2-gametests.jar",
+      "sha256": "7a70d08aae6ec0ae5d757322d3881e22629e813075309fe3a4d0c8003a2a1904",
+      "byte_identical": true
+    },
+    "cee": {
+      "rebuilt_path": "G:/WWPG/local/x27w/local/frozen/prototype-02c/electroenergetics-1.21.1-1.1.4.jar",
+      "frozen_path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\electroenergetics-1.21.1-1.1.4.jar",
+      "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f",
+      "byte_identical": true
+    }
+  },
+  "build_log": {
+    "path": "local/rollback-build-01.log",
+    "sha256": "f0cc07f98aa4ecbeb3799a6dc955453422cef5d6b1bcd8d57f7c5acae457ccc0"
+  },
+  "focused_checks": [
+    {
+      "name": "property-lifecycle-java-01",
+      "evidence": {
+        "path": "local/checks/property-lifecycle-java-01/result.json",
+        "sha256": "022591d5313d01dce723ef1f47312f2b6070459f52eb39ff986a2b89ef52fc70"
+      },
+      "passed_checks": 11,
+      "evidence_mode": "reused"
+    },
+    {
+      "name": "property-lifecycle-native-01",
+      "evidence": {
+        "path": "local/checks/property-lifecycle-native-01/result.json",
+        "sha256": "6a5010abbe2e79ce9c042fab9350aab4f5c16d39934b0ef6def18d1f94242c7b"
+      },
+      "passed_checks": 11,
+      "evidence_mode": "reused"
+    },
+    {
+      "name": "property-wire-java-off-01",
+      "evidence": {
+        "path": "local/checks/property-wire-java-off-01/result.json",
+        "sha256": "963eb07913e032ef3458400638bc6bc6b666049023d229daab2ba74df444b9f3"
+      },
+      "passed_checks": 13,
+      "evidence_mode": "reused"
+    },
+    {
+      "name": "property-wire-java-on-01",
+      "evidence": {
+        "path": "local/checks/property-wire-java-on-01/result.json",
+        "sha256": "a767f667b4998ce60acbd313ffcd2870c0e8069e9a2745aeebb174c641e7a8ee"
+      },
+      "passed_checks": 13,
+      "evidence_mode": "reused"
+    },
+    {
+      "name": "property-wire-native-off-01",
+      "evidence": {
+        "path": "local/checks/property-wire-native-off-01/result.json",
+        "sha256": "bae31428a6fecad90a9185af34eb2d62f7faeed2e3dc8ba7fd9ec340cdf89e84"
+      },
+      "passed_checks": 13,
+      "evidence_mode": "reused"
+    },
+    {
+      "name": "property-wire-native-on-03",
+      "evidence": {
+        "path": "local/checks/property-wire-native-on-03/result.json",
+        "sha256": "bf7fe87e2fd709eb8ba4308d3792a84ae273c3f3bdaaee43bb224ba192fd29e6"
+      },
+      "passed_checks": 13,
+      "evidence_mode": "reused"
+    }
+  ],
+  "fresh_test_launches": 0,
+  "full_suite": false,
+  "saves_loaded": false
+}

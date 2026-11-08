@@ -14,7 +14,6 @@ import org.cha0scollective.wwpg.api.MeasurementStatus;
 import org.cha0scollective.wwpg.api.NodeResult;
 import org.cha0scollective.wwpg.api.TickContext;
 import org.cha0scollective.wwpg.api.VoltageMeasurement;
-import org.cha0scollective.wwpg.experimental.PackedResults;
 import org.cha0scollective.wwpg.wiring.Terminals;
 import org.cha0scollective.wwpg.wiring.LineVoltages;
 import org.patryk3211.powergrid.collections.ModdedConfigs;
@@ -63,11 +62,6 @@ public final class NativeApiReadings {
     private ReferenceGroups referenceGroups = new ReferenceGroups();
     private final Map<TransmissionLine, LineFrame> lines = new IdentityHashMap<>();
     private boolean finished;
-    private final PackedResults.Buffer packedVoltages = PackedResults.ENABLED ? new PackedResults.Buffer(PackedResults.VOLTAGE) : null;
-    // Only the server touches these publication targets. Workers receive packedVoltages alone.
-    private Frame[] packedFrames = new Frame[0];
-    private int[] packedSteps = new int[0];
-    private boolean[] packedAccepted = new boolean[0], packedChanged = new boolean[0];
 
     private record Key(BlockPos pos, int nativeId) {
         Key { pos = pos.immutable(); }
@@ -251,7 +245,6 @@ public final class NativeApiReadings {
         var samples = recorder.samples(network);
         int step = samples.steps++;
         boolean accepted = network.isConverged() && !samples.rejected;
-        if (recorder.packedAfter(samples, step, accepted)) return;
         for (var frame : samples.direct) {
             if (frame.node.getNetwork() != network) frame.unavailable(MeasurementStatus.NOT_READY, "Terminal network changed during solve");
             else frame.sample(step, frame.node.getVoltage(), accepted);
@@ -271,66 +264,6 @@ public final class NativeApiReadings {
                 ++line.count;
             }
         }
-    }
-
-    private boolean packedAfter(NetworkSamples samples, int step, boolean accepted) {
-        if (packedVoltages == null) return false;
-        int capacity = samples.direct.size();
-        for (var frame : samples.direct) if (frame.node.getClass() != OwnedFloatingNode.class) return false;
-        for (var line : samples.lines) {
-            if (line.line.getClass() != TransmissionLine.class
-                    || line.line.getNode1().getClass() != OwnedFloatingNode.class
-                    || line.line.getNode2().getClass() != OwnedFloatingNode.class) return false;
-            capacity += line.frames.size();
-        }
-        var p = packedVoltages;
-        p.ensure(capacity);
-        if (packedFrames.length < capacity) {
-            packedFrames = new Frame[capacity]; packedSteps = new int[capacity];
-            packedAccepted = new boolean[capacity]; packedChanged = new boolean[capacity];
-        }
-        int count = 0;
-        for (var frame : samples.direct) {
-            packedFrames[count] = frame; packedSteps[count] = step; packedAccepted[count] = accepted;
-            packedChanged[count] = frame.node.getNetwork() != samples.network;
-            p.kind[count] = 0;
-            p.a[count] = packedChanged[count] ? 0 : frame.node.getVoltage();
-            count++;
-        }
-        for (var line : samples.lines) {
-            int next = line.count;
-            if (line.first.steps != next + 1 || line.second.steps != next + 1) continue;
-            boolean valid = line.first.network.isConverged() && !line.first.rejected
-                    && (line.second == line.first || line.second.network.isConverged() && !line.second.rejected);
-            double first = line.line.getNode1().getVoltage(), second = line.line.getNode2().getVoltage();
-            for (var frame : line.frames) {
-                packedFrames[count] = frame; packedSteps[count] = next; packedAccepted[count] = valid;
-                packedChanged[count] = false; p.kind[count] = 1;
-                p.a[count] = first; p.b[count] = second; p.c[count] = frame.fraction;
-                count++;
-            }
-        }
-        try {
-            PackedResults.run(p, count);
-            if (PackedResults.VERIFY) for (int i = 0; i < count; i++) {
-                double scalar = p.kind[i] == 0 ? p.a[i] : p.a[i] * (1 - packedFrames[i].fraction) + p.b[i] * packedFrames[i].fraction;
-                PackedResults.same(scalar, p.x[i]);
-            }
-            for (int i = 0; i < count; i++) {
-                var frame = packedFrames[i];
-                if (packedChanged[i]) frame.unavailable(MeasurementStatus.NOT_READY, "Terminal network changed during solve");
-                else frame.sample(packedSteps[i], p.x[i], packedAccepted[i]);
-            }
-            for (var line : samples.lines)
-                if (line.first.steps == line.count + 1 && line.second.steps == line.count + 1) ++line.count;
-        } catch (IllegalStateException error) {
-            // A drained failure cannot expose partial worker output as valid samples.
-            invalidate(level, samples.network);
-            if (PackedResults.VERIFY) throw error;
-        } finally {
-            Arrays.fill(packedFrames, 0, count, null);
-        }
-        return true;
     }
 
     /** Reject a whole tick if later bridge validation invalidates an earlier network sample. */

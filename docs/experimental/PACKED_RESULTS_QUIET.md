@@ -1,5 +1,10 @@
 # Packed results: quiet-host rerun
 
+Historical measurements of the rejected prototype. Packed processing and workers
+have now been reverted; plain/property-wire batching remains. See the
+[rollback record](PACKED_ROLLBACK.md). Use commit `b6e5876` to reproduce this
+report's implementation and tools.
+
 Follow-up to the [initial packed-results experiment](PACKED_RESULTS.md), after
 the competing game was closed. Runtime implementation remains at `b1f939e`,
 `0.2.7-experimental.packed.1`, on `dev/experimental-plain-wire-batching`.

@@ -25,7 +25,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
 import net.neoforged.neoforge.common.NeoForge;
 import org.cha0scollective.wwpg.WorldWidePowerGrid;
-import org.cha0scollective.wwpg.experimental.PackedResults;
 import org.cha0scollective.wwpg.mixin.CircuitBuilderAccessor;
 import org.cha0scollective.wwpg.mixin.ElectricalNetworkAccessor;
 import org.patryk3211.powergrid.config.CSolver;
@@ -63,7 +62,6 @@ public final class WorldBridge {
     private final Map<ElectricalNetwork, List<ResultNode>> resultNodes = new IdentityHashMap<>();
     private final Map<ElectricalNetwork, List<Branch>> resultBranches = new IdentityHashMap<>();
     private final Map<ElectricalNetwork, List<Winding>> resultWindings = new IdentityHashMap<>();
-    private final PackedResults.Buffer packedCurrents = PackedResults.ENABLED ? new PackedResults.Buffer(PackedResults.CURRENT) : null;
     private List<SimulatedDevice> devices = List.of();
     private final Set<net.minecraft.core.BlockPos> disabledCouplers = new HashSet<>();
     private Set<Node> disabledCouplerNodes = Set.of();
@@ -673,8 +671,7 @@ public final class WorldBridge {
             voltages[n.ordinal * substeps + activeStep] = Double.isFinite(v) ? v : 0;
             if (!Double.isFinite(v)) rejectNumericalSample(network, "Non-finite voltage at " + n.key);
         }
-        var currentBranches = resultBranches.getOrDefault(network, List.of());
-        if (!packedCurrents(network, currentBranches)) for (var branch : currentBranches) {
+        for (var branch : resultBranches.getOrDefault(network, List.of())) {
             double i = sampledOrdinals[branch.desired.firstOrdinal] && sampledOrdinals[branch.desired.secondOrdinal]
                     ? branch.element.current(voltages[branch.desired.firstOrdinal * substeps + activeStep],
                             voltages[branch.desired.secondOrdinal * substeps + activeStep]) : branch.element.current();
@@ -699,50 +696,6 @@ public final class WorldBridge {
             for (var d : dynamics) if(!failedDynamic(d))d.after(voltages, activeStep, substeps);
             ++solvedSubsteps;
         }
-    }
-
-    private boolean packedCurrents(ElectricalNetwork network, List<Branch> current) {
-        if (packedCurrents == null || current.isEmpty() || !adapters.isEmpty() || network.isDirty()
-                || !network.isConverged() || unavailableNetworks.containsKey(network)) return false;
-        // Custom/adapted properties and unsampled endpoints retain the original
-        // callbacks. The whitelist is the bridge's already-audited built-in set.
-        for (var branch : current) {
-            if (!supported(branch.desired.properties)
-                    || org.cha0scollective.wwpg.extension.CeeAdapters.isAdapted(branch.desired.properties)
-                    || !sampledOrdinals[branch.desired.firstOrdinal] || !sampledOrdinals[branch.desired.secondOrdinal]) return false;
-        }
-        var p = packedCurrents;
-        p.ensure(current.size());
-        for (int i = 0; i < current.size(); i++) {
-            var branch = current.get(i);
-            p.a[i] = voltages[branch.desired.firstOrdinal * substeps + activeStep];
-            p.b[i] = voltages[branch.desired.secondOrdinal * substeps + activeStep];
-            branch.element.captureCurrent(p, i);
-            p.old[i] = branch.currentSum; p.oldSquares[i] = branch.currentSquares;
-        }
-        try { PackedResults.run(p, current.size()); }
-        catch (IllegalStateException error) {
-            // The runner has drained all workers and no branch has been written.
-            rejectNumericalSample(network, error.getMessage()); return false;
-        }
-        for (int i = 0; i < current.size(); i++) {
-            // Preserve the scalar rejection/callback sequence on exceptional inputs.
-            if (!Double.isFinite(p.x[i])) return false;
-            if (PackedResults.VERIFY) {
-                var branch = current.get(i);
-                double scalar = branch.element.current(p.a[i], p.b[i]);
-                PackedResults.same(scalar, p.x[i]);
-                PackedResults.same(branch.currentSum + scalar, p.y[i]);
-                PackedResults.same(branch.currentSquares + scalar * scalar, p.z[i]);
-            }
-        }
-        for (int i = 0; i < current.size(); i++) {
-            var branch = current.get(i);
-            branch.currentThisStep = p.x[i]; branch.currentSum = p.y[i]; branch.currentSquares = p.z[i];
-        }
-        // Winding combination and shared dynamic/history callbacks still follow
-        // this publication on the server in their original order.
-        return true;
     }
 
     private void rejectNumericalSample(ElectricalNetwork network, String reason) {
