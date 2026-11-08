@@ -38,6 +38,7 @@
     "platform": {"namespaces": ["wwpg_platform"], "merge_into": "regression", "phases": ["SETUP"]}
   },
   "special_namespaces": {
+    "wwpg_packed_results": "opt-in experimental packed result history, rejection and terminal publication checks; not part of normal acceptance",
     "wwpg_sable_targeting": "opt-in Sable Companion API coordinate fixtures: translated/rotated/scaled/render poses, exposed pins, panel covers, native wire IDs, occlusion and live membership; requires Companion at runtime",
     "wwpg_cio_transitions": "opt-in verified CIO artifact: normal warm-up holds versus real backend rejection, unavailable readings, history rollback and recovery; run separately from healthy CIO checks",
     "wwpg_cio": "opt-in CIO artifact: inverter waveform, rollback, controls and disabled saved couplers; requires the verified optional CIO jar",

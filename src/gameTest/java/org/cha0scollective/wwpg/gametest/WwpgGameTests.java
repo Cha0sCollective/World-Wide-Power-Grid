@@ -16,7 +16,8 @@ public final class WwpgGameTests {
             modBus.addListener(ExtensionApiDiodeParameterGameTests::register);
         if (namespaces.contains("wwpg_api"))
             NeoForge.EVENT_BUS.addListener(ExtensionApiStartupGameTests::beforeStartup);
-        if (Boolean.getBoolean("wwpg.test.packaged") && namespaces.contains("wwpg_api_ownership"))
+        if (Boolean.getBoolean("wwpg.test.packaged")
+                && (namespaces.contains("wwpg_api_ownership") || namespaces.contains("wwpg_packed_results")))
             modBus.addListener(ExtensionApiTerminalRefreshGameTests::register);
         NeoForge.EVENT_BUS.addListener(MultiplayerGameTests::commands);
         if (Boolean.getBoolean("wwpg.test.packaged") && namespaces.size() == 1) {

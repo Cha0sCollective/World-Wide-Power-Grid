@@ -68,6 +68,7 @@ public final class WorldWidePowerGrid {
         if (event.getLevel() instanceof net.minecraft.world.level.Level level) org.cha0scollective.wwpg.extension.ApiTerminals.unload(level);
     }
     private void stop(ServerStoppedEvent event) {
+        LOGGER.info(org.cha0scollective.wwpg.experimental.PackedResults.stopAndReport());
         org.cha0scollective.wwpg.experimental.PlainWireBatch.reportAndReset();
         Bridges.clear();
         org.cha0scollective.wwpg.bridge.RestorationCoordinator.clear();

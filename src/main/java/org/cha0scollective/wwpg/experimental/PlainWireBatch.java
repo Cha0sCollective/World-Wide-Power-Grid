@@ -24,8 +24,8 @@ import org.patryk3211.powergrid.electricity.sim.special.CRSeriesWire;
 import org.patryk3211.powergrid.electricity.sim.special.TransmissionLine;
 
 /**
- * Experimental, server-thread-only PG 0.6.2 power aggregation. No solver work or
- * gameplay callbacks move to another thread. The actual PG hook set is untouched.
+ * Experimental PG 0.6.2 power aggregation. Optional packed math has a synchronous
+ * worker barrier; solver work and gameplay callbacks remain on the server.
  */
 public final class PlainWireBatch implements IMultiHooks {
     public static final boolean ENABLED = Boolean.getBoolean("wwpg.experimental.plainWireBatch");
@@ -42,6 +42,9 @@ public final class PlainWireBatch implements IMultiHooks {
     public interface WireAccess {
         /** Adds precisely power / tickCount, in the original hook position. */
         boolean wwpg$accumulateResistivePower(double voltage);
+        boolean wwpg$capturePower(PackedResults.Buffer buffer, int index, double voltage);
+        void wwpg$verifyPower(double power, double next);
+        void wwpg$publishPower(double next);
     }
 
     private static long plans, unsupportedPlans, steps, contributions, voltageReads, scalarFallbacks;
@@ -54,6 +57,7 @@ public final class PlainWireBatch implements IMultiHooks {
     private final int[] first, second, rows;
     private final IElectricNode[] nodes;
     private final double[] voltages;
+    private final PackedResults.Buffer packed = PackedResults.ENABLED ? new PackedResults.Buffer(PackedResults.POWER) : null;
     private final boolean supported;
     private final Set<IMultiHooks> singleton = Collections.singleton(this);
     private long lastContributions, lastPropertyContributions;
@@ -161,6 +165,19 @@ public final class PlainWireBatch implements IMultiHooks {
 
     @Override public void postMicroTick() {
         long count = 0, propertyCount = 0;
+        if (packed != null) {
+            packed.ensure(hooks.length);
+            for (int i = 0; i < hooks.length; i++) {
+                int a = first[i], b = second[i];
+                double voltage = a < 0 ? -voltages[b] : b < 0 ? voltages[a] : voltages[a] - voltages[b];
+                packed.kind[i] = (byte) (kinds[i] != 0
+                        && ((WireAccess) hooks[i]).wwpg$capturePower(packed, i, voltage) ? 1 : 0);
+            }
+            PackedResults.run(packed, hooks.length);
+            // Validate every staged contribution before publishing any of them.
+            if (VERIFY || PackedResults.VERIFY) for (int i = 0; i < hooks.length; i++)
+                if (packed.kind[i] != 0) ((WireAccess) hooks[i]).wwpg$verifyPower(packed.x[i], packed.y[i]);
+        }
         // Retain the exact ReferenceOpenHashSet iteration order, including the
         // positions of specialized formulas. Conductance is read every substep.
         for (int i = 0; i < hooks.length; i++) {
@@ -169,7 +186,11 @@ public final class PlainWireBatch implements IMultiHooks {
             if (kind != 0) {
                 int a = first[i], b = second[i];
                 double voltage = a < 0 ? -voltages[b] : b < 0 ? voltages[a] : voltages[a] - voltages[b];
-                if (((WireAccess) wire).wwpg$accumulateResistivePower(voltage)) {
+                boolean fast;
+                if (packed == null) fast = ((WireAccess) wire).wwpg$accumulateResistivePower(voltage);
+                else if (packed.kind[i] != 0) { ((WireAccess) wire).wwpg$publishPower(packed.y[i]); fast = true; }
+                else { wire.postMicroTick(); fast = false; }
+                if (fast) {
                     count++;
                     if (kind == 2) propertyCount++;
                 } else {

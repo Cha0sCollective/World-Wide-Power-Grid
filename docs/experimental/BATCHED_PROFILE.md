@@ -1,5 +1,8 @@
 # Batching-enabled profiling and worker-thread plan
 
+Historical profiling snapshot. The subsequent implementation and measurements
+are in [Packed result processing](PACKED_RESULTS.md).
+
 This investigation continues `dev/experimental-plain-wire-batching` at
 `011fd2d`. It profiles the unchanged `0.2.7-experimental.plainwire.2` runtime,
 with both plain-wire and CEE property batching enabled. It changes diagnostic

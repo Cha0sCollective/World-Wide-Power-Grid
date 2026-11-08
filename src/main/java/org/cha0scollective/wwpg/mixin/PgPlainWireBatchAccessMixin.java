@@ -1,6 +1,7 @@
 package org.cha0scollective.wwpg.mixin;
 
 import org.cha0scollective.wwpg.experimental.PlainWireBatch;
+import org.cha0scollective.wwpg.experimental.PackedResults;
 import org.patryk3211.powergrid.electricity.sim.AbstractElectricWire;
 import org.patryk3211.powergrid.electricity.sim.ElectricalNetwork;
 import org.spongepowered.asm.mixin.Mixin;
@@ -40,4 +41,18 @@ public abstract class PgPlainWireBatchAccessMixin implements PlainWireBatch.Wire
         aggregatePower = next;
         return true;
     }
+
+    @Override public boolean wwpg$capturePower(PackedResults.Buffer buffer, int index, double voltage) {
+        double g = ((AbstractElectricWire) (Object) this).conductance();
+        if (!Double.isFinite(g) || g <= 0) return false;
+        buffer.a[index] = voltage; buffer.c[index] = g;
+        buffer.old[index] = aggregatePower; buffer.d[index] = tickCount;
+        return true;
+    }
+    @Override public void wwpg$verifyPower(double power, double next) {
+        double scalar = ((AbstractElectricWire) (Object) this).internalPower();
+        PackedResults.same(scalar, power);
+        PackedResults.same(aggregatePower + scalar / tickCount, next);
+    }
+    @Override public void wwpg$publishPower(double next) { aggregatePower = next; }
 }

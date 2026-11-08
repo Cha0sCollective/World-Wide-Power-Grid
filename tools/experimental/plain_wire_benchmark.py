@@ -78,6 +78,9 @@ def prepare(args):
     flags = '-Xms512M\n-Xmx8G\n-Dwwpg.experimental.plainWireBatch=' + str(args.batch).lower() + '\n'
     flags += '-Dwwpg.experimental.plainWireBatch.verify=' + str(args.verify_batch).lower() + '\n'
     flags += '-Dwwpg.experimental.plainWireBatch.properties=' + str(args.property_batch).lower() + '\n'
+    flags += '-Dwwpg.experimental.packedResults=' + str(args.packed).lower() + '\n'
+    flags += '-Dwwpg.experimental.packedResults.verify=' + str(args.verify_packed).lower() + '\n'
+    flags += '-Dwwpg.experimental.packedResults.workers=' + str(args.workers) + '\n'
     (directory / 'launch.args').write_text(flags + '\n'.join(tokens) + '\nnogui\n', newline='\n')
     java = Path(manifest['java']['path'])
     assert java.is_file()
@@ -94,7 +97,7 @@ def prepare(args):
     return directory, reference, original
 
 
-def validate(directory, detailed, batch=False, verify=False, properties=False):
+def validate(directory, detailed, batch=False, verify=False, properties=False, packed=False, verify_packed=False, workers=0):
     report = bench.read(directory / 'benchmark/result.json')
     audit = report['audit']
     assert report['passed'] and report['cee_solves'] == report['rejected_solves'] == 0
@@ -146,6 +149,21 @@ def validate(directory, detailed, batch=False, verify=False, properties=False):
         assert 'differs from scalar PG power' not in log
         validation['batch_execution'] = stats
         validation['bitwise_verification'] = verify
+    if packed:
+        log = (directory / 'process.log').read_text(encoding='utf-8', errors='replace')
+        matches = re.findall(r'WWPG experimental packed results: enabled=true, verify=(true|false), workers=(\d+), power=(\d+), currents=(\d+), voltages=(\d+), dispatches=(\d+), ranges=(\d+), verified=(\d+)', log)
+        assert len(matches) == 1, 'Missing packed execution proof'
+        verified, actual_workers, *counts = matches[0]
+        assert (verified == 'true') == verify_packed and int(actual_workers) == workers
+        stats = dict(zip(('power', 'currents', 'voltages', 'dispatches', 'ranges', 'verified'), map(int, counts)))
+        assert stats['power'] >= len(rows) * 16 * (10368 + 9443)
+        assert stats['currents'] >= len(rows) * 16 * 9000, 'CEE packed coverage missing'
+        assert stats['voltages'] >= len(rows) * 16 * 1000, 'Terminal packed coverage missing'
+        assert stats['ranges'] == stats['dispatches'] * workers
+        assert bool(stats['dispatches']) == bool(workers)
+        if verify_packed: assert stats['verified'] >= stats['power']
+        assert 'Packed result differs' not in log and 'Packed worker failed' not in log
+        validation['packed_execution'] = dict(workers=workers, **stats)
     return validation
 
 
@@ -159,17 +177,25 @@ def main():
     parser.add_argument('--batch', action='store_true')
     parser.add_argument('--verify-batch', action='store_true')
     parser.add_argument('--property-batch', action='store_true')
+    parser.add_argument('--packed', action='store_true')
+    parser.add_argument('--verify-packed', action='store_true')
+    parser.add_argument('--workers', type=int, choices=[0, 2, 4], default=0)
     args = parser.parse_args()
     if (args.property_batch or args.verify_batch) and not args.batch:
         parser.error('--property-batch and --verify-batch require --batch')
     if args.substep_jfr and not args.detailed:
         parser.error('--substep-jfr requires --detailed')
+    if args.packed and not (args.batch and args.property_batch):
+        parser.error('--packed requires --batch and --property-batch for this comparison')
+    if (args.workers or args.verify_packed) and not args.packed:
+        parser.error('--workers and --verify-packed require --packed')
     directory, reference, original = prepare(args)
     before = inventory(original)
     protocol = dict(name=args.name, runtime=bench.read(directory / 'launch.json')['runtime'],
         scope='Focused 120-second warmup and 120-second stable control; not full capacity acceptance',
         copied_reference=True, sixteen_substeps=True, full_suite=False, batch=args.batch,
         verify_batch=args.verify_batch, property_batch=args.property_batch, detailed=args.detailed,
+        packed=args.packed, verify_packed=args.verify_packed, workers=args.workers,
         substep_jfr=args.substep_jfr, started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
     bench.write(directory / 'experiment.json', protocol)
     print(json.dumps(dict(starting=str(directory), protocol=protocol)), flush=True)
@@ -180,7 +206,8 @@ def main():
         substep_trace=args.detailed, substep_jfr=args.substep_jfr)
     try:
         bench.run(options)
-        protocol['validation'] = validate(directory, args.detailed, args.batch, args.verify_batch, args.property_batch)
+        protocol['validation'] = validate(directory, args.detailed, args.batch, args.verify_batch, args.property_batch,
+                                          args.packed, args.verify_packed, args.workers)
         if args.substep_jfr:
             recording = directory / 'benchmark/substeps.jfr'
             log = (directory / 'process.log').read_text(encoding='utf-8', errors='replace')
