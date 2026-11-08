@@ -1,0 +1,15 @@
+// Explicitly opt in only for this isolated experiment. No ordinary task defaults change.
+gradle.projectsEvaluated {
+    def p = gradle.rootProject
+    def cee = p.file(p.property('experimentalCee'))
+    if (!cee.isFile()) throw new GradleException('Missing frozen CEE 1.1.4 input')
+    def sha = java.security.MessageDigest.getInstance('SHA-256').digest(cee.bytes).encodeHex().toString()
+    if (sha != '2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f')
+        throw new GradleException('Frozen CEE 1.1.4 input changed')
+    p.configurations.implementation.dependencies.removeAll { dep -> dep.group == 'maven.modrinth' && dep.name == 'qYJdIoAx' }
+    p.dependencies.add('implementation', p.files(cee))
+    p.neoForge.runs.named('gameTestServer') {
+        systemProperty 'wwpg.experimental.plainWireBatch', 'true'
+        systemProperty 'wwpg.experimental.plainWireBatch.verify', 'true'
+    }
+}

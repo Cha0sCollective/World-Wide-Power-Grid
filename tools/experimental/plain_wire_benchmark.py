@@ -1,0 +1,171 @@
+"""Finite copied-save experiments. No release or full-acceptance commands."""
+from pathlib import Path
+import argparse
+import csv
+import json
+import os
+import re
+import shlex
+import shutil
+import subprocess
+import time
+from types import SimpleNamespace
+
+import legacy_bench as bench
+
+ROOT = Path(__file__).resolve().parents[2]
+INPUTS = ROOT / 'local/inputs'
+RELEASE_SHA = '6c1060b17f14df765188a60da154b723705947503a813508a53f62013e625053'
+HELPER_SHA = 'cb67f3bbe08568992e1664558a3dc503c876be8cad5badf7872efbd763e3224e'
+CEE_SHA = '2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f'
+
+
+def inventory(directory):
+    return [dict(path=p.relative_to(directory).as_posix(), sha256=bench.sha(p))
+            for p in sorted(directory.rglob('*')) if p.is_file()
+            and p.name not in ('session.lock', 'level.dat_old')]
+
+
+def prepare(args):
+    reference_root = Path(args.reference_root).resolve()
+    profile = reference_root / 'local/benchmarks/release-baselines-20261014/profile-231'
+    manifest = bench.read(profile / 'profile.json')
+    original = reference_root / 'local/benchmarks/fix-10k-20261012/extracted-10000-dev2/WWPG Benchmark - MIXED - 10000 nodes'
+    reference = INPUTS / 'reference'
+    if not reference.exists():
+        evidence = bench.restore_reference(original, reference)
+        bench.write(INPUTS / 'reference-copy.json', evidence)
+    saved = bench.read(INPUTS / 'reference-copy.json')
+    for item in saved['files']:
+        assert bench.sha(reference / item['path']) == item['sha256']
+        assert bench.sha(original / item['path']) == item['sha256']
+    assert bench.sha(INPUTS / 'wwpg-0.2.7.jar') == RELEASE_SHA
+    helper = INPUTS / 'wwpg-benchmark-0.1.0.jar'
+    assert bench.sha(helper) == HELPER_SHA
+    runtime = Path(args.runtime).resolve() if args.runtime else INPUTS / 'wwpg-0.2.7.jar'
+    assert runtime.is_relative_to(ROOT) and runtime.is_file()
+    directory = bench.safe_directory(ROOT / 'local/benchmarks' / args.name)
+    if directory.exists():
+        raise ValueError('Preserve prior attempts; choose a new name')
+    # Existing loader libraries are read-only, verified individually before reuse.
+    inputs = []
+    for item in manifest['libraries']:
+        path = profile / item['file']
+        assert bench.sha(path) == item['sha256'], path
+        inputs.append(dict(path=str(path), sha256=item['sha256']))
+    directory.mkdir(parents=True)
+    (directory / 'mods').mkdir()
+    for mod in manifest['mods']:
+        if mod['role'] in ('wwpg', 'cee'):
+            continue
+        source = profile / mod['file']
+        assert bench.sha(source) == mod['installed_sha256']
+        shutil.copy2(source, directory / mod['file'])
+    cee = reference_root / 'local/cee-compatibility-20261101/electroenergetics-1.21.1-1.1.4.jar'
+    assert bench.sha(cee) == CEE_SHA, 'Frozen CEE 1.1.4 input changed'
+    for source in (cee, runtime, helper):
+        shutil.copy2(source, directory / 'mods' / source.name)
+    for path in sorted((directory / 'mods').glob('*.jar')):
+        inputs.append(dict(path=str(path), sha256=bench.sha(path)))
+    launch_source = profile / 'libraries/net/neoforged/neoforge/21.1.231/win_args.txt'
+    libraries = (profile / 'libraries').as_posix()
+    tokens = []
+    for token in shlex.split(launch_source.read_text(), comments=True, posix=True):
+        token = token.replace('libraries/', libraries + '/')
+        if token.startswith('-DlibraryDirectory='):
+            token = '-DlibraryDirectory=' + libraries
+        tokens.append('"' + token.replace('"', '\\"') + '"')
+    flags = '-Xms512M\n-Xmx8G\n-Dwwpg.experimental.plainWireBatch=' + str(args.batch).lower() + '\n'
+    flags += '-Dwwpg.experimental.plainWireBatch.verify=' + str(args.verify_batch).lower() + '\n'
+    (directory / 'launch.args').write_text(flags + '\n'.join(tokens) + '\nnogui\n', newline='\n')
+    java = Path(manifest['java']['path'])
+    assert java.is_file()
+    sources = [dict(path=p.relative_to(ROOT).as_posix(), sha256=bench.sha(p))
+               for folder in ('helper-src', 'helper-resources') for p in sorted((INPUTS / folder).rglob('*')) if p.is_file()]
+    bench.write(directory / 'launch.json', dict(schema=1, neoforge='21.1.231',
+        runtime=dict(path=str(directory / 'mods' / runtime.name), sha256=bench.sha(runtime), kind='local-candidate', source=str(runtime)),
+        helper=dict(path=str(directory / 'mods' / helper.name), sha256=HELPER_SHA), sources=sources,
+        profile_inputs=inputs, profile=dict(name='EXPERIMENTAL_CLEAN', heap_gib=8, cee='1.1.4', pg='0.6.2'),
+        command=[str(java), '@' + str(directory / 'launch.args')], environment={}, directory=str(directory)))
+    bench.write(directory / 'WWPG_BENCHMARK_OWNED.json', dict(root=str(directory), purpose='Isolated plain-wire experiment'))
+    (directory / 'eula.txt').write_text('eula=true\n')
+    (directory / 'server.properties').write_text('level-name=world\nlevel-type=minecraft:flat\ngenerate-structures=false\nlevel-seed=2101248\ngamemode=creative\ndifficulty=peaceful\nserver-ip=127.0.0.1\nserver-port=25889\nonline-mode=true\nspawn-protection=0\nview-distance=2\nsimulation-distance=2\nmax-players=1\nmax-tick-time=60000\n')
+    return directory, reference, original
+
+
+def validate(directory, detailed, batch=False, verify=False):
+    report = bench.read(directory / 'benchmark/result.json')
+    audit = report['audit']
+    assert report['passed'] and report['cee_solves'] == report['rejected_solves'] == 0
+    assert (audit['electrical_nodes'], audit['edges'], audit['solver_networks'], audit['optimized_matrix_nodes']) == (14650, 20637, 1, 14925)
+    assert audit['actual_backends'] == ['NATIVE']
+    assert bench.read(directory / 'shutdown-save.json')['all_dimensions_saved']
+    assert bench.read(directory / 'benchmark/placement-restored.json')['original_thread_affinity_restored']
+    assert bench.read(directory / 'benchmark/placement-fixed.json')['mask'] == 'fff000'
+    assert len(bench.read(directory / 'benchmark/pre-solve-storage.json')) == 1050
+    assert len(bench.read(directory / 'world/WWPG_BENCHMARK.json')['chunks']) == 953
+    with (directory / 'benchmark/ticks.csv').open() as stream:
+        rows = [r for r in csv.DictReader(stream) if r['phase'] == 'STABLE']
+    assert rows and all(int(r['pg_solve_calls']) == 16 and int(r['matrix_assemblies']) == 0 for r in rows)
+    assert bench.read(directory / 'benchmark/graph-start.json') == bench.read(directory / 'benchmark/graph-end.json')
+    if not detailed:
+        assert all(r['timing_sample'] == '0' for r in rows)
+    else:
+        with (directory / 'benchmark/substeps.csv').open() as stream:
+            records = list(csv.DictReader(stream))
+        assert records and len(records) % 16 == 0
+        assert all(r['pg_accepted'] == r['pg_returned'] == 'true' and r['partial'] == 'false' for r in records)
+    validation = dict(passed=True, full_suite=False, capacity_certified=False, stable_ticks=len(rows),
+                actual_nodes=14650, edges=20637, chunks=953, storage_devices=1050,
+                sixteen_substeps=True, topology_unchanged=True, normal_shutdown=True)
+    if batch:
+        log = (directory / 'process.log').read_text(encoding='utf-8', errors='replace')
+        matches = re.findall(r'WWPG experimental plain-wire batch: verify=(true|false), plans=(\d+), unsupported=(\d+), steps=(\d+), contributions=(\d+), voltageReads=(\d+), scalarFallbacks=(\d+), largestPlainBatch=(\d+)', log)
+        assert len(matches) == 1, 'Missing or repeated batch execution proof'
+        values = matches[0]
+        assert (values[0] == 'true') == verify
+        stats = dict(zip(('plans', 'unsupported', 'steps', 'contributions', 'voltage_reads', 'scalar_fallbacks', 'largest_plain_batch'), map(int, values[1:])))
+        assert stats['largest_plain_batch'] == 10368
+        assert stats['contributions'] >= len(rows) * 16 * 10368, 'Batch did not process enough of the measured yard'
+        assert 'differs from scalar PG power' not in log
+        validation['batch_execution'] = stats
+        validation['bitwise_verification'] = verify
+    return validation
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--reference-root', required=True)
+    parser.add_argument('--name', required=True)
+    parser.add_argument('--runtime')
+    parser.add_argument('--detailed', action='store_true')
+    parser.add_argument('--batch', action='store_true')
+    parser.add_argument('--verify-batch', action='store_true')
+    args = parser.parse_args()
+    directory, reference, original = prepare(args)
+    before = inventory(original)
+    protocol = dict(name=args.name, runtime=bench.read(directory / 'launch.json')['runtime'],
+        scope='Focused 120-second warmup and 120-second stable control; not full capacity acceptance',
+        copied_reference=True, sixteen_substeps=True, full_suite=False, batch=args.batch,
+        verify_batch=args.verify_batch, detailed=args.detailed, started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
+    bench.write(directory / 'experiment.json', protocol)
+    print(json.dumps(dict(starting=str(directory), protocol=protocol)), flush=True)
+    options = SimpleNamespace(directory=str(directory), runtime_sha256=protocol['runtime']['sha256'],
+        tier=10000, backend='NATIVE', variant='MIXED', mode='control', warmup=120, sample=120,
+        churn=0, cycles=1, restore=str(reference), detailed=args.detailed, timeout=1200,
+        restoration_batch=True, rhs_counters=False, profile_every=20,
+        substep_trace=args.detailed, substep_jfr=False)
+    try:
+        bench.run(options)
+        protocol['validation'] = validate(directory, args.detailed, args.batch, args.verify_batch)
+        protocol['summary'] = bench.read(directory / 'benchmark/summary.json')
+        print(json.dumps(dict(completed=True, summary=protocol['summary']['mspt'], tps=protocol['summary']['tps'])), flush=True)
+    finally:
+        protocol['original_reference_unchanged'] = inventory(original) == before
+        protocol['finished_utc'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
+        bench.write(directory / 'experiment.json', protocol)
+        assert protocol['original_reference_unchanged']
+
+
+if __name__ == '__main__':
+    main()

@@ -45,6 +45,8 @@
     "PgRestorationValueMixin",
     "PgRestorationWireMixin",
     "PgPlainWirePowerMixin",
+    "PgPlainWireBatchMixin",
+    "PgPlainWireBatchAccessMixin",
     "PgRestorationDerivedCurrentMixin",
     "RestorationMotorMixin",
     "RestorationConstantMotorMixin",
