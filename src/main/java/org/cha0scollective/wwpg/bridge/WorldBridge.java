@@ -111,7 +111,7 @@ public final class WorldBridge {
             phase = Phase.IDLE; return;
         }
         require(phase != Phase.SOLVE, "Topology cannot change during a solve");
-        org.cha0scollective.wwpg.experimental.WireTreeBatch.flush(level);
+        org.cha0scollective.wwpg.experimental.WireTreeBatch.flushBeforeServerTick(level);
         phase = Phase.PREPARE;
         catenaryHandovers.clear();
         RestorationCoordinator.begin(level);
@@ -736,6 +736,8 @@ public final class WorldBridge {
         pausedDevices.clear(); statefulDevices.clear();
         boolean paused = RestorationCoordinator.anyPaused();
         if (paused) {
+            if (org.cha0scollective.wwpg.experimental.WireTreeBatch.holding(level))
+                for (var device : devices) pausedDevices.add(device.pos);
             for (var device : devices) if (device instanceof com.george_vi.electroenergetics.content.converter.ConverterDevice) statefulDevices.add(device.pos);
             for (var dynamic : dynamics) for (int ordinal : new int[]{dynamic.first, dynamic.second}) {
                 var owner = ownerOf(preparedKeys.get(builder.getNode(ordinal).node)); if (owner != null) statefulDevices.add(owner);

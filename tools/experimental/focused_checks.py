@@ -19,8 +19,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--inputs', required=True)
     parser.add_argument('--backend', choices=['NATIVE', 'JAVA'], required=True)
-    parser.add_argument('--selection', choices=['wire', 'lifecycle', 'tree'], default='wire')
+    parser.add_argument('--selection', choices=['wire', 'lifecycle', 'tree', 'budget'], default='wire')
     parser.add_argument('--tree-batch', action='store_true')
+    parser.add_argument('--tree-budget-ms', type=int, default=0)
+    parser.add_argument('--tree-max-parts', type=int, default=32)
     parser.add_argument('--name', required=True)
     parser.add_argument('--property-batch', action='store_true')
     args = parser.parse_args()
@@ -33,8 +35,11 @@ def main():
     assert directory.is_relative_to((ROOT / 'local/checks').resolve())
     directory.mkdir(parents=True, exist_ok=False)
     namespaces = 'wwpg_wire_power' if args.selection == 'wire' else 'wwpg_unload,wwpg_solver_safety'
-    if args.selection == 'tree':
+    if args.selection in ('tree', 'budget'):
         namespaces = 'wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery'
+    if args.selection == 'budget':
+        assert args.tree_batch and args.tree_budget_ms > 0 and args.tree_max_parts == 1
+        namespaces += ',wwpg_tree_budget'
     command = [sys.executable, str(ROOT / 'tools/run_checked.py'), '--timeout', '600', '--', 'gradlew.bat',
                'runPackagedGameTestServer', '-x', 'build', '-x', 'jar', '-x', 'test', '--offline', '--no-daemon',
                '-I', 'tools/experimental/plain-wire.gradle', '-PexperimentalCee=' + str(artifacts['cee']),
@@ -42,12 +47,14 @@ def main():
                '-PtestDirectory=' + str(directory / 'server'), '-PtestBackend=' + args.backend,
                '-PtestProfile=BASE', '-PtestNamespaces=' + namespaces,
                '-PtestPropertyWireBatch=' + str(args.property_batch).lower(),
-               '-PtestWireTreeBatch=' + str(args.tree_batch).lower()]
+               '-PtestWireTreeBatch=' + str(args.tree_batch).lower(),
+               '-PtestWireTreeBudgetMillis=' + str(args.tree_budget_ms), '-PtestWireTreeMaxParts=' + str(args.tree_max_parts)]
     env = dict(os.environ)
     env['JAVA_HOME'] = inputs['java_home']
     env['PATH'] = str(Path(inputs['java_home']) / 'bin') + os.pathsep + env['PATH']
     proof = dict(scope='Focused only; no full or graphical acceptance', namespaces=namespaces,
-                 backend=args.backend, property_batch=args.property_batch, tree_batch=args.tree_batch, command=command, artifacts=inputs['artifacts'])
+                 backend=args.backend, property_batch=args.property_batch, tree_batch=args.tree_batch,
+                 tree_budget_ms=args.tree_budget_ms, tree_max_parts=args.tree_max_parts, command=command, artifacts=inputs['artifacts'])
     (directory / 'invocation.json').write_text(json.dumps(proof, indent=2) + '\n')
     print(json.dumps(dict(starting=str(directory), namespaces=namespaces, backend=args.backend)), flush=True)
     with (directory / 'process.log').open('w', encoding='utf-8') as stream:

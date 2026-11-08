@@ -68,7 +68,9 @@ public final class RestorationCoordinator {
             record.ready = ready;
             for (var endpoint : record.endpoints) state.dependencies.computeIfAbsent(endpoint.getPos(), ignored -> new HashSet<>()).add(record);
         }
-        state.active = state.chunks.values().stream().anyMatch(record -> record.window.active());
+        state.active = state.chunks.values().stream().anyMatch(record -> record.window.active())
+                || org.cha0scollective.wwpg.experimental.WireTreeBatch.holding(level);
+        if (org.cha0scollective.wwpg.experimental.WireTreeBatch.holding(level)) anyPaused = true;
     }
     public static boolean active(ServerLevel level) { var state = WORLDS.get(level); return ENABLED && state != null && state.active; }
     public static boolean pending(ServerLevel level, ChunkPos chunk) { var state = WORLDS.get(level); var record = state == null ? null : state.chunks.get(chunk.toLong()); return record != null && record.window.active(); }
@@ -140,6 +142,12 @@ public final class RestorationCoordinator {
         if (!ENABLED || !(world.world instanceof ServerLevel level)) return false;
         var state = state(level); var previous = state.decisions.get(network);
         if (previous != null) return previous;
+        // A real unfinished wire queue cannot be released by the quiet-window deadline.
+        // Hold conservatively by dimension while queued roots can still merge circuits.
+        if (org.cha0scollective.wwpg.experimental.WireTreeBatch.holding(level)) {
+            state.decisions.put(network, true); markPaused(network);
+            return true;
+        }
         if (!state.active) return false;
         var positions = new HashSet<BlockPos>();
         var records = records(world, network, positions);
@@ -190,6 +198,7 @@ public final class RestorationCoordinator {
         state(level).incoming.add(chunk.toLong());
     }
     public static boolean pausedAt(ServerLevel level, BlockPos position) {
+        if (org.cha0scollective.wwpg.experimental.WireTreeBatch.holding(level)) return true;
         var state = WORLDS.get(level); return anyPaused && state != null && state.pausedPositions.contains(position);
     }
     public static void markOwner(ServerLevel level, BlockPos position) { if (position != null) state(level).pausedPositions.add(position); }

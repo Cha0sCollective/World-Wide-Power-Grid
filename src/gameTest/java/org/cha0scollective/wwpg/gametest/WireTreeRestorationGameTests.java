@@ -19,12 +19,12 @@ import com.george_vi.electroenergetics.CEEBlocks;
 @GameTestHolder("wwpg_tree_restore")
 @PrefixGameTestTemplate(false)
 public final class WireTreeRestorationGameTests {
-    @GameTest(template="empty", timeoutTicks=120) public static void pgSavedRing(GameTestHelper h) { restore(h, false, false, false, false); }
-    @GameTest(template="empty", timeoutTicks=120) public static void ceeSavedRing(GameTestHelper h) { restore(h, true, false, false, false); }
-    @GameTest(template="empty", timeoutTicks=120) public static void reverseLoadOrder(GameTestHelper h) { restore(h, true, true, false, false); }
-    @GameTest(template="empty", timeoutTicks=120) public static void missingSavedPartFallsBack(GameTestHelper h) { restore(h, false, true, true, false); }
-    @GameTest(template="empty", timeoutTicks=120) public static void coldPgLoopWithoutResolvedEdges(GameTestHelper h) { restore(h, false, false, false, true); }
-    @GameTest(template="empty", timeoutTicks=120) public static void coldCeeLoopInReverseOrder(GameTestHelper h) { restore(h, true, true, false, true); }
+    @GameTest(template="empty", batch="tree_pg", timeoutTicks=120) public static void pgSavedRing(GameTestHelper h) { restore(h, false, false, false, false); }
+    @GameTest(template="empty", batch="tree_cee", timeoutTicks=120) public static void ceeSavedRing(GameTestHelper h) { restore(h, true, false, false, false); }
+    @GameTest(template="empty", batch="tree_reverse", timeoutTicks=120) public static void reverseLoadOrder(GameTestHelper h) { restore(h, true, true, false, false); }
+    @GameTest(template="empty", batch="tree_missing", timeoutTicks=120) public static void missingSavedPartFallsBack(GameTestHelper h) { restore(h, false, true, true, false); }
+    @GameTest(template="empty", batch="tree_cold_pg", timeoutTicks=120) public static void coldPgLoopWithoutResolvedEdges(GameTestHelper h) { restore(h, false, false, false, true); }
+    @GameTest(template="empty", batch="tree_cold_cee", timeoutTicks=120) public static void coldCeeLoopInReverseOrder(GameTestHelper h) { restore(h, true, true, false, true); }
 
     private static void restore(GameTestHelper h, boolean cee, boolean reverse, boolean removePart, boolean coldParts) {
         var level = h.getLevel();

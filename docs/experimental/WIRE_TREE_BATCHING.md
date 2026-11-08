@@ -7,6 +7,9 @@ batching remain enabled. The new runtime is `0.2.7-experimental.wiretree.2`.
 It is isolated research, with disposable benchmark copies and focused checks;
 it is not normal acceptance or a release candidate.
 
+Follow-up: [bounded restoration](BOUNDED_WIRE_TREE.md). The timings below remain
+the historical unbounded `wiretree.2` comparison.
+
 ## Comparison
 
 On the 14,650-node mixed benchmark, the final prototype reduced the mean

@@ -42,6 +42,15 @@ def prepare(args):
     assert bench.sha(INPUTS / 'wwpg-0.2.7.jar') == RELEASE_SHA
     helper = INPUTS / 'wwpg-benchmark-0.1.0.jar'
     assert bench.sha(helper) == HELPER_SHA
+    helper_overlay = None
+    if getattr(args, 'helper_inputs', None):
+        helper_manifest = Path(args.helper_inputs).resolve()
+        assert helper_manifest.is_relative_to(ROOT / 'local/frozen')
+        helper_overlay = bench.read(helper_manifest)
+        helper = Path(helper_overlay['helper']['path'])
+        assert helper.is_relative_to(ROOT / 'local/frozen') and bench.sha(helper) == helper_overlay['helper']['sha256']
+        for item in helper_overlay['sources']:
+            assert bench.sha(ROOT / item['path']) == item['sha256']
     runtime = Path(args.runtime).resolve() if args.runtime else INPUTS / 'wwpg-0.2.7.jar'
     assert runtime.is_relative_to(ROOT) and runtime.is_file()
     directory = bench.safe_directory(ROOT / 'local/benchmarks' / args.name)
@@ -79,14 +88,18 @@ def prepare(args):
     flags += '-Dwwpg.experimental.plainWireBatch.verify=' + str(args.verify_batch).lower() + '\n'
     flags += '-Dwwpg.experimental.plainWireBatch.properties=' + str(args.property_batch).lower() + '\n'
     flags += '-Dwwpg.experimental.wireTreeBatch=' + str(getattr(args, 'tree_batch', False)).lower() + '\n'
+    flags += '-Dwwpg.experimental.wireTreeBudgetMillis=' + str(getattr(args, 'tree_budget_ms', 0)) + '\n'
+    flags += '-Dwwpg.experimental.wireTreeMaxParts=' + str(getattr(args, 'tree_max_parts', 32)) + '\n'
     (directory / 'launch.args').write_text(flags + '\n'.join(tokens) + '\nnogui\n', newline='\n')
     java = Path(manifest['java']['path'])
     assert java.is_file()
     sources = [dict(path=p.relative_to(ROOT).as_posix(), sha256=bench.sha(p))
                for folder in ('helper-src', 'helper-resources') for p in sorted((INPUTS / folder).rglob('*')) if p.is_file()]
+    if helper_overlay:
+        sources += helper_overlay['sources']
     bench.write(directory / 'launch.json', dict(schema=1, neoforge='21.1.231',
         runtime=dict(path=str(directory / 'mods' / runtime.name), sha256=bench.sha(runtime), kind='local-candidate', source=str(runtime)),
-        helper=dict(path=str(directory / 'mods' / helper.name), sha256=HELPER_SHA), sources=sources,
+        helper=dict(path=str(directory / 'mods' / helper.name), sha256=bench.sha(helper)), sources=sources,
         profile_inputs=inputs, profile=dict(name='EXPERIMENTAL_CLEAN', heap_gib=8, cee='1.1.4', pg='0.6.2'),
         command=[str(java), '@' + str(directory / 'launch.args')], environment={}, directory=str(directory)))
     bench.write(directory / 'WWPG_BENCHMARK_OWNED.json', dict(root=str(directory), purpose='Isolated plain-wire experiment'))

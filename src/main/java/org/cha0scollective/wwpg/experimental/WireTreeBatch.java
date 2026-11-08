@@ -12,10 +12,18 @@ import org.patryk3211.powergrid.electricity.wire.*;
 /** Opt-in saved-wire attachment and server-thread tree resolution. Nothing is persisted. */
 public final class WireTreeBatch {
     public static final boolean ENABLED = Boolean.getBoolean("wwpg.experimental.wireTreeBatch");
+    public static final int BUDGET_MILLIS = Integer.getInteger("wwpg.experimental.wireTreeBudgetMillis", 0);
+    public static final int MAX_PARTS = Integer.getInteger("wwpg.experimental.wireTreeMaxParts", 32);
+    public static final boolean BOUNDED = ENABLED && BUDGET_MILLIS > 0;
+    static {
+        if (BUDGET_MILLIS < 0 || MAX_PARTS < 1) throw new IllegalArgumentException("Invalid wire-tree budget");
+    }
     private static final ThreadLocal<BaseWireEntity> READING = new ThreadLocal<>();
     private static final Map<WorldNetworks, State> PENDING = new IdentityHashMap<>();
+    private static final Map<ServerLevel, Integer> LAST_FLUSH = new IdentityHashMap<>();
     private static long attachments, fallback, roots, traversals, covered, visited, flushes, forced;
-    private static int largest;
+    private static long discarded, yielded, maxFlushNanos, maxEntryNanos;
+    private static int largest, maxProcessed;
     private WireTreeBatch() { }
     public interface Access {
         boolean wwpg$traceTree(IWireEndpoint endpoint, Set<IWireEndpoint> visited);
@@ -23,10 +31,10 @@ public final class WireTreeBatch {
         boolean wwpg$makeLine(TransmissionLinePart part);
     }
     private static final class State {
-        final List<IWireEndpoint> roots = new ArrayList<>();
-        final List<TransmissionLinePart> parts = new ArrayList<>();
+        final RestorationQueue<IWireEndpoint, Attachment> queue = new RestorationQueue<>();
         boolean flushing;
     }
+    private record Attachment(TransmissionLinePart part, BaseWireEntity owner) { }
     public static void reading(BaseWireEntity wire, Runnable original) {
         if (!ENABLED) { original.run(); return; }
         var previous = READING.get();
@@ -54,21 +62,33 @@ public final class WireTreeBatch {
         // until the existing iterative resolver runs before electrical preparation.
         part.grab(wire, id);
         state = PENDING.computeIfAbsent(world, ignored -> new State());
-        state.roots.add(first); state.roots.add(second);
-        state.parts.add(part);
+        state.queue.add(first, second, new Attachment(part, wire));
         attachments++; roots += 2;
         return part;
     }
-    public static void flush(ServerLevel level) {
-        if (!ENABLED || PENDING.isEmpty()) return;
+    /** CEE's tickServer HEAD hook precedes Minecraft's tickCount increment. */
+    public static void flushBeforeServerTick(ServerLevel level) { flush(level, level.getServer().getTickCount() + 1); }
+    public static void flush(ServerLevel level) { flush(level, level.getServer().getTickCount()); }
+    private static void flush(ServerLevel level, int serverTick) {
+        if (!ENABLED) return;
         if (!level.getServer().isSameThread()) throw new IllegalStateException("Wire restoration must run on the server thread");
+        if (BOUNDED && Objects.equals(LAST_FLUSH.put(level, serverTick), serverTick)) return;
+        if (PENDING.isEmpty()) return;
+        long start = System.nanoTime();
+        long budget = BOUNDED ? BUDGET_MILLIS * 1_000_000L : Long.MAX_VALUE;
+        int processed = 0, limit = BOUNDED ? MAX_PARTS : Integer.MAX_VALUE;
         for (var entry : new ArrayList<>(PENDING.entrySet())) {
             var world = entry.getKey(); var state = entry.getValue();
             if (world.world != level || state.flushing) continue;
+            if (processed >= limit || processed > 0 && System.nanoTime() - start >= budget) break;
             state.flushing = true;
-            largest = Math.max(largest, state.roots.size()); flushes++;
+            largest = Math.max(largest, state.queue.size() * 2); flushes++;
             var access = (Access) world;
-            var counts = RestorationRoots.drain(state.roots, root -> {
+            RestorationQueue.Slice counts;
+            try {
+            counts = state.queue.drain(limit - processed, Math.max(1, budget - (System.nanoTime() - start)), System::nanoTime,
+                    attachment -> world.getPart(attachment.part.persistentOwnerId) == attachment.part
+                            && attachment.part.owner == attachment.owner && !attachment.owner.isRemoved(), root -> {
                 var seen = new HashSet<IWireEndpoint>();
                 access.wwpg$traceTree(root, seen);
                 visited += seen.size();
@@ -83,9 +103,8 @@ public final class WireTreeBatch {
                     for (var part : parts) if (part.getLine() == null) return Set.of();
                 }
                 return seen;
-            }, index -> {
-                if ((index & 1) == 0) return false;
-                var part = state.parts.get(index / 2);
+            }, attachment -> {
+                var part = attachment.part;
                 // PG finishes makeTransmissionLine with this step after both
                 // root walks. It seeds a closed saved loop that has no resolved
                 // edge yet. Removing it would strand otherwise valid loops.
@@ -95,19 +114,36 @@ public final class WireTreeBatch {
                 }
                 return false;
             });
+            } finally { state.flushing = false; }
             traversals += counts.traversed(); covered += counts.covered();
-            PENDING.remove(world);
+            discarded += counts.discarded(); processed += counts.processed();
+            maxEntryNanos = Math.max(maxEntryNanos, counts.longestEntryNanos());
+            if (state.queue.size() == 0) PENDING.remove(world);
+        }
+        if (processed > 0) {
+            maxProcessed = Math.max(maxProcessed, processed);
+            maxFlushNanos = Math.max(maxFlushNanos, System.nanoTime() - start);
+            if (pending(level) > 0) yielded++;
         }
     }
     public static int pending(ServerLevel level) {
-        return PENDING.entrySet().stream().filter(e -> e.getKey().world == level).mapToInt(e -> e.getValue().roots.size()).sum();
+        return PENDING.entrySet().stream().filter(e -> e.getKey().world == level).mapToInt(e -> e.getValue().queue.size() * 2).sum();
     }
+    /** The first bounded prototype holds the whole dimension until its queue drains. */
+    public static boolean holding(ServerLevel level) { return BOUNDED && pending(level) != 0; }
     public static long attached() { return attachments; }
-    public static void unload(ServerLevel level) { PENDING.keySet().removeIf(world -> world.world == level); }
+    public static long discarded() { return discarded; }
+    public static void unload(ServerLevel level) {
+        discarded += pending(level);
+        PENDING.keySet().removeIf(world -> world.world == level); LAST_FLUSH.remove(level);
+    }
     public static void reportAndClear() {
-        if (ENABLED) WorldWidePowerGrid.LOGGER.info("WWPG experimental wire-tree batch: attachments={}, fallback={}, roots={}, traversals={}, covered={}, visited={}, flushes={}, largest={}, pending={}, forced={}",
+        if (ENABLED) WorldWidePowerGrid.LOGGER.info("WWPG experimental wire-tree batch: attachments={}, fallback={}, roots={}, traversals={}, covered={}, visited={}, flushes={}, largest={}, pending={}, forced={}, discarded={}, budgetMillis={}, maxParts={}, yielded={}, maxProcessed={}, maxFlushNanos={}, maxEntryNanos={}",
                 attachments, fallback, roots, traversals, covered, visited, flushes, largest,
-                PENDING.values().stream().mapToInt(s -> s.roots.size()).sum(), forced);
-        PENDING.clear(); READING.remove(); attachments = fallback = roots = traversals = covered = visited = flushes = forced = 0; largest = 0;
+                PENDING.values().stream().mapToInt(s -> s.queue.size() * 2).sum(), forced, discarded,
+                BUDGET_MILLIS, MAX_PARTS, yielded, maxProcessed, maxFlushNanos, maxEntryNanos);
+        PENDING.clear(); LAST_FLUSH.clear(); READING.remove();
+        attachments = fallback = roots = traversals = covered = visited = flushes = forced = discarded = yielded = maxFlushNanos = maxEntryNanos = 0;
+        largest = maxProcessed = 0;
     }
 }

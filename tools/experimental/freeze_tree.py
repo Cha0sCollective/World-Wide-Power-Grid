@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import shutil
+import subprocess
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -36,7 +37,7 @@ def main():
     sources = [dict(path=p.relative_to(ROOT).as_posix(), sha256=sha(p))
                for p in sorted((ROOT / 'src').rglob('*')) if p.is_file()]
     sources += [dict(path=n, sha256=sha(ROOT / n)) for n in ('build.gradle', 'gradle.properties')]
-    value = dict(schema=1, base_commit='84bb53e', java_home=prior['java_home'], artifacts=artifacts,
+    value = dict(schema=1, base_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(), java_home=prior['java_home'], artifacts=artifacts,
                  sources=sources, native_unchanged=True, changed_jar_entries=changed)
     (destination / 'inputs.json').write_text(json.dumps(value, indent=2) + '\n', encoding='utf-8')
     print(json.dumps(dict(inputs=str(destination / 'inputs.json'), artifacts=artifacts)))
