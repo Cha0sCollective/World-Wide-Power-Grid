@@ -29,3 +29,6 @@ All packed reports, raw measurements, frozen jars, copied worlds and failed
 attempts remain preserved. The rejected implementation and its dedicated tools
 remain available at `b6e5876`; Git history was not rewritten. No benchmark saves
 were loaded or changed to perform this rollback.
+
+The subsequent [restoration investigation](RESTORATION_PROFILE.md) profiles the
+restored runtime on a new copied save; it does not change the runtime again.
