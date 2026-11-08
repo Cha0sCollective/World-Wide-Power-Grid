@@ -17,6 +17,7 @@ def main():
     parser.add_argument('--attempts', nargs='+', required=True)
     parser.add_argument('--output', required=True)
     parser.add_argument('--contended-attempts', nargs='*', default=[])
+    parser.add_argument('--reuse-evidence', help='Explicit source/artifact comparison for reused focused checks')
     args = parser.parse_args()
     frozen = ROOT / 'local/frozen/prototype-03d/inputs.json'
     inputs = read(frozen)
@@ -31,6 +32,18 @@ def main():
                            packed_execution=result.get('packed_execution'), evidence=evidence(path)))
     final_checks = [c for c in checks if c['name'].startswith('packed-03d-')]
     assert len(final_checks) == 6 and all(c['passed'] and c['tests'] == 43 for c in final_checks)
+    reuse = None
+    if args.reuse_evidence:
+        path = (ROOT / args.reuse_evidence).resolve()
+        assert path.is_relative_to(ROOT)
+        comparison = read(path)
+        assert comparison['sources_verified'] == len(inputs['sources'])
+        assert comparison['prior_test_passes'] == sum(c['tests'] for c in final_checks)
+        for key, item in inputs['artifacts'].items():
+            assert comparison['artifacts'][key]['sha256'] == item['sha256']
+        assert len(comparison['prior_checks']) == len(final_checks)
+        for item in comparison['prior_checks']: assert sha(ROOT / item['path']) == item['sha256']
+        reuse = evidence(path)
     attempts = []
     for name in args.attempts:
         directory = (ROOT / 'local/benchmarks' / name).resolve()
@@ -85,6 +98,7 @@ def main():
         frozen_inputs=inputs, frozen_manifest=evidence(frozen), native_comparison=read(frozen.parent / 'jar-diff.json'),
         source_and_artifact_hashes_verified=True, original_and_copied_reference_hashes_verified=True,
         focused_checks=checks, final_required_test_passes=sum(c['tests'] for c in final_checks),
+        focused_check_evidence_mode='reused' if reuse else 'recorded', evidence_reuse_comparison=reuse,
         standalone_check=dict(log=evidence(ROOT / 'local/packed-unit/result-02.log'),
                               result=(ROOT / 'local/packed-unit/result-02.log').read_text()), attempts=attempts,
         host_observations=[evidence(p) for p in sorted((ROOT / 'local/packed-host').glob('*.json'))])

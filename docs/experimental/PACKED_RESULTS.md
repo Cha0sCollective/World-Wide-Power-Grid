@@ -1,5 +1,8 @@
 # Packed result-processing experiment
 
+Historical initial-prototype measurements. The subsequent
+[quiet-host rerun](PACKED_RESULTS_QUIET.md) resolves the clean worker comparison.
+
 This is the isolated `dev/experimental-plain-wire-batching` experiment on top
 of the 0.2.7 plain/property-wire batching prototype. It is not a normal
 development or release lane. Packed serial is slower in the clean comparison.

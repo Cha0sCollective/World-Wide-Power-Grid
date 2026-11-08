@@ -1,0 +1,2459 @@
+{
+  "schema": 1,
+  "scope": "Focused experimental checks only; no full or graphical acceptance",
+  "frozen_inputs": {
+    "schema": 1,
+    "base_commit": "89e1b8a0570affc73c9367ba964af302d75f977d",
+    "java_home": "C:/Program Files/Eclipse Adoptium/jdk-21.0.12.8-hotspot",
+    "artifacts": {
+      "runtime": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-0.2.7-experimental.packed.1.jar",
+        "sha256": "80eabf8dc7c30e1bcd435988efacf9a6bfcae7628960b99a45eff63df319e314"
+      },
+      "fixtures": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-0.2.7-experimental.packed.1-gametests.jar",
+        "sha256": "99f30d2f806e382f1c6028b566fc6bc5e0cb7e533aac1811f74fc67e6634f36f"
+      },
+      "cee": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\electroenergetics-1.21.1-1.1.4.jar",
+        "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+      },
+      "example": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+        "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef"
+      },
+      "upstream_example": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar",
+        "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11"
+      }
+    },
+    "sources": [
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/ApiValidation.java",
+        "sha256": "95e4c4534346d2816737cceb7b0573265665e0916115abf48f52084d2aa72190"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/CircuitDescription.java",
+        "sha256": "039055f03176730b49d7fbebeb579237ac4f2dc26a077f2f6d862dc1a8f2b8d7"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/DeviceIdentity.java",
+        "sha256": "bc7eaa7548f70eb263af38f51f6ed46051fb307817dd7242e0da45a9e09c6545"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/DeviceResults.java",
+        "sha256": "4d56be4cf9a6d822c4d987d0e9d20497fe9db6a6b46c52bca5adac50e75801a7"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/ElectricalDevice.java",
+        "sha256": "c05b0d67811083da72415a04d0802cac4657fefc93b14ac896f4a5e73f458dfe"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/ElectricalModel.java",
+        "sha256": "903ccb4c7da2d00edc2b16e7fb5e5d5f6ee9c39d79ecd11475025b706b412750"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/Element.java",
+        "sha256": "15899ec662b23858cf2a68fda08d4474226eb0680719cb9eca906665c2b4e65b"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/ElementResult.java",
+        "sha256": "b7b41f146d35f7caa674a1173663ca6cefe53ffa0ae8e5dbef0649120cc4d53a"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/ElementState.java",
+        "sha256": "2e63a61cf27a71725e590f788a3af86708d9db4cdd289144c69012ff4ba6bda8"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/EndpointIdentity.java",
+        "sha256": "35906dbc7c37ceb07fec7af32d216041b7097e46fa214a456a72ed0c64fe7390"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/InternalNode.java",
+        "sha256": "c431276eb576b267983f4e77544576e44727d5fe8a5c33bba20c86b7c0e9c37f"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/LocalPoint.java",
+        "sha256": "be8877d9d411fdaf8b4f0fb0e3ddd8c474ada7a198314cc5fdb2ba2b8a262a70"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/MeasurementStatus.java",
+        "sha256": "64462984dd574bbd256afc33036bd1fc8dd88d6d7cadde00cf380fa9b0bbda96"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/neoforge/DeviceDiscoveryService.java",
+        "sha256": "84e5b3fe79a7e779c9097db70b05910dd42fbf714ccb86aa38da3d7d290c5d1d"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/neoforge/ElectricalCapabilities.java",
+        "sha256": "4659e3bf946dd92c46a5bbace944c550c0d044dd1835b4a9ec72e1d46aee155b"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/neoforge/ElectricalDevices.java",
+        "sha256": "e9710ae5e54a55df9c617d9983d2fb3e660f158416a50fa32692140ca2f5ec3c"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/neoforge/ElectricalMeasurements.java",
+        "sha256": "48176624e06ef728245a5b83a702a83db7fe0feed113b1f2f35e342674ea9876"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/neoforge/ElectricalProviders.java",
+        "sha256": "6384ed080892de8931d70bbb73be0495181a60a2dadf2a718767988d828566c8"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/neoforge/MeasurementService.java",
+        "sha256": "dcbd3711154f4f25d9c24ebd8c0c6486e5b5e42a45ff0af3ef1fabb1fcf540f7"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/neoforge/package-info.java",
+        "sha256": "2c5df0614c28c54b7407658b390b4d97a0aa2a6ff039f3c43171882acdb2ecbf"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/NodeResult.java",
+        "sha256": "5b32fc933256b4784ff9e2c6c5b5a50c4ffeda0a64bbdfe438bd09b2bf2a642f"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/package-info.java",
+        "sha256": "7c9df070d694a00c40633657741e6f1a2c10925c30bc106c9c4e48be8930d525"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/Terminal.java",
+        "sha256": "e5b10038e76a3c4462e5b0ef49d68c640d65d08b859b4b81428d07b1b749bc92"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/TerminalMeasurement.java",
+        "sha256": "5c1fca1ea7eeb76d21931a6683aaa1c848b6f950a95b4fad1f8eb7fe492c212c"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/TickContext.java",
+        "sha256": "77ea7d3ee96ae48d190c45ded1081d9530d70ff661b77688efab514c86028bb6"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/VoltageMeasurement.java",
+        "sha256": "6cf3df9892268c2302f8e411192069806d3a8ccdbc82a4bb0224cb67393cc29f"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/WWPGApi.java",
+        "sha256": "9a8760fd0e9f85f1094454d9b56d65ff25e4f28566e24bd0f3d2bdaef4867903"
+      },
+      {
+        "path": "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeeElectricalParameters.java",
+        "sha256": "3df72d9a69d968dc96b1e7b903ff3b7b1d582a9f42258708347efd381799d3f6"
+      },
+      {
+        "path": "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeePropertyAdapter.java",
+        "sha256": "fc37fa236aadb045b85e9f424d0d369b374a030773d34e28d785de47be5f50a7"
+      },
+      {
+        "path": "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeeStateCheckpoint.java",
+        "sha256": "6bee242912556541cac033a9dda596cd9a17512f352a0a10034f2f5538dc1088"
+      },
+      {
+        "path": "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeeSubstepContext.java",
+        "sha256": "4b0a30acf50e26742e985e1cbb3905164f73a1ad921f880ce52607a18cf934c1"
+      },
+      {
+        "path": "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeeSubstepResult.java",
+        "sha256": "44075abde96b6d8132b81f15ccdb15a3b78e12b20480b56bbed7094bbcc2efc1"
+      },
+      {
+        "path": "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/package-info.java",
+        "sha256": "1e61663e9d6155a0202b8be54aaccdd91730537fd5a299593326b70f7ae4e5bc"
+      },
+      {
+        "path": "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/RegisterCeePropertyAdaptersEvent.java",
+        "sha256": "f4cfc8e3b303062b09981787bc4270bb6016cf32ce969969c962a0464313b669"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/AdditionalFactoryGameTests.java",
+        "sha256": "84bb2e2f4182b04bf7e32024708ff85a45c426ac3223508061d994343aae6cac"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ApiMeterFixture.java",
+        "sha256": "344c402d6d9136c594c4b8127b0e8d44b78cac3339a4e0417e9e7151a90f82d0"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/BoardComponentGameTests.java",
+        "sha256": "c10c3a9de732fb073f1c152f030d1a1d602063bd84e5aea8bb1ee223698546c2"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/BoardFixture.java",
+        "sha256": "f52147371b313302c42044bd6ad46370f653af9d9168632f151b13d6cae3c63e"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/BoardGameTests.java",
+        "sha256": "6d51b3e95eac0bf5b9db4874227cf4c995c7ec97cf5bf89e6e22cc12fe544727"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/BoardStartupGameTests.java",
+        "sha256": "ef2b7db50a3e84c75e93e74b2bef01075cfb259155e235627ac22fff01fb4f6d"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/BoardWorkflowGameTests.java",
+        "sha256": "78a29ece91fec93fd75a829fb008d77759a03871d6b4c31b4d043265d8740942"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/BundledWireGameTests.java",
+        "sha256": "85e40349b5bc49bba0ab1dd162ef7486d4572edffac7f5e447ed41a718cdc6d4"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/BundledWireLifecycleGameTests.java",
+        "sha256": "55b7776f24accfa200b26e8c6211493ff766bb9a8ba248febfec7038e4bdf30e"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeAuxiliaryGameTests.java",
+        "sha256": "c664298276582a267d14b7d4bfd0f841d4b153b06643bf86735f1328e45ddd41"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeControlGameTests.java",
+        "sha256": "afbed89b7dc56e6b47186051acc4c4b4168e276969d9e4246ad3373e53d8c0b4"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CeePreparationGameTests.java",
+        "sha256": "fbb32c380293760465146b5a5b0b63c8047ff578881b371f8ea0d7a2c1245411"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeTerminalGeometryGameTests.java",
+        "sha256": "755db49c42fcb79af0ceabc3648aa35383f7ca9c1a945c9f12ea111829c2adb3"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeTerminalPickingGameTests.java",
+        "sha256": "d667280cbcb7c67e920eedd76d4effaffe3188fd79deafa585b45afa7880d39f"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CioCompatibilityGameTests.java",
+        "sha256": "85a3823800289b21bb7b37ea1950b1312ee1a8d4bcd0b5caa8a27ce86115ab54"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CioModelGuardGameTests.java",
+        "sha256": "4d25b2fa46e694591adef78408b97a5bee2bd105154714325d3b6ef7c101f6f9"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CioTransitionGameTests.java",
+        "sha256": "7178c345b31eceb10d5579151f8431be0a2e44b7b3a9feebbb3e2fce7182bb50"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CioUpgradeGameTests.java",
+        "sha256": "7df8d86f7355d2f1f781a8e0bc08f5fe93a2f8e684290bea99d8c04b8f321b95"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CircuitRebuildGameTests.java",
+        "sha256": "804204a9ff50903f034ef6a0c702da29a96f9173e30eae6ad4e96ad84deccde7"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ConfigReloadGameTests.java",
+        "sha256": "2ddda61923a80731ce6722ac556c1b34df947b6b6ce0d1dd0ea04d89ba5ff159"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ContactorRestorationGameTests.java",
+        "sha256": "29c1aa608eb277fdcac1087bd3a9e28d61bb7eae2cdb39179b1df25ee25c75b9"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CoupledNodeRemovalGameTests.java",
+        "sha256": "0faaf1c6325fc8ed54b864d58160a864f69ac4aa56979f0b1aa246b23dcd19c1"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/DelayedEntityLoads.java",
+        "sha256": "6bfa1cdbb572ac3985800a1bba37ea858acdf528203d30a94621b9d3a68a0f53"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/DesignerChunkCyclesGameTests.java",
+        "sha256": "29766a2c4b44b86af256fcdb1d21d52f66fd8a739c4445a25e8bd80116b4e375"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/DesignerRestartGameTests.java",
+        "sha256": "dd7571cfe9c85e037ef813a46446473b316f5e01d2ce2ecbaec7a15126bd532a"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/DesignTablePersistenceGameTests.java",
+        "sha256": "9da13c0cf1edf1bc02cff9f3aa8bc282874b56b6b1526186241a25d010e66bc7"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/DiagnosticsGameTests.java",
+        "sha256": "d3dd6225ffed8b7fae14128f972c2851785eeb1c4ac659cfcac71ccf1750ae0e"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/DimensionGameTests.java",
+        "sha256": "caaf812b0de89d2ea80c67edea926545edae9270c5f49883bd7ee47fd02ffb83"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/DisplayGameTests.java",
+        "sha256": "a83aa492e689ecd9c7133848fd5b660df1d2e27cd28306837b42bec5d29a84bd"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/DisplayPulseCheck.java",
+        "sha256": "02d527bd730a1a2a28cf541c6f6efeaa99f0348548cd38632b912b1f7bc052b4"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/DisplayPulseGameTests.java",
+        "sha256": "ef69f9376ad9ad10d6a3c2826b26fae0ca6c63718ea99a2c1a8e7815015520cd"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/DynamicGameTests.java",
+        "sha256": "fe7c9cf8ec44fc07b01bbdfc30a8ef69e7228ae4687d377f034ba8b225ea01eb"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ElectricalScheduleGameTests.java",
+        "sha256": "c02c600201dcd04ca231e38df4d145ee460344be523200a67589d0d384c52916"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ElectronicsPersistenceGameTests.java",
+        "sha256": "fb9a600e8a0048acf3ccfbb71cf2e9b5550c6411ca4eee3d316b1398914b125a"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExampleControlBoard.java",
+        "sha256": "1012b264c48975ef2c1d4a06718ea90f737a88f78fe391f1377fb13380c3efda"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExampleWorldGameTests.java",
+        "sha256": "5d05168b5a223b00a97acae6ad9463382515c8cdb5b0ddcb1070d034e3a1bdbb"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiClientSession.java",
+        "sha256": "5281ff92851ada758a29cce1ed2d78bb85e4e21af1423ac208feb00d9b8f6f18"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiDiodeParameterGameTests.java",
+        "sha256": "fb728835b881bab7e5e50e198014fa5b8dbfcc3e5e13fe0926b5e804a1b87980"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiGameTests.java",
+        "sha256": "758d45229738e533a4b2c0897211fa739bc1a4d9344eca878c41f53340920d43"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiLifecycleGameTests.java",
+        "sha256": "6534adb35b65b5f1ce5ed016dd5ad2c1628eb5d3cb93ec2d72ff7abe65bdd748"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiMultiplayerGameTests.java",
+        "sha256": "c7fd17b68356ef6037745c59741220bb3b28344a0f8d71bfac5535ad3a06514d"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiOwnershipGameTests.java",
+        "sha256": "2ae8e9a0b673453fc5390c85fc444fa78ef104ebf42747012c2573cd169b33e0"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiPauseGameTests.java",
+        "sha256": "85214a9ee4d1eff02d0f2b31e7c0a3576e238f0eb636101a959e94b60c3b7508"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiPendingRestartGameTests.java",
+        "sha256": "fd21f91694d4d4737bba7c416e90c7df623a52f53db389909b8a8c2c326f40c9"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiRejectedSolveGameTests.java",
+        "sha256": "02ee8a63dcfa6cdb3bf7a5b810162a508cd351774d2305991199ee5caf1bacec"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiReplacementRestartGameTests.java",
+        "sha256": "558e9dce9b176bd535de68b82bb5ef7fa58c9694fed612a771cc5c5e4c844144"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiStartupGameTests.java",
+        "sha256": "571fe91d0362ef3ccbb4f23c7c40bfa2f9fb9afdd2a310a1c68859b8f50ca77f"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiTerminalRefreshGameTests.java",
+        "sha256": "be41096dbf56706f87fbde1e7f2b3b4c5fbb6dc49b39c1825fe98c6009ac1d0a"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiWorldGameTests.java",
+        "sha256": "aaeb46b85fffaa9bff37d2855286e8e41d6341a564be3312926477edda860281"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/FactoryGameTests.java",
+        "sha256": "47ba4f58bd0d0a5469c960ee6c5edfa782f95cd2ca1ee93f309871ef802d8974"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/FactoryTransportGameTests.java",
+        "sha256": "a0bebc75f95dfaa6c72e0070e5e45d7bbe1d4dadac629f4f16a3670bbaacf3e3"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/FixtureEnergyCapabilities.java",
+        "sha256": "3bdee26fbadf2772c77f1aa0d64e801f4dfa6803e3caf757b95bd307cec6732b"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/FrequencyTimingGameTests.java",
+        "sha256": "5f2f772023f3fceb6cbf78921ad657d269e18376c75a88d3db37626dd88347db"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/FuseHolderWorkflowGameTests.java",
+        "sha256": "ad33ceef13ae0125d4d0dc10e1bfacaa94ad281184a0e23cd156c5dc714f6644"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/FuseVariantGameTests.java",
+        "sha256": "893680ca2e933318992f7602641d24e009493bd2c903870e46e85e53efbb90da"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/GenerationGameTests.java",
+        "sha256": "5c1b442dc52184629da79c790b64b005b53cdd70ca06acc590bb389ad9f5742c"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/GeneratorTimingGameTests.java",
+        "sha256": "6b05c7c3c85dc0a3202703d116bd5068b37e18c7461efc0572251be939c28d07"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/GroundingChangeGameTests.java",
+        "sha256": "c6b71c002bdc78163a5530319cbd7fbfc5f8b9eb45dbe216a34ad0d4f3a8fcc8"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/GroundingGameTests.java",
+        "sha256": "760ac096088d079bfc019f7a577a0b061772455efae2c34abf5266433c953af4"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/HandheldMeterGameTests.java",
+        "sha256": "2f7741e8f60ee6fca677d4338e789fcf46e3b1c17598b064a70fa53434b963b8"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/HealthyResultGuardGameTests.java",
+        "sha256": "b178e3c66b6bffbceedf3e6bf7f0032070208e69b65dbd0fc239d5abe2bf65a5"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/IsolationGameTests.java",
+        "sha256": "37f43541622817955fd7976f2abb0fadd49a94eb844447dc3a6acfd884d52e65"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/LifecycleGameTests.java",
+        "sha256": "3636015af909d0e4278b0bd8aa8cf7be42910d2815a26fa222ac180e0baa2909"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/LoaderAddonGameTests.java",
+        "sha256": "8741a656f4e1345efdbb2718b128e58cf1f9fb95951f905f576292db1b9b4fa3"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/LoaderInstallationGameTests.java",
+        "sha256": "6fafa29d265cc8d5240753390773d3292c8efb8517e200f93a65d161122b3e49"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/LoadingBatchGameTests.java",
+        "sha256": "ac4da49970efdcc393f86746140f7464ffa5b3a6424f44d27633d289d66536c6"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/MatrixOwnershipGameTests.java",
+        "sha256": "50553c0e4538ee9923a42b0ea77042fc824917a48a47103a8b1950fcbdd4b37f"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/MechanicalGameTests.java",
+        "sha256": "682efcc88c6b6bf7e9e2273b43dcb7c91024f9f8af0c2706f21f7824060d3a14"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/MeterGameTests.java",
+        "sha256": "c5195da4bcd5330b85393a6cbf3bf01f89d70ac816547ed8a2d91453011f43df"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/MultiplayerClientDriver.java",
+        "sha256": "bdd9c86913a406b554545c0bba99985e712b7315f478e98a1b6ec7cda6a1033a"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/MultiplayerGameTests.java",
+        "sha256": "5a85c64cf7dcb3a79e0856e19743ed17109bdce76b639c3ed22a96cb0d77910d"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeBulbItemsGameTests.java",
+        "sha256": "a774ba82a3e3d8a7284de8c85a20084c933a2a27c2d27b63fffcb0fac69c2c3a"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeFailureGameTests.java",
+        "sha256": "816ffe0dc1c27cadb32e04b0fc08d5d5f0f6ab837165f7bf614f3a029e3aea8c"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeHandheldGameTests.java",
+        "sha256": "62b663398c4e0713d3328e12d3ea2fd545a2285f178297ca503efd206740dade"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeInteractions.java",
+        "sha256": "8d0ef34c66b5f6d70ba23e506358fcd27936aa5f03d017e51d0adc089047bab6"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeReferenceTimingGameTests.java",
+        "sha256": "1faa9bd71e49985ae5cad8f9815e0c88d420e826d432a4d580d475050a8768bc"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeSamplingGameTests.java",
+        "sha256": "35ac7c03d21001618b691e6bd2b4a2684e71780396f07a4d175f61fe09018ede"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeTerminalPreparationGameTests.java",
+        "sha256": "191483d3aea2eeb57e5eb066a47361ed3b1d702c70fdcbb781a3ed215c11552f"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeWireToolsGameTests.java",
+        "sha256": "1b02e2ae909da6b3372dcd34d5b7a5a95e22fe761fd629e809d292be04a33e0b"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/NetherLifecycleGameTests.java",
+        "sha256": "d2752ce6fa42b9278ab1436c7b793c8e260fa4560cf8bccc9300e43f850f8766"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/NonlinearBoardGameTests.java",
+        "sha256": "4761839d1b667ba2ccf5e4919458649c8e754909ca2002b2039c833a67c3d87d"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PackedResultGameTests.java",
+        "sha256": "bed8e1b90138364266b556e994cfaa2038d90024e46a1d304f6a2c8b0ccd6cb2"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PanelGameTests.java",
+        "sha256": "b1c7b74b490e94f7bdfd0c1a048e2d3934d1b72438e3bef173778c5b4e99a3b2"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PentodeInitializationGameTests.java",
+        "sha256": "954766c9b6bd240d1017bdb80368895e6c0382d52e1c569572f2bb910554f2d0"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PersistenceGameTests.java",
+        "sha256": "6284885744acabb61b4409e95e0f807a78c8382b4f95798497a5f4f2d08f3002"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PgFactoryGameTests.java",
+        "sha256": "f7397147343fc62e043d0cf950c495ee97877967767522e818e3677d592ddbee"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PgGenerationGameTests.java",
+        "sha256": "80fa3551919b75f099af9ebcd8fa81f7103e00db31b54a1db67ffe7598448532"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PgStorageFailureFixture.java",
+        "sha256": "6087ff555e6401ca50d5404385111197c52893f7f8ce32a052ebd5bee1dab665"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PgTransformerGameTests.java",
+        "sha256": "48e512bf336e4c800a1a6e24e0eeb20fd71f83a9900a146fd2f54631f372d319"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PinoutLifecycleGameTests.java",
+        "sha256": "c03f7db29fba9485958300d35e6cfd88367cbbecdcbecffccd10ba3d5ee3a42d"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PinoutLuaGameTests.java",
+        "sha256": "0cf3694585ac650e9909e2e5c4ec3c1b8f29296de4af5375ca8f2858f3d6c5a7"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PlainWireBatchGameTests.java",
+        "sha256": "bd2a7d3ada87e1071208eca3458f588cd33cfe65d1a199a2d199f07656bded94"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PlainWirePowerGameTests.java",
+        "sha256": "bbfd8f2e09121cb561f5f1db9a93a864b566411ea77ab9896d44ba8b9d6cd539"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PlatformCompatibilityGameTests.java",
+        "sha256": "f84bfef8d48c24694b278f1922f54b7cd594712b8cda7dc7b965e64a99e5eb0d"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PropertyPowerGameTests.java",
+        "sha256": "a21a4f9f43c693374a5b13a7ecac3bebb2bd35a639a4acc0dde6985aa623a015"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PropertyWireBatchGameTests.java",
+        "sha256": "429ad10d7bf1bfdfb10695b8843ae51512cdf687fb4d882f299727ab6aab6910"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ProtectionGameTests.java",
+        "sha256": "a6da17ebe10b186e32f810aadb6601ed08664ca042a174edb666246a4bbcf15f"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ReferenceWorldGameTests.java",
+        "sha256": "622375c4facc88ab3d4d62dfdc9a94d268fa2f5e88101c161435e21c236d2262"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/RegistryGameTests.java",
+        "sha256": "bf93ce1772262eeb0f8356c4e7092ec69e5a3cf5e5ed4378803c134430310b9a"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ResidualAssemblyGameTests.java",
+        "sha256": "38b975327c76b275f05f872ea500b627470a71af239dc545340e71a35804001c"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/RestorationGameTests.java",
+        "sha256": "796e69691943a9e3c037b9ef2ad92db718503cc7f9ccdf64cb05b2b34ce1a302"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/RestorationPauseEpochGameTests.java",
+        "sha256": "81a918ba6339e132d0fc1b5af31eae16443d9d2ed42e271529ca327b3f7f225c"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/SableTerminalPickingGameTests.java",
+        "sha256": "af4969016d40d7fa8fb8b2a01ef81418a217ea6395fd05d0268a898ba6404069"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ShowroomBoardStations.java",
+        "sha256": "ecd6559ff60f911cacf16d70dd614111889a3729693d953182b7296af3fbde01"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ShowroomDeviceStations.java",
+        "sha256": "dbc3b29dfd87b80a990f3515b682337bd59a85be1479f501f39260b72d10b8b5"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ShowroomPanelStations.java",
+        "sha256": "6fc1a3543161e58b433ac32bec9249eccef2712d73c7394c430563b71b5b276b"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ShowroomPowerStations.java",
+        "sha256": "1f609022bf7621e94a0e9cfce368ed09bd00f573508f5677277a83943268af3d"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ShowroomTools.java",
+        "sha256": "d69a32420101ee751fb93a6b387ce1c335d108165dd037f70929ca12615ba655"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ShowroomWorldGameTests.java",
+        "sha256": "79f6595d7251068813673e9e7223bf7e52473415a4a13917e48070ce21d2fc9e"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/SolverFailureGameTests.java",
+        "sha256": "70f9292abb413293adb001009f396ea1f96212ae34c5415b797216747bc1a238"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StableBranchGameTests.java",
+        "sha256": "ad010f4a40240a55c1c832110fe349577c91c291b9ce6b57bd8fd4753c0f7e26"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StandaloneControlGameTests.java",
+        "sha256": "7dfab7129c7475fde72e3e3a391ed24110dbaa3100c514cf56f227968208efb6"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StartupGameTests.java",
+        "sha256": "72dcd33a732cff582875683be1986b39473076659b4b4971b53f9cbd6bfe4f66"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryAccuracyGameTests.java",
+        "sha256": "77b9bc68f3ad1df63a49c58cdc45a647aafe626e0685300d16ccccd73b124d04"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryConversionGameTests.java",
+        "sha256": "450d5c5f8cd887e3f01d59977b12fa6899f3418927574803d083fb6f5958cd21"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryCrtGameTests.java",
+        "sha256": "78220ae648cc810a8a0562268e56fd3422a1fc03e7fcfab87ffa7411ef87b89a"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryDistributionGameTests.java",
+        "sha256": "a6b09d9518617b5b2559a065e9bb4310eba5e93de154f63a768590b4b3679927"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryEndpointGameTests.java",
+        "sha256": "f85d60d3d075cdbcb55d8ef0bf35b94eec6dbb7247abd651ba362b92a542e840"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryEquipmentGameTests.java",
+        "sha256": "62cd55e6f05192b7b35186c191903d7602a3b75721f080e0bf37a7037972b9ab"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryGeneratorWorkflowGameTests.java",
+        "sha256": "d1f71de0ed2eeb757d3510613819055e02362598a8c02819d4eacd9773cb88c2"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryInstrumentGameTests.java",
+        "sha256": "ca502e63f22d32c27fc2e3efe8d44d6908aac78a0e75554c6f138c3aaa0e8200"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryInventoryGameTests.java",
+        "sha256": "d80db529f8be0ddb30127cf7f67d767ebf10b1bdc0d8f95e8b6efb5820fa89c6"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryLightingGameTests.java",
+        "sha256": "9f105d3a0657029f1907989c4a47f324a03cb5e0ff897db6e4a5c827e0fefe5d"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryMultiplayerClientDriver.java",
+        "sha256": "ba339dbe1801f562bd38c81094a9fae34d97d03929221f73e4c687ad80825ea0"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryMultiplayerSession.java",
+        "sha256": "da5a2bd907f491510fed7d951e19f2c852888f58923145b1700859d9d7ea4932"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryNetherGameTests.java",
+        "sha256": "261efdabbd13a8ef20ddde49a0eb040fa4a66899f88f74b1a3d867c1696667ee"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryPoleGameTests.java",
+        "sha256": "b54e5e79628824476a21d42a0b4c1fccde54006c8e528271fd33d6cb37835300"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryProcessingGameTests.java",
+        "sha256": "bf7d287ad6b69eee0c44a85a0d19459adc0647ca1d0dd7d0c0ba31386262b680"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryReaderGameTests.java",
+        "sha256": "2382555e9a12ba192d612d8b0e259213c3e37b3696354a2a1cecfa0a6ecb0624"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryStringLightGameTests.java",
+        "sha256": "4cc1d5f2ff4461d32c7880975cdf3ecf300c9646e5e30b7d36afcd0e7c87e694"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java",
+        "sha256": "f097f38798bc4679b9bcce41d03fab34de550440f3f607412dcb9b2b9fab6ff1"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardChunkTickets.java",
+        "sha256": "0fc69ab98dd3ddfdcf238ec228f8466751ee72c9f8ad55cf669e202e26d9a269"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardConnections.java",
+        "sha256": "defcb2e3777f7da793a898f473b81a7c455dadc69f1b66f6ae1e312105efe172"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardControls.java",
+        "sha256": "6b8ad4e6bfb63c9811069bd64b7f3471e115e885184121f08a41248ca281fbfb"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardCoverage.java",
+        "sha256": "e458f3ee0e838eb3ea86881e7992df0a8e245f25650e5e962c4ef7582cd59341"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardDistribution.java",
+        "sha256": "20fa80d440ed946ba9c6e0ae4b8884e8c72583da6a16cfa62e02ce63ba621240"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardEquipment.java",
+        "sha256": "2c70ad12abb8f3e1b45bd61a6fbdd3430819905ab4d1f8e10d3573ac81031599"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardGameTests.java",
+        "sha256": "2e8154bc5388c4ccd35ccd336b255e0840a88fc8ba90301399a3884f0c410454"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardGeneration.java",
+        "sha256": "76d561a4deea07fee52aff047ddda9f8f7cbe20e2f53a16b681c3e757e92e686"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardGuide.java",
+        "sha256": "a4bfd5ba8ea75953be24d17c940018d1f7509acde8634d9e1e1e1fa6a3280f5e"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardHeldParts.java",
+        "sha256": "a665052fdcc11fbd7c37cb0032c8992eccac15734ca8a35b189a200c20f096b7"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardInstruments.java",
+        "sha256": "d516344769fea80c05f20a1511f5c8309fdd6fdec6c9ab8dce527f1ed86d7c92"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardNether.java",
+        "sha256": "40da5b659eb60ac6838deb82a9aa766aab69dce59ec3fa90e491d2265a307db6"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardPinout.java",
+        "sha256": "6d355eed76d812d15f9a290598b4b16e405fc96ec5359720902a95b7781b3380"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardProcessing.java",
+        "sha256": "447cd972bd361318751eddf810498ac6f515f8bc02af09e737f6f97683132e55"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardProtection.java",
+        "sha256": "2a0cb1d7d54fbacdc6842eee92006dce00623a85a17fedf94f51cbb8e6e328e3"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardStations.java",
+        "sha256": "5e4ec7d726e3e9e687f92dc9421744196fb2f4bb6daa0a96656d589d16c1c086"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardThreePoleMeter.java",
+        "sha256": "189c5cb990929e09ae5b773c0615936f66283b64226791928e75d283ae6200fc"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardWiring.java",
+        "sha256": "f1c2809fb5ac80f7548606d9da59689928abbe9a2a10249e67c19b4adaaf846f"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/SurvivalWiringGameTests.java",
+        "sha256": "9586977e524031bdcd16161b9e4817e8dc40e63303711777cf8a4f9326f7473a"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/TerminalToolControlGameTests.java",
+        "sha256": "17e14db7c790921c417328e4ab0e403b5baaa70746143fcb9630d94aee6d37c2"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/TopologyGameTests.java",
+        "sha256": "dbcb4c24fd6bf51503e449378b963120b5a74a0b7479b157cdb81a26f775fcfd"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/TrainCircuitGameTests.java",
+        "sha256": "61e56002b16525ec0e273ac8789095d58f589ad13090f1c5eabbd4f72247c63d"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/UnloadPartitionGameTests.java",
+        "sha256": "4140affa8da501cf9b419ba89d5ff450d2608676f9b41ead91aeec12ea670f3a"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/WireAttachmentGameTests.java",
+        "sha256": "99fda42908e5117d4c1d164ffa1b5b934676ab2d34a25f3c804e50607ff0d235"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/WireFailureGameTests.java",
+        "sha256": "5e52493c6b376189a6a5ca50e8b3ed6f4ae91fc82c39e5f85ae4978589446809"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/WireRemovalRecoveryGameTests.java",
+        "sha256": "11bdab5e4fbb18cc70397fc07d0b3b109f6ac19eee0a13a767818341bbaa4e38"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/WireResultOwnershipGameTests.java",
+        "sha256": "048f25e3c42dddbc5fa4d2680836ba9c7a38cccb2863ad6f9691c3197beaa209"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/WiringGameTests.java",
+        "sha256": "b7cbe3dbdad8ed4a793e7b109e65d46b8968033694c3720f2962f989b5251215"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/WwpgGameTests.java",
+        "sha256": "e75d2892e2a199e4cef2763096f3a18e2ccb62eb6f41df0694845a8d4add00bc"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/YardComputerBootstrap.java",
+        "sha256": "14115d295f3713f24e4571f6714352bd55816f24091c36a4330167302d730d39"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/YardComputerBootstrapGameTests.java",
+        "sha256": "a869a956a6fd727e22660efb123dd8bfc08ba5e05648e3750f7ab8fea8fb0139"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_api/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_api_multiplayer/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_api_ownership/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_api_pause/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_api_pending_restart/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_api_restart/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_api_world/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_bundle/structure/empty.nbt",
+        "sha256": "5420445d400983dcb50b2a8e7594628f6bbd8059c3fb5542ff6f470123d9bb17"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_coupled/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_design/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_display_pulse/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_distribution/structure/empty.nbt",
+        "sha256": "5420445d400983dcb50b2a8e7594628f6bbd8059c3fb5542ff6f470123d9bb17"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_example/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_multiplayer/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_pause_epoch/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_pinout/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_platform/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_reference/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_rhs/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_showroom/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_stationary/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_trains/structure/empty.nbt",
+        "sha256": "aca0d3b5168bc9ace040adcfe3b99c97f821ffd0c5834a7c73c1f60873fc8464"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_wire_power/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_wire_recovery/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_wires/structure/empty.nbt",
+        "sha256": "5420445d400983dcb50b2a8e7594628f6bbd8059c3fb5542ff6f470123d9bb17"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_yard/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/META-INF/neoforge.mods.toml",
+        "sha256": "f1f2c2698da1d24cef0d200d532e544c67ee223c68ffbb2aa9b3edb7fe1725bb"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/BranchKey.java",
+        "sha256": "ff4d80c33a0b165fec548fc78857df1d119601379652167990adc66dbff22035"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/Bridges.java",
+        "sha256": "766da221397a51c128023a7ad7bf8d34f8c43d231c0bc15020696ca5e5eec3e4"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/BridgeSimulationResults.java",
+        "sha256": "0741b9233a37629730b98840615047596162d835884df97ab9af53711be132b3"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/DiagnosticHistory.java",
+        "sha256": "700cee7d820cfa3a4297866dc8dac4a1379b721368b06386e2814c9ec8710d5f"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/EndpointKey.java",
+        "sha256": "f4dee4c39415a8ed913ce166aa920934405bb32f6eb0cb89ddc49b51b38f27a3"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/ExcitationSearch.java",
+        "sha256": "5cd9b2fb5724e52cb33dc28db6f855a5ea5cf36b7cebcb85b6f25a53f5c42646"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/IndexedIslandDiscovery.java",
+        "sha256": "4c5fdc82f13507c2754b575802a41e493c075fab9881c6213057581a87c97d1c"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/InitializationWindow.java",
+        "sha256": "9463e921b02d7c7d2ac623f6c7474460d26be8f229251af7eed5317b1526b88b"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/InternalEndpoint.java",
+        "sha256": "fac63b88bea23e674f543387d27d82c9560defa04d16a770ffef0eac9a26a5fb"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/LinearBranch.java",
+        "sha256": "d2f87253da7520f1772940c903d74713e63c8eaa9dc4f098311d78d1f77c372c"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/MatrixBuildScope.java",
+        "sha256": "febf8fc43f575b3e9898de4ff7d5173f57c9433b7298721e96187815d46c5e37"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/MovingWireCuts.java",
+        "sha256": "47772bb410027cd4345e3d2c77f41dfb1249fc317486594dfcbf10234b04fcef"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/NativeBootstrap.java",
+        "sha256": "a432eadfa7f26acfa0e31a9b0badffa4580ceadd24ad8acfc8e0debffe7ba3d9"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/NativeCeeCheckpoint.java",
+        "sha256": "53a86b3595036cb4d53bd97f6cde0f9ca6c0ff6972d376905f8151a5210839a1"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/OwnedWireRemoval.java",
+        "sha256": "78218d4efc12e3490ced9c0b7938b99d8bfcf5545f5fd9d4103d10785008f655"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/PentodeInitialization.java",
+        "sha256": "42967e0b7527a83dd793f168703607b701b111da251e7933c7424bdc140ea4de"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/PgGeneratorTiming.java",
+        "sha256": "ac949608ef6ce99cf3f418692f77fda3c8bebb57aa21f712f8b249470d2a07ff"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/PropertyCurrentSourceWire.java",
+        "sha256": "24a156258207d7f22e701182468fbc277e0ee88308930bbbe34a644023713069"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/RejectedConnections.java",
+        "sha256": "70d2b4a62a82c476733c1150d09c1baf1d56ac654608fd47a3c4e9abea42d602"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/RestorationCoordinator.java",
+        "sha256": "c9336036632cc145a38ee32955e24399c7bde85dce20e400bd4f4b32ee5b49ae"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/RestorationWindow.java",
+        "sha256": "9621139dc8e575609369c09171a66e49cffb8dfc4e857e43591ae5ab9e1fc6de"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/RotorStep.java",
+        "sha256": "ea5a3aafce179b0bfd4723b5b4ea3f5b11efa5f88eaf3a4082ff2dcf1ad10984"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/ServerElectricalSchedule.java",
+        "sha256": "e8eeaa095af08467affd28c660b4ef5b6fc6ec147fd462f04d18f36d47b939a0"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/SolverAudit.java",
+        "sha256": "4947996917f589bf19543eb56608639936b65f5ebc1d717a9d29218df6e4a257"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/SparseAssembly.java",
+        "sha256": "2c2aa1ac231011be9a95ca239f8f2635e1fd6f798af2489fb0c8e4bbeb267812"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/SparseMatrixSupport.java",
+        "sha256": "9cffe3ae9c0637a8f811b49f04ed4e550a96b7c8062cd17c326cb0e245bcc418"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/SubstepAcceptance.java",
+        "sha256": "86f9d0d9157789d03ae021b6b32de2887f52af43a213cf7586ff2b39b6e04f3b"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/TrainDimensions.java",
+        "sha256": "b8d59b26b985ea523fa746bceb4319eb6ae69ddb3d4419ee17d2fb6e3f77cdbf"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/TransformerStamp.java",
+        "sha256": "89cba6a1dbe2032a6b3c055d4515ec3c6139ec9cdf22c14ddb84f409714eab70"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/WorldBridge.java",
+        "sha256": "e6a240340521acf486020ea7410e3f03384f8c0a2ec8559b2466bec25f5290f2"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/compat/cio/CioCompatibility.java",
+        "sha256": "1b2dcca5cea5e9cfa221bd6b5b6ad768ebeae013c0caf5edd05cc1ef6e75ed5e"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/compat/cio/CioInverterAdapter.java",
+        "sha256": "300e40c93d0e3d1fbaf2beb0d5e4fdab3ba247525fb1fa9e66c7b64e104347e6"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/compat/cio/CioMixinPlugin.java",
+        "sha256": "efc42bc8beafbdd0870811e71adf91e55acc104e571eeee184b25e3cbe633189"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/compat/cio/CioPhaseSourceAccess.java",
+        "sha256": "06be156c5dd7800b0b4257f892e72dcc3bb94d0709ff3ca415d1d06718d717dc"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/compat/sable/SableTerminalPicking.java",
+        "sha256": "e81aefb5cebe810f38e1f36001849beb0262620e8e4d0279c6bcae86611acbe1"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/equipment/HandheldMeters.java",
+        "sha256": "37e02a5c853aee37364a18b44f83f2a487e4d4432adf544c77032499c95a852d"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/experimental/PackedResults.java",
+        "sha256": "18b05f3640494ccc25a27fc3bd9d9f43484da4d18417075a2b1f185fcbe35010"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/experimental/PlainWireBatch.java",
+        "sha256": "68f9140ebdd44d8febb0dbb003c3f0d1fb6b9521544f4c3b8fb15b3b57abb14d"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiCeeWireIdentities.java",
+        "sha256": "1e880f6bfa95d47377ee93419515e7ac83c88cfa1da3ff5457fc400a2fd67068"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiCircuits.java",
+        "sha256": "d19feda3dee5bce1f4d9d394e342114cce33cc3c28fc981a1126eb8f88c39295"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiDeviceDiscovery.java",
+        "sha256": "3a3b8b050de14f399f4098fba05e20a08a204667737e70f74e2723772168b377"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiDiagnostics.java",
+        "sha256": "bf73ac114c1d594a82cd0cae2e408211908009968045d1b8249c404adda4b51b"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiElectric.java",
+        "sha256": "9ce8bf8c35c4422578f2750564440795a8c0c2e778ae13fe2471345a6e902060"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiElement.java",
+        "sha256": "0467d23856f467a585ffef6d11ea7a8f6cf50958ecf0a96a4a9bb099cece6327"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiGround.java",
+        "sha256": "5e3404e9f824c6458b9ded2e2e2a779495b549c5dbb6325a93e11c51855774ad"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiInternalEndpoint.java",
+        "sha256": "cda404c60eee4c2e4129eb433593d40a73e19cb05b4a8e267077647f1de9f06a"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiMeasurements.java",
+        "sha256": "903881ec8902e3c6acac46ad284b16efca0f0ac0ef56161e6648d33b9375b06e"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiTerminalIdentities.java",
+        "sha256": "a9f0ea6adc06d115b48bb5e7454d79c19f04e4902d6e39d392f32426e96ab766"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiTerminals.java",
+        "sha256": "502306680ea6665f96b39f16ab8ac91715c4c8f65e3e4f922cf007253f5adf10"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/CeeAdapters.java",
+        "sha256": "70e230a56e1397edad757dafdfbb6884e95e24cd8bc697c9c24967179402164f"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/NativeApiReadings.java",
+        "sha256": "f0635327b5dff899efef642ee60929e65fd1a9d0f2cd2cb725026e867218c8ae"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ReferenceGroups.java",
+        "sha256": "cd9d96792dd8bd3ed33898639c5fbf68232dfb6204a4a117130e692f38205535"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/ApiDeviceRemovalMixin.java",
+        "sha256": "263cb5683be10ee7462342c0c6dd49731052b983fc35ad352cac3fae400941a9"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/BoardCapacitorPersistenceMixin.java",
+        "sha256": "a1d08a68209fb717cf1c364a2b4580e88856e5096f800e3a2a0a54f792d1a8e8"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/BundledWireAssemblerMixin.java",
+        "sha256": "4ac8d327a15596cd9c955b0e90bf6b39402627e15ab0cb1de7150507a9f220b9"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/BundledWireItemMixin.java",
+        "sha256": "080c6f30f43b48e8b360d1453a01a555c1f0496fbf411029827b3385e040f7cf"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/BundledWireNodeMixin.java",
+        "sha256": "dec532b3f04f828214824527f901c117f75e549ab31e86403180a081680992ec"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/BundledWireRecoveryMixin.java",
+        "sha256": "e3de699258bc4a7241ac25e33bb56f37ae8d761fe55ba015fc317849d922563f"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CapacitorHistoryAccessor.java",
+        "sha256": "36f9940ba0abb7dcabe20141dc0f321f19db1fefeb3e46f3fe12f569023ceb85"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeBlockControlToolMixin.java",
+        "sha256": "2099267b95991d60938bcc47d4935483b1793d3ded9287e80a52d52bfe8582dc"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeBuzzerAudioMixin.java",
+        "sha256": "cae22616733d463bf2c2e2d6fa1ff08f9c9bed99bc2b3d4dd6c392356b92d441"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeCutHandleAccessor.java",
+        "sha256": "3d9ae14dfefc437ae3d34b2b86783cdc837fad393a0f134ce5ae6eff31731476"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeDeviceRemovalMixin.java",
+        "sha256": "3c3ca7930eb042fb27e8f1f8ac089fff9950e9cb05fb3b64d7edcfbaef9570da"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeFuseHolderPersistenceMixin.java",
+        "sha256": "d2cd4d02fc9b2c46572db89a173803c3557c5432f419958db176cbcf8a114127"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeFuseSwitchToolMixin.java",
+        "sha256": "15c17dcd17d52be7c9ca13790ecabaa7b1a5232c61e98865b259bb405bc7f4fc"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeMovingWireCutMixin.java",
+        "sha256": "aaec972b080d071313d592b613a90f55b729972c89cf51e2bbe54ea301c23fcc"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeePanelControlToolMixin.java",
+        "sha256": "67fd4c4687065fe1bdeaecb846c4298cf356df10a66f21a6ebe67914445f76ea"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeePanelCoverMixin.java",
+        "sha256": "6a17923e9b08a45d33f67aef8228b74ea39623f4f0fc9a8d1f6d0d70aa1f6fa9"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeePhaseHistoryAccessor.java",
+        "sha256": "b8ca389877feafed97c796f353555ccb8b2c2ef6b6b7a5518e703a4d4b9f7537"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeReadingAvailabilityMixin.java",
+        "sha256": "b22ce8a816e88b02ea03703441a993886b731a4fe187c44ce8dad48ad3866379"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeRotorHistoryAccessor.java",
+        "sha256": "24b3be6e64c2be3dc875424e27fbd1868f727b6553ff0fe6b27f05c22e345985"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeSolverAuditMixin.java",
+        "sha256": "3a9874007ab08a9567bfaa9bf79fb56371177ed05f1e3df9084ce83dbef4314f"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeTrainCircuitMixin.java",
+        "sha256": "2ebf4d65ae9961da99ba1d2c20f420423f448248565ece5994a4f9d0dcbb552a"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeWireIdentityMixin.java",
+        "sha256": "66bd17e2f2573585ae4b34ea932e09f19af74bdef2e2a9657ff9b269fc854a58"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeWirePickingMixin.java",
+        "sha256": "0cc1a7a559be8f0d074277f459bd606dd36b51bdfec435868e7bb72c35d8a9ea"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CioCouplerMixin.java",
+        "sha256": "e9d845423c695dcbc25627d64b0a2d22ea5179765e9e25b77db727e1d89750da"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CioPhaseSourceMixin.java",
+        "sha256": "b7fea34e1e05f3cfc5f71c8511c0a59f2a7bb8af8dcbd551ec5305e8b3aba5a5"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CircuitBuilderAccessor.java",
+        "sha256": "05d629923740b2c4b544a51dffbc44e9ba89e959315ceba0f5f4c53e9489200c"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CircuitBuilderValidationMixin.java",
+        "sha256": "ddea50dab5a82617f71ca1f32e866b3d7c39eb1606d92c400652c9a2f1df1dfe"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/ClampMeterClientMixin.java",
+        "sha256": "51a4e3fd53f0b29299a6306f89642f3b0600d01cd998d1a53e090c5c1558ff41"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/ClampMeterMixin.java",
+        "sha256": "acfed9b7495de05066579a830aed0d4a9516e7092cdb378c9473a2cef78156ea"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/ClampWireMixin.java",
+        "sha256": "02865262567cc41829f9c8ffb5eb32589b1009172337c10903fb49fa41bdf961"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/ConcretePoleHeightMixin.java",
+        "sha256": "51cc755757ba5338fee3777ea2c308169bc2eac51d0bda6bcee27c8b8d89aa4d"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CoupledNodeConductanceMixin.java",
+        "sha256": "090090eeb542eb3b30c2e043acbee583713458f0652161e2ecbd45815c55d03c"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/DesignTableRegistriesMixin.java",
+        "sha256": "677afc98a99a5eb2055d40dfdd12ec9acd0c1886c8cfbe16fc5afeceeaa378b3"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/ElectricalNetworkAccessor.java",
+        "sha256": "aecc98553ae74be82932400f9576b81e7d09ec69d965db8f3113b82cbf3a4103"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/FrequencyMeterTimingMixin.java",
+        "sha256": "794e353ca8ae144767bb1f8726eb737fbda2c5b9d7df8932adc339bae7065363"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/GlobalNetworksScheduleMixin.java",
+        "sha256": "62e435ecbf3c5c462535f1471e446dd30bdaaca3b2fd8e02e29694ba763ecfb7"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/HangingWireSpoolMixin.java",
+        "sha256": "8160842c6fd6941b81840264829ba028ce517abd2a374df24838e78190ea6c6e"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/InWorldNodeMixin.java",
+        "sha256": "32360addfe5f53fe9aefd684ea824fa16a3c7b6d2dcc27236c961b9dd7a6f336"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/MeterDisplayTimingMixin.java",
+        "sha256": "2bea3b09e61ad78b0b4a1c7a256f8b07d73030bba3ff5ca7af408e0fad1e6827"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/MotorSamplingMixin.java",
+        "sha256": "ba149b7a8c310596f41fcdb78a8f7dcd7e789089a62304c24023fb388e4dcd81"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/MultimeterMixin.java",
+        "sha256": "0cab4699cc7e5bf1d6487d8ab3e48180c1338ae8757c0ee3683973d15391ba29"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/MultimeterWireClientMixin.java",
+        "sha256": "61853056646fde806a4dae38366592eadd3b093480f069deec771af3ba39aa07"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/MultimeterWireMixin.java",
+        "sha256": "1ad8496a24355350002bccf3464ee5a5be177631fa7251b5426e71b699038c81"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/NativeClampAvailabilityMixin.java",
+        "sha256": "6a5ef029481f239335ae9d7533da279ce5b3990f0c8886dab1bf2a6ac5eff3e7"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/NativeResourceMixin.java",
+        "sha256": "74afb497105a381409b4ef61fa3abb6bd5db22c89bebfb4cf9ffd967623496fe"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/NetherTransformerAccessor.java",
+        "sha256": "55b0e98bee13cb4b33d7776b4d461397b1f5d242aca6bbe1beb707b0936f4c39"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/NetherTransformerEntryAccessor.java",
+        "sha256": "b73fbd08182879906863c7620c6ac9e6d397efc964d834d237ac88d87760d77b"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/NetherTransformerHistoryMixin.java",
+        "sha256": "69c040f4238b1e2ab03943f2e804bae29c1960319a3af6f31f58d75a859cbec3"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/NetherTransformerUnloadMixin.java",
+        "sha256": "dc3b96ab1d9fee29c7c63c2b360dce22a090525739c31d60d105a8213d72308e"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PanelMeterAccessor.java",
+        "sha256": "e62d4d1437e3f156ac260aecc20e0bbfb26c074d0b9237b5af2dba2c5e52b99b"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgAssemblyMixin.java",
+        "sha256": "c998bc30e5d2bf04262e914c51ec07ec175a19c6b5138b47f4b2d9eaec113253"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgBehaviourMixin.java",
+        "sha256": "e8e9d0fa81e4321d3043483ff2e8bb976dfd36f170be194e802ef31d7c4caf65"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgCalculationAccessor.java",
+        "sha256": "0ba01802ab9f3b1d792cabe60b14c921c2c9e88b78e7d594780eafbc93a8a24e"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgCalculationManyAccessor.java",
+        "sha256": "464309aa32329569cfb30419e52c339c3e9abf869da29e7467406a9bafd57beb"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgCalculationOneAccessor.java",
+        "sha256": "c4027f2b27c259dec751505e7619b63f2bb3c3a478a8c36b2d6270e00b5d5413"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgElectricMixin.java",
+        "sha256": "e8bca689326bddd2607d05feb4af77afb3c9adb3a658a5b7637155e1933e6ea8"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgGeneratorCouplingMixin.java",
+        "sha256": "85bea73491d90d79cbae50e0d51c84d4fbc02f6fbe114e86874ff5be88a2cef1"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgGeneratorMatrixMixin.java",
+        "sha256": "2cad8920f7975c2ea161166b8f3d453c85f6c32221469ea321fecf71552968ad"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgJavaMnaMixin.java",
+        "sha256": "81eeb02d22ee721dca30980a44f401199d2c080955bb994ca433a0b7bf9464f2"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgMatrixAccessor.java",
+        "sha256": "fedbcb3ca50327258690b01b31d20671847a14dc2faf2d8b4dbfe043f95a7727"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgNativeAssemblyMixin.java",
+        "sha256": "abab7cd2811030aa838977f75b44ab7a3cecd43344fcf36581ce4ca1c3b8a7fb"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgNativeFailureMixin.java",
+        "sha256": "b8e065f49bcf4cfdf21097dab05db0173e60a7e26aa762c270705c1cb8ac9344"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgNetworkMembershipMixin.java",
+        "sha256": "950a5985cd28a058b1760e7cbc9bd6913a3c668a8a5062925bad968c414978a8"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgPentodeBiasAccessor.java",
+        "sha256": "c5ecabd580d1e3b5fb30c6a1e2ca571ead620185eee404d6a1deee425aa66320"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgPentodeInitializationMixin.java",
+        "sha256": "91eedb2a87cff2309b8811f61877ffdb2716ebc1408e41834cb66ed33e989e4b"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgPlainWireBatchAccessMixin.java",
+        "sha256": "56c5d7b5f64c3ebd0a8d2ddb8db7c445a12a578f073690a2130d7f5e086e88bf"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgPlainWireBatchMixin.java",
+        "sha256": "7918bd6ba7667896fefdc0a13b8a3e9e0cd5651aaf4b6e67180398d3a5e01fd0"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgPlainWirePowerMixin.java",
+        "sha256": "5a72685fb82ea7acc74412a791ae1fdf8732907f41c5b1881b77fed005f258e8"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgProbeHighlightMixin.java",
+        "sha256": "f8d9ee14d13913efc4ecfc0b26a2c471aa255dc30fcab72f90c2efe0b120909a"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgResidualAssemblyMixin.java",
+        "sha256": "ac25185c80906d6445efb1a1206c5ede240c30fd19480078db2005275df413f3"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgRestorationDerivedCurrentMixin.java",
+        "sha256": "becb5d74a1fd9b7c4164530f575f17c8701192d10bf421b0df194d02fef8b427"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgRestorationValueMixin.java",
+        "sha256": "037eb96dd4673f1f2de195c82076a68bad4ddd59200351349a56c9afa72789c2"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgRestorationWireMixin.java",
+        "sha256": "4017a2a1209145213926f452c4a8cb2e871370db5e4dcac1c4beb189a7e6dcc6"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgRotorAccess.java",
+        "sha256": "d6b10264e420ad0c4b972f56ec1ee99f434685f1376c4457a03535625d67b2b0"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgRotorFieldAccessor.java",
+        "sha256": "9ffe383014edc620996ce77b460fcd5b7713db46c9ef6d33bc943b30c162bb94"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgRotorTimingMixin.java",
+        "sha256": "0ec2536b84b5492c489b67324fd677533ac7fc443ec1156040f008bfd29dcbd3"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgSolverFailureMixin.java",
+        "sha256": "7cc2245f5bd4749f8f64055b3a5d4b602cae1b1ed6f00818a7f221943ac22a61"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgSolverWarmupAccessor.java",
+        "sha256": "cc933c70b87c62ccb0d27578604053acee7eb746181f1ff6804ccff43ee27e74"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgSparseMatrixMixin.java",
+        "sha256": "4a7fdc05cac87a4ef8d2b1c95fedb77f05168622bdf540d8d692cc4833273651"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgWindingFieldInvoker.java",
+        "sha256": "336a584ab596c4a5b73ae47b2a31631cb07dfd8ef8f56cec71669c46b1b201c2"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgWireItemReadinessMixin.java",
+        "sha256": "bd7cf4915888c67e6b08385254fd8e08737ec2d6b1d359c761e15f13fbeffa6f"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgWireRemovalMixin.java",
+        "sha256": "ca30766f1a174ff166aa6a218098b54131d1b6824ac975fc2c4ef02aeaae6cca"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgWireTraceMixin.java",
+        "sha256": "7b44c411e4ac23d57bd9096c506a5d77319af19ee05c1fd44ed9deb03552f67f"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PnJunctionParametersAccessor.java",
+        "sha256": "ced8caeea2ce8021c62e847909a24233a9b3eb66deb23e56ef51656d9e2d4d09"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PropertyConductanceMixin.java",
+        "sha256": "51978f0c4eec4b8eae3f00f5aea879e921e58c294f926bd2fb5c5eb9b088aa2a"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/RegistrateCallbacksMixin.java",
+        "sha256": "0d2b4a157e72f68770fa3981e37f2b87eee1fad9047fd0e756cd2ad0bfd46275"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/RestorationConstantMotorMixin.java",
+        "sha256": "117c94857c737de2ffdeab1d604cfb2b807b7470a7956c8000cc292cba647f47"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/RestorationMotorMixin.java",
+        "sha256": "93f7db934b95b0da532495959799a937d10ecdf7a255d6b8ba0697fe0be5a819"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/RestorationStorageMixin.java",
+        "sha256": "66459b1dfad579ae1e388670edc2fdfa0755cf92f1d711f719774a27c680dcee"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/SimulationTickerMixin.java",
+        "sha256": "8ac80ead2eef874d7c85c1549b16ff761cc1673edc80f860122fddf69ade18b8"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/SolverConfigThreadMixin.java",
+        "sha256": "895a6ade0da791f09d6344c58ba6556c94e3c7ed8cd6f5e820ab65ce34df1da3"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/SyncPositionMixin.java",
+        "sha256": "0708dc12084b9776b22b7def56572a315e79c0e87ef73d3ea53686cdafbc3c32"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/TriPolarMeterResultsMixin.java",
+        "sha256": "9deb45f5035b3a3b7a2b0574cecc557b0d5e2b7f09d5893c9ae1c9bce1ea7619"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/VariacResultsMixin.java",
+        "sha256": "6c670a5078b1c27003a8431cf14c755931c3c0ba8559cc8e3dd612ff9002c3ff"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/WireElectrocutionAvailabilityMixin.java",
+        "sha256": "be08831fe6697a5701259641a161b4c7c28e42ff89a2c1e62b0367a86a6d1c52"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/WireLifetimeAvailabilityMixin.java",
+        "sha256": "13f6a933b57bac567d83666cd4081a21e4a76bea09ec16e25bc8b5c229ca268f"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/WireSpoolMixin.java",
+        "sha256": "6ebe356685ca5e2a34c6532999f5ab0fe180507ce80109c484fe7e5f4c895a8c"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/WorldNetworksAccessor.java",
+        "sha256": "3431b2d1fce84f7a603690b4fed91a364fe6c9f85fc6a1db820ed7776e52c6d2"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/WorldNetworksMixin.java",
+        "sha256": "deba873fb36dfd7976c79a99b18cd43ea6b0a930a548277ae06af0e024f41cc1"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/wiring/CeeElectric.java",
+        "sha256": "150be0e7cc00537c888c4f88b6bd2bc1b64881959c121f5d4c7e3f90866a1860"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/wiring/CeeTerminalPicking.java",
+        "sha256": "3687db91b4210ba33428b4ef6e10cd3aa30ec1e7626845e90ab853d7da873e72"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/wiring/LineVoltages.java",
+        "sha256": "7d5f546d2616b6190671ea4164083d203e8e704b7e010ff9aaa03a5b64f30375"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/wiring/RemovedWires.java",
+        "sha256": "1dad263085b00197a663010a6a6e61a5d21812904193103c838230a899da8053"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/wiring/Terminals.java",
+        "sha256": "6bd5d6d67113bcc75fee55edf6cfd8423ce19b3133f7a205b2377c3e5e97fb31"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/wiring/WireTreeTraversal.java",
+        "sha256": "cb38aae7f96d4c0bf1099758ffcd15e9f8969519d1e1bb9bec7351eb8ebc9a22"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/WorldWidePowerGrid.java",
+        "sha256": "f7b88cd7e4343ca4ec02b10f88d018a07d527643b3444b691ee00f5af0073589"
+      },
+      {
+        "path": "src/main/resources/assets/electroenergetics/models/block/duplex_wire_segment.json",
+        "sha256": "c0a4058f8b592569e7396fabcdc3f159fa453cdd6b4145aff8c4611968ac34c2"
+      },
+      {
+        "path": "src/main/resources/assets/wwpg/lang/en_us.json",
+        "sha256": "786c380571d9de7718329dacf5cd45aacae91000ddba00a0cb33f5088e4f9ac5"
+      },
+      {
+        "path": "src/main/resources/data/wwpg_pinout/programs/acceptance.lua",
+        "sha256": "f110850ec75e6e623d879b7934c8437aee1854b6283902a8f647633b6ed7e82b"
+      },
+      {
+        "path": "src/main/resources/data/wwpg_pinout/programs/lifecycle.lua",
+        "sha256": "159e7074fa3c4929d745df383d2710e64a67d3a28bbb075b63cb815e0416fde1"
+      },
+      {
+        "path": "src/main/resources/data/wwpg_pinout/programs/yard/startup.lua",
+        "sha256": "020217ef2a81a0824b0dece6015f913f04161a1d847e1364537751ecec40534d"
+      },
+      {
+        "path": "src/main/resources/data/wwpg_pinout/programs/yard/wwpg.lua",
+        "sha256": "3a0206e10cc6ce5c2dec4d5815d0550ae42ba7787d8ec448af4903533d4e8d79"
+      },
+      {
+        "path": "src/main/resources/META-INF/neoforge.mods.toml",
+        "sha256": "7705097d477be25a98f3be62679406f3bf8e3a820f15a9c80ec2fe6b5ec074c8"
+      },
+      {
+        "path": "src/main/resources/META-INF/POWER-GRID-LICENSE.txt",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      {
+        "path": "src/main/resources/META-INF/services/org.cha0scollective.wwpg.api.neoforge.DeviceDiscoveryService",
+        "sha256": "f319b230375117262ece2b0456b456abf510817512ea139ecb1788cb8cf60537"
+      },
+      {
+        "path": "src/main/resources/META-INF/services/org.cha0scollective.wwpg.api.neoforge.MeasurementService",
+        "sha256": "1272128f4c8b2c1fdbf7890323753180b12010dd3e517ed02760484b14ab772c"
+      },
+      {
+        "path": "src/main/resources/META-INF/WWPG-NATIVE-NOTICE.txt",
+        "sha256": "419c7fdd49c7016b9b11e9f4e606a4d7690187d6aecc27a7e2097cb8f93e559c"
+      },
+      {
+        "path": "src/main/resources/wwpg.cio.mixins.json",
+        "sha256": "b608cdaf3c402635a3ee5bdfa83fd3eb01fb4d582eade6bf7ed6785091c7eb5d"
+      },
+      {
+        "path": "src/main/resources/wwpg.mixins.json",
+        "sha256": "588bf597efe6ad027ea44586cf3551ec732214391e701218c620537f792d8208"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/api/ApiVersionTest.java",
+        "sha256": "0a9bcebadf5ab41cedbc394d019c27d8cbf22c1ce866d11fd77cf72db7cc86dd"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/api/cee/CeeAdapterRegistryTest.java",
+        "sha256": "f9e4cf5ae61e3011a1a3c7ab36295028457a95c51e2845c24937ab82ca164372"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/api/CircuitDescriptionTest.java",
+        "sha256": "ddecc6e537e37ca9d86997e2db19c58bb294986181bfac4f8dbf4d8276c3bdfc"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/api/DeviceResultsTest.java",
+        "sha256": "5aaaca4b81b0898252cdc8a33fc9e7da3eb829d82024c822834442ad568d9c08"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/api/VoltageMeasurementTest.java",
+        "sha256": "ec66fcf7ac1c79715f68e994bb6bd040ba9b2149f15dabeaba7b46f947bab544"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/BridgeSimulationResultsTest.java",
+        "sha256": "b2dcb35001f4f99c91b8c9e5fbdef050fc27522dc69d678e43d7e4a51364ceca"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/CatenaryReconnectionTest.java",
+        "sha256": "059b0ff37c9d04b2b8227c255d7aebf39a5ec43dda16af91fd8b2c5714174c32"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/DiagnosticHistoryTest.java",
+        "sha256": "ddbfe4f71f4813d79eef369fd324275c1518dd5bf75751f69d0263f9089d3088"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/ExcitationSearchTest.java",
+        "sha256": "73d00f0949323479d2f33b064fba57c50fb4587135ec87180bff9a72d7951cd0"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/IndexedIslandDiscoveryTest.java",
+        "sha256": "c6b0907dc297e5b7b5db75a9dddcc926e9d455003e468bd9118e054cde81a84b"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/InitializationWindowTest.java",
+        "sha256": "15c18728e3c6abdb10e7d35846d9e44776762fe2b3aeb03ab0567f1a9ed3b743"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/LinearBranchTest.java",
+        "sha256": "f16a21a7f1f882b38fdba6217101e3611af78ed5fe01aa0b74fd434fe4bf3ad5"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/MatrixBuildScopeTest.java",
+        "sha256": "608a9fd07a441fc1a2f80117306ed7372231fb219615b933204fbd53ee5ecbc6"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/NativeBootstrapTest.java",
+        "sha256": "36682104e6e05cceea021d4732018b3812c2406f5844ec08da4879f821477c55"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/NativeCeeCheckpointTest.java",
+        "sha256": "e0a0842b1dd6172e6735ff83c7179e8b5745e40fa6d4e964a34bd845bc70c643"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/OwnedWireRemovalTest.java",
+        "sha256": "f76abf423c30354db8edd2e1a6768e3bfbb28eeba9cb1ed0c2676898e1bd7aad"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/PropertyCurrentSourcePowerTest.java",
+        "sha256": "5b055f9a5129736e46769c3d8481b00a4bacd753923053686aa977aa637692b4"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/RestorationWindowTest.java",
+        "sha256": "1e69dce066549f7b3ed97912da01e31ca85be498e7f3e85dc6348e9a4bfef683"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/RotorStepTest.java",
+        "sha256": "17f99009515de1b8b7bf7a2abf3d00af27f0577da6d8b6773fd4024d0d61e9a1"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/SparseAssemblyTest.java",
+        "sha256": "a18b97935b4af3d75f125e70abf721bc6f3d589ae6e5e35219716f75cc8e1d26"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/SparseMatrixSupportTest.java",
+        "sha256": "d6b713a3988c6eb029ac62646ae7ef13a8cfd2ceede507e02e02c0de8d19b05b"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/SubstepAcceptanceTest.java",
+        "sha256": "ae3ef2a3712f94f6dd7bb8d5f01be0e92a2f3a2ea9dd1b5de3ef63e909936e03"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/TrainDimensionsTest.java",
+        "sha256": "6c5e5fbfd28a42522fd9d3c72199483dee31f8a3b329378f14ca02506752a5a0"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/TransformerStampTest.java",
+        "sha256": "1f00d123ae632c59e1d92384ef3a178fc989afea1d85ca1af9526be63f2cfb8a"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/extension/ApiCeeWireIdentitiesTest.java",
+        "sha256": "f8ad887b8ad08a28cfff5658288f0e63c32f593b95f4baed39be5564f8b1c3a6"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/extension/ApiDiagnosticsTest.java",
+        "sha256": "c3286e350b8ef302fbe7b011edc4c9316f8419f216037b44023f82dec48bbc2c"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/extension/ApiElectricalTest.java",
+        "sha256": "3b71e8f04ec72cb2a0c536f8ddadcb7fa532b502cb51c2df9058bace936b61ce"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/extension/ApiGroundTest.java",
+        "sha256": "7cec17141387673c0863fe43afae3508ecba817d4da0820f7aaa8ccbec146c83"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/extension/ApiTerminalIdentitiesTest.java",
+        "sha256": "ce201713e95d36a4f1012d6d8a0c871ce32ab096f6b023586c48b68d39dc667a"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/extension/NativeApiReadingsTest.java",
+        "sha256": "d8ea6618feef5f00f0acb71a81eacc6cf899d9a4ee5bc4ee8cf4c9125d50609a"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/extension/ReferenceGroupsTest.java",
+        "sha256": "7e92268e8a7e2775464fe21285fcc8e3d32217d86858e3d197438fb8b1216c69"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/wiring/LineVoltagesTest.java",
+        "sha256": "69105944a49ee9539849eea4cd114f06b251795e083927180f8837a7809f9d0e"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/wiring/TerminalPickingRayTest.java",
+        "sha256": "86e4c1fc21b3e1609a899ec8a12ea7c7ec72c211c40c89aa114f16c48c031103"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/wiring/WireTreeTraversalTest.java",
+        "sha256": "ec190525408bccfbc44ccea355f3713d032319fe2ebf443d66ad914e6f33959e"
+      },
+      {
+        "path": "build.gradle",
+        "sha256": "0bfe7aa7ad8fe9f46d33545b3dbe914bbc0b8a6ddc340d537009c124edc0f427"
+      },
+      {
+        "path": "gradle.properties",
+        "sha256": "b6517c6a240bdeafe57a52aa9ac4f0d2f715d70949c9d3e994e701ec1a6149c2"
+      }
+    ]
+  },
+  "frozen_manifest": {
+    "path": "local/frozen/prototype-03d/inputs.json",
+    "sha256": "a82ef707180cf85a31e626df9a076e5df4c3c6d13036547aae3dce2e9ed6ca2e"
+  },
+  "native_comparison": {
+    "changed": [
+      "META-INF/neoforge.mods.toml",
+      "org/cha0scollective/wwpg/WorldWidePowerGrid.class",
+      "org/cha0scollective/wwpg/bridge/LinearBranch.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$Adapted.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$Anchor.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$Branch.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$CatenaryHandover.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$Desired.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$DirectedBranch.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$Dynamic.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$Phase.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$ResultNode.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$SolveFailure.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$StableDescription.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$TopologyState.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$Unavailability.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$Winding.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$WindingKey.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge.class",
+      "org/cha0scollective/wwpg/experimental/PackedResults$Buffer.class",
+      "org/cha0scollective/wwpg/experimental/PackedResults$Runner.class",
+      "org/cha0scollective/wwpg/experimental/PackedResults.class",
+      "org/cha0scollective/wwpg/experimental/PlainWireBatch$WireAccess.class",
+      "org/cha0scollective/wwpg/experimental/PlainWireBatch.class",
+      "org/cha0scollective/wwpg/extension/NativeApiReadings$1.class",
+      "org/cha0scollective/wwpg/extension/NativeApiReadings$Frame.class",
+      "org/cha0scollective/wwpg/extension/NativeApiReadings$Key.class",
+      "org/cha0scollective/wwpg/extension/NativeApiReadings$LineFrame.class",
+      "org/cha0scollective/wwpg/extension/NativeApiReadings$NetworkSamples.class",
+      "org/cha0scollective/wwpg/extension/NativeApiReadings$Owner.class",
+      "org/cha0scollective/wwpg/extension/NativeApiReadings.class",
+      "org/cha0scollective/wwpg/mixin/PgPlainWireBatchAccessMixin.class"
+    ],
+    "native_unchanged": {
+      "native/wwpg/linux/libpowergridNative7.so": "c90e98869ed32ed8bff68aa5a856f4507ca09025a6152d9df718115637c8e837",
+      "native/wwpg/safe/linux/libpowergridNative7.so": "5c9698801a63452c839963ac9473559b6ce2dd8dac21eea610b43cf3741f6f8b",
+      "native/wwpg/safe/windows/libpowergridNative7.dll": "1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c",
+      "native/wwpg/windows/libpowergridNative7.dll": "3150ba018b68ef173332a31b041b25cd8c6501394c4e9222aaa4c3ac9eeb16f4"
+    }
+  },
+  "source_and_artifact_hashes_verified": true,
+  "original_and_copied_reference_hashes_verified": true,
+  "focused_checks": [
+    {
+      "name": "packed-03a-native-4",
+      "passed": false,
+      "backend": "NATIVE",
+      "workers": 4,
+      "tests": 0,
+      "packed_execution": null,
+      "evidence": {
+        "path": "local/checks/packed-03a-native-4/result.json",
+        "sha256": "e9eaaa15a24deadf69452993b898216529abcae3878a8d453f7315872c43ad8e"
+      }
+    },
+    {
+      "name": "packed-03b-native-4",
+      "passed": false,
+      "backend": "NATIVE",
+      "workers": 4,
+      "tests": 0,
+      "packed_execution": [
+        [
+          "4",
+          "510807",
+          "288928",
+          "1088784",
+          "696423",
+          "2785692",
+          "2825030"
+        ]
+      ],
+      "evidence": {
+        "path": "local/checks/packed-03b-native-4/result.json",
+        "sha256": "ac552ae1b0681c97b079506e9d438d96e584005838f2897244b6db150367e14d"
+      }
+    },
+    {
+      "name": "packed-03c-native-0",
+      "passed": false,
+      "backend": "NATIVE",
+      "workers": 0,
+      "tests": 0,
+      "packed_execution": [
+        [
+          "0",
+          "527340",
+          "300448",
+          "1127808",
+          "0",
+          "0",
+          "2928716"
+        ]
+      ],
+      "evidence": {
+        "path": "local/checks/packed-03c-native-0/result.json",
+        "sha256": "d41a20277ed7e59fc3b9295e90c8768b89b8db39e2e9a78aeef3dc8645bd87b6"
+      }
+    },
+    {
+      "name": "packed-03c-native-4",
+      "passed": false,
+      "backend": "NATIVE",
+      "workers": 4,
+      "tests": 0,
+      "packed_execution": [
+        [
+          "4",
+          "559400",
+          "308352",
+          "968848",
+          "662725",
+          "2650900",
+          "2838368"
+        ]
+      ],
+      "evidence": {
+        "path": "local/checks/packed-03c-native-4/result.json",
+        "sha256": "e6f58d5076758c7dc8f4b39f4341edc715e7a4c0aae3503c008ae7aedc983c5e"
+      }
+    },
+    {
+      "name": "packed-03d-java-0",
+      "passed": true,
+      "backend": "JAVA",
+      "workers": 0,
+      "tests": 43,
+      "packed_execution": [
+        [
+          "0",
+          "554894",
+          "316976",
+          "1090272",
+          "0",
+          "0",
+          "2980360"
+        ]
+      ],
+      "evidence": {
+        "path": "local/checks/packed-03d-java-0/result.json",
+        "sha256": "062162537a57141143b12a26137d3ea6458706292c60f21d10352df167449cb7"
+      }
+    },
+    {
+      "name": "packed-03d-java-2",
+      "passed": true,
+      "backend": "JAVA",
+      "workers": 2,
+      "tests": 43,
+      "packed_execution": [
+        [
+          "2",
+          "533489",
+          "305584",
+          "1271776",
+          "783383",
+          "1566766",
+          "3094730"
+        ]
+      ],
+      "evidence": {
+        "path": "local/checks/packed-03d-java-2/result.json",
+        "sha256": "193ddf3f7415f74685fc4ae7c871a197e2843c81bac90b74bfec163cacb96b61"
+      }
+    },
+    {
+      "name": "packed-03d-java-4",
+      "passed": true,
+      "backend": "JAVA",
+      "workers": 4,
+      "tests": 43,
+      "packed_execution": [
+        [
+          "4",
+          "557011",
+          "308544",
+          "991568",
+          "667458",
+          "2669832",
+          "2860598"
+        ]
+      ],
+      "evidence": {
+        "path": "local/checks/packed-03d-java-4/result.json",
+        "sha256": "538a44e7d588812294b78bfee579fa48fdcf0ba8cbedceaf1cf335eccc726161"
+      }
+    },
+    {
+      "name": "packed-03d-native-0",
+      "passed": true,
+      "backend": "NATIVE",
+      "workers": 0,
+      "tests": 43,
+      "packed_execution": [
+        [
+          "0",
+          "543667",
+          "314480",
+          "1366928",
+          "0",
+          "0",
+          "3237116"
+        ]
+      ],
+      "evidence": {
+        "path": "local/checks/packed-03d-native-0/result.json",
+        "sha256": "561323b96ce3416fbaa6bee30da9b18c2033889edb2abe9d3d723bc7bc171d05"
+      }
+    },
+    {
+      "name": "packed-03d-native-2",
+      "passed": true,
+      "backend": "NATIVE",
+      "workers": 2,
+      "tests": 43,
+      "packed_execution": [
+        [
+          "2",
+          "522837",
+          "289408",
+          "1300448",
+          "787754",
+          "1575508",
+          "3061568"
+        ]
+      ],
+      "evidence": {
+        "path": "local/checks/packed-03d-native-2/result.json",
+        "sha256": "0900aa301d52383dff91b1d952f9bd54ad9febe6822e0c21235406b5826336c8"
+      }
+    },
+    {
+      "name": "packed-03d-native-4",
+      "passed": true,
+      "backend": "NATIVE",
+      "workers": 4,
+      "tests": 43,
+      "packed_execution": [
+        [
+          "4",
+          "536618",
+          "298624",
+          "1097152",
+          "693932",
+          "2775728",
+          "2909798"
+        ]
+      ],
+      "evidence": {
+        "path": "local/checks/packed-03d-native-4/result.json",
+        "sha256": "4b2f090a3ef7fe5eac31b9ea26db7f82210eb9b0494127b7374ad3633f70c58d"
+      }
+    }
+  ],
+  "final_required_test_passes": 258,
+  "focused_check_evidence_mode": "reused",
+  "evidence_reuse_comparison": {
+    "path": "local/packed-host/quiet-reuse-01.json",
+    "sha256": "597e0a28cde3a6b644e63102fb2345b7807f3abcc85c95aaa3ad6bb97f583e51"
+  },
+  "standalone_check": {
+    "log": {
+      "path": "local/packed-unit/result-02.log",
+      "sha256": "55d11654783b21249996452725734a523298983b117531a4ca9ef6724f9f0dec"
+    },
+    "result": "workers=0 dispatches=0 ranges=0\nworkers=2 dispatches=18 ranges=36\nworkers=4 dispatches=18 ranges=72\nPASS bitwise comparisons=546870; rejected NaN classification=150804; failure, interrupt, reuse, owner and shutdown checks\n"
+  },
+  "attempts": [
+    {
+      "name": "packed-quiet-control-01",
+      "packed": false,
+      "workers": 0,
+      "host_contention": false,
+      "comparable_to_clean_control": true,
+      "verification": false,
+      "detailed": false,
+      "tps": 19.47305016455124,
+      "samples": 2334,
+      "mspt": {
+        "mean": 51.222536675235645,
+        "p50": 49.7911,
+        "p95": 60.1992,
+        "p99": 65.4521,
+        "maximum": 71.4418
+      },
+      "target_met": false,
+      "mean_gap_to_50_ms": 1.222536675235645,
+      "server_cpu_mean_ms": 51.02559982862039,
+      "server_allocation_mean_mib": 12.208981380773183,
+      "process_mean_cpu_cores": 1.0119099251739196,
+      "gc_ms": 70,
+      "compilation_ms_delta": 868,
+      "thirty_second_block_means": [
+        {
+          "block": 0,
+          "ticks": 586,
+          "mean_ms": 51.072426109215016
+        },
+        {
+          "block": 1,
+          "ticks": 581,
+          "mean_ms": 51.484400688468156
+        },
+        {
+          "block": 2,
+          "ticks": 585,
+          "mean_ms": 51.19299282051282
+        },
+        {
+          "block": 3,
+          "ticks": 582,
+          "mean_ms": 51.141960996563576
+        }
+      ],
+      "validation": {
+        "passed": true,
+        "full_suite": false,
+        "capacity_certified": false,
+        "stable_ticks": 2334,
+        "actual_nodes": 14650,
+        "edges": 20637,
+        "chunks": 953,
+        "storage_devices": 1050,
+        "sixteen_substeps": true,
+        "topology_unchanged": true,
+        "normal_shutdown": true,
+        "batch_execution": {
+          "plans": 682,
+          "unsupported": 279,
+          "steps": 3076317,
+          "contributions": 1543118989,
+          "voltage_reads": 1145011336,
+          "scalar_fallbacks": 0,
+          "largest_plain_batch": 10368,
+          "property_contributions": 737331131,
+          "property_scalar_fallbacks": 0,
+          "largest_property_batch": 9443
+        },
+        "bitwise_verification": false
+      },
+      "started_utc": "2026-11-08T17:36:09Z",
+      "finished_utc": "2026-11-08T17:42:10Z",
+      "evidence": [
+        {
+          "path": "local/benchmarks/packed-quiet-control-01/experiment.json",
+          "sha256": "2bfc236efae7ea08543d0424bfbcfa7c6fbe25f9d3f692cb00499daab7e49124"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-control-01/process.log",
+          "sha256": "e9868413f71bbb3d1ab279bb8400d2b1d355d00c2ddea6b46afa1dff8f7c59b2"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-control-01/process-metrics.jsonl",
+          "sha256": "c90c3aff2c718253c1b4598d582fe9fa3fcdf8d01fc594bca7c70cf66d5ed89c"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-control-01/launch.json",
+          "sha256": "2922244ef629a9a135a46d4d3b4da86184b5956d2f2e487fccee0b95ca9eaf63"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-control-01/benchmark/result.json",
+          "sha256": "39f11aba6d0d3b987515c7b2693d0c55a43ef7106d2d3e7f03499ce189073ea6"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-control-01/benchmark/ticks.csv",
+          "sha256": "b7addfd77be8751d4dc3031ad4d0e7b1556e4e502f9ce2833c7ec4c269711319"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-control-01/benchmark/summary.json",
+          "sha256": "724058bc0b32fa5db4f7f2372419a8f0c0db12f6196d57e0c1298e8b90ce285f"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-control-01/benchmark/placement-ticks.csv",
+          "sha256": "4bdc114e7448eb4086e5ebc8e4d1264b1c2fbe52254a3cd56ae9a8c4883b7733"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-control-01/benchmark/graph-start.json",
+          "sha256": "a544de6783e97f35d920d58468dfe5f6c55a0ceec27591f5e5084d975faecdf4"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-control-01/benchmark/graph-end.json",
+          "sha256": "a544de6783e97f35d920d58468dfe5f6c55a0ceec27591f5e5084d975faecdf4"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-control-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-control-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        }
+      ]
+    },
+    {
+      "name": "packed-quiet-workers-4-01",
+      "packed": true,
+      "workers": 4,
+      "host_contention": false,
+      "comparable_to_clean_control": true,
+      "verification": false,
+      "detailed": false,
+      "tps": 16.86905217367182,
+      "samples": 2021,
+      "mspt": {
+        "mean": 59.13877337951509,
+        "p50": 57.3988,
+        "p95": 67.1716,
+        "p99": 73.6575,
+        "maximum": 90.2561
+      },
+      "target_met": false,
+      "mean_gap_to_50_ms": 9.138773379515087,
+      "server_cpu_mean_ms": 57.003030677882236,
+      "server_allocation_mean_mib": 11.874170721432527,
+      "process_mean_cpu_cores": 1.0747674996525916,
+      "gc_ms": 139,
+      "compilation_ms_delta": 711,
+      "thirty_second_block_means": [
+        {
+          "block": 0,
+          "ticks": 507,
+          "mean_ms": 59.12802268244576
+        },
+        {
+          "block": 1,
+          "ticks": 505,
+          "mean_ms": 59.270924752475246
+        },
+        {
+          "block": 2,
+          "ticks": 512,
+          "mean_ms": 58.4167482421875
+        },
+        {
+          "block": 3,
+          "ticks": 497,
+          "mean_ms": 59.75927847082495
+        }
+      ],
+      "validation": {
+        "passed": true,
+        "full_suite": false,
+        "capacity_certified": false,
+        "stable_ticks": 2021,
+        "actual_nodes": 14650,
+        "edges": 20637,
+        "chunks": 953,
+        "storage_devices": 1050,
+        "sixteen_substeps": true,
+        "topology_unchanged": true,
+        "normal_shutdown": true,
+        "batch_execution": {
+          "plans": 683,
+          "unsupported": 284,
+          "steps": 2669121,
+          "contributions": 1334086226,
+          "voltage_reads": 989922927,
+          "scalar_fallbacks": 0,
+          "largest_plain_batch": 10368,
+          "property_contributions": 637462846,
+          "property_scalar_fallbacks": 0,
+          "largest_property_batch": 9443
+        },
+        "bitwise_verification": false,
+        "packed_execution": {
+          "workers": 4,
+          "power": 1371106844,
+          "currents": 674629552,
+          "voltages": 852444192,
+          "dispatches": 212344,
+          "ranges": 849376,
+          "verified": 0
+        }
+      },
+      "started_utc": "2026-11-08T17:42:10Z",
+      "finished_utc": "2026-11-08T17:48:07Z",
+      "evidence": [
+        {
+          "path": "local/benchmarks/packed-quiet-workers-4-01/experiment.json",
+          "sha256": "cf1f46271cc5e4a2486ba9f9cfd991f8a9ab4462afdff4f1c3e325eb62563461"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-4-01/process.log",
+          "sha256": "b74fd844fbe6bec6991dad5c67406fadfd20e8290828ecd8ddcf8ab0b038fe62"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-4-01/process-metrics.jsonl",
+          "sha256": "7b9f45c218bde93440b24dc1cbef83a09b93db795e2949b58e2a0b65170da994"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-4-01/launch.json",
+          "sha256": "723b4f90c80aa50aa07b32ec43f27a2f0fa444c2b47852cd80d44a06344add02"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-4-01/benchmark/result.json",
+          "sha256": "b26e8cb19c0066ba3fd4e4a528009119c5775c4dafa31523e8240744cfb0b01d"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-4-01/benchmark/ticks.csv",
+          "sha256": "7273433dfabb0ab5f5ce2d917f44a5160099c6a0929856937591cab285902eae"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-4-01/benchmark/summary.json",
+          "sha256": "f2f204c46d30ef6722fe32473241955481b3e7cfbe75ee0c4ad267d176402808"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-4-01/benchmark/placement-ticks.csv",
+          "sha256": "fc02ba393961664b75fa47806cc5990ddbe7845b3a5443ef22ec5fd55aedcbba"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-4-01/benchmark/graph-start.json",
+          "sha256": "a2d30f74774c7b86fe6af1044f74757a245bcb5f14972048af4397f388bad8f8"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-4-01/benchmark/graph-end.json",
+          "sha256": "a2d30f74774c7b86fe6af1044f74757a245bcb5f14972048af4397f388bad8f8"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-4-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-4-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        }
+      ]
+    },
+    {
+      "name": "packed-quiet-workers-2-01",
+      "packed": true,
+      "workers": 2,
+      "host_contention": false,
+      "comparable_to_clean_control": true,
+      "verification": false,
+      "detailed": false,
+      "tps": 16.85511969155675,
+      "samples": 2020,
+      "mspt": {
+        "mean": 59.190475231188124,
+        "p50": 57.5385,
+        "p95": 67.215699,
+        "p99": 72.345299,
+        "maximum": 150.4673
+      },
+      "target_met": false,
+      "mean_gap_to_50_ms": 9.190475231188124,
+      "server_cpu_mean_ms": 57.224628712871294,
+      "server_allocation_mean_mib": 11.877440662195188,
+      "process_mean_cpu_cores": 1.017663520584327,
+      "gc_ms": 63,
+      "compilation_ms_delta": 429,
+      "thirty_second_block_means": [
+        {
+          "block": 0,
+          "ticks": 503,
+          "mean_ms": 59.48936498011929
+        },
+        {
+          "block": 1,
+          "ticks": 510,
+          "mean_ms": 58.7466843
+        },
+        {
+          "block": 2,
+          "ticks": 504,
+          "mean_ms": 59.407160696428576
+        },
+        {
+          "block": 3,
+          "ticks": 503,
+          "mean_ms": 59.12443617892644
+        }
+      ],
+      "validation": {
+        "passed": true,
+        "full_suite": false,
+        "capacity_certified": false,
+        "stable_ticks": 2020,
+        "actual_nodes": 14650,
+        "edges": 20637,
+        "chunks": 953,
+        "storage_devices": 1050,
+        "sixteen_substeps": true,
+        "topology_unchanged": true,
+        "normal_shutdown": true,
+        "batch_execution": {
+          "plans": 681,
+          "unsupported": 274,
+          "steps": 2900025,
+          "contributions": 1351850384,
+          "voltage_reads": 1003362780,
+          "scalar_fallbacks": 0,
+          "largest_plain_batch": 10368,
+          "property_contributions": 646096736,
+          "property_scalar_fallbacks": 0,
+          "largest_property_batch": 9443
+        },
+        "bitwise_verification": false,
+        "packed_execution": {
+          "workers": 2,
+          "power": 1389345204,
+          "currents": 685659776,
+          "voltages": 867025120,
+          "dispatches": 215443,
+          "ranges": 430886,
+          "verified": 0
+        }
+      },
+      "started_utc": "2026-11-08T17:48:07Z",
+      "finished_utc": "2026-11-08T17:54:08Z",
+      "evidence": [
+        {
+          "path": "local/benchmarks/packed-quiet-workers-2-01/experiment.json",
+          "sha256": "f798df5e90674782c6aa6a5151da118f41c77821022e8ff997b147eb0d25f8c9"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-2-01/process.log",
+          "sha256": "241918ed6ef98e2e96dc052016d936b0505cc24883877f0322e7c775e5410f7c"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-2-01/process-metrics.jsonl",
+          "sha256": "635142e9f0aefc633616e12fa2d2d55c0db42b904302531e4cdbda4c7914fe4b"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-2-01/launch.json",
+          "sha256": "857db69a2a44248ec228f3d9c2cd5d9527fa17272ac65cba3b7530a4b3fe361e"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-2-01/benchmark/result.json",
+          "sha256": "1559080d605a2f7c3d83d1718d923cf47943a45b85424e5f874e9463c46d15b5"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-2-01/benchmark/ticks.csv",
+          "sha256": "a09514922b2b8bf58274690402c6840131b4e8845c85047672dfea1245d2feef"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-2-01/benchmark/summary.json",
+          "sha256": "687ab009dc12a3532d88cdfa8fb241f8ba34980a18537296b796a9b10e3306db"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-2-01/benchmark/placement-ticks.csv",
+          "sha256": "db6a6056c4ba54c8ecf00fe47e2a076ca1c9d47e28ed00b768bee8a3e33db895"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-2-01/benchmark/graph-start.json",
+          "sha256": "30798c90ad4fff244429a942abad01b4528fd6878b9af42f8ad04ea0504987b9"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-2-01/benchmark/graph-end.json",
+          "sha256": "30798c90ad4fff244429a942abad01b4528fd6878b9af42f8ad04ea0504987b9"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-2-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/packed-quiet-workers-2-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        }
+      ]
+    }
+  ],
+  "host_observations": [
+    {
+      "path": "local/packed-host/contention-01.json",
+      "sha256": "ce48cf500ab528c93944f0521c6d43607267f977c969977431bac53bb719b710"
+    },
+    {
+      "path": "local/packed-host/contention-02.json",
+      "sha256": "a2401704bd03633fe984672078110961e27128bcb2a5d25dd917ffa6bffebd4c"
+    },
+    {
+      "path": "local/packed-host/quiet-control-stable-01.json",
+      "sha256": "b7f6a2c960d5f56244635e835845709005c2e47f499d6a2141d8aa6dd530eaac"
+    },
+    {
+      "path": "local/packed-host/quiet-host-validation-01.json",
+      "sha256": "b99cd82ec50832ea935840b4d43cbbe7bc3c452613c049bf7c37b5605cc2d59f"
+    },
+    {
+      "path": "local/packed-host/quiet-preflight-01.json",
+      "sha256": "67d7909efbca076dd76cbfc7ca8c8942eb86be9422547c4b134a21b107b932ee"
+    },
+    {
+      "path": "local/packed-host/quiet-reuse-01.json",
+      "sha256": "597e0a28cde3a6b644e63102fb2345b7807f3abcc85c95aaa3ad6bb97f583e51"
+    },
+    {
+      "path": "local/packed-host/quiet-workers-2-stable-01.json",
+      "sha256": "44681ad3d454661f1403a535b0260b61f10bd335c248d7e095170ab6534b42a7"
+    },
+    {
+      "path": "local/packed-host/quiet-workers-4-stable-01.json",
+      "sha256": "cc3d5ec738f067b796eb74a025394bcc1baf9a8dac54c7232cf82008e33f93df"
+    }
+  ]
+}
