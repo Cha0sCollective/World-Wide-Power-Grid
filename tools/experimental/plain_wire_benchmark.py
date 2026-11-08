@@ -78,6 +78,7 @@ def prepare(args):
     flags = '-Xms512M\n-Xmx8G\n-Dwwpg.experimental.plainWireBatch=' + str(args.batch).lower() + '\n'
     flags += '-Dwwpg.experimental.plainWireBatch.verify=' + str(args.verify_batch).lower() + '\n'
     flags += '-Dwwpg.experimental.plainWireBatch.properties=' + str(args.property_batch).lower() + '\n'
+    flags += '-Dwwpg.experimental.wireTreeBatch=' + str(getattr(args, 'tree_batch', False)).lower() + '\n'
     (directory / 'launch.args').write_text(flags + '\n'.join(tokens) + '\nnogui\n', newline='\n')
     java = Path(manifest['java']['path'])
     assert java.is_file()

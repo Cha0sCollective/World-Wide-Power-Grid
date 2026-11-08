@@ -111,6 +111,7 @@ public final class WorldBridge {
             phase = Phase.IDLE; return;
         }
         require(phase != Phase.SOLVE, "Topology cannot change during a solve");
+        org.cha0scollective.wwpg.experimental.WireTreeBatch.flush(level);
         phase = Phase.PREPARE;
         catenaryHandovers.clear();
         RestorationCoordinator.begin(level);

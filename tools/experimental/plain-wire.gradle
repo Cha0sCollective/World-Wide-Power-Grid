@@ -12,5 +12,6 @@ gradle.projectsEvaluated {
         systemProperty 'wwpg.experimental.plainWireBatch', 'true'
         systemProperty 'wwpg.experimental.plainWireBatch.verify', 'true'
         systemProperty 'wwpg.experimental.plainWireBatch.properties', p.providers.gradleProperty('testPropertyWireBatch').getOrElse('false')
+        systemProperty 'wwpg.experimental.wireTreeBatch', p.providers.gradleProperty('testWireTreeBatch').getOrElse('false')
     }
 }

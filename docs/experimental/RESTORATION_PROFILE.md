@@ -5,6 +5,9 @@ This investigation uses the restored `0.2.7-experimental.plainwire.2` runtime,
 with plain-wire and CEE property-source batching enabled. No runtime, save
 format or electrical scheduling change was made for the investigation.
 
+Follow-up experiment: [wire-tree restoration batching](WIRE_TREE_BATCHING.md).
+The measurements below remain the earlier unchanged-runtime profile.
+
 The strongest next target is **repeated wire-tree resolution during loading**.
 It accounts for 39.4% of observed server CPU samples. The server also keeps
 preparing and simulating hundreds of temporary circuit fragments while entities

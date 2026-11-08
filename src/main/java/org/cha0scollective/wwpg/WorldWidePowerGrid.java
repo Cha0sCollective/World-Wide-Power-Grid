@@ -60,6 +60,7 @@ public final class WorldWidePowerGrid {
                 })));
     }
     private void unload(LevelEvent.Unload event) {
+        if (event.getLevel() instanceof ServerLevel level) org.cha0scollective.wwpg.experimental.WireTreeBatch.unload(level);
         if (event.getLevel() instanceof ServerLevel level) Bridges.unload(level);
         if (event.getLevel() instanceof ServerLevel level) org.cha0scollective.wwpg.bridge.RestorationCoordinator.unload(level);
         if (event.getLevel() instanceof ServerLevel level) org.cha0scollective.wwpg.extension.ApiCircuits.unload(level);
@@ -68,6 +69,7 @@ public final class WorldWidePowerGrid {
         if (event.getLevel() instanceof net.minecraft.world.level.Level level) org.cha0scollective.wwpg.extension.ApiTerminals.unload(level);
     }
     private void stop(ServerStoppedEvent event) {
+        org.cha0scollective.wwpg.experimental.WireTreeBatch.reportAndClear();
         org.cha0scollective.wwpg.experimental.PlainWireBatch.reportAndReset();
         Bridges.clear();
         org.cha0scollective.wwpg.bridge.RestorationCoordinator.clear();
