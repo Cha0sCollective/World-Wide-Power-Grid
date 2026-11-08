@@ -155,29 +155,39 @@ def main():
     parser.add_argument('--name', required=True)
     parser.add_argument('--runtime')
     parser.add_argument('--detailed', action='store_true')
+    parser.add_argument('--substep-jfr', action='store_true', help='Record stable-phase CPU/allocation samples; requires --detailed')
     parser.add_argument('--batch', action='store_true')
     parser.add_argument('--verify-batch', action='store_true')
     parser.add_argument('--property-batch', action='store_true')
     args = parser.parse_args()
     if (args.property_batch or args.verify_batch) and not args.batch:
         parser.error('--property-batch and --verify-batch require --batch')
+    if args.substep_jfr and not args.detailed:
+        parser.error('--substep-jfr requires --detailed')
     directory, reference, original = prepare(args)
     before = inventory(original)
     protocol = dict(name=args.name, runtime=bench.read(directory / 'launch.json')['runtime'],
         scope='Focused 120-second warmup and 120-second stable control; not full capacity acceptance',
         copied_reference=True, sixteen_substeps=True, full_suite=False, batch=args.batch,
         verify_batch=args.verify_batch, property_batch=args.property_batch, detailed=args.detailed,
-        started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
+        substep_jfr=args.substep_jfr, started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
     bench.write(directory / 'experiment.json', protocol)
     print(json.dumps(dict(starting=str(directory), protocol=protocol)), flush=True)
     options = SimpleNamespace(directory=str(directory), runtime_sha256=protocol['runtime']['sha256'],
         tier=10000, backend='NATIVE', variant='MIXED', mode='control', warmup=120, sample=120,
         churn=0, cycles=1, restore=str(reference), detailed=args.detailed, timeout=1200,
         restoration_batch=True, rhs_counters=False, profile_every=20,
-        substep_trace=args.detailed, substep_jfr=False)
+        substep_trace=args.detailed, substep_jfr=args.substep_jfr)
     try:
         bench.run(options)
         protocol['validation'] = validate(directory, args.detailed, args.batch, args.verify_batch, args.property_batch)
+        if args.substep_jfr:
+            recording = directory / 'benchmark/substeps.jfr'
+            log = (directory / 'process.log').read_text(encoding='utf-8', errors='replace')
+            assert log.count('WWPG_SUBSTEP_JFR_STARTED: stable phase only') == 1
+            assert log.count('WWPG_SUBSTEP_JFR_SAVED') == 1
+            assert recording.is_file() and recording.stat().st_size > 0
+            protocol['recording'] = dict(path=str(recording), sha256=bench.sha(recording), bytes=recording.stat().st_size)
         protocol['summary'] = bench.read(directory / 'benchmark/summary.json')
         print(json.dumps(dict(completed=True, summary=protocol['summary']['mspt'], tps=protocol['summary']['tps'])), flush=True)
     finally:
