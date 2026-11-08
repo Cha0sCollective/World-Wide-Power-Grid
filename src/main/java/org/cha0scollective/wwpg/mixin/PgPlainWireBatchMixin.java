@@ -15,11 +15,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class PgPlainWireBatchMixin implements PlainWireBatch.NetworkAccess {
     @Unique private PlainWireBatch wwpg$wireBatch;
     @Unique private boolean wwpg$batchSelected;
-    @Unique private long wwpg$batchSteps, wwpg$batchContributions;
+    @Unique private long wwpg$batchSteps, wwpg$batchContributions, wwpg$propertyContributions;
 
     @Override public void wwpg$invalidateWireBatch() { wwpg$wireBatch = null; }
     @Override public long wwpg$batchedSteps() { return wwpg$batchSteps; }
     @Override public long wwpg$batchedContributions() { return wwpg$batchContributions; }
+    @Override public long wwpg$batchedPropertyContributions() { return wwpg$propertyContributions; }
 
     @Inject(method = {"setDirty", "addWire", "removeWire", "internalRemoveNode", "swapNodes", "makeLeaf",
             "removeLeaf", "populateConductanceMatrix", "clear", "cleanup", "switchBackend"}, at = @At("HEAD"))
@@ -45,6 +46,7 @@ public abstract class PgPlainWireBatchMixin implements PlainWireBatch.NetworkAcc
         if (wwpg$batchSelected) {
             wwpg$batchSteps++;
             wwpg$batchContributions += wwpg$wireBatch.lastContributions();
+            wwpg$propertyContributions += wwpg$wireBatch.lastPropertyContributions();
         }
     }
 }

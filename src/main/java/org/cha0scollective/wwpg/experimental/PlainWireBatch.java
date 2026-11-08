@@ -30,34 +30,38 @@ import org.patryk3211.powergrid.electricity.sim.special.TransmissionLine;
 public final class PlainWireBatch implements IMultiHooks {
     public static final boolean ENABLED = Boolean.getBoolean("wwpg.experimental.plainWireBatch");
     public static final boolean VERIFY = Boolean.getBoolean("wwpg.experimental.plainWireBatch.verify");
+    public static final boolean PROPERTIES_ENABLED = ENABLED && Boolean.getBoolean("wwpg.experimental.plainWireBatch.properties");
 
     public interface NetworkAccess {
         void wwpg$invalidateWireBatch();
         long wwpg$batchedSteps();
         long wwpg$batchedContributions();
+        long wwpg$batchedPropertyContributions();
     }
 
     public interface WireAccess {
         /** Adds precisely power / tickCount, in the original hook position. */
-        boolean wwpg$accumulatePlainPower(double voltage);
+        boolean wwpg$accumulateResistivePower(double voltage);
     }
 
     private static long plans, unsupportedPlans, steps, contributions, voltageReads, scalarFallbacks;
-    private static int largestPlainBatch;
+    private static long propertyContributions, propertyScalarFallbacks;
+    private static int largestPlainBatch, largestPropertyBatch;
     private final ElectricalNetwork network;
     private final AbstractElectricWire[] hooks;
-    private final boolean[] plain;
+    // 0: original callback, 1: plain wire, 2: exact CEE property-source stamp.
+    private final byte[] kinds;
     private final int[] first, second, rows;
     private final IElectricNode[] nodes;
     private final double[] voltages;
     private final boolean supported;
     private final Set<IMultiHooks> singleton = Collections.singleton(this);
-    private long lastContributions;
+    private long lastContributions, lastPropertyContributions;
 
     private PlainWireBatch(ElectricalNetwork network, Set<IMultiHooks> original) {
         this.network = network;
         hooks = new AbstractElectricWire[original.size()];
-        plain = new boolean[hooks.length];
+        kinds = new byte[hooks.length];
         first = new int[hooks.length];
         second = new int[hooks.length];
         var nodeIds = new IdentityHashMap<IElectricNode, Integer>();
@@ -66,14 +70,15 @@ public final class PlainWireBatch implements IMultiHooks {
                 || network.getClass() == GraphedElectricalNetwork.class;
         var solver = ((ElectricalNetworkAccessor) network).wwpg$solver();
         safe &= solver != null && (solver.getClass() == JavaMNA.class || solver.getClass() == NativeMNA.class);
-        int index = 0, count = 0;
+        int index = 0, plainCount = 0, propertyCount = 0;
         for (var hook : original) {
             Class<?> type = hook.getClass();
-            boolean eligible = type == ElectricWire.class || type == TransmissionLine.class;
+            boolean plain = type == ElectricWire.class || type == TransmissionLine.class;
+            boolean property = type == PropertyCurrentSourceWire.class;
             // These exact classes inherit the pure aggregation callback. Their
-            // specialized formulas still run normally. Unknown hooks disable the
+            // remaining specialized formulas run normally. Unknown hooks disable the
             // entire plan: they may observe power, mutate state, or release JNI.
-            boolean pure = eligible || type == PropertyCurrentSourceWire.class
+            boolean pure = plain || property
                     || type == CurrentSourceWire.class || type == SwitchedWire.class || type == CRSeriesWire.class;
             if (!pure) { safe = false; break; }
             var wire = (AbstractElectricWire) hook;
@@ -82,20 +87,25 @@ public final class PlainWireBatch implements IMultiHooks {
                 safe = false; break;
             }
             hooks[index] = wire;
-            plain[index] = eligible;
-            if (eligible) count++;
+            if (plain) { kinds[index] = 1; plainCount++; }
+            // The final WWPG stamp inherits I = V * G. Its injected source
+            // current belongs to RHS preparation, not its power formula.
+            else if (property && PROPERTIES_ENABLED) { kinds[index] = 2; propertyCount++; }
             first[index] = intern(wire.getNode1(), nodeIds, unique);
             second[index] = intern(wire.getNode2(), nodeIds, unique);
             index++;
         }
-        supported = safe && count > 0;
+        supported = safe && plainCount + propertyCount > 0;
         nodes = unique.toArray(IElectricNode[]::new);
         rows = new int[nodes.length];
         voltages = new double[nodes.length];
         for (int i = 0; i < nodes.length; i++) rows[i] = nodes[i].getIndex();
         plans++;
         if (!supported) unsupportedPlans++;
-        else largestPlainBatch = Math.max(largestPlainBatch, count);
+        else {
+            largestPlainBatch = Math.max(largestPlainBatch, plainCount);
+            largestPropertyBatch = Math.max(largestPropertyBatch, propertyCount);
+        }
     }
 
     public static PlainWireBatch compile(ElectricalNetwork network, Set<IMultiHooks> original) {
@@ -150,30 +160,41 @@ public final class PlainWireBatch implements IMultiHooks {
     }
 
     @Override public void postMicroTick() {
-        long count = 0;
+        long count = 0, propertyCount = 0;
         // Retain the exact ReferenceOpenHashSet iteration order, including the
         // positions of specialized formulas. Conductance is read every substep.
         for (int i = 0; i < hooks.length; i++) {
             var wire = hooks[i];
-            if (plain[i]) {
+            byte kind = kinds[i];
+            if (kind != 0) {
                 int a = first[i], b = second[i];
                 double voltage = a < 0 ? -voltages[b] : b < 0 ? voltages[a] : voltages[a] - voltages[b];
-                if (((WireAccess) wire).wwpg$accumulatePlainPower(voltage)) count++;
-                else scalarFallbacks++;
+                if (((WireAccess) wire).wwpg$accumulateResistivePower(voltage)) {
+                    count++;
+                    if (kind == 2) propertyCount++;
+                } else {
+                    scalarFallbacks++;
+                    if (kind == 2) propertyScalarFallbacks++;
+                }
             } else wire.postMicroTick();
         }
         lastContributions = count;
+        lastPropertyContributions = propertyCount;
         contributions += count;
+        propertyContributions += propertyCount;
         steps++;
     }
 
     public long lastContributions() { return lastContributions; }
+    public long lastPropertyContributions() { return lastPropertyContributions; }
 
     public static void reportAndReset() {
         if (ENABLED) WorldWidePowerGrid.LOGGER.info(
-                "WWPG experimental plain-wire batch: verify={}, plans={}, unsupported={}, steps={}, contributions={}, voltageReads={}, scalarFallbacks={}, largestPlainBatch={}",
-                VERIFY, plans, unsupportedPlans, steps, contributions, voltageReads, scalarFallbacks, largestPlainBatch);
+                "WWPG experimental plain-wire batch: verify={}, plans={}, unsupported={}, steps={}, contributions={}, voltageReads={}, scalarFallbacks={}, largestPlainBatch={}, properties={}, propertyContributions={}, propertyScalarFallbacks={}, largestPropertyBatch={}",
+                VERIFY, plans, unsupportedPlans, steps, contributions, voltageReads, scalarFallbacks, largestPlainBatch,
+                PROPERTIES_ENABLED, propertyContributions, propertyScalarFallbacks, largestPropertyBatch);
         plans = unsupportedPlans = steps = contributions = voltageReads = scalarFallbacks = 0;
-        largestPlainBatch = 0;
+        propertyContributions = propertyScalarFallbacks = 0;
+        largestPlainBatch = largestPropertyBatch = 0;
     }
 }

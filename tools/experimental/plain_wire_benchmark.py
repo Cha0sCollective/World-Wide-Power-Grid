@@ -77,6 +77,7 @@ def prepare(args):
         tokens.append('"' + token.replace('"', '\\"') + '"')
     flags = '-Xms512M\n-Xmx8G\n-Dwwpg.experimental.plainWireBatch=' + str(args.batch).lower() + '\n'
     flags += '-Dwwpg.experimental.plainWireBatch.verify=' + str(args.verify_batch).lower() + '\n'
+    flags += '-Dwwpg.experimental.plainWireBatch.properties=' + str(args.property_batch).lower() + '\n'
     (directory / 'launch.args').write_text(flags + '\n'.join(tokens) + '\nnogui\n', newline='\n')
     java = Path(manifest['java']['path'])
     assert java.is_file()
@@ -93,7 +94,7 @@ def prepare(args):
     return directory, reference, original
 
 
-def validate(directory, detailed, batch=False, verify=False):
+def validate(directory, detailed, batch=False, verify=False, properties=False):
     report = bench.read(directory / 'benchmark/result.json')
     audit = report['audit']
     assert report['passed'] and report['cee_solves'] == report['rejected_solves'] == 0
@@ -127,6 +128,21 @@ def validate(directory, detailed, batch=False, verify=False):
         stats = dict(zip(('plans', 'unsupported', 'steps', 'contributions', 'voltage_reads', 'scalar_fallbacks', 'largest_plain_batch'), map(int, values[1:])))
         assert stats['largest_plain_batch'] == 10368
         assert stats['contributions'] >= len(rows) * 16 * 10368, 'Batch did not process enough of the measured yard'
+        property_matches = re.findall(r', properties=(true|false), propertyContributions=(\d+), propertyScalarFallbacks=(\d+), largestPropertyBatch=(\d+)', log)
+        assert len(property_matches) <= 1
+        if properties:
+            assert property_matches, 'Runtime did not expose property-batch execution proof'
+        if property_matches:
+            enabled, fast, fallback, largest = property_matches[0]
+            assert (enabled == 'true') == properties
+            fast, fallback, largest = int(fast), int(fallback), int(largest)
+            stats.update(property_contributions=fast, property_scalar_fallbacks=fallback, largest_property_batch=largest)
+            if properties:
+                assert largest == 9443 and fast > 0
+                assert fast + fallback >= len(rows) * 16 * 9443, 'Property batch did not cover the measured yard'
+                assert stats['contributions'] - fast >= len(rows) * 16 * 10368, 'Plain-wire coverage regressed'
+            else:
+                assert fast == fallback == largest == 0, 'Disabled property batching executed'
         assert 'differs from scalar PG power' not in log
         validation['batch_execution'] = stats
         validation['bitwise_verification'] = verify
@@ -141,13 +157,17 @@ def main():
     parser.add_argument('--detailed', action='store_true')
     parser.add_argument('--batch', action='store_true')
     parser.add_argument('--verify-batch', action='store_true')
+    parser.add_argument('--property-batch', action='store_true')
     args = parser.parse_args()
+    if (args.property_batch or args.verify_batch) and not args.batch:
+        parser.error('--property-batch and --verify-batch require --batch')
     directory, reference, original = prepare(args)
     before = inventory(original)
     protocol = dict(name=args.name, runtime=bench.read(directory / 'launch.json')['runtime'],
         scope='Focused 120-second warmup and 120-second stable control; not full capacity acceptance',
         copied_reference=True, sixteen_substeps=True, full_suite=False, batch=args.batch,
-        verify_batch=args.verify_batch, detailed=args.detailed, started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
+        verify_batch=args.verify_batch, property_batch=args.property_batch, detailed=args.detailed,
+        started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
     bench.write(directory / 'experiment.json', protocol)
     print(json.dumps(dict(starting=str(directory), protocol=protocol)), flush=True)
     options = SimpleNamespace(directory=str(directory), runtime_sha256=protocol['runtime']['sha256'],
@@ -157,7 +177,7 @@ def main():
         substep_trace=args.detailed, substep_jfr=False)
     try:
         bench.run(options)
-        protocol['validation'] = validate(directory, args.detailed, args.batch, args.verify_batch)
+        protocol['validation'] = validate(directory, args.detailed, args.batch, args.verify_batch, args.property_batch)
         protocol['summary'] = bench.read(directory / 'benchmark/summary.json')
         print(json.dumps(dict(completed=True, summary=protocol['summary']['mspt'], tps=protocol['summary']['tps'])), flush=True)
     finally:

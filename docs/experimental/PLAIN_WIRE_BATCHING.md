@@ -1,5 +1,9 @@
 # Experimental plain-wire batching
 
+Historical first-prototype snapshot (`32da30b`, `0.2.7-experimental.plainwire.1`).
+The next experiment and current commands are documented in
+[CEE property-source batching](PROPERTY_WIRE_BATCHING.md).
+
 This is an isolated research branch based on WWPG 0.2.7. It is not a release
 candidate, an accepted save format change, or part of normal development.
 Use disposable copies of saves. No production save was opened for these checks.

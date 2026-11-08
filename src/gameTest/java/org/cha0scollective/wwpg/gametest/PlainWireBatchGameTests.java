@@ -24,6 +24,7 @@ public final class PlainWireBatchGameTests {
             var groundSecond = new ElectricWire(8, f.b, null);
             f.network.addWire(groundFirst); f.network.addWire(groundSecond);
             f.settle();
+            h.assertTrue(f.wire.power() > 0, "Live-edit fixture needs an actual powered wire");
             long before = f.stats().wwpg$batchedContributions();
             f.network.prepare(16);
             double expected = 0, first = 0, second = 0;
@@ -133,7 +134,7 @@ public final class PlainWireBatchGameTests {
             network.addNodes(a, b);
             network.addWire(wire);
             network.addWire(new CurrentSourceWire(b, null, 1000));
-            network.addNode(new VoltageSourceCoupling(a, b, 10));
+            network.addNode(new VoltageSourceCoupling(a, b, 0, 10));
         }
         PlainWireBatch.NetworkAccess stats() { return (PlainWireBatch.NetworkAccess) network; }
         void settle() { for (int frame = 0; frame < 8; frame++) network.calculate(16); }

@@ -1,0 +1,800 @@
+{
+  "schema": 1,
+  "base_commit": "32da30b9a01f11626f73f1db097b2a240ed028df",
+  "branch": "dev/experimental-plain-wire-batching",
+  "full_suite": false,
+  "graphical_acceptance": false,
+  "capacity_certified": false,
+  "frozen_inputs": {
+    "path": "local/frozen/prototype-02c/inputs.json",
+    "sha256": "a77bb304af92bfdf87544535a3620c189c19f331c9a3e0e5360596af7bafe447"
+  },
+  "artifacts": {
+    "runtime": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2.jar",
+      "sha256": "8f59be1043aaaf47c33561f3327ef5f52b5ca01eac8aef7039bd1066cb849aa2"
+    },
+    "fixtures": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2-gametests.jar",
+      "sha256": "7a70d08aae6ec0ae5d757322d3881e22629e813075309fe3a4d0c8003a2a1904"
+    },
+    "cee": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\electroenergetics-1.21.1-1.1.4.jar",
+      "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+    }
+  },
+  "source_inventory_verified": true,
+  "jar_diff": {
+    "baseline": "0.2.7-experimental.plainwire.1",
+    "added": [],
+    "removed": [],
+    "changed": [
+      "META-INF/neoforge.mods.toml",
+      "org/cha0scollective/wwpg/experimental/PlainWireBatch$NetworkAccess.class",
+      "org/cha0scollective/wwpg/experimental/PlainWireBatch$WireAccess.class",
+      "org/cha0scollective/wwpg/experimental/PlainWireBatch.class",
+      "org/cha0scollective/wwpg/mixin/PgPlainWireBatchAccessMixin.class",
+      "org/cha0scollective/wwpg/mixin/PgPlainWireBatchMixin.class"
+    ],
+    "native_unchanged": true
+  },
+  "prior_experiment": {
+    "path": "docs/experimental/plain-wire-results.json",
+    "sha256": "ddff5579d3cce31c4db954b70556f8e144cecbd9460df48b1eee9be8c3f9ff01"
+  },
+  "benchmarks": [
+    {
+      "name": "property-enabled-clean-01",
+      "evidence": {
+        "path": "local/benchmarks/property-enabled-clean-01/experiment.json",
+        "sha256": "b136b68daf62cbea371e3e128b2e1d452caccdbddb1c347d46cf80a9b2117aa0"
+      },
+      "runtime_sha256": "8f59be1043aaaf47c33561f3327ef5f52b5ca01eac8aef7039bd1066cb849aa2",
+      "batch": true,
+      "property_batch": true,
+      "detailed": false,
+      "verify_batch": false,
+      "original_reference_unchanged": true,
+      "started_utc": "2026-11-08T15:36:58Z",
+      "finished_utc": "2026-11-08T15:43:12Z",
+      "validation": {
+        "passed": true,
+        "full_suite": false,
+        "capacity_certified": false,
+        "stable_ticks": 2315,
+        "actual_nodes": 14650,
+        "edges": 20637,
+        "chunks": 953,
+        "storage_devices": 1050,
+        "sixteen_substeps": true,
+        "topology_unchanged": true,
+        "normal_shutdown": true,
+        "batch_execution": {
+          "plans": 704,
+          "unsupported": 308,
+          "steps": 3015620,
+          "contributions": 1471260800,
+          "voltage_reads": 1091798030,
+          "scalar_fallbacks": 0,
+          "largest_plain_batch": 10368,
+          "property_contributions": 703042400,
+          "property_scalar_fallbacks": 0,
+          "largest_property_batch": 9443
+        },
+        "bitwise_verification": false
+      },
+      "launch_evidence": {
+        "path": "local/benchmarks/property-enabled-clean-01/launch.json",
+        "sha256": "32ef0315c208a575635f586b9b44d6f4960785673fd03f762a77cfb8bad37d86"
+      },
+      "process_log_evidence": {
+        "path": "local/benchmarks/property-enabled-clean-01/process.log",
+        "sha256": "101b3515f9879e0f0e0d9400113a1d2849e0d6a86d6537b5c83e8b317128328f"
+      },
+      "tps": 19.338449380567027,
+      "mspt": {
+        "mean": 51.5088764,
+        "p50": 49.6195,
+        "p95": 62.1063,
+        "p99": 69.8143,
+        "maximum": 101.898799
+      },
+      "stable_ticks": 2315,
+      "measured_seconds": 119.6579909,
+      "gc_ms": 131,
+      "process": {
+        "rss_peak_bytes": 2052825088,
+        "cpu_mean_cores": 1.0922730346312122
+      },
+      "audit": {
+        "electrical_nodes": 14650,
+        "conductive_edges": 20362,
+        "coupled_edges": 275,
+        "edges": 20637,
+        "connected_systems_ignoring_reference_ground": 1,
+        "optimized_matrix_nodes": 14925,
+        "solver_networks": 1,
+        "actual_backends": [
+          "NATIVE"
+        ]
+      },
+      "restoration": {
+        "phase": "SETTLE",
+        "cycle": 0,
+        "requested_chunks": 953,
+        "load_limit_ticks": 2859,
+        "chunks_ready_tick": 952,
+        "graph_ready_tick": 953,
+        "finish_tick": 1061,
+        "chunk_request_seconds": 1.0801759,
+        "chunk_loading_seconds": 109.7842432,
+        "graph_recovery_seconds": 0.1311345,
+        "electrical_settling_seconds": 6.996682,
+        "total_restoration_seconds": 117.9922356,
+        "restoration_and_settling_seconds": 116.9120597,
+        "healthy_ticks": 100
+      },
+      "practical_20tps_target_met": false,
+      "mean_margin_under_50_ms": -1.5088763999999983,
+      "p95_margin_under_50_ms": -12.106299999999997,
+      "ticks_over_50_ms": 1130,
+      "tick_evidence": {
+        "path": "local/benchmarks/property-enabled-clean-01/benchmark/ticks.csv",
+        "sha256": "426aaed88bf553d761486e70e8e3f06f7df016e5753b70460b6cde184f9e01ae"
+      },
+      "assigned_row_order_sha256": "d5769b8e8467cd8af73927c55c8cc20d322a7b1ea120d9e93f67a04aa58414f6",
+      "hook_types": {
+        "org.cha0scollective.wwpg.bridge.PropertyCurrentSourceWire": 9443,
+        "org.patryk3211.powergrid.electricity.sim.ElectricWire": 4425,
+        "org.patryk3211.powergrid.electricity.sim.SwitchedWire": 50,
+        "org.patryk3211.powergrid.electricity.sim.node.CurrentSourceWire": 1,
+        "org.patryk3211.powergrid.electricity.sim.special.CRSeriesWire": 500,
+        "org.patryk3211.powergrid.electricity.sim.special.TransmissionLine": 5943
+      },
+      "placement": {
+        "scope": "owned server thread; before restoration through final measured tick",
+        "mask": "fff000"
+      },
+      "loaded_native_resource": {
+        "path": "local/benchmarks/property-enabled-clean-01/.pg-native/wwpg-safety-1/1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c/libpowergridNative7.dll",
+        "sha256": "1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c"
+      }
+    },
+    {
+      "name": "property-enabled-clean-02",
+      "evidence": {
+        "path": "local/benchmarks/property-enabled-clean-02/experiment.json",
+        "sha256": "0c26d9833e23c47c9cc078e71c69e2314f61262e0a4eef292ebd0cbeeee9e5f0"
+      },
+      "runtime_sha256": "8f59be1043aaaf47c33561f3327ef5f52b5ca01eac8aef7039bd1066cb849aa2",
+      "batch": true,
+      "property_batch": true,
+      "detailed": false,
+      "verify_batch": false,
+      "original_reference_unchanged": true,
+      "started_utc": "2026-11-08T15:44:19Z",
+      "finished_utc": "2026-11-08T15:50:32Z",
+      "validation": {
+        "passed": true,
+        "full_suite": false,
+        "capacity_certified": false,
+        "stable_ticks": 2165,
+        "actual_nodes": 14650,
+        "edges": 20637,
+        "chunks": 953,
+        "storage_devices": 1050,
+        "sixteen_substeps": true,
+        "topology_unchanged": true,
+        "normal_shutdown": true,
+        "batch_execution": {
+          "plans": 698,
+          "unsupported": 298,
+          "steps": 3009072,
+          "contributions": 1472770444,
+          "voltage_reads": 1092907391,
+          "scalar_fallbacks": 0,
+          "largest_plain_batch": 10368,
+          "property_contributions": 703763570,
+          "property_scalar_fallbacks": 0,
+          "largest_property_batch": 9443
+        },
+        "bitwise_verification": false
+      },
+      "launch_evidence": {
+        "path": "local/benchmarks/property-enabled-clean-02/launch.json",
+        "sha256": "9e9b125cb1f18741cf3441a173f9ffb0a755214c7e32f201d09376a852b8a15a"
+      },
+      "process_log_evidence": {
+        "path": "local/benchmarks/property-enabled-clean-02/process.log",
+        "sha256": "bf5a5414f1913fce27ad74a5bc8fb62385e2a4a47f62dcd689565e0b06a9697d"
+      },
+      "tps": 18.085300343681798,
+      "mspt": {
+        "mean": 55.15422877598152,
+        "p50": 54.3099,
+        "p95": 68.7417,
+        "p99": 81.4092,
+        "maximum": 98.3002
+      },
+      "stable_ticks": 2165,
+      "measured_seconds": 119.6551873,
+      "gc_ms": 76,
+      "process": {
+        "rss_peak_bytes": 2101067776,
+        "cpu_mean_cores": 1.055771170344433
+      },
+      "audit": {
+        "electrical_nodes": 14650,
+        "conductive_edges": 20362,
+        "coupled_edges": 275,
+        "edges": 20637,
+        "connected_systems_ignoring_reference_ground": 1,
+        "optimized_matrix_nodes": 14925,
+        "solver_networks": 1,
+        "actual_backends": [
+          "NATIVE"
+        ]
+      },
+      "restoration": {
+        "phase": "SETTLE",
+        "cycle": 0,
+        "requested_chunks": 953,
+        "load_limit_ticks": 2859,
+        "chunks_ready_tick": 945,
+        "graph_ready_tick": 946,
+        "finish_tick": 1056,
+        "chunk_request_seconds": 1.5236344,
+        "chunk_loading_seconds": 107.0477144,
+        "graph_recovery_seconds": 0.1149239,
+        "electrical_settling_seconds": 7.1017549,
+        "total_restoration_seconds": 115.7880276,
+        "restoration_and_settling_seconds": 114.2643932,
+        "healthy_ticks": 100
+      },
+      "practical_20tps_target_met": false,
+      "mean_margin_under_50_ms": -5.154228775981522,
+      "p95_margin_under_50_ms": -18.741699999999994,
+      "ticks_over_50_ms": 1490,
+      "tick_evidence": {
+        "path": "local/benchmarks/property-enabled-clean-02/benchmark/ticks.csv",
+        "sha256": "ae5e47182b8863992ab3e3444ed5a21c3046b0308432d07bc52df58882163885"
+      },
+      "assigned_row_order_sha256": "ec3a3e45b32b3f3a42bc52a56bbea6ba3e55eedf33e902f43f43e50c17822c44",
+      "hook_types": {
+        "org.cha0scollective.wwpg.bridge.PropertyCurrentSourceWire": 9443,
+        "org.patryk3211.powergrid.electricity.sim.ElectricWire": 4425,
+        "org.patryk3211.powergrid.electricity.sim.SwitchedWire": 50,
+        "org.patryk3211.powergrid.electricity.sim.node.CurrentSourceWire": 1,
+        "org.patryk3211.powergrid.electricity.sim.special.CRSeriesWire": 500,
+        "org.patryk3211.powergrid.electricity.sim.special.TransmissionLine": 5943
+      },
+      "placement": {
+        "scope": "owned server thread; before restoration through final measured tick",
+        "mask": "fff000"
+      },
+      "loaded_native_resource": {
+        "path": "local/benchmarks/property-enabled-clean-02/.pg-native/wwpg-safety-1/1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c/libpowergridNative7.dll",
+        "sha256": "1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c"
+      }
+    },
+    {
+      "name": "property-plain-control-01",
+      "evidence": {
+        "path": "local/benchmarks/property-plain-control-01/experiment.json",
+        "sha256": "0d5031a1e4b8fb4703f19c56e3750defdbacf7fc54897a4c8f82745efc8e8f6f"
+      },
+      "runtime_sha256": "8f59be1043aaaf47c33561f3327ef5f52b5ca01eac8aef7039bd1066cb849aa2",
+      "batch": true,
+      "property_batch": false,
+      "detailed": false,
+      "verify_batch": false,
+      "original_reference_unchanged": true,
+      "started_utc": "2026-11-08T15:30:33Z",
+      "finished_utc": "2026-11-08T15:36:46Z",
+      "validation": {
+        "passed": true,
+        "full_suite": false,
+        "capacity_certified": false,
+        "stable_ticks": 2121,
+        "actual_nodes": 14650,
+        "edges": 20637,
+        "chunks": 953,
+        "storage_devices": 1050,
+        "sixteen_substeps": true,
+        "topology_unchanged": true,
+        "normal_shutdown": true,
+        "batch_execution": {
+          "plans": 698,
+          "unsupported": 647,
+          "steps": 70061,
+          "contributions": 719082048,
+          "voltage_reads": 1016066645,
+          "scalar_fallbacks": 0,
+          "largest_plain_batch": 10368,
+          "property_contributions": 0,
+          "property_scalar_fallbacks": 0,
+          "largest_property_batch": 0
+        },
+        "bitwise_verification": false
+      },
+      "launch_evidence": {
+        "path": "local/benchmarks/property-plain-control-01/launch.json",
+        "sha256": "247fe3dc89cc1be1028086e5ed615a2459200da5e6f1e5ab2a87b5fecca37875"
+      },
+      "process_log_evidence": {
+        "path": "local/benchmarks/property-plain-control-01/process.log",
+        "sha256": "c74ad7c9f083cfaa16d2f066a8f60a7c5c3cc0042f2d9a90c0070428b20108b4"
+      },
+      "tps": 17.69652632522443,
+      "mspt": {
+        "mean": 56.36549978736445,
+        "p50": 54.860701,
+        "p95": 70.622201,
+        "p99": 83.9136,
+        "maximum": 111.0508
+      },
+      "stable_ticks": 2121,
+      "measured_seconds": 119.7975219,
+      "gc_ms": 59,
+      "process": {
+        "rss_peak_bytes": 2282192896,
+        "cpu_mean_cores": 1.047245266265997
+      },
+      "audit": {
+        "electrical_nodes": 14650,
+        "conductive_edges": 20362,
+        "coupled_edges": 275,
+        "edges": 20637,
+        "connected_systems_ignoring_reference_ground": 1,
+        "optimized_matrix_nodes": 14925,
+        "solver_networks": 1,
+        "actual_backends": [
+          "NATIVE"
+        ]
+      },
+      "restoration": {
+        "phase": "SETTLE",
+        "cycle": 0,
+        "requested_chunks": 953,
+        "load_limit_ticks": 2859,
+        "chunks_ready_tick": 958,
+        "graph_ready_tick": 959,
+        "finish_tick": 1068,
+        "chunk_request_seconds": 1.3012452,
+        "chunk_loading_seconds": 107.2583278,
+        "graph_recovery_seconds": 0.1444793,
+        "electrical_settling_seconds": 7.6754364,
+        "total_restoration_seconds": 116.3794887,
+        "restoration_and_settling_seconds": 115.0782435,
+        "healthy_ticks": 100
+      },
+      "practical_20tps_target_met": false,
+      "mean_margin_under_50_ms": -6.365499787364449,
+      "p95_margin_under_50_ms": -20.622201000000004,
+      "ticks_over_50_ms": 1654,
+      "tick_evidence": {
+        "path": "local/benchmarks/property-plain-control-01/benchmark/ticks.csv",
+        "sha256": "e047b6fd9b0cb5c6f65465d2bbfe487ba8393a3bd3e547a970543ce1595df5a5"
+      },
+      "assigned_row_order_sha256": "59e1229bbb51f301c979f8f597536e1c4575e170fc40ac6b7289e01d2538e150",
+      "hook_types": {
+        "org.cha0scollective.wwpg.bridge.PropertyCurrentSourceWire": 9443,
+        "org.patryk3211.powergrid.electricity.sim.ElectricWire": 4425,
+        "org.patryk3211.powergrid.electricity.sim.SwitchedWire": 50,
+        "org.patryk3211.powergrid.electricity.sim.node.CurrentSourceWire": 1,
+        "org.patryk3211.powergrid.electricity.sim.special.CRSeriesWire": 500,
+        "org.patryk3211.powergrid.electricity.sim.special.TransmissionLine": 5943
+      },
+      "placement": {
+        "scope": "owned server thread; before restoration through final measured tick",
+        "mask": "fff000"
+      },
+      "loaded_native_resource": {
+        "path": "local/benchmarks/property-plain-control-01/.pg-native/wwpg-safety-1/1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c/libpowergridNative7.dll",
+        "sha256": "1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c"
+      }
+    },
+    {
+      "name": "property-verified-detailed-01",
+      "evidence": {
+        "path": "local/benchmarks/property-verified-detailed-01/experiment.json",
+        "sha256": "77cbed11efd950840d61ff02a8d06271dbc3a6d2e6d580e0b3e196c7daff80dc"
+      },
+      "runtime_sha256": "8f59be1043aaaf47c33561f3327ef5f52b5ca01eac8aef7039bd1066cb849aa2",
+      "batch": true,
+      "property_batch": true,
+      "detailed": true,
+      "verify_batch": true,
+      "original_reference_unchanged": true,
+      "started_utc": "2026-11-08T15:50:50Z",
+      "finished_utc": "2026-11-08T15:56:57Z",
+      "validation": {
+        "passed": true,
+        "full_suite": false,
+        "capacity_certified": false,
+        "stable_ticks": 1847,
+        "actual_nodes": 14650,
+        "edges": 20637,
+        "chunks": 953,
+        "storage_devices": 1050,
+        "sixteen_substeps": true,
+        "topology_unchanged": true,
+        "normal_shutdown": true,
+        "batch_execution": {
+          "plans": 686,
+          "unsupported": 287,
+          "steps": 2848753,
+          "contributions": 1247595702,
+          "voltage_reads": 926199217,
+          "scalar_fallbacks": 0,
+          "largest_plain_batch": 10368,
+          "property_contributions": 596340405,
+          "property_scalar_fallbacks": 0,
+          "largest_property_batch": 9443
+        },
+        "bitwise_verification": true
+      },
+      "launch_evidence": {
+        "path": "local/benchmarks/property-verified-detailed-01/launch.json",
+        "sha256": "54e5ff381d6fe1693afcec624d9c690bc38abaf23cd2de5cec98dea13edd190b"
+      },
+      "process_log_evidence": {
+        "path": "local/benchmarks/property-verified-detailed-01/process.log",
+        "sha256": "139f404017e53d71a8004ffdb98a7144e4418cc68338905cea8f785a20460cbf"
+      },
+      "tps": 15.405450579269477,
+      "mspt": {
+        "mean": 64.76388159177044,
+        "p50": 62.8882,
+        "p95": 84.8018,
+        "p99": 123.7208,
+        "maximum": 995.1453
+      },
+      "stable_ticks": 1847,
+      "measured_seconds": 119.8277188,
+      "gc_ms": 117,
+      "process": {
+        "rss_peak_bytes": 2047627264,
+        "cpu_mean_cores": 1.1172544314102264
+      },
+      "audit": {
+        "electrical_nodes": 14650,
+        "conductive_edges": 20362,
+        "coupled_edges": 275,
+        "edges": 20637,
+        "connected_systems_ignoring_reference_ground": 1,
+        "optimized_matrix_nodes": 14925,
+        "solver_networks": 1,
+        "actual_backends": [
+          "NATIVE"
+        ]
+      },
+      "restoration": {
+        "phase": "SETTLE",
+        "cycle": 0,
+        "requested_chunks": 953,
+        "load_limit_ticks": 2859,
+        "chunks_ready_tick": 900,
+        "graph_ready_tick": 901,
+        "finish_tick": 1012,
+        "chunk_request_seconds": 1.3310987,
+        "chunk_loading_seconds": 97.5957205,
+        "graph_recovery_seconds": 0.1177664,
+        "electrical_settling_seconds": 8.5071418,
+        "total_restoration_seconds": 107.5517274,
+        "restoration_and_settling_seconds": 106.2206287,
+        "healthy_ticks": 100
+      },
+      "practical_20tps_target_met": false,
+      "mean_margin_under_50_ms": -14.763881591770442,
+      "p95_margin_under_50_ms": -34.8018,
+      "ticks_over_50_ms": 1847,
+      "tick_evidence": {
+        "path": "local/benchmarks/property-verified-detailed-01/benchmark/ticks.csv",
+        "sha256": "093d99ff59232c52a58d2d6e06ce4423cddc17415ffadf71cf56ce01ce06acce"
+      },
+      "assigned_row_order_sha256": "02e2359d703afacd007612bc1db5a9595832cc716018dc98be604d7474f18635",
+      "hook_types": {
+        "org.cha0scollective.wwpg.bridge.PropertyCurrentSourceWire": 9443,
+        "org.patryk3211.powergrid.electricity.sim.ElectricWire": 4425,
+        "org.patryk3211.powergrid.electricity.sim.SwitchedWire": 50,
+        "org.patryk3211.powergrid.electricity.sim.node.CurrentSourceWire": 1,
+        "org.patryk3211.powergrid.electricity.sim.special.CRSeriesWire": 500,
+        "org.patryk3211.powergrid.electricity.sim.special.TransmissionLine": 5943
+      },
+      "placement": {
+        "scope": "owned server thread; before restoration through final measured tick",
+        "mask": "fff000"
+      },
+      "loaded_native_resource": {
+        "path": "local/benchmarks/property-verified-detailed-01/.pg-native/wwpg-safety-1/1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c/libpowergridNative7.dll",
+        "sha256": "1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c"
+      },
+      "complete_sixteen_step_traces": true,
+      "profiled_ticks": 103,
+      "substep_evidence": {
+        "path": "local/benchmarks/property-verified-detailed-01/benchmark/substeps.csv",
+        "sha256": "987539e0d2858effc6c5b80ced31e38fd40080c48c050706b60c2a15fa890d2f"
+      },
+      "profiled_mean_ms_per_tick": {
+        "pg_micro_hooks": 13.395836893203885,
+        "pg_pre_hooks": 0.07749029126213593,
+        "pg_post_hooks": 0.4485970873786408,
+        "rhs": 2.9154922330097084,
+        "native_solve": 5.146957281553398,
+        "history_prepare": 0.46583203883495145,
+        "history_commit": 4.7182805825242715,
+        "native_readings": 4.463955339805826
+      }
+    }
+  ],
+  "focused_checks": [
+    {
+      "name": "property-lifecycle-java-01",
+      "evidence": {
+        "path": "local/checks/property-lifecycle-java-01/result.json",
+        "sha256": "022591d5313d01dce723ef1f47312f2b6070459f52eb39ff986a2b89ef52fc70"
+      },
+      "backend": "JAVA",
+      "namespaces": "wwpg_unload,wwpg_solver_safety",
+      "property_batch": true,
+      "passed": true,
+      "required_tests_passed": 11,
+      "observed_batch_execution": {
+        "enabled": true,
+        "property_contributions": 12740,
+        "property_scalar_fallbacks": 0,
+        "largest_property_batch": 2,
+        "scalar_verification": true
+      },
+      "artifacts_unchanged": true,
+      "artifacts": {
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2.jar",
+          "sha256": "8f59be1043aaaf47c33561f3327ef5f52b5ca01eac8aef7039bd1066cb849aa2"
+        },
+        "fixtures": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2-gametests.jar",
+          "sha256": "7a70d08aae6ec0ae5d757322d3881e22629e813075309fe3a4d0c8003a2a1904"
+        },
+        "cee": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\electroenergetics-1.21.1-1.1.4.jar",
+          "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+        }
+      }
+    },
+    {
+      "name": "property-lifecycle-native-01",
+      "evidence": {
+        "path": "local/checks/property-lifecycle-native-01/result.json",
+        "sha256": "6a5010abbe2e79ce9c042fab9350aab4f5c16d39934b0ef6def18d1f94242c7b"
+      },
+      "backend": "NATIVE",
+      "namespaces": "wwpg_unload,wwpg_solver_safety",
+      "property_batch": true,
+      "passed": true,
+      "required_tests_passed": 11,
+      "observed_batch_execution": {
+        "enabled": true,
+        "property_contributions": 12820,
+        "property_scalar_fallbacks": 0,
+        "largest_property_batch": 2,
+        "scalar_verification": true
+      },
+      "artifacts_unchanged": true,
+      "artifacts": {
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2.jar",
+          "sha256": "8f59be1043aaaf47c33561f3327ef5f52b5ca01eac8aef7039bd1066cb849aa2"
+        },
+        "fixtures": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2-gametests.jar",
+          "sha256": "7a70d08aae6ec0ae5d757322d3881e22629e813075309fe3a4d0c8003a2a1904"
+        },
+        "cee": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\electroenergetics-1.21.1-1.1.4.jar",
+          "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+        }
+      }
+    },
+    {
+      "name": "property-wire-java-off-01",
+      "evidence": {
+        "path": "local/checks/property-wire-java-off-01/result.json",
+        "sha256": "963eb07913e032ef3458400638bc6bc6b666049023d229daab2ba74df444b9f3"
+      },
+      "backend": "JAVA",
+      "namespaces": "wwpg_wire_power",
+      "property_batch": false,
+      "passed": true,
+      "required_tests_passed": 13,
+      "observed_batch_execution": {
+        "enabled": false,
+        "property_contributions": 0,
+        "property_scalar_fallbacks": 0,
+        "largest_property_batch": 0,
+        "scalar_verification": true
+      },
+      "artifacts_unchanged": true,
+      "artifacts": {
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2.jar",
+          "sha256": "8f59be1043aaaf47c33561f3327ef5f52b5ca01eac8aef7039bd1066cb849aa2"
+        },
+        "fixtures": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2-gametests.jar",
+          "sha256": "7a70d08aae6ec0ae5d757322d3881e22629e813075309fe3a4d0c8003a2a1904"
+        },
+        "cee": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\electroenergetics-1.21.1-1.1.4.jar",
+          "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+        }
+      }
+    },
+    {
+      "name": "property-wire-java-on-01",
+      "evidence": {
+        "path": "local/checks/property-wire-java-on-01/result.json",
+        "sha256": "a767f667b4998ce60acbd313ffcd2870c0e8069e9a2745aeebb174c641e7a8ee"
+      },
+      "backend": "JAVA",
+      "namespaces": "wwpg_wire_power",
+      "property_batch": true,
+      "passed": true,
+      "required_tests_passed": 13,
+      "observed_batch_execution": {
+        "enabled": true,
+        "property_contributions": 4832,
+        "property_scalar_fallbacks": 168,
+        "largest_property_batch": 2,
+        "scalar_verification": true
+      },
+      "artifacts_unchanged": true,
+      "artifacts": {
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2.jar",
+          "sha256": "8f59be1043aaaf47c33561f3327ef5f52b5ca01eac8aef7039bd1066cb849aa2"
+        },
+        "fixtures": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2-gametests.jar",
+          "sha256": "7a70d08aae6ec0ae5d757322d3881e22629e813075309fe3a4d0c8003a2a1904"
+        },
+        "cee": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\electroenergetics-1.21.1-1.1.4.jar",
+          "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+        }
+      }
+    },
+    {
+      "name": "property-wire-native-off-01",
+      "evidence": {
+        "path": "local/checks/property-wire-native-off-01/result.json",
+        "sha256": "bae31428a6fecad90a9185af34eb2d62f7faeed2e3dc8ba7fd9ec340cdf89e84"
+      },
+      "backend": "NATIVE",
+      "namespaces": "wwpg_wire_power",
+      "property_batch": false,
+      "passed": true,
+      "required_tests_passed": 13,
+      "observed_batch_execution": {
+        "enabled": false,
+        "property_contributions": 0,
+        "property_scalar_fallbacks": 0,
+        "largest_property_batch": 0,
+        "scalar_verification": true
+      },
+      "artifacts_unchanged": true,
+      "artifacts": {
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2.jar",
+          "sha256": "8f59be1043aaaf47c33561f3327ef5f52b5ca01eac8aef7039bd1066cb849aa2"
+        },
+        "fixtures": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2-gametests.jar",
+          "sha256": "7a70d08aae6ec0ae5d757322d3881e22629e813075309fe3a4d0c8003a2a1904"
+        },
+        "cee": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\electroenergetics-1.21.1-1.1.4.jar",
+          "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+        }
+      }
+    },
+    {
+      "name": "property-wire-native-on-01",
+      "evidence": {
+        "path": "local/checks/property-wire-native-on-01/result.json",
+        "sha256": "55c356e24e2516191402d769becb7a594af27794b5e443dce65cbc9c5aebabf0"
+      },
+      "backend": "NATIVE",
+      "namespaces": "wwpg_wire_power",
+      "property_batch": true,
+      "passed": false,
+      "required_tests_passed": 0,
+      "observed_batch_execution": null,
+      "artifacts_unchanged": true,
+      "artifacts": {
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02\\wwpg-0.2.7-experimental.plainwire.2.jar",
+          "sha256": "8f59be1043aaaf47c33561f3327ef5f52b5ca01eac8aef7039bd1066cb849aa2"
+        },
+        "fixtures": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02\\wwpg-0.2.7-experimental.plainwire.2-gametests.jar",
+          "sha256": "a9f3beadb5faf00572c5966f2256bc5d3728fd1cdd9acf2972b85f8dfa696b19"
+        },
+        "cee": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02\\electroenergetics-1.21.1-1.1.4.jar",
+          "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+        }
+      }
+    },
+    {
+      "name": "property-wire-native-on-02",
+      "evidence": {
+        "path": "local/checks/property-wire-native-on-02/result.json",
+        "sha256": "37497222657ae65feeb4c9a5373701a992bbcd6eb78c39df51c74dd6c1781be5"
+      },
+      "backend": "NATIVE",
+      "namespaces": "wwpg_wire_power",
+      "property_batch": true,
+      "passed": false,
+      "required_tests_passed": 0,
+      "observed_batch_execution": null,
+      "artifacts_unchanged": true,
+      "artifacts": {
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02b\\wwpg-0.2.7-experimental.plainwire.2.jar",
+          "sha256": "8f59be1043aaaf47c33561f3327ef5f52b5ca01eac8aef7039bd1066cb849aa2"
+        },
+        "fixtures": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02b\\wwpg-0.2.7-experimental.plainwire.2-gametests.jar",
+          "sha256": "8559e5c15c010c25d063b89280560d72d76742b4f9c8864a8c9fee7dc1bfd0de"
+        },
+        "cee": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02b\\electroenergetics-1.21.1-1.1.4.jar",
+          "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+        }
+      }
+    },
+    {
+      "name": "property-wire-native-on-03",
+      "evidence": {
+        "path": "local/checks/property-wire-native-on-03/result.json",
+        "sha256": "bf7fe87e2fd709eb8ba4308d3792a84ae273c3f3bdaaee43bb224ba192fd29e6"
+      },
+      "backend": "NATIVE",
+      "namespaces": "wwpg_wire_power",
+      "property_batch": true,
+      "passed": true,
+      "required_tests_passed": 13,
+      "observed_batch_execution": {
+        "enabled": true,
+        "property_contributions": 4736,
+        "property_scalar_fallbacks": 168,
+        "largest_property_batch": 2,
+        "scalar_verification": true
+      },
+      "artifacts_unchanged": true,
+      "artifacts": {
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2.jar",
+          "sha256": "8f59be1043aaaf47c33561f3327ef5f52b5ca01eac8aef7039bd1066cb849aa2"
+        },
+        "fixtures": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2-gametests.jar",
+          "sha256": "7a70d08aae6ec0ae5d757322d3881e22629e813075309fe3a4d0c8003a2a1904"
+        },
+        "cee": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\electroenergetics-1.21.1-1.1.4.jar",
+          "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+        }
+      }
+    }
+  ],
+  "passing_focused_test_count": 74,
+  "limitations": [
+    "Short focused copied-save controls; no capacity or release acceptance.",
+    "Matrix row and hook order differ across JVM launches and remain stable within each measured run.",
+    "Detailed timing and scalar verification runs are not clean performance measurements.",
+    "This extends only exact WWPG PropertyCurrentSourceWire power aggregation; RHS, gameplay and native solver code are unchanged."
+  ]
+}

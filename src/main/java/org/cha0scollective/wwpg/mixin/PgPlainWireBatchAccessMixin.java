@@ -21,7 +21,7 @@ public abstract class PgPlainWireBatchAccessMixin implements PlainWireBatch.Wire
     @Inject(method = "setNetwork", at = @At("RETURN"))
     private void wwpg$invalidateNewOwner(CallbackInfo ci) { PlainWireBatch.invalidate(network); }
 
-    @Override public boolean wwpg$accumulatePlainPower(double voltage) {
+    @Override public boolean wwpg$accumulateResistivePower(double voltage) {
         var wire = (AbstractElectricWire) (Object) this;
         double conductance = wire.conductance();
         if (!Double.isFinite(conductance) || conductance <= 0) {

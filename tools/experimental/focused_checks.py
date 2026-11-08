@@ -21,6 +21,7 @@ def main():
     parser.add_argument('--backend', choices=['NATIVE', 'JAVA'], required=True)
     parser.add_argument('--selection', choices=['wire', 'lifecycle'], default='wire')
     parser.add_argument('--name', required=True)
+    parser.add_argument('--property-batch', action='store_true')
     args = parser.parse_args()
     manifest = Path(args.inputs).resolve()
     inputs = json.loads(manifest.read_text())
@@ -36,12 +37,13 @@ def main():
                '-I', 'tools/experimental/plain-wire.gradle', '-PexperimentalCee=' + str(artifacts['cee']),
                '-PtestArtifact=' + str(artifacts['runtime']), '-PtestFixtureArtifact=' + str(artifacts['fixtures']),
                '-PtestDirectory=' + str(directory / 'server'), '-PtestBackend=' + args.backend,
-               '-PtestProfile=BASE', '-PtestNamespaces=' + namespaces]
+               '-PtestProfile=BASE', '-PtestNamespaces=' + namespaces,
+               '-PtestPropertyWireBatch=' + str(args.property_batch).lower()]
     env = dict(os.environ)
     env['JAVA_HOME'] = inputs['java_home']
     env['PATH'] = str(Path(inputs['java_home']) / 'bin') + os.pathsep + env['PATH']
     proof = dict(scope='Focused only; no full or graphical acceptance', namespaces=namespaces,
-                 backend=args.backend, command=command, artifacts=inputs['artifacts'])
+                 backend=args.backend, property_batch=args.property_batch, command=command, artifacts=inputs['artifacts'])
     (directory / 'invocation.json').write_text(json.dumps(proof, indent=2) + '\n')
     print(json.dumps(dict(starting=str(directory), namespaces=namespaces, backend=args.backend)), flush=True)
     with (directory / 'process.log').open('w', encoding='utf-8') as stream:
