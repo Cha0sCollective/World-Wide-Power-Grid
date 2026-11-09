@@ -1,0 +1,901 @@
+{
+  "schema": 1,
+  "full_suite": false,
+  "runs": [
+    {
+      "name": "goal-tps-single14-01",
+      "protocol": {
+        "name": "goal-tps-single14-01",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-tps-single14-01\\mods\\wwpg-0.2.7-experimental.wiretree.4.jar",
+          "sha256": "33fe56c713a63e3b70e045b7fc50667435b50923f569036e66e189ab8a063ac6",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-05b\\wwpg-0.2.7-experimental.wiretree.4.jar"
+        },
+        "scope": "Focused 120-second warmup and 120-second stable control; not full capacity acceptance",
+        "copied_reference": true,
+        "sixteen_substeps": true,
+        "full_suite": false,
+        "batch": true,
+        "verify_batch": false,
+        "property_batch": true,
+        "detailed": false,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "cpu_affinity_mask": "fff000",
+        "server_affinity_mask": "4000",
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-tps-single14-01\\mods\\wwpg-benchmark-0.1.0-affinity.jar",
+          "sha256": "56434c77e56c6361aad1b54733eac5573b97bd24d52ae42b0d330216da7a34cb"
+        },
+        "substep_jfr": false,
+        "started_utc": "2026-11-09T13:58:20Z",
+        "validation": {
+          "passed": true,
+          "full_suite": false,
+          "capacity_certified": false,
+          "stable_ticks": 2292,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "sixteen_substeps": true,
+          "topology_unchanged": true,
+          "normal_shutdown": true,
+          "batch_execution": {
+            "plans": 1,
+            "unsupported": 0,
+            "steps": 77023,
+            "contributions": 1525902653,
+            "voltage_reads": 1128386950,
+            "scalar_fallbacks": 0,
+            "largest_plain_batch": 10368,
+            "property_contributions": 727328189,
+            "property_scalar_fallbacks": 0,
+            "largest_property_batch": 9443
+          },
+          "bitwise_verification": false
+        },
+        "summary": {
+          "schema": 1,
+          "completed": true,
+          "passed": true,
+          "protocol_complete": false,
+          "capacity_certified": false,
+          "mode": "control",
+          "tier": 10000,
+          "backend": "NATIVE",
+          "variant": "MIXED",
+          "audit": {
+            "electrical_nodes": 14650,
+            "conductive_edges": 20362,
+            "coupled_edges": 275,
+            "edges": 20637,
+            "connected_systems_ignoring_reference_ground": 1,
+            "optimized_matrix_nodes": 14925,
+            "solver_networks": 1,
+            "actual_backends": [
+              "NATIVE"
+            ]
+          },
+          "samples": 2292,
+          "profiled_ticks": 0,
+          "measured_seconds": 119.8177178,
+          "tps": 19.120711377795914,
+          "mspt": {
+            "mean": 52.117662390924956,
+            "p50": 50.3282,
+            "p95": 61.127,
+            "p99": 65.1232,
+            "maximum": 238.1879
+          },
+          "phase_mean_ms": {
+            "cee_prepare_ns": null,
+            "synchronize_ns": null,
+            "result_bridge_ns": null,
+            "gameplay_commit_ns": null,
+            "pg_prepare_ns": null,
+            "pg_solve_ns": null,
+            "history_prepare_ns": null,
+            "history_commit_ns": null,
+            "cee_device_prepare_ns": null,
+            "cee_device_commit_ns": null,
+            "electrical_schedule_ns": null,
+            "native_measurement_prepare_ns": null,
+            "native_measurement_sample_ns": null,
+            "extension_prepare_ns": null,
+            "extension_before_ns": null,
+            "extension_after_ns": null,
+            "restoration_schedule_ns": null,
+            "restoration_context_ns": null,
+            "native_measurement_finish_ns": null,
+            "extension_bind_ns": null,
+            "extension_finish_ns": null,
+            "extension_commit_ns": null,
+            "provider_prepare_ns": null,
+            "provider_commit_ns": null,
+            "pg_rhs_ns": null,
+            "native_solve_ns": null,
+            "native_iteration_hooks_ns": null,
+            "native_residual_flush_ns": null
+          },
+          "compatibility_share_upper_bound": null,
+          "heap_peak_bytes": 1744550072,
+          "gc_ms": 76,
+          "native_tick_target_met": false,
+          "reason": "Stable control completed",
+          "practical_20tps_target_met": false,
+          "detailed_timers_enabled": false,
+          "process": {
+            "rss_peak_bytes": 2498072576,
+            "cpu_mean_cores": 1.031526999348664
+          }
+        },
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T14:04:16Z"
+      },
+      "summary": {
+        "schema": 1,
+        "completed": true,
+        "passed": true,
+        "protocol_complete": false,
+        "capacity_certified": false,
+        "mode": "control",
+        "tier": 10000,
+        "backend": "NATIVE",
+        "variant": "MIXED",
+        "audit": {
+          "electrical_nodes": 14650,
+          "conductive_edges": 20362,
+          "coupled_edges": 275,
+          "edges": 20637,
+          "connected_systems_ignoring_reference_ground": 1,
+          "optimized_matrix_nodes": 14925,
+          "solver_networks": 1,
+          "actual_backends": [
+            "NATIVE"
+          ]
+        },
+        "samples": 2292,
+        "profiled_ticks": 0,
+        "measured_seconds": 119.8177178,
+        "tps": 19.120711377795914,
+        "mspt": {
+          "mean": 52.117662390924956,
+          "p50": 50.3282,
+          "p95": 61.127,
+          "p99": 65.1232,
+          "maximum": 238.1879
+        },
+        "phase_mean_ms": {
+          "cee_prepare_ns": null,
+          "synchronize_ns": null,
+          "result_bridge_ns": null,
+          "gameplay_commit_ns": null,
+          "pg_prepare_ns": null,
+          "pg_solve_ns": null,
+          "history_prepare_ns": null,
+          "history_commit_ns": null,
+          "cee_device_prepare_ns": null,
+          "cee_device_commit_ns": null,
+          "electrical_schedule_ns": null,
+          "native_measurement_prepare_ns": null,
+          "native_measurement_sample_ns": null,
+          "extension_prepare_ns": null,
+          "extension_before_ns": null,
+          "extension_after_ns": null,
+          "restoration_schedule_ns": null,
+          "restoration_context_ns": null,
+          "native_measurement_finish_ns": null,
+          "extension_bind_ns": null,
+          "extension_finish_ns": null,
+          "extension_commit_ns": null,
+          "provider_prepare_ns": null,
+          "provider_commit_ns": null,
+          "pg_rhs_ns": null,
+          "native_solve_ns": null,
+          "native_iteration_hooks_ns": null,
+          "native_residual_flush_ns": null
+        },
+        "compatibility_share_upper_bound": null,
+        "heap_peak_bytes": 1744550072,
+        "gc_ms": 76,
+        "native_tick_target_met": false,
+        "reason": "Stable control completed",
+        "practical_20tps_target_met": false,
+        "detailed_timers_enabled": false,
+        "process": {
+          "rss_peak_bytes": 2498072576,
+          "cpu_mean_cores": 1.031526999348664
+        }
+      },
+      "loading": [
+        {
+          "phase": "SETTLE",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 512,
+          "graph_ready_tick": 1261,
+          "finish_tick": 1381,
+          "chunk_request_seconds": 0.8499248,
+          "chunk_loading_seconds": 41.7496421,
+          "graph_recovery_seconds": 48.2210036,
+          "electrical_settling_seconds": 6.6622757,
+          "total_restoration_seconds": 97.4828462,
+          "restoration_and_settling_seconds": 96.6329214,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 7712,
+          "maximum_pending_roots": 8180,
+          "queue_drained_tick": 1261,
+          "queue_drain_seconds": 48.2210036
+        }
+      ],
+      "thirty_second_blocks": [
+        {
+          "block": 0,
+          "ticks": 575,
+          "mean_tick_ms": 52.06753617391305
+        },
+        {
+          "block": 1,
+          "ticks": 571,
+          "mean_tick_ms": 52.209508581436076
+        },
+        {
+          "block": 2,
+          "ticks": 578,
+          "mean_tick_ms": 51.78449809688581
+        },
+        {
+          "block": 3,
+          "ticks": 568,
+          "mean_tick_ms": 52.41510492957746
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 66,
+        "in_window_seconds": 330.9080412387848,
+        "monitored_processes": 194,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.3067317422085767,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "13688:134387027373880825",
+            "peak_cores": 0.2651741102410752,
+            "mean_cores": 0.07399147783879921
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28176:134387027293764011",
+            "peak_cores": 0.18070267515535982,
+            "mean_cores": 0.01869854832429131
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "5948:134387027096006899",
+            "peak_cores": 0.13091107288825665,
+            "mean_cores": 0.07989379738560834
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28732:134387027298932907",
+            "peak_cores": 0.09042955781421998,
+            "mean_cores": 0.04183564094778309
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "30196:134387027364652111",
+            "peak_cores": 0.09035133757767991,
+            "mean_cores": 0.0025025834878470697
+          },
+          {
+            "name": "codex.exe",
+            "identity": "30104:134387027358105490",
+            "peak_cores": 0.06551360370661859,
+            "mean_cores": 0.005335696870315451
+          },
+          {
+            "name": "Discord.exe",
+            "identity": "28708:134387040917398085",
+            "peak_cores": 0.05917943700108294,
+            "mean_cores": 0.003399736058962057
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "6028:134387027037888757",
+            "peak_cores": 0.053013086539874396,
+            "mean_cores": 0.02351484107448756
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/goal-tps-single14-01/experiment.json",
+          "sha256": "2ef8da46e443facd7cea38a67350103636683d19df07b8300b2ad6b4e50dea30"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-single14-01/launch.json",
+          "sha256": "c7019cc91f3cc9d059d798bb00a136ad28050a5dbb3d6e8236c35db6556c8026"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-single14-01/invocation.json",
+          "sha256": "dac23977aea989924e024d97cef9bda4cb2a2a21e24ed5cfd1e0337e694432d6"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-single14-01/process.log",
+          "sha256": "d2c206f9fe7535c3faafec8b8d3740c1ff36e3a142a1a7defa584eab930e58e8"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-single14-01/runner-exit.json",
+          "sha256": "d9136a876e33f2d784277ab5c1c299eac65d0b929173eb3be99b4ae3331b55fe"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-single14-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-single14-01/host-metrics.jsonl",
+          "sha256": "f97631798b34a5723fed659d35b1da09fd20cf32edfd6c27b54c0ef4bd089541"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-single14-01/process-metrics.jsonl",
+          "sha256": "c354e18809da62604f0a1c3aa2a44a761a6886836f9f2c57faea840cebc20d81"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-single14-01/benchmark/result.json",
+          "sha256": "3a61819917f1844a920029ea64693edf39a3670d1667687022cb74c411cc9d52"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-single14-01/benchmark/summary.json",
+          "sha256": "aa8fafa2f8ab841c3cb9d7c188d89434be422e4e8b403227cfe312d5c33de758"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-single14-01/benchmark/loading-results.json",
+          "sha256": "051228287cace9ebbb2aaffbfd763070bd00b215e746020b3900cf1813968aaa"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-single14-01/benchmark/ticks.csv",
+          "sha256": "dbb976d56d8b0a06713675a2a9eb2f5fef6a3962d6e42c16576b8f238a22b361"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-single14-01/benchmark/placement-ticks.csv",
+          "sha256": "61617c449a64f28344e964fa686022b5fac7c771b50d3a5d7517e7ad7001fb60"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-single14-01/benchmark/cpu-topology.json",
+          "sha256": "2a2e41277ec437834eda4eb98dae85e0079d0960e3f5d7cd501a9c7d44995a91"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-single14-01/benchmark/placement-fixed.json",
+          "sha256": "a7714a3e785843c5a0f8c386dab9daad53acfca7300302382dcc7fbe717e1003"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-single14-01/benchmark/placement-restored.json",
+          "sha256": "95ba5fee302285e31a8a83c325d65d7dac47612da59375d6bfa386fca6eafdd9"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-single14-01/benchmark/graph-start.json",
+          "sha256": "1b8900e3d867f48045a6c0b6a344fab6c499c4e2e62573f75dc01a7cf0f5e3e7"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-single14-01/benchmark/graph-end.json",
+          "sha256": "1b8900e3d867f48045a6c0b6a344fab6c499c4e2e62573f75dc01a7cf0f5e3e7"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-single14-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-single14-01/process-affinity.json",
+          "sha256": "d3ce5638d93ed46ca4ac8661993f6f9c4ed4d4b02559f1829c1cfdb43d5d3ebb"
+        }
+      ],
+      "process_affinity": {
+        "pid": 13376,
+        "original_mask": "ffffff",
+        "requested_mask": "fff000",
+        "readback_mask": "fff000",
+        "logical_cpus": [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "wall_unix": 1794232706.698294,
+        "scope": "Owned child process immediately after launch; other processes unchanged"
+      },
+      "affinity_readbacks": 348,
+      "stable_cpu_busy_percent": [
+        5.164192732888048,
+        6.570672924922904,
+        24.42718249782406,
+        23.21819958878871,
+        21.777454619289376,
+        26.673022122787962,
+        9.427551231592236,
+        9.779848692804206,
+        2.655258984600964,
+        2.7627801341400744,
+        6.176421698678283,
+        5.472389527019639,
+        1.6659078786493282,
+        2.073108166463588,
+        99.91879000673346,
+        0.7048193739091564,
+        2.8720254289108857,
+        2.3163226259810386,
+        2.3034436158034177,
+        1.8420425804941833,
+        1.5184011574648146,
+        1.7883786548036382,
+        1.8162547541833904,
+        1.5435746358776998
+      ],
+      "stable_cpu_observation_seconds": 115.32065272331238,
+      "cpu_observation_note": "Total per-core load including the benchmark; affinity restricts this process but does not reserve CPUs against other processes."
+    },
+    {
+      "name": "goal-tps-group-02",
+      "protocol": {
+        "name": "goal-tps-group-02",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-tps-group-02\\mods\\wwpg-0.2.7-experimental.wiretree.4.jar",
+          "sha256": "33fe56c713a63e3b70e045b7fc50667435b50923f569036e66e189ab8a063ac6",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-05b\\wwpg-0.2.7-experimental.wiretree.4.jar"
+        },
+        "scope": "Focused 120-second warmup and 120-second stable control; not full capacity acceptance",
+        "copied_reference": true,
+        "sixteen_substeps": true,
+        "full_suite": false,
+        "batch": true,
+        "verify_batch": false,
+        "property_batch": true,
+        "detailed": false,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "cpu_affinity_mask": "fff000",
+        "server_affinity_mask": null,
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-tps-group-02\\mods\\wwpg-benchmark-0.1.0-affinity.jar",
+          "sha256": "56434c77e56c6361aad1b54733eac5573b97bd24d52ae42b0d330216da7a34cb"
+        },
+        "substep_jfr": false,
+        "started_utc": "2026-11-09T14:04:16Z",
+        "validation": {
+          "passed": true,
+          "full_suite": false,
+          "capacity_certified": false,
+          "stable_ticks": 2372,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "sixteen_substeps": true,
+          "topology_unchanged": true,
+          "normal_shutdown": true,
+          "batch_execution": {
+            "plans": 1,
+            "unsupported": 0,
+            "steps": 78623,
+            "contributions": 1557600253,
+            "voltage_reads": 1151826950,
+            "scalar_fallbacks": 0,
+            "largest_plain_batch": 10368,
+            "property_contributions": 742436989,
+            "property_scalar_fallbacks": 0,
+            "largest_property_batch": 9443
+          },
+          "bitwise_verification": false
+        },
+        "summary": {
+          "schema": 1,
+          "completed": true,
+          "passed": true,
+          "protocol_complete": false,
+          "capacity_certified": false,
+          "mode": "control",
+          "tier": 10000,
+          "backend": "NATIVE",
+          "variant": "MIXED",
+          "audit": {
+            "electrical_nodes": 14650,
+            "conductive_edges": 20362,
+            "coupled_edges": 275,
+            "edges": 20637,
+            "connected_systems_ignoring_reference_ground": 1,
+            "optimized_matrix_nodes": 14925,
+            "solver_networks": 1,
+            "actual_backends": [
+              "NATIVE"
+            ]
+          },
+          "samples": 2372,
+          "profiled_ticks": 0,
+          "measured_seconds": 119.743046401,
+          "tps": 19.800732245110137,
+          "mspt": {
+            "mean": 50.37268713279933,
+            "p50": 47.5655,
+            "p95": 58.5825,
+            "p99": 64.0551,
+            "maximum": 236.4858
+          },
+          "phase_mean_ms": {
+            "cee_prepare_ns": null,
+            "synchronize_ns": null,
+            "result_bridge_ns": null,
+            "gameplay_commit_ns": null,
+            "pg_prepare_ns": null,
+            "pg_solve_ns": null,
+            "history_prepare_ns": null,
+            "history_commit_ns": null,
+            "cee_device_prepare_ns": null,
+            "cee_device_commit_ns": null,
+            "electrical_schedule_ns": null,
+            "native_measurement_prepare_ns": null,
+            "native_measurement_sample_ns": null,
+            "extension_prepare_ns": null,
+            "extension_before_ns": null,
+            "extension_after_ns": null,
+            "restoration_schedule_ns": null,
+            "restoration_context_ns": null,
+            "native_measurement_finish_ns": null,
+            "extension_bind_ns": null,
+            "extension_finish_ns": null,
+            "extension_commit_ns": null,
+            "provider_prepare_ns": null,
+            "provider_commit_ns": null,
+            "pg_rhs_ns": null,
+            "native_solve_ns": null,
+            "native_iteration_hooks_ns": null,
+            "native_residual_flush_ns": null
+          },
+          "compatibility_share_upper_bound": null,
+          "heap_peak_bytes": 1388395904,
+          "gc_ms": 118,
+          "native_tick_target_met": false,
+          "reason": "Stable control completed",
+          "practical_20tps_target_met": false,
+          "detailed_timers_enabled": false,
+          "process": {
+            "rss_peak_bytes": 2010001408,
+            "cpu_mean_cores": 1.0837006708733135
+          }
+        },
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T14:10:05Z"
+      },
+      "summary": {
+        "schema": 1,
+        "completed": true,
+        "passed": true,
+        "protocol_complete": false,
+        "capacity_certified": false,
+        "mode": "control",
+        "tier": 10000,
+        "backend": "NATIVE",
+        "variant": "MIXED",
+        "audit": {
+          "electrical_nodes": 14650,
+          "conductive_edges": 20362,
+          "coupled_edges": 275,
+          "edges": 20637,
+          "connected_systems_ignoring_reference_ground": 1,
+          "optimized_matrix_nodes": 14925,
+          "solver_networks": 1,
+          "actual_backends": [
+            "NATIVE"
+          ]
+        },
+        "samples": 2372,
+        "profiled_ticks": 0,
+        "measured_seconds": 119.743046401,
+        "tps": 19.800732245110137,
+        "mspt": {
+          "mean": 50.37268713279933,
+          "p50": 47.5655,
+          "p95": 58.5825,
+          "p99": 64.0551,
+          "maximum": 236.4858
+        },
+        "phase_mean_ms": {
+          "cee_prepare_ns": null,
+          "synchronize_ns": null,
+          "result_bridge_ns": null,
+          "gameplay_commit_ns": null,
+          "pg_prepare_ns": null,
+          "pg_solve_ns": null,
+          "history_prepare_ns": null,
+          "history_commit_ns": null,
+          "cee_device_prepare_ns": null,
+          "cee_device_commit_ns": null,
+          "electrical_schedule_ns": null,
+          "native_measurement_prepare_ns": null,
+          "native_measurement_sample_ns": null,
+          "extension_prepare_ns": null,
+          "extension_before_ns": null,
+          "extension_after_ns": null,
+          "restoration_schedule_ns": null,
+          "restoration_context_ns": null,
+          "native_measurement_finish_ns": null,
+          "extension_bind_ns": null,
+          "extension_finish_ns": null,
+          "extension_commit_ns": null,
+          "provider_prepare_ns": null,
+          "provider_commit_ns": null,
+          "pg_rhs_ns": null,
+          "native_solve_ns": null,
+          "native_iteration_hooks_ns": null,
+          "native_residual_flush_ns": null
+        },
+        "compatibility_share_upper_bound": null,
+        "heap_peak_bytes": 1388395904,
+        "gc_ms": 118,
+        "native_tick_target_met": false,
+        "reason": "Stable control completed",
+        "practical_20tps_target_met": false,
+        "detailed_timers_enabled": false,
+        "process": {
+          "rss_peak_bytes": 2010001408,
+          "cpu_mean_cores": 1.0837006708733135
+        }
+      },
+      "loading": [
+        {
+          "phase": "SETTLE",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 511,
+          "graph_ready_tick": 1212,
+          "finish_tick": 1332,
+          "chunk_request_seconds": 0.8272267,
+          "chunk_loading_seconds": 40.9840817,
+          "graph_recovery_seconds": 42.4051356,
+          "electrical_settling_seconds": 6.4520667,
+          "total_restoration_seconds": 90.6685107,
+          "restoration_and_settling_seconds": 89.841284,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 7700,
+          "maximum_pending_roots": 8168,
+          "queue_drained_tick": 1212,
+          "queue_drain_seconds": 42.4051356
+        }
+      ],
+      "thirty_second_blocks": [
+        {
+          "block": 0,
+          "ticks": 593,
+          "mean_tick_ms": 50.53165579595278
+        },
+        {
+          "block": 1,
+          "ticks": 594,
+          "mean_tick_ms": 50.345817350168346
+        },
+        {
+          "block": 2,
+          "ticks": 597,
+          "mean_tick_ms": 50.08936029983249
+        },
+        {
+          "block": 3,
+          "ticks": 588,
+          "mean_tick_ms": 50.52717412755102
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 65,
+        "in_window_seconds": 325.91990089416504,
+        "monitored_processes": 195,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.29162648472596425,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "13688:134387027373880825",
+            "peak_cores": 0.2614672232197461,
+            "mean_cores": 0.05868006202606941
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "5948:134387027096006899",
+            "peak_cores": 0.11849971645162068,
+            "mean_cores": 0.08308214664311951
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28176:134387027293764011",
+            "peak_cores": 0.08728105571280083,
+            "mean_cores": 0.01208118924066135
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28732:134387027298932907",
+            "peak_cores": 0.08105454014757428,
+            "mean_cores": 0.04261975093233309
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "6028:134387027037888757",
+            "peak_cores": 0.06243284415729045,
+            "mean_cores": 0.02569649774997811
+          },
+          {
+            "name": "Discord.exe",
+            "identity": "28708:134387040917398085",
+            "peak_cores": 0.04668608975930762,
+            "mean_cores": 0.004602357805966228
+          },
+          {
+            "name": "codex.exe",
+            "identity": "30104:134387027358105490",
+            "peak_cores": 0.04361736249644823,
+            "mean_cores": 0.005705006030312304
+          },
+          {
+            "name": "PhoneExperienceHost.exe",
+            "identity": "26424:134387027153458138",
+            "peak_cores": 0.03431720661624563,
+            "mean_cores": 0.0006711771800367416
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/goal-tps-group-02/experiment.json",
+          "sha256": "641a23b897c4cf6bdd2b9473e4f4bb2813c74b7e76ab4fbf30ec8b1ab28d9e11"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-group-02/launch.json",
+          "sha256": "0a6479dcc55ba931c9541786a3d2bceb09c058e0a1b4955a16df9453a789e491"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-group-02/invocation.json",
+          "sha256": "b5dcd5828d8fff99bd44e5daa2330310c7c620a8dc37307f1acd68fb912c89cb"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-group-02/process.log",
+          "sha256": "53be3c34e13343306e14a5ba009e1e1cb81204696fed646efe4d1058a572163d"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-group-02/runner-exit.json",
+          "sha256": "f45d56a227bca82b291af04630f8bf850c60444e6ca6486ac83d0bbacf9214a1"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-group-02/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-group-02/host-metrics.jsonl",
+          "sha256": "93ec3a1f0cca00e3245eadfe24d75a933b922e2672fa0d52a7e8f9282a14cd36"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-group-02/process-metrics.jsonl",
+          "sha256": "98cf94cbef1e489380024f9f1c3cf588f07cede975d87f76e4a58ab387fc2154"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-group-02/benchmark/result.json",
+          "sha256": "10baea333158c79e3a13918212a8c3842ab16602879087d1b666bacb6e08f192"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-group-02/benchmark/summary.json",
+          "sha256": "54af19c0284cd2899349eca0203f83fcd5e719a8cadd85186b06b31b938d778a"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-group-02/benchmark/loading-results.json",
+          "sha256": "a2be1bed3e03a4b9eb9bdcb84a6a042becd95db5aea551c8217a7337f3b9626f"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-group-02/benchmark/ticks.csv",
+          "sha256": "68d07472188a50b5a73d75269990bd9bdb56a01b8514a2bea40772fdac1ad45f"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-group-02/benchmark/placement-ticks.csv",
+          "sha256": "d890fb71e3380c88df31d614b244d3f84bf7e4646c5e8a9094989a7be8ab9bd2"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-group-02/benchmark/cpu-topology.json",
+          "sha256": "906e412d2a97bd56afcd4e54941df5f2508fbf4a75ac36d67fa4207c2b529d90"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-group-02/benchmark/placement-fixed.json",
+          "sha256": "f39e516534daabb39e6a5305b5c802dee926ac68a80c1f4de97c30d3406bcc22"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-group-02/benchmark/placement-restored.json",
+          "sha256": "74b9b14dfbe5899968179ec8c50c357603f021a36a512c18899f72140f4c66f7"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-group-02/benchmark/graph-start.json",
+          "sha256": "771e4a0d494c3190e82a2cc253c419e6a527b1d0c921d5f83cf9962b6b81d73b"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-group-02/benchmark/graph-end.json",
+          "sha256": "771e4a0d494c3190e82a2cc253c419e6a527b1d0c921d5f83cf9962b6b81d73b"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-group-02/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/goal-tps-group-02/process-affinity.json",
+          "sha256": "e55abc884d5c946246f196ca5aaaa6798957bcc6c1237498ef0b5131208acf46"
+        }
+      ],
+      "process_affinity": {
+        "pid": 11848,
+        "original_mask": "ffffff",
+        "requested_mask": "fff000",
+        "readback_mask": "fff000",
+        "logical_cpus": [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "wall_unix": 1794233062.850085,
+        "scope": "Owned child process immediately after launch; other processes unchanged"
+      },
+      "affinity_readbacks": 342,
+      "stable_cpu_busy_percent": [
+        4.633969469430534,
+        5.975798388707035,
+        22.138797595153182,
+        21.0535013648462,
+        22.235872870164652,
+        22.81805093549146,
+        8.901978705939195,
+        8.73977233862228,
+        2.343744603656126,
+        2.627524292817132,
+        5.392045451547314,
+        5.310763426953758,
+        11.068037090631016,
+        9.575030865777935,
+        6.842200055705023,
+        9.139064249224965,
+        7.053037435262612,
+        11.162045903899584,
+        8.799350236925294,
+        7.552229487359016,
+        1.5575802950629392,
+        1.6795686842761566,
+        12.306331580020004,
+        37.01133585407281
+      ],
+      "stable_cpu_observation_seconds": 115.32493877410889,
+      "cpu_observation_note": "Total per-core load including the benchmark; affinity restricts this process but does not reserve CPUs against other processes."
+    }
+  ],
+  "note": "Each run records its runtime, helper, CPU placement and host evidence. These are focused headless observations, not full acceptance or rendered-world evidence."
+}

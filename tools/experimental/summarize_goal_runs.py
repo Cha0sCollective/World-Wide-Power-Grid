@@ -44,7 +44,8 @@ def capture(name):
         assert proof['requested_mask']==proof['readback_mask']==mask
         samples=[json.loads(line) for line in (folder/'process-metrics.jsonl').read_text().splitlines()]
         assert samples and all(s['cpu_affinity_mask']==mask for s in samples)
-        numeric=int(mask,16)
+        numeric=int(protocol.get('server_affinity_mask') or mask,16)
+        assert read(folder/'benchmark/placement-fixed.json')['mask']==f'{numeric:x}'
         assert all(numeric & 1<<int(r[k]) for r in placed for k in ('entry_cpu','exit_cpu'))
         result['process_affinity']=proof
         result['affinity_readbacks']=len(samples)
@@ -72,7 +73,7 @@ def main():
     args=parser.parse_args()
     runs=[capture(n) for n in args.attempts]
     data=dict(schema=1,full_suite=False,runs=runs,
-              note='Whole-process placement uses a different explicit helper overlay. These observations are not a same-protocol runtime optimization A/B or rendered-world evidence.')
+              note='Each run records its runtime, helper, CPU placement and host evidence. These are focused headless observations, not full acceptance or rendered-world evidence.')
     with (ROOT/args.output).open('x',encoding='utf-8',newline='\n') as stream:
         stream.write(json.dumps(data,indent=2)+'\n')
     print(json.dumps([dict(name=r['name'],tps=r['summary']['tps'],mspt=r['summary']['mspt'],loading_seconds=r['loading'][0]['total_restoration_seconds']) for r in runs]))

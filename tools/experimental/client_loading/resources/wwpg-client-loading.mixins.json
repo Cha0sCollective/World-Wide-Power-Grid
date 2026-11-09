@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "org.cha0scollective.wwpg.clientbenchmark.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": ["RendererAccess", "OcclusionAccess"],
+  "injectors": {"defaultRequire": 1}
+}

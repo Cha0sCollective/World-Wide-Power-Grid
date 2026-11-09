@@ -3,7 +3,8 @@
 Active objective, November 9, 2026: sustain 20 TPS on the 14,650-node benchmark
 and reach a restored, rendered benchmark scene in under one minute, preserving
 all mod functionality. The user confirmed that the loading timer starts when
-selecting the world, not when launching Minecraft.
+selecting the world, not when launching Minecraft. The confirmed client view
+is windowed 1920×1080 at a 12-chunk render distance.
 
 Work stays on `dev/experimental-plain-wire-batching` in the isolated `local/x27w`
 worktree. Original saves, release artifacts and normal development remain
@@ -28,9 +29,12 @@ no full headless or graphical acceptance suite is implied by this investigation.
   fresh diagnostic profile completed in 59.48 seconds. Neither is evidence of
   a consistently sub-minute load. Ordering/JIT/host and graph-work variation
   remain to be separated; a cause has not yet been established.
-- Current measurements are headless and exclude rendering. An actual client
-  measurement from world selection through restored visible-scene readiness
-  is still required. Server health alone cannot satisfy that requirement.
+- The first [focused client observation](CLIENT_LOADING.md) is complete:
+  **121.474 seconds** from world opening to restored visible-scene readiness
+  at 1920×1080 / 12 chunks. The first frame appeared at 21.699 seconds and full
+  electrical readiness at 118.602 seconds. All circuit, rendering-readiness
+  and normal-save checks passed, but the load target was missed. It does not
+  establish sustained client TPS or complete graphical acceptance.
 - The previous bounded prototype still holds all electrical circuits in an
   affected dimension while its wire queue is pending. Preserving behavior
   during continuous streaming and narrowing that pause remain open concerns.
@@ -54,11 +58,12 @@ inputs. Full-yard graph/storage/substep checks passed in both steady samples.
 
 ## Next implementation targets
 
-1. Inspect server-thread migrations within the selected group. The pinned run
-   recorded different tick-entry/exit CPUs in 339 of 2,396 ticks. This is an
-   association, not proof that migration caused their cost. A controlled
-   single-core server-thread comparison within the same JVM group is now
-   possible, but has not been implemented or run.
+1. The [server-thread subset comparison](CPU_PLACEMENT.md#server-thread-subset-comparison)
+   is complete. CPU 14 produced 19.121 TPS / 61.127 ms p95, versus 19.801 TPS /
+   58.583 ms p95 for the matching group control. Both used the same gameplay
+   jar, helper and whole-process group. The narrower mask is not adopted;
+   reducing observed migrations did not improve this sample. Their loads
+   took 97.48 and 90.67 seconds, so the prior 54-second load is not consistent.
 2. Explain the repeated traversal of incomplete wire regions, including the
    separate node-holder initialization path, before choosing another batching
    algorithm. Retaining already-completed regions did not address the yard's
@@ -67,11 +72,16 @@ inputs. Full-yard graph/storage/substep checks passed in both steady samples.
    Inspect native geometry dependencies before any reuse; retain dynamic,
    custom, moving, unloaded and replaced-owner behavior. Do not reduce the
    16 electrical substeps, accuracy, storage, heating, or device callbacks.
-4. Establish the actual client loading/rendering measurement and verify both
-   targets on the resulting runtime. The goal remains active until that and
-   functionality preservation have supporting evidence.
+4. Use the established client loading/rendering measurement after a runtime
+   improvement, then verify both targets on that runtime. The goal remains
+   active until consistency and functionality preservation have supporting
+   evidence. Current client restoration still performs 46.14 million endpoint
+   visits and spends 58.88 seconds draining work after chunk readiness.
 
-The headless goal runs use the unchanged queue-aware helper from
-`local/frozen/budget-helper-01`. All raw logs, artifact manifests, topology and
-storage assertions are under `local/benchmarks/<attempt>`. Passing focused
-checks are evidence for their named scope, not proof of all mod functionality.
+The headless goal runs retain the queue-gate logic from
+`local/frozen/budget-helper-01`, with explicitly recorded affinity overlays
+where applicable. The client observer additionally adapts the helper's world
+path and publishes completion; its electrical checks remain unchanged. All raw
+logs, artifact manifests, topology and storage assertions are under
+`local/benchmarks/<attempt>`. Passing focused checks are evidence for their
+named scope, not proof of all mod functionality.

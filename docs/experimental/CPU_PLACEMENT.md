@@ -77,6 +77,40 @@ preflight branch and runner-source snapshot are scheduled for their first
 end-to-end exercise in the next benchmark; neither was present at the first
 whole-process run's launch.
 
+## Server-thread subset comparison
+
+The follow-up helper `affinity-helper-02` accepts an explicit server-thread
+subset of the chosen whole-process group. Its only changed parent classes are
+`CpuPlacement` and `FixedPlacement`; the queue gate and all electrical checks
+remain unchanged. The runner rejects zero masks, masks outside the selected
+process group, and helpers without explicit subset support. The process keeps
+CPUs 12–23 available to other JVM work in both modes.
+
+The two fresh copied-save runs used the same gameplay jar and helper SHA-256
+`56434c77e56c6361aad1b54733eac5573b97bd24d52ae42b0d330216da7a34cb`, with
+120 seconds of warmup followed by 120 seconds of measurement. They exercised
+the automatic quiet-group preflight and frozen runner-source capture.
+
+| Attempt | Server thread | TPS | Mean tick | p95 tick | Maximum tick | Restoration |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| `goal-tps-single14-01` | CPU 14 (`4000`) | 19.121 | 52.118 ms | 61.127 ms | 238.188 ms | 97.483 s |
+| `goal-tps-group-02` | CPUs 12–23 (`fff000`) | 19.801 | 50.373 ms | 58.583 ms | 236.486 ms | 90.669 s |
+
+Pinning this server thread to CPU 14 increased mean tick cost by 3.5% and did
+not reduce the longest tick. It is not adopted as the default. This is one
+sample per mode in that order, not proof that every individual CPU would lose.
+The earlier association between migration and slower ticks did not establish
+causality. The matching group run also did not reproduce the preceding
+54-second restoration: loading variation is still unresolved.
+
+Both runs preserved the full 14,650-node graph, 1,050 pre-solve storage values,
+all 16 substeps, unchanged stable topology and normal save/shutdown. Every
+observed process mask and tick-entry/exit CPU matched its requested placement.
+The competing game was absent; other monitored processes averaged 0.31 and
+0.29 CPU cores across the overlapping run samples. Neither mode meets the
+practical TPS/p95 gate. [Results and evidence hashes](single-core-results-20261109.json)
+retain the complete protocols. No gameplay code changed for this comparison.
+
 ## Reproduction
 
 ```text
@@ -88,6 +122,10 @@ Choose new names and a quiet group. The runner requires the explicitly
 affinity-aware helper when a process mask is supplied. The loading-only runner
 accepts the same placement options. Neither command runs full headless or
 graphical acceptance.
+
+To reproduce the subset experiment, select `affinity-helper-02/inputs.json`
+and add `--server-cpu-mask 4000`; omit that option for the matching group
+control. Choose a fresh attempt name for every run.
 
 Keep whole-process comparisons separate from the earlier server-thread-only
 protocol. A change in JVM worker placement/available processors and helper
