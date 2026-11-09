@@ -129,11 +129,12 @@ submit `CompletableFuture` tasks, and the preceding late JFR has no parked
 stack containing `ServerChunkCache`. The lambda class name alone should not be
 described as evidence of blocking chunk reads.
 
-A bounded extra task-processing window during actual loading is the next
-scheduling prototype. It must preserve FIFO dispatch through the existing
-server queues, server-thread ownership, the 16 electrical substeps, and ordinary
-behavior once loading completes. Its wall-time and tick-gap effects require a
-same-jar controlled measurement. [Task timing evidence](task-queue-results-20261109.json).
+The subsequent [bounded extra task-processing window](CHUNK_TASK_WINDOW.md)
+preserves dispatch through the existing server queues, server-thread ownership
+and the 16 electrical substeps. Its same-jar clean comparison reached complete
+loading in 40.41/39.30 seconds enabled versus 108.91 seconds disabled. See that
+snapshot for measured tick-gap limits and focused-check scope.
+[Task timing evidence](task-queue-results-20261109.json).
 
 ```text
 python -B tools/experimental/freeze_client_loading.py --name delivery-helper-new --inputs local/frozen/prototype-07a/inputs.json --base-helper-inputs local/frozen/affinity-helper-02/inputs.json --inspect-delivery
@@ -142,4 +143,5 @@ python -B tools/experimental/client_loading_benchmark.py --name delivery-new --i
 
 Always use new names. Omitting `--delivery-jfr` retains the readiness probes
 without JFR; it still does not make a clean timing sample. The under-one-minute
-complete-loading target and consistent 20 TPS remain open.
+complete-loading target was unmet in these diagnostic runs; the subsequent
+task-window prototype meets it in two clean samples. Consistent 20 TPS remains open.

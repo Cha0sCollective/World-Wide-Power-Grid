@@ -12,12 +12,13 @@ import time
 import legacy_bench as bench
 from cpu_affinity import affinity, observe_group, pin_owned
 from host_metrics import HostWatch
-from plain_wire_benchmark import ROOT, INPUTS, inventory
+from plain_wire_benchmark import ROOT, INPUTS, inventory, validate_task_window
 from process_metrics import ChildMetrics
 
 
 def validate(directory, inputs, audit_directory=None):
     audit_directory = directory if audit_directory is None else Path(audit_directory)
+    (audit_directory / 'client-benchmark').mkdir(parents=True, exist_ok=True)
     result = bench.read(directory / 'client-benchmark/result.json')
     assert result['passed'], result
     assert bench.read(directory / 'client-benchmark/shutdown.json')['save_and_quit_reached_title']
@@ -72,6 +73,11 @@ def validate(directory, inputs, audit_directory=None):
         assert len(priority) == 1 and priority[0][0] == 'true' and int(priority[0][1]) > 0
     elif priority:
         assert priority == [('false', '0')]
+    task_budget = int(bench.read(directory / 'experiment.json')['properties'].get(
+        'wwpg.experimental.chunkTaskBudgetMillis', '0'))
+    stats = validate_task_window(log, task_budget)
+    if stats is not None:
+        bench.write(audit_directory / 'client-benchmark/task-window-validation.json', stats)
     saved = bench.completed_world_save(log)
     (audit_directory / 'client-benchmark').mkdir(parents=True, exist_ok=True)
     bench.write(audit_directory / 'shutdown-save.json', saved)
@@ -87,6 +93,7 @@ def main():
     parser.add_argument('--name', required=True)
     parser.add_argument('--inputs', required=True)
     parser.add_argument('--tree-prioritize-unresolved', action='store_true')
+    parser.add_argument('--chunk-task-budget-ms', type=int, choices=range(21), default=0)
     parser.add_argument('--inspect-delivery', action='store_true')
     parser.add_argument('--delivery-jfr', action='store_true')
     parser.add_argument('--inspect-task-queues', action='store_true')
@@ -135,7 +142,8 @@ def main():
         'wwpg.experimental.plainWireBatch.verify': 'false',
         'wwpg.experimental.wireTreeBatch': 'true', 'wwpg.experimental.wireTreeBudgetMillis': '20',
         'wwpg.experimental.wireTreeMaxParts': '32',
-        'wwpg.experimental.wireTreePrioritizeUnresolved': str(args.tree_prioritize_unresolved).lower()}
+        'wwpg.experimental.wireTreePrioritizeUnresolved': str(args.tree_prioritize_unresolved).lower(),
+        'wwpg.experimental.chunkTaskBudgetMillis': str(args.chunk_task_budget_ms)}
     # Freeze launch bytes in this attempt. Frozen template dependencies are verified above.
     argument_file = directory / 'client.args'
     argument_file.write_text(''.join(f'-D{k}={v}\n' for k, v in properties.items())

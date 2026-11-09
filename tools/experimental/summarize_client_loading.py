@@ -4,7 +4,7 @@ import csv
 import json
 import re
 
-from plain_wire_benchmark import ROOT, bench
+from plain_wire_benchmark import ROOT, bench, validate_task_window
 
 
 def main():
@@ -38,6 +38,8 @@ def main():
         assert observed_priority[1] == 'false' and tree['prioritySelections'] == 0
     assert tree['budgetMillis'] == 20 and 0 < tree['maxProcessed'] <= tree['maxParts'] == 32
     assert tree['roots'] == tree['attachments'] * 2 == tree['traversals'] + tree['covered']
+    task_window = validate_task_window((folder / 'process.log').read_text(errors='replace'),
+        int(protocol['properties'].get('wwpg.experimental.chunkTaskBudgetMillis', '0')))
     paths = ['experiment.json', 'restore-input.json', 'launch.json', 'client.args', 'options.txt', 'cpu-preflight.json',
         'process-affinity.json', 'process-metrics.jsonl', 'host-metrics.jsonl', 'process.log', 'runner-exit.json',
         'shutdown-save.json', 'benchmark/result.json', 'benchmark/loading-results.json', 'benchmark/ticks.csv',
@@ -45,6 +47,9 @@ def main():
         'client-benchmark/start.json', 'client-benchmark/result.json', 'client-benchmark/validation.json',
         'client-benchmark/loaded-artifacts.json', 'client-benchmark/render-observations.json',
         'client-benchmark/frame-times-ns.json', 'client-benchmark/shutdown.json', 'client-benchmark/screenshots/rendered.png']
+    if task_window is not None:
+        paths.append('client-benchmark/task-window-validation.json')
+        assert task_window == bench.read(folder / paths[-1])
     evidence = [dict(path=(folder / path).relative_to(ROOT).as_posix(), sha256=bench.sha(folder / path)) for path in paths]
     for kind in ('runtime', 'helper', 'cee'):
         assert bench.sha(protocol[kind]['path']) == protocol[kind]['sha256']
@@ -53,6 +58,7 @@ def main():
     gaps = [int(b['wall_ns']) - int(a['wall_ns']) for a, b in zip(ticks, ticks[1:])]
     data = dict(schema=1, full_suite=False, attempt=args.attempt, protocol=protocol, result=result, validation=validation,
         server_loading=bench.read(folder / 'benchmark/loading-results.json'), tree_execution=tree,
+        task_window=task_window,
         worst_loading_tick_seconds=max(tick_ns) / 1e9, longest_loading_tick_gap_seconds=max(gaps) / 1e9,
         world_frame_intervals=dict(samples=len(frame_times), mean_ms=sum(frame_times) / len(frame_times) / 1e6,
             p95_ms=bench.percent(frame_times, .95) / 1e6, maximum_ms=max(frame_times) / 1e6),

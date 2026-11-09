@@ -114,6 +114,7 @@ def prepare(args):
     flags += '-Dwwpg.experimental.wireTreeMaxParts=' + str(getattr(args, 'tree_max_parts', 32)) + '\n'
     flags += '-Dwwpg.experimental.wireTreeRetainCoverage=' + str(getattr(args, 'tree_retain_coverage', False)).lower() + '\n'
     flags += '-Dwwpg.experimental.wireTreePrioritizeUnresolved=' + str(getattr(args, 'tree_prioritize_unresolved', False)).lower() + '\n'
+    flags += '-Dwwpg.experimental.chunkTaskBudgetMillis=' + str(getattr(args, 'chunk_task_budget_ms', 0)) + '\n'
     if cpu_mask:
         flags += '-Dwwpg.benchmark.cpuMask=0x' + cpu_mask + '\n'
     if server_mask:
@@ -197,6 +198,19 @@ def validate(directory, detailed, batch=False, verify=False, properties=False):
     return validation
 
 
+def validate_task_window(log, budget):
+    lines = re.findall(r'WWPG experimental chunk-task window: (.+)', log)
+    if not budget:
+        assert not lines
+        return None
+    assert len(lines) == 1
+    stats = {key: int(value) for key, value in re.findall(r'(\w+)=(\d+)', lines[0])}
+    assert stats['budgetMillis'] == budget and stats['windows'] > 0 and stats['completed'] > 0
+    assert 0 < stats['maxCompleted'] <= stats['maxTasks'] == 512
+    assert stats['probes'] > 0 and stats['maxWindowNanos'] >= stats['maxPollNanos']
+    return stats
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--reference-root', required=True)
@@ -212,6 +226,7 @@ def main():
     parser.add_argument('--tree-max-parts', type=int, default=32)
     parser.add_argument('--tree-retain-coverage', action='store_true')
     parser.add_argument('--tree-prioritize-unresolved', action='store_true')
+    parser.add_argument('--chunk-task-budget-ms', type=int, choices=range(21), default=0)
     parser.add_argument('--helper-inputs', help='Frozen queue-aware loading helper manifest')
     parser.add_argument('--cpu-mask', choices=['fff','fff000'], help='Explicit whole-process logical CPU group, selected after a load observation')
     parser.add_argument('--server-cpu-mask', help='Explicit hexadecimal server-thread subset of the selected process group')
@@ -234,6 +249,7 @@ def main():
         tree_batch=args.tree_batch, tree_budget_ms=args.tree_budget_ms, tree_max_parts=args.tree_max_parts,
         tree_retain_coverage=args.tree_retain_coverage,
         tree_prioritize_unresolved=args.tree_prioritize_unresolved,
+        chunk_task_budget_ms=args.chunk_task_budget_ms,
         cpu_affinity_mask=args.cpu_mask,
         server_affinity_mask=args.server_cpu_mask,
         helper=bench.read(directory / 'launch.json')['helper'],
@@ -249,6 +265,7 @@ def main():
         with HostWatch(directory / 'host-metrics.jsonl'):
             bench.run(options)
         protocol['validation'] = validate(directory, args.detailed, args.batch, args.verify_batch, args.property_batch)
+        protocol['task_window'] = validate_task_window((directory / 'process.log').read_text(errors='replace'), args.chunk_task_budget_ms)
         if args.tree_prioritize_unresolved:
             log = (directory / 'process.log').read_text(encoding='utf-8', errors='replace')
             priority = re.findall(r'prioritizeUnresolved=(true|false), prioritySelections=(\d+)', log)

@@ -13,7 +13,22 @@ no full headless or graphical acceptance suite is implied by this investigation.
 
 ## Current evidence and open requirements
 
-- The current candidate is `0.2.7-experimental.wiretree.6`, frozen at
+- The current candidate is `0.2.7-experimental.wiretree.7`, frozen at
+  `local/frozen/prototype-08a/inputs.json` (runtime SHA-256
+  `31efbb0099531a7a8db7aa0f52deb80b040080bada825dd33bc339560b85c7a1`).
+  Its opt-in [bounded chunk-task window](CHUNK_TASK_WINDOW.md) reached complete
+  restored/rendered readiness in **40.408 and 39.298 seconds**, versus
+  **108.906 seconds** with the same jar and window disabled. All three runs
+  passed the full-yard and complete-view checks at 1920×1080 / 12 chunks.
+  This meets the loading target in two focused samples. Its subsequent steady
+  observation averaged **20.040 TPS**, **48.716 ms mean** and **56.027 ms p95**,
+  so the p95 consistency gate remains unmet. Actual full-yard unload/reload
+  passed, with initial/reload times of **29.604/15.849 seconds**. Behavior during
+  continuous streaming remains open. Worst loading ticks
+  remain approximately three seconds. Nineteen unit and 98 focused regression
+  checks passed; GameTestServer bypasses extra dispatch, which the real client
+  runs exercise. [Evidence](task-window-results-20261109.json).
+- The preceding `0.2.7-experimental.wiretree.6` candidate is frozen at
   `local/frozen/prototype-07a/inputs.json` (runtime SHA-256
   `522c4cb3c394d7c2f80fd2f73fc637cddab5401540128bfe881d4353db1959bb`).
   [Unresolved-wire priority](UNRESOLVED_PRIORITY.md) reduces mean headless
@@ -89,16 +104,18 @@ samples.
    number of delayed attachments prevented fully-resolved coverage and caused
    repeated traversal. Prioritizing them cuts post-chunk recovery from 40–46
    seconds to about five. The [client delivery diagnosis](CLIENT_DELIVERY.md)
-   now shows that remaining view chunks are becoming ready on the server,
-   rather than waiting in a send queue. Late server samples are dominated by
-   ordinary ticking, including electrical work. Observe chunk-task depth/age
-   to distinguish server budget pressure from generation scheduling. The
-   separate node-holder initialization path and largest stalls also remain.
+   showed that remaining view chunks were becoming ready on the server,
+   rather than waiting in a send queue. Task instrumentation then found about
+   50 ms median waits for short lighting/future callbacks. The bounded extra
+   dispatch window now brings clean complete-client loading below one minute
+   in two samples. Its actual unload/reload and steady-TPS checks are complete;
+   the p95 tick target is still missed. The separate node-holder initialization
+   path and largest stalls also remain.
 3. Reduce repeated preparation and terminal/world lookups for steady TPS.
    Inspect native geometry dependencies before any reuse; retain dynamic,
    custom, moving, unloaded and replaced-owner behavior. Do not reduce the
    16 electrical substeps, accuracy, storage, heating, or device callbacks.
-4. The priority runtime's steady observation is complete; verify both
+4. The task-window runtime's steady observation is complete; verify both
    targets on subsequent improvements. The goal remains active until
    consistency and functionality preservation have supporting evidence.
    Headless loads below one minute do not establish complete client readiness.

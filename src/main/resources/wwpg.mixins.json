@@ -95,6 +95,7 @@
     "NetherTransformerHistoryMixin",
     "ConcretePoleHeightMixin",
     "GlobalNetworksScheduleMixin",
+    "ChunkTaskWindowMixin",
     "WorldNetworksAccessor",
     "NetherTransformerAccessor",
     "NetherTransformerEntryAccessor",
