@@ -87,12 +87,6 @@ public final class WireTreeRestorationGameTests {
                 h.assertTrue(WireTreeBatch.attached()-before==(removePart?7:8),"Saved wire batching did not match eligibility");
                 h.assertTrue(WireTreeBatch.pending(level)>0,"Expected pending restoration roots");
             }
-            if(WireTreeBatch.RETAIN_COVERAGE && !WireTreeBatch.BOUNDED && !coldParts && !removePart) {
-                long beforeTrace=WireTreeBatch.traversed();
-                WireTreeBatch.flush(level);
-                h.assertTrue(WireTreeBatch.traversed()-beforeTrace==2,
-                        "The two completed terminal rings were retraced within one drain");
-            }
             // The production flush runs at the next electrical prepare boundary.
         });
         h.runAtTickTime(50,()->{

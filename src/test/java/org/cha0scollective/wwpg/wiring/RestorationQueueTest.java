@@ -39,33 +39,6 @@ class RestorationQueueTest {
         assertEquals(List.of("a","b"), finished);
         assertEquals(2, slice.discarded()); assertEquals(2, slice.traversed()); assertEquals(2, slice.covered());
     }
-    @Test void alternatingCompletedRegionsAreWalkedOncePerDrain() {
-        var queue = new RestorationQueue<Integer, Integer>();
-        for (int i=0;i<1000;i++) queue.add(i%2*2, i%2*2+1, i);
-        var visits = new ArrayList<Integer>();
-        var first = queue.drain(500, Long.MAX_VALUE, ()->0, p->true, root->{
-            visits.add(root); return root<2 ? Set.of(0,1) : Set.of(2,3);
-        }, p->false, ()->0);
-        assertEquals(2, first.traversed()); assertEquals(998, first.covered());
-        var next = queue.drain(500, Long.MAX_VALUE, ()->0, p->true, root->{
-            visits.add(root); return root<2 ? Set.of(0,1) : Set.of(2,3);
-        }, p->false, ()->0);
-        assertEquals(2, next.traversed(), "Coverage escaped its server-thread drain");
-        assertEquals(List.of(0,2,0,2), visits);
-    }
-    @Test void migrationAndFailedConnectionAttemptsExpireEarlierRegions() {
-        for (boolean finishMutation : List.of(false, true)) {
-            var queue = new RestorationQueue<Integer, Integer>();
-            queue.add(0,1,0); queue.add(2,3,1); queue.add(0,1,2);
-            var revision = new AtomicLong(); var visits = new ArrayList<Integer>();
-            queue.drain(32, Long.MAX_VALUE, ()->0, p->true, root->{
-                visits.add(root);
-                if (root==2 && !finishMutation) revision.incrementAndGet();
-                return root<2 ? Set.of(0,1) : Set.of(2,3);
-            }, p->p==1 && finishMutation, revision::get);
-            assertEquals(List.of(0,2,0), visits, "A changed graph retained earlier coverage");
-        }
-    }
     @Test void boundedWavesMatchScalarTraversalOnMixedGraphs() {
         var random = new Random(82026);
         for (int trial = 0; trial < 200; trial++) {
@@ -89,7 +62,7 @@ class RestorationQueueTest {
                     if (parts==null||parts.isEmpty()||parts.stream().anyMatch(p->!p.resolved)) return Set.of();
                 }
                 return seen;
-            },p->false,()->batch.revision);
+            },p->false);
             var expected = new TreeMap<Integer,Boolean>(); var actual = new TreeMap<Integer,Boolean>();
             scalar.partNodeMap.values().forEach(parts->parts.forEach(p->expected.put(p.id,p.resolved)));
             batch.partNodeMap.values().forEach(parts->parts.forEach(p->actual.put(p.id,p.resolved)));

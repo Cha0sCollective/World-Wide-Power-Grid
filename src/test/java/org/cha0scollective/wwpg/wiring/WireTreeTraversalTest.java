@@ -29,10 +29,9 @@ public final class WireTreeTraversalTest {
     final Map<IWireEndpoint,IWireEndpoint> globalExternalNodes=new HashMap<>();
     final Map<IWireEndpoint,Collection<TransmissionLinePart>> partNodeMap=new HashMap<>();
     final List<String> events=new ArrayList<>();
-    long revision;
     final Map<IWireEndpoint,Runnable> migrations=new HashMap<>();
-    void addAndMigrateNode(IWireEndpoint endpoint){events.add("visit:"+((Endpoint)endpoint).id);var change=migrations.remove(endpoint);if(change!=null){revision++;change.run();}}
-    boolean makeTransmissionLine(TransmissionLinePart part){events.add("resolve:"+part.id);if(!part.resolved)revision++;if(!part.resolvable)return false;part.resolved=true;return true;}
+    void addAndMigrateNode(IWireEndpoint endpoint){events.add("visit:"+((Endpoint)endpoint).id);var change=migrations.remove(endpoint);if(change!=null)change.run();}
+    boolean makeTransmissionLine(TransmissionLinePart part){events.add("resolve:"+part.id);if(!part.resolvable)return false;part.resolved=true;return true;}
 
     private boolean traceTree(IWireEndpoint endpoint, Set<IWireEndpoint> visited) {
         if(!visited.add(endpoint))

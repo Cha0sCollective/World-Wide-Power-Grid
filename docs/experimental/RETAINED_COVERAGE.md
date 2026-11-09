@@ -4,6 +4,8 @@ Experimental investigation on November 9, 2026, following
 [bounded restoration](BOUNDED_WIRE_TREE.md). The candidate is
 `0.2.7-experimental.wiretree.5`, frozen in `local/frozen/prototype-06a`.
 It is not a release input or a demonstrated improvement.
+The candidate source is preserved at `86229ab`; the following retirement restores
+the working runtime to `wiretree.4`, retaining the reports and benchmark tools.
 
 ## Decision and measured result
 

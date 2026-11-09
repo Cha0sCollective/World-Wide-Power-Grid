@@ -12,7 +12,6 @@ import org.patryk3211.powergrid.electricity.wire.*;
 /** Opt-in saved-wire attachment and server-thread tree resolution. Nothing is persisted. */
 public final class WireTreeBatch {
     public static final boolean ENABLED = Boolean.getBoolean("wwpg.experimental.wireTreeBatch");
-    public static final boolean RETAIN_COVERAGE = ENABLED && Boolean.getBoolean("wwpg.experimental.wireTreeRetainCoverage");
     public static final int BUDGET_MILLIS = Integer.getInteger("wwpg.experimental.wireTreeBudgetMillis", 0);
     public static final int MAX_PARTS = Integer.getInteger("wwpg.experimental.wireTreeMaxParts", 32);
     public static final boolean BOUNDED = ENABLED && BUDGET_MILLIS > 0;
@@ -31,8 +30,6 @@ public final class WireTreeBatch {
         Map<OwnedFloatingNode, Set<TransmissionLinePart>> wwpg$partNodes();
         boolean wwpg$makeLine(TransmissionLinePart part);
     }
-    /** Changes observed by the native traversal, used only within one synchronous drain. */
-    public interface Revision { long wwpg$treeRevision(); }
     private static final class State {
         final RestorationQueue<IWireEndpoint, Attachment> queue = new RestorationQueue<>();
         boolean flushing;
@@ -116,7 +113,7 @@ public final class WireTreeBatch {
                     return true; // Any connection attempt invalidates prior coverage.
                 }
                 return false;
-            }, RETAIN_COVERAGE ? ((Revision) world)::wwpg$treeRevision : null);
+            });
             } finally { state.flushing = false; }
             traversals += counts.traversed(); covered += counts.covered();
             discarded += counts.discarded(); processed += counts.processed();
@@ -136,7 +133,6 @@ public final class WireTreeBatch {
     public static boolean holding(ServerLevel level) { return BOUNDED && pending(level) != 0; }
     public static long attached() { return attachments; }
     public static long discarded() { return discarded; }
-    public static long traversed() { return traversals; }
     public static void unload(ServerLevel level) {
         discarded += pending(level);
         PENDING.keySet().removeIf(world -> world.world == level); LAST_FLUSH.remove(level);
@@ -146,7 +142,6 @@ public final class WireTreeBatch {
                 attachments, fallback, roots, traversals, covered, visited, flushes, largest,
                 PENDING.values().stream().mapToInt(s -> s.queue.size() * 2).sum(), forced, discarded,
                 BUDGET_MILLIS, MAX_PARTS, yielded, maxProcessed, maxFlushNanos, maxEntryNanos);
-        if (ENABLED) WorldWidePowerGrid.LOGGER.info("WWPG experimental wire-tree retained coverage: enabled={}", RETAIN_COVERAGE);
         PENDING.clear(); LAST_FLUSH.clear(); READING.remove();
         attachments = fallback = roots = traversals = covered = visited = flushes = forced = discarded = yielded = maxFlushNanos = maxEntryNanos = 0;
         largest = maxProcessed = 0;
