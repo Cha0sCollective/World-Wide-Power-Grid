@@ -174,6 +174,9 @@ def run(args):
     props['cpuJfr']=str(getattr(args,'cpu_jfr',False)).lower()
     props['cpuJfrNonSafepoints']=str(getattr(args,'cpu_jfr_non_safepoints',False)).lower()
     props['preparationSections']=str(getattr(args,'preparation_sections',False)).lower()
+    props['nativeWork']=str(getattr(args,'native_work',False)).lower()
+    if getattr(args,'native_work',False) and (args.mode!='control' or not args.detailed or not getattr(args,'substep_trace',False) or getattr(args,'cpu_jfr',False) or getattr(args,'substep_jfr',False) or getattr(args,'preparation_sections',False)):
+        raise ValueError('Native work observation requires a detailed control without other diagnostics')
     if getattr(args,'preparation_sections',False) and (args.mode!='control' or args.detailed or getattr(args,'cpu_jfr',False) or getattr(args,'substep_jfr',False)):
         raise ValueError('Preparation sections require a control run with other diagnostics disabled')
     if getattr(args,'substep_trace',False) and not args.detailed:raise ValueError('Substep diagnosis requires sampled detailed timers')

@@ -56,6 +56,8 @@ def prepare(args):
     server_mask = getattr(args, 'server_cpu_mask', None)
     if getattr(args, 'preparation_sections', False) and not (helper_overlay and helper_overlay.get('preparation_sections_supported')):
         raise ValueError('Preparation sections require the explicit diagnostic helper')
+    if getattr(args, 'native_work', False) and not (helper_overlay and helper_overlay.get('native_work_supported')):
+        raise ValueError('Native work observation requires its explicit diagnostic helper')
     if cpu_mask:
         if not helper_overlay or not helper_overlay.get('process_affinity_supported'):
             raise ValueError('Whole-process pinning requires the explicit affinity-aware frozen helper')
@@ -95,7 +97,7 @@ def prepare(args):
     source_copy = directory / 'runner-sources'
     source_copy.mkdir()
     for name in ('plain_wire_benchmark.py','restoration_benchmark.py','legacy_bench.py','process_metrics.py',
-                 'host_metrics.py','cpu_affinity.py','cpu_profile.py','preparation_sections.py','world_save_evidence.py'):
+                 'host_metrics.py','cpu_affinity.py','cpu_profile.py','preparation_sections.py','native_work.py','world_save_evidence.py'):
         source = ROOT / 'tools/experimental' / name
         target = source_copy / name
         shutil.copy2(source,target)
@@ -296,6 +298,7 @@ def main():
     parser.add_argument('--cpu-jfr', action='store_true', help='Start JFR during warmup with detailed timers disabled; diagnostic only')
     parser.add_argument('--cpu-jfr-non-safepoints', action='store_true', help='Add compiled-code debug locations from JVM startup; requires --cpu-jfr')
     parser.add_argument('--preparation-sections', action='store_true', help='Sparse whole-section CEE preparation diagnostic; requires its helper overlay')
+    parser.add_argument('--native-work', action='store_true', help='Observe actual JNI inputs and callback counts; requires its helper and --detailed')
     parser.add_argument('--batch', action='store_true')
     parser.add_argument('--verify-batch', action='store_true')
     parser.add_argument('--property-batch', action='store_true')
@@ -324,6 +327,8 @@ def main():
         parser.error('--cpu-jfr-non-safepoints requires --cpu-jfr')
     if args.preparation_sections and (args.detailed or args.cpu_jfr or args.substep_jfr):
         parser.error('--preparation-sections requires other timing and JFR diagnostics disabled')
+    if args.native_work and (not args.detailed or args.cpu_jfr or args.substep_jfr or args.preparation_sections):
+        parser.error('--native-work requires detailed timers with JFR and preparation sections disabled')
     if args.tree_budget_ms < 0 or args.tree_max_parts < 1:
         parser.error('Invalid restoration budget')
     if (args.tree_budget_ms or args.tree_retain_coverage or args.tree_prioritize_unresolved) and not args.tree_batch:
@@ -352,6 +357,7 @@ def main():
         substep_jfr=args.substep_jfr, cpu_jfr=args.cpu_jfr,
         cpu_jfr_non_safepoints=args.cpu_jfr_non_safepoints,
         preparation_sections=args.preparation_sections,
+        native_work=args.native_work,
         started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
     bench.write(directory / 'experiment.json', protocol)
     print(json.dumps(dict(starting=str(directory), protocol=protocol)), flush=True)
@@ -360,7 +366,8 @@ def main():
         churn=0, cycles=1, restore=str(reference), detailed=args.detailed, timeout=1200,
         restoration_batch=True, rhs_counters=False, profile_every=20,
         substep_trace=args.detailed, substep_jfr=args.substep_jfr, cpu_jfr=args.cpu_jfr,
-        cpu_jfr_non_safepoints=args.cpu_jfr_non_safepoints, preparation_sections=args.preparation_sections)
+        cpu_jfr_non_safepoints=args.cpu_jfr_non_safepoints, preparation_sections=args.preparation_sections,
+        native_work=args.native_work)
     try:
         with HostWatch(directory / 'host-metrics.jsonl'):
             bench.run(options)
@@ -390,6 +397,8 @@ def main():
             protocol['recording'] = validate_recording(directory)
         from preparation_sections import validate as validate_preparation
         protocol['preparation_observation'] = validate_preparation(directory, args.preparation_sections)
+        from native_work import validate as validate_native_work
+        protocol['native_work_observation'] = validate_native_work(directory, args.native_work)
         protocol['summary'] = bench.read(directory / 'benchmark/summary.json')
         print(json.dumps(dict(completed=True, summary=protocol['summary']['mspt'], tps=protocol['summary']['tps'])), flush=True)
     finally:

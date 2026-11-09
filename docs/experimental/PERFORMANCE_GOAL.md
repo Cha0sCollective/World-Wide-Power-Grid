@@ -109,6 +109,17 @@ no full headless or graphical acceptance suite is implied by this investigation.
   [Preparation evidence](preparation-sections-results-20261109.json),
   [phase evidence](phase-timers-results-20261109.json),
   [substep analysis](native-phase-variation-20261109.json).
+- A subsequent [JNI work observer](NATIVE_SOLVER_WORK.md) records 2,112 steady
+  calls across 132 complete 16-step ticks. They split between an initial
+  residual check and a path consistent with one solve and three residual
+  checks, averaging **0.115 / 0.620 ms per native call**. All sampled initial
+  and hook-returned matrix-command counts are zero. The observed iteration
+  limit of 200 is not being exhausted. The diagnostic measured **20.041 TPS,
+  47.609 ms mean and 54.404 ms p95**, without a gameplay or native-library
+  change; it is not a clean performance comparison. Whole-yard checks and
+  normal shutdown passed. An isolated compiler is prepared for measuring
+  native residual, guard/buffer and triangular-solve work next.
+  [Evidence](native-work-results-20261109.json).
 - The preceding `0.2.7-experimental.wiretree.7` candidate is frozen at
   `local/frozen/prototype-08a/inputs.json` (runtime SHA-256
   `31efbb0099531a7a8db7aa0f52deb80b040080bada825dd33bc339560b85c7a1`).
@@ -230,10 +241,13 @@ samples.
    [section/phase measurements](PREPARATION_SECTIONS.md) show that CEE
    preparation explains little of the fast/slow gap. Native solving explains
    about 86% in the separate phase diagnostic, with added work across all 16
-   steps on most slow samples. Observe actual JNI iteration limits, matrix
-   command counts and nonlinear/residual callback counts next. Distinguish
-   residual early exits, repeated solves and factorization before proposing
-   a native change. Keep finite-state, permutation and rollback guards intact.
+   steps on most slow samples. The [JNI observer](NATIVE_SOLVER_WORK.md) now
+   distinguishes an initial residual early exit from one solve with three
+   residual checks. Initial and hook-returned matrix-command counts are zero
+   throughout the sampled calls; the 200-iteration limit is not exhausted.
+   Measure native residual multiplication/norm, buffer/finite checks and
+   factorized triangular-solve costs next, using the isolated compiler and
+   pinned sources. Keep finite-state, permutation and rollback guards intact.
    Small transformer-map or iterator changes are not the leading hypothesis
    for closing this gap. Wire temperature remains a separate world-access
    candidate.

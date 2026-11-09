@@ -1,0 +1,140 @@
+{
+  "schema": 1,
+  "passed": true,
+  "branch": "dev/experimental-plain-wire-batching",
+  "runtime_changed": false,
+  "native_library_changed": false,
+  "full_suite": false,
+  "graphical_acceptance": false,
+  "frozen": {
+    "path": "local/frozen/prototype-12g/inputs.json",
+    "sha256": "f7f34bbba95a21ef9eea0228b4174fa8b31a6a4e8a230fd01b021b7389a68016"
+  },
+  "source_build_hashes_verified": 450,
+  "rebuilt_artifacts": [
+    {
+      "path": "build/libs/wwpg-0.2.7-experimental.wiretree.11.jar",
+      "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9"
+    },
+    {
+      "path": "build/libs/wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+      "sha256": "24d2d70ca4b8895d71e1d74c9fc49b23a1873507f4f1c10627f2443d1fc51636"
+    }
+  ],
+  "loaded_native": {
+    "path": "local/benchmarks/goal-native-work-01/.pg-native/wwpg-safety-1/1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c/libpowergridNative7.dll",
+    "sha256": "1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c"
+  },
+  "helper_changed_entries": [
+    "org/cha0scollective/wwpg/benchmark/BenchmarkMixinPlugin.class",
+    "org/cha0scollective/wwpg/benchmark/mixin/TickMixin.class",
+    "wwpg-benchmark.mixins.json"
+  ],
+  "helper_added_entries": [
+    "org/cha0scollective/wwpg/benchmark/NativeWork$Frame.class",
+    "org/cha0scollective/wwpg/benchmark/NativeWork.class",
+    "org/cha0scollective/wwpg/benchmark/mixin/NativeWorkMixin.class"
+  ],
+  "evidence_files_verified": 516,
+  "python_files_parsed": 7,
+  "checked_document_links": 41,
+  "git_diff_check_passed": true,
+  "main_tracked_clean": true,
+  "owned_process_exit": {
+    "schema": 1,
+    "pid": 13752,
+    "exit_code": 0,
+    "elapsed_seconds": 286.52327650000007,
+    "ended_utc": "2026-11-09T21:05:31Z"
+  },
+  "focused_evidence_checks": 4,
+  "observer_validation": {
+    "enabled": true,
+    "sampled_steady_ticks": 132,
+    "sampled_steady_native_calls": 2112,
+    "completed": {
+      "schema": 1,
+      "entries": 4032,
+      "exits": 4032,
+      "rows": 4032,
+      "invalid": 0
+    },
+    "evidence": [
+      {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-work-01\\benchmark\\native-work.csv",
+        "sha256": "5bd32731549931834a49d45e9694eb7bd9b0984934506a029342c17bf779cc47"
+      },
+      {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-work-01\\benchmark\\native-work-end.json",
+        "sha256": "f8ab3431ff52aecf5c2d1bf3dcb40fffe602999bb3331e56aa095a2cc466267f"
+      }
+    ]
+  },
+  "toolchain": {
+    "system_install": false,
+    "indexed_archives_verified": 6,
+    "windows_probe_exit_code": 0
+  },
+  "superseded_helper_preparation": {
+    "directory": "local/frozen/native-work-helper-01",
+    "result": "Source replacement guard stopped preparation before compilation: unqualified Metrics.reset also matched LoadingMetrics.reset. The anchor was qualified before freezing helper-02.",
+    "helper_artifact_created": false,
+    "benchmark_started": false,
+    "counted_as_pass": false
+  },
+  "previous_functionality_evidence": {
+    "path": "docs/experimental/indexed-waveform-retirement-20261109.json",
+    "sha256": "61e8335a9d7b61040b97bb13e3a5a8d2690fb9830a8b2e0150343d49a650088c"
+  },
+  "evidence": [
+    {
+      "path": "docs/experimental/native-work-results-20261109.json",
+      "sha256": "fd5caf6dfea26fd4d9e90b6c0520839a825bdde00170d5d3f01fd70f9efb304c"
+    },
+    {
+      "path": "local/frozen/native-work-helper-02/inputs.json",
+      "sha256": "bad614a63ffcc07c79966eec459fc30493d8b07acaa8e6eff7dce15f0071aa0e"
+    },
+    {
+      "path": "local/native-work-review-01/tool-checks.log",
+      "sha256": "afbb98a7052e76ce2cfa75fe95f04d5ac033914fa88a5aec4b00f9d711325867"
+    },
+    {
+      "path": "local/native-toolchain-01/inputs.json",
+      "sha256": "d2e22994222485557e101947bb2ae097a6fc9f0bef0df36e742ed457ab8ea411"
+    },
+    {
+      "path": "local/native-work-review-01/toolchain-probe.json",
+      "sha256": "f5d27ed6e79ac91f0190d5f694a14d120241cdc090a475885a27c30458cc3030"
+    },
+    {
+      "path": "local/native-toolchain-01/root/usr/bin/x86_64-w64-mingw32-gcc-posix",
+      "sha256": "6688acb15632fabe09988dd132889cc3339fe00d286dcfe239322c56087115a9"
+    },
+    {
+      "path": "local/native-work-review-01/superlu-spmv-excerpt.json",
+      "sha256": "d7a7927be47a24c684d97c6736fb828905e3babcb3c7cd2f0608c4197158c807"
+    },
+    {
+      "path": "local/native-work-review-01/sparse-structure-excerpt.json",
+      "sha256": "d8d2f2d5e0a7af84de97170d949b41cf56bf65268f9ccf8fc4d82b2df63263b3"
+    },
+    {
+      "path": "local/preparation-review-02/native-source-excerpts.json",
+      "sha256": "b7e02237f4a405ac178c93123389dcd14f492c528f2d8b705892ebd2140cd73f"
+    },
+    {
+      "path": "local/native-work-review-01/verify_checkpoint.py",
+      "sha256": "fe5ad70edf2cff275f2f871e07c42f1be159c8ee7563862ddb19b86db9bf57cf"
+    },
+    {
+      "path": "docs/experimental/NATIVE_SOLVER_WORK.md",
+      "sha256": "51929597b1dee396f359be6c8ce3e9955c1d9b99b2c24633d9d3ab8bd58b7e7d"
+    },
+    {
+      "path": "docs/experimental/PERFORMANCE_GOAL.md",
+      "sha256": "cc62de0496b73c0d5a058c564989275713d6dd142f3453e3e1415e3af43ec1c4"
+    }
+  ],
+  "note": "Diagnostic progress only. Retained gameplay and native artifacts are identical. The next experiment will isolate native residual and factorized-solve costs; no speedup, new client result or full acceptance is claimed."
+}
