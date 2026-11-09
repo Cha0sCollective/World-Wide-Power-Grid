@@ -4,6 +4,7 @@ from ctypes import wintypes
 import json
 import threading
 import time
+from cpu_affinity import processor_times
 
 
 class HostWatch:
@@ -39,7 +40,7 @@ class HostWatch:
                     result[str(pid)] = dict(name=name.value.rsplit('\\', 1)[-1], created=numeric[0], cpu_seconds=sum(numeric[2:]) / 1e7)
             finally:
                 kernel.CloseHandle(handle)
-        return dict(wall_unix=time.time(), processes=result)
+        return dict(wall_unix=time.time(), processes=result, logical_cpu_times=processor_times())
 
     def run(self):
         with self.path.open('x', encoding='utf-8') as stream:

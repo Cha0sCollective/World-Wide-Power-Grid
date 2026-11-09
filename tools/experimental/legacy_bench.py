@@ -175,12 +175,22 @@ def run(args):
     argsfile.write_text(recording+'-Dwwpg.restorationBatch='+props['restoration_batch']+'\n'+''.join(f'-Dwwpg.benchmark.{k}={v}\n' for k,v in props.items())+(directory/'launch.args').read_text(encoding='utf-8'),encoding='utf-8',newline='\n')
     command=[launch['command'][0],'@'+str(argsfile)]
     env=os.environ.copy();env.update(launch['environment'])
+    if launch.get('cpu_affinity_mask'):
+        from cpu_affinity import observe_group
+        preflight=observe_group(int(launch['cpu_affinity_mask'],16))
+        write(directory/'cpu-preflight.json',preflight)
+        if not preflight['quiet']:
+            raise OSError('Selected CPU group is busy; preserve this attempt and select a quiet group before timing')
     write(directory/'invocation.json',dict(schema=1,command=command,configuration=props,loader=launch['neoforge'],runtime=launch['runtime'],helper=launch['helper'],profile=launch.get('profile',{'name':'CLEAN_DEVELOPMENT'}),host=host(),launch_sha256=sha(directory/'launch.json'),started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),started_unix_ms=round(time.time()*1000)))
     started=time.monotonic()
     with (directory/'process.log').open('w',encoding='utf-8') as log:
         process=subprocess.Popen(command,cwd=directory,env=env,stdout=log,stderr=subprocess.STDOUT,stdin=subprocess.PIPE,start_new_session=os.name!='nt')
         metrics=None;metrics_file=None
         try:
+            process_mask = launch.get('cpu_affinity_mask')
+            if process_mask:
+                from cpu_affinity import pin_owned, affinity
+                write(directory/'process-affinity.json', pin_owned(process, int(process_mask,16)))
             metrics=ChildMetrics(process.pid)
             metrics_file=(directory/'process-metrics.jsonl').open('w',encoding='utf-8')
             last=None
@@ -204,9 +214,14 @@ def run(args):
                         if process.poll() is not None:break
                         raise
                     reading['phase']=state.get('phase','STARTUP')
+                    if process_mask:
+                        actual_mask = affinity(process)[0]
+                        if actual_mask != int(process_mask,16):
+                            raise OSError('Owned benchmark process escaped requested CPU affinity')
+                        reading['cpu_affinity_mask'] = f'{actual_mask:x}'
                     metrics_file.write(json.dumps(reading)+'\n');metrics_file.flush()
                 time.sleep(1)
-        except (KeyboardInterrupt,TimeoutError,OSError) as error:
+        except (KeyboardInterrupt,TimeoutError,OSError,ValueError) as error:
             # Never target unrelated JVMs. Capture only this launched process.
             jcmd=Path(command[0]).parent/('jcmd.exe' if os.name=='nt' else 'jcmd')
             if jcmd.exists():

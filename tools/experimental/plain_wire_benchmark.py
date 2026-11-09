@@ -52,6 +52,12 @@ def prepare(args):
         assert helper.is_relative_to(ROOT / 'local/frozen') and bench.sha(helper) == helper_overlay['helper']['sha256']
         for item in helper_overlay['sources']:
             assert bench.sha(ROOT / item['path']) == item['sha256']
+    cpu_mask = getattr(args, 'cpu_mask', None)
+    if cpu_mask:
+        if not helper_overlay or not helper_overlay.get('process_affinity_supported'):
+            raise ValueError('Whole-process pinning requires the explicit affinity-aware frozen helper')
+        if int(cpu_mask, 16) not in (0xfff, 0xfff000):
+            raise ValueError('Select one of the two observed whole L3 groups')
     runtime = Path(args.runtime).resolve() if args.runtime else INPUTS / 'wwpg-0.2.7.jar'
     assert runtime.is_relative_to(ROOT) and runtime.is_file()
     directory = bench.safe_directory(ROOT / 'local/benchmarks' / args.name)
@@ -77,6 +83,15 @@ def prepare(args):
         shutil.copy2(source, directory / 'mods' / source.name)
     for path in sorted((directory / 'mods').glob('*.jar')):
         inputs.append(dict(path=str(path), sha256=bench.sha(path)))
+    runner_sources = []
+    source_copy = directory / 'runner-sources'
+    source_copy.mkdir()
+    for name in ('plain_wire_benchmark.py','restoration_benchmark.py','legacy_bench.py','process_metrics.py',
+                 'host_metrics.py','cpu_affinity.py','world_save_evidence.py'):
+        source = ROOT / 'tools/experimental' / name
+        target = source_copy / name
+        shutil.copy2(source,target)
+        runner_sources.append(dict(path=str(target),sha256=bench.sha(target)))
     launch_source = profile / 'libraries/net/neoforged/neoforge/21.1.231/win_args.txt'
     libraries = (profile / 'libraries').as_posix()
     tokens = []
@@ -92,6 +107,8 @@ def prepare(args):
     flags += '-Dwwpg.experimental.wireTreeBudgetMillis=' + str(getattr(args, 'tree_budget_ms', 0)) + '\n'
     flags += '-Dwwpg.experimental.wireTreeMaxParts=' + str(getattr(args, 'tree_max_parts', 32)) + '\n'
     flags += '-Dwwpg.experimental.wireTreeRetainCoverage=' + str(getattr(args, 'tree_retain_coverage', False)).lower() + '\n'
+    if cpu_mask:
+        flags += '-Dwwpg.benchmark.cpuMask=0x' + cpu_mask + '\n'
     (directory / 'launch.args').write_text(flags + '\n'.join(tokens) + '\nnogui\n', newline='\n')
     java = Path(manifest['java']['path'])
     assert java.is_file()
@@ -103,7 +120,8 @@ def prepare(args):
         runtime=dict(path=str(directory / 'mods' / runtime.name), sha256=bench.sha(runtime), kind='local-candidate', source=str(runtime)),
         helper=dict(path=str(directory / 'mods' / helper.name), sha256=bench.sha(helper)), sources=sources,
         profile_inputs=inputs, profile=dict(name='EXPERIMENTAL_CLEAN', heap_gib=8, cee='1.1.4', pg='0.6.2'),
-        command=[str(java), '@' + str(directory / 'launch.args')], environment={}, directory=str(directory)))
+        command=[str(java), '@' + str(directory / 'launch.args')], environment={}, directory=str(directory),
+        cpu_affinity_mask=cpu_mask, runner_sources=runner_sources))
     bench.write(directory / 'WWPG_BENCHMARK_OWNED.json', dict(root=str(directory), purpose='Isolated plain-wire experiment'))
     (directory / 'eula.txt').write_text('eula=true\n')
     (directory / 'server.properties').write_text('level-name=world\nlevel-type=minecraft:flat\ngenerate-structures=false\nlevel-seed=2101248\ngamemode=creative\ndifficulty=peaceful\nserver-ip=127.0.0.1\nserver-port=25889\nonline-mode=true\nspawn-protection=0\nview-distance=2\nsimulation-distance=2\nmax-players=1\nmax-tick-time=60000\n')
@@ -118,7 +136,11 @@ def validate(directory, detailed, batch=False, verify=False, properties=False):
     assert audit['actual_backends'] == ['NATIVE']
     assert bench.read(directory / 'shutdown-save.json')['all_dimensions_saved']
     assert bench.read(directory / 'benchmark/placement-restored.json')['original_thread_affinity_restored']
-    assert bench.read(directory / 'benchmark/placement-fixed.json')['mask'] == 'fff000'
+    expected_mask = bench.read(directory / 'launch.json').get('cpu_affinity_mask') or 'fff000'
+    assert bench.read(directory / 'benchmark/placement-fixed.json')['mask'] == expected_mask
+    if bench.read(directory / 'launch.json').get('cpu_affinity_mask'):
+        assert bench.read(directory / 'process-affinity.json')['readback_mask'] == expected_mask
+        assert all(json.loads(line)['cpu_affinity_mask'] == expected_mask for line in (directory / 'process-metrics.jsonl').read_text().splitlines())
     assert len(bench.read(directory / 'benchmark/pre-solve-storage.json')) == 1050
     assert len(bench.read(directory / 'world/WWPG_BENCHMARK.json')['chunks']) == 953
     with (directory / 'benchmark/ticks.csv').open() as stream:
@@ -180,6 +202,7 @@ def main():
     parser.add_argument('--tree-max-parts', type=int, default=32)
     parser.add_argument('--tree-retain-coverage', action='store_true')
     parser.add_argument('--helper-inputs', help='Frozen queue-aware loading helper manifest')
+    parser.add_argument('--cpu-mask', choices=['fff','fff000'], help='Explicit whole-process logical CPU group, selected after a load observation')
     args = parser.parse_args()
     if (args.property_batch or args.verify_batch) and not args.batch:
         parser.error('--property-batch and --verify-batch require --batch')
@@ -198,6 +221,7 @@ def main():
         verify_batch=args.verify_batch, property_batch=args.property_batch, detailed=args.detailed,
         tree_batch=args.tree_batch, tree_budget_ms=args.tree_budget_ms, tree_max_parts=args.tree_max_parts,
         tree_retain_coverage=args.tree_retain_coverage,
+        cpu_affinity_mask=args.cpu_mask,
         helper=bench.read(directory / 'launch.json')['helper'],
         substep_jfr=args.substep_jfr, started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
     bench.write(directory / 'experiment.json', protocol)

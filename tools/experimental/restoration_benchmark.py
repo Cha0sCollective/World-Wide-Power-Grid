@@ -22,6 +22,7 @@ def main():
     parser.add_argument('--tree-max-parts', type=int, default=32)
     parser.add_argument('--tree-retain-coverage', action='store_true')
     parser.add_argument('--helper-inputs', help='Explicit frozen helper overlay manifest for queue-aware readiness')
+    parser.add_argument('--cpu-mask', choices=['fff','fff000'], help='Explicit whole-process CPU group after load observation')
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument('--diagnostic', action='store_true')
     modes.add_argument('--reload', action='store_true')
@@ -40,7 +41,7 @@ def main():
                     batch=True, property_batch=True, tree_batch=args.tree_batch, detailed=args.diagnostic,
                     loading_trace=args.diagnostic, reload=args.reload, full_suite=False,
                     tree_budget_ms=args.tree_budget_ms, tree_max_parts=args.tree_max_parts,
-                    tree_retain_coverage=args.tree_retain_coverage, helper_inputs=args.helper_inputs,
+                    tree_retain_coverage=args.tree_retain_coverage, helper_inputs=args.helper_inputs, cpu_affinity_mask=args.cpu_mask,
                     started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
     bench.write(directory / 'experiment.json', protocol)
     print(json.dumps(dict(starting=str(directory), tree_batch=args.tree_batch, diagnostic=args.diagnostic, reload=args.reload)), flush=True)
@@ -66,7 +67,11 @@ def main():
         assert all(r['healthy_ticks'] == 100 and r['requested_chunks'] == 953 for r in loading)
         assert bench.read(directory / 'shutdown-save.json')['all_dimensions_saved']
         assert len(bench.read(directory / 'benchmark/pre-solve-storage.json')) == 1050
-        assert bench.read(directory / 'benchmark/placement-fixed.json')['mask'] == 'fff000'
+        expected_mask = args.cpu_mask or 'fff000'
+        assert bench.read(directory / 'benchmark/placement-fixed.json')['mask'] == expected_mask
+        if args.cpu_mask:
+            assert bench.read(directory / 'process-affinity.json')['readback_mask'] == expected_mask
+            assert all(json.loads(line)['cpu_affinity_mask'] == expected_mask for line in (directory / 'process-metrics.jsonl').read_text().splitlines())
         assert bench.read(directory / 'benchmark/placement-restored.json')['original_thread_affinity_restored']
         with (directory / 'benchmark/ticks.csv').open() as stream:
             ticks = list(csv.DictReader(stream))

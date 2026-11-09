@@ -36,14 +36,29 @@ no full headless or graphical acceptance suite is implied by this investigation.
   during continuous streaming and narrowing that pause remain open concerns.
 
 The user additionally requested manual assignment of benchmark runs to an
-unused CPU group. The existing helper pins only the server thread to logical
-CPUs 12–23 (`fff000`), the second observed L3 group. Whole-process placement and
-per-core load observation are being added before subsequent comparisons. Keep
-those comparisons separate from the earlier server-thread-only measurements.
+unused CPU group. [Whole-process placement](CPU_PLACEMENT.md) now restricts the
+owned JVM to logical CPUs 12–23 (`fff000`), selected after a quiet-core
+observation, with continuous readback and per-core load evidence. The completed
+`goal-tps-pinned-01` run measured **19.997 TPS**, **49.879 ms mean**, **57.569 ms
+p95**, **62.530 ms p99**, and **74.245 ms maximum**, over 2,396 stable ticks.
+Server restoration took **54.26 seconds**. This remains one headless sample,
+misses the p95 gate, and does not measure rendering. Both the process and native
+server-start observations confirm `fff000`; all 305 process readbacks matched.
+
+[Baseline evidence](goal-baselines-20261109.json) preserves both protocols.
+Do not attribute their different loading times to a code optimization: the
+gameplay jar is identical, while process placement, JVM worker availability
+and the explicit helper overlay differ. The retained-coverage candidate remains
+retired and all 439 recorded source hashes again match the frozen `wiretree.4`
+inputs. Full-yard graph/storage/substep checks passed in both steady samples.
 
 ## Next implementation targets
 
-1. Finish whole-process CPU placement with readback evidence and focused checks.
+1. Inspect server-thread migrations within the selected group. The pinned run
+   recorded different tick-entry/exit CPUs in 339 of 2,396 ticks. This is an
+   association, not proof that migration caused their cost. A controlled
+   single-core server-thread comparison within the same JVM group is now
+   possible, but has not been implemented or run.
 2. Explain the repeated traversal of incomplete wire regions, including the
    separate node-holder initialization path, before choosing another batching
    algorithm. Retaining already-completed regions did not address the yard's
