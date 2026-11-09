@@ -117,6 +117,7 @@ def prepare(args):
     flags += '-Dwwpg.experimental.chunkTaskBudgetMillis=' + str(getattr(args, 'chunk_task_budget_ms', 0)) + '\n'
     flags += '-Dwwpg.experimental.ceeStateGeometry=' + str(getattr(args, 'cee_state_geometry', False)).lower() + '\n'
     flags += '-Dwwpg.experimental.scopedRestoration=' + str(getattr(args, 'scoped_restoration', False)).lower() + '\n'
+    flags += '-Dwwpg.experimental.indexedWaveform=' + str(getattr(args, 'indexed_waveform', False)).lower() + '\n'
     flags += '-Dwwpg.experimental.terminalBookkeeping=' + str(getattr(args, 'terminal_bookkeeping', False)).lower() + '\n'
     flags += '-Dwwpg.experimental.terminalKeyLookup=' + str(getattr(args, 'terminal_key_lookup', False)).lower() + '\n'
     if cpu_mask:
@@ -245,6 +246,18 @@ def validate_scoped_restoration(log, enabled, require_activity=False):
     return stats
 
 
+def validate_indexed_waveform(log, enabled):
+    lines = re.findall(r'WWPG experimental indexed waveform: (.+)', log)
+    if not enabled:
+        assert not lines, 'Disabled indexed waveform executed'
+        return None
+    assert len(lines) == 1, 'Missing or duplicate indexed waveform report'
+    stats = {key: int(value) for key, value in re.findall(r'(\w+)=(-?\d+)', lines[0])}
+    assert set(stats) == {'passes', 'directVisits', 'middleVisits'}
+    assert stats['passes'] > 0 and stats['directVisits'] > 0 and stats['middleVisits'] >= 0
+    return stats
+
+
 def validate_terminal_bookkeeping(log, enabled):
     lines = re.findall(r'WWPG experimental terminal bookkeeping: (.+)', log)
     if not enabled:
@@ -287,6 +300,7 @@ def main():
     parser.add_argument('--chunk-task-budget-ms', type=int, choices=range(21), default=0)
     parser.add_argument('--cee-state-geometry', action='store_true')
     parser.add_argument('--scoped-restoration', action='store_true')
+    parser.add_argument('--indexed-waveform', action='store_true')
     parser.add_argument('--terminal-bookkeeping', action='store_true')
     parser.add_argument('--terminal-key-lookup', action='store_true')
     parser.add_argument('--helper-inputs', help='Frozen queue-aware loading helper manifest')
@@ -318,6 +332,7 @@ def main():
         chunk_task_budget_ms=args.chunk_task_budget_ms,
         cee_state_geometry=args.cee_state_geometry,
         scoped_restoration=args.scoped_restoration,
+        indexed_waveform=args.indexed_waveform,
         terminal_bookkeeping=args.terminal_bookkeeping,
         terminal_key_lookup=args.terminal_key_lookup,
         cpu_affinity_mask=args.cpu_mask,
@@ -339,6 +354,9 @@ def main():
         protocol['task_window'] = validate_task_window((directory / 'process.log').read_text(errors='replace'), args.chunk_task_budget_ms)
         protocol['cee_geometry'] = validate_cee_geometry((directory / 'process.log').read_text(errors='replace'), args.cee_state_geometry)
         protocol['scope_execution'] = validate_scoped_restoration((directory / 'process.log').read_text(errors='replace'), args.scoped_restoration, True)
+        protocol['waveform_execution'] = validate_indexed_waveform((directory / 'process.log').read_text(errors='replace'), args.indexed_waveform)
+        if args.indexed_waveform:
+            assert protocol['waveform_execution']['passes'] >= protocol['validation']['stable_ticks'] * 16
         protocol['terminal_execution'] = validate_terminal_bookkeeping((directory / 'process.log').read_text(errors='replace'), args.terminal_bookkeeping)
         protocol['terminal_keys'] = validate_terminal_keys((directory / 'process.log').read_text(errors='replace'), args.terminal_key_lookup)
         if args.tree_prioritize_unresolved:

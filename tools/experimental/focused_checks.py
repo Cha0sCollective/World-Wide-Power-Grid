@@ -28,6 +28,7 @@ def main():
     parser.add_argument('--chunk-task-budget-ms', type=int, choices=range(21), default=0)
     parser.add_argument('--cee-state-geometry', action='store_true')
     parser.add_argument('--scoped-restoration', action='store_true')
+    parser.add_argument('--indexed-waveform', action='store_true')
     parser.add_argument('--terminal-bookkeeping', action='store_true')
     parser.add_argument('--terminal-key-lookup', action='store_true')
     parser.add_argument('--addon-inputs', help='Frozen manifest supplying independent API example jars')
@@ -83,6 +84,7 @@ def main():
                '-PtestChunkTaskBudgetMillis=' + str(args.chunk_task_budget_ms),
                '-PtestCeeStateGeometry=' + str(args.cee_state_geometry).lower(),
                '-PtestScopedRestoration=' + str(args.scoped_restoration).lower(),
+               '-PtestIndexedWaveform=' + str(args.indexed_waveform).lower(),
                '-PtestTerminalBookkeeping=' + str(args.terminal_bookkeeping).lower(),
                '-PtestTerminalKeyLookup=' + str(args.terminal_key_lookup).lower()]
     if addons:
@@ -99,6 +101,7 @@ def main():
     proof['chunk_task_budget_ms'] = args.chunk_task_budget_ms
     proof['cee_state_geometry'] = args.cee_state_geometry
     proof['scoped_restoration'] = args.scoped_restoration
+    proof['indexed_waveform'] = args.indexed_waveform
     proof['terminal_bookkeeping'] = args.terminal_bookkeeping
     proof['terminal_key_lookup'] = args.terminal_key_lookup
     proof['addon_artifacts'] = addons
@@ -122,11 +125,12 @@ def main():
             for key, item in addons.items())
         proof['passed'] &= proof['addons_unchanged'] and proof['addon_classpath_verified']
     if proof['passed']:
-        from plain_wire_benchmark import validate_terminal_bookkeeping, validate_terminal_keys, validate_scoped_restoration
+        from plain_wire_benchmark import validate_terminal_bookkeeping, validate_terminal_keys, validate_scoped_restoration, validate_indexed_waveform
         try:
             proof['terminal_execution'] = validate_terminal_bookkeeping(log, args.terminal_bookkeeping)
             proof['terminal_keys'] = validate_terminal_keys(log, args.terminal_key_lookup)
             proof['scope_execution'] = validate_scoped_restoration(log, args.scoped_restoration, args.selection in ('scope', 'budget'))
+            proof['waveform_execution'] = validate_indexed_waveform(log, args.indexed_waveform)
         except AssertionError:
             proof['passed'] = False
             proof['execution_validation_error'] = 'Missing or inconsistent experimental execution counters'

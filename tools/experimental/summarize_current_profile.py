@@ -12,11 +12,11 @@ from summarize_tree import ROOT, evidence, read, sha
 def signature(protocol):
     keys = ('batch', 'property_batch', 'verify_batch', 'tree_batch', 'tree_budget_ms',
             'tree_max_parts', 'tree_retain_coverage', 'tree_prioritize_unresolved',
-            'chunk_task_budget_ms', 'cee_state_geometry', 'scoped_restoration', 'terminal_bookkeeping', 'terminal_key_lookup', 'cpu_affinity_mask', 'server_affinity_mask')
+            'chunk_task_budget_ms', 'cee_state_geometry', 'scoped_restoration', 'indexed_waveform', 'terminal_bookkeeping', 'terminal_key_lookup', 'cpu_affinity_mask', 'server_affinity_mask')
     defaults = dict(batch=False, property_batch=False, verify_batch=False, tree_batch=False,
                     tree_budget_ms=0, tree_max_parts=32, tree_retain_coverage=False,
                     tree_prioritize_unresolved=False, chunk_task_budget_ms=0,
-                    cee_state_geometry=False, scoped_restoration=False, terminal_bookkeeping=False, terminal_key_lookup=False)
+                    cee_state_geometry=False, scoped_restoration=False, indexed_waveform=False, terminal_bookkeeping=False, terminal_key_lookup=False)
     return {**{key: protocol.get(key, defaults.get(key)) for key in keys},
             'runtime': protocol['runtime']['sha256'], 'helper': protocol['helper']['sha256']}
 

@@ -36,6 +36,8 @@ import java.util.*;
 
 /** Read-only terminal snapshots from the existing PG schedule, including native devices. */
 public final class NativeApiReadings {
+    private static final boolean INDEXED_WAVEFORM = Boolean.getBoolean("wwpg.experimental.indexedWaveform");
+    private static long indexedPasses, indexedDirectVisits, indexedMiddleVisits;
     private static final Map<ServerLevel, NativeApiReadings> WORLDS = new IdentityHashMap<>();
     private static final Object EARTH_REFERENCE = new Object();
     // Only PG's inherited, state-only geometry can be shared between owners.
@@ -252,6 +254,10 @@ public final class NativeApiReadings {
         var samples = recorder.samples(network);
         int step = samples.steps++;
         boolean accepted = network.isConverged() && !samples.rejected;
+        if (INDEXED_WAVEFORM) {
+            afterIndexed(network, samples, step, accepted);
+            return;
+        }
         for (var frame : samples.direct) {
             if (frame.node.getNetwork() != network) frame.unavailable(MeasurementStatus.NOT_READY, "Terminal network changed during solve");
             else frame.sample(step, frame.node.getVoltage(), accepted);
@@ -268,6 +274,34 @@ public final class NativeApiReadings {
                 double second = line.line.getNode2().getVoltage();
                 for (var frame : line.frames)
                     frame.sample(next, first * (1 - frame.fraction) + second * frame.fraction, valid);
+                ++line.count;
+            }
+        }
+    }
+
+    /** Private lists are populated during preparation and are read-only during sampling. */
+    private static void afterIndexed(ElectricalNetwork network, NetworkSamples samples, int step, boolean accepted) {
+        ++indexedPasses;
+        indexedDirectVisits += samples.direct.size();
+        for (int i = 0, size = samples.direct.size(); i < size; ++i) {
+            var frame = samples.direct.get(i);
+            if (frame.node.getNetwork() != network) frame.unavailable(MeasurementStatus.NOT_READY, "Terminal network changed during solve");
+            else frame.sample(step, frame.node.getVoltage(), accepted);
+        }
+        for (int i = 0, size = samples.lines.size(); i < size; ++i) {
+            var line = samples.lines.get(i);
+            int next = line.count;
+            boolean ready = line.first.steps == next + 1 && line.second.steps == next + 1;
+            if (ready) {
+                boolean valid = line.first.network.isConverged() && !line.first.rejected
+                        && (line.second == line.first || line.second.network.isConverged() && !line.second.rejected);
+                double first = line.line.getNode1().getVoltage();
+                double second = line.line.getNode2().getVoltage();
+                indexedMiddleVisits += line.frames.size();
+                for (int j = 0, count = line.frames.size(); j < count; ++j) {
+                    var frame = line.frames.get(j);
+                    frame.sample(next, first * (1 - frame.fraction) + second * frame.fraction, valid);
+                }
                 ++line.count;
             }
         }
@@ -428,7 +462,14 @@ public final class NativeApiReadings {
     }
 
     public static void unload(ServerLevel level) { WORLDS.remove(level); }
-    public static void clear() { WORLDS.clear(); }
+    public static void clear() {
+        WORLDS.clear();
+        if (INDEXED_WAVEFORM)
+            org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info(
+                    "WWPG experimental indexed waveform: passes={}, directVisits={}, middleVisits={}",
+                    indexedPasses, indexedDirectVisits, indexedMiddleVisits);
+        indexedPasses = indexedDirectVisits = indexedMiddleVisits = 0;
+    }
 
     /** One tick's sample ownership and progress, rebuilt after native topology preparation. */
     private static final class NetworkSamples {

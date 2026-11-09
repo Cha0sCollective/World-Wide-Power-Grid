@@ -5,7 +5,7 @@ import json
 import re
 
 from plain_wire_benchmark import ROOT, bench, validate_task_window, validate_cee_geometry, validate_terminal_bookkeeping, validate_terminal_keys
-from plain_wire_benchmark import validate_scoped_restoration
+from plain_wire_benchmark import validate_scoped_restoration, validate_indexed_waveform
 
 
 def main():
@@ -49,6 +49,8 @@ def main():
         protocol['properties'].get('wwpg.experimental.terminalKeyLookup', 'false') == 'true')
     scope = validate_scoped_restoration((folder / 'process.log').read_text(errors='replace'),
         protocol['properties'].get('wwpg.experimental.scopedRestoration', 'false') == 'true', True)
+    waveform = validate_indexed_waveform((folder / 'process.log').read_text(errors='replace'),
+        protocol['properties'].get('wwpg.experimental.indexedWaveform', 'false') == 'true')
     paths = ['experiment.json', 'restore-input.json', 'launch.json', 'client.args', 'options.txt', 'cpu-preflight.json',
         'process-affinity.json', 'process-metrics.jsonl', 'host-metrics.jsonl', 'process.log', 'runner-exit.json',
         'shutdown-save.json', 'benchmark/result.json', 'benchmark/loading-results.json', 'benchmark/ticks.csv',
@@ -71,6 +73,9 @@ def main():
     if scope is not None:
         paths.append('client-benchmark/scoped-restoration-validation.json')
         assert scope == bench.read(folder / paths[-1])
+    if waveform is not None:
+        paths.append('client-benchmark/indexed-waveform-validation.json')
+        assert waveform == bench.read(folder / paths[-1])
     evidence = [dict(path=(folder / path).relative_to(ROOT).as_posix(), sha256=bench.sha(folder / path)) for path in paths]
     for kind in ('runtime', 'helper', 'cee'):
         assert bench.sha(protocol[kind]['path']) == protocol[kind]['sha256']
@@ -84,6 +89,7 @@ def main():
         terminal_execution=terminals,
         terminal_keys=keys,
         scope_execution=scope,
+        waveform_execution=waveform,
         worst_loading_tick_seconds=max(tick_ns) / 1e9, longest_loading_tick_gap_seconds=max(gaps) / 1e9,
         world_frame_intervals=dict(samples=len(frame_times), mean_ms=sum(frame_times) / len(frame_times) / 1e6,
             p95_ms=bench.percent(frame_times, .95) / 1e6, maximum_ms=max(frame_times) / 1e6),

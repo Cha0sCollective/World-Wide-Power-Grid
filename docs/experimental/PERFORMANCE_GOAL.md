@@ -72,6 +72,15 @@ no full headless or graphical acceptance suite is implied by this investigation.
   analyzed. Its 8,691 Java execution samples again identify CEE/terminal
   preparation, waveform iteration, wire calculations and entity updates.
   This is diagnostic evidence, not a new speedup or client-load result.
+- The subsequent [indexed waveform trial](INDEXED_WAVEFORM.md), `wiretree.12`,
+  passes 105 focused fixture executions, three units and four evidence guards.
+  Its same-jar pair measured **49.885 / 48.792 ms mean** and
+  **57.598 / 55.701 ms p95** enabled/disabled, with **19.992 / 20.017 TPS**.
+  Allocation was lower by about 1.586 MiB/tick, without an elapsed-time benefit.
+  The decision is to retire this traversal change and preserve the candidate.
+  Neither run meets the consistency gate. No new client or actual reload
+  observation was run for this candidate.
+  [Evidence](indexed-waveform-results-20261109.json).
 - The preceding `0.2.7-experimental.wiretree.7` candidate is frozen at
   `local/frozen/prototype-08a/inputs.json` (runtime SHA-256
   `31efbb0099531a7a8db7aa0f52deb80b040080bada825dd33bc339560b85c7a1`).
@@ -182,10 +191,12 @@ samples.
    [CPU-only profile](CPU_PROFILE_WITHOUT_TIMERS.md) leaves detailed phase and
    substep timers disabled, with explicit recording boundaries and unchanged
    jars. Compilation fell from 16.051 to 1.496 seconds between the diagnostic
-   observations; this is not a calibrated overhead comparison. After addressing
-   the restoration pause, trial indexed waveform iteration without repacking
-   samples: 538 of its 652 Java stacks end in the list iterator. Descriptor
-   validation and biome lookup remain separate candidates, not proven gains.
+   observations; this is not a calibrated overhead comparison. The subsequent
+   indexed waveform trial also fails to show an elapsed-time gain, despite
+   538 of 652 sampling stacks ending in the list iterator. Treat that attribution
+   as a sampled location, not a removable-cost estimate. Inspect remaining CEE
+   preparation and wire-temperature work before selecting another change;
+   descriptor validation and biome lookup are candidates, not proven gains.
    Retain fresh validation and
    callback behavior. Preserve dynamic, custom, moving, unloaded and
    replaced-owner behavior, all 16 electrical substeps, accuracy, storage,

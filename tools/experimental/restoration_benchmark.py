@@ -25,6 +25,7 @@ def main():
     parser.add_argument('--chunk-task-budget-ms', type=int, choices=range(21), default=0)
     parser.add_argument('--cee-state-geometry', action='store_true')
     parser.add_argument('--scoped-restoration', action='store_true')
+    parser.add_argument('--indexed-waveform', action='store_true')
     parser.add_argument('--terminal-bookkeeping', action='store_true')
     parser.add_argument('--terminal-key-lookup', action='store_true')
     parser.add_argument('--helper-inputs', help='Explicit frozen helper overlay manifest for queue-aware readiness')
@@ -56,6 +57,7 @@ def main():
                     chunk_task_budget_ms=args.chunk_task_budget_ms,
                     cee_state_geometry=args.cee_state_geometry,
                     scoped_restoration=args.scoped_restoration,
+                    indexed_waveform=args.indexed_waveform,
                     terminal_bookkeeping=args.terminal_bookkeeping,
                     terminal_key_lookup=args.terminal_key_lookup,
                     cpu_affinity_mask=args.cpu_mask, server_affinity_mask=args.server_cpu_mask,
@@ -104,6 +106,7 @@ def main():
         protocol['task_window'] = experiment.validate_task_window(log, args.chunk_task_budget_ms)
         protocol['cee_geometry'] = experiment.validate_cee_geometry(log, args.cee_state_geometry)
         protocol['scope_execution'] = experiment.validate_scoped_restoration(log, args.scoped_restoration, True)
+        protocol['waveform_execution'] = experiment.validate_indexed_waveform(log, args.indexed_waveform)
         protocol['terminal_execution'] = experiment.validate_terminal_bookkeeping(log, args.terminal_bookkeeping)
         protocol['terminal_keys'] = experiment.validate_terminal_keys(log, args.terminal_key_lookup)
         if args.tree_batch:
