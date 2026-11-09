@@ -26,7 +26,16 @@ def main():
                  if 'WWPG experimental wire-tree batch: attachments=' in line]
     assert len(tree_line) == 1
     tree = {name: int(number) for name, number in re.findall(r'(\w+)=(\d+)', tree_line[0])}
-    assert tree['pending'] == tree['discarded'] == tree['forced'] == 0
+    assert tree['pending'] == tree['discarded'] == 0
+    # A saved closed loop may need its ordinary final connection after both
+    # root traversals; prioritizing unresolved parts reaches those seeds sooner.
+    assert 0 <= tree['forced'] <= tree['attachments']
+    priority_requested = protocol['properties'].get('wwpg.experimental.wireTreePrioritizeUnresolved', 'false') == 'true'
+    observed_priority = re.search(r'prioritizeUnresolved=(true|false)', tree_line[0])
+    if priority_requested:
+        assert observed_priority and observed_priority[1] == 'true' and tree['prioritySelections'] > 0
+    elif observed_priority:
+        assert observed_priority[1] == 'false' and tree['prioritySelections'] == 0
     assert tree['budgetMillis'] == 20 and 0 < tree['maxProcessed'] <= tree['maxParts'] == 32
     assert tree['roots'] == tree['attachments'] * 2 == tree['traversals'] + tree['covered']
     paths = ['experiment.json', 'restore-input.json', 'launch.json', 'client.args', 'options.txt', 'cpu-preflight.json',

@@ -15,6 +15,7 @@ public final class WireTreeBatch {
     public static final int BUDGET_MILLIS = Integer.getInteger("wwpg.experimental.wireTreeBudgetMillis", 0);
     public static final int MAX_PARTS = Integer.getInteger("wwpg.experimental.wireTreeMaxParts", 32);
     public static final boolean BOUNDED = ENABLED && BUDGET_MILLIS > 0;
+    public static final boolean PRIORITIZE_UNRESOLVED = ENABLED && Boolean.getBoolean("wwpg.experimental.wireTreePrioritizeUnresolved");
     static {
         if (BUDGET_MILLIS < 0 || MAX_PARTS < 1) throw new IllegalArgumentException("Invalid wire-tree budget");
     }
@@ -23,6 +24,7 @@ public final class WireTreeBatch {
     private static final Map<ServerLevel, Integer> LAST_FLUSH = new IdentityHashMap<>();
     private static long attachments, fallback, roots, traversals, covered, visited, flushes, forced;
     private static long discarded, yielded, maxFlushNanos, maxEntryNanos;
+    private static long prioritySelections;
     private static int largest, maxProcessed;
     private WireTreeBatch() { }
     public interface Access {
@@ -113,10 +115,11 @@ public final class WireTreeBatch {
                     return true; // Any connection attempt invalidates prior coverage.
                 }
                 return false;
-            });
+            }, PRIORITIZE_UNRESOLVED ? attachment -> attachment.part.getLine() == null : null);
             } finally { state.flushing = false; }
             traversals += counts.traversed(); covered += counts.covered();
             discarded += counts.discarded(); processed += counts.processed();
+            prioritySelections += counts.prioritized();
             maxEntryNanos = Math.max(maxEntryNanos, counts.longestEntryNanos());
             if (state.queue.size() == 0) PENDING.remove(world);
         }
@@ -138,12 +141,14 @@ public final class WireTreeBatch {
         PENDING.keySet().removeIf(world -> world.world == level); LAST_FLUSH.remove(level);
     }
     public static void reportAndClear() {
-        if (ENABLED) WorldWidePowerGrid.LOGGER.info("WWPG experimental wire-tree batch: attachments={}, fallback={}, roots={}, traversals={}, covered={}, visited={}, flushes={}, largest={}, pending={}, forced={}, discarded={}, budgetMillis={}, maxParts={}, yielded={}, maxProcessed={}, maxFlushNanos={}, maxEntryNanos={}",
+        if (ENABLED) WorldWidePowerGrid.LOGGER.info("WWPG experimental wire-tree batch: attachments={}, fallback={}, roots={}, traversals={}, covered={}, visited={}, flushes={}, largest={}, pending={}, forced={}, discarded={}, budgetMillis={}, maxParts={}, yielded={}, maxProcessed={}, maxFlushNanos={}, maxEntryNanos={}, prioritizeUnresolved={}, prioritySelections={}",
                 attachments, fallback, roots, traversals, covered, visited, flushes, largest,
                 PENDING.values().stream().mapToInt(s -> s.queue.size() * 2).sum(), forced, discarded,
-                BUDGET_MILLIS, MAX_PARTS, yielded, maxProcessed, maxFlushNanos, maxEntryNanos);
+                BUDGET_MILLIS, MAX_PARTS, yielded, maxProcessed, maxFlushNanos, maxEntryNanos,
+                PRIORITIZE_UNRESOLVED, prioritySelections);
         PENDING.clear(); LAST_FLUSH.clear(); READING.remove();
         attachments = fallback = roots = traversals = covered = visited = flushes = forced = discarded = yielded = maxFlushNanos = maxEntryNanos = 0;
         largest = maxProcessed = 0;
+        prioritySelections = 0;
     }
 }

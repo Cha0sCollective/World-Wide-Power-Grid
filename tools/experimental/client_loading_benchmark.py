@@ -3,6 +3,7 @@ import argparse
 import csv
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -51,6 +52,13 @@ def validate(directory, inputs):
         samples = [json.loads(line) for line in stream]
     assert samples and all(row['affinity_mask'] == 'fff000' for row in samples)
     log = (directory / 'process.log').read_text(errors='replace')
+    priority_requested = bench.read(directory / 'experiment.json')['properties'].get(
+        'wwpg.experimental.wireTreePrioritizeUnresolved', 'false') == 'true'
+    priority = re.findall(r'prioritizeUnresolved=(true|false), prioritySelections=(\d+)', log)
+    if priority_requested:
+        assert len(priority) == 1 and priority[0][0] == 'true' and int(priority[0][1]) > 0
+    elif priority:
+        assert priority == [('false', '0')]
     saved = bench.completed_world_save(log)
     bench.write(directory / 'shutdown-save.json', saved)
     assert saved['all_dimensions_saved']
@@ -64,6 +72,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--name', required=True)
     parser.add_argument('--inputs', required=True)
+    parser.add_argument('--tree-prioritize-unresolved', action='store_true')
     args = parser.parse_args()
     inputs_path = (ROOT / args.inputs).resolve()
     assert inputs_path.is_relative_to(ROOT / 'local/frozen')
@@ -100,7 +109,8 @@ def main():
         'wwpg.experimental.plainWireBatch': 'true', 'wwpg.experimental.plainWireBatch.properties': 'true',
         'wwpg.experimental.plainWireBatch.verify': 'false',
         'wwpg.experimental.wireTreeBatch': 'true', 'wwpg.experimental.wireTreeBudgetMillis': '20',
-        'wwpg.experimental.wireTreeMaxParts': '32'}
+        'wwpg.experimental.wireTreeMaxParts': '32',
+        'wwpg.experimental.wireTreePrioritizeUnresolved': str(args.tree_prioritize_unresolved).lower()}
     # Freeze launch bytes in this attempt. Frozen template dependencies are verified above.
     argument_file = directory / 'client.args'
     argument_file.write_text(''.join(f'-D{k}={v}\n' for k, v in properties.items())

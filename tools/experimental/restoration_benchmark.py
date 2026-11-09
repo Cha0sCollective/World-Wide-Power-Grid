@@ -21,6 +21,7 @@ def main():
     parser.add_argument('--tree-budget-ms', type=int, default=0)
     parser.add_argument('--tree-max-parts', type=int, default=32)
     parser.add_argument('--tree-retain-coverage', action='store_true')
+    parser.add_argument('--tree-prioritize-unresolved', action='store_true')
     parser.add_argument('--helper-inputs', help='Explicit frozen helper overlay manifest for queue-aware readiness')
     parser.add_argument('--cpu-mask', choices=['fff','fff000'], help='Explicit whole-process CPU group after load observation')
     parser.add_argument('--server-cpu-mask', help='Explicit hexadecimal server-thread subset of the selected process group')
@@ -31,6 +32,7 @@ def main():
     assert args.tree_budget_ms >= 0 and args.tree_max_parts > 0
     assert not args.tree_budget_ms or args.tree_batch
     assert not args.tree_retain_coverage or args.tree_batch
+    assert not args.tree_prioritize_unresolved or args.tree_batch
     args.batch = args.property_batch = True
     args.verify_batch = False
     directory, reference, original = experiment.prepare(args)
@@ -43,6 +45,7 @@ def main():
                     loading_trace=args.diagnostic, reload=args.reload, full_suite=False,
                     tree_budget_ms=args.tree_budget_ms, tree_max_parts=args.tree_max_parts,
                     tree_retain_coverage=args.tree_retain_coverage, helper_inputs=args.helper_inputs,
+                    tree_prioritize_unresolved=args.tree_prioritize_unresolved,
                     cpu_affinity_mask=args.cpu_mask, server_affinity_mask=args.server_cpu_mask,
                     started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
     bench.write(directory / 'experiment.json', protocol)
@@ -105,6 +108,13 @@ def main():
                 assert budget and stats['yielded'] > 0 and 0 < stats['maxProcessed'] <= args.tree_max_parts
             assert stats['attachments'] > 0 and stats['covered'] > 0 and stats['pending'] == 0
             assert stats['traversals'] + stats['covered'] + stats.get('discarded',0) == stats['roots'] == stats['attachments'] * 2
+            priority = re.findall(r'prioritizeUnresolved=(true|false), prioritySelections=(\d+)', log)
+            if args.tree_prioritize_unresolved:
+                assert len(priority) == 1 and priority[0][0] == 'true' and int(priority[0][1]) > 0
+            elif priority:
+                assert len(priority) == 1 and priority[0] == ('false', '0')
+            if priority:
+                stats['priority_selections'] = int(priority[0][1])
             protocol['tree_execution'] = stats
         else:
             assert 'WWPG experimental wire-tree batch:' not in log

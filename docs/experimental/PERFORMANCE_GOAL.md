@@ -13,9 +13,21 @@ no full headless or graphical acceptance suite is implied by this investigation.
 
 ## Current evidence and open requirements
 
-- The bounded restoration runtime is `0.2.7-experimental.wiretree.4`, frozen at
-  `local/frozen/prototype-05b/inputs.json` (runtime SHA-256
-  `33fe56c713a63e3b70e045b7fc50667435b50923f569036e66e189ab8a063ac6`).
+- The current candidate is `0.2.7-experimental.wiretree.6`, frozen at
+  `local/frozen/prototype-07a/inputs.json` (runtime SHA-256
+  `522c4cb3c394d7c2f80fd2f73fc637cddab5401540128bfe881d4353db1959bb`).
+  [Unresolved-wire priority](UNRESOLVED_PRIORITY.md) reduces mean headless
+  restoration from **92.08 to 53.51 seconds** in the same-jar on/off/off/on
+  comparison, with **56.3% fewer endpoint visits**. Worst loading ticks remain
+  approximately three seconds. Fifteen units, 134 focused integration checks
+  and an actual full-yard unload/reload passed. The priority flag is opt-in;
+  the old FIFO behavior is preserved with it disabled.
+- The priority runtime's focused steady sample averaged **20.019 TPS**,
+  **48.889 ms mean**, **55.453 ms p95**, **60.356 ms p99** and **65.931 ms
+  maximum** over 2,399 ticks after two minutes of warmup. All graph, storage and
+  16-substep checks passed. This meets the average in one sample, but still
+  misses the p95 50 ms gate and does not establish consistency or a causal
+  steady-state speedup. [Evidence](priority-tps-results-20261109.json).
 - [Retained completed-region coverage](RETAINED_COVERAGE.md) passed 12 units and
   110 integration checks but did not improve full-yard loading. Its candidate
   is preserved at `86229ab` and retired from the working runtime.
@@ -29,13 +41,20 @@ no full headless or graphical acceptance suite is implied by this investigation.
   fresh diagnostic profile completed in 59.48 seconds. Neither is evidence of
   a consistently sub-minute load. Ordering/JIT/host and graph-work variation
   remain to be separated; a cause has not yet been established.
-- The first [focused client observation](CLIENT_LOADING.md) is complete:
+- The first [focused client observation](CLIENT_LOADING.md) on `wiretree.4` was:
   **121.474 seconds** from world opening to restored visible-scene readiness
   at 1920×1080 / 12 chunks. The first frame appeared at 21.699 seconds and full
   electrical readiness at 118.602 seconds. All circuit, rendering-readiness
   and normal-save checks passed, but the load target was missed. It does not
   establish sustained client TPS or complete graphical acceptance.
-- The previous bounded prototype still holds all electrical circuits in an
+- The new priority client observation reached restored/rendered readiness in
+  **104.81 seconds**, with electrical readiness at **63.08 seconds**, at the
+  same confirmed settings. Delivery of the full 609-chunk client view continued
+  for roughly 40 seconds after electrical readiness; the rendering compilation
+  queue was usually empty. This misses the complete-loading goal and identifies
+  a separate delivery/receipt bottleneck to investigate. The client observer
+  is byte-identical to the baseline's. [Evidence](client-priority-results-20261109.json).
+- The bounded implementation still holds all electrical circuits in an
   affected dimension while its wire queue is pending. Preserving behavior
   during continuous streaming and narrowing that pause remain open concerns.
 
@@ -53,8 +72,10 @@ server-start observations confirm `fff000`; all 305 process readbacks matched.
 Do not attribute their different loading times to a code optimization: the
 gameplay jar is identical, while process placement, JVM worker availability
 and the explicit helper overlay differ. The retained-coverage candidate remains
-retired and all 439 recorded source hashes again match the frozen `wiretree.4`
-inputs. Full-yard graph/storage/substep checks passed in both steady samples.
+retired. At that checkpoint all 439 recorded source hashes matched the frozen
+`wiretree.4` inputs. The priority prototype now has a separate frozen source
+inventory. Full-yard graph/storage/substep checks passed in both earlier steady
+samples.
 
 ## Next implementation targets
 
@@ -64,19 +85,20 @@ inputs. Full-yard graph/storage/substep checks passed in both steady samples.
    jar, helper and whole-process group. The narrower mask is not adopted;
    reducing observed migrations did not improve this sample. Their loads
    took 97.48 and 90.67 seconds, so the prior 54-second load is not consistent.
-2. Explain the repeated traversal of incomplete wire regions, including the
-   separate node-holder initialization path, before choosing another batching
-   algorithm. Retaining already-completed regions did not address the yard's
-   dominant cost.
+2. The unresolved-part diagnosis and priority prototype are complete. A small
+   number of delayed attachments prevented fully-resolved coverage and caused
+   repeated traversal. Prioritizing them cuts post-chunk recovery from 40–46
+   seconds to about five. Profile the client delivery/receipt interval next;
+   its full view still arrives long after electrical restoration. The separate
+   node-holder initialization path and largest loading stalls also remain.
 3. Reduce repeated preparation and terminal/world lookups for steady TPS.
    Inspect native geometry dependencies before any reuse; retain dynamic,
    custom, moving, unloaded and replaced-owner behavior. Do not reduce the
    16 electrical substeps, accuracy, storage, heating, or device callbacks.
-4. Use the established client loading/rendering measurement after a runtime
-   improvement, then verify both targets on that runtime. The goal remains
-   active until consistency and functionality preservation have supporting
-   evidence. Current client restoration still performs 46.14 million endpoint
-   visits and spends 58.88 seconds draining work after chunk readiness.
+4. The priority runtime's steady observation is complete; verify both
+   targets on subsequent improvements. The goal remains active until
+   consistency and functionality preservation have supporting evidence.
+   Headless loads below one minute do not establish complete client readiness.
 
 The headless goal runs retain the queue-gate logic from
 `local/frozen/budget-helper-01`, with explicitly recorded affinity overlays

@@ -1,0 +1,2335 @@
+{
+  "schema": 1,
+  "inputs": {
+    "path": "local/frozen/prototype-07a/inputs.json",
+    "sha256": "8945519b6714a8f6356638c7ce0d98c14f53402c50d6ef472e2ba8042e53e6fc"
+  },
+  "artifacts": {
+    "runtime": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6.jar",
+      "sha256": "522c4cb3c394d7c2f80fd2f73fc637cddab5401540128bfe881d4353db1959bb"
+    },
+    "fixtures": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6-gametests.jar",
+      "sha256": "d30fef93478e169d5bfc79f9756f98191cbb4b360b0e131105fcb7a68ac8921b"
+    },
+    "cee": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\electroenergetics-1.21.1-1.1.4.jar",
+      "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+    }
+  },
+  "matched_source_entries": 439,
+  "native_unchanged": true,
+  "helper_inputs": {
+    "path": "local/frozen/affinity-helper-02/inputs.json",
+    "sha256": "d31badb5a5aa1db5537f6cf02e5b1178de66eeb45d522f94df8f4bbdbd6e85e1"
+  },
+  "focused_checks": [
+    {
+      "name": "priority-native-budget-01",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery,wwpg_tree_budget",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 1,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\priority-native-budget-01\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery,wwpg_tree_budget",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=1",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6.jar",
+            "sha256": "522c4cb3c394d7c2f80fd2f73fc637cddab5401540128bfe881d4353db1959bb"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6-gametests.jar",
+            "sha256": "d30fef93478e169d5bfc79f9756f98191cbb4b360b0e131105fcb7a68ac8921b"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "exit_code": 0,
+        "required_tests_passed": 38,
+        "artifacts_unchanged": true,
+        "passed": true
+      },
+      "evidence": [
+        {
+          "path": "local/checks/priority-native-budget-01/result.json",
+          "sha256": "6217504be058319a16367b702bca8f15ead451f8377762225d345c6d54a60c26"
+        },
+        {
+          "path": "local/checks/priority-native-budget-01/invocation.json",
+          "sha256": "a642dc63b7eed91ca70e253d734cb000371e017c0ec48bf4abf2c75101cf523d"
+        },
+        {
+          "path": "local/checks/priority-native-budget-01/process.log",
+          "sha256": "378950b67e13a8ee5307f733225225b6ce89c7c8b75b5f5dc15a51d5bffeae0a"
+        }
+      ]
+    },
+    {
+      "name": "priority-java-budget-01",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery,wwpg_tree_budget",
+        "backend": "JAVA",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 1,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\priority-java-budget-01\\server",
+          "-PtestBackend=JAVA",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery,wwpg_tree_budget",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=1",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6.jar",
+            "sha256": "522c4cb3c394d7c2f80fd2f73fc637cddab5401540128bfe881d4353db1959bb"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6-gametests.jar",
+            "sha256": "d30fef93478e169d5bfc79f9756f98191cbb4b360b0e131105fcb7a68ac8921b"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "exit_code": 0,
+        "required_tests_passed": 38,
+        "artifacts_unchanged": true,
+        "passed": true
+      },
+      "evidence": [
+        {
+          "path": "local/checks/priority-java-budget-01/result.json",
+          "sha256": "52e2bb80fbaa1c7cecae44758de1749a1ddf38b86410eac7f21486b08508f2f1"
+        },
+        {
+          "path": "local/checks/priority-java-budget-01/invocation.json",
+          "sha256": "1db9c6cbe3969c6f05195f2c01970a69e751c3637ded44bf68c9413735a072b6"
+        },
+        {
+          "path": "local/checks/priority-java-budget-01/process.log",
+          "sha256": "6ce6b0e66b5f60b9b2b4bc85069ce794e577070d5dfc3821ef9cada085d1bd39"
+        }
+      ]
+    },
+    {
+      "name": "priority-native-lifecycle-01",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_unload,wwpg_solver_safety",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\priority-native-lifecycle-01\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_unload,wwpg_solver_safety",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=32",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6.jar",
+            "sha256": "522c4cb3c394d7c2f80fd2f73fc637cddab5401540128bfe881d4353db1959bb"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6-gametests.jar",
+            "sha256": "d30fef93478e169d5bfc79f9756f98191cbb4b360b0e131105fcb7a68ac8921b"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "exit_code": 0,
+        "required_tests_passed": 11,
+        "artifacts_unchanged": true,
+        "passed": true
+      },
+      "evidence": [
+        {
+          "path": "local/checks/priority-native-lifecycle-01/result.json",
+          "sha256": "9257f0a008781612282237f4242afef05031afecfeacc4b21a0ee0801a569011"
+        },
+        {
+          "path": "local/checks/priority-native-lifecycle-01/invocation.json",
+          "sha256": "f60037b6a30369d659bc0729d851ef47957b30612c04b25fb70c71f888052f29"
+        },
+        {
+          "path": "local/checks/priority-native-lifecycle-01/process.log",
+          "sha256": "670a8fd3f7ec58d816ae4100799836c654bffa766f1f26ab45936e5fbdf221ea"
+        }
+      ]
+    },
+    {
+      "name": "priority-java-lifecycle-01",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_unload,wwpg_solver_safety",
+        "backend": "JAVA",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\priority-java-lifecycle-01\\server",
+          "-PtestBackend=JAVA",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_unload,wwpg_solver_safety",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=32",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6.jar",
+            "sha256": "522c4cb3c394d7c2f80fd2f73fc637cddab5401540128bfe881d4353db1959bb"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6-gametests.jar",
+            "sha256": "d30fef93478e169d5bfc79f9756f98191cbb4b360b0e131105fcb7a68ac8921b"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "exit_code": 0,
+        "required_tests_passed": 11,
+        "artifacts_unchanged": true,
+        "passed": true
+      },
+      "evidence": [
+        {
+          "path": "local/checks/priority-java-lifecycle-01/result.json",
+          "sha256": "b1303e6e84e677cee223f0c624492554e13c6af070d4cee312daa6e3f90ea4a0"
+        },
+        {
+          "path": "local/checks/priority-java-lifecycle-01/invocation.json",
+          "sha256": "1ab0fd2e695b817c2805fd106115479a2159ad5ea7d9b9b6e716317a021d1b7b"
+        },
+        {
+          "path": "local/checks/priority-java-lifecycle-01/process.log",
+          "sha256": "2fe4b0aeb48724d84b890f0437214eba0fffb81d82094aab6b82e826fb5e23f8"
+        }
+      ]
+    },
+    {
+      "name": "priority-off-tree-01",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\priority-off-tree-01\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=32",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=false"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6.jar",
+            "sha256": "522c4cb3c394d7c2f80fd2f73fc637cddab5401540128bfe881d4353db1959bb"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6-gametests.jar",
+            "sha256": "d30fef93478e169d5bfc79f9756f98191cbb4b360b0e131105fcb7a68ac8921b"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": false,
+        "exit_code": 0,
+        "required_tests_passed": 36,
+        "artifacts_unchanged": true,
+        "passed": true
+      },
+      "evidence": [
+        {
+          "path": "local/checks/priority-off-tree-01/result.json",
+          "sha256": "91d970ff831acb8f72b1a27165b78d9dac2bcec51c358842d5ac54391666cedd"
+        },
+        {
+          "path": "local/checks/priority-off-tree-01/invocation.json",
+          "sha256": "2f7d65104802ddc687ee99f7cd8dabb5da3b60f5834923a8fe329cd69f06fa21"
+        },
+        {
+          "path": "local/checks/priority-off-tree-01/process.log",
+          "sha256": "621ee7aff10f5ab417ab9e7d6176ea44c322788c3f9cb3d56d2bda0a1b63fd26"
+        }
+      ]
+    }
+  ],
+  "units": {
+    "passed": true,
+    "full_suite": false,
+    "unit_tests": 15,
+    "suites": [
+      {
+        "path": "G:\\WWPG\\local\\x27w\\local\\checks\\priority-units-01\\TEST-org.cha0scollective.wwpg.bridge.RestorationWindowTest.xml",
+        "tests": 3,
+        "sha256": "afc4122da33700e7f9748695491622c8a03cc1c938d3626e29362062da68e9c0"
+      },
+      {
+        "path": "G:\\WWPG\\local\\x27w\\local\\checks\\priority-units-01\\TEST-org.cha0scollective.wwpg.wiring.RestorationQueueTest.xml",
+        "tests": 9,
+        "sha256": "55bcbe6252a3e8a278475565a7a130b1edc850376692759028109b518d871aa1"
+      },
+      {
+        "path": "G:\\WWPG\\local\\x27w\\local\\checks\\priority-units-01\\TEST-org.cha0scollective.wwpg.wiring.RestorationRootsTest.xml",
+        "tests": 2,
+        "sha256": "51322f168ea8b35a740905c719341fb83e65741e88fa9cd7c72e2538671a580f"
+      },
+      {
+        "path": "G:\\WWPG\\local\\x27w\\local\\checks\\priority-units-01\\TEST-org.cha0scollective.wwpg.wiring.WireTreeTraversalTest.xml",
+        "tests": 1,
+        "sha256": "d7fbede6a5d2bb1cd02ee48d804beff31e502a5044548d101d3afd723ac98610"
+      }
+    ],
+    "python_parsed": [
+      "plain_wire_benchmark.py",
+      "restoration_benchmark.py",
+      "focused_checks.py",
+      "client_loading_benchmark.py",
+      "freeze_unresolved_helper.py"
+    ]
+  },
+  "unit_result": {
+    "path": "local/checks/priority-units-01/result.json",
+    "sha256": "17447348d7cc69ca03324c201b8e7acc9c24fdc1f217b6b6b3deb33d0c8231d9"
+  },
+  "focused_unit_tests": 15,
+  "focused_gametests": 134,
+  "full_suite": false,
+  "diagnostic": {
+    "name": "goal-unresolved-inspect-01",
+    "protocol": {
+      "schema": 1,
+      "name": "goal-unresolved-inspect-01",
+      "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+      "runtime": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-unresolved-inspect-01\\mods\\wwpg-0.2.7-experimental.wiretree.4.jar",
+        "sha256": "33fe56c713a63e3b70e045b7fc50667435b50923f569036e66e189ab8a063ac6",
+        "kind": "local-candidate",
+        "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-05b\\wwpg-0.2.7-experimental.wiretree.4.jar"
+      },
+      "helper": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-unresolved-inspect-01\\mods\\wwpg-benchmark-unresolved.jar",
+        "sha256": "7107c54b101eac7132a35c5165f038be4847cac36ac1b14f0dee7e1cb928fc68"
+      },
+      "copied_reference": true,
+      "batch": true,
+      "property_batch": true,
+      "tree_batch": true,
+      "detailed": false,
+      "loading_trace": false,
+      "reload": false,
+      "full_suite": false,
+      "tree_budget_ms": 20,
+      "tree_max_parts": 32,
+      "tree_retain_coverage": false,
+      "helper_inputs": "local/frozen/unresolved-helper-01/inputs.json",
+      "cpu_affinity_mask": "fff000",
+      "server_affinity_mask": null,
+      "started_utc": "2026-11-09T14:37:10Z",
+      "tree_execution": {
+        "attachments": 5893,
+        "fallback": 50,
+        "roots": 11786,
+        "traversals": 11116,
+        "covered": 670,
+        "visited": 48830151,
+        "flushes": 1340,
+        "largest": 8252,
+        "pending": 0,
+        "forced": 1,
+        "discarded": 0,
+        "budgetMillis": 20,
+        "maxParts": 32,
+        "yielded": 1339,
+        "maxProcessed": 32,
+        "maxFlushNanos": 63561000,
+        "maxEntryNanos": 62258800
+      },
+      "validation": {
+        "passed": true,
+        "actual_nodes": 14650,
+        "edges": 20637,
+        "chunks": 953,
+        "storage_devices": 1050,
+        "healthy_ticks": 100,
+        "normal_shutdown": true,
+        "sixteen_substeps": true,
+        "no_independent_cee_or_rejected_solves": true,
+        "actual_reload_cycles": 0,
+        "full_suite": false
+      },
+      "loading": [
+        {
+          "phase": "SETTLE",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 503,
+          "graph_ready_tick": 1341,
+          "finish_tick": 1461,
+          "chunk_request_seconds": 0.8207536,
+          "chunk_loading_seconds": 41.0977209,
+          "graph_recovery_seconds": 52.9792349,
+          "electrical_settling_seconds": 6.432253,
+          "total_restoration_seconds": 101.3299624,
+          "restoration_and_settling_seconds": 100.5092088,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 7912,
+          "maximum_pending_roots": 8244,
+          "queue_drained_tick": 1341,
+          "queue_drain_seconds": 52.9792349
+        }
+      ],
+      "original_reference_unchanged": true,
+      "isolated_reference_unchanged": true,
+      "finished_utc": "2026-11-09T14:39:10Z"
+    },
+    "evidence": [
+      {
+        "path": "local/benchmarks/goal-unresolved-inspect-01/experiment.json",
+        "sha256": "4ba9eed1fbf3571d4f1c479f39f21faeb6ba03c5a111f3648145456ada4677c9"
+      },
+      {
+        "path": "local/benchmarks/goal-unresolved-inspect-01/launch.json",
+        "sha256": "01f9b7a09c2b8d77ac1f0cddd331cc11b33c0b5b094e33fb6fe37afb5e09f056"
+      },
+      {
+        "path": "local/benchmarks/goal-unresolved-inspect-01/invocation.json",
+        "sha256": "8c0a302961769441a17368082a136ddb6258c71e537eb4076fc46fd5f5a87be1"
+      },
+      {
+        "path": "local/benchmarks/goal-unresolved-inspect-01/restore-input.json",
+        "sha256": "04d1782cb90c76aa41bdb463dbb8493f6d676b2c522826b2dc7975e20ca13b7e"
+      },
+      {
+        "path": "local/benchmarks/goal-unresolved-inspect-01/shutdown-save.json",
+        "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+      },
+      {
+        "path": "local/benchmarks/goal-unresolved-inspect-01/runner-exit.json",
+        "sha256": "16d08769a30edcf58b73b4882c4834b28ee54ef2f61583f5dbcd33fa4690c444"
+      },
+      {
+        "path": "local/benchmarks/goal-unresolved-inspect-01/host-metrics.jsonl",
+        "sha256": "8a2cdba87171699272f8d2517af0ba38c60e9e721c69d75d748af2dcecb72254"
+      },
+      {
+        "path": "local/benchmarks/goal-unresolved-inspect-01/process.log",
+        "sha256": "d1cca5598466557373fda958aff51f8bbeb02a599c2f0f4a7283ae04f0692f45"
+      },
+      {
+        "path": "local/benchmarks/goal-unresolved-inspect-01/benchmark/result.json",
+        "sha256": "933543e2cd146aa1f8769a9736a8f81a0b127fe264f7aee06e886ad979f667c3"
+      },
+      {
+        "path": "local/benchmarks/goal-unresolved-inspect-01/benchmark/loading-results.json",
+        "sha256": "d6dfdbfe5e7f4d7f1651b191fd8da9d0c5d0d3e30259bb06941c114d013e37a4"
+      },
+      {
+        "path": "local/benchmarks/goal-unresolved-inspect-01/benchmark/ticks.csv",
+        "sha256": "70e17558bf8399e7d1317691889513a04cd7c8f1693f2487af40e3a0f2d90125"
+      },
+      {
+        "path": "local/benchmarks/goal-unresolved-inspect-01/benchmark/placement-ticks.csv",
+        "sha256": "457bc074af6d25bb89088ac3ee45a904623885759d3772760d6aefce551bd424"
+      },
+      {
+        "path": "local/benchmarks/goal-unresolved-inspect-01/benchmark/pre-solve-storage.json",
+        "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+      },
+      {
+        "path": "local/benchmarks/goal-unresolved-inspect-01/benchmark/placement-fixed.json",
+        "sha256": "f39e516534daabb39e6a5305b5c802dee926ac68a80c1f4de97c30d3406bcc22"
+      },
+      {
+        "path": "local/benchmarks/goal-unresolved-inspect-01/benchmark/placement-restored.json",
+        "sha256": "79eda4bf854b627d63ceaabf49ee8f83ec6d7c08486adcab2df1ea6c62315b9c"
+      },
+      {
+        "path": "local/benchmarks/goal-unresolved-inspect-01/benchmark/unresolved-tree.jsonl",
+        "sha256": "3fd40270d6f258878489b0adf6dc88f8f77b5a715dbe1e852e13c0c7cc00ff52"
+      },
+      {
+        "path": "local/frozen/unresolved-helper-01/inputs.json",
+        "sha256": "c081d590ae8ebc64942c4d3c2d0a2c785676c9cd651b5129f69edd1025cf77f3"
+      }
+    ],
+    "host": {
+      "sample_period_seconds": 5,
+      "in_window_intervals": 19,
+      "in_window_seconds": 95.24688196182251,
+      "monitored_processes": 190,
+      "competing_game_present": false,
+      "other_cpu_mean_cores": 0.3146428458625268,
+      "other_process_peaks": [
+        {
+          "name": "ChatGPT.exe",
+          "identity": "13688:134387027373880825",
+          "peak_cores": 0.1964321558049059,
+          "mean_cores": 0.05331539358984421
+        },
+        {
+          "name": "HWiNFO64.EXE",
+          "identity": "5948:134387027096006899",
+          "peak_cores": 0.14657596337352105,
+          "mean_cores": 0.11762196062744092
+        },
+        {
+          "name": "ChatGPT.exe",
+          "identity": "28732:134387027298932907",
+          "peak_cores": 0.09658950359538236,
+          "mean_cores": 0.04839397264308936
+        },
+        {
+          "name": "powershell.exe",
+          "identity": "6028:134387027037888757",
+          "peak_cores": 0.05927163121033255,
+          "mean_cores": 0.026903767842259847
+        },
+        {
+          "name": "codex.exe",
+          "identity": "30104:134387027358105490",
+          "peak_cores": 0.0343279592088821,
+          "mean_cores": 0.003444994662728395
+        },
+        {
+          "name": "ChatGPT.exe",
+          "identity": "28176:134387027293764011",
+          "peak_cores": 0.024943765816495985,
+          "mean_cores": 0.007218084055240447
+        },
+        {
+          "name": "dllhost.exe",
+          "identity": "31644:134387027407630677",
+          "peak_cores": 0.024903543466322946,
+          "mean_cores": 0.00492142094675485
+        },
+        {
+          "name": "explorer.exe",
+          "identity": "13836:134387027040075621",
+          "peak_cores": 0.018694742631364326,
+          "mean_cores": 0.00393713675740388
+        }
+      ],
+      "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+    },
+    "tick_metrics": {
+      "SETTLE": {
+        "ticks": 1461,
+        "longest_tick_seconds": 3.1116746,
+        "tick_body_seconds": 98.2298618,
+        "matrix_assemblies": 1,
+        "network_substep_calls": 1936,
+        "p95_tick_seconds": 0.0847952,
+        "p99_tick_seconds": 0.1472151,
+        "longest_end_to_end_gap_seconds": 3.113
+      }
+    },
+    "scope": "Read-only diagnostic snapshots add work; excluded from clean timing comparisons.",
+    "snapshots": [
+      {
+        "tick": 100,
+        "phase": "SETTLE",
+        "wall_unix_ms": 1794235060420,
+        "parts": 5943,
+        "resolved": 5129,
+        "unresolved_owned": 11,
+        "unresolved_unowned": 803,
+        "pending_roots": 7086,
+        "reasons": {
+          "electroenergetics:capacitor terminal=0 | powergrid:circuit_board terminal=0 owner=absent": 6,
+          "electroenergetics:capacitor terminal=0 | powergrid:creative_resistor terminal=0 owner=HangingWireEntity": 1,
+          "electroenergetics:capacitor terminal=0 | powergrid:creative_resistor terminal=0 owner=absent": 9,
+          "electroenergetics:capacitor terminal=1 | electroenergetics:creative_battery terminal=0 owner=absent": 25,
+          "electroenergetics:creative_battery terminal=1 | powergrid:creative_resistor terminal=0 owner=absent": 25,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:circuit_board terminal=0 owner=HangingWireEntity": 4,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:circuit_board terminal=0 owner=absent": 24,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_resistor terminal=0 owner=HangingWireEntity": 6,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_resistor terminal=0 owner=absent": 35,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_voltage_source terminal=0 owner=absent": 25,
+          "electroenergetics:electrical_panel terminal=11 | electroenergetics:white_electric_motor terminal=0 owner=absent": 50,
+          "electroenergetics:electrical_panel terminal=8 | powergrid:circuit_board terminal=0 owner=absent": 11,
+          "electroenergetics:electrical_panel terminal=8 | powergrid:creative_resistor terminal=0 owner=absent": 14,
+          "electroenergetics:indicator_bulb terminal=1 | powergrid:creative_voltage_source terminal=1 owner=absent": 50,
+          "electroenergetics:inductor terminal=1 | electroenergetics:transformer terminal=1 owner=absent": 50,
+          "electroenergetics:resistive_heater terminal=0 | powergrid:creative_voltage_source terminal=0 owner=absent": 50,
+          "electroenergetics:transformer terminal=0 | powergrid:circuit_board terminal=0 owner=absent": 50,
+          "electroenergetics:transformer terminal=0 | powergrid:creative_resistor terminal=0 owner=absent": 4,
+          "electroenergetics:transformer terminal=2 | powergrid:creative_resistor terminal=0 owner=absent": 50,
+          "powergrid:circuit_board terminal=1 | powergrid:creative_resistor terminal=0 owner=absent": 50,
+          "powergrid:circuit_board terminal=1 | powergrid:creative_voltage_source terminal=1 owner=absent": 25,
+          "powergrid:creative_resistor terminal=0 | powergrid:creative_voltage_source terminal=0 owner=absent": 50,
+          "powergrid:creative_resistor terminal=0 | powergrid:voltage_gauge terminal=0 owner=absent": 50,
+          "powergrid:creative_voltage_source terminal=0 | powergrid:electric_fan terminal=0 owner=absent": 50,
+          "powergrid:creative_voltage_source terminal=0 | powergrid:electric_pump terminal=0 owner=absent": 50,
+          "powergrid:creative_voltage_source terminal=1 | powergrid:creative_voltage_source terminal=1 owner=absent": 50
+        }
+      },
+      {
+        "tick": 200,
+        "phase": "SETTLE",
+        "wall_unix_ms": 1794235067875,
+        "parts": 5943,
+        "resolved": 5446,
+        "unresolved_owned": 104,
+        "unresolved_unowned": 393,
+        "pending_roots": 7770,
+        "reasons": {
+          "electroenergetics:capacitor terminal=0 | powergrid:circuit_board terminal=0 owner=absent": 6,
+          "electroenergetics:capacitor terminal=0 | powergrid:creative_resistor terminal=0 owner=HangingWireEntity": 1,
+          "electroenergetics:capacitor terminal=0 | powergrid:creative_resistor terminal=0 owner=absent": 5,
+          "electroenergetics:capacitor terminal=1 | electroenergetics:creative_battery terminal=0 owner=absent": 25,
+          "electroenergetics:creative_battery terminal=1 | powergrid:creative_resistor terminal=0 owner=absent": 25,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:circuit_board terminal=0 owner=HangingWireEntity": 4,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:circuit_board terminal=0 owner=absent": 16,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_resistor terminal=0 owner=HangingWireEntity": 5,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_resistor terminal=0 owner=absent": 22,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_voltage_source terminal=0 owner=absent": 25,
+          "electroenergetics:electrical_panel terminal=11 | electroenergetics:white_electric_motor terminal=0 owner=absent": 50,
+          "electroenergetics:electrical_panel terminal=8 | powergrid:circuit_board terminal=0 owner=absent": 6,
+          "electroenergetics:electrical_panel terminal=8 | powergrid:creative_resistor terminal=0 owner=absent": 11,
+          "electroenergetics:indicator_bulb terminal=1 | powergrid:creative_voltage_source terminal=1 owner=absent": 50,
+          "electroenergetics:inductor terminal=1 | electroenergetics:transformer terminal=1 owner=HangingWireEntity": 47,
+          "electroenergetics:inductor terminal=1 | electroenergetics:transformer terminal=1 owner=absent": 3,
+          "electroenergetics:resistive_heater terminal=0 | powergrid:creative_voltage_source terminal=0 owner=absent": 50,
+          "electroenergetics:transformer terminal=0 | powergrid:circuit_board terminal=0 owner=HangingWireEntity": 47,
+          "electroenergetics:transformer terminal=0 | powergrid:circuit_board terminal=0 owner=absent": 3,
+          "electroenergetics:transformer terminal=0 | powergrid:creative_resistor terminal=0 owner=absent": 3,
+          "electroenergetics:transformer terminal=2 | powergrid:creative_resistor terminal=0 owner=absent": 3,
+          "powergrid:circuit_board terminal=1 | powergrid:creative_resistor terminal=0 owner=absent": 3,
+          "powergrid:circuit_board terminal=1 | powergrid:creative_voltage_source terminal=1 owner=absent": 25,
+          "powergrid:creative_resistor terminal=0 | powergrid:creative_voltage_source terminal=0 owner=absent": 50,
+          "powergrid:creative_resistor terminal=0 | powergrid:voltage_gauge terminal=0 owner=absent": 3,
+          "powergrid:creative_voltage_source terminal=0 | powergrid:electric_fan terminal=0 owner=absent": 3,
+          "powergrid:creative_voltage_source terminal=0 | powergrid:electric_pump terminal=0 owner=absent": 3,
+          "powergrid:creative_voltage_source terminal=1 | powergrid:creative_voltage_source terminal=1 owner=absent": 3
+        }
+      },
+      {
+        "tick": 300,
+        "phase": "SETTLE",
+        "wall_unix_ms": 1794235074196,
+        "parts": 5943,
+        "resolved": 5502,
+        "unresolved_owned": 96,
+        "unresolved_unowned": 345,
+        "pending_roots": 7662,
+        "reasons": {
+          "electroenergetics:capacitor terminal=0 | powergrid:circuit_board terminal=0 owner=absent": 1,
+          "electroenergetics:capacitor terminal=0 | powergrid:creative_resistor terminal=0 owner=absent": 1,
+          "electroenergetics:capacitor terminal=1 | electroenergetics:creative_battery terminal=0 owner=absent": 25,
+          "electroenergetics:creative_battery terminal=1 | powergrid:creative_resistor terminal=0 owner=absent": 25,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:circuit_board terminal=0 owner=absent": 10,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_resistor terminal=0 owner=absent": 7,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_voltage_source terminal=0 owner=absent": 25,
+          "electroenergetics:electrical_panel terminal=11 | electroenergetics:white_electric_motor terminal=0 owner=absent": 50,
+          "electroenergetics:electrical_panel terminal=8 | powergrid:circuit_board terminal=0 owner=absent": 4,
+          "electroenergetics:electrical_panel terminal=8 | powergrid:creative_resistor terminal=0 owner=absent": 4,
+          "electroenergetics:indicator_bulb terminal=1 | powergrid:creative_voltage_source terminal=1 owner=absent": 50,
+          "electroenergetics:inductor terminal=1 | electroenergetics:transformer terminal=1 owner=HangingWireEntity": 48,
+          "electroenergetics:inductor terminal=1 | electroenergetics:transformer terminal=1 owner=absent": 2,
+          "electroenergetics:resistive_heater terminal=0 | powergrid:creative_voltage_source terminal=0 owner=absent": 50,
+          "electroenergetics:transformer terminal=0 | powergrid:circuit_board terminal=0 owner=HangingWireEntity": 48,
+          "electroenergetics:transformer terminal=0 | powergrid:circuit_board terminal=0 owner=absent": 2,
+          "electroenergetics:transformer terminal=0 | powergrid:creative_resistor terminal=0 owner=absent": 2,
+          "electroenergetics:transformer terminal=2 | powergrid:creative_resistor terminal=0 owner=absent": 2,
+          "powergrid:circuit_board terminal=1 | powergrid:creative_resistor terminal=0 owner=absent": 2,
+          "powergrid:circuit_board terminal=1 | powergrid:creative_voltage_source terminal=1 owner=absent": 25,
+          "powergrid:creative_resistor terminal=0 | powergrid:creative_voltage_source terminal=0 owner=absent": 50,
+          "powergrid:creative_resistor terminal=0 | powergrid:voltage_gauge terminal=0 owner=absent": 2,
+          "powergrid:creative_voltage_source terminal=0 | powergrid:electric_fan terminal=0 owner=absent": 2,
+          "powergrid:creative_voltage_source terminal=0 | powergrid:electric_pump terminal=0 owner=absent": 2,
+          "powergrid:creative_voltage_source terminal=1 | powergrid:creative_voltage_source terminal=1 owner=absent": 2
+        }
+      },
+      {
+        "tick": 400,
+        "phase": "SETTLE",
+        "wall_unix_ms": 1794235080499,
+        "parts": 5943,
+        "resolved": 5560,
+        "unresolved_owned": 107,
+        "unresolved_unowned": 276,
+        "pending_roots": 7220,
+        "reasons": {
+          "electroenergetics:capacitor terminal=0 | powergrid:circuit_board terminal=0 owner=absent": 1,
+          "electroenergetics:capacitor terminal=1 | electroenergetics:creative_battery terminal=0 owner=HangingWireEntity": 4,
+          "electroenergetics:capacitor terminal=1 | electroenergetics:creative_battery terminal=0 owner=absent": 21,
+          "electroenergetics:creative_battery terminal=1 | powergrid:creative_resistor terminal=0 owner=absent": 21,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:circuit_board terminal=0 owner=HangingWireEntity": 1,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:circuit_board terminal=0 owner=absent": 7,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_resistor terminal=0 owner=absent": 3,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_voltage_source terminal=0 owner=absent": 25,
+          "electroenergetics:electrical_panel terminal=11 | electroenergetics:white_electric_motor terminal=0 owner=HangingWireEntity": 10,
+          "electroenergetics:electrical_panel terminal=11 | electroenergetics:white_electric_motor terminal=0 owner=absent": 40,
+          "electroenergetics:electrical_panel terminal=8 | powergrid:circuit_board terminal=0 owner=absent": 1,
+          "electroenergetics:electrical_panel terminal=8 | powergrid:creative_resistor terminal=0 owner=absent": 3,
+          "electroenergetics:indicator_bulb terminal=1 | powergrid:creative_voltage_source terminal=1 owner=HangingWireEntity": 1,
+          "electroenergetics:indicator_bulb terminal=1 | powergrid:creative_voltage_source terminal=1 owner=absent": 40,
+          "electroenergetics:inductor terminal=1 | electroenergetics:transformer terminal=1 owner=HangingWireEntity": 49,
+          "electroenergetics:inductor terminal=1 | electroenergetics:transformer terminal=1 owner=absent": 1,
+          "electroenergetics:resistive_heater terminal=0 | powergrid:creative_voltage_source terminal=0 owner=HangingWireEntity": 1,
+          "electroenergetics:resistive_heater terminal=0 | powergrid:creative_voltage_source terminal=0 owner=absent": 40,
+          "electroenergetics:transformer terminal=0 | powergrid:circuit_board terminal=0 owner=HangingWireEntity": 40,
+          "electroenergetics:transformer terminal=0 | powergrid:circuit_board terminal=0 owner=absent": 1,
+          "electroenergetics:transformer terminal=0 | powergrid:creative_resistor terminal=0 owner=absent": 1,
+          "electroenergetics:transformer terminal=2 | powergrid:creative_resistor terminal=0 owner=absent": 1,
+          "powergrid:circuit_board terminal=1 | powergrid:creative_resistor terminal=0 owner=absent": 1,
+          "powergrid:circuit_board terminal=1 | powergrid:creative_voltage_source terminal=1 owner=absent": 25,
+          "powergrid:creative_resistor terminal=0 | powergrid:creative_voltage_source terminal=0 owner=HangingWireEntity": 1,
+          "powergrid:creative_resistor terminal=0 | powergrid:creative_voltage_source terminal=0 owner=absent": 40,
+          "powergrid:creative_resistor terminal=0 | powergrid:voltage_gauge terminal=0 owner=absent": 1,
+          "powergrid:creative_voltage_source terminal=0 | powergrid:electric_fan terminal=0 owner=absent": 1,
+          "powergrid:creative_voltage_source terminal=0 | powergrid:electric_pump terminal=0 owner=absent": 1,
+          "powergrid:creative_voltage_source terminal=1 | powergrid:creative_voltage_source terminal=1 owner=absent": 1
+        }
+      },
+      {
+        "tick": 500,
+        "phase": "SETTLE",
+        "wall_unix_ms": 1794235088541,
+        "parts": 5943,
+        "resolved": 5802,
+        "unresolved_owned": 127,
+        "unresolved_unowned": 14,
+        "pending_roots": 7818,
+        "reasons": {
+          "electroenergetics:capacitor terminal=1 | electroenergetics:creative_battery terminal=0 owner=HangingWireEntity": 25,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:circuit_board terminal=0 owner=absent": 1,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_resistor terminal=0 owner=absent": 2,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_voltage_source terminal=0 owner=HangingWireEntity": 1,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_voltage_source terminal=0 owner=absent": 5,
+          "electroenergetics:electrical_panel terminal=11 | electroenergetics:white_electric_motor terminal=0 owner=HangingWireEntity": 50,
+          "electroenergetics:electrical_panel terminal=8 | powergrid:creative_resistor terminal=0 owner=absent": 1,
+          "electroenergetics:inductor terminal=1 | electroenergetics:transformer terminal=1 owner=HangingWireEntity": 50,
+          "powergrid:circuit_board terminal=1 | powergrid:creative_voltage_source terminal=1 owner=HangingWireEntity": 1,
+          "powergrid:circuit_board terminal=1 | powergrid:creative_voltage_source terminal=1 owner=absent": 5
+        }
+      },
+      {
+        "tick": 600,
+        "phase": "SETTLE",
+        "wall_unix_ms": 1794235094872,
+        "parts": 5943,
+        "resolved": 5817,
+        "unresolved_owned": 126,
+        "unresolved_unowned": 0,
+        "pending_roots": 7202,
+        "reasons": {
+          "electroenergetics:capacitor terminal=1 | electroenergetics:creative_battery terminal=0 owner=HangingWireEntity": 25,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_resistor terminal=0 owner=HangingWireEntity": 1,
+          "electroenergetics:electrical_panel terminal=11 | electroenergetics:white_electric_motor terminal=0 owner=HangingWireEntity": 50,
+          "electroenergetics:inductor terminal=1 | electroenergetics:transformer terminal=1 owner=HangingWireEntity": 50
+        }
+      },
+      {
+        "tick": 700,
+        "phase": "SETTLE",
+        "wall_unix_ms": 1794235101027,
+        "parts": 5943,
+        "resolved": 5817,
+        "unresolved_owned": 126,
+        "unresolved_unowned": 0,
+        "pending_roots": 6508,
+        "reasons": {
+          "electroenergetics:capacitor terminal=1 | electroenergetics:creative_battery terminal=0 owner=HangingWireEntity": 25,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_resistor terminal=0 owner=HangingWireEntity": 1,
+          "electroenergetics:electrical_panel terminal=11 | electroenergetics:white_electric_motor terminal=0 owner=HangingWireEntity": 50,
+          "electroenergetics:inductor terminal=1 | electroenergetics:transformer terminal=1 owner=HangingWireEntity": 50
+        }
+      },
+      {
+        "tick": 800,
+        "phase": "SETTLE",
+        "wall_unix_ms": 1794235107208,
+        "parts": 5943,
+        "resolved": 5817,
+        "unresolved_owned": 126,
+        "unresolved_unowned": 0,
+        "pending_roots": 5756,
+        "reasons": {
+          "electroenergetics:capacitor terminal=1 | electroenergetics:creative_battery terminal=0 owner=HangingWireEntity": 25,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_resistor terminal=0 owner=HangingWireEntity": 1,
+          "electroenergetics:electrical_panel terminal=11 | electroenergetics:white_electric_motor terminal=0 owner=HangingWireEntity": 50,
+          "electroenergetics:inductor terminal=1 | electroenergetics:transformer terminal=1 owner=HangingWireEntity": 50
+        }
+      },
+      {
+        "tick": 900,
+        "phase": "SETTLE",
+        "wall_unix_ms": 1794235113338,
+        "parts": 5943,
+        "resolved": 5817,
+        "unresolved_owned": 126,
+        "unresolved_unowned": 0,
+        "pending_roots": 4980,
+        "reasons": {
+          "electroenergetics:capacitor terminal=1 | electroenergetics:creative_battery terminal=0 owner=HangingWireEntity": 25,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_resistor terminal=0 owner=HangingWireEntity": 1,
+          "electroenergetics:electrical_panel terminal=11 | electroenergetics:white_electric_motor terminal=0 owner=HangingWireEntity": 50,
+          "electroenergetics:inductor terminal=1 | electroenergetics:transformer terminal=1 owner=HangingWireEntity": 50
+        }
+      },
+      {
+        "tick": 1000,
+        "phase": "SETTLE",
+        "wall_unix_ms": 1794235119476,
+        "parts": 5943,
+        "resolved": 5817,
+        "unresolved_owned": 126,
+        "unresolved_unowned": 0,
+        "pending_roots": 4236,
+        "reasons": {
+          "electroenergetics:capacitor terminal=1 | electroenergetics:creative_battery terminal=0 owner=HangingWireEntity": 25,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_resistor terminal=0 owner=HangingWireEntity": 1,
+          "electroenergetics:electrical_panel terminal=11 | electroenergetics:white_electric_motor terminal=0 owner=HangingWireEntity": 50,
+          "electroenergetics:inductor terminal=1 | electroenergetics:transformer terminal=1 owner=HangingWireEntity": 50
+        }
+      },
+      {
+        "tick": 1100,
+        "phase": "SETTLE",
+        "wall_unix_ms": 1794235126013,
+        "parts": 5943,
+        "resolved": 5846,
+        "unresolved_owned": 97,
+        "unresolved_unowned": 0,
+        "pending_roots": 3162,
+        "reasons": {
+          "electroenergetics:capacitor terminal=1 | electroenergetics:creative_battery terminal=0 owner=HangingWireEntity": 25,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_resistor terminal=0 owner=HangingWireEntity": 1,
+          "electroenergetics:electrical_panel terminal=11 | electroenergetics:white_electric_motor terminal=0 owner=HangingWireEntity": 50,
+          "electroenergetics:inductor terminal=1 | electroenergetics:transformer terminal=1 owner=HangingWireEntity": 21
+        }
+      },
+      {
+        "tick": 1200,
+        "phase": "SETTLE",
+        "wall_unix_ms": 1794235132347,
+        "parts": 5943,
+        "resolved": 5864,
+        "unresolved_owned": 79,
+        "unresolved_unowned": 0,
+        "pending_roots": 2158,
+        "reasons": {
+          "electroenergetics:capacitor terminal=1 | electroenergetics:creative_battery terminal=0 owner=HangingWireEntity": 25,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_resistor terminal=0 owner=HangingWireEntity": 1,
+          "electroenergetics:electrical_panel terminal=11 | electroenergetics:white_electric_motor terminal=0 owner=HangingWireEntity": 50,
+          "electroenergetics:inductor terminal=1 | electroenergetics:transformer terminal=1 owner=HangingWireEntity": 3
+        }
+      },
+      {
+        "tick": 1300,
+        "phase": "SETTLE",
+        "wall_unix_ms": 1794235138762,
+        "parts": 5943,
+        "resolved": 5903,
+        "unresolved_owned": 40,
+        "unresolved_unowned": 0,
+        "pending_roots": 1088,
+        "reasons": {
+          "electroenergetics:capacitor terminal=1 | electroenergetics:creative_battery terminal=0 owner=HangingWireEntity": 13,
+          "electroenergetics:creative_resistor terminal=0 | powergrid:creative_resistor terminal=0 owner=HangingWireEntity": 1,
+          "electroenergetics:electrical_panel terminal=11 | electroenergetics:white_electric_motor terminal=0 owner=HangingWireEntity": 25,
+          "electroenergetics:inductor terminal=1 | electroenergetics:transformer terminal=1 owner=HangingWireEntity": 1
+        }
+      },
+      {
+        "tick": 1400,
+        "phase": "SETTLE",
+        "wall_unix_ms": 1794235145288,
+        "parts": 5943,
+        "resolved": 5943,
+        "unresolved_owned": 0,
+        "unresolved_unowned": 0,
+        "pending_roots": 0,
+        "reasons": {}
+      },
+      {
+        "tick": 1461,
+        "phase": "FINISH",
+        "wall_unix_ms": 1794235148330,
+        "parts": 5943,
+        "resolved": 5943,
+        "unresolved_owned": 0,
+        "unresolved_unowned": 0,
+        "pending_roots": 0,
+        "reasons": {}
+      }
+    ]
+  },
+  "measurements": [
+    {
+      "name": "goal-priority-on-01",
+      "protocol": {
+        "schema": 1,
+        "name": "goal-priority-on-01",
+        "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-priority-on-01\\mods\\wwpg-0.2.7-experimental.wiretree.6.jar",
+          "sha256": "522c4cb3c394d7c2f80fd2f73fc637cddab5401540128bfe881d4353db1959bb",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6.jar"
+        },
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-priority-on-01\\mods\\wwpg-benchmark-0.1.0-affinity.jar",
+          "sha256": "56434c77e56c6361aad1b54733eac5573b97bd24d52ae42b0d330216da7a34cb"
+        },
+        "copied_reference": true,
+        "batch": true,
+        "property_batch": true,
+        "tree_batch": true,
+        "detailed": false,
+        "loading_trace": false,
+        "reload": false,
+        "full_suite": false,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "helper_inputs": "local/frozen/affinity-helper-02/inputs.json",
+        "tree_prioritize_unresolved": true,
+        "cpu_affinity_mask": "fff000",
+        "server_affinity_mask": null,
+        "started_utc": "2026-11-09T14:54:22Z",
+        "tree_execution": {
+          "attachments": 5893,
+          "fallback": 50,
+          "roots": 11786,
+          "traversals": 5421,
+          "covered": 6365,
+          "visited": 20856093,
+          "flushes": 607,
+          "largest": 7814,
+          "pending": 0,
+          "forced": 45,
+          "discarded": 0,
+          "budgetMillis": 20,
+          "maxParts": 32,
+          "yielded": 606,
+          "maxProcessed": 32,
+          "maxFlushNanos": 64303700,
+          "maxEntryNanos": 62415000,
+          "priority_selections": 581
+        },
+        "validation": {
+          "passed": true,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "healthy_ticks": 100,
+          "normal_shutdown": true,
+          "sixteen_substeps": true,
+          "no_independent_cee_or_rejected_solves": true,
+          "actual_reload_cycles": 0,
+          "full_suite": false
+        },
+        "loading": [
+          {
+            "phase": "SETTLE",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 504,
+            "graph_ready_tick": 608,
+            "finish_tick": 728,
+            "chunk_request_seconds": 0.8041423,
+            "chunk_loading_seconds": 41.5918829,
+            "graph_recovery_seconds": 5.2051477,
+            "electrical_settling_seconds": 6.3190907,
+            "total_restoration_seconds": 53.9202636,
+            "restoration_and_settling_seconds": 53.1161213,
+            "healthy_ticks": 100,
+            "queued_roots_at_chunk_ready": 6602,
+            "maximum_pending_roots": 7808,
+            "queue_drained_tick": 608,
+            "queue_drain_seconds": 5.2051477
+          }
+        ],
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T14:55:35Z"
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/goal-priority-on-01/experiment.json",
+          "sha256": "40c48aec481ea7c19c5d5e6e557a45a9f48cb98fbc2dbb5548b8ef9174bd9a50"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-01/launch.json",
+          "sha256": "500b212d0575143a4a9f3d96ae9638c59581aad03004572270123aac1e4ef77e"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-01/invocation.json",
+          "sha256": "124baf0b5896efcb8cf76926091ced58d0759669e5b3470a6971ce92dd3ebe68"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-01/restore-input.json",
+          "sha256": "1ffe3a9c1bbe2fc14edb3163b06df0db38f65192c8d80afd457709f62ab45baa"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-01/runner-exit.json",
+          "sha256": "611ffda9f4cb2919582db9f4baeaaf5b7701a0a1c09f9b98bac306e053e39f6a"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-01/host-metrics.jsonl",
+          "sha256": "480926d94fd3cf69d2e2d4324ec5cebb07f4068e5218ef9e6727964d9aeca4f4"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-01/process.log",
+          "sha256": "c8561339ff50289f1ca82e659fd152e18f171637f0b4ce54b013ed5f64586b13"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-01/benchmark/result.json",
+          "sha256": "09349458212ed9b0bb9e7533bee3c575eb84a975c8da1d69a5348fb1f9f839a1"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-01/benchmark/loading-results.json",
+          "sha256": "4491982432ac62c8b9ace9c7680535aec266f72630e93cf4cab6d1c9a61505a0"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-01/benchmark/ticks.csv",
+          "sha256": "dfeb8ead9b13fd28597cd10811d2d8be32672f0f230e8ad8952e2efd706ff21d"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-01/benchmark/placement-ticks.csv",
+          "sha256": "43c6740357a1efde04375cb4aa5039cd78f3f4610c820719240343de00614bf6"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-01/benchmark/placement-fixed.json",
+          "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-01/benchmark/placement-restored.json",
+          "sha256": "3bafe0c622640138b9c3eba475cf936525c0775eb01488cdc2531f1b884ffbe1"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-01/cpu-preflight.json",
+          "sha256": "a9094cb676dcf80b954544562bc6b27921ec557e2667687331cdbd3ef19b0ab8"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-01/process-affinity.json",
+          "sha256": "686701f32f9c23352e25ee137f3a13b6ffe555bb8289e808af6f0a9dae63f456"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-01/process-metrics.jsonl",
+          "sha256": "271ea425ed779153a200c21b8976b0d3420cfccb52890cd07445868b94a3ab38"
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 9,
+        "in_window_seconds": 45.121729135513306,
+        "monitored_processes": 192,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.3317414976506023,
+        "other_process_peaks": [
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "5948:134387027096006899",
+            "peak_cores": 0.1556272023697433,
+            "mean_cores": 0.12016106438910125
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "13688:134387027373880825",
+            "peak_cores": 0.07780383849682072,
+            "mean_cores": 0.03566740527976204
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28732:134387027298932907",
+            "peak_cores": 0.07486085884966369,
+            "mean_cores": 0.05575196359263775
+          },
+          {
+            "name": "Discord.exe",
+            "identity": "28708:134387040917398085",
+            "peak_cores": 0.06548949933692319,
+            "mean_cores": 0.009003422691978768
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28176:134387027293764011",
+            "peak_cores": 0.0467880367810398,
+            "mean_cores": 0.015582846966886329
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "6028:134387027037888757",
+            "peak_cores": 0.04674476608311157,
+            "mean_cores": 0.02874169551670145
+          },
+          {
+            "name": "codex.exe",
+            "identity": "30104:134387027358105490",
+            "peak_cores": 0.024930541910992837,
+            "mean_cores": 0.009349708180131797
+          },
+          {
+            "name": "explorer.exe",
+            "identity": "13836:134387027040075621",
+            "peak_cores": 0.018715214712415922,
+            "mean_cores": 0.0031165693933772657
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "tick_metrics": {
+        "SETTLE": {
+          "ticks": 728,
+          "longest_tick_seconds": 3.0609546,
+          "tick_body_seconds": 52.4696352,
+          "matrix_assemblies": 1,
+          "network_substep_calls": 1936,
+          "p95_tick_seconds": 0.1079673,
+          "p99_tick_seconds": 0.2269645,
+          "longest_end_to_end_gap_seconds": 3.066
+        }
+      }
+    },
+    {
+      "name": "goal-priority-off-01",
+      "protocol": {
+        "schema": 1,
+        "name": "goal-priority-off-01",
+        "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-priority-off-01\\mods\\wwpg-0.2.7-experimental.wiretree.6.jar",
+          "sha256": "522c4cb3c394d7c2f80fd2f73fc637cddab5401540128bfe881d4353db1959bb",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6.jar"
+        },
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-priority-off-01\\mods\\wwpg-benchmark-0.1.0-affinity.jar",
+          "sha256": "56434c77e56c6361aad1b54733eac5573b97bd24d52ae42b0d330216da7a34cb"
+        },
+        "copied_reference": true,
+        "batch": true,
+        "property_batch": true,
+        "tree_batch": true,
+        "detailed": false,
+        "loading_trace": false,
+        "reload": false,
+        "full_suite": false,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "helper_inputs": "local/frozen/affinity-helper-02/inputs.json",
+        "tree_prioritize_unresolved": false,
+        "cpu_affinity_mask": "fff000",
+        "server_affinity_mask": null,
+        "started_utc": "2026-11-09T14:55:49Z",
+        "tree_execution": {
+          "attachments": 5893,
+          "fallback": 50,
+          "roots": 11786,
+          "traversals": 10586,
+          "covered": 1200,
+          "visited": 46233151,
+          "flushes": 1191,
+          "largest": 8142,
+          "pending": 0,
+          "forced": 0,
+          "discarded": 0,
+          "budgetMillis": 20,
+          "maxParts": 32,
+          "yielded": 1190,
+          "maxProcessed": 32,
+          "maxFlushNanos": 64672000,
+          "maxEntryNanos": 63666100,
+          "priority_selections": 0
+        },
+        "validation": {
+          "passed": true,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "healthy_ticks": 100,
+          "normal_shutdown": true,
+          "sixteen_substeps": true,
+          "no_independent_cee_or_rejected_solves": true,
+          "actual_reload_cycles": 0,
+          "full_suite": false
+        },
+        "loading": [
+          {
+            "phase": "SETTLE",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 519,
+            "graph_ready_tick": 1192,
+            "finish_tick": 1312,
+            "chunk_request_seconds": 0.8157761,
+            "chunk_loading_seconds": 42.1303943,
+            "graph_recovery_seconds": 40.495411,
+            "electrical_settling_seconds": 6.2866467,
+            "total_restoration_seconds": 89.7282281,
+            "restoration_and_settling_seconds": 88.912452,
+            "healthy_ticks": 100,
+            "queued_roots_at_chunk_ready": 7566,
+            "maximum_pending_roots": 8134,
+            "queue_drained_tick": 1192,
+            "queue_drain_seconds": 40.495411
+          }
+        ],
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T14:57:38Z"
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/goal-priority-off-01/experiment.json",
+          "sha256": "4906b06db70813c7071277f5092bcef72942c169b8147309675bf557baa1d78f"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-01/launch.json",
+          "sha256": "eb48a43a968c08ae1add0f6881bc75eef7c4c99aeb1e8dd783202ed8a04becfc"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-01/invocation.json",
+          "sha256": "0375be980d32b9eba4fcc7f87ac3963bd3551a832b022533e9c86e9cccba8701"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-01/restore-input.json",
+          "sha256": "0d11ec959624560a0675056bddd71d46b26974369a4b59571ee39808b60e2630"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-01/runner-exit.json",
+          "sha256": "e86c5d151165ea9c6500f84a6facdbf927e4384fbd02872dee3c9fe902e41b8d"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-01/host-metrics.jsonl",
+          "sha256": "5155544180b0997fc2f5bf9898d536ef454eb76175b02df0eb9a27f8f514a9b8"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-01/process.log",
+          "sha256": "f75aa62533e63a340a1acfc196b563f2da49aacdb25fc6f9c17114ae8ba78aaa"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-01/benchmark/result.json",
+          "sha256": "659d26bf54d9f45bd223b2ddad55b8afde82aa6aec11c5af012bb390bdd40acc"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-01/benchmark/loading-results.json",
+          "sha256": "7e05d3a7a1920d7f000f1236c52cac6726314430afd63e101abd5044eaf9ad63"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-01/benchmark/ticks.csv",
+          "sha256": "6ccb2457ea52c366b9d0a38e64a8e6dfd477c46907c9fe4d18e08017bda38294"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-01/benchmark/placement-ticks.csv",
+          "sha256": "448c69eb23b3a8c07ef000e44f403cb66cd7bbc2b4113c8c0cf24f357ba5c1c7"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-01/benchmark/placement-fixed.json",
+          "sha256": "f39e516534daabb39e6a5305b5c802dee926ac68a80c1f4de97c30d3406bcc22"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-01/benchmark/placement-restored.json",
+          "sha256": "76da4a151b5d56796030ffa77d74c15cf15b59ccd4ef3dc98f6fc708f41b508e"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-01/cpu-preflight.json",
+          "sha256": "88c28fc975954a2bac426d6c265720e2d578d0479bc5667ebf34c4b9636e3f66"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-01/process-affinity.json",
+          "sha256": "e0451dcf78b35f70fb0d5361365e872c0b2a06ae8b0ef01d86d48e4abbbe7835"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-01/process-metrics.jsonl",
+          "sha256": "410ea0518fe50eab44c6614977882efce9822525025311f864c5632ed98252bc"
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 17,
+        "in_window_seconds": 85.23161840438843,
+        "monitored_processes": 194,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.36793123945168876,
+        "other_process_peaks": [
+          {
+            "name": "chrome.exe",
+            "identity": "35380:134387027576582133",
+            "peak_cores": 0.2556282479443005,
+            "mean_cores": 0.025665358008588154
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "13688:134387027373880825",
+            "peak_cores": 0.1903797030469879,
+            "mean_cores": 0.06782987473698297
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "5948:134387027096006899",
+            "peak_cores": 0.13716114430967882,
+            "mean_cores": 0.12044385865458869
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28732:134387027298932907",
+            "peak_cores": 0.08714085776242628,
+            "mean_cores": 0.04454772854347801
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "6028:134387027037888757",
+            "peak_cores": 0.05305663855407859,
+            "mean_cores": 0.026948625909017563
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28176:134387027293764011",
+            "peak_cores": 0.04673782095464605,
+            "mean_cores": 0.009716171246108372
+          },
+          {
+            "name": "codex.exe",
+            "identity": "30104:134387027358105490",
+            "peak_cores": 0.04362196622433631,
+            "mean_cores": 0.004399775658615112
+          },
+          {
+            "name": "chrome.exe",
+            "identity": "34876:134387027579011411",
+            "peak_cores": 0.024939341262858586,
+            "mean_cores": 0.0023832118150831855
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "tick_metrics": {
+        "SETTLE": {
+          "ticks": 1312,
+          "longest_tick_seconds": 3.1080298,
+          "tick_body_seconds": 87.1838276,
+          "matrix_assemblies": 1,
+          "network_substep_calls": 1936,
+          "p95_tick_seconds": 0.0876708,
+          "p99_tick_seconds": 0.1763765,
+          "longest_end_to_end_gap_seconds": 3.111
+        }
+      }
+    },
+    {
+      "name": "goal-priority-off-02",
+      "protocol": {
+        "schema": 1,
+        "name": "goal-priority-off-02",
+        "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-priority-off-02\\mods\\wwpg-0.2.7-experimental.wiretree.6.jar",
+          "sha256": "522c4cb3c394d7c2f80fd2f73fc637cddab5401540128bfe881d4353db1959bb",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6.jar"
+        },
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-priority-off-02\\mods\\wwpg-benchmark-0.1.0-affinity.jar",
+          "sha256": "56434c77e56c6361aad1b54733eac5573b97bd24d52ae42b0d330216da7a34cb"
+        },
+        "copied_reference": true,
+        "batch": true,
+        "property_batch": true,
+        "tree_batch": true,
+        "detailed": false,
+        "loading_trace": false,
+        "reload": false,
+        "full_suite": false,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "helper_inputs": "local/frozen/affinity-helper-02/inputs.json",
+        "tree_prioritize_unresolved": false,
+        "cpu_affinity_mask": "fff000",
+        "server_affinity_mask": null,
+        "started_utc": "2026-11-09T14:57:48Z",
+        "tree_execution": {
+          "attachments": 5893,
+          "fallback": 50,
+          "roots": 11786,
+          "traversals": 11116,
+          "covered": 670,
+          "visited": 48830151,
+          "flushes": 1259,
+          "largest": 8140,
+          "pending": 0,
+          "forced": 0,
+          "discarded": 0,
+          "budgetMillis": 20,
+          "maxParts": 32,
+          "yielded": 1258,
+          "maxProcessed": 32,
+          "maxFlushNanos": 63054000,
+          "maxEntryNanos": 61934300,
+          "priority_selections": 0
+        },
+        "validation": {
+          "passed": true,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "healthy_ticks": 100,
+          "normal_shutdown": true,
+          "sixteen_substeps": true,
+          "no_independent_cee_or_rejected_solves": true,
+          "actual_reload_cycles": 0,
+          "full_suite": false
+        },
+        "loading": [
+          {
+            "phase": "SETTLE",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 510,
+            "graph_ready_tick": 1260,
+            "finish_tick": 1380,
+            "chunk_request_seconds": 0.8545784,
+            "chunk_loading_seconds": 41.4064762,
+            "graph_recovery_seconds": 46.0492204,
+            "electrical_settling_seconds": 6.1275857,
+            "total_restoration_seconds": 94.4378607,
+            "restoration_and_settling_seconds": 93.5832823,
+            "healthy_ticks": 100,
+            "queued_roots_at_chunk_ready": 7646,
+            "maximum_pending_roots": 8130,
+            "queue_drained_tick": 1260,
+            "queue_drain_seconds": 46.0492204
+          }
+        ],
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T14:59:41Z"
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/goal-priority-off-02/experiment.json",
+          "sha256": "793d8382a40d83cb8d9825b96c141d80d17627ddbabf247250dd5af07e1d5574"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-02/launch.json",
+          "sha256": "e9768b88cdf06ab490285ee24ee20ea6253a6277de685a4781c33a1fd3f751fc"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-02/invocation.json",
+          "sha256": "d5f66a664431113ca1deefb2d8caadfd6b490233e15dd0e91c5d17ab8f139a11"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-02/restore-input.json",
+          "sha256": "ae55f497a9112029bac48620063177544a70b0316d403b83937faa0de3a17392"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-02/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-02/runner-exit.json",
+          "sha256": "9288e286398e6f1928549e001c18ec95437766660390f0d149085306d78b1d03"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-02/host-metrics.jsonl",
+          "sha256": "bfd23f8367dd8062b6c014dcdc218e117860a45b1ebb7f77cfd28736b38092c6"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-02/process.log",
+          "sha256": "4f6efd0c8e2e06d09b50d51d9c9fcc12e49b625bb3ca3d0a2eef4a7393d809fe"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-02/benchmark/result.json",
+          "sha256": "5dea85e744deed73e40400d238983f485f6e4ebc12854caf95a0e94010a2ee4e"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-02/benchmark/loading-results.json",
+          "sha256": "e2af0388598523f6bb818b73cd8e4c1ada6fd8c0a4ad584b0c84e6c00e26a6f9"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-02/benchmark/ticks.csv",
+          "sha256": "13e2e3c19299cd50893110672b18eac48fa67a1922381e5dd0751801240825f0"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-02/benchmark/placement-ticks.csv",
+          "sha256": "edd703d8e3f518459f2366cabbd8d771f531e856efa7083dc35c043b8ffb6159"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-02/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-02/benchmark/placement-fixed.json",
+          "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-02/benchmark/placement-restored.json",
+          "sha256": "95ba5fee302285e31a8a83c325d65d7dac47612da59375d6bfa386fca6eafdd9"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-02/cpu-preflight.json",
+          "sha256": "68296a0a784dcf1f9b66f4b34dfd52581d92a6a73f8d49bfb057f730432f7e6d"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-02/process-affinity.json",
+          "sha256": "d2350cb816f4a7bcc4e7780940e772f97b9775c4ec1424976d38271169dde6d4"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-off-02/process-metrics.jsonl",
+          "sha256": "1371392a0b3207fc934f5ac0ebc22b8b1fa645036a68672ff6f7907b08a44956"
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 17,
+        "in_window_seconds": 85.22183895111084,
+        "monitored_processes": 198,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.32598745042262295,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "13688:134387027373880825",
+            "peak_cores": 0.22111102557596043,
+            "mean_cores": 0.05243667650217669
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "5948:134387027096006899",
+            "peak_cores": 0.17461649602934762,
+            "mean_cores": 0.12229113016416732
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "30196:134387027364652111",
+            "peak_cores": 0.0654240874253099,
+            "mean_cores": 0.007700490954865109
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "6028:134387027037888757",
+            "peak_cores": 0.05611604836553675,
+            "mean_cores": 0.0300685837285209
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28732:134387027298932907",
+            "peak_cores": 0.05607484365542716,
+            "mean_cores": 0.04253604527449298
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28176:134387027293764011",
+            "peak_cores": 0.05296773486237808,
+            "mean_cores": 0.010817356341358128
+          },
+          {
+            "name": "explorer.exe",
+            "identity": "13836:134387027040075621",
+            "peak_cores": 0.021822907697708737,
+            "mean_cores": 0.004583625568372088
+          },
+          {
+            "name": "codex.exe",
+            "identity": "30104:134387027358105490",
+            "peak_cores": 0.021810243766861564,
+            "mean_cores": 0.003666900454697671
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "tick_metrics": {
+        "SETTLE": {
+          "ticks": 1380,
+          "longest_tick_seconds": 3.136019,
+          "tick_body_seconds": 91.523299,
+          "matrix_assemblies": 1,
+          "network_substep_calls": 1936,
+          "p95_tick_seconds": 0.0857351,
+          "p99_tick_seconds": 0.16807,
+          "longest_end_to_end_gap_seconds": 3.137
+        }
+      }
+    },
+    {
+      "name": "goal-priority-on-02",
+      "protocol": {
+        "schema": 1,
+        "name": "goal-priority-on-02",
+        "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-priority-on-02\\mods\\wwpg-0.2.7-experimental.wiretree.6.jar",
+          "sha256": "522c4cb3c394d7c2f80fd2f73fc637cddab5401540128bfe881d4353db1959bb",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6.jar"
+        },
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-priority-on-02\\mods\\wwpg-benchmark-0.1.0-affinity.jar",
+          "sha256": "56434c77e56c6361aad1b54733eac5573b97bd24d52ae42b0d330216da7a34cb"
+        },
+        "copied_reference": true,
+        "batch": true,
+        "property_batch": true,
+        "tree_batch": true,
+        "detailed": false,
+        "loading_trace": false,
+        "reload": false,
+        "full_suite": false,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "helper_inputs": "local/frozen/affinity-helper-02/inputs.json",
+        "tree_prioritize_unresolved": true,
+        "cpu_affinity_mask": "fff000",
+        "server_affinity_mask": null,
+        "started_utc": "2026-11-09T15:00:00Z",
+        "tree_execution": {
+          "attachments": 5893,
+          "fallback": 50,
+          "roots": 11786,
+          "traversals": 5400,
+          "covered": 6386,
+          "visited": 20709122,
+          "flushes": 612,
+          "largest": 7818,
+          "pending": 0,
+          "forced": 42,
+          "discarded": 0,
+          "budgetMillis": 20,
+          "maxParts": 32,
+          "yielded": 611,
+          "maxProcessed": 32,
+          "maxFlushNanos": 63775000,
+          "maxEntryNanos": 62206400,
+          "priority_selections": 590
+        },
+        "validation": {
+          "passed": true,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "healthy_ticks": 100,
+          "normal_shutdown": true,
+          "sixteen_substeps": true,
+          "no_independent_cee_or_rejected_solves": true,
+          "actual_reload_cycles": 0,
+          "full_suite": false
+        },
+        "loading": [
+          {
+            "phase": "SETTLE",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 507,
+            "graph_ready_tick": 613,
+            "finish_tick": 733,
+            "chunk_request_seconds": 0.8130084,
+            "chunk_loading_seconds": 40.4402656,
+            "graph_recovery_seconds": 5.2667734,
+            "electrical_settling_seconds": 6.5830642,
+            "total_restoration_seconds": 53.1031116,
+            "restoration_and_settling_seconds": 52.2901032,
+            "healthy_ticks": 100,
+            "queued_roots_at_chunk_ready": 6618,
+            "maximum_pending_roots": 7814,
+            "queue_drained_tick": 613,
+            "queue_drain_seconds": 5.2667734
+          }
+        ],
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T15:01:11Z"
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/goal-priority-on-02/experiment.json",
+          "sha256": "896c251b27729e84cf39b4f0acb29c39a6e43abb8575905d5b2d6abcef6ea51e"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-02/launch.json",
+          "sha256": "02c9d278554c551b021044ce49bdd3202e2871d32cdbd9b3acc5a2713558d339"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-02/invocation.json",
+          "sha256": "ea2f7dfc9bece73c6dd234619cc0678dad463e5eab8e1c8707fb3da1e62721c2"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-02/restore-input.json",
+          "sha256": "317aa18a0d1c8325bdf1f91c128244448cee24cce41b50236de7fa67f377f9cf"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-02/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-02/runner-exit.json",
+          "sha256": "090597cd98a6f637ddba9a9995c0904c610c8475b3bb2de9e1e3b1849ea6164e"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-02/host-metrics.jsonl",
+          "sha256": "e1dbbe5b8a0f276f89a9ffb9dc51df99cca5cec8d9042406b612716887805872"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-02/process.log",
+          "sha256": "7da304dd77a6ff731f89d504905259e549eea6080294764871fec3c3a5c2db6a"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-02/benchmark/result.json",
+          "sha256": "bbca8e172f4be033be854992380656db7efc6b57c544d80672b9002d4e225b6c"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-02/benchmark/loading-results.json",
+          "sha256": "40df3fbeeb87f546c5c71b81797d79f36a2ca35c80b59723e93f54de977faed0"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-02/benchmark/ticks.csv",
+          "sha256": "99033ea3b3b4b36bb2f541afac0d2dfb42f164ded3a6ab0fb6dbe423662e232a"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-02/benchmark/placement-ticks.csv",
+          "sha256": "ba6d120aa064f6e0a397430c15f643ce11d6956b39546cace55f67119a0e7991"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-02/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-02/benchmark/placement-fixed.json",
+          "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-02/benchmark/placement-restored.json",
+          "sha256": "95ba5fee302285e31a8a83c325d65d7dac47612da59375d6bfa386fca6eafdd9"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-02/cpu-preflight.json",
+          "sha256": "0d2261a9868d6e983fe1762defe42a816af0c3efa2460a76d3a064310f3ba36e"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-02/process-affinity.json",
+          "sha256": "f34619c838a18732b14c05bf6fc0a96560a7dd2340f55ccf97f07b10e0e8b3f6"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-on-02/process-metrics.jsonl",
+          "sha256": "5a6b1cc29411ab1da6ce2ddcf199e793cb9874c98bd070c4c9a150c91cf74e61"
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 9,
+        "in_window_seconds": 45.134875535964966,
+        "monitored_processes": 193,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.33026013305658075,
+        "other_process_peaks": [
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "5948:134387027096006899",
+            "peak_cores": 0.14943762935892888,
+            "mean_cores": 0.12601120380775196
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "13688:134387027373880825",
+            "peak_cores": 0.1433300944484321,
+            "mean_cores": 0.04985058612174804
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28732:134387027298932907",
+            "peak_cores": 0.05917222637079413,
+            "mean_cores": 0.04500400135991142
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "6028:134387027037888757",
+            "peak_cores": 0.03427458780288594,
+            "mean_cores": 0.024579108435028543
+          },
+          {
+            "name": "NVIDIA Overlay.exe",
+            "identity": "23188:134387027107235211",
+            "peak_cores": 0.024898333829760075,
+            "mean_cores": 0.005192769387682087
+          },
+          {
+            "name": "dllhost.exe",
+            "identity": "31644:134387027407630677",
+            "peak_cores": 0.021798162110526154,
+            "mean_cores": 0.004500400135991142
+          },
+          {
+            "name": "codex.exe",
+            "identity": "30104:134387027358105490",
+            "peak_cores": 0.021792987614843794,
+            "mean_cores": 0.004500400135991142
+          },
+          {
+            "name": "NVIDIA Overlay.exe",
+            "identity": "23344:134387027098263065",
+            "peak_cores": 0.021786042101040064,
+            "mean_cores": 0.005192769387682087
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "tick_metrics": {
+        "SETTLE": {
+          "ticks": 733,
+          "longest_tick_seconds": 3.3006705,
+          "tick_body_seconds": 51.6243508,
+          "matrix_assemblies": 1,
+          "network_substep_calls": 1936,
+          "p95_tick_seconds": 0.0974907,
+          "p99_tick_seconds": 0.2191681,
+          "longest_end_to_end_gap_seconds": 3.303
+        }
+      }
+    },
+    {
+      "name": "goal-priority-reload-01",
+      "protocol": {
+        "schema": 1,
+        "name": "goal-priority-reload-01",
+        "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-priority-reload-01\\mods\\wwpg-0.2.7-experimental.wiretree.6.jar",
+          "sha256": "522c4cb3c394d7c2f80fd2f73fc637cddab5401540128bfe881d4353db1959bb",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-07a\\wwpg-0.2.7-experimental.wiretree.6.jar"
+        },
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-priority-reload-01\\mods\\wwpg-benchmark-0.1.0-affinity.jar",
+          "sha256": "56434c77e56c6361aad1b54733eac5573b97bd24d52ae42b0d330216da7a34cb"
+        },
+        "copied_reference": true,
+        "batch": true,
+        "property_batch": true,
+        "tree_batch": true,
+        "detailed": false,
+        "loading_trace": false,
+        "reload": true,
+        "full_suite": false,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "helper_inputs": "local/frozen/affinity-helper-02/inputs.json",
+        "tree_prioritize_unresolved": true,
+        "cpu_affinity_mask": "fff000",
+        "server_affinity_mask": null,
+        "started_utc": "2026-11-09T15:06:04Z",
+        "tree_execution": {
+          "attachments": 11786,
+          "fallback": 100,
+          "roots": 23572,
+          "traversals": 7276,
+          "covered": 16296,
+          "visited": 24282859,
+          "flushes": 799,
+          "largest": 11722,
+          "pending": 0,
+          "forced": 38,
+          "discarded": 0,
+          "budgetMillis": 20,
+          "maxParts": 32,
+          "yielded": 797,
+          "maxProcessed": 32,
+          "maxFlushNanos": 80687100,
+          "maxEntryNanos": 78989200,
+          "priority_selections": 565
+        },
+        "validation": {
+          "passed": true,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "healthy_ticks": 100,
+          "normal_shutdown": true,
+          "sixteen_substeps": true,
+          "no_independent_cee_or_rejected_solves": true,
+          "actual_reload_cycles": 1,
+          "full_suite": false
+        },
+        "loading": [
+          {
+            "phase": "SETTLE",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 516,
+            "graph_ready_tick": 615,
+            "finish_tick": 735,
+            "chunk_request_seconds": 0.8409214,
+            "chunk_loading_seconds": 41.5215913,
+            "graph_recovery_seconds": 4.9255711,
+            "electrical_settling_seconds": 6.0846269,
+            "total_restoration_seconds": 53.3727107,
+            "restoration_and_settling_seconds": 52.5317893,
+            "healthy_ticks": 100,
+            "queued_roots_at_chunk_ready": 6298,
+            "maximum_pending_roots": 7814,
+            "queue_drained_tick": 615,
+            "queue_drain_seconds": 4.9255711
+          },
+          {
+            "phase": "RELOAD",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 4,
+            "graph_ready_tick": 185,
+            "finish_tick": 304,
+            "chunk_request_seconds": 0.0346244,
+            "chunk_loading_seconds": 1.3258464,
+            "graph_recovery_seconds": 9.6782381,
+            "electrical_settling_seconds": 5.7627235,
+            "total_restoration_seconds": 16.8014324,
+            "restoration_and_settling_seconds": 16.766808,
+            "healthy_ticks": 100,
+            "queued_roots_at_chunk_ready": 11530,
+            "maximum_pending_roots": 11658,
+            "queue_drained_tick": 185,
+            "queue_drain_seconds": 9.6782381
+          }
+        ],
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T15:07:34Z"
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/goal-priority-reload-01/experiment.json",
+          "sha256": "bcef7319bd670bd2023de66b9b57856c6aed3eca2d329647fd728ce761e534a1"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-reload-01/launch.json",
+          "sha256": "f51206765050773dbb4ce23e0cff162e03e1e9a28869f572150bfe07bcc173fe"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-reload-01/invocation.json",
+          "sha256": "4c5007c8e6e30d9e6c8ac9f027f9fd50d623f2dcc355898b93d3bb56533ca4e3"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-reload-01/restore-input.json",
+          "sha256": "94cfebbd5aae967ea57886585f9eee2d986960845d58acdfbcf38f9fe99639c9"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-reload-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-reload-01/runner-exit.json",
+          "sha256": "43d09aeef6b0ee9af8f7142bae43e3f7ba08ca8e2b4c77349c9627992f5a3a47"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-reload-01/host-metrics.jsonl",
+          "sha256": "ce7c93327e77758c94047e18e5535208112dc5ed1172dca6c361a93826c48c33"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-reload-01/process.log",
+          "sha256": "2b6ec492962934d821c6a29d69c355c590b2fbd08b5783bf8eeed52d7cabd78e"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-reload-01/benchmark/result.json",
+          "sha256": "1cf2a1513b5df8e9603b9f7c15fa73c7c1e25a4012588788f1696779ffbb7b84"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-reload-01/benchmark/loading-results.json",
+          "sha256": "06e231cccb11e19c26a282f4fab9d91bf2d164ebb9025e8d3ffe547639e7a912"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-reload-01/benchmark/ticks.csv",
+          "sha256": "63fc153457ec81be37c2cc4f8b64da24f7b632c1af2d7c4345975fd67a252805"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-reload-01/benchmark/placement-ticks.csv",
+          "sha256": "8a1cddbba300899e5070d5a9892246c7792d2493450f66ea7ef00d80197c681d"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-reload-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-reload-01/benchmark/placement-fixed.json",
+          "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-reload-01/benchmark/placement-restored.json",
+          "sha256": "a541ad1fbc23952b4d01dccf9ce131e8b0c9f980942c0493834dc1fd617ad25a"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-reload-01/benchmark/lifecycle.json",
+          "sha256": "89e659a54487093b485520bf1cd481b055d37b44e03c72297ade1f700e8e9938"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-reload-01/cpu-preflight.json",
+          "sha256": "d642a6288ac20e009eca12e828cbadbc2c746e9efb763fdc1570820baeb6c6e5"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-reload-01/process-affinity.json",
+          "sha256": "0a5b1a50e6fed221e7f3886ae59e10ee8e50fb21a63bcf250446a39846a2baaa"
+        },
+        {
+          "path": "local/benchmarks/goal-priority-reload-01/process-metrics.jsonl",
+          "sha256": "5797be827c39c8bb18cfdd90f5df08e52e7478c9f1018b4f1d17c2247218471a"
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 13,
+        "in_window_seconds": 65.16158318519592,
+        "monitored_processes": 194,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.270481457608357,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "13688:134387027373880825",
+            "peak_cores": 0.1494021568488788,
+            "mean_cores": 0.044121088829731994
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "5948:134387027096006899",
+            "peak_cores": 0.13082119707646198,
+            "mean_cores": 0.09999181544564262
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28732:134387027298932907",
+            "peak_cores": 0.04366638399846028,
+            "mean_cores": 0.030453142833565018
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "6028:134387027037888757",
+            "peak_cores": 0.04366485242177065,
+            "mean_cores": 0.02637673788733978
+          },
+          {
+            "name": "pwsh.exe",
+            "identity": "11832:134387103634612391",
+            "peak_cores": 0.021816506456135958,
+            "mean_cores": 0.002637673788733978
+          },
+          {
+            "name": "NVIDIA Overlay.exe",
+            "identity": "23344:134387027098263065",
+            "peak_cores": 0.015606106594070584,
+            "mean_cores": 0.0064742902087106735
+          },
+          {
+            "name": "explorer.exe",
+            "identity": "13836:134387027040075621",
+            "peak_cores": 0.015605127042392674,
+            "mean_cores": 0.0035968278937281517
+          },
+          {
+            "name": "NVIDIA Overlay.exe",
+            "identity": "24496:134387027110562500",
+            "peak_cores": 0.015605127042392674,
+            "mean_cores": 0.004795770524970869
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "tick_metrics": {
+        "RELOAD": {
+          "ticks": 304,
+          "longest_tick_seconds": 0.4974717,
+          "tick_body_seconds": 16.3278755,
+          "matrix_assemblies": 1,
+          "network_substep_calls": 1920,
+          "p95_tick_seconds": 0.060231,
+          "p99_tick_seconds": 0.322769,
+          "longest_end_to_end_gap_seconds": 0.501
+        },
+        "SETTLE": {
+          "ticks": 735,
+          "longest_tick_seconds": 2.9736413,
+          "tick_body_seconds": 51.8731111,
+          "matrix_assemblies": 1,
+          "network_substep_calls": 1936,
+          "p95_tick_seconds": 0.1002124,
+          "p99_tick_seconds": 0.2038703,
+          "longest_end_to_end_gap_seconds": 2.983
+        },
+        "UNLOAD": {
+          "ticks": 2,
+          "longest_tick_seconds": 0.2578365,
+          "tick_body_seconds": 0.3878316,
+          "matrix_assemblies": 654,
+          "network_substep_calls": 19264,
+          "p95_tick_seconds": 0.2578365,
+          "p99_tick_seconds": 0.2578365,
+          "longest_end_to_end_gap_seconds": 0.13
+        }
+      }
+    }
+  ],
+  "comparison": {
+    "control": {
+      "restoration_seconds": [
+        89.7282281,
+        94.4378607
+      ],
+      "graph_recovery_seconds": [
+        40.495411,
+        46.0492204
+      ],
+      "endpoint_visits": [
+        46233151,
+        48830151
+      ],
+      "worst_tick_seconds": [
+        3.1080298,
+        3.136019
+      ],
+      "worst_gap_seconds": [
+        3.111,
+        3.137
+      ],
+      "mean_restoration_seconds": 92.0830444
+    },
+    "priority": {
+      "restoration_seconds": [
+        53.9202636,
+        53.1031116
+      ],
+      "graph_recovery_seconds": [
+        5.2051477,
+        5.2667734
+      ],
+      "endpoint_visits": [
+        20856093,
+        20709122
+      ],
+      "worst_tick_seconds": [
+        3.0609546,
+        3.3006705
+      ],
+      "worst_gap_seconds": [
+        3.066,
+        3.303
+      ],
+      "mean_restoration_seconds": 53.5116876
+    },
+    "restoration_reduction_percent": 41.88757773086833,
+    "endpoint_visit_reduction_percent": 56.27627683288342,
+    "limits": "Two fresh-process samples per mode in on/off/off/on order; caches not flushed; no significance, rendering or sustained-TPS claim."
+  },
+  "tool_sources": [
+    {
+      "path": "tools/experimental/UnresolvedTreeDiagnostic.java",
+      "sha256": "60d7691cc6394107985602e3f68a18fca3cb8eebd95553040ff50092d8e45c86"
+    },
+    {
+      "path": "tools/experimental/freeze_unresolved_helper.py",
+      "sha256": "c24299ef99f968ac9445b0584aea176b8dd065a0f7a8d5c0eded967b4f4e9a85"
+    },
+    {
+      "path": "tools/experimental/summarize_priority.py",
+      "sha256": "98e46ea72334968c807fcce44b240ec6561dc4fd5952ce4225f7561133b41569"
+    },
+    {
+      "path": "tools/experimental/plain_wire_benchmark.py",
+      "sha256": "cf192a8dd1fe540c2b35e700a8992be7854da96ac20709980aa8176fb25b14cc"
+    },
+    {
+      "path": "tools/experimental/restoration_benchmark.py",
+      "sha256": "f6dbdd14f1710338bfa68c7f9c68525cc257b2e964bb8f6dd69d043f36b6ee6c"
+    },
+    {
+      "path": "tools/experimental/focused_checks.py",
+      "sha256": "c855e155faeb44eff3662233bbc9653f94cbff9575c7e0201421604b08137f7d"
+    },
+    {
+      "path": "tools/experimental/plain-wire.gradle",
+      "sha256": "34656dde68a6d7e2d14492480fe2bf89906c4daeeaf549ca8cd6b35f054a0720"
+    }
+  ]
+}

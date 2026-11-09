@@ -113,6 +113,7 @@ def prepare(args):
     flags += '-Dwwpg.experimental.wireTreeBudgetMillis=' + str(getattr(args, 'tree_budget_ms', 0)) + '\n'
     flags += '-Dwwpg.experimental.wireTreeMaxParts=' + str(getattr(args, 'tree_max_parts', 32)) + '\n'
     flags += '-Dwwpg.experimental.wireTreeRetainCoverage=' + str(getattr(args, 'tree_retain_coverage', False)).lower() + '\n'
+    flags += '-Dwwpg.experimental.wireTreePrioritizeUnresolved=' + str(getattr(args, 'tree_prioritize_unresolved', False)).lower() + '\n'
     if cpu_mask:
         flags += '-Dwwpg.benchmark.cpuMask=0x' + cpu_mask + '\n'
     if server_mask:
@@ -210,6 +211,7 @@ def main():
     parser.add_argument('--tree-budget-ms', type=int, default=0)
     parser.add_argument('--tree-max-parts', type=int, default=32)
     parser.add_argument('--tree-retain-coverage', action='store_true')
+    parser.add_argument('--tree-prioritize-unresolved', action='store_true')
     parser.add_argument('--helper-inputs', help='Frozen queue-aware loading helper manifest')
     parser.add_argument('--cpu-mask', choices=['fff','fff000'], help='Explicit whole-process logical CPU group, selected after a load observation')
     parser.add_argument('--server-cpu-mask', help='Explicit hexadecimal server-thread subset of the selected process group')
@@ -220,8 +222,8 @@ def main():
         parser.error('--substep-jfr requires --detailed')
     if args.tree_budget_ms < 0 or args.tree_max_parts < 1:
         parser.error('Invalid restoration budget')
-    if (args.tree_budget_ms or args.tree_retain_coverage) and not args.tree_batch:
-        parser.error('Restoration budget and coverage require --tree-batch')
+    if (args.tree_budget_ms or args.tree_retain_coverage or args.tree_prioritize_unresolved) and not args.tree_batch:
+        parser.error('Restoration budget, coverage and priority require --tree-batch')
     directory, reference, original = prepare(args)
     before = inventory(original)
     reference_before = inventory(reference)
@@ -231,6 +233,7 @@ def main():
         verify_batch=args.verify_batch, property_batch=args.property_batch, detailed=args.detailed,
         tree_batch=args.tree_batch, tree_budget_ms=args.tree_budget_ms, tree_max_parts=args.tree_max_parts,
         tree_retain_coverage=args.tree_retain_coverage,
+        tree_prioritize_unresolved=args.tree_prioritize_unresolved,
         cpu_affinity_mask=args.cpu_mask,
         server_affinity_mask=args.server_cpu_mask,
         helper=bench.read(directory / 'launch.json')['helper'],
@@ -246,6 +249,11 @@ def main():
         with HostWatch(directory / 'host-metrics.jsonl'):
             bench.run(options)
         protocol['validation'] = validate(directory, args.detailed, args.batch, args.verify_batch, args.property_batch)
+        if args.tree_prioritize_unresolved:
+            log = (directory / 'process.log').read_text(encoding='utf-8', errors='replace')
+            priority = re.findall(r'prioritizeUnresolved=(true|false), prioritySelections=(\d+)', log)
+            assert len(priority) == 1 and priority[0][0] == 'true' and int(priority[0][1]) > 0
+            protocol['tree_priority_selections'] = int(priority[0][1])
         if args.substep_jfr:
             recording = directory / 'benchmark/substeps.jfr'
             log = (directory / 'process.log').read_text(encoding='utf-8', errors='replace')

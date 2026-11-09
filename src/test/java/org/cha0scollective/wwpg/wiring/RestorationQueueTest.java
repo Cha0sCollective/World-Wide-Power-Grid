@@ -69,4 +69,79 @@ class RestorationQueueTest {
             assertEquals(expected,actual,"Different resolution in trial "+trial);
         }
     }
+    @Test void priorityCannotStarveOldWorkAcrossOneItemSlices() {
+        var queue = new RestorationQueue<Integer, String>();
+        queue.add(0, 1, "old-a"); queue.add(2, 3, "old-b");
+        var finished = new ArrayList<String>();
+        for (int i = 0; i < 8; i++) {
+            queue.add(4, 5, "urgent-" + i);
+            var slice = queue.drain(1, 100, () -> 0, p -> true, n -> Set.of(),
+                    p -> { finished.add(p); return false; }, p -> p.startsWith("urgent"));
+            assertEquals(1, slice.processed());
+        }
+        assertEquals("old-a", finished.get(3));
+        assertEquals("old-b", finished.get(7));
+        assertEquals(2, queue.size());
+    }
+    @Test void priorityIsReevaluatedWithoutLosingArrivalOrderOrNewWork() {
+        var queue = new RestorationQueue<Integer, String>();
+        queue.add(0, 1, "a"); queue.add(2, 3, "b"); queue.add(4, 5, "c");
+        var finished = new ArrayList<String>();
+        var urgent = new HashSet<>(Set.of("b"));
+        queue.drain(1, 100, () -> 0, p -> true, n -> Set.of(), p -> {
+            finished.add(p); queue.add(6, 7, "new"); return false;
+        }, urgent::contains);
+        urgent.clear(); urgent.add("c");
+        queue.drain(1, 100, () -> 0, p -> true, n -> Set.of(), p -> { finished.add(p); return false; }, urgent::contains);
+        queue.drain(10, 100, () -> 0, p -> true, n -> Set.of(), p -> { finished.add(p); return false; }, p -> false);
+        assertEquals(List.of("b", "c", "a", "new"), finished);
+        assertEquals(0, queue.size());
+    }
+    @Test void priorityPreservesUnprocessedWorkAfterFailureAndDiscardsRemovedOwners() {
+        var queue = new RestorationQueue<Integer, String>();
+        queue.add(0, 1, "old"); queue.add(2, 3, "fails"); queue.add(4, 5, "removed");
+        assertThrows(IllegalStateException.class, () -> queue.drain(3, 100, () -> 0, p -> true,
+                n -> { throw new IllegalStateException("endpoint callback failed"); }, p -> false, p -> p.equals("fails")));
+        var finished = new ArrayList<String>();
+        var result = queue.drain(3, 100, () -> 0, p -> !p.equals("removed"), n -> Set.of(),
+                p -> { finished.add(p); return false; }, p -> p.equals("removed"));
+        assertEquals(List.of("old"), finished);
+        assertEquals(2, result.discarded()); assertEquals(0, queue.size());
+    }
+    @Test void priorityInspectionIsIncludedInCooperativeDeadline() {
+        var queue = new RestorationQueue<Integer, String>();
+        for (int i = 0; i < 3; i++) queue.add(i * 2, i * 2 + 1, "p" + i);
+        var clock = new AtomicLong();
+        var result = queue.drain(3, 10, clock::get, p -> true, n -> {
+            clock.addAndGet(7); return Set.of();
+        }, p -> { clock.addAndGet(3); return false; }, p -> { clock.addAndGet(4); return true; });
+        assertEquals(1, result.processed()); assertEquals(29, result.elapsedNanos());
+        assertEquals(17, result.longestEntryNanos()); assertEquals(2, queue.size());
+    }
+    @Test void priorityRetainsScalarFinalResolutionAcrossSavedGraphWaves() {
+        var random = new Random(9112026);
+        for (int trial = 0; trial < 250; trial++) {
+            int count = 4 + random.nextInt(35); var valid = new boolean[count];
+            for (int i = 0; i < count; i++) valid[i] = random.nextBoolean();
+            var edges = new ArrayList<WireTreeTraversalTest.Edge>();
+            for (int i = 0; i < count * 2; i++) edges.add(new WireTreeTraversalTest.Edge(
+                    random.nextInt(count), random.nextInt(count), random.nextBoolean(), random.nextBoolean()));
+            var fixture = new WireTreeTraversalTest.Fixture(valid, edges, false, false, false);
+            var scalar = WireTreeTraversalTest.fixture(fixture); var batch = WireTreeTraversalTest.fixture(fixture);
+            var scalarParts = new TreeMap<Integer, WireTreeTraversalTest.TransmissionLinePart>();
+            var batchParts = new TreeMap<Integer, WireTreeTraversalTest.TransmissionLinePart>();
+            scalar.partNodeMap.values().forEach(parts -> parts.forEach(p -> scalarParts.put(p.id, p)));
+            batch.partNodeMap.values().forEach(parts -> parts.forEach(p -> batchParts.put(p.id, p)));
+            var queue = new RestorationQueue<WireTreeTraversalTest.IWireEndpoint, WireTreeTraversalTest.TransmissionLinePart>();
+            for (var part : scalarParts.values()) {
+                scalar.iterative(part.a, new HashSet<>()); scalar.iterative(part.b, new HashSet<>());
+                if (!part.resolved) scalar.makeTransmissionLine(part);
+                var other = batchParts.get(part.id); queue.add(other.a, other.b, other);
+            }
+            while (queue.size() != 0) queue.drain(1 + random.nextInt(5), Long.MAX_VALUE, () -> 0,
+                    p -> true, root -> { batch.iterative(root, new HashSet<>()); return Set.of(); },
+                    part -> { if (part.resolved) return false; batch.makeTransmissionLine(part); return true; }, p -> !p.resolved);
+            scalarParts.forEach((id, part) -> assertEquals(part.resolved, batchParts.get(id).resolved));
+        }
+    }
 }

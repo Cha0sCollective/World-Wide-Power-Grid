@@ -24,9 +24,12 @@ def main():
     parser.add_argument('--tree-budget-ms', type=int, default=0)
     parser.add_argument('--tree-max-parts', type=int, default=32)
     parser.add_argument('--tree-retain-coverage', action='store_true')
+    parser.add_argument('--tree-prioritize-unresolved', action='store_true')
     parser.add_argument('--name', required=True)
     parser.add_argument('--property-batch', action='store_true')
     args = parser.parse_args()
+    if args.tree_prioritize_unresolved and not args.tree_batch:
+        parser.error('--tree-prioritize-unresolved requires --tree-batch')
     manifest = Path(args.inputs).resolve()
     inputs = json.loads(manifest.read_text())
     artifacts = {key: Path(value['path']) for key, value in inputs['artifacts'].items()}
@@ -50,7 +53,8 @@ def main():
                '-PtestPropertyWireBatch=' + str(args.property_batch).lower(),
                '-PtestWireTreeBatch=' + str(args.tree_batch).lower(),
                '-PtestWireTreeBudgetMillis=' + str(args.tree_budget_ms), '-PtestWireTreeMaxParts=' + str(args.tree_max_parts),
-               '-PtestWireTreeRetainCoverage=' + str(args.tree_retain_coverage).lower()]
+               '-PtestWireTreeRetainCoverage=' + str(args.tree_retain_coverage).lower(),
+               '-PtestWireTreePrioritizeUnresolved=' + str(args.tree_prioritize_unresolved).lower()]
     env = dict(os.environ)
     env['JAVA_HOME'] = inputs['java_home']
     env['PATH'] = str(Path(inputs['java_home']) / 'bin') + os.pathsep + env['PATH']
@@ -58,6 +62,7 @@ def main():
                  backend=args.backend, property_batch=args.property_batch, tree_batch=args.tree_batch,
                  tree_budget_ms=args.tree_budget_ms, tree_max_parts=args.tree_max_parts,
                  tree_retain_coverage=args.tree_retain_coverage, command=command, artifacts=inputs['artifacts'])
+    proof['tree_prioritize_unresolved'] = args.tree_prioritize_unresolved
     (directory / 'invocation.json').write_text(json.dumps(proof, indent=2) + '\n')
     print(json.dumps(dict(starting=str(directory), namespaces=namespaces, backend=args.backend)), flush=True)
     with (directory / 'process.log').open('w', encoding='utf-8') as stream:
