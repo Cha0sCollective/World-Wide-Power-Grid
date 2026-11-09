@@ -120,6 +120,19 @@ no full headless or graphical acceptance suite is implied by this investigation.
   normal shutdown passed. An isolated compiler is prepared for measuring
   native residual, guard/buffer and triangular-solve work next.
   [Evidence](native-work-results-20261109.json).
+- The [native C-stage diagnostic](NATIVE_STAGE_TIMINGS.md) directly confirms
+  that the sampled slow path performs one sparse solve and three residual
+  checks, with **zero factorizations**. Across 16 such calls, triangular
+  solving costs about **4.28 ms**, and residual multiplication/norm together
+  cost **4.52 ms**. Native time explains about 88% of the sampled fast/slow
+  tick gap. The diagnostic measured **20.042 TPS, 49.079 ms mean and
+  57.053 ms p95**, so consistency remains unmet. Both fresh native variants
+  passed 37 standalone safety checks, 100 cleanup/refactor cycles and 16
+  selected game fixtures each. This is a different compiler/native artifact
+  with timers, not a speedup or retained gameplay change. All 294 gameplay
+  class entries remain byte-identical to `prototype-12g`. Original and copied
+  saves, whole-yard validation and shutdown passed; no new client load or
+  full acceptance was run. [Evidence](native-stages-results-20261109.json).
 - The preceding `0.2.7-experimental.wiretree.7` candidate is frozen at
   `local/frozen/prototype-08a/inputs.json` (runtime SHA-256
   `31efbb0099531a7a8db7aa0f52deb80b040080bada825dd33bc339560b85c7a1`).
@@ -245,9 +258,14 @@ samples.
    distinguishes an initial residual early exit from one solve with three
    residual checks. Initial and hook-returned matrix-command counts are zero
    throughout the sampled calls; the 200-iteration limit is not exhausted.
-   Measure native residual multiplication/norm, buffer/finite checks and
-   factorized triangular-solve costs next, using the isolated compiler and
-   pinned sources. Keep finite-state, permutation and rollback guards intact.
+   The subsequent [C-stage timers](NATIVE_STAGE_TIMINGS.md) directly confirm
+   zero sampled factorizations and split the one-solve tick between about
+   4.28 ms of triangular solving and 4.52 ms of residual multiplication/norm.
+   Investigate exact finite/max reduction and residual layout against the
+   frozen same-compiler baseline, followed by triangular workspace or factor
+   layout if needed. The norm alone cannot close the tail gap. Keep
+   finite-state, permutation and rollback guards intact, along with
+   floating-point edge cases, contribution order and stopping criteria.
    Small transformer-map or iterator changes are not the leading hypothesis
    for closing this gap. Wire temperature remains a separate world-access
    candidate.

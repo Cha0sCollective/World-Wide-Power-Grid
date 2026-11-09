@@ -1,0 +1,2764 @@
+{
+  "schema": 1,
+  "gameplay_class_bytes_unchanged": true,
+  "runtime_jar_changed": true,
+  "native_library_changed": true,
+  "diagnostic_only": true,
+  "full_suite": false,
+  "graphical_acceptance": false,
+  "source_hashes_verified": 450,
+  "diagnostic": {
+    "name": "goal-native-stages-02",
+    "protocol": {
+      "name": "goal-native-stages-02",
+      "runtime": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-stages-02\\mods\\wwpg-0.2.7-experimental.native-stages-profile.jar",
+        "sha256": "47a80f338d96560f19c886fc312099622af336d2e150e11329a75966c9394889",
+        "kind": "local-candidate",
+        "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\native-stage-profile-01\\wwpg-0.2.7-experimental.native-stages-profile.jar",
+        "native_profile": {
+          "schema": 1,
+          "diagnostic": true,
+          "native_sha256": "c1961483cf2360537f71011813464caecca94538a9106eb427a4cda6a88c4cfa",
+          "profile_magic": 6293587271494029105,
+          "profile_stages": [
+            "total",
+            "residual_multiply",
+            "residual_norm",
+            "sparse_solve",
+            "factorization",
+            "triangular_solve",
+            "permutation",
+            "finite",
+            "copy",
+            "delta",
+            "java_callback",
+            "jacobian",
+            "rhs"
+          ],
+          "native_build": {
+            "path": "local/native-stages-01/build.json",
+            "sha256": "761496a09fbc87679ca97c8a9dca25909446507e7b329497a71ef4bf8d66bda8"
+          },
+          "original_runtime_sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9",
+          "gameplay_class_bytes_unchanged": true
+        }
+      },
+      "scope": "Focused 120-second warmup and 120-second stable control; not full capacity acceptance",
+      "copied_reference": true,
+      "sixteen_substeps": true,
+      "full_suite": false,
+      "batch": true,
+      "verify_batch": false,
+      "property_batch": true,
+      "detailed": true,
+      "tree_batch": true,
+      "tree_budget_ms": 20,
+      "tree_max_parts": 32,
+      "tree_retain_coverage": false,
+      "tree_prioritize_unresolved": true,
+      "chunk_task_budget_ms": 2,
+      "cee_state_geometry": true,
+      "scoped_restoration": true,
+      "indexed_waveform": false,
+      "terminal_bookkeeping": false,
+      "terminal_key_lookup": false,
+      "cpu_affinity_mask": "fff000",
+      "server_affinity_mask": null,
+      "helper": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-stages-02\\mods\\wwpg-benchmark-0.1.0-native-stages.jar",
+        "sha256": "848951f6f65063cc2c497e812a9cf30450461c7d827b85493f01f4a2e5b4fee9"
+      },
+      "substep_jfr": false,
+      "cpu_jfr": false,
+      "cpu_jfr_non_safepoints": false,
+      "preparation_sections": false,
+      "native_work": true,
+      "native_stages": true,
+      "started_utc": "2026-11-09T21:59:06Z",
+      "validation": {
+        "passed": true,
+        "full_suite": false,
+        "capacity_certified": false,
+        "stable_ticks": 2400,
+        "actual_nodes": 14650,
+        "edges": 20637,
+        "chunks": 953,
+        "storage_devices": 1050,
+        "sixteen_substeps": true,
+        "topology_unchanged": true,
+        "normal_shutdown": true,
+        "batch_execution": {
+          "plans": 1,
+          "unsupported": 0,
+          "steps": 78767,
+          "contributions": 1560453037,
+          "voltage_reads": 1153936550,
+          "scalar_fallbacks": 0,
+          "largest_plain_batch": 10368,
+          "property_contributions": 743796781,
+          "property_scalar_fallbacks": 0,
+          "largest_property_batch": 9443
+        },
+        "bitwise_verification": false
+      },
+      "task_window": {
+        "budgetMillis": 2,
+        "maxTasks": 512,
+        "windows": 200,
+        "completed": 3526,
+        "emptyPolls": 1075630,
+        "maxCompleted": 309,
+        "maxWindowNanos": 2106500,
+        "maxPollNanos": 918100,
+        "probes": 514,
+        "maxProbeNanos": 872100
+      },
+      "cee_geometry": {
+        "requests": 36121484,
+        "hits": 27944814,
+        "builds": 8,
+        "fallback": 8176662,
+        "states": 8
+      },
+      "scope_execution": {
+        "snapshots": 412,
+        "membershipChecks": 0,
+        "savedParts": 2448516,
+        "nodeBindings": 5950914,
+        "seedEndpoints": 2496756,
+        "heldNetworks": 15972,
+        "fallbackWorlds": 0,
+        "totalNanos": 4192144100,
+        "maxNanos": 34414000,
+        "topologyPasses": 462,
+        "topologyNanos": 266972100,
+        "maxTopologyNanos": 21430900
+      },
+      "waveform_execution": null,
+      "terminal_execution": null,
+      "terminal_keys": null,
+      "tree_priority_selections": 194,
+      "preparation_observation": {
+        "enabled": false,
+        "observation_absent": true
+      },
+      "native_work_observation": {
+        "enabled": true,
+        "sampled_steady_ticks": 132,
+        "sampled_steady_native_calls": 2112,
+        "completed": {
+          "schema": 1,
+          "entries": 4032,
+          "exits": 4032,
+          "rows": 4032,
+          "invalid": 0
+        },
+        "evidence": [
+          {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-stages-02\\benchmark\\native-work.csv",
+            "sha256": "00c69d553a9c3a2b1c366289a24f4fd1b63a6b54f82bf2b7532d54dcac26add9"
+          },
+          {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-stages-02\\benchmark\\native-work-end.json",
+            "sha256": "f8ab3431ff52aecf5c2d1bf3dcb40fffe602999bb3331e56aa095a2cc466267f"
+          }
+        ]
+      },
+      "native_stage_observation": {
+        "enabled": true,
+        "complete_steady_samples": 2112,
+        "stages": [
+          "total",
+          "residual_multiply",
+          "residual_norm",
+          "sparse_solve",
+          "factorization",
+          "triangular_solve",
+          "permutation",
+          "finite",
+          "copy",
+          "delta",
+          "java_callback",
+          "jacobian",
+          "rhs"
+        ],
+        "loaded_native": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-stages-02\\.pg-native\\wwpg-safety-1\\c1961483cf2360537f71011813464caecca94538a9106eb427a4cda6a88c4cfa\\libpowergridNative7.dll",
+          "sha256": "c1961483cf2360537f71011813464caecca94538a9106eb427a4cda6a88c4cfa"
+        },
+        "evidence": [
+          {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-stages-02\\benchmark\\native-work.csv",
+            "sha256": "00c69d553a9c3a2b1c366289a24f4fd1b63a6b54f82bf2b7532d54dcac26add9"
+          }
+        ],
+        "marker": {
+          "schema": 1,
+          "diagnostic": true,
+          "native_sha256": "c1961483cf2360537f71011813464caecca94538a9106eb427a4cda6a88c4cfa",
+          "profile_magic": 6293587271494029105,
+          "profile_stages": [
+            "total",
+            "residual_multiply",
+            "residual_norm",
+            "sparse_solve",
+            "factorization",
+            "triangular_solve",
+            "permutation",
+            "finite",
+            "copy",
+            "delta",
+            "java_callback",
+            "jacobian",
+            "rhs"
+          ],
+          "native_build": {
+            "path": "local/native-stages-01/build.json",
+            "sha256": "761496a09fbc87679ca97c8a9dca25909446507e7b329497a71ef4bf8d66bda8"
+          },
+          "original_runtime_sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9",
+          "gameplay_class_bytes_unchanged": true
+        }
+      },
+      "summary": {
+        "schema": 1,
+        "completed": true,
+        "passed": true,
+        "protocol_complete": false,
+        "capacity_certified": false,
+        "mode": "control",
+        "tier": 10000,
+        "backend": "NATIVE",
+        "variant": "MIXED",
+        "audit": {
+          "electrical_nodes": 14650,
+          "conductive_edges": 20362,
+          "coupled_edges": 275,
+          "edges": 20637,
+          "connected_systems_ignoring_reference_ground": 1,
+          "optimized_matrix_nodes": 14925,
+          "solver_networks": 1,
+          "actual_backends": [
+            "NATIVE"
+          ]
+        },
+        "samples": 2400,
+        "profiled_ticks": 132,
+        "measured_seconds": 119.6983189,
+        "tps": 20.04205257054784,
+        "mspt": {
+          "mean": 49.078544375,
+          "p50": 48.1521,
+          "p95": 57.0527,
+          "p99": 62.0068,
+          "maximum": 78.7044
+        },
+        "phase_mean_ms": {
+          "cee_prepare_ns": 7.12947803030303,
+          "synchronize_ns": 3.7236939393939394,
+          "result_bridge_ns": 0.864355303030303,
+          "gameplay_commit_ns": 2.2415757575757578,
+          "pg_prepare_ns": 0.43241060606060605,
+          "pg_solve_ns": 13.104624242424242,
+          "history_prepare_ns": 0.38072121212121207,
+          "history_commit_ns": 3.8504787878787883,
+          "cee_device_prepare_ns": 0.5773189393939394,
+          "cee_device_commit_ns": 0.6786045454545454,
+          "electrical_schedule_ns": 28.919957575757575,
+          "native_measurement_prepare_ns": 4.686917424242424,
+          "native_measurement_sample_ns": 3.6138712121212118,
+          "extension_prepare_ns": 0.0028886363636363636,
+          "extension_before_ns": 0.0004734848484848485,
+          "extension_after_ns": 0.0013416666666666668,
+          "restoration_schedule_ns": 0.004002272727272728,
+          "restoration_context_ns": 0.02746060606060606,
+          "native_measurement_finish_ns": 0.22409848484848485,
+          "extension_bind_ns": 0.0008265151515151516,
+          "extension_finish_ns": 0.0005386363636363636,
+          "extension_commit_ns": 0.001453030303030303,
+          "provider_prepare_ns": 0.0,
+          "provider_commit_ns": 0.0,
+          "pg_rhs_ns": 2.4854818181818183,
+          "native_solve_ns": 4.8560454545454546,
+          "native_iteration_hooks_ns": 0.0011212121212121212,
+          "native_residual_flush_ns": 0.0008401515151515151,
+          "cee_prepare_excluding_sync_ns": 3.4057840909090906
+        },
+        "compatibility_share_upper_bound": 0.6136702111926537,
+        "heap_peak_bytes": 1367876024,
+        "gc_ms": 120,
+        "native_tick_target_met": false,
+        "reason": "Stable control completed",
+        "practical_20tps_target_met": false,
+        "detailed_timers_enabled": true,
+        "process": {
+          "rss_peak_bytes": 1999024128,
+          "cpu_mean_cores": 1.0913374872368176
+        }
+      },
+      "original_reference_unchanged": true,
+      "isolated_reference_unchanged": true,
+      "finished_utc": "2026-11-09T22:03:58Z"
+    },
+    "summary": {
+      "schema": 1,
+      "completed": true,
+      "passed": true,
+      "protocol_complete": false,
+      "capacity_certified": false,
+      "mode": "control",
+      "tier": 10000,
+      "backend": "NATIVE",
+      "variant": "MIXED",
+      "audit": {
+        "electrical_nodes": 14650,
+        "conductive_edges": 20362,
+        "coupled_edges": 275,
+        "edges": 20637,
+        "connected_systems_ignoring_reference_ground": 1,
+        "optimized_matrix_nodes": 14925,
+        "solver_networks": 1,
+        "actual_backends": [
+          "NATIVE"
+        ]
+      },
+      "samples": 2400,
+      "profiled_ticks": 132,
+      "measured_seconds": 119.6983189,
+      "tps": 20.04205257054784,
+      "mspt": {
+        "mean": 49.078544375,
+        "p50": 48.1521,
+        "p95": 57.0527,
+        "p99": 62.0068,
+        "maximum": 78.7044
+      },
+      "phase_mean_ms": {
+        "cee_prepare_ns": 7.12947803030303,
+        "synchronize_ns": 3.7236939393939394,
+        "result_bridge_ns": 0.864355303030303,
+        "gameplay_commit_ns": 2.2415757575757578,
+        "pg_prepare_ns": 0.43241060606060605,
+        "pg_solve_ns": 13.104624242424242,
+        "history_prepare_ns": 0.38072121212121207,
+        "history_commit_ns": 3.8504787878787883,
+        "cee_device_prepare_ns": 0.5773189393939394,
+        "cee_device_commit_ns": 0.6786045454545454,
+        "electrical_schedule_ns": 28.919957575757575,
+        "native_measurement_prepare_ns": 4.686917424242424,
+        "native_measurement_sample_ns": 3.6138712121212118,
+        "extension_prepare_ns": 0.0028886363636363636,
+        "extension_before_ns": 0.0004734848484848485,
+        "extension_after_ns": 0.0013416666666666668,
+        "restoration_schedule_ns": 0.004002272727272728,
+        "restoration_context_ns": 0.02746060606060606,
+        "native_measurement_finish_ns": 0.22409848484848485,
+        "extension_bind_ns": 0.0008265151515151516,
+        "extension_finish_ns": 0.0005386363636363636,
+        "extension_commit_ns": 0.001453030303030303,
+        "provider_prepare_ns": 0.0,
+        "provider_commit_ns": 0.0,
+        "pg_rhs_ns": 2.4854818181818183,
+        "native_solve_ns": 4.8560454545454546,
+        "native_iteration_hooks_ns": 0.0011212121212121212,
+        "native_residual_flush_ns": 0.0008401515151515151,
+        "cee_prepare_excluding_sync_ns": 3.4057840909090906
+      },
+      "compatibility_share_upper_bound": 0.6136702111926537,
+      "heap_peak_bytes": 1367876024,
+      "gc_ms": 120,
+      "native_tick_target_met": false,
+      "reason": "Stable control completed",
+      "practical_20tps_target_met": false,
+      "detailed_timers_enabled": true,
+      "process": {
+        "rss_peak_bytes": 1999024128,
+        "cpu_mean_cores": 1.0913374872368176
+      }
+    },
+    "loading": [
+      {
+        "phase": "SETTLE",
+        "cycle": 0,
+        "requested_chunks": 953,
+        "load_limit_ticks": 2859,
+        "chunks_ready_tick": 29,
+        "graph_ready_tick": 208,
+        "finish_tick": 327,
+        "chunk_request_seconds": 0.9439326,
+        "chunk_loading_seconds": 13.5113783,
+        "graph_recovery_seconds": 12.7969843,
+        "electrical_settling_seconds": 6.2580166,
+        "total_restoration_seconds": 33.5103118,
+        "restoration_and_settling_seconds": 32.5663792,
+        "healthy_ticks": 100,
+        "queued_roots_at_chunk_ready": 11346,
+        "maximum_pending_roots": 11346,
+        "queue_drained_tick": 208,
+        "queue_drain_seconds": 12.7969843
+      }
+    ],
+    "thirty_second_blocks": [
+      {
+        "block": 0,
+        "ticks": 606,
+        "mean_tick_ms": 49.072389438943894
+      },
+      {
+        "block": 1,
+        "ticks": 598,
+        "mean_tick_ms": 49.171939966555186
+      },
+      {
+        "block": 2,
+        "ticks": 600,
+        "mean_tick_ms": 49.14245566666666
+      },
+      {
+        "block": 3,
+        "ticks": 596,
+        "mean_tick_ms": 48.9267533557047
+      }
+    ],
+    "host": {
+      "sample_period_seconds": 5,
+      "in_window_intervals": 53,
+      "in_window_seconds": 265.74934101104736,
+      "monitored_processes": 189,
+      "competing_game_present": false,
+      "other_cpu_mean_cores": 0.2761648428582523,
+      "other_process_peaks": [
+        {
+          "name": "ChatGPT.exe",
+          "identity": "13688:134387027373880825",
+          "peak_cores": 0.20911450827530936,
+          "mean_cores": 0.05838443452379062
+        },
+        {
+          "name": "HWiNFO64.EXE",
+          "identity": "5948:134387027096006899",
+          "peak_cores": 0.11210654896654912,
+          "mean_cores": 0.08202042916484181
+        },
+        {
+          "name": "ChatGPT.exe",
+          "identity": "28732:134387027298932907",
+          "peak_cores": 0.05931302139516575,
+          "mean_cores": 0.03733546417180971
+        },
+        {
+          "name": "ChatGPT.exe",
+          "identity": "30196:134387027364652111",
+          "peak_cores": 0.05923295571442441,
+          "mean_cores": 0.0022930442562213837
+        },
+        {
+          "name": "codex.exe",
+          "identity": "29384:134387027565919003",
+          "peak_cores": 0.056071253415306714,
+          "mean_cores": 0.002234248249651605
+        },
+        {
+          "name": "ChatGPT.exe",
+          "identity": "28176:134387027293764011",
+          "peak_cores": 0.05305597404499799,
+          "mean_cores": 0.008995789005176199
+        },
+        {
+          "name": "powershell.exe",
+          "identity": "6028:134387027037888757",
+          "peak_cores": 0.05293448248845358,
+          "mean_cores": 0.024870710779016546
+        },
+        {
+          "name": "codex.exe",
+          "identity": "30104:134387027358105490",
+          "peak_cores": 0.028090008574295288,
+          "mean_cores": 0.004292108479593873
+        }
+      ],
+      "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+    },
+    "evidence": [
+      {
+        "path": "local/benchmarks/goal-native-stages-02/experiment.json",
+        "sha256": "52c00a853c8cadc9bd8066f411a9ff3b0a395464c8a189afe9d91d8bed4af910"
+      },
+      {
+        "path": "local/benchmarks/goal-native-stages-02/launch.json",
+        "sha256": "7b2a62a1d43827f21ec5cd33380bbc88742baf98d8636006523070681b64e955"
+      },
+      {
+        "path": "local/benchmarks/goal-native-stages-02/invocation.json",
+        "sha256": "f355789c56efdffd31f6d78f87229f5592970452f784c955e7d1586538f9ef2b"
+      },
+      {
+        "path": "local/benchmarks/goal-native-stages-02/process.log",
+        "sha256": "c49f8b711b3d3c65f79bd03e63d45ce74f567bb9adaa018fbd594694314f4825"
+      },
+      {
+        "path": "local/benchmarks/goal-native-stages-02/runner-exit.json",
+        "sha256": "b75535f1d21f01ff7d325c2e8f89e9ffded7f0e2bb6b1c99ba180dd4b79b23e5"
+      },
+      {
+        "path": "local/benchmarks/goal-native-stages-02/shutdown-save.json",
+        "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+      },
+      {
+        "path": "local/benchmarks/goal-native-stages-02/host-metrics.jsonl",
+        "sha256": "f919fee713e90cc4994342f0f959eae6263900b28e30f168e06cdff2befb4a3a"
+      },
+      {
+        "path": "local/benchmarks/goal-native-stages-02/process-metrics.jsonl",
+        "sha256": "21b7b20609a7dd49a92d18cdf082ab12368c84b50283363faf128d177a87515d"
+      },
+      {
+        "path": "local/benchmarks/goal-native-stages-02/benchmark/result.json",
+        "sha256": "514fc0a4e4911672075016950b1a838aa681063efce84d9ec217ed072274eb8a"
+      },
+      {
+        "path": "local/benchmarks/goal-native-stages-02/benchmark/summary.json",
+        "sha256": "a2b4757986eff739e4b867c796371865ff4e624a45602e4554cb90e1406501b6"
+      },
+      {
+        "path": "local/benchmarks/goal-native-stages-02/benchmark/loading-results.json",
+        "sha256": "2b75054dfae1552f68777a4b26dfc4258c3fbedcf1aeb7c11650325db9a41cd1"
+      },
+      {
+        "path": "local/benchmarks/goal-native-stages-02/benchmark/ticks.csv",
+        "sha256": "a84283c4d26d1c44a66975f7db686e071c68674695bea2ce61c5a9c2f7e0a2e6"
+      },
+      {
+        "path": "local/benchmarks/goal-native-stages-02/benchmark/placement-ticks.csv",
+        "sha256": "acfb64883dd76464d909079d08b1027f8957ed57541eda2b6d7d3fdd463d2d82"
+      },
+      {
+        "path": "local/benchmarks/goal-native-stages-02/benchmark/cpu-topology.json",
+        "sha256": "81ac5a346352d92e7c3d84650c00c4f2c04e10175593999823165b1a4f560405"
+      },
+      {
+        "path": "local/benchmarks/goal-native-stages-02/benchmark/placement-fixed.json",
+        "sha256": "f39e516534daabb39e6a5305b5c802dee926ac68a80c1f4de97c30d3406bcc22"
+      },
+      {
+        "path": "local/benchmarks/goal-native-stages-02/benchmark/placement-restored.json",
+        "sha256": "79eda4bf854b627d63ceaabf49ee8f83ec6d7c08486adcab2df1ea6c62315b9c"
+      },
+      {
+        "path": "local/benchmarks/goal-native-stages-02/benchmark/graph-start.json",
+        "sha256": "89f8afdbb26bf984eb05d4fb8bba5e2089ba5865c895b43945e36c7e24f7c2b4"
+      },
+      {
+        "path": "local/benchmarks/goal-native-stages-02/benchmark/graph-end.json",
+        "sha256": "89f8afdbb26bf984eb05d4fb8bba5e2089ba5865c895b43945e36c7e24f7c2b4"
+      },
+      {
+        "path": "local/benchmarks/goal-native-stages-02/benchmark/pre-solve-storage.json",
+        "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+      },
+      {
+        "path": "local/benchmarks/goal-native-stages-02/process-affinity.json",
+        "sha256": "9f09c6bd620f02004239ccf6cdeac8a916aa59b98e48236e76a8f6a44886554e"
+      }
+    ],
+    "process_affinity": {
+      "pid": 18588,
+      "original_mask": "ffffff",
+      "requested_mask": "fff000",
+      "readback_mask": "fff000",
+      "logical_cpus": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "wall_unix": 1794261552.8186357,
+      "scope": "Owned child process immediately after launch; other processes unchanged"
+    },
+    "affinity_readbacks": 285,
+    "stable_cpu_busy_percent": [
+      5.240579776518311,
+      6.651996178729172,
+      21.497234964802328,
+      24.477774164173173,
+      18.195027121988762,
+      25.46505376368661,
+      8.817944266766796,
+      9.373943883394688,
+      2.6274317689959146,
+      2.7221316568425795,
+      5.364133448833353,
+      5.620442705165636,
+      11.103934130096121,
+      10.77180001779085,
+      7.344675571609636,
+      9.334014677196024,
+      7.895023136485443,
+      6.584487835622353,
+      8.469598191215741,
+      8.382639316866227,
+      1.9777291086568916,
+      1.9652394802357884,
+      7.538843006881624,
+      46.3667256287059
+    ],
+    "stable_cpu_observation_seconds": 115.34510374069214,
+    "cpu_observation_note": "Total per-core load including the benchmark; affinity restricts this process but does not reserve CPUs against other processes."
+  },
+  "work_observation": {
+    "enabled": true,
+    "sampled_steady_ticks": 132,
+    "sampled_steady_native_calls": 2112,
+    "completed": {
+      "schema": 1,
+      "entries": 4032,
+      "exits": 4032,
+      "rows": 4032,
+      "invalid": 0
+    },
+    "evidence": [
+      {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-stages-02\\benchmark\\native-work.csv",
+        "sha256": "00c69d553a9c3a2b1c366289a24f4fd1b63a6b54f82bf2b7532d54dcac26add9"
+      },
+      {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-stages-02\\benchmark\\native-work-end.json",
+        "sha256": "f8ab3431ff52aecf5c2d1bf3dcb40fffe602999bb3331e56aa095a2cc466267f"
+      }
+    ]
+  },
+  "stage_observation": {
+    "enabled": true,
+    "complete_steady_samples": 2112,
+    "stages": [
+      "total",
+      "residual_multiply",
+      "residual_norm",
+      "sparse_solve",
+      "factorization",
+      "triangular_solve",
+      "permutation",
+      "finite",
+      "copy",
+      "delta",
+      "java_callback",
+      "jacobian",
+      "rhs"
+    ],
+    "loaded_native": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-stages-02\\.pg-native\\wwpg-safety-1\\c1961483cf2360537f71011813464caecca94538a9106eb427a4cda6a88c4cfa\\libpowergridNative7.dll",
+      "sha256": "c1961483cf2360537f71011813464caecca94538a9106eb427a4cda6a88c4cfa"
+    },
+    "evidence": [
+      {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-stages-02\\benchmark\\native-work.csv",
+        "sha256": "00c69d553a9c3a2b1c366289a24f4fd1b63a6b54f82bf2b7532d54dcac26add9"
+      }
+    ],
+    "marker": {
+      "schema": 1,
+      "diagnostic": true,
+      "native_sha256": "c1961483cf2360537f71011813464caecca94538a9106eb427a4cda6a88c4cfa",
+      "profile_magic": 6293587271494029105,
+      "profile_stages": [
+        "total",
+        "residual_multiply",
+        "residual_norm",
+        "sparse_solve",
+        "factorization",
+        "triangular_solve",
+        "permutation",
+        "finite",
+        "copy",
+        "delta",
+        "java_callback",
+        "jacobian",
+        "rhs"
+      ],
+      "native_build": {
+        "path": "local/native-stages-01/build.json",
+        "sha256": "761496a09fbc87679ca97c8a9dca25909446507e7b329497a71ef4bf8d66bda8"
+      },
+      "original_runtime_sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9",
+      "gameplay_class_bytes_unchanged": true
+    }
+  },
+  "patterns": [
+    {
+      "initial_jacobian_commands": 0,
+      "hook_indices": [
+        0
+      ],
+      "hook_jacobian_commands": [
+        0
+      ],
+      "residual_calls": 1,
+      "sampled_calls": 1344,
+      "sampled_ticks": 84,
+      "inclusive_and_derived_ms_per_call": {
+        "total": {
+          "mean": 0.11496875,
+          "p50": 0.1072,
+          "p95": 0.1549,
+          "p99": 0.1719,
+          "maximum": 0.2218
+        },
+        "residual_multiply": {
+          "mean": 0.053847321428571425,
+          "p50": 0.0518,
+          "p95": 0.0637,
+          "p99": 0.0755,
+          "maximum": 0.1221
+        },
+        "residual_norm": {
+          "mean": 0.024101413690476192,
+          "p50": 0.0211,
+          "p95": 0.0386,
+          "p99": 0.0411,
+          "maximum": 0.0589
+        },
+        "sparse_solve": {
+          "mean": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "maximum": 0.0
+        },
+        "factorization": {
+          "mean": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "maximum": 0.0
+        },
+        "triangular_solve": {
+          "mean": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "maximum": 0.0
+        },
+        "permutation": {
+          "mean": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "maximum": 0.0
+        },
+        "finite": {
+          "mean": 0.02833779761904762,
+          "p50": 0.0266,
+          "p95": 0.0359,
+          "p99": 0.0413,
+          "maximum": 0.0966
+        },
+        "copy": {
+          "mean": 0.007019940476190476,
+          "p50": 0.0057,
+          "p95": 0.015,
+          "p99": 0.0173,
+          "maximum": 0.0555
+        },
+        "delta": {
+          "mean": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "maximum": 0.0
+        },
+        "java_callback": {
+          "mean": 0.0011948660714285713,
+          "p50": 0.0007,
+          "p95": 0.0044,
+          "p99": 0.0081,
+          "maximum": 0.0532
+        },
+        "jacobian": {
+          "mean": 1.6666666666666667e-05,
+          "p50": 0.0,
+          "p95": 0.0001,
+          "p99": 0.0001,
+          "maximum": 0.0001
+        },
+        "rhs": {
+          "mean": 0.00011227678571428571,
+          "p50": 0.0001,
+          "p95": 0.0002,
+          "p99": 0.0002,
+          "maximum": 0.0002
+        },
+        "jni": {
+          "mean": 0.11512284226190476,
+          "p50": 0.1073,
+          "p95": 0.1557,
+          "p99": 0.1734,
+          "maximum": 0.2225
+        },
+        "body_other": {
+          "mean": 0.00033846726190476167,
+          "p50": 0.0002999999999999947,
+          "p95": 0.0009000000000000119,
+          "p99": 0.0012999999999999956,
+          "maximum": 0.0025000000000000022
+        },
+        "sparse_other_including_permutation": {
+          "mean": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "maximum": 0.0
+        },
+        "jni_outside_timed_body": {
+          "mean": 0.0001540922619047621,
+          "p50": 0.00010000000000000286,
+          "p95": 0.0007999999999999952,
+          "p99": 0.0010999999999999899,
+          "maximum": 0.0031000000000000194
+        }
+      },
+      "calls_per_invocation": {
+        "total": {
+          "mean": 1.0,
+          "p50": 1,
+          "p95": 1,
+          "p99": 1,
+          "maximum": 1
+        },
+        "residual_multiply": {
+          "mean": 1.0,
+          "p50": 1,
+          "p95": 1,
+          "p99": 1,
+          "maximum": 1
+        },
+        "residual_norm": {
+          "mean": 1.0,
+          "p50": 1,
+          "p95": 1,
+          "p99": 1,
+          "maximum": 1
+        },
+        "sparse_solve": {
+          "mean": 0.0,
+          "p50": 0,
+          "p95": 0,
+          "p99": 0,
+          "maximum": 0
+        },
+        "factorization": {
+          "mean": 0.0,
+          "p50": 0,
+          "p95": 0,
+          "p99": 0,
+          "maximum": 0
+        },
+        "triangular_solve": {
+          "mean": 0.0,
+          "p50": 0,
+          "p95": 0,
+          "p99": 0,
+          "maximum": 0
+        },
+        "permutation": {
+          "mean": 0.0,
+          "p50": 0,
+          "p95": 0,
+          "p99": 0,
+          "maximum": 0
+        },
+        "finite": {
+          "mean": 2.9999999999999996,
+          "p50": 3,
+          "p95": 3,
+          "p99": 3,
+          "maximum": 3
+        },
+        "copy": {
+          "mean": 2.9999999999999996,
+          "p50": 3,
+          "p95": 3,
+          "p99": 3,
+          "maximum": 3
+        },
+        "delta": {
+          "mean": 0.0,
+          "p50": 0,
+          "p95": 0,
+          "p99": 0,
+          "maximum": 0
+        },
+        "java_callback": {
+          "mean": 2.0,
+          "p50": 2,
+          "p95": 2,
+          "p99": 2,
+          "maximum": 2
+        },
+        "jacobian": {
+          "mean": 1.0,
+          "p50": 1,
+          "p95": 1,
+          "p99": 1,
+          "maximum": 1
+        },
+        "rhs": {
+          "mean": 1.0,
+          "p50": 1,
+          "p95": 1,
+          "p99": 1,
+          "maximum": 1
+        }
+      },
+      "unweighted_count_histograms": {
+        "total": {
+          "1": 1344
+        },
+        "residual_multiply": {
+          "1": 1344
+        },
+        "residual_norm": {
+          "1": 1344
+        },
+        "sparse_solve": {
+          "0": 1344
+        },
+        "factorization": {
+          "0": 1344
+        },
+        "triangular_solve": {
+          "0": 1344
+        },
+        "permutation": {
+          "0": 1344
+        },
+        "finite": {
+          "3": 1344
+        },
+        "copy": {
+          "3": 1344
+        },
+        "delta": {
+          "0": 1344
+        },
+        "java_callback": {
+          "2": 1344
+        },
+        "jacobian": {
+          "1": 1344
+        },
+        "rhs": {
+          "1": 1344
+        }
+      }
+    },
+    {
+      "initial_jacobian_commands": 0,
+      "hook_indices": [
+        0,
+        0
+      ],
+      "hook_jacobian_commands": [
+        0,
+        0
+      ],
+      "residual_calls": 3,
+      "sampled_calls": 768,
+      "sampled_ticks": 48,
+      "inclusive_and_derived_ms_per_call": {
+        "total": {
+          "mean": 0.6283930506933004,
+          "p50": 0.6147,
+          "p95": 0.6899,
+          "p99": 0.7576,
+          "maximum": 0.9947
+        },
+        "residual_multiply": {
+          "mean": 0.15471156387287205,
+          "p50": 0.1517,
+          "p95": 0.1742,
+          "p99": 0.1935,
+          "maximum": 0.2411
+        },
+        "residual_norm": {
+          "mean": 0.12768292833607908,
+          "p50": 0.1266,
+          "p95": 0.1327,
+          "p99": 0.1546,
+          "maximum": 0.1788
+        },
+        "sparse_solve": {
+          "mean": 0.2838627951674904,
+          "p50": 0.2744,
+          "p95": 0.3336,
+          "p99": 0.3619,
+          "maximum": 0.5021
+        },
+        "factorization": {
+          "mean": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "maximum": 0.0
+        },
+        "triangular_solve": {
+          "mean": 0.2673811564730917,
+          "p50": 0.2581,
+          "p95": 0.3163,
+          "p99": 0.3454,
+          "maximum": 0.478
+        },
+        "permutation": {
+          "mean": 0.016402249794069193,
+          "p50": 0.016,
+          "p95": 0.0186,
+          "p99": 0.0216,
+          "maximum": 0.0282
+        },
+        "finite": {
+          "mean": 0.040680109658154856,
+          "p50": 0.04,
+          "p95": 0.0445,
+          "p99": 0.0495,
+          "maximum": 0.0612
+        },
+        "copy": {
+          "mean": 0.016554536484074685,
+          "p50": 0.0151,
+          "p95": 0.0292,
+          "p99": 0.0334,
+          "maximum": 0.0424
+        },
+        "delta": {
+          "mean": 0.0019712906713344317,
+          "p50": 0.0019,
+          "p95": 0.0025,
+          "p99": 0.003,
+          "maximum": 0.009
+        },
+        "java_callback": {
+          "mean": 0.002131356397583745,
+          "p50": 0.0016,
+          "p95": 0.006,
+          "p99": 0.0089,
+          "maximum": 0.0512
+        },
+        "jacobian": {
+          "mean": 1.628226249313564e-05,
+          "p50": 0.0,
+          "p95": 0.0001,
+          "p99": 0.0001,
+          "maximum": 0.0001
+        },
+        "rhs": {
+          "mean": 0.00011424183141131247,
+          "p50": 0.0001,
+          "p95": 0.0002,
+          "p99": 0.0002,
+          "maximum": 0.0002
+        },
+        "jni": {
+          "mean": 0.6285559110722131,
+          "p50": 0.6149,
+          "p95": 0.6907,
+          "p99": 0.7577,
+          "maximum": 0.995
+        },
+        "body_other": {
+          "mean": 0.0006679460118066991,
+          "p50": 0.0006000000000000449,
+          "p95": 0.0013000000000000789,
+          "p99": 0.0019000000000000128,
+          "maximum": 0.0026000000000000467
+        },
+        "sparse_other_including_permutation": {
+          "mean": 0.01648163869439868,
+          "p50": 0.016100000000000003,
+          "p95": 0.018699999999999994,
+          "p99": 0.021699999999999997,
+          "maximum": 0.028299999999999992
+        },
+        "jni_outside_timed_body": {
+          "mean": 0.00016286037891268765,
+          "p50": 9.999999999998899e-05,
+          "p95": 0.0007000000000000339,
+          "p99": 0.0010000000000000009,
+          "maximum": 0.0016000000000000458
+        }
+      },
+      "calls_per_invocation": {
+        "total": {
+          "mean": 1.0,
+          "p50": 1,
+          "p95": 1,
+          "p99": 1,
+          "maximum": 1
+        },
+        "residual_multiply": {
+          "mean": 3.0,
+          "p50": 3,
+          "p95": 3,
+          "p99": 3,
+          "maximum": 3
+        },
+        "residual_norm": {
+          "mean": 3.0,
+          "p50": 3,
+          "p95": 3,
+          "p99": 3,
+          "maximum": 3
+        },
+        "sparse_solve": {
+          "mean": 1.0,
+          "p50": 1,
+          "p95": 1,
+          "p99": 1,
+          "maximum": 1
+        },
+        "factorization": {
+          "mean": 0.0,
+          "p50": 0,
+          "p95": 0,
+          "p99": 0,
+          "maximum": 0
+        },
+        "triangular_solve": {
+          "mean": 1.0,
+          "p50": 1,
+          "p95": 1,
+          "p99": 1,
+          "maximum": 1
+        },
+        "permutation": {
+          "mean": 2.0,
+          "p50": 2,
+          "p95": 2,
+          "p99": 2,
+          "maximum": 2
+        },
+        "finite": {
+          "mean": 4.0,
+          "p50": 4,
+          "p95": 4,
+          "p99": 4,
+          "maximum": 4
+        },
+        "copy": {
+          "mean": 8.0,
+          "p50": 8,
+          "p95": 8,
+          "p99": 8,
+          "maximum": 8
+        },
+        "delta": {
+          "mean": 1.0,
+          "p50": 1,
+          "p95": 1,
+          "p99": 1,
+          "maximum": 1
+        },
+        "java_callback": {
+          "mean": 5.0,
+          "p50": 5,
+          "p95": 5,
+          "p99": 5,
+          "maximum": 5
+        },
+        "jacobian": {
+          "mean": 1.0,
+          "p50": 1,
+          "p95": 1,
+          "p99": 1,
+          "maximum": 1
+        },
+        "rhs": {
+          "mean": 1.0,
+          "p50": 1,
+          "p95": 1,
+          "p99": 1,
+          "maximum": 1
+        }
+      },
+      "unweighted_count_histograms": {
+        "total": {
+          "1": 768
+        },
+        "residual_multiply": {
+          "3": 768
+        },
+        "residual_norm": {
+          "3": 768
+        },
+        "sparse_solve": {
+          "1": 768
+        },
+        "factorization": {
+          "0": 768
+        },
+        "triangular_solve": {
+          "1": 768
+        },
+        "permutation": {
+          "2": 768
+        },
+        "finite": {
+          "4": 768
+        },
+        "copy": {
+          "8": 768
+        },
+        "delta": {
+          "1": 768
+        },
+        "java_callback": {
+          "5": 768
+        },
+        "jacobian": {
+          "1": 768
+        },
+        "rhs": {
+          "1": 768
+        }
+      }
+    }
+  ],
+  "sampled_tick_groups": {
+    "at_most_50_ms": {
+      "sampled_ticks": 78,
+      "tick_ms": {
+        "mean": 45.89398076923077,
+        "p50": 45.735,
+        "p95": 49.1055,
+        "p99": 49.538,
+        "maximum": 49.538
+      },
+      "stage_ms_per_tick": {
+        "total": {
+          "mean": 1.8263641025641024,
+          "p50": 1.8109,
+          "p95": 1.9363,
+          "p99": 2.0949,
+          "maximum": 2.0949
+        },
+        "residual_multiply": {
+          "mean": 0.8568756410256411,
+          "p50": 0.8484,
+          "p95": 0.9087,
+          "p99": 0.9712,
+          "maximum": 0.9712
+        },
+        "residual_norm": {
+          "mean": 0.3829525641025641,
+          "p50": 0.3772,
+          "p95": 0.4223,
+          "p99": 0.4345,
+          "maximum": 0.4345
+        },
+        "sparse_solve": {
+          "mean": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "maximum": 0.0
+        },
+        "factorization": {
+          "mean": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "maximum": 0.0
+        },
+        "triangular_solve": {
+          "mean": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "maximum": 0.0
+        },
+        "permutation": {
+          "mean": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "maximum": 0.0
+        },
+        "finite": {
+          "mean": 0.4512192307692308,
+          "p50": 0.4458,
+          "p95": 0.4981,
+          "p99": 0.5459,
+          "maximum": 0.5459
+        },
+        "copy": {
+          "mean": 0.10988333333333333,
+          "p50": 0.1058,
+          "p95": 0.1506,
+          "p99": 0.167,
+          "maximum": 0.167
+        },
+        "delta": {
+          "mean": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "maximum": 0.0
+        },
+        "java_callback": {
+          "mean": 0.018025641025641026,
+          "p50": 0.014799999999999999,
+          "p95": 0.0368,
+          "p99": 0.1173,
+          "maximum": 0.1173
+        },
+        "jacobian": {
+          "mean": 0.000267948717948718,
+          "p50": 0.0002,
+          "p95": 0.0006000000000000001,
+          "p99": 0.0008,
+          "maximum": 0.0008
+        },
+        "rhs": {
+          "mean": 0.0017833333333333336,
+          "p50": 0.0018000000000000002,
+          "p95": 0.0021000000000000003,
+          "p99": 0.0023,
+          "maximum": 0.0023
+        },
+        "jni": {
+          "mean": 1.828770512820513,
+          "p50": 1.8132,
+          "p95": 1.9414,
+          "p99": 2.098,
+          "maximum": 2.098
+        },
+        "body_other": {
+          "mean": 0.005356410256410253,
+          "p50": 0.005400000000000002,
+          "p95": 0.0064000000000000445,
+          "p99": 0.007599999999999996,
+          "maximum": 0.007599999999999996
+        },
+        "sparse_other_including_permutation": {
+          "mean": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "maximum": 0.0
+        },
+        "jni_outside_timed_body": {
+          "mean": 0.0024064102564102605,
+          "p50": 0.0022000000000000214,
+          "p95": 0.002799999999999969,
+          "p99": 0.017400000000000054,
+          "maximum": 0.017400000000000054
+        }
+      },
+      "unweighted_solve_call_histogram": {
+        "0": 78
+      },
+      "per_call": {
+        "sampled_calls": 1248,
+        "sampled_ticks": 78,
+        "inclusive_and_derived_ms_per_call": {
+          "total": {
+            "mean": 0.1141477564102564,
+            "p50": 0.1069,
+            "p95": 0.1547,
+            "p99": 0.1682,
+            "maximum": 0.2192
+          },
+          "residual_multiply": {
+            "mean": 0.05355472756410257,
+            "p50": 0.0517,
+            "p95": 0.0634,
+            "p99": 0.0752,
+            "maximum": 0.1221
+          },
+          "residual_norm": {
+            "mean": 0.023934535256410257,
+            "p50": 0.021,
+            "p95": 0.0385,
+            "p99": 0.0393,
+            "maximum": 0.0589
+          },
+          "sparse_solve": {
+            "mean": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "maximum": 0.0
+          },
+          "factorization": {
+            "mean": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "maximum": 0.0
+          },
+          "triangular_solve": {
+            "mean": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "maximum": 0.0
+          },
+          "permutation": {
+            "mean": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "maximum": 0.0
+          },
+          "finite": {
+            "mean": 0.028201201923076926,
+            "p50": 0.0266,
+            "p95": 0.0359,
+            "p99": 0.0401,
+            "maximum": 0.0966
+          },
+          "copy": {
+            "mean": 0.006867708333333333,
+            "p50": 0.0057,
+            "p95": 0.0149,
+            "p99": 0.0169,
+            "maximum": 0.0227
+          },
+          "delta": {
+            "mean": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "maximum": 0.0
+          },
+          "java_callback": {
+            "mean": 0.0011266025641025641,
+            "p50": 0.0007,
+            "p95": 0.0043,
+            "p99": 0.0073,
+            "maximum": 0.0532
+          },
+          "jacobian": {
+            "mean": 1.6746794871794875e-05,
+            "p50": 0.0,
+            "p95": 0.0001,
+            "p99": 0.0001,
+            "maximum": 0.0001
+          },
+          "rhs": {
+            "mean": 0.00011145833333333335,
+            "p50": 0.0001,
+            "p95": 0.0002,
+            "p99": 0.0002,
+            "maximum": 0.0002
+          },
+          "jni": {
+            "mean": 0.11429815705128206,
+            "p50": 0.107,
+            "p95": 0.1554,
+            "p99": 0.1694,
+            "maximum": 0.2201
+          },
+          "body_other": {
+            "mean": 0.0003347756410256408,
+            "p50": 0.0002999999999999947,
+            "p95": 0.0009000000000000119,
+            "p99": 0.0012999999999999956,
+            "maximum": 0.0025000000000000022
+          },
+          "sparse_other_including_permutation": {
+            "mean": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "maximum": 0.0
+          },
+          "jni_outside_timed_body": {
+            "mean": 0.00015040064102564128,
+            "p50": 0.00010000000000000286,
+            "p95": 0.0007999999999999952,
+            "p99": 0.0010999999999999899,
+            "maximum": 0.0031000000000000194
+          }
+        },
+        "calls_per_invocation": {
+          "total": {
+            "mean": 1.0,
+            "p50": 1,
+            "p95": 1,
+            "p99": 1,
+            "maximum": 1
+          },
+          "residual_multiply": {
+            "mean": 1.0,
+            "p50": 1,
+            "p95": 1,
+            "p99": 1,
+            "maximum": 1
+          },
+          "residual_norm": {
+            "mean": 1.0,
+            "p50": 1,
+            "p95": 1,
+            "p99": 1,
+            "maximum": 1
+          },
+          "sparse_solve": {
+            "mean": 0.0,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "maximum": 0
+          },
+          "factorization": {
+            "mean": 0.0,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "maximum": 0
+          },
+          "triangular_solve": {
+            "mean": 0.0,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "maximum": 0
+          },
+          "permutation": {
+            "mean": 0.0,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "maximum": 0
+          },
+          "finite": {
+            "mean": 3.0,
+            "p50": 3,
+            "p95": 3,
+            "p99": 3,
+            "maximum": 3
+          },
+          "copy": {
+            "mean": 3.0,
+            "p50": 3,
+            "p95": 3,
+            "p99": 3,
+            "maximum": 3
+          },
+          "delta": {
+            "mean": 0.0,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "maximum": 0
+          },
+          "java_callback": {
+            "mean": 2.0,
+            "p50": 2,
+            "p95": 2,
+            "p99": 2,
+            "maximum": 2
+          },
+          "jacobian": {
+            "mean": 1.0,
+            "p50": 1,
+            "p95": 1,
+            "p99": 1,
+            "maximum": 1
+          },
+          "rhs": {
+            "mean": 1.0,
+            "p50": 1,
+            "p95": 1,
+            "p99": 1,
+            "maximum": 1
+          }
+        },
+        "unweighted_count_histograms": {
+          "total": {
+            "1": 1248
+          },
+          "residual_multiply": {
+            "1": 1248
+          },
+          "residual_norm": {
+            "1": 1248
+          },
+          "sparse_solve": {
+            "0": 1248
+          },
+          "factorization": {
+            "0": 1248
+          },
+          "triangular_solve": {
+            "0": 1248
+          },
+          "permutation": {
+            "0": 1248
+          },
+          "finite": {
+            "3": 1248
+          },
+          "copy": {
+            "3": 1248
+          },
+          "delta": {
+            "0": 1248
+          },
+          "java_callback": {
+            "2": 1248
+          },
+          "jacobian": {
+            "1": 1248
+          },
+          "rhs": {
+            "1": 1248
+          }
+        }
+      }
+    },
+    "over_50_ms": {
+      "sampled_ticks": 54,
+      "tick_ms": {
+        "mean": 53.960260686482656,
+        "p50": 53.1079,
+        "p95": 61.243,
+        "p99": 62.3079,
+        "maximum": 78.7044
+      },
+      "stage_ms_per_tick": {
+        "total": {
+          "mean": 8.921408126916726,
+          "p50": 9.915,
+          "p95": 10.817499999999999,
+          "p99": 11.1724,
+          "maximum": 11.1724
+        },
+        "residual_multiply": {
+          "mean": 2.2566725642840293,
+          "p50": 2.4563,
+          "p95": 2.5276,
+          "p99": 2.6715,
+          "maximum": 2.6741
+        },
+        "residual_norm": {
+          "mean": 1.8144087284736965,
+          "p50": 2.0308,
+          "p95": 2.1028,
+          "p99": 2.1586,
+          "maximum": 2.1586
+        },
+        "sparse_solve": {
+          "mean": 3.9021591884878513,
+          "p50": 4.4384,
+          "p95": 5.2533,
+          "p99": 5.4428,
+          "maximum": 5.4428
+        },
+        "factorization": {
+          "mean": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "maximum": 0.0
+        },
+        "triangular_solve": {
+          "mean": 3.67559206180703,
+          "p50": 4.1735,
+          "p95": 4.9649,
+          "p99": 5.1714,
+          "maximum": 5.1714
+        },
+        "permutation": {
+          "mean": 0.22547579617834396,
+          "p50": 0.2602,
+          "p95": 0.2701,
+          "p99": 0.2874,
+          "maximum": 0.2883
+        },
+        "finite": {
+          "mean": 0.6270714555319651,
+          "p50": 0.6461,
+          "p95": 0.664,
+          "p99": 0.7111,
+          "maximum": 0.7111
+        },
+        "copy": {
+          "mean": 0.2478471337579618,
+          "p50": 0.2613,
+          "p95": 0.2872,
+          "p99": 0.2905,
+          "maximum": 0.4001
+        },
+        "delta": {
+          "mean": 0.027098619957537155,
+          "p50": 0.0312,
+          "p95": 0.0335,
+          "p99": 0.0353,
+          "maximum": 0.0393
+        },
+        "java_callback": {
+          "mean": 0.033991141778721395,
+          "p50": 0.0307,
+          "p95": 0.0537,
+          "p99": 0.08889999999999999,
+          "maximum": 0.1207
+        },
+        "jacobian": {
+          "mean": 0.00025903514979948105,
+          "p50": 0.0002,
+          "p95": 0.0005,
+          "p99": 0.0006000000000000001,
+          "maximum": 0.0006000000000000001
+        },
+        "rhs": {
+          "mean": 0.0018474168435951876,
+          "p50": 0.0018000000000000002,
+          "p95": 0.002,
+          "p99": 0.0023,
+          "maximum": 0.0023
+        },
+        "jni": {
+          "mean": 8.924102276480303,
+          "p50": 9.9177,
+          "p95": 10.8199,
+          "p99": 11.178799999999999,
+          "maximum": 11.178799999999999
+        },
+        "body_other": {
+          "mean": 0.010052842651568758,
+          "p50": 0.010299999999999865,
+          "p95": 0.012599999999999723,
+          "p99": 0.015300000000000091,
+          "maximum": 0.015300000000000091
+        },
+        "sparse_other_including_permutation": {
+          "mean": 0.22656712668082096,
+          "p50": 0.26160000000000005,
+          "p95": 0.2714000000000001,
+          "p99": 0.2883999999999998,
+          "maximum": 0.2902
+        },
+        "jni_outside_timed_body": {
+          "mean": 0.002694149563576347,
+          "p50": 0.0025000000000000577,
+          "p95": 0.003999999999999962,
+          "p99": 0.00639999999999985,
+          "maximum": 0.00639999999999985
+        }
+      },
+      "unweighted_solve_call_histogram": {
+        "0": 6,
+        "16": 48
+      },
+      "per_call": {
+        "sampled_calls": 864,
+        "sampled_ticks": 54,
+        "inclusive_and_derived_ms_per_call": {
+          "total": {
+            "mean": 0.5575880079322953,
+            "p50": 0.6116,
+            "p95": 0.6881,
+            "p99": 0.7545,
+            "maximum": 0.9947
+          },
+          "residual_multiply": {
+            "mean": 0.14104203526775183,
+            "p50": 0.1512,
+            "p95": 0.1737,
+            "p99": 0.1887,
+            "maximum": 0.2411
+          },
+          "residual_norm": {
+            "mean": 0.11340054552960603,
+            "p50": 0.1264,
+            "p95": 0.1323,
+            "p99": 0.1526,
+            "maximum": 0.1788
+          },
+          "sparse_solve": {
+            "mean": 0.2438849492804907,
+            "p50": 0.2716,
+            "p95": 0.3318,
+            "p99": 0.3615,
+            "maximum": 0.5021
+          },
+          "factorization": {
+            "mean": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "maximum": 0.0
+          },
+          "triangular_solve": {
+            "mean": 0.22972450386293938,
+            "p50": 0.2552,
+            "p95": 0.3147,
+            "p99": 0.342,
+            "maximum": 0.478
+          },
+          "permutation": {
+            "mean": 0.014092237261146497,
+            "p50": 0.016,
+            "p95": 0.0185,
+            "p99": 0.0216,
+            "maximum": 0.0282
+          },
+          "finite": {
+            "mean": 0.03919196597074782,
+            "p50": 0.0398,
+            "p95": 0.0443,
+            "p99": 0.0495,
+            "maximum": 0.0612
+          },
+          "copy": {
+            "mean": 0.015490445859872613,
+            "p50": 0.0151,
+            "p95": 0.029,
+            "p99": 0.0334,
+            "maximum": 0.0555
+          },
+          "delta": {
+            "mean": 0.0016936637473460722,
+            "p50": 0.0019,
+            "p95": 0.0025,
+            "p99": 0.0029,
+            "maximum": 0.009
+          },
+          "java_callback": {
+            "mean": 0.002124446361170087,
+            "p50": 0.0016,
+            "p95": 0.0059,
+            "p99": 0.0104,
+            "maximum": 0.0512
+          },
+          "jacobian": {
+            "mean": 1.6189696862467566e-05,
+            "p50": 0.0,
+            "p95": 0.0001,
+            "p99": 0.0001,
+            "maximum": 0.0001
+          },
+          "rhs": {
+            "mean": 0.00011546355272469924,
+            "p50": 0.0001,
+            "p95": 0.0002,
+            "p99": 0.0002,
+            "maximum": 0.0002
+          },
+          "jni": {
+            "mean": 0.5577563922800189,
+            "p50": 0.6118,
+            "p95": 0.6883,
+            "p99": 0.7554,
+            "maximum": 0.995
+          },
+          "body_other": {
+            "mean": 0.0006283026657230474,
+            "p50": 0.0006000000000000449,
+            "p95": 0.0012999999999999678,
+            "p99": 0.0019000000000000128,
+            "maximum": 0.0026000000000000467
+          },
+          "sparse_other_including_permutation": {
+            "mean": 0.01416044541755131,
+            "p50": 0.016000000000000014,
+            "p95": 0.018600000000000005,
+            "p99": 0.021699999999999997,
+            "maximum": 0.028299999999999992
+          },
+          "jni_outside_timed_body": {
+            "mean": 0.00016838434772352163,
+            "p50": 9.999999999998899e-05,
+            "p95": 0.0007000000000000339,
+            "p99": 0.0010000000000000009,
+            "maximum": 0.0016000000000000458
+          }
+        },
+        "calls_per_invocation": {
+          "total": {
+            "mean": 1.0,
+            "p50": 1,
+            "p95": 1,
+            "p99": 1,
+            "maximum": 1
+          },
+          "residual_multiply": {
+            "mean": 2.7183297947629157,
+            "p50": 3,
+            "p95": 3,
+            "p99": 3,
+            "maximum": 3
+          },
+          "residual_norm": {
+            "mean": 2.7183297947629157,
+            "p50": 3,
+            "p95": 3,
+            "p99": 3,
+            "maximum": 3
+          },
+          "sparse_solve": {
+            "mean": 0.859164897381458,
+            "p50": 1,
+            "p95": 1,
+            "p99": 1,
+            "maximum": 1
+          },
+          "factorization": {
+            "mean": 0.0,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "maximum": 0
+          },
+          "triangular_solve": {
+            "mean": 0.859164897381458,
+            "p50": 1,
+            "p95": 1,
+            "p99": 1,
+            "maximum": 1
+          },
+          "permutation": {
+            "mean": 1.718329794762916,
+            "p50": 2,
+            "p95": 2,
+            "p99": 2,
+            "maximum": 2
+          },
+          "finite": {
+            "mean": 3.859164897381458,
+            "p50": 4,
+            "p95": 4,
+            "p99": 4,
+            "maximum": 4
+          },
+          "copy": {
+            "mean": 7.295824486907289,
+            "p50": 8,
+            "p95": 8,
+            "p99": 8,
+            "maximum": 8
+          },
+          "delta": {
+            "mean": 0.859164897381458,
+            "p50": 1,
+            "p95": 1,
+            "p99": 1,
+            "maximum": 1
+          },
+          "java_callback": {
+            "mean": 4.577494692144374,
+            "p50": 5,
+            "p95": 5,
+            "p99": 5,
+            "maximum": 5
+          },
+          "jacobian": {
+            "mean": 1.0,
+            "p50": 1,
+            "p95": 1,
+            "p99": 1,
+            "maximum": 1
+          },
+          "rhs": {
+            "mean": 1.0,
+            "p50": 1,
+            "p95": 1,
+            "p99": 1,
+            "maximum": 1
+          }
+        },
+        "unweighted_count_histograms": {
+          "total": {
+            "1": 864
+          },
+          "residual_multiply": {
+            "1": 96,
+            "3": 768
+          },
+          "residual_norm": {
+            "1": 96,
+            "3": 768
+          },
+          "sparse_solve": {
+            "0": 96,
+            "1": 768
+          },
+          "factorization": {
+            "0": 864
+          },
+          "triangular_solve": {
+            "0": 96,
+            "1": 768
+          },
+          "permutation": {
+            "0": 96,
+            "2": 768
+          },
+          "finite": {
+            "3": 96,
+            "4": 768
+          },
+          "copy": {
+            "3": 96,
+            "8": 768
+          },
+          "delta": {
+            "0": 96,
+            "1": 768
+          },
+          "java_callback": {
+            "2": 96,
+            "5": 768
+          },
+          "jacobian": {
+            "1": 864
+          },
+          "rhs": {
+            "1": 864
+          }
+        }
+      }
+    }
+  },
+  "all_calls": {
+    "sampled_calls": 2112,
+    "sampled_ticks": 132,
+    "inclusive_and_derived_ms_per_call": {
+      "total": {
+        "mean": 0.27079302526041665,
+        "p50": 0.1145,
+        "p95": 0.6628,
+        "p99": 0.7051,
+        "maximum": 0.9947
+      },
+      "residual_multiply": {
+        "mean": 0.08445961901041667,
+        "p50": 0.0543,
+        "p95": 0.1562,
+        "p99": 0.1756,
+        "maximum": 0.2411
+      },
+      "residual_norm": {
+        "mean": 0.055538403385416664,
+        "p50": 0.0233,
+        "p95": 0.1292,
+        "p99": 0.1344,
+        "maximum": 0.1788
+      },
+      "sparse_solve": {
+        "mean": 0.08615235833333333,
+        "p50": 0.0,
+        "p95": 0.3031,
+        "p99": 0.3371,
+        "maximum": 0.5021
+      },
+      "factorization": {
+        "mean": 0.0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0
+      },
+      "triangular_solve": {
+        "mean": 0.08115018098958333,
+        "p50": 0.0,
+        "p95": 0.2855,
+        "p99": 0.3209,
+        "maximum": 0.478
+      },
+      "permutation": {
+        "mean": 0.0049780828124999996,
+        "p50": 0.0,
+        "p95": 0.017,
+        "p99": 0.0192,
+        "maximum": 0.0282
+      },
+      "finite": {
+        "mean": 0.032083689322916664,
+        "p50": 0.029,
+        "p95": 0.0423,
+        "p99": 0.0477,
+        "maximum": 0.0966
+      },
+      "copy": {
+        "mean": 0.009913690364583333,
+        "p50": 0.006,
+        "p95": 0.0175,
+        "p99": 0.0304,
+        "maximum": 0.0555
+      },
+      "delta": {
+        "mean": 0.00059828671875,
+        "p50": 0.0,
+        "p95": 0.002,
+        "p99": 0.0026,
+        "maximum": 0.009
+      },
+      "java_callback": {
+        "mean": 0.0014790908854166666,
+        "p50": 0.0008,
+        "p95": 0.0046,
+        "p99": 0.0083,
+        "maximum": 0.0532
+      },
+      "jacobian": {
+        "mean": 1.655e-05,
+        "p50": 0.0,
+        "p95": 0.0001,
+        "p99": 0.0001,
+        "maximum": 0.0001
+      },
+      "rhs": {
+        "mean": 0.00011287317708333335,
+        "p50": 0.0001,
+        "p95": 0.0002,
+        "p99": 0.0002,
+        "maximum": 0.0002
+      },
+      "jni": {
+        "mean": 0.2709497786458333,
+        "p50": 0.1147,
+        "p95": 0.663,
+        "p99": 0.7058,
+        "maximum": 0.995
+      },
+      "body_other": {
+        "mean": 0.0004384640624999996,
+        "p50": 0.00039999999999995595,
+        "p95": 0.0010999999999999899,
+        "p99": 0.0015999999999999903,
+        "maximum": 0.0026000000000000467
+      },
+      "sparse_other_including_permutation": {
+        "mean": 0.00500217734375,
+        "p50": 0.0,
+        "p95": 0.017100000000000004,
+        "p99": 0.019299999999999984,
+        "maximum": 0.028299999999999992
+      },
+      "jni_outside_timed_body": {
+        "mean": 0.0001567533854166675,
+        "p50": 0.00010000000000000286,
+        "p95": 0.0007999999999999952,
+        "p99": 0.0010000000000000009,
+        "maximum": 0.0031000000000000194
+      }
+    },
+    "calls_per_invocation": {
+      "total": {
+        "mean": 1.0,
+        "p50": 1,
+        "p95": 1,
+        "p99": 1,
+        "maximum": 1
+      },
+      "residual_multiply": {
+        "mean": 1.607,
+        "p50": 1,
+        "p95": 3,
+        "p99": 3,
+        "maximum": 3
+      },
+      "residual_norm": {
+        "mean": 1.607,
+        "p50": 1,
+        "p95": 3,
+        "p99": 3,
+        "maximum": 3
+      },
+      "sparse_solve": {
+        "mean": 0.3035,
+        "p50": 0,
+        "p95": 1,
+        "p99": 1,
+        "maximum": 1
+      },
+      "factorization": {
+        "mean": 0.0,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0,
+        "maximum": 0
+      },
+      "triangular_solve": {
+        "mean": 0.3035,
+        "p50": 0,
+        "p95": 1,
+        "p99": 1,
+        "maximum": 1
+      },
+      "permutation": {
+        "mean": 0.607,
+        "p50": 0,
+        "p95": 2,
+        "p99": 2,
+        "maximum": 2
+      },
+      "finite": {
+        "mean": 3.3034999999999997,
+        "p50": 3,
+        "p95": 4,
+        "p99": 4,
+        "maximum": 4
+      },
+      "copy": {
+        "mean": 4.5175,
+        "p50": 3,
+        "p95": 8,
+        "p99": 8,
+        "maximum": 8
+      },
+      "delta": {
+        "mean": 0.3035,
+        "p50": 0,
+        "p95": 1,
+        "p99": 1,
+        "maximum": 1
+      },
+      "java_callback": {
+        "mean": 2.9105,
+        "p50": 2,
+        "p95": 5,
+        "p99": 5,
+        "maximum": 5
+      },
+      "jacobian": {
+        "mean": 1.0,
+        "p50": 1,
+        "p95": 1,
+        "p99": 1,
+        "maximum": 1
+      },
+      "rhs": {
+        "mean": 1.0,
+        "p50": 1,
+        "p95": 1,
+        "p99": 1,
+        "maximum": 1
+      }
+    },
+    "unweighted_count_histograms": {
+      "total": {
+        "1": 2112
+      },
+      "residual_multiply": {
+        "1": 1344,
+        "3": 768
+      },
+      "residual_norm": {
+        "1": 1344,
+        "3": 768
+      },
+      "sparse_solve": {
+        "0": 1344,
+        "1": 768
+      },
+      "factorization": {
+        "0": 2112
+      },
+      "triangular_solve": {
+        "0": 1344,
+        "1": 768
+      },
+      "permutation": {
+        "0": 1344,
+        "2": 768
+      },
+      "finite": {
+        "3": 1344,
+        "4": 768
+      },
+      "copy": {
+        "3": 1344,
+        "8": 768
+      },
+      "delta": {
+        "0": 1344,
+        "1": 768
+      },
+      "java_callback": {
+        "2": 1344,
+        "5": 768
+      },
+      "jacobian": {
+        "1": 2112
+      },
+      "rhs": {
+        "1": 2112
+      }
+    }
+  },
+  "phases": {
+    "complete_sixteen_step_traces": true,
+    "sampled_ticks": 132,
+    "forced_edit_samples": 12,
+    "ordinary_samples": 120,
+    "weighting": "All forced edit samples weight 1; ordinary samples share remaining stable population equally.",
+    "weighted_sampled_tick_ms": {
+      "mean": 48.74339415,
+      "p50": 47.9507,
+      "p95": 55.7595,
+      "p99": 62.3079,
+      "maximum": 78.7044
+    },
+    "unweighted_sampled_tick_ms": {
+      "mean": 50.05635681818182,
+      "p50": 48.329,
+      "p95": 62.3079,
+      "p99": 67.7999,
+      "maximum": 78.7044
+    },
+    "strata": {
+      "ordinary": {
+        "samples": 120,
+        "tick_ms": {
+          "mean": 48.66697833333333,
+          "p50": 47.937,
+          "p95": 55.6576,
+          "p99": 61.243,
+          "maximum": 62.3079
+        },
+        "exclusive_mean_ms": {
+          "cee_prepare": 7.069805833333334,
+          "gameplay_commit": 2.2302241666666665,
+          "pg_prepare": 0.4251675,
+          "terminal_prepare": 4.6635358333333325,
+          "history_prepare": 0.38059333333333334,
+          "rhs": 2.4813408333333333,
+          "native_solve": 4.324002500000001,
+          "pg_pre_hooks": 0.07918083333333333,
+          "pg_post_hooks": 0.43460666666666664,
+          "power_hooks": 5.2118275,
+          "bridge_after_solve": 3.8312225,
+          "terminal_sample": 3.594985,
+          "bridge_results": 0.86294,
+          "terminal_finish": 0.22181499999999998,
+          "pg_other": 0.008251666666666827,
+          "electrical_other": 1.7452599999999994,
+          "other_tick": 11.102219166666666
+        }
+      },
+      "forced_edit": {
+        "samples": 12,
+        "tick_ms": {
+          "mean": 63.95014166666667,
+          "p50": 61.0641,
+          "p95": 78.7044,
+          "p99": 78.7044,
+          "maximum": 78.7044
+        },
+        "exclusive_mean_ms": {
+          "cee_prepare": 7.7261999999999995,
+          "gameplay_commit": 2.3550916666666666,
+          "pg_prepare": 0.5048416666666666,
+          "terminal_prepare": 4.920733333333334,
+          "history_prepare": 0.38199999999999995,
+          "rhs": 2.5268916666666668,
+          "native_solve": 10.176475,
+          "pg_pre_hooks": 0.0992,
+          "pg_post_hooks": 0.4498583333333333,
+          "power_hooks": 5.4986999999999995,
+          "bridge_after_solve": 4.043041666666666,
+          "terminal_sample": 3.802733333333333,
+          "bridge_results": 0.8785083333333333,
+          "terminal_finish": 0.24693333333333334,
+          "pg_other": 0.007641666666667213,
+          "electrical_other": 1.9346833333333342,
+          "other_tick": 18.396608333333333
+        }
+      }
+    },
+    "exclusive_cost_ms": {
+      "cee_prepare": {
+        "mean": 7.073087804166667,
+        "p50": 6.9037,
+        "p95": 8.4936,
+        "p99": 9.0546,
+        "maximum": 10.2167
+      },
+      "gameplay_commit": {
+        "mean": 2.2308485041666666,
+        "p50": 2.1851,
+        "p95": 2.6768,
+        "p99": 2.7377,
+        "maximum": 5.2924
+      },
+      "pg_prepare": {
+        "mean": 0.4255658708333333,
+        "p50": 0.4182,
+        "p95": 0.5032,
+        "p99": 0.5616,
+        "maximum": 0.83
+      },
+      "terminal_prepare": {
+        "mean": 4.664821820833334,
+        "p50": 4.6004,
+        "p95": 5.3447,
+        "p99": 5.554,
+        "maximum": 6.4085
+      },
+      "history_prepare": {
+        "mean": 0.38060036666666663,
+        "p50": 0.3757,
+        "p95": 0.4085,
+        "p99": 0.4392,
+        "maximum": 0.4907
+      },
+      "rhs": {
+        "mean": 2.4815685874999995,
+        "p50": 2.4642,
+        "p95": 2.6671,
+        "p99": 2.7754,
+        "maximum": 3.0394
+      },
+      "native_solve": {
+        "mean": 4.3532648625,
+        "p50": 1.8623,
+        "p95": 10.2403,
+        "p99": 11.1158,
+        "maximum": 11.1992
+      },
+      "pg_pre_hooks": {
+        "mean": 0.07928092916666667,
+        "p50": 0.071,
+        "p95": 0.1011,
+        "p99": 0.1144,
+        "maximum": 0.1202
+      },
+      "pg_post_hooks": {
+        "mean": 0.434682925,
+        "p50": 0.429,
+        "p95": 0.4779,
+        "p99": 0.4911,
+        "maximum": 0.5339
+      },
+      "power_hooks": {
+        "mean": 5.2132618625,
+        "p50": 5.1642,
+        "p95": 5.5971,
+        "p99": 5.8428,
+        "maximum": 7.7512
+      },
+      "bridge_after_solve": {
+        "mean": 3.832281595833333,
+        "p50": 3.7586,
+        "p95": 4.2511,
+        "p99": 4.8507,
+        "maximum": 6.5663
+      },
+      "terminal_sample": {
+        "mean": 3.596023741666666,
+        "p50": 3.4898,
+        "p95": 4.0506,
+        "p99": 5.1822,
+        "maximum": 6.3452
+      },
+      "bridge_results": {
+        "mean": 0.8630178416666666,
+        "p50": 0.8372,
+        "p95": 1.094,
+        "p99": 1.1595,
+        "maximum": 2.0939
+      },
+      "terminal_finish": {
+        "mean": 0.22194059166666666,
+        "p50": 0.2212,
+        "p95": 0.2763,
+        "p99": 0.3911,
+        "maximum": 0.4106
+      },
+      "pg_other": {
+        "mean": 0.00824861666666683,
+        "p50": 0.006600000000000605,
+        "p95": 0.009300000000001418,
+        "p99": 0.053000000000000824,
+        "maximum": 0.11329999999999885
+      },
+      "electrical_other": {
+        "mean": 1.7462071166666662,
+        "p50": 1.7428000000000026,
+        "p95": 1.8994,
+        "p99": 2.014400000000002,
+        "maximum": 2.8339
+      },
+      "other_tick": {
+        "mean": 11.1386911125,
+        "p50": 10.479300000000002,
+        "p95": 13.575299999999995,
+        "p99": 17.4059,
+        "maximum": 23.355999999999995
+      }
+    },
+    "inclusive_phase_ms": {
+      "cee_prepare_ns": {
+        "mean": 7.073087804166667,
+        "p50": 6.9037,
+        "p95": 8.4936,
+        "p99": 9.0546,
+        "maximum": 10.2167
+      },
+      "synchronize_ns": {
+        "mean": 3.694667691666666,
+        "p50": 3.6194,
+        "p95": 4.3186,
+        "p99": 4.5166,
+        "maximum": 5.4038
+      },
+      "result_bridge_ns": {
+        "mean": 0.8630178416666666,
+        "p50": 0.8372,
+        "p95": 1.094,
+        "p99": 1.1595,
+        "maximum": 2.0939
+      },
+      "gameplay_commit_ns": {
+        "mean": 2.2308485041666666,
+        "p50": 2.1851,
+        "p95": 2.6768,
+        "p99": 2.7377,
+        "maximum": 5.2924
+      },
+      "pg_prepare_ns": {
+        "mean": 0.4255658708333333,
+        "p50": 0.4182,
+        "p95": 0.5032,
+        "p99": 0.5616,
+        "maximum": 0.83
+      },
+      "pg_solve_ns": {
+        "mean": 12.570307783333332,
+        "p50": 10.0102,
+        "p95": 18.6943,
+        "p99": 19.3689,
+        "maximum": 22.37
+      },
+      "history_prepare_ns": {
+        "mean": 0.38060036666666663,
+        "p50": 0.3757,
+        "p95": 0.4085,
+        "p99": 0.4392,
+        "maximum": 0.4907
+      },
+      "history_commit_ns": {
+        "mean": 3.832281595833333,
+        "p50": 3.7586,
+        "p95": 4.2511,
+        "p99": 4.8507,
+        "maximum": 6.5663
+      },
+      "cee_device_prepare_ns": {
+        "mean": 0.5689078666666667,
+        "p50": 0.5607,
+        "p95": 0.7099,
+        "p99": 0.7549,
+        "maximum": 0.8419
+      },
+      "cee_device_commit_ns": {
+        "mean": 0.6792735624999999,
+        "p50": 0.6668,
+        "p95": 0.793,
+        "p99": 0.8674,
+        "maximum": 0.8801
+      },
+      "electrical_schedule_ns": {
+        "mean": 28.30076672916666,
+        "p50": 25.6905,
+        "p95": 35.2851,
+        "p99": 37.6155,
+        "maximum": 47.1452
+      },
+      "native_measurement_prepare_ns": {
+        "mean": 4.664821820833334,
+        "p50": 4.6004,
+        "p95": 5.3447,
+        "p99": 5.554,
+        "maximum": 6.4085
+      },
+      "native_measurement_sample_ns": {
+        "mean": 3.596023741666666,
+        "p50": 3.4898,
+        "p95": 4.0506,
+        "p99": 5.1822,
+        "maximum": 6.3452
+      },
+      "extension_prepare_ns": {
+        "mean": 0.002902525,
+        "p50": 0.0029,
+        "p95": 0.0036,
+        "p99": 0.0044,
+        "maximum": 0.0066
+      },
+      "extension_before_ns": {
+        "mean": 0.0004796416666666666,
+        "p50": 0.0004,
+        "p95": 0.0007,
+        "p99": 0.003,
+        "maximum": 0.0108
+      },
+      "extension_after_ns": {
+        "mean": 0.0013456041666666666,
+        "p50": 0.0013,
+        "p95": 0.0015,
+        "p99": 0.0027,
+        "maximum": 0.0112
+      },
+      "restoration_schedule_ns": {
+        "mean": 0.0040103625,
+        "p50": 0.004,
+        "p95": 0.0046,
+        "p99": 0.0049,
+        "maximum": 0.0058
+      },
+      "restoration_context_ns": {
+        "mean": 0.027488383333333328,
+        "p50": 0.0266,
+        "p95": 0.0339,
+        "p99": 0.0376,
+        "maximum": 0.0402
+      },
+      "native_measurement_finish_ns": {
+        "mean": 0.22194059166666666,
+        "p50": 0.2212,
+        "p95": 0.2763,
+        "p99": 0.3911,
+        "maximum": 0.4106
+      },
+      "extension_bind_ns": {
+        "mean": 0.0008258708333333333,
+        "p50": 0.0008,
+        "p95": 0.0011,
+        "p99": 0.0012,
+        "maximum": 0.0015
+      },
+      "extension_finish_ns": {
+        "mean": 0.000539925,
+        "p50": 0.0005,
+        "p95": 0.001,
+        "p99": 0.0013,
+        "maximum": 0.0017
+      },
+      "extension_commit_ns": {
+        "mean": 0.0014328416666666666,
+        "p50": 0.0014,
+        "p95": 0.0019,
+        "p99": 0.0021,
+        "maximum": 0.0024
+      },
+      "provider_prepare_ns": {
+        "mean": 0.0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0
+      },
+      "provider_commit_ns": {
+        "mean": 0.0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0
+      },
+      "pg_rhs_ns": {
+        "mean": 2.4815685874999995,
+        "p50": 2.4642,
+        "p95": 2.6671,
+        "p99": 2.7754,
+        "maximum": 3.0394
+      },
+      "native_solve_ns": {
+        "mean": 4.3532648625,
+        "p50": 1.8623,
+        "p95": 10.2403,
+        "p99": 11.1158,
+        "maximum": 11.1992
+      },
+      "native_iteration_hooks_ns": {
+        "mean": 0.0010862041666666667,
+        "p50": 0.0008,
+        "p95": 0.0019,
+        "p99": 0.0028,
+        "maximum": 0.0148
+      },
+      "native_residual_flush_ns": {
+        "mean": 0.0007927583333333332,
+        "p50": 0.0005,
+        "p95": 0.0018,
+        "p99": 0.0024,
+        "maximum": 0.0063
+      }
+    },
+    "postsolve_group_ms": {
+      "mean": 12.641567199999999,
+      "p50": 12.421100000000001,
+      "p95": 13.9631,
+      "p99": 14.8591,
+      "maximum": 20.5471
+    },
+    "caveat": "Whole timed scopes include serial snapshots, guards and callbacks. Models are bounds/sensitivity estimates, not measured worker speedups. Sampled tails have limited resolution."
+  },
+  "compilation_ms": 3052,
+  "focused_fixture_executions": 32,
+  "evidence": [
+    {
+      "path": "local/frozen/native-stage-profile-01/inputs.json",
+      "sha256": "e8719526026b38782e034f099559863e815e696e21d47c0521974dfc54327f3b"
+    },
+    {
+      "path": "local/frozen/native-stage-helper-01/inputs.json",
+      "sha256": "1e66baba12251cd0aad7077660bfd5f344ceb6bc6ef6234e774f413b986d53f0"
+    },
+    {
+      "path": "local/checks/native-stage-baseline-guard-01/result.json",
+      "sha256": "aa617d6be9f1b319afb0c98955384468c2bc5501a3dc7bd1a52d5f3182b35b8f"
+    },
+    {
+      "path": "local/checks/native-stage-profile-guard-01/result.json",
+      "sha256": "d9c5346a846d1d9a9e0d7f0ffc9e338f3cf4d3b887a88c4b375d51310ee1cd42"
+    },
+    {
+      "path": "local/benchmarks/goal-native-stages-02/benchmark/native-work.csv",
+      "sha256": "00c69d553a9c3a2b1c366289a24f4fd1b63a6b54f82bf2b7532d54dcac26add9"
+    },
+    {
+      "path": "local/benchmarks/goal-native-stages-02/benchmark/native-work-end.json",
+      "sha256": "f8ab3431ff52aecf5c2d1bf3dcb40fffe602999bb3331e56aa095a2cc466267f"
+    },
+    {
+      "path": "local/benchmarks/goal-native-stages-02/benchmark/substeps.csv",
+      "sha256": "b67e2ec8ccffb0b01d4a70ac42f3676decc95a073d5408ff472df6e2df6976f2"
+    },
+    {
+      "path": "local/benchmarks/goal-native-stages-02/benchmark/substep-metadata.json",
+      "sha256": "0aebe5bd92a7843b440144c2c3a3b1cc4f65b892f6c0cb4c0cb614a62ff13ab9"
+    },
+    {
+      "path": "tools/experimental/native_stages.py",
+      "sha256": "894adb008ed549004fafbd24df2fbd154263e641f3b5ec3f45b3237f1e50f3b2"
+    },
+    {
+      "path": "tools/experimental/summarize_native_stages.py",
+      "sha256": "f40fa7497ac21799732be9cf271b0afb495130a5ee95d2e45acac3277162886e"
+    }
+  ],
+  "timing_scope_notes": [
+    "C timers run on every invocation; the helper copies counters on its sampled ticks. Observer overhead is included.",
+    "Total contains the root scopes; sparse solve contains factorization, triangular solve and permutation validation.",
+    "Permutation validation may also be inside factorization. Do not sum all inclusive stages.",
+    "body_other subtracts disjoint root scopes; sparse_other_including_permutation subtracts only factorization and triangular solve.",
+    "JNI includes profile setup and timing overhead outside the measured solver body. Tiny clock-boundary differences are retained.",
+    "Weights retain every forced edit with weight one; ordinary samples share the remaining stable tick population."
+  ],
+  "limitations": [
+    "The compiler and native library differ from the retained runtime. These timings locate work; they are not evidence of a speedup.",
+    "No new client load or full acceptance is established by this diagnostic.",
+    "Focused fixtures and this copied-yard run do not establish all mod functionality."
+  ]
+}

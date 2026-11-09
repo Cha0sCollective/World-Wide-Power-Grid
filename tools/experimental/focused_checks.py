@@ -19,7 +19,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--inputs', required=True)
     parser.add_argument('--backend', choices=['NATIVE', 'JAVA'], required=True)
-    parser.add_argument('--selection', choices=['wire', 'lifecycle', 'tree', 'budget', 'scope', 'geometry', 'terminals'], default='wire')
+    parser.add_argument('--selection', choices=['wire', 'lifecycle', 'tree', 'budget', 'scope', 'geometry', 'terminals', 'native'], default='wire')
     parser.add_argument('--tree-batch', action='store_true')
     parser.add_argument('--tree-budget-ms', type=int, default=0)
     parser.add_argument('--tree-max-parts', type=int, default=32)
@@ -70,6 +70,9 @@ def main():
     if args.selection == 'scope':
         assert args.scoped_restoration and args.tree_max_parts == 1
         namespaces = 'wwpg_tree_scope,wwpg_tree_budget'
+    if args.selection == 'native':
+        assert args.backend == 'NATIVE'
+        namespaces = 'wwpg_unload,wwpg_solver_safety,wwpg_native_guard'
     command = [sys.executable, str(ROOT / 'tools/run_checked.py'), '--timeout', '600', '--', 'gradlew.bat',
                'runPackagedGameTestServer', '-x', 'build', '-x', 'jar', '-x', 'test', '--offline', '--no-daemon',
                '-I', 'tools/experimental/plain-wire.gradle', '-PexperimentalCee=' + str(artifacts['cee']),

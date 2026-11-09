@@ -175,6 +175,9 @@ def run(args):
     props['cpuJfrNonSafepoints']=str(getattr(args,'cpu_jfr_non_safepoints',False)).lower()
     props['preparationSections']=str(getattr(args,'preparation_sections',False)).lower()
     props['nativeWork']=str(getattr(args,'native_work',False)).lower()
+    props['nativeStages']=str(getattr(args,'native_stages',False)).lower()
+    if getattr(args,'native_stages',False) and not getattr(args,'native_work',False):
+        raise ValueError('Native stage observation requires the JNI work observer')
     if getattr(args,'native_work',False) and (args.mode!='control' or not args.detailed or not getattr(args,'substep_trace',False) or getattr(args,'cpu_jfr',False) or getattr(args,'substep_jfr',False) or getattr(args,'preparation_sections',False)):
         raise ValueError('Native work observation requires a detailed control without other diagnostics')
     if getattr(args,'preparation_sections',False) and (args.mode!='control' or args.detailed or getattr(args,'cpu_jfr',False) or getattr(args,'substep_jfr',False)):

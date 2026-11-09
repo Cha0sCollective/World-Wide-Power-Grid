@@ -1,0 +1,226 @@
+{
+  "schema": 1,
+  "passed": true,
+  "branch": "dev/experimental-plain-wire-batching",
+  "full_suite": false,
+  "graphical_acceptance": false,
+  "retained_source_build_hashes_verified": 450,
+  "retained_artifacts": [
+    {
+      "path": "build/libs/wwpg-0.2.7-experimental.wiretree.11.jar",
+      "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9"
+    },
+    {
+      "path": "build/libs/wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+      "sha256": "24d2d70ca4b8895d71e1d74c9fc49b23a1873507f4f1c10627f2443d1fc51636"
+    }
+  ],
+  "native_variants": {
+    "baseline": {
+      "runtime": {
+        "path": "local/frozen/native-stage-baseline-01/wwpg-0.2.7-experimental.native-stages-baseline.jar",
+        "sha256": "642fbdb202beb4545564554f4f31fbfd5000e1e949834f9c2b34303996426909"
+      },
+      "loaded_native": {
+        "path": "local/checks/native-stage-baseline-guard-01/server/.pg-native/wwpg-safety-1/7bd4a90b0709d29b665708aa8537a36916b30780c37e11167abb88750168caf5/libpowergridNative7.dll",
+        "sha256": "7bd4a90b0709d29b665708aa8537a36916b30780c37e11167abb88750168caf5"
+      },
+      "gameplay_classes_compared": 294,
+      "changed_entries": [
+        "native/wwpg/safe/guarded.properties",
+        "native/wwpg/safe/windows/libpowergridNative7.dll"
+      ],
+      "added_entries": [
+        "native/wwpg/safe/experimental-profile.json"
+      ],
+      "focused_tests": 16,
+      "focused_result": {
+        "path": "local/checks/native-stage-baseline-guard-01/result.json",
+        "sha256": "aa617d6be9f1b319afb0c98955384468c2bc5501a3dc7bd1a52d5f3182b35b8f"
+      }
+    },
+    "profile": {
+      "runtime": {
+        "path": "local/frozen/native-stage-profile-01/wwpg-0.2.7-experimental.native-stages-profile.jar",
+        "sha256": "47a80f338d96560f19c886fc312099622af336d2e150e11329a75966c9394889"
+      },
+      "loaded_native": {
+        "path": "local/checks/native-stage-profile-guard-01/server/.pg-native/wwpg-safety-1/c1961483cf2360537f71011813464caecca94538a9106eb427a4cda6a88c4cfa/libpowergridNative7.dll",
+        "sha256": "c1961483cf2360537f71011813464caecca94538a9106eb427a4cda6a88c4cfa"
+      },
+      "gameplay_classes_compared": 294,
+      "changed_entries": [
+        "native/wwpg/safe/guarded.properties",
+        "native/wwpg/safe/windows/libpowergridNative7.dll"
+      ],
+      "added_entries": [
+        "native/wwpg/safe/experimental-profile.json"
+      ],
+      "focused_tests": 16,
+      "focused_result": {
+        "path": "local/checks/native-stage-profile-guard-01/result.json",
+        "sha256": "d9c5346a846d1d9a9e0d7f0ffc9e338f3cf4d3b887a88c4b375d51310ee1cd42"
+      }
+    }
+  },
+  "helper_changed_entries": [
+    "org/cha0scollective/wwpg/benchmark/NativeWork$Frame.class",
+    "org/cha0scollective/wwpg/benchmark/NativeWork.class",
+    "org/cha0scollective/wwpg/benchmark/mixin/NativeWorkMixin.class"
+  ],
+  "helper_added_entries": [
+    "org/cha0scollective/wwpg/benchmark/NativeStages.class"
+  ],
+  "evidence_files_verified": 593,
+  "python_files_parsed": 12,
+  "checked_document_links": 44,
+  "focused_native_checks_per_variant": 37,
+  "refactor_cleanup_cycles_per_variant": 100,
+  "active_counter_checks": 4,
+  "focused_game_fixture_executions": 32,
+  "focused_evidence_checks": 6,
+  "main_tracked_clean": true,
+  "git_diff_check_passed": true,
+  "owned_process_exit": {
+    "schema": 1,
+    "pid": 18588,
+    "exit_code": 0,
+    "elapsed_seconds": 285.61494870000024,
+    "ended_utc": "2026-11-09T22:03:58Z"
+  },
+  "stage_observation": {
+    "enabled": true,
+    "complete_steady_samples": 2112,
+    "stages": [
+      "total",
+      "residual_multiply",
+      "residual_norm",
+      "sparse_solve",
+      "factorization",
+      "triangular_solve",
+      "permutation",
+      "finite",
+      "copy",
+      "delta",
+      "java_callback",
+      "jacobian",
+      "rhs"
+    ],
+    "loaded_native": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-stages-02\\.pg-native\\wwpg-safety-1\\c1961483cf2360537f71011813464caecca94538a9106eb427a4cda6a88c4cfa\\libpowergridNative7.dll",
+      "sha256": "c1961483cf2360537f71011813464caecca94538a9106eb427a4cda6a88c4cfa"
+    },
+    "evidence": [
+      {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-stages-02\\benchmark\\native-work.csv",
+        "sha256": "00c69d553a9c3a2b1c366289a24f4fd1b63a6b54f82bf2b7532d54dcac26add9"
+      }
+    ],
+    "marker": {
+      "schema": 1,
+      "diagnostic": true,
+      "native_sha256": "c1961483cf2360537f71011813464caecca94538a9106eb427a4cda6a88c4cfa",
+      "profile_magic": 6293587271494029105,
+      "profile_stages": [
+        "total",
+        "residual_multiply",
+        "residual_norm",
+        "sparse_solve",
+        "factorization",
+        "triangular_solve",
+        "permutation",
+        "finite",
+        "copy",
+        "delta",
+        "java_callback",
+        "jacobian",
+        "rhs"
+      ],
+      "native_build": {
+        "path": "local/native-stages-01/build.json",
+        "sha256": "761496a09fbc87679ca97c8a9dca25909446507e7b329497a71ef4bf8d66bda8"
+      },
+      "original_runtime_sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9",
+      "gameplay_class_bytes_unchanged": true
+    }
+  },
+  "declined_preflight": {
+    "attempt": "goal-native-stages-01",
+    "benchmark_started": false,
+    "counted_as_pass": false,
+    "evidence": {
+      "path": "local/benchmarks/goal-native-stages-01/cpu-preflight.json",
+      "sha256": "3322e25aa31c77e2a4343a979eecfed8420b9f1d726e3c74900d121799039d25"
+    }
+  },
+  "limitations": [
+    "The fresh native compiler and profile library are diagnostic only; the retained gameplay runtime remains prototype-12g.",
+    "No new rendered loading result or full acceptance. Consistent 20 TPS remains unproven."
+  ],
+  "evidence": [
+    {
+      "path": "local/frozen/prototype-12g/inputs.json",
+      "sha256": "f7f34bbba95a21ef9eea0228b4174fa8b31a6a4e8a230fd01b021b7389a68016"
+    },
+    {
+      "path": "local/frozen/native-stage-helper-01/inputs.json",
+      "sha256": "1e66baba12251cd0aad7077660bfd5f344ceb6bc6ef6234e774f413b986d53f0"
+    },
+    {
+      "path": "local/native-stages-01/build.json",
+      "sha256": "761496a09fbc87679ca97c8a9dca25909446507e7b329497a71ef4bf8d66bda8"
+    },
+    {
+      "path": "local/native-stages-01/native-safety-checks.json",
+      "sha256": "a6f8bbb29b7b7b17e2fd9f9a856ef1e4ffb585dc40f6385926ea5ab76942d6e4"
+    },
+    {
+      "path": "docs/experimental/native-stages-results-20261109.json",
+      "sha256": "6b3f7e36ce3ebb5730d1d3886244e472821049ea54843632ec4845217056b217"
+    },
+    {
+      "path": "local/native-toolchain-01/inputs.json",
+      "sha256": "d2e22994222485557e101947bb2ae097a6fc9f0bef0df36e742ed457ab8ea411"
+    },
+    {
+      "path": "local/native-stages-01/prepared.json",
+      "sha256": "c78da2d47a16fb324579af11148a2a42a91116c905593095a78025847603c8c5"
+    },
+    {
+      "path": "local/native-stages-01/instrumentation.json",
+      "sha256": "f629b476e753b57544b51be2315ddee06e95dbba9a7c9efd4fa3937362d72298"
+    },
+    {
+      "path": "local/frozen/native-stage-baseline-01/inputs.json",
+      "sha256": "b1ccf0bc5be70fc24206899eab1ec05bd201b015919ee05c245f3071d1ff194b"
+    },
+    {
+      "path": "local/checks/native-stage-baseline-guard-01/result.json",
+      "sha256": "aa617d6be9f1b319afb0c98955384468c2bc5501a3dc7bd1a52d5f3182b35b8f"
+    },
+    {
+      "path": "local/frozen/native-stage-profile-01/inputs.json",
+      "sha256": "e8719526026b38782e034f099559863e815e696e21d47c0521974dfc54327f3b"
+    },
+    {
+      "path": "local/checks/native-stage-profile-guard-01/result.json",
+      "sha256": "d9c5346a846d1d9a9e0d7f0ffc9e338f3cf4d3b887a88c4b375d51310ee1cd42"
+    },
+    {
+      "path": "docs/experimental/NATIVE_STAGE_TIMINGS.md",
+      "sha256": "893c8f10d1840c810f24b7d6b080af743bf2ea12dc535fc9a2fbef42365e6f67"
+    },
+    {
+      "path": "docs/experimental/PERFORMANCE_GOAL.md",
+      "sha256": "a114619dd2f12db95e795ae12006ef4b72a110bf538fad9c5c06bbf17928f5c8"
+    },
+    {
+      "path": "local/native-stage-review-01/tool-checks-02.log",
+      "sha256": "2fd614385027878abb33974aaeabcc4f25bceef403932d2b45ccb669e66a6903"
+    },
+    {
+      "path": "local/native-stage-review-01/verify_checkpoint.py",
+      "sha256": "70047a199b1c8ba0cd8a42f2207b1bd46f640c8621a093d76a76a0a6abda2087"
+    }
+  ]
+}
