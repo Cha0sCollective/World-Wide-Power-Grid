@@ -28,6 +28,16 @@ no full headless or graphical acceptance suite is implied by this investigation.
   built-ins, preserving original callbacks for dynamic/custom geometry.
   The p95 gate and continuous-streaming requirement remain open.
   [Evidence](cee-geometry-results-20261109.json).
+- The subsequent [terminal bookkeeping prototype](TERMINAL_BOOKKEEPING.md),
+  `wiretree.9`, passed 96 focused checks but is retired. Two enabled samples
+  averaged **48.823 ms**, versus **48.743 ms** for the same-jar disabled control;
+  p95 was **55.180 / 56.795 ms** versus **55.320 ms**. Allocation decreased by
+  about 0.898 MiB/tick, without a repeatable tick-time gain. Candidate source is
+  preserved at `7247ef9`. The working source inventory and rebuilt runtime and
+  fixture jars now match `prototype-09c` exactly. The
+  [retirement comparison](terminal-bookkeeping-retirement-20261109.json)
+  permits reuse of that runtime's named prior evidence; no new client or
+  actual reload trial was run for the rejected candidate.
 - The preceding `0.2.7-experimental.wiretree.7` candidate is frozen at
   `local/frozen/prototype-08a/inputs.json` (runtime SHA-256
   `31efbb0099531a7a8db7aa0f52deb80b040080bada825dd33bc339560b85c7a1`).
@@ -129,10 +139,12 @@ samples.
 3. Reviewed CEE geometry reuse is implemented and has a matched on/off/on
    comparison, a client load and an actual reload. The subsequent
    [steady profile](STEADY_PROFILE_GEOMETRY.md) measured 7.951 ms CEE preparation
-   and 4.778 ms terminal preparation in its weighted samples. The next target
-   is terminal preparation bookkeeping: per-pass function reuse and private
-   frame-map storage, retaining fresh validation and callback behavior.
-   Preserve dynamic, custom, moving, unloaded and
+   and 4.778 ms terminal preparation in its weighted samples. Per-pass function
+   reuse and private frame-map storage were measured and retired after failing
+   to demonstrate a repeatable speedup. Next isolate terminal-key equality,
+   endpoint hashing and stable-description validation costs. The earlier
+   profile identifies these as candidates, not proven improvements; retain
+   fresh validation and callback behavior. Preserve dynamic, custom, moving, unloaded and
    replaced-owner behavior, all 16 electrical substeps, accuracy, storage,
    heating and device callbacks. The prior packed worker prototype stays retired.
 4. Verify both targets on subsequent improvements. The goal remains active until

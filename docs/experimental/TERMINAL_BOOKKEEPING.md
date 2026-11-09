@@ -17,6 +17,16 @@ does not justify adding the prototype to the working candidate. Preserve its
 source, frozen artifacts, failed setup and passing evidence, then restore the
 preceding `wiretree.8` runtime. The overall performance goal remains open.
 
+Candidate source is preserved at `7247ef9`. The following retirement restored
+all 445 source/build entries from the preceding `64500e6` snapshot, with no
+extra runtime source left behind. Rebuilt runtime and fixture jars are
+byte-identical to `local/frozen/prototype-09c/inputs.json`; see the
+[retirement proof](terminal-bookkeeping-retirement-20261109.json). The retained
+runtime SHA-256 is
+`7a8cfa0973a73ac490e7cb1f1e1d8b4eff6bdd1fc9933d067279852e4e8f1204`.
+Its named earlier client, steady and reload results are reused through that
+comparison. No gameplay test rerun is represented as a new pass.
+
 ## Scope
 
 `-Dwwpg.experimental.terminalBookkeeping=true` selects two changes:

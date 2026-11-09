@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "passed": true,
+  "full_suite": false,
+  "retired_candidate_commit": "7247ef9",
+  "restored_source_commit": "64500e6",
+  "source_hashes_verified": 445,
+  "source_inventory_exact": true,
+  "frozen_inputs": {
+    "path": "local/frozen/prototype-09c/inputs.json",
+    "sha256": "4d74f5e83fce89c42c7a82248e31d37adc6777fba84f52649bbe6a70d83e3c1f"
+  },
+  "artifacts": {
+    "runtime": {
+      "built": "build/libs/wwpg-0.2.7-experimental.wiretree.8.jar",
+      "frozen": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\wwpg-0.2.7-experimental.wiretree.8.jar",
+      "sha256": "7a8cfa0973a73ac490e7cb1f1e1d8b4eff6bdd1fc9933d067279852e4e8f1204",
+      "byte_identical": true
+    },
+    "fixtures": {
+      "built": "build/libs/wwpg-0.2.7-experimental.wiretree.8-gametests.jar",
+      "frozen": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\wwpg-0.2.7-experimental.wiretree.8-gametests.jar",
+      "sha256": "de5df5ecdbd33506465c9ba251e8b7891a084559bcd517a51ced0f6475443089",
+      "byte_identical": true
+    }
+  },
+  "build_log": {
+    "path": "local/terminal-bookkeeping-retirement-build-01.log",
+    "sha256": "194597dff3fd9256eb3fa21ad898f12005504d4c007da10dc4abf1e701a257e3"
+  },
+  "preserved_reports": [
+    {
+      "path": "docs/experimental/cee-geometry-results-20261109.json",
+      "sha256": "32c734debd9c9515f20ef9e7e0088fe1562ebf49865b0f7dd37c5b1f0db59ca6"
+    },
+    {
+      "path": "docs/experimental/cee-geometry-tps-results-20261109.json",
+      "sha256": "fe7e62fe5f6095f3cea5ba753319cb3da1f6127480f54e25eb88b4653ab6f271"
+    },
+    {
+      "path": "docs/experimental/client-cee-geometry-results-20261109.json",
+      "sha256": "6aeab28b4621b513125c274692d06ccc74ea187fab9a6beb95dc1fcae8fe3c6b"
+    }
+  ],
+  "main_head": "cca3c09b36059cc44ec04cc2f03eea449936a460",
+  "main_tracked_unchanged": true,
+  "tests_rerun": false,
+  "note": "Exact source inventory and rebuilt runtime/fixture bytes match prototype-09c. Reuse named historical focused checks, steady samples, client load and actual reload; no new gameplay pass is claimed."
+}

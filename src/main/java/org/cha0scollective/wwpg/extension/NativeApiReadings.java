@@ -14,7 +14,6 @@ import org.cha0scollective.wwpg.api.MeasurementStatus;
 import org.cha0scollective.wwpg.api.NodeResult;
 import org.cha0scollective.wwpg.api.TickContext;
 import org.cha0scollective.wwpg.api.VoltageMeasurement;
-import org.cha0scollective.wwpg.experimental.TerminalBookkeeping;
 import org.cha0scollective.wwpg.wiring.Terminals;
 import org.cha0scollective.wwpg.wiring.LineVoltages;
 import org.patryk3211.powergrid.collections.ModdedConfigs;
@@ -34,7 +33,6 @@ import org.patryk3211.powergrid.electricity.transformer.TransformerMediumBlockEn
 import org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint;
 
 import java.util.*;
-import java.util.function.Function;
 
 /** Read-only terminal snapshots from the existing PG schedule, including native devices. */
 public final class NativeApiReadings {
@@ -57,7 +55,7 @@ public final class NativeApiReadings {
     private final WorldNetworks world;
     private TickContext context;
     private int serverTick;
-    private Map<Key, Frame> frames = TerminalBookkeeping.frameMap(), previousFrames = TerminalBookkeeping.frameMap();
+    private Map<Key, Frame> frames = new HashMap<>(), previousFrames = new HashMap<>();
     private final Map<BlockPos, Owner> owners = new HashMap<>();
     private final Map<ElectricalNetwork, NetworkSamples> networks = new IdentityHashMap<>();
     private final Map<ElectricalNetwork, Object> references = new IdentityHashMap<>();
@@ -98,9 +96,6 @@ public final class NativeApiReadings {
     private void snapshot(Map<Key, Frame> previous) {
         // One preparation pass only: no topology, owner or geometry invalidation state.
         var nativeTerminals = new IdentityHashMap<BlockState, IntSet>();
-        // Only the capturing function is reused. HashMap retains its original
-        // null-result retries, exception behavior and once-per-owner callbacks.
-        Function<BlockPos, Owner> ownerLookup = TerminalBookkeeping.ENABLED ? pos -> owner(pos, nativeTerminals) : null;
         // A native explicit ground gives a shared reference. Otherwise unrelated
         // floating circuits retain distinct solver references.
         var bridge = org.cha0scollective.wwpg.bridge.Bridges.get(level);
@@ -114,8 +109,7 @@ public final class NativeApiReadings {
         for (var entry : List.copyOf(world.globalExternalNodes.entrySet())) {
             if (!(entry.getKey() instanceof BlockWireEndpoint endpoint)) continue;
             Owner owner;
-            try { owner = owners.computeIfAbsent(endpoint.getPos(),
-                    TerminalBookkeeping.ENABLED ? ownerLookup : pos -> owner(pos, nativeTerminals)); }
+            try { owner = owners.computeIfAbsent(endpoint.getPos(), pos -> owner(pos, nativeTerminals)); }
             catch (RuntimeException | LinkageError error) {
                 var state = Terminals.loadedState(level, endpoint.getPos());
                 var entity = ApiTerminals.loadedBlockEntity(level, endpoint.getPos());
@@ -187,7 +181,6 @@ public final class NativeApiReadings {
                 frame.unavailable(MeasurementStatus.ISOLATED, "Terminal geometry is invalid: " + error.getClass().getSimpleName());
             }
         }
-        TerminalBookkeeping.prepared(frames.size());
     }
     private NetworkSamples samples(ElectricalNetwork network) {
         return networks.computeIfAbsent(network, NetworkSamples::new);
