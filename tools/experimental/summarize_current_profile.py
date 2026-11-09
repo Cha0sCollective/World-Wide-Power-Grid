@@ -12,7 +12,7 @@ from summarize_tree import ROOT, evidence, read, sha
 def signature(protocol):
     keys = ('batch', 'property_batch', 'verify_batch', 'tree_batch', 'tree_budget_ms',
             'tree_max_parts', 'tree_retain_coverage', 'tree_prioritize_unresolved',
-            'chunk_task_budget_ms', 'cee_state_geometry', 'terminal_bookkeeping', 'cpu_affinity_mask', 'server_affinity_mask')
+            'chunk_task_budget_ms', 'cee_state_geometry', 'terminal_bookkeeping', 'terminal_key_lookup', 'cpu_affinity_mask', 'server_affinity_mask')
     return {**{key: protocol.get(key) for key in keys},
             'runtime': protocol['runtime']['sha256'], 'helper': protocol['helper']['sha256']}
 

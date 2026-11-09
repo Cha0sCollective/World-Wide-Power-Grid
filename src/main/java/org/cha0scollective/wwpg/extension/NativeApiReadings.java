@@ -63,8 +63,23 @@ public final class NativeApiReadings {
     private final Map<TransmissionLine, LineFrame> lines = new IdentityHashMap<>();
     private boolean finished;
 
-    private record Key(BlockPos pos, int nativeId) {
-        Key { pos = pos.immutable(); }
+    private sealed interface Key permits StandardKey, DirectKey {
+        BlockPos pos();
+        int nativeId();
+    }
+    private record StandardKey(BlockPos pos, int nativeId) implements Key {
+        StandardKey { pos = pos.immutable(); }
+    }
+    private record DirectKey(BlockPos pos, int nativeId) implements Key {
+        DirectKey { pos = pos.immutable(); }
+        @Override public int hashCode() { return 31 * pos.hashCode() + nativeId; }
+        @Override public boolean equals(Object other) {
+            return this == other || other instanceof DirectKey key && nativeId == key.nativeId && Objects.equals(pos, key.pos);
+        }
+    }
+    private static Key key(BlockPos pos, int nativeId) {
+        return org.cha0scollective.wwpg.experimental.TerminalKeyLookup.ENABLED
+                ? new DirectKey(pos, nativeId) : new StandardKey(pos, nativeId);
     }
 
     private NativeApiReadings(ServerLevel level, TickContext context) {
@@ -113,7 +128,7 @@ public final class NativeApiReadings {
             catch (RuntimeException | LinkageError error) {
                 var state = Terminals.loadedState(level, endpoint.getPos());
                 var entity = ApiTerminals.loadedBlockEntity(level, endpoint.getPos());
-                var invalid = new Frame(new Key(endpoint.getPos(), endpoint.getTerminal()), entry.getValue(), state.getBlock(),
+                var invalid = new Frame(key(endpoint.getPos(), endpoint.getTerminal()), entry.getValue(), state.getBlock(),
                         entity == null ? state.getBlock() : entity, context.substeps());
                 invalid.unavailable(MeasurementStatus.ISOLATED, "Terminal geometry is invalid: " + error.getClass().getSimpleName());
                 frames.put(invalid.key, invalid); continue;
@@ -121,7 +136,7 @@ public final class NativeApiReadings {
             if (owner == null) continue;
             var state = owner.state;
             Object anchor = owner.entity == null ? state.getBlock() : owner.entity;
-            var key = new Key(endpoint.getPos(), endpoint.getTerminal());
+            var key = key(endpoint.getPos(), endpoint.getTerminal());
             var frame = previous.get(key);
             if (frame == null || frame.node != entry.getValue() || frame.anchor != anchor || frame.block != state.getBlock() || frame.values.length != context.substeps())
                 frame = new Frame(key, entry.getValue(), state.getBlock(), anchor, context.substeps());
@@ -181,6 +196,7 @@ public final class NativeApiReadings {
                 frame.unavailable(MeasurementStatus.ISOLATED, "Terminal geometry is invalid: " + error.getClass().getSimpleName());
             }
         }
+        org.cha0scollective.wwpg.experimental.TerminalKeyLookup.prepared(frames.size());
     }
     private NetworkSamples samples(ElectricalNetwork network) {
         return networks.computeIfAbsent(network, NetworkSamples::new);
@@ -328,7 +344,7 @@ public final class NativeApiReadings {
 
     /** Resolve a physical native proxy to an already captured canonical node. No alias cache or graph changes. */
     private Frame frameAt(BlockPos pos, int nativeId) {
-        var direct = frames.get(new Key(pos, nativeId));
+        var direct = frames.get(key(pos, nativeId));
         if (direct != null && (!(direct.node.endpoint instanceof BlockWireEndpoint endpoint)
                 || endpoint.getPos().equals(pos) && endpoint.getTerminal() == nativeId)) return direct;
         try { return proxyFrame(pos, nativeId); }
@@ -372,7 +388,7 @@ public final class NativeApiReadings {
         if (behaviour == null || !behaviour.hasTerminal(nativeId)) return null;
         var node = behaviour.getTerminal(nativeId);
         if (node == null || !(node.endpoint instanceof BlockWireEndpoint canonical)) return null;
-        var frame = frames.get(new Key(canonical.getPos(), canonical.getTerminal()));
+        var frame = frames.get(key(canonical.getPos(), canonical.getTerminal()));
         return frame != null && frame.node == node ? frame : null;
     }
 

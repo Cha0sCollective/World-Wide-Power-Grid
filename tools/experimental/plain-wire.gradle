@@ -20,5 +20,6 @@ gradle.projectsEvaluated {
         systemProperty 'wwpg.experimental.chunkTaskBudgetMillis', p.providers.gradleProperty('testChunkTaskBudgetMillis').getOrElse('0')
         systemProperty 'wwpg.experimental.ceeStateGeometry', p.providers.gradleProperty('testCeeStateGeometry').getOrElse('false')
         systemProperty 'wwpg.experimental.terminalBookkeeping', p.providers.gradleProperty('testTerminalBookkeeping').getOrElse('false')
+        systemProperty 'wwpg.experimental.terminalKeyLookup', p.providers.gradleProperty('testTerminalKeyLookup').getOrElse('false')
     }
 }

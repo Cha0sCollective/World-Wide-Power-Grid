@@ -28,6 +28,7 @@ def main():
     parser.add_argument('--chunk-task-budget-ms', type=int, choices=range(21), default=0)
     parser.add_argument('--cee-state-geometry', action='store_true')
     parser.add_argument('--terminal-bookkeeping', action='store_true')
+    parser.add_argument('--terminal-key-lookup', action='store_true')
     parser.add_argument('--addon-inputs', help='Frozen manifest supplying independent API example jars')
     parser.add_argument('--name', required=True)
     parser.add_argument('--property-batch', action='store_true')
@@ -73,7 +74,8 @@ def main():
                '-PtestWireTreePrioritizeUnresolved=' + str(args.tree_prioritize_unresolved).lower(),
                '-PtestChunkTaskBudgetMillis=' + str(args.chunk_task_budget_ms),
                '-PtestCeeStateGeometry=' + str(args.cee_state_geometry).lower(),
-               '-PtestTerminalBookkeeping=' + str(args.terminal_bookkeeping).lower()]
+               '-PtestTerminalBookkeeping=' + str(args.terminal_bookkeeping).lower(),
+               '-PtestTerminalKeyLookup=' + str(args.terminal_key_lookup).lower()]
     if addons:
         command += ['-PtestApiAddon=true', '-PtestExampleArtifact=' + addons['example']['path'],
                     '-PtestUpstreamExampleArtifact=' + addons['upstream_example']['path']]
@@ -88,6 +90,7 @@ def main():
     proof['chunk_task_budget_ms'] = args.chunk_task_budget_ms
     proof['cee_state_geometry'] = args.cee_state_geometry
     proof['terminal_bookkeeping'] = args.terminal_bookkeeping
+    proof['terminal_key_lookup'] = args.terminal_key_lookup
     proof['addon_artifacts'] = addons
     if addons:
         proof['addon_inputs'] = dict(path=str(addon_manifest), sha256=sha(addon_manifest))
@@ -109,9 +112,10 @@ def main():
             for key, item in addons.items())
         proof['passed'] &= proof['addons_unchanged'] and proof['addon_classpath_verified']
     if proof['passed']:
-        from plain_wire_benchmark import validate_terminal_bookkeeping
+        from plain_wire_benchmark import validate_terminal_bookkeeping, validate_terminal_keys
         try:
             proof['terminal_execution'] = validate_terminal_bookkeeping(log, args.terminal_bookkeeping)
+            proof['terminal_keys'] = validate_terminal_keys(log, args.terminal_key_lookup)
         except AssertionError:
             proof['passed'] = False
             proof['terminal_validation_error'] = 'Missing or inconsistent terminal bookkeeping execution counters'

@@ -117,6 +117,7 @@ def prepare(args):
     flags += '-Dwwpg.experimental.chunkTaskBudgetMillis=' + str(getattr(args, 'chunk_task_budget_ms', 0)) + '\n'
     flags += '-Dwwpg.experimental.ceeStateGeometry=' + str(getattr(args, 'cee_state_geometry', False)).lower() + '\n'
     flags += '-Dwwpg.experimental.terminalBookkeeping=' + str(getattr(args, 'terminal_bookkeeping', False)).lower() + '\n'
+    flags += '-Dwwpg.experimental.terminalKeyLookup=' + str(getattr(args, 'terminal_key_lookup', False)).lower() + '\n'
     if cpu_mask:
         flags += '-Dwwpg.benchmark.cpuMask=0x' + cpu_mask + '\n'
     if server_mask:
@@ -237,6 +238,17 @@ def validate_terminal_bookkeeping(log, enabled):
     return stats
 
 
+def validate_terminal_keys(log, enabled):
+    lines = re.findall(r'WWPG experimental terminal key lookup: (.+)', log)
+    if not enabled:
+        assert not lines
+        return None
+    assert len(lines) == 1
+    stats = {key: int(value) for key, value in re.findall(r'(\w+)=(\d+)', lines[0])}
+    assert stats['passes'] > 0 and stats['frames'] >= stats['largest'] > 0
+    return stats
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--reference-root', required=True)
@@ -255,6 +267,7 @@ def main():
     parser.add_argument('--chunk-task-budget-ms', type=int, choices=range(21), default=0)
     parser.add_argument('--cee-state-geometry', action='store_true')
     parser.add_argument('--terminal-bookkeeping', action='store_true')
+    parser.add_argument('--terminal-key-lookup', action='store_true')
     parser.add_argument('--helper-inputs', help='Frozen queue-aware loading helper manifest')
     parser.add_argument('--cpu-mask', choices=['fff','fff000'], help='Explicit whole-process logical CPU group, selected after a load observation')
     parser.add_argument('--server-cpu-mask', help='Explicit hexadecimal server-thread subset of the selected process group')
@@ -280,6 +293,7 @@ def main():
         chunk_task_budget_ms=args.chunk_task_budget_ms,
         cee_state_geometry=args.cee_state_geometry,
         terminal_bookkeeping=args.terminal_bookkeeping,
+        terminal_key_lookup=args.terminal_key_lookup,
         cpu_affinity_mask=args.cpu_mask,
         server_affinity_mask=args.server_cpu_mask,
         helper=bench.read(directory / 'launch.json')['helper'],
@@ -298,6 +312,7 @@ def main():
         protocol['task_window'] = validate_task_window((directory / 'process.log').read_text(errors='replace'), args.chunk_task_budget_ms)
         protocol['cee_geometry'] = validate_cee_geometry((directory / 'process.log').read_text(errors='replace'), args.cee_state_geometry)
         protocol['terminal_execution'] = validate_terminal_bookkeeping((directory / 'process.log').read_text(errors='replace'), args.terminal_bookkeeping)
+        protocol['terminal_keys'] = validate_terminal_keys((directory / 'process.log').read_text(errors='replace'), args.terminal_key_lookup)
         if args.tree_prioritize_unresolved:
             log = (directory / 'process.log').read_text(encoding='utf-8', errors='replace')
             priority = re.findall(r'prioritizeUnresolved=(true|false), prioritySelections=(\d+)', log)

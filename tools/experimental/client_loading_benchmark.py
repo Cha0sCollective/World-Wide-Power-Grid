@@ -12,7 +12,7 @@ import time
 import legacy_bench as bench
 from cpu_affinity import affinity, observe_group, pin_owned
 from host_metrics import HostWatch
-from plain_wire_benchmark import ROOT, INPUTS, inventory, validate_task_window, validate_cee_geometry, validate_terminal_bookkeeping
+from plain_wire_benchmark import ROOT, INPUTS, inventory, validate_task_window, validate_cee_geometry, validate_terminal_bookkeeping, validate_terminal_keys
 from process_metrics import ChildMetrics
 
 
@@ -86,6 +86,10 @@ def validate(directory, inputs, audit_directory=None):
         'wwpg.experimental.terminalBookkeeping', 'false') == 'true')
     if terminals is not None:
         bench.write(audit_directory / 'client-benchmark/terminal-bookkeeping-validation.json', terminals)
+    keys = validate_terminal_keys(log, bench.read(directory / 'experiment.json')['properties'].get(
+        'wwpg.experimental.terminalKeyLookup', 'false') == 'true')
+    if keys is not None:
+        bench.write(audit_directory / 'client-benchmark/terminal-key-validation.json', keys)
     saved = bench.completed_world_save(log)
     (audit_directory / 'client-benchmark').mkdir(parents=True, exist_ok=True)
     bench.write(audit_directory / 'shutdown-save.json', saved)
@@ -104,6 +108,7 @@ def main():
     parser.add_argument('--chunk-task-budget-ms', type=int, choices=range(21), default=0)
     parser.add_argument('--cee-state-geometry', action='store_true')
     parser.add_argument('--terminal-bookkeeping', action='store_true')
+    parser.add_argument('--terminal-key-lookup', action='store_true')
     parser.add_argument('--inspect-delivery', action='store_true')
     parser.add_argument('--delivery-jfr', action='store_true')
     parser.add_argument('--inspect-task-queues', action='store_true')
@@ -155,7 +160,8 @@ def main():
         'wwpg.experimental.wireTreePrioritizeUnresolved': str(args.tree_prioritize_unresolved).lower(),
         'wwpg.experimental.chunkTaskBudgetMillis': str(args.chunk_task_budget_ms),
         'wwpg.experimental.ceeStateGeometry': str(args.cee_state_geometry).lower(),
-        'wwpg.experimental.terminalBookkeeping': str(args.terminal_bookkeeping).lower()}
+        'wwpg.experimental.terminalBookkeeping': str(args.terminal_bookkeeping).lower(),
+        'wwpg.experimental.terminalKeyLookup': str(args.terminal_key_lookup).lower()}
     # Freeze launch bytes in this attempt. Frozen template dependencies are verified above.
     argument_file = directory / 'client.args'
     argument_file.write_text(''.join(f'-D{k}={v}\n' for k, v in properties.items())

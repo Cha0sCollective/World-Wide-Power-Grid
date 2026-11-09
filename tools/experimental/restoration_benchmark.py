@@ -25,6 +25,7 @@ def main():
     parser.add_argument('--chunk-task-budget-ms', type=int, choices=range(21), default=0)
     parser.add_argument('--cee-state-geometry', action='store_true')
     parser.add_argument('--terminal-bookkeeping', action='store_true')
+    parser.add_argument('--terminal-key-lookup', action='store_true')
     parser.add_argument('--helper-inputs', help='Explicit frozen helper overlay manifest for queue-aware readiness')
     parser.add_argument('--cpu-mask', choices=['fff','fff000'], help='Explicit whole-process CPU group after load observation')
     parser.add_argument('--server-cpu-mask', help='Explicit hexadecimal server-thread subset of the selected process group')
@@ -52,6 +53,7 @@ def main():
                     chunk_task_budget_ms=args.chunk_task_budget_ms,
                     cee_state_geometry=args.cee_state_geometry,
                     terminal_bookkeeping=args.terminal_bookkeeping,
+                    terminal_key_lookup=args.terminal_key_lookup,
                     cpu_affinity_mask=args.cpu_mask, server_affinity_mask=args.server_cpu_mask,
                     started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
     bench.write(directory / 'experiment.json', protocol)
@@ -98,6 +100,7 @@ def main():
         protocol['task_window'] = experiment.validate_task_window(log, args.chunk_task_budget_ms)
         protocol['cee_geometry'] = experiment.validate_cee_geometry(log, args.cee_state_geometry)
         protocol['terminal_execution'] = experiment.validate_terminal_bookkeeping(log, args.terminal_bookkeeping)
+        protocol['terminal_keys'] = experiment.validate_terminal_keys(log, args.terminal_key_lookup)
         if args.tree_batch:
             if args.tree_retain_coverage:
                 assert log.count('WWPG experimental wire-tree retained coverage: enabled=true') == 1
