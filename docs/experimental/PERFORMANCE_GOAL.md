@@ -13,7 +13,22 @@ no full headless or graphical acceptance suite is implied by this investigation.
 
 ## Current evidence and open requirements
 
-- The current candidate is `0.2.7-experimental.wiretree.7`, frozen at
+- The current candidate is `0.2.7-experimental.wiretree.8`, frozen at
+  `local/frozen/prototype-09c/inputs.json` (runtime SHA-256
+  `7a8cfa0973a73ac490e7cb1f1e1d8b4eff6bdd1fc9933d067279852e4e8f1204`).
+  Its opt-in [CEE state geometry reuse](CEE_STATE_GEOMETRY.md) measured
+  **20.027 / 20.031 TPS**, **49.077 / 48.616 ms mean** and **55.781 / 55.303 ms
+  p95**, versus the same-jar disabled control's **19.480 TPS**, **51.201 ms mean**
+  and **58.675 ms p95**. Mean tick time was 4.60% lower across the enabled samples;
+  total allocation was higher, so this is not an allocation-reduction claim.
+  Complete client readiness remained below one minute at **39.147 seconds**,
+  with a worst loading tick of **2.862 seconds**. All 99 focused checks and an
+  actual full-yard unload/reload passed; initial/reload headless restoration
+  took **28.639 / 17.069 seconds**. The cache covers only reviewed state-only
+  built-ins, preserving original callbacks for dynamic/custom geometry.
+  The p95 gate and continuous-streaming requirement remain open.
+  [Evidence](cee-geometry-results-20261109.json).
+- The preceding `0.2.7-experimental.wiretree.7` candidate is frozen at
   `local/frozen/prototype-08a/inputs.json` (runtime SHA-256
   `31efbb0099531a7a8db7aa0f52deb80b040080bada825dd33bc339560b85c7a1`).
   Its opt-in [bounded chunk-task window](CHUNK_TASK_WINDOW.md) reached complete
@@ -111,12 +126,13 @@ samples.
    in two samples. Its actual unload/reload and steady-TPS checks are complete;
    the p95 tick target is still missed. The separate node-holder initialization
    path and largest stalls also remain.
-3. Reduce repeated preparation and terminal/world lookups for steady TPS.
-   Inspect native geometry dependencies before any reuse; retain dynamic,
-   custom, moving, unloaded and replaced-owner behavior. Do not reduce the
-   16 electrical substeps, accuracy, storage, heating, or device callbacks.
-4. The task-window runtime's steady observation is complete; verify both
-   targets on subsequent improvements. The goal remains active until
+3. Reviewed CEE geometry reuse is implemented and has a matched on/off/on
+   comparison, a client load and an actual reload. Profile the remaining
+   preparation, sampling and wire/world-query costs on this runtime before
+   choosing the next change. Preserve dynamic, custom, moving, unloaded and
+   replaced-owner behavior, all 16 electrical substeps, accuracy, storage,
+   heating and device callbacks. The prior packed worker prototype stays retired.
+4. Verify both targets on subsequent improvements. The goal remains active until
    consistency and functionality preservation have supporting evidence.
    Headless loads below one minute do not establish complete client readiness.
 

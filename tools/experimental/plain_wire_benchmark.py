@@ -115,6 +115,7 @@ def prepare(args):
     flags += '-Dwwpg.experimental.wireTreeRetainCoverage=' + str(getattr(args, 'tree_retain_coverage', False)).lower() + '\n'
     flags += '-Dwwpg.experimental.wireTreePrioritizeUnresolved=' + str(getattr(args, 'tree_prioritize_unresolved', False)).lower() + '\n'
     flags += '-Dwwpg.experimental.chunkTaskBudgetMillis=' + str(getattr(args, 'chunk_task_budget_ms', 0)) + '\n'
+    flags += '-Dwwpg.experimental.ceeStateGeometry=' + str(getattr(args, 'cee_state_geometry', False)).lower() + '\n'
     if cpu_mask:
         flags += '-Dwwpg.benchmark.cpuMask=0x' + cpu_mask + '\n'
     if server_mask:
@@ -211,6 +212,18 @@ def validate_task_window(log, budget):
     return stats
 
 
+def validate_cee_geometry(log, enabled):
+    lines = re.findall(r'WWPG experimental CEE state geometry: (.+)', log)
+    if not enabled:
+        assert not lines
+        return None
+    assert len(lines) == 1
+    stats = {key: int(value) for key, value in re.findall(r'(\w+)=(\d+)', lines[0])}
+    assert stats['hits'] > 0 and 0 < stats['builds'] == stats['states'] <= 2048
+    assert stats['requests'] == stats['hits'] + stats['builds'] + stats['fallback']
+    return stats
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--reference-root', required=True)
@@ -227,6 +240,7 @@ def main():
     parser.add_argument('--tree-retain-coverage', action='store_true')
     parser.add_argument('--tree-prioritize-unresolved', action='store_true')
     parser.add_argument('--chunk-task-budget-ms', type=int, choices=range(21), default=0)
+    parser.add_argument('--cee-state-geometry', action='store_true')
     parser.add_argument('--helper-inputs', help='Frozen queue-aware loading helper manifest')
     parser.add_argument('--cpu-mask', choices=['fff','fff000'], help='Explicit whole-process logical CPU group, selected after a load observation')
     parser.add_argument('--server-cpu-mask', help='Explicit hexadecimal server-thread subset of the selected process group')
@@ -250,6 +264,7 @@ def main():
         tree_retain_coverage=args.tree_retain_coverage,
         tree_prioritize_unresolved=args.tree_prioritize_unresolved,
         chunk_task_budget_ms=args.chunk_task_budget_ms,
+        cee_state_geometry=args.cee_state_geometry,
         cpu_affinity_mask=args.cpu_mask,
         server_affinity_mask=args.server_cpu_mask,
         helper=bench.read(directory / 'launch.json')['helper'],
@@ -266,6 +281,7 @@ def main():
             bench.run(options)
         protocol['validation'] = validate(directory, args.detailed, args.batch, args.verify_batch, args.property_batch)
         protocol['task_window'] = validate_task_window((directory / 'process.log').read_text(errors='replace'), args.chunk_task_budget_ms)
+        protocol['cee_geometry'] = validate_cee_geometry((directory / 'process.log').read_text(errors='replace'), args.cee_state_geometry)
         if args.tree_prioritize_unresolved:
             log = (directory / 'process.log').read_text(encoding='utf-8', errors='replace')
             priority = re.findall(r'prioritizeUnresolved=(true|false), prioritySelections=(\d+)', log)

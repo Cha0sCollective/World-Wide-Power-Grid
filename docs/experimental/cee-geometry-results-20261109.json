@@ -1,0 +1,883 @@
+{
+  "schema": 1,
+  "full_suite": false,
+  "runtime": {
+    "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\wwpg-0.2.7-experimental.wiretree.8.jar",
+    "sha256": "7a8cfa0973a73ac490e7cb1f1e1d8b4eff6bdd1fc9933d067279852e4e8f1204"
+  },
+  "source_hashes_verified": 445,
+  "focused_tests": 99,
+  "checks": [
+    {
+      "name": "cee-geometry-native-03",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_cee_state_geometry,wwpg_loading,wwpg_unload,wwpg_solver_safety",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\wwpg-0.2.7-experimental.wiretree.8.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\wwpg-0.2.7-experimental.wiretree.8-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\cee-geometry-native-03\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_cee_state_geometry,wwpg_loading,wwpg_unload,wwpg_solver_safety",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=32",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\wwpg-0.2.7-experimental.wiretree.8.jar",
+            "sha256": "7a8cfa0973a73ac490e7cb1f1e1d8b4eff6bdd1fc9933d067279852e4e8f1204"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\wwpg-0.2.7-experimental.wiretree.8-gametests.jar",
+            "sha256": "de5df5ecdbd33506465c9ba251e8b7891a084559bcd517a51ced0f6475443089"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "exit_code": 0,
+        "required_tests_passed": 33,
+        "artifacts_unchanged": true,
+        "passed": true
+      },
+      "reviewed_types": 10,
+      "states_compared": 2716
+    },
+    {
+      "name": "cee-geometry-java-01",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_cee_state_geometry,wwpg_loading,wwpg_unload,wwpg_solver_safety",
+        "backend": "JAVA",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\wwpg-0.2.7-experimental.wiretree.8.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\wwpg-0.2.7-experimental.wiretree.8-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\cee-geometry-java-01\\server",
+          "-PtestBackend=JAVA",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_cee_state_geometry,wwpg_loading,wwpg_unload,wwpg_solver_safety",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=32",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\wwpg-0.2.7-experimental.wiretree.8.jar",
+            "sha256": "7a8cfa0973a73ac490e7cb1f1e1d8b4eff6bdd1fc9933d067279852e4e8f1204"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\wwpg-0.2.7-experimental.wiretree.8-gametests.jar",
+            "sha256": "de5df5ecdbd33506465c9ba251e8b7891a084559bcd517a51ced0f6475443089"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "exit_code": 0,
+        "required_tests_passed": 33,
+        "artifacts_unchanged": true,
+        "passed": true
+      },
+      "reviewed_types": 10,
+      "states_compared": 2716
+    },
+    {
+      "name": "cee-geometry-off-01",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_cee_state_geometry,wwpg_loading,wwpg_unload,wwpg_solver_safety",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\wwpg-0.2.7-experimental.wiretree.8.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\wwpg-0.2.7-experimental.wiretree.8-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\cee-geometry-off-01\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_cee_state_geometry,wwpg_loading,wwpg_unload,wwpg_solver_safety",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=32",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=false"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\wwpg-0.2.7-experimental.wiretree.8.jar",
+            "sha256": "7a8cfa0973a73ac490e7cb1f1e1d8b4eff6bdd1fc9933d067279852e4e8f1204"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\wwpg-0.2.7-experimental.wiretree.8-gametests.jar",
+            "sha256": "de5df5ecdbd33506465c9ba251e8b7891a084559bcd517a51ced0f6475443089"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": false,
+        "exit_code": 0,
+        "required_tests_passed": 33,
+        "artifacts_unchanged": true,
+        "passed": true
+      },
+      "reviewed_types": 10,
+      "states_compared": 2716
+    }
+  ],
+  "failed_fixture_attempts": [
+    {
+      "name": "cee-geometry-native-01",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_cee_state_geometry,wwpg_loading,wwpg_unload,wwpg_solver_safety",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09a\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09a\\wwpg-0.2.7-experimental.wiretree.8.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09a\\wwpg-0.2.7-experimental.wiretree.8-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\cee-geometry-native-01\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_cee_state_geometry,wwpg_loading,wwpg_unload,wwpg_solver_safety",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=32",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09a\\wwpg-0.2.7-experimental.wiretree.8.jar",
+            "sha256": "7a8cfa0973a73ac490e7cb1f1e1d8b4eff6bdd1fc9933d067279852e4e8f1204"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09a\\wwpg-0.2.7-experimental.wiretree.8-gametests.jar",
+            "sha256": "c8c9f1ec1261e4e1582263d9641d25518622655a42e0fb07d1cfde37882c120b"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09a\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "exit_code": 1,
+        "required_tests_passed": 0,
+        "artifacts_unchanged": true,
+        "passed": false
+      }
+    },
+    {
+      "name": "cee-geometry-native-02",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_cee_state_geometry,wwpg_loading,wwpg_unload,wwpg_solver_safety",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09b\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09b\\wwpg-0.2.7-experimental.wiretree.8.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09b\\wwpg-0.2.7-experimental.wiretree.8-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\cee-geometry-native-02\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_cee_state_geometry,wwpg_loading,wwpg_unload,wwpg_solver_safety",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=32",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09b\\wwpg-0.2.7-experimental.wiretree.8.jar",
+            "sha256": "7a8cfa0973a73ac490e7cb1f1e1d8b4eff6bdd1fc9933d067279852e4e8f1204"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09b\\wwpg-0.2.7-experimental.wiretree.8-gametests.jar",
+            "sha256": "feb8553df164ad8313ff74689d641607474f241f257b7206904f2a07f30e62ad"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09b\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "exit_code": 1,
+        "required_tests_passed": 0,
+        "artifacts_unchanged": true,
+        "passed": false
+      }
+    }
+  ],
+  "comparison": {
+    "disabled": {
+      "samples": 1,
+      "mean_tick_ms": [
+        51.20084781491003
+      ],
+      "p95_tick_ms": [
+        58.6748
+      ],
+      "tps": [
+        19.480148173438355
+      ],
+      "target_met": [
+        false
+      ],
+      "thread_counters": [
+        {
+          "attempt": "goal-cee-geometry-off-01",
+          "mean_cpu_ms": 50.938571122536416,
+          "mean_allocated_bytes": 12469353.312767781,
+          "compilation_ms": 1262
+        }
+      ]
+    },
+    "enabled": {
+      "samples": 2,
+      "mean_tick_ms": [
+        49.077200958333336,
+        48.61609479166667
+      ],
+      "p95_tick_ms": [
+        55.7814,
+        55.3034
+      ],
+      "tps": [
+        20.027046881607063,
+        20.030607620099193
+      ],
+      "target_met": [
+        false,
+        false
+      ],
+      "thread_counters": [
+        {
+          "attempt": "goal-cee-geometry-on-01",
+          "mean_cpu_ms": 48.7890625,
+          "mean_allocated_bytes": 13669801.576666666,
+          "compilation_ms": 1142
+        },
+        {
+          "attempt": "goal-cee-geometry-on-02",
+          "mean_cpu_ms": 48.37890625,
+          "mean_allocated_bytes": 13653758.506666666,
+          "compilation_ms": 1362
+        }
+      ]
+    },
+    "mean_tick_reduction_percent": 4.597970620370207
+  },
+  "steady_report": "docs/experimental/cee-geometry-tps-results-20261109.json",
+  "client_report": "docs/experimental/client-cee-geometry-results-20261109.json",
+  "client_result": {
+    "schema": 1,
+    "scope": "One copied benchmark save; stationary visible scene; not full graphical acceptance",
+    "start_event": "Normal WorldOpenFlows.openWorld invocation from the title screen",
+    "selected_unix_ms": 1794243582118,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "render_distance_chunks": 12,
+    "simulation_distance_chunks": 12,
+    "camera": {
+      "z": 1028.5,
+      "y": 74.0,
+      "x": 1038.5,
+      "yaw": -36.0,
+      "pitch": 14.0
+    },
+    "expected_client_chunks": 609,
+    "compile_buffers": 12,
+    "settings": {
+      "graphics": "fancy",
+      "vsync": false,
+      "max_fps": 60,
+      "fov": 70,
+      "fullscreen": false
+    },
+    "first_world_frame_seconds": 14.0470623,
+    "electrical_ready_seconds": 36.9872467,
+    "restored_rendered_seconds": 39.1474364,
+    "under_one_minute": true,
+    "readiness_observation": {
+      "elapsed_seconds": 39.1474364,
+      "electrical_ready": true,
+      "camera_ready": true,
+      "loaded_client_chunks": 609,
+      "visible_sections": 2488,
+      "rendered_sections": 393,
+      "dirty_sections": 0,
+      "uncompiled_sections": 0,
+      "queue_empty": true,
+      "free_compile_buffers": 12,
+      "occlusion_ready": true,
+      "window_active": true
+    },
+    "ready_confirmation_seconds": 2.0845608,
+    "screenshot_sha256": "90790900c1c4a95bc277976642b319411a0e3e01fa61a9346177e2873975a5eb",
+    "passed": true
+  },
+  "reload": {
+    "name": "goal-cee-geometry-reload-01",
+    "protocol": {
+      "schema": 1,
+      "name": "goal-cee-geometry-reload-01",
+      "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+      "runtime": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-cee-geometry-reload-01\\mods\\wwpg-0.2.7-experimental.wiretree.8.jar",
+        "sha256": "7a8cfa0973a73ac490e7cb1f1e1d8b4eff6bdd1fc9933d067279852e4e8f1204",
+        "kind": "local-candidate",
+        "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\wwpg-0.2.7-experimental.wiretree.8.jar"
+      },
+      "helper": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-cee-geometry-reload-01\\mods\\wwpg-benchmark-0.1.0-affinity.jar",
+        "sha256": "56434c77e56c6361aad1b54733eac5573b97bd24d52ae42b0d330216da7a34cb"
+      },
+      "copied_reference": true,
+      "batch": true,
+      "property_batch": true,
+      "tree_batch": true,
+      "detailed": false,
+      "loading_trace": false,
+      "reload": true,
+      "full_suite": false,
+      "tree_budget_ms": 20,
+      "tree_max_parts": 32,
+      "tree_retain_coverage": false,
+      "helper_inputs": "local/frozen/affinity-helper-02/inputs.json",
+      "tree_prioritize_unresolved": true,
+      "chunk_task_budget_ms": 2,
+      "cee_state_geometry": true,
+      "cpu_affinity_mask": "fff000",
+      "server_affinity_mask": null,
+      "started_utc": "2026-11-09T17:00:37Z",
+      "task_window": {
+        "budgetMillis": 2,
+        "maxTasks": 512,
+        "windows": 390,
+        "completed": 5061,
+        "emptyPolls": 2203532,
+        "maxCompleted": 512,
+        "maxWindowNanos": 2124700,
+        "maxPollNanos": 256800,
+        "probes": 64,
+        "maxProbeNanos": 901400
+      },
+      "cee_geometry": {
+        "requests": 11805651,
+        "hits": 9297203,
+        "builds": 8,
+        "fallback": 2508440,
+        "states": 8
+      },
+      "tree_execution": {
+        "attachments": 11786,
+        "fallback": 100,
+        "roots": 23572,
+        "traversals": 3116,
+        "covered": 20456,
+        "visited": 3977211,
+        "flushes": 394,
+        "largest": 11738,
+        "pending": 0,
+        "forced": 4,
+        "discarded": 0,
+        "budgetMillis": 20,
+        "maxParts": 32,
+        "yielded": 392,
+        "maxProcessed": 32,
+        "maxFlushNanos": 61141300,
+        "maxEntryNanos": 59296100,
+        "priority_selections": 199
+      },
+      "validation": {
+        "passed": true,
+        "actual_nodes": 14650,
+        "edges": 20637,
+        "chunks": 953,
+        "storage_devices": 1050,
+        "healthy_ticks": 100,
+        "normal_shutdown": true,
+        "sixteen_substeps": true,
+        "no_independent_cee_or_rejected_solves": true,
+        "actual_reload_cycles": 1,
+        "full_suite": false
+      },
+      "loading": [
+        {
+          "phase": "SETTLE",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 30,
+          "graph_ready_tick": 209,
+          "finish_tick": 328,
+          "chunk_request_seconds": 0.8244453,
+          "chunk_loading_seconds": 12.182116,
+          "graph_recovery_seconds": 9.4528467,
+          "electrical_settling_seconds": 6.1791869,
+          "total_restoration_seconds": 28.6385949,
+          "restoration_and_settling_seconds": 27.8141496,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 11306,
+          "maximum_pending_roots": 11306,
+          "queue_drained_tick": 209,
+          "queue_drain_seconds": 9.4528467
+        },
+        {
+          "phase": "RELOAD",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 3,
+          "graph_ready_tick": 186,
+          "finish_tick": 305,
+          "chunk_request_seconds": 0.0325063,
+          "chunk_loading_seconds": 1.2830068,
+          "graph_recovery_seconds": 9.9707219,
+          "electrical_settling_seconds": 5.7829698,
+          "total_restoration_seconds": 17.0692048,
+          "restoration_and_settling_seconds": 17.0366985,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 11610,
+          "maximum_pending_roots": 11674,
+          "queue_drained_tick": 186,
+          "queue_drain_seconds": 9.9707219
+        }
+      ],
+      "original_reference_unchanged": true,
+      "isolated_reference_unchanged": true,
+      "finished_utc": "2026-11-09T17:01:43Z"
+    },
+    "evidence": [
+      {
+        "path": "local/benchmarks/goal-cee-geometry-reload-01/experiment.json",
+        "sha256": "84315f8ba02fa30979163f2448efb91c6799b4d04f53f46892f0e997d70ade73"
+      },
+      {
+        "path": "local/benchmarks/goal-cee-geometry-reload-01/launch.json",
+        "sha256": "57ac884be4f8637d95ff64f285f2e1a3fb197af2ce332ee3fca287ec114cab7d"
+      },
+      {
+        "path": "local/benchmarks/goal-cee-geometry-reload-01/invocation.json",
+        "sha256": "260b064be4eb8b5a1f463d7c0d697e071616da9afdc03b55e1b59ed34133ae22"
+      },
+      {
+        "path": "local/benchmarks/goal-cee-geometry-reload-01/restore-input.json",
+        "sha256": "ec3c33f7e2ae3b4e052c0a204283843a78f82def40c25711840a7a8b5f227a09"
+      },
+      {
+        "path": "local/benchmarks/goal-cee-geometry-reload-01/shutdown-save.json",
+        "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+      },
+      {
+        "path": "local/benchmarks/goal-cee-geometry-reload-01/runner-exit.json",
+        "sha256": "15a4c6b47208882cd715b7757d482b08261bcc724bbcf7a88ae6acdeed5e25d0"
+      },
+      {
+        "path": "local/benchmarks/goal-cee-geometry-reload-01/host-metrics.jsonl",
+        "sha256": "eab6da19de242209d31309f4d034112c4c9928e290d5a6dc229529fe77f1893c"
+      },
+      {
+        "path": "local/benchmarks/goal-cee-geometry-reload-01/process.log",
+        "sha256": "d3f68f9ff0b8bd31ac9e9d02baab6d23483f436c120dd20a1c540d9db25817b0"
+      },
+      {
+        "path": "local/benchmarks/goal-cee-geometry-reload-01/benchmark/result.json",
+        "sha256": "99a942f17431657878c5c47af423744b4d48504a410a308cdd0b3d5a2378db3f"
+      },
+      {
+        "path": "local/benchmarks/goal-cee-geometry-reload-01/benchmark/loading-results.json",
+        "sha256": "53e4dd09ff8eae448f1035cce1e360027bc4fdc368ef30f2e0423e78f0cb7389"
+      },
+      {
+        "path": "local/benchmarks/goal-cee-geometry-reload-01/benchmark/ticks.csv",
+        "sha256": "dc1e0b2dbebb77d313ae2c799f64a3014405c0e6f41f33469e0ed12967c3cd58"
+      },
+      {
+        "path": "local/benchmarks/goal-cee-geometry-reload-01/benchmark/placement-ticks.csv",
+        "sha256": "949a28608fc7069cba098a1368a4c23b8272e5f27409d8c5e106ed17f2e02fa5"
+      },
+      {
+        "path": "local/benchmarks/goal-cee-geometry-reload-01/benchmark/pre-solve-storage.json",
+        "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+      },
+      {
+        "path": "local/benchmarks/goal-cee-geometry-reload-01/benchmark/placement-fixed.json",
+        "sha256": "f39e516534daabb39e6a5305b5c802dee926ac68a80c1f4de97c30d3406bcc22"
+      },
+      {
+        "path": "local/benchmarks/goal-cee-geometry-reload-01/benchmark/placement-restored.json",
+        "sha256": "74b9b14dfbe5899968179ec8c50c357603f021a36a512c18899f72140f4c66f7"
+      },
+      {
+        "path": "local/benchmarks/goal-cee-geometry-reload-01/benchmark/lifecycle.json",
+        "sha256": "89e659a54487093b485520bf1cd481b055d37b44e03c72297ade1f700e8e9938"
+      },
+      {
+        "path": "local/benchmarks/goal-cee-geometry-reload-01/process-affinity.json",
+        "sha256": "67d2e100e69d977364af590d95d507145afe85c7655a86043558ebc5a0442fe8"
+      },
+      {
+        "path": "local/benchmarks/goal-cee-geometry-reload-01/process-metrics.jsonl",
+        "sha256": "7e11de4d168d461d28cf8328d221c006dd493423b0174d6e75f9f0afd4404a17"
+      }
+    ],
+    "host": {
+      "sample_period_seconds": 5,
+      "in_window_intervals": 8,
+      "in_window_seconds": 40.08969712257385,
+      "monitored_processes": 192,
+      "competing_game_present": false,
+      "other_cpu_mean_cores": 0.3484374041861849,
+      "other_process_peaks": [
+        {
+          "name": "ChatGPT.exe",
+          "identity": "28176:134387027293764011",
+          "peak_cores": 0.24301015318581543,
+          "mean_cores": 0.04677012136727314
+        },
+        {
+          "name": "ChatGPT.exe",
+          "identity": "13688:134387027373880825",
+          "peak_cores": 0.221307346116909,
+          "mean_cores": 0.08106821036994012
+        },
+        {
+          "name": "HWiNFO64.EXE",
+          "identity": "5948:134387027096006899",
+          "peak_cores": 0.10581327060395876,
+          "mean_cores": 0.07522194519903097
+        },
+        {
+          "name": "ChatGPT.exe",
+          "identity": "28732:134387027298932907",
+          "peak_cores": 0.08100338439527181,
+          "mean_cores": 0.04443161529890949
+        },
+        {
+          "name": "powershell.exe",
+          "identity": "6028:134387027037888757",
+          "peak_cores": 0.05618415918845104,
+          "mean_cores": 0.033518586979879084
+        },
+        {
+          "name": "codex.exe",
+          "identity": "30104:134387027358105490",
+          "peak_cores": 0.031210435417862708,
+          "mean_cores": 0.012861783376000115
+        },
+        {
+          "name": "explorer.exe",
+          "identity": "13836:134387027040075621",
+          "peak_cores": 0.018727206614073552,
+          "mean_cores": 0.004677012136727315
+        },
+        {
+          "name": "dllhost.exe",
+          "identity": "31644:134387027407630677",
+          "peak_cores": 0.01869380143141532,
+          "mean_cores": 0.005066763148121258
+        }
+      ],
+      "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+    },
+    "tick_metrics": {
+      "RELOAD": {
+        "ticks": 305,
+        "longest_tick_seconds": 0.748836,
+        "tick_body_seconds": 16.2570731,
+        "matrix_assemblies": 1,
+        "network_substep_calls": 1920,
+        "p95_tick_seconds": 0.0601752,
+        "p99_tick_seconds": 0.2975173,
+        "longest_end_to_end_gap_seconds": 0.776
+      },
+      "SETTLE": {
+        "ticks": 328,
+        "longest_tick_seconds": 3.4001038,
+        "tick_body_seconds": 26.8630659,
+        "matrix_assemblies": 1,
+        "network_substep_calls": 1920,
+        "p95_tick_seconds": 0.1310358,
+        "p99_tick_seconds": 0.5800883,
+        "longest_end_to_end_gap_seconds": 3.405
+      },
+      "UNLOAD": {
+        "ticks": 2,
+        "longest_tick_seconds": 0.2920555,
+        "tick_body_seconds": 0.403588,
+        "matrix_assemblies": 654,
+        "network_substep_calls": 19264,
+        "p95_tick_seconds": 0.2920555,
+        "p99_tick_seconds": 0.2920555,
+        "longest_end_to_end_gap_seconds": 0.112
+      }
+    }
+  },
+  "evidence": [
+    {
+      "path": "local/frozen/prototype-09c/inputs.json",
+      "sha256": "4d74f5e83fce89c42c7a82248e31d37adc6777fba84f52649bbe6a70d83e3c1f"
+    },
+    {
+      "path": "local/checks/cee-geometry-native-03/invocation.json",
+      "sha256": "0e048a84554194776c01babdbcdefc4d30be377c335dc5eb7442fc276b04fff3"
+    },
+    {
+      "path": "local/checks/cee-geometry-native-03/result.json",
+      "sha256": "1f31765ed347df2aeef346d22d95fc10cadfb87b530344a45ae17ecfdcf6b30c"
+    },
+    {
+      "path": "local/checks/cee-geometry-native-03/process.log",
+      "sha256": "839211954d5c6b8c2af8f8c1a274109a9df15b95abd8e3394d90200ecc4f3f6a"
+    },
+    {
+      "path": "local/checks/cee-geometry-java-01/invocation.json",
+      "sha256": "d07e7f8c94e9e02f011376719247cb028481db80ba5fa9c149813c4cf6893f10"
+    },
+    {
+      "path": "local/checks/cee-geometry-java-01/result.json",
+      "sha256": "fd4ce20097c109494bfefd935bd0447f22015a2ee0c24c16aa7a7f4e0cee7853"
+    },
+    {
+      "path": "local/checks/cee-geometry-java-01/process.log",
+      "sha256": "3c673b8d512fd870b0983555769c90196ab43a0b33480d993990a59778e957ed"
+    },
+    {
+      "path": "local/checks/cee-geometry-off-01/invocation.json",
+      "sha256": "3a244b4c3fd4f409a52c4b62ec898f047fa8705c1acd0ad6d79af2bb8d5ec62c"
+    },
+    {
+      "path": "local/checks/cee-geometry-off-01/result.json",
+      "sha256": "0e9286476cad28dcb325cbe3e0d3f1649b125623fa60e1deae8e6475d6e3c422"
+    },
+    {
+      "path": "local/checks/cee-geometry-off-01/process.log",
+      "sha256": "8a1fa9124c0e0e3f7f361602d55d0277823775b5acf138135358ee604bbeb2e9"
+    },
+    {
+      "path": "local/checks/cee-geometry-native-01/invocation.json",
+      "sha256": "4e8c0055b3e3e0ce902b477386c5857fafef070b6909a45812665941132129a6"
+    },
+    {
+      "path": "local/checks/cee-geometry-native-01/result.json",
+      "sha256": "18fb92f3df202a2ada091549590bf08d6ec0bb1d3298aa583e4b1d5f13a8f2ef"
+    },
+    {
+      "path": "local/checks/cee-geometry-native-01/process.log",
+      "sha256": "a731d873f39e1d137661605a7b4c3cc9d10953456e97ef8adf3b6f21c7daebdf"
+    },
+    {
+      "path": "local/checks/cee-geometry-native-02/invocation.json",
+      "sha256": "a1b01082ffec6cf678d2b69a9ba81b95468f50c87a19edf9ce6e6cd97e050654"
+    },
+    {
+      "path": "local/checks/cee-geometry-native-02/result.json",
+      "sha256": "d4246a1860e372865b0d89f61a157a4018c7ac0a6a48d64b493c8fee3802e63c"
+    },
+    {
+      "path": "local/checks/cee-geometry-native-02/process.log",
+      "sha256": "9e88063a8faabdabb89bc90e980101cfc2f93ccd12d56a12578794bf44b7458c"
+    },
+    {
+      "path": "local/frozen/prototype-09a/inputs.json",
+      "sha256": "589e6a2a81bfb0f9eb5cfdfdb3a8c796ef61ec7b94e5d79334325d8d6efdda97"
+    },
+    {
+      "path": "local/frozen/prototype-09b/inputs.json",
+      "sha256": "569c87eeda9cddbf95b0ad5f46d7d9c3272339e6a87330719bc4971db05dde46"
+    },
+    {
+      "path": "local/cee-geometry-source-01/inspection.json",
+      "sha256": "67c97509c86c55c7169f295d9b2ca551319a98e34dd421037ac128de4c69b824"
+    },
+    {
+      "path": "local/cee-geometry-source-01/javap.txt",
+      "sha256": "4a31fb18d63f961f056ad20cee15bb28b9f46336eb3c6e9cd663a564ba09258d"
+    },
+    {
+      "path": "docs/experimental/cee-geometry-tps-results-20261109.json",
+      "sha256": "fe7e62fe5f6095f3cea5ba753319cb3da1f6127480f54e25eb88b4653ab6f271"
+    },
+    {
+      "path": "docs/experimental/client-cee-geometry-results-20261109.json",
+      "sha256": "6aeab28b4621b513125c274692d06ccc74ea187fab9a6beb95dc1fcae8fe3c6b"
+    },
+    {
+      "path": "tools/experimental/summarize_cee_geometry.py",
+      "sha256": "b48f310c49aa4207b81d5059a0d283df805032a9a18cedf48e1bd28482eb3887"
+    },
+    {
+      "path": "tools/experimental/focused_checks.py",
+      "sha256": "44ab94194791630f530145328bb5ca19888af7bf80310f720b97d1e548636b00"
+    },
+    {
+      "path": "tools/experimental/plain_wire_benchmark.py",
+      "sha256": "da69b44a12577ee13881dba0fc8ea7764528f9defe0c83d8fc80f563766d512c"
+    },
+    {
+      "path": "tools/experimental/restoration_benchmark.py",
+      "sha256": "a7d54f8ca9f2644581538db8cbcc8d67baffae078ff88a3574d9d96a06e27257"
+    },
+    {
+      "path": "tools/experimental/client_loading_benchmark.py",
+      "sha256": "6e0914224f9557fd38e38926999b8dfa44f5cf81db35a0dac167588575f10c32"
+    },
+    {
+      "path": "tools/experimental/summarize_client_loading.py",
+      "sha256": "bdbdb671a0afe64c9710a3934c9daab38e8f77c6af3059a0b0b020d0e37e8246"
+    }
+  ],
+  "note": "Finite same-jar focused samples; no statistical-significance or full-acceptance claim. Dynamic/custom geometry retains original callbacks."
+}

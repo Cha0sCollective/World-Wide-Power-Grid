@@ -23,6 +23,7 @@ def main():
     parser.add_argument('--tree-retain-coverage', action='store_true')
     parser.add_argument('--tree-prioritize-unresolved', action='store_true')
     parser.add_argument('--chunk-task-budget-ms', type=int, choices=range(21), default=0)
+    parser.add_argument('--cee-state-geometry', action='store_true')
     parser.add_argument('--helper-inputs', help='Explicit frozen helper overlay manifest for queue-aware readiness')
     parser.add_argument('--cpu-mask', choices=['fff','fff000'], help='Explicit whole-process CPU group after load observation')
     parser.add_argument('--server-cpu-mask', help='Explicit hexadecimal server-thread subset of the selected process group')
@@ -48,6 +49,7 @@ def main():
                     tree_retain_coverage=args.tree_retain_coverage, helper_inputs=args.helper_inputs,
                     tree_prioritize_unresolved=args.tree_prioritize_unresolved,
                     chunk_task_budget_ms=args.chunk_task_budget_ms,
+                    cee_state_geometry=args.cee_state_geometry,
                     cpu_affinity_mask=args.cpu_mask, server_affinity_mask=args.server_cpu_mask,
                     started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
     bench.write(directory / 'experiment.json', protocol)
@@ -92,6 +94,7 @@ def main():
             assert all(int(r['pg_solve_calls']) == 16 and int(r['matrix_assemblies']) == 0 for r in list(distinct.values())[-100:])
         log = (directory / 'process.log').read_text(encoding='utf-8', errors='replace')
         protocol['task_window'] = experiment.validate_task_window(log, args.chunk_task_budget_ms)
+        protocol['cee_geometry'] = experiment.validate_cee_geometry(log, args.cee_state_geometry)
         if args.tree_batch:
             if args.tree_retain_coverage:
                 assert log.count('WWPG experimental wire-tree retained coverage: enabled=true') == 1

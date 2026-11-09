@@ -210,11 +210,18 @@ public final class NativeApiReadings {
         if (nativePg != null) {
             nativeIds = nativeTerminalIds(nativePg, state, nativeTerminals);
         } else if (state.getBlock() instanceof ElectricalDeviceBlock<?> cee) {
-            ceeIds = new IntOpenHashSet();
-            for (int id : cee.getNodePositions(level, pos, state).keySet())
-                if (cee.isNodeAccessible(level, pos, state, id)) ceeIds.add(id);
+            ceeIds = ceeTerminalIds(cee, level, pos, state);
         }
         return new Owner(state, entity, nativeIds, ceeIds, ApiTerminals.existing(level, pos));
+    }
+
+    private static IntSet ceeTerminalIds(ElectricalDeviceBlock<?> block, ServerLevel level, BlockPos pos, BlockState state) {
+        var prepared = org.cha0scollective.wwpg.experimental.CeeStateGeometry.snapshot(block, level, pos, state);
+        if (prepared != null) return prepared.nativeIds();
+        var ids = new IntOpenHashSet();
+        for (int id : block.getNodePositions(level, pos, state).keySet())
+            if (block.isNodeAccessible(level, pos, state, id)) ids.add(id);
+        return ids;
     }
 
     private static IntSet nativeTerminalIds(IElectric electric, BlockState state, Map<BlockState, IntSet> prepared) {
