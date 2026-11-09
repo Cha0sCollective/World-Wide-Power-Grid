@@ -107,6 +107,8 @@ def prepare(args):
             token = '-DlibraryDirectory=' + libraries
         tokens.append('"' + token.replace('"', '\\"') + '"')
     flags = '-Xms512M\n-Xmx8G\n-Dwwpg.experimental.plainWireBatch=' + str(args.batch).lower() + '\n'
+    if getattr(args, 'cpu_jfr_non_safepoints', False):
+        flags += '-XX:+UnlockDiagnosticVMOptions\n-XX:+DebugNonSafepoints\n'
     flags += '-Dwwpg.experimental.plainWireBatch.verify=' + str(args.verify_batch).lower() + '\n'
     flags += '-Dwwpg.experimental.plainWireBatch.properties=' + str(args.property_batch).lower() + '\n'
     flags += '-Dwwpg.experimental.wireTreeBatch=' + str(getattr(args, 'tree_batch', False)).lower() + '\n'
@@ -136,7 +138,8 @@ def prepare(args):
         helper=dict(path=str(directory / 'mods' / helper.name), sha256=bench.sha(helper)), sources=sources,
         profile_inputs=inputs, profile=dict(name='EXPERIMENTAL_CLEAN', heap_gib=8, cee='1.1.4', pg='0.6.2'),
         command=[str(java), '@' + str(directory / 'launch.args')], environment={}, directory=str(directory),
-        cpu_affinity_mask=cpu_mask, server_affinity_mask=server_mask, runner_sources=runner_sources))
+        cpu_affinity_mask=cpu_mask, server_affinity_mask=server_mask, runner_sources=runner_sources,
+        debug_non_safepoints=getattr(args, 'cpu_jfr_non_safepoints', False)))
     bench.write(directory / 'WWPG_BENCHMARK_OWNED.json', dict(root=str(directory), purpose='Isolated plain-wire experiment'))
     (directory / 'eula.txt').write_text('eula=true\n')
     (directory / 'server.properties').write_text('level-name=world\nlevel-type=minecraft:flat\ngenerate-structures=false\nlevel-seed=2101248\ngamemode=creative\ndifficulty=peaceful\nserver-ip=127.0.0.1\nserver-port=25889\nonline-mode=true\nspawn-protection=0\nview-distance=2\nsimulation-distance=2\nmax-players=1\nmax-tick-time=60000\n')
@@ -289,6 +292,7 @@ def main():
     parser.add_argument('--detailed', action='store_true')
     parser.add_argument('--substep-jfr', action='store_true', help='Record stable-phase CPU/allocation samples; requires --detailed')
     parser.add_argument('--cpu-jfr', action='store_true', help='Start JFR during warmup with detailed timers disabled; diagnostic only')
+    parser.add_argument('--cpu-jfr-non-safepoints', action='store_true', help='Add compiled-code debug locations from JVM startup; requires --cpu-jfr')
     parser.add_argument('--batch', action='store_true')
     parser.add_argument('--verify-batch', action='store_true')
     parser.add_argument('--property-batch', action='store_true')
@@ -313,6 +317,8 @@ def main():
         parser.error('--substep-jfr requires --detailed')
     if args.cpu_jfr and (args.detailed or args.substep_jfr):
         parser.error('--cpu-jfr requires detailed and substep diagnostics disabled')
+    if args.cpu_jfr_non_safepoints and not args.cpu_jfr:
+        parser.error('--cpu-jfr-non-safepoints requires --cpu-jfr')
     if args.tree_budget_ms < 0 or args.tree_max_parts < 1:
         parser.error('Invalid restoration budget')
     if (args.tree_budget_ms or args.tree_retain_coverage or args.tree_prioritize_unresolved) and not args.tree_batch:
@@ -339,6 +345,7 @@ def main():
         server_affinity_mask=args.server_cpu_mask,
         helper=bench.read(directory / 'launch.json')['helper'],
         substep_jfr=args.substep_jfr, cpu_jfr=args.cpu_jfr,
+        cpu_jfr_non_safepoints=args.cpu_jfr_non_safepoints,
         started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
     bench.write(directory / 'experiment.json', protocol)
     print(json.dumps(dict(starting=str(directory), protocol=protocol)), flush=True)
@@ -346,7 +353,8 @@ def main():
         tier=10000, backend='NATIVE', variant='MIXED', mode='control', warmup=120, sample=120,
         churn=0, cycles=1, restore=str(reference), detailed=args.detailed, timeout=1200,
         restoration_batch=True, rhs_counters=False, profile_every=20,
-        substep_trace=args.detailed, substep_jfr=args.substep_jfr, cpu_jfr=args.cpu_jfr)
+        substep_trace=args.detailed, substep_jfr=args.substep_jfr, cpu_jfr=args.cpu_jfr,
+        cpu_jfr_non_safepoints=args.cpu_jfr_non_safepoints)
     try:
         with HostWatch(directory / 'host-metrics.jsonl'):
             bench.run(options)

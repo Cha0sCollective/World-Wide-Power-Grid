@@ -21,6 +21,8 @@ def write_new(path, value):
 
 
 def validate_options(args):
+    if getattr(args, 'cpu_jfr_non_safepoints', False) and not getattr(args, 'cpu_jfr', False):
+        raise ValueError('Non-safepoint debug metadata requires CPU-only JFR')
     if not getattr(args, 'cpu_jfr', False):
         return
     if (args.detailed or getattr(args, 'substep_trace', False)
@@ -28,6 +30,16 @@ def validate_options(args):
         raise ValueError('CPU-only JFR requires detailed, substep and loading diagnostics disabled')
     if args.mode != 'control' or args.warmup < 60:
         raise ValueError('CPU-only JFR requires a control run with at least 60 seconds of warmup')
+
+
+def non_safepoint_flags(text):
+    result = {}
+    for name in ('UnlockDiagnosticVMOptions', 'DebugNonSafepoints'):
+        matches = re.findall(r'^\s*bool\s+' + name + r'\s*=\s*(true|false)\b.*$', text, re.MULTILINE)
+        if matches != ['true']:
+            raise ValueError('Missing, disabled or duplicate JVM flag: ' + name)
+        result[name] = True
+    return result
 
 
 class CpuRecording:
@@ -40,6 +52,7 @@ class CpuRecording:
         self.java = Path(java)
         self.jcmd = self.java.parent / ('jcmd.exe' if os.name == 'nt' else 'jcmd')
         self.configuration = self.java.parent.parent / 'lib/jfr/profile.jfc'
+        self.debug_non_safepoints = json.loads((self.directory / 'launch.json').read_text()).get('debug_non_safepoints', False)
         if not self.jcmd.is_file() or not self.configuration.is_file():
             raise ValueError('The selected JDK must provide jcmd and profile.jfc')
         self.destination = self.directory / 'benchmark/cpu-profile.jfr'
@@ -64,6 +77,17 @@ class CpuRecording:
                      observed_state=state, requested_unix_ns=time.time_ns(),
                      configuration=dict(path=str(self.configuration), sha256=sha(self.configuration)),
                      jcmd=dict(path=str(self.jcmd), sha256=sha(self.jcmd)))
+        if self.debug_non_safepoints:
+            flag_command = [str(self.jcmd), str(self.process.pid), 'VM.flags', '-all']
+            flags = subprocess.run(flag_command, capture_output=True, text=True, timeout=30)
+            flag_path = self.directory / 'cpu-jfr-vm-flags.txt'
+            with flag_path.open('x', encoding='utf-8') as stream:
+                stream.write(flags.stdout + flags.stderr)
+            if flags.returncode != 0:
+                raise OSError('Could not confirm non-safepoint flags on the owned JVM')
+            proof['vm_flags'] = dict(path=str(flag_path), sha256=sha(flag_path), command=flag_command,
+                                     observed=non_safepoint_flags(flags.stdout))
+            proof['debug_non_safepoints'] = True
         before = time.monotonic_ns()
         try:
             result = subprocess.run(command, capture_output=True, text=True, timeout=30)
@@ -89,6 +113,15 @@ def validate_recording(directory):
     assert proof['observed_state']['phase'] == 'WARMUP'
     assert all(str(invocation[key]).lower() == 'false' for key in ('detailed', 'substeps', 'substepJfr', 'rhsCounters'))
     assert invocation['cpuJfr'] == 'true'
+    requested = json.loads((directory / 'launch.json').read_text()).get('debug_non_safepoints', False)
+    assert requested == proof.get('debug_non_safepoints', False)
+    assert str(invocation.get('cpuJfrNonSafepoints', 'false')).lower() == str(requested).lower()
+    if requested:
+        observed = proof['vm_flags']
+        assert sha(observed['path']) == observed['sha256']
+        assert non_safepoint_flags(Path(observed['path']).read_text()) == observed['observed']
+        assert observed['command'][1] == str(proof['pid'])
+        assert '-XX:+DebugNonSafepoints' in (directory / 'launch.args').read_text()
     for item in (proof['configuration'], proof['jcmd']):
         assert sha(item['path']) == item['sha256']
     with (directory / 'benchmark/placement-ticks.csv').open(newline='') as stream:
@@ -103,10 +136,14 @@ def validate_recording(directory):
     assert not (directory / 'benchmark/substeps.jfr').exists()
     recording = directory / 'benchmark/cpu-profile.jfr'
     assert recording.is_file() and recording.stat().st_size > 0
-    return dict(path=str(recording), sha256=sha(recording), bytes=recording.stat().st_size,
+    result = dict(path=str(recording), sha256=sha(recording), bytes=recording.stat().st_size,
                 start_evidence=dict(path=str(directory / 'cpu-profile-start.json'), sha256=sha(directory / 'cpu-profile-start.json')),
                 startup_lead_seconds=lead_seconds, detailed_timers=False,
                 scope='Raw recording includes warmup and shutdown; steady analysis requires explicit timestamp filtering')
+    if requested:
+        result['debug_non_safepoints'] = True
+        result['vm_flags'] = proof['vm_flags']
+    return result
 
 
 def instant_ns(value):

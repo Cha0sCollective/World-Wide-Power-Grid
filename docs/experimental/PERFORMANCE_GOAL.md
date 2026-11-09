@@ -84,6 +84,16 @@ no full headless or graphical acceptance suite is implied by this investigation.
   Neither run meets the consistency gate. No new client or actual reload
   observation was run for this candidate.
   [Evidence](indexed-waveform-results-20261109.json).
+- A [frame-location follow-up](CPU_FRAME_SITES.md) on the unchanged `wiretree.11`
+  runtime completed with **20.031 TPS**, **49.341 ms mean** and **56.623 ms p95**.
+  It adds verified compiled-code debug metadata, retaining detailed timers off.
+  All 8,576 Java and 188 native server CPU samples match the separately audited
+  filtered recording. Broad hot scopes remain similar, but leaf attribution
+  changes sharply and still assigns large counts to small bookkeeping sites.
+  The next step is sparse timing within CEE preparation before selecting a
+  further representation change. This is diagnostic progress, with no runtime
+  change, measured speedup or new client-loading result.
+  [Evidence](cpu-sites-results-20261109.json).
 - The preceding `0.2.7-experimental.wiretree.7` candidate is frozen at
   `local/frozen/prototype-08a/inputs.json` (runtime SHA-256
   `31efbb0099531a7a8db7aa0f52deb80b040080bada825dd33bc339560b85c7a1`).
@@ -197,9 +207,15 @@ samples.
    observations; this is not a calibrated overhead comparison. The subsequent
    indexed waveform trial also fails to show an elapsed-time gain, despite
    538 of 652 sampling stacks ending in the list iterator. Treat that attribution
-   as a sampled location, not a removable-cost estimate. Inspect remaining CEE
-   preparation and wire-temperature work before selecting another change;
-   descriptor validation and biome lookup are candidates, not proven gains.
+   as a sampled location, not a removable-cost estimate. The subsequent
+   [compiled-location diagnostic](CPU_FRAME_SITES.md) reinforces that limit:
+   the same broad scopes remain hot while iterator, map and thread-local leaf
+   labels shift substantially. Its offline tick analysis does not associate
+   higher allocation with the slow ticks. Time the sections within CEE
+   preparation before choosing another representation change; descriptor and
+   branch validation, application and transformer lookup are investigation
+   targets, not proven removable costs. Wire temperature remains a separate
+   world-access candidate.
    Retain fresh validation and
    callback behavior. Preserve dynamic, custom, moving, unloaded and
    replaced-owner behavior, all 16 electrical substeps, accuracy, storage,

@@ -2,11 +2,22 @@
 import unittest
 from types import SimpleNamespace
 
-from cpu_profile import filter_events, instant_ns, steady_window, validate_options
+from cpu_profile import filter_events, instant_ns, steady_window, validate_options, non_safepoint_flags
 from summarize_current_profile import signature
 
 
 class CpuProfileChecks(unittest.TestCase):
+    def test_non_safepoint_metadata_requires_a_cpu_recording(self):
+        with self.assertRaises(ValueError):
+            validate_options(SimpleNamespace(cpu_jfr=False, cpu_jfr_non_safepoints=True))
+
+    def test_observed_vm_flags_must_both_be_enabled_once(self):
+        good = ' bool UnlockDiagnosticVMOptions = true {diagnostic} {command line}\n bool DebugNonSafepoints = true {diagnostic} {command line}\n'
+        self.assertEqual(non_safepoint_flags(good), dict(UnlockDiagnosticVMOptions=True, DebugNonSafepoints=True))
+        for text in ('', good.replace('DebugNonSafepoints = true', 'DebugNonSafepoints = false'), good + good):
+            with self.subTest(text=text), self.assertRaises(ValueError):
+                non_safepoint_flags(text)
+
     def test_fractional_timestamps_keep_nanosecond_order(self):
         self.assertEqual(instant_ns('2026-11-09T18:00:00.000000001Z') - instant_ns('2026-11-09T18:00:00Z'), 1)
         self.assertEqual(instant_ns('2026-11-09T18:00:00.1Z') - instant_ns('2026-11-09T18:00:00Z'), 100_000_000)

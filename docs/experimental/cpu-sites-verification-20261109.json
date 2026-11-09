@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "passed": true,
+  "branch": "dev/experimental-plain-wire-batching",
+  "runtime_changed": false,
+  "helper_changed": false,
+  "full_suite": false,
+  "graphical_acceptance": false,
+  "frozen": {
+    "path": "local/frozen/prototype-12g/inputs.json",
+    "sha256": "f7f34bbba95a21ef9eea0228b4174fa8b31a6a4e8a230fd01b021b7389a68016"
+  },
+  "source_build_hashes_verified": 450,
+  "rebuilt_artifacts": [
+    {
+      "path": "build/libs/wwpg-0.2.7-experimental.wiretree.11.jar",
+      "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9"
+    },
+    {
+      "path": "build/libs/wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+      "sha256": "24d2d70ca4b8895d71e1d74c9fc49b23a1873507f4f1c10627f2443d1fc51636"
+    }
+  ],
+  "evidence_files_verified": 503,
+  "new_python_files_parsed": 7,
+  "checked_document_links": 33,
+  "git_diff_check_passed": true,
+  "main_tracked_clean": true,
+  "owned_process_exit": {
+    "schema": 1,
+    "pid": 6920,
+    "exit_code": 0,
+    "elapsed_seconds": 286.04177809999965,
+    "ended_utc": "2026-11-09T20:04:20Z"
+  },
+  "focused_checks": {
+    "profiling_units": 12,
+    "exporter_checks": 3,
+    "log": {
+      "path": "local/preparation-review-01/tool-checks.log",
+      "sha256": "acb698a79e0773f274f3b15e32f241f0154d36d54ac54d4c757b2f26002855fb"
+    },
+    "exporter": {
+      "path": "local/preparation-review-01/site-checks/result.json",
+      "sha256": "3a40fe293efd6cefe6a841cf3f60b13c37c7e774c10b565e7291a1eccac8fc38"
+    }
+  },
+  "previous_functionality_evidence": {
+    "path": "docs/experimental/indexed-waveform-retirement-20261109.json",
+    "sha256": "61e8335a9d7b61040b97bb13e3a5a8d2690fb9830a8b2e0150343d49a650088c"
+  },
+  "evidence": [
+    {
+      "path": "docs/experimental/cpu-sites-results-20261109.json",
+      "sha256": "0ae6d66e2f2574118962c00f7f67239d7b03b36908ea4fc9b6d34c071033ca74"
+    },
+    {
+      "path": "docs/experimental/cpu-frame-sites-20261109.json",
+      "sha256": "670c4a57e5faf962d7d584ed5233213d001ec72c97650eed2679a1dd41679f83"
+    },
+    {
+      "path": "local/preparation-review-01/site-checks/result.json",
+      "sha256": "3a40fe293efd6cefe6a841cf3f60b13c37c7e774c10b565e7291a1eccac8fc38"
+    },
+    {
+      "path": "local/preparation-review-01/tick-variation.json",
+      "sha256": "31c2a0bea5bfc912f71f0612a6f108b15ff523b870dfe3f43cb519581845dcef"
+    },
+    {
+      "path": "docs/experimental/CPU_FRAME_SITES.md",
+      "sha256": "405b1b68d216ef4f8140f9b8d5c00915c3685bb1cb594b9957ca89e9f5b41fb6"
+    },
+    {
+      "path": "docs/experimental/PERFORMANCE_GOAL.md",
+      "sha256": "d26d7989ba2f07bd9bdb3b04430feebf440ad1abb8b81ce147d39582dde90810"
+    },
+    {
+      "path": "local/preparation-review-01/verify_checkpoint.py",
+      "sha256": "f5b57946a9a0bdeb306df970dd86b3729e98752a22f6096013c5eff5ec92317e"
+    }
+  ],
+  "note": "Gameplay sources and rebuilt jars match the retained scoped-restoration runtime. Its prior named checks are reused, not new executions. The completed CPU diagnostic supplies its own full-yard correctness observation."
+}

@@ -33,7 +33,7 @@ def main():
     assert validate_recording(directory) == protocol['recording']
     clean_path = ROOT / args.clean_report
     clean = read(clean_path)
-    matched = [r for r in clean['runs'] if signature(r['protocol']) == signature(protocol)]
+    matched = [r for r in clean.get('runs', clean.get('steady', [])) if signature(r['protocol']) == signature(protocol)]
     assert matched
     for item in matched:
         assert not any(item['protocol'].get(key, False) for key in ('detailed', 'substep_jfr', 'cpu_jfr'))
@@ -79,6 +79,7 @@ def main():
                   ('cpu_profile.py', 'summarize_cpu_profile.py', 'summarize_current_profile.py',
                    'summarize_profile.py', 'summarize_goal_runs.py', 'JfrCompact.java'))
     data = dict(schema=1, full_suite=False, runtime_changed=False, helper_changed=False,
+                debug_non_safepoints=protocol.get('cpu_jfr_non_safepoints', False),
                 source_hashes_verified=len(inputs['sources']), diagnostic=run,
                 matched_clean_attempts=[r['name'] for r in matched], window=window,
                 raw_event_counts=dict(Counter(e['type'] for e in all_events)),
