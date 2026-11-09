@@ -141,11 +141,18 @@ no full headless or graphical acceptance suite is implied by this investigation.
   path counters record **249,856 finite checks and 107,928 norm reductions,
   with zero observed fallbacks**, so that diagnostic does not support the
   subnormal-fallback hypothesis. Native-call timings from differently
-  instrumented runs suggest a local reduction, but do not establish an
-  end-to-end gain. Repeat the clean
-  comparison in reversed order before deciding its value. No client load,
+  instrumented runs suggest a local reduction. The reversed clean pair then
+  favors the candidate: **46.665 versus 49.464 ms mean**, **52.083 versus
+  56.166 ms p95**. Two runs per variant average **47.868 / 48.709 ms mean**
+  (1.73% lower for the candidate), but the first run in each pair was faster.
+  Opposite paired directions and a best p95 still above 50 ms leave repeatable
+  improvement and consistency unproven. Keep the native candidate provisional
+  and capture real residual inputs before testing an exact matrix layout.
+  The unchanged jars reuse their named passing numerical/fixture evidence;
+  only two fresh copied-yard runs were added. No client load,
   actual full-yard reload or full acceptance was repeated for this trial.
-  [Evidence](native-reduction-results-20261109.json).
+  [First checkpoint](native-reduction-results-20261109.json),
+  [four-run checkpoint](native-reduction-repeat-results-20261109.json).
 - The preceding `0.2.7-experimental.wiretree.7` candidate is frozen at
   `local/frozen/prototype-08a/inputs.json` (runtime SHA-256
   `31efbb0099531a7a8db7aa0f52deb80b040080bada825dd33bc339560b85c7a1`).
@@ -274,11 +281,13 @@ samples.
    The subsequent [C-stage timers](NATIVE_STAGE_TIMINGS.md) directly confirm
    zero sampled factorizations and split the one-solve tick between about
    4.28 ms of triangular solving and 4.52 ms of residual multiplication/norm.
-   The first exact finite/max reduction candidate passes numerical checks but
-   loses its first clean pair; it remains unretained. Resolve the discrepancy
-   between local native-call timings and whole-tick performance with a reversed
-   clean comparison before changing its algorithm. Residual layout and then
-   triangular workspace or factor layout remain subsequent candidates.
+   Exact finite/max reduction passes numerical checks. Its reversed pair wins
+   after the first pair loses, leaving a 1.73% mean advantage across two runs
+   per variant but unresolved variation. It remains unretained. Capture actual
+   matrix/state/residual inputs and compare an exact row-oriented residual
+   calculation offline before another gameplay change. Preserve column-wise
+   contribution order within each row, zero-state skips and fresh callbacks.
+   Triangular workspace or factor layout remain subsequent candidates.
    The norm alone cannot close the tail gap. Keep
    finite-state, permutation and rollback guards intact, along with
    floating-point edge cases, contribution order and stopping criteria.

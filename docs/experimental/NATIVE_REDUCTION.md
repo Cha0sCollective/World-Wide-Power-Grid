@@ -33,10 +33,11 @@ guarded Windows DLL, its checksum property and explicit experimental marker.
 Both are separate from the retained `prototype-12g` artifact. Published native
 assets and the normal build are untouched.
 
-## Copied-yard result
+## First clean pair
 
-The first clean pair does **not** support retaining this candidate. Both use
-the same compiler, expanded fixture jar, affinity helper, CPU group `fff000`
+The first clean pair does **not** support retaining this candidate. Both
+variants use the same compiler and passed the same expanded fixture jar.
+The benchmark uses the same affinity helper, CPU group `fff000`
 and retained restoration flags. Detailed timers, JFR and native observers are
 disabled. Each run uses a fresh save copy, 120 seconds of warmup and a
 120-second stable sample.
@@ -65,6 +66,50 @@ exit normally after saving. The raw comparison is preserved at
 `goal-native-reduction-control-01` and `goal-native-reduction-candidate-01`.
 The retained gameplay runtime remains `prototype-12g`. No client loading,
 actual full-yard reload or full acceptance was rerun for this slower candidate.
+
+## Reversed-order repeat
+
+The subsequent pair runs the unchanged candidate first and the unchanged
+scalar control second. Both runtime hashes, both 450-entry source inventories
+and the clean helper match the first pair. The named numerical and game-fixture
+results are reused after those artifact comparisons; they are not new
+test passes. Only two fresh copied-yard runs are added, each with the same
+120-second warmup and 120-second stable window.
+
+| Pair and order | Native variant | Mean tick | p95 tick | Ticks above 50 ms |
+| --- | --- | ---: | ---: | ---: |
+| First pair, first | Scalar control | 47.954 ms | 54.077 ms | 36.82% |
+| First pair, second | Reduction candidate | 49.071 ms | 54.428 ms | 43.33% |
+| Reversed pair, first | Reduction candidate | 46.665 ms | 52.083 ms | 16.50% |
+| Reversed pair, second | Scalar control | 49.464 ms | 56.166 ms | 49.60% |
+
+The reversed candidate beats its paired control by **2.800 ms mean** and
+**4.083 ms p95**, in all four corresponding 30-second blocks. Their stable
+samples contain 2,400 and 2,399 ticks. Compilation is 1,323 versus 1,438 ms,
+other-process CPU averages 0.255 versus 0.269 cores, and neither run detects
+a competing game. All 285 process-affinity readbacks in each run match
+`fff000`. Both pass the complete yard, storage, substep, reference-save and
+normal shutdown checks.
+
+Across the two runs per variant, mean tick time is **47.868 ms candidate /
+48.709 ms control**, a **0.841 ms (1.73%)** difference. The mean of the two p95
+values is **53.255 / 55.122 ms**, a **1.866 ms** difference; these are averages
+of per-run percentiles, not a pooled percentile. The first run in each pair
+was faster regardless of variant. With only two pairs and opposite paired
+directions, this does not establish a repeatable causal gain. Host counters
+do not control frequency, thermals or JVM behavior, and the source of the
+variation is unresolved.
+
+The candidate is promising enough for further isolated native work, but stays
+**provisional and unretained**. Even its best p95 is above 50 ms, so consistent
+20 TPS is not established. The retained gameplay build remains `prototype-12g`;
+its earlier 44.399-second client result is not a new result for either native
+variant. No client, actual reload or full acceptance lane was run in this pair.
+
+The new attempts are `goal-native-reduction-candidate-02` and
+`goal-native-reduction-control-02`. The complete comparison is preserved at
+`local/native-reduction-01/comparison-two-pairs.json`, with a
+[four-run checkpoint](native-reduction-repeat-results-20261109.json).
 
 ## Focused numerical and gameplay checks
 
@@ -140,14 +185,33 @@ matched speedup measurement. The live-counter run measures 47.337 ms mean and
 52.852 ms p95 overall; it remains outside the 50 ms p95 target and is not a
 clean comparison.
 
-The next check is a reversed-order clean pair using the already-tested jars.
-Do not change the fallback semantics on the strength of this result. The
-retained gameplay build stays unchanged while the difference between local
-native time and end-to-end performance is unresolved.
+The reversed-order pair above completes this follow-up using the already-tested
+jars. It does not justify changing fallback semantics. The retained gameplay
+build stays unchanged while the difference between local native time and
+end-to-end performance is unresolved.
 
 [Recorded results and hashes](native-reduction-results-20261109.json) retain
 the clean comparison, numerical checks, diagnostic counts and failed first
 observer separately.
+
+## Next native investigation
+
+Capture the actual full-sized compressed-column matrix, state, residual input
+and resulting residual in a separately marked diagnostic. Use these inputs
+for an offline comparison before adding a new game prototype. The reviewed
+`sp_dgemv` path visits columns in increasing order, skips zero state entries
+and adds each contribution into its destination row. A row-oriented layout
+must preserve that contribution order and zero-skip behavior, including signed
+zero, nonfinite rejection and floating-point status. It must read current
+matrix values and rebuild structural indexing after insertions, zeroing or
+resizing; existing flags are consumed when the logical matrix is formed.
+
+Keep every Java callback, all 16 substeps, stopping criteria, factorization
+guards and rollback. Reusing a precomputed dot product and then subtracting
+the right-hand side would change the existing accumulation order, so it is
+not an equivalent replacement. Reusable triangular workspace remains a later
+candidate: the pinned `dgstrs` allocates work and permutation buffers per call,
+but their removable cost has not yet been measured separately.
 
 ## Reproduce
 
