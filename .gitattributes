@@ -34,3 +34,4 @@ tools/build_native_solver.py -text
 tools/experimental/native-stage-profile/** -text
 tools/experimental/native-reduction/*.c -text
 tools/experimental/native-reduction/*.h -text
+tools/experimental/native-residual/** -text

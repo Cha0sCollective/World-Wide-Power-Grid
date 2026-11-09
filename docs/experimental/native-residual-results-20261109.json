@@ -1,0 +1,329 @@
+{
+  "schema": 1,
+  "snapshot": "2026-11-09",
+  "retained": false,
+  "gameplay_layout_integrated": false,
+  "full_suite": false,
+  "graphical_acceptance": false,
+  "conclusion": "Four-row SIMD preserves tested results and reduces offline residual time about 30%; scalar row layouts are slower. No new TPS or client-loading gain is established.",
+  "capture": {
+    "name": "goal-native-residual-capture-01",
+    "checks": {
+      "path": "local/benchmarks/goal-native-residual-capture-01/native-residual-captures.json",
+      "sha256": "d75fe0203ea52bb373c67fd44c19602ed44e939bbf0a2a138cc99b8c9f0b8175"
+    },
+    "inputs": [
+      {
+        "file": {
+          "path": "local/benchmarks/goal-native-residual-capture-01/benchmark/native-residual-outer-4096.bin",
+          "sha256": "a9ff881bd1bb9b126066cbacb63d83e91a1df8b47871a214a434c8e056ce1e5d"
+        },
+        "rows": 14925,
+        "nonzeros": 57097,
+        "stage": 0,
+        "outer_ordinal": 4096,
+        "mxcsr_before": 8101,
+        "mxcsr_after": 8101,
+        "row_degree_histogram": {
+          "3": 4377,
+          "4": 8998,
+          "5": 1426,
+          "6": 74,
+          "8": 50
+        },
+        "maximum_row_degree": 8,
+        "zero_state_entries": 0,
+        "nonfinite": {
+          "matrix": 0,
+          "state": 0,
+          "input": 0,
+          "output": 0
+        },
+        "output_bytes_sha256": "f9fbdc26adabed9b8359d39ce8d02eeecce2bb05e798393f67f5f82e1161b2b2"
+      },
+      {
+        "file": {
+          "path": "local/benchmarks/goal-native-residual-capture-01/benchmark/native-residual-outer-40960.bin",
+          "sha256": "0fd9150a1fa97ade7cff0bad88df838a77facad7e9f4a2a8fcc6c0247f1e1f54"
+        },
+        "rows": 14925,
+        "nonzeros": 57097,
+        "stage": 0,
+        "outer_ordinal": 40960,
+        "mxcsr_before": 8101,
+        "mxcsr_after": 8101,
+        "row_degree_histogram": {
+          "3": 4377,
+          "4": 8998,
+          "5": 1426,
+          "6": 74,
+          "8": 50
+        },
+        "maximum_row_degree": 8,
+        "zero_state_entries": 0,
+        "nonfinite": {
+          "matrix": 0,
+          "state": 0,
+          "input": 0,
+          "output": 0
+        },
+        "output_bytes_sha256": "00c2d20fa53366a9ef26204748e9ec7ea7ea8925505b2301e662ce67acc049ee"
+      },
+      {
+        "file": {
+          "path": "local/benchmarks/goal-native-residual-capture-01/benchmark/native-residual-fit.bin",
+          "sha256": "4bdf5d158898a6d2eda26287af721ef968c69a63006b23212129b6982538f1a8"
+        },
+        "rows": 14925,
+        "nonzeros": 57097,
+        "stage": 1,
+        "outer_ordinal": 41480,
+        "mxcsr_before": 8101,
+        "mxcsr_after": 8101,
+        "row_degree_histogram": {
+          "3": 4377,
+          "4": 8998,
+          "5": 1426,
+          "6": 74,
+          "8": 50
+        },
+        "maximum_row_degree": 8,
+        "zero_state_entries": 0,
+        "nonfinite": {
+          "matrix": 0,
+          "state": 0,
+          "input": 0,
+          "output": 0
+        },
+        "output_bytes_sha256": "889f9952b16675e01ce5f5e80f0bd29e1765fcfbc1dc5eb926dc1f13fd54b926"
+      }
+    ],
+    "runtime": {
+      "path": "local/frozen/native-residual-capture-01/wwpg-0.2.7-experimental.native-residual-capture.jar",
+      "sha256": "5e57efd1ecfb83e9d5c2c072fc28e521fb90d80ad0c882ba913927c3a67cfc89"
+    },
+    "native": {
+      "path": "local/benchmarks/goal-native-residual-capture-01/.pg-native/wwpg-safety-1/09b808889cc2d15091194bd7ff862bfaf45c15258bcf275e6b5febf07a6dfe10/libpowergridNative7.dll",
+      "sha256": "09b808889cc2d15091194bd7ff862bfaf45c15258bcf275e6b5febf07a6dfe10"
+    },
+    "gameplay_classes_compared": 294,
+    "source_saves_unchanged": true,
+    "whole_yard_checks_passed": true,
+    "normal_shutdown": true,
+    "diagnostic": true
+  },
+  "capture_transparency_checks": {
+    "path": "local/native-residual-capture-01/checks.json",
+    "sha256": "a5c71a065b8bb549eaedff7fb0eb8c69af92a7c607fdad39cd6e2fb80af71e8b"
+  },
+  "failed_first_harness": {
+    "evidence": {
+      "path": "local/native-residual-replay-01/checks.json",
+      "sha256": "ea22cee25b897c64fe975a3b2de2fb6b6b1623b3065fb133abd6a1a1b4dbc143"
+    },
+    "executable_started": false,
+    "reason": "In-memory histogram uses integer keys; JSON reload uses string keys. Direct dictionary equality failed before replay. Capture hashes and bytes were not changed."
+  },
+  "offline_attempts": [
+    {
+      "name": "native-residual-replay-01",
+      "build": {
+        "path": "local/native-residual-replay-01/build.json",
+        "sha256": "79212554459d655081a9d2252acdb4f1442b281b5915d1c2913ed51971d15ed0"
+      },
+      "checks": {
+        "path": "local/native-residual-replay-01/checks-02.json",
+        "sha256": "3b9a814a9f96dbc123dc72133ef2b74d3dcae7ed45ddcb4b2ade0ec619a2f266"
+      },
+      "original_reference_replays": 3,
+      "exact_capture_comparisons": 192,
+      "timings": [
+        {
+          "capture": "local/benchmarks/goal-native-residual-capture-01/benchmark/native-residual-outer-4096.bin",
+          "mean_ms_per_call": {
+            "reference": 0.044996761067708335,
+            "row-indexed": 0.07065900065104166,
+            "row-packed": 0.05406228841145833
+          },
+          "relative_to_reference": {
+            "row-indexed": 1.5703130397478695,
+            "row-packed": 1.2014706643020094
+          }
+        },
+        {
+          "capture": "local/benchmarks/goal-native-residual-capture-01/benchmark/native-residual-outer-40960.bin",
+          "mean_ms_per_call": {
+            "reference": 0.045019873046875,
+            "row-indexed": 0.07088505859375,
+            "row-packed": 0.054410986328125
+          },
+          "relative_to_reference": {
+            "row-indexed": 1.5745281760333707,
+            "row-packed": 1.2085992839533757
+          }
+        },
+        {
+          "capture": "local/benchmarks/goal-native-residual-capture-01/benchmark/native-residual-fit.bin",
+          "mean_ms_per_call": {
+            "reference": 0.045683935546875,
+            "row-indexed": 0.07139739583333334,
+            "row-packed": 0.054151529947916666
+          },
+          "relative_to_reference": {
+            "row-indexed": 1.562855629197587,
+            "row-packed": 1.1853516843432481
+          }
+        }
+      ],
+      "edge_checks": null
+    },
+    {
+      "name": "native-residual-tiled-01",
+      "build": {
+        "path": "local/native-residual-tiled-01/build.json",
+        "sha256": "811232aae39969107e329eff9b16364821ce14a712eace3a5f668aa43ec2bae6"
+      },
+      "checks": {
+        "path": "local/native-residual-tiled-01/checks.json",
+        "sha256": "af876d8a479016376a96a5b6e8ce09dfd812af29652861af2120007ad732012e"
+      },
+      "original_reference_replays": 3,
+      "exact_capture_comparisons": 288,
+      "timings": [
+        {
+          "capture": "local/benchmarks/goal-native-residual-capture-01/benchmark/native-residual-outer-4096.bin",
+          "mean_ms_per_call": {
+            "reference": 0.04464181315104166,
+            "row-indexed": 0.06970257161458333,
+            "row-packed": 0.05397692057291667,
+            "row-tiled": 0.030855729166666665
+          },
+          "relative_to_reference": {
+            "row-indexed": 1.5613741175509783,
+            "row-packed": 1.2091112964047963,
+            "row-tiled": 0.6911844969707885
+          }
+        },
+        {
+          "capture": "local/benchmarks/goal-native-residual-capture-01/benchmark/native-residual-outer-40960.bin",
+          "mean_ms_per_call": {
+            "reference": 0.04530380859375,
+            "row-indexed": 0.0709953125,
+            "row-packed": 0.05441066080729167,
+            "row-tiled": 0.03091806640625
+          },
+          "relative_to_reference": {
+            "row-indexed": 1.5670936882289923,
+            "row-packed": 1.2010173646813003,
+            "row-tiled": 0.6824606443908422
+          }
+        },
+        {
+          "capture": "local/benchmarks/goal-native-residual-capture-01/benchmark/native-residual-fit.bin",
+          "mean_ms_per_call": {
+            "reference": 0.045159098307291666,
+            "row-indexed": 0.07007161458333333,
+            "row-packed": 0.054769189453125,
+            "row-tiled": 0.031212727864583335
+          },
+          "relative_to_reference": {
+            "row-indexed": 1.551661065208185,
+            "row-packed": 1.212805204400674,
+            "row-tiled": 0.6911725219177712
+          }
+        }
+      ],
+      "edge_checks": null
+    },
+    {
+      "name": "native-residual-tiled-02",
+      "build": {
+        "path": "local/native-residual-tiled-02/build.json",
+        "sha256": "8ba1071388c350240f8b09e8fa10bfb5b2f74a2856d1673624ae5a2bb5c50d03"
+      },
+      "checks": {
+        "path": "local/native-residual-tiled-02/checks.json",
+        "sha256": "f09657a8fdc5b76fc6bae5f6d89d01a52cfbba577dfaf38fba8d9bad822e43f1"
+      },
+      "original_reference_replays": 3,
+      "exact_capture_comparisons": 288,
+      "timings": [
+        {
+          "capture": "local/benchmarks/goal-native-residual-capture-01/benchmark/native-residual-outer-4096.bin",
+          "mean_ms_per_call": {
+            "reference": 0.04471598307291667,
+            "row-indexed": 0.07070945638020833,
+            "row-packed": 0.054218619791666665,
+            "row-tiled": 0.03138859049479167
+          },
+          "relative_to_reference": {
+            "row-indexed": 1.5813016179227255,
+            "row-packed": 1.212510965111835,
+            "row-tiled": 0.7019546108067775
+          }
+        },
+        {
+          "capture": "local/benchmarks/goal-native-residual-capture-01/benchmark/native-residual-outer-40960.bin",
+          "mean_ms_per_call": {
+            "reference": 0.04509599609375,
+            "row-indexed": 0.07052820638020833,
+            "row-packed": 0.05399347330729167,
+            "row-tiled": 0.031142106119791665
+          },
+          "relative_to_reference": {
+            "row-indexed": 1.5639571689155585,
+            "row-packed": 1.1973008245575665,
+            "row-tiled": 0.6905736388447965
+          }
+        },
+        {
+          "capture": "local/benchmarks/goal-native-residual-capture-01/benchmark/native-residual-fit.bin",
+          "mean_ms_per_call": {
+            "reference": 0.04493308919270833,
+            "row-indexed": 0.06995320638020834,
+            "row-packed": 0.05384549153645834,
+            "row-tiled": 0.03105546875
+          },
+          "relative_to_reference": {
+            "row-indexed": 1.5568305593277623,
+            "row-packed": 1.198348310874568,
+            "row-tiled": 0.6911492022462509
+          }
+        }
+      ],
+      "edge_checks": {
+        "exact_comparisons": 79120,
+        "value_refreshes": 2430,
+        "structural_rebuilds": 84,
+        "guarded_boundaries": "start and end",
+        "log": {
+          "path": "local/native-residual-tiled-02/checks/edge-checks.log",
+          "sha256": "6a460b23e11460e6b73dd6951a2178d1da035f5684de8b634ea88cdd64941da6"
+        }
+      }
+    }
+  ],
+  "projected_saving_for_48_calls_ms": 0.6585424479166666,
+  "retained_inputs": {
+    "path": "local/frozen/prototype-12g/inputs.json",
+    "sha256": "f7f34bbba95a21ef9eea0228b4174fa8b31a6a4e8a230fd01b021b7389a68016"
+  },
+  "retained_build_artifacts": [
+    {
+      "path": "build/libs/wwpg-0.2.7-experimental.wiretree.11.jar",
+      "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9"
+    },
+    {
+      "path": "build/libs/wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+      "sha256": "24d2d70ca4b8895d71e1d74c9fc49b23a1873507f4f1c10627f2443d1fc51636"
+    }
+  ],
+  "next_step": "Independent live-matrix cache invalidation and cleanup, focused mutation/callback checks, then a clean copied-yard comparison.",
+  "limitations": [
+    "Three recorded inputs are not exhaustive mod inputs or guaranteed stable-phase captures.",
+    "Microbenchmarks include output reset but exclude plan construction and refresh. No host frequency/thermal control.",
+    "The 48-call projection is arithmetic, not a measured tick gain.",
+    "Fresh plan construction and explicit refresh tests do not establish live-solver automatic invalidation.",
+    "No gameplay layout integration, client load, full-yard reload, full headless or graphical acceptance is added."
+  ]
+}

@@ -196,9 +196,12 @@ observer separately.
 
 ## Next native investigation
 
-Capture the actual full-sized compressed-column matrix, state, residual input
-and resulting residual in a separately marked diagnostic. Use these inputs
-for an offline comparison before adding a new game prototype. The reviewed
+The [capture and offline layout comparison](NATIVE_RESIDUAL_LAYOUT.md) now
+contains three actual full-sized compressed-column matrices, states, residual
+inputs and resulting residuals from a separately marked diagnostic. Scalar
+row layouts are slower; four-row SIMD saves about 30% locally and passes its
+focused numerical checks. Gameplay integration and invalidation are still
+pending, so this is not a new TPS result. The reviewed
 `sp_dgemv` path visits columns in increasing order, skips zero state entries
 and adds each contribution into its destination row. A row-oriented layout
 must preserve that contribution order and zero-skip behavior, including signed

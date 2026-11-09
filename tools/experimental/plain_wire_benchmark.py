@@ -102,7 +102,7 @@ def prepare(args, *, runtime_inspector=None):
     source_copy.mkdir()
     for name in ('plain_wire_benchmark.py','restoration_benchmark.py','legacy_bench.py','process_metrics.py',
                  'host_metrics.py','cpu_affinity.py','cpu_profile.py','preparation_sections.py','native_work.py','native_stages.py','world_save_evidence.py',
-                 'run_native_reduction_observation.py','run_native_reduction_live_observation.py'):
+                 'run_native_reduction_observation.py','run_native_reduction_live_observation.py','native_residual_capture.py'):
         source = ROOT / 'tools/experimental' / name
         target = source_copy / name
         shutil.copy2(source,target)

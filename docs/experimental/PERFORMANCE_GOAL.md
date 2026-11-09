@@ -146,13 +146,24 @@ no full headless or graphical acceptance suite is implied by this investigation.
   56.166 ms p95**. Two runs per variant average **47.868 / 48.709 ms mean**
   (1.73% lower for the candidate), but the first run in each pair was faster.
   Opposite paired directions and a best p95 still above 50 ms leave repeatable
-  improvement and consistency unproven. Keep the native candidate provisional
-  and capture real residual inputs before testing an exact matrix layout.
+  improvement and consistency unproven. Keep the native candidate provisional.
   The unchanged jars reuse their named passing numerical/fixture evidence;
   only two fresh copied-yard runs were added. No client load,
   actual full-yard reload or full acceptance was repeated for this trial.
   [First checkpoint](native-reduction-results-20261109.json),
   [four-run checkpoint](native-reduction-repeat-results-20261109.json).
+- The [actual-input residual layout investigation](NATIVE_RESIDUAL_LAYOUT.md)
+  captures three 14,925-row/57,097-entry matrices and vectors from a fresh
+  copied-yard diagnostic. Scalar row layouts are slower, while a four-row
+  SIMD layout reduces offline residual time by **29.80-30.94%**. All 288
+  actual-input comparisons and 79,120 focused tiled edge-case comparisons
+  preserve output bits and FP status. The gain projects to about 0.66 ms for
+  48 calls, excluding setup/refresh cost; it is not a measured TPS improvement.
+  No gameplay cache is integrated. Current matrix ownership, callback-driven
+  refresh, structural invalidation and cleanup need focused tests before a
+  new native gameplay comparison. The retained runtime is unchanged, and no
+  client-loading or full acceptance run was added.
+  [Evidence](native-residual-results-20261109.json).
 - The preceding `0.2.7-experimental.wiretree.7` candidate is frozen at
   `local/frozen/prototype-08a/inputs.json` (runtime SHA-256
   `31efbb0099531a7a8db7aa0f52deb80b040080bada825dd33bc339560b85c7a1`).
@@ -283,10 +294,13 @@ samples.
    4.28 ms of triangular solving and 4.52 ms of residual multiplication/norm.
    Exact finite/max reduction passes numerical checks. Its reversed pair wins
    after the first pair loses, leaving a 1.73% mean advantage across two runs
-   per variant but unresolved variation. It remains unretained. Capture actual
-   matrix/state/residual inputs and compare an exact row-oriented residual
-   calculation offline before another gameplay change. Preserve column-wise
-   contribution order within each row, zero-state skips and fresh callbacks.
+   per variant but unresolved variation. It remains unretained. Actual-input
+   capture and the [offline residual comparison](NATIVE_RESIDUAL_LAYOUT.md)
+   are now complete: scalar rows lose, while four-row SIMD saves about 30%
+   locally with exact results. Implement independent cache invalidation and
+   current matrix refresh, then test structural/value/callback changes before
+   another gameplay comparison. Preserve column-wise contribution order
+   within each row, zero-state skips and fresh callbacks.
    Triangular workspace or factor layout remain subsequent candidates.
    The norm alone cannot close the tail gap. Keep
    finite-state, permutation and rollback guards intact, along with
