@@ -77,6 +77,10 @@ public final class RestorationCoordinator {
     public static void owner(ServerLevel level, OwnedFloatingNode node, BlockPos position) {
         if (ENABLED && position != null) state(level).owners.put(node, position);
     }
+    /** Metadata registered during ordinary CEE/API preparation, never a world lookup. */
+    public static BlockPos ownerPosition(ServerLevel level, OwnedFloatingNode node) {
+        var state = WORLDS.get(level); return state == null ? null : state.owners.get(node);
+    }
     private static List<Chunk> records(WorldNetworks world, ElectricalNetwork network, Set<BlockPos> positions) {
         if (!(world.world instanceof ServerLevel level)) return List.of();
         var state = state(level); var records = Collections.newSetFromMap(new IdentityHashMap<Chunk, Boolean>());
@@ -141,13 +145,15 @@ public final class RestorationCoordinator {
     public static boolean defer(WorldNetworks world, ElectricalNetwork network) {
         if (!ENABLED || !(world.world instanceof ServerLevel level)) return false;
         var state = state(level); var previous = state.decisions.get(network);
-        if (previous != null) return previous;
+        if (previous != null && (previous || !org.cha0scollective.wwpg.experimental.ScopedRestoration.ENABLED)) return previous;
         // A real unfinished wire queue cannot be released by the quiet-window deadline.
-        // Hold conservatively by dimension while queued roots can still merge circuits.
-        if (org.cha0scollective.wwpg.experimental.WireTreeBatch.holding(level)) {
+        // The opt-in scope follows saved edges as well as current native ownership.
+        if (org.cha0scollective.wwpg.experimental.ScopedRestoration.holding(world, network)) {
             state.decisions.put(network, true); markPaused(network);
+            org.cha0scollective.wwpg.experimental.ScopedRestoration.deferred(network);
             return true;
         }
+        if (previous != null) return previous;
         if (!state.active) return false;
         var positions = new HashSet<BlockPos>();
         var records = records(world, network, positions);
@@ -163,8 +169,17 @@ public final class RestorationCoordinator {
             hold = batch.hold(level.getServer().getTickCount(), ready);
         }
         state.decisions.put(network, hold);
-        if (hold) { markPaused(network); state.pausedPositions.addAll(positions); }
+        if (hold) {
+            markPaused(network); state.pausedPositions.addAll(positions);
+            org.cha0scollective.wwpg.experimental.ScopedRestoration.deferred(network);
+        }
         return hold;
+    }
+    /** Final ownership was checked after native topology preparation. */
+    public static void holdScoped(WorldNetworks world, ElectricalNetwork network) {
+        if (world.world instanceof ServerLevel level) {
+            state(level).decisions.put(network, true); markPaused(network);
+        }
     }
     public static void holdDiscovery(WorldNetworks world, ElectricalNetwork network) {
         if (world.world instanceof ServerLevel level) state(level).heldDiscovery.add(network);
@@ -185,6 +200,7 @@ public final class RestorationCoordinator {
     private static void nextPauseEpoch() {
         if (++pauseEpoch == 0) ++pauseEpoch; // Zero belongs to an unmarked new network.
         anyPaused = false;
+        org.cha0scollective.wwpg.experimental.ScopedRestoration.beginTick();
     }
     /** Internal, unsaved native-network state; the coordinator is its only writer. */
     public interface PauseMarker {
@@ -198,7 +214,7 @@ public final class RestorationCoordinator {
         state(level).incoming.add(chunk.toLong());
     }
     public static boolean pausedAt(ServerLevel level, BlockPos position) {
-        if (org.cha0scollective.wwpg.experimental.WireTreeBatch.holding(level)) return true;
+        if (org.cha0scollective.wwpg.experimental.ScopedRestoration.pausedAt(level, position)) return true;
         var state = WORLDS.get(level); return anyPaused && state != null && state.pausedPositions.contains(position);
     }
     public static void markOwner(ServerLevel level, BlockPos position) { if (position != null) state(level).pausedPositions.add(position); }
@@ -230,7 +246,7 @@ public final class RestorationCoordinator {
         return "restorationBatch=" + ENABLED + ", pendingChunks=" + (state == null ? 0 : state.chunks.values().stream().filter(record -> record.window.active()).count())
                 + ", pausedCircuits=" + (state == null ? 0 : state.decisions.values().stream().filter(Boolean::booleanValue).count());
     }
-    public static void unload(ServerLevel level) { WORLDS.remove(level); }
+    public static void unload(ServerLevel level) { WORLDS.remove(level); org.cha0scollective.wwpg.experimental.ScopedRestoration.invalidate(); }
     public static void clear() { WORLDS.clear(); nextPauseEpoch(); serverTick = Integer.MIN_VALUE; }
     private record Dependency(long chunk, BlockWireEndpoint endpoint) { }
     private static final class Chunk { RestorationWindow window = new RestorationWindow(); boolean ready; final Set<BlockWireEndpoint> endpoints = new HashSet<>(); }

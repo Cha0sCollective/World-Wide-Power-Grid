@@ -134,6 +134,16 @@ public final class WireTreeBatch {
     }
     /** The first bounded prototype holds the whole dimension until its queue drains. */
     public static boolean holding(ServerLevel level) { return BOUNDED && pending(level) != 0; }
+    public static boolean hasPending() { return BOUNDED && !PENDING.isEmpty(); }
+    public static void visitPending(WorldNetworks world, java.util.function.BiConsumer<IWireEndpoint, TransmissionLinePart> visitor) {
+        var state = PENDING.get(world);
+        if (state == null) return;
+        state.queue.visitEndpoints((endpoint, attachment) -> {
+            if (world.getPart(attachment.part.persistentOwnerId) == attachment.part
+                    && attachment.part.owner == attachment.owner && !attachment.owner.isRemoved())
+                visitor.accept(endpoint, attachment.part);
+        });
+    }
     public static long attached() { return attachments; }
     public static long discarded() { return discarded; }
     public static void unload(ServerLevel level) {

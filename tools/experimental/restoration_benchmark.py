@@ -24,6 +24,7 @@ def main():
     parser.add_argument('--tree-prioritize-unresolved', action='store_true')
     parser.add_argument('--chunk-task-budget-ms', type=int, choices=range(21), default=0)
     parser.add_argument('--cee-state-geometry', action='store_true')
+    parser.add_argument('--scoped-restoration', action='store_true')
     parser.add_argument('--terminal-bookkeeping', action='store_true')
     parser.add_argument('--terminal-key-lookup', action='store_true')
     parser.add_argument('--helper-inputs', help='Explicit frozen helper overlay manifest for queue-aware readiness')
@@ -37,6 +38,8 @@ def main():
     assert not args.tree_budget_ms or args.tree_batch
     assert not args.tree_retain_coverage or args.tree_batch
     assert not args.tree_prioritize_unresolved or args.tree_batch
+    if args.scoped_restoration and (not args.tree_batch or args.tree_budget_ms <= 0):
+        parser.error('--scoped-restoration requires bounded wire-tree batching')
     args.batch = args.property_batch = True
     args.verify_batch = False
     directory, reference, original = experiment.prepare(args)
@@ -52,6 +55,7 @@ def main():
                     tree_prioritize_unresolved=args.tree_prioritize_unresolved,
                     chunk_task_budget_ms=args.chunk_task_budget_ms,
                     cee_state_geometry=args.cee_state_geometry,
+                    scoped_restoration=args.scoped_restoration,
                     terminal_bookkeeping=args.terminal_bookkeeping,
                     terminal_key_lookup=args.terminal_key_lookup,
                     cpu_affinity_mask=args.cpu_mask, server_affinity_mask=args.server_cpu_mask,
@@ -99,6 +103,7 @@ def main():
         log = (directory / 'process.log').read_text(encoding='utf-8', errors='replace')
         protocol['task_window'] = experiment.validate_task_window(log, args.chunk_task_budget_ms)
         protocol['cee_geometry'] = experiment.validate_cee_geometry(log, args.cee_state_geometry)
+        protocol['scope_execution'] = experiment.validate_scoped_restoration(log, args.scoped_restoration, True)
         protocol['terminal_execution'] = experiment.validate_terminal_bookkeeping(log, args.terminal_bookkeeping)
         protocol['terminal_keys'] = experiment.validate_terminal_keys(log, args.terminal_key_lookup)
         if args.tree_batch:

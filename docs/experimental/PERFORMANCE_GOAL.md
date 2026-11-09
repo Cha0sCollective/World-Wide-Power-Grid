@@ -13,7 +13,25 @@ no full headless or graphical acceptance suite is implied by this investigation.
 
 ## Current evidence and open requirements
 
-- The current candidate is `0.2.7-experimental.wiretree.8`, frozen at
+- The current experimental prototype is `0.2.7-experimental.wiretree.11`,
+  frozen at `local/frozen/prototype-12g/inputs.json`, with opt-in
+  [scoped restoration](SCOPED_RESTORATION.md). Independent circuits now continue
+  all 16 substeps during repeated saved arrivals in the dedicated fixtures;
+  disconnected circuits can split away and resume, while affected storage and
+  heat remain held. Known CEE/API internal owners, unresolved saved branches,
+  replacement identities and cross-world split controllers are covered. The
+  final artifact passes 126 focused fixture executions across enabled/disabled
+  lanes, with 17 preserved unchanged unit tests and five evidence guards.
+  Same-jar client loading is **44.399 seconds enabled / 39.302 disabled** at the
+  confirmed settings: about five seconds slower for the narrower pause, while
+  both remain below one minute. Steady results are **20.030 / 20.043 TPS**,
+  **48.319 / 48.965 ms mean**, **55.104 / 55.425 ms p95**; this single pair shows
+  no steady regression and does not establish a speedup. Actual initial/reload
+  headless restoration is **32.996 / 20.222 seconds**. Scope discovery is outside
+  the wire queue's 20 ms budget, and unknown physical endpoints retain
+  conservative fallback. Consistent TPS, largest stalls and broader gameplay
+  coverage remain open. [Evidence](scoped-restoration-results-20261109.json).
+- The preceding retained performance baseline is `0.2.7-experimental.wiretree.8`, frozen at
   `local/frozen/prototype-09c/inputs.json` (runtime SHA-256
   `7a8cfa0973a73ac490e7cb1f1e1d8b4eff6bdd1fc9933d067279852e4e8f1204`).
   Its opt-in [CEE state geometry reuse](CEE_STATE_GEOMETRY.md) measured
@@ -172,12 +190,15 @@ samples.
    callback behavior. Preserve dynamic, custom, moving, unloaded and
    replaced-owner behavior, all 16 electrical substeps, accuracy, storage,
    heating and device callbacks. The prior packed worker prototype stays retired.
-4. Narrow restoration pauses to the affected electrical components, following
-   the [scoped-restoration investigation](SCOPED_RESTORATION_INVESTIGATION.md).
-   Prove that independent circuits continue all 16 substeps during ongoing
-   restoration arrivals, while affected storage and heat remain held until
-   their topology is ready. Account for unresolved saved chains, couplers and
-   topology changes before attempting a full-yard comparison.
+4. The [scoped-restoration prototype](SCOPED_RESTORATION.md) now covers the
+   dedicated streaming, saved-chain, ownership, split-controller and storage
+   cases and has final-artifact client, reload and steady measurements. Retain
+   it as an opt-in functionality prototype; it adds loading cost. If reducing
+   that cost, preserve metadata-only discovery, final-owner rebinding and
+   disconnect progress. Reuse within a preparation epoch needs its own measured
+   comparison; do not substitute a cross-tick cached component for current
+   ownership. Unknown endpoint fallback and broader gameplay remain limits of
+   the focused evidence.
 5. Verify both targets on subsequent improvements. The goal remains active until
    consistency and functionality preservation have supporting evidence.
    Headless loads below one minute do not establish complete client readiness.

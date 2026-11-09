@@ -30,7 +30,7 @@ public final class WireTreeBudgetGameTests {
     private static void place(GameTestHelper h, BlockPos pos, Block block) {
         h.setBlock(pos.below(),Blocks.STONE); h.setBlock(pos,block);
     }
-    private static List<BlockPos> ring(GameTestHelper h, int count) {
+    static List<BlockPos> ring(GameTestHelper h, int count) {
         h.assertTrue(WireTreeBatch.BOUNDED && WireTreeBatch.MAX_PARTS==1,"Fixture requires one bounded wire per tick");
         var positions = new ArrayList<BlockPos>();
         for (int i=0;i<count;i++) {
@@ -46,12 +46,16 @@ public final class WireTreeBudgetGameTests {
         });
         return positions;
     }
-    private static List<TransmissionLinePart> reload(GameTestHelper h, List<BlockPos> positions) {
+    static List<TransmissionLinePart> reload(GameTestHelper h, List<BlockPos> positions) {
         var level=h.getLevel(); var world=GlobalElectricNetworks.getWorldNetworks(level);
+        int alreadyPending=WireTreeBatch.pending(level);
         var unique=Collections.newSetFromMap(new IdentityHashMap<TransmissionLinePart,Boolean>());
         for (var pos:positions) for (int terminal=0;terminal<2;terminal++) {
             var wires=world.findConnectedWires(new BlockWireEndpoint(pos,terminal)); if(wires!=null)unique.addAll(wires);
         }
+        unique.removeIf(part -> !(part.getEndpoint1() instanceof BlockWireEndpoint first)
+                || !(part.getEndpoint2() instanceof BlockWireEndpoint second)
+                || !positions.contains(first.getPos()) || !positions.contains(second.getPos()));
         var parts=new ArrayList<>(unique); parts.sort(Comparator.comparing(p->p.owner.getUUID().toString()));
         h.assertTrue(parts.size()==positions.size()*2,"Unexpected saved wire count");
         var tags=new ArrayList<CompoundTag>();
@@ -64,7 +68,7 @@ public final class WireTreeBudgetGameTests {
             h.assertTrue(entity instanceof WireEntity && ((WireEntity)entity).getWire()==parts.get(i),"Saved identity changed");
             h.assertTrue(level.addFreshEntity(entity),"Reloaded UUID did not rejoin");
         }
-        h.assertTrue(WireTreeBatch.pending(level)==parts.size()*2,"Reload did not queue all roots");
+        h.assertTrue(WireTreeBatch.pending(level)==alreadyPending+parts.size()*2,"Reload did not queue all roots");
         return parts;
     }
     @GameTest(template="empty",batch="budget_storage",timeoutTicks=140)
@@ -85,6 +89,12 @@ public final class WireTreeBudgetGameTests {
             for (int terminalId=0;terminalId<2;terminalId++) {
                 WiringGameTests.connect(h,h.absolutePos(terminal),terminalId,h.absolutePos(load),terminalId,true);
                 WiringGameTests.connect(h,s,terminalId,c,terminalId,true);
+            }
+            if (org.cha0scollective.wwpg.experimental.ScopedRestoration.ENABLED) {
+                // This fixture tests affected storage. Connect both storage
+                // circuits to the reloaded ring when the hold is component-scoped.
+                WiringGameTests.connect(h,positions.getFirst(),0,h.absolutePos(load),0,true);
+                WiringGameTests.connect(h,positions.getFirst(),0,s,0,true);
             }
         });
         h.runAtTickTime(25,()->reload(h,positions));

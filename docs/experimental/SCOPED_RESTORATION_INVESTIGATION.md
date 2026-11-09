@@ -1,10 +1,11 @@
 # Narrowing the restoration pause
 
-Investigation snapshot, November 9, 2026. This is an open functionality
-requirement of [the performance goal](PERFORMANCE_GOAL.md), not an implemented
-optimization or a passing streaming result.
+Pre-implementation investigation snapshot, November 9, 2026, for the retained
+`wiretree.8` runtime. The subsequent opt-in prototype and its separately named
+evidence are described in [scoped restoration](SCOPED_RESTORATION.md). This
+review records the requirements that led to that prototype.
 
-## Current behavior confirmed in source
+## Retained runtime behavior confirmed in source
 
 `WireTreeBatch.holding(level)` is true whenever bounded work remains in that
 dimension. `RestorationCoordinator.defer` consequently pauses every native

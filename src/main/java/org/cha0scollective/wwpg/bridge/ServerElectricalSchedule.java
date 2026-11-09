@@ -35,6 +35,7 @@ public final class ServerElectricalSchedule {
         var worlds = new ArrayList<WorldNetworks>();
         for (var level : server.getAllLevels()) org.cha0scollective.wwpg.extension.ApiCircuits.get(level).prepare();
         for (var level : server.getAllLevels()) worlds.add(GlobalElectricNetworks.getWorldNetworks(level));
+        org.cha0scollective.wwpg.experimental.ScopedRestoration.prepare(worlds);
         RestorationCoordinator.joinCoupledWindows(worlds);
         // CEE prepares every dimension at tickServer HEAD, before PG's first
         // level pre-tick. Retain PG's native topology and matrix preparation,
@@ -45,6 +46,7 @@ public final class ServerElectricalSchedule {
         } finally {
             PREPARING.remove();
         }
+        org.cha0scollective.wwpg.experimental.ScopedRestoration.finishPreparation(worlds);
         RestorationCoordinator.coupledClosure(worlds);
         RestorationCoordinator.finishPreparation(worlds);
         // Native preparation can merge/split circuits. Bind extension work to

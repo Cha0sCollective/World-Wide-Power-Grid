@@ -71,6 +71,7 @@ public final class WorldWidePowerGrid {
     private void stop(ServerStoppedEvent event) {
         org.cha0scollective.wwpg.experimental.CeeStateGeometry.reportAndClear();
         org.cha0scollective.wwpg.experimental.WireTreeBatch.reportAndClear();
+        org.cha0scollective.wwpg.experimental.ScopedRestoration.reportAndClear();
         org.cha0scollective.wwpg.experimental.PlainWireBatch.reportAndReset();
         Bridges.clear();
         org.cha0scollective.wwpg.bridge.RestorationCoordinator.clear();

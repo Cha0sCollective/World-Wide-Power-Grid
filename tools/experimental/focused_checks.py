@@ -19,7 +19,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--inputs', required=True)
     parser.add_argument('--backend', choices=['NATIVE', 'JAVA'], required=True)
-    parser.add_argument('--selection', choices=['wire', 'lifecycle', 'tree', 'budget', 'geometry', 'terminals'], default='wire')
+    parser.add_argument('--selection', choices=['wire', 'lifecycle', 'tree', 'budget', 'scope', 'geometry', 'terminals'], default='wire')
     parser.add_argument('--tree-batch', action='store_true')
     parser.add_argument('--tree-budget-ms', type=int, default=0)
     parser.add_argument('--tree-max-parts', type=int, default=32)
@@ -27,6 +27,7 @@ def main():
     parser.add_argument('--tree-prioritize-unresolved', action='store_true')
     parser.add_argument('--chunk-task-budget-ms', type=int, choices=range(21), default=0)
     parser.add_argument('--cee-state-geometry', action='store_true')
+    parser.add_argument('--scoped-restoration', action='store_true')
     parser.add_argument('--terminal-bookkeeping', action='store_true')
     parser.add_argument('--terminal-key-lookup', action='store_true')
     parser.add_argument('--addon-inputs', help='Frozen manifest supplying independent API example jars')
@@ -35,6 +36,10 @@ def main():
     args = parser.parse_args()
     if args.selection == 'terminals' and not args.addon_inputs:
         parser.error('Terminal ownership fixtures require --addon-inputs')
+    if args.selection == 'scope' and not args.addon_inputs:
+        parser.error('Scoped internal-owner fixtures require --addon-inputs')
+    if args.scoped_restoration and (not args.tree_batch or args.tree_budget_ms <= 0):
+        parser.error('--scoped-restoration requires bounded wire-tree batching')
     if args.tree_prioritize_unresolved and not args.tree_batch:
         parser.error('--tree-prioritize-unresolved requires --tree-batch')
     manifest = Path(args.inputs).resolve()
@@ -61,6 +66,9 @@ def main():
         namespaces = 'wwpg_cee_state_geometry,wwpg_loading,wwpg_unload,wwpg_solver_safety'
     if args.selection == 'terminals':
         namespaces = 'wwpg_loading,wwpg_api_ownership,wwpg_unload,wwpg_solver_safety'
+    if args.selection == 'scope':
+        assert args.scoped_restoration and args.tree_max_parts == 1
+        namespaces = 'wwpg_tree_scope,wwpg_tree_budget'
     command = [sys.executable, str(ROOT / 'tools/run_checked.py'), '--timeout', '600', '--', 'gradlew.bat',
                'runPackagedGameTestServer', '-x', 'build', '-x', 'jar', '-x', 'test', '--offline', '--no-daemon',
                '-I', 'tools/experimental/plain-wire.gradle', '-PexperimentalCee=' + str(artifacts['cee']),
@@ -74,6 +82,7 @@ def main():
                '-PtestWireTreePrioritizeUnresolved=' + str(args.tree_prioritize_unresolved).lower(),
                '-PtestChunkTaskBudgetMillis=' + str(args.chunk_task_budget_ms),
                '-PtestCeeStateGeometry=' + str(args.cee_state_geometry).lower(),
+               '-PtestScopedRestoration=' + str(args.scoped_restoration).lower(),
                '-PtestTerminalBookkeeping=' + str(args.terminal_bookkeeping).lower(),
                '-PtestTerminalKeyLookup=' + str(args.terminal_key_lookup).lower()]
     if addons:
@@ -89,6 +98,7 @@ def main():
     proof['tree_prioritize_unresolved'] = args.tree_prioritize_unresolved
     proof['chunk_task_budget_ms'] = args.chunk_task_budget_ms
     proof['cee_state_geometry'] = args.cee_state_geometry
+    proof['scoped_restoration'] = args.scoped_restoration
     proof['terminal_bookkeeping'] = args.terminal_bookkeeping
     proof['terminal_key_lookup'] = args.terminal_key_lookup
     proof['addon_artifacts'] = addons
@@ -112,13 +122,14 @@ def main():
             for key, item in addons.items())
         proof['passed'] &= proof['addons_unchanged'] and proof['addon_classpath_verified']
     if proof['passed']:
-        from plain_wire_benchmark import validate_terminal_bookkeeping, validate_terminal_keys
+        from plain_wire_benchmark import validate_terminal_bookkeeping, validate_terminal_keys, validate_scoped_restoration
         try:
             proof['terminal_execution'] = validate_terminal_bookkeeping(log, args.terminal_bookkeeping)
             proof['terminal_keys'] = validate_terminal_keys(log, args.terminal_key_lookup)
+            proof['scope_execution'] = validate_scoped_restoration(log, args.scoped_restoration, args.selection in ('scope', 'budget'))
         except AssertionError:
             proof['passed'] = False
-            proof['terminal_validation_error'] = 'Missing or inconsistent terminal bookkeeping execution counters'
+            proof['execution_validation_error'] = 'Missing or inconsistent experimental execution counters'
     (directory / 'result.json').write_text(json.dumps(proof, indent=2) + '\n')
     print(json.dumps({key: proof[key] for key in ('passed', 'required_tests_passed', 'artifacts_unchanged', 'exit_code')}))
     if not proof['passed']:

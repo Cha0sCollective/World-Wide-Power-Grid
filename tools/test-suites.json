@@ -38,6 +38,8 @@
     "platform": {"namespaces": ["wwpg_platform"], "merge_into": "regression", "phases": ["SETUP"]}
   },
   "special_namespaces": {
+    "wwpg_cee_state_geometry": "isolated experimental geometry-cache differential fixtures; never part of normal acceptance",
+    "wwpg_tree_scope": "isolated component-scoped restoration fixtures; requires scoped restoration and one bounded part per tick",
     "wwpg_tree_budget": "isolated bounded restoration fixtures; requires an enabled budget with one part per tick",
     "wwpg_tree_restore": "isolated experimental saved-wire restoration fixtures; never part of normal acceptance",
     "wwpg_sable_targeting": "opt-in Sable Companion API coordinate fixtures: translated/rotated/scaled/render poses, exposed pins, panel covers, native wire IDs, occlusion and live membership; requires Companion at runtime",

@@ -174,7 +174,7 @@ tasks.named('processGameTestResources') {
     inputs.property 'version', project.version
     filesMatching('META-INF/neoforge.mods.toml') { expand version: project.version }
     from('release') { include 'artifacts.json', 'optional-artifacts.json', 'content-matrix.json', '0.1.0-beta.5/content-matrix.json', '0.1.0-beta.5/registry-inventory.json'; into 'data/wwpg/release' }
-    ['wwpg_cee_state_geometry', 'wwpg_tree_budget', 'wwpg_tree_restore', 'wwpg_loading', 'wwpg_matrix_ownership', 'wwpg_board_startup', 'wwpg_cee_preparation',
+    ['wwpg_tree_scope', 'wwpg_cee_state_geometry', 'wwpg_tree_budget', 'wwpg_tree_restore', 'wwpg_loading', 'wwpg_matrix_ownership', 'wwpg_board_startup', 'wwpg_cee_preparation',
      'wwpg_solver_safety', 'wwpg_native_guard', 'wwpg_unload', 'wwpg_contactors', 'wwpg_meter_sampling',
      'wwpg_loader_installation', 'wwpg_loader_addons', 'wwpg_addon_safety', 'wwpg_addon_native_guard',
      'wwpg_cio', 'wwpg_cio_upgrade', 'wwpg_cio_guard', 'wwpg_cio_transitions', 'wwpg_sable_targeting',

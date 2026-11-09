@@ -198,12 +198,17 @@ public final class WorldBridge {
             dynamic.firstNode = nodes.get(preparedKeys.get(builder.getNode(dynamic.first).node));
             dynamic.secondNode = nodes.get(preparedKeys.get(builder.getNode(dynamic.second).node));
         }
-        if (RestorationCoordinator.active(level)) nodes.forEach((key, node) -> { if (node.endpoint instanceof InternalEndpoint) RestorationCoordinator.owner(level, node, ownerOf(key)); });
+        if (RestorationCoordinator.active(level)) restorationOwners();
         steps.clear();
         activeStep = 0;
         completedInStep = 0;
         ++preparedTicks;
         phase = Phase.READY;
+    }
+
+    /** Existing endpoint identities only; used when a coupled world is restoring. */
+    public void restorationOwners() {
+        nodes.forEach((key, node) -> { if (node.endpoint instanceof InternalEndpoint) RestorationCoordinator.owner(level, node, ownerOf(key)); });
     }
 
     private Optional<org.cha0scollective.wwpg.extension.CeeAdapters.Captured> captureAdapter(
@@ -736,8 +741,11 @@ public final class WorldBridge {
         pausedDevices.clear(); statefulDevices.clear();
         boolean paused = RestorationCoordinator.anyPaused();
         if (paused) {
-            if (org.cha0scollective.wwpg.experimental.WireTreeBatch.holding(level))
+            if (org.cha0scollective.wwpg.experimental.ScopedRestoration.ENABLED) {
+                for (var device : devices) if (RestorationCoordinator.pausedAt(level, device.pos)) pausedDevices.add(device.pos);
+            } else if (org.cha0scollective.wwpg.experimental.WireTreeBatch.holding(level)) {
                 for (var device : devices) pausedDevices.add(device.pos);
+            }
             for (var device : devices) if (device instanceof com.george_vi.electroenergetics.content.converter.ConverterDevice) statefulDevices.add(device.pos);
             for (var dynamic : dynamics) for (int ordinal : new int[]{dynamic.first, dynamic.second}) {
                 var owner = ownerOf(preparedKeys.get(builder.getNode(ordinal).node)); if (owner != null) statefulDevices.add(owner);

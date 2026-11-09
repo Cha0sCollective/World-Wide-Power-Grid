@@ -16,6 +16,10 @@ public final class RestorationQueue<N, P> {
     private int priorityStreak;
     public void add(N first, N second, P part) { entries.addLast(new Entry<>(first, second, part, nextOrder++)); }
     public int size() { return entries.size(); }
+    /** Read-only metadata visit; never drains, reorders or resolves queued endpoints. */
+    public void visitEndpoints(java.util.function.BiConsumer<N, P> visitor) {
+        for (var entry : entries) { visitor.accept(entry.first, entry.part); visitor.accept(entry.second, entry.part); }
+    }
     public Slice drain(int maxEntries, long budgetNanos, LongSupplier clock, Predicate<P> valid,
                        Function<N, Set<N>> trace, Predicate<P> finish) {
         return drain(maxEntries, budgetNanos, clock, valid, trace, finish, null);

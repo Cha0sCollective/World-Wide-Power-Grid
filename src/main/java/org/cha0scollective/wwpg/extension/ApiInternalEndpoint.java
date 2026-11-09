@@ -14,6 +14,7 @@ final class ApiInternalEndpoint implements IWireEndpoint {
     final OwnedFloatingNode node=new OwnedFloatingNode(this);
     private final DeviceIdentity owner; private final String key;
     ApiInternalEndpoint(DeviceIdentity owner,String key) { this.owner=owner;this.key=key; }
+    DeviceIdentity ownerIdentity() { return owner; }
     @Override public OwnedFloatingNode getNode(Level world) { return node; }
     @Override public void joinNetwork(Level world,ElectricalNetwork network) { network.addNode(node); }
     @Override public Vec3 getExactPosition(Level world) { throw new UnsupportedOperationException("Internal API node "+owner+" "+key); }

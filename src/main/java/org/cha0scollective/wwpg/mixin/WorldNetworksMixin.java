@@ -30,7 +30,9 @@ public abstract class WorldNetworksMixin {
     @Inject(method = "runIslandDiscoveryFor", at = @At("HEAD"), cancellable = true)
     private void wwpg$indexedIslands(ElectricalNetwork network, CallbackInfo ci) {
         var world = (WorldNetworks) (Object) this;
-        if (org.cha0scollective.wwpg.bridge.RestorationCoordinator.defer(world, network))
+        if (org.cha0scollective.wwpg.experimental.ScopedRestoration.ENABLED)
+            org.cha0scollective.wwpg.experimental.ScopedRestoration.discover(world, network);
+        else if (org.cha0scollective.wwpg.bridge.RestorationCoordinator.defer(world, network))
             org.cha0scollective.wwpg.bridge.RestorationCoordinator.holdDiscovery(world, network);
         else org.cha0scollective.wwpg.bridge.IndexedIslandDiscovery.run(world, network);
         ci.cancel();

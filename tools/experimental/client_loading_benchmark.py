@@ -13,6 +13,7 @@ import legacy_bench as bench
 from cpu_affinity import affinity, observe_group, pin_owned
 from host_metrics import HostWatch
 from plain_wire_benchmark import ROOT, INPUTS, inventory, validate_task_window, validate_cee_geometry, validate_terminal_bookkeeping, validate_terminal_keys
+from plain_wire_benchmark import validate_scoped_restoration
 from process_metrics import ChildMetrics
 
 
@@ -82,6 +83,10 @@ def validate(directory, inputs, audit_directory=None):
         'wwpg.experimental.ceeStateGeometry', 'false') == 'true')
     if geometry is not None:
         bench.write(audit_directory / 'client-benchmark/cee-geometry-validation.json', geometry)
+    scope = validate_scoped_restoration(log, bench.read(directory / 'experiment.json')['properties'].get(
+        'wwpg.experimental.scopedRestoration', 'false') == 'true', True)
+    if scope is not None:
+        bench.write(audit_directory / 'client-benchmark/scoped-restoration-validation.json', scope)
     terminals = validate_terminal_bookkeeping(log, bench.read(directory / 'experiment.json')['properties'].get(
         'wwpg.experimental.terminalBookkeeping', 'false') == 'true')
     if terminals is not None:
@@ -107,6 +112,7 @@ def main():
     parser.add_argument('--tree-prioritize-unresolved', action='store_true')
     parser.add_argument('--chunk-task-budget-ms', type=int, choices=range(21), default=0)
     parser.add_argument('--cee-state-geometry', action='store_true')
+    parser.add_argument('--scoped-restoration', action='store_true')
     parser.add_argument('--terminal-bookkeeping', action='store_true')
     parser.add_argument('--terminal-key-lookup', action='store_true')
     parser.add_argument('--inspect-delivery', action='store_true')
@@ -160,6 +166,7 @@ def main():
         'wwpg.experimental.wireTreePrioritizeUnresolved': str(args.tree_prioritize_unresolved).lower(),
         'wwpg.experimental.chunkTaskBudgetMillis': str(args.chunk_task_budget_ms),
         'wwpg.experimental.ceeStateGeometry': str(args.cee_state_geometry).lower(),
+        'wwpg.experimental.scopedRestoration': str(args.scoped_restoration).lower(),
         'wwpg.experimental.terminalBookkeeping': str(args.terminal_bookkeeping).lower(),
         'wwpg.experimental.terminalKeyLookup': str(args.terminal_key_lookup).lower()}
     # Freeze launch bytes in this attempt. Frozen template dependencies are verified above.
