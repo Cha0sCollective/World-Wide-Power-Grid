@@ -38,6 +38,15 @@ no full headless or graphical acceptance suite is implied by this investigation.
   [retirement comparison](terminal-bookkeeping-retirement-20261109.json)
   permits reuse of that runtime's named prior evidence; no new client or
   actual reload trial was run for the rejected candidate.
+- The subsequent [terminal-key arithmetic prototype](TERMINAL_KEY_LOOKUP.md),
+  `wiretree.10`, also failed to demonstrate a tick-time gain. Enabled/disabled
+  means were **49.882 / 49.855 ms**, with **57.523 / 57.421 ms p95**, despite
+  about 1.230 MiB/tick less allocation. Its corrected build passed 102 focused
+  checks and both full-yard steady observations. A superseded warmup was
+  interrupted for a compatibility correction and contributes no timing result.
+  Candidate source is preserved at `6949dff`; it is retired and the working
+  source and rebuilt jars again match `prototype-09c` exactly.
+  [Retirement proof](terminal-keys-retirement-20261109.json).
 - The preceding `0.2.7-experimental.wiretree.7` candidate is frozen at
   `local/frozen/prototype-08a/inputs.json` (runtime SHA-256
   `31efbb0099531a7a8db7aa0f52deb80b040080bada825dd33bc339560b85c7a1`).
@@ -97,6 +106,9 @@ no full headless or graphical acceptance suite is implied by this investigation.
 - The bounded implementation still holds all electrical circuits in an
   affected dimension while its wire queue is pending. Preserving behavior
   during continuous streaming and narrowing that pause remain open concerns.
+  The existing finite-reload fixture deliberately holds independent circuits;
+  it does not prove their continued operation during streaming. See the
+  [source review and required focused evidence](SCOPED_RESTORATION_INVESTIGATION.md).
 
 The user additionally requested manual assignment of benchmark runs to an
 unused CPU group. [Whole-process placement](CPU_PLACEMENT.md) now restricts the
@@ -140,14 +152,25 @@ samples.
    comparison, a client load and an actual reload. The subsequent
    [steady profile](STEADY_PROFILE_GEOMETRY.md) measured 7.951 ms CEE preparation
    and 4.778 ms terminal preparation in its weighted samples. Per-pass function
-   reuse and private frame-map storage were measured and retired after failing
-   to demonstrate a repeatable speedup. Next isolate terminal-key equality,
-   endpoint hashing and stable-description validation costs. The earlier
-   profile identifies these as candidates, not proven improvements; retain
-   fresh validation and callback behavior. Preserve dynamic, custom, moving, unloaded and
+   reuse, private frame-map storage and terminal-key arithmetic were measured
+   and retired after failing to demonstrate a repeatable speedup. Before
+   another small tick optimization, collect a CPU profile with detailed phase
+   and substep timers disabled. The existing helper starts JFR inside its
+   sampled substep path; a new mode needs explicit recording boundaries, flags,
+   artifact hashes and shutdown evidence. The diagnostic run recorded 16.051
+   seconds of compilation versus about 1.1–1.4 seconds in clean observations,
+   so its cost distribution may be distorted. Stable-description validation
+   remains a candidate, not a proven improvement; retain fresh validation and
+   callback behavior. Preserve dynamic, custom, moving, unloaded and
    replaced-owner behavior, all 16 electrical substeps, accuracy, storage,
    heating and device callbacks. The prior packed worker prototype stays retired.
-4. Verify both targets on subsequent improvements. The goal remains active until
+4. Narrow restoration pauses to the affected electrical components, following
+   the [scoped-restoration investigation](SCOPED_RESTORATION_INVESTIGATION.md).
+   Prove that independent circuits continue all 16 substeps during ongoing
+   restoration arrivals, while affected storage and heat remain held until
+   their topology is ready. Account for unresolved saved chains, couplers and
+   topology changes before attempting a full-yard comparison.
+5. Verify both targets on subsequent improvements. The goal remains active until
    consistency and functionality preservation have supporting evidence.
    Headless loads below one minute do not establish complete client readiness.
 

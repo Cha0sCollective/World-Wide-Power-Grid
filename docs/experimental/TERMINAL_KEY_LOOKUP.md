@@ -16,6 +16,13 @@ meaningful regression. Lower allocation alone does not justify retaining the
 prototype for the TPS/loading objective. Preserve its sources and measurements,
 then restore the preceding `wiretree.8` candidate.
 
+Candidate source is preserved at `6949dff`. The retirement restores all 445
+source/build entries and rebuilds both jars byte-identically to
+`local/frozen/prototype-09c/inputs.json`; see the
+[retirement proof](terminal-keys-retirement-20261109.json). That named runtime's
+previous focused checks, steady samples, client load and actual reload remain
+the applicable evidence. They have not been relabeled as new gameplay passes.
+
 ## Scope
 
 `-Dwwpg.experimental.terminalKeyLookup=true` selects two changes:
