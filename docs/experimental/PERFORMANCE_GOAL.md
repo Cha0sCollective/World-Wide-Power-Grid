@@ -88,9 +88,12 @@ samples.
 2. The unresolved-part diagnosis and priority prototype are complete. A small
    number of delayed attachments prevented fully-resolved coverage and caused
    repeated traversal. Prioritizing them cuts post-chunk recovery from 40–46
-   seconds to about five. Profile the client delivery/receipt interval next;
-   its full view still arrives long after electrical restoration. The separate
-   node-holder initialization path and largest loading stalls also remain.
+   seconds to about five. The [client delivery diagnosis](CLIENT_DELIVERY.md)
+   now shows that remaining view chunks are becoming ready on the server,
+   rather than waiting in a send queue. Late server samples are dominated by
+   ordinary ticking, including electrical work. Observe chunk-task depth/age
+   to distinguish server budget pressure from generation scheduling. The
+   separate node-holder initialization path and largest stalls also remain.
 3. Reduce repeated preparation and terminal/world lookups for steady TPS.
    Inspect native geometry dependencies before any reuse; retain dynamic,
    custom, moving, unloaded and replaced-owner behavior. Do not reduce the

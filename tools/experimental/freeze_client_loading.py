@@ -15,6 +15,7 @@ def main():
     parser.add_argument('--name', required=True)
     parser.add_argument('--inputs', required=True)
     parser.add_argument('--base-helper-inputs', required=True)
+    parser.add_argument('--inspect-delivery', action='store_true')
     args = parser.parse_args()
     runtime_inputs = json.loads((ROOT / args.inputs).read_text())
     parent = json.loads((ROOT / args.base_helper_inputs).read_text())
@@ -31,6 +32,10 @@ def main():
     sources = ROOT / 'tools/experimental/client_loading'
     shutil.copytree(sources / 'src', folder / 'src')
     shutil.copytree(sources / 'resources', folder / 'resources')
+    if args.inspect_delivery:
+        inspector = ROOT / 'tools/experimental/client_delivery'
+        for sub in ('src', 'resources'):
+            shutil.copytree(inspector / sub, folder / sub, dirs_exist_ok=True)
     package = 'org/cha0scollective/wwpg/benchmark'
     session_source = next(item for item in parent['sources'] if item['path'].endswith('/Session.java'))
     text = (ROOT / session_source['path']).read_text()
@@ -52,6 +57,9 @@ def main():
         metadata = archive.read('META-INF/neoforge.mods.toml').decode()
     metadata += '\n[[mods]]\nmodId="wwpg_benchmark_client"\nversion="0.1.0"\ndisplayName="WWPG focused client loading observer"\n'
     metadata += 'description="Disposable copied-save timing helper; not graphical acceptance."\n[[mixins]]\nconfig="wwpg-client-loading.mixins.json"\n'
+    if args.inspect_delivery:
+        metadata += '\n[[mods]]\nmodId="wwpg_benchmark_delivery"\nversion="0.1.0"\ndisplayName="WWPG chunk delivery inspector"\n'
+        metadata += 'description="Read-only focused diagnostic; not clean timing evidence."\n[[mixins]]\nconfig="wwpg-client-delivery.mixins.json"\n'
     metadata_path = folder / 'resources/META-INF/neoforge.mods.toml'
     metadata_path.parent.mkdir(parents=True)
     metadata_path.write_text(metadata, encoding='utf-8', newline='\n')
@@ -83,6 +91,7 @@ def main():
                     changed_parent_entries=changed, classpath=classpath,
                     sources=[dict(path=p.relative_to(ROOT).as_posix(), sha256=sha(p)) for p in sorted(files)],
                     process_affinity_supported=True, server_subset_supported=True,
+                    inspection_only=args.inspect_delivery, inspect_delivery=args.inspect_delivery,
                     scope='Integrated copied-save load and stationary rendering observation only; no acceptance suites')
     (folder / 'inputs.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
     print(json.dumps(dict(inputs=str(folder / 'inputs.json'), helper=manifest['helper'])))

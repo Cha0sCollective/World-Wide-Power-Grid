@@ -16,7 +16,8 @@ from plain_wire_benchmark import ROOT, INPUTS, inventory
 from process_metrics import ChildMetrics
 
 
-def validate(directory, inputs):
+def validate(directory, inputs, audit_directory=None):
+    audit_directory = directory if audit_directory is None else Path(audit_directory)
     result = bench.read(directory / 'client-benchmark/result.json')
     assert result['passed'], result
     assert bench.read(directory / 'client-benchmark/shutdown.json')['save_and_quit_reached_title']
@@ -48,6 +49,14 @@ def validate(directory, inputs):
     assert observation['free_compile_buffers'] == result['compile_buffers']
     assert result['ready_confirmation_seconds'] >= 2
     assert result['resolution'] == [1920, 1080] and result['render_distance_chunks'] == 12
+    if inputs.get('inspect_delivery', False):
+        # The unchanged client artifact observer lists its original mod IDs.
+        # The inspector is in that same already-verified wwpg_benchmark jar.
+        records = {}
+        for kind in ('server', 'batches'):
+            records[kind] = [json.loads(line) for line in (directory / f'client-benchmark/delivery-{kind}.jsonl').read_text().splitlines()]
+            assert records[kind]
+        assert sum(row['chunks'] for row in records['batches']) >= result['expected_client_chunks']
     with (directory / 'process-metrics.jsonl').open() as stream:
         samples = [json.loads(line) for line in stream]
     assert samples and all(row['affinity_mask'] == 'fff000' for row in samples)
@@ -60,9 +69,10 @@ def validate(directory, inputs):
     elif priority:
         assert priority == [('false', '0')]
     saved = bench.completed_world_save(log)
-    bench.write(directory / 'shutdown-save.json', saved)
+    (audit_directory / 'client-benchmark').mkdir(parents=True, exist_ok=True)
+    bench.write(audit_directory / 'shutdown-save.json', saved)
     assert saved['all_dimensions_saved']
-    bench.write(directory / 'client-benchmark/validation.json', dict(passed=True, full_suite=False, actual_nodes=14650,
+    bench.write(audit_directory / 'client-benchmark/validation.json', dict(passed=True, full_suite=False, actual_nodes=14650,
         edges=20637, storage_devices=1050, healthy_ticks=100, sixteen_substeps=True,
         loaded_artifacts_verified=True, normal_shutdown=True, process_affinity_readbacks=len(samples)))
     return result
@@ -73,10 +83,15 @@ def main():
     parser.add_argument('--name', required=True)
     parser.add_argument('--inputs', required=True)
     parser.add_argument('--tree-prioritize-unresolved', action='store_true')
+    parser.add_argument('--inspect-delivery', action='store_true')
+    parser.add_argument('--delivery-jfr', action='store_true')
     args = parser.parse_args()
+    if args.delivery_jfr and not args.inspect_delivery:
+        parser.error('--delivery-jfr requires --inspect-delivery')
     inputs_path = (ROOT / args.inputs).resolve()
     assert inputs_path.is_relative_to(ROOT / 'local/frozen')
     inputs = bench.read(inputs_path)
+    assert inputs.get('inspect_delivery', False) == args.inspect_delivery, 'Use a matching clean or diagnostic helper'
     for item in inputs['sources']:
         assert bench.sha(ROOT / item['path']) == item['sha256'], item['path']
     for item in inputs['classpath'] + [inputs[k] for k in ('runtime', 'cee', 'helper')]:
@@ -98,6 +113,7 @@ def main():
         'graphicsMode:1\nguiScale:2\nentityDistanceScaling:1.0\nfov:0.0\nautoJump:false\nbobView:false\n'
         'soundCategory_music:0.0\ntutorialStep:none\n', encoding='utf-8')
     properties = {'wwpg.clientBenchmark.enabled': 'true', 'wwpg.clientBenchmark.save': world_name,
+        'wwpg.clientBenchmark.inspectDelivery': str(args.inspect_delivery).lower(),
         'wwpg.benchmark.autorun': 'true', 'wwpg.benchmark.owned': 'true', 'wwpg.benchmark.restore': 'true',
         'wwpg.benchmark.exit': 'false', 'wwpg.benchmark.tier': '10000', 'wwpg.benchmark.variant': 'MIXED',
         'wwpg.benchmark.backend': 'NATIVE', 'wwpg.benchmark.mode': 'coldcheck', 'wwpg.benchmark.detailed': 'false',
@@ -114,6 +130,8 @@ def main():
     # Freeze launch bytes in this attempt. Frozen template dependencies are verified above.
     argument_file = directory / 'client.args'
     argument_file.write_text(''.join(f'-D{k}={v}\n' for k, v in properties.items())
+                            + ('-XX:StartFlightRecording=filename=client-delivery.jfr,settings=profile,dumponexit=true,maxsize=256m\n'
+                               if args.delivery_jfr else '')
                             + Path(template['arguments']).read_text(), encoding='utf-8', newline='\n')
     source_copy = directory / 'runner-sources'
     source_copy.mkdir()
@@ -126,6 +144,7 @@ def main():
         source_evidence.append(dict(path=str(target), sha256=bench.sha(target)))
     protocol = dict(schema=1, name=args.name, helper_inputs=str(inputs_path), helper_inputs_sha256=bench.sha(inputs_path),
         runtime=inputs['runtime'], helper=inputs['helper'], cee=inputs['cee'], copied_reference=True, full_suite=False,
+        inspection_only=args.inspect_delivery, delivery_jfr=args.delivery_jfr,
         cpu_affinity_mask='fff000', properties=properties, runner_sources=source_evidence,
         started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
     bench.write(directory / 'experiment.json', protocol)
@@ -181,6 +200,10 @@ def main():
                 bench.write(directory / 'runner-exit.json', dict(pid=process.pid, exit_code=process.returncode,
                     elapsed_seconds=time.monotonic() - started))
         protocol['result'] = validate(directory, inputs)
+        if args.delivery_jfr:
+            recording = directory / 'client-delivery.jfr'
+            assert recording.is_file() and recording.stat().st_size > 0
+            protocol['recording'] = dict(path=str(recording), sha256=bench.sha(recording))
         protocol['validation_passed'] = True
         print(json.dumps(protocol['result']), flush=True)
     except BaseException as error:
