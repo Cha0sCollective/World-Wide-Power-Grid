@@ -127,9 +127,12 @@ samples.
    the p95 tick target is still missed. The separate node-holder initialization
    path and largest stalls also remain.
 3. Reviewed CEE geometry reuse is implemented and has a matched on/off/on
-   comparison, a client load and an actual reload. Profile the remaining
-   preparation, sampling and wire/world-query costs on this runtime before
-   choosing the next change. Preserve dynamic, custom, moving, unloaded and
+   comparison, a client load and an actual reload. The subsequent
+   [steady profile](STEADY_PROFILE_GEOMETRY.md) measured 7.951 ms CEE preparation
+   and 4.778 ms terminal preparation in its weighted samples. The next target
+   is terminal preparation bookkeeping: per-pass function reuse and private
+   frame-map storage, retaining fresh validation and callback behavior.
+   Preserve dynamic, custom, moving, unloaded and
    replaced-owner behavior, all 16 electrical substeps, accuracy, storage,
    heating and device callbacks. The prior packed worker prototype stays retired.
 4. Verify both targets on subsequent improvements. The goal remains active until
