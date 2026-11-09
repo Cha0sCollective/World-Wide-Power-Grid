@@ -4,7 +4,7 @@ import csv
 import json
 import re
 
-from plain_wire_benchmark import ROOT, bench, validate_task_window, validate_cee_geometry
+from plain_wire_benchmark import ROOT, bench, validate_task_window, validate_cee_geometry, validate_terminal_bookkeeping
 
 
 def main():
@@ -42,6 +42,8 @@ def main():
         int(protocol['properties'].get('wwpg.experimental.chunkTaskBudgetMillis', '0')))
     geometry = validate_cee_geometry((folder / 'process.log').read_text(errors='replace'),
         protocol['properties'].get('wwpg.experimental.ceeStateGeometry', 'false') == 'true')
+    terminals = validate_terminal_bookkeeping((folder / 'process.log').read_text(errors='replace'),
+        protocol['properties'].get('wwpg.experimental.terminalBookkeeping', 'false') == 'true')
     paths = ['experiment.json', 'restore-input.json', 'launch.json', 'client.args', 'options.txt', 'cpu-preflight.json',
         'process-affinity.json', 'process-metrics.jsonl', 'host-metrics.jsonl', 'process.log', 'runner-exit.json',
         'shutdown-save.json', 'benchmark/result.json', 'benchmark/loading-results.json', 'benchmark/ticks.csv',
@@ -55,6 +57,9 @@ def main():
     if geometry is not None:
         paths.append('client-benchmark/cee-geometry-validation.json')
         assert geometry == bench.read(folder / paths[-1])
+    if terminals is not None:
+        paths.append('client-benchmark/terminal-bookkeeping-validation.json')
+        assert terminals == bench.read(folder / paths[-1])
     evidence = [dict(path=(folder / path).relative_to(ROOT).as_posix(), sha256=bench.sha(folder / path)) for path in paths]
     for kind in ('runtime', 'helper', 'cee'):
         assert bench.sha(protocol[kind]['path']) == protocol[kind]['sha256']
@@ -65,6 +70,7 @@ def main():
         server_loading=bench.read(folder / 'benchmark/loading-results.json'), tree_execution=tree,
         task_window=task_window,
         cee_geometry=geometry,
+        terminal_execution=terminals,
         worst_loading_tick_seconds=max(tick_ns) / 1e9, longest_loading_tick_gap_seconds=max(gaps) / 1e9,
         world_frame_intervals=dict(samples=len(frame_times), mean_ms=sum(frame_times) / len(frame_times) / 1e6,
             p95_ms=bench.percent(frame_times, .95) / 1e6, maximum_ms=max(frame_times) / 1e6),

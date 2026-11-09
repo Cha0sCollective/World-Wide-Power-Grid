@@ -19,5 +19,6 @@ gradle.projectsEvaluated {
         systemProperty 'wwpg.experimental.wireTreePrioritizeUnresolved', p.providers.gradleProperty('testWireTreePrioritizeUnresolved').getOrElse('false')
         systemProperty 'wwpg.experimental.chunkTaskBudgetMillis', p.providers.gradleProperty('testChunkTaskBudgetMillis').getOrElse('0')
         systemProperty 'wwpg.experimental.ceeStateGeometry', p.providers.gradleProperty('testCeeStateGeometry').getOrElse('false')
+        systemProperty 'wwpg.experimental.terminalBookkeeping', p.providers.gradleProperty('testTerminalBookkeeping').getOrElse('false')
     }
 }
