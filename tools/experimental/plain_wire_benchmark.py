@@ -12,6 +12,7 @@ import time
 from types import SimpleNamespace
 
 import legacy_bench as bench
+from host_metrics import HostWatch
 
 ROOT = Path(__file__).resolve().parents[2]
 INPUTS = ROOT / 'local/inputs'
@@ -90,6 +91,7 @@ def prepare(args):
     flags += '-Dwwpg.experimental.wireTreeBatch=' + str(getattr(args, 'tree_batch', False)).lower() + '\n'
     flags += '-Dwwpg.experimental.wireTreeBudgetMillis=' + str(getattr(args, 'tree_budget_ms', 0)) + '\n'
     flags += '-Dwwpg.experimental.wireTreeMaxParts=' + str(getattr(args, 'tree_max_parts', 32)) + '\n'
+    flags += '-Dwwpg.experimental.wireTreeRetainCoverage=' + str(getattr(args, 'tree_retain_coverage', False)).lower() + '\n'
     (directory / 'launch.args').write_text(flags + '\n'.join(tokens) + '\nnogui\n', newline='\n')
     java = Path(manifest['java']['path'])
     assert java.is_file()
@@ -173,17 +175,30 @@ def main():
     parser.add_argument('--batch', action='store_true')
     parser.add_argument('--verify-batch', action='store_true')
     parser.add_argument('--property-batch', action='store_true')
+    parser.add_argument('--tree-batch', action='store_true')
+    parser.add_argument('--tree-budget-ms', type=int, default=0)
+    parser.add_argument('--tree-max-parts', type=int, default=32)
+    parser.add_argument('--tree-retain-coverage', action='store_true')
+    parser.add_argument('--helper-inputs', help='Frozen queue-aware loading helper manifest')
     args = parser.parse_args()
     if (args.property_batch or args.verify_batch) and not args.batch:
         parser.error('--property-batch and --verify-batch require --batch')
     if args.substep_jfr and not args.detailed:
         parser.error('--substep-jfr requires --detailed')
+    if args.tree_budget_ms < 0 or args.tree_max_parts < 1:
+        parser.error('Invalid restoration budget')
+    if (args.tree_budget_ms or args.tree_retain_coverage) and not args.tree_batch:
+        parser.error('Restoration budget and coverage require --tree-batch')
     directory, reference, original = prepare(args)
     before = inventory(original)
+    reference_before = inventory(reference)
     protocol = dict(name=args.name, runtime=bench.read(directory / 'launch.json')['runtime'],
         scope='Focused 120-second warmup and 120-second stable control; not full capacity acceptance',
         copied_reference=True, sixteen_substeps=True, full_suite=False, batch=args.batch,
         verify_batch=args.verify_batch, property_batch=args.property_batch, detailed=args.detailed,
+        tree_batch=args.tree_batch, tree_budget_ms=args.tree_budget_ms, tree_max_parts=args.tree_max_parts,
+        tree_retain_coverage=args.tree_retain_coverage,
+        helper=bench.read(directory / 'launch.json')['helper'],
         substep_jfr=args.substep_jfr, started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
     bench.write(directory / 'experiment.json', protocol)
     print(json.dumps(dict(starting=str(directory), protocol=protocol)), flush=True)
@@ -193,7 +208,8 @@ def main():
         restoration_batch=True, rhs_counters=False, profile_every=20,
         substep_trace=args.detailed, substep_jfr=args.substep_jfr)
     try:
-        bench.run(options)
+        with HostWatch(directory / 'host-metrics.jsonl'):
+            bench.run(options)
         protocol['validation'] = validate(directory, args.detailed, args.batch, args.verify_batch, args.property_batch)
         if args.substep_jfr:
             recording = directory / 'benchmark/substeps.jfr'
@@ -206,9 +222,10 @@ def main():
         print(json.dumps(dict(completed=True, summary=protocol['summary']['mspt'], tps=protocol['summary']['tps'])), flush=True)
     finally:
         protocol['original_reference_unchanged'] = inventory(original) == before
+        protocol['isolated_reference_unchanged'] = inventory(reference) == reference_before
         protocol['finished_utc'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
         bench.write(directory / 'experiment.json', protocol)
-        assert protocol['original_reference_unchanged']
+        assert protocol['original_reference_unchanged'] and protocol['isolated_reference_unchanged']
 
 
 if __name__ == '__main__':

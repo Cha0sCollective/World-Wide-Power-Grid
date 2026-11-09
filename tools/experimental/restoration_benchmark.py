@@ -20,6 +20,7 @@ def main():
     parser.add_argument('--tree-batch', action='store_true')
     parser.add_argument('--tree-budget-ms', type=int, default=0)
     parser.add_argument('--tree-max-parts', type=int, default=32)
+    parser.add_argument('--tree-retain-coverage', action='store_true')
     parser.add_argument('--helper-inputs', help='Explicit frozen helper overlay manifest for queue-aware readiness')
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument('--diagnostic', action='store_true')
@@ -27,6 +28,7 @@ def main():
     args = parser.parse_args()
     assert args.tree_budget_ms >= 0 and args.tree_max_parts > 0
     assert not args.tree_budget_ms or args.tree_batch
+    assert not args.tree_retain_coverage or args.tree_batch
     args.batch = args.property_batch = True
     args.verify_batch = False
     directory, reference, original = experiment.prepare(args)
@@ -37,7 +39,8 @@ def main():
                     runtime=launch['runtime'], helper=launch['helper'], copied_reference=True,
                     batch=True, property_batch=True, tree_batch=args.tree_batch, detailed=args.diagnostic,
                     loading_trace=args.diagnostic, reload=args.reload, full_suite=False,
-                    tree_budget_ms=args.tree_budget_ms, tree_max_parts=args.tree_max_parts, helper_inputs=args.helper_inputs,
+                    tree_budget_ms=args.tree_budget_ms, tree_max_parts=args.tree_max_parts,
+                    tree_retain_coverage=args.tree_retain_coverage, helper_inputs=args.helper_inputs,
                     started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
     bench.write(directory / 'experiment.json', protocol)
     print(json.dumps(dict(starting=str(directory), tree_batch=args.tree_batch, diagnostic=args.diagnostic, reload=args.reload)), flush=True)
@@ -77,6 +80,8 @@ def main():
             assert all(int(r['pg_solve_calls']) == 16 and int(r['matrix_assemblies']) == 0 for r in list(distinct.values())[-100:])
         log = (directory / 'process.log').read_text(encoding='utf-8', errors='replace')
         if args.tree_batch:
+            if args.tree_retain_coverage:
+                assert log.count('WWPG experimental wire-tree retained coverage: enabled=true') == 1
             matches = re.findall(r'WWPG experimental wire-tree batch: attachments=(\d+), fallback=(\d+), roots=(\d+), traversals=(\d+), covered=(\d+), visited=(\d+), flushes=(\d+), largest=(\d+), pending=(\d+)', log)
             assert len(matches) == 1
             stats = dict(zip(('attachments', 'fallback', 'roots', 'traversals', 'covered', 'visited', 'flushes', 'largest', 'pending'), map(int, matches[0])))

@@ -15,5 +15,6 @@ gradle.projectsEvaluated {
         systemProperty 'wwpg.experimental.wireTreeBatch', p.providers.gradleProperty('testWireTreeBatch').getOrElse('false')
         systemProperty 'wwpg.experimental.wireTreeBudgetMillis', p.providers.gradleProperty('testWireTreeBudgetMillis').getOrElse('0')
         systemProperty 'wwpg.experimental.wireTreeMaxParts', p.providers.gradleProperty('testWireTreeMaxParts').getOrElse('32')
+        systemProperty 'wwpg.experimental.wireTreeRetainCoverage', p.providers.gradleProperty('testWireTreeRetainCoverage').getOrElse('false')
     }
 }

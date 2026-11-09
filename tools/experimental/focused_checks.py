@@ -23,6 +23,7 @@ def main():
     parser.add_argument('--tree-batch', action='store_true')
     parser.add_argument('--tree-budget-ms', type=int, default=0)
     parser.add_argument('--tree-max-parts', type=int, default=32)
+    parser.add_argument('--tree-retain-coverage', action='store_true')
     parser.add_argument('--name', required=True)
     parser.add_argument('--property-batch', action='store_true')
     args = parser.parse_args()
@@ -48,13 +49,15 @@ def main():
                '-PtestProfile=BASE', '-PtestNamespaces=' + namespaces,
                '-PtestPropertyWireBatch=' + str(args.property_batch).lower(),
                '-PtestWireTreeBatch=' + str(args.tree_batch).lower(),
-               '-PtestWireTreeBudgetMillis=' + str(args.tree_budget_ms), '-PtestWireTreeMaxParts=' + str(args.tree_max_parts)]
+               '-PtestWireTreeBudgetMillis=' + str(args.tree_budget_ms), '-PtestWireTreeMaxParts=' + str(args.tree_max_parts),
+               '-PtestWireTreeRetainCoverage=' + str(args.tree_retain_coverage).lower()]
     env = dict(os.environ)
     env['JAVA_HOME'] = inputs['java_home']
     env['PATH'] = str(Path(inputs['java_home']) / 'bin') + os.pathsep + env['PATH']
     proof = dict(scope='Focused only; no full or graphical acceptance', namespaces=namespaces,
                  backend=args.backend, property_batch=args.property_batch, tree_batch=args.tree_batch,
-                 tree_budget_ms=args.tree_budget_ms, tree_max_parts=args.tree_max_parts, command=command, artifacts=inputs['artifacts'])
+                 tree_budget_ms=args.tree_budget_ms, tree_max_parts=args.tree_max_parts,
+                 tree_retain_coverage=args.tree_retain_coverage, command=command, artifacts=inputs['artifacts'])
     (directory / 'invocation.json').write_text(json.dumps(proof, indent=2) + '\n')
     print(json.dumps(dict(starting=str(directory), namespaces=namespaces, backend=args.backend)), flush=True)
     with (directory / 'process.log').open('w', encoding='utf-8') as stream:
