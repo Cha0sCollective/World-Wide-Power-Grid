@@ -4,6 +4,7 @@ Experimental development snapshot, November 9, 2026. This trial builds on
 `wiretree.11` and its scoped-restoration checkpoint `e424f02`, in the isolated
 `dev/experimental-plain-wire-batching` worktree. Original saves and normal
 development remain untouched. The candidate is `0.2.7-experimental.wiretree.12`.
+It is now retired; the working runtime is restored to `wiretree.11`.
 
 ## Change and rationale
 
@@ -92,13 +93,31 @@ Lower allocation did not translate into faster ticks. Both runs miss the
 and 0.274 cores; no competing game was recorded. These observations do not
 control CPU frequency or thermals.
 
-The decision is to retire the indexed traversal and restore the preceding
-`wiretree.11` runtime after preserving this candidate in Git. No client-load
+The indexed traversal is retired, with its candidate preserved at `696734b`.
+The working runtime is restored to the preceding `wiretree.11`. No client-load
 or actual-unload/reload run was added for this unsuccessful candidate. Its
 headless startup timings do not establish restored/rendered client readiness.
 The [combined audit](indexed-waveform-results-20261109.json) preserves all
 focused and benchmark evidence, source hashes, execution counters and runner
 snapshots. The active performance goal remains open.
+
+## Retirement verification
+
+The offline `jar gameTestJar -x test` rebuild passes. All 450 source/build
+hashes match `prototype-12g`, and both rebuilt artifacts are byte-identical:
+
+| Artifact | Restored SHA-256 |
+| --- | --- |
+| Runtime | `fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9` |
+| Fixtures | `24d2d70ca4b8895d71e1d74c9fc49b23a1873507f4f1c10627f2443d1fc51636` |
+
+The [retirement audit](indexed-waveform-retirement-20261109.json) verifies 216
+hashed references from the retained scoped-restoration evidence and 529 from
+this candidate's evidence. Changed historical source/tool bytes are verified
+from their preserved Git commits. The retained 126 fixture executions and
+client/reload/steady observations are reused, with these explicit artifact
+comparisons; no old run is labeled as a fresh pass. Main development remains
+tracked-clean. All copied-save benchmark processes have exited normally.
 
 ## Reproducing the archived candidate
 

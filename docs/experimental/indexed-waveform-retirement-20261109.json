@@ -1,0 +1,110 @@
+{
+  "schema": 1,
+  "full_suite": false,
+  "new_gameplay_runs": 0,
+  "retired_candidate_commit": "696734bda3498a5fd6c9c753cc85cd2d3a184e68",
+  "restored_runtime_commit": "e424f02359f658c0ee614033ee398e46178e3f13",
+  "branch": "dev/experimental-plain-wire-batching",
+  "restored_inputs": {
+    "path": "local/frozen/prototype-12g/inputs.json",
+    "sha256": "f7f34bbba95a21ef9eea0228b4174fa8b31a6a4e8a230fd01b021b7389a68016"
+  },
+  "source_entries_matched": 450,
+  "rebuilt_artifacts": [
+    {
+      "kind": "runtime",
+      "rebuilt": {
+        "path": "build/libs/wwpg-0.2.7-experimental.wiretree.11.jar",
+        "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9"
+      },
+      "frozen": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar",
+        "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9"
+      },
+      "byte_identical": true
+    },
+    {
+      "kind": "fixtures",
+      "rebuilt": {
+        "path": "build/libs/wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+        "sha256": "24d2d70ca4b8895d71e1d74c9fc49b23a1873507f4f1c10627f2443d1fc51636"
+      },
+      "frozen": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+        "sha256": "24d2d70ca4b8895d71e1d74c9fc49b23a1873507f4f1c10627f2443d1fc51636"
+      },
+      "byte_identical": true
+    }
+  ],
+  "reused_focused_executions": 126,
+  "retained_evidence": {
+    "path": "docs/experimental/scoped-restoration-results-20261109.json",
+    "sha256": "d885d4ed5be254d61d943863de8e4a2da9724ebd8f30391042460cfd29888ed5"
+  },
+  "retained_evidence_audit": {
+    "unique_hashed_references_verified": 216,
+    "historical_source_blobs": [
+      {
+        "path": "tools/experimental/plain_wire_benchmark.py",
+        "sha256": "c60a054e8eb8a32056fa5298101c2975909160c9ba5076516c1a4c16dfe59478",
+        "preserved_commit": "e424f02359f658c0ee614033ee398e46178e3f13"
+      },
+      {
+        "path": "tools/experimental/restoration_benchmark.py",
+        "sha256": "b4454e1f4967ae6e8aea6b3af4ecdcbb25523e94b1cd690f7fe28c87e1cc9b83",
+        "preserved_commit": "e424f02359f658c0ee614033ee398e46178e3f13"
+      },
+      {
+        "path": "tools/experimental/client_loading_benchmark.py",
+        "sha256": "0c58815fd1c56282bdafb2d81173cf00ffe15526105f62ce4641c90a613f93ed",
+        "preserved_commit": "e424f02359f658c0ee614033ee398e46178e3f13"
+      },
+      {
+        "path": "tools/experimental/focused_checks.py",
+        "sha256": "f47665d475d67df190434b510c9b71495965a1c576a7077235bff9ae69cdcc39",
+        "preserved_commit": "e424f02359f658c0ee614033ee398e46178e3f13"
+      },
+      {
+        "path": "tools/experimental/summarize_client_loading.py",
+        "sha256": "4d73377219d685e21036baf01193ec5c19d50f749a1fee5841ccea7e072b2e4f",
+        "preserved_commit": "e424f02359f658c0ee614033ee398e46178e3f13"
+      },
+      {
+        "path": "tools/experimental/summarize_current_profile.py",
+        "sha256": "ab8bc7d361438c167e8625695d64ed2e55e436ad819132de6d3aec012db6dc23",
+        "preserved_commit": "e424f02359f658c0ee614033ee398e46178e3f13"
+      }
+    ]
+  },
+  "candidate_evidence": {
+    "path": "docs/experimental/indexed-waveform-results-20261109.json",
+    "sha256": "5a6c0920f2e21e6d0b3830a15e70507e6ea210b0f838c56b326fc673852daa1f"
+  },
+  "candidate_evidence_audit": {
+    "unique_hashed_references_verified": 529,
+    "historical_source_blobs": [
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/NativeApiReadings.java",
+        "sha256": "f77d3eb1631192bbea7493cc236135902036f4efe58b14085c33ab6dc7b0953a",
+        "preserved_commit": "696734bda3498a5fd6c9c753cc85cd2d3a184e68"
+      },
+      {
+        "path": "gradle.properties",
+        "sha256": "1b36b55324be65a1ea9fa93459ff4192aa79bc3d64952341fb9e232dd7a34a56",
+        "preserved_commit": "696734bda3498a5fd6c9c753cc85cd2d3a184e68"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "local/checks/indexed-waveform-audit-01/verify_retirement.py",
+      "sha256": "aad669aa9df9ca88a30a83c52b7abe2f1c62ca12a490525cac466223c1c9d332"
+    },
+    {
+      "path": "local/indexed-waveform-retirement-build-01.log",
+      "sha256": "b218e9f2c5ce1aa2369ff412ff92ab39aa619c72a6eb6ce9245b68795e2b0a2f"
+    }
+  ],
+  "main_tracked_clean": true,
+  "note": "Retained named evidence is reused only after exact source and rebuilt-jar comparison. Changed historical tool/source bytes are verified from their preserved Git commits; no old run is relabeled as fresh."
+}

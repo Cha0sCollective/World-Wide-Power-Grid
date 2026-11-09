@@ -77,7 +77,10 @@ no full headless or graphical acceptance suite is implied by this investigation.
   Its same-jar pair measured **49.885 / 48.792 ms mean** and
   **57.598 / 55.701 ms p95** enabled/disabled, with **19.992 / 20.017 TPS**.
   Allocation was lower by about 1.586 MiB/tick, without an elapsed-time benefit.
-  The decision is to retire this traversal change and preserve the candidate.
+  The traversal change is retired, with the candidate preserved at `696734b`.
+  All 450 source/build hashes and both rebuilt jars again match `prototype-12g`.
+  Its named scoped-restoration evidence is reused after an explicit
+  [retirement comparison](indexed-waveform-retirement-20261109.json).
   Neither run meets the consistency gate. No new client or actual reload
   observation was run for this candidate.
   [Evidence](indexed-waveform-results-20261109.json).
