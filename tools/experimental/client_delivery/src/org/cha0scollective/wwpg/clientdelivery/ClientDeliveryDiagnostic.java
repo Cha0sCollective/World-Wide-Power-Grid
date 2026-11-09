@@ -96,6 +96,10 @@ public final class ClientDeliveryDiagnostic {
             row.put("unacknowledged_batches", sender.delivery$unacknowledged());
             row.put("maximum_unacknowledged_batches", sender.delivery$maximumUnacknowledged());
             row.put("pending_wire_roots", WireTreeBatch.pending(player.serverLevel()));
+            if (TaskQueueTimings.ENABLED) {
+                row.put("pending_server_tasks", server.getPendingTasksCount());
+                row.put("pending_chunk_tasks", chunkSource.getPendingTasksCount());
+            }
             row.put("view_center", List.of(viewCenter.x, viewCenter.z));
             row.put("view_chunks", viewChunks.size());
             row.put("view_missing_holders", viewMissing);
@@ -113,6 +117,12 @@ public final class ClientDeliveryDiagnostic {
         Batch next;
         while ((next = BATCHES.poll()) != null) text.append(JSON.toJson(next)).append('\n');
         if (!text.isEmpty()) append("delivery-batches.jsonl", text.toString());
+        if (TaskQueueTimings.ENABLED) {
+            text.setLength(0);
+            TaskQueueTimings.Completed task;
+            while ((task = TaskQueueTimings.pollCompleted()) != null) text.append(JSON.toJson(task)).append('\n');
+            if (!text.isEmpty()) append("delivery-tasks.jsonl", text.toString());
+        }
     }
 
     private static void append(String file, String text) {

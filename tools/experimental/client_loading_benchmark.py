@@ -57,6 +57,10 @@ def validate(directory, inputs, audit_directory=None):
             records[kind] = [json.loads(line) for line in (directory / f'client-benchmark/delivery-{kind}.jsonl').read_text().splitlines()]
             assert records[kind]
         assert sum(row['chunks'] for row in records['batches']) >= result['expected_client_chunks']
+        if inputs.get('inspect_task_queues', False):
+            tasks = [json.loads(line) for line in (directory / 'client-benchmark/delivery-tasks.jsonl').read_text().splitlines()]
+            assert {row['queue'] for row in tasks} == {'server', 'chunk'}
+            assert all(row['wait_nanos'] >= -1 and row['execution_nanos'] >= row['exclusive_execution_nanos'] >= 0 for row in tasks)
     with (directory / 'process-metrics.jsonl').open() as stream:
         samples = [json.loads(line) for line in stream]
     assert samples and all(row['affinity_mask'] == 'fff000' for row in samples)
@@ -85,13 +89,17 @@ def main():
     parser.add_argument('--tree-prioritize-unresolved', action='store_true')
     parser.add_argument('--inspect-delivery', action='store_true')
     parser.add_argument('--delivery-jfr', action='store_true')
+    parser.add_argument('--inspect-task-queues', action='store_true')
     args = parser.parse_args()
     if args.delivery_jfr and not args.inspect_delivery:
         parser.error('--delivery-jfr requires --inspect-delivery')
+    if args.inspect_task_queues and not args.inspect_delivery:
+        parser.error('--inspect-task-queues requires --inspect-delivery')
     inputs_path = (ROOT / args.inputs).resolve()
     assert inputs_path.is_relative_to(ROOT / 'local/frozen')
     inputs = bench.read(inputs_path)
     assert inputs.get('inspect_delivery', False) == args.inspect_delivery, 'Use a matching clean or diagnostic helper'
+    assert inputs.get('inspect_task_queues', False) == args.inspect_task_queues, 'Use a matching task observer'
     for item in inputs['sources']:
         assert bench.sha(ROOT / item['path']) == item['sha256'], item['path']
     for item in inputs['classpath'] + [inputs[k] for k in ('runtime', 'cee', 'helper')]:
@@ -114,6 +122,7 @@ def main():
         'soundCategory_music:0.0\ntutorialStep:none\n', encoding='utf-8')
     properties = {'wwpg.clientBenchmark.enabled': 'true', 'wwpg.clientBenchmark.save': world_name,
         'wwpg.clientBenchmark.inspectDelivery': str(args.inspect_delivery).lower(),
+        'wwpg.clientBenchmark.inspectTaskQueues': str(args.inspect_task_queues).lower(),
         'wwpg.benchmark.autorun': 'true', 'wwpg.benchmark.owned': 'true', 'wwpg.benchmark.restore': 'true',
         'wwpg.benchmark.exit': 'false', 'wwpg.benchmark.tier': '10000', 'wwpg.benchmark.variant': 'MIXED',
         'wwpg.benchmark.backend': 'NATIVE', 'wwpg.benchmark.mode': 'coldcheck', 'wwpg.benchmark.detailed': 'false',

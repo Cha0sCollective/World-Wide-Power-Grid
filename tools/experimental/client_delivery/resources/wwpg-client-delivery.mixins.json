@@ -3,6 +3,6 @@
   "minVersion": "0.8",
   "package": "org.cha0scollective.wwpg.clientdelivery.mixin",
   "compatibilityLevel": "JAVA_21",
-  "client": ["PlayerChunkSenderAccess", "ChunkBatchTimingMixin"],
+  "client": ["PlayerChunkSenderAccess", "ChunkBatchTimingMixin", "TaskQueueTimingMixin"],
   "injectors": {"defaultRequire": 1}
 }

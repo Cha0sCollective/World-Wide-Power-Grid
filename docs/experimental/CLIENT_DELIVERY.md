@@ -105,6 +105,36 @@ evidence, not rerun or relabelled. Only observer compilation, these two focused
 client diagnostics and their analysis/audit ran. No full headless or graphical
 acceptance suite was launched.
 
+## Task-queue follow-up
+
+`goal-client-task-inspect-01` completed with the unchanged gameplay jar and a
+separate task observer (`client-task-helper-01`). It records enqueue-to-start
+latency and callback execution without polling or changing the game queues.
+All full-yard, client-readiness, shutdown, artifact and reference checks passed.
+
+During the remaining-view interval after electrical readiness, 30,777 chunk
+callbacks waited a median **49.79 ms** (57.61 ms p95), while their mean execution
+time was **0.0029 ms**. Another 1,871 server callbacks waited a median **50.07 ms**.
+The observed callbacks consumed 147.09 ms total exclusive execution across the
+roughly 40.69-second interval. Every observed execution matched its enqueue.
+Queue-depth probes reached seven server tasks and 331 chunk tasks. This points
+to waiting between short asynchronous completion stages rather than expensive
+execution inside those callbacks. Other background chunk-generation work is
+not included in these execution totals.
+
+The dominant chunk task class belongs to `ServerChunkCache`'s direct lighting
+notification callback; other large groups are future completions and chunk
+priority-queue callbacks. The source's blocking off-thread chunk reads instead
+submit `CompletableFuture` tasks, and the preceding late JFR has no parked
+stack containing `ServerChunkCache`. The lambda class name alone should not be
+described as evidence of blocking chunk reads.
+
+A bounded extra task-processing window during actual loading is the next
+scheduling prototype. It must preserve FIFO dispatch through the existing
+server queues, server-thread ownership, the 16 electrical substeps, and ordinary
+behavior once loading completes. Its wall-time and tick-gap effects require a
+same-jar controlled measurement. [Task timing evidence](task-queue-results-20261109.json).
+
 ```text
 python -B tools/experimental/freeze_client_loading.py --name delivery-helper-new --inputs local/frozen/prototype-07a/inputs.json --base-helper-inputs local/frozen/affinity-helper-02/inputs.json --inspect-delivery
 python -B tools/experimental/client_loading_benchmark.py --name delivery-new --inputs local/frozen/delivery-helper-new/inputs.json --tree-prioritize-unresolved --inspect-delivery --delivery-jfr

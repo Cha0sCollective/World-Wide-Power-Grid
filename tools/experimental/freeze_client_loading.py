@@ -16,7 +16,10 @@ def main():
     parser.add_argument('--inputs', required=True)
     parser.add_argument('--base-helper-inputs', required=True)
     parser.add_argument('--inspect-delivery', action='store_true')
+    parser.add_argument('--inspect-task-queues', action='store_true')
     args = parser.parse_args()
+    if args.inspect_task_queues and not args.inspect_delivery:
+        parser.error('--inspect-task-queues requires --inspect-delivery')
     runtime_inputs = json.loads((ROOT / args.inputs).read_text())
     parent = json.loads((ROOT / args.base_helper_inputs).read_text())
     parent_jar = Path(parent['helper']['path'])
@@ -36,6 +39,11 @@ def main():
         inspector = ROOT / 'tools/experimental/client_delivery'
         for sub in ('src', 'resources'):
             shutil.copytree(inspector / sub, folder / sub, dirs_exist_ok=True)
+        if not args.inspect_task_queues:
+            config_path = folder / 'resources/wwpg-client-delivery.mixins.json'
+            config = json.loads(config_path.read_text())
+            config['client'].remove('TaskQueueTimingMixin')
+            config_path.write_text(json.dumps(config, indent=2) + '\n', encoding='utf-8')
     package = 'org/cha0scollective/wwpg/benchmark'
     session_source = next(item for item in parent['sources'] if item['path'].endswith('/Session.java'))
     text = (ROOT / session_source['path']).read_text()
@@ -92,6 +100,7 @@ def main():
                     sources=[dict(path=p.relative_to(ROOT).as_posix(), sha256=sha(p)) for p in sorted(files)],
                     process_affinity_supported=True, server_subset_supported=True,
                     inspection_only=args.inspect_delivery, inspect_delivery=args.inspect_delivery,
+                    inspect_task_queues=args.inspect_task_queues,
                     scope='Integrated copied-save load and stationary rendering observation only; no acceptance suites')
     (folder / 'inputs.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
     print(json.dumps(dict(inputs=str(folder / 'inputs.json'), helper=manifest['helper'])))
