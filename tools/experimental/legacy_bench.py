@@ -173,6 +173,9 @@ def run(args):
     props['substepJfr']=str(getattr(args,'substep_jfr',False)).lower()
     props['cpuJfr']=str(getattr(args,'cpu_jfr',False)).lower()
     props['cpuJfrNonSafepoints']=str(getattr(args,'cpu_jfr_non_safepoints',False)).lower()
+    props['preparationSections']=str(getattr(args,'preparation_sections',False)).lower()
+    if getattr(args,'preparation_sections',False) and (args.mode!='control' or args.detailed or getattr(args,'cpu_jfr',False) or getattr(args,'substep_jfr',False)):
+        raise ValueError('Preparation sections require a control run with other diagnostics disabled')
     if getattr(args,'substep_trace',False) and not args.detailed:raise ValueError('Substep diagnosis requires sampled detailed timers')
     if getattr(args,'substep_jfr',False) and not getattr(args,'substep_trace',False):raise ValueError('Stable JFR requires explicit substep diagnosis')
     if getattr(args,'substep_trace',False) and args.mode!='control':raise ValueError('Substep diagnosis is restricted to the finite stable-only control protocol')

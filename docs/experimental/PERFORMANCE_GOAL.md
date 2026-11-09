@@ -90,10 +90,25 @@ no full headless or graphical acceptance suite is implied by this investigation.
   All 8,576 Java and 188 native server CPU samples match the separately audited
   filtered recording. Broad hot scopes remain similar, but leaf attribution
   changes sharply and still assigns large counts to small bookkeeping sites.
-  The next step is sparse timing within CEE preparation before selecting a
+  This motivated sparse timing within CEE preparation before selecting a
   further representation change. This is diagnostic progress, with no runtime
   change, measured speedup or new client-loading result.
   [Evidence](cpu-sites-results-20261109.json).
+- The subsequent [preparation-section and phase observations](PREPARATION_SECTIONS.md)
+  leave gameplay sources and jars unchanged. The same-helper clean control
+  measured **20.035 TPS, 49.378 ms mean and 56.634 ms p95**. CEE preparation
+  averaged 7.514 ms in its section diagnostic; only 0.095 ms separated its
+  fast/slow tick groups. In the separate phase-only run, native solving
+  averaged **1.797 / 9.086 ms** in the fast/slow groups, accounting for about
+  **86% of their 8.484 ms tick-time difference**. Most slow samples have the
+  added cost in all 16 steps. This redirects investigation toward native
+  solve work and convergence behavior; it does not establish removable cost
+  or a threading speedup. All three runs passed their focused whole-yard
+  checks and exited normally. The 44.399-second client result remains prior
+  same-jar evidence, with no new graphical run.
+  [Preparation evidence](preparation-sections-results-20261109.json),
+  [phase evidence](phase-timers-results-20261109.json),
+  [substep analysis](native-phase-variation-20261109.json).
 - The preceding `0.2.7-experimental.wiretree.7` candidate is frozen at
   `local/frozen/prototype-08a/inputs.json` (runtime SHA-256
   `31efbb0099531a7a8db7aa0f52deb80b040080bada825dd33bc339560b85c7a1`).
@@ -211,11 +226,17 @@ samples.
    [compiled-location diagnostic](CPU_FRAME_SITES.md) reinforces that limit:
    the same broad scopes remain hot while iterator, map and thread-local leaf
    labels shift substantially. Its offline tick analysis does not associate
-   higher allocation with the slow ticks. Time the sections within CEE
-   preparation before choosing another representation change; descriptor and
-   branch validation, application and transformer lookup are investigation
-   targets, not proven removable costs. Wire temperature remains a separate
-   world-access candidate.
+   higher allocation with the slow ticks. The subsequent
+   [section/phase measurements](PREPARATION_SECTIONS.md) show that CEE
+   preparation explains little of the fast/slow gap. Native solving explains
+   about 86% in the separate phase diagnostic, with added work across all 16
+   steps on most slow samples. Observe actual JNI iteration limits, matrix
+   command counts and nonlinear/residual callback counts next. Distinguish
+   residual early exits, repeated solves and factorization before proposing
+   a native change. Keep finite-state, permutation and rollback guards intact.
+   Small transformer-map or iterator changes are not the leading hypothesis
+   for closing this gap. Wire temperature remains a separate world-access
+   candidate.
    Retain fresh validation and
    callback behavior. Preserve dynamic, custom, moving, unloaded and
    replaced-owner behavior, all 16 electrical substeps, accuracy, storage,

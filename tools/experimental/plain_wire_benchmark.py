@@ -54,6 +54,8 @@ def prepare(args):
             assert bench.sha(ROOT / item['path']) == item['sha256']
     cpu_mask = getattr(args, 'cpu_mask', None)
     server_mask = getattr(args, 'server_cpu_mask', None)
+    if getattr(args, 'preparation_sections', False) and not (helper_overlay and helper_overlay.get('preparation_sections_supported')):
+        raise ValueError('Preparation sections require the explicit diagnostic helper')
     if cpu_mask:
         if not helper_overlay or not helper_overlay.get('process_affinity_supported'):
             raise ValueError('Whole-process pinning requires the explicit affinity-aware frozen helper')
@@ -93,7 +95,7 @@ def prepare(args):
     source_copy = directory / 'runner-sources'
     source_copy.mkdir()
     for name in ('plain_wire_benchmark.py','restoration_benchmark.py','legacy_bench.py','process_metrics.py',
-                 'host_metrics.py','cpu_affinity.py','cpu_profile.py','world_save_evidence.py'):
+                 'host_metrics.py','cpu_affinity.py','cpu_profile.py','preparation_sections.py','world_save_evidence.py'):
         source = ROOT / 'tools/experimental' / name
         target = source_copy / name
         shutil.copy2(source,target)
@@ -293,6 +295,7 @@ def main():
     parser.add_argument('--substep-jfr', action='store_true', help='Record stable-phase CPU/allocation samples; requires --detailed')
     parser.add_argument('--cpu-jfr', action='store_true', help='Start JFR during warmup with detailed timers disabled; diagnostic only')
     parser.add_argument('--cpu-jfr-non-safepoints', action='store_true', help='Add compiled-code debug locations from JVM startup; requires --cpu-jfr')
+    parser.add_argument('--preparation-sections', action='store_true', help='Sparse whole-section CEE preparation diagnostic; requires its helper overlay')
     parser.add_argument('--batch', action='store_true')
     parser.add_argument('--verify-batch', action='store_true')
     parser.add_argument('--property-batch', action='store_true')
@@ -319,6 +322,8 @@ def main():
         parser.error('--cpu-jfr requires detailed and substep diagnostics disabled')
     if args.cpu_jfr_non_safepoints and not args.cpu_jfr:
         parser.error('--cpu-jfr-non-safepoints requires --cpu-jfr')
+    if args.preparation_sections and (args.detailed or args.cpu_jfr or args.substep_jfr):
+        parser.error('--preparation-sections requires other timing and JFR diagnostics disabled')
     if args.tree_budget_ms < 0 or args.tree_max_parts < 1:
         parser.error('Invalid restoration budget')
     if (args.tree_budget_ms or args.tree_retain_coverage or args.tree_prioritize_unresolved) and not args.tree_batch:
@@ -346,6 +351,7 @@ def main():
         helper=bench.read(directory / 'launch.json')['helper'],
         substep_jfr=args.substep_jfr, cpu_jfr=args.cpu_jfr,
         cpu_jfr_non_safepoints=args.cpu_jfr_non_safepoints,
+        preparation_sections=args.preparation_sections,
         started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
     bench.write(directory / 'experiment.json', protocol)
     print(json.dumps(dict(starting=str(directory), protocol=protocol)), flush=True)
@@ -354,7 +360,7 @@ def main():
         churn=0, cycles=1, restore=str(reference), detailed=args.detailed, timeout=1200,
         restoration_batch=True, rhs_counters=False, profile_every=20,
         substep_trace=args.detailed, substep_jfr=args.substep_jfr, cpu_jfr=args.cpu_jfr,
-        cpu_jfr_non_safepoints=args.cpu_jfr_non_safepoints)
+        cpu_jfr_non_safepoints=args.cpu_jfr_non_safepoints, preparation_sections=args.preparation_sections)
     try:
         with HostWatch(directory / 'host-metrics.jsonl'):
             bench.run(options)
@@ -382,6 +388,8 @@ def main():
         if args.cpu_jfr:
             from cpu_profile import validate_recording
             protocol['recording'] = validate_recording(directory)
+        from preparation_sections import validate as validate_preparation
+        protocol['preparation_observation'] = validate_preparation(directory, args.preparation_sections)
         protocol['summary'] = bench.read(directory / 'benchmark/summary.json')
         print(json.dumps(dict(completed=True, summary=protocol['summary']['mspt'], tps=protocol['summary']['tps'])), flush=True)
     finally:
