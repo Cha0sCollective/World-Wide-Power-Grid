@@ -27,7 +27,7 @@ def inventory(directory):
             and p.name not in ('session.lock', 'level.dat_old')]
 
 
-def prepare(args):
+def prepare(args, *, runtime_inspector=None):
     reference_root = Path(args.reference_root).resolve()
     profile = reference_root / 'local/benchmarks/release-baselines-20261014/profile-231'
     manifest = bench.read(profile / 'profile.json')
@@ -73,7 +73,7 @@ def prepare(args):
     runtime = Path(args.runtime).resolve() if args.runtime else INPUTS / 'wwpg-0.2.7.jar'
     assert runtime.is_relative_to(ROOT) and runtime.is_file()
     from native_stages import inspect_runtime
-    native_profile = inspect_runtime(runtime, getattr(args, 'native_stages', False))
+    native_profile = (runtime_inspector or inspect_runtime)(runtime, getattr(args, 'native_stages', False))
     directory = bench.safe_directory(ROOT / 'local/benchmarks' / args.name)
     if directory.exists():
         raise ValueError('Preserve prior attempts; choose a new name')
@@ -101,7 +101,8 @@ def prepare(args):
     source_copy = directory / 'runner-sources'
     source_copy.mkdir()
     for name in ('plain_wire_benchmark.py','restoration_benchmark.py','legacy_bench.py','process_metrics.py',
-                 'host_metrics.py','cpu_affinity.py','cpu_profile.py','preparation_sections.py','native_work.py','native_stages.py','world_save_evidence.py'):
+                 'host_metrics.py','cpu_affinity.py','cpu_profile.py','preparation_sections.py','native_work.py','native_stages.py','world_save_evidence.py',
+                 'run_native_reduction_observation.py','run_native_reduction_live_observation.py'):
         source = ROOT / 'tools/experimental' / name
         target = source_copy / name
         shutil.copy2(source,target)
@@ -292,7 +293,7 @@ def validate_terminal_keys(log, enabled):
     return stats
 
 
-def main():
+def main(*, runtime_inspector=None, diagnostic_kind=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--reference-root', required=True)
     parser.add_argument('--name', required=True)
@@ -342,7 +343,9 @@ def main():
         parser.error('Restoration budget, coverage and priority require --tree-batch')
     if args.scoped_restoration and (not args.tree_batch or args.tree_budget_ms <= 0):
         parser.error('--scoped-restoration requires bounded wire-tree batching')
-    directory, reference, original = prepare(args)
+    if diagnostic_kind and (not args.detailed or not args.native_work or args.native_stages):
+        parser.error('Special native observation requires detailed JNI observation without C-stage snapshots')
+    directory, reference, original = prepare(args, runtime_inspector=runtime_inspector)
     before = inventory(original)
     reference_before = inventory(reference)
     protocol = dict(name=args.name, runtime=bench.read(directory / 'launch.json')['runtime'],
@@ -366,6 +369,7 @@ def main():
         preparation_sections=args.preparation_sections,
         native_work=args.native_work,
         native_stages=args.native_stages,
+        diagnostic_kind=diagnostic_kind,
         started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
     bench.write(directory / 'experiment.json', protocol)
     print(json.dumps(dict(starting=str(directory), protocol=protocol)), flush=True)

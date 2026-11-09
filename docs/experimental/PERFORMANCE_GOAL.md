@@ -133,6 +133,19 @@ no full headless or graphical acceptance suite is implied by this investigation.
   class entries remain byte-identical to `prototype-12g`. Original and copied
   saves, whole-yard validation and shutdown passed; no new client load or
   full acceptance was run. [Evidence](native-stages-results-20261109.json).
+- The [exact native reduction experiment](NATIVE_REDUCTION.md) passes 40,740
+  exact numerical comparisons across 16 floating-point modes and 20 focused
+  native fixtures per clean variant. Its first same-compiler clean pair is
+  slower: **49.071 versus 47.954 ms mean**, **54.428 versus 54.077 ms p95**.
+  It remains an unretained candidate; `prototype-12g` is unchanged. Separate
+  path counters record **249,856 finite checks and 107,928 norm reductions,
+  with zero observed fallbacks**, so that diagnostic does not support the
+  subnormal-fallback hypothesis. Native-call timings from differently
+  instrumented runs suggest a local reduction, but do not establish an
+  end-to-end gain. Repeat the clean
+  comparison in reversed order before deciding its value. No client load,
+  actual full-yard reload or full acceptance was repeated for this trial.
+  [Evidence](native-reduction-results-20261109.json).
 - The preceding `0.2.7-experimental.wiretree.7` candidate is frozen at
   `local/frozen/prototype-08a/inputs.json` (runtime SHA-256
   `31efbb0099531a7a8db7aa0f52deb80b040080bada825dd33bc339560b85c7a1`).
@@ -261,9 +274,12 @@ samples.
    The subsequent [C-stage timers](NATIVE_STAGE_TIMINGS.md) directly confirm
    zero sampled factorizations and split the one-solve tick between about
    4.28 ms of triangular solving and 4.52 ms of residual multiplication/norm.
-   Investigate exact finite/max reduction and residual layout against the
-   frozen same-compiler baseline, followed by triangular workspace or factor
-   layout if needed. The norm alone cannot close the tail gap. Keep
+   The first exact finite/max reduction candidate passes numerical checks but
+   loses its first clean pair; it remains unretained. Resolve the discrepancy
+   between local native-call timings and whole-tick performance with a reversed
+   clean comparison before changing its algorithm. Residual layout and then
+   triangular workspace or factor layout remain subsequent candidates.
+   The norm alone cannot close the tail gap. Keep
    finite-state, permutation and rollback guards intact, along with
    floating-point edge cases, contribution order and stopping criteria.
    Small transformer-map or iterator changes are not the leading hypothesis

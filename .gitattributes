@@ -30,3 +30,7 @@ docs/evidence/api-documentation-2026-10-12/** -text
 # Do not normalize the accepted source-lock CRLF or expand headers on Windows.
 tools/native/** -text
 tools/build_native_solver.py -text
+# Experimental native build inputs are also bound by byte-level hashes.
+tools/experimental/native-stage-profile/** -text
+tools/experimental/native-reduction/*.c -text
+tools/experimental/native-reduction/*.h -text
