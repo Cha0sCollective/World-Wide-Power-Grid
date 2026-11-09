@@ -93,7 +93,7 @@ def prepare(args):
     source_copy = directory / 'runner-sources'
     source_copy.mkdir()
     for name in ('plain_wire_benchmark.py','restoration_benchmark.py','legacy_bench.py','process_metrics.py',
-                 'host_metrics.py','cpu_affinity.py','world_save_evidence.py'):
+                 'host_metrics.py','cpu_affinity.py','cpu_profile.py','world_save_evidence.py'):
         source = ROOT / 'tools/experimental' / name
         target = source_copy / name
         shutil.copy2(source,target)
@@ -256,6 +256,7 @@ def main():
     parser.add_argument('--runtime')
     parser.add_argument('--detailed', action='store_true')
     parser.add_argument('--substep-jfr', action='store_true', help='Record stable-phase CPU/allocation samples; requires --detailed')
+    parser.add_argument('--cpu-jfr', action='store_true', help='Start JFR during warmup with detailed timers disabled; diagnostic only')
     parser.add_argument('--batch', action='store_true')
     parser.add_argument('--verify-batch', action='store_true')
     parser.add_argument('--property-batch', action='store_true')
@@ -276,6 +277,8 @@ def main():
         parser.error('--property-batch and --verify-batch require --batch')
     if args.substep_jfr and not args.detailed:
         parser.error('--substep-jfr requires --detailed')
+    if args.cpu_jfr and (args.detailed or args.substep_jfr):
+        parser.error('--cpu-jfr requires detailed and substep diagnostics disabled')
     if args.tree_budget_ms < 0 or args.tree_max_parts < 1:
         parser.error('Invalid restoration budget')
     if (args.tree_budget_ms or args.tree_retain_coverage or args.tree_prioritize_unresolved) and not args.tree_batch:
@@ -297,14 +300,15 @@ def main():
         cpu_affinity_mask=args.cpu_mask,
         server_affinity_mask=args.server_cpu_mask,
         helper=bench.read(directory / 'launch.json')['helper'],
-        substep_jfr=args.substep_jfr, started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
+        substep_jfr=args.substep_jfr, cpu_jfr=args.cpu_jfr,
+        started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
     bench.write(directory / 'experiment.json', protocol)
     print(json.dumps(dict(starting=str(directory), protocol=protocol)), flush=True)
     options = SimpleNamespace(directory=str(directory), runtime_sha256=protocol['runtime']['sha256'],
         tier=10000, backend='NATIVE', variant='MIXED', mode='control', warmup=120, sample=120,
         churn=0, cycles=1, restore=str(reference), detailed=args.detailed, timeout=1200,
         restoration_batch=True, rhs_counters=False, profile_every=20,
-        substep_trace=args.detailed, substep_jfr=args.substep_jfr)
+        substep_trace=args.detailed, substep_jfr=args.substep_jfr, cpu_jfr=args.cpu_jfr)
     try:
         with HostWatch(directory / 'host-metrics.jsonl'):
             bench.run(options)
@@ -325,6 +329,9 @@ def main():
             assert log.count('WWPG_SUBSTEP_JFR_SAVED') == 1
             assert recording.is_file() and recording.stat().st_size > 0
             protocol['recording'] = dict(path=str(recording), sha256=bench.sha(recording), bytes=recording.stat().st_size)
+        if args.cpu_jfr:
+            from cpu_profile import validate_recording
+            protocol['recording'] = validate_recording(directory)
         protocol['summary'] = bench.read(directory / 'benchmark/summary.json')
         print(json.dumps(dict(completed=True, summary=protocol['summary']['mspt'], tps=protocol['summary']['tps'])), flush=True)
     finally:

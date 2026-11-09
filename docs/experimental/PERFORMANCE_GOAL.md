@@ -47,6 +47,13 @@ no full headless or graphical acceptance suite is implied by this investigation.
   Candidate source is preserved at `6949dff`; it is retired and the working
   source and rebuilt jars again match `prototype-09c` exactly.
   [Retirement proof](terminal-keys-retirement-20261109.json).
+- A subsequent [CPU profile with detailed timers disabled](CPU_PROFILE_WITHOUT_TIMERS.md)
+  completed on the unchanged runtime/helper: **20.038 TPS**, **49.725 ms mean**,
+  **56.724 ms p95**, with 1.496 seconds of compilation during the sample.
+  Recording started in warmup; only the explicitly bounded steady interval is
+  analyzed. Its 8,691 Java execution samples again identify CEE/terminal
+  preparation, waveform iteration, wire calculations and entity updates.
+  This is diagnostic evidence, not a new speedup or client-load result.
 - The preceding `0.2.7-experimental.wiretree.7` candidate is frozen at
   `local/frozen/prototype-08a/inputs.json` (runtime SHA-256
   `31efbb0099531a7a8db7aa0f52deb80b040080bada825dd33bc339560b85c7a1`).
@@ -153,14 +160,15 @@ samples.
    [steady profile](STEADY_PROFILE_GEOMETRY.md) measured 7.951 ms CEE preparation
    and 4.778 ms terminal preparation in its weighted samples. Per-pass function
    reuse, private frame-map storage and terminal-key arithmetic were measured
-   and retired after failing to demonstrate a repeatable speedup. Before
-   another small tick optimization, collect a CPU profile with detailed phase
-   and substep timers disabled. The existing helper starts JFR inside its
-   sampled substep path; a new mode needs explicit recording boundaries, flags,
-   artifact hashes and shutdown evidence. The diagnostic run recorded 16.051
-   seconds of compilation versus about 1.1–1.4 seconds in clean observations,
-   so its cost distribution may be distorted. Stable-description validation
-   remains a candidate, not a proven improvement; retain fresh validation and
+   and retired after failing to demonstrate a repeatable speedup. The subsequent
+   [CPU-only profile](CPU_PROFILE_WITHOUT_TIMERS.md) leaves detailed phase and
+   substep timers disabled, with explicit recording boundaries and unchanged
+   jars. Compilation fell from 16.051 to 1.496 seconds between the diagnostic
+   observations; this is not a calibrated overhead comparison. After addressing
+   the restoration pause, trial indexed waveform iteration without repacking
+   samples: 538 of its 652 Java stacks end in the list iterator. Descriptor
+   validation and biome lookup remain separate candidates, not proven gains.
+   Retain fresh validation and
    callback behavior. Preserve dynamic, custom, moving, unloaded and
    replaced-owner behavior, all 16 electrical substeps, accuracy, storage,
    heating and device callbacks. The prior packed worker prototype stays retired.

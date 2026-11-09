@@ -9,16 +9,19 @@ import math
 from pathlib import Path
 import subprocess
 
+from cpu_profile import instant_ns
+
 from summarize import ROOT, evidence, read
 from summarize_properties import benchmark
 
 NATIVE_SHA = '1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c'
 
 
-def export_jfr(directory, java_home):
-    source = directory / 'benchmark/substeps.jfr'
-    destination = directory / 'benchmark/jfr-compact.json'
-    metadata = directory / 'benchmark/jfr-compact-export.json'
+def export_jfr(directory, java_home, *, recording='substeps.jfr', export_name='jfr-compact'):
+    assert Path(recording).name == recording and Path(export_name).name == export_name
+    source = directory / 'benchmark' / recording
+    destination = directory / 'benchmark' / (export_name + '.json')
+    metadata = directory / 'benchmark' / (export_name + '-export.json')
     exporter = ROOT / 'tools/experimental/JfrCompact.java'
     source_sha = hashlib.sha256(source.read_bytes()).hexdigest()
     if destination.exists():
@@ -176,7 +179,7 @@ def jfr_profile(path):
                                         server_scope_inclusive_top={name: ranked(counter, 45) for name,counter in scope_frames.items()},
                                         server_leaf_top=ranked(leaf, 30), server_inclusive_top=ranked(inclusive, 40))
     allocated = sorted((event for event in events if event['type'] == 'jdk.ObjectAllocationSample'
-                        and event['thread'] == 'Server thread'), key=lambda row: row['start'])
+                        and event['thread'] == 'Server thread'), key=lambda row: instant_ns(row['start']))
     # Recording starts after warmup. The first allocation sample can carry a
     # weight from before recording; retain it separately, never attribute that
     # weight to an allocation site in the measured window.

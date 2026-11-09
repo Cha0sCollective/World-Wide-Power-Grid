@@ -105,6 +105,8 @@ def summarize(directory):
             cpu_mean_cores=((readings[-1]['cpu_seconds']-readings[0]['cpu_seconds'])/duration if duration else None))
     write(directory/'benchmark/summary.json',report);return report
 def run(args):
+    from cpu_profile import CpuRecording, validate_options
+    validate_options(args)
     directory=safe_directory(args.directory);launch=read(directory/'launch.json')
     if not (directory/'WWPG_BENCHMARK_OWNED.json').is_file():raise ValueError('Not a runner-owned benchmark instance')
     if (directory/'profile-input.json').exists() and not read(directory/'profile-input.json').get('construction_complete'):
@@ -169,6 +171,7 @@ def run(args):
     props['rhsCounters']=str(getattr(args,'rhs_counters',True)).lower()
     props['substeps']=str(getattr(args,'substep_trace',False)).lower()
     props['substepJfr']=str(getattr(args,'substep_jfr',False)).lower()
+    props['cpuJfr']=str(getattr(args,'cpu_jfr',False)).lower()
     if getattr(args,'substep_trace',False) and not args.detailed:raise ValueError('Substep diagnosis requires sampled detailed timers')
     if getattr(args,'substep_jfr',False) and not getattr(args,'substep_trace',False):raise ValueError('Stable JFR requires explicit substep diagnosis')
     if getattr(args,'substep_trace',False) and args.mode!='control':raise ValueError('Substep diagnosis is restricted to the finite stable-only control protocol')
@@ -193,6 +196,7 @@ def run(args):
                 write(directory/'process-affinity.json', pin_owned(process, int(process_mask,16)))
             metrics=ChildMetrics(process.pid)
             metrics_file=(directory/'process-metrics.jsonl').open('w',encoding='utf-8')
+            cpu_recording=CpuRecording(directory,command[0],process) if getattr(args,'cpu_jfr',False) else None
             last=None
             while process.poll() is None:
                 if time.monotonic()-started>args.timeout:raise TimeoutError('Benchmark watchdog expired')
@@ -208,6 +212,8 @@ def run(args):
                         state=read(status);key=(state['phase'],state['tick']//200)
                         if key!=last:print(json.dumps(state),flush=True);last=key
                     except json.JSONDecodeError:pass
+                if cpu_recording is not None:
+                    cpu_recording.observe(state)
                 if process.poll() is None:
                     try:reading=metrics.sample()
                     except OSError:
