@@ -7,8 +7,177 @@
   "description": "Create: Electro Energetics and Power Grid, connected. Build shared stationary electrical circuits with native equipment, wires, and controls.",
   "modrinthUrl": null,
   "publicationReady": true,
-  "currentRelease": "0.2.6",
+  "currentRelease": "0.2.7",
   "releases": [
+    {
+      "version": "0.2.7",
+      "tag": "0.2.7",
+      "commit": "f100a1ff013b4fdb77a4640d50ba676c29ca06a6",
+      "recordsCommit": "cca3c09b36059cc44ec04cc2f03eea449936a460",
+      "channel": "Stable",
+      "date": "2026-11-06",
+      "requirements": {
+        "Minecraft": "1.21.1",
+        "NeoForge": "21.1.231 / 21.1.248",
+        "Java": "21",
+        "Create": "6.0.10-280",
+        "Create: Electro Energetics": "1.21.1-1.1.4 / 1.21.1-1.1.3",
+        "Power Grid": "0.6.2",
+        "Architectury API": "NeoForge 13.0.8"
+      },
+      "optionalRequirements": {
+        "CC;CPG: Pinout": "0.2.1",
+        "CC:Tweaked": "1.120.2"
+      },
+      "downloads": {
+        "jar": "wwpg-0.2.7.jar",
+        "worlds": "wwpg-0.2.7-example-worlds.zip",
+        "checksums": "wwpg-0.2.7-checksums.txt",
+        "sdk": "wwpg-0.2.7-developer-sdk.zip",
+        "verification": "wwpg-0.2.7-verification.zip"
+      },
+      "bundles": {
+        "sdk": {
+          "file": "wwpg-0.2.7-developer-sdk.zip",
+          "sha256": "e030a4065a483a2a306fbf5194611b09d652961221b6f75086ad9e1911c6437e",
+          "files": {
+            "wwpg-api-1.0.0.jar": "api/wwpg-api-1.0.0.jar",
+            "wwpg-cee-api-1.0.0.jar": "api/wwpg-cee-api-1.0.0.jar",
+            "wwpg-api-1.0.0-javadoc.jar": "api/wwpg-api-1.0.0-javadoc.jar",
+            "wwpg-cee-api-1.0.0-javadoc.jar": "api/wwpg-cee-api-1.0.0-javadoc.jar",
+            "wwpg-api-1.0.0-maven.zip": "maven/wwpg-api-1.0.0-maven.zip",
+            "wwpg-api-example-1.0.0-source.zip": "examples/wwpg-api-example-1.0.0-source.zip",
+            "wwpg-upstream-api-example-1.0.0-source.zip": "examples/wwpg-upstream-api-example-1.0.0-source.zip",
+            "tutorial-load-0.1.0-source.zip": "examples/tutorial-load-0.1.0-source.zip"
+          }
+        },
+        "worlds": {
+          "file": "wwpg-0.2.7-example-worlds.zip",
+          "sha256": "c4e2561c5493f6c3d7b88365ae5608d9c520e495c3ca0d4c8ac103ee8f0230c6",
+          "files": {
+            "wwpg-api-example-1.0.0.jar": "workshop-mods/wwpg-api-example-1.0.0.jar",
+            "wwpg-upstream-api-example-1.0.0.jar": "workshop-mods/wwpg-upstream-api-example-1.0.0.jar",
+            "wwpg-0.2.7-stationary-yard.zip": "worlds/wwpg-0.2.7-stationary-yard.zip",
+            "wwpg-0.2.7-api-workshop.zip": "worlds/wwpg-0.2.7-api-workshop.zip",
+            "wwpg-0.2.7-api-workshop-pinout.zip": "worlds/wwpg-0.2.7-api-workshop-pinout.zip",
+            "wwpg-0.2.7-benchmark-14650-nodes.zip": "worlds/wwpg-0.2.7-benchmark-14650-nodes.zip"
+          }
+        }
+      },
+      "guides": [
+        {
+          "source": "docs/INSTALL.md",
+          "slug": "install",
+          "title": "Install WWPG",
+          "description": "Exact dependencies, solver configuration, and installation for clients and servers."
+        },
+        {
+          "source": "docs/SUPPORT.md",
+          "slug": "compatibility",
+          "title": "Supported content",
+          "description": "Supported stationary equipment, native workflows, and the boundaries of this release."
+        },
+        {
+          "source": "docs/STATIONARY_WIRING.md",
+          "slug": "wiring",
+          "title": "Wiring and native tools",
+          "description": "Connect mixed terminals, use duplex cables, measure circuits, and repair native equipment."
+        },
+        {
+          "source": "docs/STATIONARY_YARD.md",
+          "slug": "example-worlds",
+          "title": "Explore the test yards",
+          "description": "A practical tour of the downloadable stationary worlds and optional computer-control exhibits."
+        },
+        {
+          "source": "docs/EXTENSION_API_WORKSHOP.md",
+          "slug": "workshop",
+          "title": "Extension API Workshop",
+          "description": "Try eleven stations using the two released example addons.",
+          "stopBefore": "## For maintainers: build and verify the save"
+        }
+      ],
+      "api": {
+        "version": "1.0.0",
+        "packages": [
+          "org.cha0scollective.wwpg.api",
+          "org.cha0scollective.wwpg.api.neoforge",
+          "org.cha0scollective.wwpg.api.cee"
+        ],
+        "verifier": "tools/verify_extracted_api_sdk.py",
+        "artifacts": {
+          "runtime": {
+            "file": "wwpg-0.2.7.jar",
+            "sha256": "6c1060b17f14df765188a60da154b723705947503a813508a53f62013e625053"
+          },
+          "api": {
+            "file": "wwpg-api-1.0.0.jar",
+            "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892"
+          },
+          "cee_api": {
+            "file": "wwpg-cee-api-1.0.0.jar",
+            "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a"
+          },
+          "example": {
+            "file": "wwpg-api-example-1.0.0.jar",
+            "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef"
+          },
+          "upstream_example": {
+            "file": "wwpg-upstream-api-example-1.0.0.jar",
+            "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11"
+          },
+          "maven": {
+            "file": "wwpg-api-1.0.0-maven.zip",
+            "sha256": "cf4f5653d4f1fa10e9df27af08eb046135783a525d6a9f9c7f7814d2be21bc06"
+          },
+          "example_source": {
+            "file": "wwpg-api-example-1.0.0-source.zip",
+            "sha256": "1bc539e8ce905cb7c486842e65dd5dde2803c4598f800e057ea76922d1b2e663"
+          },
+          "upstream_source": {
+            "file": "wwpg-upstream-api-example-1.0.0-source.zip",
+            "sha256": "f45cc1bec382fbe500e276d2cee90ee8b3bf9a57d8f590e9a1cf1ac1399153bd"
+          },
+          "core_javadoc": {
+            "file": "wwpg-api-1.0.0-javadoc.jar",
+            "sha256": "52df8e9a8badf7a3440f819179c482bfdde2e45a62813f9ca9ded7ca1fc63f25"
+          },
+          "cee_javadoc": {
+            "file": "wwpg-cee-api-1.0.0-javadoc.jar",
+            "sha256": "45c6cc3ed728ca83107c2e8eb5b5d14c4e27e64bbd800777c898bf47155d5ba5"
+          }
+        },
+        "references": [
+          {
+            "id": "core",
+            "title": "Devices & NeoForge",
+            "artifact": "core_javadoc",
+            "packages": [
+              "org.cha0scollective.wwpg.api",
+              "org.cha0scollective.wwpg.api.neoforge"
+            ],
+            "javadocTask": "apiJavadoc",
+            "referenceDirectory": "build/docs/api"
+          },
+          {
+            "id": "cee",
+            "title": "CEE property adapters",
+            "artifact": "cee_javadoc",
+            "packages": [
+              "org.cha0scollective.wwpg.api.cee"
+            ],
+            "javadocTask": "ceeApiJavadoc",
+            "referenceDirectory": "build/docs/cee-api"
+          }
+        ]
+      },
+      "extraSources": [
+        "docs/EXTENSION_API.md",
+        "examples/extension-addon/README.md",
+        "examples/cee-addon/README.md"
+      ],
+      "compatibilityNote": "Complete release acceptance used CEE 1.1.4 on Windows and Linux, with Native and Java and NeoForge 21.1.231 / 21.1.248. CEE 1.1.3 retains its earlier focused compatibility coverage; it was not rerun through the complete 0.2.7 campaign."
+    },
     {
       "version": "0.2.6",
       "tag": "0.2.6",
