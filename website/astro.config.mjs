@@ -50,7 +50,7 @@ export default defineConfig({
           collapsed: release.version !== project.currentRelease,
           items: [
             ...pages,
-            ...(['0.2.1', '0.2.2', '0.2.5', '0.2.6'].includes(release.version) ? [
+            ...(['0.2.1', '0.2.2', '0.2.5', '0.2.6', '0.2.7'].includes(release.version) ? [
               ['Create your own add-on','create-addon/'],
               ['API validation and limits','api-limits/'],
               ['Build, install and debug','addon-workflow/'],
