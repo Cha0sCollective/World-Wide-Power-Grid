@@ -1,0 +1,435 @@
+{
+  "schema": 1,
+  "observed_local_date": "2026-11-09",
+  "scope": "Read-only local pack and benchmark inspection; no performance benchmark or gameplay run",
+  "instance": "C:/Users/Parker/AppData/Roaming/PrismLauncher/instances/Create-Ch4oS-Public-Prism",
+  "instance_settings": [
+    "OverrideMemory=true",
+    "MinMemAlloc=1024",
+    "MaxMemAlloc=14000",
+    "OverrideJavaLocation=true",
+    "OverrideJavaArgs=true",
+    "JvmArgs=-XX:+UseZGC -XX:+ZGenerational",
+    "JavaPath=C:/Users/Parker/AppData/Roaming/PrismLauncher/java/java-runtime-delta/bin/javaw.exe"
+  ],
+  "client_settings": [
+    "enableVsync:false",
+    "graphicsMode:1",
+    "maxFps:60",
+    "renderDistance:12",
+    "simulationDistance:10"
+  ],
+  "loader": [
+    {
+      "cachedName": "LWJGL 3",
+      "cachedVersion": "3.3.3",
+      "cachedVolatile": true,
+      "dependencyOnly": true,
+      "uid": "org.lwjgl3",
+      "version": "3.3.3"
+    },
+    {
+      "cachedName": "Minecraft",
+      "cachedRequires": [
+        {
+          "suggests": "3.3.3",
+          "uid": "org.lwjgl3"
+        }
+      ],
+      "cachedVersion": "1.21.1",
+      "important": true,
+      "uid": "net.minecraft",
+      "version": "1.21.1"
+    },
+    {
+      "cachedName": "NeoForge",
+      "cachedRequires": [
+        {
+          "equals": "1.21.1",
+          "uid": "net.minecraft"
+        }
+      ],
+      "cachedVersion": "21.1.262",
+      "uid": "net.neoforged",
+      "version": "21.1.262"
+    }
+  ],
+  "selected_mods": [
+    {
+      "name": "alltheleaks-1.1.12+1.21.1-neoforge.jar",
+      "sha256": "ca64ec07c29cadb0e7703e993fbaad26029ebc4203626d2638aefe989e5be74f"
+    },
+    {
+      "name": "create-1.21.1-6.0.10.jar",
+      "sha256": "ef87fe5709f1ba1f5b8bb20a2925b5afb4669e178fd6d8bf10c167759eefe37a"
+    },
+    {
+      "name": "electroenergetics-1.21.1-1.1.4.jar",
+      "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+    },
+    {
+      "name": "ferritecore-7.0.3-neoforge.jar",
+      "sha256": "d87ea28262715ebff45b8a82d493e6b468e7a4521bc021df5d88302196d030a8"
+    },
+    {
+      "name": "gpumemleakfix-1.21-1.8.jar",
+      "sha256": "4bd0682e26b8d4ba78442ce8d969fc7fa3cac2c21fc600de34a54b2ff7814931"
+    },
+    {
+      "name": "ImmediatelyFast-NeoForge-1.6.15+1.21.1.jar",
+      "sha256": "7d7b1d7b9f71d5303e42b2fa45f222a5ab06e0ef5982abb6da5dd9cc449b3702"
+    },
+    {
+      "name": "leaky-1.21-3.3.jar",
+      "sha256": "eccaa99b08f021268ceaa4745586a63a9f364c9a0d8bd38acf9d2e4611a22a30"
+    },
+    {
+      "name": "lithium-neoforge-0.15.4+mc1.21.1.jar",
+      "sha256": "488f33216030c1cb0baa33e59de3d657d08d5795a6c2080c8c8bbbc133fc8757"
+    },
+    {
+      "name": "modernfix-neoforge-5.27.26+mc1.21.1.jar",
+      "sha256": "09f6842c63d14b3f1707f1f4a6f4602052f237f7efa9be135e41d3d97acf2a13"
+    },
+    {
+      "name": "powergrid-mc1.21.1-0.6.2.jar",
+      "sha256": "e40d67a874431925d502af88e85064883c67936cfd689033d7df560cffcf19e7"
+    },
+    {
+      "name": "smoothchunk-1.21-4.1.jar",
+      "sha256": "a79f06eaffe7e5b834620da3c2cdad782aeaf4f1f207d03f8b0228a20bab65e3"
+    },
+    {
+      "name": "sodium-extra-neoforge-0.9.3+mc1.21.1.jar",
+      "sha256": "fa553bce38bad6fdd478841a270a79a31dc05f87d7892b1cf839850602ac9186"
+    },
+    {
+      "name": "sodium-neoforge-0.8.13+mc1.21.1.jar",
+      "sha256": "575d187b15328d7bddd8a9b1bee64333c22c14735f5780ec49eac0cd5503c08d"
+    },
+    {
+      "name": "wwpg-0.2.7.jar",
+      "sha256": "6c1060b17f14df765188a60da154b723705947503a813508a53f62013e625053"
+    }
+  ],
+  "all_mod_filenames": [
+    "aeroclaims-0.9.3.jar",
+    "aerocopycats-1.1.1.jar",
+    "aeroworks-1.5.0.jar",
+    "alltheleaks-1.1.12+1.21.1-neoforge.jar",
+    "amendments-1.21-2.1.9-neoforge.jar",
+    "appleskin-neoforge-mc1.21-3.0.9.jar",
+    "architectury-13.0.11-neoforge.jar",
+    "azimuth-1.4.7.jar",
+    "backpacked-neoforge-1.21.1-3.0.5.jar",
+    "balm-neoforge-1.21.1-21.0.65.jar",
+    "bellsandwhistles-0.4.7-1.21.1.jar",
+    "better-compatability-checker-neoforge-21.1.8.jar",
+    "BHMenu-NeoForge-1.21-2.4.4.jar",
+    "bits_n_bobs-2.2.8.jar",
+    "blueprint-1.21.1-8.1.1.jar",
+    "boatiview-neoforge-0.0.6-1.21.1.jar",
+    "boatload-1.21.1-6.0.2.jar",
+    "bookshelf-neoforge-1.21.1-21.1.81.jar",
+    "borderless-neoforge-1.21.1-1.7.5_1-all.jar",
+    "bwncr-neoforge-1.21.1-3.20.4.jar",
+    "caelus-neoforge-7.0.1+1.21.1.jar",
+    "cc-tweaked-1.21.1-forge-1.120.2.jar",
+    "chat_heads-0.15.7-neoforge-1.21.jar",
+    "chunkactivitytracker-neoforge-1.0.1-1.21.1.jar",
+    "clientcrafting-1.21-2.1.jar",
+    "climbable_ropes-2.1.1.jar",
+    "cloth-config-15.0.140-neoforge.jar",
+    "Clumps-neoforge-1.21.1-19.0.0.1.jar",
+    "cmpackagecouriers-neoforge-2.3.0.jar",
+    "cnoregen-1.0.0.jar",
+    "collective-1.21.1-8.39.jar",
+    "colorwheel_patcher-neoforge-1.0.5+mc1.21.1.jar",
+    "colorwheel-neoforge-1.2.9+mc1.21.1.jar",
+    "configurable-3.5.2+1.21.1-neoforge.jar",
+    "ConfiguredDefaults-v21.1.3-1.21.1-NeoForge.jar",
+    "connectivity-1.21.1-7.6.jar",
+    "connector-2.0.0-beta.17+1.21.1-full.jar",
+    "continuity-3.0.0+1.21.neoforge.jar",
+    "Controlling-neoforge-1.21.1-19.0.5.jar",
+    "coppersplashing_1.21.1_v1.jar",
+    "copycats-3.0.8+mc.1.21.1-neoforge.jar",
+    "coroutil-neoforge-1.21.0-1.3.9.jar",
+    "corpse-neoforge-1.21.1-1.1.13.jar",
+    "CrashAssistant-neoforge-1.20.6-1.21.4-1.11.12.jar",
+    "CraterLib-Neoforge-1.21-3.1.2.jar",
+    "Create Encased-1.21.1-1.9.0-ht3.jar",
+    "create_aeronautics_throwable_rope_connector-0.4.3.jar",
+    "create_aeronautics_toolgun-0.3.6.jar",
+    "create_aeronautics_transmission_linkage-0.2.8.jar",
+    "create_aquatic_ambitions-1.21.1-2.0.4.jar",
+    "create_avionics-neoforge-1.21.1-0.6.0.jar",
+    "create_bb-1.0.8-1.21.1.jar",
+    "create_blaze_burner_fuels-1.0.2-neoforge-1.21.1.jar",
+    "create_chocolate_fountain-1.21.1-1.1.0.jar",
+    "create_connected-1.3.2-mc1.21.1.jar",
+    "create_deep_dark-3.0.2-neoforge-1.21.1.jar",
+    "create_factory-0.7b-1.21.1.jar",
+    "create_fantasizing-1.21.1-1.2.0-b3.jar",
+    "create_generators-1.2.5-neoforge-1.21.1.jar",
+    "create_hypertube-0.6.0-NEOFORGE.jar",
+    "create_mob_spawners-1.1.0.jar",
+    "create_mobile_packages-1.21.1-0.7.7.jar",
+    "create_optical-0.4.2.jar",
+    "create_pattern_schematics-2.0.10.jar",
+    "create_submarine-3.3.0.jar",
+    "create_things_and_misc-4.1.1-neoforge-1.21.1.jar",
+    "create_train_parts-0.5.2-1.21.1-6.0.10-281.jar",
+    "create_tweaked_controllers-1.21.1-1.2.7.jar",
+    "create_vibrant_vaults-0.3.2.jar",
+    "create_winery-2.0.2-neoforge-1.21.1.jar",
+    "create_wrapped-1.0.3-neoforge-1.21.1.jar",
+    "create-1.21.1-6.0.10.jar",
+    "create-aeronautics-bundled-1.21.1-1.3.2.jar",
+    "create-central-kitchen-2.6.2b.jar",
+    "create-confectionery1.21.1_v1.1.3b.jar",
+    "create-enchantment-industry-2.4.2.jar",
+    "create-integrated-farming-1.3.3b.jar",
+    "create-new-age-1.2.0+neoforge-mc1.21.1.jar",
+    "create-stockmarket-1.1.1+mc1.21.1.jar",
+    "Create-Structures-Arise-1.21.1-NeoForge-176.49.49.jar",
+    "create-stuff-additions1.21.1_v2.1.4b.jar",
+    "createaddition-1.6.0.jar",
+    "createaeronauticscurios-neoforge-1.21.1-2.2.jar",
+    "createbigcannons-5.11.7+mc.1.21.1.jar",
+    "createcafe-1.4.3.jar",
+    "createdeco-2.1.3.jar",
+    "createdieselgenerators-1.21.1-1.3.15.jar",
+    "CreateDragonsPlus-1.11.9.jar",
+    "CreateFastSchematicCannon-1.4.1-neoforge-1.21.1.jar",
+    "createfood-neoforge-1.21.1-2.7.1.jar",
+    "createframed-1.21.1-1.8.2.jar",
+    "creategarnished-0.1.7.4+1.21.1-neoforged.jar",
+    "createmechanicalconfection-0.3.0.jar",
+    "createmetalwork-2.0.0.jar",
+    "createnuclear-1.3.2-beta.3-neoforge.jar",
+    "CreateNumismatics-1.1.0+neoforge-mc1.21.1-ch4os.1.jar",
+    "createornithopterglider-1.2.0-1.21.1.jar",
+    "createprism-1.2.2.jar",
+    "createpropulsion-1.1.5.jar",
+    "createrailwaysnavigator-neoforge-1.21.1-beta-0.9.1-C6.jar",
+    "createtransmission-1.2.2+neoforge-create6-1.21.1.jar",
+    "cupboard-1.21.1-4.1.jar",
+    "curios-neoforge-9.5.1+1.21.1.jar",
+    "CutThrough-v21.1.0-1.21.1-NeoForge.jar",
+    "Design-n-Decor-1.21.1-2.2b.jar",
+    "despawntweaks-neoforge-1.0.0-1.21.1.jar",
+    "DistantHorizons-3.3.3-1.21.1-fabric-neoforge.jar",
+    "DnDesires-1.21.1-2.3a-BETA.jar",
+    "dragonlib-3.0.29+mc1.21.1-neoforge.jar",
+    "drippyloadingscreen_neoforge_3.1.5_MC_1.21.1.jar",
+    "e4mc-neoforge-6.2.1.jar",
+    "easy_mob_spawn_control-1.6.2.jar",
+    "EasyAnvils-v21.1.0-1.21.1-NeoForge.jar",
+    "EasyMagic-v21.1.4-1.21.1-NeoForge.jar",
+    "electroenergetics-1.21.1-1.1.4.jar",
+    "enchdesc-neoforge-1.21.1-21.1.11.jar",
+    "entity_model_features-3.2.4-1.21-neoforge.jar",
+    "entity_texture_features_1.21-neoforge-7.1.jar",
+    "EpheroLib-1.21.1-NEO-FORGE-1.2.0.jar",
+    "escalated-1.3.2-mc.1.21.1.jar",
+    "EuphoriaPatcher-1.9.3-r5.8.1-neoforge.jar",
+    "extra_create_recipes_1.21.1_v1.jar",
+    "fancymenu_neoforge_3.9.12_MC_1.21.1.jar",
+    "FarmersDelight-1.21.1-1.3.4.jar",
+    "ferritecore-7.0.3-neoforge.jar",
+    "forgified-fabric-api-0.116.15+2.3.6+1.21.1.jar",
+    "framework-neoforge-1.21.1-0.13.11.jar",
+    "ftb-filter-system-neoforge-21.1.4.jar",
+    "ftb-library-neoforge-2101.1.37.jar",
+    "ftb-teams-neoforge-2101.1.11.jar",
+    "ftb-xmod-compat-neoforge-21.1.12.jar",
+    "gadgets-and-gizmos-bundled-V1.2.2.jar",
+    "gallery-1.21.1-2.0.1.jar",
+    "gauged_wires-1.0.6a.jar",
+    "geckolib-neoforge-1.21.1-4.9.3.jar",
+    "GnKinetics-1.21.1-1.0m.jar",
+    "gpumemleakfix-1.21-1.8.jar",
+    "handcrafted-neoforge-1.21.1-4.0.3.jar",
+    "Highlighter-1.21-neoforge-1.1.11.jar",
+    "i_architecture-0.1.1b.jar",
+    "Iceberg-1.21.1-neoforge-1.3.2.jar",
+    "idas-1.13.7+1.21.1-neoforge.jar",
+    "ImmediatelyFast-NeoForge-1.6.15+1.21.1.jar",
+    "immersive_aircraft-1.4.6+1.21.1-neoforge.jar",
+    "integrated_api-neoforge-1.21.1-1.8.0.jar",
+    "integrated_stronghold-1.1.4+1.21.1-neoforge.jar",
+    "integrated_villages-1.3.3+1.21.1-neoforge.jar",
+    "iris-neoforge-1.8.14-beta.1+mc1.21.1.jar",
+    "IrisSearch-1.6.1-neoforge.jar",
+    "Jade-1.21.1-NeoForge-15.10.6.jar",
+    "JadeAddons-1.21.1-NeoForge-6.1.0.jar",
+    "jei-1.21.1-neoforge-19.53.0.426.jar",
+    "justenoughbreeding-neoforge-1.21.1-3.2.1.jar",
+    "JustEnoughProfessions-neoforge-1.21.1-4.0.5.jar",
+    "JustEnoughResources-NeoForge-1.21.1-1.6.0.17.jar",
+    "konkrete_neoforge_1.9.9_MC_1.21.jar",
+    "kotlinforforge-5.12.0-all.jar",
+    "leaky-1.21-3.3.jar",
+    "lithium-neoforge-0.15.4+mc1.21.1.jar",
+    "lithostitched-1.8.0-neoforge-21.1.jar",
+    "lmft-1.1.1+1.21.9-neoforge.jar",
+    "logfilter-neoforge-1.21.1-1.1.2.jar",
+    "lootintegrations-1.21.1-4.7.jar",
+    "mapsyncer-1.0.4-neoforge-1.21.jar",
+    "mechanical_botany-1.1.3+1.21.1-neoforged.jar",
+    "melody_neoforge_1.0.10_MC_1.21.jar",
+    "modernfix-neoforge-5.27.26+mc1.21.1.jar",
+    "moonlight-1.21.1-3.5.2-neoforge.jar",
+    "MouseTweaks-neoforge-mc1.21-2.26.1.jar",
+    "neruina-3.3.3+1.21.1-neoforge.jar",
+    "netherportalfix-neoforge-1.21.1-21.1.1.jar",
+    "NoChatReports-NEOFORGE-1.21.1-v2.9.1.jar",
+    "NoChatRestrictions-NeoForge-MC1.21.11-v1.0.2.jar",
+    "notenoughanimations-neoforge-1.12.6-mc1.21.1.jar",
+    "open-parties-and-claims-neoforge-1.21.1-0.30.3.jar",
+    "packetfixer-3.3.1-1.20.5-1.21.X-merged.jar",
+    "Patchouli-1.21.1-93-NEOFORGE.jar",
+    "Paxi-1.21.1-NeoForge-5.1.3.jar",
+    "personality-1.21.1-5.0.2.jar",
+    "petrochem-neoforge-1.21.1-1.3.2.jar",
+    "petrolpark-1.21.1-1.5.11.jar",
+    "petrolsparts-1.21.1-1.3.7.jar",
+    "PickUpNotifier-v21.1.1-1.21.1-NeoForge.jar",
+    "pinout-0.2.1.jar",
+    "pipeorgans-0.9.2.1+1.21.1.jar",
+    "Placebo-1.21.1-9.9.2.jar",
+    "player-animation-lib-forge-2.0.4+1.21.1.jar",
+    "polymorph-neoforge-1.2.0+1.21.1.jar",
+    "power-components-1.3.0.jar",
+    "powergrid_batteries-1.0.1.jar",
+    "powergrid-mc1.21.1-0.6.2.jar",
+    "prickle-neoforge-1.21.1-21.1.11.jar",
+    "PuzzlesLib-v21.1.52-1.21.1-NeoForge.jar",
+    "Quark-4.1-487.jar",
+    "railways-0.3.0-beta.2+neoforge-mc1.21.1.jar",
+    "recipeessentials-1.21.1-4.7.jar",
+    "redirected-neoforge-1.0.0-1.21.1.jar",
+    "reliable_recipes-neoforge-1.21.1-3.1.5.jar",
+    "reliable_remover-neoforge-1.21.1-2.12.1.jar",
+    "resourcefullib-neoforge-1.21-3.0.12.jar",
+    "ResourcePackOverrides-v21.1.0-1.21.1-NeoForge.jar",
+    "ritchiesprojectilelib-2.1.2-mc.1.21.1-neoforge.jar",
+    "rolling-tones-0.2.2.jar",
+    "rubberworks-neoforge-1.21.1-1.1.4.jar",
+    "sable-neoforge-1.21.1-2.0.5.jar",
+    "sablejade-1.3.0.jar",
+    "SableStuffAdditionsCompat v1.0.3-1.21.1.jar",
+    "sablexaeromaps-1.21.1-1.4.0.jar",
+    "Searchables-neoforge-1.21.1-1.0.2.jar",
+    "serverbrowser-neoforge-1.4.2-1.21.1.jar",
+    "SimpleRPC-4.1.4.jar",
+    "simulatedcoasters-0.1.5.jar",
+    "skinlayers3d-neoforge-1.11.2-mc1.21.1.jar",
+    "sliceanddice-4.3.4-neoforge.jar",
+    "smarterfarmers-1.21-2.2.4-neoforge.jar",
+    "smoothchunk-1.21-4.1.jar",
+    "snassets-1.0.2.jar",
+    "sodium-extra-neoforge-0.9.3+mc1.21.1.jar",
+    "sodium-neoforge-0.8.13+mc1.21.1.jar",
+    "someassemblyrequired-5.2.8.jar",
+    "structureessentials-1.21.1-5.0.jar",
+    "struts-1.3.1.jar",
+    "supplementaries-1.21.1-3.9.5-neoforge.jar",
+    "tacz-neoforge-1.21.1-1.1.8-hotfix-r7.jar",
+    "tacz-tweaks-3.0.0-alpha.10+1.21.1-neoforge.jar",
+    "tectonic-3.0.28-neoforge-21.1.jar",
+    "TerraBlender-neoforge-1.21.1-4.1.0.8.jar",
+    "Terralith_1.21.1_v2.6.2_Neoforge.jar",
+    "ToastControl-1.21.1-9.0.1.jar",
+    "tracks-neoforge-1.21.1-1.0.1.jar",
+    "tradeworks-1.0.7.jar",
+    "trading_floor-3.0.16.jar",
+    "TradingPost-v21.1.1-1.21.1-NeoForge.jar",
+    "txnilib-neoforge-1.0.24-1.21.1.jar",
+    "VisualWorkbench-v21.1.1-1.21.1-NeoForge.jar",
+    "watut-neoforge-1.21.0-1.2.7.jar",
+    "wwpg-0.2.7.jar",
+    "xaerominimap-neoforge-1.21.1-26.4.2.jar",
+    "xaeroworldmap-neoforge-1.21.1-1.45.0.jar",
+    "yet_another_config_lib_v3-3.8.2+1.21.1-neoforge.jar",
+    "YungsApi-1.21.1-NeoForge-5.1.8.jar",
+    "YungsBetterMineshafts-1.21.1-NeoForge-5.1.1.jar",
+    "Zeta-1.1-40.jar"
+  ],
+  "source_hashes": [
+    {
+      "path": "C:\\Users\\Parker\\AppData\\Roaming\\PrismLauncher\\instances\\Create-Ch4oS-Public-Prism\\instance.cfg",
+      "sha256": "6b17f9444eae1dbbe452e71467badf34e389d39b4ff004a925e909e78ccff1a3"
+    },
+    {
+      "path": "C:\\Users\\Parker\\AppData\\Roaming\\PrismLauncher\\instances\\Create-Ch4oS-Public-Prism\\mmc-pack.json",
+      "sha256": "50c58dc33747b46f9217ea741d67bb32c6086a60ef77132638e0b7d46baa5401"
+    },
+    {
+      "path": "C:\\Users\\Parker\\AppData\\Roaming\\PrismLauncher\\instances\\Create-Ch4oS-Public-Prism\\.minecraft\\options.txt",
+      "sha256": "1192615626636d6c2fd4d3249ce1605311f94aa7e55d6fce4cffeb1885030f8b"
+    },
+    {
+      "path": "C:\\Users\\Parker\\AppData\\Roaming\\PrismLauncher\\instances\\Create-Ch4oS-Public-Prism\\.minecraft\\config\\modernfix-mixins.properties",
+      "sha256": "7334ef900fa2206d42b1ef6082fd0be44670eedb7756cf4cc610a278360138a4"
+    },
+    {
+      "path": "C:\\Users\\Parker\\AppData\\Roaming\\PrismLauncher\\instances\\Create-Ch4oS-Public-Prism\\.minecraft\\config\\modernfix-common.toml",
+      "sha256": "72ca2bcea2a9946a3a54842f14eff6f7b47d8fc96ef497c1b56406643b153fd7"
+    },
+    {
+      "path": "C:\\Users\\Parker\\AppData\\Roaming\\PrismLauncher\\instances\\Create-Ch4oS-Public-Prism\\.minecraft\\config\\lithium.properties",
+      "sha256": "6cf6f83720071fd1657c8e79b357caf68d40f410ae123e5f922483eb1d1d25be"
+    },
+    {
+      "path": "C:\\Users\\Parker\\AppData\\Roaming\\PrismLauncher\\instances\\Create-Ch4oS-Public-Prism\\.minecraft\\config\\ferritecore-mixin.toml",
+      "sha256": "1356f9d52b2dcb2afa5a593e53c286d9c1c3778a6f8b1cf761953b185b7dce78"
+    },
+    {
+      "path": "C:\\Users\\Parker\\AppData\\Roaming\\PrismLauncher\\instances\\Create-Ch4oS-Public-Prism\\.minecraft\\config\\sodium-options.json",
+      "sha256": "83382a928cf781c7beb8de03662ad13bdf21a87df571acd6e8106bf00d24695e"
+    },
+    {
+      "path": "C:\\Users\\Parker\\AppData\\Roaming\\PrismLauncher\\instances\\Create-Ch4oS-Public-Prism\\.minecraft\\config\\immediatelyfast.json",
+      "sha256": "030d7c2c4b33a367d6e0ac009e0c47523c61d38ccb9fb68ea920f773645d6f19"
+    },
+    {
+      "path": "C:\\Users\\Parker\\AppData\\Roaming\\PrismLauncher\\instances\\Create-Ch4oS-Public-Prism\\.minecraft\\config\\smoothchunk.json",
+      "sha256": "62d4312f4a565190f18cd84aec3860427029ff4501ca940c572d9f7d28085716"
+    },
+    {
+      "path": "C:\\Users\\Parker\\AppData\\Roaming\\PrismLauncher\\instances\\Create-Ch4oS-Public-Prism\\.minecraft\\config\\leaky.json",
+      "sha256": "8e35f32de25ed00d1b4e065a2d26bd765481d74e741f69207c1143a9fed882ed"
+    },
+    {
+      "path": "C:\\Users\\Parker\\AppData\\Roaming\\PrismLauncher\\instances\\Create-Ch4oS-Public-Prism\\.minecraft\\config\\alltheleaks.json",
+      "sha256": "2437057bda7e53d91e7a8c400da308a8d848fbdcc80ed845a9c8dbdabd071482"
+    }
+  ],
+  "benchmark": {
+    "attempt": "goal-native-residual-candidate-03",
+    "heap_flags": [
+      "-Xms512M",
+      "-Xmx8G"
+    ],
+    "java": "Temurin 21.0.12+8",
+    "collector": "G1 selected by fresh -XX:+PrintCommandLineFlags -version probe using benchmark heap flags; no explicit GC flag in recorded benchmark launch",
+    "gc_ms": 92,
+    "heap_peak_bytes": 1442410768,
+    "mods": [
+      "architectury-13.0.8-neoforge.jar",
+      "create-1.21.1-6.0.10-280.jar",
+      "electroenergetics-1.21.1-1.1.4.jar",
+      "powergrid-mc1.21.1-0.6.2.jar",
+      "wwpg-0.2.7-experimental.native-residual-candidate.jar",
+      "wwpg-benchmark-0.1.0-affinity.jar"
+    ]
+  },
+  "notes": [
+    "Logs confirm Microsoft Java 21.0.7 and ModernFix/Lithium/Sodium loading in the pack. Collector flags are configured in instance.cfg; no JVM was running at the final process check.",
+    "Sable disables several Lithium mixin groups in the pack log; Lithium config itself has no user overrides.",
+    "WWPG/PG/CEE installed jar hashes match the published WWPG baseline and pinned PG/CEE inputs. Create jar differs from benchmark.",
+    "Hashes identify inspected local files; those files may later change. Full launcher configuration and logs were not copied."
+  ]
+}
