@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "passed": true,
+  "result": {
+    "path": "docs/experimental/ch4os-performance-results-20261109.json",
+    "sha256": "0ded74869c6c8881ea7aa6b32ed3673b080148eacf60de527a585199b4519dd7"
+  },
+  "tool": {
+    "path": "tools/experimental/summarize_ch4os_trial.py",
+    "sha256": "dfd5ffd4d08ab97aa2d1fa8e939d2fcb384db70cd23f01a38e0fc3d232a1b3d1"
+  },
+  "bundle_files_verified": 26,
+  "java_files_verified": 4,
+  "retained_source_hashes": 450,
+  "matching_wwpg_and_helper": true,
+  "matching_native_identity": true,
+  "actual_public_java_zgc_heap_confirmed": true,
+  "performance_mods_verified": 12,
+  "lithium_exclusions_verified": 4,
+  "source_save_checks_passed": true,
+  "full_suite": false,
+  "graphical_acceptance": false
+}

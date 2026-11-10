@@ -1,5 +1,10 @@
 # Ch4oS runtime audit — November 9, 2026
 
+Follow-up: the user-requested [server-performance trial](CH4OS_PERFORMANCE_TRIAL.md)
+has now completed. The combined Public server mod/JVM/heap setup was slower
+on the copied yard; client rendering gains remain unmeasured. The audit below
+preserves the original inspection and proposed attribution steps.
+
 Read-only inspection of the local `Create-Ch4oS-Public-Prism` instance and the
 WWPG experimental benchmark. This identifies candidates for later focused
 comparisons; it does not measure their contribution. No gameplay benchmark,
