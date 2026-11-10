@@ -1,6 +1,6 @@
 # Supported stationary content
 
-WWPG 0.2.7 lets **Create: Electro Energetics (CEE)** and **Power Grid (PG)** work
+WWPG 0.2.8-beta1 lets **Create: Electro Energetics (CEE)** and **Power Grid (PG)** work
 together in stationary factories: equipment built in the world that stays in
 place. Either mod can supply power to the other's supported equipment, and you
 can connect and measure circuits with either mod's tools.
@@ -73,7 +73,7 @@ placed and powered. Copying a design creates separate components; editing or
 reloading an installed design keeps its existing connections and component
 identities.
 
-With **CC;CPG: Pinout 0.2.1 and CC:Tweaked 1.120.2**, computers can switch all eight
+With **CC;CPG: Pinout 0.2.1 and CC:Tweaked 1.121.0**, computers can switch all eight
 pins and read signed voltages through Pinout's normal Lua API. Lua common pin 9
 maps to PG terminal 0; pins 1–8 retain their numbering. Use either wire system to
 control supported mixed equipment. The [Pinout yard instructions](STATIONARY_YARD.md#computer-controls-in-the-pinout-edition)
@@ -97,7 +97,7 @@ The release retains **164 base behavior groups, or 165 with optional Pinout**.
 The [beta.5 support matrix](../release/0.1.0-beta.5/supported-content.json) and
 [registry inventory](../release/0.1.0-beta.5/registry-inventory.json) provide the
 item-by-item baseline, including cosmetic variants, ingredients, assembly parts
-and deferred moving content. The [0.2.7 verification record](../release/0.2.7/verification.json)
+and deferred moving content. The [prerelease acceptance record](../release/0.2.8-beta1/ACCEPTANCE.md)
 checks that baseline with the new jar and worlds, alongside the add-on examples.
 Older published artifacts, support claims and check records remain unchanged.
 

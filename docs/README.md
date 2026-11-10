@@ -1,12 +1,11 @@
 # Documentation
 
-This branch prepares **0.2.8-rc.1**. See the [new circuit library](CIRCUIT_LIBRARY.md)
-and [control promotion record](developer/CONTROL_PROMOTION_028.md). Its release
-acceptance is still pending. The installation guide identifies the candidate inputs;
-preserved release notes and earlier evidence retain their original version labels.
-
-These guides describe **WWPG 0.2.7**, its supported stationary factories, and
-**extension API 1.0.0**. Start with the page that matches what you want to do.
+These guides describe **WWPG 0.2.8-beta1 (prerelease)**, its supported stationary
+factories and **extension API 1.0.0**. The previous stable release is 0.2.7.
+Start with the page that matches what you want to do. The [circuit library](CIRCUIT_LIBRARY.md)
+and [control promotion record](developer/CONTROL_PROMOTION_028.md) describe the
+retained improvements; [acceptance](../release/0.2.8-beta1/ACCEPTANCE.md) preserves
+the completed campaign's actual source and artifact identities.
 
 ## Play and run a server
 

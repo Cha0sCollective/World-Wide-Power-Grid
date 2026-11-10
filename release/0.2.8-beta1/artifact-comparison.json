@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "scope": "runtime_version_only",
+  "previous_source_sha": "74c278628a73743209473a0261e743baa72fe9c9",
+  "previous_version": "0.2.8-rc.1",
+  "version": "0.2.8-beta1",
+  "passed": true,
+  "artifacts": [
+    {
+      "role": "runtime",
+      "previous": {
+        "path": "local/package-028-05/wwpg-0.2.8-rc.1.jar",
+        "sha256": "33248a5864168a8a87b8c82bf826777c414756fd7b920a80e18a9495ca8f0a47",
+        "bytes": 5188791
+      },
+      "current": {
+        "path": "local/beta1-promotion-01/wwpg-0.2.8-beta1.jar",
+        "sha256": "30689bd0951c1b82bde1383e3b007efefc1d5adec3a83e700e3372740a3dafb5",
+        "bytes": 5188791
+      },
+      "compared_entries": 356,
+      "changed_entries": [
+        "META-INF/neoforge.mods.toml"
+      ],
+      "native_hashes": {
+        "native/wwpg/linux/libpowergridNative7.so": "c90e98869ed32ed8bff68aa5a856f4507ca09025a6152d9df718115637c8e837",
+        "native/wwpg/safe/linux/libpowergridNative7.so": "ebbe34d6b59acd5472d60d1d4802a890f960e4e9cd3e1389632b170f362a4124",
+        "native/wwpg/safe/windows/libpowergridNative7.dll": "785f96cf308e3396edfd9e478fb6bc313efdd8d5922d0a68c4f07276ef6b2ecc",
+        "native/wwpg/windows/libpowergridNative7.dll": "3150ba018b68ef173332a31b041b25cd8c6501394c4e9222aaa4c3ac9eeb16f4"
+      }
+    },
+    {
+      "role": "gametest",
+      "previous": {
+        "path": "local/package-028-05/wwpg-0.2.8-rc.1-gametests.jar",
+        "sha256": "0576a57c6954cb3358124fcfdc7dfa178099362719e5df23a068cbeb82907996",
+        "bytes": 1437607
+      },
+      "current": {
+        "path": "local/beta1-promotion-01/wwpg-0.2.8-beta1-gametests.jar",
+        "sha256": "5e1f5442f4987d6427a7c0ef60cc6fcd085af7b1830db638c15b152597ced03b",
+        "bytes": 1437608
+      },
+      "compared_entries": 513,
+      "changed_entries": [
+        "META-INF/neoforge.mods.toml"
+      ],
+      "native_hashes": {}
+    }
+  ]
+}

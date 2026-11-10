@@ -2,7 +2,19 @@
 
 ## Unreleased
 
-### 0.2.8-rc.1 candidate
+## 0.2.8-beta1 — 10 November 2026 (prerelease)
+
+- Enable retained PG/CEE wire batching, bounded and prioritized restoration,
+  extra chunk-loading work, reviewed geometry reuse and scoped holds by default.
+  Preserve serial electrical substeps and conservative fallbacks.
+- Retain exact native reductions and matrix/factor lifetime safeguards on both
+  Windows and Linux. Add twelve circuit fixtures using thirteen schematic inputs.
+- Promote the tested rc.1 build through version-only artifact comparisons. Carry
+  forward 542-job headless coverage and all 12 graphical scenarios under their
+  actual source identities; preserve the unexplained original motor assertion
+  failure and its passing unchanged repeat. API 1.0.0 is unchanged.
+
+### 0.2.8-rc.1 candidate (historical campaign)
 
 - Promote the experimental control's plain-wire and CEE property-source batching,
   saved wire-tree restoration queue, cooperative work budget, unresolved-wire

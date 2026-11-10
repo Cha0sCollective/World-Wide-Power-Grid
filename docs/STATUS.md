@@ -1,17 +1,10 @@
 # Current status
 
-The isolated **0.2.8-rc.1 candidate** promotes the experimental control and adds
-[twelve circuit fixtures](CIRCUIT_LIBRARY.md). Its complete release acceptance
-is in progress. The stable release described below remains 0.2.7.
-
-**[WWPG 0.2.7](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.7)**
-is the stable release. It supports the declared stationary factories and
-optional Pinout computer control, and includes **extension API 1.0.0** for
-add-on developers. Existing 0.1.0-beta.5 and beta.4 worlds remain compatible; update WWPG on
-the server and every client using the [installation guide](INSTALL.md).
-NeoForge **21.1.231 and 21.1.248** are tested. Newer NeoForge, Create, CEE and
-Power Grid versions are allowed to load for player testing; see
-[version compatibility](VERSION_COMPATIBILITY.md) for the tested combination.
+**[WWPG 0.2.8-beta1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8-beta1)**
+is the current prerelease. It promotes the experimental control, enables its
+retained improvements by default and adds [twelve circuit fixtures](CIRCUIT_LIBRARY.md).
+The previous stable release remains **0.2.7**. Extension API **1.0.0** is unchanged.
+Use matching server/client mods from the [installation guide](INSTALL.md).
 
 ## What works
 
@@ -47,24 +40,21 @@ a repaired device. The [developer contract](EXTENSION_API.md) explains those rul
 
 ## What was checked
 
-0.2.7 reuses the qualified dev.128 runtime after entry-by-entry comparisons.
-Only release-version metadata changes in the gameplay jar and matching test
-companion. The preserved campaign passed 350 full headless jobs on Windows and
-Ubuntu 24.04, Native/Java, BASE/PINOUT and NeoForge 21.1.231/21.1.248, plus all 12
-separate Windows graphical scenarios. Full acceptance used CEE 1.1.4.
+The rc.1 campaign supplied validated coverage for all **542 required headless jobs**
+across Windows/Linux, Native/Java and BASE/PINOUT, with NeoForge 21.1.265 as the
+complete primary runtime and separate 21.1.231/21.1.248 compatibility lanes.
+All **12 real Windows client scenarios** passed, including two-client controls,
+native tools, readings and Save and Quit. Actual loaded dependency hashes are retained.
 
-Preparation passed 130 unit tests per OS and independently compiled the extracted
-SDK examples and starter. Distinct cold restarts, unload/recovery, rejection,
-stored-state and exact exported-world reopens remain covered. Client scenarios
-include real input, two TCP clients and successful Save and Quit or clean server
-shutdown. Their WWPG electrical diagnostic lists are empty.
+0.2.8-beta1 carries that evidence forward after entry-by-entry comparisons prove
+that only declared runtime/companion version metadata changes. The worlds retain
+their native save bytes; their release labels change. This promotion does not
+represent a fresh full-suite run. SDK documentation and packaging receive focused checks.
 
-The companion contains 378 GameTest methods. The [verification record](../release/0.2.7/verification.json)
-retains original execution sources, artifact hashes, failed attempts and the
-validated continuations; reuse does not describe a fresh suite run on release
-metadata. SDK documentation and packaging have their own focused checks.
-CEE 1.1.3 and optional integration records retain their actual earlier identities.
-No new performance campaign or exhaustive graphical gallery was run.
+One initial Linux Native/.248 motor assertion failed. Its complete unchanged
+four-phase repeat and eight diagnostic phases passed; the initial cause remains
+unknown. The original failure remains in the [acceptance record](../release/0.2.8-beta1/ACCEPTANCE.md)
+and verification download, separate from the passing coverage.
 
 ## Generator and transformer fixes
 

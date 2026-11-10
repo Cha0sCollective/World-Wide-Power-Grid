@@ -84,6 +84,9 @@ for this case and records its actual project checkout separately.
 3. Edit [release/presentation.json](../release/presentation.json): write a short
    player-facing summary and up to three highlights; confirm installation versions.
    An empty highlights list is allowed. Use the changelog for the full detail.
+   For a prerelease published from an isolated branch, set `documentation_ref`
+   to its release version so the notes link that tag's installation and support
+   guides. Omitting it keeps the existing `main` guide links.
 4. Create a fresh accepted bundle:
 
 ```text

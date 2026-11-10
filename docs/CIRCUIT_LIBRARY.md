@@ -1,4 +1,4 @@
-# Circuit library for 0.2.8-rc.1
+# Circuit library for 0.2.8-beta1
 
 This prerelease adds twelve circuit assemblies to release testing. They operate
 real PG boards, native inputs, wires and loads. The verification download carries

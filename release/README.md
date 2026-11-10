@@ -9,6 +9,15 @@ is the current stable release. To install it or choose a playable world, use the
 [installation guide](../docs/INSTALL.md). This directory is for reviewing what
 was shipped and which checks passed.
 
+## Current prerelease: 0.2.8-beta1
+
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8-beta1)
+· [Acceptance and retained findings](0.2.8-beta1/ACCEPTANCE.md).
+
+Promotes the experimental control with default-on loading and wire-processing
+improvements and twelve circuit fixtures. Retains the completed rc.1 acceptance
+after version-only comparisons:542headless jobs and12real-client scenarios.
+
 ## Current stable: 0.2.7
 
 [Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.7)
