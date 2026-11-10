@@ -1,5 +1,9 @@
 # Offline native residual layouts, November 9, 2026
 
+This is the offline checkpoint. The subsequent
+[native runtime comparison](NATIVE_RESIDUAL_RUNTIME.md) completes integration
+and focused checks, with host contention limiting its performance conclusion.
+
 The four-row SIMD prototype reduces residual multiplication time by about
 30% on three actual 14,925-row benchmark inputs. Both scalar row layouts are
 slower. The SIMD result is an offline lead: it has not been integrated into

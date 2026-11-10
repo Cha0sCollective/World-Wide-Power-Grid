@@ -13,6 +13,17 @@ no full headless or graphical acceptance suite is implied by this investigation.
 
 ## Current evidence and open requirements
 
+- The [native residual-cache runtime comparison](NATIVE_RESIDUAL_RUNTIME.md)
+  completed with 24 selected game fixtures per variant and all 17 cache
+  allocation-failure points passing. Control/candidate measured 20.014/17.842
+  TPS, 47.830/55.890 ms mean and 55.778/73.374 ms p95. Another Java process
+  averaged 1.563 CPU cores during the candidate observation; the runs were
+  also about an hour apart. The comparison cannot establish a causal gain or
+  regression. Do not adopt the cache on this evidence. Both saves and yard
+  checks passed; headless restoration was 33.466/42.528 seconds. No new rendered
+  loading result or full acceptance was added. The user requested stopping
+  after this comparison, so further investigation is paused.
+
 - The current experimental prototype is `0.2.7-experimental.wiretree.11`,
   frozen at `local/frozen/prototype-12g/inputs.json`, with opt-in
   [scoped restoration](SCOPED_RESTORATION.md). Independent circuits now continue
