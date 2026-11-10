@@ -13,6 +13,13 @@ no full headless or graphical acceptance suite is implied by this investigation.
 
 ## Current evidence and open requirements
 
+- The user-requested [residual-cache rerun](NATIVE_RESIDUAL_RUNTIME.md#user-requested-rerun)
+  completed at 20.030 TPS, 48.659 ms mean and 57.194 ms p95 with much lower host
+  contention. Headless restoration was 35.590 seconds. All copied-yard/save
+  checks passed. Mean and p95 remain above the earlier control's 47.830/55.778
+  ms, so an in-game benefit is not established and the consistency gate remains
+  unmet. The cache remains experimental. Testing stopped after this rerun.
+
 - The [native residual-cache runtime comparison](NATIVE_RESIDUAL_RUNTIME.md)
   completed with 24 selected game fixtures per variant and all 17 cache
   allocation-failure points passing. Control/candidate measured 20.014/17.842

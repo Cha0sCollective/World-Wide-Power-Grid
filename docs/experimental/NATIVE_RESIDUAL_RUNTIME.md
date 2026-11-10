@@ -85,3 +85,28 @@ The retained `prototype-12g` runtime remains unchanged. One completed pair
 would still require repeatability evidence before claiming consistent 20 TPS.
 Headless restoration does not measure complete rendered loading. No new full
 headless or graphical acceptance is authorized or performed.
+
+## User-requested rerun
+
+After the user paused/closed the other workload, `goal-native-residual-candidate-03`
+completed with a fresh copied save and the identical frozen candidate/helper.
+Its preflight averaged 1.50% selected-CPU load. All graph, storage, 16-substep,
+native identity, original/copy save-integrity and normal-shutdown checks passed.
+
+The 2,401-tick stable sample measured **20.030 TPS**, **48.659 ms mean**,
+**57.194 ms p95**, **68.631 ms p99**, and **89.365 ms maximum**. Headless
+restoration took **35.590 seconds**. Other-process CPU averaged 0.676 cores,
+compared with 2.036 during attempt 02 and 0.335 during the earlier control.
+The prior heavy Java process was no longer among the leading CPU consumers.
+
+Relative to the preserved control, mean tick time was 0.830 ms higher (1.73%)
+and p95 was 1.416 ms higher. Host conditions and run times still differ; this
+is not a repeatable causal estimate. The rerun meets average 20 TPS but misses
+the p95 <=50 ms consistency gate. The offline gain has not demonstrated an
+in-game improvement, so the recommendation remains to keep the cache experimental.
+
+[Rerun results](native-residual-runtime-rerun-results-20261109.json) and its
+[verification](native-residual-runtime-rerun-verification-20261109.json) preserve
+the new observation separately. Earlier focused correctness evidence was
+verified and reused, not rerun or relabeled. Testing stopped after this requested
+rerun; the retained gameplay build and prior evidence remain unchanged.
