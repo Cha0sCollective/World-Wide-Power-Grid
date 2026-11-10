@@ -30,6 +30,10 @@ Use the full Create release jar. [The dependency list](../release/artifacts.json
 
 To control circuits with computers, also install **CC;CPG: Pinout 0.2.1** and **CC:Tweaked 1.121.0** (labelled beta by its publisher) on the server and every client. Use the **Stationary Test Yard — Pinout** world for its ready-made programs. These two mods are optional for ordinary WWPG factories; [their download records](../release/optional-artifacts.json) identify the exact files.
 
+CC:Tweaked 1.121.0 requires NeoForge 21.1.265 or newer. The older NeoForge
+compatibility lanes use CC:Tweaked 1.120.2 separately; keep that older dependency
+set together when reproducing an older-loader result.
+
 ## Installation
 
 1. [Download the WWPG jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.8-rc.1/wwpg-0.2.8-rc.1.jar).

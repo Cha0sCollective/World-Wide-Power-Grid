@@ -23,6 +23,7 @@ final class RuntimeInputAudit {
             for(var entry:lock.entrySet()) {
                 var expected=entry.getValue().getAsJsonObject();String id=entry.getKey();
                 boolean required=!expected.get("optional").getAsBoolean();
+                if(id.equals("computercraft")&&Boolean.getBoolean("wwpg.test.legacyComputerRuntime")) expected=expected.getAsJsonObject("legacy");
                 if(id.equals("pinout")||id.equals("computercraft")) required="PINOUT".equals(System.getProperty("wwpg.test.profile","BASE"));
                 if(id.equals("moregrid")) required=Set.of("fused-latch","relay-heater","quiet-heater").contains(System.getProperty("wwpg.test.circuit",""));
                 var actual=loaded.get(id);

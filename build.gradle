@@ -61,6 +61,8 @@ repositories {
 
 def releaseArtifacts = new groovy.json.JsonSlurper().parse(file('release/artifacts.json'))
 def optionalArtifacts = new groovy.json.JsonSlurper().parse(file('release/optional-artifacts.json'))
+def compatibilityArtifacts = new groovy.json.JsonSlurper().parse(file('release/compatibility-artifacts.json'))
+def legacyComputerRuntime = neo_version.startsWith('21.1.') && neo_version.split('\\.')[2].toInteger() < 265
 def testProfile = providers.gradleProperty('testProfile').getOrElse('BASE').toUpperCase()
 if (!(testProfile in ['BASE', 'PINOUT'])) throw new GradleException('testProfile must be BASE or PINOUT')
 configurations { pgNativeReference; upstreamArtifacts; optionalReference }
@@ -92,6 +94,7 @@ neoForge {
             systemProperty 'wwpg.test.backend', providers.gradleProperty('testBackend').getOrElse('NATIVE')
             systemProperty 'wwpg.restorationBatch', providers.gradleProperty('testRestorationBatch').getOrElse('true')
             systemProperty 'wwpg.test.expectedNeoForge', neo_version
+            systemProperty 'wwpg.test.legacyComputerRuntime', legacyComputerRuntime.toString()
             systemProperty 'wwpg.test.circuit', providers.gradleProperty('testCircuit').getOrElse('')
             systemProperty 'wwpg.test.restartPhase', providers.gradleProperty('restartPhase').getOrElse('SETUP')
             systemProperty 'wwpg.test.multiplayer', providers.gradleProperty('multiplayer').getOrElse('false')
@@ -110,8 +113,10 @@ neoForge.runs.named('gameTestServer') { loadedMods = [neoForge.mods.wwpg, neoFor
 dependencies {
     optionalArtifacts.artifacts.each {
         optionalReference(it.coordinate) { transitive = false }
-        compileOnly(it.coordinate) { transitive = false }
-        if (testProfile == 'PINOUT') runtimeOnly(it.coordinate) { transitive = false }
+        def minimum = it.role == 'computercraft' ? compatibilityArtifacts.computercraft.coordinate : it.coordinate
+        compileOnly(minimum) { transitive = false }
+        def runtime = legacyComputerRuntime && it.role == 'computercraft' ? minimum : it.coordinate
+        if (testProfile == 'PINOUT') runtimeOnly(runtime) { transitive = false }
     }
     releaseArtifacts.artifacts.findAll { it.role != 'pg_native_reference' }.each {
         upstreamArtifacts(it.coordinate) { transitive = false }

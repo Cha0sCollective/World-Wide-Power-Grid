@@ -125,3 +125,21 @@ manual `.github/workflows/build.yml`. No suite has started at this checkpoint.
   with the real default `verify=false` setting. Final full acceptance remains fresh.
 - Both independently built example jars match the published 1.0.0 outputs.
 - Ready to freeze source and run the explicitly requested full release matrix.
+
+### First full attempt and compatibility repair
+
+Source `047b7360b4a68ebfa92cb680a42c160d48076ba4`, GitHub Actions run
+`42797411653`, preserves the first full attempt. Canonical Linux preparation
+and Windows units/extracted SDK passed. All eight older-loader PINOUT jobs
+failed before testing because CC:Tweaked 1.121.0 declares NeoForge >=21.1.265.
+The primary .265 and BASE jobs continued; this attempt is not a release pass.
+
+The repair retains current CC:Tweaked for .265 and separately locks 1.120.2
+for older-loader compatibility and minimum compile inputs. Runtime input auditing
+distinguishes both exact jar hashes. The gameplay jar remains byte-identical
+to the canonical first-attempt jar (`33248a5864168a8a87b8c82bf826777c414756fd7b920a80e18a9495ca8f0a47`).
+The updated audit changes the fixture companion, so the final complete campaign
+must use a fresh freeze rather than relabel the earlier attempt.
+
+Focused powered Pinout/platform checks now pass on .248 Native, .231 Java and
+.265 Native (five checks each), with actual dependency-file auditing enabled.

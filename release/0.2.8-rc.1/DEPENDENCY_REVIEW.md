@@ -9,6 +9,8 @@ The adjacent version-list JSON and NeoForge XML preserve the metadata response.
 - Modrinth project version metadata: CEE 1.1.4, Create 6.0.10, Architectury
   13.0.11, CC:Tweaked 1.121.0, Pinout 0.2.1 and Gauged Wires 1.0.6a.
   CC:Tweaked labels 1.121.0 beta; its earlier 1.120.2 was labelled alpha.
+  Its jar declares a minimum NeoForge 21.1.265. Older-loader compatibility uses
+  the separate 1.120.2 lock; the primary full run retains current 1.121.0.
 - [Power Grid files](https://www.curseforge.com/minecraft/mc-mods/power-grid/files/all): latest NeoForge 1.21.1 file remains PG 0.6.2 / 8880715.
 - [Power Components files](https://www.curseforge.com/minecraft/mc-mods/create-power-components/files/all): latest file remains 1.3.0 / 9031604.
 

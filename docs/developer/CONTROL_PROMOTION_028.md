@@ -35,6 +35,10 @@ The full catalog uses its `runtime_loader` for every lifecycle group and retains
 older loader checks separately. Minimum CEE/Create/Architectury SDK compile
 inputs stay distinct from the newer runtime jars. CC:Tweaked 1.121.0 is labelled
 beta by its publisher; the earlier 1.120.2 was labelled alpha.
+CC:Tweaked 1.121.0 requires NeoForge 21.1.265. Older-loader compatibility
+therefore selects the separate 1.120.2 lock in `release/compatibility-artifacts.json`;
+the primary runtime retains 1.121.0. Actual loaded-file auditing distinguishes
+the two configurations.
 
 The new circuit fixtures run one assembly per fresh process at 16 substeps, on
 both backends, OSes and installation profiles in the primary runtime lane.
