@@ -1,5 +1,10 @@
 # Documentation
 
+This branch prepares **0.2.8-rc.1**. See the [new circuit library](CIRCUIT_LIBRARY.md)
+and [control promotion record](developer/CONTROL_PROMOTION_028.md). Its release
+acceptance is still pending. The installation guide identifies the candidate inputs;
+preserved release notes and earlier evidence retain their original version labels.
+
 These guides describe **WWPG 0.2.7**, its supported stationary factories, and
 **extension API 1.0.0**. Start with the page that matches what you want to do.
 

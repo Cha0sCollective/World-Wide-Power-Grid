@@ -15,6 +15,7 @@ import zipfile
 
 from package_api_release import package_example
 from reopen_stationary_yard import extract as extract_world
+from test_suites import catalog
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -114,7 +115,7 @@ def server(output, runtime, backend, test_fixtures=None):
              '-PdocStarterJar=' + str(starter), '-PdocRuntimeJar=' + str(runtime),
              '-PdocDirectory=' + str(directory), '-PtestNamespaces=wwpg_doc',
              '-PtestBackend=' + backend, '-PdocPhase=' + phase,
-             '-Pneo_version=21.1.248', '--no-daemon'] + (['-PtestFixtureArtifact='+str(test_fixtures)] if test_fixtures else []), log)
+             '-Pneo_version='+catalog()['loaders'][-1], '--no-daemon'] + (['-PtestFixtureArtifact='+str(test_fixtures)] if test_fixtures else []), log)
         text = log.read_text(encoding='utf-8', errors='replace')
         if 'All 4 required tests passed' not in text or 'BUILD FAILED' in text:
             raise ValueError('Starter gameplay did not pass all four fixtures')
@@ -189,7 +190,7 @@ def client(output, runtime, backend, world, example, test_fixtures=None):
          '-PdocStarterJar=' + str(starter), '-PdocRuntimeJar=' + str(runtime),
          '-PdocExampleJar=' + str(example), '-PdocDirectory=' + str(directory),
          '-PdocWorldName=' + save_name,
-         '-PtestBackend=' + backend, '-Pneo_version=21.1.248', '--no-daemon'] + (['-PtestFixtureArtifact='+str(test_fixtures)] if test_fixtures else []), log)
+         '-PtestBackend=' + backend, '-Pneo_version='+catalog()['loaders'][-1], '--no-daemon'] + (['-PtestFixtureArtifact='+str(test_fixtures)] if test_fixtures else []), log)
     if launcher_hashes != [sha(path) for path in launcher_inputs]:
         raise ValueError('Launcher tools changed during the graphical check')
     text = log.read_text(encoding='utf-8', errors='replace')

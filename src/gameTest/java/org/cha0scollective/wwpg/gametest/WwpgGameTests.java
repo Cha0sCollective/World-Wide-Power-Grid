@@ -9,6 +9,7 @@ import net.neoforged.neoforge.common.NeoForge;
 @Mod("wwpg_tests")
 public final class WwpgGameTests {
     public WwpgGameTests(IEventBus modBus) {
+        NeoForge.EVENT_BUS.addListener(RuntimeInputAudit::started);
         if (Boolean.getBoolean("wwpg.test.energyFixtures"))
             modBus.addListener(FixtureEnergyCapabilities::register);
         var namespaces = Arrays.asList(System.getProperty("neoforge.enabledGameTestNamespaces", "").split(","));

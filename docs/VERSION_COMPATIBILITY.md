@@ -1,5 +1,12 @@
 # Version compatibility
 
+The **0.2.8-rc.1 candidate** uses NeoForge 21.1.265, published Create 6.0.10,
+CEE 1.1.4 and Architectury 13.0.11 for its new release campaign. It retains
+21.1.231 and 21.1.248 as compatibility lanes. The optional computer profile
+uses CC:Tweaked 1.121.0 and Pinout 0.2.1. Acceptance is pending; exact files
+and hashes are in the [runtime selection](../release/0.2.8-rc.1/runtime-selection.json).
+The table below records the published 0.2.7 snapshot.
+
 WWPG **0.2.7** targets Minecraft **1.21.1**. Use matching mod versions on the
 server and every client, and follow the [installation guide](INSTALL.md).
 

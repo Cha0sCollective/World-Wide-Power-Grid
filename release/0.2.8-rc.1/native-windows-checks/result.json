@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "platform": "Windows-11-10.0.26200-SP0",
+  "library": {
+    "path": "release/0.2.8-rc.1/native-windows-checks/objects/785f96cf308e3396edfd9e478fb6bc313efdd8d5922d0a68c4f07276ef6b2ecc.dll",
+    "sha256": "785f96cf308e3396edfd9e478fb6bc313efdd8d5922d0a68c4f07276ef6b2ecc",
+    "bytes": 4081714
+  },
+  "checks": [
+    {
+      "name": "reduction_checks",
+      "executable": {
+        "path": "release/0.2.8-rc.1/native-windows-checks/objects/bf424e5fc2aaaf147d457a9c734d865f1af477a69ae675999d63f53a60584e4a.exe",
+        "sha256": "bf424e5fc2aaaf147d457a9c734d865f1af477a69ae675999d63f53a60584e4a",
+        "bytes": 506656
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "release/0.2.8-rc.1/native-windows-checks/objects/bc21729a9d88b135d5586b4890c9a923ff289dd0c4762b11e491af561184d3e7.log",
+        "sha256": "bc21729a9d88b135d5586b4890c9a923ff289dd0c4762b11e491af561184d3e7",
+        "bytes": 109
+      },
+      "passed": true
+    },
+    {
+      "name": "sparse_safety_tests",
+      "executable": {
+        "path": "release/0.2.8-rc.1/native-windows-checks/objects/c023edd3039cc191fc5c013d085d7d186854c0e6731938f756042ea9420c3736.exe",
+        "sha256": "c023edd3039cc191fc5c013d085d7d186854c0e6731938f756042ea9420c3736",
+        "bytes": 4119474
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "release/0.2.8-rc.1/native-windows-checks/objects/528e2e48d2ddfa29744fc89f42ddb77e2484f7d2e7060af5167b61ff3a571db8.log",
+        "sha256": "528e2e48d2ddfa29744fc89f42ddb77e2484f7d2e7060af5167b61ff3a571db8",
+        "bytes": 69
+      },
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "_original_record": {
+    "path": "release/0.2.8-rc.1/native-windows-checks/objects/result.original.bin",
+    "sha256": "34e934b9c9d56823d1830633e407d7a13797f2f1dc21e94cc73190af3d3da197",
+    "bytes": 1470
+  }
+}

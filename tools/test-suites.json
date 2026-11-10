@@ -1,47 +1,391 @@
 {
   "schema": 2,
   "policy": "separated-v2",
-  "platforms": ["ubuntu-24.04", "windows-latest"],
-  "backends": ["NATIVE", "JAVA"],
-  "profiles": ["BASE", "PINOUT"],
-  "loaders": ["21.1.231", "21.1.248"],
+  "platforms": [
+    "ubuntu-24.04",
+    "windows-latest"
+  ],
+  "backends": [
+    "NATIVE",
+    "JAVA"
+  ],
+  "profiles": [
+    "BASE",
+    "PINOUT"
+  ],
+  "loaders": [
+    "21.1.231",
+    "21.1.248",
+    "21.1.265"
+  ],
   "loader_compatibility": {
     "policy": "loader-compatibility-v1",
-    "groups": ["regression", "platform", "loading", "board-startup", "safety", "native-guard"],
-    "addon_groups": ["pinout", "api", "pause", "pending"],
+    "groups": [
+      "regression",
+      "platform",
+      "loading",
+      "board-startup",
+      "safety",
+      "native-guard"
+    ],
+    "addon_groups": [
+      "pinout",
+      "api",
+      "pause",
+      "pending"
+    ],
     "installation_namespace": "wwpg_loader_installation",
     "addon_namespace": "wwpg_loader_addons",
-    "addon_only_namespaces": ["wwpg_addon_safety", "wwpg_addon_native_guard"],
-    "installations": {"BASE": "BASE", "ADDONS": "PINOUT"},
+    "addon_only_namespaces": [
+      "wwpg_addon_safety",
+      "wwpg_addon_native_guard"
+    ],
+    "installations": {
+      "BASE": "BASE",
+      "ADDONS": "PINOUT"
+    },
     "artifacts": [
-      {"role": "computercraft", "mod_id": "computercraft", "version": "1.120.2", "filename": "cc-tweaked-1.21.1-forge-1.120.2.jar", "url": "https://cdn.modrinth.com/data/gu7yAYhd/versions/1ewzHZYg/cc-tweaked-1.21.1-forge-1.120.2.jar", "sha256": "e8651fe24b384e925e563c9ad077644744474e2e7c0adb8e6d5b4757598dce9f"},
-      {"role": "pinout", "mod_id": "pinout", "version": "0.2.1", "filename": "pinout-0.2.1.jar", "url": "https://cdn.modrinth.com/data/sMa4MaGz/versions/UJtJCpBi/pinout-0.2.1.jar", "sha256": "d31c19c3c8aefb512922bf8086146127cad7ef9100d929a8fddcc2ab133fdd4a"},
-      {"role": "gauged", "mod_id": "gauged_wires", "version": "1.0.6a", "filename": "gauged_wires-1.0.6a.jar", "url": "https://cdn.modrinth.com/data/LemfA2Y5/versions/f1ywSCNc/gauged_wires-1.0.6a.jar", "sha256": "3798534240dc72cc34df5783c03b3a0178c6a7361a4bd198af014982606839e3"},
-      {"role": "power_components", "mod_id": "moregrid", "version": "1.3.0", "filename": "power-components-1.3.0.jar", "url": "https://cursemaven.com/curse/maven/create-power-components-1659527/9031604/create-power-components-1659527-9031604.jar", "sha256": "73a130d1144f52fb94e6d7ed70c89692a2f7b7ad0476a4cfb81cde47a40261fd"}
+      {
+        "role": "computercraft",
+        "mod_id": "computercraft",
+        "version": "1.121.0",
+        "filename": "cc-tweaked-1.21.1-forge-1.121.0.jar",
+        "url": "https://cdn.modrinth.com/data/gu7yAYhd/versions/KNdTEfUA/cc-tweaked-1.21.1-forge-1.121.0.jar",
+        "sha256": "bf8dd119701560ea60085cf8c1076d32ffc99a1be5f8b99f6f3b174a88a208f8"
+      },
+      {
+        "role": "pinout",
+        "mod_id": "pinout",
+        "version": "0.2.1",
+        "filename": "pinout-0.2.1.jar",
+        "url": "https://cdn.modrinth.com/data/sMa4MaGz/versions/UJtJCpBi/pinout-0.2.1.jar",
+        "sha256": "d31c19c3c8aefb512922bf8086146127cad7ef9100d929a8fddcc2ab133fdd4a"
+      },
+      {
+        "role": "gauged",
+        "mod_id": "gauged_wires",
+        "version": "1.0.6a",
+        "filename": "gauged_wires-1.0.6a.jar",
+        "url": "https://cdn.modrinth.com/data/LemfA2Y5/versions/f1ywSCNc/gauged_wires-1.0.6a.jar",
+        "sha256": "3798534240dc72cc34df5783c03b3a0178c6a7361a4bd198af014982606839e3"
+      },
+      {
+        "role": "power_components",
+        "mod_id": "moregrid",
+        "version": "1.3.0",
+        "filename": "power-components-1.3.0.jar",
+        "url": "https://cursemaven.com/curse/maven/create-power-components-1659527/9031604/create-power-components-1659527-9031604.jar",
+        "sha256": "73a130d1144f52fb94e6d7ed70c89692a2f7b7ad0476a4cfb81cde47a40261fd"
+      }
     ]
   },
   "groups": {
-    "regression": {"namespaces": ["wwpg", "wwpg_stationary", "wwpg_design", "wwpg_distribution", "wwpg_wires", "wwpg_bundle", "wwpg_coupled"], "phases": ["SETUP", "VERIFY", "VERIFY", "VERIFY"]},
-    "pinout": {"namespaces": ["wwpg_pinout"], "profiles": ["PINOUT"], "merge_into": "regression", "phases": ["SETUP", "VERIFY", "VERIFY", "VERIFY"]},
-    "loading": {"namespaces": ["wwpg_loading", "wwpg_cee_preparation", "wwpg_pause_epoch"], "phases": ["SETUP"]},
-    "board-startup": {"namespaces": ["wwpg_board_startup"], "phases": ["SETUP"]},
-    "safety": {"namespaces": ["wwpg_unload", "wwpg_solver_safety", "wwpg_addon_safety", "wwpg_matrix_ownership", "wwpg_meter_sampling", "wwpg_contactors", "wwpg_rhs", "wwpg_wire_power", "wwpg_wire_recovery", "wwpg_display_pulse", "wwpg_trains"], "phases": ["SETUP"]},
-    "generator-timing": {"namespaces": ["wwpg_generator_timing"], "addon": true, "phases": ["SETUP"]},
-    "native-guard": {"namespaces": ["wwpg_native_guard", "wwpg_addon_native_guard"], "backends": ["NATIVE"], "merge_into": "safety", "phases": ["SETUP"]},
-    "api": {"namespaces": ["wwpg_api", "wwpg_api_faults", "wwpg_api_restart", "wwpg_api_upstream", "wwpg_api_upstream_restart"], "setup_namespaces": ["wwpg_api_ownership"], "addon": true, "phases": ["SETUP", "VERIFY", "VERIFY", "VERIFY"]},
-    "pause": {"namespaces": ["wwpg_api_pause"], "addon": true, "phases": ["SETUP"]},
-    "pending": {"namespaces": ["wwpg_api_pending_restart"], "addon": true, "phases": ["SETUP", "ARM", "VERIFY"]},
-    "yard": {"namespaces": ["wwpg_yard"], "profiles": ["PINOUT"], "phases": ["SETUP", "VERIFY", "VERIFY", "VERIFY"], "export": "yard", "reopens": 3},
-    "workshop": {"namespaces": ["wwpg_api_world"], "addon": true, "phases": ["SETUP", "VERIFY", "VERIFY", "VERIFY"], "export": "workshop", "reopens": 3},
-    "example": {"namespaces": ["wwpg_example"], "profiles": ["BASE"], "phases": ["SETUP", "VERIFY"]},
-    "showroom": {"namespaces": ["wwpg_showroom"], "profiles": ["BASE"], "phases": ["SETUP", "VERIFY"]},
-    "platform": {"namespaces": ["wwpg_platform"], "merge_into": "regression", "phases": ["SETUP"]}
+    "regression": {
+      "namespaces": [
+        "wwpg",
+        "wwpg_stationary",
+        "wwpg_design",
+        "wwpg_distribution",
+        "wwpg_wires",
+        "wwpg_bundle",
+        "wwpg_coupled"
+      ],
+      "phases": [
+        "SETUP",
+        "VERIFY",
+        "VERIFY",
+        "VERIFY"
+      ]
+    },
+    "pinout": {
+      "namespaces": [
+        "wwpg_pinout"
+      ],
+      "profiles": [
+        "PINOUT"
+      ],
+      "merge_into": "regression",
+      "phases": [
+        "SETUP",
+        "VERIFY",
+        "VERIFY",
+        "VERIFY"
+      ]
+    },
+    "loading": {
+      "namespaces": [
+        "wwpg_loading",
+        "wwpg_cee_preparation",
+        "wwpg_pause_epoch",
+        "wwpg_tree_restore",
+        "wwpg_cee_state_geometry"
+      ],
+      "phases": [
+        "SETUP"
+      ]
+    },
+    "board-startup": {
+      "namespaces": [
+        "wwpg_board_startup"
+      ],
+      "phases": [
+        "SETUP"
+      ]
+    },
+    "safety": {
+      "namespaces": [
+        "wwpg_unload",
+        "wwpg_solver_safety",
+        "wwpg_addon_safety",
+        "wwpg_matrix_ownership",
+        "wwpg_meter_sampling",
+        "wwpg_contactors",
+        "wwpg_rhs",
+        "wwpg_wire_power",
+        "wwpg_wire_recovery",
+        "wwpg_display_pulse",
+        "wwpg_trains"
+      ],
+      "phases": [
+        "SETUP"
+      ]
+    },
+    "generator-timing": {
+      "namespaces": [
+        "wwpg_generator_timing"
+      ],
+      "addon": true,
+      "phases": [
+        "SETUP"
+      ]
+    },
+    "native-guard": {
+      "namespaces": [
+        "wwpg_native_guard",
+        "wwpg_addon_native_guard"
+      ],
+      "backends": [
+        "NATIVE"
+      ],
+      "merge_into": "safety",
+      "phases": [
+        "SETUP"
+      ]
+    },
+    "api": {
+      "namespaces": [
+        "wwpg_api",
+        "wwpg_api_faults",
+        "wwpg_api_restart",
+        "wwpg_api_upstream",
+        "wwpg_api_upstream_restart"
+      ],
+      "setup_namespaces": [
+        "wwpg_api_ownership"
+      ],
+      "addon": true,
+      "phases": [
+        "SETUP",
+        "VERIFY",
+        "VERIFY",
+        "VERIFY"
+      ]
+    },
+    "pause": {
+      "namespaces": [
+        "wwpg_api_pause"
+      ],
+      "addon": true,
+      "phases": [
+        "SETUP"
+      ]
+    },
+    "pending": {
+      "namespaces": [
+        "wwpg_api_pending_restart"
+      ],
+      "addon": true,
+      "phases": [
+        "SETUP",
+        "ARM",
+        "VERIFY"
+      ]
+    },
+    "yard": {
+      "namespaces": [
+        "wwpg_yard"
+      ],
+      "profiles": [
+        "PINOUT"
+      ],
+      "phases": [
+        "SETUP",
+        "VERIFY",
+        "VERIFY",
+        "VERIFY"
+      ],
+      "export": "yard",
+      "reopens": 3
+    },
+    "workshop": {
+      "namespaces": [
+        "wwpg_api_world"
+      ],
+      "addon": true,
+      "phases": [
+        "SETUP",
+        "VERIFY",
+        "VERIFY",
+        "VERIFY"
+      ],
+      "export": "workshop",
+      "reopens": 3
+    },
+    "example": {
+      "namespaces": [
+        "wwpg_example"
+      ],
+      "profiles": [
+        "BASE"
+      ],
+      "phases": [
+        "SETUP",
+        "VERIFY"
+      ]
+    },
+    "showroom": {
+      "namespaces": [
+        "wwpg_showroom"
+      ],
+      "profiles": [
+        "BASE"
+      ],
+      "phases": [
+        "SETUP",
+        "VERIFY"
+      ]
+    },
+    "platform": {
+      "namespaces": [
+        "wwpg_platform"
+      ],
+      "merge_into": "regression",
+      "phases": [
+        "SETUP"
+      ]
+    },
+    "circuit-adder3": {
+      "namespaces": [
+        "wwpg_circuit_adder3"
+      ],
+      "phases": [
+        "SETUP"
+      ],
+      "circuit": "adder3"
+    },
+    "circuit-oscillator": {
+      "namespaces": [
+        "wwpg_circuit_oscillator"
+      ],
+      "phases": [
+        "SETUP"
+      ],
+      "circuit": "oscillator"
+    },
+    "circuit-source-switch": {
+      "namespaces": [
+        "wwpg_circuit_source_switch"
+      ],
+      "phases": [
+        "SETUP"
+      ],
+      "circuit": "source-switch"
+    },
+    "circuit-regulator": {
+      "namespaces": [
+        "wwpg_circuit_regulator"
+      ],
+      "phases": [
+        "SETUP"
+      ],
+      "circuit": "regulator"
+    },
+    "circuit-register8": {
+      "namespaces": [
+        "wwpg_circuit_register8"
+      ],
+      "phases": [
+        "SETUP"
+      ],
+      "circuit": "register8"
+    },
+    "circuit-memory-bank": {
+      "namespaces": [
+        "wwpg_circuit_memory_bank"
+      ],
+      "phases": [
+        "SETUP"
+      ],
+      "circuit": "memory-bank"
+    },
+    "circuit-shift4": {
+      "namespaces": [
+        "wwpg_circuit_shift4"
+      ],
+      "phases": [
+        "SETUP"
+      ],
+      "circuit": "shift4"
+    },
+    "circuit-ram4x4": {
+      "namespaces": [
+        "wwpg_circuit_ram4x4"
+      ],
+      "phases": [
+        "SETUP"
+      ],
+      "circuit": "ram4x4"
+    },
+    "circuit-fused-latch": {
+      "namespaces": [
+        "wwpg_circuit_fused_latch"
+      ],
+      "phases": [
+        "SETUP"
+      ],
+      "circuit": "fused-latch"
+    },
+    "circuit-relay-heater": {
+      "namespaces": [
+        "wwpg_circuit_relay_heater"
+      ],
+      "phases": [
+        "SETUP"
+      ],
+      "circuit": "relay-heater"
+    },
+    "circuit-quiet-heater": {
+      "namespaces": [
+        "wwpg_circuit_quiet_heater"
+      ],
+      "phases": [
+        "SETUP"
+      ],
+      "circuit": "quiet-heater"
+    },
+    "circuit-source-loss": {
+      "namespaces": [
+        "wwpg_circuit_source_loss"
+      ],
+      "phases": [
+        "SETUP"
+      ],
+      "circuit": "source-loss"
+    }
   },
   "special_namespaces": {
-    "wwpg_cee_state_geometry": "isolated experimental geometry-cache differential fixtures; never part of normal acceptance",
     "wwpg_tree_scope": "isolated component-scoped restoration fixtures; requires scoped restoration and one bounded part per tick",
     "wwpg_tree_budget": "isolated bounded restoration fixtures; requires an enabled budget with one part per tick",
-    "wwpg_tree_restore": "isolated experimental saved-wire restoration fixtures; never part of normal acceptance",
     "wwpg_sable_targeting": "opt-in Sable Companion API coordinate fixtures: translated/rotated/scaled/render poses, exposed pins, panel covers, native wire IDs, occlusion and live membership; requires Companion at runtime",
     "wwpg_cio_transitions": "opt-in verified CIO artifact: normal warm-up holds versus real backend rejection, unavailable readings, history rollback and recovery; run separately from healthy CIO checks",
     "wwpg_cio": "opt-in CIO artifact: inverter waveform, rollback, controls and disabled saved couplers; requires the verified optional CIO jar",
@@ -56,14 +400,129 @@
     "wwpg_api_multiplayer": "legacy real TCP Workshop client runner"
   },
   "graphical": {
-    "yard-integrated": {"world": "yard", "profiles": ["PINOUT"], "checks": ["powered-readings", "control", "agreement", "buzzer-side"], "java_checks": ["unavailable-recovery"], "native_checks": ["representative-visuals", "terminal-highlights", "design", "pinout-keyboard", "portal"]},
-    "workshop-integrated": {"world": "workshop", "profiles": ["PINOUT"], "checks": ["powered-readings", "control", "agreement", "unavailable-recovery"], "native_checks": ["addon-visuals", "integrated-tools"]},
-    "yard-tcp": {"world": "yard", "profiles": ["PINOUT"], "tcp": true, "checks": ["powered-readings", "control", "agreement"], "native_checks": ["design-sync", "pinout-keyboard"]},
-    "workshop-tcp": {"world": "workshop", "profiles": ["PINOUT"], "tcp": true, "checks": ["powered-readings", "control", "agreement"], "native_checks": ["wire", "configure", "meter", "panel-edit", "board-edit", "repair"]},
-    "base-workshop": {"world": "workshop", "profiles": ["BASE"], "checks": ["powered-readings", "control", "agreement"]},
-    "starter": {"world": "workshop", "profiles": ["BASE"], "checks": ["powered-readings", "control", "agreement"], "native_checks": ["starter-controls", "native-tools"]}
+    "yard-integrated": {
+      "world": "yard",
+      "profiles": [
+        "PINOUT"
+      ],
+      "checks": [
+        "powered-readings",
+        "control",
+        "agreement",
+        "buzzer-side"
+      ],
+      "java_checks": [
+        "unavailable-recovery"
+      ],
+      "native_checks": [
+        "representative-visuals",
+        "terminal-highlights",
+        "design",
+        "pinout-keyboard",
+        "portal"
+      ]
+    },
+    "workshop-integrated": {
+      "world": "workshop",
+      "profiles": [
+        "PINOUT"
+      ],
+      "checks": [
+        "powered-readings",
+        "control",
+        "agreement",
+        "unavailable-recovery"
+      ],
+      "native_checks": [
+        "addon-visuals",
+        "integrated-tools"
+      ]
+    },
+    "yard-tcp": {
+      "world": "yard",
+      "profiles": [
+        "PINOUT"
+      ],
+      "tcp": true,
+      "checks": [
+        "powered-readings",
+        "control",
+        "agreement"
+      ],
+      "native_checks": [
+        "design-sync",
+        "pinout-keyboard"
+      ]
+    },
+    "workshop-tcp": {
+      "world": "workshop",
+      "profiles": [
+        "PINOUT"
+      ],
+      "tcp": true,
+      "checks": [
+        "powered-readings",
+        "control",
+        "agreement"
+      ],
+      "native_checks": [
+        "wire",
+        "configure",
+        "meter",
+        "panel-edit",
+        "board-edit",
+        "repair"
+      ]
+    },
+    "base-workshop": {
+      "world": "workshop",
+      "profiles": [
+        "BASE"
+      ],
+      "checks": [
+        "powered-readings",
+        "control",
+        "agreement"
+      ]
+    },
+    "starter": {
+      "world": "workshop",
+      "profiles": [
+        "BASE"
+      ],
+      "checks": [
+        "powered-readings",
+        "control",
+        "agreement"
+      ],
+      "native_checks": [
+        "starter-controls",
+        "native-tools"
+      ]
+    }
   },
-  "yard_views": ["B08", "P2", "T2", "S07", "S15", "S24", "S25", "S26", "S61", "S77", "S79"],
-  "workshop_views": ["A01", "A04", "A08", "A10", "A11"],
-  "known_limitations": ["The dev.102 exposed-pin targeting fix has focused headless player-ray coverage while holding PG wires; prior highlight evidence does not certify its real-client rendering or input."]
+  "yard_views": [
+    "B08",
+    "P2",
+    "T2",
+    "S07",
+    "S15",
+    "S24",
+    "S25",
+    "S26",
+    "S61",
+    "S77",
+    "S79"
+  ],
+  "workshop_views": [
+    "A01",
+    "A04",
+    "A08",
+    "A10",
+    "A11"
+  ],
+  "known_limitations": [
+    "The dev.102 exposed-pin targeting fix has focused headless player-ray coverage while holding PG wires; prior highlight evidence does not certify its real-client rendering or input."
+  ],
+  "runtime_loader": "21.1.265"
 }

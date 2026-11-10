@@ -24,7 +24,7 @@ public final class WorldWidePowerGrid {
         org.cha0scollective.wwpg.extension.CeeAdapters.initialize(modBus);
         modBus.addListener(org.cha0scollective.wwpg.compat.cio.CioCompatibility::registerAdapters);
         modBus.addListener(org.cha0scollective.wwpg.extension.ApiDeviceDiscovery::freeze);
-        LOGGER.info("WWPG: CEE 1.1.3 / Power Grid 0.6.2 compatibility loaded");
+        LOGGER.info("WWPG: CEE 1.1.x / Power Grid 0.6.2 compatibility loaded");
         NeoForge.EVENT_BUS.addListener(this::commands);
         NeoForge.EVENT_BUS.addListener(this::unload);
         NeoForge.EVENT_BUS.addListener(this::stop);

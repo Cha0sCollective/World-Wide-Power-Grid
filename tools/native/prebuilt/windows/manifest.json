@@ -1,11 +1,14 @@
 {
   "platform": "windows",
-  "sha256": "1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c",
+  "sha256": "785f96cf308e3396edfd9e478fb6bc313efdd8d5922d0a68c4f07276ef6b2ecc",
   "inputs": {
-    "tools/build_native_solver.py": "0d541e6d0898e3023ae39e5e13905b6581abfec27266ee6fab847640287cc77d",
-    "tools/native/CMakeLists.txt": "fa748181d2b787400e2e1f03bb93445ee630f1fcc8b0b7a5e6bf59c2fcdb62af",
+    "tools/build_native_solver.py": "bba17dd27b92011f120f9d67b093d370fdc46e997f39dd82bb7a53fd7b488528",
+    "tools/native/CMakeLists.txt": "7db35694735ea5746307ac132af506ce1986b94be86873bc907be1d6fe4ab3a7",
     "tools/native/jni-linux/jni_md.h": "a27e4594713e0a0c961a7228ffb87d45446b02231bbf5c831210bdeef5800bf0",
-    "tools/native/pg-safety.patch": "c1afd6488c3d23976054f6bd0cfda87f3ebceadab5fd62c9f48a4d5029ab8530",
+    "tools/native/pg-safety.patch": "ecb3675f2787b806a6e007a3e90ae5cf21b340ac14ae2eb82d4eb644d626da4a",
+    "tools/native/prepare_reduction_checks.py": "30d9ea5306f5469b6aa022f9e8ef8c42453f170bfe492974078984e7b95fdd60",
+    "tools/native/reduction.h": "eacf5d2af2b326940d7157f44a557801edc67184b232183a0c99c2bc346b8f1c",
+    "tools/native/reduction_checks.c": "a863c4499f952ef0a20b922fdcb62f2e645488fa63b6bed756821c93d08aa89c",
     "tools/native/sources.lock.json": "b1eb66114de651215076bbd8ad2b7b65d0af0ae724cb983ccbd081e5ed466c5d",
     "tools/native/superlu-safety.patch": "86b00296b8e32812760cc9785705e1ace503c346f5761ce9110b3102d79c9dbc"
   },

@@ -1,0 +1,17 @@
+The GameTest companion includes circuit schematics for release verification.
+These resources are absent from the WWPG gameplay jar.
+
+Community authors:
+  Three-bit full adder: jolol1k3_
+  LC oscillator: Dr Ender
+  Generator/battery selector: Ink | Soul Artist
+  Linear regulator: native PG connector conversion of the design by
+    Doooom20 | Ham Mafia |
+
+The repository owner confirmed permission to redistribute these community
+inputs on November 10, 2026. Their attribution and design rights are preserved;
+they are not represented as MIT-licensed WWPG code. The remaining native-memory
+and advanced circuit assemblies are the retained WWPG circuit designs.
+
+See data/wwpg_circuits/provenance.json for input hashes and source provenance.
+The fixture driver code is covered by the repository's MIT license.

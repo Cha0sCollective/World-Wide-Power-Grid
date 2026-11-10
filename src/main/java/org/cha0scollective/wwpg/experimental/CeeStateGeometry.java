@@ -22,9 +22,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.cha0scollective.wwpg.WorldWidePowerGrid;
 
-/** Opt-in immutable geometry for reviewed CEE built-ins. No world/owner state is cached. */
+/** Control immutable geometry for reviewed CEE built-ins. No world/owner state is cached. */
 public final class CeeStateGeometry {
-    public static final boolean ENABLED = Boolean.getBoolean("wwpg.experimental.ceeStateGeometry");
+    public static final boolean ENABLED = Boolean.parseBoolean(System.getProperty("wwpg.experimental.ceeStateGeometry", "true"));
     private static final int MAX_STATES = 2048;
     // Exact classes only. Indicator bulbs mutate a shared node map and are excluded;
     // panels and all custom/world-dependent geometry retain their original calls.

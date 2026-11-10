@@ -1,19 +1,19 @@
 {
   "schema": 1,
-  "target": "0.1.0-beta.1",
+  "target": "0.2.8-rc.1",
   "minecraft": "1.21.1",
-  "neoforge": "21.1.231",
+  "neoforge": "21.1.265",
   "java": 21,
   "create": "6.0.10-280",
   "artifacts": [
     {
       "role": "cee",
-      "version": "1.21.1-1.1.3",
-      "coordinate": "maven.modrinth:qYJdIoAx:KWxEmmON",
-      "url": "https://cdn.modrinth.com/data/qYJdIoAx/versions/KWxEmmON/electroenergetics-1.21.1-1.1.3.jar",
-      "sha256": "ae7ea74b7b00f175daa5a60a953a6d57f7f775aed0b642a1e9f80c3865cf8be7",
+      "version": "1.21.1-1.1.4",
+      "coordinate": "maven.modrinth:qYJdIoAx:ZMfRgLy5",
+      "url": "https://cdn.modrinth.com/data/qYJdIoAx/versions/ZMfRgLy5/electroenergetics-1.21.1-1.1.4.jar",
+      "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f",
       "source": "https://github.com/george8188625/Create-Electro-Energetics/tree/cf855615a611acea5d43e62398087d68cb5ef840",
-      "source_note": "Stable 1.1.x source at the 1.1.3 publication; the development branch uses a different property API."
+      "source_note": "Current published NeoForge 1.21.1 runtime jar; minimum compile SDK remains separate."
     },
     {
       "role": "pg",
@@ -34,11 +34,20 @@
     },
     {
       "role": "create",
-      "version": "6.0.10-280",
-      "coordinate": "com.simibubi.create:create-1.21.1:6.0.10-280",
-      "url": "https://maven.createmod.net/com/simibubi/create/create-1.21.1/6.0.10-280/create-1.21.1-6.0.10-280.jar",
-      "sha256": "192c7b0be13f523dcec9a7a2393bbc2614c3c9bd3edb1f7720a97bcd4f0b87a7",
-      "source_note": "Published full Create release. All 2692 Create classes are byte-identical to the slim development artifact. Bundled Registrate, Ponder and Flywheel versions match the fixed development runtime."
+      "version": "6.0.10+mc1.21.1",
+      "coordinate": "maven.modrinth:create:UjX6dr61",
+      "url": "https://cdn.modrinth.com/data/LNytGWDc/versions/UjX6dr61/create-1.21.1-6.0.10.jar",
+      "sha256": "ef87fe5709f1ba1f5b8bb20a2925b5afb4669e178fd6d8bf10c167759eefe37a",
+      "source_note": "Current published NeoForge 1.21.1 runtime jar; minimum compile SDK remains separate."
+    },
+    {
+      "role": "architectury",
+      "version": "13.0.11",
+      "coordinate": "maven.modrinth:architectury-api:1IiqEQGl",
+      "url": "https://cdn.modrinth.com/data/lhGA9TYQ/versions/1IiqEQGl/architectury-13.0.11-neoforge.jar",
+      "sha256": "9cc92f2c09533fc5482c60f993bd891c655a0e32b637037cdcb7c2b23adedeeb",
+      "source": "https://github.com/architectury/architectury-api",
+      "source_note": "Current runtime; compile minimum remains 13.0.8."
     }
   ],
   "native_binaries": [

@@ -1,6 +1,10 @@
 # Current status
 
-**[WWPG 0.2.7](https://github.com/Cha 0sCollective/World-Wide-Power-Grid/releases/tag/0.2.7)**
+The isolated **0.2.8-rc.1 candidate** promotes the experimental control and adds
+[twelve circuit fixtures](CIRCUIT_LIBRARY.md). Its complete release acceptance
+is in progress. The stable release described below remains 0.2.7.
+
+**[WWPG 0.2.7](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.7)**
 is the stable release. It supports the declared stationary factories and
 optional Pinout computer control, and includes **extension API 1.0.0** for
 add-on developers. Existing 0.1.0-beta.5 and beta.4 worlds remain compatible; update WWPG on

@@ -19,7 +19,7 @@ import static org.cha0scollective.wwpg.experimental.RestorationComponents.join;
 
 /** Server-thread metadata only. No endpoint resolution, geometry callbacks or retained graph index. */
 public final class ScopedRestoration {
-    public static final boolean ENABLED = Boolean.getBoolean("wwpg.experimental.scopedRestoration");
+    public static final boolean ENABLED = Boolean.parseBoolean(System.getProperty("wwpg.experimental.scopedRestoration", "true"));
     private static Scope current;
     private static final Set<ElectricalNetwork> deferredNetworks = identitySet();
     private static final Set<INode> deferredNodes = identitySet();

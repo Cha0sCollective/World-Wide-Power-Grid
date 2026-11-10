@@ -2,6 +2,22 @@
 
 ## Unreleased
 
+### 0.2.8-rc.1 candidate
+
+- Promote the experimental control's plain-wire and CEE property-source batching,
+  saved wire-tree restoration queue, cooperative work budget, unresolved-wire
+  priority, extra loading service, state-only geometry reuse and scoped holds.
+  Preserve serial electrical substeps and conservative fallbacks.
+- Apply exact native finite/max reductions and refresh matrix storage/factor
+  ownership after fitting callbacks on both Windows and Linux. Preserve rejection,
+  rollback and numerical stopping criteria. Exclude the rejected residual cache
+  and packed-result worker prototypes.
+- Add twelve circuit assemblies to the release regression catalog, preserving
+  thirteen schematic inputs and their original operation sequences at sixteen
+  substeps. Record actual runtime dependency versions and hashes during tests.
+- Prepare current runtime dependencies separately from minimum SDK compile inputs
+  and older loader compatibility lanes. Release acceptance remains pending.
+
 ## 0.2.7 — 6 November 2026
 
 - Stabilize self-excited PG generators by solving rotor response and field excitation together during electrical substeps. Preserve PG's original clutch timing, including carbon-pile operating points, and verify transformer, variac and other excitation controls on both solvers.

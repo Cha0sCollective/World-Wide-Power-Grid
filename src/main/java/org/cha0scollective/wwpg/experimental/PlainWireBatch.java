@@ -28,9 +28,9 @@ import org.patryk3211.powergrid.electricity.sim.special.TransmissionLine;
  * gameplay callbacks move to another thread. The actual PG hook set is untouched.
  */
 public final class PlainWireBatch implements IMultiHooks {
-    public static final boolean ENABLED = Boolean.getBoolean("wwpg.experimental.plainWireBatch");
+    public static final boolean ENABLED = Boolean.parseBoolean(System.getProperty("wwpg.experimental.plainWireBatch", "true"));
     public static final boolean VERIFY = Boolean.getBoolean("wwpg.experimental.plainWireBatch.verify");
-    public static final boolean PROPERTIES_ENABLED = ENABLED && Boolean.getBoolean("wwpg.experimental.plainWireBatch.properties");
+    public static final boolean PROPERTIES_ENABLED = ENABLED && Boolean.parseBoolean(System.getProperty("wwpg.experimental.plainWireBatch.properties", "true"));
 
     public interface NetworkAccess {
         void wwpg$invalidateWireBatch();

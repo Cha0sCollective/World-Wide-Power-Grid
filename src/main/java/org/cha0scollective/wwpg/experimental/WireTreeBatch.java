@@ -9,13 +9,13 @@ import org.patryk3211.powergrid.electricity.sim.node.OwnedFloatingNode;
 import org.patryk3211.powergrid.electricity.sim.special.TransmissionLinePart;
 import org.patryk3211.powergrid.electricity.wire.*;
 
-/** Opt-in saved-wire attachment and server-thread tree resolution. Nothing is persisted. */
+/** Saved-wire attachment and server-thread tree resolution. Nothing is persisted. */
 public final class WireTreeBatch {
-    public static final boolean ENABLED = Boolean.getBoolean("wwpg.experimental.wireTreeBatch");
-    public static final int BUDGET_MILLIS = Integer.getInteger("wwpg.experimental.wireTreeBudgetMillis", 0);
+    public static final boolean ENABLED = Boolean.parseBoolean(System.getProperty("wwpg.experimental.wireTreeBatch", "true"));
+    public static final int BUDGET_MILLIS = Integer.getInteger("wwpg.experimental.wireTreeBudgetMillis", 20);
     public static final int MAX_PARTS = Integer.getInteger("wwpg.experimental.wireTreeMaxParts", 32);
     public static final boolean BOUNDED = ENABLED && BUDGET_MILLIS > 0;
-    public static final boolean PRIORITIZE_UNRESOLVED = ENABLED && Boolean.getBoolean("wwpg.experimental.wireTreePrioritizeUnresolved");
+    public static final boolean PRIORITIZE_UNRESOLVED = ENABLED && Boolean.parseBoolean(System.getProperty("wwpg.experimental.wireTreePrioritizeUnresolved", "true"));
     static {
         if (BUDGET_MILLIS < 0 || MAX_PARTS < 1) throw new IllegalArgumentException("Invalid wire-tree budget");
     }

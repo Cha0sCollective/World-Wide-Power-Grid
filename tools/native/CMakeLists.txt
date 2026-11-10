@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 project(WWPGGuardedNative LANGUAGES C)
+find_package(Python3 REQUIRED COMPONENTS Interpreter)
 set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
 
 # Use the exact PG/SuperLU/BLAS revisions in sources.lock.json. The two small
@@ -42,6 +43,7 @@ add_library(powergridNative SHARED "${PG_C}/sparse.c" "${PG_C}/solver.c"
     "${PG_C}/mna.c" "${PG_C}/exception_handler.c" "${PG_C}/verify.c")
 set_target_properties(powergridNative PROPERTIES OUTPUT_NAME powergridNative7)
 target_compile_options(powergridNative PRIVATE -mavx2)
+target_compile_options(powergridNative PRIVATE -ffp-contract=off)
 set_source_files_properties("${PG_C}/exception_handler.c" "${PG_C}/verify.c"
     PROPERTIES COMPILE_OPTIONS -mno-avx2)
 target_include_directories(powergridNative PRIVATE
@@ -57,6 +59,13 @@ target_include_directories(sparse_safety_tests PRIVATE "${PG_SOURCE}/native/src/
 target_link_libraries(sparse_safety_tests PRIVATE superlu openblas_static)
 target_link_options(sparse_safety_tests PRIVATE -Wl,--wrap=dgstrf -Wl,--wrap=dgstrs -Wl,--wrap=dsnode_dfs)
 target_compile_options(sparse_safety_tests PRIVATE -UNDEBUG)
+execute_process(COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/prepare_reduction_checks.py"
+    "${PG_C}/solver.c" "${CMAKE_CURRENT_BINARY_DIR}/reduction-checks" COMMAND_ERROR_IS_FATAL ANY)
+add_executable(reduction_checks "${CMAKE_CURRENT_SOURCE_DIR}/reduction_checks.c"
+    "${CMAKE_CURRENT_BINARY_DIR}/reduction-checks/reference.c" "${CMAKE_CURRENT_BINARY_DIR}/reduction-checks/candidate.c")
+target_include_directories(reduction_checks PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}")
+target_compile_options(reduction_checks PRIVATE -mavx2 -ffp-contract=off)
 if(WIN32)
     target_link_options(sparse_safety_tests PRIVATE -static-libgcc -static)
+    target_link_options(reduction_checks PRIVATE -static-libgcc -static)
 endif()

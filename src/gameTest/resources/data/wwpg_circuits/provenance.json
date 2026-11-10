@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "source_chat": "Powergrid Circuits / 01a1b37b-56f3-7332-9667-1f4cb9c33318",
+  "substeps": 16,
+  "note": "Exact distributed schematic bytes and preserved functional sequences. Registration, resource loading and backend selection adapted. Prior stock results are oracle provenance, not acceptance of this release. User confirmed permission to redistribute the community schematics on 2026-11-10; original author attribution remains separate from the WWPG code license.",
+  "adapters": [
+    {
+      "file": "FunctionalBaselines.java",
+      "source": "source-checkout/local/stock-pg-circuits-20261107T153207001530Z/source-power/FunctionalBaselines.java",
+      "source_sha256": "a7308b96f059008792fe4c942d7df3a9fb4ea97dce775ac0b35cdff241655e61",
+      "adapted_sha256": "a8c44b6bd7da90100b8be108a470cddf0d9cfb9af232a76829a86829d1c8394b"
+    },
+    {
+      "file": "AdvancedLibrary.java",
+      "source": "source-checkout/local/stock-pg-circuits-20261107T153207001530Z/source-power/AdvancedLibrary.java",
+      "source_sha256": "907ef9553343a1d5bc9bbe9daa1814875e882dd3831a01fc99bd0a0ee7d45e85",
+      "adapted_sha256": "9841d49901d84b0c1bff286b9bd76050b253d6dab89c553e4b7db24eae626724"
+    },
+    {
+      "file": "NativeMemory.java",
+      "source": "source-checkout/local/stock-pg-circuits-20261107T153207001530Z/source-power/NativeMemory.java",
+      "source_sha256": "8a191fb6fda2f4b3a37a05024060f1869fd1dd37a76dfddc4bf5d3e358bcf0c7",
+      "adapted_sha256": "d95cd5668ed4b9ef99b34a3ef7e7a76f2db62a28faffe4a65f67d7e622fea251"
+    },
+    {
+      "file": "LibraryBoards.java",
+      "source": "source-checkout/local/stock-pg-circuits-20261107T153207001530Z/source-power/LibraryBoards.java",
+      "source_sha256": "e6600956b0f84273f4dc6b9445d454517a5e694784568b59afa01106c6e8b773",
+      "adapted_sha256": "b922ffb85339d998cfa34b03c0bb74e7aa3c9418dbbffd02e943633926231dd9"
+    },
+    {
+      "file": "NativeCircuitWiring.java",
+      "source": "source-checkout/local/stock-pg-circuits-20261107T153207001530Z/source-power/StockWiring.java",
+      "source_sha256": "07746519f47bd8b4df546b622e53bc78a392cf57f570e708ad2e3bf4071cca6a",
+      "adapted_sha256": "b1cdb82bfb1414a1a82d2102850c4ea7a9453c90e6611a6b8db31885fa8e9239"
+    },
+    {
+      "file": "RelayHeaterChecks.java",
+      "source": "source-checkout/research/basin-heater/BasinChecks.java",
+      "source_sha256": "06f2a7eae3766f0ebcc8a1e832887d2b04ef0b42d070d2fe131951a57296ae21",
+      "adapted_sha256": "9c3704dbf25f77bbc24bcd3a30be21469b39d49067cad018902d2a678446d7be"
+    },
+    {
+      "file": "QuietHeaterChecks.java",
+      "source": "source-checkout/research/basin-heater-quiet/BasinChecks.java",
+      "source_sha256": "4077e15c3b136bb6245d3bcaa4367c361c38cf43e03508fec9e3a7ceed705032",
+      "adapted_sha256": "fef8b6070c3b2e46fbc859dbada2c3e755bba5828a9abe375623b5262dc9fa82"
+    },
+    {
+      "file": "SourceLossChecks.java",
+      "source": "source-checkout/research/source-loss-alarm/AlarmChecks.java",
+      "source_sha256": "07797af39b50c525536979e11c07fcac712236cbcba32c4452f93e934f5f2717",
+      "adapted_sha256": "b9aad06193e27ccc2d370c4b6a55b4929f034d36e16b7e314d0ee755751a0913"
+    }
+  ],
+  "boards": {
+    "adders/fa3_ordered.nbt": "62068d167794f2fd904daf189b86661f325d6d3f47ffed8ef82f33412906bfaf",
+    "basin-heater-240v.nbt": "745e048a51616eae0a9490502b491cae4fe2947b05920ebff1d61539ccd6a253",
+    "basin-heater-quiet-240v.nbt": "93c18c920b242ac96d850fbf631581c96e739ce0785ef2de62301114324a9faf",
+    "clocked-bit.nbt": "183b08c5c59e44d0720d110e71a53ba4213155f5b65d8cb5e129976c159c2f37",
+    "fused-latch.nbt": "ae9b12faa11df131569478b737bbe483c8ff3f5b3325c7aa197ac2dd9b17493b",
+    "oscillator/LC_Oscillator.nbt": "f1fb68e29b9e9e78adb1bdc08f804ab17318b1b3076f32eed7ce7d30d6aa3e06",
+    "read-selector.nbt": "6e0203a85a5564b486054c98f932c1bb86a7d02d72a354facf9a4c4bbb7b1951",
+    "rebuilt/native-linear-regulator.nbt": "84d61d821d6a98ffa3b344f59f7ec34018de129007844023850692a97a573ee1",
+    "rebuilt/native-memory-cell.nbt": "e00248760f158a06adf6a1d3122acfae72e75322caf859ee573312c54632c5a2",
+    "retained-word2.nbt": "c2cbc78504ae64b92a8e9d272223675ff36e9217b65131c9633f35f932a8ef39",
+    "source-loss-alarm.nbt": "5f35369791bb931448a2b5db65db5beef8cf71e9ed8b5f2eaf60c02cc40be4ef",
+    "source-switch/Gen_Battery_autoSwitchV3.nbt": "4381bdf8dbed365d71a53a82fd467014314c5f853acca43a2dcbe07b55d918e6",
+    "write-decoder.nbt": "321085475ca327a4be341c099575639a4bd0e495043f0494b523d2606a1c933c"
+  },
+  "redistribution_permission": {
+    "confirmed_by": "repository owner in this release chat",
+    "date": "2026-11-10",
+    "scope": [
+      "community adder",
+      "oscillator",
+      "source selector",
+      "original regulator design"
+    ]
+  },
+  "authors": {
+    "adder3": "jolol1k3_",
+    "oscillator": "Dr Ender",
+    "source-switch": "Ink | Soul Artist",
+    "regulator": "native-connector conversion of Doooom20 | Ham Mafia | design",
+    "other_circuits": "WWPG circuit designs; native memory-cell and assembly sources preserved"
+  },
+  "adaptation_notes": [
+    "NeoForge invokes every generator before namespace filtering; inactive generators return no tests.",
+    "The fused-latch sequence is split into FusedOutputChecks to keep Power Components types out of the core-only assemblies."
+  ]
+}

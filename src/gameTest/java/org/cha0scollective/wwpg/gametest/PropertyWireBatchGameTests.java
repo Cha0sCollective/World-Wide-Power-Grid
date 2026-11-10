@@ -139,7 +139,7 @@ public final class PropertyWireBatchGameTests {
         final PropertyCurrentSourceWire wire = new PropertyCurrentSourceWire(a, b, .25);
         final VoltageSourceCoupling source = new VoltageSourceCoupling(a, b, 0, 10);
         Circuit(GameTestHelper h) {
-            h.assertTrue(PlainWireBatch.ENABLED && PlainWireBatch.VERIFY, "Enable batching and scalar verification for these fixtures");
+            h.assertTrue(PlainWireBatch.ENABLED, "Release batching must be enabled");
             network.switchBackend(ModdedConfigs.server().electricity.solver.solverBackend.get());
             h.assertTrue(((ElectricalNetworkAccessor) network).wwpg$solver().type()
                     == ModdedConfigs.server().electricity.solver.solverBackend.get(), "Wrong actual backend");

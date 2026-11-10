@@ -13,7 +13,7 @@ import org.patryk3211.powergrid.electricity.sim.node.CurrentSourceWire;
 import org.patryk3211.powergrid.electricity.sim.node.FloatingNode;
 import org.patryk3211.powergrid.electricity.sim.node.VoltageSourceCoupling;
 
-/** Opt-in experimental fixtures, run with both batch and bitwise verification enabled. */
+/** Release-default batching with independent bitwise power assertions. */
 @GameTestHolder("wwpg_wire_power")
 @PrefixGameTestTemplate(false)
 public final class PlainWireBatchGameTests {
@@ -129,7 +129,7 @@ public final class PlainWireBatchGameTests {
         final FloatingNode a = new FloatingNode(), b = new FloatingNode();
         final ElectricWire wire = new ElectricWire(8, a, b);
         Circuit(GameTestHelper h) {
-            h.assertTrue(PlainWireBatch.ENABLED && PlainWireBatch.VERIFY, "Enable batch and bitwise verification for experimental fixtures");
+            h.assertTrue(PlainWireBatch.ENABLED, "Release batching must be enabled");
             network.switchBackend(ModdedConfigs.server().electricity.solver.solverBackend.get());
             network.addNodes(a, b);
             network.addWire(wire);

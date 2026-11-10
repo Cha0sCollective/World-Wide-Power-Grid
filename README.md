@@ -1,5 +1,10 @@
 # World-Wide Power Grid
 
+This branch prepares **0.2.8-rc.1** from the experimental control. Release
+acceptance is in progress. See the [circuit library](docs/CIRCUIT_LIBRARY.md)
+and [control promotion record](docs/developer/CONTROL_PROMOTION_028.md).
+The published release information below describes 0.2.7.
+
 **WWPG lets Create: Electro Energetics (CEE) and Power Grid (PG) work together in the same stationary factory.** Either mod can power the other's supported equipment using their native wires, controls and tools.
 
 **[WWPG 0.2.7](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.7) (stable)** for Minecraft 1.21.1 and NeoForge. Follow [installation](docs/INSTALL.md) for the required mod versions and settings. Add-on developers can also use the separately versioned **extension API 1.0.0**.

@@ -343,3 +343,57 @@
  
  #if defined(__cplusplus)
  }
+--- a/native/src/powergridNative/c/solver.c
++++ b/native/src/powergridNative/c/solver.c
+@@ -178,12 +178,12 @@
+ }
+ 
+ // Inspect every row: BLAS idamax can select a finite row while other rows are NaN.
+-static int solver_finite(const double *values, int size) {
++static int wwpg_scalar_finite(const double *values, int size) {
+     for(int row = 0; row < size; ++row) if(!isfinite(values[row])) return FALSE;
+     return TRUE;
+ }
+ 
+-static double solver_residual_norm(solver_t *solver) {
++static double wwpg_scalar_norm(solver_t *solver) {
+     double norm = 0;
+     for(int row = 0; row < solver->m_size; ++row) {
+         double value = fabs(solver->m_residual[row]);
+@@ -192,6 +192,8 @@
+     }
+     return norm;
+ }
++
++#include "reduction.h"
+ 
+ static jobject solver_failed(solver_t *solver, int info) {
+     solver->m_converged = FALSE;
+@@ -246,8 +248,7 @@
+ 
+         char trans = 'N';
+         // R = A * x - R
+-        SuperMatrix* A = sparsematrix_supermatrix(&solver->m_A);
+-        sp_dgemv(&trans, 1.0, A, solver->m_state, 1, -1.0, solver->m_residual, 1);
++        sp_dgemv(&trans, 1.0, sparsematrix_supermatrix(&solver->m_A), solver->m_state, 1, -1.0, solver->m_residual, 1);
+         double nextNorm = solver_residual_norm(solver);
+         if(!isfinite(nextNorm)) return solver_failed(solver, -1004);
+         double dNorm = fabs(nextNorm - norm);
+@@ -282,7 +283,7 @@
+                 if((*solver->m_env)->ExceptionCheck(solver->m_env)) return solver_failed(solver, -1005);
+                 memcpy(solver->m_residual, solver->m_b, solver->m_size * sizeof(double));
+                 // R = A * x - R
+-                sp_dgemv(&trans, 1.0, A, solver->m_state, 1, -1.0, solver->m_residual, 1);
++                sp_dgemv(&trans, 1.0, sparsematrix_supermatrix(&solver->m_A), solver->m_state, 1, -1.0, solver->m_residual, 1);
+                 double testNorm = solver_residual_norm(solver);
+                 if(!isfinite(testNorm)) return solver_failed(solver, -1004);
+                 if(testNorm < norm)
+@@ -293,7 +294,7 @@
+             }
+         }
+ 
+-        sparsematrix_same_pattern(&solver->m_A, 1);
++        sparsematrix_same_pattern(&solver->m_A, solver->m_A.m_L.Store != NULL && solver->m_A.m_U.Store != NULL);
+     }
+     PG_TRACE("[Solver::singleTick] post loop");
+ 

@@ -3,9 +3,9 @@ package org.cha0scollective.wwpg.experimental;
 import net.minecraft.server.MinecraftServer;
 import org.cha0scollective.wwpg.WorldWidePowerGrid;
 
-/** Opt-in extra queue service while saved wires or a player's tracked view are loading. */
+/** Extra queue service while saved wires or a player's tracked view are loading. */
 public final class ChunkTaskPump {
-    public static final int BUDGET_MILLIS = Integer.getInteger("wwpg.experimental.chunkTaskBudgetMillis", 0);
+    public static final int BUDGET_MILLIS = Integer.getInteger("wwpg.experimental.chunkTaskBudgetMillis", 2);
     private static final int MAX_TASKS = 512;
     static {
         if (BUDGET_MILLIS < 0 || BUDGET_MILLIS > 20)

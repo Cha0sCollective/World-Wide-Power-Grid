@@ -1,0 +1,303 @@
+[
+  {
+    "game_versions": [
+      "1.21.1"
+    ],
+    "loaders": [
+      "neoforge"
+    ],
+    "environment": "client_and_server",
+    "id": "ZMfRgLy5",
+    "project_id": "qYJdIoAx",
+    "author_id": "Qydnx8vL",
+    "featured": false,
+    "name": "Create: Electro Energetics 1.21.1-1.1.4",
+    "version_number": "1.21.1-1.1.4",
+    "changelog": "- Fixed electric motors breaking\n- Fixed variac overheating when they shouldn't be\n- Fixed fps freezes when removing blocks with wires on sable sublevels\n",
+    "changelog_url": null,
+    "date_published": "2026-10-14T14:34:11.913764Z",
+    "downloads": 17629,
+    "version_type": "release",
+    "status": "listed",
+    "requested_status": null,
+    "files": [
+      {
+        "id": "HFfVuq6Z",
+        "hashes": {
+          "sha512": "022ba387a614954942f45e613807d8416692dc91f808ab6420fd36981d547747b6b8d38802e40161991fd95ebe2502e91197b57fdc629fe2fbb50c4fb7375de0",
+          "sha1": "e2e7dfa11767d17920571e1c7d2c37211421539c"
+        },
+        "url": "https://cdn.modrinth.com/data/qYJdIoAx/versions/ZMfRgLy5/electroenergetics-1.21.1-1.1.4.jar",
+        "filename": "electroenergetics-1.21.1-1.1.4.jar",
+        "primary": true,
+        "size": 4774719,
+        "file_type": null
+      }
+    ],
+    "dependencies": [
+      {
+        "version_id": null,
+        "project_id": "LNytGWDc",
+        "file_name": null,
+        "dependency_type": "required"
+      }
+    ]
+  },
+  {
+    "game_versions": [
+      "1.21.1"
+    ],
+    "loaders": [
+      "neoforge"
+    ],
+    "environment": "client_and_server",
+    "id": "KWxEmmON",
+    "project_id": "qYJdIoAx",
+    "author_id": "Qydnx8vL",
+    "featured": false,
+    "name": "Create: Electro Energetics 1.21.1-1.1.3",
+    "version_number": "1.21.1-1.1.3",
+    "changelog": "- Fixed the issue with the flywheel wire rendering for glass insulators",
+    "changelog_url": null,
+    "date_published": "2026-10-04T14:07:15.153796Z",
+    "downloads": 6631,
+    "version_type": "release",
+    "status": "listed",
+    "requested_status": null,
+    "files": [
+      {
+        "id": "z7vw81Aj",
+        "hashes": {
+          "sha512": "080f4ed9cafe27b897cf14236ee92798a1c29fb08c0456208cf4a2bcc4164934a3ef40e202aeb25c9f5ae58f3f1739fcf0ab21f5f3c7e241f602a79f53a1cf00",
+          "sha1": "b8225d9ec60b5afaba8809e0bd96f224a0560e10"
+        },
+        "url": "https://cdn.modrinth.com/data/qYJdIoAx/versions/KWxEmmON/electroenergetics-1.21.1-1.1.3.jar",
+        "filename": "electroenergetics-1.21.1-1.1.3.jar",
+        "primary": true,
+        "size": 4774544,
+        "file_type": null
+      }
+    ],
+    "dependencies": [
+      {
+        "version_id": null,
+        "project_id": "LNytGWDc",
+        "file_name": null,
+        "dependency_type": "required"
+      }
+    ]
+  },
+  {
+    "game_versions": [
+      "1.21.1"
+    ],
+    "loaders": [
+      "neoforge"
+    ],
+    "environment": "client_and_server",
+    "id": "hVjeqOy6",
+    "project_id": "qYJdIoAx",
+    "author_id": "Qydnx8vL",
+    "featured": false,
+    "name": "Create: Electro Energetics 1.21.1-1.1.2",
+    "version_number": "1.21.1-1.1.2",
+    "changelog": "- Fixed JEI issues\n- Fixed crash with momentary switches\n- Fixed wire lighting when using flywheel rendering\n- Fixed pantograph section alignment issues\n- Fixed null issue when serializing catenary connections\n- Improved the performance of mob spawn prevention checks\n- Improved node interaction experience",
+    "changelog_url": null,
+    "date_published": "2026-09-25T18:34:34.995267Z",
+    "downloads": 7893,
+    "version_type": "release",
+    "status": "listed",
+    "requested_status": null,
+    "files": [
+      {
+        "id": "aH4LShnY",
+        "hashes": {
+          "sha1": "f27cdd107debaeca9bfd11d1a7fba629ad76ede7",
+          "sha512": "6b9b298a6ed6994c5b99dbbcb28ce40b1c33f4627db559b241b5866a19f62039441bbb513e9f19475c75026fa520bc07f5d84e004f3d7df88a947e5943c5bfc2"
+        },
+        "url": "https://cdn.modrinth.com/data/qYJdIoAx/versions/hVjeqOy6/electroenergetics-1.21.1-1.1.2.jar",
+        "filename": "electroenergetics-1.21.1-1.1.2.jar",
+        "primary": true,
+        "size": 4774551,
+        "file_type": null
+      }
+    ],
+    "dependencies": [
+      {
+        "version_id": null,
+        "project_id": "LNytGWDc",
+        "file_name": null,
+        "dependency_type": "required"
+      }
+    ]
+  },
+  {
+    "game_versions": [
+      "1.21.1"
+    ],
+    "loaders": [
+      "neoforge"
+    ],
+    "environment": "client_and_server",
+    "id": "11zlqCk5",
+    "project_id": "qYJdIoAx",
+    "author_id": "Qydnx8vL",
+    "featured": false,
+    "name": "Create: Electro Energetics 1.21.1-1.1.1",
+    "version_number": "1.21.1-1.1.1",
+    "changelog": "- Fixed electric motors\n- Made trains constant power, not constant resistance\n- Fixed youer incompatibility\n- Fixed redstone potentiometers",
+    "changelog_url": null,
+    "date_published": "2026-06-30T11:13:31.304486Z",
+    "downloads": 130066,
+    "version_type": "release",
+    "status": "listed",
+    "requested_status": null,
+    "files": [
+      {
+        "id": "IAuzzVpN",
+        "hashes": {
+          "sha512": "962ce12b3b755eea9c50f16f685a03f82268c5c6250dbcf3f25a11b62e01e39c8668571c2093703178736031e43139953fcb510e151a1950c638503b3eda1993",
+          "sha1": "57012ecaad1e1b4994878696a4ba81dfdb3488db"
+        },
+        "url": "https://cdn.modrinth.com/data/qYJdIoAx/versions/11zlqCk5/electroenergetics-1.21.1-1.1.1.jar",
+        "filename": "electroenergetics-1.21.1-1.1.1.jar",
+        "primary": true,
+        "size": 4771388,
+        "file_type": null
+      }
+    ],
+    "dependencies": [
+      {
+        "version_id": null,
+        "project_id": "LNytGWDc",
+        "file_name": null,
+        "dependency_type": "required"
+      }
+    ]
+  },
+  {
+    "game_versions": [
+      "1.21.1"
+    ],
+    "loaders": [
+      "neoforge"
+    ],
+    "environment": "client_and_server",
+    "id": "NKczAflT",
+    "project_id": "qYJdIoAx",
+    "author_id": "Qydnx8vL",
+    "featured": false,
+    "name": "Create: Electro Energetics 1.21.1-1.1.0",
+    "version_number": "1.21.1-1.1.0",
+    "changelog": "- Added variacs\n- Added redstone variacs\n- Added redstone potentiometers\n- Tweaked the potentiometer recipe\n\n- Made the contact shoe work on Sable sublevels\n- Made the pantograph work as a placed block (not on sable sublevel)\n- Made the resistive heater compatible with farmer's delight\n- Made it possible for wire cutters from other mods to cut wires\n- Added the alternate wire placement config (IE like wire placement)\n\n- Made electrical panels dyeable\n- Made electrical panels save data in schematics\n- Made the momentary switch and cut off switch in panels work as redstone links (r-click with redstone link)\n- Made differently sized panel attachments placeable in one block\n- Made the altitude sensor from Aeronautics placeable in panels\n- Made analog levers placeable inside electrical panels\n- Made velocity sensors from Simulated placeable inside electrical panels\n- Made turntables panel attachments (throttle wheel)\n- Made cut off switches work as miniature attachments on electrical panels\n- Made the momentary switch, cut off switch and indicator bulb placeable in panels as half-sized\n- Made the experience of using the wrench near wires nicer\n- Got rid of miniature versions of items (they are now placed using the original item)\n- Rewrote the electrical panel layout data structure\n\n- Disabled birds on wires by default since it's not at all a finished feature\n- Added a tooltip to labeled electrical panel attachments\n- Moved the nodes of variacs and potentiometers slightly apart\n\n- Significantly improved the server thread performance of pantograph-catenary contact calculation\n- Improved the performance of electrocution and wire breaking calculation\n- Added a circuit topology optimization for transformers\n\n- Fixed the wire smoke particles on wires with different slack values\n- Fixed a crash with synchroscopes and frequency meters\n- Fixed a bug that makes the pantograph connection flicker when moving the bus\n\n- Make power density of Alternator and exchange rate between SU and Watt adjustable. (PR #136)\n- Optimize the placement experience of Alternator Brushes (PR #141)\n- Fixed a crash when coupling electric trains via Steam & Rails (PR #138)",
+    "changelog_url": null,
+    "date_published": "2026-06-27T09:00:48.908106Z",
+    "downloads": 2887,
+    "version_type": "release",
+    "status": "listed",
+    "requested_status": null,
+    "files": [
+      {
+        "id": "1pbRCVhg",
+        "hashes": {
+          "sha1": "344c0e040a659f8d38d35d5aee0a42911034634c",
+          "sha512": "42293080ffcdf60a1ea122d534c1cfed362a627492a373b268aac4f63e773b683cea1fde86efaec7a1d1e21731df153634aceecbb855a58c6c016498383b17cb"
+        },
+        "url": "https://cdn.modrinth.com/data/qYJdIoAx/versions/NKczAflT/electroenergetics-1.21.1-1.1.0.jar",
+        "filename": "electroenergetics-1.21.1-1.1.0.jar",
+        "primary": true,
+        "size": 4771656,
+        "file_type": null
+      }
+    ],
+    "dependencies": [
+      {
+        "version_id": null,
+        "project_id": "LNytGWDc",
+        "file_name": null,
+        "dependency_type": "required"
+      }
+    ]
+  },
+  {
+    "game_versions": [
+      "1.21.1"
+    ],
+    "loaders": [
+      "neoforge"
+    ],
+    "environment": "client_and_server",
+    "id": "wg7VdaNo",
+    "project_id": "qYJdIoAx",
+    "author_id": "Qydnx8vL",
+    "featured": false,
+    "name": "Create: Electro Energetics 1.21.1-1.0.1",
+    "version_number": "1.21.1-1.0.1",
+    "changelog": "- Wire sag can now be changed with alt+scroll\n- Fixed the disappearing wire bug\n- Fixed miniature panel attachments being off center\n- Fixed the unaligned transformer core model lamination texture\n- Made certain nodes smaller\n- Micro ticks now don't need to be in powers of two\n- Added the glass insulator\n- Fixed rotors and stators missing the generator ponder\n- Fixed the wire attachment ponder saying hanged instead of hung\n- Fixed the wire spool crash\n- Improved the performance of de-optimization of series resistance topology optimizations",
+    "changelog_url": null,
+    "date_published": "2026-06-09T19:08:10.297924Z",
+    "downloads": 7432,
+    "version_type": "release",
+    "status": "listed",
+    "requested_status": null,
+    "files": [
+      {
+        "id": "1EWdvjdR",
+        "hashes": {
+          "sha1": "982a6e48aefa68ec38b7c6abce7bbd51d27a617d",
+          "sha512": "aa907eadcf3d9fb8f4c445a0646b06d72df91690c81ca3889a949a4c9600e4b221b32e1c10209a9eefcb2b647abace8b70fcde675a9e66e9948d8e6828eead71"
+        },
+        "url": "https://cdn.modrinth.com/data/qYJdIoAx/versions/wg7VdaNo/electroenergetics-1.21.1-1.0.1.jar",
+        "filename": "electroenergetics-1.21.1-1.0.1.jar",
+        "primary": true,
+        "size": 4519022,
+        "file_type": null
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "game_versions": [
+      "1.21.1"
+    ],
+    "loaders": [
+      "neoforge"
+    ],
+    "environment": "client_and_server",
+    "id": "4yGHMZ9V",
+    "project_id": "qYJdIoAx",
+    "author_id": "Qydnx8vL",
+    "featured": false,
+    "name": "Create: Electro Energetics 1.21.1-1.0.0",
+    "version_number": "1.21.1-1.0.0",
+    "changelog": "its out!!11!!1!11",
+    "changelog_url": null,
+    "date_published": "2026-05-31T13:12:58.944063Z",
+    "downloads": 2290,
+    "version_type": "release",
+    "status": "listed",
+    "requested_status": null,
+    "files": [
+      {
+        "id": "9Y9LgOyE",
+        "hashes": {
+          "sha512": "a072d7add2f568d00459bd33502c60bc0ad3b0225453f4366d3ead93effcb7b68aaa2f29e9aff3f736d9b17f514493cd8f84455233729d088d76e0207bb94eac",
+          "sha1": "bf2b2d41ad7cb02d1b9fb009631efd26ff164e5f"
+        },
+        "url": "https://cdn.modrinth.com/data/qYJdIoAx/versions/4yGHMZ9V/electroenergetics-1.21.1-1.0.0.jar",
+        "filename": "electroenergetics-1.21.1-1.0.0.jar",
+        "primary": true,
+        "size": 4457736,
+        "file_type": null
+      }
+    ],
+    "dependencies": [
+      {
+        "version_id": "UjX6dr61",
+        "project_id": "LNytGWDc",
+        "file_name": null,
+        "dependency_type": "required"
+      }
+    ]
+  }
+]
