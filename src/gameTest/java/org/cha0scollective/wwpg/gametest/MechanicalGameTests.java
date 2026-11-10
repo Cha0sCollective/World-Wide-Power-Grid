@@ -52,9 +52,18 @@ public final class MechanicalGameTests {
                 WiringGameTests.connect(h, ceeSource, 1 - i, pgMotor, i, true);
             }
         });
+        h.runAtTickTime(39, () -> {
+            var cee=(ElectricMotorBlockEntity)level.getBlockEntity(ceeMotor);
+            var voltage=cee.saveWithoutMetadata(level.registryAccess()).getLongArray("Voltage");
+            double sum=0;for(long bits:voltage)sum+=Math.pow(Double.longBitsToDouble(bits),2);
+            org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info("MOTOR_DIAGNOSTIC tick39 speed={} mode={} held={} samples={} rms={} pending={}",
+                cee.getGeneratedSpeed(),cee.getBehaviour(ScrollValueBehaviour.TYPE).getValue(),
+                org.cha0scollective.wwpg.bridge.RestorationCoordinator.pausedAt(level,ceeMotor),voltage.length,Math.sqrt(sum/voltage.length),
+                org.cha0scollective.wwpg.experimental.WireTreeBatch.pending(level));
+        });
         h.runAtTickTime(40, () -> {
             var cee = (ElectricMotorBlockEntity) level.getBlockEntity(ceeMotor);
-            h.assertTrue(Math.abs(cee.getGeneratedSpeed()) == 32, "CEE locked motor mode failed");
+            h.assertTrue(Math.abs(cee.getGeneratedSpeed()) == 32, "CEE locked motor mode failed: speed="+cee.getGeneratedSpeed()+", mode="+cee.getBehaviour(ScrollValueBehaviour.TYPE).getValue()+", held="+org.cha0scollective.wwpg.bridge.RestorationCoordinator.pausedAt(level,ceeMotor));
             cee.getBehaviour(ScrollValueBehaviour.TYPE).setValue(1_000_001);
         });
         h.runAtTickTime(60, () -> {
