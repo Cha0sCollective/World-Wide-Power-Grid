@@ -19,14 +19,17 @@ import static org.cha0scollective.wwpg.experimental.RestorationComponents.join;
 
 /** Server-thread metadata only. No endpoint resolution, geometry callbacks or retained graph index. */
 public final class ScopedRestoration {
-    public static final boolean ENABLED = Boolean.parseBoolean(System.getProperty("wwpg.experimental.scopedRestoration", "true"));
+    private static final boolean REQUESTED = Boolean.parseBoolean(System.getProperty("wwpg.experimental.scopedRestoration", "true"));
+    public static final boolean ENABLED = REQUESTED && WireTreeBatch.BOUNDED;
     private static Scope current;
     private static final Set<ElectricalNetwork> deferredNetworks = identitySet();
     private static final Set<INode> deferredNodes = identitySet();
     private static long snapshots, membershipChecks, savedParts, nodeBindings, seedEndpoints, heldNetworks, fallbackWorlds, totalNanos, maxNanos;
     private static long topologyPasses, topologyNanos, maxTopologyNanos;
     static {
-        if (ENABLED && !WireTreeBatch.BOUNDED) throw new IllegalArgumentException("Scoped restoration requires bounded saved-wire batching");
+        if (REQUESTED && !ENABLED) WorldWidePowerGrid.LOGGER.info(
+                "WWPG scoped restoration disabled: bounded wire batching is unavailable (wireTreeBatch={}, wireTreeBudgetMillis={}); using compatible restoration fallback",
+                WireTreeBatch.ENABLED, WireTreeBatch.BUDGET_MILLIS);
     }
     private ScopedRestoration() { }
     private static <T> Set<T> identitySet() { return Collections.newSetFromMap(new IdentityHashMap<>()); }

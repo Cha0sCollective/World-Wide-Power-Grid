@@ -17,7 +17,8 @@ public final class WireTreeBatch {
     public static final boolean BOUNDED = ENABLED && BUDGET_MILLIS > 0;
     public static final boolean PRIORITIZE_UNRESOLVED = ENABLED && Boolean.parseBoolean(System.getProperty("wwpg.experimental.wireTreePrioritizeUnresolved", "true"));
     static {
-        if (BUDGET_MILLIS < 0 || MAX_PARTS < 1) throw new IllegalArgumentException("Invalid wire-tree budget");
+        if (BUDGET_MILLIS < 0 || MAX_PARTS < 1) throw new IllegalArgumentException(
+                "Invalid wire-tree budget: wireTreeBudgetMillis="+BUDGET_MILLIS+" (must be >= 0), wireTreeMaxParts="+MAX_PARTS+" (must be >= 1)");
     }
     private static final ThreadLocal<BaseWireEntity> READING = new ThreadLocal<>();
     private static final Map<WorldNetworks, State> PENDING = new IdentityHashMap<>();
