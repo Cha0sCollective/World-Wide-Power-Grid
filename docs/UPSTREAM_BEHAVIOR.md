@@ -1,7 +1,7 @@
 # Upstream behavior and compatibility checks
 
-This describes the local 0.2.8 audit corrections. It is not a new acceptance
-record for the published 0.2.8-beta1 release.
+This describes the audit corrections being qualified for 0.2.8-beta.2. It is
+not an acceptance record for this candidate or the published 0.2.8-beta1 release.
 
 ## Preserved behavior
 

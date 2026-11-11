@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+## 0.2.8-beta.2 — release candidate, 11 November 2026
+
+- Restore rejected CEE dynamics coherently, including alternator windings that
+  share rotor state. Isolate unsupported addon endpoints before callbacks while
+  keeping healthy circuits available.
+- Fall back safely when scoped restoration cannot use bounded wire batching.
+  Reject nonfinite multimeter input without changing the previous selection.
+- Guard native matrix allocation, growth and cleanup on Windows and Linux;
+  reject duplicate archive entries in acceptance comparisons. Preserve API 1.0.0,
+  saves, electrical equations and the published generator timing correction.
+
+Release headless and graphical qualification is in progress. The historical
+Linux motor assertion remains unexplained; passing repeats do not close it.
+
 ## 0.2.8-beta1 — 10 November 2026 (prerelease)
 
 - Enable retained PG/CEE wire batching, bounded and prioritized restoration,
