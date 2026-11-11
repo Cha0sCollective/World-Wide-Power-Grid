@@ -35,7 +35,8 @@ public final class AuditConfigurationGameTests {
                     new com.george_vi.electroenergetics.foundation.nodes.InWorldNodeConnection(
                             new com.george_vi.electroenergetics.foundation.nodes.InWorldNode(port,h.absolutePos(source)),
                             new com.george_vi.electroenergetics.foundation.nodes.InWorldNode(port,h.absolutePos(load)))).getResistance();
-            double expected=10*10/(10+wireResistance);
+            // PG 0.6.2 builds its creative voltage source with 1e-4f ohms internally.
+            double expected=10*10/(10+wireResistance+(double)1e-4f);
             BoardComponentGameTests.near(h,first.getVoltage()-second.getVoltage(),expected,1e-5,"Powered load including native CEE wire resistance");
             h.getLevel().getDataStorage().save();h.succeed();
         });
