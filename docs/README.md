@@ -35,6 +35,7 @@ The combined Stationary Yard requires Pinout and CC:Tweaked and includes the ord
 | See what each current GameTest actually checks | [GameTest coverage reference](GAMETEST_REFERENCE.md) |
 | Work on the unreleased guarded native solver | [Native safety development](NATIVE_SAFETY_DEVELOPMENT.md) |
 | Submit a change | [Contributing](../CONTRIBUTING.md) |
+| Understand preserved behavior and intentional model differences | [Upstream behavior](UPSTREAM_BEHAVIOR.md) |
 | Understand API release requirements | [API release checks](API_RELEASE_CHECKS.md) and [completed API plan](EXTENSION_API_PLAN.md) |
 | Package and publish the five downloads with short notes | [Release process](RELEASING.md) |
 | Inspect a published release's files and test records | [Release records](../release/README.md) |

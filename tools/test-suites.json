@@ -80,6 +80,10 @@
     ]
   },
   "groups": {
+    "audit-generator": {
+      "namespaces": ["wwpg_audit_generator"],
+      "phases": ["SETUP"]
+    },
     "audit": {
       "namespaces": ["wwpg_audit_cee", "wwpg_audit_endpoints", "wwpg_audit_meter", "wwpg_audit_config"],
       "phases": ["SETUP"]
