@@ -43,16 +43,19 @@ public final class HandheldMeters {
 
     public static boolean attachMultimeter(NodeConnectionPoint point, ServerLevel level, Player player, ItemStack stack) {
         if (!(stack.getItem() instanceof MultimeterItem meter)) return false;
+        if (!Float.isFinite(point.point()) || point.point() < 0 || point.point() > 1) return false;
         var connection = point.connection();
         var infrastructure = InfrastructureSavedData.load(level);
         var wire = infrastructure.getConnectionData(connection);
         if (wire == null) return false;
         var a = point.node1().getPosition(level);
         var b = point.node2().getPosition(level);
-        if (a == null || b == null || point.point() < 0 || point.point() > 1) return false;
+        if (!finitePosition(a) || !finitePosition(b)) return false;
         var position = QuadraticWireHelper.posAt(a,b,point.point(),wire.getSag(a.distanceTo(b)));
         double range = ModdedConfigs.server().equipment.multimeterDistance.get();
-        if (player.distanceToSqr(position) > range * range) return false;
+        if (!finitePosition(position)) return false;
+        double distance = player.distanceToSqr(position);
+        if (!Double.isFinite(range) || range < 0 || !Double.isFinite(distance) || distance > range * range) return false;
         meter.setMode(stack, 1);
         stack.set(CEEDataComponents.NODE_CONNECTION, connection);
         var data = MultimeterItem.getModeData(stack);
@@ -61,6 +64,10 @@ public final class HandheldMeters {
         data.putFloat(CURRENT, 0);
         MultimeterItem.saveModeData(stack, data);
         return true;
+    }
+
+    private static boolean finitePosition(net.minecraft.world.phys.Vec3 position) {
+        return position != null && Double.isFinite(position.x) && Double.isFinite(position.y) && Double.isFinite(position.z);
     }
 
     public static void tickMultimeter(ItemStack stack, ServerLevel level) {
