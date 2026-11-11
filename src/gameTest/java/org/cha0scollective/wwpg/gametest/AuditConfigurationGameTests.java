@@ -29,7 +29,14 @@ public final class AuditConfigurationGameTests {
         h.runAtTickTime(25,()->{
             var first=new org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint(h.absolutePos(load),0).getNode(h.getLevel());
             var second=new org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint(h.absolutePos(load),1).getNode(h.getLevel());
-            BoardComponentGameTests.near(h,first.getVoltage()-second.getVoltage(),10,.01,"Powered circuit under effective restoration flags");
+            var infrastructure=com.george_vi.electroenergetics.simulation.infrastructure.InfrastructureSavedData.load(h.getLevel());
+            double wireResistance=0;
+            for(int port=0;port<2;++port)wireResistance+=infrastructure.getConnectionData(
+                    new com.george_vi.electroenergetics.foundation.nodes.InWorldNodeConnection(
+                            new com.george_vi.electroenergetics.foundation.nodes.InWorldNode(port,h.absolutePos(source)),
+                            new com.george_vi.electroenergetics.foundation.nodes.InWorldNode(port,h.absolutePos(load)))).getResistance();
+            double expected=10*10/(10+wireResistance);
+            BoardComponentGameTests.near(h,first.getVoltage()-second.getVoltage(),expected,1e-5,"Powered load including native CEE wire resistance");
             h.getLevel().getDataStorage().save();h.succeed();
         });
     }
