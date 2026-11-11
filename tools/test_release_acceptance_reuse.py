@@ -5,6 +5,7 @@ import subprocess
 import tempfile
 import unittest
 import zipfile
+import warnings
 from release_acceptance_reuse import runtime_equivalent, api_equivalent, world_version_equivalent, companion_equivalent
 
 class ReuseChecks(unittest.TestCase):
@@ -29,6 +30,34 @@ class ReuseChecks(unittest.TestCase):
             with self.subTest(i=i),self.assertRaises(ValueError):runtime_equivalent(old,self.runtime(str(i)+'.jar','2',change),'1','2')
     def test_added_runtime_entry_is_rejected(self):
         with self.assertRaises(ValueError):runtime_equivalent(self.runtime('old.jar','1'),self.runtime('new.jar','2',{'extra.class':b'code'}),'1','2')
+    def test_duplicate_archive_entries_are_rejected_on_either_side(self):
+        for kind in ('runtime', 'api', 'companion'):
+            for side in ('old', 'new'):
+                for differing in (False, True):
+                    with self.subTest(kind=kind, side=side, differing=differing):
+                        if kind == 'runtime':
+                            old=self.runtime('old.jar','1');new=self.runtime('new.jar','2')
+                            check=lambda:runtime_equivalent(old,new,'1','2')
+                            member='native/pg.so'
+                        elif kind == 'companion':
+                            old=self.companion('old.jar','1');new=self.companion('new.jar','2')
+                            check=lambda:companion_equivalent(old,new,'1','2')
+                            member='fixture.nbt'
+                        else:
+                            old=self.jar('old.jar',{'resource.txt':b'original'})
+                            new=self.jar('new.jar',{'resource.txt':b'original'})
+                            check=lambda:api_equivalent(old,new)
+                            member='resource.txt'
+                        target=old if side=='old' else new
+                        with zipfile.ZipFile(target) as z:payload=z.read(member)
+                        # Put the expected entry last: filename reads can hide the first one.
+                        with warnings.catch_warnings():
+                            warnings.simplefilter('ignore',UserWarning)
+                            with zipfile.ZipFile(target,'a') as z:
+                                z.writestr(member,b'altered' if differing else payload)
+                                z.writestr(member,payload)
+                        with self.assertRaisesRegex(ValueError,'[Dd]uplicate'):
+                            check()
     def companion(self,name,version,extra=None):
         files={'META-INF/neoforge.mods.toml':f'modId="wwpg_tests"\nversion="{version}"\nmodId="wwpg"\nversionRange="[{version}]"',
             'Tests.class':b'actual tests','fixture.nbt':b'actual saved fixture'}
@@ -99,6 +128,17 @@ class WorldVersionReuseChecks(unittest.TestCase):
     def test_added_world_entry_is_rejected(self):
         changed=dict(self.promoted);changed['TEST_ONLY/new.dat']=b'new'
         with self.assertRaisesRegex(ValueError,'entries differ'):self.check(changed)
+    def test_duplicate_world_entries_are_rejected_on_either_side(self):
+        for side in ('old','new'):
+            for member in (self.header,self.readme,'TEST_ONLY/level.dat'):
+                with self.subTest(side=side,member=member):
+                    old=self.archive('old.zip',self.original);new=self.archive('new.zip',self.promoted)
+                    path=old if side=='old' else new
+                    with warnings.catch_warnings():
+                        warnings.simplefilter('ignore',UserWarning)
+                        with zipfile.ZipFile(path,'a') as z:z.writestr(member,z.read(member))
+                    with self.assertRaisesRegex(ValueError,'Duplicate'):
+                        world_version_equivalent(old,new,'beta','stable',self.old_runtime,self.new_runtime)
     def test_original_runtime_must_match(self):
         self.old_runtime['sha256']='c'*64
         with self.assertRaisesRegex(ValueError,'Original world runtime'):self.check()
