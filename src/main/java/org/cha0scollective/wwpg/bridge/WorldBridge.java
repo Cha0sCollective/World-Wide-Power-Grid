@@ -102,6 +102,12 @@ public final class WorldBridge {
     }
 
     public void prepare(SimulationTicker ticker) {
+        dynamics=List.of();adapters=List.of();
+        try { prepareFrame(ticker); }
+        catch (RuntimeException | Error failure) { restoreUncommitted(failure);throw failure; }
+    }
+
+    private void prepareFrame(SimulationTicker ticker) {
         diagnostics.advance(level.getGameTime());
         results = null;
         ticker.future = null;
@@ -162,6 +168,12 @@ public final class WorldBridge {
         var bound = Collections.newSetFromMap(new IdentityHashMap<org.cha0scollective.wwpg.extension.CeeAdapters.Binding,Boolean>());
         // Microtickers identify the original dynamic orientation, before the reverse adjacency facade.
         if (session.hasAdapters()) {
+        var endpointKeys = new IdentityHashMap<Node, EndpointKey>();
+        for (var indexed : builder.allNodes()) {
+            try { endpointKeys.put(indexed.node, EndpointKey.of(indexed.node)); }
+            catch (IllegalArgumentException unsupported) { diagnostic(unsupported.getMessage()); }
+        }
+        preparedKeys = endpointKeys;
         for (var entry : builder.microTickers.long2ObjectEntrySet()) {
             int first=DataPacker.unpackFirstI(entry.getLongKey()),second=DataPacker.unpackSecondI(entry.getLongKey());
             var captured = captureAdapter(session,entry.getValue(),first,second);
@@ -182,10 +194,11 @@ public final class WorldBridge {
         }
         for(var adapter:adapters)adapter.before(0);
         dynamics = new ArrayList<>();
+        var checkpoints = new NativeCeeCheckpoint.Frame();
         for (var entry : builder.microTickers.long2ObjectEntrySet()) {
             if (DYNAMIC_TYPES.contains(entry.getValue().getClass().getName())) {
                 var d = new Dynamic(entry.getValue(), DataPacker.unpackFirstI(entry.getLongKey()), DataPacker.unpackSecondI(entry.getLongKey()),
-                        NativeCeeCheckpoint.capture(entry.getValue()));
+                        checkpoints.capture(entry.getValue()));
                 dynamics.add(d);
             } else if(!org.cha0scollective.wwpg.extension.CeeAdapters.registered(entry.getValue().getClass()))diagnostic("Unsupported property " + entry.getValue().getClass().getName());
         }
@@ -214,6 +227,11 @@ public final class WorldBridge {
     private Optional<org.cha0scollective.wwpg.extension.CeeAdapters.Captured> captureAdapter(
             org.cha0scollective.wwpg.extension.CeeAdapters.Session session,ElectricalProperties source,int first,int second) {
         var a=builder.getNode(first).node;var b=builder.getNode(second).node;
+        if(!preparedKeys.containsKey(a)||!preparedKeys.containsKey(b)) {
+            String reason="CEE adapter endpoint identity is unsupported";
+            adapterPreparationFailures.put(a,reason);adapterPreparationFailures.put(b,reason);
+            return Optional.empty();
+        }
         if(adapterPreparationFailures.containsKey(a)||adapterPreparationFailures.containsKey(b))return Optional.empty();
         try { return session.capture(source); }
         catch(RuntimeException | LinkageError error) {
@@ -292,14 +310,24 @@ public final class WorldBridge {
                 }
             }
         }
+        // Solving eligibility never owns rollback lifetime. A rejected winding
+        // holds every phase sharing its rotor, including otherwise mapped peers.
+        for (var d : dynamics) if (!nodeKeys.containsKey(builder.getNode(d.first).node) || !nodeKeys.containsKey(builder.getNode(d.second).node)
+                || isolated.contains(nodeKeys.get(builder.getNode(d.first).node)) || isolated.contains(nodeKeys.get(builder.getNode(d.second).node)))
+            d.checkpoint.hold(true);
+        for (var d : dynamics) if (d.checkpoint.held()) {
+            for (int ordinal : new int[]{d.first,d.second}) {
+                var key=nodeKeys.get(builder.getNode(ordinal).node);
+                if (key!=null) isolate(key,"Shared CEE state held after winding isolation");
+            }
+        }
         wanted.entrySet().removeIf(e -> isolated.contains(e.getKey().first()) || isolated.contains(e.getKey().second()));
         wantedTransformers.entrySet().removeIf(e -> e.getKey().keys().stream().anyMatch(isolated::contains));
-        dynamics.removeIf(d -> !nodeKeys.containsKey(builder.getNode(d.first).node) || !nodeKeys.containsKey(builder.getNode(d.second).node)
-                || isolated.contains(nodeKeys.get(builder.getNode(d.first).node)) || isolated.contains(nodeKeys.get(builder.getNode(d.second).node)));
         adapters.removeIf(d -> {
-            boolean removed=isolated.contains(nodeKeys.get(builder.getNode(d.first).node))
+            boolean removed=!nodeKeys.containsKey(builder.getNode(d.first).node) || !nodeKeys.containsKey(builder.getNode(d.second).node)
+                    || isolated.contains(nodeKeys.get(builder.getNode(d.first).node))
                     || isolated.contains(nodeKeys.get(builder.getNode(d.second).node));
-            if(removed)d.binding.finish(false);
+            if(removed)d.finish(false);
             return removed;
         });
         for (var n : builder.allNodes()) for (int other : n.adjacency.keySet().toIntArray()) {
@@ -660,10 +688,11 @@ public final class WorldBridge {
         if (step != activeStep) {
             require(step == activeStep + 1 && completedInStep == expectedNetworks, "PG substeps arrived out of order");
             activeStep = step; completedInStep = 0;
+            holdRejectedDynamics();
             for (var d : dynamics) if (!failedDynamic(d)) d.before(voltages, step, substeps);
             for(var adapter:adapters)if (adapter.branch == null || adapter.branch.branch == null || !RestorationCoordinator.paused(adapter.branch.branch.element.network())) adapter.before(step);
             for (var branch : substepBranches) if (!RestorationCoordinator.paused(branch.element.network())) branch.element.update(branch.desired.properties);
-        }
+        } else if (steps.isEmpty()) holdRejectedDynamics();
         phase = Phase.SOLVE;
     }
 
@@ -698,6 +727,7 @@ public final class WorldBridge {
         }
         steps.put(network, activeStep + 1);
         if (++completedInStep == expectedNetworks) {
+            holdRejectedDynamics();
             for(var adapter:adapters)if (adapter.branch == null || adapter.branch.branch == null || !RestorationCoordinator.paused(adapter.branch.branch.element.network())) adapter.after(activeStep);
             for (var d : dynamics) if(!failedDynamic(d))d.after(voltages, activeStep, substeps);
             ++solvedSubsteps;
@@ -712,7 +742,20 @@ public final class WorldBridge {
     }
 
     public void finishSolving() {
+        try { finishFrame(); }
+        catch (RuntimeException | Error failure) { restoreUncommitted(failure);throw failure; }
+    }
+
+    private void restoreUncommitted(Throwable failure) {
+        for (var d : dynamics) try { d.checkpoint.restore(); }
+        catch (RuntimeException | Error rollback) { failure.addSuppressed(rollback); }
+        for (var a : adapters) try { a.finish(false); }
+        catch (RuntimeException | Error rollback) { failure.addSuppressed(rollback); }
+    }
+
+    private void finishFrame() {
         if (phase == Phase.IDLE || builder == null) return;
+        holdRejectedDynamics();
         require(expectedNetworks == 0 || activeStep == substeps - 1 && completedInStep == expectedNetworks,
                 "PG did not complete the declared substeps");
         for(var adapter:adapters) {
@@ -720,11 +763,11 @@ public final class WorldBridge {
             var network=branch==null?null:branch.element.network();
             if (network!=null && (unavailableNetworks.get(network)==Unavailability.INITIALIZING
                     || RestorationCoordinator.paused(network))) adapter.binding.defer();
-            adapter.binding.finish(branch!=null&&!unavailableNetworks.containsKey(network)&&!RestorationCoordinator.paused(network)
+            adapter.finish(branch!=null&&!unavailableNetworks.containsKey(network)&&!RestorationCoordinator.paused(network)
                     && steps.getOrDefault(branch.element.network(),0)==substeps);
             adapter.binding.failureReason().ifPresent(reason->adapterFault(adapter,reason));
         }
-        for (var dynamic : dynamics) if (failedDynamic(dynamic)) dynamic.checkpoint.run();
+        for (var dynamic : dynamics) if (failedDynamic(dynamic)) dynamic.checkpoint.restore();
         var currents = new Object2DoubleOpenHashMap<DirectionalNodeConnection>(branches.size() + 2 * transformers.size());
         for (var branch : branches.values()) {
             var p = branch.desired.properties;
@@ -846,7 +889,22 @@ public final class WorldBridge {
         return key == null ? EndpointKey.of(node) : key;
     }
     private boolean failedDynamic(Dynamic dynamic) {
-        return failedDynamicNode(dynamic.firstNode) || failedDynamicNode(dynamic.secondNode);
+        return dynamic.checkpoint.held() || failedDynamicNode(dynamic.firstNode) || failedDynamicNode(dynamic.secondNode);
+    }
+    private void holdRejectedDynamics() {
+        for (var d : dynamics) if (failedDynamicNode(d.firstNode) || failedDynamicNode(d.secondNode))
+            d.checkpoint.hold(d.firstNode!=null && unavailableNetworks.get(d.firstNode.getNetwork())==Unavailability.FAILED
+                    || d.secondNode!=null && unavailableNetworks.get(d.secondNode.getNetwork())==Unavailability.FAILED);
+        for (var d : dynamics) if (d.checkpoint.held()) {
+            holdDynamicNode(d.firstNode,d.checkpoint.failed());
+            holdDynamicNode(d.secondNode,d.checkpoint.failed());
+        }
+    }
+    private void holdDynamicNode(OwnedFloatingNode node,boolean failure) {
+        if(node==null||node.getNetwork()==null)return;
+        var network=node.getNetwork();
+        markUnavailable(network,failure?Unavailability.FAILED:Unavailability.INITIALIZING);
+        org.cha0scollective.wwpg.extension.ApiCircuits.get(level).invalidate(network);
     }
     private boolean failedDynamicNode(OwnedFloatingNode node) {
         return node != null && (unavailableNetworks.containsKey(node.getNetwork()) || RestorationCoordinator.paused(node.getNetwork()));
@@ -856,7 +914,9 @@ public final class WorldBridge {
         for(int ordinal:new int[]{adapter.first,adapter.second}) {
             var source=builder.getNode(ordinal).node;
             if(phase==Phase.PREPARE)adapterPreparationFailures.put(source,reason);
-            var key=EndpointKey.of(source);var owner=ownerOf(key);
+            var key=preparedKeys.get(source);
+            if(key==null)continue;
+            var owner=ownerOf(key);
             if(owner!=null)failedAdapterDevices.add(owner);
             var node=nodes.get(key);
             if(node==null||node.getNetwork()==null)continue;
@@ -1126,9 +1186,9 @@ public final class WorldBridge {
     private static final class Dynamic {
         final MicroTickingElectricalProperties properties;
         final int first, second;
-        final Runnable checkpoint;
+        final NativeCeeCheckpoint.Snapshot checkpoint;
         OwnedFloatingNode firstNode, secondNode;
-        Dynamic(MicroTickingElectricalProperties properties, int first, int second, Runnable checkpoint) {
+        Dynamic(MicroTickingElectricalProperties properties, int first, int second, NativeCeeCheckpoint.Snapshot checkpoint) {
             this.properties = properties; this.first = first; this.second = second; this.checkpoint = checkpoint;
         }
         void before(double[] v, int i, int count) { properties.tick(v, i, count, first, second); }
@@ -1136,8 +1196,10 @@ public final class WorldBridge {
     }
     private final class Adapted {
         DirectedBranch branch;
+        boolean finished;
         final org.cha0scollective.wwpg.extension.CeeAdapters.Binding binding;final int first,second;
         Adapted(org.cha0scollective.wwpg.extension.CeeAdapters.Binding binding,int first,int second){this.binding=binding;this.first=first;this.second=second;}
+        void finish(boolean accepted) { if(!finished) { finished=true;binding.finish(accepted); } }
         void before(int step){
             double previous=step==0?0:voltages[first*substeps+step-1]-voltages[second*substeps+step-1];
             binding.before(previous,step,substeps,.05/substeps);

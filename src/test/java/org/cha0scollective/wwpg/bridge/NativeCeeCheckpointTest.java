@@ -91,6 +91,19 @@ class NativeCeeCheckpointTest {
         assertEquals(0, phaseB.v);
     }
 
+    @Test void frameHoldsAllPhasesAndCapturesSharedHistoryBeforePriming() {
+        var rotor=new TestRotor();rotor.angle=30;rotor.actualOmega=2;
+        var energy=new AtomicDouble(100);var work=new AtomicInteger();
+        var a=new TestPhase(0,energy,work,rotor);var b=new TestPhase(120,energy,work,rotor);
+        var frame=new NativeCeeCheckpoint.Frame();var first=frame.capture(a);var second=frame.capture(b);
+        a.tick(new double[32],0,16,0,1);b.tick(new double[32],0,16,0,1);
+        first.hold(true);
+        assertTrue(second.held());assertTrue(second.failed());
+        first.restore();second.restore();
+        assertEquals(30,rotor.angle);assertEquals(100,energy.get());assertEquals(0,work.get());
+        assertEquals(0,a.v);assertEquals(0,b.v);
+    }
+
     // A unit JVM does not apply Mixins; these implement the same numerical access.
     private static final class TestRotor extends VirtualRotor implements CeeRotorHistoryAccessor {
         private double torque, error;
