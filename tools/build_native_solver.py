@@ -28,6 +28,9 @@ def inputs():
     files.append(Path(__file__).resolve())
     files.append(NATIVE / 'reduction.h')
     files.append(NATIVE / 'reduction_checks.c')
+    files.append(NATIVE / 'allocation_checks.c')
+    files.append(NATIVE / 'solver_allocation_checks.c')
+    files.append(NATIVE / 'allocation_faults.h')
     files.append(NATIVE / 'prepare_reduction_checks.py')
     files.extend((NATIVE / 'jni-linux').glob('*.h'))
     return {str(p.relative_to(ROOT)): sha(p) for p in sorted(files)}
@@ -125,7 +128,7 @@ def main():
     else:
         subprocess.run(command, check=True)
     subprocess.run(['cmake', '--build', str(build), '--parallel', str(args.jobs), '--target',
-                    'powergridNative', 'sparse_safety_tests', 'reduction_checks'], check=True)
+                    'powergridNative', 'sparse_safety_tests', 'reduction_checks', 'allocation_checks', 'solver_allocation_checks'], check=True)
     if fingerprint != inputs():
         raise RuntimeError('Native inputs changed during build; no artifact staged')
     name = 'libpowergridNative7.' + ('dll' if args.platform == 'windows' else 'so')
