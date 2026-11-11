@@ -318,7 +318,7 @@ public final class WorldBridge {
         for (var d : dynamics) if (d.checkpoint.held()) {
             for (int ordinal : new int[]{d.first,d.second}) {
                 var key=nodeKeys.get(builder.getNode(ordinal).node);
-                if (key!=null) isolate(key,"Shared CEE state held after winding isolation");
+                if (key!=null&&!isolated.contains(key)) isolate(key,"Shared CEE state held after winding isolation");
             }
         }
         wanted.entrySet().removeIf(e -> isolated.contains(e.getKey().first()) || isolated.contains(e.getKey().second()));
@@ -729,6 +729,7 @@ public final class WorldBridge {
         if (++completedInStep == expectedNetworks) {
             holdRejectedDynamics();
             for(var adapter:adapters)if (adapter.branch == null || adapter.branch.branch == null || !RestorationCoordinator.paused(adapter.branch.branch.element.network())) adapter.after(activeStep);
+            holdRejectedDynamics();
             for (var d : dynamics) if(!failedDynamic(d))d.after(voltages, activeStep, substeps);
             ++solvedSubsteps;
         }
@@ -748,9 +749,9 @@ public final class WorldBridge {
 
     private void restoreUncommitted(Throwable failure) {
         for (var d : dynamics) try { d.checkpoint.restore(); }
-        catch (RuntimeException | Error rollback) { failure.addSuppressed(rollback); }
+        catch (RuntimeException | Error rollback) { if(rollback!=failure)failure.addSuppressed(rollback); }
         for (var a : adapters) try { a.finish(false); }
-        catch (RuntimeException | Error rollback) { failure.addSuppressed(rollback); }
+        catch (RuntimeException | Error rollback) { if(rollback!=failure)failure.addSuppressed(rollback); }
     }
 
     private void finishFrame() {
@@ -767,6 +768,7 @@ public final class WorldBridge {
                     && steps.getOrDefault(branch.element.network(),0)==substeps);
             adapter.binding.failureReason().ifPresent(reason->adapterFault(adapter,reason));
         }
+        holdRejectedDynamics();
         for (var dynamic : dynamics) if (failedDynamic(dynamic)) dynamic.checkpoint.restore();
         var currents = new Object2DoubleOpenHashMap<DirectionalNodeConnection>(branches.size() + 2 * transformers.size());
         for (var branch : branches.values()) {
@@ -892,19 +894,23 @@ public final class WorldBridge {
         return dynamic.checkpoint.held() || failedDynamicNode(dynamic.firstNode) || failedDynamicNode(dynamic.secondNode);
     }
     private void holdRejectedDynamics() {
-        for (var d : dynamics) if (failedDynamicNode(d.firstNode) || failedDynamicNode(d.secondNode))
+        for (var d : dynamics) if (failedDynamicNode(d.firstNode) || failedDynamicNode(d.secondNode)) {
             d.checkpoint.hold(d.firstNode!=null && unavailableNetworks.get(d.firstNode.getNetwork())==Unavailability.FAILED
                     || d.secondNode!=null && unavailableNetworks.get(d.secondNode.getNetwork())==Unavailability.FAILED);
+            if(d.firstNode!=null&&RestorationCoordinator.paused(d.firstNode.getNetwork())
+                    ||d.secondNode!=null&&RestorationCoordinator.paused(d.secondNode.getNetwork()))d.checkpoint.restoring();
+        }
         for (var d : dynamics) if (d.checkpoint.held()) {
-            holdDynamicNode(d.firstNode,d.checkpoint.failed());
-            holdDynamicNode(d.secondNode,d.checkpoint.failed());
+            holdDynamicNode(d.firstNode,d.checkpoint.failed(),d.checkpoint.restorationHold());
+            holdDynamicNode(d.secondNode,d.checkpoint.failed(),d.checkpoint.restorationHold());
         }
     }
-    private void holdDynamicNode(OwnedFloatingNode node,boolean failure) {
+    private void holdDynamicNode(OwnedFloatingNode node,boolean failure,boolean restoring) {
         if(node==null||node.getNetwork()==null)return;
         var network=node.getNetwork();
         markUnavailable(network,failure?Unavailability.FAILED:Unavailability.INITIALIZING);
-        org.cha0scollective.wwpg.extension.ApiCircuits.get(level).invalidate(network);
+        var api=org.cha0scollective.wwpg.extension.ApiCircuits.get(level);
+        if(restoring)api.defer(network);else api.invalidate(network);
     }
     private boolean failedDynamicNode(OwnedFloatingNode node) {
         return node != null && (unavailableNetworks.containsKey(node.getNetwork()) || RestorationCoordinator.paused(node.getNetwork()));

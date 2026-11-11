@@ -73,6 +73,8 @@ public final class AuditCeeStateGameTests {
             var results=InfrastructureSavedData.load(level).ticker.lastResults;
             h.assertTrue(results instanceof BridgeSimulationResults r&&r.available(new InWorldNode(0,pos)),"Repaired winding remained unavailable");
             h.assertTrue(results.getVoltageAt(pos,1,0)>100,"Repaired winding did not resume powered readings");
+            h.assertTrue(org.cha0scollective.wwpg.api.neoforge.ElectricalMeasurements.readVoltageBetween(level,pos,2,pos,0).status()
+                    ==org.cha0scollective.wwpg.api.MeasurementStatus.VALID,"Repaired winding retained unavailable public readings");
             h.succeed();
         });
     }
@@ -119,6 +121,9 @@ public final class AuditCeeStateGameTests {
             // The event precedes lastResults publication; its own results carry this frame.
             if(failure==null&&(!(event.results instanceof BridgeSimulationResults current)||current.available(new InWorldNode(2,pos))))
                 failure="Partially rejected shared rotor published an available sibling phase";
+            var status=org.cha0scollective.wwpg.api.neoforge.ElectricalMeasurements.readVoltageBetween(event.level,pos,2,pos,0).status();
+            if(status==org.cha0scollective.wwpg.api.MeasurementStatus.VALID)failure="Held winding published valid public measurements";
+            if(port==-1&&status!=org.cha0scollective.wwpg.api.MeasurementStatus.NOT_READY)failure="Restoration hold was reported as "+status;
             ++count;
         }
         void clearHook(){if(hookedNetwork!=null){hookedNetwork.innerHooks.remove(hook);hookedNetwork=null;}}

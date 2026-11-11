@@ -55,7 +55,8 @@ public final class HandheldMeters {
         double range = ModdedConfigs.server().equipment.multimeterDistance.get();
         if (!finitePosition(position)) return false;
         double distance = player.distanceToSqr(position);
-        if (!Double.isFinite(range) || range < 0 || !Double.isFinite(distance) || distance > range * range) return false;
+        double reachSquared = range * range;
+        if (!Double.isFinite(range) || range < 0 || !Double.isFinite(reachSquared) || !Double.isFinite(distance) || distance > reachSquared) return false;
         meter.setMode(stack, 1);
         stack.set(CEEDataComponents.NODE_CONNECTION, connection);
         var data = MultimeterItem.getModeData(stack);

@@ -32,13 +32,15 @@ final class NativeCeeCheckpoint {
         private final Runnable local;
         Snapshot(Group group, Runnable local) { this.group=group; this.local=local; }
         void hold(boolean failure) { group.held=true; group.failed|=failure; }
+        void restoring() { group.restoring=true; }
+        boolean restorationHold() { return group.restoring&&!group.failed; }
         boolean held() { return group.held; }
         boolean failed() { return group.failed; }
         void restore() { group.restore(); local.run(); }
     }
     private static final class Group {
         final Map<Object,Runnable> shared = new IdentityHashMap<>();
-        boolean held, failed, restored;
+        boolean held, failed, restored, restoring;
         void capture(Object owner, Supplier<Runnable> checkpoint) { shared.computeIfAbsent(owner, key -> checkpoint.get()); }
         void restore() { if(!restored) { shared.values().forEach(Runnable::run); restored=true; } }
     }

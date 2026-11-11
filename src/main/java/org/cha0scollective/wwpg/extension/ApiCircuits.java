@@ -282,9 +282,15 @@ public final class ApiCircuits {
     }
     /** Faulting upstream adapters invalidate the same shared network's extension results. */
     public void invalidate(ElectricalNetwork network) {
+        unavailable(network,false);
+    }
+    public void defer(ElectricalNetwork network) {
+        unavailable(network,true);
+    }
+    private void unavailable(ElectricalNetwork network,boolean restoring) {
         var work=networkWork.get(network);
         if(work!=null)work.invalid=true;
-        NativeApiReadings.invalidate(level,network);
+        if(restoring)NativeApiReadings.defer(level,network);else NativeApiReadings.invalidate(level,network);
     }
     private boolean invalid(ElectricalNetwork network) {
         var work=networkWork.get(network);

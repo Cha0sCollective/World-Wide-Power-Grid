@@ -275,15 +275,21 @@ public final class NativeApiReadings {
 
     /** Reject a whole tick if later bridge validation invalidates an earlier network sample. */
     public static void invalidate(ServerLevel level, ElectricalNetwork network) {
+        unavailable(level,network,MeasurementStatus.SOLVE_FAILED,"Containing circuit did not produce an accepted solution");
+    }
+    public static void defer(ServerLevel level,ElectricalNetwork network) {
+        unavailable(level,network,MeasurementStatus.NOT_READY,"Circuit is restoring its chunks and wires");
+    }
+    private static void unavailable(ServerLevel level,ElectricalNetwork network,MeasurementStatus status,String detail) {
         var recorder = WORLDS.get(level);
         if (recorder == null || network == null) return;
         var samples = recorder.samples(network);
         samples.rejected = true;
         for (var frame : samples.direct)
-            frame.unavailable(MeasurementStatus.SOLVE_FAILED, "Containing circuit did not produce an accepted solution");
+            frame.unavailable(status,detail);
         for (var line : samples.lines)
             for (var frame : line.frames)
-                frame.unavailable(MeasurementStatus.SOLVE_FAILED, "Containing circuit did not produce an accepted solution");
+                frame.unavailable(status,detail);
     }
 
     /** Publish only complete current-tick waveforms. Call after all failure validation. */
