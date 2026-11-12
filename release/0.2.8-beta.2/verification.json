@@ -1,0 +1,212 @@
+{
+  "schema": 1,
+  "wwpg_version": "0.2.8-beta.2",
+  "api_version": "1.0.0",
+  "api_coordinate": "org.cha0scollective.wwpg:wwpg-api:1.0.0",
+  "cee_api_coordinate": "org.cha0scollective.wwpg:wwpg-cee-api:1.0.0",
+  "source_sha": "c6f55f77dd929195fef43d2aadd16550db3ce7d0",
+  "artifacts": {
+    "runtime": {
+      "path": "local/release-beta2-01/package-inputs/wwpg-0.2.8-beta.2.jar",
+      "sha256": "7bc9be24019c5966d8417549b684d08afe66f6799c4d144e6d5f20a24060124e",
+      "bytes": 5196527
+    },
+    "api": {
+      "path": "local/release-beta2-01/package-inputs/wwpg-api-1.0.0.jar",
+      "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+      "bytes": 50143
+    },
+    "cee_api": {
+      "path": "local/release-beta2-01/package-inputs/wwpg-cee-api-1.0.0.jar",
+      "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+      "bytes": 8793
+    },
+    "example": {
+      "path": "local/release-beta2-01/package-inputs/wwpg-api-example-1.0.0.jar",
+      "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+      "bytes": 52081
+    },
+    "upstream_example": {
+      "path": "local/release-beta2-01/package-inputs/wwpg-upstream-api-example-1.0.0.jar",
+      "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+      "bytes": 45633
+    },
+    "gametest": {
+      "path": "local/release-beta2-01/package-inputs/wwpg-0.2.8-beta.2-gametests.jar",
+      "sha256": "1c053ac31b16a21296a2da6b5e112fef4bea067e842457d8e291ffac5a378bb7",
+      "bytes": 1467665
+    },
+    "maven_repository": {
+      "path": "local/release-beta2-01/package-inputs/wwpg-api-1.0.0-maven.zip",
+      "sha256": "176b90f195b2aa3f9a023342ea55e26c7cba46126357c5ceb88a6eea526d063e",
+      "bytes": 415656
+    },
+    "api_sources": {
+      "path": "local/release-beta2-01/package-inputs/wwpg-api-1.0.0-sources.jar",
+      "sha256": "1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b",
+      "bytes": 25943
+    },
+    "api_javadoc": {
+      "path": "local/release-beta2-01/package-inputs/wwpg-api-1.0.0-javadoc.jar",
+      "sha256": "0ccac3a79ad85a0bab976422da6897dd560c8150bb516ce9a12db7d76d3376e7",
+      "bytes": 230942
+    },
+    "cee_api_sources": {
+      "path": "local/release-beta2-01/package-inputs/wwpg-cee-api-1.0.0-sources.jar",
+      "sha256": "00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34",
+      "bytes": 6947
+    },
+    "cee_api_javadoc": {
+      "path": "local/release-beta2-01/package-inputs/wwpg-cee-api-1.0.0-javadoc.jar",
+      "sha256": "05055bd009f8fe3531acd156059c9b6e68f5d201bde973d09190e5a1aee7dac9",
+      "bytes": 107939
+    },
+    "example_sources": {
+      "path": "local/release-beta2-01/package-inputs/wwpg-api-example-1.0.0-source.zip",
+      "sha256": "6724668137f8ee5eef4a61541a0ed9ffdb4edd9d32fabe72da8e66a846ddcac7",
+      "bytes": 79514
+    },
+    "upstream_example_sources": {
+      "path": "local/release-beta2-01/package-inputs/wwpg-upstream-api-example-1.0.0-source.zip",
+      "sha256": "2a92f25d5d97c2733d1079b19bb5378f6f5e07c396ef18ee4db8263859669cf1",
+      "bytes": 70371
+    }
+  },
+  "acceptance_policy": "separated-v2",
+  "stationary_yard_policy": "combined-pinout-v1",
+  "status": "acceptance_validated",
+  "unresolved_failures": [],
+  "stages_complete": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "abi": {
+    "path": "local/release-beta2-01/accepted-04/portable/objects/bf8c07abd81096a44d5e1a6113714845d4b25cc7d71ffb2e19361b0c9d35fce6.json",
+    "sha256": "bf8c07abd81096a44d5e1a6113714845d4b25cc7d71ffb2e19361b0c9d35fce6",
+    "bytes": 63515
+  },
+  "previous_api": {
+    "path": "local/release-beta2-01/accepted-04/portable/objects/a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892.jar",
+    "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+    "bytes": 50143
+  },
+  "cee_abi": {
+    "path": "local/release-beta2-01/accepted-04/portable/objects/3b1ecfa2c3570b329c5767148637e7ccfb51037352b42ab68dbe1a51e2d00dec.json",
+    "sha256": "3b1ecfa2c3570b329c5767148637e7ccfb51037352b42ab68dbe1a51e2d00dec",
+    "bytes": 11929
+  },
+  "previous_cee_api": {
+    "path": "local/release-beta2-01/accepted-04/portable/objects/d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a.jar",
+    "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+    "bytes": 8793
+  },
+  "benchmark_world": {
+    "path": "local/release-beta2-01/package-inputs/wwpg-0.2.8-beta.2-benchmark-14650-nodes.zip",
+    "sha256": "fa4230e359ecb81b8582113bc39240b6c86be36216b3e8c407495a3ab5bcf698",
+    "bytes": 3573164
+  },
+  "stationary_yard": {
+    "path": "local/release-beta2-01/windows-headless/windows-latest-NATIVE-PINOUT-21.1.265/21.1.265/NATIVE-PINOUT-yard.zip",
+    "sha256": "9ed503621caf11020041573d37ca009ddffe02f3bc327855496222f32b165416",
+    "bytes": 1358299
+  },
+  "pinout_workshop_world": {
+    "path": "local/release-beta2-01/windows-headless/windows-latest-NATIVE-PINOUT-21.1.265/21.1.265/NATIVE-PINOUT-workshop.zip",
+    "sha256": "c83938cac5b1c7ff89e7e3a997a2e76b66fc2d77ed3e8d985a36c7d40db6fb4c",
+    "bytes": 323071
+  },
+  "base_workshop_world": {
+    "path": "local/release-beta2-01/windows-headless/windows-latest-NATIVE-BASE-21.1.265/21.1.265/NATIVE-BASE-workshop.zip",
+    "sha256": "bad0e15c53a6fe1a6ba9d3ece96487c0cefe1d1aa69973540b2670c471127c2f",
+    "bytes": 322237
+  },
+  "independent_example_build": {
+    "path": "local/release-beta2-01/accepted-04/portable/objects/bb4e436dd6401120253aa2a8f761fff09ffb570db865a9c95f8a5eb5392a9aa0.json",
+    "sha256": "d2c53ab267ca4172f8c578d210d802dd67fb440fcd16f32bf12e440a15f30bc1",
+    "bytes": 2938
+  },
+  "independent_upstream_example_build": {
+    "path": "local/release-beta2-01/accepted-04/portable/objects/1adb57b822c3aa068fb599ce09d27222bdb605dce6fbc74dfc8e10baa64eb39f.json",
+    "sha256": "24339f6341eb989a197431c2e3d5cb7db8cc92215a889ce7d22d73170d29bbc7",
+    "bytes": 3042
+  },
+  "authoring_starter": {
+    "source": {
+      "path": "local/release-beta2-01/windows-preparation/starter/tutorial-load-0.1.0-source.zip",
+      "sha256": "4739051681dcf547841fc90cbe833a779ec1b481b239babf12c9b64b4c9acc28",
+      "bytes": 54215
+    },
+    "proof": {
+      "path": "local/release-beta2-01/accepted-04/portable/objects/729b7895ab652add9ae14c9abd41914973fd8d184e867a12a6fc2a09b733abb2.json",
+      "sha256": "635e9a05fac1f70f57d5756405842f1046cde9a2675dd98e41109fd2547a3811",
+      "bytes": 3887
+    }
+  },
+  "headless_acceptance": {
+    "path": "local/release-beta2-01/accepted-04/portable/objects/938aa58d6602aea64debb998160b56a9d93c0d2535bfef206e6e83f080159dc7.json",
+    "sha256": "6d29b9ee9224b8c5cf74ba5a946a44b1d1606b25d3931dbc37505a83944498ca",
+    "bytes": 6821
+  },
+  "graphical_acceptance": {
+    "path": "local/release-beta2-01/accepted-04/portable/objects/60323c9f2362d92a296af243ef387aad4a2ee3ff89c331e029ab5a5500e939c4.json",
+    "sha256": "013d0563394c44c08299c1de39b36c79ff06c280a413227ae2817ca93f7342b6",
+    "bytes": 3201
+  },
+  "headless_assembly": {
+    "path": "local/release-beta2-01/accepted-04/portable/objects/24320f4c141c277a9b3671bfca8413a0d6019ddfcc622b6765bc5a4718db37f6.json",
+    "sha256": "c1880a8bf5f9f6ee9820add0f73b366a2d54b150b27381234ac2c6eea7a440c7",
+    "bytes": 4059
+  },
+  "runtime_dependency_selection": {
+    "path": "local/release-beta2-01/accepted-04/portable/objects/10430d0b09fa2e4b832dd6693887bbdc209da84ca5a2008ce222475329ca5e63.json",
+    "sha256": "10430d0b09fa2e4b832dd6693887bbdc209da84ca5a2008ce222475329ca5e63",
+    "bytes": 6980
+  },
+  "runtime_dependency_review": {
+    "path": "local/release-beta2-01/accepted-04/portable/objects/33bcc6f1561a1114afdd3378f116cce63310d4e8d8b0a68409b0a113bb512468.json",
+    "sha256": "33bcc6f1561a1114afdd3378f116cce63310d4e8d8b0a68409b0a113bb512468",
+    "bytes": 3978
+  },
+  "preparation_assessment": {
+    "path": "local/release-beta2-01/accepted-04/portable/objects/c5b62fbcf7873578a0d2fe2fc31f36c03cffdd94c30b4abc55f7276b5dc83216.md",
+    "sha256": "c5b62fbcf7873578a0d2fe2fc31f36c03cffdd94c30b4abc55f7276b5dc83216",
+    "bytes": 4560
+  },
+  "visual_review": {
+    "path": "local/release-beta2-01/accepted-04/portable/objects/beeee5acca00bb328830b376e8385c28b2e33ab29dc91e6f2a593a2317cef6b5.json",
+    "sha256": "60b57ee42fcce0ec723d2d0cbd40ee37af8d3ffeb3adbfa008954c507bd8a1b8",
+    "bytes": 2265
+  },
+  "upstream_behavior_contract": {
+    "path": "local/release-beta2-01/accepted-04/portable/objects/d51bc771a5480693cd59510dfb00ce9bc44c12e36cbe48d3600fe9da87743b81.md",
+    "sha256": "d51bc771a5480693cd59510dfb00ce9bc44c12e36cbe48d3600fe9da87743b81",
+    "bytes": 3498
+  },
+  "circuit_library_guide": {
+    "path": "local/release-beta2-01/accepted-04/portable/objects/6aa7650f2f234e20c41b451b2dc50821e6afe91d37a61fea596d9184ebc198d6.md",
+    "sha256": "6aa7650f2f234e20c41b451b2dc50821e6afe91d37a61fea596d9184ebc198d6",
+    "bytes": 4142
+  },
+  "control_promotion_record": {
+    "path": "local/release-beta2-01/accepted-04/portable/objects/5b928a7c1327146f6c728033c3308522aa4ba967b210cafef2ee6880dec5a21b.md",
+    "sha256": "5b928a7c1327146f6c728033c3308522aa4ba967b210cafef2ee6880dec5a21b",
+    "bytes": 3381
+  },
+  "acceptance_note": "Fresh release qualification uses the audited beta.2 runtime and frozen current supported dependencies. Windows/Linux headless coverage and all12 graphical cases retain actual process identities. Complete passing groups survive investigated local orchestration failures; original failed attempts remain failed. The historical beta1 Linux motor assertion remains unexplained, and no20TPS performance claim is made.",
+  "_original_record": {
+    "path": "local/release-beta2-01/accepted-04/portable/objects/result.original.bin",
+    "sha256": "883587a8b791b961fa48ec764786ae045925430bed38d5fa02e13b82f149e40b",
+    "bytes": 8624
+  },
+  "evidence_layout_note": "One shared immutable object store removes duplicate frozen JAR copies. Original JSON, execution/source identities, artifact hashes and observations remain retained. No acceptance executions were repeated.",
+  "documentation_snapshot": {
+    "path": "local/release-beta2-01/accepted-05/documentation-snapshot.json",
+    "sha256": "5ff4a7ef63c1187a46dc80bdeaf2f3114f62511f5685ce587345a5b81b948fac",
+    "bytes": 2617
+  },
+  "publication_note": "Publication reuses completed acceptance on the exact c6f55f7 runtime and unchanged API/example/test jars. Updated installation guides are separately frozen; no headless or graphical suite was rerun."
+}
