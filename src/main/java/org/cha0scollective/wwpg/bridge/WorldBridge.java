@@ -796,6 +796,9 @@ public final class WorldBridge {
                 var owner = ownerOf(preparedKeys.get(builder.getNode(ordinal).node)); if (owner != null) statefulDevices.add(owner);
             }
         }
+        // Project circuit status onto the current descriptors and device owners
+        // once, after all late failures and shared-state holds are known. Earlier
+        // notifications must not scan resultNodes, which may belong to the prior frame.
         // Healthy, fully mapped circuits have no availability work to perform.
         // An unmapped descriptor must still take the checked path and be masked.
         if (paused || !isolated.isEmpty() || !adapterPreparationFailures.isEmpty()
@@ -959,9 +962,6 @@ public final class WorldBridge {
     private void markUnavailable(ElectricalNetwork network,Unavailability reason) {
         // A later initialization hold must never downgrade a real fault.
         if (reason==Unavailability.FAILED || !unavailableNetworks.containsKey(network)) unavailableNetworks.put(network,reason);
-        for(var affected:resultNodes.getOrDefault(network,List.of())) {
-            var owner=ownerOf(affected.key);if(owner!=null)failedAdapterDevices.add(owner);
-        }
     }
     public List<String> diagnostics() {
         return diagnostics.snapshot();

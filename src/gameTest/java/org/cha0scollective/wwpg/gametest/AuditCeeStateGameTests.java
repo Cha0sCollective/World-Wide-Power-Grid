@@ -15,6 +15,12 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import org.cha0scollective.wwpg.bridge.BridgeSimulationResults;
+import org.cha0scollective.wwpg.bridge.Bridges;
+import org.cha0scollective.wwpg.bridge.WorldBridge;
+import java.util.AbstractList;
+import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import org.patryk3211.powergrid.collections.ModdedBlocks;
 import org.patryk3211.powergrid.electricity.creative.CreativeSourceBlockEntity;
@@ -38,6 +44,10 @@ public final class AuditCeeStateGameTests {
     public static void lateRejectionRestoresSharedRotor(GameTestHelper h) { isolation(h,-2,false); }
     @GameTest(template="empty",timeoutTicks=180)
     public static void restorationHoldRestoresSharedRotor(GameTestHelper h) { isolation(h,-1,false); }
+    @GameTest(template="empty",timeoutTicks=180)
+    public static void repeatedRestorationHoldsDoNotScanCollectedNodes(GameTestHelper h) { isolation(h,-3,false); }
+    @GameTest(template="empty",timeoutTicks=180)
+    public static void lateFailureEscalatesAfterRepeatedHolds(GameTestHelper h) { isolation(h,-4,false); }
 
     private static void isolation(GameTestHelper h,int port,boolean nonfinite) {
         DynamicGameTests.substeps(h.getLevel());GenerationGameTests.assemble(h,true);
@@ -92,15 +102,23 @@ public final class AuditCeeStateGameTests {
             prepared=true;
             if(port<0) {
                 var network=new BlockWireEndpoint(pos,1).getNode(event.level).getNetwork();
-                if(port==-1)try {
+                if(restoring())try {
                     var pause=org.cha0scollective.wwpg.bridge.RestorationCoordinator.class.getDeclaredMethod("markPaused",ElectricalNetwork.class);
                     pause.setAccessible(true);pause.invoke(null,network);
+                    // This still sees the previous frame's bindings. The current
+                    // ones are rebuilt later, and must be masked at completion.
+                    if(port==-3) repeatedHolds(network,false);
                 }catch(ReflectiveOperationException error){throw new IllegalStateException(error);}
                 else {
                     hookedNetwork=network;
                     hook=new ISolverHook(){int step;
                         public java.util.Collection<IElectricNode> coupledNodes(){return java.util.List.of();}
-                        public void startIteration(int iteration){if(iteration==0&&++step==11)throw new IllegalStateException("Audit deliberate late solve rejection");}
+                        public void startIteration(int iteration){
+                            if(iteration==0&&++step==11) {
+                                if(port==-4)repeatedHolds(network,true);
+                                else throw new IllegalStateException("Audit deliberate late solve rejection");
+                            }
+                        }
                         public void addResidual(org.patryk3211.powergrid.electricity.sim.solver.IResidualAdder residual){}
                     };
                     network.innerHooks.add(hook);
@@ -123,8 +141,34 @@ public final class AuditCeeStateGameTests {
                 failure="Partially rejected shared rotor published an available sibling phase";
             var status=org.cha0scollective.wwpg.api.neoforge.ElectricalMeasurements.readVoltageBetween(event.level,pos,2,pos,0).status();
             if(status==org.cha0scollective.wwpg.api.MeasurementStatus.VALID)failure="Held winding published valid public measurements";
-            if(port==-1&&status!=org.cha0scollective.wwpg.api.MeasurementStatus.NOT_READY)failure="Restoration hold was reported as "+status;
+            if(restoring()&&status!=org.cha0scollective.wwpg.api.MeasurementStatus.NOT_READY)failure="Restoration hold was reported as "+status;
             ++count;
+        }
+        boolean restoring(){return port==-1||port==-3;}
+        @SuppressWarnings("unchecked")
+        void repeatedHolds(ElectricalNetwork network,boolean reject) {
+            var bridge=Bridges.get(helper.getLevel());
+            try {
+                var field=WorldBridge.class.getDeclaredField("resultNodes");field.setAccessible(true);
+                var bindings=(Map<ElectricalNetwork,List<Object>>)field.get(bridge);
+                var originals=new IdentityHashMap<>(bindings);
+                int[] visits={0};
+                originals.forEach((owner,list)->bindings.put(owner,new AbstractList<>() {
+                    public Object get(int index){++visits[0];return list.get(index);}
+                    public int size(){return list.size();}
+                }));
+                try {
+                    for(int n=0;n<64;++n)bridge.unavailable(network);
+                    if(reject)bridge.reject(network,new IllegalStateException("Audit deliberate late availability rejection"));
+                    for(int n=0;n<64;++n)bridge.unavailable(network);
+                    if(visits[0]!=0)failure="Repeated holds scanned "+visits[0]+" collected result nodes";
+                    if(reject) {
+                        var status=WorldBridge.class.getDeclaredField("unavailableNetworks");status.setAccessible(true);
+                        if(!"FAILED".equals(String.valueOf(((Map<?,?>)status.get(bridge)).get(network))))
+                            failure="Initialization hold downgraded a late failure";
+                    }
+                } finally {bindings.clear();bindings.putAll(originals);}
+            }catch(ReflectiveOperationException error){throw new IllegalStateException(error);}
         }
         void clearHook(){if(hookedNetwork!=null){hookedNetwork.innerHooks.remove(hook);hookedNetwork=null;}}
         void close(){clearHook();NeoForge.EVENT_BUS.unregister(prepare);NeoForge.EVENT_BUS.unregister(finish);}
