@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-## 0.2.8-beta.2 — release candidate, 11 November 2026
+## 0.2.8-beta.2 — 12 November 2026 (prerelease)
 
 - Restore rejected CEE dynamics coherently, including alternator windings that
   share rotor state. Isolate unsupported addon endpoints before callbacks while
@@ -13,8 +13,10 @@
   reject duplicate archive entries in acceptance comparisons. Preserve API 1.0.0,
   saves, electrical equations and the published generator timing correction.
 
-Release headless and graphical qualification is in progress. The historical
-Linux motor assertion remains unexplained; passing repeats do not close it.
+Completed qualification covers 558 headless jobs and 12 separate graphical
+scenarios on the frozen beta.2 runtime. Publication reuses those passing records.
+The historical Linux motor assertion remains unexplained; passing repeats do not
+close it.
 
 ## 0.2.8-beta1 — 10 November 2026 (prerelease)
 

@@ -9,7 +9,16 @@ is the current stable release. To install it or choose a playable world, use the
 [installation guide](../docs/INSTALL.md). This directory is for reviewing what
 was shipped and which checks passed.
 
-## Current prerelease: 0.2.8-beta1
+## Current prerelease: 0.2.8-beta.2
+
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8-beta.2)
+· [Acceptance and remaining limits](0.2.8-beta.2/ACCEPTANCE.md).
+
+Adds audit-driven safety corrections to the published beta1 runtime. Reuses
+completed beta.2 coverage: 558 required headless jobs and 12 real-client
+scenarios. The tested runtime source and later guide snapshot stay distinct.
+
+## Historical prerelease: 0.2.8-beta1
 
 [Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8-beta1)
 · [Acceptance and retained findings](0.2.8-beta1/ACCEPTANCE.md).

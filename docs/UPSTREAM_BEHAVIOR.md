@@ -1,7 +1,9 @@
 # Upstream behavior and compatibility checks
 
-This describes the audit corrections being qualified for 0.2.8-beta.2. It is
-not an acceptance record for this candidate or the published 0.2.8-beta1 release.
+This describes the audit corrections in 0.2.8-beta.2. The separate
+[acceptance record](../release/0.2.8-beta.2/ACCEPTANCE.md) preserves the actual
+tested source, coverage and remaining uncertainty. Historical beta1 evidence
+continues to describe its original runtime.
 
 ## Preserved behavior
 

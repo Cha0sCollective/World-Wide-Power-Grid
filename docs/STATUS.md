@@ -1,8 +1,9 @@
 # Current status
 
-**[WWPG 0.2.8-beta1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8-beta1)**
-is the current prerelease. It promotes the experimental control, enables its
-retained improvements by default and adds [twelve circuit fixtures](CIRCUIT_LIBRARY.md).
+**[WWPG 0.2.8-beta.2](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8-beta.2)**
+is the current prerelease. It retains the published loading and wire-processing
+improvements and adds audit-driven rollback, endpoint, configuration, native
+allocation and multimeter safety corrections.
 The previous stable release remains **0.2.7**. Extension API **1.0.0** is unchanged.
 Use matching server/client mods from the [installation guide](INSTALL.md).
 
@@ -40,21 +41,21 @@ a repaired device. The [developer contract](EXTENSION_API.md) explains those rul
 
 ## What was checked
 
-The rc.1 campaign supplied validated coverage for all **542 required headless jobs**
-across Windows/Linux, Native/Java and BASE/PINOUT, with NeoForge 21.1.265 as the
-complete primary runtime and separate 21.1.231/21.1.248 compatibility lanes.
-All **12 real Windows client scenarios** passed, including two-client controls,
-native tools, readings and Save and Quit. Actual loaded dependency hashes are retained.
+Beta.2 completed all **558 required headless jobs** across local Windows and
+Ubuntu/WSL, Native/Java and BASE/PINOUT. NeoForge 21.1.265 is the full primary
+environment; 21.1.231 and 21.1.248 retain distinct compatibility lanes. All
+**12 real Windows client scenarios** passed, including two-client controls,
+tools, readings and clean Save and Quit. Actual dependency hashes are retained.
 
-0.2.8-beta1 carries that evidence forward after entry-by-entry comparisons prove
-that only declared runtime/companion version metadata changes. The worlds retain
-their native save bytes; their release labels change. This promotion does not
-represent a fresh full-suite run. SDK documentation and packaging receive focused checks.
+The passing beta.2 evidence is reused for publication without rerunning either
+suite. An investigated Windows progress-file interruption retained 40 complete
+passing jobs and ran the six missing jobs in fresh directories. The original
+interrupted batch remains failed; complete coverage is assembled transparently.
 
-One initial Linux Native/.248 motor assertion failed. Its complete unchanged
-four-phase repeat and eight diagnostic phases passed; the initial cause remains
-unknown. The original failure remains in the [acceptance record](../release/0.2.8-beta1/ACCEPTANCE.md)
-and verification download, separate from the passing coverage.
+The earlier Linux Native/BASE/.248 motor assertion did not recur, including
+SETUP and all three cold VERIFY phases in this campaign. Its original cause
+remains unknown. See the [acceptance record](../release/0.2.8-beta.2/ACCEPTANCE.md)
+for actual source identities and the preserved historical finding.
 
 ## Generator and transformer fixes
 
@@ -68,7 +69,8 @@ stable. Native clutch limits and generator damage behavior still apply.
 
 The PG multimeter can read assembled medium-transformer terminals through their
 loaded controller. Invalidated or unavailable samples remain unavailable until
-the circuit recovers. API 1.0.0, saves and native solver binaries are unchanged.
+the circuit recovers. API 1.0.0 and save formats are unchanged; beta.2 updates
+the guarded native libraries for allocation safety.
 
 ## Loading and ticking
 
