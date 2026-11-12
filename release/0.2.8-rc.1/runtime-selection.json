@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "checked_at": "2026-11-10T09:36:15.496990+00:00",
+  "minecraft": "1.21.1",
+  "loader": "neoforge",
+  "selected": {
+    "cee": {
+      "version": "1.21.1-1.1.4",
+      "version_type": "release",
+      "version_id": "ZMfRgLy5",
+      "filename": "electroenergetics-1.21.1-1.1.4.jar",
+      "url": "https://cdn.modrinth.com/data/qYJdIoAx/versions/ZMfRgLy5/electroenergetics-1.21.1-1.1.4.jar",
+      "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f",
+      "coordinate": "maven.modrinth:qYJdIoAx:ZMfRgLy5",
+      "metadata_url": "https://api.modrinth.com/v2/project/qYJdIoAx/version?game_versions=%5B%221.21.1%22%5D&loaders=%5B%22neoforge%22%5D"
+    },
+    "create": {
+      "version": "6.0.10+mc1.21.1",
+      "version_type": "release",
+      "version_id": "UjX6dr61",
+      "filename": "create-1.21.1-6.0.10.jar",
+      "url": "https://cdn.modrinth.com/data/LNytGWDc/versions/UjX6dr61/create-1.21.1-6.0.10.jar",
+      "sha256": "ef87fe5709f1ba1f5b8bb20a2925b5afb4669e178fd6d8bf10c167759eefe37a",
+      "coordinate": "maven.modrinth:create:UjX6dr61",
+      "metadata_url": "https://api.modrinth.com/v2/project/create/version?game_versions=%5B%221.21.1%22%5D&loaders=%5B%22neoforge%22%5D"
+    },
+    "computercraft": {
+      "version": "1.121.0",
+      "version_type": "beta",
+      "version_id": "KNdTEfUA",
+      "filename": "cc-tweaked-1.21.1-forge-1.121.0.jar",
+      "url": "https://cdn.modrinth.com/data/gu7yAYhd/versions/KNdTEfUA/cc-tweaked-1.21.1-forge-1.121.0.jar",
+      "sha256": "bf8dd119701560ea60085cf8c1076d32ffc99a1be5f8b99f6f3b174a88a208f8",
+      "coordinate": "maven.modrinth:gu7yAYhd:KNdTEfUA",
+      "metadata_url": "https://api.modrinth.com/v2/project/gu7yAYhd/version?game_versions=%5B%221.21.1%22%5D&loaders=%5B%22neoforge%22%5D"
+    },
+    "pinout": {
+      "version": "0.2.1",
+      "version_type": "release",
+      "version_id": "UJtJCpBi",
+      "filename": "pinout-0.2.1.jar",
+      "url": "https://cdn.modrinth.com/data/sMa4MaGz/versions/UJtJCpBi/pinout-0.2.1.jar",
+      "sha256": "d31c19c3c8aefb512922bf8086146127cad7ef9100d929a8fddcc2ab133fdd4a",
+      "coordinate": "maven.modrinth:sMa4MaGz:UJtJCpBi",
+      "metadata_url": "https://api.modrinth.com/v2/project/sMa4MaGz/version?game_versions=%5B%221.21.1%22%5D&loaders=%5B%22neoforge%22%5D"
+    },
+    "architectury": {
+      "version": "13.0.11+neoforge",
+      "version_type": "release",
+      "version_id": "1IiqEQGl",
+      "filename": "architectury-13.0.11-neoforge.jar",
+      "url": "https://cdn.modrinth.com/data/lhGA9TYQ/versions/1IiqEQGl/architectury-13.0.11-neoforge.jar",
+      "sha256": "9cc92f2c09533fc5482c60f993bd891c655a0e32b637037cdcb7c2b23adedeeb",
+      "coordinate": "maven.modrinth:architectury-api:1IiqEQGl",
+      "metadata_url": "https://api.modrinth.com/v2/project/architectury-api/version?game_versions=%5B%221.21.1%22%5D&loaders=%5B%22neoforge%22%5D"
+    },
+    "gauged": {
+      "version": "1.0.6a",
+      "version_type": "alpha",
+      "version_id": "f1ywSCNc",
+      "filename": "gauged_wires-1.0.6a.jar",
+      "url": "https://cdn.modrinth.com/data/LemfA2Y5/versions/f1ywSCNc/gauged_wires-1.0.6a.jar",
+      "sha256": "3798534240dc72cc34df5783c03b3a0178c6a7361a4bd198af014982606839e3",
+      "coordinate": "maven.modrinth:LemfA2Y5:f1ywSCNc",
+      "metadata_url": "https://api.modrinth.com/v2/project/LemfA2Y5/version?game_versions=%5B%221.21.1%22%5D&loaders=%5B%22neoforge%22%5D"
+    },
+    "neoforge": {
+      "version": "21.1.265",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/maven-metadata.xml"
+    }
+  },
+  "unchanged": {
+    "pg": "0.6.2",
+    "power_components": "1.3.0"
+  },
+  "minimum_compile": {
+    "cee": "1.21.1-1.1.3",
+    "neoforge": "21.1.231"
+  }
+}

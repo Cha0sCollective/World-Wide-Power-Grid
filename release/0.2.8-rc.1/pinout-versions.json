@@ -1,0 +1,139 @@
+[
+  {
+    "game_versions": [
+      "1.21.1"
+    ],
+    "loaders": [
+      "neoforge"
+    ],
+    "environment": "client_and_server",
+    "id": "UJtJCpBi",
+    "project_id": "sMa4MaGz",
+    "author_id": "oG7JBzeS",
+    "featured": false,
+    "name": "CC;CPG: Pinout 0.2.1",
+    "version_number": "0.2.1",
+    "changelog": "Added block drops (whoops!)",
+    "changelog_url": null,
+    "date_published": "2026-07-30T22:14:36.516429Z",
+    "downloads": 4108,
+    "version_type": "release",
+    "status": "listed",
+    "requested_status": null,
+    "files": [
+      {
+        "id": "DGvGbL7d",
+        "hashes": {
+          "sha1": "784e88295a1360147ef1cbbe177a3ee3ad999e49",
+          "sha512": "37c7598d3bb712dfc825bf7391e5291b25c927117f65102dd86f1d72982a50e7c0df5b3742fc87a18056a2caf26e90d62aa8a2137625f871d4ec51af914effdd"
+        },
+        "url": "https://cdn.modrinth.com/data/sMa4MaGz/versions/UJtJCpBi/pinout-0.2.1.jar",
+        "filename": "pinout-0.2.1.jar",
+        "primary": true,
+        "size": 29769,
+        "file_type": null
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "game_versions": [
+      "1.21.1"
+    ],
+    "loaders": [
+      "neoforge"
+    ],
+    "environment": "client_and_server",
+    "id": "OBNlAXvJ",
+    "project_id": "sMa4MaGz",
+    "author_id": "oG7JBzeS",
+    "featured": false,
+    "name": "CC;CPG: Pinout 0.2",
+    "version_number": "0.2",
+    "changelog": "Added the ability to pass tables to set all of the pins to a variety of states via setByte()",
+    "changelog_url": null,
+    "date_published": "2026-07-01T03:59:19.593674Z",
+    "downloads": 508,
+    "version_type": "release",
+    "status": "listed",
+    "requested_status": null,
+    "files": [
+      {
+        "id": "lEUWzuYa",
+        "hashes": {
+          "sha1": "660db02f527530fb7ebe1934f1784c96b1685ba4",
+          "sha512": "54a0f5f595a40f32593825cff9c338a492998b5e4e049494519aaa71b36a231e41bcdea5d1eccee5096cd92b2e3dd2146dcbe1257ea95a669086d5f91896af55"
+        },
+        "url": "https://cdn.modrinth.com/data/sMa4MaGz/versions/OBNlAXvJ/pinout-0.2.jar",
+        "filename": "pinout-0.2.jar",
+        "primary": true,
+        "size": 29356,
+        "file_type": null
+      }
+    ],
+    "dependencies": [
+      {
+        "version_id": null,
+        "project_id": "gu7yAYhd",
+        "file_name": null,
+        "dependency_type": "required"
+      },
+      {
+        "version_id": null,
+        "project_id": "eWiBLJ9R",
+        "file_name": null,
+        "dependency_type": "required"
+      }
+    ]
+  },
+  {
+    "game_versions": [
+      "1.21.1"
+    ],
+    "loaders": [
+      "neoforge"
+    ],
+    "environment": "client_and_server",
+    "id": "7kvnQvrx",
+    "project_id": "sMa4MaGz",
+    "author_id": "oG7JBzeS",
+    "featured": false,
+    "name": "CC;CPG: Pinout 0.1",
+    "version_number": "0.1",
+    "changelog": "Added the Pinout block\nAdded CC:Tweaked peripheral support to the pinout\nAdded recipe for the pinout\nAdded Tooltips for the pinout\nAdded Power Grid compatbility to the pinout.",
+    "changelog_url": null,
+    "date_published": "2026-06-30T17:43:42.896696Z",
+    "downloads": 18,
+    "version_type": "beta",
+    "status": "listed",
+    "requested_status": null,
+    "files": [
+      {
+        "id": "Qi0NL2cM",
+        "hashes": {
+          "sha1": "72eeb976dd94949252eca0ce9d9598c33c9a5239",
+          "sha512": "2a559a70c407c3835ed199a874f3db60fa61b8edc58ea03e2bb67ede6f295988fb9de2d1541b72a7eea429a76516df3af9937fa0f15a24bf4a9c6450ea24c485"
+        },
+        "url": "https://cdn.modrinth.com/data/sMa4MaGz/versions/7kvnQvrx/pinout-0.1.jar",
+        "filename": "pinout-0.1.jar",
+        "primary": true,
+        "size": 27689,
+        "file_type": null
+      }
+    ],
+    "dependencies": [
+      {
+        "version_id": null,
+        "project_id": "eWiBLJ9R",
+        "file_name": null,
+        "dependency_type": "required"
+      },
+      {
+        "version_id": null,
+        "project_id": "gu7yAYhd",
+        "file_name": null,
+        "dependency_type": "required"
+      }
+    ]
+  }
+]

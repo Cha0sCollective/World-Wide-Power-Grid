@@ -26,6 +26,12 @@ def inputs():
     files = [p for p in NATIVE.iterdir()
              if p.name in ('sources.lock.json', 'pg-safety.patch', 'superlu-safety.patch', 'CMakeLists.txt')]
     files.append(Path(__file__).resolve())
+    files.append(NATIVE / 'reduction.h')
+    files.append(NATIVE / 'reduction_checks.c')
+    files.append(NATIVE / 'allocation_checks.c')
+    files.append(NATIVE / 'solver_allocation_checks.c')
+    files.append(NATIVE / 'allocation_faults.h')
+    files.append(NATIVE / 'prepare_reduction_checks.py')
     files.extend((NATIVE / 'jni-linux').glob('*.h'))
     return {str(p.relative_to(ROOT)): sha(p) for p in sorted(files)}
 
@@ -97,6 +103,7 @@ def main():
                     path.write_text(path.read_text(), encoding='utf-8', newline='\n')
             subprocess.run(['patch', '--batch', '-p1', '-i', str(NATIVE / patch)],
                            cwd=source_root / name, check=True)
+        shutil.copyfile(NATIVE / 'reduction.h', source_root / 'PowerGrid/native/src/powergridNative/include/reduction.h')
         (source_root / 'PREPARED.json').write_text(json.dumps(fingerprint, indent=2))
     if not (source_root / 'PREPARED.json').exists():
         raise RuntimeError('Incomplete source preparation; preserve evidence and use a new work directory')
@@ -121,7 +128,7 @@ def main():
     else:
         subprocess.run(command, check=True)
     subprocess.run(['cmake', '--build', str(build), '--parallel', str(args.jobs), '--target',
-                    'powergridNative', 'sparse_safety_tests'], check=True)
+                    'powergridNative', 'sparse_safety_tests', 'reduction_checks', 'allocation_checks', 'solver_allocation_checks'], check=True)
     if fingerprint != inputs():
         raise RuntimeError('Native inputs changed during build; no artifact staged')
     name = 'libpowergridNative7.' + ('dll' if args.platform == 'windows' else 'so')

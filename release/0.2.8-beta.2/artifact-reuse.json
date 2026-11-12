@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "runtime_source_sha": "c6f55f77dd929195fef43d2aadd16550db3ce7d0",
+  "documentation_source_sha": "59fc0001b4a354424cc321196b927361affaebe6",
+  "runtime_sha256": "7bc9be24019c5966d8417549b684d08afe66f6799c4d144e6d5f20a24060124e",
+  "headless_jobs_reused": 558,
+  "graphical_scenarios_reused": 12,
+  "suite_reruns": false,
+  "sdk_changed_entries": [
+    "SHA256SUMS.txt",
+    "docs/API_RELEASE_CHECKS.md",
+    "docs/CREATE_ADDON.md",
+    "docs/EXTENSION_API.md",
+    "docs/EXTENSION_API_PLAN.md",
+    "docs/EXTENSION_API_WORKSHOP.md",
+    "docs/INSTALL.md",
+    "docs/STATIONARY_YARD.md"
+  ],
+  "runtime_and_world_assets_identical": true,
+  "scope": "Updated frozen guides, presentation and verification metadata only; compiled API, example and starter artifacts remain identical."
+}

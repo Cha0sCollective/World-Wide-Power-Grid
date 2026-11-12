@@ -100,6 +100,10 @@ def validate_job(actual, expected, inputs, base):
     if expected.get('operation') != 'reference':
         require(proof.get('phase') == expected['phase'] and proof.get('neoforge') == expected['loader']
                 and set(proof.get('namespaces', '').split(',')) == set(expected['namespaces']), 'Lifecycle/loader/namespace differs')
+        if 'circuit' in expected:
+            require(proof.get('circuit')==expected['circuit'], 'Selected circuit differs')
+            require('WWPG_RUNTIME_INPUTS_VERIFIED:' in text and f'WWPG_CIRCUIT_BEGIN case={expected["circuit"]} substeps=16' in text,
+                    'Actual circuit/runtime input audit missing')
         if expected['addon']:
             require(all(proof.get('addon_artifacts', {}).get(r, {}).get('sha256') == inputs['artifact_hashes'][r]
                         for r in ('example', 'upstream_example')), 'Actual addon jar differs')

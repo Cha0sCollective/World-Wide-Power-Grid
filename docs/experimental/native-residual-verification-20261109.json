@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "passed": true,
+  "branch": "dev/experimental-plain-wire-batching",
+  "verified_file_references": 742,
+  "retained_source_build_hashes_verified": 450,
+  "retained_build_artifacts": [
+    {
+      "path": "build/libs/wwpg-0.2.7-experimental.wiretree.11.jar",
+      "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9"
+    },
+    {
+      "path": "build/libs/wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+      "sha256": "24d2d70ca4b8895d71e1d74c9fc49b23a1873507f4f1c10627f2443d1fc51636"
+    }
+  ],
+  "main_tracked_worktree_clean": true,
+  "main_untracked_status_entries": 307,
+  "diagnostic_mode_mismatches_rejected": 3,
+  "local_document_links_checked": 52,
+  "python_syntax_files": 6,
+  "result": {
+    "path": "docs/experimental/native-residual-results-20261109.json",
+    "sha256": "a2884fa141bd282fd78f9d983333deea976b31755145b0df0354bdb53db4afdd"
+  },
+  "tool": {
+    "path": "tools/experimental/verify_native_residual.py",
+    "sha256": "194ac7140c0bddbc4c2de9a851b9a347c29e0953e4f4aea7e9b15388a3c74105"
+  },
+  "full_suite": false,
+  "graphical_acceptance": false,
+  "note": "Rechecks preserved hashes, capture metadata, CSV arithmetic, diagnostic markers and unchanged runtime. Native and game check counts describe their named completed runs; they were not rerun by this verifier."
+}

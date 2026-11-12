@@ -61,6 +61,8 @@ repositories {
 
 def releaseArtifacts = new groovy.json.JsonSlurper().parse(file('release/artifacts.json'))
 def optionalArtifacts = new groovy.json.JsonSlurper().parse(file('release/optional-artifacts.json'))
+def compatibilityArtifacts = new groovy.json.JsonSlurper().parse(file('release/compatibility-artifacts.json'))
+def legacyComputerRuntime = neo_version.startsWith('21.1.') && neo_version.split('\\.')[2].toInteger() < 265
 def testProfile = providers.gradleProperty('testProfile').getOrElse('BASE').toUpperCase()
 if (!(testProfile in ['BASE', 'PINOUT'])) throw new GradleException('testProfile must be BASE or PINOUT')
 configurations { pgNativeReference; upstreamArtifacts; optionalReference }
@@ -92,6 +94,8 @@ neoForge {
             systemProperty 'wwpg.test.backend', providers.gradleProperty('testBackend').getOrElse('NATIVE')
             systemProperty 'wwpg.restorationBatch', providers.gradleProperty('testRestorationBatch').getOrElse('true')
             systemProperty 'wwpg.test.expectedNeoForge', neo_version
+            systemProperty 'wwpg.test.legacyComputerRuntime', legacyComputerRuntime.toString()
+            systemProperty 'wwpg.test.circuit', providers.gradleProperty('testCircuit').getOrElse('')
             systemProperty 'wwpg.test.restartPhase', providers.gradleProperty('restartPhase').getOrElse('SETUP')
             systemProperty 'wwpg.test.multiplayer', providers.gradleProperty('multiplayer').getOrElse('false')
             systemProperty 'wwpg.test.stationaryMultiplayer', providers.gradleProperty('stationaryMultiplayer').getOrElse('false')
@@ -109,23 +113,32 @@ neoForge.runs.named('gameTestServer') { loadedMods = [neoForge.mods.wwpg, neoFor
 dependencies {
     optionalArtifacts.artifacts.each {
         optionalReference(it.coordinate) { transitive = false }
-        compileOnly(it.coordinate) { transitive = false }
-        if (testProfile == 'PINOUT') runtimeOnly(it.coordinate) { transitive = false }
+        def minimum = it.role == 'computercraft' ? compatibilityArtifacts.computercraft.coordinate : it.coordinate
+        compileOnly(minimum) { transitive = false }
+        def runtime = legacyComputerRuntime && it.role == 'computercraft' ? minimum : it.coordinate
+        if (testProfile == 'PINOUT') runtimeOnly(runtime) { transitive = false }
     }
     releaseArtifacts.artifacts.findAll { it.role != 'pg_native_reference' }.each {
         upstreamArtifacts(it.coordinate) { transitive = false }
     }
     def createClassifier = providers.gradleProperty('publishedRuntime').getOrElse('true') == 'true' ? '' : ':slim'
-    implementation("com.simibubi.create:create-${minecraft_version}:${create_version}${createClassifier}") { transitive = false }
+    compileOnly("com.simibubi.create:create-${minecraft_version}:${create_version}${createClassifier}") { transitive = false }
+    runtimeOnly("maven.modrinth:create:UjX6dr61") { transitive = false }
     implementation 'net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1'
     implementation 'com.tterrag.registrate:Registrate:MC1.21-1.3.0+67'
     compileOnly 'dev.engine-room.flywheel:flywheel-neoforge-api-1.21.1:1.0.6'
     runtimeOnly 'dev.engine-room.flywheel:flywheel-neoforge-1.21.1:1.0.6'
-    implementation('maven.modrinth:qYJdIoAx:KWxEmmON') { transitive = false }
+    compileOnly('maven.modrinth:qYJdIoAx:KWxEmmON') { transitive = false }
+    runtimeOnly('maven.modrinth:qYJdIoAx:ZMfRgLy5') { transitive = false }
+    compileOnly('curse.maven:create-power-components-1659527:9031604') { transitive = false }
+    if (providers.gradleProperty('testCircuit').getOrElse('') in ['fused-latch', 'relay-heater', 'quiet-heater']) {
+        runtimeOnly('curse.maven:create-power-components-1659527:9031604') { transitive = false }
+    }
     implementation('curse.maven:power-grid-1321420:8880715') { transitive = false }
     // PG 0.6.2 omitted native v7. Its NativeMNA interface is byte-identical to 0.6.1.
     pgNativeReference('curse.maven:power-grid-1321420:8738576') { transitive = false }
-    implementation 'dev.architectury:architectury-neoforge:13.0.8'
+    compileOnly 'dev.architectury:architectury-neoforge:13.0.8'
+    runtimeOnly('maven.modrinth:architectury-api:1IiqEQGl') { transitive = false }
     // PG supplies EJML at runtime. Compatibility hooks use its existing matrix types.
     compileOnly 'org.ejml:ejml-core:0.44.0'
     // Optional Sable integration uses its read-only API; Sable supplies it at runtime.
@@ -174,7 +187,7 @@ tasks.named('processGameTestResources') {
     inputs.property 'version', project.version
     filesMatching('META-INF/neoforge.mods.toml') { expand version: project.version }
     from('release') { include 'artifacts.json', 'optional-artifacts.json', 'content-matrix.json', '0.1.0-beta.5/content-matrix.json', '0.1.0-beta.5/registry-inventory.json'; into 'data/wwpg/release' }
-    ['wwpg_loading', 'wwpg_matrix_ownership', 'wwpg_board_startup', 'wwpg_cee_preparation',
+    ['wwpg_audit_generator', 'wwpg_audit_cee', 'wwpg_audit_endpoints', 'wwpg_audit_meter', 'wwpg_audit_config', 'wwpg_tree_scope', 'wwpg_cee_state_geometry', 'wwpg_tree_budget', 'wwpg_tree_restore', 'wwpg_loading', 'wwpg_matrix_ownership', 'wwpg_board_startup', 'wwpg_cee_preparation',
      'wwpg_solver_safety', 'wwpg_native_guard', 'wwpg_unload', 'wwpg_contactors', 'wwpg_meter_sampling',
      'wwpg_loader_installation', 'wwpg_loader_addons', 'wwpg_addon_safety', 'wwpg_addon_native_guard',
      'wwpg_cio', 'wwpg_cio_upgrade', 'wwpg_cio_guard', 'wwpg_cio_transitions', 'wwpg_sable_targeting',
@@ -449,6 +462,7 @@ tasks.register('runPackagedGameTestServer', JavaExec) {
                 profile: testProfile, backend: providers.gradleProperty('testBackend').getOrElse('NATIVE'),
                 phase: providers.gradleProperty('restartPhase').getOrElse('SETUP'), started: stamp,
                 namespaces: providers.gradleProperty('testNamespaces').getOrElse('default')]
+        if (providers.gradleProperty('testCircuit').isPresent()) proof.circuit = providers.gradleProperty('testCircuit').get()
         if(providers.gradleProperty('testApiAddon').getOrElse('false')=='true') {
             proof.addon_artifacts=[:]
             [example:providers.gradleProperty('testExampleArtifact').getOrElse('examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar'),

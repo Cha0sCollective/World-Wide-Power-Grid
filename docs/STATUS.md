@@ -1,13 +1,11 @@
 # Current status
 
-**[WWPG 0.2.7](https://github.com/Cha 0sCollective/World-Wide-Power-Grid/releases/tag/0.2.7)**
-is the stable release. It supports the declared stationary factories and
-optional Pinout computer control, and includes **extension API 1.0.0** for
-add-on developers. Existing 0.1.0-beta.5 and beta.4 worlds remain compatible; update WWPG on
-the server and every client using the [installation guide](INSTALL.md).
-NeoForge **21.1.231 and 21.1.248** are tested. Newer NeoForge, Create, CEE and
-Power Grid versions are allowed to load for player testing; see
-[version compatibility](VERSION_COMPATIBILITY.md) for the tested combination.
+**[WWPG 0.2.8-beta.2](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8-beta.2)**
+is the current prerelease. It retains the published loading and wire-processing
+improvements and adds audit-driven rollback, endpoint, configuration, native
+allocation and multimeter safety corrections.
+The previous stable release remains **0.2.7**. Extension API **1.0.0** is unchanged.
+Use matching server/client mods from the [installation guide](INSTALL.md).
 
 ## What works
 
@@ -43,24 +41,21 @@ a repaired device. The [developer contract](EXTENSION_API.md) explains those rul
 
 ## What was checked
 
-0.2.7 reuses the qualified dev.128 runtime after entry-by-entry comparisons.
-Only release-version metadata changes in the gameplay jar and matching test
-companion. The preserved campaign passed 350 full headless jobs on Windows and
-Ubuntu 24.04, Native/Java, BASE/PINOUT and NeoForge 21.1.231/21.1.248, plus all 12
-separate Windows graphical scenarios. Full acceptance used CEE 1.1.4.
+Beta.2 completed all **558 required headless jobs** across local Windows and
+Ubuntu/WSL, Native/Java and BASE/PINOUT. NeoForge 21.1.265 is the full primary
+environment; 21.1.231 and 21.1.248 retain distinct compatibility lanes. All
+**12 real Windows client scenarios** passed, including two-client controls,
+tools, readings and clean Save and Quit. Actual dependency hashes are retained.
 
-Preparation passed 130 unit tests per OS and independently compiled the extracted
-SDK examples and starter. Distinct cold restarts, unload/recovery, rejection,
-stored-state and exact exported-world reopens remain covered. Client scenarios
-include real input, two TCP clients and successful Save and Quit or clean server
-shutdown. Their WWPG electrical diagnostic lists are empty.
+The passing beta.2 evidence is reused for publication without rerunning either
+suite. An investigated Windows progress-file interruption retained 40 complete
+passing jobs and ran the six missing jobs in fresh directories. The original
+interrupted batch remains failed; complete coverage is assembled transparently.
 
-The companion contains 378 GameTest methods. The [verification record](../release/0.2.7/verification.json)
-retains original execution sources, artifact hashes, failed attempts and the
-validated continuations; reuse does not describe a fresh suite run on release
-metadata. SDK documentation and packaging have their own focused checks.
-CEE 1.1.3 and optional integration records retain their actual earlier identities.
-No new performance campaign or exhaustive graphical gallery was run.
+The earlier Linux Native/BASE/.248 motor assertion did not recur, including
+SETUP and all three cold VERIFY phases in this campaign. Its original cause
+remains unknown. See the [acceptance record](../release/0.2.8-beta.2/ACCEPTANCE.md)
+for actual source identities and the preserved historical finding.
 
 ## Generator and transformer fixes
 
@@ -74,7 +69,8 @@ stable. Native clutch limits and generator damage behavior still apply.
 
 The PG multimeter can read assembled medium-transformer terminals through their
 loaded controller. Invalidated or unavailable samples remain unavailable until
-the circuit recovers. API 1.0.0, saves and native solver binaries are unchanged.
+the circuit recovers. API 1.0.0 and save formats are unchanged; beta.2 updates
+the guarded native libraries for allocation safety.
 
 ## Loading and ticking
 

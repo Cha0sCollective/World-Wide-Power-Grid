@@ -1,0 +1,2859 @@
+{
+  "schema": 1,
+  "frozen_inputs": {
+    "path": "local/frozen/prototype-04c/inputs.json",
+    "sha256": "12538d41f851e8327545edd76d35741f86ef6add45af369ca8b5cc3c7b62b9c3"
+  },
+  "artifacts": {
+    "runtime": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2.jar",
+      "sha256": "5c5d4d9e6a652f5cabe589ac1a2b59d64c3954f5cbb05320c56899a448a50e1b"
+    },
+    "fixtures": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2-gametests.jar",
+      "sha256": "b60bc743051432b67cf8c65d29a6a2da0f27f7075e9314d4edd2d31f262fa46c"
+    },
+    "cee": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\electroenergetics-1.21.1-1.1.4.jar",
+      "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+    }
+  },
+  "reference_inventory": {
+    "path": "local/inputs/reference-copy.json",
+    "sha256": "22b0f44fd4159460bbc9be127d7f3de13ebcea2ec59cf8befc00b21f859cef74"
+  },
+  "matched_source_entries": 436,
+  "native_unchanged": true,
+  "changed_runtime_entries": [
+    "META-INF/neoforge.mods.toml",
+    "org/cha0scollective/wwpg/WorldWidePowerGrid.class",
+    "org/cha0scollective/wwpg/bridge/WorldBridge$Adapted.class",
+    "org/cha0scollective/wwpg/bridge/WorldBridge$Anchor.class",
+    "org/cha0scollective/wwpg/bridge/WorldBridge$Branch.class",
+    "org/cha0scollective/wwpg/bridge/WorldBridge$CatenaryHandover.class",
+    "org/cha0scollective/wwpg/bridge/WorldBridge$Desired.class",
+    "org/cha0scollective/wwpg/bridge/WorldBridge$DirectedBranch.class",
+    "org/cha0scollective/wwpg/bridge/WorldBridge$Dynamic.class",
+    "org/cha0scollective/wwpg/bridge/WorldBridge$ResultNode.class",
+    "org/cha0scollective/wwpg/bridge/WorldBridge$SolveFailure.class",
+    "org/cha0scollective/wwpg/bridge/WorldBridge$StableDescription.class",
+    "org/cha0scollective/wwpg/bridge/WorldBridge$TopologyState.class",
+    "org/cha0scollective/wwpg/bridge/WorldBridge$Winding.class",
+    "org/cha0scollective/wwpg/bridge/WorldBridge$WindingKey.class",
+    "org/cha0scollective/wwpg/bridge/WorldBridge.class",
+    "org/cha0scollective/wwpg/experimental/RestorationRoots$Counts.class",
+    "org/cha0scollective/wwpg/experimental/RestorationRoots.class",
+    "org/cha0scollective/wwpg/experimental/WireTreeBatch$Access.class",
+    "org/cha0scollective/wwpg/experimental/WireTreeBatch$State.class",
+    "org/cha0scollective/wwpg/experimental/WireTreeBatch.class",
+    "org/cha0scollective/wwpg/mixin/PgWireRestoreScopeMixin.class",
+    "org/cha0scollective/wwpg/mixin/PgWireTreeBatchAccess.class",
+    "org/cha0scollective/wwpg/mixin/PgWireTreeBatchMixin.class",
+    "wwpg.mixins.json"
+  ],
+  "focused_checks": [
+    {
+      "name": "tree-04a-native-on-01",
+      "evidence": [
+        {
+          "path": "local/checks/tree-04a-native-on-01/result.json",
+          "sha256": "fd85497a186ce9104afb5aeab4688555d9e653ebd0558a2db2f944084cae0362"
+        },
+        {
+          "path": "local/checks/tree-04a-native-on-01/invocation.json",
+          "sha256": "5b7d25b8ae924fd866398260d96484bf8b41e3652f10bab78e6bcbd0e1073d07"
+        },
+        {
+          "path": "local/checks/tree-04a-native-on-01/process.log",
+          "sha256": "eb3a493b8bc81e313b431a16ba75617cfb39aadca68b34bf7b861e2eb3637235"
+        }
+      ],
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "command": [
+          "C:\\Users\\Parker\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04a\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04a\\wwpg-0.2.7-experimental.wiretree.1.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04a\\wwpg-0.2.7-experimental.wiretree.1-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\tree-04a-native-on-01\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04a\\wwpg-0.2.7-experimental.wiretree.1.jar",
+            "sha256": "694ff552a2016dd9d007909735558b73afb129e33306e9f7a3a332650c803bd1"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04a\\wwpg-0.2.7-experimental.wiretree.1-gametests.jar",
+            "sha256": "942b5e22703fb31c7daad5ad8f9255b69372b5ba2eb2e93122b1e756bcd89ad7"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04a\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "exit_code": 1,
+        "required_tests_passed": 0,
+        "artifacts_unchanged": true,
+        "passed": false
+      }
+    },
+    {
+      "name": "tree-04b-java-life-01",
+      "evidence": [
+        {
+          "path": "local/checks/tree-04b-java-life-01/result.json",
+          "sha256": "89780f0ed3cd90c22ad0781c4b0598e56468714f2d8b92ebfccd7f085e3a0010"
+        },
+        {
+          "path": "local/checks/tree-04b-java-life-01/invocation.json",
+          "sha256": "c2f6f2e53e32774d92f75a2ff7ed0c2055d9997170d7a75f83f982c3c9451431"
+        },
+        {
+          "path": "local/checks/tree-04b-java-life-01/process.log",
+          "sha256": "cfb1eb78f47a4d9b6744b6d6c168e833f1e6cbb1ad2e62db8f9159a49095d7be"
+        }
+      ],
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_unload,wwpg_solver_safety",
+        "backend": "JAVA",
+        "property_batch": true,
+        "tree_batch": true,
+        "command": [
+          "C:\\Users\\Parker\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\tree-04b-java-life-01\\server",
+          "-PtestBackend=JAVA",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_unload,wwpg_solver_safety",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1.jar",
+            "sha256": "694ff552a2016dd9d007909735558b73afb129e33306e9f7a3a332650c803bd1"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1-gametests.jar",
+            "sha256": "ec8d0110aace8a15671c6f817b79f6f0b6e8cc6611739ac356bb8c99dc0054ea"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "exit_code": 0,
+        "required_tests_passed": 11,
+        "artifacts_unchanged": true,
+        "passed": true
+      }
+    },
+    {
+      "name": "tree-04b-java-on-01",
+      "evidence": [
+        {
+          "path": "local/checks/tree-04b-java-on-01/result.json",
+          "sha256": "106c01d43e547a5dffeb7e9c6b771d581cc3a7362dbbdc5590dc422bb20ba96c"
+        },
+        {
+          "path": "local/checks/tree-04b-java-on-01/invocation.json",
+          "sha256": "3d4fa4ddc328e85f089fcde0d9ff8663524f19193f5e2de96aba2368f28e54af"
+        },
+        {
+          "path": "local/checks/tree-04b-java-on-01/process.log",
+          "sha256": "6c227e3b2b703dc38aa473f4443c982094060546d772662f9d642814e0c7f5bc"
+        }
+      ],
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery",
+        "backend": "JAVA",
+        "property_batch": true,
+        "tree_batch": true,
+        "command": [
+          "C:\\Users\\Parker\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\tree-04b-java-on-01\\server",
+          "-PtestBackend=JAVA",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1.jar",
+            "sha256": "694ff552a2016dd9d007909735558b73afb129e33306e9f7a3a332650c803bd1"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1-gametests.jar",
+            "sha256": "ec8d0110aace8a15671c6f817b79f6f0b6e8cc6611739ac356bb8c99dc0054ea"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "exit_code": 0,
+        "required_tests_passed": 34,
+        "artifacts_unchanged": true,
+        "passed": true
+      }
+    },
+    {
+      "name": "tree-04b-native-life-01",
+      "evidence": [
+        {
+          "path": "local/checks/tree-04b-native-life-01/result.json",
+          "sha256": "795b136c508d5c9322d22aaba4dac9f1af4c5710ab0f24897b9d69b6e405089f"
+        },
+        {
+          "path": "local/checks/tree-04b-native-life-01/invocation.json",
+          "sha256": "4ca388fccceafea58c8772368533d1f387dac3eb8aa6762ee066c0b0e1a0bffa"
+        },
+        {
+          "path": "local/checks/tree-04b-native-life-01/process.log",
+          "sha256": "788fe2f363971d82925f814f4b486c99e712fe1a47cb2e03b44dcac24dc94be0"
+        }
+      ],
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_unload,wwpg_solver_safety",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "command": [
+          "C:\\Users\\Parker\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\tree-04b-native-life-01\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_unload,wwpg_solver_safety",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1.jar",
+            "sha256": "694ff552a2016dd9d007909735558b73afb129e33306e9f7a3a332650c803bd1"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1-gametests.jar",
+            "sha256": "ec8d0110aace8a15671c6f817b79f6f0b6e8cc6611739ac356bb8c99dc0054ea"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "exit_code": 0,
+        "required_tests_passed": 11,
+        "artifacts_unchanged": true,
+        "passed": true
+      }
+    },
+    {
+      "name": "tree-04b-native-off-01",
+      "evidence": [
+        {
+          "path": "local/checks/tree-04b-native-off-01/result.json",
+          "sha256": "7d94be15667cca02480409e56c3f6ea1a2188a992f02b497d9541a752d9ae15e"
+        },
+        {
+          "path": "local/checks/tree-04b-native-off-01/invocation.json",
+          "sha256": "7d75077472d54c1b9ef4990e59c6673f6b41c30799cab0333faad254cb1a8de2"
+        },
+        {
+          "path": "local/checks/tree-04b-native-off-01/process.log",
+          "sha256": "2415b5906490a872bcbe015fa78f03dba67d1682ee966539371f4ed6dbfd6e15"
+        }
+      ],
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": false,
+        "command": [
+          "C:\\Users\\Parker\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\tree-04b-native-off-01\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=false"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1.jar",
+            "sha256": "694ff552a2016dd9d007909735558b73afb129e33306e9f7a3a332650c803bd1"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1-gametests.jar",
+            "sha256": "ec8d0110aace8a15671c6f817b79f6f0b6e8cc6611739ac356bb8c99dc0054ea"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "exit_code": 0,
+        "required_tests_passed": 34,
+        "artifacts_unchanged": true,
+        "passed": true
+      }
+    },
+    {
+      "name": "tree-04b-native-on-01",
+      "evidence": [
+        {
+          "path": "local/checks/tree-04b-native-on-01/result.json",
+          "sha256": "18fa7eac47d6f5bf5ac90a1a9f62dc7fe659625eab27f8fc14f6aa45ba4f0066"
+        },
+        {
+          "path": "local/checks/tree-04b-native-on-01/invocation.json",
+          "sha256": "811921c3527575626c3ce87c43e58b01b8c406bc72edfd8d530718b2e5e228b8"
+        },
+        {
+          "path": "local/checks/tree-04b-native-on-01/process.log",
+          "sha256": "39c0537a968a779d8f04072be0173bf4eb73838bb1d5a44e25d7d1e639126109"
+        }
+      ],
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "command": [
+          "C:\\Users\\Parker\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\tree-04b-native-on-01\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1.jar",
+            "sha256": "694ff552a2016dd9d007909735558b73afb129e33306e9f7a3a332650c803bd1"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1-gametests.jar",
+            "sha256": "ec8d0110aace8a15671c6f817b79f6f0b6e8cc6611739ac356bb8c99dc0054ea"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "exit_code": 0,
+        "required_tests_passed": 34,
+        "artifacts_unchanged": true,
+        "passed": true
+      }
+    },
+    {
+      "name": "tree-04c-java-life-01",
+      "evidence": [
+        {
+          "path": "local/checks/tree-04c-java-life-01/result.json",
+          "sha256": "6f1abdc92632f0554dd4dcbb941c5b246aceff6568c4390a075b51ece89b20a6"
+        },
+        {
+          "path": "local/checks/tree-04c-java-life-01/invocation.json",
+          "sha256": "967ceaaf89280f7f00f25eba9f5d581220edb45c1788f63617b3b23eb0eb3b1f"
+        },
+        {
+          "path": "local/checks/tree-04c-java-life-01/process.log",
+          "sha256": "9466bbb8b9e7e7449c7de8842db113971c525d1908e4653b68b6e51c6ef8e407"
+        }
+      ],
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_unload,wwpg_solver_safety",
+        "backend": "JAVA",
+        "property_batch": true,
+        "tree_batch": true,
+        "command": [
+          "C:\\Users\\Parker\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\tree-04c-java-life-01\\server",
+          "-PtestBackend=JAVA",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_unload,wwpg_solver_safety",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2.jar",
+            "sha256": "5c5d4d9e6a652f5cabe589ac1a2b59d64c3954f5cbb05320c56899a448a50e1b"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2-gametests.jar",
+            "sha256": "b60bc743051432b67cf8c65d29a6a2da0f27f7075e9314d4edd2d31f262fa46c"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "exit_code": 0,
+        "required_tests_passed": 11,
+        "artifacts_unchanged": true,
+        "passed": true
+      }
+    },
+    {
+      "name": "tree-04c-java-on-01",
+      "evidence": [
+        {
+          "path": "local/checks/tree-04c-java-on-01/result.json",
+          "sha256": "bf1997b102f32f515b8aee50ae1f6d49e233d0a128ce007e524f54ed4dd83a95"
+        },
+        {
+          "path": "local/checks/tree-04c-java-on-01/invocation.json",
+          "sha256": "fb44e2e41e8c9db996b397eea07c462a04289cd5ff92e0458fc8fee6ffb0cb10"
+        },
+        {
+          "path": "local/checks/tree-04c-java-on-01/process.log",
+          "sha256": "9ea4b83eafa9fe53c34d938d7af00ddc31160bd355150eba2e34dfe1694817df"
+        }
+      ],
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery",
+        "backend": "JAVA",
+        "property_batch": true,
+        "tree_batch": true,
+        "command": [
+          "C:\\Users\\Parker\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\tree-04c-java-on-01\\server",
+          "-PtestBackend=JAVA",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2.jar",
+            "sha256": "5c5d4d9e6a652f5cabe589ac1a2b59d64c3954f5cbb05320c56899a448a50e1b"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2-gametests.jar",
+            "sha256": "b60bc743051432b67cf8c65d29a6a2da0f27f7075e9314d4edd2d31f262fa46c"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "exit_code": 0,
+        "required_tests_passed": 36,
+        "artifacts_unchanged": true,
+        "passed": true
+      }
+    },
+    {
+      "name": "tree-04c-native-life-01",
+      "evidence": [
+        {
+          "path": "local/checks/tree-04c-native-life-01/result.json",
+          "sha256": "a29c6eb675a23e4d7cb33c5d0a46cde95f30f9eabdac99701fceea4a2ddba3ff"
+        },
+        {
+          "path": "local/checks/tree-04c-native-life-01/invocation.json",
+          "sha256": "88bd154ec4aaa395904a07d2c7bad761a95dfee5cdbf9bdc098cf63e5ace0e6d"
+        },
+        {
+          "path": "local/checks/tree-04c-native-life-01/process.log",
+          "sha256": "500fd1f5b329f7ae71523715a42d8ccd81bbd22181a4bcc5accfdf06e1c5f7c7"
+        }
+      ],
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_unload,wwpg_solver_safety",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "command": [
+          "C:\\Users\\Parker\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\tree-04c-native-life-01\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_unload,wwpg_solver_safety",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2.jar",
+            "sha256": "5c5d4d9e6a652f5cabe589ac1a2b59d64c3954f5cbb05320c56899a448a50e1b"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2-gametests.jar",
+            "sha256": "b60bc743051432b67cf8c65d29a6a2da0f27f7075e9314d4edd2d31f262fa46c"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "exit_code": 0,
+        "required_tests_passed": 11,
+        "artifacts_unchanged": true,
+        "passed": true
+      }
+    },
+    {
+      "name": "tree-04c-native-off-01",
+      "evidence": [
+        {
+          "path": "local/checks/tree-04c-native-off-01/result.json",
+          "sha256": "228d65ead6aea787f935a7bb299f995797c6b1318b22fa72605bc6db6b157b21"
+        },
+        {
+          "path": "local/checks/tree-04c-native-off-01/invocation.json",
+          "sha256": "867d808fa97010c5cad9c0f61af889214e57b5a38be2c98e39a9b3962e579d60"
+        },
+        {
+          "path": "local/checks/tree-04c-native-off-01/process.log",
+          "sha256": "df719eda453e65b178be9fd6b1a9703c1f8ee6e4c716d53a1b47847228d85ba5"
+        }
+      ],
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": false,
+        "command": [
+          "C:\\Users\\Parker\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\tree-04c-native-off-01\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=false"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2.jar",
+            "sha256": "5c5d4d9e6a652f5cabe589ac1a2b59d64c3954f5cbb05320c56899a448a50e1b"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2-gametests.jar",
+            "sha256": "b60bc743051432b67cf8c65d29a6a2da0f27f7075e9314d4edd2d31f262fa46c"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "exit_code": 0,
+        "required_tests_passed": 36,
+        "artifacts_unchanged": true,
+        "passed": true
+      }
+    },
+    {
+      "name": "tree-04c-native-on-01",
+      "evidence": [
+        {
+          "path": "local/checks/tree-04c-native-on-01/result.json",
+          "sha256": "0f95a73559695ecd50da44c4d82851155ee77803fa886f3b5df8a45003ffe704"
+        },
+        {
+          "path": "local/checks/tree-04c-native-on-01/invocation.json",
+          "sha256": "a2d9da07bec454c0d92f6dc80ce8139e534b411f0365c4e23641ace44da33fc7"
+        },
+        {
+          "path": "local/checks/tree-04c-native-on-01/process.log",
+          "sha256": "32801301cd29746d8bf09ad24e82813e7a0b9e1382de20c8b8d72919e38e7663"
+        }
+      ],
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "command": [
+          "C:\\Users\\Parker\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\tree-04c-native-on-01\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2.jar",
+            "sha256": "5c5d4d9e6a652f5cabe589ac1a2b59d64c3954f5cbb05320c56899a448a50e1b"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2-gametests.jar",
+            "sha256": "b60bc743051432b67cf8c65d29a6a2da0f27f7075e9314d4edd2d31f262fa46c"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "exit_code": 0,
+        "required_tests_passed": 36,
+        "artifacts_unchanged": true,
+        "passed": true
+      }
+    }
+  ],
+  "unit_checks": [
+    {
+      "attempt": "wiretree-unit-01",
+      "evidence": {
+        "path": "local/wiretree-unit-01/TEST-org.cha0scollective.wwpg.bridge.RestorationWindowTest.xml",
+        "sha256": "426e81d7c64532a35be75bca132174dd87ac0bca0b6feba2cdbe015bdd591aac"
+      },
+      "suite": "org.cha0scollective.wwpg.bridge.RestorationWindowTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "attempt": "wiretree-unit-01",
+      "evidence": {
+        "path": "local/wiretree-unit-01/TEST-org.cha0scollective.wwpg.wiring.RestorationRootsTest.xml",
+        "sha256": "177b4cc9f83b63faa7fd6c971f2b69d51e26301718b1eee89111aaba887f862d"
+      },
+      "suite": "org.cha0scollective.wwpg.wiring.RestorationRootsTest",
+      "tests": 2,
+      "failures": 1,
+      "errors": 0
+    },
+    {
+      "attempt": "wiretree-unit-01",
+      "evidence": {
+        "path": "local/wiretree-unit-01/TEST-org.cha0scollective.wwpg.wiring.WireTreeTraversalTest.xml",
+        "sha256": "a2a2fb2d95485ae0e5b3410f53235880d366adea4d2af9b2108250714cf13b5d"
+      },
+      "suite": "org.cha0scollective.wwpg.wiring.WireTreeTraversalTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "attempt": "wiretree-unit-02",
+      "evidence": {
+        "path": "local/wiretree-unit-02/TEST-org.cha0scollective.wwpg.bridge.RestorationWindowTest.xml",
+        "sha256": "a8f03ab97ea19478e7ef2ce8a22a5f96b16d83a0202b145e4e7829a18dc10d33"
+      },
+      "suite": "org.cha0scollective.wwpg.bridge.RestorationWindowTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "attempt": "wiretree-unit-02",
+      "evidence": {
+        "path": "local/wiretree-unit-02/TEST-org.cha0scollective.wwpg.wiring.RestorationRootsTest.xml",
+        "sha256": "394d76846009ec54b5baca9c63743848a021bef7e7376c7272f8889879f69699"
+      },
+      "suite": "org.cha0scollective.wwpg.wiring.RestorationRootsTest",
+      "tests": 2,
+      "failures": 1,
+      "errors": 0
+    },
+    {
+      "attempt": "wiretree-unit-02",
+      "evidence": {
+        "path": "local/wiretree-unit-02/TEST-org.cha0scollective.wwpg.wiring.WireTreeTraversalTest.xml",
+        "sha256": "c2ccb41d3d0e1c63fe361c43d456cb903c19ae847cbccb014cf5eced87494208"
+      },
+      "suite": "org.cha0scollective.wwpg.wiring.WireTreeTraversalTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "attempt": "wiretree-unit-03",
+      "evidence": {
+        "path": "local/wiretree-unit-03/TEST-org.cha0scollective.wwpg.bridge.RestorationWindowTest.xml",
+        "sha256": "00470b7eebf31f0bbacdee5e846b93a9a93158d903050e71ece6cee14c456169"
+      },
+      "suite": "org.cha0scollective.wwpg.bridge.RestorationWindowTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "attempt": "wiretree-unit-03",
+      "evidence": {
+        "path": "local/wiretree-unit-03/TEST-org.cha0scollective.wwpg.wiring.RestorationRootsTest.xml",
+        "sha256": "ceb8f29f45f530dc39bee81b0cd04e37c2cf61ec7bfd54f7ca577354f9f3cdd4"
+      },
+      "suite": "org.cha0scollective.wwpg.wiring.RestorationRootsTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "attempt": "wiretree-unit-03",
+      "evidence": {
+        "path": "local/wiretree-unit-03/TEST-org.cha0scollective.wwpg.wiring.WireTreeTraversalTest.xml",
+        "sha256": "458484b204b7bdc884c3bcbed717db5bcecbda4bcefb8e2557f90daacc662c60"
+      },
+      "suite": "org.cha0scollective.wwpg.wiring.WireTreeTraversalTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "attempt": "wiretree-unit-04",
+      "evidence": {
+        "path": "local/wiretree-unit-04/TEST-org.cha0scollective.wwpg.bridge.RestorationWindowTest.xml",
+        "sha256": "6dc0ed29dcb1c67503368a511a35d42cbf742e85eab6ae2e22c858bfe096851d"
+      },
+      "suite": "org.cha0scollective.wwpg.bridge.RestorationWindowTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "attempt": "wiretree-unit-04",
+      "evidence": {
+        "path": "local/wiretree-unit-04/TEST-org.cha0scollective.wwpg.wiring.RestorationRootsTest.xml",
+        "sha256": "0b5d06f427a23cfe79b1e142a6ac6594a224b77d38ded6e0f5874146c9bbb036"
+      },
+      "suite": "org.cha0scollective.wwpg.wiring.RestorationRootsTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "attempt": "wiretree-unit-04",
+      "evidence": {
+        "path": "local/wiretree-unit-04/TEST-org.cha0scollective.wwpg.wiring.WireTreeTraversalTest.xml",
+        "sha256": "10f4b43d38cade2fe8a56bc2d05f69a019a4931176e337a0f0f0948d3146c656"
+      },
+      "suite": "org.cha0scollective.wwpg.wiring.WireTreeTraversalTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0
+    }
+  ],
+  "focused_passing_gametests": 130,
+  "focused_passing_unit_checks": 6,
+  "full_suite": false,
+  "superseded_measurements": [
+    {
+      "name": "tree-control-01",
+      "protocol": {
+        "schema": 1,
+        "name": "tree-control-01",
+        "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\tree-control-01\\mods\\wwpg-0.2.7-experimental.wiretree.1.jar",
+          "sha256": "694ff552a2016dd9d007909735558b73afb129e33306e9f7a3a332650c803bd1",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1.jar"
+        },
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\tree-control-01\\mods\\wwpg-benchmark-0.1.0.jar",
+          "sha256": "cb67f3bbe08568992e1664558a3dc503c876be8cad5badf7872efbd763e3224e"
+        },
+        "copied_reference": true,
+        "batch": true,
+        "property_batch": true,
+        "tree_batch": false,
+        "detailed": false,
+        "loading_trace": false,
+        "reload": false,
+        "full_suite": false,
+        "started_utc": "2026-11-08T19:32:25Z",
+        "validation": {
+          "passed": true,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "healthy_ticks": 100,
+          "normal_shutdown": true,
+          "sixteen_substeps": true,
+          "no_independent_cee_or_rejected_solves": true,
+          "actual_reload_cycles": 0,
+          "full_suite": false
+        },
+        "loading": [
+          {
+            "phase": "SETTLE",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 942,
+            "graph_ready_tick": 943,
+            "finish_tick": 1049,
+            "chunk_request_seconds": 1.2446115,
+            "chunk_loading_seconds": 96.2867351,
+            "graph_recovery_seconds": 0.1316684,
+            "electrical_settling_seconds": 6.6063693,
+            "total_restoration_seconds": 104.2693843,
+            "restoration_and_settling_seconds": 103.0247728,
+            "healthy_ticks": 100
+          }
+        ],
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-08T19:34:24Z"
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/tree-control-01/experiment.json",
+          "sha256": "31a78e7c835ef67b7e0db207d60f27abb31aedb99304029b94d8d7738880556e"
+        },
+        {
+          "path": "local/benchmarks/tree-control-01/launch.json",
+          "sha256": "b2a0cba078ee00c48e680e8f3032ea92061cdb1077c33467dedf73d1733a08c0"
+        },
+        {
+          "path": "local/benchmarks/tree-control-01/invocation.json",
+          "sha256": "003607c9aa82f80ac5afcbb616d65b08bf74ff740865191ffd2af33eb5fad617"
+        },
+        {
+          "path": "local/benchmarks/tree-control-01/restore-input.json",
+          "sha256": "9dda393876818679e76af84aa7adc4165143e2af1a08f163970f51d78b6f8ef9"
+        },
+        {
+          "path": "local/benchmarks/tree-control-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/tree-control-01/runner-exit.json",
+          "sha256": "f52944ec9dc07d5b366565ab9a5b8e8b8a57b0b78af6f84c734f8a03bee50ed4"
+        },
+        {
+          "path": "local/benchmarks/tree-control-01/host-metrics.jsonl",
+          "sha256": "62c41150c085f7502c611525b35a755776a9fbec3d9629958d390b8bff45b8a3"
+        },
+        {
+          "path": "local/benchmarks/tree-control-01/process.log",
+          "sha256": "df13e3e00e6c9ac4b3a3eda67eeb51aa79e3ea73ac65e5e9b62ce13834ace862"
+        },
+        {
+          "path": "local/benchmarks/tree-control-01/benchmark/result.json",
+          "sha256": "96e66544bca074e525f6314b616c88d61567a13a44c615c0a573ad165e56a498"
+        },
+        {
+          "path": "local/benchmarks/tree-control-01/benchmark/loading-results.json",
+          "sha256": "051a0b82ded72dcd5b4d9e0e8f729ac1b45fcc6de6f263259bc1043f05b2d9bc"
+        },
+        {
+          "path": "local/benchmarks/tree-control-01/benchmark/ticks.csv",
+          "sha256": "79fe3f694623b01c53e7f117f583471783cb68e62f3c97dd2e69dbfeda58a906"
+        },
+        {
+          "path": "local/benchmarks/tree-control-01/benchmark/placement-ticks.csv",
+          "sha256": "47afe28bf39a2352746a482305b293ad326d178c18454239d0bbf8a857234a29"
+        },
+        {
+          "path": "local/benchmarks/tree-control-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/tree-control-01/benchmark/placement-fixed.json",
+          "sha256": "f39e516534daabb39e6a5305b5c802dee926ac68a80c1f4de97c30d3406bcc22"
+        },
+        {
+          "path": "local/benchmarks/tree-control-01/benchmark/placement-restored.json",
+          "sha256": "19f01e621df7a2ce78c4a0ead631fb5eff9528e2e71f5eb5bc80479324c118d4"
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 19,
+        "in_window_seconds": 95.24281978607178,
+        "monitored_processes": 220,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.341233072193782,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "9900:134386175004057613",
+            "peak_cores": 0.23403414064446237,
+            "mean_cores": 0.06562174465265039
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "22860:134386174662605267",
+            "peak_cores": 0.15589796523848373,
+            "mean_cores": 0.09449531229981656
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "29756:134386174945302601",
+            "peak_cores": 0.07801138021482079,
+            "mean_cores": 0.03740439445201072
+          },
+          {
+            "name": "explorer.exe",
+            "identity": "13956:134386174606691267",
+            "peak_cores": 0.06552955938044946,
+            "mean_cores": 0.013124348930530078
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "13212:134386174604386403",
+            "peak_cores": 0.04679090073483476,
+            "mean_cores": 0.024444099883112268
+          },
+          {
+            "name": "ArmouryCrate.UserSessionHelper.exe",
+            "identity": "14592:134386174612986577",
+            "peak_cores": 0.04668406554840955,
+            "mean_cores": 0.008202718081581298
+          },
+          {
+            "name": "conhost.exe",
+            "identity": "5316:134386174604738986",
+            "peak_cores": 0.031204552085928317,
+            "mean_cores": 0.017225707971320725
+          },
+          {
+            "name": "codex.exe",
+            "identity": "29516:134386174993015340",
+            "peak_cores": 0.031193933823223174,
+            "mean_cores": 0.0037732503175273973
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "tick_metrics": {
+        "SETTLE": {
+          "ticks": 1049,
+          "longest_tick_seconds": 2.2508534,
+          "tick_body_seconds": 76.042533,
+          "matrix_assemblies": 926,
+          "network_substep_calls": 3411872
+        }
+      }
+    },
+    {
+      "name": "tree-enabled-01",
+      "protocol": {
+        "schema": 1,
+        "name": "tree-enabled-01",
+        "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\tree-enabled-01\\mods\\wwpg-0.2.7-experimental.wiretree.1.jar",
+          "sha256": "694ff552a2016dd9d007909735558b73afb129e33306e9f7a3a332650c803bd1",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1.jar"
+        },
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\tree-enabled-01\\mods\\wwpg-benchmark-0.1.0.jar",
+          "sha256": "cb67f3bbe08568992e1664558a3dc503c876be8cad5badf7872efbd763e3224e"
+        },
+        "copied_reference": true,
+        "batch": true,
+        "property_batch": true,
+        "tree_batch": true,
+        "detailed": false,
+        "loading_trace": false,
+        "reload": false,
+        "full_suite": false,
+        "started_utc": "2026-11-08T19:34:25Z",
+        "tree_execution": {
+          "attachments": 5893,
+          "fallback": 50,
+          "roots": 11786,
+          "traversals": 11500,
+          "covered": 286,
+          "visited": 50706852,
+          "flushes": 143,
+          "largest": 6300,
+          "pending": 0
+        },
+        "validation": {
+          "passed": true,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "healthy_ticks": 100,
+          "normal_shutdown": true,
+          "sixteen_substeps": true,
+          "no_independent_cee_or_rejected_solves": true,
+          "actual_reload_cycles": 0,
+          "full_suite": false
+        },
+        "loading": [
+          {
+            "phase": "SETTLE",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 589,
+            "graph_ready_tick": 590,
+            "finish_tick": 694,
+            "chunk_request_seconds": 1.0105661,
+            "chunk_loading_seconds": 85.3632287,
+            "graph_recovery_seconds": 0.1219847,
+            "electrical_settling_seconds": 6.2927422,
+            "total_restoration_seconds": 92.7885217,
+            "restoration_and_settling_seconds": 91.7779556,
+            "healthy_ticks": 100
+          }
+        ],
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-08T19:36:13Z"
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/tree-enabled-01/experiment.json",
+          "sha256": "d7135cbf1a7238308dda916b1eb8dc34a7e9a52c1cd40e73daf663079517c7b5"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-01/launch.json",
+          "sha256": "42760ec37f1fb98e477ae35c8dfd54688f2784e8b3990c3fbccc1cd5b0156406"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-01/invocation.json",
+          "sha256": "9718f247860a3c107a2a480b4b570b488da14954bc295ce795b2c8241dcbf766"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-01/restore-input.json",
+          "sha256": "4d6720b34c3693ffe3211581ad898c229a196fbd7840e0d0abda650242c986de"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-01/runner-exit.json",
+          "sha256": "cf65886c7989e3dc263ed0e1c20b04db2b1e22f0abbdf2f0da16f9f354c1789f"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-01/host-metrics.jsonl",
+          "sha256": "200406576443cd3885edaa81c5446e2ce5b76932fd346ed5dc63864eca81d27e"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-01/process.log",
+          "sha256": "96b1b6d94c499796ff8045bfd9c771b26d361800fe57ae46147d34cfd61f6e2f"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-01/benchmark/result.json",
+          "sha256": "10dcc588f452e835cd8ec2a322891cf8237f2f430ebc8d7df8d4bb73696adaa1"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-01/benchmark/loading-results.json",
+          "sha256": "26e1a580edc23fccff9f19f4b6e7707c94ca18cc8fc2c55db71432f3f57fc4b9"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-01/benchmark/ticks.csv",
+          "sha256": "665a8e669d0ddb17ea0120fb5f8363d195d96d20e366d6b5460f3bb93026f0d1"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-01/benchmark/placement-ticks.csv",
+          "sha256": "b0279d6623237a2e568e2e3643b26db13e877126486cd0c94c06a1840fdef8f5"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-01/benchmark/placement-fixed.json",
+          "sha256": "f39e516534daabb39e6a5305b5c802dee926ac68a80c1f4de97c30d3406bcc22"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-01/benchmark/placement-restored.json",
+          "sha256": "19f01e621df7a2ce78c4a0ead631fb5eff9528e2e71f5eb5bc80479324c118d4"
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 17,
+        "in_window_seconds": 85.22143507003784,
+        "monitored_processes": 219,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.37090873879350134,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "9900:134386175004057613",
+            "peak_cores": 0.2646234029837303,
+            "mean_cores": 0.06362102440007165
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "22860:134386174662605267",
+            "peak_cores": 0.15598912950753743,
+            "mean_cores": 0.10029020272864322
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "29756:134386174945302601",
+            "peak_cores": 0.10295282547497471,
+            "mean_cores": 0.04711989415221446
+          },
+          {
+            "name": "explorer.exe",
+            "identity": "13956:134386174606691267",
+            "peak_cores": 0.08115197072627979,
+            "mean_cores": 0.011184099390214326
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "13212:134386174604386403",
+            "peak_cores": 0.07483466911842371,
+            "mean_cores": 0.02915199677121439
+          },
+          {
+            "name": "chrome.exe",
+            "identity": "2660:134386401543435462",
+            "peak_cores": 0.0685984466918884,
+            "mean_cores": 0.004033609616142872
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "29616:134386174940556016",
+            "peak_cores": 0.05303240863598792,
+            "mean_cores": 0.00916729458214289
+          },
+          {
+            "name": "steam.exe",
+            "identity": "18364:134386320300758833",
+            "peak_cores": 0.031181112132676547,
+            "mean_cores": 0.005683722640928592
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "tick_metrics": {
+        "SETTLE": {
+          "ticks": 694,
+          "longest_tick_seconds": 15.4688236,
+          "tick_body_seconds": 91.0929696,
+          "matrix_assemblies": 621,
+          "network_substep_calls": 1414560
+        }
+      }
+    },
+    {
+      "name": "tree-enabled-02",
+      "protocol": {
+        "schema": 1,
+        "name": "tree-enabled-02",
+        "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\tree-enabled-02\\mods\\wwpg-0.2.7-experimental.wiretree.1.jar",
+          "sha256": "694ff552a2016dd9d007909735558b73afb129e33306e9f7a3a332650c803bd1",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1.jar"
+        },
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\tree-enabled-02\\mods\\wwpg-benchmark-0.1.0.jar",
+          "sha256": "cb67f3bbe08568992e1664558a3dc503c876be8cad5badf7872efbd763e3224e"
+        },
+        "copied_reference": true,
+        "batch": true,
+        "property_batch": true,
+        "tree_batch": true,
+        "detailed": false,
+        "loading_trace": false,
+        "reload": false,
+        "full_suite": false,
+        "started_utc": "2026-11-08T19:36:14Z",
+        "tree_execution": {
+          "attachments": 5893,
+          "fallback": 50,
+          "roots": 11786,
+          "traversals": 11511,
+          "covered": 275,
+          "visited": 50760752,
+          "flushes": 139,
+          "largest": 6442,
+          "pending": 0
+        },
+        "validation": {
+          "passed": true,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "healthy_ticks": 100,
+          "normal_shutdown": true,
+          "sixteen_substeps": true,
+          "no_independent_cee_or_rejected_solves": true,
+          "actual_reload_cycles": 0,
+          "full_suite": false
+        },
+        "loading": [
+          {
+            "phase": "SETTLE",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 561,
+            "graph_ready_tick": 562,
+            "finish_tick": 669,
+            "chunk_request_seconds": 1.0062347,
+            "chunk_loading_seconds": 80.3791907,
+            "graph_recovery_seconds": 0.1036847,
+            "electrical_settling_seconds": 6.4006317,
+            "total_restoration_seconds": 87.8897418,
+            "restoration_and_settling_seconds": 86.8835071,
+            "healthy_ticks": 100
+          }
+        ],
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-08T19:37:57Z"
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/tree-enabled-02/experiment.json",
+          "sha256": "5bafc3d7b433cc7524ddbed52efe0d2b09b0e143b293ffafdc2836db532faeab"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-02/launch.json",
+          "sha256": "f535ad2ec1a2368452900bc975061cfe8f935bdf392c07c11a3d40f4f15068ce"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-02/invocation.json",
+          "sha256": "da843565046d76a8f1020e5c6f542bdae36554fbbc190ea24156112fd5dc1197"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-02/restore-input.json",
+          "sha256": "a21922f5e35f12d9abe8f24dc40dd50d9ebbc89b6b2b0442c68fa0acced5936b"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-02/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-02/runner-exit.json",
+          "sha256": "e40448e02dae60ed58bf13050f6dc55e145c5f3c620f3bb8f90beca10b379d42"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-02/host-metrics.jsonl",
+          "sha256": "82c7d092d6910c79536160d755248de2e3d96ae18b787272b201a62d2ed89fa7"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-02/process.log",
+          "sha256": "50816ac97c501a850dba1f6cdd49985a46bf01e55f18e758ffc41bb7bb306740"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-02/benchmark/result.json",
+          "sha256": "7ff8c38f59c0809930a725c95bf3fb4c8cf35b0ddeb77b5d6bfac07136b019b9"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-02/benchmark/loading-results.json",
+          "sha256": "07f9648a63416896d83ac33f1d493cc800b87cbc44d09826de4410f3fcc9f7d3"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-02/benchmark/ticks.csv",
+          "sha256": "0ce4c5f91f61195c0ad14ca58e21230358084db470ed4b01db4be697f43602ef"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-02/benchmark/placement-ticks.csv",
+          "sha256": "59cd23cfd69e770bc1bf4ff33ade4dfaf4f42dbbad36551e719b2a941062e995"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-02/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-02/benchmark/placement-fixed.json",
+          "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+        },
+        {
+          "path": "local/benchmarks/tree-enabled-02/benchmark/placement-restored.json",
+          "sha256": "4dc544ebf39886f19800673c5631e6c398b4788cc1f96127182c3ac055ef3aba"
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 16,
+        "in_window_seconds": 80.21776938438416,
+        "monitored_processes": 219,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.39443411656569227,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "9900:134386175004057613",
+            "peak_cores": 0.22434202055928418,
+            "mean_cores": 0.08628854994498848
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "22860:134386174662605267",
+            "peak_cores": 0.1495864736647266,
+            "mean_cores": 0.10868851212032409
+          },
+          {
+            "name": "explorer.exe",
+            "identity": "13956:134386174606691267",
+            "peak_cores": 0.0904366965869348,
+            "mean_cores": 0.01382954186477242
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "29756:134386174945302601",
+            "peak_cores": 0.06542530972242248,
+            "mean_cores": 0.0424625369932449
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "13212:134386174604386403",
+            "peak_cores": 0.05296150551476356,
+            "mean_cores": 0.02765908372954484
+          },
+          {
+            "name": "ArmouryCrate.UserSessionHelper.exe",
+            "identity": "14592:134386174612986577",
+            "peak_cores": 0.034271845463307624,
+            "mean_cores": 0.00857042031056319
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "29616:134386174940556016",
+            "peak_cores": 0.03115490939162975,
+            "mean_cores": 0.012076501346702677
+          },
+          {
+            "name": "msrdc.exe",
+            "identity": "45196:134386402641763070",
+            "peak_cores": 0.028066561009738387,
+            "mean_cores": 0.0017530405180697433
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "tick_metrics": {
+        "SETTLE": {
+          "ticks": 669,
+          "longest_tick_seconds": 15.1243302,
+          "tick_body_seconds": 86.2185656,
+          "matrix_assemblies": 603,
+          "network_substep_calls": 1400048
+        }
+      }
+    },
+    {
+      "name": "tree-control-02",
+      "protocol": {
+        "schema": 1,
+        "name": "tree-control-02",
+        "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\tree-control-02\\mods\\wwpg-0.2.7-experimental.wiretree.1.jar",
+          "sha256": "694ff552a2016dd9d007909735558b73afb129e33306e9f7a3a332650c803bd1",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04b\\wwpg-0.2.7-experimental.wiretree.1.jar"
+        },
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\tree-control-02\\mods\\wwpg-benchmark-0.1.0.jar",
+          "sha256": "cb67f3bbe08568992e1664558a3dc503c876be8cad5badf7872efbd763e3224e"
+        },
+        "copied_reference": true,
+        "batch": true,
+        "property_batch": true,
+        "tree_batch": false,
+        "detailed": false,
+        "loading_trace": false,
+        "reload": false,
+        "full_suite": false,
+        "started_utc": "2026-11-08T19:37:58Z",
+        "validation": {
+          "passed": true,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "healthy_ticks": 100,
+          "normal_shutdown": true,
+          "sixteen_substeps": true,
+          "no_independent_cee_or_rejected_solves": true,
+          "actual_reload_cycles": 0,
+          "full_suite": false
+        },
+        "loading": [
+          {
+            "phase": "SETTLE",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 913,
+            "graph_ready_tick": 914,
+            "finish_tick": 1023,
+            "chunk_request_seconds": 1.0299418,
+            "chunk_loading_seconds": 94.2936301,
+            "graph_recovery_seconds": 0.1251701,
+            "electrical_settling_seconds": 6.4652523,
+            "total_restoration_seconds": 101.9139943,
+            "restoration_and_settling_seconds": 100.8840525,
+            "healthy_ticks": 100
+          }
+        ],
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-08T19:39:55Z"
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/tree-control-02/experiment.json",
+          "sha256": "2adc1bac347759b3fb41c635829ad1eab07e523e1d2beaa2b5a5dd2e419e877b"
+        },
+        {
+          "path": "local/benchmarks/tree-control-02/launch.json",
+          "sha256": "3423765057a27fcc80e017edbe613fb81692c20269b633be89c04a35d3bf1673"
+        },
+        {
+          "path": "local/benchmarks/tree-control-02/invocation.json",
+          "sha256": "410b552458ce633ee1d003dbe69ffa2047029c488fd33c8bf0eeb2219155ada0"
+        },
+        {
+          "path": "local/benchmarks/tree-control-02/restore-input.json",
+          "sha256": "8f2c81be8450ac9f55eb2fcba0bd2700611a41ac2c912d4cccf8dea069264684"
+        },
+        {
+          "path": "local/benchmarks/tree-control-02/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/tree-control-02/runner-exit.json",
+          "sha256": "5529d8fd0dae8e7a44b79409ffba45ec003495c42b5b7fb68caf65275581a1ce"
+        },
+        {
+          "path": "local/benchmarks/tree-control-02/host-metrics.jsonl",
+          "sha256": "9f2f751b7d50c559c275ff4b997d3ff034a0966856a8c5705d6d846fb86cfdd3"
+        },
+        {
+          "path": "local/benchmarks/tree-control-02/process.log",
+          "sha256": "aebd582893d7fe138cc2f362f8ea00f463e757153c44b7f3cb3d70ecd0fb2972"
+        },
+        {
+          "path": "local/benchmarks/tree-control-02/benchmark/result.json",
+          "sha256": "71996d5a1285bf02249e251d0c9ec4022cb8447eba18751ecaefbd17dfb434fb"
+        },
+        {
+          "path": "local/benchmarks/tree-control-02/benchmark/loading-results.json",
+          "sha256": "25c60a8772e35ec76f2c752ac8b408fdb671cf68464e90fdbf118f0a905406df"
+        },
+        {
+          "path": "local/benchmarks/tree-control-02/benchmark/ticks.csv",
+          "sha256": "e8502876fb22f80567a27307fdbdfa7769e5a73602c8885582aed3da47224fb9"
+        },
+        {
+          "path": "local/benchmarks/tree-control-02/benchmark/placement-ticks.csv",
+          "sha256": "03ebf2a337ee3dd0b878ab367a67fbe4496fe208c77dd8da0225bbbcf773edcc"
+        },
+        {
+          "path": "local/benchmarks/tree-control-02/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/tree-control-02/benchmark/placement-fixed.json",
+          "sha256": "f39e516534daabb39e6a5305b5c802dee926ac68a80c1f4de97c30d3406bcc22"
+        },
+        {
+          "path": "local/benchmarks/tree-control-02/benchmark/placement-restored.json",
+          "sha256": "19f01e621df7a2ce78c4a0ead631fb5eff9528e2e71f5eb5bc80479324c118d4"
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 18,
+        "in_window_seconds": 90.25530362129211,
+        "monitored_processes": 217,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.40233092730335157,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "9900:134386175004057613",
+            "peak_cores": 0.25890787614299665,
+            "mean_cores": 0.07045984828419281
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "22860:134386174662605267",
+            "peak_cores": 0.19011476424261897,
+            "mean_cores": 0.10871937278248915
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "29756:134386174945302601",
+            "peak_cores": 0.08423631137089661,
+            "mean_cores": 0.05557152653372455
+          },
+          {
+            "name": "explorer.exe",
+            "identity": "13956:134386174606691267",
+            "peak_cores": 0.07163727167677529,
+            "mean_cores": 0.012118401424799745
+          },
+          {
+            "name": "chrome.exe",
+            "identity": "42304:134386305169305170",
+            "peak_cores": 0.07155917631710139,
+            "mean_cores": 0.01090656128231977
+          },
+          {
+            "name": "codex.exe",
+            "identity": "29516:134386174993015340",
+            "peak_cores": 0.052979205327137006,
+            "mean_cores": 0.007444160875234129
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "13212:134386174604386403",
+            "peak_cores": 0.04991781414571651,
+            "mean_cores": 0.025968003053142313
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "29616:134386174940556016",
+            "peak_cores": 0.043567819937050827,
+            "mean_cores": 0.011425921343382618
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "tick_metrics": {
+        "SETTLE": {
+          "ticks": 1023,
+          "longest_tick_seconds": 2.0470554,
+          "tick_body_seconds": 74.2916763,
+          "matrix_assemblies": 691,
+          "network_substep_calls": 3250672
+        }
+      }
+    }
+  ],
+  "measurements": [
+    {
+      "name": "tree2-control-01",
+      "protocol": {
+        "schema": 1,
+        "name": "tree2-control-01",
+        "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\tree2-control-01\\mods\\wwpg-0.2.7-experimental.wiretree.2.jar",
+          "sha256": "5c5d4d9e6a652f5cabe589ac1a2b59d64c3954f5cbb05320c56899a448a50e1b",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2.jar"
+        },
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\tree2-control-01\\mods\\wwpg-benchmark-0.1.0.jar",
+          "sha256": "cb67f3bbe08568992e1664558a3dc503c876be8cad5badf7872efbd763e3224e"
+        },
+        "copied_reference": true,
+        "batch": true,
+        "property_batch": true,
+        "tree_batch": false,
+        "detailed": false,
+        "loading_trace": false,
+        "reload": false,
+        "full_suite": false,
+        "started_utc": "2026-11-08T19:46:03Z",
+        "validation": {
+          "passed": true,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "healthy_ticks": 100,
+          "normal_shutdown": true,
+          "sixteen_substeps": true,
+          "no_independent_cee_or_rejected_solves": true,
+          "actual_reload_cycles": 0,
+          "full_suite": false
+        },
+        "loading": [
+          {
+            "phase": "SETTLE",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 959,
+            "graph_ready_tick": 960,
+            "finish_tick": 1069,
+            "chunk_request_seconds": 1.3470477,
+            "chunk_loading_seconds": 98.8425257,
+            "graph_recovery_seconds": 0.1294064,
+            "electrical_settling_seconds": 6.3446551,
+            "total_restoration_seconds": 106.6636349,
+            "restoration_and_settling_seconds": 105.3165872,
+            "healthy_ticks": 100
+          }
+        ],
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-08T19:48:05Z"
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/tree2-control-01/experiment.json",
+          "sha256": "a095895f322f861b5c0c3a9231024fd76501ca1309461fa0629e38c5efea686d"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-01/launch.json",
+          "sha256": "b7570f5b670b91492e925926bad1b56391632063f13802248d32725e39d501fb"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-01/invocation.json",
+          "sha256": "073ebad4e6c62cb1ca4c0ba51a0345edcbf33e05974207fb86befba3509b7a38"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-01/restore-input.json",
+          "sha256": "47a14cd63d83e8b57dd3d39660ae035febdb12d5de8a20e3c22147d7d8d8520d"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-01/runner-exit.json",
+          "sha256": "20da475b1e8e10dea4063f55bb5fc6a06429a12c4e9bc29991280575d3ed0fda"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-01/host-metrics.jsonl",
+          "sha256": "6110fe060eba1858b37080bfad226c19f0ef4d723feef3bab0a9d26cd46cb27c"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-01/process.log",
+          "sha256": "e06da629c3a390845c6dd820bc5473b6246cbb009130d3560ae33dc9b8225f6c"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-01/benchmark/result.json",
+          "sha256": "440b80f6ab2ad00efde55bddb456f05db27c07075b2088b7e3a6a77cba4a7235"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-01/benchmark/loading-results.json",
+          "sha256": "0c4e822027e8c878a14d0e05e4ac206914c7bec382f5a2a76f526421d314a568"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-01/benchmark/ticks.csv",
+          "sha256": "7144adb87cfd4518baa923f1fb1caf7c4f3d987a674312c7007efbb4cc4bcb18"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-01/benchmark/placement-ticks.csv",
+          "sha256": "a06a1140c39a01a629d18a28b75678e92f961a63473296462d7eecdf70c19ff8"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-01/benchmark/placement-fixed.json",
+          "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-01/benchmark/placement-restored.json",
+          "sha256": "177f85d196e204f5e8adc663d6827f8b6546079eb85becf82fb2fee1fa0381f7"
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 19,
+        "in_window_seconds": 95.25815343856812,
+        "monitored_processes": 219,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.3444587031719101,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "9900:134386175004057613",
+            "peak_cores": 0.2678289879263741,
+            "mean_cores": 0.07102410403497003
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "22860:134386174662605267",
+            "peak_cores": 0.15287665358379876,
+            "mean_cores": 0.09776066051926591
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "29756:134386174945302601",
+            "peak_cores": 0.06866324894694813,
+            "mean_cores": 0.04691199481293633
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "13212:134386174604386403",
+            "peak_cores": 0.04983244490527864,
+            "mean_cores": 0.025424332853164793
+          },
+          {
+            "name": "chrome.exe",
+            "identity": "45692:134386407563428483",
+            "peak_cores": 0.04672579132112536,
+            "mean_cores": 0.002460419308370786
+          },
+          {
+            "name": "explorer.exe",
+            "identity": "13956:134386174606691267",
+            "peak_cores": 0.031208321977918837,
+            "mean_cores": 0.006725146109546816
+          },
+          {
+            "name": "conhost.exe",
+            "identity": "5316:134386174604738986",
+            "peak_cores": 0.028035933207796276,
+            "mean_cores": 0.015582655619681647
+          },
+          {
+            "name": "dllhost.exe",
+            "identity": "31556:134386175033301051",
+            "peak_cores": 0.028004797751198938,
+            "mean_cores": 0.0037726429395018722
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "tick_metrics": {
+        "SETTLE": {
+          "ticks": 1069,
+          "longest_tick_seconds": 2.6024965,
+          "tick_body_seconds": 78.1464191,
+          "matrix_assemblies": 717,
+          "network_substep_calls": 3381056
+        }
+      }
+    },
+    {
+      "name": "tree2-enabled-01",
+      "protocol": {
+        "schema": 1,
+        "name": "tree2-enabled-01",
+        "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\tree2-enabled-01\\mods\\wwpg-0.2.7-experimental.wiretree.2.jar",
+          "sha256": "5c5d4d9e6a652f5cabe589ac1a2b59d64c3954f5cbb05320c56899a448a50e1b",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2.jar"
+        },
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\tree2-enabled-01\\mods\\wwpg-benchmark-0.1.0.jar",
+          "sha256": "cb67f3bbe08568992e1664558a3dc503c876be8cad5badf7872efbd763e3224e"
+        },
+        "copied_reference": true,
+        "batch": true,
+        "property_batch": true,
+        "tree_batch": true,
+        "detailed": false,
+        "loading_trace": false,
+        "reload": false,
+        "full_suite": false,
+        "started_utc": "2026-11-08T19:48:06Z",
+        "tree_execution": {
+          "attachments": 5893,
+          "fallback": 50,
+          "roots": 11786,
+          "traversals": 11495,
+          "covered": 291,
+          "visited": 50682352,
+          "flushes": 145,
+          "largest": 5626,
+          "pending": 0,
+          "forced": 95
+        },
+        "validation": {
+          "passed": true,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "healthy_ticks": 100,
+          "normal_shutdown": true,
+          "sixteen_substeps": true,
+          "no_independent_cee_or_rejected_solves": true,
+          "actual_reload_cycles": 0,
+          "full_suite": false
+        },
+        "loading": [
+          {
+            "phase": "SETTLE",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 557,
+            "graph_ready_tick": 558,
+            "finish_tick": 667,
+            "chunk_request_seconds": 1.1537376,
+            "chunk_loading_seconds": 81.135067,
+            "graph_recovery_seconds": 0.1004288,
+            "electrical_settling_seconds": 6.6621977,
+            "total_restoration_seconds": 89.0514311,
+            "restoration_and_settling_seconds": 87.8976935,
+            "healthy_ticks": 100
+          }
+        ],
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-08T19:49:50Z"
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/tree2-enabled-01/experiment.json",
+          "sha256": "51a9f751e789b873de6df818a1845a85f42308603aec2a5dab8db045afc96fbb"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-01/launch.json",
+          "sha256": "f48bb287eae0525b2ae73e1e506b21298869a6c056d27a392c90871e44f9478b"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-01/invocation.json",
+          "sha256": "832b563beff85d7b563199b20a01bcfcae9d020b07a44e1ac52b8bbb85307c53"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-01/restore-input.json",
+          "sha256": "72e7c123b62a3ee8e6de3f08279674d59b678ffcc9c3d44a4857b8d5b23b7f01"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-01/runner-exit.json",
+          "sha256": "9cee60375f649d9fc164265171caeb5718c901572ad60fe97a13bb55b3318a87"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-01/host-metrics.jsonl",
+          "sha256": "7404ca9c72adf4f6ecc558c60fe45a036f6f8fa8f29bb9166e93eb8ac0134418"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-01/process.log",
+          "sha256": "a49345b24ed1fc2564fa53173237cece55300f671bb983f9589bf147674d2602"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-01/benchmark/result.json",
+          "sha256": "e6a5bd365ec179df0485f5ef925e077e091d91b3d80d11fb2244f3e57e2a98c6"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-01/benchmark/loading-results.json",
+          "sha256": "5e2646a5aecfd68ab8e6c155805298ab15c084fdede06d422733df60e0a2f376"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-01/benchmark/ticks.csv",
+          "sha256": "5b07855ef3e2b44f7fd63a9e375a861d31a14e8a7a3f95710dd627285bf9b95b"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-01/benchmark/placement-ticks.csv",
+          "sha256": "2f950cf199d9bad9c26c635ab4f11a47abaeebf47a00ad9b86e0a380103ddaac"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-01/benchmark/placement-fixed.json",
+          "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-01/benchmark/placement-restored.json",
+          "sha256": "177f85d196e204f5e8adc663d6827f8b6546079eb85becf82fb2fee1fa0381f7"
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 16,
+        "in_window_seconds": 80.23282074928284,
+        "monitored_processes": 218,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.3904652074728412,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "9900:134386175004057613",
+            "peak_cores": 0.18982696986336547,
+            "mean_cores": 0.0821827020217152
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "22860:134386174662605267",
+            "peak_cores": 0.18682996423530096,
+            "mean_cores": 0.09912558134846691
+          },
+          {
+            "name": "Discord.exe",
+            "identity": "32348:134386175037350077",
+            "peak_cores": 0.1841115385402873,
+            "mean_cores": 0.01402169323593245
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "13212:134386174604386403",
+            "peak_cores": 0.06546306790777284,
+            "mean_cores": 0.028822369429416708
+          },
+          {
+            "name": "explorer.exe",
+            "identity": "13956:134386174606691267",
+            "peak_cores": 0.062274991848120326,
+            "mean_cores": 0.012658473060216797
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "29756:134386174945302601",
+            "peak_cores": 0.05928410711783601,
+            "mean_cores": 0.04264931692596121
+          },
+          {
+            "name": "ArmouryCrate.UserSessionHelper.exe",
+            "identity": "14592:134386174612986577",
+            "peak_cores": 0.03432588006683322,
+            "mean_cores": 0.00817932105429393
+          },
+          {
+            "name": "codex.exe",
+            "identity": "29516:134386174993015340",
+            "peak_cores": 0.03115781402375479,
+            "mean_cores": 0.006037117921026472
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "tick_metrics": {
+        "SETTLE": {
+          "ticks": 667,
+          "longest_tick_seconds": 13.5583062,
+          "tick_body_seconds": 87.2243074,
+          "matrix_assemblies": 602,
+          "network_substep_calls": 1365072
+        }
+      }
+    },
+    {
+      "name": "tree2-enabled-02",
+      "protocol": {
+        "schema": 1,
+        "name": "tree2-enabled-02",
+        "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\tree2-enabled-02\\mods\\wwpg-0.2.7-experimental.wiretree.2.jar",
+          "sha256": "5c5d4d9e6a652f5cabe589ac1a2b59d64c3954f5cbb05320c56899a448a50e1b",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2.jar"
+        },
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\tree2-enabled-02\\mods\\wwpg-benchmark-0.1.0.jar",
+          "sha256": "cb67f3bbe08568992e1664558a3dc503c876be8cad5badf7872efbd763e3224e"
+        },
+        "copied_reference": true,
+        "batch": true,
+        "property_batch": true,
+        "tree_batch": true,
+        "detailed": false,
+        "loading_trace": false,
+        "reload": false,
+        "full_suite": false,
+        "started_utc": "2026-11-08T19:49:50Z",
+        "tree_execution": {
+          "attachments": 5893,
+          "fallback": 50,
+          "roots": 11786,
+          "traversals": 11387,
+          "covered": 399,
+          "visited": 50153152,
+          "flushes": 141,
+          "largest": 6488,
+          "pending": 0,
+          "forced": 103
+        },
+        "validation": {
+          "passed": true,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "healthy_ticks": 100,
+          "normal_shutdown": true,
+          "sixteen_substeps": true,
+          "no_independent_cee_or_rejected_solves": true,
+          "actual_reload_cycles": 0,
+          "full_suite": false
+        },
+        "loading": [
+          {
+            "phase": "SETTLE",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 549,
+            "graph_ready_tick": 550,
+            "finish_tick": 654,
+            "chunk_request_seconds": 1.057321,
+            "chunk_loading_seconds": 77.0083683,
+            "graph_recovery_seconds": 0.1561872,
+            "electrical_settling_seconds": 6.1882914,
+            "total_restoration_seconds": 84.4101679,
+            "restoration_and_settling_seconds": 83.3528469,
+            "healthy_ticks": 100
+          }
+        ],
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-08T19:51:31Z"
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/tree2-enabled-02/experiment.json",
+          "sha256": "3c3f26c52ad9ecaadc34442c5d73ebed6ee35a59828242477fc3ce35b7c48006"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-02/launch.json",
+          "sha256": "6130eb37395672f4a0becbb5bc974f0c6d43884ac90a9f5283fe2fc82e2abaea"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-02/invocation.json",
+          "sha256": "35ca3b4fba84e09fb3c41334e52a9feb6b42cf9f4838476afd81faf8ece7578e"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-02/restore-input.json",
+          "sha256": "ba01ce7098bde03ac2357866454abf4521fdd9d64a61b86a6f99c2eed411d59d"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-02/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-02/runner-exit.json",
+          "sha256": "9d340594f470661a1de5b0bb6281fb1536cc9f7cb56431ac79f1893501014003"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-02/host-metrics.jsonl",
+          "sha256": "dfb1976faddce131ba39c71d50b4ff37674aed9a160bae1dfd5d2bcf6a3b44f4"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-02/process.log",
+          "sha256": "e740ee1ea3782b6300bd3b2b4a0611a3dda0daf1ae92066b41eabe4d0c89e823"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-02/benchmark/result.json",
+          "sha256": "97e043f776986f41d2aa1ff1db393d4379c14b4f5201d3c77827957a960b0cf6"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-02/benchmark/loading-results.json",
+          "sha256": "35a754c32edf72440b298a86df431e70dd232545f52d018a3bc6841b96ddd860"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-02/benchmark/ticks.csv",
+          "sha256": "eae7bd5e77faeb6b0420be17aadcb8109aa331596b6f05c6e79a6f34bbd39c72"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-02/benchmark/placement-ticks.csv",
+          "sha256": "a76c871de0540b5407c6a30cfd1845894f40b23dab1ee3dab3474dc2991433fc"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-02/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-02/benchmark/placement-fixed.json",
+          "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+        },
+        {
+          "path": "local/benchmarks/tree2-enabled-02/benchmark/placement-restored.json",
+          "sha256": "2991d3d353f056f5da819f9a9348c6a7b71db411a10a103b026405ddb8cab6b6"
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 15,
+        "in_window_seconds": 75.21906924247742,
+        "monitored_processes": 219,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.4054822840426236,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "9900:134386175004057613",
+            "peak_cores": 0.23356265734544865,
+            "mean_cores": 0.09160742175348208
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "22860:134386174662605267",
+            "peak_cores": 0.20881091286437486,
+            "mean_cores": 0.11092599368788986
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "29756:134386174945302601",
+            "peak_cores": 0.09038084288159509,
+            "mean_cores": 0.054839817104125325
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "29616:134386174940556016",
+            "peak_cores": 0.05294098975062834,
+            "mean_cores": 0.012048141636512381
+          },
+          {
+            "name": "explorer.exe",
+            "identity": "13956:134386174606691267",
+            "peak_cores": 0.046731315519522934,
+            "mean_cores": 0.008309063197594746
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "13212:134386174604386403",
+            "peak_cores": 0.04367172561538548,
+            "mean_cores": 0.026589002232303188
+          },
+          {
+            "name": "chrome.exe",
+            "identity": "30488:134386177775026287",
+            "peak_cores": 0.04048824767838464,
+            "mean_cores": 0.00456998475867711
+          },
+          {
+            "name": "codex.exe",
+            "identity": "29516:134386174993015340",
+            "peak_cores": 0.03427960271008653,
+            "mean_cores": 0.007062703717955534
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "tick_metrics": {
+        "SETTLE": {
+          "ticks": 654,
+          "longest_tick_seconds": 15.414986,
+          "tick_body_seconds": 82.6856886,
+          "matrix_assemblies": 596,
+          "network_substep_calls": 1371728
+        }
+      }
+    },
+    {
+      "name": "tree2-control-02",
+      "protocol": {
+        "schema": 1,
+        "name": "tree2-control-02",
+        "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\tree2-control-02\\mods\\wwpg-0.2.7-experimental.wiretree.2.jar",
+          "sha256": "5c5d4d9e6a652f5cabe589ac1a2b59d64c3954f5cbb05320c56899a448a50e1b",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2.jar"
+        },
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\tree2-control-02\\mods\\wwpg-benchmark-0.1.0.jar",
+          "sha256": "cb67f3bbe08568992e1664558a3dc503c876be8cad5badf7872efbd763e3224e"
+        },
+        "copied_reference": true,
+        "batch": true,
+        "property_batch": true,
+        "tree_batch": false,
+        "detailed": false,
+        "loading_trace": false,
+        "reload": false,
+        "full_suite": false,
+        "started_utc": "2026-11-08T19:51:31Z",
+        "validation": {
+          "passed": true,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "healthy_ticks": 100,
+          "normal_shutdown": true,
+          "sixteen_substeps": true,
+          "no_independent_cee_or_rejected_solves": true,
+          "actual_reload_cycles": 0,
+          "full_suite": false
+        },
+        "loading": [
+          {
+            "phase": "SETTLE",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 902,
+            "graph_ready_tick": 903,
+            "finish_tick": 1010,
+            "chunk_request_seconds": 1.1408823,
+            "chunk_loading_seconds": 92.5344282,
+            "graph_recovery_seconds": 0.1016253,
+            "electrical_settling_seconds": 6.3853611,
+            "total_restoration_seconds": 100.1622969,
+            "restoration_and_settling_seconds": 99.0214146,
+            "healthy_ticks": 100
+          }
+        ],
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-08T19:53:27Z"
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/tree2-control-02/experiment.json",
+          "sha256": "2d5252cd3205abec0cf67050135677212a8ad53be8bf9c5fac24130a69506041"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-02/launch.json",
+          "sha256": "6e0e92f933d4b9e2109c0d860c9777ec7f8a0a52ad8925886802b51dc395a5c0"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-02/invocation.json",
+          "sha256": "c6c002c9f1e2232c7536cbb4b8a355a868f4f912cfbd0d73daef6ac00c7edb20"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-02/restore-input.json",
+          "sha256": "7c52046593526a8ac90404a135b6d06e6b1e6945c0131fb3477b89bad40abe04"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-02/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-02/runner-exit.json",
+          "sha256": "9e9bec2c7bf06e1b42434ff6897e3a2aefb34ccdb936b023788a469d78f6775e"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-02/host-metrics.jsonl",
+          "sha256": "8d579d9307b2a90884b6e689b645d6050deb700f5d60c31b334d67a81fc3025a"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-02/process.log",
+          "sha256": "ecec1e901cedd501bd3d631d299c166031b930225f8019283774d63c9b580340"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-02/benchmark/result.json",
+          "sha256": "2fbf3ca2a7b496ab1b9bebaf8e0f4d605bfed95ee5a1ce02ec15a10600e2e129"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-02/benchmark/loading-results.json",
+          "sha256": "d4daa0b8e5bde8fd8cf0b2e035a432ae8116d40295a4b663dce7dc42b3981f3e"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-02/benchmark/ticks.csv",
+          "sha256": "287bc9cae06d91112b81662aaf9985abaf0d1a9d4c1942b2a30dc33f8e91b066"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-02/benchmark/placement-ticks.csv",
+          "sha256": "009e88dbf05836f54c14181f6055a2bd36dc21a385829bbb076cfc0219138bb2"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-02/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-02/benchmark/placement-fixed.json",
+          "sha256": "f39e516534daabb39e6a5305b5c802dee926ac68a80c1f4de97c30d3406bcc22"
+        },
+        {
+          "path": "local/benchmarks/tree2-control-02/benchmark/placement-restored.json",
+          "sha256": "19f01e621df7a2ce78c4a0ead631fb5eff9528e2e71f5eb5bc80479324c118d4"
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 18,
+        "in_window_seconds": 90.25705051422119,
+        "monitored_processes": 220,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.4045736570379782,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "9900:134386175004057613",
+            "peak_cores": 0.1931098921702283,
+            "mean_cores": 0.0979840350378672
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "22860:134386174662605267",
+            "peak_cores": 0.1462690839576845,
+            "mean_cores": 0.10058078508304037
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "29756:134386174945302601",
+            "peak_cores": 0.07791748403378777,
+            "mean_cores": 0.04137488405309234
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28632:134386175138032532",
+            "peak_cores": 0.05298362456971777,
+            "mean_cores": 0.0038085667329206337
+          },
+          {
+            "name": "ArmouryCrate.UserSessionHelper.exe",
+            "identity": "14592:134386174612986577",
+            "peak_cores": 0.043633573175061696,
+            "mean_cores": 0.009175183492945162
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "13212:134386174604386403",
+            "peak_cores": 0.04057459789039408,
+            "mean_cores": 0.02510191710334054
+          },
+          {
+            "name": "explorer.exe",
+            "identity": "13956:134386174606691267",
+            "peak_cores": 0.04051688937684301,
+            "mean_cores": 0.007790250135519478
+          },
+          {
+            "name": "conhost.exe",
+            "identity": "5316:134386174604738986",
+            "peak_cores": 0.031148872274509323,
+            "mean_cores": 0.01696543362846464
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "tick_metrics": {
+        "SETTLE": {
+          "ticks": 1010,
+          "longest_tick_seconds": 2.107337,
+          "tick_body_seconds": 73.5525525,
+          "matrix_assemblies": 698,
+          "network_substep_calls": 3181248
+        }
+      }
+    },
+    {
+      "name": "tree2-reload-01",
+      "protocol": {
+        "schema": 1,
+        "name": "tree2-reload-01",
+        "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\tree2-reload-01\\mods\\wwpg-0.2.7-experimental.wiretree.2.jar",
+          "sha256": "5c5d4d9e6a652f5cabe589ac1a2b59d64c3954f5cbb05320c56899a448a50e1b",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-04c\\wwpg-0.2.7-experimental.wiretree.2.jar"
+        },
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\tree2-reload-01\\mods\\wwpg-benchmark-0.1.0.jar",
+          "sha256": "cb67f3bbe08568992e1664558a3dc503c876be8cad5badf7872efbd763e3224e"
+        },
+        "copied_reference": true,
+        "batch": true,
+        "property_batch": true,
+        "tree_batch": true,
+        "detailed": false,
+        "loading_trace": false,
+        "reload": true,
+        "full_suite": false,
+        "started_utc": "2026-11-08T19:53:47Z",
+        "tree_execution": {
+          "attachments": 11786,
+          "fallback": 100,
+          "roots": 23572,
+          "traversals": 12798,
+          "covered": 10774,
+          "visited": 51428803,
+          "flushes": 141,
+          "largest": 10674,
+          "pending": 0,
+          "forced": 100
+        },
+        "validation": {
+          "passed": true,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "healthy_ticks": 100,
+          "normal_shutdown": true,
+          "sixteen_substeps": true,
+          "no_independent_cee_or_rejected_solves": true,
+          "actual_reload_cycles": 1,
+          "full_suite": false
+        },
+        "loading": [
+          {
+            "phase": "SETTLE",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 527,
+            "graph_ready_tick": 528,
+            "finish_tick": 636,
+            "chunk_request_seconds": 1.2124027,
+            "chunk_loading_seconds": 79.4377688,
+            "graph_recovery_seconds": 0.1245728,
+            "electrical_settling_seconds": 6.7119386,
+            "total_restoration_seconds": 87.4866829,
+            "restoration_and_settling_seconds": 86.2742802,
+            "healthy_ticks": 100
+          },
+          {
+            "phase": "RELOAD",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 8,
+            "graph_ready_tick": 13,
+            "finish_tick": 115,
+            "chunk_request_seconds": 0.0404871,
+            "chunk_loading_seconds": 2.7027095,
+            "graph_recovery_seconds": 1.5849857,
+            "electrical_settling_seconds": 5.1696578,
+            "total_restoration_seconds": 9.4978401,
+            "restoration_and_settling_seconds": 9.457353,
+            "healthy_ticks": 100
+          }
+        ],
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-08T19:55:41Z"
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/tree2-reload-01/experiment.json",
+          "sha256": "3bfe8e46c0f6d0a890984ffe487deab4156822978667ad26038880900419d652"
+        },
+        {
+          "path": "local/benchmarks/tree2-reload-01/launch.json",
+          "sha256": "92c4cbe9b2bead246e8d31548fd756555015d9492938b743b4939bc3216792cc"
+        },
+        {
+          "path": "local/benchmarks/tree2-reload-01/invocation.json",
+          "sha256": "6acd803688c2fe0e8c752a57404f33d65f9bcda3708b8991f297f4fbb6a0b34d"
+        },
+        {
+          "path": "local/benchmarks/tree2-reload-01/restore-input.json",
+          "sha256": "9a7dc88f9c4979355771c8f5036204f7c1690b3086d540a04e70ea741165d6c7"
+        },
+        {
+          "path": "local/benchmarks/tree2-reload-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/tree2-reload-01/runner-exit.json",
+          "sha256": "4abb92c2f4ad0b80bfd75fa4415c583be5a8ccdd4dae6412dd62e31f278e5feb"
+        },
+        {
+          "path": "local/benchmarks/tree2-reload-01/host-metrics.jsonl",
+          "sha256": "6a4e2eacb793a5fcab270a705f3add93552eba6a21020bc602b2007279ab18a2"
+        },
+        {
+          "path": "local/benchmarks/tree2-reload-01/process.log",
+          "sha256": "2734939927f514aaa92849c830a281ee90a3e9358c94a1ce2da6286a65205c85"
+        },
+        {
+          "path": "local/benchmarks/tree2-reload-01/benchmark/result.json",
+          "sha256": "e44175e5014eecbc5c1b3ee565c2fa838f8ab306a75b08c36b76046210fb9b10"
+        },
+        {
+          "path": "local/benchmarks/tree2-reload-01/benchmark/loading-results.json",
+          "sha256": "e2d718488827987f72d3bcb7c41ba50917f21c44341cd38c6ba152e2c56ff5d0"
+        },
+        {
+          "path": "local/benchmarks/tree2-reload-01/benchmark/ticks.csv",
+          "sha256": "db0c6ed65eb1e7ac9061910be60f8c2421d4f596438424d248e16555f8fc90b8"
+        },
+        {
+          "path": "local/benchmarks/tree2-reload-01/benchmark/placement-ticks.csv",
+          "sha256": "93021d09dea7b4346e653c9fbf49ca6948ed45b7552b14357015878e709bea4c"
+        },
+        {
+          "path": "local/benchmarks/tree2-reload-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/tree2-reload-01/benchmark/placement-fixed.json",
+          "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+        },
+        {
+          "path": "local/benchmarks/tree2-reload-01/benchmark/placement-restored.json",
+          "sha256": "2991d3d353f056f5da819f9a9348c6a7b71db411a10a103b026405ddb8cab6b6"
+        },
+        {
+          "path": "local/benchmarks/tree2-reload-01/benchmark/lifecycle.json",
+          "sha256": "89e659a54487093b485520bf1cd481b055d37b44e03c72297ade1f700e8e9938"
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 18,
+        "in_window_seconds": 90.248943567276,
+        "monitored_processes": 220,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.34730323437675287,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "9900:134386175004057613",
+            "peak_cores": 0.22112261550547485,
+            "mean_cores": 0.07219613595967395
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "22860:134386174662605267",
+            "peak_cores": 0.1591589859858458,
+            "mean_cores": 0.09730030793605937
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "29756:134386174945302601",
+            "peak_cores": 0.06849925927460317,
+            "mean_cores": 0.03774282407484154
+          },
+          {
+            "name": "chrome.exe",
+            "identity": "30488:134386177775026287",
+            "peak_cores": 0.062410893108298844,
+            "mean_cores": 0.005193966615803881
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "13212:134386174604386403",
+            "peak_cores": 0.05928282852616672,
+            "mean_cores": 0.027528023063760572
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "29616:134386174940556016",
+            "peak_cores": 0.04672287093182384,
+            "mean_cores": 0.00744468548265223
+          },
+          {
+            "name": "explorer.exe",
+            "identity": "13956:134386174606691267",
+            "peak_cores": 0.04056193530737723,
+            "mean_cores": 0.007964082144232618
+          },
+          {
+            "name": "conhost.exe",
+            "identity": "5316:134386174604738986",
+            "peak_cores": 0.031157600712608407,
+            "mean_cores": 0.017659486493733195
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "tick_metrics": {
+        "RELOAD": {
+          "ticks": 115,
+          "longest_tick_seconds": 0.732861,
+          "tick_body_seconds": 9.2035043,
+          "matrix_assemblies": 6,
+          "network_substep_calls": 13168
+        },
+        "SETTLE": {
+          "ticks": 636,
+          "longest_tick_seconds": 14.0489068,
+          "tick_body_seconds": 85.6378151,
+          "matrix_assemblies": 599,
+          "network_substep_calls": 1322384
+        },
+        "UNLOAD": {
+          "ticks": 2,
+          "longest_tick_seconds": 0.1819258,
+          "tick_body_seconds": 0.2647952,
+          "matrix_assemblies": 654,
+          "network_substep_calls": 19264
+        }
+      }
+    }
+  ],
+  "comparison": {
+    "control_seconds": [
+      106.6636349,
+      100.1622969
+    ],
+    "enabled_seconds": [
+      89.0514311,
+      84.4101679
+    ],
+    "control_mean": 103.4129659,
+    "enabled_mean": 86.7307995,
+    "reduction_percent": 16.131600379909415,
+    "speedup": 1.1923442017849726,
+    "note": "Two fresh samples per mode in off/on/on/off order; no significance or sustained-capacity claim."
+  },
+  "build_evidence": [
+    {
+      "path": "local/wiretree-build-01.log",
+      "sha256": "825700be0330b83d0b23b312dcf9c6039b4d5ba17b0209f4320ce98f726aa46a"
+    },
+    {
+      "path": "local/wiretree-build-02.log",
+      "sha256": "c0d3a8e90d2aae84a6b9e861a8a165487c3a841e0161730b41f2c680daa73cdb"
+    },
+    {
+      "path": "local/wiretree-build-03.log",
+      "sha256": "21619956e1ba3ec1c8d68c69cfda69281a2a4c7f799e8760a4c5d9c24db84983"
+    },
+    {
+      "path": "local/wiretree-build-04.log",
+      "sha256": "11085a71b26ec2079b32530d2abf962f74d4154b4e0651cfb4013154164eb69d"
+    },
+    {
+      "path": "local/wiretree-build-05.log",
+      "sha256": "b8cd0ebc371ba531f1768d513b2a3634f4ed81aa1159794403823c1d17a3e84c"
+    }
+  ],
+  "frozen_attempts": [
+    {
+      "path": "local/frozen/prototype-04a/inputs.json",
+      "sha256": "2a9b66835c322cee86bfc7aa92c095bd0108d90418ff3d1a7a101710f6d061eb"
+    },
+    {
+      "path": "local/frozen/prototype-04b/inputs.json",
+      "sha256": "e31d2547a0456e53f80531773be004a1257803e5e41c28b63a9b477ae1bf4d2c"
+    },
+    {
+      "path": "local/frozen/prototype-04c/inputs.json",
+      "sha256": "12538d41f851e8327545edd76d35741f86ef6add45af369ca8b5cc3c7b62b9c3"
+    }
+  ],
+  "tool_sources": [
+    {
+      "path": "tools/experimental/freeze_tree.py",
+      "sha256": "ef81e28fadfcef735e0a450892fcabd613b73bd86e6aa36b5732f44c3fa005bb"
+    },
+    {
+      "path": "tools/experimental/focused_checks.py",
+      "sha256": "488ef2e04c6ebdf806d861a854de96e9bf3d9becb9979eb1bfc36fdcac93e50b"
+    },
+    {
+      "path": "tools/experimental/restoration_benchmark.py",
+      "sha256": "d39081cd5e79eae406a40f0fbe55432d9fd81f7f4afd05ac5f607bcfa0d652c1"
+    },
+    {
+      "path": "tools/experimental/host_metrics.py",
+      "sha256": "653aee546bae25b822de348c44aa8ab88e9a4ccd53663f247b63dd5001597987"
+    },
+    {
+      "path": "tools/experimental/summarize_tree.py",
+      "sha256": "48877789f122b13f3859b74d94c5a3fd18fb5ef21b34f4017fdbcf51d521b1a0"
+    },
+    {
+      "path": "tools/experimental/plain-wire.gradle",
+      "sha256": "1cebeea1202b3a8ed503e4d831ac55355864f337d314ce8f89542f85593e37e1"
+    },
+    {
+      "path": "tools/experimental/plain_wire_benchmark.py",
+      "sha256": "d8f400cb5bc2edaba7d85b8b3484c15689f33c397c7abec6faa30663c13cf709"
+    }
+  ]
+}

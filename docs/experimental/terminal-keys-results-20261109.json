@@ -1,0 +1,535 @@
+{
+  "schema": 1,
+  "full_suite": false,
+  "runtime": {
+    "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-11b\\wwpg-0.2.7-experimental.wiretree.10.jar",
+    "sha256": "c844a469433b14d009059f2a529adbeaafad28d024eeade02aa976937f3744bf"
+  },
+  "source_hashes_verified": 448,
+  "focused_tests": 102,
+  "checks": [
+    {
+      "name": "terminal-keys-native-02",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_loading,wwpg_api_ownership,wwpg_unload,wwpg_solver_safety",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-11b\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-11b\\wwpg-0.2.7-experimental.wiretree.10.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-11b\\wwpg-0.2.7-experimental.wiretree.10-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\terminal-keys-native-02\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_loading,wwpg_api_ownership,wwpg_unload,wwpg_solver_safety",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=32",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true",
+          "-PtestTerminalBookkeeping=false",
+          "-PtestTerminalKeyLookup=true",
+          "-PtestApiAddon=true",
+          "-PtestExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+          "-PtestUpstreamExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-11b\\wwpg-0.2.7-experimental.wiretree.10.jar",
+            "sha256": "c844a469433b14d009059f2a529adbeaafad28d024eeade02aa976937f3744bf"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-11b\\wwpg-0.2.7-experimental.wiretree.10-gametests.jar",
+            "sha256": "e15190c0d4493b9aebbe65c41ec68c314f6356559f5d2dfe22589cf67072ba5b"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-11b\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": true,
+        "addon_artifacts": {
+          "example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+            "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef"
+          },
+          "upstream_example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar",
+            "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11"
+          }
+        },
+        "addon_inputs": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\inputs.json",
+          "sha256": "a82ef707180cf85a31e626df9a076e5df4c3c6d13036547aae3dce2e9ed6ca2e"
+        },
+        "exit_code": 0,
+        "required_tests_passed": 34,
+        "artifacts_unchanged": true,
+        "passed": true,
+        "addons_unchanged": true,
+        "addon_classpath_verified": true,
+        "terminal_execution": null,
+        "terminal_keys": {
+          "passes": 7169,
+          "frames": 83704,
+          "largest": 102
+        }
+      },
+      "native_key_pairs": 512,
+      "reference_cases": 3,
+      "endpoint_cases": 40
+    },
+    {
+      "name": "terminal-keys-java-02",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_loading,wwpg_api_ownership,wwpg_unload,wwpg_solver_safety",
+        "backend": "JAVA",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-11b\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-11b\\wwpg-0.2.7-experimental.wiretree.10.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-11b\\wwpg-0.2.7-experimental.wiretree.10-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\terminal-keys-java-02\\server",
+          "-PtestBackend=JAVA",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_loading,wwpg_api_ownership,wwpg_unload,wwpg_solver_safety",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=32",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true",
+          "-PtestTerminalBookkeeping=false",
+          "-PtestTerminalKeyLookup=true",
+          "-PtestApiAddon=true",
+          "-PtestExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+          "-PtestUpstreamExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-11b\\wwpg-0.2.7-experimental.wiretree.10.jar",
+            "sha256": "c844a469433b14d009059f2a529adbeaafad28d024eeade02aa976937f3744bf"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-11b\\wwpg-0.2.7-experimental.wiretree.10-gametests.jar",
+            "sha256": "e15190c0d4493b9aebbe65c41ec68c314f6356559f5d2dfe22589cf67072ba5b"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-11b\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": true,
+        "addon_artifacts": {
+          "example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+            "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef"
+          },
+          "upstream_example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar",
+            "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11"
+          }
+        },
+        "addon_inputs": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\inputs.json",
+          "sha256": "a82ef707180cf85a31e626df9a076e5df4c3c6d13036547aae3dce2e9ed6ca2e"
+        },
+        "exit_code": 0,
+        "required_tests_passed": 34,
+        "artifacts_unchanged": true,
+        "passed": true,
+        "addons_unchanged": true,
+        "addon_classpath_verified": true,
+        "terminal_execution": null,
+        "terminal_keys": {
+          "passes": 7151,
+          "frames": 82446,
+          "largest": 104
+        }
+      },
+      "native_key_pairs": 512,
+      "reference_cases": 3,
+      "endpoint_cases": 40
+    },
+    {
+      "name": "terminal-keys-off-02",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_loading,wwpg_api_ownership,wwpg_unload,wwpg_solver_safety",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-11b\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-11b\\wwpg-0.2.7-experimental.wiretree.10.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-11b\\wwpg-0.2.7-experimental.wiretree.10-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\terminal-keys-off-02\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_loading,wwpg_api_ownership,wwpg_unload,wwpg_solver_safety",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=32",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true",
+          "-PtestTerminalBookkeeping=false",
+          "-PtestTerminalKeyLookup=false",
+          "-PtestApiAddon=true",
+          "-PtestExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+          "-PtestUpstreamExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-11b\\wwpg-0.2.7-experimental.wiretree.10.jar",
+            "sha256": "c844a469433b14d009059f2a529adbeaafad28d024eeade02aa976937f3744bf"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-11b\\wwpg-0.2.7-experimental.wiretree.10-gametests.jar",
+            "sha256": "e15190c0d4493b9aebbe65c41ec68c314f6356559f5d2dfe22589cf67072ba5b"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-11b\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": false,
+        "addon_artifacts": {
+          "example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+            "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef"
+          },
+          "upstream_example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar",
+            "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11"
+          }
+        },
+        "addon_inputs": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\inputs.json",
+          "sha256": "a82ef707180cf85a31e626df9a076e5df4c3c6d13036547aae3dce2e9ed6ca2e"
+        },
+        "exit_code": 0,
+        "required_tests_passed": 34,
+        "artifacts_unchanged": true,
+        "passed": true,
+        "addons_unchanged": true,
+        "addon_classpath_verified": true,
+        "terminal_execution": null,
+        "terminal_keys": null
+      },
+      "native_key_pairs": 512,
+      "reference_cases": 3,
+      "endpoint_cases": 40
+    }
+  ],
+  "comparison": {
+    "enabled": [
+      {
+        "attempt": "goal-terminal-keys-on-02",
+        "tps": 19.993236041983756,
+        "mspt": {
+          "mean": 49.882115484140236,
+          "p50": 48.1442,
+          "p95": 57.5234,
+          "p99": 62.4791,
+          "maximum": 74.6897
+        },
+        "target_met": false,
+        "ticks_over_50ms_percent": 43.363939899833056,
+        "mean_cpu_ms": 49.6661101836394,
+        "mean_allocated_bytes": 11193167.028380634,
+        "compilation_ms": 1205,
+        "gc_ms": 62,
+        "terminal_keys": {
+          "passes": 15387,
+          "frames": 60826368,
+          "largest": 11900
+        }
+      }
+    ],
+    "disabled": [
+      {
+        "attempt": "goal-terminal-keys-off-02",
+        "tps": 20.004271229170495,
+        "mspt": {
+          "mean": 49.85460863579474,
+          "p50": 48.9005,
+          "p95": 57.4206,
+          "p99": 61.8008,
+          "maximum": 69.4437
+        },
+        "target_met": false,
+        "ticks_over_50ms_percent": 44.43053817271589,
+        "mean_cpu_ms": 49.63235294117647,
+        "mean_allocated_bytes": 12483038.107634543,
+        "compilation_ms": 1260,
+        "gc_ms": 75,
+        "terminal_keys": null
+      }
+    ],
+    "mean_tick_reduction_percent": -0.05517413354187983
+  },
+  "steady_report": "docs/experimental/terminal-keys-tps-results-20261109.json",
+  "superseded_inputs": {
+    "path": "local/frozen/prototype-11a/inputs.json",
+    "sha256": "3e07ed71676c4e281f7d7a3b2d67eb1bb81ec16d3cf5d97b494e904c9ce0eb2d"
+  },
+  "interrupted_attempt": "goal-terminal-keys-on-01",
+  "client_report": null,
+  "reload": null,
+  "client_result": null,
+  "evidence": [
+    {
+      "path": "local/frozen/prototype-11b/inputs.json",
+      "sha256": "4e50012c6dfa1859619bb2b45326f324088d000def6442e9013277e79d2bec76"
+    },
+    {
+      "path": "local/terminal-keys-build-02.log",
+      "sha256": "9582b9138ea769f19f033820a30b324879273531903c1a2562c37b52604e35ae"
+    },
+    {
+      "path": "local/terminal-keys-source-01/inspection.json",
+      "sha256": "54b5c9818ad29110104f2cc3b1ec5208c649257901cceb792cf408decafa3515"
+    },
+    {
+      "path": "local/terminal-keys-source-01/BlockWireEndpoint.bytecode.txt",
+      "sha256": "5fdfbeba9b8ee462411d9b6701f647638b7e36a7829d747b60ddbd9d3366ced3"
+    },
+    {
+      "path": "local/checks/terminal-keys-native-02/invocation.json",
+      "sha256": "a24e85db2bfaed825b4c0babb265b6bc446460088accc7bbebc101781243319e"
+    },
+    {
+      "path": "local/checks/terminal-keys-native-02/result.json",
+      "sha256": "817271f03876fc7528e6600dd9177189f5c773ce7be6406e104a2b761169c2f7"
+    },
+    {
+      "path": "local/checks/terminal-keys-native-02/process.log",
+      "sha256": "a7fa6736ff2124d5a434d13ec5ed8187f44b934fc0abc8da5a305af423f56ea0"
+    },
+    {
+      "path": "local/checks/terminal-keys-native-02/server/packaged-2026-11-09T17-54-24.555036300Z.json",
+      "sha256": "185314715bedaa02cd669e11fbcff8d3c02822b18c436c9c51ec66125405efeb"
+    },
+    {
+      "path": "local/checks/terminal-keys-java-02/invocation.json",
+      "sha256": "f9fcae587b2c1c99817ca92cd94b4614dc638181efd33e76282586240379662f"
+    },
+    {
+      "path": "local/checks/terminal-keys-java-02/result.json",
+      "sha256": "740f476f4c9755333a085d4f70690c67355109b6bca17a458a5ad15e9551851e"
+    },
+    {
+      "path": "local/checks/terminal-keys-java-02/process.log",
+      "sha256": "130455c4e9d422035082f65418eeaa65928e3aa4a3a7657f557179878d15d2d0"
+    },
+    {
+      "path": "local/checks/terminal-keys-java-02/server/packaged-2026-11-09T17-54-50.011982300Z.json",
+      "sha256": "79fd6e2ab48e8aeea13f3cc94dc37dc43e0b0f63513dfe72c6836a462c4fa365"
+    },
+    {
+      "path": "local/checks/terminal-keys-off-02/invocation.json",
+      "sha256": "addff3f4d8adab50ee438c1004c17366282ade8bd16b18ba6352e5114b1f64a2"
+    },
+    {
+      "path": "local/checks/terminal-keys-off-02/result.json",
+      "sha256": "4e80966b3b5e671cf95161e26aa9714a3161bfe1c9668c13e296a595579466f6"
+    },
+    {
+      "path": "local/checks/terminal-keys-off-02/process.log",
+      "sha256": "067b7890cf93b2ace55faf077b0629496d54646ab117229262c731e24ceecde5"
+    },
+    {
+      "path": "local/checks/terminal-keys-off-02/server/packaged-2026-11-09T17-55-15.004852100Z.json",
+      "sha256": "f65bf41712ff86f23de3e28a78e0b02ac391cb0dfcee1cb953de3c678f91bdd9"
+    },
+    {
+      "path": "local/frozen/prototype-11a/inputs.json",
+      "sha256": "3e07ed71676c4e281f7d7a3b2d67eb1bb81ec16d3cf5d97b494e904c9ce0eb2d"
+    },
+    {
+      "path": "local/terminal-keys-build-01.log",
+      "sha256": "f9fa2bae471369582e60d715b3ca0eb619bf2ac82dcdf8e0fb542c583b7892e8"
+    },
+    {
+      "path": "local/terminal-keys-source-01/pre-correction/NativeApiReadings.java",
+      "sha256": "c68c75b6b902b42a3f6acda33cc890896360036ff575a0b88f7adc10aba554d8"
+    },
+    {
+      "path": "local/terminal-keys-source-01/pre-correction/TerminalKeyLookupGameTests.java",
+      "sha256": "eacc4957b3efe485496a6b58b77488092498c20d8d70c77faa379ddd0189c9fb"
+    },
+    {
+      "path": "local/checks/terminal-keys-native-01/invocation.json",
+      "sha256": "ba011c6803ce78ae8c840647415f7d340be71e24782fae385c2143268eb6da4d"
+    },
+    {
+      "path": "local/checks/terminal-keys-native-01/result.json",
+      "sha256": "007336305a97aef57113f33229d233e619bfadbbfe459c590d8fe7df3e7d8bfb"
+    },
+    {
+      "path": "local/checks/terminal-keys-native-01/process.log",
+      "sha256": "e13c12a24516f16d36752f993fc147c77c48848fcc3738431d5e0eba455d7402"
+    },
+    {
+      "path": "local/checks/terminal-keys-java-01/invocation.json",
+      "sha256": "a33dee4426d1ce7a2481c8e4ff3efe4a03ad15d43b7850d9e0d8a203f0d21bb2"
+    },
+    {
+      "path": "local/checks/terminal-keys-java-01/result.json",
+      "sha256": "f562d7c5b30b737c7ba52c0b3f85e03e87007ba0cd90f7896ce190d74fe2350c"
+    },
+    {
+      "path": "local/checks/terminal-keys-java-01/process.log",
+      "sha256": "58186fd3966aebacabcfdc6b1a6436a1650d82ba40868e2a51e13991fedc841b"
+    },
+    {
+      "path": "local/checks/terminal-keys-off-01/invocation.json",
+      "sha256": "3cda95dde4668f728d87d2cd95fe383ea04bf1aa8d137b79e260cff6aface61e"
+    },
+    {
+      "path": "local/checks/terminal-keys-off-01/result.json",
+      "sha256": "8e44abdf673841915a65aa20638bf23b38959324747a558ff9a48cc0866699a6"
+    },
+    {
+      "path": "local/checks/terminal-keys-off-01/process.log",
+      "sha256": "4b00a80224cd39ee112cac8d98eecd0f5aad4049f13dfe888c297d1af55dffad"
+    },
+    {
+      "path": "local/benchmarks/goal-terminal-keys-on-01/experiment.json",
+      "sha256": "8a38e656d8cd67eb1e15b69adbec07fc9cbbe2dda840c33ff3ac9245ee3026c7"
+    },
+    {
+      "path": "local/benchmarks/goal-terminal-keys-on-01/runner-failure.json",
+      "sha256": "65867ee2d9b93db93ebece89f7d1e4c2cf78e2d5b8a8f07b5a0004c9d690bf55"
+    },
+    {
+      "path": "local/benchmarks/goal-terminal-keys-on-01/runner-exit.json",
+      "sha256": "f04a1ff7774bdf42a7f61a993d07f4384439eb3da2d41f7f016b2efdf2c7651a"
+    },
+    {
+      "path": "local/benchmarks/goal-terminal-keys-on-01/process.log",
+      "sha256": "871f99aec48b052edb908bc4b876ef8a5ce4f7ae38e94bc406afd5f4df804acc"
+    },
+    {
+      "path": "local/benchmarks/goal-terminal-keys-on-01/CANCEL",
+      "sha256": "502b1b4b7b16d3d98b0d93e88ff6cbe6e1fe76d99efbed651d4531c8302e1771"
+    },
+    {
+      "path": "docs/experimental/terminal-keys-tps-results-20261109.json",
+      "sha256": "b53ab72eac7d1b3bce98ce80e37d8b9396bc09a3e5de442163ddc50cf5c63cfc"
+    },
+    {
+      "path": "tools/experimental/summarize_terminal_keys.py",
+      "sha256": "f8f1b1ffaf09d3baa581c9ceb675f8ce10aa45ca3fc4eb13d648053239d9ef99"
+    },
+    {
+      "path": "tools/experimental/summarize_current_profile.py",
+      "sha256": "d4c05bcc6fcd6b911ba0f962fb0f14282d3b0c37ac631668fd2ad8a635b610df"
+    },
+    {
+      "path": "tools/experimental/focused_checks.py",
+      "sha256": "ee8125e1c682f9af96434b230e3a52f4ba7cd2085777aa71af91d454b415d7e7"
+    },
+    {
+      "path": "tools/experimental/plain_wire_benchmark.py",
+      "sha256": "b2aab5434a72c02abafce08c70e6c11a182c6405e76b47ae2755e9d3a4943d2f"
+    },
+    {
+      "path": "tools/experimental/restoration_benchmark.py",
+      "sha256": "7d75f1fd42e8851e39c6fe148bd00f92b7d8cdcc2f2a5a235ee8c4845af52061"
+    },
+    {
+      "path": "tools/experimental/client_loading_benchmark.py",
+      "sha256": "ddced000f911986372ea259ac727d70258c413c56991da79b38ecc662289338e"
+    },
+    {
+      "path": "tools/experimental/summarize_client_loading.py",
+      "sha256": "3962d396f252e29fad66b49f6c7dfcfd64389701ba2c5ac80425a3982f521071"
+    }
+  ],
+  "note": "Finite same-jar samples; no statistical-significance or full-acceptance claim. Keys retain identical hashes and equality; ownership validity is freshly recomputed."
+}

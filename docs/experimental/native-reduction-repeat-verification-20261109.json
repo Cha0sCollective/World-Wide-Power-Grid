@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "passed": true,
+  "branch": "dev/experimental-plain-wire-batching",
+  "full_suite": false,
+  "graphical_acceptance": false,
+  "verified_file_references": 635,
+  "retained_source_build_hashes_verified": 450,
+  "retained_build_artifacts": [
+    {
+      "path": "build/libs/wwpg-0.2.7-experimental.wiretree.11.jar",
+      "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9"
+    },
+    {
+      "path": "build/libs/wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+      "sha256": "24d2d70ca4b8895d71e1d74c9fc49b23a1873507f4f1c10627f2443d1fc51636"
+    }
+  ],
+  "variants": {
+    "control": {
+      "inputs": {
+        "path": "local/frozen/native-reduction-control-02/inputs.json",
+        "sha256": "b566b38132f11846596264af8bec97589bce9a63e29a61175aaafe7fd226d0f8"
+      },
+      "runtime": {
+        "path": "local/frozen/native-reduction-control-02/wwpg-0.2.7-experimental.native-reduction-control.jar",
+        "sha256": "7b26ca478b60dc48fa05b63e5d42ba63a7ad56730553ecef01d53086f420c962"
+      },
+      "gameplay_classes_compared": 294,
+      "fixture_sha256": "196f63bb783369bcfc797b13e2a9bfdf9b013ba7a210ea45f31747bc13fed74c"
+    },
+    "candidate": {
+      "inputs": {
+        "path": "local/frozen/native-reduction-candidate-02/inputs.json",
+        "sha256": "2474f9bfb528a65db88586f9f83407ca092489c9be2c52f2761eccb0bc122203"
+      },
+      "runtime": {
+        "path": "local/frozen/native-reduction-candidate-02/wwpg-0.2.7-experimental.native-reduction-candidate.jar",
+        "sha256": "a82c69f330d65ebc25fd713344d51522dcd348c70b3cf051e682585f2585e4b6"
+      },
+      "gameplay_classes_compared": 294,
+      "fixture_sha256": "196f63bb783369bcfc797b13e2a9bfdf9b013ba7a210ea45f31747bc13fed74c"
+    },
+    "observer": {
+      "inputs": {
+        "path": "local/frozen/native-reduction-live-counts-01/inputs.json",
+        "sha256": "08386612b4888fdd603ec207d8dbe9dee529a390e4d3f8d6029618a2c22eb151"
+      },
+      "runtime": {
+        "path": "local/frozen/native-reduction-live-counts-01/wwpg-0.2.7-experimental.native-reduction-counts.jar",
+        "sha256": "aae049dfdf2f8418ddadcf8a47c5fc9962571949d003cb5f62f544c08a4ab414"
+      },
+      "gameplay_classes_compared": 294,
+      "fixture_sha256": "196f63bb783369bcfc797b13e2a9bfdf9b013ba7a210ea45f31747bc13fed74c"
+    }
+  },
+  "main_tracked_worktree_clean": true,
+  "main_untracked_status_entries": 307,
+  "local_document_links_checked": 47,
+  "focused_observer_identity_checks": 3,
+  "result": {
+    "path": "docs/experimental/native-reduction-repeat-results-20261109.json",
+    "sha256": "2b88a3d51b2c27a34c7f35f0b16f14bb653df3e5daeb2308075e4db22d4a463a"
+  },
+  "tool": {
+    "path": "tools/experimental/verify_native_reduction.py",
+    "sha256": "3d14b7228022bac37fd2b74224bdf3b7ef13d61ed36d51104acfcfeb9e1c48f0"
+  },
+  "note": "The three focused observer identity/counter unit checks passed before the diagnostic run. Gameplay and numeric counts describe their preserved named runs, not reruns. The first audit rejected historical untracked files in the main worktree; this audit checks tracked cleanliness and leaves those files untouched."
+}

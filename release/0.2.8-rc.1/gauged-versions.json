@@ -1,0 +1,217 @@
+[
+  {
+    "game_versions": [
+      "1.21.1"
+    ],
+    "loaders": [
+      "neoforge"
+    ],
+    "environment": "client_and_server",
+    "id": "f1ywSCNc",
+    "project_id": "LemfA2Y5",
+    "author_id": "hZ49gxNq",
+    "featured": false,
+    "name": "Gauged: A Wire Addon 1.0.6a",
+    "version_number": "1.0.6a",
+    "changelog": "I wanted to try and see how making a light bulb went. So here's the 20kW lightbulb I wanted. I also was thinking about adding components at some point so I added a new creative tab to the creative menu for just components.\n\n\nI am also planning on dropping 1.20.1 releases, because the recipe json structure is different. Should anyone wish to continue it's legacy, feel free to make a PR and make the recipes work for 1.20",
+    "changelog_url": null,
+    "date_published": "2026-08-28T22:04:09.428356Z",
+    "downloads": 1056,
+    "version_type": "alpha",
+    "status": "listed",
+    "requested_status": null,
+    "files": [
+      {
+        "id": "No6VACmJ",
+        "hashes": {
+          "sha512": "f2e78ccb1b9b3c6af9769dd19c4975a7a4058c7fd93f042b8e16904f2b328244ecb1617dd3bc1f71454ae1023f42b5d8cd757b1863c0279171656d87528bac41",
+          "sha1": "0e8a0d2d1799e0d3622373301f8f247efc00b2d1"
+        },
+        "url": "https://cdn.modrinth.com/data/LemfA2Y5/versions/f1ywSCNc/gauged_wires-1.0.6a.jar",
+        "filename": "gauged_wires-1.0.6a.jar",
+        "primary": true,
+        "size": 199350,
+        "file_type": null
+      }
+    ],
+    "dependencies": [
+      {
+        "version_id": null,
+        "project_id": "LNytGWDc",
+        "file_name": null,
+        "dependency_type": "required"
+      }
+    ]
+  },
+  {
+    "game_versions": [
+      "1.20.1",
+      "1.21.1"
+    ],
+    "loaders": [
+      "neoforge"
+    ],
+    "environment": "client_and_server",
+    "id": "EbNSBYRd",
+    "project_id": "LemfA2Y5",
+    "author_id": "hZ49gxNq",
+    "featured": false,
+    "name": "Gauged: A Wire Addon 1.0.4",
+    "version_number": "1.0.4",
+    "changelog": "# Hotfix for v1.0.3\n\n- actually register the items...",
+    "changelog_url": null,
+    "date_published": "2026-08-16T23:27:54.332695Z",
+    "downloads": 804,
+    "version_type": "release",
+    "status": "listed",
+    "requested_status": null,
+    "files": [
+      {
+        "id": "McMZVsRv",
+        "hashes": {
+          "sha1": "ffea219041fb46d69ccae70dd46c460a7af4f9ed",
+          "sha512": "878fdfe8d5332fad6a34d22dfb5d0c49222823e65b10a9b407e31d2dc44263d2ce6e0182a847614bef47fbfc4d0ac6e76960941184d890ab7ae51bcc355b436f"
+        },
+        "url": "https://cdn.modrinth.com/data/LemfA2Y5/versions/EbNSBYRd/gauged_wires-1.0.4.jar",
+        "filename": "gauged_wires-1.0.4.jar",
+        "primary": true,
+        "size": 175347,
+        "file_type": null
+      }
+    ],
+    "dependencies": [
+      {
+        "version_id": "IhWvpljS",
+        "project_id": "eWiBLJ9R",
+        "file_name": null,
+        "dependency_type": "required"
+      }
+    ]
+  },
+  {
+    "game_versions": [
+      "1.20.1",
+      "1.21.1"
+    ],
+    "loaders": [
+      "neoforge"
+    ],
+    "environment": "client_and_server",
+    "id": "Gm9gp4w2",
+    "project_id": "LemfA2Y5",
+    "author_id": "hZ49gxNq",
+    "featured": false,
+    "name": "Gauged: A Wire Addon 1.0.3",
+    "version_number": "1.0.3",
+    "changelog": "# Things added:\n\n- Copper and aluminum cords with gauges 14 AWG to 1AWG\n- 1.20.1 support",
+    "changelog_url": null,
+    "date_published": "2026-08-16T23:17:50.700782Z",
+    "downloads": 22,
+    "version_type": "release",
+    "status": "listed",
+    "requested_status": null,
+    "files": [
+      {
+        "id": "Me1feqXE",
+        "hashes": {
+          "sha512": "c8758c58e18364fc9c9bdd271cc79290b9deeecb9da8e2359d57b70d72a5ec72f713749e1d1ce3471b4b44a589eea185b313cc940e9ebbc25b9d307af38a50a7",
+          "sha1": "3e2a77664be6bb4d7dd552ba611724ead2df8395"
+        },
+        "url": "https://cdn.modrinth.com/data/LemfA2Y5/versions/Gm9gp4w2/gauged_wires-1.0.3.jar",
+        "filename": "gauged_wires-1.0.3.jar",
+        "primary": true,
+        "size": 174329,
+        "file_type": null
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "game_versions": [
+      "1.21.1"
+    ],
+    "loaders": [
+      "neoforge"
+    ],
+    "environment": "client_and_server",
+    "id": "Jl6nHvLw",
+    "project_id": "LemfA2Y5",
+    "author_id": "hZ49gxNq",
+    "featured": false,
+    "name": "Gauged: A Wire Addon 1.0.2",
+    "version_number": "1.0.2",
+    "changelog": "Fixes compat with Create: Power Grid's update 6",
+    "changelog_url": null,
+    "date_published": "2026-08-14T17:48:44.451504Z",
+    "downloads": 141,
+    "version_type": "release",
+    "status": "listed",
+    "requested_status": null,
+    "files": [
+      {
+        "id": "qjXpXC5I",
+        "hashes": {
+          "sha1": "ff982f30b44c269865d6ebea22cbdaaa87fdd58b",
+          "sha512": "f15966f0b73d1b89b5ea4cfc6cc9a93ea9ac3b3c71a3c5cb319561c92a55b5889ad851d38c2b6c49b377baf1614540547c040108c38d24162c4ede171e4456b0"
+        },
+        "url": "https://cdn.modrinth.com/data/LemfA2Y5/versions/Jl6nHvLw/gauged_wires-1.0.2.jar",
+        "filename": "gauged_wires-1.0.2.jar",
+        "primary": true,
+        "size": 152448,
+        "file_type": null
+      }
+    ],
+    "dependencies": [
+      {
+        "version_id": "IhWvpljS",
+        "project_id": "eWiBLJ9R",
+        "file_name": null,
+        "dependency_type": "required"
+      }
+    ]
+  },
+  {
+    "game_versions": [
+      "1.21.1"
+    ],
+    "loaders": [
+      "neoforge"
+    ],
+    "environment": "client_and_server",
+    "id": "qpXmkNtv",
+    "project_id": "LemfA2Y5",
+    "author_id": "hZ49gxNq",
+    "featured": false,
+    "name": "Gauged: A Wire Addon 1.0.0",
+    "version_number": "1.0.0",
+    "changelog": "",
+    "changelog_url": null,
+    "date_published": "2026-07-22T04:50:00.715416Z",
+    "downloads": 398,
+    "version_type": "release",
+    "status": "listed",
+    "requested_status": null,
+    "files": [
+      {
+        "id": "eHTzFtWS",
+        "hashes": {
+          "sha1": "95b08cea4efdc5d9fd997ff2488a0a8ddcf7e6d2",
+          "sha512": "99694d942940e1d7beaa1b4e24dc47e957d05a93a09391435dc241d117b34214cc937030b9128063453f6900634990a54ced1b5b72e0de95fb6aa2bdba7cd527"
+        },
+        "url": "https://cdn.modrinth.com/data/LemfA2Y5/versions/qpXmkNtv/gauged_wires-1.0.0.jar",
+        "filename": "gauged_wires-1.0.0.jar",
+        "primary": true,
+        "size": 149391,
+        "file_type": null
+      }
+    ],
+    "dependencies": [
+      {
+        "version_id": "8EtGIOFr",
+        "project_id": "eWiBLJ9R",
+        "file_name": null,
+        "dependency_type": "required"
+      }
+    ]
+  }
+]

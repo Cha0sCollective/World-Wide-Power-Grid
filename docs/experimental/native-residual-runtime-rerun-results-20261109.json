@@ -1,0 +1,1264 @@
+{
+  "schema": 1,
+  "snapshot": "2026-11-09",
+  "native_candidate": "Per-solver four-row SIMD residual cache with independent value invalidation",
+  "retained": false,
+  "full_suite": false,
+  "graphical_acceptance": false,
+  "clean_comparison": true,
+  "common_control_change": "Resolve current logical A at every residual and request fresh factorization when a fitting-loop structure update discarded old factors.",
+  "gameplay_classes_compared": 294,
+  "native_checks": {
+    "schema": 1,
+    "passed": true,
+    "build": {
+      "path": "local/native-residual-runtime-02/build.json",
+      "sha256": "251b765fb0d7224144655205e578ad9493171c04fd4b817c15d966a68bb6eb14"
+    },
+    "observations": {
+      "control": {
+        "live_comparisons": 2048,
+        "lifecycle_cycles": 8,
+        "allocation_failures": 0,
+        "imports": [
+          "KERNEL32.dll",
+          "msvcrt.dll"
+        ],
+        "exports": [
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_allocateNativeObject",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_deallocateNativeObject",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_finishJacobianWrite",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_processJacobianBuffer",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_processRHSBuffer",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_setPrecision",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_setStateSize",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_singleTick",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_verifySupport",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_zeroJacobian",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_zeroRHS",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_zeroState"
+        ],
+        "evidence": [
+          {
+            "path": "local/native-residual-runtime-02/checks/control.log",
+            "sha256": "f680770dc8acd17a7a4f335502fc29b7f87e89f29e9690a57bb59258fac71059"
+          },
+          {
+            "path": "local/native-residual-runtime-02/checks/control-pe.txt",
+            "sha256": "d85e97c647001699f1ca2cf8520dafdc3f3a223185849a679278f5304f43e477"
+          }
+        ]
+      },
+      "candidate": {
+        "live_comparisons": 2184,
+        "lifecycle_cycles": 108,
+        "allocation_failures": 17,
+        "imports": [
+          "KERNEL32.dll",
+          "msvcrt.dll"
+        ],
+        "exports": [
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_allocateNativeObject",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_deallocateNativeObject",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_finishJacobianWrite",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_processJacobianBuffer",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_processRHSBuffer",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_setPrecision",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_setStateSize",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_singleTick",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_verifySupport",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_zeroJacobian",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_zeroRHS",
+          "Java_org_patryk3211_powergrid_electricity_sim_solver_NativeMNA_zeroState"
+        ],
+        "evidence": [
+          {
+            "path": "local/native-residual-runtime-02/checks/candidate.log",
+            "sha256": "fed8e3c4cb0a05f672bde7f5f8f371856cd63ad965dababc6fc8dc4c4e4e5ebf"
+          },
+          {
+            "path": "local/native-residual-runtime-02/checks/candidate-pe.txt",
+            "sha256": "f599edcf512d5885b147de5012c0958b0d157d0da7973b6766ba6a83bfd7c244"
+          }
+        ]
+      }
+    },
+    "artifacts_unchanged": true,
+    "tool": {
+      "path": "local/native-residual-runtime-02/checks/runner.py",
+      "sha256": "a50109efe5d1a13eb74d27d9dc3503f9de0e596b78c986b880c2b2dc8b449c6f"
+    },
+    "scope": "Focused standalone cache mutation, lifecycle and allocation-failure checks; no new gameplay acceptance."
+  },
+  "focused_checks": [
+    {
+      "result": {
+        "path": "local/checks/native-residual-control-01/result.json",
+        "sha256": "5ee684b1ef7be8522ce1e677f4b84a00bf47be3b8241e8443f9f86276ea7f7dc"
+      },
+      "selected_tests": 24,
+      "loaded_native": {
+        "path": "local/checks/native-residual-control-01/server/.pg-native/wwpg-safety-1/e9476995415ac0a1466188c237dddf741349cf879ec4d24cd4a9247b5e29357d/libpowergridNative7.dll",
+        "sha256": "e9476995415ac0a1466188c237dddf741349cf879ec4d24cd4a9247b5e29357d"
+      },
+      "runtime_sha256": "f8e0bf53deb7549fbe18e1507686084123fab2965922e5f56bfc5c8f6dc08f98",
+      "log": {
+        "path": "local/checks/native-residual-control-01/process.log",
+        "sha256": "b046a7e568f8dfefdfbd8922a900b214ff5da9eb227f990d4f3845e3bd99252d"
+      }
+    },
+    {
+      "result": {
+        "path": "local/checks/native-residual-candidate-01/result.json",
+        "sha256": "78a01b72cf0d6545759a11fc525193a086fb56fe2d2aa223fed67d696dce7bae"
+      },
+      "selected_tests": 24,
+      "loaded_native": {
+        "path": "local/checks/native-residual-candidate-01/server/.pg-native/wwpg-safety-1/065d9ea713caf7874f35bb9a634b959a676e7b5d772babf72307e294bd11f1dc/libpowergridNative7.dll",
+        "sha256": "065d9ea713caf7874f35bb9a634b959a676e7b5d772babf72307e294bd11f1dc"
+      },
+      "runtime_sha256": "6be7132916b852a272e3dad81f098b3f07f811bdf4da64f51c89a0d820a5146e",
+      "log": {
+        "path": "local/checks/native-residual-candidate-01/process.log",
+        "sha256": "bce0d59d728c5f5be6a0830ed1666dec0656657c2a0e94823d5f49f6e58ff3a3"
+      }
+    }
+  ],
+  "focused_fixture_executions": 48,
+  "runs": {
+    "control": [
+      {
+        "name": "goal-native-residual-control-01",
+        "protocol": {
+          "name": "goal-native-residual-control-01",
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-residual-control-01\\mods\\wwpg-0.2.7-experimental.native-residual-control.jar",
+            "sha256": "f8e0bf53deb7549fbe18e1507686084123fab2965922e5f56bfc5c8f6dc08f98",
+            "kind": "local-candidate",
+            "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\native-residual-control-01\\wwpg-0.2.7-experimental.native-residual-control.jar",
+            "native_profile": {
+              "schema": 1,
+              "diagnostic": false,
+              "variant": "native-residual-control",
+              "native_sha256": "e9476995415ac0a1466188c237dddf741349cf879ec4d24cd4a9247b5e29357d",
+              "native_build": {
+                "path": "local/native-residual-runtime-02/build.json",
+                "sha256": "251b765fb0d7224144655205e578ad9493171c04fd4b817c15d966a68bb6eb14"
+              },
+              "original_runtime_sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9",
+              "gameplay_class_bytes_unchanged": true
+            }
+          },
+          "scope": "Focused 120-second warmup and 120-second stable control; not full capacity acceptance",
+          "copied_reference": true,
+          "sixteen_substeps": true,
+          "full_suite": false,
+          "batch": true,
+          "verify_batch": false,
+          "property_batch": true,
+          "detailed": false,
+          "tree_batch": true,
+          "tree_budget_ms": 20,
+          "tree_max_parts": 32,
+          "tree_retain_coverage": false,
+          "tree_prioritize_unresolved": true,
+          "chunk_task_budget_ms": 2,
+          "cee_state_geometry": true,
+          "scoped_restoration": true,
+          "indexed_waveform": false,
+          "terminal_bookkeeping": false,
+          "terminal_key_lookup": false,
+          "cpu_affinity_mask": "fff000",
+          "server_affinity_mask": null,
+          "helper": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-residual-control-01\\mods\\wwpg-benchmark-0.1.0-affinity.jar",
+            "sha256": "56434c77e56c6361aad1b54733eac5573b97bd24d52ae42b0d330216da7a34cb"
+          },
+          "substep_jfr": false,
+          "cpu_jfr": false,
+          "cpu_jfr_non_safepoints": false,
+          "preparation_sections": false,
+          "native_work": false,
+          "native_stages": false,
+          "diagnostic_kind": null,
+          "started_utc": "2026-11-10T00:45:11Z",
+          "validation": {
+            "passed": true,
+            "full_suite": false,
+            "capacity_certified": false,
+            "stable_ticks": 2398,
+            "actual_nodes": 14650,
+            "edges": 20637,
+            "chunks": 953,
+            "storage_devices": 1050,
+            "sixteen_substeps": true,
+            "topology_unchanged": true,
+            "normal_shutdown": true,
+            "batch_execution": {
+              "plans": 1,
+              "unsupported": 0,
+              "steps": 78719,
+              "contributions": 1559502109,
+              "voltage_reads": 1153233350,
+              "scalar_fallbacks": 0,
+              "largest_plain_batch": 10368,
+              "property_contributions": 743343517,
+              "property_scalar_fallbacks": 0,
+              "largest_property_batch": 9443
+            },
+            "bitwise_verification": false
+          },
+          "task_window": {
+            "budgetMillis": 2,
+            "maxTasks": 512,
+            "windows": 210,
+            "completed": 3697,
+            "emptyPolls": 1137849,
+            "maxCompleted": 448,
+            "maxWindowNanos": 2078700,
+            "maxPollNanos": 833100,
+            "probes": 514,
+            "maxProbeNanos": 857800
+          },
+          "cee_geometry": {
+            "requests": 36197042,
+            "hits": 28005239,
+            "builds": 8,
+            "fallback": 8191795,
+            "states": 8
+          },
+          "scope_execution": {
+            "snapshots": 418,
+            "membershipChecks": 0,
+            "savedParts": 2484174,
+            "nodeBindings": 6026966,
+            "seedEndpoints": 2557288,
+            "heldNetworks": 17148,
+            "fallbackWorlds": 0,
+            "totalNanos": 4442050600,
+            "maxNanos": 44361200,
+            "topologyPasses": 461,
+            "topologyNanos": 296694000,
+            "maxTopologyNanos": 11410000
+          },
+          "waveform_execution": null,
+          "terminal_execution": null,
+          "terminal_keys": null,
+          "tree_priority_selections": 203,
+          "preparation_observation": {
+            "enabled": false,
+            "observation_absent": true
+          },
+          "native_work_observation": {
+            "enabled": false,
+            "observation_absent": true
+          },
+          "native_stage_observation": {
+            "enabled": false,
+            "observation_absent": true
+          },
+          "summary": {
+            "schema": 1,
+            "completed": true,
+            "passed": true,
+            "protocol_complete": false,
+            "capacity_certified": false,
+            "mode": "control",
+            "tier": 10000,
+            "backend": "NATIVE",
+            "variant": "MIXED",
+            "audit": {
+              "electrical_nodes": 14650,
+              "conductive_edges": 20362,
+              "coupled_edges": 275,
+              "edges": 20637,
+              "connected_systems_ignoring_reference_ground": 1,
+              "optimized_matrix_nodes": 14925,
+              "solver_networks": 1,
+              "actual_backends": [
+                "NATIVE"
+              ]
+            },
+            "samples": 2398,
+            "profiled_ticks": 0,
+            "measured_seconds": 119.7649453,
+            "tps": 20.01420360520133,
+            "mspt": {
+              "mean": 47.82970246038365,
+              "p50": 47.8972,
+              "p95": 55.7779,
+              "p99": 68.7646,
+              "maximum": 90.7307
+            },
+            "phase_mean_ms": {
+              "cee_prepare_ns": null,
+              "synchronize_ns": null,
+              "result_bridge_ns": null,
+              "gameplay_commit_ns": null,
+              "pg_prepare_ns": null,
+              "pg_solve_ns": null,
+              "history_prepare_ns": null,
+              "history_commit_ns": null,
+              "cee_device_prepare_ns": null,
+              "cee_device_commit_ns": null,
+              "electrical_schedule_ns": null,
+              "native_measurement_prepare_ns": null,
+              "native_measurement_sample_ns": null,
+              "extension_prepare_ns": null,
+              "extension_before_ns": null,
+              "extension_after_ns": null,
+              "restoration_schedule_ns": null,
+              "restoration_context_ns": null,
+              "native_measurement_finish_ns": null,
+              "extension_bind_ns": null,
+              "extension_finish_ns": null,
+              "extension_commit_ns": null,
+              "provider_prepare_ns": null,
+              "provider_commit_ns": null,
+              "pg_rhs_ns": null,
+              "native_solve_ns": null,
+              "native_iteration_hooks_ns": null,
+              "native_residual_flush_ns": null
+            },
+            "compatibility_share_upper_bound": null,
+            "heap_peak_bytes": 1555597976,
+            "gc_ms": 93,
+            "native_tick_target_met": false,
+            "reason": "Stable control completed",
+            "practical_20tps_target_met": false,
+            "detailed_timers_enabled": false,
+            "process": {
+              "rss_peak_bytes": 2244108288,
+              "cpu_mean_cores": 1.0234488629083462
+            }
+          },
+          "original_reference_unchanged": true,
+          "isolated_reference_unchanged": true,
+          "finished_utc": "2026-11-10T00:50:04Z"
+        },
+        "summary": {
+          "schema": 1,
+          "completed": true,
+          "passed": true,
+          "protocol_complete": false,
+          "capacity_certified": false,
+          "mode": "control",
+          "tier": 10000,
+          "backend": "NATIVE",
+          "variant": "MIXED",
+          "audit": {
+            "electrical_nodes": 14650,
+            "conductive_edges": 20362,
+            "coupled_edges": 275,
+            "edges": 20637,
+            "connected_systems_ignoring_reference_ground": 1,
+            "optimized_matrix_nodes": 14925,
+            "solver_networks": 1,
+            "actual_backends": [
+              "NATIVE"
+            ]
+          },
+          "samples": 2398,
+          "profiled_ticks": 0,
+          "measured_seconds": 119.7649453,
+          "tps": 20.01420360520133,
+          "mspt": {
+            "mean": 47.82970246038365,
+            "p50": 47.8972,
+            "p95": 55.7779,
+            "p99": 68.7646,
+            "maximum": 90.7307
+          },
+          "phase_mean_ms": {
+            "cee_prepare_ns": null,
+            "synchronize_ns": null,
+            "result_bridge_ns": null,
+            "gameplay_commit_ns": null,
+            "pg_prepare_ns": null,
+            "pg_solve_ns": null,
+            "history_prepare_ns": null,
+            "history_commit_ns": null,
+            "cee_device_prepare_ns": null,
+            "cee_device_commit_ns": null,
+            "electrical_schedule_ns": null,
+            "native_measurement_prepare_ns": null,
+            "native_measurement_sample_ns": null,
+            "extension_prepare_ns": null,
+            "extension_before_ns": null,
+            "extension_after_ns": null,
+            "restoration_schedule_ns": null,
+            "restoration_context_ns": null,
+            "native_measurement_finish_ns": null,
+            "extension_bind_ns": null,
+            "extension_finish_ns": null,
+            "extension_commit_ns": null,
+            "provider_prepare_ns": null,
+            "provider_commit_ns": null,
+            "pg_rhs_ns": null,
+            "native_solve_ns": null,
+            "native_iteration_hooks_ns": null,
+            "native_residual_flush_ns": null
+          },
+          "compatibility_share_upper_bound": null,
+          "heap_peak_bytes": 1555597976,
+          "gc_ms": 93,
+          "native_tick_target_met": false,
+          "reason": "Stable control completed",
+          "practical_20tps_target_met": false,
+          "detailed_timers_enabled": false,
+          "process": {
+            "rss_peak_bytes": 2244108288,
+            "cpu_mean_cores": 1.0234488629083462
+          }
+        },
+        "loading": [
+          {
+            "phase": "SETTLE",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 31,
+            "graph_ready_tick": 211,
+            "finish_tick": 330,
+            "chunk_request_seconds": 0.8043094,
+            "chunk_loading_seconds": 13.0990951,
+            "graph_recovery_seconds": 13.4923251,
+            "electrical_settling_seconds": 6.0702838,
+            "total_restoration_seconds": 33.4660134,
+            "restoration_and_settling_seconds": 32.661704,
+            "healthy_ticks": 100,
+            "queued_roots_at_chunk_ready": 11304,
+            "maximum_pending_roots": 11304,
+            "queue_drained_tick": 211,
+            "queue_drain_seconds": 13.4923251
+          }
+        ],
+        "thirty_second_blocks": [
+          {
+            "block": 0,
+            "ticks": 604,
+            "mean_tick_ms": 46.76174271523179
+          },
+          {
+            "block": 1,
+            "ticks": 600,
+            "mean_tick_ms": 46.6257865
+          },
+          {
+            "block": 2,
+            "ticks": 599,
+            "mean_tick_ms": 48.92361402337229
+          },
+          {
+            "block": 3,
+            "ticks": 595,
+            "mean_tick_ms": 49.02658352941177
+          }
+        ],
+        "host": {
+          "sample_period_seconds": 5,
+          "in_window_intervals": 53,
+          "in_window_seconds": 265.6752510070801,
+          "monitored_processes": 183,
+          "competing_game_present": false,
+          "other_cpu_mean_cores": 0.3351718862124156,
+          "other_process_peaks": [
+            {
+              "name": "ChatGPT.exe",
+              "identity": "13688:134387027373880825",
+              "peak_cores": 0.33026285806978284,
+              "mean_cores": 0.07210400640400448
+            },
+            {
+              "name": "Discord.exe",
+              "identity": "28708:134387040917398085",
+              "peak_cores": 0.23372421940119295,
+              "mean_cores": 0.016349848107922713
+            },
+            {
+              "name": "HWiNFO64.EXE",
+              "identity": "5948:134387027096006899",
+              "peak_cores": 0.1463827025590521,
+              "mean_cores": 0.08545442194536583
+            },
+            {
+              "name": "ChatGPT.exe",
+              "identity": "28732:134387027298932907",
+              "peak_cores": 0.09048649708954933,
+              "mean_cores": 0.03140582334399543
+            },
+            {
+              "name": "Discord.exe",
+              "identity": "18652:134387040906701274",
+              "peak_cores": 0.08410638040289851,
+              "mean_cores": 0.010645044991129535
+            },
+            {
+              "name": "ChatGPT.exe",
+              "identity": "28176:134387027293764011",
+              "peak_cores": 0.0811029656051489,
+              "mean_cores": 0.01881996904509089
+            },
+            {
+              "name": "powershell.exe",
+              "identity": "6028:134387027037888757",
+              "peak_cores": 0.059304151239149776,
+              "mean_cores": 0.028347578374168157
+            },
+            {
+              "name": "codex.exe",
+              "identity": "30104:134387027358105490",
+              "peak_cores": 0.05611189767843854,
+              "mean_cores": 0.006469364359249994
+            }
+          ],
+          "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+        },
+        "evidence": [
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/experiment.json",
+            "sha256": "9291daa07fbbbba16609e73bf5d520cce4902c94c901ba7ddade037f58eeea8d"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/launch.json",
+            "sha256": "951e496da4ef0eb3ee8cba5dbbcfbc30d0d3321ba08da82cdb06c63f874874db"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/invocation.json",
+            "sha256": "6dc095461374718e5b765f4e59601d23ec2627dff538ab616c9d6d2603db520d"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/process.log",
+            "sha256": "41ceed29575dd3d935bbfd0033d5d4ca9738f02a352a1ff4d3c5f511435afe47"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/runner-exit.json",
+            "sha256": "cf0e5d079a4a0744c7303d67f79c65c4cbdf58ca60ade58c8d9853776b3cf9f1"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/shutdown-save.json",
+            "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/host-metrics.jsonl",
+            "sha256": "15c80706e769a6f98cb582bccf53a9d214f71b91ad5a7f0d65981f7d6bdcc070"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/process-metrics.jsonl",
+            "sha256": "b16e99f8df7f3a1dca8318121bc73cee1e2eaacc6b2f4123b74be9b58866bdc1"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/benchmark/result.json",
+            "sha256": "3f45477dcd059c98ef1f6051516cc218db7e1008224fa624934af575acdd9833"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/benchmark/summary.json",
+            "sha256": "749cab0ccaa9ef2d27b35c9587cd0d2446658aaaf9d698a375142072b1954446"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/benchmark/loading-results.json",
+            "sha256": "66624b3dca70f4a38e7f0e5dc55a56c061345e73b7702b2e8ab94058534e0cfb"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/benchmark/ticks.csv",
+            "sha256": "6a8dea21a51ef3f397c7885d85e1e4293030cb07c3f23896ad96246ad5b8de0b"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/benchmark/placement-ticks.csv",
+            "sha256": "b24c63ec289ded5bbaa459a1d94d370427d06bf16a80f5dae12b4c12ff546836"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/benchmark/cpu-topology.json",
+            "sha256": "70efbefc8026b3f528fc9dc9489fac14f14ed5ba2f58f4aaf3f7bffefc8e6afb"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/benchmark/placement-fixed.json",
+            "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/benchmark/placement-restored.json",
+            "sha256": "a541ad1fbc23952b4d01dccf9ce131e8b0c9f980942c0493834dc1fd617ad25a"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/benchmark/graph-start.json",
+            "sha256": "6860c9a75708fe740dc0e28efbef67e5914f623ddf8e93506396ff2ac3526f67"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/benchmark/graph-end.json",
+            "sha256": "6860c9a75708fe740dc0e28efbef67e5914f623ddf8e93506396ff2ac3526f67"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/benchmark/pre-solve-storage.json",
+            "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/process-affinity.json",
+            "sha256": "22df9e93728311cc48ddd665fbcc70d7dfb2b6c957290e8c60ec574c9f846ef2"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-control-01/cpu-preflight.json",
+            "sha256": "df74e48edea57ae5cfb83b4de8e1b8af73d937dcc242e975fadce181e15247a7"
+          }
+        ],
+        "process_affinity": {
+          "pid": 8732,
+          "original_mask": "ffffff",
+          "requested_mask": "fff000",
+          "readback_mask": "fff000",
+          "logical_cpus": [
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23
+          ],
+          "wall_unix": 1794271518.0649076,
+          "scope": "Owned child process immediately after launch; other processes unchanged"
+        },
+        "affinity_readbacks": 286,
+        "stable_cpu_busy_percent": [
+          5.528696290997008,
+          6.612979125148142,
+          19.361472039752613,
+          24.056193603553254,
+          19.515865491390496,
+          24.33871031567627,
+          8.914562950326301,
+          9.52641906327408,
+          2.9942094514634108,
+          3.1298822268002433,
+          5.94826315226329,
+          5.948857997984243,
+          37.246483388321415,
+          3.1099225591928144,
+          4.118460453772118,
+          4.146163722006802,
+          4.634338840322993,
+          2.7378929040707254,
+          3.0202478875011027,
+          4.06341490438833,
+          29.806416426371246,
+          27.37602325449023,
+          2.3843591904202968,
+          2.534590635836148
+        ],
+        "stable_cpu_observation_seconds": 115.28869414329529,
+        "cpu_observation_note": "Total per-core load including the benchmark; affinity restricts this process but does not reserve CPUs against other processes.",
+        "percent_ticks_above_50_ms": 25.56296914095079,
+        "compilation_ms": 1601,
+        "loaded_native": {
+          "path": "local/benchmarks/goal-native-residual-control-01/.pg-native/wwpg-safety-1/e9476995415ac0a1466188c237dddf741349cf879ec4d24cd4a9247b5e29357d/libpowergridNative7.dll",
+          "sha256": "e9476995415ac0a1466188c237dddf741349cf879ec4d24cd4a9247b5e29357d"
+        }
+      }
+    ],
+    "candidate": [
+      {
+        "name": "goal-native-residual-candidate-03",
+        "protocol": {
+          "name": "goal-native-residual-candidate-03",
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-residual-candidate-03\\mods\\wwpg-0.2.7-experimental.native-residual-candidate.jar",
+            "sha256": "6be7132916b852a272e3dad81f098b3f07f811bdf4da64f51c89a0d820a5146e",
+            "kind": "local-candidate",
+            "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\native-residual-candidate-01\\wwpg-0.2.7-experimental.native-residual-candidate.jar",
+            "native_profile": {
+              "schema": 1,
+              "diagnostic": false,
+              "variant": "native-residual-candidate",
+              "native_sha256": "065d9ea713caf7874f35bb9a634b959a676e7b5d772babf72307e294bd11f1dc",
+              "native_build": {
+                "path": "local/native-residual-runtime-02/build.json",
+                "sha256": "251b765fb0d7224144655205e578ad9493171c04fd4b817c15d966a68bb6eb14"
+              },
+              "original_runtime_sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9",
+              "gameplay_class_bytes_unchanged": true
+            }
+          },
+          "scope": "Focused 120-second warmup and 120-second stable control; not full capacity acceptance",
+          "copied_reference": true,
+          "sixteen_substeps": true,
+          "full_suite": false,
+          "batch": true,
+          "verify_batch": false,
+          "property_batch": true,
+          "detailed": false,
+          "tree_batch": true,
+          "tree_budget_ms": 20,
+          "tree_max_parts": 32,
+          "tree_retain_coverage": false,
+          "tree_prioritize_unresolved": true,
+          "chunk_task_budget_ms": 2,
+          "cee_state_geometry": true,
+          "scoped_restoration": true,
+          "indexed_waveform": false,
+          "terminal_bookkeeping": false,
+          "terminal_key_lookup": false,
+          "cpu_affinity_mask": "fff000",
+          "server_affinity_mask": null,
+          "helper": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-residual-candidate-03\\mods\\wwpg-benchmark-0.1.0-affinity.jar",
+            "sha256": "56434c77e56c6361aad1b54733eac5573b97bd24d52ae42b0d330216da7a34cb"
+          },
+          "substep_jfr": false,
+          "cpu_jfr": false,
+          "cpu_jfr_non_safepoints": false,
+          "preparation_sections": false,
+          "native_work": false,
+          "native_stages": false,
+          "diagnostic_kind": null,
+          "started_utc": "2026-11-10T01:55:09Z",
+          "validation": {
+            "passed": true,
+            "full_suite": false,
+            "capacity_certified": false,
+            "stable_ticks": 2401,
+            "actual_nodes": 14650,
+            "edges": 20637,
+            "chunks": 953,
+            "storage_devices": 1050,
+            "sixteen_substeps": true,
+            "topology_unchanged": true,
+            "normal_shutdown": true,
+            "batch_execution": {
+              "plans": 1,
+              "unsupported": 0,
+              "steps": 78799,
+              "contributions": 1561086989,
+              "voltage_reads": 1154405350,
+              "scalar_fallbacks": 0,
+              "largest_plain_batch": 10368,
+              "property_contributions": 744098957,
+              "property_scalar_fallbacks": 0,
+              "largest_property_batch": 9443
+            },
+            "bitwise_verification": false
+          },
+          "task_window": {
+            "budgetMillis": 2,
+            "maxTasks": 512,
+            "windows": 200,
+            "completed": 3991,
+            "emptyPolls": 1078024,
+            "maxCompleted": 428,
+            "maxWindowNanos": 2136600,
+            "maxPollNanos": 581300,
+            "probes": 514,
+            "maxProbeNanos": 782100
+          },
+          "cee_geometry": {
+            "requests": 36161951,
+            "hits": 27976980,
+            "builds": 8,
+            "fallback": 8184963,
+            "states": 8
+          },
+          "scope_execution": {
+            "snapshots": 416,
+            "membershipChecks": 0,
+            "savedParts": 2472288,
+            "nodeBindings": 5992708,
+            "seedEndpoints": 2525748,
+            "heldNetworks": 17740,
+            "fallbackWorlds": 0,
+            "totalNanos": 4420848900,
+            "maxNanos": 47917900,
+            "topologyPasses": 461,
+            "topologyNanos": 282811300,
+            "maxTopologyNanos": 14241800
+          },
+          "waveform_execution": null,
+          "terminal_execution": null,
+          "terminal_keys": null,
+          "tree_priority_selections": 200,
+          "preparation_observation": {
+            "enabled": false,
+            "observation_absent": true
+          },
+          "native_work_observation": {
+            "enabled": false,
+            "observation_absent": true
+          },
+          "native_stage_observation": {
+            "enabled": false,
+            "observation_absent": true
+          },
+          "summary": {
+            "schema": 1,
+            "completed": true,
+            "passed": true,
+            "protocol_complete": false,
+            "capacity_certified": false,
+            "mode": "control",
+            "tier": 10000,
+            "backend": "NATIVE",
+            "variant": "MIXED",
+            "audit": {
+              "electrical_nodes": 14650,
+              "conductive_edges": 20362,
+              "coupled_edges": 275,
+              "edges": 20637,
+              "connected_systems_ignoring_reference_ground": 1,
+              "optimized_matrix_nodes": 14925,
+              "solver_networks": 1,
+              "actual_backends": [
+                "NATIVE"
+              ]
+            },
+            "samples": 2401,
+            "profiled_ticks": 0,
+            "measured_seconds": 119.8179436,
+            "tps": 20.03038883735274,
+            "mspt": {
+              "mean": 48.65929833402749,
+              "p50": 48.3304,
+              "p95": 57.1939,
+              "p99": 68.631,
+              "maximum": 89.3646
+            },
+            "phase_mean_ms": {
+              "cee_prepare_ns": null,
+              "synchronize_ns": null,
+              "result_bridge_ns": null,
+              "gameplay_commit_ns": null,
+              "pg_prepare_ns": null,
+              "pg_solve_ns": null,
+              "history_prepare_ns": null,
+              "history_commit_ns": null,
+              "cee_device_prepare_ns": null,
+              "cee_device_commit_ns": null,
+              "electrical_schedule_ns": null,
+              "native_measurement_prepare_ns": null,
+              "native_measurement_sample_ns": null,
+              "extension_prepare_ns": null,
+              "extension_before_ns": null,
+              "extension_after_ns": null,
+              "restoration_schedule_ns": null,
+              "restoration_context_ns": null,
+              "native_measurement_finish_ns": null,
+              "extension_bind_ns": null,
+              "extension_finish_ns": null,
+              "extension_commit_ns": null,
+              "provider_prepare_ns": null,
+              "provider_commit_ns": null,
+              "pg_rhs_ns": null,
+              "native_solve_ns": null,
+              "native_iteration_hooks_ns": null,
+              "native_residual_flush_ns": null
+            },
+            "compatibility_share_upper_bound": null,
+            "heap_peak_bytes": 1442410768,
+            "gc_ms": 92,
+            "native_tick_target_met": false,
+            "reason": "Stable control completed",
+            "practical_20tps_target_met": false,
+            "detailed_timers_enabled": false,
+            "process": {
+              "rss_peak_bytes": 2062741504,
+              "cpu_mean_cores": 1.0294168324765205
+            }
+          },
+          "original_reference_unchanged": true,
+          "isolated_reference_unchanged": true,
+          "finished_utc": "2026-11-10T02:00:03Z"
+        },
+        "summary": {
+          "schema": 1,
+          "completed": true,
+          "passed": true,
+          "protocol_complete": false,
+          "capacity_certified": false,
+          "mode": "control",
+          "tier": 10000,
+          "backend": "NATIVE",
+          "variant": "MIXED",
+          "audit": {
+            "electrical_nodes": 14650,
+            "conductive_edges": 20362,
+            "coupled_edges": 275,
+            "edges": 20637,
+            "connected_systems_ignoring_reference_ground": 1,
+            "optimized_matrix_nodes": 14925,
+            "solver_networks": 1,
+            "actual_backends": [
+              "NATIVE"
+            ]
+          },
+          "samples": 2401,
+          "profiled_ticks": 0,
+          "measured_seconds": 119.8179436,
+          "tps": 20.03038883735274,
+          "mspt": {
+            "mean": 48.65929833402749,
+            "p50": 48.3304,
+            "p95": 57.1939,
+            "p99": 68.631,
+            "maximum": 89.3646
+          },
+          "phase_mean_ms": {
+            "cee_prepare_ns": null,
+            "synchronize_ns": null,
+            "result_bridge_ns": null,
+            "gameplay_commit_ns": null,
+            "pg_prepare_ns": null,
+            "pg_solve_ns": null,
+            "history_prepare_ns": null,
+            "history_commit_ns": null,
+            "cee_device_prepare_ns": null,
+            "cee_device_commit_ns": null,
+            "electrical_schedule_ns": null,
+            "native_measurement_prepare_ns": null,
+            "native_measurement_sample_ns": null,
+            "extension_prepare_ns": null,
+            "extension_before_ns": null,
+            "extension_after_ns": null,
+            "restoration_schedule_ns": null,
+            "restoration_context_ns": null,
+            "native_measurement_finish_ns": null,
+            "extension_bind_ns": null,
+            "extension_finish_ns": null,
+            "extension_commit_ns": null,
+            "provider_prepare_ns": null,
+            "provider_commit_ns": null,
+            "pg_rhs_ns": null,
+            "native_solve_ns": null,
+            "native_iteration_hooks_ns": null,
+            "native_residual_flush_ns": null
+          },
+          "compatibility_share_upper_bound": null,
+          "heap_peak_bytes": 1442410768,
+          "gc_ms": 92,
+          "native_tick_target_met": false,
+          "reason": "Stable control completed",
+          "practical_20tps_target_met": false,
+          "detailed_timers_enabled": false,
+          "process": {
+            "rss_peak_bytes": 2062741504,
+            "cpu_mean_cores": 1.0294168324765205
+          }
+        },
+        "loading": [
+          {
+            "phase": "SETTLE",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 31,
+            "graph_ready_tick": 210,
+            "finish_tick": 329,
+            "chunk_request_seconds": 0.836636,
+            "chunk_loading_seconds": 14.2522413,
+            "graph_recovery_seconds": 13.3658426,
+            "electrical_settling_seconds": 7.1356601,
+            "total_restoration_seconds": 35.59038,
+            "restoration_and_settling_seconds": 34.753744,
+            "healthy_ticks": 100,
+            "queued_roots_at_chunk_ready": 11354,
+            "maximum_pending_roots": 11354,
+            "queue_drained_tick": 210,
+            "queue_drain_seconds": 13.3658426
+          }
+        ],
+        "thirty_second_blocks": [
+          {
+            "block": 0,
+            "ticks": 601,
+            "mean_tick_ms": 49.034822462562396
+          },
+          {
+            "block": 1,
+            "ticks": 600,
+            "mean_tick_ms": 49.909784333333334
+          },
+          {
+            "block": 2,
+            "ticks": 603,
+            "mean_tick_ms": 47.91678092868988
+          },
+          {
+            "block": 3,
+            "ticks": 597,
+            "mean_tick_ms": 47.77446817420436
+          }
+        ],
+        "host": {
+          "sample_period_seconds": 5,
+          "in_window_intervals": 54,
+          "in_window_seconds": 270.7473452091217,
+          "monitored_processes": 208,
+          "competing_game_present": false,
+          "other_cpu_mean_cores": 0.6755029300794719,
+          "other_process_peaks": [
+            {
+              "name": "codex.exe",
+              "identity": "30104:134387027358105490",
+              "peak_cores": 0.7841543303956598,
+              "mean_cores": 0.03208711056165625
+            },
+            {
+              "name": "ChatGPT.exe",
+              "identity": "4272:134387494314195255",
+              "peak_cores": 0.7010021569735966,
+              "mean_cores": 0.015351027714749214
+            },
+            {
+              "name": "ChatGPT.exe",
+              "identity": "13688:134387027373880825",
+              "peak_cores": 0.6861654280831297,
+              "mean_cores": 0.11340138894542182
+            },
+            {
+              "name": "chrome.exe",
+              "identity": "39236:134387493540089343",
+              "peak_cores": 0.6798690290023117,
+              "mean_cores": 0.01483163204019003
+            },
+            {
+              "name": "chrome.exe",
+              "identity": "6512:134387493614567719",
+              "peak_cores": 0.3309668442192563,
+              "mean_cores": 0.027701102643156474
+            },
+            {
+              "name": "chrome.exe",
+              "identity": "35380:134387027576582133",
+              "peak_cores": 0.30562919652397497,
+              "mean_cores": 0.02804736642619593
+            },
+            {
+              "name": "chrome.exe",
+              "identity": "9660:134387040348463883",
+              "peak_cores": 0.29939186598266937,
+              "mean_cores": 0.0077909351183877585
+            },
+            {
+              "name": "ChatGPT.exe",
+              "identity": "28176:134387027293764011",
+              "peak_cores": 0.20226202966554718,
+              "mean_cores": 0.03404927199887983
+            }
+          ],
+          "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+        },
+        "evidence": [
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/experiment.json",
+            "sha256": "3fa6db9da0c0c9b24c760d92792924f02d34da441300bbaacb2ac8b1442e663e"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/launch.json",
+            "sha256": "71e9d777da9f1916ec4cfd72ddf12924012b1bcf73ba1884a37e7f94ac8a204b"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/invocation.json",
+            "sha256": "d1ab222692a2d6a05e592d9e212b6293e6262d84834dd68b6784efbd43ee9c21"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/process.log",
+            "sha256": "b6682394547be3d17538f7c3103e45540766054fc8505fb66f960fc579307b4a"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/runner-exit.json",
+            "sha256": "6856c54703e87d3aeec6cbdb8b08b4cbf03032bc5a0aa4ec273bc0764eb451ee"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/shutdown-save.json",
+            "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/host-metrics.jsonl",
+            "sha256": "7e5fd6425dcebd699d62a75dac0ec173c4bba7c2256dc3462b426c27baf52c48"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/process-metrics.jsonl",
+            "sha256": "c4d363fed0f17b86fa85f010de73b3517374af1f7bd7d214142427a0080a2ea2"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/benchmark/result.json",
+            "sha256": "51a0253153ac4a160b2c9664c2abc4b951bd5296478354a502fb9c829d1c4fbf"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/benchmark/summary.json",
+            "sha256": "c96f9acf384ef8b996f6fbb68bceb1777407e380f6a870b98e2e8de9db5fbb20"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/benchmark/loading-results.json",
+            "sha256": "47e3f3bf5dbf78215d8186858876bb17cc4ad3e82ffede5b90bf41835f622e25"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/benchmark/ticks.csv",
+            "sha256": "24a771cc9f1f21e61ae409f98a4acc2e6da3c7500ea153d94b1f154065632c66"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/benchmark/placement-ticks.csv",
+            "sha256": "0945255c51d2bd870e65b7644bca57f681e6fc1bfbce757a0465cab6e557e4dc"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/benchmark/cpu-topology.json",
+            "sha256": "64e9bd4d2327cb3996bd4a0212292dfc461aec05b45fa9f4db8ccd041a3e393e"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/benchmark/placement-fixed.json",
+            "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/benchmark/placement-restored.json",
+            "sha256": "3bafe0c622640138b9c3eba475cf936525c0775eb01488cdc2531f1b884ffbe1"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/benchmark/graph-start.json",
+            "sha256": "aee674cbb58802eefc855635c03f1c3102e1199bde4e7c7706ff130cb9b45944"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/benchmark/graph-end.json",
+            "sha256": "aee674cbb58802eefc855635c03f1c3102e1199bde4e7c7706ff130cb9b45944"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/benchmark/pre-solve-storage.json",
+            "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/process-affinity.json",
+            "sha256": "d36acff7d21ec2fc748506b83d47f9a2590afc19a93514ac8e816f42bb8d3c7d"
+          },
+          {
+            "path": "local/benchmarks/goal-native-residual-candidate-03/cpu-preflight.json",
+            "sha256": "789e1c5fff7cace7ffc8d8cd41dcbea1e6ccd903616fd1c155b4da01722df32d"
+          }
+        ],
+        "process_affinity": {
+          "pid": 21840,
+          "original_mask": "ffffff",
+          "requested_mask": "fff000",
+          "readback_mask": "fff000",
+          "logical_cpus": [
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23
+          ],
+          "wall_unix": 1794275715.6121247,
+          "scope": "Owned child process immediately after launch; other processes unchanged"
+        },
+        "affinity_readbacks": 287,
+        "stable_cpu_busy_percent": [
+          7.547545163976674,
+          8.876182642423357,
+          24.62114742339165,
+          26.336130923084916,
+          27.993475756842,
+          24.798410193054334,
+          12.994588177009419,
+          12.859382506437411,
+          4.649418224133498,
+          4.744220978364063,
+          9.687568076326384,
+          8.063359328043395,
+          8.100096974919625,
+          10.782311245377002,
+          6.81491681943346,
+          6.030466929203801,
+          8.373970774173893,
+          6.317447182842241,
+          5.216010215906588,
+          7.552189901282918,
+          17.931200307904703,
+          15.707261233984175,
+          8.598661255972049,
+          34.7164171261255
+        ],
+        "stable_cpu_observation_seconds": 115.31741070747375,
+        "cpu_observation_note": "Total per-core load including the benchmark; affinity restricts this process but does not reserve CPUs against other processes.",
+        "percent_ticks_above_50_ms": 29.612661391087048,
+        "compilation_ms": 1356,
+        "loaded_native": {
+          "path": "local/benchmarks/goal-native-residual-candidate-03/.pg-native/wwpg-safety-1/065d9ea713caf7874f35bb9a634b959a676e7b5d772babf72307e294bd11f1dc/libpowergridNative7.dll",
+          "sha256": "065d9ea713caf7874f35bb9a634b959a676e7b5d772babf72307e294bd11f1dc"
+        }
+      }
+    ]
+  },
+  "mean_of_run_metrics_ms": {
+    "control": {
+      "mean": 47.82970246038365,
+      "p50": 47.8972,
+      "p95": 55.7779,
+      "p99": 68.7646,
+      "maximum": 90.7307
+    },
+    "candidate": {
+      "mean": 48.65929833402749,
+      "p50": 48.3304,
+      "p95": 57.1939,
+      "p99": 68.631,
+      "maximum": 89.3646
+    }
+  },
+  "candidate_minus_control_ms": {
+    "mean": 0.8295958736438394,
+    "p50": 0.43319999999999936,
+    "p95": 1.4159999999999968,
+    "p99": -0.13360000000000127,
+    "maximum": -1.366100000000003
+  },
+  "candidate_mean_change_percent": 1.7344784327917917,
+  "retained_inputs": {
+    "path": "local/frozen/prototype-12g/inputs.json",
+    "sha256": "f7f34bbba95a21ef9eea0228b4174fa8b31a6a4e8a230fd01b021b7389a68016"
+  },
+  "retained_build_artifacts": [
+    {
+      "path": "build/libs/wwpg-0.2.7-experimental.wiretree.11.jar",
+      "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9"
+    },
+    {
+      "path": "build/libs/wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+      "sha256": "24d2d70ca4b8895d71e1d74c9fc49b23a1873507f4f1c10627f2443d1fc51636"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "local/native-residual-runtime-02/build.json",
+      "sha256": "251b765fb0d7224144655205e578ad9493171c04fd4b817c15d966a68bb6eb14"
+    },
+    {
+      "path": "local/frozen/native-residual-control-01/inputs.json",
+      "sha256": "5190251bee6471a7284cd2ffea808b712c895f65162321053da5d9accb623527"
+    },
+    {
+      "path": "local/frozen/native-residual-candidate-01/inputs.json",
+      "sha256": "249ed8d0b384f68f6f2c98ed5af9f5f48cf498ffb94428662e78010926f5e151"
+    },
+    {
+      "path": "local/frozen/affinity-helper-02/inputs.json",
+      "sha256": "d31badb5a5aa1db5537f6cf02e5b1178de66eeb45d522f94df8f4bbdbd6e85e1"
+    },
+    {
+      "path": "local/frozen/native-residual-fixtures-01/inputs.json",
+      "sha256": "a62f7ad72cc8afdc00b03822ffbc8d6d42699582bf5cb96aa9443569760c95de"
+    }
+  ],
+  "limitations": [
+    "One ordered pair does not establish repeatability or a consistent 20 TPS result.",
+    "The model-switch interval separated the control and candidate by about an hour; host and thermal conditions are not matched.",
+    "The cache applies to the private native matrix written through reviewed JNI command, clear and resize paths; arbitrary external native memory writes are outside that API.",
+    "Steady timings include cache overhead, and headless loading includes cache construction; setup/refresh costs are not separately isolated here.",
+    "No new client load, full-yard reload, full headless acceptance or graphical acceptance was run.",
+    "The retained prototype-12g gameplay build is unchanged; these native-only jars remain experimental."
+  ]
+}

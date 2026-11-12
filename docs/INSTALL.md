@@ -2,36 +2,45 @@
 
 WWPG lets stationary equipment from **Create: Electro Energetics (CEE)** and **Power Grid (PG)** share power and wires. You can run mixed factories, use either mod's handheld meters, and control equipment with panels and circuit boards.
 
-This guide installs **WWPG 0.2.7**. Start with the [Stationary Test Yard](STATIONARY_YARD.md) if you want ready-built circuits to try. See [supported content](SUPPORT.md) for what works and [current status](STATUS.md) for limitations.
+**WWPG 0.2.8-beta.2 is a prerelease** with the retained control improvements enabled by default. Start with the [Stationary Test Yard](STATIONARY_YARD.md) if you want ready-built circuits to try. See [supported content](SUPPORT.md) for what works and [current status](STATUS.md) for limitations.
 
 ## Required versions
 
-Use this tested combination, with the same mod versions on the server and every client. Use Java 21.
+The release campaign uses this combination, with the same mod versions on the server and every client. Use Java 21.
 
 | Dependency | Version |
 | --- | --- |
 | Minecraft | 1.21.1 |
-| NeoForge | 21.1.231 or 21.1.248 |
-| Create | 6.0.10-280 |
-| Create: Electro Energetics | 1.21.1-1.1.3 or 1.21.1-1.1.4 |
+| NeoForge | 21.1.265 |
+| Create | 6.0.10, published NeoForge 1.21.1 jar |
+| Create: Electro Energetics | 1.21.1-1.1.4 |
 | Power Grid | Minecraft 1.21.1, 0.6.2 |
-| Architectury API | NeoForge 13.0.8 |
-| WWPG | 0.2.7 |
+| Architectury API | NeoForge 13.0.11 |
+| WWPG | 0.2.8-beta.2 |
 
-WWPG 0.2.7 supports NeoForge 21.1.231 and 21.1.248. Its declarations also
-allow newer NeoForge, Create, CEE and Power Grid versions so players can try
-them; CEE 1.1.4 was used for the complete acceptance campaign; 1.1.3 retains its earlier focused compatibility coverage. Other additional versions have not been verified. See
+The primary release campaign targets NeoForge 21.1.265. Compatibility lanes
+retain 21.1.231 and 21.1.248, with their results separate from the complete
+current-runtime run. CEE 1.1.3 and older SDK compile inputs retain separate
+compatibility roles. See
 [Version compatibility](VERSION_COMPATIBILITY.md).
 
 Use the full Create release jar. [The dependency list](../release/artifacts.json) records the exact downloads and checksums. WWPG does not include these other mods; download and install them separately.
 
+The release uses the recorded current supported dependency jars. Its complete
+headless and separate graphical acceptance used CEE 1.1.4 on the primary runtime.
+No experimental JVM flags are needed. Keep PG at **16 electrical substeps** as shown below.
+
 ## Optional computer-control profile
 
-To control circuits with computers, also install **CC;CPG: Pinout 0.2.1** and **CC:Tweaked 1.120.2** on the server and every client. Use the **Stationary Test Yard — Pinout** world for its ready-made programs. These two mods are optional for ordinary WWPG factories; [their download records](../release/optional-artifacts.json) identify the exact files.
+To control circuits with computers, also install **CC;CPG: Pinout 0.2.1** and **CC:Tweaked 1.121.0** (labelled beta by its publisher) on the server and every client. Use the **Stationary Test Yard — Pinout** world for its ready-made programs. These two mods are optional for ordinary WWPG factories; [their download records](../release/optional-artifacts.json) identify the exact files.
+
+CC:Tweaked 1.121.0 requires NeoForge 21.1.265 or newer. The older NeoForge
+compatibility lanes use CC:Tweaked 1.120.2 separately; keep that older dependency
+set together when reproducing an older-loader result.
 
 ## Installation
 
-1. [Download the WWPG jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.7/wwpg-0.2.7.jar).
+1. [Download the WWPG jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.8-beta.2/wwpg-0.2.8-beta.2.jar).
 2. Put it and the required dependency jars in the instance's `mods` directory.
 3. Launch once to generate configuration, then stop the game or server.
 4. In `config/powergrid-server.toml`, edit the existing solver settings to the values below. Keep the other PG solver settings at their defaults.
@@ -43,6 +52,14 @@ multiTicks = 16
 ```
 
 These settings use PG's native power-calculation engine and 16 electrical steps per game tick, matching the release's tests. CEE's `microTicks` setting does not control this timing when WWPG is installed. Stop and restart after changing these settings.
+
+Wire batching, bounded saved-wire restoration and the other retained control
+optimizations are enabled by default. No extra launcher arguments are required.
+The restoration allowance reduces work between yields; it cannot guarantee a
+fixed maximum tick time. The 14,650-node benchmark has no reliable 20 TPS
+certification. The [circuit library](CIRCUIT_LIBRARY.md) describes the twelve
+added release fixtures and their controls.
+
 
 ## Native solver requirements
 
@@ -92,7 +109,7 @@ These diagnostic commands require operator permission level 2:
 
 ## Download a world to try
 
-Download the [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.7/wwpg-0.2.7-example-worlds.zip) and extract it. Its `worlds` folder has one combined `wwpg-0.2.7-stationary-yard.zip`. It includes the ordinary yard and the computer stations. Install CC:Tweaked and Pinout on the server and every client before opening it; ordinary factories still do not require those optional mods.
+Download the [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.8-beta.2/wwpg-0.2.8-beta.2-example-worlds.zip) and extract it. Its `worlds` folder has one combined `wwpg-0.2.8-beta.2-stationary-yard.zip`. It includes the ordinary yard and the computer stations. Install CC:Tweaked and Pinout on the server and every client before opening it; ordinary factories still do not require those optional mods.
 
 Extract the named save folder into your instance's `saves` directory. Goggles and tools are at spawn. Try switching the factory lamps, watching the pump and heater, changing transformer voltages, or operating panels and boards. The [station guide](STATIONARY_YARD.md) explains what to do, what you should see and how to reset each example.
 
@@ -100,14 +117,14 @@ The download keeps connected wires, Nether links and the Pinout edition's comput
 
 ## Large benchmark yard
 
-The same bundle also contains `wwpg-0.2.7-benchmark-14650-nodes.zip`.
+The same bundle also contains `wwpg-0.2.8-beta.2-benchmark-14650-nodes.zip`.
 This is the original heavy mixed workload, separate from the playable Stationary Yard.
 Read the [benchmark guide](BENCHMARK_YARD.md) before opening it. Its actual size is
 14,650 electrical nodes; it is not certified to run at 20 TPS.
 
 ## Extension API Workshop
 
-The [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.7/wwpg-0.2.7-example-worlds.zip) also contains `wwpg-0.2.7-api-workshop.zip` and its Pinout edition in `worlds`. This separate world requires both example add-ons from the bundle's `workshop-mods` folder on the server and every client:
+The [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.8-beta.2/wwpg-0.2.8-beta.2-example-worlds.zip) also contains `wwpg-0.2.8-beta.2-api-workshop.zip` and its Pinout edition in `worlds`. This separate world requires both example add-ons from the bundle's `workshop-mods` folder on the server and every client:
 
 - `wwpg-api-example-1.0.0.jar` — general API machines
 - `wwpg-upstream-api-example-1.0.0.jar` — native panel and board extensions
@@ -124,7 +141,7 @@ To write your own add-on, follow the [developer API guide](EXTENSION_API.md). Pl
 
 ## Historical small example
 
-The older [panel-relay example](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2-example-v2.zip) is a smaller demonstration. Extract `WWPG Example - Panel Demo/` into `saves`; it appears as **WWPG - Panel Relay Demo**. The unchanged download keeps its beta.2 filename and was last verified with 0.1.0-beta.5. Use the current Stationary Yard for the 0.2.7 demonstration.
+The older [panel-relay example](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.1.0-beta.2/wwpg-0.1.0-beta.2-example-v2.zip) is a smaller demonstration. Extract `WWPG Example - Panel Demo/` into `saves`; it appears as **WWPG - Panel Relay Demo**. The unchanged download keeps its beta.2 filename and was last verified with 0.1.0-beta.5. Use the current Stationary Yard for the candidate demonstration.
 
 Spawn is at `(8, 64, 16)`:
 

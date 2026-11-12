@@ -48,6 +48,10 @@ def presentation(data):
     require(data.get('schema') == 1, 'Unknown presentation schema')
     require(re.fullmatch(r'[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+', data.get('repository', '')),
             'Repository must be owner/name')
+    reference = data.get('documentation_ref', 'main')
+    require(isinstance(reference, str) and (reference == 'main' or
+            VERSION_PATTERN.fullmatch(reference) is not None),
+            'Documentation reference must be main or a release version')
     changes = data.get('changes')
     require(isinstance(changes, list) and len(changes) <= 3, 'Use at most three release highlights')
     for field in [data.get('summary'), data.get('installation'), data.get('optional_installation'), *changes]:
@@ -61,6 +65,7 @@ def notes(version, config):
     config = presentation(config)
     runtime, worlds, sdk, verification, checksums = names(version)
     base = 'https://github.com/' + config['repository']
+    guide = base + '/blob/' + config.get('documentation_ref', 'main') + '/docs/'
     download = base + '/releases/download/' + version + '/'
     highlights = ''.join('- ' + change + '\n' for change in config['changes'])
     body = config['summary'] + ('\n\n' + highlights.rstrip() if highlights else '') + '\n\n'
@@ -78,8 +83,8 @@ def notes(version, config):
         ('Inspect test records', verification, 'Verification archive — optional; not needed to play')):
         body += f'| {label} | [{description}]({download}{filename}) |\n'
     body += '\n## Install\n\n' + config['installation'] + '\n\n'
-    body += f'[Installation guide]({base}/blob/main/docs/INSTALL.md) · '
-    body += f'[Supported equipment and limits]({base}/blob/main/docs/SUPPORT.md) · '
+    body += f'[Installation guide]({guide}INSTALL.md) · '
+    body += f'[Supported equipment and limits]({guide}SUPPORT.md) · '
     body += f'[Checksums]({download}{checksums})\n'
     require(len(body.split()) <= MAX_NOTE_WORDS, 'Release notes exceed 250 words; shorten the presentation')
     return body

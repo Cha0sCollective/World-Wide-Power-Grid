@@ -1,0 +1,12 @@
+// Explicit offline instrumentation checks; never part of ordinary acceptance.
+gradle.projectsEvaluated {
+    def p = gradle.rootProject
+    def folder = p.file(p.property('budgetHelperDirectory'))
+    def compile = p.tasks.named('compileBudgetBenchmarkHelper', JavaCompile)
+    p.tasks.register('checkPreparationInstrumentation', JavaExec) {
+        dependsOn compile
+        classpath = p.files(new File(folder, 'classes')) + compile.get().classpath
+        mainClass = 'org.cha0scollective.wwpg.benchmark.PreparationInstrumentationChecks'
+        args p.property('budgetRuntime'), new File(folder, 'instrumentation-checks.json').absolutePath
+    }
+}

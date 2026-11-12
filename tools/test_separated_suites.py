@@ -44,13 +44,13 @@ class SelectionChecks(unittest.TestCase):
             self.assertEqual('wwpg_native_guard' in names,backend=='NATIVE')
 
     def test_pinout_regressions_do_not_launch_twice(self):
-        jobs=suites.plan('full-headless',backends=['NATIVE'],profiles=['PINOUT'],platforms=['windows-latest'],loaders=['21.1.231'])
+        jobs=suites.plan('full-headless',backends=['NATIVE'],profiles=['PINOUT'],platforms=['windows-latest'],loaders=[suites.catalog()['runtime_loader']])
         self.assertEqual(len([j for j in jobs if j.get('group')=='regression']),4)
         self.assertFalse(any(j.get('group')=='pinout' for j in jobs))
         self.assertIn('wwpg_pinout',next(j for j in jobs if j.get('group')=='regression')['namespaces'])
 
     def test_restart_sequences_and_exact_reopens_remain(self):
-        jobs=suites.plan('full-headless',backends=['NATIVE'],profiles=['PINOUT'],platforms=['windows-latest'],loaders=['21.1.231'])
+        jobs=suites.plan('full-headless',backends=['NATIVE'],profiles=['PINOUT'],platforms=['windows-latest'],loaders=[suites.catalog()['runtime_loader']])
         for group in ('yard','workshop'):
             source=[j for j in jobs if j.get('group')==group and 'phase' in j]
             self.assertEqual([j['phase'] for j in source],['SETUP','VERIFY','VERIFY','VERIFY'])
@@ -58,7 +58,7 @@ class SelectionChecks(unittest.TestCase):
         self.assertEqual([j['phase'] for j in jobs if j.get('group')=='pending'],['SETUP','ARM','VERIFY'])
 
     def test_fresh_ownership_fixture_does_not_rewire_saved_chunks_on_restart(self):
-        jobs=[j for j in suites.plan('full-headless',backends=['JAVA'],profiles=['BASE'],platforms=['windows-latest'],loaders=['21.1.231']) if j.get('group')=='api']
+        jobs=[j for j in suites.plan('full-headless',backends=['JAVA'],profiles=['BASE'],platforms=['windows-latest'],loaders=[suites.catalog()['runtime_loader']]) if j.get('group')=='api']
         self.assertEqual([j['phase'] for j in jobs],['SETUP','VERIFY','VERIFY','VERIFY'])
         self.assertIn('wwpg_api_ownership',jobs[0]['namespaces'])
         self.assertTrue(all('wwpg_api_ownership' not in j['namespaces'] for j in jobs[1:]))
@@ -68,6 +68,19 @@ class SelectionChecks(unittest.TestCase):
         jobs=suites.plan('full-headless')
         self.assertTrue(all(j['profile']=='PINOUT' for j in jobs if j.get('group','').startswith('yard')))
         self.assertTrue(all(j['profile']=='BASE' for j in jobs if j.get('operation')=='reference'))
+
+    def test_current_runtime_gets_complete_world_and_circuit_coverage(self):
+        current=suites.catalog()['runtime_loader'];jobs=suites.plan('full-headless')
+        self.assertEqual(current,suites.catalog()['loaders'][-1])
+        self.assertTrue(all(j['loader']==current for j in jobs if j.get('operation')=='export'))
+        circuits=[j for j in jobs if 'circuit' in j]
+        self.assertEqual(len(circuits),12*2*2*2)
+        self.assertEqual({j['loader'] for j in circuits},{current})
+        self.assertEqual(len({j['circuit'] for j in circuits}),12)
+        for job in circuits:
+            args,directory=suites.command(job,{'version':'TEST_ONLY','artifacts':{r:{'path':r+'.jar'} for r in suites.ROLES}},Path('scratch'))
+            self.assertIn('-PtestCircuit='+job['circuit'],args)
+            self.assertEqual(directory.name,'circuit-'+job['circuit'])
 
     def test_focused_requires_scope_and_does_not_expand(self):
         with self.assertRaisesRegex(ValueError,'--group'):suites.plan('focused')
@@ -152,7 +165,7 @@ class EvidenceChecks(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'complete'):evidence.validate_job(actual,expected,{},self.base)
 
     def passing_headless_fragment(self):
-        job=suites.plan('focused',['safety'],['JAVA'],['BASE'],['21.1.231'],['windows-latest'])[0]
+        job=suites.plan('focused',['safety'],['JAVA'],['BASE'],[suites.catalog()['runtime_loader']],['windows-latest'])[0]
         artifacts={role:self.file(role+'.jar','TEST_ONLY '+role) for role in suites.ROLES}
         from zipfile import ZipFile
         runtime=self.base/'runtime.jar'
@@ -161,7 +174,7 @@ class EvidenceChecks(unittest.TestCase):
         artifacts['runtime']=suites.descriptor(runtime)
         hashes={role:item['sha256'] for role,item in artifacts.items()}
         proof=dict(completed='actual completion',required_tests_passed=50,profile='BASE',backend='JAVA',
-            sha256=hashes['runtime'],phase='SETUP',neoforge='21.1.231',namespaces=','.join(job['namespaces']),
+            sha256=hashes['runtime'],phase='SETUP',neoforge=job['loader'],namespaces=','.join(job['namespaces']),
             addon_artifacts={r:{'sha256':hashes[r]} for r in ('example','upstream_example')})
         log='GAME TESTS COMPLETE\nAll 50 required tests passed\nAll dimensions are saved\nWWPG_TEST_BACKEND_CONFIG: requested=JAVA, configured=JAVA\n'
         actual=dict(job,status='passed',exit_code=0,log=self.file('log',log),proof=self.file('proof.json',json.dumps(proof)))
@@ -178,7 +191,7 @@ class EvidenceChecks(unittest.TestCase):
 
     def test_separated_process_proof_must_match_the_companion(self):
         _,report,proof=self.passing_headless_fragment()
-        expected=suites.plan('focused',['safety'],['JAVA'],['BASE'],['21.1.231'],['windows-latest'])[0]
+        expected=suites.plan('focused',['safety'],['JAVA'],['BASE'],[suites.catalog()['runtime_loader']],['windows-latest'])[0]
         report['artifact_hashes']['gametest']='b'*64
         actual=report['jobs'][0]
         with self.assertRaisesRegex(ValueError,'companion differs'):
@@ -226,7 +239,7 @@ class EvidenceChecks(unittest.TestCase):
         report['status']='failed';path.write_text(json.dumps(report))
         with patch.object(evidence,'plan',return_value=[safety,starter]),patch('subprocess.check_output',return_value=''):
             result=evidence.continue_headless(path,self.base/'inputs.json',self.base/'planned',
-                'TEST_ONLY starter failure',None,'windows-latest/21.1.231/JAVA/BASE',plan_only=True)
+                'TEST_ONLY starter failure',None,'windows-latest/'+suites.catalog()['runtime_loader']+'/JAVA/BASE',plan_only=True)
         self.assertEqual(result['retained_jobs'],[first['id']])
         self.assertEqual(result['jobs'],[starter])
         self.assertEqual(result['jobs'][0]['loader'],'21.1.248')
@@ -253,7 +266,7 @@ class EvidenceChecks(unittest.TestCase):
         with patch.object(evidence,'plan',return_value=[job]),patch.object(suites,'execute') as execute,patch('subprocess.check_output',return_value=''):
             output=self.base/'fresh'
             evidence.continue_headless(missing,self.base/'inputs.json',output,'TEST_ONLY missing evidence',None,
-                'windows-latest/21.1.231/JAVA/BASE',True)
+                'windows-latest/'+suites.catalog()['runtime_loader']+'/JAVA/BASE',True)
             self.assertEqual(execute.call_args.args[0],[job])
             self.assertFalse((output/'retained.json').exists())
             self.assertFalse(suites.read(output/'index.json')['original_report_available'])

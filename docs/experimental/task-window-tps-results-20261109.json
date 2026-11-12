@@ -1,0 +1,469 @@
+{
+  "schema": 1,
+  "full_suite": false,
+  "runs": [
+    {
+      "name": "goal-task-window-tps-01",
+      "protocol": {
+        "name": "goal-task-window-tps-01",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-task-window-tps-01\\mods\\wwpg-0.2.7-experimental.wiretree.7.jar",
+          "sha256": "31efbb0099531a7a8db7aa0f52deb80b040080bada825dd33bc339560b85c7a1",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-08a\\wwpg-0.2.7-experimental.wiretree.7.jar"
+        },
+        "scope": "Focused 120-second warmup and 120-second stable control; not full capacity acceptance",
+        "copied_reference": true,
+        "sixteen_substeps": true,
+        "full_suite": false,
+        "batch": true,
+        "verify_batch": false,
+        "property_batch": true,
+        "detailed": false,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cpu_affinity_mask": "fff000",
+        "server_affinity_mask": null,
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-task-window-tps-01\\mods\\wwpg-benchmark-0.1.0-affinity.jar",
+          "sha256": "56434c77e56c6361aad1b54733eac5573b97bd24d52ae42b0d330216da7a34cb"
+        },
+        "substep_jfr": false,
+        "started_utc": "2026-11-09T16:16:18Z",
+        "validation": {
+          "passed": true,
+          "full_suite": false,
+          "capacity_certified": false,
+          "stable_ticks": 2400,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "sixteen_substeps": true,
+          "topology_unchanged": true,
+          "normal_shutdown": true,
+          "batch_execution": {
+            "plans": 1,
+            "unsupported": 0,
+            "steps": 78767,
+            "contributions": 1560453037,
+            "voltage_reads": 1153936550,
+            "scalar_fallbacks": 0,
+            "largest_plain_batch": 10368,
+            "property_contributions": 743796781,
+            "property_scalar_fallbacks": 0,
+            "largest_property_batch": 9443
+          },
+          "bitwise_verification": false
+        },
+        "task_window": {
+          "budgetMillis": 2,
+          "maxTasks": 512,
+          "windows": 210,
+          "completed": 3902,
+          "emptyPolls": 1145837,
+          "maxCompleted": 395,
+          "maxWindowNanos": 2084400,
+          "maxPollNanos": 1068100,
+          "probes": 514,
+          "maxProbeNanos": 774900
+        },
+        "tree_priority_selections": 200,
+        "summary": {
+          "schema": 1,
+          "completed": true,
+          "passed": true,
+          "protocol_complete": false,
+          "capacity_certified": false,
+          "mode": "control",
+          "tier": 10000,
+          "backend": "NATIVE",
+          "variant": "MIXED",
+          "audit": {
+            "electrical_nodes": 14650,
+            "conductive_edges": 20362,
+            "coupled_edges": 275,
+            "edges": 20637,
+            "connected_systems_ignoring_reference_ground": 1,
+            "optimized_matrix_nodes": 14925,
+            "solver_networks": 1,
+            "actual_backends": [
+              "NATIVE"
+            ]
+          },
+          "samples": 2400,
+          "profiled_ticks": 0,
+          "measured_seconds": 119.7095274,
+          "tps": 20.040176016934137,
+          "mspt": {
+            "mean": 48.71607095833333,
+            "p50": 48.2533,
+            "p95": 56.0272,
+            "p99": 60.8144,
+            "maximum": 78.3553
+          },
+          "phase_mean_ms": {
+            "cee_prepare_ns": null,
+            "synchronize_ns": null,
+            "result_bridge_ns": null,
+            "gameplay_commit_ns": null,
+            "pg_prepare_ns": null,
+            "pg_solve_ns": null,
+            "history_prepare_ns": null,
+            "history_commit_ns": null,
+            "cee_device_prepare_ns": null,
+            "cee_device_commit_ns": null,
+            "electrical_schedule_ns": null,
+            "native_measurement_prepare_ns": null,
+            "native_measurement_sample_ns": null,
+            "extension_prepare_ns": null,
+            "extension_before_ns": null,
+            "extension_after_ns": null,
+            "restoration_schedule_ns": null,
+            "restoration_context_ns": null,
+            "native_measurement_finish_ns": null,
+            "extension_bind_ns": null,
+            "extension_finish_ns": null,
+            "extension_commit_ns": null,
+            "provider_prepare_ns": null,
+            "provider_commit_ns": null,
+            "pg_rhs_ns": null,
+            "native_solve_ns": null,
+            "native_iteration_hooks_ns": null,
+            "native_residual_flush_ns": null
+          },
+          "compatibility_share_upper_bound": null,
+          "heap_peak_bytes": 1391908176,
+          "gc_ms": 146,
+          "native_tick_target_met": false,
+          "reason": "Stable control completed",
+          "practical_20tps_target_met": false,
+          "detailed_timers_enabled": false,
+          "process": {
+            "rss_peak_bytes": 2014306304,
+            "cpu_mean_cores": 1.1031796473867035
+          }
+        },
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T16:21:05Z"
+      },
+      "summary": {
+        "schema": 1,
+        "completed": true,
+        "passed": true,
+        "protocol_complete": false,
+        "capacity_certified": false,
+        "mode": "control",
+        "tier": 10000,
+        "backend": "NATIVE",
+        "variant": "MIXED",
+        "audit": {
+          "electrical_nodes": 14650,
+          "conductive_edges": 20362,
+          "coupled_edges": 275,
+          "edges": 20637,
+          "connected_systems_ignoring_reference_ground": 1,
+          "optimized_matrix_nodes": 14925,
+          "solver_networks": 1,
+          "actual_backends": [
+            "NATIVE"
+          ]
+        },
+        "samples": 2400,
+        "profiled_ticks": 0,
+        "measured_seconds": 119.7095274,
+        "tps": 20.040176016934137,
+        "mspt": {
+          "mean": 48.71607095833333,
+          "p50": 48.2533,
+          "p95": 56.0272,
+          "p99": 60.8144,
+          "maximum": 78.3553
+        },
+        "phase_mean_ms": {
+          "cee_prepare_ns": null,
+          "synchronize_ns": null,
+          "result_bridge_ns": null,
+          "gameplay_commit_ns": null,
+          "pg_prepare_ns": null,
+          "pg_solve_ns": null,
+          "history_prepare_ns": null,
+          "history_commit_ns": null,
+          "cee_device_prepare_ns": null,
+          "cee_device_commit_ns": null,
+          "electrical_schedule_ns": null,
+          "native_measurement_prepare_ns": null,
+          "native_measurement_sample_ns": null,
+          "extension_prepare_ns": null,
+          "extension_before_ns": null,
+          "extension_after_ns": null,
+          "restoration_schedule_ns": null,
+          "restoration_context_ns": null,
+          "native_measurement_finish_ns": null,
+          "extension_bind_ns": null,
+          "extension_finish_ns": null,
+          "extension_commit_ns": null,
+          "provider_prepare_ns": null,
+          "provider_commit_ns": null,
+          "pg_rhs_ns": null,
+          "native_solve_ns": null,
+          "native_iteration_hooks_ns": null,
+          "native_residual_flush_ns": null
+        },
+        "compatibility_share_upper_bound": null,
+        "heap_peak_bytes": 1391908176,
+        "gc_ms": 146,
+        "native_tick_target_met": false,
+        "reason": "Stable control completed",
+        "practical_20tps_target_met": false,
+        "detailed_timers_enabled": false,
+        "process": {
+          "rss_peak_bytes": 2014306304,
+          "cpu_mean_cores": 1.1031796473867035
+        }
+      },
+      "loading": [
+        {
+          "phase": "SETTLE",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 32,
+          "graph_ready_tick": 212,
+          "finish_tick": 331,
+          "chunk_request_seconds": 0.8278289,
+          "chunk_loading_seconds": 12.8921222,
+          "graph_recovery_seconds": 9.2327285,
+          "electrical_settling_seconds": 6.1371409,
+          "total_restoration_seconds": 29.0898205,
+          "restoration_and_settling_seconds": 28.2619916,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 11346,
+          "maximum_pending_roots": 11346,
+          "queue_drained_tick": 212,
+          "queue_drain_seconds": 9.2327285
+        }
+      ],
+      "thirty_second_blocks": [
+        {
+          "block": 0,
+          "ticks": 605,
+          "mean_tick_ms": 48.83624082644628
+        },
+        {
+          "block": 1,
+          "ticks": 599,
+          "mean_tick_ms": 48.87744240400667
+        },
+        {
+          "block": 2,
+          "ticks": 601,
+          "mean_tick_ms": 48.7014309484193
+        },
+        {
+          "block": 3,
+          "ticks": 595,
+          "mean_tick_ms": 48.446212773109245
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 52,
+        "in_window_seconds": 260.683452129364,
+        "monitored_processes": 190,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.2905223725609436,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "13688:134387027373880825",
+            "peak_cores": 0.3023939287861164,
+            "mean_cores": 0.06419423581860338
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "5948:134387027096006899",
+            "peak_cores": 0.15596958745358705,
+            "mean_cores": 0.08930850734801031
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28732:134387027298932907",
+            "peak_cores": 0.06864813185390027,
+            "mean_cores": 0.0376414379963426
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "6028:134387027037888757",
+            "peak_cores": 0.05916870887342937,
+            "mean_cores": 0.0238555610231598
+          },
+          {
+            "name": "codex.exe",
+            "identity": "30104:134387027358105490",
+            "peak_cores": 0.04673667215154427,
+            "mean_cores": 0.0048550262383817685
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "32208:134387027482132387",
+            "peak_cores": 0.037390210543867076,
+            "mean_cores": 0.0008990789330336608
+          },
+          {
+            "name": "msrdc.exe",
+            "identity": "33188:134387148242282389",
+            "peak_cores": 0.034313309239789154,
+            "mean_cores": 0.0006593245508913513
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28176:134387027293764011",
+            "peak_cores": 0.03429209501698227,
+            "mean_cores": 0.008631157757123144
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/goal-task-window-tps-01/experiment.json",
+          "sha256": "9606aa4f9bcd81281b05358f33977d2006e1bc07906927d177f0467231cc1a76"
+        },
+        {
+          "path": "local/benchmarks/goal-task-window-tps-01/launch.json",
+          "sha256": "eeaa5abf879c16cd5dcbbf9d6f55e1bea803d4a71c77b110693f3fa30dbe5b3c"
+        },
+        {
+          "path": "local/benchmarks/goal-task-window-tps-01/invocation.json",
+          "sha256": "ea726476ec23f18f5562cf227a697a2948c0bced9668111b4bc95eccbf868bf6"
+        },
+        {
+          "path": "local/benchmarks/goal-task-window-tps-01/process.log",
+          "sha256": "d5d07454489581b6192d378a23ee54cdbfa5b314d98fccd2b601ce462437c783"
+        },
+        {
+          "path": "local/benchmarks/goal-task-window-tps-01/runner-exit.json",
+          "sha256": "ecc0557184db366e38e3c06ac8de6ed841619e8a70475ac4884d33edd617835b"
+        },
+        {
+          "path": "local/benchmarks/goal-task-window-tps-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/goal-task-window-tps-01/host-metrics.jsonl",
+          "sha256": "10a7bac62315007bce515fc9785d5be0c1a9fba7198b2f859b953b181fddb938"
+        },
+        {
+          "path": "local/benchmarks/goal-task-window-tps-01/process-metrics.jsonl",
+          "sha256": "e5b14687a0d5a812a1ace427ea057d62644a5774997fb0c9c3652351a704d3d1"
+        },
+        {
+          "path": "local/benchmarks/goal-task-window-tps-01/benchmark/result.json",
+          "sha256": "97cca5c264a2d2fa793f33d718e7b05ccc03519f11fdc9ddf1f567c2f87c068f"
+        },
+        {
+          "path": "local/benchmarks/goal-task-window-tps-01/benchmark/summary.json",
+          "sha256": "01b19156f3a7472623e30fc88b64e53f7caea106389a62162192ef7984008cc5"
+        },
+        {
+          "path": "local/benchmarks/goal-task-window-tps-01/benchmark/loading-results.json",
+          "sha256": "de1496120e210434f0e7d1c350acfdb0bc6fd507fb1c2880bdf29b868ba91a55"
+        },
+        {
+          "path": "local/benchmarks/goal-task-window-tps-01/benchmark/ticks.csv",
+          "sha256": "3c58f2878e5b0bbe25eb233d53d3a7d932dab333493e7a1a2ecfac0206c2fc6a"
+        },
+        {
+          "path": "local/benchmarks/goal-task-window-tps-01/benchmark/placement-ticks.csv",
+          "sha256": "69084e0dbb1beac8a43d2985f87d5c26d3fbf1a5dbd978309e714e9b038272da"
+        },
+        {
+          "path": "local/benchmarks/goal-task-window-tps-01/benchmark/cpu-topology.json",
+          "sha256": "7f2155cc2554fec57ea7b4e0b8c66ea4f0f03a5489f2c4516bca257e3cd4e8f2"
+        },
+        {
+          "path": "local/benchmarks/goal-task-window-tps-01/benchmark/placement-fixed.json",
+          "sha256": "f39e516534daabb39e6a5305b5c802dee926ac68a80c1f4de97c30d3406bcc22"
+        },
+        {
+          "path": "local/benchmarks/goal-task-window-tps-01/benchmark/placement-restored.json",
+          "sha256": "79eda4bf854b627d63ceaabf49ee8f83ec6d7c08486adcab2df1ea6c62315b9c"
+        },
+        {
+          "path": "local/benchmarks/goal-task-window-tps-01/benchmark/graph-start.json",
+          "sha256": "bc0c6394b0ea281d5cc0ea7c91c50b6b45bce46486327e60c3b40adbbebae8f7"
+        },
+        {
+          "path": "local/benchmarks/goal-task-window-tps-01/benchmark/graph-end.json",
+          "sha256": "bc0c6394b0ea281d5cc0ea7c91c50b6b45bce46486327e60c3b40adbbebae8f7"
+        },
+        {
+          "path": "local/benchmarks/goal-task-window-tps-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/goal-task-window-tps-01/process-affinity.json",
+          "sha256": "c9e547a49afa65c23a31973336a643d2bae6c9724bac1fc6feeab537872f5274"
+        }
+      ],
+      "process_affinity": {
+        "pid": 35684,
+        "original_mask": "ffffff",
+        "requested_mask": "fff000",
+        "readback_mask": "fff000",
+        "logical_cpus": [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "wall_unix": 1794240984.9486997,
+        "scope": "Owned child process immediately after launch; other processes unchanged"
+      },
+      "affinity_readbacks": 280,
+      "stable_cpu_busy_percent": [
+        4.4992142441393295,
+        5.922382991895118,
+        21.640352751295964,
+        21.738471246082085,
+        18.581957774809936,
+        22.591308225396553,
+        8.293552927694611,
+        8.983458017080235,
+        2.16747716314313,
+        2.438997722962157,
+        5.731660775910776,
+        5.04147736502702,
+        9.405895975428928,
+        12.842003031083614,
+        57.07320592920008,
+        7.541675391496659,
+        4.932857806952896,
+        6.300719547611212,
+        6.287682904408021,
+        5.805978937984041,
+        1.2324850756587529,
+        1.9247949849638393,
+        6.775049288742965,
+        4.811673408495857
+      ],
+      "stable_cpu_observation_seconds": 115.30750775337219,
+      "cpu_observation_note": "Total per-core load including the benchmark; affinity restricts this process but does not reserve CPUs against other processes."
+    }
+  ],
+  "note": "Each run records its runtime, helper, CPU placement and host evidence. These are focused headless observations, not full acceptance or rendered-world evidence."
+}

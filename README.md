@@ -2,9 +2,9 @@
 
 **WWPG lets Create: Electro Energetics (CEE) and Power Grid (PG) work together in the same stationary factory.** Either mod can power the other's supported equipment using their native wires, controls and tools.
 
-**[WWPG 0.2.7](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.7) (stable)** for Minecraft 1.21.1 and NeoForge. Follow [installation](docs/INSTALL.md) for the required mod versions and settings. Add-on developers can also use the separately versioned **extension API 1.0.0**.
+**[WWPG 0.2.8-beta.2](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8-beta.2) (prerelease)** for Minecraft 1.21.1 and NeoForge. Follow [installation](docs/INSTALL.md) for the required mods and settings. The previous stable release remains [0.2.7](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.7). Extension API **1.0.0** is unchanged.
 
-0.2.7 stabilizes supported self-excited PG generators while retaining their original clutch response, and fixes PG multimeter readings on assembled transformer terminals. Existing CEE 1.1.3/1.1.4, CIO, panel, wire and meter support remains available. Tests and fixtures stay in a separate companion jar; players install the gameplay jar alone. The 14,650-node benchmark has not reached 20 TPS.
+0.2.8-beta.2 enables wire batching, bounded restoration and the retained control improvements by default. No experimental JVM flags are required; keep PG at 16 electrical substeps. The release includes regressions for [twelve circuits](docs/CIRCUIT_LIBRARY.md). Beta.2 adds audit corrections for CEE rollback, unsupported endpoints, restoration configuration, native allocation safety and meter input. Its completed acceptance covers 558 headless jobs and 12 real-client scenarios. See the [acceptance record](release/0.2.8-beta.2/ACCEPTANCE.md) for the original motor test finding and coverage limits.
 
 ## What you can do
 
@@ -12,16 +12,16 @@
 - Build transformer and variac circuits, regulate voltage, use FE converters and send power through stationary Nether-transformer links.
 - Wire, measure, switch and protect mixed circuits. Both handheld meters work across the two wire systems.
 - Build and reuse saved circuit-board designs, use all 28 built-in PG board components and all 11 built-in CEE panel attachments, and repair native bulbs and fuses.
-- Optionally add CC;CPG: Pinout 0.2.1 and CC:Tweaked 1.120.2 to control eight pins and read signed voltages with the add-on's native Lua API.
+- Optionally add CC;CPG: Pinout 0.2.1 and CC:Tweaked 1.121.0 to control eight pins and read signed voltages with the add-on's native Lua API.
 - Develop new stationary machines and instruments with the public API, or try its example machines, storage, panel attachment and board component in the API Workshop.
 
 The [support list](docs/SUPPORT.md) gives the equipment and workflows covered by this release. It also explains each mod's built-in limits.
 
 ## Try the worlds
 
-Open the combined **Stationary Test Yard — Pinout** from the [release downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.7). It includes the ordinary yard and the computer stations, and requires CC:Tweaked and Pinout. Each supported native behavior has a checked exhibit or assembly/repair workflow. Signs and books explain controls, readings and resets. Goggles and tools are at spawn. The [yard guide](docs/STATIONARY_YARD.md) points to transformers, gauges, boards, panels, storage, processing and the playable Nether route.
+Open the combined **Stationary Test Yard — Pinout** from the [release downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8-beta.2). It includes the ordinary yard and the computer stations, and requires CC:Tweaked and Pinout. Each supported native behavior has a checked exhibit or assembly/repair workflow. Signs and books explain controls, readings and resets. Goggles and tools are at spawn. The [yard guide](docs/STATIONARY_YARD.md) points to transformers, gauges, boards, panels, storage, processing and the playable Nether route.
 
-The three demonstration saves, the original [14,650-node benchmark](docs/BENCHMARK_YARD.md) and the optional Workshop mods are in **wwpg-0.2.7-example-worlds.zip**.
+The three demonstration saves, the original [14,650-node benchmark](docs/BENCHMARK_YARD.md) and the optional Workshop mods are in **wwpg-0.2.8-beta.2-example-worlds.zip**.
 Players can download the mod jar directly; the developer SDK and verification
 archive are separate optional downloads.
 
@@ -47,7 +47,7 @@ PG's native solver is the default on Windows and Linux. WWPG supplies its missin
 | Anyone checking coverage | [Supported content](docs/SUPPORT.md) and [current status](docs/STATUS.md) |
 | Maintainers | [Development and test commands](docs/DEVELOPMENT.md), [contributing](CONTRIBUTING.md) |
 | Add-on developers | [Extension API contract and SDK](docs/EXTENSION_API.md), [independent examples](examples/), [API Workshop](docs/EXTENSION_API_WORKSHOP.md) |
-| Reviewers checking release evidence | [Current acceptance](release/0.2.7/verification.json), [release records](release/README.md), [changelog](CHANGELOG.md) |
+| Reviewers checking release evidence | [Current acceptance](release/0.2.8-beta.2/ACCEPTANCE.md), [release records](release/README.md), [changelog](CHANGELOG.md) |
 | Readers evaluating the long-term design | [Product specification](SPEC.md) |
 
 The [documentation index](docs/README.md) separates current guides, developer references and archived release history.

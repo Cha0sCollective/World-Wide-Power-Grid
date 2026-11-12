@@ -42,6 +42,14 @@ This policy applies to future campaigns. Preserve published records with their
 actual dependency versions; do not relabel or rerun them automatically. Full
 headless and graphical runs still require their existing explicit authorization.
 
+The catalog's `runtime_loader` selects the primary full-release environment.
+Every headless group, world export and reopen runs there. Other entries in
+`loaders` retain the smaller compatibility selection; the final catalog loader
+is also used by the graphical lane and independent starter. The twelve
+`circuit-*` groups each launch one assembly in a fresh process at sixteen
+substeps; their functional/reconstruction coverage is described in the
+[circuit library](CIRCUIT_LIBRARY.md).
+
 ## Inspect a selection first
 
 Use Java 21 and Python from the repository root. All `plan` commands are read-only:

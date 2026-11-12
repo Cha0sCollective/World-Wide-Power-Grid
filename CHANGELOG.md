@@ -2,6 +2,50 @@
 
 ## Unreleased
 
+## 0.2.8-beta.2 — 12 November 2026 (prerelease)
+
+- Restore rejected CEE dynamics coherently, including alternator windings that
+  share rotor state. Isolate unsupported addon endpoints before callbacks while
+  keeping healthy circuits available.
+- Fall back safely when scoped restoration cannot use bounded wire batching.
+  Reject nonfinite multimeter input without changing the previous selection.
+- Guard native matrix allocation, growth and cleanup on Windows and Linux;
+  reject duplicate archive entries in acceptance comparisons. Preserve API 1.0.0,
+  saves, electrical equations and the published generator timing correction.
+
+Completed qualification covers 558 headless jobs and 12 separate graphical
+scenarios on the frozen beta.2 runtime. Publication reuses those passing records.
+The historical Linux motor assertion remains unexplained; passing repeats do not
+close it.
+
+## 0.2.8-beta1 — 10 November 2026 (prerelease)
+
+- Enable retained PG/CEE wire batching, bounded and prioritized restoration,
+  extra chunk-loading work, reviewed geometry reuse and scoped holds by default.
+  Preserve serial electrical substeps and conservative fallbacks.
+- Retain exact native reductions and matrix/factor lifetime safeguards on both
+  Windows and Linux. Add twelve circuit fixtures using thirteen schematic inputs.
+- Promote the tested rc.1 build through version-only artifact comparisons. Carry
+  forward 542-job headless coverage and all 12 graphical scenarios under their
+  actual source identities; preserve the unexplained original motor assertion
+  failure and its passing unchanged repeat. API 1.0.0 is unchanged.
+
+### 0.2.8-rc.1 candidate (historical campaign)
+
+- Promote the experimental control's plain-wire and CEE property-source batching,
+  saved wire-tree restoration queue, cooperative work budget, unresolved-wire
+  priority, extra loading service, state-only geometry reuse and scoped holds.
+  Preserve serial electrical substeps and conservative fallbacks.
+- Apply exact native finite/max reductions and refresh matrix storage/factor
+  ownership after fitting callbacks on both Windows and Linux. Preserve rejection,
+  rollback and numerical stopping criteria. Exclude the rejected residual cache
+  and packed-result worker prototypes.
+- Add twelve circuit assemblies to the release regression catalog, preserving
+  thirteen schematic inputs and their original operation sequences at sixteen
+  substeps. Record actual runtime dependency versions and hashes during tests.
+- Prepare current runtime dependencies separately from minimum SDK compile inputs
+  and older loader compatibility lanes. Release acceptance remains pending.
+
 ## 0.2.7 — 6 November 2026
 
 - Stabilize self-excited PG generators by solving rotor response and field excitation together during electrical substeps. Preserve PG's original clutch timing, including carbon-pile operating points, and verify transformer, variac and other excitation controls on both solvers.

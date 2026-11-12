@@ -1,0 +1,3358 @@
+{
+  "schema": 1,
+  "full_suite": false,
+  "inputs": "local/frozen/prototype-12g/inputs.json",
+  "runtime": {
+    "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar",
+    "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9"
+  },
+  "source_hashes_verified": 450,
+  "checks": [
+    {
+      "name": "scoped-native-07",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_scope,wwpg_tree_budget",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 1,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\scoped-native-07\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_scope,wwpg_tree_budget",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=1",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true",
+          "-PtestScopedRestoration=true",
+          "-PtestTerminalBookkeeping=false",
+          "-PtestTerminalKeyLookup=false",
+          "-PtestApiAddon=true",
+          "-PtestExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+          "-PtestUpstreamExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar",
+            "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+            "sha256": "24d2d70ca4b8895d71e1d74c9fc49b23a1873507f4f1c10627f2443d1fc51636"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "scoped_restoration": true,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": false,
+        "addon_artifacts": {
+          "example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+            "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef"
+          },
+          "upstream_example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar",
+            "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11"
+          }
+        },
+        "addon_inputs": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\inputs.json",
+          "sha256": "a82ef707180cf85a31e626df9a076e5df4c3c6d13036547aae3dce2e9ed6ca2e"
+        },
+        "exit_code": 0,
+        "required_tests_passed": 9,
+        "artifacts_unchanged": true,
+        "passed": true,
+        "addons_unchanged": true,
+        "addon_classpath_verified": true,
+        "terminal_execution": null,
+        "terminal_keys": null,
+        "scope_execution": {
+          "snapshots": 1287,
+          "membershipChecks": 89084,
+          "savedParts": 47829,
+          "nodeBindings": 292641,
+          "seedEndpoints": 68696,
+          "heldNetworks": 1241,
+          "fallbackWorlds": 1,
+          "totalNanos": 177175400,
+          "maxNanos": 8437100,
+          "topologyPasses": 129,
+          "topologyNanos": 11932200,
+          "maxTopologyNanos": 2385700
+        }
+      }
+    },
+    {
+      "name": "scoped-java-02",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_scope,wwpg_tree_budget",
+        "backend": "JAVA",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 1,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\scoped-java-02\\server",
+          "-PtestBackend=JAVA",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_scope,wwpg_tree_budget",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=1",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true",
+          "-PtestScopedRestoration=true",
+          "-PtestTerminalBookkeeping=false",
+          "-PtestTerminalKeyLookup=false",
+          "-PtestApiAddon=true",
+          "-PtestExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+          "-PtestUpstreamExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar",
+            "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+            "sha256": "24d2d70ca4b8895d71e1d74c9fc49b23a1873507f4f1c10627f2443d1fc51636"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "scoped_restoration": true,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": false,
+        "addon_artifacts": {
+          "example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+            "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef"
+          },
+          "upstream_example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar",
+            "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11"
+          }
+        },
+        "addon_inputs": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\inputs.json",
+          "sha256": "a82ef707180cf85a31e626df9a076e5df4c3c6d13036547aae3dce2e9ed6ca2e"
+        },
+        "exit_code": 0,
+        "required_tests_passed": 9,
+        "artifacts_unchanged": true,
+        "passed": true,
+        "addons_unchanged": true,
+        "addon_classpath_verified": true,
+        "terminal_execution": null,
+        "terminal_keys": null,
+        "scope_execution": {
+          "snapshots": 1287,
+          "membershipChecks": 89480,
+          "savedParts": 47829,
+          "nodeBindings": 292641,
+          "seedEndpoints": 68696,
+          "heldNetworks": 1241,
+          "fallbackWorlds": 1,
+          "totalNanos": 186032000,
+          "maxNanos": 8309700,
+          "topologyPasses": 128,
+          "topologyNanos": 12244900,
+          "maxTopologyNanos": 3432600
+        }
+      }
+    },
+    {
+      "name": "scoped-api-native-01",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_loading,wwpg_api_ownership,wwpg_unload,wwpg_solver_safety",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 1,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\scoped-api-native-01\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_loading,wwpg_api_ownership,wwpg_unload,wwpg_solver_safety",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=1",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true",
+          "-PtestScopedRestoration=true",
+          "-PtestTerminalBookkeeping=false",
+          "-PtestTerminalKeyLookup=false",
+          "-PtestApiAddon=true",
+          "-PtestExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+          "-PtestUpstreamExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar",
+            "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+            "sha256": "24d2d70ca4b8895d71e1d74c9fc49b23a1873507f4f1c10627f2443d1fc51636"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "scoped_restoration": true,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": false,
+        "addon_artifacts": {
+          "example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+            "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef"
+          },
+          "upstream_example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar",
+            "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11"
+          }
+        },
+        "addon_inputs": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\inputs.json",
+          "sha256": "a82ef707180cf85a31e626df9a076e5df4c3c6d13036547aae3dce2e9ed6ca2e"
+        },
+        "exit_code": 0,
+        "required_tests_passed": 32,
+        "artifacts_unchanged": true,
+        "passed": true,
+        "addons_unchanged": true,
+        "addon_classpath_verified": true,
+        "terminal_execution": null,
+        "terminal_keys": null,
+        "scope_execution": {
+          "snapshots": 0,
+          "membershipChecks": 0,
+          "savedParts": 0,
+          "nodeBindings": 0,
+          "seedEndpoints": 0,
+          "heldNetworks": 0,
+          "fallbackWorlds": 0,
+          "totalNanos": 0,
+          "maxNanos": 0,
+          "topologyPasses": 201,
+          "topologyNanos": 17309400,
+          "maxTopologyNanos": 1815100
+        }
+      }
+    },
+    {
+      "name": "scoped-budget-native-02",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery,wwpg_tree_budget",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 1,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\scoped-budget-native-02\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery,wwpg_tree_budget",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=1",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true",
+          "-PtestScopedRestoration=true",
+          "-PtestTerminalBookkeeping=false",
+          "-PtestTerminalKeyLookup=false"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar",
+            "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+            "sha256": "24d2d70ca4b8895d71e1d74c9fc49b23a1873507f4f1c10627f2443d1fc51636"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "scoped_restoration": true,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": false,
+        "addon_artifacts": {},
+        "exit_code": 0,
+        "required_tests_passed": 38,
+        "artifacts_unchanged": true,
+        "passed": true,
+        "terminal_execution": null,
+        "terminal_keys": null,
+        "scope_execution": {
+          "snapshots": 158,
+          "membershipChecks": 16506,
+          "savedParts": 3152,
+          "nodeBindings": 47870,
+          "seedEndpoints": 2740,
+          "heldNetworks": 170,
+          "fallbackWorlds": 0,
+          "totalNanos": 29926500,
+          "maxNanos": 5842000,
+          "topologyPasses": 263,
+          "topologyNanos": 17086500,
+          "maxTopologyNanos": 1592800
+        }
+      }
+    },
+    {
+      "name": "scoped-budget-off-01",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery,wwpg_tree_budget",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 1,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\scoped-budget-off-01\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery,wwpg_tree_budget",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=1",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true",
+          "-PtestScopedRestoration=false",
+          "-PtestTerminalBookkeeping=false",
+          "-PtestTerminalKeyLookup=false"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar",
+            "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+            "sha256": "24d2d70ca4b8895d71e1d74c9fc49b23a1873507f4f1c10627f2443d1fc51636"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "scoped_restoration": false,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": false,
+        "addon_artifacts": {},
+        "exit_code": 0,
+        "required_tests_passed": 38,
+        "artifacts_unchanged": true,
+        "passed": true,
+        "terminal_execution": null,
+        "terminal_keys": null,
+        "scope_execution": null
+      }
+    }
+  ],
+  "focused_checks_passed": 126,
+  "unit_tests": [
+    {
+      "name": "org.cha0scollective.wwpg.bridge.RestorationWindowTest",
+      "tests": 3,
+      "evidence": {
+        "path": "local/checks/scoped-units-01/TEST-org.cha0scollective.wwpg.bridge.RestorationWindowTest.xml",
+        "sha256": "4a8226391f33ab977ae64275df75515e7669da1fffdd0031a05135c331f3e830"
+      }
+    },
+    {
+      "name": "org.cha0scollective.wwpg.wiring.RestorationComponentsTest",
+      "tests": 5,
+      "evidence": {
+        "path": "local/checks/scoped-units-01/TEST-org.cha0scollective.wwpg.wiring.RestorationComponentsTest.xml",
+        "sha256": "8eb74a8c4c35ceb4c8653b3353e25767731dccca0526a3878f17c9bd0cf60281"
+      }
+    },
+    {
+      "name": "org.cha0scollective.wwpg.wiring.RestorationQueueTest",
+      "tests": 9,
+      "evidence": {
+        "path": "local/checks/scoped-units-01/TEST-org.cha0scollective.wwpg.wiring.RestorationQueueTest.xml",
+        "sha256": "473c0a9c4cd11c6b9a31cec1c930eefbb5bee1ef36cdea519a5f0b57b2cf1829"
+      }
+    }
+  ],
+  "unit_sources_unchanged": [
+    {
+      "path": "src/main/java/org/cha0scollective/wwpg/bridge/RestorationWindow.java",
+      "sha256": "9621139dc8e575609369c09171a66e49cffb8dfc4e857e43591ae5ab9e1fc6de"
+    },
+    {
+      "path": "src/main/java/org/cha0scollective/wwpg/experimental/RestorationComponents.java",
+      "sha256": "0c8e27229769a38593762da3f05470f037108c10babf019276441a66ddeed7af"
+    },
+    {
+      "path": "src/main/java/org/cha0scollective/wwpg/experimental/RestorationQueue.java",
+      "sha256": "afd0a84328267fe2a996b4a11541a5382521289c20113acef3ee2e8cf81489d4"
+    },
+    {
+      "path": "src/test/java/org/cha0scollective/wwpg/bridge/RestorationWindowTest.java",
+      "sha256": "1e69dce066549f7b3ed97912da01e31ca85be498e7f3e85dc6348e9a4bfef683"
+    },
+    {
+      "path": "src/test/java/org/cha0scollective/wwpg/wiring/RestorationComponentsTest.java",
+      "sha256": "7586ad99e7c218338419fdedf347721ab9651b208ed0b55ff1108e8debd6dc05"
+    },
+    {
+      "path": "src/test/java/org/cha0scollective/wwpg/wiring/RestorationQueueTest.java",
+      "sha256": "87e46c73b990c94124d2293a8bcc547b72ca8dd4231b05ddc2e598c133a02966"
+    }
+  ],
+  "evidence_guard_tests": 5,
+  "clients": [
+    {
+      "schema": 1,
+      "full_suite": false,
+      "attempt": "goal-client-scoped-on-01",
+      "protocol": {
+        "schema": 1,
+        "name": "goal-client-scoped-on-01",
+        "helper_inputs": "G:\\WWPG\\local\\x27w\\local\\frozen\\client-scoped-helper-01\\inputs.json",
+        "helper_inputs_sha256": "fba857634b9b7dfb29aa41c75fa5a52cd8eba8fa4dcdcd74d5fce899cae3c1cd",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar",
+          "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9"
+        },
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\client-scoped-helper-01\\wwpg-benchmark-client-loading.jar",
+          "sha256": "e8c164a8908cc519976abbd56a7709af2791bf1fa0e9d7e62271e8f6b5adb015"
+        },
+        "cee": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\electroenergetics-1.21.1-1.1.4.jar",
+          "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+        },
+        "copied_reference": true,
+        "full_suite": false,
+        "inspection_only": false,
+        "delivery_jfr": false,
+        "cpu_affinity_mask": "fff000",
+        "properties": {
+          "wwpg.clientBenchmark.enabled": "true",
+          "wwpg.clientBenchmark.save": "benchmark-world",
+          "wwpg.clientBenchmark.inspectDelivery": "false",
+          "wwpg.clientBenchmark.inspectTaskQueues": "false",
+          "wwpg.benchmark.autorun": "true",
+          "wwpg.benchmark.owned": "true",
+          "wwpg.benchmark.restore": "true",
+          "wwpg.benchmark.exit": "false",
+          "wwpg.benchmark.tier": "10000",
+          "wwpg.benchmark.variant": "MIXED",
+          "wwpg.benchmark.backend": "NATIVE",
+          "wwpg.benchmark.mode": "coldcheck",
+          "wwpg.benchmark.detailed": "false",
+          "wwpg.benchmark.rhsCounters": "false",
+          "wwpg.benchmark.substeps": "false",
+          "wwpg.benchmark.profileEvery": "20",
+          "wwpg.benchmark.loading_protocol": "2",
+          "wwpg.benchmark.loading_chunk_limit": "2859",
+          "wwpg.benchmark.loading_graph_limit": "300",
+          "wwpg.benchmark.loading_acceptance_limit": "300",
+          "wwpg.benchmark.loading_healthy_ticks": "100",
+          "wwpg.benchmark.loading_stall_seconds": "30",
+          "wwpg.benchmark.cpuMask": "0xfff000",
+          "wwpg.restorationBatch": "true",
+          "wwpg.experimental.plainWireBatch": "true",
+          "wwpg.experimental.plainWireBatch.properties": "true",
+          "wwpg.experimental.plainWireBatch.verify": "false",
+          "wwpg.experimental.wireTreeBatch": "true",
+          "wwpg.experimental.wireTreeBudgetMillis": "20",
+          "wwpg.experimental.wireTreeMaxParts": "32",
+          "wwpg.experimental.wireTreePrioritizeUnresolved": "true",
+          "wwpg.experimental.chunkTaskBudgetMillis": "2",
+          "wwpg.experimental.ceeStateGeometry": "true",
+          "wwpg.experimental.scopedRestoration": "true",
+          "wwpg.experimental.terminalBookkeeping": "false",
+          "wwpg.experimental.terminalKeyLookup": "false"
+        },
+        "runner_sources": [
+          {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-on-01\\runner-sources\\client_loading_benchmark.py",
+            "sha256": "0c58815fd1c56282bdafb2d81173cf00ffe15526105f62ce4641c90a613f93ed"
+          },
+          {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-on-01\\runner-sources\\cpu_affinity.py",
+            "sha256": "4faa492829b866bbf1d38e71bb1d9fb6015c15e3876d24c2d2527a5e38ddd725"
+          },
+          {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-on-01\\runner-sources\\host_metrics.py",
+            "sha256": "6b741044b742a02ba6e9eeb17659ba80dba259addebfe9b6cd83d1b679b471b9"
+          },
+          {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-on-01\\runner-sources\\legacy_bench.py",
+            "sha256": "92846812a86a82d0b98ca94a825b21bd20d5f61719e0cd2ab7278637cbbe2380"
+          },
+          {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-on-01\\runner-sources\\plain_wire_benchmark.py",
+            "sha256": "c60a054e8eb8a32056fa5298101c2975909160c9ba5076516c1a4c16dfe59478"
+          },
+          {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-on-01\\runner-sources\\process_metrics.py",
+            "sha256": "6deaacc4885e5e7e25ee306836fcfdaa10b0dfe119a5d1f4059f8bc51b30d6ce"
+          },
+          {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-on-01\\runner-sources\\world_save_evidence.py",
+            "sha256": "7a8c6d7767d68e1ea0ac80091d6523d20ced835981b8a91c0cf5a5b7ca56f371"
+          }
+        ],
+        "started_utc": "2026-11-09T19:10:10Z",
+        "result": {
+          "schema": 1,
+          "scope": "One copied benchmark save; stationary visible scene; not full graphical acceptance",
+          "start_event": "Normal WorldOpenFlows.openWorld invocation from the title screen",
+          "selected_unix_ms": 1794251431894,
+          "resolution": [
+            1920,
+            1080
+          ],
+          "render_distance_chunks": 12,
+          "simulation_distance_chunks": 12,
+          "camera": {
+            "x": 1038.5,
+            "y": 74.0,
+            "z": 1028.5,
+            "pitch": 14.0,
+            "yaw": -36.0
+          },
+          "expected_client_chunks": 609,
+          "compile_buffers": 12,
+          "settings": {
+            "fullscreen": false,
+            "fov": 70,
+            "max_fps": 60,
+            "vsync": false,
+            "graphics": "fancy"
+          },
+          "first_world_frame_seconds": 12.8299448,
+          "electrical_ready_seconds": 42.3182291,
+          "restored_rendered_seconds": 44.3994534,
+          "under_one_minute": true,
+          "readiness_observation": {
+            "elapsed_seconds": 44.3994534,
+            "electrical_ready": true,
+            "camera_ready": true,
+            "loaded_client_chunks": 609,
+            "visible_sections": 2488,
+            "rendered_sections": 393,
+            "dirty_sections": 0,
+            "uncompiled_sections": 0,
+            "queue_empty": true,
+            "free_compile_buffers": 12,
+            "occlusion_ready": true,
+            "window_active": true
+          },
+          "ready_confirmation_seconds": 2.0625092,
+          "screenshot_sha256": "12c920ad4cc49eb605891cfa97bafa8c7393059cfda92f119e9115bb703dcf06",
+          "passed": true
+        },
+        "validation_passed": true,
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T19:11:19Z"
+      },
+      "result": {
+        "schema": 1,
+        "scope": "One copied benchmark save; stationary visible scene; not full graphical acceptance",
+        "start_event": "Normal WorldOpenFlows.openWorld invocation from the title screen",
+        "selected_unix_ms": 1794251431894,
+        "resolution": [
+          1920,
+          1080
+        ],
+        "render_distance_chunks": 12,
+        "simulation_distance_chunks": 12,
+        "camera": {
+          "x": 1038.5,
+          "y": 74.0,
+          "z": 1028.5,
+          "pitch": 14.0,
+          "yaw": -36.0
+        },
+        "expected_client_chunks": 609,
+        "compile_buffers": 12,
+        "settings": {
+          "fullscreen": false,
+          "fov": 70,
+          "max_fps": 60,
+          "vsync": false,
+          "graphics": "fancy"
+        },
+        "first_world_frame_seconds": 12.8299448,
+        "electrical_ready_seconds": 42.3182291,
+        "restored_rendered_seconds": 44.3994534,
+        "under_one_minute": true,
+        "readiness_observation": {
+          "elapsed_seconds": 44.3994534,
+          "electrical_ready": true,
+          "camera_ready": true,
+          "loaded_client_chunks": 609,
+          "visible_sections": 2488,
+          "rendered_sections": 393,
+          "dirty_sections": 0,
+          "uncompiled_sections": 0,
+          "queue_empty": true,
+          "free_compile_buffers": 12,
+          "occlusion_ready": true,
+          "window_active": true
+        },
+        "ready_confirmation_seconds": 2.0625092,
+        "screenshot_sha256": "12c920ad4cc49eb605891cfa97bafa8c7393059cfda92f119e9115bb703dcf06",
+        "passed": true
+      },
+      "validation": {
+        "passed": true,
+        "full_suite": false,
+        "actual_nodes": 14650,
+        "edges": 20637,
+        "storage_devices": 1050,
+        "healthy_ticks": 100,
+        "sixteen_substeps": true,
+        "loaded_artifacts_verified": true,
+        "normal_shutdown": true,
+        "process_affinity_readbacks": 63
+      },
+      "server_loading": [
+        {
+          "phase": "SETTLE",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 44,
+          "graph_ready_tick": 223,
+          "finish_tick": 342,
+          "chunk_request_seconds": 0.8505745,
+          "chunk_loading_seconds": 17.5533371,
+          "graph_recovery_seconds": 14.9934134,
+          "electrical_settling_seconds": 6.9097906,
+          "total_restoration_seconds": 40.3071156,
+          "restoration_and_settling_seconds": 39.4565411,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 11238,
+          "maximum_pending_roots": 11238,
+          "queue_drained_tick": 223,
+          "queue_drain_seconds": 14.9934134
+        }
+      ],
+      "tree_execution": {
+        "attachments": 5893,
+        "fallback": 50,
+        "roots": 11786,
+        "traversals": 1661,
+        "covered": 10125,
+        "visited": 2461475,
+        "flushes": 222,
+        "largest": 11254,
+        "pending": 0,
+        "forced": 5,
+        "discarded": 0,
+        "budgetMillis": 20,
+        "maxParts": 32,
+        "yielded": 221,
+        "maxProcessed": 32,
+        "maxFlushNanos": 69103200,
+        "maxEntryNanos": 67600100,
+        "prioritySelections": 194
+      },
+      "task_window": {
+        "budgetMillis": 2,
+        "maxTasks": 512,
+        "windows": 220,
+        "completed": 37948,
+        "emptyPolls": 780688,
+        "maxCompleted": 512,
+        "maxWindowNanos": 4187300,
+        "maxPollNanos": 2686600,
+        "probes": 39,
+        "maxProbeNanos": 1001900
+      },
+      "cee_geometry": {
+        "requests": 9675706,
+        "hits": 7642549,
+        "builds": 8,
+        "fallback": 2033149,
+        "states": 8
+      },
+      "terminal_execution": null,
+      "terminal_keys": null,
+      "scope_execution": {
+        "snapshots": 442,
+        "membershipChecks": 0,
+        "savedParts": 2626806,
+        "nodeBindings": 6323148,
+        "seedEndpoints": 2751108,
+        "heldNetworks": 21886,
+        "fallbackWorlds": 0,
+        "totalNanos": 5106990500,
+        "maxNanos": 54399600,
+        "topologyPasses": 480,
+        "topologyNanos": 425881700,
+        "maxTopologyNanos": 13548200
+      },
+      "worst_loading_tick_seconds": 3.1222104,
+      "longest_loading_tick_gap_seconds": 3.1324899,
+      "world_frame_intervals": {
+        "samples": 1869,
+        "mean_ms": 16.891122846441945,
+        "p95_ms": 20.5586,
+        "maximum_ms": 41.2079
+      },
+      "loaded_artifacts": [
+        {
+          "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9",
+          "version": "0.2.7-experimental.wiretree.11",
+          "id": "wwpg",
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar"
+        },
+        {
+          "sha256": "e40d67a874431925d502af88e85064883c67936cfd689033d7df560cffcf19e7",
+          "version": "0.6.2",
+          "id": "powergrid",
+          "path": "C:\\Users\\Parker\\.gradle\\caches\\modules-2\\files-2.1\\curse.maven\\power-grid-1321420\\8880715\\e09452dac8202e31f282149d45c49dcdb218bd54\\power-grid-1321420-8880715.jar"
+        },
+        {
+          "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f",
+          "version": "1.21.1-1.1.4",
+          "id": "electroenergetics",
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\electroenergetics-1.21.1-1.1.4.jar"
+        },
+        {
+          "sha256": "192c7b0be13f523dcec9a7a2393bbc2614c3c9bd3edb1f7720a97bcd4f0b87a7",
+          "version": "6.0.10",
+          "id": "create",
+          "path": "C:\\Users\\Parker\\.gradle\\caches\\modules-2\\files-2.1\\com.simibubi.create\\create-1.21.1\\6.0.10-280\\62c085fd48fc84b62f88d7bc98b7c4206492c080\\create-1.21.1-6.0.10-280.jar"
+        },
+        {
+          "sha256": "d9ab545f85dd3c6e4659d25610d172a1b15833e16808ccbfc1ce4d11be371f2b",
+          "version": "21.1.231",
+          "id": "neoforge",
+          "path": "G:\\WWPG\\local\\x27w\\build\\moddev\\artifacts\\neoforge-21.1.231.jar"
+        },
+        {
+          "sha256": "e8c164a8908cc519976abbd56a7709af2791bf1fa0e9d7e62271e8f6b5adb015",
+          "version": "0.1.0",
+          "id": "wwpg_benchmark",
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\client-scoped-helper-01\\wwpg-benchmark-client-loading.jar"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/experiment.json",
+          "sha256": "c9fdf79586aaef209ddf2641bd53cd3bcd1ccc84b682d49073293ded9cf3df99"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/restore-input.json",
+          "sha256": "78f6d712c51b45154af11d0dfe36cdd6a591239ccab5756c86475b5d3fca6fde"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/launch.json",
+          "sha256": "fc86ee79c84791990947a761d2e277d80d09aed2bb703ffaf526fc47ca5c933f"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/client.args",
+          "sha256": "e35f3eb2713f431efddb05c4e37e08cab3754d92b087e5427efd03ac32dd4a2d"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/options.txt",
+          "sha256": "c062a6e5f18158f35284b109cfe4c1e13dc90a8147f6119c3e3c192d9fda43f6"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/cpu-preflight.json",
+          "sha256": "4fe131a1f6687efc5875e9e5cd454b4636aeae9c0ad651e74242bf6a9ae32ac1"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/process-affinity.json",
+          "sha256": "0e9d1b000ad28abe0076223bb6123067503ae382b522069c439bc4a2c98a14b4"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/process-metrics.jsonl",
+          "sha256": "e979291baeb6590ff3df8e04ae0e9310314859e4942dcedc9d1bea8342043f9e"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/host-metrics.jsonl",
+          "sha256": "76e2c58298adc1b2399d7e362fbc7ce39e9808736ff1f0a4c7da62d9bc4a8db4"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/process.log",
+          "sha256": "5775e46454c0203c8532fc38b9c203a2b949d71d8bb8ddc210149aac196235e8"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/runner-exit.json",
+          "sha256": "c149d13f09c20a6bf8db5b589f6b794f17675c5b2418b5d3956caa5103d9267d"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/shutdown-save.json",
+          "sha256": "316b6deb862edc497cfd00c6cfd7886e8379cff9ee85c2bdf193b9259229cdd3"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/benchmark/result.json",
+          "sha256": "52d2d656b470fd6e7fd68872f72109db234cd25ff07068664aceb0134823d253"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/benchmark/loading-results.json",
+          "sha256": "0af85d10ecd20e1885437655cbeea21f9681069e4bfa514b024cd9a2393f8995"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/benchmark/ticks.csv",
+          "sha256": "2f03f2e1b348e387ff3c4d4dffda2fe992678a83a36eb2a8cc6641fb84d9dc94"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/benchmark/placement-fixed.json",
+          "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/benchmark/placement-restored.json",
+          "sha256": "3bafe0c622640138b9c3eba475cf936525c0775eb01488cdc2531f1b884ffbe1"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/client-benchmark/start.json",
+          "sha256": "a512f7a16b2799d3b55fb710732d2b8544ee75584700815233c74acaba60f593"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/client-benchmark/result.json",
+          "sha256": "e52e865fc8a3873d3614b49f769bbf6006bb3a24b14a1463472e050c707ca3dc"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/client-benchmark/validation.json",
+          "sha256": "d4aea399ef5e11cd30a9d7cc942a0bc8c5041505f48049d8054539e1089834c1"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/client-benchmark/loaded-artifacts.json",
+          "sha256": "7c266d19b5edf2626005c5094cb3e37e2a1a4a64b78b5b87da744f0e0b13b1d9"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/client-benchmark/render-observations.json",
+          "sha256": "848715648b4c8e5399bf577c4c1813afc837a5f98540e1df423d60a1ae6ef3ae"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/client-benchmark/frame-times-ns.json",
+          "sha256": "edb7656c28e7cc92c5208219811d20c3c0f3be22b77f13d42aecaf29e7b9b81e"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/client-benchmark/shutdown.json",
+          "sha256": "9b23a139e3219b77e3d2f00ef929918cf4ba0b2262fb8dedfc46c76d0e19f8fa"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/client-benchmark/screenshots/rendered.png",
+          "sha256": "12c920ad4cc49eb605891cfa97bafa8c7393059cfda92f119e9115bb703dcf06"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/client-benchmark/task-window-validation.json",
+          "sha256": "f04d2a1b07e2d383ba76dd4ac61a483f32c0811da6a2eee7646ab56ecee4be89"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/client-benchmark/cee-geometry-validation.json",
+          "sha256": "8a771fa09be72c6e8dbec98effe619d5f10a5219ded460a254bc5f6375640cb7"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-on-01/client-benchmark/scoped-restoration-validation.json",
+          "sha256": "deaf9c6e596465bd265e5dcb0e8056f3b044cd6095f4246d36ec3fb5ffca6cd3"
+        }
+      ],
+      "note": "One stationary view at the recorded settings. Loading phases overlap with rendering. No sustained client TPS or complete graphical acceptance claim."
+    },
+    {
+      "schema": 1,
+      "full_suite": false,
+      "attempt": "goal-client-scoped-off-01",
+      "protocol": {
+        "schema": 1,
+        "name": "goal-client-scoped-off-01",
+        "helper_inputs": "G:\\WWPG\\local\\x27w\\local\\frozen\\client-scoped-helper-01\\inputs.json",
+        "helper_inputs_sha256": "fba857634b9b7dfb29aa41c75fa5a52cd8eba8fa4dcdcd74d5fce899cae3c1cd",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar",
+          "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9"
+        },
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\client-scoped-helper-01\\wwpg-benchmark-client-loading.jar",
+          "sha256": "e8c164a8908cc519976abbd56a7709af2791bf1fa0e9d7e62271e8f6b5adb015"
+        },
+        "cee": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\electroenergetics-1.21.1-1.1.4.jar",
+          "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+        },
+        "copied_reference": true,
+        "full_suite": false,
+        "inspection_only": false,
+        "delivery_jfr": false,
+        "cpu_affinity_mask": "fff000",
+        "properties": {
+          "wwpg.clientBenchmark.enabled": "true",
+          "wwpg.clientBenchmark.save": "benchmark-world",
+          "wwpg.clientBenchmark.inspectDelivery": "false",
+          "wwpg.clientBenchmark.inspectTaskQueues": "false",
+          "wwpg.benchmark.autorun": "true",
+          "wwpg.benchmark.owned": "true",
+          "wwpg.benchmark.restore": "true",
+          "wwpg.benchmark.exit": "false",
+          "wwpg.benchmark.tier": "10000",
+          "wwpg.benchmark.variant": "MIXED",
+          "wwpg.benchmark.backend": "NATIVE",
+          "wwpg.benchmark.mode": "coldcheck",
+          "wwpg.benchmark.detailed": "false",
+          "wwpg.benchmark.rhsCounters": "false",
+          "wwpg.benchmark.substeps": "false",
+          "wwpg.benchmark.profileEvery": "20",
+          "wwpg.benchmark.loading_protocol": "2",
+          "wwpg.benchmark.loading_chunk_limit": "2859",
+          "wwpg.benchmark.loading_graph_limit": "300",
+          "wwpg.benchmark.loading_acceptance_limit": "300",
+          "wwpg.benchmark.loading_healthy_ticks": "100",
+          "wwpg.benchmark.loading_stall_seconds": "30",
+          "wwpg.benchmark.cpuMask": "0xfff000",
+          "wwpg.restorationBatch": "true",
+          "wwpg.experimental.plainWireBatch": "true",
+          "wwpg.experimental.plainWireBatch.properties": "true",
+          "wwpg.experimental.plainWireBatch.verify": "false",
+          "wwpg.experimental.wireTreeBatch": "true",
+          "wwpg.experimental.wireTreeBudgetMillis": "20",
+          "wwpg.experimental.wireTreeMaxParts": "32",
+          "wwpg.experimental.wireTreePrioritizeUnresolved": "true",
+          "wwpg.experimental.chunkTaskBudgetMillis": "2",
+          "wwpg.experimental.ceeStateGeometry": "true",
+          "wwpg.experimental.scopedRestoration": "false",
+          "wwpg.experimental.terminalBookkeeping": "false",
+          "wwpg.experimental.terminalKeyLookup": "false"
+        },
+        "runner_sources": [
+          {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-off-01\\runner-sources\\client_loading_benchmark.py",
+            "sha256": "0c58815fd1c56282bdafb2d81173cf00ffe15526105f62ce4641c90a613f93ed"
+          },
+          {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-off-01\\runner-sources\\cpu_affinity.py",
+            "sha256": "4faa492829b866bbf1d38e71bb1d9fb6015c15e3876d24c2d2527a5e38ddd725"
+          },
+          {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-off-01\\runner-sources\\host_metrics.py",
+            "sha256": "6b741044b742a02ba6e9eeb17659ba80dba259addebfe9b6cd83d1b679b471b9"
+          },
+          {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-off-01\\runner-sources\\legacy_bench.py",
+            "sha256": "92846812a86a82d0b98ca94a825b21bd20d5f61719e0cd2ab7278637cbbe2380"
+          },
+          {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-off-01\\runner-sources\\plain_wire_benchmark.py",
+            "sha256": "c60a054e8eb8a32056fa5298101c2975909160c9ba5076516c1a4c16dfe59478"
+          },
+          {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-off-01\\runner-sources\\process_metrics.py",
+            "sha256": "6deaacc4885e5e7e25ee306836fcfdaa10b0dfe119a5d1f4059f8bc51b30d6ce"
+          },
+          {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-off-01\\runner-sources\\world_save_evidence.py",
+            "sha256": "7a8c6d7767d68e1ea0ac80091d6523d20ced835981b8a91c0cf5a5b7ca56f371"
+          }
+        ],
+        "started_utc": "2026-11-09T19:11:52Z",
+        "result": {
+          "schema": 1,
+          "scope": "One copied benchmark save; stationary visible scene; not full graphical acceptance",
+          "start_event": "Normal WorldOpenFlows.openWorld invocation from the title screen",
+          "selected_unix_ms": 1794251533860,
+          "resolution": [
+            1920,
+            1080
+          ],
+          "render_distance_chunks": 12,
+          "simulation_distance_chunks": 12,
+          "camera": {
+            "x": 1038.5,
+            "yaw": -36.0,
+            "pitch": 14.0,
+            "z": 1028.5,
+            "y": 74.0
+          },
+          "expected_client_chunks": 609,
+          "compile_buffers": 12,
+          "settings": {
+            "fullscreen": false,
+            "graphics": "fancy",
+            "vsync": false,
+            "max_fps": 60,
+            "fov": 70
+          },
+          "first_world_frame_seconds": 13.6007049,
+          "electrical_ready_seconds": 37.2214094,
+          "restored_rendered_seconds": 39.3017523,
+          "under_one_minute": true,
+          "readiness_observation": {
+            "elapsed_seconds": 39.3017523,
+            "electrical_ready": true,
+            "camera_ready": true,
+            "loaded_client_chunks": 609,
+            "visible_sections": 2485,
+            "rendered_sections": 393,
+            "dirty_sections": 0,
+            "uncompiled_sections": 0,
+            "queue_empty": true,
+            "free_compile_buffers": 12,
+            "occlusion_ready": true,
+            "window_active": true
+          },
+          "ready_confirmation_seconds": 2.0328371,
+          "screenshot_sha256": "fb48f6acfebba3438d0aad68a292e545f10690b37287900b76590da6e02c0f4e",
+          "passed": true
+        },
+        "validation_passed": true,
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T19:12:56Z"
+      },
+      "result": {
+        "schema": 1,
+        "scope": "One copied benchmark save; stationary visible scene; not full graphical acceptance",
+        "start_event": "Normal WorldOpenFlows.openWorld invocation from the title screen",
+        "selected_unix_ms": 1794251533860,
+        "resolution": [
+          1920,
+          1080
+        ],
+        "render_distance_chunks": 12,
+        "simulation_distance_chunks": 12,
+        "camera": {
+          "x": 1038.5,
+          "yaw": -36.0,
+          "pitch": 14.0,
+          "z": 1028.5,
+          "y": 74.0
+        },
+        "expected_client_chunks": 609,
+        "compile_buffers": 12,
+        "settings": {
+          "fullscreen": false,
+          "graphics": "fancy",
+          "vsync": false,
+          "max_fps": 60,
+          "fov": 70
+        },
+        "first_world_frame_seconds": 13.6007049,
+        "electrical_ready_seconds": 37.2214094,
+        "restored_rendered_seconds": 39.3017523,
+        "under_one_minute": true,
+        "readiness_observation": {
+          "elapsed_seconds": 39.3017523,
+          "electrical_ready": true,
+          "camera_ready": true,
+          "loaded_client_chunks": 609,
+          "visible_sections": 2485,
+          "rendered_sections": 393,
+          "dirty_sections": 0,
+          "uncompiled_sections": 0,
+          "queue_empty": true,
+          "free_compile_buffers": 12,
+          "occlusion_ready": true,
+          "window_active": true
+        },
+        "ready_confirmation_seconds": 2.0328371,
+        "screenshot_sha256": "fb48f6acfebba3438d0aad68a292e545f10690b37287900b76590da6e02c0f4e",
+        "passed": true
+      },
+      "validation": {
+        "passed": true,
+        "full_suite": false,
+        "actual_nodes": 14650,
+        "edges": 20637,
+        "storage_devices": 1050,
+        "healthy_ticks": 100,
+        "sixteen_substeps": true,
+        "loaded_artifacts_verified": true,
+        "normal_shutdown": true,
+        "process_affinity_readbacks": 58
+      },
+      "server_loading": [
+        {
+          "phase": "SETTLE",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 40,
+          "graph_ready_tick": 218,
+          "finish_tick": 337,
+          "chunk_request_seconds": 0.8142902,
+          "chunk_loading_seconds": 16.1432851,
+          "graph_recovery_seconds": 11.1570607,
+          "electrical_settling_seconds": 7.1628219,
+          "total_restoration_seconds": 35.2774579,
+          "restoration_and_settling_seconds": 34.4631677,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 11288,
+          "maximum_pending_roots": 11288,
+          "queue_drained_tick": 218,
+          "queue_drain_seconds": 11.1570607
+        }
+      ],
+      "tree_execution": {
+        "attachments": 5893,
+        "fallback": 50,
+        "roots": 11786,
+        "traversals": 1622,
+        "covered": 10164,
+        "visited": 2270375,
+        "flushes": 217,
+        "largest": 11304,
+        "pending": 0,
+        "forced": 3,
+        "discarded": 0,
+        "budgetMillis": 20,
+        "maxParts": 32,
+        "yielded": 216,
+        "maxProcessed": 32,
+        "maxFlushNanos": 100372900,
+        "maxEntryNanos": 98206500,
+        "prioritySelections": 193
+      },
+      "task_window": {
+        "budgetMillis": 2,
+        "maxTasks": 512,
+        "windows": 210,
+        "completed": 39464,
+        "emptyPolls": 739790,
+        "maxCompleted": 512,
+        "maxWindowNanos": 4754400,
+        "maxPollNanos": 3559400,
+        "probes": 39,
+        "maxProbeNanos": 687800
+      },
+      "cee_geometry": {
+        "requests": 9554534,
+        "hits": 7546472,
+        "builds": 8,
+        "fallback": 2008054,
+        "states": 8
+      },
+      "terminal_execution": null,
+      "terminal_keys": null,
+      "scope_execution": null,
+      "worst_loading_tick_seconds": 2.9440142,
+      "longest_loading_tick_gap_seconds": 2.9522626,
+      "world_frame_intervals": {
+        "samples": 1523,
+        "mean_ms": 16.875277347340774,
+        "p95_ms": 20.7666,
+        "maximum_ms": 44.2303
+      },
+      "loaded_artifacts": [
+        {
+          "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9",
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar",
+          "id": "wwpg",
+          "version": "0.2.7-experimental.wiretree.11"
+        },
+        {
+          "sha256": "e40d67a874431925d502af88e85064883c67936cfd689033d7df560cffcf19e7",
+          "path": "C:\\Users\\Parker\\.gradle\\caches\\modules-2\\files-2.1\\curse.maven\\power-grid-1321420\\8880715\\e09452dac8202e31f282149d45c49dcdb218bd54\\power-grid-1321420-8880715.jar",
+          "id": "powergrid",
+          "version": "0.6.2"
+        },
+        {
+          "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f",
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\electroenergetics-1.21.1-1.1.4.jar",
+          "id": "electroenergetics",
+          "version": "1.21.1-1.1.4"
+        },
+        {
+          "sha256": "192c7b0be13f523dcec9a7a2393bbc2614c3c9bd3edb1f7720a97bcd4f0b87a7",
+          "path": "C:\\Users\\Parker\\.gradle\\caches\\modules-2\\files-2.1\\com.simibubi.create\\create-1.21.1\\6.0.10-280\\62c085fd48fc84b62f88d7bc98b7c4206492c080\\create-1.21.1-6.0.10-280.jar",
+          "id": "create",
+          "version": "6.0.10"
+        },
+        {
+          "sha256": "d9ab545f85dd3c6e4659d25610d172a1b15833e16808ccbfc1ce4d11be371f2b",
+          "path": "G:\\WWPG\\local\\x27w\\build\\moddev\\artifacts\\neoforge-21.1.231.jar",
+          "id": "neoforge",
+          "version": "21.1.231"
+        },
+        {
+          "sha256": "e8c164a8908cc519976abbd56a7709af2791bf1fa0e9d7e62271e8f6b5adb015",
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\client-scoped-helper-01\\wwpg-benchmark-client-loading.jar",
+          "id": "wwpg_benchmark",
+          "version": "0.1.0"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/experiment.json",
+          "sha256": "1d006022fff34e9ff41d3d2be7c8e2c18f4ff11f24854da457a6fb2785f183df"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/restore-input.json",
+          "sha256": "aca65e147ee8c8612294f3825bff39e6155828de4b506ba9740f3f6ab3f1bac1"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/launch.json",
+          "sha256": "b30357eafa328dd6baf00c5e50adc9c3b6d6f59be73bd027b1d0ed06e6b07be1"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/client.args",
+          "sha256": "fd797ccc8eced9e8bb5fed8e83353e9d6e18e19d6a5819fb4a7bf249ab61e09a"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/options.txt",
+          "sha256": "c062a6e5f18158f35284b109cfe4c1e13dc90a8147f6119c3e3c192d9fda43f6"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/cpu-preflight.json",
+          "sha256": "52badaa36614028db52580349d1ea75b176ec7d1e0804c4bd3ec06d54f355767"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/process-affinity.json",
+          "sha256": "c5454d22dea7b5c3edf4410f5abfab92b0699564427431f9596ee393efcc0def"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/process-metrics.jsonl",
+          "sha256": "76d46d90873b13f0436e13ab76eb8d9ab12a8206ad1c7ffec3b42846c2cfd7ba"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/host-metrics.jsonl",
+          "sha256": "c0b35847dedc94031e70dbdea9587bc751f0544681314a7395465e9400798780"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/process.log",
+          "sha256": "003055baec2158b449c9a22df9de64cd76017477921c61125f4e2826f7482c86"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/runner-exit.json",
+          "sha256": "a62bf9f45cc45b9f68e67ac0c03476a1f9712ef373ef9009447c3a0bf29b2e1e"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/shutdown-save.json",
+          "sha256": "316b6deb862edc497cfd00c6cfd7886e8379cff9ee85c2bdf193b9259229cdd3"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/benchmark/result.json",
+          "sha256": "72144439a45d34a8024341e92bf559f31ca367448af13d37446bef0ef5f5e4c7"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/benchmark/loading-results.json",
+          "sha256": "2d0b7990440499ccea5d59a613d9199e2e619175e1733d44716e6bc36200960a"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/benchmark/ticks.csv",
+          "sha256": "225761455aa318c8601821a09f9c6871f40681fdf74b3cf3c9e9c7814d936ccc"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/benchmark/placement-fixed.json",
+          "sha256": "f39e516534daabb39e6a5305b5c802dee926ac68a80c1f4de97c30d3406bcc22"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/benchmark/placement-restored.json",
+          "sha256": "79eda4bf854b627d63ceaabf49ee8f83ec6d7c08486adcab2df1ea6c62315b9c"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/client-benchmark/start.json",
+          "sha256": "f620b61e4a371dc1efe68bdfe5f163965d3be2132d58a6986bad18c271aa0611"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/client-benchmark/result.json",
+          "sha256": "77c93e9623e2724000bd9afded491e38a3bf70e342518a596727ea7f86eda03f"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/client-benchmark/validation.json",
+          "sha256": "df1b5185dfaec0cc917ef9808df2f0e3870f11fb78e56f1cecc430c8cddce517"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/client-benchmark/loaded-artifacts.json",
+          "sha256": "7d40b86c2093bbaee107d98b122bb3c8409d8f400c20207a68a6358d29202311"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/client-benchmark/render-observations.json",
+          "sha256": "6af0c3c7ccc00fbf4ce8604a141d433c8b38373a19cba59541ec0783ec6c2fd4"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/client-benchmark/frame-times-ns.json",
+          "sha256": "005d2cbe67c0d5ad51fe04666a3dde3c4da4a0c6e79b208d24cfbd97790600a5"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/client-benchmark/shutdown.json",
+          "sha256": "9b23a139e3219b77e3d2f00ef929918cf4ba0b2262fb8dedfc46c76d0e19f8fa"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/client-benchmark/screenshots/rendered.png",
+          "sha256": "fb48f6acfebba3438d0aad68a292e545f10690b37287900b76590da6e02c0f4e"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/client-benchmark/task-window-validation.json",
+          "sha256": "2b44ac2ec452c315be59f3b19438387015d21a9fa54303a49c52c60167d5d50f"
+        },
+        {
+          "path": "local/benchmarks/goal-client-scoped-off-01/client-benchmark/cee-geometry-validation.json",
+          "sha256": "757d3e71fc3c08342cc2f115cfa183f558dbae4e53c84d01d63b13959d2d14e3"
+        }
+      ],
+      "note": "One stationary view at the recorded settings. Loading phases overlap with rendering. No sustained client TPS or complete graphical acceptance claim."
+    }
+  ],
+  "reload": {
+    "name": "goal-scoped-reload-02",
+    "protocol": {
+      "schema": 1,
+      "name": "goal-scoped-reload-02",
+      "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+      "runtime": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-scoped-reload-02\\mods\\wwpg-0.2.7-experimental.wiretree.11.jar",
+        "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9",
+        "kind": "local-candidate",
+        "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar"
+      },
+      "helper": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-scoped-reload-02\\mods\\wwpg-benchmark-0.1.0-affinity.jar",
+        "sha256": "56434c77e56c6361aad1b54733eac5573b97bd24d52ae42b0d330216da7a34cb"
+      },
+      "copied_reference": true,
+      "batch": true,
+      "property_batch": true,
+      "tree_batch": true,
+      "detailed": false,
+      "loading_trace": false,
+      "reload": true,
+      "full_suite": false,
+      "tree_budget_ms": 20,
+      "tree_max_parts": 32,
+      "tree_retain_coverage": false,
+      "helper_inputs": "local/frozen/affinity-helper-02/inputs.json",
+      "tree_prioritize_unresolved": true,
+      "chunk_task_budget_ms": 2,
+      "cee_state_geometry": true,
+      "scoped_restoration": true,
+      "terminal_bookkeeping": false,
+      "terminal_key_lookup": false,
+      "cpu_affinity_mask": "fff000",
+      "server_affinity_mask": null,
+      "started_utc": "2026-11-09T19:12:57Z",
+      "task_window": {
+        "budgetMillis": 2,
+        "maxTasks": 512,
+        "windows": 380,
+        "completed": 4669,
+        "emptyPolls": 2169861,
+        "maxCompleted": 512,
+        "maxWindowNanos": 2449900,
+        "maxPollNanos": 556200,
+        "probes": 64,
+        "maxProbeNanos": 668000
+      },
+      "cee_geometry": {
+        "requests": 11806660,
+        "hits": 9298648,
+        "builds": 8,
+        "fallback": 2508004,
+        "states": 8
+      },
+      "scope_execution": {
+        "snapshots": 784,
+        "membershipChecks": 0,
+        "savedParts": 4659312,
+        "nodeBindings": 11453600,
+        "seedEndpoints": 4679632,
+        "heldNetworks": 22176,
+        "fallbackWorlds": 0,
+        "totalNanos": 8227859700,
+        "maxNanos": 62336100,
+        "topologyPasses": 646,
+        "topologyNanos": 454676700,
+        "maxTopologyNanos": 78316400
+      },
+      "terminal_execution": null,
+      "terminal_keys": null,
+      "tree_execution": {
+        "attachments": 11786,
+        "fallback": 100,
+        "roots": 23572,
+        "traversals": 3117,
+        "covered": 20455,
+        "visited": 3972317,
+        "flushes": 394,
+        "largest": 11722,
+        "pending": 0,
+        "forced": 8,
+        "discarded": 0,
+        "budgetMillis": 20,
+        "maxParts": 32,
+        "yielded": 392,
+        "maxProcessed": 32,
+        "maxFlushNanos": 58473700,
+        "maxEntryNanos": 56416600,
+        "priority_selections": 208
+      },
+      "validation": {
+        "passed": true,
+        "actual_nodes": 14650,
+        "edges": 20637,
+        "chunks": 953,
+        "storage_devices": 1050,
+        "healthy_ticks": 100,
+        "normal_shutdown": true,
+        "sixteen_substeps": true,
+        "no_independent_cee_or_rejected_solves": true,
+        "actual_reload_cycles": 1,
+        "full_suite": false
+      },
+      "loading": [
+        {
+          "phase": "SETTLE",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 32,
+          "graph_ready_tick": 210,
+          "finish_tick": 329,
+          "chunk_request_seconds": 0.8346089,
+          "chunk_loading_seconds": 13.1086054,
+          "graph_recovery_seconds": 12.9376352,
+          "electrical_settling_seconds": 6.1155943,
+          "total_restoration_seconds": 32.9964438,
+          "restoration_and_settling_seconds": 32.1618349,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 11294,
+          "maximum_pending_roots": 11294,
+          "queue_drained_tick": 210,
+          "queue_drain_seconds": 12.9376352
+        },
+        {
+          "phase": "RELOAD",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 4,
+          "graph_ready_tick": 185,
+          "finish_tick": 304,
+          "chunk_request_seconds": 0.0347505,
+          "chunk_loading_seconds": 1.2551518,
+          "graph_recovery_seconds": 13.3089557,
+          "electrical_settling_seconds": 5.6227837,
+          "total_restoration_seconds": 20.2216417,
+          "restoration_and_settling_seconds": 20.1868912,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 11530,
+          "maximum_pending_roots": 11658,
+          "queue_drained_tick": 185,
+          "queue_drain_seconds": 13.3089557
+        }
+      ],
+      "original_reference_unchanged": true,
+      "isolated_reference_unchanged": true,
+      "finished_utc": "2026-11-09T19:14:09Z"
+    },
+    "evidence": [
+      {
+        "path": "local/benchmarks/goal-scoped-reload-02/experiment.json",
+        "sha256": "a34679fe2cb1224121afc5bf2c915783a8d63e06125168a106f140a30245a2f2"
+      },
+      {
+        "path": "local/benchmarks/goal-scoped-reload-02/launch.json",
+        "sha256": "2612e60c07e8716bf6a222857d260d17cc088090fa506c813996ef2db11c4c92"
+      },
+      {
+        "path": "local/benchmarks/goal-scoped-reload-02/invocation.json",
+        "sha256": "144a122e856045b59c654f6a9ad7dc3c3f398bec73b3c2fbb7aafdfc710e1e90"
+      },
+      {
+        "path": "local/benchmarks/goal-scoped-reload-02/restore-input.json",
+        "sha256": "9be3a36947588db33ba24d5b3075c26138b21d3890d17d55ab6754e6cc6c7e83"
+      },
+      {
+        "path": "local/benchmarks/goal-scoped-reload-02/shutdown-save.json",
+        "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+      },
+      {
+        "path": "local/benchmarks/goal-scoped-reload-02/runner-exit.json",
+        "sha256": "8d53a20a0dcef27bace16e8838a2a979c31386d26bb360fbe1d84e89259b85ff"
+      },
+      {
+        "path": "local/benchmarks/goal-scoped-reload-02/host-metrics.jsonl",
+        "sha256": "a2d8ee356804ce1a70de59d6b9cdef0df502f955930d94c369c12b680a686f29"
+      },
+      {
+        "path": "local/benchmarks/goal-scoped-reload-02/process.log",
+        "sha256": "2f8021c1381e8cd78a22ac4fd1a89829d4dcfa7a52db089322ec090eec3e2a22"
+      },
+      {
+        "path": "local/benchmarks/goal-scoped-reload-02/benchmark/result.json",
+        "sha256": "c8d3bee6ff4dd2a09213afe74300f6ce6ca27eb6f36c561b4a5ce8b39ef1e597"
+      },
+      {
+        "path": "local/benchmarks/goal-scoped-reload-02/benchmark/loading-results.json",
+        "sha256": "2df04add8573f26b1c511e0842a748ae2b81f067c93eecb5b29712a0e30f3a0a"
+      },
+      {
+        "path": "local/benchmarks/goal-scoped-reload-02/benchmark/ticks.csv",
+        "sha256": "bc7c40a51af032d57c16a9b0ba9874c2d2ca4d53527561038e27611a1987d090"
+      },
+      {
+        "path": "local/benchmarks/goal-scoped-reload-02/benchmark/placement-ticks.csv",
+        "sha256": "9f0f20eb5ddcec800a42940f3e4cf3f15184e53a1f3db8fd392f7033710d39fa"
+      },
+      {
+        "path": "local/benchmarks/goal-scoped-reload-02/benchmark/pre-solve-storage.json",
+        "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+      },
+      {
+        "path": "local/benchmarks/goal-scoped-reload-02/benchmark/placement-fixed.json",
+        "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+      },
+      {
+        "path": "local/benchmarks/goal-scoped-reload-02/benchmark/placement-restored.json",
+        "sha256": "95ba5fee302285e31a8a83c325d65d7dac47612da59375d6bfa386fca6eafdd9"
+      },
+      {
+        "path": "local/benchmarks/goal-scoped-reload-02/benchmark/lifecycle.json",
+        "sha256": "89e659a54487093b485520bf1cd481b055d37b44e03c72297ade1f700e8e9938"
+      }
+    ],
+    "host": {
+      "sample_period_seconds": 5,
+      "in_window_intervals": 10,
+      "in_window_seconds": 50.12165808677673,
+      "monitored_processes": 192,
+      "competing_game_present": false,
+      "other_cpu_mean_cores": 0.27651469502475273,
+      "other_process_peaks": [
+        {
+          "name": "ChatGPT.exe",
+          "identity": "13688:134387027373880825",
+          "peak_cores": 0.19614757625600174,
+          "mean_cores": 0.055178242411929236
+        },
+        {
+          "name": "HWiNFO64.EXE",
+          "identity": "5948:134387027096006899",
+          "peak_cores": 0.11548186132891732,
+          "mean_cores": 0.08417020028938359
+        },
+        {
+          "name": "ChatGPT.exe",
+          "identity": "28732:134387027298932907",
+          "peak_cores": 0.04681697080902054,
+          "mean_cores": 0.033044597150646886
+        },
+        {
+          "name": "powershell.exe",
+          "identity": "6028:134387027037888757",
+          "peak_cores": 0.04364251650167489,
+          "mean_cores": 0.0283684749123478
+        },
+        {
+          "name": "codex.exe",
+          "identity": "30104:134387027358105490",
+          "peak_cores": 0.02496787984703097,
+          "mean_cores": 0.006546571133618723
+        },
+        {
+          "name": "dllhost.exe",
+          "identity": "31644:134387027407630677",
+          "peak_cores": 0.015605656936340178,
+          "mean_cores": 0.0034291563080859977
+        },
+        {
+          "name": "nvcontainer.exe",
+          "identity": "21108:134387027073690730",
+          "peak_cores": 0.015599876869135942,
+          "mean_cores": 0.001870448895319635
+        },
+        {
+          "name": "explorer.exe",
+          "identity": "13836:134387027040075621",
+          "peak_cores": 0.012484525549072142,
+          "mean_cores": 0.002805673342979453
+        }
+      ],
+      "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+    },
+    "tick_metrics": {
+      "RELOAD": {
+        "ticks": 304,
+        "longest_tick_seconds": 0.5199764,
+        "tick_body_seconds": 19.4139984,
+        "matrix_assemblies": 1,
+        "network_substep_calls": 1920
+      },
+      "SETTLE": {
+        "ticks": 329,
+        "longest_tick_seconds": 2.8560166,
+        "tick_body_seconds": 31.2871573,
+        "matrix_assemblies": 1,
+        "network_substep_calls": 1920
+      },
+      "UNLOAD": {
+        "ticks": 2,
+        "longest_tick_seconds": 0.2653874,
+        "tick_body_seconds": 0.3698694,
+        "matrix_assemblies": 654,
+        "network_substep_calls": 19264
+      }
+    }
+  },
+  "steady": [
+    {
+      "name": "goal-scoped-steady-on-01",
+      "protocol": {
+        "name": "goal-scoped-steady-on-01",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-scoped-steady-on-01\\mods\\wwpg-0.2.7-experimental.wiretree.11.jar",
+          "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar"
+        },
+        "scope": "Focused 120-second warmup and 120-second stable control; not full capacity acceptance",
+        "copied_reference": true,
+        "sixteen_substeps": true,
+        "full_suite": false,
+        "batch": true,
+        "verify_batch": false,
+        "property_batch": true,
+        "detailed": false,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "scoped_restoration": true,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": false,
+        "cpu_affinity_mask": "fff000",
+        "server_affinity_mask": null,
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-scoped-steady-on-01\\mods\\wwpg-benchmark-0.1.0-affinity.jar",
+          "sha256": "56434c77e56c6361aad1b54733eac5573b97bd24d52ae42b0d330216da7a34cb"
+        },
+        "substep_jfr": false,
+        "cpu_jfr": false,
+        "started_utc": "2026-11-09T19:14:10Z",
+        "validation": {
+          "passed": true,
+          "full_suite": false,
+          "capacity_certified": false,
+          "stable_ticks": 2401,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "sixteen_substeps": true,
+          "topology_unchanged": true,
+          "normal_shutdown": true,
+          "batch_execution": {
+            "plans": 1,
+            "unsupported": 0,
+            "steps": 78799,
+            "contributions": 1561086989,
+            "voltage_reads": 1154405350,
+            "scalar_fallbacks": 0,
+            "largest_plain_batch": 10368,
+            "property_contributions": 744098957,
+            "property_scalar_fallbacks": 0,
+            "largest_property_batch": 9443
+          },
+          "bitwise_verification": false
+        },
+        "task_window": {
+          "budgetMillis": 2,
+          "maxTasks": 512,
+          "windows": 200,
+          "completed": 3979,
+          "emptyPolls": 1085807,
+          "maxCompleted": 512,
+          "maxWindowNanos": 2093600,
+          "maxPollNanos": 833300,
+          "probes": 514,
+          "maxProbeNanos": 899200
+        },
+        "cee_geometry": {
+          "requests": 36231604,
+          "hits": 28032435,
+          "builds": 8,
+          "fallback": 8199161,
+          "states": 8
+        },
+        "scope_execution": {
+          "snapshots": 416,
+          "membershipChecks": 0,
+          "savedParts": 2472288,
+          "nodeBindings": 5995048,
+          "seedEndpoints": 2525116,
+          "heldNetworks": 17392,
+          "fallbackWorlds": 0,
+          "totalNanos": 4411643900,
+          "maxNanos": 42431100,
+          "topologyPasses": 464,
+          "topologyNanos": 267980500,
+          "maxTopologyNanos": 13519300
+        },
+        "terminal_execution": null,
+        "terminal_keys": null,
+        "tree_priority_selections": 202,
+        "summary": {
+          "schema": 1,
+          "completed": true,
+          "passed": true,
+          "protocol_complete": false,
+          "capacity_certified": false,
+          "mode": "control",
+          "tier": 10000,
+          "backend": "NATIVE",
+          "variant": "MIXED",
+          "audit": {
+            "electrical_nodes": 14650,
+            "conductive_edges": 20362,
+            "coupled_edges": 275,
+            "edges": 20637,
+            "connected_systems_ignoring_reference_ground": 1,
+            "optimized_matrix_nodes": 14925,
+            "solver_networks": 1,
+            "actual_backends": [
+              "NATIVE"
+            ]
+          },
+          "samples": 2401,
+          "profiled_ticks": 0,
+          "measured_seconds": 119.8182009,
+          "tps": 20.030345823695306,
+          "mspt": {
+            "mean": 48.319201332778015,
+            "p50": 47.2283,
+            "p95": 55.1044,
+            "p99": 58.3776,
+            "maximum": 70.4897
+          },
+          "phase_mean_ms": {
+            "cee_prepare_ns": null,
+            "synchronize_ns": null,
+            "result_bridge_ns": null,
+            "gameplay_commit_ns": null,
+            "pg_prepare_ns": null,
+            "pg_solve_ns": null,
+            "history_prepare_ns": null,
+            "history_commit_ns": null,
+            "cee_device_prepare_ns": null,
+            "cee_device_commit_ns": null,
+            "electrical_schedule_ns": null,
+            "native_measurement_prepare_ns": null,
+            "native_measurement_sample_ns": null,
+            "extension_prepare_ns": null,
+            "extension_before_ns": null,
+            "extension_after_ns": null,
+            "restoration_schedule_ns": null,
+            "restoration_context_ns": null,
+            "native_measurement_finish_ns": null,
+            "extension_bind_ns": null,
+            "extension_finish_ns": null,
+            "extension_commit_ns": null,
+            "provider_prepare_ns": null,
+            "provider_commit_ns": null,
+            "pg_rhs_ns": null,
+            "native_solve_ns": null,
+            "native_iteration_hooks_ns": null,
+            "native_residual_flush_ns": null
+          },
+          "compatibility_share_upper_bound": null,
+          "heap_peak_bytes": 1563466008,
+          "gc_ms": 89,
+          "native_tick_target_met": false,
+          "reason": "Stable control completed",
+          "practical_20tps_target_met": false,
+          "detailed_timers_enabled": false,
+          "process": {
+            "rss_peak_bytes": 2254360576,
+            "cpu_mean_cores": 1.025818345420377
+          }
+        },
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T19:19:01Z"
+      },
+      "summary": {
+        "schema": 1,
+        "completed": true,
+        "passed": true,
+        "protocol_complete": false,
+        "capacity_certified": false,
+        "mode": "control",
+        "tier": 10000,
+        "backend": "NATIVE",
+        "variant": "MIXED",
+        "audit": {
+          "electrical_nodes": 14650,
+          "conductive_edges": 20362,
+          "coupled_edges": 275,
+          "edges": 20637,
+          "connected_systems_ignoring_reference_ground": 1,
+          "optimized_matrix_nodes": 14925,
+          "solver_networks": 1,
+          "actual_backends": [
+            "NATIVE"
+          ]
+        },
+        "samples": 2401,
+        "profiled_ticks": 0,
+        "measured_seconds": 119.8182009,
+        "tps": 20.030345823695306,
+        "mspt": {
+          "mean": 48.319201332778015,
+          "p50": 47.2283,
+          "p95": 55.1044,
+          "p99": 58.3776,
+          "maximum": 70.4897
+        },
+        "phase_mean_ms": {
+          "cee_prepare_ns": null,
+          "synchronize_ns": null,
+          "result_bridge_ns": null,
+          "gameplay_commit_ns": null,
+          "pg_prepare_ns": null,
+          "pg_solve_ns": null,
+          "history_prepare_ns": null,
+          "history_commit_ns": null,
+          "cee_device_prepare_ns": null,
+          "cee_device_commit_ns": null,
+          "electrical_schedule_ns": null,
+          "native_measurement_prepare_ns": null,
+          "native_measurement_sample_ns": null,
+          "extension_prepare_ns": null,
+          "extension_before_ns": null,
+          "extension_after_ns": null,
+          "restoration_schedule_ns": null,
+          "restoration_context_ns": null,
+          "native_measurement_finish_ns": null,
+          "extension_bind_ns": null,
+          "extension_finish_ns": null,
+          "extension_commit_ns": null,
+          "provider_prepare_ns": null,
+          "provider_commit_ns": null,
+          "pg_rhs_ns": null,
+          "native_solve_ns": null,
+          "native_iteration_hooks_ns": null,
+          "native_residual_flush_ns": null
+        },
+        "compatibility_share_upper_bound": null,
+        "heap_peak_bytes": 1563466008,
+        "gc_ms": 89,
+        "native_tick_target_met": false,
+        "reason": "Stable control completed",
+        "practical_20tps_target_met": false,
+        "detailed_timers_enabled": false,
+        "process": {
+          "rss_peak_bytes": 2254360576,
+          "cpu_mean_cores": 1.025818345420377
+        }
+      },
+      "loading": [
+        {
+          "phase": "SETTLE",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 32,
+          "graph_ready_tick": 210,
+          "finish_tick": 329,
+          "chunk_request_seconds": 0.8005981,
+          "chunk_loading_seconds": 13.6911724,
+          "graph_recovery_seconds": 12.6380504,
+          "electrical_settling_seconds": 6.187008,
+          "total_restoration_seconds": 33.3168289,
+          "restoration_and_settling_seconds": 32.5162308,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 11270,
+          "maximum_pending_roots": 11270,
+          "queue_drained_tick": 210,
+          "queue_drain_seconds": 12.6380504
+        }
+      ],
+      "thirty_second_blocks": [
+        {
+          "block": 0,
+          "ticks": 604,
+          "mean_tick_ms": 48.258150331125826
+        },
+        {
+          "block": 1,
+          "ticks": 599,
+          "mean_tick_ms": 48.4957101836394
+        },
+        {
+          "block": 2,
+          "ticks": 601,
+          "mean_tick_ms": 48.28011480865224
+        },
+        {
+          "block": 3,
+          "ticks": 597,
+          "mean_tick_ms": 48.24321641541039
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 53,
+        "in_window_seconds": 265.65718483924866,
+        "monitored_processes": 190,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.27555484729048757,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "13688:134387027373880825",
+            "peak_cores": 0.2552443711202711,
+            "mean_cores": 0.05311121176164574
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "5948:134387027096006899",
+            "peak_cores": 0.1154305546186917,
+            "mean_cores": 0.08157835073466517
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28732:134387027298932907",
+            "peak_cores": 0.07800584234430791,
+            "mean_cores": 0.03687788457868425
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "6028:134387027037888757",
+            "peak_cores": 0.059295331737405546,
+            "mean_cores": 0.027878974944651254
+          },
+          {
+            "name": "Discord.exe",
+            "identity": "28708:134387040917398085",
+            "peak_cores": 0.05615143553519623,
+            "mean_cores": 0.003940698990066738
+          },
+          {
+            "name": "chrome.exe",
+            "identity": "35380:134387027576582133",
+            "peak_cores": 0.04979138281660335,
+            "mean_cores": 0.0022350233077990454
+          },
+          {
+            "name": "codex.exe",
+            "identity": "30104:134387027358105490",
+            "peak_cores": 0.04359978395510235,
+            "mean_cores": 0.0032937185588617513
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28176:134387027293764011",
+            "peak_cores": 0.04057049013611958,
+            "mean_cores": 0.006881519131907588
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/goal-scoped-steady-on-01/experiment.json",
+          "sha256": "03042706b473d16be4e162e79ede6c495cd739767e5229b9365224d5db12f1f4"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-on-01/launch.json",
+          "sha256": "d397b52de4554f0b6eb40a5d23490da8d70f69abfc466bb26f7113e4c85d06ad"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-on-01/invocation.json",
+          "sha256": "e7a6136996c0d3f0cb8dcfb566c8c7ab8dedba347d787109ce37d257b1910c2a"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-on-01/process.log",
+          "sha256": "920b9da06b8a28b7dbdfcc3154322447578bb7bb2ae26f8f71b41911bbd58b19"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-on-01/runner-exit.json",
+          "sha256": "7790b9ea74cbf185792d26276183e9af9e0ad2f5c87202b67ef33448abb2e1df"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-on-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-on-01/host-metrics.jsonl",
+          "sha256": "5fc26f34fa15961910f956dd10f65b0cad66f808089f6ddf666a0277d1a6f400"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-on-01/process-metrics.jsonl",
+          "sha256": "22bcb31323eacc4224ab0f114a318e55a18f3556852b0600757aa032904bf493"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-on-01/benchmark/result.json",
+          "sha256": "6f5fc5e5c25451286ebf5a682f177a21be26ab1f185910505d6ec4f37d825fef"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-on-01/benchmark/summary.json",
+          "sha256": "4293fde60f1f2c2b94c19be0b0b4337e1a3ba8c2b5285b2dae45e6aa13d4163f"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-on-01/benchmark/loading-results.json",
+          "sha256": "0d582e612232313cd2b4180154d320f8a80ae30456cd07926831be86710832e4"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-on-01/benchmark/ticks.csv",
+          "sha256": "ba5da0ded3816c488bd44dad29160a89f81685e6e35ef9fe27cb30cdff8d4d1c"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-on-01/benchmark/placement-ticks.csv",
+          "sha256": "017837448af25849e638e767f81d8c6c39c34f88b95acc769a7f606bd92a4665"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-on-01/benchmark/cpu-topology.json",
+          "sha256": "502d42b00a2634c12bb5142ce477b23e8b77ba45c1b83787347c8de9d3a2fade"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-on-01/benchmark/placement-fixed.json",
+          "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-on-01/benchmark/placement-restored.json",
+          "sha256": "3bafe0c622640138b9c3eba475cf936525c0775eb01488cdc2531f1b884ffbe1"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-on-01/benchmark/graph-start.json",
+          "sha256": "51507b349c1644af0ff34b5d0f8d337d69ac852ae98e1f84ad5694b99a0fa28a"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-on-01/benchmark/graph-end.json",
+          "sha256": "51507b349c1644af0ff34b5d0f8d337d69ac852ae98e1f84ad5694b99a0fa28a"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-on-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-on-01/process-affinity.json",
+          "sha256": "71271b72a5f5cd8fc5b0b93660e6f44d9bfb19ff99fd2291b7502297e58115da"
+        }
+      ],
+      "process_affinity": {
+        "pid": 17252,
+        "original_mask": "ffffff",
+        "requested_mask": "fff000",
+        "readback_mask": "fff000",
+        "logical_cpus": [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "wall_unix": 1794251656.3614311,
+        "scope": "Owned child process immediately after launch; other processes unchanged"
+      },
+      "affinity_readbacks": 284,
+      "stable_cpu_busy_percent": [
+        4.295778530509336,
+        6.49042817187557,
+        20.710562492854336,
+        24.15989722366001,
+        19.21783271718874,
+        24.400397915092032,
+        8.469737630782424,
+        8.589533258000834,
+        2.4817286617825776,
+        2.372562186675322,
+        5.3673408803221525,
+        5.067020958900909,
+        63.113662696527776,
+        8.463567344400607,
+        6.860010317480993,
+        7.003501725834542,
+        4.3927366634466685,
+        4.76958359366906,
+        4.067690527197599,
+        7.2564721335418065,
+        1.4100711179544734,
+        1.8438835962060809,
+        4.765106482995649,
+        5.499282855946737
+      ],
+      "stable_cpu_observation_seconds": 115.30489540100098,
+      "cpu_observation_note": "Total per-core load including the benchmark; affinity restricts this process but does not reserve CPUs against other processes."
+    },
+    {
+      "name": "goal-scoped-steady-off-01",
+      "protocol": {
+        "name": "goal-scoped-steady-off-01",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-scoped-steady-off-01\\mods\\wwpg-0.2.7-experimental.wiretree.11.jar",
+          "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar"
+        },
+        "scope": "Focused 120-second warmup and 120-second stable control; not full capacity acceptance",
+        "copied_reference": true,
+        "sixteen_substeps": true,
+        "full_suite": false,
+        "batch": true,
+        "verify_batch": false,
+        "property_batch": true,
+        "detailed": false,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "scoped_restoration": false,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": false,
+        "cpu_affinity_mask": "fff000",
+        "server_affinity_mask": null,
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-scoped-steady-off-01\\mods\\wwpg-benchmark-0.1.0-affinity.jar",
+          "sha256": "56434c77e56c6361aad1b54733eac5573b97bd24d52ae42b0d330216da7a34cb"
+        },
+        "substep_jfr": false,
+        "cpu_jfr": false,
+        "started_utc": "2026-11-09T19:19:01Z",
+        "validation": {
+          "passed": true,
+          "full_suite": false,
+          "capacity_certified": false,
+          "stable_ticks": 2400,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "sixteen_substeps": true,
+          "topology_unchanged": true,
+          "normal_shutdown": true,
+          "batch_execution": {
+            "plans": 1,
+            "unsupported": 0,
+            "steps": 78767,
+            "contributions": 1560453037,
+            "voltage_reads": 1153936550,
+            "scalar_fallbacks": 0,
+            "largest_plain_batch": 10368,
+            "property_contributions": 743796781,
+            "property_scalar_fallbacks": 0,
+            "largest_property_batch": 9443
+          },
+          "bitwise_verification": false
+        },
+        "task_window": {
+          "budgetMillis": 2,
+          "maxTasks": 512,
+          "windows": 210,
+          "completed": 3842,
+          "emptyPolls": 1129376,
+          "maxCompleted": 449,
+          "maxWindowNanos": 2445700,
+          "maxPollNanos": 778700,
+          "probes": 514,
+          "maxProbeNanos": 699600
+        },
+        "cee_geometry": {
+          "requests": 36177341,
+          "hits": 27989134,
+          "builds": 8,
+          "fallback": 8188199,
+          "states": 8
+        },
+        "scope_execution": null,
+        "terminal_execution": null,
+        "terminal_keys": null,
+        "tree_priority_selections": 196,
+        "summary": {
+          "schema": 1,
+          "completed": true,
+          "passed": true,
+          "protocol_complete": false,
+          "capacity_certified": false,
+          "mode": "control",
+          "tier": 10000,
+          "backend": "NATIVE",
+          "variant": "MIXED",
+          "audit": {
+            "electrical_nodes": 14650,
+            "conductive_edges": 20362,
+            "coupled_edges": 275,
+            "edges": 20637,
+            "connected_systems_ignoring_reference_ground": 1,
+            "optimized_matrix_nodes": 14925,
+            "solver_networks": 1,
+            "actual_backends": [
+              "NATIVE"
+            ]
+          },
+          "samples": 2400,
+          "profiled_ticks": 0,
+          "measured_seconds": 119.690975,
+          "tps": 20.043282294258194,
+          "mspt": {
+            "mean": 48.964711125,
+            "p50": 48.2288,
+            "p95": 55.4245,
+            "p99": 60.2994,
+            "maximum": 68.8435
+          },
+          "phase_mean_ms": {
+            "cee_prepare_ns": null,
+            "synchronize_ns": null,
+            "result_bridge_ns": null,
+            "gameplay_commit_ns": null,
+            "pg_prepare_ns": null,
+            "pg_solve_ns": null,
+            "history_prepare_ns": null,
+            "history_commit_ns": null,
+            "cee_device_prepare_ns": null,
+            "cee_device_commit_ns": null,
+            "electrical_schedule_ns": null,
+            "native_measurement_prepare_ns": null,
+            "native_measurement_sample_ns": null,
+            "extension_prepare_ns": null,
+            "extension_before_ns": null,
+            "extension_after_ns": null,
+            "restoration_schedule_ns": null,
+            "restoration_context_ns": null,
+            "native_measurement_finish_ns": null,
+            "extension_bind_ns": null,
+            "extension_finish_ns": null,
+            "extension_commit_ns": null,
+            "provider_prepare_ns": null,
+            "provider_commit_ns": null,
+            "pg_rhs_ns": null,
+            "native_solve_ns": null,
+            "native_iteration_hooks_ns": null,
+            "native_residual_flush_ns": null
+          },
+          "compatibility_share_upper_bound": null,
+          "heap_peak_bytes": 1377263600,
+          "gc_ms": 126,
+          "native_tick_target_met": false,
+          "reason": "Stable control completed",
+          "practical_20tps_target_met": false,
+          "detailed_timers_enabled": false,
+          "process": {
+            "rss_peak_bytes": 2016423936,
+            "cpu_mean_cores": 1.1088714016438672
+          }
+        },
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T19:23:48Z"
+      },
+      "summary": {
+        "schema": 1,
+        "completed": true,
+        "passed": true,
+        "protocol_complete": false,
+        "capacity_certified": false,
+        "mode": "control",
+        "tier": 10000,
+        "backend": "NATIVE",
+        "variant": "MIXED",
+        "audit": {
+          "electrical_nodes": 14650,
+          "conductive_edges": 20362,
+          "coupled_edges": 275,
+          "edges": 20637,
+          "connected_systems_ignoring_reference_ground": 1,
+          "optimized_matrix_nodes": 14925,
+          "solver_networks": 1,
+          "actual_backends": [
+            "NATIVE"
+          ]
+        },
+        "samples": 2400,
+        "profiled_ticks": 0,
+        "measured_seconds": 119.690975,
+        "tps": 20.043282294258194,
+        "mspt": {
+          "mean": 48.964711125,
+          "p50": 48.2288,
+          "p95": 55.4245,
+          "p99": 60.2994,
+          "maximum": 68.8435
+        },
+        "phase_mean_ms": {
+          "cee_prepare_ns": null,
+          "synchronize_ns": null,
+          "result_bridge_ns": null,
+          "gameplay_commit_ns": null,
+          "pg_prepare_ns": null,
+          "pg_solve_ns": null,
+          "history_prepare_ns": null,
+          "history_commit_ns": null,
+          "cee_device_prepare_ns": null,
+          "cee_device_commit_ns": null,
+          "electrical_schedule_ns": null,
+          "native_measurement_prepare_ns": null,
+          "native_measurement_sample_ns": null,
+          "extension_prepare_ns": null,
+          "extension_before_ns": null,
+          "extension_after_ns": null,
+          "restoration_schedule_ns": null,
+          "restoration_context_ns": null,
+          "native_measurement_finish_ns": null,
+          "extension_bind_ns": null,
+          "extension_finish_ns": null,
+          "extension_commit_ns": null,
+          "provider_prepare_ns": null,
+          "provider_commit_ns": null,
+          "pg_rhs_ns": null,
+          "native_solve_ns": null,
+          "native_iteration_hooks_ns": null,
+          "native_residual_flush_ns": null
+        },
+        "compatibility_share_upper_bound": null,
+        "heap_peak_bytes": 1377263600,
+        "gc_ms": 126,
+        "native_tick_target_met": false,
+        "reason": "Stable control completed",
+        "practical_20tps_target_met": false,
+        "detailed_timers_enabled": false,
+        "process": {
+          "rss_peak_bytes": 2016423936,
+          "cpu_mean_cores": 1.1088714016438672
+        }
+      },
+      "loading": [
+        {
+          "phase": "SETTLE",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 32,
+          "graph_ready_tick": 211,
+          "finish_tick": 330,
+          "chunk_request_seconds": 0.7992589,
+          "chunk_loading_seconds": 12.150365,
+          "graph_recovery_seconds": 9.5468294,
+          "electrical_settling_seconds": 6.1180086,
+          "total_restoration_seconds": 28.6144619,
+          "restoration_and_settling_seconds": 27.815203,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 11342,
+          "maximum_pending_roots": 11342,
+          "queue_drained_tick": 211,
+          "queue_drain_seconds": 9.5468294
+        }
+      ],
+      "thirty_second_blocks": [
+        {
+          "block": 0,
+          "ticks": 605,
+          "mean_tick_ms": 49.1960838016529
+        },
+        {
+          "block": 1,
+          "ticks": 600,
+          "mean_tick_ms": 49.188256333333335
+        },
+        {
+          "block": 2,
+          "ticks": 601,
+          "mean_tick_ms": 48.76770698835274
+        },
+        {
+          "block": 3,
+          "ticks": 594,
+          "mean_tick_ms": 48.70257626262626
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 52,
+        "in_window_seconds": 260.7254683971405,
+        "monitored_processes": 192,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.2784298382750405,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "13688:134387027373880825",
+            "peak_cores": 0.26157311045849313,
+            "mean_cores": 0.055554123995041435
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "5948:134387027096006899",
+            "peak_cores": 0.16187906087427573,
+            "mean_cores": 0.0857583079146756
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28732:134387027298932907",
+            "peak_cores": 0.07470812152723254,
+            "mean_cores": 0.037575443090497276
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "6028:134387027037888757",
+            "peak_cores": 0.0623261977020353,
+            "mean_cores": 0.027507381783952553
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28176:134387027293764011",
+            "peak_cores": 0.05299233419751939,
+            "mean_cores": 0.008390051088787272
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "30196:134387027364652111",
+            "peak_cores": 0.04363701806987961,
+            "mean_cores": 0.0013783655360150517
+          },
+          {
+            "name": "NVIDIA Overlay.exe",
+            "identity": "23344:134387027098263065",
+            "peak_cores": 0.021813098766950725,
+            "mean_cores": 0.005093959589620843
+          },
+          {
+            "name": "msrdc.exe",
+            "identity": "7056:134387256768594486",
+            "peak_cores": 0.01872469893485465,
+            "mean_cores": 0.00041950255443936354
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/goal-scoped-steady-off-01/experiment.json",
+          "sha256": "14683a35a892820573736b86b85edf49ce22878d7c27ef21846cc771aa9723a7"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-off-01/launch.json",
+          "sha256": "956e12bed59d4c085468b4e40e0cac78f7e929687466c76dba558d3e04291923"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-off-01/invocation.json",
+          "sha256": "73c65e72b73f9a6dd2a0f95fab71df147ecd49ba23c03477bf6d6198c1b78c29"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-off-01/process.log",
+          "sha256": "6764b82ab946129172a9f9abfd0e7c8058958a4ed76610e5b7af37f9d2a363bc"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-off-01/runner-exit.json",
+          "sha256": "39c9f62f5591dbba10277a804497978692a97eecb4f2ef2774a4a75ceff7b4c4"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-off-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-off-01/host-metrics.jsonl",
+          "sha256": "36ec8192bfbe5a67aef803ad2a003ef1d0050f9555831fcc1c35112c831ae2f2"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-off-01/process-metrics.jsonl",
+          "sha256": "712c45d5560bdaa47ca26e632d15def5755c2260f8efb6ab81a04fc91d6125fc"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-off-01/benchmark/result.json",
+          "sha256": "c3fc3ee65e970129a4b834fc21b54588f80a0983c79bdc1f65e55a9f7af41d37"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-off-01/benchmark/summary.json",
+          "sha256": "939a7de398744a86ae6056017571a02ed943762adf5a0c6c51f33e39f9c24151"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-off-01/benchmark/loading-results.json",
+          "sha256": "f61f2635cba5970189d0ddd5813a253e0edd9d44557dbd5c43cc00fbcb8ddba7"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-off-01/benchmark/ticks.csv",
+          "sha256": "3fc9ee363ee97465e668032480f9157af7b0c1c6fc9cce2fd6e03583da487506"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-off-01/benchmark/placement-ticks.csv",
+          "sha256": "fb23d7df37e66109ce993a3f3d96762653c5cd291c27e785f858eef95ec19a7a"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-off-01/benchmark/cpu-topology.json",
+          "sha256": "4568539106cc3ce96d668c977ff9e287c7065ea84692a2a9c14438c62c636855"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-off-01/benchmark/placement-fixed.json",
+          "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-off-01/benchmark/placement-restored.json",
+          "sha256": "3bafe0c622640138b9c3eba475cf936525c0775eb01488cdc2531f1b884ffbe1"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-off-01/benchmark/graph-start.json",
+          "sha256": "0486d132d60be0171b0901d5ce3c7ef6fffb4c899107045f24ab7085ae4422c1"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-off-01/benchmark/graph-end.json",
+          "sha256": "0486d132d60be0171b0901d5ce3c7ef6fffb4c899107045f24ab7085ae4422c1"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-off-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/goal-scoped-steady-off-01/process-affinity.json",
+          "sha256": "58351dfe6a08b4a111baebaf5bf79de06e24c636fe7d11fff7433d41303a08d3"
+        }
+      ],
+      "process_affinity": {
+        "pid": 37664,
+        "original_mask": "ffffff",
+        "requested_mask": "fff000",
+        "readback_mask": "fff000",
+        "logical_cpus": [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "wall_unix": 1794251948.2006395,
+        "scope": "Owned child process immediately after launch; other processes unchanged"
+      },
+      "affinity_readbacks": 280,
+      "stable_cpu_busy_percent": [
+        4.240965424442191,
+        6.054238777744226,
+        20.915513666302477,
+        23.165651426345086,
+        22.639832196705427,
+        22.93400867944236,
+        9.525871066636098,
+        8.276574507346437,
+        2.8714561820634303,
+        2.384457153758879,
+        6.190525365160061,
+        4.659784122982344,
+        11.982803929039735,
+        8.442794388554148,
+        8.500560961734598,
+        8.304253433211988,
+        5.110969102119767,
+        8.331997800299531,
+        6.78757458487421,
+        7.088134306786019,
+        2.603244964984911,
+        1.7090789867751994,
+        11.532920835797738,
+        47.97051241302201
+      ],
+      "stable_cpu_observation_seconds": 115.34884643554688,
+      "cpu_observation_note": "Total per-core load including the benchmark; affinity restricts this process but does not reserve CPUs against other processes."
+    }
+  ],
+  "failed_attempts": [
+    {
+      "name": "scoped-native-01",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_scope,wwpg_tree_budget",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 1,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12a\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12a\\wwpg-0.2.7-experimental.wiretree.11.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12a\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\scoped-native-01\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_scope,wwpg_tree_budget",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=1",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true",
+          "-PtestScopedRestoration=true",
+          "-PtestTerminalBookkeeping=false",
+          "-PtestTerminalKeyLookup=false"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12a\\wwpg-0.2.7-experimental.wiretree.11.jar",
+            "sha256": "bc90f82d2d95d1d5ce3509ad4f1baa7cf2d1c77ab6e1c1c042b4a822fdf1ac84"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12a\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+            "sha256": "25a1d2a46c7f857fb7e15d1b73fe2f4c59384047e656b2186647766cb71cef0d"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12a\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "scoped_restoration": true,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": false,
+        "addon_artifacts": {},
+        "exit_code": 1,
+        "required_tests_passed": 0,
+        "artifacts_unchanged": true,
+        "passed": false
+      },
+      "evidence": [
+        {
+          "path": "local/checks/scoped-native-01/result.json",
+          "sha256": "1c98b3a7a65ef4cb7ab8fe08a5775f433f9c1007d622a331940dd6baf312ad01"
+        },
+        {
+          "path": "local/checks/scoped-native-01/process.log",
+          "sha256": "18ef1b491885448bc4b3d38b7ac1a619d73509299ce94f5b6c5be8a85abf4910"
+        }
+      ]
+    },
+    {
+      "name": "scoped-native-02",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_scope,wwpg_tree_budget",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 1,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12b\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12b\\wwpg-0.2.7-experimental.wiretree.11.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12b\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\scoped-native-02\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_scope,wwpg_tree_budget",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=1",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true",
+          "-PtestScopedRestoration=true",
+          "-PtestTerminalBookkeeping=false",
+          "-PtestTerminalKeyLookup=false"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12b\\wwpg-0.2.7-experimental.wiretree.11.jar",
+            "sha256": "a8a5eec238d997148899cb75e6dda3a602ab545e07c231165fffddc2bc0e6120"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12b\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+            "sha256": "77252ec8943ad4e205831e9d99ce77f3826445686666e1e5a33b55917013c259"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12b\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "scoped_restoration": true,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": false,
+        "addon_artifacts": {},
+        "exit_code": 1,
+        "required_tests_passed": 0,
+        "artifacts_unchanged": true,
+        "passed": false
+      },
+      "evidence": [
+        {
+          "path": "local/checks/scoped-native-02/result.json",
+          "sha256": "05b0d98f29f007092e442ddb583dcc1b48a94966d4e52f66ea4e67c88e4a6506"
+        },
+        {
+          "path": "local/checks/scoped-native-02/process.log",
+          "sha256": "36e626124a4f2a296f6474a2c45064c51e51e5a1dfc90dda3e9bccd0e5f9b188"
+        }
+      ]
+    },
+    {
+      "name": "scoped-native-03",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_scope,wwpg_tree_budget",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 1,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12c\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12c\\wwpg-0.2.7-experimental.wiretree.11.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12c\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\scoped-native-03\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_scope,wwpg_tree_budget",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=1",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true",
+          "-PtestScopedRestoration=true",
+          "-PtestTerminalBookkeeping=false",
+          "-PtestTerminalKeyLookup=false"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12c\\wwpg-0.2.7-experimental.wiretree.11.jar",
+            "sha256": "c09b86b1bdf1daa05877a5da438de6dd050adcf34ad6f1a435c9f7932b605a33"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12c\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+            "sha256": "b7516357c90ce7329be93a963292fe316779213c9184a00803e3337f0842b771"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12c\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "scoped_restoration": true,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": false,
+        "addon_artifacts": {},
+        "exit_code": 1,
+        "required_tests_passed": 0,
+        "artifacts_unchanged": true,
+        "passed": false
+      },
+      "evidence": [
+        {
+          "path": "local/checks/scoped-native-03/result.json",
+          "sha256": "ef4182a8d8b9557a68488ca069c3028e376c3d77acc71875041e7295c1a9a33c"
+        },
+        {
+          "path": "local/checks/scoped-native-03/process.log",
+          "sha256": "d5ec629edd5cd5c27edce26e6e669db02ee49f5f0bfd9f10b09acfa123d4526e"
+        }
+      ]
+    },
+    {
+      "name": "scoped-native-05",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_scope,wwpg_tree_budget",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 1,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12e\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12e\\wwpg-0.2.7-experimental.wiretree.11.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12e\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\scoped-native-05\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_scope,wwpg_tree_budget",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=1",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true",
+          "-PtestScopedRestoration=true",
+          "-PtestTerminalBookkeeping=false",
+          "-PtestTerminalKeyLookup=false",
+          "-PtestApiAddon=true",
+          "-PtestExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+          "-PtestUpstreamExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12e\\wwpg-0.2.7-experimental.wiretree.11.jar",
+            "sha256": "9ef77de7b8c1cee23604d831d6c461a2039b971f985fb5baf8937e3fe8d0adb3"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12e\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+            "sha256": "bbae1cf6fb4fa3b7389f7ad40e52dbe1c7f8c9e5a5a0692d3df415a72160716d"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12e\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "scoped_restoration": true,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": false,
+        "addon_artifacts": {
+          "example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+            "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef"
+          },
+          "upstream_example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar",
+            "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11"
+          }
+        },
+        "addon_inputs": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\inputs.json",
+          "sha256": "a82ef707180cf85a31e626df9a076e5df4c3c6d13036547aae3dce2e9ed6ca2e"
+        },
+        "exit_code": 1,
+        "required_tests_passed": 0,
+        "artifacts_unchanged": true,
+        "passed": false,
+        "addons_unchanged": true,
+        "addon_classpath_verified": true
+      },
+      "evidence": [
+        {
+          "path": "local/checks/scoped-native-05/result.json",
+          "sha256": "e504fab6d93f5141925fa23d04573956b6d6f1a60f6168e579e652a08fda8c31"
+        },
+        {
+          "path": "local/checks/scoped-native-05/process.log",
+          "sha256": "dd0416fd653e9baa226a12d014e61879fc583dddf31c62fd15529785b38632b4"
+        }
+      ]
+    },
+    {
+      "name": "scoped-native-06",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_scope,wwpg_tree_budget",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 1,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12f\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12f\\wwpg-0.2.7-experimental.wiretree.11.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12f\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\scoped-native-06\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_scope,wwpg_tree_budget",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=1",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true",
+          "-PtestScopedRestoration=true",
+          "-PtestTerminalBookkeeping=false",
+          "-PtestTerminalKeyLookup=false",
+          "-PtestApiAddon=true",
+          "-PtestExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+          "-PtestUpstreamExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12f\\wwpg-0.2.7-experimental.wiretree.11.jar",
+            "sha256": "9ef77de7b8c1cee23604d831d6c461a2039b971f985fb5baf8937e3fe8d0adb3"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12f\\wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+            "sha256": "24d2d70ca4b8895d71e1d74c9fc49b23a1873507f4f1c10627f2443d1fc51636"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12f\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "scoped_restoration": true,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": false,
+        "addon_artifacts": {
+          "example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+            "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef"
+          },
+          "upstream_example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar",
+            "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11"
+          }
+        },
+        "addon_inputs": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\inputs.json",
+          "sha256": "a82ef707180cf85a31e626df9a076e5df4c3c6d13036547aae3dce2e9ed6ca2e"
+        },
+        "exit_code": 1,
+        "required_tests_passed": 0,
+        "artifacts_unchanged": true,
+        "passed": false,
+        "addons_unchanged": true,
+        "addon_classpath_verified": true
+      },
+      "evidence": [
+        {
+          "path": "local/checks/scoped-native-06/result.json",
+          "sha256": "e1420652d673232aa880c13dde9b1676140f003421a2ef47baf73401392f72d2"
+        },
+        {
+          "path": "local/checks/scoped-native-06/process.log",
+          "sha256": "13827e87fdc271599ce73ac4352e3c90dff98a651d7a13bfc9bcf13a11d6680b"
+        }
+      ]
+    }
+  ],
+  "archived_sources": [
+    {
+      "archive": {
+        "path": "local/scoped-restoration-source-12a.zip",
+        "sha256": "d72a98001d7f53aef1f22a9bb226122d9561bda203d508119066b368a485e90d"
+      },
+      "manifest": {
+        "path": "local/frozen/prototype-12a/inputs.json",
+        "sha256": "7e0d25dae57844437356d868d4036cae96b1335087204300dd25c8bf4691dc62"
+      }
+    },
+    {
+      "archive": {
+        "path": "local/scoped-restoration-source-12b.zip",
+        "sha256": "bbbd04f70683816ef3507261680bd2a9103166fb457e23823d3c8719f3e7599e"
+      },
+      "manifest": {
+        "path": "local/frozen/prototype-12b/inputs.json",
+        "sha256": "62006e8edb92ee14d691118a82349c4d2672cf16058c303b625f560676e4d425"
+      }
+    },
+    {
+      "archive": {
+        "path": "local/scoped-restoration-source-12c.zip",
+        "sha256": "e6f1f7e6fd5701e7d6a112dc41934a838f806c4ab29044212598744e087c0735"
+      },
+      "manifest": {
+        "path": "local/frozen/prototype-12c/inputs.json",
+        "sha256": "daa71a9df4c819f81dd70133c90d6b008c463f89bc2ab42510c091945744498a"
+      }
+    },
+    {
+      "archive": {
+        "path": "local/scoped-restoration-source-12d.zip",
+        "sha256": "e83578c2fea160e887b39688c8cb154f6f39e9f9f361f6e6fcc8f437b468718c"
+      },
+      "manifest": {
+        "path": "local/frozen/prototype-12d/inputs.json",
+        "sha256": "afe9aedfa6da20fdf8f7d7679cf6992465a4e22a6eecc23e38c4902624fc594f"
+      }
+    },
+    {
+      "archive": {
+        "path": "local/scoped-restoration-source-12e.zip",
+        "sha256": "e2ffe18c9100e53de1c3ffc9023ae05c1e15e61b028a781cbc610ebc64d3331c"
+      },
+      "manifest": {
+        "path": "local/frozen/prototype-12e/inputs.json",
+        "sha256": "d3b5c25fd2f1f7acbc4e34f388f82904b62c526be02a32575537e0b010cc5378"
+      }
+    },
+    {
+      "archive": {
+        "path": "local/scoped-restoration-source-12f.zip",
+        "sha256": "742f875bd91e958a06db81517a800e56fce510e3503dbbe549796c38fc9877ec"
+      },
+      "manifest": {
+        "path": "local/frozen/prototype-12f/inputs.json",
+        "sha256": "de2c95d45b950233583ebe69355bcae7a50cb9d0115ac68456411f32e367cb96"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "path": "local/frozen/prototype-12g/inputs.json",
+      "sha256": "f7f34bbba95a21ef9eea0228b4174fa8b31a6a4e8a230fd01b021b7389a68016"
+    },
+    {
+      "path": "local/checks/scoped-native-07/invocation.json",
+      "sha256": "f6ee5a2ff52faffbc0a563bb164adb3f224247bca00b8042823ab5aa5893c5c5"
+    },
+    {
+      "path": "local/checks/scoped-native-07/process.log",
+      "sha256": "067e732102de77d56343e6af865375be35e53d7d9b4f2575971a087e16e98f2a"
+    },
+    {
+      "path": "local/checks/scoped-native-07/result.json",
+      "sha256": "3aff06a4883ee496c9213479573d07a9144411999381876fcc345eaff9fe23f6"
+    },
+    {
+      "path": "local/checks/scoped-java-02/invocation.json",
+      "sha256": "34d544bd2d900eee96142da4efed207297a4a42ee4428e75e236697251eaecf4"
+    },
+    {
+      "path": "local/checks/scoped-java-02/process.log",
+      "sha256": "de351e5e01033d3241ffb1bb8743a33125d3827e168ddb84849e55ebeb5215fc"
+    },
+    {
+      "path": "local/checks/scoped-java-02/result.json",
+      "sha256": "f940d6ce1c65bfd814f56d06ae40b6a9a5aa2f1ee95ef6506f453f42bcc45e55"
+    },
+    {
+      "path": "local/checks/scoped-api-native-01/invocation.json",
+      "sha256": "d308de0925b80fc145a9239ea01caf5bf20f2af749a90650fc3d77e20ea20e65"
+    },
+    {
+      "path": "local/checks/scoped-api-native-01/process.log",
+      "sha256": "011f56ed53d25a3ef6a2e298c294845f8e00cb84a62799117eb46d17e951999f"
+    },
+    {
+      "path": "local/checks/scoped-api-native-01/result.json",
+      "sha256": "5e7316901387bf793b0d64c1b9b54f59c31317f5d65af75c2f22a915ebc920fc"
+    },
+    {
+      "path": "local/checks/scoped-budget-native-02/invocation.json",
+      "sha256": "33fc063807275fa1564b0961a44e8f8ebe604d87989aca40d1f9c19e8ab65b53"
+    },
+    {
+      "path": "local/checks/scoped-budget-native-02/process.log",
+      "sha256": "9770fa0d1e2ee915b234dc5a383bb19ad45cc6afcf3addb8027b2d9f838757e9"
+    },
+    {
+      "path": "local/checks/scoped-budget-native-02/result.json",
+      "sha256": "c3ab01795e061626a773d284910feb5eb93a96fd6c205f375f79fb23e348ec0c"
+    },
+    {
+      "path": "local/checks/scoped-budget-off-01/invocation.json",
+      "sha256": "cacb91c5ba99e7fe92a1b7dd1c4081c2f77647548614a00664d5e82408a4f31e"
+    },
+    {
+      "path": "local/checks/scoped-budget-off-01/process.log",
+      "sha256": "107b4bf1dee40501f3930fa2ee41ba54ede14ed6fad20ab88bf7792aa59da552"
+    },
+    {
+      "path": "local/checks/scoped-budget-off-01/result.json",
+      "sha256": "1806f76938df29b97dd783695da8f957ba64ba2dc365d5b275dc3429acea78ef"
+    },
+    {
+      "path": "docs/experimental/client-scoped-on-results-20261109.json",
+      "sha256": "dba4dea17015e1c912d40aea58c1b75f94df2119ab610c677aa837f81502a670"
+    },
+    {
+      "path": "docs/experimental/client-scoped-off-results-20261109.json",
+      "sha256": "64413a68b9d4740b7ddfc28d78b45e64dd8c9875af7b3f55becf0bfbe228aa77"
+    },
+    {
+      "path": "tools/experimental/plain_wire_benchmark.py",
+      "sha256": "c60a054e8eb8a32056fa5298101c2975909160c9ba5076516c1a4c16dfe59478"
+    },
+    {
+      "path": "tools/experimental/restoration_benchmark.py",
+      "sha256": "b4454e1f4967ae6e8aea6b3af4ecdcbb25523e94b1cd690f7fe28c87e1cc9b83"
+    },
+    {
+      "path": "tools/experimental/client_loading_benchmark.py",
+      "sha256": "0c58815fd1c56282bdafb2d81173cf00ffe15526105f62ce4641c90a613f93ed"
+    },
+    {
+      "path": "tools/experimental/focused_checks.py",
+      "sha256": "f47665d475d67df190434b510c9b71495965a1c576a7077235bff9ae69cdcc39"
+    },
+    {
+      "path": "tools/experimental/summarize_client_loading.py",
+      "sha256": "4d73377219d685e21036baf01193ec5c19d50f749a1fee5841ccea7e072b2e4f"
+    },
+    {
+      "path": "tools/experimental/summarize_current_profile.py",
+      "sha256": "ab8bc7d361438c167e8625695d64ed2e55e436ad819132de6d3aec012db6dc23"
+    },
+    {
+      "path": "tools/experimental/summarize_scoped_restoration.py",
+      "sha256": "61626784333fab4834482276dfebe8bdc2e9c0fe7d30b31f1d1aad043a4209e7"
+    },
+    {
+      "path": "tools/experimental/test_scoped_evidence.py",
+      "sha256": "e5c1aa20b87e89a911d862e9c9dfd21da422d5419862871aec3be86cf2043b9c"
+    },
+    {
+      "path": "local/scoped-evidence-check-01.log",
+      "sha256": "6ce19fe5c6e39322ca0b13f5b467573e2eeec70d41fbf64d3e414ddbe59845d6"
+    }
+  ],
+  "note": "Finite focused observations; no full acceptance or statistical-significance claim. Scope discovery is outside the wire queue time budget."
+}

@@ -1,0 +1,383 @@
+{
+  "schema": 1,
+  "attempt": "goal-phase-timers-01",
+  "offline_analysis": true,
+  "runtime_changed": false,
+  "full_suite": false,
+  "graphical_acceptance": false,
+  "sampled_ticks": 132,
+  "substeps_per_tick": 16,
+  "groups": {
+    "at_most_50_ms": {
+      "samples": 79,
+      "scopes_ms": {
+        "tick_ns": {
+          "mean": 45.669753164556965,
+          "p50": 45.2092,
+          "p95": 48.7227,
+          "p99": 49.3915,
+          "maximum": 49.3915
+        },
+        "native_solve_ns": {
+          "mean": 1.7969189873417721,
+          "p50": 1.7784,
+          "p95": 1.9611,
+          "p99": 2.0986,
+          "maximum": 2.0986
+        },
+        "native_iteration_hooks_ns": {
+          "mean": 0.0008518987341772151,
+          "p50": 0.0008,
+          "p95": 0.0013,
+          "p99": 0.0016,
+          "maximum": 0.0016
+        },
+        "native_residual_flush_ns": {
+          "mean": 0.0003772151898734177,
+          "p50": 0.0004,
+          "p95": 0.0007,
+          "p99": 0.0008,
+          "maximum": 0.0008
+        },
+        "native_excluding_java_callbacks_ns": {
+          "mean": 1.7956898734177213,
+          "p50": 1.7771,
+          "p95": 1.9597,
+          "p99": 2.0971,
+          "maximum": 2.0971
+        }
+      },
+      "step_ms": [
+        {
+          "mean": 0.15587215189873418,
+          "p50": 0.1544,
+          "p95": 0.1626,
+          "p99": 0.1926,
+          "maximum": 0.1926
+        },
+        {
+          "mean": 0.14024683544303798,
+          "p50": 0.1387,
+          "p95": 0.1462,
+          "p99": 0.2016,
+          "maximum": 0.2016
+        },
+        {
+          "mean": 0.12607341772151898,
+          "p50": 0.1244,
+          "p95": 0.1311,
+          "p99": 0.1787,
+          "maximum": 0.1787
+        },
+        {
+          "mean": 0.1150126582278481,
+          "p50": 0.1126,
+          "p95": 0.1364,
+          "p99": 0.1706,
+          "maximum": 0.1706
+        },
+        {
+          "mean": 0.11114303797468354,
+          "p50": 0.1079,
+          "p95": 0.1427,
+          "p99": 0.1636,
+          "maximum": 0.1636
+        },
+        {
+          "mean": 0.10833544303797468,
+          "p50": 0.1053,
+          "p95": 0.1327,
+          "p99": 0.1624,
+          "maximum": 0.1624
+        },
+        {
+          "mean": 0.10732151898734178,
+          "p50": 0.1037,
+          "p95": 0.1286,
+          "p99": 0.1722,
+          "maximum": 0.1722
+        },
+        {
+          "mean": 0.10614556962025316,
+          "p50": 0.1032,
+          "p95": 0.1189,
+          "p99": 0.1874,
+          "maximum": 0.1874
+        },
+        {
+          "mean": 0.10448227848101266,
+          "p50": 0.1023,
+          "p95": 0.1184,
+          "p99": 0.1682,
+          "maximum": 0.1682
+        },
+        {
+          "mean": 0.10397468354430378,
+          "p50": 0.102,
+          "p95": 0.1195,
+          "p99": 0.1439,
+          "maximum": 0.1439
+        },
+        {
+          "mean": 0.10382405063291139,
+          "p50": 0.1016,
+          "p95": 0.118,
+          "p99": 0.1537,
+          "maximum": 0.1537
+        },
+        {
+          "mean": 0.10317215189873419,
+          "p50": 0.1019,
+          "p95": 0.1092,
+          "p99": 0.1395,
+          "maximum": 0.1395
+        },
+        {
+          "mean": 0.10307721518987342,
+          "p50": 0.1016,
+          "p95": 0.1104,
+          "p99": 0.1366,
+          "maximum": 0.1366
+        },
+        {
+          "mean": 0.10331645569620254,
+          "p50": 0.1019,
+          "p95": 0.1107,
+          "p99": 0.1363,
+          "maximum": 0.1363
+        },
+        {
+          "mean": 0.10276455696202531,
+          "p50": 0.1015,
+          "p95": 0.1092,
+          "p99": 0.1344,
+          "maximum": 0.1344
+        },
+        {
+          "mean": 0.10215696202531646,
+          "p50": 0.1012,
+          "p95": 0.1078,
+          "p99": 0.1229,
+          "maximum": 0.1229
+        }
+      ],
+      "unweighted_steps_over_0_3_ms_histogram": {
+        "0": 79
+      }
+    },
+    "over_50_ms": {
+      "samples": 53,
+      "scopes_ms": {
+        "tick_ns": {
+          "mean": 54.15330798433142,
+          "p50": 53.3745,
+          "p95": 58.6187,
+          "p99": 61.7045,
+          "maximum": 65.2214
+        },
+        "native_solve_ns": {
+          "mean": 9.085605804223269,
+          "p50": 9.9846,
+          "p95": 10.6385,
+          "p99": 10.8671,
+          "maximum": 10.8671
+        },
+        "native_iteration_hooks_ns": {
+          "mean": 0.001517550625837051,
+          "p50": 0.0016,
+          "p95": 0.002,
+          "p99": 0.0023,
+          "maximum": 0.0023
+        },
+        "native_residual_flush_ns": {
+          "mean": 0.0013799379701330218,
+          "p50": 0.0014,
+          "p95": 0.002,
+          "p99": 0.0022,
+          "maximum": 0.0022
+        },
+        "native_excluding_java_callbacks_ns": {
+          "mean": 9.082708315627297,
+          "p50": 9.9812,
+          "p95": 10.6351,
+          "p99": 10.8639,
+          "maximum": 10.8639
+        }
+      },
+      "step_ms": [
+        {
+          "mean": 0.625764146535491,
+          "p50": 0.6776,
+          "p95": 0.7252,
+          "p99": 0.7685,
+          "maximum": 0.7685
+        },
+        {
+          "mean": 0.5749508936932946,
+          "p50": 0.6186,
+          "p95": 0.6916,
+          "p99": 0.6958,
+          "maximum": 0.6958
+        },
+        {
+          "mean": 0.5692216621184811,
+          "p50": 0.6173,
+          "p95": 0.6794,
+          "p99": 0.691,
+          "maximum": 0.691
+        },
+        {
+          "mean": 0.5677145085442115,
+          "p50": 0.6133,
+          "p95": 0.6916,
+          "p99": 0.7042,
+          "maximum": 0.7042
+        },
+        {
+          "mean": 0.566877812238815,
+          "p50": 0.6108,
+          "p95": 0.7009,
+          "p99": 0.7176,
+          "maximum": 0.75
+        },
+        {
+          "mean": 0.5607288791323874,
+          "p50": 0.6138,
+          "p95": 0.6699,
+          "p99": 0.6885,
+          "maximum": 0.6885
+        },
+        {
+          "mean": 0.5616079702337197,
+          "p50": 0.6121,
+          "p95": 0.6618,
+          "p99": 0.7872,
+          "maximum": 0.7872
+        },
+        {
+          "mean": 0.5642130262720654,
+          "p50": 0.6125,
+          "p95": 0.6613,
+          "p99": 0.7619,
+          "maximum": 0.7619
+        },
+        {
+          "mean": 0.5563158286928415,
+          "p50": 0.6082,
+          "p95": 0.6665,
+          "p99": 0.6836,
+          "maximum": 0.6836
+        },
+        {
+          "mean": 0.5614649813205514,
+          "p50": 0.6119,
+          "p95": 0.6595,
+          "p99": 0.7662,
+          "maximum": 0.7662
+        },
+        {
+          "mean": 0.5633499280010473,
+          "p50": 0.6123,
+          "p95": 0.6713,
+          "p99": 0.7112,
+          "maximum": 0.7112
+        },
+        {
+          "mean": 0.5681613249821261,
+          "p50": 0.6127,
+          "p95": 0.6735,
+          "p99": 0.779,
+          "maximum": 0.779
+        },
+        {
+          "mean": 0.5674853927719093,
+          "p50": 0.6132,
+          "p95": 0.6593,
+          "p99": 0.8667,
+          "maximum": 0.8667
+        },
+        {
+          "mean": 0.5671066440432195,
+          "p50": 0.61,
+          "p95": 0.6724,
+          "p99": 0.8693,
+          "maximum": 0.8693
+        },
+        {
+          "mean": 0.5535736947043008,
+          "p50": 0.6092,
+          "p95": 0.6257,
+          "p99": 0.6306,
+          "maximum": 0.6709
+        },
+        {
+          "mean": 0.557069110938806,
+          "p50": 0.6134,
+          "p95": 0.6501,
+          "p99": 0.6667,
+          "maximum": 0.6667
+        }
+      ],
+      "unweighted_steps_over_0_3_ms_histogram": {
+        "0": 5,
+        "16": 48
+      }
+    }
+  },
+  "tick_gap_ms": 8.483554819774454,
+  "native_gap_ms": 7.288686816881496,
+  "native_share_of_gap": 0.859154796747724,
+  "source_edit_parity_groups": {
+    "0": {
+      "samples": 66,
+      "native_ms": {
+        "mean": 4.302168042934556,
+        "p50": 1.8011,
+        "p95": 10.1564,
+        "p99": 10.8671,
+        "maximum": 10.8671
+      }
+    },
+    "1": {
+      "samples": 66,
+      "native_ms": {
+        "mean": 4.320276446436015,
+        "p50": 1.8279,
+        "p95": 10.23,
+        "p99": 10.6702,
+        "maximum": 10.6702
+      }
+    }
+  },
+  "evidence": [
+    {
+      "path": "docs/experimental/phase-timers-results-20261109.json",
+      "sha256": "53187caddf6c8b577b8957f38292562bf381186d5655f7f815143d82dd7e8bf8"
+    },
+    {
+      "path": "local/benchmarks/goal-phase-timers-01/benchmark/ticks.csv",
+      "sha256": "58b4694ae296720c3955823d9e50233d60a0ca8f16b5cc4f5621154cacfcef6e"
+    },
+    {
+      "path": "local/benchmarks/goal-phase-timers-01/benchmark/substeps.csv",
+      "sha256": "a2155f8753d8facf2f40336d2e922fd145e115980d102f4a2f2f5042ca742653"
+    },
+    {
+      "path": "local/inputs/helper-src/org/cha0scollective/wwpg/benchmark/NativeGrid.java",
+      "sha256": "985edaefe97f292a1a84eec83b95f8613e65cfd535c4ee2d42609c2a99adce47"
+    },
+    {
+      "path": "local/inputs/helper-src/org/cha0scollective/wwpg/benchmark/Session.java",
+      "sha256": "95ef2e3ecce359a6fa9ca1be0eedd893721e726995ca6c8f57b595c182d81432"
+    },
+    {
+      "path": "tools/experimental/summarize_profile.py",
+      "sha256": "975b48b3e8f64c27f33eeee9212c627a7b4f3112a22fc87b87a1264cf8eea563"
+    },
+    {
+      "path": "tools/experimental/summarize_native_variation.py",
+      "sha256": "7ee0511a047cb3de8591e284146558c97bfb5c045e4507ae5c278d6496912660"
+    }
+  ],
+  "note": "Weighted sparse diagnostic scopes, not a clean speedup. The 0.3 ms classification is descriptive; callback/iteration and factorization counts were not recorded. Equal source-edit parity means do not establish equal physical state."
+}

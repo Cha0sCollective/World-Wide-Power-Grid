@@ -8,5 +8,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(value = WorldNetworks.class, remap = false)
 public interface WorldNetworksAccessor {
     @Accessor("perf") PerformanceCounter wwpg$performance();
+    @Accessor("lineParts") java.util.Map<WorldNetworks.PartId, org.patryk3211.powergrid.electricity.sim.special.TransmissionLinePart> wwpg$lineParts();
     @Accessor("islandDiscoveryQueue") java.util.Set<org.patryk3211.powergrid.electricity.sim.ElectricalNetwork> wwpg$islandQueue();
 }

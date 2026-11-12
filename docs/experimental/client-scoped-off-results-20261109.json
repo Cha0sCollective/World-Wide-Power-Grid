@@ -1,0 +1,436 @@
+{
+  "schema": 1,
+  "full_suite": false,
+  "attempt": "goal-client-scoped-off-01",
+  "protocol": {
+    "schema": 1,
+    "name": "goal-client-scoped-off-01",
+    "helper_inputs": "G:\\WWPG\\local\\x27w\\local\\frozen\\client-scoped-helper-01\\inputs.json",
+    "helper_inputs_sha256": "fba857634b9b7dfb29aa41c75fa5a52cd8eba8fa4dcdcd74d5fce899cae3c1cd",
+    "runtime": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar",
+      "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9"
+    },
+    "helper": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\client-scoped-helper-01\\wwpg-benchmark-client-loading.jar",
+      "sha256": "e8c164a8908cc519976abbd56a7709af2791bf1fa0e9d7e62271e8f6b5adb015"
+    },
+    "cee": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\electroenergetics-1.21.1-1.1.4.jar",
+      "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+    },
+    "copied_reference": true,
+    "full_suite": false,
+    "inspection_only": false,
+    "delivery_jfr": false,
+    "cpu_affinity_mask": "fff000",
+    "properties": {
+      "wwpg.clientBenchmark.enabled": "true",
+      "wwpg.clientBenchmark.save": "benchmark-world",
+      "wwpg.clientBenchmark.inspectDelivery": "false",
+      "wwpg.clientBenchmark.inspectTaskQueues": "false",
+      "wwpg.benchmark.autorun": "true",
+      "wwpg.benchmark.owned": "true",
+      "wwpg.benchmark.restore": "true",
+      "wwpg.benchmark.exit": "false",
+      "wwpg.benchmark.tier": "10000",
+      "wwpg.benchmark.variant": "MIXED",
+      "wwpg.benchmark.backend": "NATIVE",
+      "wwpg.benchmark.mode": "coldcheck",
+      "wwpg.benchmark.detailed": "false",
+      "wwpg.benchmark.rhsCounters": "false",
+      "wwpg.benchmark.substeps": "false",
+      "wwpg.benchmark.profileEvery": "20",
+      "wwpg.benchmark.loading_protocol": "2",
+      "wwpg.benchmark.loading_chunk_limit": "2859",
+      "wwpg.benchmark.loading_graph_limit": "300",
+      "wwpg.benchmark.loading_acceptance_limit": "300",
+      "wwpg.benchmark.loading_healthy_ticks": "100",
+      "wwpg.benchmark.loading_stall_seconds": "30",
+      "wwpg.benchmark.cpuMask": "0xfff000",
+      "wwpg.restorationBatch": "true",
+      "wwpg.experimental.plainWireBatch": "true",
+      "wwpg.experimental.plainWireBatch.properties": "true",
+      "wwpg.experimental.plainWireBatch.verify": "false",
+      "wwpg.experimental.wireTreeBatch": "true",
+      "wwpg.experimental.wireTreeBudgetMillis": "20",
+      "wwpg.experimental.wireTreeMaxParts": "32",
+      "wwpg.experimental.wireTreePrioritizeUnresolved": "true",
+      "wwpg.experimental.chunkTaskBudgetMillis": "2",
+      "wwpg.experimental.ceeStateGeometry": "true",
+      "wwpg.experimental.scopedRestoration": "false",
+      "wwpg.experimental.terminalBookkeeping": "false",
+      "wwpg.experimental.terminalKeyLookup": "false"
+    },
+    "runner_sources": [
+      {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-off-01\\runner-sources\\client_loading_benchmark.py",
+        "sha256": "0c58815fd1c56282bdafb2d81173cf00ffe15526105f62ce4641c90a613f93ed"
+      },
+      {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-off-01\\runner-sources\\cpu_affinity.py",
+        "sha256": "4faa492829b866bbf1d38e71bb1d9fb6015c15e3876d24c2d2527a5e38ddd725"
+      },
+      {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-off-01\\runner-sources\\host_metrics.py",
+        "sha256": "6b741044b742a02ba6e9eeb17659ba80dba259addebfe9b6cd83d1b679b471b9"
+      },
+      {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-off-01\\runner-sources\\legacy_bench.py",
+        "sha256": "92846812a86a82d0b98ca94a825b21bd20d5f61719e0cd2ab7278637cbbe2380"
+      },
+      {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-off-01\\runner-sources\\plain_wire_benchmark.py",
+        "sha256": "c60a054e8eb8a32056fa5298101c2975909160c9ba5076516c1a4c16dfe59478"
+      },
+      {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-off-01\\runner-sources\\process_metrics.py",
+        "sha256": "6deaacc4885e5e7e25ee306836fcfdaa10b0dfe119a5d1f4059f8bc51b30d6ce"
+      },
+      {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-client-scoped-off-01\\runner-sources\\world_save_evidence.py",
+        "sha256": "7a8c6d7767d68e1ea0ac80091d6523d20ced835981b8a91c0cf5a5b7ca56f371"
+      }
+    ],
+    "started_utc": "2026-11-09T19:11:52Z",
+    "result": {
+      "schema": 1,
+      "scope": "One copied benchmark save; stationary visible scene; not full graphical acceptance",
+      "start_event": "Normal WorldOpenFlows.openWorld invocation from the title screen",
+      "selected_unix_ms": 1794251533860,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "render_distance_chunks": 12,
+      "simulation_distance_chunks": 12,
+      "camera": {
+        "x": 1038.5,
+        "yaw": -36.0,
+        "pitch": 14.0,
+        "z": 1028.5,
+        "y": 74.0
+      },
+      "expected_client_chunks": 609,
+      "compile_buffers": 12,
+      "settings": {
+        "fullscreen": false,
+        "graphics": "fancy",
+        "vsync": false,
+        "max_fps": 60,
+        "fov": 70
+      },
+      "first_world_frame_seconds": 13.6007049,
+      "electrical_ready_seconds": 37.2214094,
+      "restored_rendered_seconds": 39.3017523,
+      "under_one_minute": true,
+      "readiness_observation": {
+        "elapsed_seconds": 39.3017523,
+        "electrical_ready": true,
+        "camera_ready": true,
+        "loaded_client_chunks": 609,
+        "visible_sections": 2485,
+        "rendered_sections": 393,
+        "dirty_sections": 0,
+        "uncompiled_sections": 0,
+        "queue_empty": true,
+        "free_compile_buffers": 12,
+        "occlusion_ready": true,
+        "window_active": true
+      },
+      "ready_confirmation_seconds": 2.0328371,
+      "screenshot_sha256": "fb48f6acfebba3438d0aad68a292e545f10690b37287900b76590da6e02c0f4e",
+      "passed": true
+    },
+    "validation_passed": true,
+    "original_reference_unchanged": true,
+    "isolated_reference_unchanged": true,
+    "finished_utc": "2026-11-09T19:12:56Z"
+  },
+  "result": {
+    "schema": 1,
+    "scope": "One copied benchmark save; stationary visible scene; not full graphical acceptance",
+    "start_event": "Normal WorldOpenFlows.openWorld invocation from the title screen",
+    "selected_unix_ms": 1794251533860,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "render_distance_chunks": 12,
+    "simulation_distance_chunks": 12,
+    "camera": {
+      "x": 1038.5,
+      "yaw": -36.0,
+      "pitch": 14.0,
+      "z": 1028.5,
+      "y": 74.0
+    },
+    "expected_client_chunks": 609,
+    "compile_buffers": 12,
+    "settings": {
+      "fullscreen": false,
+      "graphics": "fancy",
+      "vsync": false,
+      "max_fps": 60,
+      "fov": 70
+    },
+    "first_world_frame_seconds": 13.6007049,
+    "electrical_ready_seconds": 37.2214094,
+    "restored_rendered_seconds": 39.3017523,
+    "under_one_minute": true,
+    "readiness_observation": {
+      "elapsed_seconds": 39.3017523,
+      "electrical_ready": true,
+      "camera_ready": true,
+      "loaded_client_chunks": 609,
+      "visible_sections": 2485,
+      "rendered_sections": 393,
+      "dirty_sections": 0,
+      "uncompiled_sections": 0,
+      "queue_empty": true,
+      "free_compile_buffers": 12,
+      "occlusion_ready": true,
+      "window_active": true
+    },
+    "ready_confirmation_seconds": 2.0328371,
+    "screenshot_sha256": "fb48f6acfebba3438d0aad68a292e545f10690b37287900b76590da6e02c0f4e",
+    "passed": true
+  },
+  "validation": {
+    "passed": true,
+    "full_suite": false,
+    "actual_nodes": 14650,
+    "edges": 20637,
+    "storage_devices": 1050,
+    "healthy_ticks": 100,
+    "sixteen_substeps": true,
+    "loaded_artifacts_verified": true,
+    "normal_shutdown": true,
+    "process_affinity_readbacks": 58
+  },
+  "server_loading": [
+    {
+      "phase": "SETTLE",
+      "cycle": 0,
+      "requested_chunks": 953,
+      "load_limit_ticks": 2859,
+      "chunks_ready_tick": 40,
+      "graph_ready_tick": 218,
+      "finish_tick": 337,
+      "chunk_request_seconds": 0.8142902,
+      "chunk_loading_seconds": 16.1432851,
+      "graph_recovery_seconds": 11.1570607,
+      "electrical_settling_seconds": 7.1628219,
+      "total_restoration_seconds": 35.2774579,
+      "restoration_and_settling_seconds": 34.4631677,
+      "healthy_ticks": 100,
+      "queued_roots_at_chunk_ready": 11288,
+      "maximum_pending_roots": 11288,
+      "queue_drained_tick": 218,
+      "queue_drain_seconds": 11.1570607
+    }
+  ],
+  "tree_execution": {
+    "attachments": 5893,
+    "fallback": 50,
+    "roots": 11786,
+    "traversals": 1622,
+    "covered": 10164,
+    "visited": 2270375,
+    "flushes": 217,
+    "largest": 11304,
+    "pending": 0,
+    "forced": 3,
+    "discarded": 0,
+    "budgetMillis": 20,
+    "maxParts": 32,
+    "yielded": 216,
+    "maxProcessed": 32,
+    "maxFlushNanos": 100372900,
+    "maxEntryNanos": 98206500,
+    "prioritySelections": 193
+  },
+  "task_window": {
+    "budgetMillis": 2,
+    "maxTasks": 512,
+    "windows": 210,
+    "completed": 39464,
+    "emptyPolls": 739790,
+    "maxCompleted": 512,
+    "maxWindowNanos": 4754400,
+    "maxPollNanos": 3559400,
+    "probes": 39,
+    "maxProbeNanos": 687800
+  },
+  "cee_geometry": {
+    "requests": 9554534,
+    "hits": 7546472,
+    "builds": 8,
+    "fallback": 2008054,
+    "states": 8
+  },
+  "terminal_execution": null,
+  "terminal_keys": null,
+  "scope_execution": null,
+  "worst_loading_tick_seconds": 2.9440142,
+  "longest_loading_tick_gap_seconds": 2.9522626,
+  "world_frame_intervals": {
+    "samples": 1523,
+    "mean_ms": 16.875277347340774,
+    "p95_ms": 20.7666,
+    "maximum_ms": 44.2303
+  },
+  "loaded_artifacts": [
+    {
+      "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9",
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar",
+      "id": "wwpg",
+      "version": "0.2.7-experimental.wiretree.11"
+    },
+    {
+      "sha256": "e40d67a874431925d502af88e85064883c67936cfd689033d7df560cffcf19e7",
+      "path": "C:\\Users\\Parker\\.gradle\\caches\\modules-2\\files-2.1\\curse.maven\\power-grid-1321420\\8880715\\e09452dac8202e31f282149d45c49dcdb218bd54\\power-grid-1321420-8880715.jar",
+      "id": "powergrid",
+      "version": "0.6.2"
+    },
+    {
+      "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f",
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\electroenergetics-1.21.1-1.1.4.jar",
+      "id": "electroenergetics",
+      "version": "1.21.1-1.1.4"
+    },
+    {
+      "sha256": "192c7b0be13f523dcec9a7a2393bbc2614c3c9bd3edb1f7720a97bcd4f0b87a7",
+      "path": "C:\\Users\\Parker\\.gradle\\caches\\modules-2\\files-2.1\\com.simibubi.create\\create-1.21.1\\6.0.10-280\\62c085fd48fc84b62f88d7bc98b7c4206492c080\\create-1.21.1-6.0.10-280.jar",
+      "id": "create",
+      "version": "6.0.10"
+    },
+    {
+      "sha256": "d9ab545f85dd3c6e4659d25610d172a1b15833e16808ccbfc1ce4d11be371f2b",
+      "path": "G:\\WWPG\\local\\x27w\\build\\moddev\\artifacts\\neoforge-21.1.231.jar",
+      "id": "neoforge",
+      "version": "21.1.231"
+    },
+    {
+      "sha256": "e8c164a8908cc519976abbd56a7709af2791bf1fa0e9d7e62271e8f6b5adb015",
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\client-scoped-helper-01\\wwpg-benchmark-client-loading.jar",
+      "id": "wwpg_benchmark",
+      "version": "0.1.0"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/experiment.json",
+      "sha256": "1d006022fff34e9ff41d3d2be7c8e2c18f4ff11f24854da457a6fb2785f183df"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/restore-input.json",
+      "sha256": "aca65e147ee8c8612294f3825bff39e6155828de4b506ba9740f3f6ab3f1bac1"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/launch.json",
+      "sha256": "b30357eafa328dd6baf00c5e50adc9c3b6d6f59be73bd027b1d0ed06e6b07be1"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/client.args",
+      "sha256": "fd797ccc8eced9e8bb5fed8e83353e9d6e18e19d6a5819fb4a7bf249ab61e09a"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/options.txt",
+      "sha256": "c062a6e5f18158f35284b109cfe4c1e13dc90a8147f6119c3e3c192d9fda43f6"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/cpu-preflight.json",
+      "sha256": "52badaa36614028db52580349d1ea75b176ec7d1e0804c4bd3ec06d54f355767"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/process-affinity.json",
+      "sha256": "c5454d22dea7b5c3edf4410f5abfab92b0699564427431f9596ee393efcc0def"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/process-metrics.jsonl",
+      "sha256": "76d46d90873b13f0436e13ab76eb8d9ab12a8206ad1c7ffec3b42846c2cfd7ba"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/host-metrics.jsonl",
+      "sha256": "c0b35847dedc94031e70dbdea9587bc751f0544681314a7395465e9400798780"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/process.log",
+      "sha256": "003055baec2158b449c9a22df9de64cd76017477921c61125f4e2826f7482c86"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/runner-exit.json",
+      "sha256": "a62bf9f45cc45b9f68e67ac0c03476a1f9712ef373ef9009447c3a0bf29b2e1e"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/shutdown-save.json",
+      "sha256": "316b6deb862edc497cfd00c6cfd7886e8379cff9ee85c2bdf193b9259229cdd3"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/benchmark/result.json",
+      "sha256": "72144439a45d34a8024341e92bf559f31ca367448af13d37446bef0ef5f5e4c7"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/benchmark/loading-results.json",
+      "sha256": "2d0b7990440499ccea5d59a613d9199e2e619175e1733d44716e6bc36200960a"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/benchmark/ticks.csv",
+      "sha256": "225761455aa318c8601821a09f9c6871f40681fdf74b3cf3c9e9c7814d936ccc"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/benchmark/pre-solve-storage.json",
+      "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/benchmark/placement-fixed.json",
+      "sha256": "f39e516534daabb39e6a5305b5c802dee926ac68a80c1f4de97c30d3406bcc22"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/benchmark/placement-restored.json",
+      "sha256": "79eda4bf854b627d63ceaabf49ee8f83ec6d7c08486adcab2df1ea6c62315b9c"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/client-benchmark/start.json",
+      "sha256": "f620b61e4a371dc1efe68bdfe5f163965d3be2132d58a6986bad18c271aa0611"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/client-benchmark/result.json",
+      "sha256": "77c93e9623e2724000bd9afded491e38a3bf70e342518a596727ea7f86eda03f"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/client-benchmark/validation.json",
+      "sha256": "df1b5185dfaec0cc917ef9808df2f0e3870f11fb78e56f1cecc430c8cddce517"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/client-benchmark/loaded-artifacts.json",
+      "sha256": "7d40b86c2093bbaee107d98b122bb3c8409d8f400c20207a68a6358d29202311"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/client-benchmark/render-observations.json",
+      "sha256": "6af0c3c7ccc00fbf4ce8604a141d433c8b38373a19cba59541ec0783ec6c2fd4"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/client-benchmark/frame-times-ns.json",
+      "sha256": "005d2cbe67c0d5ad51fe04666a3dde3c4da4a0c6e79b208d24cfbd97790600a5"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/client-benchmark/shutdown.json",
+      "sha256": "9b23a139e3219b77e3d2f00ef929918cf4ba0b2262fb8dedfc46c76d0e19f8fa"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/client-benchmark/screenshots/rendered.png",
+      "sha256": "fb48f6acfebba3438d0aad68a292e545f10690b37287900b76590da6e02c0f4e"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/client-benchmark/task-window-validation.json",
+      "sha256": "2b44ac2ec452c315be59f3b19438387015d21a9fa54303a49c52c60167d5d50f"
+    },
+    {
+      "path": "local/benchmarks/goal-client-scoped-off-01/client-benchmark/cee-geometry-validation.json",
+      "sha256": "757d3e71fc3c08342cc2f115cfa183f558dbae4e53c84d01d63b13959d2d14e3"
+    }
+  ],
+  "note": "One stationary view at the recorded settings. Loading phases overlap with rendering. No sustained client TPS or complete graphical acceptance claim."
+}

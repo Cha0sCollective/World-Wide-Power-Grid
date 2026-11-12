@@ -1,0 +1,17 @@
+// Explicit helper-only compile; never wired into ordinary build or acceptance.
+gradle.projectsEvaluated {
+    def p = gradle.rootProject
+    def folder = p.file(p.property('budgetHelperDirectory'))
+    def compile = p.tasks.register('compileBudgetBenchmarkHelper', JavaCompile) {
+        source p.fileTree(new File(folder, 'src')) { include '**/*.java' }
+        classpath = p.files(p.property('budgetRuntime'), 'local/inputs/wwpg-benchmark-0.1.0.jar') + p.configurations.compileClasspath
+        destinationDirectory = new File(folder, 'classes')
+        options.release = 21
+        options.compilerArgs += ['-proc:none']
+    }
+    p.tasks.register('checkBudgetLoadingGate', JavaExec) {
+        dependsOn compile
+        classpath = p.files(new File(folder, 'classes'))
+        mainClass = 'org.cha0scollective.wwpg.benchmark.LoadingGateChecks'
+    }
+}

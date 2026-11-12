@@ -1,0 +1,388 @@
+{
+  "schema": 1,
+  "wwpg_version": "0.2.8-beta1",
+  "api_version": "1.0.0",
+  "api_coordinate": "org.cha0scollective.wwpg:wwpg-api:1.0.0",
+  "cee_api_coordinate": "org.cha0scollective.wwpg:wwpg-cee-api:1.0.0",
+  "source_sha": "3042c76bcd4339690601ee9f9be771172138e42f",
+  "artifacts": {
+    "runtime": {
+      "path": "local/beta1-promotion-01/wwpg-0.2.8-beta1.jar",
+      "sha256": "30689bd0951c1b82bde1383e3b007efefc1d5adec3a83e700e3372740a3dafb5",
+      "bytes": 5188791
+    },
+    "api": {
+      "path": "local/package-028-05/wwpg-api-1.0.0.jar",
+      "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+      "bytes": 50143
+    },
+    "cee_api": {
+      "path": "local/package-028-05/wwpg-cee-api-1.0.0.jar",
+      "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+      "bytes": 8793
+    },
+    "example": {
+      "path": "local/package-028-05/wwpg-api-example-1.0.0.jar",
+      "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+      "bytes": 52081
+    },
+    "upstream_example": {
+      "path": "local/package-028-05/wwpg-upstream-api-example-1.0.0.jar",
+      "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+      "bytes": 45633
+    },
+    "gametest": {
+      "path": "local/beta1-promotion-01/wwpg-0.2.8-beta1-gametests.jar",
+      "sha256": "5e1f5442f4987d6427a7c0ef60cc6fcd085af7b1830db638c15b152597ced03b",
+      "bytes": 1437608
+    },
+    "maven_repository": {
+      "path": "local/package-028-05/wwpg-api-1.0.0-maven.zip",
+      "sha256": "47841d523025a2533fc1db1101554172d788f3a17836a26437e93e8abf52ae22",
+      "bytes": 432522
+    },
+    "api_sources": {
+      "path": "local/package-028-05/wwpg-api-1.0.0-sources.jar",
+      "sha256": "1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b",
+      "bytes": 25943
+    },
+    "api_javadoc": {
+      "path": "local/package-028-05/wwpg-api-1.0.0-javadoc.jar",
+      "sha256": "2ca4dcdd1b8ef31e2cade6213db5783b9a4fbaf37a8e5938914a65a84a4a52f4",
+      "bytes": 238965
+    },
+    "cee_api_sources": {
+      "path": "local/package-028-05/wwpg-cee-api-1.0.0-sources.jar",
+      "sha256": "00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34",
+      "bytes": 6947
+    },
+    "cee_api_javadoc": {
+      "path": "local/package-028-05/wwpg-cee-api-1.0.0-javadoc.jar",
+      "sha256": "5db11a6c2f5978a791d8f9e5bf1c5a7ba2e436cfeb9431960ce50506fa9964bb",
+      "bytes": 116375
+    },
+    "example_sources": {
+      "path": "local/package-028-05/wwpg-api-example-1.0.0-source.zip",
+      "sha256": "950d746db831b7767aa49a754d5bb4f0ac22398068dd40aa3086fbdff41fb2af",
+      "bytes": 79517
+    },
+    "upstream_example_sources": {
+      "path": "local/package-028-05/wwpg-upstream-api-example-1.0.0-source.zip",
+      "sha256": "4dffb7a5a8a735f52d12716e47d5dea07bebb6099ddb0a6d0804cb7041769ec1",
+      "bytes": 70372
+    }
+  },
+  "acceptance_policy": "separated-v2",
+  "stationary_yard_policy": "combined-pinout-v1",
+  "status": "acceptance_validated",
+  "unresolved_failures": [],
+  "stages_complete": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "abi": {
+    "path": "local/package-028-05/api-abi.json",
+    "sha256": "bf8c07abd81096a44d5e1a6113714845d4b25cc7d71ffb2e19361b0c9d35fce6",
+    "bytes": 63515
+  },
+  "previous_api": {
+    "path": "local/package-028-05/api-published-1.0.0.jar",
+    "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+    "bytes": 50143
+  },
+  "cee_abi": {
+    "path": "local/package-028-05/cee_api-abi.json",
+    "sha256": "3b1ecfa2c3570b329c5767148637e7ccfb51037352b42ab68dbe1a51e2d00dec",
+    "bytes": 11929
+  },
+  "previous_cee_api": {
+    "path": "local/package-028-05/cee_api-published-1.0.0.jar",
+    "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+    "bytes": 8793
+  },
+  "native_control_checks": [
+    {
+      "path": "release/0.2.8-rc.1/native-linux-checks/result.json",
+      "sha256": "0aac3e7541c8dce2ad8c8b73bc0f31a33c69baea42736a2619ca5c5f2d537033",
+      "bytes": 1855
+    },
+    {
+      "path": "release/0.2.8-rc.1/native-windows-checks/result.json",
+      "sha256": "7e2d61d980789dc3b67e5bfc0e3dd98d8ca223aad1e3cdcbe79e02898b30fdb6",
+      "bytes": 1841
+    }
+  ],
+  "benchmark_world": {
+    "path": "local/beta1-promotion-01/wwpg-0.2.8-beta1-benchmark-14650-nodes.zip",
+    "sha256": "499f1b414797fabb0974860f7c88febddd6ad459514d24ddffe9bdeddd6674e6",
+    "bytes": 3573151
+  },
+  "base_workshop_world": {
+    "path": "local/beta1-promotion-01/wwpg-0.2.8-beta1-api-workshop.zip",
+    "sha256": "d749230aea167ee5254838d83f6064752f26f6ca2c6ded8f5b21232340f123e3",
+    "bytes": 320783
+  },
+  "pinout_workshop_world": {
+    "path": "local/beta1-promotion-01/wwpg-0.2.8-beta1-api-workshop-pinout.zip",
+    "sha256": "fbf94e7062e9800299fd7cc18f62849f3a9a013214ec2e523233f6d72cb225af",
+    "bytes": 326294
+  },
+  "stationary_yard": {
+    "path": "local/beta1-promotion-01/wwpg-0.2.8-beta1-stationary-yard.zip",
+    "sha256": "14b949ab292e565006cfc1eb7b15430ef1c3fb9cad4149321793d3a483c3ea03",
+    "bytes": 1342520
+  },
+  "independent_example_build": {
+    "path": "build/ci-v2/canonical/preparation-evidence/objects/e71bd0337e6f2cd3a3c967b39dd50c937f16b515a8f3446d1f2cbd639255935c.json",
+    "sha256": "7e1df347da06f3aaa2f90211acebc22eabdb3bb868b4abff26867270cee4770f",
+    "bytes": 2931
+  },
+  "independent_upstream_example_build": {
+    "path": "build/ci-v2/canonical/preparation-evidence/objects/22e1226c7b7593b2a06716d6f1bee3503c15ac5aef85eeaca2e3ee1f387e2f5a.json",
+    "sha256": "9aff29ef3e678e47c502b2872a1097f335ea8ac9d8b09f37546a342b6118f922",
+    "bytes": 3035
+  },
+  "authoring_starter": {
+    "source": {
+      "path": "local/release-preparation-03/starter/tutorial-load-0.1.0-source.zip",
+      "sha256": "9717ffb94f65226c67dc3c7c5f91c0b539ca044ffe76d959ec5cf7081cf92bf9",
+      "bytes": 54214
+    },
+    "proof": {
+      "path": "local/package-028-final-01/starter-observed-acceptance.json",
+      "sha256": "79fc22118fb0dac7501b802bc2b55764b8e57fd2f1a09fbe815cd1a66a467825",
+      "bytes": 3396
+    }
+  },
+  "preserved_failed_campaigns": [
+    {
+      "run_id": 42797411653,
+      "conclusion": "cancelled",
+      "reason": "Superseded after the older-loader CC:Tweaked startup dependency failure; not acceptance."
+    },
+    {
+      "run_id": 42800563160,
+      "report": {
+        "path": "build/ci-v2/portable/ubuntu-24.04-NATIVE-BASE-21.1.248/result.json",
+        "sha256": "6f4d80f0fdcaf494e916e69bdb264527ddc4e57e6ecf5a777a94300cda5e7108",
+        "bytes": 12902
+      },
+      "reason": "Original third cold verification motor assertion failed; preserved and excluded from passing coverage. The complete unchanged environment repeat passed. Its initial cause remains unknown."
+    }
+  ],
+  "headless_acceptance": {
+    "path": "local/beta1-promotion-01/headless_acceptance.json",
+    "sha256": "8a6723d42c53cb7f6e08b1569d6cd6a079872da56eb798fab60e4ee95972cdea",
+    "bytes": 5622
+  },
+  "graphical_acceptance": {
+    "path": "local/beta1-promotion-01/graphical_acceptance.json",
+    "sha256": "7a10c25ff84c36a0b15b1843a6f43aa6de3d2cd5d08567df8662f7b9f7348563",
+    "bytes": 844
+  },
+  "headless_assembly": {
+    "path": "local/headless-cohort-028-01/assembly.json",
+    "sha256": "08655c6494e82015fb951bdd37719e85f689d923b0c9d3ccbe9043d4b1dd6015",
+    "bytes": 883
+  },
+  "motor_diagnostic_assessment": {
+    "path": "local/motor-assessment-02.json",
+    "sha256": "b04f4e44e2738e462e96b4def532e1c83d101f4bfab661e9c9bb797adfe2930f",
+    "bytes": 4075
+  },
+  "superseded_campaign_assessment": {
+    "path": "local/superseded-047-first-full/assessment.json",
+    "sha256": "f0cd10fc2df4b37a52ad404df682b683d73bc19694fcdb73438af712e1fe36f7",
+    "bytes": 3371
+  },
+  "runtime_dependency_selection": {
+    "path": "release/0.2.8-rc.1/runtime-selection.json",
+    "sha256": "53317333a8dd69ebcf161f1ef342889d6042a62c226cc77303778d833294dc89",
+    "bytes": 3834
+  },
+  "runtime_dependency_review": {
+    "path": "release/0.2.8-rc.1/DEPENDENCY_REVIEW.md",
+    "sha256": "4684790a398a52da223bb4d04f1432134769daf313b69062ef861b1bc13697b7",
+    "bytes": 1492
+  },
+  "runtime_dependency_publisher_metadata": [
+    {
+      "path": "release/0.2.8-rc.1/architectury-versions.json",
+      "sha256": "3d54bcae98b4f7fea7f70b319d83f82b4a5086d3684655bf8d59875f0208539e",
+      "bytes": 4060
+    },
+    {
+      "path": "release/0.2.8-rc.1/cee-versions.json",
+      "sha256": "46e5ee8434f256bb9217b0a3a708654eeb28d922fd4a8c0a05484e26e054591e",
+      "bytes": 12478
+    },
+    {
+      "path": "release/0.2.8-rc.1/computercraft-versions.json",
+      "sha256": "31d0a78be0b4ee481142a534c599d026200b82023c005c8ea41d356954935b11",
+      "bytes": 23600
+    },
+    {
+      "path": "release/0.2.8-rc.1/create-versions.json",
+      "sha256": "122c8176f8eae4a9c1d5ccb66665a52040a7da7a79455d4a612f688f4f87dd36",
+      "bytes": 49557
+    },
+    {
+      "path": "release/0.2.8-rc.1/gauged-versions.json",
+      "sha256": "19e9c4c18ce5c513cb8f13e1b0ccff95e22297a44623eed3e9a58531d133dae4",
+      "bytes": 6832
+    },
+    {
+      "path": "release/0.2.8-rc.1/pinout-versions.json",
+      "sha256": "c403713bbd09fec61f7e88f6f4579d924777b661585a4ed59164f4e9d6f63646",
+      "bytes": 4158
+    }
+  ],
+  "circuit_library_guide": {
+    "path": "docs/CIRCUIT_LIBRARY.md",
+    "sha256": "6aa7650f2f234e20c41b451b2dc50821e6afe91d37a61fea596d9184ebc198d6",
+    "bytes": 4142
+  },
+  "control_promotion_record": {
+    "path": "docs/developer/CONTROL_PROMOTION_028.md",
+    "sha256": "5b928a7c1327146f6c728033c3308522aa4ba967b210cafef2ee6880dec5a21b",
+    "bytes": 3381
+  },
+  "acceptance_note": "Version-only promotion from 0.2.8-rc.1. Headless and graphical cohorts retain their original source, runtime, companion, process and world identities, with exact runtime/companion/native and save-byte comparisons. No full suite or client was rerun for beta1. Original failed attempts and the unexplained motor finding remain preserved.",
+  "sdk_acceptance_reuse": {
+    "schema": 1,
+    "scope": "runtime_version_only",
+    "runtime_version": "0.2.8-rc.1",
+    "source_sha": "74c278628a73743209473a0261e743baa72fe9c9",
+    "artifacts": {
+      "api_sources": {
+        "path": "local/package-028-05/wwpg-api-1.0.0-sources.jar",
+        "sha256": "1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b",
+        "bytes": 25943
+      },
+      "runtime": {
+        "path": "local/package-028-05/wwpg-0.2.8-rc.1.jar",
+        "sha256": "33248a5864168a8a87b8c82bf826777c414756fd7b920a80e18a9495ca8f0a47",
+        "bytes": 5188791
+      },
+      "cee_api_javadoc": {
+        "path": "local/package-028-05/wwpg-cee-api-1.0.0-javadoc.jar",
+        "sha256": "5db11a6c2f5978a791d8f9e5bf1c5a7ba2e436cfeb9431960ce50506fa9964bb",
+        "bytes": 116375
+      },
+      "maven_repository": {
+        "path": "local/package-028-05/wwpg-api-1.0.0-maven.zip",
+        "sha256": "47841d523025a2533fc1db1101554172d788f3a17836a26437e93e8abf52ae22",
+        "bytes": 432522
+      },
+      "upstream_example": {
+        "path": "local/package-028-05/wwpg-upstream-api-example-1.0.0.jar",
+        "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11",
+        "bytes": 45633
+      },
+      "upstream_example_sources": {
+        "path": "local/package-028-05/wwpg-upstream-api-example-1.0.0-source.zip",
+        "sha256": "4dffb7a5a8a735f52d12716e47d5dea07bebb6099ddb0a6d0804cb7041769ec1",
+        "bytes": 70372
+      },
+      "cee_api_sources": {
+        "path": "local/package-028-05/wwpg-cee-api-1.0.0-sources.jar",
+        "sha256": "00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34",
+        "bytes": 6947
+      },
+      "example_sources": {
+        "path": "local/package-028-05/wwpg-api-example-1.0.0-source.zip",
+        "sha256": "950d746db831b7767aa49a754d5bb4f0ac22398068dd40aa3086fbdff41fb2af",
+        "bytes": 79517
+      },
+      "api_javadoc": {
+        "path": "local/package-028-05/wwpg-api-1.0.0-javadoc.jar",
+        "sha256": "2ca4dcdd1b8ef31e2cade6213db5783b9a4fbaf37a8e5938914a65a84a4a52f4",
+        "bytes": 238965
+      },
+      "example": {
+        "path": "local/package-028-05/wwpg-api-example-1.0.0.jar",
+        "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+        "bytes": 52081
+      },
+      "api": {
+        "path": "local/package-028-05/wwpg-api-1.0.0.jar",
+        "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+        "bytes": 50143
+      },
+      "cee_api": {
+        "path": "local/package-028-05/wwpg-cee-api-1.0.0.jar",
+        "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+        "bytes": 8793
+      }
+    }
+  },
+  "world_metadata_reuse": {
+    "schema": 1,
+    "scope": "runtime_version_only",
+    "version": "0.2.8-rc.1",
+    "source_sha": "74c278628a73743209473a0261e743baa72fe9c9",
+    "runtime": {
+      "path": "local/package-028-05/wwpg-0.2.8-rc.1.jar",
+      "sha256": "33248a5864168a8a87b8c82bf826777c414756fd7b920a80e18a9495ca8f0a47",
+      "bytes": 5188791
+    },
+    "worlds": {
+      "stationary_yard": {
+        "path": "build/ci-v2/portable/ubuntu-24.04-NATIVE-PINOUT-21.1.265/objects/ffffe5e9ebe70093d3a4c703f4a80bb11ddf7069a58f05833ceb6e535cae3493.zip",
+        "sha256": "ffffe5e9ebe70093d3a4c703f4a80bb11ddf7069a58f05833ceb6e535cae3493",
+        "bytes": 1342518
+      },
+      "base_workshop_world": {
+        "path": "build/ci-v2/portable/ubuntu-24.04-NATIVE-BASE-21.1.265/objects/0ec53c977efa736611890056de50183bef6640bc14d5a484184a909434f236d2.zip",
+        "sha256": "0ec53c977efa736611890056de50183bef6640bc14d5a484184a909434f236d2",
+        "bytes": 320731
+      },
+      "pinout_workshop_world": {
+        "path": "build/ci-v2/portable/ubuntu-24.04-NATIVE-PINOUT-21.1.265/objects/bd95e5b85b0eafa80075f47a2b7190269f26b552664563a834c4ca1ded425041.zip",
+        "sha256": "bd95e5b85b0eafa80075f47a2b7190269f26b552664563a834c4ca1ded425041",
+        "bytes": 326248
+      }
+    }
+  },
+  "world_label_comparison": {
+    "path": "local/beta1-promotion-01/world-label-comparison.json",
+    "sha256": "3abd7e4ade1a2f4d9f96044984961db36a4b3790037ca1b3774c1d4c274d6de8",
+    "bytes": 2357
+  },
+  "documentation_snapshot": {
+    "path": "local/beta1-promotion-01/documentation-snapshot.json",
+    "sha256": "4cf9307f42c777a15bea58f8d4314fc7a8b9de59017d3c9189d5a07f9a736e05",
+    "bytes": 2584
+  },
+  "version_promotion_comparison": {
+    "path": "release/0.2.8-beta1/artifact-comparison.json",
+    "sha256": "1a9a33b5f972639f77f25738c95d811d3e41ea9da4e5c3b7e01541890eab8f8d",
+    "bytes": 1894
+  },
+  "prerelease_acceptance_record": {
+    "path": "release/0.2.8-beta1/ACCEPTANCE.md",
+    "sha256": "813d4586d93034db35726dac5c8b6a9ded58af65d43c439f870ba3ff78e95574",
+    "bytes": 3405
+  },
+  "focused_promotion_checks": [
+    {
+      "path": "local/beta1-release-checks-02.log",
+      "sha256": "c8a4f12a00a58f802663be56db2455482e6857d425c0a7954cf2faf7bce0b376",
+      "bytes": 128
+    },
+    {
+      "path": "local/beta1-api-checks-02.log",
+      "sha256": "a0f5ac8b4d281d0bac3e72061adf372a10dc281e6e3ac9dd685e8943afd4ba71",
+      "bytes": 127
+    },
+    {
+      "path": "local/beta1-reuse-checks-01.log",
+      "sha256": "27e7ede8e6f53b0aa8d23756f090a84ea43b7c84cef748b78fa37a4419f0e68c",
+      "bytes": 120
+    }
+  ]
+}

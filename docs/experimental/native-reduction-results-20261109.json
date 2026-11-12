@@ -1,0 +1,564 @@
+{
+  "schema": 1,
+  "snapshot": "2026-11-09",
+  "retained": false,
+  "full_suite": false,
+  "graphical_acceptance": false,
+  "conclusion": "The conservative finite/max candidate is slower in its first clean pair; retain prototype-12g.",
+  "clean_runs": {
+    "control": [
+      {
+        "name": "goal-native-reduction-control-01",
+        "tps": 20.03270171599261,
+        "mspt": {
+          "mean": 47.95399927405248,
+          "p50": 47.7936,
+          "p95": 54.077499,
+          "p99": 57.8749,
+          "maximum": 66.5113
+        },
+        "percent_ticks_above_50_ms": 36.8179925031237,
+        "longest_consecutive_ticks_above_50_ms": 77,
+        "compilation_ms": 1346,
+        "thirty_second_blocks": [
+          {
+            "block": 0,
+            "ticks": 604,
+            "mean_tick_ms": 47.83120822350993
+          },
+          {
+            "block": 1,
+            "ticks": 600,
+            "mean_tick_ms": 47.87015763833334
+          },
+          {
+            "block": 2,
+            "ticks": 600,
+            "mean_tick_ms": 48.07433918333333
+          },
+          {
+            "block": 3,
+            "ticks": 597,
+            "mean_tick_ms": 48.04154840368509
+          }
+        ],
+        "host": {
+          "sample_period_seconds": 5,
+          "in_window_intervals": 53,
+          "in_window_seconds": 265.68903255462646,
+          "monitored_processes": 187,
+          "competing_game_present": false,
+          "other_cpu_mean_cores": 0.26352470904347386,
+          "other_process_peaks": [
+            {
+              "name": "ChatGPT.exe",
+              "identity": "13688:134387027373880825",
+              "peak_cores": 0.18987277082010187,
+              "mean_cores": 0.05198746770685805
+            },
+            {
+              "name": "HWiNFO64.EXE",
+              "identity": "5948:134387027096006899",
+              "peak_cores": 0.14007007683450137,
+              "mean_cores": 0.08080405048554633
+            },
+            {
+              "name": "ChatGPT.exe",
+              "identity": "28732:134387027298932907",
+              "peak_cores": 0.06536603585610064,
+              "mean_cores": 0.03693227343880866
+            },
+            {
+              "name": "powershell.exe",
+              "identity": "6028:134387027037888757",
+              "peak_cores": 0.0530484609445924,
+              "mean_cores": 0.023464931691217602
+            },
+            {
+              "name": "ChatGPT.exe",
+              "identity": "28176:134387027293764011",
+              "peak_cores": 0.03734936846564029,
+              "mean_cores": 0.006998312960538583
+            },
+            {
+              "name": "codex.exe",
+              "identity": "30104:134387027358105490",
+              "peak_cores": 0.03119886405210195,
+              "mean_cores": 0.0038814172722314833
+            },
+            {
+              "name": "NVIDIA Overlay.exe",
+              "identity": "23188:134387027107235211",
+              "peak_cores": 0.024929183427167413,
+              "mean_cores": 0.003234514393526236
+            },
+            {
+              "name": "msrdc.exe",
+              "identity": "24704:134387367022096820",
+              "peak_cores": 0.021843514080660615,
+              "mean_cores": 0.0004704748208765434
+            }
+          ],
+          "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+        },
+        "loaded_native": {
+          "path": "local/benchmarks/goal-native-reduction-control-01/.pg-native/wwpg-safety-1/7bd4a90b0709d29b665708aa8537a36916b30780c37e11167abb88750168caf5/libpowergridNative7.dll",
+          "sha256": "7bd4a90b0709d29b665708aa8537a36916b30780c37e11167abb88750168caf5"
+        }
+      }
+    ],
+    "candidate": [
+      {
+        "name": "goal-native-reduction-candidate-01",
+        "tps": 20.03030775095018,
+        "mspt": {
+          "mean": 49.071254887916666,
+          "p50": 49.3098,
+          "p95": 54.427799,
+          "p99": 59.460801,
+          "maximum": 68.1138
+        },
+        "percent_ticks_above_50_ms": 43.333333333333336,
+        "longest_consecutive_ticks_above_50_ms": 77,
+        "compilation_ms": 1362,
+        "thirty_second_blocks": [
+          {
+            "block": 0,
+            "ticks": 601,
+            "mean_tick_ms": 49.09355356073211
+          },
+          {
+            "block": 1,
+            "ticks": 603,
+            "mean_tick_ms": 49.202743150912106
+          },
+          {
+            "block": 2,
+            "ticks": 600,
+            "mean_tick_ms": 49.021543171666664
+          },
+          {
+            "block": 3,
+            "ticks": 596,
+            "mean_tick_ms": 48.96578190939597
+          }
+        ],
+        "host": {
+          "sample_period_seconds": 5,
+          "in_window_intervals": 53,
+          "in_window_seconds": 265.69847226142883,
+          "monitored_processes": 190,
+          "competing_game_present": false,
+          "other_cpu_mean_cores": 0.2763353299516076,
+          "other_process_peaks": [
+            {
+              "name": "ChatGPT.exe",
+              "identity": "13688:134387027373880825",
+              "peak_cores": 0.1992143998108503,
+              "mean_cores": 0.05804276881511741
+            },
+            {
+              "name": "HWiNFO64.EXE",
+              "identity": "5948:134387027096006899",
+              "peak_cores": 0.1372479976940533,
+              "mean_cores": 0.08180090316294662
+            },
+            {
+              "name": "powershell.exe",
+              "identity": "6028:134387027037888757",
+              "peak_cores": 0.07798868031243263,
+              "mean_cores": 0.02522831592875924
+            },
+            {
+              "name": "ChatGPT.exe",
+              "identity": "28732:134387027298932907",
+              "peak_cores": 0.07170402377068154,
+              "mean_cores": 0.03734261215562265
+            },
+            {
+              "name": "Discord.exe",
+              "identity": "28708:134387040917398085",
+              "peak_cores": 0.06859754262617762,
+              "mean_cores": 0.004234122953078474
+            },
+            {
+              "name": "ChatGPT.exe",
+              "identity": "28176:134387027293764011",
+              "peak_cores": 0.06847114966015697,
+              "mean_cores": 0.009879620223849772
+            },
+            {
+              "name": "msrdc.exe",
+              "identity": "25060:134387371010668046",
+              "peak_cores": 0.03426017546877034,
+              "mean_cores": 0.0006468798956092113
+            },
+            {
+              "name": "dllhost.exe",
+              "identity": "31644:134387027407630677",
+              "peak_cores": 0.03112957867623861,
+              "mean_cores": 0.0038224721104180666
+            }
+          ],
+          "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+        },
+        "loaded_native": {
+          "path": "local/benchmarks/goal-native-reduction-candidate-01/.pg-native/wwpg-safety-1/70fbb9465ce752e600489afd4a5c0ddb35fb082231f5b0af68d90c536c0e338c/libpowergridNative7.dll",
+          "sha256": "70fbb9465ce752e600489afd4a5c0ddb35fb082231f5b0af68d90c536c0e338c"
+        }
+      }
+    ]
+  },
+  "candidate_minus_control_ms": {
+    "mean": 1.117255613864188,
+    "p50": 1.5162000000000049,
+    "p95": 0.35029999999999717,
+    "p99": 1.5859009999999998,
+    "maximum": 1.602499999999992
+  },
+  "exact_comparisons": 40740,
+  "fp_modes": 16,
+  "focused_fixture_executions": 40,
+  "observer_fixture_executions": 20,
+  "variants": {
+    "control": {
+      "inputs": {
+        "path": "local/frozen/native-reduction-control-02/inputs.json",
+        "sha256": "b566b38132f11846596264af8bec97589bce9a63e29a61175aaafe7fd226d0f8"
+      },
+      "runtime": {
+        "path": "local/frozen/native-reduction-control-02/wwpg-0.2.7-experimental.native-reduction-control.jar",
+        "sha256": "7b26ca478b60dc48fa05b63e5d42ba63a7ad56730553ecef01d53086f420c962"
+      },
+      "gameplay_classes_compared": 294,
+      "fixture_sha256": "196f63bb783369bcfc797b13e2a9bfdf9b013ba7a210ea45f31747bc13fed74c"
+    },
+    "candidate": {
+      "inputs": {
+        "path": "local/frozen/native-reduction-candidate-02/inputs.json",
+        "sha256": "2474f9bfb528a65db88586f9f83407ca092489c9be2c52f2761eccb0bc122203"
+      },
+      "runtime": {
+        "path": "local/frozen/native-reduction-candidate-02/wwpg-0.2.7-experimental.native-reduction-candidate.jar",
+        "sha256": "a82c69f330d65ebc25fd713344d51522dcd348c70b3cf051e682585f2585e4b6"
+      },
+      "gameplay_classes_compared": 294,
+      "fixture_sha256": "196f63bb783369bcfc797b13e2a9bfdf9b013ba7a210ea45f31747bc13fed74c"
+    },
+    "observer": {
+      "inputs": {
+        "path": "local/frozen/native-reduction-live-counts-01/inputs.json",
+        "sha256": "08386612b4888fdd603ec207d8dbe9dee529a390e4d3f8d6029618a2c22eb151"
+      },
+      "runtime": {
+        "path": "local/frozen/native-reduction-live-counts-01/wwpg-0.2.7-experimental.native-reduction-counts.jar",
+        "sha256": "aae049dfdf2f8418ddadcf8a47c5fc9962571949d003cb5f62f544c08a4ab414"
+      },
+      "gameplay_classes_compared": 294,
+      "fixture_sha256": "196f63bb783369bcfc797b13e2a9bfdf9b013ba7a210ea45f31747bc13fed74c"
+    }
+  },
+  "path_observation": {
+    "schema": 1,
+    "diagnostic": true,
+    "diagnostic_kind": "native-reduction-counts",
+    "passed": true,
+    "tracked_rows": 14925,
+    "cumulative_observations": 2926,
+    "last_cumulative_counts": {
+      "finiteFast": 249856,
+      "finiteFallback": 0,
+      "normFast": 107928,
+      "normFallback": 0
+    },
+    "periodic_report_per_path_calls": 4096,
+    "fallback_fraction": {
+      "finite": 0.0,
+      "norm": 0.0
+    },
+    "loaded_native": {
+      "path": "local/benchmarks/goal-native-reduction-live-counts-01/.pg-native/wwpg-safety-1/305319ea876f5f752ddbaff82514a03659421102dbffac53b78bf190771f31eb/libpowergridNative7.dll",
+      "sha256": "305319ea876f5f752ddbaff82514a03659421102dbffac53b78bf190771f31eb"
+    },
+    "marker": {
+      "schema": 1,
+      "diagnostic": true,
+      "diagnostic_kind": "native-reduction-counts",
+      "native_sha256": "305319ea876f5f752ddbaff82514a03659421102dbffac53b78bf190771f31eb",
+      "tracked_rows": 14925,
+      "native_build": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\native-reduction-live-observer-01\\build.json",
+        "sha256": "57996c7b1cb2f82e5894eafe573daaa366f952eeb0423153745609f264217589"
+      },
+      "original_runtime_sha256": "a82c69f330d65ebc25fd713344d51522dcd348c70b3cf051e682585f2585e4b6",
+      "gameplay_class_bytes_unchanged": true
+    },
+    "native_work_observation": {
+      "enabled": true,
+      "sampled_steady_ticks": 132,
+      "sampled_steady_native_calls": 2112,
+      "completed": {
+        "schema": 1,
+        "entries": 4032,
+        "exits": 4032,
+        "rows": 4032,
+        "invalid": 0
+      },
+      "evidence": [
+        {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-reduction-live-counts-01\\benchmark\\native-work.csv",
+          "sha256": "323a4a3cb8528ec10ee25582149413f1f712dbc61a83f7c52f5c2daadbce600b"
+        },
+        {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-reduction-live-counts-01\\benchmark\\native-work-end.json",
+          "sha256": "f8ab3431ff52aecf5c2d1bf3dcb40fffe602999bb3331e56aa095a2cc466267f"
+        }
+      ]
+    },
+    "evidence": [
+      {
+        "path": "local/benchmarks/goal-native-reduction-live-counts-01/experiment.json",
+        "sha256": "34109cb1e9fce26607188a0d694b86023767e27c0d9927a596eb24d2b02f605f"
+      },
+      {
+        "path": "local/benchmarks/goal-native-reduction-live-counts-01/launch.json",
+        "sha256": "47a56b812efc424805cb1aedd59ab19fdcd3d2e634130a29536b1a8c50a76d62"
+      },
+      {
+        "path": "local/benchmarks/goal-native-reduction-live-counts-01/process.log",
+        "sha256": "81858b6ae1aabf8ed24b976a36c928df88eb0bdc56e3e197a4bb8a11587319ad"
+      },
+      {
+        "path": "local/benchmarks/goal-native-reduction-live-counts-01/runner-exit.json",
+        "sha256": "f200b372645a64eeb0c0fadf89a993e970a2178ac77e4110047d0ce1b47b7f01"
+      },
+      {
+        "path": "local/benchmarks/goal-native-reduction-live-counts-01/shutdown-save.json",
+        "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+      }
+    ],
+    "limitations": [
+      "Counts accumulate from process startup through the last report, including loading and warmup; trailing calls may be omitted.",
+      "Periodic reports occur every 4096 calls of each path and at solver teardown; these are not stable-only counts.",
+      "Counters do not distinguish subnormal from nonfinite data or identify the calling substep.",
+      "Detailed timers, atomic counters and sparse logging are enabled; timings are not a clean comparison."
+    ]
+  },
+  "failed_teardown_observation": {
+    "name": "goal-native-reduction-counts-01",
+    "counter_validation_passed": false,
+    "game_checks_passed": true,
+    "zero_only_reports": 2839,
+    "reason": "The live full-sized solver was not destroyed before process exit; teardown reports were all zero.",
+    "evidence": [
+      {
+        "path": "local/benchmarks/goal-native-reduction-counts-01/experiment.json",
+        "sha256": "497f95bdaaaedf785527a3b0b5569af6eb66fbcf0d3fc6a55e4416104d68b71f"
+      },
+      {
+        "path": "local/benchmarks/goal-native-reduction-counts-01/runner-exit.json",
+        "sha256": "c028f309b679c9ba505014f3ad9c51bd89c65b4043b479b596ea5027769af784"
+      },
+      {
+        "path": "local/benchmarks/goal-native-reduction-counts-01/process.log",
+        "sha256": "f620c31f76294bd4532ece20b4406932178e8ffd8a0eceac9d58d6ac529c4796"
+      }
+    ]
+  },
+  "exploratory_native_calls": [
+    {
+      "name": "goal-native-stages-02",
+      "runtime_sha256": "47a80f338d96560f19c886fc312099622af336d2e150e11329a75966c9394889",
+      "c_stage_timers": true,
+      "diagnostic_kind": null,
+      "groups": [
+        {
+          "iteration_callbacks": 1,
+          "residual_callbacks": 1,
+          "sampled_calls": 1344,
+          "unweighted_mean_native_ms": 0.11512284226190476
+        },
+        {
+          "iteration_callbacks": 2,
+          "residual_callbacks": 3,
+          "sampled_calls": 768,
+          "unweighted_mean_native_ms": 0.6300645833333333
+        }
+      ],
+      "evidence": [
+        {
+          "path": "local/benchmarks/goal-native-stages-02/experiment.json",
+          "sha256": "52c00a853c8cadc9bd8066f411a9ff3b0a395464c8a189afe9d91d8bed4af910"
+        },
+        {
+          "path": "local/benchmarks/goal-native-stages-02/benchmark/native-work.csv",
+          "sha256": "00c69d553a9c3a2b1c366289a24f4fd1b63a6b54f82bf2b7532d54dcac26add9"
+        }
+      ]
+    },
+    {
+      "name": "goal-native-reduction-counts-01",
+      "runtime_sha256": "3876a0faadbcacfd0ee2e95d37d509f267dea330853233f6e2ad9e8ad87b3eee",
+      "c_stage_timers": false,
+      "diagnostic_kind": "native-reduction-counts",
+      "groups": [
+        {
+          "iteration_callbacks": 1,
+          "residual_callbacks": 1,
+          "sampled_calls": 1344,
+          "unweighted_mean_native_ms": 0.07044739583333333
+        },
+        {
+          "iteration_callbacks": 2,
+          "residual_callbacks": 3,
+          "sampled_calls": 768,
+          "unweighted_mean_native_ms": 0.46122421874999997
+        }
+      ],
+      "evidence": [
+        {
+          "path": "local/benchmarks/goal-native-reduction-counts-01/experiment.json",
+          "sha256": "497f95bdaaaedf785527a3b0b5569af6eb66fbcf0d3fc6a55e4416104d68b71f"
+        },
+        {
+          "path": "local/benchmarks/goal-native-reduction-counts-01/benchmark/native-work.csv",
+          "sha256": "47517ced49ea1763040ae25f8a555d6e50be4585023415b5074605861efb0d63"
+        }
+      ]
+    },
+    {
+      "name": "goal-native-reduction-live-counts-01",
+      "runtime_sha256": "aae049dfdf2f8418ddadcf8a47c5fc9962571949d003cb5f62f544c08a4ab414",
+      "c_stage_timers": false,
+      "diagnostic_kind": "native-reduction-counts",
+      "groups": [
+        {
+          "iteration_callbacks": 1,
+          "residual_callbacks": 1,
+          "sampled_calls": 1344,
+          "unweighted_mean_native_ms": 0.06961078869047618
+        },
+        {
+          "iteration_callbacks": 2,
+          "residual_callbacks": 3,
+          "sampled_calls": 768,
+          "unweighted_mean_native_ms": 0.46295976562499996
+        }
+      ],
+      "evidence": [
+        {
+          "path": "local/benchmarks/goal-native-reduction-live-counts-01/experiment.json",
+          "sha256": "34109cb1e9fce26607188a0d694b86023767e27c0d9927a596eb24d2b02f605f"
+        },
+        {
+          "path": "local/benchmarks/goal-native-reduction-live-counts-01/benchmark/native-work.csv",
+          "sha256": "323a4a3cb8528ec10ee25582149413f1f712dbc61a83f7c52f5c2daadbce600b"
+        }
+      ]
+    }
+  ],
+  "microbenchmark": {
+    "evidence": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\native-reduction-01\\checks\\microbenchmark.csv",
+      "sha256": "5021c2d4169d8cb4a41a234f73807344ca07a1a8bde3b8ef19af36b56e16600b"
+    },
+    "measurements": [
+      {
+        "kind": "norm",
+        "shape": 0,
+        "mean_ms_per_call": {
+          "reference": 0.0145346923828125,
+          "candidate": 0.0024642822265625
+        },
+        "candidate_over_reference": 0.16954484908648992
+      },
+      {
+        "kind": "norm",
+        "shape": 1,
+        "mean_ms_per_call": {
+          "reference": 0.013725341796875,
+          "candidate": 0.00248525390625
+        },
+        "candidate_over_reference": 0.18107045660719687
+      },
+      {
+        "kind": "norm",
+        "shape": 2,
+        "mean_ms_per_call": {
+          "reference": 0.01388505859375,
+          "candidate": 0.016970434570312498
+        },
+        "candidate_over_reference": 1.222208351209357
+      },
+      {
+        "kind": "finite",
+        "shape": 0,
+        "mean_ms_per_call": {
+          "reference": 0.007925439453125,
+          "candidate": 0.0019453857421875
+        },
+        "candidate_over_reference": 0.24546093042455008
+      },
+      {
+        "kind": "finite",
+        "shape": 1,
+        "mean_ms_per_call": {
+          "reference": 0.0077524169921875,
+          "candidate": 0.0019619873046875
+        },
+        "candidate_over_reference": 0.25308072394257086
+      },
+      {
+        "kind": "finite",
+        "shape": 2,
+        "mean_ms_per_call": {
+          "reference": 0.008146826171875,
+          "candidate": 0.010133154296875
+        },
+        "candidate_over_reference": 1.2438161908814664
+      }
+    ],
+    "note": "Alternating order, 14925 rows, eight blocks per shape. Shape 2 intentionally exercises subnormal fallback. Not game timing."
+  },
+  "evidence": [
+    {
+      "path": "local/native-reduction-01/comparison-first.json",
+      "sha256": "afcad04e33439a0ec61e3fcedbc2e16161c3bc693146044ba44617c137b1750a"
+    },
+    {
+      "path": "local/benchmarks/goal-native-reduction-live-counts-01/native-reduction-paths.json",
+      "sha256": "a162710d6aa9ad8ee282c393383c59e80993af14aa38b3b22d9c8f5958d1dac8"
+    },
+    {
+      "path": "local/frozen/native-reduction-live-counts-01/inputs.json",
+      "sha256": "08386612b4888fdd603ec207d8dbe9dee529a390e4d3f8d6029618a2c22eb151"
+    },
+    {
+      "path": "local/checks/native-reduction-live-counts-guard-01/result.json",
+      "sha256": "1d193ecd400ec040c1380fae75b318444a71b3f0ac721639a7d92938248843cb"
+    },
+    {
+      "path": "local/frozen/prototype-12g/inputs.json",
+      "sha256": "f7f34bbba95a21ef9eea0228b4174fa8b31a6a4e8a230fd01b021b7389a68016"
+    },
+    {
+      "path": "local/native-reduction-01/build.json",
+      "sha256": "072eee020bdc3f179b307645dd37bd676e9d9bd73689a268f89d3034aa616b8e"
+    },
+    {
+      "path": "local/native-reduction-live-observer-01/build.json",
+      "sha256": "57996c7b1cb2f82e5894eafe573daaa366f952eeb0423153745609f264217589"
+    }
+  ],
+  "limitations": [
+    "Same-compiler control and candidate; neither native library is the earlier retained release compiler output.",
+    "Run metrics are reported individually and averaged equally, without treating a single pair as repeatability evidence.",
+    "The standalone microbenchmark is not game throughput; its subnormal path is slower.",
+    "No client loading or full acceptance is established by this steady comparison.",
+    "Counts accumulate from process startup through the last report, including loading and warmup; trailing calls may be omitted.",
+    "Periodic reports occur every 4096 calls of each path and at solver teardown; these are not stable-only counts.",
+    "Counters do not distinguish subnormal from nonfinite data or identify the calling substep.",
+    "Detailed timers, atomic counters and sparse logging are enabled; timings are not a clean comparison.",
+    "Exploratory native-call means use different diagnostic instrumentation; they are not a matched speedup measurement."
+  ]
+}

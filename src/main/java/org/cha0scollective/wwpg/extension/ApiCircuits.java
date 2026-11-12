@@ -189,6 +189,19 @@ public final class ApiCircuits {
         }
     }
 
+    /** Existing prepared models only; no provider or terminal callbacks. */
+    public void restorationOwners() {
+        for (var entry : devices.entrySet()) for (var node : entry.getValue().nodes.values())
+            org.cha0scollective.wwpg.bridge.RestorationCoordinator.owner(level, node, entry.getKey());
+    }
+    /** Immutable internal identity remains meaningful after its prepared model retires. */
+    public static BlockPos restorationOwner(ServerLevel level, org.patryk3211.powergrid.electricity.wire.IWireEndpoint endpoint) {
+        if (!(endpoint instanceof ApiInternalEndpoint internal)) return null;
+        var owner = internal.ownerIdentity();
+        return owner.dimensionId().equals(level.dimension().location().toString())
+                ? new BlockPos(owner.x(), owner.y(), owner.z()) : null;
+    }
+
     private boolean ready(BlockPos pos) {
         return level.getChunkSource().getChunkNow(pos.getX()>>4,pos.getZ()>>4)!=null
                 && level.getChunkSource().isPositionTicking(net.minecraft.world.level.ChunkPos.asLong(pos))
@@ -269,9 +282,15 @@ public final class ApiCircuits {
     }
     /** Faulting upstream adapters invalidate the same shared network's extension results. */
     public void invalidate(ElectricalNetwork network) {
+        unavailable(network,false);
+    }
+    public void defer(ElectricalNetwork network) {
+        unavailable(network,true);
+    }
+    private void unavailable(ElectricalNetwork network,boolean restoring) {
         var work=networkWork.get(network);
         if(work!=null)work.invalid=true;
-        NativeApiReadings.invalidate(level,network);
+        if(restoring)NativeApiReadings.defer(level,network);else NativeApiReadings.invalidate(level,network);
     }
     private boolean invalid(ElectricalNetwork network) {
         var work=networkWork.get(network);

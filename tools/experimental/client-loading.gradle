@@ -1,0 +1,73 @@
+// Explicit helper compilation and launch preparation only. No acceptance task is invoked.
+gradle.projectsEvaluated {
+    def p = gradle.rootProject
+    def folder = p.file(p.property('clientLoadingFolder'))
+    def runtime = p.file(p.property('clientLoadingRuntime'))
+    def cee = p.file(p.property('clientLoadingCee'))
+    def parent = p.file(p.property('clientLoadingParent'))
+    def compile = p.tasks.register('compileClientLoadingHelper', JavaCompile) {
+        source p.fileTree(new File(folder, 'src')) { include '**/*.java' }
+        classpath = p.files(runtime, parent) + p.configurations.compileClasspath
+        destinationDirectory = new File(folder, 'classes')
+        options.release = 21
+        options.encoding = 'UTF-8'
+        options.compilerArgs += ['-proc:none']
+    }
+    def helper = p.tasks.register('clientLoadingHelperJar', Jar) {
+        dependsOn compile
+        from(p.zipTree(parent)) {
+            exclude 'org/cha0scollective/wwpg/benchmark/Session.class', 'META-INF/neoforge.mods.toml'
+        }
+        from(new File(folder, 'classes'))
+        from(new File(folder, 'resources'))
+        destinationDirectory = folder
+        archiveFileName = 'wwpg-benchmark-client-loading.jar'
+        duplicatesStrategy = DuplicatesStrategy.FAIL
+    }
+    p.tasks.register('prepareClientLoadingTemplate') {
+        dependsOn helper, p.tasks.named('prepareClientARun')
+        doLast {
+            def run = p.tasks.named('runClientA').get()
+            def output = new File(folder, 'launch'); output.mkdirs()
+            def excluded = [p.sourceSets.main, p.sourceSets.extensionApi, p.sourceSets.ceeApi, p.sourceSets.gameTest]
+            def compileCee = p.configurations.runtimeClasspath.resolvedConfiguration.resolvedArtifacts.findAll {
+                it.moduleVersion.id.group == 'maven.modrinth' && it.moduleVersion.id.name == 'qYJdIoAx'
+            }.collect { it.file }
+            if (compileCee.size() != 1) throw new GradleException('Expected exactly one compile-profile CEE jar')
+            def oldCee = compileCee.first()
+            def replaceCee = { String text ->
+                [oldCee.absolutePath, oldCee.absolutePath.replace('\\', '/'), oldCee.absolutePath.replace('\\', '\\\\')].unique().each { old ->
+                    def replacement = old.contains('\\\\') ? cee.absolutePath.replace('\\', '\\\\') : (old.contains('/') ? cee.absolutePath.replace('\\', '/') : cee.absolutePath)
+                    text = text.replace(old, replacement)
+                }
+                text
+            }
+            def legacy = p.file('build/moddev/clientALegacyClasspath.txt')
+            def frozenLegacy = new File(output, 'legacy-classpath.txt')
+            frozenLegacy.setText(replaceCee(legacy.getText('UTF-8')), 'UTF-8')
+            def quote = { value -> '"' + value.toString().replace('\\', '/').replace('"', '\\"') + '"' }
+            def flatten = { values -> values.collect { value ->
+                if (!value.startsWith('@')) return quote(value)
+                def text = p.file(value.substring(1)).getText('UTF-8')
+                text = replaceCee(text).replace(legacy.absolutePath.replace('\\','\\\\'), frozenLegacy.absolutePath.replace('\\','\\\\'))
+                text = text.replace('--quickPlayMultiplayer\n127.0.0.1:25575', '')
+                    .replace('--width\n854', '--width\n1920').replace('--height\n480', '--height\n1080')
+                    .replace('-Xmx2G', '-Xmx8G').replace('-Dwwpg.test.multiplayer=true', '-Dwwpg.test.multiplayer=false')
+                    .replace('-Dneoforge.enableGameTest=true', '-Dneoforge.enableGameTest=false')
+                if (text.contains('quickPlay')) throw new GradleException('Client must start at title, not quick play')
+                text
+            }.join('\n') }
+            def classpath = run.classpathProvider.filter { file ->
+                !excluded.any { it.output.files.contains(file) } && file != oldCee
+            } + p.files(runtime, cee, helper.get().archiveFile.get().asFile)
+            def commandFile = new File(output, 'client-template.args')
+            commandFile.setText(flatten(run.jvmArgs) + '\n' + ['-cp', classpath.asPath, run.mainClass.get()].collect(quote).join('\n') + '\n' + flatten(run.args) + '\n', 'UTF-8')
+            def env = new HashMap(run.environmentProperty.get())
+            env['MOD_CLASSES'] = 'wwpg%%' + runtime.absolutePath + File.pathSeparator + 'wwpg_benchmark%%' + helper.get().archiveFile.get().asFile.absolutePath
+            def value = [schema:1, java:p.javaToolchains.launcherFor { languageVersion=JavaLanguageVersion.of(21) }.get().executablePath.asFile.absolutePath,
+                arguments:commandFile.absolutePath, environment:env, classpath:classpath.files.collect { it.absolutePath },
+                runtime:runtime.absolutePath, cee:cee.absolutePath, helper:helper.get().archiveFile.get().asFile.absolutePath]
+            new File(folder, 'launch-template.json').setText(groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(value)) + '\n', 'UTF-8')
+        }
+    }
+}

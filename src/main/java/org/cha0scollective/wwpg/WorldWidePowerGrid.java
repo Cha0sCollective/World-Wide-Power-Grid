@@ -24,7 +24,7 @@ public final class WorldWidePowerGrid {
         org.cha0scollective.wwpg.extension.CeeAdapters.initialize(modBus);
         modBus.addListener(org.cha0scollective.wwpg.compat.cio.CioCompatibility::registerAdapters);
         modBus.addListener(org.cha0scollective.wwpg.extension.ApiDeviceDiscovery::freeze);
-        LOGGER.info("WWPG: CEE 1.1.3 / Power Grid 0.6.2 compatibility loaded");
+        LOGGER.info("WWPG: CEE 1.1.x / Power Grid 0.6.2 compatibility loaded");
         NeoForge.EVENT_BUS.addListener(this::commands);
         NeoForge.EVENT_BUS.addListener(this::unload);
         NeoForge.EVENT_BUS.addListener(this::stop);
@@ -60,6 +60,7 @@ public final class WorldWidePowerGrid {
                 })));
     }
     private void unload(LevelEvent.Unload event) {
+        if (event.getLevel() instanceof ServerLevel level) org.cha0scollective.wwpg.experimental.WireTreeBatch.unload(level);
         if (event.getLevel() instanceof ServerLevel level) Bridges.unload(level);
         if (event.getLevel() instanceof ServerLevel level) org.cha0scollective.wwpg.bridge.RestorationCoordinator.unload(level);
         if (event.getLevel() instanceof ServerLevel level) org.cha0scollective.wwpg.extension.ApiCircuits.unload(level);
@@ -68,6 +69,10 @@ public final class WorldWidePowerGrid {
         if (event.getLevel() instanceof net.minecraft.world.level.Level level) org.cha0scollective.wwpg.extension.ApiTerminals.unload(level);
     }
     private void stop(ServerStoppedEvent event) {
+        org.cha0scollective.wwpg.experimental.CeeStateGeometry.reportAndClear();
+        org.cha0scollective.wwpg.experimental.WireTreeBatch.reportAndClear();
+        org.cha0scollective.wwpg.experimental.ScopedRestoration.reportAndClear();
+        org.cha0scollective.wwpg.experimental.PlainWireBatch.reportAndReset();
         Bridges.clear();
         org.cha0scollective.wwpg.bridge.RestorationCoordinator.clear();
         org.cha0scollective.wwpg.extension.ApiCircuits.clear();

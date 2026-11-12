@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+  "library": {
+    "path": "release/0.2.8-rc.1/native-linux-checks/objects/ebbe34d6b59acd5472d60d1d4802a890f960e4e9cd3e1389632b170f362a4124.so",
+    "sha256": "ebbe34d6b59acd5472d60d1d4802a890f960e4e9cd3e1389632b170f362a4124",
+    "bytes": 3251128
+  },
+  "checks": [
+    {
+      "name": "reduction_checks",
+      "executable": {
+        "path": "release/0.2.8-rc.1/native-linux-checks/objects/279cfd99a632767d342b7ae8a3269aac8f88571fa4b355ec86ed16e9eecfe1ac",
+        "sha256": "279cfd99a632767d342b7ae8a3269aac8f88571fa4b355ec86ed16e9eecfe1ac",
+        "bytes": 21016
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "release/0.2.8-rc.1/native-linux-checks/objects/f707b33b24bef44e16db1b304658d99d1c5bbad7cb7c59f7872eb67f7c75c4ca.log",
+        "sha256": "f707b33b24bef44e16db1b304658d99d1c5bbad7cb7c59f7872eb67f7c75c4ca",
+        "bytes": 108
+      },
+      "passed": true
+    },
+    {
+      "name": "sparse_safety_tests",
+      "executable": {
+        "path": "release/0.2.8-rc.1/native-linux-checks/objects/ad1d7aa5d94725647214a5c6e9f6860ba4eb43a2f24ae9f2bddab14b7bf78352",
+        "sha256": "ad1d7aa5d94725647214a5c6e9f6860ba4eb43a2f24ae9f2bddab14b7bf78352",
+        "bytes": 3190960
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "release/0.2.8-rc.1/native-linux-checks/objects/503dbb4d699205fd02f82091621a0adba84ebda3218b96e3ee5ce2c76cb23ce6.log",
+        "sha256": "503dbb4d699205fd02f82091621a0adba84ebda3218b96e3ee5ce2c76cb23ce6",
+        "bytes": 68
+      },
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "_original_record": {
+    "path": "release/0.2.8-rc.1/native-linux-checks/objects/result.original.bin",
+    "sha256": "10dfe37f41c072ca598be0a50df6aa5be21c6277b9eb79a2eea2b442c328a87e",
+    "bytes": 1431
+  }
+}

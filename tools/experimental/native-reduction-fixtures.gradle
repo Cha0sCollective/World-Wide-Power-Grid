@@ -1,0 +1,12 @@
+// Explicit experimental fixture compile, isolated from normal build/acceptance.
+gradle.projectsEvaluated {
+    def p = gradle.rootProject
+    def folder = p.file(p.property('nativeFixtureDirectory'))
+    p.tasks.register('compileNativeReductionFixtures', JavaCompile) {
+        source p.fileTree(new File(folder, 'src')) { include '**/*.java' }
+        classpath = p.files(p.property('nativeFixtureRuntime'), p.property('nativeFixtureBase')) + p.configurations.compileClasspath
+        destinationDirectory = new File(folder, 'classes')
+        options.release = 21
+        options.compilerArgs += ['-proc:none']
+    }
+}

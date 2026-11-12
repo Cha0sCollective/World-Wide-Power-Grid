@@ -1,0 +1,1867 @@
+{
+  "schema": 1,
+  "inputs": {
+    "path": "local/frozen/prototype-06a/inputs.json",
+    "sha256": "da49e7cbdc4e6b336cff2482f97720a84a79e4f5b6cb0140669ff7d07bed5518"
+  },
+  "artifacts": {
+    "runtime": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\wwpg-0.2.7-experimental.wiretree.5.jar",
+      "sha256": "6602c3d51c4ad3a3db0135482fa0ca24de97a69b800e79c92e39c1476961ecc9"
+    },
+    "fixtures": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\wwpg-0.2.7-experimental.wiretree.5-gametests.jar",
+      "sha256": "660199f1e7602315490d207b41e5bcebd66328d9efe2c88724f64dfa5f4807af"
+    },
+    "cee": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\electroenergetics-1.21.1-1.1.4.jar",
+      "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+    }
+  },
+  "sources_verified": 439,
+  "native_unchanged": true,
+  "checks": [
+    {
+      "name": "coverage-06a-java-tree",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery",
+        "backend": "JAVA",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 0,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": true,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\wwpg-0.2.7-experimental.wiretree.5.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\wwpg-0.2.7-experimental.wiretree.5-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\coverage-06a-java-tree\\server",
+          "-PtestBackend=JAVA",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=0",
+          "-PtestWireTreeMaxParts=32",
+          "-PtestWireTreeRetainCoverage=true"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\wwpg-0.2.7-experimental.wiretree.5.jar",
+            "sha256": "6602c3d51c4ad3a3db0135482fa0ca24de97a69b800e79c92e39c1476961ecc9"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\wwpg-0.2.7-experimental.wiretree.5-gametests.jar",
+            "sha256": "660199f1e7602315490d207b41e5bcebd66328d9efe2c88724f64dfa5f4807af"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "exit_code": 0,
+        "required_tests_passed": 36,
+        "artifacts_unchanged": true,
+        "passed": true
+      },
+      "evidence": [
+        {
+          "path": "local/checks/coverage-06a-java-tree/result.json",
+          "sha256": "5bfd52c31d5e4484c38a393c41493ec8f8042dbbb31c969fe56a4cf2a257089e"
+        },
+        {
+          "path": "local/checks/coverage-06a-java-tree/process.log",
+          "sha256": "1aeca492c7ecc9c65bdb87e0f9c8872664edd07a3b78be6a6d7c8d6d7a3fb728"
+        }
+      ]
+    },
+    {
+      "name": "coverage-06a-native-budget",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery,wwpg_tree_budget",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 1,
+        "tree_retain_coverage": true,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\wwpg-0.2.7-experimental.wiretree.5.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\wwpg-0.2.7-experimental.wiretree.5-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\coverage-06a-native-budget\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery,wwpg_tree_budget",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=1",
+          "-PtestWireTreeRetainCoverage=true"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\wwpg-0.2.7-experimental.wiretree.5.jar",
+            "sha256": "6602c3d51c4ad3a3db0135482fa0ca24de97a69b800e79c92e39c1476961ecc9"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\wwpg-0.2.7-experimental.wiretree.5-gametests.jar",
+            "sha256": "660199f1e7602315490d207b41e5bcebd66328d9efe2c88724f64dfa5f4807af"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "exit_code": 0,
+        "required_tests_passed": 38,
+        "artifacts_unchanged": true,
+        "passed": true
+      },
+      "evidence": [
+        {
+          "path": "local/checks/coverage-06a-native-budget/result.json",
+          "sha256": "29acb0473a277b3fb2a76bda680997a49e3e344bc0b3d9cddfce7b4b7eb7056d"
+        },
+        {
+          "path": "local/checks/coverage-06a-native-budget/process.log",
+          "sha256": "29ac605e21a2052bd76d0f5e01ae7cc16bccb388bcbcf3331b47b196d071a757"
+        }
+      ]
+    },
+    {
+      "name": "coverage-06a-native-tree",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 0,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": true,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\wwpg-0.2.7-experimental.wiretree.5.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\wwpg-0.2.7-experimental.wiretree.5-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\coverage-06a-native-tree\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_restore,wwpg_loading,wwpg_pause_epoch,wwpg_contactors,wwpg_wire_recovery",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=0",
+          "-PtestWireTreeMaxParts=32",
+          "-PtestWireTreeRetainCoverage=true"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\wwpg-0.2.7-experimental.wiretree.5.jar",
+            "sha256": "6602c3d51c4ad3a3db0135482fa0ca24de97a69b800e79c92e39c1476961ecc9"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\wwpg-0.2.7-experimental.wiretree.5-gametests.jar",
+            "sha256": "660199f1e7602315490d207b41e5bcebd66328d9efe2c88724f64dfa5f4807af"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "exit_code": 0,
+        "required_tests_passed": 36,
+        "artifacts_unchanged": true,
+        "passed": true
+      },
+      "evidence": [
+        {
+          "path": "local/checks/coverage-06a-native-tree/result.json",
+          "sha256": "ed1ad889bb3d90e1acd3dc1e55b4e902fa1a0d0def603060a823377060c6b7e4"
+        },
+        {
+          "path": "local/checks/coverage-06a-native-tree/process.log",
+          "sha256": "581700479850d108761e053086a8980795afa9fab1b9a54bacaa7fb45b530dc5"
+        }
+      ]
+    }
+  ],
+  "unit_checks": [
+    {
+      "suite": "org.cha0scollective.wwpg.bridge.RestorationWindowTest",
+      "tests": 3,
+      "evidence": {
+        "path": "local/checks/coverage-units-01/results/TEST-org.cha0scollective.wwpg.bridge.RestorationWindowTest.xml",
+        "sha256": "476b04e0384ff770ad099e863fb2bec37a2229447b950353aa5f2f3909f7f81d"
+      }
+    },
+    {
+      "suite": "org.cha0scollective.wwpg.wiring.RestorationQueueTest",
+      "tests": 6,
+      "evidence": {
+        "path": "local/checks/coverage-units-01/results/TEST-org.cha0scollective.wwpg.wiring.RestorationQueueTest.xml",
+        "sha256": "6c130306d0fdaa3263c2bcd597a8fb3f4f96c3115da89c279a8d5c997bd7ace3"
+      }
+    },
+    {
+      "suite": "org.cha0scollective.wwpg.wiring.RestorationRootsTest",
+      "tests": 2,
+      "evidence": {
+        "path": "local/checks/coverage-units-01/results/TEST-org.cha0scollective.wwpg.wiring.RestorationRootsTest.xml",
+        "sha256": "9f6a5cb07a38ef0da2ad41a5541a56c853f572ba993ffec3a9dc490c97dae782"
+      }
+    },
+    {
+      "suite": "org.cha0scollective.wwpg.wiring.WireTreeTraversalTest",
+      "tests": 1,
+      "evidence": {
+        "path": "local/checks/coverage-units-01/results/TEST-org.cha0scollective.wwpg.wiring.WireTreeTraversalTest.xml",
+        "sha256": "5238e80de2f50f23f0eaa23f5859a1e0301dd2f60eba6d9477a4dcdb98e9684a"
+      }
+    }
+  ],
+  "full_suite": false,
+  "comparison": {
+    "control": {
+      "mean_seconds": 58.295986150000004,
+      "durations": [
+        59.1063585,
+        57.4856138
+      ],
+      "visits": [
+        20263157,
+        18744154
+      ],
+      "worst_ticks": [
+        3.4369508,
+        3.2676106
+      ]
+    },
+    "retained": {
+      "mean_seconds": 62.243184549999995,
+      "durations": [
+        64.8980187,
+        59.5883504
+      ],
+      "visits": [
+        20659787,
+        21159596
+      ],
+      "worst_ticks": [
+        3.824752,
+        3.246013101
+      ]
+    },
+    "increase_percent": 6.77096085113571,
+    "conclusion": "No loading improvement on this yard. Retire runtime change; preserve frozen prototype and evidence.",
+    "limits": "Two samples per mode; fresh-process saves, not flushed caches; no significance, rendering or sustained-TPS claim."
+  },
+  "measurements": [
+    {
+      "name": "coverage-on-01",
+      "protocol": {
+        "schema": 1,
+        "name": "coverage-on-01",
+        "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\coverage-on-01\\mods\\wwpg-0.2.7-experimental.wiretree.5.jar",
+          "sha256": "6602c3d51c4ad3a3db0135482fa0ca24de97a69b800e79c92e39c1476961ecc9",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\wwpg-0.2.7-experimental.wiretree.5.jar"
+        },
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\coverage-on-01\\mods\\wwpg-benchmark-0.1.0-budget.jar",
+          "sha256": "3655eb8f3c129e8c7d6801361f66551e9ee97e12fa5d0c56bfb5354f010ce9bf"
+        },
+        "copied_reference": true,
+        "batch": true,
+        "property_batch": true,
+        "tree_batch": true,
+        "detailed": false,
+        "loading_trace": false,
+        "reload": false,
+        "full_suite": false,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": true,
+        "helper_inputs": "local/frozen/budget-helper-01/inputs.json",
+        "started_utc": "2026-11-09T13:27:58Z",
+        "tree_execution": {
+          "attachments": 5893,
+          "fallback": 50,
+          "roots": 11786,
+          "traversals": 5279,
+          "covered": 6507,
+          "visited": 20659787,
+          "flushes": 686,
+          "largest": 8238,
+          "pending": 0,
+          "forced": 1,
+          "discarded": 0,
+          "budgetMillis": 20,
+          "maxParts": 32,
+          "yielded": 685,
+          "maxProcessed": 32,
+          "maxFlushNanos": 102828900,
+          "maxEntryNanos": 99084600
+        },
+        "validation": {
+          "passed": true,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "healthy_ticks": 100,
+          "normal_shutdown": true,
+          "sixteen_substeps": true,
+          "no_independent_cee_or_rejected_solves": true,
+          "actual_reload_cycles": 0,
+          "full_suite": false
+        },
+        "loading": [
+          {
+            "phase": "SETTLE",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 564,
+            "graph_ready_tick": 687,
+            "finish_tick": 807,
+            "chunk_request_seconds": 1.2261371,
+            "chunk_loading_seconds": 49.6494816,
+            "graph_recovery_seconds": 7.224779,
+            "electrical_settling_seconds": 6.797621,
+            "total_restoration_seconds": 64.8980187,
+            "restoration_and_settling_seconds": 63.6718816,
+            "healthy_ticks": 100,
+            "queued_roots_at_chunk_ready": 7776,
+            "maximum_pending_roots": 8230,
+            "queue_drained_tick": 687,
+            "queue_drain_seconds": 7.224779
+          }
+        ],
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T13:29:20Z"
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/coverage-on-01/experiment.json",
+          "sha256": "fc06a455ae75e4d7ae215ba89f63d08f2deb6327f4e3d10f93c19bfea10cdb5b"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-01/launch.json",
+          "sha256": "d77db4b7cae1fa26b44ebd47e8edf7f9f92b627281ada240fec6d94e5b022141"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-01/invocation.json",
+          "sha256": "49300aa27e42e880e0b4c985a5fd550f1cadadc79859233b832f9465fe356e80"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-01/restore-input.json",
+          "sha256": "7109c2fef03ec8363118e253f3835d53c37a96be270b560de93204cb5c22f3c0"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-01/runner-exit.json",
+          "sha256": "0e675b3bf940da23bd9e9b5cd16bb7b54a1d0830aeefab43f0e1e125d0f03bd1"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-01/host-metrics.jsonl",
+          "sha256": "e8c1e9be2694e333764d973a6a29e2a2b146f8a66a572caf91e8957afa76215a"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-01/process.log",
+          "sha256": "bb59e615c477d68d5d1f59eef89351fd7c2b03e5032414764f31ea83631c362a"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-01/benchmark/result.json",
+          "sha256": "af4e57e24deab27b472c0dc6c5a253cce789ee0cf5a63d6f62b923f5bc5d7aa8"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-01/benchmark/loading-results.json",
+          "sha256": "50d46c825a12ded46e34c5edd0626fa649d3d6a662d04e23d5e9d53bc81509db"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-01/benchmark/ticks.csv",
+          "sha256": "1cf3d34da99d53aa2e2b2a536f94c736e19c4893cc56a18747fcb9229659f089"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-01/benchmark/placement-ticks.csv",
+          "sha256": "bc888ffa82332bdef30ce3a89f380def721eb9ad17375584a202aa5e2e0573a6"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-01/benchmark/placement-fixed.json",
+          "sha256": "f39e516534daabb39e6a5305b5c802dee926ac68a80c1f4de97c30d3406bcc22"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-01/benchmark/placement-restored.json",
+          "sha256": "19f01e621df7a2ce78c4a0ead631fb5eff9528e2e71f5eb5bc80479324c118d4"
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 11,
+        "in_window_seconds": 55.09330701828003,
+        "monitored_processes": 194,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.2759523038788647,
+        "other_process_peaks": [
+          {
+            "name": "sihost.exe",
+            "identity": "13108:134387027037015448",
+            "peak_cores": 0.19632554363572066,
+            "mean_cores": 0.017867415359063183
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "13688:134387027373880825",
+            "peak_cores": 0.12481391160135082,
+            "mean_cores": 0.01815102512666736
+          },
+          {
+            "name": "RuntimeBroker.exe",
+            "identity": "17788:134387027055955448",
+            "peak_cores": 0.11218602493469752,
+            "mean_cores": 0.010209951633750389
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "5948:134387027096006899",
+            "peak_cores": 0.10307145784083757,
+            "mean_cores": 0.08962068656292009
+          },
+          {
+            "name": "Discord.exe",
+            "identity": "28708:134387040917398085",
+            "peak_cores": 0.10278428279061137,
+            "mean_cores": 0.02949541583083446
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "6028:134387027037888757",
+            "peak_cores": 0.059344172696239816,
+            "mean_cores": 0.02807736699281357
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28176:134387027293764011",
+            "peak_cores": 0.03432382569037147,
+            "mean_cores": 0.011911610239375455
+          },
+          {
+            "name": "codex.exe",
+            "identity": "30104:134387027358105490",
+            "peak_cores": 0.024976348623880307,
+            "mean_cores": 0.008791902795729502
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "tick_metrics": {
+        "SETTLE": {
+          "ticks": 807,
+          "longest_tick_seconds": 3.824752,
+          "tick_body_seconds": 62.3001286,
+          "matrix_assemblies": 1,
+          "network_substep_calls": 1936,
+          "p95_tick_seconds": 0.1178789,
+          "p99_tick_seconds": 0.2236642,
+          "longest_end_to_end_gap_seconds": 3.838
+        }
+      }
+    },
+    {
+      "name": "coverage-off-01",
+      "protocol": {
+        "schema": 1,
+        "name": "coverage-off-01",
+        "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\coverage-off-01\\mods\\wwpg-0.2.7-experimental.wiretree.5.jar",
+          "sha256": "6602c3d51c4ad3a3db0135482fa0ca24de97a69b800e79c92e39c1476961ecc9",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\wwpg-0.2.7-experimental.wiretree.5.jar"
+        },
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\coverage-off-01\\mods\\wwpg-benchmark-0.1.0-budget.jar",
+          "sha256": "3655eb8f3c129e8c7d6801361f66551e9ee97e12fa5d0c56bfb5354f010ce9bf"
+        },
+        "copied_reference": true,
+        "batch": true,
+        "property_batch": true,
+        "tree_batch": true,
+        "detailed": false,
+        "loading_trace": false,
+        "reload": false,
+        "full_suite": false,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "helper_inputs": "local/frozen/budget-helper-01/inputs.json",
+        "started_utc": "2026-11-09T13:29:44Z",
+        "tree_execution": {
+          "attachments": 5893,
+          "fallback": 50,
+          "roots": 11786,
+          "traversals": 5288,
+          "covered": 6498,
+          "visited": 20263157,
+          "flushes": 628,
+          "largest": 8210,
+          "pending": 0,
+          "forced": 1,
+          "discarded": 0,
+          "budgetMillis": 20,
+          "maxParts": 32,
+          "yielded": 627,
+          "maxProcessed": 32,
+          "maxFlushNanos": 96485800,
+          "maxEntryNanos": 92668500
+        },
+        "validation": {
+          "passed": true,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "healthy_ticks": 100,
+          "normal_shutdown": true,
+          "sixteen_substeps": true,
+          "no_independent_cee_or_rejected_solves": true,
+          "actual_reload_cycles": 0,
+          "full_suite": false
+        },
+        "loading": [
+          {
+            "phase": "SETTLE",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 523,
+            "graph_ready_tick": 629,
+            "finish_tick": 749,
+            "chunk_request_seconds": 1.326625,
+            "chunk_loading_seconds": 44.4774837,
+            "graph_recovery_seconds": 6.2671657,
+            "electrical_settling_seconds": 7.0350841,
+            "total_restoration_seconds": 59.1063585,
+            "restoration_and_settling_seconds": 57.7797335,
+            "healthy_ticks": 100,
+            "queued_roots_at_chunk_ready": 6724,
+            "maximum_pending_roots": 8202,
+            "queue_drained_tick": 629,
+            "queue_drain_seconds": 6.2671657
+          }
+        ],
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T13:31:00Z"
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/coverage-off-01/experiment.json",
+          "sha256": "a9533dcdd949e4e2c85d7cd737de06891b9907bca1782f6c542e7157b671f3d1"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-01/launch.json",
+          "sha256": "bd25f1f8585b932025bca2f19877493ae76457868b37848e70cc64d6835ad9f6"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-01/invocation.json",
+          "sha256": "23097f45d92e5561f52349dcb0c445c5fba13833b0bdad815b9ea0b86effbb45"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-01/restore-input.json",
+          "sha256": "2e388298b3c8b6dd591d0158e55e35a02dfbe9a25ddb5f4b5e5cc07201d1e651"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-01/runner-exit.json",
+          "sha256": "d154c2d6ab01cd93921ea70bf6e15f0be89545ff4a69b95a55b4cad5f2513535"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-01/host-metrics.jsonl",
+          "sha256": "186bf8c1959ad83b1a0e66bc0ce4faf75b0908c9a9e4a44aff8cbda22f98e400"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-01/process.log",
+          "sha256": "9befa805e589166f0a241b5549550105bb0d9a872032a3c0d95bf0b4138df4fd"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-01/benchmark/result.json",
+          "sha256": "c01df551a12cb2a51abdddd5c43acca4353046dc00affb0dc2a8d83d02abefb7"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-01/benchmark/loading-results.json",
+          "sha256": "0de1543b63b4ef9c8fe13c39e51fbfec038dc1823ac681d9d53dd6f1c8f82c3d"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-01/benchmark/ticks.csv",
+          "sha256": "af23d3417b680b4d84a893f30550f26442feff102ec9ca47e4ecfda77e559dfc"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-01/benchmark/placement-ticks.csv",
+          "sha256": "b9934e29588b0f7583bdc4b485c399426aea7b8a64d67add18fff275111d341b"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-01/benchmark/placement-fixed.json",
+          "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-01/benchmark/placement-restored.json",
+          "sha256": "177f85d196e204f5e8adc663d6827f8b6546079eb85becf82fb2fee1fa0381f7"
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 10,
+        "in_window_seconds": 50.0871422290802,
+        "monitored_processes": 185,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.2520606973793371,
+        "other_process_peaks": [
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "5948:134387027096006899",
+            "peak_cores": 0.1400238890311439,
+            "mean_cores": 0.09233906735678686
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "6028:134387027037888757",
+            "peak_cores": 0.05621805158906753,
+            "mean_cores": 0.03587497549334624
+          },
+          {
+            "name": "Discord.exe",
+            "identity": "28708:134387040917398085",
+            "peak_cores": 0.04372794994970712,
+            "mean_cores": 0.02932389301195258
+          },
+          {
+            "name": "FvContainer.exe",
+            "identity": "26388:134387027138761851",
+            "peak_cores": 0.02498739997126121,
+            "mean_cores": 0.005927169864118075
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28176:134387027293764011",
+            "peak_cores": 0.02498739997126121,
+            "mean_cores": 0.009358689259133803
+          },
+          {
+            "name": "pwsh.exe",
+            "identity": "11848:134387045836309641",
+            "peak_cores": 0.024970612540811548,
+            "mean_cores": 0.0024956504691023475
+          },
+          {
+            "name": "NVIDIA Overlay.exe",
+            "identity": "23344:134387027098263065",
+            "peak_cores": 0.02178149384928905,
+            "mean_cores": 0.009670645567771596
+          },
+          {
+            "name": "dllhost.exe",
+            "identity": "31644:134387027407630677",
+            "peak_cores": 0.01874054997844591,
+            "mean_cores": 0.005303257246842489
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "tick_metrics": {
+        "SETTLE": {
+          "ticks": 749,
+          "longest_tick_seconds": 3.4369508,
+          "tick_body_seconds": 56.4763501,
+          "matrix_assemblies": 1,
+          "network_substep_calls": 1936,
+          "p95_tick_seconds": 0.1151386,
+          "p99_tick_seconds": 0.248565,
+          "longest_end_to_end_gap_seconds": 3.452
+        }
+      }
+    },
+    {
+      "name": "coverage-off-02",
+      "protocol": {
+        "schema": 1,
+        "name": "coverage-off-02",
+        "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\coverage-off-02\\mods\\wwpg-0.2.7-experimental.wiretree.5.jar",
+          "sha256": "6602c3d51c4ad3a3db0135482fa0ca24de97a69b800e79c92e39c1476961ecc9",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\wwpg-0.2.7-experimental.wiretree.5.jar"
+        },
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\coverage-off-02\\mods\\wwpg-benchmark-0.1.0-budget.jar",
+          "sha256": "3655eb8f3c129e8c7d6801361f66551e9ee97e12fa5d0c56bfb5354f010ce9bf"
+        },
+        "copied_reference": true,
+        "batch": true,
+        "property_batch": true,
+        "tree_batch": true,
+        "detailed": false,
+        "loading_trace": false,
+        "reload": false,
+        "full_suite": false,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "helper_inputs": "local/frozen/budget-helper-01/inputs.json",
+        "started_utc": "2026-11-09T13:31:01Z",
+        "tree_execution": {
+          "attachments": 5893,
+          "fallback": 50,
+          "roots": 11786,
+          "traversals": 4977,
+          "covered": 6809,
+          "visited": 18744154,
+          "flushes": 601,
+          "largest": 8270,
+          "pending": 0,
+          "forced": 0,
+          "discarded": 0,
+          "budgetMillis": 20,
+          "maxParts": 32,
+          "yielded": 600,
+          "maxProcessed": 32,
+          "maxFlushNanos": 165924400,
+          "maxEntryNanos": 163022300
+        },
+        "validation": {
+          "passed": true,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "healthy_ticks": 100,
+          "normal_shutdown": true,
+          "sixteen_substeps": true,
+          "no_independent_cee_or_rejected_solves": true,
+          "actual_reload_cycles": 0,
+          "full_suite": false
+        },
+        "loading": [
+          {
+            "phase": "SETTLE",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 512,
+            "graph_ready_tick": 601,
+            "finish_tick": 721,
+            "chunk_request_seconds": 1.396995,
+            "chunk_loading_seconds": 44.1550766,
+            "graph_recovery_seconds": 5.3713875,
+            "electrical_settling_seconds": 6.5621547,
+            "total_restoration_seconds": 57.4856138,
+            "restoration_and_settling_seconds": 56.0886188,
+            "healthy_ticks": 100,
+            "queued_roots_at_chunk_ready": 5636,
+            "maximum_pending_roots": 8260,
+            "queue_drained_tick": 601,
+            "queue_drain_seconds": 5.3713875
+          }
+        ],
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T13:32:15Z"
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/coverage-off-02/experiment.json",
+          "sha256": "3266ebc8926a83e34d51d44d8064f9cda87fe0058e49807b22adb3d026d010f0"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-02/launch.json",
+          "sha256": "e129a1e45d56d79afabe394853801df7cc6bb87b0bff17c9f1990805dec83d14"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-02/invocation.json",
+          "sha256": "412289d05a665eca37f25ec136c0fa550c533cf2d1d02fd814c30ed3d856d89d"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-02/restore-input.json",
+          "sha256": "7540852974c53d6a5589315d3d09c8dde6c4555896ad76ee14ac0a8348f99e69"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-02/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-02/runner-exit.json",
+          "sha256": "ebbd8f6b706851e8c00bf9a594fbdcf1c69b45dc825ffa9201e4558e55201de6"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-02/host-metrics.jsonl",
+          "sha256": "abbce67bd05e0c05e8048b77b87b7336ed7b5698ff81c186d794b704db8bc68b"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-02/process.log",
+          "sha256": "4cc3f9a20c96b70708d70e2d27522f3b3e07d90fabdc02a7e94c24d135c41b62"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-02/benchmark/result.json",
+          "sha256": "78ebcc1571bf8a954ab5591a631f155e698010934465d9e8d548202f50df7c79"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-02/benchmark/loading-results.json",
+          "sha256": "5a9b79051132eb64fa9d6f3389989ad0d47be70a62914916d79e22988bff5837"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-02/benchmark/ticks.csv",
+          "sha256": "0beaa1179f7f71413b18c7a4529462d542ceae0cddf409b71d71043638d162bf"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-02/benchmark/placement-ticks.csv",
+          "sha256": "17b08333023fd5c0c9ddd2dcd449be03971e2deaa606834a0f72416bbe70fb02"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-02/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-02/benchmark/placement-fixed.json",
+          "sha256": "f39e516534daabb39e6a5305b5c802dee926ac68a80c1f4de97c30d3406bcc22"
+        },
+        {
+          "path": "local/benchmarks/coverage-off-02/benchmark/placement-restored.json",
+          "sha256": "662899f0fd378261b8592f8fb4a2c438631676fa771f01ae81302bb452de447a"
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 10,
+        "in_window_seconds": 50.08287286758423,
+        "monitored_processes": 184,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.29763168817034774,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "13688:134387027373880825",
+            "peak_cores": 0.17179018423235218,
+            "mean_cores": 0.03619001659094375
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "5948:134387027096006899",
+            "peak_cores": 0.12791047120077395,
+            "mean_cores": 0.09047504147735938
+          },
+          {
+            "name": "Discord.exe",
+            "identity": "28708:134387040917398085",
+            "peak_cores": 0.08110279189236722,
+            "mean_cores": 0.03151027306625275
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "6028:134387027037888757",
+            "peak_cores": 0.05303357492283891,
+            "mean_cores": 0.03743794819752802
+          },
+          {
+            "name": "codex.exe",
+            "identity": "30104:134387027358105490",
+            "peak_cores": 0.04372841053187146,
+            "mean_cores": 0.009359487049382005
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28176:134387027293764011",
+            "peak_cores": 0.034348879054872175,
+            "mean_cores": 0.014039230574073008
+          },
+          {
+            "name": "NVIDIA Overlay.exe",
+            "identity": "23344:134387027098263065",
+            "peak_cores": 0.018740747370802054,
+            "mean_cores": 0.0071756067378595375
+          },
+          {
+            "name": "AcPowerNotification.exe",
+            "identity": "8104:134387027038147323",
+            "peak_cores": 0.01871773232570785,
+            "mean_cores": 0.004367760623044936
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "tick_metrics": {
+        "SETTLE": {
+          "ticks": 721,
+          "longest_tick_seconds": 3.2676106,
+          "tick_body_seconds": 54.8452131,
+          "matrix_assemblies": 1,
+          "network_substep_calls": 1936,
+          "p95_tick_seconds": 0.121924,
+          "p99_tick_seconds": 0.2509141,
+          "longest_end_to_end_gap_seconds": 3.286
+        }
+      }
+    },
+    {
+      "name": "coverage-on-02",
+      "protocol": {
+        "schema": 1,
+        "name": "coverage-on-02",
+        "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\coverage-on-02\\mods\\wwpg-0.2.7-experimental.wiretree.5.jar",
+          "sha256": "6602c3d51c4ad3a3db0135482fa0ca24de97a69b800e79c92e39c1476961ecc9",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-06a\\wwpg-0.2.7-experimental.wiretree.5.jar"
+        },
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\coverage-on-02\\mods\\wwpg-benchmark-0.1.0-budget.jar",
+          "sha256": "3655eb8f3c129e8c7d6801361f66551e9ee97e12fa5d0c56bfb5354f010ce9bf"
+        },
+        "copied_reference": true,
+        "batch": true,
+        "property_batch": true,
+        "tree_batch": true,
+        "detailed": false,
+        "loading_trace": false,
+        "reload": false,
+        "full_suite": false,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": true,
+        "helper_inputs": "local/frozen/budget-helper-01/inputs.json",
+        "started_utc": "2026-11-09T13:32:16Z",
+        "tree_execution": {
+          "attachments": 5893,
+          "fallback": 50,
+          "roots": 11786,
+          "traversals": 5384,
+          "covered": 6402,
+          "visited": 21159596,
+          "flushes": 651,
+          "largest": 8160,
+          "pending": 0,
+          "forced": 1,
+          "discarded": 0,
+          "budgetMillis": 20,
+          "maxParts": 32,
+          "yielded": 650,
+          "maxProcessed": 32,
+          "maxFlushNanos": 191684300,
+          "maxEntryNanos": 188254500
+        },
+        "validation": {
+          "passed": true,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "healthy_ticks": 100,
+          "normal_shutdown": true,
+          "sixteen_substeps": true,
+          "no_independent_cee_or_rejected_solves": true,
+          "actual_reload_cycles": 0,
+          "full_suite": false
+        },
+        "loading": [
+          {
+            "phase": "SETTLE",
+            "cycle": 0,
+            "requested_chunks": 953,
+            "load_limit_ticks": 2859,
+            "chunks_ready_tick": 529,
+            "graph_ready_tick": 651,
+            "finish_tick": 771,
+            "chunk_request_seconds": 1.4531444,
+            "chunk_loading_seconds": 44.591750199,
+            "graph_recovery_seconds": 6.944817201,
+            "electrical_settling_seconds": 6.5986386,
+            "total_restoration_seconds": 59.5883504,
+            "restoration_and_settling_seconds": 58.135206,
+            "healthy_ticks": 100,
+            "queued_roots_at_chunk_ready": 7678,
+            "maximum_pending_roots": 8150,
+            "queue_drained_tick": 651,
+            "queue_drain_seconds": 6.944817201
+          }
+        ],
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T13:33:33Z"
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/coverage-on-02/experiment.json",
+          "sha256": "460675006769adc07fac205773471e8fd5b9670773d37ec85ffe27ba5165571a"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-02/launch.json",
+          "sha256": "6128c5a962a13b02da060bf8dfc21000dd6fca887086f672928d1e6302dc3f22"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-02/invocation.json",
+          "sha256": "86bbd9cb965ce0947aedd7112658d2f98abbb1b9572020eae4e9381458545ba2"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-02/restore-input.json",
+          "sha256": "4881aac2dd20fe49ada446f17de4111c66b38cdcddff0594054582226c67df2f"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-02/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-02/runner-exit.json",
+          "sha256": "fd1c69f27385f2d8f9121fad05519a961dbf7962d610a06a93fc29210855a709"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-02/host-metrics.jsonl",
+          "sha256": "d3f070b8173ae2c81c16c0089ddf593d697b331a70fdcad1b8830feaaeaa5922"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-02/process.log",
+          "sha256": "1622a30c46f4e103b4fa6513dcb365a2ac4e920456373677767cdab0cb7a4fe7"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-02/benchmark/result.json",
+          "sha256": "38ba1615b2145c1568667cebb41f07b8683cc2e9da1a38066939716e3bfc4600"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-02/benchmark/loading-results.json",
+          "sha256": "dfb3b21537c8b8cca7094d0efc0170a19cdd1ce5bcca93fc9649ea04c24ca817"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-02/benchmark/ticks.csv",
+          "sha256": "8556432cd7b6d4a2036e9b32325f601a9cce92d65eea235892a150da14be4167"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-02/benchmark/placement-ticks.csv",
+          "sha256": "25dfb5f0bd78fbf072635edef622766e821ca4c64a8febc5b81a1af219b4c784"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-02/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-02/benchmark/placement-fixed.json",
+          "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+        },
+        {
+          "path": "local/benchmarks/coverage-on-02/benchmark/placement-restored.json",
+          "sha256": "4dc544ebf39886f19800673c5631e6c398b4788cc1f96127182c3ac055ef3aba"
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 10,
+        "in_window_seconds": 50.09175229072571,
+        "monitored_processes": 186,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.2376888301071551,
+        "other_process_peaks": [
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "5948:134387027096006899",
+            "peak_cores": 0.15620239039995973,
+            "mean_cores": 0.08609201720416641
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "13688:134387027373880825",
+            "peak_cores": 0.12170332775870524,
+            "mean_cores": 0.02058722150534414
+          },
+          {
+            "name": "Discord.exe",
+            "identity": "28708:134387040917398085",
+            "peak_cores": 0.05297641911413882,
+            "mean_cores": 0.021834931899607425
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28176:134387027293764011",
+            "peak_cores": 0.04991859360212361,
+            "mean_cores": 0.013412886738330274
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "6028:134387027037888757",
+            "peak_cores": 0.043736669311988725,
+            "mean_cores": 0.02932119426518711
+          },
+          {
+            "name": "codex.exe",
+            "identity": "30104:134387027358105490",
+            "peak_cores": 0.03116045991728138,
+            "mean_cores": 0.008110117562711329
+          },
+          {
+            "name": "explorer.exe",
+            "identity": "13836:134387027040075621",
+            "peak_cores": 0.02493007958312415,
+            "mean_cores": 0.004366986379921485
+          },
+          {
+            "name": "NVIDIA Overlay.exe",
+            "identity": "23188:134387027107235211",
+            "peak_cores": 0.018685001045167536,
+            "mean_cores": 0.0037431311827898443
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "tick_metrics": {
+        "SETTLE": {
+          "ticks": 771,
+          "longest_tick_seconds": 3.246013101,
+          "tick_body_seconds": 56.78238228,
+          "matrix_assemblies": 1,
+          "network_substep_calls": 1936,
+          "p95_tick_seconds": 0.1141764,
+          "p99_tick_seconds": 0.214339201,
+          "longest_end_to_end_gap_seconds": 3.251
+        }
+      }
+    }
+  ],
+  "prior_runtime_profile": {
+    "name": "goal-budget-profile-01",
+    "protocol": {
+      "schema": 1,
+      "name": "goal-budget-profile-01",
+      "scope": "Focused copied-save loading only; no full suite or TPS capacity claim",
+      "runtime": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-budget-profile-01\\mods\\wwpg-0.2.7-experimental.wiretree.4.jar",
+        "sha256": "33fe56c713a63e3b70e045b7fc50667435b50923f569036e66e189ab8a063ac6",
+        "kind": "local-candidate",
+        "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-05b\\wwpg-0.2.7-experimental.wiretree.4.jar"
+      },
+      "helper": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-budget-profile-01\\mods\\wwpg-benchmark-0.1.0-budget.jar",
+        "sha256": "3655eb8f3c129e8c7d6801361f66551e9ee97e12fa5d0c56bfb5354f010ce9bf"
+      },
+      "copied_reference": true,
+      "batch": true,
+      "property_batch": true,
+      "tree_batch": true,
+      "detailed": true,
+      "loading_trace": true,
+      "reload": false,
+      "full_suite": false,
+      "tree_budget_ms": 20,
+      "tree_max_parts": 32,
+      "helper_inputs": "local/frozen/budget-helper-01/inputs.json",
+      "started_utc": "2026-11-09T13:18:04Z",
+      "tree_execution": {
+        "attachments": 5893,
+        "fallback": 50,
+        "roots": 11786,
+        "traversals": 6031,
+        "covered": 5755,
+        "visited": 23903857,
+        "flushes": 689,
+        "largest": 7920,
+        "pending": 0,
+        "forced": 0,
+        "discarded": 0,
+        "budgetMillis": 20,
+        "maxParts": 32,
+        "yielded": 688,
+        "maxProcessed": 32,
+        "maxFlushNanos": 82486800,
+        "maxEntryNanos": 78739800
+      },
+      "validation": {
+        "passed": true,
+        "actual_nodes": 14650,
+        "edges": 20637,
+        "chunks": 953,
+        "storage_devices": 1050,
+        "healthy_ticks": 100,
+        "normal_shutdown": true,
+        "sixteen_substeps": true,
+        "no_independent_cee_or_rejected_solves": true,
+        "actual_reload_cycles": 0,
+        "full_suite": false
+      },
+      "loading": [
+        {
+          "phase": "SETTLE",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 582,
+          "graph_ready_tick": 690,
+          "finish_tick": 810,
+          "chunk_request_seconds": 1.0664139,
+          "chunk_loading_seconds": 45.9097237,
+          "graph_recovery_seconds": 6.1208007,
+          "electrical_settling_seconds": 6.3801723,
+          "total_restoration_seconds": 59.4771106,
+          "restoration_and_settling_seconds": 58.4106967,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 6868,
+          "maximum_pending_roots": 7912,
+          "queue_drained_tick": 690,
+          "queue_drain_seconds": 6.1208007
+        }
+      ],
+      "recording": {
+        "path": "loading.jfr",
+        "sha256": "d739e280714ee83bf3d07547b88e2ce7c03f1ac22e4b3f3da5edcccf400b67a3"
+      },
+      "original_reference_unchanged": true,
+      "isolated_reference_unchanged": true,
+      "finished_utc": "2026-11-09T13:19:20Z"
+    },
+    "evidence": [
+      {
+        "path": "local/benchmarks/goal-budget-profile-01/experiment.json",
+        "sha256": "1f823cb32e0b056e40f6eb113190798f0034a91f4b5f71319fd84d7ca6a214e9"
+      },
+      {
+        "path": "local/benchmarks/goal-budget-profile-01/launch.json",
+        "sha256": "1589ad25c990d13387b03fc73ceb4a63451cd8d2e766dcb64992a886c38e8a49"
+      },
+      {
+        "path": "local/benchmarks/goal-budget-profile-01/invocation.json",
+        "sha256": "2b9b1d5b55d03e7b898c551c80e9670abd4134d3d6e7f8b350e58d26f30e4dd2"
+      },
+      {
+        "path": "local/benchmarks/goal-budget-profile-01/restore-input.json",
+        "sha256": "2449c201df57e6c3820d99e9c097dac3e1c6ef1d7f98ef5b3e70582234545ca8"
+      },
+      {
+        "path": "local/benchmarks/goal-budget-profile-01/shutdown-save.json",
+        "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+      },
+      {
+        "path": "local/benchmarks/goal-budget-profile-01/runner-exit.json",
+        "sha256": "22e5809b0639abb05c319d8313550d7c60ed0a88dccd4128c35bbd424fa0b4c9"
+      },
+      {
+        "path": "local/benchmarks/goal-budget-profile-01/host-metrics.jsonl",
+        "sha256": "2681ee4a247e136e2754be476cef4c8960c46b8eb675ae85ab6a83a70195e4b1"
+      },
+      {
+        "path": "local/benchmarks/goal-budget-profile-01/process.log",
+        "sha256": "eded6b259c4d685d50099f7aeb4b89fd4f04140c293ad732170f3a6ca5b131b9"
+      },
+      {
+        "path": "local/benchmarks/goal-budget-profile-01/benchmark/result.json",
+        "sha256": "0a5526e71672cefec3b929db86225cdd1ee4c031cad188e0de431aca8a1b1755"
+      },
+      {
+        "path": "local/benchmarks/goal-budget-profile-01/benchmark/loading-results.json",
+        "sha256": "a4a7e921fb22f261adb1098d515c78c06d61614db9cea8a3fb9fe67c6ece4369"
+      },
+      {
+        "path": "local/benchmarks/goal-budget-profile-01/benchmark/ticks.csv",
+        "sha256": "7a043110376ae2d2ed9b81add141dc5ae5c1bc8be81f01675773a589764627fd"
+      },
+      {
+        "path": "local/benchmarks/goal-budget-profile-01/benchmark/placement-ticks.csv",
+        "sha256": "60f7f7cc1524bfb2eb986422f86eb041228f8ec6065c3ab47b241147ef95b73f"
+      },
+      {
+        "path": "local/benchmarks/goal-budget-profile-01/benchmark/pre-solve-storage.json",
+        "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+      },
+      {
+        "path": "local/benchmarks/goal-budget-profile-01/benchmark/placement-fixed.json",
+        "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+      },
+      {
+        "path": "local/benchmarks/goal-budget-profile-01/benchmark/placement-restored.json",
+        "sha256": "2991d3d353f056f5da819f9a9348c6a7b71db411a10a103b026405ddb8cab6b6"
+      },
+      {
+        "path": "local/benchmarks/goal-budget-profile-01/loading.jfr",
+        "sha256": "d739e280714ee83bf3d07547b88e2ce7c03f1ac22e4b3f3da5edcccf400b67a3"
+      },
+      {
+        "path": "local/benchmarks/goal-budget-profile-01/benchmark/loading-timings.csv",
+        "sha256": "914b97fdbd10e2e4104f0ee1b2f55daf408870b7a10d10da0c3aa12ecc6bcb63"
+      },
+      {
+        "path": "local/benchmarks/goal-budget-profile-01/benchmark/loading.jsonl",
+        "sha256": "3f24ab02f009ee83f99d31f658b310f60be33241254b9a83370cee60fbc1201a"
+      },
+      {
+        "path": "local/benchmarks/goal-budget-profile-01/benchmark/loading-jfr-compact.json",
+        "sha256": "3cca4ec3ffc1a49040e865cf0baa18b559e26dc47002d1adad6d6afe38fbb0f9"
+      }
+    ],
+    "host": {
+      "sample_period_seconds": 5,
+      "in_window_intervals": 10,
+      "in_window_seconds": 50.133028984069824,
+      "monitored_processes": 173,
+      "competing_game_present": false,
+      "other_cpu_mean_cores": 0.3057490303422647,
+      "other_process_peaks": [
+        {
+          "name": "ChatGPT.exe",
+          "identity": "13688:134387027373880825",
+          "peak_cores": 0.15583058825856844,
+          "mean_cores": 0.0632691673389192
+        },
+        {
+          "name": "ChatGPT.exe",
+          "identity": "33860:134387027501291661",
+          "peak_cores": 0.13715737992942986,
+          "mean_cores": 0.014025184878085536
+        },
+        {
+          "name": "HWiNFO64.EXE",
+          "identity": "5948:134387027096006899",
+          "peak_cores": 0.09349835295514107,
+          "mean_cores": 0.0729309613660448
+        },
+        {
+          "name": "ChatGPT.exe",
+          "identity": "28732:134387027298932907",
+          "peak_cores": 0.0905239287475765,
+          "mean_cores": 0.058594105712890684
+        },
+        {
+          "name": "powershell.exe",
+          "identity": "6028:134387027037888757",
+          "peak_cores": 0.031178916627797686,
+          "mean_cores": 0.020570271154525453
+        },
+        {
+          "name": "pwsh.exe",
+          "identity": "6852:134387038803835253",
+          "peak_cores": 0.03116380718668702,
+          "mean_cores": 0.003116707750685675
+        },
+        {
+          "name": "ChatGPT.exe",
+          "identity": "28176:134387027293764011",
+          "peak_cores": 0.028061024965017917,
+          "mean_cores": 0.013090172552879835
+        },
+        {
+          "name": "explorer.exe",
+          "identity": "13836:134387027040075621",
+          "peak_cores": 0.02182524163945838,
+          "mean_cores": 0.00498673240109708
+        }
+      ],
+      "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+    },
+    "tick_metrics": {
+      "SETTLE": {
+        "ticks": 810,
+        "longest_tick_seconds": 2.511308,
+        "tick_body_seconds": 56.9452287,
+        "matrix_assemblies": 1,
+        "network_substep_calls": 1936,
+        "p95_tick_seconds": 0.107861,
+        "p99_tick_seconds": 0.1842247,
+        "longest_end_to_end_gap_seconds": 2.526
+      }
+    },
+    "loading_counter_totals": {
+      "allocations": 1,
+      "allocation_ns": 250000,
+      "matrix_stamps": 1,
+      "matrix_stamp_ns": 178470100,
+      "topology_rebuilds": 1,
+      "drift_rebuilds": 0,
+      "timestep_updates": 0,
+      "graph_requests": 141125,
+      "graph_ns": 53695300,
+      "accepted_substeps": 1935,
+      "rejected_substeps": 1
+    },
+    "server_java_samples": 4584,
+    "inclusive_methods": [
+      {
+        "method": "com.george_vi.electroenergetics.simulation.simulator.SimulationTicker.tick",
+        "samples": 1882,
+        "percent": 41.05584642233857
+      },
+      {
+        "method": "com.george_vi.electroenergetics.simulation.simulator.SimulationTicker.handler$zdf001$wwpg$prepare",
+        "samples": 1882,
+        "percent": 41.05584642233857
+      },
+      {
+        "method": "org.cha0scollective.wwpg.bridge.WorldBridge.prepare",
+        "samples": 1882,
+        "percent": 41.05584642233857
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.WorldNetworks.traceTree",
+        "samples": 1711,
+        "percent": 37.325479930191975
+      },
+      {
+        "method": "org.cha0scollective.wwpg.wiring.WireTreeTraversal.trace",
+        "samples": 1711,
+        "percent": 37.325479930191975
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.WorldNetworks.handler$zdk000$wwpg$traceWithoutRecursion",
+        "samples": 1711,
+        "percent": 37.325479930191975
+      },
+      {
+        "method": "org.cha0scollective.wwpg.wiring.WireTreeTraversal.enter",
+        "samples": 1420,
+        "percent": 30.977312390924958
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.WorldNetworks$Anonymous$08b7fbac668c405fa1bc6d86c304132a.enter",
+        "samples": 1187,
+        "percent": 25.894415357766142
+      },
+      {
+        "method": "org.cha0scollective.wwpg.experimental.RestorationQueue.drain",
+        "samples": 1167,
+        "percent": 25.458115183246072
+      },
+      {
+        "method": "org.cha0scollective.wwpg.experimental.WireTreeBatch.flushBeforeServerTick",
+        "samples": 1167,
+        "percent": 25.458115183246072
+      },
+      {
+        "method": "org.cha0scollective.wwpg.experimental.WireTreeBatch$$Lambda.0x0000018f3c764478.apply",
+        "samples": 1167,
+        "percent": 25.458115183246072
+      },
+      {
+        "method": "org.cha0scollective.wwpg.experimental.WireTreeBatch.flush",
+        "samples": 1167,
+        "percent": 25.458115183246072
+      },
+      {
+        "method": "org.cha0scollective.wwpg.experimental.WireTreeBatch.lambda$flush$2",
+        "samples": 1167,
+        "percent": 25.458115183246072
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.WorldNetworks.wwpg$traceTree",
+        "samples": 1150,
+        "percent": 25.087260034904013
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.GlobalElectricNetworks.handler$zgm000$wwpg$interleaveDimensions",
+        "samples": 1079,
+        "percent": 23.538394415357764
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.GlobalElectricNetworks.preTick",
+        "samples": 1079,
+        "percent": 23.538394415357764
+      },
+      {
+        "method": "org.patryk3211.powergrid.PowerGrid$$Lambda.0x0000018f3c073240.tick",
+        "samples": 1079,
+        "percent": 23.538394415357764
+      },
+      {
+        "method": "org.cha0scollective.wwpg.bridge.ServerElectricalSchedule.preTick",
+        "samples": 1079,
+        "percent": 23.538394415357764
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.WorldNetworks.addAndMigrateNode",
+        "samples": 815,
+        "percent": 17.779232111692846
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint.getNode",
+        "samples": 801,
+        "percent": 17.473821989528794
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.base.ElectricBlockEntity.tick",
+        "samples": 705,
+        "percent": 15.379581151832461
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.base.ElectricBehaviour.initialize",
+        "samples": 691,
+        "percent": 15.074171029668411
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.GlobalElectricNetworks.nodeHolderAdded",
+        "samples": 562,
+        "percent": 12.260034904013962
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.WorldNetworks.nodeHolderAdded",
+        "samples": 562,
+        "percent": 12.260034904013962
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.WorldNetworks.resolveTree",
+        "samples": 561,
+        "percent": 12.238219895287958
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint.getElectricBehaviour",
+        "samples": 536,
+        "percent": 11.69284467713787
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.base.IElectric.getAt",
+        "samples": 439,
+        "percent": 9.576788830715532
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.base.IElectric.handler$zej000$wwpg$ceeTerminals",
+        "samples": 436,
+        "percent": 9.511343804537521
+      },
+      {
+        "method": "org.cha0scollective.wwpg.wiring.Terminals.electric",
+        "samples": 432,
+        "percent": 9.424083769633508
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint.getElectricBlock",
+        "samples": 426,
+        "percent": 9.293193717277488
+      },
+      {
+        "method": "org.cha0scollective.wwpg.bridge.WorldBridge.synchronize",
+        "samples": 425,
+        "percent": 9.271378708551483
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.wire.HangingWireEntity.tick",
+        "samples": 321,
+        "percent": 7.00261780104712
+      },
+      {
+        "method": "org.cha0scollective.wwpg.extension.NativeApiReadings.prepare$mixinextras$wrapped$29",
+        "samples": 312,
+        "percent": 6.806282722513089
+      },
+      {
+        "method": "org.cha0scollective.wwpg.extension.NativeApiReadings.mixinextras$bridge$prepare$mixinextras$wrapped$29$30",
+        "samples": 312,
+        "percent": 6.806282722513089
+      },
+      {
+        "method": "org.cha0scollective.wwpg.extension.NativeApiReadings$$Lambda.0x0000018f3c735380.call",
+        "samples": 312,
+        "percent": 6.806282722513089
+      },
+      {
+        "method": "org.cha0scollective.wwpg.extension.NativeApiReadings.wrapMethod$zhe000$wwpg_benchmark$prepare",
+        "samples": 312,
+        "percent": 6.806282722513089
+      },
+      {
+        "method": "org.cha0scollective.wwpg.extension.NativeApiReadings.prepare",
+        "samples": 312,
+        "percent": 6.806282722513089
+      },
+      {
+        "method": "org.cha0scollective.wwpg.extension.NativeApiReadings.snapshot",
+        "samples": 312,
+        "percent": 6.806282722513089
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.wire.WireEntity.tick",
+        "samples": 301,
+        "percent": 6.56631762652705
+      },
+      {
+        "method": "org.cha0scollective.wwpg.wiring.Terminals.nativePg",
+        "samples": 274,
+        "percent": 5.977312390924957
+      },
+      {
+        "method": "org.patryk3211.powergrid.circuits.circuitboard.CircuitBoardBlockEntity.tick",
+        "samples": 260,
+        "percent": 5.671902268760907
+      },
+      {
+        "method": "org.cha0scollective.wwpg.wiring.CeeElectric$EndpointBehaviour.getTerminal",
+        "samples": 243,
+        "percent": 5.301047120418848
+      },
+      {
+        "method": "org.cha0scollective.wwpg.bridge.WorldBridge.finishSolving",
+        "samples": 232,
+        "percent": 5.061082024432809
+      },
+      {
+        "method": "org.cha0scollective.wwpg.bridge.RestorationCoordinator.wrapMethod$zhg000$wwpg_benchmark$schedule",
+        "samples": 225,
+        "percent": 4.908376963350785
+      },
+      {
+        "method": "org.patryk3211.powergrid.circuits.circuitboard.CircuitBoardBlockEntity.initialize",
+        "samples": 221,
+        "percent": 4.821116928446771
+      },
+      {
+        "method": "org.cha0scollective.wwpg.bridge.WorldBridge$StableDescription.update",
+        "samples": 218,
+        "percent": 4.755671902268761
+      },
+      {
+        "method": "org.cha0scollective.wwpg.wiring.CeeElectric$EndpointBehaviour.hasTerminal",
+        "samples": 191,
+        "percent": 4.166666666666667
+      },
+      {
+        "method": "org.cha0scollective.wwpg.bridge.RestorationCoordinator.joinCoupledWindows$mixinextras$wrapped$44",
+        "samples": 189,
+        "percent": 4.12303664921466
+      },
+      {
+        "method": "org.cha0scollective.wwpg.bridge.RestorationCoordinator.joinCoupledWindows",
+        "samples": 189,
+        "percent": 4.12303664921466
+      },
+      {
+        "method": "org.cha0scollective.wwpg.bridge.RestorationCoordinator.mixinextras$bridge$joinCoupledWindows$mixinextras$wrapped$44$45",
+        "samples": 189,
+        "percent": 4.12303664921466
+      },
+      {
+        "method": "org.cha0scollective.wwpg.bridge.RestorationCoordinator$$Lambda.0x0000018f3c732060.call",
+        "samples": 189,
+        "percent": 4.12303664921466
+      },
+      {
+        "method": "org.cha0scollective.wwpg.wiring.CeeElectric.accessible",
+        "samples": 185,
+        "percent": 4.035776614310646
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.WorldNetworks$Anonymous$08b7fbac668c405fa1bc6d86c304132a.valid",
+        "samples": 175,
+        "percent": 3.817626527050611
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.wire.BaseWireEntity.temperatureUpdate",
+        "samples": 167,
+        "percent": 3.643106457242583
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.wire.BaseWireEntity.tick",
+        "samples": 167,
+        "percent": 3.643106457242583
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.base.ThermalBehaviour.getAmbientTemperature",
+        "samples": 146,
+        "percent": 3.1849912739965096
+      },
+      {
+        "method": "org.cha0scollective.wwpg.bridge.ServerElectricalSchedule.solve",
+        "samples": 146,
+        "percent": 3.1849912739965096
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.WorldNetworks.preTick",
+        "samples": 142,
+        "percent": 3.0977312390924956
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.base.ElectricBehaviour.tracedAdd",
+        "samples": 129,
+        "percent": 2.8141361256544504
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.sim.GraphedElectricalNetwork.merge",
+        "samples": 129,
+        "percent": 2.8141361256544504
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.base.ElectricBehaviour.addOrMerge",
+        "samples": 129,
+        "percent": 2.8141361256544504
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.base.ElectricBehaviour.unpause",
+        "samples": 129,
+        "percent": 2.8141361256544504
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.sim.ElectricalNetwork.merge",
+        "samples": 129,
+        "percent": 2.8141361256544504
+      },
+      {
+        "method": "org.cha0scollective.wwpg.bridge.WorldBridge.beginSolving",
+        "samples": 122,
+        "percent": 2.661431064572426
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.WorldNetworks.handler$zdj000$wwpg$begin",
+        "samples": 122,
+        "percent": 2.661431064572426
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.sim.ElectricalNetwork.lambda$merge$3",
+        "samples": 113,
+        "percent": 2.4650959860383943
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.sim.ElectricalNetwork$$Lambda.0x0000018f3c71b0b8.accept",
+        "samples": 113,
+        "percent": 2.4650959860383943
+      },
+      {
+        "method": "com.george_vi.electroenergetics.simulation.simulator.SimulationTicker.endTick",
+        "samples": 113,
+        "percent": 2.4650959860383943
+      },
+      {
+        "method": "org.cha0scollective.wwpg.bridge.WorldBridge.commit",
+        "samples": 113,
+        "percent": 2.4650959860383943
+      },
+      {
+        "method": "com.george_vi.electroenergetics.simulation.simulator.SimulationTicker.handler$zdf001$wwpg$commit",
+        "samples": 113,
+        "percent": 2.4650959860383943
+      },
+      {
+        "method": "org.cha0scollective.wwpg.bridge.RestorationCoordinator.records",
+        "samples": 109,
+        "percent": 2.3778359511343803
+      },
+      {
+        "method": "org.cha0scollective.wwpg.extension.NativeApiReadings$$Lambda.0x0000018f3c735bf8.apply",
+        "samples": 109,
+        "percent": 2.3778359511343803
+      },
+      {
+        "method": "org.cha0scollective.wwpg.extension.NativeApiReadings.owner",
+        "samples": 109,
+        "percent": 2.3778359511343803
+      },
+      {
+        "method": "org.cha0scollective.wwpg.extension.NativeApiReadings.lambda$snapshot$0",
+        "samples": 109,
+        "percent": 2.3778359511343803
+      },
+      {
+        "method": "org.patryk3211.powergrid.electricity.sim.GraphedElectricalNetwork.addWire",
+        "samples": 106,
+        "percent": 2.31239092495637
+      },
+      {
+        "method": "org.cha0scollective.wwpg.wiring.Terminals.cee",
+        "samples": 94,
+        "percent": 2.0506108202443283
+      }
+    ]
+  },
+  "helper_reused": {
+    "path": "local/frozen/budget-helper-01/inputs.json",
+    "sha256": "ba0b19822156813eebba6c6ff487d66658dd69205913467ada67ce108e818d84"
+  },
+  "tool_sources": [
+    {
+      "path": "tools/experimental/summarize_coverage.py",
+      "sha256": "a022833f9c9a2316a4819224de60cf277ffab6f9fdc28ab73caddd00ad57ec57"
+    },
+    {
+      "path": "tools/experimental/summarize_budget.py",
+      "sha256": "2ec8666ed66d9f8e06bfed50a9418326fa9cb000841e5ba7166e5632d6e59943"
+    },
+    {
+      "path": "tools/experimental/summarize_tree.py",
+      "sha256": "48877789f122b13f3859b74d94c5a3fd18fb5ef21b34f4017fdbcf51d521b1a0"
+    },
+    {
+      "path": "tools/experimental/restoration_benchmark.py",
+      "sha256": "47710178503632d7e71850cf7ed08a3e51814f317d9887552e8dbf18f035a5a8"
+    },
+    {
+      "path": "tools/experimental/plain_wire_benchmark.py",
+      "sha256": "6be75890dcac4bff300fecc04f3af032c9de19bab20a31d935b018af85b19517"
+    },
+    {
+      "path": "tools/experimental/focused_checks.py",
+      "sha256": "48aec807efeb4f469a448a5bb1561dcc9bca36cb3cc095fa86851bec90092ed8"
+    },
+    {
+      "path": "tools/experimental/plain-wire.gradle",
+      "sha256": "f2c18bfa09416f1a2ea3435882e97672218e24c2d7d4aea1a4f16a73d204271a"
+    }
+  ]
+}

@@ -1,11 +1,13 @@
 {
   "schema": 1,
   "repository": "Cha0sCollective/World-Wide-Power-Grid",
-  "summary": "0.2.7 improves self-excited PG generator stability and transformer multimeter readings. API 1.0.0 and existing saves stay compatible.",
+  "summary": "0.2.8-beta.2 adds audit-driven safety corrections while preserving API 1.0.0 and the published generator timing correction.",
   "changes": [
-    "Coordinate supported PG generators' field and rotor calculations while preserving the original clutch response, including transformer, variac and carbon-pile excitation controls.",
-    "Read assembled medium-transformer terminals with the PG multimeter while retaining unavailable readings during genuine loading or invalidation."
+    "Restore rejected CEE state coherently, including shared alternator windings, and isolate unsupported addon endpoints before callbacks.",
+    "Fall back safely when bounded restoration is disabled; reject invalid multimeter input without changing the previous selection.",
+    "Guard native matrix allocation and growth on Windows/Linux, and reject duplicate entries in release-equivalence comparisons."
   ],
-  "installation": "Use Minecraft 1.21.1, NeoForge 21.1.231 or 21.1.248, Java 21, Create 6.0.10-280, CEE 1.1.4, Power Grid 0.6.2 and Architectury 13.0.8. CEE 1.1.3 retains compatibility support. Match server and client mod versions.",
-  "optional_installation": "The combined Pinout Stationary Yard also requires CC:Tweaked 1.120.2 and CC;CPG: Pinout 0.2.1."
+  "installation": "Use Minecraft 1.21.1, NeoForge 21.1.265, Java 21, Create 6.0.10, CEE 1.1.4, Power Grid 0.6.2 and Architectury 13.0.11. Set PG multiTicks to 16. Match server and client mod versions.",
+  "optional_installation": "The combined Pinout Stationary Yard requires CC:Tweaked 1.121.0 and Pinout 0.2.1. Fuse and rotary-selector circuit examples require Power Components 1.3.0.",
+  "documentation_ref": "main"
 }

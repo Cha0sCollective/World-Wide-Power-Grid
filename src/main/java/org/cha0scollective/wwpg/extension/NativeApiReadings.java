@@ -210,11 +210,18 @@ public final class NativeApiReadings {
         if (nativePg != null) {
             nativeIds = nativeTerminalIds(nativePg, state, nativeTerminals);
         } else if (state.getBlock() instanceof ElectricalDeviceBlock<?> cee) {
-            ceeIds = new IntOpenHashSet();
-            for (int id : cee.getNodePositions(level, pos, state).keySet())
-                if (cee.isNodeAccessible(level, pos, state, id)) ceeIds.add(id);
+            ceeIds = ceeTerminalIds(cee, level, pos, state);
         }
         return new Owner(state, entity, nativeIds, ceeIds, ApiTerminals.existing(level, pos));
+    }
+
+    private static IntSet ceeTerminalIds(ElectricalDeviceBlock<?> block, ServerLevel level, BlockPos pos, BlockState state) {
+        var prepared = org.cha0scollective.wwpg.experimental.CeeStateGeometry.snapshot(block, level, pos, state);
+        if (prepared != null) return prepared.nativeIds();
+        var ids = new IntOpenHashSet();
+        for (int id : block.getNodePositions(level, pos, state).keySet())
+            if (block.isNodeAccessible(level, pos, state, id)) ids.add(id);
+        return ids;
     }
 
     private static IntSet nativeTerminalIds(IElectric electric, BlockState state, Map<BlockState, IntSet> prepared) {
@@ -268,15 +275,21 @@ public final class NativeApiReadings {
 
     /** Reject a whole tick if later bridge validation invalidates an earlier network sample. */
     public static void invalidate(ServerLevel level, ElectricalNetwork network) {
+        unavailable(level,network,MeasurementStatus.SOLVE_FAILED,"Containing circuit did not produce an accepted solution");
+    }
+    public static void defer(ServerLevel level,ElectricalNetwork network) {
+        unavailable(level,network,MeasurementStatus.NOT_READY,"Circuit is restoring its chunks and wires");
+    }
+    private static void unavailable(ServerLevel level,ElectricalNetwork network,MeasurementStatus status,String detail) {
         var recorder = WORLDS.get(level);
         if (recorder == null || network == null) return;
         var samples = recorder.samples(network);
         samples.rejected = true;
         for (var frame : samples.direct)
-            frame.unavailable(MeasurementStatus.SOLVE_FAILED, "Containing circuit did not produce an accepted solution");
+            frame.unavailable(status,detail);
         for (var line : samples.lines)
             for (var frame : line.frames)
-                frame.unavailable(MeasurementStatus.SOLVE_FAILED, "Containing circuit did not produce an accepted solution");
+                frame.unavailable(status,detail);
     }
 
     /** Publish only complete current-tick waveforms. Call after all failure validation. */

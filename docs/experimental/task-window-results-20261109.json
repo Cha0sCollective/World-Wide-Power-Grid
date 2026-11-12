@@ -1,0 +1,277 @@
+{
+  "schema": 1,
+  "full_suite": false,
+  "source_hashes_verified": 443,
+  "unit_tests": 19,
+  "focused_regression_tests": 98,
+  "active_dispatch_in_game_tests": false,
+  "active_dispatch_in_client_runs": true,
+  "runtime": {
+    "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-08a\\wwpg-0.2.7-experimental.wiretree.7.jar",
+    "sha256": "31efbb0099531a7a8db7aa0f52deb80b040080bada825dd33bc339560b85c7a1"
+  },
+  "runs": [
+    {
+      "attempt": "goal-client-task-window-on-01",
+      "budget_ms": 2,
+      "restored_rendered_seconds": 40.4081712,
+      "electrical_ready_seconds": 38.280826,
+      "first_world_frame_seconds": 12.8486234,
+      "server_loading": [
+        {
+          "phase": "SETTLE",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 40,
+          "graph_ready_tick": 222,
+          "finish_tick": 341,
+          "chunk_request_seconds": 0.8264539,
+          "chunk_loading_seconds": 16.6377727,
+          "graph_recovery_seconds": 11.5399331,
+          "electrical_settling_seconds": 7.168638,
+          "total_restoration_seconds": 36.1727977,
+          "restoration_and_settling_seconds": 35.3463438,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 11302,
+          "maximum_pending_roots": 11302,
+          "queue_drained_tick": 222,
+          "queue_drain_seconds": 11.5399331
+        }
+      ],
+      "worst_loading_tick_seconds": 3.2655946,
+      "longest_loading_tick_gap_seconds": 3.2761365,
+      "world_frame_intervals": {
+        "samples": 1632,
+        "mean_ms": 16.88697781862745,
+        "p95_ms": 20.7689,
+        "maximum_ms": 41.2304
+      },
+      "task_window": {
+        "budgetMillis": 2,
+        "maxTasks": 512,
+        "windows": 220,
+        "completed": 38190,
+        "emptyPolls": 754856,
+        "maxCompleted": 512,
+        "maxWindowNanos": 5103800,
+        "maxPollNanos": 3257000,
+        "probes": 39,
+        "maxProbeNanos": 903200
+      },
+      "report": {
+        "path": "docs/experimental/client-task-window-on-01-results-20261109.json",
+        "sha256": "f362b77f1716c8831ba42f3b2d0443298f9f29934ec53d16eb19827e47daac7f"
+      }
+    },
+    {
+      "attempt": "goal-client-task-window-off-01",
+      "budget_ms": 0,
+      "restored_rendered_seconds": 108.9059575,
+      "electrical_ready_seconds": 63.7631802,
+      "first_world_frame_seconds": 23.277391,
+      "server_loading": [
+        {
+          "phase": "SETTLE",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 547,
+          "graph_ready_tick": 643,
+          "finish_tick": 763,
+          "chunk_request_seconds": 0.8049133,
+          "chunk_loading_seconds": 48.4521561,
+          "graph_recovery_seconds": 5.5686498,
+          "electrical_settling_seconds": 6.8870918,
+          "total_restoration_seconds": 61.712811,
+          "restoration_and_settling_seconds": 60.9078977,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 5992,
+          "maximum_pending_roots": 8068,
+          "queue_drained_tick": 643,
+          "queue_drain_seconds": 5.5686498
+        }
+      ],
+      "worst_loading_tick_seconds": 3.4007247,
+      "longest_loading_tick_gap_seconds": 3.4111836,
+      "world_frame_intervals": {
+        "samples": 5098,
+        "mean_ms": 16.796501863475875,
+        "p95_ms": 19.9897,
+        "maximum_ms": 37.4695
+      },
+      "task_window": null,
+      "report": {
+        "path": "docs/experimental/client-task-window-off-01-results-20261109.json",
+        "sha256": "2a5e9c8389bd36b475fa7d9b16789c91f0d0be2ca30bba9ece7ac29035243027"
+      }
+    },
+    {
+      "attempt": "goal-client-task-window-on-02",
+      "budget_ms": 2,
+      "restored_rendered_seconds": 39.2975532,
+      "electrical_ready_seconds": 37.2023472,
+      "first_world_frame_seconds": 11.8189235,
+      "server_loading": [
+        {
+          "phase": "SETTLE",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 42,
+          "graph_ready_tick": 225,
+          "finish_tick": 344,
+          "chunk_request_seconds": 0.7867704,
+          "chunk_loading_seconds": 16.0473933,
+          "graph_recovery_seconds": 11.6111571,
+          "electrical_settling_seconds": 6.7337187,
+          "total_restoration_seconds": 35.1790395,
+          "restoration_and_settling_seconds": 34.3922691,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 11296,
+          "maximum_pending_roots": 11302,
+          "queue_drained_tick": 225,
+          "queue_drain_seconds": 11.6111571
+        }
+      ],
+      "worst_loading_tick_seconds": 3.1644581,
+      "longest_loading_tick_gap_seconds": 3.1735672,
+      "world_frame_intervals": {
+        "samples": 1624,
+        "mean_ms": 16.920338485221677,
+        "p95_ms": 20.6772,
+        "maximum_ms": 44.1008
+      },
+      "task_window": {
+        "budgetMillis": 2,
+        "maxTasks": 512,
+        "windows": 220,
+        "completed": 37346,
+        "emptyPolls": 779272,
+        "maxCompleted": 512,
+        "maxWindowNanos": 2265100,
+        "maxPollNanos": 698800,
+        "probes": 40,
+        "maxProbeNanos": 780100
+      },
+      "report": {
+        "path": "docs/experimental/client-task-window-on-02-results-20261109.json",
+        "sha256": "269d1c958b23bb59e58547fd66a8570a33f93bd32f797bd6be606e1b3cba454d"
+      }
+    }
+  ],
+  "complete_loading_by_budget": {
+    "0": {
+      "samples": 1,
+      "mean_seconds": 108.9059575,
+      "minimum_seconds": 108.9059575,
+      "maximum_seconds": 108.9059575
+    },
+    "2": {
+      "samples": 2,
+      "mean_seconds": 39.852862200000004,
+      "minimum_seconds": 39.2975532,
+      "maximum_seconds": 40.4081712
+    }
+  },
+  "mean_reduction_percent": 63.40616884985377,
+  "evidence": [
+    {
+      "path": "local/frozen/prototype-08a/inputs.json",
+      "sha256": "13823aa0239469e0d8bd1a51abf225635a2ff300b4a94fc034003b12dd25e084"
+    },
+    {
+      "path": "local/checks/task-window-unit-01/test-results/TEST-org.cha0scollective.wwpg.bridge.RestorationWindowTest.xml",
+      "sha256": "a7440f41d23fc3de4e27300e4378e68ac3d1c71deb129d5d421835b8058a7a66"
+    },
+    {
+      "path": "local/checks/task-window-unit-01/test-results/TEST-org.cha0scollective.wwpg.experimental.BoundedTaskWindowTest.xml",
+      "sha256": "8c3673338589d73f8d8c1b1a46a13736bcc3f0567c607507e59eb8d31cd6167a"
+    },
+    {
+      "path": "local/checks/task-window-unit-01/test-results/TEST-org.cha0scollective.wwpg.wiring.RestorationQueueTest.xml",
+      "sha256": "5305ae25cafda4441a3645112563367db57d2e683b0385b3630d7ede557093f9"
+    },
+    {
+      "path": "local/checks/task-window-unit-01/test-results/TEST-org.cha0scollective.wwpg.wiring.RestorationRootsTest.xml",
+      "sha256": "b5de9c273243a3f3e339951b844804578e380216cd61d69adc2df77da7f3820a"
+    },
+    {
+      "path": "local/checks/task-window-unit-01/test-results/TEST-org.cha0scollective.wwpg.wiring.WireTreeTraversalTest.xml",
+      "sha256": "ddff9f794070106bcf7780fc2ee2ea5a3aaa13c5067551309d99d0e8591e5be9"
+    },
+    {
+      "path": "local/checks/task-window-budget-native-01/invocation.json",
+      "sha256": "fd85422482868825071af852e052381d35ae351de0af3a8d7342a087b5ac88c5"
+    },
+    {
+      "path": "local/checks/task-window-budget-native-01/result.json",
+      "sha256": "f5aaa32673a6a595a5498cdbf8751fbc760a06989fabf8a1297c77220b4c0ad3"
+    },
+    {
+      "path": "local/checks/task-window-budget-native-01/process.log",
+      "sha256": "148654a3b6db982944c0f6933968c254bfcdbcf8f21a7835f24b05fc4430ff6b"
+    },
+    {
+      "path": "local/checks/task-window-budget-java-01/invocation.json",
+      "sha256": "aa984679304b28c1bd974a32830da2c80f2f8b4b9f749fdb42a222c95b2afb1d"
+    },
+    {
+      "path": "local/checks/task-window-budget-java-01/result.json",
+      "sha256": "616c61c89e7861fb9447abad24227a6fd439f84fe60e74241e44c137a4e849d4"
+    },
+    {
+      "path": "local/checks/task-window-budget-java-01/process.log",
+      "sha256": "33395f3fc387be1f06fb8967762ad4625f414596d212dedc9c1b4dd616c9611a"
+    },
+    {
+      "path": "local/checks/task-window-lifecycle-native-01/invocation.json",
+      "sha256": "914883d5623efa9405516af1c9ca836d67fde6d5475e1886f803d345b4464f55"
+    },
+    {
+      "path": "local/checks/task-window-lifecycle-native-01/result.json",
+      "sha256": "fde16eb754124480cbf06cf1290e151e32feda9fe3e4f975f95e527bffeabde0"
+    },
+    {
+      "path": "local/checks/task-window-lifecycle-native-01/process.log",
+      "sha256": "169e97b395de98522d84480f3bbcedc674b45cf27766ae277158335878f71e64"
+    },
+    {
+      "path": "local/checks/task-window-lifecycle-java-01/invocation.json",
+      "sha256": "d8b516d051aebfbea47a3724f55c2a15dffa18c9380855f2fff41cd419e8bbe8"
+    },
+    {
+      "path": "local/checks/task-window-lifecycle-java-01/result.json",
+      "sha256": "d0dade97d1c4e22dd5f7b8af902325f36c13de0e70a84364bb95eb8845fa4e98"
+    },
+    {
+      "path": "local/checks/task-window-lifecycle-java-01/process.log",
+      "sha256": "5983a751e0609fbf3c8f4793e741f6b5259ebd33626441b441a9bd2fe75bd77a"
+    },
+    {
+      "path": "tools/experimental/summarize_task_window.py",
+      "sha256": "781a3be69e78ca1b83c4cff82429580138c9e43106951004a9e3ed5d4eeed816"
+    },
+    {
+      "path": "tools/experimental/summarize_client_loading.py",
+      "sha256": "ede19b921dafb4e6d400c039798b5e18a6b523dcd2266509b959b7aad00a1dd5"
+    },
+    {
+      "path": "tools/experimental/client_loading_benchmark.py",
+      "sha256": "7616d8556d2709a90faf63adffe9d1293bb296d9787e6ec22bc6a23713b25a0c"
+    },
+    {
+      "path": "tools/experimental/plain_wire_benchmark.py",
+      "sha256": "ee29e09967cc95118a66e7a3338dae653622bfcb47d85645c3adbca108056686"
+    },
+    {
+      "path": "tools/experimental/restoration_benchmark.py",
+      "sha256": "f936d6c6c5fa5d518aaca4404e26e131f9d569b349b0cf8e880361b942db3ede"
+    },
+    {
+      "path": "tools/experimental/focused_checks.py",
+      "sha256": "94d4ee919a55dd046831853ef0c6849201d6324da9a8f7026ac04e9221450c71"
+    }
+  ],
+  "note": "GameTestServer bypasses the ordinary wait; its fixture passes do not exercise extra dispatch. Real client runs validate active dispatch and full-yard correctness. A few stationary loads do not prove all gameplay or sustained client TPS."
+}

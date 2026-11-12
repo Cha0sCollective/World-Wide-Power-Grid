@@ -6,12 +6,21 @@ import struct
 import zipfile
 
 
+def equivalent_entry_names(old, new, label):
+    """A filename lookup is unambiguous only when both archives have unique entries."""
+    for archive in (old, new):
+        names = archive.namelist()
+        if len(names) != len(set(names)):
+            raise ValueError('Duplicate ' + label + ' archive entries')
+    if set(old.namelist()) != set(new.namelist()):
+        raise ValueError(label + ' entries differ')
+    return old.namelist()
+
+
 def runtime_equivalent(previous, current, old_version, new_version):
     """Only the single declared mod-version value may differ."""
     with zipfile.ZipFile(previous) as old, zipfile.ZipFile(current) as new:
-        if len(old.namelist()) != len(set(old.namelist())) or set(old.namelist()) != set(new.namelist()):
-            raise ValueError('Runtime entries differ')
-        for name in old.namelist():
+        for name in equivalent_entry_names(old, new, 'Runtime'):
             expected = old.read(name)
             if name == 'META-INF/neoforge.mods.toml':
                 before = ('version="' + old_version + '"').encode()
@@ -26,9 +35,7 @@ def runtime_equivalent(previous, current, old_version, new_version):
 def companion_equivalent(previous, current, old_version, new_version):
     """Promote only the test mod version and its exact gameplay dependency."""
     with zipfile.ZipFile(previous) as old, zipfile.ZipFile(current) as new:
-        names=old.namelist()
-        if len(names)!=len(set(names)) or len(new.namelist())!=len(set(new.namelist())) or set(names)!=set(new.namelist()):
-            raise ValueError('Companion entries differ')
+        names=equivalent_entry_names(old, new, 'Companion')
         for name in names:
             expected=old.read(name)
             if name=='META-INF/neoforge.mods.toml':
@@ -44,9 +51,7 @@ def companion_equivalent(previous, current, old_version, new_version):
 def world_version_equivalent(previous, current, old_version, new_version, old_runtime, new_runtime):
     """Permit release labels only; preserve every native save and original proof."""
     with zipfile.ZipFile(previous) as old, zipfile.ZipFile(current) as new:
-        names=old.namelist()
-        if len(names)!=len(set(names)) or len(new.namelist())!=len(set(new.namelist())) or set(names)!=set(new.namelist()):
-            raise ValueError('Promoted world entries differ')
+        names=equivalent_entry_names(old, new, 'Promoted world')
         headers=[name for name in names if name.endswith('/WWPG_MANIFEST.json')]
         if len(headers)!=1:raise ValueError('Promoted world inventory is ambiguous')
         header=headers[0];readme=header.removesuffix('WWPG_MANIFEST.json')+'WWPG_README.txt'
@@ -105,8 +110,7 @@ def without_line_numbers(data):
 
 def api_equivalent(previous, current):
     with zipfile.ZipFile(previous) as old, zipfile.ZipFile(current) as new:
-        if set(old.namelist()) != set(new.namelist()): raise ValueError('API entries differ')
-        for name in old.namelist():
+        for name in equivalent_entry_names(old, new, 'API'):
             before, after = old.read(name), new.read(name)
             if name.endswith('.class'):
                 before, after = without_line_numbers(before), without_line_numbers(after)

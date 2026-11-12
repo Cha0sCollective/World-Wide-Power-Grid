@@ -1,0 +1,3508 @@
+{
+  "schema": 1,
+  "full_suite": false,
+  "inputs": {
+    "schema": 1,
+    "base_commit": "e424f02359f658c0ee614033ee398e46178e3f13",
+    "java_home": "C:/Program Files/Eclipse Adoptium/jdk-21.0.12.8-hotspot",
+    "artifacts": {
+      "runtime": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\wwpg-0.2.7-experimental.wiretree.12.jar",
+        "sha256": "363348d02d041efd50f9633471f6fe6d432bf29f6766e8cb9489ffa0578d60f0"
+      },
+      "fixtures": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\wwpg-0.2.7-experimental.wiretree.12-gametests.jar",
+        "sha256": "665cc2bfccce58436edb022344f86dfcb61e24376431a6f5901e0f8af80b8973"
+      },
+      "cee": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\electroenergetics-1.21.1-1.1.4.jar",
+        "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+      }
+    },
+    "sources": [
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/ApiValidation.java",
+        "sha256": "95e4c4534346d2816737cceb7b0573265665e0916115abf48f52084d2aa72190"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/CircuitDescription.java",
+        "sha256": "039055f03176730b49d7fbebeb579237ac4f2dc26a077f2f6d862dc1a8f2b8d7"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/DeviceIdentity.java",
+        "sha256": "bc7eaa7548f70eb263af38f51f6ed46051fb307817dd7242e0da45a9e09c6545"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/DeviceResults.java",
+        "sha256": "4d56be4cf9a6d822c4d987d0e9d20497fe9db6a6b46c52bca5adac50e75801a7"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/ElectricalDevice.java",
+        "sha256": "c05b0d67811083da72415a04d0802cac4657fefc93b14ac896f4a5e73f458dfe"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/ElectricalModel.java",
+        "sha256": "903ccb4c7da2d00edc2b16e7fb5e5d5f6ee9c39d79ecd11475025b706b412750"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/Element.java",
+        "sha256": "15899ec662b23858cf2a68fda08d4474226eb0680719cb9eca906665c2b4e65b"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/ElementResult.java",
+        "sha256": "b7b41f146d35f7caa674a1173663ca6cefe53ffa0ae8e5dbef0649120cc4d53a"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/ElementState.java",
+        "sha256": "2e63a61cf27a71725e590f788a3af86708d9db4cdd289144c69012ff4ba6bda8"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/EndpointIdentity.java",
+        "sha256": "35906dbc7c37ceb07fec7af32d216041b7097e46fa214a456a72ed0c64fe7390"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/InternalNode.java",
+        "sha256": "c431276eb576b267983f4e77544576e44727d5fe8a5c33bba20c86b7c0e9c37f"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/LocalPoint.java",
+        "sha256": "be8877d9d411fdaf8b4f0fb0e3ddd8c474ada7a198314cc5fdb2ba2b8a262a70"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/MeasurementStatus.java",
+        "sha256": "64462984dd574bbd256afc33036bd1fc8dd88d6d7cadde00cf380fa9b0bbda96"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/neoforge/DeviceDiscoveryService.java",
+        "sha256": "84e5b3fe79a7e779c9097db70b05910dd42fbf714ccb86aa38da3d7d290c5d1d"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/neoforge/ElectricalCapabilities.java",
+        "sha256": "4659e3bf946dd92c46a5bbace944c550c0d044dd1835b4a9ec72e1d46aee155b"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/neoforge/ElectricalDevices.java",
+        "sha256": "e9710ae5e54a55df9c617d9983d2fb3e660f158416a50fa32692140ca2f5ec3c"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/neoforge/ElectricalMeasurements.java",
+        "sha256": "48176624e06ef728245a5b83a702a83db7fe0feed113b1f2f35e342674ea9876"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/neoforge/ElectricalProviders.java",
+        "sha256": "6384ed080892de8931d70bbb73be0495181a60a2dadf2a718767988d828566c8"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/neoforge/MeasurementService.java",
+        "sha256": "dcbd3711154f4f25d9c24ebd8c0c6486e5b5e42a45ff0af3ef1fabb1fcf540f7"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/neoforge/package-info.java",
+        "sha256": "2c5df0614c28c54b7407658b390b4d97a0aa2a6ff039f3c43171882acdb2ecbf"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/NodeResult.java",
+        "sha256": "5b32fc933256b4784ff9e2c6c5b5a50c4ffeda0a64bbdfe438bd09b2bf2a642f"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/package-info.java",
+        "sha256": "7c9df070d694a00c40633657741e6f1a2c10925c30bc106c9c4e48be8930d525"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/Terminal.java",
+        "sha256": "e5b10038e76a3c4462e5b0ef49d68c640d65d08b859b4b81428d07b1b749bc92"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/TerminalMeasurement.java",
+        "sha256": "5c1fca1ea7eeb76d21931a6683aaa1c848b6f950a95b4fad1f8eb7fe492c212c"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/TickContext.java",
+        "sha256": "77ea7d3ee96ae48d190c45ded1081d9530d70ff661b77688efab514c86028bb6"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/VoltageMeasurement.java",
+        "sha256": "6cf3df9892268c2302f8e411192069806d3a8ccdbc82a4bb0224cb67393cc29f"
+      },
+      {
+        "path": "src/api/java/org/cha0scollective/wwpg/api/WWPGApi.java",
+        "sha256": "9a8760fd0e9f85f1094454d9b56d65ff25e4f28566e24bd0f3d2bdaef4867903"
+      },
+      {
+        "path": "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeeElectricalParameters.java",
+        "sha256": "3df72d9a69d968dc96b1e7b903ff3b7b1d582a9f42258708347efd381799d3f6"
+      },
+      {
+        "path": "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeePropertyAdapter.java",
+        "sha256": "fc37fa236aadb045b85e9f424d0d369b374a030773d34e28d785de47be5f50a7"
+      },
+      {
+        "path": "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeeStateCheckpoint.java",
+        "sha256": "6bee242912556541cac033a9dda596cd9a17512f352a0a10034f2f5538dc1088"
+      },
+      {
+        "path": "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeeSubstepContext.java",
+        "sha256": "4b0a30acf50e26742e985e1cbb3905164f73a1ad921f880ce52607a18cf934c1"
+      },
+      {
+        "path": "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeeSubstepResult.java",
+        "sha256": "44075abde96b6d8132b81f15ccdb15a3b78e12b20480b56bbed7094bbcc2efc1"
+      },
+      {
+        "path": "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/package-info.java",
+        "sha256": "1e61663e9d6155a0202b8be54aaccdd91730537fd5a299593326b70f7ae4e5bc"
+      },
+      {
+        "path": "src/ceeApi/java/org/cha0scollective/wwpg/api/cee/RegisterCeePropertyAdaptersEvent.java",
+        "sha256": "f4cfc8e3b303062b09981787bc4270bb6016cf32ce969969c962a0464313b669"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/AdditionalFactoryGameTests.java",
+        "sha256": "84bb2e2f4182b04bf7e32024708ff85a45c426ac3223508061d994343aae6cac"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ApiMeterFixture.java",
+        "sha256": "344c402d6d9136c594c4b8127b0e8d44b78cac3339a4e0417e9e7151a90f82d0"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/BoardComponentGameTests.java",
+        "sha256": "c10c3a9de732fb073f1c152f030d1a1d602063bd84e5aea8bb1ee223698546c2"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/BoardFixture.java",
+        "sha256": "f52147371b313302c42044bd6ad46370f653af9d9168632f151b13d6cae3c63e"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/BoardGameTests.java",
+        "sha256": "6d51b3e95eac0bf5b9db4874227cf4c995c7ec97cf5bf89e6e22cc12fe544727"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/BoardStartupGameTests.java",
+        "sha256": "ef2b7db50a3e84c75e93e74b2bef01075cfb259155e235627ac22fff01fb4f6d"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/BoardWorkflowGameTests.java",
+        "sha256": "78a29ece91fec93fd75a829fb008d77759a03871d6b4c31b4d043265d8740942"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/BundledWireGameTests.java",
+        "sha256": "85e40349b5bc49bba0ab1dd162ef7486d4572edffac7f5e447ed41a718cdc6d4"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/BundledWireLifecycleGameTests.java",
+        "sha256": "55b7776f24accfa200b26e8c6211493ff766bb9a8ba248febfec7038e4bdf30e"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeAuxiliaryGameTests.java",
+        "sha256": "c664298276582a267d14b7d4bfd0f841d4b153b06643bf86735f1328e45ddd41"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeControlGameTests.java",
+        "sha256": "afbed89b7dc56e6b47186051acc4c4b4168e276969d9e4246ad3373e53d8c0b4"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CeePreparationGameTests.java",
+        "sha256": "fbb32c380293760465146b5a5b0b63c8047ff578881b371f8ea0d7a2c1245411"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeStateGeometryGameTests.java",
+        "sha256": "8767051ad9cff996754f7604cad45107484873818ab09d6f563862de59d68b99"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeTerminalGeometryGameTests.java",
+        "sha256": "755db49c42fcb79af0ceabc3648aa35383f7ca9c1a945c9f12ea111829c2adb3"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeTerminalPickingGameTests.java",
+        "sha256": "d667280cbcb7c67e920eedd76d4effaffe3188fd79deafa585b45afa7880d39f"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CioCompatibilityGameTests.java",
+        "sha256": "85a3823800289b21bb7b37ea1950b1312ee1a8d4bcd0b5caa8a27ce86115ab54"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CioModelGuardGameTests.java",
+        "sha256": "4d25b2fa46e694591adef78408b97a5bee2bd105154714325d3b6ef7c101f6f9"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CioTransitionGameTests.java",
+        "sha256": "7178c345b31eceb10d5579151f8431be0a2e44b7b3a9feebbb3e2fce7182bb50"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CioUpgradeGameTests.java",
+        "sha256": "7df8d86f7355d2f1f781a8e0bc08f5fe93a2f8e684290bea99d8c04b8f321b95"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CircuitRebuildGameTests.java",
+        "sha256": "804204a9ff50903f034ef6a0c702da29a96f9173e30eae6ad4e96ad84deccde7"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ConfigReloadGameTests.java",
+        "sha256": "2ddda61923a80731ce6722ac556c1b34df947b6b6ce0d1dd0ea04d89ba5ff159"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ContactorRestorationGameTests.java",
+        "sha256": "29c1aa608eb277fdcac1087bd3a9e28d61bb7eae2cdb39179b1df25ee25c75b9"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/CoupledNodeRemovalGameTests.java",
+        "sha256": "0faaf1c6325fc8ed54b864d58160a864f69ac4aa56979f0b1aa246b23dcd19c1"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/DelayedEntityLoads.java",
+        "sha256": "6bfa1cdbb572ac3985800a1bba37ea858acdf528203d30a94621b9d3a68a0f53"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/DesignerChunkCyclesGameTests.java",
+        "sha256": "29766a2c4b44b86af256fcdb1d21d52f66fd8a739c4445a25e8bd80116b4e375"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/DesignerRestartGameTests.java",
+        "sha256": "dd7571cfe9c85e037ef813a46446473b316f5e01d2ce2ecbaec7a15126bd532a"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/DesignTablePersistenceGameTests.java",
+        "sha256": "9da13c0cf1edf1bc02cff9f3aa8bc282874b56b6b1526186241a25d010e66bc7"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/DiagnosticsGameTests.java",
+        "sha256": "d3dd6225ffed8b7fae14128f972c2851785eeb1c4ac659cfcac71ccf1750ae0e"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/DimensionGameTests.java",
+        "sha256": "caaf812b0de89d2ea80c67edea926545edae9270c5f49883bd7ee47fd02ffb83"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/DisplayGameTests.java",
+        "sha256": "a83aa492e689ecd9c7133848fd5b660df1d2e27cd28306837b42bec5d29a84bd"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/DisplayPulseCheck.java",
+        "sha256": "02d527bd730a1a2a28cf541c6f6efeaa99f0348548cd38632b912b1f7bc052b4"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/DisplayPulseGameTests.java",
+        "sha256": "ef69f9376ad9ad10d6a3c2826b26fae0ca6c63718ea99a2c1a8e7815015520cd"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/DynamicGameTests.java",
+        "sha256": "fe7c9cf8ec44fc07b01bbdfc30a8ef69e7228ae4687d377f034ba8b225ea01eb"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ElectricalScheduleGameTests.java",
+        "sha256": "c02c600201dcd04ca231e38df4d145ee460344be523200a67589d0d384c52916"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ElectronicsPersistenceGameTests.java",
+        "sha256": "fb9a600e8a0048acf3ccfbb71cf2e9b5550c6411ca4eee3d316b1398914b125a"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExampleControlBoard.java",
+        "sha256": "1012b264c48975ef2c1d4a06718ea90f737a88f78fe391f1377fb13380c3efda"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExampleWorldGameTests.java",
+        "sha256": "5d05168b5a223b00a97acae6ad9463382515c8cdb5b0ddcb1070d034e3a1bdbb"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiClientSession.java",
+        "sha256": "5281ff92851ada758a29cce1ed2d78bb85e4e21af1423ac208feb00d9b8f6f18"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiDiodeParameterGameTests.java",
+        "sha256": "fb728835b881bab7e5e50e198014fa5b8dbfcc3e5e13fe0926b5e804a1b87980"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiGameTests.java",
+        "sha256": "758d45229738e533a4b2c0897211fa739bc1a4d9344eca878c41f53340920d43"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiLifecycleGameTests.java",
+        "sha256": "6534adb35b65b5f1ce5ed016dd5ad2c1628eb5d3cb93ec2d72ff7abe65bdd748"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiMultiplayerGameTests.java",
+        "sha256": "c7fd17b68356ef6037745c59741220bb3b28344a0f8d71bfac5535ad3a06514d"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiOwnershipGameTests.java",
+        "sha256": "2ae8e9a0b673453fc5390c85fc444fa78ef104ebf42747012c2573cd169b33e0"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiPauseGameTests.java",
+        "sha256": "85214a9ee4d1eff02d0f2b31e7c0a3576e238f0eb636101a959e94b60c3b7508"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiPendingRestartGameTests.java",
+        "sha256": "fd21f91694d4d4737bba7c416e90c7df623a52f53db389909b8a8c2c326f40c9"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiRejectedSolveGameTests.java",
+        "sha256": "02ee8a63dcfa6cdb3bf7a5b810162a508cd351774d2305991199ee5caf1bacec"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiReplacementRestartGameTests.java",
+        "sha256": "558e9dce9b176bd535de68b82bb5ef7fa58c9694fed612a771cc5c5e4c844144"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiStartupGameTests.java",
+        "sha256": "571fe91d0362ef3ccbb4f23c7c40bfa2f9fb9afdd2a310a1c68859b8f50ca77f"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiTerminalRefreshGameTests.java",
+        "sha256": "be41096dbf56706f87fbde1e7f2b3b4c5fbb6dc49b39c1825fe98c6009ac1d0a"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiWorldGameTests.java",
+        "sha256": "aaeb46b85fffaa9bff37d2855286e8e41d6341a564be3312926477edda860281"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/FactoryGameTests.java",
+        "sha256": "47ba4f58bd0d0a5469c960ee6c5edfa782f95cd2ca1ee93f309871ef802d8974"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/FactoryTransportGameTests.java",
+        "sha256": "a0bebc75f95dfaa6c72e0070e5e45d7bbe1d4dadac629f4f16a3670bbaacf3e3"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/FixtureEnergyCapabilities.java",
+        "sha256": "3bdee26fbadf2772c77f1aa0d64e801f4dfa6803e3caf757b95bd307cec6732b"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/FrequencyTimingGameTests.java",
+        "sha256": "5f2f772023f3fceb6cbf78921ad657d269e18376c75a88d3db37626dd88347db"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/FuseHolderWorkflowGameTests.java",
+        "sha256": "ad33ceef13ae0125d4d0dc10e1bfacaa94ad281184a0e23cd156c5dc714f6644"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/FuseVariantGameTests.java",
+        "sha256": "893680ca2e933318992f7602641d24e009493bd2c903870e46e85e53efbb90da"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/GenerationGameTests.java",
+        "sha256": "5c1b442dc52184629da79c790b64b005b53cdd70ca06acc590bb389ad9f5742c"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/GeneratorTimingGameTests.java",
+        "sha256": "6b05c7c3c85dc0a3202703d116bd5068b37e18c7461efc0572251be939c28d07"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/GroundingChangeGameTests.java",
+        "sha256": "c6b71c002bdc78163a5530319cbd7fbfc5f8b9eb45dbe216a34ad0d4f3a8fcc8"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/GroundingGameTests.java",
+        "sha256": "760ac096088d079bfc019f7a577a0b061772455efae2c34abf5266433c953af4"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/HandheldMeterGameTests.java",
+        "sha256": "2f7741e8f60ee6fca677d4338e789fcf46e3b1c17598b064a70fa53434b963b8"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/HealthyResultGuardGameTests.java",
+        "sha256": "b178e3c66b6bffbceedf3e6bf7f0032070208e69b65dbd0fc239d5abe2bf65a5"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/IsolationGameTests.java",
+        "sha256": "37f43541622817955fd7976f2abb0fadd49a94eb844447dc3a6acfd884d52e65"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/LifecycleGameTests.java",
+        "sha256": "3636015af909d0e4278b0bd8aa8cf7be42910d2815a26fa222ac180e0baa2909"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/LoaderAddonGameTests.java",
+        "sha256": "8741a656f4e1345efdbb2718b128e58cf1f9fb95951f905f576292db1b9b4fa3"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/LoaderInstallationGameTests.java",
+        "sha256": "6fafa29d265cc8d5240753390773d3292c8efb8517e200f93a65d161122b3e49"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/LoadingBatchGameTests.java",
+        "sha256": "ac4da49970efdcc393f86746140f7464ffa5b3a6424f44d27633d289d66536c6"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/MatrixOwnershipGameTests.java",
+        "sha256": "50553c0e4538ee9923a42b0ea77042fc824917a48a47103a8b1950fcbdd4b37f"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/MechanicalGameTests.java",
+        "sha256": "682efcc88c6b6bf7e9e2273b43dcb7c91024f9f8af0c2706f21f7824060d3a14"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/MeterGameTests.java",
+        "sha256": "c5195da4bcd5330b85393a6cbf3bf01f89d70ac816547ed8a2d91453011f43df"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/MultiplayerClientDriver.java",
+        "sha256": "bdd9c86913a406b554545c0bba99985e712b7315f478e98a1b6ec7cda6a1033a"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/MultiplayerGameTests.java",
+        "sha256": "5a85c64cf7dcb3a79e0856e19743ed17109bdce76b639c3ed22a96cb0d77910d"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeBulbItemsGameTests.java",
+        "sha256": "a774ba82a3e3d8a7284de8c85a20084c933a2a27c2d27b63fffcb0fac69c2c3a"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeFailureGameTests.java",
+        "sha256": "816ffe0dc1c27cadb32e04b0fc08d5d5f0f6ab837165f7bf614f3a029e3aea8c"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeHandheldGameTests.java",
+        "sha256": "62b663398c4e0713d3328e12d3ea2fd545a2285f178297ca503efd206740dade"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeInteractions.java",
+        "sha256": "8d0ef34c66b5f6d70ba23e506358fcd27936aa5f03d017e51d0adc089047bab6"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeReferenceTimingGameTests.java",
+        "sha256": "1faa9bd71e49985ae5cad8f9815e0c88d420e826d432a4d580d475050a8768bc"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeSamplingGameTests.java",
+        "sha256": "35ac7c03d21001618b691e6bd2b4a2684e71780396f07a4d175f61fe09018ede"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeTerminalPreparationGameTests.java",
+        "sha256": "191483d3aea2eeb57e5eb066a47361ed3b1d702c70fdcbb781a3ed215c11552f"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeWireToolsGameTests.java",
+        "sha256": "1b02e2ae909da6b3372dcd34d5b7a5a95e22fe761fd629e809d292be04a33e0b"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/NetherLifecycleGameTests.java",
+        "sha256": "d2752ce6fa42b9278ab1436c7b793c8e260fa4560cf8bccc9300e43f850f8766"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/NonlinearBoardGameTests.java",
+        "sha256": "4761839d1b667ba2ccf5e4919458649c8e754909ca2002b2039c833a67c3d87d"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PanelGameTests.java",
+        "sha256": "b1c7b74b490e94f7bdfd0c1a048e2d3934d1b72438e3bef173778c5b4e99a3b2"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PentodeInitializationGameTests.java",
+        "sha256": "954766c9b6bd240d1017bdb80368895e6c0382d52e1c569572f2bb910554f2d0"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PersistenceGameTests.java",
+        "sha256": "6284885744acabb61b4409e95e0f807a78c8382b4f95798497a5f4f2d08f3002"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PgFactoryGameTests.java",
+        "sha256": "f7397147343fc62e043d0cf950c495ee97877967767522e818e3677d592ddbee"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PgGenerationGameTests.java",
+        "sha256": "80fa3551919b75f099af9ebcd8fa81f7103e00db31b54a1db67ffe7598448532"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PgStorageFailureFixture.java",
+        "sha256": "6087ff555e6401ca50d5404385111197c52893f7f8ce32a052ebd5bee1dab665"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PgTransformerGameTests.java",
+        "sha256": "48e512bf336e4c800a1a6e24e0eeb20fd71f83a9900a146fd2f54631f372d319"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PinoutLifecycleGameTests.java",
+        "sha256": "c03f7db29fba9485958300d35e6cfd88367cbbecdcbecffccd10ba3d5ee3a42d"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PinoutLuaGameTests.java",
+        "sha256": "0cf3694585ac650e9909e2e5c4ec3c1b8f29296de4af5375ca8f2858f3d6c5a7"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PlainWireBatchGameTests.java",
+        "sha256": "bd2a7d3ada87e1071208eca3458f588cd33cfe65d1a199a2d199f07656bded94"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PlainWirePowerGameTests.java",
+        "sha256": "bbfd8f2e09121cb561f5f1db9a93a864b566411ea77ab9896d44ba8b9d6cd539"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PlatformCompatibilityGameTests.java",
+        "sha256": "f84bfef8d48c24694b278f1922f54b7cd594712b8cda7dc7b965e64a99e5eb0d"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PropertyPowerGameTests.java",
+        "sha256": "a21a4f9f43c693374a5b13a7ecac3bebb2bd35a639a4acc0dde6985aa623a015"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/PropertyWireBatchGameTests.java",
+        "sha256": "429ad10d7bf1bfdfb10695b8843ae51512cdf687fb4d882f299727ab6aab6910"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ProtectionGameTests.java",
+        "sha256": "a6da17ebe10b186e32f810aadb6601ed08664ca042a174edb666246a4bbcf15f"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ReferenceWorldGameTests.java",
+        "sha256": "622375c4facc88ab3d4d62dfdc9a94d268fa2f5e88101c161435e21c236d2262"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/RegistryGameTests.java",
+        "sha256": "bf93ce1772262eeb0f8356c4e7092ec69e5a3cf5e5ed4378803c134430310b9a"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ResidualAssemblyGameTests.java",
+        "sha256": "38b975327c76b275f05f872ea500b627470a71af239dc545340e71a35804001c"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/RestorationGameTests.java",
+        "sha256": "796e69691943a9e3c037b9ef2ad92db718503cc7f9ccdf64cb05b2b34ce1a302"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/RestorationPauseEpochGameTests.java",
+        "sha256": "81a918ba6339e132d0fc1b5af31eae16443d9d2ed42e271529ca327b3f7f225c"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/SableTerminalPickingGameTests.java",
+        "sha256": "af4969016d40d7fa8fb8b2a01ef81418a217ea6395fd05d0268a898ba6404069"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ScopedRestorationBoundaryGameTests.java",
+        "sha256": "7edad73175dfe672c5a3ee16c4bb486da9bf81a36c672fa6af2e59325e599fab"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ScopedRestorationGameTests.java",
+        "sha256": "fa4fbd9d2a27715db936789f7e75d64f4c50f3b444a983c26cb5a947e344291a"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ShowroomBoardStations.java",
+        "sha256": "ecd6559ff60f911cacf16d70dd614111889a3729693d953182b7296af3fbde01"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ShowroomDeviceStations.java",
+        "sha256": "dbc3b29dfd87b80a990f3515b682337bd59a85be1479f501f39260b72d10b8b5"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ShowroomPanelStations.java",
+        "sha256": "6fc1a3543161e58b433ac32bec9249eccef2712d73c7394c430563b71b5b276b"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ShowroomPowerStations.java",
+        "sha256": "1f609022bf7621e94a0e9cfce368ed09bd00f573508f5677277a83943268af3d"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ShowroomTools.java",
+        "sha256": "d69a32420101ee751fb93a6b387ce1c335d108165dd037f70929ca12615ba655"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/ShowroomWorldGameTests.java",
+        "sha256": "79f6595d7251068813673e9e7223bf7e52473415a4a13917e48070ce21d2fc9e"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/SolverFailureGameTests.java",
+        "sha256": "70f9292abb413293adb001009f396ea1f96212ae34c5415b797216747bc1a238"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StableBranchGameTests.java",
+        "sha256": "ad010f4a40240a55c1c832110fe349577c91c291b9ce6b57bd8fd4753c0f7e26"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StandaloneControlGameTests.java",
+        "sha256": "7dfab7129c7475fde72e3e3a391ed24110dbaa3100c514cf56f227968208efb6"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StartupGameTests.java",
+        "sha256": "72dcd33a732cff582875683be1986b39473076659b4b4971b53f9cbd6bfe4f66"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryAccuracyGameTests.java",
+        "sha256": "77b9bc68f3ad1df63a49c58cdc45a647aafe626e0685300d16ccccd73b124d04"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryConversionGameTests.java",
+        "sha256": "450d5c5f8cd887e3f01d59977b12fa6899f3418927574803d083fb6f5958cd21"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryCrtGameTests.java",
+        "sha256": "78220ae648cc810a8a0562268e56fd3422a1fc03e7fcfab87ffa7411ef87b89a"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryDistributionGameTests.java",
+        "sha256": "a6b09d9518617b5b2559a065e9bb4310eba5e93de154f63a768590b4b3679927"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryEndpointGameTests.java",
+        "sha256": "f85d60d3d075cdbcb55d8ef0bf35b94eec6dbb7247abd651ba362b92a542e840"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryEquipmentGameTests.java",
+        "sha256": "62cd55e6f05192b7b35186c191903d7602a3b75721f080e0bf37a7037972b9ab"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryGeneratorWorkflowGameTests.java",
+        "sha256": "d1f71de0ed2eeb757d3510613819055e02362598a8c02819d4eacd9773cb88c2"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryInstrumentGameTests.java",
+        "sha256": "ca502e63f22d32c27fc2e3efe8d44d6908aac78a0e75554c6f138c3aaa0e8200"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryInventoryGameTests.java",
+        "sha256": "d80db529f8be0ddb30127cf7f67d767ebf10b1bdc0d8f95e8b6efb5820fa89c6"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryLightingGameTests.java",
+        "sha256": "9f105d3a0657029f1907989c4a47f324a03cb5e0ff897db6e4a5c827e0fefe5d"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryMultiplayerClientDriver.java",
+        "sha256": "ba339dbe1801f562bd38c81094a9fae34d97d03929221f73e4c687ad80825ea0"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryMultiplayerSession.java",
+        "sha256": "da5a2bd907f491510fed7d951e19f2c852888f58923145b1700859d9d7ea4932"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryNetherGameTests.java",
+        "sha256": "261efdabbd13a8ef20ddde49a0eb040fa4a66899f88f74b1a3d867c1696667ee"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryPoleGameTests.java",
+        "sha256": "b54e5e79628824476a21d42a0b4c1fccde54006c8e528271fd33d6cb37835300"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryProcessingGameTests.java",
+        "sha256": "bf7d287ad6b69eee0c44a85a0d19459adc0647ca1d0dd7d0c0ba31386262b680"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryReaderGameTests.java",
+        "sha256": "2382555e9a12ba192d612d8b0e259213c3e37b3696354a2a1cecfa0a6ecb0624"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryStringLightGameTests.java",
+        "sha256": "4cc1d5f2ff4461d32c7880975cdf3ecf300c9646e5e30b7d36afcd0e7c87e694"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java",
+        "sha256": "f097f38798bc4679b9bcce41d03fab34de550440f3f607412dcb9b2b9fab6ff1"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardChunkTickets.java",
+        "sha256": "0fc69ab98dd3ddfdcf238ec228f8466751ee72c9f8ad55cf669e202e26d9a269"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardConnections.java",
+        "sha256": "defcb2e3777f7da793a898f473b81a7c455dadc69f1b66f6ae1e312105efe172"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardControls.java",
+        "sha256": "6b8ad4e6bfb63c9811069bd64b7f3471e115e885184121f08a41248ca281fbfb"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardCoverage.java",
+        "sha256": "e458f3ee0e838eb3ea86881e7992df0a8e245f25650e5e962c4ef7582cd59341"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardDistribution.java",
+        "sha256": "20fa80d440ed946ba9c6e0ae4b8884e8c72583da6a16cfa62e02ce63ba621240"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardEquipment.java",
+        "sha256": "2c70ad12abb8f3e1b45bd61a6fbdd3430819905ab4d1f8e10d3573ac81031599"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardGameTests.java",
+        "sha256": "2e8154bc5388c4ccd35ccd336b255e0840a88fc8ba90301399a3884f0c410454"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardGeneration.java",
+        "sha256": "76d561a4deea07fee52aff047ddda9f8f7cbe20e2f53a16b681c3e757e92e686"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardGuide.java",
+        "sha256": "a4bfd5ba8ea75953be24d17c940018d1f7509acde8634d9e1e1e1fa6a3280f5e"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardHeldParts.java",
+        "sha256": "a665052fdcc11fbd7c37cb0032c8992eccac15734ca8a35b189a200c20f096b7"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardInstruments.java",
+        "sha256": "d516344769fea80c05f20a1511f5c8309fdd6fdec6c9ab8dce527f1ed86d7c92"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardNether.java",
+        "sha256": "40da5b659eb60ac6838deb82a9aa766aab69dce59ec3fa90e491d2265a307db6"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardPinout.java",
+        "sha256": "6d355eed76d812d15f9a290598b4b16e405fc96ec5359720902a95b7781b3380"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardProcessing.java",
+        "sha256": "447cd972bd361318751eddf810498ac6f515f8bc02af09e737f6f97683132e55"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardProtection.java",
+        "sha256": "2a0cb1d7d54fbacdc6842eee92006dce00623a85a17fedf94f51cbb8e6e328e3"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardStations.java",
+        "sha256": "5e4ec7d726e3e9e687f92dc9421744196fb2f4bb6daa0a96656d589d16c1c086"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardThreePoleMeter.java",
+        "sha256": "189c5cb990929e09ae5b773c0615936f66283b64226791928e75d283ae6200fc"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardWiring.java",
+        "sha256": "f1c2809fb5ac80f7548606d9da59689928abbe9a2a10249e67c19b4adaaf846f"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/SurvivalWiringGameTests.java",
+        "sha256": "9586977e524031bdcd16161b9e4817e8dc40e63303711777cf8a4f9326f7473a"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/TerminalToolControlGameTests.java",
+        "sha256": "17e14db7c790921c417328e4ab0e403b5baaa70746143fcb9630d94aee6d37c2"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/TopologyGameTests.java",
+        "sha256": "dbcb4c24fd6bf51503e449378b963120b5a74a0b7479b157cdb81a26f775fcfd"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/TrainCircuitGameTests.java",
+        "sha256": "61e56002b16525ec0e273ac8789095d58f589ad13090f1c5eabbd4f72247c63d"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/UnloadPartitionGameTests.java",
+        "sha256": "4140affa8da501cf9b419ba89d5ff450d2608676f9b41ead91aeec12ea670f3a"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/WireAttachmentGameTests.java",
+        "sha256": "99fda42908e5117d4c1d164ffa1b5b934676ab2d34a25f3c804e50607ff0d235"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/WireFailureGameTests.java",
+        "sha256": "5e52493c6b376189a6a5ca50e8b3ed6f4ae91fc82c39e5f85ae4978589446809"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/WireRemovalRecoveryGameTests.java",
+        "sha256": "11bdab5e4fbb18cc70397fc07d0b3b109f6ac19eee0a13a767818341bbaa4e38"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/WireResultOwnershipGameTests.java",
+        "sha256": "048f25e3c42dddbc5fa4d2680836ba9c7a38cccb2863ad6f9691c3197beaa209"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/WireTreeBudgetGameTests.java",
+        "sha256": "94beeb5fc2c1cb5dbff570a9cdda3719d4fb696bf5938ad580deb870d481fff7"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/WireTreeRestorationGameTests.java",
+        "sha256": "ee898e716e387477be3a08eeb3fd553db68399ff08b68812d9af0f6d1eef4d9d"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/WiringGameTests.java",
+        "sha256": "b7cbe3dbdad8ed4a793e7b109e65d46b8968033694c3720f2962f989b5251215"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/WwpgGameTests.java",
+        "sha256": "8eaa94761840b04c87e8504b219835ce8ce1bf8e033837a2b1fdade13c1d2b52"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/YardComputerBootstrap.java",
+        "sha256": "14115d295f3713f24e4571f6714352bd55816f24091c36a4330167302d730d39"
+      },
+      {
+        "path": "src/gameTest/java/org/cha0scollective/wwpg/gametest/YardComputerBootstrapGameTests.java",
+        "sha256": "a869a956a6fd727e22660efb123dd8bfc08ba5e05648e3750f7ab8fea8fb0139"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_api/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_api_multiplayer/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_api_ownership/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_api_pause/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_api_pending_restart/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_api_restart/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_api_world/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_bundle/structure/empty.nbt",
+        "sha256": "5420445d400983dcb50b2a8e7594628f6bbd8059c3fb5542ff6f470123d9bb17"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_coupled/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_design/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_display_pulse/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_distribution/structure/empty.nbt",
+        "sha256": "5420445d400983dcb50b2a8e7594628f6bbd8059c3fb5542ff6f470123d9bb17"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_example/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_multiplayer/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_pause_epoch/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_pinout/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_platform/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_reference/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_rhs/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_showroom/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_stationary/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_trains/structure/empty.nbt",
+        "sha256": "aca0d3b5168bc9ace040adcfe3b99c97f821ffd0c5834a7c73c1f60873fc8464"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_wire_power/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_wire_recovery/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_wires/structure/empty.nbt",
+        "sha256": "5420445d400983dcb50b2a8e7594628f6bbd8059c3fb5542ff6f470123d9bb17"
+      },
+      {
+        "path": "src/gameTest/resources/data/wwpg_yard/structure/empty.nbt",
+        "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf"
+      },
+      {
+        "path": "src/gameTest/resources/META-INF/neoforge.mods.toml",
+        "sha256": "f1f2c2698da1d24cef0d200d532e544c67ee223c68ffbb2aa9b3edb7fe1725bb"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/BranchKey.java",
+        "sha256": "ff4d80c33a0b165fec548fc78857df1d119601379652167990adc66dbff22035"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/Bridges.java",
+        "sha256": "766da221397a51c128023a7ad7bf8d34f8c43d231c0bc15020696ca5e5eec3e4"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/BridgeSimulationResults.java",
+        "sha256": "0741b9233a37629730b98840615047596162d835884df97ab9af53711be132b3"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/DiagnosticHistory.java",
+        "sha256": "700cee7d820cfa3a4297866dc8dac4a1379b721368b06386e2814c9ec8710d5f"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/EndpointKey.java",
+        "sha256": "f4dee4c39415a8ed913ce166aa920934405bb32f6eb0cb89ddc49b51b38f27a3"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/ExcitationSearch.java",
+        "sha256": "5cd9b2fb5724e52cb33dc28db6f855a5ea5cf36b7cebcb85b6f25a53f5c42646"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/IndexedIslandDiscovery.java",
+        "sha256": "4c5fdc82f13507c2754b575802a41e493c075fab9881c6213057581a87c97d1c"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/InitializationWindow.java",
+        "sha256": "9463e921b02d7c7d2ac623f6c7474460d26be8f229251af7eed5317b1526b88b"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/InternalEndpoint.java",
+        "sha256": "fac63b88bea23e674f543387d27d82c9560defa04d16a770ffef0eac9a26a5fb"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/LinearBranch.java",
+        "sha256": "b6a54b8c61838645ebf0585de09507c4cc75c05051dbb10a9054a00ef108cb30"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/MatrixBuildScope.java",
+        "sha256": "febf8fc43f575b3e9898de4ff7d5173f57c9433b7298721e96187815d46c5e37"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/MovingWireCuts.java",
+        "sha256": "47772bb410027cd4345e3d2c77f41dfb1249fc317486594dfcbf10234b04fcef"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/NativeBootstrap.java",
+        "sha256": "a432eadfa7f26acfa0e31a9b0badffa4580ceadd24ad8acfc8e0debffe7ba3d9"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/NativeCeeCheckpoint.java",
+        "sha256": "53a86b3595036cb4d53bd97f6cde0f9ca6c0ff6972d376905f8151a5210839a1"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/OwnedWireRemoval.java",
+        "sha256": "78218d4efc12e3490ced9c0b7938b99d8bfcf5545f5fd9d4103d10785008f655"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/PentodeInitialization.java",
+        "sha256": "42967e0b7527a83dd793f168703607b701b111da251e7933c7424bdc140ea4de"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/PgGeneratorTiming.java",
+        "sha256": "ac949608ef6ce99cf3f418692f77fda3c8bebb57aa21f712f8b249470d2a07ff"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/PropertyCurrentSourceWire.java",
+        "sha256": "24a156258207d7f22e701182468fbc277e0ee88308930bbbe34a644023713069"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/RejectedConnections.java",
+        "sha256": "70d2b4a62a82c476733c1150d09c1baf1d56ac654608fd47a3c4e9abea42d602"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/RestorationCoordinator.java",
+        "sha256": "ba6a7d6700d39dc927b61d183f1d3ea0597375057dd4e6f79bd41db588d96265"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/RestorationWindow.java",
+        "sha256": "9621139dc8e575609369c09171a66e49cffb8dfc4e857e43591ae5ab9e1fc6de"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/RotorStep.java",
+        "sha256": "ea5a3aafce179b0bfd4723b5b4ea3f5b11efa5f88eaf3a4082ff2dcf1ad10984"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/ServerElectricalSchedule.java",
+        "sha256": "96adb391bb2461bb24fac5ed2b7e5658c966837bcefa47d7f74b0db56cc9ae14"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/SolverAudit.java",
+        "sha256": "4947996917f589bf19543eb56608639936b65f5ebc1d717a9d29218df6e4a257"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/SparseAssembly.java",
+        "sha256": "2c2aa1ac231011be9a95ca239f8f2635e1fd6f798af2489fb0c8e4bbeb267812"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/SparseMatrixSupport.java",
+        "sha256": "9cffe3ae9c0637a8f811b49f04ed4e550a96b7c8062cd17c326cb0e245bcc418"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/SubstepAcceptance.java",
+        "sha256": "86f9d0d9157789d03ae021b6b32de2887f52af43a213cf7586ff2b39b6e04f3b"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/TrainDimensions.java",
+        "sha256": "b8d59b26b985ea523fa746bceb4319eb6ae69ddb3d4419ee17d2fb6e3f77cdbf"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/TransformerStamp.java",
+        "sha256": "89cba6a1dbe2032a6b3c055d4515ec3c6139ec9cdf22c14ddb84f409714eab70"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/bridge/WorldBridge.java",
+        "sha256": "96468f71f18d5c81f3586fea643a8837aab25bca39eab67f0b2610f20045e7b1"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/compat/cio/CioCompatibility.java",
+        "sha256": "1b2dcca5cea5e9cfa221bd6b5b6ad768ebeae013c0caf5edd05cc1ef6e75ed5e"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/compat/cio/CioInverterAdapter.java",
+        "sha256": "300e40c93d0e3d1fbaf2beb0d5e4fdab3ba247525fb1fa9e66c7b64e104347e6"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/compat/cio/CioMixinPlugin.java",
+        "sha256": "efc42bc8beafbdd0870811e71adf91e55acc104e571eeee184b25e3cbe633189"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/compat/cio/CioPhaseSourceAccess.java",
+        "sha256": "06be156c5dd7800b0b4257f892e72dcc3bb94d0709ff3ca415d1d06718d717dc"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/compat/sable/SableTerminalPicking.java",
+        "sha256": "e81aefb5cebe810f38e1f36001849beb0262620e8e4d0279c6bcae86611acbe1"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/equipment/HandheldMeters.java",
+        "sha256": "37e02a5c853aee37364a18b44f83f2a487e4d4432adf544c77032499c95a852d"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/experimental/BoundedTaskWindow.java",
+        "sha256": "ea0485df8f24af1fbe1836476837a82f4dd8defd5bbbcaf293c99dff4adca3e7"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/experimental/CeeStateGeometry.java",
+        "sha256": "15889bebc38426aae03fb6a587eb673382e259b25c1bf5485d8fe68f81733045"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/experimental/ChunkTaskPump.java",
+        "sha256": "60626903f5690ab4a19540ce2f371087605fb688406f7f50dac6d12a2e4eb7cc"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/experimental/PlainWireBatch.java",
+        "sha256": "102d669f4dda27d1abf60512805a2d2cec1cca118de95a0f5724c9e602ba2ce2"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/experimental/RestorationComponents.java",
+        "sha256": "0c8e27229769a38593762da3f05470f037108c10babf019276441a66ddeed7af"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/experimental/RestorationQueue.java",
+        "sha256": "afd0a84328267fe2a996b4a11541a5382521289c20113acef3ee2e8cf81489d4"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/experimental/RestorationRoots.java",
+        "sha256": "d7361b4098668c389d2b6d84f4e9d93b1140060c5b73e3a8f608bc9d9e801fbb"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/experimental/ScopedRestoration.java",
+        "sha256": "7e954a87d2bbba9ea02aff37e44799230b95b4d2895426a9ef04d57289dc0878"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/experimental/WireTreeBatch.java",
+        "sha256": "44f00739eb0c42816dd7778c7f1c6dfb79a9ba95a0c065cba9d8b332c41680f1"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiCeeWireIdentities.java",
+        "sha256": "1e880f6bfa95d47377ee93419515e7ac83c88cfa1da3ff5457fc400a2fd67068"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiCircuits.java",
+        "sha256": "f2225bb75cd8e99d7c4773bf4081bba2b858a5ce9152434e8c5652729e639dc5"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiDeviceDiscovery.java",
+        "sha256": "3a3b8b050de14f399f4098fba05e20a08a204667737e70f74e2723772168b377"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiDiagnostics.java",
+        "sha256": "bf73ac114c1d594a82cd0cae2e408211908009968045d1b8249c404adda4b51b"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiElectric.java",
+        "sha256": "9ce8bf8c35c4422578f2750564440795a8c0c2e778ae13fe2471345a6e902060"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiElement.java",
+        "sha256": "0467d23856f467a585ffef6d11ea7a8f6cf50958ecf0a96a4a9bb099cece6327"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiGround.java",
+        "sha256": "5e3404e9f824c6458b9ded2e2e2a779495b549c5dbb6325a93e11c51855774ad"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiInternalEndpoint.java",
+        "sha256": "ddfe524f683909abda872e874530eefd394dbef0a4eb5304ec4bd068d2cf6275"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiMeasurements.java",
+        "sha256": "903881ec8902e3c6acac46ad284b16efca0f0ac0ef56161e6648d33b9375b06e"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiTerminalIdentities.java",
+        "sha256": "a9f0ea6adc06d115b48bb5e7454d79c19f04e4902d6e39d392f32426e96ab766"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ApiTerminals.java",
+        "sha256": "502306680ea6665f96b39f16ab8ac91715c4c8f65e3e4f922cf007253f5adf10"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/CeeAdapters.java",
+        "sha256": "70e230a56e1397edad757dafdfbb6884e95e24cd8bc697c9c24967179402164f"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/NativeApiReadings.java",
+        "sha256": "f77d3eb1631192bbea7493cc236135902036f4efe58b14085c33ab6dc7b0953a"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/extension/ReferenceGroups.java",
+        "sha256": "cd9d96792dd8bd3ed33898639c5fbf68232dfb6204a4a117130e692f38205535"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/ApiDeviceRemovalMixin.java",
+        "sha256": "263cb5683be10ee7462342c0c6dd49731052b983fc35ad352cac3fae400941a9"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/BoardCapacitorPersistenceMixin.java",
+        "sha256": "a1d08a68209fb717cf1c364a2b4580e88856e5096f800e3a2a0a54f792d1a8e8"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/BundledWireAssemblerMixin.java",
+        "sha256": "4ac8d327a15596cd9c955b0e90bf6b39402627e15ab0cb1de7150507a9f220b9"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/BundledWireItemMixin.java",
+        "sha256": "080c6f30f43b48e8b360d1453a01a555c1f0496fbf411029827b3385e040f7cf"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/BundledWireNodeMixin.java",
+        "sha256": "dec532b3f04f828214824527f901c117f75e549ab31e86403180a081680992ec"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/BundledWireRecoveryMixin.java",
+        "sha256": "e3de699258bc4a7241ac25e33bb56f37ae8d761fe55ba015fc317849d922563f"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CapacitorHistoryAccessor.java",
+        "sha256": "36f9940ba0abb7dcabe20141dc0f321f19db1fefeb3e46f3fe12f569023ceb85"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeBlockControlToolMixin.java",
+        "sha256": "2099267b95991d60938bcc47d4935483b1793d3ded9287e80a52d52bfe8582dc"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeBuzzerAudioMixin.java",
+        "sha256": "cae22616733d463bf2c2e2d6fa1ff08f9c9bed99bc2b3d4dd6c392356b92d441"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeCutHandleAccessor.java",
+        "sha256": "3d9ae14dfefc437ae3d34b2b86783cdc837fad393a0f134ce5ae6eff31731476"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeDeviceRemovalMixin.java",
+        "sha256": "3c3ca7930eb042fb27e8f1f8ac089fff9950e9cb05fb3b64d7edcfbaef9570da"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeFuseHolderPersistenceMixin.java",
+        "sha256": "d2cd4d02fc9b2c46572db89a173803c3557c5432f419958db176cbcf8a114127"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeFuseSwitchToolMixin.java",
+        "sha256": "15c17dcd17d52be7c9ca13790ecabaa7b1a5232c61e98865b259bb405bc7f4fc"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeMovingWireCutMixin.java",
+        "sha256": "aaec972b080d071313d592b613a90f55b729972c89cf51e2bbe54ea301c23fcc"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeePanelControlToolMixin.java",
+        "sha256": "67fd4c4687065fe1bdeaecb846c4298cf356df10a66f21a6ebe67914445f76ea"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeePanelCoverMixin.java",
+        "sha256": "6a17923e9b08a45d33f67aef8228b74ea39623f4f0fc9a8d1f6d0d70aa1f6fa9"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeePhaseHistoryAccessor.java",
+        "sha256": "b8ca389877feafed97c796f353555ccb8b2c2ef6b6b7a5518e703a4d4b9f7537"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeReadingAvailabilityMixin.java",
+        "sha256": "b22ce8a816e88b02ea03703441a993886b731a4fe187c44ce8dad48ad3866379"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeRotorHistoryAccessor.java",
+        "sha256": "24b3be6e64c2be3dc875424e27fbd1868f727b6553ff0fe6b27f05c22e345985"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeSolverAuditMixin.java",
+        "sha256": "3a9874007ab08a9567bfaa9bf79fb56371177ed05f1e3df9084ce83dbef4314f"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeTrainCircuitMixin.java",
+        "sha256": "2ebf4d65ae9961da99ba1d2c20f420423f448248565ece5994a4f9d0dcbb552a"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeWireIdentityMixin.java",
+        "sha256": "66bd17e2f2573585ae4b34ea932e09f19af74bdef2e2a9657ff9b269fc854a58"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CeeWirePickingMixin.java",
+        "sha256": "0cc1a7a559be8f0d074277f459bd606dd36b51bdfec435868e7bb72c35d8a9ea"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/ChunkTaskWindowMixin.java",
+        "sha256": "7942df78cd1dfe6e5b5bc81f320e4944de66742b8cde488a3d2f37b5ec8b6cd2"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CioCouplerMixin.java",
+        "sha256": "e9d845423c695dcbc25627d64b0a2d22ea5179765e9e25b77db727e1d89750da"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CioPhaseSourceMixin.java",
+        "sha256": "b7fea34e1e05f3cfc5f71c8511c0a59f2a7bb8af8dcbd551ec5305e8b3aba5a5"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CircuitBuilderAccessor.java",
+        "sha256": "05d629923740b2c4b544a51dffbc44e9ba89e959315ceba0f5f4c53e9489200c"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CircuitBuilderValidationMixin.java",
+        "sha256": "ddea50dab5a82617f71ca1f32e866b3d7c39eb1606d92c400652c9a2f1df1dfe"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/ClampMeterClientMixin.java",
+        "sha256": "51a4e3fd53f0b29299a6306f89642f3b0600d01cd998d1a53e090c5c1558ff41"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/ClampMeterMixin.java",
+        "sha256": "acfed9b7495de05066579a830aed0d4a9516e7092cdb378c9473a2cef78156ea"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/ClampWireMixin.java",
+        "sha256": "02865262567cc41829f9c8ffb5eb32589b1009172337c10903fb49fa41bdf961"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/ConcretePoleHeightMixin.java",
+        "sha256": "51cc755757ba5338fee3777ea2c308169bc2eac51d0bda6bcee27c8b8d89aa4d"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/CoupledNodeConductanceMixin.java",
+        "sha256": "090090eeb542eb3b30c2e043acbee583713458f0652161e2ecbd45815c55d03c"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/DesignTableRegistriesMixin.java",
+        "sha256": "677afc98a99a5eb2055d40dfdd12ec9acd0c1886c8cfbe16fc5afeceeaa378b3"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/ElectricalNetworkAccessor.java",
+        "sha256": "aecc98553ae74be82932400f9576b81e7d09ec69d965db8f3113b82cbf3a4103"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/FrequencyMeterTimingMixin.java",
+        "sha256": "794e353ca8ae144767bb1f8726eb737fbda2c5b9d7df8932adc339bae7065363"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/GlobalNetworksScheduleMixin.java",
+        "sha256": "62e435ecbf3c5c462535f1471e446dd30bdaaca3b2fd8e02e29694ba763ecfb7"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/HangingWireSpoolMixin.java",
+        "sha256": "8160842c6fd6941b81840264829ba028ce517abd2a374df24838e78190ea6c6e"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/InWorldNodeMixin.java",
+        "sha256": "32360addfe5f53fe9aefd684ea824fa16a3c7b6d2dcc27236c961b9dd7a6f336"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/MeterDisplayTimingMixin.java",
+        "sha256": "2bea3b09e61ad78b0b4a1c7a256f8b07d73030bba3ff5ca7af408e0fad1e6827"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/MotorSamplingMixin.java",
+        "sha256": "ba149b7a8c310596f41fcdb78a8f7dcd7e789089a62304c24023fb388e4dcd81"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/MultimeterMixin.java",
+        "sha256": "0cab4699cc7e5bf1d6487d8ab3e48180c1338ae8757c0ee3683973d15391ba29"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/MultimeterWireClientMixin.java",
+        "sha256": "61853056646fde806a4dae38366592eadd3b093480f069deec771af3ba39aa07"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/MultimeterWireMixin.java",
+        "sha256": "1ad8496a24355350002bccf3464ee5a5be177631fa7251b5426e71b699038c81"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/NativeClampAvailabilityMixin.java",
+        "sha256": "6a5ef029481f239335ae9d7533da279ce5b3990f0c8886dab1bf2a6ac5eff3e7"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/NativeResourceMixin.java",
+        "sha256": "74afb497105a381409b4ef61fa3abb6bd5db22c89bebfb4cf9ffd967623496fe"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/NetherTransformerAccessor.java",
+        "sha256": "55b0e98bee13cb4b33d7776b4d461397b1f5d242aca6bbe1beb707b0936f4c39"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/NetherTransformerEntryAccessor.java",
+        "sha256": "b73fbd08182879906863c7620c6ac9e6d397efc964d834d237ac88d87760d77b"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/NetherTransformerHistoryMixin.java",
+        "sha256": "69c040f4238b1e2ab03943f2e804bae29c1960319a3af6f31f58d75a859cbec3"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/NetherTransformerUnloadMixin.java",
+        "sha256": "dc3b96ab1d9fee29c7c63c2b360dce22a090525739c31d60d105a8213d72308e"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PanelMeterAccessor.java",
+        "sha256": "e62d4d1437e3f156ac260aecc20e0bbfb26c074d0b9237b5af2dba2c5e52b99b"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgAssemblyMixin.java",
+        "sha256": "c998bc30e5d2bf04262e914c51ec07ec175a19c6b5138b47f4b2d9eaec113253"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgBehaviourMixin.java",
+        "sha256": "e8e9d0fa81e4321d3043483ff2e8bb976dfd36f170be194e802ef31d7c4caf65"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgCalculationAccessor.java",
+        "sha256": "0ba01802ab9f3b1d792cabe60b14c921c2c9e88b78e7d594780eafbc93a8a24e"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgCalculationManyAccessor.java",
+        "sha256": "464309aa32329569cfb30419e52c339c3e9abf869da29e7467406a9bafd57beb"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgCalculationOneAccessor.java",
+        "sha256": "c4027f2b27c259dec751505e7619b63f2bb3c3a478a8c36b2d6270e00b5d5413"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgElectricMixin.java",
+        "sha256": "e8bca689326bddd2607d05feb4af77afb3c9adb3a658a5b7637155e1933e6ea8"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgGeneratorCouplingMixin.java",
+        "sha256": "85bea73491d90d79cbae50e0d51c84d4fbc02f6fbe114e86874ff5be88a2cef1"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgGeneratorMatrixMixin.java",
+        "sha256": "2cad8920f7975c2ea161166b8f3d453c85f6c32221469ea321fecf71552968ad"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgJavaMnaMixin.java",
+        "sha256": "81eeb02d22ee721dca30980a44f401199d2c080955bb994ca433a0b7bf9464f2"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgMatrixAccessor.java",
+        "sha256": "fedbcb3ca50327258690b01b31d20671847a14dc2faf2d8b4dbfe043f95a7727"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgNativeAssemblyMixin.java",
+        "sha256": "abab7cd2811030aa838977f75b44ab7a3cecd43344fcf36581ce4ca1c3b8a7fb"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgNativeFailureMixin.java",
+        "sha256": "b8e065f49bcf4cfdf21097dab05db0173e60a7e26aa762c270705c1cb8ac9344"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgNetworkMembershipMixin.java",
+        "sha256": "950a5985cd28a058b1760e7cbc9bd6913a3c668a8a5062925bad968c414978a8"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgPentodeBiasAccessor.java",
+        "sha256": "c5ecabd580d1e3b5fb30c6a1e2ca571ead620185eee404d6a1deee425aa66320"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgPentodeInitializationMixin.java",
+        "sha256": "91eedb2a87cff2309b8811f61877ffdb2716ebc1408e41834cb66ed33e989e4b"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgPlainWireBatchAccessMixin.java",
+        "sha256": "17dde46b5014d93f1b45a0e9dd324446f74c7200531da6c02cc21437d3308973"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgPlainWireBatchMixin.java",
+        "sha256": "7918bd6ba7667896fefdc0a13b8a3e9e0cd5651aaf4b6e67180398d3a5e01fd0"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgPlainWirePowerMixin.java",
+        "sha256": "5a72685fb82ea7acc74412a791ae1fdf8732907f41c5b1881b77fed005f258e8"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgProbeHighlightMixin.java",
+        "sha256": "f8d9ee14d13913efc4ecfc0b26a2c471aa255dc30fcab72f90c2efe0b120909a"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgResidualAssemblyMixin.java",
+        "sha256": "ac25185c80906d6445efb1a1206c5ede240c30fd19480078db2005275df413f3"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgRestorationDerivedCurrentMixin.java",
+        "sha256": "becb5d74a1fd9b7c4164530f575f17c8701192d10bf421b0df194d02fef8b427"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgRestorationValueMixin.java",
+        "sha256": "037eb96dd4673f1f2de195c82076a68bad4ddd59200351349a56c9afa72789c2"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgRestorationWireMixin.java",
+        "sha256": "4017a2a1209145213926f452c4a8cb2e871370db5e4dcac1c4beb189a7e6dcc6"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgRotorAccess.java",
+        "sha256": "d6b10264e420ad0c4b972f56ec1ee99f434685f1376c4457a03535625d67b2b0"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgRotorFieldAccessor.java",
+        "sha256": "9ffe383014edc620996ce77b460fcd5b7713db46c9ef6d33bc943b30c162bb94"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgRotorTimingMixin.java",
+        "sha256": "0ec2536b84b5492c489b67324fd677533ac7fc443ec1156040f008bfd29dcbd3"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgSolverFailureMixin.java",
+        "sha256": "7cc2245f5bd4749f8f64055b3a5d4b602cae1b1ed6f00818a7f221943ac22a61"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgSolverWarmupAccessor.java",
+        "sha256": "cc933c70b87c62ccb0d27578604053acee7eb746181f1ff6804ccff43ee27e74"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgSparseMatrixMixin.java",
+        "sha256": "4a7fdc05cac87a4ef8d2b1c95fedb77f05168622bdf540d8d692cc4833273651"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgWindingFieldInvoker.java",
+        "sha256": "336a584ab596c4a5b73ae47b2a31631cb07dfd8ef8f56cec71669c46b1b201c2"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgWireItemReadinessMixin.java",
+        "sha256": "bd7cf4915888c67e6b08385254fd8e08737ec2d6b1d359c761e15f13fbeffa6f"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgWireRemovalMixin.java",
+        "sha256": "ca30766f1a174ff166aa6a218098b54131d1b6824ac975fc2c4ef02aeaae6cca"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgWireRestoreScopeMixin.java",
+        "sha256": "f1ee0d389c5b14328e3ebed50cf0b2849f77f2488cefd0822b3e225115036ca1"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgWireTraceMixin.java",
+        "sha256": "7b44c411e4ac23d57bd9096c506a5d77319af19ee05c1fd44ed9deb03552f67f"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgWireTreeBatchAccess.java",
+        "sha256": "5eb827efb22b3bc1cf5e3119ad6f02eb9e1cfc36441c33823c60d49ac646c8c0"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgWireTreeBatchMixin.java",
+        "sha256": "4f8fce5f34c1d09b064820139996fe353a0daa9c126e2fe9fd2588cd9c564963"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PnJunctionParametersAccessor.java",
+        "sha256": "ced8caeea2ce8021c62e847909a24233a9b3eb66deb23e56ef51656d9e2d4d09"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/PropertyConductanceMixin.java",
+        "sha256": "51978f0c4eec4b8eae3f00f5aea879e921e58c294f926bd2fb5c5eb9b088aa2a"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/RegistrateCallbacksMixin.java",
+        "sha256": "0d2b4a157e72f68770fa3981e37f2b87eee1fad9047fd0e756cd2ad0bfd46275"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/RestorationConstantMotorMixin.java",
+        "sha256": "117c94857c737de2ffdeab1d604cfb2b807b7470a7956c8000cc292cba647f47"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/RestorationMotorMixin.java",
+        "sha256": "93f7db934b95b0da532495959799a937d10ecdf7a255d6b8ba0697fe0be5a819"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/RestorationStorageMixin.java",
+        "sha256": "66459b1dfad579ae1e388670edc2fdfa0755cf92f1d711f719774a27c680dcee"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/SimulationTickerMixin.java",
+        "sha256": "8ac80ead2eef874d7c85c1549b16ff761cc1673edc80f860122fddf69ade18b8"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/SolverConfigThreadMixin.java",
+        "sha256": "895a6ade0da791f09d6344c58ba6556c94e3c7ed8cd6f5e820ab65ce34df1da3"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/SyncPositionMixin.java",
+        "sha256": "0708dc12084b9776b22b7def56572a315e79c0e87ef73d3ea53686cdafbc3c32"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/TriPolarMeterResultsMixin.java",
+        "sha256": "9deb45f5035b3a3b7a2b0574cecc557b0d5e2b7f09d5893c9ae1c9bce1ea7619"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/VariacResultsMixin.java",
+        "sha256": "6c670a5078b1c27003a8431cf14c755931c3c0ba8559cc8e3dd612ff9002c3ff"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/WireElectrocutionAvailabilityMixin.java",
+        "sha256": "be08831fe6697a5701259641a161b4c7c28e42ff89a2c1e62b0367a86a6d1c52"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/WireLifetimeAvailabilityMixin.java",
+        "sha256": "13f6a933b57bac567d83666cd4081a21e4a76bea09ec16e25bc8b5c229ca268f"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/WireSpoolMixin.java",
+        "sha256": "6ebe356685ca5e2a34c6532999f5ab0fe180507ce80109c484fe7e5f4c895a8c"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/WorldNetworksAccessor.java",
+        "sha256": "9a3d524f3179e9181048889b1ccff3f652461641e20d5cec1c0e5deca9226322"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/mixin/WorldNetworksMixin.java",
+        "sha256": "1bcfc0143f41fccbb83ae948d2175b05c369077589ddea9f0d6cba85236d0ee7"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/wiring/CeeElectric.java",
+        "sha256": "4f4bdda9ac92e3fa386225432a0542d6b0a9e50b1f476fa9498cccf5fb07c784"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/wiring/CeeTerminalPicking.java",
+        "sha256": "3687db91b4210ba33428b4ef6e10cd3aa30ec1e7626845e90ab853d7da873e72"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/wiring/LineVoltages.java",
+        "sha256": "7d5f546d2616b6190671ea4164083d203e8e704b7e010ff9aaa03a5b64f30375"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/wiring/RemovedWires.java",
+        "sha256": "1dad263085b00197a663010a6a6e61a5d21812904193103c838230a899da8053"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/wiring/Terminals.java",
+        "sha256": "6bd5d6d67113bcc75fee55edf6cfd8423ce19b3133f7a205b2377c3e5e97fb31"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/wiring/WireTreeTraversal.java",
+        "sha256": "cb38aae7f96d4c0bf1099758ffcd15e9f8969519d1e1bb9bec7351eb8ebc9a22"
+      },
+      {
+        "path": "src/main/java/org/cha0scollective/wwpg/WorldWidePowerGrid.java",
+        "sha256": "d2064946daf70a7f8a24522d063c21180ee1c4c1af48af4222c99fa5c9bba229"
+      },
+      {
+        "path": "src/main/resources/assets/electroenergetics/models/block/duplex_wire_segment.json",
+        "sha256": "c0a4058f8b592569e7396fabcdc3f159fa453cdd6b4145aff8c4611968ac34c2"
+      },
+      {
+        "path": "src/main/resources/assets/wwpg/lang/en_us.json",
+        "sha256": "786c380571d9de7718329dacf5cd45aacae91000ddba00a0cb33f5088e4f9ac5"
+      },
+      {
+        "path": "src/main/resources/data/wwpg_pinout/programs/acceptance.lua",
+        "sha256": "f110850ec75e6e623d879b7934c8437aee1854b6283902a8f647633b6ed7e82b"
+      },
+      {
+        "path": "src/main/resources/data/wwpg_pinout/programs/lifecycle.lua",
+        "sha256": "159e7074fa3c4929d745df383d2710e64a67d3a28bbb075b63cb815e0416fde1"
+      },
+      {
+        "path": "src/main/resources/data/wwpg_pinout/programs/yard/startup.lua",
+        "sha256": "020217ef2a81a0824b0dece6015f913f04161a1d847e1364537751ecec40534d"
+      },
+      {
+        "path": "src/main/resources/data/wwpg_pinout/programs/yard/wwpg.lua",
+        "sha256": "3a0206e10cc6ce5c2dec4d5815d0550ae42ba7787d8ec448af4903533d4e8d79"
+      },
+      {
+        "path": "src/main/resources/META-INF/neoforge.mods.toml",
+        "sha256": "7705097d477be25a98f3be62679406f3bf8e3a820f15a9c80ec2fe6b5ec074c8"
+      },
+      {
+        "path": "src/main/resources/META-INF/POWER-GRID-LICENSE.txt",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      {
+        "path": "src/main/resources/META-INF/services/org.cha0scollective.wwpg.api.neoforge.DeviceDiscoveryService",
+        "sha256": "f319b230375117262ece2b0456b456abf510817512ea139ecb1788cb8cf60537"
+      },
+      {
+        "path": "src/main/resources/META-INF/services/org.cha0scollective.wwpg.api.neoforge.MeasurementService",
+        "sha256": "1272128f4c8b2c1fdbf7890323753180b12010dd3e517ed02760484b14ab772c"
+      },
+      {
+        "path": "src/main/resources/META-INF/WWPG-NATIVE-NOTICE.txt",
+        "sha256": "419c7fdd49c7016b9b11e9f4e606a4d7690187d6aecc27a7e2097cb8f93e559c"
+      },
+      {
+        "path": "src/main/resources/wwpg.cio.mixins.json",
+        "sha256": "b608cdaf3c402635a3ee5bdfa83fd3eb01fb4d582eade6bf7ed6785091c7eb5d"
+      },
+      {
+        "path": "src/main/resources/wwpg.mixins.json",
+        "sha256": "828e944801374d290d72dd4d06898d03054029964b45bf54ec8075f9c3bc8793"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/api/ApiVersionTest.java",
+        "sha256": "0a9bcebadf5ab41cedbc394d019c27d8cbf22c1ce866d11fd77cf72db7cc86dd"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/api/cee/CeeAdapterRegistryTest.java",
+        "sha256": "f9e4cf5ae61e3011a1a3c7ab36295028457a95c51e2845c24937ab82ca164372"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/api/CircuitDescriptionTest.java",
+        "sha256": "ddecc6e537e37ca9d86997e2db19c58bb294986181bfac4f8dbf4d8276c3bdfc"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/api/DeviceResultsTest.java",
+        "sha256": "5aaaca4b81b0898252cdc8a33fc9e7da3eb829d82024c822834442ad568d9c08"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/api/VoltageMeasurementTest.java",
+        "sha256": "ec66fcf7ac1c79715f68e994bb6bd040ba9b2149f15dabeaba7b46f947bab544"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/BridgeSimulationResultsTest.java",
+        "sha256": "b2dcb35001f4f99c91b8c9e5fbdef050fc27522dc69d678e43d7e4a51364ceca"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/CatenaryReconnectionTest.java",
+        "sha256": "059b0ff37c9d04b2b8227c255d7aebf39a5ec43dda16af91fd8b2c5714174c32"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/DiagnosticHistoryTest.java",
+        "sha256": "ddbfe4f71f4813d79eef369fd324275c1518dd5bf75751f69d0263f9089d3088"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/ExcitationSearchTest.java",
+        "sha256": "73d00f0949323479d2f33b064fba57c50fb4587135ec87180bff9a72d7951cd0"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/IndexedIslandDiscoveryTest.java",
+        "sha256": "c6b0907dc297e5b7b5db75a9dddcc926e9d455003e468bd9118e054cde81a84b"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/InitializationWindowTest.java",
+        "sha256": "15c18728e3c6abdb10e7d35846d9e44776762fe2b3aeb03ab0567f1a9ed3b743"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/LinearBranchTest.java",
+        "sha256": "f16a21a7f1f882b38fdba6217101e3611af78ed5fe01aa0b74fd434fe4bf3ad5"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/MatrixBuildScopeTest.java",
+        "sha256": "608a9fd07a441fc1a2f80117306ed7372231fb219615b933204fbd53ee5ecbc6"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/NativeBootstrapTest.java",
+        "sha256": "36682104e6e05cceea021d4732018b3812c2406f5844ec08da4879f821477c55"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/NativeCeeCheckpointTest.java",
+        "sha256": "e0a0842b1dd6172e6735ff83c7179e8b5745e40fa6d4e964a34bd845bc70c643"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/OwnedWireRemovalTest.java",
+        "sha256": "f76abf423c30354db8edd2e1a6768e3bfbb28eeba9cb1ed0c2676898e1bd7aad"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/PropertyCurrentSourcePowerTest.java",
+        "sha256": "5b055f9a5129736e46769c3d8481b00a4bacd753923053686aa977aa637692b4"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/RestorationWindowTest.java",
+        "sha256": "1e69dce066549f7b3ed97912da01e31ca85be498e7f3e85dc6348e9a4bfef683"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/RotorStepTest.java",
+        "sha256": "17f99009515de1b8b7bf7a2abf3d00af27f0577da6d8b6773fd4024d0d61e9a1"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/SparseAssemblyTest.java",
+        "sha256": "a18b97935b4af3d75f125e70abf721bc6f3d589ae6e5e35219716f75cc8e1d26"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/SparseMatrixSupportTest.java",
+        "sha256": "d6b713a3988c6eb029ac62646ae7ef13a8cfd2ceede507e02e02c0de8d19b05b"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/SubstepAcceptanceTest.java",
+        "sha256": "ae3ef2a3712f94f6dd7bb8d5f01be0e92a2f3a2ea9dd1b5de3ef63e909936e03"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/TrainDimensionsTest.java",
+        "sha256": "6c5e5fbfd28a42522fd9d3c72199483dee31f8a3b329378f14ca02506752a5a0"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/bridge/TransformerStampTest.java",
+        "sha256": "1f00d123ae632c59e1d92384ef3a178fc989afea1d85ca1af9526be63f2cfb8a"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/experimental/BoundedTaskWindowTest.java",
+        "sha256": "98ac40aa163bf1bd47651b4f52b6a1be3d46d7f1e560560069127162361a7853"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/extension/ApiCeeWireIdentitiesTest.java",
+        "sha256": "f8ad887b8ad08a28cfff5658288f0e63c32f593b95f4baed39be5564f8b1c3a6"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/extension/ApiDiagnosticsTest.java",
+        "sha256": "c3286e350b8ef302fbe7b011edc4c9316f8419f216037b44023f82dec48bbc2c"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/extension/ApiElectricalTest.java",
+        "sha256": "3b71e8f04ec72cb2a0c536f8ddadcb7fa532b502cb51c2df9058bace936b61ce"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/extension/ApiGroundTest.java",
+        "sha256": "7cec17141387673c0863fe43afae3508ecba817d4da0820f7aaa8ccbec146c83"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/extension/ApiTerminalIdentitiesTest.java",
+        "sha256": "ce201713e95d36a4f1012d6d8a0c871ce32ab096f6b023586c48b68d39dc667a"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/extension/NativeApiReadingsTest.java",
+        "sha256": "d8ea6618feef5f00f0acb71a81eacc6cf899d9a4ee5bc4ee8cf4c9125d50609a"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/extension/ReferenceGroupsTest.java",
+        "sha256": "7e92268e8a7e2775464fe21285fcc8e3d32217d86858e3d197438fb8b1216c69"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/wiring/LineVoltagesTest.java",
+        "sha256": "69105944a49ee9539849eea4cd114f06b251795e083927180f8837a7809f9d0e"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/wiring/RestorationComponentsTest.java",
+        "sha256": "7586ad99e7c218338419fdedf347721ab9651b208ed0b55ff1108e8debd6dc05"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/wiring/RestorationQueueTest.java",
+        "sha256": "87e46c73b990c94124d2293a8bcc547b72ca8dd4231b05ddc2e598c133a02966"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/wiring/RestorationRootsTest.java",
+        "sha256": "03df51f67941a9e16f181956d9cb82a22201cdcf7ea365015d907ff47eda5d7d"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/wiring/TerminalPickingRayTest.java",
+        "sha256": "86e4c1fc21b3e1609a899ec8a12ea7c7ec72c211c40c89aa114f16c48c031103"
+      },
+      {
+        "path": "src/test/java/org/cha0scollective/wwpg/wiring/WireTreeTraversalTest.java",
+        "sha256": "ec190525408bccfbc44ccea355f3713d032319fe2ebf443d66ad914e6f33959e"
+      },
+      {
+        "path": "build.gradle",
+        "sha256": "3e6475198849bba20ae40d0c5c0460f7e0c230d3b908fa860df0a063fb4170e4"
+      },
+      {
+        "path": "gradle.properties",
+        "sha256": "1b36b55324be65a1ea9fa93459ff4192aa79bc3d64952341fb9e232dd7a34a56"
+      }
+    ],
+    "native_unchanged": true,
+    "changed_jar_entries": [
+      "META-INF/neoforge.mods.toml",
+      "org/cha0scollective/wwpg/WorldWidePowerGrid.class",
+      "org/cha0scollective/wwpg/bridge/RestorationCoordinator$Chunk.class",
+      "org/cha0scollective/wwpg/bridge/RestorationCoordinator$Dependency.class",
+      "org/cha0scollective/wwpg/bridge/RestorationCoordinator$State.class",
+      "org/cha0scollective/wwpg/bridge/RestorationCoordinator.class",
+      "org/cha0scollective/wwpg/bridge/ServerElectricalSchedule.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$Adapted.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$Anchor.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$Branch.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$CatenaryHandover.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$Desired.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$DirectedBranch.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$Dynamic.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$ResultNode.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$SolveFailure.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$StableDescription.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$TopologyState.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$Winding.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge$WindingKey.class",
+      "org/cha0scollective/wwpg/bridge/WorldBridge.class",
+      "org/cha0scollective/wwpg/experimental/BoundedTaskWindow$Slice.class",
+      "org/cha0scollective/wwpg/experimental/BoundedTaskWindow.class",
+      "org/cha0scollective/wwpg/experimental/CeeStateGeometry$1.class",
+      "org/cha0scollective/wwpg/experimental/CeeStateGeometry$Snapshot.class",
+      "org/cha0scollective/wwpg/experimental/CeeStateGeometry$State.class",
+      "org/cha0scollective/wwpg/experimental/CeeStateGeometry.class",
+      "org/cha0scollective/wwpg/experimental/ChunkTaskPump.class",
+      "org/cha0scollective/wwpg/experimental/RestorationComponents$Node.class",
+      "org/cha0scollective/wwpg/experimental/RestorationComponents.class",
+      "org/cha0scollective/wwpg/experimental/RestorationQueue$Entry.class",
+      "org/cha0scollective/wwpg/experimental/RestorationQueue$Slice.class",
+      "org/cha0scollective/wwpg/experimental/RestorationQueue.class",
+      "org/cha0scollective/wwpg/experimental/RestorationRoots$Counts.class",
+      "org/cha0scollective/wwpg/experimental/RestorationRoots.class",
+      "org/cha0scollective/wwpg/experimental/ScopedRestoration$Scope.class",
+      "org/cha0scollective/wwpg/experimental/ScopedRestoration$WorldData.class",
+      "org/cha0scollective/wwpg/experimental/ScopedRestoration.class",
+      "org/cha0scollective/wwpg/experimental/WireTreeBatch$Access.class",
+      "org/cha0scollective/wwpg/experimental/WireTreeBatch$Attachment.class",
+      "org/cha0scollective/wwpg/experimental/WireTreeBatch$State.class",
+      "org/cha0scollective/wwpg/experimental/WireTreeBatch.class",
+      "org/cha0scollective/wwpg/extension/ApiCircuits$Device.class",
+      "org/cha0scollective/wwpg/extension/ApiCircuits$NetworkWork.class",
+      "org/cha0scollective/wwpg/extension/ApiCircuits$NodeSamples.class",
+      "org/cha0scollective/wwpg/extension/ApiCircuits.class",
+      "org/cha0scollective/wwpg/extension/ApiInternalEndpoint.class",
+      "org/cha0scollective/wwpg/extension/NativeApiReadings$1.class",
+      "org/cha0scollective/wwpg/extension/NativeApiReadings$Frame.class",
+      "org/cha0scollective/wwpg/extension/NativeApiReadings$Key.class",
+      "org/cha0scollective/wwpg/extension/NativeApiReadings$LineFrame.class",
+      "org/cha0scollective/wwpg/extension/NativeApiReadings$NetworkSamples.class",
+      "org/cha0scollective/wwpg/extension/NativeApiReadings$Owner.class",
+      "org/cha0scollective/wwpg/extension/NativeApiReadings.class",
+      "org/cha0scollective/wwpg/mixin/ChunkTaskWindowMixin.class",
+      "org/cha0scollective/wwpg/mixin/PgWireRestoreScopeMixin.class",
+      "org/cha0scollective/wwpg/mixin/PgWireTreeBatchAccess.class",
+      "org/cha0scollective/wwpg/mixin/PgWireTreeBatchMixin.class",
+      "org/cha0scollective/wwpg/mixin/WorldNetworksAccessor.class",
+      "org/cha0scollective/wwpg/mixin/WorldNetworksMixin.class",
+      "org/cha0scollective/wwpg/wiring/CeeElectric$EndpointBehaviour.class",
+      "org/cha0scollective/wwpg/wiring/CeeElectric$Holder.class",
+      "org/cha0scollective/wwpg/wiring/CeeElectric$Placement.class",
+      "org/cha0scollective/wwpg/wiring/CeeElectric.class",
+      "wwpg.mixins.json"
+    ]
+  },
+  "source_hashes_verified": 450,
+  "changed_runtime_sources": [
+    "src/main/java/org/cha0scollective/wwpg/extension/NativeApiReadings.java",
+    "gradle.properties"
+  ],
+  "focused_executions": 105,
+  "unit_tests": 3,
+  "evidence_guard_tests": 4,
+  "checks": [
+    {
+      "name": "indexed-waveform-native-01",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_loading,wwpg_api_ownership,wwpg_unload,wwpg_solver_safety",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\wwpg-0.2.7-experimental.wiretree.12.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\wwpg-0.2.7-experimental.wiretree.12-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\indexed-waveform-native-01\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_loading,wwpg_api_ownership,wwpg_unload,wwpg_solver_safety",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=32",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true",
+          "-PtestScopedRestoration=true",
+          "-PtestIndexedWaveform=true",
+          "-PtestTerminalBookkeeping=false",
+          "-PtestTerminalKeyLookup=false",
+          "-PtestApiAddon=true",
+          "-PtestExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+          "-PtestUpstreamExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\wwpg-0.2.7-experimental.wiretree.12.jar",
+            "sha256": "363348d02d041efd50f9633471f6fe6d432bf29f6766e8cb9489ffa0578d60f0"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\wwpg-0.2.7-experimental.wiretree.12-gametests.jar",
+            "sha256": "665cc2bfccce58436edb022344f86dfcb61e24376431a6f5901e0f8af80b8973"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "scoped_restoration": true,
+        "indexed_waveform": true,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": false,
+        "addon_artifacts": {
+          "example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+            "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef"
+          },
+          "upstream_example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar",
+            "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11"
+          }
+        },
+        "addon_inputs": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\inputs.json",
+          "sha256": "a82ef707180cf85a31e626df9a076e5df4c3c6d13036547aae3dce2e9ed6ca2e"
+        },
+        "exit_code": 0,
+        "required_tests_passed": 32,
+        "artifacts_unchanged": true,
+        "passed": true,
+        "addons_unchanged": true,
+        "addon_classpath_verified": true,
+        "terminal_execution": null,
+        "terminal_keys": null,
+        "scope_execution": {
+          "snapshots": 0,
+          "membershipChecks": 0,
+          "savedParts": 0,
+          "nodeBindings": 0,
+          "seedEndpoints": 0,
+          "heldNetworks": 0,
+          "fallbackWorlds": 0,
+          "totalNanos": 0,
+          "maxNanos": 0,
+          "topologyPasses": 205,
+          "topologyNanos": 15490400,
+          "maxTopologyNanos": 1095900
+        },
+        "waveform_execution": {
+          "passes": 2044175,
+          "directVisits": 1415246,
+          "middleVisits": 1311
+        }
+      }
+    },
+    {
+      "name": "indexed-waveform-java-01",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_loading,wwpg_api_ownership,wwpg_unload,wwpg_solver_safety",
+        "backend": "JAVA",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\wwpg-0.2.7-experimental.wiretree.12.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\wwpg-0.2.7-experimental.wiretree.12-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\indexed-waveform-java-01\\server",
+          "-PtestBackend=JAVA",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_loading,wwpg_api_ownership,wwpg_unload,wwpg_solver_safety",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=32",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true",
+          "-PtestScopedRestoration=true",
+          "-PtestIndexedWaveform=true",
+          "-PtestTerminalBookkeeping=false",
+          "-PtestTerminalKeyLookup=false",
+          "-PtestApiAddon=true",
+          "-PtestExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+          "-PtestUpstreamExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\wwpg-0.2.7-experimental.wiretree.12.jar",
+            "sha256": "363348d02d041efd50f9633471f6fe6d432bf29f6766e8cb9489ffa0578d60f0"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\wwpg-0.2.7-experimental.wiretree.12-gametests.jar",
+            "sha256": "665cc2bfccce58436edb022344f86dfcb61e24376431a6f5901e0f8af80b8973"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "scoped_restoration": true,
+        "indexed_waveform": true,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": false,
+        "addon_artifacts": {
+          "example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+            "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef"
+          },
+          "upstream_example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar",
+            "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11"
+          }
+        },
+        "addon_inputs": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\inputs.json",
+          "sha256": "a82ef707180cf85a31e626df9a076e5df4c3c6d13036547aae3dce2e9ed6ca2e"
+        },
+        "exit_code": 0,
+        "required_tests_passed": 32,
+        "artifacts_unchanged": true,
+        "passed": true,
+        "addons_unchanged": true,
+        "addon_classpath_verified": true,
+        "terminal_execution": null,
+        "terminal_keys": null,
+        "scope_execution": {
+          "snapshots": 0,
+          "membershipChecks": 0,
+          "savedParts": 0,
+          "nodeBindings": 0,
+          "seedEndpoints": 0,
+          "heldNetworks": 0,
+          "fallbackWorlds": 0,
+          "totalNanos": 0,
+          "maxNanos": 0,
+          "topologyPasses": 197,
+          "topologyNanos": 10439300,
+          "maxTopologyNanos": 1294100
+        },
+        "waveform_execution": {
+          "passes": 2088639,
+          "directVisits": 1334382,
+          "middleVisits": 1311
+        }
+      }
+    },
+    {
+      "name": "indexed-waveform-off-01",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_loading,wwpg_api_ownership,wwpg_unload,wwpg_solver_safety",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\wwpg-0.2.7-experimental.wiretree.12.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\wwpg-0.2.7-experimental.wiretree.12-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\indexed-waveform-off-01\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_loading,wwpg_api_ownership,wwpg_unload,wwpg_solver_safety",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=32",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true",
+          "-PtestScopedRestoration=true",
+          "-PtestIndexedWaveform=false",
+          "-PtestTerminalBookkeeping=false",
+          "-PtestTerminalKeyLookup=false",
+          "-PtestApiAddon=true",
+          "-PtestExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+          "-PtestUpstreamExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\wwpg-0.2.7-experimental.wiretree.12.jar",
+            "sha256": "363348d02d041efd50f9633471f6fe6d432bf29f6766e8cb9489ffa0578d60f0"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\wwpg-0.2.7-experimental.wiretree.12-gametests.jar",
+            "sha256": "665cc2bfccce58436edb022344f86dfcb61e24376431a6f5901e0f8af80b8973"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "scoped_restoration": true,
+        "indexed_waveform": false,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": false,
+        "addon_artifacts": {
+          "example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+            "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef"
+          },
+          "upstream_example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar",
+            "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11"
+          }
+        },
+        "addon_inputs": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\inputs.json",
+          "sha256": "a82ef707180cf85a31e626df9a076e5df4c3c6d13036547aae3dce2e9ed6ca2e"
+        },
+        "exit_code": 0,
+        "required_tests_passed": 32,
+        "artifacts_unchanged": true,
+        "passed": true,
+        "addons_unchanged": true,
+        "addon_classpath_verified": true,
+        "terminal_execution": null,
+        "terminal_keys": null,
+        "scope_execution": {
+          "snapshots": 0,
+          "membershipChecks": 0,
+          "savedParts": 0,
+          "nodeBindings": 0,
+          "seedEndpoints": 0,
+          "heldNetworks": 0,
+          "fallbackWorlds": 0,
+          "totalNanos": 0,
+          "maxNanos": 0,
+          "topologyPasses": 206,
+          "topologyNanos": 17834800,
+          "maxTopologyNanos": 2272600
+        },
+        "waveform_execution": null
+      }
+    },
+    {
+      "name": "indexed-waveform-scope-01",
+      "result": {
+        "scope": "Focused only; no full or graphical acceptance",
+        "namespaces": "wwpg_tree_scope,wwpg_tree_budget",
+        "backend": "NATIVE",
+        "property_batch": true,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 1,
+        "tree_retain_coverage": false,
+        "command": [
+          "C:\\Users\\Parker\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+          "G:\\WWPG\\local\\x27w\\tools\\run_checked.py",
+          "--timeout",
+          "600",
+          "--",
+          "gradlew.bat",
+          "runPackagedGameTestServer",
+          "-x",
+          "build",
+          "-x",
+          "jar",
+          "-x",
+          "test",
+          "--offline",
+          "--no-daemon",
+          "-I",
+          "tools/experimental/plain-wire.gradle",
+          "-PexperimentalCee=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\electroenergetics-1.21.1-1.1.4.jar",
+          "-PtestArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\wwpg-0.2.7-experimental.wiretree.12.jar",
+          "-PtestFixtureArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\wwpg-0.2.7-experimental.wiretree.12-gametests.jar",
+          "-PtestDirectory=G:\\WWPG\\local\\x27w\\local\\checks\\indexed-waveform-scope-01\\server",
+          "-PtestBackend=NATIVE",
+          "-PtestProfile=BASE",
+          "-PtestNamespaces=wwpg_tree_scope,wwpg_tree_budget",
+          "-PtestPropertyWireBatch=true",
+          "-PtestWireTreeBatch=true",
+          "-PtestWireTreeBudgetMillis=20",
+          "-PtestWireTreeMaxParts=1",
+          "-PtestWireTreeRetainCoverage=false",
+          "-PtestWireTreePrioritizeUnresolved=true",
+          "-PtestChunkTaskBudgetMillis=2",
+          "-PtestCeeStateGeometry=true",
+          "-PtestScopedRestoration=true",
+          "-PtestIndexedWaveform=true",
+          "-PtestTerminalBookkeeping=false",
+          "-PtestTerminalKeyLookup=false",
+          "-PtestApiAddon=true",
+          "-PtestExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+          "-PtestUpstreamExampleArtifact=G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar"
+        ],
+        "artifacts": {
+          "runtime": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\wwpg-0.2.7-experimental.wiretree.12.jar",
+            "sha256": "363348d02d041efd50f9633471f6fe6d432bf29f6766e8cb9489ffa0578d60f0"
+          },
+          "fixtures": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\wwpg-0.2.7-experimental.wiretree.12-gametests.jar",
+            "sha256": "665cc2bfccce58436edb022344f86dfcb61e24376431a6f5901e0f8af80b8973"
+          },
+          "cee": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\electroenergetics-1.21.1-1.1.4.jar",
+            "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+          }
+        },
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "scoped_restoration": true,
+        "indexed_waveform": true,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": false,
+        "addon_artifacts": {
+          "example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-api-example-1.0.0.jar",
+            "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef"
+          },
+          "upstream_example": {
+            "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-upstream-api-example-1.0.0.jar",
+            "sha256": "5ef5ab7ed965923d89834dc9823da5e110307559e11380cb650ec28db1acca11"
+          }
+        },
+        "addon_inputs": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\inputs.json",
+          "sha256": "a82ef707180cf85a31e626df9a076e5df4c3c6d13036547aae3dce2e9ed6ca2e"
+        },
+        "exit_code": 0,
+        "required_tests_passed": 9,
+        "artifacts_unchanged": true,
+        "passed": true,
+        "addons_unchanged": true,
+        "addon_classpath_verified": true,
+        "terminal_execution": null,
+        "terminal_keys": null,
+        "scope_execution": {
+          "snapshots": 1287,
+          "membershipChecks": 90350,
+          "savedParts": 47829,
+          "nodeBindings": 292326,
+          "seedEndpoints": 68696,
+          "heldNetworks": 1241,
+          "fallbackWorlds": 1,
+          "totalNanos": 167613700,
+          "maxNanos": 10275600,
+          "topologyPasses": 126,
+          "topologyNanos": 11745200,
+          "maxTopologyNanos": 2567800
+        },
+        "waveform_execution": {
+          "passes": 1475733,
+          "directVisits": 794890,
+          "middleVisits": 0
+        }
+      }
+    }
+  ],
+  "comparison": [
+    {
+      "name": "goal-waveform-on-01",
+      "enabled": true,
+      "tps": 19.99152870031356,
+      "mspt": {
+        "mean": 49.88484031719533,
+        "p50": 48.4476,
+        "p95": 57.5983,
+        "p99": 62.344,
+        "maximum": 77.5595
+      },
+      "ticks_over_50ms_percent": 44.031719532554256,
+      "mean_cpu_ms": 49.79001460767947,
+      "mean_allocated_bytes": 12049471.732888147,
+      "compilation_ms": 1218,
+      "gc_ms": 66
+    },
+    {
+      "name": "goal-waveform-off-01",
+      "enabled": false,
+      "tps": 20.01659831757937,
+      "mspt": {
+        "mean": 48.79162776156732,
+        "p50": 47.9454,
+        "p95": 55.7009,
+        "p99": 61.0672,
+        "maximum": 80.9838
+      },
+      "ticks_over_50ms_percent": 41.22551062942893,
+      "mean_cpu_ms": 48.49025635681534,
+      "mean_allocated_bytes": 13712160.14339308,
+      "compilation_ms": 1289,
+      "gc_ms": 85
+    }
+  ],
+  "runs": [
+    {
+      "name": "goal-waveform-on-01",
+      "protocol": {
+        "name": "goal-waveform-on-01",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-waveform-on-01\\mods\\wwpg-0.2.7-experimental.wiretree.12.jar",
+          "sha256": "363348d02d041efd50f9633471f6fe6d432bf29f6766e8cb9489ffa0578d60f0",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\wwpg-0.2.7-experimental.wiretree.12.jar"
+        },
+        "scope": "Focused 120-second warmup and 120-second stable control; not full capacity acceptance",
+        "copied_reference": true,
+        "sixteen_substeps": true,
+        "full_suite": false,
+        "batch": true,
+        "verify_batch": false,
+        "property_batch": true,
+        "detailed": false,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "scoped_restoration": true,
+        "indexed_waveform": true,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": false,
+        "cpu_affinity_mask": "fff000",
+        "server_affinity_mask": null,
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-waveform-on-01\\mods\\wwpg-benchmark-0.1.0-affinity.jar",
+          "sha256": "56434c77e56c6361aad1b54733eac5573b97bd24d52ae42b0d330216da7a34cb"
+        },
+        "substep_jfr": false,
+        "cpu_jfr": false,
+        "started_utc": "2026-11-09T19:34:28Z",
+        "validation": {
+          "passed": true,
+          "full_suite": false,
+          "capacity_certified": false,
+          "stable_ticks": 2396,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "sixteen_substeps": true,
+          "topology_unchanged": true,
+          "normal_shutdown": true,
+          "batch_execution": {
+            "plans": 1,
+            "unsupported": 0,
+            "steps": 78703,
+            "contributions": 1559185133,
+            "voltage_reads": 1152998950,
+            "scalar_fallbacks": 0,
+            "largest_plain_batch": 10368,
+            "property_contributions": 743192429,
+            "property_scalar_fallbacks": 0,
+            "largest_property_batch": 9443
+          },
+          "bitwise_verification": false
+        },
+        "task_window": {
+          "budgetMillis": 2,
+          "maxTasks": 512,
+          "windows": 210,
+          "completed": 3817,
+          "emptyPolls": 1141188,
+          "maxCompleted": 407,
+          "maxWindowNanos": 2140600,
+          "maxPollNanos": 847100,
+          "probes": 513,
+          "maxProbeNanos": 1322500
+        },
+        "cee_geometry": {
+          "requests": 36180961,
+          "hits": 27992544,
+          "builds": 8,
+          "fallback": 8188409,
+          "states": 8
+        },
+        "scope_execution": {
+          "snapshots": 418,
+          "membershipChecks": 0,
+          "savedParts": 2484174,
+          "nodeBindings": 6027122,
+          "seedEndpoints": 2561292,
+          "heldNetworks": 16988,
+          "fallbackWorlds": 0,
+          "totalNanos": 4388873700,
+          "maxNanos": 45899100,
+          "topologyPasses": 468,
+          "topologyNanos": 271969100,
+          "maxTopologyNanos": 12918200
+        },
+        "waveform_execution": {
+          "passes": 78704,
+          "directVisits": 936577600,
+          "middleVisits": 0
+        },
+        "terminal_execution": null,
+        "terminal_keys": null,
+        "tree_priority_selections": 199,
+        "summary": {
+          "schema": 1,
+          "completed": true,
+          "passed": true,
+          "protocol_complete": false,
+          "capacity_certified": false,
+          "mode": "control",
+          "tier": 10000,
+          "backend": "NATIVE",
+          "variant": "MIXED",
+          "audit": {
+            "electrical_nodes": 14650,
+            "conductive_edges": 20362,
+            "coupled_edges": 275,
+            "edges": 20637,
+            "connected_systems_ignoring_reference_ground": 1,
+            "optimized_matrix_nodes": 14925,
+            "solver_networks": 1,
+            "actual_backends": [
+              "NATIVE"
+            ]
+          },
+          "samples": 2396,
+          "profiled_ticks": 0,
+          "measured_seconds": 119.8007434,
+          "tps": 19.99152870031356,
+          "mspt": {
+            "mean": 49.88484031719533,
+            "p50": 48.4476,
+            "p95": 57.5983,
+            "p99": 62.344,
+            "maximum": 77.5595
+          },
+          "phase_mean_ms": {
+            "cee_prepare_ns": null,
+            "synchronize_ns": null,
+            "result_bridge_ns": null,
+            "gameplay_commit_ns": null,
+            "pg_prepare_ns": null,
+            "pg_solve_ns": null,
+            "history_prepare_ns": null,
+            "history_commit_ns": null,
+            "cee_device_prepare_ns": null,
+            "cee_device_commit_ns": null,
+            "electrical_schedule_ns": null,
+            "native_measurement_prepare_ns": null,
+            "native_measurement_sample_ns": null,
+            "extension_prepare_ns": null,
+            "extension_before_ns": null,
+            "extension_after_ns": null,
+            "restoration_schedule_ns": null,
+            "restoration_context_ns": null,
+            "native_measurement_finish_ns": null,
+            "extension_bind_ns": null,
+            "extension_finish_ns": null,
+            "extension_commit_ns": null,
+            "provider_prepare_ns": null,
+            "provider_commit_ns": null,
+            "pg_rhs_ns": null,
+            "native_solve_ns": null,
+            "native_iteration_hooks_ns": null,
+            "native_residual_flush_ns": null
+          },
+          "compatibility_share_upper_bound": null,
+          "heap_peak_bytes": 1697257960,
+          "gc_ms": 66,
+          "native_tick_target_met": false,
+          "reason": "Stable control completed",
+          "practical_20tps_target_met": false,
+          "detailed_timers_enabled": false,
+          "process": {
+            "rss_peak_bytes": 2420740096,
+            "cpu_mean_cores": 1.0329443529975313
+          }
+        },
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T19:39:20Z"
+      },
+      "summary": {
+        "schema": 1,
+        "completed": true,
+        "passed": true,
+        "protocol_complete": false,
+        "capacity_certified": false,
+        "mode": "control",
+        "tier": 10000,
+        "backend": "NATIVE",
+        "variant": "MIXED",
+        "audit": {
+          "electrical_nodes": 14650,
+          "conductive_edges": 20362,
+          "coupled_edges": 275,
+          "edges": 20637,
+          "connected_systems_ignoring_reference_ground": 1,
+          "optimized_matrix_nodes": 14925,
+          "solver_networks": 1,
+          "actual_backends": [
+            "NATIVE"
+          ]
+        },
+        "samples": 2396,
+        "profiled_ticks": 0,
+        "measured_seconds": 119.8007434,
+        "tps": 19.99152870031356,
+        "mspt": {
+          "mean": 49.88484031719533,
+          "p50": 48.4476,
+          "p95": 57.5983,
+          "p99": 62.344,
+          "maximum": 77.5595
+        },
+        "phase_mean_ms": {
+          "cee_prepare_ns": null,
+          "synchronize_ns": null,
+          "result_bridge_ns": null,
+          "gameplay_commit_ns": null,
+          "pg_prepare_ns": null,
+          "pg_solve_ns": null,
+          "history_prepare_ns": null,
+          "history_commit_ns": null,
+          "cee_device_prepare_ns": null,
+          "cee_device_commit_ns": null,
+          "electrical_schedule_ns": null,
+          "native_measurement_prepare_ns": null,
+          "native_measurement_sample_ns": null,
+          "extension_prepare_ns": null,
+          "extension_before_ns": null,
+          "extension_after_ns": null,
+          "restoration_schedule_ns": null,
+          "restoration_context_ns": null,
+          "native_measurement_finish_ns": null,
+          "extension_bind_ns": null,
+          "extension_finish_ns": null,
+          "extension_commit_ns": null,
+          "provider_prepare_ns": null,
+          "provider_commit_ns": null,
+          "pg_rhs_ns": null,
+          "native_solve_ns": null,
+          "native_iteration_hooks_ns": null,
+          "native_residual_flush_ns": null
+        },
+        "compatibility_share_upper_bound": null,
+        "heap_peak_bytes": 1697257960,
+        "gc_ms": 66,
+        "native_tick_target_met": false,
+        "reason": "Stable control completed",
+        "practical_20tps_target_met": false,
+        "detailed_timers_enabled": false,
+        "process": {
+          "rss_peak_bytes": 2420740096,
+          "cpu_mean_cores": 1.0329443529975313
+        }
+      },
+      "loading": [
+        {
+          "phase": "SETTLE",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 31,
+          "graph_ready_tick": 211,
+          "finish_tick": 330,
+          "chunk_request_seconds": 0.8192557,
+          "chunk_loading_seconds": 13.4700651,
+          "graph_recovery_seconds": 13.134077,
+          "electrical_settling_seconds": 6.2649303,
+          "total_restoration_seconds": 33.6883281,
+          "restoration_and_settling_seconds": 32.8690724,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 11334,
+          "maximum_pending_roots": 11334,
+          "queue_drained_tick": 211,
+          "queue_drain_seconds": 13.134077
+        }
+      ],
+      "thirty_second_blocks": [
+        {
+          "block": 0,
+          "ticks": 600,
+          "mean_tick_ms": 49.92837183333334
+        },
+        {
+          "block": 1,
+          "ticks": 597,
+          "mean_tick_ms": 50.124693467336684
+        },
+        {
+          "block": 2,
+          "ticks": 604,
+          "mean_tick_ms": 49.47383377483444
+        },
+        {
+          "block": 3,
+          "ticks": 595,
+          "mean_tick_ms": 50.017507058823526
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 53,
+        "in_window_seconds": 265.71182322502136,
+        "monitored_processes": 194,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.2664423213868236,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "13688:134387027373880825",
+            "peak_cores": 0.21183848957988702,
+            "mean_cores": 0.047572685500317874
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28732:134387027298932907",
+            "peak_cores": 0.1308475901520516,
+            "mean_cores": 0.040574972800023895
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "5948:134387027096006899",
+            "peak_cores": 0.11523342706143004,
+            "mean_cores": 0.0809735326748303
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "6028:134387027037888757",
+            "peak_cores": 0.06865305137079496,
+            "mean_cores": 0.024580200913637665
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28176:134387027293764011",
+            "peak_cores": 0.040478523531258574,
+            "mean_cores": 0.008644233335657265
+          },
+          {
+            "name": "codex.exe",
+            "identity": "30104:134387027358105490",
+            "peak_cores": 0.031152719055865738,
+            "mean_cores": 0.004704344672466539
+          },
+          {
+            "name": "Discord.exe",
+            "identity": "28708:134387040917398085",
+            "peak_cores": 0.02807688316436161,
+            "mean_cores": 0.002881411111885755
+          },
+          {
+            "name": "NVIDIA Overlay.exe",
+            "identity": "24496:134387027110562500",
+            "peak_cores": 0.02496274190976536,
+            "mean_cores": 0.00441032313043738
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/goal-waveform-on-01/experiment.json",
+          "sha256": "3e7efd761fbeb0ad219fff2160190b5e6f7ff9b0fab86221b057d9aef7c78083"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-on-01/launch.json",
+          "sha256": "bb156a2de633b88f908bca10a086dc0985cb5a8afd70e3b8956d86093e0c3bb8"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-on-01/invocation.json",
+          "sha256": "710ee36b3f5e3a445bdfa7cf44c26226b3b3d4b29b80110857cf55d39b29bf63"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-on-01/process.log",
+          "sha256": "2fd779c7b05c325db8fd2fda3d0a153e3ed2845d7eaa2762d51a54fe3abea669"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-on-01/runner-exit.json",
+          "sha256": "405adefa3267103f3cc2a9251048d11136954b728cc5e3a12dc8bea1da4d6aed"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-on-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-on-01/host-metrics.jsonl",
+          "sha256": "1ae0917938ecae17535e4b9dd3ba499d102f3d3efd2d00decaa8e9c3d5c4994a"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-on-01/process-metrics.jsonl",
+          "sha256": "c75229145539aee4d1009b52d4a4d2fb2db437bb77f1a91a58e776ab5ad01e3f"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-on-01/benchmark/result.json",
+          "sha256": "436c475f46e018bc2e1b2a0f279cd247d31737f0ddc5691b00c7e786b817a109"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-on-01/benchmark/summary.json",
+          "sha256": "73be25bef80a5382cdf527562b138afe9ecf627deb65be7a9d8963b773aee212"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-on-01/benchmark/loading-results.json",
+          "sha256": "77fb587a8573dbd2c9163e53b77c501cff8a56658c1941cde2617c07695523bd"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-on-01/benchmark/ticks.csv",
+          "sha256": "dfc4c1dd59b30d8d2e4442db761ce0f72f9f3e4b7ae1ab28e45841f8474c1f2e"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-on-01/benchmark/placement-ticks.csv",
+          "sha256": "d2d11d312c5712a3944b225811d7b4e7d9893807cdb7ec3eab2c16197e68195d"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-on-01/benchmark/cpu-topology.json",
+          "sha256": "f35560d8aa64770019b2bafb8f2b7abdfda24270c493f1a950eb236c86eb64ed"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-on-01/benchmark/placement-fixed.json",
+          "sha256": "f39e516534daabb39e6a5305b5c802dee926ac68a80c1f4de97c30d3406bcc22"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-on-01/benchmark/placement-restored.json",
+          "sha256": "76da4a151b5d56796030ffa77d74c15cf15b59ccd4ef3dc98f6fc708f41b508e"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-on-01/benchmark/graph-start.json",
+          "sha256": "abe79b9a79559a48123d59ac2a79f566f1331d0213765c41744a941c750b1f19"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-on-01/benchmark/graph-end.json",
+          "sha256": "abe79b9a79559a48123d59ac2a79f566f1331d0213765c41744a941c750b1f19"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-on-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-on-01/process-affinity.json",
+          "sha256": "46cd7b68496d0f995efed306ad26e219cb8c89e3cb09634e1a199ae2ff3bab58"
+        }
+      ],
+      "process_affinity": {
+        "pid": 37076,
+        "original_mask": "ffffff",
+        "requested_mask": "fff000",
+        "readback_mask": "fff000",
+        "logical_cpus": [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "wall_unix": 1794252874.67085,
+        "scope": "Owned child process immediately after launch; other processes unchanged"
+      },
+      "affinity_readbacks": 285,
+      "stable_cpu_busy_percent": [
+        4.904887475364978,
+        5.486885804779517,
+        19.46997797533997,
+        25.037699456121572,
+        18.655475415030804,
+        23.82066428429963,
+        8.304944086129066,
+        8.21079271145001,
+        2.6685053760247244,
+        2.0596463517774115,
+        5.8799681694282935,
+        4.811643993976036,
+        11.589205173344597,
+        8.525885414323684,
+        6.680368090776386,
+        7.714520285401317,
+        15.202800249027367,
+        36.02701602513084,
+        9.862065426693473,
+        9.54146115375866,
+        1.6266662880003389,
+        1.6406164995962416,
+        5.408782436713819,
+        3.931370937862721
+      ],
+      "stable_cpu_observation_seconds": 115.30543518066406,
+      "cpu_observation_note": "Total per-core load including the benchmark; affinity restricts this process but does not reserve CPUs against other processes."
+    },
+    {
+      "name": "goal-waveform-off-01",
+      "protocol": {
+        "name": "goal-waveform-off-01",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-waveform-off-01\\mods\\wwpg-0.2.7-experimental.wiretree.12.jar",
+          "sha256": "363348d02d041efd50f9633471f6fe6d432bf29f6766e8cb9489ffa0578d60f0",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-13a\\wwpg-0.2.7-experimental.wiretree.12.jar"
+        },
+        "scope": "Focused 120-second warmup and 120-second stable control; not full capacity acceptance",
+        "copied_reference": true,
+        "sixteen_substeps": true,
+        "full_suite": false,
+        "batch": true,
+        "verify_batch": false,
+        "property_batch": true,
+        "detailed": false,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "scoped_restoration": true,
+        "indexed_waveform": false,
+        "terminal_bookkeeping": false,
+        "terminal_key_lookup": false,
+        "cpu_affinity_mask": "fff000",
+        "server_affinity_mask": null,
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-waveform-off-01\\mods\\wwpg-benchmark-0.1.0-affinity.jar",
+          "sha256": "56434c77e56c6361aad1b54733eac5573b97bd24d52ae42b0d330216da7a34cb"
+        },
+        "substep_jfr": false,
+        "cpu_jfr": false,
+        "started_utc": "2026-11-09T19:39:21Z",
+        "validation": {
+          "passed": true,
+          "full_suite": false,
+          "capacity_certified": false,
+          "stable_ticks": 2399,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "sixteen_substeps": true,
+          "topology_unchanged": true,
+          "normal_shutdown": true,
+          "batch_execution": {
+            "plans": 1,
+            "unsupported": 0,
+            "steps": 78751,
+            "contributions": 1560136061,
+            "voltage_reads": 1153702150,
+            "scalar_fallbacks": 0,
+            "largest_plain_batch": 10368,
+            "property_contributions": 743645693,
+            "property_scalar_fallbacks": 0,
+            "largest_property_batch": 9443
+          },
+          "bitwise_verification": false
+        },
+        "task_window": {
+          "budgetMillis": 2,
+          "maxTasks": 512,
+          "windows": 200,
+          "completed": 3766,
+          "emptyPolls": 1102836,
+          "maxCompleted": 512,
+          "maxWindowNanos": 2112600,
+          "maxPollNanos": 336200,
+          "probes": 514,
+          "maxProbeNanos": 742900
+        },
+        "cee_geometry": {
+          "requests": 36181936,
+          "hits": 27993090,
+          "builds": 8,
+          "fallback": 8188838,
+          "states": 8
+        },
+        "scope_execution": {
+          "snapshots": 414,
+          "membershipChecks": 0,
+          "savedParts": 2460402,
+          "nodeBindings": 5975964,
+          "seedEndpoints": 2492552,
+          "heldNetworks": 16384,
+          "fallbackWorlds": 0,
+          "totalNanos": 4196772400,
+          "maxNanos": 31671400,
+          "topologyPasses": 464,
+          "topologyNanos": 251607800,
+          "maxTopologyNanos": 11220300
+        },
+        "waveform_execution": null,
+        "terminal_execution": null,
+        "terminal_keys": null,
+        "tree_priority_selections": 203,
+        "summary": {
+          "schema": 1,
+          "completed": true,
+          "passed": true,
+          "protocol_complete": false,
+          "capacity_certified": false,
+          "mode": "control",
+          "tier": 10000,
+          "backend": "NATIVE",
+          "variant": "MIXED",
+          "audit": {
+            "electrical_nodes": 14650,
+            "conductive_edges": 20362,
+            "coupled_edges": 275,
+            "edges": 20637,
+            "connected_systems_ignoring_reference_ground": 1,
+            "optimized_matrix_nodes": 14925,
+            "solver_networks": 1,
+            "actual_backends": [
+              "NATIVE"
+            ]
+          },
+          "samples": 2399,
+          "profiled_ticks": 0,
+          "measured_seconds": 119.8005756,
+          "tps": 20.01659831757937,
+          "mspt": {
+            "mean": 48.79162776156732,
+            "p50": 47.9454,
+            "p95": 55.7009,
+            "p99": 61.0672,
+            "maximum": 80.9838
+          },
+          "phase_mean_ms": {
+            "cee_prepare_ns": null,
+            "synchronize_ns": null,
+            "result_bridge_ns": null,
+            "gameplay_commit_ns": null,
+            "pg_prepare_ns": null,
+            "pg_solve_ns": null,
+            "history_prepare_ns": null,
+            "history_commit_ns": null,
+            "cee_device_prepare_ns": null,
+            "cee_device_commit_ns": null,
+            "electrical_schedule_ns": null,
+            "native_measurement_prepare_ns": null,
+            "native_measurement_sample_ns": null,
+            "extension_prepare_ns": null,
+            "extension_before_ns": null,
+            "extension_after_ns": null,
+            "restoration_schedule_ns": null,
+            "restoration_context_ns": null,
+            "native_measurement_finish_ns": null,
+            "extension_bind_ns": null,
+            "extension_finish_ns": null,
+            "extension_commit_ns": null,
+            "provider_prepare_ns": null,
+            "provider_commit_ns": null,
+            "pg_rhs_ns": null,
+            "native_solve_ns": null,
+            "native_iteration_hooks_ns": null,
+            "native_residual_flush_ns": null
+          },
+          "compatibility_share_upper_bound": null,
+          "heap_peak_bytes": 1639202176,
+          "gc_ms": 85,
+          "native_tick_target_met": false,
+          "reason": "Stable control completed",
+          "practical_20tps_target_met": false,
+          "detailed_timers_enabled": false,
+          "process": {
+            "rss_peak_bytes": 2338717696,
+            "cpu_mean_cores": 1.0447894633099157
+          }
+        },
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T19:44:12Z"
+      },
+      "summary": {
+        "schema": 1,
+        "completed": true,
+        "passed": true,
+        "protocol_complete": false,
+        "capacity_certified": false,
+        "mode": "control",
+        "tier": 10000,
+        "backend": "NATIVE",
+        "variant": "MIXED",
+        "audit": {
+          "electrical_nodes": 14650,
+          "conductive_edges": 20362,
+          "coupled_edges": 275,
+          "edges": 20637,
+          "connected_systems_ignoring_reference_ground": 1,
+          "optimized_matrix_nodes": 14925,
+          "solver_networks": 1,
+          "actual_backends": [
+            "NATIVE"
+          ]
+        },
+        "samples": 2399,
+        "profiled_ticks": 0,
+        "measured_seconds": 119.8005756,
+        "tps": 20.01659831757937,
+        "mspt": {
+          "mean": 48.79162776156732,
+          "p50": 47.9454,
+          "p95": 55.7009,
+          "p99": 61.0672,
+          "maximum": 80.9838
+        },
+        "phase_mean_ms": {
+          "cee_prepare_ns": null,
+          "synchronize_ns": null,
+          "result_bridge_ns": null,
+          "gameplay_commit_ns": null,
+          "pg_prepare_ns": null,
+          "pg_solve_ns": null,
+          "history_prepare_ns": null,
+          "history_commit_ns": null,
+          "cee_device_prepare_ns": null,
+          "cee_device_commit_ns": null,
+          "electrical_schedule_ns": null,
+          "native_measurement_prepare_ns": null,
+          "native_measurement_sample_ns": null,
+          "extension_prepare_ns": null,
+          "extension_before_ns": null,
+          "extension_after_ns": null,
+          "restoration_schedule_ns": null,
+          "restoration_context_ns": null,
+          "native_measurement_finish_ns": null,
+          "extension_bind_ns": null,
+          "extension_finish_ns": null,
+          "extension_commit_ns": null,
+          "provider_prepare_ns": null,
+          "provider_commit_ns": null,
+          "pg_rhs_ns": null,
+          "native_solve_ns": null,
+          "native_iteration_hooks_ns": null,
+          "native_residual_flush_ns": null
+        },
+        "compatibility_share_upper_bound": null,
+        "heap_peak_bytes": 1639202176,
+        "gc_ms": 85,
+        "native_tick_target_met": false,
+        "reason": "Stable control completed",
+        "practical_20tps_target_met": false,
+        "detailed_timers_enabled": false,
+        "process": {
+          "rss_peak_bytes": 2338717696,
+          "cpu_mean_cores": 1.0447894633099157
+        }
+      },
+      "loading": [
+        {
+          "phase": "SETTLE",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 31,
+          "graph_ready_tick": 209,
+          "finish_tick": 328,
+          "chunk_request_seconds": 0.8051987,
+          "chunk_loading_seconds": 13.0932161,
+          "graph_recovery_seconds": 12.4513451,
+          "electrical_settling_seconds": 6.1671205,
+          "total_restoration_seconds": 32.5168804,
+          "restoration_and_settling_seconds": 31.7116817,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 11252,
+          "maximum_pending_roots": 11252,
+          "queue_drained_tick": 209,
+          "queue_drain_seconds": 12.4513451
+        }
+      ],
+      "thirty_second_blocks": [
+        {
+          "block": 0,
+          "ticks": 604,
+          "mean_tick_ms": 48.6602951986755
+        },
+        {
+          "block": 1,
+          "ticks": 600,
+          "mean_tick_ms": 48.7737825
+        },
+        {
+          "block": 2,
+          "ticks": 600,
+          "mean_tick_ms": 48.85881116666666
+        },
+        {
+          "block": 3,
+          "ticks": 595,
+          "mean_tick_ms": 48.87519411764706
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 53,
+        "in_window_seconds": 265.7320156097412,
+        "monitored_processes": 196,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.27400725438719337,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "13688:134387027373880825",
+            "peak_cores": 0.22466386422787293,
+            "mean_cores": 0.04880386719771899
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "5948:134387027096006899",
+            "peak_cores": 0.1434555850800588,
+            "mean_cores": 0.08890535807584472
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28732:134387027298932907",
+            "peak_cores": 0.09650620000899691,
+            "mean_cores": 0.0359855020783181
+          },
+          {
+            "name": "Discord.exe",
+            "identity": "28708:134387040917398085",
+            "peak_cores": 0.08104240041766941,
+            "mean_cores": 0.005644784639736173
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "6028:134387027037888757",
+            "peak_cores": 0.05919504261294421,
+            "mean_cores": 0.026989126558738575
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28176:134387027293764011",
+            "peak_cores": 0.046786386714920206,
+            "mean_cores": 0.009231574879568532
+          },
+          {
+            "name": "codex.exe",
+            "identity": "30104:134387027358105490",
+            "peak_cores": 0.024907744694856754,
+            "mean_cores": 0.0032339911998488487
+          },
+          {
+            "name": "dllhost.exe",
+            "identity": "31644:134387027407630677",
+            "peak_cores": 0.021837270181286395,
+            "mean_cores": 0.0038219895998213666
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/goal-waveform-off-01/experiment.json",
+          "sha256": "c49410b17a7a7748dee29cad9d2ffdf4eae35fd09f689aa41451bbad200db93c"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-off-01/launch.json",
+          "sha256": "4d0b0b4da682e5ed3db5eca8b79c223b832ea324fbfc2110102bc11a1480f375"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-off-01/invocation.json",
+          "sha256": "9f3698c7c0cfd86518a84545ea52be8b501e6a7639e0ff03492ffa7fb4a16379"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-off-01/process.log",
+          "sha256": "f029ec3efbe594fa60a874e4879413a57b83692f0b75f5d9feaa6531df086a79"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-off-01/runner-exit.json",
+          "sha256": "0cd7eda0e29db269e1c6bf7ef96aa8f5d389da554045f1cda0685e17babede22"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-off-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-off-01/host-metrics.jsonl",
+          "sha256": "36c297a7872b1ca19d47071e044a4fdf7f143bbf77b0968c1728013f56b2fdcd"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-off-01/process-metrics.jsonl",
+          "sha256": "dcaa483acdfd7a524fa963b83c5c64ea5ac6cbc6ce9f987e24e9b2a7d31cf6d9"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-off-01/benchmark/result.json",
+          "sha256": "390a310e68b7fd0cbad2ebf108691516ab549318448fc977ef574bff673ff9bb"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-off-01/benchmark/summary.json",
+          "sha256": "22bbc2ffd9db6a12e95d618266533bf22a30c481941439c68ab1ff25edc46a9a"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-off-01/benchmark/loading-results.json",
+          "sha256": "56fae1aab10b109fb5da8152226259241cfda116befa19d1cff0e504f71ba6aa"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-off-01/benchmark/ticks.csv",
+          "sha256": "5ea5a18db56cf09d615539040c9d2b5178f563e0ec7dc1aa96222dc5ce874a96"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-off-01/benchmark/placement-ticks.csv",
+          "sha256": "7913ea0e6e29c3dcc2001e317175b842ada495401fedc8ee2bbec2f87528eabd"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-off-01/benchmark/cpu-topology.json",
+          "sha256": "9d792dcb55e72a1eac4ccc41986deac1d2ed7171d030f4404ffc83b4d6297a29"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-off-01/benchmark/placement-fixed.json",
+          "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-off-01/benchmark/placement-restored.json",
+          "sha256": "95ba5fee302285e31a8a83c325d65d7dac47612da59375d6bfa386fca6eafdd9"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-off-01/benchmark/graph-start.json",
+          "sha256": "0c411f0c7ad07e4b430cb3a75375ef05058f975ae4e1088b57c9244d995317a3"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-off-01/benchmark/graph-end.json",
+          "sha256": "0c411f0c7ad07e4b430cb3a75375ef05058f975ae4e1088b57c9244d995317a3"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-off-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/goal-waveform-off-01/process-affinity.json",
+          "sha256": "b351b90daab4c1cded8c2df3ec83732658a42a174dd58137793f66c40cf46040"
+        }
+      ],
+      "process_affinity": {
+        "pid": 29328,
+        "original_mask": "ffffff",
+        "requested_mask": "fff000",
+        "readback_mask": "fff000",
+        "logical_cpus": [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "wall_unix": 1794253167.6124933,
+        "scope": "Owned child process immediately after launch; other processes unchanged"
+      },
+      "affinity_readbacks": 284,
+      "stable_cpu_busy_percent": [
+        5.177515826774515,
+        6.316015851706579,
+        23.911988065329755,
+        23.33596751357667,
+        20.014557159688827,
+        23.861666458423333,
+        8.593877027976344,
+        9.012373485176505,
+        2.683591927155081,
+        2.6024867147882413,
+        5.38185952297693,
+        5.488331432890653,
+        14.281213598303413,
+        14.157371920031892,
+        10.540484540404476,
+        12.94696637289681,
+        10.338203653259834,
+        10.56600413636286,
+        9.832671331021324,
+        13.547380778261912,
+        1.2191938859663163,
+        2.2753748755777035,
+        9.482559983647436,
+        11.844131389762584
+      ],
+      "stable_cpu_observation_seconds": 115.317312002182,
+      "cpu_observation_note": "Total per-core load including the benchmark; affinity restricts this process but does not reserve CPUs against other processes."
+    }
+  ],
+  "evidence": [
+    {
+      "path": "local/frozen/prototype-13a/inputs.json",
+      "sha256": "eceeba24700b4883a1d011fdc4271d5c8fc0bfad4d2bd22785fc90fe33482bff"
+    },
+    {
+      "path": "local/indexed-waveform-build-01.log",
+      "sha256": "793f3feae8310e02a2d5dc7093de92c64ac7ebb4b6c325caea57a26a20f843a3"
+    },
+    {
+      "path": "local/indexed-waveform-evidence-01.log",
+      "sha256": "7a304800a4fac1291dc6c0142c4563129377bd6c75b23868aa29272c8f979a71"
+    },
+    {
+      "path": "local/checks/indexed-waveform-native-01/invocation.json",
+      "sha256": "6f73daa71d8837eac44d11a3665f5dfbb830b7f401858a4051949a26837804bd"
+    },
+    {
+      "path": "local/checks/indexed-waveform-native-01/result.json",
+      "sha256": "8e59f852236a6f4a153ad069581f4b77cc0335869ebe555f90438d95d8f983c6"
+    },
+    {
+      "path": "local/checks/indexed-waveform-native-01/process.log",
+      "sha256": "e44c28a62d0259eeccc7e46e84e747690d1fd52936abbd86bd90aa7b243bdf88"
+    },
+    {
+      "path": "local/checks/indexed-waveform-native-01/server/packaged-2026-11-09T19-32-37.981196600Z.json",
+      "sha256": "ffab12d9efea4c7929ab83fe54301e471b27753a9f631545cc056332cd236fe3"
+    },
+    {
+      "path": "local/checks/indexed-waveform-java-01/invocation.json",
+      "sha256": "789e97d5e7e16f34d019ef2cf9f184b6d9e4229f95da6c7fca6698cdd1230ca1"
+    },
+    {
+      "path": "local/checks/indexed-waveform-java-01/result.json",
+      "sha256": "400824bc23a86fd87aff72e17172c6b22014b889e8eedbce7acb0498b64633c6"
+    },
+    {
+      "path": "local/checks/indexed-waveform-java-01/process.log",
+      "sha256": "f58f91e774c9c7fdca93fd2741de0c8ce759a6cfd47ae7ec3c8313a08006fd36"
+    },
+    {
+      "path": "local/checks/indexed-waveform-java-01/server/packaged-2026-11-09T19-33-02.819922400Z.json",
+      "sha256": "909037bca9bea6d14290138143d7419b352d6817744412d5e0932cc36efd2230"
+    },
+    {
+      "path": "local/checks/indexed-waveform-off-01/invocation.json",
+      "sha256": "a4ee85571071f6a02b3f1da5c2db6cfc4b86c43b8e8cfce1fe083dcf04e78a70"
+    },
+    {
+      "path": "local/checks/indexed-waveform-off-01/result.json",
+      "sha256": "28a5f447c8165f3c710c94481ecaf5b67eb4074d97f92b9533d067217ec2a7dd"
+    },
+    {
+      "path": "local/checks/indexed-waveform-off-01/process.log",
+      "sha256": "41ed4217678c717ebb8450ec3e25a96bbc44cb7d488a3d7eb24d48c3cec7f722"
+    },
+    {
+      "path": "local/checks/indexed-waveform-off-01/server/packaged-2026-11-09T19-33-27.743361900Z.json",
+      "sha256": "14d920df29d6104fc3fd9d5e90b77a29156f7fa615d377053d4012a93c3048e3"
+    },
+    {
+      "path": "local/checks/indexed-waveform-scope-01/invocation.json",
+      "sha256": "5ee95f5de4c4df93e4abac008b38514d7aadd4cd0d89149971d296ead958a57e"
+    },
+    {
+      "path": "local/checks/indexed-waveform-scope-01/result.json",
+      "sha256": "6d2c3b89ddf5538d488e1f5ff91e4d66ebd1dc605db5cdbf01d0b896737083f8"
+    },
+    {
+      "path": "local/checks/indexed-waveform-scope-01/process.log",
+      "sha256": "0c3d949768cbff746874fd893bed384671c3c8eef98b527c913d5e0c0ab8bdbf"
+    },
+    {
+      "path": "local/checks/indexed-waveform-scope-01/server/packaged-2026-11-09T19-33-52.647090400Z.json",
+      "sha256": "5ba23cd35fa274d8cd4d0a955712c281573fe7e434340e728ad127bd1affface"
+    },
+    {
+      "path": "local/checks/indexed-waveform-units-01/TEST-org.cha0scollective.wwpg.extension.NativeApiReadingsTest.xml",
+      "sha256": "ee69f4d100951b8482dae5f6aeb9f0967270f85ad406872599e32fa4a22fc323"
+    },
+    {
+      "path": "local/checks/indexed-waveform-audit-01/runners/client_loading_benchmark.py",
+      "sha256": "cf861298cbf69ecca213a15c564b92060bf81227f5f5cc2c584a7d5d3d62e943"
+    },
+    {
+      "path": "local/checks/indexed-waveform-audit-01/runners/focused_checks.py",
+      "sha256": "d93a52834dde315f98565470c32cae7354b6c118defce3a43b65d4e931223078"
+    },
+    {
+      "path": "local/checks/indexed-waveform-audit-01/runners/plain_wire_benchmark.py",
+      "sha256": "c69d09fd5b6cf21d07f739672d1d1a2f903daad3614b1866daf0ec17a2357ada"
+    },
+    {
+      "path": "local/checks/indexed-waveform-audit-01/runners/restoration_benchmark.py",
+      "sha256": "a5bb2556d026d67014136bb67fab81b0d00b9b64fa020e3351449b891574d957"
+    },
+    {
+      "path": "local/checks/indexed-waveform-audit-01/runners/summarize_client_loading.py",
+      "sha256": "768f2d30c9dc626e973323fa0c2111b6a5839ea8d4a47aa64c438310d5006cf8"
+    },
+    {
+      "path": "local/checks/indexed-waveform-audit-01/runners/summarize_current_profile.py",
+      "sha256": "923387a28e127113e43d7776131e044cf486c73f003b88d45460edef602e30cf"
+    },
+    {
+      "path": "local/checks/indexed-waveform-audit-01/runners/summarize_waveform.py",
+      "sha256": "1e627a9e446ca34eae85b8a254f2ac5982118be378a578fd71f4ca4e5acb7aec"
+    },
+    {
+      "path": "local/checks/indexed-waveform-audit-01/runners/test_waveform_evidence.py",
+      "sha256": "11d052ec969a7c4cf731379b50941c071c006fbef919cf1946f6661f459525a8"
+    },
+    {
+      "path": "local/checks/indexed-waveform-audit-01/runners/plain-wire.gradle",
+      "sha256": "ff4ad4d69acf47a705020ec2d4d7f92f3ef7466eb34831bf86c02f3d3933b811"
+    }
+  ],
+  "note": "Finite same-jar serial traversal comparison; all samples and ownership checks retained. No full acceptance or client result is implied."
+}

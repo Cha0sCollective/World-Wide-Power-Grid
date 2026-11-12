@@ -1,0 +1,128 @@
+{
+  "schema": 1,
+  "passed": true,
+  "branch": "dev/experimental-plain-wire-batching",
+  "runtime_changed": false,
+  "helper_changed": true,
+  "helper_change_scope": "Opt-in preparation observation only; all baseline helper entries other than plugin/config are byte-identical.",
+  "full_suite": false,
+  "graphical_acceptance": false,
+  "frozen": {
+    "path": "local/frozen/prototype-12g/inputs.json",
+    "sha256": "f7f34bbba95a21ef9eea0228b4174fa8b31a6a4e8a230fd01b021b7389a68016"
+  },
+  "helper": {
+    "path": "local/frozen/preparation-helper-01/inputs.json",
+    "sha256": "f86091b5c5cdc77db873ea1ef4f6d9cb8bf46c7514e1da69b6d6086b8db9b8d7"
+  },
+  "source_build_hashes_verified": 450,
+  "rebuilt_artifacts": [
+    {
+      "path": "build/libs/wwpg-0.2.7-experimental.wiretree.11.jar",
+      "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9"
+    },
+    {
+      "path": "build/libs/wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+      "sha256": "24d2d70ca4b8895d71e1d74c9fc49b23a1873507f4f1c10627f2443d1fc51636"
+    }
+  ],
+  "evidence_files_verified": 565,
+  "new_python_files_parsed": 8,
+  "checked_document_links": 40,
+  "git_diff_check_passed": true,
+  "main_tracked_clean": true,
+  "owned_process_exits": {
+    "goal-preparation-on-01": {
+      "schema": 1,
+      "pid": 15984,
+      "exit_code": 0,
+      "elapsed_seconds": 284.82487330000004,
+      "ended_utc": "2026-11-09T20:32:16Z"
+    },
+    "goal-preparation-off-01": {
+      "schema": 1,
+      "pid": 36980,
+      "exit_code": 0,
+      "elapsed_seconds": 284.49751240000114,
+      "ended_utc": "2026-11-09T20:37:35Z"
+    },
+    "goal-phase-timers-01": {
+      "schema": 1,
+      "pid": 11244,
+      "exit_code": 0,
+      "elapsed_seconds": 286.5042214999994,
+      "ended_utc": "2026-11-09T20:43:03Z"
+    }
+  },
+  "focused_checks": {
+    "instrumentation": {
+      "duplicate_rejections": 2,
+      "passed": true,
+      "transformed_methods": 2,
+      "stack_verifications": 2,
+      "drift_rejections": 1,
+      "proofs": [
+        {
+          "target": "org/cha0scollective/wwpg/bridge/WorldBridge",
+          "method": "prepare",
+          "beforeSha256": "311e5f00ef4e00e0964eded7b141e251cc9fd1a56b3e269c9f7c4bac3aeea5f7",
+          "afterSha256": "652fcf3f0cf7d8d725414142d028064409a21a48a702f6034f7655f088559236",
+          "sites": 3,
+          "originalInstructionsPreserved": true
+        },
+        {
+          "target": "org/cha0scollective/wwpg/bridge/WorldBridge$StableDescription",
+          "method": "update",
+          "beforeSha256": "36a8b9ae62a5fb690eaac83cddc8afaca69129bfe96abdd1cef66489b9da1ad2",
+          "afterSha256": "0d28bab72ae525c02fab1c93b33f63e431348f211575720deabaf025e89ed464",
+          "sites": 19,
+          "originalInstructionsPreserved": true
+        }
+      ]
+    },
+    "preparation_evidence_units": {
+      "passed": 5,
+      "command": "python -B -m unittest discover -s tools/experimental -p test_preparation_sections.py -v",
+      "provenance": "Completed earlier in this goal turn; output observed in the tool response, no separate file log captured.",
+      "source": {
+        "path": "tools/experimental/test_preparation_sections.py",
+        "sha256": "7e103f0e40bb8b8ef87cd656e32edd05a561127edd9df990fe1361ddb28ca588"
+      }
+    }
+  },
+  "previous_functionality_evidence": {
+    "path": "docs/experimental/indexed-waveform-retirement-20261109.json",
+    "sha256": "61e8335a9d7b61040b97bb13e3a5a8d2690fb9830a8b2e0150343d49a650088c"
+  },
+  "evidence": [
+    {
+      "path": "docs/experimental/preparation-sections-results-20261109.json",
+      "sha256": "988e50169eaa2e06f3312e9313fac53ebea0702590ed3939fa5e0f8c8780188d"
+    },
+    {
+      "path": "docs/experimental/phase-timers-results-20261109.json",
+      "sha256": "53187caddf6c8b577b8957f38292562bf381186d5655f7f815143d82dd7e8bf8"
+    },
+    {
+      "path": "docs/experimental/native-phase-variation-20261109.json",
+      "sha256": "e30e99a0ea2548c12f7b7909faa97448b066f7d897b19b2758a753b65bcce103"
+    },
+    {
+      "path": "local/preparation-review-02/native-review.json",
+      "sha256": "cde8ba389ca9e08e997d4afeddea7b6194be1399d09f2d7ed3a93d70dde078f4"
+    },
+    {
+      "path": "docs/experimental/PREPARATION_SECTIONS.md",
+      "sha256": "3fa6f78340dfbc1c2d7208034f5f3e24e4e62bdf6648ccf2c18d840ff1d95a7f"
+    },
+    {
+      "path": "docs/experimental/PERFORMANCE_GOAL.md",
+      "sha256": "61eb12dce05f4c749cb6d6b622edd86fcc54040a7d2eff42b77b436a69b7da61"
+    },
+    {
+      "path": "local/preparation-review-02/verify_checkpoint.py",
+      "sha256": "d9918688acc0c66541a415c51a23059269dc6b4a8508a7aaf9bab7b11bdb71e4"
+    }
+  ],
+  "note": "Retained gameplay source inventory and rebuilt jars match. Prior named functionality and client results are reused, not fresh executions. All three new headless observations preserve full-yard correctness and normal shutdown. The next target is native solve variability; the performance goal remains active."
+}

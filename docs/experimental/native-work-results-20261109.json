@@ -1,0 +1,1164 @@
+{
+  "schema": 1,
+  "gameplay_jar_unchanged": true,
+  "native_library_unchanged": true,
+  "full_suite": false,
+  "graphical_acceptance": false,
+  "source_hashes_verified": 450,
+  "diagnostic": {
+    "name": "goal-native-work-01",
+    "protocol": {
+      "name": "goal-native-work-01",
+      "runtime": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-work-01\\mods\\wwpg-0.2.7-experimental.wiretree.11.jar",
+        "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9",
+        "kind": "local-candidate",
+        "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-12g\\wwpg-0.2.7-experimental.wiretree.11.jar"
+      },
+      "scope": "Focused 120-second warmup and 120-second stable control; not full capacity acceptance",
+      "copied_reference": true,
+      "sixteen_substeps": true,
+      "full_suite": false,
+      "batch": true,
+      "verify_batch": false,
+      "property_batch": true,
+      "detailed": true,
+      "tree_batch": true,
+      "tree_budget_ms": 20,
+      "tree_max_parts": 32,
+      "tree_retain_coverage": false,
+      "tree_prioritize_unresolved": true,
+      "chunk_task_budget_ms": 2,
+      "cee_state_geometry": true,
+      "scoped_restoration": true,
+      "indexed_waveform": false,
+      "terminal_bookkeeping": false,
+      "terminal_key_lookup": false,
+      "cpu_affinity_mask": "fff000",
+      "server_affinity_mask": null,
+      "helper": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-work-01\\mods\\wwpg-benchmark-0.1.0-native-work.jar",
+        "sha256": "dafff27663c6d7b393a2f32a64e7b0d05644706a8087ac8493b0d458aab8c1c6"
+      },
+      "substep_jfr": false,
+      "cpu_jfr": false,
+      "cpu_jfr_non_safepoints": false,
+      "preparation_sections": false,
+      "native_work": true,
+      "started_utc": "2026-11-09T21:00:38Z",
+      "validation": {
+        "passed": true,
+        "full_suite": false,
+        "capacity_certified": false,
+        "stable_ticks": 2400,
+        "actual_nodes": 14650,
+        "edges": 20637,
+        "chunks": 953,
+        "storage_devices": 1050,
+        "sixteen_substeps": true,
+        "topology_unchanged": true,
+        "normal_shutdown": true,
+        "batch_execution": {
+          "plans": 1,
+          "unsupported": 0,
+          "steps": 78767,
+          "contributions": 1560453037,
+          "voltage_reads": 1153936550,
+          "scalar_fallbacks": 0,
+          "largest_plain_batch": 10368,
+          "property_contributions": 743796781,
+          "property_scalar_fallbacks": 0,
+          "largest_property_batch": 9443
+        },
+        "bitwise_verification": false
+      },
+      "task_window": {
+        "budgetMillis": 2,
+        "maxTasks": 512,
+        "windows": 200,
+        "completed": 3734,
+        "emptyPolls": 1067921,
+        "maxCompleted": 418,
+        "maxWindowNanos": 2140500,
+        "maxPollNanos": 322800,
+        "probes": 514,
+        "maxProbeNanos": 844100
+      },
+      "cee_geometry": {
+        "requests": 36118294,
+        "hits": 27942544,
+        "builds": 8,
+        "fallback": 8175742,
+        "states": 8
+      },
+      "scope_execution": {
+        "snapshots": 412,
+        "membershipChecks": 0,
+        "savedParts": 2448516,
+        "nodeBindings": 5944266,
+        "seedEndpoints": 2497048,
+        "heldNetworks": 16466,
+        "fallbackWorlds": 0,
+        "totalNanos": 4274186800,
+        "maxNanos": 37722400,
+        "topologyPasses": 465,
+        "topologyNanos": 244344600,
+        "maxTopologyNanos": 11979200
+      },
+      "waveform_execution": null,
+      "terminal_execution": null,
+      "terminal_keys": null,
+      "tree_priority_selections": 196,
+      "preparation_observation": {
+        "enabled": false,
+        "observation_absent": true
+      },
+      "native_work_observation": {
+        "enabled": true,
+        "sampled_steady_ticks": 132,
+        "sampled_steady_native_calls": 2112,
+        "completed": {
+          "schema": 1,
+          "entries": 4032,
+          "exits": 4032,
+          "rows": 4032,
+          "invalid": 0
+        },
+        "evidence": [
+          {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-work-01\\benchmark\\native-work.csv",
+            "sha256": "5bd32731549931834a49d45e9694eb7bd9b0984934506a029342c17bf779cc47"
+          },
+          {
+            "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-work-01\\benchmark\\native-work-end.json",
+            "sha256": "f8ab3431ff52aecf5c2d1bf3dcb40fffe602999bb3331e56aa095a2cc466267f"
+          }
+        ]
+      },
+      "summary": {
+        "schema": 1,
+        "completed": true,
+        "passed": true,
+        "protocol_complete": false,
+        "capacity_certified": false,
+        "mode": "control",
+        "tier": 10000,
+        "backend": "NATIVE",
+        "variant": "MIXED",
+        "audit": {
+          "electrical_nodes": 14650,
+          "conductive_edges": 20362,
+          "coupled_edges": 275,
+          "edges": 20637,
+          "connected_systems_ignoring_reference_ground": 1,
+          "optimized_matrix_nodes": 14925,
+          "solver_networks": 1,
+          "actual_backends": [
+            "NATIVE"
+          ]
+        },
+        "samples": 2400,
+        "profiled_ticks": 132,
+        "measured_seconds": 119.7028102,
+        "tps": 20.041300584269823,
+        "mspt": {
+          "mean": 47.60945975,
+          "p50": 46.905,
+          "p95": 54.4042,
+          "p99": 59.8245,
+          "maximum": 71.9684
+        },
+        "phase_mean_ms": {
+          "cee_prepare_ns": 6.9777424242424235,
+          "synchronize_ns": 3.689124242424242,
+          "result_bridge_ns": 0.8322363636363637,
+          "gameplay_commit_ns": 2.105448484848485,
+          "pg_prepare_ns": 0.4043568181818182,
+          "pg_solve_ns": 12.733790151515151,
+          "history_prepare_ns": 0.44039924242424244,
+          "history_commit_ns": 3.4753424242424242,
+          "cee_device_prepare_ns": 0.5409780303030303,
+          "cee_device_commit_ns": 0.6818333333333334,
+          "electrical_schedule_ns": 27.906828030303032,
+          "native_measurement_prepare_ns": 4.7688,
+          "native_measurement_sample_ns": 3.118205303030303,
+          "extension_prepare_ns": 0.002981818181818182,
+          "extension_before_ns": 0.0006401515151515151,
+          "extension_after_ns": 0.00095,
+          "restoration_schedule_ns": 0.004046212121212121,
+          "restoration_context_ns": 0.02934469696969697,
+          "native_measurement_finish_ns": 0.23725,
+          "extension_bind_ns": 0.0009659090909090908,
+          "extension_finish_ns": 0.0004166666666666667,
+          "extension_commit_ns": 0.0013234848484848486,
+          "provider_prepare_ns": 0.0,
+          "provider_commit_ns": 0.0,
+          "pg_rhs_ns": 2.3549348484848487,
+          "native_solve_ns": 4.781596969696969,
+          "native_iteration_hooks_ns": 0.0013227272727272727,
+          "native_residual_flush_ns": 0.0007818181818181819,
+          "cee_prepare_excluding_sync_ns": 3.2886181818181814
+        },
+        "compatibility_share_upper_bound": 0.6117612603317951,
+        "heap_peak_bytes": 1381017936,
+        "gc_ms": 139,
+        "native_tick_target_met": false,
+        "reason": "Stable control completed",
+        "practical_20tps_target_met": false,
+        "detailed_timers_enabled": true,
+        "process": {
+          "rss_peak_bytes": 2017226752,
+          "cpu_mean_cores": 1.086056311964949
+        }
+      },
+      "original_reference_unchanged": true,
+      "isolated_reference_unchanged": true,
+      "finished_utc": "2026-11-09T21:05:31Z"
+    },
+    "summary": {
+      "schema": 1,
+      "completed": true,
+      "passed": true,
+      "protocol_complete": false,
+      "capacity_certified": false,
+      "mode": "control",
+      "tier": 10000,
+      "backend": "NATIVE",
+      "variant": "MIXED",
+      "audit": {
+        "electrical_nodes": 14650,
+        "conductive_edges": 20362,
+        "coupled_edges": 275,
+        "edges": 20637,
+        "connected_systems_ignoring_reference_ground": 1,
+        "optimized_matrix_nodes": 14925,
+        "solver_networks": 1,
+        "actual_backends": [
+          "NATIVE"
+        ]
+      },
+      "samples": 2400,
+      "profiled_ticks": 132,
+      "measured_seconds": 119.7028102,
+      "tps": 20.041300584269823,
+      "mspt": {
+        "mean": 47.60945975,
+        "p50": 46.905,
+        "p95": 54.4042,
+        "p99": 59.8245,
+        "maximum": 71.9684
+      },
+      "phase_mean_ms": {
+        "cee_prepare_ns": 6.9777424242424235,
+        "synchronize_ns": 3.689124242424242,
+        "result_bridge_ns": 0.8322363636363637,
+        "gameplay_commit_ns": 2.105448484848485,
+        "pg_prepare_ns": 0.4043568181818182,
+        "pg_solve_ns": 12.733790151515151,
+        "history_prepare_ns": 0.44039924242424244,
+        "history_commit_ns": 3.4753424242424242,
+        "cee_device_prepare_ns": 0.5409780303030303,
+        "cee_device_commit_ns": 0.6818333333333334,
+        "electrical_schedule_ns": 27.906828030303032,
+        "native_measurement_prepare_ns": 4.7688,
+        "native_measurement_sample_ns": 3.118205303030303,
+        "extension_prepare_ns": 0.002981818181818182,
+        "extension_before_ns": 0.0006401515151515151,
+        "extension_after_ns": 0.00095,
+        "restoration_schedule_ns": 0.004046212121212121,
+        "restoration_context_ns": 0.02934469696969697,
+        "native_measurement_finish_ns": 0.23725,
+        "extension_bind_ns": 0.0009659090909090908,
+        "extension_finish_ns": 0.0004166666666666667,
+        "extension_commit_ns": 0.0013234848484848486,
+        "provider_prepare_ns": 0.0,
+        "provider_commit_ns": 0.0,
+        "pg_rhs_ns": 2.3549348484848487,
+        "native_solve_ns": 4.781596969696969,
+        "native_iteration_hooks_ns": 0.0013227272727272727,
+        "native_residual_flush_ns": 0.0007818181818181819,
+        "cee_prepare_excluding_sync_ns": 3.2886181818181814
+      },
+      "compatibility_share_upper_bound": 0.6117612603317951,
+      "heap_peak_bytes": 1381017936,
+      "gc_ms": 139,
+      "native_tick_target_met": false,
+      "reason": "Stable control completed",
+      "practical_20tps_target_met": false,
+      "detailed_timers_enabled": true,
+      "process": {
+        "rss_peak_bytes": 2017226752,
+        "cpu_mean_cores": 1.086056311964949
+      }
+    },
+    "loading": [
+      {
+        "phase": "SETTLE",
+        "cycle": 0,
+        "requested_chunks": 953,
+        "load_limit_ticks": 2859,
+        "chunks_ready_tick": 29,
+        "graph_ready_tick": 208,
+        "finish_tick": 327,
+        "chunk_request_seconds": 0.8522758,
+        "chunk_loading_seconds": 13.6495387,
+        "graph_recovery_seconds": 13.3879423,
+        "electrical_settling_seconds": 6.6249955,
+        "total_restoration_seconds": 34.5147523,
+        "restoration_and_settling_seconds": 33.6624765,
+        "healthy_ticks": 100,
+        "queued_roots_at_chunk_ready": 11350,
+        "maximum_pending_roots": 11350,
+        "queue_drained_tick": 208,
+        "queue_drain_seconds": 13.3879423
+      }
+    ],
+    "thirty_second_blocks": [
+      {
+        "block": 0,
+        "ticks": 605,
+        "mean_tick_ms": 47.981681322314046
+      },
+      {
+        "block": 1,
+        "ticks": 600,
+        "mean_tick_ms": 47.536341166666666
+      },
+      {
+        "block": 2,
+        "ticks": 600,
+        "mean_tick_ms": 47.3696885
+      },
+      {
+        "block": 3,
+        "ticks": 595,
+        "mean_tick_ms": 47.54650151260504
+      }
+    ],
+    "host": {
+      "sample_period_seconds": 5,
+      "in_window_intervals": 53,
+      "in_window_seconds": 265.7412521839142,
+      "monitored_processes": 187,
+      "competing_game_present": false,
+      "other_cpu_mean_cores": 0.27011707595297113,
+      "other_process_peaks": [
+        {
+          "name": "ChatGPT.exe",
+          "identity": "13688:134387027373880825",
+          "peak_cores": 0.2555286134928777,
+          "mean_cores": 0.051448071715030415
+        },
+        {
+          "name": "ChatGPT.exe",
+          "identity": "28176:134387027293764011",
+          "peak_cores": 0.21168689658258358,
+          "mean_cores": 0.013288301951539284
+        },
+        {
+          "name": "HWiNFO64.EXE",
+          "identity": "5948:134387027096006899",
+          "peak_cores": 0.12484319236135528,
+          "mean_cores": 0.0803177896716932
+        },
+        {
+          "name": "ChatGPT.exe",
+          "identity": "30196:134387027364652111",
+          "peak_cores": 0.09362418125627776,
+          "mean_cores": 0.002528305238567209
+        },
+        {
+          "name": "ChatGPT.exe",
+          "identity": "28732:134387027298932907",
+          "peak_cores": 0.06863347554698704,
+          "mean_cores": 0.03216239454642473
+        },
+        {
+          "name": "powershell.exe",
+          "identity": "6028:134387027037888757",
+          "peak_cores": 0.05300214351661272,
+          "mean_cores": 0.024283489849494355
+        },
+        {
+          "name": "codex.exe",
+          "identity": "30104:134387027358105490",
+          "peak_cores": 0.028045823432145112,
+          "mean_cores": 0.004762621495905673
+        },
+        {
+          "name": "NVIDIA Overlay.exe",
+          "identity": "23344:134387027098263065",
+          "peak_cores": 0.024924316149867072,
+          "mean_cores": 0.006114970809557901
+        }
+      ],
+      "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+    },
+    "evidence": [
+      {
+        "path": "local/benchmarks/goal-native-work-01/experiment.json",
+        "sha256": "bc25105396e902be204706d6453bbd1e0037a56a39687b0da0d4a15cf67fe84d"
+      },
+      {
+        "path": "local/benchmarks/goal-native-work-01/launch.json",
+        "sha256": "dafa51524490d0242bca271dde6520f531de9a94d2aced16c37fc3074720aa2a"
+      },
+      {
+        "path": "local/benchmarks/goal-native-work-01/invocation.json",
+        "sha256": "1550bc38c4bd267b22642ee8d856ab988e0896211e55f884997978d9f7e2e1bd"
+      },
+      {
+        "path": "local/benchmarks/goal-native-work-01/process.log",
+        "sha256": "2821fc6f1f00a585bff4972b7d99366036b928ccb711bdad7d89aae4e33aaf98"
+      },
+      {
+        "path": "local/benchmarks/goal-native-work-01/runner-exit.json",
+        "sha256": "e4179d232731eb6fb1f8a89e9fa52d3843e60ce46804957aa2cdabd84320a2d3"
+      },
+      {
+        "path": "local/benchmarks/goal-native-work-01/shutdown-save.json",
+        "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+      },
+      {
+        "path": "local/benchmarks/goal-native-work-01/host-metrics.jsonl",
+        "sha256": "6c6466a7c7da181303bc82b0b6f1922c6104b105ed01ec873d25f74d0db83d4d"
+      },
+      {
+        "path": "local/benchmarks/goal-native-work-01/process-metrics.jsonl",
+        "sha256": "671b7726fefc012234fcaaadb2e2550b9fbd1f7cc4f4ff285c7934742e2b220c"
+      },
+      {
+        "path": "local/benchmarks/goal-native-work-01/benchmark/result.json",
+        "sha256": "d5e3fda8458e82c4161bde2a859c3f0789fd6527711c4227e30df812274620fa"
+      },
+      {
+        "path": "local/benchmarks/goal-native-work-01/benchmark/summary.json",
+        "sha256": "8a51e1987c82208666128a3df517763d264dbd3593f050ecf5c3aee02072d60b"
+      },
+      {
+        "path": "local/benchmarks/goal-native-work-01/benchmark/loading-results.json",
+        "sha256": "40e5be0445959c53865dd0c4da91aeb74d655c570fe4460d3d1224da1d6abc94"
+      },
+      {
+        "path": "local/benchmarks/goal-native-work-01/benchmark/ticks.csv",
+        "sha256": "09790e333174fa937fd2d061a4c601309ba41120938c3c70d69a339ba960da7a"
+      },
+      {
+        "path": "local/benchmarks/goal-native-work-01/benchmark/placement-ticks.csv",
+        "sha256": "d428f9f5872bf3774c5e1498d61cbfa577505eb97526688c2805350229229ca2"
+      },
+      {
+        "path": "local/benchmarks/goal-native-work-01/benchmark/cpu-topology.json",
+        "sha256": "8089e8f4d0273ce12cdf52e795274c93ca6131020163ac2dfc4e41d1308a0399"
+      },
+      {
+        "path": "local/benchmarks/goal-native-work-01/benchmark/placement-fixed.json",
+        "sha256": "f39e516534daabb39e6a5305b5c802dee926ac68a80c1f4de97c30d3406bcc22"
+      },
+      {
+        "path": "local/benchmarks/goal-native-work-01/benchmark/placement-restored.json",
+        "sha256": "79eda4bf854b627d63ceaabf49ee8f83ec6d7c08486adcab2df1ea6c62315b9c"
+      },
+      {
+        "path": "local/benchmarks/goal-native-work-01/benchmark/graph-start.json",
+        "sha256": "e4664bad10f2adeab9ee7eaec5e6546e6ec76ba32a38f0b623adae6f216a7f67"
+      },
+      {
+        "path": "local/benchmarks/goal-native-work-01/benchmark/graph-end.json",
+        "sha256": "e4664bad10f2adeab9ee7eaec5e6546e6ec76ba32a38f0b623adae6f216a7f67"
+      },
+      {
+        "path": "local/benchmarks/goal-native-work-01/benchmark/pre-solve-storage.json",
+        "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+      },
+      {
+        "path": "local/benchmarks/goal-native-work-01/process-affinity.json",
+        "sha256": "38989e261100b6779a8f0f419b668e60927efa801b4d09ab2a770463092f7d4d"
+      }
+    ],
+    "process_affinity": {
+      "pid": 13752,
+      "original_mask": "ffffff",
+      "requested_mask": "fff000",
+      "readback_mask": "fff000",
+      "logical_cpus": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "wall_unix": 1794258045.0582995,
+      "scope": "Owned child process immediately after launch; other processes unchanged"
+    },
+    "affinity_readbacks": 286,
+    "stable_cpu_busy_percent": [
+      4.4776121289756,
+      6.65932242339898,
+      21.47649841962939,
+      21.1283400989367,
+      21.835143524304037,
+      21.862338261954626,
+      8.3604008278761,
+      8.345847870591525,
+      2.423456268337903,
+      2.664314350685416,
+      5.242128472111042,
+      5.171400399755675,
+      11.445799312349145,
+      13.289328073833726,
+      10.128615383960899,
+      12.949856666860255,
+      12.967665033113004,
+      7.622058677346507,
+      12.927535594440688,
+      13.963210740374581,
+      1.6728544719799558,
+      2.126379049675848,
+      6.036381880033069,
+      18.622389030508653
+    ],
+    "stable_cpu_observation_seconds": 110.28350949287415,
+    "cpu_observation_note": "Total per-core load including the benchmark; affinity restricts this process but does not reserve CPUs against other processes."
+  },
+  "observation": {
+    "enabled": true,
+    "sampled_steady_ticks": 132,
+    "sampled_steady_native_calls": 2112,
+    "completed": {
+      "schema": 1,
+      "entries": 4032,
+      "exits": 4032,
+      "rows": 4032,
+      "invalid": 0
+    },
+    "evidence": [
+      {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-work-01\\benchmark\\native-work.csv",
+        "sha256": "5bd32731549931834a49d45e9694eb7bd9b0984934506a029342c17bf779cc47"
+      },
+      {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-native-work-01\\benchmark\\native-work-end.json",
+        "sha256": "f8ab3431ff52aecf5c2d1bf3dcb40fffe602999bb3331e56aa095a2cc466267f"
+      }
+    ]
+  },
+  "patterns": [
+    {
+      "sampled_calls": 1344,
+      "sampled_ticks": 84,
+      "max_iterations": 200,
+      "initial_jacobian_commands": 0,
+      "hook_indices": [
+        0
+      ],
+      "hook_jacobian_commands": [
+        0
+      ],
+      "residual_calls": 1,
+      "jni_ms": {
+        "mean": 0.11453995535714286,
+        "p50": 0.1055,
+        "p95": 0.1543,
+        "p99": 0.1779,
+        "maximum": 1.3186
+      }
+    },
+    {
+      "sampled_calls": 768,
+      "sampled_ticks": 48,
+      "max_iterations": 200,
+      "initial_jacobian_commands": 0,
+      "hook_indices": [
+        0,
+        0
+      ],
+      "hook_jacobian_commands": [
+        0,
+        0
+      ],
+      "residual_calls": 3,
+      "jni_ms": {
+        "mean": 0.6202761360516199,
+        "p50": 0.6099,
+        "p95": 0.674,
+        "p99": 0.7071,
+        "maximum": 0.8562
+      }
+    }
+  ],
+  "sampled_tick_groups": {
+    "at_most_50_ms": {
+      "sampled_ticks": 79,
+      "tick_ms": {
+        "mean": 44.65161772151898,
+        "p50": 44.0796,
+        "p95": 48.7632,
+        "p99": 49.9631,
+        "maximum": 49.9631
+      },
+      "native_scope_ms": {
+        "mean": 1.8187012658227846,
+        "p50": 1.7875,
+        "p95": 1.9813,
+        "p99": 2.0871,
+        "maximum": 2.0871
+      },
+      "jni_ms": {
+        "mean": 1.8117556962025316,
+        "p50": 1.7822,
+        "p95": 1.9676,
+        "p99": 2.081,
+        "maximum": 2.081
+      },
+      "initial_jacobian_commands": {
+        "mean": 0.0,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0,
+        "maximum": 0
+      },
+      "hook_calls": {
+        "mean": 16.0,
+        "p50": 16,
+        "p95": 16,
+        "p99": 16,
+        "maximum": 16
+      },
+      "residual_calls": {
+        "mean": 16.0,
+        "p50": 16,
+        "p95": 16,
+        "p99": 16,
+        "maximum": 16
+      },
+      "unweighted_calls_with_fitting_hook_histogram": {
+        "0": 79
+      }
+    },
+    "over_50_ms": {
+      "sampled_ticks": 53,
+      "tick_ms": {
+        "mean": 52.402513757700206,
+        "p50": 51.357,
+        "p95": 57.1535,
+        "p99": 61.7839,
+        "maximum": 71.9684
+      },
+      "native_scope_ms": {
+        "mean": 8.997217308853726,
+        "p50": 9.842,
+        "p95": 10.2005,
+        "p99": 10.743,
+        "maximum": 10.743
+      },
+      "jni_ms": {
+        "mean": 8.991574948665297,
+        "p50": 9.8371,
+        "p95": 10.1954,
+        "p99": 10.7379,
+        "maximum": 10.7379
+      },
+      "initial_jacobian_commands": {
+        "mean": 0.0,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0,
+        "maximum": 0
+      },
+      "hook_calls": {
+        "mean": 30.077062447155452,
+        "p50": 32,
+        "p95": 32,
+        "p99": 32,
+        "maximum": 32
+      },
+      "residual_calls": {
+        "mean": 44.154124894310904,
+        "p50": 48,
+        "p95": 48,
+        "p99": 48,
+        "maximum": 48
+      },
+      "unweighted_calls_with_fitting_hook_histogram": {
+        "0": 5,
+        "16": 48
+      }
+    }
+  },
+  "phases": {
+    "complete_sixteen_step_traces": true,
+    "sampled_ticks": 132,
+    "forced_edit_samples": 12,
+    "ordinary_samples": 120,
+    "weighting": "All forced edit samples weight 1; ordinary samples share remaining stable population equally.",
+    "weighted_sampled_tick_ms": {
+      "mean": 47.325353899999996,
+      "p50": 46.4258,
+      "p95": 54.5906,
+      "p99": 60.2449,
+      "maximum": 71.9684
+    },
+    "unweighted_sampled_tick_ms": {
+      "mean": 48.502604545454545,
+      "p50": 47.0021,
+      "p95": 59.8245,
+      "p99": 63.5234,
+      "maximum": 71.9684
+    },
+    "strata": {
+      "ordinary": {
+        "samples": 120,
+        "tick_ms": {
+          "mean": 47.256836666666665,
+          "p50": 46.3884,
+          "p95": 53.7648,
+          "p99": 57.1535,
+          "maximum": 61.7839
+        },
+        "exclusive_mean_ms": {
+          "cee_prepare": 6.9585675,
+          "gameplay_commit": 2.1005875,
+          "pg_prepare": 0.4020525,
+          "terminal_prepare": 4.7749733333333335,
+          "history_prepare": 0.440525,
+          "rhs": 2.3539066666666666,
+          "native_solve": 4.266669166666667,
+          "pg_pre_hooks": 0.08394083333333334,
+          "pg_post_hooks": 0.4135608333333333,
+          "power_hooks": 5.082081666666666,
+          "bridge_after_solve": 3.4790975,
+          "terminal_sample": 3.1209316666666664,
+          "bridge_results": 0.8329783333333334,
+          "terminal_finish": 0.2372125,
+          "pg_other": 0.00873750000000002,
+          "electrical_other": 1.8929433333333334,
+          "other_tick": 10.808070833333334
+        }
+      },
+      "forced_edit": {
+        "samples": 12,
+        "tick_ms": {
+          "mean": 60.96028333333334,
+          "p50": 59.2324,
+          "p95": 71.9684,
+          "p99": 71.9684,
+          "maximum": 71.9684
+        },
+        "exclusive_mean_ms": {
+          "cee_prepare": 7.169491666666667,
+          "gameplay_commit": 2.1540583333333334,
+          "pg_prepare": 0.4274,
+          "terminal_prepare": 4.707066666666667,
+          "history_prepare": 0.4391416666666667,
+          "rhs": 2.3652166666666665,
+          "native_solve": 9.930875,
+          "pg_pre_hooks": 0.10003333333333335,
+          "pg_post_hooks": 0.428375,
+          "power_hooks": 5.151133333333333,
+          "bridge_after_solve": 3.437791666666667,
+          "terminal_sample": 3.0909416666666663,
+          "bridge_results": 0.8248166666666666,
+          "terminal_finish": 0.237625,
+          "pg_other": 0.007091666666667311,
+          "electrical_other": 1.9314916666666655,
+          "other_tick": 18.557733333333335
+        }
+      }
+    },
+    "exclusive_cost_ms": {
+      "cee_prepare": {
+        "mean": 6.959622120833333,
+        "p50": 6.7169,
+        "p95": 8.9199,
+        "p99": 9.5394,
+        "maximum": 11.3696
+      },
+      "gameplay_commit": {
+        "mean": 2.1008548541666663,
+        "p50": 2.0406,
+        "p95": 2.4318,
+        "p99": 2.9004,
+        "maximum": 3.0971
+      },
+      "pg_prepare": {
+        "mean": 0.40217923749999995,
+        "p50": 0.3916,
+        "p95": 0.4927,
+        "p99": 0.5261,
+        "maximum": 0.5446
+      },
+      "terminal_prepare": {
+        "mean": 4.7746338,
+        "p50": 4.6351,
+        "p95": 5.7222,
+        "p99": 6.5296,
+        "maximum": 8.7792
+      },
+      "history_prepare": {
+        "mean": 0.44051808333333325,
+        "p50": 0.4364,
+        "p95": 0.4725,
+        "p99": 0.4946,
+        "maximum": 0.5371
+      },
+      "rhs": {
+        "mean": 2.3539632166666666,
+        "p50": 2.3366,
+        "p95": 2.519,
+        "p99": 2.5413,
+        "maximum": 2.9786
+      },
+      "native_solve": {
+        "mean": 4.294990195833333,
+        "p50": 1.8593,
+        "p95": 10.1241,
+        "p99": 10.3109,
+        "maximum": 10.743
+      },
+      "pg_pre_hooks": {
+        "mean": 0.08402129583333333,
+        "p50": 0.0773,
+        "p95": 0.1049,
+        "p99": 0.1116,
+        "maximum": 0.1193
+      },
+      "pg_post_hooks": {
+        "mean": 0.41363490416666665,
+        "p50": 0.4095,
+        "p95": 0.4449,
+        "p99": 0.5022,
+        "maximum": 0.5198
+      },
+      "power_hooks": {
+        "mean": 5.082426925,
+        "p50": 5.0364,
+        "p95": 5.3737,
+        "p99": 5.9504,
+        "maximum": 6.6744
+      },
+      "bridge_after_solve": {
+        "mean": 3.4788909708333327,
+        "p50": 3.3975,
+        "p95": 3.7778,
+        "p99": 4.7002,
+        "maximum": 4.8266
+      },
+      "terminal_sample": {
+        "mean": 3.1207817166666665,
+        "p50": 3.0595,
+        "p95": 3.417,
+        "p99": 4.2099,
+        "maximum": 4.3438
+      },
+      "bridge_results": {
+        "mean": 0.832937525,
+        "p50": 0.8068,
+        "p95": 1.0469,
+        "p99": 1.1317,
+        "maximum": 1.1561
+      },
+      "terminal_finish": {
+        "mean": 0.23721456249999998,
+        "p50": 0.2323,
+        "p95": 0.2802,
+        "p99": 0.3103,
+        "maximum": 0.3251
+      },
+      "pg_other": {
+        "mean": 0.008729270833333356,
+        "p50": 0.007199999999999207,
+        "p95": 0.009499999999999176,
+        "p99": 0.05430000000000135,
+        "maximum": 0.10610000000000142
+      },
+      "electrical_other": {
+        "mean": 1.893136075,
+        "p50": 1.8440999999999974,
+        "p95": 2.200300000000002,
+        "p99": 2.343399999999999,
+        "maximum": 2.3484000000000016
+      },
+      "other_tick": {
+        "mean": 10.846819145833333,
+        "p50": 10.118900000000004,
+        "p95": 13.418,
+        "p99": 15.040300000000006,
+        "maximum": 26.3044
+      }
+    },
+    "inclusive_phase_ms": {
+      "cee_prepare_ns": {
+        "mean": 6.959622120833333,
+        "p50": 6.7169,
+        "p95": 8.9199,
+        "p99": 9.5394,
+        "maximum": 11.3696
+      },
+      "synchronize_ns": {
+        "mean": 3.6807971458333326,
+        "p50": 3.5461,
+        "p95": 4.5072,
+        "p99": 5.5566,
+        "maximum": 5.7176
+      },
+      "result_bridge_ns": {
+        "mean": 0.832937525,
+        "p50": 0.8068,
+        "p95": 1.0469,
+        "p99": 1.1317,
+        "maximum": 1.1561
+      },
+      "gameplay_commit_ns": {
+        "mean": 2.1008548541666663,
+        "p50": 2.0406,
+        "p95": 2.4318,
+        "p99": 2.9004,
+        "maximum": 3.0971
+      },
+      "pg_prepare_ns": {
+        "mean": 0.40217923749999995,
+        "p50": 0.3916,
+        "p95": 0.4927,
+        "p99": 0.5261,
+        "maximum": 0.5446
+      },
+      "pg_solve_ns": {
+        "mean": 12.237765808333332,
+        "p50": 9.7398,
+        "p95": 18.3845,
+        "p99": 18.9129,
+        "maximum": 19.0435
+      },
+      "history_prepare_ns": {
+        "mean": 0.44051808333333325,
+        "p50": 0.4364,
+        "p95": 0.4725,
+        "p99": 0.4946,
+        "maximum": 0.5371
+      },
+      "history_commit_ns": {
+        "mean": 3.4788909708333327,
+        "p50": 3.3975,
+        "p95": 3.7778,
+        "p99": 4.7002,
+        "maximum": 4.8266
+      },
+      "cee_device_prepare_ns": {
+        "mean": 0.5372227291666666,
+        "p50": 0.5374,
+        "p95": 0.6326,
+        "p99": 0.8952,
+        "maximum": 1.0104
+      },
+      "cee_device_commit_ns": {
+        "mean": 0.6866843333333332,
+        "p50": 0.6692,
+        "p95": 0.8257,
+        "p99": 0.8927,
+        "maximum": 0.9172
+      },
+      "electrical_schedule_ns": {
+        "mean": 27.418057779166666,
+        "p50": 24.9247,
+        "p95": 34.5904,
+        "p99": 36.092,
+        "maximum": 37.3912
+      },
+      "native_measurement_prepare_ns": {
+        "mean": 4.7746338,
+        "p50": 4.6351,
+        "p95": 5.7222,
+        "p99": 6.5296,
+        "maximum": 8.7792
+      },
+      "native_measurement_sample_ns": {
+        "mean": 3.1207817166666665,
+        "p50": 3.0595,
+        "p95": 3.417,
+        "p99": 4.2099,
+        "maximum": 4.3438
+      },
+      "extension_prepare_ns": {
+        "mean": 0.0030407375,
+        "p50": 0.0029,
+        "p95": 0.0036,
+        "p99": 0.0105,
+        "maximum": 0.0122
+      },
+      "extension_before_ns": {
+        "mean": 0.0006675708333333333,
+        "p50": 0.0004,
+        "p95": 0.0007,
+        "p99": 0.0023,
+        "maximum": 0.0334
+      },
+      "extension_after_ns": {
+        "mean": 0.0009626,
+        "p50": 0.0009,
+        "p95": 0.0012,
+        "p99": 0.0018,
+        "maximum": 0.0114
+      },
+      "restoration_schedule_ns": {
+        "mean": 0.004089954166666666,
+        "p50": 0.0038,
+        "p95": 0.0046,
+        "p99": 0.0186,
+        "maximum": 0.0228
+      },
+      "restoration_context_ns": {
+        "mean": 0.029470195833333334,
+        "p50": 0.0275,
+        "p95": 0.0362,
+        "p99": 0.0525,
+        "maximum": 0.0753
+      },
+      "native_measurement_finish_ns": {
+        "mean": 0.23721456249999998,
+        "p50": 0.2323,
+        "p95": 0.2802,
+        "p99": 0.3103,
+        "maximum": 0.3251
+      },
+      "extension_bind_ns": {
+        "mean": 0.0009737125,
+        "p50": 0.0009,
+        "p95": 0.0012,
+        "p99": 0.0029,
+        "maximum": 0.0035
+      },
+      "extension_finish_ns": {
+        "mean": 0.00042454166666666665,
+        "p50": 0.0004,
+        "p95": 0.0008,
+        "p99": 0.0016,
+        "maximum": 0.002
+      },
+      "extension_commit_ns": {
+        "mean": 0.0013154666666666667,
+        "p50": 0.0012,
+        "p95": 0.0018,
+        "p99": 0.0033,
+        "maximum": 0.0055
+      },
+      "provider_prepare_ns": {
+        "mean": 0.0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0
+      },
+      "provider_commit_ns": {
+        "mean": 0.0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0
+      },
+      "pg_rhs_ns": {
+        "mean": 2.3539632166666666,
+        "p50": 2.3366,
+        "p95": 2.519,
+        "p99": 2.5413,
+        "maximum": 2.9786
+      },
+      "native_solve_ns": {
+        "mean": 4.294990195833333,
+        "p50": 1.8593,
+        "p95": 10.1241,
+        "p99": 10.3109,
+        "maximum": 10.743
+      },
+      "native_iteration_hooks_ns": {
+        "mean": 0.0012626624999999999,
+        "p50": 0.001,
+        "p95": 0.002,
+        "p99": 0.0026,
+        "maximum": 0.0142
+      },
+      "native_residual_flush_ns": {
+        "mean": 0.0007320625,
+        "p50": 0.0005,
+        "p95": 0.0015,
+        "p99": 0.0021,
+        "maximum": 0.006
+      }
+    },
+    "postsolve_group_ms": {
+      "mean": 11.6820996125,
+      "p50": 11.506400000000001,
+      "p95": 12.561200000000001,
+      "p99": 14.9944,
+      "maximum": 15.710900000000002
+    },
+    "caveat": "Whole timed scopes include serial snapshots, guards and callbacks. Models are bounds/sensitivity estimates, not measured worker speedups. Sampled tails have limited resolution."
+  },
+  "compilation_ms": 2932,
+  "evidence": [
+    {
+      "path": "local/frozen/prototype-12g/inputs.json",
+      "sha256": "f7f34bbba95a21ef9eea0228b4174fa8b31a6a4e8a230fd01b021b7389a68016"
+    },
+    {
+      "path": "local/frozen/native-work-helper-02/inputs.json",
+      "sha256": "bad614a63ffcc07c79966eec459fc30493d8b07acaa8e6eff7dce15f0071aa0e"
+    },
+    {
+      "path": "local/benchmarks/goal-native-work-01/benchmark/substeps.csv",
+      "sha256": "439b93f013ce26cde99a26e2b912b4b4f7460c14103ce535a27aad0d25a6611e"
+    },
+    {
+      "path": "local/benchmarks/goal-native-work-01/benchmark/substep-metadata.json",
+      "sha256": "be2fea7d30a9f3827ba1497e31f8093a47071ae34eddd7b37b59581aaf31ab95"
+    },
+    {
+      "path": "local/benchmarks/goal-native-work-01/benchmark/native-work.csv",
+      "sha256": "5bd32731549931834a49d45e9694eb7bd9b0984934506a029342c17bf779cc47"
+    },
+    {
+      "path": "local/benchmarks/goal-native-work-01/benchmark/native-work-end.json",
+      "sha256": "f8ab3431ff52aecf5c2d1bf3dcb40fffe602999bb3331e56aa095a2cc466267f"
+    },
+    {
+      "path": "local/native-work-review-01/tool-checks.log",
+      "sha256": "afbb98a7052e76ce2cfa75fe95f04d5ac033914fa88a5aec4b00f9d711325867"
+    },
+    {
+      "path": "tools/experimental/native_work.py",
+      "sha256": "e2554c1ee2bf361e27f6bf36fd7a62e8aba03525ca3355a3bce90d89e9787643"
+    },
+    {
+      "path": "tools/experimental/test_native_work.py",
+      "sha256": "faa90db3a532e8f800e7f9d505ec55e39b1cce555431cd6ec70f09b480056309"
+    },
+    {
+      "path": "tools/experimental/summarize_native_work.py",
+      "sha256": "04d720186b42faa6ed8776b3f9b62af841a17916f1d56ca5b061b8db93975390"
+    },
+    {
+      "path": "tools/experimental/summarize_profile.py",
+      "sha256": "975b48b3e8f64c27f33eeee9212c627a7b4f3112a22fc87b87a1264cf8eea563"
+    },
+    {
+      "path": "tools/experimental/plain_wire_benchmark.py",
+      "sha256": "7e04d999be2dc7a82439bd870c192e96c597b300a08cfccf4e12a72e530b54aa"
+    },
+    {
+      "path": "tools/experimental/legacy_bench.py",
+      "sha256": "6c57baede6698dc00b75913bcf2f853a5b1e9adf527d623c29573e0248a9a949"
+    }
+  ],
+  "limitations": [
+    "Timing is diagnostic and includes observation overhead; this is not a new clean performance result.",
+    "Callback sequences reveal the path through the pinned native algorithm. Factorization and individual C function durations are not directly measured.",
+    "No client run or full acceptance was launched; retained gameplay artifacts are unchanged."
+  ]
+}

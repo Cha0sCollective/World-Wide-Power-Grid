@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "passed": true,
+  "branch": "dev/experimental-plain-wire-batching",
+  "verified_file_references": 588,
+  "retained_source_hashes": 450,
+  "retained_build_artifacts": [
+    {
+      "path": "build/libs/wwpg-0.2.7-experimental.wiretree.11.jar",
+      "sha256": "fa5a133d685311485dde7441db4ac55db87e54b236bf7fb9ece41da27bdd7ba9"
+    },
+    {
+      "path": "build/libs/wwpg-0.2.7-experimental.wiretree.11-gametests.jar",
+      "sha256": "24d2d70ca4b8895d71e1d74c9fc49b23a1873507f4f1c10627f2443d1fc51636"
+    }
+  ],
+  "main_tracked_worktree_clean": true,
+  "main_untracked_entries": 307,
+  "local_document_links_checked": 49,
+  "python_syntax_files": 4,
+  "full_suite": false,
+  "graphical_acceptance": false,
+  "result": {
+    "path": "docs/experimental/native-residual-runtime-results-20261109.json",
+    "sha256": "5e1078fc637d0c39d94b4b91caabeeed8365ccdad91532c58ae44f9975a8f524"
+  },
+  "tool": {
+    "path": "tools/experimental/summarize_native_residual_runtime.py",
+    "sha256": "c0dbc02dfeda98a4c819928bb6e5266b7399f2c7f61189e4ffb9167759d821f6"
+  },
+  "note": "Checks frozen artifacts, raw measurement summaries, native identity, saved-world validation and source integrity. Preserved check counts are not relabeled as new executions."
+}

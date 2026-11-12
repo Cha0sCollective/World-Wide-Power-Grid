@@ -1,0 +1,1481 @@
+{
+  "schema": 1,
+  "scope": "Single instrumented copied-save restoration; no performance improvement or capacity claim",
+  "runtime_unchanged": true,
+  "runtime": {
+    "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\restoration-profile-01\\mods\\wwpg-0.2.7-experimental.plainwire.2.jar",
+    "sha256": "8f59be1043aaaf47c33561f3327ef5f52b5ca01eac8aef7039bd1066cb849aa2",
+    "kind": "local-candidate",
+    "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2.jar"
+  },
+  "helper": {
+    "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\restoration-profile-01\\mods\\wwpg-benchmark-0.1.0.jar",
+    "sha256": "cb67f3bbe08568992e1664558a3dc503c876be8cad5badf7872efbd763e3224e"
+  },
+  "validation": {
+    "passed": true,
+    "actual_nodes": 14650,
+    "edges": 20637,
+    "chunks": 953,
+    "storage_devices": 1050,
+    "healthy_ticks": 100,
+    "normal_shutdown": true,
+    "no_independent_cee_solves": true,
+    "full_suite": false
+  },
+  "sixteen_substeps": true,
+  "final_hundred_ticks_one_network_no_rebuild": true,
+  "original_reference_unchanged": true,
+  "isolated_reference_unchanged": true,
+  "loading": {
+    "phase": "SETTLE",
+    "cycle": 0,
+    "requested_chunks": 953,
+    "load_limit_ticks": 2859,
+    "chunks_ready_tick": 1019,
+    "graph_ready_tick": 1020,
+    "finish_tick": 1122,
+    "chunk_request_seconds": 1.3336139,
+    "chunk_loading_seconds": 111.8163828,
+    "graph_recovery_seconds": 0.117852,
+    "electrical_settling_seconds": 6.6956588,
+    "total_restoration_seconds": 119.9635075,
+    "restoration_and_settling_seconds": 118.6298936,
+    "healthy_ticks": 100
+  },
+  "loading_totals": {
+    "allocations": 700,
+    "allocation_ns": 54422500,
+    "matrix_stamps": 700,
+    "matrix_stamp_ns": 12503387300,
+    "topology_rebuilds": 700,
+    "drift_rebuilds": 0,
+    "timestep_updates": 0,
+    "graph_requests": 1909,
+    "graph_ns": 1773369100,
+    "accepted_substeps": 3545924,
+    "rejected_substeps": 700
+  },
+  "intervals": [
+    {
+      "first_tick": 1,
+      "last_tick": 20,
+      "matrix_stamps": 351,
+      "matrix_stamp_seconds": 0.0644365,
+      "network_substep_calls": 5616
+    },
+    {
+      "first_tick": 21,
+      "last_tick": 350,
+      "matrix_stamps": 61,
+      "matrix_stamp_seconds": 0.5280283,
+      "network_substep_calls": 1841392
+    },
+    {
+      "first_tick": 351,
+      "last_tick": 700,
+      "matrix_stamps": 234,
+      "matrix_stamp_seconds": 6.0987451,
+      "network_substep_calls": 1397184
+    },
+    {
+      "first_tick": 701,
+      "last_tick": 1019,
+      "matrix_stamps": 53,
+      "matrix_stamp_seconds": 5.6923444,
+      "network_substep_calls": 300800
+    },
+    {
+      "first_tick": 1020,
+      "last_tick": 1122,
+      "matrix_stamps": 1,
+      "matrix_stamp_seconds": 0.119833,
+      "network_substep_calls": 1632
+    }
+  ],
+  "readiness_timeline": [
+    {
+      "tick": 20,
+      "block_chunks_present": 953,
+      "ticking_chunks": 0,
+      "entity_chunks_loaded": 28,
+      "entity_loading_inbox": 0,
+      "pg_wire_entities": 162,
+      "solver_networks": 351,
+      "largest_matrix": 6120,
+      "waiting_status_counts": {
+        "FRESH/HIDDEN": 268,
+        "LOADED/TICKING": 28,
+        "PENDING/TICKING": 657
+      }
+    },
+    {
+      "tick": 100,
+      "block_chunks_present": 953,
+      "ticking_chunks": 0,
+      "entity_chunks_loaded": 184,
+      "entity_loading_inbox": 0,
+      "pg_wire_entities": 1050,
+      "solver_networks": 351,
+      "largest_matrix": 6917,
+      "waiting_status_counts": {
+        "FRESH/HIDDEN": 268,
+        "LOADED/TICKING": 184,
+        "PENDING/TICKING": 501
+      }
+    },
+    {
+      "tick": 200,
+      "block_chunks_present": 953,
+      "ticking_chunks": 0,
+      "entity_chunks_loaded": 384,
+      "entity_loading_inbox": 0,
+      "pg_wire_entities": 2172,
+      "solver_networks": 351,
+      "largest_matrix": 7823,
+      "waiting_status_counts": {
+        "FRESH/HIDDEN": 268,
+        "LOADED/TICKING": 384,
+        "PENDING/TICKING": 301
+      }
+    },
+    {
+      "tick": 300,
+      "block_chunks_present": 953,
+      "ticking_chunks": 0,
+      "entity_chunks_loaded": 592,
+      "entity_loading_inbox": 0,
+      "pg_wire_entities": 3355,
+      "solver_networks": 351,
+      "largest_matrix": 8803,
+      "waiting_status_counts": {
+        "FRESH/HIDDEN": 268,
+        "LOADED/TICKING": 592,
+        "PENDING/TICKING": 93
+      }
+    },
+    {
+      "tick": 400,
+      "block_chunks_present": 953,
+      "ticking_chunks": 295,
+      "entity_chunks_loaded": 690,
+      "entity_loading_inbox": 0,
+      "pg_wire_entities": 3910,
+      "solver_networks": 351,
+      "largest_matrix": 9872,
+      "waiting_status_counts": {
+        "FRESH/HIDDEN": 263,
+        "LOADED/TICKING": 438
+      }
+    },
+    {
+      "tick": 500,
+      "block_chunks_present": 953,
+      "ticking_chunks": 816,
+      "entity_chunks_loaded": 690,
+      "entity_loading_inbox": 0,
+      "pg_wire_entities": 3910,
+      "solver_networks": 351,
+      "largest_matrix": 10990,
+      "waiting_status_counts": {
+        "FRESH/HIDDEN": 263
+      }
+    },
+    {
+      "tick": 600,
+      "block_chunks_present": 953,
+      "ticking_chunks": 898,
+      "entity_chunks_loaded": 760,
+      "entity_loading_inbox": 0,
+      "pg_wire_entities": 4687,
+      "solver_networks": 116,
+      "largest_matrix": 11728,
+      "waiting_status_counts": {
+        "FRESH/HIDDEN": 193
+      }
+    },
+    {
+      "tick": 700,
+      "block_chunks_present": 953,
+      "ticking_chunks": 953,
+      "entity_chunks_loaded": 816,
+      "entity_loading_inbox": 0,
+      "pg_wire_entities": 5028,
+      "solver_networks": 111,
+      "largest_matrix": 12158,
+      "waiting_status_counts": {
+        "FRESH/HIDDEN": 137
+      }
+    },
+    {
+      "tick": 800,
+      "block_chunks_present": 953,
+      "ticking_chunks": 953,
+      "entity_chunks_loaded": 816,
+      "entity_loading_inbox": 0,
+      "pg_wire_entities": 5028,
+      "solver_networks": 111,
+      "largest_matrix": 12158,
+      "waiting_status_counts": {
+        "FRESH/HIDDEN": 137
+      }
+    },
+    {
+      "tick": 900,
+      "block_chunks_present": 953,
+      "ticking_chunks": 953,
+      "entity_chunks_loaded": 880,
+      "entity_loading_inbox": 0,
+      "pg_wire_entities": 5637,
+      "solver_networks": 12,
+      "largest_matrix": 14351,
+      "waiting_status_counts": {
+        "FRESH/HIDDEN": 73
+      }
+    },
+    {
+      "tick": 1000,
+      "block_chunks_present": 953,
+      "ticking_chunks": 953,
+      "entity_chunks_loaded": 935,
+      "entity_loading_inbox": 0,
+      "pg_wire_entities": 5880,
+      "solver_networks": 2,
+      "largest_matrix": 14808,
+      "waiting_status_counts": {
+        "FRESH/HIDDEN": 18
+      }
+    },
+    {
+      "tick": 1100,
+      "block_chunks_present": 953,
+      "ticking_chunks": 953,
+      "entity_chunks_loaded": 953,
+      "entity_loading_inbox": 0,
+      "pg_wire_entities": 5943,
+      "solver_networks": 1,
+      "largest_matrix": 14925,
+      "waiting_status_counts": {}
+    }
+  ],
+  "first_snapshot_all_block_chunks": true,
+  "largest_matrix": 14925,
+  "counters": {
+    "excluded_tick": 1,
+    "first_tick_raw": {
+      "tick": "1",
+      "phase": "SETTLE",
+      "stage": "fixed-l3-b",
+      "wall_tick_ns": "2357473400",
+      "cpu_tick_ns": "1953125000",
+      "allocated_bytes": "12917591424",
+      "entry_cpu": "12",
+      "exit_cpu": "13",
+      "wall_unix_ms": "1794164643627",
+      "compile_ms": "92717"
+    },
+    "ticks": 1121,
+    "window_start_unix_ms": 1794164643849.1992,
+    "window_end_unix_ms": 1794164759881,
+    "wall_seconds": 116.03180078125,
+    "in_tick_wall_seconds": 85.3353855,
+    "in_tick_cpu_seconds": 85.25,
+    "in_tick_allocated_bytes": 31127243872,
+    "note": "Counters cover tick bodies only; entity reconstruction also runs between ticks."
+  },
+  "jfr": {
+    "server_samples": 7848,
+    "sample_types": {
+      "jdk.ExecutionSample": 7624,
+      "jdk.NativeMethodSample": 224
+    },
+    "exclusive_groups": [
+      {
+        "name": "wire_tree_resolution",
+        "samples": 3093,
+        "percent": 39.41131498470948
+      },
+      {
+        "name": "electrical_schedule",
+        "samples": 2349,
+        "percent": 29.931192660550458
+      },
+      {
+        "name": "cee_preparation",
+        "samples": 1130,
+        "percent": 14.398572884811417
+      },
+      {
+        "name": "other",
+        "samples": 1073,
+        "percent": 13.672273190621814
+      },
+      {
+        "name": "cee_commit",
+        "samples": 203,
+        "percent": 2.5866462793068297
+      }
+    ],
+    "trace_callers": [
+      {
+        "name": "org.patryk3211.powergrid.electricity.WorldNetworks.tryGrabUnloadedPart",
+        "samples": 2400,
+        "percent": 30.581039755351682
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.WorldNetworks.nodeHolderAdded",
+        "samples": 693,
+        "percent": 8.830275229357799
+      }
+    ],
+    "inclusive_frames": [
+      {
+        "name": "net.minecraft.server.MinecraftServer.runServer",
+        "samples": 7814,
+        "percent": 99.56676860346585
+      },
+      {
+        "name": "net.minecraft.server.MinecraftServer.lambda$spin$2",
+        "samples": 7782,
+        "percent": 99.15902140672783
+      },
+      {
+        "name": "net.minecraft.server.MinecraftServer$$Lambda.0x0000016660611300.run",
+        "samples": 7748,
+        "percent": 98.72579001019368
+      },
+      {
+        "name": "java.lang.Thread.runWith",
+        "samples": 7736,
+        "percent": 98.57288481141693
+      },
+      {
+        "name": "java.lang.Thread.run",
+        "samples": 7497,
+        "percent": 95.52752293577981
+      },
+      {
+        "name": "net.minecraft.server.MinecraftServer.redirect$zgl000$wwpg_benchmark$bench$tick",
+        "samples": 5430,
+        "percent": 69.18960244648318
+      },
+      {
+        "name": "net.minecraft.server.MinecraftServer.tickServer",
+        "samples": 5365,
+        "percent": 68.36136595310907
+      },
+      {
+        "name": "net.minecraft.server.MinecraftServer.tickChildren",
+        "samples": 4029,
+        "percent": 51.337920489296636
+      },
+      {
+        "name": "net.minecraft.server.dedicated.DedicatedServer.tickChildren",
+        "samples": 4029,
+        "percent": 51.337920489296636
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.WorldNetworks.traceTree",
+        "samples": 3093,
+        "percent": 39.41131498470948
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.WorldNetworks.handler$zdk000$wwpg$traceWithoutRecursion",
+        "samples": 3093,
+        "percent": 39.41131498470948
+      },
+      {
+        "name": "org.cha0scollective.wwpg.wiring.WireTreeTraversal.trace",
+        "samples": 3093,
+        "percent": 39.41131498470948
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.WorldNetworks.resolveTree",
+        "samples": 3093,
+        "percent": 39.41131498470948
+      },
+      {
+        "name": "org.cha0scollective.wwpg.wiring.WireTreeTraversal.enter",
+        "samples": 2672,
+        "percent": 34.04689092762487
+      },
+      {
+        "name": "java.util.stream.AbstractPipeline.evaluate",
+        "samples": 2538,
+        "percent": 32.3394495412844
+      },
+      {
+        "name": "java.util.stream.AbstractPipeline.wrapAndCopyInto",
+        "samples": 2535,
+        "percent": 32.301223241590215
+      },
+      {
+        "name": "java.util.stream.AbstractPipeline.copyInto",
+        "samples": 2520,
+        "percent": 32.11009174311926
+      },
+      {
+        "name": "java.util.stream.ReferencePipeline.collect",
+        "samples": 2460,
+        "percent": 31.345565749235472
+      },
+      {
+        "name": "java.util.stream.ReduceOps$ReduceOp.evaluateSequential",
+        "samples": 2460,
+        "percent": 31.345565749235472
+      },
+      {
+        "name": "net.neoforged.bus.EventBus.post",
+        "samples": 2458,
+        "percent": 31.320081549439347
+      },
+      {
+        "name": "java.lang.invoke.LambdaForm$MH.0x000001665f37c400.invokeExact_MT",
+        "samples": 2427,
+        "percent": 30.925076452599388
+      },
+      {
+        "name": "java.lang.invoke.LambdaForm$DMH.0x000001665f002800.invokeStatic",
+        "samples": 2426,
+        "percent": 30.912334352701325
+      },
+      {
+        "name": "net.minecraft.util.thread.BlockableEventLoop.pollTask",
+        "samples": 2413,
+        "percent": 30.746687054026502
+      },
+      {
+        "name": "net.minecraft.server.MinecraftServer.pollTaskInternal",
+        "samples": 2413,
+        "percent": 30.746687054026502
+      },
+      {
+        "name": "net.minecraft.util.thread.BlockableEventLoop.doRunTask",
+        "samples": 2412,
+        "percent": 30.73394495412844
+      },
+      {
+        "name": "java.util.concurrent.CompletableFuture$Completion.run",
+        "samples": 2412,
+        "percent": 30.73394495412844
+      },
+      {
+        "name": "java.util.concurrent.CompletableFuture$UniApply.tryFire",
+        "samples": 2412,
+        "percent": 30.73394495412844
+      },
+      {
+        "name": "net.minecraft.world.level.chunk.storage.EntityStorage.lambda$loadEntities$0",
+        "samples": 2410,
+        "percent": 30.708460754332314
+      },
+      {
+        "name": "net.minecraft.server.MinecraftServer.doRunTask",
+        "samples": 2410,
+        "percent": 30.708460754332314
+      },
+      {
+        "name": "net.minecraft.world.level.chunk.storage.EntityStorage$$Lambda.0x00000166606f7528.apply",
+        "samples": 2410,
+        "percent": 30.708460754332314
+      },
+      {
+        "name": "net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask",
+        "samples": 2410,
+        "percent": 30.708460754332314
+      },
+      {
+        "name": "java.util.Spliterator.forEachRemaining",
+        "samples": 2410,
+        "percent": 30.708460754332314
+      },
+      {
+        "name": "java.util.Spliterators$IteratorSpliterator.tryAdvance",
+        "samples": 2410,
+        "percent": 30.708460754332314
+      },
+      {
+        "name": "net.minecraft.util.thread.ProcessorMailbox.run",
+        "samples": 2410,
+        "percent": 30.708460754332314
+      },
+      {
+        "name": "net.minecraft.server.TickTask.run",
+        "samples": 2410,
+        "percent": 30.708460754332314
+      },
+      {
+        "name": "net.minecraft.world.entity.EntityType$1.tryAdvance",
+        "samples": 2410,
+        "percent": 30.708460754332314
+      },
+      {
+        "name": "net.minecraft.util.thread.ProcessorMailbox.pollUntil",
+        "samples": 2410,
+        "percent": 30.708460754332314
+      },
+      {
+        "name": "net.minecraft.util.thread.ProcessorMailbox.pollTask",
+        "samples": 2410,
+        "percent": 30.708460754332314
+      },
+      {
+        "name": "net.minecraft.world.entity.EntityType.create",
+        "samples": 2409,
+        "percent": 30.695718654434252
+      },
+      {
+        "name": "net.minecraft.world.entity.EntityType$1.lambda$tryAdvance$1",
+        "samples": 2409,
+        "percent": 30.695718654434252
+      },
+      {
+        "name": "net.minecraft.world.entity.EntityType.loadEntityRecursive",
+        "samples": 2409,
+        "percent": 30.695718654434252
+      },
+      {
+        "name": "net.minecraft.world.entity.EntityType.lambda$create$5",
+        "samples": 2409,
+        "percent": 30.695718654434252
+      },
+      {
+        "name": "net.minecraft.world.entity.Entity.load",
+        "samples": 2409,
+        "percent": 30.695718654434252
+      },
+      {
+        "name": "net.minecraft.world.entity.EntityType$$Lambda.0x00000166607648c0.accept",
+        "samples": 2409,
+        "percent": 30.695718654434252
+      },
+      {
+        "name": "net.minecraft.world.entity.EntityType.loadStaticEntity",
+        "samples": 2409,
+        "percent": 30.695718654434252
+      },
+      {
+        "name": "net.minecraft.Util.ifElse",
+        "samples": 2409,
+        "percent": 30.695718654434252
+      },
+      {
+        "name": "net.minecraft.world.entity.EntityType$1$$Lambda.0x000001666074fb70.accept",
+        "samples": 2409,
+        "percent": 30.695718654434252
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.wire.HangingWireEntity.readAdditionalSaveData",
+        "samples": 2408,
+        "percent": 30.682976554536186
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.wire.BaseWireEntity.readAdditionalSaveData",
+        "samples": 2406,
+        "percent": 30.65749235474006
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.wire.BaseWireEntity.setEndpoint2",
+        "samples": 2404,
+        "percent": 30.632008154943936
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.wire.WireEntity.makeWire",
+        "samples": 2402,
+        "percent": 30.606523955147807
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.GlobalElectricNetworks.makeConnection",
+        "samples": 2400,
+        "percent": 30.581039755351682
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.WorldNetworks.tryGrabUnloadedPart",
+        "samples": 2400,
+        "percent": 30.581039755351682
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.WorldNetworks.makeTransmissionLine",
+        "samples": 2400,
+        "percent": 30.581039755351682
+      },
+      {
+        "name": "net.minecraft.util.thread.BlockableEventLoop.runAllTasks",
+        "samples": 2398,
+        "percent": 30.555555555555557
+      },
+      {
+        "name": "net.minecraft.server.MinecraftServer.pollTask",
+        "samples": 2398,
+        "percent": 30.555555555555557
+      },
+      {
+        "name": "net.minecraft.server.MinecraftServer.waitUntilNextTick",
+        "samples": 2394,
+        "percent": 30.504587155963304
+      },
+      {
+        "name": "dev.architectury.event.forge.EventHandlerImplCommon.event",
+        "samples": 2365,
+        "percent": 30.13506625891947
+      },
+      {
+        "name": "net.neoforged.neoforge.event.EventHooks.fireLevelTickPre",
+        "samples": 2351,
+        "percent": 29.956676860346587
+      },
+      {
+        "name": "net.neoforged.bus.EventListenerFactory$event.0x000001665fc69c00.invoke",
+        "samples": 2350,
+        "percent": 29.94393476044852
+      },
+      {
+        "name": "org.patryk3211.powergrid.PowerGrid$$Lambda.0x0000016660078000.tick",
+        "samples": 2349,
+        "percent": 29.931192660550458
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.GlobalElectricNetworks.handler$zgk000$wwpg$interleaveDimensions",
+        "samples": 2349,
+        "percent": 29.931192660550458
+      },
+      {
+        "name": "org.cha0scollective.wwpg.bridge.ServerElectricalSchedule.preTick",
+        "samples": 2349,
+        "percent": 29.931192660550458
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.GlobalElectricNetworks.preTick",
+        "samples": 2349,
+        "percent": 29.931192660550458
+      },
+      {
+        "name": "java.lang.invoke.LambdaForm$MH.0x0000016660790400.invoke",
+        "samples": 2295,
+        "percent": 29.243119266055047
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.WorldNetworks$Anonymous$f9eb27b7970a46d496edbbe2f0e06803.enter",
+        "samples": 2276,
+        "percent": 29.001019367991844
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint.getNode",
+        "samples": 1701,
+        "percent": 21.674311926605505
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.WorldNetworks.addAndMigrateNode",
+        "samples": 1694,
+        "percent": 21.585117227319063
+      },
+      {
+        "name": "net.minecraft.server.level.ServerLevel.tick",
+        "samples": 1663,
+        "percent": 21.190112130479104
+      },
+      {
+        "name": "org.cha0scollective.wwpg.bridge.WorldBridge.prepare",
+        "samples": 1130,
+        "percent": 14.398572884811417
+      },
+      {
+        "name": "com.george_vi.electroenergetics.simulation.simulator.SimulationTicker.tick",
+        "samples": 1130,
+        "percent": 14.398572884811417
+      },
+      {
+        "name": "net.minecraft.server.MinecraftServer.handler$zhn000$electroenergetics$electroEnergetics$tickServerPre",
+        "samples": 1130,
+        "percent": 14.398572884811417
+      },
+      {
+        "name": "com.george_vi.electroenergetics.simulation.simulator.SimulationTicker.handler$zdf001$wwpg$prepare",
+        "samples": 1130,
+        "percent": 14.398572884811417
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint.getElectricBehaviour",
+        "samples": 1124,
+        "percent": 14.322120285423038
+      },
+      {
+        "name": "org.cha0scollective.wwpg.bridge.ServerElectricalSchedule.solve",
+        "samples": 1015,
+        "percent": 12.933231396534149
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.base.IElectric.getAt",
+        "samples": 967,
+        "percent": 12.321610601427116
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.base.IElectric.handler$zeh000$wwpg$ceeTerminals",
+        "samples": 959,
+        "percent": 12.21967380224261
+      },
+      {
+        "name": "org.cha0scollective.wwpg.wiring.Terminals.electric",
+        "samples": 952,
+        "percent": 12.130479102956167
+      },
+      {
+        "name": "net.minecraft.world.level.Level.tickBlockEntities",
+        "samples": 944,
+        "percent": 12.028542303771662
+      },
+      {
+        "name": "net.minecraft.world.level.chunk.LevelChunk$RebindableTickingBlockEntityWrapper.tick",
+        "samples": 896,
+        "percent": 11.416921508664627
+      },
+      {
+        "name": "net.minecraft.world.level.chunk.LevelChunk$BoundTickingBlockEntity.tick",
+        "samples": 896,
+        "percent": 11.416921508664627
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint.getElectricBlock",
+        "samples": 881,
+        "percent": 11.22579001019368
+      },
+      {
+        "name": "com.simibubi.create.foundation.blockEntity.SmartBlockEntityTicker.tick",
+        "samples": 859,
+        "percent": 10.945463812436289
+      },
+      {
+        "name": "java.util.HashMap.put",
+        "samples": 806,
+        "percent": 10.27013251783894
+      },
+      {
+        "name": "com.simibubi.create.foundation.blockEntity.SmartBlockEntity.forEachBehaviour",
+        "samples": 799,
+        "percent": 10.180937818552497
+      },
+      {
+        "name": "com.simibubi.create.foundation.blockEntity.SmartBlockEntity.tick",
+        "samples": 799,
+        "percent": 10.180937818552497
+      },
+      {
+        "name": "it.unimi.dsi.fastutil.objects.Reference2ObjectArrayMap$ValuesCollection.forEach",
+        "samples": 799,
+        "percent": 10.180937818552497
+      },
+      {
+        "name": "org.cha0scollective.wwpg.bridge.WorldBridge.synchronize",
+        "samples": 794,
+        "percent": 10.11722731906218
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.base.ElectricBlockEntity.tick",
+        "samples": 793,
+        "percent": 10.104485219164118
+      },
+      {
+        "name": "com.simibubi.create.foundation.blockEntity.SmartBlockEntity.initialize",
+        "samples": 771,
+        "percent": 9.824159021406729
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.base.ElectricBehaviour.initialize",
+        "samples": 771,
+        "percent": 9.824159021406729
+      },
+      {
+        "name": "com.simibubi.create.foundation.blockEntity.SmartBlockEntity$$Lambda.0x000001666076f668.accept",
+        "samples": 771,
+        "percent": 9.824159021406729
+      },
+      {
+        "name": "java.util.HashMap.getNode",
+        "samples": 718,
+        "percent": 9.148827726809378
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.GlobalElectricNetworks.nodeHolderAdded",
+        "samples": 694,
+        "percent": 8.843017329255861
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.WorldNetworks.nodeHolderAdded",
+        "samples": 694,
+        "percent": 8.843017329255861
+      },
+      {
+        "name": "java.util.HashMap.putVal",
+        "samples": 689,
+        "percent": 8.779306829765545
+      },
+      {
+        "name": "java.util.HashMap.get",
+        "samples": 628,
+        "percent": 8.00203873598369
+      },
+      {
+        "name": "org.cha0scollective.wwpg.wiring.Terminals.nativePg",
+        "samples": 614,
+        "percent": 7.823649337410806
+      },
+      {
+        "name": "net.minecraft.server.level.ServerChunkCache.getChunkNow",
+        "samples": 597,
+        "percent": 7.607033639143731
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.WorldNetworks.preTick",
+        "samples": 568,
+        "percent": 7.237512742099898
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.sim.ElectricalNetwork.mixinextras$bridge$singleTick$mixinextras$wrapped$86$87",
+        "samples": 560,
+        "percent": 7.135575942915392
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.sim.ElectricalNetwork.singleTick",
+        "samples": 560,
+        "percent": 7.135575942915392
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.sim.ElectricalNetwork.wrapMethod$zgn000$wwpg_benchmark$solve",
+        "samples": 560,
+        "percent": 7.135575942915392
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.sim.ElectricalNetwork.singleTick$mixinextras$wrapped$86",
+        "samples": 560,
+        "percent": 7.135575942915392
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.sim.ElectricalNetwork$$Lambda.0x000001666077fad0.call",
+        "samples": 560,
+        "percent": 7.135575942915392
+      },
+      {
+        "name": "org.cha0scollective.wwpg.wiring.CeeElectric$EndpointBehaviour.getTerminal",
+        "samples": 535,
+        "percent": 6.817023445463812
+      },
+      {
+        "name": "java.util.HashSet.add",
+        "samples": 534,
+        "percent": 6.804281345565749
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.sim.node.INode.getStateValue",
+        "samples": 444,
+        "percent": 5.657492354740061
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.sim.node.FloatingNode.getVoltage",
+        "samples": 444,
+        "percent": 5.657492354740061
+      },
+      {
+        "name": "net.minecraft.world.level.entity.EntityTickList.forEach",
+        "samples": 444,
+        "percent": 5.657492354740061
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.sim.ElectricalNetwork.getValue",
+        "samples": 443,
+        "percent": 5.644750254841998
+      },
+      {
+        "name": "net.minecraft.server.level.ServerLevel.lambda$tick$2",
+        "samples": 434,
+        "percent": 5.530071355759429
+      },
+      {
+        "name": "net.minecraft.server.level.ServerLevel$$Lambda.0x000001666073f618.accept",
+        "samples": 434,
+        "percent": 5.530071355759429
+      },
+      {
+        "name": "net.minecraft.server.level.ServerLevel$$Lambda.0x000001666076d5b8.accept",
+        "samples": 416,
+        "percent": 5.300713557594292
+      },
+      {
+        "name": "net.minecraft.server.level.ServerLevel.tickNonPassenger",
+        "samples": 416,
+        "percent": 5.300713557594292
+      },
+      {
+        "name": "net.minecraft.world.level.Level.guardEntityTick",
+        "samples": 416,
+        "percent": 5.300713557594292
+      },
+      {
+        "name": "org.cha0scollective.wwpg.wiring.CeeElectric$EndpointBehaviour.hasTerminal",
+        "samples": 406,
+        "percent": 5.173292558613659
+      },
+      {
+        "name": "org.cha0scollective.wwpg.wiring.CeeElectric.accessible",
+        "samples": 405,
+        "percent": 5.160550458715596
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.wire.HangingWireEntity.tick",
+        "samples": 386,
+        "percent": 4.918450560652396
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.wire.WireEntity.tick",
+        "samples": 375,
+        "percent": 4.7782874617737
+      }
+    ],
+    "leaf_frames": [
+      {
+        "name": "java.util.HashMap.putVal",
+        "samples": 541,
+        "percent": 6.893476044852192
+      },
+      {
+        "name": "java.util.HashMap.getNode",
+        "samples": 477,
+        "percent": 6.077981651376147
+      },
+      {
+        "name": "java.lang.ThreadLocal$ThreadLocalMap.getEntry",
+        "samples": 352,
+        "percent": 4.485219164118247
+      },
+      {
+        "name": "net.minecraft.server.level.GenerationChunkHolder.getChunkIfPresentUnchecked",
+        "samples": 263,
+        "percent": 3.3511722731906217
+      },
+      {
+        "name": "it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap.get",
+        "samples": 215,
+        "percent": 2.7395514780835883
+      },
+      {
+        "name": "it.unimi.dsi.fastutil.longs.Long2ObjectLinkedOpenHashMap.get",
+        "samples": 210,
+        "percent": 2.675840978593272
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.WorldNetworks$Anonymous$f9eb27b7970a46d496edbbe2f0e06803.other",
+        "samples": 209,
+        "percent": 2.663098878695209
+      },
+      {
+        "name": "java.util.HashMap$TreeNode.getTreeNode",
+        "samples": 168,
+        "percent": 2.140672782874618
+      },
+      {
+        "name": "it.unimi.dsi.fastutil.objects.Reference2ObjectArrayMap.get",
+        "samples": 163,
+        "percent": 2.0769622833843018
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.sim.solver.NativeMNA.processJacobianBuffer",
+        "samples": 150,
+        "percent": 1.9113149847094801
+      },
+      {
+        "name": "java.util.HashMap.keysToArray",
+        "samples": 148,
+        "percent": 1.8858307849133538
+      },
+      {
+        "name": "java.util.HashMap$HashIterator.nextNode",
+        "samples": 144,
+        "percent": 1.834862385321101
+      },
+      {
+        "name": "org.cha0scollective.wwpg.bridge.WorldBridge.afterSolve",
+        "samples": 139,
+        "percent": 1.7711518858307849
+      },
+      {
+        "name": "java.util.HashMap.resize",
+        "samples": 138,
+        "percent": 1.7584097859327217
+      },
+      {
+        "name": "it.unimi.dsi.fastutil.longs.Long2ByteOpenHashMap.get",
+        "samples": 138,
+        "percent": 1.7584097859327217
+      },
+      {
+        "name": "java.util.Arrays.hashCode",
+        "samples": 137,
+        "percent": 1.7456676860346585
+      },
+      {
+        "name": "java.util.concurrent.CompletableFuture.getNow",
+        "samples": 119,
+        "percent": 1.516309887869521
+      },
+      {
+        "name": "java.util.HashMap.computeIfAbsent",
+        "samples": 108,
+        "percent": 1.3761467889908257
+      },
+      {
+        "name": "java.util.IdentityHashMap.get",
+        "samples": 104,
+        "percent": 1.325178389398573
+      },
+      {
+        "name": "org.cha0scollective.wwpg.extension.NativeApiReadings.after$mixinextras$wrapped$31",
+        "samples": 97,
+        "percent": 1.2359836901121304
+      },
+      {
+        "name": "java.lang.Double.isFinite",
+        "samples": 96,
+        "percent": 1.2232415902140672
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.WorldNetworks$Anonymous$f9eb27b7970a46d496edbbe2f0e06803.resolve",
+        "samples": 92,
+        "percent": 1.1722731906218145
+      },
+      {
+        "name": "org.patryk3211.powergrid.electricity.sim.ElectricalNetwork.singleTick$mixinextras$wrapped$86",
+        "samples": 92,
+        "percent": 1.1722731906218145
+      },
+      {
+        "name": "net.neoforged.neoforge.registries.DeferredHolder.value",
+        "samples": 88,
+        "percent": 1.1213047910295617
+      },
+      {
+        "name": "java.util.ImmutableCollections$SetN.probe",
+        "samples": 85,
+        "percent": 1.0830784913353722
+      },
+      {
+        "name": "net.minecraft.world.level.Level.getChunk",
+        "samples": 78,
+        "percent": 0.9938837920489296
+      },
+      {
+        "name": "org.cha0scollective.wwpg.bridge.WorldBridge.synchronize",
+        "samples": 76,
+        "percent": 0.9683995922528033
+      },
+      {
+        "name": "net.minecraft.server.level.ServerChunkCache.getChunkNow",
+        "samples": 74,
+        "percent": 0.9429153924566769
+      },
+      {
+        "name": "net.minecraft.server.level.ServerChunkCache.storeInCache",
+        "samples": 74,
+        "percent": 0.9429153924566769
+      },
+      {
+        "name": "org.cha0scollective.wwpg.wiring.Terminals.nativePg",
+        "samples": 74,
+        "percent": 0.9429153924566769
+      }
+    ],
+    "gc_pause_seconds": 0.2307067,
+    "server_park_seconds": 0.0,
+    "sampled_allocation_weight_bytes": 60404933024,
+    "trace_allocation_weight_bytes": 35731486224,
+    "allocation_sites": [
+      {
+        "site": "org.cha0scollective.wwpg.extension.ApiTerminalIdentities.ownersAt",
+        "sampled_weight_bytes": 11213394696
+      },
+      {
+        "site": "org.cha0scollective.wwpg.wiring.CeeElectric.accessible",
+        "sampled_weight_bytes": 7608492976
+      },
+      {
+        "site": "org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint.hashCode",
+        "sampled_weight_bytes": 7069168488
+      },
+      {
+        "site": "org.cha0scollective.wwpg.wiring.WireTreeTraversal.enter",
+        "sampled_weight_bytes": 4889985280
+      },
+      {
+        "site": "org.patryk3211.powergrid.electricity.WorldNetworks$Anonymous$f9eb27b7970a46d496edbbe2f0e06803.enter",
+        "sampled_weight_bytes": 3388114032
+      },
+      {
+        "site": "other",
+        "sampled_weight_bytes": 2168004720
+      },
+      {
+        "site": "org.patryk3211.powergrid.electricity.sim.AbstractElectricWire.affectedNodes",
+        "sampled_weight_bytes": 2110154904
+      },
+      {
+        "site": "com.george_vi.electroenergetics.foundation.nodes.NodeConfigurator.rotate",
+        "sampled_weight_bytes": 1811875736
+      },
+      {
+        "site": "com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelBlockEntity.getNodePositions",
+        "sampled_weight_bytes": 1410887072
+      },
+      {
+        "site": "org.cha0scollective.wwpg.bridge.RestorationCoordinator.records",
+        "sampled_weight_bytes": 1312777504
+      },
+      {
+        "site": "org.cha0scollective.wwpg.bridge.WorldBridge.synchronize",
+        "sampled_weight_bytes": 1289632640
+      },
+      {
+        "site": "org.cha0scollective.wwpg.extension.NativeApiReadings.snapshot",
+        "sampled_weight_bytes": 1075456448
+      },
+      {
+        "site": "org.cha0scollective.wwpg.bridge.WorldBridge.finishSolving",
+        "sampled_weight_bytes": 814816616
+      },
+      {
+        "site": "org.patryk3211.powergrid.electricity.wire.EntityWireInteraction.wireTouching",
+        "sampled_weight_bytes": 776381768
+      },
+      {
+        "site": "org.patryk3211.powergrid.electricity.sim.NetworkGraph.getWires",
+        "sampled_weight_bytes": 740348536
+      },
+      {
+        "site": "org.cha0scollective.wwpg.wiring.WireTreeTraversal.trace",
+        "sampled_weight_bytes": 733025408
+      },
+      {
+        "site": "org.patryk3211.powergrid.electricity.wire.WireEntity.tick",
+        "sampled_weight_bytes": 724016760
+      },
+      {
+        "site": "org.cha0scollective.wwpg.bridge.BridgeSimulationResults.<init>",
+        "sampled_weight_bytes": 690346232
+      },
+      {
+        "site": "org.cha0scollective.wwpg.wiring.CeeElectric$EndpointBehaviour.resolveTerminal",
+        "sampled_weight_bytes": 650611264
+      },
+      {
+        "site": "org.patryk3211.powergrid.electricity.sim.ElectricalNetwork.computeRHS$mixinextras$wrapped$88",
+        "sampled_weight_bytes": 627048648
+      }
+    ],
+    "caution": "CPU samples are not exclusive elapsed timers. Allocation weights are estimates for the whole window, not tick-counter totals. Native stacks may be underrepresented."
+  },
+  "historical": [
+    {
+      "name": "property-enabled-clean-01",
+      "evidence": {
+        "path": "local/benchmarks/property-enabled-clean-01/benchmark/loading-results.json",
+        "sha256": "9543a75c4f18a6898cb2f3ef4b7792ab2a641a99534a43fe23d4ebd6563856ae"
+      },
+      "runtime": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\property-enabled-clean-01\\mods\\wwpg-0.2.7-experimental.plainwire.2.jar",
+        "sha256": "8f59be1043aaaf47c33561f3327ef5f52b5ca01eac8aef7039bd1066cb849aa2",
+        "kind": "local-candidate",
+        "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2.jar"
+      },
+      "loading": {
+        "phase": "SETTLE",
+        "cycle": 0,
+        "requested_chunks": 953,
+        "load_limit_ticks": 2859,
+        "chunks_ready_tick": 952,
+        "graph_ready_tick": 953,
+        "finish_tick": 1061,
+        "chunk_request_seconds": 1.0801759,
+        "chunk_loading_seconds": 109.7842432,
+        "graph_recovery_seconds": 0.1311345,
+        "electrical_settling_seconds": 6.996682,
+        "total_restoration_seconds": 117.9922356,
+        "restoration_and_settling_seconds": 116.9120597,
+        "healthy_ticks": 100
+      },
+      "evidence_mode": "historical"
+    },
+    {
+      "name": "property-enabled-clean-02",
+      "evidence": {
+        "path": "local/benchmarks/property-enabled-clean-02/benchmark/loading-results.json",
+        "sha256": "cc9b95f8df214b23c0365dcd67e5e02dd29108c73de8bc96a22b8dd23f16727e"
+      },
+      "runtime": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\property-enabled-clean-02\\mods\\wwpg-0.2.7-experimental.plainwire.2.jar",
+        "sha256": "8f59be1043aaaf47c33561f3327ef5f52b5ca01eac8aef7039bd1066cb849aa2",
+        "kind": "local-candidate",
+        "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2.jar"
+      },
+      "loading": {
+        "phase": "SETTLE",
+        "cycle": 0,
+        "requested_chunks": 953,
+        "load_limit_ticks": 2859,
+        "chunks_ready_tick": 945,
+        "graph_ready_tick": 946,
+        "finish_tick": 1056,
+        "chunk_request_seconds": 1.5236344,
+        "chunk_loading_seconds": 107.0477144,
+        "graph_recovery_seconds": 0.1149239,
+        "electrical_settling_seconds": 7.1017549,
+        "total_restoration_seconds": 115.7880276,
+        "restoration_and_settling_seconds": 114.2643932,
+        "healthy_ticks": 100
+      },
+      "evidence_mode": "historical"
+    },
+    {
+      "name": "profile-batched-timers-01",
+      "evidence": {
+        "path": "local/benchmarks/profile-batched-timers-01/benchmark/loading-results.json",
+        "sha256": "d52b970a644ca8e2bd959e1eabd4f757e56bd7908ff4d118c0e0264f932981e3"
+      },
+      "runtime": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\profile-batched-timers-01\\mods\\wwpg-0.2.7-experimental.plainwire.2.jar",
+        "sha256": "8f59be1043aaaf47c33561f3327ef5f52b5ca01eac8aef7039bd1066cb849aa2",
+        "kind": "local-candidate",
+        "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2.jar"
+      },
+      "loading": {
+        "phase": "SETTLE",
+        "cycle": 0,
+        "requested_chunks": 953,
+        "load_limit_ticks": 2859,
+        "chunks_ready_tick": 973,
+        "graph_ready_tick": 974,
+        "finish_tick": 1084,
+        "chunk_request_seconds": 1.6081214,
+        "chunk_loading_seconds": 114.9925716,
+        "graph_recovery_seconds": 0.1478985,
+        "electrical_settling_seconds": 7.4859904,
+        "total_restoration_seconds": 124.2345819,
+        "restoration_and_settling_seconds": 122.6264605,
+        "healthy_ticks": 100
+      },
+      "evidence_mode": "historical"
+    },
+    {
+      "name": "profile-batched-jfr-01",
+      "evidence": {
+        "path": "local/benchmarks/profile-batched-jfr-01/benchmark/loading-results.json",
+        "sha256": "fa5fd05da4aad2d37bbaf10b571bce1080d0f09192aff4a391b5044d8b97ae8d"
+      },
+      "runtime": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\profile-batched-jfr-01\\mods\\wwpg-0.2.7-experimental.plainwire.2.jar",
+        "sha256": "8f59be1043aaaf47c33561f3327ef5f52b5ca01eac8aef7039bd1066cb849aa2",
+        "kind": "local-candidate",
+        "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-02c\\wwpg-0.2.7-experimental.plainwire.2.jar"
+      },
+      "loading": {
+        "phase": "SETTLE",
+        "cycle": 0,
+        "requested_chunks": 953,
+        "load_limit_ticks": 2859,
+        "chunks_ready_tick": 969,
+        "graph_ready_tick": 970,
+        "finish_tick": 1080,
+        "chunk_request_seconds": 1.8371996,
+        "chunk_loading_seconds": 108.9304857,
+        "graph_recovery_seconds": 0.1455216,
+        "electrical_settling_seconds": 7.6196905,
+        "total_restoration_seconds": 118.5328974,
+        "restoration_and_settling_seconds": 116.6956978,
+        "healthy_ticks": 100
+      },
+      "evidence_mode": "historical"
+    },
+    {
+      "name": "packed-quiet-control-01",
+      "evidence": {
+        "path": "local/benchmarks/packed-quiet-control-01/benchmark/loading-results.json",
+        "sha256": "d9a53b3ad3b5f6d437976ce97a5edf4dcdc6d0ad06c8ef28c31776abb6c7179b"
+      },
+      "runtime": {
+        "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\packed-quiet-control-01\\mods\\wwpg-0.2.7-experimental.packed.1.jar",
+        "sha256": "80eabf8dc7c30e1bcd435988efacf9a6bfcae7628960b99a45eff63df319e314",
+        "kind": "local-candidate",
+        "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-03d\\wwpg-0.2.7-experimental.packed.1.jar"
+      },
+      "loading": {
+        "phase": "SETTLE",
+        "cycle": 0,
+        "requested_chunks": 953,
+        "load_limit_ticks": 2859,
+        "chunks_ready_tick": 940,
+        "graph_ready_tick": 941,
+        "finish_tick": 1052,
+        "chunk_request_seconds": 1.22546,
+        "chunk_loading_seconds": 96.0763359,
+        "graph_recovery_seconds": 0.1127559,
+        "electrical_settling_seconds": 6.6087149,
+        "total_restoration_seconds": 104.0232667,
+        "restoration_and_settling_seconds": 102.7978067,
+        "healthy_ticks": 100
+      },
+      "evidence_mode": "historical"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "local/benchmarks/restoration-profile-01/experiment.json",
+      "sha256": "e7895dca1ec75e1563fd8d55108f73dde190c57c24ccf903d6cee06fa5be3043"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/launch.json",
+      "sha256": "93fcd28af140aa2f6bdc2b25d6bff48d70b44b799c6db5e300a705286403834e"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/invocation.json",
+      "sha256": "b82e0968e7e0638413eabbf9701d171a5f1278b9a1c57013f738a2ff9369566a"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/restore-input.json",
+      "sha256": "0dd8696718501d3399a63963e9fda7b163de8c16fd9db2214269af7d4fa9ae6c"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/shutdown-save.json",
+      "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/runner-exit.json",
+      "sha256": "7152355470a89f5432867e92c82801312b7b7d616fb3030c758c9fc735e21cde"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/process.log",
+      "sha256": "2426d5cdae27aa2d2d38129af1f1a93d799fee472379c36ee75bbab02a4220f8"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/process-metrics.jsonl",
+      "sha256": "f2fef5eb3388a17cf54166633bea579b3fed4a2ad44fe27f28835c44c805b98a"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/loading.jfr",
+      "sha256": "46b4f2bed470082222190eaa82d3e96858716a2bb058ffd7469a823ad7fb700a"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/benchmark/loading-results.json",
+      "sha256": "9cfe3f8bf7fd0e472c67995395d5e6c31580b53a674d07ee1e93c0a9c1526eb4"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/benchmark/loading-timings.csv",
+      "sha256": "2967094e7ea781e18b158c06ff84b2b03f3af0d7835a3ddf63931920787b3139"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/benchmark/loading.jsonl",
+      "sha256": "4e4fda0a7de6907c8b3a2de7c72d8d6f2ae7da84071d419017e2ff434ef571c1"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/benchmark/ticks.csv",
+      "sha256": "275bff834379c923999b3e969422768751c85436cd8ad90c5a81d77c6946b0d0"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/benchmark/placement-ticks.csv",
+      "sha256": "2dcd88dbd6381f597c4543da1c8c3b1aa10b4ba1e5aa0620ec8f59f305d997ff"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/benchmark/result.json",
+      "sha256": "295e7d1d36b3ea64c5fbc61da3c788d0b9d268f4a130b5adfe6c53c08e408d91"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/benchmark/audit.json",
+      "sha256": "749e7c8971c2b0f5cea6a773b89dc7f1f670c76b697dd264b80f73de485eb59a"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/benchmark/ready-SETTLE-0.json",
+      "sha256": "310b5a0851e835ca6f65b11338bd14320cc427e6618225f60424037b6ac9da3b"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/benchmark/pre-solve-storage.json",
+      "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/benchmark/placement-fixed.json",
+      "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/benchmark/placement-restored.json",
+      "sha256": "2991d3d353f056f5da819f9a9348c6a7b71db411a10a103b026405ddb8cab6b6"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/benchmark/loading-jfr-compact.json",
+      "sha256": "9c237be4a57558674979175bb659d08d44a1ee2253d8fcfb1cce6146a02faaf7"
+    },
+    {
+      "path": "local/benchmarks/restoration-profile-01/benchmark/loading-jfr-summary.txt",
+      "sha256": "616625e409cb1b71bb0aba9f0a8ce17998195082d966133e1a3c35555be1594b"
+    }
+  ],
+  "inspected_sources": [
+    {
+      "path": "src/main/java/org/cha0scollective/wwpg/wiring/WireTreeTraversal.java",
+      "sha256": "cb38aae7f96d4c0bf1099758ffcd15e9f8969519d1e1bb9bec7351eb8ebc9a22"
+    },
+    {
+      "path": "src/main/java/org/cha0scollective/wwpg/mixin/PgWireTraceMixin.java",
+      "sha256": "7b44c411e4ac23d57bd9096c506a5d77319af19ee05c1fd44ed9deb03552f67f"
+    },
+    {
+      "path": "src/main/java/org/cha0scollective/wwpg/bridge/RestorationWindow.java",
+      "sha256": "9621139dc8e575609369c09171a66e49cffb8dfc4e857e43591ae5ab9e1fc6de"
+    },
+    {
+      "path": "src/main/java/org/cha0scollective/wwpg/bridge/RestorationCoordinator.java",
+      "sha256": "c9336036632cc145a38ee32955e24399c7bde85dce20e400bd4f4b32ee5b49ae"
+    },
+    {
+      "path": "tools/experimental/JfrCompact.java",
+      "sha256": "f9b588ca20c855dcd01eb6852b52e5dd710beb14efe8aa389d16deb59100e0dd"
+    },
+    {
+      "path": "tools/experimental/restoration_profile.py",
+      "sha256": "7be0ee964467184c8fd80f833d87395e05fece4756e300a5c2774b275fbfb09a"
+    },
+    {
+      "path": "local/restoration-source-01/BlockableEventLoop.java",
+      "sha256": "042868a63fd726b69217efe694d3acea684b128b552ea72b15dad66c86b3d912"
+    },
+    {
+      "path": "local/restoration-source-01/ChunkMap.java",
+      "sha256": "8051062b0f0b25b1f64704371b0d0fb0e9bfc06dd289eae297163bee5164d648"
+    },
+    {
+      "path": "local/restoration-source-01/EntityStorage.java",
+      "sha256": "f79b99541baf148c533bead11140811a9f6887177a7d82e8fc374b12cea29a9b"
+    },
+    {
+      "path": "local/restoration-source-01/IOWorker.java",
+      "sha256": "a72ead740db0ccc239a4de8e3ef96ff4c3a4aae3bd3c7ab18aaf7b00938248fc"
+    },
+    {
+      "path": "local/restoration-source-01/MinecraftServer.java",
+      "sha256": "b906c6597095e206ade6a9db34f76993f667bdf2bfacaeca793ba9ce14e568ed"
+    },
+    {
+      "path": "local/restoration-source-01/PersistentEntitySectionManager.java",
+      "sha256": "ef2c12ba1f94bcf175282672fd514bcb626f7f74abbcb1fbc054ef636d135f43"
+    },
+    {
+      "path": "local/restoration-source-01/ProcessorMailbox.java",
+      "sha256": "33df74040d084448616c6ea2d878e11f4f659649126db5f7886c2d4df09270a6"
+    },
+    {
+      "path": "local/restoration-source-01/ServerChunkCache.java",
+      "sha256": "02465fed32fb76cf2bc415c6ec58ba3d7cdf7b2580af2de6f9ba0c278c1bf306"
+    },
+    {
+      "path": "local/restoration-source-01/ServerLevel.java",
+      "sha256": "8d1086b8e63b11d340853e7595a63f2f27edc0d690311c9a0d46d5098eb21925"
+    },
+    {
+      "path": "local/restoration-source-01/WorldNetworks.bytecode.txt",
+      "sha256": "011beb271c1837039a54fe86d6505cbb14a919a1d4729b4656b6078f1dcd1956"
+    }
+  ]
+}

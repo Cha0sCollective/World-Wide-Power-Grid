@@ -104,12 +104,12 @@ def plan(lane, groups=None, backends=None, profiles=None, loaders=None, platform
     selected = groups or list(spec['groups'])
     if not set(selected) <= set(spec['groups']): raise ValueError('Unknown headless group')
     for target in platforms:
-        if lane == 'full-headless' and 'NATIVE' in backends and 'BASE' in profiles and spec['loaders'][0] in loaders:
+        if lane == 'full-headless' and 'NATIVE' in backends and 'BASE' in profiles and spec.get('runtime_loader',spec['loaders'][0]) in loaders:
             jobs.append(dict(id=f'{target}/prepare', lane='headless', operation='prepare', platform=target))
         for loader in loaders:
             # The second loader retains its existing compatibility matrix, not a
             # second copy of every world export/reference/SDK check.
-            compatibility = lane == 'full-headless' and loader != spec['loaders'][0]
+            compatibility = lane == 'full-headless' and loader != spec.get('runtime_loader',spec['loaders'][0])
             for backend in backends:
                 for profile in profiles:
                     for group in selected:
@@ -127,7 +127,7 @@ def plan(lane, groups=None, backends=None, profiles=None, loaders=None, platform
                             jobs.append(dict(id=f'{target}/{loader}/{backend}/{profile}/{group}/{number}-{phase}',
                                 lane='headless', platform=target, loader=loader, backend=backend, profile=profile,
                                 group=group, phase=phase, namespaces=names+cfg.get('setup_namespaces',[]) if phase=='SETUP' else names, addon=cfg.get('addon', False)
-                                    or group in ('safety', 'native-guard')))
+                                    or group in ('safety', 'native-guard'), **({'circuit':cfg['circuit']} if 'circuit' in cfg else {})))
                         if lane == 'full-headless' and cfg.get('export'):
                             jobs.append(dict(id=f'{target}/{loader}/{backend}/{profile}/{group}/export',
                                 lane='headless', operation='export', platform=target, loader=loader,
@@ -226,6 +226,7 @@ def command(job, inputs, output):
     else:
         args += ['-PtestNamespaces='+','.join(job['namespaces']), '-PrestartPhase='+job['phase'],
                  '-PtestApiAddon='+str(job['addon']).lower()]
+        if 'circuit' in job: args += ['-PtestCircuit='+job['circuit']]
     args += ['-PtestExampleArtifact='+inputs['artifacts']['example']['path'],
              '-PtestUpstreamExampleArtifact='+inputs['artifacts']['upstream_example']['path']]
     return args, directory

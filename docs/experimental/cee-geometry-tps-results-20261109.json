@@ -1,0 +1,1411 @@
+{
+  "schema": 1,
+  "full_suite": false,
+  "runs": [
+    {
+      "name": "goal-cee-geometry-on-01",
+      "protocol": {
+        "name": "goal-cee-geometry-on-01",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-cee-geometry-on-01\\mods\\wwpg-0.2.7-experimental.wiretree.8.jar",
+          "sha256": "7a8cfa0973a73ac490e7cb1f1e1d8b4eff6bdd1fc9933d067279852e4e8f1204",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\wwpg-0.2.7-experimental.wiretree.8.jar"
+        },
+        "scope": "Focused 120-second warmup and 120-second stable control; not full capacity acceptance",
+        "copied_reference": true,
+        "sixteen_substeps": true,
+        "full_suite": false,
+        "batch": true,
+        "verify_batch": false,
+        "property_batch": true,
+        "detailed": false,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "cpu_affinity_mask": "fff000",
+        "server_affinity_mask": null,
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-cee-geometry-on-01\\mods\\wwpg-benchmark-0.1.0-affinity.jar",
+          "sha256": "56434c77e56c6361aad1b54733eac5573b97bd24d52ae42b0d330216da7a34cb"
+        },
+        "substep_jfr": false,
+        "started_utc": "2026-11-09T16:41:27Z",
+        "validation": {
+          "passed": true,
+          "full_suite": false,
+          "capacity_certified": false,
+          "stable_ticks": 2400,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "sixteen_substeps": true,
+          "topology_unchanged": true,
+          "normal_shutdown": true,
+          "batch_execution": {
+            "plans": 1,
+            "unsupported": 0,
+            "steps": 78767,
+            "contributions": 1560453037,
+            "voltage_reads": 1153936550,
+            "scalar_fallbacks": 0,
+            "largest_plain_batch": 10368,
+            "property_contributions": 743796781,
+            "property_scalar_fallbacks": 0,
+            "largest_property_batch": 9443
+          },
+          "bitwise_verification": false
+        },
+        "task_window": {
+          "budgetMillis": 2,
+          "maxTasks": 512,
+          "windows": 210,
+          "completed": 4198,
+          "emptyPolls": 1140493,
+          "maxCompleted": 412,
+          "maxWindowNanos": 2486400,
+          "maxPollNanos": 805000,
+          "probes": 514,
+          "maxProbeNanos": 668700
+        },
+        "cee_geometry": {
+          "requests": 36199804,
+          "hits": 28006881,
+          "builds": 8,
+          "fallback": 8192915,
+          "states": 8
+        },
+        "tree_priority_selections": 212,
+        "summary": {
+          "schema": 1,
+          "completed": true,
+          "passed": true,
+          "protocol_complete": false,
+          "capacity_certified": false,
+          "mode": "control",
+          "tier": 10000,
+          "backend": "NATIVE",
+          "variant": "MIXED",
+          "audit": {
+            "electrical_nodes": 14650,
+            "conductive_edges": 20362,
+            "coupled_edges": 275,
+            "edges": 20637,
+            "connected_systems_ignoring_reference_ground": 1,
+            "optimized_matrix_nodes": 14925,
+            "solver_networks": 1,
+            "actual_backends": [
+              "NATIVE"
+            ]
+          },
+          "samples": 2400,
+          "profiled_ticks": 0,
+          "measured_seconds": 119.7880054,
+          "tps": 20.027046881607063,
+          "mspt": {
+            "mean": 49.077200958333336,
+            "p50": 48.7026,
+            "p95": 55.7814,
+            "p99": 59.2322,
+            "maximum": 71.4495
+          },
+          "phase_mean_ms": {
+            "cee_prepare_ns": null,
+            "synchronize_ns": null,
+            "result_bridge_ns": null,
+            "gameplay_commit_ns": null,
+            "pg_prepare_ns": null,
+            "pg_solve_ns": null,
+            "history_prepare_ns": null,
+            "history_commit_ns": null,
+            "cee_device_prepare_ns": null,
+            "cee_device_commit_ns": null,
+            "electrical_schedule_ns": null,
+            "native_measurement_prepare_ns": null,
+            "native_measurement_sample_ns": null,
+            "extension_prepare_ns": null,
+            "extension_before_ns": null,
+            "extension_after_ns": null,
+            "restoration_schedule_ns": null,
+            "restoration_context_ns": null,
+            "native_measurement_finish_ns": null,
+            "extension_bind_ns": null,
+            "extension_finish_ns": null,
+            "extension_commit_ns": null,
+            "provider_prepare_ns": null,
+            "provider_commit_ns": null,
+            "pg_rhs_ns": null,
+            "native_solve_ns": null,
+            "native_iteration_hooks_ns": null,
+            "native_residual_flush_ns": null
+          },
+          "compatibility_share_upper_bound": null,
+          "heap_peak_bytes": 1685643848,
+          "gc_ms": 87,
+          "native_tick_target_met": false,
+          "reason": "Stable control completed",
+          "practical_20tps_target_met": false,
+          "detailed_timers_enabled": false,
+          "process": {
+            "rss_peak_bytes": 2369843200,
+            "cpu_mean_cores": 1.0355876227579697
+          }
+        },
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T16:46:14Z"
+      },
+      "summary": {
+        "schema": 1,
+        "completed": true,
+        "passed": true,
+        "protocol_complete": false,
+        "capacity_certified": false,
+        "mode": "control",
+        "tier": 10000,
+        "backend": "NATIVE",
+        "variant": "MIXED",
+        "audit": {
+          "electrical_nodes": 14650,
+          "conductive_edges": 20362,
+          "coupled_edges": 275,
+          "edges": 20637,
+          "connected_systems_ignoring_reference_ground": 1,
+          "optimized_matrix_nodes": 14925,
+          "solver_networks": 1,
+          "actual_backends": [
+            "NATIVE"
+          ]
+        },
+        "samples": 2400,
+        "profiled_ticks": 0,
+        "measured_seconds": 119.7880054,
+        "tps": 20.027046881607063,
+        "mspt": {
+          "mean": 49.077200958333336,
+          "p50": 48.7026,
+          "p95": 55.7814,
+          "p99": 59.2322,
+          "maximum": 71.4495
+        },
+        "phase_mean_ms": {
+          "cee_prepare_ns": null,
+          "synchronize_ns": null,
+          "result_bridge_ns": null,
+          "gameplay_commit_ns": null,
+          "pg_prepare_ns": null,
+          "pg_solve_ns": null,
+          "history_prepare_ns": null,
+          "history_commit_ns": null,
+          "cee_device_prepare_ns": null,
+          "cee_device_commit_ns": null,
+          "electrical_schedule_ns": null,
+          "native_measurement_prepare_ns": null,
+          "native_measurement_sample_ns": null,
+          "extension_prepare_ns": null,
+          "extension_before_ns": null,
+          "extension_after_ns": null,
+          "restoration_schedule_ns": null,
+          "restoration_context_ns": null,
+          "native_measurement_finish_ns": null,
+          "extension_bind_ns": null,
+          "extension_finish_ns": null,
+          "extension_commit_ns": null,
+          "provider_prepare_ns": null,
+          "provider_commit_ns": null,
+          "pg_rhs_ns": null,
+          "native_solve_ns": null,
+          "native_iteration_hooks_ns": null,
+          "native_residual_flush_ns": null
+        },
+        "compatibility_share_upper_bound": null,
+        "heap_peak_bytes": 1685643848,
+        "gc_ms": 87,
+        "native_tick_target_met": false,
+        "reason": "Stable control completed",
+        "practical_20tps_target_met": false,
+        "detailed_timers_enabled": false,
+        "process": {
+          "rss_peak_bytes": 2369843200,
+          "cpu_mean_cores": 1.0355876227579697
+        }
+      },
+      "loading": [
+        {
+          "phase": "SETTLE",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 32,
+          "graph_ready_tick": 211,
+          "finish_tick": 330,
+          "chunk_request_seconds": 0.8125793,
+          "chunk_loading_seconds": 12.6305989,
+          "graph_recovery_seconds": 9.46423,
+          "electrical_settling_seconds": 6.2693791,
+          "total_restoration_seconds": 29.1767873,
+          "restoration_and_settling_seconds": 28.364208,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 11318,
+          "maximum_pending_roots": 11318,
+          "queue_drained_tick": 211,
+          "queue_drain_seconds": 9.46423
+        }
+      ],
+      "thirty_second_blocks": [
+        {
+          "block": 0,
+          "ticks": 603,
+          "mean_tick_ms": 49.05769668325041
+        },
+        {
+          "block": 1,
+          "ticks": 601,
+          "mean_tick_ms": 48.95808801996672
+        },
+        {
+          "block": 2,
+          "ticks": 600,
+          "mean_tick_ms": 49.06876066666666
+        },
+        {
+          "block": 3,
+          "ticks": 596,
+          "mean_tick_ms": 49.22554345637584
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 52,
+        "in_window_seconds": 260.6898055076599,
+        "monitored_processes": 190,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.3070579413112031,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "13688:134387027373880825",
+            "peak_cores": 0.1869100327673419,
+            "mean_cores": 0.05226518149977926
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "5948:134387027096006899",
+            "peak_cores": 0.1684134705116624,
+            "mean_cores": 0.12065345224662345
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28732:134387027298932907",
+            "peak_cores": 0.08735723105729781,
+            "mean_cores": 0.036321903656956686
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "6028:134387027037888757",
+            "peak_cores": 0.05925659147632566,
+            "mean_cores": 0.02870988754403012
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28176:134387027293764011",
+            "peak_cores": 0.0529392238027316,
+            "mean_cores": 0.0082113874604011
+          },
+          {
+            "name": "codex.exe",
+            "identity": "30104:134387027358105490",
+            "peak_cores": 0.0373834725570177,
+            "mean_cores": 0.0026971710636353977
+          },
+          {
+            "name": "dllhost.exe",
+            "identity": "31644:134387027407630677",
+            "peak_cores": 0.021813174481811578,
+            "mean_cores": 0.0032965424111099303
+          },
+          {
+            "name": "NVIDIA Overlay.exe",
+            "identity": "23344:134387027098263065",
+            "peak_cores": 0.01871967311410657,
+            "mean_cores": 0.006053650609492781
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-01/experiment.json",
+          "sha256": "2febae7184f3f1252ec61ab46e0298ca574a7ff86f9d2f46951791f50fe05b3c"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-01/launch.json",
+          "sha256": "34f072a75853d7d86ea67290e97bd8cc70d1c88560c003e04055d1a334bbba54"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-01/invocation.json",
+          "sha256": "f8809ed0dcf703d01896cbbc33c4f78281f841dc8c6fefe67ce973c4e22a3bbb"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-01/process.log",
+          "sha256": "6e611a0708ad79b2f9ac2eef16d9c0483f185bd83c821e4d5a0df185ae063636"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-01/runner-exit.json",
+          "sha256": "a50a822f25ce784001ec27b4f948dfe6b11aeeb9643681b22f6c9e5fcb5bac47"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-01/host-metrics.jsonl",
+          "sha256": "2b76128f5670645aec8832327b42c26dfc9a425a2dc4705edb2d7930fe779a52"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-01/process-metrics.jsonl",
+          "sha256": "1e8d08d1b37ce6bbee6c2949e5874bcf81ec212180086700f14c84c2d080f0e0"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-01/benchmark/result.json",
+          "sha256": "9ce0b42327a8eef8a8080eccfa5f835a66e71e974f35ba31ea726aa9cf5e4da9"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-01/benchmark/summary.json",
+          "sha256": "97824af02ae8c8cb5cb7fdda88470a34c972e3e16b286243a5ad0c3ac6b01dee"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-01/benchmark/loading-results.json",
+          "sha256": "5150d099a1743b88f0714ee693b3e08a9f4893bb4b5a1591fe0a06655c506b8d"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-01/benchmark/ticks.csv",
+          "sha256": "da30b8118a26e9eec94d284cfdcd56c3fa3acd31fd182107624345c8936b9906"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-01/benchmark/placement-ticks.csv",
+          "sha256": "4da09abead0b313172cccc923a884a3398834ddcbe711b3c386ac5c7de249944"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-01/benchmark/cpu-topology.json",
+          "sha256": "68da5a25da3fbb828098568ddc158b61d24049ab506ecc9dfecc87979bfb9d7a"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-01/benchmark/placement-fixed.json",
+          "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-01/benchmark/placement-restored.json",
+          "sha256": "76da4a151b5d56796030ffa77d74c15cf15b59ccd4ef3dc98f6fc708f41b508e"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-01/benchmark/graph-start.json",
+          "sha256": "ff565944e6d5db03776caa890adce1f83b63a3ae55d6beafabbf1db82e10691e"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-01/benchmark/graph-end.json",
+          "sha256": "ff565944e6d5db03776caa890adce1f83b63a3ae55d6beafabbf1db82e10691e"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-01/process-affinity.json",
+          "sha256": "20f55eab39d1cb54bb1b5ef074ff922ab502c18faaf9b9cfbebdda78721c6e4c"
+        }
+      ],
+      "process_affinity": {
+        "pid": 3048,
+        "original_mask": "ffffff",
+        "requested_mask": "fff000",
+        "readback_mask": "fff000",
+        "logical_cpus": [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "wall_unix": 1794242493.3814197,
+        "scope": "Owned child process immediately after launch; other processes unchanged"
+      },
+      "affinity_readbacks": 280,
+      "stable_cpu_busy_percent": [
+        4.916896544111975,
+        6.501734371063752,
+        21.91342506268554,
+        24.6718312477794,
+        21.432085757853475,
+        22.33145524879814,
+        9.179561561730317,
+        9.153803175652202,
+        2.7470293489293254,
+        2.408092726112515,
+        5.454544737849181,
+        5.197334617453118,
+        12.155538417265317,
+        12.733089764323987,
+        13.818008697576579,
+        14.865214704259188,
+        9.660840559306743,
+        9.20957922036634,
+        10.470448282770802,
+        10.84323415816181,
+        1.516133179556448,
+        1.8415159123416758,
+        10.182529853236067,
+        12.975443069922843
+      ],
+      "stable_cpu_observation_seconds": 110.29308581352234,
+      "cpu_observation_note": "Total per-core load including the benchmark; affinity restricts this process but does not reserve CPUs against other processes."
+    },
+    {
+      "name": "goal-cee-geometry-off-01",
+      "protocol": {
+        "name": "goal-cee-geometry-off-01",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-cee-geometry-off-01\\mods\\wwpg-0.2.7-experimental.wiretree.8.jar",
+          "sha256": "7a8cfa0973a73ac490e7cb1f1e1d8b4eff6bdd1fc9933d067279852e4e8f1204",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\wwpg-0.2.7-experimental.wiretree.8.jar"
+        },
+        "scope": "Focused 120-second warmup and 120-second stable control; not full capacity acceptance",
+        "copied_reference": true,
+        "sixteen_substeps": true,
+        "full_suite": false,
+        "batch": true,
+        "verify_batch": false,
+        "property_batch": true,
+        "detailed": false,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": false,
+        "cpu_affinity_mask": "fff000",
+        "server_affinity_mask": null,
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-cee-geometry-off-01\\mods\\wwpg-benchmark-0.1.0-affinity.jar",
+          "sha256": "56434c77e56c6361aad1b54733eac5573b97bd24d52ae42b0d330216da7a34cb"
+        },
+        "substep_jfr": false,
+        "started_utc": "2026-11-09T16:46:14Z",
+        "validation": {
+          "passed": true,
+          "full_suite": false,
+          "capacity_certified": false,
+          "stable_ticks": 2334,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "sixteen_substeps": true,
+          "topology_unchanged": true,
+          "normal_shutdown": true,
+          "batch_execution": {
+            "plans": 1,
+            "unsupported": 0,
+            "steps": 77711,
+            "contributions": 1539532621,
+            "voltage_reads": 1138466150,
+            "scalar_fallbacks": 0,
+            "largest_plain_batch": 10368,
+            "property_contributions": 733824973,
+            "property_scalar_fallbacks": 0,
+            "largest_property_batch": 9443
+          },
+          "bitwise_verification": false
+        },
+        "task_window": {
+          "budgetMillis": 2,
+          "maxTasks": 512,
+          "windows": 210,
+          "completed": 3789,
+          "emptyPolls": 1141623,
+          "maxCompleted": 512,
+          "maxWindowNanos": 2115200,
+          "maxPollNanos": 697500,
+          "probes": 507,
+          "maxProbeNanos": 764600
+        },
+        "cee_geometry": null,
+        "tree_priority_selections": 213,
+        "summary": {
+          "schema": 1,
+          "completed": true,
+          "passed": true,
+          "protocol_complete": false,
+          "capacity_certified": false,
+          "mode": "control",
+          "tier": 10000,
+          "backend": "NATIVE",
+          "variant": "MIXED",
+          "audit": {
+            "electrical_nodes": 14650,
+            "conductive_edges": 20362,
+            "coupled_edges": 275,
+            "edges": 20637,
+            "connected_systems_ignoring_reference_ground": 1,
+            "optimized_matrix_nodes": 14925,
+            "solver_networks": 1,
+            "actual_backends": [
+              "NATIVE"
+            ]
+          },
+          "samples": 2334,
+          "profiled_ticks": 0,
+          "measured_seconds": 119.7629494,
+          "tps": 19.480148173438355,
+          "mspt": {
+            "mean": 51.20084781491003,
+            "p50": 49.5795,
+            "p95": 58.6748,
+            "p99": 61.9256,
+            "maximum": 74.6946
+          },
+          "phase_mean_ms": {
+            "cee_prepare_ns": null,
+            "synchronize_ns": null,
+            "result_bridge_ns": null,
+            "gameplay_commit_ns": null,
+            "pg_prepare_ns": null,
+            "pg_solve_ns": null,
+            "history_prepare_ns": null,
+            "history_commit_ns": null,
+            "cee_device_prepare_ns": null,
+            "cee_device_commit_ns": null,
+            "electrical_schedule_ns": null,
+            "native_measurement_prepare_ns": null,
+            "native_measurement_sample_ns": null,
+            "extension_prepare_ns": null,
+            "extension_before_ns": null,
+            "extension_after_ns": null,
+            "restoration_schedule_ns": null,
+            "restoration_context_ns": null,
+            "native_measurement_finish_ns": null,
+            "extension_bind_ns": null,
+            "extension_finish_ns": null,
+            "extension_commit_ns": null,
+            "provider_prepare_ns": null,
+            "provider_commit_ns": null,
+            "pg_rhs_ns": null,
+            "native_solve_ns": null,
+            "native_iteration_hooks_ns": null,
+            "native_residual_flush_ns": null
+          },
+          "compatibility_share_upper_bound": null,
+          "heap_peak_bytes": 1517038416,
+          "gc_ms": 75,
+          "native_tick_target_met": false,
+          "reason": "Stable control completed",
+          "practical_20tps_target_met": false,
+          "detailed_timers_enabled": false,
+          "process": {
+            "rss_peak_bytes": 2153082880,
+            "cpu_mean_cores": 1.0336502482489063
+          }
+        },
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T16:51:01Z"
+      },
+      "summary": {
+        "schema": 1,
+        "completed": true,
+        "passed": true,
+        "protocol_complete": false,
+        "capacity_certified": false,
+        "mode": "control",
+        "tier": 10000,
+        "backend": "NATIVE",
+        "variant": "MIXED",
+        "audit": {
+          "electrical_nodes": 14650,
+          "conductive_edges": 20362,
+          "coupled_edges": 275,
+          "edges": 20637,
+          "connected_systems_ignoring_reference_ground": 1,
+          "optimized_matrix_nodes": 14925,
+          "solver_networks": 1,
+          "actual_backends": [
+            "NATIVE"
+          ]
+        },
+        "samples": 2334,
+        "profiled_ticks": 0,
+        "measured_seconds": 119.7629494,
+        "tps": 19.480148173438355,
+        "mspt": {
+          "mean": 51.20084781491003,
+          "p50": 49.5795,
+          "p95": 58.6748,
+          "p99": 61.9256,
+          "maximum": 74.6946
+        },
+        "phase_mean_ms": {
+          "cee_prepare_ns": null,
+          "synchronize_ns": null,
+          "result_bridge_ns": null,
+          "gameplay_commit_ns": null,
+          "pg_prepare_ns": null,
+          "pg_solve_ns": null,
+          "history_prepare_ns": null,
+          "history_commit_ns": null,
+          "cee_device_prepare_ns": null,
+          "cee_device_commit_ns": null,
+          "electrical_schedule_ns": null,
+          "native_measurement_prepare_ns": null,
+          "native_measurement_sample_ns": null,
+          "extension_prepare_ns": null,
+          "extension_before_ns": null,
+          "extension_after_ns": null,
+          "restoration_schedule_ns": null,
+          "restoration_context_ns": null,
+          "native_measurement_finish_ns": null,
+          "extension_bind_ns": null,
+          "extension_finish_ns": null,
+          "extension_commit_ns": null,
+          "provider_prepare_ns": null,
+          "provider_commit_ns": null,
+          "pg_rhs_ns": null,
+          "native_solve_ns": null,
+          "native_iteration_hooks_ns": null,
+          "native_residual_flush_ns": null
+        },
+        "compatibility_share_upper_bound": null,
+        "heap_peak_bytes": 1517038416,
+        "gc_ms": 75,
+        "native_tick_target_met": false,
+        "reason": "Stable control completed",
+        "practical_20tps_target_met": false,
+        "detailed_timers_enabled": false,
+        "process": {
+          "rss_peak_bytes": 2153082880,
+          "cpu_mean_cores": 1.0336502482489063
+        }
+      },
+      "loading": [
+        {
+          "phase": "SETTLE",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 32,
+          "graph_ready_tick": 212,
+          "finish_tick": 331,
+          "chunk_request_seconds": 0.8307579,
+          "chunk_loading_seconds": 12.4502259,
+          "graph_recovery_seconds": 9.3113834,
+          "electrical_settling_seconds": 6.2648623,
+          "total_restoration_seconds": 28.8572295,
+          "restoration_and_settling_seconds": 28.0264716,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 11306,
+          "maximum_pending_roots": 11306,
+          "queue_drained_tick": 212,
+          "queue_drain_seconds": 9.3113834
+        }
+      ],
+      "thirty_second_blocks": [
+        {
+          "block": 0,
+          "ticks": 583,
+          "mean_tick_ms": 51.37924991423671
+        },
+        {
+          "block": 1,
+          "ticks": 580,
+          "mean_tick_ms": 51.583491206896554
+        },
+        {
+          "block": 2,
+          "ticks": 584,
+          "mean_tick_ms": 51.22614332191781
+        },
+        {
+          "block": 3,
+          "ticks": 587,
+          "mean_tick_ms": 50.62041482112436
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 52,
+        "in_window_seconds": 260.6712689399719,
+        "monitored_processes": 193,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.2955710282660363,
+        "other_process_peaks": [
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "5948:134387027096006899",
+            "peak_cores": 0.19016016147052645,
+            "mean_cores": 0.12108162180032314
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "13688:134387027373880825",
+            "peak_cores": 0.14975328559792478,
+            "mean_cores": 0.037223607494059736
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28732:134387027298932907",
+            "peak_cores": 0.07159113458607813,
+            "mean_cores": 0.04082009130991092
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "6028:134387027037888757",
+            "peak_cores": 0.059265828217988537,
+            "mean_cores": 0.02445608994778804
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28176:134387027293764011",
+            "peak_cores": 0.05923021422852463,
+            "mean_cores": 0.00809208858566516
+          },
+          {
+            "name": "codex.exe",
+            "identity": "30104:134387027358105490",
+            "peak_cores": 0.028056417266143246,
+            "mean_cores": 0.0017383005109947382
+          },
+          {
+            "name": "dllhost.exe",
+            "identity": "31644:134387027407630677",
+            "peak_cores": 0.024955328796243143,
+            "mean_cores": 0.0037763080066437415
+          },
+          {
+            "name": "NVIDIA Overlay.exe",
+            "identity": "24496:134387027110562500",
+            "peak_cores": 0.02181941913653884,
+            "mean_cores": 0.0049151945483299495
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/goal-cee-geometry-off-01/experiment.json",
+          "sha256": "ff7b1d3533a2052aaf1b53edd928029884f944f0a04353682d488b2967093623"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-off-01/launch.json",
+          "sha256": "67303c96a8c0077e32b79084abb734ab58e3596bd71097fbac74c3028181d3cd"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-off-01/invocation.json",
+          "sha256": "0d61c932ae379b1ed1df5487fb8014ae487a8725222fa330024cd70834e753ce"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-off-01/process.log",
+          "sha256": "c6b71bb0b0a8431af0cf17d109261f04633111864f5bee2e3ead8fb78492876b"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-off-01/runner-exit.json",
+          "sha256": "402e39b235c13945629db0bcc8e5922c7dfe7532a1dfea8a497a27afe9d66423"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-off-01/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-off-01/host-metrics.jsonl",
+          "sha256": "eccd9ea38ddbc320597ff84a0f4e4b7aadcc94dff67bff477206d104965b339a"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-off-01/process-metrics.jsonl",
+          "sha256": "0ed19be0d26e7c82a661e6691d3eaaf2189e5a3089de58f4308f62c0b9e8fe8e"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-off-01/benchmark/result.json",
+          "sha256": "f6496adbef682cfbd6c5918e369fc57e49d140372d724e28ee1512504fc1f491"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-off-01/benchmark/summary.json",
+          "sha256": "76fb86465ed09ae419400b5892aac4a5e204ea97278b7b7d7e048f3e6ea75cdb"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-off-01/benchmark/loading-results.json",
+          "sha256": "f5e6f3ae7e06175cdbb2dc949877d28f9184a173cfb4188d8f50d806ee1caf5b"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-off-01/benchmark/ticks.csv",
+          "sha256": "90978730b04e370d68338dff3dbe448ab9bc6020a7aa1671c0ec48324cc94ee9"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-off-01/benchmark/placement-ticks.csv",
+          "sha256": "a4bc3f27153924e2d7777fa33c4bbb2d809100cc3be0efc85793c9600d536807"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-off-01/benchmark/cpu-topology.json",
+          "sha256": "761f94ea990dcb0974e58a94552fe148ec4206c0d602c48f7d79c1f4e6967a02"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-off-01/benchmark/placement-fixed.json",
+          "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-off-01/benchmark/placement-restored.json",
+          "sha256": "95ba5fee302285e31a8a83c325d65d7dac47612da59375d6bfa386fca6eafdd9"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-off-01/benchmark/graph-start.json",
+          "sha256": "f93e7ffaa113f339b8051392b06f960bd9400fb0561ba3ee1bc43f014cd24d1b"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-off-01/benchmark/graph-end.json",
+          "sha256": "f93e7ffaa113f339b8051392b06f960bd9400fb0561ba3ee1bc43f014cd24d1b"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-off-01/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-off-01/process-affinity.json",
+          "sha256": "58d7da66fe3a14eb7e96d8678a42b48dc11a33d83ea4888b25201ee676f3dc86"
+        }
+      ],
+      "process_affinity": {
+        "pid": 11512,
+        "original_mask": "ffffff",
+        "requested_mask": "fff000",
+        "readback_mask": "fff000",
+        "logical_cpus": [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "wall_unix": 1794242781.1051476,
+        "scope": "Owned child process immediately after launch; other processes unchanged"
+      },
+      "affinity_readbacks": 280,
+      "stable_cpu_busy_percent": [
+        5.02955417400858,
+        6.805059661455497,
+        18.98611101541456,
+        27.372857823276444,
+        20.249930093190713,
+        26.435923269512617,
+        8.484289155842658,
+        10.14079525212474,
+        2.792770414945244,
+        3.1037434804403095,
+        6.183694288571453,
+        5.327251920597783,
+        9.239842133416953,
+        11.750115726690844,
+        8.886646919970282,
+        8.865386940337213,
+        6.299659395888291,
+        10.92367596341361,
+        17.813073973342522,
+        32.32327878892194,
+        2.0190207016131567,
+        1.4350696474594151,
+        3.6702065700336237,
+        7.283911289071974
+      ],
+      "stable_cpu_observation_seconds": 115.29369401931763,
+      "cpu_observation_note": "Total per-core load including the benchmark; affinity restricts this process but does not reserve CPUs against other processes."
+    },
+    {
+      "name": "goal-cee-geometry-on-02",
+      "protocol": {
+        "name": "goal-cee-geometry-on-02",
+        "runtime": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-cee-geometry-on-02\\mods\\wwpg-0.2.7-experimental.wiretree.8.jar",
+          "sha256": "7a8cfa0973a73ac490e7cb1f1e1d8b4eff6bdd1fc9933d067279852e4e8f1204",
+          "kind": "local-candidate",
+          "source": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-09c\\wwpg-0.2.7-experimental.wiretree.8.jar"
+        },
+        "scope": "Focused 120-second warmup and 120-second stable control; not full capacity acceptance",
+        "copied_reference": true,
+        "sixteen_substeps": true,
+        "full_suite": false,
+        "batch": true,
+        "verify_batch": false,
+        "property_batch": true,
+        "detailed": false,
+        "tree_batch": true,
+        "tree_budget_ms": 20,
+        "tree_max_parts": 32,
+        "tree_retain_coverage": false,
+        "tree_prioritize_unresolved": true,
+        "chunk_task_budget_ms": 2,
+        "cee_state_geometry": true,
+        "cpu_affinity_mask": "fff000",
+        "server_affinity_mask": null,
+        "helper": {
+          "path": "G:\\WWPG\\local\\x27w\\local\\benchmarks\\goal-cee-geometry-on-02\\mods\\wwpg-benchmark-0.1.0-affinity.jar",
+          "sha256": "56434c77e56c6361aad1b54733eac5573b97bd24d52ae42b0d330216da7a34cb"
+        },
+        "substep_jfr": false,
+        "started_utc": "2026-11-09T16:54:25Z",
+        "validation": {
+          "passed": true,
+          "full_suite": false,
+          "capacity_certified": false,
+          "stable_ticks": 2400,
+          "actual_nodes": 14650,
+          "edges": 20637,
+          "chunks": 953,
+          "storage_devices": 1050,
+          "sixteen_substeps": true,
+          "topology_unchanged": true,
+          "normal_shutdown": true,
+          "batch_execution": {
+            "plans": 1,
+            "unsupported": 0,
+            "steps": 78767,
+            "contributions": 1560453037,
+            "voltage_reads": 1153936550,
+            "scalar_fallbacks": 0,
+            "largest_plain_batch": 10368,
+            "property_contributions": 743796781,
+            "property_scalar_fallbacks": 0,
+            "largest_property_batch": 9443
+          },
+          "bitwise_verification": false
+        },
+        "task_window": {
+          "budgetMillis": 2,
+          "maxTasks": 512,
+          "windows": 210,
+          "completed": 3842,
+          "emptyPolls": 1139884,
+          "maxCompleted": 481,
+          "maxWindowNanos": 2054200,
+          "maxPollNanos": 867700,
+          "probes": 514,
+          "maxProbeNanos": 607400
+        },
+        "cee_geometry": {
+          "requests": 36251109,
+          "hits": 28047542,
+          "builds": 8,
+          "fallback": 8203559,
+          "states": 8
+        },
+        "tree_priority_selections": 197,
+        "summary": {
+          "schema": 1,
+          "completed": true,
+          "passed": true,
+          "protocol_complete": false,
+          "capacity_certified": false,
+          "mode": "control",
+          "tier": 10000,
+          "backend": "NATIVE",
+          "variant": "MIXED",
+          "audit": {
+            "electrical_nodes": 14650,
+            "conductive_edges": 20362,
+            "coupled_edges": 275,
+            "edges": 20637,
+            "connected_systems_ignoring_reference_ground": 1,
+            "optimized_matrix_nodes": 14925,
+            "solver_networks": 1,
+            "actual_backends": [
+              "NATIVE"
+            ]
+          },
+          "samples": 2400,
+          "profiled_ticks": 0,
+          "measured_seconds": 119.7667113,
+          "tps": 20.030607620099193,
+          "mspt": {
+            "mean": 48.61609479166667,
+            "p50": 48.5284,
+            "p95": 55.3034,
+            "p99": 60.5939,
+            "maximum": 68.903
+          },
+          "phase_mean_ms": {
+            "cee_prepare_ns": null,
+            "synchronize_ns": null,
+            "result_bridge_ns": null,
+            "gameplay_commit_ns": null,
+            "pg_prepare_ns": null,
+            "pg_solve_ns": null,
+            "history_prepare_ns": null,
+            "history_commit_ns": null,
+            "cee_device_prepare_ns": null,
+            "cee_device_commit_ns": null,
+            "electrical_schedule_ns": null,
+            "native_measurement_prepare_ns": null,
+            "native_measurement_sample_ns": null,
+            "extension_prepare_ns": null,
+            "extension_before_ns": null,
+            "extension_after_ns": null,
+            "restoration_schedule_ns": null,
+            "restoration_context_ns": null,
+            "native_measurement_finish_ns": null,
+            "extension_bind_ns": null,
+            "extension_finish_ns": null,
+            "extension_commit_ns": null,
+            "provider_prepare_ns": null,
+            "provider_commit_ns": null,
+            "pg_rhs_ns": null,
+            "native_solve_ns": null,
+            "native_iteration_hooks_ns": null,
+            "native_residual_flush_ns": null
+          },
+          "compatibility_share_upper_bound": null,
+          "heap_peak_bytes": 1660400824,
+          "gc_ms": 82,
+          "native_tick_target_met": false,
+          "reason": "Stable control completed",
+          "practical_20tps_target_met": false,
+          "detailed_timers_enabled": false,
+          "process": {
+            "rss_peak_bytes": 2405752832,
+            "cpu_mean_cores": 1.0369135469568072
+          }
+        },
+        "original_reference_unchanged": true,
+        "isolated_reference_unchanged": true,
+        "finished_utc": "2026-11-09T16:59:12Z"
+      },
+      "summary": {
+        "schema": 1,
+        "completed": true,
+        "passed": true,
+        "protocol_complete": false,
+        "capacity_certified": false,
+        "mode": "control",
+        "tier": 10000,
+        "backend": "NATIVE",
+        "variant": "MIXED",
+        "audit": {
+          "electrical_nodes": 14650,
+          "conductive_edges": 20362,
+          "coupled_edges": 275,
+          "edges": 20637,
+          "connected_systems_ignoring_reference_ground": 1,
+          "optimized_matrix_nodes": 14925,
+          "solver_networks": 1,
+          "actual_backends": [
+            "NATIVE"
+          ]
+        },
+        "samples": 2400,
+        "profiled_ticks": 0,
+        "measured_seconds": 119.7667113,
+        "tps": 20.030607620099193,
+        "mspt": {
+          "mean": 48.61609479166667,
+          "p50": 48.5284,
+          "p95": 55.3034,
+          "p99": 60.5939,
+          "maximum": 68.903
+        },
+        "phase_mean_ms": {
+          "cee_prepare_ns": null,
+          "synchronize_ns": null,
+          "result_bridge_ns": null,
+          "gameplay_commit_ns": null,
+          "pg_prepare_ns": null,
+          "pg_solve_ns": null,
+          "history_prepare_ns": null,
+          "history_commit_ns": null,
+          "cee_device_prepare_ns": null,
+          "cee_device_commit_ns": null,
+          "electrical_schedule_ns": null,
+          "native_measurement_prepare_ns": null,
+          "native_measurement_sample_ns": null,
+          "extension_prepare_ns": null,
+          "extension_before_ns": null,
+          "extension_after_ns": null,
+          "restoration_schedule_ns": null,
+          "restoration_context_ns": null,
+          "native_measurement_finish_ns": null,
+          "extension_bind_ns": null,
+          "extension_finish_ns": null,
+          "extension_commit_ns": null,
+          "provider_prepare_ns": null,
+          "provider_commit_ns": null,
+          "pg_rhs_ns": null,
+          "native_solve_ns": null,
+          "native_iteration_hooks_ns": null,
+          "native_residual_flush_ns": null
+        },
+        "compatibility_share_upper_bound": null,
+        "heap_peak_bytes": 1660400824,
+        "gc_ms": 82,
+        "native_tick_target_met": false,
+        "reason": "Stable control completed",
+        "practical_20tps_target_met": false,
+        "detailed_timers_enabled": false,
+        "process": {
+          "rss_peak_bytes": 2405752832,
+          "cpu_mean_cores": 1.0369135469568072
+        }
+      },
+      "loading": [
+        {
+          "phase": "SETTLE",
+          "cycle": 0,
+          "requested_chunks": 953,
+          "load_limit_ticks": 2859,
+          "chunks_ready_tick": 31,
+          "graph_ready_tick": 212,
+          "finish_tick": 331,
+          "chunk_request_seconds": 0.9672579,
+          "chunk_loading_seconds": 12.5034794,
+          "graph_recovery_seconds": 9.0871258,
+          "electrical_settling_seconds": 6.0226288,
+          "total_restoration_seconds": 28.5804919,
+          "restoration_and_settling_seconds": 27.613234,
+          "healthy_ticks": 100,
+          "queued_roots_at_chunk_ready": 11330,
+          "maximum_pending_roots": 11330,
+          "queue_drained_tick": 212,
+          "queue_drain_seconds": 9.0871258
+        }
+      ],
+      "thirty_second_blocks": [
+        {
+          "block": 0,
+          "ticks": 604,
+          "mean_tick_ms": 48.29417963576159
+        },
+        {
+          "block": 1,
+          "ticks": 600,
+          "mean_tick_ms": 48.64189283333334
+        },
+        {
+          "block": 2,
+          "ticks": 600,
+          "mean_tick_ms": 49.024971666666666
+        },
+        {
+          "block": 3,
+          "ticks": 596,
+          "mean_tick_ms": 48.504738758389266
+        }
+      ],
+      "host": {
+        "sample_period_seconds": 5,
+        "in_window_intervals": 52,
+        "in_window_seconds": 260.6420557498932,
+        "monitored_processes": 194,
+        "competing_game_present": false,
+        "other_cpu_mean_cores": 0.3334314170825658,
+        "other_process_peaks": [
+          {
+            "name": "ChatGPT.exe",
+            "identity": "13688:134387027373880825",
+            "peak_cores": 0.24614866172630268,
+            "mean_cores": 0.0643243276752235
+          },
+          {
+            "name": "HWiNFO64.EXE",
+            "identity": "5948:134387027096006899",
+            "peak_cores": 0.16535896246940052,
+            "mean_cores": 0.11971638617653432
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28732:134387027298932907",
+            "peak_cores": 0.07802367702388437,
+            "mean_cores": 0.04382207225590715
+          },
+          {
+            "name": "codex.exe",
+            "identity": "30104:134387027358105490",
+            "peak_cores": 0.062316116892734856,
+            "mean_cores": 0.007673358753428339
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "28176:134387027293764011",
+            "peak_cores": 0.05617422252868002,
+            "mean_cores": 0.013248533472716116
+          },
+          {
+            "name": "powershell.exe",
+            "identity": "6028:134387027037888757",
+            "peak_cores": 0.056141120355268026,
+            "mean_cores": 0.026257274484387597
+          },
+          {
+            "name": "ChatGPT.exe",
+            "identity": "30196:134387027364652111",
+            "peak_cores": 0.03431039413671185,
+            "mean_cores": 0.0013788066510066546
+          },
+          {
+            "name": "dllhost.exe",
+            "identity": "31644:134387027407630677",
+            "peak_cores": 0.02182125928879986,
+            "mean_cores": 0.004196368068281123
+          }
+        ],
+        "note": "Read-only process CPU counters; overlapping whole-window samples only; not CPU-frequency or thermal control."
+      },
+      "evidence": [
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-02/experiment.json",
+          "sha256": "8050cd36e04984363b6943760ac41e41eb8dd389dadcc0ae4eae9419b77eedb9"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-02/launch.json",
+          "sha256": "38ce8f14514bde714eef4859539f94f661ab89312366b1dbe1227b7c70607b25"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-02/invocation.json",
+          "sha256": "4107bb6bcf72e0e66c744767e406947de02ec103792a44fec0087703b991f0d5"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-02/process.log",
+          "sha256": "9555eb493f97bd4cc30f6c4c64b30655fba2a23420ff0441dd85ff45a53ec716"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-02/runner-exit.json",
+          "sha256": "17d204761823e121dd6cde1580828f73bc52646e2110f8af48b57b216581f3c1"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-02/shutdown-save.json",
+          "sha256": "85c508756404886a2f544cb4769f2b1f8f199d17eb7c649a645b6cb1b77e883b"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-02/host-metrics.jsonl",
+          "sha256": "0cf4d1bd98c69db1999854ff7c0bf131d4c0fbf3c01d3af39439c41af5c4f4dd"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-02/process-metrics.jsonl",
+          "sha256": "3d1842f95af3f99b0c030fe48f2f346a0f8fd3e8992a2715237fa08fbab08b32"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-02/benchmark/result.json",
+          "sha256": "5630238d484e19968242c2a0885e6e6965d57bceb8927371ad18b433a44977df"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-02/benchmark/summary.json",
+          "sha256": "cba622a25ecd13b2935ca3597808f5a13a2ec65b872b94b73d7e1d62552b4f36"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-02/benchmark/loading-results.json",
+          "sha256": "640a1061ca83c28766d83951893d327895a3aea6db5834d6ab8dcdab952f5f8c"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-02/benchmark/ticks.csv",
+          "sha256": "0a6d469cf6bab57b9080c6f4bdb313f557162dc0a3c9f489ff143dc6503a90a4"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-02/benchmark/placement-ticks.csv",
+          "sha256": "a3ff0e02e2f5a8f9fdbfc8bee46cd37c002afe5a1a684c40515d8db0b0a8f997"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-02/benchmark/cpu-topology.json",
+          "sha256": "d1684311a3527a4d82a320d151418e0b802d61bb7c0be2e995531bb4e962d37d"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-02/benchmark/placement-fixed.json",
+          "sha256": "6354e8f7577dd8369f28dbde515c45603e4a1be9d1331f62723de57ec59e09ba"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-02/benchmark/placement-restored.json",
+          "sha256": "a541ad1fbc23952b4d01dccf9ce131e8b0c9f980942c0493834dc1fd617ad25a"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-02/benchmark/graph-start.json",
+          "sha256": "a56de6cf9074480bd9f64474de7b9ec0a5c23bb088224ca803978a565b1e9aa9"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-02/benchmark/graph-end.json",
+          "sha256": "a56de6cf9074480bd9f64474de7b9ec0a5c23bb088224ca803978a565b1e9aa9"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-02/benchmark/pre-solve-storage.json",
+          "sha256": "59c414d227e112fd8744929257d1ae12e57fd15ee5635e7521f33cfca1b1942c"
+        },
+        {
+          "path": "local/benchmarks/goal-cee-geometry-on-02/process-affinity.json",
+          "sha256": "31d77a33c3b4ed37debdfd5620a933dbc105972506ed488a1b4229d2a0f3da73"
+        }
+      ],
+      "process_affinity": {
+        "pid": 10284,
+        "original_mask": "ffffff",
+        "requested_mask": "fff000",
+        "readback_mask": "fff000",
+        "logical_cpus": [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "wall_unix": 1794243271.4037855,
+        "scope": "Owned child process immediately after launch; other processes unchanged"
+      },
+      "affinity_readbacks": 280,
+      "stable_cpu_busy_percent": [
+        5.338813423263431,
+        6.940892120305643,
+        21.386565452403783,
+        23.04716464398562,
+        19.666207603944542,
+        23.914609769595376,
+        9.650440891340194,
+        9.408506082831892,
+        3.1964806808671025,
+        2.7774072251714395,
+        6.110559939434312,
+        5.681234415577129,
+        13.709509521675843,
+        12.155024833774323,
+        13.638176827861459,
+        14.326069456744252,
+        9.500426509232842,
+        10.13601121227793,
+        9.940270926320878,
+        11.604631334447834,
+        1.8954474949720734,
+        1.7359580004327395,
+        11.227472803313793,
+        12.291010663838746
+      ],
+      "stable_cpu_observation_seconds": 115.27363348007202,
+      "cpu_observation_note": "Total per-core load including the benchmark; affinity restricts this process but does not reserve CPUs against other processes."
+    }
+  ],
+  "note": "Each run records its runtime, helper, CPU placement and host evidence. These are focused headless observations, not full acceptance or rendered-world evidence."
+}

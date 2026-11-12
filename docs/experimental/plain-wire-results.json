@@ -1,0 +1,667 @@
+{
+  "schema": 1,
+  "base_commit": "cca3c09b36059cc44ec04cc2f03eea449936a460",
+  "branch": "dev/experimental-plain-wire-batching",
+  "full_suite": false,
+  "graphical_acceptance": false,
+  "capacity_certified": false,
+  "benchmarks": [
+    {
+      "name": "baseline-clean-01",
+      "evidence": {
+        "path": "local/benchmarks/baseline-clean-01/experiment.json",
+        "sha256": "31f67497e8cc0728415dbe7ef48ccf261eb464ccf6f4dbc9b842f3fadd63caad"
+      },
+      "started_utc": "2026-11-08T14:08:58Z",
+      "finished_utc": "2026-11-08T14:09:12Z",
+      "batch": false,
+      "detailed": false,
+      "verify_batch": false,
+      "original_reference_unchanged": true,
+      "runtime_sha256": "6c1060b17f14df765188a60da154b723705947503a813508a53f62013e625053",
+      "validation": null,
+      "launch_evidence": {
+        "path": "local/benchmarks/baseline-clean-01/launch.json",
+        "sha256": "134df1d18a584cd0493c40c047e478e7775b08b16adf9fe47a8878e5ede8657b"
+      },
+      "process_log_evidence": {
+        "path": "local/benchmarks/baseline-clean-01/process.log",
+        "sha256": "d22972cc1b3179ca26dea1d2ae2480a9b1be6d24a8575364ada1a0ac4509462e"
+      },
+      "classification": "Failed launch; no benchmark pass or performance sample"
+    },
+    {
+      "name": "baseline-clean-02",
+      "evidence": {
+        "path": "local/benchmarks/baseline-clean-02/experiment.json",
+        "sha256": "992ecee5d98ac4723cded6c2b75c6e72d4e4f0a301897af7fdb1c9d603b77691"
+      },
+      "started_utc": "2026-11-08T14:10:02Z",
+      "finished_utc": "2026-11-08T14:16:07Z",
+      "batch": false,
+      "detailed": false,
+      "verify_batch": false,
+      "original_reference_unchanged": true,
+      "runtime_sha256": "6c1060b17f14df765188a60da154b723705947503a813508a53f62013e625053",
+      "validation": {
+        "passed": true,
+        "full_suite": false,
+        "capacity_certified": false,
+        "stable_ticks": 1987,
+        "actual_nodes": 14650,
+        "edges": 20637,
+        "chunks": 953,
+        "storage_devices": 1050,
+        "sixteen_substeps": true,
+        "topology_unchanged": true,
+        "normal_shutdown": true
+      },
+      "launch_evidence": {
+        "path": "local/benchmarks/baseline-clean-02/launch.json",
+        "sha256": "6c2a856c1b884cde3e73c9bf3b0b9597b895a8f2197cdab4da1b81b19a429585"
+      },
+      "process_log_evidence": {
+        "path": "local/benchmarks/baseline-clean-02/process.log",
+        "sha256": "8f8930cfa08be5c82099b52107fc19f2accbcc0f5efc2758bb2575f898aeead2"
+      },
+      "tps": 16.583629181534228,
+      "mspt": {
+        "mean": 60.16057886260695,
+        "p50": 60.6637,
+        "p95": 71.775,
+        "p99": 81.5208,
+        "maximum": 105.617
+      },
+      "stable_ticks": 1987,
+      "gc_ms": 50,
+      "process": {
+        "rss_peak_bytes": 2454704128,
+        "cpu_mean_cores": 1.039029010277371
+      },
+      "audit": {
+        "electrical_nodes": 14650,
+        "conductive_edges": 20362,
+        "coupled_edges": 275,
+        "edges": 20637,
+        "connected_systems_ignoring_reference_ground": 1,
+        "optimized_matrix_nodes": 14925,
+        "solver_networks": 1,
+        "actual_backends": [
+          "NATIVE"
+        ]
+      },
+      "restoration": {
+        "phase": "SETTLE",
+        "cycle": 0,
+        "requested_chunks": 953,
+        "load_limit_ticks": 2859,
+        "chunks_ready_tick": 935,
+        "graph_ready_tick": 936,
+        "finish_tick": 1043,
+        "chunk_request_seconds": 1.2932876,
+        "chunk_loading_seconds": 99.7639264,
+        "graph_recovery_seconds": 0.1250701,
+        "electrical_settling_seconds": 7.4514695,
+        "total_restoration_seconds": 108.6337536,
+        "restoration_and_settling_seconds": 107.340466,
+        "healthy_ticks": 100
+      },
+      "tick_evidence": {
+        "path": "local/benchmarks/baseline-clean-02/benchmark/ticks.csv",
+        "sha256": "6738e5b06bac38eecd6ceae339bab53648b674f4f6f4889d12976a24ee0afc3d"
+      },
+      "assigned_row_order_sha256": "38d0d89ff8d01d97fb3439c3d9480cf1a601976a43365bfb7ba4ec064929a43a",
+      "hook_types": {
+        "org.cha0scollective.wwpg.bridge.PropertyCurrentSourceWire": 9443,
+        "org.patryk3211.powergrid.electricity.sim.ElectricWire": 4425,
+        "org.patryk3211.powergrid.electricity.sim.SwitchedWire": 50,
+        "org.patryk3211.powergrid.electricity.sim.node.CurrentSourceWire": 1,
+        "org.patryk3211.powergrid.electricity.sim.special.CRSeriesWire": 500,
+        "org.patryk3211.powergrid.electricity.sim.special.TransmissionLine": 5943
+      },
+      "loaded_native_resource": {
+        "path": "local/benchmarks/baseline-clean-02/.pg-native/wwpg-safety-1/1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c/libpowergridNative7.dll",
+        "sha256": "1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c"
+      },
+      "placement": {
+        "scope": "owned server thread; before restoration through final measured tick",
+        "mask": "fff000"
+      }
+    },
+    {
+      "name": "baseline-detailed-01",
+      "evidence": {
+        "path": "local/benchmarks/baseline-detailed-01/experiment.json",
+        "sha256": "37533c6746025f52dbd858e14b935df4d614af11a306af996622f7e12e6eaabc"
+      },
+      "started_utc": "2026-11-08T14:18:40Z",
+      "finished_utc": "2026-11-08T14:24:40Z",
+      "batch": false,
+      "detailed": true,
+      "verify_batch": false,
+      "original_reference_unchanged": true,
+      "runtime_sha256": "6c1060b17f14df765188a60da154b723705947503a813508a53f62013e625053",
+      "validation": {
+        "passed": true,
+        "full_suite": false,
+        "capacity_certified": false,
+        "stable_ticks": 2091,
+        "actual_nodes": 14650,
+        "edges": 20637,
+        "chunks": 953,
+        "storage_devices": 1050,
+        "sixteen_substeps": true,
+        "topology_unchanged": true,
+        "normal_shutdown": true
+      },
+      "launch_evidence": {
+        "path": "local/benchmarks/baseline-detailed-01/launch.json",
+        "sha256": "bb21ce2fdfdcaaa2405b610af3d6477173a5b80a73dc0d181a8d6a9ec0ccb16b"
+      },
+      "process_log_evidence": {
+        "path": "local/benchmarks/baseline-detailed-01/process.log",
+        "sha256": "be97b90f0828d1c53bc3d09c37ee6362321c6fdfc13f3c306bf1d7941a2a0d7d"
+      },
+      "tps": 17.45218077833276,
+      "mspt": {
+        "mean": 57.158379053084644,
+        "p50": 54.8236,
+        "p95": 65.4529,
+        "p99": 72.2322,
+        "maximum": 98.1741
+      },
+      "stable_ticks": 2091,
+      "gc_ms": 62,
+      "process": {
+        "rss_peak_bytes": 2190139392,
+        "cpu_mean_cores": 1.0324466691270824
+      },
+      "audit": {
+        "electrical_nodes": 14650,
+        "conductive_edges": 20362,
+        "coupled_edges": 275,
+        "edges": 20637,
+        "connected_systems_ignoring_reference_ground": 1,
+        "optimized_matrix_nodes": 14925,
+        "solver_networks": 1,
+        "actual_backends": [
+          "NATIVE"
+        ]
+      },
+      "restoration": {
+        "phase": "SETTLE",
+        "cycle": 0,
+        "requested_chunks": 953,
+        "load_limit_ticks": 2859,
+        "chunks_ready_tick": 949,
+        "graph_ready_tick": 950,
+        "finish_tick": 1060,
+        "chunk_request_seconds": 1.2313729,
+        "chunk_loading_seconds": 95.5165006,
+        "graph_recovery_seconds": 0.119857,
+        "electrical_settling_seconds": 7.34329,
+        "total_restoration_seconds": 104.2110205,
+        "restoration_and_settling_seconds": 102.9796476,
+        "healthy_ticks": 100
+      },
+      "tick_evidence": {
+        "path": "local/benchmarks/baseline-detailed-01/benchmark/ticks.csv",
+        "sha256": "102b0b80d9f4a271607147bad7689bb59f98030c3ae2c65c9b5f8c34c82c684d"
+      },
+      "assigned_row_order_sha256": "defab99906fa7b3687674dfa56cb4f25a13ff20438a1872145d31d8d71a58ad3",
+      "hook_types": {
+        "org.cha0scollective.wwpg.bridge.PropertyCurrentSourceWire": 9443,
+        "org.patryk3211.powergrid.electricity.sim.ElectricWire": 4425,
+        "org.patryk3211.powergrid.electricity.sim.SwitchedWire": 50,
+        "org.patryk3211.powergrid.electricity.sim.node.CurrentSourceWire": 1,
+        "org.patryk3211.powergrid.electricity.sim.special.CRSeriesWire": 500,
+        "org.patryk3211.powergrid.electricity.sim.special.TransmissionLine": 5943
+      },
+      "loaded_native_resource": {
+        "path": "local/benchmarks/baseline-detailed-01/.pg-native/wwpg-safety-1/1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c/libpowergridNative7.dll",
+        "sha256": "1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c"
+      },
+      "placement": {
+        "scope": "owned server thread; before restoration through final measured tick",
+        "mask": "fff000"
+      },
+      "complete_sixteen_step_traces": true,
+      "profiled_ticks": 115,
+      "substep_evidence": {
+        "path": "local/benchmarks/baseline-detailed-01/benchmark/substeps.csv",
+        "sha256": "ac3978d0e4f8b9a406b0e632ed679380557d901591434e4d0e0fafc229cbd70a"
+      },
+      "profiled_mean_ms_per_tick": {
+        "pg_micro_hooks": 12.150173913043478,
+        "pg_pre_hooks": 0.09274695652173913,
+        "pg_post_hooks": 0.4370895652173913,
+        "rhs": 2.829534782608696,
+        "native_solve": 4.8071591304347825,
+        "history_prepare": 0.45527304347826086,
+        "history_commit": 4.16803304347826,
+        "native_readings": 3.484585217391304
+      }
+    },
+    {
+      "name": "candidate-clean-01",
+      "evidence": {
+        "path": "local/benchmarks/candidate-clean-01/experiment.json",
+        "sha256": "a2688faa3f82257a975bda4f61fced5e82d8ea4e50d5c7a11aba3f9ec83279fb"
+      },
+      "started_utc": "2026-11-08T14:32:41Z",
+      "finished_utc": "2026-11-08T14:38:39Z",
+      "batch": true,
+      "detailed": false,
+      "verify_batch": false,
+      "original_reference_unchanged": true,
+      "runtime_sha256": "d7fa86604815690a94b98a1c91473af5ecfeb312b8c415b6b9e0be7be833a317",
+      "validation": {
+        "passed": true,
+        "full_suite": false,
+        "capacity_certified": false,
+        "stable_ticks": 2295,
+        "actual_nodes": 14650,
+        "edges": 20637,
+        "chunks": 953,
+        "storage_devices": 1050,
+        "sixteen_substeps": true,
+        "topology_unchanged": true,
+        "normal_shutdown": true,
+        "batch_execution": {
+          "plans": 705,
+          "unsupported": 657,
+          "steps": 76896,
+          "contributions": 789949698,
+          "voltage_reads": 1116201675,
+          "scalar_fallbacks": 0,
+          "largest_plain_batch": 10368
+        },
+        "bitwise_verification": false
+      },
+      "launch_evidence": {
+        "path": "local/benchmarks/candidate-clean-01/launch.json",
+        "sha256": "bade8830acf2c82edca3ecd7373c45501ad44fe3e64634c1d51b5e0d68f39fb1"
+      },
+      "process_log_evidence": {
+        "path": "local/benchmarks/candidate-clean-01/process.log",
+        "sha256": "c929fe06160961d180b4c5950bc0f5842164ed761d15b098553cb2913aaba31c"
+      },
+      "tps": 19.144532363117587,
+      "mspt": {
+        "mean": 52.09690758169935,
+        "p50": 50.178,
+        "p95": 60.6939,
+        "p99": 65.9769,
+        "maximum": 79.1225
+      },
+      "stable_ticks": 2295,
+      "gc_ms": 72,
+      "process": {
+        "rss_peak_bytes": 2118389760,
+        "cpu_mean_cores": 1.05306732420822
+      },
+      "audit": {
+        "electrical_nodes": 14650,
+        "conductive_edges": 20362,
+        "coupled_edges": 275,
+        "edges": 20637,
+        "connected_systems_ignoring_reference_ground": 1,
+        "optimized_matrix_nodes": 14925,
+        "solver_networks": 1,
+        "actual_backends": [
+          "NATIVE"
+        ]
+      },
+      "restoration": {
+        "phase": "SETTLE",
+        "cycle": 0,
+        "requested_chunks": 953,
+        "load_limit_ticks": 2859,
+        "chunks_ready_tick": 912,
+        "graph_ready_tick": 913,
+        "finish_tick": 1023,
+        "chunk_request_seconds": 1.0440615,
+        "chunk_loading_seconds": 94.2696772,
+        "graph_recovery_seconds": 0.10575,
+        "electrical_settling_seconds": 6.9775909,
+        "total_restoration_seconds": 102.3970796,
+        "restoration_and_settling_seconds": 101.3530181,
+        "healthy_ticks": 100
+      },
+      "tick_evidence": {
+        "path": "local/benchmarks/candidate-clean-01/benchmark/ticks.csv",
+        "sha256": "fbf9148cf2a357d7a358d59717a93f30094e769feafb7320254cc7286b207206"
+      },
+      "assigned_row_order_sha256": "b61a611a7d5765a1cf26b27c03c55035c6b2bdbb84dc3e6a4812941a7564e9dd",
+      "hook_types": {
+        "org.cha0scollective.wwpg.bridge.PropertyCurrentSourceWire": 9443,
+        "org.patryk3211.powergrid.electricity.sim.ElectricWire": 4425,
+        "org.patryk3211.powergrid.electricity.sim.SwitchedWire": 50,
+        "org.patryk3211.powergrid.electricity.sim.node.CurrentSourceWire": 1,
+        "org.patryk3211.powergrid.electricity.sim.special.CRSeriesWire": 500,
+        "org.patryk3211.powergrid.electricity.sim.special.TransmissionLine": 5943
+      },
+      "loaded_native_resource": {
+        "path": "local/benchmarks/candidate-clean-01/.pg-native/wwpg-safety-1/1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c/libpowergridNative7.dll",
+        "sha256": "1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c"
+      },
+      "placement": {
+        "scope": "owned server thread; before restoration through final measured tick",
+        "mask": "fff000"
+      }
+    },
+    {
+      "name": "candidate-disabled-clean-01",
+      "evidence": {
+        "path": "local/benchmarks/candidate-disabled-clean-01/experiment.json",
+        "sha256": "189b01ee1f8337c508fa76097b236d737e30f78d8a23849d546cfcb6672529db"
+      },
+      "started_utc": "2026-11-08T14:39:00Z",
+      "finished_utc": "2026-11-08T14:44:59Z",
+      "batch": false,
+      "detailed": false,
+      "verify_batch": false,
+      "original_reference_unchanged": true,
+      "runtime_sha256": "d7fa86604815690a94b98a1c91473af5ecfeb312b8c415b6b9e0be7be833a317",
+      "validation": {
+        "passed": true,
+        "full_suite": false,
+        "capacity_certified": false,
+        "stable_ticks": 2029,
+        "actual_nodes": 14650,
+        "edges": 20637,
+        "chunks": 953,
+        "storage_devices": 1050,
+        "sixteen_substeps": true,
+        "topology_unchanged": true,
+        "normal_shutdown": true
+      },
+      "launch_evidence": {
+        "path": "local/benchmarks/candidate-disabled-clean-01/launch.json",
+        "sha256": "4b6dc8b076fb70364f4eaece35f52c12d915505ae137be85a9b3ef0f54f0d14b"
+      },
+      "process_log_evidence": {
+        "path": "local/benchmarks/candidate-disabled-clean-01/process.log",
+        "sha256": "62d2f334075c71e1fcf8c02b473d373f00af3d053757aacd397ae077f993d447"
+      },
+      "tps": 16.928239717710817,
+      "mspt": {
+        "mean": 58.93911473632331,
+        "p50": 57.2657,
+        "p95": 67.2203,
+        "p99": 74.1086,
+        "maximum": 96.8491
+      },
+      "stable_ticks": 2029,
+      "gc_ms": 60,
+      "process": {
+        "rss_peak_bytes": 2305536000,
+        "cpu_mean_cores": 1.0487257250972348
+      },
+      "audit": {
+        "electrical_nodes": 14650,
+        "conductive_edges": 20362,
+        "coupled_edges": 275,
+        "edges": 20637,
+        "connected_systems_ignoring_reference_ground": 1,
+        "optimized_matrix_nodes": 14925,
+        "solver_networks": 1,
+        "actual_backends": [
+          "NATIVE"
+        ]
+      },
+      "restoration": {
+        "phase": "SETTLE",
+        "cycle": 0,
+        "requested_chunks": 953,
+        "load_limit_ticks": 2859,
+        "chunks_ready_tick": 919,
+        "graph_ready_tick": 920,
+        "finish_tick": 1030,
+        "chunk_request_seconds": 1.0595893,
+        "chunk_loading_seconds": 95.0078174,
+        "graph_recovery_seconds": 0.1346684,
+        "electrical_settling_seconds": 7.6988464,
+        "total_restoration_seconds": 103.9009215,
+        "restoration_and_settling_seconds": 102.8413322,
+        "healthy_ticks": 100
+      },
+      "tick_evidence": {
+        "path": "local/benchmarks/candidate-disabled-clean-01/benchmark/ticks.csv",
+        "sha256": "12695ce05b14c0067a34679193b0774c47146e494999aa9d5384f5fa93083b1e"
+      },
+      "assigned_row_order_sha256": "0e373d448c2b6edff951d79f1a4487247b4bed67636bcc58cd6e4688b379e983",
+      "hook_types": {
+        "org.cha0scollective.wwpg.bridge.PropertyCurrentSourceWire": 9443,
+        "org.patryk3211.powergrid.electricity.sim.ElectricWire": 4425,
+        "org.patryk3211.powergrid.electricity.sim.SwitchedWire": 50,
+        "org.patryk3211.powergrid.electricity.sim.node.CurrentSourceWire": 1,
+        "org.patryk3211.powergrid.electricity.sim.special.CRSeriesWire": 500,
+        "org.patryk3211.powergrid.electricity.sim.special.TransmissionLine": 5943
+      },
+      "loaded_native_resource": {
+        "path": "local/benchmarks/candidate-disabled-clean-01/.pg-native/wwpg-safety-1/1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c/libpowergridNative7.dll",
+        "sha256": "1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c"
+      },
+      "placement": {
+        "scope": "owned server thread; before restoration through final measured tick",
+        "mask": "fff000"
+      }
+    },
+    {
+      "name": "candidate-verified-detailed-01",
+      "evidence": {
+        "path": "local/benchmarks/candidate-verified-detailed-01/experiment.json",
+        "sha256": "d82a0461f83cda26a406878d1545e7e3d368d5ab889de8183d60f6fa41a66f89"
+      },
+      "started_utc": "2026-11-08T14:45:34Z",
+      "finished_utc": "2026-11-08T14:51:34Z",
+      "batch": true,
+      "detailed": true,
+      "verify_batch": true,
+      "original_reference_unchanged": true,
+      "runtime_sha256": "d7fa86604815690a94b98a1c91473af5ecfeb312b8c415b6b9e0be7be833a317",
+      "validation": {
+        "passed": true,
+        "full_suite": false,
+        "capacity_certified": false,
+        "stable_ticks": 2123,
+        "actual_nodes": 14650,
+        "edges": 20637,
+        "chunks": 953,
+        "storage_devices": 1050,
+        "sixteen_substeps": true,
+        "topology_unchanged": true,
+        "normal_shutdown": true,
+        "batch_execution": {
+          "plans": 690,
+          "unsupported": 635,
+          "steps": 71353,
+          "contributions": 732280005,
+          "voltage_reads": 1034733091,
+          "scalar_fallbacks": 0,
+          "largest_plain_batch": 10368
+        },
+        "bitwise_verification": true
+      },
+      "launch_evidence": {
+        "path": "local/benchmarks/candidate-verified-detailed-01/launch.json",
+        "sha256": "f0757e9a0bc1db1fb9eade102b25ca5ee799e25ef0e9b68208e98d10b590a23c"
+      },
+      "process_log_evidence": {
+        "path": "local/benchmarks/candidate-verified-detailed-01/process.log",
+        "sha256": "e21ef51bde241bc5bd005fe6189cdbb0557473b4ef4e7de74dfa93b19d847207"
+      },
+      "tps": 17.717515899168163,
+      "mspt": {
+        "mean": 56.30113264248705,
+        "p50": 53.4425,
+        "p95": 65.6978,
+        "p99": 71.4564,
+        "maximum": 96.5811
+      },
+      "stable_ticks": 2123,
+      "gc_ms": 60,
+      "process": {
+        "rss_peak_bytes": 2367631360,
+        "cpu_mean_cores": 1.0432801025653902
+      },
+      "audit": {
+        "electrical_nodes": 14650,
+        "conductive_edges": 20362,
+        "coupled_edges": 275,
+        "edges": 20637,
+        "connected_systems_ignoring_reference_ground": 1,
+        "optimized_matrix_nodes": 14925,
+        "solver_networks": 1,
+        "actual_backends": [
+          "NATIVE"
+        ]
+      },
+      "restoration": {
+        "phase": "SETTLE",
+        "cycle": 0,
+        "requested_chunks": 953,
+        "load_limit_ticks": 2859,
+        "chunks_ready_tick": 941,
+        "graph_ready_tick": 942,
+        "finish_tick": 1051,
+        "chunk_request_seconds": 1.2040345,
+        "chunk_loading_seconds": 95.36196,
+        "graph_recovery_seconds": 0.1052321,
+        "electrical_settling_seconds": 7.4025877,
+        "total_restoration_seconds": 104.0738143,
+        "restoration_and_settling_seconds": 102.8697798,
+        "healthy_ticks": 100
+      },
+      "tick_evidence": {
+        "path": "local/benchmarks/candidate-verified-detailed-01/benchmark/ticks.csv",
+        "sha256": "7edfcdfb73e4dcaddaf6774f04da401edfd0d938ef57f288555858b1f5aa5ea9"
+      },
+      "assigned_row_order_sha256": "163be361b905c5c7eeb04c44ef394e2c83884e65e88277904750482cdd41ab71",
+      "hook_types": {
+        "org.cha0scollective.wwpg.bridge.PropertyCurrentSourceWire": 9443,
+        "org.patryk3211.powergrid.electricity.sim.ElectricWire": 4425,
+        "org.patryk3211.powergrid.electricity.sim.SwitchedWire": 50,
+        "org.patryk3211.powergrid.electricity.sim.node.CurrentSourceWire": 1,
+        "org.patryk3211.powergrid.electricity.sim.special.CRSeriesWire": 500,
+        "org.patryk3211.powergrid.electricity.sim.special.TransmissionLine": 5943
+      },
+      "loaded_native_resource": {
+        "path": "local/benchmarks/candidate-verified-detailed-01/.pg-native/wwpg-safety-1/1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c/libpowergridNative7.dll",
+        "sha256": "1c8a4e7cbae743bd5a1553d4222d437b881367b0777987574cafb0249a6b033c"
+      },
+      "placement": {
+        "scope": "owned server thread; before restoration through final measured tick",
+        "mask": "fff000"
+      },
+      "complete_sixteen_step_traces": true,
+      "profiled_ticks": 117,
+      "substep_evidence": {
+        "path": "local/benchmarks/candidate-verified-detailed-01/benchmark/substeps.csv",
+        "sha256": "e616bb1942055f91353cd7c536e90b2df4a36f9608974786c5b9415f9eb75068"
+      },
+      "profiled_mean_ms_per_tick": {
+        "pg_micro_hooks": 11.269778632478632,
+        "pg_pre_hooks": 0.06041111111111111,
+        "pg_post_hooks": 0.4094666666666667,
+        "rhs": 2.596636752136752,
+        "native_solve": 4.708988888888889,
+        "history_prepare": 0.430574358974359,
+        "history_commit": 4.069871794871795,
+        "native_readings": 3.7666435897435897
+      }
+    }
+  ],
+  "focused_checks": [
+    {
+      "name": "lifecycle-java-01",
+      "evidence": {
+        "path": "local/checks/lifecycle-java-01/result.json",
+        "sha256": "c568d397aeefb79942afd6299c1e5e71916d091e7acae76c76b553da277d8e61"
+      },
+      "backend": "JAVA",
+      "namespaces": "wwpg_unload,wwpg_solver_safety",
+      "passed": true,
+      "required_tests_passed": 11,
+      "artifacts_unchanged": true
+    },
+    {
+      "name": "lifecycle-native-01",
+      "evidence": {
+        "path": "local/checks/lifecycle-native-01/result.json",
+        "sha256": "fa52071f1fb1580653a03aba264f39ee1ac3180f681643c685af4823abe8b661"
+      },
+      "backend": "NATIVE",
+      "namespaces": "wwpg_unload,wwpg_solver_safety",
+      "passed": true,
+      "required_tests_passed": 11,
+      "artifacts_unchanged": true
+    },
+    {
+      "name": "wire-java-01",
+      "evidence": {
+        "path": "local/checks/wire-java-01/result.json",
+        "sha256": "d438552c92365ac7c06b235bc41e951e66a276673a24067ea3e4491736d95b7b"
+      },
+      "backend": "JAVA",
+      "namespaces": "wwpg_wire_power",
+      "passed": true,
+      "required_tests_passed": 9,
+      "artifacts_unchanged": true
+    },
+    {
+      "name": "wire-native-01",
+      "evidence": {
+        "path": "local/checks/wire-native-01/result.json",
+        "sha256": "e8cf101cba5dfffd2aa6d1032fb7a59608b1c559a4f2eb1f12ba61f11ab391be"
+      },
+      "backend": "NATIVE",
+      "namespaces": "wwpg_wire_power",
+      "passed": true,
+      "required_tests_passed": 9,
+      "artifacts_unchanged": true
+    }
+  ],
+  "frozen_inputs": {
+    "path": "local/frozen/prototype-01/inputs.json",
+    "sha256": "78efcdaf0e2fd9b019e2bf9d18d77a7f343c8c3533378b967983b457ecad56de"
+  },
+  "artifacts": {
+    "runtime": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-01\\wwpg-0.2.7-experimental.plainwire.1.jar",
+      "sha256": "d7fa86604815690a94b98a1c91473af5ecfeb312b8c415b6b9e0be7be833a317"
+    },
+    "fixtures": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-01\\wwpg-0.2.7-experimental.plainwire.1-gametests.jar",
+      "sha256": "5dc49c3bf052fcf23207808508354948ac63eeaebdff0163d17e807068bebde4"
+    },
+    "cee": {
+      "path": "G:\\WWPG\\local\\x27w\\local\\frozen\\prototype-01\\electroenergetics-1.21.1-1.1.4.jar",
+      "sha256": "2362decf60ace66037eb2ae79f34fed57b5f152e0435164f5f91912ea837052f"
+    }
+  },
+  "jar_diff": {
+    "added": [
+      "org/cha0scollective/wwpg/experimental/PlainWireBatch$NetworkAccess.class",
+      "org/cha0scollective/wwpg/experimental/PlainWireBatch$WireAccess.class",
+      "org/cha0scollective/wwpg/experimental/PlainWireBatch.class",
+      "org/cha0scollective/wwpg/mixin/PgPlainWireBatchAccessMixin.class",
+      "org/cha0scollective/wwpg/mixin/PgPlainWireBatchMixin.class"
+    ],
+    "removed": [],
+    "changed": [
+      "META-INF/neoforge.mods.toml",
+      "org/cha0scollective/wwpg/WorldWidePowerGrid.class",
+      "wwpg.mixins.json"
+    ],
+    "native_unchanged": true
+  },
+  "limitations": [
+    "Short focused controls, not capacity or release acceptance.",
+    "Assigned matrix row and hook iteration order vary across fresh JVM processes; they are stable within each measured run.",
+    "Verification and detailed instrumentation add overhead; keep those runs separate from clean timing comparisons.",
+    "Loading times are observational; this prototype does not change chunk I/O or graph construction.",
+    "Opt-in serial experiment on copied saves; no worker threads or native binary changes."
+  ]
+}

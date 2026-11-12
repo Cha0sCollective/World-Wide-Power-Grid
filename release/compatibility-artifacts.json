@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "purpose": "Older-loader compatibility only; not the primary release runtime",
+  "computercraft": {
+    "version": "1.120.2",
+    "coordinate": "maven.modrinth:gu7yAYhd:1ewzHZYg",
+    "sha256": "e8651fe24b384e925e563c9ad077644744474e2e7c0adb8e6d5b4757598dce9f",
+    "download": "https://cdn.modrinth.com/data/gu7yAYhd/versions/1ewzHZYg/cc-tweaked-1.21.1-forge-1.120.2.jar",
+    "reason": "The current CC:Tweaked 1.121.0 requires NeoForge 21.1.265; retain 1.120.2 only for older-loader compatibility and minimum compile inputs."
+  }
+}

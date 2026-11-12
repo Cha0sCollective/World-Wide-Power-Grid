@@ -64,6 +64,8 @@ public final class CeeElectric implements IElectric {
     private Map<Integer, Vec3> accessible() {
         var state = Terminals.loadedState(level, pos);
         if (state.getBlock() != block) return Map.of();
+        var prepared = org.cha0scollective.wwpg.experimental.CeeStateGeometry.snapshot(block, level, pos, state);
+        if (prepared != null) return prepared.positions();
         var terminals = new TreeMap<Integer, Vec3>();
         for (var e : block.getNodePositions(level, pos, state).entrySet())
             if (block.isNodeAccessible(level, pos, state, e.getKey())) terminals.put(e.getKey(), e.getValue());

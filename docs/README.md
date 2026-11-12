@@ -1,7 +1,11 @@
 # Documentation
 
-These guides describe **WWPG 0.2.7**, its supported stationary factories, and
-**extension API 1.0.0**. Start with the page that matches what you want to do.
+These guides describe **WWPG 0.2.8-beta.2 (prerelease)**, its supported stationary
+factories and **extension API 1.0.0**. The previous stable release is 0.2.7.
+Start with the page that matches what you want to do. The [circuit library](CIRCUIT_LIBRARY.md)
+and [control promotion record](developer/CONTROL_PROMOTION_028.md) describe the
+retained improvements; [acceptance](../release/0.2.8-beta.2/ACCEPTANCE.md) preserves
+the completed campaign's actual source and artifact identities.
 
 ## Play and run a server
 
@@ -31,6 +35,7 @@ The combined Stationary Yard requires Pinout and CC:Tweaked and includes the ord
 | See what each current GameTest actually checks | [GameTest coverage reference](GAMETEST_REFERENCE.md) |
 | Work on the unreleased guarded native solver | [Native safety development](NATIVE_SAFETY_DEVELOPMENT.md) |
 | Submit a change | [Contributing](../CONTRIBUTING.md) |
+| Understand preserved behavior and intentional model differences | [Upstream behavior](UPSTREAM_BEHAVIOR.md) |
 | Understand API release requirements | [API release checks](API_RELEASE_CHECKS.md) and [completed API plan](EXTENSION_API_PLAN.md) |
 | Package and publish the five downloads with short notes | [Release process](RELEASING.md) |
 | Inspect a published release's files and test records | [Release records](../release/README.md) |
