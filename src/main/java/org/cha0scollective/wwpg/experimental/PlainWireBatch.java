@@ -51,7 +51,7 @@ public final class PlainWireBatch implements IMultiHooks {
     private final AbstractElectricWire[] hooks;
     // 0: original callback, 1: plain wire, 2: exact CEE property-source stamp.
     private final byte[] kinds;
-    private final int[] first, second;
+    private final int[] first, second, rows;
     private final IElectricNode[] nodes;
     private final double[] voltages;
     private final boolean supported;
@@ -97,7 +97,9 @@ public final class PlainWireBatch implements IMultiHooks {
         }
         supported = safe && plainCount + propertyCount > 0;
         nodes = unique.toArray(IElectricNode[]::new);
+        rows = new int[nodes.length];
         voltages = new double[nodes.length];
+        for (int i = 0; i < nodes.length; i++) rows[i] = nodes[i].getIndex();
         plans++;
         if (!supported) unsupportedPlans++;
         else {
@@ -144,10 +146,9 @@ public final class PlainWireBatch implements IMultiHooks {
         var assigned = network.getNodes();
         for (int i = 0; i < nodes.length; i++) {
             var node = nodes[i];
-            // The node owns its current row. Validate that assignment directly;
-            // a second row table only duplicates state that topology can change.
-            int row = node.getNetwork() == network ? node.getIndex() : -1;
-            if (row < 0 || row >= assigned.size() || assigned.get(row) != node) {
+            int row = rows[i];
+            if (node.getNetwork() != network || node.getIndex() != row
+                    || row >= assigned.size() || assigned.get(row) != node) {
                 invalidate(network);
                 return original; // No contribution has been written yet.
             }

@@ -123,20 +123,22 @@ public final class PlainWireBatchGameTests {
     }
 
     @GameTest(template = "empty", batch = "wwpg_wire_power_core", timeoutTicks = 40)
-    public static void retainedPlanUsesCurrentRowsAndFreshState(GameTestHelper h) {
+    public static void rebuiltPlanUsesFreshStateAfterRowSwap(GameTestHelper h) {
         try (var f = new Circuit(h)) {
             f.settle();
             Set<IMultiHooks> original = Set.of(f.wire);
             var plan = PlainWireBatch.compile(f.network, original);
             f.network.swapNodes(f.a, f.b);
             f.settle();
+            h.assertTrue(plan.select(original) == original, "Obsolete row plan did not fall back");
+            plan = PlainWireBatch.compile(f.network, original);
             f.wire.prepare(32);
             double expected = 0;
             for (int step = 0; step < 32; step++) {
                 f.network.setValue(f.a, step - 16.0);
                 f.network.setValue(f.b, step * 0.25);
                 var selected = plan.select(original);
-                h.assertTrue(selected != original, "Coherent current row assignment lost the batch");
+                h.assertTrue(selected != original, "Rebuilt row assignment lost the batch");
                 selected.forEach(IMultiHooks::postMicroTick);
                 expected += f.wire.internalPower() / 32;
                 sameBits(h, expected, f.wire.power(), "Fresh reindexed power at step " + step);
