@@ -61,14 +61,11 @@ public final class ServerElectricalSchedule {
             org.cha0scollective.wwpg.extension.NativeApiReadings.prepare(level,
                     new org.cha0scollective.wwpg.api.TickContext(level.getGameTime(),.05,steps));
         }
-        try(var generators=PgGeneratorTiming.begin(server,networks)) {
-            for (int step = 0; step < steps; step++) {
-                generators.beforeStep();
-                for (int index = 0; index < worlds.size(); index++) {
-                    var level = (ServerLevel) worlds.get(index).world;
-                    for (var network : networks.get(index)) solve(level, network);
-                }
-                generators.afterStep();
+        // PG owns generator sampling, torque accumulation and the ordinary rotor tick.
+        for (int step = 0; step < steps; step++) {
+            for (int index = 0; index < worlds.size(); index++) {
+                var level = (ServerLevel) worlds.get(index).world;
+                for (var network : networks.get(index)) solve(level, network);
             }
         }
         for (var world : worlds) {

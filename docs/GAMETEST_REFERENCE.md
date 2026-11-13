@@ -754,8 +754,9 @@ Entry points:
 Namespace: `wwpg_generator_timing` (focused safety). [Source](../src/gameTest/java/org/cha0scollective/wwpg/gametest/GeneratorTimingGameTests.java).
 
 Builds a real six-rotor self-excited PG generator with a 50:10 field transformer.
-Checks accepted powered output, bounded settled voltage and speed, load response
-and drive stop/restart recovery. A separate direct-network check preserves native
+Checks powered output, intended overloaded voltage/speed oscillation, load changes
+and drive stop/restart. Recorded traces compare the native timing reference with
+the candidate. A separate direct-network check preserves native
 custom-rotor torque counting, inertia compensation and output in both directions
 at one and sixteen substeps. These checks do not certify whole-world cold restart,
 moving assemblies or every possible excitation circuit. See the
@@ -763,7 +764,7 @@ moving assemblies or every possible excitation circuit. See the
 
 Entry points:
 
-- `transformerFedSelfExcitationSettlesAndRecovers`
+- `transformerFedSelfExcitationRetainsNativeOscillation`
 - `carbonPilePreservesNativeClutchOperatingPoints` (connected 72-coil field, native saturated/unsaturated clutch response, load changes and drive recovery)
 - `redstoneVariacRestoresExcitationAtFullRotorSpeed`
 - `directAndCustomRotorsKeepNativeIntegration`

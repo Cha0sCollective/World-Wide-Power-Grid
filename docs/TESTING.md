@@ -120,14 +120,16 @@ The `wwpg_generator_timing` fixtures run in the separate `generator-timing`
 group. They require a healthy world's diagnostic history, so they must not share
 a process with safety fixtures that deliberately reject electrical solves.
 They cover transformer-fed native
-self-excitation, settled output, load changes and drive stop/restart recovery,
+self-excitation with PG's intended overload oscillation, load changes and drive stop/restart,
 plus a fully connected 72-coil carbon-pile fixture that checks original powered
 operating points and both saturated and unsaturated clutch loads,
 plus unchanged direct/custom-rotor execution in both directions at one and sixteen
 substeps. A separate one-step batch requires shaft-driven and redstone variac re-excitation to
-recover while the rotor remains at full speed. Run the namespace on both solvers. The separate mechanics units include
-weak drives and the once-per-tick low-speed cutoff. See
-[generator timing](developer/GENERATOR_TIMING.md) for recognition and fallback limits.
+operate while the rotor remains at full speed. The `wwpg_audit_generator`
+fixtures also record startup and load-change traces for comparison against the
+native PG timing reference on both solvers. Matching upstream behavior, including
+availability and oscillation, replaces the removed coupling model's settling
+requirements. See [upstream behavior](UPSTREAM_BEHAVIOR.md).
 
 The `wwpg` variac fixture checks powered PG load control and calls CEE's native
 heating calculation with distinct local voltage readings and signed current.

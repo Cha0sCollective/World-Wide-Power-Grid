@@ -1,6 +1,6 @@
 # Upstream behavior and compatibility checks
 
-This describes the audit corrections in 0.2.8-beta.2. The separate
+This describes the audit corrections in 0.2.8-beta.2 and the prepared beta.3 parity revert. The separate
 [acceptance record](../release/0.2.8-beta.2/ACCEPTANCE.md) preserves the actual
 tested source, coverage and remaining uncertainty. Historical beta1 evidence
 continues to describe its original runtime.
@@ -25,26 +25,24 @@ acceptance boundary. An unsupported extension endpoint is isolated with a
 diagnostic while unrelated supported circuits continue. These are WWPG's
 documented failure-handling boundaries.
 
-## Generator timing correction
+## Native PG generator timing
 
-The correction introduced in 0.2.7 remains enabled. For eligible native PG
-generators it solves field current, electrical output and rotor response
-together during the electrical substeps. It retains PG's clutch sampling
-timing and force limits and replaces the managed path's electrical
-approximation of inertia with the directly calculated rotor response.
-Unsupported models retain PG's original path.
+Starting with the prepared 0.2.8-beta.3 candidate, WWPG uses PG's original
+generator, rotor and clutch update timing. The coupled timing model introduced
+in 0.2.7 is removed, following upstream confirmation that the observed overload
+oscillation is intended behavior. Self-excited generators may therefore hunt
+under the same loads as stock PG. Flat output is not a parity requirement.
 
-This is an intentional model difference, especially under overload. A local
-comparison of 0.2.6 and 0.2.7 at sixteen substeps found closely matching settled
-readings around 32 kW, while heavy overloads that cycled in 0.2.6 settled at
-reduced speed in 0.2.7. Both clutches still saturated. The observations do not
-establish identical load-step transients or certify real-world generator
-behavior. Keep stock-reference expectations separate from correction-specific
-stability and excitation-control checks.
+PG owns field sampling, its inertia companion, torque accumulation and the
+ordinary rotor/clutch tick. WWPG retains the shared electrical substep schedule
+and independent restoration, isolation and native allocation safeguards.
+The old generatorCoupling property no longer selects an alternative model.
 
-The existing `-Dwwpg.generatorCoupling=false` switch selects the native PG
-generator timing path for controlled comparisons. It is not required for normal
-operation. Preserve original comparisons and identify the switch in evidence.
+The [0.2.7 timing document](developer/GENERATOR_TIMING.md) is historical and
+describes the removed model. Previous acceptance remains evidence for its named
+runtime, not acceptance of this revert. Current focused comparisons require
+matching source current, rotor speed, source resistance and availability against
+the native timing reference, including overload and excitation control changes.
 
 ## Restoration and native failures
 

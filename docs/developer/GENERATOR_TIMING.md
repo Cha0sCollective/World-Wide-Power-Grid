@@ -1,3 +1,7 @@
+> Historical: this describes 0.2.7 through 0.2.8-beta.2. The prepared beta.3
+> removes this timing model and restores stock PG behavior, including oscillation.
+> See [current upstream behavior](../UPSTREAM_BEHAVIOR.md).
+
 # Self-excited generator timing (WWPG 0.2.7)
 
 The correction in WWPG 0.2.7 advances a recognized
