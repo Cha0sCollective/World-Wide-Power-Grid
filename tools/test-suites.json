@@ -16,7 +16,8 @@
   "loaders": [
     "21.1.231",
     "21.1.248",
-    "21.1.265"
+    "21.1.265",
+    "21.1.266"
   ],
   "loader_compatibility": {
     "policy": "loader-compatibility-v1",
@@ -532,5 +533,5 @@
   "known_limitations": [
     "The dev.102 exposed-pin targeting fix has focused headless player-ray coverage while holding PG wires; prior highlight evidence does not certify its real-client rendering or input."
   ],
-  "runtime_loader": "21.1.265"
+  "runtime_loader": "21.1.266"
 }
