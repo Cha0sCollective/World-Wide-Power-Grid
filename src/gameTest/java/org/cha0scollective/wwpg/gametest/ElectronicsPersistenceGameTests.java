@@ -52,9 +52,9 @@ public final class ElectronicsPersistenceGameTests {
                 ((ResistorBlockEntity)level.getBlockEntity(BALLAST)).getBehaviour(ScrollValueBehaviour.TYPE).setValue(36); // native 10 ohms
                 DevicesSavedData.load(level).getDevice(LOAD,ResistorDevice.class).properties=ElectricalProperties.resistor(1000);
                 var panel=(ElectricalPanelBlockEntity)level.getBlockEntity(PANEL);
-                var control=CEEPanelAttachmentTypes.CUT_OFF_SWITCH.get().createNew(PANEL,CEEPanelAttachmentTypes.CUT_OFF_SWITCH.get().mode.getNodesFor(PANEL,ElectricalPanelSlot.THIRD_LEFT),level,ElectricalPanelSlot.THIRD_LEFT,Direction.NORTH,level.registryAccess());
+                var control=CeeTestAttachments.type("CUT_OFF_SWITCH").createNew(PANEL,CeeTestAttachments.nodes(CeeTestAttachments.type("CUT_OFF_SWITCH"),PANEL,ElectricalPanelSlot.THIRD_LEFT),level,ElectricalPanelSlot.THIRD_LEFT,Direction.NORTH,level.registryAccess());
                 control.label="Factory enable";((CutOffSwitchPanelAttachment)control).isClosed=true;
-                var meter=CEEPanelAttachmentTypes.VOLTMETER.get().createNew(PANEL,CEEPanelAttachmentTypes.VOLTMETER.get().mode.getNodesFor(PANEL,ElectricalPanelSlot.THIRD_CENTERED),level,ElectricalPanelSlot.THIRD_CENTERED,Direction.NORTH,level.registryAccess());meter.label="Stored voltage";
+                var meter=CeeTestAttachments.type("VOLTMETER").createNew(PANEL,CeeTestAttachments.nodes(CeeTestAttachments.type("VOLTMETER"),PANEL,ElectricalPanelSlot.THIRD_CENTERED),level,ElectricalPanelSlot.THIRD_CENTERED,Direction.NORTH,level.registryAccess());meter.label="Stored voltage";
                 panel.getAttachments()[ElectricalPanelSlot.THIRD_LEFT.ordinal()]=control;panel.getAttachments()[ElectricalPanelSlot.THIRD_CENTERED.ordinal()]=meter;panel.attachmentUpdate();
                 ((CircuitBoardBlockEntity)level.getBlockEntity(BOARD)).setSchematic(capacitorBoard());
                 wire(h,SOURCE,1,BALLAST,0,true);wire(h,BALLAST,1,PANEL,control.nodes[0].id(),false);wire(h,PANEL,control.nodes[1].id(),BOARD,0,true);wire(h,SOURCE,0,BOARD,1,false);

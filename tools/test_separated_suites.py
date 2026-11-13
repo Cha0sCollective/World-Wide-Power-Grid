@@ -40,7 +40,8 @@ class SelectionChecks(unittest.TestCase):
             jobs=suites.plan('full-headless',backends=[backend])
             names={n for job in jobs for n in job.get('namespaces',[])}
             self.assertTrue({'wwpg_contactors','wwpg_api_ownership','wwpg_rhs','wwpg_wire_recovery',
-                'wwpg_pause_epoch','wwpg_wire_power','wwpg_display_pulse','wwpg_cee_preparation'}<=names)
+                'wwpg_pause_epoch','wwpg_wire_power','wwpg_display_pulse','wwpg_cee_preparation',
+                'wwpg_cee_readiness','wwpg_cee_lifecycle','wwpg_cee_migration','wwpg_cee_ownership'}<=names)
             self.assertEqual('wwpg_native_guard' in names,backend=='NATIVE')
 
     def test_pinout_regressions_do_not_launch_twice(self):

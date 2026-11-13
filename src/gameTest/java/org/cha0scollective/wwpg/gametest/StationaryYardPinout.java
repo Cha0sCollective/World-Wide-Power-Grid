@@ -73,7 +73,7 @@ final class StationaryYardPinout {
                     wire(h,board,ExampleControlBoard.COIL_RETURN,running,1,true);wire(h,board,ExampleControlBoard.COIL_RETURN,stopped,1,false);
                     var player=h.makeMockPlayer(GameType.SURVIVAL);var bulb=ModdedItems.LIGHT_BULB.asStack();player.setItemInHand(InteractionHand.MAIN_HAND,bulb);
                     h.assertTrue(((org.patryk3211.powergrid.electricity.light.fixture.AbstractLightFixtureBlockEntity)level.getBlockEntity(running)).replaceBulb(player,InteractionHand.MAIN_HAND,bulb)&&bulb.isEmpty(),"Pinout board load rejected native bulb");
-                    var type=CEEPanelAttachmentTypes.VOLTMETER.get();var gauge=type.createNew(panel,type.mode.getNodesFor(panel,ElectricalPanelSlot.THIRD_CENTERED),level,ElectricalPanelSlot.THIRD_CENTERED,Direction.SOUTH,level.registryAccess());gauge.label="Pin 5 load voltage";
+                    var type=CeeTestAttachments.type("VOLTMETER");var gauge=type.createNew(panel,CeeTestAttachments.nodes(type,panel,ElectricalPanelSlot.THIRD_CENTERED),level,ElectricalPanelSlot.THIRD_CENTERED,Direction.SOUTH,level.registryAccess());gauge.label="Pin 5 load voltage";
                     var be=(ElectricalPanelBlockEntity)level.getBlockEntity(panel);be.getAttachments()[ElectricalPanelSlot.THIRD_CENTERED.ordinal()]=gauge;be.attachmentUpdate();
                     wire(h,load(pins,5),0,panel,gauge.nodes[0].id(),false);wire(h,load(pins,5),1,panel,gauge.nodes[1].id(),true);yard.blockMeter(s,load(pins,1),0,1,70);
                 }

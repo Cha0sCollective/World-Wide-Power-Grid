@@ -22,6 +22,11 @@ final class RuntimeInputAudit {
             Files.writeString(Path.of("loaded-runtime-inputs.json"),new com.google.gson.GsonBuilder().setPrettyPrinting().create().toJson(loaded));
             for(var entry:lock.entrySet()) {
                 var expected=entry.getValue().getAsJsonObject();String id=entry.getKey();
+                String ceeHash=System.getProperty("wwpg.test.expectedCeeSha256","");
+                if(id.equals("electroenergetics")&&!ceeHash.isEmpty()) {
+                    if(!ceeHash.matches("[0-9a-f]{64}"))throw new IllegalStateException("Invalid explicit CEE input hash");
+                    expected=expected.deepCopy();expected.addProperty("sha256",ceeHash);
+                }
                 boolean required=!expected.get("optional").getAsBoolean();
                 if(id.equals("computercraft")&&Boolean.getBoolean("wwpg.test.legacyComputerRuntime")) expected=expected.getAsJsonObject("legacy");
                 if(id.equals("pinout")||id.equals("computercraft")) required="PINOUT".equals(System.getProperty("wwpg.test.profile","BASE"));

@@ -158,7 +158,7 @@ public final class TrainCircuitGameTests {
                 var sd=InfrastructureSavedData.load(h.getLevel().getServer().getLevel(dimension));var indexes=new it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap<Node>();indexes.defaultReturnValue(-1);
                 var builder=new com.george_vi.electroenergetics.simulation.CircuitBuilder(0,new ArrayList<>(),indexes);builder.addNode(d.trainNode);builder.addNode(d.groundNode);double[] samples=new double[builder.allNodes().size()*16];
                 for(var node:builder.allNodes())if(node.node.equals(d.trainNode))Arrays.fill(samples,node.ordinal*16,node.ordinal*16+16,777);
-                sd.catenaryModule.finishSimulation(new SimulationResults(samples,16,new it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap<>(),builder,sd));
+                sd.catenaryModule.finishSimulation(org.cha0scollective.wwpg.compat.cee.CeeCompatibility.integration().results(samples,16,new it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap<>(),builder,sd,java.util.Set.of()));
                 h.assertTrue(Double.compare(d.lastVoltage,v)==0&&Double.compare(d.displayCurrent,i)==0&&d.accumulatorCharge==.5&&train.fuelTicks==fuel&&d.ticksSinceGaugeSync==sync,"Populated foreign results modified another dimension's train or storage");
             }
             d.accumulators=0;d.accumulatorCharge=0;

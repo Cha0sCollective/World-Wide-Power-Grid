@@ -18,9 +18,10 @@ import java.util.function.Consumer;
 @PrefixGameTestTemplate(false)
 @EventBusSubscriber(modid="wwpg_tests",bus=EventBusSubscriber.Bus.MOD)
 public final class AuditEndpointGameTests {
-    public static final class Property extends ElectricalProperties {
+    public static final class Property extends com.george_vi.electroenergetics.simulation.electrical_properties.MicroTickingElectricalProperties {
         int stored,beforeCalls,prepareCalls;boolean fail,failCapture;
-        Property(){super(100,0,0);}
+        Property(){resistance=100;}
+        @Override public void tick(double[] v,int step,int total,int a,int b){}
     }
     private static final class UnsupportedNode extends Node { }
     @SubscribeEvent public static void register(RegisterCeePropertyAdaptersEvent event) {
@@ -61,7 +62,7 @@ public final class AuditEndpointGameTests {
         Consumer<AddToElectricGraphEvent> listener=event->{
             if(event.level!=h.getLevel())return;
             event.builder.connect(!repaired[0]&&missing?unsupported:first,second,p);
-            if(!repaired[0]&&explicit)event.builder.connect(first,new AttachedNode(2,owner),new ElectricalProperties(10,0,0){});
+            if(!repaired[0]&&explicit)event.builder.connect(first,new AttachedNode(2,owner),new com.george_vi.electroenergetics.simulation.electrical_properties.MicroTickingElectricalProperties(){ {resistance=10;} public void tick(double[] v,int step,int total,int a,int b){} });
         };
         NeoForge.EVENT_BUS.addListener(AddToElectricGraphEvent.class,listener);
         h.runAtTickTime(20,()->{

@@ -42,7 +42,7 @@ public final class CeeAuxiliaryGameTests {
         h.runAtTickTime(5,()->{source(h,20);((ResistorBlockEntity)h.getBlockEntity(LOAD)).setValue(1000);((SmartBlockEntity)h.getBlockEntity(DEVICE)).getBehaviour(ScrollValueBehaviour.TYPE).setValue(8);
             wire(h,SOURCE,0,DEVICE,0);wire(h,SOURCE,1,DEVICE,1);wire(h,DEVICE,2,LOAD,0);wire(h,DEVICE,1,LOAD,1);});
         h.runAtTickTime(25,()->{near(h,voltage(h,LOAD),0,.01,"Redstone variac open");h.setBlock(DEVICE.north(),Blocks.REDSTONE_BLOCK);});
-        h.runAtTickTime(55,()->{near(h,voltage(h,LOAD),20,.05,"Native redstone variac powered");h.setBlock(DEVICE.north(),Blocks.AIR);});
+        h.runAtTickTime(55,()->{near(h,voltage(h,LOAD),20*com.george_vi.electroenergetics.content.variac.RedstoneVariacBlockEntity.indexToRatio(8),.05,"Native redstone variac powered");h.setBlock(DEVICE.north(),Blocks.AIR);});
         h.runAtTickTime(90,()->{near(h,voltage(h,LOAD),0,.01,"Native redstone variac release");DynamicGameTests.audit(h);h.succeed();});
     }
     @GameTest(template="empty",timeoutTicks=100) public static void ceeCurrentTransformerMapsInternalWindingNodes(GameTestHelper h){

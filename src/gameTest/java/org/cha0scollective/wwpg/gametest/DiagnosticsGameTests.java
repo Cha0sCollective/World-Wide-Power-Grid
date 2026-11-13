@@ -66,7 +66,7 @@ public final class DiagnosticsGameTests {
         h.runAtTickTime(5,()->{
             ShowroomTools.scroll(h,source,10000);
             ((CircuitBoardBlockEntity)h.getLevel().getBlockEntity(board)).setSchematic(BoardWorkflowGameTests.viaLabelBoard());
-            var meter=PanelGameTests.insert(h,panel,CEEPanelAttachmentTypes.VOLTMETER.get(),ElectricalPanelSlot.THIRD_LEFT);
+            var meter=PanelGameTests.insert(h,panel,CeeTestAttachments.type("VOLTMETER"),ElectricalPanelSlot.THIRD_LEFT);
             for(int index=0;index<2;index++) {
                 WiringGameTests.connect(h,source,1-index,board,index,false);
                 WiringGameTests.connect(h,source,1-index,panel,meter.nodes[index].id(),false);

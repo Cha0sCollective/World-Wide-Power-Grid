@@ -42,8 +42,8 @@ public final class PanelGameTests {
             ((CreativeSourceBlockEntity) h.getLevel().getBlockEntity(source)).setValue(10);
             WiringGameTests.connect(h, source, 0, load, 0, true);
             WiringGameTests.connect(h, source, 1, load, 1, false);
-            controls[0] = insertWithItem(h, h.absolutePos(p), CEEPanelAttachmentTypes.ANALOG_LEVER.get(), ElectricalPanelSlot.THIRD_LEFT, null);
-            controls[1] = insertWithItem(h, h.absolutePos(q), CEEPanelAttachmentTypes.STEERING_WHEEL.get(), ElectricalPanelSlot.QUARTER_CENTER, null);
+            controls[0] = insertWithItem(h, h.absolutePos(p), CeeTestAttachments.type("ANALOG_LEVER"), ElectricalPanelSlot.THIRD_LEFT, null);
+            controls[1] = insertWithItem(h, h.absolutePos(q), CeeTestAttachments.type("STEERING_WHEEL"), ElectricalPanelSlot.QUARTER_CENTER, null);
             for (var attachment : controls) {
                 var link = (com.george_vi.electroenergetics.content.electrical_panel.link.ElectricalPanelLink) attachment;
                 link.getLinkFrequencies()[0] = new ItemStack(net.minecraft.world.item.Items.REDSTONE);
@@ -91,9 +91,9 @@ public final class PanelGameTests {
         h.runAtTickTime(5, () -> {
             ((CreativeSourceBlockEntity) level.getBlockEntity(source)).setValue(10);
             ((ResistorBlockEntity) level.getBlockEntity(load)).setValue(10);
-            attachments[0] = insert(h, panel, CEEPanelAttachmentTypes.CUT_OFF_SWITCH.get(), ElectricalPanelSlot.THIRD_LEFT);
-            attachments[1] = insert(h, panel, CEEPanelAttachmentTypes.VOLTMETER.get(), ElectricalPanelSlot.THIRD_CENTERED);
-            attachments[2] = insert(h, panel, CEEPanelAttachmentTypes.INDICATOR_BULB.get(), ElectricalPanelSlot.THIRD_RIGHT);
+            attachments[0] = insert(h, panel, CeeTestAttachments.type("CUT_OFF_SWITCH"), ElectricalPanelSlot.THIRD_LEFT);
+            attachments[1] = insert(h, panel, CeeTestAttachments.type("VOLTMETER"), ElectricalPanelSlot.THIRD_CENTERED);
+            attachments[2] = insert(h, panel, CeeTestAttachments.type("INDICATOR_BULB"), ElectricalPanelSlot.THIRD_RIGHT);
             ((CutOffSwitchPanelAttachment) attachments[0]).isClosed = true;
             WiringGameTests.connect(h, source, 0, panel, attachments[0].nodes[0].id(), true);
             WiringGameTests.connect(h, panel, attachments[0].nodes[1].id(), load, 0, true);
@@ -125,7 +125,7 @@ public final class PanelGameTests {
 
     static PanelAttachment insert(GameTestHelper h, BlockPos pos, PanelAttachmentType type, ElectricalPanelSlot slot) {
         var be = (ElectricalPanelBlockEntity) h.getLevel().getBlockEntity(pos);
-        var attachment = type.createNew(pos, type.mode.getNodesFor(pos, slot), h.getLevel(), slot, Direction.NORTH, h.getLevel().registryAccess());
+        var attachment = type.createNew(pos, CeeTestAttachments.nodes(type,pos, slot), h.getLevel(), slot, Direction.NORTH, h.getLevel().registryAccess());
         be.getAttachments()[slot.ordinal()] = attachment;
         be.attachmentUpdate();
         return attachment;
@@ -144,8 +144,8 @@ public final class PanelGameTests {
         h.runAtTickTime(5, () -> {
             ((CreativeSourceBlockEntity) level.getBlockEntity(source)).setValue(10);
             for (var pos : new BlockPos[] {load, momentaryLoad}) ((ResistorBlockEntity) level.getBlockEntity(pos)).setValue(100);
-            controls[0] = insertWithItem(h, panel, CEEPanelAttachmentTypes.ESTOP.get(), ElectricalPanelSlot.HALF_LEFT, null);
-            controls[1] = insertWithItem(h, momentaryPanel, CEEPanelAttachmentTypes.MOMENTARY_SWITCH.get(), ElectricalPanelSlot.THIRD_LEFT, null);
+            controls[0] = insertWithItem(h, panel, CeeTestAttachments.type("ESTOP"), ElectricalPanelSlot.HALF_LEFT, null);
+            controls[1] = insertWithItem(h, momentaryPanel, CeeTestAttachments.type("MOMENTARY_SWITCH"), ElectricalPanelSlot.THIRD_LEFT, null);
             for (int i = 0; i < 2; ++i) {
                 var destination = i == 0 ? load : momentaryLoad;
                 WiringGameTests.connect(h, source, 0, controls[i].pos, controls[i].nodes[0].id(), true);
@@ -185,7 +185,7 @@ public final class PanelGameTests {
         h.runAtTickTime(5, () -> {
             ((CreativeSourceBlockEntity) level.getBlockEntity(source)).setValue(10);
             ((ResistorBlockEntity) level.getBlockEntity(load)).setValue(100);
-            var type = CEEPanelAttachmentTypes.MINIATURE_CIRCUIT_BREAKER.get();
+            var type = CeeTestAttachments.type("MINIATURE_CIRCUIT_BREAKER");
             var stack = new ItemStack(type.item); stack.set(CEEDataComponents.FUSE_AMPERAGE, 1);
             breaker[0] = (MCBPanelAttachment) insertWithItem(h, panel, type, ElectricalPanelSlot.THIRD_LEFT, stack);
             h.assertTrue(breaker[0].setAmperage == 1, "Panel insertion lost the breaker's item setting");
@@ -219,8 +219,8 @@ public final class PanelGameTests {
         h.runAtTickTime(5, () -> {
             ((CreativeSourceBlockEntity) level.getBlockEntity(source)).setValue(10);
             ((ResistorBlockEntity) level.getBlockEntity(load)).setValue(10);
-            meter[0] = (EnergyMeterAttachment) insertWithItem(h, panel, CEEPanelAttachmentTypes.ENERGY_METER.get(), ElectricalPanelSlot.FULL_SLOT, null);
-            gauge[0] = (GaugePanelAttachment) insertWithItem(h, gaugePanel, CEEPanelAttachmentTypes.AMMETER.get(), ElectricalPanelSlot.THIRD_LEFT, null);
+            meter[0] = (EnergyMeterAttachment) insertWithItem(h, panel, CeeTestAttachments.type("ENERGY_METER"), ElectricalPanelSlot.FULL_SLOT, null);
+            gauge[0] = (GaugePanelAttachment) insertWithItem(h, gaugePanel, CeeTestAttachments.type("AMMETER"), ElectricalPanelSlot.THIRD_LEFT, null);
             WiringGameTests.connect(h, source, 0, panel, meter[0].nodes[0].id(), true);
             WiringGameTests.connect(h, source, 1, panel, meter[0].nodes[1].id(), true);
             WiringGameTests.connect(h, panel, meter[0].nodes[2].id(), gaugePanel, gauge[0].nodes[0].id(), true);
@@ -254,7 +254,7 @@ public final class PanelGameTests {
         h.runAtTickTime(5, () -> {
             ((CreativeSourceBlockEntity) level.getBlockEntity(source)).setValue(10);
             for (var pos : new BlockPos[] {loadA, loadB}) ((ResistorBlockEntity) level.getBlockEntity(pos)).setValue(10);
-            meter[0] = (TriPolarEnergyMeterAttachment) insertWithItem(h, panel, CEEPanelAttachmentTypes.TRI_POLAR_ENERGY_METER.get(), ElectricalPanelSlot.FULL_SLOT, null);
+            meter[0] = (TriPolarEnergyMeterAttachment) insertWithItem(h, panel, CeeTestAttachments.type("TRI_POLAR_ENERGY_METER"), ElectricalPanelSlot.FULL_SLOT, null);
             for (int i : new int[] {0, 2}) WiringGameTests.connect(h, source, 0, panel, meter[0].nodes[i].id(), true);
             WiringGameTests.connect(h, source, 1, panel, meter[0].nodes[1].id(), true);
             WiringGameTests.connect(h, panel, meter[0].nodes[3].id(), loadA, 0, true);

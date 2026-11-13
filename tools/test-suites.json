@@ -81,12 +81,23 @@
   },
   "groups": {
     "audit-generator": {
-      "namespaces": ["wwpg_audit_generator"],
-      "phases": ["SETUP"]
+      "namespaces": [
+        "wwpg_audit_generator"
+      ],
+      "phases": [
+        "SETUP"
+      ]
     },
     "audit": {
-      "namespaces": ["wwpg_audit_cee", "wwpg_audit_endpoints", "wwpg_audit_meter", "wwpg_audit_config"],
-      "phases": ["SETUP"]
+      "namespaces": [
+        "wwpg_audit_cee",
+        "wwpg_audit_endpoints",
+        "wwpg_audit_meter",
+        "wwpg_audit_config"
+      ],
+      "phases": [
+        "SETUP"
+      ]
     },
     "regression": {
       "namespaces": [
@@ -389,6 +400,38 @@
         "SETUP"
       ],
       "circuit": "source-loss"
+    },
+    "cee-readiness": {
+      "namespaces": [
+        "wwpg_cee_readiness"
+      ],
+      "phases": [
+        "SETUP"
+      ]
+    },
+    "cee-lifecycle": {
+      "namespaces": [
+        "wwpg_cee_lifecycle"
+      ],
+      "phases": [
+        "SETUP"
+      ]
+    },
+    "cee-migration": {
+      "namespaces": [
+        "wwpg_cee_migration"
+      ],
+      "phases": [
+        "SETUP"
+      ]
+    },
+    "cee-ownership": {
+      "namespaces": [
+        "wwpg_cee_ownership"
+      ],
+      "phases": [
+        "SETUP"
+      ]
     }
   },
   "special_namespaces": {
@@ -405,7 +448,9 @@
     "wwpg_ci_client": "separate short two-client acceptance helper",
     "wwpg_reference": "upstream and guarded compatibility reference processes",
     "wwpg_multiplayer": "legacy real TCP yard client runner",
-    "wwpg_api_multiplayer": "legacy real TCP Workshop client runner"
+    "wwpg_api_multiplayer": "legacy real TCP Workshop client runner",
+    "wwpg_cee_stock": "Version-matched CEE-only stock-control readiness fixtures; no bridge gameplay claim",
+    "wwpg_cee_migration_cold": "Explicit frozen CEE version-transition serialization control; SETUP on legacy, cold VERIFY and reopen on development"
   },
   "graphical": {
     "yard-integrated": {

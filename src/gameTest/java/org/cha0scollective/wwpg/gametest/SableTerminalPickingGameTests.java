@@ -97,7 +97,7 @@ public final class SableTerminalPickingGameTests {
                 fixture.block(CEEBlocks.ELECTRICAL_PANEL.getDefaultState().setValue(
                         ElectricalPanelBlock.FACING,Direction.NORTH));
                 var gauge=PanelGameTests.insert(h,fixture.pos,
-                        CEEPanelAttachmentTypes.VOLTMETER.get(),
+                        CeeTestAttachments.type("VOLTMETER"),
                         ElectricalPanelSlot.THIRD_CENTERED);
                 int id=gauge.nodes[0].id();var point=fixture.pin(id);var pose=fixture.pose(.8,1);
                 var from=point.add(0,0,-2);var eye=pose.transformPosition(from);

@@ -66,7 +66,7 @@ public final class CeeTerminalGeometryGameTests {
             ((CreativeSourceBlockEntity) level.getBlockEntity(source)).setValue(20);
             ((ResistorBlockEntity) level.getBlockEntity(load)).setValue(100);
             DevicesSavedData.load(level).getDevice(capacitor, CapacitorDevice.class).capacitance = .01;
-            gauge[0] = (GaugePanelAttachment) PanelGameTests.insert(h, panel, CEEPanelAttachmentTypes.VOLTMETER.get(), ElectricalPanelSlot.THIRD_CENTERED);
+            gauge[0] = (GaugePanelAttachment) PanelGameTests.insert(h, panel, CeeTestAttachments.type("VOLTMETER"), ElectricalPanelSlot.THIRD_CENTERED);
             h.assertTrue(gauge[0].nodes[0].id() == 8 && gauge[0].nodes[1].id() == 11, "Pinned panel fixture must use sparse native IDs 8 and 11");
             wireGauge(h, source, panel, gauge[0]);
             WiringGameTests.connect(h, source, 0, load, 0, true);
@@ -101,7 +101,7 @@ public final class CeeTerminalGeometryGameTests {
             sync(h, panel, adapter[0], true);
         }).thenIdle(10).thenWaitUntil(() -> powered(h, load, capacitor, null)).thenExecute(() -> {
             h.assertTrue(ElectricalMeasurements.readTerminal(level, panel, 8).status() == MeasurementStatus.NOT_READY, "Removed panel terminal exposed a stale valid measurement");
-            gauge[0] = (GaugePanelAttachment) PanelGameTests.insert(h, panel, CEEPanelAttachmentTypes.VOLTMETER.get(), ElectricalPanelSlot.THIRD_CENTERED);
+            gauge[0] = (GaugePanelAttachment) PanelGameTests.insert(h, panel, CeeTestAttachments.type("VOLTMETER"), ElectricalPanelSlot.THIRD_CENTERED);
             wireGauge(h, source, panel, gauge[0]);
         }).thenWaitUntil(() -> powered(h, load, capacitor, gauge[0])).thenExecute(() -> {
             h.assertTrue(Terminals.cee(level, panel) == adapter[0], "Attachment edits replaced the unchanged native panel owner");

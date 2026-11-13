@@ -93,9 +93,9 @@ public final class PinoutLifecycleGameTests {
                         WiringGameTests.connect(h, SOURCE, 0, load(pin), 1, pin % 2 != 0);
                     }
                     var panel = (ElectricalPanelBlockEntity) level.getBlockEntity(PANEL);
-                    var type = CEEPanelAttachmentTypes.VOLTMETER.get();
+                    var type = CeeTestAttachments.type("VOLTMETER");
                     panel.getAttachments()[ElectricalPanelSlot.THIRD_CENTERED.ordinal()] = type.createNew(PANEL,
-                            type.mode.getNodesFor(PANEL, ElectricalPanelSlot.THIRD_CENTERED), level,
+                            CeeTestAttachments.nodes(type,PANEL, ElectricalPanelSlot.THIRD_CENTERED), level,
                             ElectricalPanelSlot.THIRD_CENTERED, Direction.NORTH, level.registryAccess());
                     panel.attachmentUpdate();
                     var meter = gauge(level);

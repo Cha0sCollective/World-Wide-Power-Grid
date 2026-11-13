@@ -33,7 +33,8 @@ import org.patryk3211.powergrid.electricity.sim.node.IElectricNode;
 @GameTestHolder("wwpg_audit_cee")
 @PrefixGameTestTemplate(false)
 public final class AuditCeeStateGameTests {
-    private static final class Unsupported extends ElectricalProperties { Unsupported(){super(100,0,0);} }
+    private static final class Unsupported extends com.george_vi.electroenergetics.simulation.electrical_properties.MicroTickingElectricalProperties { Unsupported(){resistance=100;}
+        @Override public void tick(double[] v,int step,int total,int a,int b){} }
     @GameTest(template="empty",timeoutTicks=180)
     public static void allWindingsRestoreTogether(GameTestHelper h) { isolation(h,0,false); }
     @GameTest(template="empty",timeoutTicks=180)

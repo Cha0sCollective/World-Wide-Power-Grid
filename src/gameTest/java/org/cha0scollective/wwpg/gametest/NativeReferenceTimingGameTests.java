@@ -397,7 +397,7 @@ public final class NativeReferenceTimingGameTests {
     private static boolean upstream() { return Boolean.getBoolean("wwpg.test.upstreamReference"); }
     private static double residualVoltageTolerance() {
         // PG stops on a current residual, not a voltage error. These outputs
-        // discharge through 1 kΩ. Bound both independent solves by I_tol*R;
+        // discharge through 1 kÃŽÂ©. Bound both independent solves by I_tol*R;
         // retain a percentage comparison above that explicit near-zero bound.
         return 2*1000*org.patryk3211.powergrid.collections.ModdedConfigs.server().electricity.solver.solverAbsoluteMinimumPrecision.getF();
     }

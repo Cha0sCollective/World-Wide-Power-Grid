@@ -24,8 +24,9 @@ import org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint;
 @GameTestHolder("wwpg")
 @PrefixGameTestTemplate(false)
 public final class IsolationGameTests {
-    private static final class UnknownProperties extends ElectricalProperties {
-        UnknownProperties(){super(100,0,0);}
+    private static final class UnknownProperties extends com.george_vi.electroenergetics.simulation.electrical_properties.MicroTickingElectricalProperties {
+        UnknownProperties(){resistance=100;}
+        @Override public void tick(double[] v,int step,int total,int a,int b){}
     }
     @GameTest(template="empty",timeoutTicks=110) public static void unknownPropertyIsolatesAndRecoversWithoutStalePower(GameTestHelper h){isolation(h,true);}
     @GameTest(template="empty",timeoutTicks=110) public static void nonfinitePropertyIsolatesAndRecoversWithoutStalePower(GameTestHelper h){isolation(h,false);}

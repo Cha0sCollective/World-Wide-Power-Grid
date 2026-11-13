@@ -61,7 +61,7 @@ final class ShowroomPanelStations {
     }
     private PanelAttachment insert(GameTestHelper h,BlockPos at,PanelAttachmentType type,ElectricalPanelSlot slot,String label) {
         var be=(ElectricalPanelBlockEntity)h.getLevel().getBlockEntity(at);
-        var attachment=type.createNew(at,type.mode.getNodesFor(at,slot),h.getLevel(),slot,Direction.SOUTH,h.getLevel().registryAccess());
+        var attachment=type.createNew(at,CeeTestAttachments.nodes(type,at,slot),h.getLevel(),slot,Direction.SOUTH,h.getLevel().registryAccess());
         attachment.label=label;be.getAttachments()[slot.ordinal()]=attachment;be.attachmentUpdate();return attachment;
     }
     private PanelAttachment attachment(GameTestHelper h,Station s) {
@@ -71,13 +71,13 @@ final class ShowroomPanelStations {
         for(int i=0;i<stations.size();i++) {
             var s=stations.get(i);pgSource(h,s.source(),300);
             if(i==0) {
-                var amp=insert(h,s.panel(),CEEPanelAttachmentTypes.AMMETER.get(),ElectricalPanelSlot.THIRD_LEFT,"Load current");
-                var volt=insert(h,s.panel(),CEEPanelAttachmentTypes.VOLTMETER.get(),ElectricalPanelSlot.THIRD_CENTERED,"Lamp voltage");
-                var light=insert(h,s.panel(),CEEPanelAttachmentTypes.INDICATOR_BULB.get(),ElectricalPanelSlot.THIRD_RIGHT,"Powered");
+                var amp=insert(h,s.panel(),CeeTestAttachments.type("AMMETER"),ElectricalPanelSlot.THIRD_LEFT,"Load current");
+                var volt=insert(h,s.panel(),CeeTestAttachments.type("VOLTMETER"),ElectricalPanelSlot.THIRD_CENTERED,"Lamp voltage");
+                var light=insert(h,s.panel(),CeeTestAttachments.type("INDICATOR_BULB"),ElectricalPanelSlot.THIRD_RIGHT,"Powered");
                 wire(h,s.source(),0,s.panel(),amp.nodes[0].id(),true);wire(h,s.panel(),amp.nodes[1].id(),s.lamp(),0,false);wire(h,s.source(),1,s.lamp(),1,true);
                 for(var a:new PanelAttachment[]{volt,light}){wire(h,s.lamp(),0,s.panel(),a.nodes[0].id(),true);wire(h,s.lamp(),1,s.panel(),a.nodes[1].id(),false);}
             } else if(i<=4) {
-                var type=switch(i){case 1->CEEPanelAttachmentTypes.CUT_OFF_SWITCH.get();case 2->CEEPanelAttachmentTypes.ESTOP.get();case 3->CEEPanelAttachmentTypes.MOMENTARY_SWITCH.get();default->CEEPanelAttachmentTypes.MINIATURE_CIRCUIT_BREAKER.get();};
+                var type=switch(i){case 1->CeeTestAttachments.type("CUT_OFF_SWITCH");case 2->CeeTestAttachments.type("ESTOP");case 3->CeeTestAttachments.type("MOMENTARY_SWITCH");default->CeeTestAttachments.type("MINIATURE_CIRCUIT_BREAKER");};
                 var a=insert(h,s.panel(),type,i==2?ElectricalPanelSlot.HALF_LEFT:ElectricalPanelSlot.THIRD_LEFT,s.name);
                 if(a instanceof CutOffSwitchPanelAttachment cut)cut.isClosed=true;
                 if(a instanceof EStopPanelAttachment stop)stop.isClosed=true;
@@ -86,13 +86,13 @@ final class ShowroomPanelStations {
                 if(i==4){var resistor=s.lamp().north(3);resistance(h,resistor,100000);wire(h,s.lamp(),0,resistor,0,true);wire(h,s.lamp(),1,resistor,1,false);}
                 ((ElectricalPanelBlockEntity)h.getLevel().getBlockEntity(s.panel())).setChanged();
             } else if(i<=6) {
-                var type=i==5?CEEPanelAttachmentTypes.ENERGY_METER.get():CEEPanelAttachmentTypes.TRI_POLAR_ENERGY_METER.get();
+                var type=i==5?CeeTestAttachments.type("ENERGY_METER"):CeeTestAttachments.type("TRI_POLAR_ENERGY_METER");
                 var a=insert(h,s.panel(),type,ElectricalPanelSlot.FULL_SLOT,s.name);
                 wire(h,s.source(),0,s.panel(),a.nodes[0].id(),true);wire(h,s.source(),1,s.panel(),a.nodes[1].id(),false);
                 if(i==5) {wire(h,s.panel(),a.nodes[2].id(),s.lamp(),0,true);wire(h,s.panel(),a.nodes[3].id(),s.lamp(),1,false);}
                 else {wire(h,s.source(),0,s.panel(),a.nodes[2].id(),true);wire(h,s.panel(),a.nodes[3].id(),s.lamp(),0,false);wire(h,s.panel(),a.nodes[5].id(),s.lamp().north(3),0,true);for(var lamp:new BlockPos[]{s.lamp(),s.lamp().north(3)})wire(h,s.panel(),a.nodes[4].id(),lamp,1,false);}
             } else {
-                var type=i==7?CEEPanelAttachmentTypes.ANALOG_LEVER.get():CEEPanelAttachmentTypes.STEERING_WHEEL.get();
+                var type=i==7?CeeTestAttachments.type("ANALOG_LEVER"):CeeTestAttachments.type("STEERING_WHEEL");
                 var a=insert(h,s.panel(),type,i==7?ElectricalPanelSlot.THIRD_LEFT:ElectricalPanelSlot.QUARTER_CENTER,s.name);
                 var link=(ElectricalPanelLink)a;var second=i==7?Items.IRON_INGOT:Items.GOLD_INGOT;
                 link.getLinkFrequencies()[0]=new ItemStack(Items.REDSTONE);link.getLinkFrequencies()[1]=new ItemStack(second);

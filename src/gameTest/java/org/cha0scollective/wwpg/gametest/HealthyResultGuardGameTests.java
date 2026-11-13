@@ -17,7 +17,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
-import org.cha0scollective.wwpg.bridge.BridgeSimulationResults;
+import org.cha0scollective.wwpg.bridge.CeeResultsAvailability;
+import com.george_vi.electroenergetics.simulation.SimulationResults;
 
 import java.util.function.Consumer;
 
@@ -51,28 +52,28 @@ public final class HealthyResultGuardGameTests {
             WiringGameTests.connect(h, a, 0, b, 1, true);
         }).thenIdle(25).thenExecute(() -> {
             var results = results(h);
-            h.assertTrue(results.allAvailable(), "Baseline was not a fully mapped healthy frame");
+            h.assertTrue(((CeeResultsAvailability)results).allAvailable(), "Baseline was not a fully mapped healthy frame");
             BoardComponentGameTests.near(h, results.getVoltageAt(b, 0, 1), 20, .1, "Real CEE load before unsupported descriptor");
             NeoForge.EVENT_BUS.addListener(AddToElectricGraphEvent.class, listener); active[0] = true;
         }).thenIdle(3).thenExecute(() -> {
             try {
                 var results = results(h);
-                h.assertTrue(!results.allAvailable() && !results.available(unsupported)
+                h.assertTrue(!((CeeResultsAvailability)results).allAvailable() && !((CeeResultsAvailability)results).available(unsupported)
                                 && Double.isNaN(results.getVoltageAt(unsupported)),
                         "Healthy shortcut exposed an unmapped native descriptor");
                 BoardComponentGameTests.near(h, results.getVoltageAt(b, 0, 1), 20, .1, "Unrelated CEE load was lost");
             } finally { close.run(); }
         }).thenIdle(3).thenExecute(() -> {
-            h.assertTrue(results(h).allAvailable(), "Next frame retained an obsolete unavailable descriptor");
+            h.assertTrue(((CeeResultsAvailability)results(h)).allAvailable(), "Next frame retained an obsolete unavailable descriptor");
             BoardComponentGameTests.near(h, results(h).getVoltageAt(b, 0, 1), 20, .1, "Healthy CEE load after recovery");
             DynamicGameTests.audit(h);
         }).thenSucceed();
     }
 
-    private static BridgeSimulationResults results(GameTestHelper h) {
+    private static SimulationResults results(GameTestHelper h) {
         var value = InfrastructureSavedData.load(h.getLevel()).ticker.lastResults;
-        h.assertTrue(value instanceof BridgeSimulationResults, "No current native-compatible result");
-        return (BridgeSimulationResults) value;
+        h.assertTrue(value instanceof CeeResultsAvailability, "No current native-compatible result");
+        return value;
     }
 
     private static final class UnmappedNode extends AttachedNode {

@@ -76,7 +76,7 @@ public final class CeeTerminalPickingGameTests {
         h.runAtTickTime(5,()->{
             ((CreativeSourceBlockEntity)h.getBlockEntity(sourceRelative)).setValue(20);
             var gauge=PanelGameTests.insert(h,panel,
-                    com.george_vi.electroenergetics.content.electrical_panel.attachments.CEEPanelAttachmentTypes.VOLTMETER.get(),
+                    CeeTestAttachments.type("VOLTMETER"),
                     com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelSlot.THIRD_CENTERED);
             WiringGameTests.connect(h,source,0,panel,gauge.nodes[0].id(),false);
             WiringGameTests.connect(h,source,1,panel,gauge.nodes[1].id(),false);
@@ -122,7 +122,7 @@ public final class CeeTerminalPickingGameTests {
                 h.assertTrue(gauged > 0, "Gauged was loaded but no registered wire materials were exercised");
             var panel = h.absolutePos(relative);
             var gauge = PanelGameTests.insert(h, panel,
-                    com.george_vi.electroenergetics.content.electrical_panel.attachments.CEEPanelAttachmentTypes.VOLTMETER.get(),
+                    CeeTestAttachments.type("VOLTMETER"),
                     com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelSlot.THIRD_CENTERED);
             var player = h.makeMockPlayer(GameType.SURVIVAL);
             for (var facing : Direction.Plane.HORIZONTAL) {
@@ -161,7 +161,7 @@ public final class CeeTerminalPickingGameTests {
         h.runAtTickTime(5, () -> {
             var panel = h.absolutePos(relative);
             var gauge = PanelGameTests.insert(h, panel,
-                    com.george_vi.electroenergetics.content.electrical_panel.attachments.CEEPanelAttachmentTypes.VOLTMETER.get(),
+                    CeeTestAttachments.type("VOLTMETER"),
                     com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelSlot.THIRD_CENTERED);
             var player = h.makeMockPlayer(GameType.SURVIVAL);
             player.setItemInHand(InteractionHand.MAIN_HAND, ModdedItems.GOLDEN_WIRE.asStack(64));

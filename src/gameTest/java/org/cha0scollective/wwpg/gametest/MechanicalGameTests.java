@@ -114,9 +114,7 @@ public final class MechanicalGameTests {
     /** Exercise the transformed native calculation, including its voltage overload. */
     private static void localVariacHeating(GameTestHelper h, VariacDevice device) {
         int[] reads = {0};
-        var readings = new com.george_vi.electroenergetics.simulation.SimulationResults(
-                new double[0], 1, new it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap<>(),
-                new com.george_vi.electroenergetics.simulation.CircuitBuilder(java.util.Set.of()), null) {
+        var readings = CeeTestResultProbe.create(new CeeTestResultProbe() {
             @Override public double getCurrentThrough(BlockPos pos, int first, int second) {
                 // CEE measures input current on its internal 0 -> 10 winding leg.
                 h.assertTrue(pos.equals(device.pos) && first == 0 && second == 10, "Variac current used another winding leg");
@@ -130,7 +128,7 @@ public final class MechanicalGameTests {
                 reads[0]++;
                 return 12.5;
             }
-        };
+        });
         float previous = device.temp;
         try {
             device.temp = 20;

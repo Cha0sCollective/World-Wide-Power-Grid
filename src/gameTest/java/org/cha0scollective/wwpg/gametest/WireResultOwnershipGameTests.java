@@ -18,7 +18,7 @@ import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import org.cha0scollective.wwpg.api.MeasurementStatus;
 import org.cha0scollective.wwpg.api.neoforge.ElectricalMeasurements;
-import org.cha0scollective.wwpg.bridge.BridgeSimulationResults;
+import org.cha0scollective.wwpg.compat.cee.CeeCompatibility;
 import org.patryk3211.powergrid.collections.ModdedBlocks;
 
 import java.lang.reflect.InvocationTargetException;
@@ -111,11 +111,11 @@ public final class WireResultOwnershipGameTests {
         });
     }
 
-    private static BridgeSimulationResults results(InfrastructureSavedData infrastructure, List<? extends Node> nodes,
+    private static SimulationResults results(InfrastructureSavedData infrastructure, List<? extends Node> nodes,
                                                    Set<Node> unavailable) {
         var builder = new CircuitBuilder(Set.<InWorldNode>of());
         for (var node : nodes) builder.addNode(node);
-        return new BridgeSimulationResults(new double[nodes.size() * 16], 16, new Object2DoubleOpenHashMap<>(),
+        return CeeCompatibility.integration().results(new double[nodes.size() * 16], 16, new Object2DoubleOpenHashMap<>(),
                 builder, infrastructure, unavailable);
     }
 

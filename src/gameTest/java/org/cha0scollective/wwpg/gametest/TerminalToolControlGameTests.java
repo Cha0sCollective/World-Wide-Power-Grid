@@ -62,7 +62,7 @@ public final class TerminalToolControlGameTests {
                 for(var tool:tools(h))protectedClick(h,player,pos,point,tool);
                 alternateHandsAndCancellation(h,player,pos,point);
                 // These controls have an unconditional normal click: prove it is retained.
-                if(type==CEEPanelAttachmentTypes.CUT_OFF_SWITCH.get()||type==CEEPanelAttachmentTypes.MINIATURE_CIRCUIT_BREAKER.get()) {
+                if(type==CeeTestAttachments.type("CUT_OFF_SWITCH")||type==CeeTestAttachments.type("MINIATURE_CIRCUIT_BREAKER")) {
                     player.setShiftKeyDown(false);player.setItemInHand(InteractionHand.MAIN_HAND,ItemStack.EMPTY);
                     var before=panelData(h,be);
                     var result=attachment.onInteract(ItemStack.EMPTY,player,InteractionHand.MAIN_HAND,

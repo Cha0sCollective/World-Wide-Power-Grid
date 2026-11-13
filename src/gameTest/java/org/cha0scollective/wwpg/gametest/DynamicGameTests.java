@@ -195,19 +195,23 @@ public final class DynamicGameTests {
             WiringGameTests.connect(h, resistor, 1, inductor, 0, true);
             WiringGameTests.connect(h, inductor, 1, source, 1, true);
         });
-        h.runAtTickTime(10, () -> previous[0] = DevicesSavedData.load(level).getDevice(inductor, InductorDevice.class).lastCurrent);
+        h.runAtTickTime(10, () -> previous[0] = inductorCurrent(DevicesSavedData.load(level).getDevice(inductor, InductorDevice.class).lastCurrent));
         h.runAtTickTime(20, () -> {
             var device = DevicesSavedData.load(level).getDevice(inductor, InductorDevice.class);
             double decay = Math.pow(1 / (1 + (0.05 / 16) * 10.1), 160);
-            close(h, device.lastCurrent, 10 / 10.1 + (previous[0] - 10 / 10.1) * decay, 0.03, "RL current / exactly-once advancement");
-            previous[0] = device.lastCurrent;
+            close(h, inductorCurrent(device.lastCurrent), 10 / 10.1 + (previous[0] - 10 / 10.1) * decay, 0.03, "RL current / exactly-once advancement");
+            previous[0] = inductorCurrent(device.lastCurrent);
             ((CreativeSourceBlockEntity) level.getBlockEntity(source)).setValue(0);
         });
         h.runAtTickTime(35, () -> {
-            double current = DevicesSavedData.load(level).getDevice(inductor, InductorDevice.class).lastCurrent;
+            double current = inductorCurrent(DevicesSavedData.load(level).getDevice(inductor, InductorDevice.class).lastCurrent);
             h.assertTrue(current >= 0 && current < previous[0] * 0.02, "Inductor history failed to decay: " + current);
             audit(h); h.succeed();
         });
+    }
+
+    private static double inductorCurrent(double nativeHistory) {
+        return org.cha0scollective.wwpg.compat.cee.CeeCompatibility.modern()?-nativeHistory:nativeHistory;
     }
 
     @GameTest(template = "empty", timeoutTicks = 90) public static void accumulatorChargesFromPgAndPowersPgLoad(GameTestHelper h) {
