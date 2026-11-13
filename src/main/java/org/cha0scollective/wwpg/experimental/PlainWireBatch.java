@@ -55,6 +55,7 @@ public final class PlainWireBatch implements IMultiHooks {
     private final IElectricNode[] nodes;
     private final double[] voltages;
     private final boolean supported;
+    private final int batchedWireCount, propertyWireCount;
     private final Set<IMultiHooks> singleton = Collections.singleton(this);
     private long lastContributions, lastPropertyContributions;
 
@@ -95,7 +96,9 @@ public final class PlainWireBatch implements IMultiHooks {
             second[index] = intern(wire.getNode2(), nodeIds, unique);
             index++;
         }
-        supported = safe && plainCount + propertyCount > 0;
+        batchedWireCount = plainCount + propertyCount;
+        propertyWireCount = propertyCount;
+        supported = safe && batchedWireCount > 0;
         nodes = unique.toArray(IElectricNode[]::new);
         rows = new int[nodes.length];
         voltages = new double[nodes.length];
@@ -160,7 +163,9 @@ public final class PlainWireBatch implements IMultiHooks {
     }
 
     @Override public void postMicroTick() {
-        long count = 0, propertyCount = 0;
+        // Membership is fixed for this plan; only live-conductance fallbacks
+        // change how many contributions used the fast path in this substep.
+        long count = batchedWireCount, propertyCount = propertyWireCount;
         // Retain the exact ReferenceOpenHashSet iteration order, including the
         // positions of specialized formulas. Conductance is read every substep.
         for (int i = 0; i < hooks.length; i++) {
@@ -169,12 +174,10 @@ public final class PlainWireBatch implements IMultiHooks {
             if (kind != 0) {
                 int a = first[i], b = second[i];
                 double voltage = a < 0 ? -voltages[b] : b < 0 ? voltages[a] : voltages[a] - voltages[b];
-                if (((WireAccess) wire).wwpg$accumulateResistivePower(voltage)) {
-                    count++;
-                    if (kind == 2) propertyCount++;
-                } else {
+                if (!((WireAccess) wire).wwpg$accumulateResistivePower(voltage)) {
+                    count--;
                     scalarFallbacks++;
-                    if (kind == 2) propertyScalarFallbacks++;
+                    if (kind == 2) { propertyCount--; propertyScalarFallbacks++; }
                 }
             } else wire.postMicroTick();
         }
