@@ -17,7 +17,7 @@ import org.patryk3211.powergrid.electricity.resistor.ResistorBlockEntity;
 import org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint;
 
 
-/** Opt-in, one circuit per process, preserving raw traces in the working directory. */
+/** Opt-in assemblies with independent electrical inputs and named raw traces. */
 
 public final class FunctionalBaselines {
     static CircuitSchematic load(GameTestHelper h,String file) {

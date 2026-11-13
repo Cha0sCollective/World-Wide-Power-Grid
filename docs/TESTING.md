@@ -10,7 +10,7 @@ separate from the passing execution records for any release.
 | Lane | What it proves | Authorization |
 | --- | --- | --- |
 | Focused | The affected code, tooling or selected electrical regressions work | Normal development checks |
-| Full headless | Runtime, lifecycle, API, SDK, world export and loader coverage across Windows/Linux, Native/Java and BASE/PINOUT | Explicit request to run the full suite |
+| Full headless | Runtime, lifecycle, API, SDK, world export on the recommended loader across Windows/Linux, Native/Java and BASE/PINOUT | Explicit request to run the full suite |
 | Graphical | Selected real client visuals, controls, targeting, synchronization and Save and Quit | Separate explicit graphical request |
 
 “Run the full suite” means **full headless**. It does not open clients. There is
@@ -20,35 +20,40 @@ lanes, and the publisher validates it without launching tests.
 
 ## Select release runtime dependencies
 
-Before freezing a future release campaign, review the current supported versions
-and select the newest supported runtime jars for the required mods and applicable
-optional integrations. Use the newest supported loader as the primary release
-environment, while preserving required minimum-loader compatibility coverage.
-Check the selected campaign inputs rather than assuming build defaults are current.
+Freeze the **current recommended runtime set** rather than adding each new
+loader to full acceptance. The recommendation is **NeoForge 21.1.262, PG 0.6.2
+and CEE 1.1.4**, with Create 6.0.10 and Architectury 13.0.11. PINOUT uses
+CC:Tweaked 1.120.2: 1.121.0 requires NeoForge 21.1.265 or newer. Minimum SDK
+compile dependencies remain separate; the CEE 1.1.3 compile input does not
+change the locked CEE 1.1.4 gameplay dependency. Record actual loaded versions
+and hashes, not just resolver choices.
 
-The complete requested headless and graphical acceptance must exercise that
-frozen dependency set across their required environments. A full run on an older
-dependency plus focused checks on its newer version is not a full pass of the
-newer set. For example, when both CEE 1.1.3 and 1.1.4 are supported, the primary
-full release campaign must use CEE 1.1.4.
+Full headless acceptance runs on this one loader across Windows/Linux,
+Native/Java and BASE/PINOUT. The separately requested graphical lane uses the
+same recommendation. A complete run on one dependency set cannot establish
+full acceptance of another. Published beta.3 evidence remains its actual
+NeoForge 21.1.266 execution; it is not relabelled or rerun automatically.
 
-Record actual loaded versions and jar hashes in the evidence. Keep intentionally
-pinned minimum SDK compile dependencies and explicitly selected older-version
-compatibility checks separate from the primary runtime selection. A newer jar
-outside WWPG's supported versions needs compatibility investigation before it
-can become a release input.
+The catalog's `runtime_loader` and `recommended_runtime` own this selection.
+Other loader versions use the separate focused loading workflow and never
+enter full acceptance because a compatibility probe was requested. Full
+planning rejects alternate loaders instead of silently expanding.
 
-This policy applies to future campaigns. Preserve published records with their
-actual dependency versions; do not relabel or rerun them automatically. Full
-headless and graphical runs still require their existing explicit authorization.
+The twelve circuit-library assemblies retain every assertion at sixteen
+substeps. Adder, oscillator, source-switch and regulator share one process as
+four independent GameTests, with non-overlapping 32 x 8 x 32 test areas, one
+pre-batch solver setup and separate traces. Missing cases or empty traces fail
+validation. Individual focused groups remain available. The other eight cases
+stay isolated: memory fixtures reuse trace filenames, advanced assemblies reuse
+manifests, and heater/protection fixtures have observers or shared diagnostics.
+See the [circuit library](CIRCUIT_LIBRARY.md) for their functional assertions.
 
-The catalog's `runtime_loader` selects the primary full-release environment.
-Every headless group, world export and reopen runs there. Other entries in
-`loaders` retain the smaller compatibility selection; the final catalog loader
-is also used by the graphical lane and independent starter. The twelve
-`circuit-*` groups each launch one assembly in a fresh process at sixteen
-substeps; their functional/reconstruction coverage is described in the
-[circuit library](CIRCUIT_LIBRARY.md).
+The planned headless workload is **342 jobs across eight environments**:
+328 Minecraft launches, 12 exports and two OS preparation entries. Compared
+with beta.3's 654 jobs, separating three older-loader matrices saves 288 jobs
+and circuit batching saves another 24. Cold restarts, unload/reload, rejection
+recovery, SDK checks and exact world-archive reopens remain intact. These are
+planned counts, not a claim that a fresh full suite ran.
 
 ## Inspect a selection first
 
@@ -170,9 +175,9 @@ unfinished disk work. Its actual unload/reload, identity and voltage assertions,
 ## Full headless acceptance
 
 The manual **Full headless acceptance** GitHub workflow prepares artifacts once,
-then uses the catalog for the platform/backend/profile/loader selections. The
-second loader retains the compatibility groups rather than duplicating world
-exports, SDK work and reference comparisons. The historical 0.2.1 SDK workflow
+then derives its eight platform/backend/profile selections from the catalog
+and uses only the recommended loader. Older-loader compatibility is a separate
+manual workflow and cannot expand this matrix. The historical 0.2.1 SDK workflow
 is separately named and is not current-runtime acceptance.
 
 Local execution uses the same interface. Select the current machine's platform;
@@ -198,8 +203,8 @@ NBT outside `spawnRadius`; a changed electrical save requires broader testing.
 The equivalent focused tools are `recheck_workshop_spawn.py prepare` and `run`.
 
 A headless continuation retains complete passing lifecycle groups and runs the
-failed or unexecuted groups in fresh directories. Its minimum-loader worker also
-owns the SDK starter check on the client loader; both remain bound to the same
+failed or unexecuted groups in fresh directories. The SDK starter also
+uses the recommended loader; all jobs remain bound to the same
 platform/backend/profile and exact catalog job IDs. Custom reference and SDK
 launchers prepare the selected loader's Minecraft artifacts before their launch
 preparation. The gameplay jar stays frozen. Failed SDK commands include their
@@ -207,47 +212,51 @@ underlying output in the retained launcher log even when no passing proof exists
 
 ## Manual parallel loader compatibility
 
-The **Loader compatibility checks** GitHub Action accepts one to four newer
-NeoForge 21.1 versions, separated by commas. Start it manually and choose the
+The **Loader compatibility checks** GitHub Action accepts one to four explicitly selected
+NeoForge 21.1 versions at or above the declared minimum, 21.1.231, separated by commas. Start it manually and choose the
 branch containing the code to test. It builds and freezes one gameplay jar,
-matching test companion, APIs and SDK examples at the normal minimum loader.
+matching test companion, APIs and SDK examples at the recommended loader.
 Every worker uses those same bytes against its selected loader.
 
-Each loader has eight independent jobs: Windows/Linux, Native/Java, and
+Each loader has eight independent environments: Windows/Linux, Native/Java, and
 **BASE/ADDONS**. Up to eight jobs run concurrently, subject to GitHub runner
 availability. A failure does not cancel other environments. Each job retains
-its own directories, logs and proof; cold restart phases run in order.
+its own directories, logs and proof. Each has three focused launches:
+installation/powered optional probes, loading/restoration fixtures and isolated
+board startup. That is 24 launches per selected loader.
 The installation selector defaults to BOTH. Choose BASE or ADDONS for a targeted
 retry; its summary explicitly covers only that selected installation. Reuse
 passing evidence separately with its original source, artifacts and execution
 identity, after checking artifact equivalence. A partial retry is not a fresh
 pass of both installations.
 
-BASE excludes optional integrations and SDK example mods. ADDONS loads pinned
-CC:Tweaked, Pinout, Gauged Wires and Power Components, plus both SDK examples.
+BASE excludes optional integrations and SDK example mods. ADDONS loads the
+recommended pinned CC:Tweaked 1.120.2, Pinout, Gauged Wires and Power Components,
+plus both SDK examples. These same jars are retained when only the loader
+changes; the runtime audit verifies their actual hashes, including on newer loaders.
 The report records the actual existing `PINOUT` installation profile for ADDONS;
 this does not rename historical profiles or mean Pinout is the only addon.
 The loaded jars are checked against the frozen hashes. Small powered probes
 exercise an actual Gauged wire feeding a CEE resistor and a Power Components
-fuse on a PG circuit board. Existing Pinout/CC and API tests retain their own
-checks and cold sequences. This is targeted integration coverage, not exhaustive
+fuse on a PG circuit board. The full recommended-runtime suite retains the
+Pinout/CC and API checks and their complete cold sequences. This is targeted integration coverage, not exhaustive
 coverage of every optional mod feature.
-The three safety tests that need SDK storage devices have explicit addon-only
-namespaces. BASE retains the remaining solver, wire recovery and native guard
-tests; ADDONS and ordinary safety acceptance retain all three storage tests.
+Broader safety and API cold sequences remain in full headless acceptance,
+including Native-only guards and addon-storage ownership tests. The loading
+probe does not claim those assertions ran on the alternative loader.
 
 ```text
 python tools/loader_compatibility.py plan --loader 21.1.262 --backend NATIVE --installation ADDONS
 ```
 
-The plan launches nothing. The workflow runs regression, loading, isolated board
-startup and safety groups; ADDONS adds Pinout and API lifecycle checks. It does
-not run world export campaigns, SDK acceptance, graphical clients or performance
-benchmarks. New loader inputs do not enter the verified release catalog merely
-because they were requested. A separate collector requires every planned
-environment, exact loaded artifacts, completed tests and clean saves before
-reporting a passing compatibility campaign. Missing reports remain failures.
-Full release acceptance still requires its independent existing evidence.
+The plan launches nothing. The workflow checks actual installation and jar
+identities, powered optional probes, loading/restoration and board startup.
+It does not repeat broad regression/API cold sequences, world export campaigns,
+SDK acceptance, graphical clients or benchmarks. Those remain in the recommended
+full suite. New loader inputs do not change the recommendation. The collector
+requires every planned environment, exact loaded artifacts, completed tests and
+clean saves. Its `loader-loading-v2` result explicitly is not full acceptance.
+Historical `loader-compatibility-v1` results retain their original larger scope.
 
 ## Separate local graphical acceptance
 
@@ -370,3 +379,12 @@ For a future separated release, the accepted manifest also includes the frozen
 sixth download or a player dependency. The headless/client reports must bind the
 same companion, and publication still requires their applicable complete coverage.
 Native provenance manifests remain in the player jar as referenced by its notice.
+
+## Reviewing historical headless coverage
+
+`tools/legacy/test-suites-beta3.json` preserves beta.3's 654-job planning
+contract. Read-only historical validation can use `suite_evidence.py` with
+`--historical-catalog tools/legacy/test-suites-beta3.json` and the original
+reports. Its output is explicitly historical-only and cannot qualify a current
+release. Normal release gates use the current plan; no old record is rewritten
+to claim the new batching or loader selection ran.

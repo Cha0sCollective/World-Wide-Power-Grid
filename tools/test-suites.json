@@ -14,27 +14,15 @@
     "PINOUT"
   ],
   "loaders": [
-    "21.1.231",
-    "21.1.248",
-    "21.1.265",
-    "21.1.266"
+    "21.1.262"
   ],
   "loader_compatibility": {
-    "policy": "loader-compatibility-v1",
+    "policy": "loader-loading-v2",
     "groups": [
-      "regression",
-      "platform",
       "loading",
-      "board-startup",
-      "safety",
-      "native-guard"
+      "board-startup"
     ],
-    "addon_groups": [
-      "pinout",
-      "api",
-      "pause",
-      "pending"
-    ],
+    "addon_groups": [],
     "installation_namespace": "wwpg_loader_installation",
     "addon_namespace": "wwpg_loader_addons",
     "addon_only_namespaces": [
@@ -49,10 +37,10 @@
       {
         "role": "computercraft",
         "mod_id": "computercraft",
-        "version": "1.121.0",
-        "filename": "cc-tweaked-1.21.1-forge-1.121.0.jar",
-        "url": "https://cdn.modrinth.com/data/gu7yAYhd/versions/KNdTEfUA/cc-tweaked-1.21.1-forge-1.121.0.jar",
-        "sha256": "bf8dd119701560ea60085cf8c1076d32ffc99a1be5f8b99f6f3b174a88a208f8"
+        "version": "1.120.2",
+        "filename": "cc-tweaked-1.21.1-forge-1.120.2.jar",
+        "url": "https://cdn.modrinth.com/data/gu7yAYhd/versions/1ewzHZYg/cc-tweaked-1.21.1-forge-1.120.2.jar",
+        "sha256": "e8651fe24b384e925e563c9ad077644744474e2e7c0adb8e6d5b4757598dce9f"
       },
       {
         "role": "pinout",
@@ -82,12 +70,23 @@
   },
   "groups": {
     "audit-generator": {
-      "namespaces": ["wwpg_audit_generator"],
-      "phases": ["SETUP"]
+      "namespaces": [
+        "wwpg_audit_generator"
+      ],
+      "phases": [
+        "SETUP"
+      ]
     },
     "audit": {
-      "namespaces": ["wwpg_audit_cee", "wwpg_audit_endpoints", "wwpg_audit_meter", "wwpg_audit_config"],
-      "phases": ["SETUP"]
+      "namespaces": [
+        "wwpg_audit_cee",
+        "wwpg_audit_endpoints",
+        "wwpg_audit_meter",
+        "wwpg_audit_config"
+      ],
+      "phases": [
+        "SETUP"
+      ]
     },
     "regression": {
       "namespaces": [
@@ -290,7 +289,8 @@
       "phases": [
         "SETUP"
       ],
-      "circuit": "adder3"
+      "circuit": "adder3",
+      "merge_into": "circuit-functional"
     },
     "circuit-oscillator": {
       "namespaces": [
@@ -299,7 +299,8 @@
       "phases": [
         "SETUP"
       ],
-      "circuit": "oscillator"
+      "circuit": "oscillator",
+      "merge_into": "circuit-functional"
     },
     "circuit-source-switch": {
       "namespaces": [
@@ -308,7 +309,8 @@
       "phases": [
         "SETUP"
       ],
-      "circuit": "source-switch"
+      "circuit": "source-switch",
+      "merge_into": "circuit-functional"
     },
     "circuit-regulator": {
       "namespaces": [
@@ -317,7 +319,8 @@
       "phases": [
         "SETUP"
       ],
-      "circuit": "regulator"
+      "circuit": "regulator",
+      "merge_into": "circuit-functional"
     },
     "circuit-register8": {
       "namespaces": [
@@ -390,6 +393,18 @@
         "SETUP"
       ],
       "circuit": "source-loss"
+    },
+    "circuit-functional": {
+      "namespaces": [],
+      "phases": [
+        "SETUP"
+      ],
+      "circuits": [
+        "adder3",
+        "oscillator",
+        "source-switch",
+        "regulator"
+      ]
     }
   },
   "special_namespaces": {
@@ -533,5 +548,12 @@
   "known_limitations": [
     "The dev.102 exposed-pin targeting fix has focused headless player-ray coverage while holding PG wires; prior highlight evidence does not certify its real-client rendering or input."
   ],
-  "runtime_loader": "21.1.266"
+  "runtime_loader": "21.1.262",
+  "planning_revision": "recommended-single-loader-v1",
+  "minimum_loader": "21.1.231",
+  "recommended_runtime": {
+    "neoforge": "21.1.262",
+    "powergrid": "0.6.2",
+    "electroenergetics": "1.21.1-1.1.4"
+  }
 }

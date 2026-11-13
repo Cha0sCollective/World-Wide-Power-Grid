@@ -104,6 +104,18 @@ def validate_job(actual, expected, inputs, base):
             require(proof.get('circuit')==expected['circuit'], 'Selected circuit differs')
             require('WWPG_RUNTIME_INPUTS_VERIFIED:' in text and f'WWPG_CIRCUIT_BEGIN case={expected["circuit"]} substeps=16' in text,
                     'Actual circuit/runtime input audit missing')
+        if 'circuits' in expected:
+            cases=expected['circuits']
+            require(proof.get('circuit')==','.join(cases) and proof['required_tests_passed']==len(cases)
+                    and re.search(r'All '+str(len(cases))+r' required tests passed',text),
+                    'Circuit batch did not complete every selected case')
+            require('WWPG_RUNTIME_INPUTS_VERIFIED:' in text, 'Actual circuit runtime audit missing')
+            require(set(actual.get('circuit_traces',{}))==set(cases), 'Missing circuit batch trace')
+            for case in cases:
+                require(text.count(f'WWPG_CIRCUIT_BEGIN case={case} substeps=16')==1,
+                        'Circuit case did not start exactly once: '+case)
+                trace=locked(actual['circuit_traces'][case],base).read_text(encoding='utf-8')
+                require(bool(trace.strip()), 'Empty circuit trace: '+case)
         if expected['addon']:
             require(all(proof.get('addon_artifacts', {}).get(r, {}).get('sha256') == inputs['artifact_hashes'][r]
                         for r in ('example', 'upstream_example')), 'Actual addon jar differs')
@@ -112,8 +124,9 @@ def validate_job(actual, expected, inputs, base):
         require(proof.get('neoforge')==expected['loader'], 'Reference loader differs')
 
 
-def validate_reports(paths, lane, source_sha, hashes, complete=True):
-    expected = {j['id']: j for j in plan(lane)}
+def validate_reports(paths, lane, source_sha, hashes, complete=True, catalog_contract=None):
+    # Historical review is explicit; current release gates always use the current plan.
+    expected = {j['id']: j for j in (plan(lane, spec=catalog_contract) if catalog_contract else plan(lane))}
     seen = set(); exports={}; reopens=[]
     for path in paths:
         report = read(path); base = Path(path).resolve().parent
@@ -274,6 +287,7 @@ def validate_release(manifest, root, gate):
     for lane, key in [('full-headless', 'headless_acceptance'), ('graphical', 'graphical_acceptance')]:
         cohort = read(gate.locked_file(manifest[key], root))
         cohorts.append(cohort)
+        require(not cohort.get('historical_review_only'), 'Historical review cannot qualify a current release')
         require(cohort.get('schema') == 2 and cohort.get('policy') == 'separated-v2' and cohort.get('suite') == lane,
                 'Wrong independent release gate')
         paths = [gate.locked_file(d, root) for d in cohort['reports']]
@@ -327,15 +341,18 @@ def main():
     parser.add_argument('--lane', choices=['full-headless', 'graphical'], required=True)
     parser.add_argument('--report', type=Path, action='append', required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--historical-catalog', type=Path, help='Review original historical coverage only; not current release qualification')
     args = parser.parse_args()
     first = read(args.report[0])
-    validate_reports(args.report, args.lane, first['source_sha'], first['artifact_hashes'])
+    contract=read(args.historical_catalog) if args.historical_catalog else None
+    validate_reports(args.report, args.lane, first['source_sha'], first['artifact_hashes'], catalog_contract=contract)
     reports=[]
     for path in args.report:
         item=descriptor(path)
         item['path']=Path(path).resolve().relative_to(ROOT).as_posix()
         reports.append(item)
-    write(args.output, dict(schema=2, policy='separated-v2', suite=args.lane, status='passed',reports=reports))
+    write(args.output, dict(schema=2, policy='separated-v2', suite=args.lane, status='passed',reports=reports,
+        **({'historical_review_only':True,'historical_catalog':descriptor(args.historical_catalog)} if contract else {})))
 
 
 if __name__ == '__main__': main()

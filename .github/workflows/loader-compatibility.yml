@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       neo_versions:
-        description: 'One to four NeoForge 21.1 versions, comma-separated; this does not change verified release versions'
+        description: 'Focused loading probes for one to four NeoForge 21.1 versions; never full acceptance'
         type: string
         default: '21.1.262'
         required: true
@@ -79,7 +79,7 @@ jobs:
         with: {name: loader-compatibility-inputs, path: build/loader-compatibility}
       - if: runner.os != 'Windows'
         run: chmod +x gradlew
-      - name: Run ordered compatibility checks against the frozen gameplay jar
+      - name: Run installation, loading and board-startup probes against the frozen jar
         run: >-
           python tools/loader_compatibility.py run
           --inputs build/loader-compatibility/canonical/frozen/loader-inputs.json
