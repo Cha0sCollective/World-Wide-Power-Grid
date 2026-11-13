@@ -65,6 +65,8 @@ class GameTestPackaging(unittest.TestCase):
             self.assertIn('org/cha0scollective/wwpg/gametest/WwpgGameTests.class',companion.namelist())
             self.assertIn('META-INF/neoforge.mods.toml',companion.namelist())
             self.assertTrue(any(n.endswith('/structure/empty.nbt') for n in companion.namelist()))
+            for namespace in ('wwpg_cee_adapters', 'wwpg_cee_fans'):
+                self.assertIn('data/'+namespace+'/structure/empty.nbt', companion.namelist())
             source_roots=[suites.ROOT/'src/gameTest/java',suites.ROOT/'src/cee12GameTest/java']
             expected={path.relative_to(sources).with_suffix('.class').as_posix()
                       for sources in source_roots for path in sources.rglob('*.java')}

@@ -192,7 +192,7 @@ tasks.named('processGameTestResources') {
      'wwpg_solver_safety', 'wwpg_native_guard', 'wwpg_unload', 'wwpg_contactors', 'wwpg_meter_sampling',
      'wwpg_loader_installation', 'wwpg_loader_addons', 'wwpg_addon_safety', 'wwpg_addon_native_guard',
      'wwpg_cio', 'wwpg_cio_upgrade', 'wwpg_cio_guard', 'wwpg_cio_transitions', 'wwpg_sable_targeting',
-     'wwpg_generator_timing', 'wwpg_cee_readiness', 'wwpg_cee_stock', 'wwpg_cee_lifecycle', 'wwpg_cee_migration', 'wwpg_cee_ownership', 'wwpg_cee_migration_cold'].each { namespace ->
+     'wwpg_generator_timing', 'wwpg_cee_readiness', 'wwpg_cee_stock', 'wwpg_cee_lifecycle', 'wwpg_cee_migration', 'wwpg_cee_ownership', 'wwpg_cee_migration_cold', 'wwpg_cee_adapters', 'wwpg_cee_fans'].each { namespace ->
         from('src/gameTest/resources/data/wwpg/structure/empty.nbt') { into "data/${namespace}/structure" }
     }
 }
@@ -514,7 +514,8 @@ tasks.register('prepareReferenceConfig') {
         target.parentFile.mkdirs()
         target.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson([
             required: true, minVersion: '0.8', package: 'org.cha0scollective.wwpg.mixin',
-            compatibilityLevel: 'JAVA_21', mixins: ['NativeResourceMixin', 'PgNativeFailureMixin', 'PgSolverFailureMixin', 'RegistrateCallbacksMixin', 'ElectricalNetworkAccessor', 'ReferenceTeardownMixin'],
+            compatibilityLevel: 'JAVA_21', plugin: 'org.cha0scollective.wwpg.mixin.CeeReferenceControlPlugin',
+            mixins: ['NativeResourceMixin', 'PgNativeFailureMixin', 'PgSolverFailureMixin', 'RegistrateCallbacksMixin', 'ElectricalNetworkAccessor', 'ReferenceTeardownMixin', 'CeeReferencePrecisionMixin'],
             client: [], injectors: [defaultRequire: 1]
         ])) + '\n'
     }
@@ -559,6 +560,7 @@ tasks.register('referenceJar', Jar) {
                     .replaceAll('(?m)^-Dwwpg.test.restartPhase=.*$', "-Dwwpg.test.restartPhase=${upstream ? 'SETUP' : 'VERIFY'}")
                 return "@${replacement.absolutePath}"
             } + ['-Dwwpg.test.packaged=true', "-Dwwpg.test.upstreamReference=${upstream}",
+                "-Dwwpg.test.tightCeeResidual=${providers.gradleProperty('testTightCeeResidual').getOrElse('false')}",
                 "-Dwwpg.test.tightReferencePrecision=${providers.gradleProperty('tightReferencePrecision').getOrElse('false')}"]
             def packaged = providers.gradleProperty('referenceArtifact').isPresent()
                 ? file(providers.gradleProperty('referenceArtifact').get()) : artifact.get().archiveFile.get().asFile

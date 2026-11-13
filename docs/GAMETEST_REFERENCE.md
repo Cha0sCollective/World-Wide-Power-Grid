@@ -10,6 +10,7 @@ Inventory updated **4 November 2026** for CIO integration/transition/upgrade/mod
 Inventory updated **2 November 2026** for dev.112 panel/probe/control regressions and the classified addon-only safety namespaces.
 Inventory updated **5 November 2026** for the local dev.117 transformer-probe regressions.
 Inventory updated **6 November 2026** for the local self-excitation and direct-rotor timing regressions.
+Inventory refreshed **12 November 2026** on the isolated CEE 1.2 development branch; see its additions below.
 Source links below follow that new location. This is a reference to the assertions in the current source, **not a new test
 run or a claim that every entry has passed in every environment**. See
 [Testing process](TESTING.md) for execution and [published release records](../release/README.md)
@@ -29,14 +30,14 @@ classified separately from ordinary BASE/PINOUT full acceptance.
 
 | Where the declarations live | Test methods | Source files |
 | --- | ---: | ---: |
-| Companion test jar: `src/gameTest/java/.../gametest` | 378 | 123 |
+| Companion test jar: `src/gameTest/java/.../gametest` and `src/cee12GameTest/java` | 472 | 145 |
 | Independently built general and CEE/PG example addons | 13 | 3 |
 | Extracted SDK acceptance helper | 4 | 1 |
 | Separate short TCP graphical helper | 1 | 1 |
-| **Total** | **396** | **128** |
+| **Total** | **490** | **150** |
 
-There are **50 namespaces**. These are annotated entry points, not 391 unique
-device models, 391 simultaneous tests or the number of invocations in a complete
+There are **80 namespaces**. These are annotated entry points, not 490 unique
+device models, 490 simultaneous tests or the number of invocations in a complete
 campaign. A method can operate many devices and check many assertions. Several
 focused namespaces intentionally delegate to an existing fixture. Compilation,
 JUnit, Python tooling, SDK build checks and native C fault-injection tests are
@@ -50,6 +51,23 @@ Method names are source identifiers, not copy-and-paste `/test` command IDs.
 **PG** means Power Grid; **CEE** means Create: Electro Energetics. A
 **mixed** circuit connects their native devices/wires through WWPG. **Unavailable**
 means a measurement explicitly cannot be used; it is different from a valid zero.
+
+## CEE 1.2 development additions
+
+These declarations belong to the isolated `0.2.8-dev.cee120.3` preparation branch.
+The [readiness report](developer/CEE_120_READINESS.md) identifies executed input
+versions and limitations. Source counts alone establish no passing result.
+
+| Source / namespace | Entry points and assertions |
+| --- | --- |
+| [CeeReadinessGameTests](../src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeReadinessGameTests.java), `wwpg_cee_readiness` | Eight entries: signed Norton voltage/current/power and reversal; capacitor charge/discharge; diode forward/reverse/recovery; diode-capacitor rectification and reverse hold; deliberate late rejection restoring all mutable numerical history beside a healthy circuit; transformer ratio/polarity; inductor timestep/history; accumulator charge/discharge. First four also provide stock-control trace samples. |
+| [CeeLifecycleReadinessGameTests](../src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeLifecycleReadinessGameTests.java), `wwpg_cee_lifecycle` | Seventeen delegated entries: three-phase waveform/direction, variac voltage/heating, redstone variac, regulator neutral/control, panel three-pole meter, panel energy/current, standalone three-pole meter, frequency clock, synchroscope history, physical-ground edits, reference/ground takeover, actual ground unload/reload, partial-winding isolation, late shared-rotor rollback, shared-rotor restoration hold, aimed panel probes and rotated regulator wire picking. |
+| [CeeMigrationGameTests](../src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeMigrationGameTests.java), `wwpg_cee_migration` | `chargedInductorDirectionRoundTripAndAmbiguityIsolation` exercises marked legacy history, same-version reopen, ambiguous charged-state isolation, a healthy neighbor and recovery. `capacitorCurrentAndStoredVoltageRoundTrip` checks saved voltage/current history and rejects stale in-flight publication. |
+| [CeeOwnershipReadinessGameTests](../src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeOwnershipReadinessGameTests.java), `wwpg_cee_ownership` | One delegated whole-frame ownership check, isolated from deliberate rejected-adapter fixtures. |
+| [CeeColdMigrationGameTests](../src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeColdMigrationGameTests.java), `wwpg_cee_migration_cold` | One explicit multi-process serialization control: legacy setup, disposable unmarked copy, modern upgrade and second reopen. Checks source metadata, current direction, markers and held 6 J history; physical time is frozen, so this is not a transient/performance result. |
+| [CeeAdapterReadinessGameTests](../src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeAdapterReadinessGameTests.java), `wwpg_cee_adapters` | `signedSourceAndCurrentPublication` registers an exact custom Norton source, reverses its native current and checks captured parameters, signed waveform voltage and measured source/load currents. `modernNonlinearAdapterRequiresIterationSupport` requires registration of an unsupported modern iteration model to fail explicitly; its modern-only class is never loaded on legacy CEE. Run beside the five `wwpg_audit_endpoints` rejection/callback/rollback entries. |
+| [CeeFanReadinessGameTests](../src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeFanReadinessGameTests.java), `wwpg_cee_fans` | `standaloneFanPowerDirectionAndStop` and `panelFanPowerDirectionAndStop` use real PG wires, reverse and remove power, and check signed waveform voltage/current and resistor power. The standalone device's saved speed target must follow polarity and stop; physical speed must remain finite. Requires CEE 1.2. No client blade, sound or airflow certification. |
+| [CeeStockReadinessGameTests](../src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeStockReadinessGameTests.java), `wwpg_cee_stock` | Four bridge-free control entries: `signedNorton`, `capacitor`, `diode`, `rectifier`. Raw CEE is distinct from the opt-in residual-threshold diagnostic in the separate reference artifact. Diagnostic passes never count as raw-stock parity. |
 
 ## Find a particular concern
 

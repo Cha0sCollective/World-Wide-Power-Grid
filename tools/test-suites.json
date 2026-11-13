@@ -432,6 +432,14 @@
       "phases": [
         "SETUP"
       ]
+    },
+    "cee-adapters": {
+      "namespaces": [
+        "wwpg_cee_adapters"
+      ],
+      "phases": [
+        "SETUP"
+      ]
     }
   },
   "special_namespaces": {
@@ -450,6 +458,7 @@
     "wwpg_multiplayer": "legacy real TCP yard client runner",
     "wwpg_api_multiplayer": "legacy real TCP Workshop client runner",
     "wwpg_cee_stock": "Version-matched CEE-only stock-control readiness fixtures; no bridge gameplay claim",
+    "wwpg_cee_fans": "Explicit CEE 1.2 standalone and panel fan electrical fixtures; absent from legacy CEE",
     "wwpg_cee_migration_cold": "Explicit frozen CEE version-transition serialization control; SETUP on legacy, cold VERIFY and reopen on development"
   },
   "graphical": {
