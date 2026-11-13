@@ -106,7 +106,7 @@ public final class WorldBridge {
     }
 
     public void prepare(SimulationTicker ticker) {
-        dynamics=List.of();adapters=List.of();
+        dynamics=List.of();adapters=List.of();graph=null;
         try { prepareFrame(ticker); }
         catch (RuntimeException | Error failure) { restoreUncommitted(failure);throw failure; }
     }
@@ -217,6 +217,7 @@ public final class WorldBridge {
             dynamic.firstNode = nodes.get(preparedKeys.get(graph.getNode(dynamic.first).node));
             dynamic.secondNode = nodes.get(preparedKeys.get(graph.getNode(dynamic.second).node));
         }
+        for(var branch:branches.values())branch.element.beginFrame();
         if (RestorationCoordinator.active(level)) restorationOwners();
         steps.clear();
         activeStep = 0;
@@ -253,7 +254,7 @@ public final class WorldBridge {
         if (p.getClass() == TransformerElectricalProperties.class) return true;
         if (DYNAMIC_TYPES.contains(p.getClass().getName())) return true;
         if (CeeCompatibility.integration().inverse(p))
-            return supportedInversions.contains(p);
+            return supportedInversions.contains(p)||CeeCompatibility.integration().nonlinear(p)!=null;
         return false;
     }
 
@@ -754,6 +755,8 @@ public final class WorldBridge {
     }
 
     private void restoreUncommitted(Throwable failure) {
+        if(graph!=null)for(var trial:graph.trials())try{trial.restore().run();}
+        catch(RuntimeException | Error rollback){if(rollback!=failure)failure.addSuppressed(rollback);}
         for (var d : dynamics) try { d.checkpoint.restore(); }
         catch (RuntimeException | Error rollback) { if(rollback!=failure)failure.addSuppressed(rollback); }
         for (var a : adapters) try { a.finish(false); }
@@ -776,6 +779,13 @@ public final class WorldBridge {
         }
         holdRejectedDynamics();
         for (var dynamic : dynamics) if (failedDynamic(dynamic)) dynamic.checkpoint.restore();
+        for(var trial:graph.trials()) {
+            var a=nodes.get(preparedKeys.get(graph.getNode(trial.first()).node));
+            var b=nodes.get(preparedKeys.get(graph.getNode(trial.second()).node));
+            if(a==null||b==null||isolated.contains(preparedKeys.get(graph.getNode(trial.first()).node))
+                    ||isolated.contains(preparedKeys.get(graph.getNode(trial.second()).node))
+                    ||failedDynamicNode(a)||failedDynamicNode(b))trial.restore().run();
+        }
         var currents = new Object2DoubleOpenHashMap<DirectionalNodeConnection>(branches.size() + 2 * transformers.size());
         for (var branch : branches.values()) {
             var p = branch.desired.properties;
@@ -851,8 +861,8 @@ public final class WorldBridge {
         org.cha0scollective.wwpg.extension.ApiCircuits.get(level).commit();
         if (results == null) return;
         phase = Phase.COMMIT;
-        SimulationResults pausedResults = pausedDevices.isEmpty() ? null : new SimulationResults(new double[voltages.length], substeps,
-                new Object2DoubleOpenHashMap<DirectionalNodeConnection>(), builder, infrastructure);
+        SimulationResults pausedResults = pausedDevices.isEmpty() ? null : CeeCompatibility.integration().results(new double[voltages.length], substeps,
+                new Object2DoubleOpenHashMap<DirectionalNodeConnection>(), builder, infrastructure, Set.of());
         for (var device : devices) {
             if (!device.isValid() || failedAdapterDevices.contains(device.pos)) continue;
             if (pausedDevices.contains(device.pos)) {

@@ -28,6 +28,10 @@ public abstract class CircuitBuilderValidationMixin implements RejectedConnectio
         if(wwpg$reject(first.node,second.node,properties))ci.cancel();
     }
     @Unique private boolean wwpg$reject(Node first,Node second,ElectricalProperties properties){
+        // New microtickers have an unstamped zero resistance until their first tick.
+        // Shared synchronization validates their actual stamp after priming.
+        if(properties instanceof com.george_vi.electroenergetics.simulation.electrical_properties.MicroTickingElectricalProperties
+                &&properties.resistance()==0&&Double.isFinite(properties.currentSource())&&Double.isFinite(properties.voltageSource()))return false;
         try{LinearBranch.validate(properties);return false;}
         catch(IllegalArgumentException e){wwpg$rejected.put(first,e.getMessage());wwpg$rejected.put(second,e.getMessage());return true;}
     }

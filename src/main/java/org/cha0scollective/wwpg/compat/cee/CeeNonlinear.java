@@ -5,5 +5,6 @@ public interface CeeNonlinear {
     void iterate(double first, double second, boolean firstIteration);
     double current(double voltage);
     double gMin();
+    default double reverseGMin(){return gMin();}
     Runnable checkpoint();
 }

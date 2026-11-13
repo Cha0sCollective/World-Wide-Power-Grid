@@ -26,12 +26,12 @@ public abstract class CioPhaseSourceMixin extends MicroTickingElectricalProperti
         double squaresV = sumV2, squaresI = sumI2, power = sumVI;
         int count = samples;
         double r = resistance, i = currentSource, emf = voltageSource;
-        boolean ideal = isForcedVoltageSource;
+        Runnable versionHistory=org.cha0scollective.wwpg.compat.cee.CeeCompatibility.integration().checkpoint(this);
         double[] original = terminal, values = terminal.clone();
         return () -> {
             startAngle = angle; step = increment; peak = amplitude; v = voltage;
             sumV2 = squaresV; sumI2 = squaresI; sumVI = power; samples = count;
-            resistance = r; currentSource = i; voltageSource = emf; isForcedVoltageSource = ideal;
+            resistance = r; currentSource = i; voltageSource = emf; versionHistory.run();
             terminal = original;
             System.arraycopy(values, 0, original, 0, values.length);
         };

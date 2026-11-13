@@ -23,6 +23,7 @@ public interface CeeIntegration {
     SimulationResults results(double[] samples, int substeps,
             Object2DoubleOpenHashMap<DirectionalNodeConnection> currents,
             CircuitBuilder builder, InfrastructureSavedData infrastructure, Set<Node> unavailable);
+    default boolean nonlinearType(Class<? extends ElectricalProperties> type) {return false;}
     default CeeNonlinear nonlinear(ElectricalProperties properties) { return null; }
     interface CapturedProperties { }
 }

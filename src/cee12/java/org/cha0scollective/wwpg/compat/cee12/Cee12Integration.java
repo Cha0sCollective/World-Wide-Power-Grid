@@ -24,6 +24,7 @@ public final class Cee12Integration implements CeeIntegration {
         for(var n:graph.allNodes()) for(var e:n.adjacency.int2ObjectEntrySet()) {
             int other=e.getIntKey();if(other<=n.ordinal)continue;
             var p=e.getValue();
+            var nonlinear=nonlinear(p);if(nonlinear!=null)graph.nonlinear(n.ordinal,other,nonlinear);
             if(p instanceof MicroTickingElectricalProperties m)result.put(DataPacker.pack(n.ordinal,other),m);
             else if(p.invert() instanceof MicroTickingElectricalProperties m)result.put(DataPacker.pack(other,n.ordinal),m);
         }
@@ -39,6 +40,9 @@ public final class Cee12Integration implements CeeIntegration {
         }
         return ()->{};
     }
+    @Override public boolean nonlinearType(Class<? extends ElectricalProperties> type){
+        return ISolverIterationTicker.class.isAssignableFrom(type)||NonlinearProperties.class.isAssignableFrom(type);
+    }
     @Override public CeeNonlinear nonlinear(ElectricalProperties properties) {
         boolean inverted=properties.getClass()==InvertedElectricalProperties.class;
         var original=inverted?properties.invert():properties;
@@ -51,7 +55,8 @@ public final class Cee12Integration implements CeeIntegration {
                 double id=state.wwpg$saturationCurrent()*Math.expm1((inverted?-voltage:voltage)/state.wwpg$thermalVoltage());
                 return inverted?-id:id;
             }
-            public double gMin(){return diode.gMin();}
+            public double gMin(){return properties.gMin();}
+            public double reverseGMin(){return properties.invert().gMin();}
             public Runnable checkpoint(){double v=state.wwpg$oldVoltage(),g=diode.conductance,i=diode.currentSource;
                 return ()->{state.wwpg$oldVoltage(v);diode.conductance=g;diode.currentSource=i;};}
         };

@@ -17,6 +17,10 @@ public final class CeeGraph {
             this.node=node;this.ordinal=ordinal;this.adjacency=adjacency;this.groundConductance=groundConductance;
         }
     }
+    public record Trial(int first,int second,Runnable restore) { }
+    private final List<Trial> trials=new ArrayList<>();
+    public void nonlinear(int first,int second,CeeNonlinear model){trials.add(new Trial(first,second,model.checkpoint()));}
+    public List<Trial> trials(){return Collections.unmodifiableList(trials);}
     private final List<NodeView> nodes;
     public CeeGraph(CircuitBuilder builder) {
         var result=new ArrayList<NodeView>(builder.allNodes().size());

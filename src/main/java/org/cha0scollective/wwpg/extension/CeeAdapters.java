@@ -72,6 +72,8 @@ public final class CeeAdapters {
             if (NATIVE_PROPERTY_TYPES.contains(type.getName()))
                 throw new IllegalArgumentException("CEE property " + type.getName()
                         + " has a built-in WWPG adapter; register your add-on's own property class instead");
+            if (org.cha0scollective.wwpg.compat.cee.CeeCompatibility.integration().nonlinearType(type))
+                throw new IllegalArgumentException("CEE nonlinear property "+type.getName()+" requires iteration support; the substep adapter cannot approximate it");
             if (entries.containsKey(type))
                 throw new IllegalArgumentException("CEE property " + type.getName() + " already belongs to "
                         + entries.get(type).providerId + "; cannot also register " + providerId);
