@@ -80,7 +80,7 @@ jobs:
         os: [ubuntu-24.04, windows-latest]
         backend: [NATIVE, JAVA]
         profile: [BASE, PINOUT]
-        loader: ['21.1.231', '21.1.248', '21.1.265']
+        loader: ['21.1.231', '21.1.248', '21.1.265', '21.1.266']
     steps:
       - uses: actions/checkout@v4
         with: {fetch-depth: 0}

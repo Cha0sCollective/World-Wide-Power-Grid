@@ -10,6 +10,7 @@ import org.cha0scollective.wwpg.bridge.PropertyCurrentSourceWire;
 import org.cha0scollective.wwpg.mixin.ElectricalNetworkAccessor;
 import org.patryk3211.powergrid.collections.ModdedConfigs;
 import org.patryk3211.powergrid.electricity.sim.ElectricalNetwork;
+import org.patryk3211.powergrid.electricity.sim.ElectricWire;
 import org.patryk3211.powergrid.electricity.sim.NetworkGraph;
 import org.patryk3211.powergrid.electricity.sim.node.CurrentSourceWire;
 import org.patryk3211.powergrid.electricity.sim.node.FloatingNode;
@@ -21,6 +22,45 @@ import org.patryk3211.powergrid.electricity.sim.solver.IMultiHooks;
 @GameTestHolder("wwpg_wire_power")
 @PrefixGameTestTemplate(false)
 public final class PropertyWireBatchGameTests {
+    @GameTest(template = "empty", batch = "wwpg_wire_power_core", timeoutTicks = 40)
+    public static void mixedPowerKeepsExactFallbackCountsAtSixteenAndThirtyTwoSteps(GameTestHelper h) {
+        try (var f = new Circuit(h)) {
+            var plain = new ElectricWire(8, f.a, f.b);
+            var property = new PropertyCurrentSourceWire(f.a, f.b, .125);
+            var scalar = new CurrentSourceWire(f.a, f.b, .5);
+            f.network.addWire(plain); f.network.addWire(property); f.network.addWire(scalar);
+            f.settle();
+            for (int steps : new int[]{16, 32}) {
+                long before = f.stats().wwpg$batchedContributions();
+                long beforeProperties = f.stats().wwpg$batchedPropertyContributions();
+                long expectedFast = 0, expectedProperties = 0;
+                var wires = new org.patryk3211.powergrid.electricity.sim.AbstractElectricWire[]{plain, f.wire, property, scalar};
+                var expectedPower = new double[wires.length];
+                f.network.prepare(steps);
+                for (int step = 0; step < steps; step++) {
+                    double first = switch (step % 4) { case 0 -> .25; case 1 -> 0; case 2 -> -.0625; default -> 1e-10; };
+                    double second = step % 3 == 0 ? 0 : .125;
+                    f.source.setVoltage(step % 3 == 0 ? 0 : step % 2 == 0 ? 10 : -10);
+                    f.wire.setConductance(first); property.setConductance(second);
+                    f.wire.setCurrent(step - 8); property.setCurrent(8 - step);
+                    f.network.singleTick();
+                    for (int i = 0; i < wires.length; i++) {
+                        expectedPower[i] += wires[i].internalPower() / steps;
+                        sameBits(h, expectedPower[i], wires[i].power(), "Mixed power at " + steps + " steps, index " + step);
+                    }
+                    long fastProperties = PlainWireBatch.PROPERTIES_ENABLED ? (first > 0 ? 1 : 0) + (second > 0 ? 1 : 0) : 0;
+                    expectedProperties += fastProperties;
+                    expectedFast += 1 + fastProperties;
+                    h.assertTrue(f.stats().wwpg$batchedContributions() - before == expectedFast,
+                            "Mixed fast-path count included scalar fallbacks");
+                    h.assertTrue(f.stats().wwpg$batchedPropertyContributions() - beforeProperties == expectedProperties,
+                            "Property count lost live-conductance fallback changes");
+                }
+            }
+        }
+        h.succeed();
+    }
+
     @GameTest(template = "empty", batch = "wwpg_wire_power_core", timeoutTicks = 40)
     public static void propertyOnlyBatchKeepsLiveConductanceCurrentAndSignedSupply(GameTestHelper h) {
         try (var f = new Circuit(h)) {

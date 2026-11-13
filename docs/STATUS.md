@@ -1,9 +1,9 @@
 # Current status
 
-**[WWPG 0.2.8-beta.2](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8-beta.2)**
-is the current prerelease. It retains the published loading and wire-processing
-improvements and adds audit-driven rollback, endpoint, configuration, native
-allocation and multimeter safety corrections.
+**[WWPG 0.2.8-beta.3](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8-beta.3)**
+is the current prerelease. It removes duplicate CEE restoration scans and restores
+PG's original generator, rotor and clutch timing, including its intended oscillation.
+The independent audit safety corrections remain in place.
 The previous stable release remains **0.2.7**. Extension API **1.0.0** is unchanged.
 Use matching server/client mods from the [installation guide](INSTALL.md).
 
@@ -41,31 +41,26 @@ a repaired device. The [developer contract](EXTENSION_API.md) explains those rul
 
 ## What was checked
 
-Beta.2 completed all **558 required headless jobs** across local Windows and
-Ubuntu/WSL, Native/Java and BASE/PINOUT. NeoForge 21.1.265 is the full primary
-environment; 21.1.231 and 21.1.248 retain distinct compatibility lanes. All
-**12 real Windows client scenarios** passed, including two-client controls,
-tools, readings and clean Save and Quit. Actual dependency hashes are retained.
+Beta.3 completed all **654 required headless jobs** across local Windows and
+Ubuntu/WSL, Native/Java and BASE/PINOUT. NeoForge 21.1.266 is the complete primary
+environment; 21.1.231, 21.1.248 and 21.1.265 retain compatibility lanes. All
+**12 real Windows client scenarios** passed, including integrated and actual TCP
+sessions, tools, powered readings and clean shutdown. The actual dependency
+versions and hashes, extracted SDK builds and original execution records remain locked.
 
-The passing beta.2 evidence is reused for publication without rerunning either
-suite. An investigated Windows progress-file interruption retained 40 complete
-passing jobs and ran the six missing jobs in fresh directories. The original
-interrupted batch remains failed; complete coverage is assembled transparently.
-
-The earlier Linux Native/BASE/.248 motor assertion did not recur, including
-SETUP and all three cold VERIFY phases in this campaign. Its original cause
-remains unknown. See the [acceptance record](../release/0.2.8-beta.2/ACCEPTANCE.md)
-for actual source identities and the preserved historical finding.
+Completed passing lifecycle groups were retained after interrupted orchestration;
+incomplete groups ran in fresh directories. Interrupted processes remain failed
+or incomplete, never passing evidence. The historical Linux Native/BASE/.248 motor
+assertion remains unexplained. See the [acceptance record](../release/0.2.8-beta.3/ACCEPTANCE.md).
 
 ## Generator and transformer fixes
 
-Recognized native PG generator assemblies advance field excitation and rotor
-response together during electrical solving. Clutches retain PG's original
-once-per-tick speed sample and 50 ms force prediction while physical motion uses
-all 16 electrical substeps. Focused checks cover transformer, variac, carbon-pile
-and other excitation controls on both solvers. Unsupported/custom arrangements
-retain PG's native path; this is not a promise that every unregulated circuit is
-stable. Native clutch limits and generator damage behavior still apply.
+PG owns generator field sampling, rotor motion, torque and clutch timing again.
+The stabilization introduced in 0.2.7 through 0.2.8-beta.2 is removed following
+upstream confirmation that the observed oscillation is intended. A self-excited
+generator can therefore hunt under the same conditions as stock PG. WWPG keeps
+16 electrical substeps and the independent restoration and failure safeguards.
+Transformer, variac and carbon-pile controls retain focused comparison coverage.
 
 The PG multimeter can read assembled medium-transformer terminals through their
 loaded controller. Invalidated or unavailable samples remain unavailable until
@@ -81,14 +76,14 @@ simulating the time spent waiting. Unrelated ready factories continue operating.
 
 Earlier improvements group add-on work by circuit, reuse accepted terminal and
 wire readings, and skip empty input-assembly searches. These changes retain
-electrical accuracy, stored energy and all 16 substeps. Beta.3 further reduces
+electrical accuracy, stored energy and all 16 substeps. The earlier 0.2.2-beta.3 reduced
 terminal preparation, CEE description rebuilding and result allocations.
-Beta.4 also corrects matrix ownership, unload/rebuild regrouping and handheld
+The earlier 0.2.2-beta.4 corrected matrix ownership, unload/rebuild regrouping and handheld
 connector samples. Failed native factors, invalid permutations and nonfinite
 results are rejected before unsafe reuse; rejected circuits hold stored energy.
 The original [14,650-node benchmark](BENCHMARK_YARD.md) is included
-as a separate capacity save. It has not reached 20 TPS; ordinary gameplay
-acceptance does not establish that target.
+as a separate capacity save. Its beta.3 Native benchmark is recorded separately;
+ordinary gameplay acceptance does not establish a 20 TPS capacity guarantee.
 
 Fresh PG pentodes can also need a few startup calculations before measurements
 become available. The checks hold their unaccepted results and stored

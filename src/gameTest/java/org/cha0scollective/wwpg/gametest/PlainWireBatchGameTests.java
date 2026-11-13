@@ -1,5 +1,6 @@
 package org.cha0scollective.wwpg.gametest;
 
+import java.util.Set;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.neoforged.neoforge.gametest.GameTestHolder;
@@ -12,6 +13,7 @@ import org.patryk3211.powergrid.electricity.sim.ElectricWire;
 import org.patryk3211.powergrid.electricity.sim.node.CurrentSourceWire;
 import org.patryk3211.powergrid.electricity.sim.node.FloatingNode;
 import org.patryk3211.powergrid.electricity.sim.node.VoltageSourceCoupling;
+import org.patryk3211.powergrid.electricity.sim.solver.IMultiHooks;
 
 /** Release-default batching with independent bitwise power assertions. */
 @GameTestHolder("wwpg_wire_power")
@@ -116,6 +118,61 @@ public final class PlainWireBatchGameTests {
             f.checkedFrame(h, branch, ground);
             h.assertTrue(reads[0] > 0, "Custom voltage method was bypassed");
             h.assertTrue(f.stats().wwpg$batchedSteps() == 0, "Custom node entered a cached-row plan");
+        }
+        h.succeed();
+    }
+
+    @GameTest(template = "empty", batch = "wwpg_wire_power_core", timeoutTicks = 40)
+    public static void rebuiltPlanUsesFreshStateAfterRowSwap(GameTestHelper h) {
+        try (var f = new Circuit(h)) {
+            f.settle();
+            Set<IMultiHooks> original = Set.of(f.wire);
+            var plan = PlainWireBatch.compile(f.network, original);
+            f.network.swapNodes(f.a, f.b);
+            f.settle();
+            h.assertTrue(plan.select(original) == original, "Obsolete row plan did not fall back");
+            plan = PlainWireBatch.compile(f.network, original);
+            f.wire.prepare(32);
+            double expected = 0;
+            for (int step = 0; step < 32; step++) {
+                f.network.setValue(f.a, step - 16.0);
+                f.network.setValue(f.b, step * 0.25);
+                var selected = plan.select(original);
+                h.assertTrue(selected != original, "Rebuilt row assignment lost the batch");
+                selected.forEach(IMultiHooks::postMicroTick);
+                expected += f.wire.internalPower() / 32;
+                sameBits(h, expected, f.wire.power(), "Fresh reindexed power at step " + step);
+            }
+        }
+        h.succeed();
+    }
+
+    @GameTest(template = "empty", batch = "wwpg_wire_power_core", timeoutTicks = 40)
+    public static void retainedPlanRejectsForeignAndInvalidAssignments(GameTestHelper h) {
+        try (var f = new Circuit(h); var foreign = new Circuit(h)) {
+            f.settle(); foreign.settle();
+            Set<IMultiHooks> original = Set.of(f.wire);
+            var plan = PlainWireBatch.compile(f.network, original);
+            int row = f.a.getIndex();
+            try {
+                f.a.setNetwork(foreign.network);
+                h.assertTrue(plan.select(original) == original, "Foreign owner with matching row entered batch");
+            } finally { f.a.setNetwork(f.network); }
+            try {
+                for (int invalid : new int[] {-1, f.network.getNodes().size(), f.b.getIndex()}) {
+                    f.a.assignIndex(invalid);
+                    h.assertTrue(plan.select(original) == original, "Invalid or mismatched row entered batch: " + invalid);
+                }
+            } finally { f.a.assignIndex(row); }
+            h.assertTrue(plan.select(original) != original, "Restored assignment did not recover");
+            f.network.makeLeaf(f.a, f.b);
+            // This deliberately invalid assignment still has a source coupling;
+            // inspect fallback before solving it. Valid leaf solving is covered
+            // by batchRebuildsAfterMembershipRowsAndLeafChanges above.
+            h.assertTrue(f.a.getIndex() == -1, "Leaf fixture retained an assigned row");
+            h.assertTrue(plan.select(original) == original, "Eliminated leaf entered a retained plan");
+            f.network.cleanup();
+            h.assertTrue(plan.select(original) == original, "Released native state entered batch");
         }
         h.succeed();
     }

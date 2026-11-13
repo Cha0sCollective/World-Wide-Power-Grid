@@ -9,7 +9,16 @@ is the current stable release. To install it or choose a playable world, use the
 [installation guide](../docs/INSTALL.md). This directory is for reviewing what
 was shipped and which checks passed.
 
-## Current prerelease: 0.2.8-beta.2
+## Current prerelease: 0.2.8-beta.3
+
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8-beta.3)
+· [Acceptance and remaining limits](0.2.8-beta.3/ACCEPTANCE.md).
+
+Removes duplicate CEE restoration scans and restores original PG generator timing.
+Fresh qualification covers 654 headless jobs and 12 real-client scenarios; original
+execution identities and interrupted attempts remain preserved.
+
+## Historical prerelease: 0.2.8-beta.2
 
 [Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8-beta.2)
 · [Acceptance and remaining limits](0.2.8-beta.2/ACCEPTANCE.md).

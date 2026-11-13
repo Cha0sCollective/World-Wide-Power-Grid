@@ -60,6 +60,8 @@ class StarterClientChecks(unittest.TestCase):
         self.root = Path(self.temporary.name).resolve()
         self.addCleanup(patch.stopall)
         patch.object(launcher, 'ROOT', self.root).start()
+        patch.object(launcher, 'catalog', return_value={
+            'loaders': ['TEST_OLD_LOADER', 'TEST_CURRENT_LOADER']}).start()
         local_launcher = self.root / 'tools/authoring_starter_acceptance.py'
         local_init = self.root / 'tools/documentation_acceptance/init.gradle'
         local_init.parent.mkdir(parents=True)
@@ -107,7 +109,7 @@ class StarterClientChecks(unittest.TestCase):
         command = [str(value) for value in run.call_args.args[0]]
         self.assertIn('-PdocWorldName=' + name, command)
         self.assertEqual(command[command.index('--timeout') + 1], '600')
-        self.assertIn('-Pneo_version=21.1.248', command)
+        self.assertIn('-Pneo_version=TEST_CURRENT_LOADER', command)
         self.assertEqual((self.output / ('client-JAVA/saves/' + name) / 'level.dat').read_bytes(), b'original level bytes')
         self.assertFalse((self.output / 'client-JAVA/saves/Documentation Test').exists())
         self.assertEqual(world.read_bytes(), before)
@@ -122,7 +124,7 @@ class StarterClientChecks(unittest.TestCase):
                 launcher.server(self.output,self.runtime,'JAVA')
         command=[str(value) for value in run.call_args.args[0]]
         self.assertEqual(command[command.index('createMinecraftArtifacts')+1],'runDocumentationServer')
-        self.assertIn('-Pneo_version=21.1.248',command)
+        self.assertIn('-Pneo_version=TEST_CURRENT_LOADER',command)
         self.assertEqual(command[command.index('--timeout')+1],'600')
 
     def test_spaces_and_unicode_are_one_gradle_property_argument(self):

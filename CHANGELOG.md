@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+## 0.2.8-beta.3 — 13 November 2026 (prerelease)
+
+- Remove duplicate whole-CEE circuit scans during restoration, fixing large-yard
+  loading stalls while preserving coherent rollback and unavailable readings.
+- Restore PG's original generator, rotor and clutch timing, including intended
+  self-excitation oscillation. Remove WWPG's stabilization from 0.2.7–beta.2.
+- Retain unload/regrouping, measurement, adapter isolation and native allocation
+  safety. API 1.0.0 and saves are unchanged; GameTests remain a separate jar.
+
+Qualification covers 654 headless jobs and 12 graphical scenarios on the frozen
+beta.3 runtime with CEE 1.1.4 and NeoForge 21.1.266. Older loader checks remain
+separate. The historical Linux motor assertion remains unexplained.
+
 ## 0.2.8-beta.2 — 12 November 2026 (prerelease)
 
 - Restore rejected CEE dynamics coherently, including alternator windings that
