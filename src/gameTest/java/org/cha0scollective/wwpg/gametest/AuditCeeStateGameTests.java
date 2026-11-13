@@ -14,7 +14,7 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
-import org.cha0scollective.wwpg.bridge.BridgeSimulationResults;
+import org.cha0scollective.wwpg.bridge.CeeResultsAvailability;
 import org.cha0scollective.wwpg.bridge.Bridges;
 import org.cha0scollective.wwpg.bridge.WorldBridge;
 import java.util.AbstractList;
@@ -81,7 +81,7 @@ public final class AuditCeeStateGameTests {
         });
         h.runAtTickTime(110,()->{
             var results=InfrastructureSavedData.load(level).ticker.lastResults;
-            h.assertTrue(results instanceof BridgeSimulationResults r&&r.available(new InWorldNode(0,pos)),"Repaired winding remained unavailable");
+            h.assertTrue(results instanceof CeeResultsAvailability r&&r.available(new InWorldNode(0,pos)),"Repaired winding remained unavailable");
             h.assertTrue(results.getVoltageAt(pos,1,0)>100,"Repaired winding did not resume powered readings");
             h.assertTrue(org.cha0scollective.wwpg.api.neoforge.ElectricalMeasurements.readVoltageBetween(level,pos,2,pos,0).status()
                     ==org.cha0scollective.wwpg.api.MeasurementStatus.VALID,"Repaired winding retained unavailable public readings");
@@ -137,7 +137,7 @@ public final class AuditCeeStateGameTests {
                 failure="Rejected winding changed shared state: angle "+angle+" -> "+d.virtualRotor.angle+", work "+work+" -> "+d.workCounter.get();
             var r=InfrastructureSavedData.load(event.level).ticker.lastResults;
             // The event precedes lastResults publication; its own results carry this frame.
-            if(failure==null&&(!(event.results instanceof BridgeSimulationResults current)||current.available(new InWorldNode(2,pos))))
+            if(failure==null&&(!(event.results instanceof CeeResultsAvailability current)||current.available(new InWorldNode(2,pos))))
                 failure="Partially rejected shared rotor published an available sibling phase";
             var status=org.cha0scollective.wwpg.api.neoforge.ElectricalMeasurements.readVoltageBetween(event.level,pos,2,pos,0).status();
             if(status==org.cha0scollective.wwpg.api.MeasurementStatus.VALID)failure="Held winding published valid public measurements";

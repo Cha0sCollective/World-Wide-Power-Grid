@@ -608,3 +608,33 @@ tasks.matching { it.name in ['runGameTestServer', 'runPackagedGameTestServer', '
         }
     }
 }
+
+// Frozen CEE development contract. The normal minimum SDK compile remains CEE 1.1.3.
+def cee12Contract = layout.buildDirectory.file('cee12-contract/electroenergetics-1.21.1-1.2.0-132.jar')
+def prepareCee12Contract = tasks.register('prepareCee12Contract') {
+    if (providers.gradleProperty('ceeDevelopmentJar').isPresent()) inputs.file(providers.gradleProperty('ceeDevelopmentJar'))
+    outputs.file(cee12Contract)
+    doLast {
+        def target=cee12Contract.get().asFile
+        def source=providers.gradleProperty('ceeDevelopmentJar').isPresent() ? file(providers.gradleProperty('ceeDevelopmentJar').get()) : null
+        byte[] bytes
+        if(source!=null) bytes=source.bytes
+        else bytes=new URL('https://github.com/george8188625/Create-Electro-Energetics/releases/download/autobuild-132/electroenergetics-1.21.1-1.2.0-132.jar').bytes
+        def hash=java.security.MessageDigest.getInstance('SHA-256').digest(bytes).encodeHex().toString()
+        if(hash!='71916b60d3eb000b2b766b410e6dc5af58dbf3f1ff7da40080f3ee8d950393d7') throw new GradleException('CEE 1.2 development contract checksum mismatch')
+        target.parentFile.mkdirs();target.bytes=bytes
+    }
+}
+sourceSets {
+    cee12 {
+        compileClasspath = files(cee12Contract) + sourceSets.main.output + sourceSets.extensionApi.output + sourceSets.ceeApi.output + sourceSets.main.compileClasspath.filter { !it.name.startsWith('qYJdIoAx-') }
+    }
+}
+tasks.named('compileCee12Java') { dependsOn prepareCee12Contract; options.compilerArgs += ['-proc:none'] }
+tasks.named('jar') { from sourceSets.cee12.output }
+neoForge.mods.wwpg { sourceSet sourceSets.cee12 }
+// Runtime overrides are explicit and separate from minimum compile dependencies.
+if(providers.gradleProperty('ceeRuntimeJar').isPresent()) {
+    configurations.runtimeClasspath.exclude group:'maven.modrinth',module:'qYJdIoAx'
+    dependencies { runtimeOnly files(providers.gradleProperty('ceeRuntimeJar')) }
+}

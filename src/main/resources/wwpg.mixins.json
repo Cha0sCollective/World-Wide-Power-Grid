@@ -110,5 +110,6 @@
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "plugin": "org.cha0scollective.wwpg.compat.cee.CeeMixinPlugin"
 }

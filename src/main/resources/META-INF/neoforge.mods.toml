@@ -16,6 +16,9 @@ config="wwpg.mixins.json"
 [[mixins]]
 config="wwpg.cio.mixins.json"
 
+[[mixins]]
+config="wwpg.cee12.mixins.json"
+
 [[dependencies.wwpg]]
 modId="neoforge"
 type="required"

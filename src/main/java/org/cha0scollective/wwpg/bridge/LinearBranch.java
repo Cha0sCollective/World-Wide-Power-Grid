@@ -26,8 +26,8 @@ public final class LinearBranch {
         this.properties = properties;
         double conductance = properties.conductance();
         if (Double.compare(norton.conductance(), conductance) != 0) norton.setConductance(conductance);
-        // CEE injects into the second node; PG injects into the first.
-        norton.setCurrent(-properties.currentSource());
+        // CEE 1.2 changed the Norton source orientation. Keep stamping and readings paired.
+        norton.setCurrent(org.cha0scollective.wwpg.compat.cee.CeeCompatibility.integration().pgSourceCurrent(properties.currentSource()));
         if (voltage != null) voltage.setVoltage(-properties.voltageSource());
     }
 
@@ -39,10 +39,10 @@ public final class LinearBranch {
     public ElectricalNetwork network() { return norton.getNode1().getNetwork(); }
     public boolean attached() { var network = network(); return network != null && norton.getNetwork() == network && (voltage == null || voltage.getNetwork() == network); }
     public double current() {
-        return norton.current() + properties.currentSource() + (voltage == null ? 0 : voltage.getCurrent());
+        return norton.current() - norton.getCurrent() + (voltage == null ? 0 : voltage.getCurrent());
     }
     public double current(double firstVoltage, double secondVoltage) {
-        return (firstVoltage - secondVoltage) * norton.conductance() + properties.currentSource()
+        return (firstVoltage - secondVoltage) * norton.conductance() - norton.getCurrent()
                 + (voltage == null ? 0 : voltage.getCurrent());
     }
     public void remove() {

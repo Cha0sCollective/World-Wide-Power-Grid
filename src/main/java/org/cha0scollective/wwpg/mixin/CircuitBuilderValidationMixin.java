@@ -21,7 +21,7 @@ public abstract class CircuitBuilderValidationMixin implements RejectedConnectio
     @Inject(method="connect(IILcom/george_vi/electroenergetics/simulation/electrical_properties/ElectricalProperties;)V",at=@At("HEAD"),cancellable=true)
     private void wwpg$validateIndexed(int first,int second,ElectricalProperties properties,CallbackInfo ci){
         var builder=(CircuitBuilder)(Object)this;
-        if(wwpg$reject(builder.getNode(first).node,builder.getNode(second).node,properties))ci.cancel();
+        if(wwpg$reject(org.cha0scollective.wwpg.compat.cee.CeeCompatibility.integration().node(builder,first).node,org.cha0scollective.wwpg.compat.cee.CeeCompatibility.integration().node(builder,second).node,properties))ci.cancel();
     }
     @Inject(method="connect(Lcom/george_vi/electroenergetics/simulation/WrappedIndexedNode;Lcom/george_vi/electroenergetics/simulation/WrappedIndexedNode;Lcom/george_vi/electroenergetics/simulation/electrical_properties/ElectricalProperties;)V",at=@At("HEAD"),cancellable=true)
     private void wwpg$validateWrapped(WrappedIndexedNode first,WrappedIndexedNode second,ElectricalProperties properties,CallbackInfo ci){

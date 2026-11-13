@@ -120,7 +120,7 @@ final class ShowroomPanelStations {
             var second=new com.george_vi.electroenergetics.foundation.nodes.InWorldNode(1,s.lamp());
             var results=com.george_vi.electroenergetics.simulation.infrastructure.InfrastructureSavedData.load(level).ticker.lastResults;
             boolean present=results!=null&&results.getNodeID(first,-1)>=0&&results.getNodeID(second,-1)>=0;
-            boolean available=present&&(!(results instanceof org.cha0scollective.wwpg.bridge.BridgeSimulationResults bridged)||bridged.available(first,second));
+            boolean available=present&&(!(results instanceof org.cha0scollective.wwpg.bridge.CeeResultsAvailability bridged)||bridged.available(first,second));
             double ceeVoltage=present?results.getVoltageAt(first,second):Double.NaN;
             // Inspect existing native entries only: endpoint lookups must not create
             // adapters, terminals or graph objects while observing the failed frame.

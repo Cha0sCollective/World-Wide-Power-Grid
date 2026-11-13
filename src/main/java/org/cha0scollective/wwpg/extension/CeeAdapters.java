@@ -23,6 +23,10 @@ import java.util.Set;
 public final class CeeAdapters {
     private static final Set<String> NATIVE_PROPERTY_TYPES = Set.of(
             ElectricalProperties.class.getName(),
+            "com.george_vi.electroenergetics.simulation.electrical_properties.ResistorProperties",
+            "com.george_vi.electroenergetics.simulation.electrical_properties.NortonProperties",
+            "com.george_vi.electroenergetics.simulation.electrical_properties.VoltageSourceProperties",
+            "com.george_vi.electroenergetics.simulation.electrical_properties.InvertedElectricalProperties",
             "com.george_vi.electroenergetics.content.transmission_distribution.transformer.TransformerElectricalProperties",
             "com.george_vi.electroenergetics.foundation.electrical_properties.CapacitorProperties",
             "com.george_vi.electroenergetics.foundation.electrical_properties.InductorProperties",
@@ -48,7 +52,7 @@ public final class CeeAdapters {
 
     public static Session newSession() { return REGISTRY.newSession(); }
     public static boolean registered(Class<? extends ElectricalProperties> type) { return REGISTRY.registered(type); }
-    public static boolean isAdapted(ElectricalProperties properties) { return properties instanceof SnapshotProperties; }
+    public static boolean isAdapted(ElectricalProperties properties) { return properties instanceof org.cha0scollective.wwpg.compat.cee.CeeIntegration.CapturedProperties; }
     public static List<String> registrations() { return REGISTRY.registrations(); }
 
     /** Isolated registries allow deterministic registration and lifecycle tests. */
@@ -130,8 +134,8 @@ public final class CeeAdapters {
         private final String providerId;
         private final ElectricalProperties source;
         private final boolean dynamic;
-        private final SnapshotProperties properties;
-        private final SnapshotProperties invertedProperties;
+        private final ElectricalProperties properties;
+        private final ElectricalProperties invertedProperties;
         private CeeElectricalParameters parameters;
         private CeeStateCheckpoint tickCheckpoint, substepCheckpoint;
         private String failureReason;
@@ -143,10 +147,11 @@ public final class CeeAdapters {
             this.providerId = providerId;
             this.source = source;
             this.dynamic = dynamic;
-            properties = new SnapshotProperties(this, false);
-            invertedProperties = new SnapshotProperties(this, true);
+            properties = org.cha0scollective.wwpg.compat.cee.CeeCompatibility.integration().snapshot(this, false);
+            invertedProperties = org.cha0scollective.wwpg.compat.cee.CeeCompatibility.integration().snapshot(this, true);
         }
 
+        public final CeeElectricalParameters parameters() { return parameters; }
         public final String providerId() { return providerId; }
         public final ElectricalProperties source() { return source; }
         public final boolean dynamic() { return dynamic; }
@@ -274,26 +279,4 @@ public final class CeeAdapters {
         @Override protected void afterCaptured(CeeSubstepResult result) { adapter.afterSubstep(typedSource, result); }
     }
 
-    private static final class SnapshotProperties extends ElectricalProperties {
-        private final Binding binding;
-        private final boolean inverted;
-
-        private SnapshotProperties(Binding binding, boolean inverted) {
-            super(1, 0, 0);
-            this.binding = binding;
-            this.inverted = inverted;
-        }
-        @Override public double resistance() {
-            return conductance() == 0 ? 1e11 : 1 / conductance();
-        }
-        @Override public double conductance() { return binding.parameters.conductanceSiemens(); }
-        @Override public double currentSource() { return (inverted ? -1 : 1) * binding.parameters.currentSourceAmps(); }
-        @Override public double voltageSource() { return (inverted ? -1 : 1) * binding.parameters.voltageSourceVolts(); }
-        @Override public boolean isVoltageSource() { return binding.parameters.idealVoltageSource(); }
-        @Override public boolean isCurrentSource() { return currentSource() != 0; }
-        @Override public boolean isSimpleResistor() { return !isVoltageSource() && !isCurrentSource(); }
-        @Override public ElectricalProperties invert() { return inverted ? binding.properties : binding.invertedProperties; }
-        @Override public boolean equals(Object other) { return other == this; }
-        @Override public int hashCode() { return System.identityHashCode(this); }
-    }
 }

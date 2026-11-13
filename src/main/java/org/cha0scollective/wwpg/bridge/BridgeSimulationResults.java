@@ -17,7 +17,7 @@ import java.util.Set;
  * measurements expose an explicit status and no numbers instead. Invalid samples
  * never reach CEE gameplay or wire heating; healthy circuits keep their results.
  */
-public final class BridgeSimulationResults extends SimulationResults {
+public final class BridgeSimulationResults extends SimulationResults implements CeeResultsAvailability {
     // An empty mask makes every ordinal available without allocating a zero-filled array.
     private static final boolean[] ALL_AVAILABLE = new boolean[0];
     private final Set<Node> unavailableNodes;
@@ -34,7 +34,7 @@ public final class BridgeSimulationResults extends SimulationResults {
      * Publishes a fresh current map after all solve validation. The caller transfers
      * ownership and must never mutate or reuse the map; voltage samples are copied.
      */
-    static BridgeSimulationResults takeOwnershipOfCurrents(double[] samples, int substeps,
+    public static BridgeSimulationResults takeOwnershipOfCurrents(double[] samples, int substeps,
             Object2DoubleOpenHashMap<DirectionalNodeConnection> currents,
             CircuitBuilder builder, InfrastructureSavedData infrastructure, Set<Node> unavailableNodes) {
         return new BridgeSimulationResults(samples, substeps, currents, builder, infrastructure, unavailableNodes, true);

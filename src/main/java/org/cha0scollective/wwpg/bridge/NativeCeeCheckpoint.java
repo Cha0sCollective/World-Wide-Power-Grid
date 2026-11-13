@@ -49,17 +49,11 @@ final class NativeCeeCheckpoint {
         double resistance = properties.resistance;
         double currentSource = properties.currentSource;
         double voltageSource = properties.voltageSource;
-        boolean forced = properties.isForcedVoltageSource;
+        Runnable versionHistory = org.cha0scollective.wwpg.compat.cee.CeeCompatibility.integration().checkpoint(properties);
         Runnable history;
-        if (properties instanceof CapacitorProperties capacitor) {
-            double voltage = capacitor.lastVoltage;
-            history = () -> capacitor.lastVoltage = voltage;
-        } else if (properties instanceof InductorProperties inductor) {
+        if (properties instanceof InductorProperties inductor) {
             double current = inductor.lastCurrent;
             history = () -> inductor.lastCurrent = current;
-        } else if (properties instanceof DiodeProperties diode) {
-            double voltage = diode.lastVoltage;
-            history = () -> diode.lastVoltage = voltage;
         } else if (properties instanceof AccumulatorProperties accumulator) {
             double charge = accumulator.storedCharge;
             history = () -> accumulator.storedCharge = charge;
@@ -90,7 +84,7 @@ final class NativeCeeCheckpoint {
             properties.resistance = resistance;
             properties.currentSource = currentSource;
             properties.voltageSource = voltageSource;
-            properties.isForcedVoltageSource = forced;
+            versionHistory.run();
         };
     }
 }

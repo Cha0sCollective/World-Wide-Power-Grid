@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "org.cha0scollective.wwpg.compat.cee12.mixin",
+  "plugin": "org.cha0scollective.wwpg.compat.cee.CeeMixinPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "CircuitBuilderValidationMixin",
+    "CapacitorNumerics",
+    "DiodeNumerics"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
