@@ -153,13 +153,20 @@ public final class AuditCeeStateGameTests {
                 var bindings=(Map<ElectricalNetwork,List<Object>>)field.get(bridge);
                 var originals=new IdentityHashMap<>(bindings);
                 int[] visits={0};
+                boolean[] holdNotification={true};
                 originals.forEach((owner,list)->bindings.put(owner,new AbstractList<>() {
-                    public Object get(int index){++visits[0];return list.get(index);}
+                    public Object get(int index){if(holdNotification[0])++visits[0];return list.get(index);}
                     public int size(){return list.size();}
                 }));
                 try {
                     for(int n=0;n<64;++n)bridge.unavailable(network);
-                    if(reject)bridge.reject(network,new IllegalStateException("Audit deliberate late availability rejection"));
+                    if(reject) {
+                        // A real rejection may walk descriptors once to format
+                        // its diagnostic. Measure only repeated hold notifications.
+                        holdNotification[0]=false;
+                        try {bridge.reject(network,new IllegalStateException("Audit deliberate late availability rejection"));}
+                        finally {holdNotification[0]=true;}
+                    }
                     for(int n=0;n<64;++n)bridge.unavailable(network);
                     if(visits[0]!=0)failure="Repeated holds scanned "+visits[0]+" collected result nodes";
                     if(reject) {
