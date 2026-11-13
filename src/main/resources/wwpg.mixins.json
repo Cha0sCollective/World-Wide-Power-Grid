@@ -99,7 +99,9 @@
     "WorldNetworksAccessor",
     "NetherTransformerAccessor",
     "NetherTransformerEntryAccessor",
-    "NetherTransformerUnloadMixin"
+    "NetherTransformerUnloadMixin",
+    "CeeWorldHistoryMixin",
+    "CeeInductorHistoryMixin"
   ],
   "client": [
     "PgProbeHighlightMixin",

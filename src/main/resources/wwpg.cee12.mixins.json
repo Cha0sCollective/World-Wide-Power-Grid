@@ -7,7 +7,8 @@
   "mixins": [
     "CircuitBuilderValidationMixin",
     "CapacitorNumerics",
-    "DiodeNumerics"
+    "DiodeNumerics",
+    "CapacitorSavedHistoryMixin"
   ],
   "injectors": {
     "defaultRequire": 1

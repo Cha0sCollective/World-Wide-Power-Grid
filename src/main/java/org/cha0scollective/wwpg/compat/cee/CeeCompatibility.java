@@ -6,7 +6,8 @@ import java.lang.reflect.Modifier;
 /** Select once from the upstream binary contract; no reflective calls in the solve loop. */
 public final class CeeCompatibility {
     private CeeCompatibility() { }
-    public static boolean modern() { return Modifier.isAbstract(ElectricalProperties.class.getModifiers()); }
+    private static final boolean MODERN=Modifier.isAbstract(ElectricalProperties.class.getModifiers());
+    public static boolean modern() { return MODERN; }
     private static final class Holder {
         static final CeeIntegration INSTANCE=load();
         private static CeeIntegration load() {

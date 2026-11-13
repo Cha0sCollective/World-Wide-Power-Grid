@@ -8,6 +8,7 @@ public final class CeeMixinPlugin implements IMixinConfigPlugin {
     public void onLoad(String mixinPackage) { }
     public String getRefMapperConfig(){return null;}
     public boolean shouldApplyMixin(String target,String mixin) {
+        if(Boolean.getBoolean("wwpg.test.upstreamReference")&&mixin.contains(".cee12."))return false;
         boolean modern=CeeCompatibility.modern();
         if(mixin.endsWith(".TriPolarMeterResultsMixin"))return !modern;
         if(mixin.contains(".cee12."))return modern;
