@@ -1,4 +1,6 @@
-# Local beta.3 preparation
+# Historical local beta.3 preparation
+
+This snapshot predates the completed [release acceptance](ACCEPTANCE.md).
 
 This candidate retains the CEE restoration scan correction from `6bce82c` and
 removes the generator coupling introduced in 0.2.7. Following the user's

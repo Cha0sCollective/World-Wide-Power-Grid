@@ -1,7 +1,7 @@
 # Upstream behavior and compatibility checks
 
-This describes the audit corrections in 0.2.8-beta.2 and the prepared beta.3 parity revert. The separate
-[acceptance record](../release/0.2.8-beta.2/ACCEPTANCE.md) preserves the actual
+This describes the audit corrections in 0.2.8-beta.2 and the beta.3 parity revert. The separate
+[acceptance record](../release/0.2.8-beta.3/ACCEPTANCE.md) preserves the actual
 tested source, coverage and remaining uncertainty. Historical beta1 evidence
 continues to describe its original runtime.
 
@@ -27,7 +27,7 @@ documented failure-handling boundaries.
 
 ## Native PG generator timing
 
-Starting with the prepared 0.2.8-beta.3 candidate, WWPG uses PG's original
+Starting with 0.2.8-beta.3, WWPG uses PG's original
 generator, rotor and clutch update timing. The coupled timing model introduced
 in 0.2.7 is removed, following upstream confirmation that the observed overload
 oscillation is intended behavior. Self-excited generators may therefore hunt
