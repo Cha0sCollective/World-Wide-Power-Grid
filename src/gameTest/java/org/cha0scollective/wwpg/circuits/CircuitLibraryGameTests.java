@@ -4,18 +4,18 @@ import java.util.*;
 import net.minecraft.gametest.framework.*;
 import org.cha0scollective.wwpg.gametest.DynamicGameTests;
 
-/** Each named assembly has a fresh process/world, real inputs and its own traces. */
+/** Selected assemblies keep independent GameTests, inputs and traces. */
 public final class CircuitLibraryGameTests {
     public static Collection<TestFunction> cases(String expected){
-        String selected=System.getProperty("wwpg.test.circuit");
+        String selected=expected;
+        var requested=List.of(System.getProperty("wwpg.test.circuit", "").split(","));
         // NeoForge invokes all generators before filtering structure namespaces.
-        if(!expected.equals(selected)) return List.of();
+        if(!requested.contains(expected)) return List.of();
         String namespace="wwpg_circuit_"+selected.replace('-','_');
         return List.of(new TestFunction("circuit-library",namespace+"."+selected,namespace+":empty",12000,0,true,h->{
-            DynamicGameTests.substeps(h.getLevel());
             h.assertTrue(org.patryk3211.powergrid.collections.ModdedConfigs.server().electricity.overheating.get(),"Overheating must remain enabled");
             AdvancedLibrary.identity();
-            h.runAtTickTime(12,()->SourceLossChecks.save("actual-backend.json",SourceLossChecks.backend(h)));
+            h.runAtTickTime(12,()->SourceLossChecks.save("actual-backend-"+selected+".json",SourceLossChecks.backend(h)));
             System.out.println("WWPG_CIRCUIT_BEGIN case="+selected+" substeps=16");
             switch(selected){
                 case "adder3"->FunctionalBaselines.adder3(h);

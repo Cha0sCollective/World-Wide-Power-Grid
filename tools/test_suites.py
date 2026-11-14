@@ -49,6 +49,16 @@ def catalog():
     value = read(CATALOG)
     if value['schema'] != 2 or value['policy'] != 'separated-v2':
         raise ValueError('Unknown test catalog policy')
+    for name, cfg in value['groups'].items():
+        if 'circuits' not in cfg: continue
+        members=[g for g in value['groups'].values() if g.get('merge_into')==name]
+        if len(cfg['circuits'])<2 or len(set(cfg['circuits']))!=len(cfg['circuits']) \
+                or set(cfg['circuits'])!={g.get('circuit') for g in members}:
+            raise ValueError('Circuit batch membership differs: '+name)
+        for g in [cfg,*members]:
+            if g['phases']!=['SETUP'] or g.get('export') or g.get('setup_namespaces') \
+                    or any(g.get(k)!=cfg.get(k) for k in ('profiles','backends','addon')):
+                raise ValueError('Circuit batch cannot change isolation or lifecycle: '+name)
     return value
 
 
@@ -76,8 +86,8 @@ def audit(root=ROOT):
     return dict(policy=spec['policy'], namespaces=len(discovered), classified=sorted(discovered))
 
 
-def plan(lane, groups=None, backends=None, profiles=None, loaders=None, platforms=None):
-    spec = catalog()
+def plan(lane, groups=None, backends=None, profiles=None, loaders=None, platforms=None, spec=None):
+    spec = spec or catalog()
     backends = backends or spec['backends']; profiles = profiles or spec['profiles']
     loaders = loaders or (spec['loaders'] if lane == 'full-headless' else [spec['loaders'][-1]])
     platforms = platforms or (['windows-latest'] if lane.startswith('graphical') else [host_platform()] if lane != 'full-headless' else spec['platforms'])
@@ -99,6 +109,8 @@ def plan(lane, groups=None, backends=None, profiles=None, loaders=None, platform
                         gallery=lane == 'graphical-gallery'))
         return jobs
     if lane not in ('focused', 'full-headless'): raise ValueError('Unknown lane')
+    if lane=='full-headless' and spec.get('planning_revision') and loaders != [spec['runtime_loader']]:
+        raise ValueError('Full headless uses only the recommended loader; use loader_compatibility.py for focused loading checks')
     if lane=='full-headless' and groups:raise ValueError('Full headless uses the complete catalog; use focused --group or --case')
     if lane == 'focused' and not groups: raise ValueError('Focused execution requires --group')
     selected = groups or list(spec['groups'])
@@ -118,7 +130,8 @@ def plan(lane, groups=None, backends=None, profiles=None, loaders=None, platform
                         if profile not in cfg.get('profiles', profiles) or backend not in cfg.get('backends', backends): continue
                         if cfg.get('merge_into') in selected:continue
                         names = list(cfg['namespaces'])
-                        for part in selected:
+                        members = spec['groups'] if cfg.get('circuits') else selected
+                        for part in members:
                             merged=spec['groups'][part]
                             if merged.get('merge_into')==group and profile in merged.get('profiles',spec['profiles']) and backend in merged.get('backends',spec['backends']):
                                 names+=merged['namespaces']
@@ -127,7 +140,8 @@ def plan(lane, groups=None, backends=None, profiles=None, loaders=None, platform
                             jobs.append(dict(id=f'{target}/{loader}/{backend}/{profile}/{group}/{number}-{phase}',
                                 lane='headless', platform=target, loader=loader, backend=backend, profile=profile,
                                 group=group, phase=phase, namespaces=names+cfg.get('setup_namespaces',[]) if phase=='SETUP' else names, addon=cfg.get('addon', False)
-                                    or group in ('safety', 'native-guard'), **({'circuit':cfg['circuit']} if 'circuit' in cfg else {})))
+                                    or group in ('safety', 'native-guard'), **({'circuit':cfg['circuit']} if 'circuit' in cfg else {}),
+                                    **({'circuits':cfg['circuits']} if 'circuits' in cfg else {})))
                         if lane == 'full-headless' and cfg.get('export'):
                             jobs.append(dict(id=f'{target}/{loader}/{backend}/{profile}/{group}/export',
                                 lane='headless', operation='export', platform=target, loader=loader,
@@ -192,7 +206,8 @@ def freeze(output, source=None):
         artifacts[role]['path'] = target.name
     source = source or subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     write(output/'inputs.json', dict(schema=2, policy='separated-v2', source_sha=source,
-        version=version, api_version=api, artifacts=artifacts, catalog_sha256=sha(CATALOG)))
+        version=version, api_version=api, artifacts=artifacts, catalog_sha256=sha(CATALOG),
+        recommended_runtime=catalog().get('recommended_runtime')))
     return output/'inputs.json'
 
 
@@ -227,6 +242,7 @@ def command(job, inputs, output):
         args += ['-PtestNamespaces='+','.join(job['namespaces']), '-PrestartPhase='+job['phase'],
                  '-PtestApiAddon='+str(job['addon']).lower()]
         if 'circuit' in job: args += ['-PtestCircuit='+job['circuit']]
+        if 'circuits' in job: args += ['-PtestCircuit='+','.join(job['circuits'])]
     args += ['-PtestExampleArtifact='+inputs['artifacts']['example']['path'],
              '-PtestUpstreamExampleArtifact='+inputs['artifacts']['upstream_example']['path']]
     return args, directory
@@ -292,6 +308,8 @@ def execute(jobs, inputs_path, output, lane, reason=None, preparation=None, comm
                     result = subprocess.run(args, cwd=ROOT, stdout=stream, stderr=subprocess.STDOUT)
                 record.update(status='passed' if result.returncode == 0 else 'failed', exit_code=result.returncode,
                               log=descriptor(log), command=args)
+                if job.get('circuits') and result.returncode == 0:
+                    record['circuit_traces'] = {name: descriptor(directory/(name+'-trace.csv')) for name in job['circuits']}
                 if job.get('operation') == 'export' and result.returncode == 0:
                     record['archive'] = descriptor(Path(args[args.index('--output')+1]))
                 elif result.returncode == 0:

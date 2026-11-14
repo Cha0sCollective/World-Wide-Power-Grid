@@ -73,14 +73,63 @@ class SelectionChecks(unittest.TestCase):
         current=suites.catalog()['runtime_loader'];jobs=suites.plan('full-headless')
         self.assertEqual(current,suites.catalog()['loaders'][-1])
         self.assertTrue(all(j['loader']==current for j in jobs if j.get('operation')=='export'))
-        circuits=[j for j in jobs if 'circuit' in j]
-        self.assertEqual(len(circuits),12*2*2*2)
+        circuits=[j for j in jobs if 'circuit' in j or 'circuits' in j]
+        self.assertEqual(len(circuits),9*2*2*2)
         self.assertEqual({j['loader'] for j in circuits},{current})
-        self.assertEqual(len({j['circuit'] for j in circuits}),12)
+        names={c for j in circuits for c in j.get('circuits',[j.get('circuit')])}
+        self.assertEqual(len(names),12)
         for job in circuits:
             args,directory=suites.command(job,{'version':'TEST_ONLY','artifacts':{r:{'path':r+'.jar'} for r in suites.ROLES}},Path('scratch'))
-            self.assertIn('-PtestCircuit='+job['circuit'],args)
-            self.assertEqual(directory.name,'circuit-'+job['circuit'])
+            selection=','.join(job['circuits']) if 'circuits' in job else job['circuit']
+            self.assertIn('-PtestCircuit='+selection,args)
+            self.assertEqual(directory.name,job['group'])
+
+    def test_full_suite_is_recommended_only_and_cannot_expand_to_other_loaders(self):
+        jobs=suites.plan('full-headless')
+        self.assertEqual(len(jobs),342)
+        self.assertEqual({j['loader'] for j in jobs if 'loader' in j},{'21.1.262'})
+        for loaders in (['21.1.231'],['21.1.262','21.1.266']):
+            with self.assertRaises(ValueError):suites.plan('full-headless',loaders=loaders)
+        self.assertEqual(suites.catalog()['recommended_runtime'],dict(neoforge='21.1.262',powergrid='0.6.2',electroenergetics='1.21.1-1.1.4'))
+
+    def test_batch_keeps_all_original_namespaces_and_isolated_cases(self):
+        old=suites.read(suites.ROOT/'tools/legacy/test-suites-beta3.json')
+        old_jobs=suites.plan('full-headless',loaders=['21.1.266'],spec=old)
+        new_jobs=suites.plan('full-headless')
+        from collections import Counter
+        def coverage(jobs):
+            return Counter((j['platform'],j.get('backend'),j.get('profile'),n,j.get('phase'))
+                    for j in jobs for n in j.get('namespaces',[]))
+        self.assertEqual(coverage(old_jobs),coverage(new_jobs))
+        batches=[j for j in new_jobs if j.get('circuits')]
+        self.assertEqual(len(batches),8)
+        self.assertEqual(batches[0]['circuits'],['adder3','oscillator','source-switch','regulator'])
+        for case in ('register8','memory-bank','shift4','ram4x4','fused-latch','relay-heater','quiet-heater','source-loss'):
+            self.assertEqual(len([j for j in new_jobs if j.get('circuit')==case]),8)
+        self.assertEqual(len(suites.plan('full-headless',spec=old)),654)
+        for name in ('regulator','adder3'):
+            job=suites.plan('focused',['circuit-'+name],['JAVA'],['BASE'],platforms=['windows-latest'])[0]
+            self.assertEqual(job['circuit'],name)
+            self.assertNotIn('circuits',job)
+
+    def test_batch_cannot_absorb_a_restart_or_addon_only_fixture(self):
+        for change in ('phases','addon','circuits'):
+            spec=copy.deepcopy(suites.catalog())
+            if change=='phases':spec['groups']['circuit-regulator']['phases'].append('VERIFY')
+            elif change=='addon':spec['groups']['circuit-regulator']['addon']=True
+            else:spec['groups']['circuit-functional']['circuits'].pop()
+            with tempfile.TemporaryDirectory(dir=suites.ROOT/'build') as d:
+                p=Path(d)/'catalog.json';p.write_text(json.dumps(spec))
+                with patch.object(suites,'CATALOG',p),self.assertRaisesRegex(ValueError,'Circuit batch'):
+                    suites.catalog()
+
+    def test_batched_templates_contain_the_complete_functional_footprints(self):
+        import gzip,struct
+        for name in ('adder3','oscillator','source_switch','regulator'):
+            raw=gzip.decompress((suites.ROOT/f'src/gameTest/resources/data/wwpg_circuit_{name}/structure/empty.nbt').read_bytes())
+            marker=b'\x09\x00\x04size\x03'+struct.pack('>i',3)
+            start=raw.index(marker)+len(marker)
+            self.assertEqual(struct.unpack('>iii',raw[start:start+12]),(32,8,32))
 
     def test_focused_requires_scope_and_does_not_expand(self):
         with self.assertRaisesRegex(ValueError,'--group'):suites.plan('focused')
@@ -103,6 +152,26 @@ class SelectionChecks(unittest.TestCase):
         self.assertNotIn('  push:',text);self.assertNotIn('  pull_request:',text)
         self.assertNotIn('  schedule:',text);self.assertNotIn('  release:',text)
         self.assertNotIn('run full-headless',(suites.ROOT/'.github/workflows/packaging-checks.yml').read_text())
+        self.assertIn("loader=[spec['runtime_loader']]",text)
+        self.assertIn('needs.selection.outputs.matrix',text)
+        self.assertNotIn("loader: ['21.1.231'",text)
+
+    def test_workflow_selection_emits_the_eight_recommended_environments(self):
+        import subprocess,sys,textwrap
+        text=(suites.ROOT/'.github/workflows/build.yml').read_text()
+        script=text.split("          python - <<'PY'",1)[1].split('          PY',1)[0]
+        with tempfile.TemporaryDirectory(dir=suites.ROOT/'build') as d:
+            output=Path(d)/'matrix.txt'
+            subprocess.run([sys.executable,'-c',textwrap.dedent(script)],cwd=suites.ROOT,
+                env=dict(os.environ,GITHUB_OUTPUT=str(output)),check=True)
+            matrix=json.loads(output.read_text().removeprefix('matrix='))
+        self.assertEqual(matrix,dict(os=suites.catalog()['platforms'],backend=['NATIVE','JAVA'],
+            profile=['BASE','PINOUT'],loader=['21.1.262']))
+        props=dict(line.split('=',1) for line in (suites.ROOT/'gradle.properties').read_text().splitlines() if '=' in line)
+        self.assertEqual(props['neo_version'],suites.catalog()['runtime_loader'])
+        lock=suites.read(suites.ROOT/'src/gameTest/resources/data/wwpg_tests/runtime-inputs.json')
+        for mod in ('powergrid','electroenergetics'):
+            self.assertEqual(lock[mod]['version'],suites.catalog()['recommended_runtime'][mod])
 
     def test_commands_use_frozen_inputs_and_preserve_watchdog(self):
         inputs={'version':'0.2.2-test','artifacts':{r:{'path':'frozen/'+r+'.jar'} for r in suites.ROLES+('reference',)}}
@@ -271,6 +340,27 @@ class EvidenceChecks(unittest.TestCase):
             self.assertFalse((output/'retained.json').exists())
             self.assertFalse(suites.read(output/'index.json')['original_report_available'])
 
+    def test_batch_cannot_pass_with_missing_case_trace_or_changed_selection(self):
+        _,report,proof=self.passing_headless_fragment()
+        job=suites.plan('focused',['circuit-functional'],['JAVA'],['BASE'],platforms=['windows-latest'])[0]
+        proof.update(namespaces=','.join(job['namespaces']),circuit=','.join(job['circuits']),required_tests_passed=4)
+        log='GAME TESTS COMPLETE\nAll 4 required tests passed\nAll dimensions are saved\nWWPG_TEST_BACKEND_CONFIG: requested=JAVA, configured=JAVA\nWWPG_RUNTIME_INPUTS_VERIFIED: TEST_ONLY\n'
+        log+=''.join('WWPG_CIRCUIT_BEGIN case='+c+' substeps=16\n' for c in job['circuits'])
+        actual=dict(job,status='passed',exit_code=0,proof=self.file('batch.json',json.dumps(proof)),log=self.file('batch.log',log),
+            circuit_traces={c:self.file(c+'.csv','TEST_ONLY electrical trace') for c in job['circuits']})
+        evidence.validate_job(actual,job,report,self.base)
+        for failure in ('trace','case','count','selection','empty','log-count'):
+            broken=copy.deepcopy(actual);p=copy.deepcopy(proof)
+            if failure=='trace':broken['circuit_traces'].pop('oscillator')
+            elif failure=='case':broken['log']=self.file('missing-case.log',log.replace('WWPG_CIRCUIT_BEGIN case=oscillator substeps=16',''))
+            elif failure=='empty':broken['circuit_traces']['oscillator']=self.file('empty.csv','')
+            elif failure=='log-count':broken['log']=self.file('count-mismatch.log',log.replace('All 4 required','All 3 required'))
+            else:
+                if failure=='count':p['required_tests_passed']=3
+                else:p['circuit']='adder3'
+                broken['proof']=self.file(failure+'.json',json.dumps(p))
+            with self.subTest(failure=failure),self.assertRaises(ValueError):evidence.validate_job(broken,job,report,self.base)
+
     def test_actual_restart_phase_and_artifacts_are_checked(self):
         path,report,proof=self.passing_headless_fragment();proof['phase']='VERIFY'
         report['jobs'][0]['proof']=self.file('wrong-phase.json',json.dumps(proof));path.write_text(json.dumps(report))
@@ -302,6 +392,15 @@ class EvidenceChecks(unittest.TestCase):
         portable=bundle(source,self.base/'short-portable')
         copied=suites.read(portable)['helper']
         self.assertEqual(evidence.locked(copied,self.base).read_bytes(),extended.read_bytes())
+
+    def test_historical_review_is_not_current_release_evidence(self):
+        cohort=self.file('historical.json',json.dumps(dict(historical_review_only=True)))
+        manifest=dict(acceptance_policy='separated-v2',source_sha='a'*40,
+            artifacts={r:{'sha256':'a'*64} for r in suites.ROLES},
+            headless_acceptance=cohort,graphical_acceptance=cohort)
+        gate=type('Gate',(),{'locked_file':staticmethod(lambda item,base:Path(item['path']))})()
+        with self.assertRaisesRegex(ValueError,'Historical review'):
+            evidence.validate_release(manifest,self.base,gate)
 
     def test_release_cannot_substitute_headless_for_graphical(self):
         manifest=dict(acceptance_policy='separated-v2',artifacts={r:{'sha256':'a'*64} for r in suites.ROLES},headless_acceptance={})
