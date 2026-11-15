@@ -172,6 +172,13 @@ boundary after requesting the reload, so uncapped GameTest ticks do not race
 unfinished disk work. Its actual unload/reload, identity and voltage assertions,
 80-tick readiness bound, process deadline and watchdog remain unchanged.
 
+The loading group's `wwpg_motor_restoration` fixtures exercise Create's native
+first-load motor validation and fan attachment during restoration, repeated
+pause/recovery, ordinary power loss/recovery and externally driven shaft
+continuity. Run these focused fixtures on both solvers when changing motor
+restoration ordering. Actual powered Save and Quit / cold reload remains a
+separate focused client check; these headless fixtures do not claim that coverage.
+
 ## Full headless acceptance
 
 The manual **Full headless acceptance** GitHub workflow prepares artifacts once,
