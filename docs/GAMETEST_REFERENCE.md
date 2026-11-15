@@ -59,6 +59,7 @@ means a measurement explicitly cannot be used; it is different from a valid zero
 | Battery function | `FactoryGameTests`, `StationaryEquipmentGameTests`, `NativeReferenceTimingGameTests`, `NativeHandheldGameTests` | Portable/stationary charge, capacity, native nonrechargeable behavior, reference energy windows and multiblock connector readings. |
 | Energy held during loading/failure | `LoadingBatchGameTests`, `SolverFailureGameTests`, `NativeFailureGameTests`, `ExtensionApiRejectedSolveGameTests` | No committed storage/FE/filter advancement on unavailable or rejected frames, followed by recovery. |
 | Clicking contactors after restoration | `ContactorRestorationGameTests`, `CircuitRebuildGameTests`, `ProtectionGameTests` | Held accepted contact state, unavailable coil readings, delayed rebuild and accepted reopening/reclosing. |
+| Fans disappear on powered reload | `MotorRestorationGameTests` | Native first-load motor validation and consumer attachment during repeated restoration, real power loss/recovery, and externally driven shaft continuity. Actual cold client reload remains separate. |
 | Multimeter briefly reads then zeros | `NativeHandheldGameTests`, `HandheldMeterGameTests` | Persistent connector/battery/generator readings, gauge agreement and correct unavailable recovery. |
 | Terminal IDs and geometry | `NativeTerminalPreparationGameTests`, `CeeTerminalGeometryGameTests`, `ExtensionApiTerminalRefreshGameTests` | Native IDs, sparse/live geometry, custom callbacks, rotation, terminal removal and stable ownership. |
 | Terminal boxes and mouse selection | Separate graphical `yard-integrated` scenario | Actual rendering/rays/native input; the geometry GameTests alone do not certify this. |
@@ -1104,6 +1105,22 @@ Entry points:
 - [`restorationDoesNotRepeatConverterFeTransfers`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/LoadingBatchGameTests.java#L179)
 - [`unownedUnscheduledChunkCannotKeepRestorationActive`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/LoadingBatchGameTests.java#L196)
 - [`restorationPreservesNativeBatteryAndInverterHistory`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/LoadingBatchGameTests.java#L207)
+
+#### MotorRestorationGameTests
+
+Namespace: `wwpg_motor_restoration`. [Source](../src/gameTest/java/org/cha0scollective/wwpg/gametest/MotorRestorationGameTests.java).
+
+Exercises Create's first-load validation countdown and consumer reattachment on
+powered CEE motors connected with PG wires. Attached fans must survive repeated
+restoration windows and follow real power loss/recovery. A separate fixture
+keeps an electrically paused motor turning from a real external 64 RPM shaft.
+These fixtures isolate native mechanical ordering; they do not replace
+separate-process powered Save and Quit / cold-reload checks.
+
+Entry points:
+
+- `poweredMotorReloadKeepsAttachedFans`
+- `restorationKeepsExternallyDrivenMotorTurning`
 
 #### NativeSamplingGameTests
 

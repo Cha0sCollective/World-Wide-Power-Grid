@@ -40,7 +40,7 @@ class SelectionChecks(unittest.TestCase):
             jobs=suites.plan('full-headless',backends=[backend])
             names={n for job in jobs for n in job.get('namespaces',[])}
             self.assertTrue({'wwpg_contactors','wwpg_api_ownership','wwpg_rhs','wwpg_wire_recovery',
-                'wwpg_pause_epoch','wwpg_wire_power','wwpg_display_pulse','wwpg_cee_preparation'}<=names)
+                'wwpg_pause_epoch','wwpg_wire_power','wwpg_display_pulse','wwpg_cee_preparation','wwpg_motor_restoration'}<=names)
             self.assertEqual('wwpg_native_guard' in names,backend=='NATIVE')
 
     def test_pinout_regressions_do_not_launch_twice(self):
@@ -100,7 +100,7 @@ class SelectionChecks(unittest.TestCase):
         def coverage(jobs):
             return Counter((j['platform'],j.get('backend'),j.get('profile'),n,j.get('phase'))
                     for j in jobs for n in j.get('namespaces',[]))
-        self.assertEqual(coverage(old_jobs),coverage(new_jobs))
+        self.assertFalse(coverage(old_jobs)-coverage(new_jobs), "An original primary-runtime assertion or lifecycle phase disappeared")
         batches=[j for j in new_jobs if j.get('circuits')]
         self.assertEqual(len(batches),8)
         self.assertEqual(batches[0]['circuits'],['adder3','oscillator','source-switch','regulator'])
