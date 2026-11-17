@@ -1,11 +1,11 @@
 # Current status
 
-**[WWPG 0.2.8-beta.3](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8-beta.3)**
-is the current prerelease. It removes duplicate CEE restoration scans and restores
-PG's original generator, rotor and clutch timing, including its intended oscillation.
-The independent audit safety corrections remain in place.
-The previous stable release remains **0.2.7**. Extension API **1.0.0** is unchanged.
-Use matching server/client mods from the [installation guide](INSTALL.md).
+**WWPG 0.2.8 is the current stable release.** It includes beta.3's large-world
+loading correction and restored PG generator timing, plus the merged motor
+restoration fix that preserves attached fans and externally driven shafts.
+Qualification covers 342 headless jobs and 12 separate graphical scenarios
+on the recommended dependencies.
+Extension API **1.0.0** is unchanged. Use the [selected dependency set](INSTALL.md).
 
 ## What works
 
@@ -39,7 +39,22 @@ WWPG also isolates failing add-on callbacks, preserves accepted electrical
 history after rejected calculations, and allows recovery when the add-on reports
 a repaired device. The [developer contract](EXTENSION_API.md) explains those rules.
 
-## What was checked
+## Current release checks
+
+The 342-job headless plan passed across Windows and Ubuntu/WSL, Native/Java
+and BASE/PINOUT on NeoForge 21.1.262, PG 0.6.2 and CEE 1.1.4. Preparation
+checked 137 unit tests on each operating system and built the three extracted
+SDK projects independently. All 12 real Windows client scenarios passed,
+including integrated worlds, two-client TCP synchronization and clean shutdown.
+
+One original Windows Native/BASE sparse-panel test timed out waiting for an
+available reading. It could not be reproduced in focused diagnostics, the
+original selection or the original coordinates. A fresh continuation passed
+with the same runtime, assertions and deadlines. Its cause is not established;
+the original failed process remains in the evidence. See the
+[0.2.8 acceptance record](../release/0.2.8/ACCEPTANCE.md).
+
+## Historical beta.3 checks
 
 Beta.3 completed all **654 required headless jobs** across local Windows and
 Ubuntu/WSL, Native/Java and BASE/PINOUT. NeoForge 21.1.266 is the complete primary
@@ -110,8 +125,8 @@ adjustable-load starter and step-by-step authoring, testing and repair guides.
   after a rejected calculation, but it cannot undo arbitrary inventory or world
   changes made by an add-on's callback. PG retains its own native behavior.
 
-No failing claimed workflow remains in the frozen release acceptance. Older
-intermittent reports are preserved in [release history](RELEASE_HISTORY.md),
+The 0.2.8 acceptance record retains the unexplained panel-readiness finding.
+Older intermittent reports are preserved in [release history](RELEASE_HISTORY.md),
 including cases where the original logs could not establish an exact cause.
 Passing current checks does not retroactively explain those older failures.
 
