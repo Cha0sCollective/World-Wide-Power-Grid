@@ -2,6 +2,28 @@
 
 ## Unreleased
 
+## 0.2.8 — release preparation
+
+- Enable retained PG/CEE wire batching, bounded and prioritized saved-wire
+  restoration, loading work and geometry reuse. Remove duplicate CEE circuit
+  scans that stalled large-world restoration while retaining rollback safeguards.
+- Restore rejected CEE dynamics coherently, including shared alternator state;
+  isolate unsupported addon endpoints before callbacks. Preserve valid settings
+  through restoration fallback and reject invalid multimeter input safely.
+- Guard native matrix allocation, growth and lifetime on Windows and Linux;
+  reject duplicate entries in artifact-equivalence comparisons.
+- Restore PG's original generator, rotor and clutch timing, including intended
+  self-excitation oscillation. The stabilization from 0.2.7 through beta.2 is removed.
+- Refresh motor shaft connections before native validation during restoration
+  and power loss, preserving attached fans and externally driven motors.
+- Retain twelve circuit assemblies and add motor restoration regressions in the
+  separate test companion. Full acceptance uses the recommended runtime set;
+  other loaders use separate focused probes, and four circuit checks share a process.
+
+API 1.0.0, saves and sixteen electrical substeps remain unchanged. Fresh release
+acceptance on NeoForge 21.1.262, PG 0.6.2 and CEE 1.1.4 is pending. Historical
+beta evidence remains evidence of its original runtime and dependencies.
+
 ## 0.2.8-beta.3 — 13 November 2026 (prerelease)
 
 - Remove duplicate whole-CEE circuit scans during restoration, fixing large-yard

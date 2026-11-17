@@ -1,11 +1,11 @@
 # Current status
 
-**[WWPG 0.2.8-beta.3](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8-beta.3)**
-is the current prerelease. It removes duplicate CEE restoration scans and restores
-PG's original generator, rotor and clutch timing, including its intended oscillation.
-The independent audit safety corrections remain in place.
-The previous stable release remains **0.2.7**. Extension API **1.0.0** is unchanged.
-Use matching server/client mods from the [installation guide](INSTALL.md).
+**WWPG 0.2.8 is being prepared for release.** It includes beta.3's large-world
+loading correction and restored PG generator timing, plus the merged motor
+restoration fix that preserves attached fans and externally driven shafts.
+Fresh headless and graphical acceptance are in progress. The last published
+prerelease remains beta.3; the previous stable release is 0.2.7.
+Extension API **1.0.0** is unchanged. Use the [selected dependency set](INSTALL.md).
 
 ## What works
 
@@ -39,7 +39,7 @@ WWPG also isolates failing add-on callbacks, preserves accepted electrical
 history after rejected calculations, and allows recovery when the add-on reports
 a repaired device. The [developer contract](EXTENSION_API.md) explains those rules.
 
-## What was checked
+## Historical beta.3 checks
 
 Beta.3 completed all **654 required headless jobs** across local Windows and
 Ubuntu/WSL, Native/Java and BASE/PINOUT. NeoForge 21.1.266 is the complete primary
@@ -110,7 +110,7 @@ adjustable-load starter and step-by-step authoring, testing and repair guides.
   after a rejected calculation, but it cannot undo arbitrary inventory or world
   changes made by an add-on's callback. PG retains its own native behavior.
 
-No failing claimed workflow remains in the frozen release acceptance. Older
+The new 0.2.8 acceptance is pending. Older
 intermittent reports are preserved in [release history](RELEASE_HISTORY.md),
 including cases where the original logs could not establish an exact cause.
 Passing current checks does not retroactively explain those older failures.

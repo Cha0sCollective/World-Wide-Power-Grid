@@ -1,21 +1,20 @@
 # Version compatibility
 
-**WWPG 0.2.8-beta.3** targets Minecraft **1.21.1**. Use matching mod versions on
+**WWPG 0.2.8** targets Minecraft **1.21.1**. Use matching mod versions on
 server and clients, following the [installation guide](INSTALL.md).
 
-| Dependency | Minimum accepted by WWPG | Checked release input |
+| Dependency | Minimum accepted by WWPG | Selected release input |
 | --- | --- | --- |
-| NeoForge | 21.1.231 | 21.1.266 primary; separate .231, .248 and .265 compatibility lanes |
+| NeoForge | 21.1.231 | 21.1.262; other loaders use separate focused probes |
 | Create | 6.0.10 | Published NeoForge 1.21.1 Create 6.0.10 |
-| CEE | 1.21.1-1.1.3 | 1.1.4 complete campaign; 1.1.3 retains focused compatibility coverage |
+| CEE | 1.21.1-1.1.3 | 1.1.4 release campaign; 1.1.3 retains focused compatibility coverage |
 | Power Grid | 0.6.2 | 0.6.2 for Minecraft 1.21.1 |
 | Architectury | Required by the upstream mods | 13.0.11 NeoForge |
 
-The optional computer profile uses CC:Tweaked **1.121.0** and Pinout **0.2.1**.
-CC:Tweaked 1.121.0 requires NeoForge 21.1.265; the older loader lanes use the
-separately locked CC:Tweaked 1.120.2. The [beta.3 acceptance record](../release/0.2.8-beta.3/ACCEPTANCE.md)
-identifies the newly frozen dependency set and fresh complete campaign. Earlier
-release records retain their own dependency and execution identities.
+The optional computer profile uses CC:Tweaked **1.120.2** and Pinout **0.2.1**.
+CC:Tweaked 1.121.0 requires NeoForge 21.1.265 and is not selected for 262.
+The [0.2.8 acceptance record](../release/0.2.8/ACCEPTANCE.md) tracks this campaign;
+acceptance is pending. Earlier release records retain their actual dependencies.
 
 CEE 1.1.4 corrected its variac voltage lookup. WWPG recognizes that corrected
 call and the older 1.1.3 call, preserving the correct local voltage and heating
