@@ -15,10 +15,11 @@ class GameTestPackaging(unittest.TestCase):
         methods=0
         for file in (root/'src/gameTest/java').rglob('*.java'):
             methods+=len(re.findall(r'@GameTest\s*(?:\(|\n)',file.read_text(encoding='utf-8')))
-        # Reviewed retained fixture inventory before and after the beta.3 timing
-        # revert. Updating this snapshot requires accounting for added/retired coverage.
-        self.assertEqual(methods,435)
-        self.assertEqual(suites.audit()['namespaces'],72)
+        # Beta.3 retained 435 fixtures in 72 namespaces. MotorRestorationGameTests
+        # adds fan retention and external-drive coverage in one new namespace.
+        # Updating this snapshot requires accounting for added/retired coverage.
+        self.assertEqual(methods,437)
+        self.assertEqual(suites.audit()['namespaces'],73)
 
     def test_player_sources_do_not_link_test_helpers(self):
         for file in (suites.ROOT/'src/main/java').rglob('*.java'):

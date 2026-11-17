@@ -7,14 +7,15 @@ server and clients, following the [installation guide](INSTALL.md).
 | --- | --- | --- |
 | NeoForge | 21.1.231 | 21.1.262; other loaders use separate focused probes |
 | Create | 6.0.10 | Published NeoForge 1.21.1 Create 6.0.10 |
-| CEE | 1.21.1-1.1.3 | 1.1.4 release campaign; 1.1.3 retains focused compatibility coverage |
+| CEE | 1.21.1-1.1.3 | 1.1.4 full acceptance; 1.1.3 retains focused compatibility coverage |
 | Power Grid | 0.6.2 | 0.6.2 for Minecraft 1.21.1 |
 | Architectury | Required by the upstream mods | 13.0.11 NeoForge |
 
 The optional computer profile uses CC:Tweaked **1.120.2** and Pinout **0.2.1**.
 CC:Tweaked 1.121.0 requires NeoForge 21.1.265 and is not selected for 262.
-The [0.2.8 acceptance record](../release/0.2.8/ACCEPTANCE.md) tracks this campaign;
-acceptance is pending. Earlier release records retain their actual dependencies.
+The [0.2.8 acceptance record](../release/0.2.8/ACCEPTANCE.md) records completed
+headless and graphical coverage on this set. Earlier release records retain
+their actual dependencies.
 
 CEE 1.1.4 corrected its variac voltage lookup. WWPG recognizes that corrected
 call and the older 1.1.3 call, preserving the correct local voltage and heating

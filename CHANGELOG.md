@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-## 0.2.8 — release preparation
+## 0.2.8 — 16 November 2026
 
 - Enable retained PG/CEE wire batching, bounded and prioritized saved-wire
   restoration, loading work and geometry reuse. Remove duplicate CEE circuit
@@ -20,9 +20,11 @@
   separate test companion. Full acceptance uses the recommended runtime set;
   other loaders use separate focused probes, and four circuit checks share a process.
 
-API 1.0.0, saves and sixteen electrical substeps remain unchanged. Fresh release
-acceptance on NeoForge 21.1.262, PG 0.6.2 and CEE 1.1.4 is pending. Historical
-beta evidence remains evidence of its original runtime and dependencies.
+API 1.0.0, saves and sixteen electrical substeps remain unchanged. Qualification
+covers 342 headless jobs and 12 graphical scenarios on NeoForge 21.1.262,
+PG 0.6.2 and CEE 1.1.4. One original Windows panel-readiness timeout remains
+unexplained; its unchanged-artifact continuation passed and the failed attempt
+is preserved. Historical beta evidence keeps its original runtime and dependencies.
 
 ## 0.2.8-beta.3 — 13 November 2026 (prerelease)
 

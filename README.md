@@ -2,9 +2,9 @@
 
 **WWPG lets Create: Electro Energetics (CEE) and Power Grid (PG) work together in the same stationary factory.** Either mod can power the other's supported equipment using their native wires, controls and tools.
 
-**[WWPG 0.2.8](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8) (release preparation)** for Minecraft 1.21.1 and NeoForge. Follow [installation](docs/INSTALL.md) for the required mods and settings. The previous stable release remains [0.2.7](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.7). Extension API **1.0.0** is unchanged.
+**[WWPG 0.2.8](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8)** for Minecraft 1.21.1 and NeoForge. Follow [installation](docs/INSTALL.md) for the required mods and settings. Extension API **1.0.0** is unchanged.
 
-0.2.8 enables wire batching, bounded restoration and the retained control improvements by default. No experimental JVM flags are required; keep PG at 16 electrical substeps. The release includes regressions for [twelve circuits](docs/CIRCUIT_LIBRARY.md). Beta.3 removes duplicate CEE restoration scans and restores PG's original generator, rotor and clutch timing, including intended oscillation. Fresh acceptance for the merged motor restoration correction is in progress; no new passing release claim is made yet. See the [acceptance record](release/0.2.8/ACCEPTANCE.md) for the original motor test finding and coverage limits.
+0.2.8 enables wire batching, bounded restoration and the retained control improvements by default. No experimental JVM flags are required; keep PG at 16 electrical substeps. The release includes regressions for [twelve circuits](docs/CIRCUIT_LIBRARY.md). Beta.3 removes duplicate CEE restoration scans and restores PG's original generator, rotor and clutch timing, including intended oscillation. The motor restoration correction preserves attached fans and externally driven shafts. See the [acceptance record](release/0.2.8/ACCEPTANCE.md) for the completed checks and retained uncertainty about the original panel and motor test failures.
 
 ## What you can do
 
@@ -29,7 +29,7 @@ The separate **Extension API Workshop** has eleven stations demonstrating nine n
 
 ## Release status
 
-The release campaign will check mixed factories, saving and reopening worlds, chunk loading, native player tools, exact exported worlds and two real TCP clients. Acceptance is pending. [Current status](docs/STATUS.md) explains what was tested and the remaining limits; [release records](release/README.md) contain the detailed evidence.
+Release qualification covers 342 headless jobs and 12 separate client scenarios: mixed factories, saving and reopening worlds, chunk loading, native player tools, exact exported worlds and two real TCP clients. [Current status](docs/STATUS.md) explains what was tested and the remaining limits; [release records](release/README.md) contain the detailed evidence.
 
 Existing 0.1.0-beta.5 and 0.2.2 prerelease worlds remain compatible. Focused CEE train checks cover actual movement across overhead contacts, meter recovery and dimension-owned state. Other moving contraptions, train dimension travel, train audio, broader mod-version support and large-server testing remain outside that coverage.
 

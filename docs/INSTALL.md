@@ -2,11 +2,11 @@
 
 WWPG lets stationary equipment from **Create: Electro Energetics (CEE)** and **Power Grid (PG)** share power and wires. You can run mixed factories, use either mod's handheld meters, and control equipment with panels and circuit boards.
 
-**WWPG 0.2.8 is being prepared for release** with the retained control improvements enabled by default. Start with the [Stationary Test Yard](STATIONARY_YARD.md) if you want ready-built circuits to try. See [supported content](SUPPORT.md) for what works and [current status](STATUS.md) for limitations.
+**WWPG 0.2.8 is the current stable release** with the retained control improvements enabled by default. Start with the [Stationary Test Yard](STATIONARY_YARD.md) if you want ready-built circuits to try. See [supported content](SUPPORT.md) for what works and [current status](STATUS.md) for limitations.
 
 ## Required versions
 
-The release campaign uses this combination, with the same mod versions on the server and every client. Use Java 21.
+Release acceptance used this combination, with the same mod versions on the server and every client. Use Java 21.
 
 | Dependency | Version |
 | --- | --- |
@@ -22,10 +22,14 @@ Full release acceptance targets NeoForge 21.1.262. Other loader versions use
 separate focused loading checks. CEE 1.1.3 and minimum SDK compile inputs retain
 separate compatibility roles. See [Version compatibility](VERSION_COMPATIBILITY.md).
 
-Use the full Create release jar. [The dependency list](../release/artifacts.json) records the exact downloads and checksums. WWPG does not include these other mods; download and install them separately.
+Use these versions for the bundled worlds even when an inner save text file
+lists older versions. The outer bundle's `START-HERE.md` repeats the current
+requirements; the exact accepted save archives are preserved.
+
+Use the full Create release jar. The [release verification download](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.8/wwpg-0.2.8-verification.zip) records the exact dependency versions and checksums used for this release. WWPG does not include these other mods; download and install them separately.
 
 The release uses the recorded current supported dependency jars. Its complete
-headless and separate graphical acceptance are being run with CEE 1.1.4.
+headless and separate graphical acceptance passed with CEE 1.1.4.
 No experimental JVM flags are needed. Keep PG at **16 electrical substeps** as shown below.
 
 ## Optional computer-control profile
@@ -89,7 +93,7 @@ and other CEE controls alone. Put the tool away to operate those controls normal
 
 ## Upgrading an existing world
 
-Stop the game or server, back up your world, and replace the older WWPG jar on the server and every client. Keep only one WWPG gameplay jar in `mods`. Ordinary play does not need the separate `-gametests.jar` companion from the verification bundle. Use the listed solver settings and matching dependency versions on the server and clients. Existing 0.2.5, 0.2.4, 0.2.3, 0.1.0-beta.5, 0.2.2-beta.4, 0.2.2, 0.2.0, 0.2.1 and 0.2.2-alpha.1 worlds work with 0.2.7; you do not need to download them again.
+Stop the game or server, back up your world, and replace the older WWPG jar on the server and every client. Keep only one WWPG gameplay jar in `mods`. Ordinary play does not need the separate `-gametests.jar` companion from the verification bundle. Use the listed solver settings and matching dependency versions on the server and clients. Existing 0.2.5, 0.2.4, 0.2.3, 0.1.0-beta.5, 0.2.2-beta.4, 0.2.2, 0.2.0, 0.2.1 and 0.2.2-alpha.1 worlds remain compatible with 0.2.8; you do not need to download them again.
 
 An update cannot restore wires or charge that an older version already lost and saved. The original beta.1 example also has an underpowered heater; use the current Stationary Yard or revised small example for a working burner demonstration.
 
@@ -164,7 +168,7 @@ In the pinned CEE 1.1.3 tests, the creative battery's AC mode produces a 20 Hz w
 
 ## Optional CIO and Sable compatibility
 
-WWPG 0.2.7 supports the verified CIO 0.1.240-experimental inverter. Connect its
+WWPG 0.2.8 retains support for the verified CIO 0.1.240-experimental inverter. Connect its
 labelled DC input and AC outputs with the usual tools; its native controls still
 apply. Redundant CIO grid couplers stay physically saved but do not transfer
 power. Replace them with direct wiring when updating a build; see
