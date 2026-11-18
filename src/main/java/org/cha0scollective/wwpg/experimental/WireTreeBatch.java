@@ -6,6 +6,7 @@ import org.cha0scollective.wwpg.WorldWidePowerGrid;
 import org.cha0scollective.wwpg.bridge.RestorationCoordinator;
 import org.patryk3211.powergrid.electricity.WorldNetworks;
 import org.patryk3211.powergrid.electricity.sim.node.OwnedFloatingNode;
+import org.patryk3211.powergrid.electricity.sim.special.TransmissionLine;
 import org.patryk3211.powergrid.electricity.sim.special.TransmissionLinePart;
 import org.patryk3211.powergrid.electricity.wire.*;
 
@@ -33,6 +34,10 @@ public final class WireTreeBatch {
         Map<OwnedFloatingNode, Set<TransmissionLinePart>> wwpg$partNodes();
         boolean wwpg$makeLine(TransmissionLinePart part);
     }
+    public interface Reattachment {
+        void wwpg$reclaimedInterior(TransmissionLine line);
+        TransmissionLine wwpg$takeReclaimedInterior();
+    }
     private static final class State {
         final RestorationQueue<IWireEndpoint, Attachment> queue = new RestorationQueue<>();
         boolean flushing;
@@ -40,6 +45,7 @@ public final class WireTreeBatch {
     private record Attachment(TransmissionLinePart part, BaseWireEntity owner) { }
     public static void reading(BaseWireEntity wire, Runnable original) {
         if (!ENABLED) { original.run(); return; }
+        ((Reattachment) wire).wwpg$takeReclaimedInterior();
         var previous = READING.get();
         READING.set(wire);
         try { original.run(); }
@@ -61,13 +67,48 @@ public final class WireTreeBatch {
                 || !part.getEndpoint1().equals(first) || !part.getEndpoint2().equals(second)) {
             fallback++; return null;
         }
-        // Reuse the saved object and UUID. Its unresolved line remains unavailable
-        // until the existing iterative resolver runs before electrical preparation.
+        var line = part.getLine();
+        var node1 = part.getNode1();
+        var node2 = part.getNode2();
+        double resistance = part.getResistance();
+        boolean liveInterior = onLiveInterior(world, part, line);
+        // The iterative resolver still runs, including for live owner reattachments.
         part.grab(wire, id);
+        if (liveInterior && part.getLine() == line && part.getNode1() == node1 && part.getNode2() == node2
+                && part.getResistance() == resistance && part.owner == wire)
+            ((Reattachment) wire).wwpg$reclaimedInterior(line);
         state = PENDING.computeIfAbsent(world, ignored -> new State());
         state.queue.add(first, second, new Attachment(part, wire));
         attachments++; roots += 2;
         return part;
+    }
+    /** A returning owner for an unchanged interior part adds no chunk-readiness dependency. */
+    public static boolean takeLiveInteriorReattachment(ServerLevel level, BaseWireEntity entity) {
+        if (!ENABLED || !level.getServer().isSameThread() || entity.getClass() != HangingWireEntity.class) return false;
+        var line = ((Reattachment) entity).wwpg$takeReclaimedInterior();
+        return line != null && line.global().world == level
+                && ((HangingWireEntity) entity).getWire() instanceof TransmissionLinePart part
+                && part.owner == entity && onLiveInterior(line.global(), part, line);
+    }
+    private static boolean onLiveInterior(WorldNetworks world, TransmissionLinePart part, TransmissionLine line) {
+        if (line == null || part.getLine() != line || world.transmissionLines.get(line.getId()) != line
+                || world.getPart(part.persistentOwnerId) != part) return false;
+        var network = line.getNetwork();
+        var first = line.getNode1();
+        var second = line.getNode2();
+        if (network == null || first == null || second == null
+                || first.getNetwork() != network || second.getNetwork() != network)
+            return false;
+        return interiorNode(world, line, part, part.getNode1(), part.getEndpoint1())
+                && interiorNode(world, line, part, part.getNode2(), part.getEndpoint2());
+    }
+    private static boolean interiorNode(WorldNetworks world, TransmissionLine line, TransmissionLinePart part,
+                                        OwnedFloatingNode node, IWireEndpoint endpoint) {
+        if (node == null || node == line.getNode1() || node == line.getNode2() || node.getNetwork() != null
+                || world.globalExternalNodes.get(endpoint) != node) return false;
+        var parts = ((Access) world).wwpg$partNodes().get(node);
+        return parts != null && parts.size() == 2 && parts.contains(part)
+                && parts.stream().allMatch(adjacent -> adjacent.getLine() == line);
     }
     /** CEE's tickServer HEAD hook precedes Minecraft's tickCount increment. */
     public static void flushBeforeServerTick(ServerLevel level) { flush(level, level.getServer().getTickCount() + 1); }

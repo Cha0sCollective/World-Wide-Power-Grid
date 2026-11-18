@@ -19,6 +19,7 @@ import org.patryk3211.powergrid.electricity.wire.BaseWireEntity;
 import org.patryk3211.powergrid.electricity.sim.special.SplitTransformerControllerWire;
 import org.cha0scollective.wwpg.mixin.ElectricalNetworkAccessor;
 import org.cha0scollective.wwpg.mixin.WorldNetworksAccessor;
+import org.cha0scollective.wwpg.experimental.WireTreeBatch;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -39,12 +40,17 @@ public final class RestorationCoordinator {
             state(level).incoming.add(event.getChunk().getPos().toLong());
     }
     public static void entityLoaded(EntityJoinLevelEvent event) {
-        if (ENABLED && event.loadedFromDisk() && event.getEntity() instanceof BaseWireEntity wire && event.getLevel() instanceof ServerLevel level) {
-            var state = state(level); long chunk = wire.chunkPosition().toLong();
-            state.incoming.add(chunk);
-            if (wire.getEndpoint1() instanceof BlockWireEndpoint first) state.wireDependencies.add(new Dependency(chunk, new BlockWireEndpoint(first.getPos().immutable(), first.getTerminal())));
-            if (wire.getEndpoint2() instanceof BlockWireEndpoint second) state.wireDependencies.add(new Dependency(chunk, new BlockWireEndpoint(second.getPos().immutable(), second.getTerminal())));
-        }
+        if (!ENABLED || !(event.getEntity() instanceof BaseWireEntity wire) || !(event.getLevel() instanceof ServerLevel level))
+            return;
+        // Consume the evidence on entity join, including NBT loads from a
+        // structure or a command. Only disk loads create readiness dependencies.
+        boolean liveInterior = WireTreeBatch.takeLiveInteriorReattachment(level, wire);
+        if (!event.loadedFromDisk()) return;
+        var state = state(level); long chunk = wire.chunkPosition().toLong();
+        state.incoming.add(chunk);
+        if (liveInterior) return;
+        if (wire.getEndpoint1() instanceof BlockWireEndpoint first) state.wireDependencies.add(new Dependency(chunk, new BlockWireEndpoint(first.getPos().immutable(), first.getTerminal())));
+        if (wire.getEndpoint2() instanceof BlockWireEndpoint second) state.wireDependencies.add(new Dependency(chunk, new BlockWireEndpoint(second.getPos().immutable(), second.getTerminal())));
     }
     public static void unloaded(ChunkEvent.Unload event) {
         if (ENABLED && event.getLevel() instanceof ServerLevel level) state(level).retired.add(event.getChunk().getPos().toLong());
