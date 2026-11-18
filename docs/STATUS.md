@@ -1,10 +1,10 @@
 # Current status
 
-**WWPG 0.2.8 is the current stable release.** It includes beta.3's large-world
-loading correction and restored PG generator timing, plus the merged motor
-restoration fix that preserves attached fans and externally driven shafts.
-Qualification covers 342 headless jobs and 12 separate graphical scenarios
-on the recommended dependencies.
+**WWPG 0.2.9 is the current stable release.** Train gauges recover when readings
+return, and overhead spans using only passive CEE holders stay active during
+approach loading. Stock CEE alternators can continue supplying power from their
+last saved drive state while unloaded. Qualification covers 342 headless jobs and
+12 separate graphical scenarios on the recommended dependencies.
 Extension API **1.0.0** is unchanged. Use the [selected dependency set](INSTALL.md).
 
 ## What works
@@ -47,12 +47,10 @@ checked 137 unit tests on each operating system and built the three extracted
 SDK projects independently. All 12 real Windows client scenarios passed,
 including integrated worlds, two-client TCP synchronization and clean shutdown.
 
-One original Windows Native/BASE sparse-panel test timed out waiting for an
-available reading. It could not be reproduced in focused diagnostics, the
-original selection or the original coordinates. A fresh continuation passed
-with the same runtime, assertions and deadlines. Its cause is not established;
-the original failed process remains in the evidence. See the
-[0.2.8 acceptance record](../release/0.2.8/ACCEPTANCE.md).
+The [0.2.9 acceptance record](../release/0.2.9/ACCEPTANCE.md) records the
+frozen source, tested artifacts and exact world exports. The
+[0.2.8 acceptance record](../release/0.2.8/ACCEPTANCE.md) retains its historical
+Windows Native/BASE sparse-panel timeout and passing continuation.
 
 ## Historical beta.3 checks
 
@@ -76,6 +74,11 @@ upstream confirmation that the observed oscillation is intended. A self-excited
 generator can therefore hunt under the same conditions as stock PG. WWPG keeps
 16 electrical substeps and the independent restoration and failure safeguards.
 Transformer, variac and carbon-pile controls retain focused comparison coverage.
+
+Two-terminal and three-phase CEE alternators use CEE's saved drive state while
+unloaded. The live drive is sampled again when it reloads. If the drive was
+stopped while loaded, the recorded stopped state carries through a later unload.
+Circuits still report unavailable while their electrical restoration is pending.
 
 The PG multimeter can read assembled medium-transformer terminals through their
 loaded controller. Invalidated or unavailable samples remain unavailable until

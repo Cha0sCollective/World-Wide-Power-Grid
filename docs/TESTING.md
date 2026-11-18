@@ -22,7 +22,7 @@ lanes, and the publisher validates it without launching tests.
 
 Freeze the **current recommended runtime set** rather than adding each new
 loader to full acceptance. The recommendation is **NeoForge 21.1.262, PG 0.6.2
-and CEE 1.1.4**, with Create 6.0.10 and Architectury 13.0.11. PINOUT uses
+and CEE 1.1.4**, with Create 6.0.10 and Architectury 13.0.12 for 0.2.9. PINOUT uses
 CC:Tweaked 1.120.2: 1.121.0 requires NeoForge 21.1.265 or newer. Minimum SDK
 compile dependencies remain separate; the CEE 1.1.3 compile input does not
 change the locked CEE 1.1.4 gameplay dependency. Record actual loaded versions

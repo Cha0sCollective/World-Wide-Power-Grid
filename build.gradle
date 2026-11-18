@@ -138,7 +138,7 @@ dependencies {
     // PG 0.6.2 omitted native v7. Its NativeMNA interface is byte-identical to 0.6.1.
     pgNativeReference('curse.maven:power-grid-1321420:8738576') { transitive = false }
     compileOnly 'dev.architectury:architectury-neoforge:13.0.8'
-    runtimeOnly('maven.modrinth:architectury-api:1IiqEQGl') { transitive = false }
+    runtimeOnly(releaseArtifacts.artifacts.find { it.role == 'architectury' }.coordinate) { transitive = false }
     // PG supplies EJML at runtime. Compatibility hooks use its existing matrix types.
     compileOnly 'org.ejml:ejml-core:0.44.0'
     // Optional Sable integration uses its read-only API; Sable supplies it at runtime.

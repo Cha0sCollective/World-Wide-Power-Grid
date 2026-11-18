@@ -8,13 +8,13 @@ need programming knowledge to operate the examples.
 The extension API is the interface developers use to add these devices. For the
 ordinary CEE and Power Grid equipment, use the [Stationary Test Yard](STATIONARY_YARD.md).
 
-Download and extract the [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.8/wwpg-0.2.8-example-worlds.zip). Its `worlds` folder contains `wwpg-0.2.8-api-workshop.zip` and the Pinout installation edition.
+Download and extract the [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.9/wwpg-0.2.8-example-worlds.zip). Its `worlds` folder contains `wwpg-0.2.8-api-workshop.zip` and the Pinout installation edition.
 
 ## Install and enter
 
 Follow the [installation guide](INSTALL.md) for Minecraft 1.21.1, NeoForge
 21.1.262, Java 21, published Create 6.0.10, CEE 1.1.4, Power Grid 0.6.2,
-Architectury 13.0.11 and WWPG 0.2.8. Also put both example mod jars in `mods`
+Architectury 13.0.12 and WWPG 0.2.8. Also put both example mod jars in `mods`
 from the bundle's `workshop-mods` folder on the server and every client:
 
 - `wwpg-api-example-1.0.0.jar`, the new machines.
@@ -101,7 +101,7 @@ Construction debris was removed before export.
 Players can stop here. The following commands reproduce the downloadable world
 and its checks. Start with the [development guide](DEVELOPMENT.md) for the overall
 test process and the [API guide](EXTENSION_API.md) to build the examples. The
-[0.2.8 acceptance record](../release/0.2.8/ACCEPTANCE.md) records checks on
+[0.2.9 acceptance record](../release/0.2.9/ACCEPTANCE.md) records checks on
 the exact world ZIPs and example jars.
 
 The packaged `wwpg_api_world` fixture uses registry IDs and public contracts,

@@ -1,6 +1,6 @@
 # Mixed benchmark yard: 14,650 electrical nodes
 
-The 0.2.8 example-worlds bundle includes `wwpg-0.2.8-benchmark-14650-nodes.zip`.
+The 0.2.9 example-worlds bundle includes `wwpg-0.2.8-benchmark-14650-nodes.zip`.
 This retains the original save. Beta.3 includes a separate focused Native/16
 capacity run; results and limits are recorded in its [acceptance summary](../release/0.2.8-beta.3/ACCEPTANCE.md). It is separate from the guided
 [Stationary Test Yard](STATIONARY_YARD.md) and [API Workshop](EXTENSION_API_WORKSHOP.md).

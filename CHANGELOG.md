@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+## 0.2.9 — 18 November 2026
+
+- Recover CEE train gauge needles when valid voltage and current return. The
+  needles stay hidden while readings are unavailable, and valid zero still displays.
+- Keep saved CEE overhead spans working when passive catenary holders load.
+  Mixed holders and native wire dependencies still wait for restoration.
+- Restore stock two-terminal and three-phase CEE alternator behavior in unloaded
+  chunks. The alternators use CEE's saved drive state and resume normal electrical
+  updates after reload.
+- Qualify the release on NeoForge 21.1.262 with CEE 1.1.4, PG 0.6.2, Create 6.0.10
+  and Architectury 13.0.12. The extension API stays at 1.0.0.
+
 ## 0.2.8 — 16 November 2026
 
 - Enable retained PG/CEE wire batching, bounded and prioritized saved-wire
