@@ -17,13 +17,16 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import org.patryk3211.powergrid.collections.ModdedBlocks;
 import org.patryk3211.powergrid.electricity.resistor.ResistorBlockEntity;
 import org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint;
+import java.util.function.BiConsumer;
 
 @GameTestHolder("wwpg")
 @PrefixGameTestTemplate(false)
@@ -104,12 +107,20 @@ public final class GenerationGameTests {
     }
 
     static void assemble(GameTestHelper h, boolean threePhase) {
-        for (var pos : new BlockPos[] {BRUSH, ROTOR, DRIVE}) h.setBlock(pos.below(), Blocks.STONE);
-        h.setBlock(BRUSH, (threePhase ? CEEBlocks.THREE_PHASE_ALTERNATOR_BRUSHES.getDefaultState() : CEEBlocks.ALTERNATOR_BRUSHES.getDefaultState())
+        assemble(h::setBlock, BRUSH, threePhase);
+    }
+    static void assemble(ServerLevel level, BlockPos brush, boolean threePhase) {
+        assemble(level::setBlockAndUpdate, brush, threePhase);
+    }
+    private static void assemble(BiConsumer<BlockPos, BlockState> setBlock, BlockPos brush, boolean threePhase) {
+        var rotor = brush.east();
+        var drive = rotor.east();
+        for (var pos : new BlockPos[] {brush, rotor, drive}) setBlock.accept(pos.below(), Blocks.STONE.defaultBlockState());
+        setBlock.accept(brush, (threePhase ? CEEBlocks.THREE_PHASE_ALTERNATOR_BRUSHES.getDefaultState() : CEEBlocks.ALTERNATOR_BRUSHES.getDefaultState())
                 .setValue(AlternatorBrushesBlock.FACING, Direction.WEST));
-        h.setBlock(ROTOR, CEEBlocks.ALTERNATOR_ROTOR.getDefaultState().setValue(AlternatorRotorBlock.AXIS, Direction.Axis.X));
-        h.setBlock(ROTOR.above(), CEEBlocks.STATOR.getDefaultState().setValue(StatorBlock.FACING, Direction.DOWN).setValue(StatorBlock.ROLL, true));
-        h.setBlock(DRIVE, AllBlocks.CREATIVE_MOTOR.getDefaultState().setValue(BlockStateProperties.FACING, Direction.WEST));
+        setBlock.accept(rotor, CEEBlocks.ALTERNATOR_ROTOR.getDefaultState().setValue(AlternatorRotorBlock.AXIS, Direction.Axis.X));
+        setBlock.accept(rotor.above(), CEEBlocks.STATOR.getDefaultState().setValue(StatorBlock.FACING, Direction.DOWN).setValue(StatorBlock.ROLL, true));
+        setBlock.accept(drive, AllBlocks.CREATIVE_MOTOR.getDefaultState().setValue(BlockStateProperties.FACING, Direction.WEST));
     }
     static void speed(GameTestHelper h, int rpm) {
         var drive = (SmartBlockEntity) h.getBlockEntity(DRIVE);
