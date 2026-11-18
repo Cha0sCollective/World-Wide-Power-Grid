@@ -1,6 +1,11 @@
 package org.cha0scollective.wwpg.bridge;
 
+import com.george_vi.electroenergetics.CEEBlocks;
+import com.george_vi.electroenergetics.foundation.nodes.InWorldNode;
+import com.george_vi.electroenergetics.simulation.infrastructure.CatenaryConnectionData;
+import com.george_vi.electroenergetics.simulation.infrastructure.InfrastructureSavedData;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.SectionPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
 import net.neoforged.neoforge.event.level.ChunkEvent;
@@ -90,11 +95,32 @@ public final class RestorationCoordinator {
             BlockPos position = owned.endpoint instanceof BlockWireEndpoint endpoint ? endpoint.getPos() : state.owners.get(owned);
             if (position == null) continue;
             if (positions != null) positions.add(position);
-            var record = state.chunks.get(ChunkPos.asLong(position)); if (record != null) records.add(record);
+            var record = state.chunks.get(ChunkPos.asLong(position));
+            if (record != null && !savedCatenaryJunction(level, world, owned)) records.add(record);
             records.addAll(state.dependencies.getOrDefault(position, Set.of()));
         }
         state.claimed.addAll(records);
         return List.copyOf(records);
+    }
+
+    /** CEE's saved overhead spans already exist electrically before their passive holders load. */
+    private static boolean savedCatenaryJunction(ServerLevel level, WorldNetworks world, OwnedFloatingNode node) {
+        if (!(node.endpoint instanceof BlockWireEndpoint endpoint) || endpoint.getClass() != BlockWireEndpoint.class
+                || endpoint.getTerminal() != 0 || world.globalExternalNodes.get(endpoint) != node) return false;
+        var pos = endpoint.getPos();
+        var chunk = level.getChunkSource().getChunkNow(pos.getX() >> 4, pos.getZ() >> 4);
+        if (chunk == null || !chunk.getBlockState(pos).is(CEEBlocks.CATENARY_HOLDER.get())) return false;
+
+        var infrastructure = InfrastructureSavedData.load(level);
+        var junction = new InWorldNode(0, pos);
+        var ordinary = infrastructure.getNodeData(junction);
+        if (ordinary != null && !ordinary.adjacency.isEmpty()) return false;
+        var pgParts = ((WorldNetworksAccessor) world).wwpg$partNodeMap().get(node);
+        if (pgParts != null && !pgParts.isEmpty()) return false;
+
+        return infrastructure.wireSimulationState.getConnectionsInSection(SectionPos.of(pos).asLong())
+                .entrySet().stream().anyMatch(entry -> entry.getValue().wireData instanceof CatenaryConnectionData
+                        && (entry.getKey().node1().equals(junction) || entry.getKey().node2().equals(junction)));
     }
     /** Coupled circuits share their earliest deadline before any native preparation is deferred. */
     public static void joinCoupledWindows(List<WorldNetworks> worlds) {

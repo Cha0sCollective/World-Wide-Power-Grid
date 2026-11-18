@@ -2,6 +2,7 @@ package org.cha0scollective.wwpg.gametest;
 
 import com.george_vi.electroenergetics.CEEBlocks;
 import com.george_vi.electroenergetics.CEEItems;
+import com.george_vi.electroenergetics.content.gauge.ElectricGaugeMovementBehaviour;
 import com.george_vi.electroenergetics.content.railway_electrification.ElectricTrainData;
 import com.george_vi.electroenergetics.content.railway_electrification.pantograph.PantographBlock;
 import com.george_vi.electroenergetics.foundation.nodes.*;
@@ -10,6 +11,7 @@ import com.george_vi.electroenergetics.simulation.SimulationResults;
 import com.george_vi.electroenergetics.simulation.infrastructure.*;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.Create;
+import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import com.simibubi.create.content.contraptions.glue.SuperGlueEntity;
 import com.simibubi.create.content.trains.bogey.AbstractBogeyBlock;
 import com.simibubi.create.content.trains.entity.*;
@@ -25,7 +27,9 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate.StructureBlockInfo;
 import net.minecraft.world.phys.*;
+import net.minecraft.world.level.ChunkPos;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.gametest.*;
 import org.patryk3211.powergrid.collections.ModdedBlocks;
@@ -33,6 +37,9 @@ import org.patryk3211.powergrid.collections.ModdedItems;
 import org.patryk3211.powergrid.electricity.creative.CreativeSourceBlockEntity;
 import org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint;
 import org.patryk3211.powergrid.equipment.multimeter.MultimeterItem;
+import org.cha0scollective.wwpg.api.MeasurementStatus;
+import org.cha0scollective.wwpg.api.neoforge.ElectricalMeasurements;
+import org.cha0scollective.wwpg.bridge.RestorationCoordinator;
 import java.util.*;
 
 /** Actual carriage, catenary cuts, transformer, probe input and foreign result commits. */
@@ -57,6 +64,9 @@ public final class TrainCircuitGameTests {
                 if(!Double.isFinite(f.voltage)||f.voltage<1900)f.failure="Accepted power lost during continuous handover";
                 if(p.node!=f.firstContact)f.failure="Handover replaced the native contact identity";
             }
+            if (tick > 270 && tick <= 275 && !Double.isFinite(f.voltage)
+                    && ElectricalMeasurements.readVoltageBetween(f.h.getLevel(), f.h.absolutePos(f.core.east()), 0,
+                        f.h.absolutePos(f.core.east()), 1).status() == MeasurementStatus.NOT_READY) f.mixedHoldObserved=true;
         } else if(Double.compare(f.voltage,f.data().lastVoltage)!=0||Double.compare(f.current,f.data().displayCurrent)!=0)
             f.failure="Foreign dimension overwrote train readings";
     }
@@ -66,11 +76,16 @@ public final class TrainCircuitGameTests {
         h.runAtTickTime(20,f::assemble);h.runAtTickTime(30,f::powerAndOverhead);h.runAtTickTime(35,f::neighboringContacts);
         h.onEachTick(()->{
             if(f.train==null)return;
-            if(h.getTick()>=55){f.train.burnFuel();f.train.manualTick=true;f.train.targetSpeed=.1;f.train.approachTargetSpeed(1);}
+            if(h.getTick()>=55&&h.getTick()<=260){f.train.burnFuel();f.train.manualTick=true;f.train.targetSpeed=.1;f.train.approachTargetSpeed(1);}
             if(f.failure!=null){f.cleanup();h.fail(f.failure);}
             if(h.getTick()>=55&&h.getTick()<150||h.getTick()>=198&&h.getTick()<=260)f.meter(true);
         });
         h.runAtTickTime(90,f::foreignResults);
+        h.runAtTickTime(100,()->{
+            var far = new ChunkPos(h.absolutePos(f.last));
+            h.assertTrue(!far.equals(new ChunkPos(h.absolutePos(f.middle))), "Passive holder must be in a separate chunk");
+            RestorationCoordinator.restoring(h.getLevel(), far);
+        });
         h.runAtTickTime(150,()->{
             h.assertTrue(f.position().distanceTo(f.start)>3&&f.train.fuelTicks>1,"Train did not receive native powered traction");
             h.assertTrue(f.spans.size()>=2,"Native pantograph did not cross both overhead spans: "+f.spans.size()+" start="+f.start+" position="+f.position()+" join="+f.middle);
@@ -85,7 +100,22 @@ public final class TrainCircuitGameTests {
             h.assertTrue(f.failure==null,f.failure==null?"":f.failure);
             h.assertTrue(f.voltage>1900&&f.current>1&&f.train.fuelTicks>1,"Train failed to recover from unavailable initialization");
             h.assertTrue(f.data().accumulators==0&&f.data().accumulatorCharge==0&&!f.data().hasCreativeSource,"Onboard fallback contaminated test");
-            f.foreignResults();DynamicGameTests.audit(h);f.cleanup();h.succeed();
+            f.gaugeRecovery();f.foreignResults();
+            f.train.targetSpeed=0;
+            f.train.approachTargetSpeed(1);
+            var stub = f.last.south(20);
+            h.setBlock(stub.below(),Blocks.STONE);
+            h.setBlock(stub,CEEBlocks.CONNECTOR.get());
+            f.wire(f.last,0,stub,0);
+        });
+        h.runAtTickTime(270,()->{
+            h.assertTrue(f.voltage>1900,"Mixed holder was not powered before restoration");
+            RestorationCoordinator.restoring(h.getLevel(),new ChunkPos(h.absolutePos(f.last)));
+        });
+        h.runAtTickTime(286,()->{
+            h.assertTrue(f.mixedHoldObserved,"Holder with an ordinary wire skipped the restoration hold");
+            h.assertTrue(f.voltage>1900,"Mixed holder failed to recover after restoration");
+            DynamicGameTests.audit(h);f.cleanup();h.succeed();
         });
     }
 
@@ -99,6 +129,7 @@ public final class TrainCircuitGameTests {
         net.minecraft.world.entity.player.Player player;
         Train train;Carriage carriage;TrackGraph graph;Vec3 start;AttachedNode firstContact;
         BlockPos first,middle,last;double voltage,current;String failure;
+        boolean mixedHoldObserved;
         Fixture(GameTestHelper h){this.h=h;}
         void build(){
             h.setBlock(source.below(),Blocks.STONE);h.setBlock(source,ModdedBlocks.CREATIVE_VOLTAGE_SOURCE.get());
@@ -164,6 +195,57 @@ public final class TrainCircuitGameTests {
             d.accumulators=0;d.accumulatorCharge=0;
         }
         void meter(boolean powered){probe.inventoryTick(stack,h.getLevel(),player,0,true);float value=probe.getMeasurement(h.getLevel(),stack);h.assertTrue(Float.isFinite(value)&&(!powered||Math.abs(value)>1900),"Multimeter lost an accepted transformer reading: "+value+" tick="+h.getTick()+" trainV="+voltage+" spans="+spans.size()+" "+org.cha0scollective.wwpg.api.neoforge.ElectricalMeasurements.readVoltageBetween(h.getLevel(),h.absolutePos(core.east()),0,h.absolutePos(core.east()),1));}
+        void gaugeRecovery() {
+            var readings = data();
+            double acceptedVoltage = readings.lastVoltage;
+            double acceptedCurrent = readings.displayCurrent;
+            try {
+                for (boolean voltmeter : new boolean[]{true, false}) {
+                    var block = voltmeter ? CEEBlocks.VOLTMETER : CEEBlocks.AMMETER;
+                    var info = new StructureBlockInfo(BlockPos.ZERO, block.getDefaultState(), new CompoundTag());
+                    var context = new MovementContext(h.getLevel(), info, carriage.anyAvailableEntity().getContraption());
+                    var gauge = new ElectricGaugeMovementBehaviour(voltmeter);
+                    gauge.tick(context);
+                    float powered = context.data.getFloat("DialTarget");
+                    h.assertTrue(Float.isFinite(powered) && powered > 0, "Powered train had no gauge deflection");
+
+                    if (voltmeter) readings.lastVoltage = Double.NaN;
+                    else readings.displayCurrent = Double.NaN;
+                    gauge.tick(context);
+                    gauge.tick(context);
+                    h.assertTrue(Float.isNaN(context.data.getFloat("DialTarget"))
+                            && Float.isFinite(context.data.getFloat("DialState"))
+                            && Double.isNaN(voltmeter ? readings.lastVoltage : readings.displayCurrent),
+                        "Unavailable train measurement was replaced or corrupted the dial state");
+
+                    readings.lastVoltage = acceptedVoltage;
+                    readings.displayCurrent = acceptedCurrent;
+                    gauge.tick(context);
+                    h.assertTrue(context.data.getFloat("DialState") == powered
+                            && context.data.getFloat("PrevDialState") == powered,
+                        "Train needle did not recover from an unavailable measurement");
+
+                    context.data.putFloat("DialState", Float.NaN);
+                    gauge.tick(context);
+                    h.assertTrue(context.data.getFloat("DialState") == powered
+                            && context.data.getFloat("PrevDialState") == powered,
+                        "A previously invalid dial did not recover");
+
+                    if (voltmeter) readings.lastVoltage = 0;
+                    else readings.displayCurrent = 0;
+                    gauge.tick(context);
+                    h.assertTrue(context.data.getFloat("DialTarget") == 0
+                            && context.data.getFloat("DialState") > 0
+                            && context.data.getFloat("DialState") < powered,
+                        "A valid zero reading did not retain normal needle smoothing");
+                    readings.lastVoltage = acceptedVoltage;
+                    readings.displayCurrent = acceptedCurrent;
+                }
+            } finally {
+                readings.lastVoltage = acceptedVoltage;
+                readings.displayCurrent = acceptedCurrent;
+            }
+        }
         void place(BlockPos support,ItemStack item){if(h.getBlockState(support).isAir())h.setBlock(support,Blocks.STONE);var p=h.makeMockPlayer(GameType.CREATIVE);p.setItemInHand(InteractionHand.MAIN_HAND,item);var abs=h.absolutePos(support);h.assertTrue(item.getItem().useOn(new UseOnContext(p,InteractionHand.MAIN_HAND,new BlockHitResult(abs.getCenter().add(0,.5,0),Direction.UP,abs,false))).consumesAction(),"Native pole/holder placement failed");}
         void scroll(BlockPos p,int value){var setting=((com.simibubi.create.foundation.blockEntity.SmartBlockEntity)h.getBlockEntity(p)).getBehaviour(com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour.TYPE);setting.setValue(value);h.assertTrue(setting.getValue()==value,"Native transformer ratio clamped");}
         void wire(BlockPos a,int ai,BlockPos b,int bi){WiringGameTests.connect(h,h.absolutePos(a),ai,h.absolutePos(b),bi,false);}
