@@ -1,6 +1,8 @@
 package org.cha0scollective.wwpg.bridge;
 
 import com.george_vi.electroenergetics.CEESimulatedDeviceFeatureTypes;
+import com.george_vi.electroenergetics.content.rotor.AlternatorBrushesDevice;
+import com.george_vi.electroenergetics.content.rotor.ThreePhaseAlternatorBrushesDevice;
 import com.george_vi.electroenergetics.content.transmission_distribution.transformer.TransformerElectricalProperties;
 import com.george_vi.electroenergetics.devices.device.DevicesSavedData;
 import com.george_vi.electroenergetics.devices.device.SimulatedDevice;
@@ -126,10 +128,6 @@ public final class WorldBridge {
         substeps = ModdedConfigs.server().electricity.solver.multiTicks.get();
         ticker.microTicks = substeps;
         builder = infrastructure.wireSimulationState.createCircuitBuilder();
-        // Native PG endpoints/wire entities do not exist until their chunk has
-        // loaded and its block entities are ticking. Entity IO can remain ready
-        // after a chunk loses its ticking ticket, while PG has already detached
-        // its electrical model. Do not commit that temporary disconnected graph.
         disabledCouplers.clear();
         devices = DevicesSavedData.load(level).getDevices(CEESimulatedDeviceFeatureTypes.TICKING_ELECTRICAL.get()).stream()
                 .filter(device -> {
@@ -137,7 +135,12 @@ public final class WorldBridge {
                     disabledCouplers.add(device.pos.immutable());
                     return false;
                 })
-                .filter(device -> level.getChunkSource().getChunkNow(device.pos.getX() >> 4, device.pos.getZ() >> 4) != null
+                // Stock CEE alternators generate from their saved device state.
+                // Their endpoints still participate in normal restoration holds.
+                // Other devices can depend on PG endpoints already detached
+                // when entity IO still reports ready.
+                .filter(device -> isSavedAlternator(device)
+                        || level.getChunkSource().getChunkNow(device.pos.getX() >> 4, device.pos.getZ() >> 4) != null
                         && level.getChunkSource().isPositionTicking(net.minecraft.world.level.ChunkPos.asLong(device.pos))
                         && level.areEntitiesLoaded(net.minecraft.world.level.ChunkPos.asLong(device.pos)))
                 .toList();
@@ -217,6 +220,11 @@ public final class WorldBridge {
         completedInStep = 0;
         ++preparedTicks;
         phase = Phase.READY;
+    }
+
+    private static boolean isSavedAlternator(SimulatedDevice device) {
+        return device.getClass() == AlternatorBrushesDevice.class
+                || device.getClass() == ThreePhaseAlternatorBrushesDevice.class;
     }
 
     /** Existing endpoint identities only; used when a coupled world is restoring. */
@@ -791,7 +799,9 @@ public final class WorldBridge {
             } else if (org.cha0scollective.wwpg.experimental.WireTreeBatch.holding(level)) {
                 for (var device : devices) pausedDevices.add(device.pos);
             }
-            for (var device : devices) if (device instanceof com.george_vi.electroenergetics.content.converter.ConverterDevice) statefulDevices.add(device.pos);
+            for (var device : devices)
+                if (isSavedAlternator(device) || device instanceof com.george_vi.electroenergetics.content.converter.ConverterDevice)
+                    statefulDevices.add(device.pos);
             for (var dynamic : dynamics) for (int ordinal : new int[]{dynamic.first, dynamic.second}) {
                 var owner = ownerOf(preparedKeys.get(builder.getNode(ordinal).node)); if (owner != null) statefulDevices.add(owner);
             }
