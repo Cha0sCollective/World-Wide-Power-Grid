@@ -17,8 +17,9 @@ class GameTestPackaging(unittest.TestCase):
             methods+=len(re.findall(r'@GameTest\s*(?:\(|\n)',file.read_text(encoding='utf-8')))
         # Beta.3 retained 435 fixtures in 72 namespaces. MotorRestorationGameTests
         # adds fan retention and external-drive coverage in one new namespace.
+        # AlternatorUnloadGameTests adds two fixtures in the existing unload namespace.
         # Updating this snapshot requires accounting for added/retired coverage.
-        self.assertEqual(methods,437)
+        self.assertEqual(methods,439)
         self.assertEqual(suites.audit()['namespaces'],73)
 
     def test_player_sources_do_not_link_test_helpers(self):
