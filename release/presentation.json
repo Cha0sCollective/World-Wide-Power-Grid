@@ -1,13 +1,13 @@
 {
   "schema": 1,
   "repository": "Cha0sCollective/World-Wide-Power-Grid",
-  "summary": "0.2.8 combines faster wire processing and restoration with circuit safety corrections and reliable motor reconnection.",
+  "summary": "0.2.9 improves CEE train gauge recovery, overhead chunk loading, and alternator output while unloaded.",
   "changes": [
-    "Batch wire work and remove repeated CEE restoration scans; preserve stored state, unavailable readings and native allocation safeguards.",
-    "Restore PG's original rotor and clutch timing, including intended self-excitation oscillation under overload.",
-    "Keep attached fans intact during motor restoration and power loss, including externally driven shafts. API 1.0.0 and saves remain compatible."
+    "Train voltage and current needles recover when readings return. They stay hidden while readings are unavailable.",
+    "Saved overhead spans stay active as passive holders load. Mixed circuits still wait for their real dependencies.",
+    "Two-terminal and three-phase CEE alternators keep supplying power from saved drive state while unloaded."
   ],
-  "installation": "Use Minecraft 1.21.1, NeoForge 21.1.262, Java 21, Create 6.0.10, CEE 1.1.4, Power Grid 0.6.2 and Architectury 13.0.11. Set PG multiTicks to 16. Match server and client mod versions.",
-  "optional_installation": "Use the current 0.2.8 dependency set for these saves: NeoForge 21.1.262, Power Grid 0.6.2, CEE 1.1.4 and Create 6.0.10. Some inner save text files still list older versions. The combined Pinout Stationary Yard also requires CC:Tweaked 1.120.2 and Pinout 0.2.1. Fuse and rotary-selector circuit examples require Power Components 1.3.0.",
-  "documentation_ref": "main"
+  "installation": "Use Minecraft 1.21.1, NeoForge 21.1.262, Java 21, Create 6.0.10, CEE 1.1.4, Power Grid 0.6.2 and Architectury 13.0.12. Set PG multiTicks to 16. Match server and client mod versions.",
+  "optional_installation": "Use the 0.2.9 dependency set in the installation guide. Some inner save instructions list earlier dependency versions. The combined Stationary Yard requires CC:Tweaked 1.120.2 and Pinout 0.2.1. Fuse and rotary-selector circuit examples require Power Components 1.3.0.",
+  "documentation_ref": "0.2.9"
 }

@@ -4,12 +4,21 @@ Maintainers: follow [Publishing a release](../docs/RELEASING.md) for the standar
 five-download layout and short notes. Edit [presentation.json](presentation.json)
 for the next release; version-specific records below preserve published history.
 
-**[WWPG 0.2.8](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8)**
+**[WWPG 0.2.9](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.9)**
 is the current stable release. To install it or choose a playable world, use the
 [installation guide](../docs/INSTALL.md). This directory is for reviewing what
 was shipped and which checks passed.
 
-## Current stable: 0.2.8
+## Current stable: 0.2.9
+
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.9)
+· [Acceptance](0.2.9/ACCEPTANCE.md).
+
+Recovers CEE train gauges and avoids false restoration holds on saved overhead
+spans. CEE alternators retain stock power behavior in unloaded chunks. The
+release reuses 342 passing headless jobs and 12 passing client scenarios.
+
+## Historical stable: 0.2.8
 
 [Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8)
 · [Acceptance and remaining limits](0.2.8/ACCEPTANCE.md).
