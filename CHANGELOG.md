@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Reduce brief slowdowns on CEE trains when unchanged Power Grid wire
+  segments reload onto a live line. Readings still become unavailable
+  when the circuit has to wait for restoration.
+
 ## 0.2.9 — 18 November 2026
 
 - Recover CEE train gauge needles when valid voltage and current return. The
