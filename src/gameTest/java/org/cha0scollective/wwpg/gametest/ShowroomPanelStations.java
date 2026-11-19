@@ -95,7 +95,8 @@ final class ShowroomPanelStations {
                 var type=i==7?CeeTestAttachments.type("ANALOG_LEVER"):CeeTestAttachments.type("STEERING_WHEEL");
                 var a=insert(h,s.panel(),type,i==7?ElectricalPanelSlot.THIRD_LEFT:ElectricalPanelSlot.QUARTER_CENTER,s.name);
                 var link=(ElectricalPanelLink)a;var second=i==7?Items.IRON_INGOT:Items.GOLD_INGOT;
-                link.getLinkFrequencies()[0]=new ItemStack(Items.REDSTONE);link.getLinkFrequencies()[1]=new ItemStack(second);
+                int channel=CeeTestAttachments.positiveChannel(a)*2;
+                link.getLinkFrequencies()[channel]=new ItemStack(Items.REDSTONE);link.getLinkFrequencies()[channel+1]=new ItemStack(second);
                 var receiver=(RedstoneLinkBlockEntity)h.getLevel().getBlockEntity(s.lamp().above());
                 var behaviour=receiver.getBehaviour(LinkBehaviour.TYPE);
                 behaviour.setFrequency(true,new ItemStack(Items.REDSTONE));behaviour.setFrequency(false,new ItemStack(second));
