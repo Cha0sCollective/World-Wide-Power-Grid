@@ -97,6 +97,10 @@ def validate_job(actual, expected, inputs, base):
         require(proof.get('upstream')==(expected.get('reference')=='upstream'),'Reference mode differs')
         marker='CEE_REFERENCE_RESIDUAL threshold=1.0E-16'
         require((marker in text)==(expected.get('reference')=='upstream'),'Actual reference precision control differs')
+        audits=[json.loads(line.split('WWPG_RUNTIME_INPUTS_VERIFIED: ',1)[1]) for line in text.splitlines()
+                if 'WWPG_RUNTIME_INPUTS_VERIFIED: ' in line]
+        require(bool(audits) and all(a.get('electroenergetics',{}).get('sha256')==control['cee_sha256'] for a in audits),
+                'Actual loaded reference CEE hash missing/different')
     require(proof.get('completed') and proof.get('required_tests_passed', 0) > 0, 'Process did not complete its tests')
     require('GAME TESTS COMPLETE' in text and re.search(r'All [1-9][0-9]* required tests passed', text), 'Missing actual completed GameTest log')
     require('All dimensions are saved' in text, 'World did not finish saving')

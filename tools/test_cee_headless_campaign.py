@@ -1,5 +1,6 @@
 """Campaign selection and identity checks; starts no Gradle or Minecraft."""
 import copy
+import json
 import tempfile
 from pathlib import Path
 import unittest
@@ -18,6 +19,7 @@ class CeeCampaignChecks(unittest.TestCase):
             base=dict(id='test-reference',lane='headless',operation='reference',reference='upstream',
                       backend='NATIVE',profile='BASE',platform='windows-latest',loader='21.1.262',reference_control=control)
             log='GAME TESTS COMPLETE\nAll 1 required tests passed\nAll dimensions are saved\nWWPG_TEST_BACKEND_CONFIG: requested=NATIVE, configured=NATIVE\n'
+            log+='WWPG_RUNTIME_INPUTS_VERIFIED: '+json.dumps({'electroenergetics':{'sha256':campaign.CEE_SHA256}})+'\n'
             for number,case in enumerate(('valid','missing-marker','missing-argument','wrong-cee','wrong-mode','compatibility')):
                 with self.subTest(case=case):
                     job=copy.deepcopy(base)
@@ -25,7 +27,7 @@ class CeeCampaignChecks(unittest.TestCase):
                     text=log+('CEE_REFERENCE_RESIDUAL threshold=1.0E-16\n' if case not in ('missing-marker','compatibility') else '')
                     log_path=root/(str(number)+'.log');log_path.write_text(text)
                     proof_path=root/(str(number)+'.json')
-                    suites.write(proof_path,dict(completed=True,required_tests_passed=1,backend='NATIVE',profile='BASE',
+                    suites.write(proof_path,dict(completed=True,required_tests_passed=1,backend='NATIVE',profile='BASE',neoforge='21.1.262',
                         upstream=case not in ('wrong-mode','compatibility'),sha256='runtime' if case=='compatibility' else 'reference'))
                     actual=dict(job,status='passed',exit_code=0,log=suites.descriptor(log_path),proof=suites.descriptor(proof_path),
                                 command=[] if case=='missing-argument' else ['-PtestTightCeeResidual=true'])
