@@ -1,16 +1,48 @@
 # CEE 1.2 development readiness
 
 The preparation branch `dev/cee-120-readiness` now integrates WWPG **0.2.10**,
-main commit `5072e412639db71d346ff54c2b133f54f0b13934`. The local candidate is
-`0.2.10-dev.cee120.1`. This is a development preparation, not a published release
+main commit `5072e412639db71d346ff54c2b133f54f0b13934`. The initial candidate was
+`0.2.10-dev.cee120.1`; the current repair candidate is `0.2.10-dev.cee120.2`.
+This is a development preparation, not a published release
 or a full acceptance claim.
+
+## Current repair candidate
+
+`0.2.10-dev.cee120.2` has player SHA256
+`21ac72bf950388f7e57dde94497cd3e48de1ddda88e1caeaa72f536b93cfdc06`.
+It retains CEE `1.21.1-1.2.0-132` as the development runtime. Validation is in
+progress; the initial candidate's failed campaign below remains a historical
+result for that exact input.
+
+The repair uses version-matched panel links and slots in the test companion.
+Analytical source fixtures retain the same physical polarity with either CEE
+contract, and the independent RC/transformer references use CEE's configured
+theta-method capacitor integration (`alpha=1` for legacy backward Euler).
+Tolerances, phase/current checks and power-balance checks are retained.
+CEE 1.2 has a separate complete expected registry inventory; the legacy record
+and the PG/Pinout entries are preserved.
+
+Expanded testing also found the new throttle-wheel control consuming PG wire
+and probe interactions. A CEE-1.2-only mixin now passes those interactions to
+the tool, matching existing panel controls. Tests cover all fourteen stationary
+CEE 1.2 attachment types, both hands, normal throttle interaction and analog
+state/link persistence. Legacy checks retain their eleven attachment types.
+
+Comparing player ZIP entries with `.1` shows only the added throttle guard,
+its mixin registration and the version metadata changed. Public APIs, native
+binaries and all pre-existing player classes are byte-identical. The mixin
+resource now uses frozen LF bytes; original `.1` artifacts remain unchanged.
+
+Local repair attempts and frozen inputs are retained under
+`local/cee-120/headless-repair-0210-1/`. The original two failures were test
+contract assumptions; the expanded throttle finding required the new player.
 
 The isolated worktree remains `G:/WWPG/local/cee-120-readiness`. The earlier tip
 `d9a07b2` is preserved by `dev/cee-120-before-0210-20261119`; its jars, worlds,
 logs and original result identities remain intact. The
 [historical 0.2.8 preparation report](CEE_120_READINESS_028.md) records that snapshot.
 
-## Inputs
+## Initial candidate inputs
 
 - CEE development source: `4828c3487a9fc0703717b415eb07d005c7a48653`.
 - CEE development jar: `electroenergetics-1.21.1-1.2.0-132.jar`, SHA256
