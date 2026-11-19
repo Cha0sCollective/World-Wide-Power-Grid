@@ -4,12 +4,21 @@ Maintainers: follow [Publishing a release](../docs/RELEASING.md) for the standar
 five-download layout and short notes. Edit [presentation.json](presentation.json)
 for the next release; version-specific records below preserve published history.
 
-**[WWPG 0.2.9](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.9)**
+**[WWPG 0.2.10](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.10)**
 is the current stable release. To install it or choose a playable world, use the
 [installation guide](../docs/INSTALL.md). This directory is for reviewing what
 was shipped and which checks passed.
 
-## Current stable: 0.2.9
+## Current stable: 0.2.10
+
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.10)
+· [Acceptance](0.2.10/ACCEPTANCE.md).
+
+Reduces brief slowdowns when loaded wire segments rejoin the live line powering
+a CEE train. Both needles stayed visible during normal powered travel on both
+solvers. The release reuses 342 headless checks and 12 client scenarios.
+
+## Historical stable: 0.2.9
 
 [Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.9)
 · [Acceptance](0.2.9/ACCEPTANCE.md).

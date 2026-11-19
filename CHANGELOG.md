@@ -2,9 +2,13 @@
 
 ## Unreleased
 
+## 0.2.10 — 19 November 2026
+
 - Reduce brief slowdowns on CEE trains when unchanged Power Grid wire
   segments reload onto a live line. Readings still become unavailable
   when the circuit has to wait for restoration.
+- Turn off WWPG's restoration listener for the stock Power Grid reference
+  checks so the fixture exercises stock wire attachment.
 
 ## 0.2.9 — 18 November 2026
 
