@@ -1,5 +1,7 @@
 """Campaign selection and identity checks; starts no Gradle or Minecraft."""
 import copy
+import tempfile
+from pathlib import Path
 import unittest
 from unittest.mock import patch
 
@@ -8,6 +10,26 @@ import test_suites as suites
 
 
 class CeeCampaignChecks(unittest.TestCase):
+    def test_producer_reference_survives_execution_manifest_relocation(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary); frozen=root/'frozen'; frozen.mkdir()
+            artifact=frozen/'artifact.jar';artifact.write_bytes(b'frozen artifact')
+            artifacts={role:dict(suites.descriptor(artifact),path=artifact.name) for role in (*suites.ROLES,'gametest')}
+            producer=frozen/'inputs.json'
+            original=dict(schema=2,policy='separated-v2',source_sha='a'*40,artifacts=artifacts)
+            suites.write(producer,original)
+            manifest=frozen/'cee120-inputs.json'
+            suites.write(manifest,dict(original,producer_inputs=dict(suites.descriptor(producer),path=producer.name)))
+            loaded=suites.frozen_inputs(manifest)
+            execution=root/'execution';execution.mkdir()
+            suites.write(execution/'inputs.json',loaded)
+            relocated=suites.frozen_inputs(execution/'inputs.json')
+            self.assertEqual(relocated['producer_inputs']['path'],str(producer.resolve()))
+            self.assertEqual(suites.read(producer),original)
+            producer.write_bytes(b'changed')
+            with self.assertRaisesRegex(ValueError,'producer manifest changed'):
+                suites.frozen_inputs(manifest)
+
     def test_default_recommendation_and_full_suite_remain_unchanged(self):
         original=suites.catalog()
         self.assertEqual(original['recommended_runtime']['electroenergetics'],'1.21.1-1.1.4')

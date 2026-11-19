@@ -185,6 +185,11 @@ def frozen_inputs(path):
         item['path'] = str((path.parent/item['path']).resolve())
         if sha(item['path']) != item['sha256']:raise ValueError('Frozen world changed')
     if 'starter' in record:record['starter']['path']=str((path.parent/record['starter']['path']).resolve())
+    if 'producer_inputs' in record:
+        producer=record['producer_inputs']
+        producer['path']=str((path.parent/producer['path']).resolve())
+        if sha(producer['path'])!=producer['sha256'] or Path(producer['path']).stat().st_size!=producer['bytes']:
+            raise ValueError('Frozen producer manifest changed')
     return record
 
 

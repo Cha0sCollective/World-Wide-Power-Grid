@@ -183,6 +183,21 @@ jobs:
           --environment "${{ matrix.os }}/${{ matrix.loader }}/${{ matrix.backend }}/${{ matrix.profile }}"
           --fresh-if-unavailable
           --rerun-reason "Investigated catalog lifecycle repair; retain original failed attempt and complete passing groups"
+      - name: Show the failed gameplay log without discarding its original
+        if: failure()
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          for report in Path('build/ci-v2').glob('**/result.json'):
+              if not any(p.startswith(('run-', 'continuation-')) for p in report.parts): continue
+              for job in json.loads(report.read_text()).get('jobs', []):
+                  if job.get('status') != 'failed' or not job.get('log'): continue
+                  path=Path(job['log']['path'])
+                  if path.is_file():
+                      print('Failed gameplay log: '+str(path))
+                      print('\n'.join(path.read_text(errors='replace').splitlines()[-120:]))
+          PY
       - name: Retain portable observations and unchanged originals
         if: always() && inputs.frozen_run == ''
         run: >-
