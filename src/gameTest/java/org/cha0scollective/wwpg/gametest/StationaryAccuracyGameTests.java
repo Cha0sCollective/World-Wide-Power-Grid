@@ -116,13 +116,13 @@ public final class StationaryAccuracyGameTests {
         try {
             var ground = node(n); var supply = node(n); var output = node(n);
             n.addWire(new ElectricWire(.001, ground, null));
-            var source = new LinearBranch(n, ground, supply, ElectricalProperties.fromThevenin(1, 10), false);
+            var source = new LinearBranch(n, ground, supply, CeeTestNumerics.supply(1, 10), false);
             n.addWire(new ElectricWire(9, supply, output));
             var firstLoad = new ElectricWire(120, output, ground);
             var secondLoad = new ElectricWire(240, output, ground);
             n.addWire(firstLoad); n.addWire(secondLoad);
             for (double voltage : new double[]{10, -10, 100, .001, 0}) {
-                source.update(ElectricalProperties.fromThevenin(1, voltage));
+                source.update(CeeTestNumerics.supply(1, voltage));
                 n.calculate(16);
                 // 120 || 240 = 80 ohms; source + series resistance = 10 ohms.
                 double current = voltage / 90;
@@ -173,30 +173,34 @@ public final class StationaryAccuracyGameTests {
             try {
                 var ground = node(n); var supply = node(n); var output = node(n);
                 n.addWire(new ElectricWire(.001, ground, null));
-                var source = new LinearBranch(n, ground, supply, ElectricalProperties.fromThevenin(1, 10), false);
+                var source = new LinearBranch(n, ground, supply, CeeTestNumerics.supply(1, 10), false);
                 n.addWire(new ElectricWire(9, supply, output));
                 var properties = new CapacitorProperties(); properties.capacitance = .1; properties.lastVoltage = -2;
                 properties.tick(new double[2*steps], 0, steps, 0, 1);
                 var capacitor = new LinearBranch(n, output, ground, properties, false);
                 var values = new double[2*steps];
+                double alpha=CeeTestNumerics.capacitorAlpha(), dt=.05/steps;
+                double conductance=.1/(alpha*dt), historyWeight=(1-alpha)/alpha;
+                double expectedVoltage=-2, expectedCurrent=0;
                 for (double voltage : new double[]{10, 0, -10}) {
-                    source.update(ElectricalProperties.fromThevenin(1, voltage));
-                    double start = properties.lastVoltage;
-                    // Backward Euler RC reference: tau = R*C = 10*.1 = 1 second.
-                    double decay = 1/(1+.05/steps);
+                    source.update(CeeTestNumerics.supply(1, voltage));
+                    // Independent theta-method RC recurrence. 1.1 uses alpha=1;
+                    // 1.2 uses configured damped trapezoidal integration.
                     for (int tick = 1; tick <= 30; tick++) {
                         n.prepare(steps);
                         int stamp = n.getStamp();
                         for (int step = 0; step < steps; step++) {
+                            double history=conductance*expectedVoltage+historyWeight*expectedCurrent;
+                            expectedVoltage=(voltage/10+history)/(.1+conductance);
+                            expectedCurrent=conductance*expectedVoltage-history;
                             properties.tick(values, step, steps, 0, 1); capacitor.update(properties);
                             n.singleTick();
                             values[step] = output.getVoltage(); values[steps+step] = ground.getVoltage();
                             properties.afterTick(values, 0, 1, step, steps);
                         }
                         h.assertTrue(n.getStamp()-stamp == steps, "RC advanced outside its declared substeps");
-                        double expected = voltage+(start-voltage)*Math.pow(decay, tick*steps);
-                        sample(samples, steps, tick, voltage, expected, properties.lastVoltage);
-                        relative(h, properties.lastVoltage, expected, .01, "Recorded RC window at " + steps + " substeps, tick " + tick);
+                        sample(samples, steps, tick, voltage, expectedVoltage, properties.lastVoltage);
+                        relative(h, properties.lastVoltage, expectedVoltage, .01, "Recorded RC window at " + steps + " substeps, tick " + tick);
                     }
                 }
             } finally { n.cleanup(); }
@@ -213,14 +217,14 @@ public final class StationaryAccuracyGameTests {
             try {
                 var ground = node(n); var supply = node(n); var output = node(n);
                 n.addWire(new ElectricWire(.001, ground, null));
-                var source = new LinearBranch(n, ground, supply, ElectricalProperties.fromThevenin(1, 10), false);
+                var source = new LinearBranch(n, ground, supply, CeeTestNumerics.supply(1, 10), false);
                 n.addWire(new ElectricWire(9, supply, output));
                 var properties = new InductorProperties(); properties.inductance = 1; properties.lastCurrent = -.2;
                 properties.tick(new double[2*steps], 0, steps, 0, 1);
                 var inductor = new LinearBranch(n, output, ground, properties, false);
                 var values = new double[2*steps];
                 for (double voltage : new double[]{10, 0, -10}) {
-                    source.update(ElectricalProperties.fromThevenin(1, voltage));
+                    source.update(CeeTestNumerics.supply(1, voltage));
                     double start = properties.lastCurrent;
                     // Backward Euler RL reference: tau = L/R = 1/10 second.
                     double decay = 1/(1+.05/steps*10);
@@ -234,7 +238,8 @@ public final class StationaryAccuracyGameTests {
                             properties.afterTick(values, 0, 1, step, steps);
                         }
                         h.assertTrue(n.getStamp()-stamp == steps, "RL advanced outside its declared substeps");
-                        double expected = voltage/10+(start-voltage/10)*Math.pow(decay, tick*steps);
+                        double target=org.cha0scollective.wwpg.compat.cee.CeeCompatibility.modern() ? -voltage/10 : voltage/10;
+                        double expected = target+(start-target)*Math.pow(decay, tick*steps);
                         sample(samples, steps, tick, voltage, expected, properties.lastCurrent);
                         relative(h, properties.lastCurrent, expected, .01, "Recorded RL window at " + steps + " substeps, tick " + tick);
                     }
@@ -253,7 +258,7 @@ public final class StationaryAccuracyGameTests {
             var ground = node(n); var output = node(n);
             n.addWire(new ElectricWire(.001, ground, null));
             n.addWire(new ElectricWire(9, output, ground));
-            var properties = new CreativeBatteryDevice.ACSource(10, 0, 1);
+            var properties = new CreativeBatteryDevice.ACSource(CeeTestNumerics.sourceVoltage(10), 0, 1);
             properties.tick(new double[steps*2], 0, steps, 0, 1);
             var source = new LinearBranch(n, ground, output, properties, false);
             double[] phases = new double[steps];
@@ -262,7 +267,7 @@ public final class StationaryAccuracyGameTests {
                 properties.tick(new double[steps*2], step, steps, 0, 1); source.update(properties);
                 n.calculate(1);
                 phases[step] = output.getVoltage()-ground.getVoltage(); squares += phases[step]*phases[step];
-                // CEE 1.1.3's creative AC source emits one cosine cycle per game tick.
+                // CEE's creative AC source emits one cosine cycle per game tick.
                 // Its stored float TWO_PI differs slightly from Math.PI. Keep
                 // that upstream waveform precision in the near-zero reference.
                 relative(h, phases[step], 9*Math.cos(6.283185482025146d*step/steps), .001, "Pinned CEE AC sample " + step);
@@ -285,7 +290,7 @@ public final class StationaryAccuracyGameTests {
             var ground = node(n); var primary = node(n); var secondary = node(n); var returnNode = node(n);
             n.addWire(new ElectricWire(.001, ground, null));
             n.addWire(new ElectricWire(.001, returnNode, null));
-            var sourceProperties = new CreativeBatteryDevice.ACSource(10, 0, 1);
+            var sourceProperties = new CreativeBatteryDevice.ACSource(CeeTestNumerics.sourceVoltage(10), 0, 1);
             sourceProperties.tick(new double[steps*2], 0, steps, 0, 1);
             var source = new LinearBranch(n, ground, primary, sourceProperties, false);
             var transformer = new TransformerStamp(n, primary, ground, secondary, returnNode, ratio);
@@ -295,9 +300,14 @@ public final class StationaryAccuracyGameTests {
             var capacitor = new LinearBranch(n, secondary, returnNode, properties, false);
             var values = new double[steps*2];
             double theta = 2*Math.PI/steps;
-            // Discrete RC admittance: Y = 1/R + C/dt * (1 - exp(-j*theta)).
-            double realY = 1/resistance+capacitance/dt*(1-Math.cos(theta));
-            double imaginaryY = capacitance/dt*Math.sin(theta);
+            // Theta-method admittance C/dt * (1-z^-1)/(alpha+(1-alpha)z^-1).
+            // alpha=1 reproduces the old backward-Euler reference exactly.
+            double alpha=CeeTestNumerics.capacitorAlpha(), beta=1-alpha;
+            double realD=alpha+beta*Math.cos(theta), imaginaryD=-beta*Math.sin(theta);
+            double magnitudeD=realD*realD+imaginaryD*imaginaryD;
+            double realN=1-Math.cos(theta), imaginaryN=Math.sin(theta);
+            double realY = 1/resistance+capacitance/dt*(realN*realD+imaginaryN*imaginaryD)/magnitudeD;
+            double imaginaryY = capacitance/dt*(imaginaryN*realD-realN*imaginaryD)/magnitudeD;
             double realDenominator = 1+realY/(ratio*ratio), imaginaryDenominator = imaginaryY/(ratio*ratio);
             double denominator = realDenominator*realDenominator+imaginaryDenominator*imaginaryDenominator;
             double realVoltage = 10/ratio*realDenominator/denominator;
@@ -338,7 +348,7 @@ public final class StationaryAccuracyGameTests {
             try {
                 var ground = node(n); var supply = node(n); var output = node(n);
                 n.addWire(new ElectricWire(.001, ground, null));
-                var source = new LinearBranch(n, ground, supply, ElectricalProperties.fromThevenin(1, 30), false);
+                var source = new LinearBranch(n, ground, supply, CeeTestNumerics.supply(1, 30), false);
                 n.addWire(new ElectricWire(10, supply, output));
                 var properties = new com.george_vi.electroenergetics.foundation.electrical_properties.AccumulatorProperties();
                 double nominal = com.george_vi.electroenergetics.foundation.electrical_properties.AccumulatorProperties.getNominalCharge();
@@ -348,7 +358,7 @@ public final class StationaryAccuracyGameTests {
                 var accumulator = new LinearBranch(n, output, ground, properties, false);
                 var values = new double[2*steps];
                 for (double voltage : new double[]{30, 0, -10}) {
-                    source.update(ElectricalProperties.fromThevenin(1, voltage));
+                    source.update(CeeTestNumerics.supply(1, voltage));
                     double start = expectedCharge;
                     for (int tick = 1; tick <= 30; tick++) {
                         n.prepare(steps); int stamp = n.getStamp();

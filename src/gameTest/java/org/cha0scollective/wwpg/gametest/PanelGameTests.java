@@ -46,8 +46,9 @@ public final class PanelGameTests {
             controls[1] = insertWithItem(h, h.absolutePos(q), CeeTestAttachments.type("STEERING_WHEEL"), ElectricalPanelSlot.QUARTER_CENTER, null);
             for (var attachment : controls) {
                 var link = (com.george_vi.electroenergetics.content.electrical_panel.link.ElectricalPanelLink) attachment;
-                link.getLinkFrequencies()[0] = new ItemStack(net.minecraft.world.item.Items.REDSTONE);
-                link.getLinkFrequencies()[1] = new ItemStack(net.minecraft.world.item.Items.IRON_INGOT);
+                int frequency=CeeTestAttachments.positiveChannel(attachment)*2;
+                link.getLinkFrequencies()[frequency] = new ItemStack(net.minecraft.world.item.Items.REDSTONE);
+                link.getLinkFrequencies()[frequency+1] = new ItemStack(net.minecraft.world.item.Items.IRON_INGOT);
                 var player = new net.minecraft.server.level.ServerPlayer(h.getLevel().getServer(), h.getLevel(),
                         new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(), "WWPG-panel-test"),
                         net.minecraft.server.level.ClientInformation.createDefault());
@@ -63,13 +64,17 @@ public final class PanelGameTests {
         });
         h.runAtTickTime(30, () -> {
             for (var attachment : controls) {
-                var link = (com.george_vi.electroenergetics.content.electrical_panel.link.ElectricalPanelLink) attachment;
+                var link = CeeTestAttachments.positiveLink(attachment);
                 h.assertTrue(link.getTransmittedStrength() == 15 && link.isAlive(), "Panel control did not prepare its native redstone link");
                 var saved = new CompoundTag(); attachment.write(saved, false, h.getLevel().registryAccess());
                 var restored = attachment.type.createNew(attachment.pos, attachment.nodes, h.getLevel(), attachment.slot, Direction.NORTH, h.getLevel().registryAccess());
                 restored.read(saved, false, h.getLevel().registryAccess());
-                h.assertTrue(((com.george_vi.electroenergetics.content.electrical_panel.link.ElectricalPanelLink) restored).getTransmittedStrength() == 15
+                restored.preTick(null); // Prepare 1.2's linkable from its restored analog state.
+                var restoredLink=CeeTestAttachments.positiveLink(restored);
+                h.assertTrue(restoredLink.getTransmittedStrength() == 15 && restoredLink.isAlive()
+                                && restoredLink.getNetworkKey().equals(link.getNetworkKey())
                                 && saved.getString("Color").equals("blue"), "Analog panel state/dye/frequencies did not round-trip");
+                restored.onRemoved(h.makeMockPlayer(GameType.SURVIVAL));
                 h.assertTrue(attachment.nodes.length == 0, "Native analog control gained unintended electrical terminals");
                 attachment.onRemoved(h.makeMockPlayer(GameType.SURVIVAL));
                 var be = (ElectricalPanelBlockEntity) h.getLevel().getBlockEntity(attachment.pos);

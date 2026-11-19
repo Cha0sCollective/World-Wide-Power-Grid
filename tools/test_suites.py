@@ -241,6 +241,10 @@ def command(job, inputs, output):
         '-PtestDirectory='+str(directory), '-x', 'build', '-x', 'jar', '-x', 'test', '--no-daemon']
     if 'gametest' in inputs['artifacts']:
         args += ['-PtestFixtureArtifact='+inputs['artifacts']['gametest']['path']]
+    if 'cee_runtime' in inputs['artifacts']:
+        cee=inputs['artifacts']['cee_runtime']
+        args += ['-PceeRuntimeJar='+cee['path'], '-PceeDevelopmentJar='+cee['path'],
+                 '-PtestExpectedCeeSha256='+cee['sha256']]
     if job.get('operation') == 'reference':
         args += ['-PreferenceArtifact='+inputs['artifacts']['reference' if job['reference'] == 'upstream' else 'runtime']['path'],
                  '-PreferenceDirectory='+str(directory)]

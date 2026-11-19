@@ -10,6 +10,18 @@ import test_suites as suites
 
 
 class CeeCampaignChecks(unittest.TestCase):
+    def test_explicit_runtime_arguments_do_not_depend_on_environment_key_case(self):
+        inputs={'version':campaign.VERSION,'artifacts':{role:{'path':role+'.jar'} for role in (*suites.ROLES,'gametest')}}
+        inputs['artifacts']['cee_runtime']={'path':'cee120.jar','sha256':campaign.CEE_SHA256}
+        job=suites.plan('focused',['regression'],['NATIVE'],['BASE'])[0]
+        args,_=suites.command(job,inputs,Path('scratch'))
+        for argument in ('-PceeRuntimeJar=cee120.jar','-PceeDevelopmentJar=cee120.jar',
+                         '-PtestExpectedCeeSha256='+campaign.CEE_SHA256):
+            self.assertIn(argument,args)
+        del inputs['artifacts']['cee_runtime']
+        args,_=suites.command(job,inputs,Path('scratch'))
+        self.assertFalse(any(arg.startswith('-PceeRuntimeJar=') for arg in args))
+
     def test_producer_reference_survives_execution_manifest_relocation(self):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary); frozen=root/'frozen'; frozen.mkdir()
