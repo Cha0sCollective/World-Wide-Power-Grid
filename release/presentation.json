@@ -1,13 +1,12 @@
 {
   "schema": 1,
   "repository": "Cha0sCollective/World-Wide-Power-Grid",
-  "summary": "0.2.9 improves CEE train gauge recovery, overhead chunk loading, and alternator output while unloaded.",
+  "summary": "WWPG 0.2.10 reduces brief slowdowns on Power Grid-powered CEE trains when wire chunks reload.",
   "changes": [
-    "Train voltage and current needles recover when readings return. They stay hidden while readings are unavailable.",
-    "Saved overhead spans stay active as passive holders load. Mixed circuits still wait for their real dependencies.",
-    "Two-terminal and three-phase CEE alternators keep supplying power from saved drive state while unloaded."
+    "Unchanged wire segments can rejoin a live line without adding a redundant wait for chunk readiness.",
+    "Both gauge needles stay visible during normal powered travel. A genuine outage still makes readings unavailable."
   ],
   "installation": "Use Minecraft 1.21.1, NeoForge 21.1.262, Java 21, Create 6.0.10, CEE 1.1.4, Power Grid 0.6.2 and Architectury 13.0.12. Set PG multiTicks to 16. Match server and client mod versions.",
-  "optional_installation": "Use the 0.2.9 dependency set in the installation guide. Some inner save instructions list earlier dependency versions. The combined Stationary Yard requires CC:Tweaked 1.120.2 and Pinout 0.2.1. Fuse and rotary-selector circuit examples require Power Components 1.3.0.",
-  "documentation_ref": "0.2.9"
+  "optional_installation": "Use the dependency set in the installation guide. The combined Stationary Yard requires CC:Tweaked 1.120.2 and Pinout 0.2.1. Fuse and rotary-selector circuit examples require Power Components 1.3.0.",
+  "documentation_ref": "0.2.10"
 }

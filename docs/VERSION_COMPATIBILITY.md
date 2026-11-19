@@ -1,6 +1,6 @@
 # Version compatibility
 
-**WWPG 0.2.9** targets Minecraft **1.21.1**. Use matching mod versions on
+**WWPG 0.2.10** targets Minecraft **1.21.1**. Use matching mod versions on
 server and clients, following the [installation guide](INSTALL.md).
 
 | Dependency | Minimum accepted by WWPG | Selected release input |
@@ -13,14 +13,14 @@ server and clients, following the [installation guide](INSTALL.md).
 
 The optional computer profile uses CC:Tweaked **1.120.2** and Pinout **0.2.1**.
 CC:Tweaked 1.121.0 requires NeoForge 21.1.265 and is not selected for 262.
-The [0.2.9 acceptance record](../release/0.2.9/ACCEPTANCE.md) records completed
+The [0.2.10 acceptance record](../release/0.2.10/ACCEPTANCE.md) records completed
 headless and graphical coverage on this set. Earlier release records retain
 their actual dependencies.
 
 CEE 1.1.4 corrected its variac voltage lookup. WWPG recognizes that corrected
 call and the older 1.1.3 call, preserving the correct local voltage and heating
 reading for each. Focused checks cover both solvers and the panel/tool changes;
-the retained 0.2.9 campaign uses 1.1.4. Minimum SDK compile dependencies remain pinned separately.
+the retained 0.2.10 campaign uses 1.1.4. Minimum SDK compile dependencies remain pinned separately.
 
 Newer NeoForge, Create, CEE and Power Grid versions are allowed to load so players
 can try them. Being allowed to load does not establish compatibility. Consult the

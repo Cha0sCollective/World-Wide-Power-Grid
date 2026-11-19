@@ -1,8 +1,8 @@
 # Current status
 
-**WWPG 0.2.9 is the current stable release.** Train gauges recover when readings
-return, and overhead spans using only passive CEE holders stay active during
-approach loading. Stock CEE alternators can continue supplying power from their
+**WWPG 0.2.10 is the current stable release.** Unchanged Power Grid wire
+segments can rejoin a live line without adding a redundant restoration wait.
+Train gauges recover when valid readings return. Stock CEE alternators can continue supplying power from their
 last saved drive state while unloaded. Qualification covers 342 headless jobs and
 12 separate graphical scenarios on the recommended dependencies.
 Extension API **1.0.0** is unchanged. Use the [selected dependency set](INSTALL.md).
@@ -41,13 +41,13 @@ a repaired device. The [developer contract](EXTENSION_API.md) explains those rul
 
 ## Current release checks
 
-The 342-job headless plan passed across Windows and Ubuntu/WSL, Native/Java
+The 342-job headless plan passed across Windows and Ubuntu, Native/Java
 and BASE/PINOUT on NeoForge 21.1.262, PG 0.6.2 and CEE 1.1.4. Preparation
-checked 137 unit tests on each operating system and built the three extracted
+checked units on each operating system and built the three extracted
 SDK projects independently. All 12 real Windows client scenarios passed,
 including integrated worlds, two-client TCP synchronization and clean shutdown.
 
-The [0.2.9 acceptance record](../release/0.2.9/ACCEPTANCE.md) records the
+The [0.2.10 acceptance record](../release/0.2.10/ACCEPTANCE.md) records the
 frozen source, tested artifacts and exact world exports. The
 [0.2.8 acceptance record](../release/0.2.8/ACCEPTANCE.md) retains its historical
 Windows Native/BASE sparse-panel timeout and passing continuation.
