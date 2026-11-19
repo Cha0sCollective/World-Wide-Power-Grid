@@ -197,7 +197,7 @@ public final class NativeReferenceTimingGameTests {
                     "Waiting for native wire entities at " + absolute);
             if (!nativeRun && position.equals(SOURCE)) continue;
             for (int terminal = 0; terminal < 2; terminal++) h.assertTrue(
-                    results.circuitBuilder.getNode(new InWorldNode(terminal, absolute)) != null,
+                    CeeTestGraphs.hasNode(results.circuitBuilder,new InWorldNode(terminal, absolute)),
                     "Waiting for accepted CEE node at " + absolute + " terminal " + terminal);
             double voltage = results.getVoltageAt(absolute, 0, 1);
             h.assertTrue(Double.isFinite(voltage) && Math.abs(voltage) < 1e-8,
