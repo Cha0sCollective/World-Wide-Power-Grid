@@ -27,8 +27,9 @@ GROUPS = {
     'stock': ['wwpg_cee_stock'],
     'cold-migration': ['wwpg_cee_migration_cold'],
     'fans': ['wwpg_cee_fans'],
+    'baseline': ['wwpg_cee_baseline', 'wwpg_cee_baseline_train'],
 }
-COUNTS = {'core': 10, 'lifecycle': 17, 'ownership': 1, 'adapters': 7, 'stock': 4, 'cold-migration': 1, 'fans': 2}
+COUNTS = {'core': 10, 'lifecycle': 17, 'ownership': 1, 'adapters': 7, 'stock': 4, 'cold-migration': 1, 'fans': 2, 'baseline': 7}
 EXCLUDED = ['build', 'jar', 'gameTestJar', 'referenceJar', 'test',
             'compileJava', 'compileExtensionApiJava', 'compileCeeApiJava',
             'compileGameTestJava', 'compileCee12Java', 'compileCee12GameTestJava',
@@ -92,6 +93,11 @@ def freeze(args):
     old = json.loads(previous.read_text())
     files = {role: Path(item['path']) for role, item in old['artifacts'].items()}
     files['cee113'] = Path(args.cee113).resolve()
+    new_runtime = getattr(args, 'runtime', None)
+    if new_runtime:
+        if not args.current_sources:
+            raise ValueError('A new runtime requires --current-sources')
+        files['runtime'] = Path(new_runtime).resolve()
     if args.gametest:
         files['gametest'] = Path(args.gametest).resolve()
     if args.reference:
@@ -107,12 +113,12 @@ def freeze(args):
         raise ValueError('Gameplay, companion and reference versions must match')
     if args.current_sources:
         # A replacement companion/control does not authorize describing a different player jar as tested.
-        for source in old['sources']:
+        for source in ([] if new_runtime else old['sources']):
             if source['path'].startswith(('src/main/', 'src/cee12/', 'src/api/', 'src/ceeApi/')):
                 if sha(ROOT / relative(source['path'])) != source['sha256']:
                     raise ValueError('Player source changed; build and freeze a new runtime first: ' + source['path'])
         names = subprocess.check_output(['git', 'ls-files', '--cached', '--others', '--exclude-standard'], cwd=ROOT, text=True).splitlines()
-        source_files = [(name, ROOT / name) for name in names if name.startswith(('src/', 'tools/reference_control/')) or name in ('build.gradle', 'gradle.properties', 'tools/test-suites.json', 'tools/cee_readiness.py')]
+        source_files = [(name, ROOT / name) for name in names if name.startswith(('src/', 'tools/reference_control/')) or name in ('build.gradle', 'gradle.properties', 'release/artifacts.json', 'tools/test-suites.json', 'tools/cee_readiness.py')]
     else:
         source_files = [(item['path'], previous.parent / 'sources' / relative(item['path'])) for item in old['sources']]
         for item in old['sources']:
@@ -124,8 +130,10 @@ def freeze(args):
     inputs.update(schema=2, purpose='Focused CEE readiness; not acceptance', version=version,
                   previous_inputs=str(previous), previous_inputs_sha256=sha(previous),
                   freeze_commit=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
-                  source_origin='current working sources; player sources compared' if args.current_sources else 'preserved previous snapshot',
+                  source_origin='current working sources; newly built runtime' if new_runtime else 'current working sources; player sources compared' if args.current_sources else 'preserved previous snapshot',
                   artifacts={}, sources=[])
+    if getattr(args, 'baseline', None):
+        inputs['baseline_commit'] = subprocess.check_output(['git', 'rev-parse', args.baseline + '^{commit}'], cwd=ROOT, text=True).strip()
     for role, path in files.items():
         target = out / 'artifacts' / role / path.name
         target.parent.mkdir(parents=True)
@@ -267,6 +275,8 @@ def main():
     f = subs.add_parser('freeze')
     f.add_argument('--from-inputs', required=True)
     f.add_argument('--cee113', required=True)
+    f.add_argument('--runtime', help='Explicit newly built player artifact; requires current sources and matching companion/control')
+    f.add_argument('--baseline', help='Baseline commit/ref for the integration record')
     f.add_argument('--gametest')
     f.add_argument('--reference')
     f.add_argument('--current-sources', action='store_true')

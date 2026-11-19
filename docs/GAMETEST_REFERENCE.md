@@ -11,6 +11,7 @@ Inventory updated **2 November 2026** for dev.112 panel/probe/control regression
 Inventory updated **5 November 2026** for the local dev.117 transformer-probe regressions.
 Inventory updated **6 November 2026** for the local self-excitation and direct-rotor timing regressions.
 Inventory refreshed **12 November 2026** on the isolated CEE 1.2 development branch; see its additions below.
+Inventory refreshed **19 November 2026** after integrating the 0.2.10 baseline and seven focused baseline checks.
 Source links below follow that new location. This is a reference to the assertions in the current source, **not a new test
 run or a claim that every entry has passed in every environment**. See
 [Testing process](TESTING.md) for execution and [published release records](../release/README.md)
@@ -30,14 +31,14 @@ classified separately from ordinary BASE/PINOUT full acceptance.
 
 | Where the declarations live | Test methods | Source files |
 | --- | ---: | ---: |
-| Companion test jar: `src/gameTest/java/.../gametest` and `src/cee12GameTest/java` | 472 | 145 |
+| Companion test jar: `src/gameTest/java/.../gametest` and `src/cee12GameTest/java` | 483 | 149 |
 | Independently built general and CEE/PG example addons | 13 | 3 |
 | Extracted SDK acceptance helper | 4 | 1 |
 | Separate short TCP graphical helper | 1 | 1 |
-| **Total** | **490** | **150** |
+| **Total** | **501** | **154** |
 
-There are **80 namespaces**. These are annotated entry points, not 490 unique
-device models, 490 simultaneous tests or the number of invocations in a complete
+There are **83 namespaces**. These are annotated entry points, not 501 unique
+device models, 501 simultaneous tests or the number of invocations in a complete
 campaign. A method can operate many devices and check many assertions. Several
 focused namespaces intentionally delegate to an existing fixture. Compilation,
 JUnit, Python tooling, SDK build checks and native C fault-injection tests are
@@ -54,12 +55,14 @@ means a measurement explicitly cannot be used; it is different from a valid zero
 
 ## CEE 1.2 development additions
 
-These declarations belong to the isolated `0.2.8-dev.cee120.3` preparation branch.
+These declarations began on the isolated `0.2.8-dev.cee120.3` preparation branch.
+The current `0.2.10-dev.cee120.1` integration adds the baseline checks below.
 The [readiness report](developer/CEE_120_READINESS.md) identifies executed input
 versions and limitations. Source counts alone establish no passing result.
 
 | Source / namespace | Entry points and assertions |
 | --- | --- |
+| [CeeBaselineIntegrationGameTests](../src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeBaselineIntegrationGameTests.java), `wwpg_cee_baseline`; [CeeBaselineTrainIntegrationGameTests](../src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeBaselineTrainIntegrationGameTests.java), `wwpg_cee_baseline_train` | Seven delegated baseline entries: unloaded single/three-phase alternator supply and live load changes; powered motor reload with attached fans; an externally driven motor during restoration/power loss; native direct/custom rotor integration at one and sixteen substeps in both directions; actual native wire-result selection with healthy order and rejected endpoints/cuts; and a moving transformer-fed train with handover, foreign-dimension isolation, gauge recovery, real outage and passive/mixed-holder restoration. The train preserves its original 96 x 24 x 96 structure and separate batch. These development groups remain explicitly focused and do not expand the release acceptance plan. |
 | [CeeReadinessGameTests](../src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeReadinessGameTests.java), `wwpg_cee_readiness` | Eight entries: signed Norton voltage/current/power and reversal; capacitor charge/discharge; diode forward/reverse/recovery; diode-capacitor rectification and reverse hold; deliberate late rejection restoring all mutable numerical history beside a healthy circuit; transformer ratio/polarity; inductor timestep/history; accumulator charge/discharge. First four also provide stock-control trace samples. |
 | [CeeLifecycleReadinessGameTests](../src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeLifecycleReadinessGameTests.java), `wwpg_cee_lifecycle` | Seventeen delegated entries: three-phase waveform/direction, variac voltage/heating, redstone variac, regulator neutral/control, panel three-pole meter, panel energy/current, standalone three-pole meter, frequency clock, synchroscope history, physical-ground edits, reference/ground takeover, actual ground unload/reload, partial-winding isolation, late shared-rotor rollback, shared-rotor restoration hold, aimed panel probes and rotated regulator wire picking. |
 | [CeeMigrationGameTests](../src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeMigrationGameTests.java), `wwpg_cee_migration` | `chargedInductorDirectionRoundTripAndAmbiguityIsolation` exercises marked legacy history, same-version reopen, ambiguous charged-state isolation, a healthy neighbor and recovery. `capacitorCurrentAndStoredVoltageRoundTrip` checks saved voltage/current history and rejects stale in-flight publication. |
@@ -77,6 +80,7 @@ versions and limitations. Source counts alone establish no passing result.
 | Battery function | `FactoryGameTests`, `StationaryEquipmentGameTests`, `NativeReferenceTimingGameTests`, `NativeHandheldGameTests` | Portable/stationary charge, capacity, native nonrechargeable behavior, reference energy windows and multiblock connector readings. |
 | Energy held during loading/failure | `LoadingBatchGameTests`, `SolverFailureGameTests`, `NativeFailureGameTests`, `ExtensionApiRejectedSolveGameTests` | No committed storage/FE/filter advancement on unavailable or rejected frames, followed by recovery. |
 | Clicking contactors after restoration | `ContactorRestorationGameTests`, `CircuitRebuildGameTests`, `ProtectionGameTests` | Held accepted contact state, unavailable coil readings, delayed rebuild and accepted reopening/reclosing. |
+| Fans disappear on powered reload | `MotorRestorationGameTests` | Native first-load motor validation and consumer attachment during repeated restoration, real power loss/recovery, and externally driven shaft continuity. Actual cold client reload remains separate. |
 | Multimeter briefly reads then zeros | `NativeHandheldGameTests`, `HandheldMeterGameTests` | Persistent connector/battery/generator readings, gauge agreement and correct unavailable recovery. |
 | Terminal IDs and geometry | `NativeTerminalPreparationGameTests`, `CeeTerminalGeometryGameTests`, `ExtensionApiTerminalRefreshGameTests` | Native IDs, sparse/live geometry, custom callbacks, rotation, terminal removal and stable ownership. |
 | Terminal boxes and mouse selection | Separate graphical `yard-integrated` scenario | Actual rendering/rays/native input; the geometry GameTests alone do not certify this. |
@@ -772,8 +776,9 @@ Entry points:
 Namespace: `wwpg_generator_timing` (focused safety). [Source](../src/gameTest/java/org/cha0scollective/wwpg/gametest/GeneratorTimingGameTests.java).
 
 Builds a real six-rotor self-excited PG generator with a 50:10 field transformer.
-Checks accepted powered output, bounded settled voltage and speed, load response
-and drive stop/restart recovery. A separate direct-network check preserves native
+Checks powered output, intended overloaded voltage/speed oscillation, load changes
+and drive stop/restart. Recorded traces compare the native timing reference with
+the candidate. A separate direct-network check preserves native
 custom-rotor torque counting, inertia compensation and output in both directions
 at one and sixteen substeps. These checks do not certify whole-world cold restart,
 moving assemblies or every possible excitation circuit. See the
@@ -781,7 +786,7 @@ moving assemblies or every possible excitation circuit. See the
 
 Entry points:
 
-- `transformerFedSelfExcitationSettlesAndRecovers`
+- `transformerFedSelfExcitationRetainsNativeOscillation`
 - `carbonPilePreservesNativeClutchOperatingPoints` (connected 72-coil field, native saturated/unsaturated clutch response, load changes and drive recovery)
 - `redstoneVariacRestoresExcitationAtFullRotorSpeed`
 - `directAndCustomRotorsKeepNativeIntegration`
@@ -1121,6 +1126,22 @@ Entry points:
 - [`restorationDoesNotRepeatConverterFeTransfers`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/LoadingBatchGameTests.java#L179)
 - [`unownedUnscheduledChunkCannotKeepRestorationActive`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/LoadingBatchGameTests.java#L196)
 - [`restorationPreservesNativeBatteryAndInverterHistory`](../src/gameTest/java/org/cha0scollective/wwpg/gametest/LoadingBatchGameTests.java#L207)
+
+#### MotorRestorationGameTests
+
+Namespace: `wwpg_motor_restoration`. [Source](../src/gameTest/java/org/cha0scollective/wwpg/gametest/MotorRestorationGameTests.java).
+
+Exercises Create's first-load validation countdown and consumer reattachment on
+powered CEE motors connected with PG wires. Attached fans must survive repeated
+restoration windows and follow real power loss/recovery. A separate fixture
+keeps an electrically paused motor turning from a real external 64 RPM shaft.
+These fixtures isolate native mechanical ordering; they do not replace
+separate-process powered Save and Quit / cold-reload checks.
+
+Entry points:
+
+- `poweredMotorReloadKeepsAttachedFans`
+- `restorationKeepsExternallyDrivenMotorTurning`
 
 #### NativeSamplingGameTests
 

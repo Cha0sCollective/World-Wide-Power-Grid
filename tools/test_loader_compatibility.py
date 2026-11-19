@@ -35,32 +35,26 @@ class PlanningChecks(unittest.TestCase):
             self.assertTrue(all(j['profile']=='BASE' and not j['addon'] for j in jobs))
             names={n for j in jobs for n in j['namespaces']}
             self.assertFalse({'wwpg_api','wwpg_pinout','wwpg_loader_addons'} & names)
-            self.assertIn('wwpg_trains',names)
-            self.assertTrue({'wwpg_solver_safety','wwpg_wire_recovery'}<=names)
-            self.assertEqual('wwpg_native_guard' in names,backend=='NATIVE')
+            self.assertTrue({'wwpg_loading','wwpg_board_startup'}<=names)
+            self.assertNotIn('wwpg_solver_safety',names)
+            self.assertEqual(len(jobs),3)
             self.assertFalse(set(suites.catalog()['loader_compatibility']['addon_only_namespaces']) & names)
 
-    def test_addons_have_real_optional_fixtures_and_ordered_restarts(self):
+    def test_addons_have_real_optional_probes_without_full_lifecycle_campaign(self):
         jobs=loader.plan('21.1.262','NATIVE','ADDONS','windows-latest')
+        self.assertEqual(len(jobs),3)
         self.assertTrue(all(j['profile']=='PINOUT' and j['addon'] for j in jobs))
         names={n for j in jobs for n in j['namespaces']}
-        self.assertTrue({'wwpg_loader_addons','wwpg_pinout','wwpg_api','wwpg_native_guard',
-                         'wwpg_addon_safety','wwpg_addon_native_guard'} <= names)
-        java={n for j in loader.plan('21.1.262','JAVA','ADDONS','windows-latest') for n in j['namespaces']}
-        self.assertIn('wwpg_addon_safety',java)
-        self.assertNotIn('wwpg_addon_native_guard',java)
-        for group,phases in [('regression',['SETUP','VERIFY','VERIFY','VERIFY']),
-                             ('api',['SETUP','VERIFY','VERIFY','VERIFY']),('pending',['SETUP','ARM','VERIFY'])]:
-            selected=[j for j in jobs if j['group']==group]
-            self.assertEqual([j['phase'] for j in selected],phases)
-            if group=='api':self.assertTrue(all('wwpg_api_ownership' not in j['namespaces'] for j in selected[1:]))
+        self.assertTrue({'wwpg_loader_addons','wwpg_loader_installation','wwpg_loading','wwpg_board_startup'}<=names)
+        self.assertFalse({'wwpg_api_restart','wwpg_api_pending_restart','wwpg_stationary','wwpg_contactors'} & names)
+        self.assertEqual({j['phase'] for j in jobs},{'SETUP'})
         self.assertTrue(all('operation' not in j and j['lane']=='headless' for j in jobs))
-        self.assertFalse(any(j['group'] in ('yard','workshop','example','showroom') for j in jobs))
 
-    def test_unverified_loaders_do_not_enter_release_coverage(self):
-        self.assertNotIn('21.1.262',suites.catalog()['loaders'])
-        with self.assertRaises(ValueError):suites.plan('full-headless',loaders=['21.1.262'])
-        self.assertTrue(all(j.get('loader')!='21.1.262' for j in suites.plan('full-headless')))
+    def test_other_loaders_never_enter_full_acceptance(self):
+        self.assertEqual(suites.catalog()['loaders'],['21.1.262'])
+        for value in ('21.1.231','21.1.266'):
+            with self.assertRaises(ValueError):suites.plan('full-headless',loaders=[value])
+            self.assertEqual({j['loader'] for j in loader.plan(value,'JAVA','BASE','windows-latest')},{value})
 
     def test_workflow_is_manual_parallel_and_keeps_failed_jobs(self):
         text=(suites.ROOT/'.github/workflows/loader-compatibility.yml').read_text()
@@ -71,11 +65,19 @@ class PlanningChecks(unittest.TestCase):
         self.assertIn("NEO_VERSIONS: ${{ inputs.neo_versions }}",text)
         self.assertNotIn('--versions ${{ inputs.',text)
 
+    def test_probe_keeps_recommended_optional_jars_when_only_loader_changes(self):
+        text=(suites.ROOT/'tools/loader_compatibility.gradle').read_text()
+        self.assertIn("inputs.artifacts.computercraft.version == '1.120.2'",text)
+        self.assertIn('wwpg.test.legacyComputerRuntime',text)
+        for version in ('21.1.231','21.1.262','21.1.266'):
+            self.assertEqual(len(loader.plan(version,'JAVA','ADDONS','windows-latest')),3)
+
     def test_optional_inventory_matches_existing_pins(self):
         items={i['role']:i for i in suites.catalog()['loader_compatibility']['artifacts']}
         self.assertEqual(set(items),{'computercraft','pinout','gauged','power_components'})
         for i in suites.read(suites.ROOT/'release/optional-artifacts.json')['artifacts']:
-            self.assertEqual(items[i['role']]['sha256'],i['sha256'])
+            expected=suites.read(suites.ROOT/'src/gameTest/resources/data/wwpg_tests/runtime-inputs.json')['computercraft']['legacy']['sha256'] if i['role']=='computercraft' else i['sha256']
+            self.assertEqual(items[i['role']]['sha256'],expected)
         self.assertIn('wwpg_loader_addons',suites.audit()['classified'])
 
 

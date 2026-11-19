@@ -114,7 +114,7 @@ public final class WireResultOwnershipGameTests {
     private static SimulationResults results(InfrastructureSavedData infrastructure, List<? extends Node> nodes,
                                                    Set<Node> unavailable) {
         var builder = new CircuitBuilder(Set.<InWorldNode>of());
-        for (var node : nodes) builder.addNode(node);
+        CeeTestGraphs.addNodes(builder,nodes.toArray(Node[]::new));
         return CeeCompatibility.integration().results(new double[nodes.size() * 16], 16, new Object2DoubleOpenHashMap<>(),
                 builder, infrastructure, unavailable);
     }

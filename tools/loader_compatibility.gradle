@@ -16,6 +16,12 @@ gradle.projectsEvaluated {
         if (!file.isFile() || digest(file) != item.sha256) throw new GradleException('Changed optional input: '+role)
         p.dependencies.add('runtimeOnly', p.files(file))
     }
+    // Set the launch model that supplies packaged JVM arguments; setting only
+    // JavaExec.systemProperties loses to the model's existing -D argument.
+    // The audit still verifies the retained recommended CC jar's exact hash.
+    p.neoForge.runs.named('gameTestServer') {
+        systemProperty 'wwpg.test.legacyComputerRuntime', (inputs.artifacts.computercraft.version == '1.120.2').toString()
+    }
     p.tasks.named('runPackagedGameTestServer') {
         systemProperty 'wwpg.loader.installation', addons ? 'ADDONS' : 'BASE'
         systemProperty 'wwpg.loader.inputs', manifest.absolutePath

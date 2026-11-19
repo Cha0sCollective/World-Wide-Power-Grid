@@ -21,7 +21,7 @@ public final class AuditGeneratorGameTests {
     @GameTest(template="empty",batch="audit_generator",timeoutTicks=2850)
     public static void carbonPileAtSixteenSubsteps(GameTestHelper h){trace(h,"carbon",2610);GeneratorTimingGameTests.carbonPilePreservesNativeClutchOperatingPoints(h);}
     @GameTest(template="empty",batch="audit_generator",timeoutTicks=2600)
-    public static void transformerAtSixteenSubsteps(GameTestHelper h) throws Exception {trace(h,"transformer",2460);GeneratorTimingGameTests.transformerFedSelfExcitationSettlesAndRecovers(h);}
+    public static void transformerAtSixteenSubsteps(GameTestHelper h) throws Exception {trace(h,"transformer",2460);GeneratorTimingGameTests.transformerFedSelfExcitationRetainsNativeOscillation(h);}
     @GameTest(template="empty",batch="audit_generator",timeoutTicks=1800)
     public static void shaftVariacAtSixteenSubsteps(GameTestHelper h){trace(h,"shaft-variac",1660);GeneratorTimingGameTests.shaftVariacRestoresExcitationAtFullRotorSpeed(h);}
     @GameTest(template="empty",batch="audit_generator",timeoutTicks=1800)

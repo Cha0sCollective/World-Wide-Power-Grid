@@ -13,12 +13,14 @@ pull requests, version bumps or releases. Reuse preserved passing acceptance
 when the tested runtime is unchanged, with explicit artifact comparisons;
 never relabel old evidence or interrupted runs as fresh passes.
 
-For future release campaigns, select the newest currently supported runtime
-dependency jars before freezing inputs. Run complete requested acceptance on
-that set, and record the actual loaded versions and hashes. A full run on older
-jars plus focused checks on newer jars does not establish full acceptance of
-the newer set. Retain older-version compatibility checks and minimum SDK
-compile dependencies separately. This policy does not authorize a rerun.
+For future release campaigns, freeze the current recommended runtime set before
+running acceptance. Full headless acceptance runs only on that recommended
+loader, across both operating systems, solvers and BASE/PINOUT profiles. Other
+loaders use separately requested focused loading checks, not full acceptance.
+The current recommendation is NeoForge 21.1.262, PG 0.6.2 and CEE 1.1.4;
+compatible optional jars must match that loader. Record actual loaded versions
+and hashes. Keep minimum SDK compile dependencies and historical evidence
+separate. Changing this recommendation does not authorize a suite run.
 
 Current user and developer guides start at [docs/README.md](docs/README.md).
 Write player instructions in plain language: what to operate, what should

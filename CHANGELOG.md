@@ -2,6 +2,63 @@
 
 ## Unreleased
 
+## 0.2.10 — 19 November 2026
+
+- Reduce brief slowdowns on CEE trains when unchanged Power Grid wire
+  segments reload onto a live line. Readings still become unavailable
+  when the circuit has to wait for restoration.
+- Turn off WWPG's restoration listener for the stock Power Grid reference
+  checks so the fixture exercises stock wire attachment.
+
+## 0.2.9 — 18 November 2026
+
+- Recover CEE train gauge needles when valid voltage and current return. The
+  needles stay hidden while readings are unavailable, and valid zero still displays.
+- Keep saved CEE overhead spans working when passive catenary holders load.
+  Mixed holders and native wire dependencies still wait for restoration.
+- Restore stock two-terminal and three-phase CEE alternator behavior in unloaded
+  chunks. The alternators use CEE's saved drive state and resume normal electrical
+  updates after reload.
+- Qualify the release on NeoForge 21.1.262 with CEE 1.1.4, PG 0.6.2, Create 6.0.10
+  and Architectury 13.0.12. The extension API stays at 1.0.0.
+
+## 0.2.8 — 16 November 2026
+
+- Enable retained PG/CEE wire batching, bounded and prioritized saved-wire
+  restoration, loading work and geometry reuse. Remove duplicate CEE circuit
+  scans that stalled large-world restoration while retaining rollback safeguards.
+- Restore rejected CEE dynamics coherently, including shared alternator state;
+  isolate unsupported addon endpoints before callbacks. Preserve valid settings
+  through restoration fallback and reject invalid multimeter input safely.
+- Guard native matrix allocation, growth and lifetime on Windows and Linux;
+  reject duplicate entries in artifact-equivalence comparisons.
+- Restore PG's original generator, rotor and clutch timing, including intended
+  self-excitation oscillation. The stabilization from 0.2.7 through beta.2 is removed.
+- Refresh motor shaft connections before native validation during restoration
+  and power loss, preserving attached fans and externally driven motors.
+- Retain twelve circuit assemblies and add motor restoration regressions in the
+  separate test companion. Full acceptance uses the recommended runtime set;
+  other loaders use separate focused probes, and four circuit checks share a process.
+
+API 1.0.0, saves and sixteen electrical substeps remain unchanged. Qualification
+covers 342 headless jobs and 12 graphical scenarios on NeoForge 21.1.262,
+PG 0.6.2 and CEE 1.1.4. One original Windows panel-readiness timeout remains
+unexplained; its unchanged-artifact continuation passed and the failed attempt
+is preserved. Historical beta evidence keeps its original runtime and dependencies.
+
+## 0.2.8-beta.3 — 13 November 2026 (prerelease)
+
+- Remove duplicate whole-CEE circuit scans during restoration, fixing large-yard
+  loading stalls while preserving coherent rollback and unavailable readings.
+- Restore PG's original generator, rotor and clutch timing, including intended
+  self-excitation oscillation. Remove WWPG's stabilization from 0.2.7–beta.2.
+- Retain unload/regrouping, measurement, adapter isolation and native allocation
+  safety. API 1.0.0 and saves are unchanged; GameTests remain a separate jar.
+
+Qualification covers 654 headless jobs and 12 graphical scenarios on the frozen
+beta.3 runtime with CEE 1.1.4 and NeoForge 21.1.266. Older loader checks remain
+separate. The historical Linux motor assertion remains unexplained.
+
 ## 0.2.8-beta.2 — 12 November 2026 (prerelease)
 
 - Restore rejected CEE dynamics coherently, including alternator windings that

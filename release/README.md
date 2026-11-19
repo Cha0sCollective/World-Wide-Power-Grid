@@ -4,12 +4,49 @@ Maintainers: follow [Publishing a release](../docs/RELEASING.md) for the standar
 five-download layout and short notes. Edit [presentation.json](presentation.json)
 for the next release; version-specific records below preserve published history.
 
-**[WWPG 0.2.7](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.7)**
+**[WWPG 0.2.10](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.10)**
 is the current stable release. To install it or choose a playable world, use the
 [installation guide](../docs/INSTALL.md). This directory is for reviewing what
 was shipped and which checks passed.
 
-## Current prerelease: 0.2.8-beta.2
+## Current stable: 0.2.10
+
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.10)
+· [Acceptance](0.2.10/ACCEPTANCE.md).
+
+Reduces brief slowdowns when loaded wire segments rejoin the live line powering
+a CEE train. Both needles stayed visible during normal powered travel on both
+solvers. The release reuses 342 headless checks and 12 client scenarios.
+
+## Historical stable: 0.2.9
+
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.9)
+· [Acceptance](0.2.9/ACCEPTANCE.md).
+
+Recovers CEE train gauges and avoids false restoration holds on saved overhead
+spans. CEE alternators retain stock power behavior in unloaded chunks. The
+release reuses 342 passing headless jobs and 12 passing client scenarios.
+
+## Historical stable: 0.2.8
+
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8)
+· [Acceptance and remaining limits](0.2.8/ACCEPTANCE.md).
+
+Combines the beta sequence with motor restoration and streamlined acceptance.
+Qualification covers 342 headless jobs and 12 graphical scenarios on the
+recommended dependencies. Failed attempts and unexplained findings remain
+explicit in the verification bundle.
+
+## Historical prerelease: 0.2.8-beta.3
+
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8-beta.3)
+· [Acceptance and remaining limits](0.2.8-beta.3/ACCEPTANCE.md).
+
+Removes duplicate CEE restoration scans and restores original PG generator timing.
+Fresh qualification covers 654 headless jobs and 12 real-client scenarios; original
+execution identities and interrupted attempts remain preserved.
+
+## Historical prerelease: 0.2.8-beta.2
 
 [Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.8-beta.2)
 · [Acceptance and remaining limits](0.2.8-beta.2/ACCEPTANCE.md).
@@ -27,7 +64,7 @@ Promotes the experimental control with default-on loading and wire-processing
 improvements and twelve circuit fixtures. Retains the completed rc.1 acceptance
 after version-only comparisons:542headless jobs and12real-client scenarios.
 
-## Current stable: 0.2.7
+## Historical stable: 0.2.7
 
 [Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.7)
 · [Verification](0.2.7/verification.json).

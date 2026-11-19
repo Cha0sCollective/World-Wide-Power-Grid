@@ -60,6 +60,39 @@ class ReadinessRunnerTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Frozen artifact changed'):
             runner.verify(inputs, self.root / 'inputs.json')
 
+    def test_replacing_runtime_requires_current_sources_before_creating_output(self):
+        manifest=self.root/'inputs.json'
+        runner.write(manifest,{'artifacts': {}})
+        args=argparse.Namespace(from_inputs=str(manifest),cee113='unused.jar',runtime='new.jar',current_sources=False)
+        with self.assertRaisesRegex(ValueError,'new runtime requires --current-sources'):
+            runner.freeze(args)
+
+    def test_changed_player_sources_require_explicit_new_runtime(self):
+        player=self.root/'src/main/java/Fixture.java'
+        player.parent.mkdir(parents=True)
+        player.write_text('old player')
+        old_hash=runner.sha(player)
+        artifact=self.root/'artifact.jar';artifact.write_bytes(b'fixture artifact')
+        roles=['runtime','gametest','reference',*runner.CEE]
+        inputs={'artifacts':{role:{'path':str(artifact),'sha256':runner.sha(artifact)} for role in roles},
+                'sources':[{'path':'src/main/java/Fixture.java','sha256':old_hash}],
+                'loader':'21.1.262','substeps':16,'cee_source_commit':'a'*40,'java_home':'fixture-jdk'}
+        manifest=self.root/'inputs.json';runner.write(manifest,inputs)
+        player.write_text('new player')
+        args=argparse.Namespace(from_inputs=str(manifest),cee113=str(artifact),runtime=None,current_sources=True,
+                                gametest=None,reference=None,baseline=None,output='local/frozen')
+        def git(command,**kwargs):return 'src/main/java/Fixture.java\n' if command[1]=='ls-files' else 'b'*40
+        with patch.object(runner,'ROOT',self.root),patch.object(runner,'validate_cee',return_value='fixture'), \
+             patch.object(runner,'metadata',return_value='fixture'),patch.object(runner.subprocess,'check_output',side_effect=git):
+            with self.assertRaisesRegex(ValueError,'Player source changed'):
+                runner.freeze(args)
+            self.assertFalse((self.root/'local/frozen').exists())
+            args.runtime=str(artifact)
+            runner.freeze(args)
+        frozen=runner.json.loads((self.root/'local/frozen/inputs.json').read_text())
+        self.assertIn('newly built runtime',frozen['source_origin'])
+        self.assertEqual(frozen['sources'][0]['sha256'],runner.sha(player))
+
     def test_clean_execution_has_no_failures(self):
         self.assertEqual(runner.collect(self.log, 0, self.loaded, self.inputs, self.args), ([], 10))
 

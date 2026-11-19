@@ -1,26 +1,26 @@
 # Version compatibility
 
-**WWPG 0.2.8-beta1** targets Minecraft **1.21.1**. Use matching mod versions on
+**WWPG 0.2.10** targets Minecraft **1.21.1**. Use matching mod versions on
 server and clients, following the [installation guide](INSTALL.md).
 
-| Dependency | Minimum accepted by WWPG | Checked release input |
+| Dependency | Minimum accepted by WWPG | Selected release input |
 | --- | --- | --- |
-| NeoForge | 21.1.231 | 21.1.265 primary; separate .231 and .248 compatibility lanes |
+| NeoForge | 21.1.231 | 21.1.262; other loaders use separate focused probes |
 | Create | 6.0.10 | Published NeoForge 1.21.1 Create 6.0.10 |
-| CEE | 1.21.1-1.1.3 | 1.1.4 complete campaign; 1.1.3 retains focused compatibility coverage |
+| CEE | 1.21.1-1.1.3 | 1.1.4 full acceptance; 1.1.3 retains focused compatibility coverage |
 | Power Grid | 0.6.2 | 0.6.2 for Minecraft 1.21.1 |
-| Architectury | Required by the upstream mods | 13.0.11 NeoForge |
+| Architectury | Required by the upstream mods | 13.0.12 NeoForge |
 
-The optional computer profile uses CC:Tweaked **1.121.0** and Pinout **0.2.1**.
-CC:Tweaked 1.121.0 requires NeoForge 21.1.265; the older loader lanes use the
-separately locked CC:Tweaked 1.120.2. The [runtime selection](../release/0.2.8-rc.1/runtime-selection.json)
-retains the original reviewed snapshot. Beta1 uses the identical dependency set
-and carried-forward acceptance after a version-only artifact comparison.
+The optional computer profile uses CC:Tweaked **1.120.2** and Pinout **0.2.1**.
+CC:Tweaked 1.121.0 requires NeoForge 21.1.265 and is not selected for 262.
+The [0.2.10 acceptance record](../release/0.2.10/ACCEPTANCE.md) records completed
+headless and graphical coverage on this set. Earlier release records retain
+their actual dependencies.
 
 CEE 1.1.4 corrected its variac voltage lookup. WWPG recognizes that corrected
 call and the older 1.1.3 call, preserving the correct local voltage and heating
 reading for each. Focused checks cover both solvers and the panel/tool changes;
-the retained 0.2.8 campaign uses 1.1.4. Minimum SDK compile dependencies remain pinned separately.
+the retained 0.2.10 campaign uses 1.1.4. Minimum SDK compile dependencies remain pinned separately.
 
 Newer NeoForge, Create, CEE and Power Grid versions are allowed to load so players
 can try them. Being allowed to load does not establish compatibility. Consult the

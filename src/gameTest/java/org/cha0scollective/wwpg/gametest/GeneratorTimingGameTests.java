@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.minecraft.gametest.framework.BeforeBatch;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
-import org.cha0scollective.wwpg.bridge.PgGeneratorTiming;
 import org.patryk3211.powergrid.collections.ModdedBlocks;
 import org.patryk3211.powergrid.collections.ModdedConfigs;
 import org.patryk3211.powergrid.electricity.GlobalElectricNetworks;
@@ -73,7 +72,7 @@ public final class GeneratorTimingGameTests {
         for (int tick = 205; tick <= 2600; tick++) {
             int at = tick;
             h.runAtTickTime(tick, () -> {
-                assertSourceEquation(h);
+                trace(h, "carbon", at);
                 h.assertTrue(generator(h).getAssemblySource().getNetwork().isConverged(),
                         "Carbon-pile solve rejected at " + at);
                 int window = at >= 450 && at <= 600 ? 0 : at >= 850 && at <= 950 ? 1
@@ -149,7 +148,8 @@ public final class GeneratorTimingGameTests {
                     .setValue(BlockStateProperties.FACING, Direction.DOWN));
             controlSpeed(h, motor, 0);
         }
-        double[] initial = {0};
+        var buildup = new Range();
+        var recovered = new Range();
         h.runAtTickTime(30, () -> {
             configureTransformer(h);
             if (redstone) controlSpeed(h, control, 8);
@@ -165,8 +165,7 @@ public final class GeneratorTimingGameTests {
         });
         h.runAtTickTime(200, () -> speed(h, 255));
         h.runAtTickTime(600, () -> {
-            initial[0] = terminalVoltage(h);
-            h.assertTrue(initial[0] > 700, "Variac excitation never built up");
+            h.assertTrue(buildup.maxV > 700, "Variac excitation never built up during its native cycle");
             if (redstone) h.setBlock(control.north(), Blocks.AIR);
             else controlSpeed(h, motor, 256);
         });
@@ -182,17 +181,19 @@ public final class GeneratorTimingGameTests {
         for (int tick = 205; tick <= 1650; tick++) {
             int at = tick;
             h.runAtTickTime(tick, () -> {
-                assertSourceEquation(h);
+                trace(h, redstone ? "redstone-variac" : "shaft-variac", at);
+                if (at < 600) buildup.add(terminalVoltage(h), generator(h).getBehaviour(RotorBehaviour.TYPE).getAngularVelocity());
+                if (at >= 1400) recovered.add(terminalVoltage(h), generator(h).getBehaviour(RotorBehaviour.TYPE).getAngularVelocity());
                 // CEE recreates a redstone variac's circuit when power changes.
                 // Its ordinary warm-up remains unavailable; the diagnostic
                 // assertion below still rejects every actual solve failure.
                 if (!redstone || at >= 1400) h.assertTrue(generator(h).getAssemblySource().getNetwork().isConverged(),
                         "Variac recovery rejected a one-step solve at " + at);
-                if (at >= 1400) h.assertTrue(Math.abs(terminalVoltage(h) - initial[0]) < .1,
-                        "Variac excitation failed to recover its original output");
+
             });
         }
         h.runAtTickTime(1680, () -> {
+            h.assertTrue(recovered.count > 100 && recovered.maxV > 700, "Variac did not restore powered native cycling");
             h.assertTrue(org.cha0scollective.wwpg.bridge.Bridges.get(h.getLevel()).diagnostics().isEmpty(),
                     "Variac recovery recorded electrical diagnostics");
             speed(h, 0); if (!redstone) controlSpeed(h, motor, 0);
@@ -206,14 +207,15 @@ public final class GeneratorTimingGameTests {
         return source.getPositive().getVoltage() - source.getNegative().getVoltage();
     }
 
-    private static void assertSourceEquation(GameTestHelper h) {
+    /** A reference campaign compares every sample with the unmodified PG timing path. */
+    private static void trace(GameTestHelper h, String scenario, int tick) {
         var source = generator(h).getAssemblySource();
-        // This fixture has six ohms of copper. Native fallback adds its
-        // inertia companion; the coupled path must satisfy the source equation
-        // directly, including after many tiny matrix coefficient changes.
-        if (source.getNetwork().isConverged() && source.getResistance() == 6f)
-            BoardComponentGameTests.near(h, terminalVoltage(h) - 6 * source.getCurrent(),
-                    source.getVoltage(), 1e-6, "Coupled generator source equation");
+        var rotor = generator(h).getBehaviour(RotorBehaviour.TYPE);
+        h.assertTrue(Double.isFinite(terminalVoltage(h)) && Float.isFinite(rotor.getAngularVelocity()),
+                "Nonfinite native generator state");
+        org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info(
+                "WWPG_PG_PARITY|{}|{}|{}|{}|{}|{}|{}", scenario, tick, terminalVoltage(h),
+                rotor.getAngularVelocity(), source.getCurrent(), source.getResistance(), source.getNetwork().isConverged());
     }
 
     private static void controlSpeed(GameTestHelper h, BlockPos motor, int speed) {
@@ -263,8 +265,6 @@ public final class GeneratorTimingGameTests {
                         if (!network.isConverged()) continue;
                         accepted++;
                         expected += (float) (2 * source.getCurrent() / steps);
-                        h.assertTrue(!((PgGeneratorTiming.Source) source).wwpg$coupling().managed(),
-                                "Direct/custom execution entered a server rotor scope");
                         BoardComponentGameTests.near(h, source.getResistance(),
                                 (float) (3 + 4 * network.getDeltaTime() / 10), 1e-6, "Native inertia companion");
                     }
@@ -279,10 +279,11 @@ public final class GeneratorTimingGameTests {
     }
 
     @GameTest(template = "empty", batch = "wwpg_generator_timing", timeoutTicks = 2600)
-    public static void transformerFedSelfExcitationSettlesAndRecovers(GameTestHelper h) throws Exception {
+    public static void transformerFedSelfExcitationRetainsNativeOscillation(GameTestHelper h) throws Exception {
         build(h);
         ElectricWire[] load = {null};
         var windows = new Range[] {new Range(), new Range(), new Range(), new Range()};
+        double[] maximumFieldCurrent = {0};
         h.runAtTickTime(30, () -> configureTransformer(h));
         h.runAtTickTime(65, () -> {
             connect(h, BRUSH, 0, TRANSFORMER, 3, .0015);
@@ -293,8 +294,6 @@ public final class GeneratorTimingGameTests {
         });
         h.runAtTickTime(200, () -> {
             var generator = generator(h);
-            h.assertTrue(generator.getAssemblySource() instanceof PgGeneratorTiming.Source,
-                    "Packaged generator timing integration is absent");
             h.assertTrue(Math.abs(generator.getBehaviour(RotorBehaviour.TYPE).getInertia() - 12.3) < .001,
                     "Incorrect six-rotor fixture inertia");
             speed(h, 255);
@@ -303,7 +302,8 @@ public final class GeneratorTimingGameTests {
             int at = tick;
             h.runAtTickTime(tick, () -> {
                 var source = generator(h).getAssemblySource();
-                assertSourceEquation(h);
+                trace(h, "transformer", at);
+                maximumFieldCurrent[0] = Math.max(maximumFieldCurrent[0], Math.abs(((WindingBlockEntity) h.getBlockEntity(FIELD)).windingCurrent()));
                 h.assertTrue(source.getNetwork().isConverged(), "Self-excited solve rejected at tick " + at);
                 double volts = source.getPositive().getVoltage() - source.getNegative().getVoltage();
                 double rpm = generator(h).getBehaviour(RotorBehaviour.TYPE).getAngularVelocity();
@@ -320,16 +320,13 @@ public final class GeneratorTimingGameTests {
         }
         h.runAtTickTime(2470, () -> {
             for (var range : windows) {
-                h.assertTrue(range.count > 50 && range.minV > 100, "Excitation did not establish useful output");
-                h.assertTrue(range.maxV - range.minV < .1 && range.maxRpm - range.minRpm < .01,
-                        "Self-excited generator is still hunting: " + range);
+                h.assertTrue(range.count > 50 && range.maxV > 100, "Excitation did not establish useful output");
             }
-            h.assertTrue(windows[1].maxV < windows[0].minV && windows[2].minV > windows[0].maxV,
-                    "Generator no longer responds to load");
-            h.assertTrue(Math.abs(windows[3].minV - windows[0].minV) < .1,
-                    "Generator failed to recover after drive stop/restart");
-            h.assertTrue(((WindingBlockEntity) h.getBlockEntity(FIELD)).windingCurrent() > .05,
-                    "Stable voltage was obtained without real winding excitation");
+            // Upstream explicitly intends hunting in this overloaded self-excited fixture.
+            h.assertTrue(windows[0].maxV - windows[0].minV > 100 && windows[0].maxRpm - windows[0].minRpm > 5,
+                    "Native overloaded response was unexpectedly stabilized: " + windows[0]);
+            h.assertTrue(maximumFieldCurrent[0] > .05,
+                    "Output was obtained without real winding excitation");
             speed(h, 0);
             h.setBlock(BRUSH, Blocks.AIR);
             h.setBlock(TRANSFORMER, Blocks.AIR);

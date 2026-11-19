@@ -8,15 +8,6 @@
     "NativeResourceMixin",
     "PgNativeFailureMixin",
     "PgSolverFailureMixin",
-    "PgGeneratorCouplingMixin",
-    "PgGeneratorMatrixMixin",
-    "PgRotorTimingMixin",
-    "PgRotorAccess",
-    "PgRotorFieldAccessor",
-    "PgWindingFieldInvoker",
-    "PgCalculationAccessor",
-    "PgCalculationOneAccessor",
-    "PgCalculationManyAccessor",
     "SolverConfigThreadMixin",
     "CircuitBuilderAccessor",
     "CircuitBuilderValidationMixin",
@@ -64,6 +55,7 @@
     "CeeDeviceRemovalMixin",
     "CeeBuzzerAudioMixin",
     "CeeTrainCircuitMixin",
+    "CeeTrainGaugeMovementMixin",
     "CeeCutHandleAccessor",
     "CeeMovingWireCutMixin",
     "ApiDeviceRemovalMixin",
@@ -108,7 +100,8 @@
     "CeePanelCoverMixin",
     "MultimeterWireClientMixin",
     "ClampMeterClientMixin",
-    "NativeClampAvailabilityMixin"
+    "NativeClampAvailabilityMixin",
+    "CeeTrainGaugeRenderMixin"
   ],
   "injectors": {
     "defaultRequire": 1

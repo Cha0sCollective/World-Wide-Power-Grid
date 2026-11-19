@@ -13,14 +13,14 @@ import test_suites as suites
 from suite_evidence import locked, require, validate_job
 
 ROOT = suites.ROOT
-POLICY = 'loader-compatibility-v1'
+POLICY = 'loader-loading-v2'
 
 
 def versions(text):
     values = re.split(r'[\s,]+', text.strip())
     if not 1 <= len(values) <= 4 or len(set(values)) != len(values):
         raise ValueError('Select one to four distinct NeoForge versions')
-    minimum = int(suites.catalog()['loaders'][0].split('.')[-1])
+    minimum = int(suites.catalog().get('minimum_loader', suites.catalog()['loaders'][0]).split('.')[-1])
     if any(not re.fullmatch(r'21\.1\.[0-9]{1,5}', v) or int(v.split('.')[-1]) < minimum for v in values):
         raise ValueError('Select NeoForge 21.1 versions at or above the declared minimum')
     return values
@@ -51,17 +51,12 @@ def plan(loader, backend, installation, platform):
                  namespaces=[cfg['installation_namespace']] + ([cfg['addon_namespace']] if installation=='ADDONS' else []),
                  addon=installation == 'ADDONS')]
     for original in selected:
-        group = original['group']
-        for index, phase in enumerate(spec['groups'][group]['phases']):
-            item = dict(original, loader=loader, installation=installation, phase=phase,
-                        addon=installation == 'ADDONS',
-                        id=f'{platform}/{loader}/{backend}/{installation}/{group}/{index}-{phase}')
-            if phase != 'SETUP':
-                setup = spec['groups'][group].get('setup_namespaces', [])
-                item['namespaces'] = [n for n in item['namespaces'] if n not in setup]
-            if installation == 'BASE':
-                item['namespaces'] = [n for n in item['namespaces'] if n not in cfg['addon_only_namespaces']]
-            jobs.append(item)
+        item = dict(original, loader=loader, installation=installation,
+                    addon=installation == 'ADDONS',
+                    id=original['id'].replace('/'+base+'/', '/'+loader+'/').replace('/'+profile+'/', '/'+installation+'/'))
+        if installation == 'BASE':
+            item['namespaces'] = [n for n in item['namespaces'] if n not in cfg['addon_only_namespaces']]
+        jobs.append(item)
     return jobs
 
 
@@ -69,7 +64,7 @@ def prepare(output):
     from ci_prepare import checked
     output = Path(output).resolve(); output.mkdir(parents=True, exist_ok=False)
     wrapper = ROOT / ('gradlew.bat' if os.name == 'nt' else 'gradlew')
-    # Build at the normal minimum loader, once. No tests or Minecraft launches.
+    # Build at the recommended loader, once. No tests or Minecraft launches.
     checked([sys.executable, ROOT/'tools/run_checked.py', '--timeout', '1200', '--', wrapper,
              'assemble', 'referenceJar', 'publishAllPublicationsToSdkRepository', '--no-daemon'], output/'build.log')
     for name in ('extension-addon', 'cee-addon'):

@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "target": "0.2.8-beta.2",
+  "target": "0.2.9",
   "minecraft": "1.21.1",
-  "neoforge": "21.1.265",
+  "neoforge": "21.1.262",
   "java": 21,
   "create": "6.0.10-280",
   "artifacts": [
@@ -42,10 +42,10 @@
     },
     {
       "role": "architectury",
-      "version": "13.0.11",
-      "coordinate": "maven.modrinth:architectury-api:1IiqEQGl",
-      "url": "https://cdn.modrinth.com/data/lhGA9TYQ/versions/1IiqEQGl/architectury-13.0.11-neoforge.jar",
-      "sha256": "9cc92f2c09533fc5482c60f993bd891c655a0e32b637037cdcb7c2b23adedeeb",
+      "version": "13.0.12",
+      "coordinate": "maven.modrinth:architectury-api:xGfBrBzj",
+      "url": "https://cdn.modrinth.com/data/lhGA9TYQ/versions/xGfBrBzj/architectury-13.0.12-neoforge.jar",
+      "sha256": "aa558d884c9d35399bf5471e042d6be30c32e4a1cf0a5d06a4480ad49dba3ac0",
       "source": "https://github.com/architectury/architectury-api",
       "source_note": "Current runtime; compile minimum remains 13.0.8."
     }

@@ -39,8 +39,8 @@ entry is unchanged. SDK or packaging changes still need focused checks.
 Never describe carried-forward acceptance or an interrupted run as a fresh pass.
 
 For future release campaigns, follow the [runtime dependency selection
-policy](TESTING.md#select-release-runtime-dependencies): freeze the newest
-currently supported dependency jars and use them for the complete requested
+policy](TESTING.md#select-release-runtime-dependencies): freeze the currently
+recommended dependency jars and use them for the complete requested
 acceptance, including the applicable graphical lane. Older-version focused or
 compatibility checks remain additional coverage; they cannot replace the full
 run on the current supported set. Verify actual loaded versions and hashes,

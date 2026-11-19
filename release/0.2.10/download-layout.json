@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "state": "ready",
+  "version": "0.2.10",
+  "api_version": "1.0.0",
+  "repository": "Cha0sCollective/World-Wide-Power-Grid",
+  "source_sha": "5ceeb2484b988e76b8fb34e9181ea3aed951a687",
+  "accepted_bundle_sha256": "19de5599bf69c2be3b88dc417b189177736809891a550f427dfc5f52e0023d3d",
+  "notes_sha256": "5d491c7fbcdd2364cba53c633ea8d9ce777fd29a4449ec83b5f28bf498e4f73c",
+  "assets": [
+    {
+      "filename": "wwpg-0.2.10.jar",
+      "sha256": "1a174c03fa7bd24b53f4249b95b7330f2051cc02803453679c89bf07b6b6c21e",
+      "bytes": 5169424
+    },
+    {
+      "filename": "wwpg-0.2.10-example-worlds.zip",
+      "sha256": "fc329c4b1bcd0865d86c56df04f91517482e3f0903a9218b7870b49f944e3045",
+      "bytes": 5487377
+    },
+    {
+      "filename": "wwpg-0.2.10-developer-sdk.zip",
+      "sha256": "8f454e157e82ff5c01ab111de8225c9262c77ab1184353716e1d22a6b16285bc",
+      "bytes": 1059098
+    },
+    {
+      "filename": "wwpg-0.2.10-verification.zip",
+      "sha256": "19de5599bf69c2be3b88dc417b189177736809891a550f427dfc5f52e0023d3d",
+      "bytes": 330660271
+    },
+    {
+      "filename": "wwpg-0.2.10-checksums.txt",
+      "sha256": "f7bbc1ad64b3dd42e085d6cf8099ecd31fb78a7b58229af9e7277496b0b6fe1d",
+      "bytes": 370
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 # Documentation
 
-These guides describe **WWPG 0.2.8-beta.2 (prerelease)**, its supported stationary
-factories and **extension API 1.0.0**. The previous stable release is 0.2.7.
+These guides describe **WWPG 0.2.10**, its supported stationary factories and
+**extension API 1.0.0**.
 Start with the page that matches what you want to do. The [circuit library](CIRCUIT_LIBRARY.md)
 and [control promotion record](developer/CONTROL_PROMOTION_028.md) describe the
-retained improvements; [acceptance](../release/0.2.8-beta.2/ACCEPTANCE.md) preserves
-the completed campaign's actual source and artifact identities.
+retained improvements; [acceptance](../release/0.2.10/ACCEPTANCE.md) preserves
+the completed coverage and actual source and artifact identities.
 
 ## Play and run a server
 
