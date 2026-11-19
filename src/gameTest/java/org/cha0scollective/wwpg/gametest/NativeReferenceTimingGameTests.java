@@ -291,8 +291,7 @@ public final class NativeReferenceTimingGameTests {
         place(h,SOURCE,CEEBlocks.CREATIVE_BATTERY.get());place(h,DEVICE,CEEBlocks.DIODE.get());
         place(h,LOAD,upstream()?CEEBlocks.CREATIVE_RESISTOR.get():ModdedBlocks.CREATIVE_RESISTOR.get());
         var trace=new Trace("cee-diode-clamped-high-bias",h);
-        double conductance=(1e-9/.05)*Math.exp(.8/.05),clampedCurrent=1e-9*(Math.exp(.8/.05)-1);
-        double expected=1000*(70-.8+clampedCurrent/conductance)/(1000+1/conductance);
+        double expected=CeeTestNumerics.highBiasDiodeLoadVoltage();
         h.runAtTickTime(10,()->{
             setSupply(h,true,70);
             if(upstream())((com.george_vi.electroenergetics.content.electronic_components.resistor.ResistorBlockEntity)h.getBlockEntity(LOAD)).setResistance(1000);
