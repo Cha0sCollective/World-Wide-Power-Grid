@@ -44,7 +44,12 @@ assertions. This extends the earlier causal diagnosis recorded in the historical
 report. The diagnostic is absent from the player jar. Controlled comparisons
 keep their diagnostic identities and do not certify stock-default parity.
 
-The choice of reference baseline for full beta acceptance is pending user input.
+The user approved the more accurate, test-only reference baseline for the CEE
+1.2 beta. Its catalog jobs explicitly select `cee120-residual-1e-16`; the evidence
+gate requires the matching CEE hash, launch argument and actual control marker.
+Compatibility traces must identify the same reference baseline. Raw-stock
+failures remain separate observations. The fresh full `.3` campaign is pending
+the final focused checks.
 The default stable 342-job plan and CEE 1.1.4 recommendation remain unchanged.
 
 ## Earlier `.2` repair candidate

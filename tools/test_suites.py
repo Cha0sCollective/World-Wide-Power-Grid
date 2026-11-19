@@ -157,7 +157,8 @@ def plan(lane, groups=None, backends=None, profiles=None, loaders=None, platform
                         for reference in ('upstream', 'compatibility'):
                             jobs.append(dict(id=f'{target}/{loader}/{backend}/reference-{reference}', lane='headless',
                                 operation='reference', reference=reference, platform=target, loader=loader,
-                                backend=backend, profile=profile))
+                                backend=backend, profile=profile,
+                                **({'reference_control':spec['reference_control']} if 'reference_control' in spec else {})))
     return jobs
 
 
@@ -246,6 +247,9 @@ def command(job, inputs, output):
         args += ['-PceeRuntimeJar='+cee['path'], '-PceeDevelopmentJar='+cee['path'],
                  '-PtestExpectedCeeSha256='+cee['sha256']]
     if job.get('operation') == 'reference':
+        if 'reference_control' in job:
+            if job['reference_control']['id']!='cee120-residual-1e-16':raise ValueError('Unknown reference control')
+            args += ['-PtestTightCeeResidual=true']
         args += ['-PreferenceArtifact='+inputs['artifacts']['reference' if job['reference'] == 'upstream' else 'runtime']['path'],
                  '-PreferenceDirectory='+str(directory)]
         if job['reference'] == 'upstream':

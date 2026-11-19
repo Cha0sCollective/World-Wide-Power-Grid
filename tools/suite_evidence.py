@@ -88,6 +88,15 @@ def validate_job(actual, expected, inputs, base):
             require(header['jar']['sha256'] == inputs['artifact_hashes']['runtime'] and header['profile'] == expected['profile'], 'Export artifact/profile differs')
         return
     proof = read(locked(actual['proof'], base))
+    if expected.get('reference_control'):
+        control=expected['reference_control']
+        require(control.get('id')=='cee120-residual-1e-16' and control.get('squared_residual_threshold')==1e-16,
+                'Unknown reference precision control')
+        require(inputs['artifact_hashes'].get('cee_runtime')==control['cee_sha256'],'Reference used another CEE jar')
+        require('-PtestTightCeeResidual=true' in actual.get('command',[]),'Reference precision command missing')
+        require(proof.get('upstream')==(expected.get('reference')=='upstream'),'Reference mode differs')
+        marker='CEE_REFERENCE_RESIDUAL threshold=1.0E-16'
+        require((marker in text)==(expected.get('reference')=='upstream'),'Actual reference precision control differs')
     require(proof.get('completed') and proof.get('required_tests_passed', 0) > 0, 'Process did not complete its tests')
     require('GAME TESTS COMPLETE' in text and re.search(r'All [1-9][0-9]* required tests passed', text), 'Missing actual completed GameTest log')
     require('All dimensions are saved' in text, 'World did not finish saving')

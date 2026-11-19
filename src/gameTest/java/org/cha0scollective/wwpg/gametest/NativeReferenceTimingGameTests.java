@@ -429,6 +429,8 @@ public final class NativeReferenceTimingGameTests {
                 if (!upstream()) {
                     var baseline = JsonParser.parseString(Files.readString(reference)).getAsJsonObject();
                     h.assertTrue(baseline.get("backend").getAsString().equals(System.getProperty("wwpg.test.backend")), "Reference backend differs from compatibility");
+                    String baselineMode=baseline.has("reference_baseline")?baseline.get("reference_baseline").getAsString():"stock-default";
+                    h.assertTrue(baselineMode.equals(referenceBaseline()),"Reference precision baseline differs from compatibility");
                     for (var entry : baseline.getAsJsonObject("events").entrySet()) h.assertTrue(events.has(entry.getKey()) && Math.abs(events.get(entry.getKey()).getAsInt()-entry.getValue().getAsInt()) <= 1,
                             name + " event differs by more than one tick: " + entry.getKey() + "; actual=" + events + "; reference=" + baseline.get("events"));
                     if (storage) {
@@ -449,11 +451,13 @@ public final class NativeReferenceTimingGameTests {
         void write() {
             var data = new JsonObject(); data.addProperty("schema", 1); data.addProperty("backend", System.getProperty("wwpg.test.backend"));
             data.addProperty("upstream", upstream()); data.addProperty("initial", initial); data.add("samples", samples); data.add("events", events);
+            data.addProperty("reference_baseline",referenceBaseline());
             if (!preconditions.entrySet().isEmpty()) data.add("preconditions", preconditions);
             data.addProperty("relative_tolerance", .01); data.addProperty("near_zero_tolerance", nearZero);
             data.addProperty("allowed_gameplay_tick_offset", 1);
             try { Files.writeString(Path.of((upstream() ? "native-reference-" : "compatibility-")+name+".json"), new GsonBuilder().setPrettyPrinting().create().toJson(data)+"\n"); }
             catch (java.io.IOException error) { throw new IllegalStateException(error); }
         }
+        private static String referenceBaseline(){return Boolean.getBoolean("wwpg.test.tightCeeResidual")?"cee120-residual-1e-16":"stock-default";}
     }
 }

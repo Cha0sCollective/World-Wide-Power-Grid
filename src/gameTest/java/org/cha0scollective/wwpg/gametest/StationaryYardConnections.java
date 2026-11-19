@@ -101,9 +101,8 @@ final class StationaryYardConnections {
             close(s,70,true);wire(h,s.control(),1,s.device(),1,false);wire(h,s.device(),0,load,0,true);wire(h,s.source(),1,load,1,false);yard.blockMeter(s,load,0,1,70);
         });
         yard.check(s,()->{
-            double g=(1e-9/.05)*Math.exp(.8/.05);double clampedCurrent=1e-9*(Math.exp(.8/.05)-1);
-            double expected=1000*(70-.8+clampedCurrent/g)/(1000+1/g);
-            near(h,volts(h,load,0,1),expected,expected*.001,"Native clamped diode forward voltage");
+            double expected=CeeTestNumerics.highBiasDiodeLoadVoltage();
+            near(h,volts(h,load,0,1),expected,expected*.001,"Native diode forward voltage");
         });
     }
     private void stringLights() {

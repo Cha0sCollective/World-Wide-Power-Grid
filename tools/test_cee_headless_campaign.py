@@ -7,9 +7,33 @@ from unittest.mock import patch
 
 import cee_headless_campaign as campaign
 import test_suites as suites
+import suite_evidence as evidence
 
 
 class CeeCampaignChecks(unittest.TestCase):
+    def test_reference_evidence_requires_the_actual_control_and_frozen_cee(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary)
+            control=campaign.campaign_catalog()['reference_control']
+            base=dict(id='test-reference',lane='headless',operation='reference',reference='upstream',
+                      backend='NATIVE',profile='BASE',platform='windows-latest',loader='21.1.262',reference_control=control)
+            log='GAME TESTS COMPLETE\nAll 1 required tests passed\nAll dimensions are saved\nWWPG_TEST_BACKEND_CONFIG: requested=NATIVE, configured=NATIVE\n'
+            for number,case in enumerate(('valid','missing-marker','missing-argument','wrong-cee','wrong-mode','compatibility')):
+                with self.subTest(case=case):
+                    job=copy.deepcopy(base)
+                    if case=='compatibility':job['reference']='compatibility'
+                    text=log+('CEE_REFERENCE_RESIDUAL threshold=1.0E-16\n' if case not in ('missing-marker','compatibility') else '')
+                    log_path=root/(str(number)+'.log');log_path.write_text(text)
+                    proof_path=root/(str(number)+'.json')
+                    suites.write(proof_path,dict(completed=True,required_tests_passed=1,backend='NATIVE',profile='BASE',
+                        upstream=case not in ('wrong-mode','compatibility'),sha256='runtime' if case=='compatibility' else 'reference'))
+                    actual=dict(job,status='passed',exit_code=0,log=suites.descriptor(log_path),proof=suites.descriptor(proof_path),
+                                command=[] if case=='missing-argument' else ['-PtestTightCeeResidual=true'])
+                    inputs=dict(artifact_hashes=dict(runtime='runtime',reference='reference',cee_runtime='wrong' if case=='wrong-cee' else campaign.CEE_SHA256))
+                    if case in ('valid','compatibility'):evidence.validate_job(actual,job,inputs,root)
+                    else:
+                        with self.assertRaises(ValueError):evidence.validate_job(actual,job,inputs,root)
+
     def test_explicit_runtime_arguments_do_not_depend_on_environment_key_case(self):
         inputs={'version':campaign.VERSION,'artifacts':{role:{'path':role+'.jar'} for role in (*suites.ROLES,'gametest')}}
         inputs['artifacts']['cee_runtime']={'path':'cee120.jar','sha256':campaign.CEE_SHA256}
@@ -61,11 +85,23 @@ class CeeCampaignChecks(unittest.TestCase):
         baseline={j['id']:j for j in suites.plan('full-headless')}
         jobs={j['id']:j for j in suites.plan('full-headless',spec=campaign.campaign_catalog())}
         self.assertTrue(baseline.keys()<=jobs.keys())
-        self.assertTrue(all(jobs[key]==job for key,job in baseline.items()))
+        self.assertTrue(all({k:v for k,v in jobs[key].items() if k!='reference_control'}==job for key,job in baseline.items()))
+        controlled=[j for j in jobs.values() if 'reference_control' in j]
+        self.assertEqual(len(controlled),8)
+        self.assertTrue(all(j['operation']=='reference' and j['reference_control']['id']=='cee120-residual-1e-16' for j in controlled))
         names={name for job in jobs.values() for name in job.get('namespaces',[])}
         self.assertTrue({'wwpg_cee_readiness','wwpg_cee_migration','wwpg_cee_lifecycle','wwpg_cee_ownership',
                          'wwpg_cee_adapters','wwpg_cee_baseline','wwpg_cee_baseline_train','wwpg_cee_fans'}<=names)
         self.assertNotIn('wwpg_cee_migration_cold',names)
+
+    def test_reference_precision_is_explicit_and_does_not_change_the_stable_plan(self):
+        spec=campaign.campaign_catalog()
+        selected=[j for j in suites.plan('full-headless',spec=spec) if j.get('operation')=='reference']
+        inputs={'artifacts':{role:{'path':role+'.jar'} for role in (*suites.ROLES,'gametest','reference')}}
+        for job in selected:
+            args,_=suites.command(job,inputs,Path('scratch'))
+            self.assertIn('-PtestTightCeeResidual=true',args)
+        self.assertTrue(all('reference_control' not in j for j in suites.plan('full-headless')))
 
     def test_development_catalog_is_fully_classified(self):
         with patch.object(suites,'catalog',side_effect=campaign.campaign_catalog):

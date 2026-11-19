@@ -192,6 +192,15 @@ the SDK starter use the frozen CEE development runtime. No graphical job is
 selected. `tools/cee_headless_campaign.py plan` inspects this selection without
 launching it. A continuation of this campaign must also set `cee_development`.
 
+This CEE 1.2 campaign uses the explicitly approved `cee120-residual-1e-16`
+test-only reference control for the independent CEE comparison. Stock CEE's
+default residual threshold fails the capacitor/diode transient control; preserve
+that failed observation separately. The campaign keeps the physical assertions
+and tolerances and tightens only the reference's stopping precision. Catalog
+jobs, launch arguments, trace headers and the actual control log marker bind
+that selection. The player jar contains no reference precision override, and
+the default stable CEE 1.1.4 campaign continues to use stock defaults.
+
 The manual **Full headless acceptance** GitHub workflow prepares artifacts once,
 then derives its eight platform/backend/profile selections from the catalog
 and uses only the recommended loader. Older-loader compatibility is a separate

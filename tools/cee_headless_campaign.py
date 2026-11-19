@@ -24,6 +24,9 @@ def campaign_catalog():
     for cfg in spec['groups'].values():cfg.pop('focused_only',None)
     spec['groups']['cee-fans']={'namespaces':['wwpg_cee_fans'],'phases':['SETUP']}
     spec['special_namespaces'].pop('wwpg_cee_fans')
+    spec['reference_control']={'id':'cee120-residual-1e-16','cee_sha256':CEE_SHA256,
+        'squared_residual_threshold':1e-16,
+        'scope':'Test-only independent CEE reference; stock-default failures retained separately'}
     spec['campaign']={'name':'CEE 1.2 full headless','version':VERSION,'player_sha256':PLAYER_SHA256,
                       'cee_version':CEE_VERSION,'cee_sha256':CEE_SHA256,
                       'scope':'Windows/Linux, Native/Java, BASE/PINOUT; no graphical lane'}
