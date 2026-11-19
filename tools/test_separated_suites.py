@@ -190,6 +190,7 @@ class SelectionChecks(unittest.TestCase):
             self.assertEqual(args[args.index('createMinecraftArtifacts')+1],task)
             self.assertIn('-Pneo_version='+job['loader'],args)
             self.assertEqual(args[args.index('--timeout')+1],'600')
+            self.assertEqual('-PtestRestorationBatch=false' in args,job['reference']=='upstream')
 
 
 class EvidenceChecks(unittest.TestCase):
