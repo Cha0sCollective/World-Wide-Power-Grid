@@ -37,6 +37,11 @@ real upstream jars and WWPG at runtime using the main project's
 server and every client. WWPG itself does not require it. Pinout and CC:Tweaked
 are optional.
 
+The storage property's adapter supports both CEE 1.1 and 1.2 conventions. It
+initializes a finite resistance before the first capture and selects the native
+Norton source sign from CEE's public class contract. Its backward-Euler storage
+model remains the same on both versions; it does not use WWPG internals.
+
 ## CEE panel example
 
 Craft an **API Storage Indicator** using redstone and glass, or obtain it from
