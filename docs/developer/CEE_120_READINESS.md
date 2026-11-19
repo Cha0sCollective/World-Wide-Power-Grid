@@ -2,11 +2,52 @@
 
 The preparation branch `dev/cee-120-readiness` now integrates WWPG **0.2.10**,
 main commit `5072e412639db71d346ff54c2b133f54f0b13934`. The initial candidate was
-`0.2.10-dev.cee120.1`; the current repair candidate is `0.2.10-dev.cee120.2`.
+`0.2.10-dev.cee120.1`; the current repair candidate is `0.2.10-dev.cee120.3`.
 This is a development preparation, not a published release
 or a full acceptance claim.
 
 ## Current repair candidate
+
+`0.2.10-dev.cee120.3` has player SHA256
+`0c800e29da66728a239d4fa2407efa2f9052670c744dc6614f4c2b5597a9cab8`.
+CEE remains `1.21.1-1.2.0-132`. Full acceptance is pending.
+
+The expanded reference checks found a real high-bias diode failure in `.2`:
+an extreme Newton trial overflowed the Shockley exponential before PG could
+backtrack. `.3` supplies a large finite rejection merit for those trial currents.
+Accepted measurements require the exact model current within the finite
+evaluation range; clipped trial values cannot be published. Three focused JVM
+checks cover finite squared merit, exact physical currents and rejected invalid
+measurements. Both solvers pass the ten reference comparison cases against the
+explicitly labelled precision control described below, including the 70 V diode.
+Core/migration and showroom checks also pass on both solvers. Broader `.3`
+cross-version regression checks are in progress.
+
+Further fixture repairs use the version-safe indexed-node lookup, the actual
+native diode model (legacy clamp or modern Shockley equation) and the steering
+wheel's positive channel in the showroom's real receiver wiring. Existing
+physical tolerances and restart/receiver assertions remain intact.
+
+The public SDK example now initializes its custom storage resistance before
+the first adapter capture and uses the selected CEE current-source convention.
+It compiles against the public minimum SDK and passes all 37 API setup cases on
+CEE 1.2, 1.1.4 and 1.1.3 with both solvers on `.2` (222 cases). Its repaired jar
+has SHA256 `4a412dcc1bdc887b267588aa1f75b397403f9ce72aa1afa8076dec7b52aaa9b6`.
+
+### Reference precision boundary
+
+Raw CEE 1.2's default squared residual threshold (`1e-2`) fails the reference
+capacitor/diode transient assertion. That failed observation is retained. The
+existing test-only `CeeReferencePrecisionMixin`, explicitly enabled at `1e-16`,
+makes all ten upstream reference checks pass with the same CEE jar and physical
+assertions. This extends the earlier causal diagnosis recorded in the historical
+report. The diagnostic is absent from the player jar. Controlled comparisons
+keep their diagnostic identities and do not certify stock-default parity.
+
+The choice of reference baseline for full beta acceptance is pending user input.
+The default stable 342-job plan and CEE 1.1.4 recommendation remain unchanged.
+
+## Earlier `.2` repair candidate
 
 `0.2.10-dev.cee120.2` has player SHA256
 `21ac72bf950388f7e57dde94497cd3e48de1ddda88e1caeaa72f536b93cfdc06`.
@@ -162,6 +203,22 @@ The local record is `local/cee-120/headless-0210-1/RESULTS.json`; its 290 portab
 evidence objects were checked against their recorded hashes and sizes. Original
 failed attempts are retained separately. Launcher repairs did not change the
 frozen player jar.
+
+### Subsequent `.2` campaigns
+
+[Run 44629869533](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/44629869533)
+passed 82 jobs before all eight environments stopped at API setup: eight failed
+jobs and 308 unexecuted jobs. The cause was the SDK example's initial resistance
+and source sign, repaired above. All 402 reachable portable evidence objects
+were checked against their recorded sizes and hashes.
+
+[Run 44633630674](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/44633630674)
+uses the corrected example. The canonical comparison confirms that only
+`upstream_example` changed; player, companion, APIs, reference control, CEE jar
+and catalog retained their original hashes. Completed environments have reached
+the showroom and exposed its old steering-channel assumption. Those failures
+remain failures; the `.3` focused showroom checks use the corrected fixture.
+No `.2` campaign establishes a passing full suite for `.3`.
 
 ## Repeat a focused check
 
