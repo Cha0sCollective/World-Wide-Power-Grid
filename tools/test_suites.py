@@ -238,6 +238,9 @@ def command(job, inputs, output):
     if job.get('operation') == 'reference':
         args += ['-PreferenceArtifact='+inputs['artifacts']['reference' if job['reference'] == 'upstream' else 'runtime']['path'],
                  '-PreferenceDirectory='+str(directory)]
+        if job['reference'] == 'upstream':
+            # The stock PG reference jar omits WWPG's restoration mixins.
+            args += ['-PtestRestorationBatch=false']
     else:
         args += ['-PtestNamespaces='+','.join(job['namespaces']), '-PrestartPhase='+job['phase'],
                  '-PtestApiAddon='+str(job['addon']).lower()]
