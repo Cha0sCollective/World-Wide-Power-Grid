@@ -10,8 +10,8 @@ import sys
 import test_suites as suites
 
 ROOT=suites.ROOT
-VERSION='0.2.10-dev.cee120.1'
-PLAYER_SHA256='da8c362356a4c3bc68db3073633d22aac7d9aa0da65b808d4d26ec72117fed9c'
+VERSION='0.2.10-dev.cee120.2'
+PLAYER_SHA256='21ac72bf950388f7e57dde94497cd3e48de1ddda88e1caeaa72f536b93cfdc06'
 CEE_VERSION='1.21.1-1.2.0-132'
 CEE_SHA256='71916b60d3eb000b2b766b410e6dc5af58dbf3f1ff7da40080f3ee8d950393d7'
 

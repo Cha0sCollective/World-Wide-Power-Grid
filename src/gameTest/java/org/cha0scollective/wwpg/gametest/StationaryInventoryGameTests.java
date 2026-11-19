@@ -59,8 +59,10 @@ public final class StationaryInventoryGameTests {
                 .forEach(e -> rows.add(row("fuse_holdable", e.getKey().toString(), e.getValue())));
         report.add("entries", rows);
         Files.writeString(Path.of("stationary-registry.json"), new GsonBuilder().setPrettyPrinting().create().toJson(report) + "\n");
-        try (var stream = StationaryInventoryGameTests.class.getResourceAsStream(
-                "/data/wwpg/release/0.1.0-beta.5/registry-inventory.json")) {
+        String inventory=org.cha0scollective.wwpg.compat.cee.CeeCompatibility.modern()
+                ? "/data/wwpg_tests/cee120/registry-inventory.json"
+                : "/data/wwpg/release/0.1.0-beta.5/registry-inventory.json";
+        try (var stream = StationaryInventoryGameTests.class.getResourceAsStream(inventory)) {
             h.assertTrue(stream != null, "Packaged stationary accounting record is missing");
             var expected = JsonParser.parseString(new String(stream.readAllBytes(), StandardCharsets.UTF_8))
                     .getAsJsonObject().getAsJsonArray("entries");

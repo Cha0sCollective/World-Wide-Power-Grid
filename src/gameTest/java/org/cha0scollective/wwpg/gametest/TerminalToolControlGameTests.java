@@ -57,10 +57,16 @@ public final class TerminalToolControlGameTests {
                 if(!id.getNamespace().equals("electroenergetics")||Set.of("altitude_sensor","velocity_sensor").contains(id.getPath()))continue;
                 Arrays.fill(be.getAttachments(),null);be.attachmentUpdate();
                 var type=entry.getValue();var slot=CeeTestAttachments.firstSlot(type);
+                org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info("TERMINAL_TOOL_PANEL_TYPE: {}",id);
                 var attachment=PanelGameTests.insert(h,pos,type,slot);attachments++;
                 var point=new Vec3(pos.getX()+slot.center.x,pos.getY()+slot.center.y,pos.getZ()+.6875);
                 for(var tool:tools(h))protectedClick(h,player,pos,point,tool);
                 alternateHandsAndCancellation(h,player,pos,point);
+                if(org.cha0scollective.wwpg.compat.cee.CeeCompatibility.modern()&&type==CeeTestAttachments.type("THROTTLE_WHEEL")) {
+                    player.setShiftKeyDown(false);player.setItemInHand(InteractionHand.MAIN_HAND,ItemStack.EMPTY);
+                    h.assertTrue(attachment.onInteract(ItemStack.EMPTY,player,InteractionHand.MAIN_HAND,
+                            new BlockHitResult(point,Direction.NORTH,pos,false)).consumesAction(),"Normal throttle interaction was blocked");
+                }
                 // These controls have an unconditional normal click: prove it is retained.
                 if(type==CeeTestAttachments.type("CUT_OFF_SWITCH")||type==CeeTestAttachments.type("MINIATURE_CIRCUIT_BREAKER")) {
                     player.setShiftKeyDown(false);player.setItemInHand(InteractionHand.MAIN_HAND,ItemStack.EMPTY);

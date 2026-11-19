@@ -183,7 +183,7 @@ separate focused client check; these headless fixtures do not claim that coverag
 
 On the CEE preparation branch, the manual workflow's `cee_development` input
 selects the reviewed CEE 1.2.0-132 runtime and requires the exact frozen
-`0.2.10-dev.cee120.1` player hash. Its separate campaign catalog retains every
+`0.2.10-dev.cee120.2` player hash. Its separate campaign catalog retains every
 baseline job and adds all CEE development groups and the new fan checks: 398
 jobs across the same eight Windows/Linux, Native/Java and BASE/PINOUT
 environments. This does not change the published recommendation or the default

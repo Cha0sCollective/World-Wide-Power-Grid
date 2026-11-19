@@ -32,18 +32,21 @@ public final class PanelGameTests {
     public static void analogPanelControlsRetainNativeInteractionAndLinkState(GameTestHelper h) {
         var a = new BlockPos(1, 2, 1); var p = new BlockPos(3, 2, 1);
         var q = new BlockPos(3, 2, 4); var b = new BlockPos(5, 2, 1);
-        for (var pos : new BlockPos[] {a, p, q, b}) h.setBlock(pos.below(), Blocks.STONE);
+        var r = new BlockPos(3, 2, 6);
+        boolean modern=org.cha0scollective.wwpg.compat.cee.CeeCompatibility.modern();
+        for (var pos : new BlockPos[] {a, p, q, r, b}) h.setBlock(pos.below(), Blocks.STONE);
         h.setBlock(a, ModdedBlocks.CREATIVE_VOLTAGE_SOURCE.get());
         h.setBlock(b, CEEBlocks.BULB.get());
-        for (var pos : new BlockPos[] {p, q}) h.setBlock(pos, CEEBlocks.ELECTRICAL_PANEL.getDefaultState().setValue(ElectricalPanelBlock.FACING, Direction.NORTH));
+        for (var pos : modern?new BlockPos[] {p, q, r}:new BlockPos[] {p, q}) h.setBlock(pos, CEEBlocks.ELECTRICAL_PANEL.getDefaultState().setValue(ElectricalPanelBlock.FACING, Direction.NORTH));
         var source = h.absolutePos(a); var load = h.absolutePos(b);
-        PanelAttachment[] controls = new PanelAttachment[2];
+        PanelAttachment[] controls = new PanelAttachment[modern?3:2];
         h.runAtTickTime(5, () -> {
             ((CreativeSourceBlockEntity) h.getLevel().getBlockEntity(source)).setValue(10);
             WiringGameTests.connect(h, source, 0, load, 0, true);
             WiringGameTests.connect(h, source, 1, load, 1, false);
             controls[0] = insertWithItem(h, h.absolutePos(p), CeeTestAttachments.type("ANALOG_LEVER"), ElectricalPanelSlot.THIRD_LEFT, null);
             controls[1] = insertWithItem(h, h.absolutePos(q), CeeTestAttachments.type("STEERING_WHEEL"), ElectricalPanelSlot.QUARTER_CENTER, null);
+            if(modern)controls[2] = insertWithItem(h, h.absolutePos(r), CeeTestAttachments.type("THROTTLE_WHEEL"), ElectricalPanelSlot.QUARTER_CENTER, null);
             for (var attachment : controls) {
                 var link = (com.george_vi.electroenergetics.content.electrical_panel.link.ElectricalPanelLink) attachment;
                 int frequency=CeeTestAttachments.positiveChannel(attachment)*2;

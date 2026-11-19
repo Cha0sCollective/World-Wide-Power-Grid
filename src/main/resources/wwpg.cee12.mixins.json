@@ -8,7 +8,8 @@
     "CircuitBuilderValidationMixin",
     "CapacitorNumerics",
     "DiodeNumerics",
-    "CapacitorSavedHistoryMixin"
+    "CapacitorSavedHistoryMixin",
+    "ThrottleWheelToolMixin"
   ],
   "injectors": {
     "defaultRequire": 1

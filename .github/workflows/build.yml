@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       cee_development:
-        description: 'Test the exact frozen 0.2.10-dev.cee120.1 player with CEE 1.2.0-132 and the complete development matrix'
+        description: 'Test the exact frozen 0.2.10-dev.cee120.2 player with CEE 1.2.0-132 and the complete development matrix'
         type: boolean
         default: false
       frozen_run:

@@ -383,7 +383,7 @@ public final class StationaryAccuracyGameTests {
         }
         var report = new JsonObject(); report.addProperty("schema", 1);
         report.addProperty("backend", System.getProperty("wwpg.test.backend", "NATIVE"));
-        report.addProperty("model", "CEE 1.1.3 explicit charge update with logarithmic OCV");
+        report.addProperty("model", "CEE explicit charge update with logarithmic OCV");
         report.addProperty("total_resistance_ohms", 11.1); report.addProperty("relative_tolerance", .01);
         report.addProperty("near_zero_tolerance", ZERO); report.add("samples", samples);
         try { Files.writeString(Path.of("accuracy-accumulator.json"), new GsonBuilder().setPrettyPrinting().create().toJson(report)+"\n"); }
@@ -438,7 +438,10 @@ public final class StationaryAccuracyGameTests {
         var report = new JsonObject();
         report.addProperty("schema", 1);
         report.addProperty("backend", System.getProperty("wwpg.test.backend", "NATIVE"));
-        report.addProperty("model", "CEE 1.1.3 backward Euler " + kind.toUpperCase());
+        boolean modern=org.cha0scollective.wwpg.compat.cee.CeeCompatibility.modern();
+        report.addProperty("cee_contract",modern?"1.2":"1.1");
+        report.addProperty("model", (kind.equals("rc")&&modern?"CEE damped trapezoidal ":"CEE backward Euler ") + kind.toUpperCase());
+        if(kind.equals("rc"))report.addProperty("capacitor_alpha",CeeTestNumerics.capacitorAlpha());
         report.addProperty("resistance_ohms", 10);
         report.addProperty(kind.equals("rc") ? "capacitance_farads" : "inductance_henries", kind.equals("rc") ? .1 : 1);
         report.addProperty("relative_tolerance", .01);
