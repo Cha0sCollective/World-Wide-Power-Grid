@@ -97,6 +97,40 @@ adapted to both CEE versions. The player jar remained unchanged through these
 companion corrections. Retained passing results keep their original companion
 identities, with separate runtime and fixture comparisons.
 
+## Full headless attempt: 19 November 2026
+
+The explicitly requested full development campaign **failed and is incomplete**.
+It selected 398 jobs on the exact candidate player and CEE 1.2.0-132 above,
+across Windows/Linux, Native/Java and BASE/PINOUT. Both platform preparation
+stages passed, including units and independently extracted SDK builds. The
+generator audit (four tests) and wider audit (fourteen tests) passed in all
+eight environments: 144 completed GameTest cases in total.
+
+Every environment then stopped in regression SETUP with the same two findings:
+
+- The reactive-transformer reference check expected voltage sample zero
+  `4.952854208939122`, but observed approximately `-4.98247818310351` on both
+  solvers. The cause of that reference mismatch remains to be investigated.
+- The test companion's `PanelGameTests` calls the removed
+  `ElectricalPanelLink.getTransmittedStrength()` method and crashes the test
+  server with `NoSuchMethodError`. This call is in test code; it does not by
+  itself demonstrate a player interaction crash.
+
+Coverage is **18 passed jobs, eight failed jobs and 372 unexecuted jobs**.
+The two preparation jobs retain their original execution identities; the
+continuation ran gameplay afresh. The loaded runtime audits confirm the exact
+player and CEE hashes in each environment. The candidate has no full headless
+acceptance pass.
+
+The [canonical run](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/44622129193)
+retains the frozen inputs and preparation. The
+[diagnostic continuation](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/44623975683)
+retains complete portable failure logs after a producer-manifest path repair.
+The local record is `local/cee-120/headless-0210-1/RESULTS.json`; its 290 portable
+evidence objects were checked against their recorded hashes and sizes. Original
+failed attempts are retained separately. Launcher repairs did not change the
+frozen player jar.
+
 ## Repeat a focused check
 
 ```text
@@ -125,6 +159,7 @@ The historical raw-stock capacitor/rectifier failures and separate residual
 threshold diagnosis remain recorded in the older report. They are not described
 as a fresh stock comparison or as raw-stock parity for this integration.
 
-No full headless or graphical acceptance was run for this candidate. Published
-0.2.10 acceptance remains the evidence for its named release, not for the CEE
-development port. No release, push or publication is part of this integration.
+The full headless attempt above failed; graphical acceptance has not been run
+for this candidate. Published 0.2.10 acceptance remains the evidence for its
+named release, not for the CEE development port. The preparation branch was
+pushed to execute the requested manual campaign. No release was published.
