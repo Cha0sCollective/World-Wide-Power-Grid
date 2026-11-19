@@ -4,6 +4,17 @@ import java.util.*;
 /** CEE 1.2 changed attachment fields from DeferredHolder to Supplier. */
 final class CeeTestAttachments {
     private static final Map<String,PanelAttachmentType> TYPES=new HashMap<>();
+    static com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelSlot firstSlot(PanelAttachmentType type) {
+        try {
+            var mode=com.george_vi.electroenergetics.content.electrical_panel.PanelAttachmentMode.class;
+            if(org.cha0scollective.wwpg.compat.cee.CeeCompatibility.modern()) {
+                var slots=(Map<?,?>)mode.getMethod("possibleSlots").invoke(type.mode);
+                return Arrays.stream(com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelSlot.values())
+                        .filter(slots::containsKey).findFirst().orElseThrow();
+            }
+            return ((com.george_vi.electroenergetics.content.electrical_panel.ElectricalPanelSlot[])mode.getField("possibleSlots").get(type.mode))[0];
+        }catch(ReflectiveOperationException error){throw new IllegalStateException("Unsupported panel slots",error);}
+    }
     // 1.1 attachments implement Create's link directly; 1.2 owns one or more
     // linkables. Steering's positive channel is the second link in 1.2.
     static int positiveChannel(PanelAttachment attachment) {

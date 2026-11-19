@@ -56,7 +56,7 @@ public final class TerminalToolControlGameTests {
                 var id=entry.getKey().location();
                 if(!id.getNamespace().equals("electroenergetics")||Set.of("altitude_sensor","velocity_sensor").contains(id.getPath()))continue;
                 Arrays.fill(be.getAttachments(),null);be.attachmentUpdate();
-                var type=entry.getValue();var slot=type.mode.possibleSlots[0];
+                var type=entry.getValue();var slot=CeeTestAttachments.firstSlot(type);
                 var attachment=PanelGameTests.insert(h,pos,type,slot);attachments++;
                 var point=new Vec3(pos.getX()+slot.center.x,pos.getY()+slot.center.y,pos.getZ()+.6875);
                 for(var tool:tools(h))protectedClick(h,player,pos,point,tool);
@@ -70,7 +70,8 @@ public final class TerminalToolControlGameTests {
                     h.assertTrue(result.consumesAction()&&!before.equals(panelData(h,be)),"Normal panel control stopped operating: "+id);
                 }
             }
-            h.assertTrue(attachments==11,"Expected all 11 stationary panel attachment types");
+            int expected=org.cha0scollective.wwpg.compat.cee.CeeCompatibility.modern()?14:11;
+            h.assertTrue(attachments==expected,"Expected all "+expected+" stationary panel attachment types, got "+attachments);
             org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info("TERMINAL_TOOL_CONTROLS_PASSED: panelAttachments={}, tools={}",attachments,tools(h).size());
             h.succeed();
         });
