@@ -15,7 +15,7 @@ import sys
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
-CATALOG = Path(__file__).with_name('test-suites.json')
+CATALOG = Path(os.environ.get('WWPG_TEST_CATALOG', Path(__file__).with_name('test-suites.json'))).resolve()
 ROLES = ('runtime', 'api', 'cee_api', 'example', 'upstream_example')
 
 

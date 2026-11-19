@@ -181,6 +181,17 @@ separate focused client check; these headless fixtures do not claim that coverag
 
 ## Full headless acceptance
 
+On the CEE preparation branch, the manual workflow's `cee_development` input
+selects the reviewed CEE 1.2.0-132 runtime and requires the exact frozen
+`0.2.10-dev.cee120.1` player hash. Its separate campaign catalog retains every
+baseline job and adds all CEE development groups and the new fan checks: 398
+jobs across the same eight Windows/Linux, Native/Java and BASE/PINOUT
+environments. This does not change the published recommendation or the default
+342-job plan. JVM/SDK compilation retains its minimum contracts; gameplay and
+the SDK starter use the frozen CEE development runtime. No graphical job is
+selected. `tools/cee_headless_campaign.py plan` inspects this selection without
+launching it. A continuation of this campaign must also set `cee_development`.
+
 The manual **Full headless acceptance** GitHub workflow prepares artifacts once,
 then derives its eight platform/backend/profile selections from the catalog
 and uses only the recommended loader. Older-loader compatibility is a separate

@@ -1,8 +1,12 @@
 name: Full headless acceptance
-run-name: ${{ inputs.workshop_spawn_run != '' && 'Focused Workshop export reopens' || 'Full headless acceptance' }}
+run-name: ${{ inputs.cee_development && 'CEE 1.2 full headless acceptance' || inputs.workshop_spawn_run != '' && 'Focused Workshop export reopens' || 'Full headless acceptance' }}
 on:
   workflow_dispatch:
     inputs:
+      cee_development:
+        description: 'Test the exact frozen 0.2.10-dev.cee120.1 player with CEE 1.2.0-132 and the complete development matrix'
+        type: boolean
+        default: false
       frozen_run:
         description: 'Continue investigated missing coverage using an unchanged runtime and preserved passing lifecycle groups from this run; leave empty for a fresh full campaign'
         type: string
@@ -44,7 +48,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
-        with: {distribution: temurin, java-version: '21'}
+        with: {distribution: temurin, java-version: "${{ inputs.cee_development && '21.0.12+8' || '21' }}"}
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
       - uses: gradle/actions/wrapper-validation@v4
@@ -52,7 +56,12 @@ jobs:
       - run: chmod +x gradlew
       - run: python tools/test_suites.py audit
       - name: Build and freeze once; check Linux units and extracted SDK once
-        run: python tools/ci_prepare.py --output build/ci-v2/canonical
+        run: |
+          if [[ '${{ inputs.cee_development }}' == 'true' ]]; then
+            python tools/cee_headless_campaign.py prepare --output build/ci-v2/canonical
+          else
+            python tools/ci_prepare.py --output build/ci-v2/canonical
+          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -68,14 +77,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
-        with: {distribution: temurin, java-version: '21'}
+        with: {distribution: temurin, java-version: "${{ inputs.cee_development && '21.0.12+8' || '21' }}"}
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
       - uses: gradle/actions/setup-gradle@v4
       - uses: actions/download-artifact@v4
         with: {name: ci-v2-canonical, path: build/ci-v2/canonical}
       - name: Check Windows units and independently extracted SDK once
-        run: python tools/ci_prepare.py --inputs build/ci-v2/canonical/frozen/inputs.json --output build/ci-v2/windows
+        shell: bash
+        run: |
+          if [[ '${{ inputs.cee_development }}' == 'true' ]]; then
+            python tools/cee_headless_campaign.py prepare --inputs build/ci-v2/canonical/frozen/cee120-inputs.json --output build/ci-v2/windows
+          else
+            python tools/ci_prepare.py --inputs build/ci-v2/canonical/frozen/inputs.json --output build/ci-v2/windows
+          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -97,7 +112,7 @@ jobs:
       - uses: actions/checkout@v4
         with: {fetch-depth: 0}
       - uses: actions/setup-java@v4
-        with: {distribution: temurin, java-version: '21'}
+        with: {distribution: temurin, java-version: "${{ inputs.cee_development && '21.0.12+8' || '21' }}"}
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
       - uses: gradle/actions/setup-gradle@v4
@@ -142,13 +157,16 @@ jobs:
           github-token: ${{ github.token }}
       - if: runner.os != 'Windows'
         run: chmod +x gradlew
+      - name: Activate the exact CEE development runtime and complete campaign catalog
+        if: inputs.cee_development
+        run: python tools/cee_headless_campaign.py activate --directory build/ci-v2/canonical/frozen
       - name: Execute the catalog selection against the frozen jar
         if: inputs.frozen_run == ''
         env:
           PREPARATION: ${{ runner.os == 'Windows' && 'build/ci-v2/windows/preparation.json' || 'build/ci-v2/canonical/preparation.json' }}
         run: >-
           python tools/test_suites.py run full-headless
-          --inputs build/ci-v2/canonical/frozen/inputs.json
+          --inputs "${WWPG_CAMPAIGN_INPUTS:-build/ci-v2/canonical/frozen/inputs.json}"
           --output build/ci-v2/run-${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}-${{ matrix.loader }}
           --platform ${{ matrix.os }} --backend ${{ matrix.backend }} --profile ${{ matrix.profile }}
           --loader ${{ matrix.loader }} --preparation "$PREPARATION"
@@ -159,7 +177,7 @@ jobs:
         run: >-
           python tools/test_suites.py continue-headless
           --report build/ci-v2/portable/${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}-${{ matrix.loader }}/result.json
-          --inputs build/ci-v2/canonical/frozen/inputs.json
+          --inputs "${WWPG_CAMPAIGN_INPUTS:-build/ci-v2/canonical/frozen/inputs.json}"
           --output build/ci-v2/continuation-${{ matrix.os }}-${{ matrix.backend }}-${{ matrix.profile }}-${{ matrix.loader }}
           --preparation "$PREPARATION"
           --environment "${{ matrix.os }}/${{ matrix.loader }}/${{ matrix.backend }}/${{ matrix.profile }}"
