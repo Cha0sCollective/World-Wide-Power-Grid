@@ -379,11 +379,19 @@ public final class WorldBridge {
             removeGround(e.getValue()); return true;
         });
         for (var node : retired) if (node.endpoint instanceof InternalEndpoint) node.remove();
+        boolean skippedSelfLink = false;
         for (var entry : wanted.entrySet()) {
             var key = entry.getKey(); var desired = entry.getValue();
             var branch = branches.get(key);
             if (branch == null) {
                 var a = nodes.get(key.first()); var b = nodes.get(key.second());
+                // Different positions on a PG multiblock can expose the same terminal.
+                // A saved passive wire between them has no electrical effect.
+                if (a == b && desired.first instanceof InWorldNode && desired.second instanceof InWorldNode
+                        && passiveResistance(desired)) {
+                    skippedSelfLink = true;
+                    continue;
+                }
                 var network = world.prepareForConnection(a, b);
                 branch = new Branch(new LinearBranch(network, a, b, desired.properties, desired.voltageSource));
                 branches.put(key, branch); ++created;
@@ -460,7 +468,8 @@ public final class WorldBridge {
         }
         substepBranches = List.copyOf(changing);
         blockOwners.keySet().retainAll(nodes.keySet());
-        stableDescription = isolated.isEmpty() && adapters.isEmpty() && adapterPreparationFailures.isEmpty()
+        // A split can make an ignored wire electrically relevant again.
+        stableDescription = !skippedSelfLink && isolated.isEmpty() && adapters.isEmpty() && adapterPreparationFailures.isEmpty()
                 && nodeKeys.size() == builder.allNodes().size() ? new StableDescription() : null;
     }
 
@@ -539,9 +548,9 @@ public final class WorldBridge {
         for (var key : List.of(oldFirst, oldSecond, middle)) {
             var branch = branches.get(key);
             if (branch == null || !branch.element.attached() || branch.element.hasVoltageSource()
-                    || !passiveCatenary(branch.desired)) return;
+                    || !passiveResistance(branch.desired)) return;
         }
-        for (var key : List.of(newFirst, newSecond, middle)) if (!passiveCatenary(wanted.get(key))) return;
+        for (var key : List.of(newFirst, newSecond, middle)) if (!passiveResistance(wanted.get(key))) return;
         // A--cut--junction--B becomes A--junction--cut--B. The same
         // four nodes remain connected, including every side branch. Keep the
         // stamps and hooks; only their endpoints and matrix coefficients change.
@@ -553,7 +562,7 @@ public final class WorldBridge {
             ++topologyIdentityRevision;
         }
     }
-    private static boolean passiveCatenary(Desired desired) {
+    private static boolean passiveResistance(Desired desired) {
         return desired != null && !desired.voltageSource && desired.properties.getClass() == ElectricalProperties.class
                 && desired.properties.conductance() > 0 && desired.properties.currentSource() == 0 && desired.properties.voltageSource() == 0;
     }

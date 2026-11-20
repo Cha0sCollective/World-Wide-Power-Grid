@@ -1,10 +1,10 @@
 # Current status
 
-**WWPG 0.2.10 is the current stable release.** Unchanged Power Grid wire
-segments can rejoin a live line without adding a redundant restoration wait.
-Train gauges recover when valid readings return. Stock CEE alternators can continue supplying power from their
-last saved drive state while unloaded. Qualification covers 342 headless jobs and
-12 separate graphical scenarios on the recommended dependencies.
+**WWPG 0.2.11 is the current stable release.** Worlds can reopen with redundant
+CEE copper links on joined Power Grid factory lights. CEE wires to Power Grid and
+Power Dock terminals stay visible and selectable on moving Sable builds in the
+tested setup. Qualification covers 342 headless entries and 12 separate graphical
+scenarios on the recommended dependencies.
 Extension API **1.0.0** is unchanged. Use the [selected dependency set](INSTALL.md).
 
 ## What works
@@ -47,7 +47,7 @@ checked units on each operating system and built the three extracted
 SDK projects independently. All 12 real Windows client scenarios passed,
 including integrated worlds, two-client TCP synchronization and clean shutdown.
 
-The [0.2.10 acceptance record](../release/0.2.10/ACCEPTANCE.md) records the
+The [0.2.11 acceptance record](../release/0.2.11/ACCEPTANCE.md) records the
 frozen source, tested artifacts and exact world exports. The
 [0.2.8 acceptance record](../release/0.2.8/ACCEPTANCE.md) retains its historical
 Windows Native/BASE sparse-panel timeout and passing continuation.

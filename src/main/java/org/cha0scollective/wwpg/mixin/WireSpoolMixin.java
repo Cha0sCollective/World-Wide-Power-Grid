@@ -3,6 +3,7 @@ package org.cha0scollective.wwpg.mixin;
 import com.george_vi.electroenergetics.CEEDataComponents;
 import com.george_vi.electroenergetics.content.wire_spool.WireSpoolItem;
 import com.george_vi.electroenergetics.foundation.nodes.InWorldNode;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -10,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import org.cha0scollective.wwpg.wiring.Terminals;
+import org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -47,8 +49,21 @@ public abstract class WireSpoolMixin {
                 player.displayClientMessage(net.minecraft.network.chat.Component.translatable("wwpg.device.loading"),true);
                 ci.cancel();return;
             }
+            if (wwpg$sameNativeTerminal(server, selected, node)) {
+                player.displayClientMessage(Component.translatable("wwpg.wire.same_terminal"), true);
+                ci.cancel();
+                return;
+            }
             Terminals.ensurePgNode(server, node);
-            Terminals.ensurePgNode(server, stack.get(CEEDataComponents.SELECTED_NODE));
+            Terminals.ensurePgNode(server, selected);
         }
+    }
+
+    private static boolean wwpg$sameNativeTerminal(ServerLevel level, InWorldNode first, InWorldNode second) {
+        if (first == null || second == null || first.equals(second) || first.id() < 0 || second.id() < 0
+                || Terminals.nativePg(level, first.sourcePos()) == null
+                || Terminals.nativePg(level, second.sourcePos()) == null) return false;
+        var firstNode = new BlockWireEndpoint(first.sourcePos(), first.id()).getNode(level);
+        return firstNode != null && firstNode == new BlockWireEndpoint(second.sourcePos(), second.id()).getNode(level);
     }
 }
