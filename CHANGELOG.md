@@ -2,6 +2,23 @@
 
 ## Unreleased
 
+### 0.2.11-dev.cee120.1
+
+- Integrate the 0.2.11 factory-light self-link repair into the CEE 1.2
+  preparation branch, retaining the version-specific electrical contracts,
+  save migration and spool preview compatibility. The moving-wire endpoint
+  repair was already present in `.8`.
+- New development candidate; historical `.8` and `.5` acceptance records retain
+  their original scope. No new full acceptance is claimed.
+
+## 0.2.11 — 20 November 2026
+
+- Keep CEE wires attached and selectable when Power Grid and Power Dock
+  terminals move with a Sable sublevel.
+- Reject CEE spool links between connectors that lead to the same electrical
+  terminal on a joined factory light. Existing saves can load with the wire
+  still present and electrically inactive while both ends share a terminal.
+
 ## 0.2.10-dev.cee120.8 alpha — 19 November 2026
 
 - Publish an out-of-band CEE 1.2.0-132 compatibility alpha while 0.2.10 remains

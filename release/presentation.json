@@ -1,12 +1,11 @@
 {
   "schema": 1,
   "repository": "Cha0sCollective/World-Wide-Power-Grid",
-  "summary": "WWPG 0.2.10 reduces brief slowdowns on Power Grid-powered CEE trains when wire chunks reload.",
+  "summary": "WWPG 0.2.11 fixes a factory-light wiring crash and keeps mixed CEE wires attached as Sable builds move.",
   "changes": [
-    "Unchanged wire segments can rejoin a live line without adding a redundant wait for chunk readiness.",
-    "Both gauge needles stay visible during normal powered travel. A genuine outage still makes readings unavailable."
+    "Worlds can load with an existing copper wire joining two connectors on the same factory-light terminal. New links to the same terminal are rejected.",
+    "CEE wires attached to Power Grid and Power Dock terminals stay visible and selectable on moving Sable builds."
   ],
   "installation": "Use Minecraft 1.21.1, NeoForge 21.1.262, Java 21, Create 6.0.10, CEE 1.1.4, Power Grid 0.6.2 and Architectury 13.0.12. Set PG multiTicks to 16. Match server and client mod versions.",
-  "optional_installation": "Use the dependency set in the installation guide. The combined Stationary Yard requires CC:Tweaked 1.120.2 and Pinout 0.2.1. Fuse and rotary-selector circuit examples require Power Components 1.3.0.",
-  "documentation_ref": "0.2.10"
+  "optional_installation": "Use the dependency set in the installation guide. The combined Stationary Yard requires CC:Tweaked 1.120.2 and Pinout 0.2.1. Fuse and rotary-selector circuit examples require Power Components 1.3.0."
 }

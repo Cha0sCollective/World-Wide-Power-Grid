@@ -4,12 +4,21 @@ Maintainers: follow [Publishing a release](../docs/RELEASING.md) for the standar
 five-download layout and short notes. Edit [presentation.json](presentation.json)
 for the next release; version-specific records below preserve published history.
 
-**[WWPG 0.2.10](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.10)**
+**[WWPG 0.2.11](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.11)**
 is the current stable release. To install it or choose a playable world, use the
 [installation guide](../docs/INSTALL.md). This directory is for reviewing what
 was shipped and which checks passed.
 
-## Current stable: 0.2.10
+## Current stable: 0.2.11
+
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.11)
+· [Acceptance](0.2.11/ACCEPTANCE.md).
+
+Recovers worlds with a redundant factory-light copper link and fixes visible,
+selectable CEE wires to Power Grid and Power Dock on moving Sable builds.
+Both acceptance lanes passed.
+
+## Historical stable: 0.2.10
 
 [Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.10)
 · [Acceptance](0.2.10/ACCEPTANCE.md).

@@ -1,12 +1,65 @@
 # CEE 1.2 development readiness
 
-The preparation branch `dev/cee-120-readiness` now integrates WWPG **0.2.10**,
-main commit `5072e412639db71d346ff54c2b133f54f0b13934`. The initial candidate was
-`0.2.10-dev.cee120.1`; the current client test candidate is `0.2.10-dev.cee120.8`.
-`.8` is published as an out-of-band alpha under the owner's focused-check
-exception; earlier development snapshots keep their original identities. Full headless acceptance
-belongs to `.5`; `.8` has focused coordinate, preview and client-loading checks only. Full
-graphical client acceptance was not run. `.6` was rejected by client loading.
+The preparation branch `dev/cee-120-readiness` integrates WWPG **0.2.11**,
+main commit `ae25c2a42bf416f7d2899fb5b6a8e3263c611a8f` (release source
+`96e475d2ec476a90c14a2e1ed48a001ef3307e8d`). The current development candidate
+is `0.2.11-dev.cee120.1`, targeting CEE **1.2.0-132** and PG **0.6.2**.
+
+## 0.2.11 baseline integration
+
+The factory-light fix rejects new copper spans between distinct PG connectors
+that resolve to the same native terminal. Existing saved passive spans remain
+stored without acquiring a same-node solver stamp. Topology is checked again
+so a light-row split can make the saved wire electrically active. The shared
+passive-property predicate uses the selected CEE integration rather than a
+legacy-only `ElectricalProperties` class equality. The version-neutral graph
+view is retained. The `.8` moving-wire endpoint and CEE 1.2 client preview fixes
+remain present, along with reactive history migration and numerical safeguards.
+
+Focused validation on Windows, Java 21.0.12+8, Minecraft 1.21.1, NeoForge
+21.1.262, PG 0.6.2, Create 6.0.10 and Architectury 13.0.12:
+
+| CEE runtime | Native | Java | Scope |
+| --- | --- | --- | --- |
+| 1.2.0-132 | 35/35 | 35/35 | Wiring, factory-light self-links, projected endpoint coordinates and eleven CEE readiness checks |
+| 1.1.4 | 24/24 | 24/24 | Wiring, factory-light self-links and projected endpoint coordinates |
+| 1.1.3 | 24/24 | 24/24 | Same legacy compatibility selection |
+
+All six runs used PG at sixteen substeps, with frozen player and companion
+jars and actual loaded-artifact hash checks. The source inventory and exact
+commands are retained under `local/baseline-0211/`; `results.json` contains the
+per-run outcomes. All 156 JVM tests and 66 readiness-runner, packaging and
+catalog Python tests passed. The catalog audit classified all 84 namespaces.
+
+Copies of the stable 0.2.11 factory-light save also upgraded to CEE 132,
+saved and reopened in fresh dedicated processes with Native and Java selected
+at sixteen substeps. The redundant copper span stayed saved and had no solver
+branch. All four server processes saved and exited successfully, and the source
+world inventory remained unchanged. The cold specimen is electrically inert;
+the powered neighboring-circuit and split/reconnection assertions belong to the
+separate GameTests above. `local/baseline-0211/cold-proof-v2.json` retains this
+proof. The first probe's incorrect nonempty-solver assertion is preserved as a
+failed helper attempt, not a passing run or a player-runtime crash.
+
+Player SHA256:
+`ba3129f1ba68102c3a2d796cb8fb06cb362b512344e2660c031339a3af0b635a`.
+Companion SHA256:
+`e2e383ca2b45a717959b05589e489de844c787271e4a8c828658a90848596002`.
+The CEE 132 jar retains SHA256
+`71916b60d3eb000b2b766b410e6dc5af58dbf3f1ff7da40080f3ee8d950393d7`.
+
+The previous review's outline-rejection, schedule-boundary, cache and protocol
+proposals are separate work; this merge integrates the released baseline only.
+Full headless and graphical acceptance have not been requested for this merge.
+Stable 0.2.11 acceptance targets CEE 1.1.4 and does not establish CEE 1.2 acceptance.
+
+## Historical development snapshots
+
+The initial 0.2.10-based candidate was `0.2.10-dev.cee120.1`. Published `.8`
+remains an out-of-band alpha under the owner's exact-artifact focused-check
+exception. Full headless acceptance belongs to `.5`, not `.8` or this new
+0.2.11-based build. All named evidence below retains its original scope and
+artifact hashes. `.6` was rejected by client loading.
 
 ## Sublevel wire endpoint repair: .8
 

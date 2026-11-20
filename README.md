@@ -2,15 +2,17 @@
 
 **WWPG lets Create: Electro Energetics (CEE) and Power Grid (PG) work together in the same stationary factory.** Either mod can power the other's supported equipment using their native wires, controls and tools.
 
-**CEE 1.2 testing:** [0.2.10-dev.cee120.8 alpha](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.10-dev.cee120.8)
-is an out-of-band prerelease for CEE 1.2.0-132. It has focused checks and client
-loading verification, with full acceptance still incomplete. Follow this branch's
-[alpha installation guide](docs/INSTALL.md); the [alpha record](release/0.2.10-dev.cee120.8/README.md)
-states the exact scope. Stable 0.2.10 remains unchanged.
+**CEE 1.2 development:** this branch builds `0.2.11-dev.cee120.1` for CEE
+1.2.0-132, integrating the 0.2.11 baseline fixes. Follow the [development
+installation guide](docs/INSTALL.md). Full acceptance for this new candidate
+has not been run. The published [.8 alpha](release/0.2.10-dev.cee120.8/README.md)
+retains its original bytes and test scope.
 
-**[WWPG 0.2.10 stable](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.10)** for Minecraft 1.21.1 and NeoForge uses CEE 1.1.4. Follow its [stable installation guide](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/0.2.10/docs/INSTALL.md) for the required mods and settings. Extension API **1.0.0** is unchanged.
+**[WWPG 0.2.11 stable](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.11)**
+uses CEE 1.1.4. Follow its [stable installation guide](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/0.2.11/docs/INSTALL.md).
+Extension API **1.0.0** is unchanged.
 
-0.2.10 reduces brief CEE train slowdowns when unchanged Power Grid wire segments reload onto a live line. Train gauges still show when readings are unavailable. Keep PG at 16 electrical substeps. See the [acceptance record](release/0.2.10/ACCEPTANCE.md) for the verified behavior.
+0.2.11 lets worlds reopen after a redundant CEE copper link on a joined Power Grid factory-light row. It also keeps CEE wires visible and selectable on moving Sable builds with Power Grid or Power Dock terminals. Keep PG at 16 electrical substeps. See the [acceptance record](release/0.2.11/ACCEPTANCE.md) for the verified behavior.
 
 ## What you can do
 
@@ -25,9 +27,9 @@ The [support list](docs/SUPPORT.md) gives the equipment and workflows covered by
 
 ## Try the worlds
 
-Open the combined **Stationary Test Yard — Pinout** from the [release downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.10). It includes the ordinary yard and the computer stations, and requires CC:Tweaked and Pinout. Each supported native behavior has a checked exhibit or assembly/repair workflow. Signs and books explain controls, readings and resets. Goggles and tools are at spawn. The [yard guide](docs/STATIONARY_YARD.md) points to transformers, gauges, boards, panels, storage, processing and the playable Nether route.
+Open the combined **Stationary Test Yard — Pinout** from the [release downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.11). It includes the ordinary yard and the computer stations, and requires CC:Tweaked and Pinout. Each supported native behavior has a checked exhibit or assembly/repair workflow. Signs and books explain controls, readings and resets. Goggles and tools are at spawn. The [yard guide](docs/STATIONARY_YARD.md) points to transformers, gauges, boards, panels, storage, processing and the playable Nether route.
 
-The three demonstration saves, the original [14,650-node benchmark](docs/BENCHMARK_YARD.md) and the optional Workshop mods are in **wwpg-0.2.10-example-worlds.zip**.
+The three demonstration saves, the original [14,650-node benchmark](docs/BENCHMARK_YARD.md) and the optional Workshop mods are in **wwpg-0.2.11-example-worlds.zip**.
 Players can download the mod jar directly; the developer SDK and verification
 archive are separate optional downloads.
 
@@ -53,7 +55,7 @@ PG's native solver is the default on Windows and Linux. WWPG supplies its missin
 | Anyone checking coverage | [Supported content](docs/SUPPORT.md) and [current status](docs/STATUS.md) |
 | Maintainers | [Development and test commands](docs/DEVELOPMENT.md), [contributing](CONTRIBUTING.md) |
 | Add-on developers | [Extension API contract and SDK](docs/EXTENSION_API.md), [independent examples](examples/), [API Workshop](docs/EXTENSION_API_WORKSHOP.md) |
-| Reviewers checking release evidence | [Current acceptance](release/0.2.10/ACCEPTANCE.md), [release records](release/README.md), [changelog](CHANGELOG.md) |
+| Reviewers checking release evidence | [Current acceptance](release/0.2.11/ACCEPTANCE.md), [release records](release/README.md), [changelog](CHANGELOG.md) |
 | Readers evaluating the long-term design | [Product specification](SPEC.md) |
 
 The [documentation index](docs/README.md) separates current guides, developer references and archived release history.

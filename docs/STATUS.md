@@ -1,16 +1,17 @@
 # Current status
 
-The [CEE 1.2 alpha `.8`](../release/0.2.10-dev.cee120.8/README.md) is published as
-an out-of-band prerelease with an owner-approved focused-check exception. It
-does not claim the full stable coverage below. This branch's [installation](INSTALL.md)
-describes that alpha; stable 0.2.10 uses CEE 1.1.4.
+This branch develops **0.2.11-dev.cee120.1** for CEE 1.2.0-132. It integrates
+the stable 0.2.11 fixes, but does not inherit stable acceptance evidence.
+The [development installation guide](INSTALL.md) lists its requirements.
+The published [.8 alpha](../release/0.2.10-dev.cee120.8/README.md) retains its
+original identity and acceptance scope.
 
-**WWPG 0.2.10 is the current stable release.** Unchanged Power Grid wire
-segments can rejoin a live line without adding a redundant restoration wait.
-Train gauges recover when valid readings return. Stock CEE alternators can continue supplying power from their
-last saved drive state while unloaded. Qualification covers 342 headless jobs and
-12 separate graphical scenarios on the recommended dependencies.
-Extension API **1.0.0** is unchanged. Use the [stable dependency set](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/0.2.10/docs/INSTALL.md) for stable play.
+**WWPG 0.2.11 is the current stable release.** Worlds can reopen with redundant
+CEE copper links on joined Power Grid factory lights. CEE wires to Power Grid and
+Power Dock terminals stay visible and selectable on moving Sable builds in the
+tested setup. Qualification covers 342 headless entries and 12 separate graphical
+scenarios on the recommended dependencies.
+Extension API **1.0.0** is unchanged. Use the [stable dependency set](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/0.2.11/docs/INSTALL.md) for stable play.
 
 ## What works
 
@@ -52,7 +53,7 @@ checked units on each operating system and built the three extracted
 SDK projects independently. All 12 real Windows client scenarios passed,
 including integrated worlds, two-client TCP synchronization and clean shutdown.
 
-The [0.2.10 acceptance record](../release/0.2.10/ACCEPTANCE.md) records the
+The [0.2.11 acceptance record](../release/0.2.11/ACCEPTANCE.md) records the
 frozen source, tested artifacts and exact world exports. The
 [0.2.8 acceptance record](../release/0.2.8/ACCEPTANCE.md) retains its historical
 Windows Native/BASE sparse-panel timeout and passing continuation.

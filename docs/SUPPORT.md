@@ -1,11 +1,12 @@
 # Supported stationary content
 
-The [CEE 1.2 `.8` alpha](../release/0.2.10-dev.cee120.8/README.md) has focused
-compatibility checks and client loading verification only. The stable equipment
-coverage below does not establish full CEE 1.2 acceptance. Moving mixed-wire
-visuals still need in-world confirmation on the alpha.
+This branch develops **0.2.11-dev.cee120.1** for CEE 1.2.0-132. It integrates
+the stable 0.2.11 fixes, but does not inherit stable acceptance evidence.
+The [development installation guide](INSTALL.md) lists its requirements.
+The published [.8 alpha](../release/0.2.10-dev.cee120.8/README.md) retains its
+original identity and acceptance scope.
 
-WWPG 0.2.10 lets **Create: Electro Energetics (CEE)** and **Power Grid (PG)** work
+WWPG 0.2.11 lets **Create: Electro Energetics (CEE)** and **Power Grid (PG)** work
 together in stationary factories: equipment built in the world that stays in
 place. Either mod can supply power to the other's supported equipment, and you
 can connect and measure circuits with either mod's tools.
@@ -93,8 +94,15 @@ connections instead. See [CIO integration](CIO_COMPATIBILITY.md).
 
 PG/Gauged terminal picking uses Sable's translated, rotated and interpolated
 coordinates and retains normal reach and obstruction checks. Focused checks use
-Sable 2.0.5 and Companion 1.6.0. This targeting fix does not certify arbitrary
-moving electrical constructs or every Sable client rendering case.
+Sable 2.0.5 and Companion 1.6.0. In 0.2.11, a test platform that moves and rotates
+also keeps CEE wires to PG and Power Dock visible and selectable. That client
+check covers wire rendering and targeting on the same moving platform.
+
+On joined PG factory-light rows, two connectors can lead to the same electrical
+terminal. CEE copper spools reject new links between those connectors. If a
+saved wire already joins them, the world can reopen and you can remove the
+redundant wire. The wire can carry current if you split the row and the two
+connectors then lead to distinct terminals.
 
 ## Detailed coverage records
 
@@ -102,7 +110,7 @@ The release retains **164 base behavior groups, or 165 with optional Pinout**.
 The [beta.5 support matrix](../release/0.1.0-beta.5/supported-content.json) and
 [registry inventory](../release/0.1.0-beta.5/registry-inventory.json) provide the
 item-by-item baseline, including cosmetic variants, ingredients, assembly parts
-and deferred moving content. The [release acceptance record](../release/0.2.10/ACCEPTANCE.md)
+and deferred moving content. The [release acceptance record](../release/0.2.11/ACCEPTANCE.md)
 tracks checks of that baseline with the new jar and worlds, alongside the add-on examples.
 Older published artifacts, support claims and check records remain unchanged.
 
