@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Keep CEE wires attached and selectable when Power Grid and Power Dock
+  terminals move with a Sable sublevel.
+- Reject CEE spool links between connectors that lead to the same electrical
+  terminal on a joined factory light. Existing saves can load with the wire
+  still present and electrically inactive while both ends share a terminal.
+
 ## 0.2.10 — 19 November 2026
 
 - Reduce brief slowdowns on CEE trains when unchanged Power Grid wire
