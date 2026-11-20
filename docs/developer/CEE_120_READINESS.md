@@ -20,8 +20,9 @@ evaluation range; clipped trial values cannot be published. Three focused JVM
 checks cover finite squared merit, exact physical currents and rejected invalid
 measurements. Both solvers pass the ten reference comparison cases against the
 explicitly labelled precision control described below, including the 70 V diode.
-Core/migration and showroom checks also pass on both solvers. Broader `.3`
-cross-version regression checks are in progress.
+Core/migration, showroom and combined Pinout Yard checks also pass on both
+solvers. All six broader `.3` regression invocations pass: 218 cases each on CEE
+1.2, 1.1.4 and 1.1.3 with both solvers (1,308 cases).
 
 Further fixture repairs use the version-safe indexed-node lookup, the actual
 native diode model (legacy clamp or modern Shockley equation) and the steering
@@ -48,8 +49,11 @@ The user approved the more accurate, test-only reference baseline for the CEE
 1.2 beta. Its catalog jobs explicitly select `cee120-residual-1e-16`; the evidence
 gate requires the matching CEE hash, launch argument and actual control marker.
 Compatibility traces must identify the same reference baseline. Raw-stock
-failures remain separate observations. The fresh full `.3` campaign is pending
-the final focused checks.
+failures remain separate observations. All eight measurement traces per
+comparison are retained and checked against that identity. The reference
+experiment freezes its configuration inputs and drains already queued reloads
+before timing starts, preserving the exact charge/discharge frame assertions.
+The fresh full `.3` campaign follows these focused checks.
 The default stable 342-job plan and CEE 1.1.4 recommendation remain unchanged.
 
 ## Earlier `.2` repair candidate
@@ -220,9 +224,11 @@ were checked against their recorded sizes and hashes.
 [Run 44633630674](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/44633630674)
 uses the corrected example. The canonical comparison confirms that only
 `upstream_example` changed; player, companion, APIs, reference control, CEE jar
-and catalog retained their original hashes. Completed environments have reached
-the showroom and exposed its old steering-channel assumption. Those failures
-remain failures; the `.3` focused showroom checks use the corrected fixture.
+and catalog retained their original hashes. It finished with 186 passed jobs,
+eight failed jobs and 204 unexecuted jobs. BASE environments stopped at showroom
+setup; PINOUT environments stopped at Yard setup, both on the old steering
+channel assumption. All 614 reachable evidence objects were verified. The `.3`
+focused checks correct that wiring and the Yard's old clamped-diode expectation.
 No `.2` campaign establishes a passing full suite for `.3`.
 
 ## Repeat a focused check
