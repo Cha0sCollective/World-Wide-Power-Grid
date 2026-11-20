@@ -51,6 +51,7 @@ public final class WorldBridge {
     private final Map<BranchKey, Branch> branches = new HashMap<>();
     private final Map<EndpointKey, CurrentSourceWire> grounds = new HashMap<>();
     private final Map<EndpointKey, CurrentSourceWire> references = new HashMap<>();
+    private final Map<EndpointKey, Integer> referencePriorities = new HashMap<>();
     private final Map<WindingKey, Winding> transformers = new HashMap<>();
     private Set<EndpointKey> isolated = Set.of();
     private final Map<EndpointKey, String> isolationReasons = new HashMap<>();
@@ -383,6 +384,7 @@ public final class WorldBridge {
         });
         for (var map : List.of(grounds, references)) map.entrySet().removeIf(e -> {
             if (wantedNodes.containsKey(e.getKey()) && !changed.contains(e.getKey()) && !isolated.contains(e.getKey())) return false;
+            if (map == references) referencePriorities.remove(e.getKey());
             removeGround(e.getValue()); return true;
         });
         for (var node : retired) if (node.endpoint instanceof InternalEndpoint) node.remove();
@@ -630,6 +632,7 @@ public final class WorldBridge {
         var priorities = ((CircuitBuilderAccessor) builder).wwpg$groundPriorities();
         var best = new IdentityHashMap<ElectricalNetwork, EndpointKey>();
         var ranks = new IdentityHashMap<ElectricalNetwork, Integer>();
+        var ownerRanks = new IdentityHashMap<ElectricalNetwork, Map<String, Integer>>();
         for (var n : graph.allNodes()) {
             if (!priorities.containsKey(n.ordinal)) continue;
             EndpointKey key;
@@ -639,17 +642,40 @@ public final class WorldBridge {
             var network = node == null ? null : node.getNetwork();
             if (network == null || ((ElectricalNetworkAccessor) network).wwpg$groundCount() > ownCounts.getOrDefault(network, 0)) continue;
             int rank = priorities.get(n.ordinal);
+            ownerRanks.computeIfAbsent(network, ignored -> new HashMap<>()).merge(key.owner(), rank, Math::max);
             var old = best.get(network);
             if (old == null || rank > ranks.get(network) || rank == ranks.get(network) && key.compareTo(old) < 0) {
                 best.put(network, key); ranks.put(network, rank);
             }
         }
+        // A preferred zero is a numerical anchor, not a physical earth. CEE
+        // 1.2's dynamic models can nominate the other terminal as their source
+        // changes sign. Keep the existing anchor while its device still has
+        // the highest priority; moving it would rebuild PG and reject a healthy
+        // history frame. New higher-priority devices and physical grounds still
+        // replace it. After a merge, retain only one deterministic anchor.
+        var retained = new IdentityHashMap<ElectricalNetwork, EndpointKey>();
+        for (var entry : references.entrySet()) {
+            var key = entry.getKey();
+            var network = entry.getValue().getNode1().getNetwork();
+            if (!best.containsKey(network) || nodes.get(key) != entry.getValue().getNode1()
+                    || !Objects.equals(referencePriorities.get(key), ranks.get(network))
+                    || !Objects.equals(ownerRanks.get(network).get(key.owner()), ranks.get(network))) continue;
+            var old = retained.get(network);
+            if (old == null || key.compareTo(old) < 0) retained.put(network, key);
+        }
+        best.putAll(retained);
         var wanted = new HashSet<>(best.values());
         references.entrySet().removeIf(e -> {
             if (wanted.contains(e.getKey())) return false;
+            referencePriorities.remove(e.getKey());
             removeGround(e.getValue()); return true;
         });
-        for (var key : wanted) references.computeIfAbsent(key, k -> addGround(nodes.get(k), 1000));
+        for (var entry : best.entrySet()) {
+            var key = entry.getValue();
+            references.computeIfAbsent(key, k -> addGround(nodes.get(k), 1000));
+            referencePriorities.put(key, ranks.get(entry.getKey()));
+        }
         recordTopology(previousTopology, false, "references");
     }
     /** Preferred numerical anchors do not establish a shared physical earth. */

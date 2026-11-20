@@ -2,15 +2,37 @@
 
 The preparation branch `dev/cee-120-readiness` now integrates WWPG **0.2.10**,
 main commit `5072e412639db71d346ff54c2b133f54f0b13934`. The initial candidate was
-`0.2.10-dev.cee120.1`; the current repair candidate is `0.2.10-dev.cee120.3`.
+`0.2.10-dev.cee120.1`; the current repair candidate is `0.2.10-dev.cee120.4`.
 This is a development preparation, not a published release
 or a full acceptance claim.
 
 ## Current repair candidate
 
-`0.2.10-dev.cee120.3` has player SHA256
-`0c800e29da66728a239d4fa2407efa2f9052670c744dc6614f4c2b5597a9cab8`.
+`0.2.10-dev.cee120.4` has player SHA256
+`f7e61fc385c9d329f8b2c181cbe2d037267da2320a58a45247cf8794426bfda5`.
 CEE remains `1.21.1-1.2.0-132`. Full acceptance is pending.
+
+An intermittent `.3` accumulator reference failure exposed another player issue.
+CEE 1.2's `BridgeCollector.Builder.connect` chooses its preferred numerical zero
+from the source sign. After the test seeds charge, the accumulator nominates its
+other terminal. Depending on the fixture's coordinate ordering, WWPG removed and
+replaced that numerical anchor. PG then performed a warm-up solve and WWPG held
+one otherwise healthy charge-history frame. The captured failing trace shows the
+same circuit network, no solver error or restoration hold, an anchor move from
+terminal 1 to 0, and exactly one held frame.
+
+`.4` retains the existing numerical anchor while the same device still has the
+same highest priority. Physical grounds, priority changes and removed devices
+still trigger reselection. Merged networks retain one deterministic eligible
+anchor. The repair does not change component equations, solve precision or
+accepted-history assertions. New focused checks exercise uninterrupted capacitor
+history after a preferred-terminal change and replacement by a higher-priority
+reference. The previous `.3` runtime fails the new continuity check at tick 21;
+the matching test companions differ only in their required-version metadata.
+`.4` passes all ten readiness cases on each solver and both ten-case upstream /
+ten-case compatibility reference pairs. The latter retain the unchanged timing
+fixture and all 110 accumulator samples. Full acceptance must use `.4`; `.3`
+observations remain historical.
 
 The expanded reference checks found a real high-bias diode failure in `.2`:
 an extreme Newton trial overflowed the Shockley exponential before PG could
@@ -18,8 +40,9 @@ backtrack. `.3` supplies a large finite rejection merit for those trial currents
 Accepted measurements require the exact model current within the finite
 evaluation range; clipped trial values cannot be published. Three focused JVM
 checks cover finite squared merit, exact physical currents and rejected invalid
-measurements. Both solvers pass the ten reference comparison cases against the
-explicitly labelled precision control described below, including the 70 V diode.
+measurements. Earlier `.3` runs passed the ten reference comparison cases on both
+solvers against the explicitly labelled precision control described below,
+including the 70 V diode.
 Core/migration, showroom and combined Pinout Yard checks also pass on both
 solvers. All six broader `.3` regression invocations pass: 218 cases each on CEE
 1.2, 1.1.4 and 1.1.3 with both solvers (1,308 cases).
@@ -53,7 +76,8 @@ failures remain separate observations. All eight measurement traces per
 comparison are retained and checked against that identity. The reference
 experiment freezes its configuration inputs and drains already queued reloads
 before timing starts, preserving the exact charge/discharge frame assertions.
-The fresh full `.3` campaign follows these focused checks.
+Further `.3` repeats exposed the anchor-change defect described above. Run
+`44643930077` retains the full `.3` attempt and cannot qualify the repaired `.4`.
 The default stable 342-job plan and CEE 1.1.4 recommendation remain unchanged.
 
 ## Earlier `.2` repair candidate

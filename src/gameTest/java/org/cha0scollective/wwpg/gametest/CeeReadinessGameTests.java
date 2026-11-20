@@ -174,16 +174,53 @@ public final class CeeReadinessGameTests {
     @GameTest(template="empty",batch="wwpg_cee_readiness",timeoutTicks=100)
     public static void accumulatorHistory(GameTestHelper h){DynamicGameTests.accumulatorChargesFromPgAndPowersPgLoad(h);}
 
+    @GameTest(template="empty",batch="wwpg_cee_readiness",timeoutTicks=100)
+    public static void preferredTerminalChangeKeepsEveryCapacitorHistoryFrame(GameTestHelper h) {
+        if(Boolean.getBoolean("wwpg.test.upstreamReference")){h.succeed();return;}
+        var fixture=new Fixture(h,"reference-continuity");
+        var capacitor=new CapacitorProperties();capacitor.capacitance=1;
+        fixture.source=supply(1,10);fixture.series=ElectricalProperties.resistor(99);fixture.load=capacitor;fixture.start();
+        double[] previous={0};
+        h.runAtTickTime(20,()->{previous[0]=capacitor.lastVoltage;fixture.preferred=fixture.a;});
+        for(int tick=21;tick<=50;tick++) {
+            final int at=tick;
+            h.runAtTickTime(tick,()->{
+                var results=InfrastructureSavedData.load(h.getLevel()).ticker.lastResults;
+                h.assertTrue(results instanceof CeeResultsAvailability available&&available.available(fixture.b,fixture.g),
+                        "Preferred terminal change rejected history at tick "+at);
+                h.assertTrue(capacitor.lastVoltage>previous[0],"Preferred terminal change paused capacitor charge at tick "+at);
+                previous[0]=capacitor.lastVoltage;
+            });
+        }
+        h.runAtTickTime(51,()->{try{audit(h);h.succeed();}finally{fixture.close();}});
+    }
+
+    @GameTest(template="empty",batch="wwpg_cee_readiness",timeoutTicks=80)
+    public static void higherPriorityReferenceStillReplacesTheNumericalAnchor(GameTestHelper h) {
+        if(Boolean.getBoolean("wwpg.test.upstreamReference")){h.succeed();return;}
+        var fixture=new Fixture(h,"reference-priority");
+        fixture.source=supply(1,10);fixture.series=ElectricalProperties.resistor(9);fixture.load=ElectricalProperties.resistor(10);fixture.start();
+        h.runAtTickTime(20,()->{fixture.check(5,-.5,.5);fixture.preferred=fixture.b;fixture.priority=200;});
+        h.runAtTickTime(30,()->{try{
+            var results=InfrastructureSavedData.load(h.getLevel()).ticker.lastResults;
+            BoardComponentGameTests.near(h,results.getVoltageAt(fixture.b),0,.0001,"Higher-priority zero potential");
+            BoardComponentGameTests.near(h,results.getVoltageAt(fixture.g),5,.0001,"Displaced anchor RMS voltage");
+            fixture.check(5,-.5,.5);audit(h);h.succeed();
+        }finally{fixture.close();}});
+    }
+
     private static final class Fixture {
         final GameTestHelper helper;final String name;
         final AttachedNode a,b,g,c;
+        Node preferred;
+        int priority=100;
         ElectricalProperties source,series,load;
         final Consumer<AddToElectricGraphEvent> listener=this::prepare;
         final Consumer<com.george_vi.electroenergetics.events.FinishElectricSimulationEvent> observer=this::observe;
         int frames;
         boolean active,leak;
         Fixture(GameTestHelper h,String name){helper=h;this.name=name;String owner="cee-readiness:"+name+":"+h.absolutePos(net.minecraft.core.BlockPos.ZERO);
-            a=new AttachedNode(0,owner);b=new AttachedNode(1,owner);g=new AttachedNode(2,owner);c=new AttachedNode(3,owner);}
+            a=new AttachedNode(0,owner);b=new AttachedNode(1,owner);g=new AttachedNode(2,owner);c=new AttachedNode(3,owner);preferred=g;}
         void start(){
             // Stock CEE intentionally skips its graph event without native wire endpoints.
             if(Boolean.getBoolean("wwpg.test.upstreamReference")) {
@@ -199,7 +236,7 @@ public final class CeeReadinessGameTests {
         void prepare(AddToElectricGraphEvent event){if(!active||event.level!=helper.getLevel())return;
             connect(event.builder,a,g,source);connect(event.builder,a,b,series);connect(event.builder,b,g,load);
             if(leak){event.builder.connect(b,c,ElectricalProperties.resistor(999));event.builder.connect(c,g,ElectricalProperties.resistor(1));}
-            event.builder.defaultZeroPotential(g,100);}
+            event.builder.defaultZeroPotential(preferred,priority);}
         void check(double voltage,double sourceCurrent,double loadCurrent){
             var results=InfrastructureSavedData.load(helper.getLevel()).ticker.lastResults;
             if(results instanceof CeeResultsAvailability availability)helper.assertTrue(availability.available(a,g)&&availability.available(b),"Synthetic circuit unavailable");
