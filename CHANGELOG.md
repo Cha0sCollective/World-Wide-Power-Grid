@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.2.11 — 20 November 2026
+
 - Keep CEE wires attached and selectable when Power Grid and Power Dock
   terminals move with a Sable sublevel.
 - Reject CEE spool links between connectors that lead to the same electrical
