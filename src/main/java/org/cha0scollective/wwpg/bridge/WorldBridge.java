@@ -630,6 +630,12 @@ public final class WorldBridge {
         var ownCounts = new IdentityHashMap<ElectricalNetwork, Integer>();
         references.values().forEach(g -> ownCounts.merge(g.getNode1().getNetwork(), 1, Integer::sum));
         var priorities = ((CircuitBuilderAccessor) builder).wwpg$groundPriorities();
+        var dynamicOwners = new HashSet<String>();
+        if (CeeCompatibility.modern()) for (var dynamic : dynamics)
+            for (int ordinal : new int[]{dynamic.first, dynamic.second}) {
+                var key = preparedKeys.get(graph.getNode(ordinal).node);
+                if (key != null) dynamicOwners.add(key.owner());
+            }
         var best = new IdentityHashMap<ElectricalNetwork, EndpointKey>();
         var ranks = new IdentityHashMap<ElectricalNetwork, Integer>();
         var ownerRanks = new IdentityHashMap<ElectricalNetwork, Map<String, Integer>>();
@@ -651,14 +657,15 @@ public final class WorldBridge {
         // A preferred zero is a numerical anchor, not a physical earth. CEE
         // 1.2's dynamic models can nominate the other terminal as their source
         // changes sign. Keep the existing anchor while its device still has
-        // the highest priority; moving it would rebuild PG and reject a healthy
+        // the same native default priority (100); moving it would rebuild PG and reject a healthy
         // history frame. New higher-priority devices and physical grounds still
         // replace it. After a merge, retain only one deterministic anchor.
         var retained = new IdentityHashMap<ElectricalNetwork, EndpointKey>();
         for (var entry : references.entrySet()) {
             var key = entry.getKey();
             var network = entry.getValue().getNode1().getNetwork();
-            if (!best.containsKey(network) || nodes.get(key) != entry.getValue().getNode1()
+            if (!best.containsKey(network) || ranks.get(network) != 100 || !dynamicOwners.contains(key.owner())
+                    || nodes.get(key) != entry.getValue().getNode1()
                     || !Objects.equals(referencePriorities.get(key), ranks.get(network))
                     || !Objects.equals(ownerRanks.get(network).get(key.owner()), ranks.get(network))) continue;
             var old = retained.get(network);

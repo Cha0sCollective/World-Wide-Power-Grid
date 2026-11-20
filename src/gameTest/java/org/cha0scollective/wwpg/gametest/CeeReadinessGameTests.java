@@ -176,7 +176,7 @@ public final class CeeReadinessGameTests {
 
     @GameTest(template="empty",batch="wwpg_cee_readiness",timeoutTicks=100)
     public static void preferredTerminalChangeKeepsEveryCapacitorHistoryFrame(GameTestHelper h) {
-        if(Boolean.getBoolean("wwpg.test.upstreamReference")){h.succeed();return;}
+        if(Boolean.getBoolean("wwpg.test.upstreamReference")||!CeeCompatibility.modern()){h.succeed();return;}
         var fixture=new Fixture(h,"reference-continuity");
         var capacitor=new CapacitorProperties();capacitor.capacitance=1;
         fixture.source=supply(1,10);fixture.series=ElectricalProperties.resistor(99);fixture.load=capacitor;fixture.start();
@@ -205,6 +205,20 @@ public final class CeeReadinessGameTests {
             var results=InfrastructureSavedData.load(h.getLevel()).ticker.lastResults;
             BoardComponentGameTests.near(h,results.getVoltageAt(fixture.b),0,.0001,"Higher-priority zero potential");
             BoardComponentGameTests.near(h,results.getVoltageAt(fixture.g),5,.0001,"Displaced anchor RMS voltage");
+            fixture.check(5,-.5,.5);audit(h);h.succeed();
+        }finally{fixture.close();}});
+    }
+
+    @GameTest(template="empty",batch="wwpg_cee_readiness",timeoutTicks=80)
+    public static void explicitReferenceOnPlainCircuitStillMovesAtTheSamePriority(GameTestHelper h) {
+        if(Boolean.getBoolean("wwpg.test.upstreamReference")){h.succeed();return;}
+        var fixture=new Fixture(h,"plain-reference-change");
+        fixture.source=supply(1,10);fixture.series=ElectricalProperties.resistor(9);fixture.load=ElectricalProperties.resistor(10);fixture.start();
+        h.runAtTickTime(20,()->{fixture.check(5,-.5,.5);fixture.preferred=fixture.a;});
+        h.runAtTickTime(30,()->{try{
+            var results=InfrastructureSavedData.load(h.getLevel()).ticker.lastResults;
+            BoardComponentGameTests.near(h,results.getVoltageAt(fixture.a),0,.0001,"Explicit same-priority reference");
+            BoardComponentGameTests.near(h,results.getVoltageAt(fixture.g),9.5,.0001,"Displaced plain-circuit anchor RMS voltage");
             fixture.check(5,-.5,.5);audit(h);h.succeed();
         }finally{fixture.close();}});
     }

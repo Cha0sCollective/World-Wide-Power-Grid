@@ -2,14 +2,14 @@
 
 The preparation branch `dev/cee-120-readiness` now integrates WWPG **0.2.10**,
 main commit `5072e412639db71d346ff54c2b133f54f0b13934`. The initial candidate was
-`0.2.10-dev.cee120.1`; the current repair candidate is `0.2.10-dev.cee120.4`.
+`0.2.10-dev.cee120.1`; the current repair candidate is `0.2.10-dev.cee120.5`.
 This is a development preparation, not a published release
 or a full acceptance claim.
 
 ## Current repair candidate
 
-`0.2.10-dev.cee120.4` has player SHA256
-`f7e61fc385c9d329f8b2c181cbe2d037267da2320a58a45247cf8794426bfda5`.
+`0.2.10-dev.cee120.5` has player SHA256
+`860a150384ed60ad8a51143afe4d84ac24323f9e55ec22d22a2f9d90c0e71308`.
 CEE remains `1.21.1-1.2.0-132`. Full acceptance is pending.
 
 An intermittent `.3` accumulator reference failure exposed another player issue.
@@ -21,18 +21,34 @@ one otherwise healthy charge-history frame. The captured failing trace shows the
 same circuit network, no solver error or restoration hold, an anchor move from
 terminal 1 to 0, and exactly one held frame.
 
-`.4` retains the existing numerical anchor while the same device still has the
-same highest priority. Physical grounds, priority changes and removed devices
+`.5` retains the existing numerical anchor for CEE 1.2 dynamic models while the
+same device still has CEE's native default priority (100). Physical grounds,
+explicit references on ordinary circuits, other priority tiers and removed devices
 still trigger reselection. Merged networks retain one deterministic eligible
 anchor. The repair does not change component equations, solve precision or
 accepted-history assertions. New focused checks exercise uninterrupted capacitor
 history after a preferred-terminal change and replacement by a higher-priority
-reference. The previous `.3` runtime fails the new continuity check at tick 21;
-the matching test companions differ only in their required-version metadata.
-`.4` passes all ten readiness cases on each solver and both ten-case upstream /
-ten-case compatibility reference pairs. The latter retain the unchanged timing
-fixture and all 110 accumulator samples. Full acceptance must use `.4`; `.3`
-observations remain historical.
+reference, as well as explicit same-priority changes on ordinary circuits.
+The previous `.3` runtime fails the new continuity check at tick 21; the matching
+test companions differ only in their required-version metadata.
+
+The first anchor repair, `.4` (SHA256
+`f7e61fc385c9d329f8b2c181cbe2d037267da2320a58a45247cf8794426bfda5`), passed
+the ten-case readiness groups and both upstream/compatibility reference pairs,
+but broader regression caught a failure in
+`preferredReferenceChangesAndPhysicalGroundTakeover`: the repair also retained
+an explicitly requested priority-1000 reference. Its campaign `44647987390` was
+cancelled after this finding and is not acceptance evidence. `.5` narrows the
+retention rule to the CEE 1.2 dynamic-model default; legacy behavior and explicit
+reference selection remain intact. Full acceptance must use `.5`.
+
+The narrowed `.5` repair passes the 218-case regression group and all eleven
+readiness cases on each solver, including the existing preferred-reference /
+physical-ground takeover test that rejected `.4`. Both ten-case upstream /
+ten-case compatibility reference pairs also pass and satisfy the retained-trace
+evidence gate (498 focused cases total). The accumulator comparison preserves
+all 110 samples, fifty charging frames and fifty-nine discharging frames.
+These are focused observations, not a full acceptance claim.
 
 The expanded reference checks found a real high-bias diode failure in `.2`:
 an extreme Newton trial overflowed the Shockley exponential before PG could
@@ -77,7 +93,7 @@ comparison are retained and checked against that identity. The reference
 experiment freezes its configuration inputs and drains already queued reloads
 before timing starts, preserving the exact charge/discharge frame assertions.
 Further `.3` repeats exposed the anchor-change defect described above. Run
-`44643930077` retains the full `.3` attempt and cannot qualify the repaired `.4`.
+`44643930077` retains the full `.3` attempt and cannot qualify the repaired `.5`.
 The default stable 342-job plan and CEE 1.1.4 recommendation remain unchanged.
 
 ## Earlier `.2` repair candidate
