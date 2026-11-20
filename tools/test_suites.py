@@ -333,6 +333,9 @@ def execute(jobs, inputs_path, output, lane, reason=None, preparation=None, comm
                     proofs = sorted(directory.glob('*packaged-*.json'), key=lambda p: p.stat().st_mtime_ns)
                     if not proofs: raise ValueError('No actual process proof: '+job['id'])
                     record['proof'] = descriptor(proofs[-1])
+                    if job.get('operation')=='reference':
+                        prefix='native-reference-' if job['reference']=='upstream' else 'compatibility-'
+                        record['reference_traces']={p.stem.removeprefix(prefix):descriptor(p) for p in sorted(directory.glob(prefix+'*.json'))}
                     if job.get('group', '').endswith('-extracted'):
                         record['extraction'] = descriptor(directory/'extracted-yard.json')
             record['seconds'] = round(time.monotonic()-started, 3)

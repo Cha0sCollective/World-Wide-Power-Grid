@@ -26,6 +26,8 @@ def campaign_catalog():
     spec['special_namespaces'].pop('wwpg_cee_fans')
     spec['reference_control']={'id':'cee120-residual-1e-16','cee_sha256':CEE_SHA256,
         'squared_residual_threshold':1e-16,
+        'trace_cases':['cee-heating','cee-fuse','cee-accumulator','pg-acid-battery','pg-potato-battery',
+                       'cee-diode-reactive','cee-diode-clamped-high-bias','pg-diode-reactive-board'],
         'scope':'Test-only independent CEE reference; stock-default failures retained separately'}
     spec['campaign']={'name':'CEE 1.2 full headless','version':VERSION,'player_sha256':PLAYER_SHA256,
                       'cee_version':CEE_VERSION,'cee_sha256':CEE_SHA256,

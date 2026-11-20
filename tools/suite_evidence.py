@@ -101,6 +101,12 @@ def validate_job(actual, expected, inputs, base):
                 if 'WWPG_RUNTIME_INPUTS_VERIFIED: ' in line]
         require(bool(audits) and all(a.get('electroenergetics',{}).get('sha256')==control['cee_sha256'] for a in audits),
                 'Actual loaded reference CEE hash missing/different')
+        traces=actual.get('reference_traces',{})
+        require(set(traces)==set(control['trace_cases']),'Reference trace inventory differs')
+        for item in traces.values():
+            trace=read(locked(item,base))
+            require(trace.get('reference_baseline')==control['id'] and trace.get('backend')==expected['backend']
+                    and trace.get('upstream')==(expected['reference']=='upstream'),'Reference trace identity differs')
     require(proof.get('completed') and proof.get('required_tests_passed', 0) > 0, 'Process did not complete its tests')
     require('GAME TESTS COMPLETE' in text and re.search(r'All [1-9][0-9]* required tests passed', text), 'Missing actual completed GameTest log')
     require('All dimensions are saved' in text, 'World did not finish saving')

@@ -31,6 +31,11 @@ class CeeCampaignChecks(unittest.TestCase):
                         upstream=case not in ('wrong-mode','compatibility'),sha256='runtime' if case=='compatibility' else 'reference'))
                     actual=dict(job,status='passed',exit_code=0,log=suites.descriptor(log_path),proof=suites.descriptor(proof_path),
                                 command=[] if case=='missing-argument' else ['-PtestTightCeeResidual=true'])
+                    actual['reference_traces']={}
+                    for name in control['trace_cases']:
+                        path=root/(str(number)+'-'+name+'.json')
+                        suites.write(path,dict(reference_baseline=control['id'],backend='NATIVE',upstream=case!='compatibility'))
+                        actual['reference_traces'][name]=suites.descriptor(path)
                     inputs=dict(artifact_hashes=dict(runtime='runtime',reference='reference',cee_runtime='wrong' if case=='wrong-cee' else campaign.CEE_SHA256))
                     if case in ('valid','compatibility'):evidence.validate_job(actual,job,inputs,root)
                     else:
