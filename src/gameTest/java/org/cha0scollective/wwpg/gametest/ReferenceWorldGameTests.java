@@ -23,6 +23,7 @@ import org.patryk3211.powergrid.collections.ModdedBlocks;
 public final class ReferenceWorldGameTests {
     @net.minecraft.gametest.framework.BeforeBatch(batch="reference")
     public static void configureNativeReferenceBackend(net.minecraft.server.level.ServerLevel level) {
+        ReferenceConfiguration.freeze(level);
         RuntimeInputAudit.started(new net.neoforged.neoforge.event.server.ServerStartedEvent(level.getServer()));
         DynamicGameTests.substeps(level);
         com.george_vi.electroenergetics.config.CEEConfigs.server().simulationConfig.microTicks.set(16);
