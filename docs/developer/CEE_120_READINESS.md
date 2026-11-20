@@ -3,14 +3,29 @@
 The preparation branch `dev/cee-120-readiness` now integrates WWPG **0.2.10**,
 main commit `5072e412639db71d346ff54c2b133f54f0b13934`. The initial candidate was
 `0.2.10-dev.cee120.1`; the current repair candidate is `0.2.10-dev.cee120.5`.
-This is a development preparation, not a published release
-or a full acceptance claim.
+This is an unpublished development beta candidate with completed headless
+acceptance. Graphical client acceptance was not run.
 
 ## Current repair candidate
 
 `0.2.10-dev.cee120.5` has player SHA256
 `860a150384ed60ad8a51143afe4d84ac24323f9e55ec22d22a2f9d90c0e71308`.
-CEE remains `1.21.1-1.2.0-132`. Full acceptance is pending.
+Full headless run [`44649764392`](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/44649764392)
+passed **398/398 jobs**, with zero failures and zero missing jobs, across Windows
+and Linux, Native and Java solvers, and BASE/PINOUT profiles. The tested source is
+`d8f2dd6b633b9bec1bee7e5dd9048d2ff1b6f456`.
+
+The frozen runtime is NeoForge **21.1.262**, CEE **1.21.1-1.2.0-132**, PG **0.6.2**,
+Create **6.0.10** and Architectury **13.0.12**. The actual loaded CEE SHA256 is
+`71916b60d3eb000b2b766b410e6dc5af58dbf3f1ff7da40080f3ee8d950393d7`.
+Loaded versions and hashes for all runtime mods remain in the retained audits.
+
+The official coverage/evidence gate passes, including the approved reference
+control and all required measurement traces. All **1,204** retained objects were
+hash-verified. A self-contained accepted cohort is preserved at
+`local/cee-120/headless-repair-0210-1/run-44649764392-accepted-cohort/result.json`;
+its relocated reports pass the same gate again. Original workflow records,
+portable reports, logs, traces, frozen jars and world archives remain unchanged.
 
 An intermittent `.3` accumulator reference failure exposed another player issue.
 CEE 1.2's `BridgeCollector.Builder.connect` chooses its preferred numerical zero
@@ -48,7 +63,29 @@ physical-ground takeover test that rejected `.4`. Both ten-case upstream /
 ten-case compatibility reference pairs also pass and satisfy the retained-trace
 evidence gate (498 focused cases total). The accumulator comparison preserves
 all 110 samples, fifty charging frames and fifty-nine discharging frames.
-These are focused observations, not a full acceptance claim.
+These focused observations preceded the full campaign recorded above.
+
+The `.5` player also passes the 218-case regression group and applicable
+readiness checks on CEE 1.1.4 and the actual CEE 1.1.3 jar, using each solver.
+The combined focused reports contain 1,414 reported cases in sixteen processes;
+four are the explicitly inapplicable modern-only continuity check on legacy
+CEE. Actual loaded versions and hashes are retained in the runtime audits.
+The Linux-produced `.5` player, test companion, API jars, examples and CEE jar
+match the local focused inputs byte-for-byte. The reference jar differs only
+by unused local launch-argument text files; all shared entries are identical.
+
+### Repair snapshots and acceptance
+
+| Snapshot | Change | Observed result |
+| --- | --- | --- |
+| `.3` | Finite diode trial merit, with exact accepted-current validation | Full run [`44643930077`](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/44643930077) passed all 398 jobs across eight environments. All 1,204 retained objects were hash-verified. Separate focused repeats exposed the coordinate-dependent accumulator pause. |
+| `.4` | First numerical-reference retention repair | Focused reference pairs passed, but broader regression rejected its treatment of explicit reference changes. Run [`44647987390`](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/44647987390) was cancelled and does not establish acceptance. |
+| `.5` | Retention limited to CEE 1.2 dynamic-model defaults | Focused and legacy checks pass. Full run [`44649764392`](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/44649764392), source `d8f2dd6b633b9bec1bee7e5dd9048d2ff1b6f456`, passed all 398 jobs across eight environments and the official evidence gate. |
+
+The `.3` full result belongs to player SHA256
+`0c800e29da66728a239d4fa2407efa2f9052670c744dc6614f4c2b5597a9cab8`
+and source `59e8d8980086646861a787ec56459fd2cf33ca65`. It is preserved under
+that identity and is not relabelled as `.5` evidence.
 
 The expanded reference checks found a real high-bias diode failure in `.2`:
 an extreme Newton trial overflowed the Shockley exponential before PG could
