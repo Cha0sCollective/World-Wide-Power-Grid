@@ -22,7 +22,9 @@ final class ReferenceConfiguration {
             // Removal stops new callbacks but existing debounced callbacks can
             // still be queued. A later sentinel on the same filesystem runs on
             // that watcher's single callback executor, after those callbacks.
-            var sentinel=Files.createTempFile(config,"wwpg-reference-barrier-",".tmp");
+            // A fresh directory avoids reusing a just-cancelled config watch key.
+            var barrierDirectory=Files.createTempDirectory(config,"wwpg-reference-barrier-");
+            var sentinel=Files.createFile(barrierDirectory.resolve("drain.tmp"));
             var drained=new CountDownLatch(1);
             try {
                 watcher.addWatchFuture(sentinel,drained::countDown).get(5,TimeUnit.SECONDS);
@@ -31,6 +33,7 @@ final class ReferenceConfiguration {
             } finally {
                 watcher.removeWatchFuture(sentinel).get(5,TimeUnit.SECONDS);
                 Files.delete(sentinel);
+                Files.delete(barrierDirectory);
             }
             org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info("WWPG_REFERENCE_CONFIG_FROZEN: files={}; pendingReloadsDrained=true",count);
         } catch(InterruptedException error) {
