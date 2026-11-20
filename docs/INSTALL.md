@@ -2,35 +2,36 @@
 
 WWPG lets stationary equipment from **Create: Electro Energetics (CEE)** and **Power Grid (PG)** share power and wires. You can run mixed factories, use either mod's handheld meters, and control equipment with panels and circuit boards.
 
-**WWPG 0.2.10 is the current stable release** with the retained control improvements enabled by default. Start with the [Stationary Test Yard](STATIONARY_YARD.md) if you want ready-built circuits to try. See [supported content](SUPPORT.md) for what works and [current status](STATUS.md) for limitations.
+**This branch provides the experimental CEE 1.2 alpha `0.2.10-dev.cee120.8`.**
+WWPG 0.2.10 remains the stable release for CEE 1.1.4. Use a copy of your world
+for alpha testing. This alpha has focused checks and client loading verification;
+full headless and graphical acceptance have not been completed for this exact jar.
+See [supported content](SUPPORT.md) and the [alpha record](../release/0.2.10-dev.cee120.8/README.md).
 
 ## Required versions
 
-Release acceptance used this combination, with the same mod versions on the server and every client. Use Java 21.
+Use this alpha dependency set, with the same mod versions on the server and every client. Use Java 21.
 
 | Dependency | Version |
 | --- | --- |
 | Minecraft | 1.21.1 |
 | NeoForge | 21.1.262 |
 | Create | 6.0.10, published NeoForge 1.21.1 jar |
-| Create: Electro Energetics | 1.21.1-1.1.4 |
+| Create: Electro Energetics | 1.21.1-1.2.0-132 |
 | Power Grid | Minecraft 1.21.1, 0.6.2 |
 | Architectury API | NeoForge 13.0.12 |
-| WWPG | 0.2.10 |
+| WWPG | 0.2.10-dev.cee120.8 |
 
-Full release acceptance targets NeoForge 21.1.262. Other loader versions use
-separate focused loading checks. CEE 1.1.3 and minimum SDK compile inputs retain
-separate compatibility roles. See [Version compatibility](VERSION_COMPATIBILITY.md).
+Power Dock 0.3.0-preview and Sable 2.0.5 are optional for moving connectors.
+The alpha's wire-coordinate checks also cover CEE 1.1.3 and 1.1.4; those are
+additional compatibility observations. See [Version compatibility](VERSION_COMPATIBILITY.md).
 
-Use these versions for the bundled worlds even when an inner save text file
-lists older versions. The outer bundle's `START-HERE.md` repeats the current
-requirements; the exact accepted save archives are preserved.
+The bundled worlds are unchanged historical `.5` headless exports and have not
+been retested on `.8`. Their inner version labels are preserved. Test copies
+only; the outer bundle's `START-HERE.md` explains their origin.
 
-Use the full Create release jar. The [release verification download](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.10/wwpg-0.2.10-verification.zip) records the exact dependency versions and checksums used for this release. WWPG does not include these other mods; download and install them separately.
+Use the full Create release jar. The [alpha verification download](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.10-dev.cee120.8/wwpg-0.2.10-dev.cee120.8-verification.zip) records its dependency versions, checksums and limited test scope. WWPG does not include these other mods; download and install them separately.
 
-This release reuses passing headless and graphical acceptance on the listed
-dependencies, with the version-only artifact comparisons recorded in the
-verification download.
 No experimental JVM flags are needed. Keep PG at **16 electrical substeps** as shown below.
 
 ## Optional computer-control profile
@@ -42,7 +43,7 @@ requires NeoForge 21.1.265 or newer and does not fit this dependency set.
 
 ## Installation
 
-1. [Download the WWPG jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.10/wwpg-0.2.10.jar).
+1. [Download the alpha WWPG jar](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.10-dev.cee120.8/wwpg-0.2.10-dev.cee120.8.jar).
 2. Put it and the required dependency jars in the instance's `mods` directory.
 3. Launch once to generate configuration, then stop the game or server.
 4. In `config/powergrid-server.toml`, edit the existing solver settings to the values below. Keep the other PG solver settings at their defaults.

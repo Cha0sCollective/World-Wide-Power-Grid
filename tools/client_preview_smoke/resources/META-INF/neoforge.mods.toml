@@ -1,0 +1,14 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="MIT"
+[[mods]]
+modId="wwpg_preview_smoke"
+version="1.0.0"
+displayName="WWPG preview loading smoke helper"
+description="Disposable title-screen test driver; never opens a world."
+[[dependencies.wwpg_preview_smoke]]
+modId="wwpg"
+type="required"
+versionRange="[0.2.10-dev.cee120.6,)"
+ordering="AFTER"
+side="CLIENT"

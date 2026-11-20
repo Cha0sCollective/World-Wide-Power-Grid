@@ -147,6 +147,9 @@ dependencies {
     testRuntimeOnly('dev.ryanhcode.sable-companion:sable-companion-common-1.21.1:1.6.0') { transitive = false }
     testImplementation platform('org.junit:junit-bom:5.11.4')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    // Exercise client preview hooks outside the mod launcher and inspect Java 21 CEE bytecode.
+    testRuntimeOnly 'io.github.llamalad7:mixinextras-common:0.5.3'
+    testImplementation 'org.ow2.asm:asm-tree:9.8'
     testCompileOnly 'dev.engine-room.flywheel:flywheel-neoforge-api-1.21.1:1.0.6'
     testRuntimeOnly 'dev.engine-room.flywheel:flywheel-neoforge-api-1.21.1:1.0.6'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -191,7 +194,7 @@ tasks.named('processGameTestResources') {
     ['wwpg_audit_generator', 'wwpg_audit_cee', 'wwpg_audit_endpoints', 'wwpg_audit_meter', 'wwpg_audit_config', 'wwpg_tree_scope', 'wwpg_cee_state_geometry', 'wwpg_tree_budget', 'wwpg_tree_restore', 'wwpg_loading', 'wwpg_motor_restoration', 'wwpg_matrix_ownership', 'wwpg_board_startup', 'wwpg_cee_preparation',
      'wwpg_solver_safety', 'wwpg_native_guard', 'wwpg_unload', 'wwpg_contactors', 'wwpg_meter_sampling',
      'wwpg_loader_installation', 'wwpg_loader_addons', 'wwpg_addon_safety', 'wwpg_addon_native_guard',
-     'wwpg_cio', 'wwpg_cio_upgrade', 'wwpg_cio_guard', 'wwpg_cio_transitions', 'wwpg_sable_targeting',
+     'wwpg_cio', 'wwpg_cio_upgrade', 'wwpg_cio_guard', 'wwpg_cio_transitions', 'wwpg_sable_targeting', 'wwpg_wire_positions',
      'wwpg_generator_timing', 'wwpg_cee_readiness', 'wwpg_cee_stock', 'wwpg_cee_lifecycle', 'wwpg_cee_migration', 'wwpg_cee_ownership', 'wwpg_cee_migration_cold', 'wwpg_cee_adapters', 'wwpg_cee_fans', 'wwpg_cee_baseline'].each { namespace ->
         from('src/gameTest/resources/data/wwpg/structure/empty.nbt') { into "data/${namespace}/structure" }
     }
@@ -635,6 +638,13 @@ sourceSets {
     }
 }
 tasks.named('compileCee12Java') { dependsOn prepareCee12Contract; options.compilerArgs += ['-proc:none'] }
+sourceSets.test.compileClasspath += sourceSets.cee12.output
+sourceSets.test.runtimeClasspath += sourceSets.cee12.output
+tasks.named('test') {
+    systemProperty 'wwpg.test.cee12Contract', cee12Contract.get().asFile.absolutePath
+    if(providers.gradleProperty('ceeRuntimeJar').isPresent())
+        systemProperty 'wwpg.test.ceeRuntimeJar', file(providers.gradleProperty('ceeRuntimeJar').get()).absolutePath
+}
 tasks.named('jar') { from sourceSets.cee12.output }
 neoForge.mods.wwpg { sourceSet sourceSets.cee12 }
 // Runtime overrides are explicit and separate from minimum compile dependencies.

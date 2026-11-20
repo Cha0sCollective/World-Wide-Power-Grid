@@ -521,6 +521,9 @@ def validate_release(manifest, root):
     source = manifest.get('source_sha', '')
     require(re.fullmatch(r'[0-9a-f]{40}', source) is not None, 'Missing immutable source commit')
     if 'documentation_snapshot' in manifest: documentation_inputs(manifest, root)
+    if 'alpha_release_exception' in manifest:
+        import release_alpha_exception
+        return release_alpha_exception.validate(manifest, root, sys.modules[__name__])
     require(manifest.get('unresolved_failures') == [], 'Unresolved failures block API freeze/release')
     require(manifest.get('stages_complete') == list(range(1, 7)), 'All six extension API stages must pass')
     hashes = {key: manifest['artifacts'][key]['sha256'] for key in ('runtime', 'api', 'cee_api', 'example', 'upstream_example')}
@@ -690,7 +693,10 @@ def package(manifest_path, root, output, release=False):
     entries['manifest.json'] = manifest_path.read_bytes()
     entries['PUBLICATION_STATUS.json'] = json.dumps(dict(schema=1, wwpg_version=VERSION, api_version=API_VERSION,
         publishable=release, state='accepted_release' if release else 'sdk_candidate',
-        message='All declared acceptance gates passed.' if release else 'Candidate only. API freeze and release acceptance have not been certified.'),
+        message=('Owner-authorized focused-check alpha only; full headless and graphical acceptance are not certified.'
+                 if release and 'alpha_release_exception' in manifest else
+                 'All declared acceptance gates passed.' if release else
+                 'Candidate only. API freeze and release acceptance have not been certified.')),
         indent=2).encode('utf-8') + b'\n'
     documentation_source, documents = documentation_inputs(manifest, root)
     for name, path in sorted(documents.items()):

@@ -31,6 +31,13 @@ in the verification archive.
 
 ## Prepare the accepted inputs
 
+The owner authorized a one-build focused-check exception for
+`0.2.10-dev.cee120.8`, the CEE 1.2 out-of-band alpha. Its exact runtime hash,
+locked unit/coordinate/client-loading evidence, unchanged historical world
+exports and mandatory disclosure are validated by `release_alpha_exception.py`.
+This does not certify full acceptance, authorize new suites, or waive any gate
+for another version. See its [alpha record](../release/0.2.10-dev.cee120.8/README.md).
+
 Full-suite runs require an explicit user request, including the end-of-day
 run. During development, check the changed area. A release that changes only
 the runtime's version metadata may reuse preserved passing full acceptance:

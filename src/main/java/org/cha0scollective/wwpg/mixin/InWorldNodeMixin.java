@@ -23,11 +23,17 @@ public abstract class InWorldNodeMixin {
     private void wwpg$pgPosition(Level level, CallbackInfoReturnable<Vec3> cir) {
         var node = (InWorldNode) (Object) this;
         var p = Terminals.pgLocalPosition(level, node.sourcePos(), node.id());
-        if (p != null) cir.setReturnValue(p.add(node.sourcePos().getX(), node.sourcePos().getY(), node.sourcePos().getZ()));
+        // CEE also projects sublevel storage coordinates into the visible world here.
+        if (p != null) cir.setReturnValue(node.toGlobalPos(p, level));
         else if (wwpg$unloadedApiNode(level, node)) cir.setReturnValue(null);
     }
     @Inject(method = "getPosition(Lnet/minecraft/world/level/Level;F)Lnet/minecraft/world/phys/Vec3;", at = @At("HEAD"), cancellable = true)
-    private void wwpg$pgInterpolatedPosition(Level level, float partialTicks, CallbackInfoReturnable<Vec3> cir) { wwpg$pgPosition(level, cir); }
+    private void wwpg$pgInterpolatedPosition(Level level, float partialTicks, CallbackInfoReturnable<Vec3> cir) {
+        var node = (InWorldNode) (Object) this;
+        var p = Terminals.pgLocalPosition(level, node.sourcePos(), node.id());
+        if (p != null) cir.setReturnValue(node.toGlobalPos(p, level, partialTicks));
+        else if (wwpg$unloadedApiNode(level, node)) cir.setReturnValue(null);
+    }
     @Inject(method = "getLocalPosition", at = @At("HEAD"), cancellable = true)
     private void wwpg$pgLocalPosition(Level level, CallbackInfoReturnable<Vec3> cir) {
         var node = (InWorldNode) (Object) this;

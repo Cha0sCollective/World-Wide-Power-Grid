@@ -237,6 +237,9 @@ def stage(source, expected_sha, config_path, output):
     output.parent.mkdir(parents=True, exist_ok=True)
     with accepted_bundle(source, expected_sha, output.parent) as (manifest, paths, root, accepted):
         version = manifest['wwpg_version']
+        if 'alpha_release_exception' in manifest:
+            import release_alpha_exception
+            release_alpha_exception.validate_presentation(manifest, root, config, acceptance)
         body = notes(version, config)
         with tempfile.TemporaryDirectory(prefix='release-stage-', dir=output.parent) as temporary:
             staged = Path(temporary) / 'ready'
@@ -245,7 +248,7 @@ def stage(source, expected_sha, config_path, output):
             runtime, worlds, sdk, verification, checksums = names(version)
             shutil.copyfile(paths['runtime'], downloads / runtime)
             licenses = licenses_from(accepted, paths['runtime'])
-            base = 'https://github.com/' + config['repository'] + '/blob/main/docs/'
+            base = 'https://github.com/' + config['repository'] + '/blob/' + config.get('documentation_ref', 'main') + '/docs/'
             world_files = dict(licenses)
             world_files.update(world_payload(manifest, root, version))
             for role in ('example', 'upstream_example'):
@@ -257,8 +260,12 @@ def stage(source, expected_sha, config_path, output):
             yard_note = ('The combined stationary-yard includes all ordinary exhibits and the Pinout station.\n'
                          'It requires CC:Tweaked and CC;CPG: Pinout on the server and every client.\n'
                          if manifest.get('stationary_yard_policy') == 'combined-pinout-v1' else '')
+            alpha_note = ('These are unchanged historical .5 headless exports, not worlds retested on this .8 alpha.\n'
+                          'Their inner version labels and original hashes are preserved. Test copies only.\n\n'
+                          if 'alpha_release_exception' in manifest else '')
             world_files['START-HERE.md'] = f'''# Example worlds for WWPG {version}
 
+{alpha_note}
 Install WWPG and the required mods first: {base}INSTALL.md
 
 1. Extract this bundle.
@@ -351,6 +358,9 @@ def check(staged):
     checksums = ''.join(a['sha256'] + '  ' + a['filename'] + '\n' for a in layout['assets'][:-1])
     require((staged / 'downloads' / expected[-1]).read_text(encoding='utf-8') == checksums, 'Public checksum list changed')
     with accepted_bundle(staged / 'downloads' / expected[3], layout['accepted_bundle_sha256'], staged.parent) as (manifest, paths, root, accepted):
+        if 'alpha_release_exception' in manifest:
+            import release_alpha_exception
+            release_alpha_exception.validate_presentation(manifest, root, config, acceptance)
         require(layout['source_sha'] == manifest['source_sha'] and layout['api_version'] == manifest['api_version'] and
                 layout['version'] == manifest['wwpg_version'], 'Staged identity differs from acceptance')
         require(layout['assets'][0]['sha256'] == sha(paths['runtime']), 'Staged runtime differs from acceptance')

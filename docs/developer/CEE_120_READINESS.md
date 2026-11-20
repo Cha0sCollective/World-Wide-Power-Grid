@@ -2,11 +2,117 @@
 
 The preparation branch `dev/cee-120-readiness` now integrates WWPG **0.2.10**,
 main commit `5072e412639db71d346ff54c2b133f54f0b13934`. The initial candidate was
-`0.2.10-dev.cee120.1`; the current repair candidate is `0.2.10-dev.cee120.5`.
-This is an unpublished development beta candidate with completed headless
-acceptance. Graphical client acceptance was not run.
+`0.2.10-dev.cee120.1`; the current client test candidate is `0.2.10-dev.cee120.8`.
+These are unpublished development beta candidates. Full headless acceptance
+belongs to `.5`; `.8` has focused coordinate, preview and client-loading checks only. Full
+graphical client acceptance was not run. `.6` was rejected by client loading.
 
-## Current repair candidate
+## Sublevel wire endpoint repair: .8
+
+`0.2.10-dev.cee120.8` has player SHA256
+`2dfe78d0b18690753ec68dd1ed4de2791cd4925fa72789b741fff4fdfd4394d0`.
+The player confirmed `.7` fixes loading and placement, but placed CEE wires with
+PG or Power Dock endpoints on Sable sublevels remain invisible and untargetable.
+Native CEE-to-CEE wires work. The same adapter defect is present in the 0.2.10
+baseline: WWPG's `InWorldNode.getPosition` override returns terminal coordinates
+in the sublevel's storage frame, bypassing CEE's Sable conversion. Its render
+overload also discards the supplied partial tick. CEE's wire renderer and wire
+interaction handler consume those two methods, respectively.
+
+`.8` delegates each overload to its corresponding native `toGlobalPos` conversion.
+Logical positions now use CEE's sublevel projection, while rendered positions
+also retain CEE's movement interpolation. Local geometry and outline coordinates
+keep their existing storage frame. The shared repair covers PG and Power Dock
+terminals and applies with legacy CEE as well as 1.2; native CEE geometry retains
+its existing path. No electrical equations or save formats change.
+
+The new opt-in `wwpg_wire_positions` group exercises the actual applied node mixin
+with controlled logical/render transforms: translated, rotated, scaled and moving
+coordinates; partial ticks; untransformed outline geometry; stationary PG; and
+native CEE controls. Its coordinate regression rejects the unchanged `.7` player
+with a storage-position mismatch. Both checks pass on `.8` with CEE **1.2.0-132**,
+**1.1.4** and **1.1.3**, using NeoForge **21.1.262**. The negative control's companion
+differs only in its WWPG version metadata. These fixtures verify the native
+conversion contract; they do not assemble or visually inspect a Sable sublevel.
+All thirteen preview/terminal-ray unit checks also pass on the 1.2 runtime.
+A real-client title-screen loading check passes with `.8`, CEE 1.2.0-132,
+Power Dock 0.3.0-preview and Sable 2.0.5. It applies both preview handlers and
+executes the transformed no-world tick. It does not verify in-world wire visuals.
+Compared with `.7`, only `InWorldNodeMixin.class` and mod version metadata change
+in the player jar; the electrical simulation classes and native entries are identical.
+
+Artifacts, runtime audits, focused logs and the candidate jar are retained under
+`local/cee-120/client-preview-8/`. The first `positions120` setup was rejected by
+the runtime audit before tests because no 1.2 checksum override was supplied;
+`positions120b` supplies the expected hash and is the passing run. Full suites
+were not rerun and the `.5` acceptance remains under its original identity.
+
+## Client loading repair: .7
+
+`0.2.10-dev.cee120.7` has player SHA256
+`5a2d9f9e6e350cbf48ebe413e805e6e937824d0ea144a2eeb2dd62ae5618c0b3`.
+The `.6` preview mixin declared its two static handlers with package access so
+unit tests could call them directly. Mixin requires these handlers to be private
+and rejected the patch before it could execute in the player's `dev128` client.
+`.7` makes both handlers private; tests now invoke them reflectively and include
+a regression check for the required access. The preview class differs from `.6`
+by exactly the two private access flags, with identical method code. Version
+metadata is the only other jar entry that changes.
+
+All **13** focused checks pass against CEE **1.21.1-1.2.0-132**: eight preview
+checks and five existing terminal-ray checks. A separate real-client title-screen
+smoke reproduces `.6`'s exact non-private-static failure, then passes on `.7` with
+both handlers applied and CEE's transformed `tick()` invoked on its no-world path.
+The same `.7` smoke passes again with copies of the player's installed Power Dock
+**0.3.0-preview** and Sable **2.0.5**. All three launches use NeoForge **21.1.262**.
+No world was opened, including `My Test World` in `dev128`; in-world preview and
+sublevel operation still need player verification.
+
+The candidate jar, checksums, unit reports, negative and positive client logs,
+transformed-class exports, actual input hashes and artifact comparisons are
+retained under `local/cee-120/client-preview-7/`. All 307 classes from the frozen
+`.5` player remain byte-identical. No full headless or full graphical suite was
+rerun; `.5` acceptance retains its original identity.
+
+The focused loading helper is documented at
+[`tools/client_preview_smoke/README.md`](../../tools/client_preview_smoke/README.md).
+
+## Previous client preview repair: .6 (loading rejected)
+
+`0.2.10-dev.cee120.6` has player SHA256
+`e6f597860ab7cc3478a15220d9d2fab1e4e9cb87bf4fbce2c44358ec1dc3315b`.
+It repairs a CEE 1.2 client crash while inspecting Power Grid terminals, including
+Power Dock connectors. CEE's hovered-node preview directly asks native CEE blocks
+for geometry, while WWPG also makes PG terminals selectable. That leaves a null
+position, which CEE 1.2 passes to Sable's range check before checking for null.
+The reported crash identifies this path but does not identify the hovered block.
+
+A client-only, CEE-1.2-only mixin fills missing hovered geometry through the
+existing `InWorldNode.getLocalPosition` compatibility hook. The original CEE
+conversion still runs once and preserves Sable plot coordinates. Native CEE
+geometry and detached-node cache resolution retain their existing paths. If a
+position remains unavailable, the range check skips Sable and lets CEE clear the
+overlay normally.
+
+Seven focused preview checks pass, covering ordinary and plot coordinates,
+native geometry, unavailable positions, detached-node lookup, range delegation,
+the exact build-132 injection sites and client-only registration. They pass with
+the legacy unit-test runtime and again with CEE **1.21.1-1.2.0-132**; the latter
+also passes five existing terminal-ray checks and verifies the loaded node class
+against the requested runtime jar. The CEE jar hash remains the `.5` frozen hash
+below. These checks did not apply the mixin through a client loader and missed
+the static-handler access defect corrected in `.7`. They do not establish
+graphical Power Dock acceptance.
+
+The jar comparison with the frozen `.5` player finds exactly one added preview
+class and changes only the client mixin registration and version metadata. All
+307 existing classes and eight native entries are byte-identical. The candidate player jar,
+checksum, focused reports and comparison are retained under
+`local/cee-120/client-preview-6/`. Full headless and graphical suites were not
+rerun for `.6`. The campaign tooling and retained `.5` acceptance keep their
+original identities.
+
+## Headless-accepted repair: .5
 
 `0.2.10-dev.cee120.5` has player SHA256
 `860a150384ed60ad8a51143afe4d84ac24323f9e55ec22d22a2f9d90c0e71308`.
@@ -55,7 +161,7 @@ but broader regression caught a failure in
 an explicitly requested priority-1000 reference. Its campaign `44647987390` was
 cancelled after this finding and is not acceptance evidence. `.5` narrows the
 retention rule to the CEE 1.2 dynamic-model default; legacy behavior and explicit
-reference selection remain intact. Full acceptance must use `.5`.
+reference selection remain intact. The full acceptance recorded here used `.5`.
 
 The narrowed `.5` repair passes the 218-case regression group and all eleven
 readiness cases on each solver, including the existing preferred-reference /

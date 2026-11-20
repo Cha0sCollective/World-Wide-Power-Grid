@@ -1,0 +1,65 @@
+// Focused client loading only. Separate from full graphical acceptance and player saves.
+gradle.projectsEvaluated {
+    def p=gradle.rootProject
+    def artifact=p.file(p.property('previewArtifact'))
+    def directory=p.file(p.property('previewDirectory'))
+    def out=p.file('build/preview-smoke-helper')
+    def compile=p.tasks.register('compilePreviewSmokeHelper',JavaCompile) {
+        source p.fileTree('tools/client_preview_smoke/src'){include '**/*.java'}
+        classpath=p.sourceSets.main.compileClasspath
+        destinationDirectory=new File(out,'classes')
+        javaCompiler=p.javaToolchains.compilerFor{languageVersion=JavaLanguageVersion.of(21)}
+        options.encoding='UTF-8'
+    }
+    def helper=p.tasks.register('previewSmokeHelperJar',Jar) {
+        dependsOn compile
+        from compile.map{it.destinationDirectory}
+        from p.file('tools/client_preview_smoke/resources')
+        destinationDirectory=out
+        archiveFileName='wwpg-preview-smoke.jar'
+        preserveFileTimestamps=false
+        reproducibleFileOrder=true
+    }
+    p.tasks.register('runPreviewMixinSmoke',JavaExec) {
+        dependsOn helper,p.tasks.named('prepareClientARun')
+        javaLauncher=p.javaToolchains.launcherFor{languageVersion=JavaLanguageVersion.of(21)}
+        doFirst {
+            if(!artifact.isFile()) throw new GradleException('Missing frozen preview artifact')
+            directory.mkdirs()
+            def options=new File(directory,'options.txt')
+            if(!options.exists()) options.setText('onboardAccessibility:false\nsoundCategory_master:0.0\n','UTF-8')
+            workingDir=directory
+            def run=p.tasks.named('runClientA').get()
+            mainClass=run.mainClass
+            args=run.args.collect { arg->
+                if(!arg.startsWith('@')) return arg
+                def replacement=new File(directory,'program-args.txt')
+                replacement.setText(p.file(arg.substring(1)).getText('UTF-8')
+                        .replace('--quickPlayMultiplayer\n127.0.0.1:25575',''),'UTF-8')
+                return '@'+replacement.absolutePath
+            }
+            jvmArgs=run.jvmArgs.collect { arg->
+                if(!arg.startsWith('@')) return arg
+                def replacement=new File(directory,'vm-args.txt')
+                replacement.setText(p.file(arg.substring(1)).getText('UTF-8')
+                        .replace('-Dwwpg.test.multiplayer=true','-Dwwpg.test.multiplayer=false')+
+                        '\n-Dmixin.debug.export=true\n','UTF-8')
+                return '@'+replacement.absolutePath
+            }
+            classpath=run.classpathProvider.filter { file->
+                ![p.sourceSets.main,p.sourceSets.extensionApi,p.sourceSets.ceeApi,p.sourceSets.gameTest,
+                  p.sourceSets.cee12,p.sourceSets.cee12GameTest].any{it.output.files.contains(file)}
+            }+p.files(artifact,helper.get().archiveFile.get().asFile)
+            def env=new HashMap(run.environmentProperty.get())
+            env['MOD_CLASSES']='wwpg%%'+artifact.absolutePath+File.pathSeparator+'wwpg_preview_smoke%%'+helper.get().archiveFile.get().asFile.absolutePath
+            environment env
+            logger.lifecycle('Preview loading smoke of {} SHA256 {}',artifact,
+                    java.security.MessageDigest.getInstance('SHA-256').digest(artifact.bytes).encodeHex().toString())
+        }
+        doLast {
+            def log=new File(directory,'logs/latest.log').getText('UTF-8')
+            if(!log.contains('WWPG_PREVIEW_MIXIN_SMOKE_PASSED')||log.contains('WWPG_PREVIEW_MIXIN_SMOKE_FAILED'))
+                throw new GradleException('Preview loading smoke failed; retain the client log')
+        }
+    }
+}

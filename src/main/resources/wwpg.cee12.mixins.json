@@ -11,6 +11,9 @@
     "CapacitorSavedHistoryMixin",
     "ThrottleWheelToolMixin"
   ],
+  "client": [
+    "WirePreviewClientMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }
