@@ -1,4 +1,10 @@
-# CEE 1.2 out-of-band alpha preparation
+# CEE 1.2 out-of-band alpha
+
+[Published prerelease](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.10-dev.cee120.8).
+The five verified downloads and approved notes are retained in
+[download-layout.json](download-layout.json) and [release-notes.md](release-notes.md).
+The source tag remains `c05c4fffa61b038bc7f2ba306d0b6b035e5418b3`;
+[publication.json](publication.json) records the public release and asset hashes.
 
 The alpha prerelease retains the tested `0.2.10-dev.cee120.8` version and exact
 player jar, SHA256
@@ -7,7 +13,7 @@ The stable release remains 0.2.10. The owner explicitly authorized
 "Allow a focused-check-only alpha prerelease" for this exact build. This is not
 completed full release acceptance.
 
-The candidate has thirteen focused unit checks, two applied-coordinate checks
+The alpha has thirteen focused unit checks, two applied-coordinate checks
 on each of CEE 1.2.0-132, 1.1.4 and 1.1.3, and client loading with Power Dock
 0.3.0-preview and Sable 2.0.5. A negative control rejects the unchanged `.7`
 coordinate behavior. In-world sublevel visuals have not been confirmed on `.8`.

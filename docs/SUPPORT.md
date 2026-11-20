@@ -1,5 +1,10 @@
 # Supported stationary content
 
+The [CEE 1.2 `.8` alpha](../release/0.2.10-dev.cee120.8/README.md) has focused
+compatibility checks and client loading verification only. The stable equipment
+coverage below does not establish full CEE 1.2 acceptance. Moving mixed-wire
+visuals still need in-world confirmation on the alpha.
+
 WWPG 0.2.10 lets **Create: Electro Energetics (CEE)** and **Power Grid (PG)** work
 together in stationary factories: equipment built in the world that stays in
 place. Either mod can supply power to the other's supported equipment, and you

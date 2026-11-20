@@ -1,0 +1,118 @@
+{
+  "schema": 1,
+  "wwpg_version": "0.2.10-dev.cee120.8",
+  "api_version": "1.0.0",
+  "source_sha": "c05c4fffa61b038bc7f2ba306d0b6b035e5418b3",
+  "api_coordinate": "org.cha0scollective.wwpg:wwpg-api:1.0.0",
+  "cee_api_coordinate": "org.cha0scollective.wwpg:wwpg-cee-api:1.0.0",
+  "acceptance_policy": "separated-v2",
+  "stationary_yard_policy": "combined-pinout-v1",
+  "unresolved_failures": [],
+  "artifacts": {
+    "runtime": {
+      "path": "local/cee-120/alpha8-package-01/artifacts/wwpg-0.2.10-dev.cee120.8.jar",
+      "sha256": "2dfe78d0b18690753ec68dd1ed4de2791cd4925fa72789b741fff4fdfd4394d0",
+      "bytes": 5213301
+    },
+    "gametest": {
+      "path": "local/cee-120/alpha8-package-01/artifacts/wwpg-0.2.10-dev.cee120.8-gametests.jar",
+      "sha256": "c220c90f5d366fdc9126847ce86d94be55b3a7d0140497ee574a192c6c631d40",
+      "bytes": 1568067
+    },
+    "api_javadoc": {
+      "path": "local/cee-120/alpha8-package-01/artifacts/wwpg-api-1.0.0-javadoc.jar",
+      "sha256": "007bb24235eacbaeabfbde3fb18b2c984f580a221cee5ec7d5cea2fff521eac9",
+      "bytes": 239342
+    },
+    "api_sources": {
+      "path": "local/cee-120/alpha8-package-01/artifacts/wwpg-api-1.0.0-sources.jar",
+      "sha256": "1862a8763d1687e785b3928c92c64c4cb797d9183a853f9e0f45f25f4102f55b",
+      "bytes": 25943
+    },
+    "api": {
+      "path": "local/cee-120/alpha8-package-01/artifacts/wwpg-api-1.0.0.jar",
+      "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+      "bytes": 50143
+    },
+    "cee_api_javadoc": {
+      "path": "local/cee-120/alpha8-package-01/artifacts/wwpg-cee-api-1.0.0-javadoc.jar",
+      "sha256": "fdb1d4950ca3fa059e694556c246dfa159b05632281cdd3af4b40856977505b0",
+      "bytes": 116484
+    },
+    "cee_api_sources": {
+      "path": "local/cee-120/alpha8-package-01/artifacts/wwpg-cee-api-1.0.0-sources.jar",
+      "sha256": "00e2e53fa240830a8d2d7e9ecb35449651a88c0da88067003e69da41f13b9f34",
+      "bytes": 6947
+    },
+    "cee_api": {
+      "path": "local/cee-120/alpha8-package-01/artifacts/wwpg-cee-api-1.0.0.jar",
+      "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+      "bytes": 8793
+    },
+    "maven_repository": {
+      "path": "local/cee-120/alpha8-package-01/artifacts/wwpg-api-1.0.0-maven.zip",
+      "sha256": "82a4e473ab1c1a6665d738df7f00c217f74a527515ef343657f9354489ef990a",
+      "bytes": 433195
+    },
+    "example": {
+      "path": "local/cee-120/alpha8-package-01/artifacts/wwpg-api-example-1.0.0.jar",
+      "sha256": "17ef99aa7fb06acab09efb67badd3b27aff30250167049177d952ee86b46fcef",
+      "bytes": 52081
+    },
+    "upstream_example": {
+      "path": "local/cee-120/alpha8-package-01/artifacts/wwpg-upstream-api-example-1.0.0.jar",
+      "sha256": "4a412dcc1bdc887b267588aa1f75b397403f9ce72aa1afa8076dec7b52aaa9b6",
+      "bytes": 45830
+    },
+    "example_sources": {
+      "path": "local/cee-120/alpha8-package-01/artifacts/wwpg-api-example-1.0.0-source.zip",
+      "sha256": "123eb00158a8772c5ce01b0d1a4f03dcc2b5166881f5403b3763ed2cd0729650",
+      "bytes": 79514
+    },
+    "upstream_example_sources": {
+      "path": "local/cee-120/alpha8-package-01/artifacts/wwpg-upstream-api-example-1.0.0-source.zip",
+      "sha256": "11f745749f30386a70e4a24ba40a5ff6b7d98ca7be4729eb21e65a6c462caafb",
+      "bytes": 70728
+    }
+  },
+  "abi": {
+    "path": "local/cee-120/alpha8-package-01/evidence/abi.json",
+    "sha256": "4b8675489591cc1dc8d657794b16a7b7e97aebefc239e8373804ae77acd56a09",
+    "bytes": 65329
+  },
+  "previous_api": {
+    "path": "local/cee-120/alpha8-package-01/artifacts/wwpg-api-1.0.0.jar",
+    "sha256": "a75b5fe80b58778b8fb871031fb60c829ff7f05d78880e1b8f5ae9eac5af8892",
+    "bytes": 50143
+  },
+  "cee_abi": {
+    "path": "local/cee-120/alpha8-package-01/evidence/cee_abi.json",
+    "sha256": "866c477bd4c0b00bd2072f15494348a6ea15aaa9344dedb8ef08ef511ede2fce",
+    "bytes": 12213
+  },
+  "previous_cee_api": {
+    "path": "local/cee-120/alpha8-package-01/artifacts/wwpg-cee-api-1.0.0.jar",
+    "sha256": "d5792f888ddd4b72ef127d7dcfe8948ed2dcdcf9002f196ae974b8364dd3360a",
+    "bytes": 8793
+  },
+  "stationary_yard": {
+    "path": "local/cee-120/alpha8-package-01/worlds/stationary_yard-original-cee120-5.zip",
+    "sha256": "cd6379fc99d0165f68e414c14d04992774dbb409a14fcfd84493e179b4ae0bf4",
+    "bytes": 1346387
+  },
+  "base_workshop_world": {
+    "path": "local/cee-120/alpha8-package-01/worlds/base_workshop_world-original-cee120-5.zip",
+    "sha256": "b65e427481d332da3c37090cc8a50a086545ab69e69ce61cccb2e79d6de414e8",
+    "bytes": 323399
+  },
+  "pinout_workshop_world": {
+    "path": "local/cee-120/alpha8-package-01/worlds/pinout_workshop_world-original-cee120-5.zip",
+    "sha256": "1f6f5558d9a27a18c64f4f09617996826d58b6b7fcca262861720943b1af97c4",
+    "bytes": 323392
+  },
+  "alpha_release_exception": {
+    "path": "release/0.2.10-dev.cee120.8/alpha-exception.json",
+    "sha256": "7a5b6a6b8085e8fe99033bd7cc4ba609f622dd596152a01f547ec1c42e4460fd",
+    "bytes": 4330
+  }
+}

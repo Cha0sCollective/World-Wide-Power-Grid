@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## 0.2.10-dev.cee120.8 alpha — 19 November 2026
+
+- Publish an out-of-band CEE 1.2.0-132 compatibility alpha while 0.2.10 remains
+  stable. The owner approved focused checks and client loading for this exact
+  prerelease; full headless and graphical acceptance are not claimed.
+- Fix CEE wire-tool preview crashes over PG and Power Dock terminals, and route
+  mixed-wire sublevel endpoints through CEE's logical and interpolated position
+  conversions. In-world sublevel visuals still need confirmation.
+- Keep the tested `.8` jar unchanged. The five downloads include unchanged
+  historical `.5` example saves, the SDK and clearly scoped verification records.
+
 ## 0.2.10 — 19 November 2026
 
 - Reduce brief slowdowns on CEE trains when unchanged Power Grid wire

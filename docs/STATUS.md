@@ -1,11 +1,16 @@
 # Current status
 
+The [CEE 1.2 alpha `.8`](../release/0.2.10-dev.cee120.8/README.md) is published as
+an out-of-band prerelease with an owner-approved focused-check exception. It
+does not claim the full stable coverage below. This branch's [installation](INSTALL.md)
+describes that alpha; stable 0.2.10 uses CEE 1.1.4.
+
 **WWPG 0.2.10 is the current stable release.** Unchanged Power Grid wire
 segments can rejoin a live line without adding a redundant restoration wait.
 Train gauges recover when valid readings return. Stock CEE alternators can continue supplying power from their
 last saved drive state while unloaded. Qualification covers 342 headless jobs and
 12 separate graphical scenarios on the recommended dependencies.
-Extension API **1.0.0** is unchanged. Use the [selected dependency set](INSTALL.md).
+Extension API **1.0.0** is unchanged. Use the [stable dependency set](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/0.2.10/docs/INSTALL.md) for stable play.
 
 ## What works
 

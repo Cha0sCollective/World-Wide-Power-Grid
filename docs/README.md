@@ -1,5 +1,10 @@
 # Documentation
 
+This branch also supplies the experimental [CEE 1.2 alpha](../release/0.2.10-dev.cee120.8/README.md).
+Its [installation guide](INSTALL.md) lists CEE 1.2.0-132 requirements and its
+focused-check limitations. The remaining equipment guides describe the stable
+baseline unless labelled otherwise.
+
 These guides describe **WWPG 0.2.10**, its supported stationary factories and
 **extension API 1.0.0**.
 Start with the page that matches what you want to do. The [circuit library](CIRCUIT_LIBRARY.md)

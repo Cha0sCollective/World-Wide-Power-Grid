@@ -2,7 +2,13 @@
 
 **WWPG lets Create: Electro Energetics (CEE) and Power Grid (PG) work together in the same stationary factory.** Either mod can power the other's supported equipment using their native wires, controls and tools.
 
-**[WWPG 0.2.10](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.10)** for Minecraft 1.21.1 and NeoForge. Follow [installation](docs/INSTALL.md) for the required mods and settings. Extension API **1.0.0** is unchanged.
+**CEE 1.2 testing:** [0.2.10-dev.cee120.8 alpha](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.10-dev.cee120.8)
+is an out-of-band prerelease for CEE 1.2.0-132. It has focused checks and client
+loading verification, with full acceptance still incomplete. Follow this branch's
+[alpha installation guide](docs/INSTALL.md); the [alpha record](release/0.2.10-dev.cee120.8/README.md)
+states the exact scope. Stable 0.2.10 remains unchanged.
+
+**[WWPG 0.2.10 stable](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.10)** for Minecraft 1.21.1 and NeoForge uses CEE 1.1.4. Follow its [stable installation guide](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/0.2.10/docs/INSTALL.md) for the required mods and settings. Extension API **1.0.0** is unchanged.
 
 0.2.10 reduces brief CEE train slowdowns when unchanged Power Grid wire segments reload onto a live line. Train gauges still show when readings are unavailable. Keep PG at 16 electrical substeps. See the [acceptance record](release/0.2.10/ACCEPTANCE.md) for the verified behavior.
 

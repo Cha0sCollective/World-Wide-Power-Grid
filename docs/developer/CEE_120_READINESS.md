@@ -3,7 +3,8 @@
 The preparation branch `dev/cee-120-readiness` now integrates WWPG **0.2.10**,
 main commit `5072e412639db71d346ff54c2b133f54f0b13934`. The initial candidate was
 `0.2.10-dev.cee120.1`; the current client test candidate is `0.2.10-dev.cee120.8`.
-These are unpublished development beta candidates. Full headless acceptance
+`.8` is published as an out-of-band alpha under the owner's focused-check
+exception; earlier development snapshots keep their original identities. Full headless acceptance
 belongs to `.5`; `.8` has focused coordinate, preview and client-loading checks only. Full
 graphical client acceptance was not run. `.6` was rejected by client loading.
 

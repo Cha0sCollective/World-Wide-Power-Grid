@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "scope": "cee120-focused-alpha-8",
+  "wwpg_version": "0.2.10-dev.cee120.8",
+  "runtime_sha256": "2dfe78d0b18690753ec68dd1ed4de2791cd4925fa72789b741fff4fdfd4394d0",
+  "source_sha": "c05c4fffa61b038bc7f2ba306d0b6b035e5418b3",
+  "owner_authorization": "Allow a focused-check-only alpha prerelease",
+  "full_headless_acceptance": false,
+  "full_graphical_acceptance": false,
+  "in_world_sublevel_visuals_confirmed": false,
+  "presentation": {
+    "path": "release/0.2.10-dev.cee120.8/presentation.json",
+    "sha256": "5d26a6b28f82fc7b8dd02509ef6d73956ccfbc59e102df96932af23d7ae39d4b",
+    "bytes": 1096
+  },
+  "unit_reports": [
+    {
+      "path": "local/cee-120/alpha8-package-01/evidence/TEST-org.cha0scollective.wwpg.compat.cee12.mixin.WirePreviewClientMixinTest.xml",
+      "sha256": "a5d81030b922505d47b0bc8bdab1d273fd1946c6b1163a8d3ed05a4c368ceb52",
+      "bytes": 1814
+    },
+    {
+      "path": "local/cee-120/alpha8-package-01/evidence/TEST-org.cha0scollective.wwpg.wiring.TerminalPickingRayTest.xml",
+      "sha256": "80f2bb488d5870387f922fe1869d236e52fbe1ce5cb3bb2684fc49eea80a8958",
+      "bytes": 1094
+    }
+  ],
+  "position_runs": [
+    {
+      "audit": {
+        "path": "local/cee-120/alpha8-package-01/evidence/positions120b-loaded-runtime.json",
+        "sha256": "71c06bb43e977c119fd72f49826f6b8a153fc934a5568e8e723a4125d9ec4d17",
+        "bytes": 3135
+      },
+      "log": {
+        "path": "local/cee-120/alpha8-package-01/evidence/positions120b-gradle.log",
+        "sha256": "68c24682d07679ccba0a5a42cc6bc85ec3519283ae6d7fdf880f5be17c540024",
+        "bytes": 21709
+      }
+    },
+    {
+      "audit": {
+        "path": "local/cee-120/alpha8-package-01/evidence/positions113-loaded-runtime.json",
+        "sha256": "09f7d97fbd25d6ca3473b5a711dd592d673f5e1cd3095b5133346d59f53fad6a",
+        "bytes": 3167
+      },
+      "log": {
+        "path": "local/cee-120/alpha8-package-01/evidence/positions113-gradle.log",
+        "sha256": "1a48196146363d2ce94daf2c901a2e144bed434bdb2958d7809cba0d3e3c7321",
+        "bytes": 21445
+      }
+    },
+    {
+      "audit": {
+        "path": "local/cee-120/alpha8-package-01/evidence/positions114-loaded-runtime.json",
+        "sha256": "97f71c5667f16d1bb96bc738e75489069e04e445ef1e5fb728220436c89c85f1",
+        "bytes": 3167
+      },
+      "log": {
+        "path": "local/cee-120/alpha8-package-01/evidence/positions114-gradle.log",
+        "sha256": "4bdf519075f7e0c5dfe8ded88af059cba8e913a4b1e35fafbf4fe5b476157d95",
+        "bytes": 21447
+      }
+    }
+  ],
+  "original_worlds": {
+    "stationary_yard": {
+      "path": "local/cee-120/alpha8-package-01/worlds/stationary_yard-original-cee120-5.zip",
+      "sha256": "cd6379fc99d0165f68e414c14d04992774dbb409a14fcfd84493e179b4ae0bf4",
+      "bytes": 1346387
+    },
+    "base_workshop_world": {
+      "path": "local/cee-120/alpha8-package-01/worlds/base_workshop_world-original-cee120-5.zip",
+      "sha256": "b65e427481d332da3c37090cc8a50a086545ab69e69ce61cccb2e79d6de414e8",
+      "bytes": 323399
+    },
+    "pinout_workshop_world": {
+      "path": "local/cee-120/alpha8-package-01/worlds/pinout_workshop_world-original-cee120-5.zip",
+      "sha256": "1f6f5558d9a27a18c64f4f09617996826d58b6b7fcca262861720943b1af97c4",
+      "bytes": 323392
+    }
+  },
+  "worlds_origin": "0.2.10-dev.cee120.5; historical headless exports, not retested on .8",
+  "client_log": {
+    "path": "local/cee-120/alpha8-package-01/evidence/smoke8-powerdock-gradle.log",
+    "sha256": "21c798f8ccb77fb15c5030d175918550277e11093f521ba385e3117e8a8da563",
+    "bytes": 31426
+  },
+  "client_mod_inputs": {
+    "path": "local/cee-120/alpha8-package-01/evidence/client-mod-inputs.json",
+    "sha256": "e3dcee2b9f463eb5c771f4f034e372421a51b1c1f24c1ef944d3c50f181bb9bb",
+    "bytes": 337
+  },
+  "negative_control_log": {
+    "path": "local/cee-120/alpha8-package-01/evidence/positions7-control-gradle.log",
+    "sha256": "ea530d5528ce87f479b5a7ece792a53e1ba78f3347817b755e974c58dd0334b7",
+    "bytes": 22669
+  },
+  "focused_summary": {
+    "path": "local/cee-120/alpha8-package-01/evidence/candidate8-focused-summary.json",
+    "sha256": "98386f4838aa3d35883ca8152f7e483d16183dae65bc82ebc1caf65e1f4f06f9",
+    "bytes": 12330
+  }
+}
