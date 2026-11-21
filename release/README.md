@@ -4,12 +4,21 @@ Maintainers: follow [Publishing a release](../docs/RELEASING.md) for the standar
 five-download layout and short notes. Edit [presentation.json](presentation.json)
 for the next release; version-specific records below preserve published history.
 
-**[WWPG 0.2.11](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.11)**
+**[WWPG 0.2.12](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.12)**
 is the current stable release. To install it or choose a playable world, use the
 [installation guide](../docs/INSTALL.md). This directory is for reviewing what
 was shipped and which checks passed.
 
-## Current stable: 0.2.11
+## Current stable: 0.2.12
+
+[Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.12)
+· [Acceptance](0.2.12/ACCEPTANCE.md).
+
+Restores bare CEE wire contact shocks and matches stock CEE voltage readings on
+isolated transformer windings. Both acceptance lanes passed on main and were
+reused for the version-only release.
+
+## Historical stable: 0.2.11
 
 [Downloads](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.11)
 · [Acceptance](0.2.11/ACCEPTANCE.md).
