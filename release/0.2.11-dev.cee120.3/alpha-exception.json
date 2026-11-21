@@ -1,0 +1,3110 @@
+{
+  "schema": 1,
+  "scope": "cee120-0211-focused-alpha-3",
+  "wwpg_version": "0.2.11-dev.cee120.3",
+  "runtime_sha256": "8536f2efcb5b2af88b0b6757c08653ec9b7bb940e15442b5405bf80c550147d4",
+  "gametest_sha256": "3882a9aeec583375f2fbf707d5bc65e1933aba888d3fc6509be0c86c90b7e4ae",
+  "runtime_source_sha": "ac59a3880ca5d165950f326668e5d4cb7dc8b871",
+  "source_sha": "82a14ef2602a0dd999e091ce1595a4a06a9356f7",
+  "owner_authorization": "those notes look good, i approve the focused-check-only exception for this alpha, go ahead and publish it",
+  "full_headless_acceptance": false,
+  "full_graphical_acceptance": false,
+  "new_graphical_client_run": false,
+  "presentation": {
+    "path": "release/0.2.11-dev.cee120.3/presentation.json",
+    "sha256": "3914242ab1ba9a55e601afaad1607902283c9c356798797f380a5186f8337a94",
+    "bytes": 1270
+  },
+  "runs": [
+    {
+      "backend": "NATIVE",
+      "scope": "contact-transformer",
+      "log": {
+        "path": "local/alpha-cee120-0211-3-review-01/evidence/transformer/native/console.log",
+        "sha256": "6f2852a1d932bed18b7c3527995ac6b552221b8ad422b54d1c1a7e9138f14a6e",
+        "bytes": 26510
+      },
+      "audit": {
+        "path": "local/alpha-cee120-0211-3-review-01/evidence/transformer/native/loaded-runtime-inputs.json",
+        "sha256": "b7d56eab436d4342d4effc8e24b36789bb77876f2978e1f2a2d6abc1e5d6af00",
+        "bytes": 3057
+      },
+      "arguments": {
+        "path": "local/alpha-cee120-0211-3-review-01/evidence/transformer/native/args.txt",
+        "sha256": "7b4cfc8d9fbfbbb2bf486146f91a484235a3dfd90ccdc04205e8464e2234cc84",
+        "bytes": 20509
+      }
+    },
+    {
+      "backend": "JAVA",
+      "scope": "contact-transformer",
+      "log": {
+        "path": "local/alpha-cee120-0211-3-review-01/evidence/transformer/java/console.log",
+        "sha256": "7c3be85ccc2f6507fb337a936fab27998ae9752de6c85fe68a6dbc386691fe08",
+        "bytes": 26474
+      },
+      "audit": {
+        "path": "local/alpha-cee120-0211-3-review-01/evidence/transformer/java/loaded-runtime-inputs.json",
+        "sha256": "b7d56eab436d4342d4effc8e24b36789bb77876f2978e1f2a2d6abc1e5d6af00",
+        "bytes": 3057
+      },
+      "arguments": {
+        "path": "local/alpha-cee120-0211-3-review-01/evidence/transformer/java/args.txt",
+        "sha256": "7faa930b31827e5b1e389a0e73c098f458257aa75b1356d405e2918e8c980592",
+        "bytes": 20507
+      }
+    },
+    {
+      "backend": "NATIVE",
+      "scope": "surrounding",
+      "log": {
+        "path": "local/alpha-cee120-0211-3-review-01/evidence/transformer/surrounding-native/console.log",
+        "sha256": "348f48907e4e48dab02a43a53a14208cb4a6c3c5cb9fc9f937a1565de9e3aee0",
+        "bytes": 68430
+      },
+      "audit": {
+        "path": "local/alpha-cee120-0211-3-review-01/evidence/transformer/surrounding-native/loaded-runtime-inputs.json",
+        "sha256": "b7d56eab436d4342d4effc8e24b36789bb77876f2978e1f2a2d6abc1e5d6af00",
+        "bytes": 3057
+      },
+      "arguments": {
+        "path": "local/alpha-cee120-0211-3-review-01/evidence/transformer/surrounding-native/args.txt",
+        "sha256": "1bd5801c6028ae37b9958fdde9ddca7ebc77194a1cb47ec8168497d6ad5ef7b0",
+        "bytes": 20512
+      }
+    },
+    {
+      "backend": "JAVA",
+      "scope": "surrounding",
+      "log": {
+        "path": "local/alpha-cee120-0211-3-review-01/evidence/transformer/surrounding-java/console.log",
+        "sha256": "f4e00e8d00826600338fb14956126ee46c2b82671b31d887b2627d62b57c4534",
+        "bytes": 67114
+      },
+      "audit": {
+        "path": "local/alpha-cee120-0211-3-review-01/evidence/transformer/surrounding-java/loaded-runtime-inputs.json",
+        "sha256": "b7d56eab436d4342d4effc8e24b36789bb77876f2978e1f2a2d6abc1e5d6af00",
+        "bytes": 3057
+      },
+      "arguments": {
+        "path": "local/alpha-cee120-0211-3-review-01/evidence/transformer/surrounding-java/args.txt",
+        "sha256": "0f97400da46288d40ff1540aa37dd1297390012c3c77f19559ea01c3ea5c5da4",
+        "bytes": 20510
+      }
+    }
+  ],
+  "unit_reports": [
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.api.ApiVersionTest.xml",
+      "sha256": "066d1ecc87b30e946b92583110cd7d8e7ec140264b4e37fa00a60b4c5abe70bc",
+      "bytes": 477
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.api.cee.CeeAdapterRegistryTest.xml",
+      "sha256": "099ee9f4e5622a2ae55f8b97e39d4d796649fe9bb2902695808962ceed06737a",
+      "bytes": 2310
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.api.CircuitDescriptionTest.xml",
+      "sha256": "74b5ad0f239db25d62b4cb93deaba9b5acd2dc3507652f2d414aaa014c74c71a",
+      "bytes": 1287
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.api.DeviceResultsTest.xml",
+      "sha256": "7bb66b41e9d685e8083d3b0540809d64257749fd01c903b4fd2285d360153144",
+      "bytes": 1219
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.api.VoltageMeasurementTest.xml",
+      "sha256": "c7e417f190c50399bd2f81a689a4de4413eae9eb6ba0e968cff53e1b95b61bda",
+      "bytes": 497
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.bridge.BridgeSimulationResultsTest.xml",
+      "sha256": "57e04030f2ee4e0e0a0562c1b6119c579b64721b4dc28040390eeaf30ee9bb6d",
+      "bytes": 1452
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.bridge.CatenaryReconnectionTest.xml",
+      "sha256": "81d2bcfd0637a29c4140b542080f92f17381f5489aac31fda34517200c58199e",
+      "bytes": 1174
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.bridge.DiagnosticHistoryTest.xml",
+      "sha256": "28c9a969609f93531f106525ee7a85a70d5d9880223ab1db9ff21260fb7b7725",
+      "bytes": 1419
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.bridge.IndexedIslandDiscoveryTest.xml",
+      "sha256": "71837adb2016f6eb816b6e653a58ac2932b43f916a84a862c8463906a05727c5",
+      "bytes": 671
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.bridge.InitializationWindowTest.xml",
+      "sha256": "1f106a442e4064b6b86e9caefa2f5da458cc988499ac0e03c8ea2457c86823c6",
+      "bytes": 506
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.bridge.LinearBranchTest.xml",
+      "sha256": "c6c71ca6874a2e6582cf6f12dfa5189d705fd271f00885e08c7272762b5712f1",
+      "bytes": 781
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.bridge.MatrixBuildScopeTest.xml",
+      "sha256": "ddd21d282877d7050ed179a31b838db12882d73d81cd08068fa71218fa7b6d2e",
+      "bytes": 1135
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.bridge.NativeBootstrapTest.xml",
+      "sha256": "b9f4be8188f2d9ab7b5f29490c3a2d8ae5bea8ee8882462334c56d1daea49fbe",
+      "bytes": 797
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.bridge.NativeCeeCheckpointTest.xml",
+      "sha256": "45b5292877d8d3357ae96455cb9553c984406918b944ec4560ec45c29acc1c39",
+      "bytes": 1106
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.bridge.NonlinearTrialCurrentTest.xml",
+      "sha256": "a063c4c811c106919ec480321de049ae5ca085e1089fae70f90ec1895db6d304",
+      "bytes": 824
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.bridge.OwnedWireRemovalTest.xml",
+      "sha256": "8c9b227241633cdef1118c52562068c50a54885561708979e8f5fca83c4e3f59",
+      "bytes": 633
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.bridge.PropertyCurrentSourcePowerTest.xml",
+      "sha256": "daa7c37433fc60c272671eb4ab9edbe6ee07d69305151225e9465f2c2befed8d",
+      "bytes": 855
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.bridge.ReferenceIslandsTest.xml",
+      "sha256": "17b9e7ba31b8951c32fcae9aa12c2393ad63df6c74785585aec0a8c1f3e51c7d",
+      "bytes": 650
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.bridge.RestorationWindowTest.xml",
+      "sha256": "100290da9c851c3a5e48c725548723792005327a26d8aaf6e6a6614c633c63be",
+      "bytes": 788
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.bridge.SparseAssemblyTest.xml",
+      "sha256": "ebd9d0b3a5bfd31112192e773355d77c88b82ca5234ff0a13ff50fca738facb2",
+      "bytes": 652
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.bridge.SparseMatrixSupportTest.xml",
+      "sha256": "4cd9f737a21ad977fbe10cc02dfc58860c7775bb5c7b9507dcdd66de743cee9d",
+      "bytes": 680
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.bridge.SubstepAcceptanceTest.xml",
+      "sha256": "15ed8bc557e8087989f095de9247f98c9a823578e5892ddb3b42bf12ca989962",
+      "bytes": 653
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.bridge.TrainDimensionsTest.xml",
+      "sha256": "2a293335ef4f3c25f940ef2ee918469a97b3972d02877472a4c0caf7827c3c8e",
+      "bytes": 735
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.bridge.TransformerStampTest.xml",
+      "sha256": "af1bf9e9176ff805c8d61cfc5ca21b645de21344481d1110d6f81d216fe2317f",
+      "bytes": 999
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.compat.cee.CeeSavedCurrentTest.xml",
+      "sha256": "30e5056c9a567a548468943ea9951a138163cd445392849fe53c4130d9d55ecb",
+      "bytes": 1524
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.compat.cee12.mixin.WirePreviewClientMixinTest.xml",
+      "sha256": "8a7f23054eddedbb84b3c9ddd64e64896bd2773bfca6b7700350990a32e3b5ae",
+      "bytes": 1716
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.experimental.BoundedTaskWindowTest.xml",
+      "sha256": "0e720c225187a465a42d9f258581f0c857d6e74b11a49f678b3fa1fbf75314bc",
+      "bytes": 980
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.extension.ApiCeeWireIdentitiesTest.xml",
+      "sha256": "2a5f1f83f47123944357a022d1bef2812b806a5c0fa778b66ee752b7751a5486",
+      "bytes": 1397
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.extension.ApiDiagnosticsTest.xml",
+      "sha256": "31277c03ef1b5dea353b3fddfb362817016616ab740f055f8925181270c93e29",
+      "bytes": 651
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.extension.ApiElectricalTest.xml",
+      "sha256": "dc4a97d032df7c3f7c92e267228982352c225201b5c96c7ad88ba72187a0d72a",
+      "bytes": 5484
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.extension.ApiGroundTest.xml",
+      "sha256": "2e0d530d41bb68c0e6ac00b5d0dc28539b5392ee5731014bbaca14a1bb36a852",
+      "bytes": 1350
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.extension.ApiTerminalIdentitiesTest.xml",
+      "sha256": "a8ea2e01c7b32b352a305b9b3f25fa7439855b2a1d455559f70417c20a5b130a",
+      "bytes": 1827
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.extension.NativeApiReadingsTest.xml",
+      "sha256": "2b4c192cd7a48b8beb9e9500ab07fac592167368e61f697e07537767ebe7c9bc",
+      "bytes": 842
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.extension.ReferenceGroupsTest.xml",
+      "sha256": "6c69dac084c00764201f062c3724c4134cf400bf6aad930a56ac7dab22471c0b",
+      "bytes": 681
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.wiring.LineVoltagesTest.xml",
+      "sha256": "99b890608ea2690e3f912f285172fb091757969f7111d6ae6deb5ce84c1161e7",
+      "bytes": 676
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.wiring.RestorationComponentsTest.xml",
+      "sha256": "33e265b8d0614dcd30635f5edeee8555f6927f74b9a7cfd1adc7205b1e728c7b",
+      "bytes": 1100
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.wiring.RestorationQueueTest.xml",
+      "sha256": "c9da44ac95075e0c63686984e3a49b784ba670929854fdeaa2817b93cfa79cdf",
+      "bytes": 1742
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.wiring.RestorationRootsTest.xml",
+      "sha256": "3a782ce8bc12ab4e980b56a2ab36030a2c12fc1201fa9cb2811847668907f2f9",
+      "bytes": 665
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.wiring.TerminalPickingRayTest.xml",
+      "sha256": "f36066d4545ab8992572d6c586578cf2e99ff35d83db61e34505d6611c6d33f2",
+      "bytes": 1093
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-review-01/evidence/jvm/TEST-org.cha0scollective.wwpg.wiring.WireTreeTraversalTest.xml",
+      "sha256": "c92ea0a053d7f7cbfbf799850a1d84fcbc446fcffed3281317d4dbecc402d2e6",
+      "bytes": 506
+    }
+  ],
+  "python_log": {
+    "path": "local/alpha-cee120-0211-3-review-01/evidence/transformer/python-tests.log",
+    "sha256": "9f15b23e7edd0f7aba924310ebcc850e3deda68f6ce9d407b1681c2c5dd62790",
+    "bytes": 246
+  },
+  "catalog": {
+    "path": "local/alpha-cee120-0211-3-review-01/evidence/transformer/catalog-audit.json",
+    "sha256": "8af9bf82b5c5c6144fb6d95d970430d39546826a7641750b51006612db7aa7a1",
+    "bytes": 2334
+  },
+  "worlds_origin": "0.2.10-dev.cee120.5; historical headless exports, not retested on .3",
+  "original_worlds": {
+    "stationary_yard": {
+      "path": "local/alpha-cee120-0211-3-review-01/worlds/stationary_yard-original-cee120-5.zip",
+      "sha256": "cd6379fc99d0165f68e414c14d04992774dbb409a14fcfd84493e179b4ae0bf4",
+      "bytes": 1346387
+    },
+    "base_workshop_world": {
+      "path": "local/alpha-cee120-0211-3-review-01/worlds/base_workshop_world-original-cee120-5.zip",
+      "sha256": "b65e427481d332da3c37090cc8a50a086545ab69e69ce61cccb2e79d6de414e8",
+      "bytes": 323399
+    },
+    "pinout_workshop_world": {
+      "path": "local/alpha-cee120-0211-3-review-01/worlds/pinout_workshop_world-original-cee120-5.zip",
+      "sha256": "1f6f5558d9a27a18c64f4f09617996826d58b6b7fcca262861720943b1af97c4",
+      "bytes": 323392
+    }
+  },
+  "sdk_origin": "Retained .8 API 1.0.0, Javadoc, Maven and example artifacts; runtime/API class bytes validated, no fresh independent SDK acceptance claimed.",
+  "focus_verification": {
+    "path": "local/alpha-cee120-0211-3-review-01/evidence/transformer/fix-verification.json",
+    "sha256": "4751f3b30ba6bd49e4f18bb8ac56747d6e804b891bb18d2669180b214df44a67",
+    "bytes": 44659
+  },
+  "publication_tooling_log": {
+    "path": "local/alpha-cee120-0211-3-publish-01/publication-tooling-tests.log",
+    "sha256": "da11bae8564767e13334e1a2990f8bc1d13790e6c5554c456ff675dcd584dc56",
+    "bytes": 159
+  },
+  "publication_tooling_first_attempt": {
+    "path": "local/alpha-cee120-0211-3-publish-01/publication-tooling-java11-attempt.log",
+    "sha256": "8788f213c0c5fc277a6300977ee4aaa6c79ae526af866caa168d3d17856534d0",
+    "bytes": 13080
+  },
+  "publication_tooling_note": "55 focused checks passed with Java21; earlier Java11 selection could not compile --release21 consumers and is preserved separately.",
+  "runtime_sources": [
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/cee12GameTest/java/org/cha0scollective/wwpg/gametest/cee12/TransformerReferenceGameTests.java",
+      "sha256": "8a82db3ce78a5ca45f8eb58b336819a924139a882e7b9a9cf9deb37f20f13214",
+      "bytes": 6321
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/ReferenceIslands.java",
+      "sha256": "46225628dda2ec4750eddc91e389553816911baa968ca9047598dab99dde3090",
+      "bytes": 3326
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/bridge/ReferenceIslandsTest.java",
+      "sha256": "851ccb32ded28d74e0a96c347726063d58d6754b653ae3040b084f781a46d895",
+      "bytes": 2519
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/ApiValidation.java",
+      "sha256": "95e4c4534346d2816737cceb7b0573265665e0916115abf48f52084d2aa72190",
+      "bytes": 1890
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/CircuitDescription.java",
+      "sha256": "039055f03176730b49d7fbebeb579237ac4f2dc26a077f2f6d862dc1a8f2b8d7",
+      "bytes": 5423
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/DeviceIdentity.java",
+      "sha256": "bc7eaa7548f70eb263af38f51f6ed46051fb307817dd7242e0da45a9e09c6545",
+      "bytes": 1208
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/DeviceResults.java",
+      "sha256": "4d56be4cf9a6d822c4d987d0e9d20497fe9db6a6b46c52bca5adac50e75801a7",
+      "bytes": 3935
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/ElectricalDevice.java",
+      "sha256": "c05b0d67811083da72415a04d0802cac4657fefc93b14ac896f4a5e73f458dfe",
+      "bytes": 2575
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/ElectricalModel.java",
+      "sha256": "903ccb4c7da2d00edc2b16e7fb5e5d5f6ee9c39d79ecd11475025b706b412750",
+      "bytes": 12052
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/Element.java",
+      "sha256": "15899ec662b23858cf2a68fda08d4474226eb0680719cb9eca906665c2b4e65b",
+      "bytes": 1385
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/ElementResult.java",
+      "sha256": "b7b41f146d35f7caa674a1173663ca6cefe53ffa0ae8e5dbef0649120cc4d53a",
+      "bytes": 2176
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/ElementState.java",
+      "sha256": "2e63a61cf27a71725e590f788a3af86708d9db4cdd289144c69012ff4ba6bda8",
+      "bytes": 1419
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/EndpointIdentity.java",
+      "sha256": "35906dbc7c37ceb07fec7af32d216041b7097e46fa214a456a72ed0c64fe7390",
+      "bytes": 773
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/InternalNode.java",
+      "sha256": "c431276eb576b267983f4e77544576e44727d5fe8a5c33bba20c86b7c0e9c37f",
+      "bytes": 578
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/LocalPoint.java",
+      "sha256": "be8877d9d411fdaf8b4f0fb0e3ddd8c474ada7a198314cc5fdb2ba2b8a262a70",
+      "bytes": 944
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/MeasurementStatus.java",
+      "sha256": "64462984dd574bbd256afc33036bd1fc8dd88d6d7cadde00cf380fa9b0bbda96",
+      "bytes": 541
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/NodeResult.java",
+      "sha256": "5b32fc933256b4784ff9e2c6c5b5a50c4ffeda0a64bbdfe438bd09b2bf2a642f",
+      "bytes": 956
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/Terminal.java",
+      "sha256": "e5b10038e76a3c4462e5b0ef49d68c640d65d08b859b4b81428d07b1b749bc92",
+      "bytes": 1562
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/TerminalMeasurement.java",
+      "sha256": "5c1fca1ea7eeb76d21931a6683aaa1c848b6f950a95b4fad1f8eb7fe492c212c",
+      "bytes": 1316
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/TickContext.java",
+      "sha256": "77ea7d3ee96ae48d190c45ded1081d9530d70ff661b77688efab514c86028bb6",
+      "bytes": 1460
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/VoltageMeasurement.java",
+      "sha256": "6cf3df9892268c2302f8e411192069806d3a8ccdbc82a4bb0224cb67393cc29f",
+      "bytes": 1596
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/WWPGApi.java",
+      "sha256": "9a8760fd0e9f85f1094454d9b56d65ff25e4f28566e24bd0f3d2bdaef4867903",
+      "bytes": 815
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/neoforge/DeviceDiscoveryService.java",
+      "sha256": "84e5b3fe79a7e779c9097db70b05910dd42fbf714ccb86aa38da3d7d290c5d1d",
+      "bytes": 389
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/neoforge/ElectricalCapabilities.java",
+      "sha256": "4659e3bf946dd92c46a5bbace944c550c0d044dd1835b4a9ec72e1d46aee155b",
+      "bytes": 850
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/neoforge/ElectricalDevices.java",
+      "sha256": "e9710ae5e54a55df9c617d9983d2fb3e660f158416a50fa32692140ca2f5ec3c",
+      "bytes": 1857
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/neoforge/ElectricalMeasurements.java",
+      "sha256": "48176624e06ef728245a5b83a702a83db7fe0feed113b1f2f35e342674ea9876",
+      "bytes": 4049
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/neoforge/ElectricalProviders.java",
+      "sha256": "6384ed080892de8931d70bbb73be0495181a60a2dadf2a718767988d828566c8",
+      "bytes": 6647
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/neoforge/MeasurementService.java",
+      "sha256": "dcbd3711154f4f25d9c24ebd8c0c6486e5b5e42a45ff0af3ef1fabb1fcf540f7",
+      "bytes": 1629
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/neoforge/package-info.java",
+      "sha256": "2c5df0614c28c54b7407658b390b4d97a0aa2a6ff039f3c43171882acdb2ecbf",
+      "bytes": 138
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/api/java/org/cha0scollective/wwpg/api/package-info.java",
+      "sha256": "7c9df070d694a00c40633657741e6f1a2c10925c30bc106c9c4e48be8930d525",
+      "bytes": 871
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/cee12/java/org/cha0scollective/wwpg/compat/cee12/Cee12Integration.java",
+      "sha256": "274686cd528cf3e4e34117befa7dc70d904f2838b0888c6cc625741628c93c17",
+      "bytes": 5749
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/cee12/java/org/cha0scollective/wwpg/compat/cee12/Cee12SimulationResults.java",
+      "sha256": "0dc015aca9a58e498f62e2bad1f3b606219a3d5a69f7f66b231498a7bd15a0fa",
+      "bytes": 6287
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/cee12/java/org/cha0scollective/wwpg/compat/cee12/mixin/CapacitorNumerics.java",
+      "sha256": "2e01de8f226ee3711bf56094f7040a250bb31d8e8e6b13056d0d70bc05d0cbea",
+      "bytes": 478
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/cee12/java/org/cha0scollective/wwpg/compat/cee12/mixin/CapacitorSavedHistoryMixin.java",
+      "sha256": "f1145db2dcc44712a272dbfbf1bab2303e66ea6443dd3891e5dd2bdb787244dc",
+      "bytes": 1472
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/cee12/java/org/cha0scollective/wwpg/compat/cee12/mixin/CircuitBuilderValidationMixin.java",
+      "sha256": "dac3376b6edad981d37bb53d7e09135be1deb828533aa5ce1f1355a5a293aae6",
+      "bytes": 2830
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/cee12/java/org/cha0scollective/wwpg/compat/cee12/mixin/ConnectionHazardHistoryMixin.java",
+      "sha256": "c4b8f69ff82a404d0e5c08c009babe3028e7ac3a48c77c6eeecb7004febbc107",
+      "bytes": 1208
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/cee12/java/org/cha0scollective/wwpg/compat/cee12/mixin/DiodeNumerics.java",
+      "sha256": "1319c93cafccf5d616e4379dee440058400352d7fb933f80c8b87f4b98f6f2ac",
+      "bytes": 525
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/cee12/java/org/cha0scollective/wwpg/compat/cee12/mixin/ElectrocutionContactMixin.java",
+      "sha256": "97fce3c845c30e110c6c599b15419bc7f0d94fca878d9d484dacd9be44aa9313",
+      "bytes": 1636
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/cee12/java/org/cha0scollective/wwpg/compat/cee12/mixin/ElectrocutionEntryAccessor.java",
+      "sha256": "9dc48568e6754bae26de9274141574311b904e667b5a6d0c8470d52dad06643b",
+      "bytes": 457
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/cee12/java/org/cha0scollective/wwpg/compat/cee12/mixin/ThrottleWheelToolMixin.java",
+      "sha256": "000fd48e231c556a83da9bfd143584733bd40ff05334e24473dba76b7567ff53",
+      "bytes": 1305
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/cee12/java/org/cha0scollective/wwpg/compat/cee12/mixin/WirePreviewClientMixin.java",
+      "sha256": "b75c173a6d3bbb94adaefc707d5d0388d816acfe3fd799e1b1a022fcefe11ac8",
+      "bytes": 2255
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/cee12GameTest/java/org/cha0scollective/wwpg/gametest/cee12/Cee12ResultProbe.java",
+      "sha256": "5ab30761bcab0b40437b69796177966d09634b67f0cdf874c15a4593d5f575e6",
+      "bytes": 800
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/cee12GameTest/java/org/cha0scollective/wwpg/gametest/cee12/ElectrocutionGameTests.java",
+      "sha256": "cb61faa1e387830f8c105782f2c4b6d0dece02bf90f245d1fc23fcdcbe012a3f",
+      "bytes": 12979
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/cee12GameTest/java/org/cha0scollective/wwpg/gametest/cee12/UnsupportedNonlinearProperties.java",
+      "sha256": "378367c8096c72e81566b61f9e5a4bb45dd92d0b83005e6286935d57266d07ef",
+      "bytes": 358
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeeElectricalParameters.java",
+      "sha256": "3df72d9a69d968dc96b1e7b903ff3b7b1d582a9f42258708347efd381799d3f6",
+      "bytes": 2322
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeePropertyAdapter.java",
+      "sha256": "fc37fa236aadb045b85e9f424d0d369b374a030773d34e28d785de47be5f50a7",
+      "bytes": 2490
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeeStateCheckpoint.java",
+      "sha256": "6bee242912556541cac033a9dda596cd9a17512f352a0a10034f2f5538dc1088",
+      "bytes": 619
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeeSubstepContext.java",
+      "sha256": "4b0a30acf50e26742e985e1cbb3905164f73a1ad921f880ce52607a18cf934c1",
+      "bytes": 1870
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/ceeApi/java/org/cha0scollective/wwpg/api/cee/CeeSubstepResult.java",
+      "sha256": "44075abde96b6d8132b81f15ccdb15a3b78e12b20480b56bbed7094bbcc2efc1",
+      "bytes": 1346
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/ceeApi/java/org/cha0scollective/wwpg/api/cee/RegisterCeePropertyAdaptersEvent.java",
+      "sha256": "f4cfc8e3b303062b09981787bc4270bb6016cf32ce969969c962a0464313b669",
+      "bytes": 1956
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/ceeApi/java/org/cha0scollective/wwpg/api/cee/package-info.java",
+      "sha256": "1e61663e9d6155a0202b8be54aaccdd91730537fd5a299593326b70f7ae4e5bc",
+      "bytes": 376
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/AdvancedLibrary.java",
+      "sha256": "9841d49901d84b0c1bff286b9bd76050b253d6dab89c553e4b7db24eae626724",
+      "bytes": 13251
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/CircuitAdder3GameTests.java",
+      "sha256": "1d9c580bb4aee4492a01e1ce2f6d825e8078dcf94ad1613d696aa9aad41ac5c1",
+      "bytes": 658
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/CircuitFusedLatchGameTests.java",
+      "sha256": "b7fb48b827fc3d7344dfbfe845f07cf8a45e8590cb8065f9a11aebb46e88a901",
+      "bytes": 394
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/CircuitInputs.java",
+      "sha256": "c25f695baafdb45385f41f18581407b41a13ba81cbd57e27000c3855260774af",
+      "bytes": 640
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/CircuitLibraryGameTests.java",
+      "sha256": "adf00cc251560b40392bef2941a54147f72fa9559262b8586d1572a821fdc919",
+      "bytes": 2199
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/CircuitMemoryBankGameTests.java",
+      "sha256": "cf40bedcdaf083c6fd93b7206b43f2fd651829527fdfa672d46463bed604058b",
+      "bytes": 394
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/CircuitOscillatorGameTests.java",
+      "sha256": "1447905725438caa0a1d106847e0bd86f6b07b710b559dc605a38f340525fce5",
+      "bytes": 392
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/CircuitQuietHeaterGameTests.java",
+      "sha256": "614d660a89db8bbd37c8fd6c6504bbbc39952133a016f90bd648a84e7985678c",
+      "bytes": 397
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/CircuitRam4X4GameTests.java",
+      "sha256": "2dc0519b2300d124c20f20946580155317c522d1262671981c796482b4f61613",
+      "bytes": 380
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/CircuitRegister8GameTests.java",
+      "sha256": "189bdd243a437c4960513d600c40eeba55b9fc9687dfc8858355b960943f805f",
+      "bytes": 389
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/CircuitRegulatorGameTests.java",
+      "sha256": "b23acc0ca9e956863ccbe5d6c3a2475d966acb62781ce033d3969bcf65ea012b",
+      "bytes": 389
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/CircuitRelayHeaterGameTests.java",
+      "sha256": "77aa6bb6c64605ed26fe599e4dbb449ab2979bc2877bc9cae7acea74978b3997",
+      "bytes": 397
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/CircuitShift4GameTests.java",
+      "sha256": "d10601d9400c48d083c6d67c4216a5588c1ba6332659f3a26ba8ac0698a8a998",
+      "bytes": 380
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/CircuitSourceLossGameTests.java",
+      "sha256": "b13e25d12e1324e97a9497e543393a480a44a65ed1f7b72bdd16768a82462d3a",
+      "bytes": 394
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/CircuitSourceSwitchGameTests.java",
+      "sha256": "540166d90dfb0ca39562044e18c942aa099a355e459c5be3770b7d94620e7251",
+      "bytes": 400
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/FunctionalBaselines.java",
+      "sha256": "7773366c7cd597e701613794c88c4864792a27a05b4f7909be5b10965a12636d",
+      "bytes": 16157
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/FusedOutputChecks.java",
+      "sha256": "82e25df42922ba379035eb2e7101fde46536a236eb80b15392e4ee8753e52c1d",
+      "bytes": 4244
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/LibraryBoards.java",
+      "sha256": "b922ffb85339d998cfa34b03c0bb74e7aa3c9418dbbffd02e943633926231dd9",
+      "bytes": 838
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/NativeCircuitWiring.java",
+      "sha256": "b1cdb82bfb1414a1a82d2102850c4ea7a9453c90e6611a6b8db31885fa8e9239",
+      "bytes": 1701
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/NativeMemory.java",
+      "sha256": "d95cd5668ed4b9ef99b34a3ef7e7a76f2db62a28faffe4a65f67d7e622fea251",
+      "bytes": 4396
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/QuietHeaterChecks.java",
+      "sha256": "fef8b6070c3b2e46fbc859dbada2c3e755bba5828a9abe375623b5262dc9fa82",
+      "bytes": 13096
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/QuietSoundObserver.java",
+      "sha256": "a2ab40692c27a3bf6da3c2c1fa8e1edd960e4ab111fe9bf88cc2e51e5ccced3a",
+      "bytes": 803
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/RelayHeaterChecks.java",
+      "sha256": "9c3704dbf25f77bbc24bcd3a30be21469b39d49067cad018902d2a678446d7be",
+      "bytes": 10309
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/circuits/SourceLossChecks.java",
+      "sha256": "b9aad06193e27ccc2d370c4b6a55b4929f034d36e16b7e314d0ee755751a0913",
+      "bytes": 9545
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/AdditionalFactoryGameTests.java",
+      "sha256": "84bb2e2f4182b04bf7e32024708ff85a45c426ac3223508061d994343aae6cac",
+      "bytes": 9828
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/AlternatorUnloadGameTests.java",
+      "sha256": "b4c206eebd1497175354f78e2a8058765fdd6fe26564d7636c7c334de47e4d6a",
+      "bytes": 11951
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ApiMeterFixture.java",
+      "sha256": "344c402d6d9136c594c4b8127b0e8d44b78cac3339a4e0417e9e7151a90f82d0",
+      "bytes": 5601
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/AuditCeeStateGameTests.java",
+      "sha256": "310822377ec3ba1912303e1e2ec844954b664a4b624d12f4212e0829834be22d",
+      "bytes": 12758
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/AuditConfigurationGameTests.java",
+      "sha256": "dafcf64ee9e6a4a3f5bfb57168d890f61ceb1cfade309b1fb70d556949e855da",
+      "bytes": 3286
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/AuditEndpointGameTests.java",
+      "sha256": "8429f2e9745c3255970b45756e985343038127cf768498e0309b1d8d6e14799f",
+      "bytes": 5988
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/AuditGeneratorGameTests.java",
+      "sha256": "7bca94dfa317d5ac01d921318a4922a4b1607a7f62076b64b0be0fdd74a430c2",
+      "bytes": 4097
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/AuditMeterGameTests.java",
+      "sha256": "56f60a0c2ceb6f2a76024db7c976a4c5c6cda69751095ef2cad0de452c74987b",
+      "bytes": 3319
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/BoardComponentGameTests.java",
+      "sha256": "c10c3a9de732fb073f1c152f030d1a1d602063bd84e5aea8bb1ee223698546c2",
+      "bytes": 9338
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/BoardFixture.java",
+      "sha256": "f52147371b313302c42044bd6ad46370f653af9d9168632f151b13d6cae3c63e",
+      "bytes": 12120
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/BoardGameTests.java",
+      "sha256": "6d51b3e95eac0bf5b9db4874227cf4c995c7ec97cf5bf89e6e22cc12fe544727",
+      "bytes": 4299
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/BoardStartupGameTests.java",
+      "sha256": "ef2b7db50a3e84c75e93e74b2bef01075cfb259155e235627ac22fff01fb4f6d",
+      "bytes": 964
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/BoardWorkflowGameTests.java",
+      "sha256": "78a29ece91fec93fd75a829fb008d77759a03871d6b4c31b4d043265d8740942",
+      "bytes": 11162
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/BundledWireGameTests.java",
+      "sha256": "85e40349b5bc49bba0ab1dd162ef7486d4572edffac7f5e447ed41a718cdc6d4",
+      "bytes": 10349
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/BundledWireLifecycleGameTests.java",
+      "sha256": "55b7776f24accfa200b26e8c6211493ff766bb9a8ba248febfec7038e4bdf30e",
+      "bytes": 9955
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeAdapterReadinessGameTests.java",
+      "sha256": "25bc8adeceea784e888087b1e2466f0023f213f311553bc67ce416429932378f",
+      "bytes": 5198
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeAuxiliaryGameTests.java",
+      "sha256": "aa348ed72ce112ee45fedd057c4944a736adeed6275ed3469ab572c64a3c1d74",
+      "bytes": 9003
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeBaselineIntegrationGameTests.java",
+      "sha256": "35daa0c1690f18a9f7dfa294bffc5ca39c9651a0990a4ca2779f2374eb1a3927",
+      "bytes": 1796
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeBaselineTrainIntegrationGameTests.java",
+      "sha256": "fdd573058fdc155146fddce2b35ed8b96b597800bca83c7610c8a6a4814185c7",
+      "bytes": 796
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeColdMigrationGameTests.java",
+      "sha256": "327518c3858a55d274c2b1b0dc73329d1fe7788521d8f81eb4452c3f2b55b210",
+      "bytes": 4201
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeControlGameTests.java",
+      "sha256": "afbed89b7dc56e6b47186051acc4c4b4168e276969d9e4246ad3373e53d8c0b4",
+      "bytes": 8438
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeFanReadinessGameTests.java",
+      "sha256": "695a3be25c7652b7d97d8595adbac3382fe19f162e90c102a64ef2ff395c7198",
+      "bytes": 4888
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeLifecycleReadinessGameTests.java",
+      "sha256": "6e841e75d7d8787587dfc7d7fe53d91efbca6afc014c1a0be1c8c24d449e9b29",
+      "bytes": 3980
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeMigrationGameTests.java",
+      "sha256": "46cfe33709731f741bef6969fc4e7d53f6455192ff6ad82d246830e5871428f7",
+      "bytes": 6192
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeOwnershipReadinessGameTests.java",
+      "sha256": "95f762cccb94c2769f0e06cd247c9bfec959febf05edf981a41b6469b32f5b92",
+      "bytes": 745
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeePreparationGameTests.java",
+      "sha256": "fbb32c380293760465146b5a5b0b63c8047ff578881b371f8ea0d7a2c1245411",
+      "bytes": 3268
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeReadinessGameTests.java",
+      "sha256": "92d1e44b18de4a690c2dcafeabf0e464d5a3cd03f4a250a86f1b9691f97a4ed9",
+      "bytes": 21208
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeStateGeometryGameTests.java",
+      "sha256": "8767051ad9cff996754f7604cad45107484873818ab09d6f563862de59d68b99",
+      "bytes": 9995
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeStockReadinessGameTests.java",
+      "sha256": "b88740def08d05dca9b8f19ef730c33e1cef05ff3cd24bb55f3179762225a041",
+      "bytes": 1230
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeTerminalGeometryGameTests.java",
+      "sha256": "109bd103cb8fbc9377b2ee31e93c10900f6415e6f9eefddab2c9971c6a595fbd",
+      "bytes": 15176
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeTerminalPickingGameTests.java",
+      "sha256": "c9947a2c1c8844ecb141a9542d536742934895dbdaaeefba3852485d79c59f44",
+      "bytes": 27517
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeTestAttachments.java",
+      "sha256": "d22831c9a3e492ed32fde11c377c0d30ed2360632bfae629b828bbb86f502994",
+      "bytes": 3306
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeTestGraphs.java",
+      "sha256": "9320a545c5a839129c43c8fbf82e56433fb8734774c9d84be84b90e2879fd631",
+      "bytes": 1210
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeTestNumerics.java",
+      "sha256": "dfd55a5d9f43eabbdc3fa948d93ae60010452ccfe4bcb96df5300995f5eaf73e",
+      "bytes": 2023
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeTestResultProbe.java",
+      "sha256": "e2a0657ef53d97c5d43d27ea50c979b921f1c83c277244b3143e4c0dfec4009c",
+      "bytes": 1424
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CeeWirePositionGameTests.java",
+      "sha256": "2f67699d487219b745a79491ec49e6226c46ef1c407178125492690dc7987e7d",
+      "bytes": 5948
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CioCompatibilityGameTests.java",
+      "sha256": "85a3823800289b21bb7b37ea1950b1312ee1a8d4bcd0b5caa8a27ce86115ab54",
+      "bytes": 21126
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CioModelGuardGameTests.java",
+      "sha256": "4d25b2fa46e694591adef78408b97a5bee2bd105154714325d3b6ef7c101f6f9",
+      "bytes": 1370
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CioTransitionGameTests.java",
+      "sha256": "7178c345b31eceb10d5579151f8431be0a2e44b7b3a9feebbb3e2fce7182bb50",
+      "bytes": 7015
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CioUpgradeGameTests.java",
+      "sha256": "7df8d86f7355d2f1f781a8e0bc08f5fe93a2f8e684290bea99d8c04b8f321b95",
+      "bytes": 3323
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CircuitRebuildGameTests.java",
+      "sha256": "804204a9ff50903f034ef6a0c702da29a96f9173e30eae6ad4e96ad84deccde7",
+      "bytes": 12081
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ConfigReloadGameTests.java",
+      "sha256": "2ddda61923a80731ce6722ac556c1b34df947b6b6ce0d1dd0ea04d89ba5ff159",
+      "bytes": 2068
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ContactorRestorationGameTests.java",
+      "sha256": "29c1aa608eb277fdcac1087bd3a9e28d61bb7eae2cdb39179b1df25ee25c75b9",
+      "bytes": 11131
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/CoupledNodeRemovalGameTests.java",
+      "sha256": "0faaf1c6325fc8ed54b864d58160a864f69ac4aa56979f0b1aa246b23dcd19c1",
+      "bytes": 10770
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/DelayedEntityLoads.java",
+      "sha256": "6bfa1cdbb572ac3985800a1bba37ea858acdf528203d30a94621b9d3a68a0f53",
+      "bytes": 5900
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/DesignTablePersistenceGameTests.java",
+      "sha256": "9da13c0cf1edf1bc02cff9f3aa8bc282874b56b6b1526186241a25d010e66bc7",
+      "bytes": 2908
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/DesignerChunkCyclesGameTests.java",
+      "sha256": "29766a2c4b44b86af256fcdb1d21d52f66fd8a739c4445a25e8bd80116b4e375",
+      "bytes": 8438
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/DesignerRestartGameTests.java",
+      "sha256": "dd7571cfe9c85e037ef813a46446473b316f5e01d2ce2ecbaec7a15126bd532a",
+      "bytes": 9730
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/DiagnosticsGameTests.java",
+      "sha256": "0bb98fc51689588ca15452d2cbddc21a68f96506f7c11c49ae2192fca547059d",
+      "bytes": 6715
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/DimensionGameTests.java",
+      "sha256": "caaf812b0de89d2ea80c67edea926545edae9270c5f49883bd7ee47fd02ffb83",
+      "bytes": 4538
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/DisplayGameTests.java",
+      "sha256": "a83aa492e689ecd9c7133848fd5b660df1d2e27cd28306837b42bec5d29a84bd",
+      "bytes": 2956
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/DisplayPulseCheck.java",
+      "sha256": "02d527bd730a1a2a28cf541c6f6efeaa99f0348548cd38632b912b1f7bc052b4",
+      "bytes": 6707
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/DisplayPulseGameTests.java",
+      "sha256": "ef69f9376ad9ad10d6a3c2826b26fae0ca6c63718ea99a2c1a8e7815015520cd",
+      "bytes": 6509
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/DynamicGameTests.java",
+      "sha256": "7f3c2e65b21f00b2527ce9e78860c2ebdcdd2aa62ee439ad0f1dffda7bce8039",
+      "bytes": 18026
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ElectricalScheduleGameTests.java",
+      "sha256": "c02c600201dcd04ca231e38df4d145ee460344be523200a67589d0d384c52916",
+      "bytes": 4277
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ElectronicsPersistenceGameTests.java",
+      "sha256": "ff441397308494274c23ea81e736889bcce9efa74ae077caa07e0cdfaf73aa10",
+      "bytes": 12025
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ExampleControlBoard.java",
+      "sha256": "1012b264c48975ef2c1d4a06718ea90f737a88f78fe391f1377fb13380c3efda",
+      "bytes": 2859
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ExampleWorldGameTests.java",
+      "sha256": "392b4b8607e1e53afcb4238c96e9e29909e48bb0aa7dffc423406b8d540c3270",
+      "bytes": 18979
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiClientSession.java",
+      "sha256": "5281ff92851ada758a29cce1ed2d78bb85e4e21af1423ac208feb00d9b8f6f18",
+      "bytes": 16561
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiDiodeParameterGameTests.java",
+      "sha256": "fb728835b881bab7e5e50e198014fa5b8dbfcc3e5e13fe0926b5e804a1b87980",
+      "bytes": 12798
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiGameTests.java",
+      "sha256": "758d45229738e533a4b2c0897211fa739bc1a4d9344eca878c41f53340920d43",
+      "bytes": 12584
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiLifecycleGameTests.java",
+      "sha256": "6534adb35b65b5f1ce5ed016dd5ad2c1628eb5d3cb93ec2d72ff7abe65bdd748",
+      "bytes": 35892
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiMultiplayerGameTests.java",
+      "sha256": "c7fd17b68356ef6037745c59741220bb3b28344a0f8d71bfac5535ad3a06514d",
+      "bytes": 2594
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiOwnershipGameTests.java",
+      "sha256": "2ae8e9a0b673453fc5390c85fc444fa78ef104ebf42747012c2573cd169b33e0",
+      "bytes": 14924
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiPauseGameTests.java",
+      "sha256": "85214a9ee4d1eff02d0f2b31e7c0a3576e238f0eb636101a959e94b60c3b7508",
+      "bytes": 16689
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiPendingRestartGameTests.java",
+      "sha256": "fd21f91694d4d4737bba7c416e90c7df623a52f53db389909b8a8c2c326f40c9",
+      "bytes": 16315
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiRejectedSolveGameTests.java",
+      "sha256": "02ee8a63dcfa6cdb3bf7a5b810162a508cd351774d2305991199ee5caf1bacec",
+      "bytes": 11708
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiReplacementRestartGameTests.java",
+      "sha256": "558e9dce9b176bd535de68b82bb5ef7fa58c9694fed612a771cc5c5e4c844144",
+      "bytes": 13972
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiStartupGameTests.java",
+      "sha256": "571fe91d0362ef3ccbb4f23c7c40bfa2f9fb9afdd2a310a1c68859b8f50ca77f",
+      "bytes": 4605
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiTerminalRefreshGameTests.java",
+      "sha256": "be41096dbf56706f87fbde1e7f2b3b4c5fbb6dc49b39c1825fe98c6009ac1d0a",
+      "bytes": 18183
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ExtensionApiWorldGameTests.java",
+      "sha256": "aaeb46b85fffaa9bff37d2855286e8e41d6341a564be3312926477edda860281",
+      "bytes": 30431
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/FactoryGameTests.java",
+      "sha256": "47ba4f58bd0d0a5469c960ee6c5edfa782f95cd2ca1ee93f309871ef802d8974",
+      "bytes": 8654
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/FactoryLightWireGameTests.java",
+      "sha256": "5b97ce2d95d053bc8c97cc4d177562b525abea82d70624b25b5c86a588f4b965",
+      "bytes": 8524
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/FactoryTransportGameTests.java",
+      "sha256": "a0bebc75f95dfaa6c72e0070e5e45d7bbe1d4dadac629f4f16a3670bbaacf3e3",
+      "bytes": 5324
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/FixtureEnergyCapabilities.java",
+      "sha256": "3bdee26fbadf2772c77f1aa0d64e801f4dfa6803e3caf757b95bd307cec6732b",
+      "bytes": 1795
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/FrequencyTimingGameTests.java",
+      "sha256": "5f2f772023f3fceb6cbf78921ad657d269e18376c75a88d3db37626dd88347db",
+      "bytes": 6059
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/FuseHolderWorkflowGameTests.java",
+      "sha256": "ad33ceef13ae0125d4d0dc10e1bfacaa94ad281184a0e23cd156c5dc714f6644",
+      "bytes": 18917
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/FuseVariantGameTests.java",
+      "sha256": "893680ca2e933318992f7602641d24e009493bd2c903870e46e85e53efbb90da",
+      "bytes": 5343
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/GenerationGameTests.java",
+      "sha256": "4546b0226978c67028625edfec04d7aa3c7c3430d2681e94e7326fc54b3a95e4",
+      "bytes": 8087
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/GeneratorTimingGameTests.java",
+      "sha256": "ee8ce20ab8eeafbffd1f4044175b65bedd6c9f31faeff2d717511282788e7504",
+      "bytes": 25002
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/GroundingChangeGameTests.java",
+      "sha256": "c6b71c002bdc78163a5530319cbd7fbfc5f8b9eb45dbe216a34ad0d4f3a8fcc8",
+      "bytes": 16950
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/GroundingGameTests.java",
+      "sha256": "760ac096088d079bfc019f7a577a0b061772455efae2c34abf5266433c953af4",
+      "bytes": 3364
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/HandheldMeterGameTests.java",
+      "sha256": "2f7741e8f60ee6fca677d4338e789fcf46e3b1c17598b064a70fa53434b963b8",
+      "bytes": 8317
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/HealthyResultGuardGameTests.java",
+      "sha256": "d217b367f7c56dddddfb1f8cf705875ea69434455896f4873e24f31f26149e26",
+      "bytes": 4933
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/IsolationGameTests.java",
+      "sha256": "b2fc9e2dbc6af4e45f48cbf1a4a25d103c71e2c1b248e34dfa66d3e6ca29580d",
+      "bytes": 11332
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/LifecycleGameTests.java",
+      "sha256": "3636015af909d0e4278b0bd8aa8cf7be42910d2815a26fa222ac180e0baa2909",
+      "bytes": 4464
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/LoaderAddonGameTests.java",
+      "sha256": "8741a656f4e1345efdbb2718b128e58cf1f9fb95951f905f576292db1b9b4fa3",
+      "bytes": 5420
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/LoaderInstallationGameTests.java",
+      "sha256": "6fafa29d265cc8d5240753390773d3292c8efb8517e200f93a65d161122b3e49",
+      "bytes": 2575
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/LoadingBatchGameTests.java",
+      "sha256": "ac4da49970efdcc393f86746140f7464ffa5b3a6424f44d27633d289d66536c6",
+      "bytes": 23353
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/MatrixOwnershipGameTests.java",
+      "sha256": "50553c0e4538ee9923a42b0ea77042fc824917a48a47103a8b1950fcbdd4b37f",
+      "bytes": 8703
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/MechanicalGameTests.java",
+      "sha256": "1b225a86b6395b257c3af5311f51dac5f2896604be0eba2c35bfadb9fe212471",
+      "bytes": 10503
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/MeterGameTests.java",
+      "sha256": "c5195da4bcd5330b85393a6cbf3bf01f89d70ac816547ed8a2d91453011f43df",
+      "bytes": 9411
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/MotorRestorationGameTests.java",
+      "sha256": "9ccfd68a816ff7f251b32bcc7702cc31536f1ff3bdb8cedcb3516ebd07494b46",
+      "bytes": 7071
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/MultiplayerClientDriver.java",
+      "sha256": "bdd9c86913a406b554545c0bba99985e712b7315f478e98a1b6ec7cda6a1033a",
+      "bytes": 15257
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/MultiplayerGameTests.java",
+      "sha256": "5a85c64cf7dcb3a79e0856e19743ed17109bdce76b639c3ed22a96cb0d77910d",
+      "bytes": 8819
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeBulbItemsGameTests.java",
+      "sha256": "a774ba82a3e3d8a7284de8c85a20084c933a2a27c2d27b63fffcb0fac69c2c3a",
+      "bytes": 5921
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeFailureGameTests.java",
+      "sha256": "816ffe0dc1c27cadb32e04b0fc08d5d5f0f6ab837165f7bf614f3a029e3aea8c",
+      "bytes": 6678
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeHandheldGameTests.java",
+      "sha256": "62b663398c4e0713d3328e12d3ea2fd545a2285f178297ca503efd206740dade",
+      "bytes": 20733
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeInteractions.java",
+      "sha256": "8d0ef34c66b5f6d70ba23e506358fcd27936aa5f03d017e51d0adc089047bab6",
+      "bytes": 5168
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeMatrixLifetimeGameTests.java",
+      "sha256": "3f5bf1ebfa8ecda2aa66cd567c7608a0c1fc8fc4cb8e70a16a85468049bc857d",
+      "bytes": 5414
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeReductionGameTests.java",
+      "sha256": "861d6dd453ab3bff9c7809e2f4d189d66b739dedff8f46a60b1a216bfe28034a",
+      "bytes": 6565
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeReferenceTimingGameTests.java",
+      "sha256": "155f49050d61d5059bfc5bae8dd958aac02c8ec0b79a91338bcc10c1d3cb669c",
+      "bytes": 34105
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeSamplingGameTests.java",
+      "sha256": "35ac7c03d21001618b691e6bd2b4a2684e71780396f07a4d175f61fe09018ede",
+      "bytes": 12768
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeTerminalPreparationGameTests.java",
+      "sha256": "191483d3aea2eeb57e5eb066a47361ed3b1d702c70fdcbb781a3ed215c11552f",
+      "bytes": 6478
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/NativeWireToolsGameTests.java",
+      "sha256": "1b02e2ae909da6b3372dcd34d5b7a5a95e22fe761fd629e809d292be04a33e0b",
+      "bytes": 11386
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/NetherLifecycleGameTests.java",
+      "sha256": "d2752ce6fa42b9278ab1436c7b793c8e260fa4560cf8bccc9300e43f850f8766",
+      "bytes": 19659
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/NonlinearBoardGameTests.java",
+      "sha256": "4761839d1b667ba2ccf5e4919458649c8e754909ca2002b2039c833a67c3d87d",
+      "bytes": 9742
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/PanelGameTests.java",
+      "sha256": "3fb3316839c504fe667e5b2d0119030fe04609498628be4b9d27876e06e2c7fd",
+      "bytes": 23699
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/PentodeInitializationGameTests.java",
+      "sha256": "954766c9b6bd240d1017bdb80368895e6c0382d52e1c569572f2bb910554f2d0",
+      "bytes": 5295
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/PersistenceGameTests.java",
+      "sha256": "6284885744acabb61b4409e95e0f807a78c8382b4f95798497a5f4f2d08f3002",
+      "bytes": 14526
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/PgFactoryGameTests.java",
+      "sha256": "f7397147343fc62e043d0cf950c495ee97877967767522e818e3677d592ddbee",
+      "bytes": 9496
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/PgGenerationGameTests.java",
+      "sha256": "80fa3551919b75f099af9ebcd8fa81f7103e00db31b54a1db67ffe7598448532",
+      "bytes": 5899
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/PgStorageFailureFixture.java",
+      "sha256": "6087ff555e6401ca50d5404385111197c52893f7f8ce32a052ebd5bee1dab665",
+      "bytes": 7143
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/PgTransformerGameTests.java",
+      "sha256": "48e512bf336e4c800a1a6e24e0eeb20fd71f83a9900a146fd2f54631f372d319",
+      "bytes": 10162
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/PinoutLifecycleGameTests.java",
+      "sha256": "bc4c8bb4fd36dfb3ede41d2b842fc44cbecf2829e58ddaa3c64dca576d27a32f",
+      "bytes": 24360
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/PinoutLuaGameTests.java",
+      "sha256": "0cf3694585ac650e9909e2e5c4ec3c1b8f29296de4af5375ca8f2858f3d6c5a7",
+      "bytes": 8326
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/PlainWireBatchGameTests.java",
+      "sha256": "8d0e8e4f2a5b24d2ddd8d28e7d7df231da0665b075b0092c08c4dafb423f2b96",
+      "bytes": 11628
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/PlainWirePowerGameTests.java",
+      "sha256": "bbfd8f2e09121cb561f5f1db9a93a864b566411ea77ab9896d44ba8b9d6cd539",
+      "bytes": 21725
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/PlatformCompatibilityGameTests.java",
+      "sha256": "f84bfef8d48c24694b278f1922f54b7cd594712b8cda7dc7b965e64a99e5eb0d",
+      "bytes": 1581
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/PropertyPowerGameTests.java",
+      "sha256": "a21a4f9f43c693374a5b13a7ecac3bebb2bd35a639a4acc0dde6985aa623a015",
+      "bytes": 5948
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/PropertyWireBatchGameTests.java",
+      "sha256": "48b7bedc0e74541e967e135f9c53cd4a04319aec77b121bbcfa155d0e644e1d6",
+      "bytes": 12049
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ProtectionGameTests.java",
+      "sha256": "a6da17ebe10b186e32f810aadb6601ed08664ca042a174edb666246a4bbcf15f",
+      "bytes": 11087
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ReferenceConfiguration.java",
+      "sha256": "cf8afe4a86420e6c93bce54b0eb4118d9f4bfffe1a902a0b02167f47947d6ba7",
+      "bytes": 2579
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ReferenceWorldGameTests.java",
+      "sha256": "02c4c91d2998d43c69798d8bced4ce6bcda4006fd0572e2c879cfe54e574b5b0",
+      "bytes": 8280
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/RegistryGameTests.java",
+      "sha256": "bf93ce1772262eeb0f8356c4e7092ec69e5a3cf5e5ed4378803c134430310b9a",
+      "bytes": 2451
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ResidualAssemblyGameTests.java",
+      "sha256": "38b975327c76b275f05f872ea500b627470a71af239dc545340e71a35804001c",
+      "bytes": 11321
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/RestorationGameTests.java",
+      "sha256": "796e69691943a9e3c037b9ef2ad92db718503cc7f9ccdf64cb05b2b34ce1a302",
+      "bytes": 6444
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/RestorationPauseEpochGameTests.java",
+      "sha256": "81a918ba6339e132d0fc1b5af31eae16443d9d2ed42e271529ca327b3f7f225c",
+      "bytes": 3452
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/RuntimeInputAudit.java",
+      "sha256": "b9646b627f7cd405a15e96e5902e80e901f53dcfef1cb5f35f4d927b9e082cfa",
+      "bytes": 3430
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/SableTerminalPickingGameTests.java",
+      "sha256": "a4fef10c5fce5e1a21568bf587e2f95061a55f1a5544a29494a2472483c409f1",
+      "bytes": 16774
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ScopedRestorationBoundaryGameTests.java",
+      "sha256": "7edad73175dfe672c5a3ee16c4bb486da9bf81a36c672fa6af2e59325e599fab",
+      "bytes": 12032
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ScopedRestorationGameTests.java",
+      "sha256": "fa4fbd9d2a27715db936789f7e75d64f4c50f3b444a983c26cb5a947e344291a",
+      "bytes": 11380
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ShowroomBoardStations.java",
+      "sha256": "ecd6559ff60f911cacf16d70dd614111889a3729693d953182b7296af3fbde01",
+      "bytes": 16540
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ShowroomDeviceStations.java",
+      "sha256": "dbc3b29dfd87b80a990f3515b682337bd59a85be1479f501f39260b72d10b8b5",
+      "bytes": 11828
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ShowroomPanelStations.java",
+      "sha256": "17160083e4f79c100be8ea2b8b1d3d378839f2bf14f73e19e2ed2a81519c6024",
+      "bytes": 14893
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ShowroomPowerStations.java",
+      "sha256": "1f609022bf7621e94a0e9cfce368ed09bd00f573508f5677277a83943268af3d",
+      "bytes": 12745
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ShowroomTools.java",
+      "sha256": "d69a32420101ee751fb93a6b387ce1c335d108165dd037f70929ca12615ba655",
+      "bytes": 4835
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/ShowroomWorldGameTests.java",
+      "sha256": "79f6595d7251068813673e9e7223bf7e52473415a4a13917e48070ce21d2fc9e",
+      "bytes": 16690
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/SolverFailureGameTests.java",
+      "sha256": "70f9292abb413293adb001009f396ea1f96212ae34c5415b797216747bc1a238",
+      "bytes": 6329
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StableBranchGameTests.java",
+      "sha256": "ad010f4a40240a55c1c832110fe349577c91c291b9ce6b57bd8fd4753c0f7e26",
+      "bytes": 6119
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StandaloneControlGameTests.java",
+      "sha256": "7dfab7129c7475fde72e3e3a391ed24110dbaa3100c514cf56f227968208efb6",
+      "bytes": 9319
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StartupGameTests.java",
+      "sha256": "72dcd33a732cff582875683be1986b39473076659b4b4971b53f9cbd6bfe4f66",
+      "bytes": 5136
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryAccuracyGameTests.java",
+      "sha256": "41e7dcfbc85bad4951078b2c9eab9984ffdbdf6450dae1b103c0fd617d416783",
+      "bytes": 30096
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryConversionGameTests.java",
+      "sha256": "450d5c5f8cd887e3f01d59977b12fa6899f3418927574803d083fb6f5958cd21",
+      "bytes": 13091
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryCrtGameTests.java",
+      "sha256": "78220ae648cc810a8a0562268e56fd3422a1fc03e7fcfab87ffa7411ef87b89a",
+      "bytes": 5638
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryDistributionGameTests.java",
+      "sha256": "a6b09d9518617b5b2559a065e9bb4310eba5e93de154f63a768590b4b3679927",
+      "bytes": 10272
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryEndpointGameTests.java",
+      "sha256": "f85d60d3d075cdbcb55d8ef0bf35b94eec6dbb7247abd651ba362b92a542e840",
+      "bytes": 5009
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryEquipmentGameTests.java",
+      "sha256": "62cd55e6f05192b7b35186c191903d7602a3b75721f080e0bf37a7037972b9ab",
+      "bytes": 14720
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryGeneratorWorkflowGameTests.java",
+      "sha256": "d1f71de0ed2eeb757d3510613819055e02362598a8c02819d4eacd9773cb88c2",
+      "bytes": 9406
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryInstrumentGameTests.java",
+      "sha256": "ca502e63f22d32c27fc2e3efe8d44d6908aac78a0e75554c6f138c3aaa0e8200",
+      "bytes": 8981
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryInventoryGameTests.java",
+      "sha256": "42825decf97f43758c4c067cf73238ad366c211b092e7eb3636d6a1f1a6ee72d",
+      "bytes": 5954
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryLightingGameTests.java",
+      "sha256": "9f105d3a0657029f1907989c4a47f324a03cb5e0ff897db6e4a5c827e0fefe5d",
+      "bytes": 11555
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryMultiplayerClientDriver.java",
+      "sha256": "ba339dbe1801f562bd38c81094a9fae34d97d03929221f73e4c687ad80825ea0",
+      "bytes": 9969
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryMultiplayerSession.java",
+      "sha256": "da5a2bd907f491510fed7d951e19f2c852888f58923145b1700859d9d7ea4932",
+      "bytes": 10571
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryNetherGameTests.java",
+      "sha256": "261efdabbd13a8ef20ddde49a0eb040fa4a66899f88f74b1a3d867c1696667ee",
+      "bytes": 16386
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryPoleGameTests.java",
+      "sha256": "b54e5e79628824476a21d42a0b4c1fccde54006c8e528271fd33d6cb37835300",
+      "bytes": 13456
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryProcessingGameTests.java",
+      "sha256": "bf7d287ad6b69eee0c44a85a0d19459adc0647ca1d0dd7d0c0ba31386262b680",
+      "bytes": 5403
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryReaderGameTests.java",
+      "sha256": "2382555e9a12ba192d612d8b0e259213c3e37b3696354a2a1cecfa0a6ecb0624",
+      "bytes": 6845
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryStringLightGameTests.java",
+      "sha256": "4cc1d5f2ff4461d32c7880975cdf3ecf300c9646e5e30b7d36afcd0e7c87e694",
+      "bytes": 5966
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryWireFamiliesGameTests.java",
+      "sha256": "f097f38798bc4679b9bcce41d03fab34de550440f3f607412dcb9b2b9fab6ff1",
+      "bytes": 8777
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardChunkTickets.java",
+      "sha256": "0fc69ab98dd3ddfdcf238ec228f8466751ee72c9f8ad55cf669e202e26d9a269",
+      "bytes": 1770
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardConnections.java",
+      "sha256": "96f870032b5e9f8364017c849d47a0070aed6889e6a9a90be8a5794ee81fb2b1",
+      "bytes": 17716
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardControls.java",
+      "sha256": "6b8ad4e6bfb63c9811069bd64b7f3471e115e885184121f08a41248ca281fbfb",
+      "bytes": 10567
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardCoverage.java",
+      "sha256": "e458f3ee0e838eb3ea86881e7992df0a8e245f25650e5e962c4ef7582cd59341",
+      "bytes": 4787
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardDistribution.java",
+      "sha256": "20fa80d440ed946ba9c6e0ae4b8884e8c72583da6a16cfa62e02ce63ba621240",
+      "bytes": 7402
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardEquipment.java",
+      "sha256": "2c70ad12abb8f3e1b45bd61a6fbdd3430819905ab4d1f8e10d3573ac81031599",
+      "bytes": 10589
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardGameTests.java",
+      "sha256": "2e8154bc5388c4ccd35ccd336b255e0840a88fc8ba90301399a3884f0c410454",
+      "bytes": 663
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardGeneration.java",
+      "sha256": "76d561a4deea07fee52aff047ddda9f8f7cbe20e2f53a16b681c3e757e92e686",
+      "bytes": 9014
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardGuide.java",
+      "sha256": "a4bfd5ba8ea75953be24d17c940018d1f7509acde8634d9e1e1e1fa6a3280f5e",
+      "bytes": 8806
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardHeldParts.java",
+      "sha256": "a665052fdcc11fbd7c37cb0032c8992eccac15734ca8a35b189a200c20f096b7",
+      "bytes": 5221
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardInstruments.java",
+      "sha256": "d516344769fea80c05f20a1511f5c8309fdd6fdec6c9ab8dce527f1ed86d7c92",
+      "bytes": 6304
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardNether.java",
+      "sha256": "40da5b659eb60ac6838deb82a9aa766aab69dce59ec3fa90e491d2265a307db6",
+      "bytes": 6679
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardPinout.java",
+      "sha256": "1f3b81db4bad1812706ad6c83b511ae87245e678596d31f8879bb0559d6b2f4e",
+      "bytes": 11270
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardProcessing.java",
+      "sha256": "447cd972bd361318751eddf810498ac6f515f8bc02af09e737f6f97683132e55",
+      "bytes": 4467
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardProtection.java",
+      "sha256": "2a0cb1d7d54fbacdc6842eee92006dce00623a85a17fedf94f51cbb8e6e328e3",
+      "bytes": 10345
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardStations.java",
+      "sha256": "5e4ec7d726e3e9e687f92dc9421744196fb2f4bb6daa0a96656d589d16c1c086",
+      "bytes": 13925
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardThreePoleMeter.java",
+      "sha256": "189c5cb990929e09ae5b773c0615936f66283b64226791928e75d283ae6200fc",
+      "bytes": 4418
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/StationaryYardWiring.java",
+      "sha256": "f1c2809fb5ac80f7548606d9da59689928abbe9a2a10249e67c19b4adaaf846f",
+      "bytes": 9718
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/SurvivalWiringGameTests.java",
+      "sha256": "9586977e524031bdcd16161b9e4817e8dc40e63303711777cf8a4f9326f7473a",
+      "bytes": 9644
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/TerminalToolControlGameTests.java",
+      "sha256": "fc2bf424f495da6bed8fdfc270a1f175d47cb7e4b3ddc729f55a5f3a87a824ce",
+      "bytes": 10307
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/TopologyGameTests.java",
+      "sha256": "dbcb4c24fd6bf51503e449378b963120b5a74a0b7479b157cdb81a26f775fcfd",
+      "bytes": 4538
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/TrainCircuitGameTests.java",
+      "sha256": "007bbb4223a08a91327e038f5488c3f884e486dec26c602f8d25bea7d79e2adf",
+      "bytes": 21018
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/UnloadPartitionGameTests.java",
+      "sha256": "4140affa8da501cf9b419ba89d5ff450d2608676f9b41ead91aeec12ea670f3a",
+      "bytes": 7732
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/WireAttachmentGameTests.java",
+      "sha256": "99fda42908e5117d4c1d164ffa1b5b934676ab2d34a25f3c804e50607ff0d235",
+      "bytes": 9159
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/WireFailureGameTests.java",
+      "sha256": "5e52493c6b376189a6a5ca50e8b3ed6f4ae91fc82c39e5f85ae4978589446809",
+      "bytes": 2916
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/WireRemovalRecoveryGameTests.java",
+      "sha256": "11bdab5e4fbb18cc70397fc07d0b3b109f6ac19eee0a13a767818341bbaa4e38",
+      "bytes": 8334
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/WireResultOwnershipGameTests.java",
+      "sha256": "04dc6dc41cbfd26a66ebbb67dd2f4f8af6fbd66af90dcf586086123e1968c087",
+      "bytes": 9909
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/WireTreeBudgetGameTests.java",
+      "sha256": "94beeb5fc2c1cb5dbff570a9cdda3719d4fb696bf5938ad580deb870d481fff7",
+      "bytes": 9626
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/WireTreeRestorationGameTests.java",
+      "sha256": "ee898e716e387477be3a08eeb3fd553db68399ff08b68812d9af0f6d1eef4d9d",
+      "bytes": 7345
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/WiringGameTests.java",
+      "sha256": "b7cbe3dbdad8ed4a793e7b109e65d46b8968033694c3720f2962f989b5251215",
+      "bytes": 6029
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/WwpgGameTests.java",
+      "sha256": "322e76875a519d294129eaa977a59490e73a471bf14a35b15ca1d74bc612fcff",
+      "bytes": 1806
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/YardComputerBootstrap.java",
+      "sha256": "14115d295f3713f24e4571f6714352bd55816f24091c36a4330167302d730d39",
+      "bytes": 1019
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/java/org/cha0scollective/wwpg/gametest/YardComputerBootstrapGameTests.java",
+      "sha256": "a869a956a6fd727e22660efb123dd8bfc08ba5e05648e3750f7ab8fea8fb0139",
+      "bytes": 6141
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/META-INF/WWPG-CIRCUIT-NOTICE.txt",
+      "sha256": "7c3d5e796f5196f93d2b9aff9bd0c67d3a13ce591d860f2f4efef02d0b8e2e5d",
+      "bytes": 809
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/META-INF/neoforge.mods.toml",
+      "sha256": "b6183f628b23b1efb7a0e07cb6b4a464f54ff34c9f76a02f37938cb4394f4474",
+      "bytes": 442
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_api/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_api_multiplayer/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_api_ownership/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_api_pause/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_api_pending_restart/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_api_restart/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_api_world/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_bundle/structure/empty.nbt",
+      "sha256": "5420445d400983dcb50b2a8e7594628f6bbd8059c3fb5542ff6f470123d9bb17",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuit_adder3/structure/empty.nbt",
+      "sha256": "5378b67c1fbb3893d96efc1382665c252fefbbe50b49c7b1f7ff51bf287e2737",
+      "bytes": 113
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuit_fused_latch/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuit_memory_bank/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuit_oscillator/structure/empty.nbt",
+      "sha256": "5378b67c1fbb3893d96efc1382665c252fefbbe50b49c7b1f7ff51bf287e2737",
+      "bytes": 113
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuit_quiet_heater/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuit_ram4x4/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuit_register8/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuit_regulator/structure/empty.nbt",
+      "sha256": "5378b67c1fbb3893d96efc1382665c252fefbbe50b49c7b1f7ff51bf287e2737",
+      "bytes": 113
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuit_relay_heater/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuit_shift4/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuit_source_loss/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuit_source_switch/structure/empty.nbt",
+      "sha256": "5378b67c1fbb3893d96efc1382665c252fefbbe50b49c7b1f7ff51bf287e2737",
+      "bytes": 113
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuits/boards/adders/fa3_ordered.nbt",
+      "sha256": "62068d167794f2fd904daf189b86661f325d6d3f47ffed8ef82f33412906bfaf",
+      "bytes": 1573
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuits/boards/basin-heater-240v.nbt",
+      "sha256": "745e048a51616eae0a9490502b491cae4fe2947b05920ebff1d61539ccd6a253",
+      "bytes": 1228
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuits/boards/basin-heater-quiet-240v.nbt",
+      "sha256": "93c18c920b242ac96d850fbf631581c96e739ce0785ef2de62301114324a9faf",
+      "bytes": 1427
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuits/boards/clocked-bit.nbt",
+      "sha256": "183b08c5c59e44d0720d110e71a53ba4213155f5b65d8cb5e129976c159c2f37",
+      "bytes": 1090
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuits/boards/fused-latch.nbt",
+      "sha256": "ae9b12faa11df131569478b737bbe483c8ff3f5b3325c7aa197ac2dd9b17493b",
+      "bytes": 1123
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuits/boards/oscillator/LC_Oscillator.nbt",
+      "sha256": "f1fb68e29b9e9e78adb1bdc08f804ab17318b1b3076f32eed7ce7d30d6aa3e06",
+      "bytes": 638
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuits/boards/read-selector.nbt",
+      "sha256": "6e0203a85a5564b486054c98f932c1bb86a7d02d72a354facf9a4c4bbb7b1951",
+      "bytes": 965
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuits/boards/rebuilt/native-linear-regulator.nbt",
+      "sha256": "84d61d821d6a98ffa3b344f59f7ec34018de129007844023850692a97a573ee1",
+      "bytes": 641
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuits/boards/rebuilt/native-memory-cell.nbt",
+      "sha256": "e00248760f158a06adf6a1d3122acfae72e75322caf859ee573312c54632c5a2",
+      "bytes": 648
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuits/boards/retained-word2.nbt",
+      "sha256": "c2cbc78504ae64b92a8e9d272223675ff36e9217b65131c9633f35f932a8ef39",
+      "bytes": 1091
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuits/boards/source-loss-alarm.nbt",
+      "sha256": "5f35369791bb931448a2b5db65db5beef8cf71e9ed8b5f2eaf60c02cc40be4ef",
+      "bytes": 789
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuits/boards/source-switch/Gen_Battery_autoSwitchV3.nbt",
+      "sha256": "4381bdf8dbed365d71a53a82fd467014314c5f853acca43a2dcbe07b55d918e6",
+      "bytes": 814
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuits/boards/write-decoder.nbt",
+      "sha256": "321085475ca327a4be341c099575639a4bd0e495043f0494b523d2606a1c933c",
+      "bytes": 1036
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuits/provenance.json",
+      "sha256": "f979a5a30f426dff24ebfdbf2c87f36296daabf5488d40076054a04ea829649b",
+      "bytes": 5310
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_circuits/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_coupled/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_design/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_display_pulse/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_distribution/structure/empty.nbt",
+      "sha256": "5420445d400983dcb50b2a8e7594628f6bbd8059c3fb5542ff6f470123d9bb17",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_example/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_multiplayer/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_pause_epoch/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_pinout/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_platform/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_reference/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_rhs/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_showroom/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_stationary/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_tests/cee120/registry-inventory.json",
+      "sha256": "db6c803903e5584f92cb56e0ba41bf3197e3f8cbcb44b97c866fadb7f71e41fb",
+      "bytes": 127568
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_tests/runtime-inputs.json",
+      "sha256": "06e3133ac6575af24017f67c5ad1733aaa4231fb786daee132a292387dd1d4bf",
+      "bytes": 1540
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_trains/structure/empty.nbt",
+      "sha256": "aca0d3b5168bc9ace040adcfe3b99c97f821ffd0c5834a7c73c1f60873fc8464",
+      "bytes": 112
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_wire_power/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_wire_recovery/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_wires/structure/empty.nbt",
+      "sha256": "5420445d400983dcb50b2a8e7594628f6bbd8059c3fb5542ff6f470123d9bb17",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/gameTest/resources/data/wwpg_yard/structure/empty.nbt",
+      "sha256": "6ba8451287adccd4ea2bc24d64c74314e99f7e6eca2a401a28d68cd698b91caf",
+      "bytes": 111
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/WorldWidePowerGrid.java",
+      "sha256": "255080c601e33264cf1f2a60fc7fdbf94c0bfcfc3e5dafc7950df8f3b2e5fa3e",
+      "bytes": 6007
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/BranchKey.java",
+      "sha256": "ff4d80c33a0b165fec548fc78857df1d119601379652167990adc66dbff22035",
+      "bytes": 257
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/BridgeSimulationResults.java",
+      "sha256": "84cad6b5549d968a117057461753aced8b091b5991e407386b920d98fac9cba5",
+      "bytes": 6260
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/Bridges.java",
+      "sha256": "766da221397a51c128023a7ad7bf8d34f8c43d231c0bc15020696ca5e5eec3e4",
+      "bytes": 666
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/CeeResultsAvailability.java",
+      "sha256": "4efd3a02492690cb7655c717d92d7274734bf772f751698e0aa739ba192793f0",
+      "bytes": 388
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/ContactHazardHistory.java",
+      "sha256": "4936e987ceb796b335c384dad9a701de9823b1b8add714604849f1571bfca2cf",
+      "bytes": 317
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/DiagnosticHistory.java",
+      "sha256": "700cee7d820cfa3a4297866dc8dac4a1379b721368b06386e2814c9ec8710d5f",
+      "bytes": 3976
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/EndpointKey.java",
+      "sha256": "f4dee4c39415a8ed913ce166aa920934405bb32f6eb0cb89ddc49b51b38f27a3",
+      "bytes": 1151
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/IndexedIslandDiscovery.java",
+      "sha256": "4c5fdc82f13507c2754b575802a41e493c075fab9881c6213057581a87c97d1c",
+      "bytes": 3904
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/InitializationWindow.java",
+      "sha256": "9463e921b02d7c7d2ac623f6c7474460d26be8f229251af7eed5317b1526b88b",
+      "bytes": 360
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/InternalEndpoint.java",
+      "sha256": "fac63b88bea23e674f543387d27d82c9560defa04d16a770ffef0eac9a26a5fb",
+      "bytes": 1389
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/LinearBranch.java",
+      "sha256": "8d1b2baee4ff83854b9b8cf648d1a8ec1fbd8df11cd8ce1c58c91e3cf7a943a2",
+      "bytes": 5145
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/MatrixBuildScope.java",
+      "sha256": "febf8fc43f575b3e9898de4ff7d5173f57c9433b7298721e96187815d46c5e37",
+      "bytes": 3587
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/MovingWireCuts.java",
+      "sha256": "47772bb410027cd4345e3d2c77f41dfb1249fc317486594dfcbf10234b04fcef",
+      "bytes": 577
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/NativeBootstrap.java",
+      "sha256": "a432eadfa7f26acfa0e31a9b0badffa4580ceadd24ad8acfc8e0debffe7ba3d9",
+      "bytes": 3057
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/NativeCeeCheckpoint.java",
+      "sha256": "333f627fb0487d13e12064c9fd2a9e0e2e2efd15a80f17de65b5aeb780ba7ac9",
+      "bytes": 4681
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/NonlinearPropertyWire.java",
+      "sha256": "52e7755072c3138df23f5cc7e9696444b91c8cc8ce90f50425e8caeced0669fc",
+      "bytes": 2388
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/NonlinearTrialCurrent.java",
+      "sha256": "bd7f5d88784e89c72462840e3f1c51b264eb8d2fef0788d794659bfab0795d24",
+      "bytes": 811
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/OwnedWireRemoval.java",
+      "sha256": "78218d4efc12e3490ced9c0b7938b99d8bfcf5545f5fd9d4103d10785008f655",
+      "bytes": 1184
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/PentodeInitialization.java",
+      "sha256": "42967e0b7527a83dd793f168703607b701b111da251e7933c7424bdc140ea4de",
+      "bytes": 2358
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/PropertyCurrentSourceWire.java",
+      "sha256": "1b5f6467ae4771e45597c74c450373e98c2cef72dde4700791959a2b7fc2b280",
+      "bytes": 1993
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/RejectedConnections.java",
+      "sha256": "70d2b4a62a82c476733c1150d09c1baf1d56ac654608fd47a3c4e9abea42d602",
+      "bytes": 288
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/RestorationCoordinator.java",
+      "sha256": "52ff08734989a417d16c41d3d8dcfb5887b126a54b4fadad177ce86c1f29cb0e",
+      "bytes": 19843
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/RestorationWindow.java",
+      "sha256": "9621139dc8e575609369c09171a66e49cffb8dfc4e857e43591ae5ab9e1fc6de",
+      "bytes": 1910
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/ServerElectricalSchedule.java",
+      "sha256": "2d97b14f16b972367b8936e0864df6bc561c63546f28f800933346eabf31ab8c",
+      "bytes": 6916
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/SolverAudit.java",
+      "sha256": "4947996917f589bf19543eb56608639936b65f5ebc1d717a9d29218df6e4a257",
+      "bytes": 563
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/SparseAssembly.java",
+      "sha256": "2c2aa1ac231011be9a95ca239f8f2635e1fd6f798af2489fb0c8e4bbeb267812",
+      "bytes": 2009
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/SparseMatrixSupport.java",
+      "sha256": "9cffe3ae9c0637a8f811b49f04ed4e550a96b7c8062cd17c326cb0e245bcc418",
+      "bytes": 1048
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/SubstepAcceptance.java",
+      "sha256": "86f9d0d9157789d03ae021b6b32de2887f52af43a213cf7586ff2b39b6e04f3b",
+      "bytes": 360
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/TrainDimensions.java",
+      "sha256": "b8d59b26b985ea523fa746bceb4319eb6ae69ddb3d4419ee17d2fb6e3f77cdbf",
+      "bytes": 809
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/TransformerStamp.java",
+      "sha256": "30823abbc4e7cb73e4c19a8ab9c62b723aea56e4c02c63995ae87ae7f09299ef",
+      "bytes": 1801
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/bridge/WorldBridge.java",
+      "sha256": "8ef68140b2194a3709a42ee9ce674ed7f380ed85285ab09793422ccfa85b3f10",
+      "bytes": 87852
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/compat/cee/CeeCompatibility.java",
+      "sha256": "a22a5cd8e6fe8c1386c11381b1996b5eba72be3f9d99286f68a682ac8a788931",
+      "bytes": 1089
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/compat/cee/CeeGraph.java",
+      "sha256": "a8491e33acd65db256fac709e4166bfd6c1d7b4fc6eee79a4df4e9c9a74576c6",
+      "bytes": 1694
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/compat/cee/CeeIntegration.java",
+      "sha256": "6856710f3356a9ea0095acfb55afecfaa2827a1b8d1688fa3d5b6ae60782d938",
+      "bytes": 1692
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/compat/cee/CeeMixinPlugin.java",
+      "sha256": "1318bb9d0ba7d9de500e70e38e01b7972095b7d17fe4ae49308911dfe5ecaff5",
+      "bytes": 1072
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/compat/cee/CeeNonlinear.java",
+      "sha256": "d6240dc20ada486cb589d7c3268f6c1b1bf1fda1b4e7ccb39106660a911996b8",
+      "bytes": 374
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/compat/cee/CeeSaveConventions.java",
+      "sha256": "dbcf86b8387a8abaf043d1cff1562c402d2727fe3af2c0ec78faa83364ac443f",
+      "bytes": 2648
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/compat/cee/CeeSavedCurrent.java",
+      "sha256": "4c7189b5c2d684a85028c76cd1d58d9612ed17b71b39d710c9a1e16055df15fd",
+      "bytes": 1733
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/compat/cee11/Cee11Integration.java",
+      "sha256": "a7b76c875567bd512ec0bbda669dd7d3ec4c4da0ddaf0f121fb2dfb4102c12f7",
+      "bytes": 3567
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/compat/cio/CioCompatibility.java",
+      "sha256": "1b2dcca5cea5e9cfa221bd6b5b6ad768ebeae013c0caf5edd05cc1ef6e75ed5e",
+      "bytes": 4208
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/compat/cio/CioInverterAdapter.java",
+      "sha256": "300e40c93d0e3d1fbaf2beb0d5e4fdab3ba247525fb1fa9e66c7b64e104347e6",
+      "bytes": 1375
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/compat/cio/CioMixinPlugin.java",
+      "sha256": "efc42bc8beafbdd0870811e71adf91e55acc104e571eeee184b25e3cbe633189",
+      "bytes": 2324
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/compat/cio/CioPhaseSourceAccess.java",
+      "sha256": "06be156c5dd7800b0b4257f892e72dcc3bb94d0709ff3ca415d1d06718d717dc",
+      "bytes": 372
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/compat/sable/SableTerminalPicking.java",
+      "sha256": "e81aefb5cebe810f38e1f36001849beb0262620e8e4d0279c6bcae86611acbe1",
+      "bytes": 4245
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/equipment/HandheldMeters.java",
+      "sha256": "c9e769a62f94347c4b4f94f364772cbaff3de6d52efebfb55b621f150fec3634",
+      "bytes": 12051
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/experimental/BoundedTaskWindow.java",
+      "sha256": "ea0485df8f24af1fbe1836476837a82f4dd8defd5bbbcaf293c99dff4adca3e7",
+      "bytes": 1682
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/experimental/CeeStateGeometry.java",
+      "sha256": "eecc0f39531ed17195f7b63ad5f8f7229260188d2615afc3c4c87327dae4fe21",
+      "bytes": 5073
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/experimental/ChunkTaskPump.java",
+      "sha256": "a58d1bcaa07e8e5f323981448fefc8db611e9f1d0566b055b28940d85956ed3f",
+      "bytes": 3403
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/experimental/PlainWireBatch.java",
+      "sha256": "a3d68217c1b8722b3db30ba77699a4dcaaaba46b3c29ecbc8525ed070e40dea4",
+      "bytes": 10416
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/experimental/RestorationComponents.java",
+      "sha256": "0c8e27229769a38593762da3f05470f037108c10babf019276441a66ddeed7af",
+      "bytes": 1125
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/experimental/RestorationQueue.java",
+      "sha256": "afd0a84328267fe2a996b4a11541a5382521289c20113acef3ee2e8cf81489d4",
+      "bytes": 4703
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/experimental/RestorationRoots.java",
+      "sha256": "d7361b4098668c389d2b6d84f4e9d93b1140060c5b73e3a8f608bc9d9e801fbb",
+      "bytes": 1030
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/experimental/ScopedRestoration.java",
+      "sha256": "517362f3aa3d195ff3915e7661eea987eda96a65128aa3a6aff73a1494ceedcf",
+      "bytes": 13746
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/experimental/WireTreeBatch.java",
+      "sha256": "81b294f808f3779443256c7d9321c23d2c39510326825bcab81aa972009a286e",
+      "bytes": 13337
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/extension/ApiCeeWireIdentities.java",
+      "sha256": "1e880f6bfa95d47377ee93419515e7ac83c88cfa1da3ff5457fc400a2fd67068",
+      "bytes": 8452
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/extension/ApiCircuits.java",
+      "sha256": "00fdfd216a936e680e6b5267d69b1a10421cf00c7d51237a09f9163e5eda7d37",
+      "bytes": 24368
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/extension/ApiDeviceDiscovery.java",
+      "sha256": "3a3b8b050de14f399f4098fba05e20a08a204667737e70f74e2723772168b377",
+      "bytes": 2132
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/extension/ApiDiagnostics.java",
+      "sha256": "bf73ac114c1d594a82cd0cae2e408211908009968045d1b8249c404adda4b51b",
+      "bytes": 445
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/extension/ApiElectric.java",
+      "sha256": "9ce8bf8c35c4422578f2750564440795a8c0c2e778ae13fe2471345a6e902060",
+      "bytes": 17729
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/extension/ApiElement.java",
+      "sha256": "0467d23856f467a585ffef6d11ea7a8f6cf50958ecf0a96a4a9bb099cece6327",
+      "bytes": 10893
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/extension/ApiGround.java",
+      "sha256": "5e3404e9f824c6458b9ded2e2e2a779495b549c5dbb6325a93e11c51855774ad",
+      "bytes": 1677
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/extension/ApiInternalEndpoint.java",
+      "sha256": "ddfe524f683909abda872e874530eefd394dbef0a4eb5304ec4bd068d2cf6275",
+      "bytes": 1556
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/extension/ApiMeasurements.java",
+      "sha256": "903881ec8902e3c6acac46ad284b16efca0f0ac0ef56161e6648d33b9375b06e",
+      "bytes": 1290
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/extension/ApiTerminalIdentities.java",
+      "sha256": "a9f0ea6adc06d115b48bb5e7454d79c19f04e4902d6e39d392f32426e96ab766",
+      "bytes": 14319
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/extension/ApiTerminals.java",
+      "sha256": "502306680ea6665f96b39f16ab8ac91715c4c8f65e3e4f922cf007253f5adf10",
+      "bytes": 24681
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/extension/CeeAdapters.java",
+      "sha256": "14f1897db0b428561f6ff73d0e106986d530064cc9a92d7f05201bc8c6b32ea9",
+      "bytes": 16426
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/extension/NativeApiReadings.java",
+      "sha256": "64e506b34d2b1cbd30aea323f089cb467fbfd5d253ad2c78c02f9de4b0248d25",
+      "bytes": 29366
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/extension/ReferenceGroups.java",
+      "sha256": "cd9d96792dd8bd3ed33898639c5fbf68232dfb6204a4a117130e692f38205535",
+      "bytes": 940
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/ApiDeviceRemovalMixin.java",
+      "sha256": "263cb5683be10ee7462342c0c6dd49731052b983fc35ad352cac3fae400941a9",
+      "bytes": 1250
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/BoardCapacitorPersistenceMixin.java",
+      "sha256": "a1d08a68209fb717cf1c364a2b4580e88856e5096f800e3a2a0a54f792d1a8e8",
+      "bytes": 915
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/BundledWireAssemblerMixin.java",
+      "sha256": "4ac8d327a15596cd9c955b0e90bf6b39402627e15ab0cb1de7150507a9f220b9",
+      "bytes": 1659
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/BundledWireItemMixin.java",
+      "sha256": "080c6f30f43b48e8b360d1453a01a555c1f0496fbf411029827b3385e040f7cf",
+      "bytes": 3912
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/BundledWireNodeMixin.java",
+      "sha256": "dec532b3f04f828214824527f901c117f75e549ab31e86403180a081680992ec",
+      "bytes": 919
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/BundledWireRecoveryMixin.java",
+      "sha256": "e3de699258bc4a7241ac25e33bb56f37ae8d761fe55ba015fc317849d922563f",
+      "bytes": 1012
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CapacitorHistoryAccessor.java",
+      "sha256": "36f9940ba0abb7dcabe20141dc0f321f19db1fefeb3e46f3fe12f569023ceb85",
+      "bytes": 428
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CeeBlockControlToolMixin.java",
+      "sha256": "2099267b95991d60938bcc47d4935483b1793d3ded9287e80a52d52bfe8582dc",
+      "bytes": 1937
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CeeBuzzerAudioMixin.java",
+      "sha256": "cae22616733d463bf2c2e2d6fa1ff08f9c9bed99bc2b3d4dd6c392356b92d441",
+      "bytes": 831
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CeeCutHandleAccessor.java",
+      "sha256": "3d9ae14dfefc437ae3d34b2b86783cdc837fad393a0f134ce5ae6eff31731476",
+      "bytes": 367
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CeeDeviceRemovalMixin.java",
+      "sha256": "3c3ca7930eb042fb27e8f1f8ac089fff9950e9cb05fb3b64d7edcfbaef9570da",
+      "bytes": 826
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CeeFuseHolderPersistenceMixin.java",
+      "sha256": "d2cd4d02fc9b2c46572db89a173803c3557c5432f419958db176cbcf8a114127",
+      "bytes": 2224
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CeeFuseSwitchToolMixin.java",
+      "sha256": "15c17dcd17d52be7c9ca13790ecabaa7b1a5232c61e98865b259bb405bc7f4fc",
+      "bytes": 1973
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CeeInductorHistoryMixin.java",
+      "sha256": "caa730e55f89652d9acc23d51dee7989c0ff84c5f0393317ff403f59c793a4ed",
+      "bytes": 2631
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CeeMovingWireCutMixin.java",
+      "sha256": "aaec972b080d071313d592b613a90f55b729972c89cf51e2bbe54ea301c23fcc",
+      "bytes": 1670
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CeePanelControlToolMixin.java",
+      "sha256": "67fd4c4687065fe1bdeaecb846c4298cf356df10a66f21a6ebe67914445f76ea",
+      "bytes": 1741
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CeePanelCoverMixin.java",
+      "sha256": "6a17923e9b08a45d33f67aef8228b74ea39623f4f0fc9a8d1f6d0d70aa1f6fa9",
+      "bytes": 1567
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CeePhaseHistoryAccessor.java",
+      "sha256": "b8ca389877feafed97c796f353555ccb8b2c2ef6b6b7a5518e703a4d4b9f7537",
+      "bytes": 792
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CeeReadingAvailabilityMixin.java",
+      "sha256": "b22ce8a816e88b02ea03703441a993886b731a4fe187c44ce8dad48ad3866379",
+      "bytes": 877
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CeeRotorHistoryAccessor.java",
+      "sha256": "24b3be6e64c2be3dc875424e27fbd1868f727b6553ff0fe6b27f05c22e345985",
+      "bytes": 559
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CeeSolverAuditMixin.java",
+      "sha256": "3a9874007ab08a9567bfaa9bf79fb56371177ed05f1e3df9084ce83dbef4314f",
+      "bytes": 723
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CeeTrainCircuitMixin.java",
+      "sha256": "2ebf4d65ae9961da99ba1d2c20f420423f448248565ece5994a4f9d0dcbb552a",
+      "bytes": 4486
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CeeTrainGaugeMovementMixin.java",
+      "sha256": "95253a23cb03844e6ddc4c3a8329a88877b02d693930562b035a4064e7496b70",
+      "bytes": 1383
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CeeTrainGaugeRenderMixin.java",
+      "sha256": "1f531172968d53201b956e68752925472717950c48705a4c62b65cb57adf1ad8",
+      "bytes": 1487
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CeeWireIdentityMixin.java",
+      "sha256": "66bd17e2f2573585ae4b34ea932e09f19af74bdef2e2a9657ff9b269fc854a58",
+      "bytes": 1740
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CeeWirePickingMixin.java",
+      "sha256": "0cc1a7a559be8f0d074277f459bd606dd36b51bdfec435868e7bb72c35d8a9ea",
+      "bytes": 1038
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CeeWorldHistoryMixin.java",
+      "sha256": "a201d8fc8ee4489c54426e6d98975468d17d95689f9a7e58b3ffe1cb1224cc24",
+      "bytes": 907
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/ChunkTaskWindowMixin.java",
+      "sha256": "7942df78cd1dfe6e5b5bc81f320e4944de66742b8cde488a3d2f37b5ec8b6cd2",
+      "bytes": 1250
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CioCouplerMixin.java",
+      "sha256": "e9d845423c695dcbc25627d64b0a2d22ea5179765e9e25b77db727e1d89750da",
+      "bytes": 1867
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CioPhaseSourceMixin.java",
+      "sha256": "ebe714ea5903877efea3c9f3cdd7f1e1e824727ec6ed8801934019cc7158aa91",
+      "bytes": 2421
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CircuitBuilderAccessor.java",
+      "sha256": "05d629923740b2c4b544a51dffbc44e9ba89e959315ceba0f5f4c53e9489200c",
+      "bytes": 416
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CircuitBuilderValidationMixin.java",
+      "sha256": "85ffaab218b24ea818255b78a196cdd3cd1f246a92c15180327a131da3af051c",
+      "bytes": 2393
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/ClampMeterClientMixin.java",
+      "sha256": "51a4e3fd53f0b29299a6306f89642f3b0600d01cd998d1a53e090c5c1558ff41",
+      "bytes": 2137
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/ClampMeterMixin.java",
+      "sha256": "acfed9b7495de05066579a830aed0d4a9516e7092cdb378c9473a2cef78156ea",
+      "bytes": 1189
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/ClampWireMixin.java",
+      "sha256": "02865262567cc41829f9c8ffb5eb32589b1009172337c10903fb49fa41bdf961",
+      "bytes": 970
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/ConcretePoleHeightMixin.java",
+      "sha256": "51cc755757ba5338fee3777ea2c308169bc2eac51d0bda6bcee27c8b8d89aa4d",
+      "bytes": 915
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/CoupledNodeConductanceMixin.java",
+      "sha256": "090090eeb542eb3b30c2e043acbee583713458f0652161e2ecbd45815c55d03c",
+      "bytes": 1544
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/DesignTableRegistriesMixin.java",
+      "sha256": "677afc98a99a5eb2055d40dfdd12ec9acd0c1886c8cfbe16fc5afeceeaa378b3",
+      "bytes": 4119
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/ElectricalNetworkAccessor.java",
+      "sha256": "aecc98553ae74be82932400f9576b81e7d09ec69d965db8f3113b82cbf3a4103",
+      "bytes": 700
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/FrequencyMeterTimingMixin.java",
+      "sha256": "794e353ca8ae144767bb1f8726eb737fbda2c5b9d7df8932adc339bae7065363",
+      "bytes": 855
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/GlobalNetworksScheduleMixin.java",
+      "sha256": "62e435ecbf3c5c462535f1471e446dd30bdaaca3b2fd8e02e29694ba763ecfb7",
+      "bytes": 884
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/HangingWireSpoolMixin.java",
+      "sha256": "8160842c6fd6941b81840264829ba028ce517abd2a374df24838e78190ea6c6e",
+      "bytes": 1125
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/InWorldNodeMixin.java",
+      "sha256": "a952f3fcc316c9389c2d9b8b018e57deca424de57c6a78ccb4db206f459c0205",
+      "bytes": 3551
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/MeterDisplayTimingMixin.java",
+      "sha256": "2bea3b09e61ad78b0b4a1c7a256f8b07d73030bba3ff5ca7af408e0fad1e6827",
+      "bytes": 1562
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/MotorSamplingMixin.java",
+      "sha256": "ba149b7a8c310596f41fcdb78a8f7dcd7e789089a62304c24023fb388e4dcd81",
+      "bytes": 826
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/MultimeterMixin.java",
+      "sha256": "0cab4699cc7e5bf1d6487d8ab3e48180c1338ae8757c0ee3683973d15391ba29",
+      "bytes": 3662
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/MultimeterWireClientMixin.java",
+      "sha256": "61853056646fde806a4dae38366592eadd3b093480f069deec771af3ba39aa07",
+      "bytes": 1609
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/MultimeterWireMixin.java",
+      "sha256": "1ad8496a24355350002bccf3464ee5a5be177631fa7251b5426e71b699038c81",
+      "bytes": 1661
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/NativeClampAvailabilityMixin.java",
+      "sha256": "6a5ef029481f239335ae9d7533da279ce5b3990f0c8886dab1bf2a6ac5eff3e7",
+      "bytes": 886
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/NativeResourceMixin.java",
+      "sha256": "74afb497105a381409b4ef61fa3abb6bd5db22c89bebfb4cf9ffd967623496fe",
+      "bytes": 1547
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/NetherTransformerAccessor.java",
+      "sha256": "55b0e98bee13cb4b33d7776b4d461397b1f5d242aca6bbe1beb707b0936f4c39",
+      "bytes": 712
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/NetherTransformerEntryAccessor.java",
+      "sha256": "b73fbd08182879906863c7620c6ac9e6d397efc964d834d237ac88d87760d77b",
+      "bytes": 740
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/NetherTransformerHistoryMixin.java",
+      "sha256": "69c040f4238b1e2ab03943f2e804bae29c1960319a3af6f31f58d75a859cbec3",
+      "bytes": 715
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/NetherTransformerUnloadMixin.java",
+      "sha256": "dc3b96ab1d9fee29c7c63c2b360dce22a090525739c31d60d105a8213d72308e",
+      "bytes": 1656
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PanelMeterAccessor.java",
+      "sha256": "e62d4d1437e3f156ac260aecc20e0bbfb26c074d0b9237b5af2dba2c5e52b99b",
+      "bytes": 392
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgAssemblyMixin.java",
+      "sha256": "c998bc30e5d2bf04262e914c51ec07ec175a19c6b5138b47f4b2d9eaec113253",
+      "bytes": 1213
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgBehaviourMixin.java",
+      "sha256": "e8e9d0fa81e4321d3043483ff2e8bb976dfd36f170be194e802ef31d7c4caf65",
+      "bytes": 3929
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgElectricMixin.java",
+      "sha256": "e8bca689326bddd2607d05feb4af77afb3c9adb3a658a5b7637155e1933e6ea8",
+      "bytes": 1905
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgJavaMnaMixin.java",
+      "sha256": "81eeb02d22ee721dca30980a44f401199d2c080955bb994ca433a0b7bf9464f2",
+      "bytes": 2692
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgMatrixAccessor.java",
+      "sha256": "fedbcb3ca50327258690b01b31d20671847a14dc2faf2d8b4dbfe043f95a7727",
+      "bytes": 823
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgNativeAssemblyMixin.java",
+      "sha256": "abab7cd2811030aa838977f75b44ab7a3cecd43344fcf36581ce4ca1c3b8a7fb",
+      "bytes": 736
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgNativeFailureMixin.java",
+      "sha256": "b8e065f49bcf4cfdf21097dab05db0173e60a7e26aa762c270705c1cb8ac9344",
+      "bytes": 869
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgNetworkMembershipMixin.java",
+      "sha256": "950a5985cd28a058b1760e7cbc9bd6913a3c668a8a5062925bad968c414978a8",
+      "bytes": 1202
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgPentodeBiasAccessor.java",
+      "sha256": "c5ecabd580d1e3b5fb30c6a1e2ca571ead620185eee404d6a1deee425aa66320",
+      "bytes": 410
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgPentodeInitializationMixin.java",
+      "sha256": "91eedb2a87cff2309b8811f61877ffdb2716ebc1408e41834cb66ed33e989e4b",
+      "bytes": 928
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgPlainWireBatchAccessMixin.java",
+      "sha256": "17dde46b5014d93f1b45a0e9dd324446f74c7200531da6c02cc21437d3308973",
+      "bytes": 2049
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgPlainWireBatchMixin.java",
+      "sha256": "7918bd6ba7667896fefdc0a13b8a3e9e0cd5651aaf4b6e67180398d3a5e01fd0",
+      "bytes": 2685
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgPlainWirePowerMixin.java",
+      "sha256": "5a72685fb82ea7acc74412a791ae1fdf8732907f41c5b1881b77fed005f258e8",
+      "bytes": 1271
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgProbeHighlightMixin.java",
+      "sha256": "f8d9ee14d13913efc4ecfc0b26a2c471aa255dc30fcab72f90c2efe0b120909a",
+      "bytes": 1186
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgResidualAssemblyMixin.java",
+      "sha256": "ac25185c80906d6445efb1a1206c5ede240c30fd19480078db2005275df413f3",
+      "bytes": 1509
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgRestorationDerivedCurrentMixin.java",
+      "sha256": "becb5d74a1fd9b7c4164530f575f17c8701192d10bf421b0df194d02fef8b427",
+      "bytes": 1751
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgRestorationValueMixin.java",
+      "sha256": "037eb96dd4673f1f2de195c82076a68bad4ddd59200351349a56c9afa72789c2",
+      "bytes": 1930
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgRestorationWireMixin.java",
+      "sha256": "4017a2a1209145213926f452c4a8cb2e871370db5e4dcac1c4beb189a7e6dcc6",
+      "bytes": 1628
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgSolverFailureMixin.java",
+      "sha256": "7cc2245f5bd4749f8f64055b3a5d4b602cae1b1ed6f00818a7f221943ac22a61",
+      "bytes": 1096
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgSolverWarmupAccessor.java",
+      "sha256": "cc933c70b87c62ccb0d27578604053acee7eb746181f1ff6804ccff43ee27e74",
+      "bytes": 509
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgSparseMatrixMixin.java",
+      "sha256": "4a7fdc05cac87a4ef8d2b1c95fedb77f05168622bdf540d8d692cc4833273651",
+      "bytes": 1293
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgWireItemReadinessMixin.java",
+      "sha256": "bd7cf4915888c67e6b08385254fd8e08737ec2d6b1d359c761e15f13fbeffa6f",
+      "bytes": 2323
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgWireRemovalMixin.java",
+      "sha256": "ca30766f1a174ff166aa6a218098b54131d1b6824ac975fc2c4ef02aeaae6cca",
+      "bytes": 2109
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgWireRestoreScopeMixin.java",
+      "sha256": "0b649c0aaf256c16cd15242a154676a02b2dbd1a2410f185a4bb140245173189",
+      "bytes": 1197
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgWireTraceMixin.java",
+      "sha256": "7b44c411e4ac23d57bd9096c506a5d77319af19ee05c1fd44ed9deb03552f67f",
+      "bytes": 2655
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgWireTreeBatchAccess.java",
+      "sha256": "5eb827efb22b3bc1cf5e3119ad6f02eb9e1cfc36441c33823c60d49ac646c8c0",
+      "bytes": 912
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PgWireTreeBatchMixin.java",
+      "sha256": "4f8fce5f34c1d09b064820139996fe353a0daa9c126e2fe9fd2588cd9c564963",
+      "bytes": 1268
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PnJunctionParametersAccessor.java",
+      "sha256": "ced8caeea2ce8021c62e847909a24233a9b3eb66deb23e56ef51656d9e2d4d09",
+      "bytes": 629
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/PropertyConductanceMixin.java",
+      "sha256": "51978f0c4eec4b8eae3f00f5aea879e921e58c294f926bd2fb5c5eb9b088aa2a",
+      "bytes": 1035
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/RegistrateCallbacksMixin.java",
+      "sha256": "0d2b4a157e72f68770fa3981e37f2b87eee1fad9047fd0e756cd2ad0bfd46275",
+      "bytes": 1782
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/RestorationConstantMotorMixin.java",
+      "sha256": "117c94857c737de2ffdeab1d604cfb2b807b7470a7956c8000cc292cba647f47",
+      "bytes": 965
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/RestorationMotorMixin.java",
+      "sha256": "8aae1b3440ea504a6eb4e51e23c0914fb40d390c5702ceb1944428c7428aef6b",
+      "bytes": 2318
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/RestorationStorageMixin.java",
+      "sha256": "66459b1dfad579ae1e388670edc2fdfa0755cf92f1d711f719774a27c680dcee",
+      "bytes": 1936
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/SimulationTickerMixin.java",
+      "sha256": "8ac80ead2eef874d7c85c1549b16ff761cc1673edc80f860122fddf69ade18b8",
+      "bytes": 1145
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/SolverConfigThreadMixin.java",
+      "sha256": "895a6ade0da791f09d6344c58ba6556c94e3c7ed8cd6f5e820ab65ce34df1da3",
+      "bytes": 1582
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/SyncPositionMixin.java",
+      "sha256": "0708dc12084b9776b22b7def56572a315e79c0e87ef73d3ea53686cdafbc3c32",
+      "bytes": 1218
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/TriPolarMeterResultsMixin.java",
+      "sha256": "9deb45f5035b3a3b7a2b0574cecc557b0d5e2b7f09d5893c9ae1c9bce1ea7619",
+      "bytes": 1574
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/VariacResultsMixin.java",
+      "sha256": "6c670a5078b1c27003a8431cf14c755931c3c0ba8559cc8e3dd612ff9002c3ff",
+      "bytes": 1505
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/WireElectrocutionAvailabilityMixin.java",
+      "sha256": "7e758bdaeb5caf5af2a286b900a279c9943de61abf36095bf3b567fb915da29e",
+      "bytes": 2748
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/WireLifetimeAvailabilityMixin.java",
+      "sha256": "5f427cbd6537f67d0f9acba62e4431b7c06b903d1bbc964a91a79c88fa76a546",
+      "bytes": 1768
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/WireSpoolMixin.java",
+      "sha256": "88e2cb32b3c0993e0bebb19b41de6c9125496d230e2c47e6f892935e70773ee6",
+      "bytes": 4407
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/WorldNetworksAccessor.java",
+      "sha256": "156191e1dda86fe63e73b0958b85efd30858f90b09e04145347f2eac63e36bcd",
+      "bytes": 968
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/mixin/WorldNetworksMixin.java",
+      "sha256": "1bcfc0143f41fccbb83ae948d2175b05c369077589ddea9f0d6cba85236d0ee7",
+      "bytes": 5103
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/wiring/CeeElectric.java",
+      "sha256": "4f4bdda9ac92e3fa386225432a0542d6b0a9e50b1f476fa9498cccf5fb07c784",
+      "bytes": 11513
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/wiring/CeeTerminalPicking.java",
+      "sha256": "3687db91b4210ba33428b4ef6e10cd3aa30ec1e7626845e90ab853d7da873e72",
+      "bytes": 7141
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/wiring/LineVoltages.java",
+      "sha256": "7d5f546d2616b6190671ea4164083d203e8e704b7e010ff9aaa03a5b64f30375",
+      "bytes": 972
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/wiring/RemovedWires.java",
+      "sha256": "1dad263085b00197a663010a6a6e61a5d21812904193103c838230a899da8053",
+      "bytes": 1550
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/wiring/Terminals.java",
+      "sha256": "6bd5d6d67113bcc75fee55edf6cfd8423ce19b3133f7a205b2377c3e5e97fb31",
+      "bytes": 11933
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/java/org/cha0scollective/wwpg/wiring/WireTreeTraversal.java",
+      "sha256": "cb38aae7f96d4c0bf1099758ffcd15e9f8969519d1e1bb9bec7351eb8ebc9a22",
+      "bytes": 2680
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/resources/META-INF/POWER-GRID-LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/resources/META-INF/WWPG-NATIVE-NOTICE.txt",
+      "sha256": "419c7fdd49c7016b9b11e9f4e606a4d7690187d6aecc27a7e2097cb8f93e559c",
+      "bytes": 753
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/resources/META-INF/neoforge.mods.toml",
+      "sha256": "4c06417763a1a29ed67882d81c24239ee4fe83aa5375ab0032afe80526d9709e",
+      "bytes": 1030
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/resources/META-INF/services/org.cha0scollective.wwpg.api.neoforge.DeviceDiscoveryService",
+      "sha256": "f319b230375117262ece2b0456b456abf510817512ea139ecb1788cb8cf60537",
+      "bytes": 54
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/resources/META-INF/services/org.cha0scollective.wwpg.api.neoforge.MeasurementService",
+      "sha256": "1272128f4c8b2c1fdbf7890323753180b12010dd3e517ed02760484b14ab772c",
+      "bytes": 51
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/resources/assets/electroenergetics/models/block/duplex_wire_segment.json",
+      "sha256": "c0a4058f8b592569e7396fabcdc3f159fa453cdd6b4145aff8c4611968ac34c2",
+      "bytes": 63
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/resources/assets/wwpg/lang/en_us.json",
+      "sha256": "ddf9ca4dace3fbf8fa3deca864f64aef06bfcd9d3da46768ee326a2685d50aab",
+      "bytes": 303
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/resources/data/wwpg_pinout/programs/acceptance.lua",
+      "sha256": "f110850ec75e6e623d879b7934c8437aee1854b6283902a8f647633b6ed7e82b",
+      "bytes": 2620
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/resources/data/wwpg_pinout/programs/lifecycle.lua",
+      "sha256": "159e7074fa3c4929d745df383d2710e64a67d3a28bbb075b63cb815e0416fde1",
+      "bytes": 2358
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/resources/data/wwpg_pinout/programs/yard/startup.lua",
+      "sha256": "020217ef2a81a0824b0dece6015f913f04161a1d847e1364537751ecec40534d",
+      "bytes": 1734
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/resources/data/wwpg_pinout/programs/yard/wwpg.lua",
+      "sha256": "3a0206e10cc6ce5c2dec4d5815d0550ae42ba7787d8ec448af4903533d4e8d79",
+      "bytes": 2144
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/resources/wwpg.cee12.mixins.json",
+      "sha256": "a69d6ecd7db5fb7cd52246319137d2017f90a06f30995854a0687ed2dc9c852d",
+      "bytes": 569
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/resources/wwpg.cio.mixins.json",
+      "sha256": "b608cdaf3c402635a3ee5bdfa83fd3eb01fb4d582eade6bf7ed6785091c7eb5d",
+      "bytes": 288
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/main/resources/wwpg.mixins.json",
+      "sha256": "1210dfdbbed8ad8215dfcfbb048b2fcaff46e4e744b7bab6c69a771925d4aeed",
+      "bytes": 3170
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/api/ApiVersionTest.java",
+      "sha256": "0a9bcebadf5ab41cedbc394d019c27d8cbf22c1ce866d11fd77cf72db7cc86dd",
+      "bytes": 489
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/api/CircuitDescriptionTest.java",
+      "sha256": "ddecc6e537e37ca9d86997e2db19c58bb294986181bfac4f8dbf4d8276c3bdfc",
+      "bytes": 6335
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/api/DeviceResultsTest.java",
+      "sha256": "5aaaca4b81b0898252cdc8a33fc9e7da3eb829d82024c822834442ad568d9c08",
+      "bytes": 5735
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/api/VoltageMeasurementTest.java",
+      "sha256": "ec66fcf7ac1c79715f68e994bb6bd040ba9b2149f15dabeaba7b46f947bab544",
+      "bytes": 1205
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/api/cee/CeeAdapterRegistryTest.java",
+      "sha256": "f9e4cf5ae61e3011a1a3c7ab36295028457a95c51e2845c24937ab82ca164372",
+      "bytes": 17521
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/bridge/BridgeSimulationResultsTest.java",
+      "sha256": "b2dcb35001f4f99c91b8c9e5fbdef050fc27522dc69d678e43d7e4a51364ceca",
+      "bytes": 14240
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/bridge/CatenaryReconnectionTest.java",
+      "sha256": "059b0ff37c9d04b2b8227c255d7aebf39a5ec43dda16af91fd8b2c5714174c32",
+      "bytes": 3825
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/bridge/DiagnosticHistoryTest.java",
+      "sha256": "ddbfe4f71f4813d79eef369fd324275c1518dd5bf75751f69d0263f9089d3088",
+      "bytes": 4879
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/bridge/IndexedIslandDiscoveryTest.java",
+      "sha256": "c6b0907dc297e5b7b5db75a9dddcc926e9d455003e468bd9118e054cde81a84b",
+      "bytes": 2760
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/bridge/InitializationWindowTest.java",
+      "sha256": "15c18728e3c6abdb10e7d35846d9e44776762fe2b3aeb03ab0567f1a9ed3b743",
+      "bytes": 418
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/bridge/LinearBranchTest.java",
+      "sha256": "f16a21a7f1f882b38fdba6217101e3611af78ed5fe01aa0b74fd434fe4bf3ad5",
+      "bytes": 2322
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/bridge/MatrixBuildScopeTest.java",
+      "sha256": "608a9fd07a441fc1a2f80117306ed7372231fb219615b933204fbd53ee5ecbc6",
+      "bytes": 4218
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/bridge/NativeBootstrapTest.java",
+      "sha256": "36682104e6e05cceea021d4732018b3812c2406f5844ec08da4879f821477c55",
+      "bytes": 2214
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/bridge/NativeCeeCheckpointTest.java",
+      "sha256": "c454fcec909f11e96b52cc461774b0f9c5d5d7fc8db0b0f2b3d87a65e0492b1d",
+      "bytes": 6045
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/bridge/NonlinearTrialCurrentTest.java",
+      "sha256": "5e937a6af5355b08848c78bf9644f8dac1cb8c29a18bf58d88c2f114182544c5",
+      "bytes": 1450
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/bridge/OwnedWireRemovalTest.java",
+      "sha256": "f76abf423c30354db8edd2e1a6768e3bfbb28eeba9cb1ed0c2676898e1bd7aad",
+      "bytes": 1670
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/bridge/PropertyCurrentSourcePowerTest.java",
+      "sha256": "5b055f9a5129736e46769c3d8481b00a4bacd753923053686aa977aa637692b4",
+      "bytes": 5526
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/bridge/RestorationWindowTest.java",
+      "sha256": "1e69dce066549f7b3ed97912da01e31ca85be498e7f3e85dc6348e9a4bfef683",
+      "bytes": 973
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/bridge/SparseAssemblyTest.java",
+      "sha256": "a18b97935b4af3d75f125e70abf721bc6f3d589ae6e5e35219716f75cc8e1d26",
+      "bytes": 1537
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/bridge/SparseMatrixSupportTest.java",
+      "sha256": "d6b713a3988c6eb029ac62646ae7ef13a8cfd2ceede507e02e02c0de8d19b05b",
+      "bytes": 2064
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/bridge/SubstepAcceptanceTest.java",
+      "sha256": "ae3ef2a3712f94f6dd7bb8d5f01be0e92a2f3a2ea9dd1b5de3ef63e909936e03",
+      "bytes": 733
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/bridge/TrainDimensionsTest.java",
+      "sha256": "6c5e5fbfd28a42522fd9d3c72199483dee31f8a3b329378f14ca02506752a5a0",
+      "bytes": 1059
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/bridge/TransformerStampTest.java",
+      "sha256": "1f00d123ae632c59e1d92384ef3a178fc989afea1d85ca1af9526be63f2cfb8a",
+      "bytes": 3393
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/compat/cee/CeeSavedCurrentTest.java",
+      "sha256": "bbe7a611acd8fc96d48893d2aad93e6631b373baa0eff54666c8200cb60265bb",
+      "bytes": 2705
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/compat/cee12/mixin/WirePreviewClientMixinTest.java",
+      "sha256": "c31550b823474ad0156894004c479530f56ad1d5837ac6cabcba611042231a44",
+      "bytes": 8201
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/experimental/BoundedTaskWindowTest.java",
+      "sha256": "98ac40aa163bf1bd47651b4f52b6a1be3d46d7f1e560560069127162361a7853",
+      "bytes": 3219
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/extension/ApiCeeWireIdentitiesTest.java",
+      "sha256": "f8ad887b8ad08a28cfff5658288f0e63c32f593b95f4baed39be5564f8b1c3a6",
+      "bytes": 4994
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/extension/ApiDiagnosticsTest.java",
+      "sha256": "c3286e350b8ef302fbe7b011edc4c9316f8419f216037b44023f82dec48bbc2c",
+      "bytes": 1169
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/extension/ApiElectricalTest.java",
+      "sha256": "3b71e8f04ec72cb2a0c536f8ddadcb7fa532b502cb51c2df9058bace936b61ce",
+      "bytes": 6066
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/extension/ApiGroundTest.java",
+      "sha256": "7cec17141387673c0863fe43afae3508ecba817d4da0820f7aaa8ccbec146c83",
+      "bytes": 5227
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/extension/ApiTerminalIdentitiesTest.java",
+      "sha256": "ce201713e95d36a4f1012d6d8a0c871ce32ab096f6b023586c48b68d39dc667a",
+      "bytes": 7466
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/extension/NativeApiReadingsTest.java",
+      "sha256": "d8ea6618feef5f00f0acb71a81eacc6cf899d9a4ee5bc4ee8cf4c9125d50609a",
+      "bytes": 2204
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/extension/ReferenceGroupsTest.java",
+      "sha256": "7e92268e8a7e2775464fe21285fcc8e3d32217d86858e3d197438fb8b1216c69",
+      "bytes": 1771
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/wiring/LineVoltagesTest.java",
+      "sha256": "69105944a49ee9539849eea4cd114f06b251795e083927180f8837a7809f9d0e",
+      "bytes": 1831
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/wiring/RestorationComponentsTest.java",
+      "sha256": "7586ad99e7c218338419fdedf347721ab9651b208ed0b55ff1108e8debd6dc05",
+      "bytes": 3196
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/wiring/RestorationQueueTest.java",
+      "sha256": "87e46c73b990c94124d2293a8bcc547b72ca8dd4231b05ddc2e598c133a02966",
+      "bytes": 9897
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/wiring/RestorationRootsTest.java",
+      "sha256": "03df51f67941a9e16f181956d9cb82a22201cdcf7ea365015d907ff47eda5d7d",
+      "bytes": 3495
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/wiring/TerminalPickingRayTest.java",
+      "sha256": "86e4c1fc21b3e1609a899ec8a12ea7c7ec72c211c40c89aa114f16c48c031103",
+      "bytes": 2087
+    },
+    {
+      "path": "local/alpha-cee120-0211-3-publish-01/tested-source/src/test/java/org/cha0scollective/wwpg/wiring/WireTreeTraversalTest.java",
+      "sha256": "ec190525408bccfbc44ccea355f3713d032319fe2ebf443d66ad914e6f33959e",
+      "bytes": 8657
+    }
+  ],
+  "source_scope": {
+    "path": "local/alpha-cee120-0211-3-publish-01/source-scope.json",
+    "sha256": "d1e6f4b6ea1a1de5108105091d54268b143e7bdc282a71cd1371507ec86c60cc",
+    "bytes": 707
+  }
+}

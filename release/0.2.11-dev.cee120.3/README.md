@@ -1,6 +1,11 @@
 # Updated CEE 1.2 alpha
 
 [Alpha prerelease](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.11-dev.cee120.3).
+Published on 21 November 2026 with five downloads. The
+[publication receipt](publication.json) verifies the public prerelease, exact tag,
+approved notes and every asset hash. The stable 0.2.11 release and historical
+`.8` release remain unchanged. See the [download layout](download-layout.json),
+[verification manifest](verification.json) and [exact-build exception](alpha-exception.json).
 The [approved notes](release-notes.md) describe the electrocution,
 contact-reading and transformer-reference repairs on the WWPG 0.2.11 baseline.
 

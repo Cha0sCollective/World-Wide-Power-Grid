@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "version": "0.2.11-dev.cee120.3",
+  "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.11-dev.cee120.3",
+  "release_id": 453828157,
+  "draft": false,
+  "prerelease": true,
+  "published_at": "2026-11-21T16:40:02Z",
+  "source_sha": "82a14ef2602a0dd999e091ce1595a4a06a9356f7",
+  "runtime_source_sha": "ac59a3880ca5d165950f326668e5d4cb7dc8b871",
+  "notes_match_owner_approval": true,
+  "asset_hashes_verified": true,
+  "assets": [
+    {
+      "filename": "wwpg-0.2.11-dev.cee120.3.jar",
+      "sha256": "8536f2efcb5b2af88b0b6757c08653ec9b7bb940e15442b5405bf80c550147d4",
+      "bytes": 5222206
+    },
+    {
+      "filename": "wwpg-0.2.11-dev.cee120.3-example-worlds.zip",
+      "sha256": "2bef88dd6268c3048ec6cb659da0a7d10308812d33bc93c04c5e75b062309cfb",
+      "bytes": 2030520
+    },
+    {
+      "filename": "wwpg-0.2.11-dev.cee120.3-developer-sdk.zip",
+      "sha256": "272cff9c94f9c5b833976f7660fb595dbd765c29664a88ce1fe316c0e445d491",
+      "bytes": 1041984
+    },
+    {
+      "filename": "wwpg-0.2.11-dev.cee120.3-verification.zip",
+      "sha256": "6367e0560193d7e25750bfc5be30d0c9c2b93fe05b09e3e4ce62d4183de1d177",
+      "bytes": 11021566
+    },
+    {
+      "filename": "wwpg-0.2.11-dev.cee120.3-checksums.txt",
+      "sha256": "5b0fcf06954b1d4935174a890152c5cf0c231b816e097b79c0e7d137018f40c6",
+      "bytes": 422
+    }
+  ],
+  "stable_release_unchanged": "0.2.11",
+  "historical_alpha_unchanged": "0.2.10-dev.cee120.8",
+  "focused_only_exception": true,
+  "full_headless_acceptance": false,
+  "graphical_acceptance": false
+}
