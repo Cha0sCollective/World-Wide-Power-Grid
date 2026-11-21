@@ -1,4 +1,4 @@
-"""Owner-authorized exception for the exact CEE 1.2 .8 alpha; never a general bypass."""
+"""Owner-authorized exceptions for two exact CEE 1.2 alphas; never a general bypass."""
 import xml.etree.ElementTree as ET
 
 VERSION = '0.2.10-dev.cee120.8'
@@ -11,6 +11,9 @@ CEE = {
 
 
 def record(manifest, root, api):
+    if manifest.get('wwpg_version') == '0.2.11-dev.cee120.3':
+        import release_alpha_0211_exception
+        return release_alpha_0211_exception.record(manifest, root, api)
     api.require(manifest.get('wwpg_version') == VERSION and manifest.get('api_version') == '1.0.0'
                 and manifest['artifacts']['runtime']['sha256'] == RUNTIME,
                 'Alpha exception applies only to the exact .8 runtime')
@@ -28,6 +31,9 @@ def record(manifest, root, api):
 
 
 def validate_presentation(manifest, root, config, api):
+    if manifest.get('wwpg_version') == '0.2.11-dev.cee120.3':
+        import release_alpha_0211_exception
+        return release_alpha_0211_exception.validate_presentation(manifest, root, config, api)
     value = record(manifest, root, api)
     expected = api.read(api.locked_file(value['presentation'], root))
     api.require(config == expected and 'alpha' in config['summary'].lower()
@@ -36,6 +42,9 @@ def validate_presentation(manifest, root, config, api):
 
 
 def validate(manifest, root, api):
+    if manifest.get('wwpg_version') == '0.2.11-dev.cee120.3':
+        import release_alpha_0211_exception
+        return release_alpha_0211_exception.validate(manifest, root, api)
     value = record(manifest, root, api)
     api.require(manifest.get('acceptance_policy') == 'separated-v2'
                 and manifest.get('unresolved_failures') == [], 'Unexpected focused alpha policy/failures')

@@ -1,6 +1,7 @@
 # Documentation
 
 This branch develops **0.2.11-dev.cee120.3** for CEE 1.2.0-132. Its
+[alpha prerelease](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.11-dev.cee120.3) has focused checks only. The
 [installation guide](INSTALL.md) lists the development requirements. The
 published [.8 alpha](../release/0.2.10-dev.cee120.8/README.md) is a historical
 snapshot with its original acceptance scope. The remaining equipment guides

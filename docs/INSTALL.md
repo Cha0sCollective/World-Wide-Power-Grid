@@ -43,7 +43,7 @@ requires NeoForge 21.1.265 or newer and does not fit this dependency set.
 
 ## Installation
 
-1. Use the development jar `wwpg-0.2.11-dev.cee120.3.jar` supplied for this branch. It has not been published as a release.
+1. Download `wwpg-0.2.11-dev.cee120.3.jar` from the [CEE 1.2 alpha prerelease](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.11-dev.cee120.3). This is an experimental alpha, with focused checks rather than full release acceptance.
 2. Put it and the required dependency jars in the instance's `mods` directory.
 3. Launch once to generate configuration, then stop the game or server.
 4. In `config/powergrid-server.toml`, edit the existing solver settings to the values below. Keep the other PG solver settings at their defaults.

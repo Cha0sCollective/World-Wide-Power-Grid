@@ -2,7 +2,7 @@
 
 **WWPG lets Create: Electro Energetics (CEE) and Power Grid (PG) work together in the same stationary factory.** Either mod can power the other's supported equipment using their native wires, controls and tools.
 
-**CEE 1.2 development:** this branch builds `0.2.11-dev.cee120.3` for CEE
+**[CEE 1.2 alpha: 0.2.11-dev.cee120.3](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.11-dev.cee120.3)** targets CEE
 1.2.0-132, restoring stock transformer node references, electrocution and stable readings during wire contact,
 alongside the 0.2.11 baseline fixes. Follow the [development
 installation guide](docs/INSTALL.md). Full acceptance for this new candidate

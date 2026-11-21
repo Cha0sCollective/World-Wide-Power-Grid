@@ -38,6 +38,15 @@ exports and mandatory disclosure are validated by `release_alpha_exception.py`.
 This does not certify full acceptance, authorize new suites, or waive any gate
 for another version. See its [alpha record](../release/0.2.10-dev.cee120.8/README.md).
 
+The owner separately approved the focused-check-only exception for
+`0.2.11-dev.cee120.3`, exact player SHA256
+`8536f2efcb5b2af88b0b6757c08653ec9b7bb940e15442b5405bf80c550147d4`.
+`release_alpha_0211_exception.py` locks that player, its companion, 80 focused
+server checks on Native/Java, 158 JVM checks, 66 tooling checks and the approved
+disclosures. Full headless and graphical acceptance remain uncompleted. Example
+worlds retain their historical `.5` identities. This approval applies to this
+exact alpha only; it does not authorize new suites or future-version exceptions.
+
 Full-suite runs require an explicit user request, including the end-of-day
 run. During development, check the changed area. A release that changes only
 the runtime's version metadata may reuse preserved passing full acceptance:

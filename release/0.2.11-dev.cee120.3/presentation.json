@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "repository": "Cha0sCollective/World-Wide-Power-Grid",
+  "documentation_ref": "0.2.11-dev.cee120.3",
+  "summary": "Updated out-of-band alpha for CEE 1.2.0 build 132, based on WWPG 0.2.11. Experimental testing release; full headless and graphical acceptance have not been completed for this exact build.",
+  "changes": [
+    "Restores electrocution from live CEE wires while preserving insulation and dielectric protection.",
+    "Fixes wire-contact-related unavailable readings and restores stock CEE transformer node voltages.",
+    "Includes the 0.2.11 fixes and retains the earlier wire preview and moving-sublevel wiring fixes."
+  ],
+  "installation": "Use Minecraft 1.21.1, Java 21, NeoForge 21.1.262, Create 6.0.10, CEE 1.21.1-1.2.0-132, Power Grid 0.6.2 and Architectury 13.0.12. Replace your WWPG jar on client and server. Set PG multiTicks to 16. Test a copy of your world. Both solvers passed 40 focused server checks each; no new graphical acceptance was run. Bundled example worlds are unchanged historical exports, not retested on this alpha.",
+  "optional_installation": "The combined Stationary Yard requires CC:Tweaked 1.120.2 and Pinout 0.2.1. Example worlds retain their original .5 version labels; test copies only."
+}
