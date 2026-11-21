@@ -1,10 +1,6 @@
 # Current status
 
-**WWPG 0.2.11 is the current stable release.** Worlds can reopen with redundant
-CEE copper links on joined Power Grid factory lights. CEE wires to Power Grid and
-Power Dock terminals stay visible and selectable on moving Sable builds in the
-tested setup. Qualification covers 342 headless entries and 12 separate graphical
-scenarios on the recommended dependencies.
+**WWPG 0.2.12 is the current stable release.** Energized bare CEE wires can shock entities again, and isolated CEE transformer windings follow stock voltage readings.
 Extension API **1.0.0** is unchanged. Use the [selected dependency set](INSTALL.md).
 
 ## What works
@@ -41,13 +37,9 @@ a repaired device. The [developer contract](EXTENSION_API.md) explains those rul
 
 ## Current release checks
 
-The 342-job headless plan passed across Windows and Ubuntu, Native/Java
-and BASE/PINOUT on NeoForge 21.1.262, PG 0.6.2 and CEE 1.1.4. Preparation
-checked units on each operating system and built the three extracted
-SDK projects independently. All 12 real Windows client scenarios passed,
-including integrated worlds, two-client TCP synchronization and clean shutdown.
+The dashboard run on main passed 258 headless checks across Windows and Ubuntu, Native and Java, and BASE and ADDONS. All 12 Windows graphical scenarios passed. The release reuses those results after verifying a version-only change.
 
-The [0.2.11 acceptance record](../release/0.2.11/ACCEPTANCE.md) records the
+The [0.2.12 acceptance record](../release/0.2.12/ACCEPTANCE.md) records the
 frozen source, tested artifacts and exact world exports. The
 [0.2.8 acceptance record](../release/0.2.8/ACCEPTANCE.md) retains its historical
 Windows Native/BASE sparse-panel timeout and passing continuation.

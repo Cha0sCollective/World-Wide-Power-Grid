@@ -1,10 +1,10 @@
 # Documentation
 
-These guides describe **WWPG 0.2.11**, its supported stationary factories and
+These guides describe **WWPG 0.2.12**, its supported stationary factories and
 **extension API 1.0.0**.
 Start with the page that matches what you want to do. The [circuit library](CIRCUIT_LIBRARY.md)
 and [control promotion record](developer/CONTROL_PROMOTION_028.md) describe the
-retained improvements; [acceptance](../release/0.2.11/ACCEPTANCE.md) preserves
+retained improvements; [acceptance](../release/0.2.12/ACCEPTANCE.md) preserves
 the completed coverage and actual source and artifact identities.
 
 ## Play and run a server

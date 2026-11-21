@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.2.12 — 21 November 2026
 
 - Fix CEE wire contact so energized bare wires can shock entities and readings
   recover after contact changes. Insulation and dielectric protection still apply.
