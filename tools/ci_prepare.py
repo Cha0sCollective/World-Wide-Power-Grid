@@ -39,7 +39,7 @@ def prepare(output, inputs=None):
         for name in ('extension-addon', 'cee-addon'):
             checked([sys.executable, ROOT/'tools/run_checked.py', '--timeout', '1200', '--', wrapper,
                      '-p', ROOT/'examples'/name, 'build', '--no-daemon'], output/(name+'.log'))
-        inputs = freeze(output/'frozen')
+        inputs = freeze(output/'frozen', with_optionals=True)
     frozen = frozen_inputs(inputs)
     checked([sys.executable, ROOT/'tools/run_checked.py', '--timeout', '1200', '--', wrapper,
              'check', '--no-daemon'], output/'check.log')

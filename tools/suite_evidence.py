@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 import re
-from test_suites import ROOT, CATALOG, ROLES, catalog, descriptor, plan, read, sha, write
+from test_suites import ROOT, CATALOG, ROLES, SDK_MODS, catalog, descriptor, external_mods, plan, read, sha, world_edition, write
 
 
 def require(value, message):
@@ -22,7 +22,28 @@ def locked(item, base):
     return path
 
 
-def validate_job(actual, expected, inputs, base):
+def validate_optional_installation(text, expected, inputs, spec):
+    wanted = set(expected['optional_mods'])
+    externals = external_mods(spec)
+    mod_ids = {role: entry['mod_id'] for role, entry in externals.items()} | SDK_MODS
+    observations = re.findall(r'WWPG_RUNTIME_INPUTS_VERIFIED: (\{[^\r\n]+\})', text)
+    require(bool(observations), 'Missing loaded optional mod inventory')
+    hashes = inputs['artifact_hashes']
+    for observation in observations:
+        loaded = json.loads(observation)
+        require({'powergrid', 'electroenergetics', 'wwpg'} <= loaded.keys() and
+                loaded.get('neoforge', {}).get('version') == expected['loader'],
+                'Loaded core environment differs')
+        for role, mod_id in mod_ids.items():
+            require((mod_id in loaded) == (role in wanted), 'Wrong loaded optional mod: '+role)
+            if role in wanted:
+                require(hashes.get(role) and loaded[mod_id].get('sha256') == hashes[role],
+                        'Loaded optional mod hash differs: '+role)
+                if role in externals:
+                    require(hashes[role] == externals[role]['sha256'], 'Unpinned optional mod: '+role)
+
+
+def validate_job(actual, expected, inputs, base, spec=None):
     for key, value in expected.items():
         require(actual.get(key) == value, 'Wrong job selection: '+expected['id']+'/'+key)
     require(actual.get('status') == 'passed' and actual.get('exit_code') == 0, 'Failed/incomplete job: '+expected['id'])
@@ -85,19 +106,23 @@ def validate_job(actual, expected, inputs, base):
             headers = [n for n in zipped.namelist() if n.endswith('/WWPG_MANIFEST.json')]
             require(len(headers) == 1, 'World inventory missing')
             header = json.loads(zipped.read(headers[0]))
-            require(header['jar']['sha256'] == inputs['artifact_hashes']['runtime'] and header['profile'] == expected['profile'], 'Export artifact/profile differs')
+            require(header['jar']['sha256'] == inputs['artifact_hashes']['runtime'] and
+                    header['profile'] == world_edition(expected), 'Export artifact/profile differs')
         return
     proof = read(locked(actual['proof'], base))
     require(proof.get('completed') and proof.get('required_tests_passed', 0) > 0, 'Process did not complete its tests')
     require('GAME TESTS COMPLETE' in text and re.search(r'All [1-9][0-9]* required tests passed', text), 'Missing actual completed GameTest log')
     require('All dimensions are saved' in text, 'World did not finish saving')
     require(f'WWPG_TEST_BACKEND_CONFIG: requested={expected["backend"]}, configured={expected["backend"]}' in text,'Actual configured solver differs')
-    require(proof.get('profile') == expected['profile'] and proof.get('backend') == expected['backend'], 'Actual solver/profile differs')
+    require(proof.get('profile') == expected.get('runtime_profile', expected['profile']) and
+            proof.get('backend') == expected['backend'], 'Actual solver/profile differs')
     role = 'reference' if expected.get('reference') == 'upstream' else 'runtime'
     require(proof.get('sha256') == inputs['artifact_hashes'][role], 'Actual loaded artifact differs')
     if 'gametest' in inputs['artifact_hashes']:
         require(proof.get('test_fixture_artifact', {}).get('sha256') == inputs['artifact_hashes']['gametest'], 'Loaded GameTest companion differs')
     if expected.get('operation') != 'reference':
+        if 'optional_mods' in expected:
+            validate_optional_installation(text, expected, inputs, spec or catalog())
         require(proof.get('phase') == expected['phase'] and proof.get('neoforge') == expected['loader']
                 and set(proof.get('namespaces', '').split(',')) == set(expected['namespaces']), 'Lifecycle/loader/namespace differs')
         if 'circuit' in expected:
@@ -116,9 +141,10 @@ def validate_job(actual, expected, inputs, base):
                         'Circuit case did not start exactly once: '+case)
                 trace=locked(actual['circuit_traces'][case],base).read_text(encoding='utf-8')
                 require(bool(trace.strip()), 'Empty circuit trace: '+case)
-        if expected['addon']:
-            require(all(proof.get('addon_artifacts', {}).get(r, {}).get('sha256') == inputs['artifact_hashes'][r]
-                        for r in ('example', 'upstream_example')), 'Actual addon jar differs')
+        sdk = (set(expected['optional_mods']) & SDK_MODS.keys() if 'optional_mods' in expected
+               else SDK_MODS.keys() if expected['addon'] else set())
+        require(all(proof.get('addon_artifacts', {}).get(r, {}).get('sha256') == inputs['artifact_hashes'][r]
+                    for r in sdk), 'Actual addon jar differs')
     else:
         require(proof.get('upstream')==(expected['reference']=='upstream'),'Wrong reference mode')
         require(proof.get('neoforge')==expected['loader'], 'Reference loader differs')
@@ -126,7 +152,8 @@ def validate_job(actual, expected, inputs, base):
 
 def validate_reports(paths, lane, source_sha, hashes, complete=True, catalog_contract=None):
     # Historical review is explicit; current release gates always use the current plan.
-    expected = {j['id']: j for j in (plan(lane, spec=catalog_contract) if catalog_contract else plan(lane))}
+    spec = catalog_contract or catalog()
+    expected = {j['id']: j for j in plan(lane, spec=spec)}
     seen = set(); exports={}; reopens=[]
     for path in paths:
         report = read(path); base = Path(path).resolve().parent
@@ -134,6 +161,8 @@ def validate_reports(paths, lane, source_sha, hashes, complete=True, catalog_con
         require(report.get('schema') == 2 and report.get('policy') == 'separated-v2'
                 and report.get('suite') in allowed, 'Acceptance policy/lane differs')
         require(report.get('status') in ('passed','reused') and not report.get('not_run'), 'Incomplete acceptance attempt')
+        if lane == 'full-headless' and 'headless_profiles' in spec:
+            require(report.get('planning_revision') == spec['planning_revision'], 'Headless planning revision differs')
         if report['status']=='reused':
             original=read(locked(report['execution_report'],base))
             require(report.get('reuse_reason') and report.get('original_status')==original.get('status'), 'Missing retained execution identity')
@@ -154,6 +183,8 @@ def validate_reports(paths, lane, source_sha, hashes, complete=True, catalog_con
         input_path=locked(report['inputs'],base);frozen=read(input_path)
         require(frozen.get('schema')==2 and frozen.get('policy')=='separated-v2' and frozen.get('source_sha')==source_sha,
                 'Frozen campaign identity differs')
+        if lane == 'full-headless' and 'headless_profiles' in spec:
+            require(frozen.get('catalog_sha256') == report['catalog']['sha256'], 'Frozen headless catalog differs')
         require('gametest' not in frozen.get('artifacts', {}) or 'gametest' in hashes,
                 'Frozen campaign requires its GameTest companion identity')
         if 'gametest' not in frozen.get('artifacts', {}):
@@ -177,12 +208,18 @@ def validate_reports(paths, lane, source_sha, hashes, complete=True, catalog_con
                 if name=='workshop-integrated' and job['backend']=='NATIVE':require(previous_catalog['workshop_views']==current['workshop_views'],'Selected Workshop views differ')
             selected=expected[identity]
             if report['suite']=='graphical-gallery':selected=dict(selected,gallery=True)
-            validate_job(job, selected, report, base); seen.add(identity)
+            validate_job(job, selected, report, base, spec); seen.add(identity)
+            for role in set(selected.get('optional_mods', [])) & external_mods(spec).keys():
+                require(frozen['artifacts'][role]['sha256']==report['artifact_hashes'][role],
+                        'Frozen optional input differs: '+role)
+                locked(frozen['artifacts'][role],input_path.parent)
             if job.get('operation') == 'export':exports[identity.removesuffix('/export')] = job['archive']['sha256']
             if job.get('group', '').endswith('-extracted'):
                 extraction=read(locked(job['extraction'],base))
                 prefix=identity.rsplit('/',1)[0]
                 require(extraction['jar']['sha256']==hashes['runtime'],'Reopened another runtime world')
+                if 'world_profile' in selected:
+                    require(extraction['profile'] == world_edition(selected), 'Reopened another world edition')
                 reopens.append((prefix,extraction['sha256']))
     for prefix,archive in reopens:require(exports.get(prefix)==archive,'Exact archive reopen lacks its matching export')
     if complete: require(seen == expected.keys(), 'Missing '+lane+' coverage: '+', '.join(sorted(expected.keys()-seen)))
@@ -206,6 +243,10 @@ def continue_headless(previous, inputs_path, output, reason, preparation, enviro
         old=dict(suite='full-headless',policy='separated-v2',source_sha=frozen['source_sha'],
                  artifact_hashes={r:d['sha256'] for r,d in frozen['artifacts'].items()},jobs=[])
     require(old.get('suite')=='full-headless' and old.get('policy')=='separated-v2','Not a versioned headless execution')
+    spec = catalog()
+    if available and 'headless_profiles' in spec:
+        require(old.get('planning_revision') == spec['planning_revision'],
+                'Continue with the original headless catalog or start a fresh campaign')
     require(old['source_sha']==frozen['source_sha'] and all(old['artifact_hashes'].get(r)==frozen['artifacts'][r]['sha256'] for r in tuple(ROLES)+(('gametest',) if 'gametest' in frozen['artifacts'] else ())),'Continuation changed tested artifacts/source')
     import subprocess
     protected=['src','gradle.properties','build.gradle','tools/native','release/artifacts.json','release/optional-artifacts.json']
@@ -224,7 +265,9 @@ def continue_headless(previous, inputs_path, output, reason, preparation, enviro
     require({j['id'] for j in old['jobs']} <= {j['id'] for j in expected},
             'Original report contains jobs outside the selected environment')
     groups={}
-    for job in expected:groups.setdefault(job.get('group',job.get('operation')),[]).append(job)
+    for job in expected:
+        group = job.get('catalog_group', job.get('group', job.get('operation')).removesuffix('-extracted'))
+        groups.setdefault((group, job.get('world_profile')), []).append(job)
     actual={j['id']:j for j in old['jobs']};retained=[];remaining=[]
     for members in groups.values():
         try:

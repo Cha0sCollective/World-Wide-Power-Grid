@@ -20,9 +20,9 @@ ordinary yard; do not build or test a separate BASE yard. Record actual PINOUT
 executions with `stationary_yard_policy: combined-pinout-v1`, a single
 `stationary_yard` descriptor and locked `stationary_yard_acceptance`. The gate
 checks both backends on Windows/Linux, three cold restarts, exact archive
-reopens and the retained real Windows clients. This changes yard coverage only;
-BASE/PINOUT runtime/API installation checks remain separate. The combined yard
-requires CC:Tweaked and Pinout. Previous releases keep their original editions.
+reopens and the retained real Windows clients. The combined yard requires
+CC:Tweaked and Pinout and is covered by the headless ADDONS selection. Its
+graphical edition remains PINOUT. Previous releases keep their original editions.
 
 Release notes explain the change in plain language, provide the download table,
 and link installation and support guides. They allow at most **three highlights

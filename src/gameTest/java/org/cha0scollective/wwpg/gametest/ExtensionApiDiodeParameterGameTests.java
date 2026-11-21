@@ -29,7 +29,7 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 /** Exercises live PN parameters through the real selected PG backend and both wire systems. */
-@GameTestHolder("wwpg_api")
+@GameTestHolder("wwpg_api_core")
 @PrefixGameTestTemplate(false)
 public final class ExtensionApiDiodeParameterGameTests {
     private static final String PROVIDER = "wwpg:diode_parameter_fixture";
