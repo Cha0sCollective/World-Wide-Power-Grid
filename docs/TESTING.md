@@ -90,6 +90,13 @@ contact removal and an unaffected powered neighbor on Native and Java. The
 server checks do not establish graphical overlays or a real player's client
 session. This namespace is not added to the ordinary full acceptance selection.
 
+`wwpg_cee_transformer_reference` is an opt-in CEE 1.2.0-132 namespace. Its four
+checks compare signed node samples with stock CEE's 23 kV / 4.6-ratio fixture:
+floating secondary, primary and secondary physical grounding, ground removal,
+native PG wire bonding/removal, and cascaded isolated windings. Run it on both
+solvers alongside the contact regressions. It checks actual solver samples,
+not a relabelled tooltip, and does not establish graphical acceptance.
+
 ## Freeze once and run focused checks
 
 `tools/ci_prepare.py` builds one canonical runtime/API set, independently builds

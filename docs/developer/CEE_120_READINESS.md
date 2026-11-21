@@ -3,7 +3,49 @@
 The preparation branch `dev/cee-120-readiness` integrates WWPG **0.2.11**,
 main commit `ae25c2a42bf416f7d2899fb5b6a8e3263c611a8f` (release source
 `96e475d2ec476a90c14a2e1ed48a001ef3307e8d`). The current development candidate
-is `0.2.11-dev.cee120.2`, targeting CEE **1.2.0-132** and PG **0.6.2**.
+is `0.2.11-dev.cee120.3`, targeting CEE **1.2.0-132** and PG **0.6.2**.
+
+## Transformer node references: 0.2.11-dev.cee120.3
+
+The reporter's transformer video shows a single-node hover reading alongside
+the separate winding-voltage display. Both are native CEE behavior, but the
+floating node values were different under WWPG: stock CEE 1.1.4 and 1.2.0-132
+gave approximately 0 / 5 kV in the 23 kV, ratio-4.6 fixture, while the published
+`.8` alpha gave 9 / 14 kV on Native and Java. Every case retained the correct
+5 kV winding difference. The previous ratio-only comparison did not establish
+stock-equivalent node references. Fresh stock controls are preserved under
+`local/node-hover-132/stock-132-01` and `stock-114-01`.
+
+CEE 1.2 transformer networks now select a numerical zero separately for each
+conductively connected region. The transformer coupling keeps both windings
+in one solver network without combining their voltage references. Ordinary
+CEE and native PG wires still join those regions. Physical earth takes
+precedence within its own region; it no longer suppresses an isolated winding's
+reference. Existing numerical anchors are excluded from physical-earth detection.
+CEE's native priority and node-hash tie break choose each zero, while the existing
+dynamic-history retention remains in place. Legacy CEE and networks without
+CEE transformer stamps retain their prior selection. Native PG transformer
+couplings retain their existing treatment; this repair targets CEE windings.
+
+On the frozen `.3` player and companion, Native and Java each pass four new
+transformer checks plus all four electrocution checks. Each solver also passes
+32 readiness, lifecycle and solver-safety checks, including signed ratio changes,
+regulators, physical grounds, reference changes, chunk reloads and rejected-solve
+history recovery. The new fixtures cover floating 0 / 5 kV, grounded -5 / 0 kV,
+ground removal, primary-only grounding, native PG bond/removal and cascades.
+All 158 JVM checks pass. Exact artifacts, sources, loaded runtime audits and logs
+are preserved under `local/node-hover-132/fix-02-*`. These 80 focused GameTests
+are new `.3` evidence; they are not full headless or graphical acceptance.
+All 66 focused runner/packaging/catalog checks pass; the catalog classifies 86
+namespaces. A diagnostic companion with only its version requirement adapted
+to `.2` fails all four new transformer checks against the preserved pre-fix
+player, each exposing the former approximately 9 kV reference. Original jars
+and prior evidence remain unchanged. See `fix-verification.json` locally.
+
+Player SHA256:
+`8536f2efcb5b2af88b0b6757c08653ec9b7bb940e15442b5405bf80c550147d4`.
+Companion SHA256:
+`3882a9aeec583375f2fbf707d5bc65e1933aba888d3fc6509be0c86c90b7e4ae`.
 
 ## Electrocution and contact readings: 0.2.11-dev.cee120.2
 

@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### 0.2.11-dev.cee120.3
+
+- Match stock CEE's individual transformer node readings by selecting separate
+  numerical zero references for isolated windings. Physical grounding and native
+  PG wire bonds take precedence; winding voltage and turns ratio remain intact.
+- Add focused floating, grounding/removal, native PG bond and cascade regressions
+  on both solvers. Historical development acceptance keeps its original scope.
+
 ### 0.2.11-dev.cee120.2
 
 - Restore native CEE 1.2 electrocution and stable wire readings while an entity

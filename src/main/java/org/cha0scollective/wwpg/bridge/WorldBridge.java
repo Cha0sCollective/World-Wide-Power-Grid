@@ -639,28 +639,38 @@ public final class WorldBridge {
         var ownCounts = new IdentityHashMap<ElectricalNetwork, Integer>();
         references.values().forEach(g -> ownCounts.merge(g.getNode1().getNetwork(), 1, Integer::sum));
         var priorities = ((CircuitBuilderAccessor) builder).wwpg$groundPriorities();
+        var regions = transformerReferenceIslands();
         var dynamicOwners = new HashSet<String>();
         if (CeeCompatibility.modern()) for (var dynamic : dynamics)
             for (int ordinal : new int[]{dynamic.first, dynamic.second}) {
                 var key = preparedKeys.get(graph.getNode(ordinal).node);
                 if (key != null) dynamicOwners.add(key.owner());
             }
-        var best = new IdentityHashMap<ElectricalNetwork, EndpointKey>();
-        var ranks = new IdentityHashMap<ElectricalNetwork, Integer>();
-        var ownerRanks = new IdentityHashMap<ElectricalNetwork, Map<String, Integer>>();
+        var best = new IdentityHashMap<Object, EndpointKey>();
+        var ranks = new IdentityHashMap<Object, Integer>();
+        var hashes = new IdentityHashMap<Object, Integer>();
+        var ownerRanks = new IdentityHashMap<Object, Map<String, Integer>>();
         for (var n : graph.allNodes()) {
-            if (!priorities.containsKey(n.ordinal)) continue;
             EndpointKey key;
             try { key = preparedKey(n.node); } catch (IllegalArgumentException e) { continue; }
             if (isolated.contains(key)) continue;
             var node = nodes.get(key);
             var network = node == null ? null : node.getNetwork();
-            if (network == null || ((ElectricalNetworkAccessor) network).wwpg$groundCount() > ownCounts.getOrDefault(network, 0)) continue;
+            var region = regions.get(node);
+            if (network == null || (region == null
+                    ? ((ElectricalNetworkAccessor) network).wwpg$groundCount() > ownCounts.getOrDefault(network, 0)
+                    : region.grounded)) continue;
+            if (region == null && !priorities.containsKey(n.ordinal)) continue;
+            Object group = region == null ? network : region;
             int rank = priorities.get(n.ordinal);
-            ownerRanks.computeIfAbsent(network, ignored -> new HashMap<>()).merge(key.owner(), rank, Math::max);
-            var old = best.get(network);
-            if (old == null || rank > ranks.get(network) || rank == ranks.get(network) && key.compareTo(old) < 0) {
-                best.put(network, key); ranks.put(network, rank);
+            ownerRanks.computeIfAbsent(group, ignored -> new HashMap<>()).merge(key.owner(), rank, Math::max);
+            var old = best.get(group);
+            // CEE's dfsAndGround uses priority, then the native node hash.
+            boolean earlier = old != null && (region == null ? key.compareTo(old) < 0
+                    : n.node.hashCode() < hashes.get(group)
+                    || n.node.hashCode() == hashes.get(group) && key.compareTo(old) < 0);
+            if (old == null || rank > ranks.get(group) || rank == ranks.get(group) && earlier) {
+                best.put(group, key); ranks.put(group, rank); hashes.put(group, n.node.hashCode());
             }
         }
         // A preferred zero is a numerical anchor, not a physical earth. CEE
@@ -669,16 +679,17 @@ public final class WorldBridge {
         // the same native default priority (100); moving it would rebuild PG and reject a healthy
         // history frame. New higher-priority devices and physical grounds still
         // replace it. After a merge, retain only one deterministic anchor.
-        var retained = new IdentityHashMap<ElectricalNetwork, EndpointKey>();
+        var retained = new IdentityHashMap<Object, EndpointKey>();
         for (var entry : references.entrySet()) {
             var key = entry.getKey();
             var network = entry.getValue().getNode1().getNetwork();
-            if (!best.containsKey(network) || ranks.get(network) != 100 || !dynamicOwners.contains(key.owner())
+            Object group = regions.containsKey(entry.getValue().getNode1()) ? regions.get(entry.getValue().getNode1()) : network;
+            if (!best.containsKey(group) || ranks.get(group) != 100 || !dynamicOwners.contains(key.owner())
                     || nodes.get(key) != entry.getValue().getNode1()
-                    || !Objects.equals(referencePriorities.get(key), ranks.get(network))
-                    || !Objects.equals(ownerRanks.get(network).get(key.owner()), ranks.get(network))) continue;
-            var old = retained.get(network);
-            if (old == null || key.compareTo(old) < 0) retained.put(network, key);
+                    || !Objects.equals(referencePriorities.get(key), ranks.get(group))
+                    || !Objects.equals(ownerRanks.get(group).get(key.owner()), ranks.get(group))) continue;
+            var old = retained.get(group);
+            if (old == null || key.compareTo(old) < 0) retained.put(group, key);
         }
         best.putAll(retained);
         var wanted = new HashSet<>(best.values());
@@ -693,6 +704,25 @@ public final class WorldBridge {
             referencePriorities.put(key, ranks.get(entry.getKey()));
         }
         recordTopology(previousTopology, false, "references");
+    }
+
+    private Map<org.patryk3211.powergrid.electricity.sim.node.IElectricNode, ReferenceIslands.Region> transformerReferenceIslands() {
+        if (!CeeCompatibility.modern() || transformers.isEmpty()) return Map.of();
+        var windings = new IdentityHashMap<org.patryk3211.powergrid.electricity.sim.node.INode,
+                List<List<org.patryk3211.powergrid.electricity.sim.node.IElectricNode>>>();
+        var networks = Collections.newSetFromMap(new IdentityHashMap<ElectricalNetwork, Boolean>());
+        for (var entry : transformers.entrySet()) {
+            var key = entry.getKey(); var stamp = entry.getValue().element;
+            networks.add(stamp.network());
+            windings.put(stamp.coupling(), List.of(List.of(nodes.get(key.p1), nodes.get(key.p2)),
+                    List.of(nodes.get(key.s1), nodes.get(key.s2))));
+        }
+        var own = Collections.newSetFromMap(new IdentityHashMap<org.patryk3211.powergrid.electricity.sim.AbstractElectricWire, Boolean>());
+        own.addAll(references.values());
+        var result = new IdentityHashMap<org.patryk3211.powergrid.electricity.sim.node.IElectricNode, ReferenceIslands.Region>();
+        for (var network : networks) if (network != null)
+            result.putAll(ReferenceIslands.partition(network, ((ElectricalNetworkAccessor) network).wwpg$wires(), own, windings));
+        return result;
     }
     /** Preferred numerical anchors do not establish a shared physical earth. */
     public boolean hasPhysicalReference(ElectricalNetwork network) {

@@ -2,7 +2,7 @@
 
 WWPG lets stationary equipment from **Create: Electro Energetics (CEE)** and **Power Grid (PG)** share power and wires. You can run mixed factories, use either mod's handheld meters, and control equipment with panels and circuit boards.
 
-**This branch develops `0.2.11-dev.cee120.2` for CEE 1.2.0-132.**
+**This branch develops `0.2.11-dev.cee120.3` for CEE 1.2.0-132.**
 Use a copy of your world for development testing. Full headless and graphical
 acceptance have not been completed for this candidate. WWPG 0.2.11 is the
 stable release for CEE 1.1.4; use its [stable installation guide](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/0.2.11/docs/INSTALL.md)
@@ -20,7 +20,7 @@ Use this development dependency set, with the same mod versions on the server an
 | Create: Electro Energetics | 1.21.1-1.2.0-132 |
 | Power Grid | Minecraft 1.21.1, 0.6.2 |
 | Architectury API | NeoForge 13.0.12 |
-| WWPG | 0.2.11-dev.cee120.2 |
+| WWPG | 0.2.11-dev.cee120.3 |
 
 Power Dock 0.3.0-preview and Sable 2.0.5 are optional for moving connectors.
 The published `.8` alpha's wire-coordinate checks also cover CEE 1.1.3 and 1.1.4; those are
@@ -43,7 +43,7 @@ requires NeoForge 21.1.265 or newer and does not fit this dependency set.
 
 ## Installation
 
-1. Use the development jar `wwpg-0.2.11-dev.cee120.2.jar` supplied for this branch. It has not been published as a release.
+1. Use the development jar `wwpg-0.2.11-dev.cee120.3.jar` supplied for this branch. It has not been published as a release.
 2. Put it and the required dependency jars in the instance's `mods` directory.
 3. Launch once to generate configuration, then stop the game or server.
 4. In `config/powergrid-server.toml`, edit the existing solver settings to the values below. Keep the other PG solver settings at their defaults.
