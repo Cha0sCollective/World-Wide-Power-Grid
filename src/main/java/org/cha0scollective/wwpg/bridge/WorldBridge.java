@@ -1027,6 +1027,17 @@ public final class WorldBridge {
     public void unavailable(ElectricalNetwork network) {
         markUnavailable(network,Unavailability.INITIALIZING);
     }
+    /** Only the current commit may retain contact detection through a known solver warm-up hold. */
+    public boolean initializingContact(SimulationResults sample,Node endpoint) {
+        if(sample!=results||phase!=Phase.COMMIT)return false;
+        EndpointKey key;
+        try { key=preparedKey(endpoint); }
+        catch(IllegalArgumentException unsupported) { return false; }
+        var node=nodes.get(key);
+        return node!=null&&!isolated.contains(key)&&!adapterPreparationFailures.containsKey(endpoint)
+                &&!RestorationCoordinator.paused(node.getNetwork())
+                &&unavailableNetworks.get(node.getNetwork())==Unavailability.INITIALIZING;
+    }
     private void markUnavailable(ElectricalNetwork network,Unavailability reason) {
         // A later initialization hold must never downgrade a real fault.
         if (reason==Unavailability.FAILED || !unavailableNetworks.containsKey(network)) unavailableNetworks.put(network,reason);

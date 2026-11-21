@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### 0.2.11-dev.cee120.2
+
+- Restore native CEE 1.2 electrocution and stable wire readings while an entity
+  stays in contact. Keep the contact's body identity stable and preserve contact
+  detection briefly during solver initialization. Rejected measurements still
+  cannot cause damage; insulation and dielectric protection retain their native behavior.
+- Add focused contact, protection and rejected-solve recovery regressions for
+  both solvers. This development candidate does not claim full acceptance.
+
 ### 0.2.11-dev.cee120.1
 
 - Integrate the 0.2.11 factory-light self-link repair into the CEE 1.2

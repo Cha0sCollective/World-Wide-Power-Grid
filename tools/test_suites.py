@@ -71,7 +71,7 @@ def audit(root=ROOT):
             membership[name] = group
     if set(membership)&spec['special_namespaces'].keys():raise ValueError('Namespace classified as both ordinary and special')
     membership.update(spec['special_namespaces'])
-    roots=['src/main/java','src/gameTest/java','examples/extension-addon/src','examples/cee-addon/src',
+    roots=['src/main/java','src/gameTest/java','src/cee12GameTest/java','examples/extension-addon/src','examples/cee-addon/src',
            'tools/client_acceptance/src','tools/documentation_acceptance/src']
     discovered=set()
     for directory in roots:

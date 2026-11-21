@@ -82,6 +82,14 @@ scale, render interpolation, panel covers, occlusion and live owner replacement.
 They do not establish client frame rate or full moving-factory electrical
 compatibility. Retain separate evidence for checks using the actual Sable mod.
 
+`wwpg_cee_electrocution` is an opt-in CEE 1.2.0-132 namespace. Its four focused
+checks use actual susceptible mobs on energized copper, dielectric protection,
+within-rating insulation, and deliberately rejected solves followed by recovery.
+They check stable contact identity, settled voltage availability, native damage,
+contact removal and an unaffected powered neighbor on Native and Java. The
+server checks do not establish graphical overlays or a real player's client
+session. This namespace is not added to the ordinary full acceptance selection.
+
 ## Freeze once and run focused checks
 
 `tools/ci_prepare.py` builds one canonical runtime/API set, independently builds

@@ -9,7 +9,10 @@
     "CapacitorNumerics",
     "DiodeNumerics",
     "CapacitorSavedHistoryMixin",
-    "ThrottleWheelToolMixin"
+    "ThrottleWheelToolMixin",
+    "ElectrocutionEntryAccessor",
+    "ElectrocutionContactMixin",
+    "ConnectionHazardHistoryMixin"
   ],
   "client": [
     "WirePreviewClientMixin"

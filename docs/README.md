@@ -1,6 +1,6 @@
 # Documentation
 
-This branch develops **0.2.11-dev.cee120.1** for CEE 1.2.0-132. Its
+This branch develops **0.2.11-dev.cee120.2** for CEE 1.2.0-132. Its
 [installation guide](INSTALL.md) lists the development requirements. The
 published [.8 alpha](../release/0.2.10-dev.cee120.8/README.md) is a historical
 snapshot with its original acceptance scope. The remaining equipment guides

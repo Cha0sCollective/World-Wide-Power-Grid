@@ -3,9 +3,54 @@
 The preparation branch `dev/cee-120-readiness` integrates WWPG **0.2.11**,
 main commit `ae25c2a42bf416f7d2899fb5b6a8e3263c611a8f` (release source
 `96e475d2ec476a90c14a2e1ed48a001ef3307e8d`). The current development candidate
-is `0.2.11-dev.cee120.1`, targeting CEE **1.2.0-132** and PG **0.6.2**.
+is `0.2.11-dev.cee120.2`, targeting CEE **1.2.0-132** and PG **0.6.2**.
 
-## 0.2.11 baseline integration
+## Electrocution and contact readings: 0.2.11-dev.cee120.2
+
+CEE's contact builder allocated a new central body node on each build. With
+WWPG's persistent PG networks this repeatedly restarted warm-up. Unavailable
+wire results also cleared native hazard detection, dropping and rediscovering
+the contact before it could settle. Fresh-world probes reproduced an unharmed
+mob and unavailable wire readings on both solvers; stock CEE damaged the mob.
+
+The modern-only contact mixin now reuses the previous contact's central node,
+matching CEE's existing ground and cut-node reuse. Each native connection
+retains its last accepted hazard voltage for at most four game ticks. This
+history is used only during the current bridge commit when every unavailable
+endpoint/cut is known to be initializing. It preserves contact detection, not
+measurement validity or damage. Real failures, isolation and restoration holds
+still clear the hazard; nonfinite results remain unavailable. The history is
+not serialized and has the connection's lifetime. Legacy CEE lacks these new
+mixins and retains its prior hazard policy.
+
+The four `wwpg_cee_electrocution` regressions cover real bare-wire damage,
+stable body identity and settled readings, contact removal, dielectric immunity,
+insulation below its rating, and rejection/no-damage/recovery beside a healthy
+PG circuit. Native and Java both pass. The first parallel test attempt checked
+the whole level's contact map instead of each fixture's mob; that helper failure
+is preserved. It required a companion-only correction, with identical player bytes.
+
+Player SHA256:
+`f5bfc5a9d6301a8d18d9c0f14fa75fc675b4d7915eec08ffd6ad6ade817fdc5a`.
+Companion SHA256:
+`ba88be6a43b19bfcbbef4ffcfaef49cee60884a4c51156a22cc5276d44f5a036`.
+Local evidence and immutable inputs are under `local/electrocution-fix-0211/`.
+The new group passed 4/4 on Native and 4/4 on Java. The surrounding CEE 132
+wiring, coordinate, readiness and solver-safety checks passed 52/52 on Native
+and 39/39 on Java. CEE 1.1.4 passed 28/28 on each solver, and CEE 1.1.3 passed
+28/28 on Java: 183 focused GameTests total. All 156 JVM tests and 66 Python
+runner/packaging/catalog tests passed. The catalog now audits the modern fixture
+source directory as well and classifies 85 namespaces.
+
+The first Native regression wrapper counted two addon-only template namespaces
+as selected tests. Minecraft actually passed all 52 selected checks. The original
+wrapper failure is retained; a separate validation record checks the corrected
+namespace inventory and identical runtime/companion/log hashes without describing
+that execution as a fresh rerun. Subsequent Java and legacy runs are recorded
+separately. See `attempt-02-validated-results.json` for the complete selection.
+These are focused server checks; no graphical or full headless acceptance was run.
+
+## 0.2.11 baseline integration: 0.2.11-dev.cee120.1
 
 The factory-light fix rejects new copper spans between distinct PG connectors
 that resolve to the same native terminal. Existing saved passive spans remain
