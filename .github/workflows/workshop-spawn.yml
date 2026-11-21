@@ -24,6 +24,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
+      - id: catalog
+        name: Read the recommended loader
+        run: python -c 'import json, os; print("loader="+json.load(open("tools/test-suites.json"))["runtime_loader"], file=open(os.environ["GITHUB_OUTPUT"],"a"))'
       - uses: actions/download-artifact@v4
         with:
           name: ci-v2-canonical
@@ -32,22 +35,16 @@ jobs:
           github-token: ${{ github.token }}
       - uses: actions/download-artifact@v4
         with:
-          name: ci-v2-continued-ubuntu-24.04-NATIVE-BASE-21.1.231
-          path: build/ci-v2/portable-continued/ubuntu-24.04-NATIVE-BASE-21.1.231
-          run-id: ${{ inputs.world_run }}
-          github-token: ${{ github.token }}
-      - uses: actions/download-artifact@v4
-        with:
-          name: ci-v2-continued-ubuntu-24.04-NATIVE-PINOUT-21.1.231
-          path: build/ci-v2/portable-continued/ubuntu-24.04-NATIVE-PINOUT-21.1.231
+          name: ci-v2-continued-ubuntu-24.04-NATIVE-ADDONS-${{ steps.catalog.outputs.loader }}
+          path: build/ci-v2/portable-continued/ubuntu-24.04-NATIVE-ADDONS-${{ steps.catalog.outputs.loader }}
           run-id: ${{ inputs.world_run }}
           github-token: ${{ github.token }}
       - name: Freeze metadata-only Workshop corrections once
         run: >-
           python tools/recheck_workshop_spawn.py prepare
           --inputs build/ci-v2/canonical/frozen/inputs.json
-          --base-report build/ci-v2/portable-continued/ubuntu-24.04-NATIVE-BASE-21.1.231/result.json
-          --pinout-report build/ci-v2/portable-continued/ubuntu-24.04-NATIVE-PINOUT-21.1.231/result.json
+          --base-report build/ci-v2/portable-continued/ubuntu-24.04-NATIVE-ADDONS-${{ steps.catalog.outputs.loader }}/result.json
+          --pinout-report build/ci-v2/portable-continued/ubuntu-24.04-NATIVE-ADDONS-${{ steps.catalog.outputs.loader }}/result.json
           --output build/ci-v2/spawn
       - uses: actions/upload-artifact@v4
         with: {name: workshop-spawn-inputs, path: build/ci-v2/spawn/}

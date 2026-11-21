@@ -65,6 +65,21 @@ def compatibilityArtifacts = new groovy.json.JsonSlurper().parse(file('release/c
 def legacyComputerRuntime = neo_version.startsWith('21.1.') && neo_version.split('\\.')[2].toInteger() < 265
 def testProfile = providers.gradleProperty('testProfile').getOrElse('BASE').toUpperCase()
 if (!(testProfile in ['BASE', 'PINOUT'])) throw new GradleException('testProfile must be BASE or PINOUT')
+// The headless catalog selects exact optional inputs per job. Direct Gradle
+// and graphical launches retain the independent BASE/PINOUT runtime profiles.
+def acceptanceMods = providers.gradleProperty('testAcceptanceMods').map { it.tokenize(',') }.getOrNull()
+def acceptanceExternals = ['pinout', 'computercraft', 'gauged', 'power_components']
+def sdkRoles = ['example', 'upstream_example']
+def sdkPaths = [
+    example: providers.gradleProperty('testExampleArtifact').getOrElse('examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar'),
+    upstream_example: providers.gradleProperty('testUpstreamExampleArtifact').getOrElse('examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar')
+]
+def sdkRuntime = acceptanceMods != null ? sdkRoles.intersect(acceptanceMods) :
+        (providers.gradleProperty('testApiAddon').getOrElse('false') == 'true' ? sdkRoles : [])
+if (acceptanceMods != null && (!((acceptanceExternals + sdkRoles).containsAll(acceptanceMods))
+        || acceptanceMods.toSet().size() != acceptanceMods.size()
+        || ['pinout', 'computercraft'].intersect(acceptanceMods).size() != (testProfile == 'PINOUT' ? 2 : 0)))
+    throw new GradleException('Invalid frozen optional installation for ' + testProfile)
 configurations { pgNativeReference; upstreamArtifacts; optionalReference }
 
 neoForge {
@@ -116,7 +131,7 @@ dependencies {
         def minimum = it.role == 'computercraft' ? compatibilityArtifacts.computercraft.coordinate : it.coordinate
         compileOnly(minimum) { transitive = false }
         def runtime = legacyComputerRuntime && it.role == 'computercraft' ? minimum : it.coordinate
-        if (testProfile == 'PINOUT') runtimeOnly(runtime) { transitive = false }
+        if (testProfile == 'PINOUT' && acceptanceMods == null) runtimeOnly(runtime) { transitive = false }
     }
     releaseArtifacts.artifacts.findAll { it.role != 'pg_native_reference' }.each {
         upstreamArtifacts(it.coordinate) { transitive = false }
@@ -131,7 +146,7 @@ dependencies {
     compileOnly('maven.modrinth:qYJdIoAx:KWxEmmON') { transitive = false }
     runtimeOnly('maven.modrinth:qYJdIoAx:ZMfRgLy5') { transitive = false }
     compileOnly('curse.maven:create-power-components-1659527:9031604') { transitive = false }
-    if (providers.gradleProperty('testCircuit').getOrElse('') in ['fused-latch', 'relay-heater', 'quiet-heater']) {
+    if (acceptanceMods == null && providers.gradleProperty('testCircuit').getOrElse('') in ['fused-latch', 'relay-heater', 'quiet-heater']) {
         runtimeOnly('curse.maven:create-power-components-1659527:9031604') { transitive = false }
     }
     implementation('curse.maven:power-grid-1321420:8880715') { transitive = false }
@@ -154,9 +169,13 @@ dependencies {
     testRuntimeOnly 'org.ejml:ejml-ddense:0.44.0'
     testRuntimeOnly 'org.ejml:ejml-dsparse:0.44.0'
     testRuntimeOnly 'net.neoforged:bus:8.0.5'
-    if (providers.gradleProperty('testApiAddon').getOrElse('false') == 'true') {
-        runtimeOnly files(providers.gradleProperty('testExampleArtifact').getOrElse('examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar'))
-        runtimeOnly files(providers.gradleProperty('testUpstreamExampleArtifact').getOrElse('examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar'))
+    sdkRuntime.each { role -> runtimeOnly files(sdkPaths[role]) }
+    if (acceptanceMods != null) {
+        acceptanceExternals.intersect(acceptanceMods).each { role ->
+            def jar = file(providers.gradleProperty('testAcceptanceJar.' + role).get())
+            if (!jar.isFile()) throw new GradleException('Missing frozen optional artifact: ' + role)
+            runtimeOnly files(jar)
+        }
     }
 }
 
@@ -189,7 +208,7 @@ tasks.named('processGameTestResources') {
     from('release') { include 'artifacts.json', 'optional-artifacts.json', 'content-matrix.json', '0.1.0-beta.5/content-matrix.json', '0.1.0-beta.5/registry-inventory.json'; into 'data/wwpg/release' }
     ['wwpg_audit_generator', 'wwpg_audit_cee', 'wwpg_audit_endpoints', 'wwpg_audit_meter', 'wwpg_audit_config', 'wwpg_tree_scope', 'wwpg_cee_state_geometry', 'wwpg_tree_budget', 'wwpg_tree_restore', 'wwpg_loading', 'wwpg_motor_restoration', 'wwpg_matrix_ownership', 'wwpg_board_startup', 'wwpg_cee_preparation',
      'wwpg_solver_safety', 'wwpg_native_guard', 'wwpg_unload', 'wwpg_contactors', 'wwpg_meter_sampling', 'wwpg_cee_electrocution', 'wwpg_cee_transformer_reference',
-     'wwpg_loader_installation', 'wwpg_loader_addons', 'wwpg_addon_safety', 'wwpg_addon_native_guard',
+     'wwpg_loader_installation', 'wwpg_loader_addons', 'wwpg_addon_safety', 'wwpg_addon_native_guard', 'wwpg_api_core',
      'wwpg_cio', 'wwpg_cio_upgrade', 'wwpg_cio_guard', 'wwpg_cio_transitions', 'wwpg_sable_targeting', 'wwpg_wire_positions',
      'wwpg_generator_timing'].each { namespace ->
         from('src/gameTest/resources/data/wwpg/structure/empty.nbt') { into "data/${namespace}/structure" }
@@ -463,12 +482,11 @@ tasks.register('runPackagedGameTestServer', JavaExec) {
                 phase: providers.gradleProperty('restartPhase').getOrElse('SETUP'), started: stamp,
                 namespaces: providers.gradleProperty('testNamespaces').getOrElse('default')]
         if (providers.gradleProperty('testCircuit').isPresent()) proof.circuit = providers.gradleProperty('testCircuit').get()
-        if(providers.gradleProperty('testApiAddon').getOrElse('false')=='true') {
+        if (!sdkRuntime.isEmpty()) {
             proof.addon_artifacts=[:]
-            [example:providers.gradleProperty('testExampleArtifact').getOrElse('examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar'),
-             upstream_example:providers.gradleProperty('testUpstreamExampleArtifact').getOrElse('examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar')].each { role,path ->
-                def addon=file(path)
-                if(!addon.isFile())throw new GradleException("Missing independent API example: ${path}")
+            sdkRuntime.each { role ->
+                def addon=file(sdkPaths[role])
+                if(!addon.isFile())throw new GradleException("Missing independent API example: ${addon}")
                 proof.addon_artifacts[role]=[artifact:addon.name,
                     sha256:java.security.MessageDigest.getInstance('SHA-256').digest(addon.bytes).encodeHex().toString()]
             }

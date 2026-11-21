@@ -75,8 +75,10 @@ def prepare(inputs,base_reports,output):
         index=s.read(index_path)
         if index['status']!='passed':raise ValueError('Original environment has not passed')
         paths=[evidence.locked(item,s.ROOT) for item in index['reports']]
-        evidence.validate_reports(paths,'full-headless',frozen['source_sha'],{r:frozen['artifacts'][r]['sha256'] for r in s.ROLES},complete=False)
-        rows=[job for path in paths for job in s.read(path)['jobs'] if job.get('operation')=='export' and job['world']=='workshop' and job['profile']==profile]
+        evidence.validate_reports(paths,'full-headless',frozen['source_sha'],
+                                  {r:item['sha256'] for r,item in frozen['artifacts'].items()},complete=False)
+        rows=[job for path in paths for job in s.read(path)['jobs'] if job.get('operation')=='export'
+              and job['world']=='workshop' and s.world_edition(job)==profile]
         if len(rows)!=1:raise ValueError('No unique completed Workshop export')
         source=evidence.locked(rows[0]['archive'],s.ROOT)
         target=output/'sources'/(profile+'.zip');target.parent.mkdir(exist_ok=True);shutil.copyfile(source,target)
@@ -93,9 +95,10 @@ def prepare(inputs,base_reports,output):
 
 def run(inputs,corrections,output,backend,profile):
     frozen=s.frozen_inputs(inputs);metadata=s.read(corrections)
-    jobs=s.plan('full-headless',backends=[backend],profiles=[profile],loaders=['21.1.231'],platforms=[s.host_platform()])
-    exported=next(j for j in jobs if j.get('operation')=='export' and j['world']=='workshop')
-    reopens=[j for j in jobs if j.get('group')=='workshop-extracted']
+    jobs=s.plan('full-headless',backends=[backend],profiles=['ADDONS'],platforms=[s.host_platform()])
+    workshop=[j for j in jobs if j.get('world')=='workshop' and s.world_edition(j)==profile]
+    exported=next(j for j in workshop if j.get('operation')=='export')
+    reopens=[j for j in workshop if j['group'].endswith('-extracted')]
     # Validate the producer's metadata-only export before any reopen, on the
     # same host/environment that will consume it. This is not a second export.
     correction_path=evidence.locked(metadata['proofs'][profile],s.ROOT)

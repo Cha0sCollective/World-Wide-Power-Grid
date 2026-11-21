@@ -13,10 +13,17 @@ import shutil
 import subprocess
 import sys
 import time
+import urllib.request
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = Path(__file__).with_name('test-suites.json')
 ROLES = ('runtime', 'api', 'cee_api', 'example', 'upstream_example')
+SDK_MODS = {'example': 'wwpg_api_example', 'upstream_example': 'wwpg_api_upstream'}
+PINOUT_MODS = ('pinout', 'computercraft')
+
+
+def external_mods(spec):
+    return {item['role']: item for item in spec.get('loader_compatibility', {}).get('artifacts', [])}
 
 
 def read(path):
@@ -50,6 +57,12 @@ def catalog():
     if value['schema'] != 2 or value['policy'] != 'separated-v2':
         raise ValueError('Unknown test catalog policy')
     for name, cfg in value['groups'].items():
+        if 'headless_profiles' in value:
+            requires = cfg.get('requires', [])
+            if len(set(requires)) != len(requires) or not set(requires) <= external_mods(value).keys() | SDK_MODS.keys():
+                raise ValueError('Unknown or duplicate optional dependencies: '+name)
+            if cfg.get('merge_into') and requires != value['groups'][cfg['merge_into']].get('requires', []):
+                raise ValueError('Merged groups require the same mods: '+name)
         if 'circuits' not in cfg: continue
         members=[g for g in value['groups'].values() if g.get('merge_into')==name]
         if len(cfg['circuits'])<2 or len(set(cfg['circuits']))!=len(cfg['circuits']) \
@@ -88,6 +101,9 @@ def audit(root=ROOT):
 
 def plan(lane, groups=None, backends=None, profiles=None, loaders=None, platforms=None, spec=None):
     spec = spec or catalog()
+    if lane in ('full-headless', 'focused') and 'headless_profiles' in spec:
+        return partitioned_headless(lane, groups, backends, profiles, loaders, platforms, spec)
+    # Historical catalogs retain their recorded BASE/PINOUT matrix.
     backends = backends or spec['backends']; profiles = profiles or spec['profiles']
     loaders = loaders or (spec['loaders'] if lane == 'full-headless' else [spec['loaders'][-1]])
     platforms = platforms or (['windows-latest'] if lane.startswith('graphical') else [host_platform()] if lane != 'full-headless' else spec['platforms'])
@@ -160,6 +176,79 @@ def plan(lane, groups=None, backends=None, profiles=None, loaders=None, platform
     return jobs
 
 
+def partitioned_headless(lane, groups, backends, profiles, loaders, platforms, spec):
+    full = lane == 'full-headless'
+    backends = backends or spec['backends']
+    profiles = profiles or spec['headless_profiles']
+    platforms = platforms or (spec['platforms'] if full else [host_platform()])
+    loader = spec['runtime_loader']
+    if loaders and loaders != [loader]:
+        raise ValueError('Use loader_compatibility.py for other NeoForge versions')
+    for selection, available in ((backends, spec['backends']), (profiles, spec['headless_profiles']),
+                                 (platforms, spec['platforms'])):
+        if len(set(selection)) != len(selection) or not set(selection) <= set(available):
+            raise ValueError('Unknown or repeated headless selection')
+    if full and groups:
+        raise ValueError('Full headless uses the complete catalog; use focused --group or --case')
+    if not full and not groups:
+        raise ValueError('Focused execution requires --group')
+    selected = groups or list(spec['groups'])
+    if not set(selected) <= spec['groups'].keys() or len(set(selected)) != len(selected):
+        raise ValueError('Unknown or repeated headless group')
+    jobs = []
+    for target in platforms:
+        if full and 'NATIVE' in backends and 'BASE' in profiles:
+            jobs.append(dict(id=f'{target}/prepare', lane='headless', operation='prepare', platform=target,
+                             profile='BASE', runtime_profile='BASE', optional_mods=[]))
+        for backend in backends:
+            for profile in profiles:
+                environment = dict(lane='headless', platform=target, loader=loader, backend=backend, profile=profile)
+                prefix = f'{target}/{loader}/{backend}/{profile}'
+                for group in selected:
+                    cfg = spec['groups'][group]
+                    if backend not in cfg.get('backends', spec['backends']) or cfg.get('merge_into') in selected:
+                        continue
+                    for edition in cfg.get('world_profiles', [None]):
+                        runtime_profile = edition or cfg.get('runtime_profile', 'BASE')
+                        mods = sorted(set(cfg.get('requires', [])) | (set(PINOUT_MODS) if runtime_profile == 'PINOUT' else set()))
+                        if profile != ('ADDONS' if mods else 'BASE'):
+                            continue
+                        # The two Workshop editions each have their own saved-world lifecycle.
+                        name = group + '-pinout' if group == 'workshop' and edition == 'PINOUT' else group
+                        extra = dict(world=cfg['export'], world_profile=edition) if edition else {}
+                        task = dict(environment, group=name, catalog_group=group,
+                                    runtime_profile=runtime_profile, optional_mods=mods, **extra)
+                        names = cfg['namespaces'][:]
+                        for part in spec['groups'] if cfg.get('circuits') else selected:
+                            merged = spec['groups'][part]
+                            if merged.get('merge_into') == group and backend in merged.get('backends', spec['backends']):
+                                names += merged['namespaces']
+                        checks = dict(addon=bool(set(mods) & SDK_MODS.keys()))
+                        for key in ('circuit', 'circuits'):
+                            if key in cfg: checks[key] = cfg[key]
+                        phases = cfg['phases'] if full else cfg['phases'][:1]
+                        for number, phase in enumerate(phases):
+                            jobs.append(dict(task, **checks, id=f'{prefix}/{name}/{number}-{phase}', phase=phase,
+                                             namespaces=names+cfg.get('setup_namespaces', []) if phase=='SETUP' else names))
+                        if full and edition:
+                            jobs.append(dict(task, id=f'{prefix}/{name}/export', operation='export'))
+                            for number in range(cfg['reopens']):
+                                jobs.append(dict(task, **checks, id=f'{prefix}/{name}/reopen-{number}',
+                                                 group=name+'-extracted', phase='VERIFY', namespaces=names))
+                if full and profile == 'ADDONS':
+                    jobs.append(dict(environment, id=f'{target}/{backend}/starter', operation='starter',
+                                     runtime_profile='BASE', optional_mods=['starter']))
+                if full and profile == 'BASE':
+                    for reference in ('upstream', 'compatibility'):
+                        jobs.append(dict(environment, id=f'{target}/{loader}/{backend}/reference-{reference}',
+                                         operation='reference', reference=reference, runtime_profile='BASE', optional_mods=[]))
+    return jobs
+
+
+def world_edition(job):
+    return job.get('world_profile', job.get('runtime_profile', job['profile']))
+
+
 def host_platform():
     return 'windows-latest' if os.name == 'nt' else 'ubuntu-24.04'
 
@@ -187,8 +276,8 @@ def frozen_inputs(path):
     return record
 
 
-def freeze(output, source=None):
-    """Freeze already built inputs. This never builds or runs acceptance."""
+def freeze(output, source=None, with_optionals=False):
+    """Freeze built inputs and, when requested, the pinned optional jars."""
     output = Path(output).resolve(); output.mkdir(parents=True, exist_ok=False)
     props = dict(line.split('=', 1) for line in (ROOT/'gradle.properties').read_text().splitlines() if '=' in line)
     version, api = props['mod_version'], props['api_version']
@@ -204,6 +293,14 @@ def freeze(output, source=None):
         target = output / source_path.name
         shutil.copyfile(source_path, target); artifacts[role] = descriptor(target)
         artifacts[role]['path'] = target.name
+    if with_optionals:
+        for role, item in external_mods(catalog()).items():
+            target = output/item['filename']
+            with urllib.request.urlopen(item['url'], timeout=120) as response, target.open('xb') as stream:
+                shutil.copyfileobj(response, stream)
+            if sha(target) != item['sha256']:
+                raise ValueError('Optional artifact checksum differs: '+role)
+            artifacts[role] = dict(descriptor(target), path=target.name, mod_id=item['mod_id'], version=item['version'])
     source = source or subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     write(output/'inputs.json', dict(schema=2, policy='separated-v2', source_sha=source,
         version=version, api_version=api, artifacts=artifacts, catalog_sha256=sha(CATALOG),
@@ -214,11 +311,12 @@ def freeze(output, source=None):
 def command(job, inputs, output):
     wrapper = str(ROOT / ('gradlew.bat' if os.name == 'nt' else 'gradlew'))
     directory = output / job['backend'] / job['profile'] / job.get('group', 'reference')
+    runtime_profile = job.get('runtime_profile', job['profile'])
     if job.get('operation') == 'export':
-        archive = output / f'{job["backend"]}-{job["profile"]}-{job["group"]}.zip'
+        archive = output / f'{job["backend"]}-{world_edition(job)}-{job["world"]}.zip'
         tool = 'export_stationary_yard.py' if job['world'] == 'yard' else 'export_api_workshop.py'
         args = [sys.executable, str(ROOT/'tools'/tool), '--run', str(directory), '--jar', inputs['artifacts']['runtime']['path'],
-                '--profile', job['profile'], '--output', str(archive)]
+                '--profile', world_edition(job), '--output', str(archive)]
         if job['world'] == 'yard': args += ['--target', inputs['version']]
         else: args += ['--backend', job['backend'], '--example', inputs['artifacts']['example']['path'],
                        '--upstream-example', inputs['artifacts']['upstream_example']['path']]
@@ -231,10 +329,19 @@ def command(job, inputs, output):
     tasks = ['createMinecraftArtifacts', task] if job.get('operation') == 'reference' else [task]
     args = [sys.executable, str(ROOT/'tools/run_checked.py'), '--timeout', '600', '--', wrapper, *tasks,
         '-PtestArtifact='+inputs['artifacts']['runtime']['path'], '-PtestBackend='+job['backend'],
-        '-PtestProfile='+job['profile'], '-Pneo_version='+job['loader'],
+        '-PtestProfile='+runtime_profile, '-Pneo_version='+job['loader'],
         '-PtestDirectory='+str(directory), '-x', 'build', '-x', 'jar', '-x', 'test', '--no-daemon']
     if 'gametest' in inputs['artifacts']:
         args += ['-PtestFixtureArtifact='+inputs['artifacts']['gametest']['path']]
+    if 'optional_mods' in job and job.get('operation') != 'reference':
+        args += ['-PtestAcceptanceMods='+','.join(job['optional_mods'])]
+        locked = external_mods(catalog())
+        for role in job['optional_mods']:
+            if role in locked:
+                item = inputs['artifacts'].get(role, {})
+                if item.get('sha256') != locked[role]['sha256'] or item.get('mod_id') != locked[role]['mod_id']:
+                    raise ValueError('Freeze the pinned optional artifact before running: '+role)
+                args += ['-PtestAcceptanceJar.'+role+'='+item['path']]
     if job.get('operation') == 'reference':
         args += ['-PreferenceArtifact='+inputs['artifacts']['reference' if job['reference'] == 'upstream' else 'runtime']['path'],
                  '-PreferenceDirectory='+str(directory)]
@@ -252,16 +359,17 @@ def command(job, inputs, output):
 
 
 def archive_for_reopen(job, inputs, folder):
-    world=job['group'].removesuffix('-extracted')
-    bound=inputs.get('worlds',{}).get(world+'/'+job['profile'])
-    if not bound:return folder/f'{job["backend"]}-{job["profile"]}-{world}.zip'
+    world=job.get('world',job['group'].removesuffix('-extracted'))
+    edition=world_edition(job)
+    bound=inputs.get('worlds',{}).get(world+'/'+edition)
+    if not bound:return folder/f'{job["backend"]}-{edition}-{world}.zip'
     archive=Path(bound['path'])
     if sha(archive)!=bound['sha256'] or archive.stat().st_size!=bound['bytes']:
         raise ValueError('Changed bound world archive')
     return archive
 
 
-def execute(jobs, inputs_path, output, lane, reason=None, preparation=None, command_factory=None):
+def execute(jobs, inputs_path, output, lane, reason=None, preparation=None, command_factory=None, progress=None):
     inputs = frozen_inputs(inputs_path)
     if any(j['platform'] != host_platform() for j in jobs): raise ValueError('Select this machine platform')
     output = Path(output).resolve(); output.mkdir(parents=True, exist_ok=False)
@@ -272,11 +380,21 @@ def execute(jobs, inputs_path, output, lane, reason=None, preparation=None, comm
     report['launcher_source_sha']=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     report['ci']={name:os.environ.get(name) for name in ('GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','GITHUB_SHA','GITHUB_EVENT_NAME')}
     report['complete_suite']=lane!='focused' and {j['id'] for j in jobs}=={j['id'] for j in plan(lane)}
+    if lane == 'full-headless' and 'headless_profiles' in catalog():
+        report['planning_revision'] = catalog()['planning_revision']
+
+    def emit(job=None, status='running'):
+        if progress is None: return
+        with Path(progress).open('x' if status == 'started' else 'a', encoding='utf-8') as stream:
+            stream.write(json.dumps(dict(job=job, status=status, total=len(jobs)))+'\n')
+
     try:
+        emit(status='started')
         for job in jobs:
             frozen_inputs(inputs_path)
             record = dict(job, status='not run'); report['jobs'].append(record)
             started = time.monotonic()
+            emit(job['id'])
             folder = output / job.get('loader', 'preparation'); folder.mkdir(exist_ok=True)
             if job.get('operation') == 'prepare':
                 if preparation is None: raise ValueError('Supply the once-per-OS --preparation record')
@@ -322,6 +440,7 @@ def execute(jobs, inputs_path, output, lane, reason=None, preparation=None, comm
                     if job.get('group', '').endswith('-extracted'):
                         record['extraction'] = descriptor(directory/'extracted-yard.json')
             record['seconds'] = round(time.monotonic()-started, 3)
+            emit(job['id'], record['status'])
             if record['status'] != 'passed': raise RuntimeError('Failed '+job['id'])
         frozen_inputs(inputs_path)
         report['status'] = 'passed'
@@ -329,6 +448,7 @@ def execute(jobs, inputs_path, output, lane, reason=None, preparation=None, comm
         report.update(status='failed', failure=f'{type(error).__name__}: {error}')
         if report['jobs'] and report['jobs'][-1]['status'] == 'not run':
             report['jobs'][-1].update(status='failed',seconds=round(time.monotonic()-started,3))
+            emit(report['jobs'][-1]['id'], 'failed')
         raise
     finally:
         report['not_run'] = [j['id'] for j in jobs[len(report['jobs']):]]
@@ -346,6 +466,7 @@ def main():
     continuation.add_argument('--fresh-if-unavailable',action='store_true')
     continuation.add_argument('--plan',action='store_true')
     frozen = sub.add_parser('freeze'); frozen.add_argument('--output', type=Path, required=True); frozen.add_argument('--source-sha')
+    frozen.add_argument('--with-optionals', action='store_true')
     binding=sub.add_parser('bind');binding.add_argument('--inputs',type=Path,required=True);binding.add_argument('--output',type=Path,required=True)
     binding.add_argument('--world',action='append',default=[]);binding.add_argument('--starter',type=Path)
     collect=sub.add_parser('collect-client');collect.add_argument('--case-directory',type=Path,required=True);collect.add_argument('--output',type=Path,required=True)
@@ -357,6 +478,7 @@ def main():
             child.add_argument('--inputs', type=Path, required=True); child.add_argument('--output', type=Path, required=True)
             child.add_argument('--rerun-reason')
             child.add_argument('--preparation', type=Path)
+            child.add_argument('--progress', type=Path)
     args = parser.parse_args()
     if args.action == 'audit': print(json.dumps(audit(), indent=2)); return
     if args.action == 'continue-headless':
@@ -364,7 +486,7 @@ def main():
         result=continue_headless(args.report,args.inputs,args.output,args.rerun_reason,args.preparation,args.environment,args.fresh_if_unavailable,args.plan)
         if args.plan:print(json.dumps(result,indent=2))
         return
-    if args.action == 'freeze': print(freeze(args.output, args.source_sha)); return
+    if args.action == 'freeze': print(freeze(args.output, args.source_sha, args.with_optionals)); return
     if args.action == 'collect-client':
         from graphical_suite import collect_case
         collect_case(args.case_directory,args.output);return
@@ -385,7 +507,7 @@ def main():
     if args.action == 'plan':
         print(json.dumps(dict(lane=args.lane, jobs=jobs, count=len(jobs)), indent=2)); return
     if not jobs: raise ValueError('Empty selection')
-    execute(jobs, args.inputs, args.output, args.lane, args.rerun_reason, args.preparation)
+    execute(jobs, args.inputs, args.output, args.lane, args.rerun_reason, args.preparation, progress=args.progress)
 
 
 if __name__ == '__main__': main()

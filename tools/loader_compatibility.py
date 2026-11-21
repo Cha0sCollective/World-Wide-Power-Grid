@@ -7,7 +7,6 @@ import re
 import shutil
 import subprocess
 import sys
-import urllib.request
 
 import test_suites as suites
 from suite_evidence import locked, require, validate_job
@@ -44,16 +43,18 @@ def plan(loader, backend, installation, platform):
     # Reuse catalog namespace merging, then apply only this probe's explicitly
     # supplied loader. Unverified versions never enter release acceptance.
     base = spec['loaders'][0]
-    selected = suites.plan('focused', groups, [backend], [profile], [base], [platform])
+    selected = suites.plan('focused', groups, [backend], ['BASE'], [base], [platform])
     jobs = [dict(id=f'{platform}/{loader}/{backend}/{installation}/installation/0-SETUP',
                  lane='headless', platform=platform, loader=loader, backend=backend,
                  installation=installation, profile=profile, group='installation', phase='SETUP',
                  namespaces=[cfg['installation_namespace']] + ([cfg['addon_namespace']] if installation=='ADDONS' else []),
                  addon=installation == 'ADDONS')]
     for original in selected:
-        item = dict(original, loader=loader, installation=installation,
+        item = dict(original, loader=loader, profile=profile, installation=installation,
                     addon=installation == 'ADDONS',
-                    id=original['id'].replace('/'+base+'/', '/'+loader+'/').replace('/'+profile+'/', '/'+installation+'/'))
+                    id=original['id'].replace('/'+base+'/', '/'+loader+'/').replace('/BASE/', '/'+installation+'/'))
+        item.pop('runtime_profile', None)
+        item.pop('optional_mods', None)
         if installation == 'BASE':
             item['namespaces'] = [n for n in item['namespaces'] if n not in cfg['addon_only_namespaces']]
         jobs.append(item)
@@ -70,16 +71,9 @@ def prepare(output):
     for name in ('extension-addon', 'cee-addon'):
         checked([sys.executable, ROOT/'tools/run_checked.py', '--timeout', '1200', '--', wrapper,
                  '-p', ROOT/'examples'/name, 'jar', '--no-daemon'], output/(name+'.log'))
-    frozen = suites.freeze(output/'frozen')
+    frozen = suites.freeze(output/'frozen', with_optionals=True)
     inputs = suites.read(frozen)
     cfg = suites.catalog()['loader_compatibility']
-    for item in cfg['artifacts']:
-        target = frozen.parent/item['filename']
-        with urllib.request.urlopen(item['url'], timeout=120) as response, target.open('xb') as stream:
-            shutil.copyfileobj(response, stream)
-        require(suites.sha(target) == item['sha256'], 'Optional download checksum differs: '+item['role'])
-        inputs['artifacts'][item['role']] = dict(suites.descriptor(target), path=target.name,
-                                               mod_id=item['mod_id'], version=item['version'])
     inputs['loader_compatibility'] = dict(policy=POLICY, artifacts=[i['role'] for i in cfg['artifacts']])
     # freeze's original manifest remains immutable.
     result = frozen.parent/'loader-inputs.json'; suites.write(result, inputs)

@@ -15,12 +15,10 @@ class GameTestPackaging(unittest.TestCase):
         methods=0
         for file in (root/'src/gameTest/java').rglob('*.java'):
             methods+=len(re.findall(r'@GameTest\s*(?:\(|\n)',file.read_text(encoding='utf-8')))
-        # Beta.3 retained 435 fixtures in 72 namespaces. MotorRestorationGameTests
-        # adds fan retention and external-drive coverage in one new namespace.
-        # AlternatorUnloadGameTests adds two fixtures in the existing unload namespace.
-        # Updating this snapshot requires accounting for added/retired coverage.
-        self.assertEqual(methods,439)
-        self.assertEqual(suites.audit()['namespaces'],73)
+        # Includes the train, factory-light, Sable, contact and transformer
+        # regressions on main and the two optional-only inventory/targeting splits.
+        self.assertEqual(methods,453)
+        self.assertEqual(suites.audit()['namespaces'],77)
 
     def test_player_sources_do_not_link_test_helpers(self):
         for file in (suites.ROOT/'src/main/java').rglob('*.java'):
@@ -49,7 +47,7 @@ class GameTestPackaging(unittest.TestCase):
 
     def test_packaged_launch_explicitly_selects_frozen_companion(self):
         inputs={'artifacts':{r:{'path':r+'.jar'} for r in (*suites.ROLES,'gametest')}}
-        job=suites.plan('focused',groups=['api'],backends=['JAVA'],profiles=['BASE'])[0]
+        job=suites.plan('focused',groups=['api'],backends=['JAVA'],profiles=['ADDONS'])[0]
         command,_=suites.command(job,inputs,Path('build/packaging-test'))
         self.assertIn('-PtestArtifact=runtime.jar',command)
         self.assertIn('-PtestFixtureArtifact=gametest.jar',command)
