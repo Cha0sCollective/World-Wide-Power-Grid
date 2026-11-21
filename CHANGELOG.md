@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Fix CEE wire contact so energized bare wires can shock entities and readings
+  recover after contact changes. Insulation and dielectric protection still apply.
+
 ## 0.2.11 — 20 November 2026
 
 - Keep CEE wires attached and selectable when Power Grid and Power Dock
