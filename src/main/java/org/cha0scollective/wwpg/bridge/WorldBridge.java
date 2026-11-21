@@ -34,9 +34,12 @@ import org.patryk3211.powergrid.collections.ModdedConfigs;
 import org.patryk3211.powergrid.electricity.GlobalElectricNetworks;
 import org.patryk3211.powergrid.electricity.WorldNetworks;
 import org.patryk3211.powergrid.electricity.base.IElectric;
+import org.patryk3211.powergrid.electricity.sim.AbstractElectricWire;
 import org.patryk3211.powergrid.electricity.sim.ElectricalNetwork;
 import org.patryk3211.powergrid.electricity.sim.node.CurrentSourceWire;
+import org.patryk3211.powergrid.electricity.sim.node.IElectricNode;
 import org.patryk3211.powergrid.electricity.sim.node.OwnedFloatingNode;
+import org.patryk3211.powergrid.electricity.sim.node.TransformerCoupling;
 import org.patryk3211.powergrid.electricity.wire.BlockWireEndpoint;
 
 import java.util.*;
@@ -630,29 +633,65 @@ public final class WorldBridge {
         var ownCounts = new IdentityHashMap<ElectricalNetwork, Integer>();
         references.values().forEach(g -> ownCounts.merge(g.getNode1().getNetwork(), 1, Integer::sum));
         var priorities = ((CircuitBuilderAccessor) builder).wwpg$groundPriorities();
-        var best = new IdentityHashMap<ElectricalNetwork, EndpointKey>();
-        var ranks = new IdentityHashMap<ElectricalNetwork, Integer>();
+        var regions = transformerReferenceIslands();
+        var best = new IdentityHashMap<Object, ReferenceChoice>();
         for (var n : builder.allNodes()) {
-            if (!priorities.containsKey(n.ordinal)) continue;
+            boolean preferred = priorities.containsKey(n.ordinal);
+            if (!preferred && regions.isEmpty()) continue;
             EndpointKey key;
             try { key = preparedKey(n.node); } catch (IllegalArgumentException e) { continue; }
             if (isolated.contains(key)) continue;
             var node = nodes.get(key);
             var network = node == null ? null : node.getNetwork();
-            if (network == null || ((ElectricalNetworkAccessor) network).wwpg$groundCount() > ownCounts.getOrDefault(network, 0)) continue;
-            int rank = priorities.get(n.ordinal);
-            var old = best.get(network);
-            if (old == null || rank > ranks.get(network) || rank == ranks.get(network) && key.compareTo(old) < 0) {
-                best.put(network, key); ranks.put(network, rank);
+            if (network == null) continue;
+            var region = regions.get(node);
+            if (region == null) {
+                if (!preferred || ((ElectricalNetworkAccessor) network).wwpg$groundCount() > ownCounts.getOrDefault(network, 0))
+                    continue;
+            } else if (region.grounded) {
+                continue;
             }
+            Object group = region == null ? network : region;
+            int rank = priorities.getOrDefault(n.ordinal, 0);
+            int hash = region == null ? 0 : n.node.hashCode();
+            var old = best.get(group);
+            // Stock CEE breaks equal-priority ties by node hash within each winding region.
+            if (old == null || rank > old.rank || rank == old.rank
+                    && (hash < old.hash || hash == old.hash && key.compareTo(old.key) < 0))
+                best.put(group, new ReferenceChoice(key, rank, hash));
         }
-        var wanted = new HashSet<>(best.values());
+        var wanted = new HashSet<EndpointKey>();
+        best.values().forEach(choice -> wanted.add(choice.key));
         references.entrySet().removeIf(e -> {
             if (wanted.contains(e.getKey())) return false;
             removeGround(e.getValue()); return true;
         });
         for (var key : wanted) references.computeIfAbsent(key, k -> addGround(nodes.get(k), 1000));
         recordTopology(previousTopology, false, "references");
+    }
+
+    private record ReferenceChoice(EndpointKey key, int rank, int hash) {}
+
+    private Map<IElectricNode, ReferenceIslands.Region> transformerReferenceIslands() {
+        if (transformers.isEmpty()) return Map.of();
+        var windings = new IdentityHashMap<TransformerCoupling, List<List<IElectricNode>>>();
+        var networks = Collections.newSetFromMap(new IdentityHashMap<ElectricalNetwork, Boolean>());
+        for (var entry : transformers.entrySet()) {
+            var key = entry.getKey();
+            var stamp = entry.getValue().element;
+            var network = stamp.network();
+            if (network == null) continue;
+            networks.add(network);
+            windings.put(stamp.coupling(), List.of(List.of(nodes.get(key.p1), nodes.get(key.p2)),
+                    List.of(nodes.get(key.s1), nodes.get(key.s2))));
+        }
+        var numericalReferences = Collections.newSetFromMap(new IdentityHashMap<AbstractElectricWire, Boolean>());
+        numericalReferences.addAll(references.values());
+        var regions = new IdentityHashMap<IElectricNode, ReferenceIslands.Region>();
+        for (var network : networks)
+            regions.putAll(ReferenceIslands.partition(network, ((ElectricalNetworkAccessor) network).wwpg$wires(),
+                    numericalReferences, windings));
+        return regions;
     }
     /** Preferred numerical anchors do not establish a shared physical earth. */
     public boolean hasPhysicalReference(ElectricalNetwork network) {

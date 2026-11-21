@@ -4,6 +4,8 @@
 
 - Fix CEE wire contact so energized bare wires can shock entities and readings
   recover after contact changes. Insulation and dielectric protection still apply.
+- Match stock CEE voltage readings on isolated transformer windings while
+  preserving the voltage across each winding and respecting physical grounds.
 
 ## 0.2.11 — 20 November 2026
 
