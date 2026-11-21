@@ -31,5 +31,6 @@ public final class TransformerStamp {
     public double primaryCurrent() { return -coupling.getStateValue(); }
     public double secondaryCurrent() { return pgRatio * coupling.getStateValue(); }
     public ElectricalNetwork network() { return coupling.getNetwork(); }
+    TransformerCoupling coupling() { return coupling; }
     public void remove() { coupling.remove(); }
 }
