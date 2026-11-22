@@ -693,7 +693,9 @@ def package(manifest_path, root, output, release=False):
     entries['manifest.json'] = manifest_path.read_bytes()
     entries['PUBLICATION_STATUS.json'] = json.dumps(dict(schema=1, wwpg_version=VERSION, api_version=API_VERSION,
         publishable=release, state='accepted_release' if release else 'sdk_candidate',
-        message=('Owner-authorized focused-check alpha only; full headless and graphical acceptance are not certified.'
+        message=('Owner-authorized headless-only alpha; full headless acceptance passed. Graphical acceptance is not certified.'
+                 if release and 'alpha_release_exception' in manifest and manifest.get('wwpg_version') == '0.2.12-dev.cee120.1' else
+                 'Owner-authorized focused-check alpha only; full headless and graphical acceptance are not certified.'
                  if release and 'alpha_release_exception' in manifest else
                  'All declared acceptance gates passed.' if release else
                  'Candidate only. API freeze and release acceptance have not been certified.')),

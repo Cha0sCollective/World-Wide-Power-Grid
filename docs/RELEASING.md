@@ -47,6 +47,17 @@ disclosures. Full headless and graphical acceptance remain uncompleted. Example
 worlds retain their historical `.5` identities. This approval applies to this
 exact alpha only; it does not authorize new suites or future-version exceptions.
 
+The owner approved a **headless-only alpha exception** for
+`0.2.12-dev.cee120.1`, exact player SHA256
+`ec4980f544120e39c89002c0ee0cb936ec62194c9685177d2e40022344cc6723`.
+`release_alpha_0212_exception.py` still requires all 286 fresh headless jobs,
+160 passing JVM tests per OS, exact runtime/companion/SDK hashes, actual CEE 132
+and PG 0.6.2 loading, and the exact tested world exports and approved notes.
+Only graphical acceptance is excepted. The publisher states that limitation;
+it does not manufacture client evidence or broaden earlier alpha exceptions.
+This approval applies only to this exact build. See its
+[release record](../release/0.2.12-dev.cee120.1/README.md).
+
 Full-suite runs require an explicit user request, including the end-of-day
 run. During development, check the changed area. A release that changes only
 the runtime's version metadata may reuse preserved passing full acceptance:

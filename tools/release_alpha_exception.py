@@ -1,4 +1,4 @@
-"""Owner-authorized exceptions for two exact CEE 1.2 alphas; never a general bypass."""
+"""Owner-authorized exceptions for exact CEE 1.2 alphas; never a general bypass."""
 import xml.etree.ElementTree as ET
 
 VERSION = '0.2.10-dev.cee120.8'
@@ -11,6 +11,9 @@ CEE = {
 
 
 def record(manifest, root, api):
+    if manifest.get('wwpg_version') == '0.2.12-dev.cee120.1':
+        import release_alpha_0212_exception
+        return release_alpha_0212_exception.record(manifest, root, api)
     if manifest.get('wwpg_version') == '0.2.11-dev.cee120.3':
         import release_alpha_0211_exception
         return release_alpha_0211_exception.record(manifest, root, api)
@@ -31,6 +34,9 @@ def record(manifest, root, api):
 
 
 def validate_presentation(manifest, root, config, api):
+    if manifest.get('wwpg_version') == '0.2.12-dev.cee120.1':
+        import release_alpha_0212_exception
+        return release_alpha_0212_exception.validate_presentation(manifest, root, config, api)
     if manifest.get('wwpg_version') == '0.2.11-dev.cee120.3':
         import release_alpha_0211_exception
         return release_alpha_0211_exception.validate_presentation(manifest, root, config, api)
@@ -42,6 +48,9 @@ def validate_presentation(manifest, root, config, api):
 
 
 def validate(manifest, root, api):
+    if manifest.get('wwpg_version') == '0.2.12-dev.cee120.1':
+        import release_alpha_0212_exception
+        return release_alpha_0212_exception.validate(manifest, root, api)
     if manifest.get('wwpg_version') == '0.2.11-dev.cee120.3':
         import release_alpha_0211_exception
         return release_alpha_0211_exception.validate(manifest, root, api)

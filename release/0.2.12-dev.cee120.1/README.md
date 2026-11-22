@@ -1,9 +1,11 @@
 # Prepared CEE 1.2 alpha: 0.2.12-dev.cee120.1
 
-This is a review preparation, not a published release. The release notes and
-five grouped downloads are being prepared for owner approval. Publication is
-not authorized yet. The normal graphical acceptance gate remains unmet; any
-headless-only alpha exception needs separate approval for this exact build.
+The owner approved the exact release notes and a headless-only alpha exception
+for this build on 22 November 2026, and authorized publication. Full graphical
+acceptance remains uncompleted. The publication receipt will record the actual
+public release and verified five downloads; approval alone is not publication.
+The exception is locked by `release_alpha_0212_exception.py` to the tested
+player, companion, SDK artifacts, 286-job catalog and exact world exports.
 
 Full headless acceptance passed **286/286 jobs** on tested source
 `0cbbc7f7837eec738237a839d5aa16235f0e9561`:

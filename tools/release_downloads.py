@@ -260,7 +260,10 @@ def stage(source, expected_sha, config_path, output):
             yard_note = ('The combined stationary-yard includes all ordinary exhibits and the Pinout station.\n'
                          'It requires CC:Tweaked and CC;CPG: Pinout on the server and every client.\n'
                          if manifest.get('stationary_yard_policy') == 'combined-pinout-v1' else '')
-            alpha_note = (f'These are unchanged historical .5 headless exports, not worlds retested on this {version} alpha.\n'
+            alpha_note = ('These are exact exports tested and reopened in this alpha’s full headless campaign.\n'
+                          'Graphical acceptance has not been run. Test copies only.\n\n'
+                          if 'alpha_release_exception' in manifest and version == '0.2.12-dev.cee120.1' else
+                          f'These are unchanged historical .5 headless exports, not worlds retested on this {version} alpha.\n'
                           'Their inner version labels and original hashes are preserved. Test copies only.\n\n'
                           if 'alpha_release_exception' in manifest else '')
             world_files['START-HERE.md'] = f'''# Example worlds for WWPG {version}
