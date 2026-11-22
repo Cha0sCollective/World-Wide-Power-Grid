@@ -1,5 +1,10 @@
 # Supported stationary content
 
+The prepared `0.2.12-dev.cee120.1` alpha passed all 286 full headless jobs on
+Windows/Linux and both solvers. Graphical acceptance is pending. Its
+[release record](../release/0.2.12-dev.cee120.1/README.md) preserves the exact
+source, artifact hashes and scope; it has not been published yet.
+
 This branch develops **0.2.12-dev.cee120.1** for CEE 1.2.0-132. It integrates
 the stable 0.2.12 fixes, but does not inherit stable acceptance evidence.
 The [development installation guide](INSTALL.md) lists its requirements.

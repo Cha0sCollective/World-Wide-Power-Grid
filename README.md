@@ -9,9 +9,12 @@ installation guide](docs/INSTALL.md). Full acceptance for this new candidate
 has not been run. The published [.8 alpha](release/0.2.10-dev.cee120.8/README.md)
 retains its original bytes and test scope.
 
-The current development candidate is `0.2.12-dev.cee120.1`. It quiets the expected
-warning from WWPG's ideal transformer models. It incorporates the 0.2.12 baseline; its gameplay fixes were already present here. The published alpha remains `0.2.11-dev.cee120.3`;
-the new candidate has not been published or given full acceptance.
+The prepared update is `0.2.12-dev.cee120.1`, aligned with the 0.2.12 baseline.
+It quiets the expected warning from WWPG's intentional ideal transformer models.
+All **286 full headless jobs** passed on Windows/Linux, Native/Java and
+BASE/ADDONS; graphical acceptance is pending. The previous published alpha
+remains `0.2.11-dev.cee120.3` until this update is posted. See the
+[prepared release record](release/0.2.12-dev.cee120.1/README.md).
 
 **[WWPG 0.2.12](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.12)** for Minecraft 1.21.1 and NeoForge. For CEE 1.1.4, follow the [stable installation guide](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/0.2.12/docs/INSTALL.md) for the required mods and settings. Extension API **1.0.0** is unchanged.
 

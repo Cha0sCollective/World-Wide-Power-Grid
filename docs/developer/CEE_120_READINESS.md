@@ -5,6 +5,24 @@ main commit `19b70bdb9f85f957e7d9e4ca0b7def3630577c85` (release source
 `bb7a78f0be2ebd7b43df516a737037389a80a595`). The current development candidate
 is `0.2.12-dev.cee120.1`, targeting CEE **1.2.0-132** and PG **0.6.2**.
 
+## Full headless acceptance: 0.2.12-dev.cee120.1
+
+[Run 45023229639](https://github.com/Cha0sCollective/World-Wide-Power-Grid/actions/runs/45023229639)
+passed **286/286 jobs**, with zero failures or missing jobs, on tested source
+`0cbbc7f7837eec738237a839d5aa16235f0e9561`. Windows/Linux, Native/Java and
+BASE/ADDONS all passed. Each OS passed 160 JVM tests and independently compiled
+the extracted SDK examples and starter. All eight portable reports pass the
+strict combined coverage gate. This is new `.1` evidence, not historical reuse.
+
+The CI player is byte-identical to `build/libs/wwpg-0.2.12-dev.cee120.1.jar`.
+Actual loaded CEE 1.21.1-1.2.0-132, PG 0.6.2, NeoForge 21.1.262, Create 6.0.10
+and Architectury 13.0.12 versions/hashes were verified from original server logs.
+The approved accurate CEE reference remains test-only. Full evidence, original
+downloads, exact world exports/reopens, checksums and the validated cohort are
+preserved under `local/headless-0212-1/`. See its `RESULT.md` and
+`final-verification.json`. No graphical lane was run. Release preparation
+retains this tested source and all original artifact identities.
+
 ## Current full-headless planning
 
 The explicit CEE campaign now follows main's disjoint BASE/ADDONS strategy:
