@@ -1,11 +1,23 @@
-# Prepared CEE 1.2 alpha: 0.2.12-dev.cee120.1
+# Published CEE 1.2 alpha: 0.2.12-dev.cee120.1
 
-The owner approved the exact release notes and a headless-only alpha exception
-for this build on 22 November 2026, and authorized publication. Full graphical
-acceptance remains uncompleted. The publication receipt will record the actual
-public release and verified five downloads; approval alone is not publication.
-The exception is locked by `release_alpha_0212_exception.py` to the tested
-player, companion, SDK artifacts, 286-job catalog and exact world exports.
+[Published alpha prerelease](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.12-dev.cee120.1),
+22 November 2026, with five downloads. The [publication receipt](publication.json)
+verifies the public prerelease, exact tag, approved notes, and independently
+downloaded asset bytes. The previous `.3` alpha and stable 0.2.12 are unchanged.
+
+The owner approved the exact notes and a headless-only alpha exception for
+this build. Graphical acceptance remains uncompleted. The exception retains
+all 286 fresh headless jobs, 160 unit tests per OS, exact SDK/runtime/world
+identities and the graphical disclosure. All 84 focused publication checks pass.
+The [download layout](download-layout.json), [verification manifest](verification.json)
+and [exact-build exception](alpha-exception.json) retain their accepted identities.
+
+The tag points to `2bc4cb62540790c59f1a7ca2bc376eb4dd816261`, which contains the
+working publisher and approved exception. No runtime was rebuilt for publication.
+SDK guides are separately frozen from documentation source `4ad6782`.
+Manifest paths are relative to the extracted verification workspace; the local
+workspace is `local/headless-0212-1/validation/`. This publication receipt is a
+later documentation commit; the published tag and assets remain immutable.
 
 Full headless acceptance passed **286/286 jobs** on tested source
 `0cbbc7f7837eec738237a839d5aa16235f0e9561`:

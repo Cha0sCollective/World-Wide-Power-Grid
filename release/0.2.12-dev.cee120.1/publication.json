@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "state": "published_alpha_prerelease",
+  "version": "0.2.12-dev.cee120.1",
+  "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.12-dev.cee120.1",
+  "release_id": 454492178,
+  "author": "Cha0sArbiter",
+  "published_at": "2026-11-22T14:11:04Z",
+  "tag_source_sha": "2bc4cb62540790c59f1a7ca2bc376eb4dd816261",
+  "tested_runtime_source_sha": "0cbbc7f7837eec738237a839d5aa16235f0e9561",
+  "runtime_sha256": "ec4980f544120e39c89002c0ee0cb936ec62194c9685177d2e40022344cc6723",
+  "accepted_bundle_sha256": "5b474530fd265c29a984fcfc40c2405dd563211846c1093e0b0cdf4f9285ae6f",
+  "approved_notes_sha256": "44db795a480ced3f12eb2817992d7b111e0c2b34ac6c8e697cf3c1010bd49f89",
+  "assets": [
+    {
+      "filename": "wwpg-0.2.12-dev.cee120.1.jar",
+      "sha256": "ec4980f544120e39c89002c0ee0cb936ec62194c9685177d2e40022344cc6723",
+      "bytes": 5224240,
+      "id": 779270777,
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.12-dev.cee120.1/wwpg-0.2.12-dev.cee120.1.jar"
+    },
+    {
+      "filename": "wwpg-0.2.12-dev.cee120.1-example-worlds.zip",
+      "sha256": "a21396830dd0f91aa95fadb9eaebaab5405fc340d5e67c52c9ff83a8b42e6909",
+      "bytes": 2031254,
+      "id": 779270772,
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.12-dev.cee120.1/wwpg-0.2.12-dev.cee120.1-example-worlds.zip"
+    },
+    {
+      "filename": "wwpg-0.2.12-dev.cee120.1-developer-sdk.zip",
+      "sha256": "9c63932173703d79905e0f8b4f19c2aef762329c92771397bfb5a6a969cfaf15",
+      "bytes": 1094204,
+      "id": 779270773,
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.12-dev.cee120.1/wwpg-0.2.12-dev.cee120.1-developer-sdk.zip"
+    },
+    {
+      "filename": "wwpg-0.2.12-dev.cee120.1-verification.zip",
+      "sha256": "5b474530fd265c29a984fcfc40c2405dd563211846c1093e0b0cdf4f9285ae6f",
+      "bytes": 179526155,
+      "id": 779270776,
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.12-dev.cee120.1/wwpg-0.2.12-dev.cee120.1-verification.zip"
+    },
+    {
+      "filename": "wwpg-0.2.12-dev.cee120.1-checksums.txt",
+      "sha256": "b489e13374dbc020a89afa54ab66f6f6797a2fce6716e76558009e367f0ea7f5",
+      "bytes": 422,
+      "id": 779270774,
+      "url": "https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.12-dev.cee120.1/wwpg-0.2.12-dev.cee120.1-checksums.txt"
+    }
+  ],
+  "downloaded_all_five_assets_and_verified_bytes": true,
+  "full_headless_jobs": 286,
+  "jvm_tests_per_os": 160,
+  "graphical_acceptance_completed": false,
+  "owner_approved_headless_only_alpha_exception": true,
+  "previous_releases_unchanged": {
+    "0.2.11-dev.cee120.3": true,
+    "0.2.12": true
+  },
+  "publication_tooling_checks": 84
+}

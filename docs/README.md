@@ -1,11 +1,11 @@
 # Documentation
 
-The prepared `0.2.12-dev.cee120.1` alpha passed all 286 full headless jobs on
+The published `0.2.12-dev.cee120.1` alpha passed all 286 full headless jobs on
 Windows/Linux and both solvers. Graphical acceptance is pending. Its
 [release record](../release/0.2.12-dev.cee120.1/README.md) preserves the exact
-source, artifact hashes and scope; it has not been published yet.
+source, artifact hashes, approved graphical exception and publication receipt.
 
-This branch develops **0.2.12-dev.cee120.1** for CEE 1.2.0-132. The published `.3`
+This branch develops **0.2.12-dev.cee120.1** for CEE 1.2.0-132. The previous `.3`
 [alpha prerelease](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.11-dev.cee120.3) has focused checks only. The
 [installation guide](INSTALL.md) lists the development requirements. The
 published [.8 alpha](../release/0.2.10-dev.cee120.8/README.md) is a historical

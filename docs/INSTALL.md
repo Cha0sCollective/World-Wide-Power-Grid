@@ -2,12 +2,12 @@
 
 WWPG lets stationary equipment from **Create: Electro Energetics (CEE)** and **Power Grid (PG)** share power and wires. You can run mixed factories, use either mod's handheld meters, and control equipment with panels and circuit boards.
 
-This guide targets **`0.2.12-dev.cee120.1`**, the prepared experimental alpha for
+This guide targets **`0.2.12-dev.cee120.1`**, the published experimental alpha for
 CEE **1.2.0-132**. All 286 full headless jobs passed on Windows/Linux and both
 solvers. Graphical acceptance has not been run for this build. Test a copy of
 your world. The [release record](../release/0.2.12-dev.cee120.1/README.md) names
-the exact tested artifacts and scope. The previous published alpha remains
-`0.2.11-dev.cee120.3` until this new prerelease is posted.
+the exact tested artifacts and scope. The previous `0.2.11-dev.cee120.3` alpha remains available with its original
+artifacts and test scope.
 
 WWPG 0.2.12 is the stable release for CEE 1.1.4; use its
 [stable installation guide](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/0.2.12/docs/INSTALL.md)
@@ -31,7 +31,7 @@ Power Dock 0.3.0-preview and Sable 2.0.5 are optional for moving connectors.
 The published `.8` alpha's wire-coordinate checks also cover CEE 1.1.3 and 1.1.4; those are
 additional compatibility observations. See [Version compatibility](VERSION_COMPATIBILITY.md).
 
-The prepared alpha includes fresh Stationary Yard and API Workshop exports
+This alpha includes fresh Stationary Yard and API Workshop exports
 that passed the current headless campaign and exact-archive reopens. Their
 native version labels and bytes are preserved. Graphical play remains unverified.
 
@@ -48,7 +48,7 @@ requires NeoForge 21.1.265 or newer and does not fit this dependency set.
 
 ## Installation
 
-1. When posted, download `wwpg-0.2.12-dev.cee120.1.jar` from the [CEE 1.2 alpha prerelease](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.12-dev.cee120.1). This experimental alpha has full headless acceptance; graphical acceptance is pending.
+1. Download `wwpg-0.2.12-dev.cee120.1.jar` from the [CEE 1.2 alpha prerelease](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.12-dev.cee120.1). This experimental alpha has full headless acceptance; graphical acceptance is pending.
 2. Put it and the required dependency jars in the instance's `mods` directory.
 3. Launch once to generate configuration, then stop the game or server.
 4. In `config/powergrid-server.toml`, edit the existing solver settings to the values below. Keep the other PG solver settings at their defaults.

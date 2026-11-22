@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "scope": "cee120-0212-headless-alpha-1",
+  "wwpg_version": "0.2.12-dev.cee120.1",
+  "source_sha": "2bc4cb62540790c59f1a7ca2bc376eb4dd816261",
+  "runtime_source_sha": "0cbbc7f7837eec738237a839d5aa16235f0e9561",
+  "runtime_sha256": "ec4980f544120e39c89002c0ee0cb936ec62194c9685177d2e40022344cc6723",
+  "gametest_sha256": "3d832f7a951ebc7e65ad9b32f12a398b4a69d29864c84a96c297697425c312d7",
+  "owner_authorization": "those notes look good, i approve the headless-only alpha exception for this exact build, go ahead and publish 0.2.12-dev.cee120.1",
+  "full_headless_acceptance": true,
+  "full_graphical_acceptance": false,
+  "new_graphical_client_run": false,
+  "source_scope": {
+    "path": "alpha-publication-0212-1/source-scope.json",
+    "sha256": "f3e03197f6118cc29b512cea069da9a800d511a39ae9f9a51cc59982dc6618fe",
+    "bytes": 211
+  },
+  "catalog": {
+    "path": "build/ci-v2/portable/ubuntu-24.04-NATIVE-BASE-21.1.262/objects/60b456f93edd27058680820cdfc89b9cb4d5d501ecb702408769749d91918797.json",
+    "sha256": "60b456f93edd27058680820cdfc89b9cb4d5d501ecb702408769749d91918797",
+    "bytes": 16649
+  },
+  "presentation": {
+    "path": "alpha-review-0212-1/presentation.json",
+    "sha256": "f1d3000db02f59b0cfc92b653a39a2e5abb3ea14b04c9ef538d2cce0e0b9e4e7",
+    "bytes": 1086
+  }
+}

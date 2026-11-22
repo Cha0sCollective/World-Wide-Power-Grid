@@ -2,19 +2,17 @@
 
 **WWPG lets Create: Electro Energetics (CEE) and Power Grid (PG) work together in the same stationary factory.** Either mod can power the other's supported equipment using their native wires, controls and tools.
 
-**[CEE 1.2 alpha: 0.2.11-dev.cee120.3](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.11-dev.cee120.3)** targets CEE
-1.2.0-132, restoring stock transformer node references, electrocution and stable readings during wire contact,
-alongside the 0.2.11 baseline fixes. Follow the [development
-installation guide](docs/INSTALL.md). Full acceptance for this new candidate
-has not been run. The published [.8 alpha](release/0.2.10-dev.cee120.8/README.md)
-retains its original bytes and test scope.
-
-The prepared update is `0.2.12-dev.cee120.1`, aligned with the 0.2.12 baseline.
-It quiets the expected warning from WWPG's intentional ideal transformer models.
+**[CEE 1.2 alpha: 0.2.12-dev.cee120.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.12-dev.cee120.1)**
+targets CEE 1.2.0-132 on the WWPG 0.2.12 baseline. It retains the electrocution,
+contact-reading, stock transformer-voltage and wiring fixes, and quiets the
+expected warning for WWPG's intentional ideal transformer models.
 All **286 full headless jobs** passed on Windows/Linux, Native/Java and
-BASE/ADDONS; graphical acceptance is pending. The previous published alpha
-remains `0.2.11-dev.cee120.3` until this update is posted. See the
-[prepared release record](release/0.2.12-dev.cee120.1/README.md).
+BASE/ADDONS. This is an experimental alpha with an owner-approved graphical
+acceptance exception. Follow the [installation guide](docs/INSTALL.md) and
+[publication record](release/0.2.12-dev.cee120.1/README.md).
+Earlier [.3](release/0.2.11-dev.cee120.3/README.md) and
+[.8](release/0.2.10-dev.cee120.8/README.md) alphas retain their original artifacts
+and test scope.
 
 **[WWPG 0.2.12](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.12)** for Minecraft 1.21.1 and NeoForge. For CEE 1.1.4, follow the [stable installation guide](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/0.2.12/docs/INSTALL.md) for the required mods and settings. Extension API **1.0.0** is unchanged.
 

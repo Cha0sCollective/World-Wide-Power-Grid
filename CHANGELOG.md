@@ -1,8 +1,8 @@
 # Changelog
 
-## Unreleased
+## CEE 1.2 development and alpha releases
 
-### 0.2.12-dev.cee120.1
+### [0.2.12-dev.cee120.1](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.12-dev.cee120.1) — 22 November 2026
 
 - Align the explicit CEE 1.2 full-headless plan with main's disjoint BASE/ADDONS
   strategy: 286 planned jobs instead of 398, retaining current regressions,
