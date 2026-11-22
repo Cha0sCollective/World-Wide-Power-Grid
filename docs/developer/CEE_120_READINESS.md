@@ -5,6 +5,30 @@ main commit `19b70bdb9f85f957e7d9e4ca0b7def3630577c85` (release source
 `bb7a78f0be2ebd7b43df516a737037389a80a595`). The current development candidate
 is `0.2.12-dev.cee120.1`, targeting CEE **1.2.0-132** and PG **0.6.2**.
 
+## Current full-headless planning
+
+The explicit CEE campaign now follows main's disjoint BASE/ADDONS strategy:
+**286 planned entries**, 112 fewer than the historical 398-entry matrix.
+It keeps all 258 ordinary baseline entries plus seven CEE groups, each once
+per operating system and solver. The readiness group also includes the four
+contact checks, four winding-reference checks and two constructor-warning
+controls without creating another process. Lifecycle, reference precision,
+optional installations, SDK, exports and exact reopens retain their checks.
+
+The launcher freezes the current version from `gradle.properties` and records
+both player and companion hashes plus the source in a dedicated campaign
+catalog. It verifies that frozen identity on activation instead of requiring
+the old `.5` player. The reviewed CEE 132 hash remains fixed. The old `.5`
+selection is read-only via `plan --historical`; its evidence stays historical.
+
+Focused verification covers selection uniqueness, baseline preservation,
+platform/solver/installation coverage, precision controls, both workflow
+selections and producer/catalog/player/companion/CEE tampering. All **95 focused
+checks pass**. Read-only CLI plans, the historical-catalog equality comparison
+and unchanged player hash are recorded in `local/cee-suite-disjoint/verification.json`.
+No full headless or graphical execution is part of this planning update.
+See [testing](../TESTING.md).
+
 ## Baseline alignment: 0.2.12-dev.cee120.1
 
 The 0.2.12 gameplay changes backport this branch's contact and transformer
@@ -13,8 +37,9 @@ fixtures instead of installing duplicate legacy mixins or fixture classes.
 Player runtime sources, resources and dependency inputs are unchanged from
 `bc90364` (`0.2.11-dev.cee120.4`); only the declared mod version changes in the
 player jar. The merge also incorporates core/optional headless selection and
-updated stable release records. CEE 132 contact/transformer namespaces remain
-explicit focused checks outside ordinary legacy acceptance.
+updated stable release records. At this baseline merge, CEE 132 contact/transformer namespaces remained
+explicit focused checks outside ordinary legacy acceptance; the current CEE
+campaign above now includes them.
 
 The published `.3` alpha and all historical checks below retain their exact
 versions and hashes. This baseline update does not establish full headless or

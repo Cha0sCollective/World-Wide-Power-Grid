@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       cee_development:
-        description: 'Test the exact frozen 0.2.10-dev.cee120.5 player with CEE 1.2.0-132 and the complete development matrix'
+        description: 'Freeze the current CEE 1.2 candidate with CEE 1.2.0-132; disjoint BASE/ADDONS full headless coverage'
         type: boolean
         default: false
       frozen_run:
@@ -34,10 +34,15 @@ jobs:
       - uses: actions/checkout@v4
       - id: matrix
         name: Select only the recommended full-suite loader
+        env:
+          CEE_DEVELOPMENT: ${{ inputs.cee_development }}
         run: |
           python - <<'PY'
           import json, os
-          spec=json.load(open('tools/test-suites.json'))
+          import sys
+          sys.path.insert(0,'tools')
+          import test_suites, cee_headless_campaign
+          spec=cee_headless_campaign.campaign_catalog() if os.environ['CEE_DEVELOPMENT']=='true' else test_suites.catalog()
           matrix=dict(os=spec['platforms'], backend=spec['backends'], profile=spec['headless_profiles'], loader=[spec['runtime_loader']])
           with open(os.environ['GITHUB_OUTPUT'],'a') as out: out.write('matrix='+json.dumps(matrix)+'\n')
           PY

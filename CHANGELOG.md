@@ -4,6 +4,10 @@
 
 ### 0.2.12-dev.cee120.1
 
+- Align the explicit CEE 1.2 full-headless plan with main's disjoint BASE/ADDONS
+  strategy: 286 planned jobs instead of 398, retaining current regressions,
+  lifecycle coverage and frozen runtime identities. Historical `.5` evidence
+  remains separate; this planning update does not run acceptance.
 - Integrate the 0.2.12 baseline and its separated core/optional headless tooling.
   Its electrocution and transformer fixes were already present in this CEE 1.2
   branch; player runtime code and dependency inputs are unchanged from `.4`.

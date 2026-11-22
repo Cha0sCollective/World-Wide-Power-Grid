@@ -244,7 +244,8 @@ def partitioned_headless(lane, groups, backends, profiles, loaders, platforms, s
                 if full and profile == 'BASE':
                     for reference in ('upstream', 'compatibility'):
                         jobs.append(dict(environment, id=f'{target}/{loader}/{backend}/reference-{reference}',
-                                         operation='reference', reference=reference, runtime_profile='BASE', optional_mods=[]))
+                                         operation='reference', reference=reference, runtime_profile='BASE', optional_mods=[],
+                                         **({'reference_control':spec['reference_control']} if 'reference_control' in spec else {})))
     return jobs
 
 

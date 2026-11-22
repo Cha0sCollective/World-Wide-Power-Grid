@@ -192,10 +192,13 @@ class SelectionChecks(unittest.TestCase):
         text=(suites.ROOT/'.github/workflows/build.yml').read_text()
         script=text.split("          python - <<'PY'",1)[1].split('          PY',1)[0]
         with tempfile.TemporaryDirectory(dir=suites.ROOT/'build') as d:
-            output=Path(d)/'matrix.txt'
-            subprocess.run([sys.executable,'-c',textwrap.dedent(script)],cwd=suites.ROOT,
-                env=dict(os.environ,GITHUB_OUTPUT=str(output)),check=True)
-            matrix=json.loads(output.read_text().removeprefix('matrix='))
+            for development in ('false','true'):
+                output=Path(d)/(development+'-matrix.txt')
+                subprocess.run([sys.executable,'-c',textwrap.dedent(script)],cwd=suites.ROOT,
+                    env=dict(os.environ,GITHUB_OUTPUT=str(output),CEE_DEVELOPMENT=development),check=True)
+                matrix=json.loads(output.read_text().removeprefix('matrix='))
+                self.assertEqual(matrix['profile'],['BASE','ADDONS'])
+                self.assertEqual(matrix['loader'],['21.1.262'])
         self.assertEqual(matrix,dict(os=suites.catalog()['platforms'],backend=['NATIVE','JAVA'],
             profile=['BASE','ADDONS'],loader=['21.1.262']))
         props=dict(line.split('=',1) for line in (suites.ROOT/'gradle.properties').read_text().splitlines() if '=' in line)

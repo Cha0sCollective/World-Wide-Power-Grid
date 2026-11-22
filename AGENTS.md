@@ -15,7 +15,8 @@ never relabel old evidence or interrupted runs as fresh passes.
 
 For future release campaigns, freeze the current recommended runtime set before
 running acceptance. Full headless acceptance runs only on that recommended
-loader, across both operating systems, solvers and BASE/PINOUT profiles. Other
+loader, across both operating systems, solvers and disjoint BASE/ADDONS headless
+selections. Graphical acceptance retains BASE/PINOUT editions. Other
 loaders use separately requested focused loading checks, not full acceptance.
 The current recommendation is NeoForge 21.1.262, PG 0.6.2 and CEE 1.1.4;
 compatible optional jars must match that loader. Record actual loaded versions

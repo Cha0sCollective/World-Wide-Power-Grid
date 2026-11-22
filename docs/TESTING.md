@@ -86,12 +86,13 @@ within-rating insulation, and deliberately rejected solves followed by recovery.
 They check stable contact identity, settled voltage availability, native damage,
 contact removal and an unaffected powered neighbor on Native and Java. The
 server checks do not establish graphical overlays or a real player's client
-session. This namespace is not added to the ordinary full acceptance selection.
+session. This namespace remains outside ordinary stable acceptance; the explicit CEE 1.2
+campaign includes it in CEE readiness.
 
 `wwpg_cee_transformer_reference` is an opt-in CEE 1.2.0-132 namespace. Its four
 checks compare signed node samples with stock CEE's 23 kV / 4.6-ratio fixture:
 floating secondary, primary and secondary physical grounding, ground removal,
-native PG wire bonding/removal, and cascaded isolated windings. Run it on both
+native PG wire bonding/removal, and cascaded isolated windings. The explicit CEE 1.2 campaign includes it in CEE readiness on both
 solvers alongside the contact regressions. It checks actual solver samples,
 not a relabelled tooltip, and does not establish graphical acceptance.
 
@@ -205,18 +206,36 @@ separate focused client check; these headless fixtures do not claim that coverag
 
 ## Full headless acceptance
 
-For the historical `.5` campaign, the manual workflow's `cee_development` input
-selects the reviewed CEE 1.2.0-132 runtime and requires the exact frozen
-`0.2.10-dev.cee120.5` player hash. Its separate campaign catalog retains every
-baseline job and adds all CEE development groups and the new fan checks: 398
-jobs across the same eight Windows/Linux, Native/Java and BASE/PINOUT
-environments. This does not change the published recommendation or the default
-342-job plan from that snapshot; this is not the current 258-entry catalog.
-Its original selection is pinned in `tools/legacy/test-suites-cee120-pre-addons.json`.
-Continue it from its original checkout. JVM/SDK compilation retains its minimum contracts; gameplay and
-the SDK starter use the frozen CEE development runtime. No graphical job is
-selected. `tools/cee_headless_campaign.py plan` inspects this selection without
-launching it. A continuation of this campaign must also set `cee_development`.
+On the CEE preparation branch, the manual workflow's `cee_development` input
+freezes the **current candidate** and its matching GameTest companion with CEE
+**1.2.0-132**. It extends main's disjoint BASE/ADDONS strategy: **286 jobs**
+across Windows/Linux and Native/Java, down from the historical 398-job matrix.
+Core CEE checks run once per platform and solver on BASE. Optional integrations,
+SDK examples, the starter and computer-controlled worlds keep their declared
+ADDONS installations. All baseline cold restarts, rejected-solve recovery,
+world exports and exact archive reopens remain.
+
+The 286 entries comprise 272 server-check entries, 12 exports and two OS
+preparation entries. Seven CEE groups add 28 entries to the ordinary 258-entry
+plan. The contact/electrocution, transformer-reference and scoped warning
+regressions share the CEE readiness group, adding no extra process per case.
+The CEE catalog promotes these fixtures only for this explicit campaign; the
+ordinary stable plan and separate graphical selection remain unchanged. CIO,
+real Sable/Power Dock and cross-version cold migration keep their separately
+selected fixtures and dependencies.
+
+`python tools/cee_headless_campaign.py plan` inspects the current selection
+without launching it. `prepare` freezes the actual source, player and companion
+hashes into the campaign; `activate` verifies those files, the original producer
+manifest, optional inputs, catalog and exact CEE hash before any gameplay worker
+runs. JVM/SDK compilation retains minimum contracts. Actual gameplay and the
+starter use the frozen CEE runtime. This tooling update authorizes no suite run.
+
+The old `.5` plan remains available through `plan --historical` and the preserved
+`tools/legacy/test-suites-cee120-pre-addons.json` snapshot. Its 398-job results
+retain their original BASE/PINOUT environments, exact player hash and scope;
+continue that campaign from its original checkout. The current workflow does
+not reinterpret those results as acceptance of the new candidate.
 
 This CEE 1.2 campaign uses the explicitly approved `cee120-residual-1e-16`
 test-only reference control for the independent CEE comparison. Stock CEE's
