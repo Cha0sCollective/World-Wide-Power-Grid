@@ -15,7 +15,7 @@ public final class TransformerStamp {
         // CEE imposes Vprimary = ratio * Vsecondary. PG imposes
         // ratio * Vprimary = Vsecondary, so exchange the winding roles.
         // This also represents CEE's valid zero-ratio regulator position.
-        coupling = TransformerCoupling.create(pgRatio, s1, s2, p1, p2);
+        coupling = OwnedTransformerCouplings.create(pgRatio, s1, s2, p1, p2);
         network.addNode(coupling);
     }
     public void update(double ceeRatio) {

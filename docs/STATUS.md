@@ -1,6 +1,6 @@
 # Current status
 
-This branch develops **0.2.11-dev.cee120.3** for CEE 1.2.0-132. It integrates
+This branch develops **0.2.11-dev.cee120.4** for CEE 1.2.0-132. It integrates
 the stable 0.2.11 fixes, but does not inherit stable acceptance evidence.
 The [development installation guide](INSTALL.md) lists its requirements.
 The [.3 alpha prerelease](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.11-dev.cee120.3) uses the exact jar that passed 40 focused server checks per solver; full headless and graphical acceptance remain uncompleted.

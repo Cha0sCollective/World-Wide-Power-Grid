@@ -2,6 +2,7 @@ package org.cha0scollective.wwpg.extension;
 
 import org.cha0scollective.wwpg.api.*;
 import org.cha0scollective.wwpg.bridge.PropertyCurrentSourceWire;
+import org.cha0scollective.wwpg.bridge.OwnedTransformerCouplings;
 import org.cha0scollective.wwpg.mixin.PnJunctionParametersAccessor;
 import org.patryk3211.powergrid.electricity.sim.ElectricalNetwork;
 import org.patryk3211.powergrid.electricity.sim.node.*;
@@ -34,7 +35,7 @@ final class ApiElement {
             case ElectricalModel.AcVoltageSource ignored -> voltage = new VoltageSourceCoupling(positive, negative, 0f);
             case ElectricalModel.Diode d -> diode = new PNJunctionWire(d.saturationCurrentAmps(), d.seriesResistanceOhms(),
                     d.temperatureCelsius(), d.idealityFactor(), positive, negative);
-            case ElectricalModel.Transformer t -> transformer = TransformerCoupling.create((float)t.ratio(), positive, negative,
+            case ElectricalModel.Transformer t -> transformer = OwnedTransformerCouplings.create((float)t.ratio(), positive, negative,
                     nodes.get(t.secondaryPositiveNode()), nodes.get(t.secondaryNegativeNode()));
             case ElectricalModel.ControlledVoltageSource c -> controlled = new ControlCoupling(positive, negative,
                     nodes.get(c.controlPositiveNode()), nodes.get(c.controlNegativeNode()), c.gain(), false);

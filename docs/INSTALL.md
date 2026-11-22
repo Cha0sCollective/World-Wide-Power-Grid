@@ -2,7 +2,11 @@
 
 WWPG lets stationary equipment from **Create: Electro Energetics (CEE)** and **Power Grid (PG)** share power and wires. You can run mixed factories, use either mod's handheld meters, and control equipment with panels and circuit boards.
 
-**This branch develops `0.2.11-dev.cee120.3` for CEE 1.2.0-132.**
+**The published CEE 1.2 alpha is `0.2.11-dev.cee120.3`, targeting CEE 1.2.0-132.**
+The current unpublished candidate is `0.2.11-dev.cee120.4`, which quiets the
+expected WWPG ideal-transformer warning. The download and installation steps
+below describe the published `.3` alpha; a supplied `.4` test jar uses the same
+upstream versions. Full acceptance has not been run for `.4`.
 Use a copy of your world for development testing. Full headless and graphical
 acceptance have not been completed for this candidate. WWPG 0.2.11 is the
 stable release for CEE 1.1.4; use its [stable installation guide](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/0.2.11/docs/INSTALL.md)

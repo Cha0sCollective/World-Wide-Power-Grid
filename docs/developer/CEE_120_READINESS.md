@@ -3,7 +3,40 @@
 The preparation branch `dev/cee-120-readiness` integrates WWPG **0.2.11**,
 main commit `ae25c2a42bf416f7d2899fb5b6a8e3263c611a8f` (release source
 `96e475d2ec476a90c14a2e1ed48a001ef3307e8d`). The current development candidate
-is `0.2.11-dev.cee120.3`, targeting CEE **1.2.0-132** and PG **0.6.2**.
+is `0.2.11-dev.cee120.4`, targeting CEE **1.2.0-132** and PG **0.6.2**.
+
+## Intentional ideal-transformer logging: 0.2.11-dev.cee120.4
+
+PG 0.6.2 warns in its transformer coupling constructor when internal resistance
+is zero. WWPG's CEE and extension API models intentionally use this ideal coupling;
+CEE winding losses remain separate branches. A scoped factory now marks only
+those constructor calls. A mixin skips only that exact warning within the scope,
+leaving foreign PG constructions and other warning messages untouched. A finally
+block restores the constructing thread's prior state on success or exception.
+Resistance, equations, public API classes and persistent state remain unchanged.
+
+The opt-in `wwpg_transformer_logging` namespace exercises both real WWPG caller
+paths, verifies zero internal resistance, and requires foreign ideal models to
+retain their warning, including after failed construction. JVM checks also
+cover construction context cleanup and thread isolation. Local frozen test
+records are under `local/transformer-warning/fix/`. Published `.3` artifacts and
+their focused-only release exception retain their original bytes and scope;
+`.4` is an unpublished candidate with no full acceptance claim.
+
+On CEE 132 / PG 0.6.2, Native and Java each pass ten constructor-logging,
+transformer-reference and electrocution checks, plus the three unchanged
+replacement/regulator/actual-chunk-reentry diagnostic fixtures. The latter
+produce zero generic warnings even when four or three separate coupling
+lifetimes are expected. The constructor controls retain two intentional foreign
+warnings per process. All 11 selected JVM and 66 packaging/runner/catalog checks
+pass; the catalog classifies 87 namespaces. Sources, runtime audits, logs and
+the 26 focused server outcomes are verified in
+`local/transformer-warning/fix/verification.json`.
+
+Player SHA256:
+`3a8e4de6ac21dcbbc3638242cbfd0e1d62071c08e6cd1a3617673324e91c8cee`.
+Companion SHA256:
+`fbfca5f91aa848dbc8ad23481c04e8f14fe807b748d32a911307c479ea582eff`.
 
 ## Transformer node references: 0.2.11-dev.cee120.3
 

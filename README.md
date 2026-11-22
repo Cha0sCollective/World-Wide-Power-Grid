@@ -9,6 +9,10 @@ installation guide](docs/INSTALL.md). Full acceptance for this new candidate
 has not been run. The published [.8 alpha](release/0.2.10-dev.cee120.8/README.md)
 retains its original bytes and test scope.
 
+The current development candidate is `0.2.11-dev.cee120.4`. It quiets the expected
+warning from WWPG's ideal transformer models. The published alpha remains `.3`;
+the new candidate has not been published or given full acceptance.
+
 **[WWPG 0.2.11 stable](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.11)**
 uses CEE 1.1.4. Follow its [stable installation guide](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/0.2.11/docs/INSTALL.md).
 Extension API **1.0.0** is unchanged.

@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### 0.2.11-dev.cee120.4
+
+- Silence Power Grid's generic zero-resistance warning only while WWPG creates
+  its intentional ideal CEE/API transformer couplings. Other callers retain the
+  upstream warning; winding resistance, equations and solver behavior are unchanged.
+- Add actual constructor logging controls, including failure cleanup and a
+  foreign-coupling negative control. Published `.3` downloads remain unchanged.
+
 ### 0.2.11-dev.cee120.3
 
 - Match stock CEE's individual transformer node readings by selecting separate

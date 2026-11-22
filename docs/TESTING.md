@@ -97,6 +97,12 @@ native PG wire bonding/removal, and cascaded isolated windings. Run it on both
 solvers alongside the contact regressions. It checks actual solver samples,
 not a relabelled tooltip, and does not establish graphical acceptance.
 
+`wwpg_transformer_logging` checks the actual transformed PG constructor on both
+solvers. WWPG's CEE and extension API couplings retain zero internal resistance
+and produce no generic warning. A foreign ideal coupling must still warn, and
+an invalid WWPG constructor must leave the next foreign warning intact. Run this
+focused namespace when changing the scoped factory or constructor hook.
+
 ## Freeze once and run focused checks
 
 `tools/ci_prepare.py` builds one canonical runtime/API set, independently builds
