@@ -47,7 +47,7 @@ class GameTestPackaging(unittest.TestCase):
 
     def test_packaged_launch_explicitly_selects_frozen_companion(self):
         inputs={'artifacts':{r:{'path':r+'.jar'} for r in (*suites.ROLES,'gametest')}}
-        job=suites.plan('focused',groups=['api'],backends=['JAVA'],profiles=['BASE'])[0]
+        job=suites.plan('focused',groups=['api'],backends=['JAVA'],profiles=['ADDONS'])[0]
         command,_=suites.command(job,inputs,Path('build/packaging-test'))
         self.assertIn('-PtestArtifact=runtime.jar',command)
         self.assertIn('-PtestFixtureArtifact=gametest.jar',command)

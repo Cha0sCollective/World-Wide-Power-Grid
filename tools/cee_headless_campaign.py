@@ -17,9 +17,10 @@ CEE_SHA256='71916b60d3eb000b2b766b410e6dc5af58dbf3f1ff7da40080f3ee8d950393d7'
 
 
 def campaign_catalog():
+    # Preserve the historical .5 selection independently of later runner policy.
     # The published recommendation remains unchanged. This opt-in campaign
     # promotes every CEE development regression into its own full matrix.
-    spec=copy.deepcopy(suites.read(ROOT/'tools/test-suites.json'))
+    spec=copy.deepcopy(suites.read(ROOT/'tools/legacy/test-suites-cee120-pre-addons.json'))
     spec['recommended_runtime']['electroenergetics']=CEE_VERSION
     for cfg in spec['groups'].values():cfg.pop('focused_only',None)
     spec['groups']['cee-fans']={'namespaces':['wwpg_cee_fans'],'phases':['SETUP']}

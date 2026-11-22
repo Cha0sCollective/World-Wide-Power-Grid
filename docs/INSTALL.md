@@ -3,13 +3,13 @@
 WWPG lets stationary equipment from **Create: Electro Energetics (CEE)** and **Power Grid (PG)** share power and wires. You can run mixed factories, use either mod's handheld meters, and control equipment with panels and circuit boards.
 
 **The published CEE 1.2 alpha is `0.2.11-dev.cee120.3`, targeting CEE 1.2.0-132.**
-The current unpublished candidate is `0.2.11-dev.cee120.4`, which quiets the
+The current unpublished candidate is `0.2.12-dev.cee120.1`, which quiets the
 expected WWPG ideal-transformer warning. The download and installation steps
-below describe the published `.3` alpha; a supplied `.4` test jar uses the same
-upstream versions. Full acceptance has not been run for `.4`.
+below describe the published `.3` alpha; a supplied `0.2.12-dev.cee120.1` test jar uses the same
+upstream versions. Full acceptance has not been run for this candidate.
 Use a copy of your world for development testing. Full headless and graphical
-acceptance have not been completed for this candidate. WWPG 0.2.11 is the
-stable release for CEE 1.1.4; use its [stable installation guide](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/0.2.11/docs/INSTALL.md)
+acceptance have not been completed for this candidate. WWPG 0.2.12 is the
+stable release for CEE 1.1.4; use its [stable installation guide](https://github.com/Cha0sCollective/World-Wide-Power-Grid/blob/0.2.12/docs/INSTALL.md)
 for ordinary play. See [supported content](SUPPORT.md).
 
 ## Required versions
@@ -99,7 +99,7 @@ and other CEE controls alone. Put the tool away to operate those controls normal
 
 ## Upgrading an existing world
 
-Stop the game or server, back up your world, and replace the older WWPG jar on the server and every client. Keep only one WWPG gameplay jar in `mods`. Ordinary play does not need the separate `-gametests.jar` companion from the verification bundle. Use the listed solver settings and matching dependency versions on the server and clients. Existing 0.2.5, 0.2.4, 0.2.3, 0.1.0-beta.5, 0.2.2-beta.4, 0.2.2, 0.2.0, 0.2.1 and 0.2.2-alpha.1 worlds remain compatible with 0.2.11; you do not need to download them again.
+Stop the game or server, back up your world, and replace the older WWPG jar on the server and every client. Keep only one WWPG gameplay jar in `mods`. Ordinary play does not need the separate `-gametests.jar` companion from the verification bundle. Use the listed solver settings and matching dependency versions on the server and clients. Existing 0.2.5, 0.2.4, 0.2.3, 0.1.0-beta.5, 0.2.2-beta.4, 0.2.2, 0.2.0, 0.2.1 and 0.2.2-alpha.1 worlds remain compatible with 0.2.12; you do not need to download them again.
 
 An update cannot restore wires or charge that an older version already lost and saved. The original beta.1 example also has an underpowered heater; use the current Stationary Yard or revised small example for a working burner demonstration.
 
@@ -116,7 +116,7 @@ These diagnostic commands require operator permission level 2:
 
 ## Download a world to try
 
-Download the [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.11/wwpg-0.2.11-example-worlds.zip) and extract it. Its `worlds` folder has one combined `wwpg-0.2.11-stationary-yard.zip`. It includes the ordinary yard and the computer stations. Install CC:Tweaked and Pinout on the server and every client before opening it; ordinary factories still do not require those optional mods.
+Download the [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.12/wwpg-0.2.12-example-worlds.zip) and extract it. Its `worlds` folder has one combined `wwpg-0.2.12-stationary-yard.zip`. It includes the ordinary yard and the computer stations. Install CC:Tweaked and Pinout on the server and every client before opening it; ordinary factories still do not require those optional mods.
 
 Extract the named save folder into your instance's `saves` directory. Goggles and tools are at spawn. Try switching the factory lamps, watching the pump and heater, changing transformer voltages, or operating panels and boards. The [station guide](STATIONARY_YARD.md) explains what to do, what you should see and how to reset each example.
 
@@ -131,7 +131,7 @@ Read the [benchmark guide](BENCHMARK_YARD.md) before opening it. Its actual size
 
 ## Extension API Workshop
 
-The [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.11/wwpg-0.2.11-example-worlds.zip) also contains `wwpg-0.2.11-api-workshop.zip` and its Pinout edition in `worlds`. This separate world requires both example add-ons from the bundle's `workshop-mods` folder on the server and every client:
+The [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.12/wwpg-0.2.12-example-worlds.zip) also contains `wwpg-0.2.12-api-workshop.zip` and its Pinout edition in `worlds`. This separate world requires both example add-ons from the bundle's `workshop-mods` folder on the server and every client:
 
 - `wwpg-api-example-1.0.0.jar` — general API machines
 - `wwpg-upstream-api-example-1.0.0.jar` — native panel and board extensions
@@ -174,7 +174,7 @@ In the pinned CEE 1.1.3 tests, the creative battery's AC mode produces a 20 Hz w
 
 ## Optional CIO and Sable compatibility
 
-WWPG 0.2.11 retains support for the verified CIO 0.1.240-experimental inverter. Connect its
+WWPG 0.2.12 retains support for the verified CIO 0.1.240-experimental inverter. Connect its
 labelled DC input and AC outputs with the usual tools; its native controls still
 apply. Redundant CIO grid couplers stay physically saved but do not transfer
 power. Replace them with direct wiring when updating a build; see

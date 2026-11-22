@@ -76,7 +76,7 @@ class CeeCampaignChecks(unittest.TestCase):
     def test_default_recommendation_and_full_suite_remain_unchanged(self):
         original=suites.catalog()
         self.assertEqual(original['recommended_runtime']['electroenergetics'],'1.21.1-1.1.4')
-        self.assertEqual(len(suites.plan('full-headless')),342)
+        self.assertEqual(len(suites.plan('full-headless')),258)
         campaign.campaign_catalog()
         self.assertEqual(suites.catalog(),original)
 
@@ -89,7 +89,8 @@ class CeeCampaignChecks(unittest.TestCase):
         self.assertTrue(all(j['lane']=='headless' for j in jobs))
 
     def test_development_keeps_every_baseline_job_and_all_cee_groups(self):
-        baseline={j['id']:j for j in suites.plan('full-headless')}
+        historical=suites.read(campaign.ROOT/'tools/legacy/test-suites-cee120-pre-addons.json')
+        baseline={j['id']:j for j in suites.plan('full-headless',spec=historical)}
         jobs={j['id']:j for j in suites.plan('full-headless',spec=campaign.campaign_catalog())}
         self.assertTrue(baseline.keys()<=jobs.keys())
         self.assertTrue(all({k:v for k,v in jobs[key].items() if k!='reference_control'}==job for key,job in baseline.items()))
@@ -111,8 +112,12 @@ class CeeCampaignChecks(unittest.TestCase):
         self.assertTrue(all('reference_control' not in j for j in suites.plan('full-headless')))
 
     def test_development_catalog_is_fully_classified(self):
-        with patch.object(suites,'catalog',side_effect=campaign.campaign_catalog):
-            self.assertGreaterEqual(suites.audit()['namespaces'],83)
+        spec=campaign.campaign_catalog()
+        classified={n for cfg in spec['groups'].values() for n in cfg['namespaces']+cfg.get('setup_namespaces',[])}
+        classified.update(spec['special_namespaces'])
+        current=suites.audit()['classified']
+        self.assertTrue(classified <= set(current))
+        self.assertIn('wwpg_cee_fans',spec['groups']['cee-fans']['namespaces'])
 
     def test_another_player_or_version_is_rejected(self):
         inputs={'version':campaign.VERSION,'artifacts':{'runtime':{'sha256':campaign.PLAYER_SHA256}}}

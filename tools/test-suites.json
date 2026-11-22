@@ -109,16 +109,17 @@
       "namespaces": [
         "wwpg_pinout"
       ],
-      "profiles": [
-        "PINOUT"
-      ],
-      "merge_into": "regression",
       "phases": [
         "SETUP",
         "VERIFY",
         "VERIFY",
         "VERIFY"
-      ]
+      ],
+      "requires": [
+        "pinout",
+        "computercraft"
+      ],
+      "runtime_profile": "PINOUT"
     },
     "loading": {
       "namespaces": [
@@ -145,7 +146,6 @@
       "namespaces": [
         "wwpg_unload",
         "wwpg_solver_safety",
-        "wwpg_addon_safety",
         "wwpg_matrix_ownership",
         "wwpg_meter_sampling",
         "wwpg_contactors",
@@ -163,15 +163,13 @@
       "namespaces": [
         "wwpg_generator_timing"
       ],
-      "addon": true,
       "phases": [
         "SETUP"
       ]
     },
     "native-guard": {
       "namespaces": [
-        "wwpg_native_guard",
-        "wwpg_addon_native_guard"
+        "wwpg_native_guard"
       ],
       "backends": [
         "NATIVE"
@@ -192,40 +190,45 @@
       "setup_namespaces": [
         "wwpg_api_ownership"
       ],
-      "addon": true,
       "phases": [
         "SETUP",
         "VERIFY",
         "VERIFY",
         "VERIFY"
+      ],
+      "requires": [
+        "example",
+        "upstream_example"
       ]
     },
     "pause": {
       "namespaces": [
         "wwpg_api_pause"
       ],
-      "addon": true,
       "phases": [
         "SETUP"
+      ],
+      "requires": [
+        "example",
+        "upstream_example"
       ]
     },
     "pending": {
       "namespaces": [
         "wwpg_api_pending_restart"
       ],
-      "addon": true,
       "phases": [
         "SETUP",
         "ARM",
         "VERIFY"
+      ],
+      "requires": [
+        "example"
       ]
     },
     "yard": {
       "namespaces": [
         "wwpg_yard"
-      ],
-      "profiles": [
-        "PINOUT"
       ],
       "phases": [
         "SETUP",
@@ -234,13 +237,19 @@
         "VERIFY"
       ],
       "export": "yard",
-      "reopens": 3
+      "reopens": 3,
+      "requires": [
+        "pinout",
+        "computercraft"
+      ],
+      "world_profiles": [
+        "PINOUT"
+      ]
     },
     "workshop": {
       "namespaces": [
         "wwpg_api_world"
       ],
-      "addon": true,
       "phases": [
         "SETUP",
         "VERIFY",
@@ -248,7 +257,15 @@
         "VERIFY"
       ],
       "export": "workshop",
-      "reopens": 3
+      "reopens": 3,
+      "requires": [
+        "example",
+        "upstream_example"
+      ],
+      "world_profiles": [
+        "BASE",
+        "PINOUT"
+      ]
     },
     "example": {
       "namespaces": [
@@ -366,7 +383,10 @@
       "phases": [
         "SETUP"
       ],
-      "circuit": "fused-latch"
+      "circuit": "fused-latch",
+      "requires": [
+        "power_components"
+      ]
     },
     "circuit-relay-heater": {
       "namespaces": [
@@ -375,7 +395,10 @@
       "phases": [
         "SETUP"
       ],
-      "circuit": "relay-heater"
+      "circuit": "relay-heater",
+      "requires": [
+        "power_components"
+      ]
     },
     "circuit-quiet-heater": {
       "namespaces": [
@@ -384,7 +407,10 @@
       "phases": [
         "SETUP"
       ],
-      "circuit": "quiet-heater"
+      "circuit": "quiet-heater",
+      "requires": [
+        "power_components"
+      ]
     },
     "circuit-source-loss": {
       "namespaces": [
@@ -456,6 +482,56 @@
         "source-switch",
         "regulator"
       ]
+    },
+    "api-core": {
+      "namespaces": [
+        "wwpg_api_core"
+      ],
+      "phases": [
+        "SETUP",
+        "VERIFY",
+        "VERIFY",
+        "VERIFY"
+      ],
+      "merge_into": "regression"
+    },
+    "addon-safety": {
+      "namespaces": [
+        "wwpg_addon_safety"
+      ],
+      "phases": [
+        "SETUP"
+      ],
+      "requires": [
+        "example"
+      ]
+    },
+    "addon-native-guard": {
+      "namespaces": [
+        "wwpg_addon_native_guard"
+      ],
+      "phases": [
+        "SETUP"
+      ],
+      "requires": [
+        "example"
+      ],
+      "backends": [
+        "NATIVE"
+      ],
+      "merge_into": "addon-safety"
+    },
+    "optional-integrations": {
+      "namespaces": [
+        "wwpg_loader_addons"
+      ],
+      "phases": [
+        "SETUP"
+      ],
+      "requires": [
+        "gauged",
+        "power_components"
+      ]
     }
   },
   "special_namespaces": {
@@ -471,7 +547,6 @@
     "wwpg_cio_upgrade": "opt-in CIO upgrade against a disposable original 0.2.5 coupler reproduction world; retains native PG/CEE wires",
     "wwpg_cio_guard": "opt-in negative CIO private-model identity fixture; an unverified model must load without receiving an unsafe adapter",
     "wwpg_loader_installation": "explicit loader compatibility installation inventory and powered optional integration checks",
-    "wwpg_loader_addons": "opt-in loader compatibility powered Gauged Wires and Power Components fixtures",
     "wwpg_doc": "independently extracted SDK starter server and client helpers",
     "wwpg_ci_client": "separate short two-client acceptance helper",
     "wwpg_reference": "upstream and guarded compatibility reference processes",
@@ -607,11 +682,15 @@
     "The dev.102 exposed-pin targeting fix has focused headless player-ray coverage while holding PG wires; prior highlight evidence does not certify its real-client rendering or input."
   ],
   "runtime_loader": "21.1.262",
-  "planning_revision": "recommended-single-loader-v1",
+  "planning_revision": "disjoint-headless-addons-v1",
   "minimum_loader": "21.1.231",
   "recommended_runtime": {
     "neoforge": "21.1.262",
     "powergrid": "0.6.2",
     "electroenergetics": "1.21.1-1.1.4"
-  }
+  },
+  "headless_profiles": [
+    "BASE",
+    "ADDONS"
+  ]
 }

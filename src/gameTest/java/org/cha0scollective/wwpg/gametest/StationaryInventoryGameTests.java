@@ -24,41 +24,49 @@ import com.google.gson.JsonParser;
 @GameTestHolder("wwpg_stationary")
 @PrefixGameTestTemplate(false)
 public final class StationaryInventoryGameTests {
-    private static final Set<String> NAMESPACES = Set.of("electroenergetics", "powergrid", "pinout");
-
     @GameTest(template = "empty", timeoutTicks = 40)
     public static void recordCompletePinnedStationaryInventory(GameTestHelper h) throws Exception {
+        inventory(h, Set.of("electroenergetics", "powergrid"), false);
+    }
+
+    @GameTest(template = "empty", templateNamespace = "wwpg_pinout", timeoutTicks = 40)
+    public static void recordPinnedPinoutInventory(GameTestHelper h) throws Exception {
+        h.assertTrue(ModList.get().isLoaded("pinout"), "Pinout installation is missing");
+        inventory(h, Set.of("pinout"), true);
+    }
+
+    private static void inventory(GameTestHelper h, Set<String> namespaces, boolean pinoutOnly) throws Exception {
         var report = new JsonObject();
         report.addProperty("schema", 1);
         report.addProperty("profile", ModList.get().isLoaded("pinout") ? "PINOUT" : "BASE");
         var rows = new JsonArray();
-        BuiltInRegistries.BLOCK.entrySet().stream().filter(e -> NAMESPACES.contains(e.getKey().location().getNamespace()))
+        BuiltInRegistries.BLOCK.entrySet().stream().filter(e -> namespaces.contains(e.getKey().location().getNamespace()))
                 .sorted(java.util.Comparator.comparing(e -> e.getKey().location().toString())).forEach(e -> {
                     var row = row("block", e.getKey().location().toString(), e.getValue());
                     row.addProperty("has_item", e.getValue().asItem() != net.minecraft.world.item.Items.AIR);
                     rows.add(row);
                 });
-        BuiltInRegistries.ITEM.entrySet().stream().filter(e -> NAMESPACES.contains(e.getKey().location().getNamespace()))
+        BuiltInRegistries.ITEM.entrySet().stream().filter(e -> namespaces.contains(e.getKey().location().getNamespace()))
                 .sorted(java.util.Comparator.comparing(e -> e.getKey().location().toString())).forEach(e -> {
                     var row = row("item", e.getKey().location().toString(), e.getValue());
                     if (e.getValue() instanceof BlockItem item)
                         row.addProperty("block", BuiltInRegistries.BLOCK.getKey(item.getBlock()).toString());
                     rows.add(row);
                 });
-        CEERegistries.WIRE_TYPE.entrySet().stream().filter(e -> NAMESPACES.contains(e.getKey().location().getNamespace()))
+        CEERegistries.WIRE_TYPE.entrySet().stream().filter(e -> namespaces.contains(e.getKey().location().getNamespace()))
                 .forEach(e -> rows.add(row("wire_type", e.getKey().location().toString(), e.getValue())));
-        CEERegistries.WIRE_ATTACHMENT_TYPE.entrySet().stream().filter(e -> NAMESPACES.contains(e.getKey().location().getNamespace()))
+        CEERegistries.WIRE_ATTACHMENT_TYPE.entrySet().stream().filter(e -> namespaces.contains(e.getKey().location().getNamespace()))
                 .forEach(e -> rows.add(row("wire_attachment", e.getKey().location().toString(), e.getValue())));
-        CEERegistries.PANEL_ATTACHMENT_TYPE.entrySet().stream().filter(e -> NAMESPACES.contains(e.getKey().location().getNamespace()))
+        CEERegistries.PANEL_ATTACHMENT_TYPE.entrySet().stream().filter(e -> namespaces.contains(e.getKey().location().getNamespace()))
                 .forEach(e -> rows.add(row("panel_attachment", e.getKey().location().toString(), e.getValue())));
         ComponentRegistry.entries().forEach(e -> {
-            if (NAMESPACES.contains(ComponentRegistry.getId(e).getNamespace()))
+            if (namespaces.contains(ComponentRegistry.getId(e).getNamespace()))
                 rows.add(row("board_component", ComponentRegistry.getId(e).toString(), e));
         });
-        FuseHoldable.ALL.entrySet().stream().sorted(java.util.Map.Entry.comparingByKey())
+        if (!pinoutOnly) FuseHoldable.ALL.entrySet().stream().sorted(java.util.Map.Entry.comparingByKey())
                 .forEach(e -> rows.add(row("fuse_holdable", e.getKey().toString(), e.getValue())));
         report.add("entries", rows);
-        Files.writeString(Path.of("stationary-registry.json"), new GsonBuilder().setPrettyPrinting().create().toJson(report) + "\n");
+        Files.writeString(Path.of(pinoutOnly ? "pinout-registry.json" : "stationary-registry.json"), new GsonBuilder().setPrettyPrinting().create().toJson(report) + "\n");
         String inventory=org.cha0scollective.wwpg.compat.cee.CeeCompatibility.modern()
                 ? "/data/wwpg_tests/cee120/registry-inventory.json"
                 : "/data/wwpg/release/0.1.0-beta.5/registry-inventory.json";
@@ -70,7 +78,7 @@ public final class StationaryInventoryGameTests {
             var actualClasses = new java.util.TreeMap<String, String>();
             for (var entry : expected) {
                 var row = entry.getAsJsonObject();
-                if (!ModList.get().isLoaded("pinout") && row.get("id").getAsString().startsWith("pinout:")) continue;
+                if (row.get("id").getAsString().startsWith("pinout:") != pinoutOnly) continue;
                 expectedClasses.put(row.get("registry").getAsString() + "/" + row.get("id").getAsString(),
                         row.get("implementation").getAsString());
             }

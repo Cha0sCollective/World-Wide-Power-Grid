@@ -10,7 +10,7 @@ separate from the passing execution records for any release.
 | Lane | What it proves | Authorization |
 | --- | --- | --- |
 | Focused | The affected code, tooling or selected electrical regressions work | Normal development checks |
-| Full headless | Runtime, lifecycle, API, SDK, world export on the recommended loader across Windows/Linux, Native/Java and BASE/PINOUT | Explicit request to run the full suite |
+| Full headless | Runtime, lifecycle, API, SDK, world export on the recommended loader across Windows/Linux, Native/Java and BASE/ADDONS | Explicit request to run the full suite |
 | Graphical | Selected real client visuals, controls, targeting, synchronization and Save and Quit | Separate explicit graphical request |
 
 “Run the full suite” means **full headless**. It does not open clients. There is
@@ -29,7 +29,7 @@ change the locked CEE 1.1.4 gameplay dependency. Record actual loaded versions
 and hashes, not just resolver choices.
 
 Full headless acceptance runs on this one loader across Windows/Linux,
-Native/Java and BASE/PINOUT. The separately requested graphical lane uses the
+Native/Java and BASE/ADDONS. The separately requested graphical lane uses the
 same recommendation. A complete run on one dependency set cannot establish
 full acceptance of another. Published beta.3 evidence remains its actual
 NeoForge 21.1.266 execution; it is not relabelled or rerun automatically.
@@ -48,12 +48,10 @@ stay isolated: memory fixtures reuse trace filenames, advanced assemblies reuse
 manifests, and heater/protection fixtures have observers or shared diagnostics.
 See the [circuit library](CIRCUIT_LIBRARY.md) for their functional assertions.
 
-The planned headless workload is **342 jobs across eight environments**:
-328 Minecraft launches, 12 exports and two OS preparation entries. Compared
-with beta.3's 654 jobs, separating three older-loader matrices saves 288 jobs
-and circuit batching saves another 24. Cold restarts, unload/reload, rejection
-recovery, SDK checks and exact world-archive reopens remain intact. These are
-planned counts, not a claim that a fresh full suite ran.
+The planned headless workload is **258 entries across eight environments**:
+244 server-check entries, 12 exports and two OS preparation entries. This
+removes 84 entries from the previous recommended-loader plan. Cold restarts,
+unload/reload, rejection recovery, SDK checks and exact archive reopens remain.
 
 ## Inspect a selection first
 
@@ -76,7 +74,7 @@ their API groups.
 
 `wwpg_sable_targeting` is an opt-in coordinate fixture namespace. Install the
 Sable Companion 1.6.0 API explicitly for that invocation; the normal BASE and
-PINOUT launches do not require it. These fixtures use real CEE geometry and PG
+ADDONS launches do not require it. These fixtures use real CEE geometry and PG
 wire dispatch with controlled public-API poses, covering translation, rotation,
 scale, render interpolation, panel covers, occlusion and live owner replacement.
 They do not establish client frame rate or full moving-factory electrical
@@ -121,6 +119,11 @@ and the separate upstream reference artifact into a fresh directory:
 python tools/test_suites.py freeze --output local/my-campaign/frozen
 python tools/test_suites.py run focused --group safety --backend JAVA --profile BASE --inputs local/my-campaign/frozen/inputs.json --output local/my-campaign/safety-java
 ```
+
+Use `freeze --with-optionals` for focused jobs that load external mods. The
+full-campaign preparation already freezes these pinned jars. For example,
+`plan focused --group optional-integrations --profile ADDONS` selects the
+powered Gauged Wires and Power Components checks.
 
 Never rebuild a frozen jar in place. The runner verifies all hashes before and
 after execution. It passes explicit frozen example paths to Gradle and excludes
@@ -202,13 +205,15 @@ separate focused client check; these headless fixtures do not claim that coverag
 
 ## Full headless acceptance
 
-On the CEE preparation branch, the manual workflow's `cee_development` input
+For the historical `.5` campaign, the manual workflow's `cee_development` input
 selects the reviewed CEE 1.2.0-132 runtime and requires the exact frozen
 `0.2.10-dev.cee120.5` player hash. Its separate campaign catalog retains every
 baseline job and adds all CEE development groups and the new fan checks: 398
 jobs across the same eight Windows/Linux, Native/Java and BASE/PINOUT
 environments. This does not change the published recommendation or the default
-342-job plan. JVM/SDK compilation retains its minimum contracts; gameplay and
+342-job plan from that snapshot; this is not the current 258-entry catalog.
+Its original selection is pinned in `tools/legacy/test-suites-cee120-pre-addons.json`.
+Continue it from its original checkout. JVM/SDK compilation retains its minimum contracts; gameplay and
 the SDK starter use the frozen CEE development runtime. No graphical job is
 selected. `tools/cee_headless_campaign.py plan` inspects this selection without
 launching it. A continuation of this campaign must also set `cee_development`.
@@ -228,6 +233,17 @@ and uses only the recommended loader. Older-loader compatibility is a separate
 manual workflow and cannot expand this matrix. The historical 0.2.1 SDK workflow
 is separately named and is not current-runtime acceptance.
 
+**BASE** runs core PG, CEE and WWPG checks, including core API fixtures that
+register their own test devices. **ADDONS** runs Pinout and CC:Tweaked, Gauged
+Wires, Power Components, the packaged SDK examples and the independently built
+starter. Each job loads its declared optional mods. Headless evidence checks
+the actual installation and pinned hashes. CIO and Sable remain opt-in focused
+checks on their own pinned inputs.
+
+The `disjoint-headless-addons-v1` planning revision selects each ordinary check
+once per platform and solver. The 12 graphical scenarios retain their
+BASE/PINOUT editions.
+
 Local execution uses the same interface. Select the current machine's platform;
 a Windows-only result cannot claim Linux coverage:
 
@@ -235,17 +251,20 @@ a Windows-only result cannot claim Linux coverage:
 python tools/test_suites.py run full-headless --platform windows-latest --inputs build/my-campaign/frozen/inputs.json --preparation build/my-campaign/preparation.json --output local/my-campaign/headless-windows
 ```
 
-The combined PINOUT yard covers the ordinary yard. BASE and PINOUT runtime/API
-installation checks remain separate. Source-world cold restarts and exact ZIP
-reopens remain distinct checks. References, example and showroom checks execute
+Add `--profile BASE` or `--profile ADDONS` to select one worker scope. Both
+scopes use the same once-per-OS preparation. The BASE Native plan includes the
+preparation evidence row. ADDONS produces the combined PINOUT yard and both
+Workshop editions because the yard uses computer controls and both Workshops
+exercise packaged SDK examples. Use `world_profile` to bind an archive to its
+graphical scenario. References and the core example and showroom checks execute
 once per operating-system/backend combination.
 
 For an investigated Workshop spawn-metadata correction, the manual workflow's
 `workshop_spawn_run` input selects only the focused export/reopen continuation.
-Supply the preserved canonical runtime run as `frozen_run` and the passing world
-run as `workshop_spawn_run`. This mode skips preparation and every full-suite
-job. It freezes the corrected archives once and runs their three exact reopens
-on Windows/Linux and both solvers/profiles. Original source-world cold checks
+Supply the preserved canonical runtime run as `frozen_run` and the passing
+continued ADDONS world run as `workshop_spawn_run`. That worker provides both
+Workshop exports. This mode freezes the corrected archives once and runs their
+three exact reopens on Windows/Linux and both solvers. Original source-world cold checks
 remain separate. Compare every native payload and all uncompressed `level.dat`
 NBT outside `spawnRadius`; a changed electrical save requires broader testing.
 The equivalent focused tools are `recheck_workshop_spawn.py prepare` and `run`.
@@ -257,6 +276,11 @@ platform/backend/profile and exact catalog job IDs. Custom reference and SDK
 launchers prepare the selected loader's Minecraft artifacts before their launch
 preparation. The gameplay jar stays frozen. Failed SDK commands include their
 underlying output in the retained launcher log even when no passing proof exists.
+
+The pre-split BASE/PINOUT catalog is retained in
+[`tools/legacy/test-suites-pre-addons.json`](../tools/legacy/test-suites-pre-addons.json).
+Review its frozen results with `suite_evidence.py --historical-catalog`.
+Continue a pre-split run from its original checkout and catalog.
 
 ## Manual parallel loader compatibility
 

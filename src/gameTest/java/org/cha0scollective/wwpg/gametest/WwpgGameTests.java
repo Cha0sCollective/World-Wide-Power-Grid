@@ -13,7 +13,7 @@ public final class WwpgGameTests {
         if (Boolean.getBoolean("wwpg.test.energyFixtures"))
             modBus.addListener(FixtureEnergyCapabilities::register);
         var namespaces = Arrays.asList(System.getProperty("neoforge.enabledGameTestNamespaces", "").split(","));
-        if (Boolean.getBoolean("wwpg.test.packaged") && namespaces.contains("wwpg_api"))
+        if (Boolean.getBoolean("wwpg.test.packaged") && namespaces.contains("wwpg_api_core"))
             modBus.addListener(ExtensionApiDiodeParameterGameTests::register);
         if (namespaces.contains("wwpg_api"))
             NeoForge.EVENT_BUS.addListener(ExtensionApiStartupGameTests::beforeStartup);

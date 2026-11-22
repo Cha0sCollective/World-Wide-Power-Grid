@@ -55,21 +55,26 @@ class SelectionChecks(unittest.TestCase):
             self.assertEqual(jobs[0]['namespaces'],suites.catalog()['groups'][group]['namespaces'])
 
     def test_pinout_regressions_do_not_launch_twice(self):
-        jobs=suites.plan('full-headless',backends=['NATIVE'],profiles=['PINOUT'],platforms=['windows-latest'],loaders=[suites.catalog()['runtime_loader']])
+        jobs=suites.plan('full-headless',backends=['NATIVE'],platforms=['windows-latest'])
         self.assertEqual(len([j for j in jobs if j.get('group')=='regression']),4)
-        self.assertFalse(any(j.get('group')=='pinout' for j in jobs))
-        self.assertIn('wwpg_pinout',next(j for j in jobs if j.get('group')=='regression')['namespaces'])
+        pinout=[j for j in jobs if j.get('group')=='pinout']
+        self.assertEqual([j['phase'] for j in pinout],['SETUP','VERIFY','VERIFY','VERIFY'])
+        self.assertTrue(all(j['profile']=='ADDONS' and j['namespaces']==['wwpg_pinout'] for j in pinout))
+        self.assertTrue(all('wwpg_pinout' not in j['namespaces'] for j in jobs if j.get('group')=='regression'))
 
     def test_restart_sequences_and_exact_reopens_remain(self):
-        jobs=suites.plan('full-headless',backends=['NATIVE'],profiles=['PINOUT'],platforms=['windows-latest'],loaders=[suites.catalog()['runtime_loader']])
-        for group in ('yard','workshop'):
+        jobs=suites.plan('full-headless',backends=['NATIVE'],profiles=['ADDONS'],platforms=['windows-latest'])
+        for group in ('yard','workshop','workshop-pinout'):
             source=[j for j in jobs if j.get('group')==group and 'phase' in j]
             self.assertEqual([j['phase'] for j in source],['SETUP','VERIFY','VERIFY','VERIFY'])
-            self.assertEqual(len([j for j in jobs if j.get('group')==group+'-extracted']),3)
+            lifecycle=[j for j in jobs if j.get('group') in (group,group+'-extracted')]
+            self.assertEqual(len(lifecycle),8)
+            self.assertEqual(len({j['world_profile'] for j in lifecycle}),1)
+            self.assertEqual(len({j['catalog_group'] for j in lifecycle}),1)
         self.assertEqual([j['phase'] for j in jobs if j.get('group')=='pending'],['SETUP','ARM','VERIFY'])
 
     def test_fresh_ownership_fixture_does_not_rewire_saved_chunks_on_restart(self):
-        jobs=[j for j in suites.plan('full-headless',backends=['JAVA'],profiles=['BASE'],platforms=['windows-latest'],loaders=[suites.catalog()['runtime_loader']]) if j.get('group')=='api']
+        jobs=[j for j in suites.plan('full-headless',backends=['JAVA'],profiles=['ADDONS'],platforms=['windows-latest']) if j.get('group')=='api']
         self.assertEqual([j['phase'] for j in jobs],['SETUP','VERIFY','VERIFY','VERIFY'])
         self.assertIn('wwpg_api_ownership',jobs[0]['namespaces'])
         self.assertTrue(all('wwpg_api_ownership' not in j['namespaces'] for j in jobs[1:]))
@@ -77,7 +82,8 @@ class SelectionChecks(unittest.TestCase):
 
     def test_no_base_yard_and_no_repeated_reference_per_profile(self):
         jobs=suites.plan('full-headless')
-        self.assertTrue(all(j['profile']=='PINOUT' for j in jobs if j.get('group','').startswith('yard')))
+        self.assertTrue(all(j['profile']=='ADDONS' and j['world_profile']=='PINOUT'
+                            for j in jobs if j.get('group','').startswith('yard')))
         self.assertTrue(all(j['profile']=='BASE' for j in jobs if j.get('operation')=='reference'))
 
     def test_current_runtime_gets_complete_world_and_circuit_coverage(self):
@@ -85,39 +91,53 @@ class SelectionChecks(unittest.TestCase):
         self.assertEqual(current,suites.catalog()['loaders'][-1])
         self.assertTrue(all(j['loader']==current for j in jobs if j.get('operation')=='export'))
         circuits=[j for j in jobs if 'circuit' in j or 'circuits' in j]
-        self.assertEqual(len(circuits),9*2*2*2)
+        self.assertEqual(len(circuits),9*2*2)
         self.assertEqual({j['loader'] for j in circuits},{current})
         names={c for j in circuits for c in j.get('circuits',[j.get('circuit')])}
         self.assertEqual(len(names),12)
         for job in circuits:
-            args,directory=suites.command(job,{'version':'TEST_ONLY','artifacts':{r:{'path':r+'.jar'} for r in suites.ROLES}},Path('scratch'))
+            inputs={r:{'path':r+'.jar'} for r in suites.ROLES}
+            inputs.update({r:dict(lock,path=r+'.jar') for r,lock in suites.external_mods(suites.catalog()).items()})
+            args,directory=suites.command(job,{'version':'TEST_ONLY','artifacts':inputs},Path('scratch'))
             selection=','.join(job['circuits']) if 'circuits' in job else job['circuit']
             self.assertIn('-PtestCircuit='+selection,args)
             self.assertEqual(directory.name,job['group'])
 
     def test_full_suite_is_recommended_only_and_cannot_expand_to_other_loaders(self):
         jobs=suites.plan('full-headless')
-        self.assertEqual(len(jobs),342)
+        self.assertEqual(len(jobs),258)
         self.assertEqual({j['loader'] for j in jobs if 'loader' in j},{'21.1.262'})
         for loaders in (['21.1.231'],['21.1.262','21.1.266']):
             with self.assertRaises(ValueError):suites.plan('full-headless',loaders=loaders)
         self.assertEqual(suites.catalog()['recommended_runtime'],dict(neoforge='21.1.262',powergrid='0.6.2',electroenergetics='1.21.1-1.1.4'))
 
-    def test_batch_keeps_all_original_namespaces_and_isolated_cases(self):
-        old=suites.read(suites.ROOT/'tools/legacy/test-suites-beta3.json')
-        old_jobs=suites.plan('full-headless',loaders=['21.1.266'],spec=old)
+    def test_split_keeps_all_original_namespaces_and_lifecycles_once(self):
+        old=suites.read(suites.ROOT/'tools/legacy/test-suites-pre-addons.json')
+        old_jobs=suites.plan('full-headless',spec=old)
         new_jobs=suites.plan('full-headless')
-        from collections import Counter
-        def coverage(jobs):
-            return Counter((j['platform'],j.get('backend'),j.get('profile'),n,j.get('phase'))
-                    for j in jobs for n in j.get('namespaces',[]))
-        self.assertFalse(coverage(old_jobs)-coverage(new_jobs), "An original primary-runtime assertion or lifecycle phase disappeared")
+        def coverage(job, namespace):
+            # World editions are distinct runs. Core and SDK namespaces had
+            # performed the same fixtures under both previous worker profiles.
+            world = job.get('group','').removesuffix('-extracted') in ('yard','workshop','workshop-pinout')
+            return (job['platform'],job['backend'],namespace,job['id'].rsplit('/',1)[-1],
+                    suites.world_edition(job) if world else None)
+        # Main's legacy contact/transformer cases use these names in full acceptance;
+        # this branch owns CEE 132 fixtures under the same names as explicit probes.
+        modern_probes={'wwpg_cee_electrocution','wwpg_cee_transformer_reference'}
+        required={coverage(j,n) for j in old_jobs for n in j.get('namespaces',[]) if n not in modern_probes}
+        self.assertFalse(any(n in modern_probes for j in new_jobs for n in j.get('namespaces',[])))
+        observed=[coverage(j,n) for j in new_jobs for n in j.get('namespaces',[])]
+        self.assertTrue(required <= set(observed), required-set(observed))
+        self.assertEqual(len(observed),len(set(observed)))
+        self.assertTrue(all(bool(j['optional_mods'])==(j['profile']=='ADDONS') for j in new_jobs))
+        self.assertTrue(all(j['profile']=='ADDONS' for j in new_jobs if j.get('operation')=='starter'))
         batches=[j for j in new_jobs if j.get('circuits')]
-        self.assertEqual(len(batches),8)
+        self.assertEqual(len(batches),4)
         self.assertEqual(batches[0]['circuits'],['adder3','oscillator','source-switch','regulator'])
         for case in ('register8','memory-bank','shift4','ram4x4','fused-latch','relay-heater','quiet-heater','source-loss'):
-            self.assertEqual(len([j for j in new_jobs if j.get('circuit')==case]),8)
-        self.assertEqual(len(suites.plan('full-headless',spec=old)),654)
+            self.assertEqual(len([j for j in new_jobs if j.get('circuit')==case]),4)
+        self.assertEqual(len(old_jobs),342)
+        self.assertEqual(suites.plan('graphical',spec=old),suites.plan('graphical'))
         for name in ('regulator','adder3'):
             job=suites.plan('focused',['circuit-'+name],['JAVA'],['BASE'],platforms=['windows-latest'])[0]
             self.assertEqual(job['circuit'],name)
@@ -177,7 +197,7 @@ class SelectionChecks(unittest.TestCase):
                 env=dict(os.environ,GITHUB_OUTPUT=str(output)),check=True)
             matrix=json.loads(output.read_text().removeprefix('matrix='))
         self.assertEqual(matrix,dict(os=suites.catalog()['platforms'],backend=['NATIVE','JAVA'],
-            profile=['BASE','PINOUT'],loader=['21.1.262']))
+            profile=['BASE','ADDONS'],loader=['21.1.262']))
         props=dict(line.split('=',1) for line in (suites.ROOT/'gradle.properties').read_text().splitlines() if '=' in line)
         self.assertEqual(props['neo_version'],suites.catalog()['runtime_loader'])
         lock=suites.read(suites.ROOT/'src/gameTest/resources/data/wwpg_tests/runtime-inputs.json')
@@ -224,11 +244,11 @@ class EvidenceChecks(unittest.TestCase):
 
     def test_actual_reopen_selection_uses_group_with_bound_and_unbound_inputs(self):
         job=next(j for j in suites.plan('full-headless') if j.get('group')=='workshop-extracted')
-        self.assertNotIn('world',job)
-        expected=self.base/f'{job["backend"]}-{job["profile"]}-workshop.zip'
+        self.assertEqual(job['world'],'workshop')
+        expected=self.base/f'{job["backend"]}-{job["world_profile"]}-workshop.zip'
         self.assertEqual(suites.archive_for_reopen(job,{},self.base),expected)
         item=self.file('fixed-world.zip','TEST_ONLY fixed metadata')
-        inputs={'worlds':{'workshop/'+job['profile']:item}}
+        inputs={'worlds':{'workshop/'+job['world_profile']:item}}
         self.assertEqual(suites.archive_for_reopen(job,inputs,self.base),Path(item['path']))
         Path(item['path']).write_text('changed')
         with self.assertRaisesRegex(ValueError,'Changed bound'):suites.archive_for_reopen(job,inputs,self.base)
@@ -258,12 +278,35 @@ class EvidenceChecks(unittest.TestCase):
             sha256=hashes['runtime'],phase='SETUP',neoforge=job['loader'],namespaces=','.join(job['namespaces']),
             addon_artifacts={r:{'sha256':hashes[r]} for r in ('example','upstream_example')})
         log='GAME TESTS COMPLETE\nAll 50 required tests passed\nAll dimensions are saved\nWWPG_TEST_BACKEND_CONFIG: requested=JAVA, configured=JAVA\n'
+        log+=self.loaded_inventory(job)
         actual=dict(job,status='passed',exit_code=0,log=self.file('log',log),proof=self.file('proof.json',json.dumps(proof)))
-        inputs=dict(schema=2,policy='separated-v2',source_sha='a'*40,artifacts=artifacts)
+        inputs=dict(schema=2,policy='separated-v2',source_sha='a'*40,artifacts=artifacts,
+                    catalog_sha256=suites.sha(suites.CATALOG))
         report=dict(schema=2,policy='separated-v2',source_sha='a'*40,suite='full-headless',status='passed',not_run=[],
+            planning_revision=suites.catalog()['planning_revision'],
             artifact_hashes=hashes,catalog=suites.descriptor(suites.CATALOG),inputs=self.file('inputs.json',json.dumps(inputs)),jobs=[actual])
         path=self.base/'result.json';suites.write(path,report)
         return path,report,proof
+
+    def loaded_inventory(self, job, extra=None):
+        loaded=dict(neoforge={'version':job['loader']},powergrid={},electroenergetics={},wwpg={})
+        return 'WWPG_RUNTIME_INPUTS_VERIFIED: '+json.dumps(loaded | (extra or {}))+'\n'
+
+    def test_base_rejects_optional_jars_and_addons_require_pinned_loaded_hashes(self):
+        spec=suites.catalog(); loader=spec['runtime_loader']
+        external=suites.external_mods(spec)['gauged']
+        role='gauged'; mod=external['mod_id']; sha=external['sha256']
+        base=dict(loader=loader,optional_mods=[])
+        addons=dict(loader=loader,optional_mods=[role])
+        inputs={'artifact_hashes':{role:sha}}
+        log=self.loaded_inventory(base)
+        with_jar=self.loaded_inventory(base,{mod:{'sha256':sha}})
+        evidence.validate_optional_installation(log,base,inputs,spec)
+        evidence.validate_optional_installation(with_jar,addons,inputs,spec)
+        for wrong,expected in ((with_jar,base),(log,addons),
+                               (self.loaded_inventory(base,{mod:{'sha256':'bad'}}),addons)):
+            with self.subTest(log=wrong),self.assertRaises(ValueError):
+                evidence.validate_optional_installation(wrong,expected,inputs,spec)
 
     def test_passing_fragment_cannot_claim_complete_suite(self):
         path,report,_=self.passing_headless_fragment()
@@ -291,7 +334,7 @@ class EvidenceChecks(unittest.TestCase):
         path.write_text(json.dumps(report))
         first=report['jobs'][0]
         api0={k:v for k,v in first.items() if k not in ('status','exit_code','proof','log')}
-        api0.update(id='TEST_ONLY/api/0-SETUP',group='api',phase='SETUP')
+        api0.update(id='TEST_ONLY/api/0-SETUP',group='api',catalog_group='api',phase='SETUP')
         api1=dict(api0,id='TEST_ONLY/api/1-VERIFY',phase='VERIFY')
         safety={k:v for k,v in first.items() if k not in ('status','exit_code','proof','log')}
         output=self.base/'continued'
@@ -325,6 +368,18 @@ class EvidenceChecks(unittest.TestCase):
         self.assertEqual(result['jobs'],[starter])
         self.assertEqual(result['jobs'][0]['loader'],'21.1.248')
 
+    def test_continuation_rebuilds_an_incomplete_world_without_repeating_the_other_edition(self):
+        path,report,_=self.passing_headless_fragment()
+        jobs=[j for j in suites.plan('full-headless',backends=['JAVA'],profiles=['ADDONS'],platforms=['windows-latest'])
+              if j.get('catalog_group')=='workshop']
+        report.update(status='failed',jobs=[dict(j,status='passed') for j in jobs[:-1]])
+        path.write_text(json.dumps(report))
+        with patch.object(evidence,'plan',return_value=jobs),patch.object(evidence,'validate_job'),patch('subprocess.check_output',return_value=''):
+            result=evidence.continue_headless(path,self.base/'inputs.json',self.base/'planned',
+                'TEST_ONLY lost PINOUT reopen',None,plan_only=True)
+        self.assertEqual(result['retained_jobs'],[j['id'] for j in jobs if j['world_profile']=='BASE'])
+        self.assertEqual(result['jobs'],[j for j in jobs if j['world_profile']=='PINOUT'])
+
     def test_auxiliary_starter_cannot_smuggle_another_worker_into_continuation(self):
         path,report,_=self.passing_headless_fragment()
         first=report['jobs'][0]
@@ -356,7 +411,8 @@ class EvidenceChecks(unittest.TestCase):
         _,report,proof=self.passing_headless_fragment()
         job=suites.plan('focused',['circuit-functional'],['JAVA'],['BASE'],platforms=['windows-latest'])[0]
         proof.update(namespaces=','.join(job['namespaces']),circuit=','.join(job['circuits']),required_tests_passed=4)
-        log='GAME TESTS COMPLETE\nAll 4 required tests passed\nAll dimensions are saved\nWWPG_TEST_BACKEND_CONFIG: requested=JAVA, configured=JAVA\nWWPG_RUNTIME_INPUTS_VERIFIED: TEST_ONLY\n'
+        log='GAME TESTS COMPLETE\nAll 4 required tests passed\nAll dimensions are saved\nWWPG_TEST_BACKEND_CONFIG: requested=JAVA, configured=JAVA\n'
+        log+=self.loaded_inventory(job)
         log+=''.join('WWPG_CIRCUIT_BEGIN case='+c+' substeps=16\n' for c in job['circuits'])
         actual=dict(job,status='passed',exit_code=0,proof=self.file('batch.json',json.dumps(proof)),log=self.file('batch.log',log),
             circuit_traces={c:self.file(c+'.csv','TEST_ONLY electrical trace') for c in job['circuits']})

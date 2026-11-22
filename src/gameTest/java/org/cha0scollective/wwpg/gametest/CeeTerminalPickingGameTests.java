@@ -101,25 +101,33 @@ public final class CeeTerminalPickingGameTests {
 
     @GameTest(template = "empty", timeoutTicks = 80)
     public static void pgWireMaterialsRevealAndSelectPanelTerminals(GameTestHelper h) {
+        selectPanelTerminals(h, java.util.List.of(ModdedItems.WIRE.asStack(64), ModdedItems.IRON_WIRE.asStack(64),
+                ModdedItems.GOLDEN_WIRE.asStack(64), ModdedItems.INSULATED_COPPER_WIRE.asStack(64)), true);
+    }
+
+    @GameTest(template = "empty", templateNamespace = "wwpg_loader_addons", timeoutTicks = 80)
+    public static void gaugedWireMaterialsRevealAndSelectPanelTerminals(GameTestHelper h) {
+        var wires = net.minecraft.core.registries.BuiltInRegistries.ITEM.entrySet().stream()
+                .filter(entry -> entry.getKey().location().getNamespace().equals("gauged_wires")
+                        && org.patryk3211.powergrid.electricity.wire.IWire.isWire(h.getLevel(), entry.getValue()))
+                .map(entry -> new ItemStack(entry.getValue(), 64)).toList();
+        h.assertTrue(!wires.isEmpty(), "No registered Gauged wire materials");
+        selectPanelTerminals(h, wires, false);
+    }
+
+    private static void selectPanelTerminals(GameTestHelper h, java.util.List<ItemStack> wires, boolean checkNativeTools) {
         var relative = new BlockPos(4, 2, 4);
         h.setBlock(relative.below(), Blocks.STONE);
         h.setBlock(relative, CEEBlocks.ELECTRICAL_PANEL.getDefaultState().setValue(
                 ElectricalPanelBlock.FACING, Direction.NORTH));
         h.runAtTickTime(5, () -> {
-            h.assertTrue(org.cha0scollective.wwpg.wiring.CeeTerminalPicking.revealsPanel(h.getLevel(), CEEItems.WIRE_SPOOL.asStack())
-                    && org.cha0scollective.wwpg.wiring.CeeTerminalPicking.revealsPanel(h.getLevel(), CEEItems.EMPTY_SPOOL.asStack()),
-                    "PG compatibility replaced CEE's native panel tools");
-            h.assertTrue(!org.cha0scollective.wwpg.wiring.CeeTerminalPicking.revealsPanel(h.getLevel(), new ItemStack(Items.STICK)), "An unrelated item reveals panel terminals");
-            var wires = new java.util.ArrayList<ItemStack>(java.util.List.of(ModdedItems.WIRE.asStack(64),
-                    ModdedItems.IRON_WIRE.asStack(64), ModdedItems.GOLDEN_WIRE.asStack(64), ModdedItems.INSULATED_COPPER_WIRE.asStack(64)));
-            for (var entry : net.minecraft.core.registries.BuiltInRegistries.ITEM.entrySet()) {
-                if (entry.getKey().location().getNamespace().equals("gauged_wires")
-                        && org.patryk3211.powergrid.electricity.wire.IWire.isWire(h.getLevel(), entry.getValue()))
-                    wires.add(new ItemStack(entry.getValue(), 64));
+            if (checkNativeTools) {
+                h.assertTrue(org.cha0scollective.wwpg.wiring.CeeTerminalPicking.revealsPanel(h.getLevel(), CEEItems.WIRE_SPOOL.asStack())
+                        && org.cha0scollective.wwpg.wiring.CeeTerminalPicking.revealsPanel(h.getLevel(), CEEItems.EMPTY_SPOOL.asStack()),
+                        "PG compatibility replaced CEE's native panel tools");
+                h.assertTrue(!org.cha0scollective.wwpg.wiring.CeeTerminalPicking.revealsPanel(h.getLevel(), new ItemStack(Items.STICK)),
+                        "An unrelated item reveals panel terminals");
             }
-            int gauged = wires.size() - 4;
-            if (net.neoforged.fml.ModList.get().isLoaded("gauged_wires"))
-                h.assertTrue(gauged > 0, "Gauged was loaded but no registered wire materials were exercised");
             var panel = h.absolutePos(relative);
             var gauge = PanelGameTests.insert(h, panel,
                     CeeTestAttachments.type("VOLTMETER"),
@@ -148,7 +156,8 @@ public final class CeeTerminalPickingGameTests {
                 }
             }
             org.cha0scollective.wwpg.WorldWidePowerGrid.LOGGER.info(
-                    "PANEL_PG_WIRING_PASSED: baseMaterials=4, gaugedMaterials={}, nativeToolsRetained=true", gauged);
+                    "PANEL_PG_WIRING_PASSED: baseMaterials={}, gaugedMaterials={}",
+                    checkNativeTools ? wires.size() : 0, checkNativeTools ? 0 : wires.size());
             h.succeed();
         });
     }

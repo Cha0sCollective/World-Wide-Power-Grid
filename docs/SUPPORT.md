@@ -1,13 +1,13 @@
 # Supported stationary content
 
-This branch develops **0.2.11-dev.cee120.4** for CEE 1.2.0-132. It integrates
-the stable 0.2.11 fixes, but does not inherit stable acceptance evidence.
+This branch develops **0.2.12-dev.cee120.1** for CEE 1.2.0-132. It integrates
+the stable 0.2.12 fixes, but does not inherit stable acceptance evidence.
 The [development installation guide](INSTALL.md) lists its requirements.
 The [.3 alpha prerelease](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.11-dev.cee120.3) is experimental and has focused server checks only.
 The published [.8 alpha](../release/0.2.10-dev.cee120.8/README.md) retains its
 original identity and acceptance scope.
 
-WWPG 0.2.11 lets **Create: Electro Energetics (CEE)** and **Power Grid (PG)** work
+WWPG 0.2.12 lets **Create: Electro Energetics (CEE)** and **Power Grid (PG)** work
 together in stationary factories: equipment built in the world that stays in
 place. Either mod can supply power to the other's supported equipment, and you
 can connect and measure circuits with either mod's tools.
@@ -82,7 +82,7 @@ identities.
 
 With **CC;CPG: Pinout 0.2.1 and CC:Tweaked 1.120.2**, computers can switch all eight
 pins and read signed voltages through Pinout's normal Lua API. Lua common pin 9
-maps to PG terminal 0; pins 1–8 retain their numbering. Use either wire system to
+maps to PG terminal 0; pins 1â€“8 retain their numbering. Use either wire system to
 control supported mixed equipment. The [Pinout yard instructions](STATIONARY_YARD.md#computer-controls-in-the-pinout-edition)
 explain the included programs.
 
@@ -111,7 +111,7 @@ The release retains **164 base behavior groups, or 165 with optional Pinout**.
 The [beta.5 support matrix](../release/0.1.0-beta.5/supported-content.json) and
 [registry inventory](../release/0.1.0-beta.5/registry-inventory.json) provide the
 item-by-item baseline, including cosmetic variants, ingredients, assembly parts
-and deferred moving content. The [release acceptance record](../release/0.2.11/ACCEPTANCE.md)
+and deferred moving content. The [release acceptance record](../release/0.2.12/ACCEPTANCE.md)
 tracks checks of that baseline with the new jar and worlds, alongside the add-on examples.
 Older published artifacts, support claims and check records remain unchanged.
 

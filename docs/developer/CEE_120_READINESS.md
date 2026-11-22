@@ -1,9 +1,40 @@
 # CEE 1.2 development readiness
 
-The preparation branch `dev/cee-120-readiness` integrates WWPG **0.2.11**,
-main commit `ae25c2a42bf416f7d2899fb5b6a8e3263c611a8f` (release source
-`96e475d2ec476a90c14a2e1ed48a001ef3307e8d`). The current development candidate
-is `0.2.11-dev.cee120.4`, targeting CEE **1.2.0-132** and PG **0.6.2**.
+The preparation branch `dev/cee-120-readiness` integrates WWPG **0.2.12**,
+main commit `19b70bdb9f85f957e7d9e4ca0b7def3630577c85` (release source
+`bb7a78f0be2ebd7b43df516a737037389a80a595`). The current development candidate
+is `0.2.12-dev.cee120.1`, targeting CEE **1.2.0-132** and PG **0.6.2**.
+
+## Baseline alignment: 0.2.12-dev.cee120.1
+
+The 0.2.12 gameplay changes backport this branch's contact and transformer
+repairs to legacy CEE. Retain the existing CEE 1.2 implementations and focused
+fixtures instead of installing duplicate legacy mixins or fixture classes.
+Player runtime sources, resources and dependency inputs are unchanged from
+`bc90364` (`0.2.11-dev.cee120.4`); only the declared mod version changes in the
+player jar. The merge also incorporates core/optional headless selection and
+updated stable release records. CEE 132 contact/transformer namespaces remain
+explicit focused checks outside ordinary legacy acceptance.
+
+The published `.3` alpha and all historical checks below retain their exact
+versions and hashes. This baseline update does not establish full headless or
+graphical acceptance for the new candidate.
+
+Focused verification: player and companion builds pass, as do 90 packaging,
+runner, loader and CEE campaign checks. A full entry-by-entry archive comparison
+against the preserved `.4` player finds exactly one changed entry:
+`META-INF/neoforge.mods.toml`, with only the declared version replaced. All
+classes, native libraries, API payloads and other resources are identical.
+The earlier `.4` focused runtime evidence therefore applies to the unchanged
+runtime payload; no new server or graphical run is claimed. The historical
+398-job `.5` campaign is now pinned to its pre-split catalog, independently of
+the current 258-entry plan.
+
+Candidate player SHA256:
+`ec4980f544120e39c89002c0ee0cb936ec62194c9685177d2e40022344cc6723`.
+Previous `.4` player SHA256:
+`3a8e4de6ac21dcbbc3638242cbfd0e1d62071c08e6cd1a3617673324e91c8cee`.
+Build, check logs and archive comparison: `local/baseline-0212/`.
 
 ## Intentional ideal-transformer logging: 0.2.11-dev.cee120.4
 

@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### 0.2.12-dev.cee120.1
+
+- Integrate the 0.2.12 baseline and its separated core/optional headless tooling.
+  Its electrocution and transformer fixes were already present in this CEE 1.2
+  branch; player runtime code and dependency inputs are unchanged from `.4`.
+- Preserve the scoped ideal-transformer warning suppression and the published
+  `0.2.11-dev.cee120.3` alpha with its original evidence.
+
 ### 0.2.11-dev.cee120.4
 
 - Silence Power Grid's generic zero-resistance warning only while WWPG creates
@@ -35,6 +43,13 @@
   repair was already present in `.8`.
 - New development candidate; historical `.8` and `.5` acceptance records retain
   their original scope. No new full acceptance is claimed.
+
+## 0.2.12 — 21 November 2026
+
+- Fix CEE wire contact so energized bare wires can shock entities and readings
+  recover after contact changes. Insulation and dielectric protection still apply.
+- Match stock CEE voltage readings on isolated transformer windings while
+  preserving the voltage across each winding and respecting physical grounds.
 
 ## 0.2.11 — 20 November 2026
 

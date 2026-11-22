@@ -8,7 +8,7 @@ need programming knowledge to operate the examples.
 The extension API is the interface developers use to add these devices. For the
 ordinary CEE and Power Grid equipment, use the [Stationary Test Yard](STATIONARY_YARD.md).
 
-Download and extract the [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.11/wwpg-0.2.11-example-worlds.zip). Its `worlds` folder contains `wwpg-0.2.11-api-workshop.zip` and the Pinout installation edition.
+Download and extract the [example-worlds bundle](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/download/0.2.12/wwpg-0.2.12-example-worlds.zip). Its `worlds` folder contains `wwpg-0.2.12-api-workshop.zip` and the Pinout installation edition.
 
 ## Install and enter
 
@@ -101,7 +101,7 @@ Construction debris was removed before export.
 Players can stop here. The following commands reproduce the downloadable world
 and its checks. Start with the [development guide](DEVELOPMENT.md) for the overall
 test process and the [API guide](EXTENSION_API.md) to build the examples. The
-[0.2.11 acceptance record](../release/0.2.11/ACCEPTANCE.md) records checks on
+[0.2.12 acceptance record](../release/0.2.12/ACCEPTANCE.md) records checks on
 the exact world ZIPs and example jars.
 
 The packaged `wwpg_api_world` fixture uses registry IDs and public contracts,
@@ -116,7 +116,7 @@ base/Pinout installations. The source save is exported only after all passes
 succeed:
 
 ```text
-python tools/export_api_workshop.py --run run/api-workshop --jar build/libs/wwpg-0.2.11.jar --example examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar --upstream-example examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar --profile BASE --backend NATIVE --output build/distributions/wwpg-api-workshop-BASE.zip
+python tools/export_api_workshop.py --run run/api-workshop --jar build/libs/wwpg-0.2.12.jar --example examples/extension-addon/build/libs/wwpg-api-example-1.0.0.jar --upstream-example examples/cee-addon/build/libs/wwpg-upstream-api-example-1.0.0.jar --profile BASE --backend NATIVE --output build/distributions/wwpg-api-workshop-BASE.zip
 python tools/reopen_stationary_yard.py build/distributions/wwpg-api-workshop-BASE.zip --run run/exported-api-workshop
 ```
 

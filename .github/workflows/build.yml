@@ -38,7 +38,7 @@ jobs:
           python - <<'PY'
           import json, os
           spec=json.load(open('tools/test-suites.json'))
-          matrix=dict(os=spec['platforms'], backend=spec['backends'], profile=spec['profiles'], loader=[spec['runtime_loader']])
+          matrix=dict(os=spec['platforms'], backend=spec['backends'], profile=spec['headless_profiles'], loader=[spec['runtime_loader']])
           with open(os.environ['GITHUB_OUTPUT'],'a') as out: out.write('matrix='+json.dumps(matrix)+'\n')
           PY
   prepare:

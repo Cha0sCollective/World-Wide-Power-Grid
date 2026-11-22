@@ -1,15 +1,15 @@
 # Documentation
 
-This branch develops **0.2.11-dev.cee120.4** for CEE 1.2.0-132. The published `.3`
+This branch develops **0.2.12-dev.cee120.1** for CEE 1.2.0-132. The published `.3`
 [alpha prerelease](https://github.com/Cha0sCollective/World-Wide-Power-Grid/releases/tag/0.2.11-dev.cee120.3) has focused checks only. The
 [installation guide](INSTALL.md) lists the development requirements. The
 published [.8 alpha](../release/0.2.10-dev.cee120.8/README.md) is a historical
 snapshot with its original acceptance scope. The remaining equipment guides
-describe the **WWPG 0.2.11** stable baseline unless labelled otherwise, and
+describe the **WWPG 0.2.12** stable baseline unless labelled otherwise, and
 **extension API 1.0.0**.
 Start with the page that matches what you want to do. The [circuit library](CIRCUIT_LIBRARY.md)
 and [control promotion record](developer/CONTROL_PROMOTION_028.md) describe the
-retained improvements; [acceptance](../release/0.2.11/ACCEPTANCE.md) preserves
+retained improvements; [acceptance](../release/0.2.12/ACCEPTANCE.md) preserves
 the completed coverage and actual source and artifact identities.
 
 ## Play and run a server
