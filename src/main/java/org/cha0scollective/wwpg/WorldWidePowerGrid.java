@@ -1,6 +1,7 @@
 package org.cha0scollective.wwpg;
 
 import com.mojang.logging.LogUtils;
+import com.george_vi.electroenergetics.config.CEEConfigs;
 import net.neoforged.fml.common.Mod;
 import org.slf4j.Logger;
 import net.minecraft.commands.Commands;
@@ -10,13 +11,16 @@ import net.minecraft.server.level.ServerLevel;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.level.LevelEvent;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import org.cha0scollective.wwpg.bridge.Bridges;
+import org.patryk3211.powergrid.collections.ModdedConfigs;
 
 @Mod(WorldWidePowerGrid.ID)
 public final class WorldWidePowerGrid {
     public static final String ID = "wwpg";
     public static final Logger LOGGER = LogUtils.getLogger();
+    private static final int CEE_DEFAULT_MICRO_TICKS = 1;
 
     public WorldWidePowerGrid(net.neoforged.bus.api.IEventBus modBus) {
         org.cha0scollective.wwpg.wiring.CeeElectric.register(modBus);
@@ -26,6 +30,7 @@ public final class WorldWidePowerGrid {
         modBus.addListener(org.cha0scollective.wwpg.extension.ApiDeviceDiscovery::freeze);
         LOGGER.info("WWPG: CEE 1.1.x / Power Grid 0.6.2 compatibility loaded");
         NeoForge.EVENT_BUS.addListener(this::commands);
+        NeoForge.EVENT_BUS.addListener(this::checkElectricalTiming);
         NeoForge.EVENT_BUS.addListener(this::unload);
         NeoForge.EVENT_BUS.addListener(this::stop);
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.bridge.RestorationCoordinator::loaded);
@@ -36,6 +41,17 @@ public final class WorldWidePowerGrid {
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.extension.ApiTerminals::chunkUnloaded);
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.compat.cio.CioCompatibility::placed);
         NeoForge.EVENT_BUS.addListener(org.cha0scollective.wwpg.compat.cio.CioCompatibility::tooltip);
+    }
+
+    private void checkElectricalTiming(ServerStartedEvent event) {
+        int pgSubsteps = ModdedConfigs.server().electricity.solver.multiTicks.get();
+        int ceeMicroTicks = CEEConfigs.server().simulationConfig.microTicks.get();
+        if ((pgSubsteps != 16 && pgSubsteps != 32) || ceeMicroTicks != CEE_DEFAULT_MICRO_TICKS) {
+            LOGGER.warn("WWPG electrical timing: Power Grid multiTicks={}, CEE microTicks={}. "
+                    + "Power Grid controls substeps for both mods while WWPG is installed. "
+                    + "Set multiTicks = 16 in config/powergrid-server.toml and restart. "
+                    + "CEE's microTicks setting has no effect under WWPG.", pgSubsteps, ceeMicroTicks);
+        }
     }
 
     private void commands(RegisterCommandsEvent event) {

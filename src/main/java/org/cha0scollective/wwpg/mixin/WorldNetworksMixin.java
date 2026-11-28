@@ -2,6 +2,7 @@ package org.cha0scollective.wwpg.mixin;
 
 import net.minecraft.server.level.ServerLevel;
 import org.cha0scollective.wwpg.bridge.Bridges;
+import org.cha0scollective.wwpg.bridge.NativeMatrixAllocationError;
 import org.cha0scollective.wwpg.bridge.ServerElectricalSchedule;
 import org.cha0scollective.wwpg.extension.ApiCircuits;
 import org.patryk3211.powergrid.electricity.WorldNetworks;
@@ -40,7 +41,14 @@ public abstract class WorldNetworksMixin {
     }
     @Redirect(method = "preTick", at = @At(value = "INVOKE", target = "Lorg/patryk3211/powergrid/electricity/sim/ElectricalNetwork;prepare(I)V"))
     private void wwpg$batchPreparation(ElectricalNetwork network, int steps) {
-        if (!org.cha0scollective.wwpg.bridge.RestorationCoordinator.defer((WorldNetworks) (Object) this, network)) network.prepare(steps);
+        var world = (WorldNetworks) (Object) this;
+        if (org.cha0scollective.wwpg.bridge.RestorationCoordinator.defer(world, network)) return;
+        try {
+            network.prepare(steps);
+        } catch (NativeMatrixAllocationError failure) {
+            failure.inDimension(world.world.dimension().location());
+            throw failure;
+        }
     }
     @ModifyExpressionValue(method = "postTick", at = @At(value = "FIELD",
             target = "Lorg/patryk3211/powergrid/electricity/WorldNetworks$CheckChunk;ticks:I",
