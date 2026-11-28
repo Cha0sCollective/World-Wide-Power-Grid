@@ -15,6 +15,7 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import org.cha0scollective.wwpg.api.MeasurementStatus;
 import org.cha0scollective.wwpg.api.neoforge.ElectricalMeasurements;
 import org.cha0scollective.wwpg.extension.ApiCircuits;
+import org.cha0scollective.wwpg.extension.ApiTerminals;
 import org.patryk3211.powergrid.electricity.base.IElectric;
 import org.patryk3211.powergrid.electricity.GlobalElectricNetworks;
 import org.patryk3211.powergrid.electricity.WorldNetworks;
@@ -41,6 +42,23 @@ public final class ExtensionApiOwnershipGameTests {
             h.assertTrue(ApiCircuits.step(level,network)==16,"Ownership fixture requires a complete sixteen-substep frame");
             held[0]=state(h,cap);identity[0]=circuits.elementIdentity(cap,"storage");
             h.assertTrue(held[0].getDouble("StoredVoltage")>1,"Rejection fixture requires charged storage");
+            var holder = ApiTerminals.existing(level, cap);
+            var pgWires = ApiTerminals.savedPgWireIdentities(level, cap);
+            h.assertTrue(holder != null && !pgWires.isEmpty(), "Retirement fixture requires a wired holder");
+            circuits.beginSubstep();
+            try {
+                ApiTerminals.remove(level, cap);
+                throw new AssertionError("Immediate terminal retirement was allowed during a substep");
+            } catch (IllegalStateException expected) {
+                h.assertTrue(expected.getMessage().contains("terminal removal during electrical solve"),
+                        "Immediate retirement reached an unrelated failure");
+            } finally {
+                circuits.endSubstep();
+            }
+            h.assertTrue(ApiTerminals.existing(level, cap) == holder
+                            && ApiTerminals.savedPgWireIdentities(level, cap).equals(pgWires)
+                            && circuits.elementIdentity(cap, "storage") == identity[0],
+                    "Rejected retirement changed the terminal, wire ownership or electrical model");
             circuits.beginSolving();circuits.beginSolving();
             h.assertTrue(ApiCircuits.step(level,network)==16,"Repeated binding reset accepted substep progress");
             circuits.invalidate(network);circuits.beginSolving();circuits.finish();

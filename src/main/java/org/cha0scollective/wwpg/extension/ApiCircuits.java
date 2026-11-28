@@ -28,7 +28,7 @@ public final class ApiCircuits {
     private TickContext context;
     private long preparedTick = Long.MIN_VALUE, commits, created, removed;
     private int preparedServerTick = Integer.MIN_VALUE;
-    private boolean solving;
+    private boolean solving, aborted;
     private final Map<ElectricalNetwork,NetworkWork> networkWork = new IdentityHashMap<>();
 
     private ApiCircuits(ServerLevel level) { this.level = level; }
@@ -48,12 +48,17 @@ public final class ApiCircuits {
     public static void retireOwner(ServerLevel level, BlockPos pos, String providerId, String slotId) {
         var circuits=WORLDS.get(level);
         if(circuits==null)return;
-        if(circuits.solving)throw new IllegalStateException("Extension terminal removal during electrical solve");
+        requireRetirementAllowed(level);
         var device=circuits.devices.get(pos);
         if(device!=null && device.identity.providerId().equals(providerId) && device.identity.slotId().equals(slotId)) {
             circuits.devices.remove(pos);
             circuits.retire(device);
         }
+    }
+    static void requireRetirementAllowed(ServerLevel level) {
+        var circuits = WORLDS.get(level);
+        if (circuits != null && circuits.solving)
+            throw new IllegalStateException("Extension terminal removal during electrical solve");
     }
     public static void clear() { WORLDS.clear(); }
     public static int step(ServerLevel level,ElectricalNetwork network) {
@@ -73,6 +78,8 @@ public final class ApiCircuits {
             var failure = owner.failures.get(pos);
             if(failure!=null&&failure.context().equals(owner.context))return failure;
             var device = owner.devices.get(pos);
+            if (owner.aborted && device != null)
+                return DeviceResults.unavailable(owner.context, MeasurementStatus.SOLVE_FAILED, "Electrical frame aborted");
             if(device!=null&&device.results!=null&&device.results.context().equals(owner.context)
                     && (device.results.status()==MeasurementStatus.SOLVE_FAILED || device.results.status()==MeasurementStatus.ISOLATED))
                 return device.results;
@@ -91,6 +98,7 @@ public final class ApiCircuits {
     public void prepare() {
         if (preparedServerTick == level.getServer().getTickCount()) return;
         if (solving) throw new IllegalStateException("API topology mutation during solve");
+        aborted = false;
         preparedTick = level.getGameTime();
         preparedServerTick = level.getServer().getTickCount();
         context = new TickContext(level.getGameTime(), .05, ModdedConfigs.server().electricity.solver.multiTicks.get());
@@ -243,8 +251,16 @@ public final class ApiCircuits {
         }
         networkWork.values().removeIf(work -> work.elements.isEmpty() && work.samples.isEmpty());
     }
+    public void beginSubstep() {
+        if (solving) throw new IllegalStateException("Extension electrical substep re-entered");
+        solving = true;
+    }
+
+    public void endSubstep() {
+        solving = false;
+    }
+
     public void before(ElectricalNetwork network,int step) {
-        solving=true;
         var work = networkWork.get(network);
         if (work != null) for (var element : work.elements) element.before(context,step);
     }
@@ -256,8 +272,20 @@ public final class ApiCircuits {
             for (var sample : work.samples) sample.add(converged);
             ++work.steps;
         }
-        solving=false;
     }
+
+    public void abortFrame() {
+        solving = false;
+        aborted = true;
+        for (var device : devices.values())
+            device.elements.values().forEach(ApiElement::rejectTick);
+    }
+
+    public static boolean frameAborted(ServerLevel level) {
+        var circuits = WORLDS.get(level);
+        return circuits != null && circuits.aborted && circuits.preparedServerTick == level.getServer().getTickCount();
+    }
+
     public void finish() {
         solving=false;
         for(var device:devices.values()) {
@@ -302,7 +330,7 @@ public final class ApiCircuits {
             diagnostic(entry.getKey(),error);
     }
     public void commit() {
-        if(context==null)return;
+        if(context==null || aborted)return;
         for(var entry:List.copyOf(failedProviders.entrySet())) {
             if(!ready(entry.getKey()) || failedAnchors.get(entry.getKey())!=loadedAnchor(entry.getKey()))continue;
             if(commitFaults.get(entry.getKey())==failedAnchors.get(entry.getKey()))continue;

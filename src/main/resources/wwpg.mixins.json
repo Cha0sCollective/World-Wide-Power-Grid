@@ -13,7 +13,7 @@
     "CircuitBuilderValidationMixin",
     "ElectricalNetworkAccessor",
     "PgNetworkMembershipMixin",
-    "PgSolverWarmupAccessor",
+    "PgSolverStateAccessor",
     "PgPentodeBiasAccessor",
     "PgPentodeInitializationMixin",
     "CeePhaseHistoryAccessor",
