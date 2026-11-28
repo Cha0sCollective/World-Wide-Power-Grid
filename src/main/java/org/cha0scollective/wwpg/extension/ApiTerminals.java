@@ -295,6 +295,8 @@ public final class ApiTerminals {
     /** Permanent replacement/removal only; chunk unload must not call this method. */
     public static void remove(Level level, BlockPos pos) {
         var entries = HOLDERS.get(level);
+        if (level instanceof ServerLevel server && entries != null && entries.containsKey(pos))
+            ApiCircuits.requireRetirementAllowed(server);
         var adapter = entries == null ? null : entries.remove(pos);
         if (level instanceof ServerLevel server && adapter != null) {
             adapter.captureReplacementParts();

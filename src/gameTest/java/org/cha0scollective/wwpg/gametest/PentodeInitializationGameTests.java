@@ -6,7 +6,7 @@ import net.neoforged.neoforge.gametest.*;
 import org.cha0scollective.wwpg.bridge.PentodeInitialization;
 import org.cha0scollective.wwpg.mixin.CapacitorHistoryAccessor;
 import org.cha0scollective.wwpg.mixin.ElectricalNetworkAccessor;
-import org.cha0scollective.wwpg.mixin.PgSolverWarmupAccessor;
+import org.cha0scollective.wwpg.mixin.PgSolverStateAccessor;
 import org.patryk3211.powergrid.config.CSolver;
 import org.patryk3211.powergrid.electricity.sim.*;
 import org.patryk3211.powergrid.electricity.sim.node.*;
@@ -34,7 +34,7 @@ public final class PentodeInitializationGameTests {
         network.prepare(16);network.warmUp(1);
         return new Circuit(network,screenSupply,capacitor);
     }
-    private static int warm(ElectricalNetwork network) { return ((PgSolverWarmupAccessor)((ElectricalNetworkAccessor)network).wwpg$solver()).wwpg$warmUpTicks(); }
+    private static int warm(ElectricalNetwork network) { return ((PgSolverStateAccessor)((ElectricalNetworkAccessor)network).wwpg$solver()).wwpg$warmUpTicks(); }
     @GameTest(template="empty",batch="wwpg_loading_pentode_reference",timeoutTicks=20)
     public static void upstreamPentodeNeedsMultipleColdStepsWithoutAdvancingStorage(GameTestHelper h) {
         var circuit=circuit();var network=circuit.network;

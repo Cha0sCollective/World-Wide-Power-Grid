@@ -174,7 +174,7 @@ class CeeAdapterRegistryTest {
         assertEquals(0, source.commits);
     }
 
-    @Test void completedTickKeepsAcceptedStateButDynamicAdaptersMustProvideCheckpoints() {
+    @Test void finalizedTickKeepsAcceptedStateUntilScheduleAbortAndRequiresCheckpoint() {
         var missing = new CeeAdapters.Registry();
         missing.register("example:missing_checkpoint", StoredProperty.class, new CeePropertyAdapter<>() {
             @Override public boolean dynamic() { return true; }
@@ -211,6 +211,12 @@ class CeeAdapterRegistryTest {
         assertEquals(7, source.savedVoltage);
         assertEquals(1, source.commits);
         assertThrows(IllegalStateException.class, () -> binding.before(7, 1, 1, .05));
+        binding.abort();
+        assertEquals(10, source.savedVoltage);
+        assertEquals(0, source.commits);
+        source.savedVoltage = 6;
+        binding.abort();
+        assertEquals(6, source.savedVoltage, "The restored checkpoint must not be reused");
     }
 
     @Test void adapterErrorsRemainExplicitInsteadOfUsingUntranslatedNativeFields() {

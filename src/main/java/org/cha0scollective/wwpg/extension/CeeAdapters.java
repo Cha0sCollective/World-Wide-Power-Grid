@@ -214,10 +214,23 @@ public final class CeeAdapters {
             if (acceptedTick && !failed() && dynamic && (declaredSubsteps < 1 || lastAfter != declaredSubsteps - 1))
                 latchFailure(new IllegalStateException("electrical tick did not complete its declared substeps"));
             if (!acceptedTick && !failed() && !held) latchFailure(new IllegalStateException("electrical tick was rejected"));
-            if (failed() || held) restore(tickCheckpoint);
+            if (failed() || held) {
+                restore(tickCheckpoint);
+                tickCheckpoint = null;
+            }
             substepCheckpoint = null;
-            tickCheckpoint = null;
             finished = true;
+        }
+
+        /** Keep accepted history reversible until the entire schedule has finished. */
+        public void abort() {
+            var saved = tickCheckpoint;
+            tickCheckpoint = null;
+            substepCheckpoint = null;
+            finished = true;
+            // Report a failed restore to the caller. The schedule must not
+            // continue when it cannot restore a captured checkpoint.
+            if (saved != null) saved.restore();
         }
 
         private void latchFailure(Throwable failure) {

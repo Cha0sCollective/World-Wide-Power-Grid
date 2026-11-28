@@ -2,9 +2,13 @@ package org.cha0scollective.wwpg.bridge;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
+import org.cha0scollective.wwpg.api.TickContext;
+import org.cha0scollective.wwpg.extension.ApiCircuits;
+import org.cha0scollective.wwpg.extension.NativeApiReadings;
+import org.cha0scollective.wwpg.experimental.ScopedRestoration;
 import org.cha0scollective.wwpg.mixin.WorldNetworksAccessor;
 import org.cha0scollective.wwpg.mixin.ElectricalNetworkAccessor;
-import org.cha0scollective.wwpg.mixin.PgSolverWarmupAccessor;
+import org.cha0scollective.wwpg.mixin.PgSolverStateAccessor;
 import org.patryk3211.powergrid.collections.ModdedConfigs;
 import org.patryk3211.powergrid.electricity.GlobalElectricNetworks;
 import org.patryk3211.powergrid.electricity.WorldNetworks;
@@ -33,9 +37,9 @@ public final class ServerElectricalSchedule {
         if (Integer.valueOf(tick).equals(LAST_TICK.get(server))) return;
         LAST_TICK.put(server, tick);
         var worlds = new ArrayList<WorldNetworks>();
-        for (var level : server.getAllLevels()) org.cha0scollective.wwpg.extension.ApiCircuits.get(level).prepare();
+        for (var level : server.getAllLevels()) ApiCircuits.get(level).prepare();
         for (var level : server.getAllLevels()) worlds.add(GlobalElectricNetworks.getWorldNetworks(level));
-        org.cha0scollective.wwpg.experimental.ScopedRestoration.prepare(worlds);
+        ScopedRestoration.prepare(worlds);
         RestorationCoordinator.joinCoupledWindows(worlds);
         // CEE prepares every dimension at tickServer HEAD, before PG's first
         // level pre-tick. Retain PG's native topology and matrix preparation,
@@ -46,50 +50,81 @@ public final class ServerElectricalSchedule {
         } finally {
             PREPARING.remove();
         }
-        org.cha0scollective.wwpg.experimental.ScopedRestoration.finishPreparation(worlds);
+        ScopedRestoration.finishPreparation(worlds);
         RestorationCoordinator.coupledClosure(worlds);
         RestorationCoordinator.finishPreparation(worlds);
         // Native preparation can merge/split circuits. Bind extension work to
         // the final owners for this tick, before any electrical advancement.
-        for (var world : worlds) org.cha0scollective.wwpg.extension.ApiCircuits.get((ServerLevel) world.world).beginSolving();
+        for (var world : worlds) ApiCircuits.get((ServerLevel) world.world).beginSolving();
         var networks = worlds.stream().map(world -> world.subnetworks.stream().filter(network -> !RestorationCoordinator.paused(network)).toList()).toList();
         for (var world : worlds) Bridges.get((ServerLevel) world.world).scheduledNetworks(
                 (int) world.subnetworks.stream().filter(network -> !network.isEmpty() && !RestorationCoordinator.paused(network)).count());
         int steps = ModdedConfigs.server().electricity.solver.multiTicks.get();
         for(var world:worlds) {
             var level=(ServerLevel)world.world;
-            org.cha0scollective.wwpg.extension.NativeApiReadings.prepare(level,
-                    new org.cha0scollective.wwpg.api.TickContext(level.getGameTime(),.05,steps));
+            NativeApiReadings.prepare(level, new TickContext(level.getGameTime(), .05, steps));
         }
-        // PG owns generator sampling, torque accumulation and the ordinary rotor tick.
-        for (int step = 0; step < steps; step++) {
-            for (int index = 0; index < worlds.size(); index++) {
-                var level = (ServerLevel) worlds.get(index).world;
-                for (var network : networks.get(index)) solve(level, network);
+        try {
+            // PG owns generator sampling, torque accumulation and the ordinary rotor tick.
+            for (int step = 0; step < steps; step++) {
+                for (int index = 0; index < worlds.size(); index++) {
+                    var level = (ServerLevel) worlds.get(index).world;
+                    for (var network : networks.get(index)) solve(level, network);
+                }
             }
+            for (var world : worlds) {
+                var level = (ServerLevel) world.world;
+                ((WorldNetworksAccessor) world).wwpg$performance().end();
+                Bridges.get(level).finishSolving();
+                ApiCircuits.get(level).finish();
+                NativeApiReadings.finish(level);
+            }
+        } catch (RuntimeException | LinkageError failure) {
+            abortFrame(worlds, failure);
+            // Do not resume if a checkpoint or unavailable publication failed.
+            if (failure.getSuppressed().length != 0) throw failure;
         }
+    }
+
+    private static void abortFrame(List<WorldNetworks> worlds, Throwable failure) {
         for (var world : worlds) {
-            ((WorldNetworksAccessor) world).wwpg$performance().end();
-            Bridges.get((ServerLevel) world.world).finishSolving();
-            org.cha0scollective.wwpg.extension.ApiCircuits.get((ServerLevel)world.world).finish();
-            org.cha0scollective.wwpg.extension.NativeApiReadings.finish((ServerLevel)world.world);
+            var level = (ServerLevel) world.world;
+            ApiCircuits.get(level).abortFrame();
+            NativeApiReadings.abortFrame(level);
+            for (var network : world.subnetworks) {
+                if (((ElectricalNetworkAccessor) network).wwpg$solver() instanceof PgSolverStateAccessor solver)
+                    solver.wwpg$setConverged(false);
+            }
+            Bridges.get(level).abortFrame(failure);
         }
     }
 
     public static void solve(ServerLevel level, ElectricalNetwork network) {
         var bridge = Bridges.get(level);
-        bridge.beforeSolve(network);
-        var api = org.cha0scollective.wwpg.extension.ApiCircuits.get(level);
-        api.before(network, org.cha0scollective.wwpg.extension.ApiCircuits.step(level,network));
+        var api = ApiCircuits.get(level);
+        api.beginSubstep();
+        try {
+            bridge.beforeSolve(network);
+            api.before(network, ApiCircuits.step(level, network));
+            solveBackend(network, bridge, api);
+            api.after(network);
+            bridge.afterSolve(network);
+            NativeApiReadings.after(level, network);
+        } finally {
+            api.endSubstep();
+        }
+    }
+
+    private static void solveBackend(ElectricalNetwork network, WorldBridge bridge, ApiCircuits api) {
         try {
             var solver = ((ElectricalNetworkAccessor) network).wwpg$solver();
-            int warmBefore = solver instanceof PgSolverWarmupAccessor warm ? warm.wwpg$warmUpTicks() : 0;
+            int warmBefore = solver instanceof PgSolverStateAccessor warm ? warm.wwpg$warmUpTicks() : 0;
             network.singleTick();
             // A backend can return a finite trial state without accepting it.
             // CEE history/gameplay must observe the same acceptance boundary as
             // general API models, including ordinary native warm-up substeps.
             if (!network.isConverged()) {
-                int warmAfter = solver instanceof PgSolverWarmupAccessor warm ? warm.wwpg$warmUpTicks() : 0;
+                int warmAfter = solver instanceof PgSolverStateAccessor warm ? warm.wwpg$warmUpTicks() : 0;
                 if (SubstepAcceptance.settling(warmBefore, warmAfter, false)) {
                     PentodeInitialization.converged(network);
                     api.invalidate(network);
@@ -109,9 +144,6 @@ public final class ServerElectricalSchedule {
             } else PentodeInitialization.converged(network);
         }
         catch(RuntimeException | LinkageError error) { api.solveFailure(network,error);bridge.reject(network,error); }
-        api.after(network);
-        bridge.afterSolve(network);
-        org.cha0scollective.wwpg.extension.NativeApiReadings.after(level,network);
     }
     public static void clear() { LAST_TICK.clear(); PREPARING.remove(); PentodeInitialization.clear(); }
 }

@@ -3,6 +3,7 @@ package org.cha0scollective.wwpg.mixin;
 import net.minecraft.server.level.ServerLevel;
 import org.cha0scollective.wwpg.bridge.Bridges;
 import org.cha0scollective.wwpg.bridge.ServerElectricalSchedule;
+import org.cha0scollective.wwpg.extension.ApiCircuits;
 import org.patryk3211.powergrid.electricity.WorldNetworks;
 import org.patryk3211.powergrid.electricity.sim.ElectricalNetwork;
 import org.spongepowered.asm.mixin.Mixin;
@@ -49,6 +50,14 @@ public abstract class WorldNetworksMixin {
         // The upstream post-increment writes zero when this returns -1. Keep
         // the check queued, with its full ten-tick grace period still available.
         return world instanceof ServerLevel level && !level.areEntitiesLoaded(chunk.toLong()) ? -1 : age;
+    }
+    @Inject(method = "postTick", at = @At(value = "FIELD", opcode = Opcodes.GETFIELD, ordinal = 0,
+            target = "Lorg/patryk3211/powergrid/electricity/WorldNetworks;syncTicks:I"), cancellable = true)
+    private void wwpg$skipAbortedSync(CallbackInfo ci) {
+        // PG has completed wire cleanup at this point. Both remaining sync
+        // paths can read raw solver rows without checking convergence.
+        if (((WorldNetworks) (Object) this).world instanceof ServerLevel level && ApiCircuits.frameAborted(level))
+            ci.cancel();
     }
     @Inject(method = "preTick", at = @At(value = "INVOKE", target = "Lorg/patryk3211/powergrid/electricity/sim/PerformanceCounter;start()V"))
     private void wwpg$begin(CallbackInfo ci) {

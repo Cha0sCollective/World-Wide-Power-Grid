@@ -806,8 +806,30 @@ public final class WorldBridge {
     private void restoreUncommitted(Throwable failure) {
         for (var d : dynamics) try { d.checkpoint.restore(); }
         catch (RuntimeException | Error rollback) { if(rollback!=failure)failure.addSuppressed(rollback); }
-        for (var a : adapters) try { a.finish(false); }
+        for (var a : adapters) try { a.binding.abort(); }
         catch (RuntimeException | Error rollback) { if(rollback!=failure)failure.addSuppressed(rollback); }
+        dynamics = List.of();
+        adapters = List.of();
+        results = null;
+        phase = Phase.IDLE;
+    }
+
+    /** Discard an uncommitted schedule, including a frame already finalized in this dimension. */
+    void abortFrame(Throwable failure) {
+        restoreUncommitted(failure);
+        diagnostic("Electrical frame aborted: " + failure.getClass().getSimpleName() + ": " + failure.getMessage());
+        if (infrastructure == null) return;
+        try {
+            var unavailable = new HashSet<Node>();
+            for (var node : builder.allNodes()) unavailable.add(node.node);
+            var rejected = BridgeSimulationResults.takeOwnershipOfCurrents(voltages, substeps,
+                    new Object2DoubleOpenHashMap<>(), builder, infrastructure, unavailable);
+            infrastructure.ticker.lastResults = rejected;
+            VoltageSync.finishSimulation(infrastructure, level, rejected);
+        } catch (RuntimeException | LinkageError publication) {
+            infrastructure.ticker.lastResults = null;
+            if (publication != failure) failure.addSuppressed(publication);
+        }
     }
 
     private void finishFrame() {
@@ -900,8 +922,16 @@ public final class WorldBridge {
     }
 
     public void commit(SimulationTicker ticker) {
-        org.cha0scollective.wwpg.extension.ApiCircuits.get(level).commit();
-        if (results == null) return;
+        try {
+            org.cha0scollective.wwpg.extension.ApiCircuits.get(level).commit();
+            if (results != null) commitResults(ticker);
+        } finally {
+            results = null;
+            phase = Phase.IDLE;
+        }
+    }
+
+    private void commitResults(SimulationTicker ticker) {
         phase = Phase.COMMIT;
         SimulationResults pausedResults = pausedDevices.isEmpty() ? null : new SimulationResults(new double[voltages.length], substeps,
                 new Object2DoubleOpenHashMap<DirectionalNodeConnection>(), builder, infrastructure);
@@ -915,7 +945,13 @@ public final class WorldBridge {
         // wires and masked voltage sync clears old client numbers, while unrelated
         // healthy circuits still receive normal gameplay and meter publication.
         infrastructure.wireLifetimeModule.finishSimulation(results);
-        NeoForge.EVENT_BUS.post(new FinishElectricSimulationEvent(results, level, infrastructure));
+        try {
+            NeoForge.EVENT_BUS.post(new FinishElectricSimulationEvent(results, level, infrastructure));
+        } catch (RuntimeException | LinkageError failure) {
+            // Gameplay may already have consumed this completed frame. A broken
+            // listener must not interrupt publication or roll back applied work.
+            diagnostic("CEE completion listener failed: " + failure.getClass().getSimpleName() + ": " + failure.getMessage());
+        }
         if (!builder.allNodes().isEmpty()) infrastructure.setDirty();
         VoltageSync.finishSimulation(infrastructure, level, results);
         ticker.lastResults = results;
@@ -925,8 +961,7 @@ public final class WorldBridge {
         ticker.lastStats = stats; ticker.lastProfilerResults = List.of();
         SimulationTicker.allStats.put(level, stats);
         DevicesSavedData.load(level).setDirty();
-        results = null; ++committedTicks;
-        phase = Phase.IDLE;
+        ++committedTicks;
     }
 
     private static void require(boolean condition, String error) {

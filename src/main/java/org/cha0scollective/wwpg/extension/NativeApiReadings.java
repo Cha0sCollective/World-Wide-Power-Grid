@@ -303,6 +303,12 @@ public final class NativeApiReadings {
         recorder.finished = true;
     }
 
+    /** An earlier dimension may already have finished before this frame was aborted. */
+    public static void abortFrame(ServerLevel level) {
+        var recorder = WORLDS.get(level);
+        if (recorder != null) recorder.finished = false;
+    }
+
     public static VoltageMeasurement readTerminal(ServerLevel level, BlockPos pos, int nativeId) {
         Objects.requireNonNull(level, "level"); Objects.requireNonNull(pos, "pos");
         if (nativeId < 0) throw new IllegalArgumentException("Native terminal ID must be nonnegative");
